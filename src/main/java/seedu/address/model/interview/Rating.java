@@ -58,5 +58,4 @@ public class Rating implements Comparable<Rating> {
     public int hashCode() {
         return rating.hashCode();
     }
-
 }

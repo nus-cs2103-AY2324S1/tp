@@ -13,7 +13,7 @@ import seedu.address.model.interview.UniqueInterviewList;
 import seedu.address.testutil.TypicalApplicants;
 import seedu.address.testutil.TypicalInterviews;
 
-public class TimeModelTest {
+public class TimeTest {
     /*
      * Tests for the listInterviewClashes class
      */
@@ -26,7 +26,7 @@ public class TimeModelTest {
         LocalDateTime endTime = LocalDateTime.of(2024, 12, 21, 20, 30);
         List<Interview> expected = new ArrayList<>();
         expected.add(TypicalInterviews.STANDARD_INTERVIEW);
-        List<Interview> actual = TimeModel.listInterviewClashes(startTime, endTime, uniqueInterviewList);
+        List<Interview> actual = Time.listInterviewClashes(startTime, endTime, uniqueInterviewList);
         assertEquals(expected, actual);
     }
 
@@ -38,7 +38,7 @@ public class TimeModelTest {
         LocalDateTime endTime = LocalDateTime.of(2024, 12, 21, 22, 0);
         List<Interview> expected = new ArrayList<>();
         expected.add(TypicalInterviews.STANDARD_INTERVIEW);
-        List<Interview> actual = TimeModel.listInterviewClashes(startTime, endTime, uniqueInterviewList);
+        List<Interview> actual = Time.listInterviewClashes(startTime, endTime, uniqueInterviewList);
         assertEquals(expected, actual);
     }
 
@@ -51,7 +51,7 @@ public class TimeModelTest {
         LocalDateTime endTime = LocalDateTime.of(2024, 12, 21, 19, 1);
         List<Interview> expected = new ArrayList<>();
         expected.add(TypicalInterviews.STANDARD_INTERVIEW);
-        List<Interview> actual = TimeModel.listInterviewClashes(startTime, endTime, uniqueInterviewList);
+        List<Interview> actual = Time.listInterviewClashes(startTime, endTime, uniqueInterviewList);
         assertEquals(expected, actual);
     }
 
@@ -64,7 +64,7 @@ public class TimeModelTest {
         LocalDateTime endTime = LocalDateTime.of(2024, 12, 21, 22, 0);
         List<Interview> expected = new ArrayList<>();
         expected.add(TypicalInterviews.STANDARD_INTERVIEW);
-        List<Interview> actual = TimeModel.listInterviewClashes(startTime, endTime, uniqueInterviewList);
+        List<Interview> actual = Time.listInterviewClashes(startTime, endTime, uniqueInterviewList);
         assertEquals(expected, actual);
     }
 
@@ -78,7 +78,7 @@ public class TimeModelTest {
         List<Interview> expected = new ArrayList<>();
         expected.add(TypicalInterviews.STANDARD_INTERVIEW);
         expected.add(TypicalInterviews.STANDARD_INTERVIEW_4);
-        List<Interview> actual = TimeModel.listInterviewClashes(startTime, endTime, uniqueInterviewList);
+        List<Interview> actual = Time.listInterviewClashes(startTime, endTime, uniqueInterviewList);
         assertEquals(expected, actual);
     }
 
@@ -93,7 +93,7 @@ public class TimeModelTest {
         expected.add(TypicalInterviews.STANDARD_INTERVIEW);
         expected.add(TypicalInterviews.STANDARD_INTERVIEW_3);
         expected.add(TypicalInterviews.STANDARD_INTERVIEW_4);
-        List<Interview> actual = TimeModel.listInterviewClashes(startTime, endTime, uniqueInterviewList);
+        List<Interview> actual = Time.listInterviewClashes(startTime, endTime, uniqueInterviewList);
         assertEquals(expected, actual);
     }
 
@@ -108,7 +108,7 @@ public class TimeModelTest {
         expected.add(TypicalInterviews.STANDARD_INTERVIEW);
         expected.add(TypicalInterviews.STANDARD_INTERVIEW_3);
         expected.add(TypicalInterviews.STANDARD_INTERVIEW_4);
-        List<Interview> actual = TimeModel.listInterviewClashes(startTime, endTime, uniqueInterviewList);
+        List<Interview> actual = Time.listInterviewClashes(startTime, endTime, uniqueInterviewList);
         assertEquals(expected, actual);
     }
 
@@ -124,7 +124,7 @@ public class TimeModelTest {
         expected.add(TypicalInterviews.STANDARD_INTERVIEW_2);
         expected.add(TypicalInterviews.STANDARD_INTERVIEW_3);
         expected.add(TypicalInterviews.STANDARD_INTERVIEW_4);
-        List<Interview> actual = TimeModel.listInterviewClashes(startTime, endTime, uniqueInterviewList);
+        List<Interview> actual = Time.listInterviewClashes(startTime, endTime, uniqueInterviewList);
         assertEquals(expected, actual);
     }
 
@@ -136,7 +136,7 @@ public class TimeModelTest {
         LocalDateTime startTime = LocalDateTime.of(2023, 5, 12, 9, 0);
         LocalDateTime endTime = LocalDateTime.of(2023, 12, 21, 22, 0);
         List<Interview> expected = new ArrayList<>();
-        List<Interview> actual = TimeModel.listInterviewClashes(startTime, endTime, uniqueInterviewList);
+        List<Interview> actual = Time.listInterviewClashes(startTime, endTime, uniqueInterviewList);
         assertEquals(expected, actual);
     }
 
@@ -149,7 +149,7 @@ public class TimeModelTest {
         UniqueInterviewList uniqueInterviewList = new UniqueInterviewList();
         uniqueInterviewList.setInterviews(interviewList);
         List<Interview> expected = new ArrayList<>();
-        List<Interview> actual = TimeModel.listInterviewsToday(uniqueInterviewList);
+        List<Interview> actual = Time.listInterviewsToday(uniqueInterviewList);
         assertEquals(expected, actual);
     }
 
@@ -163,7 +163,7 @@ public class TimeModelTest {
         uniqueInterviewList.setInterviews(interviewList);
         List<Interview> expected = new ArrayList<>();
         expected.add(interviewNow);
-        List<Interview> actual = TimeModel.listInterviewsToday(uniqueInterviewList);
+        List<Interview> actual = Time.listInterviewsToday(uniqueInterviewList);
         assertEquals(expected, actual);
     }
 
@@ -184,7 +184,7 @@ public class TimeModelTest {
         uniqueInterviewList.setInterviews(interviewList);
         List<Interview> expected = new ArrayList<>();
         expected.add(interviewNow);
-        List<Interview> actual = TimeModel.listInterviewsToday(uniqueInterviewList);
+        List<Interview> actual = Time.listInterviewsToday(uniqueInterviewList);
         assertEquals(expected, actual);
     }
 
@@ -204,7 +204,7 @@ public class TimeModelTest {
         UniqueInterviewList uniqueInterviewList = new UniqueInterviewList();
         uniqueInterviewList.setInterviews(interviewList);
         List<Interview> expected = new ArrayList<>();
-        List<Interview> actual = TimeModel.listInterviewsToday(uniqueInterviewList);
+        List<Interview> actual = Time.listInterviewsToday(uniqueInterviewList);
         assertEquals(expected, actual);
     }
 
@@ -224,7 +224,7 @@ public class TimeModelTest {
         UniqueInterviewList uniqueInterviewList = new UniqueInterviewList();
         uniqueInterviewList.setInterviews(interviewList);
         List<Interview> expected = new ArrayList<>();
-        List<Interview> actual = TimeModel.listInterviewsToday(uniqueInterviewList);
+        List<Interview> actual = Time.listInterviewsToday(uniqueInterviewList);
         assertEquals(expected, actual);
     }
 
@@ -244,7 +244,7 @@ public class TimeModelTest {
         UniqueInterviewList uniqueInterviewList = new UniqueInterviewList();
         uniqueInterviewList.setInterviews(interviewList);
         List<Interview> expected = new ArrayList<>();
-        List<Interview> actual = TimeModel.listInterviewsToday(uniqueInterviewList);
+        List<Interview> actual = Time.listInterviewsToday(uniqueInterviewList);
         assertEquals(expected, actual);
     }
 
@@ -264,7 +264,7 @@ public class TimeModelTest {
         UniqueInterviewList uniqueInterviewList = new UniqueInterviewList();
         uniqueInterviewList.setInterviews(interviewList);
         List<Interview> expected = new ArrayList<>();
-        List<Interview> actual = TimeModel.listInterviewsToday(uniqueInterviewList);
+        List<Interview> actual = Time.listInterviewsToday(uniqueInterviewList);
         assertEquals(expected, actual);
     }
 
@@ -282,7 +282,7 @@ public class TimeModelTest {
         element.add(LocalDateTime.of(2024, 12, 21, 9, 0));
         element.add(LocalDateTime.of(2024, 12, 21, 17, 0));
         expected.add(element);
-        List<List<LocalDateTime>> actual = TimeModel.listPocketsOfTimeOnGivenDay(day, uniqueInterviewList);
+        List<List<LocalDateTime>> actual = Time.listPocketsOfTimeOnGivenDay(day, uniqueInterviewList);
         assertEquals(expected, actual);
     }
 
@@ -306,7 +306,7 @@ public class TimeModelTest {
         element2.add(LocalDateTime.of(2024, 12, 21, 17, 0));
         expected.add(element1);
         expected.add(element2);
-        List<List<LocalDateTime>> actual = TimeModel.listPocketsOfTimeOnGivenDay(day, uniqueInterviewList);
+        List<List<LocalDateTime>> actual = Time.listPocketsOfTimeOnGivenDay(day, uniqueInterviewList);
         assertEquals(expected, actual);
     }
 
@@ -323,7 +323,7 @@ public class TimeModelTest {
         expected.add(TypicalInterviews.STANDARD_INTERVIEW_4);
         expected.add(TypicalInterviews.STANDARD_INTERVIEW);
         expected.add(TypicalInterviews.STANDARD_INTERVIEW_2);
-        List<Interview> actual = TimeModel.sortInterviewsInChronologicalAscendingOrder(uniqueInterviewList);
+        List<Interview> actual = Time.sortInterviewsInChronologicalAscendingOrder(uniqueInterviewList);
         assertEquals(expected, actual);
     }
 }
