@@ -691,7 +691,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | user                             | search my contacts by name                                                                                                          | quickly find a person without scrolling through my entire list. |
 | `* * *`  | user                             | search my contacts by phone number                                                                                                  | identify who is calling me from an unfamiliar number.           |
 | `* * *`  | international in-campus resident | add Singapore’s emergency contact details                                                                                           | access them quickly in urgent situations.                       |
-| `* * *`  | in-campus resident               | add campus specific information to my contacts, in particular, a tag called RA (Residential Assistant) and SO (Security Officer)    | quickly reach out to them when required.                        |
+| `* * *`  | in-campus resident               | add campus specific information to my contacts, in particular, a tag called RA (Residential Assistant) and SOS (Security Officer)   | quickly reach out to them when required.                        |
 | `* * *`  | on-campus student                | quickly list the emergency contacts I have previously registered                                                                    | contact them in an emergency.                                   |
 
 *{More to be added}*
@@ -724,14 +724,6 @@ Use case ends.
 2. System shows a list of all contacts. <br>
 Use case ends.
 
-**Use case: UC3 - Delete emergency contact**
-
-**MSS**
-1. User <ins>lists all contacts (UC2).</ins>
-2. User enters an index to delete contact as an emergency contact.
-3. System deletes contact from the emergency contact list. <br>
-Use case ends.
-
 **Extensions**
 * 1a. System shows an empty contact list.
 Use case ends.
@@ -741,7 +733,7 @@ Use case ends.
   Steps 2a1- 2a2 are repeated until the data entered are correct. <br>
   Use case resumes from step 3.
 
-**Use case: UC4 - Delete contact**
+**Use case: UC3 - Delete contact**
 
 **MSS**
 1. User <ins>lists all contacts (UC2).</ins>
@@ -779,7 +771,6 @@ Use case ends.
   Use case resumes from step 3.
 
 
-*{More to be added}*
 
 ### Non-Functional Requirements
 
@@ -794,9 +785,6 @@ Use case ends.
 9. The code should be well-organised and well-documented to ensure ease of maintenance and debugging. 
 10. Should provide clear and easily accessible help and documentation, including FAQs and tutorials, to assist the user in using the platform effectively. 
 11. Should be designed to prevent errors and provide clear, actionable error messages if errors occur, so that users can correct any issues.
-
-
-*{More to be added}*
 
 ### Glossary
 
