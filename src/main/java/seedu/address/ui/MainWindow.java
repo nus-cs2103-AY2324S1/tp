@@ -38,10 +38,10 @@ public class MainWindow extends UiPart<Stage> {
     private PersonListPanel personListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
-    private boolean isRead;
-    private Label clockLabel;
 
     private List<Integer> indexes = null;
+
+    private CalendarComponent calendarComponent;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -142,7 +142,7 @@ public class MainWindow extends UiPart<Stage> {
         ClockComponent clockComponent =new ClockComponent();
         clockDisplayPlaceholder.getChildren().add(clockComponent);
 
-        CalendarComponent calendarComponent = new CalendarComponent(logic.getFilteredPersonList());
+        calendarComponent = new CalendarComponent(logic.getFilteredPersonList());
         calendarDisplayPlaceholder.getChildren().add(calendarComponent);
 
         YearMonthComponent yearMonthComponent = new YearMonthComponent();
@@ -195,6 +195,12 @@ public class MainWindow extends UiPart<Stage> {
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
     }
 
+    private void handleLeave() {
+        calendarDisplayPlaceholder.getChildren().clear();
+        CalendarComponent calendarComponent = new CalendarComponent(logic.getFilteredPersonList());
+        calendarDisplayPlaceholder.getChildren().add(calendarComponent);
+    }
+
     public PersonListPanel getPersonListPanel() {
         return personListPanel;
     }
@@ -234,6 +240,10 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.isRead()) {
                 handleRead(commandResult.getFieldToRead());
+            }
+
+            if (commandResult.isLeave()) {
+                handleLeave();
             }
 
             return commandResult;

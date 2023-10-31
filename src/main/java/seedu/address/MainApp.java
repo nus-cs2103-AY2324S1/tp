@@ -183,4 +183,6 @@ public class MainApp extends Application {
             logger.severe("Failed to save preferences " + StringUtil.getDetails(e));
         }
     }
+
+
 }

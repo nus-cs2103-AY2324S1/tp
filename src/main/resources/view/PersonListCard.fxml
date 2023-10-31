@@ -8,6 +8,8 @@
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 
 <HBox id="cardPane" fx:id="cardPane" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
   <GridPane HBox.hgrow="ALWAYS">
@@ -27,14 +29,77 @@
         </Label>
         <Label fx:id="name" styleClass="cell_big_label" text="\$first" />
       </HBox>
-      <Label fx:id="workingStatus" styleClass="cell_small_label" text="\$workingStatus"/>
-      <Label fx:id="phone" styleClass="cell_small_label" text="\$phone" />
-      <Label fx:id="address" styleClass="cell_small_label" text="\$address" />
-      <Label fx:id="email" styleClass="cell_small_label" text="\$email" />
-      <Label fx:id="bankAccount" styleClass="cell_small_label" text="\$bankAccount" />
-      <Label fx:id="salary" styleClass="cell_small_label" text="\$salary" />
-      <Label fx:id="annualLeave" styleClass="cell_small_label" text="\$annualLeave" />
-      <Label fx:id="joinDate" styleClass="cell_small_label" text="\$joinDate" />
+        <Label fx:id="workingStatus" text="\$workingStatus"/>
+        <HBox styleClass="pc-label-container">
+          <ImageView>
+            <image>
+              <Image url="/images/phone-icon.png"  /> <!-- Add your icon URL here -->
+            </image>
+            <fitWidth>25.0</fitWidth> <!-- Set the width as needed -->
+            <fitHeight>25.0</fitHeight>
+          </ImageView>
+          <Label fx:id="phone" styleClass="cell_small_label" text="\$phone" />
+        </HBox>
+        <HBox styleClass="pc-label-container">
+          <ImageView>
+            <image>
+              <Image url="/images/add-icon.png"  /> <!-- Add your icon URL here -->
+            </image>
+            <fitWidth>25.0</fitWidth> <!-- Set the width as needed -->
+            <fitHeight>25.0</fitHeight>
+          </ImageView>
+          <Label fx:id="address" styleClass="cell_small_label" text="\$address" />
+        </HBox>
+        <HBox styleClass="pc-label-container">
+          <ImageView>
+            <image>
+              <Image url="/images/email-icon.png"  /> <!-- Add your icon URL here -->
+            </image>
+            <fitWidth>25.0</fitWidth> <!-- Set the width as needed -->
+            <fitHeight>25.0</fitHeight>
+          </ImageView>
+          <Label fx:id="email" styleClass="cell_small_label" text="\$email" />
+        </HBox>
+        <HBox styleClass="pc-label-container">
+          <ImageView>
+            <image>
+              <Image url="/images/bank-account-icon.png"  /> <!-- Add your icon URL here -->
+            </image>
+            <fitWidth>25.0</fitWidth> <!-- Set the width as needed -->
+            <fitHeight>25.0</fitHeight>
+          </ImageView>
+          <Label fx:id="bankAccount" styleClass="cell_small_label" text="\$bankAccount" />
+        </HBox>
+        <HBox styleClass="pc-label-container">
+          <ImageView>
+            <image>
+              <Image url="/images/salary-icon.png"  /> <!-- Add your icon URL here -->
+            </image>
+            <fitWidth>25.0</fitWidth> <!-- Set the width as needed -->
+            <fitHeight>25.0</fitHeight>
+          </ImageView>
+          <Label fx:id="salary" styleClass="cell_small_label" text="\$salary" />
+        </HBox>
+        <HBox styleClass="pc-label-container">
+          <ImageView>
+            <image>
+              <Image url="/images/leave-icon.png"  /> <!-- Add your icon URL here -->
+            </image>
+            <fitWidth>25.0</fitWidth> <!-- Set the width as needed -->
+            <fitHeight>25.0</fitHeight>
+          </ImageView>
+          <Label fx:id="annualLeave" styleClass="cell_small_label" text="\$annualLeave" />
+        </HBox>
+        <HBox styleClass="pc-label-container">
+          <ImageView>
+            <image>
+              <Image url="/images/join-date-icon.png"  /> <!-- Add your icon URL here -->
+            </image>
+            <fitWidth>25.0</fitWidth> <!-- Set the width as needed -->
+            <fitHeight>25.0</fitHeight>
+          </ImageView>
+          <Label fx:id="joinDate" styleClass="cell_small_label" text="\$joinDate" />
+        </HBox>
     </VBox>
       <rowConstraints>
          <RowConstraints />

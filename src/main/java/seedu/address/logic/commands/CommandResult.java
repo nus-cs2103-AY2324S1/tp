@@ -22,6 +22,8 @@ public class CommandResult {
     private final List<Integer> indexes;
     /** The application should read a specific field of a particular employee. */
     private final boolean read;
+
+    private final boolean leave;
     private final String fieldToRead;
 
     /**
@@ -34,6 +36,7 @@ public class CommandResult {
         this.indexes = null;
         this.read = false;
         this.fieldToRead = null;
+        this.leave = false;
     }
 
     /**
@@ -47,6 +50,7 @@ public class CommandResult {
         this.exit = false;
         this.read = false;
         this.fieldToRead = null;
+        this.leave = false;
     }
 
     /**
@@ -60,6 +64,7 @@ public class CommandResult {
         this.showHelp = false;
         this.read = read;
         this.fieldToRead = fieldToRead;
+        this.leave = false;
     }
 
     /**
@@ -72,6 +77,21 @@ public class CommandResult {
         this.indexes = indexes;
         this.read = false;
         this.fieldToRead = null;
+        this.leave = false;
+    }
+
+    /**
+     * Constructs a {@code CommandResult} with the specified {@code feedbackToUser},
+     * and other fields set to their default value.
+     */
+    public CommandResult(String feedbackToUser, boolean leave) {
+        this.feedbackToUser = requireNonNull(feedbackToUser);
+        this.showHelp = false;
+        this.indexes = null;
+        this.exit = false;
+        this.read = false;
+        this.fieldToRead = null;
+        this.leave = true;
     }
 
     public String getFeedbackToUser() {
@@ -92,6 +112,10 @@ public class CommandResult {
 
     public boolean isRead() {
         return read;
+    }
+
+    public boolean isLeave() {
+        return leave;
     }
 
     @Override

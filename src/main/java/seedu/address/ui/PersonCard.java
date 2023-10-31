@@ -95,11 +95,9 @@ public class PersonCard extends UiPart<Region> {
      */
     public void setWorkingStatus(String statusText) {
         if ("Working".equals(statusText)) {
-            workingStatus.setStyle("-fx-background-color: green; -fx-padding: 2;"
-                    + "-fx-font-family: 'Arial Black'; -fx-font-size:13; -fx-background-radius: 3");
+            workingStatus.getStyleClass().add("work");
         } else {
-            workingStatus.setStyle("-fx-background-color: #A50000; -fx-padding: 2;"
-                    + "-fx-font-family: 'Arial Black'; -fx-font-size:13; -fx-background-radius: 3");
+            workingStatus.getStyleClass().add("on-leave");
         }
         workingStatus.setText(statusText);
     }

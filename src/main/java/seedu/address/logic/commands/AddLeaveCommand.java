@@ -96,13 +96,13 @@ public class AddLeaveCommand extends Command {
             }
         }
         return new CommandResult(String.format(MESSAGE_SUCCESS + this.getLeaveStatusMessage(employeeToAddLeave),
-                Messages.format(employeeToAddLeave)));
+                Messages.format(employeeToAddLeave)), true);
     }
 
     @Override
     public boolean equals(Object other) {
         if (other == this) {
-            return true;
+        return true;
         }
 
         // instanceof handles nulls

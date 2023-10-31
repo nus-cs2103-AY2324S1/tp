@@ -97,18 +97,15 @@
     -fx-label-padding: 0 0 0 0;
     -fx-graphic-text-gap : 0;
     -fx-padding: 10 10 20 10;
-    -fx-background-radius: 20; /* Adjust the corner radius as needed */
+    -fx-background-radius: 20;
 }
 
 .list-cell:filled:even {
-    -fx-background-color: #3c3e3f;
-
+    -fx-background-color: #E0EDC5;
 }
 
 .list-cell:filled:odd {
-    -fx-background-color: #515658;
-    -fx-background-radius: 10; /* Adjust the corner radius as needed */
-    -fx-padding: 10; /* Add padding for spacing */
+    -fx-background-color: #F1FFE7;
 }
 
 .list-cell:filled:selected {
@@ -120,20 +117,40 @@
     -fx-border-width: 1;
 }
 
-.list-cell .label {
-    -fx-text-fill: white;
-}
-
 .cell_big_label {
     -fx-font-family: "Segoe UI Semibold";
     -fx-font-size: 16px;
-    -fx-text-fill: #010504;
+    -fx-text-fill: black;
 }
 
 .cell_small_label {
     -fx-font-family: "Segoe UI";
-    -fx-font-size: 13px;
-    -fx-text-fill: #010504;
+    -fx-font-size: 18px;
+    -fx-text-fill: black;
+    -fx-padding: 0 0 0 5;
+}
+
+.pc-label-container {
+    -fx-padding: 4 0 0 0;
+    -fx-text-fill: black;
+}
+
+.work {
+    -fx-background-color: green;
+    -fx-padding: 3;
+    -fx-font-family: 'Arial Black';
+    -fx-font-size: 13;
+    -fx-text-fill : white;
+    -fx-background-radius: 5;
+}
+
+.on-leave {
+    -fx-background-color: red;
+    -fx-padding: 3;
+    -fx-font-family: 'Arial Black';
+    -fx-font-size: 13;
+    -fx-text-fill : white;
+    -fx-background-radius: 5;
 }
 
 .stack-pane {
@@ -145,6 +162,13 @@
      -fx-border-color: derive(#1d1d1d, 10%);
      -fx-border-top-width: 1px;
 }
+
+.clock-pane {
+     -fx-background-color: derive(#1d1d1d, 20%);
+     -fx-border-color: derive(#1d1d1d, 10%);
+     -fx-border-top-width: 1px;
+}
+
 
 .year-month-pane {
      -fx-background-color: derive(#1d1d1d, 20%);
@@ -162,7 +186,13 @@
 
 .clock-label {
      -fx-text-fill: white;
-     -fx-font-size: 50px;
+     -fx-font-size: 40px;
+     -fx-min-height:50px;
+}
+
+.day-label {
+    -fx-font-size: 25px;
+    -fx-text-fill: black;
 }
 
 .calendar-grid {
@@ -174,30 +204,57 @@
      -fx-alignment: center;
 }
 
-.calendar-grid Label {
+.name-label {
+    -fx-text-fill: #E71D36;
+    -fx-background-color: #FFFD98;
+    -fx-min-height: 50px;
+    -fx-font-size: 15px;
+    -fx-min-width: 35;
+    -fx-pref-width: 120px;
+    -fx-min-height: 15px;
+    -fx-alignment: center;
+    -fx-background-radius: 15;
+}
+
+.empty-label {
+    -fx-text-fill: #8d99ae;
+    -fx-min-height: 50px;
+    -fx-font-size: 15px;
+    -fx-min-width: 35;
+    -fx-pref-width: 120px;
+    -fx-min-height: 15px;
+    -fx-alignment: center;
+    -fx-background-radius: 15;
+}
+
+.calendar-grid VBox{
      -fx-padding: 10;
-     -fx-text-fill: white;
-     -fx-font-size: 20px;
-     -fx-min-width: 35;
-     -fx-pref-width: 90px;
-     -fx-pref-height: 90px;
+     -fx-text-fill: #020887;
+     -fx-font-size: 15px;
+     -fx-min-width: 40px;
+     -fx-min-height: 100px;
      -fx-alignment: center;
      -fx-background-radius: 15;
 }
 
-.day {
+.day-name-label {
     -fx-background-color: #FFFD98;
+    -fx-min-height: 50px;
     -fx-text-fill: #020887;
+    -fx-font-size: 20px;
+    -fx-min-width: 35px;
+    -fx-pref-width: 150px;
+    -fx-min-height: 40px;
+    -fx-alignment: center;
+    -fx-background-radius: 15;
 }
 
 .today {
     -fx-background-color: #EAFFFD;
-    -fx-text-fill: #020887;
 }
 
 .not-today {
     -fx-background-color: #C6EBBE;
-    -fx-text-fill: #020887;
 }
 
 .calendar-pane {
@@ -216,7 +273,7 @@
 .result-display {
     -fx-background-color: transparent;
     -fx-font-family: "Segoe UI Light";
-    -fx-font-size: 13pt;
+    -fx-font-size: 25px;
     -fx-text-fill: white;
 }
 
@@ -391,7 +448,7 @@
     -fx-border-insets: 0;
     -fx-border-width: 1;
     -fx-font-family: "Segoe UI Light";
-    -fx-font-size: 13pt;
+    -fx-font-size: 20pt;
     -fx-text-fill: white;
 }
 
