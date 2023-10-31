@@ -45,7 +45,9 @@ public class SetGradeCommandTest {
                 + editedStudent.getClassDetails().displayAssignments();
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-        expectedModel.setStudent(model.getStudent(editedStudent.getStudentNumber()), editedStudent);
+        if (expectedModel.isSelectedStudent(editedStudent)) {
+            expectedModel.setSelectedStudent(editedStudent);
+        }
         expectedModel.commitAddressBook();
 
         assertCommandSuccess(setGradeCommand, model, expectedMessage, expectedModel, commandHistory);
@@ -123,5 +125,4 @@ public class SetGradeCommandTest {
                 + "{studentNumber=" + VALID_STUDENT_NUMBER_AMY + ", assignmentNumber=1, grade=50}";
         assertEquals(expected, setGradeCommand.toString());
     }
-
 }

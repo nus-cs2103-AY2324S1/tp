@@ -139,6 +139,7 @@ public class LogicManagerTest {
         expectedModel.setConfigured(true);
         assertCommandFailure(configCommand, CommandException.class,
                 String.format(FILE_OPS_ERROR_FORMAT, DUMMY_IO_EXCEPTION.getMessage()), expectedModel);
+        assertHistoryCorrect(configCommand);
     }
 
 
@@ -296,6 +297,7 @@ public class LogicManagerTest {
         expectedModel.addStudent(expectedStudent);
         expectedModel.commitAddressBook();
         assertCommandFailure(addCommand, CommandException.class, expectedMessage, expectedModel);
+        assertHistoryCorrect(addCommand);
     }
 
     private void assertLoadCommandFailureForExceptionFromStorage(IOException e, String expectedMessage) {
@@ -333,6 +335,7 @@ public class LogicManagerTest {
         expectedModel.setAddressBookFilePath(filePath);
         expectedModel.reset(newData);
         assertCommandFailure(loadCommand, CommandException.class, expectedMessage, expectedModel);
+        assertHistoryCorrect(loadCommand);
     }
 
 
