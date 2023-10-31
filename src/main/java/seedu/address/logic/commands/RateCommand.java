@@ -5,6 +5,7 @@ import static java.util.Objects.requireNonNull;
 import java.util.List;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -18,7 +19,8 @@ public class RateCommand extends Command {
     public static final String COMMAND_WORD = "rate";
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Rate the interview identified by the index number used in the displayed interview list.\n"
-            + "Parameters: INDEX (must be a positive integer) Rating\n"
+            + "Parameters: INDEX (must be a positive integer) "
+            + "RATING (must be a non-negative number with 1 decimal place between 0.0 to 5.0 inclusive)\n"
             + "Example: " + COMMAND_WORD + " 1" + " 3.5";
     public static final String MESSAGE_MARK_INTERVIEW_SUCCESS = "Marked Interview: %s as done.";
     public static final String MESSAGE_NOT_DONE = "Interview: %s must be completed before rating.";
@@ -63,5 +65,29 @@ public class RateCommand extends Command {
 
         return new CommandResult(
                 String.format(MESSAGE_MARK_INTERVIEW_SUCCESS, Messages.formatInterview(interviewToRate)));
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof RateCommand)) {
+            return false;
+        }
+
+        RateCommand otherRateCommand = (RateCommand) other;
+        return targetIndex.equals(otherRateCommand.targetIndex)
+                && newRating.equals(otherRateCommand.newRating);
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .add("targetIndex", targetIndex)
+                .add("newRating", newRating)
+                .toString();
     }
 }
