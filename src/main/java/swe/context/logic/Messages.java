@@ -1,7 +1,5 @@
 package swe.context.logic;
 
-
-//TODO prefix messages containing format specifiers with UNFORMATTED_
 /**
  * Holds message strings used by the logic for display to the user.
  *
@@ -77,7 +75,7 @@ public final class Messages {
             invalidName
         );
     }
-    
+
     /**
      * Returns a formatted message showing the number of contacts listed.
      */
