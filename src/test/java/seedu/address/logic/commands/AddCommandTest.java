@@ -14,6 +14,7 @@ import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
 
+import javafx.beans.value.ChangeListener;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.ShortcutSettings;
@@ -23,6 +24,7 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.Theme;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PatientBuilder;
 
@@ -236,6 +238,16 @@ public class AddCommandTest {
 
         @Override
         public void addCommandString(String commandString) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setTheme(Theme theme) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addThemeListener(ChangeListener<? super Theme> changeListener) {
             throw new AssertionError("This method should not be called.");
         }
     }
