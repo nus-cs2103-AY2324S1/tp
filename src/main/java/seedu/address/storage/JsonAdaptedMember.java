@@ -66,7 +66,7 @@ class JsonAdaptedMember {
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
-        toDoList.addAll(source.getTasks().getTaskAsList().stream()
+        toDoList.addAll(source.getTasks().stream()
                 .map(JsonAdaptedToDo::new)
                 .collect(Collectors.toList()));
     }

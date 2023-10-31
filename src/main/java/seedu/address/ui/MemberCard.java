@@ -60,6 +60,6 @@ public class MemberCard extends UiPart<Region> {
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
         member.getTasks().stream()
                 .sorted(Comparator.comparing(Task::getTaskName))
-                .forEach(task -> tags.getChildren().add(new Label(task.getTaskName())));
+                .forEach(task -> tasks.getChildren().add(new Label(task.getTaskName())));
     }
 }
