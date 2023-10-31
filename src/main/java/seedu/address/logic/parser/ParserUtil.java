@@ -2,6 +2,7 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import seedu.address.commons.core.index.Index;
@@ -10,8 +11,10 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.schedule.Date;
 import seedu.address.model.schedule.EndTime;
 import seedu.address.model.schedule.StartTime;
+import seedu.address.model.schedule.Status;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -105,5 +108,35 @@ public class ParserUtil {
         }
 
         return new EndTime(LocalDateTime.parse(trimmedTime));
+    }
+
+    /**
+     * Parses {@code String status} into a {@code status}
+     */
+    public static Status parseStatus(String status) throws ParseException {
+        requireNonNull(status);
+        String trimmedStatus = status.trim();
+
+        if (trimmedStatus.equals("0")) {
+            return Status.MISSED;
+        } else if (trimmedStatus.equals("1")) {
+            return Status.COMPLETED;
+        } else {
+            throw new ParseException(Status.MESSAGE_CONSTRAINTS);
+        }
+    }
+
+    /**
+     * Parses {@code String time} into a {@code StartTime}.
+     */
+    public static Date parseDate(String date) throws ParseException {
+        requireNonNull(date);
+        String trimmedDate = date.trim();
+
+        if (!Date.isValidDate(trimmedDate)) {
+            throw new ParseException(Date.MESSAGE_CONSTRAINTS);
+        }
+
+        return new Date(LocalDate.parse(trimmedDate));
     }
 }

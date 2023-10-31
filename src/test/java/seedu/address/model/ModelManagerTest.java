@@ -19,9 +19,11 @@ import org.junit.jupiter.api.Test;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
 import seedu.address.model.schedule.Schedule;
 import seedu.address.testutil.AddressBookBuilder;
+import seedu.address.testutil.PersonBuilder;
 
 public class ModelManagerTest {
 
@@ -43,7 +45,7 @@ public class ModelManagerTest {
     public void setUserPrefs_validUserPrefs_copiesUserPrefs() {
         UserPrefs userPrefs = new UserPrefs();
         userPrefs.setAddressBookFilePath(Paths.get("address/book/file/path"));
-        userPrefs.setGuiSettings(new GuiSettings(1, 2, 3, 4));
+        userPrefs.setGuiSettings(new GuiSettings(1, 2, 3, 4, "/view/DarkTheme.css"));
         modelManager.setUserPrefs(userPrefs);
         assertEquals(userPrefs, modelManager.getUserPrefs());
 
@@ -60,7 +62,7 @@ public class ModelManagerTest {
 
     @Test
     public void setGuiSettings_validGuiSettings_setsGuiSettings() {
-        GuiSettings guiSettings = new GuiSettings(1, 2, 3, 4);
+        GuiSettings guiSettings = new GuiSettings(1, 2, 3, 4, "/view/DarkTheme.css");
         modelManager.setGuiSettings(guiSettings);
         assertEquals(guiSettings, modelManager.getGuiSettings());
     }
@@ -174,6 +176,23 @@ public class ModelManagerTest {
         modelManager.addSchedule(SCHEDULE_ALICE_FIRST_JAN);
         assertTrue(modelManager.hasSchedule(SCHEDULE_ALICE_FIRST_JAN));
         assertThrows(PersonNotFoundException.class, () -> modelManager.getSchedulesFromTutor(ALICE));
+    }
+
+    @Test
+    public void updateTutorSchedules_success() {
+        ModelManager model = new ModelManager();
+        model.addPerson(ALICE);
+        model.addSchedule(SCHEDULE_ALICE_FIRST_JAN);
+
+        Person editedPerson = new PersonBuilder().withName("John Doe").build();
+        Schedule editedSchedule = new Schedule(editedPerson, SCHEDULE_ALICE_FIRST_JAN.getStartTime(),
+            SCHEDULE_ALICE_FIRST_JAN.getEndTime());
+
+        model.updateTutorSchedules(ALICE, editedPerson);
+
+        // Check if the schedule is updated correctly
+        assertTrue(model.getFilteredScheduleList().contains(editedSchedule));
+        assertFalse(model.getFilteredScheduleList().contains(SCHEDULE_ALICE_FIRST_JAN));
     }
 
     @Test

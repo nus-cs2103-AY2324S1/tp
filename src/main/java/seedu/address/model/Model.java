@@ -136,4 +136,10 @@ public interface Model {
      * @throws PersonNotFoundException if {@code tutor} is null.
      */
     ObservableList<Schedule> getSchedulesFromTutor(Person tutor);
+
+    /**
+     * Updates associated schedules of {@code oldPerson} to reference {@code editedPerson} instead.
+     * @throws PersonNotFoundException if {@code oldTutor} is null or not found.
+     */
+    void updateTutorSchedules(Person oldTutor, Person editedTutor);
 }

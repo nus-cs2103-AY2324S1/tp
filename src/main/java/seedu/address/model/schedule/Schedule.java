@@ -18,6 +18,7 @@ public class Schedule implements Comparable<Schedule> {
     private final Person tutor;
     private final StartTime startTime;
     private final EndTime endTime;
+    private final Status status;
 
     /**
      * Every field must be present and not null.
@@ -29,6 +30,20 @@ public class Schedule implements Comparable<Schedule> {
         this.tutor = tutor;
         this.startTime = startTime;
         this.endTime = endTime;
+        this.status = Status.PENDING;
+    }
+
+    /**
+     * Every field must be present and not null.
+     */
+    public Schedule(Person tutor, StartTime startTime, EndTime endTime, Status status) {
+        requireAllNonNull(tutor, startTime, endTime, status);
+        checkArgument(isValidSchedule(startTime, endTime), MESSAGE_CONSTRAINTS);
+
+        this.tutor = tutor;
+        this.startTime = startTime;
+        this.endTime = endTime;
+        this.status = status;
     }
 
     private boolean isValidSchedule(StartTime startTime, EndTime endTime) {
@@ -45,6 +60,10 @@ public class Schedule implements Comparable<Schedule> {
 
     public EndTime getEndTime() {
         return endTime;
+    }
+
+    public Status getStatus() {
+        return status;
     }
 
     /**
@@ -66,6 +85,33 @@ public class Schedule implements Comparable<Schedule> {
     }
 
     /**
+     * Checks if this schedule is a duplicate of another schedule.
+     * Two schedules are considered duplicate if they have the same tutor and their time intervals are equal.
+     *
+     * @param other The other schedule to compare against.
+     * @return {@code true} if the schedules are duplicates, {@code false} otherwise.
+     */
+    public boolean isDuplicate(Schedule other) {
+        if (other == this) {
+            return true;
+        }
+
+        return tutor.equals(other.tutor)
+            && startTime.equals(other.startTime)
+            && endTime.equals(other.endTime);
+    }
+
+    /**
+     * Checks if this schedule is on the specified date.
+     *
+     * @param date The specified date to compare against.
+     * @return {@code true} if the schedule is on the date, {@code false} otherwise.
+     */
+    public boolean isOnDate(Date date) {
+        return this.startTime.isOnDate(date) && this.endTime.isOnDate(date);
+    }
+
+    /**
      * Returns true if both schedules have the same tutor index and time fields.
      * This defines a stronger notion of equality between two schedules.
      */
@@ -83,13 +129,14 @@ public class Schedule implements Comparable<Schedule> {
         Schedule otherSchedule = (Schedule) other;
         return tutor.equals(otherSchedule.tutor)
                 && startTime.equals(otherSchedule.startTime)
-                && endTime.equals(otherSchedule.endTime);
+                && endTime.equals(otherSchedule.endTime)
+                && status.equals(otherSchedule.status);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(tutor, startTime, endTime);
+        return Objects.hash(tutor, startTime, endTime, status);
     }
 
     @Override
@@ -98,6 +145,7 @@ public class Schedule implements Comparable<Schedule> {
                 .add("tutor", tutor)
                 .add("startTime", startTime)
                 .add("endTime", endTime)
+                .add("status", status)
                 .toString();
     }
 

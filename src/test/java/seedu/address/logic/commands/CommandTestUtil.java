@@ -34,8 +34,6 @@ public class CommandTestUtil {
     public static final String VALID_PHONE_BOB = "22222222";
     public static final String VALID_EMAIL_AMY = "amy@example.com";
     public static final String VALID_EMAIL_BOB = "bob@example.com";
-    public static final String VALID_ADDRESS_AMY = "Block 312, Amy Street 1";
-
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
     public static final String PHONE_DESC_AMY = " " + PREFIX_PHONE + VALID_PHONE_AMY;
@@ -50,10 +48,10 @@ public class CommandTestUtil {
     /* Schedule related */
     public static final String VALID_TUTOR_INDEX_ONE = "1";
     public static final String VALID_TUTOR_INDEX_TWO = "2";
-    public static final String VALID_START_TIME_ONE = "2023-01-01T09:00:00";
-    public static final String VALID_START_TIME_TWO = "2023-01-02T20:00:00";
-    public static final String VALID_END_TIME_ONE = "2023-01-01T11:00:00";
-    public static final String VALID_END_TIME_TWO = "2023-01-02T22:00:00";
+    public static final String VALID_START_TIME_ONE = "2023-01-01T09:00";
+    public static final String VALID_START_TIME_TWO = "2023-01-02T20:00";
+    public static final String VALID_END_TIME_ONE = "2023-01-01T11:00";
+    public static final String VALID_END_TIME_TWO = "2023-01-02T22:00";
 
     public static final String TUTOR_INDEX_DESC_ONE = VALID_TUTOR_INDEX_ONE;
     public static final String TUTOR_INDEX_DESC_TWO = VALID_TUTOR_INDEX_TWO;

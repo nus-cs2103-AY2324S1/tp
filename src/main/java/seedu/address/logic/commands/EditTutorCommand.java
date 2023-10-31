@@ -22,7 +22,7 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 
 /**
- * Edits the details of an existing person in the address book.
+ * Edits the details of an existing tutor in the address book.
  */
 public class EditTutorCommand extends Command {
 
@@ -47,6 +47,7 @@ public class EditTutorCommand extends Command {
     private final EditPersonDescriptor editPersonDescriptor;
 
     /**
+     * Constructs a EditTutorCommand object.
      * @param index of the person in the filtered person list to edit
      * @param editPersonDescriptor details to edit the person with
      */
@@ -74,6 +75,7 @@ public class EditTutorCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
+        model.updateTutorSchedules(personToEdit, editedPerson);
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)));
@@ -127,8 +129,8 @@ public class EditTutorCommand extends Command {
         public EditPersonDescriptor() {}
 
         /**
-         * Copy constructor.
-         * A defensive copy of {@code tags} is used internally.
+         * Copies constructor.
+         * @param toCopy the {@code EditPersonDescriptor to be copied}
          */
         public EditPersonDescriptor(EditPersonDescriptor toCopy) {
             setName(toCopy.name);

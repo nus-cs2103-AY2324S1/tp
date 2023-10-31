@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import org.junit.jupiter.api.Test;
@@ -25,20 +26,29 @@ class TimeTest {
         assertFalse(Time.isValidTimeString("Start Time")); // spaces within alphabets
         assertFalse(Time.isValidTimeString("9011p041")); // alphabets within digits
         assertFalse(Time.isValidTimeString("9312 1534")); // spaces within digits
-        assertFalse(Time.isValidTimeString("2024-31-12T00:00:00")); // bad month
-        assertFalse(Time.isValidTimeString("2024-01-32T00:00:00")); // bad day
-        assertFalse(Time.isValidTimeString("2024-01-01T25:00:00")); // bad hour
-        assertFalse(Time.isValidTimeString("2024-01-01T00:61:00")); // bad min
-        assertFalse(Time.isValidTimeString("2024-01-01T00:00:61")); // bad sec
-        assertFalse(Time.isValidTimeString("2023-02-29T01:00:00")); // non leap year
+        assertFalse(Time.isValidTimeString("2024-31-12T00:00")); // bad month
+        assertFalse(Time.isValidTimeString("2024-01-32T00:00")); // bad day
+        assertFalse(Time.isValidTimeString("2024-01-01T25:00")); // bad hour
+        assertFalse(Time.isValidTimeString("2024-01-01T00:61")); // bad min
+        assertFalse(Time.isValidTimeString("2023-02-29T01:00")); // non leap year
 
         // valid StartTimes
-        assertTrue(Time.isValidTimeString("2024-02-29T01:00:00")); // leap year
-        assertTrue(Time.isValidTimeString("2024-01-01T00:00:00")); // first second of a year
-        assertTrue(Time.isValidTimeString("2023-12-31T23:59:59")); // last second of a year
-        assertTrue(Time.isValidTimeString("2099-01-01T00:00:00")); // Long time in the future
-        assertTrue(Time.isValidTimeString("1899-01-01T00:00:00")); // Long time in the past
-        assertTrue(Time.isValidTimeString("2023-10-17T18:15:33")); // random date
+        assertTrue(Time.isValidTimeString("2024-02-29T01:00")); // leap year
+        assertTrue(Time.isValidTimeString("2024-01-01T00:00")); // first second of a year
+        assertTrue(Time.isValidTimeString("2023-12-31T23:59")); // last second of a year
+        assertTrue(Time.isValidTimeString("2099-01-01T00:00")); // Long time in the future
+        assertTrue(Time.isValidTimeString("1899-01-01T00:00")); // Long time in the past
+        assertTrue(Time.isValidTimeString("2023-10-17T18:15")); // random date
+    }
+
+    @Test
+    void isOnDate() {
+        Time time = new StartTime(LocalDateTime.of(2023, 1, 1, 0, 0, 0));
+
+        assertFalse(time.isOnDate(new Date(LocalDate.of(2022, 1, 1)))); // different month
+        assertFalse(time.isOnDate(new Date(LocalDate.of(2023, 2, 1)))); // different year
+        assertFalse(time.isOnDate(new Date(LocalDate.of(2023, 1, 2)))); // different day
+        assertTrue(time.isOnDate(new Date(LocalDate.of(2023, 1, 1)))); // same date
     }
 
     @Test
@@ -66,6 +76,18 @@ class TimeTest {
         StartTime startTime = new StartTime(LocalDateTime.of(2023, 1, 1, 0, 0, 0));
         String expectedString = "Jan 1 2023 00:00";
         assertEquals(expectedString, startTime.toString());
+    }
+
+    @Test
+    void testToTimeString() {
+        StartTime startTime1 = new StartTime(LocalDateTime.of(2023, 1, 1, 0, 0, 0));
+        assertEquals("00:00", startTime1.toTimeString());
+
+        StartTime startTime2 = new StartTime(LocalDateTime.of(2023, 1, 1, 0, 0, 10));
+        assertEquals("00:00", startTime2.toTimeString());
+
+        StartTime startTime3 = new StartTime(LocalDateTime.of(2023, 1, 1, 12, 12, 10));
+        assertEquals("12:12", startTime3.toTimeString());
     }
 
     @Test
