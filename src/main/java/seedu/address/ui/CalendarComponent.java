@@ -12,12 +12,18 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import seedu.address.model.person.Person;
 
+/**
+ * The UI component that is responsible for showing the calendar.
+ */
 public class CalendarComponent extends VBox {
 
     private LocalDate currentDate;
     private ObservableList<Person> personList;
     private GridPane calendarGrid;
 
+    /**
+     * Creates a {@code CalendarComponent} with the current date.
+     */
     public CalendarComponent(ObservableList<Person> personList) {
         currentDate = LocalDate.now();
         this.personList = personList;

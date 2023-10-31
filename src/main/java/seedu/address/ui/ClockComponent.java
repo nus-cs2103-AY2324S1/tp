@@ -8,7 +8,14 @@ import javafx.animation.Timeline;
 import javafx.scene.control.Label;
 import javafx.util.Duration;
 
+/**
+ * The UI component that is responsible for showing a clock.
+ */
 public class ClockComponent extends Label {
+
+    /**
+     * Creates a {@code ClockComponent} with the current time.
+     */
     public ClockComponent() {
         getStyleClass().add("clock-label");
         initializeClock();
