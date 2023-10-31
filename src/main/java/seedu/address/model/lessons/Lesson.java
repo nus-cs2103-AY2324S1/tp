@@ -17,6 +17,7 @@ public class Lesson extends ListEntry<Lesson> {
     public static final Lesson DEFAULT_LESSON = new Lesson();
     private Time start;
     private Time end;
+    private Name name;
     // Data fields
     private Subject subject;
     private Day day;
@@ -102,6 +103,14 @@ public class Lesson extends ListEntry<Lesson> {
      * Else, the date will be returned as: [start date] - [end date]
      * @return
      */
+    public String getLessonNameStr() {
+        return name.toString();
+    }
+
+    /**
+     * Gets the name of a lesson.
+     * @return
+     */
     public String getLessonDateStr() {
         return day.toString();
     }
@@ -178,6 +187,19 @@ public class Lesson extends ListEntry<Lesson> {
 
     public TaskList getTaskList() {
         return taskList;
+    }
+
+    public Name getName() {
+        return name;
+    }
+
+    public void setName(Name name) {
+        this.name = name;
+    }
+    public void setNameIfNotDefault(Name name) {
+        if (name != null && !name.equals(Name.DEFAULT_NAME)) {
+            setName(name);
+        }
     }
 
     @Override
