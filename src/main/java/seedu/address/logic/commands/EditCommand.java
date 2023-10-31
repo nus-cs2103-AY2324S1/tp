@@ -35,6 +35,7 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Profession;
 import seedu.address.model.person.TelegramHandle;
+import seedu.address.model.person.interaction.Interaction;
 import seedu.address.model.person.lead.Lead;
 import seedu.address.model.tag.Tag;
 
@@ -120,10 +121,11 @@ public class EditCommand extends Command {
         Profession updatedProfession = editPersonDescriptor.getProfession().orElse(personToEdit.getProfession());
         Income updatedIncome = editPersonDescriptor.getIncome().orElse(personToEdit.getIncome());
         Details updatedDetails = editPersonDescriptor.getDetails().orElse(personToEdit.getDetails());
+        List<Interaction> interactionList = personToEdit.getInteractions();
 
         return new Person.PersonBuilder(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags)
                 .withLead(updatedLead).withTelegram(updatedTelegram).withProfession(updatedProfession)
-                .withIncome(updatedIncome).withDetails(updatedDetails)
+                .withIncome(updatedIncome).withDetails(updatedDetails).withInteractions(interactionList)
                 .build();
     }
 
@@ -154,6 +156,8 @@ public class EditCommand extends Command {
     /**
      * Stores the details to edit the person with. Each non-empty field value will replace the
      * corresponding field value of the person.
+     *
+     * Note: You cannot edit {@code Interactions} using this command.
      */
     public static class EditPersonDescriptor {
         private Name name;

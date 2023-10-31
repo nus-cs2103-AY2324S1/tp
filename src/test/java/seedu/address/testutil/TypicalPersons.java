@@ -22,7 +22,6 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.interaction.Interaction;
 import seedu.address.model.person.interaction.Interaction.Outcome;
-import seedu.address.model.person.interaction.InteractionList;
 
 /**
  * A utility class containing a list of {@code Person} objects to be used in tests.
@@ -43,7 +42,7 @@ public class TypicalPersons {
     public static final Interaction INTERACTION_ONE =
         new Interaction("Met up for lunch", Outcome.INTERESTED, EXAMPLE_DATE);
 
-    public static final InteractionList INTERACTION_LIST_ONE = new InteractionList().addInteraction(INTERACTION_ONE);
+    public static final List<Interaction> INTERACTION_LIST_ONE = new ArrayList<>(Arrays.asList(INTERACTION_ONE));
 
     public static final Person ALICE = new PersonBuilder().withName("Alice Pauline")
             .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")
