@@ -9,22 +9,22 @@ import seedu.address.model.employee.Name;
 /**
  * Jackson-friendly version of {@link Name}.
  */
-class JsonAdaptedManagerInCharge {
+class JsonAdaptedSupervisor {
 
     private final String managerName;
 
     /**
-     * Constructs a {@code JsonAdaptedManagerInCharge} with the given {@code managerName}.
+     * Constructs a {@code JsonAdaptedSupervisor} with the given {@code managerName}.
      */
     @JsonCreator
-    public JsonAdaptedManagerInCharge(String managerName) {
+    public JsonAdaptedSupervisor(String managerName) {
         this.managerName = managerName;
     }
 
     /**
      * Converts a given {@code Name} into this class for Jackson use.
      */
-    public JsonAdaptedManagerInCharge(Name source) {
+    public JsonAdaptedSupervisor(Name source) {
         managerName = source.fullName;
     }
 

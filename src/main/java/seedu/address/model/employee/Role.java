@@ -5,6 +5,10 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import seedu.address.model.employee.exceptions.InvalidRoleException;
 
+/**
+ * Represents the role of an employee, which can be either a manager or a subordinate.
+ * The role is stored as an enum and validated using regular expressions.
+ */
 public class Role {
 
     enum EmployeeRole {
@@ -42,14 +46,14 @@ public class Role {
         requireNonNull(role);
         checkArgument(isValidRole(role), MESSAGE_CONSTRAINTS);
         switch (role) {
-            case "manager":
-                this.role = EmployeeRole.MANAGER;
-                break;
-            case "subordinate":
-                this.role = EmployeeRole.SUBORDINATE;
-                break;
-            default:
-                throw new InvalidRoleException();
+        case "manager":
+            this.role = EmployeeRole.MANAGER;
+            break;
+        case "subordinate":
+            this.role = EmployeeRole.SUBORDINATE;
+            break;
+        default:
+            throw new InvalidRoleException();
         }
     }
 
@@ -81,12 +85,12 @@ public class Role {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof EmployeeRole)) {
+        if (!(other instanceof Role)) {
             return false;
         }
 
-        EmployeeRole otherRole = (EmployeeRole) other;
-        return role.equals(otherRole);
+        Role otherRole = (Role) other;
+        return role.equals(otherRole.role);
     }
 
     @Override

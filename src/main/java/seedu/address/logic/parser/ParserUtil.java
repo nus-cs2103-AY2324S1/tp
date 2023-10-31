@@ -145,30 +145,30 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String managerInCharge} into a {@code Name}.
+     * Parses a {@code String supervisor} into a {@code Name}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code managerInCharge} is invalid.
+     * @throws ParseException if the given {@code supervisor} is invalid.
      */
-    public static Name parseManagerInCharge(String managerInCharge) throws ParseException {
-        requireNonNull(managerInCharge);
-        String trimmedManagerInChargeName = managerInCharge.trim();
-        if (!Name.isValidName(trimmedManagerInChargeName)) {
+    public static Name parseSupervisor(String supervisor) throws ParseException {
+        requireNonNull(supervisor);
+        String trimmedSupervisorName = supervisor.trim();
+        if (!Name.isValidName(trimmedSupervisorName)) {
             throw new ParseException(Department.MESSAGE_CONSTRAINTS);
         }
-        return new Name(trimmedManagerInChargeName);
+        return new Name(trimmedSupervisorName);
     }
 
     /**
-     * Parses {@code Collection<String> managersInCharge} into a {@code Set<Name>}.
+     * Parses {@code Collection<String> supervisors} into a {@code Set<Name>}.
      */
-    public static Set<Name> parseManagersInCharge(Collection<String> managersInCharge) throws ParseException {
-        requireNonNull(managersInCharge);
-        final Set<Name> managersInChargeSet = new HashSet<>();
-        for (String managerInCharge : managersInCharge) {
-            managersInChargeSet.add(parseManagerInCharge(managerInCharge));
+    public static Set<Name> parseSupervisors(Collection<String> supervisors) throws ParseException {
+        requireNonNull(supervisors);
+        final Set<Name> supervisorNameSet = new HashSet<>();
+        for (String supervisor : supervisors) {
+            supervisorNameSet.add(parseSupervisor(supervisor));
         }
-        return managersInChargeSet;
+        return supervisorNameSet;
     }
 
     /**

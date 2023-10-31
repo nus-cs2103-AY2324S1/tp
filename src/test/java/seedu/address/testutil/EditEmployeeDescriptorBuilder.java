@@ -12,6 +12,7 @@ import seedu.address.model.employee.Employee;
 import seedu.address.model.employee.Leave;
 import seedu.address.model.employee.Name;
 import seedu.address.model.employee.Phone;
+import seedu.address.model.employee.Role;
 import seedu.address.model.employee.Salary;
 
 /**
@@ -88,6 +89,24 @@ public class EditEmployeeDescriptorBuilder {
      */
     public EditEmployeeDescriptorBuilder withLeave(String leave) {
         descriptor.setLeave(new Leave(leave));
+        return this;
+    }
+
+    /**
+     * Sets the {@code role} of the {@code EditEmployeeDescriptor} that we are building.
+     */
+    public EditEmployeeDescriptorBuilder withRole(String role) {
+        descriptor.setRole(new Role(role));
+        return this;
+    }
+
+    /**
+     * Parses the {@code supervisors} into a {@code Set<Name>} and set it to the {@code EditEmployeeDescriptor}
+     * that we are building.
+     */
+    public EditEmployeeDescriptorBuilder withSupervisors(String... supervisors) {
+        Set<Name> supervisorNameSet = Stream.of(supervisors).map(Name::new).collect(Collectors.toSet());
+        descriptor.setSupervisors(supervisorNameSet);
         return this;
     }
 

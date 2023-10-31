@@ -114,13 +114,13 @@ public class EditCommand extends Command {
         Salary updatedSalary = editEmployeeDescriptor.getSalary().orElse(employeeToEdit.getSalary());
         Leave updatedLeave = editEmployeeDescriptor.getLeave().orElse(employeeToEdit.getLeave());
         Role updatedRole = editEmployeeDescriptor.getRole().orElse(employeeToEdit.getRole());
-        Set<Name> updatedManagersInCharge = editEmployeeDescriptor
-                .getManagersInCharge().orElse(employeeToEdit.getManagersInCharge());
+        Set<Name> updatedSupervisors = editEmployeeDescriptor
+                .getSupervisors().orElse(employeeToEdit.getSupervisors());
         Set<Department> updatedDepartments = editEmployeeDescriptor
                 .getDepartments().orElse(employeeToEdit.getDepartments());
 
         return new Employee(updatedName, updatedPhone, updatedEmail, updatedAddress,
-                updatedSalary, updatedLeave, updatedRole, updatedManagersInCharge, updatedDepartments);
+                updatedSalary, updatedLeave, updatedRole, updatedSupervisors, updatedDepartments);
     }
 
     @Override
@@ -159,7 +159,7 @@ public class EditCommand extends Command {
         private Salary salary;
         private Leave leave;
         private Role role;
-        private Set<Name> managersInCharge;
+        private Set<Name> supervisors;
         private Set<Department> departments;
 
         public EditEmployeeDescriptor() {}
@@ -175,6 +175,8 @@ public class EditCommand extends Command {
             setAddress(toCopy.address);
             setSalary(toCopy.salary);
             setLeave(toCopy.leave);
+            setRole(toCopy.role);
+            setSupervisors(toCopy.supervisors);
             setDepartments(toCopy.departments);
         }
 
@@ -182,7 +184,8 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, salary, leave, departments);
+            return CollectionUtil.isAnyNonNull(name, phone, email, address, salary,
+                    leave, role, supervisors, departments);
         }
 
         public void setName(Name name) {
@@ -242,21 +245,21 @@ public class EditCommand extends Command {
         }
 
         /**
-         * Sets {@code ManagersInCharge} to this object's {@code ManagersInCharge}.
-         * A defensive copy of {@code ManagersInCharge} is used internally.
+         * Sets {@code supervisors} to this object's {@code supervisors}.
+         * A defensive copy of {@code supervisors} is used internally.
          */
-        public void setManagersInCharge(Set<Name> ManagersInCharge) {
-            this.managersInCharge = (ManagersInCharge != null) ? new HashSet<>(ManagersInCharge) : null;
+        public void setSupervisors(Set<Name> supervisors) {
+            this.supervisors = (supervisors != null) ? new HashSet<>(supervisors) : null;
         }
 
         /**
          * Returns an unmodifiable name set, which throws {@code UnsupportedOperationException}
          * if modification is attempted.
-         * Returns {@code Optional#empty()} if {@code managersInCharge} is null.
+         * Returns {@code Optional#empty()} if {@code supervisors} is null.
          */
-        public Optional<Set<Name>> getManagersInCharge() {
-            return (managersInCharge != null) ?
-                    Optional.of(Collections.unmodifiableSet(managersInCharge)) : Optional.empty();
+        public Optional<Set<Name>> getSupervisors() {
+            return (supervisors != null)
+                    ? Optional.of(Collections.unmodifiableSet(supervisors)) : Optional.empty();
         }
 
         /**
@@ -295,7 +298,7 @@ public class EditCommand extends Command {
                     && Objects.equals(salary, otherEditEmployeeDescriptor.salary)
                     && Objects.equals(leave, otherEditEmployeeDescriptor.leave)
                     && Objects.equals(role, otherEditEmployeeDescriptor.role)
-                    && Objects.equals(managersInCharge, otherEditEmployeeDescriptor.managersInCharge)
+                    && Objects.equals(supervisors, otherEditEmployeeDescriptor.supervisors)
                     && Objects.equals(departments, otherEditEmployeeDescriptor.departments);
         }
 
@@ -309,7 +312,7 @@ public class EditCommand extends Command {
                     .add("salary", salary)
                     .add("leave", leave)
                     .add("role", role)
-                    .add("managersInCharge", managersInCharge)
+                    .add("supervisors", supervisors)
                     .add("departments", departments)
                     .toString();
         }

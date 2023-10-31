@@ -76,8 +76,8 @@ public class EditCommandParser implements Parser<EditCommand> {
         parseDepartmentsForEdit(argMultimap.getAllValues(PREFIX_DEPARTMENT))
                 .ifPresent(editEmployeeDescriptor::setDepartments);
 
-        parseManagersInChargeForEdit(argMultimap.getAllValues(PREFIX_MANAGER))
-                .ifPresent(editEmployeeDescriptor::setManagersInCharge);
+        parseSupervisorsForEdit(argMultimap.getAllValues(PREFIX_MANAGER))
+                .ifPresent(editEmployeeDescriptor::setSupervisors);
 
         if (!editEmployeeDescriptor.isAnyFieldEdited()) {
             throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
@@ -87,21 +87,21 @@ public class EditCommandParser implements Parser<EditCommand> {
     }
 
     /**
-     * Parses {@code Collection<String> managersInCharge} into a {@code Set<Name>} if
-     * {@code managersInCharge} is non-empty.
-     * If {@code managersInCharge} contain only one element which is an empty string, it will be parsed into a
-     * {@code Set<Name>} containing zero manager names.
+     * Parses {@code Collection<String> supervisors} into a {@code Set<Name>} if
+     * {@code supervisors} is non-empty.
+     * If {@code supervisors} contain only one element which is an empty string, it will be parsed into a
+     * {@code Set<Name>} containing zero supervisor names.
      */
-    private Optional<Set<Name>> parseManagersInChargeForEdit(Collection<String> managersInCharge)
+    private Optional<Set<Name>> parseSupervisorsForEdit(Collection<String> supervisors)
             throws ParseException {
-        assert managersInCharge != null;
+        assert supervisors != null;
 
-        if (managersInCharge.isEmpty()) {
+        if (supervisors.isEmpty()) {
             return Optional.empty();
         }
-        Collection<String> nameSet = managersInCharge.size() == 1 && managersInCharge.contains("")
-                ? Collections.emptySet() : managersInCharge;
-        return Optional.of(ParserUtil.parseManagersInCharge(nameSet));
+        Collection<String> nameSet = supervisors.size() == 1 && supervisors.contains("")
+                ? Collections.emptySet() : supervisors;
+        return Optional.of(ParserUtil.parseSupervisors(nameSet));
     }
 
     /**

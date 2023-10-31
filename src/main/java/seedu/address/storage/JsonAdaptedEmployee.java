@@ -34,7 +34,7 @@ class JsonAdaptedEmployee {
     private final String salary;
     private final String leave;
     private final String role;
-    private final List<JsonAdaptedManagerInCharge> managersInCharge = new ArrayList<>();
+    private final List<JsonAdaptedSupervisor> supervisors = new ArrayList<>();
     private final List<JsonAdaptedDepartment> departments = new ArrayList<>();
 
     /**
@@ -45,7 +45,7 @@ class JsonAdaptedEmployee {
                                @JsonProperty("email") String email, @JsonProperty("address") String address,
                                @JsonProperty("salary") String salary, @JsonProperty("leave") String leave,
                                @JsonProperty("role") String role,
-                               @JsonProperty("managersInCharge") List<JsonAdaptedManagerInCharge> managersInCharge,
+                               @JsonProperty("supervisors") List<JsonAdaptedSupervisor> supervisors,
                                @JsonProperty("departments") List<JsonAdaptedDepartment> departments) {
         this.name = name;
         this.phone = phone;
@@ -54,8 +54,8 @@ class JsonAdaptedEmployee {
         this.salary = salary;
         this.leave = leave;
         this.role = role;
-        if (managersInCharge != null) {
-            this.managersInCharge.addAll(managersInCharge);
+        if (supervisors != null) {
+            this.supervisors.addAll(supervisors);
         }
         if (departments != null) {
             this.departments.addAll(departments);
@@ -73,8 +73,8 @@ class JsonAdaptedEmployee {
         salary = source.getSalary().value;
         leave = source.getLeave().value;
         role = source.getRole().toString();
-        managersInCharge.addAll(source.getManagersInCharge().stream()
-                .map(JsonAdaptedManagerInCharge::new)
+        supervisors.addAll(source.getSupervisors().stream()
+                .map(JsonAdaptedSupervisor::new)
                 .collect(Collectors.toList()));
         departments.addAll(source.getDepartments().stream()
                 .map(JsonAdaptedDepartment::new)
@@ -92,8 +92,8 @@ class JsonAdaptedEmployee {
             employeeDepartments.add(department.toModelType());
         }
         final List<Name> managers = new ArrayList<>();
-        for (JsonAdaptedManagerInCharge managerInCharge : managersInCharge) {
-            managers.add(managerInCharge.toModelType());
+        for (JsonAdaptedSupervisor supervisor : supervisors) {
+            managers.add(supervisor.toModelType());
         }
 
         if (name == null) {
@@ -151,10 +151,10 @@ class JsonAdaptedEmployee {
             throw new IllegalValueException(Role.MESSAGE_CONSTRAINTS);
         }
         final Role modelRole = new Role(role);
-        final Set<Name> modelManagersInCharge = new HashSet<>(managers);
+        final Set<Name> modelSupervisors = new HashSet<>(managers);
         final Set<Department> modelDepartments = new HashSet<>(employeeDepartments);
         return new Employee(modelName, modelPhone, modelEmail, modelAddress, modelSalary, modelLeave,
-                 modelRole, modelManagersInCharge, modelDepartments);
+                 modelRole, modelSupervisors, modelDepartments);
     }
 
 }

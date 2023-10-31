@@ -6,8 +6,10 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DEPARTMENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LEAVE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MANAGER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SALARY;
 import static seedu.address.testutil.Assert.assertThrows;
 
@@ -40,6 +42,9 @@ public class CommandTestUtil {
     public static final String VALID_SALARY_BOB = "12000";
     public static final String VALID_LEAVE_AMY = "21";
     public static final String VALID_LEAVE_BOB = "28";
+    public static final String VALID_ROLE_AMY = "manager";
+    public static final String VALID_ROLE_BOB = "subordinate";
+    public static final String VALID_MANAGER_AMY = "Amy Bee";
     public static final String VALID_DEPARTMENT_LOGISTIC = "logistic";
     public static final String VALID_DEPARTMENT_INVESTMENT = "investment";
 
@@ -55,6 +60,9 @@ public class CommandTestUtil {
     public static final String SALARY_DESC_BOB = " " + PREFIX_SALARY + VALID_SALARY_BOB;
     public static final String LEAVE_DESC_AMY = " " + PREFIX_LEAVE + VALID_LEAVE_AMY;
     public static final String LEAVE_DESC_BOB = " " + PREFIX_LEAVE + VALID_LEAVE_BOB;
+    public static final String ROLE_DESC_AMY = " " + PREFIX_ROLE + VALID_ROLE_AMY;
+    public static final String ROLE_DESC_BOB = " " + PREFIX_ROLE + VALID_ROLE_BOB;
+    public static final String MANAGER_DESC_AMY = " " + PREFIX_MANAGER + VALID_MANAGER_AMY;
     public static final String DEPARTMENT_DESC_INVESTMENT = " " + PREFIX_DEPARTMENT + VALID_DEPARTMENT_INVESTMENT;
     public static final String DEPARTMENT_DESC_LOGISTIC = " " + PREFIX_DEPARTMENT + VALID_DEPARTMENT_LOGISTIC;
 
@@ -64,6 +72,8 @@ public class CommandTestUtil {
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
     public static final String INVALID_SALARY_DESC = " " + PREFIX_SALARY + "10thou"; // alphabets not allowed for salary
     public static final String INVALID_LEAVE_DESC = " " + PREFIX_LEAVE + "100 days"; // spaces not allowed for leave
+    public static final String INVALID_ROLE_DESC = " " + PREFIX_ROLE + "worker"; // 'worker' not a valid role
+    public static final String INVALID_MANAGER_DESC = " " + PREFIX_MANAGER + "James"; // 'James' is not a manager
     public static final String INVALID_DEPARTMENT_DESC = " "
             + PREFIX_DEPARTMENT + "hubby111*"; // '111' not allowed in departments
 
@@ -76,12 +86,11 @@ public class CommandTestUtil {
     static {
         DESC_AMY = new EditEmployeeDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
-                .withSalary(VALID_SALARY_AMY).withLeave(VALID_LEAVE_AMY)
-                .withDepartments(VALID_DEPARTMENT_INVESTMENT).build();
-        DESC_BOB = new EditEmployeeDescriptorBuilder().withName(VALID_NAME_BOB)
-                .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
-                .withAddress(VALID_ADDRESS_BOB).withSalary(VALID_SALARY_BOB)
-                .withLeave(VALID_LEAVE_BOB)
+                .withSalary(VALID_SALARY_AMY).withLeave(VALID_LEAVE_AMY).withRole(VALID_ROLE_AMY)
+                .withSupervisors().withDepartments(VALID_DEPARTMENT_INVESTMENT).build();
+        DESC_BOB = new EditEmployeeDescriptorBuilder().withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
+                .withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB).withSalary(VALID_SALARY_BOB)
+                .withLeave(VALID_LEAVE_BOB).withRole(VALID_ROLE_BOB).withSupervisors(VALID_MANAGER_AMY)
                 .withDepartments(VALID_DEPARTMENT_LOGISTIC, VALID_DEPARTMENT_INVESTMENT).build();
     }
 
@@ -94,6 +103,7 @@ public class CommandTestUtil {
             Model expectedModel) {
         try {
             CommandResult result = command.execute(actualModel);
+            assertEquals(actualModel.getManageHr().getEmployeeList(), expectedModel.getManageHr().getEmployeeList());
             assertEquals(expectedCommandResult, result);
             assertEquals(expectedModel, actualModel);
         } catch (CommandException ce) {

@@ -26,14 +26,14 @@ public class Employee {
     private final Salary salary;
     private final Leave leave;
     private final Role role;
-    private final Set<Name> managersInCharge = new HashSet<>();
+    private final Set<Name> supervisors = new HashSet<>();
     private final Set<Department> departments = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
     public Employee(Name name, Phone phone, Email email, Address address, Salary salary, Leave leave,
-                    Role role, Set<Name> managersInCharge, Set<Department> departments) {
+                    Role role, Set<Name> supervisors, Set<Department> departments) {
         requireAllNonNull(name, phone, email, address, salary, leave, departments);
         this.name = name;
         this.phone = phone;
@@ -42,7 +42,7 @@ public class Employee {
         this.salary = salary;
         this.leave = leave;
         this.role = role;
-        this.managersInCharge.addAll(managersInCharge);
+        this.supervisors.addAll(supervisors);
         this.departments.addAll(departments);
     }
 
@@ -86,8 +86,8 @@ public class Employee {
      * Returns an immutable name set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
-    public Set<Name> getManagersInCharge() {
-        return Collections.unmodifiableSet(managersInCharge);
+    public Set<Name> getSupervisors() {
+        return Collections.unmodifiableSet(supervisors);
     }
 
     /**
@@ -119,8 +119,23 @@ public class Employee {
                 && otherEmployee.equals(getName());
     }
 
+    /**
+     * Checks if this employee holds a managerial role.
+     *
+     * @return {@code true} if this employee's role is a managerial role, {@code false} otherwise.
+     */
     public boolean isManager() {
         return role.isManager();
+    }
+
+    /**
+     * Checks if this employee is a supervisor of the provided subordinate.
+     *
+     * @param subordinate The subordinate employee to check.
+     * @return {@code true} if this employee is a supervisor of the provided 'subordinate,' {@code false} otherwise.
+     */
+    public boolean isSupervisorOf(Employee subordinate) {
+        return subordinate.getSupervisors().stream().anyMatch(x -> x.equals(this.getName()));
     }
 
     /**
@@ -146,14 +161,14 @@ public class Employee {
                 && salary.equals(otherEmployee.salary)
                 && leave.equals(otherEmployee.leave)
                 && role.equals(otherEmployee.role)
-                && managersInCharge.equals(otherEmployee.managersInCharge)
+                && supervisors.equals(otherEmployee.supervisors)
                 && departments.equals(otherEmployee.departments);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, salary, leave, role, managersInCharge, departments);
+        return Objects.hash(name, phone, email, address, salary, leave, role, supervisors, departments);
     }
 
     @Override
@@ -166,7 +181,7 @@ public class Employee {
                 .add("salary", salary)
                 .add("leave", leave)
                 .add("role", role)
-                .add("managersInCharge", managersInCharge)
+                .add("supervisors", supervisors)
                 .add("departments", departments)
                 .toString();
     }

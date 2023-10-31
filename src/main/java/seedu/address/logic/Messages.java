@@ -47,7 +47,11 @@ public class Messages {
                 .append(employee.getSalary())
                 .append("; Leave: ")
                 .append(employee.getLeave())
-                .append("; Department: ");
+                .append("; Role: ")
+                .append(employee.getRole())
+                .append("; Supervisor: ");
+        employee.getSupervisors().forEach(x -> builder.append("[").append(x.toString()).append("]"));
+        builder.append("; Department: ");
         employee.getDepartments().forEach(builder::append);
         return builder.toString();
     }

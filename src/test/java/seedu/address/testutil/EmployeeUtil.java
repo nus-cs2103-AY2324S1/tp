@@ -4,8 +4,10 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DEPARTMENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LEAVE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MANAGER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SALARY;
 
 import java.util.Set;
@@ -14,6 +16,7 @@ import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.EditCommand.EditEmployeeDescriptor;
 import seedu.address.model.department.Department;
 import seedu.address.model.employee.Employee;
+import seedu.address.model.employee.Name;
 
 /**
  * A utility class for Employee.
@@ -38,6 +41,10 @@ public class EmployeeUtil {
         sb.append(PREFIX_ADDRESS + employee.getAddress().value + " ");
         sb.append(PREFIX_SALARY + employee.getSalary().value + " ");
         sb.append(PREFIX_LEAVE + employee.getLeave().value + " ");
+        sb.append(PREFIX_ROLE + employee.getRole().toString() + " ");
+        employee.getSupervisors().stream().forEach(
+                x -> sb.append(PREFIX_MANAGER + x.toString() + " ")
+        );
         employee.getDepartments().stream().forEach(
             s -> sb.append(PREFIX_DEPARTMENT + s.departmentName + " ")
         );
@@ -55,6 +62,15 @@ public class EmployeeUtil {
         descriptor.getAddress().ifPresent(address -> sb.append(PREFIX_ADDRESS).append(address.value).append(" "));
         descriptor.getSalary().ifPresent(salary -> sb.append(PREFIX_SALARY).append(salary.value).append(" "));
         descriptor.getLeave().ifPresent(leave -> sb.append(PREFIX_LEAVE).append(leave.value).append(" "));
+        descriptor.getRole().ifPresent(role -> sb.append(PREFIX_ROLE).append(role).append(" "));
+        if (descriptor.getSupervisors().isPresent()) {
+            Set<Name> supervisors = descriptor.getSupervisors().get();
+            if (supervisors.isEmpty()) {
+                sb.append(PREFIX_MANAGER);
+            } else {
+                supervisors.forEach(s -> sb.append(PREFIX_MANAGER).append(s).append(" "));
+            }
+        }
         if (descriptor.getDepartments().isPresent()) {
             Set<Department> departments = descriptor.getDepartments().get();
             if (departments.isEmpty()) {

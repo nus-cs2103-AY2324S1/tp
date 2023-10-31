@@ -56,12 +56,12 @@ public class AddCommandParser implements Parser<AddCommand> {
         Salary salary = ParserUtil.parseSalary(argMultimap.getValue(PREFIX_SALARY).get());
         Leave leave = ParserUtil.parseLeave(argMultimap.getValue(PREFIX_LEAVE).get());
         Role role = ParserUtil.parseRole(argMultimap.getValue(PREFIX_ROLE).get());
-        Set<Name> managersInChargeList = ParserUtil.parseManagersInCharge(
+        Set<Name> supervisorNameList = ParserUtil.parseSupervisors(
                 argMultimap.getAllValues(PREFIX_MANAGER));
         Set<Department> departmentList = ParserUtil.parseDepartments(argMultimap.getAllValues(PREFIX_DEPARTMENT));
 
         Employee employee = new Employee(name, phone, email, address, salary, leave, role,
-                managersInChargeList, departmentList);
+                supervisorNameList, departmentList);
 
         return new AddCommand(employee);
     }

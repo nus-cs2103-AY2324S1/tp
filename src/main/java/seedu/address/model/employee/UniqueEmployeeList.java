@@ -10,8 +10,8 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.employee.exceptions.DuplicateEmployeeException;
 import seedu.address.model.employee.exceptions.EmployeeNotFoundException;
-import seedu.address.model.employee.exceptions.ManagerNotFoundException;
 import seedu.address.model.employee.exceptions.SubordinatePresentException;
+import seedu.address.model.employee.exceptions.SupervisorNotFoundException;
 
 /**
  * A list of employees that enforces uniqueness between its elements and does not allow nulls.
@@ -44,7 +44,7 @@ public class UniqueEmployeeList implements Iterable<Employee> {
      */
     public boolean containsManager(Employee toCheck) {
         requireNonNull(toCheck);
-        return toCheck.getManagersInCharge().stream().allMatch(x ->
+        return toCheck.getSupervisors().stream().allMatch(x ->
                 internalList.stream().anyMatch(y ->
                         y.hasSameEmployeeName(x) && y.isManager()));
     }
@@ -62,8 +62,9 @@ public class UniqueEmployeeList implements Iterable<Employee> {
         if (!toCheck.isManager()) {
             return false;
         }
-        return internalList.stream().anyMatch(x -> x.getManagersInCharge().contains(toCheck.getName()));
+        return internalList.stream().anyMatch(x -> x.getSupervisors().contains(toCheck.getName()));
     }
+
 
     /**
      * Adds an employee to the list.
@@ -76,8 +77,9 @@ public class UniqueEmployeeList implements Iterable<Employee> {
             throw new DuplicateEmployeeException();
         }
         if (!containsManager(toAdd)) {
-            throw new ManagerNotFoundException();
+            throw new SupervisorNotFoundException();
         }
+
         internalList.add(toAdd);
     }
 
@@ -98,7 +100,13 @@ public class UniqueEmployeeList implements Iterable<Employee> {
             throw new DuplicateEmployeeException();
         }
         if (!containsManager(editedEmployee)) {
-            throw new ManagerNotFoundException();
+            throw new SupervisorNotFoundException();
+        }
+        if (hasSubordinates(target)) {
+            throw new SubordinatePresentException();
+        }
+        if (target.isSupervisorOf(editedEmployee)) {
+            throw new SupervisorNotFoundException();
         }
 
         internalList.set(index, editedEmployee);
