@@ -19,14 +19,17 @@ public class EmployeeContainsKeywordsPredicateTest {
         List<String> firstPredicateKeywordList = Collections.singletonList("first");
         List<String> secondPredicateKeywordList = Arrays.asList("first", "second");
 
-        EmployeeContainsKeywordsPredicate firstPredicate = new EmployeeContainsKeywordsPredicate(firstPredicateKeywordList);
-        EmployeeContainsKeywordsPredicate secondPredicate = new EmployeeContainsKeywordsPredicate(secondPredicateKeywordList);
+        EmployeeContainsKeywordsPredicate firstPredicate =
+                new EmployeeContainsKeywordsPredicate(firstPredicateKeywordList);
+        EmployeeContainsKeywordsPredicate secondPredicate =
+                new EmployeeContainsKeywordsPredicate(secondPredicateKeywordList);
 
         // same object -> returns true
         assertTrue(firstPredicate.equals(firstPredicate));
 
         // same values -> returns true
-        EmployeeContainsKeywordsPredicate firstPredicateCopy = new EmployeeContainsKeywordsPredicate(firstPredicateKeywordList);
+        EmployeeContainsKeywordsPredicate firstPredicateCopy =
+                new EmployeeContainsKeywordsPredicate(firstPredicateKeywordList);
         assertTrue(firstPredicate.equals(firstPredicateCopy));
 
         // different types -> returns false
@@ -42,7 +45,8 @@ public class EmployeeContainsKeywordsPredicateTest {
     @Test
     public void test_employeeContainsKeywords_returnsTrue() {
         // One keyword - name
-        EmployeeContainsKeywordsPredicate predicate = new EmployeeContainsKeywordsPredicate(Collections.singletonList("Alice"));
+        EmployeeContainsKeywordsPredicate predicate =
+                new EmployeeContainsKeywordsPredicate(Collections.singletonList("Alice"));
         assertTrue(predicate.test(new EmployeeBuilder().withName("Alice Bob").build()));
 
         // One keyword - position

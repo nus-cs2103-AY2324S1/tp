@@ -18,14 +18,13 @@ public class EmployeeContainsKeywordsPredicate implements Predicate<Employee> {
 
     @Override
     public boolean test(Employee employee) {
-        return keywords.stream()
-                .anyMatch(keyword -> 
-                StringUtil.containsWordIgnoreCase(employee.getName().fullName, keyword) ||
-                StringUtil.containsWordIgnoreCase(employee.getDepartments().toString(), keyword) ||
-                StringUtil.containsWordIgnoreCase(employee.getPosition().value, keyword) ||
-                StringUtil.containsWordIgnoreCase(employee.getPhone().value, keyword) ||
-                StringUtil.containsWordIgnoreCase(employee.getEmail().value, keyword) ||
-                StringUtil.containsWordIgnoreCase(employee.getId().value, keyword)
+        return keywords.stream().anyMatch(keyword ->
+                StringUtil.containsWordIgnoreCase(employee.getName().fullName, keyword)
+                || StringUtil.containsWordIgnoreCase(employee.getDepartments().toString(), keyword)
+                || StringUtil.containsWordIgnoreCase(employee.getPosition().value, keyword)
+                || StringUtil.containsWordIgnoreCase(employee.getPhone().value, keyword)
+                || StringUtil.containsWordIgnoreCase(employee.getEmail().value, keyword)
+                || StringUtil.containsWordIgnoreCase(employee.getId().value, keyword)
                 );
     }
 
@@ -40,7 +39,8 @@ public class EmployeeContainsKeywordsPredicate implements Predicate<Employee> {
             return false;
         }
 
-        EmployeeContainsKeywordsPredicate otherEmployeeContainsKeywordsPredicate = (EmployeeContainsKeywordsPredicate) other;
+        EmployeeContainsKeywordsPredicate otherEmployeeContainsKeywordsPredicate =
+                (EmployeeContainsKeywordsPredicate) other;
         return keywords.equals(otherEmployeeContainsKeywordsPredicate.keywords);
     }
 
