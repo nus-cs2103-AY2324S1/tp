@@ -8,6 +8,7 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.person.Member;
+import seedu.address.task.Task;
 
 /**
  * An UI component that displays information of a {@code Member}.
@@ -40,8 +41,8 @@ public class MemberCard extends UiPart<Region> {
     private Label telegram;
     @FXML
     private FlowPane tags;
-//    @FXML
-//    private FlowPane tasks;
+    @FXML
+    private FlowPane tasks;
 
     /**
      * Creates a {@code MemberCard} with the given {@code Member} and index to display.
@@ -57,7 +58,8 @@ public class MemberCard extends UiPart<Region> {
         member.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
-//        member.getTasks().getTaskAsList()
-//                .forEach(task -> tags.getChildren().add(new Label(task.tag))
+        member.getTasks().stream()
+                .sorted(Comparator.comparing(Task::getTaskName))
+                .forEach(task -> tags.getChildren().add(new Label(task.getTaskName())));
     }
 }

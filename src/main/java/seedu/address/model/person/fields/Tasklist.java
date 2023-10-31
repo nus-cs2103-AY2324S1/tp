@@ -7,6 +7,7 @@ import seedu.address.task.ToDo;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Stream;
 
 public class Tasklist {
 
@@ -137,6 +138,11 @@ public class Tasklist {
         return linesToAppend.subList(0, linesToAppend.size());
     }
 
+    public Stream<ToDo> stream() {
+        return taskList.stream()
+                .filter(task -> task instanceof ToDo)
+                .map(task -> (ToDo) task);
+    }
     /**
      * Marks a task as done.
      * @param index The index of the task to mark as done.
