@@ -154,6 +154,11 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void updateWholeReminderList(ObservableList<Person> personList) {
+        reminderList.setReminders(personList);
+    }
+
+    @Override
     public boolean equals(Object other) {
         if (other == this) {
             return true;

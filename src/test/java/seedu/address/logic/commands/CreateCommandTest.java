@@ -176,6 +176,11 @@ public class CreateCommandTest {
         public void updateReminderList(Person person, Interaction interaction) {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public void updateWholeReminderList(ObservableList<Person> personList) {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     /**
