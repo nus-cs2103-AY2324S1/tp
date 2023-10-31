@@ -12,6 +12,7 @@ import static seedu.address.testutil.TypicalSchedules.SCHEDULE_BOB_SECOND_JAN;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDate;
 import java.util.Arrays;
 
 import org.junit.jupiter.api.Test;
@@ -21,7 +22,9 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
+import seedu.address.model.schedule.Date;
 import seedu.address.model.schedule.Schedule;
+import seedu.address.model.schedule.ScheduleIsOnDatePredicate;
 import seedu.address.testutil.AddressBookBuilder;
 import seedu.address.testutil.PersonBuilder;
 
@@ -244,6 +247,11 @@ public class ModelManagerTest {
 
         // different Schedule List -> returns false
         modelManager.deleteSchedule(modelManager.getFilteredScheduleList().get(0));
+        assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs)));
+
+        // different Calendar Schedule List -> return false
+        modelManager.updateFilteredCalendarScheduleList(
+            new ScheduleIsOnDatePredicate(new Date(LocalDate.of(2023, 9, 15))));
         assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs)));
     }
 }

@@ -238,7 +238,8 @@ public class ModelManager implements Model {
         return addressBook.equals(otherModelManager.addressBook)
                 && userPrefs.equals(otherModelManager.userPrefs)
                 && filteredPersons.equals(otherModelManager.filteredPersons)
-                && filteredSchedules.equals(otherModelManager.filteredSchedules);
+                && filteredSchedules.equals(otherModelManager.filteredSchedules)
+                && filteredCalendarSchedules.equals(otherModelManager.filteredCalendarSchedules);
     }
 
 }
