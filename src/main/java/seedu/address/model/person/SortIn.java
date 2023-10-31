@@ -34,7 +34,7 @@ public class SortIn {
     public static boolean isValidSortIn(String sequence) {
         try {
             ValidSequence enumValue = ValidSequence.valueOf(sequence.toUpperCase());
-            return enumValue == ValidSequence.ASC || enumValue == ValidSequence.DESC;
+            return true;
         } catch (Exception e) {
             return false;
         }

@@ -160,7 +160,7 @@ public class UniquePersonList implements Iterable<Student> {
 
         if ("ASC".equals(sequence.toString().toUpperCase())) {
             internalList.sort(comparator);
-        } else if ("DESC".equals(sequence.toString().toUpperCase())) {
+        } else {
             internalList.sort(comparator.reversed());
         }
     }
