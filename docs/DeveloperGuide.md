@@ -334,7 +334,7 @@ Class Diagram for FindFilterStringTokenizer:
 
 <puml src="diagrams/find-command/FindFilterStringTokenizerClassDiagram.puml" alt="FindFilterStringTokenizerClassDiagram" />
 
-##### `FindExpressionParser``
+##### `FindExpressionParser`
 
 The `FindExpressionParser` ingests the tokens produced by the `FindFilterStringTokenizer` and interprets them, creating a singular complete `Predicate<Person>` that's applied on the PersonList.
 
