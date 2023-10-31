@@ -27,5 +27,4 @@ public class RemindCommandParser implements Parser<RemindCommand> {
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, RemindCommand.MESSAGE_USAGE), pe);
         }
     }
-
 }

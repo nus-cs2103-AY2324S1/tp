@@ -82,7 +82,7 @@ public class EditEventCommand extends Command {
         Event meetingToEdit = lastShownList.get(index.getZeroBased());
         Event editedMeeting = createEditedMeeting(meetingToEdit, this.editEventDescriptor, model);
 
-        //ensure that the user is not editing a valid time into an invalid time
+        // ensure that the user is not editing a valid time into an invalid time
         if (this.editEventDescriptor.getDate().isPresent()
                 || this.editEventDescriptor.getStartTime().isPresent()
                 || this.editEventDescriptor.getEndTime().isPresent()) {

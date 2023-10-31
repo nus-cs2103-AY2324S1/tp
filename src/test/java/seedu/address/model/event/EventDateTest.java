@@ -32,11 +32,11 @@ public class EventDateTest {
         assertFalse(() -> EventDate.isValidDate("2020-13-13")); // invalid month
         assertFalse(() -> EventDate.isValidDate("2020-01-32")); // invalid day
         assertFalse(() -> EventDate.isValidDate("2020-25-02")); // invalid format yyyy-dd-MM
+        assertFalse(() -> EventDate.isValidDate("2020-02-31")); // corrects incorrect day in February
 
         // valid dates
         assertTrue(() -> EventDate.isValidDate("2020-01-01")); // valid date
         assertTrue(() -> EventDate.isValidDate("2020-02-29")); // valid leap year date
-        assertTrue(() -> EventDate.isValidDate("2020-02-31")); // corrects incorrect day in February
     }
 
     @Test

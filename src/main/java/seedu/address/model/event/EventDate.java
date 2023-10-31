@@ -2,6 +2,7 @@ package seedu.address.model.event;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.ResolverStyle;
 
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -9,10 +10,11 @@ import seedu.address.logic.parser.exceptions.ParseException;
  * DateTime class to represent the date and time of an event.
  */
 public class EventDate {
-    public static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+    public static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("uuuu-MM-dd")
+            .withResolverStyle(ResolverStyle.STRICT);
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Date should be in YYYY-mm-yy format, i.e. 2023-09-30, and it should not be blank";
+            "Date should be in YYYY-mm-dd format, i.e. 2023-09-30, and it should not be blank";
 
     private LocalDate date;
 
