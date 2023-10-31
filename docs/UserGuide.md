@@ -38,7 +38,9 @@ HouR is a **desktop app for managing employee records, optimized for use via a C
    * `delete EID1234-5678` : Deletes the employee with employee id EID1234-5678 shown in the list.
 
    * `sort by/Salary`: Sorts the employees by their salaries in ascending order.
-   * 
+
+   * `report EID1234-5678`: Generates a report with details on leaves and overtime for employee with id EID1234-5678.
+
    * `clear` : Deletes all employees.
 
    * `exit` : Exits the app.
@@ -56,6 +58,7 @@ HouR is a **desktop app for managing employee records, optimized for use via a C
 - List all employees: `list`
 - Find employees by name: `find`
 - Sorts employees by attribute: `sort`
+- Get details on employee performance: `report`
 - Clear all employees: `clear`
 - Exit the program: `exit`
 
@@ -185,6 +188,25 @@ Examples:
 * `sort by/blah` is invalid because it does not exist.
 
 ![sort failure](images/sortFailure.png)
+
+### Generating a report : `report`
+
+Generates a report with details on leaves and overtime for an employee.
+
+Format: `report EMPLOYEE_ID`
+
+* Generates a report for the employee with the specified `EMPLOYEE_ID`.
+* The employee id refers to each employee's unique employee id.
+* The employee id **must follow the EID format** (EID[4 digits]-[4 digits])
+
+Examples:
+* `report EID1234-5678` generates a report for the employee with employee id EID1234-5678 in the employee list.
+
+![report success](images/reportSuccess.jpg)
+
+* `report EID000-0000` is invalid because the id does not exist.
+
+![report failure](images/reportFailure.jpg)
 
 ### Clearing all entries : `clear`
 
