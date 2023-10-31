@@ -87,6 +87,13 @@ public class ListScheduleCommandParserTest {
 
     @Test
     public void parse_validArgs_returnsListScheduleCommand() {
+        ListScheduleCommand expectedListCommand = new ListScheduleCommand(INDEX_FIRST_PERSON, Status.MISSED);
+        assertParseSuccess(parser, "1 m/0", expectedListCommand);
+
+    }
+
+    @Test
+    public void parse_validArgsIndexOnly_returnsListScheduleCommand() {
         ListScheduleCommand expectedListCommand = new ListScheduleCommand(INDEX_FIRST_PERSON, null);
         assertParseSuccess(parser, "1", expectedListCommand);
 
