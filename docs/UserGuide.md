@@ -30,7 +30,8 @@ If you type fast, lesSON can get your flashcards done faster than current GUI ap
    - [Practise Flashcards](#practise-flashcards-practise)
    - [Solve Flashcards](#practise-flashcards-solve)
    - [Setting Difficulty for Flashcards](#setting-difficulty-of-flashcards-set)
-4. [FAQ](#faq)
+4. [Markdown Syntax](#markdown-syntax)
+5. [FAQ](#faq)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -257,6 +258,12 @@ solve 10
 ### Setting Difficulty of Flashcards: `set`
 Setting the difficulty of a flashcard
 
+This difficulty refers to how difficult you found the flashcard.
+This flashcard will be rescheduled based on the difficulty, as indicated by their due date.
+More difficult cards will appear more often in the practice rotation.
+This also takes into account past practices, so the more a card is practised,
+the less it will appear in the practice rotation.
+
 Format: set INDEX DIFFICULTY
 
 #### Acceptable values for each parameters:
@@ -284,3 +291,21 @@ set 10 d/ easy
 
 2. Successful Output
    ![result of set command](./images/UserGuide/1.3_set_ans.png)
+
+# MarkDown Syntax
+
+For user who wish to incorporate styling in lesSON, there are 3 font styles currently supported:
+1. Bold
+2. Italic
+3. Underline
+
+### Bold
+To bold a line of text, wrap text with `**`
+
+### Italic
+To italicise a line of text, wrap text with `*`
+
+### Underline
+To underline a line of text, insert `<u>` at the beginning of the text,
+and end with `</u>` at the end of the underlined text.
+
