@@ -94,4 +94,14 @@ public class Name extends ListEntryField {
         }
     }
 
+    public int compareTo(Name n) {
+        if (this == DEFAULT_NAME) {
+            return 1;
+        } else if (n == DEFAULT_NAME) {
+            return -1;
+        } else {
+            return fullName.compareTo(n.fullName);
+        }
+    }
+
 }
