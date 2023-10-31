@@ -3,21 +3,34 @@ package seedu.address.model.person.fields;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-public class InterviewTime {
+/**
+ * Represents a Person's interview time in the address book.
+ */
 
-    LocalDateTime interviewTime;
+public class InterviewTime {
 
     public static final String MESSAGE_CONSTRAINTS =
             "Interview time should be in the format of DD/MM/YYYY HHmm";
 
     public static final String VALIDATION_REGEX = "^\\d{2}/\\d{2}/\\d{4} \\d{4}$";
-    public InterviewTime(LocalDateTime interviewTime){
 
+    private LocalDateTime interviewTime;
+
+    /**
+     * Constructs a {@code InterviewTime}.
+     *
+     * @param interviewTime A valid interview time.
+     */
+    public InterviewTime(LocalDateTime interviewTime) {
         this.interviewTime = interviewTime;
     }
 
+    /**
+     * Returns true if a given string is a valid interview time.
+     */
     public static boolean isValidTime(String test) {
-        return test.matches(VALIDATION_REGEX);
+
+        return test.matches(VALIDATION_REGEX) || test.equals("cancel");
     }
     @Override
     public boolean equals(Object other) {

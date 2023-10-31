@@ -71,7 +71,7 @@ public class Applicant extends Person {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof Applicant)    ){
+        if (!(other instanceof Applicant)) {
             return false;
         }
 
