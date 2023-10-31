@@ -235,11 +235,11 @@ public class UndoCommandTest {
     }
 
     /**
-     * Test undo functionality with list command.
-     * List command cannot be undone
+     * Test undo functionality with Patients command.
+     * Patients command cannot be undone
      */
     @Test
-    public void testListCommandFollowedByUndo() throws CommandException, ParseException {
+    public void testPatientsCommandFollowedByUndo() throws CommandException, ParseException {
         CommandResult commandResult1 = logic.execute(SAMPLE_ADD_COMMAND_1);
         CommandResult commandResult2 = logic.execute(SAMPLE_LIST_COMMAND);
 
