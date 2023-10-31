@@ -33,6 +33,7 @@ public class Person {
     private Optional<Telegram> telegram;
     private final Set<Tag> tags = new HashSet<>();
     private Optional<Integer> id;
+    private Avatar avatar = new Avatar();
     private Balance balance;
 
     private ObservableList<Note> notes;
@@ -78,6 +79,29 @@ public class Person {
         this.balance = balance;
     }
 
+    /**
+     * Constructor allowing to add all attributes.
+     */
+    public Person(Name name, Phone phone, Email email, Address address, Optional<Birthday> birthday,
+                  Optional<Linkedin> linkedin, Optional<Email> secondaryEmail,
+                  Optional<Telegram> telegram, Set<Tag> tags, Optional<Integer> id,
+                  Avatar avatar, ObservableList<Note> notes, Balance balance) {
+        requireAllNonNull(name, phone, email, address, birthday, tags);
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.address = address;
+        this.birthday = birthday;
+        this.linkedin = linkedin;
+        this.secondaryEmail = secondaryEmail;
+        this.telegram = telegram;
+        this.tags.addAll(tags);
+        this.id = id;
+        this.avatar = avatar;
+        this.notes = notes;
+        this.balance = balance;
+    }
+
     public Name getName() {
         return name;
     }
@@ -108,6 +132,10 @@ public class Person {
 
     public Optional<Telegram> getTelegram() {
         return telegram;
+    }
+
+    public Avatar getAvatar() {
+        return avatar;
     }
 
     /**
@@ -275,3 +303,4 @@ public class Person {
                 .toString();
     }
 }
+
