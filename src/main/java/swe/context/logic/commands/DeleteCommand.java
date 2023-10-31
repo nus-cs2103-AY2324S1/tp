@@ -35,15 +35,15 @@ public class DeleteCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Contact> lastShownList = model.getFilteredContactList();
+        List<Contact> currentContactList = model.getFilteredContactList();
         List<Contact> contactsToDelete = new ArrayList<>();
 
         // Collect contacts to delete
         for (Index index : targetIndices) {
-            if (index.getZeroBased() >= lastShownList.size()) {
+            if (index.getZeroBased() >= currentContactList.size()) {
                 throw new CommandException(Messages.INVALID_CONTACT_DISPLAYED_INDEX);
             }
-            contactsToDelete.add(lastShownList.get(index.getZeroBased()));
+            contactsToDelete.add(currentContactList.get(index.getZeroBased()));
         }
 
         // Delete the contacts

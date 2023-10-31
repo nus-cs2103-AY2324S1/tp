@@ -12,7 +12,6 @@ end box
 
 box Model MODEL_COLOR_T1
 participant ":Model" as Model MODEL_COLOR
-participant ":Contact" as Contact MODEL_COLOR
 end box
 
 [-> LogicManager : execute("delete 1 3 5")
@@ -52,15 +51,8 @@ activate DeleteCommand
 
 DeleteCommand -> Model : getFilteredContactList()
 activate Model
-Model --> DeleteCommand : lastShownList
+Model --> DeleteCommand : currentContactList
 deactivate Model
-
-loop for each index
-    DeleteCommand -> Model : get(index.getZeroBased())
-    activate Model
-    Model --> DeleteCommand : contact
-    deactivate Model
-end
 
 loop for each contact in contactsToDelete
     DeleteCommand -> Model : removeContact(contact)
@@ -73,11 +65,9 @@ create CommandResult
 DeleteCommand -> CommandResult
 activate CommandResult
 
-CommandResult --> DeleteCommand
+CommandResult --> LogicManager : result
 deactivate CommandResult
-
-DeleteCommand --> LogicManager : result
-deactivate DeleteCommand
+destroy DeleteCommand
 
 [<--LogicManager
 deactivate LogicManager
