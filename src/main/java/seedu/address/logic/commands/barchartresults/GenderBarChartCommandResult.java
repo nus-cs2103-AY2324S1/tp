@@ -12,7 +12,7 @@ import seedu.address.logic.commands.CommandResult;
  * Represents the command result for gender table generation.
  */
 public class GenderBarChartCommandResult extends CommandResult {
-    private static final String FEEDBACKTOUSERMESSAGE = "A bar chart categorized by gender is shown";
+    private static final String MESSAGE_SUCCESS = "A bar chart categorized by gender is shown";
     private int maleCount;
     private int femaleCount;
 
@@ -22,7 +22,7 @@ public class GenderBarChartCommandResult extends CommandResult {
      * @param columnValueMapping A hashmap containing column titles(String) as key and counts(Long) as values.
      */
     public GenderBarChartCommandResult(Map<String, Integer> columnValueMapping) {
-        super(FEEDBACKTOUSERMESSAGE);
+        super(MESSAGE_SUCCESS);
         requireNonNull(columnValueMapping);
         this.maleCount = columnValueMapping.get("Male");
         this.femaleCount = columnValueMapping.get("Female");
@@ -79,7 +79,7 @@ public class GenderBarChartCommandResult extends CommandResult {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("feedbackToUser", FEEDBACKTOUSERMESSAGE)
+                .add("feedbackToUser", MESSAGE_SUCCESS)
                 .add("showHelp", isShowHelp())
                 .add("showTable", isShowTable())
                 .add("showBarChart", isShowBarChart())

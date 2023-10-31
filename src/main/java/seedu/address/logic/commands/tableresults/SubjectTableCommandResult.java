@@ -12,7 +12,7 @@ import seedu.address.model.tag.Subject;
  */
 public class SubjectTableCommandResult extends CommandResult {
 
-    private static final String FEEDBACKTOUSERMESSAGE = "A table categorized by Subject is shown";
+    private static final String MESSAGE_SUCCESS = "A table categorized by Subject is shown";
     private int engCount;
     private int chiCount;
     private int emathCount;
@@ -30,7 +30,7 @@ public class SubjectTableCommandResult extends CommandResult {
      * @param columnValueMapping hash map instance containing column titles(String) as keys and counts(Long) as values.
      */
     public SubjectTableCommandResult(Map<String, Integer> columnValueMapping) {
-        super(FEEDBACKTOUSERMESSAGE);
+        super(MESSAGE_SUCCESS);
         this.engCount = columnValueMapping.get(Subject.ENG);
         this.chiCount = columnValueMapping.get(Subject.CHI);
         this.emathCount = columnValueMapping.get(Subject.EMATH);
@@ -167,7 +167,7 @@ public class SubjectTableCommandResult extends CommandResult {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("feedbackToUser", FEEDBACKTOUSERMESSAGE)
+                .add("feedbackToUser", MESSAGE_SUCCESS)
                 .add("showHelp", isShowHelp())
                 .add("showTable", isShowTable())
                 .add("showBarChart", isShowBarChart())

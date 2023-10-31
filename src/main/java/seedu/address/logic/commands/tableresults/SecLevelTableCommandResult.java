@@ -11,7 +11,7 @@ import seedu.address.logic.commands.CommandResult;
  * Represents the command result for sec level table generation.
  */
 public class SecLevelTableCommandResult extends CommandResult {
-    private static final String FEEDBACKTOUSERMESSAGE = "A table categorized by SecLevel is shown";
+    private static final String MESSAGE_SUCCESS = "A table categorized by SecLevel is shown";
     private int sec1Count;
     private int sec2Count;
     private int sec3Count;
@@ -23,7 +23,7 @@ public class SecLevelTableCommandResult extends CommandResult {
      * @param columnValueMapping A hashmap instance containing column titles(String) as keys and counts(Long) as values.
      */
     public SecLevelTableCommandResult(Map<String, Integer> columnValueMapping) {
-        super(FEEDBACKTOUSERMESSAGE);
+        super(MESSAGE_SUCCESS);
         this.sec1Count = columnValueMapping.get("Sec 1");
         this.sec2Count = columnValueMapping.get("Sec 2");
         this.sec3Count = columnValueMapping.get("Sec 3");
@@ -99,7 +99,7 @@ public class SecLevelTableCommandResult extends CommandResult {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("feedbackToUser", FEEDBACKTOUSERMESSAGE)
+                .add("feedbackToUser", MESSAGE_SUCCESS)
                 .add("showHelp", isShowHelp())
                 .add("showTable", isShowTable())
                 .add("showBarChart", isShowBarChart())
