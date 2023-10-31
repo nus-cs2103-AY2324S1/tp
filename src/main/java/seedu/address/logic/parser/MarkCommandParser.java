@@ -9,6 +9,7 @@ import java.util.Arrays;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.MarkCommand;
+import seedu.address.logic.commands.PayslipCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.attendance.AttendanceType;
@@ -25,9 +26,23 @@ public class MarkCommandParser implements Parser<MarkCommand> {
      */
     public MarkCommand parse(String args) throws ParseException {
         requireNonNull(args);
+
+        String trimmedArgs = args.trim();
+
+        if (trimmedArgs.isEmpty()) {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, MarkCommand.MESSAGE_USAGE));
+        }
+
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_ATTENDANCE_TYPE);
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_ATTENDANCE_TYPE);
+
+        if (!argMultimap.getValue(PREFIX_ATTENDANCE_TYPE).isPresent()) {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, MarkCommand.MESSAGE_USAGE)
+            );
+        }
 
         Index index;
 
