@@ -17,6 +17,8 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.DeleteNoteCommand;
+import seedu.address.model.note.NoteID;
+import seedu.address.model.person.ContactID;
 
 public class DeleteNoteCommandParserTest {
     private DeleteNoteCommandParser parser = new DeleteNoteCommandParser();
@@ -25,8 +27,8 @@ public class DeleteNoteCommandParserTest {
     public void parse_allFieldsPresent_success() {
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + NOTE_A_PERSON_ID_DESC + NOTE_A_NOTE_ID_DESC,
-                new DeleteNoteCommand(Integer.parseInt(VALID_NOTE_A_PERSON_ID),
-                        Integer.parseInt(VALID_NOTE_A_NOTE_ID)));
+                new DeleteNoteCommand(ContactID.fromString(VALID_NOTE_A_PERSON_ID),
+                        NoteID.fromString(VALID_NOTE_A_NOTE_ID)));
     }
 
     @Test

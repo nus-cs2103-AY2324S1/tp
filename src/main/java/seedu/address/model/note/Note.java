@@ -1,5 +1,7 @@
 package seedu.address.model.note;
 
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+
 /**
  * Represents a Note.
  */
@@ -9,6 +11,17 @@ public class Note {
 
     /**
      * Constructs a Note.
+     * @param title The title of the note.
+     * @param content The content of the note.
+     */
+    public Note(NoteTitle title, NoteContent content) {
+        requireAllNonNull(title, content);
+        this.title = title;
+        this.content = content;
+    }
+
+    /**
+     * Constructs a Note from string representation.
      * @param title The title of the note.
      * @param content The content of the note.
      */
