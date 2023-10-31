@@ -48,78 +48,91 @@ If you type fast, lesSON can get your flashcards done faster than current GUI ap
 
 # Glossary
 
+`Deck` - A scrollable list of flashcards on the GUI.
+
+`Flashcard`- A card created by the user containing its index, question, answer (not shown) and due date.
+
+`Index` - The relative position of a flashcard within the deck.
+
 --------------------------------------------------------------------------------------------------------------------
 # Feature list
 
 ### Adding a Flashcard `add`
 Adds a flashcard to the deck for the user.
 
-Format: `add q/question a/answer [t/TAG]`
+**Format:** 
 
-**Tip**: Tagging is not supported in v1.2 and earlier
+`add q/question a/answer [t/TAG]`
 
-Examples:
 
-```
-- add q/What are the three ways to implement binary systems? a/1s Complement, 2s Complement, and Sign and Magnitude
+**Examples:**
 
-- add q/How do you convert from binary to 1s Complement? a/By inverting all the bits, i.e. 0 to 1 and vice versa t/CS2100 t/Number Systems
-```
+_A flashcard with only a question and answer field._
 
-#### Acceptable values for each parameters:
+`add q/What are the three ways to implement binary systems? a/1s Complement, 2s Complement, and Sign and Magnitude`
+
+_A flashcard with a question, answer and tag field._
+
+`add q/How do you convert from binary to 1s Complement? a/By inverting all the bits, i.e. 0 to 1 and vice versa t/CS2100 t/Number Systems`
+
+#### To Note:
 1. No Empty Input after q/, a/ and t/.
 2. t/ is optional and not necessary.
+3. **Tip**: Tagging is not supported in v1.2 and earlier
+
 #### Expected outputs:
-```
-1. add q/What are the three ways to implement binary systems? a/1s Complement, 2s Complement, and Sign and Magnitude
-   “New Card added: Question: What are the three ways to implement binary systems?; Answer: 1s Complement, 2s Complement, and Sign and Magnitude “
 
-2. add q/What are the three ways to implement binary systems? a/
-   Answers should only contain alphanumeric characters, some special characters and spaces, and it should not be blank
-
-3. add a/10111
-   Invalid command format!
-   add: Adds a card to the deck. Parameters: q/QUESTION a/ANSWER
-```
+1. Given a correct input, a success message will be shown containing the user's input.
+   1. `“New Card added: Question: (question); Answer: (answer)“`
+2. Given an incorrect input, an error message will be shown, detailing how the error can be fixed.
+   1. `Answers should only contain alphanumeric characters, some special characters and spaces, and it should not be blank`
+   2. ```
+       Invalid command format!
+       add: Adds a card to the deck. Parameters: q/QUESTION a/ANSWER
+      ```
 #### Usage
-1. User Input
-![usage of add command](./images/UserGuide/1.3_add.png)
+1. User Input: `add q/ opcode for R format instructions a/ 000000 t/ CS2100 t/ MIPS` 
 
 2. Successful Output
-![result of add command](./images/UserGuide/1.3_add_ans.png)
+
+![result of add command](./images/UserGuide/1.3_add_clean.png)
 
 
 ### Deleting a Flashcard : `delete`
 Deletes a flashcard in the deck
 
-Format: `delete INDEX`
-Examples:
-```
-- delete 2
- (deletes the 2nd flashcard in the deck)
-```
+**Format:** 
 
-#### Acceptable values for each parameters:
-1. Index must be positive integer
-2. Index cannot exceed size of the deck
+`delete INDEX`
+
+**Examples:**
+
+_Deleting the card in th deck with an index of 2._
+
+`delete 2`
+
+#### To Note:
+1. Index must be positive integer.
+2. Index cannot exceed size of the deck.
 
 #### Expected outputs:
-```
-1. delete 2
-   Deleted Card: Question: <provided question>; Answer: <provided answer>
+1. Given a correct input, a success message will be shown containing the details of the deleted flashcard.
+   1. `Deleted Card: Question: <provided question>; Answer: <provided answer>`
+2. Given an incorrect input, an error message will be shown, detailing how the error can be fixed.
+   1. `The card index provided is invalid`
+   2. ```
+      Invalid command format!
+      delete: Deletes the deck identified by the index number used in the displayed card list.
+      Parameters: INDEX (must be a positive integer)
+      Example: delete 1
+      ```
 
-2. delete -100
-   Invalid command format!
-   delete: Deletes the deck identified by the index number used in the displayed card list.
-   Parameters: INDEX (must be a positive integer)
-   Example: delete 1
-```
 #### Usage:
-1. User Input
-   ![usage of delete command](./images/UserGuide/1.3_del.png)
+1. User Input: `delete 1`
 
 2. Successful Output
-   ![result of delete command](./images/UserGuide/1.3_del_ans.png)
+
+![result of delete command](./images/UserGuide/1.3_del_clean.png)
 
 ### View All Flashcards : `list`
 Shows a list of all flashcards in the deck. A keyword may be specified to filter out the list.
