@@ -54,6 +54,7 @@ public class ListScheduleCommandTest {
         String expectedMessage = String.format(Messages.MESSAGE_SCHEDULES_LISTED_OVERVIEW, 2);
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.updateFilteredScheduleList(predicate);
+
         assertCommandSuccess(listScheduleCommand, model, expectedMessage, expectedModel);
     }
 
