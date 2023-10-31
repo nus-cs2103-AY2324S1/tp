@@ -45,7 +45,10 @@ public class MainWindow extends UiPart<Stage> {
     private MenuItem helpMenuItem;
 
     @FXML
-    private StackPane listPanelPlaceholder;
+    private StackPane personListPanelPlaceholder;
+
+    @FXML
+    private StackPane scheduleListPanelPlaceholder;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
@@ -115,9 +118,10 @@ public class MainWindow extends UiPart<Stage> {
      */
     void fillInnerParts() {
         scheduleListPanel = new ScheduleListPanel(logic.getFilteredScheduleList());
+        scheduleListPanelPlaceholder.getChildren().add(scheduleListPanel.getRoot());
 
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
-        listPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
@@ -188,16 +192,16 @@ public class MainWindow extends UiPart<Stage> {
      * Shows list of person cards.
      */
     void showPersons() {
-        listPanelPlaceholder.getChildren().clear();
-        listPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+        personListPanelPlaceholder.getChildren().clear();
+        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
     }
 
     /**
      * Fills up all the placeholders of this window.
      */
     void showSchedules() {
-        listPanelPlaceholder.getChildren().clear();
-        listPanelPlaceholder.getChildren().add(scheduleListPanel.getRoot());
+        personListPanelPlaceholder.getChildren().clear();
+        personListPanelPlaceholder.getChildren().add(scheduleListPanel.getRoot());
     }
 
     /**
