@@ -7,7 +7,6 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.interaction.Interaction;
 
 /**
  * The API of the Model component.
@@ -95,10 +94,5 @@ public interface Model {
     /**
      * Updates the reminder list with the given {@code Person Interaction}.
      */
-    void updateReminderList(Person person, Interaction interaction);
-
-    /**
-     * Updates the entire reminder list with the given {@code personList}.
-     */
-    void updateWholeReminderList(ObservableList<Person> personList);
+    void addReminder(Person person);
 }

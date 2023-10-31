@@ -71,7 +71,7 @@ public class InteractionList {
     }
 
     public Interaction getLastInteraction() {
-        return this.interactions.size() != 0 ? this.interactions.get(this.interactions.size() - 1) : null;
+        return this.interactions.size() > 0 ? this.interactions.get(this.interactions.size() - 1) : null;
     }
 
     /**
