@@ -11,8 +11,10 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Set;
+import java.util.logging.Logger;
 import java.util.stream.Stream;
 
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.AddDoctorCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
@@ -29,7 +31,7 @@ import seedu.address.model.tag.Tag;
  * Parses input arguments and creates a new AddDoctorCommand object
  */
 public class AddDoctorCommandParser implements Parser<AddDoctorCommand> {
-
+    private static final Logger logger = LogsCenter.getLogger(AddDoctorCommandParser.class);
     /**
      * Parses {@code userInput} into a command and returns it.
      *
@@ -45,6 +47,7 @@ public class AddDoctorCommandParser implements Parser<AddDoctorCommand> {
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ADDRESS, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_GENDER,
                 PREFIX_NRIC)
                 || !argMultimap.getPreamble().isEmpty()) {
+            logger.warning("Invalid command format for AddPatientCommand: " + userInput);
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddDoctorCommand.MESSAGE_USAGE));
         }
 
@@ -60,7 +63,7 @@ public class AddDoctorCommandParser implements Parser<AddDoctorCommand> {
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
         Doctor doctor = new Doctor(name, phone, email, address, remark, gender, ic, tagList);
-
+        logger.info("Successfully parsed AddDoctorCommand with doctor: " + doctor);
         return new AddDoctorCommand(doctor);
     }
 

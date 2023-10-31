@@ -13,7 +13,7 @@ import seedu.address.model.person.Person;
 
 /**
  * Finds and lists all persons in address book whose name contains any of the argument keywords.
- * Keyword matching is case insensitive.
+ * Keyword matching is case-insensitive.
  */
 public class FindCommand extends Command {
 
@@ -25,7 +25,6 @@ public class FindCommand extends Command {
             + "Example: " + COMMAND_WORD + " alice bob charlie";
 
     private final Predicate<Person> predicate;
-
     public FindCommand(Predicate<Person> predicate) {
         this.predicate = predicate;
     }
