@@ -40,22 +40,66 @@ public class EmployeeContainsKeywordsPredicateTest {
     }
 
     @Test
-    public void test_nameContainsKeywords_returnsTrue() {
-        // One keyword
+    public void test_employeeContainsKeywords_returnsTrue() {
+        // One keyword - name
         EmployeeContainsKeywordsPredicate predicate = new EmployeeContainsKeywordsPredicate(Collections.singletonList("Alice"));
         assertTrue(predicate.test(new EmployeeBuilder().withName("Alice Bob").build()));
 
-        // Multiple keywords
+        // One keyword - position
+        predicate = new EmployeeContainsKeywordsPredicate(Collections.singletonList("Manager"));
+        assertTrue(predicate.test(new EmployeeBuilder().withPosition("Manager").build()));
+
+        // One keyword - department
+        predicate = new EmployeeContainsKeywordsPredicate(Collections.singletonList("HR"));
+        assertTrue(predicate.test(new EmployeeBuilder().withDepartments("HR").build()));
+
+        // One keyword - phone
+        predicate = new EmployeeContainsKeywordsPredicate(Collections.singletonList("91234567"));
+        assertTrue(predicate.test(new EmployeeBuilder().withPhone("91234567").build()));
+
+        // One keyword - email
+        predicate = new EmployeeContainsKeywordsPredicate(Collections.singletonList("alice@example.com"));
+        assertTrue(predicate.test(new EmployeeBuilder().withEmail("alice@example.com").build()));
+
+        // One keyword - id
+        predicate = new EmployeeContainsKeywordsPredicate(Collections.singletonList("EID1234-5678"));
+        assertTrue(predicate.test(new EmployeeBuilder().withId("EID1234-5678").build()));
+
+        // Multiple keywords - name
         predicate = new EmployeeContainsKeywordsPredicate(Arrays.asList("Alice", "Bob"));
         assertTrue(predicate.test(new EmployeeBuilder().withName("Alice Bob").build()));
+
+        // Multiple keywords - position
+        predicate = new EmployeeContainsKeywordsPredicate(Arrays.asList("Manager", "Supervisor"));
+        assertTrue(predicate.test(new EmployeeBuilder().withPosition("Manager").build()));
+
+        // Multiple keywords - department
+        predicate = new EmployeeContainsKeywordsPredicate(Arrays.asList("HR", "IT"));
+        assertTrue(predicate.test(new EmployeeBuilder().withDepartments("HR").build()));
+
+        // Multiple keywords - phone
+        predicate = new EmployeeContainsKeywordsPredicate(Arrays.asList("91234567", "87654321"));
+        assertTrue(predicate.test(new EmployeeBuilder().withPhone("91234567").build()));
+
+        // Multiple keywords - email
+        predicate = new EmployeeContainsKeywordsPredicate(Arrays.asList("abc@def.com", "ghi@jkl.com"));
+        assertTrue(predicate.test(new EmployeeBuilder().withEmail("abc@def.com").build()));
+
+        // Multiple keywords - id
+        predicate = new EmployeeContainsKeywordsPredicate(Arrays.asList("EID1234-5678", "EID8765-4321"));
+        assertTrue(predicate.test(new EmployeeBuilder().withId("EID1234-5678").build()));
+
+        // Multiple keywords across different fields
+        predicate = new EmployeeContainsKeywordsPredicate(Arrays.asList("Alice", "Manager"));
+        assertTrue(predicate.test(new EmployeeBuilder().withName("Alice").withPosition("Manager").build()));
 
         // Only one matching keyword
         predicate = new EmployeeContainsKeywordsPredicate(Arrays.asList("Bob", "Carol"));
         assertTrue(predicate.test(new EmployeeBuilder().withName("Alice Carol").build()));
 
         // Mixed-case keywords
-        predicate = new EmployeeContainsKeywordsPredicate(Arrays.asList("aLIce", "bOB"));
-        assertTrue(predicate.test(new EmployeeBuilder().withName("Alice Bob").build()));
+        predicate = new EmployeeContainsKeywordsPredicate(Arrays.asList("aLIce", "mAnaGeR"));
+        assertTrue(predicate.test(new EmployeeBuilder().withName("Alice Bob").withPosition("manager").build()));
     }
 
     @Test

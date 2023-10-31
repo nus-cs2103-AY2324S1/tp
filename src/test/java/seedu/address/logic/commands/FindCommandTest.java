@@ -5,7 +5,10 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_EMPLOYEES_LISTED_OVERVIEW;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.testutil.TypicalEmployees.ALICE;
+import static seedu.address.testutil.TypicalEmployees.BENSON;
 import static seedu.address.testutil.TypicalEmployees.CARL;
+import static seedu.address.testutil.TypicalEmployees.DANIEL;
 import static seedu.address.testutil.TypicalEmployees.ELLE;
 import static seedu.address.testutil.TypicalEmployees.FIONA;
 import static seedu.address.testutil.TypicalEmployees.getTypicalAddressBook;
@@ -66,12 +69,12 @@ public class FindCommandTest {
 
     @Test
     public void execute_multipleKeywords_multipleEmployeesFound() {
-        String expectedMessage = String.format(MESSAGE_EMPLOYEES_LISTED_OVERVIEW, 3);
-        EmployeeContainsKeywordsPredicate predicate = preparePredicate("Kurz Elle Kunz");
+        String expectedMessage = String.format(MESSAGE_EMPLOYEES_LISTED_OVERVIEW, 6);
+        EmployeeContainsKeywordsPredicate predicate = preparePredicate("Kurz Elle Kunz manager IT");
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredEmployeeList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(CARL, ELLE, FIONA), model.getFilteredEmployeeList());
+        assertEquals(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA), model.getFilteredEmployeeList());
     }
 
     @Test
@@ -83,7 +86,7 @@ public class FindCommandTest {
     }
 
     /**
-     * Parses {@code userInput} into a {@code NameContainsKeywordsPredicate}.
+     * Parses {@code userInput} into an {@code EmployeeContainsKeywordsPredicate}.
      */
     private EmployeeContainsKeywordsPredicate preparePredicate(String userInput) {
         return new EmployeeContainsKeywordsPredicate(Arrays.asList(userInput.split("\\s+")));
