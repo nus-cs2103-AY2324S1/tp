@@ -1,16 +1,18 @@
-package seedu.address.logic.commands;
+package seedu.address.logic.commands.barchartresults;
+
+import static java.util.Objects.requireNonNull;
 
 import java.util.Map;
 import java.util.Objects;
 
 import seedu.address.commons.util.ToStringBuilder;
-
+import seedu.address.logic.commands.CommandResult;
 
 /**
  * Represents the command result for gender table generation.
  */
-public class GenderTableCommandResult extends CommandResult {
-    private static final String FEEDBACKTOUSERMESSAGE = "A table categorized by gender is shown";
+public class GenderBarChartCommandResult extends CommandResult {
+    private static final String MESSAGE_SUCCESS = "A bar chart categorized by gender is shown";
     private int maleCount;
     private int femaleCount;
 
@@ -19,8 +21,9 @@ public class GenderTableCommandResult extends CommandResult {
      * Constructor for GenderTableCommandResult.
      * @param columnValueMapping A hashmap containing column titles(String) as key and counts(Long) as values.
      */
-    public GenderTableCommandResult(Map<String, Integer> columnValueMapping) {
-        super(FEEDBACKTOUSERMESSAGE);
+    public GenderBarChartCommandResult(Map<String, Integer> columnValueMapping) {
+        super(MESSAGE_SUCCESS);
+        requireNonNull(columnValueMapping);
         this.maleCount = columnValueMapping.get("Male");
         this.femaleCount = columnValueMapping.get("Female");
     }
@@ -30,7 +33,7 @@ public class GenderTableCommandResult extends CommandResult {
      * @return always return true for GenderTableCommandResult instance.
      */
     @Override
-    public boolean isShowTable() {
+    public boolean isShowBarChart() {
         return true;
     }
 
@@ -58,11 +61,11 @@ public class GenderTableCommandResult extends CommandResult {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof GenderTableCommandResult)) {
+        if (!(other instanceof GenderBarChartCommandResult)) {
             return false;
         }
 
-        GenderTableCommandResult otherCommandResult = (GenderTableCommandResult) other;
+        GenderBarChartCommandResult otherCommandResult = (GenderBarChartCommandResult) other;
         return super.equals(otherCommandResult)
                 && otherCommandResult.maleCount == maleCount
                 && otherCommandResult.femaleCount == femaleCount;
@@ -76,9 +79,10 @@ public class GenderTableCommandResult extends CommandResult {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("feedbackToUser", FEEDBACKTOUSERMESSAGE)
+                .add("feedbackToUser", MESSAGE_SUCCESS)
                 .add("showHelp", isShowHelp())
                 .add("showTable", isShowTable())
+                .add("showBarChart", isShowBarChart())
                 .add("exit", isExit())
                 .toString();
     }

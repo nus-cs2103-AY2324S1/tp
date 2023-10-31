@@ -52,6 +52,14 @@ public class CommandResult {
         return false;
     }
 
+    /**
+     * Check if this CommandResult instance is meant for showing bar chart window.
+     * @return true if this is a XXXBarChartCommandResult instance, false otherwise.
+     */
+    public boolean isShowBarChart() {
+        return false;
+    }
+
     public boolean isExit() {
         return exit;
     }
@@ -84,6 +92,7 @@ public class CommandResult {
                 .add("feedbackToUser", feedbackToUser)
                 .add("showHelp", showHelp)
                 .add("showTable", this.isShowTable())
+                .add("showBarChart", this.isShowBarChart())
                 .add("exit", exit)
                 .toString();
     }
