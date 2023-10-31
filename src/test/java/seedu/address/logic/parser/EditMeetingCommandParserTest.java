@@ -28,7 +28,7 @@ import seedu.address.model.person.Name;
 
 public class EditMeetingCommandParserTest {
 
-    private EditMeetingCommandParser parser = new EditMeetingCommandParser();
+    private final EditMeetingCommandParser parser = new EditMeetingCommandParser();
 
     @Test
     public void parse_missingParts_failure() {

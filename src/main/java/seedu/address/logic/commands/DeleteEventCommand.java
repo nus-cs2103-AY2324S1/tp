@@ -48,4 +48,11 @@ public class DeleteEventCommand extends Command {
 
         return new CommandResult(String.format(MESSAGE_DELETE_EVENT_SUCCESS, Messages.formatEvent(eventToDelete)));
     }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof DeleteEventCommand // instanceof handles nulls
+                && targetIndex.equals(((DeleteEventCommand) other).targetIndex)); // state check
+    }
 }
