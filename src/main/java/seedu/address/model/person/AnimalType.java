@@ -18,7 +18,18 @@ public class AnimalType {
 
     public static final String VALIDATION_REGEX_AVAILABLE = "^(able\\.Dog|able\\.Cat|nil)$";
     public static final String VALIDATION_REGEX_NOT_AVAILABLE = "^(current\\.Dog|current\\.Cat|nil)$";
+
+    public static final String ABLE_CAT_WORD = "able.Cat";
+    public static final String ABLE_DOG_WORD = "able.Dog";
+    public static final String CURRENT_CAT_WORD = "current.Cat";
+    public static final String CURRENT_DOG_WORD = "current.Dog";
+    public static final AnimalType ABLE_CAT = new AnimalType(ABLE_CAT_WORD, Availability.AVAILABLE);
+    public static final AnimalType ABLE_DOG = new AnimalType(ABLE_DOG_WORD, Availability.AVAILABLE);
+    public static final AnimalType CURRENT_CAT = new AnimalType(CURRENT_CAT_WORD, Availability.NOT_AVAILABLE);
+    public static final AnimalType CURRENT_DOG = new AnimalType(CURRENT_DOG_WORD, Availability.NOT_AVAILABLE);
+
     public static final String VALIDATION_REGEX_NIL = "^(nil)$";
+
 
     public final Availability availability;
     public final String value;
@@ -33,11 +44,11 @@ public class AnimalType {
         requireNonNull(availability);
         requireNonNull(value);
 
-        if (availability.equals(new Availability("Available"))) {
+        if (availability.equals(Availability.AVAILABLE)) {
             checkArgument(isValidAnimalType(value, VALIDATION_REGEX_AVAILABLE), MESSAGE_CONSTRAINTS);
-        } else if (availability.equals(new Availability("NotAvailable"))) {
+        } else if (availability.equals(Availability.NOT_AVAILABLE)) {
             checkArgument(isValidAnimalType(value, VALIDATION_REGEX_NOT_AVAILABLE), MESSAGE_CONSTRAINTS);
-        } else if (availability.equals(new Availability("nil"))) {
+        } else if (availability.equals(Availability.NIL_AVAILABILITY)) {
             checkArgument(isValidAnimalType(value, VALIDATION_REGEX_NIL), MESSAGE_CONSTRAINTS);
         }
 

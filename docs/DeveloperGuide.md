@@ -320,10 +320,25 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 _{more aspects and alternatives to be added}_
 
-### \[Proposed\] Data archiving
+--------------------------------------------------------------------------------------------------------------------
+## Planned Enhancements
 
-_{Explain here how the data archiving feature will be implemented}_
+### Shorter Command Formats
+Currently, the default add command may be too long for an average typer to key in quickly. A future enhancement we are planning would be to allow the addition of a fosterer with just the basic details, such as their name, phone number, email, housing type and availability. Only when the fosterer is ready to foster, then other details such as animal name, animal type and address need to be filled in via the `edit` command.
 
+We are also planning to shorten some input parameters when adding or editing a fosterer:
+
+| Current                   | Enhancement |
+|---------------------------|-----------|
+| availability/Available    | avail/true |
+| availability/NotAvailable | avail/false |
+| availability/nil          | avail/nil |
+| animalType/               | type/     |
+
+### Case-sensitivity of Inputs
+Currently, the fields and parameters for housing, availability and animal type are case-sensitive. An enhancement to this would be to make these fields and their parameters case-insensitive to improve the user experience. Moreover, the aforementioned enhancements to shorten the command format will also be case-insensitive.
+
+### Specificity of Error Messages
 
 --------------------------------------------------------------------------------------------------------------------
 
