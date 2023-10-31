@@ -169,11 +169,15 @@ public class AddressBook implements ReadOnlyAddressBook {
         return applicants.asUnmodifiableObservableList();
     }
 
+    @Override
     public ObservableList<Tag> getTagList() {
         updateTags();
         return tags;
     }
 
+    /**
+     * Updates the tags list to contain all tags in the address book.
+     */
     public void updateTags() {
         ObservableList<Member> allMembers = getMemberList();
         HashSet<Tag> allTags = new HashSet<>();
