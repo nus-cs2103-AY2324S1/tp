@@ -68,7 +68,7 @@ public class CustomFilterPredicate implements Predicate<Applicant> {
             }
         }
         if (this.position != null) {
-            if (!StringUtil.containsWordIgnoreCase(applicant.getPosition().toString(), this.position.toString())) {
+            if (!StringUtil.containsStringIgnoreCase(applicant.getPosition().toString(), this.position.toString())) {
                 return false;
             }
         }
