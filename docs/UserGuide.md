@@ -203,43 +203,47 @@ tracking tutor information within your tuition centre.
 
 Adds a tutor to TutorConnect.
 
+<div markdown="block" class="alert alert-first">
+
+**:baby-bottle: First time users**<br>
+
+</div>
+
+**Scenario**
+
+A new tutor named John Doe has just joined your tuition centre. His phone number is 987654321 and his email address is johnd@example.com.
+
+Let’s add him into TutorConnect.
+
+**What you should do**
+
+Type in `add-t n/John Doe p/98765432 e/johnd@example.com` and press enter.
+
+**What you can expect to see**
+
+You should expect to see John Doe has now been added at the bottom of the displayed list.
+
 ![add tutor](images/addTutor.png)
 
-**Format**: `add-t n/NAME p/PHONE NUMBER e/EMAIL`
+<div markdown="block" class="alert alert-experienced">
 
-**Example**:
-* `add-t n/John Doe p/98765432 e/johnd@example.com`
-* `add-t n/Betsy Crowe p/91234567 e/betsycrowe@example.com`
+**:nerd-face: Experienced users**<br>
 
-**Acceptable values for each parameter**:
-* `NAME`: Only contain alphanumeric characters and spaces, and should not be blank
-* `PHONE NUMBER`: Only contain numbers, and should be at least 3 digits long
-* `EMAIL`: Of the format local-part@domain
+</div>
 
-    <div markdown="block" class="alert alert-info">
+**Command format**
 
-    **:information_source: Email Format**<br>
+![add tutor command](images/addTutorCommandSyntax.png)
 
-    1. The local-part should only contain alphanumeric characters and these special characters, excluding the parentheses, (+_.-). The local-part may not start or end with any special characters.
-    2. This is followed by a '@' and then a domain name. The domain name is made up of domain labels separated by periods.
+**Errors**
+If you see “Invalid command format!”, please ensure that you have followed the example above correctly. You may have missed out one of the tags like “n/” or typed one incorrectly.
 
-    The domain name must:
-    * end with a domain label at least 2 characters long
-    * have each domain label start and end with alphanumeric characters
-    * have each domain label consist of alphanumeric characters, separated only by hyphens, if any.
-    </div>
+Otherwise if you see any of the following messages displayed in the result box:
+* Names should only contain alphanumeric characters and spaces, and it should not be blank 
+* Phone numbers should only contain numbers, and it should be at least 3 digits long 
+* Emails should be of the format local-part@domain and adhere to the following constraints
 
-**Expected output**:
-* `New tutor John Doe; Phone: 98765432; Email: johnd@example.com has been added.`
-
-**Error messages**:
-* `Invalid command format!`: One or more of the tags `n/`, `p/`, `e/` is missing. 
-* `Names should only contain alphanumeric characters and spaces, and it should not be blank`: Tutor name input was 
-  either invalid or blank. 
-* `Phone numbers should only contain numbers, and it should be at least 3 digits long`: Tutor phone number input was
-  either invalid or blank.
-* `Emails should be of the format local-part@domain and adhere to the following constraints:`: Tutor email input was
-  either invalid or blank.
+Refer to [input information](#input-information) for details about valid inputs.
 
 #### Editing a tutor: `edit-t`
 
@@ -689,8 +693,8 @@ Here are some descriptions of the words you might come across in the User Guide:
 | <span id="cli">CLI</span>  | CLI is a text-based user interface that allows users to interact with the application by typing commands.                                                                                                                                                  |
 
 
-### Parameter Information
-Here are some parameters you might come across in the User Guide:
+### Input Information
+Here are some inputs you might come across in the User Guide:
 
 | Parameter         | Description                                     | Limitations                                                                                  |
 |-------------------|-------------------------------------------------|----------------------------------------------------------------------------------------------|
@@ -703,7 +707,7 @@ Here are some parameters you might come across in the User Guide:
 | `SCHEDULE_INDEX`  | Refers to the position of schedule in the list. | Only numerical input that ranges from 1 to the last schedule shown in the list of schedules. |
 | `SCHEDULE_STATUS` | Refers to the status of schedule in the list.   | Only numerical inputs of 0 for MISSED status and 1 for COMPLETED status is accepted          |
 
-### Parameter Format
+### Input Format
 This section consists of more details of format limitations mentioned above.
 
 **<sup>1</sup> Email Format**
@@ -723,6 +727,20 @@ The domain name must:
 * `T` is a **separator** indicating the start of the time portion.
 * `HH` represents the **hour** in **24-hour format** with a leading zero (e.g., 09 for 9 AM, 21 for 9 PM).
 * `mm` represents the **minutes** with a leading zero (e.g., 05).
+
+### Input Examples
+
+| Input Fields     | ✅                         | ❌        |
+|------------------|---------------------------|----------|
+| `n/NAME`         | John Doe                  | John@Doe |
+|                  | John Doe123               |          |
+| `p/PHONE NUMBER` | 98765432                  | abc      |
+|                  | 987                       | 98       |
+| `e/EMAIL`        | johnd@example.com         | johnd    |
+|                  | jo@example123-example.com | johnd@p  |
+| `p/PHONE NUMBER` | 98765432                  | abc      |
+|                  | 987                       | 98       |
+
 
 [Back To Top](#table-of-contents)
 
