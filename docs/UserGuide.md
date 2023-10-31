@@ -92,7 +92,7 @@ Welcome to TutorConnect! We are excited to get you started with a more efficient
 
 4. Double-click the jar file to launch the application.
 
-    <div markdown="block" class="alert alert-info">
+   <div markdown="block" class="alert alert-info">
 
    **:information_source: Mac Users**<br>
 
@@ -203,7 +203,9 @@ tracking tutor information within your tuition centre.
 
 Adds a tutor to TutorConnect.
 
-##### First time users
+<!-- toc-ignore -->
+
+##### :beginner: First time users
 
 **Scenario**
 
@@ -221,13 +223,16 @@ You should expect to see John Doe has now been added at the bottom of the displa
 
 ![add tutor](images/addTutor.png)
 
-##### Experienced users
+<!-- /toc-ignore -->
+
+##### :hammer: Experienced users
 
 **Command format**
 
 ![add tutor command](images/addTutorCommandSyntax.png)
 
 **Errors**
+
 If you see “Invalid command format!”, please ensure that you have followed the example above correctly. You may have missed out one of the tags like “n/” or typed one incorrectly.
 
 Otherwise if you see any of the following messages displayed in the result box:
