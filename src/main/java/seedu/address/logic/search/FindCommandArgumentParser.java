@@ -20,7 +20,7 @@ public class FindCommandArgumentParser {
 
     private enum Joiner implements BiFunction<SearchMatcher, SearchMatcher, SearchMatcher> {
         IMPLICIT_AND(' ', 2, SearchMatcher::and),
-        EXPLICIT_OR('|', 1, SearchMatcher::or),
+        EXPLICIT_OR('/', 1, SearchMatcher::or),
         EXPLICIT_AND('&', 0, SearchMatcher::and);
 
         private static final Map<Character, Joiner> set = new HashMap<>();

@@ -31,8 +31,8 @@ public class MainWindow extends UiPart<Stage> {
 
     private final Logger logger = LogsCenter.getLogger(getClass());
 
-    private Stage primaryStage;
-    private Logic logic;
+    private final Stage primaryStage;
+    private final Logic logic;
 
     // Independent Ui parts residing in this Ui container
     private PersonListPanel personListPanel;
@@ -186,6 +186,10 @@ public class MainWindow extends UiPart<Stage> {
     private void handleView(Person personToView) {
         if (personListPanelPlaceholder.isVisible() && personToView != null) {
             personProfile = new PersonProfile(personToView, this);
+<<<<<<< HEAD
+=======
+            //personProfile = new PersonProfile(this);
+>>>>>>> b13722f04973b73655c6b62f595bd1e1a83c3ee6
             personProfilePlaceholder.getChildren().add(personProfile.getRoot());
             personProfilePlaceholder.setVisible(true);
             personListPanelPlaceholder.setVisible(false);
@@ -268,20 +272,6 @@ public class MainWindow extends UiPart<Stage> {
             resultDisplay.setFeedbackToUser(e.getMessage());
             throw e;
         }
-    }
-
-    /**
-     * Returns the boolean value that checks whether the current UI is in profile view page or normal foster list page.
-     */
-    public boolean getIsInViewMode() {
-        return this.isInViewMode;
-    }
-
-    /**
-     * Sets the cursor back to the command box
-     */
-    private void setFocusToCommandBox() {
-        commandBox.setFocus();
     }
 
     protected void sendFeedback(String feedback) {

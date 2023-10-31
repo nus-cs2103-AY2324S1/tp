@@ -54,9 +54,9 @@ class FindCommandArgumentParserTest {
 
     @Test
     void test_explicitOrQuery() throws ParseException {
-        SearchPredicate queryA = new FindCommandArgumentParser().parse("Tom | Harry");
+        SearchPredicate queryA = new FindCommandArgumentParser().parse("Tom / Harry");
         assertTrue(queryA.test(TEST_PERSON));
-        SearchPredicate queryB = new FindCommandArgumentParser().parse("Cat | Boy");
+        SearchPredicate queryB = new FindCommandArgumentParser().parse("Cat / Boy");
         assertFalse(queryB.test(TEST_PERSON));
     }
 
@@ -75,19 +75,19 @@ class FindCommandArgumentParserTest {
         // TRUE: Tom whee twee
         // FALSE: Harry Cat ree
         SearchPredicate query;
-        query = new FindCommandArgumentParser().parse("Harry Tom | whee twee");
+        query = new FindCommandArgumentParser().parse("Harry Tom / whee twee");
         assertTrue(query.test(TEST_PERSON));
-        query = new FindCommandArgumentParser().parse("Tom | whee Harry twee");
+        query = new FindCommandArgumentParser().parse("Tom / whee Harry twee");
         assertTrue(query.test(TEST_PERSON));
-        query = new FindCommandArgumentParser().parse("ree & whee | twee");
+        query = new FindCommandArgumentParser().parse("ree & whee / twee");
         assertFalse(query.test(TEST_PERSON));
-        query = new FindCommandArgumentParser().parse("whee & ree | twee");
+        query = new FindCommandArgumentParser().parse("whee & ree / twee");
         assertTrue(query.test(TEST_PERSON));
-        query = new FindCommandArgumentParser().parse("Tom whee & ree | twee");
+        query = new FindCommandArgumentParser().parse("Tom whee & ree / twee");
         assertTrue(query.test(TEST_PERSON));
-        query = new FindCommandArgumentParser().parse("twee | ree & whee Tom");
+        query = new FindCommandArgumentParser().parse("twee / ree & whee Tom");
         assertTrue(query.test(TEST_PERSON));
-        query = new FindCommandArgumentParser().parse("twee | whee & Tom ree");
+        query = new FindCommandArgumentParser().parse("twee / whee & Tom ree");
         assertFalse(query.test(TEST_PERSON));
     }
 
@@ -128,13 +128,13 @@ class FindCommandArgumentParserTest {
         // TRUE: Tom whee twee
         // FALSE: Harry Cat ree
         SearchPredicate query;
-        query = new FindCommandArgumentParser().parse("Harry (Tom | whee) twee");
+        query = new FindCommandArgumentParser().parse("Harry (Tom / whee) twee");
         assertFalse(query.test(TEST_PERSON));
-        query = new FindCommandArgumentParser().parse("(Tom | whee) Harry twee");
+        query = new FindCommandArgumentParser().parse("(Tom / whee) Harry twee");
         assertFalse(query.test(TEST_PERSON));
-        query = new FindCommandArgumentParser().parse("(ree & whee) | twee");
+        query = new FindCommandArgumentParser().parse("(ree & whee) / twee");
         assertTrue(query.test(TEST_PERSON));
-        query = new FindCommandArgumentParser().parse("twee | (whee & Tom) ree");
+        query = new FindCommandArgumentParser().parse("twee / (whee & Tom) ree");
         assertTrue(query.test(TEST_PERSON));
     }
 
