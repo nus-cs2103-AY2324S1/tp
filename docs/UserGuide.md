@@ -30,6 +30,7 @@ If you type fast, lesSON can get your flashcards done faster than current GUI ap
    - [Practise Flashcards](#practise-flashcards-practise)
    - [Solve Flashcards](#practise-flashcards-solve)
    - [Setting Difficulty for Flashcards](#setting-difficulty-of-flashcards-set)
+4. [Markdown Syntax](#markdown-syntax)
 4. [FAQ](#faq)
 
 --------------------------------------------------------------------------------------------------------------------
@@ -271,3 +272,21 @@ set 10 d/ easy
 
 2. Successful Output
    ![result of practise command](./images/UserGuide/1.3_set_ans.png)
+
+# MarkDown Syntax
+
+For user who wish to incorporate styling in lesSON, there are 3 font styles currently supported:
+1. Bold
+2. Italic
+3. Underline
+
+### Bold
+To bold a line of text, wrap text with `**`
+
+### Italic
+To italicise a line of text, wrap text with `*`
+
+### Underline
+To underline a line of text, insert `<u>` at the beginning of the text,
+and end with `</u>` at the end of the underlined text.
+
