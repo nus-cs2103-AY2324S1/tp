@@ -7,8 +7,10 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.calendar.Calendar;
+import seedu.address.model.event.Event;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -74,6 +76,13 @@ public class Person {
 
     public Calendar getCalendar() {
         return calendar;
+    }
+
+    /**
+     * Returns a view of the events belonging to this person
+     */
+    public ObservableList<Event> getEventList() {
+        return calendar.getEventList();
     }
 
     /**
