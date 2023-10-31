@@ -25,16 +25,13 @@ For a more technical and comprehensive overview of CampusConnect's codebase, ple
 2. Features 
    - Request help [Coming Soon]
    - Add normal contact
-   - Add emergency contact
    - Add alternative information to contact
    - Edit contact information
    - Upload contact's photo
    - Update contact's photo
    - Search contact
    - List all contacts
-   - List emergency contacts
    - Delete normal contact
-   - Delete emergency contact
    - Undo last action [Coming Soon]
    - Receive upcoming birthday notifications
    - Opt out notification [Coming soon]
@@ -66,8 +63,6 @@ For a more technical and comprehensive overview of CampusConnect's codebase, ple
    * `add n/Jane Doe p/98765433 e/janed@example.com a/Jane street, block 123, #01-01 t/floorball t/suitemate` : Adds a contact named `Jane Doe` to CampusConnect who is tagged with the `floorball` and `suitemate` tags.
 
    * `optout notify birthdays` : Opts out from birthday notifications.
-
-   * `addemer 3 RA` : Marks the 3rd contact in the list as an RA (Residential Assistant).
 
    * `find name/Doe` : Finds all contacts who have "Doe" in their name.
 
@@ -128,16 +123,9 @@ Examples
     * Adds a contact named "Betsy Crowe" with the email "betsycrowe@example.com", address "Newgate Prison", phone "1234567", and two tags "friend" and "colleague"
 
 
-### Add emergency contact
+#### Emergency tags
 
-Adds an existing contact as an emergency contact.
-
-Format: `addemer INDEX [tag/TAG]`
-* `tag/TAG` Optional tag indicating the type of emergency contact, e.g. RA (residential assistant) or SO (security officer)
-
-Examples:
-* `addemer 1 RA`
-    * Indicates that the contact at index 1 is the residential assistant (RA) for contact during emergencies
+Certain tags such as `RA` and `SOS` are emergency tags, and are displayed first, with a red background.
 
 ###  Add alternative information to contact
 
@@ -347,18 +335,6 @@ Shows a list of all contacts.
 
 Format: `list`
 
-###  List emergency contacts
-
-Lists all emergency contacts that have been registered.
-
-Format: `listemer [tag/TAG]`
-* `tag/TAG` Optional tag to filter for emergency contacts of a certain type, e.g. RA (residential assistant) or SO (security officer)
-
-Examples:
-* `listemer`
-* `listemer tag/RA`
-  * Only lists emergency contacts tagged as residential assistants (RA)
-
 ###  Delete normal contact
 
 Deletes an existing contact from the address book.
@@ -371,17 +347,6 @@ Examples:
 * `delete 2`
   * Deletes the 2nd person from the list
 
-###  Delete emergency contact
-
-Removes contact as an emergency contact.
-
-Note: Contact will not be deleted, only unmarked as an emergency contact.
-
-Format: `delemer INDEX`
-
-Examples:
-* `delemer 1`
-  * Indicates that contact at index 1 is no longer an emergency contact
 
 ###  Undo last action [Coming Soon]
 
@@ -426,9 +391,11 @@ Invalid Input Example | Application Output
 **optout notifications** | Invalid `NOTIFICATION_DESCRIPTION` (refer to aforementioned for the list of `NOTIFICATION_DESCRIPTION` to enter).
 **optout** | `NOTIFICATION_DESCRIPTION` cannot be empty.
 
-### Notes feature
+### Notes
 ![Window with Notes](images/notes/window_with_notes.png)
 ![Notes Window](images/notes/notes_window.png)
+
+Allows you to add notes to a person and remove notes from a person.
 
 #### 1. Adding Notes to a Person
 
@@ -489,10 +456,6 @@ Make sure to familiarize yourself with the commands and use them as per your nee
 Action        | Format, Examples
 --------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 **Add**       | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-**Addemer**   | `addemer INDEX [tag/TAG]`
 **Addalt**    | `addalt INDEX [tg/TELEGRAM] [e2/SECONDARY_EMAIL] [li/LINKEDIN]` <br> e.g., `addalt 1 tg/johndoe_telegram e2/johndoe2@example.com`
-**Delemer**   | `delemer INDEX`
-**Listemer**  | `listemer [tag/TAG]`
-**Optout**    | `optout NOTIFICATION_DESCRIPTION`
 **Find**      | `find FIELD/KEYWORD [FIELD/KEYWORD]`
 
