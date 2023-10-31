@@ -104,39 +104,45 @@ Adds an interview to the address book.
 Format: `add-i app/APPLICANT_ID jr/JOB_ROLE time/INTERVIEW_DATETIME`
 
 * List of accepted date formats:
-  * Day, Month & Year formats(only DD*MM*YY/YYYY formats accepted):
-    * 12/03/2023
-    *  12/03/23
-    *  12/03/2023 5pm
-    *  12/03/2023 1700
-    *  12/03/2023 5.03pm
-    *  12/03/23 5pm
-    *  12-03-2023
-    *  12-03-2023 5pm
-    *  12-03-23
-    *  12-03-23 5pm
-    *  12th December 2023
-    *  12th December 2023 5pm
-  * Day & Month formats
-    * 12/03
-    *  12/03 5pm
-    *  12-03 5pm
-    *  12-03
-    *  12th December
-    *  12th December 5pm
-    *  12th Dec
-    *  12th Dec 5pm
-  * Day formats
-    *  Mon/tues/wed/…/sun
-    *  Monday/Tuesday/Wednesday/…/Sunday
-    *  Today
-    *  Tomorrow
-    *  Next week
-    *  Next month
+  * Day and time: 
+    * `Tue 1600`
+    * `Tue 4.00pm`
+    * `Tue 4pm`
+  * DD/MM/YYYY and time:
+    * `16 May 2024 1515`
+    * `16 May 2024 3.15pm`
+    * `16 May 2024 3pm`
+    * `16-05-2024 1515`
+    * `16-05-2024 3.15pm`
+    * `16-05-2024 3pm`
+    * `16-05-24 1515`
+    * `16-05-24 3.15pm`
+    * `16-05-24 3pm`
+    * `16/05/2024 1515`
+    * `16/05/2024 3.15pm`
+    * `16/05/2024 3pm`
+    * `16/05/24 1515`
+    * `16/05/24 3.15pm`
+    * `16/05/24 3pm`
+  * MM, DD and time:
+    * `16 May 1515`
+    * `16 May 3.15pm`
+    * `16 May 3pm`
+    * `16 January 1515`
+    * `16 January 3.15pm`
+    * `16 January 3pm`
+    * `16/5 1515`
+    * `16/5 3.15pm`
+    * `16/5 3pm`
+    * `16/05 1515`
+    * `16/05 3.15pm`
+    * `16/05 3pm`
 
 * Other features:
   * When the user enters the date properly: `added <interview description> at <time>`
-  * When the user does not input the date properly: `“Oops! Please enter a valid date String!”`
+  * When the user does not input a valid date: `“Please specify a valid date!”`
+  * When the user inputs a valid date without a time: `"Please enter an interview time!"`
+  * When the user enters a valid date in the past: `<todo>`
   * When there is an interview clash: `“Oops! You have an <insert interview object> scheduled at <from date & by date>`
 
 Examples:

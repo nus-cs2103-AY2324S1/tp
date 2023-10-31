@@ -28,32 +28,23 @@ public class TimeParser {
             },
             // time with all required information: year, month, day of month, time (formatID == 1)
             {
-            "d MMM yyyy h'.'mma",
             "d MMM yyyy HHmm",
+            "d MMM yyyy h'.'mma",
+            "d MMM yyyy ha",
             "dd-MM-y HHmm",
-            "dd-MM-yyyy HHmm",
-            "dd-MM-yyyy HH'.'mma",
-            "d M y HH'.'mma",
-            "d M y HH:mm",
-            "MMM d HH:mm yyyy",
-            "d/M/yy HHmm",
-            "d/M/yyyy HHmm",
+            "dd-MM-y h'.'mma",
+            "dd-MM-y ha",
+            "d/M/y HHmm",
             "d/M/y hh'.'mma",
-            "d/M/yyyy hh'.'mma",
             "d/M/y ha"
             },
             // time with these information: month, day of month, time (formatID == 2)
             {
-            "MMM dd HH'.'mma",
-            "dd MMM HH'.'mma",
-            "MMM dd ha",
-            "MMM dd hh'.'mma",
-            "MMM dd HHmm",
             "dd MMM HHmm",
-            "d/M HHmm",
-            "MMM dd ha",
-            "dd MMM ha",
             "dd MMM hh'.'mma",
+            "dd MMM ha",
+            "d/M HHmm",
+            "d/M hh'.'mma",
             "d/M ha"
             },
             // correct format but string is missing the time (formatID == 3)
@@ -70,6 +61,7 @@ public class TimeParser {
     };
 
     private static final String MISSING_TIME_ERROR_MESSAGE = "Please enter an interview time!";
+    // todo: make this more meaningful (e.g. Date cannot be in the past!)
     private static final String PAST_DATE_ERROR_MESSAGE = "Please specify a valid date!";
 
     /**
