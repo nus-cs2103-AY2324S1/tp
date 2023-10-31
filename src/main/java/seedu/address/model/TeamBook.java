@@ -182,16 +182,22 @@ public class TeamBook implements ReadOnlyTeamBook {
     }
 
     @Override
-    public boolean equals(Object other) {
-        if (other == this) {
+    public int hashCode() {
+        return teams.hashCode();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
             return true;
         }
-
-        if (!(other instanceof TeamBook)) {
+        if (obj == null || getClass() != obj.getClass()) {
             return false;
         }
-
-        TeamBook otherTeamBook = (TeamBook) other;
-        return teams.equals(otherTeamBook.teams);
+        TeamBook teamBook = (TeamBook) obj;
+        // Assume 'teams' is a List of Team objects in TeamBook
+        // Also, make sure that Team class has an overridden equals method
+        return teams.equals(teamBook.teams);
     }
+
 }
