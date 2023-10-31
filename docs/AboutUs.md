@@ -33,7 +33,7 @@ You can reach us at the email `pohsaykeong@stu.comp.nus.edu.sg`
 
 <img src="images/lshaoqin.png" width="200px">
 
-[[github](http://github.com/lshaoqin)] 
+[[github](http://github.com/lshaoqin)]
 [[portfolio](team/lshaoqin.md)]
 
 * Role: Developer (integration)

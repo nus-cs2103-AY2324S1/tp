@@ -54,7 +54,7 @@ public class PersonUtil {
         person.getCourses().forEach(
             s -> sb.append(PREFIX_COURSE).append(s.getCourseCode()).append(" ")
         );
-        sb.append(PREFIX_HOUR).append(person.getHour().value).append(" ");
+        sb.append(PREFIX_HOUR + String.valueOf(person.getHour().value) + " ");
         return sb.toString();
     }
 
@@ -77,7 +77,7 @@ public class PersonUtil {
             Set<Course> mods = descriptor.getCourses().get();
             mods.forEach(s -> sb.append(PREFIX_COURSE).append(s.getCourseCode()).append(" "));
         }
-        descriptor.getHour().ifPresent(hour -> sb.append(PREFIX_HOUR).append(hour.value).append(" "));
+        descriptor.getHour().ifPresent(hour -> sb.append(PREFIX_HOUR).append(String.valueOf(hour.value)).append(" "));
         return sb.toString();
     }
 }

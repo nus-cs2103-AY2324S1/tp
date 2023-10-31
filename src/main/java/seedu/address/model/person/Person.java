@@ -86,6 +86,19 @@ public class Person {
         return hour;
     }
 
+
+    /**
+     * Updates the work hours of this person and returns a new Person object with the updated work hours.
+     *
+     * @param duration The number of hours to add or subtract from the work hours.
+     * @return A new Person object with the updated work hours.
+     */
+    public Person updateHour(Integer duration) {
+        Hour updatedHour = this.hour.addHour(duration);
+        return new Person(this.name, this.phone, this.email, this.telegram, this.tags,
+                this.freeTime, this.courses, updatedHour);
+    }
+
     /**
      * Returns true if both persons have the same name.
      * This defines a weaker notion of equality between two persons.

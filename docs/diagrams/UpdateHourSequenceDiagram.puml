@@ -1,0 +1,91 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":HourCommandParser" as HourCommandParser LOGIC_COLOR
+participant "h:HourCommand" as HourCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+participant "person:Person" as Person MODEL_COLOR
+participant "hour:Hour" as Hour MODEL_COLOR
+end box
+
+[-> LogicManager : execute("hour 10")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("hour 10")
+activate AddressBookParser
+
+create HourCommandParser
+AddressBookParser -> HourCommandParser
+activate HourCommandParser
+
+HourCommandParser --> AddressBookParser
+deactivate HourCommandParser
+
+AddressBookParser -> HourCommandParser : parse("10")
+activate HourCommandParser
+
+create HourCommand
+HourCommandParser -> HourCommand
+activate HourCommand
+
+HourCommand --> HourCommandParser : h
+deactivate HourCommand
+
+HourCommandParser --> AddressBookParser : h
+deactivate HourCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+HourCommandParser -[hidden]-> AddressBookParser
+destroy HourCommandParser
+
+AddressBookParser --> LogicManager : h
+deactivate AddressBookParser
+
+LogicManager -> HourCommand : execute()
+activate HourCommand
+
+HourCommand -> Model : getFilteredPersonList()
+activate Model
+
+Model --> HourCommand
+deactivate Model
+
+
+loop through each Person in currentList
+    create Person
+    HourCommand -> Person : updateHour(10)
+    activate Person
+        create Hour
+        Person -> Hour : UpdateHour(10)
+            activate Hour
+            Hour --> Person : updatedHour
+            deactivate Hour
+        Person --> HourCommand : editedPerson
+    deactivate Person
+
+    HourCommand -> Model : setPerson(person, editedPerson)
+    activate Model
+    Model --> HourCommand
+    deactivate Model
+end
+
+create CommandResult
+HourCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> HourCommand
+deactivate CommandResult
+
+HourCommand --> LogicManager : result
+deactivate HourCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

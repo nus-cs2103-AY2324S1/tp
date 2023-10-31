@@ -34,7 +34,7 @@ public class JsonAdaptedPersonTest {
 
     private static final String INVALID_COURSE = "CS12231S";
 
-    private static final String INVALID_HOUR = "1000000";
+    private static final Integer INVALID_HOUR = 1000000;
     private static final String VALID_NAME = BENSON.getName().toString();
     private static final String VALID_PHONE = BENSON.getPhone().toString();
     private static final String VALID_EMAIL = BENSON.getEmail().toString();
@@ -48,8 +48,10 @@ public class JsonAdaptedPersonTest {
     private static final List<JsonAdaptedCourse> VALID_COURSES = BENSON.getCourses().stream()
             .map(JsonAdaptedCourse::new)
             .collect(Collectors.toList());
+    private static final Integer VALID_HOUR = 100;
 
-    private static final String VALID_HOUR = "100";
+
+
 
     @Test
     public void toModelType_validPersonDetails_returnsPerson() throws Exception {

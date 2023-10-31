@@ -34,9 +34,9 @@ class JsonAdaptedPerson {
     private final String telegram;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
     private final List<JsonAdaptedTimeInterval> intervals = new ArrayList<>();
-
     private final List<JsonAdaptedCourse> courses = new ArrayList<>();
-    private final String hour;
+    private final Integer hour;
+
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
@@ -47,7 +47,8 @@ class JsonAdaptedPerson {
                              @JsonProperty("tags") List<JsonAdaptedTag> tags,
                              @JsonProperty("freeTime") List<JsonAdaptedTimeInterval> intervals,
                              @JsonProperty("courses") List<JsonAdaptedCourse> courses,
-                             @JsonProperty("hour") String hour) {
+                             @JsonProperty("hour") Integer hour) {
+
         this.name = name;
         this.phone = phone;
         this.email = email;

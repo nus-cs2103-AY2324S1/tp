@@ -67,19 +67,19 @@ Shows a message explaining how to access the help page.
 
 Format: `help`
 
-### Viewing course : `course` 
+### Viewing course : `course`
 
-Views course information and tutorial timings. 
+Views course information and tutorial timings.
 
-![view course](images/viewCourse.png) 
+![view course](images/viewCourse.png)
 
-Format: `course c/COURSE_CODE` 
+Format: `course c/COURSE_CODE`
 
-Example: `course c/CS1231S` returns the course information and tutorial timings for CS1231S. 
+Example: `course c/CS1231S` returns the course information and tutorial timings for CS1231S.
 
 If you are unsure about the course code, you can simply type `course` and a list of all courses will be shown.
 
-When the command succeeds: 
+When the command succeeds:
 ```
 Course: CS2103T Software Engineering
 CS2103T Tutorial 10:00-12:00
@@ -89,14 +89,14 @@ CS2103T Laboratory 10:00-12:00
 
 ### Adding a default course : `teach`
 
-Adds a default course to the address book. 
+Adds a default course to the address book.
 
 ![teach command](images/teachCommand.png)
 
 Format: `teach c/COURSE_CODE`
 - Updates the name of the window to the default course.
 - Filters the list of TAs teaching under the course automatically.
-- The default course is saved even after the user closes the application. 
+- The default course is saved even after the user closes the application.
 
 Example: `course c/CS2103T` sets the default course to the given course code.
 
@@ -175,7 +175,7 @@ When the command fails:
 
 - Incorrect format (missing index or index is not a positive integer): `Invalid command format!`
 - Index does not correspond to a TA: For example, there are only 5 TAs but the user tried to delete a TA at index 6
-  
+
   `The person index provided is invalid`
 
 ### Finding a Teaching Assistant: `find`
@@ -230,6 +230,33 @@ Snowflake; Phone: 83124113; Email: snowflake@example.com; Course of study: Compu
 Snowman; Phone: 83172153; Email: snowman@example.com; Course of study: Computer Science; Year of Study: 2;
 ```
 
+### Updating Hours for All TAs in View: `hour`
+
+![update Hour](images/updateHour.png)
+
+Format: `hour HOUR`
+
+- This command update ths hour field for all TAs in view, by adding the `HOUR` value to their current values.
+- This command can be applied after the `find` command. e.g First type `find c/ CS2103T` will find all TAs with course
+`CS2103T`, then type `hour 6` will add 6 hours to all `CS2103T` TAs only, other TAs will not be updated.
+- The updated hour should still be within range of 0-9999.
+
+Examples:
+
+- `hour 4` will add 4 hours to all TAs in the address book if you are at the default view of all TAs.
+- `find c/ CS1231S` then `hour 4` will add 4 hours to all `CS1231S` TAs and other TAs will not be affected.
+
+When the command succeeds:
+
+```
+Hour updated to all TAs identified!
+```
+
+When the command fails:
+
+- Invalid command format (updated new hour is invalid, either below 0 or above 9999): `Invalid command format!`
+
+
 ### Clearing all entries : `clear`
 
 Clears all entries from the address book.
@@ -277,5 +304,6 @@ Action | Format, Examples
 **Clear** | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Find** | `find PREFIX KEYWORD [MORE_KEYWORDS]`<br> e.g., `find n/Alex`, `find c/cs1231s`, `find from/10:00 to/12:00`, `find n/Alex c/cs1231s`, `find c/cs2103t from/10:00 to/12:00`
+**Hour** | `hour 6`
 **List** | `list`
 **Help** | `help`
