@@ -1,0 +1,11 @@
+@startuml
+'https://plantuml.com/activity-diagram-beta
+
+start
+:User enters a filter command;
+:Filter command is parsed;
+if (All fields are valid) then (true)
+  :Filter is applied;
+else (false)
+    :Parse Exception thrown;
+@enduml
