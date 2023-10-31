@@ -41,8 +41,7 @@ public class ModelManager implements Model {
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
-    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs, ReadOnlySchedule scheduleList,
-                        ReadOnlyFullTaskList fullTaskList) {
+    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs, ReadOnlySchedule scheduleList) {
         requireAllNonNull(addressBook, userPrefs, scheduleList);
 
         logger.fine("Initializing with address book: " + addressBook + " , schedule list: " + scheduleList
@@ -54,11 +53,12 @@ public class ModelManager implements Model {
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
         filteredLessons = new FilteredList<>(this.scheduleList.getLessonList());
-        this.fullTaskList = new FullTaskList(fullTaskList);
+        this.fullTaskList = new FullTaskList();
+        this.fullTaskList.setFullTaskList(scheduleList);
     }
 
     public ModelManager() {
-        this(new AddressBook(), new UserPrefs(), new ScheduleList(), new FullTaskList());
+        this(new AddressBook(), new UserPrefs(), new ScheduleList());
     }
 
     //=========== UserPrefs ==================================================================================

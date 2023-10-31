@@ -10,7 +10,6 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalLessons.getTypicalScheduleList;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
-import static seedu.address.testutil.TypicalTasks.getTypicalFullTaskList;
 
 import org.junit.jupiter.api.Test;
 
@@ -28,7 +27,7 @@ import seedu.address.model.person.Person;
 public class DeleteCommandTest {
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs(),
-            getTypicalScheduleList(), getTypicalFullTaskList());
+            getTypicalScheduleList());
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
@@ -39,7 +38,7 @@ public class DeleteCommandTest {
                 Messages.format(personToDelete));
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(),
-                model.getScheduleList(), model.getFullTaskListObject());
+                model.getScheduleList());
         expectedModel.deletePerson(personToDelete);
 
         assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
@@ -64,7 +63,7 @@ public class DeleteCommandTest {
                 Messages.format(personToDelete));
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(),
-                model.getScheduleList(), model.getFullTaskListObject());
+                model.getScheduleList());
         expectedModel.deletePerson(personToDelete);
         showNoPerson(expectedModel);
 

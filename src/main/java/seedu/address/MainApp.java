@@ -16,7 +16,6 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.Logic;
 import seedu.address.logic.LogicManager;
 import seedu.address.model.AddressBook;
-import seedu.address.model.FullTaskList;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyAddressBook;
@@ -87,7 +86,6 @@ public class MainApp extends Application {
         Optional<ReadOnlySchedule> scheduleListOptional;
         ReadOnlyAddressBook initialDataStudents;
         ReadOnlySchedule initialDataLessons;
-        FullTaskList fullTaskList = new FullTaskList();
 
         try {
             addressBookOptional = storage.readAddressBook();
@@ -114,10 +112,8 @@ public class MainApp extends Application {
             initialDataLessons = new ScheduleList();
         }
 
-        fullTaskList.setFullTaskList(initialDataLessons);
 
-
-        return new ModelManager(initialDataStudents, userPrefs, initialDataLessons, fullTaskList);
+        return new ModelManager(initialDataStudents, userPrefs, initialDataLessons);
     }
 
     private void initLogging(Config config) {

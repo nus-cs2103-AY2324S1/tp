@@ -15,7 +15,6 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
-import seedu.address.model.FullTaskList;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -30,7 +29,7 @@ import seedu.address.model.state.State;
 public class ShowCommandTest {
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs(),
-            getTypicalScheduleList(), new FullTaskList());
+            getTypicalScheduleList());
 
     @Test
     public void execute_validIndexUnfilteredStudentList_success() {
@@ -40,7 +39,7 @@ public class ShowCommandTest {
         String expectedMessage = String.format(ShowCommand.MESSAGE_SHOW_PERSON_SUCCESS,
                 Messages.format(personToShow));
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(),
-                model.getScheduleList(), new FullTaskList());
+                model.getScheduleList());
         expectedModel.showPerson(personToShow);
 
         assertCommandSuccess(showCommand, model, expectedMessage, expectedModel);
@@ -54,7 +53,7 @@ public class ShowCommandTest {
         String expectedMessage = String.format(ShowCommand.MESSAGE_SHOW_LESSON_SUCCESS,
                 Messages.formatLesson(lessonToShow));
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(),
-                model.getScheduleList(), new FullTaskList());
+                model.getScheduleList());
         expectedModel.showLesson(lessonToShow);
 
         assertCommandSuccess(showCommand, model, expectedMessage, expectedModel);
