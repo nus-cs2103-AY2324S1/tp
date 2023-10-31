@@ -1,5 +1,7 @@
 package seedu.address.logic.parser;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.SEQUENCE_ASC;
 import static seedu.address.logic.commands.CommandTestUtil.SEQUENCE_DESC;
@@ -31,14 +33,15 @@ public class SortCommandParserTest {
     public void parseSortInvalidFailure() throws ParseException {
         // Invalid sequence, should throw a ParseException
         String invalidSequence = "INVALID";
-        try {
+        parser.parse(invalidSequence);
+        // Use assertThrows to verify that a ParseException is thrown
+        ParseException exception = assertThrows(ParseException.class, () -> {
             parser.parse(invalidSequence);
-            // The line above should throw a ParseException, if not, the test fails
-            assert false : "Expected ParseException was not thrown";
-        } catch (ParseException e) {
-            // Expected ParseException, test passes
-            assert true;
-        }
+        });
+
+        // Assert the exception message using assertEquals
+        assertEquals(SortIn.MESSAGE_CONSTRAINTS, exception.getMessage());
+
     }
 
     @Test
