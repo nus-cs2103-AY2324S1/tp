@@ -23,6 +23,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Salary;
+import seedu.address.model.person.attendance.AttendanceStorage;
 
 /**
  * Parses input arguments and creates a new AddCommand object
@@ -54,8 +55,10 @@ public class AddCommandParser implements Parser<AddCommand> {
         JoinDate joinDate = ParserUtil.parseJoinDate(argMultimap.getValue(PREFIX_JOIN_DATE).get());
         Salary salary = ParserUtil.parseSalary(argMultimap.getValue(PREFIX_SALARY).get());
         AnnualLeave annualLeave = ParserUtil.parseAnnualLeave(argMultimap.getValue(PREFIX_ANNUAL_LEAVE).get());
+        AttendanceStorage attendanceStorage = new AttendanceStorage();
 
-        Person person = new Person(name, phone, email, address, bankAccount, joinDate, salary, annualLeave);
+        Person person = new Person(name, phone, email, address,
+                bankAccount, joinDate, salary, annualLeave, attendanceStorage);
 
         return new AddCommand(person);
     }

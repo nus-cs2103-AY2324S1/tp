@@ -16,6 +16,8 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.person.Payroll;
 import seedu.address.model.person.Person;
 
 class PayslipCommandTest {
@@ -27,13 +29,15 @@ class PayslipCommandTest {
 
     @Test
     public void constructor_nullIndex_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new PayslipCommand(null));
+        assertThrows(NullPointerException.class, () -> new PayslipCommand((Index) null));
+        assertThrows(NullPointerException.class, () -> new PayslipCommand((NameContainsKeywordsPredicate) null));
     }
 
     @Test
     public void execute() throws Exception {
         // success
         Person employeeToGenerate = model.getFilteredPersonList().get(2);
+        employeeToGenerate.addPayroll(new Payroll(employeeToGenerate.getSalary()));
         CommandResult commandResult = payslipCommand.execute(model);
         assertEquals(String.format(PayslipCommand.MESSAGE_PAYSLIP_SUCCESS, employeeToGenerate.getName().toString()),
             commandResult.getFeedbackToUser());

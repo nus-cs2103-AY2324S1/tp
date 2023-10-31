@@ -37,6 +37,10 @@ public class Benefit extends Payment {
         this.reason = reason;
     }
 
+    public Reason getReason() {
+        return reason;
+    }
+
     /**
      * Returns true if a given reason is a valid reason for benefits.
      */

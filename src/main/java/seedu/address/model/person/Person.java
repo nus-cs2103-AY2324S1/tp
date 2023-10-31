@@ -8,6 +8,8 @@ import java.util.List;
 import java.util.Objects;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.person.attendance.AttendanceStorage;
+import seedu.address.model.person.attendance.AttendanceType;
 
 /**
  * Represents a Person in the address book.
@@ -27,13 +29,14 @@ public class Person {
     private final BankAccount bankAccount;
     private final JoinDate joinDate;
     private final Salary salary;
+    private final AttendanceStorage attendanceStorage;
     private final ArrayList<Payroll> payrolls;
 
     /**
      * Every field must be present and not null.
      */
     public Person(Name name, Phone phone, Email email, Address address, BankAccount bankAccount, JoinDate joinDate,
-            Salary salary, AnnualLeave annualLeave) {
+            Salary salary, AnnualLeave annualLeave, AttendanceStorage attendanceStorage) {
         requireAllNonNull(name, phone, email, address, bankAccount, joinDate, salary, annualLeave);
         this.name = name;
         this.phone = phone;
@@ -43,6 +46,7 @@ public class Person {
         this.joinDate = joinDate;
         this.salary = salary;
         this.annualLeave = annualLeave;
+        this.attendanceStorage = attendanceStorage;
         this.payrolls = new ArrayList<>();
     }
 
@@ -82,12 +86,53 @@ public class Person {
         return annualLeave.getLeaveList();
     }
 
+    public AttendanceStorage getAttendanceStorage() {
+        return attendanceStorage;
+    }
+
+    public AttendanceType getAttendanceToday() {
+        return this.attendanceStorage.getType(LocalDate.now());
+    }
+
+    /**
+     * @return the working status of this employee.
+     */
+    public AttendanceType getWorkingStatusToday() {
+        if (this.annualLeave.getLeaveStatus().equals("On Leave")) {
+            return AttendanceType.ON_LEAVE;
+        }
+        return this.getAttendanceToday();
+    }
+
     /**
      * Adds a payroll to the payroll list of this person.
      * @param payroll Payroll to be added.
      */
     public void addPayroll(Payroll payroll) {
         this.payrolls.add(payroll);
+    }
+
+    /**
+     * Returns the latest payroll of this person.
+     * @return Latest payroll.
+     */
+    public Payroll getLatestPayroll() {
+        return this.payrolls.get(this.payrolls.size() - 1);
+    }
+
+    /**
+     * Returns a payroll based on a specific date.
+     * @param date Start date of the payroll you want to retrieve, in MM/YY.
+     * @return payroll of a specific start date.
+     */
+    public Payroll getPayrollWithStartDate(LocalDate date) {
+        for (Payroll payroll: payrolls) {
+            if (payroll.getStartDate().getMonth().equals(date.getMonth())
+                    && payroll.getStartDate().getYear() == date.getYear()) {
+                return payroll;
+            }
+        }
+        return null;
     }
 
     /**

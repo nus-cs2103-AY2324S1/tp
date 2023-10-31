@@ -7,6 +7,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.attendance.AttendanceType;
 
 /**
  * An UI component that displays information of a {@code Person}.
@@ -50,7 +51,6 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label workingStatus;
 
-
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to
      * display.
@@ -67,7 +67,7 @@ public class PersonCard extends UiPart<Region> {
         joinDate.setText(person.getJoinDate().value);
         salary.setText(person.getSalary().value);
         annualLeave.setText(person.getAnnualLeave().value);
-        setWorkingStatus(person.getAnnualLeave().getWorkingStatus());
+        setWorkingStatus(person.getWorkingStatusToday());
     }
 
     /**
@@ -86,19 +86,39 @@ public class PersonCard extends UiPart<Region> {
         joinDate.setText(person.getJoinDate().value);
         salary.setText(person.getSalary().value);
         annualLeave.setText(person.getAnnualLeave().value);
-        setWorkingStatus(person.getAnnualLeave().getWorkingStatus());
+        setWorkingStatus(person.getWorkingStatusToday());
     }
 
     /**
      * Set the style of the workingStatus label based on test
-     * @param statusText of the employee on whether they are On Leave or Working
+     * @param status of the employee on whether they are On Leave or Working
      */
-    public void setWorkingStatus(String statusText) {
-        if ("Working".equals(statusText)) {
-            workingStatus.getStyleClass().add("work");
-        } else {
-            workingStatus.getStyleClass().add("on-leave");
+    public void setWorkingStatus(AttendanceType status) {
+        switch (status) {
+        case PRESENT:
+            workingStatus.setStyle("-fx-background-color: green; -fx-padding: 2;"
+                    + "-fx-font-family: 'Arial Black'; -fx-font-size:13; -fx-background-radius: 3");
+            workingStatus.setText("Working");
+            break;
+        case LATE:
+            workingStatus.setStyle("-fx-background-color: #b8af00; -fx-padding: 2;"
+                    + "-fx-font-family: 'Arial Black'; -fx-font-size:13; -fx-background-radius: 3");
+            workingStatus.setText("Late");
+            break;
+        case ABSENT:
+            workingStatus.setStyle("-fx-background-color: #d17749; -fx-padding: 2;"
+                    + "-fx-font-family: 'Arial Black'; -fx-font-size:13; -fx-background-radius: 3");
+            workingStatus.setText("Absent");
+            break;
+        case ON_LEAVE:
+            workingStatus.setStyle("-fx-background-color: #A50000; -fx-padding: 2;"
+                    + "-fx-font-family: 'Arial Black'; -fx-font-size:13; -fx-background-radius: 3");
+            workingStatus.setText("On Leave");
+            break;
+        default:
+            workingStatus.setStyle("-fx-background-color: green; -fx-padding: 2;"
+                    + "-fx-font-family: 'Arial Black'; -fx-font-size:13; -fx-background-radius: 3");
+            workingStatus.setText("Working");
         }
-        workingStatus.setText(statusText);
     }
 }
