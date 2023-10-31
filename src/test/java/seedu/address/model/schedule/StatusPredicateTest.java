@@ -57,6 +57,13 @@ public class StatusPredicateTest {
     }
 
     @Test
+    public void test_containsStatusAndPerson_returnsFalse() {
+        StatusPredicate predicate =
+            new StatusPredicate(Collections.singletonList(Status.PENDING.toString()), TypicalPersons.BOB);
+        assertFalse(predicate.test(new ScheduleBuilder().build()));
+    }
+
+    @Test
     public void toStringMethod() {
         Person tutor = TypicalPersons.ALICE;
         StatusPredicate predicate = new StatusPredicate(Collections.singletonList(Status.MISSED.toString()), tutor);
