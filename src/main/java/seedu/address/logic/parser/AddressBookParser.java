@@ -22,8 +22,8 @@ import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.OweCommand;
 import seedu.address.logic.commands.PayCommand;
 import seedu.address.logic.commands.RemoveNoteCommand;
-import seedu.address.logic.commands.ViewNotesCommand;
 import seedu.address.logic.commands.UpdatePhotoCommand;
+import seedu.address.logic.commands.ViewNotesCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
