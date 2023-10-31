@@ -65,6 +65,11 @@ public interface Model {
     UniqueReminderList getReminderList();
 
     /**
+     * Starts the reminder scheduler
+     */
+    void startReminderScheduler();
+
+    /**
      * Returns true if a person with the same identity as {@code person} exists in the address book.
      */
     boolean hasPerson(Person person);
