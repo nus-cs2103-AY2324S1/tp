@@ -129,5 +129,4 @@ class JsonAdaptedStudent {
         return new Student(modelName, modelPhone, modelEmail, modelStudentNumber, modelClassDetails,
                 modelTags, modelComment);
     }
-
 }
