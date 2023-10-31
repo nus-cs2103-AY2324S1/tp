@@ -141,7 +141,18 @@ public class FindExpressionParser {
             // split by slash but include slash in substrings
             String[] parts = token.text.split("(?<=/)");
             FindSupportedField field = FindSupportedField.createFromPrefix(parts[0].trim().toLowerCase());
-            return new ConditionNode(field, parts[1].trim());
+
+            // remove double-quotes around keyword if present
+            String keyword = parts[1].trim();
+            if (keyword.startsWith("\"") && keyword.endsWith("\"")) {
+                keyword = keyword.substring(1, keyword.length() - 1);
+            }
+
+            if (keyword.isEmpty()) {
+                throw new ParseException("Invalid condition: Keyword cannot be empty!");
+            }
+
+            return new ConditionNode(field, keyword);
         }
     }
 
