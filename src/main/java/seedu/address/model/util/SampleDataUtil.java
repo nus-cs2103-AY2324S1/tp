@@ -87,11 +87,11 @@ public class SampleDataUtil {
     }
 
     public static Lesson[] getSampleLessons() {
-        TaskList taskList = new TaskList();
-        List<Task> tasks = Arrays.asList(new Task("first"), new Task("second"),
-                new Task("third long words test sentrence bomvasnv haha loanfafsszzzz sss"));
-        taskList.setTasks(tasks);
         try {
+            TaskList taskList = new TaskList();
+            List<Task> tasks = Arrays.asList(new Task("first"), new Task("second"),
+                    new Task("third long words test sentrence bomvasnv haha loanfafsszzzz sss"));
+            taskList.setTasks(tasks);
             return new Lesson[] {
                 new Lesson("lesson1", "12:30", "14:30", "20", "Mathematics", taskList),
                 new Lesson("lesson2", "13:30", "15:30", "21", "Physics", taskList),

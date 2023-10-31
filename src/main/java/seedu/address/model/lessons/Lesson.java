@@ -34,6 +34,7 @@ public class Lesson extends ListEntry<Lesson> {
      * @param start The start time of the lesson
      * @param end The end time of the lesson
      * @param subject The subject of this lesson
+     * @param taskList the tasks to be completed
      * @param studentNames The student attending this lesson. Note: Converted to ArrayList when stored
      * @see seedu.address.logic.parser.ParserUtil
      */
@@ -46,16 +47,29 @@ public class Lesson extends ListEntry<Lesson> {
         this.day = day;
         this.taskList = taskList;
     }
-    public Lesson(String name, String start, String end, String day, String subject, TaskList tasklist) throws ParseException {
-        this(new Name(name), new Time(start), new Time(end), Day.of(day), new Subject(subject), tasklist);
+
+    /**
+     * Used to construct sample data.
+     * @param name
+     * @param start
+     * @param end
+     * @param day
+     * @param subject
+     * @param taskList
+     * @throws ParseException
+     */
+    public Lesson(String name, String start, String end, String day, String subject, TaskList taskList)
+            throws ParseException {
+        this(new Name(name), new Time(start), new Time(end), Day.of(day), new Subject(subject), taskList);
     }
+
     private Lesson() {
         this.name = Name.DEFAULT_NAME;
         this.start = Time.DEFAULT_TIME;
         this.end = Time.DEFAULT_TIME;
         this.subject = Subject.DEFAULT_SUBJECT;
         this.day = Day.DEFAULT_DAY;
-        this.taskList = new TaskList();
+        this.taskList = TaskList.DEFAULT_TASKLIST;
     }
 
     public static Lesson getDefaultLesson() {
@@ -107,13 +121,13 @@ public class Lesson extends ListEntry<Lesson> {
         //todo, get the students str from model in the future instead of from the lesson
     }
 
-    /**
-     * Returns the Task List.
-     * @return
-     */
-    public ObservableList<Task> getTaskList() {
-        return taskList.asUnmodifiableObservableList();
-    }
+//    /**
+//     * Returns the Task List.
+//     * @return
+//     */
+//    public ObservableList<Task> getTaskList() {
+//        return taskList.asUnmodifiableObservableList();
+//    }
 
 
     public Time getStart() {
@@ -176,6 +190,11 @@ public class Lesson extends ListEntry<Lesson> {
             setSubject(subject);
         }
     }
+
+    public TaskList getTaskList() {
+        return taskList;
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {

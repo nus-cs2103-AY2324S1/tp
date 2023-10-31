@@ -65,7 +65,7 @@ public class EditPersonCommand extends AbstractEditCommand<Person> {
     protected void setNonDefaultFields() throws CommandException {
         edited.setPhoneIfNotDefault(editDescriptor.getPhone());
         edited.setEmail(editDescriptor.getEmail());
-        edited.setSubjectsIfNotDefault(editDescriptor.getSubjects());
+        edited.setAddress(editDescriptor.getAddress());
         edited.setSubjectsIfNotDefault(editDescriptor.getSubjects());
     }
 }

@@ -493,12 +493,15 @@ public class TypeParsingUtil {
      * @throws RepeatedFlagException if more than one flag is found
      */
     public static String parseFlag(String flag, String input, boolean isOptional) throws ParseException {
-        Pattern p = Pattern.compile("-" + flag + "\\s*([\\w:,._/@#$%&! ]*)");
+        Pattern p = Pattern.compile("-" + flag + "\\s*([\\w-:,._/@#$%&! ]*)");
         Matcher m = p.matcher(input);
         if (m.find()) {
             String flagValue = m.group(1).trim();
             if (m.find()) {
                 throw new RepeatedFlagException("Flag " + flag + " is repeated");
+            }
+            if (flagValue.contains(" -")) {
+                flagValue = flagValue.substring(0, flagValue.indexOf(" -"));
             }
             return flagValue;
         } else {
