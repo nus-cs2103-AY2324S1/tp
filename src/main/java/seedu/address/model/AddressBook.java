@@ -151,6 +151,17 @@ public class AddressBook implements ReadOnlyAddressBook {
         bands.remove(key);
     }
 
+    /**
+     * Replaces the given band {@code target} in the list with {@code editedBand}.
+     * {@code target} must exist in the address book.
+     * The band identity of {@code editedBand} must not be the same as another existing band in the
+     * address book.
+     */
+    public void setBand(Band target, Band editedBand) {
+        requireNonNull(editedBand);
+        bands.setBand(target, editedBand);
+    }
+
     //// util methods
 
     @Override
