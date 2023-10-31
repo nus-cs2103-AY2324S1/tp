@@ -2,8 +2,8 @@ package seedu.address.storage;
 
 import static seedu.address.model.person.interaction.Interaction.DEFAULT_DATE_FORMAT;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
+import java.text.ParseException;
+import java.util.Date;
 import java.util.logging.Logger;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -67,13 +67,13 @@ class JsonAdaptedInteraction {
 
         if (date == null) {
             throw new IllegalValueException(
-                    String.format(INTERACTION_MISSING_FIELD_MESSAGE_FORMAT, LocalDate.class.getSimpleName()));
+                    String.format(INTERACTION_MISSING_FIELD_MESSAGE_FORMAT, Date.class.getSimpleName()));
         }
-        LocalDate modelDate;
+        Date modelDate;
         try {
             logger.info("Read Date into JSON: " + date);
-            modelDate = LocalDate.parse(date, DEFAULT_DATE_FORMAT);
-        } catch (DateTimeParseException e) {
+            modelDate = DEFAULT_DATE_FORMAT.parse(date);
+        } catch (ParseException e) {
             throw new IllegalValueException(INVALID_DATE_FIELD_MESSAGE, e);
         }
 

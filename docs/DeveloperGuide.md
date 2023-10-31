@@ -299,7 +299,7 @@ The proposed Reminder mechanism is facilitated by `Reminder` and `UniqueReminder
 
 Step 1. The user launches the application for the first time. Data from the `UniqueReminderList` is loaded from memory and displayed in a separate window.
 
-Step 2. The user executes `interaction 1 o/INTERESTED Thinking of giving it a shot` command to add an interaction to the 1st person in the address book. The `interaction` command calls `UniqueReminderList#add()`, creating a new `Reminder` entry in the List with the information from `Person`'s Lead and the current `LocalDate`.
+Step 2. The user executes `interaction 1 o/INTERESTED Thinking of giving it a shot` command to add an interaction to the 1st person in the address book. The `interaction` command calls `UniqueReminderList#add()`, creating a new `Reminder` entry in the List with the information from `Person` and `Date`.
 
 Step 3. The user executes `reminder` that displays the same separate window that has been
 

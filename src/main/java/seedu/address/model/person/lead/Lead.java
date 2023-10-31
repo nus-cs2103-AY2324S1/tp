@@ -7,10 +7,6 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Lead {
     public static final String MESSAGE_CONSTRAINTS = "Lead should only take values hot|warm|cold";
-    // Number of weeks before next followup
-    private static final int HOT_LEAD_FOLLOWUP = 1;
-    private static final int WARM_LEAD_FOLLOWUP = 4;
-    private static final int COLD_LEAD_FOLLOWUP = 8;
     private final LeadType leadType;
 
     /**
@@ -25,16 +21,6 @@ public class Lead {
 
     public Lead(LeadType lead) {
         this.leadType = lead;
-    }
-
-    public int getFollowUpPeriod() {
-        if (leadType.equals(LeadType.HOT)) {
-            return HOT_LEAD_FOLLOWUP;
-        } else if (leadType.equals(LeadType.WARM)) {
-            return WARM_LEAD_FOLLOWUP;
-        } else {
-            return COLD_LEAD_FOLLOWUP;
-        }
     }
 
     /**
