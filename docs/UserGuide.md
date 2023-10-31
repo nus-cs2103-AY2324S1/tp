@@ -396,25 +396,28 @@ Invalid Input Example | Application Output
 ### Notes
 
 <div style="display:flex; justify-content:space-around; align-items:center;">
-  <img src="images/notes/window_with_notes.png" alt="Window with Notes" style="height:400px; margin:10px;">
-  <img src="images/notes/notes_window.png" alt="Notes Window" style="height:400px; margin:10px;">
+
+[//]: # (  <img src="images/notes/window_with_notes.png" alt="Window with Notes" style="height:400px; margin:10px;">)
+
+[//]: # (  <img src="images/notes/notes_window.png" alt="Notes Window" style="height:400px; margin:10px;">)
+  <img src="images/notes/noteswindow2.png" alt="Window with Notes" style="height:400px; margin:10px;">
 </div>
 
 Allows you to add notes to a person and remove notes from a person.
 
 You can add notes to a person with the `addnote` command, remove notes from them with the `removenotes` command.
 
-You can view notes by one of two ways: by using the `addnote` command, or by clicking on the `Notes` button in the person's information window.
+You can view notes by one of two ways: by using the `viewnotes` command, or by clicking on the `Notes` button in the person's information window.
 
-Format: `addnote PERSON_INDEX NOTE_CONTENT`, `removenote PERSON_INDEX NOTE_INDEX` and `notes PERSON_INDEX`
+Format: `addnote PERSON_INDEX NOTE_CONTENT`, `removenote PERSON_INDEX NOTE_INDEX` and `viewnotes PERSON_INDEX`
 
 <box type="warning">
 
 Always make sure the indices provided are valid and within the bounds of the list. Invalid indices will result in an error.
 
 </box>
-<box type="info">
 
+<panel header=":fa-solid-book: **Command Parameter / Syntax Tables**" type="secondary" expanded no-close>
 The fields you enter should follow the following format:
 
 | Parameter     | Description                                                                                                 | 
@@ -423,22 +426,18 @@ The fields you enter should follow the following format:
 | `NOTE_INDEX`  | The position of the note in the person's list of notes you want to remove. This should be a positive integer, and should be within the bounds of the list. | 
 | `NOTE_CONTENT`| The content of the note you want to add. It has to be non-empty, and can contain any character.              | 
 
-</box>
+</panel>
 
-<box>
-If you want to add a note to the person at position 1 in the list, you would use:
+<box type="info">
+To manage notes for a person in a list, use the following commands:
 
-`note 1 This is a sample note for the person.`
+| Action                                  | Command                                           | Description                                             |
+|-----------------------------------------|---------------------------------------------------|---------------------------------------------------------|
+| Add a note to a person                  | `addnote 1 This is a sample note for the person.` | Adds a note to the person at index 1.                   |
+| Remove a specific note from a person    | `removenote 1 2`                                  | Removes the 2nd note from the person at index 1.        |
+| View all notes of a person              | `viewnotes 1`                                     | Displays all notes of the person at index 1.            |
 
-This will add a note "This is a sample note for the person." to the person at index 1.
-</box>
-
-<box>
-If you want to remove the 2nd note from the person at position 1 in the list, you would use:
-
-`removenote 1 2`
-
-This will remove the 2nd note from the person at index 1.
+To add a note, use the `addnote` command followed by the position number and the note text. To remove a note, use the `removenote` command followed by the position number and the note index. To view all notes, use the `viewnotes` command followed by the position number. Closing the notes window can be done via the "Close" button or by pressing ESC.
 </box>
 
 
