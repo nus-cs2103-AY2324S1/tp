@@ -4,12 +4,14 @@ import static java.util.Objects.requireNonNull;
 import static transact.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.Comparator;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
 import javafx.collections.ObservableMap;
 import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import transact.commons.core.GuiSettings;
 import transact.commons.core.LogsCenter;
 import transact.model.person.Person;
@@ -28,6 +30,7 @@ public class ModelManager implements Model {
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
     private final FilteredList<Transaction> filteredTransactions;
+    private final SortedList<Transaction> sortedTransactions;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -43,6 +46,7 @@ public class ModelManager implements Model {
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
         filteredTransactions = new FilteredList<>(this.transactionBook.getTransactionList());
+        sortedTransactions = new SortedList<>(filteredTransactions, COMPARATOR_ASC_BY_ID);
     }
 
     public ModelManager() {
@@ -218,13 +222,19 @@ public class ModelManager implements Model {
 
     @Override
     public ObservableList<Transaction> getFilteredTransactionList() {
-        return filteredTransactions;
+        return sortedTransactions;
     }
 
     @Override
     public void updateFilteredTransactionList(Predicate<Transaction> predicate) {
         requireNonNull(predicate);
         filteredTransactions.setPredicate(predicate);
+    }
+
+    @Override
+    public void updateFilteredTransactionList(Comparator<Transaction> comparator) {
+        requireNonNull(comparator);
+        sortedTransactions.setComparator(comparator);
     }
 
     @Override

@@ -10,7 +10,9 @@ import java.util.regex.Pattern;
 import transact.commons.core.LogsCenter;
 import transact.logic.commands.AddStaffCommand;
 import transact.logic.commands.AddTransactionCommand;
+import transact.logic.commands.ClearFilterCommand;
 import transact.logic.commands.ClearResultBoxCommand;
+import transact.logic.commands.ClearSortCommand;
 import transact.logic.commands.ClearStaffCommand;
 import transact.logic.commands.ClearTransactionCommand;
 import transact.logic.commands.Command;
@@ -20,9 +22,11 @@ import transact.logic.commands.EditStaffCommand;
 import transact.logic.commands.EditTransactionCommand;
 import transact.logic.commands.ExitCommand;
 import transact.logic.commands.ExportTransactionCommand;
+import transact.logic.commands.FilterCommand;
 import transact.logic.commands.FindCommand;
 import transact.logic.commands.HelpCommand;
 import transact.logic.commands.ImportTransactionCommand;
+import transact.logic.commands.SortCommand;
 import transact.logic.commands.ViewCommand;
 import transact.logic.parser.exceptions.ParseException;
 
@@ -101,11 +105,24 @@ public class AddressBookParser {
         case ClearResultBoxCommand.COMMAND_WORD:
             return new ClearResultBoxCommand();
 
+        case SortCommand.COMMAND_WORD:
+            return new SortCommandParser().parse(arguments);
+
+        case ClearSortCommand.COMMAND_WORD:
+            return new ClearSortCommand();
+
+        case FilterCommand.COMMAND_WORD:
+            return new FilterCommandParser().parse(arguments);
+
+        case ClearFilterCommand.COMMAND_WORD:
+            return new ClearFilterCommand();
+
         case ExportTransactionCommand.COMMAND_WORD:
             return new ExportTransactionCommand();
 
         case ImportTransactionCommand.COMMAND_WORD:
             return new ImportTransactionCommand();
+
         default:
             logger.finer("This user input caused a ParseException: " + userInput);
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

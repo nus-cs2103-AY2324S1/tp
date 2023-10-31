@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.chart.PieChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.LineChart?>
+<?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="625.0" prefWidth="838.0" stylesheets="@Overview.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
@@ -16,23 +17,34 @@
          <children>
             <VBox prefHeight="625.0" prefWidth="315.0">
                <children>
-                  <StackPane fx:id="pickerContainer" prefHeight="80.0" prefWidth="315.0" />
-                  <Label text="Revenue" />
-                  <Label fx:id="revenueLabel" layoutX="40.0" layoutY="90.0" prefHeight="48.0" prefWidth="102.0" text="\$10000">
-                     <font>
-                        <Font size="24.0" />
-                     </font>
-                  </Label>
-                  <Label layoutX="40.0" layoutY="90.0" text="Expenses" />
-                  <Label fx:id="expensesLabel" layoutX="40.0" layoutY="132.0" prefHeight="45.0" prefWidth="109.0" text="\$6000">
-                     <font>
-                        <Font size="24.0" />
-                     </font>
-                  </Label>
-                  <PieChart fx:id="breakdownPieChart" prefHeight="248.0" prefWidth="315.0" title="Breakdown" />
+                  <StackPane fx:id="pickerContainer" prefHeight="80.0" prefWidth="315.0">
+                     <VBox.margin>
+                        <Insets bottom="16.0" />
+                     </VBox.margin></StackPane>
+                  <VBox style="-fx-background-color: #E5E4E2; -fx-background-radius: 10; -fx-border-radius: 10;">
+                     <children>
+                        <Label style="-fx-font-size: 18px;" text="Revenue" />
+                        <Label fx:id="revenueLabel" contentDisplay="BOTTOM" style="-fx-font-size: 28px;" text="\$10000" />
+                     </children>
+                     <padding>
+                        <Insets bottom="14.0" left="14.0" right="14.0" top="14.0" />
+                     </padding>
+                     <VBox.margin>
+                        <Insets bottom="16.0" />
+                     </VBox.margin>
+                  </VBox>
+                  <VBox style="-fx-background-color: #E5E4E2; -fx-background-radius: 10; -fx-border-radius: 10;">
+                     <padding>
+                        <Insets bottom="14.0" left="14.0" right="14.0" top="14.0" />
+                     </padding>
+                     <children>
+                        <Label style="-fx-font-size: 18px;" text="Expenses" />
+                        <Label fx:id="expensesLabel" style="-fx-font-size: 28px;" text="\$6000" />
+                     </children>
+                  </VBox>
                </children>
                <padding>
-                  <Insets left="30.0" right="30.0" />
+                  <Insets bottom="10.0" left="30.0" right="30.0" top="10.0" />
                </padding>
             </VBox>
             <Separator orientation="VERTICAL" prefHeight="200.0" />

@@ -76,7 +76,7 @@ public class EditTransactionCommand extends Command {
         }
 
         for (TransactionId id : model.getTransactionBook().getTransactionMap().keySet()) {
-            if (id.getValue() == transactionId) {
+            if (id.getValue().equals(transactionId)) {
                 Transaction transactionToEdit = model.getTransaction(id);
                 Transaction editedTransaction = createEditedTransaction(transactionToEdit, editTransactionDescriptor,
                         model);
