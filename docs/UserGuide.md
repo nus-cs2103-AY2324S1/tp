@@ -87,9 +87,9 @@ Format: `help`
 
 ![Help](images/screenshots/HelpWindow.png)
 
-### Adding a fosterer: `add`
+### Adding a fosterer through the main window: `add`
 
-Adds a fosterer to the address book.
+Adds a fosterer to the address book from the main window.
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS housing/HOUSING_TYPE availability/AVAILABILITY animal/ANIMAL_NAME animalType/TYPE_OF_ANIMAL [t/TAG]…`
 
@@ -146,6 +146,22 @@ In the case where duplicates field descriptions are given, the last one will be 
 
 ![Add](images/screenshots/AddSuccess.png)
 
+### Adding a fosterer through the profile page: `add`
+
+Adds a fosterer to the address book with information provided through the profile page.
+
+Format: `add`
+
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Notes about the command format:**<br>
+
+*  The UI generates a profile page where details of the fosterer are shown as `nil`.
+*  The respective field descriptions can be keyed in and saved by the user through the `save` command.
+*  Valid cases of a fosterer entry in the section 'Adding a fosterer through the main window' are still applied in this alternative way to add a fosterer.
+
+</div>
+
 ### Listing fosterers: `list` (Alias: `find`)
 
 Lists fosterers that match a particular description or search, or all fosterers if the search is blank.
@@ -171,6 +187,9 @@ Alias: `find`
 * Fosterers must match all keywords (i.e. `AND` search).<br>
   e.g. `Hans Bo` will return `Hansbo Grahm`, but not `Hans Duo`.
 
+* Use double quotes `"` for exact, case-sensitive, word-level match.<br>
+  e.g. `"Tom"` matches "Tom", but not "Tommy".
+
 * Symbols between keywords or sections will combine them according to the function of the symbol.<br>
 
 | Symbol / Operator | Description              | Precedence |
@@ -181,9 +200,6 @@ Alias: `find`
 | `(` and `)`       | Parentheses for grouping | -          |
 
   e.g. `a & b | c d` is the same as `a & (b | (c & d))`.
-
-* Use double quotes `"` for exact, case-sensitive, word-level match.<br>
-  e.g. `"Tom"` matches "Tom", but not "Tommy".
 
 </div>
 
@@ -197,7 +213,7 @@ Examples:
 * `list "John" | zam & doe`
   * lists entries which match "John Doe" and "Doe Shazam", but not "John Grahm".
 
-### Viewing a fosterer's detail : `view`
+### Viewing a fosterer's detail: `view`
 
 Views a fosterer's full details in the profile page.
 
@@ -247,19 +263,17 @@ Saves changes in details of the fosterer made in the profile page.
 
 Format: `save`
 
-### Editing a fosterer's detail : `edit`
+### Editing a fosterer's detail through the main window: `edit`
 
-Edits or views the details of a fosterer stored in the address book.
+Edits the details of a fosterer stored in the address book from the main window.
 
-Format 1: `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [housing/HOUSING_TYPE] [availability/AVAILABILITY] [animal/ANIMAL_NAME] [animalType/TYPE_OF_ANIMAL [t/TAG…]`
-
-Format 2: `edit INDEX`
+Format: `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [housing/HOUSING_TYPE] [availability/AVAILABILITY] [animal/ANIMAL_NAME] [animalType/TYPE_OF_ANIMAL] [t/TAG…]`
 
 Parameters:
 
 | Parameter        | About                                                                                                                                                                                                                                                                               | Example                                                     |
 |------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------|
-| `INDEX`          | - Index of a fosterer displayed in the list obtained from a `list`/`find` command <br/> - At least one index must be provided<br/> - Index must be a positive integer                                                                                                               | `1`, `2`, `3`                                               |
+| `INDEX`     | - The index of a fosterer displayed in the list obtained from a `list`/`find` command <br/> - At least one index must be provided<br/> - Index must be a positive integer | `1`, `2`, `3` |
 | `NAME`           | Updated name of the fosterer                                                                                                                                                                                                                                                        | `Alice Tan`, `Harry Yeo`                                    |
 | `PHONE_NUMBER`   | Updated Phone number of the fosterer                                                                                                                                                                                                                                                | `93456778`, `89067547`                                      |
 | `EMAIL`          | Updated email of the fosterer                                                                                                                                                                                                                                                       | `thomas718@gmail.com`, `kate@yahoo.com.sg`                  |
@@ -282,20 +296,6 @@ Parameters:
 <div markdown="span" class="alert alert-primary">
   :exclamation: <b>Important:</b> <br/>
 If the parameters are not provided, <b><code>edit INDEX</code> operates the same way as <code>view INDEX</code></b>, leading you to the profile page of the person at index <code>INDEX</code> in the addressbook. 
-</div> 
-<br>
-<div markdown="block" class="alert alert-info">
-
-**:information_source: Notes about the command format:**<br>
-
-For Format 2:
-*  The UI generates a window where details of the fosterer are shown.
-*  Aside from the details added by the add command, here is the list of fields the profile page shows:
-   * `NOTE` : Notes for the user, examples include but are not limited to (optional and non-exhaustive):
-     * Health condition of the animal
-     * Duration / end date of foster, whichever the foster manager prefers
-     * Identifiable physical traits of the animal
-
 </div>
 
 Examples:
@@ -305,6 +305,40 @@ Examples:
   * edits the phone number and the pet name of the 1st fosterer in the address book to 12345678 and Bob respectively.
 *  `find` or `list` followed by `edit 2` 
   * changes the view to the profile page of the 2nd fosterer in the address book since parameters are not provided.
+
+<div markdown="span" class="alert alert-warning">:exclamation: <b>Caution:</b><br/>
+Edit may cause information loss. 
+Before you type the save command, make sure there is no accidental overwrite with faulty information. 
+</div>
+
+
+### Editing a fosterer's detail through the profile page: `edit`
+
+Edits the details of a fosterer stored in the address book with updated information provided through the profile page.
+
+Format: `edit INDEX`
+
+Parameters:
+
+| Parameter | About                                                                                                                                                                     | Example |
+|-----------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------|
+| `INDEX`     | - The index of a fosterer displayed in the list obtained from a `list`/`find` command <br/> - At least one index must be provided<br/> - Index must be a positive integer | `1`, `2`, `3` |
+
+
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Notes about the command format:**<br>
+
+*  The UI generates a profile page where details of the fosterer are shown.
+*  Aside from the details added by the add command, here is the list of fields the profile page shows:
+* `NOTE` : Notes for the user, examples include but are not limited to (optional and non-exhaustive):
+  * Health condition of the animal
+  * Duration / end date of foster, whichever the foster manager prefers
+  * Identifiable physical traits of the animal
+*  The respective updated field descriptions can be keyed in and saved by the user through the `save` command.
+  * Please refer to the section 'Viewing a fosterer's detail: Editing a fosterer’s details in profile page' for the specific steps to do so.
+ 
+</div>
 
 <div markdown="span" class="alert alert-warning">:exclamation: <b>Caution:</b><br/>
 Edit may cause information loss. 
@@ -443,16 +477,19 @@ If your changes to the data file makes its format invalid, Foster Family will di
 
 ## Command summary
 
-| Action                                 | Format                                                                                                                                             | Examples                                                                                                                                                                |
-|----------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Help**                               | `help`                                                                                                                                             | -                                                                                                                                                                       |
-| **Add**                                | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS housing/HOUSING_TYPE availability/AVAILABILITY animal/ANIMAL_NAME animalType/TYPE_OF_ANIMAL [t/TAG]…` | `add n/Jerry Tan p/98765412 e/jerry123@example.com a/Baker street, block 5, #27-01 housing/HDB availability/NotAvailable animal/Dexter animalType/current.Cat t/Urgent` |
-| **List**  or **Find**                  | `list`, `find`                                                                                                                                     | `list`, `find`,  `list available`, `find available`                                                                                                                     |
-| **Edit**                               | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…`                                                                              | `edit 2 n/James Lee e/jameslee@example.com`                                                                                                                             |
-| **View Profile**                       | `view INDEX`                                                                                                                                       | `view 1`                                                                                                                                                                |
-| **Delete**                             | `delete INDEX [INDEX...]`                                                                                                                          | `delete 1 2 3`                                                                                                                                                          |
-| **Sort**                               | `sort`                                                                                                                                             | -                                                                                                                                                                       |
-| **View Available Fosterer Statistics** | `stats avail`                                                                                                                                      | -                                                                                                                                                                       |
-| **View Current Fosterer Statistics**   | `stats current`                                                                                                                                    | -                                                                                                                                                                       |
-| **View Housing Statistics**            | `stats housing`                                                                                                                                    | -                                                                                                                                                                       |
-| **Reset**                              | `reset`                                                                                                                                            | -                                                                                                                                                                       |
+| Action                                 | Format                                                                                                                                                                    | Examples                                                                                                                                                                |
+|----------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Help**                               | `help`                                                                                                                                                                    | -                                                                                                                                                                       |
+| **Add** from main window               | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS housing/HOUSING_TYPE availability/AVAILABILITY animal/ANIMAL_NAME animalType/TYPE_OF_ANIMAL [t/TAG]…`                        | `add n/Jerry Tan p/98765412 e/jerry123@example.com a/Baker street, block 5, #27-01 housing/HDB availability/NotAvailable animal/Dexter animalType/current.Cat t/Urgent` |
+| **Add** from profile page              | `add`                                                                                                                                                                     | -                                                                                                                                                                       |
+| **List**  or **Find**                  | `list`, `find`                                                                                                                                                            | `list`, `find`,  `list available`, `find available`                                                                                                                     |
+| **View Profile**                       | `view INDEX`                                                                                                                                                              | `view 1`                                                                                                                                                                |
+| **Save updated field descriptions**    | `save`                                                                                                                                                                    | -                                                                                                                                                                       |
+| **Edit** from main window              | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [housing/HOUSING_TYPE] [availability/AVAILABILITY] [animal/ANIMAL_NAME] [animalType/TYPE_OF_ANIMAL] [t/TAG…]` | `edit 2 n/James Lee e/jameslee@example.com`                                                                                                                             |
+| **Edit** from profile page             | `edit INDEX`                                                                                                                                                              | `edit 1`                                                                                                                                                                |
+| **Delete**                             | `delete INDEX [INDEX...]`                                                                                                                                                 | `delete 1 2 3`                                                                                                                                                          |
+| **Sort**                               | `sort`                                                                                                                                                                    | -                                                                                                                                                                       |
+| **View Available Fosterer Statistics** | `stats avail`                                                                                                                                                             | -                                                                                                                                                                       |
+| **View Current Fosterer Statistics**   | `stats current`                                                                                                                                                           | -                                                                                                                                                                       |
+| **View Housing Statistics**            | `stats housing`                                                                                                                                                           | -                                                                                                                                                                       |
+| **Reset**                              | `reset`                                                                                                                                                                   | -                                                                                                                                                                       |
