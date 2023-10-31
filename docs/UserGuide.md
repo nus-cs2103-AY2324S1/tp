@@ -235,10 +235,10 @@ solve 10
 
 #### Usage:
 1. User Input
-   ![usage of practise command](./images/UserGuide/1.3_solve.png)
+   ![usage of solve command](./images/UserGuide/1.3_solve.png)
 
 2. Successful Output
-   ![result of practise command](./images/UserGuide/1.3_solve_ans.png)
+   ![result of solve command](./images/UserGuide/1.3_solve_ans.png)
 
 
 ### Setting Difficulty of Flashcards: `set`
@@ -267,7 +267,7 @@ set 10 d/ easy
 
 #### Usage:
 1. User Input
-   ![usage of practise command](./images/UserGuide/1.3_set.png)
+   ![usage of set command](./images/UserGuide/1.3_set.png)
 
 2. Successful Output
-   ![result of practise command](./images/UserGuide/1.3_set_ans.png)
+   ![result of set command](./images/UserGuide/1.3_set_ans.png)
