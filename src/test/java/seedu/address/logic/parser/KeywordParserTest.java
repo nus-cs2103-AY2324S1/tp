@@ -2,7 +2,6 @@ package seedu.address.logic.parser;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import java.util.Arrays;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
@@ -65,14 +64,14 @@ public class KeywordParserTest {
     }
 
     @Test
-    public void parseInputWithICAndGender() {
+    public void parseInputWithIcAndGender() {
         String[] input = {"S1234567A", "M"};
         Predicate<Person> predicate = KeywordParser.parseInput(input);
         assertTrue(predicate instanceof IcContainsKeywordsPredicate);
     }
 
     @Test
-    public void parseInputWithICAndBloodType() {
+    public void parseInputWithIcAndBloodType() {
         String[] input = {"S1234567A", "A+"};
         Predicate<Person> predicate = KeywordParser.parseInput(input);
         assertTrue(predicate instanceof IcContainsKeywordsPredicate);
