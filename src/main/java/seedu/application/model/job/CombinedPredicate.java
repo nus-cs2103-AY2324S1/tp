@@ -35,7 +35,17 @@ public class CombinedPredicate implements Predicate<Job> {
         }
 
         CombinedPredicate otherCombinedPredicate = (CombinedPredicate) other;
-        return predicateList.equals(otherCombinedPredicate.predicateList);
+
+        if (otherCombinedPredicate.predicateList.size() != predicateList.size()) {
+            return false;
+        }
+
+        for (FieldContainsKeywordsPredicate p : predicateList) {
+            if (!otherCombinedPredicate.predicateList.contains(p)) {
+                return false;
+            }
+        }
+        return true;
     }
 
 }

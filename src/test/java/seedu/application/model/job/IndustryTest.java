@@ -33,8 +33,8 @@ class IndustryTest {
 
         // valid industries
         assertTrue(Industry.isValidIndustry("Farming"));
-        assertTrue(Industry.isValidIndustry("Health & Wellness")); // alphanumeric
-        assertTrue(Industry.isValidIndustry("Bitcoin 2")); // Industry with numbers
+        assertTrue(Industry.isValidIndustry("Health & Wellness")); // non-alphanumeric characters
+        assertTrue(Industry.isValidIndustry("Bitcoin 2")); // with numbers
     }
 
     @Test
