@@ -3,7 +3,6 @@ package seedu.address.model;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BOB;
@@ -238,7 +237,7 @@ public class ModelManagerTest {
         assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs)));
 
         // resets modelManager to initial state for upcoming tests
-        modelManager.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        modelManager = new ModelManager(addressBook, userPrefs);
 
         // different userPrefs -> returns false
         UserPrefs differentUserPrefs = new UserPrefs();
@@ -248,6 +247,9 @@ public class ModelManagerTest {
         // different Schedule List -> returns false
         modelManager.deleteSchedule(modelManager.getFilteredScheduleList().get(0));
         assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs)));
+
+        // resets modelManager to initial state for upcoming test
+        modelManager = new ModelManager(addressBook, userPrefs);
 
         // different Calendar Schedule List -> return false
         modelManager.updateFilteredCalendarScheduleList(
