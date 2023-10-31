@@ -66,13 +66,13 @@ public class FindCommand extends Command {
         }
 
         FindCommand otherFindCommand = (FindCommand) other;
-        return predicate.equals(otherFindCommand.predicate);
+        return trimmedArgs.equals(otherFindCommand.trimmedArgs);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("predicate", predicate)
+                .add("trimmed args", trimmedArgs)
                 .toString();
     }
 }

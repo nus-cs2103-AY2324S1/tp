@@ -41,7 +41,7 @@ public class ListCommand extends Command {
     }
 
     public ListCommand() {
-        this(State.NONE, new String[0]);
+        this(State.SCHEDULE, new String[0]);
     }
 
     public ListCommand(State state) {
@@ -51,15 +51,8 @@ public class ListCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-
-        switch (model.getState()) {
-        case STUDENT:
-            model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-            break;
-        case SCHEDULE:
-            model.updateFilteredScheduleList(PREDICATE_SHOW_ALL_LESSONS);
-            break;
-        }
+        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        model.updateFilteredScheduleList(PREDICATE_SHOW_ALL_LESSONS);
         if (model.sameState(state)) {
             return new CommandResult(MESSAGE_SUCCESS, displayParams);
         } else {

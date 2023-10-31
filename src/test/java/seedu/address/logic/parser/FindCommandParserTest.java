@@ -22,7 +22,7 @@ public class FindCommandParserTest {
     public void parse_validArgs_returnsFindCommand() {
         // no leading and trailing whitespaces
         FindCommand expectedFindCommand =
-                new FindCommand(new NameContainsKeywordsPredicate("Alice"));
+                new FindCommand("Alice");
         assertParseSuccess(parser, "Alice", expectedFindCommand);
     }
 
