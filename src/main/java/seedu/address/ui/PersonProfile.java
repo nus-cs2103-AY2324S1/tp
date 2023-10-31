@@ -45,9 +45,9 @@ public class PersonProfile extends UiPart<Region> {
 
     private static final String INVALID_VALUE = "Invalid value for field: ";
     private static final String FIELDS_ARE_INCOMPATIBLE = "Some fields are incompatible!";
-    private static final String AVAILABLE_NIL_TYPE_MUST_NIL = "For 'nil' Availability, Animal Type must also be 'nil'!";
-    private static final String AVAILABLE_NIL_NAME_MUST_NIL = "For 'nil' Availability, Animal Name must also be 'nil'!";
-    private static final String AVAILABLE_NAME_MUST_NIL = "If fosterer is 'Available', Animal Name must be 'nil'!";
+    private static final String AVAILABLE_NIL_TYPE_MUST_NIL = "For 'nil' Availability, Animal Type must also be 'nil'.";
+    private static final String AVAILABLE_NIL_NAME_MUST_NIL = "For 'nil' Availability, Animal Name must also be 'nil'.";
+    private static final String AVAILABLE_NAME_MUST_NIL = "If fosterer is 'Available', Animal Name must be 'nil'.";
     private static final String AVAILABLE_TYPE_MUST_ABLE_OR_NIL =
             "If fosterer is 'Available', Animal Type must either be 'nil', or start with 'able'.";
     private static final String NOT_AVAILABLE_NAME_TYPE_BOTH_SAME =
@@ -234,9 +234,9 @@ public class PersonProfile extends UiPart<Region> {
         Name animalName;
 
         try {
-            availability = new Availability(fields.get(Field.AVAILABILITY));
-            animalName = new Name(fields.get(Field.ANIMAL_NAME));
-        } catch (IllegalArgumentException ignored) {
+            availability = new Availability(getNonNullOrNil(fields.get(Field.AVAILABILITY)));
+            animalName = new Name(getNonNullOrNil(fields.get(Field.ANIMAL_NAME)));
+        } catch (Exception ignored) {
             sendUnexpectedError();
             return true;
         }
@@ -246,8 +246,8 @@ public class PersonProfile extends UiPart<Region> {
         }
 
         try {
-            new AnimalType(fields.get(Field.ANIMAL_TYPE), availability);
-        } catch (IllegalArgumentException ignored) {
+            new AnimalType(getNonNullOrNil(fields.get(Field.ANIMAL_TYPE)), availability);
+        } catch (Exception ignored) {
             sendUnexpectedError();
             return true;
         }
@@ -324,6 +324,13 @@ public class PersonProfile extends UiPart<Region> {
 
     private boolean isNullOrNil(String string) {
         return string == null || string.equals("nil");
+    }
+
+    private String getNonNullOrNil(String string) {
+        if (string == null) {
+            return "nil";
+        }
+        return string;
     }
 
     // endregion
