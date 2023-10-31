@@ -72,7 +72,7 @@ public class AddressBookParser {
         // log messages such as the one below.
         // Lower level log messages are used sparingly to minimize noise in the code.
         logger.fine("Command word: " + commandWord + "; Arguments: " + arguments);
-
+        userInput = commandWord + " " + arguments;
         switch (commandWord) {
 
         case AddPersonCommand.COMMAND_WORD:
