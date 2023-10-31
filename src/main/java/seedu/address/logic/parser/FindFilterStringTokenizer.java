@@ -53,10 +53,33 @@ public class FindFilterStringTokenizer {
                 StringBuilder sb = new StringBuilder();
                 while (pos < filterString.length() && isPartOfCondition(peek())) {
                     sb.append(next());
+
+                    // When a '/' is encountered, determine the next part of the condition.
+                    if (sb.charAt(sb.length() - 1) == '/' && peek() == '\"') {
+                        sb.append(next()); // Consume the opening double-quote
+
+                        while (pos < filterString.length() && peek() != '\"') {
+                            sb.append(next());
+                        }
+
+                        if (peek() == '\"') {
+                            sb.append(next()); // Consume the closing double-quote
+                        } else {
+                            throw new ParseException("Invalid filter string: "
+                                    + "Unmatched double-quote in filter string!");
+                        }
+
+                        // Check that the closing double-quote is the end of the condition
+                        if (sb.charAt(sb.length() - 1) == '\"' && isPartOfCondition(peek())) {
+                            throw new ParseException("Invalid filter string: "
+                                    + "Closing double-quote should be the end of condition!");
+                        }
+                    }
+
                 }
                 tokens.add(new Token(Token.Type.CONDITION, sb.toString()));
             } else {
-                throw new ParseException("Find command received an invalid filter string!");
+                throw new ParseException("Invalid filter string: Syntax error!");
             }
         }
 
@@ -65,7 +88,8 @@ public class FindFilterStringTokenizer {
 
     private boolean isPartOfCondition(char c) {
         return Character.isLetterOrDigit(c)
-                || c == '/' || c == ',' || c == '@' || c == '.' || c == '-' || c == '_' || c == '#';
+                || c == '/' || c == ',' || c == '@' || c == '.' || c == '-'
+                || c == '_' || c == '#' || c == '$' || c == '\"';
     }
 
     private char next() {
