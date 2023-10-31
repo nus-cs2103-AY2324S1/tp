@@ -46,7 +46,7 @@ Person *--> Phone
 Person *--> Email
 AddressBook *--> "1" UniqueScheduleList
 UniqueScheduleList --> "~* all" Schedule
-Schedule *--> Person
+Schedule o--> Person
 Schedule *--> StartTime
 Schedule *--> EndTime
 Schedule *--> Status
