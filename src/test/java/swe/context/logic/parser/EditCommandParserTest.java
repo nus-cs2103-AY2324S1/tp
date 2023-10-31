@@ -62,6 +62,12 @@ public class EditCommandParserTest {
             "1" + TestData.Invalid.Tag.FLAG_HASHTAG,
             Messages.tagInvalid(TestData.Invalid.Tag.HASHTAG)
         );
+        // Invalid alternate contact
+        assertParseFailure(
+                parser,
+                "1" + TestData.Invalid.AlternateContact.FLAG_MISSING_SYMBOL,
+                Messages.alternateContactInvalid(TestData.Invalid.AlternateContact.MISSING_SYMBOL)
+        );
 
         // invalid phone followed by valid email
         assertParseFailure(parser,
@@ -97,6 +103,33 @@ public class EditCommandParserTest {
             Messages.tagInvalid("")
         );
 
+        // while parsing {@code PREFIX_TAG} alone will reset the tags of the {@code Contact} being edited,
+        // parsing it together with a valid tag results in error
+        assertParseFailure(
+                parser,
+                "1"
+                        + TestData.Valid.AlternateContact.FLAG
+                        + TestData.Valid.AlternateContact.FLAG_ALPHANUMERIC
+                        + TestData.Valid.AlternateContact.FLAG_ALPHANUMERIC_UNDERSCORE,
+                Messages.alternateContactInvalid("")
+        );
+        assertParseFailure(
+                parser,
+                "1"
+                        + TestData.Valid.AlternateContact.FLAG_ALPHANUMERIC
+                        + TestData.Valid.AlternateContact.FLAG
+                        + TestData.Valid.AlternateContact.FLAG_ALPHANUMERIC_UNDERSCORE,
+                Messages.alternateContactInvalid("")
+        );
+        assertParseFailure(
+                parser,
+                "1"
+                        + TestData.Valid.AlternateContact.FLAG_ALPHANUMERIC
+                        + TestData.Valid.AlternateContact.FLAG_ALPHANUMERIC_UNDERSCORE
+                        + TestData.Valid.AlternateContact.FLAG,
+                Messages.alternateContactInvalid("")
+        );
+
         // multiple invalid values, but only the first invalid value is captured
         assertParseFailure(parser,
                 "1"
@@ -113,10 +146,12 @@ public class EditCommandParserTest {
         String userInput = targetIndex.getOneBased()
                 + TestData.Valid.PHONE_DESC_BOB
                 + TestData.Valid.Tag.FLAG_ALPHANUMERIC
+                + TestData.Valid.AlternateContact.FLAG_ALPHANUMERIC
                 + TestData.Valid.EMAIL_DESC_AMY
                 + TestData.Valid.NOTE_DESC_AMY
                 + TestData.Valid.NAME_DESC_AMY
-                + TestData.Valid.Tag.FLAG_ALPHANUMERIC_SPACES;
+                + TestData.Valid.Tag.FLAG_ALPHANUMERIC_SPACES
+                + TestData.Valid.AlternateContact.FLAG_ALPHANUMERIC_UNDERSCORE;
 
         EditContactDescriptor descriptor =
                 new EditContactDescriptorBuilder()
@@ -124,7 +159,9 @@ public class EditCommandParserTest {
                         .withPhone(TestData.Valid.PHONE_BOB)
                         .withEmail(TestData.Valid.EMAIL_AMY)
                         .withNote(TestData.Valid.NOTE_AMY)
-                        .withTags(TestData.Valid.Tag.ALPHANUMERIC, TestData.Valid.Tag.ALPHANUMERIC_SPACES).build();
+                        .withTags(TestData.Valid.Tag.ALPHANUMERIC, TestData.Valid.Tag.ALPHANUMERIC_SPACES)
+                        .withAlternateContacts(TestData.Valid.AlternateContact.ALPHANUMERIC,
+                                TestData.Valid.AlternateContact.ALPHANUMERIC_UNDERSCORE).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);
@@ -174,6 +211,13 @@ public class EditCommandParserTest {
         descriptor = new EditContactDescriptorBuilder().withTags(TestData.Valid.Tag.ALPHANUMERIC).build();
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
+
+        // alternate contacts
+        userInput = targetIndex.getOneBased() + TestData.Valid.AlternateContact.FLAG_ALPHANUMERIC;
+        descriptor = new EditContactDescriptorBuilder()
+                .withAlternateContacts(TestData.Valid.AlternateContact.ALPHANUMERIC).build();
+        expectedCommand = new EditCommand(targetIndex, descriptor);
+        assertParseSuccess(parser, userInput, expectedCommand);
     }
 
     @Test
@@ -192,20 +236,23 @@ public class EditCommandParserTest {
 
         assertParseFailure(parser, userInput, ArgumentMultimap.getErrorMessageForDuplicatePrefixes(PREFIX_PHONE));
 
-        // Duplicated valid tag
+        // Duplicated valid tag and alternate contact
         userInput = targetIndex.getOneBased()
                 + TestData.Valid.PHONE_DESC_AMY
                 + TestData.Valid.NOTE_DESC_AMY
                 + TestData.Valid.EMAIL_DESC_AMY
                 + TestData.Valid.Tag.FLAG_ALPHANUMERIC
+                + TestData.Valid.AlternateContact.FLAG_ALPHANUMERIC
                 + TestData.Valid.PHONE_DESC_AMY
                 + TestData.Valid.NOTE_DESC_AMY
                 + TestData.Valid.EMAIL_DESC_AMY
                 + TestData.Valid.Tag.FLAG_ALPHANUMERIC
+                + TestData.Valid.AlternateContact.FLAG_ALPHANUMERIC
                 + TestData.Valid.PHONE_DESC_BOB
                 + TestData.Valid.NOTE_DESC_BOB
                 + TestData.Valid.EMAIL_DESC_BOB
-                + TestData.Valid.Tag.FLAG_ALPHANUMERIC_SPACES;
+                + TestData.Valid.Tag.FLAG_ALPHANUMERIC_SPACES
+                + TestData.Valid.AlternateContact.FLAG_ALPHANUMERIC_UNDERSCORE;
 
         assertParseFailure(parser, userInput,
             ArgumentMultimap.getErrorMessageForDuplicatePrefixes(PREFIX_PHONE, PREFIX_EMAIL, PREFIX_NOTE));
@@ -229,6 +276,17 @@ public class EditCommandParserTest {
         String userInput = targetIndex.getOneBased() + TestData.Valid.Tag.FLAG;
 
         EditContactDescriptor descriptor = new EditContactDescriptorBuilder().withTags().build();
+        EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
+
+        assertParseSuccess(parser, userInput, expectedCommand);
+    }
+
+    @Test
+    public void parse_resetAlternateContacts_success() {
+        Index targetIndex = TestData.IndexContact.THIRD_CONTACT;
+        String userInput = targetIndex.getOneBased() + TestData.Valid.AlternateContact.FLAG;
+
+        EditContactDescriptor descriptor = new EditContactDescriptorBuilder().withAlternateContacts().build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);

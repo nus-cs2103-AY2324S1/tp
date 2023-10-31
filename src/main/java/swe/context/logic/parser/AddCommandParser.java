@@ -1,5 +1,6 @@
 package swe.context.logic.parser;
 
+import static swe.context.logic.parser.CliSyntax.PREFIX_ALTERNATE;
 import static swe.context.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static swe.context.logic.parser.CliSyntax.PREFIX_NAME;
 import static swe.context.logic.parser.CliSyntax.PREFIX_NOTE;
@@ -13,6 +14,7 @@ import java.util.stream.Stream;
 import swe.context.logic.Messages;
 import swe.context.logic.commands.AddCommand;
 import swe.context.logic.parser.exceptions.ParseException;
+import swe.context.model.alternate.AlternateContact;
 import swe.context.model.contact.Contact;
 import swe.context.model.contact.Email;
 import swe.context.model.contact.Name;
@@ -40,14 +42,16 @@ public class AddCommandParser implements Parser<AddCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public AddCommand parse(String args) throws ParseException {
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(
-            args,
-            PREFIX_NAME,
-            PREFIX_PHONE,
-            PREFIX_EMAIL,
-            PREFIX_NOTE,
-            PREFIX_TAG
-        );
+        ArgumentMultimap argMultimap =
+                ArgumentTokenizer.tokenize(
+                        args,
+                        PREFIX_NAME,
+                        PREFIX_PHONE,
+                        PREFIX_EMAIL,
+                        PREFIX_NOTE,
+                        PREFIX_TAG,
+                        PREFIX_ALTERNATE
+                );
 
         if (
             !arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL)
@@ -64,13 +68,15 @@ public class AddCommandParser implements Parser<AddCommand> {
         Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
+        Set<AlternateContact> alternateContactList =
+                ParserUtil.parseAlternates(argMultimap.getAllValues(PREFIX_ALTERNATE));
 
         // Default to empty note
         Optional<String> noteOptional = argMultimap.getValue(PREFIX_NOTE);
         String noteString = noteOptional.orElse("");
         Note note = ParserUtil.parseNote(noteString);
 
-        Contact contact = new Contact(name, phone, email, note, tagList);
+        Contact contact = new Contact(name, phone, email, note, tagList, alternateContactList);
         return new AddCommand(contact);
     }
 }

@@ -1,26 +1,30 @@
-package swe.context.model.tag;
+package swe.context.model.alternate;
 
 import swe.context.model.contact.Contact;
-import swe.context.model.contact.Name;
-
 
 
 /**
- * Immutably represents a {@link Contact}'s tag.
+ * Immutably represents a {@link Contact}'s AlternateContact.
  *
  * Constructor arguments must be valid as determined by
  * {@link #isValid(String)}.
  */
-public final class Tag {
+public final class AlternateContact {
+    /*
+     * Requires a form similar to example_email@foo-domain.sg.
+     */
+    public static final String REGEX_VALID =
+            "^[a-zA-Z\\d]+(?:[a-zA-Z\\d]+)*" + "@(?:[a-zA-Z\\d]+(?:[+_.-][a-zA-Z\\d]+)*)+";
+
     public final String value;
 
     /**
      * Returns whether the specified value is valid.
      *
-     * Tags must be an alphanumeric and may contain spaces, but cannot start with a space.
+     * Alternate Contacts must roughly be of the form social-media@name.
      */
     public static boolean isValid(String value) {
-        return value.matches(Name.REGEX_VALID);
+        return value.matches(REGEX_VALID);
     }
 
     /**
@@ -29,7 +33,7 @@ public final class Tag {
      * Constructor arguments must be valid as determined by
      * {@link #isValid(String)}.
      */
-    public Tag(String value) {
+    public AlternateContact(String value) {
         this.value = value;
     }
 
@@ -45,12 +49,12 @@ public final class Tag {
         }
 
         // instanceof also handles nulls
-        if (!(other instanceof Tag)) {
+        if (!(other instanceof AlternateContact)) {
             return false;
         }
-        Tag otherTag = (Tag) other;
+        AlternateContact otherAlternateContact = (AlternateContact) other;
 
-        return this.value.equals(otherTag.value);
+        return this.value.equals(otherAlternateContact.value);
     }
 
     @Override

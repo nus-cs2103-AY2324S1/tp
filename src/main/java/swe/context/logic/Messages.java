@@ -43,6 +43,10 @@ public final class Messages {
     private static final String UNFORMATTED_TAG_INVALID =
             "\"%s\" is not a valid tag. Tags must be alphanumeric (spaces allowed).";
 
+    private static final String UNFORMATTED_ALTERNATECONTACT_INVALID =
+            "\"%s\" is not a valid alternate contact. "
+            + "Alternate contacts must roughly be of the form \"socialMedia@name\"";
+
     // JSON
     public static final String CONVERT_CONTACTS_DUPLICATE = "Encountered duplicate while converting contacts.";
 
@@ -123,6 +127,14 @@ public final class Messages {
      */
     public static String fieldMissing(String fieldName) {
         return String.format(UNFORMATTED_FIELD_MISSING, fieldName);
+    }
+
+    /**
+     * Returns a formatted message about the specified alternate contact being invalid.
+     */
+    public static String alternateContactInvalid(String invalid) {
+        return String.format(
+                Messages.UNFORMATTED_ALTERNATECONTACT_INVALID, invalid);
     }
 
     private Messages() {
