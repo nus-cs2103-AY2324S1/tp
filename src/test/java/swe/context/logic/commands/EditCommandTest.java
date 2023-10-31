@@ -34,7 +34,7 @@ public class EditCommandTest {
         EditContactDescriptor descriptor = new EditContactDescriptorBuilder(editedContact).build();
         EditCommand editCommand = new EditCommand(TestData.IndexContact.FIRST_CONTACT, descriptor);
 
-        String expectedMessage = String.format(Messages.EDIT_COMMAND_SUCCESS, Contact.format(editedContact));
+        String expectedMessage = Messages.editCommandSuccess(Contact.format(editedContact));
 
         Model expectedModel = new ModelManager(new Contacts(model.getContacts()), new Settings());
         expectedModel.updateContact(model.getFilteredContactList().get(0), editedContact);
@@ -55,7 +55,7 @@ public class EditCommandTest {
                 .withPhone(TestData.Valid.PHONE_BOB).withTags(TestData.Valid.Tag.ALPHANUMERIC_SPACES).build();
         EditCommand editCommand = new EditCommand(indexLastContact, descriptor);
 
-        String expectedMessage = String.format(Messages.EDIT_COMMAND_SUCCESS, Contact.format(editedContact));
+        String expectedMessage = Messages.editCommandSuccess(Contact.format(editedContact));
 
         Model expectedModel = new ModelManager(new Contacts(model.getContacts()), new Settings());
         expectedModel.updateContact(lastContact, editedContact);
@@ -68,7 +68,7 @@ public class EditCommandTest {
         EditCommand editCommand = new EditCommand(TestData.IndexContact.FIRST_CONTACT, new EditContactDescriptor());
         Contact editedContact = model.getFilteredContactList().get(TestData.IndexContact.FIRST_CONTACT.getZeroBased());
 
-        String expectedMessage = String.format(Messages.EDIT_COMMAND_SUCCESS, Contact.format(editedContact));
+        String expectedMessage = Messages.editCommandSuccess(Contact.format(editedContact));
 
         Model expectedModel = new ModelManager(new Contacts(model.getContacts()), new Settings());
 
@@ -85,7 +85,7 @@ public class EditCommandTest {
         EditCommand editCommand = new EditCommand(TestData.IndexContact.FIRST_CONTACT,
                 new EditContactDescriptorBuilder().withName(TestData.Valid.NAME_BOB).build());
 
-        String expectedMessage = String.format(Messages.EDIT_COMMAND_SUCCESS, Contact.format(editedContact));
+        String expectedMessage = Messages.editCommandSuccess(Contact.format(editedContact));
 
         Model expectedModel = new ModelManager(new Contacts(model.getContacts()), new Settings());
         expectedModel.updateContact(model.getFilteredContactList().get(0), editedContact);

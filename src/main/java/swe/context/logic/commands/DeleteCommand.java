@@ -56,7 +56,7 @@ public class DeleteCommand extends Command {
                 .map(Contact::format)
                 .collect(Collectors.joining(",\n"));
 
-        return new CommandResult(String.format(Messages.DELETE_COMMAND_SUCCESS, formattedContacts));
+        return new CommandResult(Messages.deleteCommandSuccess(formattedContacts));
     }
 
     @Override

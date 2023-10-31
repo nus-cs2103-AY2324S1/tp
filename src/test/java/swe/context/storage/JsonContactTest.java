@@ -45,7 +45,7 @@ public class JsonContactTest {
     @Test
     public void toModelType_nullName_throwsIllegalValueException() {
         JsonContact contact = new JsonContact(null, VALID_PHONE, VALID_EMAIL, VALID_NOTE, VALID_TAGS);
-        String expectedMessage = String.format(Messages.FIELD_MISSING, Name.class.getSimpleName());
+        String expectedMessage = Messages.fieldMissing(Name.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, contact::toModelType);
     }
 
@@ -60,7 +60,7 @@ public class JsonContactTest {
     @Test
     public void toModelType_nullPhone_throwsIllegalValueException() {
         JsonContact contact = new JsonContact(VALID_NAME, null, VALID_EMAIL, VALID_NOTE, VALID_TAGS);
-        String expectedMessage = String.format(Messages.FIELD_MISSING, Phone.class.getSimpleName());
+        String expectedMessage = Messages.fieldMissing(Phone.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, contact::toModelType);
     }
 
@@ -75,14 +75,14 @@ public class JsonContactTest {
     @Test
     public void toModelType_nullEmail_throwsIllegalValueException() {
         JsonContact contact = new JsonContact(VALID_NAME, VALID_PHONE, null, VALID_NOTE, VALID_TAGS);
-        String expectedMessage = String.format(Messages.FIELD_MISSING, Email.class.getSimpleName());
+        String expectedMessage = Messages.fieldMissing(Email.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, contact::toModelType);
     }
 
     @Test
     public void toModelType_nullAddress_throwsIllegalValueException() {
         JsonContact contact = new JsonContact(VALID_NAME, VALID_PHONE, VALID_EMAIL, null, VALID_TAGS);
-        String expectedMessage = String.format(Messages.FIELD_MISSING, Note.class.getSimpleName());
+        String expectedMessage = Messages.fieldMissing(Note.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, contact::toModelType);
     }
 

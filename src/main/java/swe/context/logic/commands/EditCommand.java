@@ -82,7 +82,7 @@ public class EditCommand extends Command {
 
         model.updateContact(contactToEdit, editedContact);
         model.setContactsFilter(ModelManager.FILTER_NONE);
-        return new CommandResult(String.format(Messages.EDIT_COMMAND_SUCCESS, Contact.format(editedContact)));
+        return new CommandResult(Messages.editCommandSuccess(Contact.format(editedContact)));
     }
 
     /**

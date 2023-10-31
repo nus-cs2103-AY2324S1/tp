@@ -53,7 +53,7 @@ public class FilterCommandTest {
 
     @Test
     public void execute_zeroKeywords_noContactFound() {
-        String expectedMessage = String.format(Messages.CONTACTS_LISTED_OVERVIEW, 0);
+        String expectedMessage = Messages.contactsListedOverview(0);
         ContainsTagPredicate predicate = preparePredicate(" ");
         FilterCommand command = new FilterCommand(predicate);
         expectedModel.setContactsFilter(predicate);
@@ -63,7 +63,7 @@ public class FilterCommandTest {
 
     @Test
     public void execute_multipleKeywords_multipleContactsFound() {
-        String expectedMessage = String.format(Messages.CONTACTS_LISTED_OVERVIEW, 3);
+        String expectedMessage = Messages.contactsListedOverview(3);
         ContainsTagPredicate predicate = preparePredicate("Friends");
         FilterCommand command = new FilterCommand(predicate);
         expectedModel.setContactsFilter(predicate);

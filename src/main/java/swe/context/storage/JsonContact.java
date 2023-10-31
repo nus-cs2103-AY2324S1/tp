@@ -80,7 +80,7 @@ class JsonContact {
         }
 
         if (name == null) {
-            throw new IllegalValueException(String.format(Messages.FIELD_MISSING, Name.class.getSimpleName()));
+            throw new IllegalValueException(Messages.fieldMissing(Name.class.getSimpleName()));
         }
         if (!Name.isValid(name)) {
             throw new IllegalValueException(Messages.NAME_INVALID);
@@ -88,7 +88,7 @@ class JsonContact {
         final Name modelName = new Name(name);
 
         if (phone == null) {
-            throw new IllegalValueException(String.format(Messages.FIELD_MISSING, Phone.class.getSimpleName()));
+            throw new IllegalValueException(Messages.fieldMissing(Phone.class.getSimpleName()));
         }
         if (!Phone.isValid(phone)) {
             throw new IllegalValueException(Messages.PHONE_INVALID);
@@ -96,7 +96,7 @@ class JsonContact {
         final Phone modelPhone = new Phone(phone);
 
         if (email == null) {
-            throw new IllegalValueException(String.format(Messages.FIELD_MISSING, Email.class.getSimpleName()));
+            throw new IllegalValueException(Messages.fieldMissing(Email.class.getSimpleName()));
         }
         if (!Email.isValid(email)) {
             throw new IllegalValueException(Messages.EMAIL_INVALID);
@@ -104,7 +104,7 @@ class JsonContact {
         final Email modelEmail = new Email(email);
 
         if (this.note == null) {
-            throw new IllegalValueException(String.format(Messages.FIELD_MISSING, Note.class.getSimpleName()));
+            throw new IllegalValueException(Messages.fieldMissing(Note.class.getSimpleName()));
         }
         final Note modelNote = new Note(this.note);
 
