@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.*;
 
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -20,8 +21,13 @@ public class OvertimeCommand extends Command{
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Increases the overtime hours of an employee by the specified amount.\n"
-            + "Parameters: ID (must be in the exact EID format) AMOUNT (must be a positive integer)\n"
-            + "Example: " + COMMAND_WORD + " EID1234-5678 2";
+            + "Parameters: " + PREFIX_ID + "ID (must be in the exact EID format) "
+            + PREFIX_OPERATION + "OPERATION "
+            + PREFIX_AMOUNT + "AMOUNT (must be a positive integer)\n"
+            + "Example: " + COMMAND_WORD + " "
+            + PREFIX_ID + " EID1234-5678 "
+            + PREFIX_OPERATION + "inc "
+            + PREFIX_AMOUNT + "2";
 
     public static final String MESSAGE_OVERTIME_EMPLOYEE_SUCCESS = "Overtime hours of employee %1$s increased by %2$s";
 
