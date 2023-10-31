@@ -18,6 +18,7 @@ import seedu.address.model.appointment.Appointment;
 import seedu.address.model.appointment.AppointmentDescription;
 import seedu.address.model.appointment.AppointmentTime;
 import seedu.address.model.person.Person;
+import seedu.address.model.tag.PriorityTag;
 
 /**
  * Reschedules an existing appointment
@@ -90,7 +91,9 @@ public class RescheduleCommand extends Command {
 
         Person patient = appointmentToReschedule.getPerson();
         AppointmentDescription description = appointmentToReschedule.getAppointmentDescription();
-        return new Appointment(patient, newTime, description);
+        PriorityTag priorityTag = appointmentToReschedule.getPriorityTag();
+
+        return new Appointment(patient, newTime, description, priorityTag);
     }
     @Override
     public boolean equals(Object other) {

@@ -54,6 +54,6 @@ public class PriorityTag extends Tag {
      * Format state as text for viewing.
      */
     public String toString() {
-        return '[' + priority + ']';
+        return priority;
     }
 }
