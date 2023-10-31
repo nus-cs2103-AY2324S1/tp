@@ -8,7 +8,7 @@ It is optimised for use via a **Command Line Interface** (CLI) while still havin
 If you can type fast, WellNUS can get your contact management tasks done faster than traditional GUI apps.
 
 * Table of Contents
-  {:toc}
+{:toc}
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -18,20 +18,19 @@ If you can type fast, WellNUS can get your contact management tasks done faster 
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-1. Download the latest `wellnus.jar` from [here](https://github.com/AY2324S1-CS2103T-W13-4/tp).
+2. Download the latest `wellnus.jar` from [here](https://github.com/AY2324S1-CS2103T-W13-4/tp).
 
-1. Copy the file to the folder you want to use as the _home folder_ for WellNUS.
+3. Copy the file to the folder you want to use as the _home folder_ for WellNUS.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar wellnus.jar` command to run the application.<br>
+4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar wellnus.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
    * `exit` : Exits the app.
-
-1. Refer to the [Features](#features) below for details of each command.
+6. Refer to the [Features](#features) below for details of each command.
 
 #### 1.2 Prefixes and parameters used in commands
 
@@ -131,6 +130,7 @@ Student Name: Roy Lee
 * "find Ro" does not work
 * "find Le" does not work
 * "find Roy L" does not work
+
 ### 2.2.6 Assigning risk status to student (to be implemented)
 
 Tags a student with a risk level based on their current mental health status, categorizing them as high, medium, low tag_student <index> <RISK_LEVEL>
@@ -149,13 +149,20 @@ Format: `tag_student <INDEX> <RISK_LEVEL>`
 
 Schedules a new appointment for a student.
 
-Format: `schedule d/DESCRIPTION s/DATETIME n/STUDENT`
+Format: `schedule n/NAME_OF_STUDENT date/DATE from/START_TIME to/END_TIME d/DESCRIPTION`
 
 **Parameters**:
-1. Date/Time of appointment
-   - Must be in one of the following formats: `yyyy-MM-dd HH:mm`, or `HH:mm`. If in `HH:mm` the appointment date is set on the date of creation
-2. Name
-   - Alphabetical characters only
+1. Name
+    - Alphabetical characters only
+2. Date
+    - Date should follow yyyy-MM-dd format
+3. Start time
+    - Time should follow HH:mm
+4. End time 
+    - Time should follow HH:mm
+5. Description 
+    - Description should have a minimum length of 1 character and maximum length of 100 characters
+
 
 Examples:
 - `schedule d/monthly check-up s/2023-12-31 16:30 n/Jon`
@@ -195,7 +202,7 @@ Format: `exit`
 
 #### 2.4.2 Clearing storage: `clear`
 
-### 2.4.3 Saving the data
+#### 2.4.3 Saving the data
 
 WellNUS data is saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
@@ -227,19 +234,19 @@ _Details coming soon ..._
 
 ## 5. Command summary
 
-| Action                     | Format, Examples                                                                                                       |
-|----------------------------|------------------------------------------------------------------------------------------------------------------------|
-| [Add Student]()            | `add n/NAME c/PHONE_NUMBER a/ADDRESS` <br> e.g., `add n/John c/81349705 a/Yishun Street 56 Blk 21 #05-07`              |
-| [Delete Student]()         | `delete INDEX`<br> e.g., `delete 3`                                                                                    |
-| [Add Student Note]()       | `note INDEX note/[NOTE]` <br> e.g., `note 1 note/Likes dogs`                                                           |
-| [Edit Student]()           |                                                                                                                        |
-| [View Students]()          |                                                                                                                        |
-| [Find Students]()          |                                                                                                                        |
-| [Assign Risk to Student]() | `tag_student INDEX RISK_LEVEL`<br> e.g.,`tag_student 4 HIGH`                                                           |
-| [Schedule Appointment]()   | `schedule d/DESCRIPTION s/DATETIME n/NAME_OF_STUDENT`<br> e.g., `schedule d/monthly check-up s/2023-12-31 16:30 n/Jon` |
-| [Cancel Appointment]()     | `cancel INDEX`<br> e.g., `cancel 3`                                                                                    |
-| [View Appointments]()      | `view g/CATEGORY` <br> e.g., `view g/appointments`                                                                     |
-| [Filter Appointments]()    |                                                                                                                        |
-| [Help]()                   | `help`                                                                                                                 |
-| [Exit]()                   | `exit`                                                                                                                 |
+| Action                     | Format, Examples                                                                                                                                                      |
+|----------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| [Add Student]()            | `add n/NAME c/PHONE_NUMBER a/ADDRESS` <br> e.g., `add n/John c/81349705 a/Yishun Street 56 Blk 21 #05-07`                                                             |
+| [Delete Student]()         | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                   |
+| [Add Student Note]()       | `note INDEX note/[NOTE]` <br> e.g., `note 1 note/Likes dogs`                                                                                                          |
+| [Edit Student]()           |                                                                                                                                                                       |
+| [View Students]()          |                                                                                                                                                                       |
+| [Find Students]()          |                                                                                                                                                                       |
+| [Assign Risk to Student]() | `tag_student INDEX RISK_LEVEL`<br> e.g.,`tag_student 4 HIGH`                                                                                                          |
+| [Schedule Appointment]()   | `schedule n/NAME_OF_STUDENT date/DATE from/START_TIME to/END_TIME d/DESCRIPTION`<br> e.g., `schedule n/John Doe date/2023-12-31 from/16:30 to/17:30 d/First Session`  |
+| [Cancel Appointment]()     | `cancel INDEX`<br> e.g., `cancel 3`                                                                                                                                   |
+| [View Appointments]()      | `view g/CATEGORY` <br> e.g., `view g/appointments`                                                                                                                    |
+| [Filter Appointments]()    | `filter DATE` <br> e.g., `filter 2023-10-16`                                                                                                                          |
+| [Help]()                   | `help`                                                                                                                                                                |
+| [Exit]()                   | `exit`                                                                                                                                                                |
 
