@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_LESSONS;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.Arrays;
@@ -40,7 +41,7 @@ public class ListCommand extends Command {
     }
 
     public ListCommand() {
-        this(State.NONE, new String[0]);
+        this(State.SCHEDULE, new String[0]);
     }
 
     public ListCommand(State state) {
@@ -51,6 +52,7 @@ public class ListCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        model.updateFilteredScheduleList(PREDICATE_SHOW_ALL_LESSONS);
         if (model.sameState(state)) {
             return new CommandResult(MESSAGE_SUCCESS, displayParams);
         } else {

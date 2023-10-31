@@ -28,6 +28,9 @@ public class LessonDetailListPanel extends UiPart<Region> {
     private TextField date;
 
     @FXML
+    private TextField lessonName;
+
+    @FXML
     private TextField startTime;
 
     @FXML
@@ -60,6 +63,7 @@ public class LessonDetailListPanel extends UiPart<Region> {
      * @param lesson The lesson whose details are to be shown.
      */
     public void setLessonDetails(Lesson lesson) {
+        lessonName.setText(lesson.getLessonNameStr());
         date.setText(lesson.getLessonDateStr());
         startTime.setText(lesson.getStart().toString());
         endTime.setText(lesson.getEnd().toString());

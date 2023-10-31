@@ -20,7 +20,7 @@ import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.ModelManager;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
+
 
 public class AddressBookParserTest {
 
@@ -74,7 +74,7 @@ public class AddressBookParserTest {
         String keyword = "foo";
         FindCommand command = (FindCommand) parser.parseCommand(
                 FindCommand.COMMAND_WORD + " " + keyword);
-        assertEquals(new FindCommand(new NameContainsKeywordsPredicate(keyword)), command);
+        assertEquals(new FindCommand(keyword), command);
     }
 
     @Test

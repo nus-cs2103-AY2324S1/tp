@@ -29,7 +29,9 @@ public class LessonCard extends UiPart<Region> {
     @FXML
     private HBox cardPane;
     @FXML
-    private Label overview;
+    private Label name;
+    @FXML
+    private Label date;
     @FXML
     private Label id;
     @FXML
@@ -43,7 +45,8 @@ public class LessonCard extends UiPart<Region> {
         super(FXML);
         this.lesson = lesson;
         id.setText(displayedIndex + ". ");
-        overview.setText(lesson.getLessonDateStr());
+        name.setText(lesson.getLessonNameStr());
+        date.setText(lesson.getLessonDateStr());
         duration.setText(lesson.getLessonDurationStr());
         for (String field : displayFields) {
             // TODO: Implement the schedule detail
