@@ -15,10 +15,10 @@ public class FindCommand extends Command {
 
     public static final String COMMAND_WORD = "find";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all employees where the given fields contain "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all employees where the fields contain "
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
-            + "Example: " + COMMAND_WORD + " n/alice p/manager";
+            + "Example: " + COMMAND_WORD + " alice manager";
 
     private final EmployeeContainsKeywordsPredicate predicate;
 
