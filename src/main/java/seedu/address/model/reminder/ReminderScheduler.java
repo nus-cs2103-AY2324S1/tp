@@ -1,21 +1,29 @@
 package seedu.address.model.reminder;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.temporal.ChronoUnit;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Logger;
 
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.Model;
 /**
  * Represents a thread that manages the reminders.
  */
 public class ReminderScheduler extends Thread {
-    private static final long FREQUENCY = 1; // in minutes
+    private static final long FREQUENCY = TimeUnit.DAYS.toMinutes(1); // Frequency of a Day in minutes
 
-    private final UniqueReminderList reminderList;
+    private final Model model;
     private final Object mutex;
 
     private Logger logger = LogsCenter.getLogger(ReminderScheduler.class);
+
+    //This is defensive programming to prevent multiple ReminderManager from running
+    private boolean isRunning = false;
 
     /**
      * Creates a ReminderManager object.
@@ -23,16 +31,24 @@ public class ReminderScheduler extends Thread {
      * @param taskQueue
      * @param reminderMutex
      */
-    public ReminderScheduler(Object reminderMutex) {
+    public ReminderScheduler(Model model, Object reminderMutex) {
+        this.model = model;
         this.mutex = reminderMutex;
-        this.reminderList = UniqueReminderList.getInstance();
     }
 
     /**
-     * Starts the ReminderManager thread.
+     * Starts the ReminderScheduler thread.
      */
     public void start() {
-        super.start();
+        if (!isRunning) {
+            super.start();
+            isRunning = true;
+        }
+        
+        // Calculate the initial delay until 00:00
+        LocalDateTime now = LocalDateTime.now();
+        LocalDateTime nextMidnight = LocalDateTime.of(LocalDate.now().plusDays(1), LocalTime.MIDNIGHT);
+        long initialDelay = ChronoUnit.MILLIS.between(now, nextMidnight);
 
         // Start the scheduler to wake up the ReminderManager occasionally
         ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
@@ -40,37 +56,22 @@ public class ReminderScheduler extends Thread {
             synchronized (mutex) {
                 mutex.notifyAll();
             }
-        }, 0, FREQUENCY, TimeUnit.MINUTES); // Wakes up every 10 minutes
+        }, initialDelay, FREQUENCY, TimeUnit.MINUTES); // Wakes up Day
     }
 
     @Override
     public void run() {
         while (true) {
             synchronized (mutex) {
-                while (reminderList.isEmpty()) {
-                    try {
-                        mutex.wait();
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                }
-
-                long timeUntilNextReminder = reminderList.getEarliestReminderTime();
-                // timeUntilNextReminder should always be positive, unless the reminderList is empty,
-                // and if it is empty, the while loop above should have caught it
-                assert timeUntilNextReminder >= 0;
-
-                logger.info("Time until next reminder update: " + timeUntilNextReminder);
-
-                if (timeUntilNextReminder > FREQUENCY * 60 * 1000) {
-                    try {
-                        // Wait until it's time for the next reminder
-                        mutex.wait(timeUntilNextReminder);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                } else {
-                    // TODO: Update the reminderList to the GUI
+                try {
+                    mutex.wait();
+                    logger.info("ReminderManager thread woken up");
+                    //TODO: @zhyuhan Rather than changing the reminderlist which could cause thread access issues 
+                    //(ie someone just nice update the reminderlist at the same time)),
+                    //Change this to just update the Dashboard/Reminder UI with reminders after for the new day
+                    model.getReminderList().updateReminders(model.getAddressBook().getPersonList());
+                } catch (InterruptedException e) {
+                    logger.info("ReminderManager thread interrupted");
                 }
             }
         }
