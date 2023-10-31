@@ -4,6 +4,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import seedu.address.commons.util.ToStringBuilder;
@@ -81,6 +82,10 @@ public class Person {
         return annualLeave;
     }
 
+    public List<LocalDate> getLeaveList() {
+        return annualLeave.getLeaveList();
+    }
+
     public AttendanceStorage getAttendanceStorage() {
         return attendanceStorage;
     }
@@ -98,6 +103,7 @@ public class Person {
         }
         return this.getAttendanceToday();
     }
+
     /**
      * Adds a payroll to the payroll list of this person.
      * @param payroll Payroll to be added.

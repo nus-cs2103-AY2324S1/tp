@@ -3,12 +3,15 @@ package seedu.address.ui;
 import java.util.List;
 import java.util.logging.Logger;
 
+import com.itextpdf.kernel.colors.Lab;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import seedu.address.commons.core.GuiSettings;
@@ -35,9 +38,10 @@ public class MainWindow extends UiPart<Stage> {
     private PersonListPanel personListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
-    private boolean isRead;
 
     private List<Integer> indexes = null;
+
+    private CalendarComponent calendarComponent;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -53,6 +57,15 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane statusbarPlaceholder;
+
+    @FXML
+    private StackPane clockDisplayPlaceholder;
+
+    @FXML
+    private StackPane calendarDisplayPlaceholder;
+
+    @FXML
+    private StackPane yearMonthDisplayPlaceholder;
 
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
@@ -125,6 +138,15 @@ public class MainWindow extends UiPart<Stage> {
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+
+        ClockComponent clockComponent =new ClockComponent();
+        clockDisplayPlaceholder.getChildren().add(clockComponent);
+
+        calendarComponent = new CalendarComponent(logic.getFilteredPersonList());
+        calendarDisplayPlaceholder.getChildren().add(calendarComponent);
+
+        YearMonthComponent yearMonthComponent = new YearMonthComponent();
+        yearMonthDisplayPlaceholder.getChildren().add(yearMonthComponent);
     }
 
     /**
@@ -173,6 +195,12 @@ public class MainWindow extends UiPart<Stage> {
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
     }
 
+    private void handleLeave() {
+        calendarDisplayPlaceholder.getChildren().clear();
+        CalendarComponent calendarComponent = new CalendarComponent(logic.getFilteredPersonList());
+        calendarDisplayPlaceholder.getChildren().add(calendarComponent);
+    }
+
     public PersonListPanel getPersonListPanel() {
         return personListPanel;
     }
@@ -212,6 +240,10 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.isRead()) {
                 handleRead(commandResult.getFieldToRead());
+            }
+
+            if (commandResult.isLeave()) {
+                handleLeave();
             }
 
             return commandResult;
