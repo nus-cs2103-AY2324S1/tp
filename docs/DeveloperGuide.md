@@ -297,11 +297,11 @@ _{Explain here how the data archiving feature will be implemented}_
 
 The proposed Reminder mechanism is facilitated by `Reminder` and `UniqueReminderList`.
 
-Step 1. The user launches the application for the first time. Data from the `UniqueReminderList` is loaded from memory and displayed in a separate window.
+Step 1. The user launches the application and the User's data such as interactions and leads are loaded. `Reminder`s are derived from the `Person.lead` and `Person.interactions` data, with the `Reminder` date being X + the date of the latest `Interaction`, and X is dependant on the `Lead`'s `LeadCategory`. These initial `Reminder`s will be stored in the `UniqueReminderList`.
 
-Step 2. The user executes `interaction 1 o/INTERESTED Thinking of giving it a shot` command to add an interaction to the 1st person in the address book. The `interaction` command calls `UniqueReminderList#add()`, creating a new `Reminder` entry in the List with the information from `Person`'s Lead and the current `LocalDate`.
+Step 2. The user executes `interaction 1 o/INTERESTED Thinking of giving it a shot` command to add an interaction to the 1st person in the address book. The `interaction` command will make `UniqueReminderList` dirty; The `Reminder` should later be updated to the latest `Interaction` date + X. Note this change should also happen when `EditCommand` is executed since the `Person.lead` or `Person.name` might have been changed.
 
-Step 3. The user executes `reminder` that displays the same separate window that has been
+Step 3. When displaying the `Reminder`'s, the `UniqueReminderList` will then be updated and should be sorted by date, and the `Reminder` that is due the soonest should be displayed first. `UniqueReminderList` should also be updated daily with `ReminderScheduler` class.
 
 #### Design considerations:
 
