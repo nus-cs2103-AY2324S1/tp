@@ -93,7 +93,7 @@ Examples:
 
 Deletes an existing student.
 
-Format: `delete <INDEX>`
+Format: `delete INDEX`
 
 **Parameters**:
 1. Appointment Index
@@ -103,7 +103,7 @@ Format: `delete <INDEX>`
 
 Adds a note to an existing student, overwrites any existing note.
 
-Format: `note <INDEX> note/[NOTE]`
+Format: `note INDEX note/[NOTE]`
 
 **Parameters**:
 1. Student Index
@@ -140,17 +140,23 @@ Student Name: Roy Lee
 * "find Ro" does not work
 * "find Le" does not work
 * "find Roy L" does not work
-### 2.2.6 Assigning risk status to student (to be implemented)
 
-Tags a student with a risk level based on their current mental health status, categorizing them as high, medium, low tag_student <index> <RISK_LEVEL>
 
-Format: `tag_student <INDEX> <RISK_LEVEL>`
+#### 2.2.7 Assigning risk status to student: `tag`
+
+Tags a student to a specific risk level.
+
+Format: `tag INDEX r/RISK_LEVEL`
 
 **Parameters**:
 1. Student Index
-   - The index of an existing student in the system
+   - Index must be an integer more than 0
 2. Risk Level
-   - One of the following HIGH, MEDIUM, LOW
+   - One of the following `high`, `medium`, or `low`
+
+Examples:
+* `tag 2 /high`
+
 
 ### 2.3 Appointment Commands
 
