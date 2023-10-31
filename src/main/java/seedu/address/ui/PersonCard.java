@@ -92,7 +92,7 @@ public class PersonCard extends UiPart<Region> {
         emailField.setText("Email:");
         linkedinField.setText("Linkedin:");
         birthdayField.setText("Birthday:");
-        secondaryEmailField.setText("Second Email:");
+        secondaryEmailField.setText("Secondary Email:");
         telegramField.setText("Telegram:");
         name.setText(person.getName().fullName);
         bindLabelToProperty(phone, person.getPhone().value, phoneField);

@@ -12,8 +12,15 @@ import java.util.Locale;
  * Guarantees: immutable;
  */
 public class Birthday {
+
     public static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd/MM");
-    public static final String MESSAGE_INVALID = "Birthday should be in the format of dd/MM and should be a valid day.";
+
+    /**
+     * Message constraints for birthday which is the format used for user input.
+     */
+    public static final String MESSAGE_INVALID = "Birthday should be in the format of dd/MM and should be a valid day."
+            + "\ne.g. 31/01";
+
     public final MonthDay birthday;
 
     /**

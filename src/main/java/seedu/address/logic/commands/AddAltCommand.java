@@ -31,7 +31,7 @@ import seedu.address.model.person.Telegram;
 import seedu.address.model.tag.Tag;
 
 /**
- * Changes the remark of an existing person in the address book.
+ * Adds alternative contact information to the specified person.
  */
 public class AddAltCommand extends Command {
 
@@ -39,6 +39,7 @@ public class AddAltCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Adds alternative contact of the person identified "
             + "by the index number used in the last person listing.\n"
+            + "At least one field must be present.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + PREFIX_BIRTHDAY + "[BIRTHDAY] "
             + PREFIX_TELEGRAM + "[TELEGRAM] "
@@ -47,16 +48,16 @@ public class AddAltCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_TELEGRAM + "johndoe_telegram"
             + PREFIX_SECONDARY_EMAIL + "johndoe2@example.com";
-    public static final String MESSAGE_ADDALT_SUCCESS = "Added alternative contact to Person: %1$s";
-    public static final String MESSAGE_NO_ADDALT = "At least one field to edit must be provided.";
+    public static final String MESSAGE_ADDALT_SUCCESS = "Added alternative contact information to Person: %1$s";
     public static final String MESSAGE_ADDALT_DUPLICATE_EMAIL = "Secondary email is same as primary email "
             + "for Person: %1$s";
-    public static final String MESSAGE_ADDALT_FAILURE = "There is existing alternative contact to Person: %1$s. "
-            + "To change the corresponding field, use the edit command.";
+    public static final String MESSAGE_ADDALT_FAILURE = "There is existing %1$sto Person: %2$s. "
+            + "\nTo change the corresponding fields, use the edit command.";
     private final Index index;
     private final AddAltPersonDescriptor addAltPersonDescriptor;
 
     /**
+     * Constructs a {@code AddAltCommand}.
      * @param index of the person in the filtered person list to edit the remark
      * @param addAltPersonDescriptor details of the person to be updated to
      */
@@ -85,8 +86,9 @@ public class AddAltCommand extends Command {
 
     /**
      * Creates and returns a {@code Person} with the details of {@code personToEdit}
-     * edited with {@code editPersonDescriptor}.
-     * @throws CommandException if the alternative contact information added to the person is not empty or invalid.
+     * updated with {@code addAltPersonDescriptor}.
+     * @throws CommandException if the alternative contact information added to the person is not empty
+     *      or when updated {@code personToEdit} has same primary and secondary email.
      */
     private static Person createAddAltPerson(Person personToEdit, AddAltPersonDescriptor addAltPersonDescriptor)
             throws CommandException {
@@ -97,24 +99,36 @@ public class AddAltCommand extends Command {
         Email email = personToEdit.getEmail();
         Address address = personToEdit.getAddress();
         Set<Tag> tags = personToEdit.getTags();
-        Birthday birthday = personToEdit.getBirthday().orElse(addAltPersonDescriptor.getBirthday());
-        Linkedin updatedLinkedin = personToEdit.getLinkedin().orElse(addAltPersonDescriptor.getLinkedin());
-        Email updatedSecondaryEmail = personToEdit.getSecondaryEmail()
-                .orElse(addAltPersonDescriptor.getSecondaryEmail());
-        Telegram updatedTelegram = personToEdit.getTelegram().orElse(addAltPersonDescriptor.getTelegram());
+        Optional<Birthday> updatedBirthday = personToEdit.getBirthday().or(() -> addAltPersonDescriptor.getBirthday());
+        Optional<Linkedin> updatedLinkedin = personToEdit.getLinkedin().or(() -> addAltPersonDescriptor.getLinkedin());
+        Optional<Email> updatedSecondaryEmail = personToEdit.getSecondaryEmail()
+                .or(() -> addAltPersonDescriptor.getSecondaryEmail());
+        Optional<Telegram> updatedTelegram = personToEdit.getTelegram().or(() -> addAltPersonDescriptor.getTelegram());
         Optional<Integer> id = personToEdit.getId();
         ObservableList<Note> notes = personToEdit.getNotes();
         Balance balance = personToEdit.getBalance();
 
-        Person updatedPerson = new Person(name, phone, email, address, Optional.ofNullable(birthday),
-                Optional.ofNullable(updatedLinkedin), Optional.ofNullable(updatedSecondaryEmail),
-                Optional.ofNullable(updatedTelegram), tags, id, notes, balance);
+        Person updatedPerson = new Person(name, phone, email, address, updatedBirthday, updatedLinkedin,
+                updatedSecondaryEmail, updatedTelegram, tags, id, notes, balance);
 
-        if ((personToEdit.hasValidLinkedin() && addAltPersonDescriptor.hasValidLinkedin())
-                || (personToEdit.hasValidBirthday() && addAltPersonDescriptor.hasValidBirthday())
-                || (personToEdit.hasValidSecondaryEmail() && addAltPersonDescriptor.hasValidSecondaryEmail())
-                || (personToEdit.hasValidTelegram() && addAltPersonDescriptor.hasValidTelegram())) {
-            throw new CommandException(String.format(MESSAGE_ADDALT_FAILURE, name));
+        // Records down the alternative contact fields that are not initially empty.
+        String existingAlternativeContactField = "";
+
+        if (personToEdit.hasValidLinkedin() && addAltPersonDescriptor.hasValidLinkedin()) {
+            existingAlternativeContactField += "Linkedin ";
+        }
+        if (personToEdit.hasValidBirthday() && addAltPersonDescriptor.hasValidBirthday()) {
+            existingAlternativeContactField += "Birthday ";
+        }
+        if (personToEdit.hasValidSecondaryEmail() && addAltPersonDescriptor.hasValidSecondaryEmail()) {
+            existingAlternativeContactField += "Secondary Email ";
+        }
+        if (personToEdit.hasValidTelegram() && addAltPersonDescriptor.hasValidTelegram()) {
+            existingAlternativeContactField += "Telegram ";
+        }
+
+        if (!existingAlternativeContactField.isEmpty()) {
+            throw new CommandException(String.format(MESSAGE_ADDALT_FAILURE, existingAlternativeContactField, name));
         } else if (updatedPerson.hasRepeatedEmail()) {
             throw new CommandException(String.format(MESSAGE_ADDALT_DUPLICATE_EMAIL, name));
         } else {
@@ -146,8 +160,8 @@ public class AddAltCommand extends Command {
     }
 
     /**
-     * Stores the alternative contact details to add the person with. Each non-empty field value will replace the
-     * corresponding field value of the person.
+     * Stores the alternative contact details to add the specified person with. Each empty alternative contact field
+     * will be replaced by the corresponding field value specified by the user.
      */
     public static class AddAltPersonDescriptor {
         private Birthday birthday;
@@ -161,8 +175,8 @@ public class AddAltCommand extends Command {
             this.birthday = birthday;
         }
 
-        public Birthday getBirthday() {
-            return birthday;
+        public Optional<Birthday> getBirthday() {
+            return Optional.ofNullable(birthday);
         }
 
         public boolean hasValidBirthday() {
@@ -173,8 +187,8 @@ public class AddAltCommand extends Command {
             this.linkedin = linkedin;
         }
 
-        public Linkedin getLinkedin() {
-            return linkedin;
+        public Optional<Linkedin> getLinkedin() {
+            return Optional.ofNullable(linkedin);
         }
         public boolean hasValidLinkedin() {
             return linkedin != null;
@@ -184,8 +198,8 @@ public class AddAltCommand extends Command {
             this.secondaryEmail = email;
         }
 
-        public Email getSecondaryEmail() {
-            return secondaryEmail;
+        public Optional<Email> getSecondaryEmail() {
+            return Optional.ofNullable(secondaryEmail);
         }
 
         public boolean hasValidSecondaryEmail() {
@@ -196,8 +210,8 @@ public class AddAltCommand extends Command {
             this.telegram = telegram;
         }
 
-        public Telegram getTelegram() {
-            return telegram;
+        public Optional<Telegram> getTelegram() {
+            return Optional.ofNullable(telegram);
         }
 
         public boolean hasValidTelegram() {

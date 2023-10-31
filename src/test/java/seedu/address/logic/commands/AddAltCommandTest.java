@@ -9,6 +9,7 @@ import static seedu.address.testutil.Assert.assertThrows;
 
 import java.time.MonthDay;
 import java.util.ArrayList;
+import java.util.Optional;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 
@@ -35,6 +36,7 @@ public class AddAltCommandTest {
 
     @Test
     public void constructor_nullArgs_throwsNullPointerException() {
+        // All pairs strategy
         assertThrows(NullPointerException.class, () -> new AddAltCommand(
                 Index.fromZeroBased(0), null)
         );
@@ -45,7 +47,11 @@ public class AddAltCommandTest {
     }
 
     @Test
-    public void execute_allFieldsSpecifiedInitiallyEmpty_success() throws Exception {
+    public void execute_validArgs_success() throws Exception {
+        // Test based on use cases. Users can choose to add at least 1 up to 4 empty alternative contact
+        // fields using addalt.
+
+        // Success: Adds all 4 empty fields.
         Person personA = new PersonBuilder().withName("A").build();
         Person personACopy = new PersonBuilder().withName("A")
                 .withLinkedin("LINKEDIN")
@@ -64,129 +70,75 @@ public class AddAltCommandTest {
             assertEquals(p.getLinkedin().orElseThrow(), new Linkedin("LINKEDIN"));
             assertEquals(p.getSecondaryEmail().orElseThrow(), new Email("email@email.com"));
             assertEquals(p.getTelegram().orElseThrow(), new Telegram("@telegram"));
+            assertEquals(p.getBirthday().orElseThrow(), new Birthday(MonthDay.of(6, 9)));
         });
 
         CommandResult commandResult = new AddAltCommand(Index.fromZeroBased(0), descriptor).execute(modelStub);
         String expectedMessage = String.format(AddAltCommand.MESSAGE_ADDALT_SUCCESS, Messages.format(personACopy));
         assertEquals(commandResult, new CommandResult(expectedMessage));
-    }
 
-    @Test
-    public void execute_someFieldsSpecifiedInitiallyEmpty_success() throws Exception {
-        Person personA = new PersonBuilder().withName("A").withTelegram("@telegram").build();
-        Person personACopy = new PersonBuilder().withName("A")
-                .withLinkedin("LINKEDIN")
-                .withSecondaryEmail("email@email.com").build();
-
-        AddAltCommand.AddAltPersonDescriptor descriptor = new AddAltCommand.AddAltPersonDescriptor();
+        // Success: Adds 2 empty fields.
+        personA = new PersonBuilder().withName("A").withTelegram("@telegram").build();
+        descriptor = new AddAltCommand.AddAltPersonDescriptor();
         descriptor.setLinkedin(new Linkedin("LINKEDIN"));
         descriptor.setSecondaryEmail(new Email("email@email.com"));
 
-        ModelStubSetPerson modelStub = new ModelStubSetPerson(personA, p -> {
+        modelStub = new ModelStubSetPerson(personA, p -> {
             assertEquals(p.getName(), new Name("A"));
             assertEquals(p.getLinkedin().orElseThrow(), new Linkedin("LINKEDIN"));
+            assertEquals(p.getSecondaryEmail().orElseThrow(), new Email("email@email.com"));
             assertEquals(p.getTelegram().orElseThrow(), new Telegram("@telegram"));
         });
 
-        CommandResult commandResult = new AddAltCommand(Index.fromZeroBased(0), descriptor).execute(modelStub);
-        String expectedMessage = String.format(AddAltCommand.MESSAGE_ADDALT_SUCCESS, Messages.format(personACopy));
+        commandResult = new AddAltCommand(Index.fromZeroBased(0), descriptor).execute(modelStub);
+        expectedMessage = String.format(AddAltCommand.MESSAGE_ADDALT_SUCCESS, Messages.format(personACopy));
+        assertEquals(commandResult, new CommandResult(expectedMessage));
+
+        // Success: Adds 1 empty field.
+        personA = new PersonBuilder().withName("A").build();
+        descriptor = new AddAltCommand.AddAltPersonDescriptor();
+        descriptor.setLinkedin(new Linkedin("LINKEDIN"));
+
+        modelStub = new ModelStubSetPerson(personA, p -> {
+            assertEquals(p.getName(), new Name("A"));
+            assertEquals(p.getLinkedin().orElseThrow(), new Linkedin("LINKEDIN"));
+        });
+
+        commandResult = new AddAltCommand(Index.fromZeroBased(0), descriptor).execute(modelStub);
+        expectedMessage = String.format(AddAltCommand.MESSAGE_ADDALT_SUCCESS, Messages.format(personACopy));
         assertEquals(commandResult, new CommandResult(expectedMessage));
     }
 
     @Test
-    public void execute_allFieldsSpecifiedInitiallyNotEmpty_exceptionThrown() {
-        Person personA = new PersonBuilder().withName("A")
-                .withLinkedin("LINKEDIN")
-                .withSecondaryEmail("email@email.com")
-                .withTelegram("@telegram")
-                .withBirthday(MonthDay.of(6, 9)).build();
+    public void execute_invalidArgs_exceptionThrown() {
+        // Heuristic applied: No More Than One Invalid Input In A Test Case
 
+        // Invalid index input. Boundary value analysis
+        ModelStubAcceptingPersonAdded model = new ModelStubAcceptingPersonAdded();
+        Person personA = new PersonBuilder().withName("A").build();
+        model.addPerson(personA);
         AddAltCommand.AddAltPersonDescriptor descriptor = new AddAltCommand.AddAltPersonDescriptor();
-        descriptor.setLinkedin(new Linkedin("LINKEDIN_A"));
-        descriptor.setSecondaryEmail(new Email("personA@email.com"));
-        descriptor.setTelegram(new Telegram("@telegrama"));
-        descriptor.setBirthday(new Birthday(MonthDay.of(6, 10)));
-
-        ModelStubSetPerson modelStub = new ModelStubSetPerson(personA, p -> {});
-
         try {
-            new AddAltCommand(Index.fromZeroBased(0), descriptor).execute(modelStub);
+            //EP: Value from boundary
+            new AddAltCommand(Index.fromZeroBased(1), descriptor).execute(model);
             fail();
         } catch (CommandException e) {
-            String expectedMessage = String.format(AddAltCommand.MESSAGE_ADDALT_FAILURE, "A");
+            String expectedMessage = Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
             assertEquals(e.getMessage(), expectedMessage);
         }
-    }
 
-    @Test
-    public void execute_telegramNotEmpty_exceptionThrown() {
-        Person personA = new PersonBuilder().withName("A")
+        try {
+            //EP: One value above boundary
+            new AddAltCommand(Index.fromZeroBased(2), descriptor).execute(model);
+            fail();
+        } catch (CommandException e) {
+            String expectedMessage = Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
+            assertEquals(e.getMessage(), expectedMessage);
+        }
+
+        //Telegram is already present in specified person.
+        personA = new PersonBuilder().withName("A")
                 .withTelegram("@telegram").build();
-
-        AddAltCommand.AddAltPersonDescriptor descriptor = new AddAltCommand.AddAltPersonDescriptor();
-        descriptor.setLinkedin(new Linkedin("LINKEDIN_A"));
-        descriptor.setSecondaryEmail(new Email("personA@email.com"));
-        descriptor.setTelegram(new Telegram("@telegrama"));
-
-        ModelStubSetPerson modelStub = new ModelStubSetPerson(personA, p -> {});
-
-        try {
-            new AddAltCommand(Index.fromZeroBased(0), descriptor).execute(modelStub);
-            fail();
-        } catch (CommandException e) {
-            String expectedMessage = String.format(AddAltCommand.MESSAGE_ADDALT_FAILURE, "A");
-            assertEquals(e.getMessage(), expectedMessage);
-        }
-    }
-
-    @Test
-    public void execute_linkedinNotEmpty_exceptionThrown() {
-        Person personA = new PersonBuilder().withName("A")
-                .withLinkedin("linkedin").build();
-
-        AddAltCommand.AddAltPersonDescriptor descriptor = new AddAltCommand.AddAltPersonDescriptor();
-        descriptor.setLinkedin(new Linkedin("LINKEDIN_A"));
-        descriptor.setSecondaryEmail(new Email("personA@email.com"));
-        descriptor.setTelegram(new Telegram("@telegrama"));
-
-        ModelStubSetPerson modelStub = new ModelStubSetPerson(personA, p -> {});
-
-        try {
-            new AddAltCommand(Index.fromZeroBased(0), descriptor).execute(modelStub);
-            fail();
-        } catch (CommandException e) {
-            String expectedMessage = String.format(AddAltCommand.MESSAGE_ADDALT_FAILURE, "A");
-            assertEquals(e.getMessage(), expectedMessage);
-        }
-    }
-
-    @Test
-    public void execute_secondaryEmailNotEmpty_exceptionThrown() {
-        Person personA = new PersonBuilder().withName("A")
-                .withSecondaryEmail("example@email.com").build();
-
-        AddAltCommand.AddAltPersonDescriptor descriptor = new AddAltCommand.AddAltPersonDescriptor();
-        descriptor.setLinkedin(new Linkedin("LINKEDIN_A"));
-        descriptor.setSecondaryEmail(new Email("personA@email.com"));
-        descriptor.setTelegram(new Telegram("@telegrama"));
-
-        ModelStubSetPerson modelStub = new ModelStubSetPerson(personA, p -> {});
-
-        try {
-            new AddAltCommand(Index.fromZeroBased(0), descriptor).execute(modelStub);
-            fail();
-        } catch (CommandException e) {
-            String expectedMessage = String.format(AddAltCommand.MESSAGE_ADDALT_FAILURE, "A");
-            assertEquals(e.getMessage(), expectedMessage);
-        }
-    }
-
-    @Test
-    public void execute_birthdayNotEmpty_exceptionThrown() {
-        Person personA = new PersonBuilder().withName("A")
-                .withBirthday(MonthDay.of(6, 9)).build();
-
-        AddAltCommand.AddAltPersonDescriptor descriptor = new AddAltCommand.AddAltPersonDescriptor();
         descriptor.setLinkedin(new Linkedin("LINKEDIN_A"));
         descriptor.setSecondaryEmail(new Email("personA@email.com"));
         descriptor.setTelegram(new Telegram("@telegrama"));
@@ -198,19 +150,39 @@ public class AddAltCommandTest {
             new AddAltCommand(Index.fromZeroBased(0), descriptor).execute(modelStub);
             fail();
         } catch (CommandException e) {
-            String expectedMessage = String.format(AddAltCommand.MESSAGE_ADDALT_FAILURE, "A");
+            String expectedMessage = String.format(AddAltCommand.MESSAGE_ADDALT_FAILURE, "Telegram ", "A");
             assertEquals(e.getMessage(), expectedMessage);
         }
-    }
 
-    @Test
-    public void execute_samePrimaryAndSecondayEmail_exceptionThrown() {
-        Person personA = new PersonBuilder().withName("A").withEmail("email@email.com").build();
+        //Linkedin is already present in specified person.
+        personA = new PersonBuilder().withName("A")
+                .withLinkedin("linkedin").build();
+        modelStub = new ModelStubSetPerson(personA, p -> {});
 
-        AddAltCommand.AddAltPersonDescriptor descriptor = new AddAltCommand.AddAltPersonDescriptor();
-        descriptor.setSecondaryEmail(new Email("email@email.com"));
+        try {
+            new AddAltCommand(Index.fromZeroBased(0), descriptor).execute(modelStub);
+            fail();
+        } catch (CommandException e) {
+            String expectedMessage = String.format(AddAltCommand.MESSAGE_ADDALT_FAILURE, "Linkedin ", "A");
+            assertEquals(e.getMessage(), expectedMessage);
+        }
 
-        ModelStubSetPerson modelStub = new ModelStubSetPerson(personA, p -> {});
+        //Secondary Email is already present in specified person.
+        personA = new PersonBuilder().withName("A")
+                .withSecondaryEmail("example@email.com").build();
+        modelStub = new ModelStubSetPerson(personA, p -> {});
+
+        try {
+            new AddAltCommand(Index.fromZeroBased(0), descriptor).execute(modelStub);
+            fail();
+        } catch (CommandException e) {
+            String expectedMessage = String.format(AddAltCommand.MESSAGE_ADDALT_FAILURE, "Secondary Email ", "A");
+            assertEquals(e.getMessage(), expectedMessage);
+        }
+
+        // Adding secondary email results in duplicate emails for the specified person.
+        personA = new PersonBuilder().withName("A").withEmail("personA@email.com").build();
+        modelStub = new ModelStubSetPerson(personA, p -> {});
 
         try {
             new AddAltCommand(Index.fromZeroBased(0), descriptor).execute(modelStub);
@@ -219,34 +191,32 @@ public class AddAltCommandTest {
             String expectedMessage = String.format(AddAltCommand.MESSAGE_ADDALT_DUPLICATE_EMAIL, "A");
             assertEquals(e.getMessage(), expectedMessage);
         }
-    }
 
-    @Test
-    public void execute_invalidPersonIndex_failure() {
-        ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
-        Person personA = new PersonBuilder().withName("A").build();
-        modelStub.addPerson(personA);
-        AddAltCommand.AddAltPersonDescriptor descriptor = new AddAltCommand.AddAltPersonDescriptor();
+        //Birthday is already present in specified person.
+        personA = new PersonBuilder().withName("A").withBirthday(MonthDay.of(6, 9)).build();
+        modelStub = new ModelStubSetPerson(personA, p -> {});
+
         try {
-            new AddAltCommand(Index.fromZeroBased(2), descriptor).execute(modelStub);
+            new AddAltCommand(Index.fromZeroBased(0), descriptor).execute(modelStub);
             fail();
         } catch (CommandException e) {
-            String expectedMessage = Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
+            String expectedMessage = String.format(AddAltCommand.MESSAGE_ADDALT_FAILURE, "Birthday ", "A");
             assertEquals(e.getMessage(), expectedMessage);
         }
     }
 
     @Test
     public void addAltPersonDescriptor() {
+        // Testing nested static class AddAltPersonDescriptor's constructor, getter and setter methods.
         AddAltCommand.AddAltPersonDescriptor descriptor = new AddAltCommand.AddAltPersonDescriptor();
         descriptor.setTelegram(new Telegram("@telegram"));
-        assertEquals(descriptor.getTelegram(), new Telegram("@telegram"));
+        assertEquals(descriptor.getTelegram(), Optional.of(new Telegram("@telegram")));
         descriptor.setLinkedin(new Linkedin("LINKEDIN"));
-        assertEquals(descriptor.getLinkedin(), new Linkedin("LINKEDIN"));
+        assertEquals(descriptor.getLinkedin(), Optional.of(new Linkedin("LINKEDIN")));
         descriptor.setSecondaryEmail(new Email("email@email.com"));
-        assertEquals(descriptor.getSecondaryEmail(), new Email("email@email.com"));
+        assertEquals(descriptor.getSecondaryEmail(), Optional.of(new Email("email@email.com")));
         descriptor.setBirthday(new Birthday(MonthDay.of(6, 9)));
-        assertEquals(descriptor.getBirthday(), new Birthday(MonthDay.of(6, 9)));
+        assertEquals(descriptor.getBirthday(), Optional.of(new Birthday(MonthDay.of(6, 9))));
     }
 
     @Test
@@ -258,18 +228,13 @@ public class AddAltCommandTest {
         AddAltCommand commandA = new AddAltCommand(Index.fromZeroBased(0), descriptorA);
         AddAltCommand commandB = new AddAltCommand(Index.fromZeroBased(1), descriptorB);
 
+        // EP: Same types
         // same object -> returns true
         assertTrue(commandA.equals(commandA));
 
         // same values -> returns true
         AddAltCommand commandACopy = new AddAltCommand(Index.fromZeroBased(0), descriptorA);
         assertTrue(commandA.equals(commandACopy));
-
-        // different types -> returns false
-        assertFalse(commandA.equals(1));
-
-        // null -> returns false
-        assertFalse(commandA.equals(null));
 
         // different index, same descriptor -> returns false
         AddAltCommand commandADiffIndex = new AddAltCommand(Index.fromZeroBased(1), descriptorA);
@@ -281,6 +246,12 @@ public class AddAltCommandTest {
 
         // different args -> returns false
         assertFalse(commandA.equals(commandB));
+
+        // EP: Different types
+        assertFalse(commandA.equals(1));
+
+        // EP: null
+        assertFalse(commandA.equals(null));
     }
 
     @Test
@@ -291,10 +262,12 @@ public class AddAltCommandTest {
         descriptorA.setLinkedin(new Linkedin("LINKEDIN"));
         descriptorA.setSecondaryEmail(new Email("email@email.com"));
         descriptorA.setBirthday(new Birthday(MonthDay.of(6, 9)));
+        // EP: Valid fields
         assertTrue(descriptorA.hasValidBirthday());
         assertTrue(descriptorA.hasValidTelegram());
         assertTrue(descriptorA.hasValidLinkedin());
         assertTrue(descriptorA.hasValidSecondaryEmail());
+        // EP: Invalid fields
         assertFalse(descriptorB.hasValidBirthday());
         assertFalse(descriptorB.hasValidTelegram());
         assertFalse(descriptorB.hasValidLinkedin());

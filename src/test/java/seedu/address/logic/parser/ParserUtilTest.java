@@ -6,6 +6,7 @@ import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
+import java.time.MonthDay;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
@@ -16,9 +17,12 @@ import org.junit.jupiter.api.Test;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Balance;
+import seedu.address.model.person.Birthday;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Linkedin;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Telegram;
 import seedu.address.model.tag.Tag;
 
 public class ParserUtilTest {
@@ -292,4 +296,52 @@ public class ParserUtilTest {
         assertThrows(ParseException.class, () -> ParserUtil.parseBalance("$"));
     }
 
+    @Test
+    public void parseTelegram() throws Exception {
+        // EP: Valid
+        Telegram expectedTelegram = new Telegram("@telegram");
+        assertEquals(expectedTelegram, ParserUtil.parseTelegram("@telegram"));
+
+        // EP: Invalid
+        // Blank
+        assertThrows(ParseException.class, () -> ParserUtil.parseTelegram("1 tg/"));
+        // Not starting with @
+        assertThrows(ParseException.class, () -> ParserUtil.parseTelegram("1 tg/telegram"));
+        // Not meeting 5 character requirement
+        assertThrows(ParseException.class, () -> ParserUtil.parseTelegram("1 tg/@tel"));
+        // Using characters other than alphanumeric and underscores
+        assertThrows(ParseException.class, () -> ParserUtil.parseTelegram("1 tg/@tel?!"));
+    }
+
+    @Test
+    public void parseBirthday() throws Exception {
+        // EP: Valid
+        Birthday expectedBirthday = new Birthday(MonthDay.of(6, 9));
+        assertEquals(expectedBirthday, ParserUtil.parseBirthday("09/06"));
+
+        // EP: Invalid
+        // Blank
+        assertThrows(ParseException.class, () -> ParserUtil.parseBirthday("1 b/"));
+        // Not following format
+        assertThrows(ParseException.class, () -> ParserUtil.parseBirthday("1 b/24-01-24"));
+        // Invalid date
+        assertThrows(ParseException.class, () -> ParserUtil.parseBirthday("1 b/./."));
+        // Date that doesn't exist
+        assertThrows(ParseException.class, () -> ParserUtil.parseBirthday("1 b/31/02"));
+    }
+
+    @Test
+    public void parseLinkedin() throws Exception {
+        // EP: Valid
+        Linkedin expectedLinkedin = new Linkedin("linkedin");
+        assertEquals(expectedLinkedin, ParserUtil.parseLinkedin("linkedin"));
+
+        // EP: Invalid
+        // Blank
+        assertThrows(ParseException.class, () -> ParserUtil.parseTelegram("1 li/"));
+        // Has special characters
+        assertThrows(ParseException.class, () -> ParserUtil.parseLinkedin("1 li/?"));
+        // Has whitespace
+        assertThrows(ParseException.class, () -> ParserUtil.parseLinkedin("1 li/linked in"));
+    }
 }
