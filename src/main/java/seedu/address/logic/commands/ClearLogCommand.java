@@ -6,7 +6,7 @@ import seedu.address.model.LogBook;
 import seedu.address.model.Model;
 
 /**
- * Clears the address book.
+ * Clears the logger tab.
  */
 public class ClearLogCommand extends UndoableCommand {
 
@@ -14,7 +14,7 @@ public class ClearLogCommand extends UndoableCommand {
 
     public static final String COMMAND_WORD_ALIAS = "cl";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + "or" + COMMAND_WORD_ALIAS
+    public static final String MESSAGE_USAGE = COMMAND_WORD + " or " + COMMAND_WORD_ALIAS
             + ": Clears the entire logger tab.\n"
             + "Example 1: " + COMMAND_WORD + "\n"
             + "Example 2: " + COMMAND_WORD_ALIAS;
@@ -25,6 +25,12 @@ public class ClearLogCommand extends UndoableCommand {
 
     private LogBook logBookBeforeClear;
 
+    /**
+     * Executes the ClearLogCommand, clearing the entire logger tab.
+     *
+     * @param model The current model that contains the data.
+     * @return A CommandResult indicating the success of the operation.
+     */
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
@@ -37,6 +43,12 @@ public class ClearLogCommand extends UndoableCommand {
         return new CommandResult(MESSAGE_SUCCESS);
     }
 
+    /**
+     * Undoes the ClearLogCommand, restoring the logger tab to its state before clearing.
+     *
+     * @param model The current model that contains the data.
+     * @return A CommandResult indicating the success of the undo operation.
+     */
     @Override
     public CommandResult undo(Model model) {
         requireNonNull(model);
