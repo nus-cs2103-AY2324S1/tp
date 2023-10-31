@@ -1,11 +1,18 @@
 package seedu.application.model.job;
 
+import static seedu.application.logic.parser.CliSyntax.PREFIX_COMPANY;
+import static seedu.application.logic.parser.CliSyntax.PREFIX_DEADLINE;
+import static seedu.application.logic.parser.CliSyntax.PREFIX_INDUSTRY;
+import static seedu.application.logic.parser.CliSyntax.PREFIX_JOB_TYPE;
+import static seedu.application.logic.parser.CliSyntax.PREFIX_ROLE;
+import static seedu.application.logic.parser.CliSyntax.PREFIX_STATUS;
+
+import java.util.Collections;
 import java.util.List;
 import java.util.function.Predicate;
 
 import seedu.application.commons.util.StringUtil;
 import seedu.application.commons.util.ToStringBuilder;
-import seedu.application.logic.parser.CliSyntax;
 import seedu.application.logic.parser.Prefix;
 
 /**
@@ -25,45 +32,53 @@ public class FieldContainsKeywordsPredicate implements Predicate<Job> {
         this.keywords = keywords;
     }
 
+    /**
+     * Generates a {@code Predicate<Job>} which is used to filter the list as specified the preamble.
+     * @param keywords The list of keywords in the preamble.
+     * @return the {@code Predicate<Job>} to be passed into the constructor for {@code CombinedPredicate}.
+     */
+    public static Predicate<Job> getPreamblePredicate(List<String> keywords) {
+        Predicate<Job> preamblePredicate = x -> true;
+        for (String keyword : keywords) {
+            Predicate<Job> allFieldsPredicate = x -> false;
+            allFieldsPredicate = allFieldsPredicate
+                    .or(new FieldContainsKeywordsPredicate(PREFIX_COMPANY, Collections.singletonList(keyword)))
+                    .or(new FieldContainsKeywordsPredicate(PREFIX_ROLE, Collections.singletonList(keyword)))
+                    .or(new FieldContainsKeywordsPredicate(PREFIX_STATUS, Collections.singletonList(keyword)))
+                    .or(new FieldContainsKeywordsPredicate(PREFIX_INDUSTRY, Collections.singletonList(keyword)))
+                    .or(new FieldContainsKeywordsPredicate(PREFIX_DEADLINE, Collections.singletonList(keyword)))
+                    .or(new FieldContainsKeywordsPredicate(PREFIX_JOB_TYPE, Collections.singletonList(keyword)));
+            preamblePredicate = preamblePredicate.and(allFieldsPredicate);
+        }
+        return preamblePredicate;
+    }
+
     private String getField(Job job) {
-        if (prefix.equals(CliSyntax.PREFIX_COMPANY)) {
+        if (prefix.equals(PREFIX_COMPANY)) {
             return job.getCompany().name;
         }
 
-        if (prefix.equals(CliSyntax.PREFIX_ROLE)) {
+        if (prefix.equals(PREFIX_ROLE)) {
             return job.getRole().description;
         }
 
-        if (prefix.equals(CliSyntax.PREFIX_STATUS)) {
+        if (prefix.equals(PREFIX_STATUS)) {
             return job.getStatus().status;
         }
 
-        if (prefix.equals(CliSyntax.PREFIX_INDUSTRY)) {
+        if (prefix.equals(PREFIX_INDUSTRY)) {
             return job.getIndustry().industry;
         }
 
-        if (prefix.equals(CliSyntax.PREFIX_DEADLINE)) {
+        if (prefix.equals(PREFIX_DEADLINE)) {
             return job.getDeadline().deadline;
         }
 
-        if (prefix.equals(CliSyntax.PREFIX_JOB_TYPE)) {
+        if (prefix.equals(PREFIX_JOB_TYPE)) {
             return job.getJobType().jobType;
         }
 
         return null;
-    }
-
-    /**
-     * Checks if a {@code Prefix} is a valid prefix in the context of the Find command.
-     * @param prefix The prefix specified by the user.
-     */
-    public static boolean isValidPrefix(Prefix prefix) {
-        return prefix.equals(CliSyntax.PREFIX_COMPANY)
-                || prefix.equals(CliSyntax.PREFIX_ROLE)
-                || prefix.equals(CliSyntax.PREFIX_STATUS)
-                || prefix.equals(CliSyntax.PREFIX_INDUSTRY)
-                || prefix.equals(CliSyntax.PREFIX_DEADLINE)
-                || prefix.equals(CliSyntax.PREFIX_JOB_TYPE);
     }
 
     @Override

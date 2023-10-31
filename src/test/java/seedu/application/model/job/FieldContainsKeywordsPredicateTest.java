@@ -23,8 +23,6 @@ import seedu.application.testutil.JobBuilder;
 
 public class FieldContainsKeywordsPredicateTest {
 
-    public static final String INVALID_PREFIX = "Scndkcjnkcsjn";
-
     @Test
     public void equals() {
         List<String> firstPredicateKeywordList = Collections.singletonList("first");
@@ -51,6 +49,20 @@ public class FieldContainsKeywordsPredicateTest {
 
         // different predicate -> returns false
         assertNotEquals(firstPredicate, secondPredicate);
+    }
+
+    @Test
+    public void getPreamblePredicate() {
+        List<String> oneKeyword = Arrays.asList("one");
+        List<String> oneAndTwoKeywords = Arrays.asList("one", "two");
+
+        // One keyword
+        assertTrue(FieldContainsKeywordsPredicate.getPreamblePredicate(oneKeyword).test(
+                new JobBuilder().withCompany("one").build()));
+
+        // Multiple keywords
+        assertTrue(FieldContainsKeywordsPredicate.getPreamblePredicate(oneAndTwoKeywords).test(
+                new JobBuilder().withCompany("two").withRole("one").build()));
     }
 
     @Test

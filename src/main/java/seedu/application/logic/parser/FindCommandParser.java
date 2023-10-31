@@ -9,13 +9,16 @@ import static seedu.application.logic.parser.CliSyntax.PREFIX_ROLE;
 import static seedu.application.logic.parser.CliSyntax.PREFIX_STATUS;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Predicate;
 
 import seedu.application.logic.commands.FindCommand;
 import seedu.application.logic.parser.exceptions.ParseException;
 import seedu.application.model.job.CombinedPredicate;
 import seedu.application.model.job.FieldContainsKeywordsPredicate;
+import seedu.application.model.job.Job;
 
 /**
  * Parses input arguments and creates a new FindCommand object
@@ -35,36 +38,30 @@ public class FindCommandParser implements Parser<FindCommand> {
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_ROLE, PREFIX_COMPANY,
                 PREFIX_DEADLINE, PREFIX_STATUS, PREFIX_JOB_TYPE, PREFIX_INDUSTRY);
 
-        if (!argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
-        }
-
-        ArrayList<FieldContainsKeywordsPredicate> predicateList = new ArrayList<>();
+        ArrayList<Predicate<Job>> predicateList = new ArrayList<>();
 
         for (Map.Entry<Prefix, List<String>> entry : argMultimap.getArgMultimap().entrySet()) {
-            if (entry.getKey().equals(new Prefix(""))) {
-                continue;
-            }
-
             String keywords = entry.getValue().get(0);
             if (keywords.equals("")) {
-                throw new ParseException(
-                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_EMPTY_KEYWORDS));
+                if (entry.getKey().equals(new Prefix("")) && argMultimap.size() > 1) {
+                    continue;
+                } else {
+                    throw new ParseException(
+                            String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_EMPTY_KEYWORDS));
+                }
             }
 
             String[] splitKeywords = keywords.split("\\s+");
-            List<String> keywordList = new ArrayList<>();
-            for (String keyword : splitKeywords) {
-                keywordList.add(keyword);
+            List<String> keywordList = Arrays.asList(splitKeywords);
+
+            Predicate<Job> predicate;
+            System.out.println("");
+            if (entry.getKey().equals(new Prefix(""))) {
+                predicate = FieldContainsKeywordsPredicate.getPreamblePredicate(keywordList);
+            } else {
+                predicate = new FieldContainsKeywordsPredicate(entry.getKey(), keywordList);
             }
-
-            FieldContainsKeywordsPredicate predicate = new FieldContainsKeywordsPredicate(entry.getKey(), keywordList);
             predicateList.add(predicate);
-        }
-
-        if (argMultimap.size() < 2) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
 
         return new FindCommand(new CombinedPredicate(predicateList));
