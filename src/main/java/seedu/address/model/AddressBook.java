@@ -22,6 +22,7 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniquePersonList<Member> members;
     private final UniquePersonList<Applicant> applicants;
+    private final ObservableList<Tag> tags = FXCollections.observableArrayList();
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -169,12 +170,17 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     public ObservableList<Tag> getTagList() {
+        updateTags();
+        return tags;
+    }
+
+    public void updateTags() {
         ObservableList<Member> allMembers = getMemberList();
         HashSet<Tag> allTags = new HashSet<>();
         for (Member member : allMembers) {
             allTags.addAll(member.getTags());
         }
-        return FXCollections.unmodifiableObservableList(FXCollections.observableArrayList(allTags));
+        tags.setAll(allTags);
     }
 
     @Override
