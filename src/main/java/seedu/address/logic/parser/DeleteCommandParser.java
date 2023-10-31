@@ -10,7 +10,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
-import static seedu.address.logic.parser.ParserUtil.isAnyPrefixPresent;
 
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.DeleteCommand.DeletePersonDescriptor;
@@ -36,8 +35,9 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_NRIC,
                 PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_APPOINTMENT, PREFIX_MEDICAL, PREFIX_TAG);
 
-        if (isAnyPrefixPresent(argMultimap, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG)
-                || !isAnyPrefixPresent(argMultimap, PREFIX_NAME, PREFIX_NRIC, PREFIX_APPOINTMENT, PREFIX_MEDICAL)) {
+        if (ArgumentMultimap.isAnyPrefixPresent(argMultimap, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG)
+                || !ArgumentMultimap.isAnyPrefixPresent(argMultimap, PREFIX_NAME, PREFIX_NRIC, PREFIX_APPOINTMENT,
+                        PREFIX_MEDICAL)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
         }
 
@@ -63,11 +63,11 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
         DeletePersonDescriptor deletePersonDescriptor = new DeletePersonDescriptor();
 
         if (argMultimap.prefixExist(PREFIX_MEDICAL)) {
-            deletePersonDescriptor.setShouldDeleteMedicalHistory();
+            deletePersonDescriptor.setDeleteMedicalHistory();
         }
 
         if (argMultimap.prefixExist(PREFIX_APPOINTMENT)) {
-            deletePersonDescriptor.setShouldDeleteAppointment();
+            deletePersonDescriptor.setDeleteAppointment();
         }
 
         return new DeleteCommand(nric, name, deletePersonDescriptor);

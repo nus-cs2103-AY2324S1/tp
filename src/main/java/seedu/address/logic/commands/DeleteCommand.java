@@ -164,11 +164,11 @@ public class DeleteCommand extends UndoableCommand {
         Appointment updatedAppointment = personToEdit.getAppointment().isPresent() ? personToEdit.getAppointment().get()
                 : null;
 
-        if (deletePersonDescriptor.getShouldDeleteMedicalHistory()) {
+        if (deletePersonDescriptor.shouldDeleteMedicalHistory()) {
             updatedMedicalHistories = new HashSet<MedicalHistory>();
         }
 
-        if (deletePersonDescriptor.getShouldDeleteAppointment()) {
+        if (deletePersonDescriptor.shouldDeleteAppointment()) {
             updatedAppointment = null;
         }
 
@@ -178,29 +178,28 @@ public class DeleteCommand extends UndoableCommand {
 
     /**
      * Stores the boolean value of the fields that is to be deleted from a patient
-     * in
-     * HealthSync.
+     * in HealthSync.
      */
     public static class DeletePersonDescriptor {
         private boolean shouldDeleteAppointment;
-        private boolean shoudlDeleteMedicalHistory;
+        private boolean shouldDeleteMedicalHistory;
 
         public DeletePersonDescriptor() {
         }
 
-        public void setShouldDeleteMedicalHistory() {
-            this.shoudlDeleteMedicalHistory = true;
+        public void setDeleteMedicalHistory() {
+            this.shouldDeleteMedicalHistory = true;
         }
 
-        public boolean getShouldDeleteMedicalHistory() {
-            return this.shoudlDeleteMedicalHistory;
+        public boolean shouldDeleteMedicalHistory() {
+            return this.shouldDeleteMedicalHistory;
         }
 
-        public void setShouldDeleteAppointment() {
+        public void setDeleteAppointment() {
             this.shouldDeleteAppointment = true;
         }
 
-        public boolean getShouldDeleteAppointment() {
+        public boolean shouldDeleteAppointment() {
             return this.shouldDeleteAppointment;
         }
 
@@ -208,7 +207,7 @@ public class DeleteCommand extends UndoableCommand {
          * Returns true if all fields are false.
          */
         public boolean isAllFalse() {
-            return !(shoudlDeleteMedicalHistory || shouldDeleteAppointment);
+            return !(shouldDeleteMedicalHistory || shouldDeleteAppointment);
         }
 
         @Override
@@ -223,15 +222,14 @@ public class DeleteCommand extends UndoableCommand {
             }
 
             DeletePersonDescriptor otherDeletePersonDescriptor = (DeletePersonDescriptor) other;
-            return Objects.equals(shoudlDeleteMedicalHistory,
-                    otherDeletePersonDescriptor.shoudlDeleteMedicalHistory)
+            return Objects.equals(shouldDeleteMedicalHistory, otherDeletePersonDescriptor.shouldDeleteMedicalHistory)
                     && Objects.equals(shouldDeleteAppointment, otherDeletePersonDescriptor.shouldDeleteAppointment);
         }
 
         @Override
         public String toString() {
             return new ToStringBuilder(this)
-                    .add("shoudlDeleteMedicalHistory", shoudlDeleteMedicalHistory)
+                    .add("shouldDeleteMedicalHistory", shouldDeleteMedicalHistory)
                     .add("shouldDeleteAppointment", shouldDeleteAppointment)
                     .toString();
         }
