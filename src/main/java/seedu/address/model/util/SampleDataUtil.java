@@ -1,5 +1,6 @@
 package seedu.address.model.util;
 
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
@@ -28,61 +29,56 @@ public class SampleDataUtil {
 
     public static final Remark EMPTY_REMARK = new Remark("");
     public static final Set<Appointment> EMPTY_APPOINTMENTS = new HashSet<>();
+    public static final Appointment APPOINTMENT_1 = new Appointment(new Ic("S8811111Z"),
+            new Ic("S1111111Z"), LocalDateTime.parse("2023-10-31T14:00"));
+    public static final Appointment APPOINTMENT_2 = new Appointment(new Ic("S8811112Z"),
+            new Ic("S1111111Z"), LocalDateTime.parse("2023-10-31T15:00"));
+    public static final Appointment APPOINTMENT_3 = new Appointment(new Ic("S8811112Z"),
+            new Ic("S1111112Z"), LocalDateTime.parse("2023-10-31T16:00"));
 
     // persons should not be used anymore
     public static Patient[] getSamplePatients() {
         return new Patient[] {
-                new Patient(new Name("Alex Yeoh"), new Phone("87438807"), new Phone("99272758"),
-                        new Email("alexyeoh@example.com"), new Address("Blk 30 Geylang Street 29, #06-40"),
-                        EMPTY_REMARK, new Gender("M"), new Ic("S1111111Z"), new Condition("Unknown"),
-                        new BloodType("O+"), EMPTY_APPOINTMENTS,
-                        getTagSet("friends")),
-                new Patient(new Name("Bernice Yu"), new Phone("99272758"), new Phone("87438807"),
-                        new Email("berniceyu@example.com"), new Address("Blk 30 Lorong 3 Serangoon Gardens, #07-18"),
-                        EMPTY_REMARK, new Gender("F"), new Ic("S1111112Z"), new Condition("Unknown"),
-                        new BloodType("O+"), EMPTY_APPOINTMENTS,
-                        getTagSet("colleagues", "friends")),
-                new Patient(new Name("Charlotte Oliveiro"), new Phone("93210283"), new Phone("87438807"),
-                        new Email("charlotte@example.com"), new Address("Blk 11 Ang Mo Kio Street 74, #11-04"),
-                        EMPTY_REMARK, new Gender("F"), new Ic("S1111113Z"), new Condition("Unknown"),
-                        new BloodType("O+"), EMPTY_APPOINTMENTS,
-                        getTagSet("neighbours")),
-                new Patient(new Name("David Li"), new Phone("91031282"), new Phone("87438807"),
-                        new Email("lidavid@example.com"), new Address("Blk 436 Serangoon Gardens Street 26, #16-43"),
-                        EMPTY_REMARK, new Gender("M"), new Ic("S1111114Z"), new Condition("Unknown"),
-                        new BloodType("O+"), EMPTY_APPOINTMENTS,
-                        getTagSet("family")),
-                new Patient(new Name("Irfan Ibrahim"), new Phone("92492021"), new Phone("87438807"),
-                        new Email("irfan@example.com"), new Address("Blk 47 Tampines Street 20, #17-35"), EMPTY_REMARK,
-                        new Gender("M"), new Ic("S1111115Z"), new Condition("Unknown"), new BloodType("O+"),
-                        EMPTY_APPOINTMENTS, getTagSet("classmates")),
-                new Patient(new Name("Roy Balakrishnan"), new Phone("92624417"), new Phone("87438807"),
-                        new Email("royb@example.com"), new Address("Blk 45 Aljunied Street 85, #11-31"), EMPTY_REMARK,
-                        new Gender("M"), new Ic("S1111116Z"), new Condition("Unknown"), new BloodType("O+"),
-                        EMPTY_APPOINTMENTS, getTagSet("colleagues"))
+            new Patient(new Name("Alex Yeoh"), new Phone("87438807"), new Phone("99272758"),
+                    new Email("alexyeoh@example.com"), new Address("Blk 30 Geylang Street 29, #06-40"),
+                    EMPTY_REMARK, new Gender("M"), new Ic("S1111111Z"), new Condition("Unknown"),
+                    new BloodType("O+"), getAppointmentSet(APPOINTMENT_1, APPOINTMENT_2),
+                    getTagSet("friends")),
+            new Patient(new Name("Bernice Yu"), new Phone("99272758"), new Phone("87438807"),
+                    new Email("berniceyu@example.com"), new Address("Blk 30 Lorong 3 Serangoon Gardens, #07-18"),
+                    EMPTY_REMARK, new Gender("F"), new Ic("S1111112Z"), new Condition("Unknown"),
+                    new BloodType("O+"), getAppointmentSet(APPOINTMENT_3),
+                    getTagSet("colleagues", "friends")),
+            new Patient(new Name("Charlotte Oliveiro"), new Phone("93210283"), new Phone("87438807"),
+                    new Email("charlotte@example.com"), new Address("Blk 11 Ang Mo Kio Street 74, #11-04"),
+                    EMPTY_REMARK, new Gender("F"), new Ic("S1111113Z"), new Condition("Unknown"),
+                    new BloodType("O+"), EMPTY_APPOINTMENTS,
+                    getTagSet("neighbours")),
+            new Patient(new Name("David Li"), new Phone("91031282"), new Phone("87438807"),
+                    new Email("lidavid@example.com"), new Address("Blk 436 Serangoon Gardens Street 26, #16-43"),
+                    EMPTY_REMARK, new Gender("M"), new Ic("S1111114Z"), new Condition("Unknown"),
+                    new BloodType("O+"), EMPTY_APPOINTMENTS,
+                    getTagSet("family")),
+            new Patient(new Name("Irfan Ibrahim"), new Phone("92492021"), new Phone("87438807"),
+                    new Email("irfan@example.com"), new Address("Blk 47 Tampines Street 20, #17-35"), EMPTY_REMARK,
+                    new Gender("M"), new Ic("S1111115Z"), new Condition("Unknown"), new BloodType("O+"),
+                    EMPTY_APPOINTMENTS, getTagSet("classmates")),
+            new Patient(new Name("Roy Balakrishnan"), new Phone("92624417"), new Phone("87438807"),
+                    new Email("royb@example.com"), new Address("Blk 45 Aljunied Street 85, #11-31"), EMPTY_REMARK,
+                    new Gender("M"), new Ic("S1111116Z"), new Condition("Unknown"), new BloodType("O+"),
+                    EMPTY_APPOINTMENTS, getTagSet("colleagues"))
         };
     }
 
     public static Doctor[] getSampleDoctors() {
         return new Doctor[] {
-                new Doctor(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
-                        new Address("Blk 30 Geylang Street 29, #06-40"), EMPTY_REMARK, new Gender("M"),
-                        new Ic("S1111111Z"), EMPTY_APPOINTMENTS, getTagSet("friends")),
-                new Doctor(new Name("Bernice Yu"), new Phone("99272758"), new Email("berniceyu@example.com"),
-                        new Address("Blk 30 Lorong 3 Serangoon Gardens, #07-18"), EMPTY_REMARK, new Gender("F"),
-                        new Ic("S1111112Z"), EMPTY_APPOINTMENTS, getTagSet("colleagues", "friends")),
-                new Doctor(new Name("Charlotte Oliveiro"), new Phone("93210283"), new Email("charlotte@example.com"),
-                        new Address("Blk 11 Ang Mo Kio Street 74, #11-04"), EMPTY_REMARK, new Gender("F"),
-                        new Ic("S1111113Z"), EMPTY_APPOINTMENTS, getTagSet("neighbours")),
-                new Doctor(new Name("David Li"), new Phone("91031282"), new Email("lidavid@example.com"),
-                        new Address("Blk 436 Serangoon Gardens Street 26, #16-43"), EMPTY_REMARK, new Gender("M"),
-                        new Ic("S1111114Z"), EMPTY_APPOINTMENTS, getTagSet("family")),
-                new Doctor(new Name("Irfan Ibrahim"), new Phone("92492021"), new Email("irfan@example.com"),
-                        new Address("Blk 47 Tampines Street 20, #17-35"), EMPTY_REMARK, new Gender("M"),
-                        new Ic("S1111115Z"), EMPTY_APPOINTMENTS, getTagSet("classmates")),
-                new Doctor(new Name("Roy Balakrishnan"), new Phone("92624417"), new Email("royb@example.com"),
-                        new Address("Blk 45 Aljunied Street 85, #11-31"), EMPTY_REMARK, new Gender("M"),
-                        new Ic("S1111116Z"), EMPTY_APPOINTMENTS, getTagSet("colleagues"))
+            new Doctor(new Name("Adam Lim"), new Phone("87438000"), new Email("adamlim@example.com"),
+                    new Address("Blk 30 Geylang Street 29, #06-40"), EMPTY_REMARK, new Gender("M"),
+                    new Ic("S8811111Z"), getAppointmentSet(APPOINTMENT_1), getTagSet("GP")),
+            new Doctor(new Name("Bernard Tan"), new Phone("99272000"), new Email("bernardtan@example.com"),
+                    new Address("Blk 30 Lorong 3 Serangoon Gardens, #07-18"), EMPTY_REMARK, new Gender("M"),
+                    new Ic("S8811112Z"), getAppointmentSet(APPOINTMENT_2, APPOINTMENT_3),
+                    getTagSet("ENTspecialist"))
         };
     }
 

@@ -1,6 +1,7 @@
 package seedu.address.storage;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -9,15 +10,17 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.appointment.Appointment;
 import seedu.address.model.person.Ic;
-import seedu.address.model.tag.Tag;
 
 /**
- * Jackson-friendly version of {@link Tag}.
+ * Jackson-friendly version of {@link Appointment}.
  */
 class JsonAdaptedAppointment {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Appointment's %s field is missing!";
     public static final String INVALID_FIELD_MESSAGE_FORMAT = "Appointment's %s field is invalid!";
+    public static final String DUPLICATE_PATIENT_AND_DOCTOR_IC =
+            "Appointment's doctor IC and patients IC are the same!";
+    private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
     private final String doctorIc;
     private final String patientIc;
     private final String appointmentTime;
@@ -43,7 +46,7 @@ class JsonAdaptedAppointment {
     public JsonAdaptedAppointment(Appointment source) {
         doctorIc = source.getDoctor().value;
         patientIc = source.getPatient().value;
-        appointmentTime = source.getAppointmentTime().toString();
+        appointmentTime = source.getAppointmentTime().format(formatter);
         status = source.getStatus();
     }
 
@@ -61,7 +64,7 @@ class JsonAdaptedAppointment {
         }
         LocalDateTime result;
         try {
-            result = LocalDateTime.parse(appointmentTime);
+            result = LocalDateTime.parse(appointmentTime, formatter);
         } catch (DateTimeParseException e) {
             throw new IllegalValueException(String.format(INVALID_FIELD_MESSAGE_FORMAT,
                     LocalDateTime.class.getSimpleName()));
@@ -91,6 +94,10 @@ class JsonAdaptedAppointment {
      * @throws IllegalValueException if there were any data constraints violated in the adapted tag.
      */
     public Appointment toModelType() throws IllegalValueException {
+        //  doctorIc and patientIc should not be the same.
+        if (doctorIc == patientIc) {
+            throw new IllegalValueException(DUPLICATE_PATIENT_AND_DOCTOR_IC);
+        }
         final Ic modelDoctor = checkIc(doctorIc);
         final Ic modelPatient = checkIc(patientIc);
         final LocalDateTime modelAppointmentTime = checkAppointmentTime();

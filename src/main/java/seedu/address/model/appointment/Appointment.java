@@ -3,14 +3,18 @@ package seedu.address.model.appointment;
 import static java.util.Objects.requireNonNull;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Objects;
 
 import seedu.address.model.person.Ic;
 
 /**
  * The {@code Appointment} class represents a scheduled appointment between a doctor and a patient.
  * It includes information about the doctor, patient, and the appointment time.
+ * Doctor and patient ic should not be the same.
  */
 public class Appointment {
+    public static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
     private Ic doctorIc;
     private Ic patientIc;
     private LocalDateTime appointmentTime;
@@ -102,7 +106,13 @@ public class Appointment {
     }
 
     @Override
+    public int hashCode() {
+        return Objects.hash(doctorIc, patientIc, appointmentTime, status);
+    }
+
+    @Override
     public String toString() {
-        return "Patient with IC " + patientIc + ", Doctor with IC " + doctorIc + " at " + appointmentTime;
+        return "Patient with IC " + patientIc + ", Doctor with IC " + doctorIc + " at "
+                + appointmentTime.format(FORMATTER);
     }
 }

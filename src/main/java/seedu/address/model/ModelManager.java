@@ -137,28 +137,6 @@ public class ModelManager implements Model {
             return false;
         }
     }
-//
-//    /**
-//     * Returns true if a patient with the same ic as {@code patientIc} exists in the address book.
-//     *
-//     * @param patientIc The ic of patient to check.
-//     * @return true if there is a patient with patientIc in the address book
-//     */
-//    public boolean hasPatientIc(Ic patientIc) {
-//        requireNonNull(patientIc);
-//        return addressBook.hasPatientIc(patientIc);
-//    }
-//
-//    /**
-//     * Returns true if a doctor with the same ic as {@code doctorIc} exists in the address book.
-//     *
-//     * @param doctorIc The ic of doctor to check.
-//     * @return true if there is a patient with doctorIc in the address book
-//     */
-//    public boolean hasDoctorIc(Ic doctorIc) {
-//        requireNonNull(doctorIc);
-//        return addressBook.hasDoctorIc(doctorIc);
-//    }
 
     @Override
     public void deletePerson(Person target) {
@@ -195,13 +173,6 @@ public class ModelManager implements Model {
             addressBook.setDoctor((Doctor) target, (Doctor) editedPerson);
         }
     }
-
-//    @Override
-//    public void addApointment(Appointment appointment) {
-//        requireNonNull(appointment);
-//        updateBackup();
-//        addressBook.addAppointment(appointment);
-//    }
 
     /**
      * Returns an unmodifiable view of the filtered person list

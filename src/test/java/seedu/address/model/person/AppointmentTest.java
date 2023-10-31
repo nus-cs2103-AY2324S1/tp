@@ -59,8 +59,8 @@ public class AppointmentTest {
 
     @Test
     public void constructor_nullStatus() { // should this throw a nullPointerException?
-        assertThrows(NullPointerException.class,
-                () -> new Appointment(new Ic(VALID_NRIC_DEREK), new Ic(VALID_NRIC_AMY), VALID_DATE_1, null));
+        assertThrows(NullPointerException.class, (
+        ) -> new Appointment(new Ic(VALID_NRIC_DEREK), new Ic(VALID_NRIC_AMY), VALID_DATE_1, null));
     }
 
     @Test

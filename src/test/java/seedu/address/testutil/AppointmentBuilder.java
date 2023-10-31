@@ -1,23 +1,21 @@
 package seedu.address.testutil;
 
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_1;
-import static seedu.address.testutil.TypicalDoctor.DEREK;
-import static seedu.address.testutil.TypicalPatient.BENSON;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NRIC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NRIC_DEREK;
 
 import java.time.LocalDateTime;
 
 import seedu.address.model.appointment.Appointment;
-import seedu.address.model.person.Doctor;
 import seedu.address.model.person.Ic;
-import seedu.address.model.person.Patient;
 
 
 /**
  * A utility class to help with building Person objects.
  */
 public class AppointmentBuilder {
-    public static final Doctor DEFAULT_DOCTOR = DEREK;
-    public static final Patient DEFAULT_PATIENT = BENSON;
+    public static final Ic DEFAULT_DOCTOR_IC = new Ic(VALID_NRIC_DEREK);
+    public static final Ic DEFAULT_PATIENT_IC = new Ic(VALID_NRIC_BOB);
     public static final LocalDateTime DEFAULT_APPT_TIME = VALID_DATE_1;
     private Ic doctorIc;
     private Ic patientIc;
@@ -29,8 +27,8 @@ public class AppointmentBuilder {
      * a PersonBuilder instance populated with default values.
      */
     public AppointmentBuilder() {
-        doctorIc = DEFAULT_DOCTOR.getIc();
-        patientIc = DEFAULT_PATIENT.getIc();
+        doctorIc = DEFAULT_DOCTOR_IC;
+        patientIc = DEFAULT_PATIENT_IC;
         appointmentTime = DEFAULT_APPT_TIME;
         status = "Scheduled";
     }

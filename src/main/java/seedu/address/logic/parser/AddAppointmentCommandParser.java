@@ -4,6 +4,7 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_APPOINTMENT_TIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DOCTOR_IC;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PATIENT_IC;
+import static seedu.address.model.appointment.Appointment.FORMATTER;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
@@ -40,7 +41,7 @@ public class AddAppointmentCommandParser implements Parser<AddAppointmentCommand
         Ic doctorIc = ParserUtil.parseIc(argMultimap.getValue(PREFIX_DOCTOR_IC).get());
         LocalDateTime dateTime;
         try {
-            dateTime = LocalDateTime.parse(argMultimap.getValue(PREFIX_APPOINTMENT_TIME).get());
+            dateTime = LocalDateTime.parse(argMultimap.getValue(PREFIX_APPOINTMENT_TIME).get(), FORMATTER);
         } catch (DateTimeParseException e) {
             throw new ParseException(e.getMessage());
         }

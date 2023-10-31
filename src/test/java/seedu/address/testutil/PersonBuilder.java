@@ -50,6 +50,7 @@ public class PersonBuilder {
         gender = new Gender(DEFAULT_GENDER);
         ic = new Ic(DEFAULT_NRIC);
         tags = new HashSet<>();
+        appointments = new HashSet<>();
     }
 
     /**
@@ -64,6 +65,7 @@ public class PersonBuilder {
         gender = personToCopy.getGender();
         ic = personToCopy.getIc();
         tags = new HashSet<>(personToCopy.getTags());
+        appointments = new HashSet<>(personToCopy.getAppointments());
     }
 
     /**
@@ -79,6 +81,15 @@ public class PersonBuilder {
      */
     public PersonBuilder withTags(String... tags) {
         this.tags = SampleDataUtil.getTagSet(tags);
+        return this;
+    }
+
+    /**
+     * Parses the {@code appointments} into a {@code Set<Appointment>}
+     * and set it to the {@code Patient} that we are building.
+     */
+    public PersonBuilder withAppointments(Appointment... appointments) {
+        this.appointments = SampleDataUtil.getAppointmentSet(appointments);
         return this;
     }
 

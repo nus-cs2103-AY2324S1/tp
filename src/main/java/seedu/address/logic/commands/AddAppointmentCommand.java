@@ -38,6 +38,8 @@ public class AddAppointmentCommand extends Command {
             "This patient already has an appointment at this timing";
     public static final String MESSAGE_DUPLICATE_APPOINTMENT_DOCTOR =
             "This doctor already has an appointment at this timing";
+    public static final String MESSAGE_SAME_DOCTOR_AND_PATIENT =
+            "You entered the same IC for both doctors and patients!";
 
 
     private final Appointment toAdd;
@@ -53,13 +55,6 @@ public class AddAppointmentCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-//        Ic patientIc = toAdd.getPatient();
-//        Ic doctorIc = toAdd.getDoctor();
-//
-//        // check that patient and doctor exists in the model
-//        if (!model.hasPatientIc(patientIc)) {
-//
-//        }
 
         Patient chosenPatient = findPatient(model);
         Doctor chosenDoctor = findDoctor(model);
@@ -69,6 +64,12 @@ public class AddAppointmentCommand extends Command {
         if (chosenDoctor == null) {
             throw new CommandException(MESSAGE_INVALID_DOCTOR);
         }
+
+        // check that patient and doctor are not the same person
+        if (chosenPatient.isSamePerson(chosenDoctor)) {
+            throw new CommandException(MESSAGE_SAME_DOCTOR_AND_PATIENT);
+        }
+
 
         // check that the patient and doctor do not have appointment scheduled at the same time
         if (chosenPatient.hasAppointmentAt(toAdd.getAppointmentTime())) {

@@ -84,14 +84,6 @@ public interface Model {
      */
     void setPerson(Person target, Person editedPerson);
 
-//    /**
-//     * Adds an appointment specified by the {@code appointment} into the model.
-//     * The patient and doctor in the appointment cannot have another appointment at the same time.
-//     *
-//     * @param appointment the appointment to be added.
-//     */
-//    public void addApointment(Appointment appointment);
-
     /**
      * Returns an unmodifiable view of the filtered person list
      */

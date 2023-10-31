@@ -36,14 +36,6 @@ public class UniquePatientList implements Iterable<Patient> {
         return internalList.stream().anyMatch(toCheck::isSamePerson);
     }
 
-//    /**
-//     * Returns true if the list contains a person with same ic as the given argument.
-//     */
-//    public boolean containsIc(Ic toCheck) {
-//        requireNonNull(toCheck);
-//        return internalList.stream().anyMatch(toCheck::equals);
-//    }
-
     /**
      * Adds a person to the list.
      * The person must not already exist in the list.

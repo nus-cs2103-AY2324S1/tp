@@ -18,7 +18,7 @@ public class Messages {
     public static final String MESSAGE_PERSON_NOT_FOUND = "Person with specified nric cannot be found!";
     public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d persons listed!";
     public static final String MESSAGE_DUPLICATE_FIELDS =
-                "Multiple values specified for the following single-valued field(s): ";
+            "Multiple values specified for the following single-valued field(s): ";
 
     /**
      * Returns an error message indicating the duplicate prefixes.
@@ -46,6 +46,8 @@ public class Messages {
                 .append(person.getAddress())
                 .append("; Tags: ");
         person.getTags().forEach(builder::append);
+        builder.append("; Appointments: ");
+        person.getAppointments().forEach(builder::append);
         return builder.toString();
     }
 
