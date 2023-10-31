@@ -7,6 +7,7 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.person.Applicant;
 import seedu.address.model.person.Member;
+import seedu.address.model.tag.Tag;
 
 /**
  * A default model stub that have all of the methods failing.
@@ -103,12 +104,22 @@ public class ModelStub implements Model {
     }
 
     @Override
+    public ObservableList<Tag> getFilteredTagList() {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
     public void updateFilteredMemberList(Predicate<? super Member> predicate) {
         throw new AssertionError("This method should not be called.");
     }
 
     @Override
     public void updateFilteredApplicantList(Predicate<? super Applicant> predicate) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public void updateFilteredTagList(Predicate<? super Tag> predicate) {
         throw new AssertionError("This method should not be called.");
     }
 }

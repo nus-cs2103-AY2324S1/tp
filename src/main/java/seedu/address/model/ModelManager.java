@@ -13,6 +13,7 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.person.Applicant;
 import seedu.address.model.person.Member;
+import seedu.address.model.tag.Tag;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -24,6 +25,7 @@ public class ModelManager implements Model {
     private final UserPrefs userPrefs;
     private final FilteredList<Member> filteredMembers;
     private final FilteredList<Applicant> filteredApplicants;
+    private FilteredList<Tag> filteredTags;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -37,6 +39,7 @@ public class ModelManager implements Model {
         this.userPrefs = new UserPrefs(userPrefs);
         filteredMembers = new FilteredList<>(this.addressBook.getMemberList());
         filteredApplicants = new FilteredList<>(this.addressBook.getApplicantList());
+        filteredTags = new FilteredList<>(this.addressBook.getTagList());
     }
 
     public ModelManager() {
@@ -103,19 +106,23 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void deleteApplicant(Applicant target) {
-        addressBook.removeApplicant(target);
-        //updateFilteredApplicantList(PREDICATE_SHOW_ALL_PERSONS);
+    public void deleteMember(Member target) {
+        addressBook.removeMember(target);
+        addressBook.updateTags();
     }
 
-    public void deleteMember(Member memberIndex) {
-        addressBook.removeMember(memberIndex);
+    @Override
+    public void deleteApplicant(Applicant target) {
+        addressBook.removeApplicant(target);
     }
 
     @Override
     public void addMember(Member member) {
         addressBook.addMember(member);
+        addressBook.updateTags();
+
         updateFilteredMemberList(PREDICATE_SHOW_ALL_PERSONS);
+        updateFilteredTagList(PREDICATE_SHOW_ALL_TAGS);
     }
 
     @Override
@@ -129,6 +136,10 @@ public class ModelManager implements Model {
         requireAllNonNull(target, editedMember);
 
         addressBook.setMember(target, editedMember);
+        addressBook.updateTags();
+
+        updateFilteredMemberList(PREDICATE_SHOW_ALL_PERSONS);
+        updateFilteredTagList(PREDICATE_SHOW_ALL_TAGS);
     }
 
     @Override
@@ -136,6 +147,8 @@ public class ModelManager implements Model {
         requireAllNonNull(target, editedApplicant);
 
         addressBook.setApplicant(target, editedApplicant);
+
+        updateFilteredApplicantList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
     //=========== Filtered Person List Accessors =============================================================
@@ -158,6 +171,15 @@ public class ModelManager implements Model {
         return filteredApplicants;
     }
 
+    /**
+     * Returns an unmodifiable view of the list of {@code Tag} backed by the internal list of
+     * {@code versionedAddressBook}
+     */
+    @Override
+    public ObservableList<Tag> getFilteredTagList() {
+        return filteredTags;
+    }
+
     @Override
     public void updateFilteredMemberList(Predicate<? super Member> predicate) {
         requireNonNull(predicate);
@@ -168,6 +190,12 @@ public class ModelManager implements Model {
     public void updateFilteredApplicantList(Predicate<? super Applicant> predicate) {
         requireNonNull(predicate);
         filteredApplicants.setPredicate(predicate);
+    }
+
+    @Override
+    public void updateFilteredTagList(Predicate<? super Tag> predicate) {
+        requireNonNull(predicate);
+        filteredTags.setPredicate(predicate);
     }
 
     @Override
