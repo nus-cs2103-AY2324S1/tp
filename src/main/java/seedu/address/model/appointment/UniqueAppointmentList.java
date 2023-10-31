@@ -32,6 +32,9 @@ public class UniqueAppointmentList implements Iterable<Appointment> {
         return internalList.stream().anyMatch(toCheck::equals);
     }
 
+    /**
+     * Returns true if the list contains an overlapping appointment as the given argument.
+     */
     public boolean overlaps(Appointment toCheck) {
         requireNonNull(toCheck);
         return internalList.stream().anyMatch(toCheck::isOverlappingAppointment);

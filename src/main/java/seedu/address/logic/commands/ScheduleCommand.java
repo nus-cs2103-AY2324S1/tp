@@ -37,7 +37,8 @@ public class ScheduleCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "New appointment scheduled: %1$s";
     public static final String MESSAGE_DUPLICATE_APPOINTMENT = "This appointment already exists";
-    public static final String MESSAGE_OVERLAPPING_APPOINTMENTS = "This appointment overlaps with an existing appointment";
+    public static final String MESSAGE_OVERLAPPING_APPOINTMENTS = "This appointment overlaps "
+                                                                  + "with an existing appointment!";
 
     private final Appointment toAdd;
 
@@ -59,7 +60,7 @@ public class ScheduleCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_APPOINTMENT);
         }
 
-        if (model.overlapsWithAppointments(toAdd)) {
+        if (model.hasOverlapsWithAppointments(toAdd)) {
             throw new CommandException(MESSAGE_OVERLAPPING_APPOINTMENTS);
         }
 
