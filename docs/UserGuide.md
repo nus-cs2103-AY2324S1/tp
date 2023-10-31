@@ -71,6 +71,22 @@ need. Look out for these coloured boxes!
 
 </div>
 
+<div markdown="block" class="alert alert-first">
+
+**:beginner: First time users**<br>
+
+The section after this block contains additional information for first time users.
+
+</div>
+
+<div markdown="block" class="alert alert-experienced">
+
+**:hammer: Experienced users**<br>
+
+The section after this block contains additional information for experienced users.
+
+</div>
+
 [Back To Top](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
@@ -205,7 +221,7 @@ Adds a tutor to TutorConnect.
 
 <div markdown="block" class="alert alert-first">
 
-**:baby-bottle: First time users**<br>
+**:beginner: First time users**<br>
 
 </div>
 
@@ -227,7 +243,7 @@ You should expect to see John Doe has now been added at the bottom of the displa
 
 <div markdown="block" class="alert alert-experienced">
 
-**:nerd-face: Experienced users**<br>
+**:hammer: Experienced users**<br>
 
 </div>
 
