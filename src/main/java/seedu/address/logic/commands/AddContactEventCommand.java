@@ -32,7 +32,7 @@ public class AddContactEventCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an event to the calendar of the person "
             + "identified by the index number used in the displayed person list.\n"
-            + "Parameters: "
+            + "Parameters: INDEX (must be a positive integer) "
             + PREFIX_EVENT_DESCRIPTION + "DESCRIPTION "
             + PREFIX_EVENT_START_DATE_TIME + "START DATE AND TIME "
             + PREFIX_EVENT_END_DATE_TIME + "END DATE AND TIME...\n"
