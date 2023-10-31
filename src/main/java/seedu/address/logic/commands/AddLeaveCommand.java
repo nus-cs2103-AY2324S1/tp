@@ -74,7 +74,7 @@ public class AddLeaveCommand extends Command {
         }
         Person employeeToAddLeave = lastShownList.get(index.getZeroBased());
         if (startDate.isBefore(LocalDate.now())) {
-            throw new CommandException(String.format(AnnualLeave.MESSAGE_ADD_EXPIRED_LEAVE ));
+            throw new CommandException(String.format(AnnualLeave.MESSAGE_ADD_EXPIRED_LEAVE));
         }
         if (employeeToAddLeave.getAnnualLeave().containsDuplicateLeave(startDate, endDate)) {
             throw new CommandException(AnnualLeave.MESSAGE_ADD_DUPLICATE_LEAVE);
@@ -111,7 +111,15 @@ public class AddLeaveCommand extends Command {
         }
 
         AddLeaveCommand otherAddLeaveCommand = (AddLeaveCommand) other;
-        return this.equals(otherAddLeaveCommand);
+        if (this.endDate == null || otherAddLeaveCommand.endDate == null) {
+            if (this.endDate == null && otherAddLeaveCommand.endDate == null) {
+                return this.index.equals(otherAddLeaveCommand.index)
+                        && this.startDate.equals(otherAddLeaveCommand.startDate);
+            }
+            return false;
+        }
+        return this.index.equals(otherAddLeaveCommand.index) && this.startDate.equals(otherAddLeaveCommand.startDate)
+                && this.endDate.equals(otherAddLeaveCommand.endDate);
     }
 
     @Override
@@ -126,7 +134,7 @@ public class AddLeaveCommand extends Command {
      * @param employee The employee that has their leave added.
      * @return The message that shows remaining days of leave for an employee for the current year.
      */
-    public String getLeaveStatusMessage(Person employee) {
+    public static String getLeaveStatusMessage(Person employee) {
         requireNonNull(employee);
         return "Number of leaves left for this year: " + employee.getAnnualLeave().numOfLeaveLeftForCurrYear()
                 + " / "

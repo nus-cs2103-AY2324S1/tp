@@ -1,5 +1,13 @@
 package seedu.address.logic.commands;
 
+import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ADD_ANNUAL_LEAVE_FROM;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ADD_ANNUAL_LEAVE_ON;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ADD_ANNUAL_LEAVE_TO;
+
+import java.time.LocalDate;
+import java.util.List;
+
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
@@ -8,14 +16,9 @@ import seedu.address.model.Model;
 import seedu.address.model.person.AnnualLeave;
 import seedu.address.model.person.Person;
 
-import java.time.LocalDate;
-import java.util.List;
-
-import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADD_ANNUAL_LEAVE_FROM;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADD_ANNUAL_LEAVE_ON;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADD_ANNUAL_LEAVE_TO;
-
+/**
+ * Deletes leave from an existing employee in the list.
+ */
 public class DeleteLeaveCommand extends Command {
 
     public static final String COMMAND_WORD = "deleteleave";
@@ -105,7 +108,16 @@ public class DeleteLeaveCommand extends Command {
         }
 
         DeleteLeaveCommand otherDeleteLeaveCommand = (DeleteLeaveCommand) other;
-        return this.equals(otherDeleteLeaveCommand);
+        if (this.endDate == null || otherDeleteLeaveCommand.endDate == null) {
+            if (this.endDate == null && otherDeleteLeaveCommand.endDate == null) {
+                return this.index.equals(otherDeleteLeaveCommand.index)
+                        && this.startDate.equals(otherDeleteLeaveCommand.startDate);
+            }
+            return false;
+        }
+        return this.index.equals(otherDeleteLeaveCommand.index)
+                && this.startDate.equals(otherDeleteLeaveCommand.startDate)
+                && this.endDate.equals(otherDeleteLeaveCommand.endDate);
     }
 
     @Override
@@ -120,7 +132,7 @@ public class DeleteLeaveCommand extends Command {
      * @param employee The employee that has their leave deleted.
      * @return The message that shows remaining days of leave for an employee for the current year.
      */
-    public String getLeaveStatusMessage(Person employee) {
+    public static String getLeaveStatusMessage(Person employee) {
         requireNonNull(employee);
         return "Number of leaves left for this year: " + employee.getAnnualLeave().numOfLeaveLeftForCurrYear()
                 + " / "

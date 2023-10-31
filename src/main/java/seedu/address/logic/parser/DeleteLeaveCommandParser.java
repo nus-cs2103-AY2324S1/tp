@@ -1,20 +1,23 @@
 package seedu.address.logic.parser;
 
+import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ADD_ANNUAL_LEAVE_FROM;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ADD_ANNUAL_LEAVE_ON;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ADD_ANNUAL_LEAVE_TO;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.DeleteLeaveCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
-
-import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADD_ANNUAL_LEAVE_ON;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADD_ANNUAL_LEAVE_FROM;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADD_ANNUAL_LEAVE_TO;
-
-public class DeleteLeaveCommandParser implements Parser<DeleteLeaveCommand>{
+/**
+ * Parses input arguments and creates a new DeleteLeaveCommand object
+ */
+public class DeleteLeaveCommandParser implements Parser<DeleteLeaveCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the DeleteLeaveCommand
@@ -86,7 +89,8 @@ public class DeleteLeaveCommandParser implements Parser<DeleteLeaveCommand>{
      * @return DeleteLeaveCommand object for execution
      * @throws ParseException if the user input does not conform the expected format
      */
-    public DeleteLeaveCommand deleteMultipleDaysLeaveHandler(ArgumentMultimap argMultimapForFromAndTo) throws ParseException {
+    public DeleteLeaveCommand deleteMultipleDaysLeaveHandler(ArgumentMultimap argMultimapForFromAndTo)
+            throws ParseException {
         if (argMultimapForFromAndTo.getPreamble().isEmpty()) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteLeaveCommand.MESSAGE_USAGE));

@@ -26,9 +26,10 @@ public class AnnualLeave {
             + "the number of days of annual leave taken should not exceed the total limit and \n"
                     + "you can only add leave for this year and next year.";
 
-    public static final String MESSAGE_ADD_EXPIRED_LEAVE = "Date of the leave that you are trying to add is already over.";
-    public static final String MESSAGE_DELETE_EXPIRED_LEAVE = "Date of the leave that you are trying to " +
-            "delete is already over.";
+    public static final String MESSAGE_ADD_EXPIRED_LEAVE = "Date of the leave that you are trying to "
+            + "add is already over.";
+    public static final String MESSAGE_DELETE_EXPIRED_LEAVE = "Date of the leave that you are trying to "
+            + "delete is already over.";
     public static final String MESSAGE_ADD_DUPLICATE_LEAVE = "Some or all the leave(s) that you "
             + "are trying to add has already been added. Please check again.";
     public static final String MESSAGE_DELETE_INVALID_LEAVE = "Some or all the leave(s) that you "
@@ -88,7 +89,15 @@ public class AnnualLeave {
         }
 
         AnnualLeave otherAnnualLeave = (AnnualLeave) other;
-        return value.equals(otherAnnualLeave.value);
+        if (!value.equals(otherAnnualLeave.value)) {
+            return false;
+        }
+        for (LocalDate d: this.leaveList) {
+            if (!otherAnnualLeave.leaveList.contains(d)) {
+                return false;
+            }
+        }
+        return this.leaveList.size() == otherAnnualLeave.leaveList.size();
     }
 
     @Override
@@ -98,6 +107,18 @@ public class AnnualLeave {
 
     public List<LocalDate> getLeaveList() {
         return leaveList;
+    }
+
+    /**
+     * Adds in multiple days of leave.
+     * @param startDate of the leave to be added to the leaveList
+     * @param endDate of the leave to be added to the leaveList
+     */
+    public void addLeave(LocalDate startDate, LocalDate endDate) {
+        long numOfDays = ChronoUnit.DAYS.between(startDate, endDate) + 1;
+        for (int i = 0; i < numOfDays; i++) {
+            this.leaveList.add(startDate.plusDays(i));
+        }
     }
 
     /**
@@ -114,18 +135,6 @@ public class AnnualLeave {
      */
     public void deleteLeave(LocalDate startDate) {
         this.leaveList.remove(startDate);
-    }
-
-    /**
-     * Adds in multiple days of leave.
-     * @param startDate of the leave to be added to the leaveList
-     * @param endDate of the leave to be added to the leaveList
-     */
-    public void addLeave(LocalDate startDate, LocalDate endDate) {
-        long numOfDays = ChronoUnit.DAYS.between(startDate, endDate) + 1;
-        for (int i = 0; i < numOfDays; i++) {
-            this.leaveList.add(startDate.plusDays(i));
-        }
     }
 
     /**
