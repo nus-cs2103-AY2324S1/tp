@@ -88,12 +88,14 @@ public class DeleteCommandTest {
 
         DeletePersonDescriptor descriptor = new DeletePersonDescriptor();
         descriptor.setAppointment();
+        descriptor.setMedicalHistory();
 
         DeleteCommand command = new DeleteCommand(firstPerson.getNric(), null, descriptor);
         command.execute(model);
 
         Person editedPerson = model.getFilteredPersonList().get(0);
         assertTrue(editedPerson.getAppointment().isEmpty());
+        assertTrue(editedPerson.getMedicalHistories().isEmpty());
     }
 
     @Test
