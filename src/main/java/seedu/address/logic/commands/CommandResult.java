@@ -17,18 +17,10 @@ public class CommandResult {
     private final String feedbackToUser;
 
     /** Help information should be shown to the user. */
-    private final boolean showHelp;
-
-    /** The application should exit. */
-    private final boolean exit;
-
-    private final boolean showView;
 
     private final Person personToView;
 
     private final Index targetIndex;
-
-    private final boolean viewExit;
 
     private final boolean isFostererEdited;
 
@@ -39,22 +31,14 @@ public class CommandResult {
      */
     public CommandResult(
             String feedbackToUser,
-            boolean showHelp,
-            boolean exit,
-            boolean showView,
             Person personToView,
             Index targetIndex,
-            boolean viewExit,
             CommandType commandType,
             boolean isFostererEdited
     ) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
-        this.showHelp = showHelp;
-        this.exit = exit;
-        this.showView = showView;
         this.personToView = personToView;
         this.targetIndex = targetIndex;
-        this.viewExit = viewExit;
         this.commandType = commandType;
         this.isFostererEdited = isFostererEdited;
     }
@@ -63,17 +47,12 @@ public class CommandResult {
      * Constructs a {@code CommandResult} with the specified {@code feedbackToUser},
      * and other fields set to their default value.
      */
-    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit) {
-        this(requireNonNull(feedbackToUser),
-                showHelp,
-                exit,
-                false,
-                null,
-                null,
-                false,
-                null,
-                false
-        );
+    public CommandResult(String feedbackToUser, CommandType commandType) {
+        this.feedbackToUser = requireNonNull(feedbackToUser);
+        this.personToView = null;
+        this.targetIndex = null;
+        this.commandType = commandType;
+        this.isFostererEdited = false;
     }
 
     /**
@@ -81,27 +60,11 @@ public class CommandResult {
      * and other fields set to their default value.
      */
     public CommandResult(String feedbackToUser) {
-        this(feedbackToUser, false, false);
+        this(feedbackToUser, null);
     }
 
     public String getFeedbackToUser() {
         return feedbackToUser;
-    }
-
-    public boolean isShowHelp() {
-        return showHelp;
-    }
-
-    public boolean isExit() {
-        return exit;
-    }
-
-    public boolean isShowView() {
-        return showView;
-    }
-
-    public boolean isViewExit() {
-        return viewExit;
     }
 
     public Person getPersonToView() {
@@ -127,26 +90,31 @@ public class CommandResult {
 
         CommandResult otherCommandResult = (CommandResult) other;
         return feedbackToUser.equals(otherCommandResult.feedbackToUser)
-                && showHelp == otherCommandResult.showHelp
-                && exit == otherCommandResult.exit;
+                && personToView == otherCommandResult.personToView
+                && targetIndex == otherCommandResult.targetIndex
+                && commandType == otherCommandResult.commandType
+                && isFostererEdited == otherCommandResult.isFostererEdited;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(feedbackToUser, showHelp, exit);
+        return Objects.hash(feedbackToUser, personToView, targetIndex, commandType, isFostererEdited);
     }
 
     @Override
     public String toString() {
         ToStringBuilder t = new ToStringBuilder(this)
-                .add("feedbackToUser", feedbackToUser)
-                .add("showHelp", showHelp)
-                .add("exit", exit)
-                .add("isInViewMode", isShowView())
-                .add("isViewExit", isViewExit());
-        if (isShowView()) {
-            t.add("person", getPersonToView());
+                .add("feedbackToUser", feedbackToUser);
+        if (personToView != null) {
+            t.add("person", personToView);
         }
+        if (targetIndex != null) {
+            t.add("targetIndex", targetIndex);
+        }
+        if (commandType != null) {
+            t.add("commandType", commandType);
+        }
+        t.add("isFostererEdited", isFostererEdited);
         return t.toString();
     }
 

@@ -260,20 +260,20 @@ public class MainWindow extends UiPart<Stage> {
             if (commandResult != null) {
                 logger.info("Result: " + commandResult.getFeedbackToUser());
                 resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
-                if (commandResult.isShowHelp()) {
+                if (commandResult.getCommandType() == CommandType.HELP) {
                     handleHelp();
                 }
 
-                if (commandResult.isExit()) {
+                if (commandResult.getCommandType() == CommandType.EXIT) {
                     handleExit();
                 }
 
-                if (logic.getIsViewCommand()) {
+                if (commandResult.getCommandType() == CommandType.VIEW) {
                     indexOfAFostererToView = commandResult.getTargetIndex();
                     handleView(commandResult.getPersonToView());
                 }
 
-                if (logic.getIsViewExitCommand()) {
+                if (commandResult.getCommandType() == CommandType.VIEW_EXIT) {
                     isSaved = commandResult.getIsFostererEdited();
                     handleViewExit();
                 }

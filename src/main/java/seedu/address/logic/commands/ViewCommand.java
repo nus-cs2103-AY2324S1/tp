@@ -32,14 +32,7 @@ public class ViewCommand extends Command {
         if (indexOfTheFostererToView == null) {
             return new CommandResult(
                     VIEWING_NEW_PROFILE_SUCCESS,
-                    false,
-                    false,
-                    true,
-                    null,
-                    null,
-                    false,
-                    null,
-                    false
+                    CommandType.VIEW
             );
         }
 
@@ -53,13 +46,9 @@ public class ViewCommand extends Command {
         Person personToView = lastShownList.get(indexOfTheFostererToView.getZeroBased());
         return new CommandResult(
                 String.format(VIEWING_PROFILE_SUCCESS, Messages.format(personToView)),
-                false,
-                false,
-                true,
                 personToView,
                 indexOfTheFostererToView,
-                false,
-                null,
+                CommandType.VIEW,
                 false
         );
     }

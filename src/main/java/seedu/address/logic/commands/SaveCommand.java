@@ -19,7 +19,7 @@ import seedu.address.model.person.Person;
 public class SaveCommand extends Command {
     public static final String SAVE_COMMAND_WORD = "save";
     public static final String MESSAGE_ADD_SUCCESS = "New fosterer added: %1$s";
-    public static final String MESSAGE_FOSTERER_NOT_EDITED = "Fosterer details must be added.";
+    public static final String MESSAGE_FOSTERER_NOT_EDITED = "Fosterer details must be filled out.";
 
     private Person newFosterer;
     private Index index;
@@ -61,13 +61,9 @@ public class SaveCommand extends Command {
             model.addPerson(newFosterer);
             return new CommandResult(
                     String.format(MESSAGE_ADD_SUCCESS, Messages.format(newFosterer)),
-                    false,
-                    false,
-                    false,
                     null,
                     null,
-                    true,
-                    CommandType.SAVE,
+                    CommandType.VIEW_EXIT,
                     true
                     );
         }
@@ -91,14 +87,7 @@ public class SaveCommand extends Command {
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(
                 String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)),
-                false,
-                false,
-                false,
-                null,
-                null,
-                false,
-                CommandType.SAVE,
-                false
+                CommandType.SAVE
         );
     }
 }

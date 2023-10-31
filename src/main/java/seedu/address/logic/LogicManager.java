@@ -11,6 +11,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.CommandType;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.AddressBookParser;
 import seedu.address.logic.parser.ViewModeParser;
@@ -57,7 +58,7 @@ public class LogicManager implements Logic {
         command = addressBookParser.parseCommand(commandText);
         commandResult = command.execute(model);
 
-        if (commandResult.isShowView()) {
+        if (commandResult.getCommandType() == CommandType.VIEW) {
             isViewCommand = true;
         } else {
             isViewCommand = false;
@@ -90,7 +91,7 @@ public class LogicManager implements Logic {
             return null;
         }
         
-        if (commandResult.isViewExit()) {
+        if (commandResult.getCommandType() == CommandType.VIEW_EXIT) {
             isViewExitCommand = true;
             isViewCommand = false;
         } else {

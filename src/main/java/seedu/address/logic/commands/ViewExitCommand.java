@@ -36,31 +36,26 @@ public class ViewExitCommand extends Command {
         List<Person> lastShownList = model.getFilteredPersonList();
         boolean isFostererEdited = false;
 
+        // for adding from empty profile page
         if (index == null && !lastShownList.contains(newFosterer)) {
             return new CommandResult(
                     MESSAGE_EXIT_ACKNOWLEDGEMENT,
-                    false,
-                    false,
-                    false,
                     newFosterer,
                     null,
-                    true,
-                    null,
+                    CommandType.VIEW_EXIT,
                     false);
         }
 
-        if (index == null && lastShownList.contains(newFosterer)) {
-            return new CommandResult(
-                    MESSAGE_EXIT_ACKNOWLEDGEMENT,
-                    false,
-                    false,
-                    false,
-                    newFosterer,
-                    null,
-                    true,
-                    null,
-                    false);
-        }
+//        //
+//        if (index == null && lastShownList.contains(newFosterer)) {
+//            return new CommandResult(
+//                    MESSAGE_EXIT_ACKNOWLEDGEMENT,
+//                    newFosterer,
+//                    null,
+//                    true,
+//                    null,
+//                    false);
+//        }
 
 
         if (index.getZeroBased() >= lastShownList.size()) {
@@ -76,13 +71,9 @@ public class ViewExitCommand extends Command {
 
         return new CommandResult(
                 MESSAGE_EXIT_ACKNOWLEDGEMENT,
-                false,
-                false,
-                false,
                 newFosterer,
                 null,
-                true,
-                null,
+                CommandType.VIEW_EXIT,
                 isFostererEdited);
     }
 }

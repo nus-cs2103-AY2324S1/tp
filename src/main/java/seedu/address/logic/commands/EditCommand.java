@@ -94,14 +94,11 @@ public class EditCommand extends Command {
 
         Person personToEdit = lastShownList.get(index.getZeroBased());
         if (editPersonDescriptor == null) {
-            return new CommandResult(String.format(VIEWING_PROFILE_SUCCESS, Messages.format(personToEdit)),
-                    false,
-                    false,
-                    true,
+            return new CommandResult(
+                    String.format(VIEWING_PROFILE_SUCCESS, Messages.format(personToEdit)),
                     personToEdit,
                     index,
-                    false,
-                    null,
+                    CommandType.VIEW,
                     false
             );
         }
