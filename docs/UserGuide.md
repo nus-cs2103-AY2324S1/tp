@@ -205,6 +205,7 @@ tracking tutor information within your tuition centre.
 Adds a tutor to TutorConnect.
 
 ##### :beginner: First time users
+{:.no_toc}
 
 **Scenario**
 

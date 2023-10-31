@@ -31,8 +31,6 @@ $warning:       $yellow !default;
 $danger:        $red !default;
 $light:         $gray-100 !default;
 $dark:          $gray-800 !default;
-$first:         $purple !default;
-$experienced:   $pink !default;
 
 $theme-colors: (
   "primary":    $primary,
@@ -43,8 +41,6 @@ $theme-colors: (
   "danger":     $danger,
   "light":      $light,
   "dark":       $dark,
-  "first":      $first,
-  "experienced":$experienced,
 ) !default;
 
 $theme-color-interval: 8% !default;
