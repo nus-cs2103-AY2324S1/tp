@@ -50,8 +50,20 @@ deactivate InputParser
 LogicManager -> DeleteCommand : execute()
 activate DeleteCommand
 
+DeleteCommand -> Model : getFilteredContactList()
+activate Model
+Model --> DeleteCommand : lastShownList
+deactivate Model
+
 loop for each index
-    DeleteCommand -> Model : removeContact(index)
+    DeleteCommand -> Model : get(index.getZeroBased())
+    activate Model
+    Model --> DeleteCommand : contact
+    deactivate Model
+end
+
+loop for each contact in contactsToDelete
+    DeleteCommand -> Model : removeContact(contact)
     activate Model
     Model --> DeleteCommand
     deactivate Model
