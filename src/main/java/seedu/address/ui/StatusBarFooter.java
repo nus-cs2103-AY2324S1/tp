@@ -29,19 +29,17 @@ public class StatusBarFooter extends UiPart<Region> {
     public StatusBarFooter(Path saveLocation) {
         super(FXML);
         saveLocationStatus.setText(Paths.get(".").resolve(saveLocation).toString());
+
+        //@@author dishenggg-reused
+        //Reused from https://stackoverflow.com/a/42384436
+        // with minor modifications
+        AnimationTimer timer = new AnimationTimer() {
+            @Override
+            public void handle(long now) {
+                currentTime.setText(LocalDateTime.now().format(DateTimeFormatter.ofPattern(TIME_DISPLAY_FORMAT)));
+            }
+        };
+        //@@author
         timer.start();
     }
-
-
-    // @@author dishenggg-reused
-    //Reused from https://stackoverflow.com/a/42384436
-    // with minor modifications
-    AnimationTimer timer = new AnimationTimer() {
-        @Override
-        public void handle(long now) {
-            currentTime.setText(LocalDateTime.now().format(DateTimeFormatter.ofPattern(TIME_DISPLAY_FORMAT)));
-        }
-    };
-    //@@author
-
 }
