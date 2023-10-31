@@ -1,10 +1,9 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_STATUS;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_SCHEDULES;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -15,10 +14,10 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 import seedu.address.model.schedule.Status;
 import seedu.address.model.schedule.StatusPredicate;
-import seedu.address.model.schedule.TutorIndexPredicate;
+import seedu.address.model.schedule.TutorPredicate;
 
 /**
- * Lists all persons in the address book to the user.
+ * Lists all schedules in the address book to the user.
  */
 public class ListScheduleCommand extends Command {
 
@@ -27,9 +26,12 @@ public class ListScheduleCommand extends Command {
     public static final String MESSAGE_SUCCESS = "Listed all schedules";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-        + ": List the schedule identified by the index number used in the displayed tutor list.\n"
-        + "Parameters: INDEX (must be a positive integer, optional to add)\n"
-        + "Example: " + COMMAND_WORD + " 1";
+        + ": List the schedules in the address book. If index or status is specified, it lists the schedule"
+        + "identified by that index number in the displayed tutor list or the status.\n"
+        + "Parameters: \nINDEX (must be a positive integer, optional to add) \n"
+        + PREFIX_STATUS + "STATUS (0 or 1 value, optional to add)"
+        + "Example: \n"
+        + COMMAND_WORD + " 1, \n" + COMMAND_WORD + " m/0 \n" + COMMAND_WORD + " 1 m/1";
 
     private final Index targetIndex;
     private final Status status;
@@ -46,14 +48,14 @@ public class ListScheduleCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         List<String> nameList = null;
+        List<Person> lastShownList = model.getFilteredPersonList();
+
         if (targetIndex != null) {
-            List<Person> lastShownList = model.getFilteredPersonList();
             if (targetIndex.getZeroBased() >= lastShownList.size()) {
                 throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
             }
-            String fullName = lastShownList.get(targetIndex.getZeroBased()).getName().toString();
-            nameList = new ArrayList<>(Arrays.asList(fullName.split(" ")));
-            TutorIndexPredicate indexPredicate = new TutorIndexPredicate(nameList);
+            Person tutor = lastShownList.get(targetIndex.getZeroBased());
+            TutorPredicate indexPredicate = new TutorPredicate(tutor);
             model.updateFilteredScheduleList(indexPredicate);
         }
 
