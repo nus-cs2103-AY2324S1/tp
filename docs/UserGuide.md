@@ -20,12 +20,94 @@ Here is an **overview** of how CampusConnect can enhance your campus experience:
 
 This user guide shows you how to get started with using CampusConnect -- it has easy-to-understand explanations and examples to help you grasp its various features. 
 
+### Who is this guide for?
+
+Our guide is catered to CampusConnect users of all experiences! Here's a quick overview of who this guide is for, and how you can best use the guide:
+
 | If you are... | You should... |
 | :-----------: | :-----------: |
 | New to CampusConnect | Read the **[Quick Start](#quick-start)** below! |
 | An existing user | Skip to the **[Command Summary](#command-summary)** for a quick reference, or read through our **[Features](#features)** for a deeper look at each feature! |
 | Interested in comprehensive technical details | Read our **[Developer Guide](DeveloperGuide.md)**, which is separate from this User Guide! |
 
+### Visual Components
+
+Our guide uses **visual components** to highlight key information for your convenience. Here's a quick overview of what each component means:
+
+<div style="display: grid; grid-template-columns: 25% 75%; grid-template-rows: repeat(5, auto);">
+    <div style="font-size: 1.5em; display: flex; align-items: center;">
+       <ol start="1">
+        <li>Examples</li>
+      </ol>
+    </div>
+    <div>
+        <box theme="info" icon=":fa-solid-magnifying-glass:">
+
+**Example usages** of a feature will be contained in a **light blue box** with this **magnifying glass icon** :fa-solid-magnifying-glass:. These examples will show you how a feature works, and will include sample commands that you can try out yourself!
+        </box>
+    </div>
+    <div style="font-size: 1.5em; display: flex; align-items: center;">
+        <ol start="2">
+            <li>Command Syntax Tables</li>
+        </ol>
+    </div>
+    <div>
+        <br>
+        <panel header=":fa-solid-book: **Command Parameter / Syntax Tables**" type="secondary" expanded no-close>
+Large tables describing the **syntax or parameters** of **parameter-heavy commands**, or the **attributes of large models**, will be contained in a **collapsible grey panel** like this one with a **book icon** :fa-solid-book:.
+
+| Sample | Table |
+| ------ | ----- |
+| Sample | Table Data |
+| Sample 2 | Table Data 2 |
+
+These tables will provide a quick reference on the meanings and usage of each parameter in commands which support many such parameters, or the attributes of large and complex models, such as our [Person model](#person-model).
+
+PDF Users will always see these panels expanded, but users of the web version of this guide can click on the panel header to collapse (and then re-expand) the panel if the information is no longer necessary.
+        </panel>
+        <br>
+    </div>
+    <div style="font-size: 1.5em; display: flex; align-items: center;">
+        <ol start="3">
+            <li>Planned Enhancements</li>
+        </ol>
+    </div>
+    <div>
+        <box theme="warning" icon=":fa-solid-exclamation-triangle:">
+**Planned enhancements / fixes** which have not been implemented will be contained in a **yellow box** with this **exclamation triangle icon** :fa-solid-exclamation-triangle:. These enhancements will be implemented in future releases of CampusConnect, so stay tuned!
+
+All planned enhancements / fixes will also be listed in the [Planned Enhancements / Known Issues](#planned-enhancements-known-issues) section near the end of the guide.
+        </box>
+        <br>
+    </div>
+    <div style="font-size: 1.5em; display: flex; align-items: center;">
+        <ol start="4">
+            <li>Tips</li>
+        </ol>
+    </div>
+    <div>
+        <box theme="primary" icon=":fa-solid-lightbulb:">
+**Tips** which provide useful additional information about a feature will be contained in a **darker blue box** with this **lightbulb icon** :fa-solid-lightbulb:. These tips aren't required to get through basic functionality of our features, but will help you get the most out of CampusConnect!
+        </box>
+    </div>
+</div>
+
+
+
+
+<br>
+
+
+
+<br>
+
+
+
+<br>
+
+
+
+---
 
 # Table of Contents
 1. Quick Start
@@ -51,7 +133,7 @@ This user guide shows you how to get started with using CampusConnect -- it has 
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Quick start
+# Quick Start
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
@@ -84,7 +166,7 @@ This user guide shows you how to get started with using CampusConnect -- it has 
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Features
+# Features
 
 <box type="info" seamless>
 
@@ -486,20 +568,20 @@ Make sure to familiarize yourself with the commands and use them as per your nee
 
 --------------------------------------------------------------------------------------------------------------------
 
-## FAQ
+# FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous CampusConnect home folder.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Known issues
+# Planned Enhancements / Known Issues
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Command summary
+# Command summary
 
 Action        | Format, Examples
 --------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
