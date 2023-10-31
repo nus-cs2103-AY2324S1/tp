@@ -3,15 +3,21 @@ layout: page
 title: User Guide
 ---
 # BandConnect++ User Guide
-BandConnect++ is a powerful desktop app that helps musicians manage contact with other musicians to easily form a band. You can use it to manage musician contacts, select band members, and form a band of your preference, all within a few clicks or a few seconds of typing!
+Unlock your musical potential with **_BandConnect++_** ! 
+
+**_BandConnect++_** is a powerful desktop app that helps music producers manage their musician contacts and form bands with ease. It is created with a convenient and intuitive Command Line Interface (CLI) that speeds up your work routine.
+
+**_BandConnect++_** is developed by a driven team of musicians/programmers who strives to make life easier for musicians and music producers.  Discover your perfect musical match and create your next big hit now!
 
 --------------------------------------------------------------------------------------------------------------------
 ## About this guide
-Welcome to the *BandConnect++ User Guide*! This user guide provides an in-depth documentation on everything about *BandConnect++*, including installation, set up, features, common FAQ and troubleshooting recommendations. 
+Welcome to the *BandConnect++ User Guide*! This user guide walks you through everything about *BandConnect++*. Whether you are new to our app or a seasoned user, you can always find something useful in this guide. 
 
 For first-time users, please go to the [Quick start](#quick-start) section below to start an end-to-end tutorial that gets you onboard. Should you encounter any difficulty understanding the terminology, don't forget to refer to the [Glossary](#glossary)!
 
-### Table of Contents
+For experienced users, if you need help in remembering a particular command, please see [Command Summary](#command-summary). For common troubleshooting, please see [Troubleshooting](#troubleshooting).
+
+## Table of Contents
 * [Glossary](#glossary)
 * [Quick start](#quick-start)
 * [Features](#features)
@@ -25,13 +31,41 @@ To be added.
 --------------------------------------------------------------------------------------------------------------------
 
 ## Quick start
-To be added.
+1. Ensure you have Java 11 or above installed in your Computer. If you have never downloaded it before, download from [here](https://www.oracle.com/sg/java/technologies/javase/jdk11-archive-downloads.html).
+
+
+2. Download the latest version of [BandConnect++](https://github.com/AY2324S1-CS2103T-W11-3/tp/releases/latest).
+
+
+3. Move the file to the home folder you want to access the app. 
+
+     Recommended: Drag the downloaded file to your desktop so that you can access it from there.
+
+
+4. From the home folder, open "Terminal" on MacOS or "Command Prompt" in Windows, and type `java -jar BandConnect++.jar` to run the application. A GUI similar to the below should appear in a few seconds.
+   ![to be updated with arrows explaining the components](images/tobeupdated.png)
+Note how the app contains some sample data.
+Type the command in the command box and press Enter to execute it. 
+
+
+5. Some example commands you can try:
+   * `help` : Open the help window.
+   * `list` : Lists all contacts. 
+   * `add n/John Doe p/98765432 e/johnd@example.com i/bass g/rock`: Adds rock bassist John Doe.
+   * `delete 3` : Deletes the 3rd musician shown in the current list.
+   * `clear` : Deletes all contacts. 
+   * `exit` : Exits the app.
+   
+Please refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## Features
 
 ### Formatting Convention
+to be updated.
+
+### Get help: `help`
 
 ### Adding a musician contact: `add`
 
