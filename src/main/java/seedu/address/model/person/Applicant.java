@@ -101,6 +101,7 @@ public class Applicant extends Person {
     @Override
     public String detailsToCopy() {
         return "Name: " + getName() + "\n"
-                + "Phone: " + phone + "Interview Time: " + interviewTime;
+                + "Phone: " + getPhone() + "\n"
+                + "Interview Time: " + interviewTime;
     }
 }
