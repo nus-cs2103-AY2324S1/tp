@@ -156,5 +156,12 @@ public class UniquePersonList implements Iterable<Student> {
     public void sort(SortIn sequence) {
         requireNonNull(sequence);
         internalList.sort(Comparator.comparing(student -> student.getName().fullName.toLowerCase()));
+        Comparator<Student> comparator = Comparator.comparing(student -> student.getName().fullName.toLowerCase());
+
+        if ("ASC".equals(sequence.toString().toUpperCase())) {
+            internalList.sort(comparator);
+        } else {
+            internalList.sort(comparator.reversed());
+        }
     }
 }

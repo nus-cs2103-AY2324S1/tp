@@ -8,9 +8,14 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class SortIn {
     public static final String MESSAGE_CONSTRAINTS =
-            "Sort in should not be blank";
+            "Sort in should only be ASC or DESC.";
     public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
     public final String sortIn;
+
+    /**
+     * All valid sequences.
+     */
+    public enum ValidSequence { ASC, DESC; }
 
     /**
      * Constructs a {@code MrtStation}.
@@ -20,15 +25,19 @@ public class SortIn {
     public SortIn(String sortIn) {
         requireNonNull(sortIn);
         checkArgument(isValidSortIn(sortIn), MESSAGE_CONSTRAINTS);
-        this.sortIn = sortIn;
+        this.sortIn = sortIn.toUpperCase();
     }
 
     /**
      * Returns true if a given string is a valid sort in attribute.
      */
-    public static boolean isValidSortIn(String mrtStationName) {
-        // return mrtStationName.matches(VALIDATION_REGEX);
-        return true;
+    public static boolean isValidSortIn(String sequence) {
+        try {
+            ValidSequence enumValue = ValidSequence.valueOf(sequence.toUpperCase());
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
 
     @Override
