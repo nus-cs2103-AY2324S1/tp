@@ -47,21 +47,21 @@ public class ListScheduleCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<String> nameList = null;
+        Person tutor = null;
         List<Person> lastShownList = model.getFilteredPersonList();
 
         if (targetIndex != null) {
             if (targetIndex.getZeroBased() >= lastShownList.size()) {
                 throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
             }
-            Person tutor = lastShownList.get(targetIndex.getZeroBased());
+            tutor = lastShownList.get(targetIndex.getZeroBased());
             TutorPredicate indexPredicate = new TutorPredicate(tutor);
             model.updateFilteredScheduleList(indexPredicate);
         }
 
         if (status != null) {
             StatusPredicate statusPredicate = new StatusPredicate(
-                Collections.singletonList(status.toString()), nameList);
+                Collections.singletonList(status.toString()), tutor);
             model.updateFilteredScheduleList(statusPredicate);
         }
 

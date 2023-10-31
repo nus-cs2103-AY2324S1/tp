@@ -5,34 +5,33 @@ import java.util.function.Predicate;
 
 import seedu.address.commons.util.StringUtil;
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.person.Person;
 
 /**
  * Tests that a {@code Person}'s {@code Name} matches any of the keywords given.
  */
 public class StatusPredicate implements Predicate<Schedule> {
     private final List<String> status;
-    private final List<String> tutorName;
+    private final Person tutor;
 
     /**
      * Default constructor for StatusPredicate.
      *
      * @param status  status value
-     * @param tutorName name of tutor
+     * @param tutor   tutor
      */
-    public StatusPredicate(List<String> status, List<String> tutorName) {
+    public StatusPredicate(List<String> status, Person tutor) {
         this.status = status;
-        this.tutorName = tutorName;
+        this.tutor = tutor;
     }
 
     @Override
     public boolean test(Schedule schedule) {
-        if (tutorName != null) {
+        if (tutor != null) {
             return status.stream()
                 .allMatch(status ->
                     StringUtil.containsWordIgnoreCase(schedule.getStatus().toString(), status))
-                && tutorName.stream()
-                .allMatch(keywords ->
-                    StringUtil.containsWordIgnoreCase(schedule.getTutor().getName().toString(), keywords));
+                && schedule.getTutor().isSamePerson(tutor);
         } else {
             return status.stream()
                 .allMatch(status ->
