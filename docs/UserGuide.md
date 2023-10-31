@@ -255,7 +255,13 @@ solve 10
 
 
 ### Setting Difficulty of Flashcards: `set`
-Setting the difficulty of a flashcard
+Setting the difficulty of a flashcard.
+
+This difficulty refers to how difficult you found the flashcard. 
+This flashcard will be rescheduled based on the difficulty, as indicated by their due date.
+More difficult cards will appear more often in the practice rotation.
+This also takes into account past practices, so the more a card is practised, 
+the less it will appear in the practice rotation.
 
 Format: set INDEX DIFFICULTY
 
