@@ -10,6 +10,7 @@ import swe.context.commons.core.index.Index;
 import swe.context.commons.util.StringUtil;
 import swe.context.logic.Messages;
 import swe.context.logic.parser.exceptions.ParseException;
+import swe.context.model.alternate.AlternateContact;
 import swe.context.model.contact.Email;
 import swe.context.model.contact.Name;
 import swe.context.model.contact.Note;
@@ -115,6 +116,25 @@ public class ParserUtil {
     }
 
     /**
+     * Attempts to parse the specified string as a {@link AlternateContact}.
+     *
+     * Trims the specified string as part of parsing.
+     *
+     * @throws ParseException if the specified string is not a valid alternate contact.
+     */
+    public static AlternateContact parseAlternate(String alternateContact) throws ParseException {
+        String trimmed = alternateContact.trim();
+
+        if (!AlternateContact.isValid(trimmed)) {
+            throw new ParseException(
+                    Messages.alternateContactInvalid(trimmed)
+            );
+        }
+
+        return new AlternateContact(trimmed);
+    }
+
+    /**
      * Attempts to parse the specified strings as {@link Tag}s.
      *
      * @param tagNames Tag names.
@@ -127,5 +147,19 @@ public class ParserUtil {
             );
         }
         return tags;
+    }
+
+    /**
+     * Attempts to parse the specified strings as {@link AlternateContact}s.
+     *
+     * @param alternateContactNames AlternateContact names.
+     */
+    public static Set<AlternateContact> parseAlternates(Collection<String> alternateContactNames)
+            throws ParseException {
+        Set<AlternateContact> alternateContacts = new HashSet<>();
+        for (String alternateContactName : alternateContactNames) {
+            alternateContacts.add(parseAlternate(alternateContactName));
+        }
+        return alternateContacts;
     }
 }

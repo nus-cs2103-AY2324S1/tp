@@ -27,6 +27,9 @@ public class JsonContactTest {
     private static final List<JsonTag> VALID_TAGS = BENSON.getTags().stream()
             .map(JsonTag::new)
             .collect(Collectors.toList());
+    private static final List<JsonAlternateContact> VALID_ALTERNATECONTACTS = BENSON.getAlternates().stream()
+            .map(JsonAlternateContact::new)
+            .collect(Collectors.toList());
 
     @Test
     public void toModelType_validPersonDetails_returnsPerson() throws Exception {
@@ -37,14 +40,28 @@ public class JsonContactTest {
     @Test
     public void toModelType_invalidName_throwsIllegalValueException() {
         JsonContact contact =
-                new JsonContact(TestData.Invalid.NAME, VALID_PHONE, VALID_EMAIL, VALID_NOTE, VALID_TAGS);
+                new JsonContact(
+                        TestData.Invalid.NAME,
+                        VALID_PHONE,
+                        VALID_EMAIL,
+                        VALID_NOTE,
+                        VALID_TAGS,
+                        VALID_ALTERNATECONTACTS
+                );
         String expectedMessage = Messages.NAME_INVALID;
         assertThrows(IllegalValueException.class, expectedMessage, contact::toModelType);
     }
 
     @Test
     public void toModelType_nullName_throwsIllegalValueException() {
-        JsonContact contact = new JsonContact(null, VALID_PHONE, VALID_EMAIL, VALID_NOTE, VALID_TAGS);
+        JsonContact contact = new JsonContact(
+                null,
+                VALID_PHONE,
+                VALID_EMAIL,
+                VALID_NOTE,
+                VALID_TAGS,
+                VALID_ALTERNATECONTACTS
+        );
         String expectedMessage = String.format(Messages.FIELD_MISSING, Name.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, contact::toModelType);
     }
@@ -52,14 +69,28 @@ public class JsonContactTest {
     @Test
     public void toModelType_invalidPhone_throwsIllegalValueException() {
         JsonContact contact =
-                new JsonContact(VALID_NAME, TestData.Invalid.PHONE, VALID_EMAIL, VALID_NOTE, VALID_TAGS);
+                new JsonContact(
+                        VALID_NAME,
+                        TestData.Invalid.PHONE,
+                        VALID_EMAIL,
+                        VALID_NOTE,
+                        VALID_TAGS,
+                        VALID_ALTERNATECONTACTS
+                );
         String expectedMessage = Messages.PHONE_INVALID;
         assertThrows(IllegalValueException.class, expectedMessage, contact::toModelType);
     }
 
     @Test
     public void toModelType_nullPhone_throwsIllegalValueException() {
-        JsonContact contact = new JsonContact(VALID_NAME, null, VALID_EMAIL, VALID_NOTE, VALID_TAGS);
+        JsonContact contact = new JsonContact(
+                VALID_NAME,
+                null,
+                VALID_EMAIL,
+                VALID_NOTE,
+                VALID_TAGS,
+                VALID_ALTERNATECONTACTS
+        );
         String expectedMessage = String.format(Messages.FIELD_MISSING, Phone.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, contact::toModelType);
     }
@@ -67,21 +98,42 @@ public class JsonContactTest {
     @Test
     public void toModelType_invalidEmail_throwsIllegalValueException() {
         JsonContact contact =
-                new JsonContact(VALID_NAME, VALID_PHONE, TestData.Invalid.EMAIL, VALID_NOTE, VALID_TAGS);
+                new JsonContact(
+                        VALID_NAME,
+                        VALID_PHONE,
+                        TestData.Invalid.EMAIL,
+                        VALID_NOTE,
+                        VALID_TAGS,
+                        VALID_ALTERNATECONTACTS
+                );
         String expectedMessage = Messages.EMAIL_INVALID;
         assertThrows(IllegalValueException.class, expectedMessage, contact::toModelType);
     }
 
     @Test
     public void toModelType_nullEmail_throwsIllegalValueException() {
-        JsonContact contact = new JsonContact(VALID_NAME, VALID_PHONE, null, VALID_NOTE, VALID_TAGS);
+        JsonContact contact = new JsonContact(
+                VALID_NAME,
+                VALID_PHONE,
+                null,
+                VALID_NOTE,
+                VALID_TAGS,
+                VALID_ALTERNATECONTACTS
+        );
         String expectedMessage = String.format(Messages.FIELD_MISSING, Email.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, contact::toModelType);
     }
 
     @Test
     public void toModelType_nullAddress_throwsIllegalValueException() {
-        JsonContact contact = new JsonContact(VALID_NAME, VALID_PHONE, VALID_EMAIL, null, VALID_TAGS);
+        JsonContact contact = new JsonContact(
+                VALID_NAME,
+                VALID_PHONE,
+                VALID_EMAIL,
+                null,
+                VALID_TAGS,
+                VALID_ALTERNATECONTACTS
+        );
         String expectedMessage = String.format(Messages.FIELD_MISSING, Note.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, contact::toModelType);
     }
@@ -90,8 +142,29 @@ public class JsonContactTest {
     public void toModelType_invalidTags_throwsIllegalValueException() {
         List<JsonTag> invalidTags = new ArrayList<>(VALID_TAGS);
         invalidTags.add(new JsonTag(TestData.Invalid.Tag.UNDERSCORE_DASH));
-        JsonContact contact =
-                new JsonContact(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_NOTE, invalidTags);
+        JsonContact contact = new JsonContact(
+                VALID_NAME,
+                VALID_PHONE,
+                VALID_EMAIL,
+                VALID_NOTE,
+                invalidTags,
+                VALID_ALTERNATECONTACTS
+        );
+        assertThrows(IllegalValueException.class, contact::toModelType);
+    }
+
+    @Test
+    public void toModelType_invalidAlternateContacts_throwsIllegalValueException() {
+        List<JsonAlternateContact> invalidAlternateContacts = new ArrayList<>(VALID_ALTERNATECONTACTS);
+        invalidAlternateContacts.add(new JsonAlternateContact(TestData.Invalid.AlternateContact.WHITESPACE));
+        JsonContact contact = new JsonContact(
+                VALID_NAME,
+                VALID_PHONE,
+                VALID_EMAIL,
+                VALID_NOTE,
+                VALID_TAGS,
+                invalidAlternateContacts
+        );
         assertThrows(IllegalValueException.class, contact::toModelType);
     }
 

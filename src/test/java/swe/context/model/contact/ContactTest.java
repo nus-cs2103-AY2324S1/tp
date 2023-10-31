@@ -94,7 +94,8 @@ public class ContactTest {
                         + ", phone=" + TestData.Valid.Contact.ALICE.getPhone()
                         + ", email=" + TestData.Valid.Contact.ALICE.getEmail()
                         + ", note=" + TestData.Valid.Contact.ALICE.getNote()
-                        + ", tags=" + TestData.Valid.Contact.ALICE.getTags() + "}";
+                        + ", tags=" + TestData.Valid.Contact.ALICE.getTags()
+                        + ", alternate contacts=" + TestData.Valid.Contact.ALICE.getAlternates() + "}";
         assertEquals(expected, TestData.Valid.Contact.ALICE.toString());
     }
 }

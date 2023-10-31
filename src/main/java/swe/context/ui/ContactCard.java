@@ -35,6 +35,7 @@ public class ContactCard extends UiPart<Region> {
     @FXML private Label note;
 
     @FXML private FlowPane tags;
+    @FXML private FlowPane alternates;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Contact} and index to display.
@@ -52,5 +53,9 @@ public class ContactCard extends UiPart<Region> {
         contact.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.value))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.value)));
+
+        contact.getAlternates().stream()
+                .sorted(Comparator.comparing(alternate -> alternate.value))
+                .forEach(alternate -> alternates.getChildren().add(new Label(alternate.value)));
     }
 }

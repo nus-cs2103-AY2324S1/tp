@@ -49,10 +49,12 @@ public class EditCommandTest {
 
         ContactBuilder contactInList = new ContactBuilder(lastContact);
         Contact editedContact = contactInList.withName(TestData.Valid.NAME_BOB).withPhone(TestData.Valid.PHONE_BOB)
-                .withTags(TestData.Valid.Tag.ALPHANUMERIC_SPACES).build();
+                .withTags(TestData.Valid.Tag.ALPHANUMERIC_SPACES)
+                .withAlternateContacts(TestData.Valid.AlternateContact.ALPHANUMERIC_UNDERSCORE).build();
 
         EditContactDescriptor descriptor = new EditContactDescriptorBuilder().withName(TestData.Valid.NAME_BOB)
-                .withPhone(TestData.Valid.PHONE_BOB).withTags(TestData.Valid.Tag.ALPHANUMERIC_SPACES).build();
+                .withPhone(TestData.Valid.PHONE_BOB).withTags(TestData.Valid.Tag.ALPHANUMERIC_SPACES)
+                .withAlternateContacts(TestData.Valid.AlternateContact.ALPHANUMERIC_UNDERSCORE).build();
         EditCommand editCommand = new EditCommand(indexLastContact, descriptor);
 
         String expectedMessage = String.format(Messages.EDIT_COMMAND_SUCCESS, Contact.format(editedContact));

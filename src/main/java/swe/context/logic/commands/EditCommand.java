@@ -1,6 +1,7 @@
 package swe.context.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static swe.context.logic.parser.CliSyntax.PREFIX_ALTERNATE;
 import static swe.context.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static swe.context.logic.parser.CliSyntax.PREFIX_NAME;
 import static swe.context.logic.parser.CliSyntax.PREFIX_NOTE;
@@ -21,6 +22,7 @@ import swe.context.logic.Messages;
 import swe.context.logic.commands.exceptions.CommandException;
 import swe.context.model.Model;
 import swe.context.model.ModelManager;
+import swe.context.model.alternate.AlternateContact;
 import swe.context.model.contact.Contact;
 import swe.context.model.contact.Email;
 import swe.context.model.contact.Name;
@@ -44,7 +46,8 @@ public class EditCommand extends Command {
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_NOTE + "NOTE] "
-            + "[" + PREFIX_TAG + "TAG]...\n"
+            + "[" + PREFIX_TAG + "TAG]... "
+            + "[" + PREFIX_ALTERNATE + "ALTERNATE CONTACT]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";
@@ -97,8 +100,17 @@ public class EditCommand extends Command {
         Email updatedEmail = editContactDescriptor.getEmail().orElse(contactToEdit.getEmail());
         Note updatedAddress = editContactDescriptor.getNote().orElse(contactToEdit.getNote());
         Set<Tag> updatedTags = editContactDescriptor.getTags().orElse(contactToEdit.getTags());
+        Set<AlternateContact> updatedAlternateContacts =
+                editContactDescriptor.getAlternateContacts().orElse(contactToEdit.getAlternates());
 
-        return new Contact(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
+        return new Contact(
+                updatedName,
+                updatedPhone,
+                updatedEmail,
+                updatedAddress,
+                updatedTags,
+                updatedAlternateContacts
+        );
     }
 
     @Override
@@ -135,6 +147,7 @@ public class EditCommand extends Command {
         private Email email;
         private Note note;
         private Set<Tag> tags;
+        private Set<AlternateContact> alternateContacts;
 
         public EditContactDescriptor() {}
 
@@ -148,13 +161,14 @@ public class EditCommand extends Command {
             setEmail(toCopy.email);
             setNote(toCopy.note);
             setTags(toCopy.tags);
+            setAlternateContacts(toCopy.alternateContacts);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, note, tags);
+            return CollectionUtil.isAnyNonNull(name, phone, email, note, tags, alternateContacts);
         }
 
         public void setName(Name name) {
@@ -206,6 +220,16 @@ public class EditCommand extends Command {
             return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
         }
 
+        public void setAlternateContacts(Set<AlternateContact> alternateContacts) {
+            this.alternateContacts = (alternateContacts != null) ? new HashSet<>(alternateContacts) : null;
+        }
+
+        public Optional<Set<AlternateContact>> getAlternateContacts() {
+            return (alternateContacts != null)
+                    ? Optional.of(Collections.unmodifiableSet(alternateContacts))
+                    : Optional.empty();
+        }
+
         @Override
         public boolean equals(Object other) {
             if (other == this) {
@@ -222,7 +246,8 @@ public class EditCommand extends Command {
                     && Objects.equals(this.phone, otherEditContactDescriptor.phone)
                     && Objects.equals(this.email, otherEditContactDescriptor.email)
                     && Objects.equals(this.note, otherEditContactDescriptor.note)
-                    && Objects.equals(this.tags, otherEditContactDescriptor.tags);
+                    && Objects.equals(this.tags, otherEditContactDescriptor.tags)
+                    && Objects.equals(this.alternateContacts, otherEditContactDescriptor.alternateContacts);
         }
 
         @Override
@@ -233,6 +258,7 @@ public class EditCommand extends Command {
                     .add("email", this.email)
                     .add("note", this.note)
                     .add("tags", this.tags)
+                    .add("alternate contacts", this.alternateContacts)
                     .toString();
         }
     }

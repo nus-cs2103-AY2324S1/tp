@@ -51,7 +51,7 @@ public class Name {
         if (!(other instanceof Name)) {
             return false;
         }
-        Name otherName = (Name)other;
+        Name otherName = (Name) other;
 
         return this.value.equals(otherName.value);
     }

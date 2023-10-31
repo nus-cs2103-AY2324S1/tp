@@ -4,7 +4,8 @@
     "phone": "94351253",
     "email": "alice@example.com",
     "note": "Note.",
-    "tags": ["friends"]
+    "tags": ["friends"],
+    "alternate contacts" : ["Example@Alice"]
   }, {
     "name": "Alice Pauline",
     "phone": "65433456",
