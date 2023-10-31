@@ -493,10 +493,10 @@ _{more aspects and alternatives to be added}_
 ### Notes feature
 #### Implementation
 ##### Commmand logic
-The `NoteCommand` feature allows users to add personalized notes to a specific contact in the Address Book. This functionality is essential for users who wish to record additional information about their contacts.
+The `AddNoteCommand` feature allows users to add personalized notes to a specific contact in the Address Book. This functionality is essential for users who wish to record additional information about their contacts.
 
 Three key classes are involved in this implementation:
-- `NoteCommand`: Handles the logic for adding the note.
+- `AddNoteCommand`: Handles the logic for adding the note.
 - `Index`: Represents the index of the person in the filtered person list to whom the note will be added.
 - `Note`: Represents the content of the note to be added.
 
@@ -504,20 +504,25 @@ Notes are stored as an `ObservableList<Note>` within the Person model. This is d
 
 The `Note` class is a simple wrapper class that contains a `String` representing the content of the note.
 
-When a user inputs a command to add a note, the `NoteCommandParser` parses the user input and creates a new `NoteCommand` object. This object is then executed, which results in the addition of the specified note to the targeted contact.
+When a user inputs a command to add a note, the `NoteCommandParser` parses the user input and creates a new `AddNoteCommand` object. This object is then executed, which results in the addition of the specified note to the targeted contact.
 
 
 The process can be summarized in the following logic flow:
-1. Parse user input to create a `NoteCommand` object.
-2. Execute the `NoteCommand`, which involves:
+<puml src="diagrams/notes/NotesCommandSequenceDiagram.puml" />
+
+1. Parse user input to create a `AddNoteCommand` object.
+2. Execute the `AddNoteCommand`, which involves:
     - Retrieving the list of all persons.
     - Validating the provided index.
     - Adding the note to the person at the specified index.
 3. Return a `CommandResult` indicating the outcome.
 
 Key methods in this implementation include:
-- `NoteCommand(Index index, Note note)`: Constructor to initialize the command.
+- `AddNoteCommand(Index index, Note note)`: Constructor to initialize the command.
 - `execute(Model model)`: Adds the note and updates the model.
+
+
+
 
 ##### UI Logic
 The Notes feature also includes a user interface component to allow users to interactively add, view, and remove notes from contacts.

@@ -1,0 +1,40 @@
+@startuml
+
+participant "AddNoteCommandParser" as Parser
+participant "ParserUtil" as Util
+participant "AddNoteCommand" as Command
+participant "Model" as Model
+participant "Person" as Person
+participant "Note" as Note
+
+Parser -> Util : parseIndex(args[0])
+activate Util
+Util --> Parser : index: Index
+deactivate Util
+
+Parser -> Note : new Note(args[1].trim())
+activate Note
+Note --> Parser
+deactivate Note
+
+Parser --> Command : new AddNoteCommand(index, note)
+
+Command -> Model : execute(model)
+activate Model
+
+Model --> Model : lastShownList = getFilteredPersonList()
+
+Model -> Person : Person p = lastShownList.get(index.getZeroBased())
+activate Person
+Person --> Model
+deactivate Person
+
+Model -> Person : p.addNote(note)
+activate Person
+Person --> Model
+deactivate Person
+
+Model --> Command : return new CommandResult(message)
+deactivate Model
+
+@enduml
