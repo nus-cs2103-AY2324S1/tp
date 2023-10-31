@@ -14,7 +14,7 @@ Here is an **overview** of how CampusConnect can enhance your campus experience:
 
 - Store and edit contact profiles of your friends
 - Receive timely notifications to celebrate your friends' birthdays
-- Tracks debts owed by you to your friends or owed to you by your friends
+- Tracks payments between you and your friends
 
 This user guide shows you how to get started with using CampusConnect -- it has easy-to-understand explanations and examples to help you grasp its various features.
 
