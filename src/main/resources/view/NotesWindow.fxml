@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.VBox?>
-
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.geometry.Insets?>
@@ -20,6 +18,7 @@
                 <ScrollPane fitToWidth="true" prefHeight="300" VBox.vgrow="ALWAYS">
                     <ListView fx:id="notesListView" />
                 </ScrollPane>
+                <Label text="Press ESC to exit" style="-fx-font-size: 12px;" />
                 <Button text="Close" onAction="#handleClose" />
             </VBox>
         </Scene>
