@@ -5,6 +5,8 @@ import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditContactEventCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
+import java.util.ArrayList;
+
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
@@ -26,16 +28,18 @@ public class EditContactEventCommandParser implements Parser<EditContactEventCom
      * and returns an EditCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
-    public EditContactEventCommandParser parse(String args) throws ParseException {
+    public EditContactEventCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args,
                         PREFIX_EVENT_DESCRIPTION, PREFIX_EVENT_START_DATE_TIME, PREFIX_EVENT_END_DATE_TIME);
 
-        Index index;
+        String preamble;
+        ArrayList<Index> indexArrayList;
 
         try {
-            index = ParserUtil.parseIndex(argMultimap.getPreamble());
+            preamble = argMultimap.getPreamble();
+            indexArrayList = ParserUtil.parseDualIndexes(preamble);
         } catch (ParseException pe) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     EditContactEventCommand.MESSAGE_USAGE), pe);
@@ -44,13 +48,23 @@ public class EditContactEventCommandParser implements Parser<EditContactEventCom
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_EVENT_DESCRIPTION,
                 PREFIX_EVENT_START_DATE_TIME, PREFIX_EVENT_END_DATE_TIME);
 
-        EditContactEventCommand.EditPersonDescriptor editPersonDescriptor =
-                new EditContactEventCommand.EditPersonDescriptor();
+        EditContactEventCommand.EditEventDescriptor editEventDescriptor =
+                new EditContactEventCommand.EditEventDescriptor();
 
-        if (!editPersonDescriptor.isAnyFieldEdited()) {
+        if (argMultimap.getValue(PREFIX_EVENT_DESCRIPTION).isPresent()) {
+            editEventDescriptor.setEventDescription(ParserUtil.parseEventDescription(argMultimap
+                    .getValue(PREFIX_EVENT_DESCRIPTION).get()));
+        }
+        if (argMultimap.getValue(PREFIX_EVENT_START_DATE_TIME).isPresent()
+                && argMultimap.getValue(PREFIX_EVENT_END_DATE_TIME).isPresent()) {
+            editEventDescriptor.setEventPeriod(
+                    ParserUtil.parseEventPeriod(argMultimap.getValue(PREFIX_EVENT_START_DATE_TIME).get(),
+                            argMultimap.getValue(PREFIX_EVENT_END_DATE_TIME).get()));
+        }
+        if (!editEventDescriptor.isAnyFieldEdited()) {
             throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
         }
 
-        return new EditContactEventCommand(index, editPersonDescriptor);
+        return new EditContactEventCommand(indexArrayList, editEventDescriptor);
     }
 }
