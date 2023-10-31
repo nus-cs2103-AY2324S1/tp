@@ -88,7 +88,8 @@ public class TypicalPersons {
             ab.addPerson(person);
         }
         for (Event event : new ArrayList<>(
-                Arrays.asList(TypicalEvents.TP_MEETING, TypicalEvents.MEETING_WITHOUT_PERSONS))) {
+                Arrays.asList(TypicalEvents.TP_MEETING, TypicalEvents.MEETING_WITHOUT_PERSONS,
+                        TypicalEvents.TP_MEETING_WITH_PERSONS, TypicalEvents.TP_MEETING_WITH_GROUPS))) {
             ab.addEvent(event);
         }
         return ab;

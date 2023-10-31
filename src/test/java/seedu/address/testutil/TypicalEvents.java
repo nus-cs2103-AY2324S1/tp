@@ -24,6 +24,37 @@ public class TypicalEvents {
         }
     }
 
+    public static final Meeting TP_MEETING_WITH_PERSONS;
+
+    static {
+        try {
+            TP_MEETING_WITH_PERSONS = new MeetingBuilder().withEventName("TP MEETING TEST")
+                    .withEventDate("2023-10-18")
+                    .withEventStartTime("0000")
+                    .withEventEndTime("2359")
+                    .withPerson("Alice Pauline", "Benson Meier")
+                    .build();
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static final Meeting TP_MEETING_WITH_GROUPS;
+
+    static {
+        try {
+            TP_MEETING_WITH_GROUPS = new MeetingBuilder().withEventName("TP MEETING TEST")
+                    .withEventDate("2023-10-18")
+                    .withEventStartTime("0000")
+                    .withEventEndTime("2359")
+                    .withGroups("friends", "owesMoney")
+                    .build();
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+
     public static final Meeting TP_MEETING_LATER_START_TIME;
 
     static {
