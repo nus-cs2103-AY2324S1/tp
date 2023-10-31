@@ -60,14 +60,6 @@
                   <VBox VBox.vgrow="ALWAYS">
                         <Label styleClass="panel-label" text="Task List">
                        </Label>
-                        <ListView fx:id="taskListView" minHeight="100" style="-fx-border-color: #201e26; -fx-border-radius: 5; -fx-background-radius: 10; -fx-border-width: 3;" VBox.vgrow="ALWAYS">
-                           <VBox.margin>
-                              <Insets />
-                           </VBox.margin>
-                           <opaqueInsets>
-                              <Insets />
-                           </opaqueInsets>
-                        </ListView>
                      <VBox fx:id="taskListContainer" spacing="10" VBox.vgrow="ALWAYS">
                         <padding>
                            <Insets bottom="5.0" top="5.0" />
