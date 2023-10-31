@@ -12,6 +12,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import seedu.address.model.person.Person;
 
+
 /**
  * The UI component that is responsible for showing the calendar.
  */
@@ -26,6 +27,16 @@ public class CalendarComponent extends VBox {
      */
     public CalendarComponent(ObservableList<Person> personList) {
         currentDate = LocalDate.now();
+        this.personList = personList;
+        calendarGrid = new GridPane();
+        createCalendarUI();
+    }
+
+    /**
+     * Creates a {@code CalendarComponent} with the given {@code ObservableList} and date.
+     */
+    public CalendarComponent(ObservableList<Person> personList, LocalDate newDate) {
+        currentDate = newDate;
         this.personList = personList;
         calendarGrid = new GridPane();
         createCalendarUI();
@@ -82,11 +93,11 @@ public class CalendarComponent extends VBox {
                 emptyLabel.getStyleClass().add("empty-label");
             }
 
-            if (day == currentDate.getDayOfMonth()) {
+            if (day == currentDate.getDayOfMonth() && currentDate.isEqual(LocalDate.now())) {
                 dayContainer.getStyleClass().add("today");
             }
 
-            if (day != currentDate.getDayOfMonth()) {
+            if (day != currentDate.getDayOfMonth() || !currentDate.isEqual(LocalDate.now())) {
                 dayContainer.getStyleClass().add("not-today");
             }
 
@@ -96,6 +107,14 @@ public class CalendarComponent extends VBox {
         }
 
         this.getChildren().add(calendarGrid);
+    }
+
+    public void setCurrentDate(LocalDate newDate) {
+        this.currentDate = newDate;
+    }
+
+    public LocalDate getCurrentDate() {
+        return currentDate;
     }
 
 }

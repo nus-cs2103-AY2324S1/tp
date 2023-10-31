@@ -13,6 +13,7 @@ import seedu.address.logic.commands.AddLeaveCommand;
 import seedu.address.logic.commands.BenefitCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
+import seedu.address.logic.commands.CurrentMonthCommand;
 import seedu.address.logic.commands.DeductCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
@@ -21,8 +22,10 @@ import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.MarkCommand;
+import seedu.address.logic.commands.NextMonthCommand;
 import seedu.address.logic.commands.PayrollCommand;
 import seedu.address.logic.commands.PayslipCommand;
+import seedu.address.logic.commands.PreviousMonthCommand;
 import seedu.address.logic.commands.ReadCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -104,6 +107,15 @@ public class AddressBookParser {
 
         case BenefitCommand.COMMAND_WORD:
             return new BenefitCommandParser().parse(arguments);
+
+        case NextMonthCommand.COMMAND_WORD:
+            return new NextMonthCommand();
+
+        case PreviousMonthCommand.COMMAND_WORD:
+            return new PreviousMonthCommand();
+
+        case CurrentMonthCommand.COMMAND_WORD:
+            return new CurrentMonthCommand();
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);
