@@ -12,6 +12,7 @@ import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.HelpCommand;
+import seedu.address.logic.commands.ModeCommand;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.commands.appointmentcommands.AppointmentsCommand;
@@ -138,6 +139,9 @@ public class AddressBookParser {
 
         case FindIllnessCommand.COMMAND_WORD:
             return new FindIllnessCommandParser().parse(arguments);
+
+        case ModeCommand.COMMAND_WORD:
+            return new ModeCommand();
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);
