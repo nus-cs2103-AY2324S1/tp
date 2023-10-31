@@ -1,9 +1,9 @@
 package seedu.address.model.person.fields;
 
+import static seedu.address.commons.util.AppUtil.checkArgument;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-
-import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
  * Represents a Person's interview time in the address book.
