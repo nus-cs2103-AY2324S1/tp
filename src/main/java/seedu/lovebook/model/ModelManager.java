@@ -140,7 +140,6 @@ public class ModelManager implements Model {
         int randomIndex = randomGenerator.nextInt(loveBook.getPersonList().size());
         Date person = loveBook.getPersonList().get(randomIndex);
         updateFilteredPersonList(new RandomPredicate(person));
-
     }
 
     @Override

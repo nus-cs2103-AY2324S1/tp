@@ -176,14 +176,36 @@ There are 5 main features in that you came up with for LoveBook.
 8. Unstar dates
 
 ### Filter dates
+
 The filter feature is implemented using the `FilterCommand` class. The `FilterCommand` class takes in a `Predicate`
 object as a parameter. The `Predicate` object is used to filter the `Date` objects in the `Model` component.
 The `FilterCommand` class then returns a `CommandResult` object that contains the filtered `Date` objects.
+
+The _Acitvity_ diagram summarises what happens after the user enters a filter command.
+
+![Filter Activity.png](..%2F..%2F..%2FFilter%20Activity.png)
+
+The _Sequence_ Diagram below shows how the components interact with each other for the scenario where the user issues 
+the command `filter name/ John`
+![Filter Sequence.png](..%2F..%2F..%2FFilter%20Sequence.png)
 
 ### Sort dates
 The sort feature is implemented using the `SortCommand` class. The `SortCommand` class takes in a `Comparator`
 object as a parameter. The `Comparator` object is used to sort the `Date` objects in the `Model` component.
 The `SortCommand` class then returns a `CommandResult` object that contains the sorted `Date` objects.
+
+The _Acitvity_ diagram summarises what happens after the user enters a sort command.
+![SortActivity.png](..%2F..%2F..%2FSortActivity.png)
+
+The _Sequence_ Diagram below shows how the components interact with each other for the scenario where the user issues
+the command `sort name/ increasing`
+![Sort Sequence.png](..%2F..%2F..%2FSort%20Sequence.png)
+
+### Get random Date
+The random date feature is implemented using the 'RandomCommand' class. The 'RandomCommand' class calls a 
+getRandomPerson() method from the model class. Within the getRandomPerson method, a 'Predicate' object is created and 
+used to filter the 'Date' objects in the 'Model component'. The 'RandomCommand' class then returns a 'CommandResult' 
+object that contains the random 'Date' object.
 
 ### Get best match
 The best match feature is implemented using the `BestMatchCommand` class. The `BestMatchCommand` class iterates

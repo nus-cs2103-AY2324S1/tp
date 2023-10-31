@@ -1,0 +1,20 @@
+@startuml
+skin rose
+skinparam ActivityFontSize 15
+skinparam ArrowFontSize 12
+
+start
+:User enters sort command;
+if () then ([else])
+  :Parse exception thrown;
+  stop
+else ([All compulsory fields are valid and in the correct format])
+  if () then ([sequence is decreasing])
+    :Returns a list of Dates in decreasing order;
+  else ([sequence is increasing])
+    :Returns a list of Dates in increasing order;
+  endif
+endif
+stop
+
+@enduml
