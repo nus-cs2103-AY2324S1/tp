@@ -1,6 +1,7 @@
 package seedu.address.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static seedu.address.model.person.interaction.Interaction.Outcome.MESSAGE_CONSTRAINTS;
 import static seedu.address.storage.JsonAdaptedInteraction.INVALID_DATE_FIELD_MESSAGE;
 import static seedu.address.storage.JsonAdaptedPerson.PERSON_MISSING_FIELD_MESSAGE_FORMAT;
@@ -16,8 +17,13 @@ import org.junit.jupiter.api.Test;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Income;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Profession;
+import seedu.address.model.person.TelegramHandle;
+import seedu.address.model.person.lead.Lead;
 
 public class JsonAdaptedPersonTest {
     private static final String INVALID_NAME = "R@chel";
@@ -139,7 +145,7 @@ public class JsonAdaptedPersonTest {
         JsonAdaptedPerson person =
                 new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_TAGS, INVALID_LEAD,
                         VALID_TELEGRAM, VALID_PROFESSION, VALID_INCOME, VALID_DETAILS, VALID_INTERACTIONS);
-        String expectedMessage = "Lead should only take values hot|warm|cold";
+        String expectedMessage = Lead.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
 
@@ -148,7 +154,76 @@ public class JsonAdaptedPersonTest {
         JsonAdaptedPerson person =
                 new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_TAGS, null,
                         VALID_TELEGRAM, VALID_PROFESSION, VALID_INCOME, VALID_DETAILS, VALID_INTERACTIONS);
-        assertEquals(BENSON, person.toModelType());
+        Person modelPerson = person.toModelType();
+        assertEquals(BENSON, modelPerson);
+        assertNull(modelPerson.getLead());
+    }
+
+    @Test
+    public void toModelType_invalidTelegram_throwsIllegalValueException() {
+        JsonAdaptedPerson person =
+                new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_TAGS, VALID_LEAD,
+                        INVALID_TELEGRAM, VALID_PROFESSION, VALID_INCOME, VALID_DETAILS, VALID_INTERACTIONS);
+        String expectedMessage = TelegramHandle.MESSAGE_CONSTRAINTS;
+        assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
+    }
+
+    @Test
+    public void toModelType_nullTelegram_returnsPerson() throws Exception {
+        JsonAdaptedPerson person =
+                new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_TAGS, VALID_LEAD,
+                        null, VALID_PROFESSION, VALID_INCOME, VALID_DETAILS, VALID_INTERACTIONS);
+        Person modelPerson = person.toModelType();
+        assertEquals(BENSON, modelPerson);
+        assertNull(modelPerson.getTelegram());
+    }
+
+    @Test
+    public void toModelType_invalidProfession_throwsIllegalValueException() {
+        JsonAdaptedPerson person =
+                new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_TAGS, VALID_LEAD,
+                        VALID_TELEGRAM, INVALID_PROFESSION, VALID_INCOME, VALID_DETAILS, VALID_INTERACTIONS);
+        String expectedMessage = Profession.MESSAGE_CONSTRAINTS;
+        assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
+    }
+
+    @Test
+    public void toModelType_nullProfession_returnsPerson() throws Exception {
+        JsonAdaptedPerson person =
+                new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_TAGS, VALID_LEAD,
+                        VALID_TELEGRAM, null, VALID_INCOME, VALID_DETAILS, VALID_INTERACTIONS);
+        Person modelPerson = person.toModelType();
+        assertEquals(BENSON, modelPerson);
+        assertNull(modelPerson.getProfession());
+    }
+
+    @Test
+    public void toModelType_invalidIncome_throwsIllegalValueException() {
+        JsonAdaptedPerson person =
+                new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_TAGS, VALID_LEAD,
+                        VALID_TELEGRAM, VALID_PROFESSION, INVALID_INCOME, VALID_DETAILS, VALID_INTERACTIONS);
+        String expectedMessage = Income.MESSAGE_CONSTRAINTS;
+        assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
+    }
+
+    @Test
+    public void toModelType_nullIncome_returnsPerson() throws Exception {
+        JsonAdaptedPerson person =
+                new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_TAGS, VALID_LEAD,
+                        VALID_TELEGRAM, VALID_PROFESSION, null, VALID_DETAILS, VALID_INTERACTIONS);
+        Person modelPerson = person.toModelType();
+        assertEquals(BENSON, modelPerson);
+        assertNull(modelPerson.getIncome());
+    }
+
+    @Test
+    public void toModelType_nullDetails_returnsPerson() throws Exception {
+        JsonAdaptedPerson person =
+                new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_TAGS, VALID_LEAD,
+                        VALID_TELEGRAM, VALID_PROFESSION, VALID_INCOME, null, VALID_INTERACTIONS);
+        Person modelPerson = person.toModelType();
+        assertEquals(BENSON, modelPerson);
+        assertNull(modelPerson.getDetails());
     }
 
     @Test
