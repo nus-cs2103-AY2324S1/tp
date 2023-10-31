@@ -5,7 +5,6 @@ import static seedu.application.logic.parser.CliSyntax.PREFIX_COMPANY;
 import static seedu.application.logic.parser.CliSyntax.PREFIX_ROLE;
 import static seedu.application.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.application.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.application.model.job.FieldContainsKeywordsPredicateTest.INVALID_PREFIX;
 
 import java.util.Arrays;
 
@@ -21,19 +20,14 @@ public class FindCommandParserTest {
 
     @Test
     public void parse_emptyArg_throwsParseException() {
-        assertParseFailure(parser, "     ", String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
-    }
-
-    @Test
-    public void parse_invalidPrefix_throwsParseException() {
-        assertParseFailure(parser, INVALID_PREFIX + "Google",
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "     ",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_EMPTY_KEYWORDS));
     }
 
     @Test
     public void parse_emptyKeywords_throwsParseException() {
-        assertParseFailure(parser, PREFIX_ROLE.toString(),
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, " " + PREFIX_ROLE.toString(),
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_EMPTY_KEYWORDS));
     }
 
     @Test

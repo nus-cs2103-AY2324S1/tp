@@ -8,9 +8,9 @@ import java.util.function.Predicate;
  * Represents a predicate that is the logical AND of all {@code FieldContainsKeyWordsPredicate} objects supplied to it.
  */
 public class CombinedPredicate implements Predicate<Job> {
-    private List<FieldContainsKeywordsPredicate> predicateList;
+    private List<Predicate<Job>> predicateList;
 
-    public CombinedPredicate(List<FieldContainsKeywordsPredicate> predicateList) {
+    public CombinedPredicate(List<Predicate<Job>> predicateList) {
         this.predicateList = new ArrayList<>(predicateList);
     }
 
@@ -40,7 +40,7 @@ public class CombinedPredicate implements Predicate<Job> {
             return false;
         }
 
-        for (FieldContainsKeywordsPredicate p : predicateList) {
+        for (Predicate<Job> p : predicateList) {
             if (!otherCombinedPredicate.predicateList.contains(p)) {
                 return false;
             }
