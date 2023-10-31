@@ -1,9 +1,9 @@
 package seedu.address.ui;
 
-import javafx.scene.control.Label;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+
+import javafx.scene.control.Label;
 
 public class YearMonthComponent extends Label {
     private LocalDate currentDate;

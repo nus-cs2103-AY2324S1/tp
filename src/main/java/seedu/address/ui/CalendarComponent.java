@@ -1,16 +1,16 @@
 package seedu.address.ui;
 
-import javafx.collections.ObservableList;
-import javafx.scene.control.Label;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.VBox;
-import seedu.address.model.person.Person;
-
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import javafx.collections.ObservableList;
+import javafx.scene.control.Label;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.VBox;
+import seedu.address.model.person.Person;
 
 public class CalendarComponent extends VBox {
 
