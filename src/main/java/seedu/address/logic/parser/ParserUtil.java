@@ -2,8 +2,6 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -69,10 +67,7 @@ public class ParserUtil {
         if (!InterviewTime.isValidTime(trimmedTime)) {
             throw new ParseException(InterviewTime.MESSAGE_CONSTRAINTS);
         }
-
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
-        LocalDateTime dateTime = LocalDateTime.parse(trimmedTime, formatter);
-        return new InterviewTime(dateTime);
+        return new InterviewTime(trimmedTime);
 
     }
 

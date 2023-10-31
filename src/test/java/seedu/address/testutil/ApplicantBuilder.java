@@ -1,8 +1,12 @@
 package seedu.address.testutil;
 
 import seedu.address.model.person.Applicant;
+import seedu.address.model.person.fields.InterviewTime;
 import seedu.address.model.person.fields.Name;
 import seedu.address.model.person.fields.Phone;
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 /**
  * A utility class to help with building Applicant objects.
@@ -13,6 +17,8 @@ public class ApplicantBuilder {
 
     private Name name;
     private Phone phone;
+
+    private InterviewTime interviewTime;
 
     /**
      * Creates a {@code ApplicantBuilder} with the default details.
@@ -43,6 +49,11 @@ public class ApplicantBuilder {
      */
     public ApplicantBuilder withPhone(String phone) {
         this.phone = new Phone(phone);
+        return this;
+    }
+
+    public ApplicantBuilder withInterviewTime(String interviewTime) {
+        this.interviewTime = new InterviewTime(interviewTime);
         return this;
     }
 

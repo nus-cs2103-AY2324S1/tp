@@ -26,7 +26,7 @@ public class Applicant extends Person {
     public Applicant(Name name, Phone phone) {
         super(name);
         this.phone = phone;
-        this.interviewTime = InterviewTime.createEmptyInterviewTime();
+        this.interviewTime = new InterviewTime("Interview time has not been set");
     }
 
     /**
