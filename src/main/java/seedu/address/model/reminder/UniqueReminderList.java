@@ -42,7 +42,7 @@ public class UniqueReminderList implements Iterable<Reminder> {
     public void setRemidnerListDirty() {
         isReminderListDirty = true;
     }
-    
+
     /**
      * Returns true if the list contains no Reminders.
      */
@@ -118,16 +118,19 @@ public class UniqueReminderList implements Iterable<Reminder> {
             person.updateReminder();
             if (person.getReminder() != null) {
                 internalList.add(new Reminder(person));
-                
             }
         }
     }
 
+    /**
+     * Updates the internal list of reminders if the list is dirty.
+     * @param personList
+     */
     public void updateRemindersIfDirty(ObservableList<Person> personList) {
         if (!isReminderListDirty) {
             return;
         }
-        
+
         updateReminders(personList);
         isReminderListDirty = false;
     }

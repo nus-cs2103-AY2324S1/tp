@@ -142,11 +142,11 @@ public class Person {
         if (interactions.isEmpty() || lead == null) {
             return null; //TODO: Think if returning null here causes any issues
         }
-        LocalDate latestInteractionDate = interactions.get(interactions.size() - 1).getDate(); 
+        LocalDate latestInteractionDate = interactions.get(interactions.size() - 1).getDate();
         //TODO: Think if the lastest interaction is always the last one in the list
         int weeksToAdd = lead.getFollowUpPeriod();
         return latestInteractionDate.plusWeeks(weeksToAdd);
-    }  
+    }
 
     /**
      * Adds a Reminder to the list.
@@ -168,7 +168,7 @@ public class Person {
         this.reminder = updatedReminder;
     }
 
-    //TODO: Establish that this is not a bug. 
+    //TODO: Establish that this is not a bug.
     //If someone tries to make a new person with the same name it should not be allowed
     /**
      * Returns true if both persons have the same name.
