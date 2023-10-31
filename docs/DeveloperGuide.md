@@ -154,7 +154,36 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features of WellNus are implemented.
 
-### 3.1 View Feature
+### 3.1 Scheduling an Appointment
+
+### 3.2 Cancelling an Appointment
+
+The canceling of an appointment is facilitated by the `CancelCommand`. It extends `Command` and allows the user to cancel an appointment at a specified index.
+
+The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("cancel 1")` as an example.
+
+![Interactions inside the Logic component for "cancel 1" command](images/CancelSequenceDiagram.png)
+
+#### Design Considerations:
+
+**Aspect: How an Appointment should be canceled**
+
+* **Current Choice:** Create a new `CancelCommand` class which handles the cancellation of an appointment.
+    * Pros: User input will be shorter and easier to read.
+    * Cons: More work to implement.
+
+* **Alternative 1:** Add appointment cancellation functionality to the existing `DeleteCommand`.
+    * Pros: Easier to implement.
+    * Cons: User will have to type longer commands since appointment details can be lengthy, which may lead to more complex commands.
+
+### 3.3 Filtering Appointments by Date
+
+### 3.4 Finding Students by Name
+
+### 3.5 Deleting Students
+Include how deleting Students lead to cancelling Appointments associated with those Students. 
+
+### 3.6 View Feature
 
 This feature is facilitated by the use of the ViewCommand class which extends the Command interface.
 
@@ -169,7 +198,7 @@ View Command handles both the viewing of all students and all appointments. The 
 but due to a limitation of PlantUML, the 3 branches leads to the "end" individually .
 </div>
 
-### 3.2 Student Notes feature
+### 3.7 Student Notes feature
 
 The adding of student notes is facilitated by `NoteCommand`. It extends `Command` and allows the addition of a `Note`
 to the student at the index specified by the user.
@@ -193,27 +222,8 @@ to a `Student`.
     * Cons: User will have to type much longer commands, since `Note` can be up to 200 characters long,
   leads to very lengthy commands
 
-### 3.3 Cancel Appointment Feature
-
-The canceling of an appointment is facilitated by the `CancelCommand`. It extends `Command` and allows the user to cancel an appointment at a specified index.
-
-The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("cancel 1")` as an example.
-
-![Interactions inside the Logic component for "cancel 1" command](images/CancelSequenceDiagram.png)
-
-#### Design Considerations:
-
-**Aspect: How an Appointment should be canceled**
-
-* **Current Choice:** Create a new `CancelCommand` class which handles the cancellation of an appointment.
-    * Pros: User input will be shorter and easier to read.
-    * Cons: More work to implement.
-
-* **Alternative 1:** Add appointment cancellation functionality to the existing `DeleteCommand`.
-    * Pros: Easier to implement.
-    * Cons: User will have to type longer commands since appointment details can be lengthy, which may lead to more complex commands.
-
-### 3.4 \[Proposed\] Check clashing appointments feature
+      
+### 3.8 \[Proposed\] Check clashing appointments feature
 
 #### Proposed Implementation
 
