@@ -24,8 +24,18 @@ public class SortCommandIntegrationTest {
     }
 
     @Test
-    public void execute_sort_success() {
+    public void execute_sort_asc_success() {
         String sequence = "ASC";
+        SortIn validSortIn = new SortIn(sequence);
+
+        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        expectedModel.updateSortedPersonList(validSortIn);
+        assertCommandSuccess(new SortCommand(validSortIn), model, SortCommand.MESSAGE_SUCCESS, expectedModel);
+    }
+
+    @Test
+    public void execute_sort_desc_success() {
+        String sequence = "DESC";
         SortIn validSortIn = new SortIn(sequence);
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
