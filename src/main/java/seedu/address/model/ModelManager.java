@@ -27,6 +27,7 @@ public class ModelManager implements Model {
     private final SimpleObjectProperty<Person> selectedPerson = new SimpleObjectProperty<>();
     private final UniqueReminderList reminderList;
     private final Dashboard dashboard = new Dashboard(this);
+    private final UniqueReminderList reminderList;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
