@@ -109,15 +109,11 @@ public class ModelManager implements Model {
     public void deleteMember(Member target) {
         addressBook.removeMember(target);
         addressBook.updateTags();
-
-        updateFilteredMemberList(PREDICATE_SHOW_ALL_PERSONS);
-        updateFilteredTagList(PREDICATE_SHOW_ALL_TAGS);
     }
 
     @Override
     public void deleteApplicant(Applicant target) {
         addressBook.removeApplicant(target);
-        //updateFilteredApplicantList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
     @Override
