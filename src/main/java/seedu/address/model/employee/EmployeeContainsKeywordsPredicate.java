@@ -18,7 +18,6 @@ public class EmployeeContainsKeywordsPredicate implements Predicate<Employee> {
 
     @Override
     public boolean test(Employee employee) {
-        System.out.println(StringUtil.containsWordIgnoreCase(employee.getDepartments().toString(), keywords.get(0)));
         return keywords.stream()
                 .anyMatch(keyword -> 
                 StringUtil.containsWordIgnoreCase(employee.getName().fullName, keyword) ||
