@@ -166,7 +166,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public void updateSortedApplicantList(Descriptor descriptor) {
+        public void updateSortedApplicantList(Descriptor descriptor, Boolean descendingOrder) {
             throw new AssertionError("This method should not be called.");
         }
 

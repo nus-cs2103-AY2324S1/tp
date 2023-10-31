@@ -7,7 +7,7 @@ import static seedu.staffsnap.commons.util.AppUtil.checkArgument;
  * Represents a Applicant's position in the applicant book.
  * Guarantees: immutable; is valid as declared in {@link #isValidPosition(String)}
  */
-public class Position {
+public class Position implements Comparable<Position> {
 
     public static final String MESSAGE_CONSTRAINTS = "Positions can take any values, and it should not be blank";
 
@@ -62,4 +62,8 @@ public class Position {
         return value.hashCode();
     }
 
+    @Override
+    public int compareTo(Position o) {
+        return this.value.compareTo(o.value);
+    }
 }

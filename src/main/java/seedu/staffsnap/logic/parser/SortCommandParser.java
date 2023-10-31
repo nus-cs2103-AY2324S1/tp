@@ -1,6 +1,8 @@
 package seedu.staffsnap.logic.parser;
 
 import static seedu.staffsnap.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_ASCENDING;
+import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_DESCENDING;
 import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_DESCRIPTOR;
 import static seedu.staffsnap.logic.parser.ParserUtil.arePrefixesPresent;
 
@@ -20,7 +22,7 @@ public class SortCommandParser implements Parser<SortCommand> {
      */
     public SortCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_DESCRIPTOR);
+                ArgumentTokenizer.tokenize(args, PREFIX_DESCRIPTOR, PREFIX_ASCENDING, PREFIX_DESCENDING);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_DESCRIPTOR)
                 || !argMultimap.getPreamble().isEmpty()) {
@@ -30,6 +32,15 @@ public class SortCommandParser implements Parser<SortCommand> {
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_DESCRIPTOR);
         Descriptor descriptor = ParserUtil.parseDescriptor(argMultimap.getValue(PREFIX_DESCRIPTOR).get());
 
-        return new SortCommand(descriptor);
+        // default behaviour is to sort in ascending order if none are specified, or if both are specified
+        boolean isDescendingOrder = false;
+        if (argMultimap.getValue(PREFIX_DESCENDING).isPresent()) {
+            isDescendingOrder = true;
+        }
+        if (argMultimap.getValue(PREFIX_ASCENDING).isPresent()) {
+            isDescendingOrder = false;
+        }
+
+        return new SortCommand(descriptor, isDescendingOrder);
     }
 }
