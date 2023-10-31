@@ -36,9 +36,9 @@ public class TypicalLessons {
         try {
             taskList.setTasks(fillerTasks);
             return new ArrayList<>(Arrays.asList(
-                    new Lesson("lesson 1", "14:30", "16:30", "2022/10/10", "MATHEMATICS"),
-                    new Lesson("lesson 2", "14:30", "16:30", "2022/10/20", "BIOLOGY"),
-                    new Lesson("lesson 3", "10:30", "12:30", "2022/11/20", "MATHEMATICS")
+                    new Lesson("lesson 1", "14:30", "16:30", "2022/10/10", "MATHEMATICS", taskList),
+                    new Lesson("lesson 2", "14:30", "16:30", "2022/10/20", "BIOLOGY", taskList),
+                    new Lesson("lesson 3", "10:30", "12:30", "2022/11/20", "MATHEMATICS", taskList)
             ));
         } catch (ParseException e) {
             return new ArrayList<>();

@@ -4,6 +4,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Objects;
 
+import javafx.collections.ObservableList;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.ListEntry;
 import seedu.address.model.person.Name;
@@ -22,6 +23,11 @@ public class Lesson extends ListEntry<Lesson> {
     private Day day;
 
     /**
+     * The Task List to store the Lesson Tasks.
+     */
+    private TaskList taskList;
+
+    /**
      * Constructor for a Lesson Object with at least one student.
      * Note: parse the string before giving it to the constructor.
      *
@@ -31,16 +37,17 @@ public class Lesson extends ListEntry<Lesson> {
      * @param studentNames The student attending this lesson. Note: Converted to ArrayList when stored
      * @see seedu.address.logic.parser.ParserUtil
      */
-    public Lesson(Name name, Time start, Time end, Day day, Subject subject, Name... studentNames) {
-        requireAllNonNull(name, start, end, day, subject, studentNames);
+    public Lesson(Name name, Time start, Time end, Day day, Subject subject, TaskList taskList, Name... studentNames) {
+        requireAllNonNull(name, start, end, day, subject, taskList, studentNames);
         this.name = name;
         this.start = start;
         this.end = end;
         this.subject = subject;
         this.day = day;
+        this.taskList = taskList;
     }
-    public Lesson(String name, String start, String end, String day, String subject) throws ParseException {
-        this(new Name(name), new Time(start), new Time(end), Day.of(day), new Subject(subject));
+    public Lesson(String name, String start, String end, String day, String subject, TaskList tasklist) throws ParseException {
+        this(new Name(name), new Time(start), new Time(end), Day.of(day), new Subject(subject), tasklist);
     }
     private Lesson() {
         this.name = Name.DEFAULT_NAME;
@@ -48,6 +55,7 @@ public class Lesson extends ListEntry<Lesson> {
         this.end = Time.DEFAULT_TIME;
         this.subject = Subject.DEFAULT_SUBJECT;
         this.day = Day.DEFAULT_DAY;
+        this.taskList = new TaskList();
     }
 
     public static Lesson getDefaultLesson() {
@@ -98,6 +106,15 @@ public class Lesson extends ListEntry<Lesson> {
         return "getStudentsStr in lesson is to be implemented";
         //todo, get the students str from model in the future instead of from the lesson
     }
+
+    /**
+     * Returns the Task List.
+     * @return
+     */
+    public ObservableList<Task> getTaskList() {
+        return taskList.asUnmodifiableObservableList();
+    }
+
 
     public Time getStart() {
         return start;
@@ -231,6 +248,7 @@ public class Lesson extends ListEntry<Lesson> {
         cloned.setNameIfNotDefault(this.name);
         cloned.setDayIfNotDefault(this.day);
         cloned.setRemarkIfNotDefault(this.remark);
+        cloned.taskList = taskList;
         return cloned;
     }
 }

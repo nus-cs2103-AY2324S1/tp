@@ -1,6 +1,7 @@
 package seedu.address.model.util;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Set;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
@@ -11,6 +12,8 @@ import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlySchedule;
 import seedu.address.model.ScheduleList;
 import seedu.address.model.lessons.Lesson;
+import seedu.address.model.lessons.Task;
+import seedu.address.model.lessons.TaskList;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -84,12 +87,16 @@ public class SampleDataUtil {
     }
 
     public static Lesson[] getSampleLessons() {
+        TaskList taskList = new TaskList();
+        List<Task> tasks = Arrays.asList(new Task("first"), new Task("second"),
+                new Task("third long words test sentrence bomvasnv haha loanfafsszzzz sss"));
+        taskList.setTasks(tasks);
         try {
             return new Lesson[] {
-                new Lesson("lesson1", "12:30", "14:30", "20", "Mathematics"),
-                new Lesson("lesson2", "13:30", "15:30", "21", "Physics"),
-                new Lesson("lesson3", "14:30", "16:30", "22", "Biology"),
-                new Lesson("lesson4", "15:30", "17:30", "23", "Chemistry"),
+                new Lesson("lesson1", "12:30", "14:30", "20", "Mathematics", taskList),
+                new Lesson("lesson2", "13:30", "15:30", "21", "Physics", taskList),
+                new Lesson("lesson3", "14:30", "16:30", "22", "Biology", taskList),
+                new Lesson("lesson4", "15:30", "17:30", "23", "Chemistry", taskList),
             };
         } catch (ParseException e) {
             Logger logger = Logger.getLogger(SampleDataUtil.class.getName());

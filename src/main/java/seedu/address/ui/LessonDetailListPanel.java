@@ -41,8 +41,6 @@ public class LessonDetailListPanel extends UiPart<Region> {
     private TextField subject;
 
     @FXML
-    private ListView<Task> taskListView;
-    @FXML
     private VBox taskListContainer;
 
 
@@ -66,20 +64,11 @@ public class LessonDetailListPanel extends UiPart<Region> {
         endTime.setText(lesson.getEnd().toString());
         students.setText(lesson.getStudentsStr());
         subject.setText(lesson.getSubject().toString());
-        //taskListView.setItems("to be implemented");
-        taskListView.setCellFactory(listView -> new LessonDetailListPanel.TaskListViewCell());
         subject.setText(lesson.getSubject().toString());
 
         taskListContainer.getChildren().clear();
-        // temporary code, to show ui only
-        Task task1 = new Task("first");
-        Task task2 = new Task("second");
-        Task task3 = new Task("third long words test sentrence bomvasnv haha loanfafsszzzz sss");
-        TaskList tasks = new TaskList();
-        tasks.add(task1);
-        tasks.add(task2);
-        tasks.add(task3);
-        ObservableList<Task> taskList = tasks.asUnmodifiableObservableList();
+        ObservableList<Task> taskList = lesson.getTaskList();
+
         for (int i = 0; i < taskList.size(); i++) {
             Task task = taskList.get(i);
             taskListContainer.getChildren().add(new TaskCard(task, i + 1).getRoot());

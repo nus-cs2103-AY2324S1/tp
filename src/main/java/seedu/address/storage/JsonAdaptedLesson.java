@@ -9,6 +9,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.lessons.Day;
 import seedu.address.model.lessons.Lesson;
+import seedu.address.model.lessons.Task;
+import seedu.address.model.lessons.TaskList;
 import seedu.address.model.lessons.Time;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Remark;
@@ -42,6 +44,7 @@ public class JsonAdaptedLesson {
         this.day = day;
         this.subject = subject;
         this.remark = remark;
+        // TODO add taskList json property
     }
 
     /**
@@ -54,6 +57,7 @@ public class JsonAdaptedLesson {
         day = serialize(source.getDay());
         subject = serialize(source.getSubject());
         remark = serialize(source.getRemark());
+        //TODO serialize task list
     }
     /**
      * Converts this Jackson-friendly adapted lesson object into the model's {@code Lesson} object.
@@ -68,7 +72,8 @@ public class JsonAdaptedLesson {
             Day day = deserialize(Day.DEFAULT_DAY, Day::deserialize, this.day);
             Subject subject = deserialize(Subject.DEFAULT_SUBJECT, Subject::of, this.subject);
             Remark remark = deserialize(Remark.DEFAULT_REMARK, Remark::of, this.remark);
-            return new Lesson(name, start, end, day, subject);
+            TaskList taskList = new TaskList(); // Todo deserialising
+            return new Lesson(name, start, end, day, subject, taskList);
         } catch (Exception e) {
             throw new IllegalValueException(e.getMessage());
         }

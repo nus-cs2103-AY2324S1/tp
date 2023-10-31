@@ -104,7 +104,8 @@ public class MainApp extends Application {
                 logger.info("Creating a new data file " + storage.getScheduleListFilePath()
                         + " populated with a sample Schedule.");
             }
-            initialDataLessons = scheduleListOptional.orElseGet(SampleDataUtil::getSampleSchedule);
+//            initialDataLessons = scheduleListOptional.orElseGet(SampleDataUtil::getSampleSchedule);
+            initialDataLessons = SampleDataUtil.getSampleSchedule(); //PLACEHOLDER TO TEST TASK LIST
         } catch (DataLoadingException e) {
             logger.warning("Data file at " + storage.getScheduleListFilePath() + " could not be loaded."
                     + " Will be starting with an empty Schedule List.");
