@@ -23,6 +23,9 @@ public class ResultDisplay extends UiPart<Region> {
     @FXML
     private WebView resultDisplay;
 
+    /**
+     * Constructs a ResultDisplay and sets the text to wrap.
+     */
     public ResultDisplay() {
         super(FXML);
     }

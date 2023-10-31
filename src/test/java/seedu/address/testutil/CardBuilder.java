@@ -78,6 +78,15 @@ public class CardBuilder {
         return this;
     }
 
+    /**
+     * Empty constructor for no tags
+     * @returns card builder with no tags
+     */
+    public CardBuilder withTags() {
+        this.tags = new ArrayList<>();
+        return this;
+    }
+
     public Card build() {
         return new Card(question, answer, "new", tags, nextPracticeDate, null);
     }
