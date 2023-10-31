@@ -19,9 +19,8 @@ import seedu.address.model.person.attendance.AttendanceType;
 public class MarkCommandParser implements Parser<MarkCommand> {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the
-     * EditCommand
-     * and returns an EditCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the MarkCommand
+     * and returns an MarkCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
     public MarkCommand parse(String args) throws ParseException {
