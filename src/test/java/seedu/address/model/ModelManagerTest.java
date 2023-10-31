@@ -163,6 +163,12 @@ public class ModelManagerTest {
     }
 
     @Test
+    public void getFilteredCalendarScheduleList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () ->
+            modelManager.getFilteredCalendarScheduleList().remove(0));
+    }
+
+    @Test
     public void getSchedulesFromTutor_success() {
         modelManager.addPerson(ALICE);
         modelManager.addSchedule(SCHEDULE_ALICE_FIRST_JAN);
