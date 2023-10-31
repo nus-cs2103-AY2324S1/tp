@@ -1,7 +1,7 @@
 package seedu.address.ui;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.testutil.TypicalPersons.BENSON;
+import static seedu.address.testutil.TypicalPersons.ALICE;
 
 import org.junit.jupiter.api.Test;
 import org.testfx.framework.junit5.ApplicationTest;
@@ -12,7 +12,7 @@ import seedu.address.model.person.Person;
 
 public class PersonCardTest extends ApplicationTest {
 
-    private final Person testPerson = BENSON;
+    private final Person testPerson = ALICE;
     private PersonCard personCard;
 
     @Override

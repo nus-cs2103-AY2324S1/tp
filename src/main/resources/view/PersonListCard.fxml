@@ -35,14 +35,41 @@
         </Label>
         <Label fx:id="name" text="$first" styleClass="cell_big_label" />
       </HBox>
-      <FlowPane fx:id="tags" />
-      <Label fx:id="phone" styleClass="cell_small_label" text="$phone" />
-      <Label fx:id="address" styleClass="cell_small_label" text="$address" />
-      <Label fx:id="email" styleClass="cell_small_label" text="$email" />
-      <Label fx:id="linkedin" styleClass="cell_small_label" text="$linkedin" />
-      <Label fx:id="secondaryEmail" styleClass="cell_small_label" text="$secondaryEmail" />
-      <Label fx:id="telegram" styleClass="cell_small_label" text="$telegram" />
-      <Label fx:id="birthday" styleClass="cell_small_label" text="$birthday" />
+
+      <VBox>
+        <FlowPane fx:id="tags" />
+        <padding>
+          <Insets bottom="8"/>
+        </padding>
+      </VBox>
+      <HBox>
+        <Label fx:id="phoneField" style="-fx-text-fill: #F7F8F8; -fx-font-size: 8pt;"/>
+        <Label fx:id="phone" styleClass="cell_small_label" text="$phone" />
+      </HBox>
+      <HBox>
+        <Label fx:id="addressField" style="-fx-text-fill: #F7F8F8; -fx-font-size: 8pt;"/>
+        <Label fx:id="address" styleClass="cell_small_label" text="$address" />
+      </HBox>
+      <HBox>
+        <Label fx:id="emailField" style="-fx-text-fill: #F7F8F8; -fx-font-size: 8pt;"/>
+        <Label fx:id="email" styleClass="cell_small_label" text="$email" />
+      </HBox>
+      <HBox>
+        <Label fx:id="linkedinField" style="-fx-text-fill: #F7F8F8; -fx-font-size: 8pt;"/>
+        <Label fx:id="linkedin" styleClass="cell_small_label" text="$linkedin" />
+      </HBox>
+      <HBox>
+        <Label fx:id="secondaryEmailField" style="-fx-text-fill: #F7F8F8; -fx-font-size: 8pt;"/>
+        <Label fx:id="secondaryEmail" styleClass="cell_small_label" text="$secondaryEmail" />
+      </HBox>
+      <HBox>
+        <Label fx:id="birthdayField" style="-fx-text-fill: #F7F8F8; -fx-font-size: 8pt;"/>
+        <Label fx:id="birthday" styleClass="cell_small_label" text="$birthday" />
+      </HBox>
+      <HBox>
+        <Label fx:id="telegramField" style="-fx-text-fill: #F7F8F8; -fx-font-size: 8pt;"/>
+        <Label fx:id="telegram" styleClass="cell_small_label" text="$telegram" />
+      </HBox>
       <Label fx:id="balance" styleClass="cell_small_label" text="$balance" />
 
     </VBox>

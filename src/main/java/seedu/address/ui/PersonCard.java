@@ -5,12 +5,17 @@ import java.util.Comparator;
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.StringBinding;
 import javafx.fxml.FXML;
+import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import javafx.scene.paint.Color;
 import seedu.address.model.person.Person;
 
 /**
@@ -60,7 +65,20 @@ public class PersonCard extends UiPart<Region> {
     private Button notesButton;
     @FXML
     private Label balance;
-
+    @FXML
+    private Label phoneField;
+    @FXML
+    private Label addressField;
+    @FXML
+    private Label emailField;
+    @FXML
+    private Label linkedinField;
+    @FXML
+    private Label birthdayField;
+    @FXML
+    private Label secondaryEmailField;
+    @FXML
+    private Label telegramField;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -69,14 +87,23 @@ public class PersonCard extends UiPart<Region> {
         super(FXML);
         this.person = person;
         id.setText(displayedIndex + ". ");
-        bindLabelToProperty(name, person.getName().fullName);
-        bindLabelToProperty(phone, person.getPhone().value);
-        bindLabelToProperty(address, person.getAddress().value);
-        bindLabelToProperty(email, person.getEmail().value);
-        bindLabelToProperty(linkedin, person.getLinkedin().map(l -> l.value).orElse(""));
-        bindLabelToProperty(secondaryEmail, person.getSecondaryEmail().map(e -> e.value).orElse(""));
-        bindLabelToProperty(telegram, person.getTelegram().map(t -> t.value).orElse(""));
-        bindLabelToProperty(birthday, person.getBirthday().map(b -> b.toString()).orElse(""));
+        phoneField.setText("Tel:");
+        addressField.setText("Room Number:");
+        emailField.setText("Email:");
+        linkedinField.setText("Linkedin:");
+        birthdayField.setText("Birthday:");
+        secondaryEmailField.setText("Second Email:");
+        telegramField.setText("Telegram:");
+        name.setText(person.getName().fullName);
+        bindLabelToProperty(phone, person.getPhone().value, phoneField);
+        bindLabelToProperty(address, person.getAddress().value, addressField);
+        bindLabelToProperty(email, person.getEmail().value, emailField);
+        bindLabelToProperty(linkedin, person.getLinkedin().map(l -> l.value).orElse(""), linkedinField);
+        bindLabelToProperty(secondaryEmail,
+                person.getSecondaryEmail().map(e -> e.value).orElse(""),
+                secondaryEmailField);
+        bindLabelToProperty(telegram, person.getTelegram().map(t -> t.value).orElse(""), telegramField);
+        bindLabelToProperty(birthday, person.getBirthday().map(b -> b.toString()).orElse(""), birthdayField);
         avatar.setImage(person.getAvatar().getImage());
         person.getEmergencyTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
@@ -89,17 +116,26 @@ public class PersonCard extends UiPart<Region> {
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
         StringBinding notesButtonText = Bindings
-            .createStringBinding(() -> "Notes (" + person.getNotes().size() + ")",
-            person.getNotes()); // This will cause the binding to update when the list changes
-
+                .createStringBinding(() -> "Notes (" + person.getNotes().size() + ")",
+                        person.getNotes()); // This will cause the binding to update when the list changes
         notesButton.textProperty().bind(notesButtonText);
-        bindLabelToProperty(balance, person.getBalance().toUiMessage());
+        balance.setText(person.getBalance().toUiMessage());
     }
 
-    private void bindLabelToProperty(Label label, String propertyValue) {
+    private void bindLabelToProperty(Label label, String propertyValue, Label labelField) {
         label.setText(propertyValue);
         label.visibleProperty().bind(label.textProperty().isNotEmpty());
         label.managedProperty().bind(label.visibleProperty());
+        if (!label.getText().isEmpty()) {
+            labelField.setBackground(new Background(new BackgroundFill(Color.BLACK, new CornerRadii(4),
+                    new Insets(-3, -3, -3, -3))));
+            HBox parent = (HBox) labelField.getParent();
+            parent.setMargin(labelField, new Insets(0, 10, 8, 3));
+        } else {
+            labelField.setText("");
+            labelField.visibleProperty().bind(labelField.textProperty().isNotEmpty());
+            labelField.managedProperty().bind(labelField.visibleProperty());
+        }
     }
 
     /**
