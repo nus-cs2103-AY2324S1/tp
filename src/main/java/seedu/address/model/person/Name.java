@@ -94,6 +94,9 @@ public class Name extends ListEntryField {
         }
     }
 
+    /**
+     * Compares this name to another name.
+     */
     public int compareTo(Name n) {
         if (this == DEFAULT_NAME) {
             return 1;
