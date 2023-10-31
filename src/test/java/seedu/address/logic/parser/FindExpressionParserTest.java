@@ -143,7 +143,7 @@ public class FindExpressionParserTest {
 
     @Test
     public void conditionNodeToPredicate_validBalanceField_evaluatesCorrectly() throws ParseException {
-        Person you_owe = new Person(
+        Person youOwe = new Person(
                 new Name("Alice"),
                 new Phone("12345"),
                 new Email("alice@a.com"),
@@ -160,14 +160,14 @@ public class FindExpressionParserTest {
 
         assertTrue(new FindExpressionParser.ConditionNode(
                 FindExpressionParser.FindSupportedField.BALANCE, "-1.12")
-                .toPredicate().test(you_owe));
+                .toPredicate().test(youOwe));
 
         // equal and with dollar sign
         assertTrue(new FindExpressionParser.ConditionNode(
                 FindExpressionParser.FindSupportedField.BALANCE, "-$5.0")
-                .toPredicate().test(you_owe));
+                .toPredicate().test(youOwe));
 
-        Person owes_you = new Person(
+        Person owesYou = new Person(
                 new Name("Alice"),
                 new Phone("12345"),
                 new Email("alice@a.com"),
@@ -184,17 +184,17 @@ public class FindExpressionParserTest {
 
         assertTrue(new FindExpressionParser.ConditionNode(
                 FindExpressionParser.FindSupportedField.BALANCE, "5.2")
-                .toPredicate().test(owes_you));
+                .toPredicate().test(owesYou));
 
         // equal and with dollar sign
         assertTrue(new FindExpressionParser.ConditionNode(
                 FindExpressionParser.FindSupportedField.BALANCE, "$50.00")
-                .toPredicate().test(owes_you));
+                .toPredicate().test(owesYou));
     }
 
     @Test
     public void conditionNodeToPredicate_invalidBalanceField_evaluatesCorrectly() {
-        Person you_owe = new Person(
+        Person youOwe = new Person(
                 new Name("Alice"),
                 new Phone("12345"),
                 new Email("alice@a.com"),
@@ -211,23 +211,23 @@ public class FindExpressionParserTest {
 
         assertThrows(ParseException.class, () -> new FindExpressionParser.ConditionNode(
                 FindExpressionParser.FindSupportedField.BALANCE, "1.123")
-                .toPredicate().test(you_owe));
+                .toPredicate().test(youOwe));
 
         assertThrows(ParseException.class, () -> new FindExpressionParser.ConditionNode(
                 FindExpressionParser.FindSupportedField.BALANCE, "1.1.1")
-                .toPredicate().test(you_owe));
+                .toPredicate().test(youOwe));
 
         assertThrows(ParseException.class, () -> new FindExpressionParser.ConditionNode(
                 FindExpressionParser.FindSupportedField.BALANCE, "$-5")
-                .toPredicate().test(you_owe));
+                .toPredicate().test(youOwe));
 
         assertThrows(ParseException.class, () -> new FindExpressionParser.ConditionNode(
                 FindExpressionParser.FindSupportedField.BALANCE, "$ABCD")
-                .toPredicate().test(you_owe));
+                .toPredicate().test(youOwe));
 
         assertThrows(ParseException.class, () -> new FindExpressionParser.ConditionNode(
                 FindExpressionParser.FindSupportedField.BALANCE, "$$5")
-                .toPredicate().test(you_owe));
+                .toPredicate().test(youOwe));
     }
 
     @Test
