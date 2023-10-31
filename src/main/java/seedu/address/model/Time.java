@@ -1,5 +1,6 @@
 package seedu.address.model;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -284,6 +285,16 @@ public class Time implements Comparable<Time> {
      */
     public LocalTime getTime() {
         return this.time.toLocalTime();
+    }
+
+    /**
+     * Returns the date associated with the current Time instance.
+     *
+     * @author Tan Kerway
+     * @return a LocalDate object instance containing the date of the current instance
+     */
+    public LocalDate getDate() {
+        return this.time.toLocalDate();
     }
 
     /**

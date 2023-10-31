@@ -149,7 +149,7 @@ public class Interview {
         return startTime.isBefore(endTime)
                 && startTime.isWithinWorkingHours()
                 && endTime.isWithinWorkingHours()
-                && startTime.getTime().equals(endTime.getTime());
+                && startTime.getDate().equals(endTime.getDate());
     }
 
     public Applicant getInterviewApplicant() {
