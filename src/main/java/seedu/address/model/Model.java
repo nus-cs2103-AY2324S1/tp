@@ -188,19 +188,17 @@ public interface Model {
     default Task getCurrentlyDisplayedTask() {
         return null;
     }
-
     // todo: implement everything below here properly
     default void setTask(Task target, Task editedTask) {
     }
-    default void addTask(Task task) {
-    }
+    void addTask(Task task, int index);
     default void deleteTask(Task target) {
     }
+    // elaine: not having a updatedFilteredTaskList?
     default void updateFilteredTaskList(Predicate<Task> predicate) {
     }
-    default Boolean hasTaskClashWith(Task task) {
-        return null;
-    }
+    boolean hasTaskClashWith(Task task, int index);
+    Task getTaskClashWith(Task task, int index);
     Boolean hasPersonClashWith(Person person);
     default BiDirectionalMap<Person, Lesson> getPersonLessonMap() {
         return null;

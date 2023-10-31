@@ -40,6 +40,15 @@ public class TaskList extends ListEntryField implements Iterable<Task> {
         requireNonNull(toCheck);
         return internalTaskList.stream().anyMatch(toCheck::isSameTask);
     }
+    /**
+     * Returns the task that clashes with the given argument.
+     * @param toCheck Task to check
+     * @return Task that clashes with the given argument.
+     */
+    public Task getTaskClashWith(Task toCheck) {
+        requireNonNull(toCheck);
+        return internalTaskList.stream().filter(toCheck::isSameTask).findFirst().get();
+    }
 
     /**
      * Adds a task to the list.
@@ -152,7 +161,7 @@ public class TaskList extends ListEntryField implements Iterable<Task> {
 
     /**
      * Encodes into a string
-     * @return
+     * @return String of tasks
      */
     @Override
     public String toString() {
