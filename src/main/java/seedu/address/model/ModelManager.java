@@ -13,7 +13,6 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.interaction.Interaction;
 import seedu.address.model.reminder.UniqueReminderList;
 
 /**
@@ -41,6 +40,7 @@ public class ModelManager implements Model {
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
         this.reminderList = UniqueReminderList.getInstance();
+        this.reminderList.setReminders(addressBook.getPersonList());
     }
 
     public ModelManager() {
@@ -149,13 +149,8 @@ public class ModelManager implements Model {
     //=========== Unique Reminder List Accessors ===============================================================
 
     @Override
-    public void updateReminderList(Person person, Interaction interaction) {
-        reminderList.add(person, interaction);
-    }
-
-    @Override
-    public void updateWholeReminderList(ObservableList<Person> personList) {
-        reminderList.setReminders(personList);
+    public void addReminder(Person person) {
+        reminderList.add(person);
     }
 
     @Override

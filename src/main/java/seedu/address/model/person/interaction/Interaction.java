@@ -70,7 +70,7 @@ public class Interaction {
     public Interaction(String interactionNote, Outcome outcome, Date date) {
         this.interactionNote = interactionNote;
         this.outcome = outcome;
-        this.date = date;
+        this.date = new Date();
     }
 
     public String getInteractionNote() {

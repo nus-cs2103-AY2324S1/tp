@@ -90,9 +90,7 @@ public class MainApp extends Application {
             initialData = new AddressBook();
         }
 
-        Model initModel = new ModelManager(initialData, userPrefs);
-        initModel.updateWholeReminderList(initialData.getPersonList());
-        return initModel;
+        return new ModelManager(initialData, userPrefs);
     }
 
     private void initLogging(Config config) {

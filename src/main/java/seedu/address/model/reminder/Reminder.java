@@ -1,17 +1,11 @@
 package seedu.address.model.reminder;
 
 import java.util.Calendar;
-import java.util.Collections;
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
 import seedu.address.model.person.lead.Lead;
-import seedu.address.model.tag.Tag;
 
 /**
  * Represents a Reminder
@@ -20,52 +14,16 @@ import seedu.address.model.tag.Tag;
 public class Reminder implements Comparable<Date> {
     private static final int DAYS_IN_WEEK = 7;
 
-    // Identity fields
-    private final Name name;
-    private final Phone phone;
-
-    // Data fields
-    private final Set<Tag> tags = new HashSet<>();
-    private final Lead lead;
-
-    private final Date currentDate;
+    private final Person person;
     private final Date followUpDate;
 
     /**
      * Represents a Reminder in the list of reminders
      * Guarantees: details are present and not null, field values are validated, immutable.
      */
-    public Reminder(Name name, Phone phone, Set<Tag> tags, Lead lead, Date currentDate) {
-        this.name = name;
-        this.phone = phone;
-        this.tags.addAll(tags);
-        this.lead = lead;
-        this.currentDate = currentDate;
-        this.followUpDate = this.setFollowUpDate(currentDate, lead);
-    }
-
-    public Name getName() {
-        return name;
-    }
-
-    public Phone getPhone() {
-        return phone;
-    }
-
-    /**
-     * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
-     * if modification is attempted.
-     */
-    public Set<Tag> getTags() {
-        return Collections.unmodifiableSet(tags);
-    }
-
-    public Lead getLead() {
-        return lead;
-    }
-
-    public Date getCurrentDate() {
-        return currentDate;
+    public Reminder(Person person, Date currentDate) {
+        this.person = person;
+        this.followUpDate = this.setFollowUpDate(currentDate, person.getLead());
     }
 
     public Date getFollowUpDate() {
@@ -95,11 +53,7 @@ public class Reminder implements Comparable<Date> {
         }
 
         Reminder otherReminder = (Reminder) other;
-        return name.equals(otherReminder.name)
-                && phone.equals(otherReminder.phone)
-                && tags.equals(otherReminder.tags)
-                && lead.equals(otherReminder.lead)
-                && currentDate.equals(otherReminder.currentDate)
+        return person.isSamePerson(otherReminder.person)
                 && followUpDate.equals(otherReminder.followUpDate);
     }
 
@@ -111,11 +65,7 @@ public class Reminder implements Comparable<Date> {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("name", name)
-                .add("phone", phone)
-                .add("tags", tags)
-                .add("lead", lead)
-                .add("currentDate", currentDate)
+                .add("person", person)
                 .add("followUpDate", followUpDate)
                 .toString();
     }
