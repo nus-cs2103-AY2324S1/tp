@@ -11,7 +11,6 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.interaction.Interaction;
-import seedu.address.model.person.interaction.InteractionList;
 
 /**
  * Represents a command that creates an interaction with the client.
@@ -56,15 +55,14 @@ public class InteractionCommand extends Command {
 
 
         Person personToEdit = lastShownList.get(index.getZeroBased());
-        InteractionList editInteractions = new InteractionList(personToEdit.getInteractions());
-        editInteractions.addInteraction(interaction);
+        List<Interaction> editInteractions = personToEdit.getInteractions();
+        editInteractions.add(interaction);
         Person editedPerson = new Person.PersonBuilder(personToEdit)
                 .withInteractions(editInteractions)
                 .build();
 
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        model.addReminder(personToEdit);
 
         return new CommandResult(String.format(MESSAGE_INTERACTION_SUCCESS, editedPerson));
     }
