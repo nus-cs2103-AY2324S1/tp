@@ -152,7 +152,7 @@ Format: `tag INDEX r/RISK_LEVEL`
 1. Student Index
    - Index must be an integer more than 0
 2. Risk Level
-   - One of the following `high`, `medium`, or `low`
+   - Must be `high`, `medium`, or `low`
 
 Examples:
 * `tag 2 /high`
