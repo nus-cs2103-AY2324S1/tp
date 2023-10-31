@@ -3,6 +3,7 @@ package seedu.address.model.appointment;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.function.Predicate;
@@ -41,27 +42,7 @@ public class UniqueAppointmentList implements Iterable<Appointment> {
             throw new DuplicateAppointmentException();
         }
         internalList.add(toAdd);
-    }
-
-    /**
-     * Replaces the appointment {@code target} in the list with {@code editedAppointment}.
-     * {@code target} must exist in the list.
-     * The student identity of {@code editedAppointment} must not be the same as another existing appointment in the
-     * list.
-     */
-    public void setAppointment(Appointment target, Appointment editedAppointment) {
-        requireAllNonNull(target, editedAppointment);
-
-        int index = internalList.indexOf(target);
-        if (index == -1) {
-            throw new AppointmentNotFoundException();
-        }
-
-        if (!target.equals(editedAppointment) && contains(editedAppointment)) {
-            throw new DuplicateAppointmentException();
-        }
-
-        internalList.set(index, editedAppointment);
+        Collections.sort(internalList);
     }
 
     /**
@@ -73,6 +54,7 @@ public class UniqueAppointmentList implements Iterable<Appointment> {
         if (!internalList.remove(toRemove)) {
             throw new AppointmentNotFoundException();
         }
+        Collections.sort(internalList);
     }
 
     /**
@@ -82,11 +64,13 @@ public class UniqueAppointmentList implements Iterable<Appointment> {
         requireNonNull(toRemove);
         Predicate<Appointment> hasSameName = appointment -> appointment.getName().equals(toRemove);
         internalList.removeIf(hasSameName);
+        Collections.sort(internalList);
     }
 
     public void setAppointments(UniqueAppointmentList replacement) {
         requireNonNull(replacement);
         internalList.setAll(replacement.internalList);
+        Collections.sort(internalList);
     }
 
     /**
@@ -99,6 +83,7 @@ public class UniqueAppointmentList implements Iterable<Appointment> {
             throw new DuplicateAppointmentException();
         }
         internalList.setAll(appointments);
+        Collections.sort(internalList);
     }
 
     /**

@@ -11,7 +11,7 @@ import seedu.address.model.student.Name;
 /**
  * Represents an appointment with a date, start time, end time, a student, and a description.
  */
-public class Appointment {
+public class Appointment implements Comparable<Appointment> {
 
     private final Date date;
     private final Time startTime;
@@ -31,7 +31,7 @@ public class Appointment {
     public Appointment(Date date, Time startTime, Time endTime, Name name, Description description)
             throws InvalidStartEndTimeException {
         requireAllNonNull(date, startTime, endTime, name, description);
-        checkStartEndTime(startTime, endTime);
+        isValidStartEndTime(startTime, endTime);
         assert startTime.getLocalTime().isBefore(endTime.getLocalTime());
         this.date = date;
         this.startTime = startTime;
@@ -67,7 +67,7 @@ public class Appointment {
      * @param endTime   The end time of the appointment.
      * @throws InvalidStartEndTimeException If the start time is not before the end time, an exception is thrown.
      */
-    public void checkStartEndTime(Time startTime, Time endTime) throws InvalidStartEndTimeException {
+    public void isValidStartEndTime(Time startTime, Time endTime) throws InvalidStartEndTimeException {
         if (!(startTime.getLocalTime().isBefore(endTime.getLocalTime()))) {
             throw new InvalidStartEndTimeException();
         }
@@ -114,6 +114,27 @@ public class Appointment {
     public int hashCode() {
         return Objects.hash(name, description, date, startTime, endTime);
     }
+
+    @Override
+    public int compareTo(Appointment otherAppointment) {
+        int dateCompare = this.date.getLocalDate().compareTo(otherAppointment.date.getLocalDate());
+
+        if (dateCompare != 0) {
+            return dateCompare;
+        }
+
+        int startTimeCompare = this.startTime.getLocalTime().compareTo(otherAppointment.startTime.getLocalTime());
+
+        if (startTimeCompare != 0) {
+            return startTimeCompare;
+        }
+
+        // There can be no overlapping appointments, hence if 2 appointments have the same date and startTime,
+        // they are the same appointment.
+        return 0;
+    }
+
+
 
     @Override
     public String toString() {
