@@ -1,11 +1,12 @@
 package seedu.address.ui;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.scene.control.Label;
 import javafx.util.Duration;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 public class ClockComponent extends Label {
     public ClockComponent() {
