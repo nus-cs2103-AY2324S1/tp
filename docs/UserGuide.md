@@ -41,7 +41,7 @@ Easily add a new contact to your list with the `add` command.
 
 **Examples:**
 - `add n/John Doe p/98765432 e/john.doe@email.com`
-- `add n/John Doe p/98765432 e/john.doe@email.com o/example t/CS2103 a/SocialMedia@JohnDoe`
+- `add n/John Doe p/98765432 e/john.doe@email.com o/CS2103 Prof. t/NUS t/CS2103 course a/Telegram@JohnDoe`
 
 ---
 

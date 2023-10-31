@@ -35,11 +35,11 @@ public class AddCommand extends Command {
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
             + PREFIX_PHONE + "98765432 "
-            + PREFIX_EMAIL + "johnd@example.com "
+            + PREFIX_EMAIL + "john.doe@email.com "
             + PREFIX_NOTE + "CS2103 Prof. "
-            + PREFIX_TAG + "friends "
-            + PREFIX_TAG + "owes money "
-            + PREFIX_ALTERNATE + "Example@JohnDoe";
+            + PREFIX_TAG + "NUS "
+            + PREFIX_TAG + "CS2103 course "
+            + PREFIX_ALTERNATE + "Telegram@JohnDoe";
 
     private final Contact toAdd;
     /**
