@@ -44,7 +44,13 @@ public class EventPeriod implements Comparable<EventPeriod> {
                 LocalDateTime.parse(endString, DATE_TIME_STRING_FORMATTER));
     }
 
-    private EventPeriod(LocalDateTime start, LocalDateTime end) {
+    /**
+     * Constructs an EventPeriod object with the given start and end date/time LocalDateTime.
+     *
+     * @param start The LocalDateTime representation of the start date and time.
+     * @param end The LocalDateTime representation of the end date and time.
+     */
+    public EventPeriod(LocalDateTime start, LocalDateTime end) {
         this.start = start;
         this.end = end;
     }
