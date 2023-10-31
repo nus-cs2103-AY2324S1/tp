@@ -24,7 +24,6 @@ class JsonAdaptedJob {
     private final String deadline;
     private final String jobType;
     private final String industry;
-
     private final List<JsonAdaptedInterview> interviews;
 
     /**

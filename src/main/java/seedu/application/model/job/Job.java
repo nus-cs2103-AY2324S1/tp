@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import seedu.application.commons.core.index.Index;
 import seedu.application.commons.util.CollectionUtil;
 import seedu.application.commons.util.ToStringBuilder;
 import seedu.application.model.job.interview.Interview;
@@ -87,6 +88,16 @@ public class Job {
      */
     public void addInterview(Interview interview) {
         interviews.add(interview);
+    }
+
+    /**
+     * Deletes an interview in the list of interviews for a job.
+     * The interview must exist for the job.
+     */
+    public void deleteInterview(Index index) {
+        System.out.println(interviews);
+        interviews.remove(index.getZeroBased());
+        System.out.println(interviews);
     }
 
     /**

@@ -1,5 +1,7 @@
 package seedu.application.storage;
 
+import java.util.ArrayList;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.application.storage.JsonAdaptedJob.MISSING_FIELD_MESSAGE_FORMAT;
 import static seedu.application.testutil.Assert.assertThrows;
