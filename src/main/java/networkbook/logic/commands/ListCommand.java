@@ -8,7 +8,7 @@ import networkbook.model.Model;
 /**
  * Lists all persons in the network book to the user.
  */
-public class ListCommand extends Command {
+public class ListCommand extends DoesNotChangeDataCommand {
 
     public static final String COMMAND_WORD = "list";
 

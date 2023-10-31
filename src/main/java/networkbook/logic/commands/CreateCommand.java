@@ -12,7 +12,7 @@ import networkbook.model.person.Person;
 /**
  * Creates a new contact in the network book.
  */
-public class CreateCommand extends Command {
+public class CreateCommand extends ChangeDataCommand {
 
     public static final String COMMAND_WORD = "create";
 

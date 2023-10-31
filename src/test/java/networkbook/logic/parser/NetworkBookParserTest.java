@@ -23,6 +23,7 @@ import networkbook.logic.commands.HelpCommand;
 import networkbook.logic.commands.ListCommand;
 import networkbook.logic.commands.OpenLinkCommand;
 import networkbook.logic.commands.RedoCommand;
+import networkbook.logic.commands.SaveCommand;
 import networkbook.logic.commands.SortCommand;
 import networkbook.logic.commands.UndoCommand;
 import networkbook.logic.commands.delete.DeletePersonCommand;
@@ -137,6 +138,12 @@ public class NetworkBookParserTest {
     public void parseCommand_help() throws Exception {
         assertTrue(parser.parseCommand(HelpCommand.COMMAND_WORD) instanceof HelpCommand);
         assertTrue(parser.parseCommand(HelpCommand.COMMAND_WORD + " 3") instanceof HelpCommand);
+    }
+
+    @Test
+    public void parseCommand_save() throws Exception {
+        assertTrue(parser.parseCommand(SaveCommand.COMMAND_WORD) instanceof SaveCommand);
+        assertTrue(parser.parseCommand(SaveCommand.COMMAND_WORD + " 3") instanceof SaveCommand);
     }
 
     @Test

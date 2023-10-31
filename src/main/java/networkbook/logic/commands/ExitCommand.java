@@ -5,7 +5,7 @@ import networkbook.model.Model;
 /**
  * Terminates the program.
  */
-public class ExitCommand extends Command {
+public class ExitCommand extends DoesNotChangeDataCommand {
 
     public static final String COMMAND_WORD = "exit";
 

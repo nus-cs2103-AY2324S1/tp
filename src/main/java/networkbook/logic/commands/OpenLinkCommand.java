@@ -17,7 +17,7 @@ import networkbook.model.person.Person;
 /**
  * Represents a command to open a link attached to a contact.
  */
-public class OpenLinkCommand extends Command {
+public class OpenLinkCommand extends DoesNotChangeDataCommand {
     public static final String COMMAND_WORD = "open";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": open a link of a contact\n"
             + "Parameters: [LIST INDEX OF CONTACT]"

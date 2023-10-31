@@ -8,7 +8,7 @@ import java.util.List;
 
 import networkbook.commons.core.index.Index;
 import networkbook.logic.Messages;
-import networkbook.logic.commands.Command;
+import networkbook.logic.commands.ChangeDataCommand;
 import networkbook.logic.commands.CommandResult;
 import networkbook.logic.commands.exceptions.CommandException;
 import networkbook.model.Model;
@@ -17,7 +17,7 @@ import networkbook.model.person.Person;
 /**
  * Class that represents a user command to delete a field of a person.
  */
-public class DeleteFieldCommand extends Command {
+public class DeleteFieldCommand extends ChangeDataCommand {
     public static final String MESSAGE_DELETE_PERSON_FIELD_SUCCESS = "Deleted some information of person: %1$s";
     private Index indexOfPerson;
     private DeleteFieldAction action;

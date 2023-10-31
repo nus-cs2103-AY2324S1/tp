@@ -5,7 +5,7 @@ import networkbook.model.Model;
 /**
  * Format full help instructions for every command for display.
  */
-public class HelpCommand extends Command {
+public class HelpCommand extends DoesNotChangeDataCommand {
 
     public static final String COMMAND_WORD = "help";
 

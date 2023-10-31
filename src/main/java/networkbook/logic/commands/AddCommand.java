@@ -29,7 +29,7 @@ import networkbook.model.util.UniqueList;
 /**
  * Adds new information about a contact.
  */
-public class AddCommand extends Command {
+public class AddCommand extends ChangeDataCommand {
 
     public static final String COMMAND_WORD = "add";
 

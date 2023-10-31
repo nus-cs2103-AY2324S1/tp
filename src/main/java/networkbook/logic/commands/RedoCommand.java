@@ -6,7 +6,7 @@ import networkbook.model.Model;
 /**
  * Clears the network book.
  */
-public class RedoCommand extends Command {
+public class RedoCommand extends ChangeDataCommand {
 
     public static final String COMMAND_WORD = "redo";
     public static final String MESSAGE_SUCCESS = "Noted, next change successfully redone!";

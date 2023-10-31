@@ -8,7 +8,7 @@ import java.util.List;
 import networkbook.commons.core.index.Index;
 import networkbook.commons.util.ToStringBuilder;
 import networkbook.logic.Messages;
-import networkbook.logic.commands.Command;
+import networkbook.logic.commands.ChangeDataCommand;
 import networkbook.logic.commands.CommandResult;
 import networkbook.logic.commands.exceptions.CommandException;
 import networkbook.logic.parser.CliSyntax;
@@ -18,7 +18,7 @@ import networkbook.model.person.Person;
 /**
  * Edits the details of an existing person in the network book.
  */
-public class EditCommand extends Command {
+public class EditCommand extends ChangeDataCommand {
 
     public static final String COMMAND_WORD = "edit";
 
