@@ -72,8 +72,8 @@ public class ApplicationBookParser {
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
 
-        case InterviewAddCommand.COMMAND_WORD:
-            return new InterviewAddCommandParser().parse(arguments);
+        case InterviewCommand.COMMAND_WORD:
+            return new InterviewCommandParser().parse(arguments);
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);

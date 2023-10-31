@@ -18,9 +18,9 @@ import java.util.List;
 /**
  * Adds a person to the application book.
  */
-public class InterviewAddCommand extends Command {
+public class InterviewAddCommand extends InterviewCommand {
 
-    public static final String COMMAND_WORD = "interviewAdd";
+    public static final String COMMAND_WORD = "add";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an interview to the application. "
         + "Parameters: INDEX (must be a positive integer)\n"
@@ -49,18 +49,11 @@ public class InterviewAddCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        requireNonNull(model);
-        List<Job> lastShownList = model.getFilteredJobList();
+        Job jobToAddInterview = getJob(model, index);
 
-        if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_JOB_DISPLAYED_INDEX);
+        if (jobToAddInterview.hasInterview(toAdd)) {
+            throw new CommandException(MESSAGE_DUPLICATE_JOB);
         }
-
-        Job jobToAddInterview = lastShownList.get(index.getZeroBased());
-
-//        if (jobToAddInterview.hasInterview(toAdd)) {
-//            throw new CommandException(MESSAGE_DUPLICATE_JOB);
-//        }
 
         jobToAddInterview.addInterview(toAdd);
         model.updateFilteredJobList(Model.PREDICATE_SHOW_ALL_JOBS);

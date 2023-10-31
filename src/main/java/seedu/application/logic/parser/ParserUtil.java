@@ -5,6 +5,7 @@ import static java.util.Objects.requireNonNull;
 import seedu.application.commons.core.index.Index;
 import seedu.application.commons.util.StringUtil;
 import seedu.application.logic.commands.InterviewAddCommand;
+import seedu.application.logic.commands.InterviewCommand;
 import seedu.application.logic.parser.exceptions.ParseException;
 import seedu.application.model.job.Company;
 import seedu.application.model.job.Deadline;
@@ -172,4 +173,18 @@ public class ParserUtil {
         return new InterviewAddress(trimmedInterviewAddress);
     }
 
+    public static String[] parseInterviewPreamble(String interviewPreamble) throws ParseException {
+        requireNonNull(interviewPreamble);
+        String[] trimmedInterviewPreamble = interviewPreamble.trim().split(" ");
+        return trimmedInterviewPreamble;
+    }
+
+    public static String parseSubCommandWord(String subCommandWord) throws ParseException {
+        requireNonNull(subCommandWord);
+        String trimmedSubCommandWord = subCommandWord.trim();
+        if (!InterviewCommand.isValidSubCommandWord(trimmedSubCommandWord)) {
+            throw new ParseException(InterviewCommand.MESSAGE_CONSTRAINTS);
+        }
+        return trimmedSubCommandWord;
+    }
 }

@@ -34,7 +34,7 @@ public class AddCommand extends Command {
         + PREFIX_ROLE + "Software Engineer "
         + PREFIX_STATUS + "PENDING "
         + PREFIX_DEADLINE + "Dec 31 2030 1200 "
-        + PREFIX_JOB_TYPE + "INTERNSHIP"
+        + PREFIX_JOB_TYPE + "INTERNSHIP "
         + PREFIX_INDUSTRY + "Technology\n";
 
     public static final String MESSAGE_SUCCESS = "New job added: %1$s";
