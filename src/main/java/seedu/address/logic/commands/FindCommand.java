@@ -19,10 +19,11 @@ public class FindCommand extends Command {
 
     public static final String COMMAND_WORD = "find";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all students whose names contain any of "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all students whose names matches all of "
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
-            + "Example: " + COMMAND_WORD + " alice bob charlie";
+            + "Example (finding by first name): " + COMMAND_WORD + " bernice\n"
+            + "Example (finding by full name): " + COMMAND_WORD + " bernice yu";
 
     private final String[] nameKeywords;
 

@@ -116,7 +116,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public ReadOnlyWellNus getAddressBook() {
+        public ReadOnlyWellNus getWellNusData() {
             return new WellNus();
         }
     }

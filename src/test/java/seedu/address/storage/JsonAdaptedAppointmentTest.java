@@ -3,7 +3,7 @@ package seedu.address.storage;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.storage.JsonAdaptedAppointment.MISSING_FIELD_MESSAGE_FORMAT;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalAppointments.ALEX_APPOINTMENT;
+import static seedu.address.testutil.TypicalAppointments.ALICE_APPOINTMENT;
 
 import org.junit.jupiter.api.Test;
 
@@ -22,16 +22,16 @@ public class JsonAdaptedAppointmentTest {
     private static final String INVALID_END_TIME = "23-01";
     private static final String INVALID_DESCRIPTION = "";
 
-    private static final String VALID_NAME = ALEX_APPOINTMENT.getName().toString();
-    private static final String VALID_DATE = ALEX_APPOINTMENT.getDate().toString();
-    private static final String VALID_START_TIME = ALEX_APPOINTMENT.getStartTime().toString();
-    private static final String VALID_END_TIME = ALEX_APPOINTMENT.getEndTime().toString();
-    private static final String VALID_DESCRIPTION = ALEX_APPOINTMENT.getDescription().toString();
+    private static final String VALID_NAME = ALICE_APPOINTMENT.getName().toString();
+    private static final String VALID_DATE = ALICE_APPOINTMENT.getDate().toString();
+    private static final String VALID_START_TIME = ALICE_APPOINTMENT.getStartTime().toString();
+    private static final String VALID_END_TIME = ALICE_APPOINTMENT.getEndTime().toString();
+    private static final String VALID_DESCRIPTION = ALICE_APPOINTMENT.getDescription().toString();
 
     @Test
     public void toModelType_validAppointmentDetails_returnsAppointment() throws Exception {
-        JsonAdaptedAppointment appointment = new JsonAdaptedAppointment(ALEX_APPOINTMENT);
-        assertEquals(ALEX_APPOINTMENT, appointment.toModelType());
+        JsonAdaptedAppointment appointment = new JsonAdaptedAppointment(ALICE_APPOINTMENT);
+        assertEquals(ALICE_APPOINTMENT, appointment.toModelType());
     }
 
     @Test

@@ -57,7 +57,7 @@ public class MainApp extends Application {
 
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         UserPrefs userPrefs = initPrefs(userPrefsStorage);
-        WellNusStorage wellNusStorage = new JsonWellNusStorage(userPrefs.getAddressBookFilePath());
+        WellNusStorage wellNusStorage = new JsonWellNusStorage(userPrefs.getWellNusFilePath());
         storage = new StorageManager(wellNusStorage, userPrefsStorage);
 
         model = initModelManager(storage, userPrefs);
