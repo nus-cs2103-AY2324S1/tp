@@ -56,6 +56,8 @@ public class EditEventCommand extends Command {
             + PREFIX_NAME + "Ken "
             + PREFIX_GROUP + "Team2 ";
 
+    public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
+
     public static final String MESSAGE_EDIT_SUCCESS = "Edited event: %1$s";
 
     public final Index index;

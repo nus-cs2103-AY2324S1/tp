@@ -32,7 +32,6 @@ public class CommandUtil {
         } else {
             verifyTimeIsAfterCurrentTime(event.getStartDate().getDate()
                     .atTime(event.getStartTime().getEventTime()));
-
             verifyEndTimeIsAfterStartTime(event);
         }
 

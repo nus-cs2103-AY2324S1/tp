@@ -17,7 +17,6 @@ import java.util.Optional;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditEventCommand;
 import seedu.address.logic.commands.EditEventCommand.EditEventDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -65,16 +64,26 @@ public class EditMeetingCommandParser implements Parser<EditEventCommand> {
             editEventDescriptor.setEndTime(ParserUtil.parseEventTime(argMultimap.getValue(PREFIX_END_TIME).get()));
         }
 
-        parseNamesForEdit(argMultimap.getAllValues(PREFIX_NAME)).ifPresent(editEventDescriptor::setPersonNames);
-        parseNamesForEdit(argMultimap.getAllValues(PREFIX_UNASSIGN_PERSONS))
-                .ifPresent(editEventDescriptor::setUnassignPersons);
+        if (!argMultimap.getAllValues(PREFIX_NAME).isEmpty()) {
+            editEventDescriptor.setPersonNames(ParserUtil.parsePersonNames(argMultimap.getAllValues(PREFIX_NAME)));
+        }
 
-        parseGroupsForEdit(argMultimap.getAllValues(PREFIX_GROUP)).ifPresent(editEventDescriptor::setGroups);
-        parseGroupsForEdit(argMultimap.getAllValues(PREFIX_UNASSIGN_GROUPS))
-                .ifPresent(editEventDescriptor::setUnassignGroups);
+        if (!argMultimap.getAllValues(PREFIX_UNASSIGN_PERSONS).isEmpty()) {
+            editEventDescriptor
+                    .setUnassignPersons(ParserUtil.parsePersonNames(argMultimap.getAllValues(PREFIX_UNASSIGN_PERSONS)));
+        }
+
+        if (!argMultimap.getAllValues(PREFIX_GROUP).isEmpty()) {
+            editEventDescriptor.setGroups(ParserUtil.parseGroups(argMultimap.getAllValues(PREFIX_GROUP)));
+        }
+
+        if (!argMultimap.getAllValues(PREFIX_UNASSIGN_GROUPS).isEmpty()) {
+            editEventDescriptor
+                    .setUnassignGroups(ParserUtil.parseGroups(argMultimap.getAllValues(PREFIX_UNASSIGN_GROUPS)));
+        }
 
         if (!editEventDescriptor.isAnyFieldEdited()) {
-            throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
+            throw new ParseException(EditEventCommand.MESSAGE_NOT_EDITED);
         }
 
         return new EditEventCommand(index, editEventDescriptor);
