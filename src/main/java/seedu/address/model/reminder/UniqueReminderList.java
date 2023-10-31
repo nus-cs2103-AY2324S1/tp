@@ -3,7 +3,7 @@ package seedu.address.model.reminder;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -12,8 +12,6 @@ import java.util.stream.Collectors;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.interaction.Interaction;
-import seedu.address.model.reminder.exceptions.DuplicateReminderException;
 
 /**
  * A list of Reminders that enforces uniqueness between its elements and does not allow nulls.
@@ -40,6 +38,13 @@ public class UniqueReminderList implements Iterable<Reminder> {
     }
 
     /**
+     * Returns true if the list contains no Reminders.
+     */
+    public boolean isEmpty() {
+        return internalList.isEmpty();
+    }
+
+    /**
      * Returns true if the list contains an equivalent Reminder as the given argument.
      */
     public boolean contains(Reminder toCheck) {
@@ -60,20 +65,23 @@ public class UniqueReminderList implements Iterable<Reminder> {
     }
 
     /**
-     * Adds a Reminder to the list.
+     * Updates a persons reminder in the list.
+     * This could add, delete or edit a perons reminder depending on the interaction.
      * The Reminder must not already exist in the list.
      */
-    public void add(Person person) {
+    public void updateReminder(Person person) {
         requireAllNonNull(person);
-        Interaction interaction = person.getLastInteraction();
 
-        if (interaction == null) {
+        //Person must have lead and interaciton to have a reminder
+        //If person has no lead or interaction, remove reminder
+        if (person.getFollowUpDate() == null) {
+            internalList.remove(personToReminderMap.get(person));
             return;
         }
 
-        Reminder toAdd = new Reminder(person, interaction.getDate());
+        Reminder toAdd = new Reminder(person);
         if (contains(toAdd)) {
-            throw new DuplicateReminderException();
+            return;
         }
 
         if (personToReminderMap.containsKey(person)) {
@@ -92,34 +100,32 @@ public class UniqueReminderList implements Iterable<Reminder> {
     }
 
     /**
-     * Returns the list of reminders after a specific date.
+     * Returns the earliest reminder time in the {@code UniqueReminderList}
+     */
+    public long getEarliestReminderTime() {
+        if (internalList.isEmpty()) {
+            return -1;
+        }
+        return internalList.stream().mapToLong(Reminder::getDueTime).min().getAsLong();
+    }
+
+    /**
+     * Returns the list of reminders associated with a specific date.
      *
      * @param date The date that which is used to retrieve the list of reminders.
      * @return the list of reminders mapped from the given date.
      */
-    public ObservableList<Reminder> getRemindersAfterDate(Date date) {
+    public ObservableList<Reminder> getRemindersAfterDate(LocalDate date) {
         ObservableList<Reminder> reminderList = FXCollections.observableArrayList();
         List<Reminder> retrievedReminders = personToReminderMap.entrySet()
                 .stream()
-                .map(x -> x.getValue())
-                .filter(a->a.compareTo(date) == 1)
-                .collect(Collectors.toList());
+                .filter(a->a.getValue().getFollowUpDate().isAfter(date))
+                .map(x -> x.getValue()).collect(Collectors.toList());
         if (retrievedReminders == null) {
             return reminderList;
         }
         reminderList.addAll(retrievedReminders);
         return reminderList;
-    }
-
-    /**
-     * Resets the internal list of reminders using the given list of persons.
-     *
-     * @param personList The persons from which the reminders are to be produced.
-     */
-    public void setReminders(ObservableList<Person> personList) {
-        for (Person person : personList) {
-            this.add(person);
-        }
     }
 
     public Iterator<Reminder> iterator() {

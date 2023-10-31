@@ -94,5 +94,5 @@ public interface Model {
     /**
      * Updates the reminder list with the given {@code Person Interaction}.
      */
-    void addReminder(Person person);
+    void updateReminder(Person person);
 }

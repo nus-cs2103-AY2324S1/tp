@@ -1,40 +1,35 @@
 package seedu.address.model.reminder;
 
-import java.util.Calendar;
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.lead.Lead;
 
 /**
  * Represents a Reminder
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
-public class Reminder implements Comparable<Date> {
-    private static final int DAYS_IN_WEEK = 7;
-
+public class Reminder implements Comparable<LocalDate> {
     private final Person person;
-    private final Date followUpDate;
+    private final LocalDate followUpDate;
 
     /**
      * Represents a Reminder in the list of reminders
      * Guarantees: details are present and not null, field values are validated, immutable.
      */
-    public Reminder(Person person, Date currentDate) {
+    public Reminder(Person person) {
         this.person = person;
-        this.followUpDate = this.setFollowUpDate(currentDate, person.getLead());
+        this.followUpDate = person.getFollowUpDate();
     }
 
-    public Date getFollowUpDate() {
+    public LocalDate getFollowUpDate() {
         return followUpDate;
     }
 
-    private Date setFollowUpDate(Date currentDate, Lead lead) {
-        Calendar cal = Calendar.getInstance(); // creates calendar
-        cal.setTime(currentDate);
-        cal.add(Calendar.DAY_OF_YEAR, lead.getFollowUpPeriod() * DAYS_IN_WEEK);
-        return cal.getTime();
+    public long getDueTime() {
+        return ChronoUnit.MILLIS.between(LocalDateTime.now(), followUpDate.atStartOfDay());
     }
 
     /**
@@ -58,8 +53,8 @@ public class Reminder implements Comparable<Date> {
     }
 
     @Override
-    public int compareTo(Date date) {
-        return this.followUpDate.after(date) ? 1 : -1;
+    public int compareTo(LocalDate date) {
+        return this.followUpDate.isAfter(followUpDate) ? 1 : -1;
     }
 
     @Override
