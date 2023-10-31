@@ -136,4 +136,28 @@ public class UniqueAppointmentList implements Iterable<Appointment> {
         }
         return true;
     }
+
+    private boolean appointmentsDoNotOverlap(List<Appointment> appointments) {
+        for (int i = 0; i < appointments.size() - 1; i++) {
+            for (int j = i + 1; j < appointments.size(); j++) {
+                if (hasOverlap(appointments.get(i), appointments.get(j))) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    private boolean hasOverlap(Appointment firstAppt, Appointment secondAppt) {
+        if (!firstAppt.getDate().equals(secondAppt.getDate())) {
+            return false;
+        }
+
+        if (firstAppt.getEndTime().getLocalTime().isAfter(secondAppt.getStartTime().getLocalTime())
+        && secondAppt.getEndTime().getLocalTime().isAfter(firstAppt.getStartTime().getLocalTime())) {
+            return true;
+        }
+
+        return false;
+    }
 }
