@@ -15,7 +15,6 @@ import seedu.address.model.Theme;
 import seedu.address.model.UserPrefs;
 
 public class ThemeCommandTest {
-    private CommandHistory commandHistory = new CommandHistory();
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
@@ -28,7 +27,7 @@ public class ThemeCommandTest {
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
 
-        assertCommandSuccess(themeCommand, model, expectedMessage, expectedModel, commandHistory);
+        assertCommandSuccess(themeCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
