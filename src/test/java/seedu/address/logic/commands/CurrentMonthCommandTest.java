@@ -13,7 +13,7 @@ public class CurrentMonthCommandTest {
     private Model expectedModel = new ModelManager();
 
     @Test
-    public void execute_current_month_success() {
+    public void execute_currentMonth_success() {
         CommandResult expectedCommandResult = new CommandResult(
                 MESSAGE_CURRENT_MONTH_ACKNOWLEDGEMENT, false, false, false, false, false, true);
         assertCommandSuccess(new CurrentMonthCommand(), model, expectedCommandResult, expectedModel);
