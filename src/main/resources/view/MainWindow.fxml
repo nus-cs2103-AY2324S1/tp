@@ -27,13 +27,13 @@
                      <Menu mnemonicParsing="false" text="Import">
                        <items>
                          <MenuItem mnemonicParsing="false" text="Staff List" />
-                           <MenuItem mnemonicParsing="false" text="Transaction List" />
+                           <MenuItem mnemonicParsing="false" onAction="#handleImportTransactions" text="Transaction List" />
                        </items>
                      </Menu>
                      <Menu mnemonicParsing="false" text="Export">
                         <items>
                            <MenuItem mnemonicParsing="false" text="Staff List" />
-                           <MenuItem mnemonicParsing="false" text="Transaction List" />
+                           <MenuItem mnemonicParsing="false" onAction="#handleExportTransactions" text="Transaction List" />
                         </items>
                      </Menu>
                <MenuItem mnemonicParsing="false" onAction="#handleExit" text="Exit" />

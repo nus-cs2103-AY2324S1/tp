@@ -13,6 +13,7 @@ import com.opencsv.CSVWriter;
 import com.opencsv.exceptions.CsvValidationException;
 
 import transact.commons.exceptions.DataLoadingException;
+import transact.commons.util.FileUtil;
 import transact.logic.parser.ParserUtil;
 import transact.model.ReadOnlyTransactionBook;
 import transact.model.TransactionBook;
@@ -29,14 +30,35 @@ import transact.model.transaction.info.TransactionType;
 public class CsvAdaptedTransactionStorage implements TransactionBookStorage {
 
     private Path filePath;
+    private Path exportFilePath;
+    private Path importFilePath;
 
-    public CsvAdaptedTransactionStorage(Path filePath) {
+    /**
+     * Creates CsvAdaptedTransactionStorage Object
+     *
+     * @param filePath for storage data
+     * @param importFilePath
+     * @param exportFilePath
+     */
+    public CsvAdaptedTransactionStorage(Path filePath, Path importFilePath, Path exportFilePath) {
         this.filePath = filePath;
+        this.importFilePath = importFilePath;
+        this.exportFilePath = exportFilePath;
     }
 
     @Override
     public Path getTransactionBookFilePath() {
         return filePath;
+    }
+
+    @Override
+    public Path getImportTransactionsFilePath() {
+        return importFilePath;
+    }
+
+    @Override
+    public Path getExportTransactionsFilePath() {
+        return exportFilePath;
     }
 
     @Override
@@ -101,6 +123,7 @@ public class CsvAdaptedTransactionStorage implements TransactionBookStorage {
      *            location of the data. Cannot be null.
      */
     public void saveTransactionBook(ReadOnlyTransactionBook transactionBook, Path filePath) throws IOException {
+        FileUtil.createIfMissing(filePath);
         Map<TransactionId, Transaction> transactions = transactionBook.getTransactionMap();
         try (CSVWriter writer = new CSVWriter(new FileWriter(filePath.toFile()))) {
             String[] header = { "TransactionId", "Type", "Description", "Amount", "Date", "Person" };
