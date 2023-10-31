@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
@@ -60,6 +61,15 @@
                   </HBox>
                   <FlowPane fx:id="tags" prefHeight="25.0" prefWidth="320.0" />
                   <FlowPane fx:id="subjects" prefHeight="25.0" prefWidth="320.0" />
+                  <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="80.0" prefHeight="25.0" prefWidth="254.0">
+                     <children>
+                        <Label style="-fx-text-fill: white;" text="Lesson(s): " />
+                        <TextField fx:id="lessons" editable="false" style="-fx-background-color: transparent; -fx-text-fill: white;" text="\$students" HBox.hgrow="ALWAYS" />
+                     </children>
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                  </HBox>
                   <HBox alignment="CENTER_LEFT" prefHeight="25.0" prefWidth="120.0">
                      <children>
                         <ImageView fitHeight="21.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">

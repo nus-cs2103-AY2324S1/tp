@@ -42,6 +42,8 @@ public class StudentDetailListPanel extends UiPart<Region> {
 
     @FXML
     private TextField remark;
+    @FXML
+    private TextField lessons;
 
     /**
      * Creates a {@code StudentDetailListPanel} with the given {@code ObservableList}.
@@ -62,6 +64,7 @@ public class StudentDetailListPanel extends UiPart<Region> {
         phone.setText(person.getPhone().value);
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
+        lessons.setText(model.getLinkedLessonNameStr(person));
         remark.setText(person.getRemark().value);
         // Clears the previous items in the FlowPane for Tags and Subjects
         tags.getChildren().clear();
