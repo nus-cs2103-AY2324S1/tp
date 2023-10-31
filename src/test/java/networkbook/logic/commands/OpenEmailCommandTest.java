@@ -29,10 +29,10 @@ import networkbook.model.person.Person;
 import networkbook.testutil.TypicalIndexes;
 import networkbook.testutil.TypicalPersons;
 
-public class OpenLinkCommandTest {
+public class OpenEmailCommandTest {
     private static final Model MODEL = new ModelManager(TypicalPersons.getTypicalNetworkBook(), new UserPrefs());
 
-    private static final Model modelStubThrowingIoExceptionForOpeningLink = new Model() {
+    private static final Model modelStubThrowingIoExceptionForOpeningEmail = new Model() {
         public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
             throw new UnsupportedOperationException();
         }
@@ -90,19 +90,19 @@ public class OpenLinkCommandTest {
         }
 
         public boolean isValidLinkIndex(Index personIndex, Index linkIndex) {
-            return true;
+            throw new UnsupportedOperationException();
         }
 
-        public Link openLink(Index personIndex, Index linkIndex) throws IOException {
-            throw new IOException();
+        public Link openLink(Index personIndex, Index linkIndex) {
+            throw new UnsupportedOperationException();
         }
 
         public boolean isValidEmailIndex(Index personIndex, Index emailIndex) {
-            throw new UnsupportedOperationException();
+            return true;
         }
 
-        public Email openEmail(Index personIndex, Index emailIndex) {
-            throw new UnsupportedOperationException();
+        public Email openEmail(Index personIndex, Index emailIndex) throws IOException {
+            throw new IOException();
         }
 
         public ObservableList<Person> getFilteredPersonList() {
@@ -120,61 +120,60 @@ public class OpenLinkCommandTest {
 
     @Test
     public void constructor_null_throwsAssertionError() {
-        assertThrowsAssertionError(() -> new OpenLinkCommand(null, null));
-        assertThrowsAssertionError(() -> new OpenLinkCommand(TypicalIndexes.INDEX_FIRST_PERSON, null));
-        assertThrowsAssertionError(() -> new OpenLinkCommand(null, CommandTestUtil.VALID_LINK_INDEX_AMY));
+        assertThrowsAssertionError(() -> new OpenEmailCommand(null, CommandTestUtil.VALID_EMAIL_INDEX_AMY));
+        assertThrowsAssertionError(() -> new OpenEmailCommand(TypicalIndexes.INDEX_FIRST_PERSON, null));
     }
 
     @Test
     public void constructor_nonNullInputs_success() {
-        new OpenLinkCommand(TypicalIndexes.INVALID_INDEX, CommandTestUtil.INVALID_LINK_INDEX_AMY);
+        new OpenEmailCommand(TypicalIndexes.INVALID_INDEX, CommandTestUtil.INVALID_EMAIL_INDEX_AMY);
     }
 
     @Test
     public void execute_nullModel_throwsAssertionError() {
-        assertThrowsAssertionError(() -> new OpenLinkCommand(
-                TypicalIndexes.INDEX_FIRST_PERSON, CommandTestUtil.VALID_LINK_INDEX_AMY)
+        assertThrowsAssertionError(() -> new OpenEmailCommand(
+                TypicalIndexes.INDEX_FIRST_PERSON, CommandTestUtil.VALID_EMAIL_INDEX_AMY)
                 .execute(null));
     }
 
     @Test
     public void execute_invalidPersonIndex_throwsCommandException() {
-        OpenLinkCommand openLinkCommand = new OpenLinkCommand(
-                TypicalIndexes.INVALID_INDEX, CommandTestUtil.VALID_LINK_INDEX_AMY);
-        assertCommandFailure(openLinkCommand, MODEL, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        OpenEmailCommand openEmailCommand = new OpenEmailCommand(
+                TypicalIndexes.INVALID_INDEX, CommandTestUtil.VALID_EMAIL_INDEX_AMY);
+        assertCommandFailure(openEmailCommand, MODEL, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
 
     @Test
-    public void execute_invalidLinkIndex_throwsCommandException() {
-        OpenLinkCommand openLinkCommand = new OpenLinkCommand(
-                TypicalIndexes.INDEX_FIRST_PERSON, CommandTestUtil.INVALID_LINK_INDEX_AMY);
-        assertCommandFailure(openLinkCommand, MODEL,
-                String.format(OpenLinkCommand.MESSAGE_INVALID_LINK_INDEX,
+    public void execute_invalidEmailIndex_throwsCommandException() {
+        OpenEmailCommand openEmailCommand = new OpenEmailCommand(
+                TypicalIndexes.INDEX_FIRST_PERSON, CommandTestUtil.INVALID_EMAIL_INDEX_AMY);
+        assertCommandFailure(openEmailCommand, MODEL,
+                String.format(OpenEmailCommand.MESSAGE_INVALID_EMAIL_INDEX,
                         TypicalIndexes.INDEX_FIRST_PERSON.getOneBased(),
-                        CommandTestUtil.INVALID_LINK_INDEX_AMY.getOneBased()));
+                        CommandTestUtil.INVALID_EMAIL_INDEX_AMY.getOneBased()));
     }
 
     @Test
     public void execute_validIndices_success() {
-        OpenLinkCommand openLinkCommand = new OpenLinkCommand(
-                TypicalIndexes.INDEX_FIRST_PERSON, CommandTestUtil.VALID_LINK_INDEX_AMY);
-        assertCommandSuccess(openLinkCommand, MODEL,
-                String.format(OpenLinkCommand.MESSAGE_SUCCESS, "nknguyenhc.github.io"), MODEL);
+        OpenEmailCommand openEmailCommand = new OpenEmailCommand(
+                TypicalIndexes.INDEX_FIRST_PERSON, CommandTestUtil.VALID_EMAIL_INDEX_AMY);
+        assertCommandSuccess(openEmailCommand, MODEL,
+                String.format(OpenEmailCommand.MESSAGE_SUCCESS, "alice@example.com"), MODEL);
     }
 
     @Test
     public void execute_modelThrowingIoException_throwsCommandException() {
-        OpenLinkCommand openLinkCommand = new OpenLinkCommand(
-                TypicalIndexes.INDEX_FIRST_PERSON, CommandTestUtil.VALID_LINK_INDEX_AMY);
-        assertCommandFailure(openLinkCommand, modelStubThrowingIoExceptionForOpeningLink,
-                OpenLinkCommand.MESSAGE_CANNOT_OPEN_LINK);
+        OpenEmailCommand openEmailCommand = new OpenEmailCommand(
+                TypicalIndexes.INDEX_FIRST_PERSON, CommandTestUtil.VALID_EMAIL_INDEX_AMY);
+        assertCommandFailure(openEmailCommand, modelStubThrowingIoExceptionForOpeningEmail,
+                OpenEmailCommand.MESSAGE_CANNOT_OPEN_EMAIL);
     }
 
     @Test
     public void equals() {
-        OpenLinkCommand command = new OpenLinkCommand(Index.fromOneBased(1), Index.fromOneBased(1));
-        OpenLinkCommand sameCommand = new OpenLinkCommand(Index.fromOneBased(1), Index.fromOneBased(1));
-        OpenLinkCommand differentCommand = new OpenLinkCommand(Index.fromOneBased(2), Index.fromOneBased(1));
+        OpenEmailCommand command = new OpenEmailCommand(Index.fromOneBased(1), Index.fromOneBased(1));
+        OpenEmailCommand sameCommand = new OpenEmailCommand(Index.fromOneBased(1), Index.fromOneBased(1));
+        OpenEmailCommand differentCommand = new OpenEmailCommand(Index.fromOneBased(2), Index.fromOneBased(1));
 
         assertTrue(command.equals(command));
         assertFalse(command.equals(1));
@@ -184,12 +183,12 @@ public class OpenLinkCommandTest {
 
     @Test
     public void toStringMethod() {
-        OpenLinkCommand command = new OpenLinkCommand(
-                TypicalIndexes.INDEX_FIRST_PERSON, CommandTestUtil.VALID_LINK_INDEX_AMY);
-        String expectedString = String.format("%s{personIndex=%s, linkIndex=%s}",
+        OpenEmailCommand command = new OpenEmailCommand(
+                TypicalIndexes.INDEX_FIRST_PERSON, CommandTestUtil.VALID_EMAIL_INDEX_AMY);
+        String expectedString = String.format("%s{personIndex=%s, emailIndex=%s}",
                 command.getClass().getCanonicalName(),
                 TypicalIndexes.INDEX_FIRST_PERSON,
-                CommandTestUtil.VALID_LINK_INDEX_AMY);
+                CommandTestUtil.VALID_EMAIL_INDEX_AMY);
         assertEquals(command.toString(), expectedString);
     }
 }

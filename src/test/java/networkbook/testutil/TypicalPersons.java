@@ -22,6 +22,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import networkbook.model.NetworkBook;
+import networkbook.model.person.Email;
 import networkbook.model.person.Link;
 import networkbook.model.person.Person;
 
@@ -85,6 +86,7 @@ public class TypicalPersons {
             .withPriority("High")
             .withTags("software eng enthusiast", "AI enthusiast").build();
     public static final Link JACK_FIRST_LINK = new Link("github.com");
+    public static final Email JACK_FIRST_EMAIL = new Email("jack@gmail.com");
 
     // Manually added - Person's details found in {@code CommandTestUtil}
     public static final Person AMY = new PersonBuilder().withName(VALID_NAME_AMY).withPhones(List.of(VALID_PHONE_AMY))

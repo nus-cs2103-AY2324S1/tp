@@ -25,7 +25,7 @@ public class Person implements Identifiable<Person> {
     private static final String[] BROWSERS = {"google-chrome", "firefox", "mozilla", "epiphany",
         "konqueror", "netscape", "opera", "links", "lynx", "chromium", "brave-browser"};
     private static final Logger LOGGER = LogsCenter.getLogger(Person.class);
-    private static final String LINK_OPENING_MESSAGE = "Opening %s on %s";
+    private static final String LINK_OPENING_MESSAGE = "Opening URL %s on %s";
     private static final ThrowingIoExceptionConsumer<Link> LINK_OPENER = link -> {
         String url = link.toRecognisableWebUrl();
         // Code adapted from https://www.geekyhacker.com/open-a-url-in-the-default-browser-in-java/
@@ -49,6 +49,14 @@ public class Person implements Identifiable<Person> {
             LOGGER.warning("No browser found.");
         } else {
             LOGGER.warning(String.format("Unrecognised OS: %s", System.getProperty("os.name")));
+        }
+    };
+    private static final String EMAIL_OPENING_MESSAGE = "Opening email %s on %s";
+    private static final ThrowingIoExceptionConsumer<Email> EMAIL_OPENER = email -> {
+        String emailUri = email.toEmailUri();
+        if (System.getProperty("os.name").startsWith("Windows")) {
+            LOGGER.info(String.format(EMAIL_OPENING_MESSAGE, email.getValue(), "Windows"));
+            Desktop.getDesktop().mail(URI.create(emailUri));
         }
     };
 
@@ -165,6 +173,29 @@ public class Person implements Identifiable<Person> {
         assert index >= 0;
         assert index < this.links.size();
         return this.links.get(index);
+    }
+
+    /**
+     * Checks if the given index points to a valid email of this person.
+     */
+    public boolean isValidEmailIndex(Index emailIndex) {
+        assert emailIndex != null;
+        return emailIndex.getZeroBased() < this.emails.size();
+    }
+
+    /**
+     * Opens the email at the specified index.
+     */
+    public void openEmail(Index emailIndex) throws IOException {
+        assert emailIndex != null;
+        assert emailIndex.getZeroBased() < this.emails.size();
+        this.emails.consumeItem(emailIndex.getZeroBased(), EMAIL_OPENER);
+    }
+
+    public Email getEmail(int index) {
+        assert index >= 0;
+        assert index < this.links.size();
+        return this.emails.get(index);
     }
 
     /**
