@@ -1,4 +1,4 @@
-package seedu.address.model.student.grades.exceptions;
+package seedu.address.model.student.information.exceptions;
 
 import seedu.address.logic.Messages;
 

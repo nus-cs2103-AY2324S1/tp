@@ -129,7 +129,7 @@ public class AddressBookParser {
             return new SetGradeCommandParser().parse(arguments);
 
         case RecordClassParticipationCommand.COMMAND_WORD:
-            return new RecordClassPartCommandParser().parse(arguments);
+            return new RecordClassParticipationCommandParser().parse(arguments);
 
         case MarkPresentCommand.COMMAND_WORD:
             return new MarkPresentCommandParser().parse(arguments);

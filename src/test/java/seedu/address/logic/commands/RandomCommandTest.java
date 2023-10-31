@@ -21,7 +21,7 @@ import seedu.address.testutil.TypicalStudents;
  */
 public class RandomCommandTest {
 
-    private Model model = new ModelManager(TypicalStudents.getTypicalAddressBook(), new UserPrefs());
+    private final Model model = new ModelManager(TypicalStudents.getTypicalAddressBook(), new UserPrefs());
     private final CommandHistory commandHistory = new CommandHistory();
 
     @Test

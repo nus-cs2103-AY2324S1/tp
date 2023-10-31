@@ -34,7 +34,7 @@ import seedu.address.testutil.TypicalStudents;
  */
 public class TagCommandTest {
 
-    private Model model = new ModelManager(new AddressBook(getTypicalAddressBook()), new UserPrefs());
+    private final Model model = new ModelManager(new AddressBook(getTypicalAddressBook()), new UserPrefs());
     private final CommandHistory commandHistory = new CommandHistory();
 
     @Test

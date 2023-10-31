@@ -29,7 +29,7 @@ public class RecordClassParticipationCommandParserTest {
     private static final String MESSAGE_INVALID_FORMAT =
             String.format(MESSAGE_INVALID_COMMAND_FORMAT, RecordClassParticipationCommand.MESSAGE_USAGE);
 
-    private final RecordClassPartCommandParser parser = new RecordClassPartCommandParser();
+    private final RecordClassParticipationCommandParser parser = new RecordClassParticipationCommandParser();
 
     @Test
     public void parse_missingParts_failure() {

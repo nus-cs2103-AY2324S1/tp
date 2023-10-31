@@ -8,7 +8,9 @@ import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.tag.Tag;
 import seedu.address.storage.JsonAdaptedClassDetails;
 
@@ -57,6 +59,15 @@ public class Student {
         this.classDetails = classDetails;
         this.tags.addAll(tags);
         this.comment = comment;
+    }
+
+    /**
+     * Returns a deep copy of a Student.
+     * @return A deep copy of {@code Student}.
+     */
+    public Student copy() throws IllegalValueException {
+        return new Student(this.name, this.phone, this.email, this.studentNumber,
+                this.classDetails.copy(), this.tags, this.comment);
     }
 
     public Name getName() {
@@ -114,17 +125,29 @@ public class Student {
     /**
      * Marks the specific tutorial as present.
      */
-    public Student markPresent(Index tutNum) {
-        return new Student(this.name, this.phone, this.email,
-                this.studentNumber, this.classDetails.markPresent(tutNum), this.tags, this.comment);
+    public void markPresent(Index tutNum) {
+        this.classDetails.markPresent(tutNum);
     }
 
     /**
      * Marks the specific tutorial as absent.
      */
-    public Student markAbsent(Index tutNum) {
-        return new Student(this.name, this.phone, this.email,
-                this.studentNumber, this.classDetails.markAbsent(tutNum), this.tags, this.comment);
+    public void markAbsent(Index tutNum) {
+        this.classDetails.markAbsent(tutNum);
+    }
+
+    /**
+     * Marks student as having participated in the specific tutorial.
+     */
+    public void markClassParticipation(int sessionNumber, boolean hasParticipated) throws CommandException {
+        this.classDetails.recordClassParticipation(sessionNumber, hasParticipated);
+    }
+
+    /**
+     * Marks student as having participated in the specific tutorial.
+     */
+    public void setGrade(int assignmentNumber, int grade) throws CommandException {
+        this.classDetails.setGrade(assignmentNumber, grade);
     }
 
 

@@ -27,9 +27,9 @@ import seedu.address.testutil.TypicalStudents;
  * Contains integration tests (interaction with the Model) for {@code LookupCommand}.
  */
 public class LookupCommandTest {
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-    private Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-    private CommandHistory commandHistory = new CommandHistory();
+    private final Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private final Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private final CommandHistory commandHistory = new CommandHistory();
 
     @Test
     public void equals() {

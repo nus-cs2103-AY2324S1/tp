@@ -78,11 +78,11 @@ public class StudentCard extends UiPart<Region> {
     public XYChart.Series initBarChart(Student student) {
         XYChart.Series<String, Double> series = new XYChart.Series();
         series.setName("Grades");
-        series.getData().add(new XYChart.Data("Assignment",
+        series.getData().add(new XYChart.Data("Assignment marks",
                 student.getClassDetails().getAssignmentPercentage()));
         series.getData().add(new XYChart.Data("Attendance",
                 student.getClassDetails().getAttendancePercentage()));
-        series.getData().add(new XYChart.Data("Class Participation",
+        series.getData().add(new XYChart.Data("Class participation",
                 student.getClassDetails().getClassParticipationPercentage()));
         return series;
     }

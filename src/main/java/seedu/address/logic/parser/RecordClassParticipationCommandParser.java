@@ -11,12 +11,12 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.student.StudentNumber;
 
 /**
- * Parses input arguments and creates a new RecordClassPartCommand object
+ * Parses input arguments and creates a new RecordClassParticipationCommand object
  */
-public class RecordClassPartCommandParser implements Parser<RecordClassParticipationCommand> {
+public class RecordClassParticipationCommandParser implements Parser<RecordClassParticipationCommand> {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the RecordClassPartCommand
+     * Parses the given {@code String} of arguments in the context of the RecordClassParticipationCommand
      * and returns an SetGradeCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
@@ -49,8 +49,8 @@ public class RecordClassPartCommandParser implements Parser<RecordClassParticipa
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     RecordClassParticipationCommand.MESSAGE_USAGE));
         }
-        boolean isParticipated = Boolean.parseBoolean(participation);
-        return new RecordClassParticipationCommand(studentNumber, sessionNumber, isParticipated);
+        boolean hasParticipated = Boolean.parseBoolean(participation);
+        return new RecordClassParticipationCommand(studentNumber, sessionNumber, hasParticipated);
     }
 
 }

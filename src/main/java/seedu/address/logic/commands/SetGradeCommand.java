@@ -4,13 +4,14 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ASSIGNMENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GRADE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT_NUMBER;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
 
+import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.student.ClassDetails;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.StudentNumber;
 
@@ -48,7 +49,8 @@ public class SetGradeCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Model model, CommandHistory commandHistory) throws CommandException {
+    public CommandResult execute(Model model, CommandHistory commandHistory)
+            throws CommandException, IllegalValueException {
         requireNonNull(model);
 
         if (!model.hasStudent(new Student(studentNumber))) {
@@ -56,21 +58,19 @@ public class SetGradeCommand extends Command {
         }
 
         Student studentToGrade = model.getStudent(studentNumber);
-        ClassDetails classDetails = studentToGrade.getClassDetails();
-        classDetails.setGrade(assignmentNumber, grade);
-        Student gradedStudent = new Student(studentToGrade.getName(), studentToGrade.getPhone(),
-            studentToGrade.getEmail(), studentToGrade.getStudentNumber(), classDetails, studentToGrade.getTags(),
-                studentToGrade.getComment());
-
+        Student gradedStudent = studentToGrade.copy();
+        gradedStudent.setGrade(assignmentNumber, grade);
         model.setStudent(studentToGrade, gradedStudent);
+
         if (model.isSelectedStudent(gradedStudent)) {
             model.setSelectedStudent(gradedStudent);
         }
 
+        model.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
         model.commitAddressBook();
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, studentNumber)
-                + classDetails.displayAssignments());
+                + studentToGrade.getClassDetails().displayAssignments());
     }
 
     @Override

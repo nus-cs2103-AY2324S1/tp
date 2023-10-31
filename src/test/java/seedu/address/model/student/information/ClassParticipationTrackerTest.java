@@ -1,4 +1,4 @@
-package seedu.address.model.student.grades;
+package seedu.address.model.student.information;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -20,12 +20,12 @@ public class ClassParticipationTrackerTest {
     @Test
     public void isValidAttendance() {
         // invalid number of tutorials
-        assertFalse(ClassParticipationTracker.isValidClassPart(-1)); // -negative number
+        assertFalse(ClassParticipationTracker.isValidClassParticipation(-1)); // -negative number
 
         // valid number of tutorials
-        assertTrue(ClassParticipationTracker.isValidClassPart(1));
-        assertTrue(ClassParticipationTracker.isValidClassPart(2));
-        assertTrue(ClassParticipationTracker.isValidClassPart(10));
+        assertTrue(ClassParticipationTracker.isValidClassParticipation(1));
+        assertTrue(ClassParticipationTracker.isValidClassParticipation(2));
+        assertTrue(ClassParticipationTracker.isValidClassParticipation(10));
     }
 
     @Test
@@ -74,7 +74,7 @@ public class ClassParticipationTrackerTest {
     public void toStringMethod() {
         ClassParticipationTracker classParticipationTracker = new ClassParticipationTracker(3);
 
-        assertEquals("Class Participation:\n"
+        assertEquals("Class participation:\n"
                 + "Tutorial 1: Did not Participate\n"
                 + "Tutorial 2: Did not Participate\n"
                 + "Tutorial 3: Did not Participate\n", classParticipationTracker.toString());

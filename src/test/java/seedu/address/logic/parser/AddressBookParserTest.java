@@ -164,7 +164,7 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommand_recordClassPart() throws Exception {
+    public void parseCommand_recordClassParticipation() throws Exception {
         RecordClassParticipationCommand command = (RecordClassParticipationCommand) parser.parseCommand(
                 RecordClassParticipationCommand.COMMAND_WORD
                 + STUDENT_NUMBER_DESC_AMY + RecordClassParticipationCommandParserTest.VALID_TUT_DESC

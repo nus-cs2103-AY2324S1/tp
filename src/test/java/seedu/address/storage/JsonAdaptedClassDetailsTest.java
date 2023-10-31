@@ -12,10 +12,10 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.student.ClassDetails;
-import seedu.address.model.student.grades.Assignment;
-import seedu.address.model.student.grades.AssignmentTracker;
-import seedu.address.model.student.grades.AttendanceTracker;
-import seedu.address.model.student.grades.ClassParticipationTracker;
+import seedu.address.model.student.information.Assignment;
+import seedu.address.model.student.information.AssignmentTracker;
+import seedu.address.model.student.information.AttendanceTracker;
+import seedu.address.model.student.information.ClassParticipationTracker;
 
 public class JsonAdaptedClassDetailsTest {
     private static final String INVALID_CLASS_NUMBER = "11";

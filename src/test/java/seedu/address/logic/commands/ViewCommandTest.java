@@ -29,7 +29,7 @@ import seedu.address.testutil.TypicalStudents;
  */
 public class ViewCommandTest {
 
-    private Model model = new ModelManager(new AddressBook(getTypicalAddressBook()), new UserPrefs());
+    private final Model model = new ModelManager(new AddressBook(getTypicalAddressBook()), new UserPrefs());
     private final CommandHistory commandHistory = new CommandHistory();
 
     @Test
@@ -42,7 +42,6 @@ public class ViewCommandTest {
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.setSelectedStudent(studentToView);
-        expectedModel.commitAddressBook();
 
         assertCommandSuccess(viewCommand, model, expectedMessage, expectedModel, commandHistory);
     }

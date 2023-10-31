@@ -1,15 +1,17 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
 
 import java.util.List;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.student.Student;
-import seedu.address.model.student.grades.exceptions.InvalidTutorialIndexException;
+import seedu.address.model.student.information.exceptions.InvalidTutorialIndexException;
 
 /**
  * Marks all displayed students' attendance as present.
@@ -37,12 +39,16 @@ public class MarkPresentAllCommand extends Command {
 
         List<Student> lastShownList = model.getFilteredStudentList();
         try {
-            for (Student s : lastShownList) {
-                model.setStudent(s, s.markPresent(index));
+            for (Student studentToMark : lastShownList) {
+                Student markedStudent = studentToMark.copy();
+                markedStudent.markPresent(index);
+                model.setStudent(studentToMark, markedStudent);
             }
-        } catch (InvalidTutorialIndexException e) {
+        } catch (InvalidTutorialIndexException | IllegalValueException e) {
             throw new CommandException(e.getMessage());
         }
+
+        model.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
 
         model.commitAddressBook();
 

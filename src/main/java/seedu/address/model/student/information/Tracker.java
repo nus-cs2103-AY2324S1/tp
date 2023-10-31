@@ -1,4 +1,4 @@
-package seedu.address.model.student.grades;
+package seedu.address.model.student.information;
 
 import java.util.List;
 

@@ -110,7 +110,7 @@ public class StudentBuilder {
      * Sets a {@code ClassParticipation} in {@code ClassParticipationTracker} of the
      * {@code ClassDetails} that we are building.
      */
-    public StudentBuilder withClassPartDetails(int tutNum, boolean isPresent) {
+    public StudentBuilder withClassParticipationDetails(int tutNum, boolean isPresent) {
         try {
             this.classDetails.recordClassParticipation(tutNum, isPresent);
         } catch (CommandException e) {

@@ -1,4 +1,4 @@
-package seedu.address.model.student.grades;
+package seedu.address.model.student.information;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
@@ -18,7 +18,7 @@ public class AssignmentTracker implements Tracker {
 
     public static final String MESSAGE_CONSTRAINTS = "Assignment Tracker needs to have positive number of assignments.";
 
-    private Assignment[] assignments;
+    private Assignment[] assignmentList;
 
     /**
      * Constructs an {@code AssignmentTracker}.
@@ -28,8 +28,8 @@ public class AssignmentTracker implements Tracker {
      */
     public AssignmentTracker(int numOfAssignments) {
         checkArgument(isValidAssignments(numOfAssignments), MESSAGE_CONSTRAINTS);
-        assignments = new Assignment[numOfAssignments];
-        IntStream.range(0, numOfAssignments).forEach(i -> assignments[i] = new Assignment());
+        assignmentList = new Assignment[numOfAssignments];
+        IntStream.range(0, numOfAssignments).forEach(i -> assignmentList[i] = new Assignment());
     }
 
     /**
@@ -39,11 +39,39 @@ public class AssignmentTracker implements Tracker {
      */
     public AssignmentTracker(List<Integer> assignmentTracker) throws IllegalValueException {
         requireNonNull(assignmentTracker);
-        assignments = new Assignment[assignmentTracker.size()];
+        assignmentList = new Assignment[assignmentTracker.size()];
         for (int i = 0; i < assignmentTracker.size(); i++) {
-            assignments[i] = new Assignment(assignmentTracker.get(i));
+            assignmentList[i] = new Assignment(assignmentTracker.get(i));
         }
     }
+
+    /**
+     * Constructs an {@code AssignmentTracker} with a given assignment list.
+     * Used for duplication.
+     * @param assignmentList A list of integers stored in {@code Assignment}.
+     */
+    public AssignmentTracker(Assignment[] assignmentList) {
+        assert assignmentList != null;
+        this.assignmentList = assignmentList;
+    }
+
+    /**
+     * Returns a deep copy of the assignment tracker.
+     * @return A deep copy of {@code AssignmentTracker}.
+     */
+    public AssignmentTracker copy() {
+        Assignment[] newAssignmentList = new Assignment[this.assignmentList.length];
+        IntStream.range(0, this.assignmentList.length)
+                .forEach(i -> {
+                    try {
+                        newAssignmentList[i] = new Assignment(this.assignmentList[i].getMarks());
+                    } catch (IllegalValueException e) {
+                        throw new RuntimeException(e);
+                    }
+                });
+        return new AssignmentTracker(newAssignmentList);
+    }
+
 
     /**
      * Returns true if a given number is a valid amount of assignments
@@ -58,7 +86,7 @@ public class AssignmentTracker implements Tracker {
      * @param marks Marks to be changed to.
      */
     public void editMarks(Index index, int marks) {
-        assignments[index.getZeroBased()].setMarks(marks);
+        assignmentList[index.getZeroBased()].setMarks(marks);
     }
 
     /**
@@ -66,7 +94,7 @@ public class AssignmentTracker implements Tracker {
      */
     public List<Integer> getJson() {
         List<Integer> assignmentTracker = new ArrayList<>();
-        for (Assignment assignment : assignments) {
+        for (Assignment assignment : assignmentList) {
             assignmentTracker.add(assignment.getMarks());
         }
         return assignmentTracker;
@@ -78,15 +106,15 @@ public class AssignmentTracker implements Tracker {
      * @return Percentage of overall assignment grades.
      */
     public double getPercentage() {
-        if (assignments.length == 0) {
+        if (assignmentList.length == 0) {
             return 100;
         }
         int score = 0;
         int totalScore = 0;
-        for (int i = 0; i < assignments.length; i++) {
-            if (assignments[i] != null) {
+        for (int i = 0; i < assignmentList.length; i++) {
+            if (assignmentList[i] != null) {
                 totalScore += 100;
-                score += assignments[i].getMarks();
+                score += assignmentList[i].getMarks();
             }
         }
         return (double) score / totalScore * 100;
@@ -95,8 +123,8 @@ public class AssignmentTracker implements Tracker {
     @Override
     public String toString() {
         StringBuilder ret = new StringBuilder("Assignment marks:\n");
-        for (int i = 0; i < assignments.length; i++) {
-            ret.append("Assignment ").append(i + 1).append(": ").append(assignments[i].toString()).append("\n");
+        for (int i = 0; i < assignmentList.length; i++) {
+            ret.append("Assignment ").append(i + 1).append(": ").append(assignmentList[i].toString()).append("\n");
         }
         return ret.toString();
     }
@@ -113,29 +141,29 @@ public class AssignmentTracker implements Tracker {
         }
 
         AssignmentTracker otherAssignmentTracker = (AssignmentTracker) other;
-        return Arrays.equals(assignments, otherAssignmentTracker.assignments);
+        return Arrays.equals(assignmentList, otherAssignmentTracker.assignmentList);
     }
 
     @Override
     public int hashCode() {
-        return Arrays.hashCode(assignments);
+        return Arrays.hashCode(assignmentList);
     }
 
     /**
      * Updates the length of the assignment tracker. Whenever the assignment count changes.
      */
     public void updateAssignmentCountChange(int assignmentCount) {
-        if (assignmentCount == assignments.length) {
+        if (assignmentCount == assignmentList.length) {
             return;
         }
         Assignment[] newAssignments = new Assignment[assignmentCount];
         for (int i = 0; i < assignmentCount; i++) {
-            if (i < assignments.length) {
-                newAssignments[i] = assignments[i];
+            if (i < assignmentList.length) {
+                newAssignments[i] = assignmentList[i];
             } else {
                 newAssignments[i] = new Assignment();
             }
         }
-        assignments = newAssignments;
+        assignmentList = newAssignments;
     }
 }

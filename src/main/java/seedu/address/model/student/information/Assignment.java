@@ -1,4 +1,4 @@
-package seedu.address.model.student.grades;
+package seedu.address.model.student.information;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 

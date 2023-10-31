@@ -12,6 +12,7 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_STUDENT;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.Messages;
 import seedu.address.model.Model;
@@ -26,11 +27,11 @@ import seedu.address.testutil.TypicalStudents;
  */
 public class MarkPresentCommandTest {
 
-    private Model model = new ModelManager(TypicalStudents.getTypicalAddressBook(), new UserPrefs());
+    private final Model model = new ModelManager(TypicalStudents.getTypicalAddressBook(), new UserPrefs());
     private final CommandHistory commandHistory = new CommandHistory();
 
     @Test
-    public void execute_validStudentNumber_success() {
+    public void execute_validStudentNumber_success() throws IllegalValueException {
         Student studentToMark = TypicalStudents.getTypicalStudents().get(INDEX_FIRST_STUDENT.getZeroBased());
         Index i = Index.fromOneBased(ClassDetails.DEFAULT_COUNT);
         model.setSelectedStudent(studentToMark);
@@ -40,7 +41,9 @@ public class MarkPresentCommandTest {
         String expectedMessage = MarkPresentCommand.MESSAGE_MARK_SUCCESS;
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        expectedModel.setStudent(studentToMark, studentToMark.markPresent(i));
+        Student markedStudent = studentToMark.copy();
+        markedStudent.markPresent(i);
+        expectedModel.setStudent(studentToMark, markedStudent);
         expectedModel.commitAddressBook();
 
         assertCommandSuccess(markPresentCommand, model, expectedMessage, expectedModel, commandHistory);

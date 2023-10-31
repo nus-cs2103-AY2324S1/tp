@@ -24,6 +24,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
+import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.exceptions.DataLoadingException;
 import seedu.address.logic.commands.AddCommand;
@@ -60,8 +61,6 @@ public class LogicManagerTest {
     private final int assignmentCount = 4;
     private final String fileName = "classmanager";
     private final String loadCommand = "load f/" + fileName;
-
-
 
     @BeforeEach
     public void setUp() {
@@ -144,13 +143,13 @@ public class LogicManagerTest {
 
 
     @Test
-    public void execute_storageThrowsIoException_throwsCommandException() {
+    public void execute_storageThrowsIoException_throwsCommandException() throws IOException {
         assertCommandFailureForExceptionFromStorage(DUMMY_IO_EXCEPTION, String.format(
                 FILE_OPS_ERROR_FORMAT, DUMMY_IO_EXCEPTION.getMessage()));
     }
 
     @Test
-    public void execute_storageThrowsAdException_throwsCommandException() {
+    public void execute_storageThrowsAdException_throwsCommandException() throws IOException {
         assertCommandFailureForExceptionFromStorage(DUMMY_AD_EXCEPTION, String.format(
                 LogicManager.FILE_OPS_PERMISSION_ERROR_FORMAT, DUMMY_AD_EXCEPTION.getMessage()));
     }
@@ -202,6 +201,12 @@ public class LogicManagerTest {
         logic.setGuiSettings(newGuiSettings);
 
         assertEquals(newGuiSettings, logic.getGuiSettings());
+    }
+
+    @Test
+    public void getHistory_success() {
+        ObservableList<String> history = logic.getHistory();
+        assertNotNull(history);
     }
 
     @Test
@@ -270,7 +275,7 @@ public class LogicManagerTest {
      * @param e the exception to be thrown by the Storage component
      * @param expectedMessage the message expected inside exception thrown by the Logic component
      */
-    private void assertCommandFailureForExceptionFromStorage(IOException e, String expectedMessage) {
+    private void assertCommandFailureForExceptionFromStorage(IOException e, String expectedMessage) throws IOException {
         Path prefPath = temporaryFolder.resolve("ExceptionUserPrefs.json");
 
         // Inject LogicManager with an AddressBookStorage that throws the IOException e when saving
@@ -296,6 +301,7 @@ public class LogicManagerTest {
         expectedModel.setConfigured(true);
         expectedModel.addStudent(expectedStudent);
         expectedModel.commitAddressBook();
+        storage.saveAddressBook(expectedModel.getAddressBook(), expectedModel.getAddressBookFilePath());
         assertCommandFailure(addCommand, CommandException.class, expectedMessage, expectedModel);
         assertHistoryCorrect(addCommand);
     }

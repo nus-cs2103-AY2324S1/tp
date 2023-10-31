@@ -15,7 +15,7 @@ import seedu.address.testutil.TypicalStudents;
 
 public class CommentCommandTest {
 
-    private Model model = new ModelManager(TypicalStudents.getTypicalAddressBook(), new UserPrefs());
+    private final Model model = new ModelManager(TypicalStudents.getTypicalAddressBook(), new UserPrefs());
     private final CommandHistory commandHistory = new CommandHistory();
 
     @Test

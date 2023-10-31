@@ -3,15 +3,17 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT_NUMBER;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.StudentNumber;
-import seedu.address.model.student.grades.exceptions.InvalidTutorialIndexException;
+import seedu.address.model.student.information.exceptions.InvalidTutorialIndexException;
 
 /**
  * Marks a student's attendance.
@@ -41,25 +43,28 @@ public class MarkPresentCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Model model, CommandHistory commandHistory) throws CommandException {
+    public CommandResult execute(Model model, CommandHistory commandHistory)
+            throws CommandException, IllegalValueException {
         requireNonNull(model);
 
         if (!model.hasStudent(new Student(targetStudentNumber))) {
             throw new CommandException(Messages.MESSAGE_NONEXISTENT_STUDENT_NUMBER);
         }
 
-        Student student = model.getStudent(targetStudentNumber);
+        Student studentToMark = model.getStudent(targetStudentNumber);
+        Student markedStudent = studentToMark.copy();
+        markedStudent.markPresent(this.index);
 
         try {
-            model.setStudent(student, student.markPresent(this.index));
+            model.setStudent(studentToMark, markedStudent);
         } catch (InvalidTutorialIndexException e) {
             throw new CommandException(e.getMessage());
         }
 
-        if (model.isSelectedStudent(student)) {
-            model.setSelectedStudent(student);
+        if (model.isSelectedStudent(markedStudent)) {
+            model.setSelectedStudent(markedStudent);
         }
-
+        model.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
         model.commitAddressBook();
 
         return new CommandResult(MESSAGE_MARK_SUCCESS);

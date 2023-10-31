@@ -8,9 +8,9 @@ import java.util.Objects;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.student.grades.AssignmentTracker;
-import seedu.address.model.student.grades.AttendanceTracker;
-import seedu.address.model.student.grades.ClassParticipationTracker;
+import seedu.address.model.student.information.AssignmentTracker;
+import seedu.address.model.student.information.AttendanceTracker;
+import seedu.address.model.student.information.ClassParticipationTracker;
 import seedu.address.storage.JsonAdaptedClassDetails;
 
 /**
@@ -72,23 +72,33 @@ public class ClassDetails {
     }
 
     /**
+     * Creates a deep copy of the class details.
+     * @return A deep copy of {@Code ClassDetails}.
+     * @throws IllegalValueException When there is an error in copying the trackers.
+     */
+    public ClassDetails copy() throws IllegalValueException {
+        AttendanceTracker newAttendanceTracker = this.attendanceTracker.copy();
+        AssignmentTracker newAssignmentTracker = this.assignmentTracker.copy();
+        ClassParticipationTracker newClassParticipationTracker = this.classParticipationTracker.copy();
+        return new ClassDetails(classNumber, newAttendanceTracker, newAssignmentTracker, newClassParticipationTracker);
+    }
+
+    /**
      * Marks the specific tutorial as present.
      */
-    public ClassDetails markPresent(Index tutNum) {
+    public void markPresent(Index tutNum) {
         requireNonNull(tutNum);
         updateAssignmentAndTutorialCount();
         this.attendanceTracker.markPresent(tutNum);
-        return this;
     }
 
     /**
      * Marks the specific tutorial as absent.
      */
-    public ClassDetails markAbsent(Index tutNum) {
+    public void markAbsent(Index tutNum) {
         requireNonNull(tutNum);
         updateAssignmentAndTutorialCount();
         this.attendanceTracker.markAbsent(tutNum);
-        return this;
     }
 
     public String getClassNumber() {

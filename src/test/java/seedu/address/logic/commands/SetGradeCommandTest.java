@@ -29,7 +29,7 @@ import seedu.address.testutil.TypicalStudents;
  */
 public class SetGradeCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private final Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
     private final CommandHistory commandHistory = new CommandHistory();
 
     @Test
@@ -45,9 +45,8 @@ public class SetGradeCommandTest {
                 + editedStudent.getClassDetails().displayAssignments();
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-        if (expectedModel.isSelectedStudent(editedStudent)) {
-            expectedModel.setSelectedStudent(editedStudent);
-        }
+        expectedModel.setStudent(model.getStudent(editedStudent.getStudentNumber()), editedStudent);
+        expectedModel.setSelectedStudent(editedStudent);
         expectedModel.commitAddressBook();
 
         assertCommandSuccess(setGradeCommand, model, expectedMessage, expectedModel, commandHistory);
@@ -70,6 +69,7 @@ public class SetGradeCommandTest {
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         showStudentAtIndex(expectedModel, INDEX_FIRST_STUDENT);
         expectedModel.setStudent(model.getStudent(editedStudent.getStudentNumber()), editedStudent);
+        expectedModel.setSelectedStudent(editedStudent);
         expectedModel.commitAddressBook();
 
         assertCommandSuccess(setGradeCommand, model, expectedMessage, expectedModel, commandHistory);

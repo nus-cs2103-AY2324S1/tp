@@ -27,8 +27,8 @@ import seedu.address.testutil.TypicalStudents;
  */
 public class DeleteCommandTest {
 
-    private Model model = new ModelManager(TypicalStudents.getTypicalAddressBook(), new UserPrefs());
-    private CommandHistory commandHistory = new CommandHistory();
+    private final Model model = new ModelManager(TypicalStudents.getTypicalAddressBook(), new UserPrefs());
+    private final CommandHistory commandHistory = new CommandHistory();
 
     @Test
     public void execute_validStudentNumber_success() {

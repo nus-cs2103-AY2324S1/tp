@@ -11,9 +11,9 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.student.grades.AssignmentTracker;
-import seedu.address.model.student.grades.AttendanceTracker;
-import seedu.address.model.student.grades.ClassParticipationTracker;
+import seedu.address.model.student.information.AssignmentTracker;
+import seedu.address.model.student.information.AttendanceTracker;
+import seedu.address.model.student.information.ClassParticipationTracker;
 
 public class ClassDetailsTest {
 
@@ -86,7 +86,7 @@ public class ClassDetailsTest {
     }
 
     @Test
-    public void recordClassPart_invalidValues_exceptionThrown() {
+    public void recordClassParticipation_invalidValues_exceptionThrown() {
         ClassDetails classDetails = new ClassDetails("T11");
         ClassDetails.setTutorialCount(10);
         assertThrows(CommandException.class, () -> classDetails.recordClassParticipation(11, true));
@@ -94,7 +94,7 @@ public class ClassDetailsTest {
     }
 
     @Test
-    public void recordClassPart_validValues_success() {
+    public void recordClassParticipation_validValues_success() {
         ClassDetails classDetails = new ClassDetails("T11");
         ClassDetails.setTutorialCount(10);
         try {

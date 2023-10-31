@@ -8,6 +8,7 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.Messages;
 import seedu.address.model.Model;
@@ -26,7 +27,7 @@ public class MarkPresentAllCommandTest {
     private final CommandHistory commandHistory = new CommandHistory();
 
     @Test
-    public void execute_success() {
+    public void execute_success() throws IllegalValueException {
         Index i = Index.fromOneBased(ClassDetails.DEFAULT_COUNT);
 
         MarkPresentAllCommand markPresentAllCommand = new MarkPresentAllCommand(i);
@@ -35,7 +36,9 @@ public class MarkPresentAllCommandTest {
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         for (Student s : TypicalStudents.getTypicalStudents()) {
-            expectedModel.setStudent(s, s.markPresent(i));
+            Student markedStudent = s.copy();
+            markedStudent.markPresent(i);
+            expectedModel.setStudent(s, markedStudent);
         }
         expectedModel.commitAddressBook();
 

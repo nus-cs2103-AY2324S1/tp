@@ -4,13 +4,14 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PARTICIPATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT_NUMBER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TUTORIAL_SESSION;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
 
+import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.student.ClassDetails;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.StudentNumber;
 
@@ -36,19 +37,20 @@ public class RecordClassParticipationCommand extends Command {
 
     private final StudentNumber studentNumber;
     private final int sessionNumber;
-    private final boolean isParticipated;
+    private final boolean hasParticipated;
 
     /**
      * Creates an RecordPartCommand to record the specified {@code Student}'s participation
      */
-    public RecordClassParticipationCommand(StudentNumber studentNumber, int sessionNumber, boolean isParticipated) {
+    public RecordClassParticipationCommand(StudentNumber studentNumber, int sessionNumber, boolean hasParticipated) {
         this.studentNumber = studentNumber;
         this.sessionNumber = sessionNumber;
-        this.isParticipated = isParticipated;
+        this.hasParticipated = hasParticipated;
     }
 
     @Override
-    public CommandResult execute(Model model, CommandHistory commandHistory) throws CommandException {
+    public CommandResult execute(Model model, CommandHistory commandHistory)
+            throws CommandException, IllegalValueException {
         requireNonNull(model);
 
         if (!model.hasStudent(new Student(studentNumber))) {
@@ -56,21 +58,19 @@ public class RecordClassParticipationCommand extends Command {
         }
 
         Student studentToMark = model.getStudent(studentNumber);
-        ClassDetails classDetails = studentToMark.getClassDetails();
-        classDetails.recordClassParticipation(sessionNumber, isParticipated);
-        Student markedStudent = new Student(studentToMark.getName(), studentToMark.getPhone(),
-            studentToMark.getEmail(), studentToMark.getStudentNumber(), classDetails, studentToMark.getTags(),
-                studentToMark.getComment());
-
+        Student markedStudent = studentToMark.copy();
+        markedStudent.markClassParticipation(this.sessionNumber, this.hasParticipated);
         model.setStudent(studentToMark, markedStudent);
+
         if (model.isSelectedStudent(markedStudent)) {
             model.setSelectedStudent(markedStudent);
         }
 
+        model.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
         model.commitAddressBook();
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, studentNumber)
-                + classDetails.displayParticipation());
+                + markedStudent.getClassDetails().displayParticipation());
     }
 
     @Override
@@ -87,7 +87,7 @@ public class RecordClassParticipationCommand extends Command {
         RecordClassParticipationCommand otherSetGradeCommand = (RecordClassParticipationCommand) other;
         return studentNumber.equals(otherSetGradeCommand.studentNumber)
                 && sessionNumber == otherSetGradeCommand.sessionNumber
-                && isParticipated == otherSetGradeCommand.isParticipated;
+                && hasParticipated == otherSetGradeCommand.hasParticipated;
     }
 
     @Override
@@ -95,7 +95,7 @@ public class RecordClassParticipationCommand extends Command {
         return new ToStringBuilder(this)
                 .add("studentNumber", studentNumber)
                 .add("sessionNumber", sessionNumber)
-                .add("isParticipated", isParticipated)
+                .add("hasParticipated", hasParticipated)
                 .toString();
     }
 }

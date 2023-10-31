@@ -20,7 +20,7 @@ public class ViewCommand extends Command {
         + "Parameters: s/STUDENT_NUMBER\n"
         + "Example: " + COMMAND_WORD + " s/A1234567N";
     public static final String MESSAGE_COMMAND_SUCCESS =
-        "You are now viewing the class details of Student %1$s";
+        "You are now viewing the class details of student: %1$s";
     public static final String MESSAGE_COMMAND_FAILURE =
         "Please check that the student exist in the address book.";
     protected final StudentNumber studentNumber;
@@ -42,7 +42,6 @@ public class ViewCommand extends Command {
 
         Student studentToView = model.getStudent(studentNumber);
         model.setSelectedStudent(studentToView);
-        model.commitAddressBook();
 
         return new CommandResult(String.format(MESSAGE_COMMAND_SUCCESS, studentToView.getName()));
     }

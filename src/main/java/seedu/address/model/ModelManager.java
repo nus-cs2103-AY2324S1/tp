@@ -22,7 +22,7 @@ import seedu.address.model.student.StudentNumber;
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
-    private VersionedAddressBook versionedAddressBook;
+    private final VersionedAddressBook versionedAddressBook;
     private final UserPrefs userPrefs;
     private FilteredList<Student> filteredStudents;
 
