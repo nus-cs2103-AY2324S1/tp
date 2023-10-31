@@ -20,17 +20,14 @@ applications.
 ## Quick start
 
 1. Ensure you have Java `11` or above installed in your Computer.
-
 2. Download the latest `jobfindr.jar` from [here](https://github.com/AY2324S1-CS2103T-W12-3/tp/releases).
-
 3. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
-
-4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar jobfindr.jar` command
-   to run the application.<br>
-   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+4. Open a command terminal, `cd` into the folder you put the jar file in, and enter the command `java -jar jobfindr.jar`
+   to run the application.
+5. A GUI similar to the below should appear in a few seconds. Note that the app contains some sample data.<br><br>
    ![Ui](images/Ui.png)
 
-5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will
+6. Type the command in the command box and press Enter to execute it. For example, typing **`help`** and pressing Enter will
    open the help window.<br>
    Some example commands you can try:
 
@@ -45,21 +42,60 @@ applications.
 
     * `exit` : Exits the app.
 
-6. Refer to the [Features](#features) below for details of each command.
+7. Refer to "[Key Information](#key-information)" below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Features
+## Key Information
 
 <div markdown="block" class="alert alert-info">
 
-**information_source: Notes about the command format:**<br>
+### User interface
+
+### Structure of a job application
+
+| Field    | Prefix | Remarks                                                                                                             | Optional? | Sort Order    |
+|----------|--------|---------------------------------------------------------------------------------------------------------------------|-----------|---------------|
+| Company  | `c/`   | No restrictions                                                                                                     | No        | Alphabetical  |
+| Role     | `r/`   | Must only contain alphanumeric characters and spaces                                                                | No        | Alphabetical  |
+| Status   | `s/`   | Possible values in "[Valid statuses and job types](#valid-statuses-and-job-types)"                                  | No        | Alphabetical  |
+| Industry | `i/`   | Must start with an alphanumeric character                                                                           | Yes       | Alphabetical  |
+| Deadline | `d/`   | Must be in the format MMM dd yyyy HHmm (e.g. Dec 31 2030 1200) and cannot be earlier than the current date and time | Yes       | Chronological |
+| Type     | `t/`   | Possible values in "[Valid statuses and job types](#valid-statuses-and-job-types)"                                  |           |               |
+
+### Valid statuses and job types
+
+The following are valid statuses:
+
+| Status            | Remark                                                                                  |
+|-------------------|-----------------------------------------------------------------------------------------|
+| `TO_BE_SUBMITTED` | An application that you plan to apply for. The default status if no status is specified |
+| `PENDING`         | An application that you have applied for but have yet to receive a result               |
+| `APPROVED`        | An application that you have received a job offer for                                   |
+| `REJECTED`        | An application that you have been rejected for                                          |
+
+The following are valid job types:
+
+| Job Type     | Remark              |
+|--------------|---------------------|
+| `FULL_TIME`  | A full time job     |
+| `PART_TIME`  | A part time job     |
+| `INTERNSHIP` | An internship       |
+| `TEMPORARY`  | A temporary job     |
+| `CONTRACT`   | A contract job      |
+| `FREELANCE`  | A freelance job     |
+| `VOLUNTEER`  | A volunteered job   |
+
+### Structure of an interview
+
+
+### Command format
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines
   as space characters surrounding line-breaks may be omitted when copied over to the application.
 
 
-* Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
+* Words in upper case are the parameters to be supplied by the user.<br>
     * e.g. in `add c/COMPANY`, `COMPANY` is a parameter which can be used as `add c/Google`.
 
 
@@ -69,26 +105,19 @@ applications.
 
 * Parameters can be in any order.<br>
     * e.g. if the command specifies `c/COMPANY r/ROLE`, `r/ROLE c/COMPANY` is also acceptable.
+    * When `INDEX` is required, it has to be the first parameter.
 
 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `exit` and `clear`) will be
   ignored.<br>
     * e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
+* The same prefix cannot be used multiple times in the same command. 
+  * e.g. `add r/Cleaner c/Google c/Microsoft` is an invalid input. 
+
 
 * `INDEX` refers to the index number of the chosen application in the displayed application list and must be a _positive
   integer_ 1, 2, 3, …
-
-* Structure of a job application
-
-| Field    | Prefix | Specifier | Optional? | Sort Order    |
-|----------|--------|-----------|-----------|---------------|
-| Company  | `c/`   | `-c`      | No        | Alphabetical  |
-| Role     | `r/`   | `-r`      | No        | Alphabetical  |
-| Status   | `s/`   | `-s`      | Yes       | Alphabetical  |
-| Industry | `i/`   | `-i`      | Yes       | Alphabetical  |
-| Deadline | `d/`   | `-d`      | Yes       | Chronological |
-| Type     | `t/`   | `-t`      | Yes       | Alphabetical  |
 
 </div>
 
@@ -96,34 +125,9 @@ applications.
 
 ### Adding an application : `add`
 
-Adds an application to a company to the list.
+Adds a job application to the list.
 
 **Format:** `add c/COMPANY r/ROLE [d/DEADLINE] [s/STATUS] [i/INDUSTRY] [t/JOB_TYPE]`
-
-* Users must input a company `COMPANY` and a role `ROLE`
-* Details of the company such as `DEADLINE`, `STATUS`, `INDUSTRY`, `JOB_TYPE` are optional
-* `DEADLINE` must be in the following format: MMM dd yyyy HHmm (E.g Dec 31 2030 1200)
-
-* `STATUS`can only be in the following formats:
-
-| Status          | Remark                                                                                   |
-|-----------------|------------------------------------------------------------------------------------------|
-| TO_BE_SUBMITTED | An application that you plan to apply for. The default status if no status is specified. |
-| PENDING         | An application that you have applied for but have yet to receive a result.               |
-| APPROVED        | An application that you have received a job offer for.                                   |
-| REJECTED        | An application that you have been rejected for.                                          |
-
-* `JOBTYPE` can only be in the following formats:
-
-| Job Type   | An application for |
-|------------|--------------------|
-| FULL_TIME  | A full time job    |
-| PART_TIME  | A part time job    |
-| INTERNSHIP | An internship      |
-| TEMPORARY  | A temporary job    |
-| CONTRACT   | A contract job     |
-| FREELANCE  | A freelance job    |
-| VOLUNTEER  | A volunteered job  |
 
 **Examples:**
 
@@ -131,7 +135,7 @@ Adds an application to a company to the list.
   Adds a company called Microsoft, with the role Software Engineer in the technology industry,
   deadline Nov 12 2022 1200 and status as pending.
 * `add c/Google r/Cleaner`
-  Adds a company called Google, with the role Cleaner and status TO_BE_SUBMITTED.
+  Adds a company called Google, with the role Cleaner and status `TO_BE_SUBMITTED`.
 
 **UI mockup:**
 ![AddCommand](images/user-guide/AddCommand.png)
@@ -152,7 +156,7 @@ Edits an application in the list.
 * `edit 1 r/Announcer`
   Changes the role of the 1st job application to an announcer.
 * `edit 5 s/approved t/volunteer`
-  Changes the status and job type of the 5th job application to approved and volunteer respectively.
+  Changes the status and job type of the 5th job application to `APPROVED` and volunteer respectively.
 
 ---
 

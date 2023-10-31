@@ -12,7 +12,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import seedu.application.logic.Messages;
 import seedu.application.logic.commands.FindCommand;
 import seedu.application.logic.parser.exceptions.ParseException;
 import seedu.application.model.job.CombinedPredicate;
@@ -36,18 +35,15 @@ public class FindCommandParser implements Parser<FindCommand> {
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_ROLE, PREFIX_COMPANY,
                 PREFIX_DEADLINE, PREFIX_STATUS, PREFIX_JOB_TYPE, PREFIX_INDUSTRY);
 
-
+        if (!argMultimap.getPreamble().isEmpty()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+        }
 
         ArrayList<FieldContainsKeywordsPredicate> predicateList = new ArrayList<>();
 
         for (Map.Entry<Prefix, List<String>> entry : argMultimap.getArgMultimap().entrySet()) {
             if (entry.getKey().equals(new Prefix(""))) {
                 continue;
-            }
-
-            if (!FieldContainsKeywordsPredicate.isValidPrefix(entry.getKey())) {
-                throw new ParseException(
-                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, Messages.MESSAGE_INVALID_PREFIX));
             }
 
             String keywords = entry.getValue().get(0);
