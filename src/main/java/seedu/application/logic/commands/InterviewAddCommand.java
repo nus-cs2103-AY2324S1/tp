@@ -1,8 +1,6 @@
 package seedu.application.logic.commands;
 
-import static java.util.Objects.requireNonNull;
 import static seedu.application.logic.parser.CliSyntax.*;
-import static seedu.application.logic.parser.CliSyntax.PREFIX_INTERVIEW_ADDRESS;
 
 import seedu.application.commons.core.index.Index;
 import seedu.application.commons.util.CollectionUtil;
@@ -13,16 +11,14 @@ import seedu.application.model.Model;
 import seedu.application.model.job.Job;
 import seedu.application.model.job.interview.Interview;
 
-import java.util.List;
-
 /**
- * Adds a person to the application book.
+ * Adds an interview to a job in the application book.
  */
 public class InterviewAddCommand extends InterviewCommand {
 
     public static final String COMMAND_WORD = "add";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an interview to the application. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an interview to the job. "
         + "Parameters: INDEX (must be a positive integer)\n"
         + PREFIX_INTERVIEW_TYPE + "INTERVIEW TYPE "
         + PREFIX_INTERVIEW_DATETIME + "INTERVIEW DATE AND TIME "

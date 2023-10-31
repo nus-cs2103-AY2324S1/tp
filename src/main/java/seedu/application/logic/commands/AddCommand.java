@@ -10,7 +10,7 @@ import seedu.application.model.Model;
 import seedu.application.model.job.Job;
 
 /**
- * Adds a person to the application book.
+ * Adds a job to the application book.
  */
 public class AddCommand extends Command {
 

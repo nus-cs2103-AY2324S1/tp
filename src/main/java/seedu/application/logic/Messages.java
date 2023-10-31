@@ -52,6 +52,9 @@ public class Messages {
                 + job.getIndustry();
     }
 
+    /**
+     * Formats the {@code interview} for display to the user.
+     */
     public static String format(Interview interview) {
         return interview.getInterviewType()
             + " interview; Date and Time: "

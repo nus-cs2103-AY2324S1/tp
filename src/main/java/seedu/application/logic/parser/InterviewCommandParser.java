@@ -6,8 +6,6 @@ import static seedu.application.logic.parser.CliSyntax.*;
 import java.util.stream.Stream;
 
 import seedu.application.commons.core.index.Index;
-import seedu.application.commons.exceptions.IllegalValueException;
-import seedu.application.logic.commands.DeleteCommand;
 import seedu.application.logic.commands.InterviewAddCommand;
 import seedu.application.logic.commands.InterviewCommand;
 import seedu.application.logic.parser.exceptions.ParseException;
@@ -29,7 +27,8 @@ public class InterviewCommandParser implements Parser<InterviewCommand> {
      */
     public InterviewCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-            ArgumentTokenizer.tokenize(args, PREFIX_INTERVIEW_TYPE, PREFIX_INTERVIEW_DATETIME, PREFIX_INTERVIEW_ADDRESS);
+            ArgumentTokenizer.tokenize(args, PREFIX_INTERVIEW_TYPE,
+                    PREFIX_INTERVIEW_DATETIME, PREFIX_INTERVIEW_ADDRESS);
 
         Index index;
         String subCommandWord;
@@ -54,15 +53,20 @@ public class InterviewCommandParser implements Parser<InterviewCommand> {
     }
 
     private static InterviewAddCommand parseAdd(Index index, ArgumentMultimap argMultimap) throws ParseException {
-        if (!arePrefixesPresent(argMultimap, PREFIX_INTERVIEW_TYPE, PREFIX_INTERVIEW_DATETIME, PREFIX_INTERVIEW_ADDRESS)) {
+        if (!arePrefixesPresent(argMultimap, PREFIX_INTERVIEW_TYPE,
+            PREFIX_INTERVIEW_DATETIME, PREFIX_INTERVIEW_ADDRESS)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, InterviewAddCommand.MESSAGE_USAGE));
         }
 
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_INTERVIEW_TYPE, PREFIX_INTERVIEW_DATETIME, PREFIX_INTERVIEW_ADDRESS);
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_INTERVIEW_TYPE,
+                PREFIX_INTERVIEW_DATETIME, PREFIX_INTERVIEW_ADDRESS);
 
-        InterviewType interviewType = ParserUtil.parseInterviewType(argMultimap.getValue(PREFIX_INTERVIEW_TYPE).get());
-        InterviewDateTime interviewDateTime = ParserUtil.parseInterviewDateTime(argMultimap.getValue(PREFIX_INTERVIEW_DATETIME).get());
-        InterviewAddress interviewAddress = ParserUtil.parseInterviewAddress(argMultimap.getValue(PREFIX_INTERVIEW_ADDRESS).get());
+        InterviewType interviewType =
+                ParserUtil.parseInterviewType(argMultimap.getValue(PREFIX_INTERVIEW_TYPE).get());
+        InterviewDateTime interviewDateTime =
+                ParserUtil.parseInterviewDateTime(argMultimap.getValue(PREFIX_INTERVIEW_DATETIME).get());
+        InterviewAddress interviewAddress =
+                ParserUtil.parseInterviewAddress(argMultimap.getValue(PREFIX_INTERVIEW_ADDRESS).get());
 
         Interview interview = new Interview(interviewType, interviewDateTime, interviewAddress);
 

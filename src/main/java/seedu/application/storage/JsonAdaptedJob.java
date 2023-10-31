@@ -1,15 +1,15 @@
 package seedu.application.storage;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.application.commons.exceptions.IllegalValueException;
 import seedu.application.model.job.*;
 import seedu.application.model.job.interview.Interview;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * Jackson-friendly version of {@link Job}.
@@ -125,7 +125,8 @@ class JsonAdaptedJob {
             modelInterviews.add(toModelType);
         }
 
-        return new Job(modelRole, modelCompany, modelDeadline, modelStatus, modelJobType, modelIndustry, modelInterviews);
+        return new Job(modelRole, modelCompany, modelDeadline, modelStatus,
+                modelJobType, modelIndustry, modelInterviews);
     }
 
 }

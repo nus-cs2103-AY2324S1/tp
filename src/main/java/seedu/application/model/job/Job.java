@@ -6,8 +6,6 @@ import java.util.Objects;
 
 import seedu.application.commons.util.CollectionUtil;
 import seedu.application.commons.util.ToStringBuilder;
-import seedu.application.model.Model;
-import seedu.application.model.ModelManager;
 import seedu.application.model.job.interview.Interview;
 
 /**
@@ -40,6 +38,9 @@ public class Job {
         this.industry = industry;
     }
 
+    /**
+     * Not all fields are compulsory
+     */
     public Job(Role role, Company company, Deadline deadline, Status status, JobType jobType,
                Industry industry, List<Interview> interviews) {
         CollectionUtil.requireAllNonNull(role, company);
@@ -80,10 +81,17 @@ public class Job {
         return interviews;
     }
 
+    /**
+     * Adds an interview to the list of interviews for a job.
+     * The interview must not already exist for the job.
+     */
     public void addInterview(Interview interview) {
         interviews.add(interview);
     }
 
+    /**
+     * Returns true if an interview with the same identity as {@code interview} exists for the job.
+     */
     public boolean hasInterview(Interview interview) {
         for (Interview i : interviews) {
             if (interview.equals(i)) {

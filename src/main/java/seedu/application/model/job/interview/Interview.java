@@ -4,7 +4,6 @@ import java.util.Objects;
 
 import seedu.application.commons.util.CollectionUtil;
 import seedu.application.commons.util.ToStringBuilder;
-import seedu.application.model.job.Deadline;
 
 /**
  * Represents an Interview in the application book.

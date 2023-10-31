@@ -10,8 +10,6 @@ import seedu.application.model.job.interview.InterviewAddress;
 import seedu.application.model.job.interview.InterviewDateTime;
 import seedu.application.model.job.interview.InterviewType;
 
-import java.util.List;
-
 /**
  * Jackson-friendly version of {@link Job}.
  */

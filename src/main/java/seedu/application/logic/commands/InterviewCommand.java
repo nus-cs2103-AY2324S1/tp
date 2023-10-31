@@ -1,18 +1,20 @@
 package seedu.application.logic.commands;
 
+import static java.util.Objects.requireNonNull;
+import static seedu.application.logic.parser.CliSyntax.*;
+import static seedu.application.logic.parser.CliSyntax.PREFIX_INTERVIEW_ADDRESS;
+
+import java.util.List;
+
 import seedu.application.commons.core.index.Index;
 import seedu.application.logic.Messages;
 import seedu.application.logic.commands.exceptions.CommandException;
 import seedu.application.model.Model;
 import seedu.application.model.job.Job;
-import seedu.application.model.job.JobType;
 
-import java.util.List;
-
-import static java.util.Objects.requireNonNull;
-import static seedu.application.logic.parser.CliSyntax.*;
-import static seedu.application.logic.parser.CliSyntax.PREFIX_INTERVIEW_ADDRESS;
-
+/**
+ * Represents an interview command with hidden internal logic and the ability to be executed.
+ */
 public abstract class InterviewCommand extends Command {
 
     public static final String COMMAND_WORD = "interview";
@@ -31,10 +33,21 @@ public abstract class InterviewCommand extends Command {
 
     public static final String MESSAGE_CONSTRAINTS = "interview can only be followed by add, delete, or edit";
 
+    /**
+     * Enum representing valid sub-command words for interview-related commands.
+     */
     public enum SubCommandWords {
         add, delete, edit
     }
 
+    /**
+     * Retrieves the job associated with a given index in the filtered job list.
+     *
+     * @param model The model containing the job list.
+     * @param index The index of the job to retrieve.
+     * @return The job associated with the given index.
+     * @throws CommandException If the index is out of bounds or if the job is not found.
+     */
     public Job getJob(Model model, Index index) throws CommandException {
         requireNonNull(model);
         List<Job> lastShownList = model.getFilteredJobList();
@@ -46,6 +59,12 @@ public abstract class InterviewCommand extends Command {
         return lastShownList.get(index.getZeroBased());
     }
 
+    /**
+     * Checks if a given sub-command word is a valid sub-command for interview commands.
+     *
+     * @param subCommandWord The sub-command word to validate.
+     * @return True if the sub-command word is valid, false otherwise.
+     */
     public static boolean isValidSubCommandWord(String subCommandWord) {
         for (InterviewCommand.SubCommandWords w : InterviewCommand.SubCommandWords.values()) {
             if (subCommandWord.equalsIgnoreCase(w.toString())) {
