@@ -176,6 +176,9 @@ public class ParserUtil {
     public static String[] parseInterviewPreamble(String interviewPreamble) throws ParseException {
         requireNonNull(interviewPreamble);
         String[] trimmedInterviewPreamble = interviewPreamble.trim().split(" ");
+        if (trimmedInterviewPreamble.length != 2) {
+            throw new ParseException(InterviewCommand.MESSAGE_CONSTRAINTS);
+        }
         return trimmedInterviewPreamble;
     }
 

@@ -7,6 +7,7 @@ import java.util.stream.Stream;
 
 import seedu.application.commons.core.index.Index;
 import seedu.application.commons.exceptions.IllegalValueException;
+import seedu.application.logic.commands.DeleteCommand;
 import seedu.application.logic.commands.InterviewAddCommand;
 import seedu.application.logic.commands.InterviewCommand;
 import seedu.application.logic.parser.exceptions.ParseException;
@@ -38,9 +39,9 @@ public class InterviewCommandParser implements Parser<InterviewCommand> {
             splitPreamble = ParserUtil.parseInterviewPreamble(argMultimap.getPreamble());
             subCommandWord = ParserUtil.parseSubCommandWord(splitPreamble[0]);
             index = ParserUtil.parseIndex(splitPreamble[1]);
-        } catch (IllegalValueException ive) {
-            throw new ParseException(String.format(MESSAGE_INVALID_JOB_DISPLAYED_INDEX,
-                InterviewCommand.MESSAGE_USAGE), ive);
+        } catch (ParseException pe) {
+            throw new ParseException(
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, InterviewCommand.MESSAGE_USAGE), pe);
         }
 
         switch (subCommandWord) {

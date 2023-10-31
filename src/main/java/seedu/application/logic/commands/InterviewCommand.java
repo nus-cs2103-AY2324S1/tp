@@ -18,7 +18,7 @@ public abstract class InterviewCommand extends Command {
     public static final String COMMAND_WORD = "interview";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-        + ": Adds / Deletes / Edits an interview in the application."
+        + ": Adds / Deletes / Edits an interview in the application.\n"
         + "Parameters: command word (add / delete / list)\n"
         + "INDEX (must be a positive integer)\n"
         + PREFIX_INTERVIEW_TYPE + "INTERVIEW TYPE "
