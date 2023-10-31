@@ -160,6 +160,18 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
+    /**
+     * Opens the bar chart window or focuses on it if it's already opened.
+     * @param barchartWindow a BarChartWindow instance.
+     */
+    public void handleBarChart(BarChartWindow barchartWindow) {
+        if (!barchartWindow.isShowing()) {
+            barchartWindow.show();
+        } else {
+            barchartWindow.focus();
+        }
+    }
+
     void show() {
         primaryStage.show();
     }
@@ -198,6 +210,11 @@ public class MainWindow extends UiPart<Stage> {
             if (commandResult.isShowTable()) {
                 TableWindow tableWindow = new TableWindow(commandResult);
                 handleTable(tableWindow);
+            }
+
+            if (commandResult.isShowBarChart()) {
+                BarChartWindow barChartWindow = new BarChartWindow(commandResult);
+                handleBarChart(barChartWindow);
             }
 
             if (commandResult.isExit()) {

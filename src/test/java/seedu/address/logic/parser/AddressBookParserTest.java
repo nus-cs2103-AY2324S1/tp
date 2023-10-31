@@ -10,6 +10,7 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.BarChartCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
@@ -80,6 +81,17 @@ public class AddressBookParserTest {
         assertEquals(new TableCommand("g/"), command1);
         assertEquals(new TableCommand("l/"), command2);
         assertEquals(new TableCommand("s/"), command3);
+    }
+
+    @Test
+    public void parseCommand_barChart() throws Exception {
+        BarChartCommand command1 = (BarChartCommand) parser.parseCommand(BarChartCommand.COMMAND_WORD + " g/");
+        BarChartCommand command2 = (BarChartCommand) parser.parseCommand(BarChartCommand.COMMAND_WORD + " l/");
+        BarChartCommand command3 = (BarChartCommand) parser.parseCommand(BarChartCommand.COMMAND_WORD + " s/");
+
+        assertEquals(new BarChartCommand("g/"), command1);
+        assertEquals(new BarChartCommand("l/"), command2);
+        assertEquals(new BarChartCommand("s/"), command3);
     }
 
     @Test
