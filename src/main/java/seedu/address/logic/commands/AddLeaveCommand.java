@@ -102,7 +102,7 @@ public class AddLeaveCommand extends Command {
     @Override
     public boolean equals(Object other) {
         if (other == this) {
-        return true;
+            return true;
         }
 
         // instanceof handles nulls
