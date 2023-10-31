@@ -33,6 +33,14 @@ public class UniqueAppointmentList implements Iterable<Appointment> {
     }
 
     /**
+     * Returns true if the list contains an overlapping appointment as the given argument.
+     */
+    public boolean overlaps(Appointment toCheck) {
+        requireNonNull(toCheck);
+        return internalList.stream().anyMatch(toCheck::isOverlappingAppointment);
+    }
+
+    /**
      * Adds an appointment to the list.
      * The appointment must not already exist in the list.
      */
@@ -130,6 +138,17 @@ public class UniqueAppointmentList implements Iterable<Appointment> {
         for (int i = 0; i < appointments.size() - 1; i++) {
             for (int j = i + 1; j < appointments.size(); j++) {
                 if (appointments.get(i).equals(appointments.get(j))) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    private boolean appointmentsDoNotOverlap(List<Appointment> appointments) {
+        for (int i = 0; i < appointments.size() - 1; i++) {
+            for (int j = i + 1; j < appointments.size(); j++) {
+                if (appointments.get(i).isOverlappingAppointment(appointments.get(j))) {
                     return false;
                 }
             }

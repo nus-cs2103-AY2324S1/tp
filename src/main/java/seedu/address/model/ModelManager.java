@@ -118,12 +118,19 @@ public class ModelManager implements Model {
 
     @Override
     public boolean hasAppointment(Appointment appointment) {
-        requireAllNonNull(appointment);
+        requireNonNull(appointment);
         return wellNus.hasAppointment(appointment);
     }
 
     @Override
+    public boolean hasOverlapsWithAppointments(Appointment appointment) {
+        requireNonNull(appointment);
+        return wellNus.overlapsWithAppointments(appointment);
+    }
+
+    @Override
     public void addAppointment(Appointment appointment) {
+        requireNonNull(appointment);
         wellNus.addAppointment(appointment);
         updateFilteredAppointmentList(PREDICATE_SHOW_ALL_APPOINTMENTS);
         updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
