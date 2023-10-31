@@ -31,7 +31,7 @@ If you type fast, lesSON can get your flashcards done faster than current GUI ap
    - [Solve Flashcards](#practise-flashcards-solve)
    - [Setting Difficulty for Flashcards](#setting-difficulty-of-flashcards-set)
 4. [Markdown Syntax](#markdown-syntax)
-4. [FAQ](#faq)
+5. [FAQ](#faq)
 
 --------------------------------------------------------------------------------------------------------------------
 
