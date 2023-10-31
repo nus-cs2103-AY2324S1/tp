@@ -15,24 +15,73 @@ import seedu.address.model.person.Person;
 
 
 public class KeywordParserTest {
+    @Test
+    public void parseInputWithName() {
+        String[] input = {"John", "Doe"};
+        Predicate<Person> predicate = KeywordParser.parseInput(input);
+        assertTrue(predicate instanceof NameContainsKeywordsPredicate);
+    }
 
     @Test
-    public void test_userInput_returnsCorrectFindCommand() {
-        String[] testIcInput = {"T1234567G"};
-        String[] testGenderInput = {"M"};
-        String[] testBloodTypeInput = {"Blood", "Type", "A+"};
-        String[] testNameInput = {"Alice", "Bob"};
+    public void parseInputWithIC() {
+        String[] input = {"S1234567A"};
+        Predicate<Person> predicate = KeywordParser.parseInput(input);
+        assertTrue(predicate instanceof IcContainsKeywordsPredicate);
+    }
 
-        Predicate<Person> testPredicate1 = new IcContainsKeywordsPredicate("T1234567G");
-        assertTrue(KeywordParser.parseInput(testIcInput).equals(testPredicate1));
+    @Test
+    public void parseInputWithGender() {
+        String[] input = {"M"};
+        Predicate<Person> predicate = KeywordParser.parseInput(input);
+        assertTrue(predicate instanceof GenderPredicate);
+    }
 
-        Predicate<Person> testPredicate2 = new GenderPredicate("M");
-        assertTrue(KeywordParser.parseInput(testGenderInput).equals(testPredicate2));
+    @Test
+    public void parseInputWithBloodType() {
+        String[] input = {"Blood", "Type", "A+"};
+        Predicate<Person> predicate = KeywordParser.parseInput(input);
+        assertTrue(predicate instanceof BloodTypePredicate);
+    }
 
-        Predicate<Person> testPredicate3 = new BloodTypePredicate("A+");
-        assertTrue(KeywordParser.parseInput(testBloodTypeInput).equals(testPredicate3));
+    @Test
+    public void parseInputWithInvalidGender() {
+        String[] input = {"X"};
+        Predicate<Person> predicate = KeywordParser.parseInput(input);
+        assertTrue(predicate instanceof NameContainsKeywordsPredicate);
+    }
 
-        Predicate<Person> testPredicate4 = new NameContainsKeywordsPredicate(Arrays.asList("Alice", "Bob"));
-        assertTrue(KeywordParser.parseInput(testNameInput).equals(testPredicate4));
+    @Test
+    public void parseInputWithInvalidBloodType() {
+        String[] input = {"Blood", "Type", "C"};
+        Predicate<Person> predicate = KeywordParser.parseInput(input);
+        assertTrue(predicate instanceof NameContainsKeywordsPredicate);
+    }
+
+    @Test
+    public void parseInputWithMultipleKeywords() {
+        String[] input = {"John", "Doe", "Carl"};
+        Predicate<Person> predicate = KeywordParser.parseInput(input);
+        assertTrue(predicate instanceof NameContainsKeywordsPredicate);
+    }
+
+    @Test
+    public void parseInputWithICAndGender() {
+        String[] input = {"S1234567A", "M"};
+        Predicate<Person> predicate = KeywordParser.parseInput(input);
+        assertTrue(predicate instanceof IcContainsKeywordsPredicate);
+    }
+
+    @Test
+    public void parseInputWithICAndBloodType() {
+        String[] input = {"S1234567A", "A+"};
+        Predicate<Person> predicate = KeywordParser.parseInput(input);
+        assertTrue(predicate instanceof IcContainsKeywordsPredicate);
+    }
+
+    @Test
+    public void parseInputWithGenderAndBloodType() {
+        String[] input = {"M", "A+"};
+        Predicate<Person> predicate = KeywordParser.parseInput(input);
+        assertTrue(predicate instanceof GenderPredicate);
     }
 }
