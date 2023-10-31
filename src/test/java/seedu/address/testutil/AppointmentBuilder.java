@@ -6,6 +6,7 @@ import seedu.address.model.appointment.Appointment;
 import seedu.address.model.appointment.AppointmentDescription;
 import seedu.address.model.appointment.AppointmentTime;
 import seedu.address.model.person.Person;
+import seedu.address.model.tag.PriorityTag;
 
 /**
  * Apartment builder helps to build test appointment objects.
@@ -17,11 +18,11 @@ public class AppointmentBuilder {
     private static final Person DEFAULT_PATIENT = new PersonBuilder().build();
     private static final String DEFAULT_DESCRIPTION = VALID_DESCRIPTION;
 
+
     // Identity fields
     private AppointmentTime appointmentTime;
     private Person patient;
-    //  private Set<Tag> tags = new HashSet<>();
-
+    private PriorityTag priorityTag;
     private AppointmentDescription appointmentDescription;
     /**
      * Creates a {@code AppointmentBuilder} with default settings.
@@ -39,10 +40,11 @@ public class AppointmentBuilder {
         appointmentTime = appointment.getAppointmentTime();
         patient = appointment.getPerson();
         appointmentDescription = appointment.getAppointmentDescription();
+        priorityTag = appointment.getPriorityTag();
     }
 
     public Appointment build() {
-        return new Appointment(this.patient, this.appointmentTime, this.appointmentDescription);
+        return new Appointment(this.patient, this.appointmentTime, this.appointmentDescription, this.priorityTag);
     }
 
     /**
@@ -67,6 +69,11 @@ public class AppointmentBuilder {
      */
     public AppointmentBuilder withDescription(String description) {
         this.appointmentDescription = new AppointmentDescription(description);
+        return this;
+    }
+
+    public AppointmentBuilder withPriorityTag(String priorityTag) {
+        this.priorityTag = new PriorityTag(priorityTag);
         return this;
     }
 }
