@@ -52,7 +52,7 @@ public class LogicManager implements Logic {
         commandResult = command.execute(model);
 
         try {
-            storage.saveWellNus(model.getAddressBook());
+            storage.saveWellNus(model.getWellNusData());
         } catch (AccessDeniedException e) {
             throw new CommandException(String.format(FILE_OPS_PERMISSION_ERROR_FORMAT, e.getMessage()), e);
         } catch (IOException ioe) {
@@ -64,7 +64,7 @@ public class LogicManager implements Logic {
 
     @Override
     public ReadOnlyWellNus getAddressBook() {
-        return model.getAddressBook();
+        return model.getWellNusData();
     }
 
     @Override
@@ -79,7 +79,7 @@ public class LogicManager implements Logic {
 
     @Override
     public Path getAddressBookFilePath() {
-        return model.getAddressBookFilePath();
+        return model.getWellNusFilePath();
     }
 
     @Override

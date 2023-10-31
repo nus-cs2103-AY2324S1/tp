@@ -15,7 +15,7 @@ import seedu.address.model.appointment.Appointment;
 import seedu.address.model.student.Student;
 
 /**
- * Represents the in-memory model of the address book data.
+ * Represents the in-memory model of the Wellnus data.
  */
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
@@ -26,14 +26,14 @@ public class ModelManager implements Model {
     private final FilteredList<Student> filteredStudents;
 
     /**
-     * Initializes a ModelManager with the given addressBook and userPrefs.
+     * Initializes a ModelManager with the given Wellnus instance and userPrefs.
      */
-    public ModelManager(ReadOnlyWellNus addressBook, ReadOnlyUserPrefs userPrefs) {
-        requireAllNonNull(addressBook, userPrefs);
+    public ModelManager(ReadOnlyWellNus wellNus, ReadOnlyUserPrefs userPrefs) {
+        requireAllNonNull(wellNus, userPrefs);
 
-        logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
+        logger.fine("Initializing with WellNus instance: " + wellNus + " and user prefs " + userPrefs);
 
-        this.wellNus = new WellNus(addressBook);
+        this.wellNus = new WellNus(wellNus);
         this.userPrefs = new UserPrefs(userPrefs);
         this.filteredStudents = new FilteredList<>(this.wellNus.getStudentList());
         this.filteredAppointments = new FilteredList<>(this.wellNus.getAppointmentList());
@@ -68,25 +68,25 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public Path getAddressBookFilePath() {
-        return userPrefs.getAddressBookFilePath();
+    public Path getWellNusFilePath() {
+        return userPrefs.getWellNusFilePath();
     }
 
     @Override
-    public void setAddressBookFilePath(Path addressBookFilePath) {
-        requireNonNull(addressBookFilePath);
-        userPrefs.setAddressBookFilePath(addressBookFilePath);
+    public void setWellNusFilePath(Path wellNusFilePath) {
+        requireNonNull(wellNusFilePath);
+        userPrefs.setWellNusFilePath(wellNusFilePath);
     }
 
-    //=========== AddressBook ================================================================================
+    //=========== WellNus ================================================================================
 
     @Override
-    public void setAddressBook(ReadOnlyWellNus addressBook) {
-        this.wellNus.resetData(addressBook);
+    public void setWellNusData(ReadOnlyWellNus wellNusData) {
+        this.wellNus.resetData(wellNusData);
     }
 
     @Override
-    public ReadOnlyWellNus getAddressBook() {
+    public ReadOnlyWellNus getWellNusData() {
         return wellNus;
     }
 
@@ -107,6 +107,7 @@ public class ModelManager implements Model {
     public void addStudent(Student student) {
         wellNus.addStudent(student);
         updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
+        updateFilteredAppointmentList(PREDICATE_SHOW_ALL_APPOINTMENTS);
     }
 
     @Override
@@ -125,6 +126,7 @@ public class ModelManager implements Model {
     public void addAppointment(Appointment appointment) {
         wellNus.addAppointment(appointment);
         updateFilteredAppointmentList(PREDICATE_SHOW_ALL_APPOINTMENTS);
+        updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
     }
 
     @Override
@@ -135,8 +137,7 @@ public class ModelManager implements Model {
     //=========== Filtered Student List Accessors =============================================================
 
     /**
-     * Returns an unmodifiable view of the list of {@code Student} backed by the internal list of
-     * {@code versionedAddressBook}
+     * Returns an unmodifiable view of the list of {@code Student}
      */
     @Override
     public ObservableList<Student> getFilteredStudentList() {
@@ -144,8 +145,7 @@ public class ModelManager implements Model {
     }
 
     /**
-     * Returns an unmodifiable view of the list of {@code Appointment} backed by the internal list of
-     * {@code versionedAddressBook}
+     * Returns an unmodifiable view of the list of {@code Appointment}
      */
     @Override
     public ObservableList<Appointment> getFilteredAppointmentList() {
