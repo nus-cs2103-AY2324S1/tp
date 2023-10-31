@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.LogBook;
@@ -35,6 +36,7 @@ public class LogCommand extends UndoableCommand {
      */
     @Override
     public CommandResult execute(Model model) throws CommandException {
+
         // Ensure that there are results from the most recent FindCommand
         if (model.getFoundPersonsList().isEmpty()) {
             throw new CommandException(Messages.MESSAGE_EMPTY_FIND_RESULT);

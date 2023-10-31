@@ -37,6 +37,7 @@ public class AppendLogCommand extends UndoableCommand {
      */
     @Override
     public CommandResult execute(Model model) throws CommandException {
+
         // Ensure that there are results from the most recent FindCommand
         if (model.getFoundPersonsList().isEmpty()) {
             throw new CommandException(Messages.MESSAGE_EMPTY_FIND_RESULT);
