@@ -35,19 +35,19 @@ public class ScheduleListPanel extends UiPart<Region> {
         scheduleListView.setItems(scheduleList);
         scheduleListView.setCellFactory(listView -> new ScheduleListViewCell());
 
-        getDividerIndex(scheduleList);
-        scheduleList.addListener((ListChangeListener<Schedule>) c -> getDividerIndex(scheduleList));
+        setDividerIndex(scheduleList);
+        scheduleList.addListener((ListChangeListener<Schedule>) c -> setDividerIndex(scheduleList));
     }
 
-    private void getDividerIndex(ObservableList<Schedule> scheduleList) {
+    private void setDividerIndex(ObservableList<Schedule> scheduleList) {
         LocalDateTime now = LocalDateTime.now();
         for (int i = 0; i < scheduleList.size(); i++) {
             if (scheduleList.get(i).getStartTime().compareDays(new StartTime(now)) < 0) {
                 dividerIndex = i;
-                break;
+                return;
             }
         }
-
+        dividerIndex = -1;
     }
 
     /**
@@ -63,7 +63,7 @@ public class ScheduleListPanel extends UiPart<Region> {
                 setText(null);
             } else if (getIndex() == dividerIndex) {
                 VBox container = new VBox();
-                Label dividerLabel = new Label("Past Schedules");
+                Label dividerLabel = new Label("Schedules Before Today");
                 Separator separator = new Separator();
                 container.getChildren()
                         .addAll(dividerLabel, separator, new ScheduleCard(schedule, getIndex() + 1).getRoot());
