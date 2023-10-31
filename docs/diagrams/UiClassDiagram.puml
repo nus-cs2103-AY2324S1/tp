@@ -13,6 +13,10 @@ Class HelpWindow
 Class ResultDisplay
 Class PersonListPanel
 Class PersonCard
+Class ScheduleListPanel
+Class ScheduleCard
+Class CalendarPanel
+Class CalendarCard
 Class StatusBarFooter
 Class CommandBox
 }
@@ -33,10 +37,16 @@ UiManager -down-> "1" MainWindow
 MainWindow *-down->  "1" CommandBox
 MainWindow *-down-> "1" ResultDisplay
 MainWindow *-down-> "1" PersonListPanel
+MainWindow *-down-> "1" ScheduleListPanel
+MainWindow *-down-> "1" CalendarPanel
 MainWindow *-down-> "1" StatusBarFooter
 MainWindow --> "0..1" HelpWindow
 
 PersonListPanel -down-> "*" PersonCard
+
+ScheduleListPanel -down-> "*" ScheduleCard
+
+CalendarPanel -down-> "*" CalendarCard
 
 MainWindow -left-|> UiPart
 
@@ -44,13 +54,20 @@ ResultDisplay --|> UiPart
 CommandBox --|> UiPart
 PersonListPanel --|> UiPart
 PersonCard --|> UiPart
+ScheduleListPanel --|> UiPart
+ScheduleCard --|> UiPart
+CalendarPanel --|> UiPart
+CalendarCard --|> UiPart
 StatusBarFooter --|> UiPart
 HelpWindow --|> UiPart
 
 PersonCard ..> Model
+ScheduleCard ..> Model
 UiManager -right-> Logic
 MainWindow -left-> Logic
 
+CalendarPanel -[hidden]left- ScheduleListPanel
+ScheduleListPanel -[hidden]left- PersonListPanel
 PersonListPanel -[hidden]left- HelpWindow
 HelpWindow -[hidden]left- CommandBox
 CommandBox -[hidden]left- ResultDisplay

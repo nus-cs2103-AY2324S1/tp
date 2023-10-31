@@ -4,6 +4,7 @@ import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Scene;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
@@ -15,7 +16,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.ListScheduleCommand;
-import seedu.address.logic.commands.ListTutorCommand;
+import seedu.address.logic.commands.ShowCalendarCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -35,6 +36,7 @@ public class MainWindow extends UiPart<Stage> {
     // Independent Ui parts residing in this Ui container
     private PersonListPanel personListPanel;
     private ScheduleListPanel scheduleListPanel;
+    private CalendarPanel calendarPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
 
@@ -55,7 +57,6 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane statusbarPlaceholder;
-
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
      */
@@ -80,6 +81,16 @@ public class MainWindow extends UiPart<Stage> {
 
     private void setAccelerators() {
         setAccelerator(helpMenuItem, KeyCombination.valueOf("F1"));
+    }
+
+    private String getCurrentTheme() {
+        Scene scene = primaryStage.getScene();
+        String stylesheetPath = scene.getStylesheets().get(0);
+        if (stylesheetPath.contains("/view/")) {
+            int startIndex = stylesheetPath.indexOf("/view/");
+            return stylesheetPath.substring(startIndex);
+        }
+        return null;
     }
 
     /**
@@ -117,6 +128,7 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
+        calendarPanel = new CalendarPanel(logic.getFilteredPersonList(), logic.getFilteredScheduleList());
         scheduleListPanel = new ScheduleListPanel(logic.getFilteredScheduleList());
         scheduleListPanelPlaceholder.getChildren().add(scheduleListPanel.getRoot());
 
@@ -143,6 +155,7 @@ public class MainWindow extends UiPart<Stage> {
             primaryStage.setX(guiSettings.getWindowCoordinates().getX());
             primaryStage.setY(guiSettings.getWindowCoordinates().getY());
         }
+        handleChangeTheme(guiSettings.getTheme());
     }
 
     /**
@@ -167,7 +180,7 @@ public class MainWindow extends UiPart<Stage> {
     @FXML
     private void handleExit() {
         GuiSettings guiSettings = new GuiSettings(primaryStage.getWidth(), primaryStage.getHeight(),
-                (int) primaryStage.getX(), (int) primaryStage.getY());
+                (int) primaryStage.getX(), (int) primaryStage.getY(), getCurrentTheme());
         logic.setGuiSettings(guiSettings);
         helpWindow.hide();
         primaryStage.hide();
@@ -177,9 +190,15 @@ public class MainWindow extends UiPart<Stage> {
      * Displays either the list of schedules or tutors based on the command result
      */
     private void handleListDisplay(CommandResult commandResult) {
-        if (commandResult.getFeedbackToUser().equals(ListScheduleCommand.MESSAGE_SUCCESS)) {
+        // TODO: Update this when there are both lists displayed simultaneously
+        switch (commandResult.getFeedbackToUser()) {
+        case ListScheduleCommand.MESSAGE_SUCCESS:
             showSchedules();
-        } else if (commandResult.getFeedbackToUser().equals(ListTutorCommand.MESSAGE_SUCCESS)) {
+            break;
+        case ShowCalendarCommand.MESSAGE_SUCCESS:
+            showCalendar();
+            break;
+        default:
             showPersons();
         }
     }
@@ -205,6 +224,34 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
+     * Shows calendar of filtered schedule cards.
+     */
+    void showCalendar() {
+        listPanelPlaceholder.getChildren().clear();
+        listPanelPlaceholder.getChildren().add(calendarPanel.getRoot());
+    }
+
+    /**
+     * Changes the theme of the application according to specified theme.
+     * @param theme is the specified filepath of theme styling.
+     */
+    @FXML
+    private void handleChangeTheme(String theme) {
+        Scene scene = primaryStage.getScene();
+        scene.getStylesheets().clear();
+        scene.getStylesheets().add(getClass().getResource(theme).toExternalForm());
+
+        GuiSettings guiSettings = new GuiSettings(
+            primaryStage.getWidth(),
+            primaryStage.getHeight(),
+            (int) primaryStage.getX(),
+            (int) primaryStage.getY(),
+            theme
+        );
+        logic.setGuiSettings(guiSettings);
+    }
+
+    /**
      * Executes the command and returns the result.
      *
      * @see seedu.address.logic.Logic#execute(String)
@@ -221,6 +268,10 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.isExit()) {
                 handleExit();
+            }
+
+            if (commandResult.isTheme()) {
+                handleChangeTheme(commandResult.getTheme());
             }
 
             handleListDisplay(commandResult);
