@@ -7,26 +7,26 @@ title: Developer Guide
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Acknowledgements**
+## 1. Introduction
+
+### 1.1 Acknowledgements
 
 * This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
 
---------------------------------------------------------------------------------------------------------------------
-
-## **Setting up, getting started**
+### 1.2 Setting up, getting started
 
 Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Design**
+### 2. Design
 
 <div markdown="span" class="alert alert-primary">
 
 :bulb: **Tip:** The `.puml` files used to create diagrams in this document `docs/diagrams` folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
 </div>
 
-### Architecture
+### 2.1 Architecture
 
 <img src="images/ArchitectureDiagram.png" width="280" />
 
@@ -34,7 +34,7 @@ The ***Architecture Diagram*** given above explains the high-level design of the
 
 Given below is a quick overview of main components and how they interact with each other.
 
-**Main components of the architecture**
+#### 2.1.1 Main components of the architecture
 
 **`Main`** (consisting of classes [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java)) is in charge of the app launch and shut down.
 * At app launch, it initializes the other components in the correct sequence, and connects them up with each other.
@@ -49,7 +49,7 @@ The bulk of the app's work is done by the following four components:
 
 [**`Commons`**](#common-classes) represents a collection of classes used by multiple other components.
 
-**How the architecture components interact with each other**
+#### 2.1.2 How the architecture components interact with each other
 
 The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete 1`.
 
@@ -66,7 +66,7 @@ For example, the `Logic` component defines its API in the `Logic.java` interface
 
 The sections below give more details of each component.
 
-### UI component
+### 2.2 UI component
 
 The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
 
@@ -83,7 +83,7 @@ The `UI` component,
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
 * depends on some classes in the `Model` component, as it displays `Student` object residing in the `Model`.
 
-### Logic component
+### 2.3 Logic component
 
 **API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
 
@@ -113,7 +113,8 @@ How the parsing works:
 * When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
-### Model component
+### 2.4 Model component
+
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
 
 <img src="images/ModelClassDiagram.png" width="450" />
@@ -133,7 +134,7 @@ The `Model` component,
 </div>
 
 
-### Storage component
+### 2.5 Storage component
 
 **API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
 
@@ -144,16 +145,16 @@ The `Storage` component,
 * inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
-### Common classes
+### 2.6 Common classes
 
 Classes used by multiple components are in the `seedu.addressbook.commons` package.
 
 --------------------------------------------------------------------------------------------------------------------
-## **WellNus Implementation**
+## 3. WellNus Implementation
 
 This section describes some noteworthy details on how certain features of WellNus are implemented.
 
-### View Feature
+### 3.1 View Feature
 
 This feature is facilitated by the use of the ViewCommand class which extends the Command interface.
 
@@ -168,7 +169,7 @@ View Command handles both the viewing of all students and all appointments. The 
 but due to a limitation of PlantUML, the 3 branches leads to the "end" individually .
 </div>
 
-### Student Notes feature
+### 3.2 Student Notes feature
 
 The adding of student notes is facilitated by `NoteCommand`. It extends `Command` and allows the addition of a `Note`
 to the student at the index specified by the user.
@@ -192,7 +193,7 @@ to a `Student`.
     * Cons: User will have to type much longer commands, since `Note` can be up to 200 characters long,
   leads to very lengthy commands
 
-### Cancel Appointment Feature
+### 3.3 Cancel Appointment Feature
 
 The canceling of an appointment is facilitated by the `CancelCommand`. It extends `Command` and allows the user to cancel an appointment at a specified index.
 
@@ -212,7 +213,7 @@ The sequence diagram below illustrates the interactions within the `Logic` compo
     * Pros: Easier to implement.
     * Cons: User will have to type longer commands since appointment details can be lengthy, which may lead to more complex commands.
 
-### \[Proposed\] Check clashing appointments feature
+### 3.4 \[Proposed\] Check clashing appointments feature
 
 #### Proposed Implementation
 
@@ -239,11 +240,11 @@ The following activity diagram summarises what happens when a user schedules an 
 ![ClashActivityDiagram](images/ClashActivityDiagram.png)
 
 --------------------------------------------------------------------------------------------------------------------
-## **Implementation**
+## 4. Implementation
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### \[Proposed\] Undo/redo feature
+### 4.1 \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
 
@@ -323,14 +324,14 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 _{more aspects and alternatives to be added}_
 
-### \[Proposed\] Data archiving
+### 4.2 \[Proposed\] Data archiving
 
 _{Explain here how the data archiving feature will be implemented}_
 
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Documentation, logging, testing, configuration, dev-ops**
+## 5. Documentation, logging, testing, configuration, dev-ops
 
 * [Documentation guide](Documentation.md)
 * [Testing guide](Testing.md)
@@ -340,9 +341,9 @@ _{Explain here how the data archiving feature will be implemented}_
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Appendix: Requirements**
+## 6. Appendix: Requirements
 
-### Product scope
+### 6.1 Product scope
 
 **Target user profile**:
 
@@ -357,7 +358,7 @@ _{Explain here how the data archiving feature will be implemented}_
 **Value proposition**: This product is meant to help the counsellors better schedule their appointments with students faster than a typical mouse/GUI driven app. Users will be able to store details like personal information, appointment dates, number of visits, emergency contacts etc.
 
 
-### User stories
+### 6.2 User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
@@ -384,11 +385,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`      | counsellor | link todos items to students                 | have easy access to the contact information for the students                         |
 | `*`      | counsellor | sort todos items by dateline                 | organise my appointments and plan my schedule accordingly                            |
 
-### Use cases
+### 6.3 Use cases
 
 (For all use cases below, the **System** is `WellNUS` and the **Actor** is the `counselor`, unless specified otherwise)
 
-**Use case: Add a student #UC01**
+#### 6.3.1 #UC01: Add a student
 
 **MSS**
 
@@ -409,8 +410,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   * 3b1. WellNUS shows an error message.
     * Use case ends.
 
-
-**Use case: View existing students #UC02**
+#### 6.3.2 #UC02: View existing students
 
 **MSS**
 
@@ -425,8 +425,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 2a. The list is empty
   * Use case ends.
 
-
-**Use case: Delete an existing student #UC03**
+#### 6.3.3 #UC03: Delete an existing student
 
 **MSS**
 
@@ -444,8 +443,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   * 3a1. WellNUS shows an error message.
     * Use case ends.
 
-
-**Use case: Tag student to risk level #UC04**
+#### 6.3.4 #UC04: Tag student to risk level
 
 **MSS**
 
@@ -467,8 +465,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   * 4b1. WellNUS shows an error message.
     * Use case ends.
 
-
-**Use case: Schedule an appointment #UC05**
+#### 6.3.5 #UC05: Schedule an appointment
 
 **MSS**
 
@@ -494,7 +491,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   * 3c1. WellNUS shows an error message.
     * Use case ends.
 
-**Use case: View existing appointments #UC06**
+#### 6.3.6 #UC06: View existing appointments
 
 **MSS**
 
@@ -510,7 +507,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
-**Use case: Cancel an existing appointment #UC07**
+#### 6.3.7 #UC07: Cancel an existing appointment
 
 **MSS**
 
@@ -527,8 +524,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case resumes from step 1.
 
-
-**Use case: Tag student to appointment #UC08**
+#### 6.3.8 #UC08: Tag student to appointment
 
 **MSS**
 
@@ -546,7 +542,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     
   Use case resumes from step 1.
 
-**Use case: Add a ToDo #UC09**
+#### 6.3.9 #UC09: Add a ToDo
 
 **MSS**
 
@@ -571,7 +567,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
-**Use case: View existing ToDos #UC10**
+#### 6.3.10 #UC10: View existing ToDos
 
 **MSS**
 
@@ -587,7 +583,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-**Use case: Delete an existing ToDo #UC11**
+#### 6.3.11 #UC11: Delete an existing ToDo
 
 **MSS**
 
@@ -607,7 +603,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
-**Use case: Tag student to ToDo #UC12**
+#### 6.3.12 #UC12: Tag student to ToDo
 
 **MSS**
 
@@ -637,7 +633,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 *{More to be added}*
 
-### Non-Functional Requirements
+### 6.4 Non-Functional Requirements
 1.  Cross-Platform Compatibility:
     - Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
 2.  Scalability and Performance:
@@ -653,7 +649,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 *{More to be added}*
 
-### Glossary
+### 6.5 Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
 * **Private contact detail**: A contact detail that is not meant to be shared with others
@@ -663,7 +659,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Appendix: Instructions for manual testing**
+## 7. Appendix: Instructions for manual testing
 
 Given below are instructions to test the app manually.
 
@@ -672,44 +668,42 @@ testers are expected to do more *exploratory* testing.
 
 </div>
 
-### Launch and shutdown
+### 7.1 Launch and shutdown
 
 1. Initial launch
 
    1. Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   2. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
-1. Saving window preferences
+2. Saving window preferences
 
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-   1. Re-launch the app by double-clicking the jar file.<br>
-       Expected: The most recent window size and location is retained.
+   2. Re-launch the app by double-clicking the jar file.<br>
+          Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
-
-### Deleting a student
+### 7.2 Deleting a student
 
 1. Deleting a student while all students are being shown
 
    1. Prerequisites: List all students using the `list` command. Multiple students in the list.
 
-   1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+   2. Test case: `delete 1`<br>
+         Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 
-   1. Test case: `delete 0`<br>
-      Expected: No student is deleted. Error details shown in the status message. Status bar remains the same.
+   3. Test case: `delete 0`<br>
+         Expected: No student is deleted. Error details shown in the status message. Status bar remains the same.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
+   4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+         Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
+    { more test cases …​ }_
 
-### Saving data
+### 8. Saving data
 
 1. Dealing with missing/corrupted data files
 
    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
-1. _{ more test cases …​ }_
+2. _{ more test cases …​ }_
