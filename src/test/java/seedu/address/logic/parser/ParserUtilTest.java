@@ -32,6 +32,8 @@ public class ParserUtilTest {
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_TAG = "#friend";
     private static final String INVALID_DATE = "06 2023";
+    private static final String INVALID_SORT_IN = "INVALID";
+
 
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_PHONE = "123456";
@@ -41,7 +43,8 @@ public class ParserUtilTest {
     private static final String VALID_SUBJECT_2 = "English";
     private static final String VALID_ENROL_DATE_1 = "Jun 2023";
     private static final String VALID_ENROL_DATE_2 = "Dec 2021";
-    private static final String VALID_SORT_IN = "ASC";
+    private static final String VALID_SORT_IN_ASC = "ASC";
+    private static final String VALID_SORT_IN_DESC = "ASC";
 
     private static final String WHITESPACE = " \t\r\n";
 
@@ -315,9 +318,20 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseSortIn_validValueWithoutWhitespace_returnsTag() throws Exception {
-        SortIn validSortIn = new SortIn(VALID_SORT_IN);
-        assertEquals(validSortIn, ParserUtil.parseSortIn(VALID_SORT_IN));
+    public void parseSortInAsc_validValueWithoutWhitespace_returnsTag() throws Exception {
+        SortIn validSortIn = new SortIn(VALID_SORT_IN_ASC);
+        assertEquals(validSortIn, ParserUtil.parseSortIn(VALID_SORT_IN_ASC));
+    }
+
+    @Test
+    public void parseSortInDesc_validValueWithoutWhitespace_returnsTag() throws Exception {
+        SortIn validSortIn = new SortIn(VALID_SORT_IN_DESC);
+        assertEquals(validSortIn, ParserUtil.parseSortIn(VALID_SORT_IN_DESC));
+    }
+
+    @Test
+    public void parseSortIn_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseSortIn(INVALID_SORT_IN));
     }
 
     @Test
