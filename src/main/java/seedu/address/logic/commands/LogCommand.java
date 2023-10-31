@@ -15,7 +15,8 @@ public class LogCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + "or" + COMMAND_WORD_ALIAS
             + ": Saves the results of the most recent FindCommand to the logger tab.\n"
-            + "Example: " + COMMAND_WORD + "or" + COMMAND_WORD_ALIAS;
+            + "Example 1: " + COMMAND_WORD + "\n"
+            + "Example 2: " + COMMAND_WORD_ALIAS
 
     public static final String MESSAGE_SUCCESS = "Results of the FindCommand have been saved to the logger tab.";
 
