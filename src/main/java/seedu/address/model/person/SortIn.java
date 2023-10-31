@@ -24,7 +24,7 @@ public class SortIn {
     public SortIn(String sortIn) {
         requireNonNull(sortIn);
         checkArgument(isValidSortIn(sortIn), MESSAGE_CONSTRAINTS);
-        this.SORT_IN = sortIn;
+        this.SORT_IN = sortIn.toUpperCase();
     }
 
     /**
