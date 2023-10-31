@@ -640,7 +640,7 @@ Wow! A whole new colour scheme.
 
 Here is a list of the error messages you may encounter, when the command is entered incorrectly:
 * `Invalid command format!`: New theme field was left blank and not specified.
-* `Theme provided does not exist`: New theme field was not `dark`, `light` or `blue`r `et/` tag provided to edit a field.
+* `Theme provided does not exist`: New theme field was not `dark`, `light` or `blue`.
 
 You can also refer to [input information](#input-examples) for details about valid inputs.
 
@@ -729,25 +729,24 @@ Here are some descriptions of the words you might come across in the User Guide:
 
 ### Input Examples
 
-| Input Fields        | ✅                         | ❌                |
-|---------------------|---------------------------|------------------|
-| `n/NAME`            | John Doe                  | John@Doe         |
-|                     | John Doe123               |                  |
-| `p/PHONE NUMBER`    | 98765432                  | abc              |
-|                     | 987                       | 98               |
-| `e/EMAIL`           | johnd@example.com         | johnd            |
-|                     | jo@example123-example.com | johnd@p          |
-| `p/PHONE NUMBER`    | 98765432                  | abc              |
-|                     | 987                       | 98               |
-| `st/START_TIME`/    | 2023-09-15T09:00          | 2023-09-15 09:00 |
-| `et/END_TIME`       | 2023-09-15T11:00          | 2023-09-15T09    |
-| `m/SCHEDULE_STATUS` | 0                         | 3                |
-| `m/SCHEDULE_STATUS` | 1                         | abc              |
-| `TUTOR_INDEX`/      | 1                         | 0                |
-| `SCHEDULE_INDEX`    |                           | abc              |
-| `NEW_THEME`         | dark                      | white            |
-|                     | light                     | brown            |
-|                     | blue                      | black            |
+| Input Fields                         | ✅                         | ❌                |
+|--------------------------------------|---------------------------|------------------|
+| `n/NAME`                             | John Doe                  | John@Doe         |
+|                                      | John Doe123               |                  |
+| `p/PHONE NUMBER`                     | 98765432                  | abc              |
+|                                      | 987                       | 98               |
+| `e/EMAIL`                            | johnd@example.com         | johnd            |
+|                                      | jo@example123-example.com | johnd@p          |
+| `p/PHONE NUMBER`                     | 98765432                  | abc              |
+|                                      | 987                       | 98               |
+| `st/START_TIME`<br/>`et/END_TIME`    | 2023-09-15T09:00          | 2023-09-15 09:00 |
+|                                      | 2023-09-15T11:00          | 2023-09-15T09    |
+| `m/SCHEDULE_STATUS`                  | 0                         | 3                |
+| `m/SCHEDULE_STATUS`                  | 1                         | abc              |
+| `TUTOR_INDEX`<br/>`SCHEDULE_INDEX`   | 1                         | 0, abc           |
+| `NEW_THEME`                          | dark                      | white            |
+|                                      | light                     | brown            |
+|                                      | blue                      | black            |
 
 ### Input Information
 Here are some inputs you might come across in the User Guide:
