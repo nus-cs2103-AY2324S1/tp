@@ -1,8 +1,5 @@
 package seedu.address.model.person;
 
-import java.time.YearMonth;
-import java.util.ArrayList;
-
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
@@ -13,7 +10,11 @@ public class SortIn {
     public static final String MESSAGE_CONSTRAINTS =
             "Sort in should only be ASC or DESC.";
     public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
-    public final String SORT_IN;
+    public final String sortIn;
+
+    /**
+     * All valid sequences.
+     */
     public enum ValidSequence { ASC, DESC; }
 
     /**
@@ -24,7 +25,7 @@ public class SortIn {
     public SortIn(String sortIn) {
         requireNonNull(sortIn);
         checkArgument(isValidSortIn(sortIn), MESSAGE_CONSTRAINTS);
-        this.SORT_IN = sortIn.toUpperCase();
+        this.sortIn = sortIn.toUpperCase();
     }
 
     /**
@@ -41,7 +42,7 @@ public class SortIn {
 
     @Override
     public String toString() {
-        return SORT_IN;
+        return sortIn;
     }
 
     @Override
@@ -56,11 +57,11 @@ public class SortIn {
         }
 
         SortIn otherSortIn = (SortIn) other;
-        return SORT_IN.equals(otherSortIn.SORT_IN);
+        return sortIn.equals(otherSortIn.sortIn);
     }
 
     @Override
     public int hashCode() {
-        return SORT_IN.hashCode();
+        return sortIn.hashCode();
     }
 }

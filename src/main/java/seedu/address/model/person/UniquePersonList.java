@@ -162,6 +162,6 @@ public class UniquePersonList implements Iterable<Student> {
             internalList.sort(comparator);
         } else if ("DESC".equals(sequence.toString().toUpperCase())) {
             internalList.sort(comparator.reversed());
-        } 
+        }
     }
 }
