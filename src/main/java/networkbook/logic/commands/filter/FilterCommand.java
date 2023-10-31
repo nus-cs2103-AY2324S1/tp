@@ -73,7 +73,8 @@ public class FilterCommand extends Command {
             feedback += MESSAGE_EXCL_FIN;
         }
         return new CommandResult(feedback
-                + String.format(MESSAGE_PERSONS_FOUND_OVERVIEW, model.getFilteredPersonList().size()));
+                + String.format(MESSAGE_PERSONS_FOUND_OVERVIEW, model.getFilteredPersonList().size()),
+                false);
     }
 
     @Override

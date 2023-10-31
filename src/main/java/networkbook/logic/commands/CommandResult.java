@@ -19,21 +19,25 @@ public class CommandResult {
     /** The application should exit. */
     private final boolean exit;
 
+    /** The command makes change to the contact details saved. */
+    private final boolean changeData;
+
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
-    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit) {
+    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, boolean changeData) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
         this.exit = exit;
+        this.changeData = changeData;
     }
 
     /**
      * Constructs a {@code CommandResult} with the specified {@code feedbackToUser},
      * and other fields set to their default value.
      */
-    public CommandResult(String feedbackToUser) {
-        this(feedbackToUser, false, false);
+    public CommandResult(String feedbackToUser, boolean changeData) {
+        this(feedbackToUser, false, false, changeData);
     }
 
     public String getFeedbackToUser() {
@@ -46,6 +50,10 @@ public class CommandResult {
 
     public boolean isExit() {
         return exit;
+    }
+
+    public boolean isChangeData() {
+        return changeData;
     }
 
     @Override

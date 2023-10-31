@@ -39,7 +39,8 @@ public class FindCommand extends Command {
                                 .reduce("", (acc, term) -> acc + " \"" + term + "\"")
                                 .trim()
                                 .replace(" ", ", "))
-                        + String.format(MESSAGE_PERSONS_FOUND_OVERVIEW, model.getFilteredPersonList().size()));
+                        + String.format(MESSAGE_PERSONS_FOUND_OVERVIEW, model.getFilteredPersonList().size()),
+                false);
     }
 
     @Override

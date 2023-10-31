@@ -15,6 +15,9 @@ import networkbook.commons.core.GuiSettings;
 import networkbook.commons.core.LogsCenter;
 import networkbook.logic.Logic;
 import networkbook.logic.commands.CommandResult;
+import networkbook.logic.commands.RedoCommand;
+import networkbook.logic.commands.SaveCommand;
+import networkbook.logic.commands.UndoCommand;
 import networkbook.logic.commands.exceptions.CommandException;
 import networkbook.logic.parser.exceptions.ParseException;
 
@@ -25,14 +28,15 @@ import networkbook.logic.parser.exceptions.ParseException;
 public class MainWindow extends UiPart<Stage> {
 
     private static final String FXML = "MainWindow.fxml";
-    private static final String SHORTCUT_HELP = "F1";
-    private static final String SHORTCUT_EXIT = "W";
-    private static final String SHORTCUT_FIND = "F";
-    private static final String SHORTCUT_CREATE = "N";
-    private static final String SHORTCUT_EDIT = "G";
-    private static final String SHORTCUT_UNDO = "U";
-    private static final String SHORTCUT_SAVE = "S";
-
+    private static final KeyCombination SHORTCUT_HELP = KeyCombination.valueOf("F1");
+    private static final KeyCombination SHORTCUT_EXIT =
+            new KeyCharacterCombination("W", KeyCombination.SHORTCUT_DOWN);
+    private static final KeyCombination SHORTCUT_UNDO_UNFOCUSED =
+            new KeyCharacterCombination("Z", KeyCombination.SHORTCUT_DOWN);
+    private static final KeyCombination SHORTCUT_REDO_UNFOCUSED =
+            new KeyCharacterCombination("Y", KeyCombination.SHORTCUT_DOWN);
+    private static final KeyCombination SHORTCUT_SAVE =
+            new KeyCharacterCombination("S", KeyCombination.SHORTCUT_DOWN);
     private final Logger logger = LogsCenter.getLogger(getClass());
 
     private Stage primaryStage;
@@ -84,8 +88,8 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     private void setAccelerators() {
-        setAccelerator(helpMenuItem, KeyCombination.valueOf(SHORTCUT_HELP));
-        setAccelerator(exitMenuItem, new KeyCharacterCombination(SHORTCUT_EXIT, KeyCombination.SHORTCUT_DOWN));
+        setAccelerator(helpMenuItem, SHORTCUT_HELP);
+        setAccelerator(exitMenuItem, SHORTCUT_EXIT);
     }
 
     /**
@@ -133,6 +137,34 @@ public class MainWindow extends UiPart<Stage> {
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+        setCommandBoxShortcutsWhenUnfocused(commandBox);
+    }
+
+    private void setCommandBoxShortcutsWhenUnfocused(CommandBox commandBox) {
+        getRoot().addEventFilter(KeyEvent.KEY_PRESSED, event -> {
+            if (!commandBox.isTextFieldFocused() && SHORTCUT_UNDO_UNFOCUSED.match(event)) {
+                injectCommand(UndoCommand.COMMAND_WORD);
+                event.consume();
+            } else if (!commandBox.isTextFieldFocused() && SHORTCUT_REDO_UNFOCUSED.match(event)) {
+                injectCommand(RedoCommand.COMMAND_WORD);
+                event.consume();
+            } else if (SHORTCUT_SAVE.match(event)) {
+                injectCommand(SaveCommand.COMMAND_WORD);
+                event.consume();
+            }
+        });
+    }
+
+    /**
+     * Executes a command that does not come from user input in the command box.
+     * @param commandText is the command text to be injected and executed.
+     */
+    private void injectCommand(String commandText) {
+        try {
+            executeCommand(commandText);
+        } catch (CommandException | ParseException e) {
+            logger.info("This command is injected using a keyboard shortcut");
+        }
     }
 
     /**

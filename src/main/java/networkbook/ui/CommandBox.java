@@ -31,6 +31,8 @@ public class CommandBox extends UiPart<Region> {
             new KeyCharacterCombination("G", KeyCombination.SHORTCUT_DOWN);
     private static final KeyCombination SHORTCUT_UNDO =
             new KeyCharacterCombination("U", KeyCombination.SHORTCUT_DOWN);
+    private static final KeyCombination SHORTCUT_REDO =
+            new KeyCharacterCombination("R", KeyCombination.SHORTCUT_DOWN);
     private static final KeyCode SHORTCUT_UP = KeyCode.UP;
     private static final KeyCode SHORTCUT_DOWN = KeyCode.DOWN;
 
@@ -52,7 +54,6 @@ public class CommandBox extends UiPart<Region> {
         commandHistory = new ArrayList<>();
         pointer = 0;
         setCommandBoxShortcuts();
-
     }
 
     private void setCommandBoxShortcuts() {
@@ -61,16 +62,25 @@ public class CommandBox extends UiPart<Region> {
             public void handle(KeyEvent event) {
                 if (SHORTCUT_FIND.match(event)) {
                     autoFillCommandIfEmpty("find ");
+                    event.consume();
                 } else if (SHORTCUT_CREATE.match(event)) {
                     autoFillCommandIfEmpty("create ");
+                    event.consume();
                 } else if (SHORTCUT_EDIT.match(event)) {
                     autoFillCommandIfEmpty("edit ");
+                    event.consume();
                 } else if (SHORTCUT_UNDO.match(event)) {
                     autoFillCommandIfEmpty("undo");
+                    event.consume();
+                } else if (SHORTCUT_REDO.match(event)) {
+                    autoFillCommandIfEmpty("redo");
+                    event.consume();
                 } else if (noModifier(event) && event.getCode() == SHORTCUT_UP) {
                     navigateCommandHistory(true);
+                    event.consume();
                 } else if (noModifier(event) && event.getCode() == SHORTCUT_DOWN) {
                     navigateCommandHistory(false);
+                    event.consume();
                 }
             }
 
@@ -134,11 +144,15 @@ public class CommandBox extends UiPart<Region> {
         CommandResult execute(String commandText) throws CommandException, ParseException;
     }
 
+    public boolean isTextFieldFocused() {
+        return commandTextField.isFocused();
+    }
+
     /**
      * Automatically fills the command box if there's no user input.
      * @param command the command to fill
      */
-    public void autoFillCommandIfEmpty(String command) {
+    private void autoFillCommandIfEmpty(String command) {
         if (commandTextField.getText().isEmpty()) {
             commandTextField.setText(command);
             commandTextField.positionCaret(commandTextField.getLength());
@@ -149,7 +163,7 @@ public class CommandBox extends UiPart<Region> {
      * Sets the command to be an entry in a command history, if the history is still navigable in the given direction.
      * @param isOlderCommand whether it navigates to an older command (true when "up" key is pressed)
      */
-    public void navigateCommandHistory(boolean isOlderCommand) {
+    private void navigateCommandHistory(boolean isOlderCommand) {
         int newPointer = isOlderCommand ? pointer - 1 : pointer + 1;
 
         if (newPointer < 0 || newPointer > commandHistory.size() - 1) {

@@ -58,7 +58,7 @@ public class OpenLinkCommand extends Command {
 
         try {
             Link openedLink = model.openLink(personIndex, linkIndex);
-            return new CommandResult(String.format(MESSAGE_SUCCESS, openedLink.getValue()));
+            return new CommandResult(String.format(MESSAGE_SUCCESS, openedLink.getValue()), false);
         } catch (IOException e) {
             throw new CommandException(MESSAGE_CANNOT_OPEN_LINK);
         }
