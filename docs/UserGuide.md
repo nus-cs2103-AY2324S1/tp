@@ -20,7 +20,7 @@ TutorConnect is **optimised for users who can type fast** and utilise the [Comma
 --------------------------------------------------------------------------------------------------------------------
 ## Table of Contents
 * Table of Contents
-{::options toc_levels 1..4}
+{::options toc_levels="1..4"}
 {:toc}
 --------------------------------------------------------------------------------------------------------------------
 
