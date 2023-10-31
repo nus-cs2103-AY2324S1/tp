@@ -139,6 +139,7 @@ public class ModelManager implements Model {
         return selectedPerson;
     }
 
+<<<<<<< Updated upstream
     //=========== Unique Reminder List Accessors ===============================================================
 
     @Override
@@ -146,6 +147,8 @@ public class ModelManager implements Model {
         reminderList.add(person);
     }
 
+=======
+>>>>>>> Stashed changes
     @Override
     public boolean equals(Object other) {
         if (other == this) {
