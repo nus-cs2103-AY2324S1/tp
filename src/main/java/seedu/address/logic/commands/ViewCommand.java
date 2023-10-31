@@ -37,7 +37,10 @@ public class ViewCommand extends Command {
                     true,
                     null,
                     null,
-                    false);
+                    false,
+                    null,
+                    false
+            );
         }
 
         requireNonNull(model);
@@ -55,7 +58,10 @@ public class ViewCommand extends Command {
                 true,
                 personToView,
                 indexOfTheFostererToView,
-                false);
+                false,
+                null,
+                false
+        );
     }
 
     @Override

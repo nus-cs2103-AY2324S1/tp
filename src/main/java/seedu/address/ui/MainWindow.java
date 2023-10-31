@@ -17,6 +17,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.CommandType;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Person;
@@ -40,7 +41,9 @@ public class MainWindow extends UiPart<Stage> {
     private PersonProfile personProfile;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
-    private boolean isInViewMode = false;
+    private boolean isViewExit = false;
+    private boolean isSaved;
+
     private Index indexOfAFostererToView;
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -133,7 +136,7 @@ public class MainWindow extends UiPart<Stage> {
         StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
-        CommandBox commandBox = new CommandBox(this::executeCommand);
+        CommandBox commandBox = new CommandBox(this, this::executeCommand);
         this.commandBox = commandBox;
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
     }
@@ -186,10 +189,6 @@ public class MainWindow extends UiPart<Stage> {
     private void handleView(Person personToView) {
         if (personListPanelPlaceholder.isVisible() && personToView != null) {
             personProfile = new PersonProfile(personToView, this);
-<<<<<<< HEAD
-=======
-            //personProfile = new PersonProfile(this);
->>>>>>> b13722f04973b73655c6b62f595bd1e1a83c3ee6
             personProfilePlaceholder.getChildren().add(personProfile.getRoot());
             personProfilePlaceholder.setVisible(true);
             personListPanelPlaceholder.setVisible(false);
@@ -211,10 +210,23 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     @FXML
-    private void handleViewExit() {
-        personListPanelPlaceholder.setVisible(true);
-        personProfilePlaceholder.getChildren().remove(personProfile.getRoot());
-        personProfilePlaceholder.setVisible(false);
+    void handleViewExit() {
+        if (isSaved || commandBox.getInConfirmationDialog()) {
+            commandBox.setInConfirmationDialog(false);
+            personListPanelPlaceholder.setVisible(true);
+            personProfilePlaceholder.getChildren().remove(personProfile.getRoot());
+            personProfilePlaceholder.setVisible(false);
+            sendFeedback("Exiting view as requested.");
+        } else {
+            sendFeedback("You did not save your changes. Are you sure you want to exit?\n" +
+                    " Yes: [Enter] No: [Esc]");
+            commandBox.setInConfirmationDialog(true);
+        }
+    }
+
+    void handleCancelViewExit() {
+        sendFeedback("Cancelled exit.");
+        commandBox.setInConfirmationDialog(false);
     }
 
     /**
@@ -262,8 +274,10 @@ public class MainWindow extends UiPart<Stage> {
                 }
 
                 if (logic.getIsViewExitCommand()) {
+                    isSaved = commandResult.getIsFostererEdited();
                     handleViewExit();
                 }
+
             }
 
             return commandResult;

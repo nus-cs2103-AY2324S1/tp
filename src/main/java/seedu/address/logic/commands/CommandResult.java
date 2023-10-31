@@ -3,10 +3,11 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 
 import java.util.Objects;
+import java.util.function.Predicate;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.model.person.Person;
+import seedu.address.model.person.*;
 
 /**
  * Represents the result of a command execution.
@@ -29,6 +30,10 @@ public class CommandResult {
 
     private final boolean viewExit;
 
+    private final boolean isFostererEdited;
+
+    private final CommandType commandType;
+
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
@@ -39,7 +44,10 @@ public class CommandResult {
             boolean showView,
             Person personToView,
             Index targetIndex,
-            boolean viewExit) {
+            boolean viewExit,
+            CommandType commandType,
+            boolean isFostererEdited
+    ) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
         this.exit = exit;
@@ -47,6 +55,8 @@ public class CommandResult {
         this.personToView = personToView;
         this.targetIndex = targetIndex;
         this.viewExit = viewExit;
+        this.commandType = commandType;
+        this.isFostererEdited = isFostererEdited;
     }
 
     /**
@@ -54,7 +64,16 @@ public class CommandResult {
      * and other fields set to their default value.
      */
     public CommandResult(String feedbackToUser, boolean showHelp, boolean exit) {
-        this(requireNonNull(feedbackToUser), showHelp, exit, false, null, null, false);
+        this(requireNonNull(feedbackToUser),
+                showHelp,
+                exit,
+                false,
+                null,
+                null,
+                false,
+                null,
+                false
+        );
     }
 
     /**
@@ -90,6 +109,10 @@ public class CommandResult {
     }
 
     public Index getTargetIndex() { return targetIndex; }
+
+    public CommandType getCommandType() { return commandType; }
+
+    public boolean getIsFostererEdited() { return isFostererEdited; }
 
     @Override
     public boolean equals(Object other) {
@@ -128,3 +151,4 @@ public class CommandResult {
     }
 
 }
+

@@ -14,6 +14,7 @@ import seedu.address.logic.commands.EditFieldCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.SaveCommand;
 import seedu.address.logic.commands.ViewExitCommand;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Person;
 
@@ -34,7 +35,8 @@ public class ViewModeParser {
      * @return the command based on the user input
      * @throws ParseException if the user input does not conform the expected format
      */
-    public Command parseCommand(String userInput, Person newPerson, Index targetIndex) throws ParseException {
+    public Command parseCommand(String userInput, Person newPerson, Index targetIndex)
+            throws ParseException, CommandException {
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
         if (!matcher.matches()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
@@ -53,10 +55,14 @@ public class ViewModeParser {
             if (targetIndex != null) {
                 return new SaveCommand(targetIndex, newPerson);
             } else {
-                return new AddCommand(newPerson);
+                return new SaveCommand(newPerson);
             }
         case ViewExitCommand.COMMAND_WORD:
-            return new ViewExitCommand();
+            if (targetIndex != null) {
+                return new ViewExitCommand(targetIndex, newPerson);
+            } else {
+                return new ViewExitCommand();
+            }
 
         default:
             return new EditFieldCommand();

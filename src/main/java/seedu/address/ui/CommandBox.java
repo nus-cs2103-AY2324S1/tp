@@ -3,6 +3,8 @@ package seedu.address.ui;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Region;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -15,17 +17,19 @@ public class CommandBox extends UiPart<Region> {
 
     public static final String ERROR_STYLE_CLASS = "error";
     private static final String FXML = "CommandBox.fxml";
-
+    private MainWindow mainWindow;
     private final CommandExecutor commandExecutor;
 
     @FXML
     private TextField commandTextField;
+    private boolean inConfirmationDialog;
 
     /**
      * Creates a {@code CommandBox} with the given {@code CommandExecutor}.
      */
-    public CommandBox(CommandExecutor commandExecutor) {
+    public CommandBox(MainWindow mainWindow, CommandExecutor commandExecutor) {
         super(FXML);
+        this.mainWindow = mainWindow;
         this.commandExecutor = commandExecutor;
         // calls #setStyleToDefault() whenever there is a change to the text of the command box.
         commandTextField.textProperty().addListener((unused1, unused2, unused3) -> setStyleToDefault());
@@ -35,17 +39,41 @@ public class CommandBox extends UiPart<Region> {
      * Handles the Enter button pressed event.
      */
     @FXML
-    private void handleCommandEntered() {
-        String commandText = commandTextField.getText();
-        if (commandText.equals("")) {
+    private void handleKey(KeyEvent keyEvent) {
+        if (!inConfirmationDialog && keyEvent.getCode() != KeyCode.ENTER) {
             return;
         }
 
-        try {
-            commandExecutor.execute(commandText);
+        if (inConfirmationDialog) {
+            commandTextField.setEditable(false);
+        }
+
+        if (inConfirmationDialog && keyEvent.getCode() == KeyCode.ENTER) {
+            mainWindow.handleViewExit();
             commandTextField.setText("");
-        } catch (CommandException | ParseException e) {
-            setStyleToIndicateCommandFailure();
+            commandTextField.setEditable(true);
+            return;
+        }
+
+        if (inConfirmationDialog && keyEvent.getCode() == KeyCode.ESCAPE) {
+            commandTextField.setText("");
+            mainWindow.handleCancelViewExit();
+            commandTextField.setEditable(true);
+        }
+
+        if (!inConfirmationDialog && keyEvent.getCode() == KeyCode.ENTER) {
+            String commandText = commandTextField.getText();
+
+            if (commandText.equals("")) {
+                return;
+            }
+
+            try {
+                commandExecutor.execute(commandText);
+                commandTextField.setText("");
+            } catch (CommandException | ParseException e) {
+                setStyleToIndicateCommandFailure();
+            }
         }
     }
 
@@ -74,6 +102,14 @@ public class CommandBox extends UiPart<Region> {
      */
     public void setFocus() {
         commandTextField.requestFocus();
+    }
+
+    public void setInConfirmationDialog(boolean inConfirmationDialog) {
+        this.inConfirmationDialog = inConfirmationDialog;
+    }
+
+    public boolean getInConfirmationDialog() {
+        return inConfirmationDialog;
     }
 
     /**

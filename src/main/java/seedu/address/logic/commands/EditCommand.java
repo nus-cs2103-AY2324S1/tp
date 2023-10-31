@@ -100,7 +100,10 @@ public class EditCommand extends Command {
                     true,
                     personToEdit,
                     index,
-                    false);
+                    false,
+                    null,
+                    false
+            );
         }
 
         try {
