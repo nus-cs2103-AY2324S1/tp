@@ -39,6 +39,12 @@ public class CommandTestUtil {
     public static final String VALID_JOB_TYPE_CLEANER = "PART_TIME";
     public static final String VALID_INDUSTRY_CHEF = "Culinary";
     public static final String VALID_INDUSTRY_CLEANER = "Cleaning";
+    public static final String VALID_INTERVIEW_TYPE_CHEF = "Onsite";
+    public static final String VALID_INTERVIEW_TYPE_CLEANER = "Group";
+    public static final String VALID_INTERVIEW_DATETIME_CHEF = "Dec 31 2050 1200";
+    public static final String VALID_INTERVIEW_DATETIME_CLEANER = "Dec 31 2060 1200";
+    public static final String VALID_INTERVIEW_ADDRESS_CHEF = "Hungry Street";
+    public static final String VALID_INTERVIEW_ADDRESS_CLEANER = "Dirty Street";
     public static final String ROLE_DESC_CHEF = " " + PREFIX_ROLE + VALID_ROLE_CHEF;
     public static final String ROLE_DESC_CLEANER = " " + PREFIX_ROLE + VALID_ROLE_CLEANER;
     public static final String COMPANY_DESC_CHEF = " " + PREFIX_COMPANY + VALID_COMPANY_CHEF;

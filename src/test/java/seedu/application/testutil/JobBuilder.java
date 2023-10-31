@@ -1,6 +1,10 @@
 package seedu.application.testutil;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import seedu.application.model.job.*;
+import seedu.application.model.job.interview.Interview;
 
 /**
  * A utility class to help with building Job objects.
@@ -10,7 +14,7 @@ public class JobBuilder {
     public static final String DEFAULT_ROLE = "Student";
     public static final String DEFAULT_COMPANY = "Sparkletots";
     public static final String DEFAULT_DEADLINE = Deadline.TO_ADD_DEADLINE;
-    public static final String DEFAULT_JOBTYPE = JobType.TO_ADD_JOB_TYPE;
+    public static final String DEFAULT_JOB_TYPE = JobType.TO_ADD_JOB_TYPE;
     public static final String DEFAULT_STATUS = Status.IN_PROGRESS;
     public static final String DEFAULT_INDUSTRY = Industry.TO_ADD_INDUSTRY;
 
@@ -20,6 +24,7 @@ public class JobBuilder {
     private Deadline deadline;
     private JobType jobType;
     private Industry industry;
+    private List<Interview> interviews;
 
     /**
      * Creates a {@code JobBuilder} with the default details.
@@ -28,9 +33,10 @@ public class JobBuilder {
         role = new Role(DEFAULT_ROLE);
         company = new Company(DEFAULT_COMPANY);
         deadline = new Deadline(DEFAULT_DEADLINE);
-        jobType = new JobType(DEFAULT_JOBTYPE);
+        jobType = new JobType(DEFAULT_JOB_TYPE);
         status = new Status(DEFAULT_STATUS);
         industry = new Industry(DEFAULT_INDUSTRY);
+        interviews = new ArrayList<>();
     }
 
     /**
@@ -43,6 +49,7 @@ public class JobBuilder {
         jobType = jobToCopy.getJobType();
         status = jobToCopy.getStatus();
         industry = jobToCopy.getIndustry();
+        interviews = jobToCopy.getInterviews();
     }
 
     /**
@@ -93,9 +100,23 @@ public class JobBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code Interviews} of the {@code Job} that we are building.
+     */
+    public JobBuilder withInterview(Interview interview) {
+        this.interviews.add(interview);
+        return this;
+    }
 
+    /**
+     * Builds the {@code Job}.
+     */
     public Job build() {
-        return new Job(role, company, deadline, status, jobType, industry);
+        Job job = new Job(role, company, deadline, status, jobType, industry);
+        for (Interview interview : interviews) {
+            job.addInterview(interview);
+        }
+        return job;
     }
 
 }

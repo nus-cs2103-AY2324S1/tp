@@ -5,6 +5,9 @@ import static seedu.application.storage.JsonAdaptedJob.MISSING_FIELD_MESSAGE_FOR
 import static seedu.application.testutil.Assert.assertThrows;
 import static seedu.application.testutil.TypicalJobs.CLEANER;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.application.commons.exceptions.IllegalValueException;
@@ -24,6 +27,7 @@ public class JsonAdaptedJobTest {
     private static final String VALID_DEADLINE = CLEANER.getDeadline().toString();
     private static final String VALID_JOB_TYPE = CLEANER.getJobType().toString();
     private static final String VALID_INDUSTRY = CLEANER.getIndustry().toString();
+    private static final List<JsonAdaptedInterview> VALID_INTERVIEWS = new ArrayList<>();
 
     @Test
     public void toModelType_validJobDetails_returnsJob() throws Exception {
@@ -35,7 +39,7 @@ public class JsonAdaptedJobTest {
     public void toModelType_invalidRole_throwsIllegalValueException() {
         JsonAdaptedJob job =
                 new JsonAdaptedJob(INVALID_ROLE, VALID_COMPANY, VALID_STATUS, VALID_DEADLINE,
-                        VALID_JOB_TYPE, VALID_INDUSTRY);
+                        VALID_JOB_TYPE, VALID_INDUSTRY, VALID_INTERVIEWS);
         String expectedMessage = Role.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, job::toModelType);
     }
@@ -43,7 +47,7 @@ public class JsonAdaptedJobTest {
     @Test
     public void toModelType_nullRole_throwsIllegalValueException() {
         JsonAdaptedJob job = new JsonAdaptedJob(null, VALID_COMPANY, VALID_STATUS, VALID_DEADLINE,
-                VALID_JOB_TYPE, VALID_INDUSTRY);
+                VALID_JOB_TYPE, VALID_INDUSTRY, VALID_INTERVIEWS);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Role.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, job::toModelType);
     }
@@ -52,7 +56,7 @@ public class JsonAdaptedJobTest {
     public void toModelType_invalidCompany_throwsIllegalValueException() {
         JsonAdaptedJob job =
                 new JsonAdaptedJob(VALID_ROLE, INVALID_COMPANY, VALID_STATUS, VALID_DEADLINE,
-                        VALID_JOB_TYPE, VALID_INDUSTRY);
+                        VALID_JOB_TYPE, VALID_INDUSTRY, VALID_INTERVIEWS);
         String expectedMessage = Company.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, job::toModelType);
     }
@@ -60,7 +64,7 @@ public class JsonAdaptedJobTest {
     @Test
     public void toModelType_nullCompany_throwsIllegalValueException() {
         JsonAdaptedJob job = new JsonAdaptedJob(VALID_ROLE, null, VALID_STATUS, VALID_DEADLINE,
-                VALID_JOB_TYPE, VALID_INDUSTRY);
+                VALID_JOB_TYPE, VALID_INDUSTRY, VALID_INTERVIEWS);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Company.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, job::toModelType);
     }
@@ -69,7 +73,7 @@ public class JsonAdaptedJobTest {
     public void toModelType_invalidStatus_throwsIllegalValueException() {
         JsonAdaptedJob job =
                 new JsonAdaptedJob(VALID_ROLE, VALID_COMPANY, INVALID_STATUS, VALID_DEADLINE,
-                        VALID_JOB_TYPE, VALID_INDUSTRY);
+                        VALID_JOB_TYPE, VALID_INDUSTRY, VALID_INTERVIEWS);
         String expectedMessage = Status.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, job::toModelType);
     }
@@ -77,7 +81,7 @@ public class JsonAdaptedJobTest {
     @Test
     public void toModelType_nullStatus_throwsIllegalValueException() {
         JsonAdaptedJob job = new JsonAdaptedJob(VALID_ROLE, VALID_COMPANY, null, VALID_DEADLINE,
-                VALID_JOB_TYPE, VALID_INDUSTRY);
+                VALID_JOB_TYPE, VALID_INDUSTRY, VALID_INTERVIEWS);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Status.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, job::toModelType);
     }
@@ -86,7 +90,7 @@ public class JsonAdaptedJobTest {
     public void toModelType_invalidDeadline_throwsIllegalValueException() {
         JsonAdaptedJob job =
                 new JsonAdaptedJob(VALID_ROLE, VALID_COMPANY, VALID_STATUS, INVALID_DEADLINE,
-                        VALID_JOB_TYPE, VALID_INDUSTRY);
+                        VALID_JOB_TYPE, VALID_INDUSTRY, VALID_INTERVIEWS);
         String expectedMessage = Deadline.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, job::toModelType);
     }
@@ -94,7 +98,7 @@ public class JsonAdaptedJobTest {
     @Test
     public void toModelType_nullDeadline_throwsIllegalValueException() {
         JsonAdaptedJob job = new JsonAdaptedJob(VALID_ROLE, VALID_COMPANY, VALID_STATUS, null,
-                VALID_JOB_TYPE, VALID_INDUSTRY);
+                VALID_JOB_TYPE, VALID_INDUSTRY, VALID_INTERVIEWS);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Deadline.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, job::toModelType);
     }
@@ -103,7 +107,7 @@ public class JsonAdaptedJobTest {
     public void toModelType_invalidJobType_throwsIllegalValueException() {
         JsonAdaptedJob job =
                 new JsonAdaptedJob(VALID_ROLE, VALID_COMPANY, VALID_STATUS, VALID_DEADLINE,
-                        INVALID_JOB_TYPE, VALID_INDUSTRY);
+                        INVALID_JOB_TYPE, VALID_INDUSTRY, VALID_INTERVIEWS);
         String expectedMessage = JobType.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, job::toModelType);
     }
@@ -111,7 +115,7 @@ public class JsonAdaptedJobTest {
     @Test
     public void toModelType_nullJobType_throwsIllegalValueException() {
         JsonAdaptedJob job = new JsonAdaptedJob(VALID_ROLE, VALID_COMPANY, VALID_STATUS, VALID_DEADLINE,
-                null, VALID_INDUSTRY);
+                null, VALID_INDUSTRY, VALID_INTERVIEWS);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, JobType.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, job::toModelType);
     }
@@ -120,7 +124,7 @@ public class JsonAdaptedJobTest {
     public void toModelType_invalidIndustry_throwsIllegalValueException() {
         JsonAdaptedJob job =
                 new JsonAdaptedJob(VALID_ROLE, VALID_COMPANY, VALID_STATUS, VALID_DEADLINE,
-                        VALID_JOB_TYPE, INVALID_INDUSTRY);
+                        VALID_JOB_TYPE, INVALID_INDUSTRY, VALID_INTERVIEWS);
         String expectedMessage = Industry.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, job::toModelType);
     }
@@ -128,7 +132,7 @@ public class JsonAdaptedJobTest {
     @Test
     public void toModelType_nullIndustry_throwsIllegalValueException() {
         JsonAdaptedJob job = new JsonAdaptedJob(VALID_ROLE, VALID_COMPANY, VALID_STATUS, VALID_DEADLINE,
-                VALID_JOB_TYPE, null);
+                VALID_JOB_TYPE, null, VALID_INTERVIEWS);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Industry.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, job::toModelType);
     }

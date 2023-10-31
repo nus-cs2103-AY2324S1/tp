@@ -120,9 +120,12 @@ class JsonAdaptedJob {
         final Industry modelIndustry = new Industry(industry);
 
         List<Interview> modelInterviews = new ArrayList<>();
-        for (JsonAdaptedInterview interview : interviews) {
-            Interview toModelType = interview.toModelType();
-            modelInterviews.add(toModelType);
+
+        if (interviews != null) {
+            for (JsonAdaptedInterview interview : interviews) {
+                Interview toModelType = interview.toModelType();
+                modelInterviews.add(toModelType);
+            }
         }
 
         return new Job(modelRole, modelCompany, modelDeadline, modelStatus,
