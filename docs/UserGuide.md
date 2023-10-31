@@ -225,7 +225,7 @@ Parameters:
 |-----------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------|
 | `INDEX`     | - Index of a fosterer displayed in the list obtained from a `list`/`find` command <br/> - At least one index must be provided<br/> - Index must be a positive integer | `1`, `2`, `3` |
 
-<div markdown="span" class="alert alert-primary">
+<div markdown="span" class="alert alert-warning">
   :exclamation: <b>Important:</b> <br/>
 Only specific commands are available in the profile page. 
 The list of available commands are <code>help</code>, <code>save</code>, and <code>exit</code>. 
@@ -252,7 +252,7 @@ Example:
 
 Saves changes in details of the fosterer made in the profile page.
 
-<div markdown="block" class="alert alert-primary">
+<div markdown="block" class="alert alert-warning">
 
 **:exclamation: Important:**<br>
 
@@ -293,7 +293,7 @@ Parameters:
 
 </div>
 
-<div markdown="span" class="alert alert-primary">
+<div markdown="span" class="alert alert-warning">
   :exclamation: <b>Important:</b> <br/>
 If the parameters are not provided, <b><code>edit INDEX</code> operates the same way as <code>view INDEX</code></b>, leading you to the profile page of the person at index <code>INDEX</code> in the addressbook. 
 </div>
