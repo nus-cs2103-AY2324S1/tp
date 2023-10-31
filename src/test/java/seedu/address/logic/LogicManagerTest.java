@@ -85,16 +85,20 @@ public class LogicManagerTest {
 
     @Test
     public void execute_loadCommand_success() throws CommandException, ParseException {
-        String fileName = "execute_loadCommand_success";
+        String fileName = "classmanager";
         String loadCommand = "load f/" + fileName;
         assertCommandSuccess(loadCommand, String.format(LoadCommand.MESSAGE_LOAD_SUCCESS, fileName), model);
         assertHistoryCorrect(loadCommand);
     }
 
     @Test
-    public void execute_configCommand_failure() {
-        String configCommand = ConfigCommand.COMMAND_WORD;
-        assertCommandFailure(configCommand, ParseException.class, MESSAGE_CLASS_MANAGER_ALREADY_CONFIGURED);
+    public void execute_configCommand_success() throws CommandException, ParseException {
+        model.setConfigured(false);
+        int tutorialCount = 13;
+        int assignmentCount = 4;
+        String configCommand = "config #t/" + tutorialCount + " #a/" + assignmentCount;
+        assertCommandSuccess(configCommand, String.format(ConfigCommand.MESSAGE_CONFIG_SUCCESS, tutorialCount, assignmentCount),
+                model);
         assertHistoryCorrect(configCommand);
     }
 
