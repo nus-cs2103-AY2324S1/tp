@@ -117,6 +117,7 @@ All the fields must be provided except `TAG`. The fields you enter should follow
 </box>
 
 <box type="info">
+
 Certain tags such as `RA` and `SOS` are tags to indicate important contacts such as emergency contacts. They are displayed first, and with a red background to indicate their importance. 
 </box>
 
