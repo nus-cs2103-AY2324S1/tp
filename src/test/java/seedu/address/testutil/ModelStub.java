@@ -36,12 +36,12 @@ public class ModelStub implements Model {
     }
 
     @Override
-    public Path getAddressBookFilePath() {
+    public Path getWellNusFilePath() {
         throw new AssertionError("This method should not be called.");
     }
 
     @Override
-    public void setAddressBookFilePath(Path addressBookFilePath) {
+    public void setWellNusFilePath(Path addressBookFilePath) {
         throw new AssertionError("This method should not be called.");
     }
 
@@ -51,12 +51,12 @@ public class ModelStub implements Model {
     }
 
     @Override
-    public void setAddressBook(ReadOnlyWellNus newData) {
+    public void setWellNusData(ReadOnlyWellNus newData) {
         throw new AssertionError("This method should not be called.");
     }
 
     @Override
-    public ReadOnlyWellNus getAddressBook() {
+    public ReadOnlyWellNus getWellNusData() {
         throw new AssertionError("This method should not be called.");
     }
 

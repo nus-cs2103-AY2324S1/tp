@@ -18,7 +18,7 @@ public class AppointmentContainsNamePredicate implements Predicate<Appointment> 
 
     @Override
     public boolean test(Appointment appointment) {
-        return keywords.stream()
+        return keywords.size() == 0 ? false : keywords.stream()
                 .allMatch(keyword -> StringUtil.containsWordIgnoreCase(appointment.getName().fullName, keyword));
     }
 
