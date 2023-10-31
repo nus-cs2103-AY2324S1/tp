@@ -8,8 +8,13 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Housing {
     public static final String MESSAGE_CONSTRAINTS = "Housing type should be either 'HDB', 'Condo', 'Landed' or 'nil'";
-
     public static final String VALIDATION_REGEX = "^(HDB|Condo|Landed|nil)$";
+    public static final String HDB_WORD = "HDB";
+    public static final String CONDO_WORD = "Condo";
+    public static final String LANDED_WORD = "Landed";
+    public static final Housing HDB = new Housing(HDB_WORD);
+    public static final Housing CONDO = new Housing(CONDO_WORD);
+    public static final Housing LANDED = new Housing(LANDED_WORD);
 
     public final String value;
 

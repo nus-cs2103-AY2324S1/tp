@@ -20,73 +20,86 @@ import java.util.Arrays;
 import java.util.List;
 
 import seedu.address.model.AddressBook;
+import seedu.address.model.person.AnimalType;
 import seedu.address.model.person.Availability;
+import seedu.address.model.person.Housing;
 import seedu.address.model.person.Person;
 
 /**
  * A utility class containing a list of {@code Person} objects to be used in tests.
+ * IMPORTANT: the data stored here must correspond to the data in typicalPersonsAddressBook.json.
+ * Please do not alter the attributes of the existing fosterers.
  */
 public class TypicalPersons {
-    public static final Availability NIL_AVAILABILITY = new Availability("nil");
 
     public static final Person ALICE = new PersonBuilder().withName("Alice Pauline")
             .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")
             .withPhone("94351253")
-            .withTags("friends").withAnimalName("nil")
-            .withAvailability("nil")
-            .withAnimalType("nil", NIL_AVAILABILITY)
-            .withHousing("nil").build();
+            .withTags("friends")
+            .withAnimalName(Person.NIL_WORD)
+            .withAvailability(Person.NIL_WORD)
+            .withAnimalType(Person.NIL_WORD, Availability.NIL_AVAILABILITY)
+            .withHousing(Housing.LANDED_WORD).build();
     public static final Person BENSON = new PersonBuilder().withName("Benson Meier")
             .withAddress("311, Clementi Ave 2, #02-25")
             .withEmail("johnd@example.com").withPhone("98765432")
-            .withTags("owesMoney", "friends").withAnimalName("nil")
-            .withAvailability("nil")
-            .withAnimalType("nil", NIL_AVAILABILITY)
-            .withHousing("nil").build();
+            .withTags("owesMoney", "friends")
+            .withAnimalName(Person.NIL_WORD)
+            .withAvailability(Availability.AVAILABLE_WORD)
+            .withAnimalType(Person.NIL_WORD, Availability.AVAILABLE)
+            .withHousing(Housing.HDB_WORD).build();
     public static final Person CARL = new PersonBuilder().withName("Carl Kurz").withPhone("95352563")
-            .withEmail("heinz@example.com").withAddress("wall street").withAnimalName("nil")
-            .withAvailability("nil")
-            .withAnimalType("nil", NIL_AVAILABILITY)
-            .withHousing("nil").build();
+            .withEmail("heinz@example.com").withAddress("wall street")
+            .withAnimalName(Person.NIL_WORD)
+            .withAvailability(Availability.AVAILABLE_WORD)
+            .withAnimalType(AnimalType.ABLE_CAT_WORD, Availability.AVAILABLE)
+            .withHousing(Housing.CONDO_WORD).build();
     public static final Person DANIEL = new PersonBuilder().withName("Daniel Meier").withPhone("87652533")
-            .withEmail("cornelia@example.com").withAddress("10th street").withTags("friends").withAnimalName("nil")
-            .withAvailability("nil")
-            .withAnimalType("nil", NIL_AVAILABILITY)
-            .withHousing("nil").build();
+            .withEmail("cornelia@example.com").withAddress("10th street").withTags("friends")
+            .withAnimalName(Person.NIL_WORD)
+            .withAvailability(Availability.NOT_AVAILABLE_WORD)
+            .withAnimalType(Person.NIL_WORD, Availability.NOT_AVAILABLE)
+            .withHousing(Housing.HDB_WORD).build();
     public static final Person ELLE = new PersonBuilder().withName("Elle Meyer").withPhone("9482224")
-            .withEmail("werner@example.com").withAddress("michegan ave").withAnimalName("nil")
-            .withAvailability("nil")
-            .withAnimalType("nil", NIL_AVAILABILITY)
-            .withHousing("nil").build();
+            .withEmail("werner@example.com").withAddress("michegan ave")
+            .withAnimalName(Person.NIL_WORD)
+            .withAvailability(Availability.AVAILABLE_WORD)
+            .withAnimalType(AnimalType.ABLE_DOG_WORD, Availability.AVAILABLE)
+            .withHousing(Housing.HDB_WORD).build();
     public static final Person FIONA = new PersonBuilder().withName("Fiona Kunz").withPhone("9482427")
-            .withEmail("lydia@example.com").withAddress("little tokyo").withAnimalName("nil")
-            .withAvailability("nil")
-            .withAnimalType("nil", NIL_AVAILABILITY)
-            .withHousing("nil").build();
+            .withEmail("lydia@example.com").withAddress("little tokyo")
+            .withAnimalName("Dexter")
+            .withAvailability(Availability.NOT_AVAILABLE_WORD)
+            .withAnimalType(AnimalType.CURRENT_CAT_WORD, Availability.NOT_AVAILABLE)
+            .withHousing(Housing.HDB_WORD).build();
     public static final Person GEORGE = new PersonBuilder().withName("George Best").withPhone("9482442")
-            .withEmail("anna@example.com").withAddress("4th street").withAnimalName("nil")
-            .withAvailability("nil")
-            .withAnimalType("nil", NIL_AVAILABILITY)
-            .withHousing("nil").build();
+            .withEmail("anna@example.com").withAddress("4th street")
+            .withAnimalName("MeowMeow")
+            .withAvailability(Availability.NOT_AVAILABLE_WORD)
+            .withAnimalType(AnimalType.CURRENT_CAT_WORD, Availability.NOT_AVAILABLE)
+            .withHousing(Housing.HDB_WORD).build();
 
     // Manually added
     public static final Person HOON = new PersonBuilder().withName("Hoon Meier").withPhone("8482424")
-            .withEmail("stefan@example.com").withAddress("little india").withAnimalName("nil")
-            .withAvailability("nil")
-            .withAnimalType("nil", NIL_AVAILABILITY)
-            .withHousing("nil").build();
+            .withEmail("stefan@example.com").withAddress("little india")
+            .withAnimalName(Person.NIL_WORD)
+            .withAvailability(Person.NIL_WORD)
+            .withAnimalType(Person.NIL_WORD, Availability.NIL_AVAILABILITY)
+            .withHousing(Person.NIL_WORD).build();
     public static final Person IDA = new PersonBuilder().withName("Ida Mueller").withPhone("8482131")
-            .withEmail("hans@example.com").withAddress("chicago ave").withAnimalName("nil")
-            .withAvailability("nil")
-            .withAnimalType("nil", NIL_AVAILABILITY)
-            .withHousing("nil").build();
+            .withEmail("hans@example.com").withAddress("chicago ave")
+            .withAnimalName(Person.NIL_WORD)
+            .withAvailability(Person.NIL_WORD)
+            .withAnimalType(Person.NIL_WORD, Availability.NIL_AVAILABILITY)
+            .withHousing(Person.NIL_WORD).build();
 
     // Manually added - Person's details found in {@code CommandTestUtil}
     public static final Person AMY = new PersonBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
-            .withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY).withTags(VALID_TAG_FRIEND).withAnimalName("nil")
-            .withAvailability("nil")
-            .withAnimalType("nil", NIL_AVAILABILITY)
-            .withHousing("nil").build();
+            .withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY).withTags(VALID_TAG_FRIEND)
+            .withAnimalName(Person.NIL_WORD)
+            .withAvailability(Person.NIL_WORD)
+            .withAnimalType(Person.NIL_WORD, Availability.NIL_AVAILABILITY)
+            .withHousing(Person.NIL_WORD).build();
     public static final Person BOB = new PersonBuilder().withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
             .withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND)
             .withAnimalName(VALID_ANIMAL_NAME_BOB)
@@ -96,7 +109,8 @@ public class TypicalPersons {
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
 
-    private TypicalPersons() {} // prevents instantiation
+    private TypicalPersons() {
+    } // prevents instantiation
 
     /**
      * Returns an {@code AddressBook} with all the typical persons.
@@ -111,5 +125,42 @@ public class TypicalPersons {
 
     public static List<Person> getTypicalPersons() {
         return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));
+    }
+
+    /**
+     * Hardcoded values for testing.
+     */
+    public static List<Person> getAvailableFosterers() {
+        return new ArrayList<>(Arrays.asList(BENSON, CARL, ELLE));
+    }
+
+    public static List<Person> getCurrentFosterers() {
+        return new ArrayList<>(Arrays.asList(FIONA, GEORGE));
+    }
+
+    public static List<Person> getAbleCatFosterers() {
+        return new ArrayList<>(Arrays.asList(CARL));
+    }
+
+    public static List<Person> getAbleDogFosterers() {
+        return new ArrayList<>(Arrays.asList(ELLE));
+    }
+
+    public static List<Person> getCurrentDogFosterers() {
+        return new ArrayList<>();
+    }
+    public static List<Person> getCurrentCatFosterers() {
+        return new ArrayList<>(Arrays.asList(FIONA, GEORGE));
+    }
+
+    public static List<Person> getHdbFosterers() {
+        return new ArrayList<>(Arrays.asList(BENSON, DANIEL, ELLE, FIONA, GEORGE));
+    }
+
+    public static List<Person> getCondoFosterers() {
+        return new ArrayList<>(Arrays.asList(CARL));
+    }
+    public static List<Person> getLandedFosterers() {
+        return new ArrayList<>(Arrays.asList(ALICE));
     }
 }
