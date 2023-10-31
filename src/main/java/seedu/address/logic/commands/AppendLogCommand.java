@@ -16,7 +16,8 @@ public class AppendLogCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + "or" + COMMAND_WORD_ALIAS
             + ": Appends the results of the most recent FindCommand to the logger tab.\n"
-            + "Example: " + COMMAND_WORD + "or" + COMMAND_WORD_ALIAS;
+            + "Example 1: " + COMMAND_WORD + "\n";
+            + "Example 2: " + COMMAND_WORD_ALIAS;
 
     public static final String MESSAGE_SUCCESS = "Results of the FindCommand have been appended to the logger tab.";
 
