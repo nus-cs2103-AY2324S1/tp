@@ -270,7 +270,7 @@ public class ParserUtil {
         requireNonNull(sortIn);
         String trimmedSortIn = sortIn.trim();
         if (!SortIn.isValidSortIn(trimmedSortIn)) {
-            throw new ParseException(Name.MESSAGE_CONSTRAINTS);
+            throw new ParseException(SortIn.MESSAGE_CONSTRAINTS);
         }
         return new SortIn(trimmedSortIn);
     }
