@@ -2,16 +2,19 @@ package seedu.address.model.lessons;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Objects;
 
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.model.ListEntry;
+import seedu.address.model.ListEntryField;
+
 
 /**
  * Represents a Task in the application.
  */
-public class Task extends ListEntry<Task> {
+
+public class Task extends ListEntryField {
 
     public static final String MESSAGE_CONSTRAINTS = "Tasks can take any values, and it should not be blank";
 
@@ -40,6 +43,20 @@ public class Task extends ListEntry<Task> {
         requireNonNull(description);
         checkArgument(isValidTask(description), MESSAGE_CONSTRAINTS);
         this.description = description;
+        this.isDone = false;
+    }
+
+    /**
+     * Constructs a {@code Task}, given the done status
+     *
+     * @param description
+     * @param isDone
+     */
+    public Task(String description, boolean isDone) {
+        requireAllNonNull(description, isDone);
+        checkArgument(isValidTask(description), MESSAGE_CONSTRAINTS);
+        this.description = description;
+        this.isDone = isDone;
     }
 
     /**
@@ -97,6 +114,28 @@ public class Task extends ListEntry<Task> {
                 && otherTask.getDescription().equals(getDescription());
     }
 
+    public boolean isDone() {
+        return isDone;
+    }
+
+    /**
+     * Parses a string task.
+     * The first character will be either + or -.
+     * If it is +, the task is done. if it is -, the task is undone.
+     * @param task
+     * @return
+     */
+    public static Task of(String task) {
+        // parse the task
+        String description = task.substring(1);
+        if (task.charAt(0) == '+') {
+            // task done
+            return new Task(description, true);
+        } else {
+            return new Task(description, false);
+        }
+    }
+
     /**
      * Returns true if both tasks have the same identity and data fields.
      * This defines a stronger notion of equality between two tasks.
@@ -131,9 +170,12 @@ public class Task extends ListEntry<Task> {
      */
     @Override
     public String toString() {
-        return new ToStringBuilder(this)
-                .add("description", description)
-                .toString();
+        return this.isDone ? "+" : "-" + this.description;
+    }
+
+    @Override
+    public ListEntryField clone() {
+        return new Task(this.description, this.isDone);
     }
 
     @Override
