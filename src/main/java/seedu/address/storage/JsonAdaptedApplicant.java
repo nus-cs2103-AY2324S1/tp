@@ -18,13 +18,17 @@ public class JsonAdaptedApplicant {
     private final String name;
     private final String phone;
 
+    private final String interviewTime;
+
     /**
      * Constructs a {@code JsonAdaptedApplicant} with the given applicant details.
      */
     @JsonCreator
-    public JsonAdaptedApplicant(@JsonProperty("name") String name, @JsonProperty("phone") String phone) {
+    public JsonAdaptedApplicant(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
+                                @JsonProperty("interviewTime") String interviewTime) {
         this.name = name;
         this.phone = phone;
+        this.interviewTime = interviewTime;
     }
 
     /**
@@ -33,6 +37,7 @@ public class JsonAdaptedApplicant {
     public JsonAdaptedApplicant(Applicant source) {
         name = source.getName().fullName;
         phone = source.getPhone().value;
+        interviewTime = source.getInterviewTime().toString();
     }
 
     /**
