@@ -2,6 +2,7 @@ package seedu.address.model.student.information;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
+import static seedu.address.model.student.ClassDetails.MESSAGE_INVALID_TUTORIAL_SESSION_NUMBER;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -9,7 +10,7 @@ import java.util.List;
 import java.util.stream.IntStream;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.model.student.information.exceptions.InvalidTutorialSessionNumberException;
+import seedu.address.logic.commands.exceptions.CommandException;
 
 /**
  * Represents a Student's AttendanceTracker grades in the class manager.
@@ -78,10 +79,11 @@ public class AttendanceTracker implements Tracker {
      *
      * @param tutNum The tutorial number.
      */
-    public void markPresent(Index tutNum) throws InvalidTutorialSessionNumberException {
+    public void markPresent(Index tutNum) throws CommandException {
         requireNonNull(tutNum);
         if (tutNum.getZeroBased() >= attendanceList.length) {
-            throw new InvalidTutorialSessionNumberException();
+            throw new CommandException(
+                    String.format(MESSAGE_INVALID_TUTORIAL_SESSION_NUMBER, attendanceList.length));
         }
         attendanceList[tutNum.getZeroBased()].mark();
     }
@@ -91,10 +93,11 @@ public class AttendanceTracker implements Tracker {
      *
      * @param tutNum The tutorial number.
      */
-    public void markAbsent(Index tutNum) throws InvalidTutorialSessionNumberException {
+    public void markAbsent(Index tutNum) throws CommandException {
         requireNonNull(tutNum);
         if (tutNum.getZeroBased() >= attendanceList.length) {
-            throw new InvalidTutorialSessionNumberException();
+            throw new CommandException(
+                    String.format(MESSAGE_INVALID_TUTORIAL_SESSION_NUMBER, attendanceList.length));
         }
         attendanceList[tutNum.getZeroBased()].unmark();
     }
@@ -104,9 +107,10 @@ public class AttendanceTracker implements Tracker {
      *
      * @param tutNum The tutorial number.
      */
-    public boolean isPresent(Index tutNum) throws InvalidTutorialSessionNumberException {
+    public boolean isPresent(Index tutNum) throws CommandException {
         if (tutNum.getZeroBased() >= attendanceList.length) {
-            throw new InvalidTutorialSessionNumberException();
+            throw new CommandException(
+                    String.format(MESSAGE_INVALID_TUTORIAL_SESSION_NUMBER, attendanceList.length));
         }
         return attendanceList[tutNum.getZeroBased()].getIsPresent();
     }

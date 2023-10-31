@@ -47,7 +47,7 @@ public class MarkPresentAllCommandTest {
 
     @Test
     public void execute_invalidTutorialIndex_throwsCommandException() {
-        Index i = Index.fromOneBased(ClassDetails.DEFAULT_COUNT + 1);
+        Index i = Index.fromZeroBased(ClassDetails.DEFAULT_COUNT + 1);
 
         MarkPresentAllCommand markPresentAllCommand = new MarkPresentAllCommand(i);
 

@@ -87,7 +87,7 @@ public class ClassDetails {
      */
     public void markPresent(Index tutNum) throws CommandException {
         requireNonNull(tutNum);
-        if (tutNum.getOneBased() > tutorialCount || tutNum.getOneBased() <= 0) {
+        if (tutNum.getZeroBased() > tutorialCount || tutNum.getZeroBased() <= 0) {
             throw new CommandException(
                     String.format(MESSAGE_INVALID_TUTORIAL_SESSION_NUMBER, tutorialCount));
         }
@@ -100,7 +100,7 @@ public class ClassDetails {
      */
     public void markAbsent(Index tutNum) throws CommandException {
         requireNonNull(tutNum);
-        if (tutNum.getOneBased() > tutorialCount || tutNum.getOneBased() <= 0) {
+        if (tutNum.getZeroBased() > tutorialCount || tutNum.getZeroBased() <= 0) {
             throw new CommandException(
                     String.format(MESSAGE_INVALID_TUTORIAL_SESSION_NUMBER, tutorialCount));
         }

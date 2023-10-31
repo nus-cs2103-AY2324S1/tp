@@ -54,7 +54,7 @@ public class MarkPresentCommandTest {
     @Test
     public void execute_invalidTutorialIndex_throwsCommandException() {
         Student studentToMark = TypicalStudents.getTypicalStudents().get(INDEX_FIRST_STUDENT.getZeroBased());
-        Index i = Index.fromOneBased(ClassDetails.DEFAULT_COUNT + 1);
+        Index i = Index.fromZeroBased(ClassDetails.DEFAULT_COUNT + 1);
 
         MarkPresentCommand markPresentCommand = new MarkPresentCommand(i, studentToMark.getStudentNumber());
 

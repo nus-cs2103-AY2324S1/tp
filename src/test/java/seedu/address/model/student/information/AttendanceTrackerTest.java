@@ -8,7 +8,7 @@ import static seedu.address.testutil.Assert.assertThrows;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.model.student.information.exceptions.InvalidTutorialSessionNumberException;
+import seedu.address.logic.commands.exceptions.CommandException;
 
 public class AttendanceTrackerTest {
 
@@ -41,7 +41,7 @@ public class AttendanceTrackerTest {
     }
 
     @Test
-    public void attendancePercentage_validValues_returnsCorrectPercentage() {
+    public void attendancePercentage_validValues_returnsCorrectPercentage() throws CommandException {
         AttendanceTracker attendanceTracker = new AttendanceTracker(10);
         attendanceTracker.markPresent(Index.fromZeroBased(0));
         attendanceTracker.markPresent(Index.fromZeroBased(2));
@@ -55,28 +55,28 @@ public class AttendanceTrackerTest {
     }
 
     @Test
-    public void markPresent_validTutorialIndex_success() {
+    public void markPresent_validTutorialIndex_success() throws CommandException {
         AttendanceTracker attendanceTracker = new AttendanceTracker(10);
         int tutNum = 1;
         attendanceTracker.markPresent(Index.fromOneBased(tutNum));
-        assertEquals(true, attendanceTracker.isPresent(Index.fromOneBased(tutNum)));
+        assertTrue(attendanceTracker.isPresent(Index.fromOneBased(tutNum)));
     }
 
     @Test
-    public void markPresent_invalidTutorialIndex_throwsInvalidTutorialIndexException() {
+    public void markPresent_invalidTutorialIndex_throwsCommandException() {
         int total = 10;
         AttendanceTracker attendanceTracker = new AttendanceTracker(total);
 
         int num = 100;
         assertThrows(
-                InvalidTutorialSessionNumberException.class, ()
-                        -> attendanceTracker.markPresent(Index.fromOneBased(num)));
+                CommandException.class, ()
+                        -> attendanceTracker.markPresent(Index.fromZeroBased(num)));
 
         // edge case
         int edg = total + 1;
         assertThrows(
-                InvalidTutorialSessionNumberException.class, ()
-                        -> attendanceTracker.markPresent(Index.fromOneBased(edg)));
+                CommandException.class, ()
+                        -> attendanceTracker.markPresent(Index.fromZeroBased(edg)));
     }
 
     @Test

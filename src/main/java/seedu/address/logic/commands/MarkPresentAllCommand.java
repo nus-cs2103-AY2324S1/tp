@@ -10,7 +10,6 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.student.Student;
-import seedu.address.model.student.information.exceptions.InvalidTutorialSessionNumberException;
 
 /**
  * Marks all displayed students' attendance as present.
@@ -43,7 +42,7 @@ public class MarkPresentAllCommand extends Command {
                 markedStudent.markPresent(index);
                 model.setStudent(studentToMark, markedStudent);
             }
-        } catch (InvalidTutorialSessionNumberException e) {
+        } catch (CommandException e) {
             throw new CommandException(e.getMessage());
         }
 

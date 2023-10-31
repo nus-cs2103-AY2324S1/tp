@@ -301,9 +301,22 @@ public class LogicManagerTest {
         expectedModel.setConfigured(true);
         expectedModel.addStudent(expectedStudent);
         expectedModel.commitAddressBook();
-        //storage.saveAddressBook(expectedModel.getAddressBook(), expectedModel.getAddressBookFilePath());
+        saveAddressBook(expectedModel.getAddressBook(),
+                expectedModel.getAddressBookFilePath());
         assertCommandFailure(addCommand, CommandException.class, expectedMessage, expectedModel);
         assertHistoryCorrect(addCommand);
+    }
+
+    /**
+     * Saves {@code addressBook} at the specified {@code filePath}.
+     */
+    private void saveAddressBook(ReadOnlyAddressBook addressBook, Path filePath) {
+        try {
+            new JsonAddressBookStorage(filePath)
+                    .saveAddressBook(addressBook, filePath);
+        } catch (IOException ioe) {
+            throw new AssertionError("There should not be an error writing to the file.", ioe);
+        }
     }
 
     private void assertLoadCommandFailureForExceptionFromStorage(IOException e, String expectedMessage) {
@@ -356,20 +369,6 @@ public class LogicManagerTest {
             assertEquals(expectedMessage, result.getFeedbackToUser());
         } catch (ParseException | CommandException e) {
             throw new AssertionError("Parsing and execution of HistoryCommand.COMMAND_WORD should succeed.", e);
-        }
-    }
-
-    /**
-     * A stub class to throw an {@code IOException} when the save method is called.
-     */
-    private static class JsonAddressBookIoExceptionThrowingStub extends JsonAddressBookStorage {
-        private JsonAddressBookIoExceptionThrowingStub(Path filePath) {
-            super(filePath);
-        }
-
-        @Override
-        public void saveAddressBook(ReadOnlyAddressBook addressBook, Path filePath) throws IOException {
-            throw DUMMY_IO_EXCEPTION;
         }
     }
 }

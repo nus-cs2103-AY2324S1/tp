@@ -15,7 +15,6 @@ import java.util.Collections;
 import java.util.List;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
@@ -99,7 +98,7 @@ public class CommandTestUtil {
             CommandResult result = command.execute(actualModel, commandHistory);
             assertEquals(expectedCommandResult, result);
             assertEquals(expectedModel, actualModel);
-        } catch (CommandException | IllegalValueException ce) {
+        } catch (CommandException ce) {
             throw new AssertionError("Execution of command should not fail.", ce);
         }
     }

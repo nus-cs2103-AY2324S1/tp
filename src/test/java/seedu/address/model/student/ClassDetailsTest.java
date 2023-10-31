@@ -64,6 +64,22 @@ public class ClassDetailsTest {
     }
 
     @Test
+    public void markAttendancePresent_invalidValues_exceptionThrown() {
+        ClassDetails classDetails = new ClassDetails("T11");
+        ClassDetails.setTutorialCount(13);
+        assertThrows(CommandException.class, () -> classDetails.markPresent(Index.fromZeroBased(14)));
+        assertThrows(CommandException.class, () -> classDetails.markPresent(Index.fromZeroBased(0)));
+    }
+
+    @Test
+    public void markAttendanceAbsent_invalidValues_exceptionThrown() {
+        ClassDetails classDetails = new ClassDetails("T11");
+        ClassDetails.setTutorialCount(13);
+        assertThrows(CommandException.class, () -> classDetails.markAbsent(Index.fromZeroBased(14)));
+        assertThrows(CommandException.class, () -> classDetails.markAbsent(Index.fromZeroBased(0)));
+    }
+
+    @Test
     public void setAssignmentGrade_invalidValues_exceptionThrown() {
         ClassDetails classDetails = new ClassDetails("T11");
         ClassDetails.setAssignmentCount(3);
@@ -110,8 +126,8 @@ public class ClassDetailsTest {
         ClassDetails classDetails = new ClassDetails("T11");
         try {
             ClassDetails.setTutorialCount(10);
-            classDetails.markPresent(Index.fromZeroBased(0));
             classDetails.markPresent(Index.fromZeroBased(1));
+            classDetails.markPresent(Index.fromZeroBased(3));
             classDetails.markPresent(Index.fromZeroBased(6));
             assertEquals(30, classDetails.getAttendancePercentage());
         } catch (Exception e) {
@@ -141,9 +157,9 @@ public class ClassDetailsTest {
     public void getAttendancePercentage_invalidValues_fail() {
         try {
             ClassDetails classDetails = new ClassDetails("T11", null, null, null);
-            classDetails.markPresent(Index.fromZeroBased(0));
+            classDetails.markPresent(Index.fromZeroBased(-1));
             classDetails.markPresent(Index.fromZeroBased(1));
-            classDetails.markPresent(Index.fromZeroBased(6));
+            classDetails.markPresent(Index.fromZeroBased(66));
             assertNotEquals(0, classDetails.getAttendancePercentage());
         } catch (Exception e) {
             assertTrue(e instanceof NullPointerException);
