@@ -14,7 +14,7 @@ import seedu.address.logic.commands.AddEventCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.ClearEventsCommand;
 import seedu.address.logic.commands.Command;
-import seedu.address.logic.commands.CompareCalendarCommand;
+import seedu.address.logic.commands.CompareCalendarCommandByIndex;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.DeleteEventCommand;
 import seedu.address.logic.commands.EditCommand;
@@ -102,7 +102,7 @@ public class UniMateParser {
         case AddContactEventCommand.COMMAND_WORD:
             return new AddContactEventCommandParser().parse(arguments);
 
-        case CompareCalendarCommand.COMMAND_WORD:
+        case CompareCalendarCommandByIndex.COMMAND_WORD:
             return new CompareCalendarCommandParser().parse(arguments);
 
         default:

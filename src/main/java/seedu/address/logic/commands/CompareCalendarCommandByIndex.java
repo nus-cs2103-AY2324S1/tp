@@ -14,7 +14,7 @@ import seedu.address.model.person.Person;
 /**
  * Command for comparing calendars of user and persons in address book.
  */
-public class CompareCalendarCommand extends Command {
+public class CompareCalendarCommandByIndex extends Command {
     public static final String COMMAND_WORD = "compare";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": compare calendars with specified people index. "
             + "Parameters: "
@@ -30,7 +30,7 @@ public class CompareCalendarCommand extends Command {
      *
      * @param indexList list of index of persons to compare with.
      */
-    public CompareCalendarCommand(List<Index> indexList) {
+    public CompareCalendarCommandByIndex(List<Index> indexList) {
         this.indexList = indexList;
     }
 
@@ -44,7 +44,8 @@ public class CompareCalendarCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
-        ReadOnlyCalendar combinedCalendar = lastShownList.stream().map(Person::getReadOnlyCalendar)
+        ReadOnlyCalendar combinedCalendar = indexList.stream().map(Index::getZeroBased).map(lastShownList::get)
+                .map(Person::getReadOnlyCalendar)
                 .reduce(model.getCalendar(), ReadOnlyCalendar::combineCalendar);
 
         model.setComparisonCalendar(combinedCalendar);
