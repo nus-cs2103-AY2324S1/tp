@@ -2,10 +2,10 @@
 layout: page
 title: User Guide
 ---
-# Tra$act User Guide
+# Tran$act User Guide
 
 Welcome to **Tran$act**, your solution for effortless transaction recording and management.
-Transact is a desktop application designed to cater the needs of startup or small scale
+Tran$act is a desktop application designed to cater the needs of startup or small scale
 retailers looking for a cheap and efficient way to record daily transactions.
 
 Here's an overview of our main features:
@@ -24,13 +24,13 @@ to help you streamline your accounting
 
 ## Quick start
 
-1. Ensure you have Java `11` or above installed in your Computer.<br><br>
+1. Ensure you have Java `11` or above installed in your Computer.
 
-2. Download the latest `transact.jar` from [here](https://github.com/AY2324S1-CS2103T-W13-3/tp/releases).<br><br>
+2. Download the latest `transact.jar` from [here](https://github.com/AY2324S1-CS2103T-W13-3/tp/releases).
 
-3. Copy the file to the folder you want to use as the _home folder_ for Tran$act.<br><br>
+3. Copy the file to the folder you want to use as the _home folder_ for Tran$act.
 
-4. Double click `transact.jar` to start the app. A GUI similar to the below should appear in a few seconds.<br><br>
+4. Double click `transact.jar` to start the app. A GUI similar to the below should appear in a few seconds.
    ![Ui](images/Ui.png)
 
 >**❗If the above does not work, try this method:**
@@ -43,18 +43,17 @@ to help you streamline your accounting
 > view respectively.
 
 6. Let's add a new staff member: type `addstaff n/Isaac p/92345678 e/isaac@gmail.com a/Blk 456, Pasir Ris St 32 t/marketing` 
-   and press Enter.<br/><br/>
+   and press Enter.
 
    This creates a new staff member called Isaac with the respective phone number, email and address, and adds an
-   optional tag with the name 'marketing'<br><br>
+   optional tag with the name 'marketing'.
  
-7. Let's add a new transaction: type `add ty/E d/Flyer printing amt/100 on/23/10/2023 s/7` and press Enter.<br><br>
+7. Let's add a new transaction: type `add ty/E d/Flyer printing amt/100 on/23/10/2023 s/7` and press Enter.
 
-   Notice that
-   the app automatically switches to the _transaction list_, and your newly added transaction appears at the bottom of
-   the list.
+   Notice that the app automatically switches to the _transaction list_, and your newly added transaction appears
+   at the bottom of the list.
 
->**Wondering where the s/7 came from?**
+>**Wondering where the _s/7_ came from?**
 >
 > In step 6, we added a new staff member Isaac, and the app automatically assigned them with an ID of 7, which you can
 > see in the staff list.
@@ -85,6 +84,10 @@ View a comprehensive list of all recorded transactions for reference. This list 
 
 Need to make corrections or updates to transaction records? Tran$act allows you to edit transaction details, ensuring your records are accurate.
 
+**5. Filtering, Sorting Transactions**
+
+Need to find transactions meeting a specific criteria, and order them? Tran$act allows you to filter transactions by date, amount and person, and sort transactions by date and amount.
+
 **5. Dashboard Display**
 
 Upon opening the app, you'll be greeted with a clear and concise dashboard. The dashboard displays essential financial information, including total income, total expenses, net profit for the selected period.
@@ -104,19 +107,20 @@ Import staff lists into the address book for quick access to contact information
 
 **Notes about the command format:**
 
-* \<?...>: Optional field
+* []: Optional field
 * \<description>: Any string
-* \<type>: [R (for Revenue), E (for Expense)]
+* \<type>: R (for Revenue), or E (for Expense)
 * \<amount>: Any number
 * \<date>: In dd/mm/yy format
-* \<staff>: ID of staff, an integer
-* []: Multiple entries allowed, separated by a space
+* \<staff ID>: ID of staff, an integer
+* \<sort type>: asc (ascending) or desc (descending)
+* ...: Multiple entries allowed, separated by a space
 </div>
 
 
 ### Adding transaction : `add`
 
-Format: `add ty/<type> d/<description> a/<amount> on/<date> s/<?staff>`
+Format: `add ty/<type> d/<description> a/<amount> on/<date> [s/<staff ID>]`
 
 Examples:
 
@@ -140,6 +144,32 @@ Success/Fail Output:
 - Removed transaction
 - Error: <Error Message>
 
+### Sorting transactions : `sort`
+
+Format: `sort [date/<sort type>] [amount/<sort type>]`
+
+* At least one parameter must be present
+* If both parameters are present, the order matters
+  * Transactions will be sorted by the first parameter; if there are ties, the second parameter is used to tiebreak
+
+### Filtering transactions : `filter`
+
+Format: `filter [has/<keywords...>] [after/<date>] [before/<date>] [more/<amount>] [less/<amount>] [by/<staff ID>]`
+
+* At least one parameter must be present
+* If multiple parameters are present, only transactions matching all parameters will be shown
+* The order of parameters does not matter
+* `has` will match descriptions containing the keyword(s)
+  * The search is case-insensitive. e.g `hans` will match `Hans`
+  * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
+  * Only the description is searched.
+  * Only full words will be matched e.g. `Han` will not match `Hans`
+* `after` will match dates on or after the given date
+* `before` will match dates on or before the given date
+* `more` will match amounts greater than or equal to the given amount
+* `less` will match amounts less than or equal to the given amount
+* `by` will match transactions with the given staff ID
+
 ### Viewing transactions : `view t`
 
 Switches UI to transaction tab, which shows the full list of transactions
@@ -148,7 +178,7 @@ Format: `view t` or `view transaction`
 
 ### Adding staff : `addstaff`
 
-Format: `addstaff n/<name> p/<phone no> e/<email> a/<address> [t/<tag>]`
+Format: `addstaff n/<name> p/<phone no> e/<email> a/<address> [t/<tag>...]`
 
 Success/Fail Output:
 
@@ -165,6 +195,23 @@ Success/Fail Output:
 
 - Removed staff
 - Error: <Error Message>
+
+### Locating staff by name: `find`
+
+Finds persons whose names contain any of the given keywords.
+
+Format: `find keyword [keywords...]`
+
+* The search is case-insensitive. e.g `hans` will match `Hans`
+* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
+* Only the name is searched.
+* Only full words will be matched e.g. `Han` will not match `Hans`
+* Persons matching at least one keyword will be returned (i.e. `OR` search).
+  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+
+Examples:
+* `find John` returns `john` and `John Doe`
+* `find alex david` returns `Alex Yeoh`, `David Li`
 
 ### Viewing staff : `view s`
 
@@ -192,14 +239,14 @@ Format: `exit`
 
 ### Saving the data
 
-transact data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+Tran$act's data is saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 
 ## Navigating the GUI
 
 Tran$act's GUI is simple and gives you access to all of its features with just one click.
 
-This should be what you see when you open Transact for the first time:
+This should be what you see when you open Tran$act for the first time:
 ![Ui](images/Transact_UI.png)
 
 The upper menu bar contains two tabs:
@@ -225,17 +272,20 @@ The input field below this with the grey text `Enter command here...` is where y
 
 ## Command summary
 
-| Action                  | Format, Examples                                                  |
-|-------------------------|-------------------------------------------------------------------|
-| **Add transaction**     | `add ty/<type> d/<description> a/<amount> on/<date> s/<?staff>`   |
-| **Remove transaction**  | `del <id>`                                                        |
-| **View transaction**    | `view t` or `view transaction`                                    |
-| **Add staff**           | `addstaff n/<name> p/<phone no> e/<email> a/<address> [t/<?tag>]` |
-| **Remove staff**        | `delstaff <staff id>`                                             |
-| **View staff**          | `view s` or `view staff`                                          |
-| **View overview**       | `view o` or `view overview`                                       |
-| **Clear output**        | `clear`                                                           |
-| **Exit**                | `exit`                                                            |
+| Action                  | Format, Examples                                                                                            |
+|-------------------------|-------------------------------------------------------------------------------------------------------------|
+| **Add transaction**     | `add ty/<type> d/<description> a/<amount> on/<date> [s/<staff ID>]`                                         |
+| **Remove transaction**  | `del <id>`                                                                                                  |
+| **Sort transactions**   | `sort [date/<sort type>] [amount/<sort type>]`                                                              |
+| **Filter transactions** | `filter [has/<keywords...>] [after/<date>] [before/<date>] [more/<amount>] [less/<amount>] [by/<staff ID>]` |
+| **View transaction**    | `view t` or `view transaction`                                                                              |
+| **Add staff**           | `addstaff n/<name> p/<phone no> e/<email> a/<address> [t/<tag>...]`                                         |
+| **Remove staff**        | `delstaff <staff ID>`                                                                                       |
+| **Find staff**          | `find <keyword> [more keywords...]`                                                                         |
+| **View staff**          | `view s` or `view staff`                                                                                    |
+| **View overview**       | `view o` or `view overview`                                                                                 |
+| **Clear output**        | `clear`                                                                                                     |
+| **Exit**                | `exit`                                                                                                      |
 
 ## Glossary
 
