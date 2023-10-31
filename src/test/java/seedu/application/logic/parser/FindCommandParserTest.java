@@ -1,7 +1,7 @@
 package seedu.application.logic.parser;
 
 import static seedu.application.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-//import static seedu.application.logic.parser.CliSyntax.PREFIX_COMPANY;
+import static seedu.application.logic.parser.CliSyntax.PREFIX_COMPANY;
 import static seedu.application.logic.parser.CliSyntax.PREFIX_ROLE;
 import static seedu.application.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.application.logic.parser.CommandParserTestUtil.assertParseSuccess;
@@ -44,13 +44,21 @@ public class FindCommandParserTest {
         CombinedPredicate expectedCombinedPredicate = new CombinedPredicate(Arrays.asList(expectedFirstPredicate));
         FindCommand expectedFindCommand =
                 new FindCommand(expectedCombinedPredicate);
-        assertParseSuccess(parser,
-                FindCommand.COMMAND_WORD + " "
-                        + PREFIX_ROLE + " Software Grass", expectedFindCommand);
+        assertParseSuccess(parser, " " + PREFIX_ROLE + " Software Grass", expectedFindCommand);
 
         // multiple whitespaces between keywords
-        assertParseSuccess(parser, FindCommand.COMMAND_WORD + " "
+        assertParseSuccess(parser, " "
                 + PREFIX_ROLE + " \n Software \n \t Grass  \t", expectedFindCommand);
+
+        // multiple prefixes
+        FieldContainsKeywordsPredicate expectedSecondPredicate = new FieldContainsKeywordsPredicate(
+                PREFIX_COMPANY, Arrays.asList("Google"));
+        expectedCombinedPredicate = new CombinedPredicate(
+                Arrays.asList(expectedFirstPredicate, expectedSecondPredicate));
+        expectedFindCommand = new FindCommand(expectedCombinedPredicate);
+        assertParseSuccess(parser, " " + PREFIX_ROLE + "Software Grass " + PREFIX_COMPANY + "Google",
+                expectedFindCommand);
+
     }
 
 }

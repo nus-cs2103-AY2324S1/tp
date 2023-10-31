@@ -12,7 +12,7 @@ public class Industry {
 
     public static final String MESSAGE_CONSTRAINTS =
             "Industry descriptions should adhere to the following constraints:\n"
-                    + "1. Only contain alphanumeric characters and spaces\n";
+                    + "1. Must start with an alphanumeric character\n";
 
     public static final String TO_ADD_INDUSTRY = "TO_ADD_INDUSTRY";
     public static final Industry DEFAULT_INDUSTRY = new Industry(TO_ADD_INDUSTRY);

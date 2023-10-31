@@ -11,8 +11,8 @@ import seedu.application.commons.util.AppUtil;
 public class JobType {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Type is not case sensitive and should only be in the form: \n"
-                    + "FULL_TIME, PART_TIME, INTERNSHIP, TEMPORARY, CONTRACT, FREELANCE, VOLUNTEER";
+            "Type is case-insensitive and should only be in the form: FULL_TIME, PART_TIME, INTERNSHIP,"
+                    + " TEMPORARY, CONTRACT, FREELANCE, VOLUNTEER";
 
     public static final String TO_ADD_JOB_TYPE = "TO_ADD_JOB_TYPE";
     public static final JobType EMPTY_JOB_TYPE = new JobType(TO_ADD_JOB_TYPE);

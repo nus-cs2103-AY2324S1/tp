@@ -23,7 +23,7 @@ public class SortCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Sorts the list of jobs based on "
             + "the specified field and displays them as a list with index numbers.\n"
             + "Parameters: FIELD\n\n"
-            + "Example: " + COMMAND_WORD + PREFIX_ROLE;
+            + "Example: " + COMMAND_WORD + " " + PREFIX_ROLE;
 
     public static final String MESSAGE_INVALID_SPECIFIER = "Specifiers should only be one of the following: "
             + PREFIX_COMPANY + " (Company), "

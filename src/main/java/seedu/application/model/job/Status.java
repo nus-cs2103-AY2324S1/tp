@@ -10,7 +10,7 @@ import seedu.application.commons.util.AppUtil;
 public class Status {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Status is not case sensitive and should only be in the form: TO_BE_SUBMITTED, PENDING, APPROVED, REJECTED";
+            "Status is case-insensitive and should only be in the form: TO_BE_SUBMITTED, PENDING, APPROVED, REJECTED";
 
     public static final String IN_PROGRESS = JobStatus.TO_BE_SUBMITTED.toString();
     public static final Status DEFAULT_STATUS = new Status(IN_PROGRESS);
