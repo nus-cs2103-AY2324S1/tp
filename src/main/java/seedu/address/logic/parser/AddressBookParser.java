@@ -2,6 +2,7 @@ package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.model.state.State.STUDENT;
 
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
@@ -12,7 +13,9 @@ import seedu.address.logic.commands.AddLessonCommand;
 import seedu.address.logic.commands.AddPersonCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
-import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.logic.commands.DeleteLessonCommand;
+import seedu.address.logic.commands.DeletePersonCommand;
+import seedu.address.logic.commands.EditLessonCommand;
 import seedu.address.logic.commands.EditPersonCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
@@ -20,6 +23,7 @@ import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.ShowCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.Model;
 
 /**
  * Parses user input.
@@ -31,6 +35,10 @@ public class AddressBookParser {
      */
     private static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
     private static final Logger logger = LogsCenter.getLogger(AddressBookParser.class);
+    private final Model model;
+    public AddressBookParser(Model model) {
+        this.model = model;
+    }
 
     /**
      * Parses user input into command for execution.
@@ -45,14 +53,26 @@ public class AddressBookParser {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
         }
 
-        final String commandWord = matcher.group("commandWord");
+        String commandWord = matcher.group("commandWord");
+        switch (commandWord) {
+        case "delete":
+            commandWord = model.getState().equals(STUDENT) ? "deletePerson" : "deleteLesson";
+            break;
+        case "add":
+            commandWord = model.getState().equals(STUDENT) ? "addPerson" : "addLesson";
+            break;
+        case "edit":
+            commandWord = model.getState().equals(STUDENT) ? "editPerson" : "editLesson";
+            break;
+        default:
+            break;
+        }
         final String arguments = matcher.group("arguments");
-
         // Note to developers: Change the log level in config.json to enable lower level (i.e., FINE, FINER and lower)
         // log messages such as the one below.
         // Lower level log messages are used sparingly to minimize noise in the code.
         logger.fine("Command word: " + commandWord + "; Arguments: " + arguments);
-
+        userInput = commandWord + " " + arguments;
         switch (commandWord) {
 
         case AddPersonCommand.COMMAND_WORD:
@@ -61,8 +81,10 @@ public class AddressBookParser {
         case EditPersonCommand.COMMAND_WORD:
             return new EditPersonCommandParser().parse(userInput);
 
-        case DeleteCommand.COMMAND_WORD:
-            return new DeleteCommandParser().parse(arguments);
+        case DeletePersonCommand.COMMAND_WORD:
+            return new DeletePersonCommandParser().parse(arguments);
+        case DeleteLessonCommand.COMMAND_WORD:
+            return new DeleteLessonCommandParser().parse(arguments);
 
         case ShowCommand.COMMAND_WORD:
             return new ShowCommandParser().parse(arguments);
@@ -83,7 +105,8 @@ public class AddressBookParser {
             return new HelpCommand();
         case AddLessonCommand.COMMAND_WORD:
             return new AddLessonCommandParser().parse(userInput);
-
+        case EditLessonCommand.COMMAND_WORD:
+            return new EditLessonCommandParser().parse(userInput);
         default:
             logger.finer("This user input caused a ParseException: " + userInput);
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
