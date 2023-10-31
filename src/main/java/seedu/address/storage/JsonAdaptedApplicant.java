@@ -37,10 +37,10 @@ public class JsonAdaptedApplicant {
     public JsonAdaptedApplicant(Applicant source) {
         name = source.getName().fullName;
         phone = source.getPhone().value;
-        if (source.getInterviewTime().interviewTime == null) {
+        if (source.getInterviewTime().time == null) {
             interviewTime = "Interview time has not been set";
         } else {
-            interviewTime = source.getInterviewTime().interviewTime;
+            interviewTime = source.getInterviewTime().time;
         }
     }
 

@@ -10,12 +10,12 @@ import java.time.format.DateTimeFormatter;
 public class InterviewTime {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Interview time should be in the format of DD/MM/YYYY HHmm. To cancel the interview, enter " +
-                    "'Interview time has not been set'(case sensitive)";
+            "Interview time should be in the format of DD/MM/YYYY HHmm. To cancel the interview, enter "
+                    + "'Interview time has not been set'(case sensitive)";
 
     public static final String VALIDATION_REGEX = "^\\d{2}/\\d{2}/\\d{4} \\d{4}$";
 
-    public String interviewTime;
+    public String time;
 
     /**
      * Constructs a {@code InterviewTime}.
@@ -23,9 +23,7 @@ public class InterviewTime {
      * @param interviewTime A valid interview time.
      */
     public InterviewTime(String interviewTime) {
-        //DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
-        //LocalDateTime dateTime = LocalDateTime.parse(interviewTime, formatter);
-        this.interviewTime = interviewTime;
+        this.time = interviewTime;
     }
 
     /**
@@ -47,16 +45,16 @@ public class InterviewTime {
 
         InterviewTime otherInterviewTime = (InterviewTime) other;
 
-        return interviewTime.equals(otherInterviewTime.interviewTime);
+        return time.equals(otherInterviewTime.time);
     }
 
     @Override
     public String toString() {
-        if (interviewTime.equals("Interview time has not been set")) {
+        if (time.equals("Interview time has not been set")) {
             return "Interview time has not been set";
         }
         DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
-        LocalDateTime dateTime = LocalDateTime.parse(this.interviewTime, inputFormatter);
+        LocalDateTime dateTime = LocalDateTime.parse(this.time, inputFormatter);
         DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("d MMMM yyyy h:mma");
         String formattedDateTime = dateTime.format(outputFormatter);
         return "Interview scheduled at: " + formattedDateTime;
@@ -64,6 +62,6 @@ public class InterviewTime {
 
     @Override
     public int hashCode() {
-        return interviewTime.hashCode();
+        return time.hashCode();
     }
 }
