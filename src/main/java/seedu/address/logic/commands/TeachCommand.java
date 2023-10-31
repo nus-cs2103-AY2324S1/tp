@@ -8,7 +8,7 @@ import java.util.List;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.course.Course;
-import seedu.address.model.course.CourseData;
+import seedu.address.model.course.UniqueCourseList;
 import seedu.address.model.person.predicates.TeachingCoursePredicate;
 
 /**
@@ -22,7 +22,7 @@ public class TeachCommand extends Command {
             + PREFIX_COURSE + "COURSE_CODE \n"
             + "Example: " + COMMAND_WORD
             + " " + PREFIX_COURSE + "CS1231S \n"
-            + CourseData.getCourseListString();
+            + UniqueCourseList.getCourseListString();
 
     public static final String MESSAGE_SUCCESS = " is successfully added as default course.";
 

@@ -3,6 +3,7 @@ package seedu.address.model.course;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.time.DayOfWeek;
+import java.time.LocalTime;
 import java.util.Objects;
 
 import seedu.address.model.availability.TimeInterval;
@@ -30,6 +31,22 @@ public class Lesson {
         this.courseCode = courseCode;
         this.dayOfWeek = dayOfWeek;
         this.timeInterval = timeInterval;
+    }
+
+    /**
+     * Constructs a {@code Lesson} with String representations of each field.
+     * @param name     A lesson name.
+     * @param courseCode A course code.
+     * @param dayOfWeek A day of the week.
+     * @param startTime A start time of the lesson.
+     * @param endTime  An end time of the lesson.
+     */
+    public Lesson(String name, String courseCode, String dayOfWeek, String startTime, String endTime) {
+        requireAllNonNull(name, courseCode, dayOfWeek, startTime, endTime);
+        this.name = name;
+        this.courseCode = courseCode;
+        this.dayOfWeek = DayOfWeek.valueOf(dayOfWeek);
+        this.timeInterval = new TimeInterval(LocalTime.parse(startTime), LocalTime.parse(endTime));
     }
 
     public String getCourseCode() {

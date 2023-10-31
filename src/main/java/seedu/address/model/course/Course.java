@@ -57,6 +57,19 @@ public class Course {
         return test.matches(VALIDATION_REGEX);
     }
 
+    /**
+     * Returns true if both courses have the same course code.
+     * This defines a weaker notion of equality between two courses.
+     */
+    public boolean isSameCourse(Course otherCourse) {
+        if (otherCourse == this) {
+            return true;
+        }
+        return otherCourse != null
+                && otherCourse.courseCode.equals(this.courseCode);
+
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
