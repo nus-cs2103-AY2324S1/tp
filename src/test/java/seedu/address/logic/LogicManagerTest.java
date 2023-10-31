@@ -3,8 +3,6 @@ package seedu.address.logic;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.Messages.MESSAGE_CLASS_MANAGER_ALREADY_CONFIGURED;
-import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_NONEXISTENT_STUDENT_NUMBER;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.commands.CommandTestUtil.CLASS_NUMBER_DESC_AMY;
@@ -97,8 +95,8 @@ public class LogicManagerTest {
         int tutorialCount = 13;
         int assignmentCount = 4;
         String configCommand = "config #t/" + tutorialCount + " #a/" + assignmentCount;
-        assertCommandSuccess(configCommand, String.format(ConfigCommand.MESSAGE_CONFIG_SUCCESS, tutorialCount, assignmentCount),
-                model);
+        assertCommandSuccess(configCommand,
+                String.format(ConfigCommand.MESSAGE_CONFIG_SUCCESS, tutorialCount, assignmentCount), model);
         assertHistoryCorrect(configCommand);
     }
 
