@@ -115,6 +115,15 @@ public class Appointment implements Comparable<Appointment> {
         return Objects.hash(name, description, date, startTime, endTime);
     }
 
+    /**
+     * Compares this appointment with another appointment based on their date and start time.
+     * If two appointments have the same date and start time, they are considered the same appointment, as there cannot
+     * be overlapping appointments.
+     *
+     * @param otherAppointment The appointment to compare to.
+     * @return A negative integer if this appointment is earlier than the other, a positive integer if it's later,
+     *         and 0 if they are the same appointment.
+     */
     @Override
     public int compareTo(Appointment otherAppointment) {
         int dateCompare = this.date.getLocalDate().compareTo(otherAppointment.date.getLocalDate());
@@ -129,12 +138,10 @@ public class Appointment implements Comparable<Appointment> {
             return startTimeCompare;
         }
 
-        // There can be no overlapping appointments, hence if 2 appointments have the same date and startTime,
-        // they are the same appointment.
+        assert this.equals(otherAppointment);
+
         return 0;
     }
-
-
 
     @Override
     public String toString() {
