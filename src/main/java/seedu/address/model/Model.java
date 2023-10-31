@@ -96,4 +96,9 @@ public interface Model {
      * Updates the reminder list with the given {@code Person Interaction}.
      */
     void updateReminderList(Person person, Interaction interaction);
+
+    /**
+     * Updates the entire reminder list with the given {@code personList}.
+     */
+    void updateWholeReminderList(ObservableList<Person> personList);
 }
