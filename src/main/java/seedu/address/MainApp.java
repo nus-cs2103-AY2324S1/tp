@@ -21,7 +21,6 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.reminder.ReminderManager;
 import seedu.address.model.util.SampleDataUtil;
 import seedu.address.storage.AddressBookStorage;
 import seedu.address.storage.JsonAddressBookStorage;
@@ -46,9 +45,6 @@ public class MainApp extends Application {
     protected Storage storage;
     protected Model model;
     protected Config config;
-    protected ReminderManager reminderManager;
-    protected Object reminderMutex = new Object();
-
 
     @Override
     public void init() throws Exception {
@@ -69,9 +65,6 @@ public class MainApp extends Application {
         logic = new LogicManager(model, storage);
 
         ui = new UiManager(logic);
-
-        reminderManager = new ReminderManager(model, reminderMutex);
-        reminderManager.start();
     }
 
     /**
