@@ -17,8 +17,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ADD_ANNUAL_LEAVE_TO;
 public class DeleteLeaveCommandParser implements Parser<DeleteLeaveCommand>{
 
     /**
-     * Parses the given {@code String} of arguments in the context of the AddLeaveCommand
-     * and returns an AddLeaveCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the DeleteLeaveCommand
+     * and returns a DeleteLeaveCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
     public DeleteLeaveCommand parse(String args) throws ParseException {
@@ -50,9 +50,9 @@ public class DeleteLeaveCommandParser implements Parser<DeleteLeaveCommand>{
     }
 
     /**
-     * Handles the command based on user input if user wish to add in a single day of leave for employee.
+     * Handles the command based on user input if user wish to delete a single day of leave from employee.
      * @param argMultimapForOn The ArgumentMultimap consisting of the user input
-     * @return AddLeaveCommand object for execution
+     * @return DeleteLeaveCommand object for execution
      * @throws ParseException if the user input does not conform the expected format
      */
     public DeleteLeaveCommand deleteSingleDayLeaveHandler(ArgumentMultimap argMultimapForOn) throws ParseException {
@@ -81,9 +81,9 @@ public class DeleteLeaveCommandParser implements Parser<DeleteLeaveCommand>{
     }
 
     /**
-     * Handles the command based on user input if user wish to add in multiple days of leave for employee.
+     * Handles the command based on user input if user wish to delete multiple days of leave from employee.
      * @param argMultimapForFromAndTo The ArgumentMultimap consisting of the user input
-     * @return AddLeaveCommand object for execution
+     * @return DeleteLeaveCommand object for execution
      * @throws ParseException if the user input does not conform the expected format
      */
     public DeleteLeaveCommand deleteMultipleDaysLeaveHandler(ArgumentMultimap argMultimapForFromAndTo) throws ParseException {

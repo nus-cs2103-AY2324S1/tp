@@ -26,9 +26,13 @@ public class AnnualLeave {
             + "the number of days of annual leave taken should not exceed the total limit and \n"
                     + "you can only add leave for this year and next year.";
 
-    public static final String MESSAGE_EXPIRED_LEAVE = "Date of the leave that you are trying to add is already over.";
-    public static final String MESSAGE_DUPLICATE_LEAVE = "Some or all the leave(s) that you "
+    public static final String MESSAGE_ADD_EXPIRED_LEAVE = "Date of the leave that you are trying to add is already over.";
+    public static final String MESSAGE_DELETE_EXPIRED_LEAVE = "Date of the leave that you are trying to " +
+            "delete is already over.";
+    public static final String MESSAGE_ADD_DUPLICATE_LEAVE = "Some or all the leave(s) that you "
             + "are trying to add has already been added. Please check again.";
+    public static final String MESSAGE_DELETE_INVALID_LEAVE = "Some or all the leave(s) that you "
+            + "are trying to delete does not exist. Please check again.";
     public static final String MESSAGE_INVALID_LEAVE = "The end date of the leave must be after the start date.";
 
     /*
@@ -105,6 +109,14 @@ public class AnnualLeave {
     }
 
     /**
+     * Deletes a single day of leave.
+     * @param startDate of the leave to be deleted from the leaveList
+     */
+    public void deleteLeave(LocalDate startDate) {
+        this.leaveList.remove(startDate);
+    }
+
+    /**
      * Adds in multiple days of leave.
      * @param startDate of the leave to be added to the leaveList
      * @param endDate of the leave to be added to the leaveList
@@ -113,6 +125,18 @@ public class AnnualLeave {
         long numOfDays = ChronoUnit.DAYS.between(startDate, endDate) + 1;
         for (int i = 0; i < numOfDays; i++) {
             this.leaveList.add(startDate.plusDays(i));
+        }
+    }
+
+    /**
+     * Deletes multiple days of leave.
+     * @param startDate of the leave to be deleted from the leaveList
+     * @param endDate of the leave to be deleted from the leaveList
+     */
+    public void deleteLeave(LocalDate startDate, LocalDate endDate) {
+        long numOfDays = ChronoUnit.DAYS.between(startDate, endDate) + 1;
+        for (int i = 0; i < numOfDays; i++) {
+            this.leaveList.remove(startDate.plusDays(i));
         }
     }
 
@@ -218,6 +242,22 @@ public class AnnualLeave {
             }
         }
         return false;
+    }
+
+    /**
+     * Returns true if the leave to be deleted has already been added before, else false.
+     * @param startDate of the leave to be deleted from the leaveList
+     * @param endDate of the leave to be deleted from the leaveList
+     * @return true or false depending on whether the dates given are all present in the leaveList
+     */
+    public boolean containsAllLeave(LocalDate startDate, LocalDate endDate) {
+        long numOfDays = ChronoUnit.DAYS.between(startDate, endDate) + 1;
+        for (int i = 0; i < numOfDays; i++) {
+            if (!this.leaveList.contains(startDate.plusDays(i))) {
+                return false;
+            }
+        }
+        return true;
     }
 
     /**

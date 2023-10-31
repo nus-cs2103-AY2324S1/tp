@@ -74,10 +74,10 @@ public class AddLeaveCommand extends Command {
         }
         Person employeeToAddLeave = lastShownList.get(index.getZeroBased());
         if (startDate.isBefore(LocalDate.now())) {
-            throw new CommandException(String.format(AnnualLeave.MESSAGE_EXPIRED_LEAVE));
+            throw new CommandException(String.format(AnnualLeave.MESSAGE_ADD_EXPIRED_LEAVE ));
         }
         if (employeeToAddLeave.getAnnualLeave().containsDuplicateLeave(startDate, endDate)) {
-            throw new CommandException(AnnualLeave.MESSAGE_DUPLICATE_LEAVE);
+            throw new CommandException(AnnualLeave.MESSAGE_ADD_DUPLICATE_LEAVE);
         }
         if (endDate == null) {
             if (employeeToAddLeave.getAnnualLeave().isValidAddLeave(startDate, startDate)) {
