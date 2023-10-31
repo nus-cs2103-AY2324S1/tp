@@ -21,10 +21,11 @@ public class Messages {
     public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d persons listed!";
     public static final String MESSAGE_DUPLICATE_FIELDS =
             "Multiple values specified for the following single-valued field(s): ";
-    public static final String MESSAGE_MISSING_IDENTIFICATION =
-            "Missing identification! Use the n/ or id/ tag to specify the patient";
     public static final String MESSAGE_EMPTY_FIND_RESULT =
             "There are no FindCommand results. There is nothing to be saved to the logger tab.";
+
+    public static final String MESSAGE_EMPTY_LOG =
+            "No previous log to undo.";
 
     /**
      * Returns an error message indicating the duplicate prefixes.

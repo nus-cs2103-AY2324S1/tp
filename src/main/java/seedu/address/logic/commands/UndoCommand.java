@@ -10,7 +10,7 @@ import seedu.address.model.Model;
 
 /**
  * Represents an undo command in the address book.
- * This undoes the last undo-able command, which includes edit, add, or delete commands.
+ * This undoes the last undo-able command, which includes add, clear, edit, delete, log, alog, and clog commands.
  * Optionally, you can specify the number of commands to undo.
  */
 public class UndoCommand extends Command {
@@ -26,7 +26,7 @@ public class UndoCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + "/" + COMMAND_WORD_ALIAS
             + ": Undoes the last undo-able command. "
-            + "An undo-able command includes an edit, add, clear or delete command.\n"
+            + "An undo-able command includes an add, clear, delete, edit, log, alog, and clog command.\n"
             + "Optionally, you can specify the number of commands to undo.\n"
             + COMMAND_FORMAT;
     public static final String INVALID_STEPS_TO_UNDO = "Undo step count cannot be a negative number or zero.\n";
@@ -36,7 +36,7 @@ public class UndoCommand extends Command {
 
     public static final String NO_HISTORY_EXISTS_FAILURE = "There is no history of un-doable commands to be undone.\n"
             + "Please execute some undo-able commands first.\n"
-            + "Undo-able commands include add, edit, delete or clear command.";
+            + "Undo-able commands include add, clear, delete, edit, log, alog, and clog commands.";
 
     private static final Logger logger = Logger.getLogger(UndoCommand.class.getName());
     private int stepsToUndo;
