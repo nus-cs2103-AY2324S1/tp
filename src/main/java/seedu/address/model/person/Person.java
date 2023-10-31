@@ -3,6 +3,7 @@ package seedu.address.model.person;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
@@ -15,6 +16,7 @@ import java.util.stream.Collectors;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.person.interaction.Interaction;
 import seedu.address.model.person.lead.Lead;
+import seedu.address.model.reminder.Reminder;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -39,6 +41,9 @@ public class Person {
     private final Income income;
     private final Details details;
     private final List<Interaction> interactions = new ArrayList<>();
+
+    // Dependant fields
+    private Reminder reminder;
 
     /**
      * Creates a {@code Person} given a PersonBuilder.
@@ -128,6 +133,41 @@ public class Person {
     public List<Interaction> addInteractions(List<Interaction> interactions) {
         this.interactions.addAll(interactions);
         return this.interactions;
+    }
+
+    public LocalDate getFollowUpDate() {
+        if (interactions.isEmpty() || lead == null) {
+            return null; //TODO: Think if returning null here causes any issues
+        }
+        LocalDate latestInteractionDate = interactions.get(interactions.size() - 1).getDate(); 
+        //TODO: Think if the lastest interaction is always the last one in the list
+        int weeksToAdd = lead.getFollowUpPeriod();
+        return latestInteractionDate.plusWeeks(weeksToAdd);
+    }  
+
+    /**
+     * Adds a Reminder to the list.
+     * The Reminder must not already exist in the list.
+     */
+    public void updateReminder() {
+        //Person must have lead and interaciton to have a reminder
+        //If person has no lead or interaction, remove reminder
+        if (this.getFollowUpDate() == null) {
+            internalList.remove(personToReminderMap.get(person));
+            return;
+        }
+
+        Reminder toAdd = new Reminder(person);
+        if (contains(toAdd)) {
+            return;
+        }
+
+        if (personToReminderMap.containsKey(person)) {
+            internalList.remove(personToReminderMap.get(person));
+        }
+
+        internalList.add(toAdd);
+        personToReminderMap.put(person, toAdd);
     }
 
     /**

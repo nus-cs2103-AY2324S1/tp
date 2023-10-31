@@ -1,7 +1,6 @@
 package seedu.address.model.reminder;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -12,8 +11,6 @@ import java.util.stream.Collectors;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.interaction.Interaction;
-import seedu.address.model.reminder.exceptions.DuplicateReminderException;
 
 /**
  * A list of Reminders that enforces uniqueness between its elements and does not allow nulls.
@@ -57,31 +54,6 @@ public class UniqueReminderList implements Iterable<Reminder> {
             reminderList = new UniqueReminderList();
         }
         return reminderList;
-    }
-
-    /**
-     * Adds a Reminder to the list.
-     * The Reminder must not already exist in the list.
-     */
-    public void add(Person person) {
-        requireAllNonNull(person);
-        Interaction interaction = person.getLastInteraction();
-
-        if (interaction == null) {
-            return;
-        }
-
-        Reminder toAdd = new Reminder(person, interaction.getDate());
-        if (contains(toAdd)) {
-            throw new DuplicateReminderException();
-        }
-
-        if (personToReminderMap.containsKey(person)) {
-            internalList.remove(personToReminderMap.get(person));
-        }
-
-        internalList.add(toAdd);
-        personToReminderMap.put(person, toAdd);
     }
 
     /**

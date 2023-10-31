@@ -95,12 +95,4 @@ public interface Model {
      * Returns the currently selected person
      */
     SimpleObjectProperty<Person> getSelectedPerson();
-<<<<<<< Updated upstream
-
-    /**
-     * Updates the reminder list with the given {@code Person Interaction}.
-     */
-    void addReminder(Person person);
-=======
->>>>>>> Stashed changes
 }
