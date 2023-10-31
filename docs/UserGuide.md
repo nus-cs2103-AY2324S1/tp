@@ -400,30 +400,6 @@ If your changes to the data file makes its format invalid, Foster Family will di
 </div>
 
 --------------------------------------------------------------------------------------------------------------------
-## Planned Enhancements 
-
-### Enhanced Duplicate Detection 
-Currently, duplicate detection for fosterers detect only for exact string/value matches. For instance, `John Doe` and `john doe` are likely to be the same person, but Foster Family will not detect the duplicate. Similarly, `John  Doe` will also not be detected as a duplicate. Hence, a future enhancement we will make is to remove case sensitivity, and to ensure that extra white spaces are removed when parsing input.
-
-### Shorter Command Formats
-Currently, the default add command may be too long for an average typer to key in quickly. A future enhancement we are planning would be to allow the addition of a fosterer with just the basic details, such as their name, phone number, email, housing type and availability. Only when the fosterer is ready to foster, then other details such as animal name, animal type and address need to be filled in via the `edit` command. 
-
-We are also planning to shorten some input parameters when adding or editing a fosterer:
-
-| Current                   | Enhancement |
-|---------------------------|-------------|
-| availability/Available    | avail/true  |
-| availability/NotAvailable | avail/false |
-| availability/nil          | avail/nil   |
-
-
-
-### Case Sensitivity of Inputs
-
-
-### Specificity of Error Messages
-
---------------------------------------------------------------------------------------------------------------------
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
