@@ -65,10 +65,15 @@ create CommandResult
 DeleteCommand -> CommandResult
 activate CommandResult
 
-CommandResult --> LogicManager : result
+CommandResult --> DeleteCommand
 deactivate CommandResult
+
+DeleteCommand --> LogicManager : result
+deactivate DeleteCommand
+DeleteCommand -[hidden]-> InputParser
 destroy DeleteCommand
 
 [<--LogicManager
 deactivate LogicManager
+deactivate CommandResult
 @enduml
