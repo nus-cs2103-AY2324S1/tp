@@ -547,6 +547,38 @@ Deletes a schedule in the address book based on their index number in the table 
 * `Invalid value in parameter SCHEDULE_INDEX`: Parameter given is not a numerical value.
 * `Missing parameter SCHEDULE_INDEX`: A numerical value is not provided when calling the command `delete-s`.
 
+#### View calendar: `show`
+
+Display schedules on a specified day as a calendar view.
+
+**Format:** `show DATE`
+
+**Acceptable values**:
+* `DATE`: Only dates in `yyyy-MM-dd` format is accepted
+
+**Example:**
+* `show 2023-01-06` shows all schedules on 6 Jan 2023.
+* `show 2023-09-25` shows all schedules on 25 September 2023.
+
+**Expected output:**
+* Viewing calendar.
+
+![show calendar](images/showCalendar.png)
+
+**Error messages**:
+* `Invalid command format!`: Invalid or missing DATE.
+
+<div markdown="block" class="alert alert-warning">
+
+**:warning: Calendar Limitations**<br>
+* Currently, the calendar does not support displaying of schedules that extend over multiple days.
+* Schedules with very short duration may not be displayed correctly (the schedule's index, status and time will not be visible).
+* Adding or modifying schedules will hide the calendar view. Use `show DATE` to view calendar again. 
+
+</div>
+
+[Back To Top](#table-of-contents)
+
 ### System Feature
 
 Beyond just providing you with powerful features related to tutors and schedule tracking, TutorConnect offers some 

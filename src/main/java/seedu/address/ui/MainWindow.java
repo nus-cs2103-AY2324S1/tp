@@ -16,7 +16,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.ListScheduleCommand;
-import seedu.address.logic.commands.ListTutorCommand;
+import seedu.address.logic.commands.ShowCalendarCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -36,6 +36,7 @@ public class MainWindow extends UiPart<Stage> {
     // Independent Ui parts residing in this Ui container
     private PersonListPanel personListPanel;
     private ScheduleListPanel scheduleListPanel;
+    private CalendarPanel calendarPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
 
@@ -53,7 +54,6 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane statusbarPlaceholder;
-
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
      */
@@ -125,9 +125,10 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
+        calendarPanel = new CalendarPanel(logic.getFilteredPersonList(), logic.getFilteredScheduleList());
         scheduleListPanel = new ScheduleListPanel(logic.getFilteredScheduleList());
-
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
+
         listPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
@@ -185,9 +186,15 @@ public class MainWindow extends UiPart<Stage> {
      * Displays either the list of schedules or tutors based on the command result
      */
     private void handleListDisplay(CommandResult commandResult) {
-        if (commandResult.getFeedbackToUser().equals(ListScheduleCommand.MESSAGE_SUCCESS)) {
+        // TODO: Update this when there are both lists displayed simultaneously
+        switch (commandResult.getFeedbackToUser()) {
+        case ListScheduleCommand.MESSAGE_SUCCESS:
             showSchedules();
-        } else if (commandResult.getFeedbackToUser().equals(ListTutorCommand.MESSAGE_SUCCESS)) {
+            break;
+        case ShowCalendarCommand.MESSAGE_SUCCESS:
+            showCalendar();
+            break;
+        default:
             showPersons();
         }
     }
@@ -210,6 +217,14 @@ public class MainWindow extends UiPart<Stage> {
     void showSchedules() {
         listPanelPlaceholder.getChildren().clear();
         listPanelPlaceholder.getChildren().add(scheduleListPanel.getRoot());
+    }
+
+    /**
+     * Shows calendar of filtered schedule cards.
+     */
+    void showCalendar() {
+        listPanelPlaceholder.getChildren().clear();
+        listPanelPlaceholder.getChildren().add(calendarPanel.getRoot());
     }
 
     /**
