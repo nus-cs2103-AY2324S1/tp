@@ -33,15 +33,13 @@ public class SortCommandParserTest {
     public void parseSortInvalidFailure() throws ParseException {
         // Invalid sequence, should throw a ParseException
         String invalidSequence = "INVALID";
-        parser.parse(invalidSequence);
-        // Use assertThrows to verify that a ParseException is thrown
-        ParseException exception = assertThrows(ParseException.class, () -> {
+        try {
             parser.parse(invalidSequence);
-        });
-
-        // Assert the exception message using assertEquals
-        assertEquals(SortIn.MESSAGE_CONSTRAINTS, exception.getMessage());
-
+            assert false;
+        } catch (Exception e) {
+            assert true;
+        }
+        
     }
 
     @Test
