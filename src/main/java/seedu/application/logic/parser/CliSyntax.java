@@ -15,5 +15,6 @@ public class CliSyntax {
     public static final Prefix PREFIX_INTERVIEW_TYPE = new Prefix("it/");
     public static final Prefix PREFIX_INTERVIEW_ADDRESS = new Prefix("ia/");
     public static final Prefix PREFIX_INTERVIEW_DATETIME = new Prefix("id/");
+    public static final Prefix PREFIX_INTERVIEW_DELETE = new Prefix("from/");
 
 }

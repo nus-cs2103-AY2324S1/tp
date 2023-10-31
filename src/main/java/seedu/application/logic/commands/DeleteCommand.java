@@ -33,6 +33,7 @@ public class DeleteCommand extends Command {
      * @param targetIndex The index of the job to be deleted.
      */
     public DeleteCommand(Index targetIndex) {
+        requireNonNull(targetIndex);
         this.targetIndex = targetIndex;
     }
 

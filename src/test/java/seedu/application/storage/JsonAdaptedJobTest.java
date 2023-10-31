@@ -1,10 +1,13 @@
 package seedu.application.storage;
 
+import java.util.ArrayList;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.application.storage.JsonAdaptedJob.MISSING_FIELD_MESSAGE_FORMAT;
 import static seedu.application.testutil.Assert.assertThrows;
 import static seedu.application.testutil.TypicalJobs.CLEANER;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import seedu.application.commons.exceptions.IllegalValueException;
@@ -24,6 +27,7 @@ public class JsonAdaptedJobTest {
     private static final String VALID_DEADLINE = CLEANER.getDeadline().toString();
     private static final String VALID_JOB_TYPE = CLEANER.getJobType().toString();
     private static final String VALID_INDUSTRY = CLEANER.getIndustry().toString();
+    private static ArrayList<JsonAdaptedInterview> list = new ArrayList<>();
 
     @Test
     public void toModelType_validJobDetails_returnsJob() throws Exception {
