@@ -49,7 +49,7 @@ public class DeleteCommandParserTest {
     public void test_parse_descriptorAppointment() {
         String userString = " id/" + PersonBuilder.DEFAULT_NRIC + " ap/";
         DeletePersonDescriptor descriptor = new DeletePersonDescriptor();
-        descriptor.setAppointment();
+        descriptor.setShouldDeleteAppointment();
         DeleteCommand deleteCommand = new DeleteCommand(defaultNric, null, descriptor);
         assertParseSuccess(parser, userString, deleteCommand);
     }
@@ -58,7 +58,7 @@ public class DeleteCommandParserTest {
     public void test_parse_descriptorMedicalHistory() {
         String userString = " id/" + PersonBuilder.DEFAULT_NRIC + " m/";
         DeletePersonDescriptor descriptor = new DeletePersonDescriptor();
-        descriptor.setMedicalHistory();
+        descriptor.setShouldDeleteMedicalHistory();
         DeleteCommand deleteCommand = new DeleteCommand(defaultNric, null, descriptor);
         assertParseSuccess(parser, userString, deleteCommand);
     }

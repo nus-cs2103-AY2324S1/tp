@@ -164,11 +164,11 @@ public class DeleteCommand extends UndoableCommand {
         Appointment updatedAppointment = personToEdit.getAppointment().isPresent() ? personToEdit.getAppointment().get()
                 : null;
 
-        if (deletePersonDescriptor.getMedicalHistory()) {
+        if (deletePersonDescriptor.getShouldDeleteMedicalHistory()) {
             updatedMedicalHistories = new HashSet<MedicalHistory>();
         }
 
-        if (deletePersonDescriptor.getAppointment()) {
+        if (deletePersonDescriptor.getShouldDeleteAppointment()) {
             updatedAppointment = null;
         }
 
@@ -188,19 +188,19 @@ public class DeleteCommand extends UndoableCommand {
         public DeletePersonDescriptor() {
         }
 
-        public void setMedicalHistory() {
+        public void setShouldDeleteMedicalHistory() {
             this.shoudlDeleteMedicalHistory = true;
         }
 
-        public boolean getMedicalHistory() {
+        public boolean getShouldDeleteMedicalHistory() {
             return this.shoudlDeleteMedicalHistory;
         }
 
-        public void setAppointment() {
+        public void setShouldDeleteAppointment() {
             this.shouldDeleteAppointment = true;
         }
 
-        public boolean getAppointment() {
+        public boolean getShouldDeleteAppointment() {
             return this.shouldDeleteAppointment;
         }
 

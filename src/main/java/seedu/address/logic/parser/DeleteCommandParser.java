@@ -63,11 +63,11 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
         DeletePersonDescriptor deletePersonDescriptor = new DeletePersonDescriptor();
 
         if (argMultimap.prefixExist(PREFIX_MEDICAL)) {
-            deletePersonDescriptor.setMedicalHistory();
+            deletePersonDescriptor.setShouldDeleteMedicalHistory();
         }
 
         if (argMultimap.prefixExist(PREFIX_APPOINTMENT)) {
-            deletePersonDescriptor.setAppointment();
+            deletePersonDescriptor.setShouldDeleteAppointment();
         }
 
         return new DeleteCommand(nric, name, deletePersonDescriptor);

@@ -87,8 +87,8 @@ public class DeleteCommandTest {
         Person firstPerson = model.getFilteredPersonList().get(0);
 
         DeletePersonDescriptor descriptor = new DeletePersonDescriptor();
-        descriptor.setAppointment();
-        descriptor.setMedicalHistory();
+        descriptor.setShouldDeleteAppointment();
+        descriptor.setShouldDeleteMedicalHistory();
 
         DeleteCommand command = new DeleteCommand(firstPerson.getNric(), null, descriptor);
         command.execute(model);
@@ -102,11 +102,11 @@ public class DeleteCommandTest {
     public void deletePersonDescriptor_setterMethods() {
         DeletePersonDescriptor descriptor = new DeletePersonDescriptor();
 
-        descriptor.setAppointment();
-        descriptor.setMedicalHistory();
+        descriptor.setShouldDeleteAppointment();
+        descriptor.setShouldDeleteMedicalHistory();
 
-        assertTrue(descriptor.getAppointment());
-        assertTrue(descriptor.getMedicalHistory());
+        assertTrue(descriptor.getShouldDeleteAppointment());
+        assertTrue(descriptor.getShouldDeleteMedicalHistory());
     }
 
     @Test
@@ -116,7 +116,7 @@ public class DeleteCommandTest {
 
         assertTrue(descriptor.isAllFalse());
 
-        descriptor.setAppointment();
+        descriptor.setShouldDeleteAppointment();
 
         assertFalse(descriptor.isAllFalse());
     }
@@ -166,7 +166,7 @@ public class DeleteCommandTest {
 
         // different person -> returns false
         DeletePersonDescriptor descriptorDifferent = new DeletePersonDescriptor();
-        descriptorDifferent.setAppointment();
+        descriptorDifferent.setShouldDeleteAppointment();
         assertFalse(descriptor.equals(descriptorDifferent));
     }
 
@@ -200,7 +200,7 @@ public class DeleteCommandTest {
         Person firstPerson = model.getFilteredPersonList().get(0);
 
         DeletePersonDescriptor descriptor = new DeletePersonDescriptor();
-        descriptor.setAppointment();
+        descriptor.setShouldDeleteAppointment();
 
         DeleteCommand deleteFieldsCommand = new DeleteCommand(firstPerson.getNric(), null, descriptor);
         deleteFieldsCommand.execute(model);
