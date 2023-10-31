@@ -53,7 +53,16 @@ public class ModelManager implements Model {
         filteredLessons = new FilteredList<>(this.scheduleList.getLessonList());
         personToLessonMap = new BiDirectionalMap<>();
     }
-    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs, ReadOnlySchedule scheduleList, BiDirectionalMap<Person,Lesson> map) {
+
+    /**
+     * Initializes a ModelManager with the given addressBook and userPrefs and scheduleList and map.
+     * @param addressBook
+     * @param userPrefs
+     * @param scheduleList
+     * @param map
+     */
+    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs,
+                        ReadOnlySchedule scheduleList, BiDirectionalMap<Person, Lesson> map) {
         this(addressBook, userPrefs, scheduleList);
         personToLessonMap = map;
     }

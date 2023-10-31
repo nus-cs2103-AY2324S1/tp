@@ -1,28 +1,41 @@
 package seedu.address.logic.commands;
 
+import java.util.Set;
+
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.lessons.Lesson;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 
-import java.util.Set;
-
+/**
+ * Links a student to a lesson
+ */
 public class LinkCommand extends Command {
+    /**
+     * The COMMAND_WORD where a -lesson and -student is required
+     */
     public static final String COMMAND_WORD = "link";
+    /**
+     * The COMMAND_WORD where only the name of the linked lesson or student is required
+     */
     public static final String STATEFUL_COMMAND_WORD = "linkTo";
-    private Name LessonName;
-    private Name StudentName;
-    public LinkCommand(Name LessonName, Name StudentName) {
-        this.LessonName = LessonName;
-        this.StudentName = StudentName;
+    private Name lessonName;
+    private Name studentName;
+
+    /**
+     * Creates a LinkCommand to link the specified {@code Person} to the specified {@code Lesson}
+     */
+    public LinkCommand(Name lessonName, Name studentName) {
+        this.lessonName = lessonName;
+        this.studentName = studentName;
     }
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        Set<Person> personSet = model.getPersonsFulfill(person -> person.getName().equals(StudentName));
-        Set<Lesson> lessonSet = model.getLessonsFulfill(lesson -> lesson.getName().equals(LessonName));
+        Set<Person> personSet = model.getPersonsFulfill(person -> person.getName().equals(studentName));
+        Set<Lesson> lessonSet = model.getLessonsFulfill(lesson -> lesson.getName().equals(lessonName));
         if (personSet.isEmpty()) {
-            throw new CommandException("No such student with name " + StudentName.toString() + " found");
+            throw new CommandException("No such student with name " + studentName.toString() + " found");
         } else if (personSet.size() > 1) {
             throw new CommandException("Multiple students with the same name");
         } else if (lessonSet.isEmpty()) {
