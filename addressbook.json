@@ -1,0 +1,242 @@
+{
+  "persons" : [ {
+    "name" : "Alex Yeoh",
+    "phone" : "87438807",
+    "email" : "alexyeoh@example.com",
+    "telegram" : "@alexyeoh",
+    "tags" : [ "tutorial" ],
+    "courses" : [ {
+      "name" : "Software Engineering",
+      "courseCode" : "CS2103T",
+      "lessons" : [ {
+        "name" : "Tutorial",
+        "courseCode" : "CS2103T",
+        "startTime" : "10:00",
+        "dayOfWeek" : "TUESDAY",
+        "endTime" : "12:00"
+      }, {
+        "name" : "Lecture",
+        "courseCode" : "CS2103T",
+        "startTime" : "10:00",
+        "dayOfWeek" : "MONDAY",
+        "endTime" : "12:00"
+      }, {
+        "name" : "Laboratory",
+        "courseCode" : "CS2103T",
+        "startTime" : "10:00",
+        "dayOfWeek" : "WEDNESDAY",
+        "endTime" : "12:00"
+      } ]
+    } ],
+    "hour" : "8",
+    "intervals" : [ "11:30-12:30", "11:30-12:30", "11:30-12:30", "11:30-12:30", "11:30-12:30" ]
+  }, {
+    "name" : "Bernice Yu",
+    "phone" : "99272758",
+    "email" : "berniceyu@example.com",
+    "telegram" : "@berrrrrnice",
+    "tags" : [ "laboratory", "tutorial" ],
+    "courses" : [ {
+      "name" : "Software Engineering",
+      "courseCode" : "CS2103T",
+      "lessons" : [ {
+        "name" : "Tutorial",
+        "courseCode" : "CS2103T",
+        "startTime" : "10:00",
+        "dayOfWeek" : "TUESDAY",
+        "endTime" : "12:00"
+      }, {
+        "name" : "Lecture",
+        "courseCode" : "CS2103T",
+        "startTime" : "10:00",
+        "dayOfWeek" : "MONDAY",
+        "endTime" : "12:00"
+      }, {
+        "name" : "Laboratory",
+        "courseCode" : "CS2103T",
+        "startTime" : "10:00",
+        "dayOfWeek" : "WEDNESDAY",
+        "endTime" : "12:00"
+      } ]
+    } ],
+    "hour" : "2",
+    "intervals" : [ "12:30-13:30", "12:30-13:30", "12:30-13:30", "12:30-13:30", "12:30-13:30" ]
+  }, {
+    "name" : "Charlotte Oliveiro",
+    "phone" : "93210283",
+    "email" : "charlotte@example.com",
+    "telegram" : "@heyimcharlotte",
+    "tags" : [ "tutorial" ],
+    "courses" : [ {
+      "name" : "Software Engineering",
+      "courseCode" : "CS2103T",
+      "lessons" : [ {
+        "name" : "Tutorial",
+        "courseCode" : "CS2103T",
+        "startTime" : "10:00",
+        "dayOfWeek" : "TUESDAY",
+        "endTime" : "12:00"
+      }, {
+        "name" : "Lecture",
+        "courseCode" : "CS2103T",
+        "startTime" : "10:00",
+        "dayOfWeek" : "MONDAY",
+        "endTime" : "12:00"
+      }, {
+        "name" : "Laboratory",
+        "courseCode" : "CS2103T",
+        "startTime" : "10:00",
+        "dayOfWeek" : "WEDNESDAY",
+        "endTime" : "12:00"
+      } ]
+    } ],
+    "hour" : "8",
+    "intervals" : [ null, null, null, null, null ]
+  }, {
+    "name" : "David Li",
+    "phone" : "91031282",
+    "email" : "lidavid@example.com",
+    "telegram" : "@davidli123",
+    "tags" : [ "tutorial" ],
+    "courses" : [ {
+      "name" : "Software Engineering",
+      "courseCode" : "CS2103T",
+      "lessons" : [ {
+        "name" : "Tutorial",
+        "courseCode" : "CS2103T",
+        "startTime" : "10:00",
+        "dayOfWeek" : "TUESDAY",
+        "endTime" : "12:00"
+      }, {
+        "name" : "Lecture",
+        "courseCode" : "CS2103T",
+        "startTime" : "10:00",
+        "dayOfWeek" : "MONDAY",
+        "endTime" : "12:00"
+      }, {
+        "name" : "Laboratory",
+        "courseCode" : "CS2103T",
+        "startTime" : "10:00",
+        "dayOfWeek" : "WEDNESDAY",
+        "endTime" : "12:00"
+      } ]
+    } ],
+    "hour" : "10",
+    "intervals" : [ "14:30-15:30", "14:30-15:30", "14:30-15:30", "14:30-15:30", "14:30-15:30" ]
+  }, {
+    "name" : "Irfan Ibrahim",
+    "phone" : "92492021",
+    "email" : "irfan@example.com",
+    "telegram" : "@irfannn",
+    "tags" : [ "lecture" ],
+    "courses" : [ {
+      "name" : "Discrete Structures",
+      "courseCode" : "CS1231S",
+      "lessons" : [ {
+        "name" : "Laboratory",
+        "courseCode" : "CS1231S",
+        "startTime" : "10:00",
+        "dayOfWeek" : "WEDNESDAY",
+        "endTime" : "12:00"
+      }, {
+        "name" : "Lecture",
+        "courseCode" : "CS1231S",
+        "startTime" : "10:00",
+        "dayOfWeek" : "MONDAY",
+        "endTime" : "12:00"
+      }, {
+        "name" : "Tutorial",
+        "courseCode" : "CS1231S",
+        "startTime" : "10:00",
+        "dayOfWeek" : "TUESDAY",
+        "endTime" : "12:00"
+      } ]
+    } ],
+    "hour" : "20",
+    "intervals" : [ null, null, null, null, null ]
+  }, {
+    "name" : "Roy Balakrishnan",
+    "phone" : "92624417",
+    "email" : "royb@example.com",
+    "telegram" : "@rollieroy",
+    "tags" : [ "tutorial" ],
+    "courses" : [ {
+      "name" : "Discrete Structures",
+      "courseCode" : "CS1231S",
+      "lessons" : [ {
+        "name" : "Laboratory",
+        "courseCode" : "CS1231S",
+        "startTime" : "10:00",
+        "dayOfWeek" : "WEDNESDAY",
+        "endTime" : "12:00"
+      }, {
+        "name" : "Lecture",
+        "courseCode" : "CS1231S",
+        "startTime" : "10:00",
+        "dayOfWeek" : "MONDAY",
+        "endTime" : "12:00"
+      }, {
+        "name" : "Tutorial",
+        "courseCode" : "CS1231S",
+        "startTime" : "10:00",
+        "dayOfWeek" : "TUESDAY",
+        "endTime" : "12:00"
+      } ]
+    } ],
+    "hour" : "5",
+    "intervals" : [ "11:30-12:30", "11:30-12:30", "11:30-12:30", "11:30-12:30", "11:30-12:30" ]
+  }, {
+    "name" : "John Doe",
+    "phone" : "98765432",
+    "email" : "johnd@example.com",
+    "telegram" : "@johnd",
+    "tags" : [ "laboratory" ],
+    "courses" : [ {
+      "name" : "Computer Organisation",
+      "courseCode" : "CS2100",
+      "lessons" : [ {
+        "name" : "Laboratory",
+        "courseCode" : "CS2100",
+        "startTime" : "10:00",
+        "dayOfWeek" : "WEDNESDAY",
+        "endTime" : "12:00"
+      }, {
+        "name" : "Lecture",
+        "courseCode" : "CS2100",
+        "startTime" : "10:00",
+        "dayOfWeek" : "MONDAY",
+        "endTime" : "12:00"
+      }, {
+        "name" : "Tutorial",
+        "courseCode" : "CS2100",
+        "startTime" : "10:00",
+        "dayOfWeek" : "TUESDAY",
+        "endTime" : "12:00"
+      } ]
+    }, {
+      "name" : "Discrete Structures",
+      "courseCode" : "CS1231S",
+      "lessons" : [ {
+        "name" : "Laboratory",
+        "courseCode" : "CS1231S",
+        "startTime" : "10:00",
+        "dayOfWeek" : "WEDNESDAY",
+        "endTime" : "12:00"
+      }, {
+        "name" : "Lecture",
+        "courseCode" : "CS1231S",
+        "startTime" : "10:00",
+        "dayOfWeek" : "MONDAY",
+        "endTime" : "12:00"
+      }, {
+        "name" : "Tutorial",
+        "courseCode" : "CS1231S",
+        "startTime" : "10:00",
+        "dayOfWeek" : "TUESDAY",
+        "endTime" : "12:00"
+      } ]
+    } ],
+    "hour" : "10",
+    "intervals" : [ "10:00-12:00", "10:00-12:00", "10:00-12:00", "10:00-12:00", "10:00-12:00" ]
+  } ]
+}

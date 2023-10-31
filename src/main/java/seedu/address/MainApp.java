@@ -94,7 +94,7 @@ public class MainApp extends Application {
             }
             if (!coursesOptional.isPresent()) {
                 logger.info("Creating a new data file " + storage.getCoursesFilePath()
-                        + " populated with a sample Courses.");
+                        + " populated with sample Courses.");
             }
             initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
             courseData = coursesOptional.orElseGet(SampleDataUtil::getSampleCoursesData);
@@ -104,7 +104,7 @@ public class MainApp extends Application {
                     + " Will be starting with an empty AddressBook.");
             initialData = new AddressBook();
             logger.warning("Data file at " + storage.getCoursesFilePath() + " could not be loaded."
-                    + " Will be starting with an empty Courses.");
+                    + " Will be starting with empty Courses.");
             courseData = List.of();
             UniqueCourseList.setCourses(courseData);
         } catch (IOException e) {
