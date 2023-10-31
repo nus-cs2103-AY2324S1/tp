@@ -5,6 +5,9 @@ import seedu.address.commons.util.CollectionUtil;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.calendar.Calendar;
 import seedu.address.model.event.AllDaysEventListManager;
+import seedu.address.model.event.Event;
+import seedu.address.model.event.EventDescription;
+import seedu.address.model.event.EventPeriod;
 import seedu.address.model.event.SingleDayEventList;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
@@ -12,9 +15,11 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
 
+import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
@@ -51,36 +56,49 @@ public class EditContactEventCommand extends Command {
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
     private final Index index;
-    private final EditPersonDescriptor editPersonDescriptor;
+    private final EditEventDescriptor editEventDescriptor;
 
 
-    public static class EditPersonDescriptor {
+    public static class EditEventDescriptor {
         private Calendar calendar;
-        public EditPersonDescriptor() {}
+        private Event event;
+        private EventDescription eventDescription;
+        private EventPeriod eventPeriod;
+        private LocalDateTime start;
+        private LocalDateTime end;
+
+        public EditEventDescriptor() {}
 
         /**
          * Copy constructor.
          * A defensive copy of {@code tags} is used internally.
          */
-        public EditPersonDescriptor(EditPersonDescriptor toCopy) {
-            setCalendar(toCopy.calendar);
-            AllDaysEventListManager allDaysEventListManager = calendar.getEventManager();
-            Collection<SingleDayEventList> eventListCollection = allDaysEventListManager
+        public EditEventDescriptor(EditEventDescriptor toCopy) {
+            setEventPeriod(toCopy.eventPeriod);
+            setEventDescription(toCopy.eventDescription);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(calendar);
+            return CollectionUtil.isAnyNonNull(eventDescription, eventPeriod.);
         }
 
-        public void setCalendar(Calendar calendar) {
-            this.calendar = calendar;
+        public void setEventDescription(EventDescription eventDescription) {
+            this.eventDescription = eventDescription;
         }
 
-        public Optional<Calendar> getCalendar() {
-            return Optional.ofNullable(calendar);
+        public Optional<EventDescription> getEventDescription() {
+            return Optional.ofNullable(eventDescription);
+        }
+
+        public void setEventPeriod(EventPeriod eventPeriod) {
+            this.eventPeriod = eventPeriod;
+        }
+
+        public Optional<EventPeriod> getEventPeriod() {
+            return Optional.ofNullable(eventPeriod);
         }
 
         @Override
@@ -90,22 +108,22 @@ public class EditContactEventCommand extends Command {
             }
 
             // instanceof handles nulls
-            if (!(other instanceof EditPersonDescriptor)) {
+            if (!(other instanceof EditEventDescriptor)) {
                 return false;
             }
 
-            EditPersonDescriptor otherEditPersonDescriptor = (EditPersonDescriptor) other;
-            return Objects.equals(calendar, otherEditPersonDescriptor.calendar);
+            EditEventDescriptor otherEditEventDescriptor = (EditEventDescriptor) other;
+            boolean isSameEventDescription = Object
+            return Objects.equals(eventDescription, otherEditEventDescriptor.eventDescription)
+                    && Objects.equals(eventPeriod, otherEditEventDescriptor.eventPeriod);
         }
 
         @Override
         public String toString() {
             return new ToStringBuilder(this)
-                    .add("name", name)
-                    .add("phone", phone)
-                    .add("email", email)
-                    .add("address", address)
-                    .add("tags", tags)
+                    .add("eventDescription", eventDescription)
+                    .add("start", eventPeriod.getStart())
+                    .add("end", eventPeriod.getEnd())
                     .toString();
         }
     }

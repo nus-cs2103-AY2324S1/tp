@@ -53,6 +53,10 @@ public class EventPeriod implements Comparable<EventPeriod> {
         return this.start;
     }
 
+    public LocalDateTime getEnd() {
+        return this.end;
+    }
+
     /**
      * Creates and returns a new EventPeriod object with minimum date/time values.
      *

@@ -150,6 +150,17 @@ public class AllDaysEventListManager {
     }
 
     /**
+     * Returns the event list as an Event List.
+     */
+    public List<Event> asEventList() {
+        List<Event> list = dayToEventListMap.values().stream()
+                .flatMap(singleDayEventList -> singleDayEventList.getDayEventList().stream())
+                .map(Event::getParentEvent).distinct()
+                .collect(Collectors.toList());
+        return list;
+    }
+
+    /**
      * Returns the event list as an unmodifiable {@code ObservableList}.
      */
     public ObservableList<Event> asUnmodifiableObservableList() {
