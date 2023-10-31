@@ -3,6 +3,8 @@ package seedu.address.model.person.fields;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+import static seedu.address.commons.util.AppUtil.checkArgument;
+
 /**
  * Represents a Person's interview time in the address book.
  */
@@ -23,6 +25,7 @@ public class InterviewTime {
      * @param interviewTime A valid interview time.
      */
     public InterviewTime(String interviewTime) {
+        checkArgument(isValidTime(interviewTime), MESSAGE_CONSTRAINTS);
         this.time = interviewTime;
     }
 
@@ -39,7 +42,8 @@ public class InterviewTime {
             return true;
         }
 
-        if (other == null || getClass() != other.getClass()) {
+        //instanceof handles null
+        if (!(other instanceof InterviewTime)) {
             return false;
         }
 
