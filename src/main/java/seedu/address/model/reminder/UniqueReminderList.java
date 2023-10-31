@@ -2,8 +2,7 @@ package seedu.address.model.reminder;
 
 import static java.util.Objects.requireNonNull;
 
-import java.util.Date;
-import java.util.HashMap;
+import java.time.LocalDate;
 import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -21,11 +20,12 @@ import seedu.address.model.person.Person;
  */
 public class UniqueReminderList implements Iterable<Reminder> {
 
-    private static UniqueReminderList reminderList;
+    private static UniqueReminderList reminderListinstance;
+
+    private boolean isReminderListDirty = false;
 
     private final ObservableList<Reminder> internalList;
     private final ObservableList<Reminder> internalUnmodifiableList;
-    private final HashMap<Person, Reminder> personToReminderMap;
 
     /**
      * Constructor of UniqueReminderList
@@ -33,7 +33,21 @@ public class UniqueReminderList implements Iterable<Reminder> {
     private UniqueReminderList() {
         internalList = FXCollections.observableArrayList();
         internalUnmodifiableList = FXCollections.unmodifiableObservableList(internalList);
-        personToReminderMap = new HashMap<>();
+    }
+
+    /**
+     * Sets the reminder list to be dirty.
+     * To be called when the reminder list is modified.
+     */
+    public void setRemidnerListDirty() {
+        isReminderListDirty = true;
+    }
+    
+    /**
+     * Returns true if the list contains no Reminders.
+     */
+    public boolean isEmpty() {
+        return internalList.isEmpty();
     }
 
     /**
@@ -50,10 +64,10 @@ public class UniqueReminderList implements Iterable<Reminder> {
      * @return Produced UniqueReminderList object that is a Singleton.
      */
     public static UniqueReminderList getInstance() {
-        if (reminderList == null) {
-            reminderList = new UniqueReminderList();
+        if (reminderListinstance == null) {
+            reminderListinstance = new UniqueReminderList();
         }
-        return reminderList;
+        return reminderListinstance;
     }
 
     /**
@@ -64,18 +78,27 @@ public class UniqueReminderList implements Iterable<Reminder> {
     }
 
     /**
-     * Returns the list of reminders after a specific date.
+     * Returns the earliest reminder time in the {@code UniqueReminderList}
+     */
+    public long getEarliestReminderTime() {
+        if (internalList.isEmpty()) {
+            return -1;
+        }
+        return internalList.stream().mapToLong(Reminder::getDueTime).min().getAsLong();
+    }
+
+    /**
+     * Returns the list of reminders associated with a specific date.
      *
      * @param date The date that which is used to retrieve the list of reminders.
      * @return the list of reminders mapped from the given date.
      */
-    public ObservableList<Reminder> getRemindersAfterDate(Date date) {
+    public ObservableList<Reminder> getRemindersAfterDate(LocalDate date) {
         ObservableList<Reminder> reminderList = FXCollections.observableArrayList();
-        List<Reminder> retrievedReminders = personToReminderMap.entrySet()
-                .stream()
-                .map(x -> x.getValue())
-                .filter(a->a.compareTo(date) == 1)
+        List<Reminder> retrievedReminders = internalList.stream()
+                .filter(a -> a.isAfter(date))
                 .collect(Collectors.toList());
+
         if (retrievedReminders == null) {
             return reminderList;
         }
@@ -84,14 +107,29 @@ public class UniqueReminderList implements Iterable<Reminder> {
     }
 
     /**
-     * Resets the internal list of reminders using the given list of persons.
+     * Updates the entire internal list of reminders using the given list of persons.
      *
      * @param personList The persons from which the reminders are to be produced.
      */
-    public void setReminders(ObservableList<Person> personList) {
+    public void updateReminders(ObservableList<Person> personList) {
+        requireNonNull(personList);
+        internalList.clear();
         for (Person person : personList) {
-            this.add(person);
+            person.updateReminder();
+            if (person.getReminder() != null) {
+                internalList.add(new Reminder(person));
+                
+            }
         }
+    }
+
+    public void updateRemindersIfDirty(ObservableList<Person> personList) {
+        if (!isReminderListDirty) {
+            return;
+        }
+        
+        updateReminders(personList);
+        isReminderListDirty = false;
     }
 
     public Iterator<Reminder> iterator() {

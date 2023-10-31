@@ -112,8 +112,11 @@ public class Person {
         return interactions;
     }
 
-    public Interaction getLastInteraction() {
-        return interactions.isEmpty() ? null : interactions.get(interactions.size() - 1);
+    /**
+     * Returns the reminder associated with this person.
+     */
+    public Reminder getReminder() {
+        return this.reminder;
     }
 
     /**
@@ -153,23 +156,20 @@ public class Person {
         //Person must have lead and interaciton to have a reminder
         //If person has no lead or interaction, remove reminder
         if (this.getFollowUpDate() == null) {
-            internalList.remove(personToReminderMap.get(person));
+            this.reminder = null;
             return;
         }
 
-        Reminder toAdd = new Reminder(person);
-        if (contains(toAdd)) {
+        Reminder updatedReminder = new Reminder(this);
+        if (this.reminder.equals(updatedReminder)) {
             return;
         }
 
-        if (personToReminderMap.containsKey(person)) {
-            internalList.remove(personToReminderMap.get(person));
-        }
-
-        internalList.add(toAdd);
-        personToReminderMap.put(person, toAdd);
+        this.reminder = updatedReminder;
     }
 
+    //TODO: Establish that this is not a bug. 
+    //If someone tries to make a new person with the same name it should not be allowed
     /**
      * Returns true if both persons have the same name.
      * This defines a weaker notion of equality between two persons.

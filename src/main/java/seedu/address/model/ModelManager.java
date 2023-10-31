@@ -40,7 +40,7 @@ public class ModelManager implements Model {
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
         this.reminderList = UniqueReminderList.getInstance();
-        this.reminderList.setReminders(addressBook.getPersonList());
+        this.reminderList.updateReminders(addressBook.getPersonList());
     }
 
     public ModelManager() {
@@ -144,6 +144,12 @@ public class ModelManager implements Model {
     @Override
     public SimpleObjectProperty<Person> getSelectedPerson() {
         return selectedPerson;
+    }
+
+    //=========== Reminder List Accessors =============================================================
+    @Override
+    public UniqueReminderList getReminderList() {
+        return reminderList;
     }
 
     @Override
