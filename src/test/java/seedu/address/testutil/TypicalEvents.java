@@ -8,7 +8,7 @@ import seedu.address.model.event.Meeting;
 /**
  * A utility class containing a list of {@code Meeting} objects to be used in tests.
  */
-public class TypicalMeetings {
+public class TypicalEvents {
 
     public static final Meeting TP_MEETING;
 
@@ -18,7 +18,6 @@ public class TypicalMeetings {
                     .withEventDate("2023-10-18")
                     .withEventStartTime("0000")
                     .withEventEndTime("2359")
-                    .withPerson("Alice Pauline", "Benson Meier")
                     .build();
         } catch (ParseException e) {
             throw new RuntimeException(e);

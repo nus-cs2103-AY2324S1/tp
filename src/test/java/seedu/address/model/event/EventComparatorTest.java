@@ -1,15 +1,15 @@
 package seedu.address.model.event;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static seedu.address.testutil.TypicalMeetings.MEETING_3_DAYS_AFTER_TODAY;
-import static seedu.address.testutil.TypicalMeetings.MEETING_6_DAYS_AFTER_TODAY;
-import static seedu.address.testutil.TypicalMeetings.MEETING_LATER_THAN_TP_MEETING;
-import static seedu.address.testutil.TypicalMeetings.MEETING_WITHOUT_END_TIME;
-import static seedu.address.testutil.TypicalMeetings.MEETING_WITHOUT_START_TIME;
-import static seedu.address.testutil.TypicalMeetings.MEETING_WITHOUT_TIME;
-import static seedu.address.testutil.TypicalMeetings.TP_MEETING;
-import static seedu.address.testutil.TypicalMeetings.TP_MEETING_EARLIER_END_TIME;
-import static seedu.address.testutil.TypicalMeetings.TP_MEETING_LATER_START_TIME;
+import static seedu.address.testutil.TypicalEvents.MEETING_3_DAYS_AFTER_TODAY;
+import static seedu.address.testutil.TypicalEvents.MEETING_6_DAYS_AFTER_TODAY;
+import static seedu.address.testutil.TypicalEvents.MEETING_LATER_THAN_TP_MEETING;
+import static seedu.address.testutil.TypicalEvents.MEETING_WITHOUT_END_TIME;
+import static seedu.address.testutil.TypicalEvents.MEETING_WITHOUT_START_TIME;
+import static seedu.address.testutil.TypicalEvents.MEETING_WITHOUT_TIME;
+import static seedu.address.testutil.TypicalEvents.TP_MEETING;
+import static seedu.address.testutil.TypicalEvents.TP_MEETING_EARLIER_END_TIME;
+import static seedu.address.testutil.TypicalEvents.TP_MEETING_LATER_START_TIME;
 
 import org.junit.jupiter.api.Test;
 

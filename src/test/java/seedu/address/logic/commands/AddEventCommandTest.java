@@ -309,6 +309,5 @@ public class AddEventCommandTest {
 
             return invalidGroups;
         }
-
     }
 }

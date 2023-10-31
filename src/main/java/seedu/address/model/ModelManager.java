@@ -138,7 +138,6 @@ public class ModelManager implements Model {
 
         // Reset the current persons list first
         this.filteredPersons.setPredicate(PREDICATE_SHOW_ALL_PERSONS);
-
         this.addressBook.setEvent(target, editedEvent);
         sort();
         this.filteredPersons.setPredicate(personPredicate);

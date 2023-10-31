@@ -2,6 +2,7 @@ package seedu.address.testutil;
 
 import seedu.address.logic.commands.EditEventCommand.EditEventDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.event.Event;
 import seedu.address.model.event.EventDate;
 import seedu.address.model.event.EventName;
 import seedu.address.model.event.Meeting;
@@ -9,33 +10,28 @@ import seedu.address.model.event.Meeting;
 /**
  * A utility class to help with building EditMeetingDescriptor objects.
  */
-public class EditMeetingDescriptorBuilder {
+public class EditEventDescriptorBuilder {
 
     private EditEventDescriptor descriptor;
 
     /**
      * Returns an {@code EditMeetingDescriptor} with fields containing {@code meeting}'s details
      */
-    public EditMeetingDescriptorBuilder(Meeting meeting) {
+    public EditEventDescriptorBuilder(Event event) {
         descriptor = new EditEventDescriptor();
-        descriptor.setName(meeting.getName());
-        descriptor.setDate(meeting.getStartDate());
-        descriptor.setPersonNames(meeting.getNames());
+        descriptor.setName(event.getName());
+        descriptor.setDate(event.getStartDate());
+        descriptor.setStartTime(event.getStartTime());
+        descriptor.setEndTime(event.getEndTime());
+        descriptor.setPersonNames(event.getNames());
+        descriptor.setGroups(event.getGroups());
     }
 
     /**
      * Sets the {@code Name} of the {@code EditMeetingDescriptor} that we are building.
      */
-    public EditMeetingDescriptorBuilder withName(String name) {
+    public EditEventDescriptorBuilder withName(String name) {
         descriptor.setName(new EventName(name));
-        return this;
-    }
-
-    /**
-     * Sets the {@code Date} of the {@code EditMeetingDescriptor} that we are building.
-     */
-    public EditMeetingDescriptorBuilder withDate(String date) throws ParseException {
-        descriptor.setDate(new EventDate(date));
         return this;
     }
 

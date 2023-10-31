@@ -1,5 +1,6 @@
 package seedu.address.logic.commands;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_END_TIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT_NAME;
@@ -66,6 +67,8 @@ public class EditEventCommand extends Command {
      * @param editEventDescriptor details to edit the meeting with
      */
     public EditEventCommand(Index index, EditEventDescriptor editEventDescriptor) {
+        requireNonNull(index);
+        requireNonNull(editEventDescriptor);
         this.index = index;
         this.editEventDescriptor = editEventDescriptor;
     }
@@ -324,6 +327,10 @@ public class EditEventCommand extends Command {
                     .add("date", this.date.toString())
                     .add("start time", this.startTime.toString())
                     .add("end time", this.endTime.toString())
+                    .add("assign persons", this.assignPersons)
+                    .add("unassign persons", this.unassignPersons)
+                    .add("assign groups", this.assignGroups)
+                    .add("unassign groups", this.unassignGroups)
                     .toString();
         }
 

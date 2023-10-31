@@ -70,7 +70,11 @@ public class MeetingBuilder {
         for (String name : names) {
             this.names.add(new Name(name));
         }
+        return this;
+    }
 
+    public MeetingBuilder withPerson(Set<Name> names) throws ParseException {
+        this.names = names;
         return this;
     }
 
@@ -84,7 +88,11 @@ public class MeetingBuilder {
         for (String group : groups) {
             this.groups.add(new Group(group));
         }
+        return this;
+    }
 
+    public MeetingBuilder withGroups(Set<Group> groups) throws ParseException {
+        this.groups = groups;
         return this;
     }
 

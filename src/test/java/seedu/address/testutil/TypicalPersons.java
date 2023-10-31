@@ -88,7 +88,7 @@ public class TypicalPersons {
             ab.addPerson(person);
         }
         for (Event event : new ArrayList<>(
-                Arrays.asList(TypicalMeetings.TP_MEETING, TypicalMeetings.MEETING_WITHOUT_PERSONS))) {
+                Arrays.asList(TypicalEvents.TP_MEETING, TypicalEvents.MEETING_WITHOUT_PERSONS))) {
             ab.addEvent(event);
         }
         return ab;
@@ -104,8 +104,8 @@ public class TypicalPersons {
             ab.addPerson(person);
         }
         for (Event event : new ArrayList<>(
-                Arrays.asList(TypicalMeetings.MEETING_3_DAYS_AFTER_TODAY,
-                        TypicalMeetings.MEETING_6_DAYS_AFTER_TODAY))) {
+                Arrays.asList(TypicalEvents.MEETING_3_DAYS_AFTER_TODAY,
+                        TypicalEvents.MEETING_6_DAYS_AFTER_TODAY))) {
             ab.addEvent(event);
         }
         return ab;
