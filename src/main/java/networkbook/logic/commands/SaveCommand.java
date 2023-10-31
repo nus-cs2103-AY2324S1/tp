@@ -17,6 +17,6 @@ public class SaveCommand extends ChangeDataCommand {
 
     @Override
     public CommandResult execute(Model model) {
-        return new CommandResult(MESSAGE_SUCCESS, true);
+        return new CommandResult(MESSAGE_SUCCESS);
     }
 }

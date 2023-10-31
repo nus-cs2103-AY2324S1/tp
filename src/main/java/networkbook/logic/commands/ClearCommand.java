@@ -18,6 +18,6 @@ public class ClearCommand extends ChangeDataCommand {
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.setNetworkBook(new NetworkBook());
-        return new CommandResult(MESSAGE_SUCCESS, true);
+        return new CommandResult(MESSAGE_SUCCESS);
     }
 }

@@ -58,8 +58,7 @@ public class CreateCommand extends ChangeDataCommand {
 
         model.addPerson(toAdd);
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd))
-            + String.format(MESSAGE_SUCCESS_INDEX, model.getFilteredPersonList().size()),
-                true);
+            + String.format(MESSAGE_SUCCESS_INDEX, model.getFilteredPersonList().size()));
     }
 
     @Override

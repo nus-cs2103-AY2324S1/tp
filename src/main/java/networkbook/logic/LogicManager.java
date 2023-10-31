@@ -10,6 +10,7 @@ import networkbook.commons.core.GuiSettings;
 import networkbook.commons.core.LogsCenter;
 import networkbook.logic.commands.Command;
 import networkbook.logic.commands.CommandResult;
+import networkbook.logic.commands.DoesNotChangeDataCommand;
 import networkbook.logic.commands.exceptions.CommandException;
 import networkbook.logic.parser.NetworkBookParser;
 import networkbook.logic.parser.exceptions.ParseException;
@@ -50,7 +51,7 @@ public class LogicManager implements Logic {
         Command command = networkBookParser.parseCommand(commandText);
         commandResult = command.execute(model);
 
-        if (!commandResult.isChangeData()) {
+        if (command instanceof DoesNotChangeDataCommand) {
             return commandResult;
         }
 

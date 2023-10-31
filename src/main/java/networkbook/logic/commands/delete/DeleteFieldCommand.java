@@ -50,8 +50,7 @@ public class DeleteFieldCommand extends ChangeDataCommand {
         model.setItem(personToDeleteField, personWithFieldDeleted);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(String.format(MESSAGE_DELETE_PERSON_FIELD_SUCCESS,
-                Messages.format(personWithFieldDeleted)),
-                true);
+                Messages.format(personWithFieldDeleted)));
     }
 
     @Override

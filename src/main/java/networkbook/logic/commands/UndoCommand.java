@@ -16,7 +16,7 @@ public class UndoCommand extends ChangeDataCommand {
     public CommandResult execute(Model model) throws CommandException {
         assert model != null : "Model should not be null";
         model.undoNetworkBook();
-        return new CommandResult(MESSAGE_SUCCESS, true);
+        return new CommandResult(MESSAGE_SUCCESS);
     }
 
 }

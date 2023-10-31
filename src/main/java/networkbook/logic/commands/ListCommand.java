@@ -20,7 +20,6 @@ public class ListCommand extends DoesNotChangeDataCommand {
         requireNonNull(model);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(String.format(MESSAGE_PERSONS_LISTED_OVERVIEW,
-                model.getFilteredPersonList().size()),
-                false);
+                model.getFilteredPersonList().size()));
     }
 }

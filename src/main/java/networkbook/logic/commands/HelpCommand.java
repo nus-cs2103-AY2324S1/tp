@@ -16,6 +16,6 @@ public class HelpCommand extends DoesNotChangeDataCommand {
 
     @Override
     public CommandResult execute(Model model) {
-        return new CommandResult(SHOWING_HELP_MESSAGE, true, false, false);
+        return new CommandResult(SHOWING_HELP_MESSAGE, true, false);
     }
 }

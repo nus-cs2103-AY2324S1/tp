@@ -58,7 +58,7 @@ public class OpenLinkCommand extends DoesNotChangeDataCommand {
 
         try {
             Link openedLink = model.openLink(personIndex, linkIndex);
-            return new CommandResult(String.format(MESSAGE_SUCCESS, openedLink.getValue()), false);
+            return new CommandResult(String.format(MESSAGE_SUCCESS, openedLink.getValue()));
         } catch (IOException e) {
             throw new CommandException(MESSAGE_CANNOT_OPEN_LINK);
         }

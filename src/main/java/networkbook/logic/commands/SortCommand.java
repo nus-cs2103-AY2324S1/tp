@@ -35,8 +35,7 @@ public class SortCommand extends DoesNotChangeDataCommand {
         requireNonNull(model);
         model.updateSortedPersonList(comparator);
         return new CommandResult(
-                String.format(Messages.MESSAGE_PERSONS_SORTED_OVERVIEW, model.getFilteredPersonList().size()),
-                false);
+                String.format(Messages.MESSAGE_PERSONS_SORTED_OVERVIEW, model.getFilteredPersonList().size()));
     }
 
     @Override

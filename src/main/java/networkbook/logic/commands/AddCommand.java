@@ -83,8 +83,7 @@ public class AddCommand extends ChangeDataCommand {
         model.setItem(personToAddInfo, personAfterAddingInfo);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(
-                String.format(MESSAGE_ADD_INFO_SUCCESS, Messages.format(personAfterAddingInfo)),
-                true);
+                String.format(MESSAGE_ADD_INFO_SUCCESS, Messages.format(personAfterAddingInfo)));
     }
 
     /**

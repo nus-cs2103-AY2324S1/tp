@@ -1,8 +1,8 @@
 package networkbook.logic.commands.filter;
 
 import networkbook.commons.util.ToStringBuilder;
-import networkbook.logic.commands.Command;
 import networkbook.logic.commands.CommandResult;
+import networkbook.logic.commands.DoesNotChangeDataCommand;
 import networkbook.logic.parser.CliSyntax;
 import networkbook.model.Model;
 import networkbook.model.person.filter.CourseContainsKeyTermsPredicate;
@@ -18,7 +18,7 @@ import networkbook.model.person.filter.CourseIsStillBeingTakenPredicate;
  * TODO: Implement filter
  * TODO: Extend functionality to grad year and specialisation
  */
-public class FilterCommand extends Command {
+public class FilterCommand extends DoesNotChangeDataCommand {
 
     public static final String COMMAND_WORD = "filter";
 
@@ -73,8 +73,7 @@ public class FilterCommand extends Command {
             feedback += MESSAGE_EXCL_FIN;
         }
         return new CommandResult(feedback
-                + String.format(MESSAGE_PERSONS_FOUND_OVERVIEW, model.getFilteredPersonList().size()),
-                false);
+                + String.format(MESSAGE_PERSONS_FOUND_OVERVIEW, model.getFilteredPersonList().size()));
     }
 
     @Override

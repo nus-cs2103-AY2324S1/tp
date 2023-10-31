@@ -53,8 +53,7 @@ public class DeletePersonCommand extends ChangeDataCommand {
         model.deletePerson(personToDelete);
         return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS,
                 Messages.format(personToDelete))
-                + String.format(MESSAGE_DELETE_PERSON_INDEX, targetIndex.getOneBased()),
-                true);
+                + String.format(MESSAGE_DELETE_PERSON_INDEX, targetIndex.getOneBased()));
     }
 
     @Override
