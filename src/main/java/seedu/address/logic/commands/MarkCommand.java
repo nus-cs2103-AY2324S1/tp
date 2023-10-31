@@ -171,7 +171,10 @@ public class MarkCommand extends Command {
         Person markedEmployee = markEmployee(employeeToMark);
 
         model.setPerson(employeeToMark, markedEmployee);
-        return new CommandResult(String.format(MESSAGE_MARK_PERSON_SUCCESS, this.attendanceType.toString().toLowerCase(), employeeToMark.getName()));
+        return new CommandResult(
+                String.format(MESSAGE_MARK_PERSON_SUCCESS,
+                        this.attendanceType.toString().toLowerCase(),
+                        employeeToMark.getName()));
     }
 
     /**
