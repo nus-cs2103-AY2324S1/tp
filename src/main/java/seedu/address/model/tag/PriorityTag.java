@@ -3,6 +3,10 @@ package seedu.address.model.tag;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+/**
+ * Represents a Priority Tag in the records.
+ * Guarantees: immutable; name is valid as declared in {@link #isValidPriorityTag(String)}
+ */
 public class PriorityTag extends Tag {
 
     public static final String MESSAGE_CONSTRAINTS = "Priority tag can only take in values: 'high', 'medium' or 'low'";

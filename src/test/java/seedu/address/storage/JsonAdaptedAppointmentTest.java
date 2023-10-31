@@ -61,7 +61,7 @@ public class JsonAdaptedAppointmentTest {
     public void toModelType_nullPatient_throwsIllegalValueException() {
         JsonAdaptedAppointment appointment =
                 new JsonAdaptedAppointment(null, VALID_START, VALID_END, VALID_DESCRIPTION,
-                        VALID_PRIORITYTAG) ;
+                        VALID_PRIORITYTAG);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, () -> appointment.toModelType(ADDRESS_BOOK));
     }

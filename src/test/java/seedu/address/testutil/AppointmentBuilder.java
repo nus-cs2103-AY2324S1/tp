@@ -72,6 +72,9 @@ public class AppointmentBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code PriorityTag} for the Appointment being built.
+     */
     public AppointmentBuilder withPriorityTag(String priorityTag) {
         this.priorityTag = new PriorityTag(priorityTag);
         return this;

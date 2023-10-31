@@ -2,13 +2,11 @@ package seedu.address.ui;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.appointment.Appointment;
 import seedu.address.model.tag.PriorityTag;
 
-import java.util.Comparator;
 
 /**
  * An UI component that displays information of a {@code Person}.
