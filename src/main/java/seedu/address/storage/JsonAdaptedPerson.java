@@ -11,10 +11,15 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Details;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Income;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Person.PersonBuilder;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Profession;
+import seedu.address.model.person.TelegramHandle;
 import seedu.address.model.person.interaction.Interaction;
 import seedu.address.model.person.lead.Lead;
 import seedu.address.model.tag.Tag;
@@ -32,7 +37,10 @@ class JsonAdaptedPerson {
     private final String address;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
     private final String lead;
-    // private final JsonAdaptedInteractionList interactions;
+    private final String telegram;
+    private final String profession;
+    private final String income;
+    private final String details;
     private final List<JsonAdaptedInteraction> interactions = new ArrayList<>();
 
     /**
@@ -42,6 +50,8 @@ class JsonAdaptedPerson {
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("address") String address,
             @JsonProperty("tags") List<JsonAdaptedTag> tags, @JsonProperty("lead") String lead,
+            @JsonProperty("telegram") String telegram, @JsonProperty("profession") String profession,
+            @JsonProperty("income") String income, @JsonProperty("details") String details,
             @JsonProperty("interactions") List<JsonAdaptedInteraction> interactions) {
         this.name = name;
         this.phone = phone;
@@ -50,7 +60,14 @@ class JsonAdaptedPerson {
         if (tags != null) {
             this.tags.addAll(tags);
         }
+
+        // Optional fields
         this.lead = lead;
+        this.telegram = telegram;
+        this.profession = profession;
+        this.income = income;
+        this.details = details;
+
         if (interactions != null) {
             this.interactions.addAll(interactions);
         }
@@ -67,11 +84,14 @@ class JsonAdaptedPerson {
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
-        if (source.getLead() == null) {
-            lead = "";
-        } else {
-            lead = source.getLead().toString().toLowerCase();
-        }
+
+        // Optional fields
+        lead = source.getLead() == null ? null : source.getLead().toString();
+        telegram = source.getTelegram() == null ? null : source.getTelegram().toString();
+        profession = source.getProfession() == null ? null : source.getProfession().toString();
+        income = source.getIncome() == null ? null : source.getIncome().toString();
+        details = source.getDetails() == null ? null : source.getDetails().toString();
+
         interactions.addAll(source.getInteractions().stream()
             .map(JsonAdaptedInteraction::new)
             .collect(Collectors.toList()));
@@ -131,13 +151,40 @@ class JsonAdaptedPerson {
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
 
-        Person.PersonBuilder personBuilder =
-                new Person.PersonBuilder(modelName, modelPhone, modelEmail, modelAddress, modelTags);
+        PersonBuilder personBuilder = new PersonBuilder(modelName, modelPhone, modelEmail, modelAddress, modelTags);
 
-        if (lead != null && !lead.isEmpty()) {
-            final Lead modelLead = new Lead(lead);
-            personBuilder = personBuilder.withLead(modelLead);
+        // Optional fields
+        if (lead != null) {
+            if (!Lead.isValidLead(lead)) {
+                throw new IllegalValueException(String.format(Lead.MESSAGE_CONSTRAINTS));
+            }
+            personBuilder = personBuilder.withLead(new Lead(lead));
         }
+        if (telegram != null) {
+            if (!TelegramHandle.isValidTelegramHandle(telegram)) {
+                throw new IllegalValueException(String.format(TelegramHandle.MESSAGE_CONSTRAINTS));
+            }
+            personBuilder = personBuilder.withTelegram(new TelegramHandle(telegram));
+        }
+        if (profession != null) {
+            if (!Profession.isValidProfession(profession)) {
+                throw new IllegalValueException(String.format(Profession.MESSAGE_CONSTRAINTS));
+            }
+            personBuilder = personBuilder.withProfession(new Profession(profession));
+        }
+        if (income != null) {
+            if (!Income.isValidIncome(income)) {
+                throw new IllegalValueException(String.format(Income.MESSAGE_CONSTRAINTS));
+            }
+            personBuilder = personBuilder.withIncome(new Income(Integer.valueOf(income)));
+        }
+        if (details != null) {
+            if (!Details.isValidDetails(details)) {
+                throw new IllegalValueException(String.format(Details.MESSAGE_CONSTRAINTS));
+            }
+            personBuilder = personBuilder.withDetails(new Details(details));
+        }
+
         personBuilder.withInteractions(modelInteractions);
         return personBuilder.build();
     }
