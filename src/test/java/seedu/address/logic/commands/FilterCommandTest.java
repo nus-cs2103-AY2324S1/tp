@@ -5,10 +5,10 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_APPOINTMENTS_LISTED_OVERVIEW;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalAppointments.ALEX_APPOINTMENT;
-import static seedu.address.testutil.TypicalAppointments.ALEX_SECOND_APPOINTMENT;
+import static seedu.address.testutil.TypicalAppointments.ALICE_APPOINTMENT;
+import static seedu.address.testutil.TypicalAppointments.ALICE_SECOND_APPOINTMENT;
 import static seedu.address.testutil.TypicalAppointments.BERNICE_APPOINTMENT;
-import static seedu.address.testutil.TypicalAppointments.getTypicalAppointmentBook;
+import static seedu.address.testutil.TypicalWellNus.getTypicalWellNus;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -24,15 +24,15 @@ import seedu.address.model.appointment.AppointmentDateMatchesPredicate;
  * Contains integration tests (interaction with the Model) for {@code FilterCommand}.
  */
 public class FilterCommandTest {
-    private Model model = new ModelManager(getTypicalAppointmentBook(), new UserPrefs());
-    private Model expectedModel = new ModelManager(getTypicalAppointmentBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalWellNus(), new UserPrefs());
+    private Model expectedModel = new ModelManager(getTypicalWellNus(), new UserPrefs());
 
     @Test
     public void equals() {
         AppointmentDateMatchesPredicate firstPredicate =
-                new AppointmentDateMatchesPredicate(ALEX_APPOINTMENT.getDate().getDate());
+                new AppointmentDateMatchesPredicate(ALICE_APPOINTMENT.getDate().getDate());
         AppointmentDateMatchesPredicate secondPredicate =
-                new AppointmentDateMatchesPredicate(ALEX_SECOND_APPOINTMENT.getDate().getDate());
+                new AppointmentDateMatchesPredicate(ALICE_SECOND_APPOINTMENT.getDate().getDate());
 
         FilterCommand filterFirstCommand = new FilterCommand(firstPredicate);
         FilterCommand filterSecondCommand = new FilterCommand(secondPredicate);
@@ -57,23 +57,23 @@ public class FilterCommandTest {
     @Test
     public void execute_validDate_singleAppointmentFound() {
         String expectedMessage = String.format(MESSAGE_APPOINTMENTS_LISTED_OVERVIEW, 1);
-        AppointmentDateMatchesPredicate predicate = new AppointmentDateMatchesPredicate(ALEX_APPOINTMENT
+        AppointmentDateMatchesPredicate predicate = new AppointmentDateMatchesPredicate(ALICE_APPOINTMENT
                 .getDate().getDate());
         FilterCommand command = new FilterCommand(predicate);
         expectedModel.updateFilteredAppointmentList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(expectedModel.getFilteredAppointmentList(), Collections.singletonList(ALEX_APPOINTMENT));
+        assertEquals(expectedModel.getFilteredAppointmentList(), Collections.singletonList(ALICE_APPOINTMENT));
     }
 
     @Test
     public void execute_validDate_multipleAppointmentsFound() {
         String expectedMessage = String.format(MESSAGE_APPOINTMENTS_LISTED_OVERVIEW, 2);
-        AppointmentDateMatchesPredicate predicate = new AppointmentDateMatchesPredicate(ALEX_SECOND_APPOINTMENT
+        AppointmentDateMatchesPredicate predicate = new AppointmentDateMatchesPredicate(ALICE_SECOND_APPOINTMENT
                 .getDate().getDate());
         FilterCommand command = new FilterCommand(predicate);
         expectedModel.updateFilteredAppointmentList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(expectedModel.getFilteredAppointmentList(), Arrays.asList(ALEX_SECOND_APPOINTMENT,
+        assertEquals(expectedModel.getFilteredAppointmentList(), Arrays.asList(ALICE_SECOND_APPOINTMENT,
                 BERNICE_APPOINTMENT));
     }
 

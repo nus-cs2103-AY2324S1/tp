@@ -30,6 +30,7 @@ public class ViewCommandParser implements Parser<ViewCommand> {
         }
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_CATEGORY);
 
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_CATEGORY);
 
         String category = argMultimap.getValue(PREFIX_CATEGORY).orElse("");
         if (!isValidCategory(category)) {
