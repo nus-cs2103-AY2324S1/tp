@@ -296,6 +296,19 @@ Example:
 * `view s/A0245234A`
 ![result for 'view s/A0245234A'](images/ViewCommand.png)
 
+---
+### Selecting students randomly: `random`
+
+Select a specific number of students from all students displayed in the class manager.
+
+Format: `random INDEX`
+
+* The `INDEX` must be a valid positive integer.
+
+Example:
+
+* `random 2`
+
 ### Deleting a student : `delete`
 
 Deletes the specific student.
@@ -304,7 +317,7 @@ Format: `delete s/STUDENT_NUMBER`
 
 * The STUDENT_NUMBER must be valid and exist.
 
-Examples:
+Example:
 * `delete s/A0249112A`
 
 ---
@@ -366,9 +379,6 @@ Format: `theme`
 <img alt="theme_light" src="images/theme-light.png" width="575" >
 
 ---
-### Archiving data files `[coming in v2.0]`
-
-_Details coming soon ..._
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -385,6 +395,7 @@ _Details coming soon ..._
 
 --------------------------------------------------------------------------------------------------------------------
 
+<<<<<<< HEAD
 ## Command summary (in alphabetical order)
 
 ### Useful commands
@@ -413,6 +424,7 @@ _Details coming soon ..._
 | **Mark Absent**                | `mark-abs TUTORIAL_INDEX s/STUDENT_NUMBER` <br> e.g. `mark-abs 1 s/A0245234A`                                                                                    |
 | **Mark Present**               | `mark-pre TUTORIAL_INDEX s/STUDENT_NUMBER` <br> e.g. `mark-pre 1 s/A0245234A`                                                                                    |
 | **Mark Present All**           | `mark-pre-all TUTORIAL_INDEX` <br> e.g. `mark-pre-all 1`                                                                                                         |
+| **Random**                     | `random INDEX` <br> e.g. `random 2`                                                                                                                              |
 | **Record Class Participation** | `class-part s/STUDENT_NUMBER tut/TUTORIAL_INDEX part/PARTICIPATION_LEVEL` <br> e.g. `class-part s/A0245234A tut/1 part/true`                                     |
 | **Set Grade**                  | `grade s/STUDENT_NUMBER a/ASSIGNMENT_INDEX g/GRADE` <br> e.g. `grade s/A0245234A a/1 g/100`                                                                      |
 | **Tag**                        | `tag STUDENT_NUMBER [/add] [/delete] t/[TAG]…​` <br> e.g. `tag A0123456N t/smart t/shy`                                                                          |
