@@ -18,10 +18,11 @@ public class Course {
 
     // 2-3 alphabets, followed by 4 digits, and optionally ending with an alphabet
     public static final String VALIDATION_REGEX = "^[A-Za-z]{2,3}\\d{4}[A-Za-z]?$";
+    public static final Course EMPTY_COURSE = new Course();
+
     private final String name;
     private final String courseCode;
     private final Set<Lesson> lessons = new HashSet<>();
-
 
     /**
      * Constructs a {@code Course}.
@@ -36,6 +37,11 @@ public class Course {
         this.name = name;
         this.courseCode = courseCode;
         this.lessons.addAll(lessons);
+    }
+
+    private Course() {
+        this.name = "";
+        this.courseCode = "";
     }
 
     public String getName() {
