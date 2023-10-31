@@ -127,7 +127,9 @@ public class Person {
         this.paid = true;
     }
 
-    public void setUnPaid() {this.paid = false;}
+    public void setUnPaid() {
+        this.paid = false;
+    }
 
     public PayRate getPayRate() {
         return payRate;
