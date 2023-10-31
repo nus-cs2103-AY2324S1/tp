@@ -125,7 +125,7 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        calendarPanel = new CalendarPanel(logic.getFilteredPersonList(), logic.getFilteredScheduleList());
+        calendarPanel = new CalendarPanel(logic.getFilteredPersonList(), logic.getFilteredCalendarScheduleList());
         scheduleListPanel = new ScheduleListPanel(logic.getFilteredScheduleList());
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
 
@@ -223,6 +223,7 @@ public class MainWindow extends UiPart<Stage> {
      * Shows calendar of filtered schedule cards.
      */
     void showCalendar() {
+        System.out.println(10);
         listPanelPlaceholder.getChildren().clear();
         listPanelPlaceholder.getChildren().add(calendarPanel.getRoot());
     }

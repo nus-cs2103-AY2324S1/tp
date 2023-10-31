@@ -6,6 +6,7 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.schedule.Date;
+import seedu.address.model.schedule.ScheduleIsOnDatePredicate;
 
 
 /**
@@ -34,7 +35,8 @@ public class ShowCalendarCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        model.updateFilteredScheduleList(schedule -> schedule.isOnDate(date));
+        ScheduleIsOnDatePredicate predicate = new ScheduleIsOnDatePredicate(date);
+        model.updateFilteredCalendarScheduleList(predicate);
         return new CommandResult(MESSAGE_SUCCESS);
     }
 

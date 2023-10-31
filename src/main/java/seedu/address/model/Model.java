@@ -130,6 +130,16 @@ public interface Model {
      */
     void updateFilteredScheduleList(Predicate<Schedule> predicate);
 
+
+    /** Returns an unmodifiable view of the filtered calendar schedule list */
+    ObservableList<Schedule> getFilteredCalendarScheduleList();
+
+    /**
+     * Updates the filter of the filtered calendar schedule list to filter by the given {@code predicate}.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateFilteredCalendarScheduleList(Predicate<Schedule> predicate);
+
     /**
      * Returns the list of schedules associated with given tutor.
      * @param tutor the given tutor to find associated schedules.

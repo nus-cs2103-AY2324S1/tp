@@ -29,6 +29,7 @@ public class ModelManager implements Model {
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
     private final FilteredList<Schedule> filteredSchedules;
+    private final FilteredList<Schedule> filteredCalendarSchedules;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -42,6 +43,7 @@ public class ModelManager implements Model {
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
         filteredSchedules = new FilteredList<>(this.addressBook.getScheduleList());
+        filteredCalendarSchedules = new FilteredList<>(filteredSchedules);
     }
 
     public ModelManager() {
@@ -170,6 +172,8 @@ public class ModelManager implements Model {
         filteredPersons.setPredicate(predicate);
     }
 
+    //=========== Filtered Schedule List Accessors =============================================================
+
     /**
      * Returns an unmodifiable view of the list of {@code Schedule} backed by the internal list of
      * {@code versionedAddressBook}
@@ -183,6 +187,17 @@ public class ModelManager implements Model {
     public void updateFilteredScheduleList(Predicate<Schedule> predicate) {
         requireNonNull(predicate);
         filteredSchedules.setPredicate(predicate);
+    }
+
+    @Override
+    public ObservableList<Schedule> getFilteredCalendarScheduleList() {
+        return filteredCalendarSchedules;
+    }
+
+    @Override
+    public void updateFilteredCalendarScheduleList(Predicate<Schedule> predicate) {
+        requireNonNull(predicate);
+        filteredCalendarSchedules.setPredicate(predicate);
     }
 
     @Override
