@@ -181,7 +181,6 @@ public class AddressBook implements ReadOnlyAddressBook {
         return patients.equals(otherAddressBook.patients)
                 && doctors.equals((otherAddressBook.doctors));
     }
-
     @Override
     public int hashCode() {
         return patients.hashCode();
