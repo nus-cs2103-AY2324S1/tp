@@ -51,7 +51,7 @@ public class AddCommandParser implements Parser<AddCommand> {
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_TELEGRAM,
                         PREFIX_FROM, PREFIX_TO, PREFIX_TAG, PREFIX_COURSE, PREFIX_HOUR);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_TELEGRAM, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_HOUR)
+        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_TELEGRAM, PREFIX_PHONE, PREFIX_EMAIL)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
@@ -66,8 +66,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         FreeTime freeTime = ParserUtil.parseFreeTime(argMultimap.getValue(PREFIX_FROM).orElseGet(() -> null),
                 argMultimap.getValue((PREFIX_TO)).orElseGet(() -> null));
         Set<Course> courseList = ParserUtil.parseCourses(argMultimap.getAllValues(PREFIX_COURSE));
-        Hour hour = ParserUtil.parseHour(argMultimap.getValue(PREFIX_HOUR).get());
-
+        Hour hour = ParserUtil.parseHour(argMultimap.getValue(PREFIX_HOUR).orElseGet(() -> Hour.EMPTY_HOUR));
         Person person = new Person(name, phone, email, telegram, tagList, freeTime, courseList, hour);
 
         return new AddCommand(person);

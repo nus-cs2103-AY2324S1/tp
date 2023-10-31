@@ -10,8 +10,8 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.course.Course;
-import seedu.address.model.course.CourseData;
 import seedu.address.model.course.Lesson;
+import seedu.address.model.course.UniqueCourseList;
 
 /**
  * Displays all courses in the address book if no course is listed.
@@ -24,7 +24,7 @@ public class CourseCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Displays lesson information about course\n"
             + "Parameters: " + PREFIX_COURSE + "Course\n"
             + "Example: " + COMMAND_WORD + " c/CS2103T" + "\n"
-            + CourseData.getCourseListString();
+            + UniqueCourseList.getCourseListString();
 
     private final Course targetCourse;
 

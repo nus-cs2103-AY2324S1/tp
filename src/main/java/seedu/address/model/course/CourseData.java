@@ -13,10 +13,4 @@ public class CourseData {
     public static List<Course> getCourseList() {
         return courseList;
     }
-
-    public static String getCourseListString() {
-        return "Available courses: " + courseList.stream()
-                .map(Course::getCourseCode).reduce((courseCode1, courseCode2) -> courseCode1 + ", "
-                        + courseCode2).orElse("");
-    }
 }

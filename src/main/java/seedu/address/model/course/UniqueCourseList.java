@@ -76,6 +76,14 @@ public class UniqueCourseList implements Iterable<Course> {
         requireNonNull(courses);
         internalList.setAll(courses);
     }
+    /**
+     * Returns a string of all the course codes in the list.
+     */
+    public static String getCourseListString() {
+        return "Available courses: " + internalList.stream()
+                .map(Course::getCourseCode).reduce((courseCode1, courseCode2) -> courseCode1 + ", "
+                        + courseCode2).orElse("");
+    }
 
     /**
      * Returns the backing list as an unmodifiable {@code ObservableList}.

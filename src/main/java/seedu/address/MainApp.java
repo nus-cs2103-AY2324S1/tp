@@ -55,7 +55,6 @@ public class MainApp extends Application {
     public void init() throws Exception {
         logger.info("=============================[ Initializing AddressBook ]===========================");
         super.init();
-
         AppParameters appParameters = AppParameters.parse(getParameters());
         config = initConfig(appParameters.getConfigPath());
         initLogging(config);
@@ -86,19 +85,19 @@ public class MainApp extends Application {
         ReadOnlyAddressBook initialData;
         List<Course> courseData;
         try {
-            addressBookOptional = storage.readAddressBook();
             coursesOptional = storage.readCourses();
-            if (!addressBookOptional.isPresent()) {
-                logger.info("Creating a new data file " + storage.getAddressBookFilePath()
-                        + " populated with a sample AddressBook.");
-            }
             if (!coursesOptional.isPresent()) {
                 logger.info("Creating a new data file " + storage.getCoursesFilePath()
                         + " populated with sample Courses.");
             }
-            initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
+            addressBookOptional = storage.readAddressBook();
+            if (!addressBookOptional.isPresent()) {
+                logger.info("Creating a new data file " + storage.getAddressBookFilePath()
+                        + " populated with a sample AddressBook.");
+            }
             courseData = coursesOptional.orElseGet(SampleDataUtil::getSampleCoursesData);
             UniqueCourseList.setCourses(courseData);
+            initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
         } catch (DataLoadingException e) {
             logger.warning("Data file at " + storage.getAddressBookFilePath() + " could not be loaded."
                     + " Will be starting with an empty AddressBook.");
