@@ -14,6 +14,7 @@ public class ViewCommandParser implements Parser<ViewCommand> {
 
     public static final String STUDENT_CATEGORY = "students";
     public static final String APPOINTMENT_CATEGORY = "appointments";
+    public static final String ALL_CATEGORY = "all";
 
     /**
      * Parses the given {@code String} of arguments in the context of the ViewCommand
@@ -31,11 +32,19 @@ public class ViewCommandParser implements Parser<ViewCommand> {
 
 
         String category = argMultimap.getValue(PREFIX_CATEGORY).orElse("");
-        if (!category.equals(STUDENT_CATEGORY) && !category.equals(APPOINTMENT_CATEGORY)) {
+        if (!isValidCategory(category)) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewCommand.MESSAGE_USAGE));
         }
 
         return new ViewCommand(category);
+    }
+
+    /**
+     * Check whether the category is valid
+     */
+    public boolean isValidCategory(String category) {
+        return category.equals(STUDENT_CATEGORY) || category.equals(APPOINTMENT_CATEGORY)
+                || category.equals(ALL_CATEGORY);
     }
 }
