@@ -8,7 +8,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_MEDICAL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
@@ -34,7 +33,6 @@ public class AddCommand extends UndoableCommand {
             + PREFIX_EMAIL + "EMAIL "
             + PREFIX_ADDRESS + "ADDRESS "
             + "[" + PREFIX_APPOINTMENT + "APPOINTMENT] "
-            + "[" + PREFIX_TAG + "TAG]..."
             + "[" + PREFIX_MEDICAL + "MEDICAL_HISTORY]...\n"
             + "Example 1: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
@@ -42,20 +40,18 @@ public class AddCommand extends UndoableCommand {
             + PREFIX_PHONE + "98765432 "
             + PREFIX_EMAIL + "johnd@example.com "
             + PREFIX_ADDRESS + "311, Clementi Ave 2, #02-25 "
-            + PREFIX_APPOINTMENT + "2023-10-17 11:00 13:00 "
+            + PREFIX_APPOINTMENT + "17-10-2023 11:00 13:00 "
             + PREFIX_MEDICAL + "hypochondriac "
             + PREFIX_MEDICAL + "on Medicine XYZ "
-            + PREFIX_TAG + "owesMoney \n"
             + "Example 2: " + COMMAND_WORD_ALIAS + " "
-            + PREFIX_NAME + "Alex Yeoh"
+            + PREFIX_NAME + "Alex Yeoh "
             + PREFIX_NRIC + "S6742632F "
             + PREFIX_PHONE + "85743822 "
             + PREFIX_EMAIL + "alex@example.com "
             + PREFIX_ADDRESS + "420, Country Road, #02-25 "
-            + PREFIX_APPOINTMENT + "2023-11-10 11:00 13:00 "
+            + PREFIX_APPOINTMENT + "10-11-2023 11:00 13:00 "
             + PREFIX_MEDICAL + "tachycardia "
-            + PREFIX_MEDICAL + "on Medicine CHS "
-            + PREFIX_TAG + "owesMoney";
+            + PREFIX_MEDICAL + "on Medicine CHS ";
 
     public static final String MESSAGE_SUCCESS = "New Patient added: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This Patient already exists in the address book";

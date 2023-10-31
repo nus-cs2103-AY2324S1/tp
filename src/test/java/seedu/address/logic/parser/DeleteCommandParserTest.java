@@ -46,12 +46,28 @@ public class DeleteCommandParserTest {
     }
 
     @Test
-    public void test_parse_descriptor() {
+    public void test_parse_descriptorAppointment() {
         String userString = " id/" + PersonBuilder.DEFAULT_NRIC + " ap/";
         DeletePersonDescriptor descriptor = new DeletePersonDescriptor();
         descriptor.setAppointment();
         DeleteCommand deleteCommand = new DeleteCommand(defaultNric, null, descriptor);
         assertParseSuccess(parser, userString, deleteCommand);
+    }
+
+    @Test
+    public void test_parse_descriptorMedicalHistory() {
+        String userString = " id/" + PersonBuilder.DEFAULT_NRIC + " m/";
+        DeletePersonDescriptor descriptor = new DeletePersonDescriptor();
+        descriptor.setMedicalHistory();
+        DeleteCommand deleteCommand = new DeleteCommand(defaultNric, null, descriptor);
+        assertParseSuccess(parser, userString, deleteCommand);
+    }
+
+    @Test
+    public void test_parse_descriptorInvalidField() {
+        String userString = "id/ " + PersonBuilder.DEFAULT_NRIC + " p/";
+        assertParseFailure(parser, userString,
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
     }
 
     @Test

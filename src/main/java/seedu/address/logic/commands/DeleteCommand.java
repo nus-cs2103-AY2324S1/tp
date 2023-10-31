@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -34,7 +35,8 @@ public class DeleteCommand extends UndoableCommand {
     public static final String MESSAGE_USAGE = COMMAND_WORD + " or " + COMMAND_WORD_ALIAS
             + ": Delete the patient identified by the full name or nric of the patient.\n"
             + "Parameters: n/Name or id/Nric (must be valid)\n"
-            + "Example 1: " + COMMAND_WORD + " n/John Doe or " + COMMAND_WORD + " id/S1234567A \n"
+            + "Fields that can be deleted: ap/ (Appointment) m/ (Medical History) \n"
+            + "Example 1: " + COMMAND_WORD + " n/John Doe or " + COMMAND_WORD + " id/S1234567A " + "ap/ m/\n"
             + "Example 1: " + COMMAND_WORD_ALIAS + " n/Alex Yeoh or " + COMMAND_WORD_ALIAS + " id/T0123456F";
 
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Patient: %1$s";
@@ -62,8 +64,10 @@ public class DeleteCommand extends UndoableCommand {
     private final DeletePersonDescriptor deletePersonDescriptor;
 
     /**
-     * @param nric of the person in the filtered person list to edit
-     * @param name of the person in the filtered person list to edit
+     * @param nric                   of the person in the filtered person list to
+     *                               edit
+     * @param name                   of the person in the filtered person list to
+     *                               edit
      * @param deletePersonDescriptor details to delete the person with
      */
     public DeleteCommand(Nric nric, Name name, DeletePersonDescriptor deletePersonDescriptor) {
@@ -160,6 +164,10 @@ public class DeleteCommand extends UndoableCommand {
         Appointment updatedAppointment = personToEdit.getAppointment().isPresent() ? personToEdit.getAppointment().get()
                 : null;
 
+        if (deletePersonDescriptor.getMedicalHistory()) {
+            updatedMedicalHistories = new HashSet<MedicalHistory>();
+        }
+
         if (deletePersonDescriptor.getAppointment()) {
             updatedAppointment = null;
         }
@@ -169,73 +177,38 @@ public class DeleteCommand extends UndoableCommand {
     }
 
     /**
-     * Stores the boolean value of the fields that is to be deleted from a person in
-     * the address book.
+     * Stores the boolean value of the fields that is to be deleted from a patient
+     * in
+     * HealthSync.
      */
     public static class DeletePersonDescriptor {
-        private boolean phone;
-        private boolean medicalHistory;
-        private boolean appointment;
-        private boolean email;
-        private boolean address;
-        private boolean tags;
+        private boolean shouldDeleteAppointment;
+        private boolean shoudlDeleteMedicalHistory;
 
         public DeletePersonDescriptor() {
         }
 
-        public void setPhone() {
-            this.phone = true;
-        }
-
-        public boolean getPhone() {
-            return this.phone;
-        }
-
-        public void setEmail() {
-            this.email = true;
-        }
-
-        public boolean getEmail() {
-            return this.email;
-        }
-
-        public void setAddress() {
-            this.address = true;
-        }
-
-        public boolean getAddress() {
-            return this.address;
-        }
-
         public void setMedicalHistory() {
-            this.medicalHistory = true;
+            this.shoudlDeleteMedicalHistory = true;
         }
 
         public boolean getMedicalHistory() {
-            return this.medicalHistory;
+            return this.shoudlDeleteMedicalHistory;
         }
 
         public void setAppointment() {
-            this.appointment = true;
+            this.shouldDeleteAppointment = true;
         }
 
         public boolean getAppointment() {
-            return this.appointment;
-        }
-
-        public void setTags() {
-            this.tags = true;
-        }
-
-        public boolean getTags() {
-            return this.tags;
+            return this.shouldDeleteAppointment;
         }
 
         /**
          * Returns true if all fields are false.
          */
         public boolean isAllFalse() {
-            return !(phone || email || address || tags || medicalHistory || appointment);
+            return !(shoudlDeleteMedicalHistory || shouldDeleteAppointment);
         }
 
         @Override
@@ -250,23 +223,16 @@ public class DeleteCommand extends UndoableCommand {
             }
 
             DeletePersonDescriptor otherDeletePersonDescriptor = (DeletePersonDescriptor) other;
-            return Objects.equals(phone, otherDeletePersonDescriptor.phone)
-                    && Objects.equals(email, otherDeletePersonDescriptor.email)
-                    && Objects.equals(address, otherDeletePersonDescriptor.address)
-                    && Objects.equals(tags, otherDeletePersonDescriptor.tags)
-                    && Objects.equals(medicalHistory, otherDeletePersonDescriptor.medicalHistory)
-                    && Objects.equals(appointment, otherDeletePersonDescriptor.appointment);
+            return Objects.equals(shoudlDeleteMedicalHistory,
+                    otherDeletePersonDescriptor.shoudlDeleteMedicalHistory)
+                    && Objects.equals(shouldDeleteAppointment, otherDeletePersonDescriptor.shouldDeleteAppointment);
         }
 
         @Override
         public String toString() {
             return new ToStringBuilder(this)
-                    .add("phone", phone)
-                    .add("email", email)
-                    .add("address", address)
-                    .add("tags", tags)
-                    .add("medicalHistory", medicalHistory)
-                    .add("appointment", appointment)
+                    .add("shoudlDeleteMedicalHistory", shoudlDeleteMedicalHistory)
+                    .add("shouldDeleteAppointment", shouldDeleteAppointment)
                     .toString();
         }
     }

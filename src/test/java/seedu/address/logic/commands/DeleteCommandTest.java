@@ -101,18 +101,10 @@ public class DeleteCommandTest {
         DeletePersonDescriptor descriptor = new DeletePersonDescriptor();
 
         descriptor.setAppointment();
-        descriptor.setAddress();
-        descriptor.setEmail();
         descriptor.setMedicalHistory();
-        descriptor.setPhone();
-        descriptor.setTags();
 
         assertTrue(descriptor.getAppointment());
-        assertTrue(descriptor.getAddress());
-        assertTrue(descriptor.getEmail());
         assertTrue(descriptor.getMedicalHistory());
-        assertTrue(descriptor.getPhone());
-        assertTrue(descriptor.getTags());
     }
 
     @Test
@@ -172,7 +164,7 @@ public class DeleteCommandTest {
 
         // different person -> returns false
         DeletePersonDescriptor descriptorDifferent = new DeletePersonDescriptor();
-        descriptorDifferent.setAddress();
+        descriptorDifferent.setAppointment();
         assertFalse(descriptor.equals(descriptorDifferent));
     }
 

@@ -9,9 +9,9 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.ParserUtil.isAnyPrefixPresent;
 
 import java.util.Arrays;
-import java.util.stream.Stream;
 
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -59,13 +59,5 @@ public class FindCommandParser implements Parser<FindCommand> {
         }
 
         return new FindCommand(findCommandPredicate);
-    }
-
-    /**
-     * Returns true if at least 1 of the prefixes isn't the empty {@code Optional} values in the given
-     * {@code ArgumentMultimap}.
-     */
-    private static boolean isAnyPrefixPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
-        return Stream.of(prefixes).anyMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
 }

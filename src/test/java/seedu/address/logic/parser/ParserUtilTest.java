@@ -1,8 +1,10 @@
 package seedu.address.logic.parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
+import static seedu.address.logic.parser.ParserUtil.isAnyPrefixPresent;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
@@ -327,5 +329,29 @@ public class ParserUtilTest {
                         new MedicalHistory(VALID_MEDICAL_HISTORY_2)));
 
         assertEquals(expectedMedSet, actualMedSet);
+    }
+
+    @Test
+    public void testIsAnyPrefixPresent() {
+        // Create an ArgumentMultimap with some values
+        ArgumentMultimap argumentMultimap = new ArgumentMultimap();
+        argumentMultimap.put(new Prefix("phone"), "123456789");
+        argumentMultimap.put(new Prefix("email"), "john@example.com");
+
+        // Test with prefixes that exist in the ArgumentMultimap
+        boolean result1 = isAnyPrefixPresent(argumentMultimap, new Prefix("phone"), new Prefix("email"));
+        assertTrue(result1);
+
+        // Test with prefixes that do not exist in the ArgumentMultimap
+        boolean result2 = isAnyPrefixPresent(argumentMultimap, new Prefix("address"), new Prefix("tags"));
+        assertFalse(result2);
+
+        // Test with a mix of existing and non-existing prefixes
+        boolean result3 = isAnyPrefixPresent(argumentMultimap, new Prefix("phone"), new Prefix("address"));
+        assertTrue(result3);
+
+        // Test with no prefixes
+        boolean result4 = isAnyPrefixPresent(argumentMultimap);
+        assertFalse(result4);
     }
 }
