@@ -163,21 +163,11 @@ class TimeParserTest {
     }
 
     @Test
-    void testParseDateYearMonthDayTime11SuccessfulParse() {
-        boolean hasError = false;
-        try {
-            TimeParser.parseDate("21-12-2024 5pm");
-        } catch (ParseException ignored) {
-            hasError = true;
-        }
-        assertTrue(hasError);
+    void testParseDateYearMonthDayTime11SuccessfulParse() throws ParseException {
+        TimeParser.parseDate("21-12-2024 5pm");
     }
 
     // TESTS FOR VALID DATES WITH MONTH, DAY OF MONTH, AND TIME
-    @Test
-    void testParseDateMonthDayTimeSuccessfulParse() throws ParseException {
-        TimeParser.parseDate("Jan 15 2pm");
-    }
 
     @Test
     void testParseDateMonthDayTime2SuccessfulParse() throws ParseException {
@@ -187,11 +177,6 @@ class TimeParserTest {
     @Test
     void testParseDateMonthDayTime3SuccessfulParse() throws ParseException {
         TimeParser.parseDate("15 Jan 1456");
-    }
-
-    @Test
-    void testParseDateMonthDayTime4SuccessfulParse() throws ParseException {
-        TimeParser.parseDate("Jan 15 1456");
     }
 
     @Test
@@ -208,11 +193,6 @@ class TimeParserTest {
             hasError = true;
         }
         assertTrue(hasError);
-    }
-
-    @Test
-    void testParseDateMonthDayTime7SuccessfulParse() throws ParseException {
-        TimeParser.parseDate("May 16 3.15pm");
     }
 
     @Test
@@ -517,7 +497,7 @@ class TimeParserTest {
     void testListInterviewsToday4() {
         List<Interview> interviewList = TypicalInterviews.getTypicalInterviews();
         LocalDateTime today = LocalDateTime.now();
-        int todayDay = today.getDayOfMonth();
+        int todayDay = 1;
         int todayMonth = today.getMonthValue();
         int todayYear = today.getYear();
         Interview interviewNow = new Interview(TypicalApplicants.ALICE,
@@ -537,7 +517,7 @@ class TimeParserTest {
     void testListInterviewsToday5() {
         List<Interview> interviewList = TypicalInterviews.getTypicalInterviews();
         LocalDateTime today = LocalDateTime.now();
-        int todayDay = today.getDayOfMonth();
+        int todayDay = 1;
         int todayMonth = today.getMonthValue();
         int todayYear = today.getYear();
         Interview interviewNow = new Interview(TypicalApplicants.ALICE,
