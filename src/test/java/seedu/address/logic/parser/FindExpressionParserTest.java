@@ -193,7 +193,7 @@ public class FindExpressionParserTest {
     }
 
     @Test
-    public void conditionNodeToPredicate_invalidBalanceField_evaluatesCorrectly() throws ParseException {
+    public void conditionNodeToPredicate_invalidBalanceField_evaluatesCorrectly() {
         Person you_owe = new Person(
                 new Name("Alice"),
                 new Phone("12345"),
@@ -231,7 +231,8 @@ public class FindExpressionParserTest {
     }
 
     @Test
-    public void conditionNoteToPredicate_validConditionWithQuotedKeyword_returnsPredicate() {
+    public void conditionNoteToPredicate_validConditionWithQuotedKeyword_returnsPredicate()
+            throws ParseException {
         assertTrue(new FindExpressionParser.ConditionNode(
                 FindExpressionParser.FindSupportedField.NAME, "\"Alice Bob\"").toPredicate()
                 instanceof Predicate);
