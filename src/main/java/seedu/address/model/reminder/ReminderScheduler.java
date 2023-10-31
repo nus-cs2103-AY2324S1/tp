@@ -6,13 +6,14 @@ import java.util.concurrent.TimeUnit;
 import java.util.logging.Logger;
 
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.Model;
 /**
  * Represents a thread that manages the reminders.
  */
 public class ReminderScheduler extends Thread {
     private static final long FREQUENCY = 1; // in minutes
 
-    private final UniqueReminderList reminderList;
+    private final Model model;
     private final Object mutex;
 
     private Logger logger = LogsCenter.getLogger(ReminderScheduler.class);
@@ -23,9 +24,9 @@ public class ReminderScheduler extends Thread {
      * @param taskQueue
      * @param reminderMutex
      */
-    public ReminderScheduler(Object reminderMutex) {
+    public ReminderScheduler(Model model, Object reminderMutex) {
         this.mutex = reminderMutex;
-        this.reminderList = UniqueReminderList.getInstance();
+        this.model = model;
     }
 
     /**
@@ -47,7 +48,7 @@ public class ReminderScheduler extends Thread {
     public void run() {
         while (true) {
             synchronized (mutex) {
-                while (reminderList.isEmpty()) {
+                while (model.getReminderList().isEmpty()) {
                     try {
                         mutex.wait();
                     } catch (InterruptedException e) {
@@ -55,7 +56,7 @@ public class ReminderScheduler extends Thread {
                     }
                 }
 
-                long timeUntilNextReminder = reminderList.getEarliestReminderTime();
+                long timeUntilNextReminder = model.getReminderList().getEarliestReminderTime();
                 // timeUntilNextReminder should always be positive, unless the reminderList is empty,
                 // and if it is empty, the while loop above should have caught it
                 assert timeUntilNextReminder >= 0;

@@ -9,6 +9,7 @@ import java.util.stream.Collectors;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 
 /**
@@ -20,17 +21,17 @@ import seedu.address.model.person.Person;
  */
 public class UniqueReminderList implements Iterable<Reminder> {
 
-    private static UniqueReminderList reminderListinstance;
-
     private boolean isReminderListDirty = false;
 
+    private final Model model;
     private final ObservableList<Reminder> internalList;
     private final ObservableList<Reminder> internalUnmodifiableList;
 
     /**
      * Constructor of UniqueReminderList
      */
-    private UniqueReminderList() {
+    public UniqueReminderList(Model model) {
+        this.model = model;
         internalList = FXCollections.observableArrayList();
         internalUnmodifiableList = FXCollections.unmodifiableObservableList(internalList);
     }
@@ -39,7 +40,7 @@ public class UniqueReminderList implements Iterable<Reminder> {
      * Sets the reminder list to be dirty.
      * To be called when the reminder list is modified.
      */
-    public void setRemidnerListDirty() {
+    public void setReminderListDirty() {
         isReminderListDirty = true;
     }
 
@@ -56,18 +57,6 @@ public class UniqueReminderList implements Iterable<Reminder> {
     public boolean contains(Reminder toCheck) {
         requireNonNull(toCheck);
         return internalList.stream().anyMatch(toCheck::equals);
-    }
-
-    /**
-     * Factory method of UniqueReminderList
-     *
-     * @return Produced UniqueReminderList object that is a Singleton.
-     */
-    public static UniqueReminderList getInstance() {
-        if (reminderListinstance == null) {
-            reminderListinstance = new UniqueReminderList();
-        }
-        return reminderListinstance;
     }
 
     /**
@@ -107,14 +96,12 @@ public class UniqueReminderList implements Iterable<Reminder> {
     }
 
     /**
-     * Updates the entire internal list of reminders using the given list of persons.
-     *
-     * @param personList The persons from which the reminders are to be produced.
+     * Updates the entire internal list of reminders using the list of persons in {@code model}.
      */
-    public void updateReminders(ObservableList<Person> personList) {
-        requireNonNull(personList);
+    public void updateReminders() {
+
         internalList.clear();
-        for (Person person : personList) {
+        for (Person person : model.getAddressBook().getPersonList()) {
             person.updateReminder();
             person.getReminder().ifPresent(internalList::add);
         }
@@ -122,14 +109,13 @@ public class UniqueReminderList implements Iterable<Reminder> {
 
     /**
      * Updates the internal list of reminders if the list is dirty.
-     * @param personList
      */
-    public void updateRemindersIfDirty(ObservableList<Person> personList) {
+    public void updateRemindersIfDirty() {
         if (!isReminderListDirty) {
             return;
         }
 
-        updateReminders(personList);
+        updateReminders();
         isReminderListDirty = false;
     }
 

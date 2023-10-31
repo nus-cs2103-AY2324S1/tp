@@ -154,7 +154,7 @@ public class Person {
      * The Reminder must not already exist in the list.
      */
     public void updateReminder() {
-        //Person must have lead and interaciton to have a reminder
+        //Person must have lead and interaction to have a reminder
         //If person has no lead or interaction, remove reminder
         if (this.getFollowUpDate().isEmpty()) {
             this.reminder = Optional.empty();
