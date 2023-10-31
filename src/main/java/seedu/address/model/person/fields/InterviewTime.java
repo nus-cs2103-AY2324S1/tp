@@ -15,7 +15,7 @@ public class InterviewTime {
 
     public static final String VALIDATION_REGEX = "^\\d{2}/\\d{2}/\\d{4} \\d{4}$";
 
-    public String time;
+    private String time;
 
     /**
      * Constructs a {@code InterviewTime}.
@@ -63,5 +63,9 @@ public class InterviewTime {
     @Override
     public int hashCode() {
         return time.hashCode();
+    }
+
+    public String getTime() {
+        return this.time;
     }
 }

@@ -54,7 +54,9 @@ public class Applicant extends Person {
         return phone;
     }
 
-    public InterviewTime getInterviewTime() { return interviewTime; }
+    public InterviewTime getInterviewTime() {
+        return interviewTime;
+    }
 
     public void addInterviewTime(InterviewTime interviewTime) {
         this.interviewTime = interviewTime;
