@@ -8,8 +8,10 @@ import static seedu.address.logic.commands.CommandTestUtil.COMMANDWORD_DESC_VALI
 import static seedu.address.logic.commands.CommandTestUtil.COMMAND_WORD_1;
 import static seedu.address.logic.commands.CommandTestUtil.SHORTCUT_ALIAS_1;
 import static seedu.address.logic.commands.CommandTestUtil.SHORTCUT_DESC_VALID;
+import static seedu.address.logic.parser.CliSyntax.PATIENT_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.SPECIALIST_TAG;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
@@ -36,6 +38,7 @@ import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.ViewCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.person.Patient;
 import seedu.address.model.person.PersonType;
@@ -50,8 +53,8 @@ import seedu.address.testutil.SpecialistBuilder;
 import seedu.address.testutil.SpecialistUtil;
 
 public class AddressBookParserTest {
-
-    private final AddressBookParser parser = new AddressBookParser(new ModelManager());
+    private final Model model = new ModelManager();
+    private final AddressBookParser parser = new AddressBookParser(model);
 
     @Test
     public void parseCommand_addShortcut() throws Exception {
@@ -101,23 +104,53 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_edit_patient() throws Exception {
-        Patient patient = new PatientBuilder().build();
+        Patient patient = (Patient) new PatientBuilder()
+                .withMedicalHistory("MedHistory1")
+                .withTags("Tag1", "Tag2")
+                .build();
+        model.updateSelectedPerson(patient);
         EditPatientDescriptor descriptor = new EditPatientDescriptorBuilder(patient).build();
-        EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD
-                + " " + CliSyntax.PATIENT_TAG + " "
-                + INDEX_FIRST_PERSON.getOneBased() + " " + PatientUtil.getEditPatientDescriptorDetails(descriptor));
-        assertEquals(new EditCommand(INDEX_FIRST_PERSON, descriptor), command);
+        String input = EditCommand.COMMAND_WORD + " " + PatientUtil.getEditPatientDescriptorDetails(descriptor);
+        EditCommand command = (EditCommand) parser.parseCommand(input);
+        assertEquals(new EditCommand(descriptor), command);
     }
 
     @Test
     public void parseCommand_edit_specialist() throws Exception {
-        Specialist person = new SpecialistBuilder().build();
-        EditSpecialistDescriptor descriptor = new EditSpecialistDescriptorBuilder(person).build();
-        EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD
-                + " " + CliSyntax.SPECIALIST_TAG + " "
-                + INDEX_FIRST_PERSON.getOneBased()
-                + " " + SpecialistUtil.getEditSpecialistDescriptorDetails(descriptor));
-        assertEquals(new EditCommand(INDEX_FIRST_PERSON, descriptor), command);
+        Specialist specialist = (Specialist) new SpecialistBuilder()
+                .withSpecialty("TestSpecialty")
+                .withLocation("TestLocation")
+                .withTags("Tag1", "Tag2")
+                .build();
+        model.updateSelectedPerson(specialist);
+        EditSpecialistDescriptor descriptor = new EditSpecialistDescriptorBuilder(specialist).build();
+        String input = EditCommand.COMMAND_WORD
+                + " " + SpecialistUtil.getEditSpecialistDescriptorDetails(descriptor);
+        EditCommand command = (EditCommand) parser.parseCommand(input);
+        assertEquals(new EditCommand(descriptor), command);
+    }
+
+    @Test
+    public void parseCommand_complexEdit_failure() {
+        Patient patient = (Patient) new PatientBuilder()
+                .withMedicalHistory("MedHistory1")
+                .withTags("Tag1", "Tag2")
+                .build();
+        Specialist specialist = (Specialist) new SpecialistBuilder()
+                .withSpecialty("TestSpecialty")
+                .withLocation("TestLocation")
+                .withTags("Tag1", "Tag2")
+                .build();
+        String userInput1 = EditCommand.COMMAND_WORD + " " + PATIENT_TAG;
+        String userInput2 = EditCommand.COMMAND_WORD + " " + SPECIALIST_TAG;
+
+        model.updateSelectedPerson(patient);
+        assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                EditCommand.MESSAGE_USAGE_PATIENT), () -> parser.parseCommand(userInput1));
+
+        model.updateSelectedPerson(specialist);
+        assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                EditCommand.MESSAGE_USAGE_SPECIALIST), () -> parser.parseCommand(userInput2));
     }
 
     @Test

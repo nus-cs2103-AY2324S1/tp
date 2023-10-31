@@ -24,11 +24,14 @@ import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.RedoCommand;
+import seedu.address.logic.commands.ThemeCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.commands.ViewCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
+import seedu.address.model.person.Patient;
 import seedu.address.model.person.PersonType;
+import seedu.address.model.person.Specialist;
 
 /**
  * Parses user input.
@@ -95,14 +98,22 @@ public class AddressBookParser {
             case AddCommand.COMMAND_WORD:
                 return new AddCommandParser().parse(personType, arguments);
 
-            case EditCommand.COMMAND_WORD:
-                return new EditCommandParser().parse(personType, arguments);
-
             case FindCommand.COMMAND_WORD:
                 return new FindCommandParser().parse(personType, arguments);
 
             case ListCommand.COMMAND_WORD:
                 return new ListCommand(personType);
+
+            case EditCommand.COMMAND_WORD:
+                if (model.getSelectedPerson() instanceof Patient) {
+                    throw new ParseException(
+                            String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE_PATIENT));
+                }
+                if (model.getSelectedPerson() instanceof Specialist) {
+                    throw new ParseException(
+                            String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE_SPECIALIST));
+                }
+                break;
 
             default:
                 logger.finer("This user input caused a ParseException: " + userInput);
@@ -119,6 +130,14 @@ public class AddressBookParser {
             logger.fine("Command word: " + commandWord + "; Arguments: " + arguments);
 
             switch (commandWord) {
+            case EditCommand.COMMAND_WORD:
+                if (model.getSelectedPerson() instanceof Patient) {
+                    return new EditCommandParser().parse(PersonType.PATIENT, arguments);
+                }
+                if (model.getSelectedPerson() instanceof Specialist) {
+                    return new EditCommandParser().parse(PersonType.SPECIALIST, arguments);
+                }
+                break;
 
             case DeleteCommand.COMMAND_WORD:
                 return new DeleteCommandParser().parse(arguments);
@@ -147,8 +166,10 @@ public class AddressBookParser {
             case RedoCommand.COMMAND_WORD:
                 return new RedoCommand();
 
+            case ThemeCommand.COMMAND_WORD:
+                return new ThemeCommandParser().parse(arguments);
+
             case AddCommand.COMMAND_WORD:
-            case EditCommand.COMMAND_WORD:
             case FindCommand.COMMAND_WORD:
             case ListCommand.COMMAND_WORD:
                 throw new ParseException(MESSAGE_INVALID_PERSON_TYPE);

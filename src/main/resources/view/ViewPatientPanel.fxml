@@ -7,10 +7,11 @@
 <?import javafx.scene.layout.VBox?>
 
 <?import javafx.scene.control.ListView?>
-<VBox minWidth="480.0" HBox.hgrow="ALWAYS" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" style="-fx-border-color: black; -fx-border-radius: 15; -fx-background-radius: 15;">
+
+<VBox styleClass="viewPersonPanel" minWidth="480.0" HBox.hgrow="ALWAYS" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
     <VBox minWidth="440.0" prefWidth="440.0" HBox.hgrow="ALWAYS">
         <VBox minWidth="440.0" prefWidth="470.0 " VBox.vgrow="ALWAYS">
-            <Label fx:id="personType" styleClass="cell_view_field_label" style="-fx-text-fill: aqua" text="Patient" />
+            <Label fx:id="personType" styleClass="patientType, cell_view_field_label" text="Patient" />
             <padding>
                 <Insets bottom="5.0"/>
             </padding>

@@ -12,7 +12,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SPECIALTY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -116,12 +115,10 @@ public class FindCommandParser implements ParserComplex<FindCommand> {
     }
 
     private List<String> splitKeywordsByWhitespace(ArgumentMultimap argMultimap, Prefix prefix) {
-        if (argMultimap.getValue(prefix).isPresent()) {
-            String trimmedArgs = argMultimap.getValue(prefix).get().trim();
-            String[] keywords = trimmedArgs.split("\\s+");
-            return Arrays.asList(keywords);
-        }
-        return new ArrayList<>();
+        assert argMultimap.getValue(prefix).isPresent();
+        String trimmedArgs = argMultimap.getValue(prefix).get().trim();
+        String[] keywords = trimmedArgs.split("\\s+");
+        return Arrays.asList(keywords);
     }
 
     private FindPredicateMap setupPersonPredicates(ArgumentMultimap argMultimap) {

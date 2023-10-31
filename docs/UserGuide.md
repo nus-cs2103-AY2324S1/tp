@@ -88,7 +88,6 @@ A patient can have any number of medical histories (including 0)
 
 Format (for specialists): `add -sp n/NAME e/EMAIL p/PHONE_NUMBER s/SPECIALISATION l/LOCATION`
 
-
 Examples:
 * `add -pa n/John p/12345678 a/21 m/Osteoporosis m/Rheumatoid arthritis`
 * `add -sp n/Jane p/73331515 s/Dermatologist l/Ang Mo Kio`
@@ -103,15 +102,15 @@ Examples:
 * `list -pa` Lists all patients in records.
 * `list -sp` Lists all specialists in records.
 
-### Locating persons by their attributes: `find`
+### Locating patients or specialists by their attributes: `find`
 
-Finds persons whose attributes contain any of the given keywords. 
+Finds patients or specialists whose attributes contain any of the given keywords. 
 Multiple attributes can be searched at once, the result will display any person
 with all attributes containing any of the corresponding keywords in the command.
 
 Format: `find -PERSON_TYPE [PREFIX/KEYWORDS]`
 
-* All prefixes are optional. Hence, calling `find -PERSON_TYPE` (without any prefixes) will result in all person of the specified type being listed.
+* All prefixes are optional. Hence, entering `find -PERSON_TYPE` (without any prefixes) will result in all person of the specified type being listed.
 * The search is case-insensitive.
   * e.g `hans` will match `Hans`
 * The order of the keywords does not matter. 
@@ -144,6 +143,34 @@ The list header will show `No data found` instead.
 
 </div>
 
+### Editing a pre-existing patient or specialist record: `edit`
+
+Changes the content of a pre-existing patient or specialist record in the view panel.
+Multiple attributes of a person can be changed at once. The view panel will be updated with the
+modified results immediately after each successful command execution.
+
+Format: `edit PREFIX/KEYWORD…​`
+
+* When entering an `edit` command, at least one valid prefix must be present. 
+I.e. entering `edit` (without any prefixes) will result in an error message being displayed.
+* Only the patient or specialist in the view panel will be edited. Hence, when editing a specialist specific attribute
+while viewing a patient (or vice versa), an error message be displayed.
+  * e.g. when a patient is present in the view panel, `edit s/Dentistry` will result in an error message being displayed as
+  patients do not have the specialty attribute.
+* The new values of compulsory attributes for a patient or specialist cannot be empty.
+  * e.g. `edit s/` (empty Specialty attribute) will result in an error when trying to edit a specialist.
+  * e.g. `edit n/` (empty Name attribute) will result in an error when trying to edit a patient or specialist.
+* The new values of optional attributes can be empty. This is useful when you want to clear the content of optional attributes 
+in a patient or specialist.
+  * e.g. `edit t/` (empty Tag attribute) will remove the tags of the patient or specialist being displayed in the view panel.
+
+Examples:
+* `list -pa` > `view 1` > `edit n/John Wick` modifies the name of the first patient in the list to `John Wick`.
+*  `find -sp t/friend` > `view 3` > `edit s/Surgery` modifies the specialty of the third specialist in the list with
+the `friend` tag.
+<br>
+
+
 ### Deleting a patient or specialist : `delete`
 
 Deletes the specified patients or specialists from the stored records.
@@ -159,12 +186,6 @@ Examples:
 * `list -pa` followed by `delete 2` deletes the 2nd patient in the listed patients.
 * `find -sp s/Orthopaedic` followed by `delete 2 3 4` deletes the 2nd, 3rd and 4th specialist listed in the `find` command.
 
-### Clearing all entries : `clear`
-
-Clears all entries from the stored records.
-
-Format: `clear`
-
 ### Undo previous entry : `undo`
 
 Undo the previous command, stackable. (Able to keep undo-ing till there are no commands left to be undone)
@@ -177,11 +198,6 @@ Redo the previous 'undo', stackable. (Able to keep redoing-ing till there are no
 
 Format: `redo`
 
-### Exiting the program : `exit`
-
-Exits the program.
-
-Format: `exit`
 
 
 ### Adding a custom shortcut : `addsc`
@@ -208,6 +224,30 @@ Format: `delsc sc/SHORTCUT...​`
 Examples:
 * `delsc sc/del sc/abc` will remove the previous mappings of `del` and `abc`.
 
+
+### Changing the Theme : `theme`
+
+Changes the theme of the application. The default theme on launch is the dark theme.
+
+Format: `theme TYPE`
+* `TYPE` has the following possibilities: `dark`, `light` (case-insensitive)
+
+Examples:
+* `theme dark` sets the application theme to the dark theme.
+* `theme LIGHT` sets the application theme to the light theme.
+
+### Clearing all entries : `clear`
+
+Clears all entries from the stored records.
+
+Format: `clear`
+
+### Exiting the program : `exit`
+
+Exits the program.
+
+Format: `exit`
+
 ### Recalling Recent Commands
 
 Similar to the [CLI of Unix](https://www.osc.edu/book/export/html/3022), the CLI of DoConnek Pro provides the functionality of
@@ -215,11 +255,10 @@ recalling recent commands by pressing the 'up arrow' and the 'down arrow' on the
 
 DoConnek Pro maintains a history of the 20 most recent commands the user has entered.
 
-The user can recall the 20 most recently entered commands by pressing the up arrow on the keyboard. Each press of the 
+The user can recall the 20 most recently entered commands by pressing the up arrow on the keyboard. Each press of the
 up arrow cycles one command further back in the history.
 
 If the user goes too far back in history, they can 'undo' an 'up arrow' by pressing the down arrow.
-
 
 ### Save and Load Data
 
@@ -256,14 +295,17 @@ If your changes to the data file makes its format invalid, DoConnek Pro will dis
 
 Action | Format, Examples
 --------|------------------
+**Help** | `help`
 **Add (patient)** | `add -pa n/NAME e/EMAIL p/PHONE_NUMBER a/AGE [m/MEDICAL_HISTORY]...` <br> e.g., `add -pa n/John e/johnjohn@example.com p/12345678 a/21 m/Osteoporosis m/Rheumatoid arthritis`
 **Add (specialist)** | `add -sp n/NAME e/EMAIL p/PHONE_NUMBER s/SPECIALISATION l/LOCATION` <br> e.g., `add -sp n/Jane e/janejane@example.com p/73331515 s/Dermatologist l/Ang Mo Kio`
-**Clear** | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Find** | `find -PERSON_TYPE KEYWORD [MORE_KEYWORDS]`<br> e.g., `find -pa n/James Jake p/73281193`
+**Find** | `find -PERSON_TYPE PREFIX/KEYWORD [MORE_PREFIX/KEYWORDS]`<br> e.g., `find -pa n/James Jake p/73281193`
+**Edit** | `edit PREFIX/KEYWORD [MORE_PREFIX/KEYWORDS]` <br> e.g. `edit n/Jonathan Wick p/09883100`
 **List** | `list -pa`
 **Undo** | `undo`
 **Redo** | `redo`
 **Add shortcut** | `addsc sc/SHORTCUT kw/KEYWORD` <br> e.g., `addsc sc/del kw/delete`
 **Delete shortcut** | `delsc sc/SHORTCUT [sc/SHORTCUT]...` <br> e.g., `delsc sc/del sc/li`
-**Help** | `help`
+**Change Theme** | `theme TYPE` <br> e.g., `theme dark`
+**Clear** | `clear`
+**Exit** | `exit`
