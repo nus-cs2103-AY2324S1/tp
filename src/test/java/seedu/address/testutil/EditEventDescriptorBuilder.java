@@ -1,11 +1,8 @@
 package seedu.address.testutil;
 
 import seedu.address.logic.commands.EditEventCommand.EditEventDescriptor;
-import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.event.Event;
-import seedu.address.model.event.EventDate;
 import seedu.address.model.event.EventName;
-import seedu.address.model.event.Meeting;
 
 /**
  * A utility class to help with building EditMeetingDescriptor objects.

@@ -73,7 +73,12 @@ public class MeetingBuilder {
         return this;
     }
 
-    public MeetingBuilder withPerson(Set<Name> names) throws ParseException {
+    /**
+     * Sets the {@code names} of the {@code Meeting} that we are building.
+     * @param names names of the persons
+     * @return this instance of MeetingBuilder
+     */
+    public MeetingBuilder withPerson(Set<Name> names) {
         this.names = names;
         return this;
     }
@@ -91,7 +96,12 @@ public class MeetingBuilder {
         return this;
     }
 
-    public MeetingBuilder withGroups(Set<Group> groups) throws ParseException {
+    /**
+     * Sets the {@code groups} of the {@code Meeting} that we are building.
+     * @param groups the groups to add
+     * @return this instance of MeetingBuilder
+     */
+    public MeetingBuilder withGroups(Set<Group> groups) {
         this.groups = groups;
         return this;
     }

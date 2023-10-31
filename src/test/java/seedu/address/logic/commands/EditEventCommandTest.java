@@ -1,7 +1,7 @@
 package seedu.address.logic.commands;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_EVENT_OUT_OF_BOUNDS;
@@ -10,8 +10,13 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_TYPICAL_GROUP_EVENT;
 import static seedu.address.testutil.TypicalIndexes.INDEX_TYPICAL_PERSON_EVENT;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import org.junit.jupiter.api.Test;
+
 import seedu.address.logic.Messages;
+import seedu.address.logic.commands.EditEventCommand.EditEventDescriptor;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.AddressBook;
@@ -19,19 +24,15 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.event.Event;
-import seedu.address.logic.commands.EditEventCommand.EditEventDescriptor;
 import seedu.address.model.group.Group;
 import seedu.address.model.person.Name;
 import seedu.address.testutil.EditEventDescriptorBuilder;
 import seedu.address.testutil.MeetingBuilder;
 
-import java.util.HashSet;
-import java.util.Set;
-
 
 public class EditEventCommandTest {
 
-    Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private final Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
     public void constructor_nullEvent_throwsNullPointerException() {
@@ -50,7 +51,8 @@ public class EditEventCommandTest {
         EditEventDescriptor descriptor = new EditEventDescriptorBuilder(editedEvent).build();
         EditEventCommand editEventCommand = new EditEventCommand(INDEX_FIRST_EVENT, descriptor);
 
-        String expectedMessage = String.format(EditEventCommand.MESSAGE_EDIT_SUCCESS, Messages.formatEvent(editedEvent));
+        String expectedMessage = String
+                .format(EditEventCommand.MESSAGE_EDIT_SUCCESS, Messages.formatEvent(editedEvent));
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setEvent(model.getEventList().get(0), editedEvent);

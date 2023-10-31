@@ -11,17 +11,10 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_START_TIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_UNASSIGN_GROUPS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_UNASSIGN_PERSONS;
 
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Optional;
-import java.util.Set;
-
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditEventCommand;
 import seedu.address.logic.commands.EditEventCommand.EditEventDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.group.Group;
-import seedu.address.model.person.Name;
 
 /**
  * Parses input arguments and creates a new EditMeetingCommand object
@@ -87,25 +80,5 @@ public class EditMeetingCommandParser implements Parser<EditEventCommand> {
         }
 
         return new EditEventCommand(index, editEventDescriptor);
-    }
-
-    private Optional<Set<Name>> parseNamesForEdit(Collection<String> names) throws ParseException {
-        assert names != null;
-
-        if (names.isEmpty()) {
-            return Optional.empty();
-        }
-        Collection<String> nameSet = names.size() == 1 && names.contains("") ? Collections.emptySet() : names;
-        return Optional.of(ParserUtil.parsePersonNames(nameSet));
-    }
-
-    private Optional<Set<Group>> parseGroupsForEdit(Collection<String> groups) throws ParseException {
-        assert groups != null;
-
-        if (groups.isEmpty()) {
-            return Optional.empty();
-        }
-        Collection<String> groupSet = groups.size() == 1 && groups.contains("") ? Collections.emptySet() : groups;
-        return Optional.of(ParserUtil.parseGroups(groupSet));
     }
 }
