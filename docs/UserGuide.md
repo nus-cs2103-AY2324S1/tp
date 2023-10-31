@@ -130,6 +130,19 @@ Examples:
 * `find -sp n/Alex s/Orthopaedic` returns any specialists names including the string `Alex` who has the `Orthopaedic` specialty
 <br>
 
+<div markdown="block" class="alert alert-info">
+
+**:information_source: About the list header:**<br>
+
+DoConnek Pro's interface comes with a handy list header that shows whether you are viewing `Patients` or `Specialists`.
+If for any reason there is no data to show, for example:
+* There is no existing `Patient` data when listing `Patients`.
+* A `find` query returns no matching results.
+
+The list header will show `No data found` instead.
+
+</div>
+
 ### Editing a pre-existing patient or specialist record: `edit`
 
 Changes the content of a pre-existing patient or specialist record in the view panel.
@@ -156,6 +169,7 @@ Examples:
 *  `find -sp t/friend` > `view 3` > `edit s/Surgery` modifies the specialty of the third specialist in the list with
 the `friend` tag.
 <br>
+
 
 ### Deleting a patient or specialist : `delete`
 

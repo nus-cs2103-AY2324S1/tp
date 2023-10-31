@@ -202,7 +202,9 @@ public class MainWindow extends UiPart<Stage> {
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
             viewPersonPanel = ViewPatientPanel.updatePerson(logic.getSelectedPerson());
             viewPersonPanelPlaceholder.getChildren().clear();
-            viewPersonPanelPlaceholder.getChildren().add(viewPersonPanel.getRoot());
+            if (viewPersonPanel != null) {
+                viewPersonPanelPlaceholder.getChildren().add(viewPersonPanel.getRoot());
+            }
 
             if (commandResult.isShowHelp()) {
                 handleHelp();
