@@ -20,6 +20,7 @@ TutorConnect is **optimised for users who can type fast** and utilise the [Comma
 --------------------------------------------------------------------------------------------------------------------
 ## Table of Contents
 * Table of Contents
+{::options toc_levels 1..4}
 {:toc}
 --------------------------------------------------------------------------------------------------------------------
 
@@ -203,8 +204,6 @@ tracking tutor information within your tuition centre.
 
 Adds a tutor to TutorConnect.
 
-<!-- toc-ignore -->
-
 ##### :beginner: First time users
 
 **Scenario**
@@ -223,7 +222,6 @@ You should expect to see John Doe has now been added at the bottom of the displa
 
 ![add tutor](images/addTutor.png)
 
-<!-- /toc-ignore -->
 
 ##### :hammer: Experienced users
 
