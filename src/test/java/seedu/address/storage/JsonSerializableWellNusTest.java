@@ -2,6 +2,7 @@ package seedu.address.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalWellNus.getTypicalWellNus;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -11,7 +12,6 @@ import org.junit.jupiter.api.Test;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.JsonUtil;
 import seedu.address.model.WellNus;
-import seedu.address.testutil.TypicalStudents;
 
 public class JsonSerializableWellNusTest {
 
@@ -28,7 +28,7 @@ public class JsonSerializableWellNusTest {
         JsonSerializableWellNus dataFromFile = JsonUtil.readJsonFile(TYPICAL_WELLNUS_FILE,
                 JsonSerializableWellNus.class).get();
         WellNus wellNusFromFile = dataFromFile.toModelType();
-        WellNus typicalStudentsWellNus = TypicalStudents.getTypicalAddressBook();
+        WellNus typicalStudentsWellNus = getTypicalWellNus();
         assertEquals(wellNusFromFile, typicalStudentsWellNus);
     }
 

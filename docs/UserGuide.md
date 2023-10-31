@@ -113,10 +113,19 @@ Format: `note <INDEX> note/[NOTE]`
 #### 2.2.4 Editing a Student: `edit`
 
 #### 2.2.5 Viewing all Students: `view`
+Shows a list of all available students or appointments, depending on specified input.
+
+Format: `view g/CATEGORY`
+
+**Parameters**:
+1. Category
+    - Only 'students', 'appointments' or 'all'
+
+
 
 #### 2.2.6 Finding Students by Name: `find`
 
-Find students based on their name. Can choose to find student based on their first name, last name or full name
+Find students and their related appointments based on their name. Can choose to find student based on their first name, last name or full name
 If the name does not match entirely, the student will not be shown. Refer to the examples below for a better understanding
 
 Format: `find <NAME>`
@@ -183,15 +192,16 @@ Examples:
 
 #### 2.3.3 Viewing all Appointments: `view`
 
-Shows a list of all students or appointments, depending on specified input.
+Shows a list of all available students or appointments, depending on specified input.
 
 Format: `view g/CATEGORY`
 
 **Parameters**:
 1. Category
-   - Only 'students' or 'appointments'
+   - Only 'students', 'appointments' or 'all'
 
 #### 2.3.4 Filtering Appointments by Date: `filter`
+
 
 ### 2.4 Others
 #### 2.4.1 Exiting the program: `exit`

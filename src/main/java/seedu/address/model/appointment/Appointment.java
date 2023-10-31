@@ -11,7 +11,7 @@ import seedu.address.model.student.Name;
 /**
  * Represents an appointment with a date, start time, end time, a student, and a description.
  */
-public class Appointment {
+public class Appointment implements Comparable<Appointment> {
 
     private final Date date;
     private final Time startTime;
@@ -31,7 +31,7 @@ public class Appointment {
     public Appointment(Date date, Time startTime, Time endTime, Name name, Description description)
             throws InvalidStartEndTimeException {
         requireAllNonNull(date, startTime, endTime, name, description);
-        checkStartEndTime(startTime, endTime);
+        isValidStartEndTime(startTime, endTime);
         assert startTime.getLocalTime().isBefore(endTime.getLocalTime());
         this.date = date;
         this.startTime = startTime;
@@ -67,7 +67,7 @@ public class Appointment {
      * @param endTime   The end time of the appointment.
      * @throws InvalidStartEndTimeException If the start time is not before the end time, an exception is thrown.
      */
-    public void checkStartEndTime(Time startTime, Time endTime) throws InvalidStartEndTimeException {
+    public void isValidStartEndTime(Time startTime, Time endTime) throws InvalidStartEndTimeException {
         if (!(startTime.getLocalTime().isBefore(endTime.getLocalTime()))) {
             throw new InvalidStartEndTimeException();
         }
@@ -113,6 +113,34 @@ public class Appointment {
     @Override
     public int hashCode() {
         return Objects.hash(name, description, date, startTime, endTime);
+    }
+
+    /**
+     * Compares this appointment with another appointment based on their date and start time.
+     * If two appointments have the same date and start time, they are considered the same appointment, as there cannot
+     * be overlapping appointments.
+     *
+     * @param otherAppointment The appointment to compare to.
+     * @return A negative integer if this appointment is earlier than the other, a positive integer if it's later,
+     *         and 0 if they are the same appointment.
+     */
+    @Override
+    public int compareTo(Appointment otherAppointment) {
+        int dateCompare = this.date.getLocalDate().compareTo(otherAppointment.date.getLocalDate());
+
+        if (dateCompare != 0) {
+            return dateCompare;
+        }
+
+        int startTimeCompare = this.startTime.getLocalTime().compareTo(otherAppointment.startTime.getLocalTime());
+
+        if (startTimeCompare != 0) {
+            return startTimeCompare;
+        }
+
+        assert this.equals(otherAppointment);
+
+        return 0;
     }
 
     @Override
