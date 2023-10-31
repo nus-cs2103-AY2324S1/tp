@@ -20,7 +20,7 @@ import networkbook.model.person.Priority;
 public class PersonCard extends UiPart<Region> {
 
     private static final String FXML = "PersonListCard.fxml";
-    private static final String PHONES_HEADER = "Phone: ";
+    private static final String PHONES_HEADER = "Phones: ";
     private static final String EMAILS_HEADER = "Emails: ";
     private static final String LINKS_HEADER = "Links: ";
     private static final String GRADUATION_HEADER = "Graduation: ";
@@ -28,6 +28,10 @@ public class PersonCard extends UiPart<Region> {
     private static final String SPECIALISATION_HEADER = "Specialisations: ";
     private static final String PRIORITY_HEADER = "Priority: ";
     private static final String EMPTY_FIELD = "-";
+
+    private static final String FIELD_STYLE_CLASS = "cell_field";
+    private static final String EMPTY_STYLE_CLASS = "empty";
+    private static final String PRIORITY_STYLE_CLASS_PREFIX = "priority_";
 
     private static final Logger LOGGER = Logger.getLogger("PersonCard");
 
@@ -48,17 +52,25 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label id;
     @FXML
-    private Label phones;
+    private Label phonesHeader;
+    @FXML
+    private FlowPane phones;
     @FXML
     private Label linksHeader;
     @FXML
     private FlowPane links;
     @FXML
+    private Label graduationHeader;
+    @FXML
     private Label graduation;
     @FXML
-    private Label courses;
+    private Label coursesHeader;
     @FXML
-    private Label specialisations;
+    private FlowPane courses;
+    @FXML
+    private Label specialisationsHeader;
+    @FXML
+    private FlowPane specialisations;
     @FXML
     private Label emailsHeader;
     @FXML
@@ -67,6 +79,8 @@ public class PersonCard extends UiPart<Region> {
     private FlowPane tags;
     @FXML
     private Label priority;
+    @FXML
+    private Label priorityHeader;
 
     /**
      * Creates a {@code PersonCard} with the given {@code Person} and index to display.
@@ -81,7 +95,16 @@ public class PersonCard extends UiPart<Region> {
         name.setText(person.getName().fullName);
 
         // Phone numbers
-        phones.setText(PHONES_HEADER + person.getPhones().toString());
+        phonesHeader.setText(PHONES_HEADER);
+        person.getPhones().stream()
+                .forEach(phone -> {
+                    Label phoneLabel = new Label(phone.getValue());
+                    phoneLabel.getStyleClass().add(FIELD_STYLE_CLASS);
+                    phones.getChildren().add(phoneLabel);
+                });
+        if (person.getPhones().isEmpty()) {
+            phones.getChildren().add(getEmptyFieldLabel());
+        }
 
         // Email addresses
         emailsHeader.setText(EMAILS_HEADER);
@@ -90,6 +113,9 @@ public class PersonCard extends UiPart<Region> {
                 .forEach(email -> emails.getChildren().add(new FieldHyperlink(email.getValue(), () -> {
                     LOGGER.log(Level.INFO, "Opening email: " + email.getValue());
                 })));
+        if (person.getEmails().isEmpty()) {
+            emails.getChildren().add(getEmptyFieldLabel());
+        }
 
         // Website links
         linksHeader.setText(LINKS_HEADER);
@@ -98,38 +124,74 @@ public class PersonCard extends UiPart<Region> {
                 .forEach(link -> links.getChildren().add(new FieldHyperlink(link.getValue(), () -> {
                     LOGGER.log(Level.INFO, "Opening link: " + link.getValue());
                 })));
+        if (person.getLinks().isEmpty()) {
+            links.getChildren().add(getEmptyFieldLabel());
+        }
 
         // Graduation
-        person.getGraduation().ifPresentOrElse((Graduation g) ->
-                graduation.setText(GRADUATION_HEADER + g.getFullString()), () ->
-                graduation.setText(GRADUATION_HEADER + EMPTY_FIELD));
+        graduationHeader.setText(GRADUATION_HEADER);
+        person.getGraduation().ifPresentOrElse((Graduation g) -> {
+                graduation.setText(g.getFullString());
+                graduation.getStyleClass().add(EMPTY_STYLE_CLASS);
+            }, () -> {
+                graduation.setText(EMPTY_FIELD);
+                graduation.getStyleClass().add(EMPTY_STYLE_CLASS);
+            });
 
         // Courses
-        courses.setText(COURSE_HEADER + person.getCourses().toString());
+        coursesHeader.setText(COURSE_HEADER);
+        person.getCourses().stream()
+                .forEach(course -> {
+                    Label courseLabel = new Label(course.getValue());
+                    courseLabel.getStyleClass().add(FIELD_STYLE_CLASS);
+                    courses.getChildren().add(courseLabel);
+                });
+        if (person.getCourses().isEmpty()) {
+            courses.getChildren().add(getEmptyFieldLabel());
+        }
 
         // Specialisations
-        specialisations.setText(SPECIALISATION_HEADER + person.getSpecialisations().toString());
+        specialisationsHeader.setText(SPECIALISATION_HEADER);
+        person.getSpecialisations().stream()
+                .forEach(spec -> {
+                    Label specLabel = new Label(spec.getValue());
+                    specLabel.getStyleClass().add(FIELD_STYLE_CLASS);
+                    specialisations.getChildren().add(specLabel);
+                });
+        if (person.getSpecialisations().isEmpty()) {
+            specialisations.getChildren().add(getEmptyFieldLabel());
+        }
 
         // Tags
         person.getTags().stream()
                 .forEach(tag -> tags.getChildren().add(new Label(tag.getValue())));
-        person.getPriority().ifPresentOrElse((Priority p) ->
-                        priority.setText(PRIORITY_HEADER + p), () -> priority.setText(PRIORITY_HEADER + EMPTY_FIELD));
+
+        // Priority
+        priorityHeader.setText(PRIORITY_HEADER);
+        person.getPriority().ifPresentOrElse((Priority p) -> {
+            priority.setText(p.toString());
+            priority.getStyleClass().add(PRIORITY_STYLE_CLASS_PREFIX + p.toString());
+        }, () -> {
+            priority.setText(EMPTY_FIELD);
+            priority.getStyleClass().add(EMPTY_STYLE_CLASS);
+        });
     }
 
-    public Label getPhones() {
-        return phones;
+    /**
+     * Returns new label to indicate empty field or list.
+     */
+    private static Label getEmptyFieldLabel() {
+        Label emptyFieldLabel = new Label(EMPTY_FIELD);
+        emptyFieldLabel.getStyleClass().add(FIELD_STYLE_CLASS);
+        emptyFieldLabel.getStyleClass().add(EMPTY_STYLE_CLASS);
+        return emptyFieldLabel;
     }
+
+    // Below: getter methods for testing
     public Label getGraduation() {
         return graduation;
     }
-    public Label getCourse() {
-        return courses;
-    }
-    public Label getSpecialisations() {
-        return specialisations;
-    }
     public Label getPriority() {
-        return priority; // getter method for testing
+        return priority;
     }
 }

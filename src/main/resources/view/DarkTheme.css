@@ -338,7 +338,7 @@
 }
 
 #tags {
-    -fx-hgap: 7;
+    -fx-hgap: 5;
     -fx-vgap: 3;
 }
 
@@ -348,7 +348,7 @@
     -fx-padding: 1 3 1 3;
     -fx-border-radius: 2;
     -fx-background-radius: 2;
-    -fx-font-size: 11;
+    -fx-font-size: 12px;
 }
 
 .hyperlink_list {
@@ -356,19 +356,45 @@
     -fx-vgap: 3;
 }
 
-.hyperlink_list .hyperlink {
+.cell_field.hyperlink {
+    -fx-background-color: #6093b5;
+}
+
+.cell_field.hyperlink:hover {
+    -fx-background-color: #80b5d8;
+}
+
+.cell_field.hyperlink:visited {
+    -fx-background-color: #6093b5;
+}
+
+.cell_header {
+    -fx-font-weight: bold;
+    -fx-font-size: 14px;
+    -fx-margin: 3 0 3 0;
+}
+
+.cell_field {
     -fx-text-fill: white;
-    -fx-padding: 1 3 1 3;
+    -fx-padding: 1 4 1 4;
     -fx-border-radius: 2;
     -fx-background-radius: 2;
-    -fx-font-size: 11;
-    -fx-background-color: #6c90a8;
+    -fx-background-color: #a48355;
+    -fx-font-size: 12px;
 }
 
-.hyperlink_list .hyperlink:hover {
-    -fx-background-color: #6da5ca;
+.cell_field.empty {
+    -fx-background-color: #5c6c76;
 }
 
-.hyperlink_list .hyperlink:visited {
-    -fx-background-color: #6c90a8;
+.cell_field.priority_High {
+    -fx-background-color: #be3c3c;
+}
+
+.cell_field.priority_Medium {
+    -fx-background-color: #c69a21;
+}
+
+.cell_field.priority_Low {
+    -fx-background-color: #44a096;
 }

@@ -15,6 +15,8 @@ public class FieldHyperlink extends Hyperlink {
     public FieldHyperlink(String labelText, Runnable action) {
         requireAllNonNull(labelText, action);
         this.setText(labelText);
+        this.getStyleClass().add("cell_field");
+        this.getStyleClass().add("cell_small_label");
         this.setOnAction(e -> action.run());
     }
 
