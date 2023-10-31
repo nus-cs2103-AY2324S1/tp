@@ -16,13 +16,20 @@ Here is an **overview** of how CampusConnect can enhance your campus experience:
 - Receive timely notifications to celebrate your friends' birthdays
 - Tracks payments between you and your friends
 
-This user guide shows you how to get started with using CampusConnect -- it has easy-to-understand explanations and examples to help you grasp its various features.
+## Using this Guide
 
-For a more technical and comprehensive overview of CampusConnect's codebase, please refer to our [Developer Guide](DeveloperGuide.md).
+This user guide shows you how to get started with using CampusConnect -- it has easy-to-understand explanations and examples to help you grasp its various features. 
+
+| If you are... | You should... |
+| :-----------: | :-----------: |
+| New to CampusConnect | Read the **[Quick Start](#quick-start)** below! |
+| An existing user | Skip to the **[Command Summary](#command-summary)** for a quick reference, or read through our **[Features](#features)** for a deeper look at each feature! |
+| Interested in comprehensive technical details | Read our **[Developer Guide](DeveloperGuide.md)**, which is separate from this User Guide! |
+
 
 # Table of Contents
 1. Quick Start
-2. Features 
+2. Features
    - Request help [Coming Soon]
    - Add normal contact
    - Add emergency contact
