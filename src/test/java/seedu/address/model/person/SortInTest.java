@@ -23,6 +23,16 @@ public class SortInTest {
         assertFalse(SortIn.isValidSortIn("ASCENDING"));
         assertFalse(SortIn.isValidSortIn("SHUN"));
         assertFalse(SortIn.isValidSortIn("DES"));
+
+        // valid sort in
+        assertTrue(SortIn.isValidSortIn("ASC"));
+        assertTrue(SortIn.isValidSortIn("DESC"));
+        assertTrue(SortIn.isValidSortIn("Asc"));
+        assertTrue(SortIn.isValidSortIn("Desc"));
+        assertTrue(SortIn.isValidSortIn("AsC"));
+        assertTrue(SortIn.isValidSortIn("DeSC"));
+        assertTrue(SortIn.isValidSortIn("asc"));
+        assertTrue(SortIn.isValidSortIn("desc"));
     }
     @Test
     public void equals() {
