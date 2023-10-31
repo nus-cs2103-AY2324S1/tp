@@ -21,16 +21,30 @@ For experienced users, if you need help in remembering a particular command, ple
 * [Glossary](#glossary)
 * [Quick start](#quick-start)
 * [Features](#features)
+  * [Command Format](#command-format)
+  * [Get help](#get-help--help)
+  * [List all](#list-all-musicians-and-bands--list)
+  * [Features for musicians](#features-for-managing-musicians)
+    * [Add musician](#add-musician--add)
+    * [Remove musician](#remove-musician--remove)
+    * [Edit musician](#edit-musician--edit)
+    * [Tag musician](#tag-musician)
+    * [Find musicians](#find-musicians--find)
+  * [Features for bands](#features-for-managing-bands)
+    * [Create band](#create-band--addb)
+    * [Add musician to band](#add-musician-to-band--addm)
+  * [Clear data](#clear-data--clear)
+  * [Exit app](#exit-app--exit)
+  * [Save data](#save-data)
 * [Command Summary](#command-summary)
 * [Troubleshooting](#troubleshooting)
 
-
 ## Glossary
 To be added.
-
+CLI, GUI, Java
 --------------------------------------------------------------------------------------------------------------------
 
-## Quick start
+# Quick start
 1. Ensure you have Java 11 or above installed in your Computer. If you have never downloaded it before, download from [here](https://www.oracle.com/sg/java/technologies/javase/jdk11-archive-downloads.html).
 
 
@@ -43,7 +57,7 @@ To be added.
 
 
 4. From the home folder, open "Terminal" on MacOS or "Command Prompt" in Windows, and type `java -jar BandConnect++.jar` to run the application. A GUI similar to the below should appear in a few seconds.
-   ![to be updated with arrows explaining the components](images/tobeupdated.png)
+   ![to be updated with components labelled](images/tobeupdated.png)
 Note how the app contains some sample data.
 Type the command in the command box and press Enter to execute it. 
 
@@ -60,14 +74,17 @@ Please refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Features
+# Features
 
-### Formatting Convention
+## Command Format
 to be updated.
 
-### Get help: `help`
+## Get help: `help`
 
-### Adding a musician contact: `add`
+## List all musicians and bands: `list`
+
+## Features for managing musicians
+### Add musician: `add`
 
 Adds a musician to the contact book. Name, phone number, email, and instrument can be recorded.
 
@@ -87,7 +104,7 @@ You will see a message indicating successful addition of the musician like below
 Should you input a musician which is already in your contact book (ie. have the same phone number or email as an existing contact),
 you will see an error message showing the possible error. Please input a different phone/email for the current contact or modify the original contact's relevant details.
 
-### Removing a musician contact: `remove`
+### Remove musician: `remove`
 
 Removes a musician contact from the address book.
 
@@ -111,7 +128,11 @@ containing 5 musicians), or input a non-positive index (e.g. `remove 0` or `remo
 
 Please verify that the index is correct and try again.
 
-### Tagging a musician with instruments: `tag instrument`
+### Edit musician: `edit`
+
+### Tag musician
+[combine tag i and g]
+with instruments: `tag instrument`
 
 Tags a musician with one or more instruments he/she is proficient in.
 
@@ -137,7 +158,7 @@ Should you try to tag a musician with zero instrument tags or empty tags, i.e., 
 `tag instrument 1`, you will see a message like below:
 [insert image]
 
-### Tagging a musician with genres: `tag genre`
+Tag musician with genres: `tag genre`
 
 Tags a musician with one or more genres he/she is proficient in.
 
@@ -163,7 +184,7 @@ Should you try to tag a musician with zero genre tags or empty tags, i.e., `tag 
 you will see a message like below:
 [insert image]
 
-### Locating musicians by name: `find`
+### Find musicians: `find`
 
 Finds all musicians whose names contain any of the given keywords.
 
@@ -182,7 +203,8 @@ You will see a list of musicians as follows:
 Should you input `find` without any keyword, you will see a message like below:
 [insert image]
 
-### Creating a band: `addb`
+## Features for managing bands
+### Create band: `addb`
 
 Creates a band with the specified band name.
 
@@ -203,7 +225,7 @@ existing band), you will see an error message showing the possible error. Please
 band or change the name of the existing band.
 [insert image]
 
-### Adding a musician to a band: `addm`
+### Add musician to band: `addm`
 
 Adds a musician to a specified band.
 
@@ -223,25 +245,23 @@ Should you input an index that does not exist, you will see an error message sho
 Please input a different index as pointed out by the error message.
 [insert image]
 
-### Exiting the program : `exit`
+## Clear data: `clear`
+
+## Exit app : `exit`
 
 Exits the program.
 
 Format: `exit`
 
-### Saving the data
+## Save data
 
 BandConnect++ data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
---------------------------------------------------------------------------------------------------------------------
+Congratulations! You are now ready to use **_BandConnect++_**!
 
-## Troubleshooting
-
-[to be added soon]
+If you wish, please refer to the below section for a more succinct [command summary](#command-summary).
 
 --------------------------------------------------------------------------------------------------------------------
-
-
 ## Command summary
 
 
@@ -252,3 +272,11 @@ BandConnect++ data are saved in the hard disk automatically after any command th
 | **Tag Instrument** | `tag instrument INDEX i/INSTRUMENT…​`<br> e.g.,`tag instrument 1 i/piano i/guitar`                             |
 | **Tag Genre**      | `tag genre INDEX g/GENRE…​`<br> e.g., `tag genre 1 g/rock g/pop`                                               |
 | **Find**           | `find KEYWORD`                                                                                                 |
+
+
+
+--------------------------------------------------------------------------------------------------------------------
+## Troubleshooting
+
+[to be added soon]
+
