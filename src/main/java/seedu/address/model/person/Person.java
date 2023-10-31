@@ -8,7 +8,9 @@ import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.policy.Company;
 import seedu.address.model.policy.Policy;
+import seedu.address.model.policy.PolicyDate;
 import seedu.address.model.policy.PolicyNumber;
 import seedu.address.model.tag.Tag;
 
@@ -99,6 +101,26 @@ public class Person {
                 && otherPerson.getNric().equals(getNric())
                 && otherPerson.getLicencePlate().equals(getLicencePlate())
                 && otherPerson.getEmail().equals(getEmail());
+    }
+
+    /**
+     * Returns true if the specified person has the default policy parameters
+     */
+    public boolean hasDefaultPolicy() {
+        return this.getPolicy().getPolicyNumber().value.equals(PolicyNumber.DEFAULT_VALUE)
+                && this.getPolicy().getPolicyExpiryDate().date.toString().equals(PolicyDate.DEFAULT_COMPARISON_VALUE)
+                && this.getPolicy().getPolicyIssueDate().date.toString().equals(PolicyDate.DEFAULT_COMPARISON_VALUE)
+                && this.getPolicy().getCompany().value.equals(Company.DEFAULT_VALUE);
+    }
+
+    /**
+     * Returns true if the specified person has any policy parameters equal to the default
+     */
+    public boolean hasAnyDefaultPolicyParameters() {
+        return this.getPolicy().getPolicyNumber().value.equals(PolicyNumber.DEFAULT_VALUE)
+                || this.getPolicy().getPolicyExpiryDate().date.toString().equals(PolicyDate.DEFAULT_COMPARISON_VALUE)
+                || this.getPolicy().getPolicyIssueDate().date.toString().equals(PolicyDate.DEFAULT_COMPARISON_VALUE)
+                || this.getPolicy().getCompany().value.equals(Company.DEFAULT_VALUE);
     }
 
     /**
