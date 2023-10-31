@@ -1,12 +1,15 @@
 package seedu.address.logic.commands;
 
+import static java.util.Objects.requireNonNull;
+
 import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.employee.ContainsDepartmentPredicate;
-import seedu.address.model.employee.NameContainsKeywordsPredicate;
 
-import static java.util.Objects.requireNonNull;
-
+/**
+ * Filters employees in ManageHR app whose department(s) contains the argument keyword.
+ * Keyword matching is case-sensitive.
+ */
 public class FilterCommand extends Command {
     public static final String COMMAND_WORD = "filter";
 
