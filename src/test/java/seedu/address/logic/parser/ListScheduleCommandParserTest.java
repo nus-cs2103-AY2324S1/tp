@@ -100,6 +100,13 @@ public class ListScheduleCommandParserTest {
     }
 
     @Test
+    public void parse_validArgsStatusOnly_returnsListScheduleCommand() {
+        ListScheduleCommand expectedListCommand = new ListScheduleCommand(null, Status.MISSED);
+        assertParseSuccess(parser, " m/0", expectedListCommand);
+
+    }
+
+    @Test
     public void parse_invalidArgs_throwsParseException() {
         assertParseFailure(parser, "a",
             String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListScheduleCommand.MESSAGE_USAGE));
