@@ -213,18 +213,19 @@ A new tutor named John Doe has just joined your tuition centre. His phone number
 
 Let’s add him into TutorConnect.
 
-**What you should do**
+**Follow these steps**
 
 Type in `add-t n/John Doe p/98765432 e/johnd@example.com` and press enter.
 
 **What you can expect to see**
 
-You should expect to see John Doe has now been added at the bottom of the displayed list.
+Amazing! Tutor John Doe has now been added to the bottom of the displayed list.
 
 ![add tutor](images/addTutor.png)
 
 
 ##### :hammer: Experienced users
+{:.no_toc}
 
 **Command format**
 
@@ -232,14 +233,18 @@ You should expect to see John Doe has now been added at the bottom of the displa
 
 **Errors**
 
-If you see “Invalid command format!”, please ensure that you have followed the example above correctly. You may have missed out one of the tags like “n/” or typed one incorrectly.
+Here is a list of the error messages you may encounter, when the command is entered incorrectly:
+* `Invalid command format!`: One or more of the tags n/, p/, e/ is missing.
+* `Names should only contain alphanumeric characters and spaces, and it should not be blank`: Tutor name input was 
+  either invalid or blank.
+* `Phone numbers should only contain numbers, and it should be at least 3 digits long`: Tutor phone number input was 
+  either invalid or blank.
+* `Emails should be of the format local-part@domain and adhere to the following constraints`: Tutor email input was 
+  either invalid or blank.
 
-Otherwise if you see any of the following messages displayed in the result box:
-* Names should only contain alphanumeric characters and spaces, and it should not be blank 
-* Phone numbers should only contain numbers, and it should be at least 3 digits long 
-* Emails should be of the format local-part@domain and adhere to the following constraints
+Refer to [input information](#input-examples) for details about valid inputs.
 
-Refer to [input information](#input-information) for details about valid inputs.
+[Back To Top](#table-of-contents)
 
 #### Editing a tutor: `edit-t`
 
@@ -411,36 +416,54 @@ Adds a schedule to a specified tutor.
 
 #### Editing a schedule: `edit-s`
 
-Edits an existing schedule in the addressbook.
+Edits an existing schedule in TutorConnect.
+
+##### :beginner: First time users
+{:.no_toc}
+
+**Scenario**
+
+One day, tutor Alex Yeoh requested to change a class timing, so that it starts at 1pm instead.
+
+The edit schedule function is here for that!
+
+**Follow these steps**
+
+1. Type in `list-s` to find the schedule to update.
+2. Let's say the schedule to be updated is in position 1.
+3. Type in `edit-s 1 st/2023-09-15T13:00` and press enter.
+
+**What you can expect to see**
+
+Tada! The schedule has now been updated to 1pm.
 
 ![edit schedule](images/editSchedule.png)
 
-**Format**: `edit-s SCHEDULE_INDEX st/START_TIME et/END_TIME`
 
-**Examples**:
-* `edit-s 1 st/2023-09-15T13:00`
-* `edit-s 2 et/2023-09-16T19:00`
+##### :hammer: Experienced users
+{:.no_toc}
 
-**Acceptable values for each parameter**:
-* `SCHEDULE_INDEX`: Only number input accepted, starting from 1 to the last schedule index shown in the list of 
-  schedules.
-* `START_TIME`: Only datetime in `yyyy-MM-ddTHH:mm` format is accepted
-* `END_TIME`: Only datetime in `yyyy-MM-ddTHH:mm` format is accepted
+**Command format**
 
-**Expected output**:
-* `Edited Schedule: Alex Yeoh; Start Time: Sep 15 2023 09:00; End Time: Sep 15 2023 13:00`
+![edit schedule command](images/editScheduleCommandSyntax.png)
 
-**Error messages**:
+**Errors**
+
+Here is a list of the error messages you may encounter, when the command is entered incorrectly:
 * `Invalid command format!`: Invalid or missing SCHEDULE_INDEX.
 * `EndTime should only contain a valid date and time in the format "yyyy-MM-ddTHH:mm", and it should not be blank`:
   The end time entered is not in the correct datetime format.
-* `StartTime should only contain a valid date and time in the format "yyyy-MM-ddTHH:mm", and it should not be 
+* `StartTime should only contain a valid date and time in the format "yyyy-MM-ddTHH:mm", and it should not be
   blank`: The start time entered is not in the correct datetime format.
 * `Multiple values specified for the following single-valued field(s): st/`: More than 1 `st/` was given in the command
 * `Multiple values specified for the following single-valued field(s): et/`: More than 1 `et/` was given in the command
 * `This schedule already exists in the address book`: There is a schedule for the same tutor with the same start and end time in the address book.
 * `This tutor has a clashing schedule in the address book`: There is a schedule for the same tutor with overlapping times in the address book.
 * `At least one field to edit must be provided.`: There is no `st/` or `et/` tag provided to edit a field.
+
+You can also refer to [input information](#input-examples) for details about valid inputs.
+
+[Back To Top](#table-of-contents)
 
 #### List all schedules: `list-s`
 
@@ -586,27 +609,42 @@ additional system features to take your experience with us to the next level!
 
 #### Changing theme: `theme`
 
-Want a change of scenery? TutorConnect supports 3 colour palettes for you to choose from! No more looking at a 
-boring interface.
+Changes the theme of TutorConnect.
+
+##### :beginner: First time users
+{:.no_toc}
+
+**Scenario**
+
+Want a change of scenery? TutorConnect supports 3 colour palettes for you to choose from! No more looking at a
+boring interface. Let's say you want to switch to `blue` theme.
+
+**Follow these steps**
+
+Type in `theme blue`.
+
+**What you can expect to see**
+
+Wow! A whole new colour scheme.
 
 ![change theme](images/changeTheme.png)
 
-**Format**: `theme NEW_THEME`
+##### :hammer: Experienced users
+{:.no_toc}
 
-**Example**:
-* `theme blue`
-* `theme light`
+**Command format**
 
-**Acceptable inputs**:
-* `NEW_THEME`: Only one of the following themes: `dark`, `light`, `blue`.
+![theme command](images/themeCommandSyntax.png)
 
-**Expected output**:
-* `Changed theme to blue`
+**Errors**
 
-**Error messages**:
+Here is a list of the error messages you may encounter, when the command is entered incorrectly:
 * `Invalid command format!`: New theme field was left blank and not specified.
-* `Theme provided does not exist`: New theme field was not `dark`, `light` or `blue`
+* `Theme provided does not exist`: New theme field was not `dark`, `light` or `blue`r `et/` tag provided to edit a field.
 
+You can also refer to [input information](#input-examples) for details about valid inputs.
+
+[Back To Top](#table-of-contents)
 
 #### Clearing all data: `clear`
 
@@ -689,22 +727,42 @@ Here are some descriptions of the words you might come across in the User Guide:
 | <span id="cli">CLI</span>  | CLI is a text-based user interface that allows users to interact with the application by typing commands.                                                                                                                                                  |
 
 
+### Input Examples
+
+| Input Fields        | ✅                         | ❌                |
+|---------------------|---------------------------|------------------|
+| `n/NAME`            | John Doe                  | John@Doe         |
+|                     | John Doe123               |                  |
+| `p/PHONE NUMBER`    | 98765432                  | abc              |
+|                     | 987                       | 98               |
+| `e/EMAIL`           | johnd@example.com         | johnd            |
+|                     | jo@example123-example.com | johnd@p          |
+| `p/PHONE NUMBER`    | 98765432                  | abc              |
+|                     | 987                       | 98               |
+| `st/START_TIME`/    | 2023-09-15T09:00          | 2023-09-15 09:00 |
+| `et/END_TIME`       | 2023-09-15T11:00          | 2023-09-15T09    |
+| `m/SCHEDULE_STATUS` | 0                         | 3                |
+| `m/SCHEDULE_STATUS` | 1                         | abc              |
+| `TUTOR_INDEX`/      | 1                         | 0                |
+| `SCHEDULE_INDEX`    |                           | abc              |
+| `NEW_THEME`         | dark                      | white            |
+|                     | light                     | brown            |
+|                     | blue                      | black            |
+
 ### Input Information
 Here are some inputs you might come across in the User Guide:
 
-| Parameter         | Description                                     | Limitations                                                                                  |
-|-------------------|-------------------------------------------------|----------------------------------------------------------------------------------------------|
-| `n/NAME`          | Refers to the name of the tutor.                | Only contain alphanumeric characters and spaces, and <br/>should <br/>not be blank.          |
-| `p/PHONE NUMBER`  | Refers to the phone number of the tutor.        | Only contain numbers, and should be at least 3 <br/>digits long.                             |
-| `e/EMAIL`         | Refers to the email address of the tutor.       | Of the format local-part@domain<sup>1</sup>.                                                 |
-| `st/START_TIME`   | Refers to the start time of the schedule.       | Only datetime in `yyyy-MM-ddTHH:mm`<sup>2</sup> format is accepted.                          |
-| `et/END_TIME`     | Refers to the end time of the schedule.         | Only datetime in `yyyy-MM-ddTHH:mm` format is accepted.                                      |
-| `TUTOR_INDEX`     | Refers to the position of tutor in the list.    | Only numerical input that ranges from 1 to the last tutor shown in the list of tutors.       |
-| `SCHEDULE_INDEX`  | Refers to the position of schedule in the list. | Only numerical input that ranges from 1 to the last schedule shown in the list of schedules. |
-| `SCHEDULE_STATUS` | Refers to the status of schedule in the list.   | Only numerical inputs of 0 for MISSED status and 1 for COMPLETED status is accepted          |
-
-### Input Format
-This section consists of more details of format limitations mentioned above.
+| Parameter           | Description                                       | Limitations                                                                                  |
+|---------------------|---------------------------------------------------|----------------------------------------------------------------------------------------------|
+| `n/NAME`            | Refers to the name of the tutor.                  | Only contain alphanumeric characters and spaces, and <br/>should <br/>not be blank.          |
+| `p/PHONE NUMBER`    | Refers to the phone number of the tutor.          | Only contain numbers, and should be at least 3 <br/>digits long.                             |
+| `e/EMAIL`           | Refers to the email address of the tutor.         | Of the format local-part@domain<sup>1</sup>.                                                 |
+| `st/START_TIME`     | Refers to the start time of the schedule.         | Only datetime in `yyyy-MM-ddTHH:mm`<sup>2</sup> format is accepted.                          |
+| `et/END_TIME`       | Refers to the end time of the schedule.           | Only datetime in `yyyy-MM-ddTHH:mm` format is accepted.                                      |
+| `m/SCHEDULE_STATUS` | Refers to the status of schedule in the list.     | Only numerical inputs of 0 for MISSED status and 1 for COMPLETED status is accepted          |
+| `TUTOR_INDEX`       | Refers to the position of tutor in the list.      | Only numerical input that ranges from 1 to the last tutor shown in the list of tutors.       |
+| `SCHEDULE_INDEX`    | Refers to the position of schedule in the list.   | Only numerical input that ranges from 1 to the last schedule shown in the list of schedules. |
+| `NEW_THEME`         | Refers to the name of the new theme to switch to. | Only `dark`, `light` and `blue` themes are supported.                                        |
 
 **<sup>1</sup> Email Format**
 
@@ -723,20 +781,6 @@ The domain name must:
 * `T` is a **separator** indicating the start of the time portion.
 * `HH` represents the **hour** in **24-hour format** with a leading zero (e.g., 09 for 9 AM, 21 for 9 PM).
 * `mm` represents the **minutes** with a leading zero (e.g., 05).
-
-### Input Examples
-
-| Input Fields     | ✅                         | ❌        |
-|------------------|---------------------------|----------|
-| `n/NAME`         | John Doe                  | John@Doe |
-|                  | John Doe123               |          |
-| `p/PHONE NUMBER` | 98765432                  | abc      |
-|                  | 987                       | 98       |
-| `e/EMAIL`        | johnd@example.com         | johnd    |
-|                  | jo@example123-example.com | johnd@p  |
-| `p/PHONE NUMBER` | 98765432                  | abc      |
-|                  | 987                       | 98       |
-
 
 [Back To Top](#table-of-contents)
 
