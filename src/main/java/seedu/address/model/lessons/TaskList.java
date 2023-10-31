@@ -3,11 +3,14 @@ package seedu.address.model.lessons;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.commons.util.StringUtil;
+import seedu.address.model.ListEntryField;
 import seedu.address.model.lessons.exceptions.DuplicateTaskException;
 import seedu.address.model.lessons.exceptions.TaskNotFoundException;
 
@@ -23,8 +26,8 @@ import seedu.address.model.lessons.exceptions.TaskNotFoundException;
  *
  * @see Task#isSameTask(Task)
  */
-public class TaskList implements Iterable<Task> {
-
+public class TaskList extends ListEntryField implements Iterable<Task> {
+    public static final TaskList DEFAULT_TASKLIST = new TaskList();
     private final ObservableList<Task> internalTaskList = FXCollections.observableArrayList();
 
     private final ObservableList<Task> internalUnmodifiableTaskList =
@@ -100,6 +103,22 @@ public class TaskList implements Iterable<Task> {
     }
 
     /**
+     * Parses a Tasklist from a String input.
+     * @param input The save file input
+     * @return A TaskList
+     */
+    public static TaskList of(String input) {
+        // TODO: parse
+        String[] tasksArray = input.split(",");
+        TaskList taskList = new TaskList();
+        for (int i = 0; i < tasksArray.length; i++) {
+            taskList.add(Task.of(tasksArray[i]));
+        }
+        return taskList;
+    }
+
+
+    /**
      * Returns the backing list as an unmodifiable {@code ObservableList}.
      */
     public ObservableList<Task> asUnmodifiableObservableList() {
@@ -131,9 +150,13 @@ public class TaskList implements Iterable<Task> {
         return internalTaskList.hashCode();
     }
 
+    /**
+     * Encodes into a string
+     * @return
+     */
     @Override
     public String toString() {
-        return internalTaskList.toString();
+        return StringUtil.joinArray(new ArrayList<>(this.internalTaskList), ",");
     }
 
     /**
@@ -148,5 +171,14 @@ public class TaskList implements Iterable<Task> {
             }
         }
         return true;
+    }
+
+    @Override
+    public ListEntryField clone() {
+        TaskList cloned = new TaskList();
+        internalTaskList.forEach(task -> {
+            cloned.add(new Task(task.getDescription(), task.isDone()));
+        });
+        return cloned;
     }
 }
