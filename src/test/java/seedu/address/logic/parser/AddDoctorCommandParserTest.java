@@ -17,6 +17,7 @@ import seedu.address.logic.commands.AddDoctorCommand;
 
 public class AddDoctorCommandParserTest {
     private AddDoctorCommandParser parser = new AddDoctorCommandParser();
+
     @Test
     public void parse_compulsoryFieldMissing_failure() {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddDoctorCommand.MESSAGE_USAGE);

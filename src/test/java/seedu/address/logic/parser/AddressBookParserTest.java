@@ -89,6 +89,14 @@ public class AddressBookParserTest {
     }
 
     @Test
+    public void parseCommand_findBloodType() throws Exception {
+        String[] keywords = {"Blood", "Type", "A+"};
+        FindCommand command = (FindCommand) parser.parseCommand(
+                FindCommand.COMMAND_WORD + " Blood Type A+");
+        assertEquals(new FindCommand(KeywordParser.parseInput(keywords)), command);
+    }
+
+    @Test
     public void parseCommand_help() throws Exception {
         assertTrue(parser.parseCommand(HelpCommand.COMMAND_WORD) instanceof HelpCommand);
         assertTrue(parser.parseCommand(HelpCommand.COMMAND_WORD + " 3") instanceof HelpCommand);
