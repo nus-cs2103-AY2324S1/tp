@@ -14,9 +14,9 @@ import seedu.address.model.person.Person;
 /**
  * Deletes a person identified using it's displayed index from the address book.
  */
-public class DeleteCommand extends Command {
+public class DeletePersonCommand extends Command {
 
-    public static final String COMMAND_WORD = "delete";
+    public static final String COMMAND_WORD = "deletePerson";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the person identified by the index number used in the displayed person list.\n"
@@ -25,10 +25,14 @@ public class DeleteCommand extends Command {
 
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
 
-    private final Index targetIndex;
+    private final int targetIndex;
 
-    public DeleteCommand(Index targetIndex) {
+    public DeletePersonCommand(int targetIndex) {
         this.targetIndex = targetIndex;
+    }
+
+    public DeletePersonCommand(Index targetIndex) {
+        this.targetIndex = targetIndex.getOneBased();
     }
 
     @Override
@@ -36,11 +40,11 @@ public class DeleteCommand extends Command {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
 
-        if (targetIndex.getZeroBased() >= lastShownList.size()) {
+        if (targetIndex < 1 || targetIndex > lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
-        Person personToDelete = lastShownList.get(targetIndex.getZeroBased());
+        Person personToDelete = lastShownList.get(targetIndex - 1);
         model.deletePerson(personToDelete);
         return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(personToDelete)));
     }
@@ -52,12 +56,12 @@ public class DeleteCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof DeleteCommand)) {
+        if (!(other instanceof DeletePersonCommand)) {
             return false;
         }
 
-        DeleteCommand otherDeleteCommand = (DeleteCommand) other;
-        return targetIndex.equals(otherDeleteCommand.targetIndex);
+        DeletePersonCommand otherDeletePersonCommand = (DeletePersonCommand) other;
+        return targetIndex == otherDeletePersonCommand.targetIndex;
     }
 
     @Override
