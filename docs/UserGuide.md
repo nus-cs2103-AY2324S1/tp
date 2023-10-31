@@ -154,7 +154,7 @@ Examples:
 ![usage of list command](./images/UserGuide/1.3_list.png)
 
 ### Editing a Specific Flashcard : `edit`
-Edits an existing person in the address book.
+Edits an existing Flashcard in the deck.
 
 Format: `edit INDEX (q/a)/ (question/answer)`
 
