@@ -12,6 +12,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.Logic;
 import seedu.address.model.lessons.Lesson;
+import seedu.address.model.lessons.Task;
 import seedu.address.model.person.Person;
 
 /**
@@ -103,7 +104,16 @@ public class UiManager implements Ui {
      * @param lesson The specified lesson to show the details of.
      */
     public void showLessonDetails(Lesson lesson) {
-        mainWindow.handleShowLesson(lesson); //TODO
+        mainWindow.handleShowLesson(lesson);
+    }
+
+    /**
+     * Shows the details of the selected task.
+     *
+     * @param task The specified task to show the details of.
+     */
+    public void showTaskDetails(Task task) {
+        mainWindow.handleShowTask(task);
     }
 
 }

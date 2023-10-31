@@ -10,6 +10,7 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.lessons.Lesson;
+import seedu.address.model.lessons.Task;
 import seedu.address.model.person.Person;
 
 /**
@@ -27,6 +28,7 @@ public class ShowCommand extends Command {
 
     public static final String MESSAGE_SHOW_PERSON_SUCCESS = "Showing Person: %1$s";
     public static final String MESSAGE_SHOW_LESSON_SUCCESS = "Showing Lesson: %1$s";
+    public static final String MESSAGE_SHOW_TASK_SUCCESS = "Showing Task: %1$s";
 
     private final Index targetIndex;
 
@@ -39,6 +41,7 @@ public class ShowCommand extends Command {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
         List<Lesson> lastShownSchedule = model.getFilteredScheduleList();
+        List<Task> fullTaskList = model.getFullTaskList();
 
         // Handle different cases of show command based on app state
         switch (model.getState()) {
@@ -58,6 +61,14 @@ public class ShowCommand extends Command {
             Lesson lessonToShow = lastShownSchedule.get(targetIndex.getZeroBased());
             model.showLesson(lessonToShow);
             return new CommandResult(String.format(MESSAGE_SHOW_LESSON_SUCCESS, Messages.formatLesson(lessonToShow)));
+        case TASK:
+            if (targetIndex.getZeroBased() >= fullTaskList.size()) {
+                throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
+            }
+            // Show lesson details
+            Task taskToShow = fullTaskList.get(targetIndex.getZeroBased());
+            model.showTask(taskToShow);
+            return new CommandResult(String.format(MESSAGE_SHOW_TASK_SUCCESS, Messages.formatTask(taskToShow)));
 
         default:
             throw new CommandException(Messages.MESSAGE_UNKNOWN_COMMAND);

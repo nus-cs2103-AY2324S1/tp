@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import seedu.address.model.FullTaskList;
 import seedu.address.model.lessons.Task;
 import seedu.address.model.lessons.TaskList;
 
@@ -33,5 +34,14 @@ public class TypicalTasks {
             tl.add(task);
         }
         return tl;
+    }
+
+    /**
+     * Returns a {@code FullTaskList} with all the typical lessons.
+     */
+    public static FullTaskList getTypicalFullTaskList() {
+        FullTaskList ftl = new FullTaskList();
+        ftl.setFullTaskList(TypicalLessons.getTypicalScheduleList());
+        return ftl;
     }
 }

@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 import static seedu.address.testutil.TypicalLessons.getTypicalScheduleList;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalTasks.getTypicalFullTaskList;
 
 import org.junit.jupiter.api.Test;
 
@@ -20,7 +21,8 @@ import seedu.address.model.person.Person;
 
 public class EditCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs(), getTypicalScheduleList());
+    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs(),
+            getTypicalScheduleList(), getTypicalFullTaskList());
 
     @Test
     void happyCases() {

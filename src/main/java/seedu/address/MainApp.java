@@ -16,6 +16,7 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.Logic;
 import seedu.address.logic.LogicManager;
 import seedu.address.model.AddressBook;
+import seedu.address.model.FullTaskList;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyAddressBook;
@@ -86,6 +87,8 @@ public class MainApp extends Application {
         Optional<ReadOnlySchedule> scheduleListOptional;
         ReadOnlyAddressBook initialDataStudents;
         ReadOnlySchedule initialDataLessons;
+        FullTaskList fullTaskList = new FullTaskList();
+
         try {
             addressBookOptional = storage.readAddressBook();
             if (!addressBookOptional.isPresent()) {
@@ -104,15 +107,17 @@ public class MainApp extends Application {
                 logger.info("Creating a new data file " + storage.getScheduleListFilePath()
                         + " populated with a sample Schedule.");
             }
-//            initialDataLessons = scheduleListOptional.orElseGet(SampleDataUtil::getSampleSchedule);
-            initialDataLessons = SampleDataUtil.getSampleSchedule(); //PLACEHOLDER TO TEST TASK LIST
+            initialDataLessons = scheduleListOptional.orElseGet(SampleDataUtil::getSampleSchedule);
         } catch (DataLoadingException e) {
             logger.warning("Data file at " + storage.getScheduleListFilePath() + " could not be loaded."
                     + " Will be starting with an empty Schedule List.");
             initialDataLessons = new ScheduleList();
         }
 
-        return new ModelManager(initialDataStudents, userPrefs, initialDataLessons);
+        fullTaskList.setFullTaskList(initialDataLessons);
+
+
+        return new ModelManager(initialDataStudents, userPrefs, initialDataLessons, fullTaskList);
     }
 
     private void initLogging(Config config) {

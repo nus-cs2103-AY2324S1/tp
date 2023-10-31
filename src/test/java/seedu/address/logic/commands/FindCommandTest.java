@@ -7,6 +7,7 @@ import static seedu.address.logic.Messages.MESSAGE_PERSONS_LISTED_OVERVIEW;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalLessons.getTypicalScheduleList;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalTasks.getTypicalFullTaskList;
 
 import org.junit.jupiter.api.Test;
 
@@ -20,9 +21,9 @@ import seedu.address.model.person.NameContainsKeywordsPredicate;
  */
 public class FindCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs(),
-            getTypicalScheduleList());
+            getTypicalScheduleList(), getTypicalFullTaskList());
     private Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs(),
-            getTypicalScheduleList());
+            getTypicalScheduleList(), getTypicalFullTaskList());
 
     @Test
     public void equals() {

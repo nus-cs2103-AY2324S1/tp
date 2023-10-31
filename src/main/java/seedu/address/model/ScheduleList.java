@@ -31,7 +31,7 @@ public class ScheduleList implements ReadOnlySchedule {
     public ScheduleList() {}
 
     /**
-     * Creates an ScheduleList using the Lessons in the {@code toBeCopied}
+     * Creates a ScheduleList using the Lessons in the {@code toBeCopied}
      */
     public ScheduleList(ReadOnlySchedule toBeCopied) {
         this();

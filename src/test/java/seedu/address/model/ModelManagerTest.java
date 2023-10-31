@@ -99,10 +99,12 @@ public class ModelManagerTest {
         AddressBook differentAddressBook = new AddressBook();
         UserPrefs userPrefs = new UserPrefs();
         ScheduleList scheduleList = new ScheduleList();
+        FullTaskList fullTaskList = new FullTaskList();
+        fullTaskList.setFullTaskList(scheduleList);
 
         // same values -> returns true
-        modelManager = new ModelManager(addressBook, userPrefs, scheduleList);
-        ModelManager modelManagerCopy = new ModelManager(addressBook, userPrefs, scheduleList);
+        modelManager = new ModelManager(addressBook, userPrefs, scheduleList, fullTaskList);
+        ModelManager modelManagerCopy = new ModelManager(addressBook, userPrefs, scheduleList, fullTaskList);
         assertTrue(modelManager.equals(modelManagerCopy));
 
         // same object -> returns true
@@ -115,12 +117,12 @@ public class ModelManagerTest {
         assertFalse(modelManager.equals(5));
 
         // different addressBook -> returns false
-        assertFalse(modelManager.equals(new ModelManager(differentAddressBook, userPrefs, scheduleList)));
+        assertFalse(modelManager.equals(new ModelManager(differentAddressBook, userPrefs, scheduleList, fullTaskList)));
 
         // different filteredList -> returns false
         String keyword = ALICE.getName().fullName;
         modelManager.updateFilteredPersonList(new NameContainsKeywordsPredicate(keyword));
-        assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs, scheduleList)));
+        assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs, scheduleList, fullTaskList)));
 
         // resets modelManager to initial state for upcoming tests
         modelManager.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
@@ -128,6 +130,6 @@ public class ModelManagerTest {
         // different userPrefs -> returns false
         UserPrefs differentUserPrefs = new UserPrefs();
         differentUserPrefs.setAddressBookFilePath(Paths.get("differentFilePath"));
-        assertFalse(modelManager.equals(new ModelManager(addressBook, differentUserPrefs, scheduleList)));
+        assertFalse(modelManager.equals(new ModelManager(addressBook, differentUserPrefs, scheduleList, fullTaskList)));
     }
 }

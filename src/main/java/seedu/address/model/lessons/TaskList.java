@@ -174,7 +174,7 @@ public class TaskList extends ListEntryField implements Iterable<Task> {
     }
 
     @Override
-    public ListEntryField clone() {
+    public TaskList clone() {
         TaskList cloned = new TaskList();
         internalTaskList.forEach(task -> {
             cloned.add(new Task(task.getDescription(), task.isDone()));

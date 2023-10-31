@@ -145,7 +145,7 @@ public interface Model {
      * Shows the details of the given lesson.
      * The lesson must exist in the application.
      */
-    void showLesson(Lesson lessonToShow); //TODO
+    void showLesson(Lesson lessonToShow);
     ObservableList<Lesson> getFilteredScheduleList();
     /**
      * Updates the filter of the filtered lesson list to filter by the given {@code predicate}.
@@ -176,6 +176,12 @@ public interface Model {
      */
     boolean sameState(State state);
 
+    /**
+     * Shows the details of the given task.
+     * The task must exist in the application.
+     */
+    void showTask(Task taskToShow);
+
 
     public boolean hasCurrentShownEntry();
 
@@ -188,6 +194,13 @@ public interface Model {
     default Task getCurrentlyDisplayedTask() {
         return null;
     }
+
+
+    /** Returns the full task list object */
+    ReadOnlyFullTaskList getFullTaskListObject();
+
+    /** Returns a view of the full task list */
+    ObservableList<Task> getFullTaskList();
 
     // todo: implement everything below here properly
     default void setTask(Task target, Task editedTask) {

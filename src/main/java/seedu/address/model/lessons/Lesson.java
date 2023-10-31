@@ -4,7 +4,6 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Objects;
 
-import javafx.collections.ObservableList;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.ListEntry;
 import seedu.address.model.person.Name;
@@ -121,15 +120,6 @@ public class Lesson extends ListEntry<Lesson> {
         //todo, get the students str from model in the future instead of from the lesson
     }
 
-//    /**
-//     * Returns the Task List.
-//     * @return
-//     */
-//    public ObservableList<Task> getTaskList() {
-//        return taskList.asUnmodifiableObservableList();
-//    }
-
-
     public Time getStart() {
         return start;
     }
@@ -195,6 +185,7 @@ public class Lesson extends ListEntry<Lesson> {
         return taskList;
     }
 
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -212,7 +203,8 @@ public class Lesson extends ListEntry<Lesson> {
                 && subject.equals(otherLesson.subject)
                 && name.equals(otherLesson.name)
                 && day.equals(otherLesson.day)
-                && remark.equals(otherLesson.remark);
+                && remark.equals(otherLesson.remark)
+                && taskList.equals(otherLesson.taskList);
     }
     @Override
     public int hashCode() {
@@ -267,7 +259,7 @@ public class Lesson extends ListEntry<Lesson> {
         cloned.setNameIfNotDefault(this.name);
         cloned.setDayIfNotDefault(this.day);
         cloned.setRemarkIfNotDefault(this.remark);
-        cloned.taskList = taskList;
+        cloned.taskList = taskList.clone();
         return cloned;
     }
 }

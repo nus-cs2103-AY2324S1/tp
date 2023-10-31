@@ -54,6 +54,8 @@ public class ListCommandParser implements Parser<ListCommand> {
         case "STUDENTS":
             return new ListCommand(State.STUDENT, displayParams);
 
+        case "TASKS":
+            return new ListCommand(State.TASK);
         default:
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListCommand.MESSAGE_USAGE));
