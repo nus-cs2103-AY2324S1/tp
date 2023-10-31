@@ -42,7 +42,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
         Set<RiskLevel> tagList = ParserUtil.parseRiskLevel(argMultimap.getAllValues(PREFIX_TAG));
-        Note note = new Note(" ");
+        Note note = new Note("");
 
         Student student = new Student(name, phone, address, tagList, note);
 
