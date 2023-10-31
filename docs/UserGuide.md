@@ -729,24 +729,16 @@ Here are some descriptions of the words you might come across in the User Guide:
 
 ### Input Examples
 
-| Input Fields                         | ✅                         | ❌                |
-|--------------------------------------|---------------------------|------------------|
-| `n/NAME`                             | John Doe                  | John@Doe         |
-|                                      | John Doe123               |                  |
-| `p/PHONE NUMBER`                     | 98765432                  | abc              |
-|                                      | 987                       | 98               |
-| `e/EMAIL`                            | johnd@example.com         | johnd            |
-|                                      | jo@example123-example.com | johnd@p          |
-| `p/PHONE NUMBER`                     | 98765432                  | abc              |
-|                                      | 987                       | 98               |
-| `st/START_TIME`<br/>`et/END_TIME`    | 2023-09-15T09:00          | 2023-09-15 09:00 |
-|                                      | 2023-09-15T11:00          | 2023-09-15T09    |
-| `m/SCHEDULE_STATUS`                  | 0                         | 3                |
-| `m/SCHEDULE_STATUS`                  | 1                         | abc              |
-| `TUTOR_INDEX`<br/>`SCHEDULE_INDEX`   | 1                         | 0, abc           |
-| `NEW_THEME`                          | dark                      | white            |
-|                                      | light                     | brown            |
-|                                      | blue                      | black            |
+| Input Fields                       | ✅                                            | ❌                                   |
+|------------------------------------|----------------------------------------------|-------------------------------------|
+| `n/NAME`                           | John Doe, John Doe123                        | John@Doe                            |
+| `p/PHONE NUMBER`                   | 98765432, 987                                | abc, 98                             |
+| `e/EMAIL`                          | johnd@example.com, jo@example123-example.com | johnd, johnd@p                      |
+| `p/PHONE NUMBER`                   | 98765432, 987                                | abc, 98                             |
+| `st/START_TIME`<br/>`et/END_TIME`  | 2023-09-15T09:00,<br/>2023-09-15T11:00       | 2023-09-15 09:00,<br/>2023-09-15T09 |
+| `m/SCHEDULE_STATUS`                | 0, 1                                         | 3, abc                              |
+| `TUTOR_INDEX`<br/>`SCHEDULE_INDEX` | 1                                            | 0, abc                              |
+| `NEW_THEME`                        | dark, light, blue                            | white, brown, black                 |
 
 ### Input Information
 Here are some inputs you might come across in the User Guide:
