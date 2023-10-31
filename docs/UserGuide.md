@@ -61,7 +61,7 @@ applications.
 | Status   | `s/`   | Possible values in "[Valid statuses and job types](#valid-statuses-and-job-types)"                                  | No        | Alphabetical  |
 | Industry | `i/`   | Must start with an alphanumeric character                                                                           | Yes       | Alphabetical  |
 | Deadline | `d/`   | Must be in the format MMM dd yyyy HHmm (e.g. Dec 31 2030 1200) and cannot be earlier than the current date and time | Yes       | Chronological |
-| Type     | `t/`   | Possible values in "[Valid statuses and job types](#valid-statuses-and-job-types)"                                  |           |               |
+| Type     | `t/`   | Possible values in "[Valid statuses and job types](#valid-statuses-and-job-types)"                                  | Yes       | Alphabetical  |
 
 ### Valid statuses and job types
 
@@ -191,41 +191,43 @@ Shows a list of all applications in the list in alphabetical order.
 
 ### Finding an application : `find`
 
-Finds all applications with the specified fields containing any of the given keywords.
+Finds all applications whose fields match the keywords provided.
 
-**Format:** `find [c/COMPANY] [r/ROLE] [d/DEADLINE] [s/STATUS] [i/INDUSTRY] [t/JOB_TYPE]`
+**Format:** `find [KEYWORDS] [c/COMPANY] [r/ROLE] [d/DEADLINE] [s/STATUS] [i/INDUSTRY] [t/JOB_TYPE]`
 
 * At least one optional field must be provided.
-* An application will be listed if at least one of the keywords match. The keywords are case-insensitive.
+* If `[KEYWORDS]` is provided, the command will find all applications that contains the keywords in any field.
+* An application will be listed only if all the keywords match. The keywords are case-insensitive.
 * Applications with partially matching keywords will not be listed.
     * e.g. searching for the keyword "Goo" will not list applications with "Google".
-* Searches for Deadline must be in the format `MMM DD YYYY HHMM`.
+* Searches for Deadline must be in the format `MMM DD YYYY HHMM` (e.g. Dec 31 2030 1200).
 
 **Examples:**
 
 * `find c/Google`
-  Finds all applications with the keyword "Google" in the company name.
-* `find r/Software Engineer`
-  Finds all applications with the keyword "Software Engineer" in the role.
+  Finds all applications with "Google" in the company name.
+* `find Google r/Software Engineer`
+  Finds all applications with "Software Engineer" in the role and "Google" in any field.
 
 ---
 
 ### Sorting the list : `sort`
 
-Sorts the list based on the field specifier provided.
+Sorts the list based on the prefix provided.
 
-**Format:** `sort SPECIFIER`
+**Format:** `sort PREFIX`
 
-* A single valid `SPECIFIER` must be provided.
+* A single valid `PREFIX` must be provided. Refer to "[Structure of a job application](#structure-of-a-job-application)"
+for the list of valid prefixes.
 * For optional fields, applications with empty fields will be listed first.
 
 **Examples:**
 
-* `sort -d`
-  Lists all applications sorted by deadline.
+* `sort d/`
+  Lists all applications, starting from the one with the earliest deadline.
 
-* `sort -r`
-  Lists all applications sorted by role.
+* `sort r/`
+  Lists all applications sorted by role, in alphabetical order.
 
 ---
 
@@ -262,7 +264,7 @@ Exits the program.
 | **Delete** | `delete INDEX`                                                                           |
 | **List**   | `list`                                                                                   |
 | **Find**   | `find [KEYWORDS] [c/COMPANY] [r/ROLE] [d/DEADLINE] [s/STATUS] [i/INDUSTRY] [t/JOB_TYPE]` |
-| **Sort**   | `sort FIELD_SPECIFIER`                                                                   |
+| **Sort**   | `sort PREFIX`                                                                            |
 | **Help**   | `help`                                                                                   |
 | **Clear**  | `clear`                                                                                  |
 | **Exit**   | `exit`                                                                                   |
