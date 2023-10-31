@@ -21,7 +21,9 @@ public final class Reminder implements Comparable<LocalDate> {
      */
     public Reminder(Person person) {
         this.person = person;
-        this.followUpDate = person.getFollowUpDate();
+        //Person class should check if followUpDate is present before creating a Reminder
+        assert person.getFollowUpDate().isPresent();
+        this.followUpDate = person.getFollowUpDate().get();
     }
 
     public LocalDate getFollowUpDate() {

@@ -9,6 +9,7 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.Set;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
@@ -42,8 +43,8 @@ public class Person {
     private final Details details;
     private final List<Interaction> interactions = new ArrayList<>();
 
-    // Dependant fields
-    private Reminder reminder;
+    // Dependant fields, may not exist
+    private Optional<Reminder> reminder = Optional.empty();
 
     /**
      * Creates a {@code Person} given a PersonBuilder.
@@ -115,7 +116,7 @@ public class Person {
     /**
      * Returns the reminder associated with this person.
      */
-    public Reminder getReminder() {
+    public Optional<Reminder> getReminder() {
         return this.reminder;
     }
 
@@ -138,14 +139,14 @@ public class Person {
         return this.interactions;
     }
 
-    public LocalDate getFollowUpDate() {
+    public Optional<LocalDate> getFollowUpDate() {
         if (interactions.isEmpty() || lead == null) {
-            return null; //TODO: Think if returning null here causes any issues
+            return Optional.empty();
         }
         LocalDate latestInteractionDate = interactions.get(interactions.size() - 1).getDate();
-        //TODO: Think if the lastest interaction is always the last one in the list
+        //TODO: Not sure if the lastest interaction is always the last one in the list
         int weeksToAdd = lead.getFollowUpPeriod();
-        return latestInteractionDate.plusWeeks(weeksToAdd);
+        return Optional.of(latestInteractionDate.plusWeeks(weeksToAdd));
     }
 
     /**
@@ -155,12 +156,12 @@ public class Person {
     public void updateReminder() {
         //Person must have lead and interaciton to have a reminder
         //If person has no lead or interaction, remove reminder
-        if (this.getFollowUpDate() == null) {
-            this.reminder = null;
+        if (this.getFollowUpDate().isEmpty()) {
+            this.reminder = Optional.empty();
             return;
         }
 
-        Reminder updatedReminder = new Reminder(this);
+        Optional<Reminder> updatedReminder = Optional.of(new Reminder(this));
         if (this.reminder.equals(updatedReminder)) {
             return;
         }

@@ -116,9 +116,7 @@ public class UniqueReminderList implements Iterable<Reminder> {
         internalList.clear();
         for (Person person : personList) {
             person.updateReminder();
-            if (person.getReminder() != null) {
-                internalList.add(new Reminder(person));
-            }
+            person.getReminder().ifPresent(internalList::add);
         }
     }
 
