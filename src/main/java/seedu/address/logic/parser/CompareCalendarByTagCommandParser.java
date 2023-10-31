@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Set;
@@ -9,6 +10,9 @@ import seedu.address.logic.commands.CompareCalendarByTagCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.tag.Tag;
 
+/**
+ * Parser for creating a CompareCalendarByTagCommand.
+ */
 public class CompareCalendarByTagCommandParser implements Parser<CompareCalendarByTagCommand> {
     private static final String splitRegex = "\\s+";
     @Override

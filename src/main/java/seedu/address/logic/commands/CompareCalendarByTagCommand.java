@@ -1,14 +1,18 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+
 import java.util.List;
-import seedu.address.logic.Messages;
+
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.calendar.ReadOnlyCalendar;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
 
+/**
+ * Command to compare calendars of user with people in the calendar with some collection of tags.
+ */
 public class CompareCalendarByTagCommand extends Command {
     public static final String COMMAND_WORD = "compareTag";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": compare calendars within people with specified tags. "
@@ -30,7 +34,7 @@ public class CompareCalendarByTagCommand extends Command {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
 
-        ReadOnlyCalendar comparisonCalendar =  lastShownList.stream().filter(person -> {
+        ReadOnlyCalendar comparisonCalendar = lastShownList.stream().filter(person -> {
             return tagList.stream().anyMatch(person::hasTag);
         }).map(Person::getReadOnlyCalendar).reduce(model.getCalendar(), ReadOnlyCalendar::combineCalendar);
 
