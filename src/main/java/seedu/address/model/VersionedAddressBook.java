@@ -31,6 +31,7 @@ public class VersionedAddressBook extends AddressBook {
         removeStatesAfterCurrentPointer();
         addressBookStateList.add(new AddressBook(this));
         currentStatePointer++;
+        resetData(addressBookStateList.get(currentStatePointer));
         indicateModified();
     }
 

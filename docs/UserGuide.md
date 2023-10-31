@@ -38,7 +38,15 @@ management tasks done faster than traditional GUI apps.
 
    * `exit` : Exits the app.
 
-6. Refer to the [Features](#features) below for details of each command.
+6. Refer to the [Commands](#commands) below for details of each command.
+
+--------------------------------------------------------------------------------------------------------------------
+
+## GUI Overview
+
+TODO: Add a screenshot of the GUI
+
+TODO: Add a description of the GUI
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -66,6 +74,18 @@ management tasks done faster than traditional GUI apps.
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </box>
 
+### Student Number
+
+* Student Number refers to the unique matriculation number of a NUS student. It must begin with capital A, followed by any number of alphanumeric characters. It must not be blank.
+* Class Manager uses the Student Number to uniquely identify each student in most commands. The Student Number is not case-sensitive, other than the first capital A. e.g. If the Student Number is `A123V`, `A123v` also refers to the same student.
+
+### Command navigation
+
+* Class Manager allows you to navigate to previously entered commands using the arrow keys. Navigate to earlier commands using the up arrow key, and later commands using the down arrow key.
+
+--------------------------------------------------------------------------------------------------------------------
+
+## Commands
 
 ### Configuring Class Manager : `config`
 
@@ -125,6 +145,7 @@ Shows a list of all student details in the class manager.
 Format: `list`
 
 ---
+
 ### Editing a student : `edit`
 
 Edits an existing student in the class manager.
@@ -142,6 +163,7 @@ Examples:
 *  `edit 2 n/Betsy Crower` Edits the name of the 2nd student to be `Betsy Crower`.
 
 ---
+
 ### Tagging a student : `tag`
 
 Tags the existing student in the class manager.
@@ -159,6 +181,7 @@ Examples:
 * `tag s/A1234567N t/` clear all tags from the specified student.
 
 ---
+
 ### Adding comment to a student : `comment`
 
 Adds a comment to an existing student in the address book.
@@ -175,6 +198,7 @@ Examples:
 * `comment s/A0249112A c/This student is very hardworking and smart.`
 
 ---
+
 ### Lookup students : `lookup`
 
 Lookup student details containing any of the given fields.
@@ -201,6 +225,7 @@ Examples:
 <img alt="result for 'lookup c/t11'" src="images/lookupClassResult.png" width="600"> </br></br>
 
 ---
+
 ### Configuring Class Manager: `config`
 
 Configures Class Manager 2023 with the module information, such as tutorial count and assignment count.
@@ -212,6 +237,7 @@ Examples:
 * `config #t/2 #a/3` sets the tutorial count to 2 and assignment count to 3.
 
 ---
+
 ### Marking tutorial attendance for a student as present : `mark-pre`
 
 Marking tutorial attendance for an existing student as present in the class manager.
@@ -225,6 +251,7 @@ Examples:
 * `mark-pre 1 s/A0249112A`
 
 ---
+
 ### Marking tutorial attendance for all students displayed as present : `mark-pre-all`
 
 Marking tutorial attendance for all students displayed as present in the class manager.
@@ -237,6 +264,7 @@ Examples:
 * `mark-pre-all 1`
 
 ---
+
 ### Marking tutorial attendance for a student as absent : `mark-abs`
 
 Marking tutorial attendance for an existing student as absent in the class manager.
@@ -250,6 +278,7 @@ Examples:
 * `mark-abs 1 s/A0249112A`
 
 ---
+
 ### Setting assignment grade for a student : `grade`
 
 Setting an assignment grade for an existing student in the class manager.
@@ -264,6 +293,7 @@ Examples:
 * `grade s/A0249112A a/1 g/100`
 
 ---
+
 ### Record class participation for a student : `class-part`
 
 Recording the class participation level for an existing student in the class manager.
@@ -282,6 +312,7 @@ Examples:
 * `class-part s/A0249112A tut/1 part/true`
 
 ---
+
 ### View a student's class details: `view`
 
 Views the class details of a student that will be displayed on the right side of the application.
@@ -297,6 +328,7 @@ Example:
 ![result for 'view s/A0245234A'](images/ViewCommand.png)
 
 ---
+
 ### Selecting students randomly: `random`
 
 Select a specific number of students from all students displayed in the class manager.
@@ -321,6 +353,7 @@ Example:
 * `delete s/A0249112A`
 
 ---
+
 ### Clearing all entries : `clear`
 
 Clears all entries from the class manager.
@@ -328,6 +361,7 @@ Clears all entries from the class manager.
 Format: `clear`
 
 ---
+
 ### Exiting the program : `exit`
 
 Exits the program.
@@ -335,11 +369,13 @@ Exits the program.
 Format: `exit`
 
 ---
+
 ### Saving the data
 
 Class Manager 2023 data is saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 ---
+
 ### Editing the data file
 
 Class Manager 2023 data is saved automatically as a JSON file `[JAR file location]/data/classmanager.json`. Advanced users are welcome to update data directly by editing that data file.
@@ -367,6 +403,7 @@ Examples:
 * ![t2_contents](images/t2-contents.png)
 
 ---
+
 ### Toggling color themes: `theme`
 
 Toggles between light and dark color themes.
@@ -395,7 +432,6 @@ Format: `theme`
 
 --------------------------------------------------------------------------------------------------------------------
 
-<<<<<<< HEAD
 ## Command summary (in alphabetical order)
 
 ### Useful commands
@@ -430,9 +466,12 @@ Format: `theme`
 | **Tag**                        | `tag STUDENT_NUMBER [/add] [/delete] t/[TAG]…​` <br> e.g. `tag A0123456N t/smart t/shy`                                                                          |
 | **View**                       | `view STUDENT_NUMBER` <br> e.g. `view A0245234A`                                                                                                                 |
 
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## Glossary
 
-* TODO: add glossary
+* **cd**: Change directory command in terminal/command line. cd takes the name of the folder you want to navigate to as an argument. The full command is cd `your-directory`.
+* **Student Number**: Matriculation number of NUS student. It must begin with capital A, followed by any number of alphanumeric characters. It must not be blank.
+* **Email**: Any valid email address, such as NUS email address (eXXXXXXX@u.nus.edu).
+* **CLI**: Command Line Interface.
+* **GUI**: Graphical User Interface.

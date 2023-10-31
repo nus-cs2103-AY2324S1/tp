@@ -122,7 +122,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Resets the selected student.
+     * Resets the selected student for load command.
      */
     public void resetSelectedStudent() {
         students.clearSelectedStudent();

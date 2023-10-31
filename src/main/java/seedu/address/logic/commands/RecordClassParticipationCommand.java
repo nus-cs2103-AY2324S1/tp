@@ -22,7 +22,7 @@ public class RecordClassParticipationCommand extends Command {
     public static final String COMMAND_WORD = "class-part";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Records the class participation of Student in a specific tutorial session.\n"
+            + ": Records the class participation of a student in a specific tutorial session.\n"
             + "Parameters: "
             + PREFIX_STUDENT_NUMBER + "STUDENT_NUMBER "
             + PREFIX_TUTORIAL_SESSION + "TUTORIAL_SESSION "
@@ -70,7 +70,7 @@ public class RecordClassParticipationCommand extends Command {
         model.commitAddressBook();
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, studentNumber)
-                + classDetails.displayParticipations());
+                + classDetails.displayParticipation());
     }
 
     @Override

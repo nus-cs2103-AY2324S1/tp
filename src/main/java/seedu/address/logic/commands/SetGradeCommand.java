@@ -57,7 +57,7 @@ public class SetGradeCommand extends Command {
 
         Student studentToGrade = model.getStudent(studentNumber);
         ClassDetails classDetails = studentToGrade.getClassDetails();
-        classDetails.setAssignGrade(assignmentNumber, grade);
+        classDetails.setGrade(assignmentNumber, grade);
         Student gradedStudent = new Student(studentToGrade.getName(), studentToGrade.getPhone(),
             studentToGrade.getEmail(), studentToGrade.getStudentNumber(), classDetails, studentToGrade.getTags(),
                 studentToGrade.getComment());
@@ -72,7 +72,6 @@ public class SetGradeCommand extends Command {
         return new CommandResult(String.format(MESSAGE_SUCCESS, studentNumber)
                 + classDetails.displayAssignments());
     }
-
 
     @Override
     public boolean equals(Object other) {

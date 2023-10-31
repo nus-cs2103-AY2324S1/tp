@@ -148,41 +148,13 @@ public class ClassDetails {
                 this.assignmentTracker, this.classParticipationTracker);
     }
 
-    @Override
-    public String toString() {
-        return classNumber;
-    }
-
-    @Override
-    public boolean equals(Object other) {
-        if (other == this) {
-            return true;
-        }
-
-        // instanceof handles nulls
-        if (!(other instanceof ClassDetails)) {
-            return false;
-        }
-
-        ClassDetails otherAddress = (ClassDetails) other;
-        return classNumber.equals(otherAddress.classNumber)
-                && attendanceTracker.equals(otherAddress.attendanceTracker)
-                && classParticipationTracker.equals(otherAddress.classParticipationTracker)
-                && assignmentTracker.equals(otherAddress.assignmentTracker);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(classNumber, attendanceTracker, classParticipationTracker, assignmentTracker);
-    }
-
     /**
      * Sets the grade of the student for a particular assignment number.
      * @param assignmentNumber the assignment number
      * @param grade the grade to be set
      * @throws CommandException if the assignment number or grade is invalid
      */
-    public void setAssignGrade(int assignmentNumber, int grade) throws CommandException {
+    public void setGrade(int assignmentNumber, int grade) throws CommandException {
         if (assignmentNumber > assignmentCount || assignmentNumber <= 0) {
             throw new CommandException(
                     String.format(MESSAGE_INVALID_ASSIGNMENT_NUMBER, assignmentCount));
@@ -229,7 +201,7 @@ public class ClassDetails {
      * Displays the list of tutorial sessions and their participation status.
      * @return the display message of the tutorial sessions and their participation status.
      */
-    public String displayParticipations() {
+    public String displayParticipation() {
         return classParticipationTracker.toString();
     }
 
@@ -238,5 +210,33 @@ public class ClassDetails {
                 attendanceTracker.getJson(),
                 assignmentTracker.getJson(),
                 classParticipationTracker.getJson());
+    }
+
+    @Override
+    public String toString() {
+        return classNumber;
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof ClassDetails)) {
+            return false;
+        }
+
+        ClassDetails otherAddress = (ClassDetails) other;
+        return classNumber.equals(otherAddress.classNumber)
+                && attendanceTracker.equals(otherAddress.attendanceTracker)
+                && classParticipationTracker.equals(otherAddress.classParticipationTracker)
+                && assignmentTracker.equals(otherAddress.assignmentTracker);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(classNumber, attendanceTracker, classParticipationTracker, assignmentTracker);
     }
 }

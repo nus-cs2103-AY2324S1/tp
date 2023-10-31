@@ -44,7 +44,7 @@ public class RecordClassParticipationCommandTest {
 
         String expectedMessage = String.format(RecordClassParticipationCommand.MESSAGE_SUCCESS,
                 editedStudent.getStudentNumber())
-                + editedStudent.getClassDetails().displayParticipations();
+                + editedStudent.getClassDetails().displayParticipation();
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setStudent(model.getStudent(editedStudent.getStudentNumber()), editedStudent);
@@ -67,7 +67,7 @@ public class RecordClassParticipationCommandTest {
 
         String expectedMessage = String.format(RecordClassParticipationCommand.MESSAGE_SUCCESS,
                 editedStudent.getStudentNumber())
-                + editedStudent.getClassDetails().displayParticipations();
+                + editedStudent.getClassDetails().displayParticipation();
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         showStudentAtIndex(expectedModel, INDEX_FIRST_STUDENT);

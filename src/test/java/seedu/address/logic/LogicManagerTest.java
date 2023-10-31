@@ -3,6 +3,7 @@ package seedu.address.logic;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.LogicManager.FILE_OPS_ERROR_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_NONEXISTENT_STUDENT_NUMBER;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.commands.CommandTestUtil.CLASS_NUMBER_DESC_AMY;
@@ -16,12 +17,15 @@ import static seedu.address.testutil.TypicalStudents.AMY;
 import java.io.IOException;
 import java.nio.file.AccessDeniedException;
 import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.Optional;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.commons.exceptions.DataLoadingException;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.ConfigCommand;
@@ -33,8 +37,11 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.student.Student;
+import seedu.address.model.util.SampleDataUtil;
+import seedu.address.storage.AddressBookStorage;
 import seedu.address.storage.JsonAddressBookStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
 import seedu.address.storage.StorageManager;
@@ -47,8 +54,14 @@ public class LogicManagerTest {
     @TempDir
     public Path temporaryFolder;
 
-    private Model model = new ModelManager();
+    private final Model model = new ModelManager();
     private Logic logic;
+    private final int tutorialCount = 13;
+    private final int assignmentCount = 4;
+    private final String fileName = "classmanager";
+    private final String loadCommand = "load f/" + fileName;
+
+
 
     @BeforeEach
     public void setUp() {
@@ -83,8 +96,6 @@ public class LogicManagerTest {
 
     @Test
     public void execute_loadCommand_success() throws CommandException, ParseException {
-        String fileName = "classmanager";
-        String loadCommand = "load f/" + fileName;
         assertCommandSuccess(loadCommand, String.format(LoadCommand.MESSAGE_LOAD_SUCCESS, fileName), model);
         assertHistoryCorrect(loadCommand);
     }
@@ -92,24 +103,67 @@ public class LogicManagerTest {
     @Test
     public void execute_configCommand_success() throws CommandException, ParseException {
         model.setConfigured(false);
-        int tutorialCount = 13;
-        int assignmentCount = 4;
         String configCommand = "config #t/" + tutorialCount + " #a/" + assignmentCount;
         assertCommandSuccess(configCommand,
                 String.format(ConfigCommand.MESSAGE_CONFIG_SUCCESS, tutorialCount, assignmentCount), model);
         assertHistoryCorrect(configCommand);
     }
 
+    /**
+     * Tests the Logic component's handling of an {@code IOException} thrown by the Storage component for
+     * Config Commands.
+     */
+    @Test
+    public void execute_configCommand_failure() {
+        Path prefPath = temporaryFolder.resolve("ExceptionUserPrefs.json");
+
+        // Inject LogicManager with a UserPrefsStorage that throws the IOException e when saving
+        JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(prefPath) {
+            @Override
+            public void saveUserPrefs(ReadOnlyUserPrefs userPrefs)
+                    throws IOException {
+                throw DUMMY_IO_EXCEPTION;
+            }
+        };
+
+        JsonAddressBookStorage addressBookStorage =
+                new JsonAddressBookStorage(temporaryFolder.resolve("ExceptionAddressBook.json"));
+        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
+
+        logic = new LogicManager(model, storage);
+
+        // Triggers the saveAddressBook method by executing an add command
+        String configCommand = "config #t/" + tutorialCount + " #a/" + assignmentCount;
+        ModelManager expectedModel = new ModelManager();
+        model.setConfigured(false);
+        expectedModel.setConfigured(true);
+        assertCommandFailure(configCommand, CommandException.class,
+                String.format(FILE_OPS_ERROR_FORMAT, DUMMY_IO_EXCEPTION.getMessage()), expectedModel);
+    }
+
+
     @Test
     public void execute_storageThrowsIoException_throwsCommandException() {
         assertCommandFailureForExceptionFromStorage(DUMMY_IO_EXCEPTION, String.format(
-                LogicManager.FILE_OPS_ERROR_FORMAT, DUMMY_IO_EXCEPTION.getMessage()));
+                FILE_OPS_ERROR_FORMAT, DUMMY_IO_EXCEPTION.getMessage()));
     }
 
     @Test
     public void execute_storageThrowsAdException_throwsCommandException() {
         assertCommandFailureForExceptionFromStorage(DUMMY_AD_EXCEPTION, String.format(
                 LogicManager.FILE_OPS_PERMISSION_ERROR_FORMAT, DUMMY_AD_EXCEPTION.getMessage()));
+    }
+
+    @Test
+    public void executeLoadCommand_storageThrowsAdException_throwsCommandException() {
+        assertLoadCommandFailureForExceptionFromStorage(DUMMY_AD_EXCEPTION, String.format(
+                LogicManager.FILE_OPS_PERMISSION_ERROR_FORMAT, DUMMY_AD_EXCEPTION.getMessage()));
+    }
+
+    @Test
+    public void executeLoadCommand_storageThrowsIoException_throwsCommandException() {
+        assertLoadCommandFailureForExceptionFromStorage(DUMMY_IO_EXCEPTION, String.format(
+                FILE_OPS_ERROR_FORMAT, DUMMY_IO_EXCEPTION.getMessage()));
     }
 
     @Test
@@ -243,6 +297,44 @@ public class LogicManagerTest {
         expectedModel.commitAddressBook();
         assertCommandFailure(addCommand, CommandException.class, expectedMessage, expectedModel);
     }
+
+    private void assertLoadCommandFailureForExceptionFromStorage(IOException e, String expectedMessage) {
+        Path prefPath = temporaryFolder.resolve("ExceptionUserPrefs.json");
+
+        // Inject LogicManager with an AddressBookStorage that throws the IOException e when saving
+        JsonAddressBookStorage addressBookStorage = new JsonAddressBookStorage(prefPath) {
+            @Override
+            public void saveAddressBook(ReadOnlyAddressBook addressBook, Path filePath)
+                    throws IOException {
+                throw e;
+            }
+        };
+
+        JsonUserPrefsStorage userPrefsStorage =
+                new JsonUserPrefsStorage(temporaryFolder.resolve("ExceptionUserPrefs.json"));
+        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
+
+        logic = new LogicManager(model, storage);
+
+        // Triggers the saveAddressBook method by executing a load command
+        String fileName = "classmanager";
+        Path filePath = Paths.get("data", fileName + ".json");
+        AddressBookStorage tempAddressBookStorage = new JsonAddressBookStorage(filePath);
+        Optional<ReadOnlyAddressBook> addressBookOptional;
+        ReadOnlyAddressBook newData;
+        try {
+            addressBookOptional = tempAddressBookStorage.readAddressBook();
+            newData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
+        } catch (DataLoadingException dle) {
+            throw new AssertionError("Data should not be invalid", dle);
+        }
+        ModelManager expectedModel = new ModelManager();
+        expectedModel.setConfigured(true);
+        expectedModel.setAddressBookFilePath(filePath);
+        expectedModel.reset(newData);
+        assertCommandFailure(loadCommand, CommandException.class, expectedMessage, expectedModel);
+    }
+
 
     /**
      * Asserts that the result display shows all the {@code expectedCommands} upon the execution of

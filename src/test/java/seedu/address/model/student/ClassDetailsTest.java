@@ -67,10 +67,10 @@ public class ClassDetailsTest {
     public void setAssignmentGrade_invalidValues_exceptionThrown() {
         ClassDetails classDetails = new ClassDetails("T11");
         ClassDetails.setAssignmentCount(3);
-        assertThrows(CommandException.class, () -> classDetails.setAssignGrade(4, 0));
-        assertThrows(CommandException.class, () -> classDetails.setAssignGrade(-1, 0));
-        assertThrows(CommandException.class, () -> classDetails.setAssignGrade(1, -1));
-        assertThrows(CommandException.class, () -> classDetails.setAssignGrade(1, 200));
+        assertThrows(CommandException.class, () -> classDetails.setGrade(4, 0));
+        assertThrows(CommandException.class, () -> classDetails.setGrade(-1, 0));
+        assertThrows(CommandException.class, () -> classDetails.setGrade(1, -1));
+        assertThrows(CommandException.class, () -> classDetails.setGrade(1, 200));
     }
 
     @Test
@@ -78,8 +78,8 @@ public class ClassDetailsTest {
         ClassDetails classDetails = new ClassDetails("T11");
         ClassDetails.setAssignmentCount(3);
         try {
-            classDetails.setAssignGrade(3, 0);
-            classDetails.setAssignGrade(1, 100);
+            classDetails.setGrade(3, 0);
+            classDetails.setGrade(1, 100);
         } catch (CommandException e) {
             fail();
         }
@@ -200,9 +200,9 @@ public class ClassDetailsTest {
         ClassDetails classDetails = new ClassDetails("T11");
         ClassDetails.setAssignmentCount(3);
         try {
-            classDetails.setAssignGrade(1, 30);
-            classDetails.setAssignGrade(2, 40);
-            classDetails.setAssignGrade(3, 50);
+            classDetails.setGrade(1, 30);
+            classDetails.setGrade(2, 40);
+            classDetails.setGrade(3, 50);
             assertEquals(40, classDetails.getAssignmentPercentage());
         } catch (Exception e) {
             fail();
@@ -231,9 +231,9 @@ public class ClassDetailsTest {
     public void getAssignmentPercentage_invalidValues_fail() {
         try {
             ClassDetails classDetails = new ClassDetails("T11", null, null, null);
-            classDetails.setAssignGrade(1, 30);
-            classDetails.setAssignGrade(2, 40);
-            classDetails.setAssignGrade(3, 50);
+            classDetails.setGrade(1, 30);
+            classDetails.setGrade(2, 40);
+            classDetails.setGrade(3, 50);
             assertEquals(40, classDetails.getAssignmentPercentage());
         } catch (Exception e) {
             assertTrue(e instanceof NullPointerException);

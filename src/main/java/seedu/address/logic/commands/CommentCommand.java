@@ -21,7 +21,7 @@ public class CommentCommand extends Command {
     public static final String COMMAND_WORD = "comment";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the comment of the person identified "
-            + "by the student number used. "
+            + "by the student number used.\n"
             + "Existing comment will be overwritten by the input.\n"
             + "Parameters: " + PREFIX_STUDENT_NUMBER + "[StudentNumber] (must be an existing student number) "
             + PREFIX_COMMENT + "[Comment]\n"

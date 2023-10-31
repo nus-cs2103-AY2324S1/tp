@@ -569,10 +569,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
-* **Student Number**: Matriculation number of NUS student
-* **Email**: NUS email address (eXXXXXXX@u.nus.edu)
-* **CLI**: Command Line Interface
-* **GUI**: Graphical User Interface
+* **Student Number**: Matriculation number of NUS student. It must begin with capital A, followed by any number of alphanumeric characters. It must not be blank.
+* **Email**: Any valid email address, such as NUS email address (eXXXXXXX@u.nus.edu).
+* **CLI**: Command Line Interface.
+* **GUI**: Graphical User Interface.
 
 --------------------------------------------------------------------------------------------------------------------
 

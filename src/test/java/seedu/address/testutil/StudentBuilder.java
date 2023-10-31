@@ -99,7 +99,7 @@ public class StudentBuilder {
      */
     public StudentBuilder withAssignmentDetails(int assignmentNumber, int marks) {
         try {
-            this.classDetails.setAssignGrade(assignmentNumber, marks);
+            this.classDetails.setGrade(assignmentNumber, marks);
         } catch (CommandException e) {
             e.printStackTrace();
         }

@@ -12,6 +12,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.student.ClassDetails;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.StudentNumber;
@@ -269,5 +270,14 @@ public class ModelManager implements Model {
     @Override
     public int hashCode() {
         return Objects.hash(versionedAddressBook, userPrefs, filteredStudents);
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .add("versionedAddressBook", versionedAddressBook)
+                .add("userPrefs", userPrefs)
+                .add("filteredStudents", filteredStudents)
+                .toString();
     }
 }
