@@ -139,6 +139,13 @@ public class Person {
         return this.interactions;
     }
 
+    /**
+     * Returns the follow up date of the person.
+     * This is calculated by adding the follow up period of the lead to the date of the latest interaction.
+     * It is an optional because the person may not have a lead or interaction.
+     * It is also used in Reminders constructor to determine the due time of the reminder.
+     * @return
+     */
     public Optional<LocalDate> getFollowUpDate() {
         if (interactions.isEmpty() || lead == null) {
             return Optional.empty();

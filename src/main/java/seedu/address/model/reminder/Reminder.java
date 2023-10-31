@@ -60,6 +60,9 @@ public final class Reminder implements Comparable<LocalDate> {
 
     @Override
     public int compareTo(LocalDate date) {
+        if (this.followUpDate.isEqual(date)) {
+            return 0;
+        }
         return this.followUpDate.isAfter(followUpDate) ? 1 : -1;
     }
 
