@@ -24,7 +24,7 @@ public class ClearCommandTest {
     public void execute_nonEmptyAddressBook_success() {
         Model model = new ModelManager(getTypicalWellNus(), new UserPrefs());
         Model expectedModel = new ModelManager(getTypicalWellNus(), new UserPrefs());
-        expectedModel.setAddressBook(new WellNus());
+        expectedModel.setWellNusData(new WellNus());
 
         assertCommandSuccess(new ClearCommand(), model, ClearCommand.MESSAGE_SUCCESS, expectedModel);
     }

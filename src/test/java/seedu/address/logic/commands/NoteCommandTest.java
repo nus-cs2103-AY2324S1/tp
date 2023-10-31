@@ -42,7 +42,7 @@ public class NoteCommandTest {
         String expectedMessage = String.format(NoteCommand.MESSAGE_ADD_NOTE_SUCCESS,
                 Messages.format(editedStudent));
 
-        Model expectedModel = new ModelManager(new WellNus(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new WellNus(model.getWellNusData()), new UserPrefs());
         expectedModel.setStudent(firstStudent, editedStudent);
 
         assertCommandSuccess(noteCommand, model, expectedMessage, expectedModel);
@@ -59,7 +59,7 @@ public class NoteCommandTest {
         String expectedMessage = String.format(NoteCommand.MESSAGE_DELETE_NOTE_SUCCESS,
                 Messages.format(editedStudent));
 
-        Model expectedModel = new ModelManager(new WellNus(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new WellNus(model.getWellNusData()), new UserPrefs());
         expectedModel.setStudent(firstStudent, editedStudent);
 
         assertCommandSuccess(noteCommand, model, expectedMessage, expectedModel);
@@ -78,7 +78,7 @@ public class NoteCommandTest {
         String expectedMessage = String.format(NoteCommand.MESSAGE_ADD_NOTE_SUCCESS,
                 Messages.format(editedStudent));
 
-        Model expectedModel = new ModelManager(new WellNus(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new WellNus(model.getWellNusData()), new UserPrefs());
         expectedModel.setStudent(firstStudent, editedStudent);
 
         assertCommandSuccess(noteCommand, model, expectedMessage, expectedModel);
@@ -101,7 +101,7 @@ public class NoteCommandTest {
         showStudentAtIndex(model, INDEX_FIRST_STUDENT);
         Index outOfBoundIndex = INDEX_SECOND_STUDENT;
         // ensures that outOfBoundIndex is still in bounds of address book list
-        assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getStudentList().size());
+        assertTrue(outOfBoundIndex.getZeroBased() < model.getWellNusData().getStudentList().size());
 
         NoteCommand noteCommand = new NoteCommand(outOfBoundIndex, new Note(VALID_NOTE_BOB));
 

@@ -23,7 +23,7 @@ public class ViewCommandTest {
     @BeforeEach
     public void setUp() {
         model = new ModelManager(getTypicalWellNus(), new UserPrefs());
-        expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        expectedModel = new ModelManager(model.getWellNusData(), new UserPrefs());
     }
 
     @Test
