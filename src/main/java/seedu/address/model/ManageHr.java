@@ -72,6 +72,9 @@ public class ManageHr implements ReadOnlyManageHr {
     /**
      * Adds an employee to ManageHR.
      * The employee must not already exist in ManageHR.
+     *
+     * @param p The employee to be added to the list.
+     * @throws SupervisorNotFoundException If the supervisor of the employee is not found in the list.
      */
     public void addEmployee(Employee p) {
         requireNonNull(p);
@@ -85,6 +88,12 @@ public class ManageHr implements ReadOnlyManageHr {
      * Replaces the given employee {@code target} in the list with {@code editedEmployee}.
      * {@code target} must exist in the ManageHR.
      * The employee identity of {@code editedEmployee} must not be the same as another existing employee in ManageHR.
+     *
+     * @param target The original employee to be updated.
+     * @param editedEmployee The updated employee.
+     * @throws SubordinatePresentException If the original employee manages subordinates, preventing the update.
+     * @throws SupervisorNotFoundException If the supervisor of the updated employee is not found in the list or if the
+     * original employee is a supervisor of the updated employee.
      */
     public void setEmployee(Employee target, Employee editedEmployee) {
         requireNonNull(editedEmployee);
@@ -104,6 +113,9 @@ public class ManageHr implements ReadOnlyManageHr {
     /**
      * Removes {@code key} from this {@code ManageHr}.
      * {@code key} must exist in the ManageHr.
+     *
+     * @param key The employee to be removed.
+     * @throws SubordinatePresentException If the employee manages subordinates, preventing removal.
      */
     public void removeEmployee(Employee key) {
         if (employees.hasSubordinates(key)) {

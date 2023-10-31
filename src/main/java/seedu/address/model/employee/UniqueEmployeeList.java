@@ -20,7 +20,6 @@ import seedu.address.model.employee.exceptions.SupervisorNotFoundException;
  * that the employee being added or updated is unique in terms of identity in the UniqueEmployeeList.
  * However, the removal of an employee uses Employee#equals(Object) to ensure that the employee with
  * exactly the same fields will be removed.
- *
  * Supports a minimal set of list operations.
  *
  * @see Employee#isSameEmployee(Employee)
@@ -69,7 +68,10 @@ public class UniqueEmployeeList implements Iterable<Employee> {
     /**
      * Adds an employee to the list.
      * The employee must not already exist in the list.
-     * The managers of the employee are not
+     *
+     * @param toAdd The employee to be added to the list.
+     * @throws DuplicateEmployeeException If the employee already exists in the list.
+     * @throws SupervisorNotFoundException If the employee's manager (supervisor) is not found in the list.
      */
     public void add(Employee toAdd) {
         requireNonNull(toAdd);
@@ -87,6 +89,13 @@ public class UniqueEmployeeList implements Iterable<Employee> {
      * Replaces the employee {@code target} in the list with {@code editedEmployee}.
      * {@code target} must exist in the list.
      * The employee identity of {@code editedEmployee} must not be the same as another existing employee in the list.
+     *
+     * @param target The original employee to be updated.
+     * @param editedEmployee The updated employee.
+     * @throws EmployeeNotFoundException If the original employee is not found in the list.
+     * @throws DuplicateEmployeeException If an employee with the same information already exists in the list.
+     * @throws SupervisorNotFoundException If the updated employee has supervisors not found in the list.
+     * @throws SubordinatePresentException If the original employee manages subordinates.
      */
     public void setEmployee(Employee target, Employee editedEmployee) {
         requireAllNonNull(target, editedEmployee);
@@ -115,6 +124,10 @@ public class UniqueEmployeeList implements Iterable<Employee> {
     /**
      * Removes the equivalent employee from the list.
      * The employee must exist in the list.
+     *
+     * @param toRemove The employee to be removed from the list.
+     * @throws EmployeeNotFoundException If the employee is not found in the list.
+     * @throws SubordinatePresentException If the employee manages subordinates, preventing removal.
      */
     public void remove(Employee toRemove) {
         requireNonNull(toRemove);
