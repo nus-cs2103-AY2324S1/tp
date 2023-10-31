@@ -53,6 +53,8 @@ public class PersonProfile extends UiPart<Region> {
     private static final String NOT_AVAILABLE_NAME_TYPE_BOTH_SAME =
             "If fosterer is 'NotAvailable', Animal Name and Type must either both be 'nil', or both not be 'nil'.";
     private static final String FIELD_IS_MISSING = "Field is required to be not 'nil': ";
+    private static final String NOT_AVAILABLE_TYPE_NOT_CURRENT =
+            "If fosterer is 'NotAvailable', Animal Type must either be 'nil' or begin with 'current'.";
 
     // endregion
 
@@ -296,9 +298,15 @@ public class PersonProfile extends UiPart<Region> {
                 return true;
             }
         case "NotAvailable":
+            boolean isTypeCurrent = animalType.startsWith("current.");
             if (isNameNil != isTypeNil) {
                 sendConflict(
                         NOT_AVAILABLE_NAME_TYPE_BOTH_SAME, Field.AVAILABILITY, Field.ANIMAL_TYPE, Field.ANIMAL_NAME
+                );
+                return false;
+            } else if (!isTypeNil && !isTypeCurrent) {
+                sendConflict(
+                        NOT_AVAILABLE_TYPE_NOT_CURRENT, Field.AVAILABILITY, Field.ANIMAL_TYPE
                 );
                 return false;
             } else {
