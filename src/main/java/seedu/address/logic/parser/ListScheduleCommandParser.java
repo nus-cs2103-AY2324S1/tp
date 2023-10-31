@@ -7,13 +7,13 @@ import seedu.address.logic.commands.ListScheduleCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
- * Parses input arguments and creates a new DeleteTutorCommand object
+ * Parses input arguments and creates a new ListScheduleCommand object
  */
 public class ListScheduleCommandParser implements Parser<ListScheduleCommand> {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the DeleteTutorCommand
-     * and returns a DeleteTutorCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the ListScheduleCommand
+     * and returns a ListScheduleCommand object for execution.
      *
      * @throws ParseException if the user input does not conform the expected format
      */

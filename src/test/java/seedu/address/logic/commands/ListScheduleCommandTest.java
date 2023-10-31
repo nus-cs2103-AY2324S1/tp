@@ -8,10 +8,6 @@ import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -21,7 +17,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Person;
-import seedu.address.model.schedule.TutorIndexPredicate;
+import seedu.address.model.schedule.TutorPredicate;
 import seedu.address.testutil.TypicalSchedules;
 
 /**
@@ -47,9 +43,7 @@ public class ListScheduleCommandTest {
     @Test
     public void execute_validIndexUnfilteredList_success() {
         Person tutor = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        String fullName = tutor.getName().toString();
-        List<String> nameList = new ArrayList<>(Arrays.asList(fullName.split(" ")));
-        TutorIndexPredicate predicate = new TutorIndexPredicate(nameList);
+        TutorPredicate predicate = new TutorPredicate(tutor);
         ListScheduleCommand listScheduleCommand = new ListScheduleCommand(INDEX_FIRST_PERSON);
 
         String expectedMessage = String.format(Messages.MESSAGE_SCHEDULES_LISTED_OVERVIEW, 2);
@@ -71,9 +65,7 @@ public class ListScheduleCommandTest {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
 
         Person tutor = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        String fullName = tutor.getName().toString();
-        List<String> nameList = new ArrayList<>(Arrays.asList(fullName.split(" ")));
-        TutorIndexPredicate predicate = new TutorIndexPredicate(nameList);
+        TutorPredicate predicate = new TutorPredicate(tutor);
         ListScheduleCommand listScheduleCommand = new ListScheduleCommand(INDEX_FIRST_PERSON);
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());

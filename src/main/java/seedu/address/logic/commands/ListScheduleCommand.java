@@ -3,8 +3,6 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_SCHEDULES;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import seedu.address.commons.core.index.Index;
@@ -12,10 +10,10 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
-import seedu.address.model.schedule.TutorIndexPredicate;
+import seedu.address.model.schedule.TutorPredicate;
 
 /**
- * Lists all persons in the address book to the user.
+ * Lists all schedules in the address book to the user.
  */
 public class ListScheduleCommand extends Command {
 
@@ -24,9 +22,11 @@ public class ListScheduleCommand extends Command {
     public static final String MESSAGE_SUCCESS = "Listed all schedules";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-        + ": List the schedule identified by the index number used in the displayed tutor list.\n"
-        + "Parameters: INDEX (must be a positive integer, optional to add)\n"
-        + "Example: " + COMMAND_WORD + " 1";
+        + ": List the schedules in the address book. If index is specified, it lists the schedule"
+        + "identified by that index number in the displayed tutor list.\n"
+        + "Parameters: \nINDEX (must be a positive integer, optional to add) \n"
+        + "Example: \n"
+        + COMMAND_WORD + " 1, \n";
 
     private Index targetIndex;
 
@@ -44,16 +44,13 @@ public class ListScheduleCommand extends Command {
         } else {
             if (targetIndex.getZeroBased() >= lastShownList.size()) {
                 throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
-            } else {
-                Person tutor = lastShownList.get(targetIndex.getZeroBased());
-                String fullName = tutor.getName().toString();
-                List<String> nameList = new ArrayList<>(Arrays.asList(fullName.split(" ")));
-                TutorIndexPredicate predicate = new TutorIndexPredicate(nameList);
-
-                model.updateFilteredScheduleList(predicate);
-                return new CommandResult(
-                    String.format(Messages.MESSAGE_SCHEDULES_LISTED_OVERVIEW, model.getFilteredScheduleList().size()));
             }
+            Person tutor = lastShownList.get(targetIndex.getZeroBased());
+            TutorPredicate indexPredicate = new TutorPredicate(tutor);
+            model.updateFilteredScheduleList(indexPredicate);
+
+            return new CommandResult(
+                String.format(Messages.MESSAGE_SCHEDULES_LISTED_OVERVIEW, model.getFilteredScheduleList().size()));
         }
     }
 
