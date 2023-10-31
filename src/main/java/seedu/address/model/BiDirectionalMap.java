@@ -31,6 +31,14 @@ public class BiDirectionalMap<T extends ListEntry<T>, P extends ListEntry<P>> {
     }
 
     /**
+     * Removes a key-value pair and its reverse from the map
+     */
+    public void removeMapping(T t, P p) {
+        forwardMap.get(t.getName()).remove(p.getName());
+        reverseMap.get(p.getName()).remove(t.getName());
+    }
+
+    /**
      * Returns the value associated with the key
      */
     public Name[] get(T t) {

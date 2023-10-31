@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.Arrays;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -13,6 +14,7 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.lessons.Lesson;
 import seedu.address.model.lessons.Task;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.state.State;
 import seedu.address.ui.Ui;
@@ -143,7 +145,6 @@ public class ModelManager implements Model {
         requireAllNonNull(target, editedPerson);
         addressBook.setPerson(target, editedPerson);
         personToLessonMap.update(target, editedPerson);
-
     }
 
 
@@ -310,6 +311,21 @@ public class ModelManager implements Model {
 
     public BiDirectionalMap<Person, Lesson> getPersonLessonMap() {
         return personToLessonMap;
+    }
+
+    public void linkWith(Person person, Lesson lesson) {
+        personToLessonMap.addMapping(person, lesson);
+    }
+    public void unLinkWith(Person person, Lesson lesson) {
+        personToLessonMap.removeMapping(person, lesson);
+    }
+    public String getLinkedPersonNameStr(Lesson lesson) {
+        return Arrays.stream(personToLessonMap.getReversed(lesson)).map(Name::toString)
+                .reduce((a, b) -> a + ", " + b).orElse("Not linked to any Students yet");
+    }
+    public String getLinkedLessonNameStr(Person person) {
+        return Arrays.stream(personToLessonMap.get(person)).map(Name::toString)
+                .reduce((a, b) -> a + ", " + b).orElse("Not linked to any Lessons yet");
     }
 
 }

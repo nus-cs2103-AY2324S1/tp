@@ -10,6 +10,7 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.Logic;
+import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 
 /**
@@ -56,13 +57,12 @@ public class StudentDetailListPanel extends UiPart<Region> {
      *
      * @param person The person whose details are to be shown.
      */
-    public void setPersonDetails(Person person) {
+    public void setPersonDetails(Person person, Model model) {
         name.setText(person.getName().fullName);
         phone.setText(person.getPhone().value);
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
         remark.setText(person.getRemark().value);
-
         // Clears the previous items in the FlowPane for Tags and Subjects
         tags.getChildren().clear();
         subjects.getChildren().clear();
