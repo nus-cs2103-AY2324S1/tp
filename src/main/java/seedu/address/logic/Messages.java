@@ -32,7 +32,8 @@ public class Messages {
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
     public static final String MESSAGE_NOT_NUMBERS = "Error: The value is not a number";
-    public static final String MESSAGE_NOT_POSITIVE_NUMBER = "Error: The value has to be 0 or more";
+    public static final String MESSAGE_NOT_IN_RANGE =
+            "Error: The value has to be between %1$d and %2$d (both inclusive)";
 
     /**
      * Returns an error message indicating the duplicate prefixes.
