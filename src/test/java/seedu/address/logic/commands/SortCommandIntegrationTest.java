@@ -24,7 +24,7 @@ public class SortCommandIntegrationTest {
     }
 
     @Test
-    public void execute_sort_asc_success() {
+    public void executeSortAscSuccess() {
         String sequence = "ASC";
         SortIn validSortIn = new SortIn(sequence);
 
@@ -34,7 +34,7 @@ public class SortCommandIntegrationTest {
     }
 
     @Test
-    public void execute_sort_desc_success() {
+    public void executeSortDescSuccess() {
         String sequence = "DESC";
         SortIn validSortIn = new SortIn(sequence);
 
