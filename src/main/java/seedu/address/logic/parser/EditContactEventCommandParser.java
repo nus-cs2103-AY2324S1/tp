@@ -56,7 +56,7 @@ public class EditContactEventCommandParser implements Parser<EditContactEventCom
                             argMultimap.getValue(PREFIX_EVENT_END_DATE_TIME).get()));
         }
         if (!editEventDescriptor.isAnyFieldEdited()) {
-            throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
+            throw new ParseException(EditContactEventCommand.MESSAGE_NOT_EDITED);
         }
 
         return new EditContactEventCommand(indexArrayList, editEventDescriptor);

@@ -7,6 +7,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT_START_DATE_TIME;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -45,7 +46,7 @@ public class EditContactEventCommand extends Command {
             + "[" + PREFIX_EVENT_DESCRIPTION + "DESCRIPTION] "
             + "[" + PREFIX_EVENT_START_DATE_TIME + "START_DATE] "
             + "[" + PREFIX_EVENT_END_DATE_TIME + "END_DATE] \n"
-            + "Example: " + COMMAND_WORD + " 1 " + " 1 "
+            + "Example: " + COMMAND_WORD + " 1 " + "1 "
             + PREFIX_EVENT_DESCRIPTION + "Nap "
             + PREFIX_EVENT_START_DATE_TIME + "2023-10-10 10:00 "
             + PREFIX_EVENT_END_DATE_TIME + "2023-10-10 15:00 ";
@@ -113,7 +114,10 @@ public class EditContactEventCommand extends Command {
         LocalDateTime newEndDateTime = editEventDescriptor.getEnd().orElse(updatePeriod.getEnd());
         EventDescription newEventDescription = editEventDescriptor.getEventDescription()
                 .orElse(updateEvent.getDescription());
-        EventPeriod newEventPeriod = new EventPeriod(newStartDateTime, newEndDateTime);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        String stringStartDateTime = newStartDateTime.format(formatter);
+        String stringEndDateTime = newEndDateTime.format(formatter);
+        EventPeriod newEventPeriod = new EventPeriod(stringStartDateTime, stringEndDateTime);
         Event updatedEvent = new Event(newEventDescription, newEventPeriod);
         eventList.set(eventIndex.getZeroBased(), updatedEvent);
         Calendar updatedCalendar = new Calendar();
@@ -151,7 +155,7 @@ public class EditContactEventCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(eventDescription, eventPeriod);
+            return CollectionUtil.isAnyNonNull(start, end, eventPeriod);
         }
 
         public void setEventDescription(EventDescription eventDescription) {
@@ -169,7 +173,9 @@ public class EditContactEventCommand extends Command {
         public Optional<EventPeriod> getEventPeriod() {
             return Optional.ofNullable(eventPeriod);
         }
-        public void setStart(LocalDateTime start) {
+        public void setStart(String startString) {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+            LocalDateTime start = LocalDateTime.parse(startString, formatter);
             this.start = start;
         }
 
@@ -177,7 +183,9 @@ public class EditContactEventCommand extends Command {
             return Optional.ofNullable(start);
         }
 
-        public void setEnd(LocalDateTime end) {
+        public void setEnd(String endString) {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+            LocalDateTime end = LocalDateTime.parse(endString, formatter);
             this.end = end;
         }
 

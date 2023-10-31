@@ -50,7 +50,7 @@ public class EventPeriod implements Comparable<EventPeriod> {
      * @param start The LocalDateTime representation of the start date and time.
      * @param end The LocalDateTime representation of the end date and time.
      */
-    public EventPeriod(LocalDateTime start, LocalDateTime end) {
+    private EventPeriod(LocalDateTime start, LocalDateTime end) {
         this.start = start;
         this.end = end;
     }
