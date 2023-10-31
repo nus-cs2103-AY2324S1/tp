@@ -491,154 +491,72 @@ The following activity diagram summarizes what happens when a user executes a ne
 _{more aspects and alternatives to be added}_
 
 ### Notes feature
+#### Implementation
+##### Commmand logic
+The `NoteCommand` feature allows users to add personalized notes to a specific contact in the Address Book. This functionality is essential for users who wish to record additional information about their contacts.
 
-#### 1. NoteCommand
-**Purpose:**
-The NoteCommand is used to add a note to a specific person in the Address Book.
+Three key classes are involved in this implementation:
+- `NoteCommand`: Handles the logic for adding the note.
+- `Index`: Represents the index of the person in the filtered person list to whom the note will be added.
+- `Note`: Represents the content of the note to be added.
 
-**Class Description:**
-- `NoteCommand`: This class extends `Command` and is responsible for the logic of adding a note.
-- `Index`: This is used to store the index of the person in the filtered person list to whom the note will be added.
-- `Note`: This is used to store the content of the note to be added.
+Notes are stored as an `ObservableList<Note>` within the Person model. This is done to simplify storage and retrieval of notes, as well as to enable the use of JavaFX components to display the notes with the `Observer` pattern.
 
-**Logic Flow:**
-1. The user inputs a command to add a note, specifying the index of the person and the content of the note.
-2. The `NoteCommandParser` parses the user input and creates a new `NoteCommand` object.
-3. The `execute` method of `NoteCommand` is called.
-4. The method retrieves the list of all persons and checks if the provided index is valid.
-5. If the index is valid, it retrieves the person at the specified index and adds the note to this person.
-6. Finally, a `CommandResult` is returned, indicating that the note has been successfully added.
+The `Note` class is a simple wrapper class that contains a `String` representing the content of the note.
 
-**Key Methods:**
-- `NoteCommand(Index index, Note note)`: Constructor to initialize the command with the specified index and note.
-- `execute(Model model)`: Adds the note to the person at the specified index in the model's filtered person list.
+When a user inputs a command to add a note, the `NoteCommandParser` parses the user input and creates a new `NoteCommand` object. This object is then executed, which results in the addition of the specified note to the targeted contact.
 
-#### 2. RemoveNoteCommand
-**Purpose:**
-The RemoveNoteCommand is used to remove a note from a specific person in the Address Book based on the index of the person and the index of the note.
 
-**Class Description:**
-- `RemoveNoteCommand`: This class extends `Command` and is responsible for the logic of removing a note.
-- `Index`: The first index refers to the person in the filtered person list, and the second index refers to the note to be removed.
+The process can be summarized in the following logic flow:
+1. Parse user input to create a `NoteCommand` object.
+2. Execute the `NoteCommand`, which involves:
+    - Retrieving the list of all persons.
+    - Validating the provided index.
+    - Adding the note to the person at the specified index.
+3. Return a `CommandResult` indicating the outcome.
 
-**Logic Flow:**
-1. The user inputs a command to remove a note, specifying the index of the person and the index of the note.
-2. The `RemoveNoteCommandParser` parses the user input and creates a new `RemoveNoteCommand` object.
-3. The `execute` method of `RemoveNoteCommand` is called.
-4. The method retrieves the list of all persons and checks if the provided indexes are valid.
-5. If the indexes are valid, it retrieves the person and note at the specified indexes and removes the note from this person.
-6. Finally, a `CommandResult` is returned, indicating that the note has been successfully removed.
+Key methods in this implementation include:
+- `NoteCommand(Index index, Note note)`: Constructor to initialize the command.
+- `execute(Model model)`: Adds the note and updates the model.
 
-**Key Methods:**
-- `RemoveNoteCommand(Index indexPerson, Index indexNote)`: Constructor to initialize the command with the specified indexes.
-- `execute(Model model)`: Removes the note from the person at the specified index in the model's filtered person list.
+##### UI Logic
+The Notes feature also includes a user interface component to allow users to interactively add, view, and remove notes from contacts.
 
-#### 3. Person
-**Key Modifications:**
-- `List<Note> notes`: A list to store notes associated with the person.
-- `addNote(Note note)`: Adds a note to the person.
-- `removeNote(int idx)`: Removes a note from the person at the specified index.
+The user interface for the Notes feature is implemented using JavaFX components. The main components include:
+- `PersonCard`: Displays individual person's details and includes a button for accessing notes.
+- `NotesWindow`: A pop-up window that displays all notes associated with a person.
 
-### User Interface Implementation for Notes Feature
+The `PersonCard` component includes a button (`notesButton`) that, when clicked, triggers the `handleNotesButtonClick` method in the controller. This method creates and shows a new `NotesWindow`.
 
-The Notes feature in the application is implemented using a combination of JavaFX components. Below is a detailed explanation of the development and testing of the UI components relevant to this feature.
+The `NotesWindow` is responsible for displaying the list of notes and is populated using a `ListView` component. The controller for `NotesWindow` handles the population of this list and the closing of the window. `NotesWindow` has a button (`closeButton`) that, when clicked, triggers the `handleCloseButtonClick` method in the controller. This method closes the window. The `NotesWindow` is also closed when the user presses the `ESC` key.
 
-#### 1. `PersonCard` UI Component
+#### Design considerations
 
-The `PersonCard` UI component is responsible for displaying individual person's details. It is implemented using FXML and its associated controller class. The relevant parts for the Notes feature are:
+**Aspect: Integration with Existing Data Model**
+* **Alternative 1 (current choice):** Leverage existing `Person` class and `Model` interface.
+    * Pros: Utilizes existing data structures and methods, ensuring consistency and potentially reducing the likelihood of bugs.
+    * Cons: The `Person` class becomes more complex as more features are added.
+* **Alternative 2:** Create a separate system for managing notes.
+    * Pros: Keeps the `Person` class simpler and more focused on contact information.
+    * Cons: May result in duplication of effort and increased complexity in ensuring consistency between the contact and note systems.
 
-- **FXML**: The layout of the `PersonCard` includes a Button component (`notesButton`) for accessing the notes of a person. This button is placed in a VBox in the second column of a GridPane.
+Choosing alternative 1 aligns with the principle of maximizing code reuse and maintaining consistency across the application, even though it slightly increases the complexity of the `Person` class.
 
-  ```xml
-  <VBox alignment="CENTER" GridPane.columnIndex="1" GridPane.vgrow="ALWAYS">
-    <Region VBox.vgrow="ALWAYS" />
-    <Button fx:id="notesButton" onAction="#handleNotesButtonClick" text="Notes (0)" />
-  </VBox>
-  ```
+**Aspect: User Interaction and Experience**
+* **Alternative 1 (current choice):** Pop-up window for notes.
+    * Pros: Provides a clear and focused view for user to manage notes.
+    * Cons: Additional window management required; may be less convenient for quick interactions.
+* **Alternative 2:** Inline editing within the `PersonCard`.
+    * Pros: Potentially more convenient for quick additions or edits.
+    * Cons: Could clutter the interface and distract from the main contact information.
 
-- **Controller**: In the `PersonCard` controller, there is a method `handleNotesButtonClick()`, which is called when the Notes button is clicked. This method creates a new instance of `NotesWindow` and shows it.
-
-  ```java
-  @FXML
-  public void handleNotesButtonClick() {
-      try {
-          NotesWindow notesWindow = new NotesWindow(person);
-          notesWindow.show();
-      } catch (Exception e) {
-          e.printStackTrace();
-      }
-  }
-  ```
-
-#### 2. `NotesWindow` UI Component
-
-The `NotesWindow` UI component is used to display the notes of a person in a new window.
-
-- **FXML**: It consists of a `ListView` (`notesListView`) to list the notes and a Button to close the window.
-
-  ```xml
-  <ListView fx:id="notesListView" />
-  <Button text="Close" onAction="#handleClose" />
-  ```
-
-- **Controller**: The controller class manages the population of the `ListView` with the notes from the person object and handles the closing of the window.
-
-  ```java
-  public class NotesWindow extends UiPart<Stage> {
-      //...
-      private void populateListView(List<Note> notes) {
-          ObservableList<String> notesObservableList = FXCollections.observableArrayList();
-          for (Note note : notes) {
-              notesObservableList.add(note.toString());
-          }
-          notesListView.setItems(notesObservableList);
-      }
-  
-      @FXML
-      void handleClose() {
-          Stage stage = (Stage) notesListView.getScene().getWindow();
-          stage.close();
-      }
-      //...
-  }
-  ```
+Choosing alternative 1 provides a balance between functionality and user interface simplicity, ensuring that the notes feature does not overwhelm the main contact viewing experience.
 
 #### Testing
 
-For testing the UI components, we use TestFX.
+The UI components are tested using TestFX to ensure that they behave as expected. Test cases include verifying the display of notes, interaction responses, and the proper functioning of the close button. Ensuring thorough testing is vital for maintaining the reliability and user-friendliness of the application.
 
-- `NotesWindowTest`: This test class ensures that the `NotesWindow` UI component is functioning as expected.
-
-  ```java
-  public class NotesWindowTest extends ApplicationTest {
-      //...
-      @Test
-      public void testNotesDisplay() {
-          List<String> expectedNotes = Arrays.asList("Likes to swim", "Likes to run", "Is a chad");
-          verifyThat("#notesListView", hasItems(3));
-          assertTrue(notesWindow.getNotesListView().getItems().containsAll(expectedNotes));
-      }
-
-      @Test
-      public void testIsShowing() {
-          assertTrue(notesWindow.isShowing());
-          interact(() -> notesWindow.hide());
-          assertFalse(notesWindow.isShowing());
-      }
-
-      @Test
-      public void testHandleClose() {
-          interact(() -> notesWindow.handleClose());
-          assertFalse(notesWindow.isShowing());
-      }
-      //...
-  }
-  ```
-
-In the tests, we verify that the `NotesWindow` displays the correct number of notes, that it reacts correctly to interactions, and that it properly closes when the close button is clicked.
-
-Ensure that you replace the actual code and XML content if it changes in the future to keep the documentation up to date.
-
+Take note that UI tests have to be run on the `JavaFX` thread, so UI tests have to extend `ApplicationTest` from `TestFX` to run properly.
 
 ### \[Proposed\] Data archiving
 
