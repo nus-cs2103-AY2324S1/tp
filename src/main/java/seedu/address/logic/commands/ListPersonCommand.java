@@ -12,6 +12,9 @@ public class ListPersonCommand extends ListCommand {
     public static final String MESSAGE_SUCCESS = "Listed all contacts";
     public static final String SECONDARY_COMMAND_WORD = "contact";
 
+    public static final String MESSAGE_USAGE = COMMAND_WORD + SECONDARY_COMMAND_WORD
+            + ": Lists all contacts in the address book";
+
 
     @Override
     public CommandResult execute(Model model) {

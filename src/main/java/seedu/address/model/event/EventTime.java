@@ -9,6 +9,9 @@ import seedu.address.commons.util.DateTimeUtil;
  * The class for holding the "start" and "end" part for an Event
  */
 public class EventTime {
+    public static final String MESSAGE_INVALID_DATETIME_FORMAT = "Invalid date-time format! ";
+    public static final String MESSAGE_NON_EMPTY = "Event time can not be empty!";
+
     private final LocalDateTime time;
 
     private EventTime() {

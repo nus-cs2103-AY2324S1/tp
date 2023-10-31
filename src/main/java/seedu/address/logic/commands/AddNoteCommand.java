@@ -6,6 +6,7 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.note.Note;
+import seedu.address.model.person.ContactID;
 import seedu.address.model.person.Person;
 
 /**
@@ -21,12 +22,12 @@ public class AddNoteCommand extends AddCommand {
     public static final String MESSAGE_PERSON_NOT_FOUND = "Can not find the target contact with ID: ";
 
     private final Note toAdd;
-    private final int contactId;
+    private final ContactID contactId;
 
     /**
      * Creates an AddNoteCommand to add the specified {@code Note}
      */
-    public AddNoteCommand(int contactId, Note note) {
+    public AddNoteCommand(ContactID contactId, Note note) {
         requireNonNull(note);
         this.contactId = contactId;
         this.toAdd = note;
@@ -58,7 +59,7 @@ public class AddNoteCommand extends AddCommand {
         AddNoteCommand otherAddNoteCommand = (AddNoteCommand) other;
 
         boolean equalToAdd = toAdd.equals(otherAddNoteCommand.toAdd);
-        boolean equalContactId = (contactId == otherAddNoteCommand.contactId);
+        boolean equalContactId = contactId.equals(otherAddNoteCommand.contactId);
         return equalToAdd && equalContactId;
     }
 

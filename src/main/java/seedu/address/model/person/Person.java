@@ -12,7 +12,9 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.event.Event;
+import seedu.address.model.event.EventID;
 import seedu.address.model.note.Note;
+import seedu.address.model.note.NoteID;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -102,18 +104,18 @@ public class Person {
     /**
      * Remove a note by its user-friendly id
      * @param id The id of the note you want to remove
-     * @return {@code true} if the operation is successful and {@code false} if the note with this id does not exist
+     * @return The note object that is just deleted if the operation is successful
+     *      or {@code null} if the note with this name does not exist
      */
-    public boolean removeNoteByUserFriendlyId(int id) {
-        return this.removeNoteByIndex(id - 1);
+    public Note removeNoteByUserFriendlyId(NoteID id) {
+        return this.removeNoteByIndex(id.getId() - 1);
     }
 
-    private boolean removeNoteByIndex(int index) {
+    private Note removeNoteByIndex(int index) {
         if (index < 0 || index >= this.notes.size()) {
-            return false;
+            return null;
         }
-        this.notes.remove(index);
-        return true;
+        return this.notes.remove(index);
     }
 
     /**
@@ -127,18 +129,18 @@ public class Person {
     /**
      * Remove an event by its user-friendly id
      * @param id The id of the event you want to remove
-     * @return {@code true} if the operation is successful and {@code false} if the event with this name does not exist
+     * @return The event object that is just deleted if the operation is successful
+     *     or {@code null} if the event with this name does not exist
      */
-    public boolean removeEventByUserFriendlyId(int id) {
-        return this.removeEventByIndex(id - 1);
+    public Event removeEventByUserFriendlyId(EventID id) {
+        return this.removeEventByIndex(id.getId() - 1);
     }
 
-    private boolean removeEventByIndex(int index) {
+    private Event removeEventByIndex(int index) {
         if (index < 0 || index >= this.events.size()) {
-            return false;
+            return null;
         }
-        this.events.remove(index);
-        return true;
+        return this.events.remove(index);
     }
 
     /**

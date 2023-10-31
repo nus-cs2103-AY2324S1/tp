@@ -5,6 +5,9 @@ import static java.util.Objects.requireNonNull;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.note.Note;
+import seedu.address.model.note.NoteID;
+import seedu.address.model.person.ContactID;
 import seedu.address.model.person.Person;
 
 /**
@@ -19,12 +22,12 @@ public class DeleteNoteCommand extends DeleteCommand {
     public static final String MESSAGE_SUCCESS = "Successfully deleted note: ";
     public static final String MESSAGE_NOTE_NOT_FOUND = "Note not found: ID = ";
 
-    private final int noteIdToDelete;
-    private final int contactId;
+    private final NoteID noteIdToDelete;
+    private final ContactID contactId;
     /**
-     * Creates an DeleteEventCommand to delete the specified {@code Event}
+     * Creates a DeleteNoteCommand to delete the specified {@code Note}
      */
-    public DeleteNoteCommand(int contactId, int noteIdToDelete) {
+    public DeleteNoteCommand(ContactID contactId, NoteID noteIdToDelete) {
         this.contactId = contactId;
         this.noteIdToDelete = noteIdToDelete;
     }
@@ -36,12 +39,12 @@ public class DeleteNoteCommand extends DeleteCommand {
         if (person == null) {
             throw new CommandException(MESSAGE_PERSON_NOT_FOUND + this.contactId);
         }
-        boolean success = person.removeNoteByUserFriendlyId(this.noteIdToDelete);
-        if (!success) {
+        Note deletedNote = person.removeNoteByUserFriendlyId(this.noteIdToDelete);
+        if (deletedNote == null) {
             throw new CommandException(MESSAGE_NOTE_NOT_FOUND + this.noteIdToDelete);
         }
 
-        return new CommandResult(MESSAGE_SUCCESS + this.noteIdToDelete);
+        return new CommandResult(MESSAGE_SUCCESS + this.noteIdToDelete + ". " + deletedNote.getTitle());
     }
 
     @Override
@@ -57,8 +60,8 @@ public class DeleteNoteCommand extends DeleteCommand {
 
         DeleteNoteCommand otherDeleteNoteCommand = (DeleteNoteCommand) other;
 
-        boolean equalNoteIdToDelete = (noteIdToDelete == otherDeleteNoteCommand.noteIdToDelete);
-        boolean equalContactId = (contactId == otherDeleteNoteCommand.contactId);
+        boolean equalNoteIdToDelete = noteIdToDelete.equals(otherDeleteNoteCommand.noteIdToDelete);
+        boolean equalContactId = contactId.equals(otherDeleteNoteCommand.contactId);
         return equalNoteIdToDelete && equalContactId;
     }
 
