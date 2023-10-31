@@ -39,7 +39,7 @@ public class Time implements Comparable<Time> {
     }
 
     /**
-     * Returns the interviews which clash with the current interview
+     * Returns the interviews which clash with the current interview.
      *
      * @author Tan Kerway
      * @param startTime the start time of the interview that the user wants to schedule
@@ -49,33 +49,67 @@ public class Time implements Comparable<Time> {
      * @return a list of interviews that clash with the interview to be
      *         scheduled
      */
-    public static List<Interview> listInterviewClashes(LocalDateTime startTime,
-                                                       LocalDateTime endTime, UniqueInterviewList interviews) {
+    public static List<Interview> listInterviewClashes(Time startTime,
+                                                       Time endTime, UniqueInterviewList interviews) {
         List<Interview> res = new ArrayList<>();
         for (Interview currentInterview : interviews) {
+            // get the LocalDateTime format of the start time of the interview to be added
+            LocalDateTime potentialInterviewStartTime = startTime.getDateAndTime();
+            // get the LocalDateTime format of the end time of the interview to be added
+            LocalDateTime potentialInterviewEndTime = endTime.getDateAndTime();
             // get the start time of the current interview
             LocalDateTime currentInterviewStartTime = currentInterview.getInterviewStartTime();
             // get the end time of the current interview
             LocalDateTime currentInterviewEndTime = currentInterview.getInterviewEndTime();
-            // case 1: the current interview is completely within the interview to be added
-            boolean completelyInside = (currentInterviewStartTime.isAfter(startTime)
-                    && currentInterviewStartTime.isBefore(endTime))
-                    && (currentInterviewEndTime.isAfter(startTime)
-                    && currentInterviewEndTime.isBefore(endTime));
-            // case 2: the interview to be added is completely within the current interview
-            boolean completelyOutside = currentInterviewStartTime.isBefore(startTime)
-                    && currentInterviewEndTime.isAfter(endTime);
-            // case 3: the current interview end time falls within the interview to be added
-            boolean endInside = currentInterviewEndTime.isAfter(startTime)
-                    && currentInterviewEndTime.isBefore(endTime);
-            // case 4: the current interview start time falls within the interview to be added
-            boolean startInside = currentInterviewStartTime.isAfter(startTime)
-                    && currentInterviewStartTime.isBefore(endTime);
-            if (completelyInside || completelyOutside || endInside || startInside) {
+            if (isClashing(potentialInterviewStartTime, potentialInterviewEndTime,
+                    currentInterviewStartTime, currentInterviewEndTime)) {
                 res.add(currentInterview);
             }
         }
         return res;
+    }
+
+    /**
+     * Checks whether the first interval overlaps with the second.
+     *
+     * @author Tan Kerway
+     * @param potentialInterviewStartTime the start time of the first interval
+     * @param potentialInterviewEndTime the end time of the first interval
+     * @param currentInterviewStartTime the start time of the second interval
+     * @param currentInterviewEndTime the end time of the second interval
+     * @return true if the first interval clashes with the second, false otherwise
+     */
+    private static boolean isClashing(LocalDateTime potentialInterviewStartTime,
+                                      LocalDateTime potentialInterviewEndTime,
+                                      LocalDateTime currentInterviewStartTime,
+                                      LocalDateTime currentInterviewEndTime) {
+        // case 1: the current interview is completely within the interview to be added
+        boolean currentCompletelyInside = potentialInterviewStartTime.isBefore(currentInterviewStartTime)
+                && potentialInterviewEndTime.isAfter(currentInterviewEndTime);
+        // case 2: the interview to be added is completely within the current interview
+        boolean addedCompletelyInside = currentInterviewStartTime.isBefore(potentialInterviewStartTime)
+                && currentInterviewEndTime.isAfter(potentialInterviewEndTime);
+        // case 3: the end time of the interview to be added falls within the current interview window
+        boolean endInside = potentialInterviewEndTime.isAfter(currentInterviewStartTime)
+                && potentialInterviewEndTime.isBefore(currentInterviewEndTime);
+        // case 4: the start time of the interview to be added falls within the current interview window
+        boolean startInside = potentialInterviewStartTime.isAfter(currentInterviewStartTime)
+                && potentialInterviewStartTime.isBefore(currentInterviewEndTime);
+        // case 5: the interview to be added has the exact same start and end time as the
+        // current interview
+        boolean completelyEqual = currentInterviewStartTime.isEqual(potentialInterviewStartTime)
+                && currentInterviewEndTime.isEqual(potentialInterviewEndTime);
+        // case 6: the interview to be added has an end time that is after the end time of the current interview
+        // and the start time of the interview to be added has a start time equals to the current interview
+        boolean startEquals = potentialInterviewEndTime.isAfter(currentInterviewEndTime)
+                && potentialInterviewStartTime.equals(currentInterviewStartTime);
+        // case 7: the interview to be added has a start time before the start time of the current interview
+        // and the end time of the interview to be added has an end time equals to the current interview
+        boolean endEquals = potentialInterviewStartTime.isBefore(currentInterviewStartTime)
+                && potentialInterviewEndTime.equals(currentInterviewEndTime);
+
+        return currentCompletelyInside || addedCompletelyInside || endInside || startInside
+                || completelyEqual || endEquals || startEquals;
     }
 
     /**
@@ -86,11 +120,19 @@ public class Time implements Comparable<Time> {
      * @return a list of interviews whose start time is today, as given by LocalDateTime.now()
      */
     public static List<Interview> listInterviewsToday(UniqueInterviewList interviews) {
-        // get today's day, month, and year for checking
-        LocalDateTime today = LocalDateTime.now();
-        int todayDay = today.getDayOfMonth();
-        int todayMonth = today.getMonthValue();
-        int todayYear = today.getYear();
+        return listInterviewsOnGivenDay(LocalDateTime.now(), interviews);
+    }
+
+    /**
+     * Compiles a list of interviews that the user has on a given day
+     *
+     * @author Tan Kerway
+     * @return a list of interviews whose start time is the given day, as given by LocalDateTime.now()
+     */
+    public static List<Interview> listInterviewsOnGivenDay(LocalDateTime day, UniqueInterviewList interviews) {
+        int todayDay = day.getDayOfMonth();
+        int todayMonth = day.getMonthValue();
+        int todayYear = day.getYear();
         List<Interview> res = new ArrayList<>();
         // loop over all the interviews, and add those that have today as the start time
         for (Interview interview : interviews) {
@@ -206,32 +248,6 @@ public class Time implements Comparable<Time> {
     }
 
     /**
-     * Compiles a list of interviews that the user has on a given day
-     *
-     * @author Tan Kerway
-     *
-     */
-    public static List<Interview> listInterviewsOnGivenDay(LocalDateTime day, UniqueInterviewList interviews) {
-        int todayDay = day.getDayOfMonth();
-        int todayMonth = day.getMonthValue();
-        int todayYear = day.getYear();
-        List<Interview> res = new ArrayList<>();
-        // loop over all the interviews, and add those that have today as the start time
-        for (Interview interview : interviews) {
-            LocalDateTime currentInterviewStartTime = interview.getInterviewStartTime();
-            int currentInterviewDay = currentInterviewStartTime.getDayOfMonth();
-            int currentInterviewMonth = currentInterviewStartTime.getMonthValue();
-            int currentInterviewYear = currentInterviewStartTime.getYear();
-            if (currentInterviewDay == todayDay
-                    && currentInterviewMonth == todayMonth
-                    && currentInterviewYear == todayYear) {
-                res.add(interview); // add the current interview if its start date is today
-            }
-        }
-        return res;
-    }
-
-    /**
      * Compares the other given time to this instance.
      *
      * @author Tan Kerway
@@ -250,17 +266,6 @@ public class Time implements Comparable<Time> {
      * @return true if this instance is before the otherTime, false otherwise
      */
     public boolean isBefore(Time otherTime) {
-        return this.time.isBefore(otherTime.time);
-    }
-
-    /**
-     * Checks whether this instance is after the given time.
-     *
-     * @author Tan Kerway
-     * @param otherTime the other time to compare to
-     * @return true if this instance is after the otherTime, false otherwise
-     */
-    public boolean isAfter(Time otherTime) {
         return this.time.isBefore(otherTime.time);
     }
 
