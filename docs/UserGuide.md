@@ -107,7 +107,7 @@ Examples:
 
 Shows a message explaining how to access the help page.
 
-<img alt="help message" src="images/helpMessage.png" width="600"> 
+<img alt="help message" src="images/helpMessage.png" width="600">
 
 Format: `help`
 
@@ -123,8 +123,7 @@ Format: `add n/NAME p/PHONE e/EMAIL s/STUDENT NUMBER c/CLASS NUMBER [t/TAG]...â€
 * **ALL** the fields must be provided.
 * The NAME fields are case-sensitive.
 * STUDENT NUMBER needs to be unique
-* The class details of a student will be automatically populated to be 0 for all fields during the 
-creation of a student.
+* The class details of a student will be automatically populated to be 0 for all fields during the creation of a student.
 * Comment for a student can only be added after the student is instantiated.
 
 <box type="tip" seamless>
@@ -440,7 +439,7 @@ Format: `theme`
 | **Configure Class Manager** | `config #t/TUTORIAL_COUNT #a/ASSIGNMENT_COUNT`<br> e.g. `config #t/13 #a/3`                                                                                      |
 | **Open help window**        | `help`                                                                                                                                                           |
 
-### Core commands without parameters 
+### Core commands without parameters
 | Action                 | Format, Examples                                                                                                                                                 |
 |------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Clear student list** | `clear`                                                                                                                                                          |
