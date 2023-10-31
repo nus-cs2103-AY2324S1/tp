@@ -90,7 +90,7 @@ public class DeleteLeaveCommand extends Command {
             }
         }
         return new CommandResult(String.format(MESSAGE_SUCCESS + this.getLeaveStatusMessage(employeeToDeleteLeave),
-                Messages.format(employeeToDeleteLeave)), true);
+                Messages.format(employeeToDeleteLeave)), false, false, true, false, false, false);
     }
 
     @Override

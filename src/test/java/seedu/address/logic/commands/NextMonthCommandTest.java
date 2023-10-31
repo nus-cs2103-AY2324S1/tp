@@ -1,21 +1,21 @@
 package seedu.address.logic.commands;
 
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.logic.commands.HelpCommand.SHOWING_HELP_MESSAGE;
+import static seedu.address.logic.commands.NextMonthCommand.MESSAGE_NEXT_MONTH_ACKNOWLEDGEMENT;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 
-public class HelpCommandTest {
+public class NextMonthCommandTest {
     private Model model = new ModelManager();
     private Model expectedModel = new ModelManager();
 
     @Test
-    public void execute_help_success() {
+    public void execute_nextMonth_success() {
         CommandResult expectedCommandResult = new CommandResult(
-                SHOWING_HELP_MESSAGE, true, false, false, false, false, false);
-        assertCommandSuccess(new HelpCommand(), model, expectedCommandResult, expectedModel);
+               MESSAGE_NEXT_MONTH_ACKNOWLEDGEMENT, false, false, false, true, false, false);
+        assertCommandSuccess(new NextMonthCommand(), model, expectedCommandResult, expectedModel);
     }
 }
