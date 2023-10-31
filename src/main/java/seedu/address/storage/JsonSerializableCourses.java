@@ -9,8 +9,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.Courses;
-import seedu.address.model.ReadOnlyCourses;
 import seedu.address.model.course.Course;
 
 /**
@@ -34,8 +32,8 @@ public class JsonSerializableCourses {
      *
      * @param source future changes to this will not affect the created {@code JsonSerializableCourses}.
      */
-    public JsonSerializableCourses(ReadOnlyCourses source) {
-        courses.addAll(source.getCourseList().stream().map(JsonAdaptedCourse::new).collect(Collectors.toList()));
+    public JsonSerializableCourses(Course[] source) {
+        courses.addAll(List.of(source).stream().map(JsonAdaptedCourse::new).collect(Collectors.toList()));
     }
 
     /**
@@ -43,14 +41,11 @@ public class JsonSerializableCourses {
      *
      * @throws IllegalValueException if there were any data constraints violated.
      */
-    public Courses toModelType() throws IllegalValueException {
-        Courses coursesData = new Courses();
+    public List<Course> toModelType() throws IllegalValueException {
+        List<Course> coursesData = new ArrayList<>();
         for (JsonAdaptedCourse jsonAdaptedCourse : courses) {
             Course course = jsonAdaptedCourse.toModelType();
-            if (coursesData.hasCourse(course)) {
-                throw new IllegalValueException(MESSAGE_DUPLICATE_COURSE);
-            }
-            coursesData.addCourse(course);
+            coursesData.add(course);
         }
         return coursesData;
     }

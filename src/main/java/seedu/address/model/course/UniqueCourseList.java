@@ -72,7 +72,7 @@ public class UniqueCourseList implements Iterable<Course> {
         internalList.add(toAdd);
     }
 
-    public void setCourses(List<Course> courses) {
+    public static void setCourses(List<Course> courses) {
         requireNonNull(courses);
         internalList.setAll(courses);
     }

@@ -2,6 +2,7 @@ package seedu.address;
 
 import java.io.IOException;
 import java.nio.file.Path;
+import java.util.List;
 import java.util.Optional;
 import java.util.logging.Logger;
 
@@ -16,13 +17,13 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.Logic;
 import seedu.address.logic.LogicManager;
 import seedu.address.model.AddressBook;
-import seedu.address.model.Courses;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.ReadOnlyCourses;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.course.Course;
+import seedu.address.model.course.UniqueCourseList;
 import seedu.address.model.util.SampleDataUtil;
 import seedu.address.storage.AddressBookStorage;
 import seedu.address.storage.CoursesStorage;
@@ -81,9 +82,9 @@ public class MainApp extends Application {
         logger.info("Using data file : " + storage.getAddressBookFilePath());
 
         Optional<ReadOnlyAddressBook> addressBookOptional;
-        Optional<ReadOnlyCourses> coursesOptional;
+        Optional<List<Course>> coursesOptional;
         ReadOnlyAddressBook initialData;
-        ReadOnlyCourses initialCourseData;
+        List<Course> courseData;
         try {
             addressBookOptional = storage.readAddressBook();
             coursesOptional = storage.readCourses();
@@ -96,16 +97,20 @@ public class MainApp extends Application {
                         + " populated with a sample Courses.");
             }
             initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
-            initialCourseData = coursesOptional.orElseGet(SampleDataUtil::getSampleCoursesData);
+            courseData = coursesOptional.orElseGet(SampleDataUtil::getSampleCoursesData);
+            UniqueCourseList.setCourses(courseData);
         } catch (DataLoadingException e) {
             logger.warning("Data file at " + storage.getAddressBookFilePath() + " could not be loaded."
                     + " Will be starting with an empty AddressBook.");
             initialData = new AddressBook();
             logger.warning("Data file at " + storage.getCoursesFilePath() + " could not be loaded."
                     + " Will be starting with an empty Courses.");
-            initialCourseData = new Courses();
+            courseData = List.of();
+            UniqueCourseList.setCourses(courseData);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
-        return new ModelManager(initialData, userPrefs, initialCourseData);
+        return new ModelManager(initialData, userPrefs);
     }
 
     private void initLogging(Config config) {

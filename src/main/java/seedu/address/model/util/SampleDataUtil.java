@@ -3,13 +3,12 @@ package seedu.address.model.util;
 import java.time.LocalTime;
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 import seedu.address.model.AddressBook;
-import seedu.address.model.Courses;
 import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.ReadOnlyCourses;
 import seedu.address.model.availability.FreeTime;
 import seedu.address.model.course.Course;
 import seedu.address.model.course.Lesson;
@@ -116,12 +115,8 @@ public class SampleDataUtil {
         return sampleAb;
     }
 
-    public static ReadOnlyCourses getSampleCoursesData() {
-        Courses sampleCourses = new Courses();
-        for (Course sampleCourse : getSampleCourses()) {
-            sampleCourses.addCourse(sampleCourse);
-        }
-        return sampleCourses;
+    public static List<Course> getSampleCoursesData() {
+        return Arrays.asList(getSampleCourses());
     }
 
     /**
