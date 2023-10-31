@@ -5,9 +5,6 @@ import seedu.address.model.person.fields.InterviewTime;
 import seedu.address.model.person.fields.Name;
 import seedu.address.model.person.fields.Phone;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-
 /**
  * A utility class to help with building Applicant objects.
  */
@@ -52,6 +49,9 @@ public class ApplicantBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code InterviewTime} of the {@code Applicant} that we are building.
+     */
     public ApplicantBuilder withInterviewTime(String interviewTime) {
         this.interviewTime = new InterviewTime(interviewTime);
         return this;
