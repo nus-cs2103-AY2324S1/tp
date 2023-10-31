@@ -205,7 +205,4 @@ public interface Model {
     default BiDirectionalMap<Person, Lesson> getPersonLessonMap() {
         return null;
     }
-    default BiDirectionalMap<Lesson, Task> getLessonTaskMap() {
-        return null;
-    }
 }

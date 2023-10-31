@@ -11,7 +11,6 @@ import seedu.address.model.ReadOnlySchedule;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.lessons.Lesson;
-import seedu.address.model.lessons.Task;
 import seedu.address.model.person.Person;
 
 /**
@@ -45,7 +44,5 @@ public interface Storage extends AddressBookStorage, UserPrefsStorage, ScheduleS
     BiDirectionalMap<Person, Lesson> getPersonLessonMap() throws DataLoadingException;
     void savePersonLessonMap(BiDirectionalMap<Person, Lesson> personLessonMap) throws IOException;
 
-    BiDirectionalMap<Lesson, Task> getLessonTaskMap() throws DataLoadingException;
-    void saveLessonTaskMap(BiDirectionalMap<Lesson, Task> lessonTaskMap) throws IOException;
 
 }

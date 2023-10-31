@@ -72,7 +72,6 @@ public class LogicManager implements Logic {
             storage.saveAddressBook(model.getAddressBook());
             storage.saveScheduleList(model.getScheduleList());
             storage.savePersonLessonMap(model.getPersonLessonMap());
-            storage.saveLessonTaskMap(model.getLessonTaskMap());
         } catch (AccessDeniedException e) {
             throw new CommandException(String.format(FILE_OPS_PERMISSION_ERROR_FORMAT, e.getMessage()), e);
         } catch (IOException ioe) {

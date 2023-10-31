@@ -15,7 +15,6 @@ import seedu.address.model.ReadOnlySchedule;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.lessons.Lesson;
-import seedu.address.model.lessons.Task;
 import seedu.address.model.person.Person;
 
 /**
@@ -125,16 +124,5 @@ public class StorageManager implements Storage {
     }
     public void savePersonLessonMap(BiDirectionalMap<Person, Lesson> personLessonMap) throws IOException {
         personLessonMap.saveTo(Paths.get("data", "personLessonMap.json"));
-    }
-
-    public BiDirectionalMap<Lesson, Task> getLessonTaskMap() throws DataLoadingException {
-        try {
-            return BiDirectionalMap.readFrom(Paths.get("data", "lessonTaskMap.json"));
-        } catch (ParseException e) {
-            throw new DataLoadingException(e);
-        }
-    }
-    public void saveLessonTaskMap(BiDirectionalMap<Lesson, Task> lessonTaskMap) throws IOException {
-        lessonTaskMap.saveTo(Paths.get("data", "lessonTaskMap.json"));
     }
 }

@@ -34,7 +34,6 @@ public class ModelManager implements Model {
     private Lesson currentShowingLesson = null;
     private Task currentShowingTask = null;
     private final BiDirectionalMap<Person, Lesson> personToLessonMap = new BiDirectionalMap<>();
-    private final BiDirectionalMap<Lesson, Task> lessonToTaskMap = new BiDirectionalMap<>();
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -203,7 +202,6 @@ public class ModelManager implements Model {
     public void deleteLesson(Lesson target) {
         scheduleList.removeLesson(target);
         personToLessonMap.removeReverse(target);
-        lessonToTaskMap.remove(target);
     }
 
     @Override
@@ -218,7 +216,6 @@ public class ModelManager implements Model {
         scheduleList.setLesson(target, editedLesson);
         updateFilteredScheduleList(PREDICATE_SHOW_ALL_LESSONS);
         personToLessonMap.updateReverse(target, editedLesson);
-        lessonToTaskMap.update(target, editedLesson);
     }
 
     //=========== Filtered Lesson List Accessors =============================================================
@@ -313,9 +310,6 @@ public class ModelManager implements Model {
 
     public BiDirectionalMap<Person, Lesson> getPersonLessonMap() {
         return personToLessonMap;
-    }
-    public BiDirectionalMap<Lesson, Task> getLessonTaskMap() {
-        return lessonToTaskMap;
     }
 
 }
