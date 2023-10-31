@@ -22,6 +22,7 @@ import seedu.address.logic.commands.NoteCommand;
 import seedu.address.logic.commands.OweCommand;
 import seedu.address.logic.commands.PayCommand;
 import seedu.address.logic.commands.RemoveNoteCommand;
+import seedu.address.logic.commands.UpdatePhotoCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -64,6 +65,9 @@ public class AddressBookParser {
         case AddAltCommand.COMMAND_WORD:
             return new AddAltCommandParser().parse(arguments);
 
+        case UpdatePhotoCommand.COMMAND_WORD:
+            return new UpdatePhotoCommandParser().parse(arguments);
+
         case EditCommand.COMMAND_WORD:
             return new EditCommandParser().parse(arguments);
 
@@ -104,3 +108,6 @@ public class AddressBookParser {
     }
 
 }
+
+
+
