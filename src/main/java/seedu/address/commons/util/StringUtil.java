@@ -70,7 +70,7 @@ public class StringUtil {
      * @param delimiter What to put inbetween each element of the array
      * @return The result string
      */
-    public static String joinArray(ArrayList<String> array, String delimiter) {
-        return array.stream().collect(Collectors.joining(delimiter));
+    public static <T> String joinArray(ArrayList<T> array, String delimiter) {
+        return array.stream().map(Object::toString).collect(Collectors.joining(delimiter));
     }
 }

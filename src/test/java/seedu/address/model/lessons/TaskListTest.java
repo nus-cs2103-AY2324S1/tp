@@ -166,6 +166,7 @@ public class TaskListTest {
 
     @Test
     public void toStringMethod() {
-        assertEquals(taskList.asUnmodifiableObservableList().toString(), taskList.toString());
+        assert taskList.toString().isEmpty();
+        assertEquals(taskList.asUnmodifiableObservableList().toString(), "[" + taskList.toString() + "]");
     }
 }
