@@ -5,6 +5,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.person.Applicant;
+import seedu.address.model.person.fields.InterviewTime;
 
 /**
  * An UI component that displays information of a {@code Applicant}.
@@ -31,6 +32,8 @@ public class ApplicantCard extends UiPart<Region> {
     private Label id;
     @FXML
     private Label phone;
+    @FXML
+    private Label interviewTime;
 
     /**
      * Creates a {@code ApplicantCard} with the given {@code Applicant} and index to display.
@@ -41,5 +44,6 @@ public class ApplicantCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         name.setText(applicant.getName().fullName);
         phone.setText(applicant.getPhone().value);
+        interviewTime.setText(applicant.getInterviewTime().toString());
     }
 }

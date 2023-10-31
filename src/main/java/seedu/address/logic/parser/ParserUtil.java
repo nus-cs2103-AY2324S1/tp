@@ -2,6 +2,8 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -14,6 +16,7 @@ import seedu.address.model.person.fields.Email;
 import seedu.address.model.person.fields.Name;
 import seedu.address.model.person.fields.Phone;
 import seedu.address.model.person.fields.Telegram;
+import seedu.address.model.person.fields.InterviewTime;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -49,6 +52,23 @@ public class ParserUtil {
             throw new ParseException(Name.MESSAGE_CONSTRAINTS);
         }
         return new Name(trimmedName);
+    }
+
+    /**
+     * Parses a {@code String interviewTime into a {@code InterviewTime}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code interviewTime} is invalid.
+     */
+    public static InterviewTime parseInterviewTime(String interviewTime) throws ParseException {
+        requireNonNull(interviewTime);
+        String trimmedTime = interviewTime.trim();
+        if (!InterviewTime.isValidTime(trimmedTime)) {
+            throw new ParseException(InterviewTime.MESSAGE_CONSTRAINTS);
+        }
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
+        LocalDateTime dateTime = LocalDateTime.parse(trimmedTime, formatter);
+        return new InterviewTime(dateTime);
     }
 
     /**

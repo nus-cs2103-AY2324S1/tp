@@ -3,6 +3,7 @@ package seedu.address.model.person;
 import java.util.Objects;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.person.fields.InterviewTime;
 import seedu.address.model.person.fields.Name;
 import seedu.address.model.person.fields.Phone;
 
@@ -14,6 +15,8 @@ public class Applicant extends Person {
 
     private final Phone phone;
 
+    private InterviewTime interviewTime;
+
     /**
      * Every field must be present and not null.
      *
@@ -23,6 +26,7 @@ public class Applicant extends Person {
     public Applicant(Name name, Phone phone) {
         super(name);
         this.phone = phone;
+        this.interviewTime = InterviewTime.createEmptyInterviewTime();
     }
 
     /**
@@ -50,6 +54,12 @@ public class Applicant extends Person {
         return phone;
     }
 
+    public InterviewTime getInterviewTime() { return interviewTime; }
+
+    public void addInterviewTime(InterviewTime interviewTime) {
+        this.interviewTime = interviewTime;
+    }
+
     /**
      * Returns true if both applicants have the same identity and data fields.
      * This defines a stronger notion of equality between two applicants.
@@ -61,13 +71,14 @@ public class Applicant extends Person {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof Applicant)) {
+        if (!(other instanceof Applicant)    ){
             return false;
         }
 
         Applicant otherApplicant = (Applicant) other;
         return getName().equals(otherApplicant.getName())
-                && this.phone.equals(otherApplicant.phone);
+                && this.phone.equals(otherApplicant.phone)
+                && this.interviewTime.equals(otherApplicant.interviewTime);
     }
 
     @Override
@@ -81,12 +92,13 @@ public class Applicant extends Person {
         return new ToStringBuilder(this)
                 .add("name", getName())
                 .add("phone", phone)
+                .add("interview time", interviewTime)
                 .toString();
     }
 
     @Override
     public String detailsToCopy() {
         return "Name: " + getName() + "\n"
-                + "Phone: " + phone;
+                + "Phone: " + phone + "Interview Time: " + interviewTime;
     }
 }
