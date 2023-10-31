@@ -69,13 +69,11 @@ public class ParserUtil {
         if (!InterviewTime.isValidTime(trimmedTime)) {
             throw new ParseException(InterviewTime.MESSAGE_CONSTRAINTS);
         }
-        if (trimmedTime == "cancel") {
-            return InterviewTime.createEmptyInterviewTime();
-        } else {
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
-            LocalDateTime dateTime = LocalDateTime.parse(trimmedTime, formatter);
-            return new InterviewTime(dateTime);
-        }
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
+        LocalDateTime dateTime = LocalDateTime.parse(trimmedTime, formatter);
+        return new InterviewTime(dateTime);
+
     }
 
     /**

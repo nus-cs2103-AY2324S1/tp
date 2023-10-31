@@ -30,7 +30,7 @@ public class InterviewTime {
      */
     public static boolean isValidTime(String test) {
 
-        return test.matches(VALIDATION_REGEX) || test.equals("cancel");
+        return test.matches(VALIDATION_REGEX);
     }
     @Override
     public boolean equals(Object other) {
