@@ -27,6 +27,7 @@ import seedu.address.logic.commands.FindMeetingCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.ListMeetingCommand;
+import seedu.address.logic.commands.MarkMeetingCommand;
 import seedu.address.logic.commands.RemoveMeetingContactCommand;
 import seedu.address.logic.commands.ViewContactCommand;
 import seedu.address.logic.commands.ViewMeetingCommand;
@@ -145,6 +146,11 @@ public class AddressBookParserTest {
     public void parseCommand_rmmc() throws Exception {
         assertTrue(parser.parseCommand(
                 RemoveMeetingContactCommand.COMMAND_WORD + " 1 1") instanceof RemoveMeetingContactCommand);
+    }
+
+    @Test
+    public void parseCommand_mark() throws Exception {
+        assertTrue(parser.parseCommand(MarkMeetingCommand.COMMAND_WORD + " 1") instanceof MarkMeetingCommand);
     }
 
     @Test
