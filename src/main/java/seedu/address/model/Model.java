@@ -205,4 +205,8 @@ public interface Model {
     default BiDirectionalMap<Person, Lesson> getPersonLessonMap() {
         return null;
     }
+    void linkWith(Person person, Lesson lesson);
+    void unLinkWith(Person person, Lesson lesson);
+    String getLinkedPersonNameStr(Lesson lesson);
+    String getLinkedLessonNameStr(Person person);
 }

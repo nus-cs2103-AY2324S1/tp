@@ -2,6 +2,7 @@ package seedu.address.ui;
 
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
+import seedu.address.model.Model;
 import seedu.address.model.lessons.Lesson;
 
 
@@ -15,13 +16,13 @@ public class LessonCardFieldBuilder {
      * @param lesson the lesson
      * @param fields the fields
      */
-    public static void build(String fieldName, Lesson lesson, VBox fields) {
+    public static void build(String fieldName, Lesson lesson, VBox fields, Model model) {
         switch (fieldName) {
         case "date":
             buildDate(lesson, fields);
             break;
         case "students":
-            buildStudents(lesson, fields);
+            buildStudents(lesson, fields, model);
             break;
         case "subjects":
             buildSubjects(lesson, fields);
@@ -38,8 +39,8 @@ public class LessonCardFieldBuilder {
         fields.getChildren().add(date);
     }
 
-    static void buildStudents(Lesson lesson, VBox fields) {
-        Label students = new Label(lesson.getStudentsStr());
+    static void buildStudents(Lesson lesson, VBox fields, Model model) {
+        Label students = new Label(model.getLinkedPersonNameStr(lesson));
         students.getStyleClass().add("cell_small_label");
         fields.getChildren().add(students);
     }

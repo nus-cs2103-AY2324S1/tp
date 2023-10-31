@@ -5,6 +5,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
+import seedu.address.model.Model;
 import seedu.address.model.lessons.Lesson;
 
 /**
@@ -41,7 +42,7 @@ public class LessonCard extends UiPart<Region> {
     /**
      * Creates a {@code LessonCard} with the given {@code Lesson} and index to display.
      */
-    public LessonCard(Lesson lesson, int displayedIndex, String[] displayFields) {
+    public LessonCard(Lesson lesson, int displayedIndex, String[] displayFields, Model model) {
         super(FXML);
         this.lesson = lesson;
         id.setText(displayedIndex + ". ");
@@ -50,7 +51,7 @@ public class LessonCard extends UiPart<Region> {
         duration.setText(lesson.getLessonDurationStr());
         for (String field : displayFields) {
             // TODO: Implement the schedule detail
-            LessonCardFieldBuilder.build(field, lesson, fields);
+            LessonCardFieldBuilder.build(field, lesson, fields, model);
         }
     }
 

@@ -11,6 +11,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.Logic;
+import seedu.address.model.Model;
 import seedu.address.model.lessons.Lesson;
 
 /**
@@ -21,6 +22,7 @@ public class LessonListPanel extends UiPart<Region> {
     private final Logger logger = LogsCenter.getLogger(LessonListPanel.class);
 
     private Logic logic;
+    private Model model;
     private BooleanProperty reRenderUi;
     @FXML
     private ListView<Lesson> scheduleListView;
@@ -28,9 +30,10 @@ public class LessonListPanel extends UiPart<Region> {
     /**
      * Creates a {@code PersonListPanel} with the given {@code ObservableList}.
      */
-    public LessonListPanel(Logic logic) {
+    public LessonListPanel(Logic logic, Model model) {
         super(FXML);
         this.logic = logic;
+        this.model = model;
         this.reRenderUi = logic.getRefreshListUi(); // Connect to the logic manager's boolean flag
         scheduleListView.setItems(logic.getFilteredScheduleList());
         scheduleListView.setCellFactory(listView -> new ScheduleListViewCell());
@@ -60,7 +63,7 @@ public class LessonListPanel extends UiPart<Region> {
                 setGraphic(null);
                 setText(null);
             } else {
-                setGraphic(new LessonCard(lesson, getIndex() + 1, logic.getDisplayedFieldsList()).getRoot());
+                setGraphic(new LessonCard(lesson, getIndex() + 1, logic.getDisplayedFieldsList(), model).getRoot());
             }
         }
     }

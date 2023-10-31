@@ -11,6 +11,7 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.Logic;
+import seedu.address.model.Model;
 import seedu.address.model.lessons.Lesson;
 import seedu.address.model.lessons.Task;
 
@@ -62,12 +63,12 @@ public class LessonDetailListPanel extends UiPart<Region> {
      *
      * @param lesson The lesson whose details are to be shown.
      */
-    public void setLessonDetails(Lesson lesson) {
+    public void setLessonDetails(Lesson lesson, Model model) {
         lessonName.setText(lesson.getLessonNameStr());
         date.setText(lesson.getLessonDateStr());
         startTime.setText(lesson.getStart().toString());
         endTime.setText(lesson.getEnd().toString());
-        students.setText(lesson.getStudentsStr());
+        students.setText(model.getLinkedPersonNameStr(lesson));
         subject.setText(lesson.getSubject().toString());
         //taskListView.setItems("to be implemented");
         //taskListView.setCellFactory(listView -> new LessonDetailListPanel.TaskListViewCell());
