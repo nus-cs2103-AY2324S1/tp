@@ -21,6 +21,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Reason;
 import seedu.address.model.person.Salary;
+import seedu.address.model.person.attendance.AttendanceType;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser
@@ -166,6 +167,20 @@ public class ParserUtil {
     }
 
     /**
+     * Parses a {@code String attendanceType} into an {@code AttendanceType}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code attendanceType} is invalid.
+     */
+    public static AttendanceType parseAttendanceType(String attendanceType) throws ParseException {
+        requireNonNull(attendanceType);
+        String trimmedAttendanceType = attendanceType.trim();
+        if (!AttendanceType.isValidAttendanceType(trimmedAttendanceType)) {
+            throw new ParseException(AttendanceType.MESSAGE_CONSTRAINTS);
+        }
+        return AttendanceType.valueOf(attendanceType.toUpperCase());
+    }
+    /**
      * Returns LocalDate object from String
      * @param date The String containing date from user input
      * @return LocalDate
@@ -174,8 +189,7 @@ public class ParserUtil {
     public static LocalDate stringToDate(String date) throws DateTimeParseException {
         String dateFormat = "dd/MM/yyyy";
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern(dateFormat);
-        LocalDate localDate = LocalDate.parse(date, formatter);
-        return localDate;
+        return LocalDate.parse(date, formatter);
     }
 
     /**
@@ -186,8 +200,7 @@ public class ParserUtil {
     public static String dateToString(LocalDate date) {
         String dateFormat = "dd/MM/yyyy";
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern(dateFormat);
-        String localDate = date.format(formatter);
-        return localDate;
+        return date.format(formatter);
     }
 
     /**

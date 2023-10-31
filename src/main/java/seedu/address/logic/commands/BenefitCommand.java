@@ -2,7 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
-import static seedu.address.logic.Messages.MESSAGE_PERSONS_LISTED_OVERVIEW_DEDUCT;
+import static seedu.address.logic.Messages.MESSAGE_PERSONS_LISTED_OVERVIEW_BENEFIT;
 
 import java.util.List;
 
@@ -28,8 +28,8 @@ public class BenefitCommand extends Command {
         + ": add benefits to the salary of the person identified "
         + "by the index number or name used in the last person listing.\n"
         + "Parameters: INDEX (must be a positive integer) or NAME, AMOUNT, REASON\n"
-        + "Example 1 (index): " + COMMAND_WORD + " 1, 3000.00, bonus\n"
-        + "Example 2 (name): " + COMMAND_WORD + " /n john, 150.00, transport\n";
+        + "Example 1 (index): " + COMMAND_WORD + " 1 /v 3000.00 /r bonus\n"
+        + "Example 2 (name): " + COMMAND_WORD + " /n john /v 150.00 /r transport\n";
 
     public static final String MESSAGE_ARGUMENTS = "The benefits for the specified person is as below\n%s";
 
@@ -116,7 +116,7 @@ public class BenefitCommand extends Command {
         }
 
         model.updateFilteredPersonList(this.name);
-        return new CommandResult(String.format(MESSAGE_PERSONS_LISTED_OVERVIEW_DEDUCT,
+        return new CommandResult(String.format(MESSAGE_PERSONS_LISTED_OVERVIEW_BENEFIT,
             lastShownList.size()), indexes);
     }
 

@@ -147,6 +147,130 @@ public class Salary extends Payment {
         return benefitsString;
     }
 
+    /**
+     * Returns the basic salary of a person.
+     * @return basic salary.
+     */
+    public double getBasicSalary() {
+        return Double.parseDouble(value);
+    }
+
+    /**
+     * Returns the total allowances of a person, except annual bonuses.
+     * @return total allowances except annual bonuses.
+     */
+    public double getTotalAllowancesExceptBonuses() {
+        if (benefits == null) {
+            return 0.0;
+        }
+
+        double total = 0;
+        for (Benefit benefit : benefits) {
+            if (!benefit.getReason().equals(Reason.ANNUAL_BONUS)) {
+                total += Double.parseDouble(benefit.value);
+            }
+        }
+        return total;
+    }
+
+    /**
+     * Returns the transport allowances of a person.
+     * @return transport allowances.
+     */
+    public double getTransportAllowances() {
+        if (benefits == null) {
+            return 0.0;
+        }
+
+        double total = 0;
+        for (Benefit benefit : benefits) {
+            if (benefit.getReason().equals(Reason.TRANSPORT_ALLOWANCE)) {
+                total += Double.parseDouble(benefit.value);
+            }
+        }
+        return total;
+    }
+
+    /**
+     * Returns the annual bonuses of a person.
+     * @return annual bonuses.
+     */
+    public double getAnnualBonuses() {
+        if (benefits == null) {
+            return 0.0;
+        }
+
+        double total = 0;
+        for (Benefit benefit : benefits) {
+            if (benefit.getReason().equals(Reason.ANNUAL_BONUS)) {
+                total += Double.parseDouble(benefit.value);
+            }
+        }
+        return total;
+    }
+
+    /**
+     * Returns the no pay leaves of a person.
+     * @return no pay leaves.
+     */
+    public double getNoPayLeaves() {
+        if (deductions == null) {
+            return 0.0;
+        }
+
+        double total = 0;
+        for (Deduction deduction : deductions) {
+            if (deduction.getReason().equals(Reason.NO_PAY_LEAVE)) {
+                total += Double.parseDouble(deduction.value);
+            }
+        }
+        return total;
+    }
+
+    /**
+     * Returns the absences of a person.
+     * @return absences.
+     */
+    public double getAbsences() {
+        if (deductions == null) {
+            return 0.0;
+        }
+
+        double total = 0;
+        for (Deduction deduction : deductions) {
+            if (deduction.getReason().equals(Reason.ABSENCE)) {
+                total += Double.parseDouble(deduction.value);
+            }
+        }
+        return total;
+    }
+
+    /**
+     * Returns the employee CPF deductions of a person.
+     * @return employee CPF deductions.
+     */
+    public double getEmployeeCpfDeductions() {
+        if (deductions == null) {
+            return 0.0;
+        }
+
+        double total = 0;
+        for (Deduction deduction : deductions) {
+            if (deduction.getReason().equals(Reason.EMPLOYEE_CPF_DEDUCTION)) {
+                total += Double.parseDouble(deduction.value);
+            }
+        }
+        return total;
+    }
+
+    /**
+     * Returns the gross pay of a person.
+     * @return gross pay.
+     */
+    public double getGrossPay() {
+        return getBasicSalary() + getTotalAllowancesExceptBonuses();
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {

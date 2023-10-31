@@ -27,8 +27,8 @@ public class DeductCommand extends Command {
             + ": add deductions to the salary of the person identified "
             + "by the index number or name used in the last person listing.\n"
             + "Parameters: INDEX (must be a positive integer) or NAME, AMOUNT, REASON\n"
-            + "Example 1 (index): " + COMMAND_WORD + " 1, 200.00, cpf\n"
-            + "Example 2 (name): " + COMMAND_WORD + " /n john, 150.00, absence\n";
+            + "Example 1 (index): " + COMMAND_WORD + " 1 /v 200.00 /r cpf\n"
+            + "Example 2 (name): " + COMMAND_WORD + " /n john /v 150.00 /r absence\n";
 
     public static final String MESSAGE_ARGUMENTS = "The deductions for the specified person is as below\n%s";
 
