@@ -16,6 +16,7 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.CommandWord;
 import seedu.address.logic.commands.ShortcutAlias;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.Theme;
 import seedu.address.model.person.Age;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Location;
@@ -248,5 +249,21 @@ public class ParserUtil {
             throw new ParseException(ShortcutAlias.MESSAGE_CONSTRAINTS);
         }
         return new ShortcutAlias(trimmedAlias);
+    }
+
+    /**
+     * Parses {@code String themeString} into a {@code Theme}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code themeString} is invalid.
+     */
+    public static Theme parseTheme(String themeString) throws ParseException {
+        requireNonNull(themeString);
+        String trimmedTheme = themeString.trim();
+        try {
+            return Theme.getThemeValue(trimmedTheme);
+        } catch (IllegalArgumentException exception) {
+            throw new ParseException(Theme.MESSAGE_CONSTRAINTS);
+        }
     }
 }

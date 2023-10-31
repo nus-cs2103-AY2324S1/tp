@@ -7,11 +7,13 @@ import java.nio.file.Path;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
+import javafx.beans.value.ChangeListener;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.ShortcutSettings;
+import seedu.address.commons.core.ThemeProperty;
 import seedu.address.logic.commands.CommandWord;
 import seedu.address.logic.commands.ShortcutAlias;
 import seedu.address.model.person.Person;
@@ -27,6 +29,12 @@ public class ModelManager implements Model {
     private final FilteredList<Person> filteredPersons;
     private Person selectedPerson;
     private final CommandStringStash commandStringStash;
+    /**
+     * Ideally theme property should be under UserPrefs, but due to limitations of the
+     * JSON Serialising library, it causes errors when put under there, and so the
+     * theme preference cannot be saved from session to session.
+     */
+    private ThemeProperty themeProperty;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -40,6 +48,7 @@ public class ModelManager implements Model {
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.trackedAddressBook.getPersonList());
         this.commandStringStash = new CommandStringStash();
+        this.themeProperty = new ThemeProperty();
 
         // DoConnek Pro shows all patients on startup by default.
         updateFilteredPersonList(PersonType.PATIENT.getSearchPredicate());
@@ -198,6 +207,18 @@ public class ModelManager implements Model {
     public void addCommandString(String commandString) {
         commandStringStash.addCommandString(commandString);
     }
+
+    //=========== Theme =============================================================
+    @Override
+    public void setTheme(Theme theme) {
+        themeProperty.setValue(theme);
+    }
+
+    @Override
+    public void addThemeListener(ChangeListener<? super Theme> changeListener) {
+        themeProperty.addListener(changeListener);
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -218,6 +239,7 @@ public class ModelManager implements Model {
                 && selectedPerson.equals(otherModelManager.selectedPerson)));
     }
 
+    //=========== Undo-Redo =============================================================
     @Override
     public boolean hasHistory() {
         return trackedAddressBook.hasHistory();
