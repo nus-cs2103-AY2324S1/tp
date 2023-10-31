@@ -8,7 +8,6 @@ import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.tag.Tag;
@@ -65,7 +64,7 @@ public class Student {
      * Returns a deep copy of a Student.
      * @return A deep copy of {@code Student}.
      */
-    public Student copy() throws IllegalValueException {
+    public Student copy() {
         return new Student(this.name, this.phone, this.email, this.studentNumber,
                 this.classDetails.copy(), this.tags, this.comment);
     }

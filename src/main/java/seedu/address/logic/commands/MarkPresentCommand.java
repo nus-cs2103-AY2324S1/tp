@@ -6,7 +6,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT_NUMBER;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -44,7 +43,7 @@ public class MarkPresentCommand extends Command {
 
     @Override
     public CommandResult execute(Model model, CommandHistory commandHistory)
-            throws CommandException, IllegalValueException {
+            throws CommandException {
         requireNonNull(model);
 
         if (!model.hasStudent(new Student(targetStudentNumber))) {

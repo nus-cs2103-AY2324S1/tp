@@ -6,7 +6,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT_NUMBER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TUTORIAL_SESSION;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
 
-import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.Messages;
@@ -50,7 +49,7 @@ public class RecordClassParticipationCommand extends Command {
 
     @Override
     public CommandResult execute(Model model, CommandHistory commandHistory)
-            throws CommandException, IllegalValueException {
+            throws CommandException {
         requireNonNull(model);
 
         if (!model.hasStudent(new Student(studentNumber))) {

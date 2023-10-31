@@ -6,7 +6,6 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
 import java.util.List;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -44,7 +43,7 @@ public class MarkPresentAllCommand extends Command {
                 markedStudent.markPresent(index);
                 model.setStudent(studentToMark, markedStudent);
             }
-        } catch (InvalidTutorialSessionNumberException | IllegalValueException e) {
+        } catch (InvalidTutorialSessionNumberException e) {
             throw new CommandException(e.getMessage());
         }
 

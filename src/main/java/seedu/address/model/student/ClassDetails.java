@@ -74,9 +74,8 @@ public class ClassDetails {
     /**
      * Creates a deep copy of the class details.
      * @return A deep copy of {@Code ClassDetails}.
-     * @throws IllegalValueException When there is an error in copying the trackers.
      */
-    public ClassDetails copy() throws IllegalValueException {
+    public ClassDetails copy() {
         AttendanceTracker newAttendanceTracker = this.attendanceTracker.copy();
         AssignmentTracker newAssignmentTracker = this.assignmentTracker.copy();
         ClassParticipationTracker newClassParticipationTracker = this.classParticipationTracker.copy();
