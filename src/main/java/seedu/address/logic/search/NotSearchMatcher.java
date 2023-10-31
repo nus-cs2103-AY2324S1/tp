@@ -2,6 +2,9 @@ package seedu.address.logic.search;
 
 import java.util.Map;
 
+/**
+ * Represents a negation (flip) of another SearchMatcher.
+ */
 public class NotSearchMatcher extends SearchMatcher {
 
     private final SearchMatcher prev;

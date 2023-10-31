@@ -2,6 +2,10 @@ package seedu.address.logic.search;
 
 import java.util.Map;
 
+/**
+ * Represents the combination of two other SearchMatchers in a logical "and" manner.
+ * Evaluates lazily.
+ */
 public class AndSearchMatcher extends BinarySearchMatcher {
 
     private static final char SYMBOL = '&';
