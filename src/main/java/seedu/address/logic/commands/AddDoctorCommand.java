@@ -60,7 +60,6 @@ public class AddDoctorCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        Model originalModel = model;
 
         if (model.hasPerson(toAdd)) {
             logger.warning("Can't add doctor as doctor already exists");
@@ -68,7 +67,6 @@ public class AddDoctorCommand extends Command {
         }
 
         model.addPerson(toAdd);
-        assert !originalModel.equals(model);
         logger.info("Successfully added doctor");
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
     }
