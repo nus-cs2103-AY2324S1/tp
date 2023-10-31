@@ -17,7 +17,6 @@ import seedu.address.model.person.fields.InterviewTime;
 import seedu.address.model.person.fields.Name;
 import seedu.address.model.person.fields.Phone;
 import seedu.address.model.person.fields.Telegram;
-
 import seedu.address.model.tag.Tag;
 
 /**
@@ -70,9 +69,13 @@ public class ParserUtil {
         if (!InterviewTime.isValidTime(trimmedTime)) {
             throw new ParseException(InterviewTime.MESSAGE_CONSTRAINTS);
         }
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
-        LocalDateTime dateTime = LocalDateTime.parse(trimmedTime, formatter);
-        return new InterviewTime(dateTime);
+        if (trimmedTime == "cancel") {
+            return InterviewTime.createEmptyInterviewTime();
+        } else {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
+            LocalDateTime dateTime = LocalDateTime.parse(trimmedTime, formatter);
+            return new InterviewTime(dateTime);
+        }
     }
 
     /**
