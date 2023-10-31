@@ -7,6 +7,8 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
@@ -36,10 +38,20 @@ class JsonAdaptedPerson {
     private final String email;
     private final String address;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
+
+    @JsonInclude(Include.NON_NULL)
     private final String lead;
+
+    @JsonInclude(Include.NON_NULL)
     private final String telegram;
+
+    @JsonInclude(Include.NON_NULL)
     private final String profession;
+
+    @JsonInclude(Include.NON_NULL)
     private final String income;
+
+    @JsonInclude(Include.NON_NULL)
     private final String details;
     private final List<JsonAdaptedInteraction> interactions = new ArrayList<>();
 
