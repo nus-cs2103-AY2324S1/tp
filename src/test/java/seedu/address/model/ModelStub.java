@@ -117,4 +117,9 @@ public class ModelStub implements Model {
     public void updateFilteredApplicantList(Predicate<? super Applicant> predicate) {
         throw new AssertionError("This method should not be called.");
     }
+
+    @Override
+    public void updateFilteredTagList(Predicate<? super Tag> predicate) {
+        throw new AssertionError("This method should not be called.");
+    }
 }
