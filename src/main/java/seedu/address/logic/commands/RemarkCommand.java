@@ -64,25 +64,22 @@ public class RemarkCommand extends Command {
         if (personToEdit.isDoctor()) {
             Doctor editedDoctor = new Doctor(personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
                     personToEdit.getAddress(), remark, personToEdit.getGender(),
-                    personToEdit.getIc(), personToEdit.getTags());
+                    personToEdit.getIc(), personToEdit.getAppointments(), personToEdit.getTags());
             model.setPerson(personToEdit, editedDoctor);
             model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
-
-            return new CommandResult(generateSuccessMessage(editedDoctor));
         }
         @SuppressWarnings("unchecked") //Since Person is abstract, every Person is either a Patient or a Doctor
         Patient editedPerson = (Patient) personToEdit;
         Patient editedPatient = new Patient(editedPerson.getName(), editedPerson.getPhone(),
                 editedPerson.getEmergencyContact(), editedPerson.getEmail(), editedPerson.getAddress(),
                 editedPerson.getRemark(), editedPerson.getGender(), editedPerson.getIc(),
-                editedPerson.getCondition(), editedPerson.getBloodType(), editedPerson.getTags());
+                editedPerson.getCondition(), editedPerson.getBloodType(), editedPerson.getAppointments(),
+                editedPerson.getTags());
 
         model.setPerson(personToEdit, editedPatient);
         model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
 
         return new CommandResult(generateSuccessMessage(editedPatient));
-
-
 
     }
 

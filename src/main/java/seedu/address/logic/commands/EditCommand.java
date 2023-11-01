@@ -28,6 +28,7 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.appointment.Appointment;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.BloodType;
 import seedu.address.model.person.Condition;
@@ -78,7 +79,7 @@ public class EditCommand extends Command {
     private String personRole;
 
     /**
-     * @param nric of the person in the filtered person list to edit
+     * @param nric                 of the person in the filtered person list to edit
      * @param editPersonDescriptor details to edit the person with
      */
     public EditCommand(Ic nric, EditPersonDescriptor editPersonDescriptor) {
@@ -147,9 +148,11 @@ public class EditCommand extends Command {
         Gender updatedGender = editPersonDescriptor.getGender().orElse(personToEdit.getGender());
         Ic updatedIc = editPersonDescriptor.getIc().orElse(personToEdit.getIc());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
+        Set<Appointment> updatedAppointments =
+                editPersonDescriptor.getAppointments().orElse(personToEdit.getAppointments());
 
         return new Doctor(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedRemarks,
-                updatedGender, updatedIc, updatedTags);
+                updatedGender, updatedIc, updatedAppointments, updatedTags);
     }
 
 
@@ -165,10 +168,13 @@ public class EditCommand extends Command {
         Gender updatedGender = editPersonDescriptor.getGender().orElse(personToEdit.getGender());
         Ic updatedIc = editPersonDescriptor.getIc().orElse(personToEdit.getIc());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
+        Set<Appointment> updatedAppointments =
+                editPersonDescriptor.getAppointments().orElse(personToEdit.getAppointments());
         BloodType updatedBloodType = editPersonDescriptor.getBloodType().orElse(personToEdit.getBloodType());
         Condition updatedCondition = editPersonDescriptor.getCondition().orElse(personToEdit.getCondition());
         return new Patient(updatedName, updatedPhone, updatedEmergencyContact, updatedEmail, updatedAddress,
-                updatedRemarks, updatedGender, updatedIc, updatedCondition, updatedBloodType, updatedTags);
+                updatedRemarks, updatedGender, updatedIc, updatedCondition, updatedBloodType, updatedAppointments,
+                updatedTags);
     }
 
     @Override
@@ -212,7 +218,7 @@ public class EditCommand extends Command {
         private Set<Tag> tags;
         private Condition condition;
         private BloodType bloodType;
-        private ArrayList<Patient> patients;
+        private Set<Appointment> appointments;
 
         public EditPersonDescriptor() {
         }
@@ -233,7 +239,7 @@ public class EditCommand extends Command {
             setTags(toCopy.tags);
             setBloodType(toCopy.bloodType);
             setCondition(toCopy.condition);
-            setPatients(toCopy.patients);
+            setAppointments(toCopy.appointments);
         }
 
         /**
@@ -241,7 +247,7 @@ public class EditCommand extends Command {
          */
         public boolean isAnyFieldEdited() {
             return CollectionUtil.isAnyNonNull(name, phone, email, emergencyContact, address,
-                    gender, ic, tags, bloodType, condition, remark, patients);
+                    gender, ic, tags, bloodType, condition, remark, appointments);
         }
 
         public void setName(Name name) {
@@ -275,12 +281,7 @@ public class EditCommand extends Command {
         public Optional<Email> getEmail() {
             return Optional.ofNullable(email);
         }
-        public void setPatients(ArrayList<Patient> patients) {
-            this.patients = patients;
-        }
-        public Optional<ArrayList<Patient>> getPatients() {
-            return Optional.ofNullable(patients);
-        }
+
         public void setAddress(Address address) {
             this.address = address;
         }
@@ -347,6 +348,23 @@ public class EditCommand extends Command {
             return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
         }
 
+        /**
+         * Sets {@code tags} to this object's {@code tags}.
+         * A defensive copy of {@code tags} is used internally.
+         */
+        public void setAppointments(Set<Appointment> appointments) {
+            this.appointments = (appointments != null) ? new HashSet<>(appointments) : null;
+        }
+
+        /**
+         * Returns an unmodifiable tag set, which throws {@code UnsupportedOperationException}
+         * if modification is attempted.
+         * Returns {@code Optional#empty()} if {@code tags} is null.
+         */
+        public Optional<Set<Appointment>> getAppointments() {
+            return (appointments != null) ? Optional.of(Collections.unmodifiableSet(appointments)) : Optional.empty();
+        }
+
         @Override
         public boolean equals(Object other) {
             if (other == this) {
@@ -368,7 +386,8 @@ public class EditCommand extends Command {
                     && Objects.equals(tags, otherEditPersonDescriptor.tags)
                     && Objects.equals(condition, otherEditPersonDescriptor.condition)
                     && Objects.equals(bloodType, otherEditPersonDescriptor.bloodType)
-                    && Objects.equals(remark, otherEditPersonDescriptor.remark);
+                    && Objects.equals(remark, otherEditPersonDescriptor.remark)
+                    && Objects.equals(appointments, otherEditPersonDescriptor.appointments);
         }
 
         @Override
@@ -383,6 +402,7 @@ public class EditCommand extends Command {
                     .add("tags", tags)
                     .add("condition", condition)
                     .add("blood type", bloodType)
+                    .add("appointments", appointments)
                     .toString();
         }
     }

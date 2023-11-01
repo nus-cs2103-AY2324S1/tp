@@ -9,6 +9,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.appointment.Appointment;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Doctor;
 import seedu.address.model.person.Email;
@@ -18,6 +19,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Remark;
 import seedu.address.model.tag.Tag;
+
 
 
 /**
@@ -34,8 +36,9 @@ public class JsonAdaptedDoctor extends JsonAdaptedPerson {
     public JsonAdaptedDoctor(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
                              @JsonProperty("email") String email, @JsonProperty("address") String address,
                              @JsonProperty("remark") String remark, @JsonProperty("gender") String gender,
-                             @JsonProperty("nric") String ic, @JsonProperty("tags") List<JsonAdaptedTag> tags) {
-        super(name, phone, email, address, remark, gender, ic, tags);
+                             @JsonProperty("nric") String ic, @JsonProperty("tags") List<JsonAdaptedTag> tags,
+                             @JsonProperty("appointments") List<JsonAdaptedAppointment> appointments) {
+        super(name, phone, email, address, remark, gender, ic, appointments, tags);
     }
 
     /**
@@ -63,7 +66,12 @@ public class JsonAdaptedDoctor extends JsonAdaptedPerson {
             personTags.add(tag.toModelType());
         }
         final Set<Tag> modelTags = new HashSet<>(personTags);
+        final List<Appointment> personAppointments = new ArrayList<>();
+        for (JsonAdaptedAppointment appointment : this.getAppointments()) {
+            personAppointments.add(appointment.toModelType());
+        }
+        final Set<Appointment> modelAppointments = new HashSet<>(personAppointments);
         return new Doctor(modelName, modelPhone, modelEmail, modelAddress, modelRemark, modelGender, modelIc,
-                modelTags);
+                modelAppointments, modelTags);
     }
 }
