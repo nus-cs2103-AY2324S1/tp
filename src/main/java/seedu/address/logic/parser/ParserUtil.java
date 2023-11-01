@@ -11,6 +11,7 @@ import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import javafx.util.Pair;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.commands.FindCommand;
@@ -255,5 +256,23 @@ public class ParserUtil {
             throw new ParseException(Score.MESSAGE_CONSTRAINTS);
         }
         return new Score(Integer.parseInt(trimmedScore));
+    }
+
+    /**
+     * Parses a Tag Score string input and turns it into a Pair with head as Tag and tail as Score.
+     * @param tagScore String to be parsed
+     * @return Pair with head as Tag and tail as Score
+     * @throws ParseException if the given {@code tagScorePair} is invalid.
+     */
+    public static Pair<Tag, Score> parseTagScore(String tagScore) throws ParseException {
+        requireNonNull(tagScore);
+        String trimmedTagScorePair = tagScore.trim();
+        String[] tagScorePairArr = trimmedTagScorePair.split(" ");
+        if (tagScorePairArr.length != 2) {
+            throw new ParseException("Invalid score, score must be non-negative integer.");
+        }
+        Tag tag = parseTag(tagScorePairArr[0]);
+        Score score = parseScore(tagScorePairArr[1]);
+        return new Pair<>(tag, score);
     }
 }
