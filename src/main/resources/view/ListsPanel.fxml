@@ -14,7 +14,7 @@
         </padding>
         <HBox alignment="CENTER_LEFT" HBox.hgrow="ALWAYS">
             <children>
-                <Label styleClass="label-bright" text=" Tutors:" />
+                <Label text=" Tutors:" />
             </children>
         </HBox>
         <StackPane fx:id="personListPanelPlaceholder" VBox.vgrow="ALWAYS" />
@@ -25,7 +25,7 @@
         </padding>
         <HBox alignment="CENTER_LEFT" HBox.hgrow="ALWAYS">
             <children>
-                <Label styleClass="label-bright" text=" Schedules:" />
+                <Label text=" Schedules:"/>
             </children>
         </HBox>
         <StackPane fx:id="scheduleListPanelPlaceholder" VBox.vgrow="ALWAYS" />

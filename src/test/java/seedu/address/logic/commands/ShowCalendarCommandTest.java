@@ -14,6 +14,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.schedule.Date;
+import seedu.address.model.schedule.ScheduleIsOnDatePredicate;
 import seedu.address.testutil.TypicalSchedules;
 
 /**
@@ -30,7 +31,7 @@ public class ShowCalendarCommandTest {
         ShowCalendarCommand showCalendarCommand = new ShowCalendarCommand(date);
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        expectedModel.updateFilteredScheduleList(schedule -> schedule.isOnDate(date));
+        expectedModel.updateFilteredCalendarScheduleList(new ScheduleIsOnDatePredicate(date));
 
         assertCommandSuccess(showCalendarCommand, model, ShowCalendarCommand.MESSAGE_SUCCESS, expectedModel);
     }

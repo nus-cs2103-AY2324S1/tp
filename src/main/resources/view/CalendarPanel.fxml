@@ -4,6 +4,6 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
-    <ListView fx:id="personListView" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS"/>
+<VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" VBox.vgrow="ALWAYS">
+    <ListView fx:id="calendarListView" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS"/>
 </VBox>
