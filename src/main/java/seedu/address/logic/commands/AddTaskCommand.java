@@ -1,15 +1,15 @@
 package seedu.address.logic.commands;
 
+import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT_DESCRIPTION;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT_END_DATE_TIME;
+
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.exceptions.DuplicateTaskException;
-
-import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT_DESCRIPTION;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT_END_DATE_TIME;
 
 /**
  * Adds a Task to the TaskList
@@ -40,12 +40,17 @@ public class AddTaskCommand extends Command {
 
     private final Task toAdd;
 
+    /**
+     * Constructs an AddTaskCommand to add a task into the task list.
+     * @param task the task to add.
+     */
     public AddTaskCommand(Task task) {
         requireNonNull(task);
 
         toAdd = task;
     }
 
+    @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 

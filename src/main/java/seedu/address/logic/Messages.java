@@ -68,6 +68,12 @@ public class Messages {
         return builder.toString();
     }
 
+    /**
+     * Formats a task for displayy to the user.
+     *
+     * @param task task to be displayed
+     * @return String of appropriate format.
+     */
     public static String format(Task task) {
         final StringBuilder builder = new StringBuilder();
         builder.append(task.getDescriptionString())

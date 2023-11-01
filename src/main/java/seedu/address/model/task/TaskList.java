@@ -13,6 +13,9 @@ import javafx.collections.transformation.SortedList;
 import seedu.address.model.task.exceptions.DuplicateTaskException;
 import seedu.address.model.task.exceptions.TaskNotFoundException;
 
+/**
+ * A list of tasks that enforces uniqueness between its elements and does not allow nulls.
+ */
 public class TaskList implements Iterable<Task> {
     private final ObservableList<Task> internalList = FXCollections.observableArrayList();
     private final ObservableList<Task> internalUnmodifiableList =
@@ -86,7 +89,7 @@ public class TaskList implements Iterable<Task> {
         return internalList;
     }
 
-
+    @Override
     public boolean equals(Object other) {
         if (other == this) {
             return true;

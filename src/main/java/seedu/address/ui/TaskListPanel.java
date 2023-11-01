@@ -1,5 +1,7 @@
 package seedu.address.ui;
 
+import java.util.logging.Logger;
+
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListCell;
@@ -7,8 +9,9 @@ import javafx.scene.control.ListView;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.task.Task;
 
-import java.util.logging.Logger;
-
+/**
+ * Panel containing a list of tasks.
+ */
 public class TaskListPanel extends BottomListPanel {
     private static final String FXML = "TaskListPanel.fxml";
     private final Logger logger = LogsCenter.getLogger(TaskListPanel.class);

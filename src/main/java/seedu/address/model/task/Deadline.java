@@ -10,6 +10,9 @@ import java.util.Optional;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.event.exceptions.InvalidDeadlineException;
 
+/**
+ * An object representing the deadline of a task.
+ */
 public class Deadline implements Comparable<Deadline> {
     public static final String MESSAGE_CONSTRAINTS = "The deadline should "
             + "be in the format 'yyyy-MM-dd HH:mm' where:\n"
@@ -65,12 +68,10 @@ public class Deadline implements Comparable<Deadline> {
     }
 
     /**
-     * Compares this deadline to another deadline.
-     * Deadlines that are present are prioritized above absent ones.
+     * Compares this deadline to another deadline. Deadlines that are present are prioritized above absent ones.
      *
      * @param other the object to be compared.
-     * @return -1 if this deadline is before, 1 if this deadline is after and 0 if the deadlines are both present and
-     * equal.
+     * @return -1 if this deadline is before, 1 if deadline is after and 0 if the deadlines are both present and equal.
      */
     @Override
     public int compareTo(Deadline other) {

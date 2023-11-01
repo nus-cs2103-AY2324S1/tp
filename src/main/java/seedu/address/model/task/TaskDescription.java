@@ -1,8 +1,8 @@
 package seedu.address.model.task;
 
-import seedu.address.model.task.exceptions.InvalidTaskDescriptionException;
-
 import static java.util.Objects.requireNonNull;
+
+import seedu.address.model.task.exceptions.InvalidTaskDescriptionException;
 
 /**
  * Represents the description of a task.

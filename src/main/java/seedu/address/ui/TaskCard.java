@@ -23,6 +23,9 @@ public class TaskCard extends UiPart<Region> {
     @FXML
     private Label deadline;
 
+    /**
+     * Creates a {@code TaskCard} with the given {@code Task} and index to display.
+     */
     public TaskCard(Task task, int displayedIndex) {
         super(FXML);
         this.task = task;

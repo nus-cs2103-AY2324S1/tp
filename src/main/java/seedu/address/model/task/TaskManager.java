@@ -1,16 +1,16 @@
 package seedu.address.model.task;
 
-import javafx.collections.ObservableList;
+import static java.util.Objects.requireNonNull;
 
 import java.util.Comparator;
 import java.util.List;
 
-import static java.util.Objects.requireNonNull;
+import javafx.collections.ObservableList;
 
 /**
  * Represents a task manager that stores and manages tasks
  */
-public class TaskManager implements ReadOnlyTaskManager{
+public class TaskManager implements ReadOnlyTaskManager {
 
     private final TaskList tasks;
     private Comparator<Task> sortingOrder;
@@ -55,6 +55,9 @@ public class TaskManager implements ReadOnlyTaskManager{
         tasks.setTasks(taskList);
     }
 
+    /**
+     * Adds a task into the taskManager.
+     */
     public void addTask(Task task) {
         requireNonNull(task);
         tasks.add(task);
