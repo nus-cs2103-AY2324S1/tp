@@ -5,8 +5,10 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DEPARTMENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LEAVE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MANAGER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SALARY;
 
 import seedu.address.commons.util.ToStringBuilder;
@@ -29,10 +31,13 @@ public class AddCommand extends Command {
             + PREFIX_ADDRESS + "311, Clementi Ave 2, #02-25 "
             + PREFIX_SALARY + "123 "
             + PREFIX_LEAVE + "14 "
+            + PREFIX_ROLE + "manager "
+            + PREFIX_MANAGER + "Johnny "
+            + PREFIX_MANAGER + "Tom "
             + PREFIX_DEPARTMENT + "investment "
             + PREFIX_DEPARTMENT + "logistics";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an employee to the ManageHR app. \n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an employee to the ManageHR app. "
             + "Parameters: "
             + PREFIX_NAME + "NAME "
             + PREFIX_PHONE + "PHONE "
@@ -40,7 +45,11 @@ public class AddCommand extends Command {
             + PREFIX_ADDRESS + "ADDRESS "
             + PREFIX_SALARY + "SALARY "
             + PREFIX_LEAVE + "LEAVE "
-            + "[" + PREFIX_DEPARTMENT + "DEPARTMENT]...\n" + "Example: " + MESSAGE_EXAMPLE;
+            + PREFIX_ROLE + "ROLE "
+            + "[" + PREFIX_MANAGER + "MANAGER]...\n"
+            + "[" + PREFIX_DEPARTMENT + "DEPARTMENT]...\n"
+            + "Example: " + MESSAGE_EXAMPLE + " "
+
 
     public static final String MESSAGE_SUCCESS = "New employee added: %1$s";
     public static final String MESSAGE_DUPLICATE_EMPLOYEE = "This employee already exists in the ManageHR app";

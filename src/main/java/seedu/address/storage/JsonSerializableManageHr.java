@@ -46,15 +46,15 @@ class JsonSerializableManageHr {
      * @throws IllegalValueException if there were any data constraints violated.
      */
     public ManageHr toModelType() throws IllegalValueException {
-        ManageHr manageHR = new ManageHr();
+        ManageHr manageHr = new ManageHr();
         for (JsonAdaptedEmployee jsonAdaptedEmployee : employees) {
             Employee employee = jsonAdaptedEmployee.toModelType();
-            if (manageHR.hasEmployee(employee)) {
+            if (manageHr.hasEmployee(employee)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_EMPLOYEE);
             }
-            manageHR.addEmployee(employee);
+            manageHr.addEmployee(employee);
         }
-        return manageHR;
+        return manageHr;
     }
 
 }
