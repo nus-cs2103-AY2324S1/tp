@@ -21,6 +21,10 @@ public class Lesson extends ListEntry<Lesson> {
     // Data fields
     private Subject subject;
     private Day day;
+
+    /**
+     * The Task List to store the Lesson Tasks.
+     */
     private TaskList taskList;
 
     /**
@@ -35,7 +39,7 @@ public class Lesson extends ListEntry<Lesson> {
      * @see seedu.address.logic.parser.ParserUtil
      */
     public Lesson(Name name, Time start, Time end, Day day, Subject subject, TaskList taskList, Name... studentNames) {
-        requireAllNonNull(name, start, end, day, subject, studentNames);
+        requireAllNonNull(name, start, end, day, subject, taskList, studentNames);
         this.name = name;
         this.start = start;
         this.end = end;
@@ -58,6 +62,7 @@ public class Lesson extends ListEntry<Lesson> {
             throws ParseException {
         this(new Name(name), new Time(start), new Time(end), Day.of(day), new Subject(subject), taskList);
     }
+
     private Lesson() {
         this.name = Name.DEFAULT_NAME;
         this.start = Time.DEFAULT_TIME;
@@ -231,6 +236,7 @@ public class Lesson extends ListEntry<Lesson> {
         }
     }
 
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -311,7 +317,7 @@ public class Lesson extends ListEntry<Lesson> {
         cloned.setNameIfNotDefault(this.name);
         cloned.setDayIfNotDefault(this.day);
         cloned.setRemarkIfNotDefault(this.remark);
-        cloned.setTaskListIfNotDefault(this.taskList);
+        cloned.taskList = taskList.clone();
         return cloned;
     }
 }

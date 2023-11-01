@@ -2,7 +2,9 @@ package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.model.state.State.SCHEDULE;
 import static seedu.address.model.state.State.STUDENT;
+import static seedu.address.model.state.State.TASK;
 
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
@@ -24,6 +26,7 @@ import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.LinkCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.NavigateCommand;
 import seedu.address.logic.commands.ShowCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
@@ -59,13 +62,38 @@ public class AddressBookParser {
         String commandWord = matcher.group("commandWord");
         switch (commandWord) {
         case "delete":
-            commandWord = model.getState().equals(STUDENT) ? "deletePerson" : "deleteLesson";
+            if (model.getState().equals(SCHEDULE)) {
+                commandWord = "deleteLesson";
+                break;
+            } else if (model.getState().equals(STUDENT)) {
+                commandWord = "deletePerson";
+                break;
+            } else if (model.getState().equals(TASK)) {
+                throw new ParseException("Please delete tasks in the schedule list.");
+            }
             break;
         case "add":
-            commandWord = model.getState().equals(STUDENT) ? "addPerson" : "addLesson";
+            if (model.getState().equals(SCHEDULE)) {
+                commandWord = "addLesson";
+                break;
+            } else if (model.getState().equals(STUDENT)) {
+                commandWord = "addPerson";
+                break;
+            } else if (model.getState().equals(TASK)) {
+                throw new ParseException("Please add tasks in the schedule list.");
+            }
             break;
+
         case "edit":
-            commandWord = model.getState().equals(STUDENT) ? "editPerson" : "editLesson";
+            if (model.getState().equals(SCHEDULE)) {
+                commandWord = "editLesson";
+                break;
+            } else if (model.getState().equals(STUDENT)) {
+                commandWord = "editPerson";
+                break;
+            } else if (model.getState().equals(TASK)) {
+                throw new ParseException("Editing tasks is not supported.");
+            }
             break;
         default:
             break;
@@ -107,9 +135,24 @@ public class AddressBookParser {
         case LinkCommand.COMMAND_WORD:
             return new LinkCommandParser().parse(arguments);
         case AddTaskCommand.COMMAND_WORD:
+            if (!model.getState().equals(SCHEDULE)) {
+                throw new ParseException("Please add tasks in the schedule list.");
+            }
+            return new AddTaskCommandParser().parse(userInput);
+        case "task":
+            if (!model.getState().equals(SCHEDULE)) {
+                throw new ParseException("Please add tasks in the schedule list.");
+            }
             return new AddTaskCommandParser().parse(userInput);
         case DeleteTaskCommand.COMMAND_WORD:
+            if (!model.getState().equals(SCHEDULE)) {
+                throw new ParseException("Please add tasks in the schedule list.");
+            }
             return new DeleteTaskCommandParser().parse(userInput);
+        case NavigateCommand.COMMAND_WORD:
+            return new NavigateCommand();
+        case "nav":
+            return new NavigateCommand();
         default:
             logger.finer("This user input caused a ParseException: " + userInput);
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

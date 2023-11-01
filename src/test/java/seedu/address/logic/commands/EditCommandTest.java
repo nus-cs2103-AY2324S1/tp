@@ -20,7 +20,8 @@ import seedu.address.model.person.Person;
 
 public class EditCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs(), getTypicalScheduleList());
+    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs(),
+            getTypicalScheduleList());
 
     @Test
     void happyCases() {
