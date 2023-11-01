@@ -137,6 +137,8 @@ public class AddressBookParser {
             return new LinkCommandParser().parse(arguments);
         case AddTaskCommand.COMMAND_WORD:
             return new AddTaskCommandParser().parse(userInput);
+        case "task":
+            return new AddTaskCommandParser().parse(userInput);
         case DeleteTaskCommand.COMMAND_WORD:
             return new DeleteTaskCommandParser().parse(userInput);
         case NavigateCommand.COMMAND_WORD:
