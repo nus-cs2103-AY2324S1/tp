@@ -10,12 +10,12 @@ import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
-import seedu.address.logic.commands.ListScheduleCommand;
 import seedu.address.logic.commands.ShowCalendarCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -34,8 +34,7 @@ public class MainWindow extends UiPart<Stage> {
     private Logic logic;
 
     // Independent Ui parts residing in this Ui container
-    private PersonListPanel personListPanel;
-    private ScheduleListPanel scheduleListPanel;
+    private ListsPanel listsPanel;
     private CalendarPanel calendarPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
@@ -47,13 +46,14 @@ public class MainWindow extends UiPart<Stage> {
     private MenuItem helpMenuItem;
 
     @FXML
-    private StackPane listPanelPlaceholder;
-
-    @FXML
     private StackPane resultDisplayPlaceholder;
 
     @FXML
     private StackPane statusbarPlaceholder;
+
+    @FXML
+    private VBox listPanelPlaceholder;
+
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
      */
@@ -126,10 +126,8 @@ public class MainWindow extends UiPart<Stage> {
      */
     void fillInnerParts() {
         calendarPanel = new CalendarPanel(logic.getFilteredPersonList(), logic.getFilteredScheduleList());
-        scheduleListPanel = new ScheduleListPanel(logic.getFilteredScheduleList());
-        personListPanel = new PersonListPanel(logic.getFilteredPersonList());
 
-        listPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+        listsPanel = new ListsPanel(logic.getFilteredPersonList(), logic.getFilteredScheduleList());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
@@ -139,6 +137,8 @@ public class MainWindow extends UiPart<Stage> {
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+
+        showLists();
     }
 
     /**
@@ -188,35 +188,20 @@ public class MainWindow extends UiPart<Stage> {
     private void handleListDisplay(CommandResult commandResult) {
         // TODO: Update this when there are both lists displayed simultaneously
         switch (commandResult.getFeedbackToUser()) {
-        case ListScheduleCommand.MESSAGE_SUCCESS:
-            showSchedules();
-            break;
         case ShowCalendarCommand.MESSAGE_SUCCESS:
             showCalendar();
             break;
         default:
-            showPersons();
+            showLists();
         }
     }
 
-    public PersonListPanel getPersonListPanel() {
-        return personListPanel;
-    }
-
     /**
-     * Shows list of person cards.
+     * Shows list of person and schedule cards.
      */
-    void showPersons() {
+    void showLists() {
         listPanelPlaceholder.getChildren().clear();
-        listPanelPlaceholder.getChildren().add(personListPanel.getRoot());
-    }
-
-    /**
-     * Fills up all the placeholders of this window.
-     */
-    void showSchedules() {
-        listPanelPlaceholder.getChildren().clear();
-        listPanelPlaceholder.getChildren().add(scheduleListPanel.getRoot());
+        listPanelPlaceholder.getChildren().add(listsPanel.getRoot());
     }
 
     /**
@@ -238,11 +223,11 @@ public class MainWindow extends UiPart<Stage> {
         scene.getStylesheets().add(getClass().getResource(theme).toExternalForm());
 
         GuiSettings guiSettings = new GuiSettings(
-            primaryStage.getWidth(),
-            primaryStage.getHeight(),
-            (int) primaryStage.getX(),
-            (int) primaryStage.getY(),
-            theme
+                primaryStage.getWidth(),
+                primaryStage.getHeight(),
+                (int) primaryStage.getX(),
+                (int) primaryStage.getY(),
+                theme
         );
         logic.setGuiSettings(guiSettings);
     }
