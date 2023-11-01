@@ -100,10 +100,10 @@ public class ListAttendanceCommand extends ListCommand {
     public CommandResult execute(Model model) {
         requireNonNull(model);
 
+        model.clearFilters();
         boolean isWithTag = false;
         int numberOfStudents = model.getFilteredPersonList().size();
         String courseCode = model.getAddressBook().getCourseCode();
-        System.out.println(model.getFilteredPersonList().toString());
 
         if (tag.isPresent()) {
             model.addFilter(tutorialPredicate);
@@ -111,7 +111,7 @@ public class ListAttendanceCommand extends ListCommand {
             numberOfStudents = model.getFilteredPersonList().size();
 
             if (numberOfStudents == 0) {
-                return new CommandResult(String.format(MESSAGE_NO_STUDENTS, tag.get().getTagName()));
+                return new CommandResult(String.format(MESSAGE_NO_STUDENTS, courseCode, tag.get().getTagName()));
             }
         }
 

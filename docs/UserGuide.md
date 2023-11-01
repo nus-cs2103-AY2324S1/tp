@@ -144,12 +144,13 @@ Shows a summary of attendance records including list of absentees.
 ![list attendance](images/listAttendance.png)
 
 Format: `list attendance w/WEEKNUMBER [tg/TUTORIALGROUPID]`
-*  Shows a list of absentees and summary of the attendance records of all students or students corresponding to the specified tutorial group for the specified week number.
+* If tutorial group is specified, shows a list of absentees and summary of the attendance of students corresponding to the specified tutorial group in the course for the specified week number.
+* If tutorial group is not specified, shows a list of absentees and summary of the attendance of all students in the course for the specified week number.
 * `TUTORIALGROUPID` is optional.
 
 Examples:
-*  `list attendance w/1` Shows a summary of attendance records of all students for Week 1.
-*  `list attendance w/3 tg/G01` Shows a summary of attendance records of the students in the tutorial group G01 for Week 3.
+* `list attendance w/1` Shows a summary of attendance records of all students for Week 1.
+* `list attendance w/3 tg/G01` Shows a summary of attendance records of the students in the tutorial group G01 for Week 3.
 
 ### Searching for student's contact via keyword : `find`
 
@@ -173,7 +174,7 @@ Shows a list of students.
 ![list students](images/listStudents.png)
 
 Format: `list students`
-*  Shows a list of all students.
+*  Shows a list of all students in the course.
 
 ### Adding a filter: `filter add`
 
@@ -224,7 +225,7 @@ Format: `filter clear`
 Examples:
 * `filter clear` returns the list of all students
 
-### Deleting a person : `delete`
+### Deleting a student : `delete`
 
 Deletes the specified person from TAvigator.
 
@@ -240,7 +241,7 @@ Examples:
 * `list students` followed by `delete 2` deletes the 2nd person in TAvigator.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
-### Deleting all students : `delete all`
+### Deleting multiple students : `delete all`
 
 Deletes all students from current address book or the specified tutorial group in the current address book.
 
@@ -248,12 +249,12 @@ Deletes all students from current address book or the specified tutorial group i
 
 Format: `delete all [tg/TUTORIALGROUPID]`
 
-* Deletes all students or the students from the specified tutorial group.
+* Deletes all students in the current course or the students from the specified tutorial group in the current course.
 * `TUTORIALGROUPID` is optional.
 
 Examples:
-* `delete all` deletes all students from the current address book.
-* `delete all tg/G02` deletes all students from tutorial group G02.
+* `delete all` deletes all students from the current course.
+* `delete all tg/G02` deletes all students from tutorial group G02 in the current course.
 
 ### Clearing all entries : `clear`
 

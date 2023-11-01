@@ -61,6 +61,7 @@ public class DeleteCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+
         List<Person> lastShownList = model.getFilteredPersonList();
         String courseCode = model.getAddressBook().getCourseCode();
 
@@ -74,6 +75,7 @@ public class DeleteCommand extends Command {
             return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(personToDelete)));
         }
 
+        model.clearFilters();
         if (tag.isPresent()) {
             model.addFilter(tagPredicate);
         }
@@ -86,7 +88,6 @@ public class DeleteCommand extends Command {
         }
 
         model.clearFilters();
-
         return tag.isPresent()
                 ? new CommandResult(String.format(MESSAGE_DELETE_TAGGED_SUCCESS, courseCode, tag.get().getTagName()))
                 : new CommandResult(String.format(MESSAGE_DELETE_NO_TAG_SUCCESS, courseCode));
