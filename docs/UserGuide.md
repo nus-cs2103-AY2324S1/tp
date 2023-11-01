@@ -72,7 +72,7 @@ Shows a message explaning how to access the help page.
 Format: `help`
 
 
-### Adding a person: `add`
+### Adding a client: `add`
 
 Adds a person to the database.
 
@@ -98,13 +98,13 @@ Expected output upon failure:
 * Format of added value is incorrect or not allowed for the specified field: `Error: Invalid value format.`
 
 
-### Listing all persons : `list`
+### Listing all clients : `list`
 
 Shows a list of all persons in the database.
 
 Format: `list`
 
-### Editing a person : `edit`
+### Editing a client : `edit`
 
 Modify and/or updates existing policy information in the database.
 
@@ -135,41 +135,50 @@ Expected output upon failure:
 
 
 
-### Locating persons by fields: `find`
+### Locating clients by fields : `find`
 
-Finds person(s) whose fields matches any of the given fields.
+Finds client(s) whose fields matches any of the given fields.
 
-Format: `find [n/NAME] [i/NRIC] [c/CONTACT NUMBER] [l/LICENCE PLATE]
-[pn/POLICY NUMBER] [pi/POLICY ISSUE DATE] [pe/POLICY EXPIRY DATE]`
+Format: `find [n/NAME] [i/NRIC] [c/CONTACT NUMBER] [l/LICENCE PLATE] [e/EMAIL] [t/TAG]
+[c/COMPANY] [pn/POLICY NUMBER] [pi/POLICY ISSUE DATE] [pe/POLICY EXPIRY DATE]`
 
-* The search is case-insensitive e.g `hans` will match `Hans`
-* The order of the fields does not matter. e.g. `Hans Bo` will match `Bo Hans`
+* The search is case-insensitive e.g. `hans` will match `Hans`
+* The order of the fields does not matter. e.g. `find n/Hans i/123B` is the same as `find i/123B n/Hans`
 * **At least one** of the fields must be present
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one field will be returned (i.e. `OR` search)
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+* Value given with white spaces for each field is treated as 1 value e.g. `find n/Hans Bo` will return clients with 
+names `Hans Bo` in it
+* Clients that partially matches with the field given will be returned e.g. `find l/SLA` will return all clients whose
+licence plates contains `SLA`
 
 Examples:
-* `find n/mary` returns all profiles that has the name `Mary`
-* `find n/john pn/AB12345J` returns the profile whose name contains `John` with policy number `AB12345J`
+* `find n/mary` returns all clients that has the name `Mary` such as `Mary Lim`, `Mary Koh`, `Mary White`
+* `find n/Hans Bo` returns all clients that has the name `Hans Bo` but not those with names `Hans` or `Bo` in it
+* `find n/john pn/AB12345J` returns the clients whose name contains `John` with policy number `AB12345J`
 
 Acceptable values for each parameter:
-* `n/NAME`: Alphabets 
-* `i/NRIC`: Alphanumeric, _exactly_ 4 characters 
-* `c/CONTACT NUMBER`: Numeric, _exactly_ 8 characters 
-* `l/LICENCE PLATE`: Alphanumeric, _up to_ 9 characters 
-* `pn/POLICY NUMBER`: Alphanumeric, _exactly_ 8 characters 
-* `pi/POLICY ISSUE DATE` and `pe/POLICY EXPIRY DATE`: Date in the format _dd-mm-yyyy_
+* `n/NAME` : Alphabets 
+* `i/NRIC` : Alphanumeric, _exactly_ 4 characters 
+* `c/CONTACT NUMBER` : Numeric, _exactly_ 8 characters 
+* `l/LICENCE PLATE` : Alphanumeric, _up to_ 9 characters 
+  * `pn/POLICY NUMBER` : Alphanumeric, _exactly_ 8 characters
+* `pi/POLICY ISSUE DATE` and `pe/POLICY EXPIRY DATE` : Date in the format _dd-mm-yyyy_
 
-Expected output upon success: [coming soon]
+Expected output upon success:
 
 Expected output upon failure:
-* Format error in any field:`Error: Please adhere to the format for the fields`
-* No field given: `Error: Please give at least one field`
-* Field flag given but no value: `Error: Please give a value in the field(s) indicated`
+* Format error in any field:<br>
+`Error: Please adhere to the format for the fields`
+* No field given:<br>
+`Invalid command format!  
+  find: Finds all persons whose names contain any of the specified fields (case-insensitive for values) and displays them as a list with index numbers.  
+  Parameters: [n/NAME] [l/LICENCE PLATE] [n/NAME] [i/NRIC] [c/CONTACT NUMBER] [l/LICENCE PLATE] [e/EMAIL][c/COMPANY] [pn/POLICY NUMBER] [pi/POLICY ISSUE DATE] [pe/POLICY EXPIRY DATE]  
+  At least one parameter must be present.  
+  Example: find n/Alice Rodriguez`
+* Field flag given but no value:<br>
+`Error: Please give a value in the field(s) indicated`
 
 
-### Deleting a person : `delete`
+### Deleting a client : `delete`
 
 Deletes the specified person from the database.
 
@@ -192,7 +201,7 @@ Expected output upon failure:
 * Missing `INDEX` parameter: `Error: Missing Index`
 * Incorrect `INDEX` parameter: `Error: The parameter is not of the type positive integer`
 
-### Sorting all entries by policy expiration date : `sort`
+### Sorting clients by policy expiration date : `sort`
 
 Format: `sort`
 
@@ -206,6 +215,41 @@ Examples:
 
 Expected output upon success : `Address book has been sorted!`
 
+### Header think of it later : `remind`
+
+Reminds the user of clients that have approaching policy expiration date within a certain number of days.
+
+Format: `remind NUMBER_OF_DAYS`
+
+* The search is case-insensitive e.g. `hans` will match `Hans`
+* The order of the fields does not matter. e.g. `find n/Hans i/123B` is the same as `find i/123B n/Hans`
+* **At least one** of the fields must be present
+* Value given with white spaces for each field is treated as 1 value e.g. `find n/Hans Bo` will return clients with
+  names `Hans Bo` in it
+* Clients that partially matches with the field given will be returned e.g. `find l/SLA` will return all clients whose
+  licence plates contains `SLA`
+
+Examples:
+* `find n/mary` returns all clients that has the name `Mary` such as `Mary Lim`, `Mary Koh`, `Mary White`
+* `find n/Hans Bo` returns all clients that has the name `Hans Bo` but not those with names `Hans` or `Bo` in it
+* `find n/john pn/AB12345J` returns the clients whose name contains `John` with policy number `AB12345J`
+
+Acceptable values for each parameter:
+* `NUMBER_OF_DAYS` : Numeric, range from _0_ to _7305_
+
+Expected output upon success:
+
+Expected output upon failure:
+* Format error in any field:<br>
+  `Error: Please adhere to the format for the fields`
+* No field given:<br>
+  `Invalid command format!  
+  find: Finds all persons whose names contain any of the specified fields (case-insensitive for values) and displays them as a list with index numbers.  
+  Parameters: [n/NAME] [l/LICENCE PLATE] [n/NAME] [i/NRIC] [c/CONTACT NUMBER] [l/LICENCE PLATE] [e/EMAIL][c/COMPANY] [pn/POLICY NUMBER] [pi/POLICY ISSUE DATE] [pe/POLICY EXPIRY DATE]  
+  At least one parameter must be present.  
+  Example: find n/Alice Rodriguez`
+* Field flag given but no value:<br>
+  `Error: Please give a value in the field(s) indicated`
 
 ### Clearing all entries : `clear`
 
@@ -252,12 +296,12 @@ _Details coming soon ..._
 
 ## Command summary
 
-| Action     | Format, Examples                                                                                                                                                     |
-|------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**    | `add n/NAME i/NRIC c/CONTACT NUMBER l/LICENCE PLATE…​` <br> e.g., `add n/Mary i/627A c/73052859 l/SLU5237J`                                                          |
-| **Clear**  | `clear`                                                                                                                                                              |
-| **Delete** | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                  |
-| **Edit**   | `edit INDEX [l/LICENCEPLATE] [pn/POLICY NUMBER] [pi/POLICY ISSUE DATE] [pe/POLICY EXPIRY DATE]…​`<br> e.g.,`edit 2 pn/AB12345J pe/31-12-2024`                        |
-| **Find**   | `find [n/NAME] [i/NRIC] [c/CONTACT NUMBER] [l/LICENCE PLATE] [pn/POLICY NUMBER] [pi/POLICY ISSUE DATE] [pe/POLICY EXPIRY DATE]`<br> e.g., `find n/John /pn AB12345J` |
-| **List**   | `list`                                                                                                                                                               |
-| **Help**   | `help`                                                                                                                                                               |
+| Action     | Format, Examples                                                                                                                                                                                                     |
+|------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**    | `add n/NAME i/NRIC c/CONTACT NUMBER l/LICENCE PLATE…​` <br> e.g., `add n/Mary i/627A c/73052859 l/SLU5237J`                                                                                                          |
+| **Clear**  | `clear`                                                                                                                                                                                                              |
+| **Delete** | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                                                  |
+| **Edit**   | `edit INDEX [l/LICENCEPLATE] [pn/POLICY NUMBER] [pi/POLICY ISSUE DATE] [pe/POLICY EXPIRY DATE]…​`<br> e.g.,`edit 2 pn/AB12345J pe/31-12-2024`                                                                        |
+| **Find**   | `find [n/NAME] [l/LICENCE PLATE] [n/NAME] [i/NRIC] [c/CONTACT NUMBER] [l/LICENCE PLATE] [e/EMAIL][c/COMPANY] [pn/POLICY NUMBER] [pi/POLICY ISSUE DATE] [pe/POLICY EXPIRY DATE]`<br> e.g., `find n/John /pn AB12345J` |
+| **List**   | `list`                                                                                                                                                                                                               |
+| **Help**   | `help`                                                                                                                                                                                                               |
