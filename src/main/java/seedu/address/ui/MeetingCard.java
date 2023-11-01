@@ -50,6 +50,8 @@ public class MeetingCard extends UiPart<Region> {
     private Label end;
     @FXML
     private FlowPane tags;
+    @FXML
+    private Label status;
 
     /**
      * Creates a {@code MeetingCode} with the given {@code Meeting} and index to display.
@@ -71,5 +73,10 @@ public class MeetingCard extends UiPart<Region> {
         meeting.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        if (meeting.getStatus().isComplete) {
+            status.setText("[COMPLETE]");
+        } else {
+            status.setText("");
+        }
     }
 }
