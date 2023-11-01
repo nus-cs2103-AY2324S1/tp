@@ -406,13 +406,14 @@ Here is a list of the error messages you may encounter, when the command is ente
 
 | Error Message                                                                                                      | Reason                                                                                       |
 |--------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------|
-| `Invalid command format!`                                                                                          | One or more of the tags n/, p/, e/ is missing.                                               |
-| `EndTime should only contain a valid date and time in the format "yyyy-MM-ddTHH:mm", and it should not be blank`   | The start time entered is not in the correct datetime format[<sup>2</sup>](#note2).                                |
-| `StartTime should only contain a valid date and time in the format "yyyy-MM-ddTHH:mm", and it should not be blank` | The end time entered is not in the correct datetime format[<sup>2</sup>](#note2).                                  |
-| `Multiple values specified for the following single-valued field(s): st/`                                          | More than 1 st/ was given in the command                                                     |
-| `Multiple values specified for the following single-valued field(s): et/`                                          | More than 1 et/ was given in the command                                                     |
+| `Invalid command format!`                                                                                          | Invalid `TUTOR_INDEX` or some of the tags `st/`, `et/` is missing.                           |
+| `StartTime should only contain a valid date and time in the format "yyyy-MM-ddTHH:mm", and it should not be blank` | The start time entered is not in the correct datetime format[<sup>2</sup>](#note2).          |
+| `EndTime should only contain a valid date and time in the format "yyyy-MM-ddTHH:mm", and it should not be blank`   | The end time entered is not in the correct datetime format[<sup>2</sup>](#note2).            |
+| `Multiple values specified for the following single-valued field(s): st/`                                          | More than 1 `st/` was given in the command.                                                  |
+| `Multiple values specified for the following single-valued field(s): et/`                                          | More than 1 `et/` was given in the command.                                                  |
 | `This schedule already exists in the address book`                                                                 | There is a schedule for the same tutor with the same start and end time in the address book. |
 | `This tutor has a clashing schedule in the address book`                                                           | There is a schedule for the same tutor with overlapping times in the address book.           |
+| `Schedules start time must be before its end time and both should be on the same day`                              | The provided start time is either before the end time or they are not on the same day.       |
 
 Refer to [input information](#input-examples) for details about valid inputs.
 
@@ -760,7 +761,7 @@ Here are some inputs you might come across in the User Guide:
 | `p/PHONE NUMBER`    | Refers to the phone number of the tutor.          | Only contain numbers, and should be at least 3 <br/>digits long.                             |
 | `e/EMAIL`           | Refers to the email address of the tutor.         | Of the format local-part@domain[<sup>1</sup>](#note1).                                       |
 | `st/START_TIME`     | Refers to the start time of the schedule.         | Only datetime in `yyyy-MM-ddTHH:mm`[<sup>2</sup>](#note2) format is accepted.                |
-| `et/END_TIME`       | Refers to the end time of the schedule.           | Only datetime in `yyyy-MM-ddTHH:mm`[<sup>2</sup>](#note2) format is accepted.                                      |
+| `et/END_TIME`       | Refers to the end time of the schedule.           | Only datetime in `yyyy-MM-ddTHH:mm`[<sup>2</sup>](#note2) format is accepted.                |
 | `m/SCHEDULE_STATUS` | Refers to the status of schedule in the list.     | Only numerical inputs of 0 for MISSED status and 1 for COMPLETED status is accepted          |
 | `TUTOR_INDEX`       | Refers to the position of tutor in the list.      | Only numerical input that ranges from 1 to the last tutor shown in the list of tutors.       |
 | `SCHEDULE_INDEX`    | Refers to the position of schedule in the list.   | Only numerical input that ranges from 1 to the last schedule shown in the list of schedules. |
@@ -791,20 +792,20 @@ The domain name must:
 
 ## Command summary
 
-| Action              | Format, Examples                                                                                             |
-|---------------------|--------------------------------------------------------------------------------------------------------------|
-| **Add Tutor**       | `add-t n/NAME p/PHONE NUMBER e/EMAIL` <br> e.g., `add-t n/John Doe p/98765432 e/johnd@example.com`           |
-| **Edit Tutor**      | `edit-t TUTOR_INDEX n/NAME p/PHONE_NUMBER e/EMAIL`<br> e.g.,`edit-t 2 n/James Lee e/jameslee@example.com`    |
-| **List Tutor**      | `list-t`                                                                                                     |
-| **Delete Tutor**    | `delete-t TUTOR_INDEX`<br> e.g., `delete-t 3`                                                                |
-| **Find Tutor**      | `find-t KEYWORD [MORE_KEYWORDS]`<br> e.g., `find-t James Jake`                                               |
-| **Add Schedule**    | `add-s TUTOR_INDEX st/START_TIME et/END_TIME` <br> e.g., `add-s ti/1 st/2023-09-15T09:00 e/2023-09-15T11:00` |
-| **Edit Schedule**   | `edit-s SCHEDULE_INDEX [st/START_TIME] [etEND_TIME]` <br> e.g., `edit-s 1 st/2023-09-15T13:00`               |
-| **List Schedule**   | `list-s`, `list-s KEYWORD [MORE_KEYWORDS]` <br> e.g., `list-s Alice Pauline`                                 |
-| **Mark Schedule**   | `mark SCHEDULE_INDEX m/SCHEDULE_STATUS`<br> e.g., `mark 3 m/0`                                               |
-| **Unmark Schedule** | `unmark SCHEDULE_INDEX`<br> e.g., `unmark 3`                                                                 |
-| **Delete Schedule** | `delete-s SCHEDULE_INDEX`<br> e.g., `delete-s 3`                                                             |
-| **Change Theme**    | `theme NEW_THEME` <br> e.g., `theme dark`                                                                    |
-| **Clear**           | `clear`                                                                                                      |
+| Action              | Format, Examples                                                                                           |
+|---------------------|------------------------------------------------------------------------------------------------------------|
+| **Add Tutor**       | `add-t n/NAME p/PHONE NUMBER e/EMAIL` <br> e.g., `add-t n/John Doe p/98765432 e/johnd@example.com`         |
+| **Edit Tutor**      | `edit-t TUTOR_INDEX n/NAME p/PHONE_NUMBER e/EMAIL`<br> e.g.,`edit-t 2 n/James Lee e/jameslee@example.com`  |
+| **List Tutor**      | `list-t`                                                                                                   |
+| **Delete Tutor**    | `delete-t TUTOR_INDEX`<br> e.g., `delete-t 3`                                                              |
+| **Find Tutor**      | `find-t KEYWORD [MORE_KEYWORDS]`<br> e.g., `find-t James Jake`                                             |
+| **Add Schedule**    | `add-s TUTOR_INDEX st/START_TIME et/END_TIME` <br> e.g., `add-s 1 st/2023-09-15T09:00 et/2023-09-15T11:00` |
+| **Edit Schedule**   | `edit-s SCHEDULE_INDEX [st/START_TIME] [et/END_TIME]` <br> e.g., `edit-s 1 st/2023-09-15T13:00`            |
+| **List Schedule**   | `list-s`, `list-s KEYWORD [MORE_KEYWORDS]` <br> e.g., `list-s Alice Pauline`                               |
+| **Mark Schedule**   | `mark SCHEDULE_INDEX m/SCHEDULE_STATUS`<br> e.g., `mark 3 m/0`                                             |
+| **Unmark Schedule** | `unmark SCHEDULE_INDEX`<br> e.g., `unmark 3`                                                               |
+| **Delete Schedule** | `delete-s SCHEDULE_INDEX`<br> e.g., `delete-s 3`                                                           |
+| **Change Theme**    | `theme NEW_THEME` <br> e.g., `theme dark`                                                                  |
+| **Clear**           | `clear`                                                                                                    |
 
 [Back To Top](#table-of-contents)
