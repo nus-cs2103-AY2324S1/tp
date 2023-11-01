@@ -70,6 +70,7 @@ public class Messages {
                 .append(person.getPolicy().toDisplay(false))
                 .append("\nTags: ");
         person.getTags().forEach(builder::append);
+        builder.append("\nRemark: ").append(person.getRemark());
         return builder.toString();
     }
 
