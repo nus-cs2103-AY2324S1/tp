@@ -31,15 +31,20 @@ public class MainWindow extends UiPart<Stage> {
     private Logic logic;
 
     // Independent Ui parts residing in this Ui container
+    private CourseListPanel courseListPanel;
     private PersonListPanel personListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+    private StatusBarFooter statusBarFooter;
 
     @FXML
     private StackPane commandBoxPlaceholder;
 
     @FXML
     private MenuItem helpMenuItem;
+
+    @FXML
+    private StackPane courseListPanelPlaceholder;
 
     @FXML
     private StackPane personListPanelPlaceholder;
@@ -110,13 +115,17 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
+        courseListPanel = new CourseListPanel(logic, logic.getCourseList(), logic.getObservableCourseCode());
+        courseListPanelPlaceholder.getChildren().add(courseListPanel.getRoot());
+
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
-        StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
+        statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath(),
+                logic.getUnfilteredPersonList(), logic.getFilteredPersonList());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
@@ -163,8 +172,16 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
+    public CourseListPanel getCourseListPanel() {
+        return courseListPanel;
+    }
+
     public PersonListPanel getPersonListPanel() {
         return personListPanel;
+    }
+
+    public StatusBarFooter getStatusBarFooter() {
+        return statusBarFooter;
     }
 
     /**
