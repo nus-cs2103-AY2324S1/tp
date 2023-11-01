@@ -55,15 +55,16 @@ public class Messages {
         return builder.toString();
     }
 
+    /**
+     * Formats the OvertimeHours of {@code employee} for display to the user.
+     */
     public static String formatOvertimeHours(Employee employee) {
         final StringBuilder builder = new StringBuilder();
         builder.append(employee.getName())
                 .append("; Position: ")
                 .append(employee.getPosition())
                 .append("; Id: ")
-                .append(employee.getId())
-                .append("; Overtime hours: ")
-                .append(employee.getOvertimeHours());
+                .append(employee.getId());
         return builder.toString();
     }
 

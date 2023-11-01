@@ -11,7 +11,14 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.department.Department;
-import seedu.address.model.employee.*;
+import seedu.address.model.employee.Email;
+import seedu.address.model.employee.Id;
+import seedu.address.model.employee.Leave;
+import seedu.address.model.employee.Name;
+import seedu.address.model.employee.OvertimeHours;
+import seedu.address.model.employee.Phone;
+import seedu.address.model.employee.Position;
+import seedu.address.model.employee.Salary;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser

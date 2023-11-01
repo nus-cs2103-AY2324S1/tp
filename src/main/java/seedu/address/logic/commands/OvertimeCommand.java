@@ -5,6 +5,9 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_AMOUNT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_OPERATION;
 
+import java.util.List;
+import java.util.Objects;
+
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -12,10 +15,7 @@ import seedu.address.model.employee.Employee;
 import seedu.address.model.employee.Id;
 import seedu.address.model.employee.OvertimeHours;
 
-import java.util.List;
-import java.util.Objects;
-
-/*
+/**
  * Updates the overtime hours of an employee.
  */
 public class OvertimeCommand extends Command {
@@ -38,6 +38,9 @@ public class OvertimeCommand extends Command {
     private final OvertimeHours overtimeHoursToChange;
     private final String operation;
 
+    /**
+     * Creates an OvertimeCommand to update the overtime hours of the specified {@code Employee}
+     */
     public OvertimeCommand(Id targetId, OvertimeHours overtimeHoursToChange, String operation) {
         this.targetId = targetId;
         this.overtimeHoursToChange = overtimeHoursToChange;
