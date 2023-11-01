@@ -159,12 +159,14 @@ Expected output upon success:<br>
 Expected output upon failure:
 * Format error in any field:<br>
 `Error: Please adhere to the format for the fields`
-* No field given:<br>
-`Invalid command format!  
-  find: Finds all persons whose names contain any of the specified fields (case-insensitive for values) and displays them as a list with index numbers.  
-  Parameters: [n/NAME] [l/LICENCE PLATE] [n/NAME] [i/NRIC] [c/CONTACT NUMBER] [l/LICENCE PLATE] [e/EMAIL][c/COMPANY] [pn/POLICY NUMBER] [pi/POLICY ISSUE DATE] [pe/POLICY EXPIRY DATE]  
-  At least one parameter must be present.  
-  Example: find n/Alice Rodriguez`
+* No field given:
+```
+Invalid command format!  
+find: Finds all persons whose names contain any of the specified fields (case-insensitive for values) and displays them as a list with index numbers.  
+Parameters: [n/NAME] [l/LICENCE PLATE] [n/NAME] [i/NRIC] [c/CONTACT NUMBER] [l/LICENCE PLATE] [e/EMAIL][c/COMPANY] [pn/POLICY NUMBER] [pi/POLICY ISSUE DATE] [pe/POLICY EXPIRY DATE]  
+At least one parameter must be present.  
+Example: find n/Alice Rodriguez
+```
 * Field flag given but no value:<br>
 `Error: Please give a value in the field(s) indicated`
 
@@ -233,11 +235,13 @@ Expected output upon failure:
 `Error: The value has to be between 0 and 7305 (both inclusive)`
 * `NUMBER_OF_DAYS` not numeric:<br>
 `Invalid command format! Error: The value is not a number`
-* `NUMBER_OF_DAYS` not given:<br>
-`Invalid command format!  
-  remind: Finds all persons whose policy expiry dates is within the specified number of days.  
-  Parameters: Number of days  
-  Example: remind 30`
+* `NUMBER_OF_DAYS` not given:
+```
+Invalid command format!  
+remind: Finds all persons whose policy expiry dates is within the specified number of days.  
+Parameters: Number of days  
+Example: remind 30
+```
 
 
 ### Add or remove remark to a client : `remark`
@@ -263,10 +267,12 @@ Expected output upon success:<br>
 
 Expected output upon failure:
 * Invalid `INDEX` parameter or no `INDEX` :<br>
-`Invalid command format!  
-  remark: Edits the remark of the person identified by the index number used in the last person listing. Existing remark will be overwritten by the input.
-  Parameters: INDEX (must be a positive integer) r/REMARK
-  Example: remark 1 r/ Likes to swim.`
+```
+Invalid command format!  
+remark: Edits the remark of the person identified by the index number used in the last person listing. Existing remark will be overwritten by the input.
+Parameters: INDEX (must be a positive integer) r/REMARK
+Example: remark 1 r/ Likes to swim.
+```
 
 
 ### Clearing all entries : `clear`
