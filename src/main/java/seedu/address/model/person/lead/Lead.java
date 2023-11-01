@@ -34,6 +34,26 @@ public class Lead {
         return lead.equalsIgnoreCase("HOT")
                 || lead.equalsIgnoreCase("WARM")
                 || lead.equalsIgnoreCase("COLD");
+
+    /**
+     * Returns true if the lead is hot.
+     */
+    public boolean isHot() {
+        return leadType.equals(LeadType.HOT);
+    }
+
+    /**
+     * Returns true if the lead is warm.
+     */
+    public boolean isWarm() {
+        return leadType.equals(LeadType.WARM);
+    }
+
+    /**
+     * Returns true if the lead is cold.
+     */
+    public boolean isCold() {
+        return leadType.equals(LeadType.COLD);
     }
 
     @Override
