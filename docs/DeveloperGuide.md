@@ -171,7 +171,7 @@ This section describes some noteworthy details on how certain features are imple
   * Previous help feature simply opens a page with a link to the website, this is bad because:
     * The flow is lengthy
     * User may not be able to access website when operating without the internet
-    
+
     Therefore, we want to make this better by simplifying the flow. We do this by adding:
     * Making the help command return things in the application console
     * Letting users enter an extra argument to specify what command they need guiding on
@@ -456,7 +456,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 1c. User inputs a note that does not exist.
 
     * 1c1. KeepInTouch shows a message indicating that the note cannot be found.
-  
+
       Use case ends.
 
 **Use case: UC08 - Add an event**
