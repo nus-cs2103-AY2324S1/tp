@@ -21,4 +21,6 @@ public class CliSyntax {
     public static final Prefix PREFIX_VALUE = new Prefix("/v");
     public static final Prefix PREFIX_REASON = new Prefix("/r");
     public static final Prefix PREFIX_MONTH_YEAR = new Prefix("/t");
+    public static final Prefix PREFIX_SLASH = new Prefix("/");
+
 }
