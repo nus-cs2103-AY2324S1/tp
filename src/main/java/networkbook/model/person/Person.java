@@ -57,6 +57,14 @@ public class Person implements Identifiable<Person> {
         if (System.getProperty("os.name").startsWith("Windows")) {
             LOGGER.info(String.format(EMAIL_OPENING_MESSAGE, email.getValue(), "Windows"));
             Desktop.getDesktop().mail(URI.create(emailUri));
+        } else if (System.getProperty("os.name").startsWith("Mac OS")) {
+            LOGGER.info(String.format(LINK_OPENING_MESSAGE, email.getValue(), "Mac OS"));
+            Runtime.getRuntime().exec(new String[] { "open", emailUri });
+        } else if (System.getProperty("os.name").startsWith("Linux")) {
+            LOGGER.info(String.format(EMAIL_OPENING_MESSAGE, email.getValue(), "Ubuntu"));
+            Runtime.getRuntime().exec(new String[] { "xdg-open", emailUri });
+        } else {
+            LOGGER.warning(String.format("Unrecognised OS: %s", System.getProperty("os.name")));
         }
     };
 
