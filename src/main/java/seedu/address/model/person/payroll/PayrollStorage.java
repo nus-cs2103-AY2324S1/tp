@@ -5,6 +5,9 @@ import java.util.ArrayList;
 
 import seedu.address.model.person.Payroll;
 
+/**
+ * Stores the payrolls of all employees.
+ */
 public class PayrollStorage {
     private ArrayList<Payroll> payrolls;
 

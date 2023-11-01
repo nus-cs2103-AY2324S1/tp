@@ -30,9 +30,18 @@ public class Payroll {
         this.paymentDate = localDate.plusMonths(1).withDayOfMonth(5);
     }
 
+    /**
+     * Constructs a {@code Payroll}.
+     *
+     * @param salary This contains the details of the person's salary.
+     *               E.g. basic salary, deductions and bonuses.
+     * @param startDate The start date of the payroll.
+     * @param endDate The end date of the payroll.
+     * @param paymentDate The payment date of the payroll.
+     */
     public Payroll(Salary salary, String startDate, String endDate, String paymentDate) {
         this.salary = salary;
-        this.startDate = LocalDate.parse(startDate,DATE_TIME_FORMATTER);
+        this.startDate = LocalDate.parse(startDate, DATE_TIME_FORMATTER);
         this.endDate = LocalDate.parse(endDate, DATE_TIME_FORMATTER);
         this.paymentDate = LocalDate.parse(paymentDate, DATE_TIME_FORMATTER);
     }

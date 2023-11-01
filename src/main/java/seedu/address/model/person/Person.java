@@ -36,7 +36,8 @@ public class Person {
      * Every field must be present and not null.
      */
     public Person(Name name, Phone phone, Email email, Address address, BankAccount bankAccount, JoinDate joinDate,
-            Salary salary, AnnualLeave annualLeave, AttendanceStorage attendanceStorage, PayrollStorage payrollStorage) {
+            Salary salary, AnnualLeave annualLeave,
+                  AttendanceStorage attendanceStorage, PayrollStorage payrollStorage) {
         requireAllNonNull(name, phone, email, address, bankAccount, joinDate, salary, annualLeave);
         this.name = name;
         this.phone = phone;

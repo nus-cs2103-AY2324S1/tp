@@ -12,6 +12,9 @@ import seedu.address.model.person.Deduction;
 import seedu.address.model.person.Payroll;
 import seedu.address.model.person.Salary;
 
+/**
+ * Jackson-friendly version of {@link Payroll}.
+ */
 public class JsonAdaptedPayroll {
 
     private final String salary;
@@ -21,6 +24,9 @@ public class JsonAdaptedPayroll {
     private final List<JsonAdaptedBenefit> benefits = new ArrayList<>();
     private final List<JsonAdaptedDeduction> deductions = new ArrayList<>();
 
+    /**
+     * Constructs a {@code JsonAdaptedPayroll} with the given payroll details.
+     */
     @JsonCreator
     public JsonAdaptedPayroll(@JsonProperty("salary") String salary, @JsonProperty("startDate") String startDate,
             @JsonProperty("endDate") String endDate, @JsonProperty("paymentDate") String paymentDate,
@@ -34,6 +40,9 @@ public class JsonAdaptedPayroll {
         this.deductions.addAll(deductions);
     }
 
+    /**
+     * Converts a given {@code Payroll} into this class for Jackson use.
+     */
     public JsonAdaptedPayroll(Payroll payroll) {
         salary = payroll.getBasicSalaryString();
         startDate = payroll.getStartDateString();
@@ -51,6 +60,9 @@ public class JsonAdaptedPayroll {
                 .collect(Collectors.toList()));
     }
 
+    /**
+     * Converts this Jackson-friendly adapted payroll object into the model's {@code Payroll} object.
+     */
     public Payroll toModelType() {
         final ArrayList<Benefit> personBenefits = new ArrayList<>();
         final ArrayList<Deduction> personDeductions = new ArrayList<>();
