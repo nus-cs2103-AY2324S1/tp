@@ -111,11 +111,14 @@ Below is a quick overview of the various components of our interface.
 
 ![ui overview](images/uiOverview.png)
 
-| Component      | Description                                                                                | 
-|----------------|--------------------------------------------------------------------------------------------|
-| Command Box    | You will enter your [commands](#glossary) along with its [parameters](#glossary) here.     | 
-| Result Display | Displays the results of your commands.<br/>Any error messages will also be displayed here. | 
-| Tutor Details  | Contains information related to the tutor like name, phone number etc.                     |
+| Component        | Description                                                                                | 
+|------------------|--------------------------------------------------------------------------------------------|
+| Command Box      | You will enter your [commands](#glossary) along with its [parameters](#glossary) here.     |
+| Menu Bar         | Contains dropdown menu options for the application.                                        |
+| Result Display   | Displays the results of your commands.<br/>Any error messages will also be displayed here. | 
+| Tutor Details    | Contains information related to the tutor like name, phone number etc.                     |
+| Schedule Details | Contains information related to the schedule like assigned tutor, start time etc.          |
+| Current Time     | Displays the current date and time.                                                        |
 
 [Back To Top](#table-of-contents)
 
