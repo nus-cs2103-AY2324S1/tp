@@ -241,6 +241,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public void resetSelectedStudent() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public Student getStudent(StudentNumber studentNumber) {
             throw new AssertionError("This method should not be called.");
         }
