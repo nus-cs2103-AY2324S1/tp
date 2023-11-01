@@ -28,16 +28,15 @@ public class MainWindow extends UiPart<Stage> {
 
     private final Logger logger = LogsCenter.getLogger(getClass());
 
-    private Stage primaryStage;
-    private Logic logic;
+    private final Stage primaryStage;
+    private final Logic logic;
 
     // Independent Ui parts residing in this Ui container
     private PersonListPanel personListPanel;
 
     private PersonProfile personProfile;
     private ResultDisplay resultDisplay;
-    private HelpWindow helpWindow;
-    private boolean isInViewMode = false;
+    private final HelpWindow helpWindow;
     @FXML
     private StackPane commandBoxPlaceholder;
 
@@ -55,6 +54,9 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane statusbarPlaceholder;
+
+    @FXML
+    private CommandBox commandBox;
 
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
@@ -127,6 +129,7 @@ public class MainWindow extends UiPart<Stage> {
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
+        this.commandBox = commandBox;
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
     }
 
@@ -177,7 +180,8 @@ public class MainWindow extends UiPart<Stage> {
     @FXML
     private void handleView(Person personToView) {
         if (personListPanelPlaceholder.isVisible()) {
-            personProfile = new PersonProfile(personToView);
+            personProfile = new PersonProfile(personToView, this);
+            //personProfile = new PersonProfile(this);
             personProfilePlaceholder.getChildren().add(personProfile.getRoot());
             personProfilePlaceholder.setVisible(true);
             personListPanelPlaceholder.setVisible(false);
@@ -226,10 +230,7 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
-    /**
-     * Returns the boolean value that checks whether the current UI is in profile view page or normal foster list page.
-     */
-    public boolean getIsInViewMode() {
-        return this.isInViewMode;
+    protected void sendFeedback(String feedback) {
+        resultDisplay.setFeedbackToUser(feedback);
     }
 }

@@ -44,11 +44,11 @@ public class AnimalType {
         requireNonNull(availability);
         requireNonNull(value);
 
-        if (availability.equals(new Availability("Available"))) {
+        if (availability.equals(Availability.AVAILABLE)) {
             checkArgument(isValidAnimalType(value, VALIDATION_REGEX_AVAILABLE), MESSAGE_CONSTRAINTS);
-        } else if (availability.equals(new Availability("NotAvailable"))) {
+        } else if (availability.equals(Availability.NOT_AVAILABLE)) {
             checkArgument(isValidAnimalType(value, VALIDATION_REGEX_NOT_AVAILABLE), MESSAGE_CONSTRAINTS);
-        } else if (availability.equals(new Availability("nil"))) {
+        } else if (availability.equals(Availability.NIL_AVAILABILITY)) {
             checkArgument(isValidAnimalType(value, VALIDATION_REGEX_NIL), MESSAGE_CONSTRAINTS);
         }
 
@@ -58,6 +58,15 @@ public class AnimalType {
 
     public static boolean isValidAnimalType(String test, String validationRegex) {
         return test.matches(validationRegex);
+    }
+
+    /**
+     * Checks if the given string can be a valid Animal Type under any situation.
+     *
+     * @return true if the animal type matches any possible validation.
+     */
+    public static boolean isValidAnimalType(String test) {
+        return test.matches(VALIDATION_REGEX_AVAILABLE) || test.matches(VALIDATION_REGEX_NOT_AVAILABLE);
     }
 
     @Override

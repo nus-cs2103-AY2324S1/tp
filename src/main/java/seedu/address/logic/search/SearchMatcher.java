@@ -54,7 +54,20 @@ abstract class SearchMatcher {
      */
     SearchMatcher and(SearchMatcher other) {
         Objects.requireNonNull(other);
-        return new AndSearchMatcher(this, other);
+        return new BinarySearchMatcher(this, other, '&') {
+            @Override
+            FieldRanges test(Map<String, String> p) {
+                FieldRanges rangeA = a.test(p);
+                if (!FieldRanges.isMatch(rangeA)) {
+                    return null;
+                }
+                FieldRanges rangeB = b.test(p);
+                if (!FieldRanges.isMatch(rangeB)) {
+                    return null;
+                }
+                return FieldRanges.union(rangeA, rangeB);
+            }
+        };
     }
 
     /**
@@ -65,7 +78,20 @@ abstract class SearchMatcher {
      *         predicate.
      */
     SearchMatcher negate() {
-        return new NotSearchMatcher(this);
+        SearchMatcher old = this;
+        return new SearchMatcher() {
+            @Override
+            FieldRanges test(Map<String, String> p) {
+                FieldRanges ranges = old.test(p);
+                if (!FieldRanges.isMatch(ranges)) {
+                    ranges = new FieldRanges();
+                    ranges.setIsMatch(true);
+                } else {
+                    ranges = null;
+                }
+                return ranges;
+            }
+        };
     }
 
     /**
@@ -85,7 +111,12 @@ abstract class SearchMatcher {
      */
     SearchMatcher or(SearchMatcher other) {
         Objects.requireNonNull(other);
-        return new OrSearchMatcher(this, other);
+        return new BinarySearchMatcher(this, other, '|') {
+            @Override
+            FieldRanges test(Map<String, String> p) {
+                return FieldRanges.union(a.test(p), b.test(p));
+            }
+        };
     }
 
     protected void initFlags() {

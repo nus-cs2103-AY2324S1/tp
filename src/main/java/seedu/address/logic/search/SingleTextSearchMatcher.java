@@ -1,9 +1,11 @@
 package seedu.address.logic.search;
 
 import java.util.AbstractMap;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -12,6 +14,14 @@ import java.util.regex.Pattern;
  * Applies full word matching on tags regardless of the flag's presence.
  */
 class SingleTextSearchMatcher extends SearchMatcher {
+    private static final Set<String> fullMatches;
+
+    static {
+        fullMatches = new HashSet<>();
+        fullMatches.add("housing");
+        fullMatches.add("availability");
+    }
+
     private final String textToFind;
 
     public SingleTextSearchMatcher(String search) {
@@ -39,7 +49,9 @@ class SingleTextSearchMatcher extends SearchMatcher {
     private Map.Entry<String, Range> getFieldRangeEntryElseNull(Map.Entry<String, String> entry) {
         Range range;
         if (entry.getValue() == null) {
-            range = getRangeIfMatchElseNull(entry.getKey(), true);
+            range = getRangeIfMatchElseNull(entry.getKey(), false);
+        } else if (fullMatches.contains(entry.getKey())) {
+            range = getRangeIfMatchElseNull(entry.getValue(), true);
         } else {
             range = getRangeIfMatchElseNull(entry.getValue(), isFlagApplied(Flag.FULL_WORD_MATCHING_ONLY));
         }
@@ -50,12 +62,7 @@ class SingleTextSearchMatcher extends SearchMatcher {
     }
 
     private Range getRangeIfMatchElseNull(String target, boolean isFullWord) {
-        int index;
-        if (isFullWord) {
-            index = index(target, true);
-        } else {
-            index = index(target, false);
-        }
+        int index = index(target, isFullWord);
         if (index == -1) {
             return null;
         }
