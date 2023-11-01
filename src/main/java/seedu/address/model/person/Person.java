@@ -39,6 +39,7 @@ public class Person {
     private final Availability availability;
     private final Housing housing;
     private final AnimalType animalType;
+    private String note;
 
     /**
      * Constructor for Person object. Ensures that required fields are not null.
@@ -138,6 +139,14 @@ public class Person {
         return address;
     }
 
+    public String getNote() {
+        return Objects.requireNonNullElse(note, "");
+    }
+
+    public void setNote(String note) {
+        this.note = note;
+    }
+
     /**
      * Returns a map of fields and their existing attributes as strings.
      * Intended for use with predicates generated through the find command.
@@ -155,9 +164,8 @@ public class Person {
         tryPut(map, "availability", getAvailability());
         tryPut(map, "animal name", getAnimalName());
         tryPut(map, "animal type", getAnimalType());
-        for (Tag tag : getTags()) {
-            map.put(tag.tagName, null);
-        }
+        getTags().forEach(tag -> map.put(tag.tagName, null));
+        tryPut(map, "note", getNote());
         return map;
     }
 
@@ -236,5 +244,4 @@ public class Person {
                 .add("housing", housing)
                 .toString();
     }
-
 }

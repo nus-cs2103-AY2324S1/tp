@@ -106,9 +106,12 @@ public class PersonProfile extends UiPart<Region> {
     private final MainWindow mainWindow;
     private Person person;
     private final Map<Field, String> fields = new EnumMap<>(Field.class);
-    private final Set<String> tags = new HashSet<>();
+    private Set<Tag> tags;
+    private String note;
 
     private final Map<Field, PersonProfileField> uiElements = new EnumMap<>(Field.class);
+    private PersonProfileTags tagUI;
+    private PersonProfileNote noteUI;
     private final Map<Event, List<Runnable>> eventHandlers = new EnumMap<>(Event.class);
     // endregion
 
@@ -131,7 +134,9 @@ public class PersonProfile extends UiPart<Region> {
         fields.put(Field.AVAILABILITY, person.getAvailability().toString());
         fields.put(Field.ANIMAL_NAME, person.getAnimalName().toString());
         fields.put(Field.ANIMAL_TYPE, person.getAnimalType().toString());
-        person.getTags().stream().map(Tag::getTagName).forEach(tags::add);
+        tags = new HashSet<>();
+        tags.addAll(person.getTags());
+        note = person.getNote();
         initialize();
     }
 
@@ -144,6 +149,7 @@ public class PersonProfile extends UiPart<Region> {
         this.person = null;
 
         Arrays.stream(Field.values()).forEach(field -> fields.put(field, null));
+        tags = new HashSet<>();
         initialize();
     }
 
@@ -168,7 +174,10 @@ public class PersonProfile extends UiPart<Region> {
         uiElements.values().stream()
                 .map(UiPart::getRoot)
                 .forEach(vboxChildren::add);
-        //todo deal with tags
+        tagUI = new PersonProfileTags(this);
+        vboxChildren.add(tagUI.getRoot());
+        noteUI = new PersonProfileNote(this);
+        vboxChildren.add(noteUI.getRoot());
     }
 
     // endregion
@@ -213,13 +222,8 @@ public class PersonProfile extends UiPart<Region> {
         Name animalName = new Name(getNonNullOrNil(Field.ANIMAL_NAME));
         AnimalType animalType = new AnimalType(getNonNullOrNil(Field.ANIMAL_TYPE), availability);
 
-        this.person = new Person(name, phone, email, address, housing, availability, animalName, animalType, getTags());
-    }
-
-    private Set<Tag> getTags() {
-        Set<Tag> set = new HashSet<>();
-        tags.stream().map(Tag::new).forEach(set::add);
-        return set;
+        this.person = new Person(name, phone, email, address, housing, availability, animalName, animalType, this.tags);
+        person.setNote(note);
     }
 
     private boolean handleAvailabilityGroupInvalid() {
@@ -249,7 +253,8 @@ public class PersonProfile extends UiPart<Region> {
     }
 
     private boolean editingInProgress() {
-        return uiElements.values().stream().anyMatch(PersonProfileField::isEditing);
+        return uiElements.values().stream().anyMatch(PersonProfileField::isEditing) ||
+                tagUI.isEditing() || noteUI.isEditing();
     }
 
     private void sendFeedback(String string) {
@@ -368,6 +373,14 @@ public class PersonProfile extends UiPart<Region> {
         fields.put(field, value);
     }
 
+    void updateTags(Set<Tag> tags) {
+        this.tags = tags;
+    }
+
+    void updateNote(String note) {
+        this.note = note;
+    }
+
     void triggerEvent(Event event) {
         List<Runnable> runnables = eventHandlers.get(event);
         runnables.forEach(Runnable::run);
@@ -377,12 +390,28 @@ public class PersonProfile extends UiPart<Region> {
         sendFeedback(field.getHint());
     }
 
+    void sendHint(String hint) {
+        sendFeedback(hint);
+    }
+
     String getValueOfField(Field field) {
         return getNonNullOrNil(field);
     }
 
+    Set<Tag> getTags() {
+        return tags;
+    }
+
+    String getNote() {
+        return note;
+    }
+
     void sendInvalidInput(Field field) {
         sendFeedback(INVALID_VALUE + field.getDisplayName() + "\n" + field.getHint());
+    }
+
+    void sendInvalidInput(String fieldName, String message) {
+        sendFeedback(INVALID_VALUE + fieldName + "\n" + message);
     }
 
     // endregion
@@ -396,6 +425,20 @@ public class PersonProfile extends UiPart<Region> {
      */
     public void setFocus(Field field) {
         uiElements.get(field).setFocus();
+    }
+
+    /**
+     * Sets focus to the UI element responsible for editing tags.
+     */
+    public void setFocusTags() {
+        tagUI.setFocus();
+    }
+
+    /**
+     * Sets focus to the UI element responsible for editing notes.
+     */
+    public void setFocusNotes() {
+        noteUI.setFocus();
     }
 
     /**
