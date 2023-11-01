@@ -23,7 +23,7 @@ import networkbook.testutil.TypicalIndexes;
 
 public class ParserUtilTest {
     private static final String INVALID_NAME = "R@chel";
-    private static final String INVALID_PHONE = "+651234";
+    private static final String INVALID_PHONE = "+ 651234";
     private static final String INVALID_LINK = "facebookcom";
     private static final String INVALID_GRADUATION = "2024";
     private static final String INVALID_COURSE = "";
