@@ -1,15 +1,10 @@
 package seedu.address.logic.commands;
 
-import seedu.address.logic.LogicManager;
-import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
-import seedu.address.storage.StorageManager;
 
-import java.io.IOException;
-import java.util.Objects;
-
-import static java.util.Objects.requireNonNull;
-
+/**
+ * Undoes the last command
+ */
 public class UndoCommand extends Command {
     public static final String COMMAND_WORD = "undo";
     public static final String MESSAGE_SUCCESS = "Undo Completed";

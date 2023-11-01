@@ -25,6 +25,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
+import seedu.address.commons.exceptions.DataLoadingException;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.ListCommand;
@@ -73,7 +74,8 @@ public class LogicManagerTest {
     }
 
     @Test
-    public void execute_viewModeCommandExecutionError_throwsParseException() throws CommandException, ParseException {
+    public void execute_viewModeCommandExecutionError_throwsParseException() throws CommandException, ParseException,
+            DataLoadingException, IOException {
         String listCommand = "list";
         assertViewModeParseException(listCommand, MESSAGE_UNAVAILABLE_COMMAND_IN_VIEW_MODE);
     }
@@ -97,14 +99,16 @@ public class LogicManagerTest {
     }
 
     @Test
-    public void execute_getIsViewCommandMethod_success() throws CommandException, ParseException {
+    public void execute_getIsViewCommandMethod_success() throws CommandException, ParseException, DataLoadingException,
+            IOException {
         String viewCommand = "view 1";
         CommandResult parsedCommand = logic.execute(viewCommand);
         assertTrue(logic.getIsViewCommand());
     }
 
     @Test
-    public void execute_getIsViewExitCommandMethod_success() throws CommandException, ParseException {
+    public void execute_getIsViewExitCommandMethod_success() throws CommandException, ParseException,
+            DataLoadingException, IOException {
         String viewCommand = "view 1";
         String viewExitCommand = "exit";
         CommandResult parsedViewCommand = logic.execute(viewCommand);
@@ -131,7 +135,7 @@ public class LogicManagerTest {
     }
 
     private void assertAddressBookCommandSuccess(String inputCommand, String expectedMessage,
-            Model expectedModel) throws CommandException, ParseException {
+            Model expectedModel) throws CommandException, ParseException, DataLoadingException, IOException {
         CommandResult result = logic.execute(inputCommand);
         assertEquals(expectedMessage, result.getFeedbackToUser());
         assertEquals(expectedModel, model);
@@ -145,7 +149,8 @@ public class LogicManagerTest {
      * - the internal model manager state is the same as that in {@code expectedModel} <br>
      */
     private void assertViewModeCommandSuccess(String inputCommand, String expectedMessage,
-                                                 Model expectedModel) throws CommandException, ParseException {
+                                                 Model expectedModel) throws CommandException, ParseException,
+            DataLoadingException, IOException {
         String viewCommand = "view 1";
         CommandResult viewCommandResult = logic.execute(viewCommand);
         CommandResult result = logic.execute(inputCommand);
@@ -161,7 +166,7 @@ public class LogicManagerTest {
      * @see #assertCommandFailure(String, Class, String, Model)
      */
     private void assertCommandSuccess(String inputCommand, String expectedMessage,
-            Model expectedModel) throws CommandException, ParseException {
+            Model expectedModel) throws CommandException, ParseException, DataLoadingException, IOException {
         CommandResult result = logic.execute(inputCommand);
         assertEquals(expectedMessage, result.getFeedbackToUser());
         assertEquals(expectedModel, model);
@@ -212,7 +217,7 @@ public class LogicManagerTest {
      * @see #assertViewModeCommandFailure(String, Class, String, Model)
      */
     private void assertViewModeParseException(String inputCommand, String expectedMessage)
-            throws CommandException, ParseException {
+            throws CommandException, ParseException, DataLoadingException, IOException {
         String viewCommand = "view 1";
         CommandResult viewCommandResult = logic.execute(viewCommand);
         assertViewModeCommandFailure(inputCommand, ParseException.class, expectedMessage);
