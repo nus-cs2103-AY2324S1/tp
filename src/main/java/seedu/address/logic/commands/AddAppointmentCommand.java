@@ -55,35 +55,35 @@ public class AddAppointmentCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-
         Patient chosenPatient = findPatient(model);
         Doctor chosenDoctor = findDoctor(model);
-        if (chosenPatient == null) {
-            throw new CommandException(MESSAGE_INVALID_PATIENT);
-        }
-        if (chosenDoctor == null) {
-            throw new CommandException(MESSAGE_INVALID_DOCTOR);
-        }
+        checkPatientAndDoctor(chosenPatient, chosenDoctor);
+        checkValidAppointment(chosenPatient, chosenDoctor, toAdd);
+        chosenPatient.addAppointment(toAdd);
+        chosenDoctor.addAppointment(toAdd);
+        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
+    }
 
-        // check that patient and doctor are not the same person
-        if (chosenPatient.isSamePerson(chosenDoctor)) {
-            throw new CommandException(MESSAGE_SAME_DOCTOR_AND_PATIENT);
-        }
-
-
-        // check that the patient and doctor do not have appointment scheduled at the same time
+    private void checkValidAppointment(Patient chosenPatient, Doctor chosenDoctor, Appointment toAdd)
+            throws CommandException {
         if (chosenPatient.hasAppointmentAt(toAdd.getAppointmentTime())) {
             throw new CommandException(MESSAGE_DUPLICATE_APPOINTMENT_PATIENT);
         }
         if (chosenDoctor.hasAppointmentAt(toAdd.getAppointmentTime())) {
             throw new CommandException(MESSAGE_DUPLICATE_APPOINTMENT_DOCTOR);
         }
-        // add appointment to the specified doctor's appointment set
-        // add appointment to the specified patient's appointment set
-        chosenPatient.addAppointment(toAdd);
-        chosenDoctor.addAppointment(toAdd);
-
-        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
+    }
+    private void checkPatientAndDoctor(Patient chosenPatient, Doctor chosenDoctor) throws CommandException {
+        if (chosenPatient == null) {
+            throw new CommandException(MESSAGE_INVALID_PATIENT);
+        }
+        if (chosenDoctor == null) {
+            throw new CommandException(MESSAGE_INVALID_DOCTOR);
+        }
+        // check that patient and doctor are not the same person
+        if (chosenPatient.isSamePerson(chosenDoctor)) {
+            throw new CommandException(MESSAGE_SAME_DOCTOR_AND_PATIENT);
+        }
     }
 
     private Patient findPatient(Model model) {
