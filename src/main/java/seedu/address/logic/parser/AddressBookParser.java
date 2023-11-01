@@ -99,7 +99,7 @@ public class AddressBookParser {
             return new SortCommandParser().parse(arguments);
 
         case ExportCommand.COMMAND_WORD:
-            return new ExportCommand();
+            return new ExportCommandParser().parse(arguments);
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);

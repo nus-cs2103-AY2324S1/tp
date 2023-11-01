@@ -30,6 +30,7 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.barchartresults.GenderBarChartCommandResult;
 import seedu.address.logic.commands.barchartresults.SecLevelBarChartCommandResult;
 import seedu.address.logic.commands.barchartresults.SubjectBarChartCommandResult;
+import seedu.address.model.ModelManager;
 import seedu.address.model.tag.Subject;
 
 /**
@@ -49,7 +50,7 @@ public class BarChartWindow extends UiPart<Stage> {
     public BarChartWindow(CommandResult commandResult) {
         super(FXML, new Stage());
         barChart = createBarChart(commandResult);
-        exportAsPng();
+        ModelManager.getBarChart(this);
         initialize();
     }
 

@@ -25,6 +25,7 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.tableresults.GenderTableCommandResult;
 import seedu.address.logic.commands.tableresults.SecLevelTableCommandResult;
 import seedu.address.logic.commands.tableresults.SubjectTableCommandResult;
+import seedu.address.model.ModelManager;
 import seedu.address.model.tag.Subject;
 
 /**
@@ -44,7 +45,7 @@ public class TableWindow extends UiPart<Stage> {
     public TableWindow(CommandResult commandResult) {
         super(FXML, new Stage());
         table = createTable(commandResult);
-        exportAsPng();
+        ModelManager.getTable(this);
         initialize();
     }
 

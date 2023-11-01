@@ -20,21 +20,24 @@ import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.SortIn;
 import seedu.address.model.person.Student;
+import seedu.address.model.person.Visual;
 
 public class ExportCommandTest {
 
     @Test
     public void execute_personAcceptedByModel_sortSuccessful() throws Exception {
         ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
+        Visual validVisual = new Visual("TABLE");
 
-        CommandResult commandResult = new ExportCommand().execute(modelStub);
+        CommandResult commandResult = new ExportCommand(validVisual).execute(modelStub);
 
         assertEquals(String.format(ExportCommand.MESSAGE_SUCCESS), commandResult.getFeedbackToUser());
     }
 
     @Test
     public void toStringMethod() {
-        ExportCommand sortCommand = new ExportCommand();
+        Visual validVisual = new Visual("TABLE");
+        ExportCommand sortCommand = new ExportCommand(validVisual);
         String expected = ExportCommand.class.getCanonicalName() + "{}";
         assertEquals(expected, sortCommand.toString());
     }
@@ -116,6 +119,11 @@ public class ExportCommandTest {
         @Override
         public void updateSortedPersonList(SortIn sortIn) {
             throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void export(Visual visual) {
+
         }
 
         /**

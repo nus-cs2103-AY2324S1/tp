@@ -12,14 +12,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.Messages;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Gender;
-import seedu.address.model.person.MrtStation;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Phone;
-import seedu.address.model.person.SecLevel;
-import seedu.address.model.person.SortIn;
+import seedu.address.model.person.*;
 import seedu.address.model.tag.EnrolDate;
 import seedu.address.model.tag.Subject;
 
@@ -264,7 +257,7 @@ public class ParserUtil {
 
 
     /**
-     * Parses {@code String } into a {@code Set<Subject>}.
+     * Parses {@code String } into a {@code SortIn}.
      */
     public static SortIn parseSortIn(String sortIn) throws ParseException {
         requireNonNull(sortIn);
@@ -273,6 +266,18 @@ public class ParserUtil {
             throw new ParseException(SortIn.MESSAGE_CONSTRAINTS);
         }
         return new SortIn(trimmedSortIn);
+    }
+
+    /**
+     * Parses {@code String } into a {@code Visual}.
+     */
+    public static Visual parseVisual(String visual) throws ParseException {
+        requireNonNull(visual);
+        String trimmedVisual = visual.trim();
+        if (!Visual.isValidVisual(trimmedVisual)) {
+            throw new ParseException(Visual.MESSAGE_CONSTRAINTS);
+        }
+        return new Visual(trimmedVisual);
     }
 
     /**

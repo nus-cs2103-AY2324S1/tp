@@ -1,5 +1,6 @@
 package seedu.address.model;
 
+import static java.util.Objects.isNull;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
@@ -10,12 +11,18 @@ import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
+import javafx.scene.chart.BarChart;
+import javafx.scene.control.TableView;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.commands.CommandResult;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.SortIn;
 import seedu.address.model.person.Student;
+import seedu.address.model.person.Visual;
+import seedu.address.ui.BarChartWindow;
+import seedu.address.ui.TableWindow;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -26,6 +33,11 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private FilteredList<Student> filteredStudents;
+    private static TableWindow tableWindow = null;
+    private static BarChartWindow barChartWindow = null;
+
+
+
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -142,6 +154,36 @@ public class ModelManager implements Model {
         addressBook.sort(sequence);
     }
 
+    public static void updateTable(TableView<? extends CommandResult> table) {
+        requireNonNull(table);
+    }
+
+    public static void updateBarChart(BarChart<String, Number> barChart) {
+        requireNonNull(barChart);
+    }
+
+    public static void getTable(TableWindow table) {
+        requireNonNull(table);
+        tableWindow = table;
+    }
+
+    public static void getBarChart(BarChartWindow barChart) {
+        requireNonNull(barChart);
+        barChartWindow = barChart;
+    }
+
+    @Override
+    public void export(Visual visual) throws Exception {
+        requireNonNull(visual);
+        if (visual.toString().equals("TABLE") && !isNull(tableWindow)) {
+            tableWindow.exportAsPng();
+        } else if (visual.toString().equals("BAR") && !isNull(barChartWindow)) {
+            barChartWindow.exportAsPng();
+        } else {
+            throw new Exception();
+        }
+    }
+
     @Override
     public Optional<Student> getStudentFromFilteredPersonListByName(Name name) {
         Optional<Student> targetStudent = Optional.ofNullable(null);
@@ -179,5 +221,7 @@ public class ModelManager implements Model {
                 && userPrefs.equals(otherModelManager.userPrefs)
                 && filteredStudents.equals(otherModelManager.filteredStudents);
     }
+
+
 
 }

@@ -20,6 +20,7 @@ import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.SortIn;
 import seedu.address.model.person.Student;
+import seedu.address.model.person.Visual;
 
 public class SortCommandTest {
 
@@ -119,6 +120,11 @@ public class SortCommandTest {
 
         @Override
         public void updateSortedPersonList(SortIn sortIn) {
+
+        }
+
+        @Override
+        public void export(Visual visual) {
 
         }
 
