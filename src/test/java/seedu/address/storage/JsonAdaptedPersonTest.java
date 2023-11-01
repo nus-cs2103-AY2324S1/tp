@@ -125,4 +125,13 @@ public class JsonAdaptedPersonTest {
         assertThrows(IllegalValueException.class, person::toModelType);
     }
 
+    @Test
+    public void toModelType_duplicateEvents_throwsIllegalValueException() {
+        List<JsonAdaptedEvent> duplicateEvents = new ArrayList<>(VALID_EVENTS);
+        duplicateEvents.addAll(VALID_EVENTS);
+        JsonAdaptedPerson person =
+                new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_TAGS, duplicateEvents);
+        assertThrows(IllegalValueException.class, person::toModelType);
+    }
+
 }
