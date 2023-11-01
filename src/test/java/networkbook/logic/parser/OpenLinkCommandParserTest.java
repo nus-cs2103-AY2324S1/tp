@@ -2,6 +2,7 @@ package networkbook.logic.parser;
 
 import static networkbook.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static networkbook.logic.parser.CommandParserTestUtil.assertParseSuccess;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
@@ -50,5 +51,11 @@ public class OpenLinkCommandParserTest {
                 TypicalIndexes.INDEX_FIRST_PERSON, Index.fromOneBased(1));
         String userInput = TypicalIndexes.INDEX_FIRST_PERSON.getOneBased() + CommandTestUtil.VALID_INDEX_DESC;
         assertParseSuccess(PARSER, userInput, expectedCommand);
+    }
+
+    @Test
+    public void generateCommandString() {
+        String expectedString = "open 1 /index 1";
+        assertEquals(expectedString, OpenLinkCommandParser.generateCommandString(1, 1));
     }
 }
