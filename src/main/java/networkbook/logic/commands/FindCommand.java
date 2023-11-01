@@ -24,7 +24,13 @@ public class FindCommand extends Command {
 
     private final NameContainsKeyTermsPredicate predicate;
 
+    /**
+     * Constructor that instantiates a new {@code FindCommand} object.
+     * This command is not data-changing, so parent constructor is called with false.
+     * @param predicate
+     */
     public FindCommand(NameContainsKeyTermsPredicate predicate) {
+        super(false);
         this.predicate = predicate;
     }
 
