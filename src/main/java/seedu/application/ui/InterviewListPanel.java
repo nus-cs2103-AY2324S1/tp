@@ -10,6 +10,9 @@ import javafx.scene.layout.Region;
 import seedu.application.commons.core.LogsCenter;
 import seedu.application.model.job.interview.Interview;
 
+/**
+ * Panel containing the list of interviews in a specific Job.
+ */
 public class InterviewListPanel extends UiPart<Region> {
     private static final String FXML = "InterviewListPanel.fxml";
     private final Logger logger = LogsCenter.getLogger(InterviewListPanel.class);

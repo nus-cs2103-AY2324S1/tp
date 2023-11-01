@@ -10,8 +10,8 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import seedu.application.commons.core.LogsCenter;
-import seedu.application.model.job.interview.Interview;
 import seedu.application.model.job.Job;
+import seedu.application.model.job.interview.Interview;
 
 /**
  * Panel containing the details of the selected job.
