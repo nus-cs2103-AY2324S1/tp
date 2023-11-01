@@ -36,6 +36,7 @@ import seedu.address.logic.parser.appointmentparser.CancelCommandParser;
 import seedu.address.logic.parser.appointmentparser.FindPatientAppointmentCommandParser;
 import seedu.address.logic.parser.appointmentparser.RescheduleCommandParser;
 import seedu.address.logic.parser.appointmentparser.ScheduleCommandParser;
+import seedu.address.logic.parser.appointmentparser.SortCommandParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.logic.parser.personparser.AddCommandParser;
 import seedu.address.logic.parser.personparser.DeleteCommandParser;
@@ -130,7 +131,7 @@ public class AddressBookParser {
             return new FindPatientAppointmentCommandParser().parse(arguments);
 
         case SortCommand.COMMAND_WORD:
-            return new SortCommand();
+            return new SortCommandParser().parse(arguments);
 
         case DiagnoseCommand.COMMAND_WORD:
             return new DiagnoseCommandParser().parse(arguments);

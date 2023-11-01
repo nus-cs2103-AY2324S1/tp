@@ -66,7 +66,7 @@ public class UndoCommandTest {
     private static final String SAMPLE_UPCOMING_COMMAND = "today";
     private static final String SAMPLE_FIND_PATIENT_APPOINTMENT_COMMAND = "find-appointment john";
 
-    private static final String SAMPLE_SORT_COMMAND = "sort";
+    private static final String SAMPLE_SORT_COMMAND = "sort asc by=date";
 
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~MISC COMMANDS~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     private static final String SAMPLE_HELP_COMMAND = "help";

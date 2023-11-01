@@ -1,13 +1,15 @@
 package seedu.address.model.tag;
 
+import static java.lang.Math.abs;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
+
 
 /**
  * Represents a Priority Tag in the records.
  * Guarantees: immutable; name is valid as declared in {@link #isValidPriorityTag(String)}
  */
-public class PriorityTag extends Tag {
+public class PriorityTag extends Tag implements Comparable<PriorityTag> {
 
     public static final String MESSAGE_CONSTRAINTS = "Priority tag can only take in values: 'high', 'medium' or 'low'";
 
@@ -59,5 +61,15 @@ public class PriorityTag extends Tag {
      */
     public String toString() {
         return priority;
+    }
+
+    @Override
+    public int compareTo(PriorityTag otherTag) {
+        int numerator = priority.charAt(priority.length() - 1)
+                - otherTag.priority.charAt(otherTag.priority.length() - 1);
+        int denominator = numerator == 0
+                ? 1
+                : abs(numerator);
+        return numerator / denominator;
     }
 }

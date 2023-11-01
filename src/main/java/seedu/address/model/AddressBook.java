@@ -159,8 +159,8 @@ public class AddressBook implements ReadOnlyAddressBook {
     /**
      * Sorts appointment list.
      */
-    public void sortAppointmentList() {
-        appointments.sort();
+    public void sortAppointmentList(boolean isAscending, String attribute) {
+        appointments.sort(isAscending, attribute);
     }
 
 

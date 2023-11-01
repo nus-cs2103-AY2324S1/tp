@@ -13,12 +13,42 @@ import seedu.address.model.Model;
 public class SortCommand extends Command {
     public static final String COMMAND_WORD = "sort";
 
-    public static final String MESSAGE_SUCCESS = "Sorted all appointments.";
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + ": Sorts the appointment by the corresponding parameters.\n"
+            + "The direction should either be asc or desc. The parameter must be one of [date, priority].\n"
+            + "Parameters: DIRECTION "
+            + "by=[ATTRIBUTE]\n"
+            + "Example: " + COMMAND_WORD + " asc by=priority";
+
+    public static final String MESSAGE_SUCCESS = "Sorted all appointments in %1$s order by %1$s.";
+
+    private final String attribute;
+    private final boolean isAscending;
+
+    /**
+     * Creates a SortCommand to sort by type
+     * @param isAscending whether the sort type is ascending
+     * @param attribute attribute to sort by
+     */
+    public SortCommand(boolean isAscending, String attribute) {
+        requireNonNull(isAscending, attribute);
+        this.isAscending = isAscending;
+        this.attribute = attribute;
+    }
 
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        model.sortAppointmentList();
-        return new CommandResult(MESSAGE_SUCCESS, false, false, false, true);
+        model.sortAppointmentList(isAscending, attribute);
+        return new CommandResult(String.format(MESSAGE_SUCCESS, order(isAscending), attribute),
+                false, false, false, true);
+    }
+
+    private static String order(boolean isAscending) {
+        if (isAscending) {
+            return "ascending";
+        } else {
+            return "descending";
+        }
     }
 }
