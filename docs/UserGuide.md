@@ -56,14 +56,14 @@ Display all your stored contacts.
 
 ### Deleting Contacts: `delete`
 
-Removes one or more contacts based on their indices. The indices refer to the index numbers shown in the displayed contact list.
+Remove one or more contacts based on their indices. The indices refer to the index numbers shown in the displayed contact list.
 
 **Format:**
 `delete INDEX [INDEX]...`
 
 - You can delete multiple contacts at once by specifying multiple indices separated by spaces.
 - Indices **must be positive integers** like 1, 2, 3, …​
-- Duplicated indices are only count once.
+- Duplicated indices only count once.
 - Invalid indices will cause abortion of the delete command.
 
 **Examples:**
@@ -95,7 +95,7 @@ Search and display contacts with names containing any of the given keywords.
 
 ### Clearing All Entries: `clear`
 
-Remove all contacts from your list. Apply with caution!
+Remove all contacts from your list. **Apply with caution!**
 
 **Format:**
 `clear`
