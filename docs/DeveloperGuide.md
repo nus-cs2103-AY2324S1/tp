@@ -166,7 +166,7 @@ The `find-i` command is facilitated by the `FindInterviewCommand`, `FindIntervie
 It uses `Model#updateFilteredInterviewList(Predicate<Interview> predicate)` to apply the `JobContainsKeywordsPredicate`
 in order to produce a filtered list containing only entries whose job correspond to `JOB_TITLE`.
 
-The find interview command will affect the applicant list. The new applicant list will contain the applicant who have their respective interview 
+The find interview command will affect the applicant list. The new applicant list will contain the applicant who have their respective interview
 listed in the interview list. The applicant list index represents an applicant at that index has an interview at the same index in the interview list.
 The applicant list uses `Model#updateFilteredApplicantList(Predicate<Applicant> predicate)` to apply the `ApplicantContainsInterviewPredicate`
 in order to produce a filtered list containing only entries whose interview correspond to the interview list.
