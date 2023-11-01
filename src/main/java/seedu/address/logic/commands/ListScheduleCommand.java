@@ -73,6 +73,7 @@ public class ListScheduleCommand extends Command {
         return new CommandResult(String.format(Messages.MESSAGE_SCHEDULES_LISTED_OVERVIEW,
             model.getFilteredScheduleList().size()));
     }
+        }
 
 
     @Override
