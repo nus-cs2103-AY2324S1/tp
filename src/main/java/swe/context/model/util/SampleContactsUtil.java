@@ -19,8 +19,6 @@ import swe.context.model.tag.Tag;
  */
 public class SampleContactsUtil {
     private static Contact[] getSampleContactsArray() {
-        //TODO access these from a production data file. Help command text could reuse these valid data strings
-        // Ensure test JSONs are also updated
         return new Contact[] {
             new Contact(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
                 new Note("CS2103 tutorial mate."),

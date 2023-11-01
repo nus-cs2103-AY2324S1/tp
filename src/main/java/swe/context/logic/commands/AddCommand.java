@@ -22,8 +22,6 @@ import swe.context.model.contact.Contact;
 public class AddCommand extends Command {
     public static final String COMMAND_WORD = "add";
 
-    //TODO values like these could be in some kind of ProductionData, which
-    // could be used in tests alongside TestData.Valid
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a contact. "
             + "Parameters: "
             + PREFIX_NAME + "NAME "
