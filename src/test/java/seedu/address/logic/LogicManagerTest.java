@@ -73,12 +73,6 @@ public class LogicManagerTest {
         assertCommandException(deleteCommand, MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
 
-    @Test
-    public void execute_viewModeCommandExecutionError_throwsParseException() throws CommandException, ParseException,
-            DataLoadingException, IOException {
-        String listCommand = "list";
-        assertViewModeParseException(listCommand, MESSAGE_UNAVAILABLE_COMMAND_IN_VIEW_MODE);
-    }
 
     @Test
     public void execute_validCommand_success() throws Exception {

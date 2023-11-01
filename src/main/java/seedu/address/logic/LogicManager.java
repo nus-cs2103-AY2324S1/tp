@@ -8,14 +8,12 @@ import java.util.logging.Logger;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.commons.exceptions.DataLoadingException;
-import seedu.address.logic.commands.UndoCommand;
-import seedu.address.logic.commands.ViewCommand;
-import seedu.address.logic.commands.ViewExitCommand;
 import seedu.address.commons.core.index.Index;
+import seedu.address.commons.exceptions.DataLoadingException;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.CommandType;
+import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.AddressBookParser;
 import seedu.address.logic.parser.ViewModeParser;
@@ -54,7 +52,6 @@ public class LogicManager implements Logic {
         this.storage = storage;
         addressBookParser = new AddressBookParser();
         viewModeParser = new ViewModeParser();
-        this.parser = addressBookParser;
         this.backupModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         Path mainPath = Path.of("data\\addressbookbackup.json");
         backupModel.setAddressBookFilePath(mainPath);
@@ -66,7 +63,7 @@ public class LogicManager implements Logic {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
         Command command;
         CommandResult commandResult;
-        command = parser.parseCommand(commandText);
+        command = addressBookParser.parseCommand(commandText);
         //checking for undo command
         if (command instanceof UndoCommand) {
             model.setAddressBook(backupModel.getAddressBook());
