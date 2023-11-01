@@ -107,6 +107,17 @@ public class EditContactEventCommand extends Command {
         Address updatedAddress = personToEdit.getAddress();
         Set<Tag> updatedTags = personToEdit.getTags();
         Calendar calendar = personToEdit.getCalendar();
+        List<Event> eventList = updateEventList(calendar, eventIndex, editEventDescriptor);
+        Calendar updatedCalendar = new Calendar();
+        for (Event e: eventList) {
+            updatedCalendar.addEvent(e);
+        }
+
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, updatedCalendar);
+    }
+
+    public static List<Event> updateEventList(Calendar calendar, Index eventIndex,
+                                             EditEventDescriptor editEventDescriptor) {
         List<Event> eventList = calendar.getEventManager().asEventList();
         Event updateEvent = eventList.get(eventIndex.getZeroBased());
         EventPeriod updatePeriod = updateEvent.getEventPeriod();
@@ -120,12 +131,7 @@ public class EditContactEventCommand extends Command {
         EventPeriod newEventPeriod = new EventPeriod(stringStartDateTime, stringEndDateTime);
         Event updatedEvent = new Event(newEventDescription, newEventPeriod);
         eventList.set(eventIndex.getZeroBased(), updatedEvent);
-        Calendar updatedCalendar = new Calendar();
-        for (Event e: eventList) {
-            updatedCalendar.addEvent(e);
-        }
-
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, updatedCalendar);
+        return eventList;
     }
 
     /**
