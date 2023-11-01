@@ -21,8 +21,6 @@ public class AppointmentBuilder {
     // Identity fields
     private AppointmentTime appointmentTime;
     private Person patient;
-    private String patientString;
-    //  private Set<Tag> tags = new HashSet<>();
 
     private AppointmentDescription appointmentDescription;
     /**
@@ -62,16 +60,6 @@ public class AppointmentBuilder {
         this.patient = patient;
         return this;
     }
-
-    /**
-     * Sets the {@code PatientString} for the Appointment being built.
-     */
-    public AppointmentBuilder withPatientString(String patientString) {
-        this.patient = null;
-        this.patientString = patientString;
-        return this;
-    }
-
 
     /**
      * Sets the {@code Description} for the Appointment being built.
