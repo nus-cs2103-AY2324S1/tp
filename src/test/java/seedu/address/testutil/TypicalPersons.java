@@ -10,12 +10,10 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
-import static seedu.address.model.person.interaction.Interaction.DEFAULT_DATE_FORMAT;
 
-import java.text.ParseException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Date;
 import java.util.List;
 
 import seedu.address.model.AddressBook;
@@ -27,17 +25,7 @@ import seedu.address.model.person.interaction.Interaction.Outcome;
  * A utility class containing a list of {@code Person} objects to be used in tests.
  */
 public class TypicalPersons {
-    public static final Date EXAMPLE_DATE;
-
-    static {
-        Date date = null;
-        try {
-            date = DEFAULT_DATE_FORMAT.parse("27-Oct-2023");
-        } catch (ParseException e) {
-            // Static date should always parse properly
-        }
-        EXAMPLE_DATE = date;
-    }
+    public static final LocalDate EXAMPLE_DATE = LocalDate.of(2023, 10, 27);
 
     public static final Interaction INTERACTION_ONE =
         new Interaction("Met up for lunch", Outcome.INTERESTED, EXAMPLE_DATE);

@@ -3,11 +3,13 @@ package seedu.address.model.person;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.Set;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
@@ -15,6 +17,7 @@ import java.util.stream.Collectors;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.person.interaction.Interaction;
 import seedu.address.model.person.lead.Lead;
+import seedu.address.model.reminder.Reminder;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -39,6 +42,9 @@ public class Person {
     private final Income income;
     private final Details details;
     private final List<Interaction> interactions = new ArrayList<>();
+
+    // Dependant fields, may not exist
+    private Optional<Reminder> reminder = Optional.empty();
 
     /**
      * Creates a {@code Person} given a PersonBuilder.
@@ -108,6 +114,13 @@ public class Person {
     }
 
     /**
+     * Returns the reminder associated with this person.
+     */
+    public Optional<Reminder> getReminder() {
+        return this.reminder;
+    }
+
+    /**
      * Returns a filtered list of {@code Interaction} that matches the given predicate.
      */
     public List<Interaction> getFilteredInteractions(Predicate<Interaction> predicate) {
@@ -126,6 +139,45 @@ public class Person {
         return this.interactions;
     }
 
+    /**
+     * Returns the follow up date of the person.
+     * This is calculated by adding the follow up period of the lead to the date of the latest interaction.
+     * It is an optional because the person may not have a lead or interaction.
+     * It is also used in Reminders constructor to determine the due time of the reminder.
+     * @return
+     */
+    public Optional<LocalDate> getFollowUpDate() {
+        if (interactions.isEmpty() || lead == null) {
+            return Optional.empty();
+        }
+        LocalDate latestInteractionDate = interactions.get(interactions.size() - 1).getDate();
+        //TODO: Not sure if the lastest interaction is always the last one in the list
+        int weeksToAdd = lead.getFollowUpPeriod();
+        return Optional.of(latestInteractionDate.plusWeeks(weeksToAdd));
+    }
+
+    /**
+     * Adds a Reminder to the list.
+     * The Reminder must not already exist in the list.
+     */
+    public void updateReminder() {
+        //Person must have lead and interaction to have a reminder
+        //If person has no lead or interaction, remove reminder
+        if (this.getFollowUpDate().isEmpty()) {
+            this.reminder = Optional.empty();
+            return;
+        }
+
+        Optional<Reminder> updatedReminder = Optional.of(new Reminder(this));
+        if (this.reminder.equals(updatedReminder)) {
+            return;
+        }
+
+        this.reminder = updatedReminder;
+    }
+
+    //TODO: Establish that this is not a bug.
+    //If someone tries to make a new person with the same name it should not be allowed
     /**
      * Returns true if both persons have the same name.
      * This defines a weaker notion of equality between two persons.
