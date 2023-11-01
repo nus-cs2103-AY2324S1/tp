@@ -1,13 +1,5 @@
 package seedu.address.ui;
 
-import javafx.fxml.FXML;
-import javafx.scene.control.Label;
-import javafx.scene.control.SplitPane;
-import javafx.scene.control.TextArea;
-import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.FlowPane;
-import seedu.address.model.tag.Tag;
-
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
@@ -15,6 +7,14 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
+
+import javafx.fxml.FXML;
+import javafx.scene.control.Label;
+import javafx.scene.control.SplitPane;
+import javafx.scene.control.TextArea;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.FlowPane;
+import seedu.address.model.tag.Tag;
 
 /**
  * A row of the PersonProfile UI, representing one field of the Person displayed.
