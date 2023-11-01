@@ -25,7 +25,7 @@ public class AddTaskCommandParser implements Parser<AddTaskCommand> {
                     .getValueImmediatelyAfterCommandName(AddTaskCommand.COMMAND_WORD, "index", args),
                     1, Integer.MAX_VALUE));
         } catch (ParseException e) {
-            throw new ParseException("Missing lesson with specified index!");
+            throw new ParseException("Lesson index has to be a positive value!");
         }
         return new AddTaskCommand(index, task);
     }
