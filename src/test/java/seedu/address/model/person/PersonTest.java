@@ -95,7 +95,8 @@ public class PersonTest {
     public void toStringMethod() {
         String expected = Person.class.getCanonicalName() + "{name=" + ALICE.getName() + ", phone=" + ALICE.getPhone()
                 + ", email=" + ALICE.getEmail() + ", address=" + ALICE.getAddress() + ", tags=" + ALICE.getTags()
-                + ", nric=" + ALICE.getNric() + ", licence plate=" + ALICE.getLicencePlate() + ", policy="
+                + ", nric=" + ALICE.getNric() + ", licence plate=" + ALICE.getLicencePlate()
+                + ", remark=" + ALICE.getRemark() + ", policy="
                 + Policy.class.getCanonicalName() + "{company=" + ALICE.getPolicy().getCompany()
                 + ", policy number=" + ALICE.getPolicy().getPolicyNumber()
                 + ", policy issue date=" + ALICE.getPolicy().getPolicyIssueDate() + ", policy expiry date="

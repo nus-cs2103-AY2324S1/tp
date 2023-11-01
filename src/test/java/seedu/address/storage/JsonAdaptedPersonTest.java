@@ -40,6 +40,7 @@ public class JsonAdaptedPersonTest {
     private static final String VALID_COMPANY = "NTUC";
     private static final String VALID_POLICY_NUMBER = "AIA1234";
     private static final String VALID_POLICY_DATE = "01-01-2023";
+    private static final String VALID_REMARK = BENSON.getRemark().toString();
 
     @Test
     public void toModelType_validPersonDetails_returnsPerson() throws Exception {
@@ -58,6 +59,7 @@ public class JsonAdaptedPersonTest {
                 VALID_TAGS,
                 VALID_NRIC,
                 VALID_LICENCE_PLATE,
+                VALID_REMARK,
                 VALID_COMPANY,
                 VALID_POLICY_NUMBER,
                 VALID_POLICY_DATE,
@@ -77,6 +79,7 @@ public class JsonAdaptedPersonTest {
             VALID_TAGS,
             VALID_NRIC,
             VALID_LICENCE_PLATE,
+            VALID_REMARK,
             VALID_COMPANY,
             VALID_POLICY_NUMBER,
             VALID_POLICY_DATE,
@@ -97,6 +100,7 @@ public class JsonAdaptedPersonTest {
                 VALID_TAGS,
                 VALID_NRIC,
                 VALID_LICENCE_PLATE,
+                VALID_REMARK,
                 VALID_COMPANY,
                 VALID_POLICY_NUMBER,
                 VALID_POLICY_DATE,
@@ -116,6 +120,7 @@ public class JsonAdaptedPersonTest {
             VALID_TAGS,
             VALID_NRIC,
             VALID_LICENCE_PLATE,
+            VALID_REMARK,
             VALID_COMPANY,
             VALID_POLICY_NUMBER,
             VALID_POLICY_DATE,
@@ -136,6 +141,7 @@ public class JsonAdaptedPersonTest {
                 VALID_TAGS,
                 VALID_NRIC,
                 VALID_LICENCE_PLATE,
+                VALID_REMARK,
                 VALID_COMPANY,
                 VALID_POLICY_NUMBER,
                 VALID_POLICY_DATE,
@@ -155,6 +161,7 @@ public class JsonAdaptedPersonTest {
             VALID_TAGS,
             VALID_NRIC,
             VALID_LICENCE_PLATE,
+            VALID_REMARK,
             VALID_COMPANY,
             VALID_POLICY_NUMBER,
             VALID_POLICY_DATE,
@@ -175,6 +182,7 @@ public class JsonAdaptedPersonTest {
                 VALID_TAGS,
                 VALID_NRIC,
                 VALID_LICENCE_PLATE,
+                VALID_REMARK,
                 VALID_COMPANY,
                 VALID_POLICY_NUMBER,
                 VALID_POLICY_DATE,
@@ -194,6 +202,7 @@ public class JsonAdaptedPersonTest {
             VALID_TAGS,
             VALID_NRIC,
             VALID_LICENCE_PLATE,
+            VALID_REMARK,
             VALID_COMPANY,
             VALID_POLICY_NUMBER,
             VALID_POLICY_DATE,
@@ -216,6 +225,7 @@ public class JsonAdaptedPersonTest {
                 invalidTags,
                 VALID_NRIC,
                 VALID_LICENCE_PLATE,
+                VALID_REMARK,
                 VALID_COMPANY,
                 VALID_POLICY_NUMBER,
                 VALID_POLICY_DATE,
