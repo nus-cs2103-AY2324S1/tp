@@ -1,6 +1,5 @@
 package seedu.address.logic.parser;
 
-import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_BLOODTYPE;
@@ -19,7 +18,9 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Optional;
 import java.util.Set;
+import java.util.logging.Logger;
 
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -30,14 +31,13 @@ import seedu.address.model.tag.Tag;
  * Parses input arguments and creates a new EditCommand object
  */
 public class EditCommandParser implements Parser<EditCommand> {
-
+    private static final Logger logger = LogsCenter.getLogger(EditCommand.class);
     /**
      * Parses the given {@code String} of arguments in the context of the EditCommand
      * and returns an EditCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
     public EditCommand parse(String args) throws ParseException {
-        requireNonNull(args);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
                         PREFIX_ADDRESS, PREFIX_REMARK, PREFIX_GENDER, PREFIX_NRIC, PREFIX_TAG,
@@ -48,10 +48,9 @@ public class EditCommandParser implements Parser<EditCommand> {
         try {
             nric = ParserUtil.parseIc(argMultimap.getPreamble());
         } catch (ParseException pe) {
+            logger.severe("Error parsing NRIC: " + pe.getMessage());
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE), pe);
         }
-
-
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_NRIC,
                 PREFIX_GENDER, PREFIX_BLOODTYPE, PREFIX_CONDITION, PREFIX_DOCTOR, PREFIX_EMERGENCY_CONTACT);
@@ -93,10 +92,11 @@ public class EditCommandParser implements Parser<EditCommand> {
         parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editPersonDescriptor::setTags);
 
         if (!editPersonDescriptor.isAnyFieldEdited()) {
+            logger.warning("No fields were edited for the EditCommand.");
             throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
         }
 
-        // make it pass a 3rd argument on whether doctor or patient
+        logger.info("Successfully parsed EditCommand.");
         return new EditCommand(nric, editPersonDescriptor);
     }
 
