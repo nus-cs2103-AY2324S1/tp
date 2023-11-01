@@ -66,6 +66,9 @@ public class SampleDataUtil {
         };
     }
 
+    /**
+     * Returns an event list containing the list of events given.
+     */
     public static Event[] getSampleEvents() {
         try {
             return new Event[]{
@@ -115,9 +118,9 @@ public class SampleDataUtil {
      */
     public static Set<Group> getGroupSet(String... strings) {
         if (strings.length == 0) {
-            return Set.of();
-        } else if (strings.length == 1 && strings[0].equals("")) {
-            return Set.of();
+            return new HashSet<>();
+        } else if (strings.length == 1 && strings[0].isEmpty()) {
+            return new HashSet<>();
         }
         return Arrays.stream(strings)
                 .map(Group::new)
@@ -126,9 +129,9 @@ public class SampleDataUtil {
 
     public static Set<Name> getNameSet(String... strings) {
         if (strings.length == 0) {
-            return Set.of();
-        } else if (strings.length == 1 && strings[0].equals("")) {
-            return Set.of();
+            return new HashSet<>();
+        } else if (strings.length == 1 && strings[0].isEmpty()) {
+            return new HashSet<>();
         }
         return Arrays.stream(strings)
                 .map(Name::new)

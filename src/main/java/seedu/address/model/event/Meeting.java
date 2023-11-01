@@ -55,4 +55,20 @@ public class Meeting extends Event {
         }
         return other.getName().equals(getName());
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (!(other instanceof Meeting)) {
+            return false;
+        }
+
+        Meeting otherMeeting = (Meeting) other;
+        return otherMeeting.getName().equals(getName())
+                && otherMeeting.getStartDate().equals(getStartDate())
+                && otherMeeting.getStartTime().equals(getStartTime())
+                && otherMeeting.getEndTime().equals(getEndTime())
+                && otherMeeting.getNames().equals(getNames())
+                && otherMeeting.getGroups().equals(getGroups());
+    }
+
 }
