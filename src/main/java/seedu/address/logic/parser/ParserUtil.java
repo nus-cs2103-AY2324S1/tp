@@ -287,9 +287,9 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String tagScorePair} into a {@code Pair<Tag, Score>}.
+     * Parses a Tag Score string input and turns it into a Pair with head as Tag and tail as Score.
      * @param tagScore String to be parsed
-     * @return Pair<Tag, Score> object
+     * @return Pair with head as Tag and tail as Score
      * @throws ParseException if the given {@code tagScorePair} is invalid.
      */
     public static Pair<Tag, Score> parseTagScore(String tagScore) throws ParseException {
