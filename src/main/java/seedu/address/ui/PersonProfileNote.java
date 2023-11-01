@@ -5,44 +5,30 @@ import javafx.scene.control.Label;
 import javafx.scene.control.SplitPane;
 import javafx.scene.control.TextArea;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.FlowPane;
-import seedu.address.model.tag.Tag;
-
-import java.util.Arrays;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
-import java.util.Set;
-import java.util.function.Predicate;
-import java.util.stream.Collectors;
 
 /**
  * A row of the PersonProfile UI, representing one field of the Person displayed.
  */
-public class PersonProfileTags extends UiPart<SplitPane> {
+public class PersonProfileNote extends UiPart<SplitPane> {
 
     // region Super
-    private static final String FXML = "PersonProfileTags.fxml";
+    private static final String FXML = "PersonProfileNote.fxml";
     // endregion
 
     // region Constants
-    private static final String KEY_NAME = "Tags";
-    private static final String TAG_SEPARATOR_REGEX = "[ ,;\n]";
-    private static final String DEFAULT_TAG_SEPARATOR = "\n";
-    private static final String TAGS_HINT = Tag.MESSAGE_CONSTRAINTS + "\n" +
-            "Tag names can be separated by spaces, commas, semicolons or new lines.";
-    private static final String TAG_INVALID_MESSAGE = "is not a valid tag.";
+    private static final String KEY_NAME = "Notes";
+    private static final String NOTES_HINT = "Notes can be any text.";
     // endregion
 
     // region FXML
-    @FXML private FlowPane valueFlowPane;
+    @FXML private Label valueLabel;
     @FXML private TextArea valueField;
     @FXML private Label keyLabel;
     // endregion
 
     // region Fields
     private final PersonProfile personProfile;
-    private Set<Tag> tags;
+    private String value;
     private State state;
     // endregion
 
@@ -64,7 +50,7 @@ public class PersonProfileTags extends UiPart<SplitPane> {
      *
      * @param personProfile UI parent, serving as a container for this object.
      */
-    public PersonProfileTags(PersonProfile personProfile) {
+    public PersonProfileNote(PersonProfile personProfile) {
         super(FXML);
         this.personProfile = personProfile;
         initializeAndRefresh();
@@ -93,12 +79,13 @@ public class PersonProfileTags extends UiPart<SplitPane> {
     private void updateState() {
         switch (state) {
         case READ_ONLY:
-            generateAndSetLabels();
-            valueFlowPane.setVisible(true);
+            valueLabel.setText(value);
+            valueField.setText(value);
+            valueLabel.setVisible(true);
             valueField.setVisible(false);
             break;
         case EDITING:
-            valueFlowPane.setVisible(false);
+            valueLabel.setVisible(false);
             valueField.setVisible(true);
             valueField.requestFocus();
             sendHint();
@@ -108,19 +95,9 @@ public class PersonProfileTags extends UiPart<SplitPane> {
         }
     }
 
-    private void generateAndSetLabels() {
-        List<Label> labels = tags.stream()
-                .map(Tag::getTagName).sorted()
-                .map(Label::new)
-                .collect(Collectors.toList());
-        valueFlowPane.getChildren().setAll(labels);
-    }
-
-    private boolean confirmIfValid() {
+    private boolean confirm() {
         assert state == State.EDITING;
-        if (!getTagsFromFieldIfValidElseError()) {
-            return false;
-        }
+        retrieveValue();
         updateProfile();
         updateState(State.READ_ONLY);
         personProfile.triggerEvent(PersonProfile.Event.AFTER_CONFIRM);
@@ -133,50 +110,29 @@ public class PersonProfileTags extends UiPart<SplitPane> {
         personProfile.triggerEvent(PersonProfile.Event.CANCEL);
     }
 
-    private boolean getTagsFromFieldIfValidElseError() throws IllegalArgumentException {
+    private String getNonNull() {
         String text = valueField.getText();
-        if (text == null || text.isBlank()) {
-            tags.clear();
-            return true;
+        if (text == null) {
+            text = "";
         }
-        Predicate<String> notBlank = ((Predicate<String>) String::isBlank).negate();
-        Predicate<String> notValid = ((Predicate<String>) Tag::isValidTagName).negate();
-        Optional<String> invalid = Arrays.stream(text.split(TAG_SEPARATOR_REGEX))
-                .filter(Objects::nonNull).filter(notBlank)
-                .filter(notValid)
-                .findAny();
-        if (invalid.isPresent()) {
-            sendValueInvalid("'" + invalid.get() + "' " + TAG_INVALID_MESSAGE + "\n" +
-                    Tag.MESSAGE_CONSTRAINTS);
-            return false;
-        }
-        this.tags = Arrays.stream(text.split(TAG_SEPARATOR_REGEX))
-                .filter(Objects::nonNull).filter(notBlank).map(Tag::new).collect(Collectors.toSet());
-        return true;
-    }
-
-    private void getFieldFromTags() {
-        String textRepresentation = tags.stream().map(Tag::getTagName)
-                .collect(Collectors.joining(DEFAULT_TAG_SEPARATOR)).trim();
-        valueField.setText(textRepresentation);
+        return text;
     }
 
     private void updateProfile() {
-        personProfile.updateTags(tags);
+        personProfile.updateNote(value);
     }
 
     private void refresh() {
-        tags = personProfile.getTags();
-        getFieldFromTags();
+        value = personProfile.getNote();
         updateState();
     }
 
     private void sendHint() {
-        personProfile.sendHint(TAGS_HINT);
+        personProfile.sendHint(NOTES_HINT);
     }
 
-    private void sendValueInvalid(String invalidTag) {
-        personProfile.sendInvalidInput(KEY_NAME, invalidTag);
+    private void retrieveValue() {
+        this.value = getNonNull().trim();
     }
 
     // endregion
@@ -192,14 +148,14 @@ public class PersonProfileTags extends UiPart<SplitPane> {
             keyEvent.consume();
             if (keyEvent.isShiftDown()) {
                 int cursor = valueField.getCaretPosition();
-                String text = Objects.requireNonNullElse(valueField.getText(), "");
+                String text = getNonNull();
                 String before = text.substring(0, cursor);
                 String after = text.substring(cursor);
                 valueField.setText(before + "\n" + after);
                 valueField.positionCaret(cursor+1);
                 return;
             }
-            if (confirmIfValid()) {
+            if (confirm()) {
                 return;
             }
             break;
@@ -216,7 +172,7 @@ public class PersonProfileTags extends UiPart<SplitPane> {
         if (!isEditing()) {
             return;
         }
-        if (confirmIfValid()) {
+        if (confirm()) {
             return;
         }
         cancel();

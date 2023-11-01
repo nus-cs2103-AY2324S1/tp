@@ -60,10 +60,6 @@ public class PersonProfile extends UiPart<Region> {
 
     // region FXML
     @FXML private VBox vbox;
-
-    public Set<Tag> getTags() {
-        return tags;
-    }
     // endregion
 
     // region Enums
@@ -118,9 +114,11 @@ public class PersonProfile extends UiPart<Region> {
     private final MainWindow mainWindow;
     private final Map<Field, String> fields = new EnumMap<>(Field.class);
     private Set<Tag> tags;
+    private String note;
 
     private final Map<Field, PersonProfileField> uiElements = new EnumMap<>(Field.class);
     private PersonProfileTags tagUI;
+    private PersonProfileNote noteUI;
     private final Map<Event, List<Runnable>> eventHandlers = new EnumMap<>(Event.class);
     // endregion
 
@@ -147,6 +145,7 @@ public class PersonProfile extends UiPart<Region> {
         fields.put(Field.ANIMAL_TYPE, person.getAnimalType().toString());
         tags = new HashSet<>();
         tags.addAll(person.getTags());
+        note = person.getNote();
         initialize();
     }
 
@@ -186,6 +185,8 @@ public class PersonProfile extends UiPart<Region> {
                 .forEach(vboxChildren::add);
         tagUI = new PersonProfileTags(this);
         vboxChildren.add(tagUI.getRoot());
+        noteUI = new PersonProfileNote(this);
+        vboxChildren.add(noteUI.getRoot());
     }
 
     // endregion
@@ -231,6 +232,7 @@ public class PersonProfile extends UiPart<Region> {
         AnimalType animalType = new AnimalType(getNonNullOrNil(Field.ANIMAL_TYPE), availability);
 
         this.person = new Person(name, phone, email, address, housing, availability, animalName, animalType, this.tags);
+        person.setNote(note);
     }
 
     private boolean handleAvailabilityGroupInvalid() {
@@ -260,7 +262,8 @@ public class PersonProfile extends UiPart<Region> {
     }
 
     private boolean editingInProgress() {
-        return uiElements.values().stream().anyMatch(PersonProfileField::isEditing) || tagUI.isEditing();
+        return uiElements.values().stream().anyMatch(PersonProfileField::isEditing) ||
+                tagUI.isEditing() || noteUI.isEditing();
     }
 
     private void sendFeedback(String string) {
@@ -383,6 +386,10 @@ public class PersonProfile extends UiPart<Region> {
         this.tags = tags;
     }
 
+    void updateNote(String note) {
+        this.note = note;
+    }
+
     void triggerEvent(Event event) {
         List<Runnable> runnables = eventHandlers.get(event);
         runnables.forEach(Runnable::run);
@@ -398,6 +405,14 @@ public class PersonProfile extends UiPart<Region> {
 
     String getValueOfField(Field field) {
         return getNonNullOrNil(field);
+    }
+
+    Set<Tag> getTags() {
+        return tags;
+    }
+
+    String getNote() {
+        return note;
     }
 
     void sendInvalidInput(Field field) {

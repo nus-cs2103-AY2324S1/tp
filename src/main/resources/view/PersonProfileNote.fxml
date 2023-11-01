@@ -13,7 +13,7 @@
    </StackPane>
    <StackPane alignment="CENTER_LEFT" maxWidth="Infinity" onMouseClicked="#setFocus" HBox.hgrow="ALWAYS">
       <TextArea fx:id="valueField" prefRowCount="1" wrapText="true" />
-      <FlowPane fx:id="valueFlowPane" hgap="10.0" vgap="5.0" />
+      <Label fx:id="valueLabel" wrapText="true" />
       <padding>
          <Insets left="10.0" right="10.0" />
       </padding>
