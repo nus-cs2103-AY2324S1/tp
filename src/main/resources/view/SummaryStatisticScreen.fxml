@@ -13,12 +13,12 @@
     <VBox>
         <TableView fx:id="tableView">
             <columns>
-            <TableColumn text="Tag" minWidth="100">
+            <TableColumn text="Tag" minWidth="130">
                 <cellValueFactory>
                     <PropertyValueFactory property="tag" />
                 </cellValueFactory>
             </TableColumn>
-            <TableColumn text="Score" minWidth="120">
+            <TableColumn text="Score" minWidth="80">
                 <cellValueFactory>
                     <PropertyValueFactory property="currentScore" />
                 </cellValueFactory>
@@ -33,12 +33,12 @@
                     <PropertyValueFactory property="median" />
                 </cellValueFactory>
             </TableColumn>
-            <TableColumn text="Min" minWidth="100">
+            <TableColumn text="Min" minWidth="80">
                 <cellValueFactory>
                     <PropertyValueFactory property="min" />
                 </cellValueFactory>
             </TableColumn>
-            <TableColumn text="Max" minWidth="100">
+            <TableColumn text="Max" minWidth="80">
                 <cellValueFactory>
                     <PropertyValueFactory property="max" />
                 </cellValueFactory>

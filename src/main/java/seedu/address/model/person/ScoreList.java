@@ -70,8 +70,8 @@ public class ScoreList {
      * @return true if a given tag is a valid score tag
      */
     public static boolean isValidScoreTag(Tag tag) {
-        String trimmedTag = tag.tagName.trim();
-        if (trimmedTag.startsWith("Interview") || trimmedTag.startsWith("Technical Assessment")) {
+        String trimmedTag = tag.tagName.trim().toLowerCase();
+        if (trimmedTag.contains("interview") || trimmedTag.startsWith("Technical Assessment")) {
             return true;
         }
         return false;
