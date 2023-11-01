@@ -322,8 +322,9 @@ The notes feature allows you to add and remove notes for a person, and provides 
 The parameters for these commands are `PERSON_INDEX`, `NOTE_INDEX` and `NOTE_CONTENT`. These parameters are explained in detail in the section below.
 
 <br>
-<panel header=":fa-solid-book: **Command Parameter / Syntax Tables**" type="secondary" expanded no-close>
+<panel header=":fa-solid-book: **Notes Command Parameters**" type="secondary" expanded no-close>
 The fields you enter should follow the following format:
+
 | Parameter     | Description                                                                                                 |
 |---------------|-------------------------------------------------------------------------------------------------------------|
 | `PERSON_INDEX`| The position of the person in the list you want to add a note to. This should be a positive integer, and should be within the bounds of the list. |
