@@ -15,6 +15,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import networkbook.commons.core.index.Index;
 import networkbook.logic.parser.OpenLinkCommandParser;
+import networkbook.model.person.Graduation;
 import networkbook.model.person.Person;
 import networkbook.model.person.Priority;
 import networkbook.model.util.Identifiable;
@@ -117,7 +118,7 @@ public class PersonCard extends UiPart<Region> {
 
         // Graduation
         graduationHeader.setText(GRADUATION_HEADER);
-        populateField(person.getGraduation(), graduation);
+        populateGrad(person.getGraduation(), graduation);
 
         // Courses
         coursesHeader.setText(COURSE_HEADER);
@@ -185,6 +186,19 @@ public class PersonCard extends UiPart<Region> {
     private <T> void populateField(Optional<T> item, FlowPane pane) {
         item.ifPresentOrElse((T t) -> {
             pane.getChildren().add(new FieldLabel(t.toString()));
+        }, () -> {
+            pane.getChildren().add(new EmptyFieldLabel());
+        });
+    }
+
+    /**
+     * Populates graduation.
+     * @param g Optional of Graduation.
+     * @param pane FlowPane to populate.
+     */
+    private void populateGrad(Optional<Graduation> g, FlowPane pane) {
+        g.ifPresentOrElse((Graduation grad) -> {
+            pane.getChildren().add(new FieldLabel(grad.getFullString()));
         }, () -> {
             pane.getChildren().add(new EmptyFieldLabel());
         });
