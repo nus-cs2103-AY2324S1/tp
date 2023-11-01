@@ -72,7 +72,7 @@ public class RatingTest {
     }
 
     @Test
-    public void string() {
+    public void toStringMethod() {
         assertEquals("1.2", new Rating("1.2").toString());
     }
 }

@@ -22,7 +22,7 @@ public class RateCommand extends Command {
             + "Parameters: INDEX (must be a positive integer) "
             + "RATING (must be a non-negative number with 1 decimal place between 0.0 to 5.0 inclusive)\n"
             + "Example: " + COMMAND_WORD + " 1" + " 3.5";
-    public static final String MESSAGE_MARK_INTERVIEW_SUCCESS = "Marked Interview: %s as done.";
+    public static final String MESSAGE_RATE_INTERVIEW_SUCCESS = "Rating Interview: %s is rated.";
     public static final String MESSAGE_NOT_DONE = "Interview: %s must be completed before rating.";
     private final Index targetIndex;
     private final Rating newRating;
@@ -64,7 +64,7 @@ public class RateCommand extends Command {
         model.setInterview(interviewToRate, ratedInterview);
 
         return new CommandResult(
-                String.format(MESSAGE_MARK_INTERVIEW_SUCCESS, Messages.formatInterview(interviewToRate)));
+                String.format(MESSAGE_RATE_INTERVIEW_SUCCESS, Messages.formatInterview(interviewToRate)));
     }
 
     @Override
