@@ -150,7 +150,7 @@ public class AddAltCommandTest {
             new AddAltCommand(Index.fromZeroBased(0), descriptor).execute(modelStub);
             fail();
         } catch (CommandException e) {
-            String expectedMessage = String.format(AddAltCommand.MESSAGE_ADDALT_FAILURE, "Telegram ", "A");
+            String expectedMessage = String.format(AddAltCommand.MESSAGE_ADDALT_FAILURE, "A", "Telegram");
             assertEquals(e.getMessage(), expectedMessage);
         }
 
@@ -163,7 +163,7 @@ public class AddAltCommandTest {
             new AddAltCommand(Index.fromZeroBased(0), descriptor).execute(modelStub);
             fail();
         } catch (CommandException e) {
-            String expectedMessage = String.format(AddAltCommand.MESSAGE_ADDALT_FAILURE, "Linkedin ", "A");
+            String expectedMessage = String.format(AddAltCommand.MESSAGE_ADDALT_FAILURE, "A", "Linkedin");
             assertEquals(e.getMessage(), expectedMessage);
         }
 
@@ -176,7 +176,7 @@ public class AddAltCommandTest {
             new AddAltCommand(Index.fromZeroBased(0), descriptor).execute(modelStub);
             fail();
         } catch (CommandException e) {
-            String expectedMessage = String.format(AddAltCommand.MESSAGE_ADDALT_FAILURE, "Secondary Email ", "A");
+            String expectedMessage = String.format(AddAltCommand.MESSAGE_ADDALT_FAILURE, "A", "Secondary Email");
             assertEquals(e.getMessage(), expectedMessage);
         }
 
@@ -200,7 +200,7 @@ public class AddAltCommandTest {
             new AddAltCommand(Index.fromZeroBased(0), descriptor).execute(modelStub);
             fail();
         } catch (CommandException e) {
-            String expectedMessage = String.format(AddAltCommand.MESSAGE_ADDALT_FAILURE, "Birthday ", "A");
+            String expectedMessage = String.format(AddAltCommand.MESSAGE_ADDALT_FAILURE, "A", "Birthday");
             assertEquals(e.getMessage(), expectedMessage);
         }
     }

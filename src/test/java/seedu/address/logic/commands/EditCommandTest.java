@@ -178,28 +178,28 @@ public class EditCommandTest {
         EditPersonDescriptor descriptor = new EditCommand.EditPersonDescriptor();
         descriptor.setBirthday(new Birthday(MonthDay.of(6, 9)));
         EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON, descriptor);
-        String expectedMessage = String.format(EditCommand.MESSAGE_USE_ADDALT_COMMAND, "Birthday ");
+        String expectedMessage = String.format(EditCommand.MESSAGE_USE_ADDALT_COMMAND, "Birthday");
         assertCommandFailure(editCommand, model, expectedMessage);
 
         // Telegram of specified person is empty.
         descriptor = new EditCommand.EditPersonDescriptor();
         descriptor.setTelegram(new Telegram("@alice"));
         editCommand = new EditCommand(INDEX_FIRST_PERSON, descriptor);
-        expectedMessage = String.format(EditCommand.MESSAGE_USE_ADDALT_COMMAND, "Telegram ");
+        expectedMessage = String.format(EditCommand.MESSAGE_USE_ADDALT_COMMAND, "Telegram");
         assertCommandFailure(editCommand, model, expectedMessage);
 
         // Linkedin of specified person is empty.
         descriptor = new EditCommand.EditPersonDescriptor();
         descriptor.setLinkedin(new Linkedin("alice"));
         editCommand = new EditCommand(Index.fromOneBased(3), descriptor);
-        expectedMessage = String.format(EditCommand.MESSAGE_USE_ADDALT_COMMAND, "Linkedin ");
+        expectedMessage = String.format(EditCommand.MESSAGE_USE_ADDALT_COMMAND, "Linkedin");
         assertCommandFailure(editCommand, model, expectedMessage);
 
         // Secondary Email of specified person is empty.
         descriptor = new EditCommand.EditPersonDescriptor();
         descriptor.setSecondaryEmail(new Email("alice@email.com"));
         editCommand = new EditCommand(INDEX_FIRST_PERSON, descriptor);
-        expectedMessage = String.format(EditCommand.MESSAGE_USE_ADDALT_COMMAND, "Secondary Email ");
+        expectedMessage = String.format(EditCommand.MESSAGE_USE_ADDALT_COMMAND, "Secondary Email");
         assertCommandFailure(editCommand, model, expectedMessage);
     }
 
