@@ -117,7 +117,8 @@ public class NetworkBookParserTest {
         List<String> keywords = Arrays.asList("foo", "bar", "baz");
         FilterCommand command = (FilterCommand) parser.parseCommand(
                 FilterCommand.COMMAND_WORD + " "
-                        + CliSyntax.PREFIX_FILTER_FIELD + " "
+                        + CliSyntax.PREFIX_FILTER_FIELD + " course "
+                        + CliSyntax.PREFIX_FILTER_ARGS + " "
                         + keywords.stream().collect(Collectors.joining(" "))
         );
         assertEquals(new FilterCourseCommand(

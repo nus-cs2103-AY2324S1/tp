@@ -1,4 +1,4 @@
-package networkbook.logic.commands;
+package networkbook.logic.commands.filter;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
@@ -10,8 +10,7 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import networkbook.logic.commands.filter.FilterCommand;
-import networkbook.logic.commands.filter.FilterCourseCommand;
+import networkbook.logic.commands.CommandTestUtil;
 import networkbook.model.Model;
 import networkbook.model.ModelManager;
 import networkbook.model.NetworkBook;
@@ -36,8 +35,6 @@ public class FilterCourseCommandTest {
             .addCourse("Second")
             .addCourse("Third")
             .build();
-    private Person personWithoutCourses = new PersonBuilder().withName("D").build();
-
 
     @Test
     public void equals() {

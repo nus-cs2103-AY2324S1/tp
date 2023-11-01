@@ -8,14 +8,19 @@ import java.util.Optional;
 import networkbook.logic.Messages;
 import networkbook.logic.commands.filter.FilterCommand;
 import networkbook.logic.commands.filter.FilterCourseCommand;
+import networkbook.logic.commands.filter.FilterSpecCommand;
 import networkbook.logic.parser.exceptions.ParseException;
 import networkbook.model.person.filter.CourseContainsKeyTermsPredicate;
 import networkbook.model.person.filter.CourseIsStillBeingTakenPredicate;
+import networkbook.model.person.filter.SpecContainsKeyTermsPredicate;
 
 /**
  * Parses input arguments and creates a new FilterCommand object.
  */
 public class FilterCommandParser implements Parser<FilterCommand> {
+    public static final String MISSING_FIELD = "Filter command must have a /by and /with field, and both fields cannot"
+            + " be empty!";
+    public static final String UNKNOWN_FIELD = "Can only filter by spec, course, or grad year!";
 
     /**
      * Parses the given string of arguments
@@ -25,36 +30,63 @@ public class FilterCommandParser implements Parser<FilterCommand> {
      * @throws ParseException if the user input does not conform to the expected format
      */
     public FilterCommand parse(String args) throws ParseException {
-
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(
                         args,
                         CliSyntax.PREFIX_FILTER_FIELD,
+                        CliSyntax.PREFIX_FILTER_ARGS
+                );
+
+        if (!ArgumentMultimap.arePrefixesPresent(argMultimap,
+                CliSyntax.PREFIX_FILTER_FIELD, CliSyntax.PREFIX_FILTER_ARGS)) {
+            throw new ParseException(MISSING_FIELD);
+        }
+
+        argMultimap.verifyNoDuplicatePrefixesFor(
+                CliSyntax.PREFIX_FILTER_FIELD,
+                CliSyntax.PREFIX_FILTER_ARGS);
+
+        String field = argMultimap.getValue(CliSyntax.PREFIX_FILTER_FIELD).orElse("").trim();
+        String compArgs = argMultimap.getValue(CliSyntax.PREFIX_FILTER_ARGS).orElse("");
+
+        switch (field) {
+        case "spec":
+            return parseSpec(compArgs);
+        case "course":
+            return parseCourse(compArgs);
+        default:
+            break;
+        }
+        throw new ParseException(UNKNOWN_FIELD);
+    }
+
+    /**
+     * Parses the text and create a FilterCourseCommand object.
+     *
+     * @param course
+     * @return A FilterCourseCommand
+     * @throws ParseException if the user input does not conform to the expected format
+     */
+    public FilterCommand parseCourse(String course) throws ParseException {
+        ArgumentMultimap argMultimap =
+                ArgumentTokenizer.tokenize(
+                        course,
                         CliSyntax.PREFIX_FILTER_FIN
                 );
 
         argMultimap.verifyNoDuplicatePrefixesFor(
-                CliSyntax.PREFIX_FILTER_FIELD,
                 CliSyntax.PREFIX_FILTER_FIN
         );
 
-        Optional<String> fieldString = argMultimap.getValue(CliSyntax.PREFIX_FILTER_FIELD);
+        Optional<String> fieldString = Optional.ofNullable(argMultimap.getPreamble());
         if (fieldString.isEmpty()) {
-            throw new ParseException(
-                    String.format(
-                            Messages.MESSAGE_INVALID_COMMAND_FORMAT,
-                            FilterCommand.MESSAGE_USAGE
-                    )
-            );
+            throw new ParseException(MISSING_FIELD);
         }
 
         String[] predicateTerms = fieldString.get().trim().split("\\s+");
         if (Arrays.stream(predicateTerms).anyMatch(s -> s.equals(""))) {
             throw new ParseException(
-                    String.format(
-                            Messages.MESSAGE_INVALID_COMMAND_FORMAT,
-                            FilterCommand.MESSAGE_USAGE
-                    )
+                    String.format(MISSING_FIELD)
             );
         }
 
@@ -70,5 +102,30 @@ public class FilterCommandParser implements Parser<FilterCommand> {
                 new CourseContainsKeyTermsPredicate(List.of(predicateTerms)),
                 new CourseIsStillBeingTakenPredicate(LocalDate.now()),
                 Boolean.parseBoolean(booleanToCheck.orElse("false")));
+    }
+
+    /**
+     * Parses the text and create a FilterSpecCommand object.
+     *
+     * @param spec
+     * @return A FilterSpecCommand
+     * @throws ParseException if the user input does not conform to the expected format
+     */
+    public FilterCommand parseSpec(String spec) throws ParseException {
+        Optional<String> fieldString = Optional.ofNullable(spec);
+        if (fieldString.isEmpty()) {
+            throw new ParseException(
+                    String.format(MISSING_FIELD)
+            );
+        }
+
+        String[] predicateTerms = fieldString.get().trim().split("\\s+");
+        if (Arrays.stream(predicateTerms).anyMatch(s -> s.equals(""))) {
+            throw new ParseException(
+                    String.format(MISSING_FIELD)
+            );
+        }
+
+        return new FilterSpecCommand(new SpecContainsKeyTermsPredicate(List.of(predicateTerms)));
     }
 }

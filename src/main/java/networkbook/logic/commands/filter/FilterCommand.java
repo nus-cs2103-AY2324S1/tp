@@ -22,6 +22,7 @@ public abstract class FilterCommand extends Command {
             + " who have finished the course or graduated.\n"
             + "Parameters: "
             + CliSyntax.PREFIX_FILTER_FIELD + " FIELD "
+            + CliSyntax.PREFIX_FILTER_ARGS + " ARGS "
             + "[" + CliSyntax.PREFIX_FILTER_FIN + " true/false (false by default)]\n"
             + "Example: " + COMMAND_WORD + " /with a b c /taken false";
 

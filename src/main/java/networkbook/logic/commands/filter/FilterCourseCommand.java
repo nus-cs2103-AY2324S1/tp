@@ -15,6 +15,7 @@ import networkbook.model.person.filter.CourseIsStillBeingTakenPredicate;
  */
 public class FilterCourseCommand extends FilterCommand {
 
+    public static final String FIELD_NAME = "course";
     private final CourseContainsKeyTermsPredicate keyTermsPredicate;
     private final CourseIsStillBeingTakenPredicate takenPredicate;
     private final boolean checkFin;

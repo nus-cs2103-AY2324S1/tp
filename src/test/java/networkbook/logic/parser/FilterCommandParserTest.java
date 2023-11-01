@@ -21,42 +21,48 @@ public class FilterCommandParserTest {
     @Test
     public void parse_emptyArg_throwsParseException() {
         assertParseFailure(parser, "    ",
-                String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));
+                String.format(FilterCommandParser.MISSING_FIELD));
     }
 
     @Test
     public void parse_noFields_throwsParseException() {
-        assertParseFailure(parser, "filter /with ",
-                String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "filter /by ",
+                String.format(FilterCommandParser.MISSING_FIELD));
     }
 
     @Test
-    public void parse_validArgs_returnsFilterCourseCommand() {
+    public void parse_noArgs_throwsParseException() {
+        assertParseFailure(parser, "filter /by course /with ",
+                String.format(FilterCommandParser.MISSING_FIELD));
+    }
+
+    @Test
+    public void parseCourse_validArgs_returnsFilterCourseCommand() {
         FilterCommand expectedCommand = new FilterCourseCommand(
                 new CourseContainsKeyTermsPredicate(List.of("Alice", "Bob")),
                 new CourseIsStillBeingTakenPredicate(LocalDate.now()),
                 false);
 
         // no whitespaces
-        assertParseSuccess(parser, "filter /with Alice Bob", expectedCommand);
+        assertParseSuccess(parser, "filter /by course /with Alice Bob", expectedCommand);
 
         // multiple whitespaces
-        assertParseSuccess(parser, "filter /with  Alice    Bob", expectedCommand);
+        assertParseSuccess(parser, "filter /by   course   /with  Alice    Bob", expectedCommand);
     }
 
     @Test
-    public void parse_takenFieldNotTrueOrFalse_throwsParseException() {
-        assertParseFailure(parser, "filter /with Alice /taken no",
+    public void parseCourse_takenFieldNotTrueOrFalse_throwsParseException() {
+        assertParseFailure(parser, "filter /by course /with Alice /taken no",
                 String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));
     }
 
     @Test
-    public void parse_validTakenField_success() {
+    public void parseCourse_validTakenField_success() {
         FilterCommand expectedCommand = new FilterCourseCommand(
                 new CourseContainsKeyTermsPredicate(List.of("Alice", "Bob")),
                 new CourseIsStillBeingTakenPredicate(LocalDate.now()),
                 true);
 
-        assertParseSuccess(parser, "filter /with Alice Bob /taken true", expectedCommand);
+        assertParseSuccess(parser, "filter /by course /with Alice Bob /taken true", expectedCommand);
     }
 }
