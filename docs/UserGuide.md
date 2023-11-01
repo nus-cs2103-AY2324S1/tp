@@ -15,45 +15,47 @@ Connectify is a **desktop app for managing clients, optimized for use via a Comm
 ## Quick start [coming soon]
 
 --------------------------------------------------------------------------------------------------------------------
+## Reading the examples in this user guide
 
-## Features [coming soon]
+The examples in this guide are formatted with the following conventions:
+* **Command** - The command to be typed into the command box.
+* **Command word(s)** - Words that specify the type of command to be executed. Written in ***bold italics***, always at the start of a line.
+* **Flags** - Indicators to differentiate various parts of the command. Always take the format `$/` followed by a **Parameter**. The `$` varies depending on the type of flag. <br/> E.g., `o/` in ***interaction*** command specifies the **Outcome** of the interaction, while `l/` in ***edit*** command specifies the **Lead** of the client.
+* **Parameters** - Component of the command that usually follows a **Flag**. A parameter might be written without a flag for some commands where it is clear what the parameter is referring to. <br/> E.g., `INDEX` following an ***edit*** command specifies the index of the client to be edited.
+
+[↑ Back to table of contents](#table-of-contents)
+
+--------------------------------------------------------------------------------------------------------------------
+
+## Features
+### Quick notes about the command format
+- Everything related to the command is case-sensitive unless otherwise stated.
+- Words in `UPPER_CASE` are the parameters to be supplied by the user. <br/> E.g., in `n/NAME`, `NAME` is a parameter which can be used as `n/John Doe`.
+- Parameters that are optional are indicated with square brackets `[OPTIONAL]`. <br/> E.g., in `[tg/TELEGRAM]`, `TELEGRAM` is an optional parameter which can be used as `tg/@john_doe` or omitted.
+- Parameters specified in the command can be written in any order. <br/> E.g., `n/John Doe tg/@john_doe` is equivalent to `tg/@john_doe n/John Doe`.
+- Optional parameters with `...` after the square bracket can be repeated any number of times, including zero. <br/> E.g., in `[tag/TAG]...`, multiple tags can be supplied as `tag/important tag/urgent` or omitted.
+
+[↑ Back to table of contents](#table-of-contents)
+
+--------------------------------------------------------------------------------------------------------------------
 
 ### Viewing help [coming soon]
 
-### Adding a client profile: `create profile` [to be implemented]
+### Adding a client profile: ***create***
 
-Creates a new client profile with various details.
+Your job as a salesperson starts with adding a client profile to Connectify. This is a one-time process for each client that has been made simple for you.
+Use the ***create*** command to add a client profile to Connectify with the following format:
 
-Format
-```text
-create profile <client_name> --profession <profession> --email <email>
---telegram <telegram_handle> --phone <phone_number> --income <income>
---details <additional_details>
+Format: `create n/CLIENT_NAME p/PROFESSION e/EMAIL a/ADDRESS [t/TAG]... [tg/TELEGRAM] [i/INCOME] [d/DETAILS]`
+
+Examples: 
 ```
-
-Example
-```text
-create profile John Doe --profession Sales --email john@example.com
---telegram @john_doe --phone +1234567890 --income $50,000
---details "Birthday: 01/15, Family: Spouse, 2 children"
+create n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 t/friends t/owesMoney tg/meowies pf/student i/1000 d/Likes to play games 
 ```
-
-Acceptable values
-- <client_name>: Alphanumeric, up to 50 characters, has to be unique
-- <profession>: Alphanumeric, up to 50 characters
-- <email>: Valid email address format
-- <telegram_handle>: Alphanumeric, up to 50 characters, starting with '@'
-- <phone_number>: Numeric, valid phone number format
-- <income>: Numeric, representing annual income
-- <additional_details>: Alphanumeric, additional client details
-
-Expected Output (Success)
-- The new client profile is created and added to the address book
-- The GUI should reflect the newly added client profile
-
-Expected Output (Failure)
-- Invalid email, telegram handle, or phone number format: "Invalid email/telegram/phone format."
-- Missing required parameters: "Missing parameters. Please provide all required details."
+```
+create n/Chemmy Lee p/98765432 e/chemmy@gmail.com a/311, Clementi Ave 2, #02-25 tg/meowies`
+```
+You should directly see the client profile added to the list of clients in the application window. After adding a client profile, you can now perform various operations on the client profile as specified in the next few sections!
 
 ### Marking a client as Cold, Warm, or Hot Leads [to be implemented]
 
