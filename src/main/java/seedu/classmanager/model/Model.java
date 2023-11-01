@@ -162,4 +162,9 @@ public interface Model {
      * Resets the history of the model after a load command.
      */
     void reset(ReadOnlyClassManager classManager);
+
+    /**
+     * Resets the selected student after a clear command.
+     */
+    void resetSelectedStudent();
 }

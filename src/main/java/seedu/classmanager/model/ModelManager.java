@@ -248,6 +248,14 @@ public class ModelManager implements Model {
         versionedClassManager.resetSelectedStudent();
     }
 
+    /**
+     * Resets the selected student after a clear command.
+     */
+    @Override
+    public void resetSelectedStudent() {
+        versionedClassManager.resetSelectedStudent();
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
