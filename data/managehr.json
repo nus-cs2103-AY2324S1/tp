@@ -46,6 +46,11 @@
     "address" : "Blk 45 Aljunied Street 85, #11-31",
     "salary" : "13000",
     "leave" : "0",
-    "departments" : [ "R&D", "Finance" ]
-  } ]
+    "departments" : [ "CEO" ]
+  } ],
+  "departments" : [
+    {
+      
+    }
+  ]
 }

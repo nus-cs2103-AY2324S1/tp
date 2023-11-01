@@ -6,6 +6,8 @@ import java.util.List;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.department.Department;
+import seedu.address.model.department.UniqueDepartmentList;
 import seedu.address.model.employee.Employee;
 import seedu.address.model.employee.UniqueEmployeeList;
 
@@ -17,6 +19,7 @@ public class ManageHr implements ReadOnlyManageHr {
 
     private final UniqueEmployeeList employees;
 
+    private final UniqueDepartmentList departments;
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
      * between constructors. See https://docs.oracle.com/javase/tutorial/java/javaOO/initial.html
@@ -25,6 +28,7 @@ public class ManageHr implements ReadOnlyManageHr {
      *   among constructors.
      */
     {
+        departments = new UniqueDepartmentList();
         employees = new UniqueEmployeeList();
     }
 
@@ -45,6 +49,9 @@ public class ManageHr implements ReadOnlyManageHr {
      * {@code people} must not contain duplicate people.
      */
     public void setEmployees(List<Employee> people) {
+        for (Employee employee : people) {
+            employee.checkValidDepartments(departments);
+        }
         this.employees.setEmployees(people);
     }
 
@@ -53,7 +60,6 @@ public class ManageHr implements ReadOnlyManageHr {
      */
     public void resetData(ReadOnlyManageHr newData) {
         requireNonNull(newData);
-
         setEmployees(newData.getEmployeeList());
     }
 
@@ -71,8 +77,9 @@ public class ManageHr implements ReadOnlyManageHr {
      * Adds an employee to ManageHR.
      * The employee must not already exist in ManageHR.
      */
-    public void addEmployee(Employee p) {
-        employees.add(p);
+    public void addEmployee(Employee employee) {
+        employee.checkValidDepartments(departments);
+        employees.add(employee);
     }
 
     /**
@@ -82,7 +89,7 @@ public class ManageHr implements ReadOnlyManageHr {
      */
     public void setEmployee(Employee target, Employee editedEmployee) {
         requireNonNull(editedEmployee);
-
+        editedEmployee.checkValidDepartments(departments);
         employees.setEmployee(target, editedEmployee);
     }
 
@@ -94,6 +101,40 @@ public class ManageHr implements ReadOnlyManageHr {
         employees.remove(key);
     }
 
+    /**
+     * Adds an department to ManageHR.
+     * The employee must not already exist in ManageHR.
+     */
+    public boolean hasDepartment(Department department) {
+        requireNonNull(department);
+        return departments.contains(department);
+    }
+
+    /**
+     * Adds an department to ManageHR.
+     * The employee must not already exist in ManageHR.
+     */
+    public void addDepartment(Department d) {
+        departments.add(d);
+    }
+
+    /**
+     * Replaces the given employee {@code target} in the list with {@code editedEmployee}.
+     * {@code target} must exist in the ManageHR.
+     * The employee identity of {@code editedEmployee} must not be the same as another existing employee in ManageHR.
+     */
+    public void setDepartment(Department target, Department editedDepartment) {
+        requireNonNull(editedDepartment);
+        departments.setDepartment(target, editedDepartment);
+    }
+
+    /**
+     * Removes {@code key} from this {@code ManageHr}.
+     * {@code key} must exist in the ManageHr.
+     */
+    public void removeDepartment(Department key) {
+        departments.remove(key);
+    }
     //// util methods
 
     @Override
@@ -106,6 +147,11 @@ public class ManageHr implements ReadOnlyManageHr {
     @Override
     public ObservableList<Employee> getEmployeeList() {
         return employees.asUnmodifiableObservableList();
+    }
+
+    @Override
+    public ObservableList<Department> getDepartmentList() {
+        return departments.asUnmodifiableObservableList();
     }
 
     @Override

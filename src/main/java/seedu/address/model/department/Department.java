@@ -48,6 +48,14 @@ public class Department {
         return departmentName.equals(otherDepartment.departmentName);
     }
 
+    /**
+     * Returns true if both department have the same name.
+     * This defines a weaker notion of equality between two department.
+     */
+    public boolean isSameDepartment(Department otherDepartment) {
+        return otherDepartment.equals(this);
+    }
+
     @Override
     public int hashCode() {
         return departmentName.hashCode();

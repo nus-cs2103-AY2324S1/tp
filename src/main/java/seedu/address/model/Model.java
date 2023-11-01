@@ -5,6 +5,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.department.Department;
 import seedu.address.model.employee.Employee;
 
 /**
@@ -84,4 +85,29 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredEmployeeList(Predicate<Employee> predicate);
+
+    /**
+     * Adds an department to ManageHR.
+     * The employee must not already exist in ManageHR.
+     */
+    boolean hasDepartment(Department department);
+
+    /**
+     * Adds an department to ManageHR.
+     * The employee must not already exist in ManageHR.
+     */
+    void addDepartment(Department department);
+
+    /**
+     * Replaces the given employee {@code target} in the list with {@code editedEmployee}.
+     * {@code target} must exist in the ManageHR.
+     * The employee identity of {@code editedEmployee} must not be the same as another existing employee in ManageHR.
+     */
+    void setDepartment(Department target, Department editedDepartment);
+
+    /**
+     * Removes {@code key} from this {@code ManageHr}.
+     * {@code key} must exist in the ManageHr.
+     */
+    void deleteDepartment(Department target);
 }

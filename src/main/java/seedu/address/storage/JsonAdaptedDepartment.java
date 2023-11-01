@@ -1,6 +1,9 @@
 package seedu.address.storage;
 
+import java.util.List;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 import seedu.address.commons.exceptions.IllegalValueException;
@@ -17,8 +20,8 @@ class JsonAdaptedDepartment {
      * Constructs a {@code JsonAdaptedDepartment} with the given {@code departmentName}.
      */
     @JsonCreator
-    public JsonAdaptedDepartment(String departmentName) {
-        this.departmentName = departmentName;
+    public JsonAdaptedDepartment(@JsonProperty("name") String name) {
+        this.departmentName = name;
     }
 
     /**

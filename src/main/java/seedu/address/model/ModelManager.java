@@ -11,6 +11,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.department.Department;
 import seedu.address.model.employee.Employee;
 
 /**
@@ -111,6 +112,29 @@ public class ModelManager implements Model {
         manageHr.setEmployee(target, editedEmployee);
     }
 
+    @Override
+    public boolean hasDepartment(Department department) {
+        requireNonNull(department);
+        return manageHr.hasDepartment(department);
+    }
+
+    @Override
+    public void deleteDepartment(Department target) {
+        manageHr.removeDepartment(target);
+    }
+
+    @Override
+    public void addDepartment(Department department) {
+        manageHr.addDepartment(department);
+    }
+
+    @Override
+    public void setDepartment(Department target, Department editedDepartment) {
+        requireAllNonNull(target, editedDepartment);
+
+        manageHr.setDepartment(target, editedDepartment);
+    }
+    
     //=========== Filtered Employee List Accessors =============================================================
 
     /**

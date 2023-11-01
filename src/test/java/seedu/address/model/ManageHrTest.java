@@ -18,6 +18,7 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.model.department.Department;
 import seedu.address.model.employee.Employee;
 import seedu.address.model.employee.exceptions.DuplicateEmployeeException;
 import seedu.address.testutil.EmployeeBuilder;
@@ -116,6 +117,7 @@ public class ManageHrTest {
      */
     private static class ManageHrStub implements ReadOnlyManageHr {
         private final ObservableList<Employee> people = FXCollections.observableArrayList();
+        private final ObservableList<Department> departments = FXCollections.observableArrayList();
 
         ManageHrStub(Collection<Employee> people) {
             this.people.setAll(people);
@@ -124,6 +126,11 @@ public class ManageHrTest {
         @Override
         public ObservableList<Employee> getEmployeeList() {
             return people;
+        }
+
+        @Override
+        public ObservableList<Department> getDepartmentList() {
+            return departments;
         }
     }
 

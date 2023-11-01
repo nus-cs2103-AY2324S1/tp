@@ -9,6 +9,8 @@ import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.department.Department;
+import seedu.address.model.department.UniqueDepartmentList;
+import seedu.address.model.department.exceptions.DepartmentNotFoundException;
 
 /**
  * Represents an Employee in the ManageHR app.
@@ -66,6 +68,13 @@ public class Employee {
         return leave;
     }
 
+    public void checkValidDepartments(UniqueDepartmentList validDepartments) {
+        for (Department department : departments) {
+            if (!validDepartments.contains(department)) {
+                throw new DepartmentNotFoundException();
+            }
+        }
+    }
     /**
      * Returns an immutable department set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
