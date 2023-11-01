@@ -34,8 +34,8 @@ public class InterviewBuilder {
         this.applicant = DEFAULT_APPLICANT;
         this.jobRole = DEFAULT_JOBROLE;
         this.rating = new Rating(DEFAULT_RATING);
-        this.startTime = TimeParser.parseDate(DEFAULT_STARTTIME);
-        this.endTime = TimeParser.parseDate(DEFAULT_ENDTIME);
+        this.startTime = TimeParser.parseDate(DEFAULT_STARTTIME, false);
+        this.endTime = TimeParser.parseDate(DEFAULT_ENDTIME, false);
         this.isDone = DEFAULT_HAS_DONE;
     }
 
@@ -79,7 +79,7 @@ public class InterviewBuilder {
      * Sets the {@code Start-Time} of the {@code Interview} that we are building.
      */
     public InterviewBuilder withStartTime(String startTime) throws ParseException {
-        this.startTime = TimeParser.parseDate(startTime);
+        this.startTime = TimeParser.parseDate(startTime, false);
         return this;
     }
 
@@ -87,7 +87,7 @@ public class InterviewBuilder {
      * Sets the {@code End-Time} of the {@code Interview} that we are building.
      */
     public InterviewBuilder withEndTime(String endTime) throws ParseException {
-        this.endTime = TimeParser.parseDate(endTime);
+        this.endTime = TimeParser.parseDate(endTime, false);
         return this;
     }
 

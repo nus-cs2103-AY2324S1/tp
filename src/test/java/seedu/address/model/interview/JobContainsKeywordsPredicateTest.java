@@ -43,7 +43,8 @@ public class JobContainsKeywordsPredicateTest {
     @Test
     public void test_jobContainsKeywords_returnsTrue() throws ParseException {
         // One keyword
-        JobContainsKeywordsPredicate predicate = new JobContainsKeywordsPredicate(Collections.singletonList("Engineer"));
+        JobContainsKeywordsPredicate predicate =
+                new JobContainsKeywordsPredicate(Collections.singletonList("Engineer"));
         assertTrue(predicate.test(new InterviewBuilder().withJobRole("Engineer").build()));
 
         // Multiple keywords

@@ -216,8 +216,8 @@ public class ParserUtilTest {
 
     @Test
     public void parseRating_validValueWithWhitespace_returnsTrimmedRating() throws Exception {
-        String RatingWithWhitespace = WHITESPACE + VALID_RATING + WHITESPACE;
+        String ratingWithWhitespace = WHITESPACE + VALID_RATING + WHITESPACE;
         Rating expectedRating = new Rating(VALID_RATING);
-        assertEquals(expectedRating, ParserUtil.parseRating(RatingWithWhitespace));
+        assertEquals(expectedRating, ParserUtil.parseRating(ratingWithWhitespace));
     }
 }
