@@ -11,7 +11,6 @@ import seedu.address.model.appointment.Appointment;
 import seedu.address.model.person.exceptions.DuplicateObjectException;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.ObjectNotFoundException;
-import seedu.address.model.person.exceptions.PersonNotFoundException;
 
 /**
  * A list of persons that enforces uniqueness between its elements and does not allow nulls.

@@ -40,8 +40,8 @@ public class AppointmentCard extends UiPart<Region> {
         super(FXML);
         this.appointment = appointment;
         id.setText(displayedIndex + ". ");
-        patientIc.setText(this.appointment.getPatient().toString());
-        doctorIc.setText(this.appointment.getDoctor().toString());
-        appointmentTime.setText(this.appointment.getAppointmentTime().toString());
+        patientIc.setText("Patient IC: " + this.appointment.getPatient().toString());
+        doctorIc.setText("Doctor IC: " + this.appointment.getDoctor().toString());
+        appointmentTime.setText("Time of appointment: " + this.appointment.getAppointmentTime().toString());
     }
 }
