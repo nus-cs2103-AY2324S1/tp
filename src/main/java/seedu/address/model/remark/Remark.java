@@ -31,7 +31,7 @@ public class Remark {
         }
 
         Remark otherRemark = (Remark) other;
-        return remark.equals(otherRemark.remark);
+        return remark.equals(otherRemark.remark) || remark.equalsIgnoreCase(otherRemark.remark);
     }
 
     @Override
