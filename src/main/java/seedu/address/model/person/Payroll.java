@@ -37,6 +37,14 @@ public class Payroll {
         this.paymentDate = LocalDate.parse(paymentDate, DATE_TIME_FORMATTER);
     }
 
+    public void addDeduction(Deduction deduction) {
+        this.salary.addDeduction(deduction);
+    }
+
+    public void addBenefit(Benefit benefit) {
+        this.salary.addBenefit(benefit);
+    }
+
     /**
      * Calculates the net salary of a person.
      * @return net salary.
@@ -175,6 +183,14 @@ public class Payroll {
 
     public Salary getSalary() {
         return this.salary;
+    }
+
+    public String getDeductionsString() {
+        return this.salary.getDeductionsString();
+    }
+
+    public String getBenefitsString() {
+        return this.salary.getBenefitsString();
     }
 
     @Override

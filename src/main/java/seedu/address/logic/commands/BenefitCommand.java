@@ -14,7 +14,7 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Benefit;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.Salary;
+import seedu.address.model.person.payroll.PayrollStorage;
 
 /**
  * Adds a benefit to the salary of the person identified using it's
@@ -86,11 +86,12 @@ public class BenefitCommand extends Command {
         }
 
         Person employeeToCalculate = lastShownList.get(index.getZeroBased());
-        Salary salary = employeeToCalculate.getSalary();
-        salary.addBenefit(benefit);
+        PayrollStorage payrollStorage = employeeToCalculate.getPayrollStorage();
+        payrollStorage.getLatestPayroll().addBenefit(benefit);
 
         model.updateFilteredPersonList(person -> person.equals(employeeToCalculate));
-        return new CommandResult(String.format(MESSAGE_ARGUMENTS, salary.getBenefitsString()));
+        return new CommandResult(String.format(MESSAGE_ARGUMENTS,
+            payrollStorage.getLatestPayroll().getBenefitsString()));
     }
 
     /**
@@ -109,10 +110,12 @@ public class BenefitCommand extends Command {
 
         if (indexes.size() == 1) {
             Person employeeToCalculate = lastShownList.get(indexes.get(0) - 1);
-            Salary salary = employeeToCalculate.getSalary();
-            salary.addBenefit(benefit);
+            PayrollStorage payrollStorage = employeeToCalculate.getPayrollStorage();
+            payrollStorage.getLatestPayroll().addBenefit(benefit);
+
             model.updateFilteredPersonList(this.name);
-            return new CommandResult(String.format(MESSAGE_ARGUMENTS, salary.getBenefitsString()));
+            return new CommandResult(String.format(MESSAGE_ARGUMENTS,
+                payrollStorage.getLatestPayroll().getBenefitsString()));
         }
 
         model.updateFilteredPersonList(this.name);

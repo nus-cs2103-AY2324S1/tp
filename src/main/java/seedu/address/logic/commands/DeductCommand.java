@@ -13,7 +13,7 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Deduction;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.Salary;
+import seedu.address.model.person.payroll.PayrollStorage;
 
 /**
  * Adds a deduction to the salary of the person identified using it's
@@ -85,11 +85,12 @@ public class DeductCommand extends Command {
         }
 
         Person employeeToCalculate = lastShownList.get(index.getZeroBased());
-        Salary salary = employeeToCalculate.getSalary();
-        salary.addDeduction(deduction);
+        PayrollStorage payrollStorage = employeeToCalculate.getPayrollStorage();
+        payrollStorage.getLatestPayroll().addDeduction(deduction);
 
         model.updateFilteredPersonList(person -> person.equals(employeeToCalculate));
-        return new CommandResult(String.format(MESSAGE_ARGUMENTS, salary.getDeductionsString()));
+        return new CommandResult(String.format(MESSAGE_ARGUMENTS,
+            payrollStorage.getLatestPayroll().getDeductionsString()));
     }
 
     /**
@@ -108,10 +109,11 @@ public class DeductCommand extends Command {
 
         if (indexes.size() == 1) {
             Person employeeToCalculate = lastShownList.get(indexes.get(0) - 1);
-            Salary salary = employeeToCalculate.getSalary();
-            salary.addDeduction(deduction);
+            PayrollStorage payrollStorage = employeeToCalculate.getPayrollStorage();
+            payrollStorage.getLatestPayroll().addDeduction(deduction);
             model.updateFilteredPersonList(this.name);
-            return new CommandResult(String.format(MESSAGE_ARGUMENTS, deduction.toString()));
+            return new CommandResult(String.format(MESSAGE_ARGUMENTS,
+                payrollStorage.getLatestPayroll().getDeductionsString()));
         }
 
         model.updateFilteredPersonList(this.name);

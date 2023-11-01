@@ -27,7 +27,6 @@ import seedu.address.model.person.BankAccount;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.JoinDate;
 import seedu.address.model.person.Name;
-import seedu.address.model.person.Payroll;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Salary;
