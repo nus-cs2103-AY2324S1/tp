@@ -6,9 +6,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showMeetingAtIndex;
+import static seedu.address.testutil.TypicalAddressBook.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_MEETING;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_MEETING;
-import static seedu.address.testutil.TypicalMeetings.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
 
@@ -32,11 +32,11 @@ public class MarkMeetingCommandTest {
         Meeting meetingToMark = model.getFilteredMeetingList().get(INDEX_FIRST_MEETING.getZeroBased());
         MarkMeetingCommand markMeetingCommand = new MarkMeetingCommand(INDEX_FIRST_MEETING);
 
-        String expectedMessage = String.format(MarkMeetingCommand.MESSAGE_MARK_MEETING_SUCCESS,
-                Messages.format(meetingToMark));
-
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         Meeting markedMeeting = new MeetingBuilder(meetingToMark).withStatus(true).build();
+        String expectedMessage = String.format(MarkMeetingCommand.MESSAGE_MARK_MEETING_SUCCESS,
+                Messages.format(markedMeeting));
+
         expectedModel.setMeeting(meetingToMark, markedMeeting);
 
         assertCommandSuccess(markMeetingCommand, model, expectedMessage, expectedModel);
@@ -57,13 +57,12 @@ public class MarkMeetingCommandTest {
         Meeting meetingToMark = model.getFilteredMeetingList().get(INDEX_FIRST_MEETING.getZeroBased());
         MarkMeetingCommand markMeetingCommand = new MarkMeetingCommand(INDEX_FIRST_MEETING);
 
-        String expectedMessage = String.format(MarkMeetingCommand.MESSAGE_MARK_MEETING_SUCCESS,
-                Messages.format(meetingToMark));
-
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         Meeting markedMeeting = new MeetingBuilder(meetingToMark).withStatus(true).build();
         expectedModel.setMeeting(meetingToMark, markedMeeting);
         showMeetingAtIndex(expectedModel, INDEX_FIRST_MEETING);
+        String expectedMessage = String.format(MarkMeetingCommand.MESSAGE_MARK_MEETING_SUCCESS,
+                Messages.format(markedMeeting));
 
         assertCommandSuccess(markMeetingCommand, model, expectedMessage, expectedModel);
     }

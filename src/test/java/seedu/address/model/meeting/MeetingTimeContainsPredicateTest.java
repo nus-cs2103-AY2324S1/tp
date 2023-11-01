@@ -18,7 +18,6 @@ public class MeetingTimeContainsPredicateTest {
     private LocalDateTime start = LocalDateTime.of(LocalDate.of(0001, 01, 01), LocalTime.of(00, 00));
     private LocalDateTime startOn30 = LocalDateTime.of(LocalDate.of(2023, 9, 30), LocalTime.of(10, 00));
     private LocalDateTime endOn30 = LocalDateTime.of(LocalDate.of(2023, 9, 30), LocalTime.of(12, 00));
-    private LocalDateTime start2 = LocalDateTime.of(LocalDate.of(0001, 01, 02), LocalTime.of(00, 00));
     private LocalDateTime end = LocalDateTime.of(LocalDate.of(9999, 12, 31), LocalTime.of(23, 59));
 
     @Test
