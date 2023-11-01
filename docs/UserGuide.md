@@ -149,6 +149,8 @@ Return to the [Table of Contents](#table-of-contents)
 
 ## Navigating the user interface
 
+![User Interface for MediFlowR](images/userguide/UserInterface.png)
+
 Return to the [Table of Contents](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
