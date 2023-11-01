@@ -16,6 +16,7 @@ import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.Dashboard;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -31,7 +32,6 @@ public class MainWindow extends UiPart<Stage> {
     private Logic logic;
 
     // Independent Ui parts residing in this Ui container
-    private ContentDisplay contentDisplay;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
 
@@ -42,10 +42,10 @@ public class MainWindow extends UiPart<Stage> {
     private MenuItem helpMenuItem;
 
     @FXML
-    private StackPane contentDisplayPlaceholder;
+    private StackPane resultDisplayPlaceholder;
 
     @FXML
-    private StackPane resultDisplayPlaceholder;
+    private StackPane content;
 
     @FXML
     private StackPane statusbarPlaceholder;
@@ -78,6 +78,7 @@ public class MainWindow extends UiPart<Stage> {
 
     /**
      * Sets the accelerator of a MenuItem.
+     *
      * @param keyCombination the KeyCombination value of the accelerator
      */
     private void setAccelerator(MenuItem menuItem, KeyCombination keyCombination) {
@@ -110,8 +111,8 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        contentDisplay = new ContentDisplay(logic.getFilteredPersonList(), logic.getSelectedPerson());
-        contentDisplayPlaceholder.getChildren().add(contentDisplay.getRoot());
+        // show dashboard by default
+        fillContent(true);
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
@@ -132,6 +133,23 @@ public class MainWindow extends UiPart<Stage> {
         if (guiSettings.getWindowCoordinates() != null) {
             primaryStage.setX(guiSettings.getWindowCoordinates().getX());
             primaryStage.setY(guiSettings.getWindowCoordinates().getY());
+        }
+    }
+
+    /**
+     * Handles the toggling of display between dashboard and client info.
+     */
+    public void fillContent(boolean showDashboard) {
+        content.getChildren().clear();
+
+        Dashboard dashboard = logic.getDashboard();
+        if (showDashboard) {
+            dashboard.openDashboard();
+            content.getChildren().add(new DashboardDisplay(dashboard).getRoot());
+        } else {
+            dashboard.closeDashboard();
+            content.getChildren()
+                   .add(new ClientDisplay(logic.getFilteredPersonList(), logic.getSelectedPerson()).getRoot());
         }
     }
 
@@ -157,7 +175,7 @@ public class MainWindow extends UiPart<Stage> {
     @FXML
     private void handleExit() {
         GuiSettings guiSettings = new GuiSettings(primaryStage.getWidth(), primaryStage.getHeight(),
-                (int) primaryStage.getX(), (int) primaryStage.getY());
+                                                  (int) primaryStage.getX(), (int) primaryStage.getY());
         logic.setGuiSettings(guiSettings);
         helpWindow.hide();
         primaryStage.hide();
@@ -173,6 +191,8 @@ public class MainWindow extends UiPart<Stage> {
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
+
+            fillContent(commandResult.isShowDashboard());
 
             if (commandResult.isShowHelp()) {
                 handleHelp();

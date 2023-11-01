@@ -13,6 +13,7 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.person.Person;
+import seedu.address.model.reminder.ReminderScheduler;
 import seedu.address.model.reminder.UniqueReminderList;
 
 /**
@@ -27,7 +28,12 @@ public class ModelManager implements Model {
     private final SimpleObjectProperty<Person> selectedPerson = new SimpleObjectProperty<>();
     private final UniqueReminderList reminderList;
     private final Dashboard dashboard = new Dashboard(this);
+<<<<<<< HEAD
     private final UniqueReminderList reminderList;
+=======
+    private final ReminderScheduler reminderScheduler;
+    private final Object reminderMutex = new Object();
+>>>>>>> f91d8d07f4e3b44fbefa58a590572ef8b8224796
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -40,8 +46,9 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
-        this.reminderList = UniqueReminderList.getInstance();
-        this.reminderList.setReminders(addressBook.getPersonList());
+        this.reminderList = new UniqueReminderList(this);
+        this.reminderList.updateReminders();
+        this.reminderScheduler = new ReminderScheduler(this, reminderMutex);
     }
 
     public ModelManager() {
@@ -147,11 +154,18 @@ public class ModelManager implements Model {
         return selectedPerson;
     }
 
-    //=========== Unique Reminder List Accessors ===============================================================
+    //=========== Reminder List Accessors =============================================================
+    @Override
+    public UniqueReminderList getReminderList() {
+        return reminderList;
+    }
 
     @Override
-    public void addReminder(Person person) {
-        reminderList.add(person);
+    public void startReminderScheduler() {
+        if (reminderScheduler == null) {
+            return;
+        }
+        reminderScheduler.start();
     }
 
     @Override
