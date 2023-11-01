@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalSchedules.SCHEDULE_ALICE_FIRST_JAN;
-import static seedu.address.testutil.TypicalSchedules.SCHEDULE_ALICE_SECOND_JAN;
+import static seedu.address.testutil.TypicalSchedules.SCHEDULE_ALICE_SECOND_JAN_1;
 import static seedu.address.testutil.TypicalSchedules.SCHEDULE_BOB_SECOND_JAN;
 
 import java.util.Arrays;
@@ -200,7 +200,7 @@ public class UniqueScheduleListTest {
 
         uniqueScheduleList.add(SCHEDULE_ALICE_FIRST_JAN);
         otherUniqueScheduleList1.add(SCHEDULE_ALICE_FIRST_JAN);
-        otherUniqueScheduleList2.add(SCHEDULE_ALICE_SECOND_JAN);
+        otherUniqueScheduleList2.add(SCHEDULE_ALICE_SECOND_JAN_1);
 
         // null -> returns false
         assertFalse(uniqueScheduleList.equals(null));
@@ -221,11 +221,11 @@ public class UniqueScheduleListTest {
     @Test
     public void iterator_validList_returnsIterator() {
         uniqueScheduleList.add(SCHEDULE_ALICE_FIRST_JAN);
-        uniqueScheduleList.add(SCHEDULE_ALICE_SECOND_JAN);
+        uniqueScheduleList.add(SCHEDULE_ALICE_SECOND_JAN_1);
 
         Iterator<Schedule> iterator = uniqueScheduleList.iterator();
 
-        assertEquals(SCHEDULE_ALICE_SECOND_JAN, iterator.next());
+        assertEquals(SCHEDULE_ALICE_SECOND_JAN_1, iterator.next());
         assertEquals(SCHEDULE_ALICE_FIRST_JAN, iterator.next());
         assertFalse(iterator.hasNext());
     }

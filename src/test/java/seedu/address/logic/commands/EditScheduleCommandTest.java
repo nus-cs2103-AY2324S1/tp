@@ -97,11 +97,12 @@ public class EditScheduleCommandTest {
         showScheduleAtIndex(model, INDEX_FIRST_SCHEDULE);
 
         Schedule scheduleInFilteredList = model.getFilteredScheduleList().get(INDEX_FIRST_SCHEDULE.getZeroBased());
+        LocalDateTime newStartTime = scheduleInFilteredList.getStartTime().getTime().minusHours(1);
         Schedule editedSchedule =
             new ScheduleBuilder(scheduleInFilteredList)
-                .withStartTime(LocalDateTime.parse(VALID_START_TIME_ONE)).build();
+                .withStartTime(newStartTime).build();
         EditScheduleCommand editScheduleCommand = new EditScheduleCommand(INDEX_FIRST_SCHEDULE,
-            new EditScheduleDescriptorBuilder().withStartTime(VALID_START_TIME_ONE).build());
+            new EditScheduleDescriptorBuilder().withStartTime(newStartTime.toString()).build());
 
         String expectedMessage = String.format(EditScheduleCommand.MESSAGE_EDIT_SCHEDULE_SUCCESS,
             Messages.format(editedSchedule));

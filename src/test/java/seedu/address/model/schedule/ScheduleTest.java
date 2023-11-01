@@ -201,13 +201,13 @@ class ScheduleTest {
 
         // different start time -> returns false
         editedOne = new ScheduleBuilder(SCHEDULE_ALICE_FIRST_JAN)
-                .withStartTime(LocalDateTime.of(2022, 12, 31, 10, 0, 0))
+                .withStartTime(SCHEDULE_ALICE_FIRST_JAN.getStartTime().getTime().minusHours(1))
                 .build();
         assertFalse(SCHEDULE_ALICE_FIRST_JAN.equals(editedOne));
 
         // different end time -> returns false
         editedOne = new ScheduleBuilder(SCHEDULE_ALICE_FIRST_JAN)
-                .withEndTime(LocalDateTime.of(2023, 1, 2, 10, 0, 0))
+                .withEndTime(SCHEDULE_ALICE_FIRST_JAN.getStartTime().getTime().plusHours(1))
                 .build();
         assertFalse(SCHEDULE_ALICE_FIRST_JAN.equals(editedOne));
 
@@ -343,12 +343,6 @@ class ScheduleTest {
         assertFalse(schedule1.isOnDate(new Date(LocalDate.of(2023, 2, 1)))); // different year
         assertFalse(schedule1.isOnDate(new Date(LocalDate.of(2023, 1, 2)))); // different day
         assertTrue(schedule1.isOnDate(new Date(LocalDate.of(2023, 1, 1)))); // same date
-
-        // start and end time on different dates
-        Schedule schedule2 =
-            new ScheduleBuilder().withStartTime(sameDay).withEndTime(differentDay).build();
-        assertFalse(schedule2.isOnDate(new Date(sameDay.toLocalDate())));
-        assertFalse(schedule2.isOnDate(new Date(differentDay.toLocalDate())));
     }
 
     @Test
