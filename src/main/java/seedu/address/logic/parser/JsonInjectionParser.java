@@ -9,7 +9,6 @@ import seedu.address.logic.parser.exceptions.ParseException;
  */
 public class JsonInjectionParser {
     // List of possible JSON commands.
-    private final String quote = "\'";
     private final String hexEscape = "\\x";
     private final String octalEscape = "\\0";
     private final String comma = ",";
@@ -18,7 +17,7 @@ public class JsonInjectionParser {
     private final String openCurlyBrackets = "{";
     private final String closedCurlyBrackets = "}";
     private String[] wordsToSanitise =
-            new String[]{quote, hexEscape, octalEscape, comma, openParentheses, closedParentheses,
+            new String[]{hexEscape, octalEscape, comma, openParentheses, closedParentheses,
                 openCurlyBrackets, closedCurlyBrackets};
 
     /**
