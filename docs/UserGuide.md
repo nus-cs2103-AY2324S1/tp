@@ -14,42 +14,7 @@ In this user guide, you will find instructions on how to install Connectify and 
 Choose a topic from the table of contents below to find out how to manage your clients using Connectify!
 
 # Table of Contents
-* Table of Contents
-  - [Welcome to Connectify!](#welcome-to-connectify)
-- [Welcome to Connectify!](#welcome-to-connectify)
-- [Table of Contents](#table-of-contents)
-- [Quick start](#quick-start)
-  - [Reading the examples in this user guide](#reading-the-examples-in-this-user-guide)
-  - [Features](#features)
-    - [Quick notes about the command format](#quick-notes-about-the-command-format)
-- [Features](#features-1)
-    - [Viewing help: ***help***](#viewing-help-help)
-  - [Adding](#adding)
-    - [Adding a client profile: ***create***](#adding-a-client-profile-create)
-      - [Format](#format)
-      - [Example](#example)
-      - [Adding a client interaction: ***interaction***](#adding-a-client-interaction-interaction)
-      - [Format](#format-1)
-      - [Examples](#examples)
-  - [Viewing](#viewing)
-    - [Viewing the dashboard: ***dashboard***](#viewing-the-dashboard-dashboard)
-      - [Format](#format-2)
-    - [Viewing the list of clients: ***list***](#viewing-the-list-of-clients-list)
-    - [Finding a client by name: ***find***](#finding-a-client-by-name-find)
-    - [Viewing the full details of a client: ***view***](#viewing-the-full-details-of-a-client-view)
-  - [Editing](#editing)
-    - [Editing a client profile: ***edit***](#editing-a-client-profile-edit)
-  - [Deleting](#deleting)
-    - [Deleting a client profile: ***delete***](#deleting-a-client-profile-delete)
-- [FAQ \[coming soon\]](#faq-coming-soon)
-- [Known issues \[coming soon\]](#known-issues-coming-soon)
-  - [Command summary](#command-summary)
-    - [Add](#add)
-    - [View](#view)
-    - [Edit](#edit)
-    - [Delete](#delete)
-    - [Exit](#exit)
-- [Command summary](#command-summary-1)
+{:toc}
 
 
 --------------------------------------------------------------------------------------------------------------------
@@ -175,14 +140,16 @@ After adding a client profile, you can now log your interactions with the client
 ```text
 interaction INDEX o/OUTCOME [DETAILS]
 ```
-where INDEX refers to the index of the client profile in the displayed list of clients.
+Where INDEX refers to the index of the client profile in the displayed list of clients.
+
+Note that at least one of the `outcome` or `details` parameters must be provided.
 
 #### Examples
 ```
-interaction 1 o/Meeting with client d/Client is interested in our products
+interaction 1 o/INTERESTED Meeting with client
 ```
 ```
-interaction 1 o/Meeting with client
+interaction 1 Meeting with client
 ```
 
 You should directly see the interaction added to the client profile in the application window.
