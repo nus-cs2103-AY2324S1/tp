@@ -211,6 +211,8 @@ public class ParserUtil {
      * @throws ParseException If there is no course name, or if there is an end date but no start date
      */
     public static Course parseCourseWithPrefixes(String courseText) throws ParseException {
+        requireNonNull(courseText);
+
         ArgumentMultimap argMultiMap =
                 ArgumentTokenizer.tokenize(
                         courseText,

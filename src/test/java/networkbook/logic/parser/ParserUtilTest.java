@@ -216,6 +216,17 @@ public class ParserUtilTest {
     }
 
     @Test
+    public void parseCourse_invalidDates_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseCourse(VALID_COURSE, "a", ""));
+        assertThrows(ParseException.class, () -> ParserUtil.parseCourse(VALID_COURSE, "01-01-2000", "a"));
+    }
+
+    @Test
+    public void parseCourse_startDateAfterEndDate_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseCourse(VALID_COURSE, "01-10-2000", "01-01-2000"));
+    }
+
+    @Test
     public void parseCourses_null_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> ParserUtil.parseCourses(null));
     }
@@ -228,6 +239,11 @@ public class ParserUtilTest {
     @Test
     public void parseCourses_collectionWithDuplicates_throwsParseException() {
         assertThrows(ParseException.class, () -> ParserUtil.parseCourses(Arrays.asList(VALID_COURSE, VALID_COURSE)));
+    }
+
+    @Test
+    public void parseCourseWithPrefixes_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseCourseWithPrefixes(null));
     }
 
     @Test
