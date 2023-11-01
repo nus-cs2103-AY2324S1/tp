@@ -566,7 +566,7 @@ For step 3, the schedule list has been updated to show schedules that are marked
 
 **:warning: Warning**<br>
 
-`TUTOR_INDEX` and `m/` are optional flags to add as per type of usage. However an error will still occur if invalid values are passed into these flags.
+`TUTOR_INDEX` and `m/` are optional fields to add as per type of usage. However an error will still occur if invalid values are passed into these fields.
 
 </div>
 
