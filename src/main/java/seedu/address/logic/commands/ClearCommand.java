@@ -20,7 +20,16 @@ public class ClearCommand extends Command {
 
     private final String confirmation;
 
+    /**
+     * Constructs a ClearCommand with the provided confirmation.
+     *
+     * @param confirmation The user's confirmation. Must be "confirm" to execute the clear command.
+     * @throws NullPointerException if the confirmation is null.
+     */
     public ClearCommand(String confirmation) {
+        if (confirmation == null) {
+            throw new NullPointerException("Confirmation cannot be null.");
+        }
         this.confirmation = confirmation;
     }
 
