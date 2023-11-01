@@ -138,8 +138,8 @@ on a day-to-day basis. You will be adding your first tutor and corresponding sch
 Click on any of these below to jump to the respective sections of the guide!
 * [Start](#start)
 * [Adding your first tutor](#adding-your-first-tutor)
-* [Planning your schedules](#planning-your-schedules)
-* [Viewing your scheudles](#viewing-your-tutorsschedules)
+* [Adding your first schedule](#adding-your-first-schedule)
+* [Marking your schedule as completed](#marking-your-schedule-as-completed)
 
 ### Start
 ![start](images/tutorial/start.png)
@@ -150,43 +150,44 @@ When you first launch TutorConnect, you will be greeted with an empty screen wit
 
 ![add-t](images/tutorial/add-t.png)
 
-To add your first tutor, you can use the [**add-t**](#adding-a-tutor-add-t) command.
-
 Let's say you have a tutor named **John Doe**, he has provided you with his phone number: **9123 4567** and his email address: **johndoe@example.com**.
 
-To add John Doe into TutorConnect:
+Here is how you would use the [**add-t**](#adding-a-tutor-add-t) command to add John Doe to TutorConnect:
 1. Simply type into the Command Box: `add-t n/John Doe p/91234567 e/johnd@example.com`
-2. Hit enter.
+2. Hit enter
 3. Voila! John Doe is now in TutorConnect
 
-### Planning Your Schedules
+### Adding your first schedule
+
+![add-s](images/tutorial/add-s.png)
 
 Now that your tutors are in TutorConnect, it's time to start scheduling classes for them!
 
-To assign schedules to your tutor, you can use the [**add-s**](#adding-a-schedule-add-s) command.
+Let's say you have a class on **1 October 2023** from **9AM to 11AM**.
 
-Let's assign a schedule for **John Doe** on **1 October 2023** from **9AM to 11AM**.
+Let's assign the class to **John Doe**.
 
-To assign John Doe that schedule:
-1. Get the **TUTOR_INDEX** of the tutor you wish to assign a schedule to
+Here is how to use the [**add-s**](#adding-a-schedule-add-s) command to assign the schedule to John Doe:
+1. Get the **TUTOR_INDEX** of the tutor you wish to assign the schedule to
    ![tutor-index](images/tutorial/tutor-index.png)
 2. Simply type into the Command Box: `add-s 1 st/2023-10-01T09:00 et/2023-10-01T11:00`
-3. Hit enter.
-4. Tada! John Doe now has a schedule on **1 October 2023** from **9AM to 11AM**. 
+3. Hit enter
+4. Tada! John Doe now has a schedule on **1 October 2023** from **9AM to 11AM**
 
-### Viewing Your Tutors/Schedules
+### Marking your schedule as completed
 
-![list-s](images/tutorial/list-s.png)
+![mark](images/tutorial/mark.png)
 
-Now that you have schedules in TutorConnect, you can view them using the [**list-s**](#list-all-schedules-list-s) command.
+Now that class is over, it is time to mark the schedule as completed!
 
-1. Simply type into the Command Box: `list-s`
-2. Hit enter.
-3. Amazing! You can view all your schedules in TutorConnect.
+Here is how to use the [**mark**](#marking-a-schedule-mark) command to mark the schedule as completed:
+1. Get the **SCHEDULE_INDEX** of the schedule you wish to mark as completed
+   ![schedule-index](images/tutorial/schedule-index.png)
+2. Simply type into the Command Box: `mark 1 m/1`
+3. Hit enter
+4. Tada! The schedule is now marked as completed
 
-Similarly, you can use the [**list-t**](#listing-all-tutors-list-t) command to go back to viewing all your tutors instead.
-
-Congratulations! You have successfully added your first tutor and schedule to TutorConnect. We hope that this tutorial has helped guide you through the basic features of TutorConnect. Please refer to the [**Features Section**](#features) to see what else TutorConnect can do. Alternatively visit the [**FAQ**](#faq) to view the frequently asked questions.
+**Congratulations!** You have successfully added your first tutor and schedule, and also completed a schedule in TutorConnect. We hope that this tutorial has helped guide you through the basic features of TutorConnect. Please refer to the [**Features Section**](#features) to see what else TutorConnect can do. Alternatively visit the [**FAQ**](#faq) to view the frequently asked questions.
 
 [Back To Top](#table-of-contents)
 
