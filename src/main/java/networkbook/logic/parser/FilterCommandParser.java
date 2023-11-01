@@ -131,6 +131,9 @@ public class FilterCommandParser implements Parser<FilterCommand> {
     public FilterCommand parseGrad(String grad) throws ParseException {
         Optional<String> fieldString = Optional.ofNullable(grad);
         String[] predicateTerms = fieldString.get().trim().split("\\s+");
+        if (Arrays.stream(predicateTerms).anyMatch(s -> s.equals(""))) {
+            throw new ParseException(MISSING_FIELD);
+        }
         try {
             List<Integer> yearsPredicate = Arrays.stream(predicateTerms)
                     .map(String::trim)
