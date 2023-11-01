@@ -22,9 +22,9 @@ public class SortCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Sorts the current list based currently available "
             + "sort functions.\n"
             + "Currently available sorting variations: \n"
-            + "-sort (lexicographical name sort)\n -appointment (earliest timing first)\n"
+            + "-name (lexicographical name sort)\n -appointment (earliest timing first)\n"
             + "Parameters: sort [variation]...\n"
-            + "Example: sort sort";
+            + "Example: sort name";
 
     private final Comparator<Person> comparator;
 
