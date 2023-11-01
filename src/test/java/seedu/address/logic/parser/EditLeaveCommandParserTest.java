@@ -57,7 +57,7 @@ public class EditLeaveCommandParserTest {
     @Test
     public void parse_allFieldsSpecified_success() {
         String userInput = " " + PREFIX_ID + VALID_ID_BOB + " " + PREFIX_OLD
-                + VALID_LEAVELIST_BOB.get(0).toString() + " " +  PREFIX_NEW + "2023-11-11";
+                + VALID_LEAVELIST_BOB.get(0).toString() + " " + PREFIX_NEW + "2023-11-11";
         EditLeaveCommand expectedCommand = new EditLeaveCommand(new Id(VALID_ID_BOB), LocalDate.now(),
                 LocalDate.of(2023, 11, 11));
         assertParseSuccess(parser, userInput, expectedCommand);
