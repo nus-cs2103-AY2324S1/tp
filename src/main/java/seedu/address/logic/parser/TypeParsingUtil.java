@@ -516,14 +516,23 @@ public class TypeParsingUtil {
     }
     public static String getValueImmediatelyAfterCommandName(String commandWord,
                                                              String errorFieldName,
-                                                             String input) throws ParseException {
+                                                             String input,
+                                                             boolean isOptional) throws ParseException {
         Pattern p = Pattern.compile(commandWord + "\\s+([\\w ]+)");
         Matcher m = p.matcher(input);
         if (m.find()) {
             return m.group(1).trim();
         } else {
+            if (isOptional) {
+                return null;
+            }
             throw new FlagNotFoundException(errorFieldName + " not found");
         }
+    }
+    public static String getValueImmediatelyAfterCommandName(String commandWord,
+                                                             String errorFieldName,
+                                                             String input) throws ParseException {
+        return getValueImmediatelyAfterCommandName(commandWord, errorFieldName, input, false);
     }
 
     /**

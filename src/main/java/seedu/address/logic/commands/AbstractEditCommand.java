@@ -107,8 +107,11 @@ public abstract class AbstractEditCommand<T extends ListEntry<? extends T>> exte
                 try {
                     original = list.get(index - 1);
                 } catch (IndexOutOfBoundsException e) {
-                    throw new CommandException("Index out of bounds, expected 1 to "
-                            + model.getFilteredPersonList().size() + " but got " + index + ".");
+                    String errMessage = list.isEmpty()
+                                        ? "The index provided is invalid as the " + className() + " list is empty."
+                                        : "Index out of bounds, expected 1 to " + list.size()
+                            + " but got " + index + ".";
+                    throw new CommandException(errMessage);
                 }
             }
             edited = original.clone();
@@ -148,5 +151,5 @@ public abstract class AbstractEditCommand<T extends ListEntry<? extends T>> exte
     }
     abstract String editableFieldsInfo();
     abstract String className();
-    abstract String getUsageInfo();
+    public abstract String getUsageInfo();
 }

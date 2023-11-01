@@ -5,6 +5,8 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
 import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -127,7 +129,6 @@ public class ModelManager implements Model {
         requireNonNull(person);
         return addressBook.hasPersonClashWith(person);
     }
-
     @Override
     public void deletePerson(Person target) {
         addressBook.removePerson(target);

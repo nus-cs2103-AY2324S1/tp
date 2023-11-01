@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.parser.EditLessonCommandParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.lessons.Lesson;
 
@@ -49,14 +50,11 @@ public class EditLessonCommand extends AbstractEditCommand<Lesson> {
 
     @Override
     String className() {
-        return "Lesson";
+        return "lesson";
     }
 
     @Override
-    String getUsageInfo() {
-        return "Usage: editLesson [INDEX] -[flagName] [Value]. For example, editLesson 1 -start 14:30"
-                + " If you currently displayed list is Lesson, you could use edit inplace of editLesson. "
-                + "Editable Fields: " + editableFieldsInfo() + "."
-                + "Note that start must be before end.";
+    public String getUsageInfo() {
+        return EditLessonCommandParser.getUsageInfo();
     }
 }

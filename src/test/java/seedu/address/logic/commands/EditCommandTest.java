@@ -48,6 +48,7 @@ public class EditCommandTest {
             assertFalse(model.hasPerson(person));
             new EditPersonCommand(1, person).execute(model);
             assertTrue(model.hasPerson(person));
+            new EditPersonCommand(1, person).execute(model);
             assertThrows(CommandException.class, () -> new EditPersonCommand(1, person).execute(model));
             assertThrows(CommandException.class, () -> new EditPersonCommand(2, person).execute(model));
             Lesson lesson = Lesson.getDefaultLesson();

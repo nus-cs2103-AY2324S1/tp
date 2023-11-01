@@ -47,7 +47,7 @@ public class DeletePersonCommandTest {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
         DeletePersonCommand deletePersonCommand = new DeletePersonCommand(outOfBoundIndex);
 
-        assertCommandFailure(deletePersonCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandFailure(deletePersonCommand, model, "Index out of bounds, expected 1 to 7 but got 8.");
     }
 
     @Test
@@ -77,7 +77,7 @@ public class DeletePersonCommandTest {
 
         DeletePersonCommand deletePersonCommand = new DeletePersonCommand(outOfBoundIndex);
 
-        assertCommandFailure(deletePersonCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandFailure(deletePersonCommand, model, "Index out of bounds, expected 1 to 1 but got 2.");
     }
 
     @Test

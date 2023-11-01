@@ -256,10 +256,13 @@ public class Lesson extends ListEntry<Lesson> {
     }
     @Override
     public String toString() {
+        String startEndStr = start != Time.DEFAULT_TIME && end != Time.DEFAULT_TIME
+                             ? " from " + start + " to " + end
+                             : "";
         String subjectStr = subject == null
                              ? ""
                              : " for " + subject;
-        return "Lesson from " + start + " to " + end + subjectStr;
+        return "Lesson " + name + startEndStr + subjectStr;
     }
 
     /**

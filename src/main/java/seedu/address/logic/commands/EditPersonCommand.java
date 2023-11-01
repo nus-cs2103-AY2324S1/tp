@@ -9,6 +9,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.parser.EditPersonCommandParser;
 import seedu.address.model.person.Person;
 // hello world
 /**
@@ -58,6 +59,7 @@ public class EditPersonCommand extends AbstractEditCommand<Person> {
         hasClashWith = model::hasPersonClashWith;
         deleteMethod = model::deletePerson;
         addMethod = model::addPerson;
+        getClashingEntry = model::getPersonClashWith;
     }
 
 
@@ -67,6 +69,21 @@ public class EditPersonCommand extends AbstractEditCommand<Person> {
         edited.setEmail(editDescriptor.getEmail());
         edited.setAddress(editDescriptor.getAddress());
         edited.setSubjectsIfNotDefault(editDescriptor.getSubjects());
+    }
+
+    @Override
+    String editableFieldsInfo() {
+        return "name, phone, email, address, subjects, remark, tags";
+    }
+
+    @Override
+    String className() {
+        return "student";
+    }
+
+    @Override
+    public String getUsageInfo() {
+        return EditPersonCommandParser.getUsageInfo();
     }
 }
 

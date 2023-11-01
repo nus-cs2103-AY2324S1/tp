@@ -28,14 +28,24 @@ public class AddLessonCommandParser implements Parser<AddLessonCommand> {
      * @return a lesson object
      * @throws ParseException if the user input is of wrong format or the lesson clashes with existing lessons
      */
-    public static Lesson parseLesson(String args) throws ParseException {
-        Lesson lesson = Lesson.getDefaultLesson();
-        lesson.setNameIfNotDefault(parseField("name", args, Name::of));
-        lesson.setSubjectIfNotDefault(parseField("subject", args, Subject::of));
-        lesson.setDayIfNotDefault(parseField("day", args, Day::of));
-        lesson.setStartIfNotDefault(parseField("start", args, Time::of));
-        lesson.setEndIfNotDefault(parseField("end", args, Time::of));
-        return lesson;
-        //lesson.setTaskListIfNotDefault(parseField("task", args, TaskList::of));
+    public static Lesson parseLesson(String args) throws ParseException{
+        try {
+            Lesson lesson = Lesson.getDefaultLesson();
+            lesson.setNameIfNotDefault(parseField("name", args, Name::of, false));
+            lesson.setSubjectIfNotDefault(parseField("subject", args, Subject::of));
+            lesson.setDayIfNotDefault(parseField("day", args, Day::of));
+            lesson.setStartIfNotDefault(parseField("start", args, Time::of));
+            lesson.setEndIfNotDefault(parseField("end", args, Time::of));
+            return lesson;
+        } catch (ParseException e) {
+            throw new ParseException("Invalid lesson format: " + e.getMessage() + ". "
+                    + getUsageInfo());
+        }
+    }
+    private static String getUsageInfo() {
+        return "Usage: addLesson -name [NAME] (any number of -[subject|day|start|end|remark] [value]). "
+                + "For example, addLesson -name John -subject Math -day Monday -start 14:30 -end 16:30"
+                + "If you are currently displaying lesson list, you could use 'add' inplace of 'addLesson'. "
+                + "Note you must provide a 'name' not already in the schedule and 'start' must be before 'end'.";
     }
 }

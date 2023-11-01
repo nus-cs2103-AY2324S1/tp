@@ -34,7 +34,11 @@ public class DeleteLessonCommand extends Command {
         List<Lesson> lastShownList = model.getFilteredScheduleList();
 
         if (targetIndex < 1 || targetIndex > lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            String errMessage = lastShownList.isEmpty()
+                    ? "The index provided is invalid as the lesson list is empty."
+                    : "Index out of bounds, expected 1 to " + lastShownList.size()
+                    + " but got " + targetIndex + ".";
+            throw new CommandException(errMessage);
         }
 
         Lesson lessonToDelete = lastShownList.get(targetIndex - 1);
