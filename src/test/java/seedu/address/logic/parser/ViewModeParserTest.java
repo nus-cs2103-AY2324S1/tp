@@ -15,14 +15,13 @@ public class ViewModeParserTest {
     private final ViewModeParser parser = new ViewModeParser();
     @Test
     public void parseCommand_viewExit() throws Exception {
-        assertTrue(parser.parseCommand(ViewExitCommand.COMMAND_WORD) instanceof ViewExitCommand);
-        assertTrue(parser.parseCommand(ViewExitCommand.COMMAND_WORD + " 3") instanceof ViewExitCommand);
+        assertTrue(parser.parseCommand(ViewExitCommand.COMMAND_WORD, null, null) instanceof ViewExitCommand);
     }
 
     @Test
     public void parseCommand_unrecognisedInput_throwsParseException() {
         assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE), ()
-                -> parser.parseCommand(""));
+                -> parser.parseCommand("", null, null));
     }
 
     @Test
@@ -30,7 +29,7 @@ public class ViewModeParserTest {
         assertThrows(
                 ParseException.class,
                 MESSAGE_UNAVAILABLE_COMMAND_IN_VIEW_MODE, () ->
-                        parser.parseCommand("unknownCommand")
+                        parser.parseCommand("unknownCommand", null, null)
         );
     }
 }

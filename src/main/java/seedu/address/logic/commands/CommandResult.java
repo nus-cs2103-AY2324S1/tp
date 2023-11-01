@@ -109,17 +109,11 @@ public class CommandResult {
     @Override
     public String toString() {
         ToStringBuilder t = new ToStringBuilder(this)
-                .add("feedbackToUser", feedbackToUser);
-        if (personToView != null) {
-            t.add("person", personToView);
-        }
-        if (targetIndex != null) {
-            t.add("targetIndex", targetIndex);
-        }
-        if (commandType != null) {
-            t.add("commandType", commandType);
-        }
-        t.add("isFostererEdited", isFostererEdited);
+                .add("feedbackToUser", feedbackToUser)
+                .add("person", personToView)
+                .add("targetIndex", targetIndex)
+                .add("commandType", commandType)
+                .add("isFostererEdited", isFostererEdited);
         return t.toString();
     }
 

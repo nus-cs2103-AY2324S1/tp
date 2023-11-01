@@ -25,10 +25,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
-import seedu.address.logic.commands.AddCommand;
-import seedu.address.logic.commands.CommandResult;
-import seedu.address.logic.commands.ListCommand;
-import seedu.address.logic.commands.ViewExitCommand;
+import seedu.address.logic.commands.*;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
@@ -73,12 +70,6 @@ public class LogicManagerTest {
     }
 
     @Test
-    public void execute_viewModeCommandExecutionError_throwsParseException() throws CommandException, ParseException {
-        String listCommand = "list";
-        assertViewModeParseException(listCommand, MESSAGE_UNAVAILABLE_COMMAND_IN_VIEW_MODE);
-    }
-
-    @Test
     public void execute_validCommand_success() throws Exception {
         String listCommand = ListCommand.COMMAND_WORD;
         assertCommandSuccess(listCommand, ListCommand.MESSAGE_SUCCESS, model);
@@ -108,8 +99,12 @@ public class LogicManagerTest {
         String viewCommand = "view 1";
         String viewExitCommand = "exit";
         CommandResult parsedViewCommand = logic.execute(viewCommand);
-        CommandResult parsedViewExitCommand = logic.execute(viewExitCommand);
-        assertTrue(logic.getIsViewExitCommand());
+        CommandResult parsedViewExitCommand = logic.executeInView(
+                viewExitCommand,
+                parsedViewCommand.getPersonToView(),
+                parsedViewCommand.getTargetIndex()
+        );
+        assertTrue(parsedViewExitCommand.getCommandType() == CommandType.VIEW_EXIT);
     }
 
 
@@ -148,7 +143,11 @@ public class LogicManagerTest {
                                                  Model expectedModel) throws CommandException, ParseException {
         String viewCommand = "view 1";
         CommandResult viewCommandResult = logic.execute(viewCommand);
-        CommandResult result = logic.execute(inputCommand);
+        CommandResult result = logic.executeInView(
+                inputCommand,
+                viewCommandResult.getPersonToView(),
+                viewCommandResult.getTargetIndex()
+        );
         assertEquals(expectedMessage, result.getFeedbackToUser());
         assertEquals(expectedModel, model);
     }

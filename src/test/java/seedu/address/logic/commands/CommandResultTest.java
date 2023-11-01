@@ -22,7 +22,7 @@ public class CommandResultTest {
 
         // same values -> returns true
         assertTrue(commandResult.equals(new CommandResult("feedback")));
-        assertTrue(commandResult.equals(new CommandResult("feedback", false, false)));
+        assertTrue(commandResult.equals(new CommandResult("feedback", null)));
 
         // same object -> returns true
         assertTrue(commandResult.equals(commandResult));
@@ -36,11 +36,11 @@ public class CommandResultTest {
         // different feedbackToUser value -> returns false
         assertFalse(commandResult.equals(new CommandResult("different")));
 
-        // different showHelp value -> returns false
-        assertFalse(commandResult.equals(new CommandResult("feedback", true, false)));
+        // different CommandType (HELP) -> returns false
+        assertFalse(commandResult.equals(new CommandResult("feedback", CommandType.HELP)));
 
-        // different exit value -> returns false
-        assertFalse(commandResult.equals(new CommandResult("feedback", false, true)));
+        // different CommandType (EXIT) -> returns false
+        assertFalse(commandResult.equals(new CommandResult("feedback", CommandType.EXIT)));
     }
 
     @Test
@@ -53,20 +53,22 @@ public class CommandResultTest {
         // different feedbackToUser value -> returns different hashcode
         assertNotEquals(commandResult.hashCode(), new CommandResult("different").hashCode());
 
-        // different showHelp value -> returns different hashcode
-        assertNotEquals(commandResult.hashCode(), new CommandResult("feedback", true, false).hashCode());
+        // different CommandType (HELP) -> returns different hashcode
+        assertNotEquals(commandResult.hashCode(), new CommandResult("feedback", CommandType.HELP).hashCode());
 
-        // different exit value -> returns different hashcode
-        assertNotEquals(commandResult.hashCode(), new CommandResult("feedback", false, true).hashCode());
+        // different CommandType (EXIT) -> returns different hashcode
+        assertNotEquals(commandResult.hashCode(), new CommandResult("feedback", CommandType.EXIT).hashCode());
     }
 
     @Test
     public void toStringMethodWithoutPerson() {
         CommandResult commandResult = new CommandResult("feedback");
         String expected = CommandResult.class.getCanonicalName() + "{feedbackToUser="
-                + commandResult.getFeedbackToUser() + ", showHelp=" + commandResult.isShowHelp()
-                + ", exit=" + commandResult.isExit() + ", isInViewMode=" + commandResult.isShowView()
-                + ", isViewExit=" + commandResult.isViewExit() + "}";
+                + commandResult.getFeedbackToUser()
+                + ", person=" + commandResult.getPersonToView()
+                + ", targetIndex=" + commandResult.getTargetIndex()
+                +", commandType=" + commandResult.getCommandType()
+                + ", isFostererEdited=" + commandResult.getIsFostererEdited() + "}";
         assertEquals(expected, commandResult.toString());
     }
 
@@ -76,17 +78,18 @@ public class CommandResultTest {
                 .withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND).build();
 
         CommandResult commandResult = new CommandResult("feedback",
-                false,
-                false,
-                true,
                 alice,
+                null,
+                null,
                 false
         );
 
         String expected = CommandResult.class.getCanonicalName() + "{feedbackToUser="
-                + commandResult.getFeedbackToUser() + ", showHelp=" + commandResult.isShowHelp()
-                + ", exit=" + commandResult.isExit() + ", isInViewMode=" + commandResult.isShowView()
-                + ", isViewExit=" + commandResult.isViewExit() + ", person=" + commandResult.getPersonToView() + "}";
+                + commandResult.getFeedbackToUser()
+                + ", person=" + commandResult.getPersonToView()
+                + ", targetIndex=" + commandResult.getTargetIndex()
+                +", commandType=" + commandResult.getCommandType()
+                + ", isFostererEdited=" + commandResult.getIsFostererEdited() + "}";
         assertEquals(expected, commandResult.toString());
     }
 }
