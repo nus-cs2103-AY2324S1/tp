@@ -20,13 +20,25 @@ public class Applicant extends Person {
     /**
      * Every field must be present and not null.
      *
+     * @param name          The name of the applicant.
+     * @param phone         The phone number of the applicant.
+     * @param interviewTime The interview time of the applicant.
+     */
+    public Applicant(Name name, Phone phone, InterviewTime interviewTime) {
+        this(name, phone);
+        this.interviewTime = interviewTime;
+    }
+
+    /**
+     * Every field must be present and not null.
+     *
      * @param name  The name of the applicant.
      * @param phone The phone number of the applicant.
      */
     public Applicant(Name name, Phone phone) {
         super(name);
         this.phone = phone;
-        this.interviewTime = new InterviewTime("Interview time has not been set");
+        this.interviewTime = new InterviewTime(null);
     }
 
     /**
@@ -56,10 +68,6 @@ public class Applicant extends Person {
 
     public InterviewTime getInterviewTime() {
         return interviewTime;
-    }
-
-    public void addInterviewTime(InterviewTime interviewTime) {
-        this.interviewTime = interviewTime;
     }
 
     /**

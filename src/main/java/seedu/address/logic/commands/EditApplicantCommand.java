@@ -93,8 +93,7 @@ public class EditApplicantCommand extends Command {
         InterviewTime updatedInterviewTime = editApplicantDescriptor.getInterviewTime()
                 .orElse(applicantToEdit.getInterviewTime());
 
-        Applicant newApplicant = new Applicant(updatedName, updatedPhone);
-        newApplicant.addInterviewTime(updatedInterviewTime);
+        Applicant newApplicant = new Applicant(updatedName, updatedPhone, updatedInterviewTime);
 
         return newApplicant;
     }

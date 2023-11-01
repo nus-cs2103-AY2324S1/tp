@@ -17,7 +17,7 @@ public class InterviewTime {
 
     public static final String VALIDATION_REGEX = "^\\d{2}/\\d{2}/\\d{4} \\d{4}$";
 
-    private String time;
+    private final String time;
 
     /**
      * Constructs a {@code InterviewTime}.
@@ -33,9 +33,9 @@ public class InterviewTime {
      * Returns true if a given string is a valid interview time.
      */
     public static boolean isValidTime(String test) {
-
-        return test.matches(VALIDATION_REGEX) || test.equals("Interview time has not been set");
+        return test == null || test.matches(VALIDATION_REGEX);
     }
+
     @Override
     public boolean equals(Object other) {
         if (this == other) {
@@ -54,7 +54,7 @@ public class InterviewTime {
 
     @Override
     public String toString() {
-        if (time.equals("Interview time has not been set")) {
+        if (time == null) {
             return "Interview time has not been set";
         }
         DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");

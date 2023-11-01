@@ -25,7 +25,7 @@ public class JsonAdaptedApplicant {
      */
     @JsonCreator
     public JsonAdaptedApplicant(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
-                                @JsonProperty("interviewTime") String interviewTime) {
+            @JsonProperty("interviewTime") String interviewTime) {
         this.name = name;
         this.phone = phone;
         this.interviewTime = interviewTime;
@@ -38,7 +38,7 @@ public class JsonAdaptedApplicant {
         name = source.getName().fullName;
         phone = source.getPhone().value;
         if (source.getInterviewTime().getTime() == null) {
-            interviewTime = "Interview time has not been set";
+            interviewTime = null;
         } else {
             interviewTime = source.getInterviewTime().getTime();
         }
@@ -76,12 +76,8 @@ public class JsonAdaptedApplicant {
 
         final Phone modelPhone = new Phone(phone);
 
-        final Applicant applicant = new Applicant(modelName, modelPhone);
+        final InterviewTime interviewTime = new InterviewTime(this.interviewTime);
 
-        if (this.interviewTime != null) {
-            final InterviewTime time = new InterviewTime(interviewTime);
-            applicant.addInterviewTime(time);
-        }
-        return applicant;
+        return new Applicant(modelName, modelPhone, interviewTime);
     }
 }
