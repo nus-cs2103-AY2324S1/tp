@@ -1,6 +1,7 @@
 package seedu.address.ui;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
@@ -44,6 +45,9 @@ public class PersonCard extends UiPart<Region> {
     private Label paid;
     @FXML
     private Label payRate;
+
+    @FXML
+    private CheckBox paidCheckBox;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
