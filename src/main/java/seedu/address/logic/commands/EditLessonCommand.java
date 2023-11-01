@@ -28,6 +28,7 @@ public class EditLessonCommand extends AbstractEditCommand<Lesson> {
         hasClashWith = model::hasLessonClashWith;
         deleteMethod = model::deleteLesson;
         addMethod = model::addLesson;
+        getClashingEntry = model::getLessonClashWith;
     }
 
     @Override
@@ -39,5 +40,23 @@ public class EditLessonCommand extends AbstractEditCommand<Lesson> {
             throw new CommandException(e.getMessage());
         }
         edited.setSubjectIfNotDefault(editDescriptor.getSubject());
+    }
+
+    @Override
+    String editableFieldsInfo() {
+        return "name, start, end, subject, day, remark";
+    }
+
+    @Override
+    String className() {
+        return "Lesson";
+    }
+
+    @Override
+    String getUsageInfo() {
+        return "Usage: editLesson [INDEX] -[flagName] [Value]. For example, editLesson 1 -start 14:30"
+                + " If you currently displayed list is Lesson, you could use edit inplace of editLesson. "
+                + "Editable Fields: " + editableFieldsInfo() + "."
+                + "Note that start must be before end.";
     }
 }
