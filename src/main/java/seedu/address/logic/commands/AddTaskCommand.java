@@ -27,16 +27,9 @@ public class AddTaskCommand extends Command {
             + PREFIX_EVENT_END_DATE_TIME + "2024-01-01 08:00";
 
     public static final String MESSAGE_SUCCESS = "New task added: %1$s";
-
-    public static final String MESSAGE_INVALID_DEADLINE = "Invalid Deadline!\n"
-            + "Deadline should be in the format 'yyyy-MM-dd HH:mm' where:\n"
-            + "    -'yyyy' is the year.\n"
-            + "    -'MM' is the month.\n"
-            + "    -'dd' is the day.\n"
-            + "    -'HH:mm' is the time in 24-hour format.";
-
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists!\n"
             + "Duplicate task: %s";
+    public static final String MESSAGE_INVALID_DESCRIPTION = "Description cannot be empty!\n%s";
 
     private final Task toAdd;
 

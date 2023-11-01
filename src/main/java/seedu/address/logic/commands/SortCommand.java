@@ -10,7 +10,7 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.comparer.SortComparator;
 
 /**
- * Changes the remark of an existing person in the address book.
+ * Sorts the persons in the address book by the given field.
  */
 public class SortCommand extends Command {
 

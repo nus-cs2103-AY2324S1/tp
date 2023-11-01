@@ -1,11 +1,8 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_END_DATE_LATER;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_START_DATE_LATER;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.nio.file.Path;
@@ -16,9 +13,8 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.function.Predicate;
 
-import org.junit.jupiter.api.Test;
-
 import javafx.collections.ObservableList;
+import org.junit.jupiter.api.Test;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -32,50 +28,54 @@ import seedu.address.model.event.exceptions.EventNotFoundException;
 import seedu.address.model.person.Person;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.TaskManager;
-import seedu.address.testutil.EventBuilder;
+import seedu.address.model.task.exceptions.DuplicateTaskException;
+import seedu.address.testutil.TaskBuilder;
 
-public class AddEventCommandTest {
+class AddTaskCommandTest {
+
     @Test
-    public void constructor_nullEvent_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new AddEventCommand(null));
+    public void constructor_nullTask_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> new AddTaskCommand(null));
     }
 
     @Test
-    public void constructor_eventAcceptedByModel_addSuccessful() throws Exception {
-        ModelStubAcceptingEventAdded modelStub = new ModelStubAcceptingEventAdded();
-        Event validEvent = new EventBuilder().build();
+    public void constructor_taskAcceptedByModel_addSuccessful() throws CommandException {
+        ModelStubAcceptingTaskAdded modelStub = new ModelStubAcceptingTaskAdded();
+        Task validTask = new TaskBuilder().build();
 
-        CommandResult commandResult = new AddEventCommand(validEvent).execute(modelStub);
-        assertEquals(String.format(AddEventCommand.MESSAGE_SUCCESS, Messages.format(validEvent)),
+        CommandResult commandResult = new AddTaskCommand(validTask).execute(modelStub);
+        assertEquals(String.format(AddTaskCommand.MESSAGE_SUCCESS, Messages.format(validTask)),
                 commandResult.getFeedbackToUser());
-        assertEquals(Arrays.asList(validEvent), modelStub.eventsAdded);
+        assertEquals(Arrays.asList(validTask), modelStub.tasksAdded);
     }
 
     @Test
     public void execute_conflictingEvent_throwsCommandException() {
-        Event validEvent = new EventBuilder().build();
-        AddEventCommand addEventCommand = new AddEventCommand(validEvent);
-        ModelStub modelStub = new ModelStubWithEvent(validEvent);
+        Task validTask = new TaskBuilder().build();
+        AddTaskCommand addTaskCommand = new AddTaskCommand(validTask);
+        AddTaskCommandTest.ModelStub modelStub = new AddTaskCommandTest.ModelStubWithTask(validTask);
 
-        assertThrows(CommandException.class, AddEventCommand.MESSAGE_EVENT_CONFLICT, () -> addEventCommand
-                .execute(modelStub));
+        assertThrows(CommandException.class, String.format(AddTaskCommand.MESSAGE_DUPLICATE_TASK,
+                Messages.format(validTask)), () -> addTaskCommand.execute(modelStub));
     }
 
     @Test
     public void equalsTest() {
-        Event validEvent = new EventBuilder().build();
-        EventBuilder otherValidEventBuilder = new EventBuilder();
-        otherValidEventBuilder.withStartEndDate(VALID_START_DATE_LATER, VALID_END_DATE_LATER);
-        Event otherEvent = otherValidEventBuilder.build();
-        AddEventCommand addEventCommand = new AddEventCommand(validEvent);
-        AddEventCommand notEqualAddEventCommand = new AddEventCommand(otherEvent);
-        Object nonAddEventCommandObject = new Object();
+        Task validTask = new TaskBuilder().build();
+        Task otherValidTask = new TaskBuilder().withDeadline(VALID_END_DATE_LATER).build();
+        AddTaskCommand addTaskCommand = new AddTaskCommand(validTask);
+        AddTaskCommand notEqualAddTaskCommand = new AddTaskCommand(otherValidTask);
+        Object nonAddTaskCommandObject = new Object();
 
-        assertTrue(addEventCommand.equals(addEventCommand));
+        assertTrue(addTaskCommand.equals(addTaskCommand));
 
-        assertFalse(addEventCommand.equals(notEqualAddEventCommand));
+        assertFalse(addTaskCommand.equals(notEqualAddTaskCommand));
 
-        assertFalse(addEventCommand.equals(nonAddEventCommandObject));
+        assertFalse(addTaskCommand.equals(nonAddTaskCommandObject));
+    }
+
+    @Test
+    void testToString() {
     }
 
     /**
@@ -238,38 +238,32 @@ public class AddEventCommandTest {
     }
 
     /**
-     * A Model stub that contains a single event.
+     * A Model stub that contains a single task.
      */
-    private class ModelStubWithEvent extends AddEventCommandTest.ModelStub {
-        private final Event event;
+    private class ModelStubWithTask extends AddTaskCommandTest.ModelStub {
+        private final Task task;
 
-        ModelStubWithEvent(Event event) {
-            requireNonNull(event);
-            this.event = event;
+        ModelStubWithTask(Task task) {
+            requireNonNull(task);
+            this.task = task;
         }
 
         @Override
-        public boolean canAddEvent(Event other) {
-            return !event.isConflicting(other);
+        public void addTask(Task task) {
+            throw new DuplicateTaskException();
         }
     }
 
     /**
      * A Model stub that always accept the person being added.
      */
-    private class ModelStubAcceptingEventAdded extends AddEventCommandTest.ModelStub {
-        final ArrayList<Event> eventsAdded = new ArrayList<Event>();
+    private class ModelStubAcceptingTaskAdded extends AddTaskCommandTest.ModelStub {
+        final ArrayList<Task> tasksAdded = new ArrayList<Task>();
 
         @Override
-        public boolean canAddEvent(Event event) {
-            requireNonNull(event);
-            return eventsAdded.stream().anyMatch(x -> !x.isConflicting(event)) || eventsAdded.isEmpty();
-        }
-
-        @Override
-        public void addEvent(Event event) {
-            requireNonNull(event);
-            eventsAdded.add(event);
+        public void addTask(Task task) {
+            requireNonNull(task);
+            tasksAdded.add(task);
         }
     }
 }
