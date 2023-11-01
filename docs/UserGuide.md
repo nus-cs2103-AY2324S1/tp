@@ -41,7 +41,8 @@ The examples in this guide are formatted with the following conventions:
 
 ### Viewing help [coming soon]
 
-### Adding a client profile: ***create***
+### Add Features
+#### Adding a client profile: ***create***
 
 Your job as a salesperson starts with adding a client profile to Connectify. This is a one-time process for each client that has been made simple for you.
 Use the ***create*** command to add a client profile to Connectify with the following format:
@@ -56,6 +57,96 @@ create n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 t
 create n/Chemmy Lee p/98765432 e/chemmy@gmail.com a/311, Clementi Ave 2, #02-25 tg/meowies`
 ```
 You should directly see the client profile added to the list of clients in the application window. After adding a client profile, you can now perform various operations on the client profile as specified in the next few sections!
+
+#### Adding a client interaction: ***interaction***
+
+After adding a client profile, you can now log your interactions with the client. 
+Use the ***interaction*** command to add an interaction to a client profile with the following format:
+
+Format: `interaction INDEX o/OUTCOME [DETAILS]`
+Where INDEX refers to the index of the client profile in the displayed list of clients.
+
+Examples:
+```
+interaction 1 o/Meeting with client d/Client is interested in our products
+```
+```
+interaction 1 o/Meeting with client
+```
+
+You should directly see the interaction added to the client profile in the application window.
+
+[↑ Back to table of contents](#table-of-contents)
+
+--------------------------------------------------------------------------------------------------------------------
+
+### View Features
+
+Sometimes, you may want to view the details of a client profile or the interactions you have had with a client to quickly catch up on the client's profile before contacting them.
+Or, you might just want to view the list of clients you have added to Connectify.
+<br/>
+This section contains multiple commands that allow you to view various details of your clients and collate them in a single place for your convenience.
+
+#### Viewing the dashboard: ***dashboard***
+
+The ***dashboard*** command allows you to view a summarized information of all your clients and their interactions with you in a single place.
+Use the ***dashboard*** command with the following format:
+
+Format: `dashboard`
+
+Example:
+```
+dashboard
+```
+You should see a dashboard as shown below:
+
+#### Viewing the list of clients: ***list***
+
+You might want to go back to the list of clients you have added to Connectify to view the details of a particular client.
+Use the ***list*** command with the following format:
+
+Format: `list`
+
+You should then see the list of clients in the application window.
+
+#### Finding a client by name: ***find***
+
+Managing a large number of clients can be difficult. Some of our commands use indexes to refer to a client profile. This might be difficult to remember if you have a large number of clients.
+Don't worry, though, we have a solution for you! You can use the ***find*** command to search for a client by name and get their index.
+
+Format: `find CLIENT_NAME`
+<br/>
+You don't need to type the full name of the client. You can type a part of the name and the command will return the index of the first client whose name contains the search term.
+
+Example:
+Finding a client with the name "John Doe"
+```
+find John Doe
+```
+
+Example:
+Finding a client with the name "Chemmy Lee". Notice that you don't need to type the full name of the client.
+```
+find Chemmy
+```
+
+#### Viewing the full details of a client: ***view***
+
+Catching up on the details of a client before contacting them is important. Most of the time, remembering the details of previous interactions with a client is difficult as the data is scattered everywhere.
+Well, not anymore! With Connectify, you can view the full details of a client in a single place using the ***view*** command.
+
+Format: `view INDEX`
+<br/>
+Where INDEX refers to the index of the client profile in the displayed list of clients.
+
+Example:
+```
+view 1
+```
+
+[↑ Back to table of contents](#table-of-contents)
+
+--------------------------------------------------------------------------------------------------------------------
 
 ### Marking a client as Cold, Warm, or Hot Leads [to be implemented]
 
@@ -107,55 +198,6 @@ Expected Output (Success)
 - Expected Output (Failure)
 - Client not found: "Client not found in the address book."
 - Missing client name parameter: "Please enter the client name."
-
-### Viewing a client profile [to be implemented]
-
-View the full details of a client profile.
-
-Format
-```text
-view <index>
-```
-
-```text
-view 1
-```
-
-Acceptable Values
-- <index>: Number, the index of the client to view in the list displayed.
-
-Expected Output (Success)
-- The full details of the selected client profile are displayed in the GUI
- 
-Expected Output (Failure)
-- Invalid index: "The person index provided is invalid"
-
-### Create a client interaction [to be implemented]
-
-Create an interaction that is tagged to a client.
-
-Format
-```text
-log <client_name> <interaction>
-```
-
-Example 
-```text
-log John Doe “Discussed financial plans”
-```
-
-Acceptable Values
-- <client_name>: Alphanumeric, the name of an existing client
-- <interaction>: Alphanumeric, details of interaction with the client
-
-Expected Output (Success)
-- The client profile is shown
-- The interaction is added to the client profile
-
-Expected Output (Failure)
-- Client not found: "Client not found in the address book."
-- Missing client name parameter: "Please enter the client name."
-- Missing interaction parameter: “Please enter the client interaction.”
 
 --------------------------------------------------------------------------------------------------------------------
 
