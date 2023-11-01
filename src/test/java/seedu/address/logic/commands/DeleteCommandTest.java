@@ -87,32 +87,26 @@ public class DeleteCommandTest {
         Person firstPerson = model.getFilteredPersonList().get(0);
 
         DeletePersonDescriptor descriptor = new DeletePersonDescriptor();
-        descriptor.setAppointment();
+        descriptor.setDeleteAppointment();
+        descriptor.setDeleteMedicalHistory();
 
         DeleteCommand command = new DeleteCommand(firstPerson.getNric(), null, descriptor);
         command.execute(model);
 
         Person editedPerson = model.getFilteredPersonList().get(0);
         assertTrue(editedPerson.getAppointment().isEmpty());
+        assertTrue(editedPerson.getMedicalHistories().isEmpty());
     }
 
     @Test
     public void deletePersonDescriptor_setterMethods() {
         DeletePersonDescriptor descriptor = new DeletePersonDescriptor();
 
-        descriptor.setAppointment();
-        descriptor.setAddress();
-        descriptor.setEmail();
-        descriptor.setMedicalHistory();
-        descriptor.setPhone();
-        descriptor.setTags();
+        descriptor.setDeleteAppointment();
+        descriptor.setDeleteMedicalHistory();
 
-        assertTrue(descriptor.getAppointment());
-        assertTrue(descriptor.getAddress());
-        assertTrue(descriptor.getEmail());
-        assertTrue(descriptor.getMedicalHistory());
-        assertTrue(descriptor.getPhone());
-        assertTrue(descriptor.getTags());
+        assertTrue(descriptor.shouldDeleteAppointment());
+        assertTrue(descriptor.shouldDeleteMedicalHistory());
     }
 
     @Test
@@ -122,7 +116,7 @@ public class DeleteCommandTest {
 
         assertTrue(descriptor.isAllFalse());
 
-        descriptor.setAppointment();
+        descriptor.setDeleteAppointment();
 
         assertFalse(descriptor.isAllFalse());
     }
@@ -172,7 +166,7 @@ public class DeleteCommandTest {
 
         // different person -> returns false
         DeletePersonDescriptor descriptorDifferent = new DeletePersonDescriptor();
-        descriptorDifferent.setAddress();
+        descriptorDifferent.setDeleteAppointment();
         assertFalse(descriptor.equals(descriptorDifferent));
     }
 
@@ -206,7 +200,7 @@ public class DeleteCommandTest {
         Person firstPerson = model.getFilteredPersonList().get(0);
 
         DeletePersonDescriptor descriptor = new DeletePersonDescriptor();
-        descriptor.setAppointment();
+        descriptor.setDeleteAppointment();
 
         DeleteCommand deleteFieldsCommand = new DeleteCommand(firstPerson.getNric(), null, descriptor);
         deleteFieldsCommand.execute(model);

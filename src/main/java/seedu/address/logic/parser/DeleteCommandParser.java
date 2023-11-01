@@ -32,11 +32,16 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
     public DeleteCommand parse(String args) throws ParseException {
         requireNonNull(args);
 
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_NRIC, PREFIX_PHONE,
-                PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_APPOINTMENT, PREFIX_MEDICAL, PREFIX_TAG);
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_NRIC,
+                PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_APPOINTMENT, PREFIX_MEDICAL, PREFIX_TAG);
 
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_NRIC, PREFIX_PHONE, PREFIX_EMAIL,
-                PREFIX_ADDRESS, PREFIX_APPOINTMENT, PREFIX_MEDICAL, PREFIX_TAG);
+        if (ArgumentMultimap.isAnyPrefixPresent(argMultimap, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG)
+                || !ArgumentMultimap.isAnyPrefixPresent(argMultimap, PREFIX_NAME, PREFIX_NRIC, PREFIX_APPOINTMENT,
+                        PREFIX_MEDICAL)) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
+        }
+
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_NRIC, PREFIX_APPOINTMENT, PREFIX_MEDICAL);
 
         boolean hasNamePrefix = argMultimap.getValue(PREFIX_NAME).isPresent();
         boolean hasNricPrefix = argMultimap.getValue(PREFIX_NRIC).isPresent();
@@ -57,8 +62,12 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
 
         DeletePersonDescriptor deletePersonDescriptor = new DeletePersonDescriptor();
 
+        if (argMultimap.prefixExist(PREFIX_MEDICAL)) {
+            deletePersonDescriptor.setDeleteMedicalHistory();
+        }
+
         if (argMultimap.prefixExist(PREFIX_APPOINTMENT)) {
-            deletePersonDescriptor.setAppointment();
+            deletePersonDescriptor.setDeleteAppointment();
         }
 
         return new DeleteCommand(nric, name, deletePersonDescriptor);
