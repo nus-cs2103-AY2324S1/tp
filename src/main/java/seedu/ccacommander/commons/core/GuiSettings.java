@@ -6,6 +6,8 @@ import java.util.Objects;
 
 import seedu.ccacommander.commons.util.ToStringBuilder;
 
+import static seedu.ccacommander.ui.Stylesheet.DEFAULT_STYLESHEET;
+
 /**
  * A Serializable class that contains the GUI settings.
  * Guarantees: immutable.
@@ -18,6 +20,7 @@ public class GuiSettings implements Serializable {
     private final double windowWidth;
     private final double windowHeight;
     private final Point windowCoordinates;
+    private String stylesheet;
 
     /**
      * Constructs a {@code GuiSettings} with the default height, width and position.
@@ -26,6 +29,7 @@ public class GuiSettings implements Serializable {
         windowWidth = DEFAULT_WIDTH;
         windowHeight = DEFAULT_HEIGHT;
         windowCoordinates = null; // null represent no coordinates
+        stylesheet = DEFAULT_STYLESHEET.toString();
     }
 
     /**
@@ -49,6 +53,9 @@ public class GuiSettings implements Serializable {
         return windowCoordinates != null ? new Point(windowCoordinates) : null;
     }
 
+    public String getStylesheet() {
+        return this.stylesheet;
+    }
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -63,7 +70,8 @@ public class GuiSettings implements Serializable {
         GuiSettings otherGuiSettings = (GuiSettings) other;
         return windowWidth == otherGuiSettings.windowWidth
                 && windowHeight == otherGuiSettings.windowHeight
-                && Objects.equals(windowCoordinates, otherGuiSettings.windowCoordinates);
+                && Objects.equals(windowCoordinates, otherGuiSettings.windowCoordinates)
+                && Objects.equals(stylesheet, otherGuiSettings.stylesheet);
     }
 
     @Override
@@ -77,6 +85,7 @@ public class GuiSettings implements Serializable {
                 .add("windowWidth", windowWidth)
                 .add("windowHeight", windowHeight)
                 .add("windowCoordinates", windowCoordinates)
+                .add("Stylesheet", stylesheet)
                 .toString();
     }
 }

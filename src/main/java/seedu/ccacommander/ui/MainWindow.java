@@ -2,6 +2,7 @@ package seedu.ccacommander.ui;
 
 import java.util.logging.Logger;
 
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
@@ -16,6 +17,8 @@ import seedu.ccacommander.logic.Logic;
 import seedu.ccacommander.logic.commands.CommandResult;
 import seedu.ccacommander.logic.commands.exceptions.CommandException;
 import seedu.ccacommander.logic.parser.exceptions.ParseException;
+
+import static seedu.ccacommander.ui.Stylesheet.constructStylesheet;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -35,6 +38,7 @@ public class MainWindow extends UiPart<Stage> {
     private EventListPanel eventListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+    private Stylesheet stylesheet;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -64,7 +68,9 @@ public class MainWindow extends UiPart<Stage> {
         this.logic = logic;
 
         // Configure the UI
-        setWindowDefaultSize(logic.getGuiSettings());
+        GuiSettings guiSettings = logic.getGuiSettings();
+        setWindowDefaultSize(guiSettings);
+        applyStylesheet(constructStylesheet(guiSettings.getStylesheet()));
 
         setAccelerators();
 
@@ -156,6 +162,28 @@ public class MainWindow extends UiPart<Stage> {
 
     void show() {
         primaryStage.show();
+    }
+
+    private void applyStylesheet(Stylesheet newStylesheet) {
+        ObservableList<String> uiStyleSheet = primaryStage.getScene().getStylesheets();
+        uiStyleSheet.clear();
+        String switchedStyleSheet = newStylesheet.getStylesheet();
+        uiStyleSheet.add(switchedStyleSheet);
+        uiStyleSheet.add(Stylesheet.EXTENSION.getStylesheet());
+        this.stylesheet = newStylesheet;
+        logger.info(String.format(Stylesheet.SUCCESS_MESSAGE, stylesheet));
+    }
+
+    /** Sets stylesheet to Light Theme. */
+    @FXML
+    public void applyLightTheme() {
+        applyStylesheet(Stylesheet.LIGHT);
+    }
+
+    /** Sets stylesheet to Dark Theme. */
+    @FXML
+    public void applyDarkTheme() {
+        applyStylesheet(Stylesheet.DARK);
     }
 
     /**
