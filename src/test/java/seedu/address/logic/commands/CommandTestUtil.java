@@ -13,6 +13,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.commands.band.EditBandCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.commands.musician.EditCommand;
 import seedu.address.model.AddressBook;
@@ -21,6 +22,7 @@ import seedu.address.model.band.Band;
 import seedu.address.model.band.BandNameContainsKeywordsPredicate;
 import seedu.address.model.musician.Musician;
 import seedu.address.model.musician.NameContainsKeywordsPredicate;
+import seedu.address.testutil.EditBandDescriptorBuilder;
 import seedu.address.testutil.EditMusicianDescriptorBuilder;
 
 /**
@@ -30,6 +32,8 @@ public class CommandTestUtil {
 
     public static final String VALID_NAME_AMY = "Amy Bee";
     public static final String VALID_NAME_BOB = "Bob Choo";
+    public static final String VALID_NAME_ROCKSTARS = "The Rockstars";
+    public static final String VALID_NAME_POPSTARS = "The Popstars";
     public static final String VALID_PHONE_AMY = "11111111";
     public static final String VALID_PHONE_BOB = "22222222";
     public static final String VALID_EMAIL_AMY = "amy@example.com";
@@ -56,6 +60,8 @@ public class CommandTestUtil {
 
     public static final EditCommand.EditMusicianDescriptor DESC_AMY;
     public static final EditCommand.EditMusicianDescriptor DESC_BOB;
+    public static final EditBandCommand.EditBandDescriptor DESC_ROCKSTARS;
+    public static final EditBandCommand.EditBandDescriptor DESC_POPSTARS;
 
     static {
         DESC_AMY = new EditMusicianDescriptorBuilder().withName(VALID_NAME_AMY)
@@ -63,6 +69,8 @@ public class CommandTestUtil {
         DESC_BOB = new EditMusicianDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND)
                 .build();
+        DESC_POPSTARS = new EditBandDescriptorBuilder().withName(VALID_NAME_POPSTARS).build();
+        DESC_ROCKSTARS = new EditBandDescriptorBuilder().withName(VALID_NAME_ROCKSTARS).build();
     }
 
     /**

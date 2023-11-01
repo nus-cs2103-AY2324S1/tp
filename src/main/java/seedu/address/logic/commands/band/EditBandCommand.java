@@ -1,10 +1,8 @@
 package seedu.address.logic.commands.band;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GENRE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -20,13 +18,15 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.commands.musician.EditCommand;
 import seedu.address.model.Model;
 import seedu.address.model.band.Band;
 import seedu.address.model.band.BandName;
 import seedu.address.model.tag.Tag;
 
-public class EditBandCommand extends Command{
+/**
+ * Edits the details of an existing band in the address book.
+ */
+public class EditBandCommand extends Command {
     public static final String COMMAND_WORD = "editb";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the band identified "
