@@ -140,9 +140,9 @@ After adding a client profile, you can now log your interactions with the client
 ```text
 interaction INDEX o/OUTCOME [DETAILS]
 ```
-Where INDEX refers to the index of the client profile in the displayed list of clients.
+Where `INDEX` refers to the index of the client profile in the displayed list of clients.
 
-Note that at least one of the `outcome` or `details` parameters must be provided.
+Note that at least one of the `OUTCOME` or `DETAILS` parameters must be provided.
 
 #### Examples
 ```
