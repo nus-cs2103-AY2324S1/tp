@@ -1,5 +1,6 @@
 package seedu.address.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
@@ -29,7 +30,8 @@ public class MarkPresentAllCommandTest {
     @Test
     public void execute_success() throws IllegalValueException, CommandException {
         Index i = Index.fromOneBased(ClassDetails.DEFAULT_COUNT);
-
+        Student selectedStudent = TypicalStudents.getTypicalStudents().get(0);
+        model.setSelectedStudent(selectedStudent);
         MarkPresentAllCommand markPresentAllCommand = new MarkPresentAllCommand(i);
 
         String expectedMessage = MarkPresentAllCommand.MESSAGE_MARK_SUCCESS;
@@ -43,6 +45,7 @@ public class MarkPresentAllCommandTest {
         expectedModel.commitAddressBook();
 
         assertCommandSuccess(markPresentAllCommand, model, expectedMessage, expectedModel, commandHistory);
+        assertEquals(selectedStudent, model.getSelectedStudent().get(0));
     }
 
     @Test
