@@ -18,6 +18,7 @@ public class PrefixCompletion {
      *
      * @param currentInput The user's current input string.
      * @return The next prefix and example for completion.
+     * @throws PrefixCompletionException If no prefix completion recommendation is found.
      */
     public String getNextCompletion(String currentInput) throws PrefixCompletionException {
         PrefixFinder prefixFinder;
@@ -39,10 +40,22 @@ public class PrefixCompletion {
         return prefixFinder.getPrefix(currentInput);
     }
 
+    /**
+     * Retrieves the command word from the input string.
+     *
+     * @param input The user's input string.
+     * @return The command word extracted from the input.
+     */
     private String getCommandWord(String input) {
         return input.split("\\s+")[0];
     }
 
+    /**
+     * Checks if the input string ends with a single space, ensuring proper format for prefix completion.
+     *
+     * @param currentInput The user's current input string.
+     * @throws PrefixCompletionException If the input does not end with a single space.
+     */
     private void checkFormat(String currentInput) throws PrefixCompletionException {
         boolean isLastCharSingleSpace =
                 currentInput.length() > 0 && currentInput.charAt(currentInput.length() - 1) == ' ';

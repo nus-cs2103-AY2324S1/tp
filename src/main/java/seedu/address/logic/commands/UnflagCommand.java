@@ -11,7 +11,7 @@ import seedu.address.model.Model;
 import seedu.address.model.booking.Booking;
 
 /**
- * Flags a booking identified using its displayed indices from the bookings book.
+ * Unflags a booking identified using its displayed indices from the bookings book.
  */
 public class UnflagCommand extends Command {
 
@@ -26,10 +26,23 @@ public class UnflagCommand extends Command {
 
     private final Index targetIndex;
 
+    /**
+     * Constructs an {@code UnflagCommand} to unflag a booking at the specified index.
+     *
+     * @param targetIndex The index of the booking to be unflagged.
+     */
     public UnflagCommand(Index targetIndex) {
+        assert targetIndex != null : "Index cannot be null";
         this.targetIndex = targetIndex;
     }
 
+    /**
+     * Executes the UnflagCommand to unflag a booking using its index.
+     *
+     * @param model The model containing the booking list.
+     * @return A CommandResult indicating the success of the unflag operation.
+     * @throws CommandException If there's an error in executing the command.
+     */
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
@@ -49,7 +62,12 @@ public class UnflagCommand extends Command {
                 false);
     }
 
-
+    /**
+     * Checks for equality between two UnflagCommand objects based on their target indices.
+     *
+     * @param other The object to compare.
+     * @return True if the objects are equal, false otherwise.
+     */
     @Override
     public boolean equals(Object other) {
         if (other == this) {

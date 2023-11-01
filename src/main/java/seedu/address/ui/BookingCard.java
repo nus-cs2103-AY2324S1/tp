@@ -52,7 +52,7 @@ public class BookingCard extends UiPart<Region> {
     @FXML
     private Label remark;
     @FXML
-    private Label flag;
+    private ImageView flagImage;
     @FXML
     private FlowPane tags;
 
@@ -67,9 +67,8 @@ public class BookingCard extends UiPart<Region> {
         bookingPeriod.setText(booking.getBookingPeriod().value);
         remark.setText(booking.getRemark().value);
         if (booking.isFlagged()) {
-            flag.setText("!");
-        } else {
-            flag.setText("");
+            Image flag = new Image("images/Flag.png");
+            flagImage.setImage(flag);
         }
         Tag tag = booking.getTags();
         Label tagLabel = new Label(tag.tagName);

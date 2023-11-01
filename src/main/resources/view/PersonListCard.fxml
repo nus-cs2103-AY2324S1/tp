@@ -29,7 +29,7 @@
           </minWidth>
         </Label>
         <FlowPane fx:id="tags" maxWidth="Infinity" HBox.hgrow="ALWAYS" />
-        <Label fx:id="flag" styleClass="cell_big_label" text="\$flag" wrapText="true" alignment="BASELINE_RIGHT"/>
+        <ImageView fx:id="flagImage" fitHeight="25.0" fitWidth="25.0" preserveRatio="true" pickOnBounds="true"/>
       </HBox>
       <FlowPane>
         <children>

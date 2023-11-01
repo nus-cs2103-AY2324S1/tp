@@ -36,9 +36,17 @@ public class DeleteCommand extends Command {
      * @param targetIndices The indices of the bookings to be deleted.
      */
     public DeleteCommand(Index... targetIndices) {
+        assert targetIndices.length > 0 : "At least one index must be provided for deletion.";
         this.targetIndices = targetIndices;
     }
 
+    /**
+     * Executes the DeleteCommand to delete bookings by their indices.
+     *
+     * @param model The model containing the booking list.
+     * @return A CommandResult indicating the success of the deletion operation.
+     * @throws CommandException If there's an error in executing the command.
+     */
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
@@ -75,6 +83,12 @@ public class DeleteCommand extends Command {
                 false, false, true);
     }
 
+    /**
+     * Checks for equality between two DeleteCommand objects based on their target indices.
+     *
+     * @param other The object to compare.
+     * @return True if the objects are equal, false otherwise.
+     */
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -89,6 +103,11 @@ public class DeleteCommand extends Command {
         return Arrays.equals(targetIndices, otherDeleteCommand.targetIndices);
     }
 
+    /**
+     * Provides a string representation of the DeleteCommand, including its target indices.
+     *
+     * @return A string representation of the command.
+     */
     @Override
     public String toString() {
         // Create a list of index strings

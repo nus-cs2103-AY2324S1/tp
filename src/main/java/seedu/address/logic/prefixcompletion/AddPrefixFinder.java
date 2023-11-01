@@ -16,6 +16,9 @@ public class AddPrefixFinder implements PrefixFinder {
     private static final List<Prefix> PREFIXES = AddCommand.PREFIXES;
     private static List<String> examples = AddCommand.EXAMPLES;
 
+    /**
+     * Updates the example list with the current date and time.
+     */
     private void updateExample() {
         // Get current date and time
         LocalDateTime now = LocalDateTime.now();
@@ -34,6 +37,13 @@ public class AddPrefixFinder implements PrefixFinder {
         examples = updatedExamples;
     }
 
+    /**
+     * Retrieves the appropriate prefix for the current input in the AddCommand.
+     *
+     * @param currentInput The current input string.
+     * @return The recommended prefix completion.
+     * @throws PrefixCompletionException If no prefix completion recommendation is found.
+     */
     public String getPrefix(String currentInput) throws PrefixCompletionException {
         updateExample();
         // Determine the next prefix and example.
