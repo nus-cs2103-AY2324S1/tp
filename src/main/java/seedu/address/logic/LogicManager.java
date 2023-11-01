@@ -57,6 +57,14 @@ public class LogicManager implements Logic {
         Command command;
         CommandResult commandResult;
 
+        try {
+            storage.saveAddressBookBackup(model.getAddressBook());
+        } catch (AccessDeniedException e) {
+            throw new CommandException(String.format(FILE_OPS_PERMISSION_ERROR_FORMAT, e.getMessage()), e);
+        } catch (IOException ioe) {
+            throw new CommandException(String.format(FILE_OPS_ERROR_FORMAT, ioe.getMessage()), ioe);
+        }
+
         command = parser.parseCommand(commandText);
         commandResult = command.execute(model);
 
