@@ -185,7 +185,7 @@ All planned enhancements will also be listed in the [Planned Enhancements / Know
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </box>
 
-### Request help [Coming Soon]
+## Manage Contacts
 
 ### Add normal contact
 
@@ -293,9 +293,120 @@ Examples:
 You are required to input the absolute path to the photo for this command. If you use an invalid path, a default photo will be chosen for your specified contact.
 </box>
 
-###  Find contacts
+###  List all contacts
 
-Lists contacts whose fields match the specified the specified find expression.
+Shows a list of all contacts.
+
+Format: `list`
+
+###  Delete normal contact
+
+Deletes an existing contact from the address book.
+
+Format: `delete INDEX`
+
+Examples:
+* `delete 1`
+  * Deletes the 1st person from the list
+* `delete 2`
+  * Deletes the 2nd person from the list
+
+## Notes
+
+<div style="display:flex; justify-content:space-around; align-items:center;">
+  <img src="images/notes/noteswindow2.png" alt="Window with Notes" style="height:400px; margin:10px;">
+</div>
+
+Allows you to add notes to a person and remove notes from a person.
+
+You can add notes to a person with the `addnote` command, remove notes from them with the `removenotes` command.
+
+You can view notes by one of two ways: by using the `viewnotes` command, or by clicking on the `Notes` button in the person's information window.
+
+Format: `addnote PERSON_INDEX NOTE_CONTENT`, `removenote PERSON_INDEX NOTE_INDEX` and `viewnotes PERSON_INDEX`
+
+<box type="warning">
+
+Always make sure the indices provided are valid and within the bounds of the list. Invalid indices will result in an error.
+
+</box>
+
+<panel header=":fa-solid-book: **Command Parameter / Syntax Tables**" type="secondary" expanded no-close>
+The fields you enter should follow the following format:
+
+| Parameter     | Description                                                                                                 |
+|---------------|-------------------------------------------------------------------------------------------------------------|
+| `PERSON_INDEX`| The position of the person in the list you want to add a note to. This should be a positive integer, and should be within the bounds of the list. |
+| `NOTE_INDEX`  | The position of the note in the person's list of notes you want to remove. This should be a positive integer, and should be within the bounds of the list. |
+| `NOTE_CONTENT`| The content of the note you want to add. It has to be non-empty, and can contain any character.              |
+
+</panel>
+
+<br>
+
+<box type="info" icon=":fa-solid-magnifying-glass:">
+To manage notes for a person in a list, use the following commands:
+
+| Action                                  | Command                                           | Description                                             |
+|-----------------------------------------|---------------------------------------------------|---------------------------------------------------------|
+| Add a note to a person                  | `addnote 1 This is a sample note for the person.` | Adds a note to the person at index 1.                   |
+| Remove a specific note from a person    | `removenote 1 2`                                  | Removes the 2nd note from the person at index 1.        |
+| View all notes of a person              | `viewnotes 1`                                     | Displays all notes of the person at index 1.            |
+
+To add a note, use the `addnote` command followed by the position number and the note text. To remove a note, use the `removenote` command followed by the position number and the note index. To view all notes, use the `viewnotes` command followed by the position number. Closing the notes window can be done via the "Close" button or by pressing ESC.
+</box>
+
+## Birthday Notifications
+
+###  Receive upcoming birthday notifications
+
+Receives a pop-up notification for each contact in CampusConnect whose birthday is within a day.
+
+Upon launching the application, if any of your contacts’ birthday in CampusConnect is coming within a day, you should see the following pop-up notification: <br>
+
+![birthdayNotification](images/birthdayNotification.png)
+
+The notification will contain the names of the birthday individuals saved in CampusConnect.
+
+###  Opt out notification [Coming soon]
+
+Opts you out from receiving birthday related notifications, such as turning off actual birthday notification feature.
+
+Format: `optout NOTIFICATION_DESCRIPTION`
+
+- `NOTIFICATION_DESCRIPTION` Mandatory field to enter which only includes the following and are not case-sensitive:
+    - `Notify Birthdays`
+    - `All`
+
+Examples:
+- `optout notify birthdays`
+- `optout Notify Birthdays`
+- `optout NOTIFY BIRTHDAYS`
+    - Requests to opt out from receiving actual birthday notifications in the future.
+- `optout all`
+    - Requests to turn off all kinds of notifications CampusConnect will send.
+
+Upon request to opt out notification, you should see the following pop-up message: <br>
+
+![optOutNotification](images/optOutNotification.png)
+
+Select `OK` to opt out notifications or `Cancel` to cancel the request.
+
+Below shows some examples of ___invalid usage___ of the command and the response that CampusConnect will provide.
+
+Invalid Input Example | Application Output
+---|---
+**optout notifications** | Invalid `NOTIFICATION_DESCRIPTION` (refer to aforementioned for the list of `NOTIFICATION_DESCRIPTION` to enter).
+**optout** | `NOTIFICATION_DESCRIPTION` cannot be empty.
+
+
+## Payments
+## Find Contacts
+
+Another feature of CampusConnect is the ability to search for contacts based on a variety of criteria. This is useful for quickly finding contacts whose details you may only partially remember, or for finding contacts who match a certain criteria.
+
+This feature involves only 1 command: `find`, which list contacts whose fields match the specified find expression.
+
 
 Format: `find FIND_EXPRESSION`
 
@@ -337,7 +448,7 @@ Note that in all cases, the search is case-insensitive for alphabetic characters
 For now, search keywords cannot contain spaces. For example, `n/John Doe` will not work as expected. Functionality to search for keywords which spaces like `"John Doe"` will be added in a future release.
 </box>
 
-#### Find contacts: basic filtering
+### Basic Filtering
 
 Contacts can be filtered by a single field by typing:
 - the **prefix** of the field you're searching through, followed by
@@ -372,7 +483,7 @@ Since `n/do` and `t/friend` are both **find conditions**, they can constitute a 
 
 </box>
 
-#### Find contacts: advanced filtering
+### Advanced Filtering
 
 While basic filtering is sufficient for most use cases, you may find that you need to perform more complex filtering. For example, you may want to find all contacts who have the tag `"friend"` *and* whose names contain the substring `"do"`. Or you may want to find all contacts whose addresses contain the substring `"street"` *or* whose names *do not* contain the substring `"ye"`.
 
@@ -420,117 +531,6 @@ The following are valid **`FIND_EXPRESSIONs`**:
 Note that the last example is **not equivalent** to `n/do && t/friend || t/colleague`. Due to the higher precedence of `&&` compared to `||`, this will return all contacts whose names contain the substring `"do"` **and** who have the `"friend"` tag, **or** who have the `"colleague"` tag, in this case `"Jane Doe"` and `"Alex Yeoh"`.
 
 </box>
-
-###  List all contacts
-
-Shows a list of all contacts.
-
-Format: `list`
-
-###  Delete normal contact
-
-Deletes an existing contact from the address book.
-
-Format: `delete INDEX`
-
-Examples:
-* `delete 1`
-  * Deletes the 1st person from the list
-* `delete 2`
-  * Deletes the 2nd person from the list
-
-
-###  Undo last action [Coming Soon]
-
-###  Receive upcoming birthday notifications
-
-Receives a pop-up notification for each contact in CampusConnect whose birthday is within a day.
-
-Upon launching the application, if any of your contacts’ birthday in CampusConnect is coming within a day, you should see the following pop-up notification: <br>
-
-![birthdayNotification](images/birthdayNotification.png)
-
-The notification will contain the names of the birthday individuals saved in CampusConnect.
-
-###  Opt out notification [Coming soon]
-
-Opts you out from receiving birthday related notifications, such as turning off actual birthday notification feature.
-
-Format: `optout NOTIFICATION_DESCRIPTION`
-
-- `NOTIFICATION_DESCRIPTION` Mandatory field to enter which only includes the following and are not case-sensitive:
-    - `Notify Birthdays`
-    - `All`
-
-Examples:
-- `optout notify birthdays`
-- `optout Notify Birthdays`
-- `optout NOTIFY BIRTHDAYS`
-    - Requests to opt out from receiving actual birthday notifications in the future.
-- `optout all`
-    - Requests to turn off all kinds of notifications CampusConnect will send.
-
-Upon request to opt out notification, you should see the following pop-up message: <br>
-
-![optOutNotification](images/optOutNotification.png)
-
-Select `OK` to opt out notifications or `Cancel` to cancel the request.
-
-Below shows some examples of ___invalid usage___ of the command and the response that CampusConnect will provide.
-
-Invalid Input Example | Application Output
----|---
-**optout notifications** | Invalid `NOTIFICATION_DESCRIPTION` (refer to aforementioned for the list of `NOTIFICATION_DESCRIPTION` to enter).
-**optout** | `NOTIFICATION_DESCRIPTION` cannot be empty.
-
-### Notes
-
-<div style="display:flex; justify-content:space-around; align-items:center;">
-  <img src="images/notes/noteswindow2.png" alt="Window with Notes" style="height:400px; margin:10px;">
-</div>
-
-Allows you to add notes to a person and remove notes from a person.
-
-You can add notes to a person with the `addnote` command, remove notes from them with the `removenotes` command.
-
-You can view notes by one of two ways: by using the `viewnotes` command, or by clicking on the `Notes` button in the person's information window.
-
-Format: `addnote PERSON_INDEX NOTE_CONTENT`, `removenote PERSON_INDEX NOTE_INDEX` and `viewnotes PERSON_INDEX`
-
-<box type="warning">
-
-Always make sure the indices provided are valid and within the bounds of the list. Invalid indices will result in an error.
-
-</box>
-
-<panel header=":fa-solid-book: **Command Parameter / Syntax Tables**" type="secondary" expanded no-close>
-The fields you enter should follow the following format:
-
-| Parameter     | Description                                                                                                 | 
-|---------------|-------------------------------------------------------------------------------------------------------------| 
-| `PERSON_INDEX`| The position of the person in the list you want to add a note to. This should be a positive integer, and should be within the bounds of the list. | 
-| `NOTE_INDEX`  | The position of the note in the person's list of notes you want to remove. This should be a positive integer, and should be within the bounds of the list. | 
-| `NOTE_CONTENT`| The content of the note you want to add. It has to be non-empty, and can contain any character.              | 
-
-</panel>
-
-<br>
-
-<box type="info" icon=":fa-solid-magnifying-glass:">
-To manage notes for a person in a list, use the following commands:
-
-| Action                                  | Command                                           | Description                                             |
-|-----------------------------------------|---------------------------------------------------|---------------------------------------------------------|
-| Add a note to a person                  | `addnote 1 This is a sample note for the person.` | Adds a note to the person at index 1.                   |
-| Remove a specific note from a person    | `removenote 1 2`                                  | Removes the 2nd note from the person at index 1.        |
-| View all notes of a person              | `viewnotes 1`                                     | Displays all notes of the person at index 1.            |
-
-To add a note, use the `addnote` command followed by the position number and the note text. To remove a note, use the `removenote` command followed by the position number and the note index. To view all notes, use the `viewnotes` command followed by the position number. Closing the notes window can be done via the "Close" button or by pressing ESC.
-</box>
-
-
-###  Track payment [Coming Soon]
-###  Change language [Coming Soon]
 
 --------------------------------------------------------------------------------------------------------------------
 
