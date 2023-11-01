@@ -10,11 +10,11 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Nric;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Remark;
 import seedu.address.model.policy.Company;
 import seedu.address.model.policy.Policy;
 import seedu.address.model.policy.PolicyDate;
 import seedu.address.model.policy.PolicyNumber;
-import seedu.address.model.person.Remark;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
@@ -27,13 +27,13 @@ public class PersonBuilder {
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
+    public static final String DEFAULT_REMARK = "";
     private static final String DEFAULT_NRIC = "567A";
     private static final String DEFAULT_LICENCE_PLATE = "SBC123D";
     private static final String DEFAULT_COMPANY = "NTUC";
     private static final String DEFAULT_POLICY_NUMBER = "AIA1234";
     private static final String DEFAULT_POLICY_ISSUE_DATE = "01-01-2023";
     private static final String DEFAULT_POLICY_EXPIRY_DATE = "01-01-2030";
-    public static final String DEFAULT_REMARK = "";
 
     private Name name;
     private Phone phone;

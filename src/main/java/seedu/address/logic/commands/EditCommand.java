@@ -35,11 +35,11 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Nric;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Remark;
 import seedu.address.model.policy.Company;
 import seedu.address.model.policy.Policy;
 import seedu.address.model.policy.PolicyDate;
 import seedu.address.model.policy.PolicyNumber;
-import seedu.address.model.person.Remark;
 import seedu.address.model.tag.Tag;
 
 /**
