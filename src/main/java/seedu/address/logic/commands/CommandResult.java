@@ -74,21 +74,23 @@ public class CommandResult {
         }
 
         CommandResult otherCommandResult = (CommandResult) other;
-        return feedbackToUser.equals(otherCommandResult.feedbackToUser) && showHelp == otherCommandResult.showHelp
+        return feedbackToUser.equals(otherCommandResult.feedbackToUser)
+                && showDashboard == otherCommandResult.showDashboard && showHelp == otherCommandResult.showHelp
                 && exit == otherCommandResult.exit;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(feedbackToUser, showHelp, exit);
+        return Objects.hash(feedbackToUser, showDashboard, showHelp, exit);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this).add("feedbackToUser", feedbackToUser)
-                                        .add("showHelp", showHelp)
-                                        .add("exit", exit)
-                                        .toString();
+                .add("showDashboard", showDashboard)
+                .add("showHelp", showHelp)
+                .add("exit", exit)
+                .toString();
     }
 
 }
