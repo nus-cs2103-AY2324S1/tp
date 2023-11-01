@@ -14,11 +14,11 @@ public class GuiSettings implements Serializable {
 
     private static final double DEFAULT_HEIGHT = 600;
     private static final double DEFAULT_WIDTH = 740;
-    private static final boolean DEFAULT_LIGHTMODE = false;
+    private static final boolean DEFAULT_ISLIGHTMODE = false;
 
     private final double windowWidth;
     private final double windowHeight;
-    private final boolean lightMode;
+    private final boolean isLightMode;
     private final Point windowCoordinates;
 
     /**
@@ -27,18 +27,18 @@ public class GuiSettings implements Serializable {
     public GuiSettings() {
         windowWidth = DEFAULT_WIDTH;
         windowHeight = DEFAULT_HEIGHT;
-        lightMode = DEFAULT_LIGHTMODE;
+        isLightMode = DEFAULT_ISLIGHTMODE;
         windowCoordinates = null; // null represent no coordinates
     }
 
     /**
      * Constructs a {@code GuiSettings} with the specified height, width, position and light mode setting.
      */
-    public GuiSettings(double windowWidth, double windowHeight, int xPosition, int yPosition, boolean lightMode) {
+    public GuiSettings(double windowWidth, double windowHeight, int xPosition, int yPosition, boolean isLightMode) {
         this.windowWidth = windowWidth;
         this.windowHeight = windowHeight;
         windowCoordinates = new Point(xPosition, yPosition);
-        this.lightMode = lightMode;
+        this.isLightMode = isLightMode;
     }
 
     public double getWindowWidth() {
@@ -49,8 +49,8 @@ public class GuiSettings implements Serializable {
         return windowHeight;
     }
 
-    public boolean getLightMode() {
-        return lightMode;
+    public boolean getIsLightMode() {
+        return isLightMode;
     }
 
     public Point getWindowCoordinates() {
@@ -72,12 +72,12 @@ public class GuiSettings implements Serializable {
         return windowWidth == otherGuiSettings.windowWidth
                 && windowHeight == otherGuiSettings.windowHeight
                 && Objects.equals(windowCoordinates, otherGuiSettings.windowCoordinates)
-                && lightMode == otherGuiSettings.lightMode;
+                && isLightMode == otherGuiSettings.isLightMode;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(windowWidth, windowHeight, windowCoordinates, lightMode);
+        return Objects.hash(windowWidth, windowHeight, windowCoordinates, isLightMode);
     }
 
     @Override
@@ -86,7 +86,7 @@ public class GuiSettings implements Serializable {
                 .add("windowWidth", windowWidth)
                 .add("windowHeight", windowHeight)
                 .add("windowCoordinates", windowCoordinates)
-                .add("lightMode", lightMode)
+                .add("isLightMode", isLightMode)
                 .toString();
     }
 }

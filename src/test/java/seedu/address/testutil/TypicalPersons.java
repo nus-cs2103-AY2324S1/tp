@@ -38,18 +38,6 @@ public class TypicalPersons {
             .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")
             .withPhone("94351253").withBirthdate("1999/01/12")
             .withTags("friends").build();
-
-    public static final Person ALICE_WITH_CANCER = new PersonBuilder().withName("Alice Pauline")
-            .withGender("FEMALE")
-            .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")
-            .withPhone("94351253").withBirthdate("1999/01/12")
-            .withTags("friends").build();
-
-    public static final Person ALICE_WITHOUT_FRIENDS = new PersonBuilder().withName("Alice Pauline")
-            .withGender("FEMALE")
-            .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")
-            .withPhone("94351253").withBirthdate("1999/01/12")
-            .withTags("friends").build();
     public static final Person BENSON = new PersonBuilder().withName("Benson Meier")
             .withGender("MALE")
             .withAddress("311, Clementi Ave 2, #02-25")
@@ -58,7 +46,7 @@ public class TypicalPersons {
             .withTags("owesMoney", "friends").build();
     public static final Person CARL = new PersonBuilder().withName("Carl Kurz").withGender("MALE")
             .withPhone("95352563").withEmail("heinz@example.com").withBirthdate("1987/01/02")
-            .withAddress("wall street").build();
+            .withAddress("wall street").withTags("malaria").build();
     public static final Person DANIEL = new PersonBuilder().withName("Daniel Meier").withGender("MALE")
             .withPhone("87652533").withEmail("cornelia@example.com").withBirthdate("2003/03/28")
             .withAddress("10th street").withTags("friends").build();

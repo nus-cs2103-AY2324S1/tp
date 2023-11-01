@@ -33,15 +33,11 @@ public class Messages {
     public static final String MESSAGE_INVALID_APPOINTMENT_SORT_ATTRIBUTE = "The attribute given is invalid, please"
             + " give one of the following attributes: %1$s";
     public static final String MESSAGE_PATIENT_DOES_NOT_EXIST = "Patient provided does not exist";
-    public static final String MESSAGE_INVALID_START_AND_END_TIMES =
-            "Your start time is either before or on the same time as the end "
-            + "time. Start time should be before end time";
     public static final String MESSAGE_DUPLICATE_TIMESLOT =
             "Please choose another timing for the appointment, there "
             + "already exists another appointment in this timing that clashes with the requested appointment";
     public static final String MESSAGE_DUPLICATE_APPOINTMENT =
-            "This appointment has already been created and we have taken note!";
-
+            "This appointment already exists!";
     public static final String MESSAGE_APPOINTMENTS_LISTED_OVERVIEW = "%1$d appointments listed!";
 
     /**

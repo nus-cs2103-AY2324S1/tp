@@ -8,7 +8,7 @@ import seedu.address.model.Model;
 
 
 /**
- * Sorts all appointments in MediFlowR according to start time.
+ * Sorts all appointments by the attribute provided.
  */
 public class SortCommand extends Command {
     public static final String COMMAND_WORD = "sort";
@@ -20,7 +20,7 @@ public class SortCommand extends Command {
             + "by=[ATTRIBUTE]\n"
             + "Example: " + COMMAND_WORD + " asc by=priority";
 
-    public static final String MESSAGE_SUCCESS = "Sorted all appointments in %1$s order by %1$s.";
+    public static final String MESSAGE_SUCCESS = "Sorted all appointments in %1$s order by %2$s.";
 
     private final String attribute;
     private final boolean isAscending;
@@ -31,7 +31,7 @@ public class SortCommand extends Command {
      * @param attribute attribute to sort by
      */
     public SortCommand(boolean isAscending, String attribute) {
-        requireNonNull(isAscending, attribute);
+        requireNonNull(attribute);
         this.isAscending = isAscending;
         this.attribute = attribute;
     }

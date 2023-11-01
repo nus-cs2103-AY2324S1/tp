@@ -23,7 +23,7 @@
     "email" : "heinz@example.com",
     "birthdate": "1987/01/02",
     "address" : "wall street",
-    "tags" : [ ]
+    "tags" : [ "malaria" ]
   }, {
     "name" : "Daniel Meier",
     "gender": "MALE",
