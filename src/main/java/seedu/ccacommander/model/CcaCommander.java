@@ -175,6 +175,16 @@ public class CcaCommander implements ReadOnlyCcaCommander {
         enrolments.createEnrolment(a);
     }
 
+    /**
+     * Replaces the given enrolment {@code target} in the list with {@code editedEnrolment}.
+     * {@code target} must exist in CcaCommander.
+     */
+    public void setEnrolment(Enrolment target, Enrolment editedEnrolment) {
+        requireNonNull(editedEnrolment);
+
+        enrolments.setEnrolment(target, editedEnrolment);
+    }
+
     // util methods
 
     @Override
