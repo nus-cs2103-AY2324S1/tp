@@ -642,7 +642,7 @@ Deletes a schedule in the address book based on their index number in the table 
 
 #### View calendar: `show`
 
-Display schedules on a specified day as a calendar view.
+Displays schedules on a specified day as a calendar view.
 
 ##### :star: First time users
 {:.no_toc}
