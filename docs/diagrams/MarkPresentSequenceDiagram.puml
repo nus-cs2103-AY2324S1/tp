@@ -1,0 +1,8 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+participant ":ClassDetails" as ClassDetails MODEL_COLOR
+participant ":AttendanceTracker" as AttendanceTracker MODEL_COLOR
+
+[-> ClassDetails : execute("delete s/A0249112A")

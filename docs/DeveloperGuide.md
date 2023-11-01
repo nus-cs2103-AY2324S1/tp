@@ -332,6 +332,20 @@ The `load` command is facilitated by `LoadCommand` and `LoadCommandParser`. `Loa
 4. The file name is then check to ensure that it is valid. If the file name is missing, null or contains a forward slash, a ParseException would be thrown.
 5. The `LoadCommandParser` then creates the `LoadCommand` based on the processed input.
 
+### Mark present feature
+
+#### About this feature
+
+The mark feature allows users to mark a specific student to be present in a specific tutorial in the app.
+
+This feature builds upon the current design of Student and ClassDetails.
+
+#### How it is implemented
+
+<puml src="diagrams/MarkPresentSequenceDiagram.puml" alt="MarkPresentSequenceDiagram" />
+
+The `mark-pre` command is facilitated by `MarkPresentCommand` and `MarkPresentCommandParser`. 
+
 ### Config feature
 
 The config feature is mandatory for TAs to enter before using Class Manager. It allows TAs to set the number of tutorials and the number of assignments in a module. This allows Class Manager to be able to display the correct number of tutorials and assignments for the TA to enter the grades for each student.
