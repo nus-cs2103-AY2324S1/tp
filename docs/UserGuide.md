@@ -296,12 +296,13 @@ _Details coming soon ..._
 
 ## Command summary
 
-| Action     | Format, Examples                                                                                                                                                                                                     |
-|------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**    | `add n/NAME i/NRIC c/CONTACT NUMBER l/LICENCE PLATE…​` <br> e.g., `add n/Mary i/627A c/73052859 l/SLU5237J`                                                                                                          |
-| **Clear**  | `clear`                                                                                                                                                                                                              |
-| **Delete** | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                                                  |
-| **Edit**   | `edit INDEX [l/LICENCEPLATE] [pn/POLICY NUMBER] [pi/POLICY ISSUE DATE] [pe/POLICY EXPIRY DATE]…​`<br> e.g.,`edit 2 pn/AB12345J pe/31-12-2024`                                                                        |
-| **Find**   | `find [n/NAME] [l/LICENCE PLATE] [n/NAME] [i/NRIC] [c/CONTACT NUMBER] [l/LICENCE PLATE] [e/EMAIL][c/COMPANY] [pn/POLICY NUMBER] [pi/POLICY ISSUE DATE] [pe/POLICY EXPIRY DATE]`<br> e.g., `find n/John /pn AB12345J` |
-| **List**   | `list`                                                                                                                                                                                                               |
-| **Help**   | `help`                                                                                                                                                                                                               |
+| Action     | Format, Examples                                                                                                                                                     |
+|------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**    | `add n/NAME i/NRIC c/CONTACT NUMBER l/LICENCE PLATE…​` <br> e.g., `add n/Mary i/627A c/73052859 l/SLU5237J`                                                          |
+| **Clear**  | `clear`                                                                                                                                                              |
+| **Delete** | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                  |
+| **Edit**   | `edit INDEX [l/LICENCEPLATE] [pn/POLICY NUMBER] [pi/POLICY ISSUE DATE] [pe/POLICY EXPIRY DATE]…​`<br> e.g.,`edit 2 pn/AB12345J pe/31-12-2024`                        |
+| **Find**   | `find [n/NAME] [i/NRIC] [c/CONTACT NUMBER] [l/LICENCE PLATE] [pn/POLICY NUMBER] [pi/POLICY ISSUE DATE] [pe/POLICY EXPIRY DATE]`<br> e.g., `find n/John /pn AB12345J` |
+| **List**   | `list`                                                                                                                                                               |
+| **Help**   | `help`                                                                                                                                                               |
+| **Sort**   | `sort`                                                                                                                                                                  |
