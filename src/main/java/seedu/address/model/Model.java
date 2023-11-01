@@ -67,6 +67,8 @@ public interface Model {
 
     void markPersonPaid(Person target);
 
+    void markPersonUnPaid(Person target);
+
     void getPersonPaid(Person target);
 
 
@@ -89,9 +91,44 @@ public interface Model {
     /** Returns an unmodifiable view of the schedule list */
     ObservableList<Person> getScheduleList();
 
+    /** Returns an unmodifiable view of the unfiltered person list */
+    ObservableList<Person> getUnfilteredPersonList();
+
     /**
      * Updates the filter of the filtered person list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
+
+    /**
+     * Saves the current addressbook {@code VersionedAddressBook} state in its history
+     */
+    void commitAddressBook();
+
+    /**
+     * Restore the previous addressbook {@code VersionedAddressBook} state from its history
+     */
+    void undoAddressBook();
+
+    /**
+     * Restore a previously undone addressbook {@code VersionedAddressBook} state from its history
+     */
+    void redoAddressBook();
+
+    /**
+     * Remove states in the {@code VersionedAddressBook} that are no longer valid
+     */
+    void purgeAddressBook();
+
+    /**
+     * Checks whether the addressbook has any saved states that can be restored
+     * @return a boolean to indicate whether an undo operation is possible
+     */
+    boolean canUndoAddressBook();
+
+    /**
+     * Checks whether the addressbook has any saved undone states that can be restored
+     * @return a boolean to indicate whether an undo operation is possible
+     */
+    boolean canRedoAddressBook();
 }

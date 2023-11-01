@@ -45,8 +45,8 @@ public class CommandTestUtil {
     public static final String VALID_BEGIN_BOB = "1300";
     public static final String VALID_END_AMY = "1400";
     public static final String VALID_END_BOB = "1500";
-    public static final String VALID_PAYRATE_AMY = "75";
-    public static final String VALID_PAYRATE_BOB = "25";
+    public static final String VALID_PAYRATE_AMY = "75.00";
+    public static final String VALID_PAYRATE_BOB = "25.00";
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;

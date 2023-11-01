@@ -62,11 +62,13 @@ public class PersonCard extends UiPart<Region> {
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
         subject.setText(person.getSubject().value);
-        day.setText(person.getDay().value.toString());
-        begin.setText(person.getBegin().value);
-        end.setText(person.getEnd().value);
         lesson.setText(person.getLesson().toString());
         payRate.setText("rate: " + person.getPayRate().toString() + "/h");
-        paid.setText(String.valueOf(person.getPaid()));
+        if (person.getPaid()) {
+            paid.setText("paid");
+        }
+        else {
+            paid.setText("not paid");
+        }
     }
 }

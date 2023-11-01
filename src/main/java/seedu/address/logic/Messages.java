@@ -14,10 +14,15 @@ public class Messages {
 
     public static final String MESSAGE_UNKNOWN_COMMAND = "Unknown command";
     public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format! \n%1$s";
+    public static final String MESSAGE_BEGIN_AFTER_END = "Begin time must be before End time.";
     public static final String MESSAGE_INVALID_TUTEE_DISPLAYED_INDEX = "The tutee index provided is invalid";
     public static final String MESSAGE_TUTEES_LISTED_OVERVIEW = "%1$d tutees listed!";
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
+    public static final String MESSAGE_CANNOT_UNDO =
+            "Nothing to undo!";
+    public static final String MESSAGE_CANNOT_REDO =
+            "Nothing to redo!";
 
     /**
      * Returns an error message indicating the duplicate prefixes.
@@ -46,7 +51,9 @@ public class Messages {
                 .append("; Address: ")
                 .append(person.getAddress())
                 .append("; Day: ")
-                .append(person.getDay());
+                .append(person.getDay())
+                .append("; PayRate: ")
+                .append(person.getPayRate());
         return builder.toString();
     }
 
