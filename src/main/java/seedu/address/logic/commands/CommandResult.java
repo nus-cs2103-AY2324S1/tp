@@ -19,7 +19,7 @@ public class CommandResult {
     /** The application should exit. */
     private final boolean exit;
 
-    /** Toggle between light/dark mode */
+    /** Toggle between dark/light mode */
     private final boolean modeToggle;
 
     /** Whether the command can be undone*/

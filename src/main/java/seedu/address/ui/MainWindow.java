@@ -45,7 +45,7 @@ public class MainWindow extends UiPart<Stage> {
     private HelpWindow helpWindow;
 
     // Dark/Light mode
-    private boolean lightMode;
+    private boolean isLightMode;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -84,7 +84,8 @@ public class MainWindow extends UiPart<Stage> {
         // Configure the UI
         setWindowDefaultSize(logic.getGuiSettings());
 
-        setDarkLightMode(logic.getGuiSettings());
+        isLightMode = logic.getGuiSettings().getIsLightMode();
+        setDarkLightMode();
 
         setAccelerators();
 
@@ -172,10 +173,11 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
-    private void setDarkLightMode(GuiSettings guiSettings) {
-        lightMode = guiSettings.getLightMode();
-        System.out.println(lightMode);
-        if (lightMode) {
+    /**
+     * Sets the dark/light mode based on {@code isLightMode}.
+     */
+    private void setDarkLightMode() {
+        if (isLightMode) {
             darkLightModeButton.setText("Dark Mode");
             primaryStage
                     .getScene()
@@ -212,7 +214,7 @@ public class MainWindow extends UiPart<Stage> {
     @FXML
     private void handleExit() {
         GuiSettings guiSettings = new GuiSettings(primaryStage.getWidth(), primaryStage.getHeight(),
-                (int) primaryStage.getX(), (int) primaryStage.getY(), lightMode);
+                (int) primaryStage.getX(), (int) primaryStage.getY(), isLightMode);
         logic.setGuiSettings(guiSettings);
         helpWindow.hide();
         primaryStage.hide();
@@ -223,20 +225,8 @@ public class MainWindow extends UiPart<Stage> {
      */
     @FXML
     private void handleDarkLightMode() {
-        lightMode = !lightMode;
-        if (lightMode) {
-            darkLightModeButton.setText("Dark Mode");
-            primaryStage
-                    .getScene()
-                    .getStylesheets()
-                    .add(getClass().getResource("/view/LightTheme.css").toExternalForm());
-        } else {
-            darkLightModeButton.setText("Light Mode");
-            primaryStage
-                    .getScene()
-                    .getStylesheets()
-                    .remove(getClass().getResource("/view/LightTheme.css").toExternalForm());
-        }
+        isLightMode = !isLightMode;
+        setDarkLightMode();
     }
 
     /**

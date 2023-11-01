@@ -10,7 +10,7 @@ public class GuiSettingsTest {
         GuiSettings guiSettings = new GuiSettings();
         String expected = GuiSettings.class.getCanonicalName() + "{windowWidth=" + guiSettings.getWindowWidth()
                 + ", windowHeight=" + guiSettings.getWindowHeight() + ", windowCoordinates="
-                + guiSettings.getWindowCoordinates() + ", lightMode=" + guiSettings.getLightMode() + "}";
+                + guiSettings.getWindowCoordinates() + ", isLightMode=" + guiSettings.getIsLightMode() + "}";
         assertEquals(expected, guiSettings.toString());
     }
 }

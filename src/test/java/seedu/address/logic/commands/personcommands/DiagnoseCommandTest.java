@@ -29,8 +29,6 @@ import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.PersonBuilder;
 
-
-
 public class DiagnoseCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
@@ -49,7 +47,7 @@ public class DiagnoseCommandTest {
 
         DiagnoseCommand diagnoseCommand = new DiagnoseCommand(INDEX_FIRST_PERSON, tagToDiagnose);
         String expectedMessage = String.format(DiagnoseCommand.MESSAGE_DIAGNOSE_PERSON_SUCCESS,
-                Messages.format(diagnosedPerson));
+                diagnosedPerson.getName(), getAddedIllnesses(personToDiagnose, tagToDiagnose));
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.setPerson(expectedModel.getFilteredPersonList().get(0), diagnosedPerson);
@@ -72,7 +70,7 @@ public class DiagnoseCommandTest {
 
         DiagnoseCommand diagnoseCommand = new DiagnoseCommand(INDEX_SECOND_PERSON, tagsToDiagnose);
         String expectedMessage = String.format(DiagnoseCommand.MESSAGE_DIAGNOSE_PERSON_SUCCESS,
-                Messages.format(diagnosedPerson));
+                diagnosedPerson.getName(), getAddedIllnesses(personToDiagnose, tagsToDiagnose));
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.setPerson(expectedModel.getFilteredPersonList().get(1), diagnosedPerson);
@@ -98,7 +96,7 @@ public class DiagnoseCommandTest {
 
         DiagnoseCommand diagnoseCommand = new DiagnoseCommand(INDEX_FIRST_PERSON, tagToDiagnose);
         String expectedMessage = String.format(DiagnoseCommand.MESSAGE_DIAGNOSE_PERSON_SUCCESS,
-                Messages.format(diagnosedPerson));
+                diagnosedPerson.getName(), getAddedIllnesses(personToDiagnose, tagToDiagnose));
         //It should be editing the second person
         expectedModel.setPerson(expectedModel.getFilteredPersonList().get(1), diagnosedPerson);
 
@@ -123,7 +121,7 @@ public class DiagnoseCommandTest {
 
         DiagnoseCommand diagnoseCommand = new DiagnoseCommand(INDEX_FIRST_PERSON, tagsToDiagnose);
         String expectedMessage = String.format(DiagnoseCommand.MESSAGE_DIAGNOSE_PERSON_SUCCESS,
-                Messages.format(diagnosedPerson));
+                diagnosedPerson.getName(), getAddedIllnesses(personToDiagnose, tagsToDiagnose));
 
         //It should be editing the third person
         expectedModel.setPerson(expectedModel.getFilteredPersonList().get(2), diagnosedPerson);
@@ -179,5 +177,19 @@ public class DiagnoseCommandTest {
 
         // different illnesses set -> returns false
         assertFalse(standardCommand.equals(new DiagnoseCommand(INDEX_FIRST_PERSON, createTypicalIllnessSet())));
+    }
+
+    private static String getAddedIllnesses(Person personToEdit, Set<Tag> illnesses) {
+        assert personToEdit != null;
+
+        StringBuilder addedTags = new StringBuilder();
+
+        for (Tag tag: illnesses) {
+            if (!personToEdit.getTags().contains(tag)) {
+                addedTags.append(tag);
+            }
+        }
+
+        return addedTags.toString();
     }
 }

@@ -29,8 +29,6 @@ import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.PersonBuilder;
 
-
-
 public class UndiagnoseCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
@@ -51,7 +49,7 @@ public class UndiagnoseCommandTest {
 
         UndiagnoseCommand undiagnoseCommand = new UndiagnoseCommand(INDEX_FIRST_PERSON, tagToRemove);
         String expectedMessage = String.format(UndiagnoseCommand.MESSAGE_UNDIAGNOSE_PERSON_SUCCESS,
-                Messages.format(undiagnosedPerson));
+                undiagnosedPerson.getName(), getIllnessesOriginallyThere(personToUndiagnose, tagToRemove));
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.setPerson(expectedModel.getFilteredPersonList().get(0), undiagnosedPerson);
@@ -71,7 +69,7 @@ public class UndiagnoseCommandTest {
 
         UndiagnoseCommand undiagnoseCommand = new UndiagnoseCommand(INDEX_SECOND_PERSON, existingTags);
         String expectedMessage = String.format(UndiagnoseCommand.MESSAGE_UNDIAGNOSE_PERSON_SUCCESS,
-                Messages.format(undiagnosedPerson));
+                undiagnosedPerson.getName(), getIllnessesOriginallyThere(personToUndiagnose, existingTags));
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.setPerson(expectedModel.getFilteredPersonList().get(1), undiagnosedPerson);
@@ -99,7 +97,7 @@ public class UndiagnoseCommandTest {
 
         UndiagnoseCommand undiagnoseCommand = new UndiagnoseCommand(INDEX_FIRST_PERSON, tagToRemove);
         String expectedMessage = String.format(UndiagnoseCommand.MESSAGE_UNDIAGNOSE_PERSON_SUCCESS,
-                Messages.format(undiagnosedPerson));
+                undiagnosedPerson.getName(), getIllnessesOriginallyThere(personToUndiagnose, tagToRemove));
         //It should be editing the second person
         expectedModel.setPerson(expectedModel.getFilteredPersonList().get(1), undiagnosedPerson);
 
@@ -120,8 +118,9 @@ public class UndiagnoseCommandTest {
         Person undiagnosedPerson = new PersonBuilder(personToUndiagnose).withTags(newTagsString).build();
 
         UndiagnoseCommand undiagnoseCommand = new UndiagnoseCommand(INDEX_FIRST_PERSON, existingTags);
+        System.out.println(existingTags);
         String expectedMessage = String.format(UndiagnoseCommand.MESSAGE_UNDIAGNOSE_PERSON_SUCCESS,
-                Messages.format(undiagnosedPerson));
+                undiagnosedPerson.getName(), getIllnessesOriginallyThere(personToUndiagnose, existingTags));
 
         //It should be editing the third person
         expectedModel.setPerson(expectedModel.getFilteredPersonList().get(2), undiagnosedPerson);
@@ -177,5 +176,19 @@ public class UndiagnoseCommandTest {
 
         // different illnesses set -> returns false
         assertFalse(standardCommand.equals(new UndiagnoseCommand(INDEX_FIRST_PERSON, createTypicalIllnessSet())));
+    }
+
+    private static String getIllnessesOriginallyThere(Person personToEdit, Set<Tag> illnesses) {
+        assert personToEdit != null;
+
+        StringBuilder tagsNotOriginallyInside = new StringBuilder();
+
+        for (Tag tag: illnesses) {
+            if (personToEdit.getTags().contains(tag)) {
+                tagsNotOriginallyInside.append(tag);
+            }
+        }
+
+        return tagsNotOriginallyInside.toString();
     }
 }

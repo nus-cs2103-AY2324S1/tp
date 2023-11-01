@@ -9,7 +9,7 @@ public class ModeCommand extends Command {
 
     public static final String COMMAND_WORD = "mode";
 
-    public static final String MESSAGE_TOGGLED = "Toggled light/dark mode";
+    public static final String MESSAGE_TOGGLED = "Toggled dark/light mode";
 
     @Override
     public CommandResult execute(Model model) {
