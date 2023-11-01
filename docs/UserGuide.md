@@ -324,35 +324,52 @@ Displays a list of all tutors in the address book in a table format.
 
 Find tutors whose names contain any of the given keywords.
 
+##### :beginner: First time users
+{:.no_toc}
+
+**Scenario**
+
+You would like to contact tutor **John Doe**, but you can't remember his phone number. You try to look for him in the 
+list of tutors but the list has gotten far too long, and you can't find him.
+
+Fret not! The find tutor command is here to save the day.
+
+**Follow these steps**
+
+Type in `find-t john` and press enter.
+
+**What you can expect to see**
+
+Tada! You have found tutor **John Doe** (and any other tutors whose name contains John).
+
 ![find tutor](images/findTutor.png)
 
-**Format**: `find-t KEYWORD [MORE_KEYWORDS]`
+##### :hammer: Experienced users
+{:.no_toc}
 
-**Examples**:
-* `find-t John` returns `John Smith` and `John Doe`
-* `find-t Alex David Li` returns `Alex David Li`
+**Command format**
 
-**Acceptable values for each parameter**:
-* `KEYWORD`: Any input accepted
+![find tutor command](images/findTutorCommandSyntax.png)
 
-    <div markdown="block" class="alert alert-info">
+**Errors you might encounter**
 
-    **:information_source: Search behaviour**<br>
-
-    * Search is case-insensitive. e.g. `hans` will match `Hans`
-    * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-    * Only the tutor name is searched.
-    * Only full words will be matched. e.g. `Han` will not match `Hans`
-    * Tutors matching at least one keyword will be returned (i.e. OR search). e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
-
-    </div>
-
-**Expected output**:
-* `2 tutors listed!`
-* `0 tutors listed!`
-
-**Error messages**:
+This command is relatively straight forward to use and has only 1 possible error:
 * `Invalid command format!`: No search keyword provided.
+
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Search behaviour**<br>
+
+* The search is case-insensitive. e.g. `hans` will match for `Hans` too!
+* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
+* Only full words will be matched. e.g. `Han` will not match `Hans`
+* Tutors matching at least one keyword will be matched. e.g. `Hans Bo` will match both `Hans Gruber` and `Bo Yang`
+
+</div>
+
+You can also refer to [input information](#input-examples) for details about valid inputs.
+
+[Back To Top](#table-of-contents)
 
 #### Deleting a tutor: `delete-t`
 
