@@ -234,44 +234,44 @@ Examples:
 
 ---
 
-### Marking tutorial attendance for a student as present : `mark-pre`
+### Marking tutorial attendance for a student as present : `present`
 
 Marking tutorial attendance for an existing student as present in the class manager.
 
-Format: `mark-pre TUTORIAL_INDEX s/STUDENT_NUMBER`
+Format: `present s/STUDENT_NUMBER tut/TUTORIAL_INDEX`
 
 * The `STUDENT_NUMBER` must be valid and exist.
 * The `TUTORIAL_INDEX` must be a valid positive integer, within the configured tutorial count given in the [**<u>`config`<u>**](#configuring-class-manager-config) command.
 
 Examples:
-* `mark-pre 1 s/A0249112A`
+* `present s/A0245234A tut/1`
 
 ---
 
-### Marking tutorial attendance for all students displayed as present : `mark-pre-all`
+### Marking tutorial attendance for all students displayed as present : `present-all`
 
 Marking tutorial attendance for all students in current list displayed as present in the class manager.
 
-Format: `mark-pre-all TUTORIAL_INDEX`
+Format: `present-all tut/TUTORIAL_INDEX`
 
 * The `TUTORIAL_INDEX` must be a valid positive integer, within the configured tutorial count given in the [**<u>`config`<u>**](#configuring-class-manager-config) command.
 
 Examples:
-* `mark-pre-all 1`
+* `present-all tut/1`
 
 ---
 
-### Marking tutorial attendance for a student as absent : `mark-abs`
+### Marking tutorial attendance for a student as absent : `absent`
 
 Marking tutorial attendance for an existing student as absent in the class manager.
 
-Format: `mark-abs TUTORIAL_INDEX s/STUDENT_NUMBER`
+Format: `absent s/STUDENT_NUMBER tut/TUTORIAL_INDEX`
 
 * The `STUDENT_NUMBER` must be valid and exist.
 * The `TUTORIAL_INDEX` must be a valid positive integer, within the configured tutorial count given in the [**<u>`config`<u>**](#configuring-class-manager-config) command.
 
 Examples:
-* `mark-abs 1 s/A0249112A`
+* `absent s/A0245234A tut/1`
 
 ---
 
@@ -365,9 +365,9 @@ Here are the list of commands that can be undone/redone:
 * `delete`
 * `edit`
 * `grade`
-* `mark-abs`
-* `mark-pre-all`
-* `mark-pre`
+* `absent`
+* `present-all`
+* `present`
 * `tag`
 
 Displayed result if undo is successful: `Undo success!`
@@ -390,9 +390,9 @@ Here are the list of commands that can be redone after they are undone (same lis
 * `delete`
 * `edit`
 * `grade`
-* `mark-abs`
-* `mark-pre-all`
-* `mark-pre`
+* `absent`
+* `present-all`
+* `present`
 * `tag`
 
 Displayed result if redo is successful: `Redo success!`
@@ -515,9 +515,9 @@ Format: `theme`
 | **Edit**                       | `edit STUDENT_NUMBER [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [s/NEW_STUDENT_NUMBER] [c/CLASS_NUMBER]`<br> e.g.`edit A0245234A n/John Bob p/98761234 e/johnd@exp.com`    |
 | **Lookup**                     | `lookup [c/CLASS_NUMBER] [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [s/STUDENT_NUMBER] [t/TAG]` <br> e.g. `lookup c/T11`                                                   |
 | **Load**                       | `load f/FILE_NAME`<br> e.g. `load f/sample`                                                                                                                         |
-| **Mark Absent**                | `mark-abs TUTORIAL_INDEX s/STUDENT_NUMBER` <br> e.g. `mark-abs 1 s/A0245234A`                                                                                       |
-| **Mark Present**               | `mark-pre TUTORIAL_INDEX s/STUDENT_NUMBER` <br> e.g. `mark-pre 1 s/A0245234A`                                                                                       |
-| **Mark Present All**           | `mark-pre-all TUTORIAL_INDEX` <br> e.g. `mark-pre-all 1`                                                                                                            |
+| **Absent**                | `absent s/STUDENT_NUMBER tut/TUTORIAL_INDEX` <br> e.g. `absent s/A0245234A tut/1`                                                                                                 |
+| **Present**               | `present s/STUDENT_NUMBER tut/TUTORIAL_INDEX` <br> e.g. `present s/A0245234A tut/1`                                                                                     |
+| **Present All**           | `present-all tut/TUTORIAL_INDEX` <br> e.g. `present-all tut/1`                                                                                                          |
 | **Random**                     | `random NUM_OF_STUDENTS` <br> e.g. `random 2`                                                                                                                       |
 | **Record Class participation** | `class-part s/STUDENT_NUMBER tut/TUTORIAL_INDEX part/PARTICIPATION_LEVEL` <br> e.g. `class-part s/A0245234A tut/1 part/true`                                        |
 | **Set Grade**                  | `grade s/STUDENT_NUMBER a/ASSIGNMENT_INDEX g/GRADE` <br> e.g. `grade s/A0245234A a/1 g/100`                                                                         |

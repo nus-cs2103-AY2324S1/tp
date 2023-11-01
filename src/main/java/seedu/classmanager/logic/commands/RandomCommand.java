@@ -1,7 +1,6 @@
 package seedu.classmanager.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.classmanager.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.HashSet;
 import java.util.List;
@@ -21,8 +20,8 @@ public class RandomCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Selects a specific number of students randomly.\n"
             + "Parameters: NUM_OF_STUDENT\n"
             + "Example: " + COMMAND_WORD + " 2";
-    public static final String MESSAGE_TOO_MUCH_TO_BE_SELECTED =
-            "The number of students to be selected exceeds that of current students displayed";
+    public static final String MESSAGE_INVALID_NUM_OF_STUDENT = "Number of student to be selected must be more than 0 "
+        + "and cannot be more than current number of student displayed";
     private final Integer numOfStudent;
 
     /**
@@ -31,7 +30,7 @@ public class RandomCommand extends Command {
      * @param numOfStudent the number of students to be selected.
      */
     public RandomCommand(Integer numOfStudent) {
-        requireAllNonNull(numOfStudent);
+        requireNonNull(numOfStudent);
 
         this.numOfStudent = numOfStudent;
     }
@@ -41,8 +40,8 @@ public class RandomCommand extends Command {
         requireNonNull(model);
 
         List<Student> lastShownList = model.getFilteredStudentList();
-        if (numOfStudent > lastShownList.size()) {
-            throw new CommandException(MESSAGE_TOO_MUCH_TO_BE_SELECTED);
+        if (numOfStudent > lastShownList.size() || numOfStudent <= 0) {
+            throw new CommandException(MESSAGE_INVALID_NUM_OF_STUDENT);
         }
 
         Random random = new Random();
