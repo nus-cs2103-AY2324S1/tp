@@ -192,7 +192,7 @@ e.g. `find Bee John` will match the names `Amy Bee` and `John Doe`.
 
 //TODO
 
-### Viewing Help: `help`
+### Viewing help: `help`
 
 Opens a subwindow with a convenient link to the user guide.
 
@@ -201,11 +201,20 @@ Opens a subwindow with a convenient link to the user guide.
 
 Alternatively, you can press <kbd>F1</kbd> or click Help → Help in the top toolbar.
 
-### Exiting the Program: `exit`
+### Exiting the app: `exit`
 
-//TODO top tab
-
-Close the ConText application.
+Exits the app.
 
 **Format:**
 `exit`
+
+Alternatively, you can click File → Exit in the top toolbar.
+
+### Automatic sorting
+
+The displayed contact list is always automatically sorted in ascending alphabetical order, regardless of capitalization.
+
+### Automatic saving
+
+Your contacts get automatically saved to the file system after each successful command execution. There is no need to save manually.
+

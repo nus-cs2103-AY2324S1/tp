@@ -20,8 +20,8 @@ public class AlphabeticalComparator implements Comparator<Contact> {
             return n;
         }
 
-        // Only take true casing into account if names would otherwise be
-        // identical
+        // Only take true capitalization into account if names would otherwise
+        // be identical
         return aName.compareTo(bName);
     }
 }
