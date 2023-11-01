@@ -123,7 +123,7 @@
 }
 
 .grid-pane .stack-pane {
-    -fx-background-color: derive(#1d1d1d, 30%);
+    -fx-background-color: derive(#ffffff, 30%);
 }
 
 .dialog-pane {

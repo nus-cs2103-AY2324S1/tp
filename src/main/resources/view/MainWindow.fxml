@@ -26,12 +26,12 @@
                 <URL value="@css/CommandBox.css"/>
                 <URL value="@css/JobList.css"/>
                 <URL value="@css/JobDetailsPanel.css"/>
-                <URL value="@css/InterviewList.css"/>
                 <URL value="@css/MenuBar.css"/>
                 <URL value="@css/ResultDisplay.css"/>
                 <URL value="@css/ScrollBar.css"/>
                 <URL value="@css/JobCard.css"/>
                 <URL value="@css/InterviewCard.css"/>
+                <URL value="@css/InterviewList.css"/>
             </stylesheets>
             <VBox>
                 <MenuBar fx:id="menuBar" VBox.vgrow="NEVER">
