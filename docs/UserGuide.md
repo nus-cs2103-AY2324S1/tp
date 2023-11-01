@@ -4,7 +4,7 @@ title: User Guide
 ---
 
 **ConText** is a desktop app that allows for managing contacts quickly via text commands.
-It is optimised for use via an in-app Command Line Interface (CLI), while still having the benefits of a Graphical User Interface (GUI).
+It is optimized for use via an in-app Command Line Interface (CLI), while still having the benefits of a Graphical User Interface (GUI).
 
 It has useful features relevant to NUS SoC students:
 
