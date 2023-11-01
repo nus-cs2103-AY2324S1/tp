@@ -324,7 +324,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case resumes at step 2.
 * 3b. The given contact information is invalid.
   * 3b1. AddressBook shows an error message.
-
     Use case resumes at step 2.
 
 **Use case: View TAs of specific course**

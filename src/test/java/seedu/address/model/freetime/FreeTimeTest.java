@@ -66,4 +66,29 @@ public class FreeTimeTest {
         // different values -> returns false
         assertNotEquals(freeTime, new FreeTime(from, closeFrom));
     }
+
+    @Test
+    public void updateAvailabilityForDay() {
+        LocalTime from = LocalTime.parse("12:20");
+        LocalTime to = LocalTime.parse("23:44");
+        LocalTime closeFrom = LocalTime.parse("12:21");
+        FreeTime freeTime = new FreeTime(from, to);
+        TimeInterval upDatedTimeInterval = new TimeInterval(closeFrom, to);
+        FreeTime updatedFreeTime = freeTime.updateAvailabilityForDay(1, upDatedTimeInterval);
+
+        // Check original freeTime is unchanged
+        assertEquals(freeTime, freeTime);
+
+        // Check updatedFreeTime is edited
+        assertFalse(freeTime.equals(updatedFreeTime));
+
+        // Check that the time interval for the first day is updated
+        assertNotEquals(freeTime.getDay(0), upDatedTimeInterval);
+        assertEquals(updatedFreeTime.getDay(0), upDatedTimeInterval);
+
+        // Check other days are not modified
+        for (int i = 2; i < 6; i++) {
+            assertEquals(freeTime.getDay(i - 1), updatedFreeTime.getDay(i - 1));
+        }
+    }
 }

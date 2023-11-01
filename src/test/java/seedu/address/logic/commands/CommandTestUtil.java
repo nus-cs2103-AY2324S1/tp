@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_COURSE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DAY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FROM;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_HOUR;
@@ -52,6 +53,8 @@ public class CommandTestUtil {
     public static final Integer VALID_EMPTY_HOUR = 0;
     public static final Integer VALID_HOUR_FIVE = 5;
     public static final Integer VALID_HOUR_SIXTY = 60;
+    public static final Integer VALID_DAY_AMY = 2;
+    public static final Integer VALID_DAY_BOB = 3;
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
@@ -63,8 +66,8 @@ public class CommandTestUtil {
     public static final String TELEGRAM_DESC_BOB = " " + PREFIX_TELEGRAM + VALID_TELEGRAM_BOB;
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
-    public static final String FROM_DESC_BOB = " " + PREFIX_FROM + VALID_FROM_BOB;
-    public static final String TO_DESC_BOB = " " + PREFIX_TO + VALID_TO_BOB;
+    public static final String FROM_DESC_BOB = " " + PREFIX_FROM + " " + VALID_FROM_BOB;
+    public static final String TO_DESC_BOB = " " + PREFIX_TO + " " + VALID_TO_BOB;
 
     public static final String COURSE_DESC_CS2103T = " " + PREFIX_COURSE + VALID_COURSE_CS2103T;
     public static final String COURSE_DESC_CS1231S = " " + PREFIX_COURSE + VALID_COURSE_CS1231S;
@@ -72,6 +75,9 @@ public class CommandTestUtil {
     public static final String HOUR_DESC_FIVE = " " + PREFIX_HOUR + VALID_HOUR_FIVE;
     public static final String HOUR_DESC_SIXTY = " " + PREFIX_HOUR + VALID_HOUR_SIXTY;
     public static final String HOUR_DESC_EMPTY = " " + PREFIX_HOUR + VALID_EMPTY_HOUR;
+
+    public static final String FREETIME_DESC_AMY = " " + PREFIX_DAY + VALID_DAY_AMY + FROM_DESC_BOB + TO_DESC_BOB;
+    public static final String FREETIME_DESC_BOB = " " + PREFIX_DAY + " " + VALID_DAY_BOB + FROM_DESC_BOB + TO_DESC_BOB;
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
@@ -81,6 +87,7 @@ public class CommandTestUtil {
     public static final String INVALID_COURSE_DESC = " " + PREFIX_COURSE
             + "ABCD2100"; // Four character prefixes not allowed
     public static final String INVALID_HOUR_DESC = " " + PREFIX_HOUR + "20000"; // Hour is out of range
+    public static final String INVALID_FREETIME_DESC = " " + PREFIX_FROM + "13:00 " + PREFIX_TO + "12:00"; // to b4 from
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";

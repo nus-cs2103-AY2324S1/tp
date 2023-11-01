@@ -123,6 +123,14 @@ public class PersonBuilder {
     }
 
     /**
+     * Sets the {@code FreeTime} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withFreeTime(FreeTime freeTime) {
+        this.freeTime = freeTime;
+        return this;
+    }
+
+    /**
      * Sets the {@code Hour} of the {@code Person} that we are building.
      */
     public PersonBuilder withHour(Integer hour) {
