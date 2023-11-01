@@ -46,6 +46,15 @@ public class ListEventCommandTest {
                 EventTime.fromString("05:00"), true).execute(model));
     }
 
+    @Test
+    public void execute_correctCommandFilteredDescending_success() {
+        model.addEvent(VALID_EVENT_0, model.findPersonByUserFriendlyId(ContactID.fromInt(1)));
+        model.addEvent(VALID_EVENT_1, model.findPersonByUserFriendlyId(ContactID.fromInt(2)));
+        model.addEvent(VALID_EVENT_2, model.findPersonByUserFriendlyId(ContactID.fromInt(2)));
+        assertCommandSuccess(() -> new ListEventCommand(EventTime.fromString("03:00"),
+                EventTime.fromString("05:00"), false).execute(model));
+    }
+
     private void assertCommandSuccess(ThrowingSupplier<CommandResult> function) {
         try {
             function.get();
