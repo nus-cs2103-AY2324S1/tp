@@ -87,7 +87,7 @@ public interface Model {
     ObservableList<Person> getFilteredPersonList();
 
     /** Returns a view of the event list */
-    ObservableList<Event> getEventList();
+    ObservableList<Event> getFilteredEventList();
 
     /**
      * Replaces the given person {@code target} with {@code editedPerson} in the address book

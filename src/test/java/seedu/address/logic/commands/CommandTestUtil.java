@@ -141,9 +141,9 @@ public class CommandTestUtil {
      * Updates the model's event list to show only the event at the given index.
      */
     public static void showEventAtIndex(Model model, Index targetIndex) {
-        assertTrue(targetIndex.getZeroBased() < model.getEventList().size());
+        assertTrue(targetIndex.getZeroBased() < model.getFilteredEventList().size());
 
-        Event event = model.getEventList().get(targetIndex.getZeroBased());
+        Event event = model.getFilteredEventList().get(targetIndex.getZeroBased());
         final String[] splitName = event.getName().toString().split("\\s+");
         model.updateFilteredEventList(new EventNameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
     }

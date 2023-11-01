@@ -55,7 +55,7 @@ public class EditEventCommandTest {
                 .format(EditEventCommand.MESSAGE_EDIT_SUCCESS, Messages.formatEvent(editedEvent));
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-        expectedModel.setEvent(model.getEventList().get(0), editedEvent);
+        expectedModel.setEvent(model.getFilteredEventList().get(0), editedEvent);
 
         CommandResult result = editEventCommand.execute(model);
         assertEquals(new CommandResult(expectedMessage), result);
@@ -73,8 +73,8 @@ public class EditEventCommandTest {
                 .withEventDate("2050-10-10")
                 .withEventStartTime("1400")
                 .withEventEndTime("1500")
-                .withPerson(model.getEventList().get(0).getNames())
-                .withGroups(model.getEventList().get(0).getGroups()).build();
+                .withPerson(model.getFilteredEventList().get(0).getNames())
+                .withGroups(model.getFilteredEventList().get(0).getGroups()).build();
 
         EditEventDescriptor descriptor = new EditEventDescriptorBuilder(editedEvent).build();
         EditEventCommand editEventCommand = new EditEventCommand(INDEX_FIRST_EVENT, descriptor);
@@ -83,7 +83,7 @@ public class EditEventCommandTest {
                 .format(EditEventCommand.MESSAGE_EDIT_SUCCESS, Messages.formatEvent(expectedEvent));
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-        expectedModel.setEvent(model.getEventList().get(0), editedEvent);
+        expectedModel.setEvent(model.getFilteredEventList().get(0), editedEvent);
 
         CommandResult result = editEventCommand.execute(model);
         assertEquals(new CommandResult(expectedMessage), result);
@@ -93,7 +93,7 @@ public class EditEventCommandTest {
     @Test
     public void execute_noFieldSpecifiedUnfilteredList_failure() throws Exception {
         EditEventCommand editEventCommand = new EditEventCommand(INDEX_FIRST_EVENT, new EditEventDescriptor());
-        Event editedEvent = model.getEventList().get(INDEX_FIRST_EVENT.getZeroBased());
+        Event editedEvent = model.getFilteredEventList().get(INDEX_FIRST_EVENT.getZeroBased());
 
         String expectedMessage = String
                 .format(EditEventCommand.MESSAGE_EDIT_SUCCESS, Messages.formatEvent(editedEvent));
@@ -124,7 +124,7 @@ public class EditEventCommandTest {
                 .withEventDate("2050-10-10")
                 .withEventStartTime("1400")
                 .withEventEndTime("1500")
-                .withPerson(model.getEventList().get(0).getNames())
+                .withPerson(model.getFilteredEventList().get(0).getNames())
                 .withGroups("friends").build();
 
         EditEventDescriptor descriptor = new EditEventDescriptorBuilder(editedEvent).build();
@@ -134,7 +134,7 @@ public class EditEventCommandTest {
                 .format(EditEventCommand.MESSAGE_EDIT_SUCCESS, Messages.formatEvent(expectedEvent));
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-        expectedModel.setEvent(model.getEventList().get(0), expectedEvent);
+        expectedModel.setEvent(model.getFilteredEventList().get(0), expectedEvent);
 
         CommandResult result = editEventCommand.execute(model);
         assertEquals(new CommandResult(expectedMessage), result);
@@ -172,7 +172,8 @@ public class EditEventCommandTest {
         EditEventCommand editEventCommand = new EditEventCommand(INDEX_TYPICAL_PERSON_EVENT, descriptor);
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-        expectedModel.setEvent(model.getEventList().get(INDEX_TYPICAL_PERSON_EVENT.getZeroBased()), expectedEvent);
+        expectedModel.setEvent(model.getFilteredEventList()
+                .get(INDEX_TYPICAL_PERSON_EVENT.getZeroBased()), expectedEvent);
 
         CommandResult result = editEventCommand.execute(model);
         assertEquals(expectedModel, model);
@@ -227,7 +228,8 @@ public class EditEventCommandTest {
         EditEventCommand editEventCommand = new EditEventCommand(INDEX_TYPICAL_GROUP_EVENT, descriptor);
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-        expectedModel.setEvent(model.getEventList().get(INDEX_TYPICAL_GROUP_EVENT.getZeroBased()), expectedEvent);
+        expectedModel.setEvent(model.getFilteredEventList()
+                .get(INDEX_TYPICAL_GROUP_EVENT.getZeroBased()), expectedEvent);
 
         CommandResult result = editEventCommand.execute(model);
         assertEquals(expectedModel, model);

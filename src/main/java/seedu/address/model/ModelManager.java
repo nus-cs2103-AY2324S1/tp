@@ -31,7 +31,7 @@ public class ModelManager implements Model {
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
 
-    private final FilteredList<Event> events;
+    private final FilteredList<Event> filteredEvents;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -44,7 +44,7 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         this.filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
-        this.events = new FilteredList<>(this.addressBook.getEventList());
+        this.filteredEvents = new FilteredList<>(this.addressBook.getEventList());
     }
 
     public ModelManager() {
@@ -150,7 +150,7 @@ public class ModelManager implements Model {
 
     @Override
     public void removeEmptyGroups(Set<Group> groups) {
-        for (Event event: events) {
+        for (Event event: filteredEvents) {
             event.removeEmptyGroups(groups);
             setEvent(event, event);
         }
@@ -162,7 +162,7 @@ public class ModelManager implements Model {
 
         // Reset the current persons list first
         this.filteredPersons.setPredicate(PREDICATE_SHOW_ALL_PERSONS);
-        for (Event event: events) {
+        for (Event event: filteredEvents) {
             event.updateGroups();
             setEvent(event, event);
         }
@@ -185,8 +185,8 @@ public class ModelManager implements Model {
      * @return ArrayList of events
      */
     @Override
-    public ObservableList<Event> getEventList() {
-        return this.events;
+    public ObservableList<Event> getFilteredEventList() {
+        return this.filteredEvents;
     }
 
     @Override
@@ -202,7 +202,7 @@ public class ModelManager implements Model {
 
         // Reset the current persons list first
         this.filteredPersons.setPredicate(PREDICATE_SHOW_ALL_PERSONS);
-        this.events.setPredicate(predicate);
+        this.filteredEvents.setPredicate(predicate);
 
         // Switch back to the previous filtered persons list
         this.filteredPersons.setPredicate(personPredicate);
@@ -220,7 +220,7 @@ public class ModelManager implements Model {
         this.filteredPersons.setPredicate(PREDICATE_SHOW_ALL_PERSONS);
 
         // Reset the current events list
-        this.events.setPredicate(predicate);
+        this.filteredEvents.setPredicate(predicate);
 
         // Switch back to the previous filtered persons list
         this.filteredPersons.setPredicate(personPredicate);
@@ -267,7 +267,7 @@ public class ModelManager implements Model {
 
     @Override
     public void updateAssignedPersons(Person personToEdit, Person editedPerson) {
-        for (Event event : this.events) {
+        for (Event event : this.filteredEvents) {
             if (event.getNames().contains(personToEdit.getName())) {
                 logger.info(String.format("Updating events that involves %s : ", personToEdit.getName())
                         + Messages.formatEvent(event));
@@ -279,7 +279,7 @@ public class ModelManager implements Model {
 
     @Override
     public void updateAssignedPersons(Person personToDelete) {
-        for (Event event : this.events) {
+        for (Event event : this.filteredEvents) {
             if (event.getNames().contains(personToDelete.getName())) {
                 event.getNames().remove(personToDelete.getName());
                 setEvent(event, event); //update event in the storage
@@ -341,6 +341,6 @@ public class ModelManager implements Model {
 
     @Override
     public String toString() {
-        return this.filteredPersons.toString() + "\n" + this.events.toString();
+        return this.filteredPersons.toString() + "\n" + this.filteredEvents.toString();
     }
 }
