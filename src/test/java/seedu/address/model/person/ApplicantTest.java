@@ -68,14 +68,16 @@ public class ApplicantTest {
     public void toStringMethod() {
         String expected = Applicant.class.getCanonicalName()
                 + "{name=" + ALICE_APPLICANT.getName()
-                + ", phone=" + ALICE_APPLICANT.getPhone() + "}";
+                + ", phone=" + ALICE_APPLICANT.getPhone()
+                + ", interview time=" + ALICE_APPLICANT.getInterviewTime() + "}";
         assertEquals(expected, ALICE_APPLICANT.toString());
     }
 
     @Test
     public void detailsToCopyMethod() {
         String expected = "Name: " + ALICE_APPLICANT.getName() + "\n"
-                + "Phone: " + ALICE_APPLICANT.getPhone();
+                + "Phone: " + ALICE_APPLICANT.getPhone() + "\n"
+                + "Interview Time: " + ALICE_APPLICANT.getInterviewTime();
         assertEquals(expected, ALICE_APPLICANT.detailsToCopy());
     }
 }

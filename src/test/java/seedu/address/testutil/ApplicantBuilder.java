@@ -1,6 +1,7 @@
 package seedu.address.testutil;
 
 import seedu.address.model.person.Applicant;
+import seedu.address.model.person.fields.InterviewTime;
 import seedu.address.model.person.fields.Name;
 import seedu.address.model.person.fields.Phone;
 
@@ -13,6 +14,8 @@ public class ApplicantBuilder {
 
     private Name name;
     private Phone phone;
+
+    private InterviewTime interviewTime;
 
     /**
      * Creates a {@code ApplicantBuilder} with the default details.
@@ -43,6 +46,14 @@ public class ApplicantBuilder {
      */
     public ApplicantBuilder withPhone(String phone) {
         this.phone = new Phone(phone);
+        return this;
+    }
+
+    /**
+     * Sets the {@code InterviewTime} of the {@code Applicant} that we are building.
+     */
+    public ApplicantBuilder withInterviewTime(String interviewTime) {
+        this.interviewTime = new InterviewTime(interviewTime);
         return this;
     }
 
