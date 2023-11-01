@@ -147,7 +147,7 @@ public class AddressBookParser {
             return new FindIllnessCommandParser().parse(arguments);
 
         case ModeCommand.COMMAND_WORD:
-            return new ModeCommand();
+            return new ModeCommandParser().parse(arguments);
 
         case ListCommand.COMMAND_WORD:
             return new ListCommandParser().parse(arguments);

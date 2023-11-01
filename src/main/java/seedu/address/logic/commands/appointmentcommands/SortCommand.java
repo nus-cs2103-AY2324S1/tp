@@ -15,9 +15,9 @@ public class SortCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Sorts the appointment by the corresponding parameters.\n"
-            + "The direction should either be asc or desc. The parameter must be one of [date, priority].\n"
+            + "The direction should either be asc or desc. The parameter must be one of [time, priority].\n"
             + "Parameters: DIRECTION "
-            + "by=[ATTRIBUTE]\n"
+            + "by=ATTRIBUTE\n"
             + "Example: " + COMMAND_WORD + " asc by=priority";
 
     public static final String MESSAGE_SUCCESS = "Sorted all appointments in %1$s order by %2$s.";
