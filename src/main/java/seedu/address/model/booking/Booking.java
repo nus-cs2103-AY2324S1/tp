@@ -14,7 +14,7 @@ import seedu.address.model.person.exceptions.PhoneNotFoundException;
 import seedu.address.model.tag.Tag;
 
 /**
- * Represents a Person in the address book.
+ * Represents a Booking in the bookings book.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Booking {
@@ -31,19 +31,21 @@ public class Booking {
 
     // Flag
     private boolean flag;
+
     /**
      * Constructs a Booking with the specified details.
      *
-     * @param room The room associated with the booking.
-     * @param bookingPeriod The booking period.
-     * @param name The name of the person making the booking.
-     * @param phone The phone number of the person making the booking.
-     * @param email The email of the person making the booking.
-     * @throws RoomNotFoundException If the room is null.
+     * @param room           The room associated with the booking.
+     * @param bookingPeriod  The booking period.
+     * @param name           The name of the person making the booking.
+     * @param phone          The phone number of the person making the booking.
+     * @param email          The email of the person making the booking.
+     * @param remark         Additional remarks for the booking.
+     * @throws RoomNotFoundException          If the room is null.
      * @throws BookingPeriodNotFoundException If the booking period is null.
-     * @throws NameNotFoundException If the name is null.
-     * @throws PhoneNotFoundException If the phone is null.
-     * @throws EmailNotFoundException If the email is null.
+     * @throws NameNotFoundException          If the name is null.
+     * @throws PhoneNotFoundException         If the phone is null.
+     * @throws EmailNotFoundException         If the email is null.
      */
     public Booking(Room room, BookingPeriod bookingPeriod, Name name, Phone phone, Email email, Remark remark) {
         if (room == null) {
@@ -70,6 +72,9 @@ public class Booking {
         this.remark = remark;
     }
 
+    // Getters for fields
+
+    // Identity fields
     public Room getRoom() {
         return this.room;
     }
@@ -86,12 +91,13 @@ public class Booking {
         return this.email;
     }
 
-    public Remark getRemark() {
-        return this.remark;
-    }
-
+    // Data fields
     public BookingPeriod getBookingPeriod() {
         return this.bookingPeriod;
+    }
+
+    public Remark getRemark() {
+        return this.remark;
     }
 
     /**
@@ -102,9 +108,14 @@ public class Booking {
         return this.room.tag;
     }
 
+    // Other methods
+
     /**
      * Returns true if both bookings have the same name and room.
-     * This defines a weaker notion of equality between two persons.
+     * This defines a weaker notion of equality between two bookings.
+     *
+     * @param otherBooking The other booking to compare.
+     * @return True if both bookings have the same name and room, false otherwise.
      */
     public boolean isSameBooking(Booking otherBooking) {
         return otherBooking != null
@@ -128,14 +139,19 @@ public class Booking {
 
     /**
      * This method returns whether the flag is set to true or false.
+     *
+     * @return True if the booking is flagged, false otherwise.
      */
     public boolean isFlagged() {
         return flag;
     }
 
     /**
-     * Returns true if both persons have the same identity and data fields.
-     * This defines a stronger notion of equality between two persons.
+     * Returns true if both bookings have the same identity and data fields.
+     * This defines a stronger notion of equality between two bookings.
+     *
+     * @param other The other object to compare.
+     * @return True if both bookings have the same identity and data fields, false otherwise.
      */
     @Override
     public boolean equals(Object other) {

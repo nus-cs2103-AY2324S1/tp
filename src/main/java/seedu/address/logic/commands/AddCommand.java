@@ -1,6 +1,5 @@
 package seedu.address.logic.commands;
 
-import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_BOOKING_PERIOD;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
@@ -53,7 +52,9 @@ public class AddCommand extends Command {
     private final Booking toAdd;
 
     /**
-     * Creates an AddCommand to add the specified {@code Person}
+     * Creates an AddCommand to add the specified {@code Booking}.
+     *
+     * @param booking The booking to be added.
      */
     public AddCommand(Booking booking) {
         if (booking == null) {
@@ -71,7 +72,7 @@ public class AddCommand extends Command {
      */
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        requireNonNull(model);
+        assert model != null : "Model cannot be null";
 
         if (model.hasBooking(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_BOOKING);

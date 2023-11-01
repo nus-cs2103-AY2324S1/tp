@@ -1,7 +1,5 @@
 package seedu.address.logic.commands;
 
-import static java.util.Objects.requireNonNull;
-
 import seedu.address.model.BookingsBook;
 import seedu.address.model.Model;
 
@@ -21,7 +19,7 @@ public class ClearCommand extends Command {
      */
     @Override
     public CommandResult execute(Model model) {
-        requireNonNull(model);
+        assert model != null : "Model cannot be null";
         model.setBookingsBook(new BookingsBook());
         return new CommandResult(MESSAGE_SUCCESS);
     }

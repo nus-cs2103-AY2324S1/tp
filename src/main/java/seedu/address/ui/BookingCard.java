@@ -1,15 +1,25 @@
 package seedu.address.ui;
 
 import javafx.fxml.FXML;
+import javafx.geometry.Insets;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.control.Tooltip;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
+import javafx.stage.Stage;
 import seedu.address.model.booking.Booking;
 import seedu.address.model.tag.Tag;
 
 /**
- * An UI component that displays information of a {@code Person}.
+ * A UI component that displays information of a {@code Person}.
  */
 public class BookingCard extends UiPart<Region> {
 
@@ -42,7 +52,7 @@ public class BookingCard extends UiPart<Region> {
     @FXML
     private Label remark;
     @FXML
-    private Label flag;
+    private ImageView flagImage;
     @FXML
     private FlowPane tags;
 
@@ -53,19 +63,88 @@ public class BookingCard extends UiPart<Region> {
         super(FXML);
         this.booking = booking;
         id.setText(displayedIndex + ". ");
-        room.setText("Room: " + booking.getRoom().value);
-        name.setText("Client: " + booking.getName().fullName);
-        phone.setText("Contact: " + booking.getPhone().value);
-        email.setText("Email: " + booking.getEmail().value);
-        bookingPeriod.setText("Booking Period: " + booking.getBookingPeriod().value);
-        remark.setText("Remark: " + booking.getRemark().value);
+        room.setText("Room " + booking.getRoom().value);
+        bookingPeriod.setText(booking.getBookingPeriod().value);
+        remark.setText(booking.getRemark().value);
         if (booking.isFlagged()) {
-            flag.setText("!");
-        } else {
-            flag.setText("");
+            Image flag = new Image("images/Flag.png");
+            flagImage.setImage(flag);
         }
         Tag tag = booking.getTags();
         Label tagLabel = new Label(tag.tagName);
+        tagLabel.setStyle("-fx-font-weight: bold; -fx-font-size: 14; -fx-background-color: #64a4db;"
+                 + " -fx-background-radius: 15; -fx-padding: 5px;");
         tags.getChildren().add(tagLabel);
+
+        // Adding spacing between tags and room
+        FlowPane.setMargin(tagLabel, new Insets(0, 0, 0, 50)); // Adjust the insets as needed
+    }
+
+    @FXML
+    private void handleCardClick(MouseEvent event) {
+        if (booking != null) {
+            // Create a VBox to hold the icons and set its style
+            VBox popupRoot = new VBox();
+            popupRoot.setStyle("-fx-background-color: #6ccaf0; -fx-padding: 10px;");
+
+            // Set the icons for Name, Email, and Phone
+            ImageView nameIcon = new ImageView(new Image("images/Name.png"));
+            ImageView emailIcon = new ImageView(new Image("images/Email.png"));
+            ImageView phoneIcon = new ImageView(new Image("images/Phone.png"));
+
+            // Set the icon size
+            nameIcon.setFitHeight(30);
+            nameIcon.setFitWidth(30);
+            emailIcon.setFitHeight(30);
+            emailIcon.setFitWidth(30);
+            phoneIcon.setFitHeight(30);
+            phoneIcon.setFitWidth(30);
+
+            // Create Labels and set the actual data for Name, Email, and Phone
+            Label nameLabel = new Label(booking.getName().toString());
+            Label phoneLabel = new Label(booking.getPhone().toString());
+            Label emailLabel = new Label(booking.getEmail().toString());
+
+            // Apply bold style, increase font size, and increase letter-spacing to the labels
+            nameLabel.setStyle("-fx-font-weight: bold; -fx-font-size: 14; -fx-text-letter-spacing: 1.5;");
+            phoneLabel.setStyle("-fx-font-weight: bold; -fx-font-size: 14; -fx-text-letter-spacing: 1.5;");
+            emailLabel.setStyle("-fx-font-weight: bold; -fx-font-size: 14; -fx-text-letter-spacing: 1.5;");
+
+            // Create HBoxes for icons and labels with spacing
+            HBox nameBox = new HBox(nameIcon, nameLabel);
+            nameBox.setSpacing(10); // Adjust the spacing as needed
+
+            HBox emailBox = new HBox(emailIcon, emailLabel);
+            emailBox.setSpacing(10); // Adjust the spacing as needed
+
+            HBox phoneBox = new HBox(phoneIcon, phoneLabel);
+            phoneBox.setSpacing(10); // Adjust the spacing as needed
+
+            // Add icon-label HBoxes to the VBox
+            popupRoot.getChildren().addAll(nameBox, emailBox, phoneBox);
+
+            // Create a Scene with the VBox and set its dimensions
+            Scene scene = new Scene(popupRoot);
+
+            Stage popupStage = new Stage();
+            popupStage.setTitle("Room " + booking.getRoom().value);
+
+            // Set the room image as the icon
+            popupStage.getIcons().add(new Image("images/Room.png"));
+
+            // Set a tooltip for the stage title to show the full room number
+            Tooltip tooltip = new Tooltip("Room " + booking.getRoom().value);
+            Tooltip.install(scene.getRoot(), tooltip); // Install tooltip on the scene root
+
+            popupStage.setScene(scene);
+
+            // Set a minimum width for the stage to accommodate the full title
+            Text titleText = new Text(popupStage.getTitle());
+            titleText.setFont(Font.getDefault());
+            double titleWidth = titleText.getLayoutBounds().getWidth();
+            popupStage.setMinWidth(titleWidth + 200); // Adjust the extra space as necessary
+
+            popupStage.show();
+        }
     }
 }

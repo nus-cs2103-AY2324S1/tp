@@ -25,6 +25,9 @@ public class ModelManager implements Model {
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
+     *
+     * @param addressBook ReadOnlyBookingsBook containing booking data.
+     * @param userPrefs   ReadOnlyUserPrefs containing user preferences.
      */
     public ModelManager(ReadOnlyBookingsBook addressBook, ReadOnlyUserPrefs userPrefs) {
         requireAllNonNull(addressBook, userPrefs);
@@ -37,23 +40,41 @@ public class ModelManager implements Model {
 
     }
 
+    /**
+     * Constructs a ModelManager with default BookingsBook and UserPrefs.
+     */
     public ModelManager() {
         this(new BookingsBook(), new UserPrefs());
     }
 
     //=========== UserPrefs ==================================================================================
 
+    /**
+     * Sets user preferences to the provided {@code ReadOnlyUserPrefs}.
+     *
+     * @param userPrefs ReadOnlyUserPrefs to be set.
+     */
     @Override
     public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
         requireNonNull(userPrefs);
         this.userPrefs.resetData(userPrefs);
     }
 
+    /**
+     * Returns the user preferences.
+     *
+     * @return UserPrefs object containing user preferences.
+     */
     @Override
     public ReadOnlyUserPrefs getUserPrefs() {
         return userPrefs;
     }
 
+    /**
+     * Returns the GUI settings.
+     *
+     * @return GuiSettings object representing the GUI settings.
+     */
     @Override
     public GuiSettings getGuiSettings() {
         return userPrefs.getGuiSettings();

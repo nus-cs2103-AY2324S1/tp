@@ -26,10 +26,23 @@ public class FlagCommand extends Command {
 
     private final Index targetIndex;
 
+    /**
+     * Constructs a FlagCommand to flag a booking at the specified index.
+     *
+     * @param targetIndex The index of the booking to be flagged.
+     */
     public FlagCommand(Index targetIndex) {
+        assert targetIndex != null : "Index cannot be null";
         this.targetIndex = targetIndex;
     }
 
+    /**
+     * Executes the FlagCommand to flag a booking using its index.
+     *
+     * @param model The model containing the booking list.
+     * @return A CommandResult indicating the success of the flag operation.
+     * @throws CommandException If there's an error in executing the command.
+     */
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
@@ -48,8 +61,12 @@ public class FlagCommand extends Command {
         return new CommandResult(String.format(MESSAGE_FLAG_SUCCESS, booking), false, false,
                 false);
     }
-
-
+    /**
+     * Checks for equality between two FlagCommand objects based on their target indices.
+     *
+     * @param other The object to compare.
+     * @return True if the objects are equal, false otherwise.
+     */
     @Override
     public boolean equals(Object other) {
         if (other == this) {

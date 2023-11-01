@@ -34,7 +34,10 @@ public class LogicManager implements Logic {
     private final BookingBookParser bookingBookParser;
 
     /**
-     * Constructs a {@code LogicManager} with the given {@code Model} and {@code Storage}.
+     * Constructs a LogicManager with the given Model and Storage.
+     *
+     * @param model   The Model component providing the application's data.
+     * @param storage The Storage component handling the saving and loading of data.
      */
     public LogicManager(Model model, Storage storage) {
         this.model = model;
