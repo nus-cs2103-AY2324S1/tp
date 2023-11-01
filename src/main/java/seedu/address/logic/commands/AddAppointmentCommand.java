@@ -70,7 +70,6 @@ public class AddAppointmentCommand extends Command {
             throw new CommandException(MESSAGE_SAME_DOCTOR_AND_PATIENT);
         }
 
-
         // check that the patient and doctor do not have appointment scheduled at the same time
         if (chosenPatient.hasAppointmentAt(toAdd.getAppointmentTime())) {
             throw new CommandException(MESSAGE_DUPLICATE_APPOINTMENT_PATIENT);
@@ -82,7 +81,7 @@ public class AddAppointmentCommand extends Command {
         // add appointment to the specified patient's appointment set
         chosenPatient.addAppointment(toAdd);
         chosenDoctor.addAppointment(toAdd);
-
+        model.addAppointment(toAdd);
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
     }
 
