@@ -54,6 +54,8 @@ public class TaskList implements Iterable<Task> {
     }
 
     public Task remove(int index) {
+        requireNonNull(index);
+
         return internalList.remove(index - 1);
     }
 
