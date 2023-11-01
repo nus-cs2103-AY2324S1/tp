@@ -7,11 +7,12 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSucces
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.FindCommand;
+import seedu.address.logic.parser.exceptions.ParseException;
 
 public class FindCommandParserTest {
 
     private FindCommandParser parser = new FindCommandParser();
-    private String[] testInput = {"Alice", "Bob"};
+    private String[] testInput1 = {"Alice", "Bob"};
 
     @Test
     public void parse_emptyArg_throwsParseException() {
@@ -19,10 +20,10 @@ public class FindCommandParserTest {
     }
 
     @Test
-    public void parse_validArgs_returnsFindCommand() {
+    public void parse_validArgs_returnsFindCommand() throws ParseException {
         // no leading and trailing whitespaces
         FindCommand expectedFindCommand =
-                new FindCommand(KeywordParser.parseInput(testInput));
+                new FindCommand(KeywordParser.parseInput(testInput1));
         assertParseSuccess(parser, "Alice Bob", expectedFindCommand);
 
         // multiple whitespaces between keywords

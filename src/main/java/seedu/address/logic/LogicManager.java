@@ -1,5 +1,7 @@
 package seedu.address.logic;
 
+import static java.util.Objects.requireNonNull;
+
 import java.io.IOException;
 import java.nio.file.AccessDeniedException;
 import java.nio.file.Path;
@@ -38,6 +40,8 @@ public class LogicManager implements Logic {
      * Constructs a {@code LogicManager} with the given {@code Model} and {@code Storage}.
      */
     public LogicManager(Model model, Storage storage) {
+        requireNonNull(model);
+        requireNonNull(storage);
         this.model = model;
         this.storage = storage;
         addressBookParser = new AddressBookParser();
@@ -45,6 +49,7 @@ public class LogicManager implements Logic {
 
     @Override
     public CommandResult execute(String commandText) throws CommandException, ParseException {
+        requireNonNull(commandText);
         logger.info("----------------[USER COMMAND][" + commandText + "]");
 
         CommandResult commandResult;
