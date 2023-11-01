@@ -289,7 +289,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 * **Alternative 2:** Individual command knows how to undo/redo by
   itself.
   * Pros: Will use less memory (e.g. for `delete`, just save the student being deleted).
-  * Cons: We must ensure that the implementation of each individual command are correct.
+  * Cons: We must ensure that the implementation of each command is correct.
 
 **Aspect: Data structure to support the undo/redo commands**
 
@@ -358,13 +358,10 @@ The feature should be implemented upon the current design of Student and ClassDe
 
 The config feature is mandatory for TAs to enter before using Class Manager. It allows TAs to set the number of tutorials and the number of assignments in a module. This allows Class Manager to be able to display the correct number of tutorials and assignments for the TA to enter the grades for each student.
 
-### \[Proposed\] Data archiving
 
-_{Explain here how the data archiving feature will be implemented}_
+### Class Details feature
 
-### \[Proposed\] Class Details feature
-
-#### Proposed Implementation
+#### Implementation
 
 The proposed class details mechanism for each student will be facilitated by `ClassDetails`. It allows for the tracking
 of an `Student`'s class details, such as their tutorial group, tutorial attendance, class participation, and assignment
