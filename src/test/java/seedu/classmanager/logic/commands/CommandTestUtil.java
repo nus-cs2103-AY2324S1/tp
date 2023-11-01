@@ -8,6 +8,7 @@ import static seedu.classmanager.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.classmanager.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.classmanager.logic.parser.CliSyntax.PREFIX_STUDENT_NUMBER;
 import static seedu.classmanager.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.classmanager.logic.parser.CliSyntax.PREFIX_TUTORIAL_INDEX;
 import static seedu.classmanager.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;
@@ -63,6 +64,8 @@ public class CommandTestUtil {
     public static final String COMMENT_DESC_BOB = " " + PREFIX_CLASS_NUMBER + VALID_COMMENT_BOB;
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
+    public static final int TEST_TUTORIAL = 1;
+    public static final String TEST_TUTORIAL_DESC = " " + PREFIX_TUTORIAL_INDEX + TEST_TUTORIAL;
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
