@@ -83,13 +83,15 @@ Typing in the name of the field of the fosterer - or letters that are close to t
 
 ![Before typing name](images/screenshots/BeforeEnteringName.png)
 
-In the example above, entering <code>name</code>, or others that are close to name like <code>nam</code> sets focus on the name field.
+In the example above, entering <code>name</code>, or others that are partially name like <code>nam</code> sets focus on the name field.
 
 ![Profile navigate field](images/screenshots/NavigatingFields.png)
 
-After you finish editing, pressing enter key brings your cursor back to the command box with your new changes intact.
+After you finish editing, pressing <code>enter</code> key brings your cursor back to the command box with your new changes intact. <br>
+If you want to revert back to the original value of the field while editing on the textbox, press <code>escape</code> key to cancel the changes and bring your cursor back to the command box. 
+
 ![Cursor back to commandbox](images/screenshots/CursorBackToCommandbox.png)
-In the example above, after changing name from 'Meie' to 'Mei' an enter key was pressed. 
+In the example above, after changing name from 'Meie' to 'Mei' an <code>enter</code> key was pressed. 
 
 The same process can be applied to other fields.
 
