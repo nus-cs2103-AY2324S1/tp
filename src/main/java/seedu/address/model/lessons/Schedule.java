@@ -204,6 +204,10 @@ public class Schedule implements Iterable<Lesson> {
     class LessonComparator implements Comparator<Lesson> {
         @Override
         public int compare(Lesson lesson1, Lesson lesson2) {
+            int compareDay = lesson1.getDay().compareTo(lesson2.getDay());
+            if (compareDay != 0) {
+                return compareDay;
+            }
             return lesson1.getStart()
                     .compareTo(lesson2.getStart());
         }
