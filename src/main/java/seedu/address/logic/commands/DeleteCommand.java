@@ -46,6 +46,15 @@ public class DeleteCommand extends UndoableCommand {
     public static final String MESSAGE_PERSON_NOT_FOUND =
             "The given combination of Name and NRIC does not match any patient in the patients list.";
 
+    public static final String MESSAGE_NO_APPOINTMENT_TO_DELETE = "Patient does not have an appointment to delete";
+
+    public static final String MESSAGE_NO_MEDICAL_HISTORY_TO_DELETE =
+            "Patient does not have any medical histories to delete";
+
+    public static final String MESSAGE_INVALID_MEDICAL_HISTORY =
+            "Patient does not have the medical histories speicifed.\n"
+            + "Please check the medical histories of the patient through finding the patient first.";
+
     public static final String MESSAGE_UNDO_DELETE_PERSON_SUCCESS = "Undoing the deletion of Patient:  %1$s";
 
     public static final String MESSAGE_UNDO_DELETE_FIELD_SUCCESS = "Undoing the deletion of a Patient's field:  %1$s";
@@ -169,7 +178,7 @@ public class DeleteCommand extends UndoableCommand {
 
         if (deletePersonDescriptor.shouldDeleteAppointment()) {
             if (updatedAppointment == null) {
-                throw new CommandException("Patient does not have an appointment to delete");
+                throw new CommandException(MESSAGE_NO_APPOINTMENT_TO_DELETE);
             } else {
                 updatedAppointment = null;
             }
@@ -179,13 +188,12 @@ public class DeleteCommand extends UndoableCommand {
             Set<MedicalHistory> medicalHistoriesToDelete = deletePersonDescriptor.getMedicalHistories();
             Set<MedicalHistory> medicalHistoriesToKeep = new HashSet<>();
             if (updatedMedicalHistories.isEmpty()) {
-                throw new CommandException("Patient does not have any medical histories to delete");
+                throw new CommandException(MESSAGE_NO_MEDICAL_HISTORY_TO_DELETE);
             } else if (medicalHistoriesToDelete == null || medicalHistoriesToDelete.isEmpty()) {
                 updatedMedicalHistories = new HashSet<>();
             } else {
                 if (!updatedMedicalHistories.containsAll(medicalHistoriesToDelete)) {
-                    throw new CommandException("Patient does not have the medical histories speicifed.\n"
-                            + "Please check the medical histories of the patient through finding the patient first.");
+                    throw new CommandException(MESSAGE_INVALID_MEDICAL_HISTORY);
                 }
                 for (MedicalHistory medicalHistory : updatedMedicalHistories) {
                     if (!medicalHistoriesToDelete.contains(medicalHistory)) {
