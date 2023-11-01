@@ -49,9 +49,6 @@ deactivate AddCommand
 
 AddCommandParser --> InputParser : a
 deactivate AddCommandParser
-'Hidden arrow to position the destroy marker below the end of the activation bar.
-AddCommandParser -[hidden]-> InputParser
-destroy AddCommandParser
 
 InputParser --> LogicManager : a
 deactivate InputParser
@@ -74,8 +71,6 @@ deactivate CommandResult
 
 AddCommand --> LogicManager : result
 deactivate AddCommand
-AddCommand -[hidden]-> InputParser
-destroy AddCommand
 
 [<--LogicManager
 deactivate LogicManager

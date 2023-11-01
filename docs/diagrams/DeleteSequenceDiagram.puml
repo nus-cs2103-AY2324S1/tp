@@ -39,9 +39,6 @@ deactivate DeleteCommand
 
 DeleteCommandParser --> InputParser : d
 deactivate DeleteCommandParser
-'Hidden arrow to position the destroy marker below the end of the activation bar.
-DeleteCommandParser -[hidden]-> InputParser
-destroy DeleteCommandParser
 
 InputParser --> LogicManager : d
 deactivate InputParser
@@ -70,8 +67,6 @@ deactivate CommandResult
 
 DeleteCommand --> LogicManager : result
 deactivate DeleteCommand
-DeleteCommand -[hidden]-> InputParser
-destroy DeleteCommand
 
 [<--LogicManager
 deactivate LogicManager
