@@ -513,14 +513,14 @@ You can also refer to [input information](#input-examples) for details about val
 
 #### Listing all schedules: `list-s`
 
-Displays a list of all schedules in the address book in a table format. List can be filtered by tutors using the index number provided in the tutor list, or filter by `COMPLETED` or `MISSING` status.
+Displays a list of all schedules in TutorConnect. List can be filtered by tutors using the index number provided in the tutor list, or filter by `COMPLETED` or `MISSING` status.
 
 ##### :star: First time users
 {:.no_toc}
 
 **Scenario**
 
-You wish to view the list of schedules from tutor **Irfan Ibrahim** that are marked as `COMPLETED`.
+You wish to view schedules assigned to tutor **Irfan Ibrahim** that have been marked as `COMPLETED`.
 
 The list schedule function is here for that!
 
