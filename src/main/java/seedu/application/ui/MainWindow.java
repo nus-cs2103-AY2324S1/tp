@@ -35,6 +35,7 @@ public class MainWindow extends UiPart<Stage> {
     private JobListPanel jobListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+    private InterviewListPanel interviewListPanel;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -44,6 +45,8 @@ public class MainWindow extends UiPart<Stage> {
     private StackPane jobListPanelPlaceholder;
     @FXML
     private StackPane jobDetailsPanelPlaceholder;
+    @FXML
+    private StackPane interviewListPanelPlaceholder;
     @FXML
     private StackPane resultDisplayPlaceholder;
     @FXML
