@@ -9,6 +9,7 @@ import java.util.regex.Pattern;
 
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
@@ -53,7 +54,6 @@ public class DeckParser {
         logger.fine("Command word: " + commandWord + "; Arguments: " + arguments);
 
         switch (commandWord) {
-
         case AddCommand.COMMAND_WORD:
             return new AddCommandParser().parse(arguments);
 
@@ -71,13 +71,12 @@ public class DeckParser {
 
         case PractiseCommand.COMMAND_WORD:
             return new PractiseCommandParser().parse(arguments);
-
         case SolveCommand.COMMAND_WORD:
             return new SolveCommandParser().parse(arguments);
-
         case SetDifficultyCommand.COMMAND_WORD:
             return new SetDifficultyCommandParser().parse(arguments);
-
+        case ClearCommand.COMMAND_WORD:
+            return new ClearCommand();
         default:
             logger.finer("This user input caused a ParseException: " + userInput);
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

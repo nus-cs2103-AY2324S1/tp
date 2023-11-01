@@ -1,3 +1,4 @@
+
 .background {
     -fx-background-color: derive(#34403A, 10%);
     background-color: #383838; /* Used in the default.html file */
@@ -149,7 +150,6 @@
 }
 
 .result-display {
-    -fx-background-color: transparent;
     -fx-font-family: "Segoe UI Light";
     -fx-font-size: 13pt;
     -fx-text-fill: #34403A;
