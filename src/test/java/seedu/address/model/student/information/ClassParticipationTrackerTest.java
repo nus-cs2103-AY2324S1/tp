@@ -12,10 +12,9 @@ import seedu.address.commons.core.index.Index;
 public class ClassParticipationTrackerTest {
 
     @Test
-    public void constructor_nullAssignmentList() {
-        assertThrows(AssertionError.class, () -> new ClassParticipationTracker((ClassParticipation[]) null));
+    public void constructor_nullClassParticipationList_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> new ClassParticipationTracker((ClassParticipation[]) null));
     }
-
 
     @Test
     public void constructor_invalidNumOfTut_throwsIllegalArgumentException() {

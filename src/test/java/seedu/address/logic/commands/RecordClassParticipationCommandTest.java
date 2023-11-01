@@ -48,9 +48,7 @@ public class RecordClassParticipationCommandTest {
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setStudent(model.getStudent(editedStudent.getStudentNumber()), editedStudent);
-        if (expectedModel.isSelectedStudent(editedStudent)) {
-            expectedModel.setSelectedStudent(editedStudent);
-        }
+        expectedModel.setSelectedStudent(editedStudent);
         expectedModel.commitAddressBook();
 
         assertCommandSuccess(recordClassParticipationCommand, model, expectedMessage, expectedModel, commandHistory);
@@ -75,9 +73,7 @@ public class RecordClassParticipationCommandTest {
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         showStudentAtIndex(expectedModel, INDEX_FIRST_STUDENT);
         expectedModel.setStudent(model.getStudent(editedStudent.getStudentNumber()), editedStudent);
-        if (expectedModel.isSelectedStudent(editedStudent)) {
-            expectedModel.setSelectedStudent(editedStudent);
-        }
+        expectedModel.setSelectedStudent(editedStudent);
         expectedModel.updateFilteredStudentList(Model.PREDICATE_SHOW_ALL_STUDENTS);
         expectedModel.commitAddressBook();
 

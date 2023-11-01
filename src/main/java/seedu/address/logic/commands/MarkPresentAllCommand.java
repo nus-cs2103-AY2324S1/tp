@@ -47,7 +47,6 @@ public class MarkPresentAllCommand extends Command {
         }
 
         model.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
-
         model.commitAddressBook();
 
         return new CommandResult(MESSAGE_MARK_SUCCESS);

@@ -13,6 +13,11 @@ import seedu.address.logic.commands.exceptions.CommandException;
 public class AttendanceTrackerTest {
 
     @Test
+    public void constructor_nullAttendanceList_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> new AttendanceTracker((Attendance[]) null));
+    }
+
+    @Test
     public void constructor_invalidNumOfTut_throwsIllegalArgumentException() {
         int invalidNumOfTut = -1;
         assertThrows(IllegalArgumentException.class, () -> new AttendanceTracker(invalidNumOfTut));

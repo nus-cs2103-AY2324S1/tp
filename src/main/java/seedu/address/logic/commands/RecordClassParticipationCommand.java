@@ -60,12 +60,8 @@ public class RecordClassParticipationCommand extends Command {
         Student markedStudent = studentToMark.copy();
         markedStudent.markClassParticipation(this.sessionNumber, this.hasParticipated);
         model.setStudent(studentToMark, markedStudent);
-
-        if (model.isSelectedStudent(markedStudent)) {
-            model.setSelectedStudent(markedStudent);
-        }
-
         model.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
+        model.setSelectedStudent(markedStudent);
         model.commitAddressBook();
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, studentNumber)

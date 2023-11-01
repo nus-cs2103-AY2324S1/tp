@@ -52,7 +52,7 @@ public class AttendanceTracker implements Tracker {
      * @param attendanceList A list of booleans stored in {@code Attendance}.
      */
     public AttendanceTracker(Attendance[] attendanceList) {
-        assert attendanceList != null;
+        requireNonNull(attendanceList);
         this.attendanceList = attendanceList;
     }
 

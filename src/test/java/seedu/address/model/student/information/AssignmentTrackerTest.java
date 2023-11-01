@@ -30,8 +30,8 @@ public class AssignmentTrackerTest {
     }
 
     @Test
-    public void constructor_nullAssignmentList_throwsAssertionError() {
-        assertThrows(AssertionError.class, () -> new AssignmentTracker((Assignment[]) null));
+    public void constructor_nullAssignmentList_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> new AssignmentTracker((Assignment[]) null));
     }
 
     @Test

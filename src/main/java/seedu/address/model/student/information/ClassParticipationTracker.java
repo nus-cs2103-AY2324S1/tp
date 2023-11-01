@@ -50,7 +50,7 @@ public class ClassParticipationTracker implements Tracker {
      * @param classParticipationList A list of booleans stored in {@code ClassParticipation}.
      */
     public ClassParticipationTracker(ClassParticipation[] classParticipationList) {
-        assert classParticipationList != null;
+        requireNonNull(classParticipationList);
         this.classParticipationList = classParticipationList;
     }
 

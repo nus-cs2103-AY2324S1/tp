@@ -59,10 +59,8 @@ public class MarkPresentCommand extends Command {
             throw new CommandException(e.getMessage());
         }
 
-        if (model.isSelectedStudent(markedStudent)) {
-            model.setSelectedStudent(markedStudent);
-        }
         model.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
+        model.setSelectedStudent(markedStudent);
         model.commitAddressBook();
 
         return new CommandResult(MESSAGE_MARK_SUCCESS);

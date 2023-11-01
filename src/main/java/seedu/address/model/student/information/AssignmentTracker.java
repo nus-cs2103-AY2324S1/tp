@@ -51,7 +51,7 @@ public class AssignmentTracker implements Tracker {
      * @param assignmentList A list of integers stored in {@code Assignment}.
      */
     public AssignmentTracker(Assignment[] assignmentList) {
-        assert assignmentList != null;
+        requireNonNull(assignmentList);
         this.assignmentList = assignmentList;
     }
 
