@@ -17,7 +17,9 @@ import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.meeting.Meeting;
 import seedu.address.model.person.Person;
+import seedu.address.testutil.MeetingBuilder;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for
@@ -26,6 +28,25 @@ import seedu.address.model.person.Person;
 public class DeleteCommandTest {
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+
+    @Test
+    public void deleteAttendees() {
+        Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Meeting editedMeeting = new MeetingBuilder().withAttendees(firstPerson.getName().fullName).build();
+        model.addMeeting(editedMeeting);
+        DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_PERSON);
+
+        Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        Meeting editedMeetingTester = new MeetingBuilder().withAttendees(firstPerson.getName().fullName).build();
+        expectedModel.addMeeting(editedMeetingTester);
+        expectedModel.deletePerson(firstPerson);
+        expectedModel.deleteAttendee(firstPerson.getName().fullName);
+
+        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS,
+                Messages.format(firstPerson));
+
+        assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
+    }
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
