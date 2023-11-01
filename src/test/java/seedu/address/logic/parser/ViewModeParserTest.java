@@ -1,15 +1,10 @@
 package seedu.address.logic.parser;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.Messages.MESSAGE_UNAVAILABLE_COMMAND_IN_VIEW_MODE;
-import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ViewExitCommand;
-import seedu.address.logic.parser.exceptions.ParseException;
 
 public class ViewModeParserTest {
     private final ViewModeParser parser = new ViewModeParser();
@@ -20,7 +15,8 @@ public class ViewModeParserTest {
 
     //    @Test
     //    public void parseCommand_unrecognisedInput_throwsParseException() {
-    //        assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE), ()
+    //        assertThrows(ParseException.class,
+    //        String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE), ()
     //                -> parser.parseCommand("", null, null));
     //    }
 
