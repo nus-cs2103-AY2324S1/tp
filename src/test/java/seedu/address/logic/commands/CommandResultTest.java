@@ -28,6 +28,9 @@ public class CommandResultTest {
         // different feedbackToUser value -> returns false
         assertFalse(commandResult.equals(new CommandResult("different")));
 
+        // different showDashboard value -> returns false
+        assertFalse(commandResult.equals(new CommandResult("feedback", true, false, false)));
+
         // different showHelp value -> returns false
         assertFalse(commandResult.equals(new CommandResult("feedback", false, true, false)));
 
@@ -45,6 +48,9 @@ public class CommandResultTest {
         // different feedbackToUser value -> returns different hashcode
         assertNotEquals(commandResult.hashCode(), new CommandResult("different").hashCode());
 
+        // different showDashboard value -> returns different hashcode
+        assertNotEquals(commandResult.hashCode(), new CommandResult("feedback", true, false, false).hashCode());
+
         // different showHelp value -> returns different hashcode
         assertNotEquals(commandResult.hashCode(), new CommandResult("feedback", false, true, false).hashCode());
 
@@ -56,7 +62,7 @@ public class CommandResultTest {
     public void toStringMethod() {
         CommandResult commandResult = new CommandResult("feedback");
         String expected = CommandResult.class.getCanonicalName() + "{feedbackToUser="
-                + commandResult.getFeedbackToUser() + ", showHelp=" + commandResult.isShowHelp()
+                + commandResult.getFeedbackToUser() + ", showDashboard=" + commandResult.isShowDashboard() + ", showHelp=" + commandResult.isShowHelp()
                 + ", exit=" + commandResult.isExit() + "}";
         assertEquals(expected, commandResult.toString());
     }
