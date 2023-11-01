@@ -14,7 +14,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.appointment.Appointment;
 
 /**
- * Panel containing the list of students.
+ * Panel containing the list of appointments.
  */
 public class AppointmentListPanel extends UiPart<Region> {
     private static final String FXML = "AppointmentListPanel.fxml";
