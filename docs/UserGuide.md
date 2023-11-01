@@ -345,10 +345,8 @@ Format: `addnote PERSON_INDEX NOTE_CONTENT`
 <box type="info" icon=":fa-solid-magnifying-glass:">
 Below are some examples on how to use the commands:
 
-| Command                                           | Description                                             |
-|---------------------------------------------------|---------------------------------------------------------|
-| `addnote 1 This is a sample note for the person.` | Adds a note to the person at index 1.                   |
-| `addnote 2 This is another sample note.`           | Adds a note to the person at index 2.                   |
+- `addnote 1 This is a sample note for the person.`: Adds a note to the contact at index 1.
+- `addnote 2 This is another sample note.`: Adds a note to the contact at index 2.
 
 </box>
 
@@ -361,10 +359,8 @@ Format: `removenote PERSON_INDEX NOTE_INDEX`
 <box type="info" icon=":fa-solid-magnifying-glass:">
 Below are some examples on how to use the commands:
 
-| Command                                           | Description                                             |
-|---------------------------------------------------|---------------------------------------------------------|
-| `removenote 1 2`                                  | Removes the 2nd note from the person at index 1.        |
-| `removenote 1 1`                                  | Removes the 1st note from the person at index 1.        |
+- `removenote 1 2`: Removes the second note from the contact at index 1.
+- `removenote 1 1`: Removes the first note from the contact at index 1.
 
 </box>
 
@@ -380,10 +376,8 @@ Format: `viewnotes PERSON_INDEX`
 <box type="info" icon=":fa-solid-magnifying-glass:">
 Below are some examples on how to use the commands:
 
-| Command                                           | Description                                             |
-|---------------------------------------------------|---------------------------------------------------------|
-| `viewnotes 1`                                     | Displays all notes of the person at index 1.            |
-| `viewnotes 2`                                     | Displays all notes of the person at index 2.            |
+- `viewnotes 1`: Shows all notes for the contact at index 1.
+- `viewnotes 2`: Shows all notes for the contact at index 2.
 
 </box>
 
