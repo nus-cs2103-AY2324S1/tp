@@ -25,6 +25,7 @@ import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlySchedule;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.lessons.Lesson;
+import seedu.address.model.lessons.Task;
 import seedu.address.model.person.Person;
 import seedu.address.model.state.State;
 import seedu.address.testutil.PersonBuilder;
@@ -273,6 +274,25 @@ public class AddPersonCommandTest {
         @Override
         public Lesson getLessonClashWith(Lesson lesson) {
             throw new AssertionError("This method should not be called.");
+        }
+        @Override
+        public void addTask(Task task, int index) {
+            throw new AssertionError("This method should not be called.");
+        }
+        @Override
+        public Task getTaskClashWith(Task task, int index) {
+            throw new AssertionError("This method should not be called.");
+        }
+        @Override
+        public boolean hasTaskClashWith(Task task, int index) {
+            throw new AssertionError("This method should not be called.");
+        }
+        @Override
+        public String deleteTask(Lesson lesson, int index) {
+            throw new AssertionError("This method should not be called.");
+        }
+        @Override
+        public void resetAllShowFields() {
         }
     }
 
