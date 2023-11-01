@@ -9,10 +9,12 @@ import seedu.address.model.person.BankAccount;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.JoinDate;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.Payroll;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Salary;
 import seedu.address.model.person.attendance.AttendanceStorage;
+import seedu.address.model.person.payroll.PayrollStorage;
 
 /**
  * A utility class to help with building Person objects.
@@ -29,6 +31,8 @@ public class PersonBuilder {
     public static final String DEFAULT_ANNUALLEAVE = "14";
     public static final ArrayList<String> DEFAULT_ATTENDANCE_STORAGE = new ArrayList<>(
         Arrays.asList("27/10/2023//late"));
+    public static final ArrayList<String> DEFAULT_PAYROLL_STORAGE = new ArrayList<>(
+    );
 
     private Name name;
     private Phone phone;
@@ -39,6 +43,7 @@ public class PersonBuilder {
     private Salary salary;
     private AnnualLeave annualLeave;
     private AttendanceStorage attendanceStorage;
+    private PayrollStorage payrollStorage;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -53,6 +58,7 @@ public class PersonBuilder {
         salary = new Salary(DEFAULT_SALARY);
         annualLeave = new AnnualLeave(DEFAULT_ANNUALLEAVE);
         attendanceStorage = new AttendanceStorage(DEFAULT_ATTENDANCE_STORAGE);
+        payrollStorage = new PayrollStorage();
     }
 
     /**
@@ -143,8 +149,13 @@ public class PersonBuilder {
         return this;
     }
 
+    public PersonBuilder withPayrollStorage(ArrayList<String> payrollStorage) {
+        this.payrollStorage = new PayrollStorage(payrollStorage);
+    }
+
     public Person build() {
-        return new Person(name, phone, email, address, bankAccount, joinDate, salary, annualLeave, attendanceStorage);
+        return new Person(name, phone, email, address, bankAccount,
+                joinDate, salary, annualLeave, attendanceStorage, payrollStorage);
     }
 
 }

@@ -3,13 +3,13 @@ package seedu.address.model.person;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.person.attendance.AttendanceStorage;
 import seedu.address.model.person.attendance.AttendanceType;
+import seedu.address.model.person.payroll.PayrollStorage;
 
 /**
  * Represents a Person in the address book.
@@ -30,13 +30,13 @@ public class Person {
     private final JoinDate joinDate;
     private final Salary salary;
     private final AttendanceStorage attendanceStorage;
-    private final ArrayList<Payroll> payrolls;
+    private final PayrollStorage payrollStorage;
 
     /**
      * Every field must be present and not null.
      */
     public Person(Name name, Phone phone, Email email, Address address, BankAccount bankAccount, JoinDate joinDate,
-            Salary salary, AnnualLeave annualLeave, AttendanceStorage attendanceStorage) {
+            Salary salary, AnnualLeave annualLeave, AttendanceStorage attendanceStorage, PayrollStorage payrollStorage) {
         requireAllNonNull(name, phone, email, address, bankAccount, joinDate, salary, annualLeave);
         this.name = name;
         this.phone = phone;
@@ -47,7 +47,7 @@ public class Person {
         this.salary = salary;
         this.annualLeave = annualLeave;
         this.attendanceStorage = attendanceStorage;
-        this.payrolls = new ArrayList<>();
+        this.payrollStorage = payrollStorage;
     }
 
     public Name getName() {
@@ -86,6 +86,10 @@ public class Person {
         return annualLeave.getLeaveList();
     }
 
+    public PayrollStorage getPayrollStorage() {
+        return this.payrollStorage;
+    }
+
     public AttendanceStorage getAttendanceStorage() {
         return attendanceStorage;
     }
@@ -109,7 +113,7 @@ public class Person {
      * @param payroll Payroll to be added.
      */
     public void addPayroll(Payroll payroll) {
-        this.payrolls.add(payroll);
+        this.payrollStorage.add(payroll);
     }
 
     /**
@@ -117,7 +121,7 @@ public class Person {
      * @return Latest payroll.
      */
     public Payroll getLatestPayroll() {
-        return this.payrolls.get(this.payrolls.size() - 1);
+        return this.payrollStorage.getLatestPayroll();
     }
 
     /**
@@ -126,13 +130,7 @@ public class Person {
      * @return payroll of a specific start date.
      */
     public Payroll getPayrollWithStartDate(LocalDate date) {
-        for (Payroll payroll: payrolls) {
-            if (payroll.getStartDate().getMonth().equals(date.getMonth())
-                    && payroll.getStartDate().getYear() == date.getYear()) {
-                return payroll;
-            }
-        }
-        return null;
+        return this.payrollStorage.getPayrollWithStartDate(date);
     }
 
     /**
