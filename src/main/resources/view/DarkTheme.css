@@ -361,7 +361,7 @@
     -fx-background-radius: 0;
 }
 
-#tags {
+#tags, #priorityTag {
     -fx-hgap: 7;
     -fx-vgap: 3;
 }
@@ -373,4 +373,24 @@
     -fx-border-radius: 2;
     -fx-background-radius: 2;
     -fx-font-size: 14;
+}
+
+#priorityTag {
+    -fx-text-fill: white;
+    -fx-padding: 1 3 1 3;
+    -fx-border-radius: 2;
+    -fx-background-radius: 2;
+    -fx-font-size: 14;
+}
+
+.high {
+    -fx-background-color: red;
+}
+
+.medium {
+    -fx-background-color: orange;
+}
+
+.low {
+    -fx-background-color: green;
 }
