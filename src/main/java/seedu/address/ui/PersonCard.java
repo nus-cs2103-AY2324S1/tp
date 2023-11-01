@@ -66,8 +66,7 @@ public class PersonCard extends UiPart<Region> {
         payRate.setText("rate: " + person.getPayRate().toString() + "/h");
         if (person.getPaid()) {
             paid.setText("paid");
-        }
-        else {
+        } else {
             paid.setText("not paid");
         }
     }
