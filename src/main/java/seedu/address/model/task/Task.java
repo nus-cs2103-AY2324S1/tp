@@ -1,5 +1,7 @@
 package seedu.address.model.task;
 
+import seedu.address.commons.util.ToStringBuilder;
+
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
@@ -58,6 +60,14 @@ public class Task {
         boolean descriptionMatches = description.equals(otherTask.description);
         boolean deadlineMatches = deadline.equals(otherTask.deadline);
         return descriptionMatches && deadlineMatches;
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .add("description", description)
+                .add("deadline", deadline)
+                .toString();
     }
 
     public static class TaskDeadlineComparator implements Comparator<Task> {

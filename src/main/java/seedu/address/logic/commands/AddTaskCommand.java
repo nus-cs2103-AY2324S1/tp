@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.task.Task;
@@ -22,7 +23,7 @@ public class AddTaskCommand extends Command {
             + PREFIX_EVENT_DESCRIPTION + "DESCRIPTION "
             + "[" + PREFIX_EVENT_END_DATE_TIME + "DEADLINE]\n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_EVENT_DESCRIPTION + "Caffeinate"
+            + PREFIX_EVENT_DESCRIPTION + "Caffeinate "
             + PREFIX_EVENT_END_DATE_TIME + "2024-01-01 08:00";
 
     public static final String MESSAGE_SUCCESS = "New task added: %1$s";
@@ -35,7 +36,7 @@ public class AddTaskCommand extends Command {
             + "    -'HH:mm' is the time in 24-hour format.";
 
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists!\n"
-            + "Task to add: %s";
+            + "Duplicate task: %s";
 
     private final Task toAdd;
 
@@ -51,10 +52,10 @@ public class AddTaskCommand extends Command {
         try {
             model.addTask(toAdd);
         } catch (DuplicateTaskException e) {
-            throw new CommandException(String.format(MESSAGE_DUPLICATE_TASK, toAdd.toString()));
+            throw new CommandException(String.format(MESSAGE_DUPLICATE_TASK, Messages.format(toAdd)));
         }
 
-        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd.toString()));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
     }
 
     @Override
