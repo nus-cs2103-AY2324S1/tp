@@ -54,6 +54,10 @@ public class LogBook implements ReadOnlyAddressBook {
         this.loggedPersons.setPersons(persons);
     }
 
+    public UniquePersonList getPersons() {
+        return loggedPersons;
+    }
+
     /**
      * Resets the existing data of this {@code AddressBook} with {@code newData}.
      */

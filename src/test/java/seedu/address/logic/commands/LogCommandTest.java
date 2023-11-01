@@ -40,21 +40,6 @@ public class LogCommandTest {
     private final List<UndoableCommand> commandHistory = new ArrayList<>();
 
 
-    @Test
-    public void execute_resultsLoggedToLogBook_logSuccessful() throws Exception {
-        ModelStubLoggingPersonAdded model = new ModelStubLoggingPersonAdded();
-        Person personToLog = new PersonBuilder().withName("Amy Bee").build();
-        model.addPerson(personToLog);
-        foundPersonsList.add(personToLog);
-
-        LogCommand logCommand = new LogCommand();
-
-        CommandResult commandResult = logCommand.execute(model);
-
-        assertEquals(LogCommand.MESSAGE_SUCCESS, commandResult.getFeedbackToUser());
-        assertEquals(model.getLogBook().getPersonList().size(), 1);
-    }
-
     private class ModelStub implements Model {
 
         @Override
@@ -173,6 +158,7 @@ public class LogCommandTest {
         public int getCommandHistorySize() {
             throw new AssertionError("This method should not be called.");
         }
+
     }
 
     private class ModelStubLoggingPersonAdded extends ModelStub {
@@ -211,6 +197,11 @@ public class LogCommandTest {
         public boolean isCommandHistoryEmpty() {
             return false;
         }
+
+        @Override
+        public void setLogBook(LogBook logBook) {
+            this.logBook.resetData(logBook);
+        }
     }
 
     private class ModelStubNoPersonsFound extends ModelStubLoggingPersonAdded {
@@ -231,20 +222,49 @@ public class LogCommandTest {
     }
 
     @Test
+    public void execute_resultsLoggedToLogBook_logSuccessful() throws Exception {
+        ModelStubLoggingPersonAdded model = new ModelStubLoggingPersonAdded();
+        Person personToLog = new PersonBuilder().withName("Amy Bee").build();
+        model.addPerson(personToLog);
+        foundPersonsList.add(personToLog);
+
+        LogCommand logCommand = new LogCommand();
+
+        CommandResult commandResult = logCommand.execute(model);
+
+        assertEquals(LogCommand.MESSAGE_SUCCESS, commandResult.getFeedbackToUser());
+        assertEquals(model.getLogBook().getPersonList().size(), 1);
+    }
+
+    @Test
     public void execute_noPersonsFound_logNotExecuted() {
         ModelStubNoPersonsFound model = new ModelStubNoPersonsFound();
         LogCommand logCommand = new LogCommand();
 
-        // Use assertThrows to capture the exception thrown by logCommand.execute(model)
         CommandException exception = assertThrows(CommandException.class, () -> logCommand.execute(model));
 
-        // Expect an error message indicating no found persons.
         assertEquals(Messages.MESSAGE_EMPTY_FIND_RESULT, exception.getMessage());
 
-        // Assert that the log book's size remains 0.
         assertEquals(0, model.getLogBook().getPersonList().size());
     }
 
+    @Test
+    public void undo_executeCommand_resultsUndone() throws Exception {
+        ModelStubLoggingPersonAdded model = new ModelStubLoggingPersonAdded();
+        Person personToLog = new PersonBuilder().withName("Amy Bee").build();
+
+        foundPersonsList.add(personToLog);
+
+        LogCommand logCommand = new LogCommand();
+
+        logCommand.execute(model);
+
+        CommandResult undoResult = logCommand.undo(model);
+
+        assertEquals(LogCommand.MESSAGE_UNDO_LOG_SUCCESS, undoResult.getFeedbackToUser());
+
+        assertEquals(model.getLogBook().getPersons().asUnmodifiableObservableList().size(), 0);
+    }
 
 
 }
