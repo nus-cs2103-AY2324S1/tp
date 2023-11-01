@@ -90,7 +90,7 @@ public class TypicalEmployees {
                 .withPhone("94824242")
                 .withEmail("anna@example.com")
                 .withSalary("1000")
-                .withOvertimeHours(DEFAULT_OVERTIME_HOURS)
+                .withOvertimeHours(VALID_OVERTIME_HOURS_BOB)
                 .withLeaveList(DEFAULT_LEAVELIST).build();
 
     // Manually added

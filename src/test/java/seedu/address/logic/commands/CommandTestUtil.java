@@ -45,7 +45,7 @@ public class CommandTestUtil {
     public static final String VALID_SALARY_AMY = "7000";
     public static final String VALID_SALARY_BOB = "5000";
     public static final int VALID_OVERTIME_HOURS_AMY = 0;
-    public static final int VALID_OVERTIME_HOURS_BOB = 1;
+    public static final int VALID_OVERTIME_HOURS_BOB = 10;
     public static final ArrayList<Leave> VALID_LEAVELIST_AMY = new ArrayList<>();
     public static final ArrayList<Leave> VALID_LEAVELIST_BOB = new ArrayList<>(List.of(new Leave(LocalDate.now())));
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
