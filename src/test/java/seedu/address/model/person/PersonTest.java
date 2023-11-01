@@ -8,10 +8,13 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_ID_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_G01;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_T09;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BOB;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
@@ -121,4 +124,59 @@ public class PersonTest {
                 + ", email=" + ALICE.getEmail() + ", id=" + ALICE.getId() + ", tags=" + ALICE.getTags() + "}";
         assertEquals(expected, ALICE.toString());
     }
+
+    @Test
+    public void mergeAttendanceRecordsMethod_noDuplicatedAttendance() {
+        Week testWeek1 = new Week(1);
+        Attendance attendance1 = new Attendance(testWeek1, true, null);
+        List<Attendance> attendanceRecords1 = new ArrayList<>();
+        attendanceRecords1.add(attendance1);
+
+        Week testWeek2 = new Week(2);
+        Attendance attendance2 = new Attendance(testWeek2, true, null);
+        List<Attendance> attendanceRecords2 = new ArrayList<>();
+        attendanceRecords2.add(attendance2);
+
+        Person emptyAlice = new PersonBuilder(ALICE).build();
+        emptyAlice.mergeAttendanceRecords(attendanceRecords1, attendanceRecords2, emptyAlice);
+
+        List<Attendance> expectedRecords = new ArrayList<>();
+        expectedRecords.add(attendance1);
+        expectedRecords.add(attendance2);
+
+        assertEquals(expectedRecords, emptyAlice.getAttendanceRecords());
+    }
+
+    @Test
+    public void mergeAttendanceRecordsMethod_withDuplicatedAttendance() {
+        Week testWeek1 = new Week(1);
+        Attendance attendance1 = new Attendance(testWeek1, true, null);
+        List<Attendance> attendanceRecords1 = new ArrayList<>();
+        attendanceRecords1.add(attendance1);
+
+        Week testWeek2 = new Week(1);
+        Attendance attendance2 = new Attendance(testWeek2, true, null);
+        List<Attendance> attendanceRecords2 = new ArrayList<>();
+        attendanceRecords2.add(attendance2);
+
+        Person emptyAlice = new PersonBuilder(ALICE).build();
+        emptyAlice.mergeAttendanceRecords(attendanceRecords1, attendanceRecords2, emptyAlice);
+
+        List<Attendance> expectedRecords = new ArrayList<>();
+        expectedRecords.add(attendance1);
+
+        assertEquals(expectedRecords, emptyAlice.getAttendanceRecords());
+    }
+
+    @Test
+    public void mergePersonsMethod() {
+        Person primaryStudent = new PersonBuilder().withTags(VALID_TAG_G01).build();
+        Person secondaryStudent = new PersonBuilder().withTags(VALID_TAG_T09).build();
+        Person mergedStudent = primaryStudent.mergePersons(secondaryStudent);
+
+        Person expectedMergedStudent = new PersonBuilder().withTags(VALID_TAG_G01, VALID_TAG_T09).build();
+
+        assertEquals(expectedMergedStudent, mergedStudent);
+    }
+
 }

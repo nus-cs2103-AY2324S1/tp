@@ -14,7 +14,7 @@ import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.parser.ParserUtil.FilterOperation;
+import seedu.address.logic.parser.ParserUtil.CourseOperation;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.ID;
@@ -39,9 +39,9 @@ public class ParserUtilTest {
     private static final String VALID_ID = "A1234567H";
     private static final String VALID_TAG_1 = "friend";
     private static final String VALID_TAG_2 = "neighbour";
-    private static final String VALID_ADD_OPERATION = "add";
+    private static final String VALID_CREATE_OPERATION = "create";
     private static final String VALID_DELETE_OPERATION = "delete";
-    private static final String VALID_CLEAR_OPERATION = "clear";
+    private static final String VALID_SWITCH_OPERATION = "switch";
     private static final String VALID_WEEK = "2";
 
     private static final String WHITESPACE = " \t\r\n";
@@ -241,21 +241,21 @@ public class ParserUtilTest {
 
     @Test
     public void parseFilterOperation_validValueWithputWhiteSpace_returnsFilterOperation() throws Exception {
-        assertEquals(FilterOperation.ADD, ParserUtil.parseFilterOperation(VALID_ADD_OPERATION));
-        assertEquals(FilterOperation.DELETE, ParserUtil.parseFilterOperation(VALID_DELETE_OPERATION));
-        assertEquals(FilterOperation.CLEAR, ParserUtil.parseFilterOperation(VALID_CLEAR_OPERATION));
+        assertEquals(CourseOperation.CREATE, ParserUtil.parseFilterOperation(VALID_CREATE_OPERATION));
+        assertEquals(CourseOperation.DELETE, ParserUtil.parseFilterOperation(VALID_DELETE_OPERATION));
+        assertEquals(CourseOperation.SWITCH, ParserUtil.parseFilterOperation(VALID_SWITCH_OPERATION));
     }
 
     @Test
     public void parseFilterOperation_validValueWithWhiteSpace_returnsFilterOperation() throws Exception {
-        String addOperationWithWhitespace = WHITESPACE + VALID_ADD_OPERATION + WHITESPACE;
-        assertEquals(FilterOperation.ADD, ParserUtil.parseFilterOperation(addOperationWithWhitespace));
+        String addOperationWithWhitespace = WHITESPACE + VALID_CREATE_OPERATION + WHITESPACE;
+        assertEquals(CourseOperation.CREATE, ParserUtil.parseFilterOperation(addOperationWithWhitespace));
 
         String deleteOperationWithWhitespace = WHITESPACE + VALID_DELETE_OPERATION + WHITESPACE;
-        assertEquals(FilterOperation.DELETE, ParserUtil.parseFilterOperation(deleteOperationWithWhitespace));
+        assertEquals(CourseOperation.DELETE, ParserUtil.parseFilterOperation(deleteOperationWithWhitespace));
 
-        String clearOperationWithWhitespace = WHITESPACE + VALID_CLEAR_OPERATION + WHITESPACE;
-        assertEquals(FilterOperation.CLEAR, ParserUtil.parseFilterOperation(clearOperationWithWhitespace));
+        String clearOperationWithWhitespace = WHITESPACE + VALID_SWITCH_OPERATION + WHITESPACE;
+        assertEquals(CourseOperation.SWITCH, ParserUtil.parseFilterOperation(clearOperationWithWhitespace));
     }
 }
 
