@@ -216,5 +216,37 @@ public class PersonCard extends UiPart<Region> {
             pane.getChildren().add(new EmptyFieldLabel());
         });
     }
+
     // Below: getter methods for testing
+    FlowPane getGraduation() {
+        return graduation;
+    }
+
+    FlowPane getPriority() {
+        return priority;
+    }
+
+    FlowPane getCourses() {
+        return courses;
+    }
+
+    FlowPane getEmails() {
+        return emails;
+    }
+
+    FlowPane getLinks() {
+        return links;
+    }
+
+    FlowPane getPhones() {
+        return phones;
+    }
+
+    FlowPane getSpecialisations() {
+        return specialisations;
+    }
+
+    Label getName() {
+        return name;
+    }
 }
