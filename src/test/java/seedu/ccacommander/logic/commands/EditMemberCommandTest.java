@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.ccacommander.logic.commands.CommandTestUtil.DESC_AMY;
 import static seedu.ccacommander.logic.commands.CommandTestUtil.DESC_BOB;
+import static seedu.ccacommander.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.ccacommander.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.ccacommander.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.ccacommander.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
@@ -27,6 +28,7 @@ import seedu.ccacommander.model.Model;
 import seedu.ccacommander.model.ModelManager;
 import seedu.ccacommander.model.UserPrefs;
 import seedu.ccacommander.model.enrolment.Enrolment;
+import seedu.ccacommander.model.enrolment.EnrolmentContainsMemberPredicate;
 import seedu.ccacommander.model.member.Member;
 import seedu.ccacommander.model.shared.Name;
 import seedu.ccacommander.testutil.EditMemberDescriptorBuilder;
@@ -55,12 +57,20 @@ public class EditMemberCommandTest {
 
         Name prevName = model.getFilteredMemberList().get(0).getName();
         Name newName = editedMember.getName();
-        List<Enrolment> enrolmentList = model.getFilteredEnrolmentList();
-        for (Enrolment enrolment: enrolmentList) {
-            if (enrolment.getMemberName().equals(prevName)) {
-                Enrolment editedEnrolment = new Enrolment(newName, enrolment.getEventName(),
-                        enrolment.getHours(), enrolment.getRemark());
-                expectedModel.setEnrolment(enrolment, editedEnrolment);
+
+        if (!prevName.equals(newName)) {
+            // update filtered enrolment list to contain only the enrolments that has member of previous name
+            expectedModel.updateFilteredEnrolmentList(new EnrolmentContainsMemberPredicate(prevName));
+
+            List<Enrolment> enrolmentsToEditList = expectedModel.getFilteredEnrolmentList();
+            expectedModel.updateFilteredEnrolmentList(Model.PREDICATE_SHOW_ALL_ENROLMENTS);
+
+            if (!enrolmentsToEditList.isEmpty()) {
+                for (Enrolment enrolment : enrolmentsToEditList) {
+                    Enrolment editedEnrolment = new Enrolment(newName, enrolment.getEventName(),
+                            enrolment.getHours(), enrolment.getRemark());
+                    expectedModel.setEnrolment(enrolment, editedEnrolment);
+                }
             }
         }
         expectedModel.commit(commitMessage);
@@ -90,12 +100,22 @@ public class EditMemberCommandTest {
 
         Name prevName = lastMember.getName();
         Name newName = editedMember.getName();
-        List<Enrolment> enrolmentList = model.getFilteredEnrolmentList();
-        for (Enrolment enrolment: enrolmentList) {
-            if (enrolment.getMemberName().equals(prevName)) {
-                Enrolment editedEnrolment = new Enrolment(newName, enrolment.getEventName(),
-                        enrolment.getHours(), enrolment.getRemark());
-                expectedModel.setEnrolment(enrolment, editedEnrolment);
+
+        if (!prevName.equals(newName)) {
+            // update filtered enrolment list to contain only the enrolments that has event of previous name
+            expectedModel.updateFilteredEnrolmentList(new EnrolmentContainsMemberPredicate(prevName));
+
+            List<Enrolment> enrolmentsToEditList = expectedModel.getFilteredEnrolmentList();
+            model.updateFilteredEnrolmentList(Model.PREDICATE_SHOW_ALL_ENROLMENTS);
+            expectedModel.updateFilteredEnrolmentList(Model.PREDICATE_SHOW_ALL_ENROLMENTS);
+
+            if (!enrolmentsToEditList.isEmpty()) {
+                for (Enrolment enrolment : enrolmentsToEditList) {
+                    Enrolment editedEnrolment = new Enrolment(newName, enrolment.getEventName(),
+                            enrolment.getHours(), enrolment.getRemark());
+                    model.setEnrolment(enrolment, editedEnrolment);
+                    expectedModel.setEnrolment(enrolment, editedEnrolment);
+                }
             }
         }
         expectedModel.commit(commitMessage);
@@ -124,9 +144,9 @@ public class EditMemberCommandTest {
         showMemberAtIndex(model, INDEX_FIRST_MEMBER);
 
         Member memberInFilteredList = model.getFilteredMemberList().get(INDEX_FIRST_MEMBER.getZeroBased());
-        Member editedMember = new MemberBuilder(memberInFilteredList).withName(VALID_NAME_BOB).build();
+        Member editedMember = new MemberBuilder(memberInFilteredList).withName(VALID_NAME_AMY).build();
         EditMemberCommand editMemberCommand = new EditMemberCommand(INDEX_FIRST_MEMBER,
-                new EditMemberDescriptorBuilder().withName(VALID_NAME_BOB).build());
+                new EditMemberDescriptorBuilder().withName(VALID_NAME_AMY).build());
 
         String commitMessage = String.format(EditMemberCommand.MESSAGE_COMMIT, editedMember.getName());
         String expectedMessage = String.format(EditMemberCommand.MESSAGE_EDIT_MEMBER_SUCCESS,
@@ -134,18 +154,28 @@ public class EditMemberCommandTest {
 
         Model expectedModel = new ModelManager(new CcaCommander(model.getCcaCommander()), new UserPrefs());
         expectedModel.setMember(model.getFilteredMemberList().get(0), editedMember);
+        expectedModel.commit(commitMessage);
 
         Name prevName = model.getFilteredMemberList().get(0).getName();
         Name newName = editedMember.getName();
-        List<Enrolment> enrolmentList = model.getFilteredEnrolmentList();
-        for (Enrolment enrolment: enrolmentList) {
-            if (enrolment.getMemberName().equals(prevName)) {
-                Enrolment editedEnrolment = new Enrolment(newName, enrolment.getEventName(),
-                        enrolment.getHours(), enrolment.getRemark());
-                expectedModel.setEnrolment(enrolment, editedEnrolment);
+
+        if (!prevName.equals(newName)) {
+            // update filtered enrolment list to contain only the enrolments that has event of previous name
+            expectedModel.updateFilteredEnrolmentList(new EnrolmentContainsMemberPredicate(prevName));
+
+            List<Enrolment> enrolmentsToEditList = expectedModel.getFilteredEnrolmentList();
+            model.updateFilteredEnrolmentList(Model.PREDICATE_SHOW_ALL_ENROLMENTS);
+            expectedModel.updateFilteredEnrolmentList(Model.PREDICATE_SHOW_ALL_ENROLMENTS);
+
+            if (!enrolmentsToEditList.isEmpty()) {
+                for (Enrolment enrolment : enrolmentsToEditList) {
+                    Enrolment editedEnrolment = new Enrolment(newName, enrolment.getEventName(),
+                            enrolment.getHours(), enrolment.getRemark());
+                    model.setEnrolment(enrolment, editedEnrolment);
+                    expectedModel.setEnrolment(enrolment, editedEnrolment);
+                }
             }
         }
-        expectedModel.commit(commitMessage);
 
         assertCommandSuccess(editMemberCommand, model, expectedMessage, expectedModel);
     }
