@@ -230,9 +230,17 @@ public class ParserUtil {
             throw new ParseException(Course.END_DATE_WITH_NO_START);
         }
 
-        return parseCourse(argMultiMap.getPreamble(),
-                argMultiMap.getValue(CliSyntax.PREFIX_COURSE_START).orElse(""),
-                argMultiMap.getValue(CliSyntax.PREFIX_COURSE_END).orElse(""));
+        String optStart = argMultiMap.getValue(CliSyntax.PREFIX_COURSE_START).orElse("").trim();
+        String optEnd = argMultiMap.getValue(CliSyntax.PREFIX_COURSE_END).orElse("").trim();
+
+        // Throws exception if /start or /end prefix is written but string is empty
+        if ((ArgumentMultimap.arePrefixesPresent(argMultiMap, CliSyntax.PREFIX_COURSE_START) && optStart.equals(""))
+                || (ArgumentMultimap.arePrefixesPresent(argMultiMap, CliSyntax.PREFIX_COURSE_END)
+                && optEnd.equals(""))) {
+            throw new ParseException(Course.DATE_CONSTRAINTS);
+        }
+
+        return parseCourse(argMultiMap.getPreamble(), optStart, optEnd);
     }
 
     /**
@@ -248,22 +256,20 @@ public class ParserUtil {
 
         // Process dates, if they are not empty strings
         if (!start.equals("")) {
-            String trimmedStart = start.trim();
-            if (!Course.isValidDate(trimmedStart)) {
+            if (!Course.isValidDate(start)) {
                 throw new ParseException(Course.DATE_CONSTRAINTS);
             }
             if (!end.equals("")) {
-                String trimmedEnd = end.trim();
-                if (!Course.isValidDate(trimmedEnd)) {
+                if (!Course.isValidDate(end)) {
                     throw new ParseException(Course.DATE_CONSTRAINTS);
                 }
                 try {
-                    return new Course(trimmedCourse, trimmedStart, trimmedEnd);
+                    return new Course(trimmedCourse, start, end);
                 } catch (IllegalArgumentException e) {
                     throw new ParseException(e.getMessage());
                 }
             }
-            return new Course(trimmedCourse, trimmedStart);
+            return new Course(trimmedCourse, start);
         }
         return new Course(trimmedCourse);
     }
