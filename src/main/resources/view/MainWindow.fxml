@@ -66,10 +66,16 @@
               </padding>
             </StackPane>
             <StackPane fx:id="personInformationPanelPlaceholder"
-                       styleClass="pane-with-border" minWidth="400" prefWidth="400" VBox.vgrow="ALWAYS">
+                       styleClass="pane-with-border" minWidth="480" prefWidth="480" VBox.vgrow="ALWAYS">
               <padding>
                 <Insets top="10" right="10" bottom="10" left="10" />
               </padding>
+            </StackPane>
+            <StackPane fx:id="summaryStatisticScreenPlaceholder" styleClass="pane-with-border"
+                       minWidth="350" prefWidth="350">
+                <padding>
+                    <Insets top="10" right="10" bottom="10" left="10" />
+                </padding>
             </StackPane>
           </SplitPane>
         </HBox>

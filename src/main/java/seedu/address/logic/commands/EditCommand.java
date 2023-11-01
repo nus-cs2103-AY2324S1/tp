@@ -24,11 +24,15 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Github;
+import seedu.address.model.person.LinkedIn;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Remark;
 import seedu.address.model.person.Score;
+import seedu.address.model.person.ScoreList;
+import seedu.address.model.person.Status;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -89,6 +93,7 @@ public class EditCommand extends Command {
 
         model.setPerson(personToEdit, editedPerson);
         model.setLastViewedPersonIndex(index);
+        model.loadSummaryStatistics();
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)), true);
     }
@@ -105,11 +110,37 @@ public class EditCommand extends Command {
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         Remark updatedRemark = personToEdit.getRemark();
+        LinkedIn updatedLinkedIn = personToEdit.getLinkedIn();
+        Github updatedGithub = personToEdit.getGithub();
+        Status updatedStatus = personToEdit.getStatus();
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
         Person editedPerson = new Person(updatedName, updatedPhone,
                 updatedEmail, updatedAddress, updatedRemark, updatedTags);
-        editedPerson.setScore(editPersonDescriptor.getScore().orElse(personToEdit.getScore()));
+
+
+        ScoreList updatedScoreList = createEditedScoreList(personToEdit.getScoreList(),
+                editPersonDescriptor.getScoreList());
+        editedPerson.setScoreList(updatedScoreList);
+        editedPerson.setGithub(updatedGithub);
+        editedPerson.setLinkedIn(updatedLinkedIn);
+        editedPerson.setStatus(updatedStatus);
+
         return editedPerson;
+    }
+
+    private static ScoreList createEditedScoreList(
+            ScoreList oldScoreList,
+            Optional<ScoreList> editPersonDescriptorScoreList) {
+        ScoreList updatedScoreList = editPersonDescriptorScoreList.orElse(oldScoreList);
+        if (updatedScoreList.equals(oldScoreList)) {
+            return oldScoreList;
+        }
+        // The score list that is updated, only contains the update pair, which is 1 pair of tag score entry
+        Tag newTag = updatedScoreList.getTagsWithScore().get(0);
+        Score newScore = updatedScoreList.getScore(newTag);
+        oldScoreList.updateScoreList(newTag, newScore);
+        return oldScoreList;
+
     }
 
     @Override
@@ -146,7 +177,7 @@ public class EditCommand extends Command {
         private Email email;
         private Address address;
 
-        private Score score;
+        private ScoreList scoreList;
         private Set<Tag> tags;
 
         public EditPersonDescriptor() {}
@@ -161,14 +192,14 @@ public class EditCommand extends Command {
             setEmail(toCopy.email);
             setAddress(toCopy.address);
             setTags(toCopy.tags);
-            setScore(toCopy.score);
+            setScoreList(toCopy.scoreList);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, score, tags);
+            return CollectionUtil.isAnyNonNull(name, phone, email, address, scoreList, tags);
         }
 
         public void setName(Name name) {
@@ -203,12 +234,12 @@ public class EditCommand extends Command {
             return Optional.ofNullable(address);
         }
 
-        public void setScore(Score score) {
-            this.score = score;
+        public void setScoreList(ScoreList scoreList) {
+            this.scoreList = (scoreList != null) ? scoreList : null;
         }
 
-        public Optional<Score> getScore() {
-            return Optional.ofNullable(score);
+        public Optional<ScoreList> getScoreList() {
+            return Optional.ofNullable(scoreList);
         }
 
         /**
@@ -244,7 +275,7 @@ public class EditCommand extends Command {
                     && Objects.equals(phone, otherEditPersonDescriptor.phone)
                     && Objects.equals(email, otherEditPersonDescriptor.email)
                     && Objects.equals(address, otherEditPersonDescriptor.address)
-                    && Objects.equals(score, otherEditPersonDescriptor.score)
+                    && Objects.equals(scoreList, otherEditPersonDescriptor.scoreList)
                     && Objects.equals(tags, otherEditPersonDescriptor.tags);
         }
 
@@ -255,7 +286,7 @@ public class EditCommand extends Command {
                     .add("phone", phone)
                     .add("email", email)
                     .add("address", address)
-                    .add("score", score)
+                    .add("score-list", scoreList)
                     .add("tags", tags)
                     .toString();
         }

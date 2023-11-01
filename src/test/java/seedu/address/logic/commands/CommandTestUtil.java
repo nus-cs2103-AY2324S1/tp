@@ -20,6 +20,7 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.ScoreList;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 
 /**
@@ -38,7 +39,7 @@ public class CommandTestUtil {
     public static final String VALID_ADDRESS_AMY = "Block 312, Amy Street 1";
     public static final String VALID_ADDRESS_BOB = "Block 123, Bobby Street 3";
 
-    public static final int VALID_SCORE_AMY = 100;
+    public static final ScoreList VALID_SCORE_LIST_AMY = new ScoreList();
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
 
@@ -51,7 +52,7 @@ public class CommandTestUtil {
     public static final String ADDRESS_DESC_AMY = " " + PREFIX_ADDRESS + VALID_ADDRESS_AMY;
     public static final String ADDRESS_DESC_BOB = " " + PREFIX_ADDRESS + VALID_ADDRESS_BOB;
 
-    public static final String SCORE_DESC_AMY = " " + PREFIX_SCORE + VALID_SCORE_AMY;
+    public static final String SCORE_LIST_DESC_AMY = " " + PREFIX_SCORE + VALID_SCORE_LIST_AMY;
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
 
