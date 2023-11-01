@@ -38,7 +38,7 @@ public class EventTime {
     public String toString() {
         return this.time != null ? DateTimeUtil.toFormattedString(this.time) : "";
     }
-    
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
