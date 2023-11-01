@@ -35,6 +35,14 @@ public class AppointmentTest {
     private static final String INVALID_BAD_MIN = "1-Jan-2023 12:60 15:00";
     private static final String INVALID_BAD_HOUR = "1-Jan-2023 25:00 15:00";
     private static final String INVALID_BAD_START = "1-Jan-2023 16:00 15:00";
+
+    private static final String APPOINTMENT_END_OVERLAPS_WITH_START = "1-1-2021, 8 9";
+    private static final String APPOINTMENT_START_OVERLAPS_WITH_END = "1-1-2021, 1130 12";
+    private static final String APPOINTMENT_NO_OVERLAP_START = "1-1-2021, 7 0759";
+    private static final String APPOINTMENT_NO_OVERLAP_END = "1-1-2021, 1201 1300";
+
+    private static final String APPOINTMENT_DIFF_DATE = "2-1-2021, 9 11:30";
+    private static final String APPOINTMENT_OVERLAPS = "1-1-2021, 8 10";
     @Test
     public void factory_null_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> Appointment.of(null, InputSource.STORAGE));
@@ -110,6 +118,32 @@ public class AppointmentTest {
     public void parseAppointmentIfExists_emptyOptional_returnsNull() throws ParseException {
         Optional<String> emptyAppointment = Optional.empty();
         assertNull(ParserUtil.parseAppointmentIfExists(emptyAppointment));
+    }
+
+    @Test
+    void overlaps() throws Exception {
+        Appointment appointment = Appointment.of(VALID_APPOINTMENT_USER_INPUT_1, InputSource.USER_INPUT);
+
+        // handles null
+        assertFalse(appointment.hasOverlap(null));
+
+        // overlaps with edge-to-edge
+        assertTrue(
+                appointment.hasOverlap(Appointment.of(APPOINTMENT_START_OVERLAPS_WITH_END, InputSource.USER_INPUT)));
+        assertTrue(
+                appointment.hasOverlap(Appointment.of(APPOINTMENT_END_OVERLAPS_WITH_START, InputSource.USER_INPUT)));
+
+        // handles no overlap
+        assertFalse(appointment.hasOverlap(Appointment.of(APPOINTMENT_NO_OVERLAP_START, InputSource.USER_INPUT)));
+        assertFalse(appointment.hasOverlap(Appointment.of(APPOINTMENT_NO_OVERLAP_END, InputSource.USER_INPUT)));
+
+        // handles overlap
+        Appointment other = Appointment.of(APPOINTMENT_OVERLAPS, InputSource.USER_INPUT);
+        assertTrue(appointment.hasOverlap(other));
+        assertTrue(other.hasOverlap(appointment));
+
+        // handles diff dates
+        assertFalse(appointment.hasOverlap(Appointment.of(APPOINTMENT_DIFF_DATE, InputSource.USER_INPUT)));
     }
 
     @Test
