@@ -2,6 +2,7 @@ package seedu.address.model.employee;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
@@ -108,6 +109,13 @@ public class Employee {
      */
     public boolean isOnLeaveToday() {
         return leaveList.getCurrentLeaveStatus();
+    }
+
+    /**
+     * Returns the leave status of the employee on the specified date.
+     */
+    public boolean isOnLeave(LocalDate date) {
+        return leaveList.getLeaveStatus(date);
     }
 
     /**

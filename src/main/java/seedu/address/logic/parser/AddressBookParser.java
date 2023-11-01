@@ -90,7 +90,7 @@ public class AddressBookParser {
             return new AddLeaveCommandParser().parse(arguments);
 
         case ListLeaveCommand.COMMAND_WORD:
-            return new ListLeaveCommand();
+            return new ListLeaveCommandParser().parse(arguments);
 
         case ResetCommand.COMMAND_WORD:
             return new ResetCommandParser().parse(arguments);

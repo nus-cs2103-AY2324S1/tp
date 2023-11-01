@@ -75,12 +75,27 @@ public class LeaveList {
         return leaveList.contains(date);
     }
 
-
+    /**
+     * Returns true if the LeaveList contains a Leave of the current date.
+     */
     public boolean getCurrentLeaveStatus() {
         if (leaveList.isEmpty()) {
             return false;
         } else {
             return leaveList.contains(new Leave(LocalDate.now()));
+        }
+    }
+
+    /**
+     * Returns true if the LeaveList contains a Leave of the specified date.
+     *
+     * @param date The Leave date to be checked.
+     */
+    public boolean getLeaveStatus(LocalDate date) {
+        if (leaveList.isEmpty()) {
+            return false;
+        } else {
+            return leaveList.contains(new Leave(date));
         }
     }
 
@@ -143,5 +158,4 @@ public class LeaveList {
     public int hashCode() {
         return leaveList.hashCode();
     }
-
 }
