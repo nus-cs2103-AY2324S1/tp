@@ -6,11 +6,15 @@ import networkbook.model.Model;
 /**
  * Clears the network book.
  */
-public class UndoCommand extends ChangeDataCommand {
+public class UndoCommand extends Command {
 
     public static final String COMMAND_WORD = "undo";
     public static final String MESSAGE_SUCCESS = "Noted, last change successfully undone!";
     public static final String MESSAGE_UNDO_DISALLOWED = "There have been no changes to undo.";
+
+    public UndoCommand() {
+        super(true);
+    }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {

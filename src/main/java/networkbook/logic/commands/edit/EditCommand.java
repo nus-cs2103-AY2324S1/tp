@@ -8,7 +8,7 @@ import java.util.List;
 import networkbook.commons.core.index.Index;
 import networkbook.commons.util.ToStringBuilder;
 import networkbook.logic.Messages;
-import networkbook.logic.commands.ChangeDataCommand;
+import networkbook.logic.commands.Command;
 import networkbook.logic.commands.CommandResult;
 import networkbook.logic.commands.exceptions.CommandException;
 import networkbook.logic.parser.CliSyntax;
@@ -18,7 +18,7 @@ import networkbook.model.person.Person;
 /**
  * Edits the details of an existing person in the network book.
  */
-public class EditCommand extends ChangeDataCommand {
+public class EditCommand extends Command {
 
     public static final String COMMAND_WORD = "edit";
 
@@ -46,10 +46,13 @@ public class EditCommand extends ChangeDataCommand {
     private final EditAction editAction;
 
     /**
+     * Constructor that instantiates a new {@code EditCommand} object.
+     * This command is data-changing, so parent constructor is called with true.
      * @param index of the person in the filtered person list to edit.
      * @param editAction the action to edit the person.
      */
     public EditCommand(Index index, EditAction editAction) {
+        super(true);
         requireAllNonNull(index, editAction);
 
         this.index = index;

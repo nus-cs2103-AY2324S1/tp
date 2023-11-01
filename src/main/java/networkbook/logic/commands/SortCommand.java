@@ -12,7 +12,7 @@ import networkbook.model.person.PersonSortComparator;
  * Finds and lists all persons in network book whose name contains any of the argument keywords.
  * Keyword matching is case insensitive.
  */
-public class SortCommand extends DoesNotChangeDataCommand {
+public class SortCommand extends Command {
 
     public static final String COMMAND_WORD = "sort";
 
@@ -26,7 +26,13 @@ public class SortCommand extends DoesNotChangeDataCommand {
 
     private final PersonSortComparator comparator;
 
+    /**
+     * Constructor that instantiates a new {@code SortCommand} object.
+     * This command is not data-changing, so parent constructor is called with false.
+     * @param comparator
+     */
     public SortCommand(PersonSortComparator comparator) {
+        super(false);
         this.comparator = comparator;
     }
 

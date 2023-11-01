@@ -1,8 +1,8 @@
 package networkbook.logic.commands.filter;
 
 import networkbook.commons.util.ToStringBuilder;
+import networkbook.logic.commands.Command;
 import networkbook.logic.commands.CommandResult;
-import networkbook.logic.commands.DoesNotChangeDataCommand;
 import networkbook.logic.parser.CliSyntax;
 import networkbook.model.Model;
 import networkbook.model.person.filter.CourseContainsKeyTermsPredicate;
@@ -18,7 +18,7 @@ import networkbook.model.person.filter.CourseIsStillBeingTakenPredicate;
  * TODO: Implement filter
  * TODO: Extend functionality to grad year and specialisation
  */
-public class FilterCommand extends DoesNotChangeDataCommand {
+public class FilterCommand extends Command {
 
     public static final String COMMAND_WORD = "filter";
 
@@ -44,10 +44,12 @@ public class FilterCommand extends DoesNotChangeDataCommand {
      * Creates a FilterCommand object that searches using a list of key terms,
      * a specified date to check whether a course is being taken, and a
      * boolean that specifies whether the date check needs to be done.
+     * This command is not data-changing, so parent constructor is called with false.
      */
     public FilterCommand(CourseContainsKeyTermsPredicate keyTermsPredicate,
                          CourseIsStillBeingTakenPredicate takenPredicate,
                          boolean checkFin) {
+        super(false);
         this.keyTermsPredicate = keyTermsPredicate;
         this.takenPredicate = takenPredicate;
         this.checkFin = checkFin;

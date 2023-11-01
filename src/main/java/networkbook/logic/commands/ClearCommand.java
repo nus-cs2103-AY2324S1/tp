@@ -8,11 +8,14 @@ import networkbook.model.NetworkBook;
 /**
  * Clears the network book.
  */
-public class ClearCommand extends ChangeDataCommand {
+public class ClearCommand extends Command {
 
     public static final String COMMAND_WORD = "clear";
     public static final String MESSAGE_SUCCESS = "Noted, cleared all contacts!";
 
+    public ClearCommand() {
+        super(true);
+    }
 
     @Override
     public CommandResult execute(Model model) {

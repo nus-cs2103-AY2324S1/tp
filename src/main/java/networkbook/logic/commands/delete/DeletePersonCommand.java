@@ -8,7 +8,7 @@ import java.util.Objects;
 import networkbook.commons.core.index.Index;
 import networkbook.commons.util.ToStringBuilder;
 import networkbook.logic.Messages;
-import networkbook.logic.commands.ChangeDataCommand;
+import networkbook.logic.commands.Command;
 import networkbook.logic.commands.CommandResult;
 import networkbook.logic.commands.exceptions.CommandException;
 import networkbook.model.Model;
@@ -17,7 +17,7 @@ import networkbook.model.person.Person;
 /**
  * Deletes a person identified using it's displayed index from the network book.
  */
-public class DeletePersonCommand extends ChangeDataCommand {
+public class DeletePersonCommand extends Command {
 
     public static final String COMMAND_WORD = "delete";
 
@@ -36,7 +36,13 @@ public class DeletePersonCommand extends ChangeDataCommand {
 
     private final Index targetIndex;
 
+    /**
+     * Constructor that instantiates a new {@code DeletePersonCommand} object.
+     * This command is data-changing, so parent constructor is called with true.
+     * @param targetIndex is the {@code Index} of the person to delete in the displayed list.
+     */
     public DeletePersonCommand(Index targetIndex) {
+        super(true);
         this.targetIndex = targetIndex;
     }
 

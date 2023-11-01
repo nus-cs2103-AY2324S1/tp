@@ -5,7 +5,7 @@ import networkbook.model.Model;
 /**
  * Format full help instructions for every command for display.
  */
-public class HelpCommand extends DoesNotChangeDataCommand {
+public class HelpCommand extends Command {
 
     public static final String COMMAND_WORD = "help";
 
@@ -13,6 +13,10 @@ public class HelpCommand extends DoesNotChangeDataCommand {
             + "Example: " + COMMAND_WORD;
 
     public static final String SHOWING_HELP_MESSAGE = "Opened help window.";
+
+    public HelpCommand() {
+        super(false);
+    }
 
     @Override
     public CommandResult execute(Model model) {

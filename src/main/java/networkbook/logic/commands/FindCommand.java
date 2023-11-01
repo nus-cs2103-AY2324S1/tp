@@ -10,7 +10,7 @@ import networkbook.model.person.NameContainsKeyTermsPredicate;
  * Finds and lists all persons in network book whose name contains any of the argument keywords.
  * Keyword matching is case insensitive.
  */
-public class FindCommand extends DoesNotChangeDataCommand {
+public class FindCommand extends Command {
 
     public static final String COMMAND_WORD = "find";
 
@@ -24,7 +24,13 @@ public class FindCommand extends DoesNotChangeDataCommand {
 
     private final NameContainsKeyTermsPredicate predicate;
 
+    /**
+     * Constructor that instantiates a new {@code FindCommand} object.
+     * This command is not data-changing, so parent constructor is called with false.
+     * @param predicate
+     */
     public FindCommand(NameContainsKeyTermsPredicate predicate) {
+        super(false);
         this.predicate = predicate;
     }
 

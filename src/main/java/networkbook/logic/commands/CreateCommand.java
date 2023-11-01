@@ -12,7 +12,7 @@ import networkbook.model.person.Person;
 /**
  * Creates a new contact in the network book.
  */
-public class CreateCommand extends ChangeDataCommand {
+public class CreateCommand extends Command {
 
     public static final String COMMAND_WORD = "create";
 
@@ -41,9 +41,11 @@ public class CreateCommand extends ChangeDataCommand {
     private final Person toAdd;
 
     /**
-     * Creates a CreateCommand to create the specified {@code Person}
+     * Creates a CreateCommand to create the specified {@code Person}.
+     * This command is data-changing, so parent constructor is called with true.
      */
     public CreateCommand(Person person) {
+        super(true);
         requireNonNull(person);
         toAdd = person;
     }

@@ -29,7 +29,7 @@ import networkbook.model.util.UniqueList;
 /**
  * Adds new information about a contact.
  */
-public class AddCommand extends ChangeDataCommand {
+public class AddCommand extends Command {
 
     public static final String COMMAND_WORD = "add";
 
@@ -59,11 +59,13 @@ public class AddCommand extends ChangeDataCommand {
 
     /**
      * Creates an AddCommand to add information about the contact at {@code Index}
+     * This command is data-changing, so parent constructor is called with true.
      *
      * @param index of the contact to add information about
      * @param addPersonDescriptor details to add to the contact
      */
     public AddCommand(Index index, AddPersonDescriptor addPersonDescriptor) {
+        super(true);
         requireNonNull(index);
         requireNonNull(addPersonDescriptor);
 
