@@ -89,7 +89,9 @@ public class DeleteCommand extends Command {
         List<Person> copyDeleteList = new ArrayList<>(toDeleteList);
 
         if (toDeleteList.isEmpty()) {
-            String toDeleteListDesc = tag.isPresent() ? String.format("%s %s", courseCode, tag) : courseCode;
+            String toDeleteListDesc = tag.isPresent()
+                    ? String.format("%s Tutorial Group %s", courseCode, tag.get().getTagName()) : courseCode;
+            model.clearFilters();
             return new CommandResult(String.format(MESSAGE_NO_STUDENTS, toDeleteListDesc));
         }
 
