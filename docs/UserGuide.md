@@ -270,6 +270,19 @@ Format: `merge [PRIMARY_INDEX] [SECONDARY_INDEX]`
 Examples:
 * `merge 1 2` merges the information of the first two displayed students.
 
+### Viewing detailed attendance records : `view`
+
+Displays the detailed attendance record of the specified student.
+
+![view](images/viewCommand.png)
+
+Format: `merge [PRIMARY_INDEX] [SECONDARY_INDEX]`
+
+* If the student has no attendance records, it will return a message indicating that the student has no attendance records.
+* If the student has attendance records, the attendance record will be shown week by week with the reason being provided for absences.
+
+Examples:
+* `view 1` views the attendance record for the student with index 1.
 
 ### Clearing all entries : `clear`
 
