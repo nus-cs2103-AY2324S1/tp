@@ -108,11 +108,13 @@ public class AddressBookParserTest {
                 .withMedicalHistory("MedHistory1")
                 .withTags("Tag1", "Tag2")
                 .build();
+        model.addPerson(patient);
         model.updateSelectedPerson(patient);
         EditPatientDescriptor descriptor = new EditPatientDescriptorBuilder(patient).build();
         String input = EditCommand.COMMAND_WORD + " " + PatientUtil.getEditPatientDescriptorDetails(descriptor);
         EditCommand command = (EditCommand) parser.parseCommand(input);
         assertEquals(new EditCommand(descriptor), command);
+        model.deletePerson(patient);
     }
 
     @Test
@@ -122,12 +124,14 @@ public class AddressBookParserTest {
                 .withLocation("TestLocation")
                 .withTags("Tag1", "Tag2")
                 .build();
+        model.addPerson(specialist);
         model.updateSelectedPerson(specialist);
         EditSpecialistDescriptor descriptor = new EditSpecialistDescriptorBuilder(specialist).build();
         String input = EditCommand.COMMAND_WORD
                 + " " + SpecialistUtil.getEditSpecialistDescriptorDetails(descriptor);
         EditCommand command = (EditCommand) parser.parseCommand(input);
         assertEquals(new EditCommand(descriptor), command);
+        model.deletePerson(specialist);
     }
 
     @Test
@@ -143,14 +147,16 @@ public class AddressBookParserTest {
                 .build();
         String userInput1 = EditCommand.COMMAND_WORD + " " + PATIENT_TAG;
         String userInput2 = EditCommand.COMMAND_WORD + " " + SPECIALIST_TAG;
-
+        model.addPerson(patient);
         model.updateSelectedPerson(patient);
         assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 EditCommand.MESSAGE_USAGE_PATIENT), () -> parser.parseCommand(userInput1));
-
+        model.deletePerson(patient);
+        model.addPerson(specialist);
         model.updateSelectedPerson(specialist);
         assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 EditCommand.MESSAGE_USAGE_SPECIALIST), () -> parser.parseCommand(userInput2));
+        model.deletePerson(specialist);
     }
 
     @Test

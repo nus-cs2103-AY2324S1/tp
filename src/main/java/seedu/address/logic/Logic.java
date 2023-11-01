@@ -39,6 +39,9 @@ public interface Logic {
     /** Returns a person that is selected*/
     Person getSelectedPerson();
 
+    /** Update the selected person*/
+    void updateSelectedPerson(Person person);
+
     /**
      * Returns the user prefs' address book file path.
      */
