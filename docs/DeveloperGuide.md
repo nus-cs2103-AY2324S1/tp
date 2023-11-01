@@ -163,16 +163,16 @@ This section describes some noteworthy details on how certain features are imple
 #### Implementation
 
 The notifications feature is centered around `Event` instances.
-`Event`s can represent any type of event with a specific date and time.
+`Event` can represent any type of event with a specific date and time.
 This could be a birthday, an upcoming meeting or a deadline.
-`Event`s also encapsulate timings where a reminder should be created.
+`Event` also encapsulates timings where a reminder should be created.
 
-On startup, `EventFactory#createEvents(model)` is used to generate the `Event` instances from the initial state of the model.
+On startup, `EventFactory#createEvents(model)` is used to generate `Event` instances from the initial state of the model.
 Any future events can be added to the data model as well during runtime.
 
 Three public methods for `Event` are important for its usage
 * `Event#addMember(Person)` — Adds a `Person` as associated with this event.
-* `Event#addReminder(Duration)` — Sets a reminder for the event one `Duration` before the time of the actual event. If `Duration` is set to a day, the reminder will be a day in advance.
+* `Event#addReminder(Duration)` — Sets a reminder for the event one `Duration` before the time of the actual event. For example, if `Duration` is set to a day, the reminder will be a day in advance.
 * `Event#getNotificationAtTime(LocalDateTime)` — Check if any notifications should be generated based on a specific time, usually the current time should be passed as the parameter.
 
 Below is the class diagram for the `Event` class and it's interactions with the other classes.
@@ -180,6 +180,7 @@ Below is the class diagram for the `Event` class and it's interactions with the 
 <puml src="diagrams/notification-system/ClassDiagram.puml" alt="NotificationClassDiagram" />
 
 The startup sequence for creating initial events is given below as well.
+On a high level, the `MainApp#initEvents()` will use `EventFactory#createEvents(model)` to generate `Event` instances from the intial state of the model, then add all of these events to the model.
 
 <puml src="diagrams/notification-system/InitEventsSequenceDiagram.puml" alt="InitEventsSequenceDiagram" />
 
@@ -334,7 +335,7 @@ Class Diagram for FindFilterStringTokenizer:
 
 <puml src="diagrams/find-command/FindFilterStringTokenizerClassDiagram.puml" alt="FindFilterStringTokenizerClassDiagram" />
 
-##### `FindExpressionParser``
+##### `FindExpressionParser`
 
 The `FindExpressionParser` ingests the tokens produced by the `FindFilterStringTokenizer` and interprets them, creating a singular complete `Predicate<Person>` that's applied on the PersonList.
 
@@ -640,11 +641,6 @@ In the tests, we verify that the `NotesWindow` displays the correct number of no
 Ensure that you replace the actual code and XML content if it changes in the future to keep the documentation up to date.
 
 
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
-
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
@@ -680,13 +676,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | Priority | As a …​                          | I want to …​                                                                                                                        | So that I can…​                                                 |
 |----------|----------------------------------|-------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------|
 | `* * *`  | user                             | add new contacts with basic contact information                                                                                     | keep track of the people I know.                                |
-| `* * *`  | user                             | add alternative contact information such as telegram, email and linkedin, which are preferred communication channels of my contacts | stay better connected to them                                   |
+| `* * *`  | user                             | add alternative contact information such as telegram, email and linkedin | connect with friends through my preferred channels |
 | `* * *`  | user                             | delete contacts                                                                                                                     | reduce clutter and keep my contact list organised.              |
-| `* * *`  | forgetful user                   | upload photos for my contacts                                                                                                       | visually remember them.                                         |
-| `* * *`  | user                             | update photos for my contacts                                                                                                       | visually recognize them.                                        |
+| `* * *`  | user                             | add notes associated with my contacts | remember important information regarding my contacts. |
+| `* * *`  | user                             | delete notes associated with my contacts | remove unwanted information. |
+| `* *`  | forgetful user                   | update photos for my contacts                                                                                                       | visually remember them.                                         |
 | `* * *`  | forgetful user                   | add the birthday of my contact                                                                                                      | keep track and remember my contacts’ birthdays.                 |
-| `* * *`  | forgetful user                   | receive a notification when it is my contact’s actual birthday                                                                      | remember to celebrate his/her birthday.                         |
+| `* * *`  | forgetful user                   | receive a notification when it is the day before my contact’s birthday                                                                      | remember to celebrate his/her birthday.                         |
 | `* * *`  | user                             | opt out of receiving notifications                                                                                                  | keep myself from being distracted by the notifications.         |
+| `* * *`  | user                             | record money owed to a contact | remember to settle the debt.         |
+| `* * *`  | user                             | record money owed by a contact | remember to collect the money.         |
 | `* * *`  | user                             | search through my contacts based on their respective contact information                                                            | quickly access the information required.                        |
 | `* * *`  | user                             | search my contacts by name                                                                                                          | quickly find a person without scrolling through my entire list. |
 | `* * *`  | user                             | search my contacts by phone number                                                                                                  | identify who is calling me from an unfamiliar number.           |
@@ -811,7 +810,7 @@ Use case ends.
 | p/     | Phone number of contact        | `p/98765432`                     |
 | e/     | Email of contact               | `e/johndoe@gmail.com`            |
 | a/     | Address of contact             | `a/16 Bukit Timah Road, S156213` |
-| t/     | Tags of contact                | 'friend'                         |
+| t/     | Tags of contact                | `t/friend`                       |
 | li/    | Linkedin of contact            | `li/john-doe`                    |
 | tg/    | Telegram handle of contact     | `tg/@johndoe`                    |
 | e2/    | Secondary email of contact     | `e2/johndoe@hotmail.com`         |
