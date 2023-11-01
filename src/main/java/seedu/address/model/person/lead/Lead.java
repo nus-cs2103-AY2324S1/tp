@@ -34,6 +34,7 @@ public class Lead {
         return lead.equalsIgnoreCase("HOT")
                 || lead.equalsIgnoreCase("WARM")
                 || lead.equalsIgnoreCase("COLD");
+    }
 
     /**
      * Returns true if the lead is hot.
