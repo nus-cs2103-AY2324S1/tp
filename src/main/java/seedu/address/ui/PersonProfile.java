@@ -437,6 +437,20 @@ public class PersonProfile extends UiPart<Region> {
     }
 
     /**
+     * Sets focus to the UI element responsible for editing tags.
+     */
+    public void setFocusTags() {
+        tagUI.setFocus();
+    }
+
+    /**
+     * Sets focus to the UI element responsible for editing notes.
+     */
+    public void setFocusNotes() {
+        noteUI.setFocus();
+    }
+
+    /**
      * Gets the last valid Person object.
      *
      * @return valid Person object, or null if unavailable.
