@@ -11,7 +11,7 @@ import seedu.address.model.lessons.Task;
  * Wraps all tasks
  */
 public class FullTaskList implements ReadOnlyFullTaskList {
-    private ReadOnlySchedule scheduleList;
+    private ObservableList<Lesson> lessonList;
     private ObservableList<Task> fullTaskList = FXCollections.observableArrayList();
     private final ObservableList<Task> internalUnmodifiableFullTaskList =
             FXCollections.unmodifiableObservableList(fullTaskList);
@@ -43,8 +43,12 @@ public class FullTaskList implements ReadOnlyFullTaskList {
     }
 
     public void setFullTaskList(ReadOnlySchedule scheduleList) {
-        this.scheduleList = scheduleList;
-        ObservableList<Lesson> lessonList = scheduleList.getLessonList();
+        this.lessonList = scheduleList.getLessonList();
+        refreshFullTaskList();
+    }
+
+    public void refreshFullTaskList() {
+        fullTaskList.clear();
         for (Lesson lesson : lessonList) {
             ObservableList<Task> tasks = lesson.getTaskList().asUnmodifiableObservableList();
             fullTaskList.addAll(tasks);

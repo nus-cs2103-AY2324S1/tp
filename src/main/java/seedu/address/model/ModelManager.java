@@ -275,6 +275,11 @@ public class ModelManager implements Model {
         return fullTaskList.getFullTaskList();
     }
 
+    @Override
+    public void updateFullTaskList() {
+        fullTaskList.setFullTaskList(this.scheduleList);
+    }
+
     //=========== Ui Changing =============================================================
 
     public void linkUi(Ui ui) {
