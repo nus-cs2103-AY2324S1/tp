@@ -5,7 +5,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.util.Objects;
 import java.util.Set;
 
-import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.logic.Messages;
 import seedu.address.model.ListEntry;
 import seedu.address.model.tag.Tag;
 
@@ -173,6 +173,8 @@ public class Person extends ListEntry<Person> {
 
     @Override
     public String toString() {
+        return Messages.format(this);
+        /*
         return new ToStringBuilder(this)
                 .add("name", name)
                 .add("phone", phone)
@@ -182,6 +184,7 @@ public class Person extends ListEntry<Person> {
                 .add("tags", tags)
                 .add("remark", remark)
                 .toString();
+         */
     }
     /**
      * Returns a clone of this person that is equal to this person.

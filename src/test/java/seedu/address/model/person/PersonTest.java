@@ -86,9 +86,9 @@ public class PersonTest {
 
     @Test
     public void toStringMethod() {
-        String expected = Person.class.getCanonicalName() + "{name=" + ALICE.getName() + ", phone=" + ALICE.getPhone()
-                + ", email=" + ALICE.getEmail() + ", address=" + ALICE.getAddress() + ", subjects="
-                + ALICE.getSubjects() + ", tags=" + ALICE.getTags() + ", remark=" + ALICE.getRemark() + "}";
+        String expected = "Alice Pauline; Phone: 94351253; Email: "
+                + "alice@example.com; Address: 123, Jurong West Ave 6, #08-111;"
+                + " Subjects: CHEMISTRYBIOLOGY; Tags: [friends]; Remark: ";
         assertEquals(expected, ALICE.toString());
     }
 }
