@@ -130,23 +130,34 @@ public class Time implements Comparable<Time> {
      * @return a list of interviews whose start time is the given day, as given by LocalDateTime.now()
      */
     public static List<Interview> listInterviewsOnGivenDay(LocalDateTime day, UniqueInterviewList interviews) {
-        int todayDay = day.getDayOfMonth();
-        int todayMonth = day.getMonthValue();
-        int todayYear = day.getYear();
         List<Interview> res = new ArrayList<>();
         // loop over all the interviews, and add those that have today as the start time
         for (Interview interview : interviews) {
-            LocalDateTime currentInterviewStartTime = interview.getInterviewStartTime();
-            int currentInterviewDay = currentInterviewStartTime.getDayOfMonth();
-            int currentInterviewMonth = currentInterviewStartTime.getMonthValue();
-            int currentInterviewYear = currentInterviewStartTime.getYear();
-            if (currentInterviewDay == todayDay
-                    && currentInterviewMonth == todayMonth
-                    && currentInterviewYear == todayYear) {
+            LocalDateTime currentInterviewStartDate = interview.getInterviewStartTime();
+            if (isSameDay(day, currentInterviewStartDate)) {
                 res.add(interview); // add the current interview if its start date is today
             }
         }
         return res;
+    }
+
+    /**
+     * Checks whether two LocalDateTimes are the same.
+     *
+     * @author Tan Kerway
+     *
+     */
+    public static boolean isSameDay(LocalDateTime date1, LocalDateTime date2) {
+        return date1.toLocalDate().equals(date2.toLocalDate());
+    }
+
+    /**
+     * Checks whether the given LocalDateTime so happens to be today.
+     *
+     * @author Tan Kerway
+     */
+    public static boolean isToday(LocalDateTime day) {
+        return isSameDay(LocalDateTime.now(), day);
     }
 
     /**
