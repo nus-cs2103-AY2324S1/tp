@@ -28,7 +28,7 @@
 
       <VBox>
         <HBox style="-fx-background-color: derive(#1d1d1d, 20%);" HBox.hgrow="ALWAYS">
-          <MenuBar fx:id="menuBar" VBox.vgrow="NEVER" HBox.hgrow="ALWAYS">
+          <MenuBar styleClass="menu-bar" fx:id="menuBar" VBox.vgrow="NEVER" HBox.hgrow="ALWAYS">
           <Menu mnemonicParsing="false" text="File">
               <MenuItem mnemonicParsing="false" onAction="#handleExit" text="Exit" />
             </Menu>
