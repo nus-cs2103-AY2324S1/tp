@@ -367,14 +367,14 @@ _{Explain here how the data archiving feature will be implemented}_
 #### Proposed Implementation
 
 The proposed class details mechanism for each student will be facilitated by `ClassDetails`. It allows for the tracking
-of an `Student` 's class details, such as their tutorial group, tutorial attendance, class participation, and assignment
+of an `Student`'s class details, such as their tutorial group, tutorial attendance, class participation, and assignment
 grades. It will be stored as 3 separate classes to model each of the 3 different types of class details (We will
-call them "class grades"), and a tracker
-class to act as the manager for each of the class grades, with the trackers composing the `ClassDetails` class.
+call them "class information"), and a tracker
+class to act as the manager for each of the class information, with the trackers composing the `ClassDetails` class.
 
-<puml src="diagrams/ClassGrades.puml" />
+<puml src="diagrams/ClassInformation.puml" />
 
-The 3 different types of class grades are:
+The 3 different types of class information are:
 
 * `Attendance` - Stores the details for a student's attendance in a specific tutorial. Attendance will be stored as
 a boolean value.
@@ -403,21 +403,21 @@ or assignment grade.
 
 #### Design considerations:
 
-**Aspect: 'class grade' classes**
+**Aspect: 'class information' classes**
 
-* **Alternative 1 (current choice):** Use a class for each type of class details.
+* **Alternative 1 (current choice):** Use a class for each type of class information.
   * Pros: Easy to implement, follows OOP principle. If we want to edit the implementation of each of the classes or
   change the data structure / details of each instance, it can be easily done.
   * Cons: May have performance issues in terms of memory usage.
 
 * **Alternative 2:** Store class values as a primitive type (String or Integer).
   * Pros: Will use less memory.
-  * Cons: We must ensure that the implementation of each individual class are correct. Implementation will be more
+  * Cons: We must ensure that the implementation of each class is correct. Implementation will be more
   complicated as different class detail types will require different implementations for the same operation.
 
 **Aspect: Tracker classes**
 
-* **Alternative 1 (current choice):** Use a tracker class for each type of class details.
+* **Alternative 1 (current choice):** Use a tracker class for each type of class information.
   * Pros: Easy to implement. Shared functions can be abstracted out and polymorphism can be applied.
   * Cons: May have performance issues in terms of memory usage.
 
@@ -496,6 +496,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `ClassManager` and the **Actor** is the `user`, unless specified otherwise)
 
+---
 **Use case: Delete a student**
 
 **MSS**
@@ -519,6 +520,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 1.
 
+---
 **Use case: Tag a student with a label**
 
 **MSS**
@@ -548,6 +550,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
+---
 **Use case: Loading a saved file**
 
 **MSS**
@@ -572,6 +575,89 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 3.
 
+---
+**Use case: Look up a list of students**
+
+**MSS**
+
+1.  User requests to look up students with a given criteria.
+2.  ClassManager check each student in the list with the given criteria.
+3.  ClassManager shows a list of students that match the criteria.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. There are no criteria given.
+
+    * 1a1. ClassManager shows an error message.
+
+      Use case ends.
+
+* 2a. There are no students in the list that match the criteria.
+
+    * 2a1. ClassManager shows an error message.
+
+      Use case ends.
+
+---
+**Use case: Randomly select a list of students**
+
+**MSS**
+
+1.  User requests to randomly select a specific number of students.
+2.  ClassManager randomly selects the students from the list.
+3.  ClassManager shows a list of students that are randomly selected.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. There are no students on the list.
+
+    * 1a1. ClassManager shows an error message.
+
+      Use case ends.
+
+* 1b. The number of students to be selected is more than the number of students in the list.
+
+    * 1b1. ClassManager shows an error message.
+
+      Use case ends.
+  
+* 1c. The number of students to be selected is less than 1.
+
+    * 1c1. ClassManager shows an error message.
+
+      Use case ends.
+
+---
+**Use case: Modifying a student's class information**
+
+**MSS**
+
+1.  User requests to modify a student's class information.
+2.  ClassManager finds the student in the list.
+3.  ClassManager modifies the student's class information.
+4.  ClassManager shows the student's updated class information.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The student does not exist in the list.
+
+    * 1a1. ClassManager shows an error message.
+
+      Use case ends.
+  
+* 1b. The modifying request is invalid.
+
+    * 1b1. ClassManager shows an error message.
+
+      Use case ends.
+
+---
 *{More to be added}*
 
 ### Non-Functional Requirements
@@ -579,8 +665,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
 2.  Should be able to hold up to 1000 students without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-4.  Application should be secure (with password) as sensitive information is stored
-5.  Application needs to have proper documentation and user guide so that users can understand how to use the application
+4.  The Application should be secure (with password) as sensitive information is stored.
+5.  The Application needs to have proper documentation and user guide so that users can understand how to use the application.
 
 ### Glossary
 
