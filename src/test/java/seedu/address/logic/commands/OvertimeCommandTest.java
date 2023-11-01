@@ -24,7 +24,7 @@ class OvertimeCommandTest {
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
     @Test
-    void execute_incrementOvertimeHours_success() {
+    public void execute_incrementOvertimeHours_success() {
         Employee employee = model.getFilteredEmployeeList().get(INDEX_FIRST_EMPLOYEE.getZeroBased());
         OvertimeHours overtimeHoursToChange = new OvertimeHours(VALID_OVERTIME_HOURS_BOB);
         OvertimeCommand overtimeCommand = new OvertimeCommand(employee.getId(), overtimeHoursToChange, "inc");
@@ -41,7 +41,7 @@ class OvertimeCommandTest {
     }
 
     @Test
-    void execute_decrementOvertimeHours_success() {
+    public void execute_decrementOvertimeHours_success() {
         Index indexLastEmployee = Index.fromOneBased(model.getFilteredEmployeeList().size());
         Employee lastEmployee = model.getFilteredEmployeeList().get(indexLastEmployee.getZeroBased());
         OvertimeHours overtimeHoursToChange = new OvertimeHours(VALID_OVERTIME_HOURS_BOB);
@@ -61,7 +61,7 @@ class OvertimeCommandTest {
     }
 
     @Test
-    void execute_incrementOvertimeHours_failure() {
+    public void execute_incrementOvertimeHours_failure() {
         Employee employee = model.getFilteredEmployeeList().get(INDEX_FIRST_EMPLOYEE.getZeroBased());
         OvertimeHours overtimeHoursToChange = new OvertimeHours(VALID_OVERTIME_HOURS_BOB);
         OvertimeCommand overtimeCommand = new OvertimeCommand(employee.getId(), overtimeHoursToChange, "dec");
@@ -70,7 +70,7 @@ class OvertimeCommandTest {
     }
 
     @Test
-    void execute_decrementOvertimeHours_failure() {
+    public void execute_decrementOvertimeHours_failure() {
         Index indexLastEmployee = Index.fromOneBased(model.getFilteredEmployeeList().size());
         Employee lastEmployee = model.getFilteredEmployeeList().get(indexLastEmployee.getZeroBased());
         OvertimeHours overtimeHoursToChange = new OvertimeHours(VALID_OVERTIME_HOURS_BOB);

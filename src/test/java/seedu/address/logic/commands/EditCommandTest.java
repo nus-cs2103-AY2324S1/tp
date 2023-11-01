@@ -8,7 +8,6 @@ import static seedu.address.logic.commands.CommandTestUtil.DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DEPARTMENT_IT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ID_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_OVERTIME_HOURS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_POSITION_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_SALARY_BOB;
@@ -65,8 +64,7 @@ public class EditCommandTest {
                 .withId(VALID_ID_BOB)
                 .withPhone(VALID_PHONE_BOB)
                 .withDepartments(VALID_DEPARTMENT_IT)
-                .withSalary(VALID_SALARY_BOB)
-                .withOvertimeHours(VALID_OVERTIME_HOURS_BOB).build();
+                .withSalary(VALID_SALARY_BOB).build();
 
         EditEmployeeDescriptor descriptor = new EditEmployeeDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withId(VALID_ID_BOB)
@@ -82,9 +80,7 @@ public class EditCommandTest {
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setEmployee(lastEmployee, editedEmployee);
-//        System.out.println(editedEmployee);
-//        Employee expectedLastEmployee = expectedModel.getFilteredEmployeeList().get(Index.fromOneBased(model.getFilteredEmployeeList().size()).getZeroBased());
-//        System.out.println(expectedLastEmployee);
+
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
 
