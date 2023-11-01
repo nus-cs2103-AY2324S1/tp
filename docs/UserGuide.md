@@ -261,3 +261,4 @@ _Details coming soon ..._
 | **Find**   | `find [n/NAME] [i/NRIC] [c/CONTACT NUMBER] [l/LICENCE PLATE] [pn/POLICY NUMBER] [pi/POLICY ISSUE DATE] [pe/POLICY EXPIRY DATE]`<br> e.g., `find n/John /pn AB12345J` |
 | **List**   | `list`                                                                                                                                                               |
 | **Help**   | `help`                                                                                                                                                               |
+| **Sort**   | `sort`                                                                                                                                                                  |
