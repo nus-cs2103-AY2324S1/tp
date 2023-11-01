@@ -312,7 +312,7 @@ Displays a list of all tutors in TutorConnect.
 
 **Scenario**
 
-Imagine that you have found the details of the tutor John Doe and want to go back to view the list of tutors.\
+Imagine that you have found the details of the tutor **John Doe** and want to go back to view the list of tutors.\
 As a tuition centre coordinator, you want to view the list of tutors after filtering the list of tutors.
 
 Let's use the list tutor command to view the most updated list of tutors!
@@ -348,6 +348,9 @@ Great job! You have found the full updated list of tutors.
     
 </div>
 
+You can also refer to [input information](#input-examples) for details about valid inputs.
+
+[Back To Top](#table-of-contents)
 
 #### Locating tutors by name: `find-t`
 
@@ -405,26 +408,47 @@ You can also refer to [input information](#input-examples) for details about val
 
 #### Deleting a tutor: `delete-t`
 
-Deletes a tutor in the address book based on their index number in the table.
+Deletes a tutor in TutorConnect based on their index number in the tutor list.
+
+##### :star: First time users
+{:.no_toc}
+
+**Scenario**
+
+Imagine the tutor **John Doe** has left the tuition centre and you want to remove him from the tutor list to keep
+the updated list of tutors.
+
+No worries! Let the delete tutor command help you to remove **John Doe** from the tutor list.
+
+**Follow these steps**
+
+1. Type `list-t` and press enter to get the index number of the tutor with the name **John Doe** from the tutor list, 
+   which is index 9.
+2. Type `delete-t 9` to remove the tutor in index 9 of the tutor list, which is **John Doe**.
+3. Type `list-t` again and press enter to view the updated list of tutors without the tutor **John Doe**.
+
+**What you can expect to see**
+
+Well done! You have deleted tutor **John Doe**.
 
 ![delete tutor](images/deleteTutor.png)
 
-**Format**: `delete-t TUTOR_INDEX`
+##### :star::star::star: Experienced users
+{:.no_toc}
 
-**Examples**:
-* `delete-t 5` deletes the tutor that is indexed as 5 in the address book.
-* `list` followed by `delete-t 2` deletes the 2nd person in the address book.
+**Command format**
+![delete tutor command](images/deleteTutorCommandSyntax.png)
 
-**Acceptable values for each parameter**:
-* `TUTOR_INDEX`: Only accepts numerical value
+**Errors you might encounter**
 
-**Expected output**:
-* `Tutor has been deleted: Alex Yeoh; Phone: 87438807;
-  Email: alexyeoh@example.com`
+This command is relatively straight forward to use and has only 1 possible error:
 
-**Error messages**:
-* `Invalid command format!`: No tutor index provided or parameter given is not a numerical value.
-* `Tutor index provided is out of range`: Given tutor index is out of range.
+| Error Message                          | Reason                                                      |
+|----------------------------------------|-------------------------------------------------------------|
+| `Invalid command format!`              | Invalid or missing TUTOR_INDEX                              |
+| `The person index provided is invalid` | TUTOR_INDEX entered is not in the range of number of tutors |
+
+You can also refer to [input information](#input-examples) for details about valid inputs.
 
 [Back To Top](#table-of-contents)
 
