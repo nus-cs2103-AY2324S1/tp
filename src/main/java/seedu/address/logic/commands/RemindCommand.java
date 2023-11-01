@@ -29,6 +29,8 @@ public class RemindCommand extends Command {
     private final BirthdayWithinDaysPredicate birthdayPredicate;
     private final EventWithinDaysPredicate eventPredicate;
     private final int days;
+    private final static int DEFAULT_DAYS = 7;
+
 
     /**
      * Creates a RemindCommand to remind the user of the upcoming birthdays and events in the next n number of days.
@@ -37,7 +39,11 @@ public class RemindCommand extends Command {
                          EventWithinDaysPredicate eventPredicate, int days) {
         this.birthdayPredicate = birthdayPredicate;
         this.eventPredicate = eventPredicate;
-        this.days = days;
+        if (days == 7) {
+            this.days = DEFAULT_DAYS;
+        } else {
+            this.days = days;
+        }
     }
 
     @Override
@@ -65,8 +71,8 @@ public class RemindCommand extends Command {
         }
 
         RemindCommand otherRemindCommand = (RemindCommand) other;
-        return birthdayPredicate == otherRemindCommand.birthdayPredicate
-                && eventPredicate == otherRemindCommand.eventPredicate
+        return birthdayPredicate.equals(otherRemindCommand.birthdayPredicate)
+                && eventPredicate.equals(otherRemindCommand.eventPredicate)
                 && days == otherRemindCommand.days;
     }
 

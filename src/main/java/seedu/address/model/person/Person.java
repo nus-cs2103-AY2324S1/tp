@@ -177,9 +177,6 @@ public class Person {
      */
     public boolean hasBirthdayWithinDays(int days) {
         Birthday birthday = getBirthday();
-        if (birthday == null) {
-            return false;
-        }
         return birthday.isWithinDays(days);
     }
 

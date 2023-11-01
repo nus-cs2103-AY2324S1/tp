@@ -375,8 +375,8 @@ Expected output when the command succeeds:
 Expected output when the command fails:
 * `Invalid command format!
   remind: Reminds the user of the upcoming birthdays and events in the next n number of days. If no index is given, the default number of days is 7.
-  Parameters: INDEX (must be a positive integer)
-  Example: remind 1`
+  Parameters: INDEX (must be a positive integer)`
+  Example: `remind 1`
 
 [Scroll back to Table of Contents](#table-of-contents)
 

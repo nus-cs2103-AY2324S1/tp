@@ -37,13 +37,9 @@ public class Birthday {
             this.value = null;
             return;
         }
-        try {
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-            LocalDate parsedDate = LocalDate.parse(birthday, formatter);
-            this.value = parsedDate;
-        } catch (java.time.format.DateTimeParseException e) {
-            throw new IllegalArgumentException(MESSAGE_CONSTRAINTS);
-        }
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate parsedDate = LocalDate.parse(birthday, formatter);
+        this.value = parsedDate;
     }
     /**
      * Returns true if a given string is a valid birthday.
