@@ -21,6 +21,8 @@ import java.util.stream.Stream;
  */
 public class Group {
     public static final String MESSAGE_CONSTRAINTS = "Group names should be alphanumeric and must not be black";
+    public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
+
     private final ObservableList<Person> listOfGroupMates = FXCollections.observableArrayList();
     private final String groupName;
     private GroupRemark groupRemark;
@@ -84,12 +86,6 @@ public class Group {
      */
     public boolean isSameGroup(Group otherGroup) {
         return this.equals(otherGroup);
-//        if (otherGroup == this) {
-//            return true;
-//        }
-//
-//        return otherGroup != null
-//            && this.equals(otherGroup);
     }
 
     /**
@@ -111,7 +107,8 @@ public class Group {
     //For now no constraints
     public static boolean isValidGroup(String name) {
         requireNonNull(name);
-        return !name.isBlank();
+
+        return !name.isBlank() && name.matches(VALIDATION_REGEX);
     }
 
     /**
@@ -148,41 +145,10 @@ public class Group {
         listOfGroupMates.add(personToAdd);
     }
 
-    @Override
-    public String toString() {
-        return new ToStringBuilder(this)
-            .add("Group name", groupName)
-            .toString();
-    }
-
-    //need remove
-    public void printGrpMates() {
-        this.listOfGroupMates.forEach(x -> System.out.println(x.getName()));
-    }
-
     public ObservableList<Person> getListOfGroupMates() {
         return this.listOfGroupMates;
     }
 
-    @Override
-    public boolean equals(Object group) {
-        if (group == this) {
-            return true;
-        }
-
-        // instanceof handles nulls
-        if (!(group instanceof Group)) {
-            return false;
-        }
-
-        Group otherGroup = (Group) group;
-        return this.groupName.equals(otherGroup.getGroupName());
-    }
-
-//    public Stream<Person> grpMatesStream() {
-//        return listOfGroupMates.stream();
-//    }
-//
     public GroupRemark getGroupRemark() {
         return this.groupRemark;
     }
@@ -255,6 +221,25 @@ public class Group {
 
     public void deleteTime(ArrayList<TimeInterval> toDeleteTime) throws CommandException { this.timeIntervalList.deleteTime(toDeleteTime);}
 
+    @Override
+    public boolean equals(Object group) {
+        if (group == this) {
+            return true;
+        }
 
+        // instanceof handles nulls
+        if (!(group instanceof Group)) {
+            return false;
+        }
 
+        Group otherGroup = (Group) group;
+        return this.groupName.equals(otherGroup.getGroupName());
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .add("Group name", groupName)
+                .toString();
+    }
 }

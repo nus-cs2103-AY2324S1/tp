@@ -25,74 +25,32 @@ public class AddGroupParserTest {
         Group expectedGroup = new Group("CS2103T");
 
         // whitespace only preamble
-        assertParseSuccess(parser, PREAMBLE_WHITESPACE + "CS2103T", new AddGroupCommand(expectedGroup));
+        assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_CS2103T, new AddGroupCommand(expectedGroup));
     }
 
-//    @Test
-//    public void parse_repeatedNonTagValue_failure() {
-//        String validExpectedPersonString = NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB;
-//
-//        // multiple names
-//        assertParseFailure(parser, NAME_DESC_AMY + validExpectedPersonString,
-//                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_NAME));
-//
-//        // multiple phones
-//        assertParseFailure(parser, PHONE_DESC_AMY + validExpectedPersonString,
-//                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PHONE));
-//
-//        // multiple emails
-//        assertParseFailure(parser, EMAIL_DESC_AMY + validExpectedPersonString,
-//                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_EMAIL));
-//
-//
-//        // multiple fields repeated
-//        assertParseFailure(parser,
-//                validExpectedPersonString + PHONE_DESC_AMY + EMAIL_DESC_AMY + NAME_DESC_AMY + validExpectedPersonString,
-//                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_NAME, PREFIX_EMAIL, PREFIX_PHONE));
-//
-//        // invalid value followed by valid value
-//
-//        // invalid name
-//        assertParseFailure(parser, INVALID_NAME_DESC + validExpectedPersonString,
-//                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_NAME));
-//
-//        // invalid email
-//        assertParseFailure(parser, INVALID_EMAIL_DESC + validExpectedPersonString,
-//                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_EMAIL));
-//
-//        // invalid phone
-//        assertParseFailure(parser, INVALID_PHONE_DESC + validExpectedPersonString,
-//                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PHONE));
-//
-//
-//        // valid value followed by invalid value
-//
-//        // invalid name
-//        assertParseFailure(parser, validExpectedPersonString + INVALID_NAME_DESC,
-//                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_NAME));
-//
-//        // invalid email
-//        assertParseFailure(parser, validExpectedPersonString + INVALID_EMAIL_DESC,
-//                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_EMAIL));
-//
-//        // invalid phone
-//        assertParseFailure(parser, validExpectedPersonString + INVALID_PHONE_DESC,
-//                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PHONE));
-//
-//    }
-//
-//    @Test
-//    public void parse_optionalFieldsMissing_success() {
-//
-//    }
-//
-//    @Test
-//    public void parse_compulsoryFieldMissing_failure() {
-//
-//    }
-//
-//    @Test
-//    public void parse_invalidValue_failure() {
-//        // invalid name
-//    }
+    @Test
+    public void parse_repeatedNonTagValue_failure() {
+        String validExpectedGroupString = NAME_DESC_CS;
+
+        // multiple group names
+        assertParseFailure(parser, NAME_DESC_CS2103T + validExpectedGroupString,
+                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_GROUPTAG));
+    }
+
+    @Test
+    public void parse_compulsoryFieldMissing_failure() {
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddGroupCommand.MESSAGE_USAGE);
+
+        // missing group prefix
+        assertParseFailure(parser, VALID_GROUP_CS2103T, expectedMessage);
+    }
+
+    @Test
+    public void parse_invalidValue_failure() {
+        // invalid name
+        assertParseFailure(parser, INVALID_GROUP_DESC_BLANK, Group.MESSAGE_CONSTRAINTS);
+
+        // invalid name
+        assertParseFailure(parser, INVALID_GROUP_DESC, Group.MESSAGE_CONSTRAINTS);
+    }
 }

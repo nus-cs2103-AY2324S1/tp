@@ -51,7 +51,13 @@ public class CommandTestUtil {
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
-    public static final String INVALID_GROUP_DESC = " " + PREFIX_GROUPTAG; // empty string not allowed for group
+    public static final String INVALID_GROUP_DESC_BLANK = " " + PREFIX_GROUPTAG; // empty string not allowed for group
+    public static final String INVALID_GROUP_DESC = " " + PREFIX_GROUPTAG + "CS2103T&"; // '&' not allowed in group names
+
+    public static final String VALID_GROUP_CS = "CS";
+    public static final String VALID_GROUP_CS2103T = "CS2103T";
+    public static final String NAME_DESC_CS = " " + PREFIX_GROUPTAG + VALID_GROUP_CS;
+    public static final String NAME_DESC_CS2103T = " " + PREFIX_GROUPTAG + VALID_GROUP_CS2103T;
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";

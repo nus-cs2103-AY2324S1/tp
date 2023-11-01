@@ -61,9 +61,12 @@ public class ParserUtil {
      * Parses a {@code String name}.
      * Leading and trailing whitespaces will be trimmed.
      */
-    public static String parseGroupName(String name) {
+    public static String parseGroupName(String name) throws ParseException {
         requireNonNull(name);
         String trimmedName = name.trim();
+        if (!Name.isValidName(trimmedName)) {
+            throw new ParseException(Group.MESSAGE_CONSTRAINTS);
+        }
         return trimmedName;
     }
 
