@@ -120,11 +120,20 @@ class AddScheduleCommandTest {
 
     @Test
     public void execute_badSchedule_failure() {
+
+        // Start time is after end time
         AddScheduleCommand addScheduleCommand = new AddScheduleCommand(INDEX_FIRST_PERSON,
                 new StartTime(SCHEDULE_ALICE_FIRST_JAN.getEndTime().getTime()),
                 new EndTime(SCHEDULE_ALICE_FIRST_JAN.getStartTime().getTime()));
 
         assertCommandFailure(addScheduleCommand, model, Schedule.MESSAGE_CONSTRAINTS);
+
+        // Start time and end time are on different days
+        AddScheduleCommand addScheduleCommand1 = new AddScheduleCommand(INDEX_FIRST_PERSON,
+                new StartTime(SCHEDULE_ALICE_FIRST_JAN.getStartTime().getTime().minusDays(1)),
+                new EndTime(SCHEDULE_ALICE_FIRST_JAN.getStartTime().getTime()));
+
+        assertCommandFailure(addScheduleCommand1, model, Schedule.MESSAGE_CONSTRAINTS);
     }
 
     @Test

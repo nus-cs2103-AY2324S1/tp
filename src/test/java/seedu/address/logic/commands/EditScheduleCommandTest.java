@@ -156,6 +156,18 @@ public class EditScheduleCommandTest {
     }
 
     @Test
+    public void execute_differentDays_failure() {
+        EditScheduleDescriptor descriptor =
+                new EditScheduleDescriptorBuilder(SCHEDULE_ALICE_FIRST_JAN)
+                        .withStartTime(new StartTime(SCHEDULE_ALICE_FIRST_JAN.getStartTime().getTime().minusDays(1)))
+                        .withEndTime(SCHEDULE_ALICE_FIRST_JAN.getEndTime())
+                        .build();
+        EditScheduleCommand editScheduleCommand = new EditScheduleCommand(INDEX_THIRD_SCHEDULE, descriptor);
+
+        assertCommandFailure(editScheduleCommand, model, Schedule.MESSAGE_CONSTRAINTS);
+    }
+
+    @Test
     public void execute_clashingScheduleUnfilteredList_failure() {
         Schedule firstSchedule = model.getFilteredScheduleList().get(INDEX_SECOND_SCHEDULE.getZeroBased());
         Schedule secondSchedule = model.getFilteredScheduleList().get(INDEX_THIRD_SCHEDULE.getZeroBased());
