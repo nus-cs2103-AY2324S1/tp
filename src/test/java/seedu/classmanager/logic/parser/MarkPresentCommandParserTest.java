@@ -31,7 +31,7 @@ public class MarkPresentCommandParserTest {
 
     @Test
     public void parse_validArgs_returnsMarkCommand() {
-        assertParseSuccess(parser, TEST_TUTORIAL_DESC + STUDENT_NUMBER_DESC_BOB,
+        assertParseSuccess(parser, STUDENT_NUMBER_DESC_BOB + TEST_TUTORIAL_DESC,
                 new MarkPresentCommand(Index.fromOneBased(TEST_TUTORIAL), new StudentNumber(VALID_STUDENT_NUMBER_BOB)));
     }
 
@@ -45,6 +45,6 @@ public class MarkPresentCommandParserTest {
 
     @Test
     public void parse_invalidStudentNumber_throwsParseException() {
-        assertParseFailure(parser, TEST_TUTORIAL_DESC + INVALID_STUDENT_NUMBER_DESC, StudentNumber.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, INVALID_STUDENT_NUMBER_DESC + TEST_TUTORIAL_DESC, StudentNumber.MESSAGE_CONSTRAINTS);
     }
 }

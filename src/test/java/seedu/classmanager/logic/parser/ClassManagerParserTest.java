@@ -107,7 +107,7 @@ public class ClassManagerParserTest {
     public void parseCommand_markPresent() throws Exception {
         Student student = new StudentBuilder().build();
         MarkPresentCommand command = (MarkPresentCommand) parser.parseCommand(MarkPresentCommand.COMMAND_WORD
-                        + TEST_TUTORIAL_DESC + " " + PREFIX_STUDENT_NUMBER + student.getStudentNumber(),
+                        + " " + PREFIX_STUDENT_NUMBER + student.getStudentNumber() + TEST_TUTORIAL_DESC,
                 true);
         assertEquals(new MarkPresentCommand(Index.fromOneBased(TEST_TUTORIAL), student.getStudentNumber()), command);
     }
@@ -124,7 +124,7 @@ public class ClassManagerParserTest {
         Student student = new StudentBuilder().build();
         MarkAbsentCommand command = (MarkAbsentCommand) parser
                 .parseCommand(MarkAbsentCommand.COMMAND_WORD + " "
-                        + TEST_TUTORIAL_DESC + " " + PREFIX_STUDENT_NUMBER + student.getStudentNumber(),
+                        + PREFIX_STUDENT_NUMBER + student.getStudentNumber() + TEST_TUTORIAL_DESC,
                 true);
         assertEquals(new MarkAbsentCommand(Index.fromOneBased(TEST_TUTORIAL), student.getStudentNumber()), command);
     }

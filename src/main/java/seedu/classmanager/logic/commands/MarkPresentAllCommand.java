@@ -22,7 +22,7 @@ public class MarkPresentAllCommand extends Command {
             + "Parameters: "
             + PREFIX_TUTORIAL_INDEX + "TUTORIAL INDEX\n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_TUTORIAL_INDEX + "1 ";
+            + PREFIX_TUTORIAL_INDEX + "1";
     private final Index index;
 
     /**

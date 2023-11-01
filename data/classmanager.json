@@ -6,20 +6,7 @@
     "studentNumber" : "A0218510F",
     "classDetails" : {
       "classNumber" : "T11",
-      "attendanceTracker" : [ true, false, false, false, false, false, false, false, false, false ],
-      "assignmentTracker" : [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
-      "classParticipationTracker" : [ false, false, false, false, false, false, false, false, false, false ]
-    },
-    "tags" : [ ],
-    "comment" : ""
-  }, {
-    "name" : "John Doe",
-    "phone" : "98765432",
-    "email" : "johnd@example.com",
-    "studentNumber" : "A0245234A",
-    "classDetails" : {
-      "classNumber" : "T11",
-      "attendanceTracker" : [ true, false, false, false, false, false, false, false, false, false ],
+      "attendanceTracker" : [ false, false, false, false, false, false, false, false, false, false ],
       "assignmentTracker" : [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
       "classParticipationTracker" : [ false, false, false, false, false, false, false, false, false, false ]
     },
