@@ -229,7 +229,7 @@ public class AddPersonCommandTest {
 
         @Override
         public State getState() {
-            throw new AssertionError("This method should not be called.");
+            return State.STUDENT;
         }
 
         @Override
