@@ -86,7 +86,12 @@ public class ModelStub implements Model {
     }
 
     @Override
-    public boolean hasOverlapsWithAppointments(Appointment appointments) {
+    public boolean hasOverlapsWithAppointments(Appointment appointment) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public boolean hasNoStudentForAppointment(Appointment appointment) {
         throw new AssertionError("This method should not be called.");
     }
 
