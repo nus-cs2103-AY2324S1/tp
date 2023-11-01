@@ -60,7 +60,7 @@ Refer to the [Features](#features) below for details of each command.
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </div>
 
-### Viewing help : `help` [Coming soon]
+### Viewing help : `help`
 **What it does:**
 
 Shows a message explaning how to access the help page.
@@ -78,11 +78,11 @@ This feature allows users to add a new employee to the ManaGease app, creating a
 
 **Command format:**
 ```
-add /n NAME [/e EMAIL] [/p PHONE] [/a ADDRESS] [/b BANK_ACCOUNT] [/jd JOIN_DATE] [/s SALARY] [/l ANNUAL_LEAVE]
+add /n NAME /e EMAIL /p PHONE /a ADDRESS /b BANK_ACCOUNT /jd JOIN_DATE /s SALARY /l ANNUAL_LEAVE
 ```
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A person must have at least the NAME parameter, but can have any number of parameters.
+A person must have all parameters shown in the command format.
 </div>
 
 Example:
@@ -92,10 +92,11 @@ Example:
 Output:
 * The ScheduleEase app should display a confirmation message indicating that the employee has been successfully added to the database. (e.g. `Employee "Jane Smith" successfully added!`)
 * The employee's profile should be updated with the provided information.
+  ![result for adding employee](images/addSuccess.png)
 
 * If prefix used is not defined, an error message will appear and say `Prefix not found, please use any of the following prefixes: /n, /e, /p, /a, /b, /jd, /s, /l`
 
-![result for adding employee](images/addSuccess.png)
+
 ![failed result for adding employee](images/addFailed.png)
 
 
@@ -221,9 +222,114 @@ Output:
 
 * If the `DATE` has already been added to the employee, the app should display `There isn’t any information on this employee’s specified PREFIX`.
 
+### Adding a deduction to the payroll of an employee : `deduct`
+
+**What it does**
+
+This feature allows users to add a deduction to the payroll of an employee.
+
+**Command Format**
+
+`deduct INDEX /v VALUE /r REASON` or `deduct /n NAME /v VALUE /r REASON`
+
+* Adds a deduction with given `VALUE` and `REASON` to the employee specified by the `INDEX` or `NAME`.
+* The index refers to the index number shown in the displayed person list.
+* The index **must be a positive integer**.
+
+Examples:
+* `deduct 3 /v 100.00 /r absence` adds a deduction of $100.00 for being absent from work to the third employee in the most recently displayed list.
+* `deduct /n John Doe /v 100.00 /r cpf` adds a deduction of $100.00 for employee CPF deduction to the employee named John Doe.
+
+Output:
+
+* If the index is not within the numbers in the list, the app should display `Please enter a valid index number`.
+* If the command is incorrect, the app should display `Please use the following format to read information : read INDEX INFORMATION`.
+* If the `VALUE` provided is not in the correct format, the app should display `Please provide a valid information prefix to read`.
+* If the `REASON` provided is not in the correct format, the app should display `Please provide a valid information prefix to read`.
 
 
-### Listing all persons : `list` [Coming soon]
+### Adding a benefit to the payroll of an employee : `benefit`
+
+**What it does**
+
+This feature allows users to add a benefit to the payroll of an employee.
+
+**Command Format**
+
+`benefit INDEX /v VALUE /r REASON` or `benefit /n NAME /v VALUE /r REASON`
+
+* Adds a benefit with given `VALUE` and `REASON` to the employee specified by the `INDEX` or `NAME`.
+* The index refers to the index number shown in the displayed person list.
+* The index **must be a positive integer**.
+
+Examples:
+* `benefit 3 /v 1000.00 /r bonus` adds a benefit of $1000.00 for annual bonus to the third employee in the most recently displayed list.
+* `benefit /n John Doe /v 200.00 /r transport` adds a benefit of $200.00 for transport allowance to the employee named John Doe.
+
+Output:
+
+* If the index is not within the numbers in the list, the app should display `Please enter a valid index number`.
+* If the command is incorrect, the app should display `Please use the following format to read information : read INDEX INFORMATION`.
+* If the `VALUE` provided is not in the correct format, the app should display `Please provide a valid information prefix to read`.
+* If the `REASON` provided is not in the correct format, the app should display `Please provide a valid information prefix to read`.
+
+
+### Calculating payroll of an employee : `payroll`
+
+**What it does**
+
+This feature allows users to calculate the payroll of an employee.
+
+**Command Format**
+
+`payroll INDEX` or `payroll /n NAME`
+
+* Calculates the payroll of the employee specified by the `INDEX` or `NAME`.
+* The index refers to the index number shown in the displayed person list.
+* The index **must be a positive integer**.
+
+Examples:
+
+* `payroll 3` calculates the payroll of the third employee in the most recently displayed list.
+* `payroll /n John Doe` calculates the payroll of the employee named John Doe.
+
+Output:
+* ManaGease should display the payroll of the employee specified by the `INDEX` or `NAME`, if the input is valid.
+* If the index is not within the numbers in the list, the app should display `Please enter a valid index number`.
+* If the command is incorrect, the app should display `Please use the following format to read information : read INDEX INFORMATION`.
+
+
+### Generating payslips for an employee : `payslip`
+
+**What it does**
+
+This feature allows users to generate payslips for an employee.
+
+**Command Format**
+
+`payslip INDEX [/t DD/MM/YYYY]` or `payslip /n NAME [/t DD/MM/YYYY]`
+
+* Generates a payslip for the employee specified by the `INDEX` or `NAME`.
+* If the optional `/t DD/MM/YYYY` is provided, the payslip will be generated for the month specified by the date.
+* The index refers to the index number shown in the displayed person list.
+* The index **must be a positive integer**.
+
+Examples:
+
+* `payslip 3` generates a payslip for the third employee in the most recently displayed list.
+* `payslip /n John Doe` generates a payslip for the employee named John Doe.
+* `payslip 3 /t 01/01/2024` generates a payslip for the third employee in the most recently displayed list for the month of January 2024.
+
+Output:
+
+* ManaGease should display a success message saying that the payslip has been generated successfully, if the input is valid.
+* A payslip report in PDF format will be generated in the `payslips` folder in the ManaGease home directory.
+* If the index is not within the numbers in the list, the app should display `Please enter a valid index number`.
+* If the command is incorrect, the app should display `Please use the following format to read information : read INDEX INFORMATION`.
+* If the date provided is not in the correct format, the app should display `Please provide a valid information prefix to read`.
+
+
+### Listing all persons : `list`
 
 **What it does**
 
@@ -233,7 +339,7 @@ Shows a list of all employees in the workplace.
 
 `list`
 
-### Clearing all entries : `clear` [Coming soon]
+### Clearing all entries : `clear`
 
 **What it does**
 
@@ -242,7 +348,7 @@ Clears all entries from the address book.
 **Command format:**
 `clear`
 
-### Locating employees by name: `find` [Coming soon]
+### Locating employees by name: `find`
 
 **What it does**
 
