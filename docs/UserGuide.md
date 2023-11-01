@@ -317,23 +317,13 @@ Examples:
   <img src="images/notes/noteswindow2.png" alt="Window with Notes" style="height:400px; margin:10px;">
 </div>
 
-Allows you to add notes to a person and remove notes from a person.
+The notes feature allows you to add and remove notes for a person, and provides a convenient pop-up window to view all notes for a person. You can add notes to a person with the `addnote` command, remove notes with the `removenote` command, and view notes by using either the `viewnotes` command or by clicking the `Notes` button in the person's information window.
 
-You can add notes to a person with the `addnote` command, remove notes from them with the `removenotes` command.
+The parameters for these commands are `PERSON_INDEX`, `NOTE_INDEX` and `NOTE_CONTENT`. These parameters are explained in detail in the section below.
 
-You can view notes by one of two ways: by using the `viewnotes` command, or by clicking on the `Notes` button in the person's information window.
-
-Format: `addnote PERSON_INDEX NOTE_CONTENT`, `removenote PERSON_INDEX NOTE_INDEX` and `viewnotes PERSON_INDEX`
-
-<box type="warning">
-
-Always make sure the indices provided are valid and within the bounds of the list. Invalid indices will result in an error.
-
-</box>
-
+<br>
 <panel header=":fa-solid-book: **Command Parameter / Syntax Tables**" type="secondary" expanded no-close>
 The fields you enter should follow the following format:
-
 | Parameter     | Description                                                                                                 |
 |---------------|-------------------------------------------------------------------------------------------------------------|
 | `PERSON_INDEX`| The position of the person in the list you want to add a note to. This should be a positive integer, and should be within the bounds of the list. |
@@ -343,17 +333,52 @@ The fields you enter should follow the following format:
 </panel>
 
 <br>
+<box type="warning">
+Always make sure the indices provided are valid and within the bounds of the list. Invalid indices will result in an error.
+</box>
+
+### Add a note to contact: `addnote`
+You can add notes to a person with the `addnote` command.
+
+Format: `addnote PERSON_INDEX NOTE_CONTENT`
 
 <box type="info" icon=":fa-solid-magnifying-glass:">
-To manage notes for a person in a list, use the following commands:
+Below are some examples on how to use the commands:
 
-| Action                                  | Command                                           | Description                                             |
-|-----------------------------------------|---------------------------------------------------|---------------------------------------------------------|
-| Add a note to a person                  | `addnote 1 This is a sample note for the person.` | Adds a note to the person at index 1.                   |
-| Remove a specific note from a person    | `removenote 1 2`                                  | Removes the 2nd note from the person at index 1.        |
-| View all notes of a person              | `viewnotes 1`                                     | Displays all notes of the person at index 1.            |
+- `addnote 1 This is a sample note for the person.`: Adds a note to the contact at index 1.
+- `addnote 2 This is another sample note.`: Adds a note to the contact at index 2.
 
-To add a note, use the `addnote` command followed by the position number and the note text. To remove a note, use the `removenote` command followed by the position number and the note index. To view all notes, use the `viewnotes` command followed by the position number. Closing the notes window can be done via the "Close" button or by pressing ESC.
+</box>
+
+
+### Remove a note from contact: `removenote`
+You can remove notes from a person with the `removenote` command.
+
+Format: `removenote PERSON_INDEX NOTE_INDEX`
+
+<box type="info" icon=":fa-solid-magnifying-glass:">
+Below are some examples on how to use the commands:
+
+- `removenote 1 2`: Removes the second note from the contact at index 1.
+- `removenote 1 1`: Removes the first note from the contact at index 1.
+
+</box>
+
+### View notes of a contact: `viewnotes`
+<div style="display:flex; justify-content:space-around; align-items:center;">
+  <img src="images/notes/window_with_notes.png" alt="Window with Notes" style="height:400px; margin:10px;">
+  <img src="images/notes/noteswindow2.png" alt="Window with Notes" style="height:400px; margin:10px;">
+</div>
+
+You can view notes by one of two ways: by using the `viewnotes` command, or by clicking on the `Notes` button in the person's information window. The notes window can be closed by either clicking the `Close` button or by pressing the `ESC` key, making it convenient for both CLI and GUI users to use the notes feature.
+
+Format: `viewnotes PERSON_INDEX`
+<box type="info" icon=":fa-solid-magnifying-glass:">
+Below are some examples on how to use the commands:
+
+- `viewnotes 1`: Shows all notes for the contact at index 1.
+- `viewnotes 2`: Shows all notes for the contact at index 2.
+
 </box>
 
 ## Birthday Notifications
