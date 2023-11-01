@@ -243,27 +243,40 @@ Adds a tutor to TutorConnect.
 
 #### Editing a tutor: `edit-t`
 
-Edits an existing tutor in the addressbook.
+Edits an existing tutor found in TutorConnect.
+
+##### :beginner: First time users
+{:.no_toc}
+
+**Scenario**
+
+Imagine that tutor John Doe has changed his phone number to **87654321**.\
+As a tuition centre coordinator you want to have the most up-to-date information on your tutors.  
+
+Let's use the edit tutor command to update his phone number!
+
+**Follow these steps**
+
+1. Type in `list-t`, press enter, and find John Doe in the list of tutors.
+2. Let's say you found him at position 9.
+3. Type in `edit-t 9 p/87654321` and press enter.
+
+**What you can expect to see**
+
+Viola! His phone has now been updated to **87654321**.
 
 ![edit tutor](images/editTutor.png)
 
-**Format**: `edit-t TUTOR_INDEX n/NAME p/PHONE NUMBER e/EMAIL`
+##### :hammer: Experienced users
+{:.no_toc}
 
-**Examples**:
-* `edit-t 1 n/John Doe`
-* `edit-t 2 n/John Doe e/johndoe@email.com`
+**Command format**
 
-**Acceptable values for each parameter**:
-* `TUTOR_INDEX`: Only number input accepted, starting from 1 to the last tutor index shown in the list of
-  tutors.
-* `NAME`: Only contain alphanumeric characters and spaces, and should not be blank
-* `PHONE NUMBER`: Only contain numbers, and should be at least 3 digits long
-* `EMAIL`: Of the format local-part@domain
+![edit tutor command](images/editTutorCommandSyntax.png)
 
-**Expected output**:
-* `Edited Tutor: John Doe; Phone: 99272758; Email: johndoe@email.com`
+**Errors you might encounter**
 
-**Error messages**:
+Here is a list of the error messages you may encounter, when the command is entered incorrectly:
 * `Invalid command format!`: Invalid or missing TUTOR_INDEX.
 * `Names should only contain alphanumeric characters and spaces, and it should not be blank`: Tutor name input was
   either invalid or blank.
@@ -276,6 +289,10 @@ Edits an existing tutor in the addressbook.
 * `Multiple values specified for the following single-valued field(s): e/`: More than 1 `e/` was given in the command
 * `This tutor already exists in the address book.`: There is a tutor with the same name in the address book.
 * `At least one field to edit must be provided.`: There is no `n/`, `p/` or `e/` tag provided to edit a field.
+
+You can also refer to [input information](#input-examples) for details about valid inputs.
+
+[Back To Top](#table-of-contents)
 
 #### Listing all tutors: `list-t`
 
