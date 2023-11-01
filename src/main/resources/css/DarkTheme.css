@@ -123,17 +123,17 @@
 .cell_big_label {
     -fx-font-family: "Segoe UI Semibold";
     -fx-font-size: 16px;
-    -fx-text-fill: #010504;
+    -fx-text-fill: white;
 }
 
 .cell_small_label {
     -fx-font-family: "Segoe UI";
     -fx-font-size: 13px;
-    -fx-text-fill: #010504;
+    -fx-text-fill: white;
 }
 
 .column_title {
-    -fx-alignment: center;
+    -fx-alignment: top;
     -fx-font-family: "Segoe UI Semibold";
     -fx-font-size: 22px;
     -fx-text-fill: white;
@@ -370,4 +370,7 @@
     -fx-background-color: #DC143C;
 }
 
-
+.noteBox {
+    -fx-background-color: #3c3e3f;
+    -fx-padding: 10;
+}

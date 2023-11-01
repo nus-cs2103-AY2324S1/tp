@@ -49,7 +49,7 @@ public class JsonAdaptedAppointment {
         date = source.getDate().value;
         startTime = source.getStartTime().value;
         endTime = source.getEndTime().value;
-        name = source.getName().fullName;
+        name = source.getName().value;
         description = source.getDescription().value;
     }
 
