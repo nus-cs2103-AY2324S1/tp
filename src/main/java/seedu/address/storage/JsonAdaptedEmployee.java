@@ -165,9 +165,6 @@ class JsonAdaptedEmployee {
 
         final ArrayList<Remark> employeeRemarks = new ArrayList<>();
         for (JsonAdaptedRemark remark : remarkList) {
-            if (!Remark.isValidRemark(remark.toString())) {
-                throw new IllegalValueException(Remark.MESSAGE_CONSTRAINTS);
-            }
             employeeRemarks.add(remark.toModelType());
         }
         final RemarkList modelRemarkList = new RemarkList(employeeRemarks);

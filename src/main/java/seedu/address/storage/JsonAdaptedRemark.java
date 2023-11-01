@@ -3,7 +3,6 @@ package seedu.address.storage;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
-import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.remark.Remark;
 
 /**
@@ -34,13 +33,8 @@ public class JsonAdaptedRemark {
 
     /**
      * Converts this Jackson-friendly adapted department object into the model's {@code Department} object.
-     *
-     * @throws IllegalValueException if there were any data constraints violated in the adapted department.
      */
-    public Remark toModelType() throws IllegalValueException {
-        if (!Remark.isValidRemark(remark)) {
-            throw new IllegalValueException(Remark.MESSAGE_CONSTRAINTS);
-        }
+    public Remark toModelType() {
         return new Remark(remark);
     }
 }

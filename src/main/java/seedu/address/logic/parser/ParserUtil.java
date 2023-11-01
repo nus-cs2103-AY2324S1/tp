@@ -18,6 +18,7 @@ import seedu.address.model.employee.Name;
 import seedu.address.model.employee.Phone;
 import seedu.address.model.employee.Position;
 import seedu.address.model.employee.Salary;
+import seedu.address.model.remark.Remark;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser
@@ -173,5 +174,15 @@ public class ParserUtil {
             throw new ParseException(Leave.MESSAGE_CONSTRAINTS);
         }
         return LocalDate.parse(leaveDate, Leave.VALID_DATE_FORMAT);
+    }
+
+    /**
+     * Parses a {@code String remark} into a {@code Remark}.
+     * Leading and trailing whitespaces will be trimmed.
+     */
+    public static Remark parseRemark(String remark) {
+        requireNonNull(remark);
+        String trimmedDate = remark.trim();
+        return new Remark(remark);
     }
 }

@@ -1,16 +1,11 @@
 package seedu.address.model.remark;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
  * Represents a Remark in the employee book.
- * Guarantees: immutable; name is valid as declared in {@link #isValidRemark(String)}
  */
 public class Remark {
-
-    public static final String MESSAGE_CONSTRAINTS = "Remarks should be alphanumeric";
-    public static final String VALIDATION_REGEX = "\\p{Alnum}+";
 
     public final String remark;
 
@@ -21,15 +16,7 @@ public class Remark {
      */
     public Remark(String remark) {
         requireNonNull(remark);
-        checkArgument(isValidRemark(remark), MESSAGE_CONSTRAINTS);
         this.remark = remark;
-    }
-
-    /**
-     * Returns true if a given string is a valid remark.
-     */
-    public static boolean isValidRemark(String test) {
-        return test.matches(VALIDATION_REGEX);
     }
 
     @Override
