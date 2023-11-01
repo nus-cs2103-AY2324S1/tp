@@ -76,7 +76,6 @@ public class EditCommand extends Command {
     private static final Logger logger = LogsCenter.getLogger(EditCommand.class.getName());
     private final Ic nric;
     private final EditPersonDescriptor editPersonDescriptor;
-    private String personRole;
 
     /**
      * @param nric                 of the person in the filtered person list to edit
@@ -94,27 +93,35 @@ public class EditCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         // combine doctor list and patient list
+        Person personToEdit = getPersonToEdit(model);
+        Person editedPerson = getEditedPerson(model, personToEdit);
+
+        model.setPerson(personToEdit, editedPerson);
+        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        logger.info("Successfully edited person");
+        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)));
+    }
+
+    private Person getPersonToEdit(Model model) throws CommandException {
         List<Person> lastShownList = new ArrayList<>();
         lastShownList.addAll(model.getFilteredDoctorList());
         lastShownList.addAll(model.getFilteredPatientList());
-
         List<Person> personToEditList = lastShownList.stream()
                 .filter(x -> x.getIc().equals(nric))
                 .collect(Collectors.toList());
-
         if (personToEditList.size() == 0) {
             logger.warning("Could not edit - person isn't in adressbook");
             throw new CommandException(MESSAGE_DOESNT_EXIST);
         }
-
         //developer assumption - can't have 2 people with same IC
         assert personToEditList.size() < 2;
-
         Person personToEdit = personToEditList.get(0);
-        Person editedPerson;
+        return personToEdit;
+    }
 
+    private Person getEditedPerson(Model model, Person personToEdit) throws CommandException {
+        Person editedPerson;
         if (personToEdit instanceof Patient) {
-            personRole = "patient";
             editedPerson = createEditedPatient((Patient) personToEdit, editPersonDescriptor);
         } else {
             assert personToEdit.isDoctor();
@@ -122,25 +129,19 @@ public class EditCommand extends Command {
                 logger.warning("Error thrown - tried to edit condition / bloodtype of doctor");
                 throw new CommandException("Doctors cannot have Condition or BloodType fields.");
             }
-            personRole = "doctor";
             editedPerson = createEditedDoctor((Doctor) personToEdit, editPersonDescriptor);
         }
-
         if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
             logger.warning("Edited Person and orignal person are the same");
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
-        model.setPerson(personToEdit, editedPerson);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        logger.info("Successfully edited person");
-        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)));
+        return editedPerson;
     }
 
     /**
      * Creates and returns a {@code Person} with the details of {@code personToEdit}
      * edited with {@code editPersonDescriptor}.
      */
-
     private static Doctor createEditedDoctor(Doctor personToEdit, EditPersonDescriptor editPersonDescriptor) {
         requireNonNull(personToEdit);
         requireNonNull(personToEdit);
