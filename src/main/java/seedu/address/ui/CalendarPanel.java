@@ -28,7 +28,7 @@ public class CalendarPanel extends UiPart<Region> {
     private final Logger logger = LogsCenter.getLogger(CalendarPanel.class);
 
     @FXML
-    private ListView<PersonWithSchedules> personListView;
+    private ListView<PersonWithSchedules> calendarListView;
     @FXML
     private ListView<Label> timeListView;
 
@@ -43,8 +43,8 @@ public class CalendarPanel extends UiPart<Region> {
         personWithSchedulesList = FXCollections.observableArrayList();
         createPersonWithSchedulesList(personList, scheduleList);
 
-        personListView.setItems(personWithSchedulesList);
-        personListView.setCellFactory(listView -> new CalendarRowViewCell());
+        calendarListView.setItems(personWithSchedulesList);
+        calendarListView.setCellFactory(listView -> new CalendarRowViewCell());
     }
 
     private void createTimetableLabels() {
