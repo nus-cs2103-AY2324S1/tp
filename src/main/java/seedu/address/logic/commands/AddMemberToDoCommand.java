@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.*;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
@@ -52,6 +53,7 @@ public class AddMemberToDoCommand extends Command{
 
         Member memberToAssign = lastShownList.get(index.getZeroBased());
         assignTaskToMember(memberToAssign, addMemberToDoDescriptor);
+        model.updateFilteredMemberList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(String.format(MESSAGE_ADD_TODO_SUCCESS, Messages.format(memberToAssign)));
     }
 
