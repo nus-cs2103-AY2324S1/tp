@@ -39,9 +39,13 @@ Easily add a new contact to your list with the `add` command.
 * A contact can have any number of tags (including 0)
 * A contact can have any number of alternate contacts (including 0)
 
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+The format for alternate contact is "Type of alternate contact": "Name of alternate contact"
+</div>
+
 **Examples:**
 - `add n/John Doe p/98765432 e/john.doe@email.com`
-- `add n/John Doe p/98765432 e/john.doe@email.com o/CS2103 Prof. t/NUS t/CS2103 course a/Telegram@JohnDoe`
+- `add n/John Doe p/98765432 e/john.doe@email.com o/CS2103 Prof. t/NUS t/CS2103 course a/Telegram: JohnDoe`
 
 ---
 

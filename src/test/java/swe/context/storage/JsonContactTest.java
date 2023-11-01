@@ -156,7 +156,7 @@ public class JsonContactTest {
     @Test
     public void toModelType_invalidAlternateContacts_throwsIllegalValueException() {
         List<JsonAlternateContact> invalidAlternateContacts = new ArrayList<>(VALID_ALTERNATECONTACTS);
-        invalidAlternateContacts.add(new JsonAlternateContact(TestData.Invalid.AlternateContact.WHITESPACE));
+        invalidAlternateContacts.add(new JsonAlternateContact(TestData.Invalid.AlternateContact.WHITESPACE_IN_NAME));
         JsonContact contact = new JsonContact(
                 VALID_NAME,
                 VALID_PHONE,

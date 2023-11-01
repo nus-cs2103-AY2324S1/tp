@@ -25,27 +25,27 @@ public class SampleContactsUtil {
             new Contact(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
                 new Note("CS2103 tutorial mate."),
                 getTagSet("friends"),
-                getAlternateContactSet("Example@Alexyeoh")),
+                getAlternateContactSet("Example: Alexyeoh")),
             new Contact(new Name("Bernice Yu"), new Phone("99272758"), new Email("berniceyu@example.com"),
                 new Note("CS2103 tutorial mate."),
                 getTagSet("colleagues", "friends"),
-                getAlternateContactSet("Example@berniceyu123")),
+                getAlternateContactSet("Example: berniceyu123")),
             new Contact(new Name("Charlotte Oliveiro"), new Phone("93210283"), new Email("charlotte@example.com"),
                 new Note("CS2103 tutorial mate."),
                 getTagSet("neighbours"),
-                getAlternateContactSet("Example@Charlotte21")),
+                getAlternateContactSet("Example: Charlotte21")),
             new Contact(new Name("David Li"), new Phone("91031282"), new Email("lidavid@example.com"),
                 new Note("CS2103 tutorial mate."),
                 getTagSet("family"),
-                getAlternateContactSet("Example@dl312")),
+                getAlternateContactSet("Example: dl312")),
             new Contact(new Name("Irfan Ibrahim"), new Phone("92492021"), new Email("irfan@example.com"),
                 new Note("CS2103 tutorial mate."),
                 getTagSet("classmates"),
-                getAlternateContactSet("Example@IrfanIbrahim")),
+                getAlternateContactSet("Example: IrfanIbrahim")),
             new Contact(new Name("Roy Balakrishnan"), new Phone("92624417"), new Email("royb@example.com"),
                 new Note("CS2103 tutorial mate."),
                 getTagSet("colleagues"),
-                getAlternateContactSet("Example@RoyBalakrishnan"))
+                getAlternateContactSet("Example: RoyBalakrishnan"))
         };
     }
 
