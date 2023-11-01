@@ -130,7 +130,8 @@ public abstract class AbstractEditCommand<T extends ListEntry<? extends T>> exte
     }
     protected void validateEditedAndWriteBack() throws CommandException {
         if (edited.equals(original)) {
-            throw new CommandException("No edit detected. Please edit at least one field: "+ editableFieldsInfo() + " to different value.");
+            throw new CommandException("No edit detected. Please edit at least one field: "
+                    + editableFieldsInfo() + " to different value.");
         }
         try {
             deleteMethod.accept(original);
@@ -141,7 +142,8 @@ public abstract class AbstractEditCommand<T extends ListEntry<? extends T>> exte
             try {
                 addMethod.accept(original);
             } catch (Exception e) {
-                throw new CommandException("Internal Error, clash detected for edited entry and error adding deleted original entry back. original: "
+                throw new CommandException("Internal Error, clash detected for edited entry and"
+                        + " error adding deleted original entry back. original: "
                         + original.toString() + " edited: " + edited.toString() + ".");
             }
             throw new CommandException("Clash detected, edited: " + edited.toString() + " clashes with: "

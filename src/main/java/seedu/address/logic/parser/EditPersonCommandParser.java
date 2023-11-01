@@ -1,12 +1,10 @@
 package seedu.address.logic.parser;
 
-import seedu.address.logic.commands.EditLessonCommand;
+import static seedu.address.logic.parser.TypeParsingUtil.getValueImmediatelyAfterCommandName;
+
 import seedu.address.logic.commands.EditPersonCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.lessons.Lesson;
 import seedu.address.model.person.Person;
-
-import static seedu.address.logic.parser.TypeParsingUtil.getValueImmediatelyAfterCommandName;
 
 /**
  * Parses input arguments and creates a new EditCommand object

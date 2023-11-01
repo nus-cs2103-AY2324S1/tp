@@ -28,7 +28,7 @@ public class AddLessonCommandParser implements Parser<AddLessonCommand> {
      * @return a lesson object
      * @throws ParseException if the user input is of wrong format or the lesson clashes with existing lessons
      */
-    public static Lesson parseLesson(String args) throws ParseException{
+    public static Lesson parseLesson(String args) throws ParseException {
         try {
             Lesson lesson = Lesson.getDefaultLesson();
             lesson.setNameIfNotDefault(parseField("name", args, Name::of, false));
