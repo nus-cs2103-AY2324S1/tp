@@ -2,8 +2,6 @@ package networkbook.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
-import java.util.Collections;
-
 import networkbook.commons.core.index.Index;
 import networkbook.logic.Messages;
 import networkbook.logic.commands.edit.EditAction;
