@@ -2,6 +2,7 @@ package seedu.address.model.person;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
+import static seedu.address.model.person.Payroll.DECIMAL_FORMAT;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,6 +43,14 @@ public class Deduction extends Payment {
 
     public Reason getReason() {
         return reason;
+    }
+
+    public String getDeductString() {
+        return DECIMAL_FORMAT.format(this.getDeduct());
+    }
+
+    public Double getDeduct() {
+        return Double.parseDouble(this.value);
     }
 
     /**

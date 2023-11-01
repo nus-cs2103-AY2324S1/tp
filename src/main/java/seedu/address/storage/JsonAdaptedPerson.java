@@ -3,6 +3,7 @@ package seedu.address.storage;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -15,6 +16,7 @@ import seedu.address.model.person.BankAccount;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.JoinDate;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.Payroll;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Salary;
@@ -37,7 +39,7 @@ class JsonAdaptedPerson {
     private final String salary;
     private final String annualLeave;
     private final ArrayList<String> attendanceStorage;
-    private final ArrayList<String> payrollStorage;
+    private final List<JsonAdaptedPayroll> payrolls = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
@@ -48,7 +50,7 @@ class JsonAdaptedPerson {
             @JsonProperty("bankAccount") String bankAccount, @JsonProperty("joinDate") String joinDate,
             @JsonProperty("salary") String salary, @JsonProperty("annualLeave") String annualLeave,
             @JsonProperty("attendanceStorage") ArrayList<String> attendanceStorage,
-            @JsonProperty("payrollStorage") ArrayList<String> payrollStorage) {
+            @JsonProperty("payrolls") List<JsonAdaptedPayroll> payrolls) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -58,7 +60,7 @@ class JsonAdaptedPerson {
         this.salary = salary;
         this.annualLeave = annualLeave;
         this.attendanceStorage = attendanceStorage;
-        this.payrollStorage = payrollStorage;
+        this.payrolls.addAll(payrolls);
     }
 
     /**
@@ -74,7 +76,10 @@ class JsonAdaptedPerson {
         salary = source.getSalary().value;
         attendanceStorage = source.getAttendanceStorage().getValue();
         annualLeave = source.getAnnualLeave().toString();
-        payrollStorage = source.getPayrollStorage().getValue();
+        payrolls.addAll(source.getPayrollStorage().getPayrolls()
+                .stream()
+                .map(JsonAdaptedPayroll::new)
+                .collect(Collectors.toList()));
     }
 
     /**
@@ -85,6 +90,10 @@ class JsonAdaptedPerson {
      *                               the adapted person.
      */
     public Person toModelType() throws IllegalValueException {
+        final ArrayList<Payroll> personPayrolls = new ArrayList<>();
+        for (JsonAdaptedPayroll payroll: payrolls) {
+            personPayrolls.add(payroll.toModelType());
+        }
 
         if (name == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
@@ -141,7 +150,7 @@ class JsonAdaptedPerson {
 
         final AttendanceStorage modelAttendanceStorage = new AttendanceStorage(attendanceStorage);
 
-        final PayrollStorage modelPayrollStorage = new PayrollStorage(payrollStorage);
+        final PayrollStorage modelPayrollStorage = new PayrollStorage(personPayrolls);
 
         return new Person(modelName, modelPhone, modelEmail, modelAddress, modelBankAccount, modelJoinDate, modelSalary,
                 modelAnnualLeave, modelAttendanceStorage, modelPayrollStorage);

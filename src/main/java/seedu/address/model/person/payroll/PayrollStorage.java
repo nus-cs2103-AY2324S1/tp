@@ -12,12 +12,16 @@ public class PayrollStorage {
         this.payrolls = new ArrayList<>();
     }
 
-    public PayrollStorage(ArrayList<String> payrolls) {
-        this();
+    public PayrollStorage(ArrayList<Payroll> payrolls) {
+        this.payrolls = payrolls;
     }
 
     public void add(Payroll payroll) {
         this.payrolls.add(payroll);
+    }
+
+    public ArrayList<Payroll> getPayrolls() {
+        return this.payrolls;
     }
 
     public Payroll getLatestPayroll() {

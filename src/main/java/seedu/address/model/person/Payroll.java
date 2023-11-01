@@ -30,6 +30,13 @@ public class Payroll {
         this.paymentDate = localDate.plusMonths(1).withDayOfMonth(5);
     }
 
+    public Payroll(Salary salary, String startDate, String endDate, String paymentDate) {
+        this.salary = salary;
+        this.startDate = LocalDate.parse(startDate,DATE_TIME_FORMATTER);
+        this.endDate = LocalDate.parse(endDate, DATE_TIME_FORMATTER);
+        this.paymentDate = LocalDate.parse(paymentDate, DATE_TIME_FORMATTER);
+    }
+
     /**
      * Calculates the net salary of a person.
      * @return net salary.
@@ -164,6 +171,10 @@ public class Payroll {
      */
     public String calculatePayrollString() {
         return this.salary.getNetSalaryString();
+    }
+
+    public Salary getSalary() {
+        return this.salary;
     }
 
     @Override
