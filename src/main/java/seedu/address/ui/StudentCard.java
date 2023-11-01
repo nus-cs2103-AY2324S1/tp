@@ -1,7 +1,5 @@
 package seedu.address.ui;
 
-import java.util.Comparator;
-
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
@@ -51,9 +49,27 @@ public class StudentCard extends UiPart<Region> {
         name.setText(student.getName().fullName);
         phone.setText(student.getPhone().value);
         address.setText(student.getAddress().value);
-        student.getTags().stream()
-                .sorted(Comparator.comparing(tag -> tag.riskLevel))
-                .forEach(tag -> tags.getChildren().add(new Label(tag.riskLevel)));
+
+        student.getTags().forEach(tag -> {
+            Label tagLabel = new Label(tag.riskLevel);
+            tagLabel.getStyleClass().add(getTagStyleClass(tag.riskLevel));
+            tags.getChildren().add(tagLabel);
+        });
+
         note.setText(student.getNote().value);
     }
+
+    private String getTagStyleClass(String riskLevel) {
+        switch (riskLevel) {
+        case "low":
+            return "low-risk-tag";
+        case "medium":
+            return "medium-risk-tag";
+        case "high":
+            return "high-risk-tag";
+        default:
+            return "";
+        }
+    }
+
 }

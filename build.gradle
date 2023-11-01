@@ -67,7 +67,7 @@ dependencies {
 }
 
 shadowJar {
-    archiveFileName = 'wellNus.jar'
+    archiveFileName = 'wellnus.jar'
 }
 
 defaultTasks 'clean', 'test'

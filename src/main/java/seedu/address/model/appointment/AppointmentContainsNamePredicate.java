@@ -1,4 +1,4 @@
-package seedu.address.model.student;
+package seedu.address.model.appointment;
 
 import java.util.List;
 import java.util.function.Predicate;
@@ -7,19 +7,19 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.commons.util.ToStringBuilder;
 
 /**
- * Tests that a {@code Student}'s {@code Name} matches any of the keywords given.
+ * Tests that a {@code Appointment}'s {@code Name} matches any of the keywords given.
  */
-public class NameContainsKeywordsPredicate implements Predicate<Student> {
+public class AppointmentContainsNamePredicate implements Predicate<Appointment> {
     private final List<String> keywords;
 
-    public NameContainsKeywordsPredicate(List<String> keywords) {
+    public AppointmentContainsNamePredicate(List<String> keywords) {
         this.keywords = keywords;
     }
 
     @Override
-    public boolean test(Student student) {
+    public boolean test(Appointment appointment) {
         return keywords.size() == 0 ? false : keywords.stream()
-                .allMatch(keyword -> StringUtil.containsWordIgnoreCase(student.getName().fullName, keyword));
+                .allMatch(keyword -> StringUtil.containsWordIgnoreCase(appointment.getName().fullName, keyword));
     }
 
     @Override
@@ -29,12 +29,12 @@ public class NameContainsKeywordsPredicate implements Predicate<Student> {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof NameContainsKeywordsPredicate)) {
+        if (!(other instanceof AppointmentContainsNamePredicate)) {
             return false;
         }
 
-        NameContainsKeywordsPredicate otherNameContainsKeywordsPredicate = (NameContainsKeywordsPredicate) other;
-        return keywords.equals(otherNameContainsKeywordsPredicate.keywords);
+        AppointmentContainsNamePredicate otherPredicate = (AppointmentContainsNamePredicate) other;
+        return keywords.equals(otherPredicate.keywords);
     }
 
     @Override

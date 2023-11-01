@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.ViewCommandParser.ALL_CATEGORY;
 import static seedu.address.logic.parser.ViewCommandParser.APPOINTMENT_CATEGORY;
 import static seedu.address.logic.parser.ViewCommandParser.STUDENT_CATEGORY;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_APPOINTMENTS;
@@ -20,13 +21,15 @@ public class ViewCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": View which data you want to see\n"
-            + "Parameters: data category (must be 'students' or 'appointments') "
+            + "Parameters: data category (must be 'students', 'appointments' or 'all') "
             + "g/ [DATA_CATEGORY]\n"
             + "Example: " + COMMAND_WORD + " g/appointments ";
 
     public static final String MESSAGE_SUCCESS_APPOINTMENT = "Listed all appointments";
 
     public static final String MESSAGE_SUCCESS_STUDENT = "Listed all students";
+
+    public static final String MESSAGE_SUCCESS_ALL = "Listed all students and appointments";
 
     public static final String MESSAGE_ARGUMENTS = "Data chosen: %1$s";
 
@@ -39,12 +42,16 @@ public class ViewCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        if (this.category.equals(STUDENT_CATEGORY)) {
+        if (category.equals(STUDENT_CATEGORY)) {
             model.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
             return new CommandResult(MESSAGE_SUCCESS_STUDENT);
-        } else if (this.category.equals(APPOINTMENT_CATEGORY)) {
+        } else if (category.equals(APPOINTMENT_CATEGORY)) {
             model.updateFilteredAppointmentList(PREDICATE_SHOW_ALL_APPOINTMENTS);
             return new CommandResult(MESSAGE_SUCCESS_APPOINTMENT);
+        } else if (category.equals(ALL_CATEGORY)) {
+            model.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
+            model.updateFilteredAppointmentList(PREDICATE_SHOW_ALL_APPOINTMENTS);
+            return new CommandResult(MESSAGE_SUCCESS_ALL);
         } else {
             throw new CommandException(String.format(MESSAGE_ARGUMENTS, category));
         }

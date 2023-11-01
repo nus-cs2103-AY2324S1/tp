@@ -54,6 +54,10 @@ public class Date {
         return value;
     }
 
+    public LocalDate getLocalDate() {
+        return localDate;
+    }
+
     @Override
     public String toString() {
         return value;

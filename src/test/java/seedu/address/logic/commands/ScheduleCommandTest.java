@@ -113,13 +113,19 @@ public class ScheduleCommandTest {
         }
 
         @Override
+        public boolean hasOverlapsWithAppointments(Appointment appointment) {
+            requireNonNull(appointment);
+            return appointmentsAdded.stream().anyMatch(appointment::isOverlappingAppointment);
+        }
+
+        @Override
         public void addAppointment(Appointment appointment) {
             requireNonNull(appointment);
             appointmentsAdded.add(appointment);
         }
 
         @Override
-        public ReadOnlyWellNus getAddressBook() {
+        public ReadOnlyWellNus getWellNusData() {
             return new WellNus();
         }
     }
