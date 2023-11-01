@@ -8,7 +8,7 @@ It is optimised for use via a **Command Line Interface** (CLI) while still havin
 If you can type fast, WellNUS can get your contact management tasks done faster than traditional GUI apps.
 
 * Table of Contents
-  {:toc}
+{:toc}
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -18,20 +18,19 @@ If you can type fast, WellNUS can get your contact management tasks done faster 
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-1. Download the latest `wellnus.jar` from [here](https://github.com/AY2324S1-CS2103T-W13-4/tp).
+2. Download the latest `wellnus.jar` from [here](https://github.com/AY2324S1-CS2103T-W13-4/tp).
 
-1. Copy the file to the folder you want to use as the _home folder_ for WellNUS.
+3. Copy the file to the folder you want to use as the _home folder_ for WellNUS.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar wellnus.jar` command to run the application.<br>
+4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar wellnus.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
    * `exit` : Exits the app.
-
-1. Refer to the [Features](#features) below for details of each command.
+6. Refer to the [Features](#features) below for details of each command.
 
 #### 1.2 Prefixes and parameters used in commands
 
@@ -114,6 +113,7 @@ Format: `note STUDENT_INDEX note/NOTE`
 #### 2.2.4 Editing a Student: `edit`
 
 #### 2.2.5 Viewing all Students: `view`
+
 Shows a list of all available students or appointments, depending on specified input.
 
 Format: `view g/CATEGORY`
@@ -122,7 +122,9 @@ Format: `view g/CATEGORY`
 1. Category
     - Only 'students', 'appointments' or 'all'
 
-    
+Examples:
+* `view g/students`
+
 #### 2.2.6 Finding Students by Name: `find`
 
 Find students and their related appointments based on their name. Can choose to find student based on their first name, last name or full name
@@ -139,7 +141,6 @@ Student Name: Roy Lee
 * "find Ro" does not work
 * "find Le" does not work
 * "find Roy L" does not work
-
 
 #### 2.2.7 Assigning risk status to student: `tag`
 
@@ -159,11 +160,15 @@ Examples:
 
 ### 2.3 Appointment Commands
 
+<div markdown="span" class="alert alert-info">:information_source: **Note:**
+Appointments will be automatically sorted by Date and Time in ascending order.
+</div>
+
 #### 2.3.1 Scheduling an Appointment: `schedule`
 
 Schedules a new appointment for a student.
 
-Format: `schedule n/STUDENT_NAME date/DATE from/START_TIME to/END_TIME d/DESCRIPTION`
+Format: `schedule n/NAME_OF_STUDENT date/DATE from/START_TIME to/END_TIME d/DESCRIPTION`
 
 **Parameters**:
 1. Name
@@ -172,11 +177,12 @@ Format: `schedule n/STUDENT_NAME date/DATE from/START_TIME to/END_TIME d/DESCRIP
     - Must be in the following format: `yyyy-MM-dd`
 3. Start/End Time
     - Must be in the following format: `HH:mm`
+4. Description
+   - Description should have a minimum length of 1 character and maximum length of 100 characters
 
 Examples:
 - `schedule n/Jon date/2023-12-30 from/16:30 to/17:30 d/monthly check-up`
 - `schedule n/Yin Kiat date/2023-01-09 from/07:00 to/10:45 d/first counselling session`
-
 
 #### 2.3.2 Cancelling an Appointment: `cancel`
 
@@ -201,10 +207,24 @@ Format: `view g/CATEGORY`
 1. Category
    - Only 'students', 'appointments' or 'all'
 
+Examples:
+* `view g/appointments`
+
 #### 2.3.4 Filtering Appointments by Date: `filter`
 
+Filters appointments based on given date. 
+
+Format: `filter DATE`
+
+**Parameters**
+1. Date
+    - Date should follow yyyy-MM-dd format
+
+Examples:
+* `filter 2023-10-16`
 
 ### 2.4 Others
+
 #### 2.4.1 Exiting the program: `exit`
 
 Exits the program.
@@ -213,7 +233,11 @@ Format: `exit`
 
 #### 2.4.2 Clearing storage: `clear`
 
-### 2.4.3 Saving the data
+Resets the storage, deleting **all** Appointments and Students. 
+
+Format: `clear`
+
+#### 2.4.3 Saving the data
 
 WellNUS data is saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
@@ -224,7 +248,7 @@ WellNUS data is saved automatically as a JSON file `[JAR file location]/data/add
 If your changes to the data file makes its format invalid, WellNUS will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.
 </div>
 
-### 2.5 Tracking TODOS `[coming in v1.3]`
+### 2.5 Tracking TODOS `[coming in v1.4]`
 
 _Details coming soon ..._
 
@@ -257,7 +281,8 @@ _Details coming soon ..._
 | [Schedule Appointment]()   | `schedule n/STUDENT_NAME date/DATE from/START_TIME to/END_TIME d/DESCRIPTION`<br> e.g., `schedule n/Jon date/2023-12-30 from/16:30 to/17:30 d/monthly check-up` |
 | [Cancel Appointment]()     | `cancel APPOINTMENT_INDEX`<br> e.g., `cancel 3`                                                                                                                 |
 | [View Appointments]()      | `view g/CATEGORY` <br> e.g., `view g/appointments`                                                                                                              |
-| [Filter Appointments]()    |                                                                                                                                                                 |
+| [Filter Appointments]()    | `filter DATE` <br> e.g., `filter 2023-10-16`                                                                                                                    |
 | [Help]()                   | `help`                                                                                                                                                          |
 | [Exit]()                   | `exit`                                                                                                                                                          |
+
 
