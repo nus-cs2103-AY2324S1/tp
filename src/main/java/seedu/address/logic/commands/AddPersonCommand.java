@@ -82,11 +82,10 @@ public class AddPersonCommand extends Command {
             model.addLesson(lesson);
         }
         model.addPerson(toAdd);
-        if (model.getState().equals(State.STUDENT)) {
-            model.resetAllShowFields();
-            model.showPerson(toAdd);
-        }
-        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
+        model.resetAllShowFields();
+        model.setState(State.STUDENT);
+        model.showPerson(toAdd);
+        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)), State.STUDENT);
     }
 
     @Override

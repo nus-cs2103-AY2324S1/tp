@@ -83,6 +83,7 @@ public class AddressBookParser {
                 throw new ParseException("Please add tasks in the schedule list.");
             }
             break;
+
         case "edit":
             if (model.getState().equals(SCHEDULE)) {
                 commandWord = "editLesson";
