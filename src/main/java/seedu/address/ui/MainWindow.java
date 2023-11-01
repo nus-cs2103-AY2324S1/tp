@@ -95,6 +95,7 @@ public class MainWindow extends UiPart<Stage> {
 
     /**
      * Sets the accelerator of a MenuItem.
+     *
      * @param keyCombination the KeyCombination value of the accelerator
      */
     private void setAccelerator(MenuItem menuItem, KeyCombination keyCombination) {
@@ -218,8 +219,6 @@ public class MainWindow extends UiPart<Stage> {
             personProfilePlaceholder.setVisible(false);
             sendFeedback("Exiting view as requested.");
         } else {
-            sendFeedback("You did not save your changes. Are you sure you want to exit?\n" +
-                    " Yes: [Enter] No: [Esc]");
             commandBox.setInConfirmationDialog(true);
         }
     }
@@ -242,8 +241,26 @@ public class MainWindow extends UiPart<Stage> {
             } else {
                 commandResult = logic.executeInView(commandText, personProfile.getPerson(), indexOfAFostererToView);
             }
+            logger.info("Result: " + commandResult.getFeedbackToUser());
+            resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
+            if (commandResult.getCommandType() == CommandType.HELP) {
+                handleHelp();
+            }
 
-            if (personProfilePlaceholder.isVisible() && commandResult == null) {
+            if (commandResult.getCommandType() == CommandType.EXIT) {
+                handleExit();
+            }
+
+            if (commandResult.getCommandType() == CommandType.VIEW) {
+                indexOfAFostererToView = commandResult.getTargetIndex();
+                handleView(commandResult.getPersonToView());
+            }
+
+            if (commandResult.getCommandType() == CommandType.VIEW_EXIT) {
+                isSaved = commandResult.getIsFostererEdited();
+                handleViewExit();
+            }
+            if (commandResult.getCommandType() == CommandType.EDIT_FIELD) {
                 Optional<PersonProfile.Field> field = Arrays.stream(PersonProfile.Field.values())
                         .filter(f -> f.getDisplayName().toLowerCase().startsWith(commandText.toLowerCase().trim()))
                         .findFirst();
@@ -256,30 +273,6 @@ public class MainWindow extends UiPart<Stage> {
 
                 field.ifPresent(personProfile::setFocus);
             }
-
-            if (commandResult != null) {
-                logger.info("Result: " + commandResult.getFeedbackToUser());
-                resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
-                if (commandResult.getCommandType() == CommandType.HELP) {
-                    handleHelp();
-                }
-
-                if (commandResult.getCommandType() == CommandType.EXIT) {
-                    handleExit();
-                }
-
-                if (commandResult.getCommandType() == CommandType.VIEW) {
-                    indexOfAFostererToView = commandResult.getTargetIndex();
-                    handleView(commandResult.getPersonToView());
-                }
-
-                if (commandResult.getCommandType() == CommandType.VIEW_EXIT) {
-                    isSaved = commandResult.getIsFostererEdited();
-                    handleViewExit();
-                }
-
-            }
-
             return commandResult;
         } catch (CommandException | ParseException e) {
             logger.info("An error occurred while executing command: " + commandText);

@@ -19,7 +19,8 @@ import seedu.address.model.person.Person;
 public class SaveCommand extends Command {
     public static final String SAVE_COMMAND_WORD = "save";
     public static final String MESSAGE_ADD_SUCCESS = "New fosterer added: %1$s";
-    public static final String MESSAGE_FOSTERER_NOT_EDITED = "Fosterer details must be filled out.";
+    public static final String MESSAGE_DETAILS_NOT_FILLED = "Fosterer details must be filled out.";
+    public static final String MESSAGE_FOSTERER_NOT_EDITED = "No details are edited.";
 
     private Person newFosterer;
     private Index index;
@@ -43,7 +44,7 @@ public class SaveCommand extends Command {
     public SaveCommand(Person newFosterer) throws CommandException {
         super();
         if (newFosterer == null) {
-            throw new CommandException(MESSAGE_FOSTERER_NOT_EDITED);
+            throw new CommandException(MESSAGE_DETAILS_NOT_FILLED);
         }
         this.newFosterer = newFosterer;
         this.index = null;
@@ -54,10 +55,12 @@ public class SaveCommand extends Command {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
 
+        // While on add ProfilePage.
         if (index == null) {
             if (model.hasPerson(newFosterer)) {
                 throw new CommandException(MESSAGE_DUPLICATE_PERSON);
             }
+
             model.addPerson(newFosterer);
             return new CommandResult(
                     String.format(MESSAGE_ADD_SUCCESS, Messages.format(newFosterer)),
@@ -80,7 +83,7 @@ public class SaveCommand extends Command {
         }
 
         if (personToEdit.equals(editedPerson)) {
-            throw new CommandException("No details are edited.");
+            throw new CommandException(MESSAGE_FOSTERER_NOT_EDITED);
         }
 
         model.setPerson(personToEdit, editedPerson);

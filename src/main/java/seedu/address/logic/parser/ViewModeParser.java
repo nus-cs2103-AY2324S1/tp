@@ -42,7 +42,7 @@ public class ViewModeParser {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
         }
 
-        final String commandWord = matcher.group("commandWord");
+        final String commandWord = matcher.group("commandWord").toLowerCase();
 
         // Note to developers: Change the log level in config.json to enable lower level (i.e., FINE, FINER and lower)
         // log messages such as the one below.
@@ -61,7 +61,7 @@ public class ViewModeParser {
             if (targetIndex != null) {
                 return new ViewExitCommand(targetIndex, newPerson);
             } else {
-                return new ViewExitCommand();
+                return new ViewExitCommand(newPerson);
             }
 
         default:

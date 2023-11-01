@@ -9,12 +9,14 @@ import seedu.address.model.Model;
  */
 public class EditFieldCommand extends Command {
 
+    public static final String MESSAGE_SUCCESS = "Editing fosterer field";
+
     public EditFieldCommand() {
         super();
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        return null;
+        return new CommandResult(MESSAGE_SUCCESS, CommandType.EDIT_FIELD);
     }
 }
