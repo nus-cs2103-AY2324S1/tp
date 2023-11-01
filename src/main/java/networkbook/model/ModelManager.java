@@ -106,13 +106,14 @@ public class ModelManager implements Model {
     @Override
     public void deletePerson(Person target) {
         versionedNetworkBook.removePerson(target);
+        versionedNetworkBook.setFilterPredicate(PREDICATE_SHOW_ALL_PERSONS);
         versionedNetworkBook.commit();
     }
 
     @Override
     public void addPerson(Person person) {
         versionedNetworkBook.addPerson(person);
-        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        versionedNetworkBook.setFilterPredicate(PREDICATE_SHOW_ALL_PERSONS);
         versionedNetworkBook.commit();
     }
 
@@ -150,27 +151,21 @@ public class ModelManager implements Model {
         return versionedNetworkBook.openLink(personIndex, linkIndex);
     }
 
-    //=========== Filtered Person List Accessors =============================================================
+    //=========== Displayed Person List Accessors =============================================================
 
-    /**
-     * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
-     * {@code versionedNetworkBook}
-     */
     @Override
-    public ObservableList<Person> getFilteredPersonList() {
-        return filteredSortedPersons;
+    public void updateDisplayedPersonList(Predicate<Person> predicate, Comparator<Person> comparator) {
+        if (predicate != null) {
+            versionedNetworkBook.setFilterPredicate(predicate);
+        }
+        if (comparator != null) {
+            versionedNetworkBook.setSortComparator(comparator);
+        }
     }
 
     @Override
-    public void updateFilteredPersonList(Predicate<Person> predicate) {
-        requireNonNull(predicate);
-        filteredPersons.setPredicate(predicate);
-    }
-
-    @Override
-    public void updateSortedPersonList(Comparator<Person> comparator) {
-        requireNonNull(comparator);
-        filteredSortedPersons.setComparator(comparator);
+    public ObservableList<Person> getDisplayedPersonList() {
+        return versionedNetworkBook.getDisplayedPersonList();
     }
 
     @Override

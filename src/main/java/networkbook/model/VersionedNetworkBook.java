@@ -49,6 +49,7 @@ public class VersionedNetworkBook extends NetworkBook {
      */
     public void undo() {
         super.resetData(networkBookStateList.get(--currentStatePointer));
+        currentStatePointer--;
     }
 
     /**
@@ -56,6 +57,7 @@ public class VersionedNetworkBook extends NetworkBook {
      */
     public void redo() {
         super.resetData(networkBookStateList.get(++currentStatePointer));
+        currentStatePointer++;
     }
 
     /**

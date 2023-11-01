@@ -103,18 +103,16 @@ public interface Model {
      */
     Link openLink(Index personIndex, Index linkIndex) throws IOException;
 
-    /** Returns an unmodifiable view of the filtered person list */
-    ObservableList<Person> getFilteredPersonList();
+    /**
+     * Updates the displayed person list to be filtered by the given {@code predicate} if {@code predicate} is not null.
+     * Also updates the displayed person list to be sorted by the given {@code comparator} if {@code comparator} is not
+     * null.
+     */
+    void updateDisplayedPersonList(Predicate<Person> predicate, Comparator<Person> comparator);
 
     /**
-     * Updates the filter of the filtered person list to filter by the given {@code predicate}.
-     * @throws NullPointerException if {@code predicate} is null.
+     * Returns an unmodifiable view of the list of {@code Person} to be displayed,
+     * which are backed by the internal list of {@code versionedNetworkBook}.
      */
-    void updateFilteredPersonList(Predicate<Person> predicate);
-
-    /**
-     * Updates the sort of the filtered person list to sort by the given {@code comparator}.
-     * @throws NullPointerException if {@code comparator} is null.
-     */
-    void updateSortedPersonList(Comparator<Person> comparator);
+    ObservableList<Person> getDisplayedPersonList();
 }
