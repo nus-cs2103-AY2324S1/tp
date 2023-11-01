@@ -201,9 +201,11 @@ The following activity diagram summarises what happens when a user executes an e
 ### Product scope
 
 **Target user profile**: NUS SoC students, who:
-- can type fast and prefer typing
-- are reasonably comfortable with command-line inputs
-- wish to label contacts by category (e.g. classmates from certain courses, professors)
+
+- Can type fast and prefer typing
+- Are reasonably comfortable with command-line inputs
+- Wish to label contacts by category (e.g. professors, classmates from certain courses)
+- Have many different ways to reach their contacts (e.g. local/overseas phone number, NUS/personal/other university email/gmail, Telegram, Discord etc.)
 
 **Value proposition**: Manage contacts quickly via text commands, with useful features relevant to SoC students.
 

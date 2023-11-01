@@ -1,11 +1,17 @@
 ---
-
 layout: page
 title: User Guide
 ---
 
-**ConText** is a **desktop app designed for managing contacts of NUS SoC students.** ConText leverages a Command Line Interface (CLI) combined with a modern Graphical User Interface (GUI) to offer speedy contact management. If you're familiar with typing commands, you'll find ConText incredibly efficient.
-![ConText UI](images/Ui.png)
+**ConText** is a desktop app that allows for managing contacts quickly via text commands.
+It is optimised for use via an in-app Command Line Interface (CLI), while still having the benefits of a Graphical User Interface (GUI).
+
+It has useful features relevant to NUS SoC students:
+
+- Tagging contacts by category: You could tag all your professors and classmates with custom tags such as "Professor", "Tutorial mate", "CS2103" etc., then filter by tag
+- Storing different ways to reach people: By adding alternate contact details, you could have multiple phone numbers, NUS email, gmail, Telegram, Discord etc. all in the same contact
+
+If you can type fast, prefer typing, and are reasonably comfortable with CLI inputs, ConText can let you manage contacts faster than traditional GUI apps.
 
 - Table of Contents
 {:toc}
