@@ -73,7 +73,6 @@ public class EditBandCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_BAND);
         }
 
-        // update musician list to show all, update band list to show all, update bands musicians
         model.setBand(bandToEdit, editedBand);
 
         return new CommandResult(String.format(MESSAGE_EDIT_BAND_SUCCESS, Messages.format(editedBand)));
