@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.List;
 import java.util.function.Consumer;
+import java.util.function.Function;
 import java.util.function.Predicate;
 
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -31,6 +32,7 @@ public abstract class AbstractEditCommand<T extends ListEntry<? extends T>> exte
     protected Predicate<T> hasClashWith;
     protected Consumer<T> deleteMethod;
     protected Consumer<T> addMethod;
+    protected Function<T, T> getClashingEntry;
 
     /**
      * Pass in index to indicate which entry to edit
@@ -66,7 +68,7 @@ public abstract class AbstractEditCommand<T extends ListEntry<? extends T>> exte
         init();
         editFields();
         validateEditedAndWriteBack();
-        return new CommandResult("Edited : " + edited.toString());
+        return new CommandResult("edited : " + edited.toString());
     }
     /**
      * You need to override this method and set the following fields:
@@ -98,7 +100,8 @@ public abstract class AbstractEditCommand<T extends ListEntry<? extends T>> exte
             if (index == null) {
                 original = currentShownEntry;
                 if (original == null) {
-                    throw new CommandException("No entry selected or shown.");
+                    throw new CommandException("Using edit command without specifying index when no entry is shown. "
+                            + getUsageInfo() + ".");
                 }
             } else {
                 try {
@@ -124,21 +127,26 @@ public abstract class AbstractEditCommand<T extends ListEntry<? extends T>> exte
     }
     protected void validateEditedAndWriteBack() throws CommandException {
         if (edited.equals(original)) {
-            throw new CommandException("No change detected.");
+            throw new CommandException("No edit detected. Please edit at least one field: "+ editableFieldsInfo() + " to different value.");
         }
         try {
             deleteMethod.accept(original);
         } catch (Exception e) {
-            throw new CommandException("Error deleting original entry.");
+            throw new CommandException("Internal Error in deleting original entry: " + original.toString());
         }
         if (hasClashWith.test(edited)) {
             try {
                 addMethod.accept(original);
             } catch (Exception e) {
-                throw new CommandException("Clash detected and Error adding original entry back.");
+                throw new CommandException("Internal Error, clash detected for edited entry and error adding deleted original entry back. original: "
+                        + original.toString() + " edited: " + edited.toString() + ".");
             }
-            throw new CommandException("Clash detected.");
+            throw new CommandException("Clash detected, edited: " + edited.toString() + " clashes with: "
+                    + getClashingEntry.apply(edited).toString() + ".");
         }
         addMethod.accept(edited);
     }
+    abstract String editableFieldsInfo();
+    abstract String className();
+    abstract String getUsageInfo();
 }
