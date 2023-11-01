@@ -88,43 +88,30 @@ public class AddressBookParser {
             return new DeletePersonCommandParser().parse(arguments);
         case DeleteLessonCommand.COMMAND_WORD:
             return new DeleteLessonCommandParser().parse(arguments);
-
         case ShowCommand.COMMAND_WORD:
             return new ShowCommandParser().parse(arguments);
-
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
-
         case FindCommand.COMMAND_WORD:
             return new FindCommandParser().parse(arguments);
-
         case ListCommand.COMMAND_WORD:
             return new ListCommandParser().parse(arguments);
-
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
-
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
-            
         case AddLessonCommand.COMMAND_WORD:
             return new AddLessonCommandParser().parse(userInput);
-            
         case EditLessonCommand.COMMAND_WORD:
             return new EditLessonCommandParser().parse(userInput);
-            
         case LinkCommand.STATEFUL_COMMAND_WORD:
             return new LinkCommandParser(model).parse(arguments);
-            
         case LinkCommand.COMMAND_WORD:
             return new LinkCommandParser().parse(arguments);
-            
         case AddTaskCommand.COMMAND_WORD:
             return new AddTaskCommandParser().parse(userInput);
-            
         case DeleteTaskCommand.COMMAND_WORD:
             return new DeleteTaskCommandParser().parse(userInput);
-
         default:
             logger.finer("This user input caused a ParseException: " + userInput);
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
