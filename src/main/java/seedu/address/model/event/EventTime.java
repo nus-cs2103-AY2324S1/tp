@@ -10,7 +10,7 @@ import seedu.address.commons.util.DateTimeUtil;
  */
 public class EventTime {
     public static final String MESSAGE_INVALID_DATETIME_FORMAT = "Invalid date-time format! ";
-    public static final String MESSAGE_NON_EMPTY = "Event time can not be empty!";
+    public static final String MESSAGE_NON_EMPTY = "Time can not be empty!";
 
     private final LocalDateTime time;
 
@@ -28,6 +28,14 @@ public class EventTime {
      */
     public static EventTime fromString(String timeStr) throws DateTimeParseException {
         return timeStr.isEmpty() ? new EventTime() : new EventTime(timeStr);
+    }
+
+    /**
+     * Return the date-time as {@code LocalDateTime}
+     * @return The date-time as {@code LocalDateTime}
+     */
+    public LocalDateTime getTime() {
+        return this.time;
     }
 
     /**
@@ -52,5 +60,14 @@ public class EventTime {
 
         EventTime otherName = (EventTime) other;
         return time.equals(otherName.time);
+    }
+
+    /**
+     * Return {@code true} if this {@code EventTime} is after {@code other}.
+     * Always returns false when this {@code EventTime} or {@code other} contains null time
+     * @param other The other {@code EventTime}
+     */
+    public boolean isAfter(EventTime other) {
+        return this.time != null && other.time != null && this.time.isAfter(other.time);
     }
 }

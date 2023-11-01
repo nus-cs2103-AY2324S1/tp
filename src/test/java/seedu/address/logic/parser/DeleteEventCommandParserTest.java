@@ -12,7 +12,7 @@ import seedu.address.logic.commands.DeleteEventCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 
-public class DeleteCommandParserTest {
+public class DeleteEventCommandParserTest {
 
     private DeleteCommandParser parser = new DeleteCommandParser();
 

@@ -22,7 +22,7 @@ public class ListCommandParser implements Parser<ListCommand> {
         case ListNoteCommand.SECONDARY_COMMAND_WORD:
             return new ListNoteCommand();
         case ListEventCommand.SECONDARY_COMMAND_WORD:
-            return new ListEventCommand();
+            return new ListEventCommandParser().parse(args);
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }

@@ -165,9 +165,20 @@ Examples:
 
 ### Listing all events : `list events`
 
-Shows a list of all events.
+Shows a list of all events or events within a specified time interval.
 
-Format: `list events`
+Format: `list events [-descending] [-st filter_start_time] [-et filter_end_time]` (start time and end time are inclusive)
+
+Arguments `-st` and `-et` must both present or both not present.
+  - If they both not present, the application will show you all events in the address book.
+  - If they both present, the application will show you the events within the time interval.
+
+By default, the list of events are sorted by the start time in ascending order (the event with the earliest start time is in the beginning). If you want to use descending order, add `-descending` to the command.
+
+Examples
+* `list events`
+* `list events -st 2023-11-01 -et 2023-11-02`
+* `list events -descending -st 2023-11-01 -et 2023-11-02`
 
 ### Deleting an event : `delete event`
 
@@ -226,5 +237,5 @@ Action             | Format, Examples
 **List Notes**     | `list notes`
 **Add Event**      | `add event -id CONTACT_ID -en EVENT_NAME -st START_TIME [-et END_TIME] [-loc LOCATION] [-info INFORMATION]` <br> e.g., `add event -id 1 -en Meeting with professor -st 12:00 -et 01:00 -loc COM 1 Basement -info Discuss the project implementation with the professor`
 **Delete Event**   | `delete event -id CONTACT_ID -eid EVENT_ID`<br> e.g., `delete event -id 1 -eid 1`
-**List Events**    | `list events`
+**List Events**    | `list events [-descending] [-st filter_start_time] [-et filter_end_time]`<br> e.g., `list events -descending -st 2023-11-01 -et 2023-11-02`
 **Help**           | `help`
