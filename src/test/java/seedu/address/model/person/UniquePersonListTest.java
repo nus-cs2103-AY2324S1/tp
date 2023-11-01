@@ -61,6 +61,17 @@ public class UniquePersonListTest {
         uniquePersonList.add(ALICE);
         assertThrows(DuplicatePersonException.class, () -> uniquePersonList.add(ALICE));
     }
+    
+    @Test
+    public void getPerson_isInList_success() {
+        uniquePersonList.add(ALICE);
+        assertEquals(ALICE, uniquePersonList.getPerson(ALICE.getName().fullName));
+    }
+
+    @Test
+    public void getPerson_notFound_throwsPersonNotFoundException() {
+        assertThrows(PersonNotFoundException.class, () -> uniquePersonList.getPerson(ALICE.getName().fullName));
+    }
 
     @Test
     public void setPerson_nullTargetPerson_throwsNullPointerException() {

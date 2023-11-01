@@ -128,7 +128,12 @@ public class AddCommandTest {
 
         @Override
         public void addMeeting(Meeting meeting) {
+            throw new AssertionError("This method should not be called.");
+        }
 
+        @Override
+        public Person getPerson(String name) {
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override
@@ -148,7 +153,7 @@ public class AddCommandTest {
 
         @Override
         public boolean hasMeeting(Meeting meeting) {
-            return false;
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override
@@ -158,7 +163,7 @@ public class AddCommandTest {
 
         @Override
         public void deleteMeeting(Meeting target) {
-
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override
@@ -168,7 +173,7 @@ public class AddCommandTest {
 
         @Override
         public void setMeeting(Meeting target, Meeting editedMeeting) {
-
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override
@@ -178,7 +183,7 @@ public class AddCommandTest {
 
         @Override
         public ObservableList<Meeting> getFilteredMeetingList() {
-            return null;
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override
@@ -188,21 +193,23 @@ public class AddCommandTest {
 
         @Override
         public void updateFilteredMeetingList(Predicate<Meeting> predicate) {
-
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public boolean hasName(String attendeeName) {
-            return false;
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public void setViewedPersonIndex(Index person) {
-
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void setViewedMeetingIndex(Index meeting) {}
+        public void setViewedMeetingIndex(Index meeting) {
+            throw new AssertionError("This method should not be called.");
+        }
 
         @Override
         public Pair<Person, Meeting> getViewedItems() {
