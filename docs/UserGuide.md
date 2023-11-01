@@ -112,21 +112,23 @@ All planned enhancements will also be listed in the [Planned Enhancements / Know
 # Table of Contents
 1. Quick Start
 2. Features
-   - Request help [Coming Soon]
-   - Add normal contact
-   - Add alternative information to contact
-   - Edit contact information
-   - Upload contact's photo
-   - Update contact's photo
-   - Search contact
-   - List all contacts
-   - Delete normal contact
-   - Undo last action [Coming Soon]
-   - Receive upcoming birthday notifications
-   - Opt out notification [Coming soon]
-   - Track payment [Coming Soon]
-   - Change language [Coming Soon]
-3. Troubleshooting / FAQ
+   - Manage Contacts
+     - Add contact: `add`
+     - Add alternative information to contact: `addalt`
+     - Edit contact information: `edit`
+     - Update contact's photo: `updatephoto`
+     - List all contacts: `list`
+     - Delete contact: `delete`
+   - Notes
+   - Notifications
+     - Birthday notifications
+   - Payments
+   - Find Contacts
+     - Basic Filtering
+     - Advanced Filtering
+3. FAQ
+4. Planned Enhancements / Known Issues
+5. Command summary
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -187,7 +189,7 @@ All planned enhancements will also be listed in the [Planned Enhancements / Know
 
 ## Manage Contacts
 
-### Add normal contact
+### Add contact: `add`
 
 Add a new contact with basic details like name, phone number, email, and address.
 
@@ -217,9 +219,7 @@ Examples
     * Adds a contact named "Betsy Crowe" with the email "betsycrowe@example.com", address "Newgate Prison", phone "1234567", and two tags "friend" and "colleague"
 
 
-
-
-###  Add alternative information to contact
+###  Add alternative information to contact: `addalt`
 
 Adds alternative contact information to an existing contact.
 
@@ -243,7 +243,7 @@ Examples:
 * `addalt 1 li/john-doe-b9a38128a`
     * Adds John Doe's linkedin "john-doe-b9a38128a"
 
-###  Edit contact information
+###  Edit contact information: `edit`
 
 Edits contact information of an existing contact.
 
@@ -276,7 +276,7 @@ Examples:
 You are not allowed to edit any alternative contact information, i.e. `TELEGRAM`, `SECONDARY_EMAIL`, `LINKEDIN`, `BIRTHDAY` if any of these fields are empty. You will receive an error message that directs you to use [**`addalt`**](#add-alternative-information-to-contact) command.
 </box>
 
-###  Update contact's photo
+###  Update contact's photo: `updatephoto`
 
 Updates the photo of an existing contact.
 
@@ -293,13 +293,13 @@ Examples:
 You are required to input the absolute path to the photo for this command. If you use an invalid path, a default photo will be chosen for your specified contact.
 </box>
 
-###  List all contacts
+###  List all contacts: `list`
 
 Shows a list of all contacts.
 
 Format: `list`
 
-###  Delete normal contact
+###  Delete contact: `delete`
 
 Deletes an existing contact from the address book.
 
