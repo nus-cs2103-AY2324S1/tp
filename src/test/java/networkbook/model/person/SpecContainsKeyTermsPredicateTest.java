@@ -98,7 +98,7 @@ public class SpecContainsKeyTermsPredicateTest {
     }
 
     @Test
-    public void test_courseDoesNotContainKeyTerms_returnsFalse() {
+    public void test_doesNotContainKeyTerms_returnsFalse() {
         // Zero key terms
         SpecContainsKeyTermsPredicate predicate = new SpecContainsKeyTermsPredicate(Collections.emptyList());
         assertFalse(predicate.test(
