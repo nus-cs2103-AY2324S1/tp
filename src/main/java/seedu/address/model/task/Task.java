@@ -1,6 +1,7 @@
 package seedu.address.model.task;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -19,6 +20,13 @@ public class Task {
         this.deadline = new Deadline(deadline);
     }
 
+    public Task(TaskDescription description, Deadline deadline) {
+        requireAllNonNull(description, deadline);
+
+        this.description = description;
+        this.deadline = deadline;
+    }
+
     public TaskDescription getDescription() {
         return description;
     }
@@ -33,23 +41,6 @@ public class Task {
 
     public String getDeadlineString() {
         return deadline.getFormattedDeadline();
-    }
-
-    public static class TaskDeadlineComparator implements Comparator<Task> {
-        @Override
-        public int compare(Task task1, Task task2) {
-            int firstResult = task1.deadline.compareTo(task2.deadline);
-            if (firstResult == 0) {
-                return new TaskDescriptorComparator().compare(task1, task2);
-            }
-            return firstResult;
-        }
-    }
-
-    public static class TaskDescriptorComparator implements Comparator<Task> {
-        public int compare(Task task1, Task task2) {
-            return task1.getDescription().compareTo(task2.getDescription());
-        }
     }
 
     @Override
@@ -67,5 +58,32 @@ public class Task {
         boolean descriptionMatches = description.equals(otherTask.description);
         boolean deadlineMatches = deadline.equals(otherTask.deadline);
         return descriptionMatches && deadlineMatches;
+    }
+
+    public static class TaskDeadlineComparator implements Comparator<Task> {
+        @Override
+        public int compare(Task task1, Task task2) {
+            int firstResult = task1.deadline.compareTo(task2.deadline);
+            if (firstResult == 0) {
+                return new TaskDescriptorComparator().compare(task1, task2);
+            }
+            return firstResult;
+        }
+
+        @Override
+        public boolean equals(Object other) {
+            return other instanceof TaskDeadlineComparator;
+        }
+    }
+
+    public static class TaskDescriptorComparator implements Comparator<Task> {
+        public int compare(Task task1, Task task2) {
+            return task1.getDescription().compareTo(task2.getDescription());
+        }
+
+        @Override
+        public boolean equals(Object other) {
+            return other instanceof TaskDescriptorComparator;
+        }
     }
 }

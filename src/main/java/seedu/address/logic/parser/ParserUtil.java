@@ -168,7 +168,7 @@ public class ParserUtil {
      * @param startDate start date string in 'yyyy-MM-dd HH:mm' format.
      * @param endDate end date string in 'yyyy-MM-dd HH:mm' format.
      * @return EventPeriod object describing the time period between startDate and endDate.
-     * @throws ParseException if the startDate or endDate strings are in inproper format.
+     * @throws ParseException if the startDate or endDate strings are in improper format.
      */
     public static EventPeriod parseEventPeriod(String startDate, String endDate) throws ParseException {
         requireAllNonNull(startDate, endDate);

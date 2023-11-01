@@ -4,6 +4,7 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.task.Task;
+import seedu.address.model.task.exceptions.DuplicateTaskException;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT_DESCRIPTION;
@@ -33,6 +34,9 @@ public class AddTaskCommand extends Command {
             + "    -'dd' is the day.\n"
             + "    -'HH:mm' is the time in 24-hour format.";
 
+    public static final String MESSAGE_DUPLICATE_TASK = "This task already exists!\n"
+            + "Task to add: %s";
+
     private final Task toAdd;
 
     public AddTaskCommand(Task task) {
@@ -44,7 +48,13 @@ public class AddTaskCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        return null;
+        try {
+            model.addTask(toAdd);
+        } catch (DuplicateTaskException e) {
+            throw new CommandException(String.format(MESSAGE_DUPLICATE_TASK, toAdd.toString()));
+        }
+
+        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd.toString()));
     }
 
     @Override

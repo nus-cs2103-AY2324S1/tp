@@ -22,6 +22,7 @@ import seedu.address.model.event.EventPeriod;
 import seedu.address.model.event.exceptions.EventNotFoundException;
 import seedu.address.model.person.Person;
 import seedu.address.model.task.ReadOnlyTaskManager;
+import seedu.address.model.task.Task;
 import seedu.address.model.task.TaskManager;
 
 /**
@@ -139,7 +140,7 @@ public class ModelManager implements Model {
         addressBook.setPerson(target, editedPerson);
     }
 
-    //=========== Sorted Person List Accessors =============================================================
+    //=========== Sorted Person List Accessors ===============================================================
     @Override
     public void sortPersonList(Comparator<Person> personComparator) {
         addressBook.sortPersons(personComparator);
@@ -211,7 +212,24 @@ public class ModelManager implements Model {
         calendar.deleteEventsInRange(range);
     }
 
+    //=========== TaskManager ================================================================================
 
+    @Override
+    public TaskManager getTaskManager() {
+        return taskManager;
+    }
+
+    @Override
+    public void addTask(Task task) {
+        requireNonNull(task);
+
+        taskManager.addTask(task);
+    }
+
+    @Override
+    public Task deleteTask(int index) {
+        return taskManager.deleteTask(index);
+    }
 
     //=========== Filtered Person List Accessors =============================================================
 
@@ -244,6 +262,7 @@ public class ModelManager implements Model {
         ModelManager otherModelManager = (ModelManager) other;
         return addressBook.equals(otherModelManager.addressBook)
                 && calendar.equals(otherModelManager.calendar)
+                && taskManager.equals(otherModelManager.taskManager)
                 && userPrefs.equals(otherModelManager.userPrefs)
                 && filteredPersons.equals(otherModelManager.filteredPersons);
     }

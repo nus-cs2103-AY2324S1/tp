@@ -16,7 +16,7 @@ public class TaskDescription implements Comparable<TaskDescription> {
      *
      * @param description A String representing the description of the task.
      */
-    TaskDescription(String description) {
+    public TaskDescription(String description) {
         requireNonNull(description);
         if (!isValidDescription(description)) {
             throw new InvalidTaskDescriptionException();

@@ -13,6 +13,7 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalTasks.getTypicalTaskManager;
 
 import org.junit.jupiter.api.Test;
 
@@ -27,7 +28,8 @@ import seedu.address.model.person.Person;
 
 public class AddContactEventCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), getTypicalCalendar(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalAddressBook(), getTypicalCalendar(), getTypicalTaskManager(),
+            new UserPrefs());
 
     @Test
     public void execute_addEvent_success() {
@@ -38,7 +40,7 @@ public class AddContactEventCommandTest {
         String expectedMessage = String.format(AddContactEventCommand.MESSAGE_ADD_EVENT_TO_PERSON_SUCCESS,
                 person.getName(), Messages.format(event));
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()),
-                model.getCalendar(), new UserPrefs());
+                model.getCalendar(), model.getTaskManager(), new UserPrefs());
         expectedModel.setPerson(model.getFilteredPersonList().get(0), person);
 
         assertCommandSuccess(addContactEventCommand, model, expectedMessage, expectedModel);

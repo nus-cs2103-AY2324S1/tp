@@ -14,7 +14,6 @@ import seedu.address.model.task.exceptions.DuplicateTaskException;
 import seedu.address.model.task.exceptions.TaskNotFoundException;
 
 public class TaskList implements Iterable<Task> {
-    private Comparator<Task> sortingOrder = new Task.TaskDeadlineComparator();
     private final ObservableList<Task> internalList = FXCollections.observableArrayList();
     private final ObservableList<Task> internalUnmodifiableList =
             FXCollections.unmodifiableObservableList(internalList);
@@ -51,6 +50,10 @@ public class TaskList implements Iterable<Task> {
         }
     }
 
+    public Task remove(int index) {
+        return internalList.remove(index - 1);
+    }
+
     public void setTasks(TaskList replacement) {
         requireNonNull(replacement);
         internalList.setAll(replacement.internalList);
@@ -71,7 +74,7 @@ public class TaskList implements Iterable<Task> {
     /**
      * Sorts tasks in the list according to the current sorting order setting of the list.
      */
-    public void sortTasks() {
+    public void sortTasks(Comparator<Task> sortingOrder) {
         internalList.setAll(new SortedList<Task>(internalList, sortingOrder));
     }
 
@@ -121,19 +124,5 @@ public class TaskList implements Iterable<Task> {
     @Override
     public Iterator<Task> iterator() {
         return internalList.iterator();
-    }
-
-    /**
-     * Sets the sorting order setting to sort by deadline.
-     */
-    public void setSortDeadline() {
-        sortingOrder = new Task.TaskDeadlineComparator();
-    }
-
-    /**
-     * Sets the sorting order setting to sort by description.
-     */
-    public void setSortDescription() {
-        sortingOrder = new Task.TaskDescriptorComparator();
     }
 }
