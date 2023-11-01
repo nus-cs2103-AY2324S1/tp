@@ -29,7 +29,6 @@ public class PersonCard extends UiPart<Region> {
     private static final String GRADUATION_HEADER = "Graduation: ";
     private static final String COURSE_HEADER = "Courses: ";
     private static final String SPECIALISATION_HEADER = "Specialisations: ";
-    private static final String PRIORITY_HEADER = "Priority: ";
     private static final String FIELD_WITH_INDEX_FORMAT = "%d) %s";
 
     private static final Logger LOGGER = Logger.getLogger("PersonCard");
