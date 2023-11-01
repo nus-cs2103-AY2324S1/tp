@@ -27,7 +27,7 @@
         <Label fx:id="name" text="\$first" styleClass="cell_big_label" />
       </HBox>
       <FlowPane fx:id="tags" />
-      <Label fx:id="fieldLabel" styleClass="cell_small_label" text="\$fieldToRead" />
+      <Label fx:id="fieldLabel" styleClass="cell_small_label" text="\$fieldToRead" wrapText="true"/>
     </VBox>
   </GridPane>
 </HBox>

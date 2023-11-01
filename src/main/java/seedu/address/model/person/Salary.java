@@ -18,6 +18,8 @@ public class Salary extends Payment {
      */
     public Salary(String salary) {
         super(salary);
+        this.deductions = new ArrayList<>();
+        this.benefits = new ArrayList<>();
     }
 
     /**
@@ -269,6 +271,14 @@ public class Salary extends Payment {
      */
     public double getGrossPay() {
         return getBasicSalary() + getTotalAllowancesExceptBonuses();
+    }
+
+    public ArrayList<Deduction> getDeductions() {
+        return this.deductions;
+    }
+
+    public ArrayList<Benefit> getBenefits() {
+        return this.benefits;
     }
 
     @Override

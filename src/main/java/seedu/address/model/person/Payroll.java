@@ -31,6 +31,30 @@ public class Payroll {
     }
 
     /**
+     * Constructs a {@code Payroll}.
+     *
+     * @param salary This contains the details of the person's salary.
+     *               E.g. basic salary, deductions and bonuses.
+     * @param startDate The start date of the payroll.
+     * @param endDate The end date of the payroll.
+     * @param paymentDate The payment date of the payroll.
+     */
+    public Payroll(Salary salary, String startDate, String endDate, String paymentDate) {
+        this.salary = salary;
+        this.startDate = LocalDate.parse(startDate, DATE_TIME_FORMATTER);
+        this.endDate = LocalDate.parse(endDate, DATE_TIME_FORMATTER);
+        this.paymentDate = LocalDate.parse(paymentDate, DATE_TIME_FORMATTER);
+    }
+
+    public void addDeduction(Deduction deduction) {
+        this.salary.addDeduction(deduction);
+    }
+
+    public void addBenefit(Benefit benefit) {
+        this.salary.addBenefit(benefit);
+    }
+
+    /**
      * Calculates the net salary of a person.
      * @return net salary.
      */
@@ -164,6 +188,18 @@ public class Payroll {
      */
     public String calculatePayrollString() {
         return this.salary.getNetSalaryString();
+    }
+
+    public Salary getSalary() {
+        return this.salary;
+    }
+
+    public String getDeductionsString() {
+        return this.salary.getDeductionsString();
+    }
+
+    public String getBenefitsString() {
+        return this.salary.getBenefitsString();
     }
 
     @Override

@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SLASH;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
@@ -34,15 +35,15 @@ public class ReadCommandParser implements Parser<ReadCommand> {
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, ReadCommand.MESSAGE_USAGE));
         }
 
-        String[] fields = trimmedArgs.split("/");
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_SLASH);
 
-        if (fields.length < 2) {
+        if (argMultimap.getValue(PREFIX_SLASH).isEmpty()) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, ReadCommand.MESSAGE_USAGE));
         }
 
-        Index index = ParserUtil.parseIndex(fields[0].trim());
-        String fieldName = fieldNameToString(fields[1]);
+        Index index = ParserUtil.parseIndex(argMultimap.getPreamble());
+        String fieldName = fieldNameToString(argMultimap.getValue(PREFIX_SLASH).get());
         return new ReadCommand(index, fieldName);
     }
 

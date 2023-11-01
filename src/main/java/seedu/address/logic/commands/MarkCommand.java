@@ -24,7 +24,7 @@ import seedu.address.model.person.Phone;
 import seedu.address.model.person.Salary;
 import seedu.address.model.person.attendance.AttendanceStorage;
 import seedu.address.model.person.attendance.AttendanceType;
-
+import seedu.address.model.person.payroll.PayrollStorage;
 
 
 /**
@@ -192,6 +192,7 @@ public class MarkCommand extends Command {
         JoinDate joinDate = employeeToMark.getJoinDate();
         Salary salary = employeeToMark.getSalary();
         AnnualLeave annualLeave = employeeToMark.getAnnualLeave();
+        PayrollStorage payrollStorage = employeeToMark.getPayrollStorage();
 
         AttendanceStorage attendanceStorage = employeeToMark.getAttendanceStorage();
 
@@ -206,7 +207,8 @@ public class MarkCommand extends Command {
             attendanceStorage.markPresent(LocalDate.now());
         }
 
-        return new Person(name, phone, email, address, bankAccount, joinDate, salary, annualLeave, attendanceStorage);
+        return new Person(name, phone, email, address, bankAccount,
+                joinDate, salary, annualLeave, attendanceStorage, payrollStorage);
     }
 
 

@@ -95,8 +95,8 @@
 
 .list-cell {
     -fx-label-padding: 0 0 0 0;
-    -fx-graphic-text-gap : 0;
-    -fx-padding: 10 10 20 10;
+    -fx-graphic-text-gap : 10;
+    -fx-padding: 10 10 30 10;
     -fx-background-radius: 20;
 }
 
@@ -273,7 +273,7 @@
 .result-display {
     -fx-background-color: transparent;
     -fx-font-family: "Segoe UI Light";
-    -fx-font-size: 25px;
+    -fx-font-size: 20px;
     -fx-text-fill: white;
 }
 
