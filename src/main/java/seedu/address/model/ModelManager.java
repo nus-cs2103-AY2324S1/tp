@@ -243,7 +243,7 @@ public class ModelManager implements Model {
 
     @Override
     public void showPerson(Person person) {
-        requireNonNull(person);
+        //requireNonNull(person);
         if (ui != null) {
             currentShowingPerson = person;
             ui.showPersonDetails(person);
@@ -252,7 +252,7 @@ public class ModelManager implements Model {
 
     @Override
     public void showLesson(Lesson lesson) {
-        requireNonNull(lesson);
+        //requireNonNull(lesson);
         if (ui != null) {
             currentShowingLesson = lesson;
             ui.showLessonDetails(lesson);

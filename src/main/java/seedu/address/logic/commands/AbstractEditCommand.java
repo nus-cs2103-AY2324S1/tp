@@ -31,6 +31,7 @@ public abstract class AbstractEditCommand<T extends ListEntry<? extends T>> exte
     protected Predicate<T> hasClashWith;
     protected Consumer<T> deleteMethod;
     protected Consumer<T> addMethod;
+    protected Consumer<T> showMethod;
 
     /**
      * Pass in index to indicate which entry to edit
@@ -66,6 +67,7 @@ public abstract class AbstractEditCommand<T extends ListEntry<? extends T>> exte
         init();
         editFields();
         validateEditedAndWriteBack();
+        showMethod.accept(edited);
         return new CommandResult("Edited : " + edited.toString());
     }
     /**

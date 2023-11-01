@@ -58,6 +58,7 @@ public class EditPersonCommand extends AbstractEditCommand<Person> {
         hasClashWith = model::hasPersonClashWith;
         deleteMethod = model::deletePerson;
         addMethod = model::addPerson;
+        showMethod = model::showPerson;
     }
 
 

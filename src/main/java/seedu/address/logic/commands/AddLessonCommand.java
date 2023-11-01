@@ -30,6 +30,7 @@ public class AddLessonCommand extends Command {
         }
 
         model.addLesson(lesson);
+        model.showLesson(lesson);
         return new CommandResult(String.format("New lesson added: " + lesson.toString()));
     }
 
