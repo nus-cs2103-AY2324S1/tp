@@ -9,6 +9,8 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.ReadOnlyWellNus;
 import seedu.address.model.appointment.Appointment;
+import seedu.address.model.student.Name;
+import seedu.address.model.student.Note;
 import seedu.address.model.student.Student;
 
 /**
@@ -37,6 +39,11 @@ public interface Logic {
     /** Returns an unmodifiable view of the filtered list of appointments */
     ObservableList<Appointment> getFilteredAppointmentList();
 
+    /** Return the Note of a particular student denoted by its index */
+    Note getStudentNote(int studentIndex);
+
+    /** Return the Name of a particular student denoted by its index */
+    Name getStudentName(int studentIndex);
     /**
      * Returns the user prefs' address book file path.
      */

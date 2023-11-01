@@ -2,6 +2,8 @@ package seedu.address.ui;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
@@ -23,6 +25,8 @@ public class StudentCard extends UiPart<Region> {
      */
 
     public final Student student;
+    private CommandExecutor showNote;
+    private int index;
 
     @FXML
     private HBox cardPane;
@@ -42,11 +46,13 @@ public class StudentCard extends UiPart<Region> {
     /**
      * Creates a {@code StudentCode} with the given {@code Student} and index to display.
      */
-    public StudentCard(Student student, int displayedIndex) {
+    public StudentCard(Student student, int displayedIndex, CommandExecutor showNote) {
         super(FXML);
         this.student = student;
+        this.showNote = showNote;
+        index = displayedIndex;
         id.setText(displayedIndex + ". ");
-        name.setText(student.getName().fullName);
+        name.setText(student.getName().value);
         phone.setText(student.getPhone().value);
         address.setText(student.getAddress().value);
 
@@ -58,6 +64,15 @@ public class StudentCard extends UiPart<Region> {
 
         note.setText(student.getNote().value);
     }
+
+    @FXML
+    private void displayNote(MouseEvent event) {
+        if (event.getButton() == MouseButton.PRIMARY && event.getClickCount() == 2) {
+            System.out.println("Button clicked");
+            showNote.execute(index);
+        }
+    }
+
 
     private String getTagStyleClass(String riskLevel) {
         switch (riskLevel) {
@@ -72,4 +87,16 @@ public class StudentCard extends UiPart<Region> {
         }
     }
 
+    /**
+     * Represents a function that can execute commands.
+     */
+    @FunctionalInterface
+    public interface CommandExecutor {
+        /**
+         * Executes the command and returns the result.
+         *
+         * @see seedu.address.logic.Logic#execute(String)
+         */
+        void execute(int studentIndex);
+    }
 }
