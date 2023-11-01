@@ -32,7 +32,8 @@ public class FindCommandParser implements Parser<FindCommand> {
         try {
             argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_GROUPTAG);
         } catch (ParseException e) {
-            throw new ParseException(String.format(FindCommand.MESSAGE_TWO_PARAMETERS, FindCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    FindCommand.MESSAGE_TWO_PARAMETERS));
         }
 
         // check if either n/ or g/ are present
