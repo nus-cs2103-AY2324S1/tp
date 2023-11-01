@@ -204,8 +204,6 @@ public interface Model {
     ObservableList<Task> getFullTaskList();
 
     public void resetAllShowFields();
-
-    // todo: implement everything below here properly
     default void setTask(Task target, Task editedTask) {
     }
     void addTask(Task task, int index);

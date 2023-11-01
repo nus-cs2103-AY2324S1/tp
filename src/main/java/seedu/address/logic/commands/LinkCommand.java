@@ -47,6 +47,7 @@ public class LinkCommand extends Command {
             Person person = personSet.iterator().next();
             Lesson lesson = lessonSet.iterator().next();
             model.linkWith(person, lesson);
+            // parser make sure the state is either STUDENT or SCHEDULE
             State state = model.getState();
             if (state == State.STUDENT && model.getCurrentlyDisplayedPerson().equals(person)) {
                 model.showPerson(person);
