@@ -38,6 +38,9 @@ public class MarkPresentAllCommand extends Command {
         try {
             for (Student s : lastShownList) {
                 model.setStudent(s, s.markPresent(index));
+                if (model.isSelectedStudent(s)) {
+                    model.setSelectedStudent(s);
+                }
             }
         } catch (InvalidTutorialIndexException e) {
             throw new CommandException(e.getMessage());
