@@ -26,6 +26,11 @@
                <Font name="System Bold" size="13.0" />
             </font>
          </Label>
+         <FlowPane fx:id="priority" alignment="CENTER_LEFT">
+            <padding>
+               <Insets left="5.0" />
+            </padding>
+         </FlowPane>
    </HBox>
    <FlowPane fx:id="tags" />
       <HBox alignment="CENTER_LEFT" spacing="5">
@@ -92,17 +97,6 @@
                </styleClass>
             </Label>
             <FlowPane fx:id="specialisations" alignment="CENTER_LEFT" hgap="3.0" />
-         </children>
-      </HBox>
-      <HBox alignment="CENTER_LEFT" spacing="5">
-         <children>
-         <Label fx:id="priorityHeader" text="\$priorityHeader" textOverrun="CENTER_WORD_ELLIPSIS">
-               <styleClass>
-                  <String fx:value="cell_header" />
-                  <String fx:value="cell_small_label" />
-               </styleClass>
-            </Label>
-            <FlowPane fx:id="priority" alignment="CENTER_LEFT" hgap="3.0" styleClass="hyperlink_list" />
          </children>
       </HBox>
  </VBox>

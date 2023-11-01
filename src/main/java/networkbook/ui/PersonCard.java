@@ -2,6 +2,8 @@ package networkbook.ui;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.Optional;
+import java.util.function.Consumer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -10,9 +12,14 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import networkbook.logic.commands.OpenLinkCommand;
+import networkbook.model.person.Email;
 import networkbook.model.person.Graduation;
 import networkbook.model.person.Person;
+import networkbook.model.person.Phone;
 import networkbook.model.person.Priority;
+import networkbook.model.util.Identifiable;
+import networkbook.model.util.UniqueList;
 
 /**
  * An UI component that displays information of a {@code Person}.
@@ -27,6 +34,7 @@ public class PersonCard extends UiPart<Region> {
     private static final String COURSE_HEADER = "Courses: ";
     private static final String SPECIALISATION_HEADER = "Specialisations: ";
     private static final String PRIORITY_HEADER = "Priority: ";
+    private static final String FIELD_WITH_INDEX_FORMAT = "%d) %s";
 
     private static final Logger LOGGER = Logger.getLogger("PersonCard");
 
@@ -73,8 +81,6 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private FlowPane tags;
     @FXML
-    private Label priorityHeader;
-    @FXML
     private FlowPane priority;
 
     /**
@@ -91,73 +97,105 @@ public class PersonCard extends UiPart<Region> {
 
         // Phone numbers
         phonesHeader.setText(PHONES_HEADER);
-        if (person.getPhones().isEmpty()) {
-            phones.getChildren().add(new EmptyFieldLabel());
-        } else {
-            person.getPhones().stream()
-                    .forEach(phone -> phones.getChildren().add(new FieldLabel(phone.getValue())));
-        }
+        populateListChildren(person.getPhones(), phones);
 
         // Email addresses
         emailsHeader.setText(EMAILS_HEADER);
-        // TODO: implement actual link opening
-        person.getEmails().stream()
-                .forEach(email -> emails.getChildren().add(new FieldHyperlink(email.getValue(), () -> {
-                    LOGGER.log(Level.INFO, "Opening email: " + email.getValue());
-                })));
-        if (person.getEmails().isEmpty()) {
-            emails.getChildren().add(new EmptyFieldLabel());
-        }
+        populateHyperlinkListChildren(person.getEmails(), emails, (email) -> {
+            // TODO: implement actual email opening
+            LOGGER.log(Level.INFO, "Opening email: " + email.getValue());
+        });
 
         // Website links
         linksHeader.setText(LINKS_HEADER);
+        populateHyperlinkListChildren(person.getLinks(), links, (link)-> {
         // TODO: implement actual link opening
-        person.getLinks().stream()
-                .forEach(link -> links.getChildren().add(new FieldHyperlink(link.getValue(), () -> {
-                    LOGGER.log(Level.INFO, "Opening link: " + link.getValue());
-                })));
-        if (person.getLinks().isEmpty()) {
-            links.getChildren().add(new EmptyFieldLabel());
-        }
+            LOGGER.log(Level.INFO, "Opening link: " + link.getValue());
+        });
 
         // Graduation
         graduationHeader.setText(GRADUATION_HEADER);
-        person.getGraduation().ifPresentOrElse((Graduation g) -> {
-                graduation.getChildren().add(new FieldLabel(g.getFullString()));
-            }, () -> {
-                graduation.getChildren().add(new EmptyFieldLabel());
-            });
+        populateField(person.getGraduation(), graduation);
 
         // Courses
         coursesHeader.setText(COURSE_HEADER);
-        if (person.getCourses().isEmpty()) {
-            courses.getChildren().add(new EmptyFieldLabel());
-        } else {
-            person.getCourses().stream()
-                .forEach(course -> courses.getChildren().add(new FieldLabel(course.getValue())));   
-        }
+        populateListChildren(person.getCourses(), courses);
 
         // Specialisations
         specialisationsHeader.setText(SPECIALISATION_HEADER);
-        if (person.getSpecialisations().isEmpty()) {
-            specialisations.getChildren().add(new EmptyFieldLabel());
-        } else {
-            person.getSpecialisations().stream()
-                .forEach(spec -> specialisations.getChildren().add(new FieldLabel(spec.getValue())));
-        }
+        populateListChildren(person.getSpecialisations(), specialisations);
 
         // Tags
         person.getTags().stream()
                 .forEach(tag -> tags.getChildren().add(new Label(tag.getValue())));
 
         // Priority
-        priorityHeader.setText(PRIORITY_HEADER);
-        person.getPriority().ifPresentOrElse((Priority p) -> {
-            priority.getChildren().add(new PriorityFieldLabel(p));
-        }, () -> {
-            priority.getChildren().add(new EmptyFieldLabel());
-        });
+        populatePriority(person.getPriority(), priority);
     }
 
+    /**
+     * Populates FlowPane with labels from list.
+     * @param <T> Type of list item.
+     * @param list Source list of items.
+     * @param pane FlowPane to populate.
+     */
+    private <T extends Identifiable<T>> void populateListChildren(UniqueList<T> list, FlowPane pane) {
+        if (list.isEmpty()) {
+            pane.getChildren().add(new EmptyFieldLabel());
+        } else {
+            for (int i = 0; i < list.size(); i++) {
+                T t = list.get(i);
+                FieldLabel label = new FieldLabel(String.format(FIELD_WITH_INDEX_FORMAT, i + 1, t.getValue()));
+                pane.getChildren().add(label);
+            }
+        }
+    }
+
+    /**
+     * Populates FlowPane with hyperlinks from list.
+     * @param <T> Type of list item.
+     * @param list Source list of items.
+     * @param pane FlowPane to populate.
+     * @param action Action to perform on link click. Takes in list item.
+     */
+    private <T extends Identifiable<T>> void populateHyperlinkListChildren(UniqueList<T> list, FlowPane pane, Consumer<T> action) {
+        if (list.isEmpty()) {
+            pane.getChildren().add(new EmptyFieldLabel());
+        } else {
+            for (int i = 0; i < list.size(); i++) {
+                T link = list.get(i);
+                FieldHyperlink hyperlink = 
+                new FieldHyperlink(String.format(FIELD_WITH_INDEX_FORMAT, i + 1, link.getValue()), () -> action.accept(link));
+                pane.getChildren().add(hyperlink);
+            }
+        }
+    }
+
+    /**
+     * Populates field with single value.
+     * @param <T> Type of value.
+     * @param item Value.
+     * @param pane FlowPane to populate.
+     */
+    private <T> void populateField(Optional<T> item, FlowPane pane) { 
+        item.ifPresentOrElse((T t) -> {
+            pane.getChildren().add(new FieldLabel(t.toString()));
+        }, () -> {
+            pane.getChildren().add(new EmptyFieldLabel());
+        });
+    } 
+
+    /**
+     * Populates priority.
+     * @param p Optional of Priority.
+     * @param pane FlowPane to populate.
+     */
+    private void populatePriority(Optional<Priority> p, FlowPane pane) { 
+        p.ifPresentOrElse((Priority priority) -> {
+            pane.getChildren().add(new PriorityFieldLabel(priority));
+        }, () -> {
+            pane.getChildren().add(new EmptyFieldLabel());
+        });
+    } 
     // Below: getter methods for testing
 }
