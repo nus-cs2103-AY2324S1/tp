@@ -45,6 +45,7 @@ public class LogCommand extends UndoableCommand {
 
         // Ensure that there are results from the most recent FindCommand
         assert !model.getFoundPersonsList().isEmpty();
+
         return new CommandResult(MESSAGE_SUCCESS);
 
     }
