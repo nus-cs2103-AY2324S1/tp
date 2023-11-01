@@ -538,25 +538,46 @@ specified schedule.
 
 #### Unmarking a schedule: `unmark`
 
-Removes the status of a schedule in the address book based on their index number in the table of schedules listed.
+Removes the status of a schedule.
+
+##### :beginner: First time users
+{:.no_toc}
+
+**Scenario**
+
+You have accidentally marked the wrong schedule to be COMPLETED.\
+The class for that schedule has yet to occur so its status should be left empty.
+
+Don't worry as you can do just that with the unmark command.
+
+**Follow these steps**
+
+1. Type in `list-s`, press enter, and find the schedule you want to unmark.
+2. Let's say the schedule to be unmarked is at position 1.
+3. Type in `unmark 1` and press enter.
+
+**What you can expect to see**
+
+Phew! The schedule has now been unmarked.
 
 ![unmark schedule](images/unmarkSchedule.png)
 
-**Format:** `unmark SCHEDULE_INDEX`
+#### :hammer: Experienced users
+{:.no_toc}
 
-**Example:**
-* `unmark 5` removes the status of the schedule indexed at 5 in the schedule list.
-* `list-s` followed by `unmark 2` removes the status of the schedule indexed at 2 in the schedule list.
+**Command format**
 
-**Acceptable values for each parameter:**
-* `SCHEDULE_INDEX`: Only numerical input that ranges from 1 to the last schedule shown in the list of schedules.
+![unmark schedule command](images/unmarkScheduleCommandSyntax.png)
 
-**Expected output:**
-* `Unmarked Schedule: Alex Yeoh; Start Time: Sep 15 2023 09:00; End Time: Sep 15 2023 11:00`
+**Errors you might encounter**
 
-**Error messages:**
+Here is a list of the error messages you may encounter, when the command is entered incorrectly:
 * `Index number given is out of range`: The schedule index provided is invalid
 * `Invalid command format!`: Invalid or missing SCHEDULE_INDEX.
+
+You can also refer to [input information](#input-examples) for details about valid inputs.
+
+[Back To Top](#table-of-contents)
 
 #### Deleting a schedule: `delete-s`
 
