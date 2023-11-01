@@ -67,6 +67,8 @@ public interface Model {
 
     void markPersonPaid(Person target);
 
+    void markPersonUnPaid(Person target);
+
     void getPersonPaid(Person target);
 
 
