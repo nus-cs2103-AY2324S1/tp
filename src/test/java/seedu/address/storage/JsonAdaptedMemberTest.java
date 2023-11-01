@@ -31,8 +31,8 @@ public class JsonAdaptedMemberTest {
     private static final List<JsonAdaptedTag> VALID_TAGS = BETTY_MEMBER.getTags().stream()
             .map(JsonAdaptedTag::new)
             .collect(Collectors.toList());
-    private static final List<JsonAdaptedToDo> VALID_TODO = BETTY_MEMBER.getTasks().getTaskAsList().stream()
-            .map(JsonAdaptedToDo::new)
+    private static final List<JsonAdaptedTask> VALID_TODO = BETTY_MEMBER.getTasks().stream()
+            .map(JsonAdaptedTask::new)
             .collect(Collectors.toList());
     @Test
     public void toModelType_validMemberDetails_returnsMember() throws Exception {

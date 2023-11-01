@@ -1,12 +1,15 @@
 package seedu.address.storage;
 
-import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.task.ToDo;
-
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
-public class JsonAdaptedToDo {
+import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.task.Task;
+
+/**
+ * Jackson-friendly version of {@link Task}.
+ */
+class JsonAdaptedTask {
 
     private final String taskName;
 
@@ -14,15 +17,15 @@ public class JsonAdaptedToDo {
      * Constructs a {@code JsonAdaptedTag} with the given {@code tagName}.
      */
     @JsonCreator
-    public JsonAdaptedToDo(String taskName) {
+    public JsonAdaptedTask(String taskName) {
         this.taskName = taskName;
     }
 
     /**
      * Converts a given {@code Tag} into this class for Jackson use.
      */
-    public JsonAdaptedToDo(ToDo source) {
-        taskName = source.getTaskName();
+    public JsonAdaptedTask(Task source) {
+        taskName = source.taskName;
     }
 
     @JsonValue
@@ -35,7 +38,8 @@ public class JsonAdaptedToDo {
      *
      * @throws IllegalValueException if there were any data constraints violated in the adapted tag.
      */
-    public ToDo toModelType() throws IllegalValueException {
-        return new ToDo(taskName);
+    public Task toModelType() throws IllegalValueException {
+        return new Task(taskName);
     }
+
 }

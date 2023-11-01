@@ -13,10 +13,9 @@ import seedu.address.model.person.Member;
 import seedu.address.model.person.fields.Email;
 import seedu.address.model.person.fields.Name;
 import seedu.address.model.person.fields.Phone;
-import seedu.address.model.person.fields.Tasklist;
 import seedu.address.model.person.fields.Telegram;
 import seedu.address.model.tag.Tag;
-import seedu.address.task.ToDo;
+import seedu.address.model.task.Task;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -77,7 +76,7 @@ public class AddMemberToDoCommand extends Command{
         Email updatedEmail = addMemberToDoDescriptor.getEmail().orElse(member.getEmail());
         Telegram updatedTelegram = addMemberToDoDescriptor.getTelegram().orElse(member.getTelegram());
         Set<Tag> updatedTags = addMemberToDoDescriptor.getTags().orElse(member.getTags());
-        Tasklist updatedTasks = addMemberToDoDescriptor.getTasks().orElse(member.getTasks());
+        Set<Task> updatedTasks = addMemberToDoDescriptor.getTasks().orElse(member.getTasks());
 
         return new Member(updatedName, updatedPhone, updatedEmail, updatedTelegram, updatedTags, updatedTasks);
 
@@ -89,7 +88,7 @@ public class AddMemberToDoCommand extends Command{
         private Email email;
         private Telegram telegram;
         private Set<Tag> tags;
-        private Tasklist tasks;
+        private Set<Task> tasks;
 
         public AddMemberToDoDescriptor() {
         }
@@ -156,12 +155,12 @@ public class AddMemberToDoCommand extends Command{
             return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
         }
 
-        public void setTasks(Tasklist tasks) {
+        public void setTasks(Set<Task> tasks) {
             this.tasks = tasks;
             System.out.println(this.tasks);
         }
 
-        public Optional<Tasklist> getTasks() {
+        public Optional<Set<Task>> getTasks() {
             return Optional.ofNullable(this.tasks);
         }
 

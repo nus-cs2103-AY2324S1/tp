@@ -8,7 +8,6 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.person.Member;
-import seedu.address.task.Task;
 
 /**
  * An UI component that displays information of a {@code Member}.
@@ -59,7 +58,7 @@ public class MemberCard extends UiPart<Region> {
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
         member.getTasks().stream()
-                .sorted(Comparator.comparing(Task::getTaskName))
-                .forEach(task -> tasks.getChildren().add(new Label(task.getTaskName())));
+                .sorted(Comparator.comparing(tasks -> tasks.taskName))
+                .forEach(task -> tasks.getChildren().add(new Label(task.taskName)));
     }
 }
