@@ -95,9 +95,14 @@ public class Job {
      * The interview must exist for the job.
      */
     public void deleteInterview(Index index) {
-        System.out.println(interviews);
         interviews.remove(index.getZeroBased());
-        System.out.println(interviews);
+    }
+
+    /**
+     * Returns number of interviews for a job.
+     */
+    public int interviewLength() {
+        return interviews.size();
     }
 
     /**
