@@ -26,7 +26,7 @@ My contributions to the project are listed below.
     - Review and merge pull requests
 
 - **Enhancements to existing features**:
-  
+
   - Sort contacts by last contacted time
   - New Command
     - "editm"
@@ -39,7 +39,7 @@ My contributions to the project are listed below.
     - First draft of User Guide with initial plans for v1.2
     - Update parts of User Guide on `viewm`, `viewc`, `editm`
   - Developer Guide
-    - Add Implementation notes on `viewm` & `viewc`
+    - Add Implementation notes on `viewm`, `viewc`, `editc` and `editm`
 
 - **Community**:
 

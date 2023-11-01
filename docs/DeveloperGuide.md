@@ -381,31 +381,31 @@ _{more aspects and alternatives to be added}_
 
 ### Keeping track of last meeting with contact
 
-Keeping track of the user's last meeting with their contact is facilitated by the addition of a `LastContactedTime` object to `Person`.  
-Thus, each instance of `Person` will contain an immutable `LastContactedTime` object that stores the user's last meeting with that contact.  
+Keeping track of the user's last meeting with their contact is facilitated by the addition of a `LastContactedTime` object to `Person`.
+Thus, each instance of `Person` will contain an immutable `LastContactedTime` object that stores the user's last meeting with that contact.
 The following steps shows how `LastContactedTime` is implemented and utilized in the application.
 
 Step 1. The user inputs the `addc` command into the `CommandBox` input field, with the added field `l/[LAST_CONTACTED_TIME]`.
 
-The following diagram summarizes steps 2 to 6:  
+The following diagram summarizes steps 2 to 6:
 <img src="images/LastContactedTime1.png" width="1000" />
 
-Step 2. Entering a correct command with the `Enter` key then calls `execute` on `LogicManager`.  
-Step 3. `LogicManager` then calls `AddressBookParser#parseCommand(commandText)` on the `commandText` String, which recognizes that it is an `addc` command.  
-Step 4. `AddressBookParser` then calls `AddCommandParser#parse()` on the command arguments.  
-Step 5. `AddCommandParser` then calls `ParserUtil#parseContactTime()` which parses the last contacted time and returns a `LocalDateTime` object called `lastContactedTime`.  
+Step 2. Entering a correct command with the `Enter` key then calls `execute` on `LogicManager`.
+Step 3. `LogicManager` then calls `AddressBookParser#parseCommand(commandText)` on the `commandText` String, which recognizes that it is an `addc` command.
+Step 4. `AddressBookParser` then calls `AddCommandParser#parse()` on the command arguments.
+Step 5. `AddCommandParser` then calls `ParserUtil#parseContactTime()` which parses the last contacted time and returns a `LocalDateTime` object called `lastContactedTime`.
 Step 6. The `lastContactedTime` object is then passed to the `Person` constructor, which creates a new `Person` that calls the `LastContactedTime` constructor with it.
 
 The following diagram summarizes steps 7 and 8:
 <img src="images/LastContactedTime2.png" width="1000" />
 
-Step 7. The completed `Person` is passed to an `AddCommand` constructor which return a new `AddCommand` that can be executed.  
-Step 8. `LogicManager` then executes the `AddCommand` on the application model.  
+Step 7. The completed `Person` is passed to an `AddCommand` constructor which return a new `AddCommand` that can be executed.
+Step 8. `LogicManager` then executes the `AddCommand` on the application model.
 Step 9. Further execution is carried out, which like before adds the `Person` object to the list of `Person`s in the `Model`, and updates the `Storage` with this new `Person`.
 
 #### Design Consideration: Updating last meeting with contact
 
-Solution:  
+Solution:
 This is facilitated by the addition of the `MarkDoneCommand`. When a meeting is marked as done, the attendees of the meeting will be updated with their LastContactedTime field updated to the end time of the meeting.
 
 ---
