@@ -12,7 +12,15 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.Messages;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.*;
+import seedu.address.model.person.Address;
+import seedu.address.model.person.Email;
+import seedu.address.model.person.Gender;
+import seedu.address.model.person.MrtStation;
+import seedu.address.model.person.Name;
+import seedu.address.model.person.Phone;
+import seedu.address.model.person.SecLevel;
+import seedu.address.model.person.SortIn;
+import seedu.address.model.person.Visual;
 import seedu.address.model.tag.EnrolDate;
 import seedu.address.model.tag.Subject;
 

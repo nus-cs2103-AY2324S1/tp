@@ -1,13 +1,14 @@
 package seedu.address.logic.parser;
 
+import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
+
 import org.junit.jupiter.api.Test;
+
 import seedu.address.logic.commands.CommandTestUtil;
 import seedu.address.logic.commands.ExportCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Visual;
-
-import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 
 public class ExportCommandParserTest {
     private ExportCommandParser parser = new ExportCommandParser();
@@ -15,13 +16,15 @@ public class ExportCommandParserTest {
     @Test
     public void parseExportValidAscSuccess() throws ParseException {
         String visual = "TABLE";
-        assert new ExportCommand(new Visual(visual)).toString().equals(parser.parse(CommandTestUtil.VISUAL_TABLE).toString());
+        assert new ExportCommand(new Visual(visual)).toString()
+                .equals(parser.parse(CommandTestUtil.VISUAL_TABLE).toString());
     }
 
     @Test
     public void parseExportValidDescSuccess() throws ParseException {
         String visual = "BAR";
-        assert new ExportCommand(new Visual(visual)).toString().equals(parser.parse(CommandTestUtil.VISUAL_BAR).toString());
+        assert new ExportCommand(new Visual(visual)).toString()
+                .equals(parser.parse(CommandTestUtil.VISUAL_BAR).toString());
     }
 
     @Test
