@@ -75,7 +75,7 @@ public class AddPersonCommand extends Command {
             // could execute without model by making model singleton
             if (model.hasLessonClashWith(lesson)) {
                 Lesson clashingLesson = model.getLessonClashWith(lesson);
-                throw new CommandException("Lesson already exists in the specified time slot: "
+                throw new CommandException("Exist lesson clashing with lesson to added: "
                         + clashingLesson.toString());
             }
             model.addLesson(lesson);

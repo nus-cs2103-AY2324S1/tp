@@ -25,7 +25,7 @@ public class AddLessonCommand extends Command {
 
         if (model.hasLessonClashWith(lesson)) {
             Lesson clashingLesson = model.getLessonClashWith(lesson);
-            throw new CommandException("Lesson already exists in the specified time slot: "
+            throw new CommandException("Exist lesson clashes with this lesson: "
                     + clashingLesson.toString());
         }
 
