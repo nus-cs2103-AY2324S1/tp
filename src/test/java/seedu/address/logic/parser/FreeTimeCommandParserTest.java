@@ -1,9 +1,9 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.commands.CommandTestUtil.INTERVAL_BEGIN_DESC_ONE;
 import static seedu.address.logic.commands.CommandTestUtil.INTERVAL_DAY_DESC_ONE;
 import static seedu.address.logic.commands.CommandTestUtil.INTERVAL_DURATION_DESC_ONE;
-import static seedu.address.logic.commands.CommandTestUtil.INTERVAL_BEGIN_DESC_ONE;
 import static seedu.address.logic.commands.CommandTestUtil.INTERVAL_END_DESC_ONE;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_INTERVAL_BEGIN_DESC_ONE;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_INTERVAL_DAY_DESC_ONE;
@@ -22,13 +22,11 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_END;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
-
 import org.junit.jupiter.api.Test;
+
 import seedu.address.logic.Messages;
-import seedu.address.logic.commands.CommandTestUtil;
 import seedu.address.logic.commands.FreeTimeCommand;
 import seedu.address.model.interval.Duration;
-import seedu.address.model.interval.Interval;
 import seedu.address.model.interval.IntervalBegin;
 import seedu.address.model.interval.IntervalDay;
 import seedu.address.model.interval.IntervalEnd;

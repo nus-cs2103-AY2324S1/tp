@@ -24,6 +24,11 @@ public class Duration {
         value = duration;
     }
 
+    /**
+     * Checks if it is a valid duration
+     * @param test String to be checked
+     * @return boolean on whether the value is a valid duration
+     */
     public static boolean isValidDuration(String test) {
         try {
             int number = Integer.parseInt(test);

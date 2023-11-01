@@ -1,18 +1,22 @@
 package seedu.address.logic.commands;
 
-import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.Model;
-import seedu.address.model.interval.Interval;
-import seedu.address.model.interval.TimeSlot;
-
-import java.text.ParseException;
-import java.util.List;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_BEGIN;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DAY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DURATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_END;
 
+import java.text.ParseException;
+import java.util.List;
+
+import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.Model;
+import seedu.address.model.interval.Interval;
+import seedu.address.model.interval.TimeSlot;
+
+/**
+ * FreeTimeCommand
+ */
 public class FreeTimeCommand extends Command {
 
     public static final String COMMAND_WORD = "freeTime";

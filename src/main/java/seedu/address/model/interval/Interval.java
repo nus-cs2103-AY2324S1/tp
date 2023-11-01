@@ -1,11 +1,11 @@
 package seedu.address.model.interval;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
-import java.text.ParseException;
+
 import java.util.Objects;
 
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.model.person.Person;
+
 
 /**
  * Represents an Interval in the address book.
@@ -17,6 +17,13 @@ public class Interval {
     private final IntervalEnd intervalEnd;
     private final Duration duration;
 
+    /**
+     * Constructor for interval class
+     * @param intervalDay
+     * @param duration
+     * @param intervalBegin
+     * @param intervalEnd
+     */
     public Interval(IntervalDay intervalDay, Duration duration, IntervalBegin intervalBegin, IntervalEnd intervalEnd) {
         requireAllNonNull(intervalDay, intervalBegin, intervalDay, duration);
         this.intervalDay = intervalDay;

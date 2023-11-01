@@ -5,9 +5,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalTime;
 import java.util.Date;
-import java.text.SimpleDateFormat;
 
 /**
  * Represents a Interval's Begin in the address book.

@@ -1,26 +1,43 @@
 package seedu.address.model.interval;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Date;
+import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * TimeSlot Class
+ */
 public class TimeSlot {
-    public Date start;
-    public Date end;
+    private Date start;
+    private Date end;
 
+    /**
+     * Constructor for TimeSlot
+     * @param start a Date object for start
+     * @param end a Date object for end
+     */
     public TimeSlot(Date start, Date end) {
         this.start = start;
         this.end = end;
     }
 
+    /**
+     * @return the duration of the timeslot in minutes
+     */
     public long getDurationMinutes() {
         return (end.getTime() - start.getTime()) / (60 * 1000);
     }
 
+    /**
+     * Parses a list of String into a list of TimeSlots.
+     * @param timeSlots the list of strings to be parsed
+     * @return parsed timeslots
+     * @throws ParseException
+     */
     public static List<TimeSlot> parseIntervals(List<String> timeSlots) throws ParseException {
         List<TimeSlot> timeSlotObjects = new ArrayList<>();
         SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm");
@@ -33,6 +50,13 @@ public class TimeSlot {
         return timeSlotObjects;
     }
 
+    /**
+     * Finds the available time within the given list of timeslots and interval
+     * @param timeslots
+     * @param interval
+     * @return a list of available timeslots
+     * @throws ParseException
+     */
     public static List<TimeSlot> findAvailableTime(List<TimeSlot> timeslots, Interval interval) throws ParseException {
         timeslots.sort(Comparator.comparing(timeslot -> timeslot.start));
 
@@ -57,6 +81,11 @@ public class TimeSlot {
         return validTimeSlots;
     }
 
+    /**
+     * Prints out the results
+     * @param timeslots
+     * @return String of results
+     */
     public static String printResults(List<TimeSlot> timeslots) {
         if (timeslots.size() == 0) {
             return "There are no available timeslots.";
@@ -71,6 +100,20 @@ public class TimeSlot {
             result = result + "Free from " + startTime + " - " + endTime + "\n";
         }
         return result;
+    }
+
+    /**
+     * @return start
+     */
+    public Date getStart() {
+        return start;
+    }
+
+    /**
+     * @return end
+     */
+    public Date getEnd() {
+        return end;
     }
 
     @Override

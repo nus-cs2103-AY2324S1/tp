@@ -40,29 +40,29 @@ public class IntervalDay {
     public DayOfWeek parse(String test) {
         String lowerCaseTest = test.toLowerCase();
         switch (lowerCaseTest) {
-            case "mon":
-            case "monday":
-                return DayOfWeek.MONDAY;
-            case "tue":
-            case "tuesday":
-                return DayOfWeek.TUESDAY;
-            case "wed":
-            case "wednesday":
-                return DayOfWeek.WEDNESDAY;
-            case "thu":
-            case "thursday":
-                return DayOfWeek.THURSDAY;
-            case "fri":
-            case "friday":
-                return DayOfWeek.FRIDAY;
-            case "sat":
-            case "saturday":
-                return DayOfWeek.SATURDAY;
-            case "sun":
-            case "sunday":
-                return DayOfWeek.SUNDAY;
-            default:
-                throw new IllegalArgumentException(MESSAGE_CONSTRAINTS);
+        case "mon":
+        case "monday":
+            return DayOfWeek.MONDAY;
+        case "tue":
+        case "tuesday":
+            return DayOfWeek.TUESDAY;
+        case "wed":
+        case "wednesday":
+            return DayOfWeek.WEDNESDAY;
+        case "thu":
+        case "thursday":
+            return DayOfWeek.THURSDAY;
+        case "fri":
+        case "friday":
+            return DayOfWeek.FRIDAY;
+        case "sat":
+        case "saturday":
+            return DayOfWeek.SATURDAY;
+        case "sun":
+        case "sunday":
+            return DayOfWeek.SUNDAY;
+        default:
+            throw new IllegalArgumentException(MESSAGE_CONSTRAINTS);
         }
         //checkArgument(isValidDay(day), MESSAGE_CONSTRAINTS);
         //value = parseDay(day);

@@ -13,8 +13,8 @@ import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.model.person.LessonComparator;
 import seedu.address.model.interval.Interval;
+import seedu.address.model.person.LessonComparator;
 import seedu.address.model.person.Person;
 
 /**

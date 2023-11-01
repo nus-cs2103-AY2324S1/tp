@@ -78,6 +78,11 @@ public class AddressBook implements ReadOnlyAddressBook {
         return persons.checkSameDate(person);
     }
 
+    /**
+     * Finds the list of timings which have the same day as the Interval from the address book
+     * @param interval
+     * @return list of timings
+     */
     public List<String> findInterval(Interval interval) {
         requireNonNull(interval);
         return persons.findInterval(interval);

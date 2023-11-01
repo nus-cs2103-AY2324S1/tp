@@ -7,7 +7,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
 
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.interval.Interval;
@@ -49,6 +48,11 @@ public class UniquePersonList implements Iterable<Person> {
                 .anyMatch(toCheck::isSameDate);
     }
 
+    /**
+     * Finds the list of timings which have the same day as the Interval from the address book
+     * @param interval
+     * @return list of timings
+     */
     public List<String> findInterval(Interval interval) {
         requireNonNull(interval);
         List<String> filteredSchedule = internalList.stream()
