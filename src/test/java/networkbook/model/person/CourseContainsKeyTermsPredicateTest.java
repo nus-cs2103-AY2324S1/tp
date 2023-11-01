@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -14,6 +15,7 @@ import org.junit.jupiter.api.Test;
 
 import networkbook.model.person.filter.CourseContainsKeyTermsPredicate;
 import networkbook.model.person.filter.SpecContainsKeyTermsPredicate;
+import networkbook.testutil.Assert;
 import networkbook.testutil.PersonBuilder;
 
 public class CourseContainsKeyTermsPredicateTest {
@@ -183,12 +185,21 @@ public class CourseContainsKeyTermsPredicateTest {
 
     @Test
     public void instance_withNull_throwsAssertionError() {
-        assertThrows(AssertionError.class, () -> new SpecContainsKeyTermsPredicate(null));
+        try {
+            new SpecContainsKeyTermsPredicate(null);
+        } catch (AssertionError e) {
+            return;
+        }
+        fail();
     }
 
     @Test
     public void test_withNull_throwsAssertionError() {
-        assertThrows(AssertionError.class, () ->
-                new SpecContainsKeyTermsPredicate(List.of("Spec")).test(null));
+        try {
+            new SpecContainsKeyTermsPredicate(List.of("Spec")).test(null);
+        } catch (AssertionError e) {
+            return;
+        }
+        fail();
     }
 }
