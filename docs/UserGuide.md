@@ -128,10 +128,10 @@ Valid cases:
 * For invalid cases, error messages will be shown when the invalid command is entered. For example:
   ![Add](images/screenshots/AddErrorMessage.png)
 
-<div markdown="span" class="alert alert-primary">
+<div markdown="span" class="alert alert-warning">
   :exclamation: <b>Important:</b> <br/>
 Duplicate fosterers cannot be added; this is detected by the fosterer's name.</br>
-e.g. <code>"Anne Tay"</code> is the same person as <code>"anne tay"</code>.
+e.g. <code>"Anne Tay"</code> is the same person as <code>"anne tay"</code> and <code>"anne     tay"</code>.
 </div> 
 
 Examples:
@@ -148,7 +148,7 @@ In the case where duplicates field descriptions are given, the last one will be 
 
 ### Adding a fosterer through the profile page: `add`
 
-Adds a fosterer to the address book with information provided through the profile page.
+Shows an empty profile page where details of the fosterer you are intending to add are displayed as `nil`. The respective field descriptions can be keyed in. Adds the fosterer to the address book upon saving the information.
 
 Format: `add`
 
@@ -156,8 +156,6 @@ Format: `add`
 
 **:information_source: Notes about the command format:**<br>
 
-*  The UI generates a profile page where details of the fosterer are shown as `nil`.
-*  The respective field descriptions can be keyed in and saved by the user through the `save` command.
 *  Valid cases of a fosterer entry in the section 'Adding a fosterer through the main window' are still applied in this alternative way to add a fosterer.
 
 </div>
