@@ -154,11 +154,14 @@ Format: `sort [date/<sort type>] [amount/<sort type>]`
 
 ### Filtering transactions : `filter`
 
-Format: `filter [has/<keywords...>] [after/<date>] [before/<date>] [more/<amount>] [less/<amount>] [by/<staff ID>]`
+Format: `filter [ty/<type>] [has/<keywords...>] [after/<date>] [before/<date>] [more/<amount>] [less/<amount>] [by/<staff ID>]`
 
 * At least one parameter must be present
 * If multiple parameters are present, only transactions matching all parameters will be shown
 * The order of parameters does not matter
+* `ty` will match transactions of the given type
+  * `R` will match revenue
+  * `E` will match expense
 * `has` will match descriptions containing the keyword(s)
   * The search is case-insensitive. e.g `hans` will match `Hans`
   * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
@@ -262,35 +265,35 @@ The input field below this with the grey text `Enter command here...` is where y
 
 ## FAQ
 1. How to check my Java Version?
-* Open a Terminal/ Command Prompt and type java --version. If you do not have Java installed, you can check the instructions [here](https://nus-cs2103-ay2223s2.github.io/website/admin/programmingLanguages.html)
+   * Open a Terminal/ Command Prompt and type java --version. If you do not have Java installed, you can check the instructions [here](https://nus-cs2103-ay2223s2.github.io/website/admin/programmingLanguages.html)
 2. Can I do further analysis with the transaction data
-* The purpose of Tran$act is to keep accounting and analysis simple to improve efficiency. Nonetheless, you can export the data as a CSV file and use the data in third party apps such as excel and do further analysis if needed.
+   * The purpose of Tran$act is to keep accounting and analysis simple to improve efficiency. Nonetheless, you can export the data as a CSV file and use the data in third party apps such as excel and do further analysis if needed.
 3. How can I launch Tran$act  if clicking on the JAR file does not work?
-* Open a command terminal, `cd` into the folder you put the jar file in, type `java -jar transact.jar` and press Enter to run the application. 
+   * Open a command terminal, `cd` into the folder you put the jar file in, type `java -jar transact.jar` and press Enter to run the application. 
 ---
 
 
 ## Command summary
 
-| Action                  | Format, Examples                                                                                            |
-|-------------------------|-------------------------------------------------------------------------------------------------------------|
-| **Add transaction**     | `add ty/<type> d/<description> a/<amount> on/<date> [s/<staff ID>]`                                         |
-| **Remove transaction**  | `del <id>`                                                                                                  |
-| **Sort transactions**   | `sort [date/<sort type>] [amount/<sort type>]`                                                              |
-| **Filter transactions** | `filter [has/<keywords...>] [after/<date>] [before/<date>] [more/<amount>] [less/<amount>] [by/<staff ID>]` |
-| **View transaction**    | `view t` or `view transaction`                                                                              |
-| **Add staff**           | `addstaff n/<name> p/<phone no> e/<email> a/<address> [t/<tag>...]`                                         |
-| **Remove staff**        | `delstaff <staff ID>`                                                                                       |
-| **Find staff**          | `find <keyword> [more keywords...]`                                                                         |
-| **View staff**          | `view s` or `view staff`                                                                                    |
-| **View overview**       | `view o` or `view overview`                                                                                 |
-| **Clear output**        | `clear`                                                                                                     |
-| **Exit**                | `exit`                                                                                                      |
+| Action                  | Format, Examples                                                                                                        |
+|-------------------------|-------------------------------------------------------------------------------------------------------------------------|
+| **Add transaction**     | `add ty/<type> d/<description> a/<amount> on/<date> [s/<staff ID>]`                                                     |
+| **Remove transaction**  | `del <id>`                                                                                                              |
+| **Sort transactions**   | `sort [date/<sort type>] [amount/<sort type>]`                                                                          |
+| **Filter transactions** | `filter [ty/<type>] [has/<keywords...>] [after/<date>] [before/<date>] [more/<amount>] [less/<amount>] [by/<staff ID>]` |
+| **View transaction**    | `view t` or `view transaction`                                                                                          |
+| **Add staff**           | `addstaff n/<name> p/<phone no> e/<email> a/<address> [t/<tag>...]`                                                     |
+| **Remove staff**        | `delstaff <staff ID>`                                                                                                   |
+| **Find staff**          | `find <keyword> [more keywords...]`                                                                                     |
+| **View staff**          | `view s` or `view staff`                                                                                                |
+| **View overview**       | `view o` or `view overview`                                                                                             |
+| **Clear output**        | `clear`                                                                                                                 |
+| **Exit**                | `exit`                                                                                                                  |
 
 ## Glossary
 
 | Term        | Definition                                             |
-| ----------- | ------------------------------------------------------ |
+|-------------|--------------------------------------------------------|
 | Transaction | An exchange of money (e.g. Income / Expense)           |
 | Transactor  | Person associated with the transaction                 |
 | Income      | Money received (e.g. Product Sale)                     |

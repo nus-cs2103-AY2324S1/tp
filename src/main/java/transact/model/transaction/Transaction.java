@@ -164,6 +164,7 @@ public class Transaction implements Entry {
                 .add("type", transactionType)
                 .add("description", description)
                 .add("amount", amount)
+                .add("date", date)
                 .add("personId", personId)
                 .toString();
     }

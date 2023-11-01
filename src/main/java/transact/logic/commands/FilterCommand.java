@@ -7,6 +7,7 @@ import static transact.logic.parser.CliSyntax.PREFIX_BY_PERSON;
 import static transact.logic.parser.CliSyntax.PREFIX_DESCRIPTION_HAS;
 import static transact.logic.parser.CliSyntax.PREFIX_LESS_THAN_AMOUNT;
 import static transact.logic.parser.CliSyntax.PREFIX_MORE_THAN_AMOUNT;
+import static transact.logic.parser.CliSyntax.PREFIX_TYPE;
 import static transact.model.Model.PREDICATE_SHOW_ALL_TRANSACTIONS;
 
 import java.util.List;
@@ -18,12 +19,14 @@ import transact.model.Model;
 import transact.model.transaction.Transaction;
 import transact.model.transaction.info.Amount;
 import transact.model.transaction.info.Date;
+import transact.model.transaction.info.TransactionType;
 import transact.model.transaction.predicates.AfterOrOnDatePredicate;
 import transact.model.transaction.predicates.BeforeOrOnDatePredicate;
 import transact.model.transaction.predicates.ByPersonIdPredicate;
 import transact.model.transaction.predicates.DescriptionContainsKeywordsPredicate;
 import transact.model.transaction.predicates.LessThanOrEqualAmountPredicate;
 import transact.model.transaction.predicates.MoreThanOrEqualAmountPredicate;
+import transact.model.transaction.predicates.TransactionTypePredicate;
 import transact.ui.MainWindow.TabWindow;
 
 /**
@@ -37,12 +40,17 @@ public class FilterCommand extends Command {
      */
     public static class FilterConditions {
 
+        private TransactionType transactionType;
         private List<String> descriptionHas;
         private Date afterDate;
         private Date beforeDate;
         private Amount moreThanAmount;
         private Amount lessThanAmount;
         private Integer byPersonId;
+
+        public void setTransactionType(TransactionType transactionType) {
+            this.transactionType = transactionType;
+        }
 
         public void setDescriptionHas(List<String> descriptionHas) {
             this.descriptionHas = descriptionHas;
@@ -70,6 +78,8 @@ public class FilterCommand extends Command {
 
         public Predicate<Transaction> getPredicate() {
             return PREDICATE_SHOW_ALL_TRANSACTIONS
+                    .and(transaction -> transactionType == null
+                            || new TransactionTypePredicate(transactionType).test(transaction))
                     .and(transaction -> descriptionHas == null
                             || new DescriptionContainsKeywordsPredicate(descriptionHas).test(transaction))
                     .and(transaction -> afterDate == null
@@ -89,7 +99,8 @@ public class FilterCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Filters transactions by conditions. "
             + "Parameters: "
-            + "[" + PREFIX_DESCRIPTION_HAS + "KEYWORD(S)] "
+            + "[" + PREFIX_TYPE + "TYPE] "
+            + "[" + PREFIX_DESCRIPTION_HAS + "KEYWORD(S)...] "
             + "[" + PREFIX_AFTER_DATE + "DATE] "
             + "[" + PREFIX_BEFORE_DATE + "DATE] "
             + "[" + PREFIX_MORE_THAN_AMOUNT + "AMOUNT] "
