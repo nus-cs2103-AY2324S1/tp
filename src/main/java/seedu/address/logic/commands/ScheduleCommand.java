@@ -40,6 +40,8 @@ public class ScheduleCommand extends Command {
     public static final String MESSAGE_OVERLAPPING_APPOINTMENTS = "This appointment overlaps "
                                                                   + "with an existing appointment!";
 
+    public static final String MESSAGE_NO_STUDENT_FOR_APPOINTMENT = "No such student exists for this appointment!";
+
     private final Appointment toAdd;
 
     /**
@@ -62,6 +64,10 @@ public class ScheduleCommand extends Command {
 
         if (model.hasOverlapsWithAppointments(toAdd)) {
             throw new CommandException(MESSAGE_OVERLAPPING_APPOINTMENTS);
+        }
+
+        if (model.hasNoStudentForAppointment(toAdd)) {
+            throw new CommandException(MESSAGE_NO_STUDENT_FOR_APPOINTMENT);
         }
 
         model.addAppointment(toAdd);

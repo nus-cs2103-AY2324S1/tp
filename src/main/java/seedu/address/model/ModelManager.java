@@ -129,6 +129,12 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public boolean hasNoStudentForAppointment(Appointment appointment) {
+        requireNonNull(appointment);
+        return wellNus.hasNoStudentForAppointment(appointment);
+    }
+
+    @Override
     public void addAppointment(Appointment appointment) {
         requireNonNull(appointment);
         wellNus.addAppointment(appointment);
