@@ -742,7 +742,7 @@ Clears all data in TutorConnect.
 
 **Scenario**
 
-You realised that all your current tutors and schedules created are all wrong, and you would like to delete them all.
+You realised that all your current tutors and schedules created are wrong, and you would like to delete them all.
 
 Instead of deleting them one by one, use the clear command!
 
