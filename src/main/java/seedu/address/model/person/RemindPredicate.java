@@ -1,10 +1,11 @@
 package seedu.address.model.person;
 
-import seedu.address.model.policy.PolicyDate;
-
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.function.Predicate;
+
+import seedu.address.model.policy.PolicyDate;
+
 
 /**
  * Tests that a {@code Person}'s {@code Policy Expiry Date}is within a certain period from the current date.
