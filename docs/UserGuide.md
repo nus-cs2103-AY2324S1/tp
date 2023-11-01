@@ -424,7 +424,7 @@ No worries! Let the delete tutor command help you to remove **John Doe** from th
 
 1. Type `list-t` and press enter to get the index number of the tutor to be deleted.
 2. Let's say the tutor to be deleted **John Doe**, is in position 9 of the tutor list.
-3. Type `delete-t 9` to remove the tutor in index 9 of the tutor list, which is **John Doe**.
+3. Type `delete-t 9` and pres enter.
 
 **What you can expect to see**
 
