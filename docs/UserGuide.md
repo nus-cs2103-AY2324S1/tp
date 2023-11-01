@@ -498,12 +498,13 @@ Format: `theme`
 | **Open help window**        | `help`                                                                      |
 
 ### Core commands without parameters
-| Action                 | Format, Examples                                                                                                                                                 |
-|------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Clear student list** | `clear`                                                                                                                                                          |
-| **Exit Class Manager** | `exit`                                                                                                                                                           |
-| **List all students**  | `list`                                                                                                                                                           |
-| **Toggle theme**       | `theme`                                                                                                                                                          |
+| Action                   | Format, Examples |
+|--------------------------|------------------|
+| **Clear student list**   | `clear`          |
+| **Exit Class Manager**   | `exit`           |
+| **View command history** | `history`        |
+| **List all students**    | `list`           |
+| **Toggle theme**         | `theme`          |
 
 ### Core commands with parameters
 | Action                         | Format, Examples                                                                                                                                                    |
