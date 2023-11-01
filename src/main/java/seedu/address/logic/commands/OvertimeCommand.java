@@ -33,7 +33,8 @@ public class OvertimeCommand extends Command {
 
     public static final String MESSAGE_OVERTIME_INCREASE_SUCCESS = "Overtime hours of employee %1$s increased by %2$s";
     public static final String MESSAGE_OVERTIME_DECREASE_SUCCESS = "Overtime hours of employee %1$s decreased by %2$s";
-    public static final String MISSING_OPERATION_AMOUNT = "Operation and amount must be specified";
+    public static final String MESSAGE_MISSING_OPERATION_AMOUNT = "Operation and amount must be specified";
+    public static final String MESSAGE_OPERATION_USAGE = "Operation must be either inc or dec";
     private final Id targetId;
     private final OvertimeHours overtimeHoursToChange;
     private final String operation;
@@ -60,13 +61,13 @@ public class OvertimeCommand extends Command {
             model.setEmployee(employeeToUpdate, updatedEmployee);
             if (Objects.equals(operation, "dec")) {
                 return new CommandResult(String.format(MESSAGE_OVERTIME_DECREASE_SUCCESS,
-                        Messages.formatOvertimeHours(updatedEmployee), updatedEmployee.getOvertimeHours()));
+                        Messages.formatOvertimeHours(updatedEmployee), overtimeHoursToChange));
             } else if (Objects.equals(operation, "inc")) {
                 return new CommandResult(String.format(MESSAGE_OVERTIME_INCREASE_SUCCESS,
-                        Messages.formatOvertimeHours(updatedEmployee), updatedEmployee.getOvertimeHours()));
+                        Messages.formatOvertimeHours(updatedEmployee), overtimeHoursToChange));
             }
         }
-        throw new CommandException(Messages.MESSAGE_INVALID_EMPLOYEE_DISPLAYED_ID);
+        throw new CommandException(Messages.MESSAGE_INVALID_COMMAND_FORMAT);
     }
 
     private Employee updateEmployeeOvertime(Employee employeeToEdit) throws CommandException {

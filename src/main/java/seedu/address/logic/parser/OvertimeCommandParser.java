@@ -43,10 +43,13 @@ public class OvertimeCommandParser implements Parser<OvertimeCommand> {
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_ID, PREFIX_OPERATION, PREFIX_AMOUNT);
 
         if (argMultimap.getValue(PREFIX_OPERATION).isEmpty() || argMultimap.getValue(PREFIX_AMOUNT).isEmpty()) {
-            throw new ParseException(OvertimeCommand.MISSING_OPERATION_AMOUNT);
+            throw new ParseException(OvertimeCommand.MESSAGE_MISSING_OPERATION_AMOUNT);
         }
 
         String operation = argMultimap.getValue(PREFIX_OPERATION).get();
+        if (!isOperationValid(operation)) {
+            throw new ParseException(OvertimeCommand.MESSAGE_OPERATION_USAGE);
+        }
         OvertimeHours overtimeHoursToChange = ParserUtil.parseOvertimeHours(argMultimap.getValue(PREFIX_AMOUNT).get());
 
         return new OvertimeCommand(id, overtimeHoursToChange, operation);
@@ -59,5 +62,9 @@ public class OvertimeCommandParser implements Parser<OvertimeCommand> {
      */
     private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
         return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
+    }
+
+    private static boolean isOperationValid(String operation) {
+        return operation.equals("inc") || operation.equals("dec");
     }
 }
