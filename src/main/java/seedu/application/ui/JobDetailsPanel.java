@@ -1,6 +1,4 @@
 package seedu.application.ui;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.logging.Logger;
 
 import javafx.collections.FXCollections;
@@ -11,7 +9,6 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import seedu.application.commons.core.LogsCenter;
 import seedu.application.model.job.Job;
-import seedu.application.model.job.interview.Interview;
 
 /**
  * Panel containing the details of the selected job.
@@ -58,11 +55,8 @@ public class JobDetailsPanel extends UiPart<Region> {
         jobType.setText(job.getJobType().jobType);
         industry.setText(job.getIndustry().industry);
         interviewPreamble.setText("Interviews: ");
-        // placeholder interviews **TO BE UPDATED**
-        List<Interview> interviews = new ArrayList<>();
-        interviews.add(Interview.DEFAULT_INTERVIEW);
         interviewListPanel = new InterviewListPanel(
-                FXCollections.observableArrayList(interviews));
+            FXCollections.observableArrayList(job.getInterviews()));
         interviewListPanelPlaceHolder.getChildren().add(interviewListPanel.getRoot());
     }
 }

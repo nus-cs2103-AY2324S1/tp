@@ -149,8 +149,8 @@ public class ModelManager implements Model {
 
         ModelManager otherModelManager = (ModelManager) other;
         return applicationBook.equals(otherModelManager.applicationBook)
-                && userPrefs.equals(otherModelManager.userPrefs)
-                && filteredJobs.equals(otherModelManager.filteredJobs);
+            && userPrefs.equals(otherModelManager.userPrefs)
+            && filteredJobs.equals(otherModelManager.filteredJobs);
     }
 
 }

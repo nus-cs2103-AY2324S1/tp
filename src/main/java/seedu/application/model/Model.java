@@ -12,7 +12,9 @@ import seedu.application.model.job.Job;
  * The API of the Model component.
  */
 public interface Model {
-    /** {@code Predicate} that always evaluate to true */
+    /**
+     * {@code Predicate} that always evaluate to true
+     */
     Predicate<Job> PREDICATE_SHOW_ALL_JOBS = unused -> true;
 
     /**
@@ -50,7 +52,9 @@ public interface Model {
      */
     void setApplicationBook(ReadOnlyApplicationBook applicationBook);
 
-    /** Returns the ApplicationBook */
+    /**
+     * Returns the ApplicationBook
+     */
     ReadOnlyApplicationBook getApplicationBook();
 
     /**
@@ -77,17 +81,21 @@ public interface Model {
      */
     void setJob(Job target, Job editedJob);
 
-    /** Returns an unmodifiable view of the filtered job list */
+    /**
+     * Returns an unmodifiable view of the filtered job list
+     */
     ObservableList<Job> getFilteredJobList();
 
     /**
      * Updates the filter of the filtered job list to filter by the given {@code predicate}.
+     *
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredJobList(Predicate<Job> predicate);
 
     /**
      * Sorts the jobs in the application book based on the comparator provided.
+     *
      * @param comparator The comparator used to compare 2 jobs.
      */
     public void sortJobs(FieldComparator comparator);
