@@ -8,7 +8,7 @@ import static seedu.classmanager.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.classmanager.logic.commands.CommandTestUtil.VALID_STUDENT_NUMBER_AMY;
 import static seedu.classmanager.logic.parser.CliSyntax.PREFIX_PARTICIPATION;
 import static seedu.classmanager.logic.parser.CliSyntax.PREFIX_STUDENT_NUMBER;
-import static seedu.classmanager.logic.parser.CliSyntax.PREFIX_TUTORIAL_SESSION;
+import static seedu.classmanager.logic.parser.CliSyntax.PREFIX_TUTORIAL_INDEX;
 import static seedu.classmanager.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.classmanager.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
@@ -21,11 +21,11 @@ import seedu.classmanager.model.student.ClassDetails;
 import seedu.classmanager.model.student.StudentNumber;
 
 public class RecordClassParticipationCommandParserTest {
-    public static final String INVALID_TUT_DESC = " " + PREFIX_TUTORIAL_SESSION + "first";
+    public static final String INVALID_TUT_DESC = " " + PREFIX_TUTORIAL_INDEX + "first";
     public static final String INVALID_PARTICIPATION_DESC = " " + PREFIX_PARTICIPATION + "execellent";
     public static final String VALID_TUT = "1";
     public static final String VALID_PARTICIPATION = "true";
-    public static final String VALID_TUT_DESC = " " + PREFIX_TUTORIAL_SESSION + VALID_TUT;
+    public static final String VALID_TUT_DESC = " " + PREFIX_TUTORIAL_INDEX + VALID_TUT;
     public static final String VALID_PARTICIPATION_DESC = " " + PREFIX_PARTICIPATION + VALID_PARTICIPATION;
 
     private static final String MESSAGE_INVALID_FORMAT =
@@ -99,20 +99,20 @@ public class RecordClassParticipationCommandParserTest {
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_STUDENT_NUMBER));
 
         assertParseFailure(parser, userInput + VALID_TUT_DESC,
-                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_TUTORIAL_SESSION));
+                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_TUTORIAL_INDEX));
 
         // multiple valid fields repeated
         userInput += VALID_TUT_DESC + VALID_PARTICIPATION_DESC;
 
         assertParseFailure(parser, userInput,
-                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_TUTORIAL_SESSION, PREFIX_PARTICIPATION));
+                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_TUTORIAL_INDEX, PREFIX_PARTICIPATION));
 
         // multiple invalid fields followed by multiple valid repeated fields
         userInput = INVALID_STUDENT_NUMBER_DESC + INVALID_TUT_DESC + INVALID_PARTICIPATION_DESC
                 + STUDENT_NUMBER_DESC_AMY + VALID_TUT_DESC + VALID_PARTICIPATION_DESC;
 
         assertParseFailure(parser, userInput,
-                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_TUTORIAL_SESSION,
+                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_TUTORIAL_INDEX,
                         PREFIX_PARTICIPATION,
                         PREFIX_STUDENT_NUMBER));
     }
