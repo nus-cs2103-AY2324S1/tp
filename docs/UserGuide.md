@@ -131,8 +131,8 @@ If you press <code>escape</code> key, the exit is cancelled and you can continue
 The example above is the result of pressing <code>escape</code> key after you are warned.
 
 
-To learn more about **adding a new fosterer from profile page**, refer to a section about [add](#adding-a-fosterer-through-the-profile-page-add). <br/>
-To learn more about **editing a fosterer in profile page**, refer to a section about [edit](#editing-a-fosterers-detail-through-the-profile-page-edit). 
+To learn more about **adding a new fosterer from profile page**, refer to a section [Adding a fosterer through the main window: add](#adding-a-fosterer-through-the-profile-page-add). <br/>
+To learn more about **editing a fosterer in profile page**, refer to a section about [Editing a fosterer's detail through the profile page: edit](#editing-a-fosterers-detail-through-the-profile-page-edit). 
 
 
 ## Features
@@ -236,13 +236,13 @@ Format: `add`
 
 **:information_source: Notes about the command format:**<br>
 
-*  Valid cases of a fosterer entry in the section 'Adding a fosterer through the main window' are still applied in this alternative way to add a fosterer.
+*  Valid cases of a fosterer entry in the section [Adding a fosterer through the main window](#adding-a-fosterer-through-the-main-window-add) are still applied in this alternative way to add a fosterer.
 
 </div>
 
 ![Profile](images/screenshots/ProfilePage.png)
 
-To learn more about profile page, refer to the section of [the profile view](#the-profile-view) under [User Interface](#user-interface). 
+To learn more about profile page, please refer to the section [User Interface: the Profile View](#the-profile-view).  
 
 ### Listing fosterers: `list` (Alias: `find`)
 
@@ -317,7 +317,8 @@ Examples:
 * `list` followed by `view 2`
   * views the profile of the 2nd fosterer in the address book.
 
-=======
+To learn more about profile page, please refer to the section [User Interface: the Profile View](#the-profile-view). 
+
 #### Editing a fosterer’s details in profile page:
 
 1. Enter a fosterer’s profile page with `view INDEX`.
@@ -418,7 +419,7 @@ Parameters:
   * Duration / end date of foster, whichever the foster manager prefers
   * Identifiable physical traits of the animal
 *  The respective updated field descriptions can be keyed in and saved by the user through the `save` command.
-  * Please refer to the section 'Viewing a fosterer's detail: Editing a fosterer’s details in profile page' for the specific steps to do so.
+  * Please refer to the section [Viewing a fosterer's detail: Editing a fosterer’s details in profile page](#editing-a-fosterers-details-in-profile-page) for the specific steps to do so.
  
 </div>
 
@@ -426,11 +427,11 @@ Parameters:
 Edit may cause information loss. 
 Before you type the save command, make sure there is no accidental overwrite with faulty information. 
 </div>
-
 <br/>
-![Edit example](images/screenshots/EditExample.png)
 
-To learn more about profile page, refer to the section of [the profile view](#the-profile-view) under [User Interface](#user-interface).
+![Example profile 1](images/screenshots/EditExample.png)
+
+To learn more about profile page, please refer to the section [User Interface: the Profile View](#the-profile-view). 
 
 ### Deleting a fosterer : `delete`
 
@@ -531,10 +532,14 @@ Exits the program.
 
 Format: `exit`
 
-<div markdown="span" class="alert alert-primary">
-  :bulb: <b>Tip:</b><br/>
-  As mentioned in the <code>view</code>, <code>exit</code> exits the program when executed on the normal foster family list view, while on the profile page you are exited out of the page back to the list view. 
+<div markdown="block" class="alert alert-primary">
+
+**:bulb: Tip:**<br>
+
+* On the profile view, entering <code>exit</code> leads you out of the page back to the list view. 
+* On the profile view, attempting to <code>exit</code> without saving changes with <code>save</code> prompts a warning message (refer to [User Interface: The Profile View: Exiting the profile page](#exiting-the-profile-page)). 
 </div>
+
 
 ### Saving data
 
