@@ -17,7 +17,7 @@ import org.junit.jupiter.api.Test;
 public class InterviewTest {
 
     @Test
-    public void isNotValidOrNewInterview() {
+    public void isSameInterview() {
         // same object -> returns true
         assertTrue(STANDARD_INTERVIEW.isSameInterview(STANDARD_INTERVIEW));
 

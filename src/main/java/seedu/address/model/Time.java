@@ -281,6 +281,21 @@ public class Time implements Comparable<Time> {
     }
 
     /**
+     * Returns true if this Time instance is after the given time.
+     */
+    public boolean isAfter(Time otherTime) {
+        return this.time.isAfter(otherTime.time);
+    }
+
+    /**
+     * Returns true if this Time instance is between the given time,
+     * exclusive of the start and end time.
+     */
+    public boolean isBetween(Time start, Time end) {
+        return isAfter(start) && isBefore(end);
+    }
+
+    /**
      * Returns true if startTime and endTime are within working hours,
      * which is defined to be between 0900 and 1700.
      *

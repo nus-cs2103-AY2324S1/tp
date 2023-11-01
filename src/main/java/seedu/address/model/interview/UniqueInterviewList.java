@@ -37,6 +37,14 @@ public class UniqueInterviewList implements Iterable<Interview> {
     }
 
     /**
+     * Returns true if any interview in the list clashes with the interview in the given argument.
+     */
+    public boolean anyClash(Interview toCheck) {
+        requireNonNull(toCheck);
+        return internalList.stream().anyMatch(toCheck::isClashingWith);
+    }
+
+    /**
      * Adds a interview to the list.
      * The interview must not already exist in the list.
      */
@@ -90,7 +98,7 @@ public class UniqueInterviewList implements Iterable<Interview> {
      */
     public void setInterviews(List<Interview> interviews) {
         requireAllNonNull(interviews);
-        if (!interviewsAreUnique(interviews)) {
+        if (!interviewsAreUnique(interviews) || !interviewsDoNotClash(interviews)) {
             throw new DuplicateInterviewException();
         }
 
@@ -149,6 +157,20 @@ public class UniqueInterviewList implements Iterable<Interview> {
         for (int i = 0; i < interviews.size() - 1; i++) {
             for (int j = i + 1; j < interviews.size(); j++) {
                 if (interviews.get(i).isSameInterview(interviews.get(j))) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    /**
+     * Returns true if {@code interviews} contains only interviews that do not clash.
+     */
+    private boolean interviewsDoNotClash(List<Interview> interviews) {
+        for (int i = 0; i < interviews.size() - 1; i++) {
+            for (int j = i + 1; j < interviews.size(); j++) {
+                if (interviews.get(i).isClashingWith(interviews.get(j))) {
                     return false;
                 }
             }

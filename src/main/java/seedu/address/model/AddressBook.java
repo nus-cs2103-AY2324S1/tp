@@ -118,6 +118,15 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Returns true if an interview with a timing that clashes with {@code interview}
+     * exists in the address book.
+     */
+    public boolean hasInterviewClash(Interview interview) {
+        requireNonNull(interview);
+        return interviews.anyClash(interview);
+    }
+
+    /**
      * Adds an interview to the address book.
      * The interview must not already exist in the address book.
      */
@@ -154,7 +163,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         requireNonNull(applicant);
 
         for (Interview interview : getInterviewList()) {
-            if (interview.getInterviewApplicant().isSameApplicant(applicant)) {
+            if (interview.getInterviewApplicant().equals(applicant)) {
                 return interview;
             }
         }

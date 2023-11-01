@@ -1,5 +1,7 @@
 package seedu.address.model;
 
+import static java.util.Objects.requireNonNull;
+
 import java.nio.file.Path;
 import java.util.Comparator;
 import java.util.function.Predicate;
@@ -96,6 +98,12 @@ public interface Model {
      * Returns true if an Interview with the same attributes as {@code interview} exists in the address book.
      */
     boolean hasInterview(Interview interview);
+
+    /**
+     * Returns true if an interview with a timing that clashes with {@code interview}
+     * exists in the address book.
+     */
+    public boolean hasInterviewClash(Interview interview);
 
     /**
      * Adds the given interview.

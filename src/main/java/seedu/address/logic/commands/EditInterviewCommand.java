@@ -45,6 +45,7 @@ public class EditInterviewCommand extends Command {
     public static final String MESSAGE_INVALID_TIME = "The interview start time must be before the end time, "
             + "the time must be between 0900 to 1700,\n"
             + "and the start time and end time must be on the same day!";
+    public static final String MESSAGE_TIME_CLASH = "This interview clashes with another interview!";
 
     private final Index index;
     private final EditInterviewDescriptor editInterviewDescriptor;
@@ -79,6 +80,10 @@ public class EditInterviewCommand extends Command {
 
         if (!editedInterview.isValid()) {
             throw new CommandException(MESSAGE_INVALID_TIME);
+        }
+
+        if (model.hasInterviewClash(editedInterview)) {
+            throw new CommandException(MESSAGE_TIME_CLASH);
         }
 
         model.setInterview(interviewToEdit, editedInterview);

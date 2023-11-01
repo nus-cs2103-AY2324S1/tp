@@ -136,8 +136,6 @@ public class Interview {
         }
 
         return otherInterview != null
-                && otherInterview.startTime.equals(startTime)
-                && otherInterview.endTime.equals(endTime)
                 && otherInterview.getInterviewApplicant().equals(getInterviewApplicant());
     }
 
@@ -150,6 +148,24 @@ public class Interview {
                 && startTime.isWithinWorkingHours()
                 && endTime.isWithinWorkingHours()
                 && startTime.getDate().equals(endTime.getDate());
+    }
+
+    /**
+     * Returns true if this interview instance clashes with
+     * the given otherInterview in the argument.
+     */
+    public boolean isClashingWith(Interview otherInterview) {
+        // Interviews do not clash with themselves
+        if (isSameInterview(otherInterview)) {
+            return false;
+        }
+
+        Time otherStartTime = otherInterview.getStartTime();
+        Time otherEndTime = otherInterview.getEndTime();
+
+        return (startTime.isBetween(otherStartTime, otherEndTime) || startTime.equals(otherStartTime))
+                || (endTime.isBetween(otherStartTime, otherEndTime) || endTime.equals(otherEndTime))
+                || otherStartTime.isBetween(startTime, endTime);
     }
 
     public Applicant getInterviewApplicant() {
@@ -174,6 +190,14 @@ public class Interview {
 
     public LocalDateTime getInterviewEndTime() {
         return endTime.getDateAndTime();
+    }
+
+    public Time getStartTime() {
+        return startTime;
+    }
+
+    public Time getEndTime() {
+        return endTime;
     }
 
     public Rating getRating() {
