@@ -132,6 +132,7 @@ public class WellNus implements ReadOnlyWellNus {
     public boolean hasNoStudentForAppointment(Appointment appointment) {
         return !students.hasName(appointment.getName());
     }
+
     /**
      * Adds a person to the address book.
      * The person must not already exist in the address book.
