@@ -106,7 +106,7 @@ public class UniqueAppointmentList implements Iterable<Appointment> {
      * Replaces the current list with a sorted list based on attribute in isAscending order
      */
     public void sort(boolean isAscending, String attribute) {
-        if (attribute.equals("date")) {
+        if (attribute.equals("time")) {
             sortByDateAndTime(isAscending);
         } else if (attribute.equals("priority")) {
             sortByPriority(isAscending);

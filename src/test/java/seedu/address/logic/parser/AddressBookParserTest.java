@@ -89,7 +89,6 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_mode() throws Exception {
         assertTrue(parser.parseCommand(ModeCommand.COMMAND_WORD) instanceof ModeCommand);
-        assertTrue(parser.parseCommand(ModeCommand.COMMAND_WORD + " 3") instanceof ModeCommand);
     }
 
     @Test

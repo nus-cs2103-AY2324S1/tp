@@ -19,7 +19,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
  * Parses input arguments and creates a new SortCommand object
  */
 public class SortCommandParser implements Parser<SortCommand> {
-    private static final String[] ATTRIBUTES = {"date", "priority"};
+    private static final String[] ATTRIBUTES = {"time", "priority"};
     /**
      * Parses the given {@code String} of arguments in the context of the SortCommand
      * and returns a SortCommand object for execution.
