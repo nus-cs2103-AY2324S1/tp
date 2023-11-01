@@ -26,25 +26,30 @@ public class TypicalMembers {
             .withPhone("94351253")
             .withEmail("alicep@example.com")
             .withTelegram("@alanpauline")
-            .withTags("friends").build();
+            .withTags("friends")
+            .withTask("finish proposal", "setup meeting").build();
     public static final Member BETTY_MEMBER = new MemberBuilder().withName("Betty Meier")
             .withPhone("98765432")
             .withEmail("johnd@example.com")
             .withTelegram("@bettymeier")
-            .withTags("owesMoney", "friends").build();
+            .withTags("owesMoney", "friends")
+            .withTask("finish proposal", "setup meeting").build();
     public static final Member CHARLES_MEMBER = new MemberBuilder().withName("Charles Kurz")
             .withPhone("95352563")
             .withEmail("heinz@example.com")
-            .withTelegram("@charleskurz").build();
+            .withTelegram("@charleskurz")
+            .withTask("finish proposal", "setup meeting").build();
     public static final Member DENISE_MEMBER = new MemberBuilder().withName("Denise Meier")
             .withPhone("87652533")
             .withEmail("cornelia@example.com")
             .withTelegram("@denisemeier")
-            .withTags("friends").build();
+            .withTags("friends")
+            .withTask("finish proposal", "setup meeting").build();
     public static final Member ETHAN_MEMBER = new MemberBuilder().withName("Ethan Meyer")
             .withPhone("9482224")
             .withEmail("werner@example.com")
-            .withTelegram("@ethanmeyer").build();
+            .withTelegram("@ethanmeyer")
+            .withTask("finish proposal", "setup meeting").build();
     public static final Member FRED_MEMBER = new MemberBuilder().withName("Fred Kunz")
             .withPhone("9482427")
             .withEmail("lydia@example.com")
@@ -52,13 +57,15 @@ public class TypicalMembers {
     public static final Member GISELLE_MEMBER = new MemberBuilder().withName("Giselle Best")
             .withPhone("9482442")
             .withEmail("anna@example.com")
-            .withTelegram("@gisellebest").build();
+            .withTelegram("@gisellebest")
+            .withTask("finish proposal", "setup meeting").build();
 
     // Manually added
     public static final Member HUGO_MEMBER = new MemberBuilder().withName("Hugo Meier")
             .withPhone("8482424")
             .withEmail("stefan@example.com")
-            .withTelegram("@hugomeier").build();
+            .withTelegram("@hugomeier")
+            .withTask("finish proposal", "setup meeting").build();
 
     // Manually added - Member's details found in {@code CommandTestUtil}
     public static final Member AMY_MEMBER = new MemberBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)

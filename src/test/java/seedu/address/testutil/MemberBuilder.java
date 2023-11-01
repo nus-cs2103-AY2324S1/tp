@@ -7,9 +7,11 @@ import seedu.address.model.person.Member;
 import seedu.address.model.person.fields.Email;
 import seedu.address.model.person.fields.Name;
 import seedu.address.model.person.fields.Phone;
+import seedu.address.model.person.fields.Tasklist;
 import seedu.address.model.person.fields.Telegram;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
+import seedu.address.task.ToDo;
 
 /**
  * A utility class to help with building Member objects.
@@ -26,6 +28,7 @@ public class MemberBuilder {
     private Email email;
     private Telegram telegram;
     private Set<Tag> tags;
+    private final Tasklist tasks;
 
     /**
      * Creates a {@code MemberBuilder} with the default details.
@@ -36,6 +39,7 @@ public class MemberBuilder {
         email = new Email(DEFAULT_EMAIL);
         telegram = new Telegram(DEFAULT_TELEGRAM);
         tags = new HashSet<>();
+        tasks = new Tasklist();
     }
 
     /**
@@ -47,6 +51,7 @@ public class MemberBuilder {
         email = memberToCopy.getEmail();
         telegram = memberToCopy.getTelegram();
         tags = new HashSet<>(memberToCopy.getTags());
+        tasks = new Tasklist(memberToCopy.getTasks());
     }
 
     /**
@@ -89,8 +94,15 @@ public class MemberBuilder {
         return this;
     }
 
+    public MemberBuilder withTask(String... taskName) {
+        for (String i : taskName) {
+            this.tasks.addToDo(new ToDo(i));
+        }
+        return this;
+    }
+
     public Member build() {
-        return new Member(name, phone, email, telegram, tags);
+        return new Member(name, phone, email, telegram, tags, tasks);
     }
 
 }

@@ -13,6 +13,8 @@ import seedu.address.model.person.fields.Name;
 import seedu.address.model.person.fields.Phone;
 import seedu.address.model.person.fields.Telegram;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.task.Task;
+
 
 /**
  * Contains utility methods for populating {@code AddressBook} with sample data.
@@ -22,7 +24,8 @@ public class SampleDataUtil {
         return new Member[]{
             new Member(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
                     new Telegram("alexyeoh"),
-                    getTagSet("friends")),
+                    getTagSet("friends"),
+                    getTaskSet("finish_proposal")),
             new Member(new Name("Bernice Yu"), new Phone("99272758"), new Email("berniceyu@example.com"),
                     new Telegram("berniceyu"),
                     getTagSet("colleagues", "friends")),
@@ -70,6 +73,12 @@ public class SampleDataUtil {
     public static Set<Tag> getTagSet(String... strings) {
         return Arrays.stream(strings)
                 .map(Tag::new)
+                .collect(Collectors.toSet());
+    }
+
+    public static Set<Task> getTaskSet(String... strings) {
+        return Arrays.stream(strings)
+                .map(Task::new)
                 .collect(Collectors.toSet());
     }
 }

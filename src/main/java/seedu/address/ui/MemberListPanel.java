@@ -36,6 +36,7 @@ public class MemberListPanel extends UiPart<Region> {
         @Override
         protected void updateItem(Member member, boolean empty) {
             super.updateItem(member, empty);
+            System.out.println("Updated Memebnr lits panel");
 
             if (empty || member == null) {
                 setGraphic(null);
