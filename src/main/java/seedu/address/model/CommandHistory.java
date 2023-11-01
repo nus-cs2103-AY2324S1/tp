@@ -6,7 +6,7 @@ import java.util.LinkedList;
  * A command history stores a specified number of commands that the user has entered.
  */
 public class CommandHistory {
-    private final int MAX_COMMANDS;
+    private final int maxCommands;
     private final LinkedList<String> commandHistory;
     private int currentCommandIndex = 0;
 
@@ -14,7 +14,7 @@ public class CommandHistory {
      * Create a command history with a default maximum number of commands to store.
      */
     public CommandHistory() {
-        this.MAX_COMMANDS = 100;
+        this.maxCommands = 100;
         this.commandHistory = new LinkedList<>();
     }
 
@@ -23,7 +23,7 @@ public class CommandHistory {
      * @param maxCommands The maximum number of commands to store.
      */
     public CommandHistory(int maxCommands) {
-        this.MAX_COMMANDS = maxCommands;
+        this.maxCommands = maxCommands;
         this.commandHistory = new LinkedList<>();
     }
 
@@ -32,7 +32,7 @@ public class CommandHistory {
      * @param command The command to add.
      */
     public void addCommand(String command) {
-        if (commandHistory.size() == MAX_COMMANDS) {
+        if (commandHistory.size() == maxCommands) {
             commandHistory.removeFirst();
         }
 
@@ -57,7 +57,9 @@ public class CommandHistory {
      */
     public String getPreviousCommand() {
         if (currentCommandIndex == 0) {
-            return "";
+            return commandHistory.isEmpty()
+                ? ""
+                : commandHistory.getFirst();
         }
         currentCommandIndex--;
         return commandHistory.get(currentCommandIndex);
@@ -67,7 +69,8 @@ public class CommandHistory {
      * Get the next command in the command history.
      */
     public String getNextCommand() {
-        if (currentCommandIndex == commandHistory.size() - 1) {
+        if (currentCommandIndex >= commandHistory.size() - 1) {
+            currentCommandIndex = commandHistory.size();
             return "";
         }
         currentCommandIndex++;
