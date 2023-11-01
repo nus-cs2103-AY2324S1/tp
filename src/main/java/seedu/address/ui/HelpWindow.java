@@ -16,7 +16,34 @@ import seedu.address.commons.core.LogsCenter;
 public class HelpWindow extends UiPart<Stage> {
 
     public static final String USERGUIDE_URL = "https://ay2324s1-cs2103t-t11-1.github.io/tp/UserGuide.html";
-    public static final String HELP_MESSAGE = "Refer to the user guide: " + USERGUIDE_URL;
+    public static final String COMMAND_TABLE = "Useful Commands\n"
+            + "1- Configure Class Manager - config\n"
+            + "2- Open help window - help\n\n"
+            + "Core Commands without Parameters\n"
+            + "3- Clear student list - clear\n"
+            + "4- Exit Class Manager - exit\n"
+            + "5- List all students - list\n"
+            + "6- Toggle theme - theme\n\n"
+            + "Core Commands with Parameters\n"
+            + "7- Add - add s/STUDENT_NUMBER n/NAME p/PHONE_NUMBER e/EMAIL c/CLASS_NUMBER [t/TAG]…\n"
+            + "8- Comment - comment s/STUDENT_NUMBER c/COMMENT\n"
+            + "9- Delete - delete s/STUDENT_NUMBER\n"
+            + "10- Edit - edit STUDENT_NUMBER [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [s/NEW_STUDENT_NUMBER] "
+            + "[c/CLASS_NUMBER]\n"
+            + "11- Lookup - lookup [c/CLASS_NUMBER] [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [s/STUDENT_NUMBER] [t/TAG]\n"
+            + "12- Load - load f/FILE_NAME\n"
+            + "13- Mark Absent - mark-abs TUTORIAL_INDEX s/STUDENT_NUMBER\n"
+            + "14- Mark Present - mark-pre TUTORIAL_INDEX s/STUDENT_NUMBER\n"
+            + "15- Mark Present All - mark-pre-all TUTORIAL_INDEX\n"
+            + "16- Random - random INDEX\n"
+            + "17- Record Class participation - class-part s/STUDENT_NUMBER tut/TUTORIAL_INDEX "
+            + "part/PARTICIPATION_LEVEL\n"
+            + "18- Set Grade - grade s/STUDENT_NUMBER a/ASSIGNMENT_INDEX g/GRADE\n"
+            + "19- Tag - tag s/STUDENT_NUMBER [/add] [/delete] t/[TAG]…\n"
+            + "20- View - view s/STUDENT_NUMBER";
+
+
+    public static final String HELP_MESSAGE = COMMAND_TABLE + "\nRefer to the user guide: " + USERGUIDE_URL;
 
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
     private static final String FXML = "HelpWindow.fxml";
