@@ -114,16 +114,13 @@ All planned enhancements / fixes will also be listed in the [Planned Enhancement
 2. Features
    - Request help [Coming Soon]
    - Add normal contact
-   - Add emergency contact
    - Add alternative information to contact
    - Edit contact information
    - Upload contact's photo
    - Update contact's photo
    - Search contact
    - List all contacts
-   - List emergency contacts
    - Delete normal contact
-   - Delete emergency contact
    - Undo last action [Coming Soon]
    - Receive upcoming birthday notifications
    - Opt out notification [Coming soon]
@@ -155,8 +152,6 @@ All planned enhancements / fixes will also be listed in the [Planned Enhancement
    * `add n/Jane Doe p/98765433 e/janed@example.com a/Jane street, block 123, #01-01 t/floorball t/suitemate` : Adds a contact named `Jane Doe` to CampusConnect who is tagged with the `floorball` and `suitemate` tags.
 
    * `optout notify birthdays` : Opts out from birthday notifications.
-
-   * `addemer 3 RA` : Marks the 3rd contact in the list as an RA (Residential Assistant).
 
    * `find name/Doe` : Finds all contacts who have "Doe" in their name.
 
@@ -210,6 +205,11 @@ All the fields must be provided except `TAG`. The fields you enter should follow
 | `TAG`          | Use `a-z`, `A-Z` and `0-9` only. Alternatively, use `RA` or `SOS` which are predefined emergency tags for your contact  | friend                          |
 </box>
 
+<box type="info">
+
+Certain tags such as `RA` and `SOS` are tags to indicate important contacts such as emergency contacts. They are displayed first, and with a red background to indicate their importance. 
+</box>
+
 Examples
 * `add n/John Doe p/98765432 e/johndoe@gmail.com a/John street, block 123, #01-01 t/friend`
     * Adds a contact named "John Doe" with the phone number "98765432", email "johndoe@gmail.com", address "John street, block 123, #01-01", and a tag "friend"
@@ -217,16 +217,7 @@ Examples
     * Adds a contact named "Betsy Crowe" with the email "betsycrowe@example.com", address "Newgate Prison", phone "1234567", and two tags "friend" and "colleague"
 
 
-### Add emergency contact
 
-Adds an existing contact as an emergency contact.
-
-Format: `addemer INDEX [tag/TAG]`
-* `tag/TAG` Optional tag indicating the type of emergency contact, e.g. RA (residential assistant) or SO (security officer)
-
-Examples:
-* `addemer 1 RA`
-    * Indicates that the contact at index 1 is the residential assistant (RA) for contact during emergencies
 
 ###  Add alternative information to contact
 
@@ -436,18 +427,6 @@ Shows a list of all contacts.
 
 Format: `list`
 
-###  List emergency contacts
-
-Lists all emergency contacts that have been registered.
-
-Format: `listemer [tag/TAG]`
-* `tag/TAG` Optional tag to filter for emergency contacts of a certain type, e.g. RA (residential assistant) or SO (security officer)
-
-Examples:
-* `listemer`
-* `listemer tag/RA`
-  * Only lists emergency contacts tagged as residential assistants (RA)
-
 ###  Delete normal contact
 
 Deletes an existing contact from the address book.
@@ -460,17 +439,6 @@ Examples:
 * `delete 2`
   * Deletes the 2nd person from the list
 
-###  Delete emergency contact
-
-Removes contact as an emergency contact.
-
-Note: Contact will not be deleted, only unmarked as an emergency contact.
-
-Format: `delemer INDEX`
-
-Examples:
-* `delemer 1`
-  * Indicates that contact at index 1 is no longer an emergency contact
 
 ###  Undo last action [Coming Soon]
 
@@ -515,45 +483,51 @@ Invalid Input Example | Application Output
 **optout notifications** | Invalid `NOTIFICATION_DESCRIPTION` (refer to aforementioned for the list of `NOTIFICATION_DESCRIPTION` to enter).
 **optout** | `NOTIFICATION_DESCRIPTION` cannot be empty.
 
-### Notes feature
-![Window with Notes](images/notes/window_with_notes.png)
-![Notes Window](images/notes/notes_window.png)
+### Notes
 
-#### 1. Adding Notes to a Person
+<div style="display:flex; justify-content:space-around; align-items:center;">
+  <img src="images/notes/noteswindow2.png" alt="Window with Notes" style="height:400px; margin:10px;">
+</div>
 
-##### Command Format:
-    note INDEX NOTE_CONTENT
+Allows you to add notes to a person and remove notes from a person.
 
-##### Parameters:
-- `INDEX`: The position of the person in the list you want to add a note to. This should be a positive integer.
-- `NOTE_CONTENT`: The content of the note you want to add.
+You can add notes to a person with the `addnote` command, remove notes from them with the `removenotes` command.
 
-##### Example:
-If you want to add a note to the person at position 1 in the list, you would use:
-    
-    note 1 This is a sample note for the person.
+You can view notes by one of two ways: by using the `viewnotes` command, or by clicking on the `Notes` button in the person's information window.
 
-This will add a note "This is a sample note for the person." to the person at index 1.
+Format: `addnote PERSON_INDEX NOTE_CONTENT`, `removenote PERSON_INDEX NOTE_INDEX` and `viewnotes PERSON_INDEX`
 
-#### 2. Removing Notes from a Person
+<box type="warning">
 
-##### Command Format:
-    removenote INDEX_PERSON INDEX_NOTE
-
-##### Parameters:
-- `INDEX_PERSON`: The position of the person in the list you want to remove a note from. This should be a positive integer.
-- `INDEX_NOTE`: The position of the note in the person's list of notes you want to remove. This should be a positive integer.
-
-##### Example:
-If you want to remove the 2nd note from the person at position 1 in the list, you would use:
-    
-    removenote 1 2
-
-This will remove the 2nd note from the person at index 1.
-
-##### Note:
 Always make sure the indices provided are valid and within the bounds of the list. Invalid indices will result in an error.
-Make sure to familiarize yourself with the commands and use them as per your needs. If you have any issues or questions, refer to the application's help section or contact the support team.
+
+</box>
+
+<panel header=":fa-solid-book: **Command Parameter / Syntax Tables**" type="secondary" expanded no-close>
+The fields you enter should follow the following format:
+
+| Parameter     | Description                                                                                                 | 
+|---------------|-------------------------------------------------------------------------------------------------------------| 
+| `PERSON_INDEX`| The position of the person in the list you want to add a note to. This should be a positive integer, and should be within the bounds of the list. | 
+| `NOTE_INDEX`  | The position of the note in the person's list of notes you want to remove. This should be a positive integer, and should be within the bounds of the list. | 
+| `NOTE_CONTENT`| The content of the note you want to add. It has to be non-empty, and can contain any character.              | 
+
+</panel>
+
+<br>
+
+<box type="info" icon=":fa-solid-magnifying-glass:">
+To manage notes for a person in a list, use the following commands:
+
+| Action                                  | Command                                           | Description                                             |
+|-----------------------------------------|---------------------------------------------------|---------------------------------------------------------|
+| Add a note to a person                  | `addnote 1 This is a sample note for the person.` | Adds a note to the person at index 1.                   |
+| Remove a specific note from a person    | `removenote 1 2`                                  | Removes the 2nd note from the person at index 1.        |
+| View all notes of a person              | `viewnotes 1`                                     | Displays all notes of the person at index 1.            |
+
+To add a note, use the `addnote` command followed by the position number and the note text. To remove a note, use the `removenote` command followed by the position number and the note index. To view all notes, use the `viewnotes` command followed by the position number. Closing the notes window can be done via the "Close" button or by pressing ESC.
+</box>
+
 
 ###  Track payment [Coming Soon]
 ###  Change language [Coming Soon]
@@ -578,10 +552,6 @@ Make sure to familiarize yourself with the commands and use them as per your nee
 Action        | Format, Examples
 --------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 **Add**       | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-**Addemer**   | `addemer INDEX [tag/TAG]`
 **Addalt**    | `addalt INDEX [tg/TELEGRAM] [e2/SECONDARY_EMAIL] [li/LINKEDIN]` <br> e.g., `addalt 1 tg/johndoe_telegram e2/johndoe2@example.com`
-**Delemer**   | `delemer INDEX`
-**Listemer**  | `listemer [tag/TAG]`
-**Optout**    | `optout NOTIFICATION_DESCRIPTION`
 **Find**      | `find FIELD/KEYWORD [FIELD/KEYWORD]`
 
