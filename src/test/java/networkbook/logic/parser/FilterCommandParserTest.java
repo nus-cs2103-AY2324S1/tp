@@ -2,6 +2,7 @@ package networkbook.logic.parser;
 
 import static networkbook.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static networkbook.logic.parser.CommandParserTestUtil.assertParseSuccess;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -11,6 +12,7 @@ import org.junit.jupiter.api.Test;
 import networkbook.logic.Messages;
 import networkbook.logic.commands.filter.FilterCommand;
 import networkbook.logic.commands.filter.FilterCourseCommand;
+import networkbook.logic.commands.filter.FilterSpecCommand;
 import networkbook.model.person.filter.CourseContainsKeyTermsPredicate;
 import networkbook.model.person.filter.CourseIsStillBeingTakenPredicate;
 
@@ -34,6 +36,15 @@ public class FilterCommandParserTest {
     public void parse_noArgs_throwsParseException() {
         assertParseFailure(parser, "filter /by course /with ",
                 String.format(FilterCommandParser.MISSING_FIELD));
+    }
+
+    @Test
+    public void parse_fields_returnsMatchingType() throws Exception {
+        FilterCommand courseCommand = parser.parse("filter /by course /with a");
+        FilterCommand specCommand = parser.parse("filter /by spec /with a");
+
+        assertTrue(courseCommand instanceof FilterCourseCommand);
+        assertTrue(specCommand instanceof FilterSpecCommand);
     }
 
     @Test
