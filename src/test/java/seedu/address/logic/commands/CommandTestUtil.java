@@ -144,4 +144,13 @@ public class CommandTestUtil {
 
         assertEquals(1, model.getFilteredStudentList().size());
     }
+
+    /**
+     * Deletes the first student in {@code model}'s filtered list from {@code model}'s address book.
+     */
+    public static void deleteFirstStudent(Model model) {
+        Student firstStudent = model.getFilteredStudentList().get(0);
+        model.deleteStudent(firstStudent);
+        model.commitAddressBook();
+    }
 }
