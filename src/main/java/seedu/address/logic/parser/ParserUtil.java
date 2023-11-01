@@ -3,7 +3,9 @@ package seedu.address.logic.parser;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Collection;
 import java.util.HashSet;
@@ -12,6 +14,7 @@ import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
+import seedu.address.logic.commands.CompleteCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.appointment.Appointment;
 import seedu.address.model.financialplan.FinancialPlan;
@@ -130,7 +133,6 @@ public class ParserUtil {
         return new NextOfKinPhone(trimmedNokPhone);
     }
 
-
     /**
      * Parses a {@code String financialPlan} into a {@code FinancialPlan}.
      * Leading and trailing whitespaces will be trimmed.
@@ -189,6 +191,34 @@ public class ParserUtil {
         }
 
         return new Appointment(trimmedAppointmentName, appointmentDate);
+    }
+
+    /**
+     * Parses a {@code String date} into a {@code LocalDate}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code date} is invalid.
+     */
+    public static LocalDate parseDate(String date) throws ParseException {
+        requireNonNull(date);
+        String trimmedDate = date.trim();
+
+        String dateValidation = "\\d{2}-\\d{2}-\\d{4}";
+        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+
+
+        if (!trimmedDate.matches(dateValidation)) {
+            throw new ParseException(CompleteCommand.MESSAGE_INVALID_DATE_FORMAT);
+        }
+
+        LocalDate appointmentDate;
+        try {
+            appointmentDate = LocalDate.parse(date, dateFormatter);
+        } catch (DateTimeParseException e) {
+            throw new ParseException(CompleteCommand.MESSAGE_INVALID_DATE);
+        }
+
+        return appointmentDate;
     }
 
     /**
