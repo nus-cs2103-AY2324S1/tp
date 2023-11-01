@@ -6,13 +6,6 @@
 
 # Staff-Snap User Guide
 
-
-## Introduction
-
-Staff-Snap is an application meant HR managers hiring candidates to make applicant tracking easier.
-
-
-
 ## Table of Contents
 
 - [Quick start <a name="quick-start"></a>](#quick-start)
@@ -41,57 +34,56 @@ Staff-Snap is an application meant HR managers hiring candidates to make applica
   * [Saving the data](#saving-the-data)
   * [Editing the data file](#editing-the-data-file)
 
+---
+
+<a name="introduction"></a>
+## Introduction
+
+Welcome to the User Guide of **Staff-Snap**! Here you'll find everything you need to start using **Staff-Snap** like a pro.
+
+**Staff-Snap** is an easy-to-use desktop application for Hiring Managers of Small-Medium Enterprises to manage hundreds of applicants during each recruitment cycle.
+
+While **Staff-Snap** has a simple and intuitive [Graphical User Interface (GUI)](#TODO), it is optimised for use with a [Command Line Interface (CLI)](#TODO). If you are a fast typer, **Staff-Snap** can get your applicant management tasks done faster than traditional GUI applications.
+
+---
+
 <a name="quick-start"></a>
-## Quick start 
+## Quick Start 
 
-- Download the latest jar file (`staffsnap.jar`) from [here](https://github.com/AY2324S1-CS2103T-W08-1/tp/releases/tag/v1.2.1). 
-- Move the jar file to an empty folder where you would like to store the applicant data. 
-  - Create a new empty folder (e.g. staffsnap) where you would like to store the applicant data 
-  - Move the downloaded jar file from the download address into this folder.
-- Open the `staffsnap.jar` file. 
-  - For Mac Users:
-    - For users not familiar with using the terminal window, 
-    you can right-click the **file > Open With > JavaLauncher.app**. 
-    Users may be shown a warning stating *“macOS cannot verify the developer of “staffsnap.jar”. Are you sure you want to open it?”*
-    when opening the file for the first time. It is completely fine to click Open to continue launching Staff-Snap. 
-    You should see the GUI displayed as shown below. 
-    - For users more comfortable using the terminal window, 
-    open a new Terminal window and navigate to the location of the folder containing the `staffsnap.jar` file 
-    using the `cd` command. Launch the programme by typing in `java -jar staffsnap.jar` 
-    and pressing Enter. You should see the GUI displayed as shown below.
-![Main Window view](images/user-guide/MainWindow.png)
-  - For Windows Users:
-    - Double-click the `staffsnap.jar` file to launch the application. 
-    You should see the GUI displayed as shown below.
-    - For users more comfortable using the command prompt, 
-    you can open the command prompt and navigate to the folder containing the `staffsnap.jar` file using the `cd` 
-    command followed by typing `java -jar staffsnap.jar` and pressing Enter. 
-    You should see the GUI displayed as shown below.
+1. Ensure you have [Java](#TODO) 11 or above installed in your computer.
+2. Download the latest `staffsnap.jar` from [here](https://github.com/AY2324S1-CS2103T-W08-1/tp/releases/tag/v1.3).
+3. Copy the [JAR](#TODO) file to an empty folder that you would like to use as the [home folder](#TODO) for **Staff-Snap**.
+4. Open the [command terminal](#TODO).
+5. Navigate into your home folder with the `cd` command.
+6. Enter the `java -jar staffsnap.jar` command to run the application.
+7. You should see the [GUI](#TODO) displayed as shown below. Note how the application contains some sample data.
+   ![Main Window view](images/user-guide/MainWindow.png)
+8. Type the command in the command box and press <kbd>Enter</kbd> to execute it. e.g. typing `help` and pressing <kbd>Enter</kbd> will open this User Guide in your browser window.<br>
+   Some example commands that you can try:
+   * `add n/John Doe hp/81238123 p/Boss e/john@mail.com` : Adds an applicant named John Doe to the list. 
+   * `list` : Lists all applicants.
+   * `delete 1` : Deletes the 1st applicant shown in the current list.
+   * `clear` : Clears all applicants from the list.
+   * `exit` : Exits the application.
+9. Refer to the [Features](#TODO) below for details of each command.
 
-<a name="glossary"></a> 
+<box type="tip" header="**For macOS users**" seamless>
 
-## Glossary 
+If you are unfamiliar with the command terminal, you can right-click the `staffsnap.jar` file and select **Open With > JavaLauncher.app** to launch the application. If you are shown the warning below, click Open to continue launching **Staff-Snap**.
+![mac_os_warning](images/user-guide/mac_os_warning.png)
 
-As Staff-Snap is packed with features and components to take note of, 
-we’ve prepared tables summarising the important definitions, command formats, and parameters to take note of.
+</box>
 
-<a name="definitions"></a>
+---
 
-### Definitions <br>
+<a name="using-this-guide"></a>
+## Using this Guide
 
-| Term                           | Definition                                                                                                                                     |
-|--------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------|
-| Parameter                      | Parameters are the details needed to perform a specific command. (e.g. When adding an applicant, a parameter can be the name of the applicant) |
-| Command                        | A Command is an instruction given by the user to perform a certain action.                                                                     |
-| Index                          | The position of a certain applicant in a list. The first applicant on a list in Staff-Snap will always have the index 1.                       |
-| User Interface (UI)            | An User Interface is the visual display of the application where users can interact with the application.                                      |
-| Graphical User Interface (GUI) | The GUI is the visual display of the application which users can interact with.                                                                |
-| Command Line Interface (CLI)   | The CLI is a text-based interface that allows users to type in commands to interact with the application.                                      |
-| Component                      | A component is part of the user interface.                                                                                                     |
-| Alphanumeric                   | Text that is consisting of or using both letters and numerals.                                                                                 |
+This section introduces the symbols and notations used throughout this guide.
+We recommend you to read this section closely before using this guide.
+
 
 <a name="parameters"></a>
-
 ### Parameters <br>
 
 | Parameter | Description                   | Constraints                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  | Valid Examples                        | Invalid Examples                    | Error message for invalid examples                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
@@ -149,6 +141,7 @@ we’ve prepared tables summarising the important definitions, command formats, 
 <a name="features"></a>
 
 ## Features
+
 ---
 <a name="help"></a>
 
@@ -375,3 +368,20 @@ Automatically saves the data to a local storage whenever there is a change to th
 </box>
 
 Staff-Snap applicant data are saved automatically as a JSON file `[JAR file location]/data/applicantBook.json`. Advanced users are welcome to update data directly by editing that data file.
+
+---
+
+<a name="glossary"></a>
+## Glossary
+
+| Term                           | Definition                                                                                                                                     |
+|--------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------|
+| Parameter                      | Parameters are the details needed to perform a specific command. (e.g. When adding an applicant, a parameter can be the name of the applicant) |
+| Command                        | A Command is an instruction given by the user to perform a certain action.                                                                     |
+| Index                          | The position of a certain applicant in a list. The first applicant on a list in Staff-Snap will always have the index 1.                       |
+| User Interface (UI)            | An User Interface is the visual display of the application where users can interact with the application.                                      |
+| Graphical User Interface (GUI) | The GUI is the visual display of the application which users can interact with.                                                                |
+| Command Line Interface (CLI)   | The CLI is a text-based interface that allows users to type in commands to interact with the application.                                      |
+| Component                      | A component is part of the user interface.                                                                                                     |
+| Alphanumeric                   | Text that is consisting of or using both letters and numerals.                                                                                 |
+
