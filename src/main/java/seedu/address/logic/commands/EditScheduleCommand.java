@@ -48,6 +48,7 @@ public class EditScheduleCommand extends Command {
     private final EditScheduleDescriptor editScheduleDescriptor;
 
     /**
+     * Constructs a EditScheduleCommand object.
      * @param index                of the schedule in the filtered schedule list to edit
      * @param editScheduleDescriptor details to edit the schedule with
      */
@@ -145,8 +146,8 @@ public class EditScheduleCommand extends Command {
         }
 
         /**
-         * Copy constructor.
-         * A defensive copy of {@code tags} is used internally.
+         * Copies constructor.
+         * @param toCopy the {@code EditScheduleDescriptor to be copied}
          */
         public EditScheduleDescriptor(EditScheduleDescriptor toCopy) {
             setStartTime(toCopy.startTime);

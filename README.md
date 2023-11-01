@@ -1,8 +1,8 @@
-# Tutor Connect
+# TutorConnect
 [![CI Status](https://github.com/se-edu/addressbook-level3/workflows/Java%20CI/badge.svg)](https://github.com/AY2324S1-CS2103T-T17-3/tp/actions)
 [![codecov](https://codecov.io/gh/AY2324S1-CS2103T-T17-3/tp/graph/badge.svg?token=CY67NSXKQZ)](https://codecov.io/gh/AY2324S1-CS2103T-T17-3/tp)
 
-Tutor Connect is an **address book made for tuition centre managers** to easily track, schedule, and notify tutors of their upcoming schedule, optimised for users who prefer a CLI.
+TutorConnect is an **address book made for tuition centre managers** to easily track, schedule, and notify tutors of their upcoming schedule, optimised for users who prefer a CLI.
 
 ![Ui](docs/images/Ui.png)
 
@@ -11,9 +11,9 @@ Tutor Connect is an **address book made for tuition centre managers** to easily 
 - **Create** and **plan** your tutor availability and schedule
 - **View** upcoming schedules
 
-If you are interested in **using** Tutor Connect, head over to the [Quick Start](https://ay2324s1-cs2103t-t17-3.github.io/tp/UserGuide.html#quick-start) section of the User Guide.
+If you are interested in **using** TutorConnect, head over to the [Quick Start](https://ay2324s1-cs2103t-t17-3.github.io/tp/UserGuide.html#quick-start) section of the User Guide.
 
-If you are interested in **developing** Tutor Connect, the [Developer Guide](https://ay2324s1-cs2103t-t17-3.github.io/tp/DeveloperGuide.html) is a good place to start.
+If you are interested in **developing** TutorConnect, the [Developer Guide](https://ay2324s1-cs2103t-t17-3.github.io/tp/DeveloperGuide.html) is a good place to start.
 ## Requirements
 Ensure you have **Java 11** installed on your computer.
 To verify, perform the following steps:
@@ -25,9 +25,9 @@ To verify, perform the following steps:
 3. If it says a version other than 11 or `command not found`, please install Java 11 by following this [guide](https://www.java.com/en/download/help/download_options.html).
 
 ## Installation Guide
-1. **Download** the latest jar file (tutorconnect.jar) from our [Github Releases](https://github.com/AY2324S1-CS2103T-T17-3/tp/releases).
+1. **Download** the latest jar file (TutorConnect.jar) from our [Github Releases](https://github.com/AY2324S1-CS2103T-T17-3/tp/releases).
 
-2. Move the jar file into a new folder called “Tutor Connect”
+2. Move the jar file into a new folder called “TutorConnect”
 
 3. Double click the jar file to launch the application.
 

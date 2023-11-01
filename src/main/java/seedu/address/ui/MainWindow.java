@@ -4,18 +4,19 @@ import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Scene;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
-import seedu.address.logic.commands.ListScheduleCommand;
-import seedu.address.logic.commands.ListTutorCommand;
+import seedu.address.logic.commands.ShowCalendarCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -33,8 +34,8 @@ public class MainWindow extends UiPart<Stage> {
     private Logic logic;
 
     // Independent Ui parts residing in this Ui container
-    private PersonListPanel personListPanel;
-    private ScheduleListPanel scheduleListPanel;
+    private ListsPanel listsPanel;
+    private CalendarPanel calendarPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
 
@@ -45,13 +46,13 @@ public class MainWindow extends UiPart<Stage> {
     private MenuItem helpMenuItem;
 
     @FXML
-    private StackPane listPanelPlaceholder;
-
-    @FXML
     private StackPane resultDisplayPlaceholder;
 
     @FXML
     private StackPane statusbarPlaceholder;
+
+    @FXML
+    private VBox listPanelPlaceholder;
 
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
@@ -77,6 +78,16 @@ public class MainWindow extends UiPart<Stage> {
 
     private void setAccelerators() {
         setAccelerator(helpMenuItem, KeyCombination.valueOf("F1"));
+    }
+
+    private String getCurrentTheme() {
+        Scene scene = primaryStage.getScene();
+        String stylesheetPath = scene.getStylesheets().get(0);
+        if (stylesheetPath.contains("/view/")) {
+            int startIndex = stylesheetPath.indexOf("/view/");
+            return stylesheetPath.substring(startIndex);
+        }
+        return null;
     }
 
     /**
@@ -114,10 +125,9 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        scheduleListPanel = new ScheduleListPanel(logic.getFilteredScheduleList());
+        calendarPanel = new CalendarPanel(logic.getFilteredPersonList(), logic.getFilteredCalendarScheduleList());
 
-        personListPanel = new PersonListPanel(logic.getFilteredPersonList());
-        listPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+        listsPanel = new ListsPanel(logic.getFilteredPersonList(), logic.getFilteredScheduleList());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
@@ -127,6 +137,8 @@ public class MainWindow extends UiPart<Stage> {
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+
+        showLists();
     }
 
     /**
@@ -139,6 +151,7 @@ public class MainWindow extends UiPart<Stage> {
             primaryStage.setX(guiSettings.getWindowCoordinates().getX());
             primaryStage.setY(guiSettings.getWindowCoordinates().getY());
         }
+        handleChangeTheme(guiSettings.getTheme());
     }
 
     /**
@@ -163,7 +176,7 @@ public class MainWindow extends UiPart<Stage> {
     @FXML
     private void handleExit() {
         GuiSettings guiSettings = new GuiSettings(primaryStage.getWidth(), primaryStage.getHeight(),
-                (int) primaryStage.getX(), (int) primaryStage.getY());
+                (int) primaryStage.getX(), (int) primaryStage.getY(), getCurrentTheme());
         logic.setGuiSettings(guiSettings);
         helpWindow.hide();
         primaryStage.hide();
@@ -173,31 +186,50 @@ public class MainWindow extends UiPart<Stage> {
      * Displays either the list of schedules or tutors based on the command result
      */
     private void handleListDisplay(CommandResult commandResult) {
-        if (commandResult.getFeedbackToUser().equals(ListScheduleCommand.MESSAGE_SUCCESS)) {
-            showSchedules();
-        } else if (commandResult.getFeedbackToUser().equals(ListTutorCommand.MESSAGE_SUCCESS)) {
-            showPersons();
+        // TODO: Update this when there are both lists displayed simultaneously
+        switch (commandResult.getFeedbackToUser()) {
+        case ShowCalendarCommand.MESSAGE_SUCCESS:
+            showCalendar();
+            break;
+        default:
+            showLists();
         }
     }
 
-    public PersonListPanel getPersonListPanel() {
-        return personListPanel;
+    /**
+     * Shows list of person and schedule cards.
+     */
+    void showLists() {
+        listPanelPlaceholder.getChildren().clear();
+        listPanelPlaceholder.getChildren().add(listsPanel.getRoot());
     }
 
     /**
-     * Shows list of person cards.
+     * Shows calendar of filtered schedule cards.
      */
-    void showPersons() {
+    void showCalendar() {
         listPanelPlaceholder.getChildren().clear();
-        listPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+        listPanelPlaceholder.getChildren().add(calendarPanel.getRoot());
     }
 
     /**
-     * Fills up all the placeholders of this window.
+     * Changes the theme of the application according to specified theme.
+     * @param theme is the specified filepath of theme styling.
      */
-    void showSchedules() {
-        listPanelPlaceholder.getChildren().clear();
-        listPanelPlaceholder.getChildren().add(scheduleListPanel.getRoot());
+    @FXML
+    private void handleChangeTheme(String theme) {
+        Scene scene = primaryStage.getScene();
+        scene.getStylesheets().clear();
+        scene.getStylesheets().add(getClass().getResource(theme).toExternalForm());
+
+        GuiSettings guiSettings = new GuiSettings(
+                primaryStage.getWidth(),
+                primaryStage.getHeight(),
+                (int) primaryStage.getX(),
+                (int) primaryStage.getY(),
+                theme
+        );
+        logic.setGuiSettings(guiSettings);
     }
 
     /**
@@ -217,6 +249,10 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.isExit()) {
                 handleExit();
+            }
+
+            if (commandResult.isTheme()) {
+                handleChangeTheme(commandResult.getTheme());
             }
 
             handleListDisplay(commandResult);

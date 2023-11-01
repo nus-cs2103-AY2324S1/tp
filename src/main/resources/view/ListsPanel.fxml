@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.Label?>
+
+<HBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
+    <VBox fx:id="personList" styleClass="pane-with-border" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
+        <padding>
+            <Insets bottom="10" left="10" right="10" top="10" />
+        </padding>
+        <HBox alignment="CENTER_LEFT" HBox.hgrow="ALWAYS">
+            <children>
+                <Label text=" Tutors:" />
+            </children>
+        </HBox>
+        <StackPane fx:id="personListPanelPlaceholder" VBox.vgrow="ALWAYS" />
+    </VBox>
+    <VBox fx:id="scheduleList" styleClass="pane-with-border" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
+        <padding>
+            <Insets bottom="10" left="10" right="10" top="10" />
+        </padding>
+        <HBox alignment="CENTER_LEFT" HBox.hgrow="ALWAYS">
+            <children>
+                <Label text=" Schedules:"/>
+            </children>
+        </HBox>
+        <StackPane fx:id="scheduleListPanelPlaceholder" VBox.vgrow="ALWAYS" />
+    </VBox>
+</HBox>

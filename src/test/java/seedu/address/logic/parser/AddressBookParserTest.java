@@ -9,6 +9,7 @@ import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_SCHEDULE;
 
+import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -25,16 +26,19 @@ import seedu.address.logic.commands.EditScheduleCommand.EditScheduleDescriptor;
 import seedu.address.logic.commands.EditTutorCommand;
 import seedu.address.logic.commands.EditTutorCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.ExitCommand;
-import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.FindScheduleCommand;
+import seedu.address.logic.commands.FindTutorCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListScheduleCommand;
 import seedu.address.logic.commands.ListTutorCommand;
 import seedu.address.logic.commands.MarkScheduleCommand;
+import seedu.address.logic.commands.ShowCalendarCommand;
+import seedu.address.logic.commands.ThemeCommand;
 import seedu.address.logic.commands.UnmarkScheduleCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
+import seedu.address.model.schedule.Date;
 import seedu.address.model.schedule.Schedule;
 import seedu.address.model.schedule.Status;
 import seedu.address.model.schedule.TutorNameContainsKeywordsPredicate;
@@ -88,15 +92,23 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_find() throws Exception {
         List<String> keywords = Arrays.asList("foo", "bar", "baz");
-        FindCommand command = (FindCommand) parser.parseCommand(
-                FindCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
-        assertEquals(new FindCommand(new NameContainsKeywordsPredicate(keywords)), command);
+        FindTutorCommand command = (FindTutorCommand) parser.parseCommand(
+                FindTutorCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
+        assertEquals(new FindTutorCommand(new NameContainsKeywordsPredicate(keywords)), command);
     }
 
     @Test
     public void parseCommand_help() throws Exception {
         assertTrue(parser.parseCommand(HelpCommand.COMMAND_WORD) instanceof HelpCommand);
         assertTrue(parser.parseCommand(HelpCommand.COMMAND_WORD + " 3") instanceof HelpCommand);
+    }
+
+    @Test
+    public void parseCommand_theme() throws Exception {
+        String theme = "dark";
+        String themePath = "/view/DarkTheme.css";
+        ThemeCommand command = (ThemeCommand) parser.parseCommand(ThemeCommand.COMMAND_WORD + " " + theme);
+        assertEquals(new ThemeCommand(themePath, theme), command);
     }
 
     @Test
@@ -159,6 +171,13 @@ public class AddressBookParserTest {
         DeleteScheduleCommand command = (DeleteScheduleCommand) parser.parseCommand(
             DeleteScheduleCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
         assertEquals(new DeleteScheduleCommand(INDEX_FIRST_PERSON), command);
+    }
+
+    @Test
+    public void parseCommand_showCalendar() throws Exception {
+        ShowCalendarCommand command = (ShowCalendarCommand) parser.parseCommand(
+            ShowCalendarCommand.COMMAND_WORD + " 2023-09-15");
+        assertEquals(new ShowCalendarCommand(new Date(LocalDate.of(2023, 9, 15))), command);
     }
 
     @Test

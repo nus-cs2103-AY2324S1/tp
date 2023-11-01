@@ -3,7 +3,6 @@ package seedu.address.model;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BOB;
@@ -12,6 +11,7 @@ import static seedu.address.testutil.TypicalSchedules.SCHEDULE_BOB_SECOND_JAN;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDate;
 import java.util.Arrays;
 
 import org.junit.jupiter.api.Test;
@@ -21,7 +21,9 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
+import seedu.address.model.schedule.Date;
 import seedu.address.model.schedule.Schedule;
+import seedu.address.model.schedule.ScheduleIsOnDatePredicate;
 import seedu.address.testutil.AddressBookBuilder;
 import seedu.address.testutil.PersonBuilder;
 
@@ -45,7 +47,7 @@ public class ModelManagerTest {
     public void setUserPrefs_validUserPrefs_copiesUserPrefs() {
         UserPrefs userPrefs = new UserPrefs();
         userPrefs.setAddressBookFilePath(Paths.get("address/book/file/path"));
-        userPrefs.setGuiSettings(new GuiSettings(1, 2, 3, 4));
+        userPrefs.setGuiSettings(new GuiSettings(1, 2, 3, 4, "/view/DarkTheme.css"));
         modelManager.setUserPrefs(userPrefs);
         assertEquals(userPrefs, modelManager.getUserPrefs());
 
@@ -62,7 +64,7 @@ public class ModelManagerTest {
 
     @Test
     public void setGuiSettings_validGuiSettings_setsGuiSettings() {
-        GuiSettings guiSettings = new GuiSettings(1, 2, 3, 4);
+        GuiSettings guiSettings = new GuiSettings(1, 2, 3, 4, "/view/DarkTheme.css");
         modelManager.setGuiSettings(guiSettings);
         assertEquals(guiSettings, modelManager.getGuiSettings());
     }
@@ -163,6 +165,12 @@ public class ModelManagerTest {
     }
 
     @Test
+    public void getFilteredCalendarScheduleList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () ->
+            modelManager.getFilteredCalendarScheduleList().remove(0));
+    }
+
+    @Test
     public void getSchedulesFromTutor_success() {
         modelManager.addPerson(ALICE);
         modelManager.addSchedule(SCHEDULE_ALICE_FIRST_JAN);
@@ -229,15 +237,23 @@ public class ModelManagerTest {
         assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs)));
 
         // resets modelManager to initial state for upcoming tests
-        modelManager.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        modelManager.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
 
         // different userPrefs -> returns false
         UserPrefs differentUserPrefs = new UserPrefs();
         differentUserPrefs.setAddressBookFilePath(Paths.get("differentFilePath"));
         assertFalse(modelManager.equals(new ModelManager(addressBook, differentUserPrefs)));
 
-        // different Schedule List -> returns false
-        modelManager.deleteSchedule(modelManager.getFilteredScheduleList().get(0));
+        // different filtered Schedule List -> returns false
+        modelManager.updateFilteredScheduleList(p -> false);
+        assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs)));
+
+        // resets modelManager to initial state for upcoming test
+        modelManager.updateFilteredScheduleList(Model.PREDICATE_SHOW_ALL_SCHEDULES);
+
+        // different filtered Calendar Schedule List -> return false
+        modelManager.updateFilteredCalendarScheduleList(
+            new ScheduleIsOnDatePredicate(new Date(LocalDate.of(2023, 9, 15))));
         assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs)));
     }
 }

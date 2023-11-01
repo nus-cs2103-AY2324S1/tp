@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import org.junit.jupiter.api.Test;
@@ -41,6 +42,16 @@ class TimeTest {
     }
 
     @Test
+    void isOnDate() {
+        Time time = new StartTime(LocalDateTime.of(2023, 1, 1, 0, 0, 0));
+
+        assertFalse(time.isOnDate(new Date(LocalDate.of(2022, 1, 1)))); // different month
+        assertFalse(time.isOnDate(new Date(LocalDate.of(2023, 2, 1)))); // different year
+        assertFalse(time.isOnDate(new Date(LocalDate.of(2023, 1, 2)))); // different day
+        assertTrue(time.isOnDate(new Date(LocalDate.of(2023, 1, 1)))); // same date
+    }
+
+    @Test
     void testEquals() {
         TimeStub time = new TimeStub(LocalDateTime.of(2023, 1, 1, 0, 0, 0));
 
@@ -65,6 +76,18 @@ class TimeTest {
         StartTime startTime = new StartTime(LocalDateTime.of(2023, 1, 1, 0, 0, 0));
         String expectedString = "Jan 1 2023 00:00";
         assertEquals(expectedString, startTime.toString());
+    }
+
+    @Test
+    void testToTimeString() {
+        StartTime startTime1 = new StartTime(LocalDateTime.of(2023, 1, 1, 0, 0, 0));
+        assertEquals("00:00", startTime1.toTimeString());
+
+        StartTime startTime2 = new StartTime(LocalDateTime.of(2023, 1, 1, 0, 0, 10));
+        assertEquals("00:00", startTime2.toTimeString());
+
+        StartTime startTime3 = new StartTime(LocalDateTime.of(2023, 1, 1, 12, 12, 10));
+        assertEquals("12:12", startTime3.toTimeString());
     }
 
     @Test

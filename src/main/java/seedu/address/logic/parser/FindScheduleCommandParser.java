@@ -9,13 +9,13 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.schedule.TutorNameContainsKeywordsPredicate;
 
 /**
- * Parses input arguments and creates a new FindCommand object
+ * Parses input arguments and creates a new FindTutorCommand object
  */
 public class FindScheduleCommandParser implements Parser<FindScheduleCommand> {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the FindCommand
-     * and returns a FindCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the FindTutorCommand
+     * and returns a FindTutorCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
     public FindScheduleCommand parse(String args) throws ParseException {
