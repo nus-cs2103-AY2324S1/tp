@@ -1,5 +1,7 @@
 package seedu.address.model.event;
 
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+
 /**
  * The class for holding an Event
  */
@@ -21,6 +23,7 @@ public class Event {
      * @param information The information of the event
      */
     public Event(EventName name, EventTime start, EventTime end, EventLocation location, EventInformation information) {
+        requireAllNonNull(name, start);
         this.name = name;
         this.start = start;
         this.end = end;
@@ -102,5 +105,24 @@ public class Event {
         }
         result += " )";
         return result;
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof Event)) {
+            return false;
+        }
+
+        Event otherPerson = (Event) other;
+        return name.equals(otherPerson.name)
+                && start.equals(otherPerson.start)
+                && end.equals(otherPerson.end)
+                && location.equals(otherPerson.location)
+                && information.equals(otherPerson.information);
     }
 }
