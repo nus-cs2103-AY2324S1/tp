@@ -53,6 +53,8 @@ public class CommandTestUtil {
     public static final String VALID_POLICY_ISSUE_DATE_BOB = "01-01-2013";
     public static final String VALID_POLICY_EXPIRY_DATE_AMY = "01-01-2030";
     public static final String VALID_POLICY_EXPIRY_DATE_BOB = "01-01-2025";
+    public static final String VALID_REMARK_AMY = "Like skiing.";
+    public static final String VALID_REMARK_BOB = "Favourite pastime: Eating";
 
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
