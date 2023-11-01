@@ -28,7 +28,6 @@ public class Leave {
     public Leave(LocalDate leaveDate) {
         requireNonNull(leaveDate);
         this.leaveDate = leaveDate;
-        // this.leaveDate = LocalDate.parse(leaveDate, VALID_DATE_FORMAT);
     }
 
     /**
