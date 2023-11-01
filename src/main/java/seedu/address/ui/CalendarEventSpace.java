@@ -151,8 +151,7 @@ public class CalendarEventSpace extends UiPart<Region> {
      * @return A StackPane containing the event card.
      */
     private StackPane generateEventCard(Event event) {
-        double widthMultiplier = event.getDurationOfEvent().getHour()
-                + ((double) (event.getDurationOfEvent().getMinute()) / NUMBER_OF_MINUTES_IN_AN_HOUR);
+        double widthMultiplier = (double) event.getDurationOfEvent().toMinutes() / NUMBER_OF_MINUTES_IN_AN_HOUR;
         StackPane cardHolder = new StackPane();
 
         Rectangle cardRectangle = new Rectangle();

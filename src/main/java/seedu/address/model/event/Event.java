@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.time.DayOfWeek;
+import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -251,7 +252,7 @@ public class Event {
      *
      * @return LocalTime object of the duration of the Event.
      */
-    public LocalTime getDurationOfEvent() {
+    public Duration getDurationOfEvent() {
         return eventPeriod.getDuration();
     }
 

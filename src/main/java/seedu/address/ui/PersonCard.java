@@ -22,8 +22,8 @@ public class PersonCard extends UiPart<Region> {
     private static final String FXML = "PersonListCard.fxml";
     private static final String TITLE_STRING_AFTER_NAME = "'s Calendar";
     private static final int NUMBER_OF_CLICK_TO_SHOW_CALENDAR = 2;
-    private static final int POPUP_CALENDAR_HEIGHT = 270;
-    private static final int POPUP_CALENDAR_WIDTH = 550;
+    private static final int POPUP_CALENDAR_HEIGHT = 285;
+    private static final int POPUP_CALENDAR_WIDTH = 555;
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
