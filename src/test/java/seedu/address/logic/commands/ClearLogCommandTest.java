@@ -48,7 +48,6 @@ public class ClearLogCommandTest {
 
         @Override
         public ObservableList<Person> getFoundPersonsList() {
-            // Return an empty list or a list with some persons if needed for your test
             throw new AssertionError("This method should not be called.");
         }
 
@@ -56,7 +55,6 @@ public class ClearLogCommandTest {
         public void updateFoundPersonsList(Predicate<Person> predicate) {
             throw new AssertionError("This method should not be called.");
         }
-
 
         @Override
         public ReadOnlyUserPrefs getUserPrefs() {

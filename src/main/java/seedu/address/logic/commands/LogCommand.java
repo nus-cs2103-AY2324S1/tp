@@ -37,16 +37,6 @@ public class LogCommand extends UndoableCommand {
     @Override
     public CommandResult execute(Model model) throws CommandException {
 
-        //          Ensure that there are results from the most recent FindCommand
-        //          if (model.isCommandHistoryEmpty()) {
-        //              throw new CommandException(Messages.MESSAGE_EMPTY_FIND_RESULT);
-        //          }
-
-        //          if full list, likely
-        //          if (model.getFoundPersonsList() == model.getFilteredPersonList()) {
-        //              throw new CommandException(Messages.MESSAGE_EMPTY_FIND_RESULT);
-        //          }
-
         // Store a copy of the current logBook before updating it
         logBookBeforeUpdate = new LogBook(model.getLogBook());
         model.addToHistory(this);
