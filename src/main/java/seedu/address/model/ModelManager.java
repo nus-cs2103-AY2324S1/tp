@@ -198,32 +198,7 @@ public class ModelManager implements Model {
     @Override
     public void updateFilteredEventList(Predicate<Event> predicate) {
         requireNonNull(predicate);
-        Predicate<? super Person> personPredicate = this.filteredPersons.getPredicate();
-
-        // Reset the current persons list first
-        this.filteredPersons.setPredicate(PREDICATE_SHOW_ALL_PERSONS);
         this.filteredEvents.setPredicate(predicate);
-
-        // Switch back to the previous filtered persons list
-        this.filteredPersons.setPredicate(personPredicate);
-    }
-
-    /**
-     * Updates the filtered event list without affecting the filtered person list.
-     * @param predicate Predicate to filter the event list.
-     */
-    public void updateFilteredEventListOnly(Predicate<Event> predicate) {
-        requireNonNull(predicate);
-        Predicate<? super Person> personPredicate = this.filteredPersons.getPredicate();
-
-        // Reset the current persons list first
-        this.filteredPersons.setPredicate(PREDICATE_SHOW_ALL_PERSONS);
-
-        // Reset the current events list
-        this.filteredEvents.setPredicate(predicate);
-
-        // Switch back to the previous filtered persons list
-        this.filteredPersons.setPredicate(personPredicate);
     }
 
     /**

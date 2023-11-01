@@ -221,11 +221,6 @@ public class AddCommandTest {
         public void updateGroups() {
             return;
         }
-
-        @Override
-        public void updateFilteredEventListOnly(Predicate<Event> predicate) {
-            throw new AssertionError("This method should not be called.");
-        }
     }
 
     /**

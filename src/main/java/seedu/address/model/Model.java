@@ -114,8 +114,6 @@ public interface Model {
      */
     void updateFilteredEventList(Predicate<Event> predicate);
 
-    void updateFilteredEventListOnly(Predicate<Event> predicate);
-
     /**
      * Adds an event to the list of events.
      * @param toAdd Event to be added.
