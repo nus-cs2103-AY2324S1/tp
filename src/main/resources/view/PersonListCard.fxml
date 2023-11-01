@@ -33,7 +33,6 @@
       <Label fx:id="email" styleClass="cell_small_label" text="\$email" />
       <Label fx:id="linkedIn" styleClass="cell_small_label" text="\$linkedIn" />
       <Label fx:id="github" styleClass="cell_small_label" text="\$github" />
-      <Label fx:id="score" styleClass="cell_small_label" text="$score" />
     </VBox>
   </GridPane>
 </HBox>

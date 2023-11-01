@@ -51,7 +51,11 @@ public class CreateTagCommand extends Command {
             try {
                 String tagCategory = categoryTag[0];
                 String tagName = categoryTag[1];
-                model.addTag(new Tag(tagName, tagCategory));
+                Tag newTag = new Tag(tagName, tagCategory);
+                if (model.hasTag(newTag)) {
+                    throw new CommandException(MESSAGE_DUPLICATE_TAG);
+                }
+                model.addTag(newTag);
             } catch (IllegalValueException e) {
                 throw new RuntimeException(e);
             }

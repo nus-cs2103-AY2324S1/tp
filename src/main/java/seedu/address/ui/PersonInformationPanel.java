@@ -1,7 +1,6 @@
 package seedu.address.ui;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
@@ -60,42 +59,39 @@ public class PersonInformationPanel extends UiPart<Region> {
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
         remark.setText(person.getRemark().value);
-//        person.getTags().stream()
-//                .sorted(java.util.Comparator.comparing(tag -> tag.tagName))
-//                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName).getStyleClass()));
-        List<String> tagCategories = new ArrayList<>();
-        for (Tag tag : UniqueTagList.internalList) {
-            if (!tagCategories.contains(tag.tagCategory)) {
-                tagCategories.add(tag.tagCategory);
-            }
-        }
-        System.out.println(tagCategories);
-        for (Tag tag : person.getTags()) {
-            Label label = new Label(tag.tagName);
-            if (tagCategories.indexOf(tag.tagCategory) == 0) {
-                System.out.println("index of 0");
-                label.getStyleClass().add("label1");
-            }
-            else if (tagCategories.indexOf(tag.tagCategory) == 1) {
-                System.out.println("index of 1");
-                label.getStyleClass().add("label2");
-            }
-            else if (tagCategories.indexOf(tag.tagCategory) == 2) {
-                System.out.println("index of 2");
-                label.getStyleClass().add("label3");
-            }
-            else if (tagCategories.indexOf(tag.tagCategory) == 3) {
-                System.out.println("index of 3");
-                label.getStyleClass().add("label4");
-            }
-            tags.getChildren().add(label);
-        }
+        setTagLabel(person.getTags());
         linkedIn.setText(person.getLinkedIn().value);
         github.setText(person.getGithub().value);
         setResultButton(person.getStatus(), status);
         setButton(person.getStatus());
     }
 
+    private void setTagLabel(Set<Tag> tagsSet) {
+        List<String> tagCategories = new ArrayList<>();
+        for (Tag tag : UniqueTagList.internalList) {
+            if (!tagCategories.contains(tag.tagCategory)) {
+                tagCategories.add(tag.tagCategory);
+            }
+        }
+
+        for (Tag tag : tagsSet) {
+            Label label = new Label(tag.tagName);
+            if (tagCategories.indexOf(tag.tagCategory) == 0) {
+                label.getStyleClass().add("label2");
+            } else if (tagCategories.indexOf(tag.tagCategory) == 1) {
+                label.getStyleClass().add("label3");
+            } else if (tagCategories.indexOf(tag.tagCategory) == 2) {
+                label.getStyleClass().add("label4");
+            } else if (tagCategories.indexOf(tag.tagCategory) == 3) {
+                label.getStyleClass().add("label5");
+            } else if (tagCategories.indexOf(tag.tagCategory) == 4){
+                label.getStyleClass().add("label6");
+            } else {
+                label.getStyleClass().add("label1");
+            }
+            tags.getChildren().add(label);
+        }
+    }
 
     private static void setResultButton(Status status, ToggleButton statusButton) {
         StatusTypes statusType = status.getStatusType();

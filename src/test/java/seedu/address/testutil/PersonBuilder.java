@@ -12,6 +12,7 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Remark;
 import seedu.address.model.person.Score;
+import seedu.address.model.person.ScoreList;
 import seedu.address.model.person.Status;
 import seedu.address.model.person.StatusTypes;
 import seedu.address.model.tag.Tag;
@@ -39,7 +40,7 @@ public class PersonBuilder {
     private Address address;
     private Remark remark;
 
-    private Score score;
+    private ScoreList scoreList;
 
     private Set<Tag> tags;
     private Status status;
@@ -55,7 +56,7 @@ public class PersonBuilder {
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
         remark = new Remark(DEFAULT_REMARK);
-        score = new Score(DEFAULT_SCORE_VALUE);
+        scoreList = new ScoreList();
         tags = new HashSet<>();
         status = new Status(); // default status is preliminary
         linkedIn = new LinkedIn(DEFAULT_LINKEDIN);
@@ -70,7 +71,7 @@ public class PersonBuilder {
         email = personToCopy.getEmail();
         address = personToCopy.getAddress();
         remark = personToCopy.getRemark();
-        score = personToCopy.getScore();
+        scoreList = personToCopy.getScoreList();
         tags = new HashSet<>(personToCopy.getTags());
         linkedIn = personToCopy.getLinkedIn();
     }
@@ -127,8 +128,8 @@ public class PersonBuilder {
      * @param score integer value of score
      * @return PersonBuilder
      */
-    public PersonBuilder withScore(int score) {
-        this.score = new Score(score);
+    public PersonBuilder withScoreList(ScoreList scoreList) {
+        this.scoreList = scoreList;
         return this;
     }
 
@@ -169,7 +170,7 @@ public class PersonBuilder {
      */
     public Person build() {
         Person createdPerson = new Person(name, phone, email, address, remark, tags);
-        createdPerson.setScore(score);
+        createdPerson.setScoreList(scoreList);
         return createdPerson;
     }
 

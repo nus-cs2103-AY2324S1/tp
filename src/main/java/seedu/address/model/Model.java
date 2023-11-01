@@ -12,6 +12,7 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.event.Event;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.statistics.ReadOnlySummaryStatistic;
 
 /**
  * The API of the Model component.
@@ -67,6 +68,8 @@ public interface Model {
     ReadOnlyAddressBook getAddressBook();
 
     ReadOnlyEventBook getEventBook();
+
+    ReadOnlySummaryStatistic getSummaryStatistic();
 
     /**
      * Returns true if a person with the same identity as {@code person} exists in the address book.
@@ -125,6 +128,8 @@ public interface Model {
      */
     void sortPersonList(Comparator<Person> comparator);
 
+    void sortEventList(Comparator<Event> comparator);
+
     /**
      * Returns the Index of the last view command called.
      */
@@ -135,6 +140,14 @@ public interface Model {
      */
     void setLastViewedPersonIndex(Index index);
 
+
     void addTag(Tag tag) throws IllegalValueException;
+
+    boolean hasTag(Tag tag);
+    /**
+     * Loads the summary statistics based on the current Address Book
+     */
+    void loadSummaryStatistics();
+
 
 }

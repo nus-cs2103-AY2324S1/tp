@@ -43,6 +43,7 @@ public class ViewCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
+        model.loadSummaryStatistics();
         Person personToView = lastShownList.get(index.getZeroBased());
         return new CommandResult(generateSuccessMessage(personToView), true);
     }

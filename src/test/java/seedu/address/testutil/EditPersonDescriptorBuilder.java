@@ -1,5 +1,6 @@
 package seedu.address.testutil;
 
+import java.util.HashMap;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -11,6 +12,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Score;
+import seedu.address.model.person.ScoreList;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -38,7 +40,7 @@ public class EditPersonDescriptorBuilder {
         descriptor.setEmail(person.getEmail());
         descriptor.setAddress(person.getAddress());
         descriptor.setTags(person.getTags());
-        descriptor.setScore(person.getScore());
+        descriptor.setScoreList(person.getScoreList());
     }
 
     /**
@@ -76,8 +78,8 @@ public class EditPersonDescriptorBuilder {
     /**
      * Sets the {@code Score} of the {@code EditPersonDescriptor} that we are building.
      */
-    public EditPersonDescriptorBuilder withScore(int score) {
-        descriptor.setScore(new Score(score));
+    public EditPersonDescriptorBuilder withScoreList(ScoreList scoreList) {
+        descriptor.setScoreList(scoreList);
         return this;
     }
 

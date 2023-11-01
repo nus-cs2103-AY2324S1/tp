@@ -3,6 +3,7 @@ package seedu.address.ui;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Set;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -66,34 +67,31 @@ public class PersonCard extends UiPart<Region> {
         email.setText(person.getEmail().value);
         linkedIn.setText(person.getLinkedIn().value);
         github.setText(person.getGithub().value);
-        score.setText("interview score: " + person.getScore().toString());
-//        person.getTags().stream()
-//                .sorted(Comparator.comparing(tag -> tag.tagName))
-//                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        setTagLabel(person.getTags());
+    }
+
+    private void setTagLabel(Set<Tag> tagsSet) {
         List<String> tagCategories = new ArrayList<>();
         for (Tag tag : UniqueTagList.internalList) {
             if (!tagCategories.contains(tag.tagCategory)) {
                 tagCategories.add(tag.tagCategory);
             }
         }
-        System.out.println(tagCategories);
-        for (Tag tag : person.getTags()) {
+
+        for (Tag tag : tagsSet) {
             Label label = new Label(tag.tagName);
             if (tagCategories.indexOf(tag.tagCategory) == 0) {
-                System.out.println("index of 0");
-                label.getStyleClass().add("label1");
-            }
-            else if (tagCategories.indexOf(tag.tagCategory) == 1) {
-                System.out.println("index of 1");
                 label.getStyleClass().add("label2");
-            }
-            else if (tagCategories.indexOf(tag.tagCategory) == 2) {
-                System.out.println("index of 2");
+            } else if (tagCategories.indexOf(tag.tagCategory) == 1) {
                 label.getStyleClass().add("label3");
-            }
-            else if (tagCategories.indexOf(tag.tagCategory) == 3) {
-                System.out.println("index of 3");
+            } else if (tagCategories.indexOf(tag.tagCategory) == 2) {
                 label.getStyleClass().add("label4");
+            } else if (tagCategories.indexOf(tag.tagCategory) == 3) {
+                label.getStyleClass().add("label5");
+            } else if (tagCategories.indexOf(tag.tagCategory) == 4){
+                label.getStyleClass().add("label6");
+            } else {
+                label.getStyleClass().add("label1");
             }
             tags.getChildren().add(label);
         }

@@ -5,9 +5,11 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.Optional;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
@@ -57,12 +59,22 @@ public class UniqueTagList implements Iterable<Tag> {
      * @throws ParseException If the tag is not found in the list.
      */
     public static Tag getTag(String tagName) throws ParseException {
-        for (Tag tag : internalList) {
-            if (tag.tagName.equals(tagName)) {
-                return tag;
+        Optional<Tag> foundTag = internalList.stream()
+                .filter(tag -> tag.tagName.equals(tagName))
+                .findFirst();
+        if (foundTag.isPresent()) {
+            long occurrence = internalList.stream()
+                    .filter(tag -> tag.tagName.equals(tagName))
+                    .count();
+            if (occurrence > 1) {
+                throw new ParseException("Multiple tags exists with the same name! Specify the category of the tag when adding it to a person e.g. edit 1 t/experience 3");
             }
+            return foundTag.get();
+        } else {
+            System.out.println("uncategorised");
+            return new Tag(tagName, "uncategorised");
         }
-        throw new ParseException("Tag Not Found! Create tag before adding it to a person!");
+
     }
 
     /**
@@ -71,7 +83,7 @@ public class UniqueTagList implements Iterable<Tag> {
      * @param target The tag to be replaced.
      * @param editedTag The edited tag to replace the target.
      * @throws TagNotFoundException If the target tag is not found in the list.
-     * @throws DuplicatePersonException If the edited tag is already present in the list.
+     * @throws DuplicateTagException If the edited tag is already present in the list.
      */
     public void setTag(Tag target, Tag editedTag) {
         requireAllNonNull(target, editedTag);
@@ -82,7 +94,7 @@ public class UniqueTagList implements Iterable<Tag> {
         }
 
         if (!target.equals(editedTag) && contains(editedTag)) {
-            throw new DuplicatePersonException();
+            throw new DuplicateTagException();
         }
 
         internalList.set(index, editedTag);
