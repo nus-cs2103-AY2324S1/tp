@@ -16,25 +16,29 @@ import seedu.address.commons.core.LogsCenter;
 public class HelpWindow extends UiPart<Stage> {
 
     public static final String USERGUIDE_URL = "https://ay2324s1-cs2103t-t11-1.github.io/tp/UserGuide.html";
-    public static final String COMMAND_TABLE = "Command Table" + "\n"
-            + "1. Add\n"
-            + "2. Comment\n"
-            + "3. Delete\n"
-            + "4. Edit\n"
-            + "5. Tag\n"
-            + "6. Lookup\n"
-            + "7. Config\n"
-            + "8. Mark\n"
-            + "9. Markall\n"
-            + "10. Set Grade\n"
-            + "11. Record Part\n"
-            + "12. View\n"
-            + "13. Load\n"
-            + "14. Clear\n"
-            + "15. List\n"
-            + "16. Help\n"
-            + "17. Exit\n"
-            + "18. Theme";
+    public static final String COMMAND_TABLE = "Useful Commands\n"
+            + "1- Configure Class Manager\n"
+            + "2- Open help window\n\n"
+            + "Core Commands without Parameters\n"
+            + "3- Clear student list\n"
+            + "4- Exit Class Manager\n"
+            + "5- List all students\n"
+            + "6- Toggle theme\n\n"
+            + "Core Commands with Parameters\n"
+            + "7- Add\n"
+            + "8- Comment\n"
+            + "9- Delete\n"
+            + "10- Edit\n"
+            + "11- Lookup\n"
+            + "12- Load\n"
+            + "13- Mark Absent\n"
+            + "14- Mark Present\n"
+            + "15- Mark Present All\n"
+            + "16- Random\n"
+            + "17- Record Class participation\n"
+            + "18- Set Grade\n"
+            + "19- Tag\n"
+            + "20- View";
 
 
     public static final String HELP_MESSAGE = COMMAND_TABLE + "\nRefer to the user guide: " + USERGUIDE_URL;
