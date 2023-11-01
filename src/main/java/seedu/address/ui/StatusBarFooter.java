@@ -21,7 +21,7 @@ public class StatusBarFooter extends UiPart<Region> {
      */
     public StatusBarFooter(Path saveLocation) {
         super(FXML);
-        saveLocationStatus.setText("FumbleLog: Manage your life");
+        saveLocationStatus.setText("Manage Your Life.");
     }
 
 }
