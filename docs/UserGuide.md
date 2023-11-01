@@ -254,6 +254,55 @@ Failure Output:
 Invalid Index entered, please try deleting the contact again with the correct Index!
 ```
 
+### Adding a task : `addTask`
+Adds a task to the specified lesson.
+
+Format: `addTask INDEX [-description TASKDESCRIPTION]`
+
+* Adds the task to the lesson at specified `INDEX`.
+* The index refers to the index number shown in the displayed lesson list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+* `list schedule` followed by `addTask 2 -description mark homework` adds a task to the second lesson in the schedule.
+
+Success Output:
+```
+New task added to lesson with index 2: -mark homework
+```
+
+Failure Output:
+```
+No lesson with index 10!
+Lesson index has to be a positive value!
+```
+
+### Deleting a task : `deleteTask`
+Deletes the specified task from the shown lesson in the application.
+
+Format: `deleteTask INDEX`
+
+* Deletes the task at the specified `INDEX` of the task list in lesson.
+* The index refers to the index number shown in the displayed student list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+* `show 1` followed by `delete 2` deletes the 2nd task of the 1st lesson in the schedule.
+
+Success Output:
+```
+Deleted Task: -mark extra practice questions 
+```
+
+Failure Output:
+```
+Task index do not belong to any tasks!
+
+Invalid command format! 
+deleteTask: Deletes the task identified by the task index from the currently displayed lesson .
+Parameters: task index (must be a positive integer)
+Example: deleteTask 1
+```
 
 ### Exiting the program : `exit`
 
