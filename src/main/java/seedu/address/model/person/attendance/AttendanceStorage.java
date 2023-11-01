@@ -119,9 +119,10 @@ public class AttendanceStorage {
      * @param type type of attendance to count
      * @return count of number of attendances
      */
-    public int getCount(AttendanceType type, JoinDate joinDate) {
+    private int getCount(AttendanceType type, JoinDate joinDate) {
         //TODO decide if the param should be JoinDate or LocalDate
-        LocalDate dateJoined = LocalDate.parse(joinDate.value);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        LocalDate dateJoined = LocalDate.parse(joinDate.value, formatter);
 
         if (type == AttendanceType.PRESENT) {
             int numOfDaysSinceJoining = dateJoined.until(LocalDate.now()).getDays();
@@ -129,10 +130,23 @@ public class AttendanceStorage {
                     - getCount(AttendanceType.LATE, joinDate);
             return numOfDaysPresent;
         }
-        int result = 0;
         return (int) storage.stream()
                 .filter(attendance -> attendance.getType() == type)
                 .count();
+    }
+
+    /**
+     * Gets the number of attendances for the given type.
+     *
+     * @return count of number of attendances
+     */
+    public int[] getAttendanceReport(JoinDate joinDate) {
+        int numOfDaysOnLeave = getCount(AttendanceType.ON_LEAVE, joinDate);
+        int numOfDaysAbsent = getCount(AttendanceType.ABSENT, joinDate);
+        int numOfDaysLate = getCount(AttendanceType.LATE, joinDate);
+
+        return new int[]{numOfDaysOnLeave, numOfDaysAbsent, numOfDaysLate};
+
     }
 
     /**
