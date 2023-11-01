@@ -41,8 +41,12 @@ public class AddInterviewCommandParser implements Parser<AddInterviewCommand> {
                 PREFIX_START_TIME, PREFIX_END_TIME);
         String applicantArgs = argMultimap.getValue(PREFIX_APPLICANT).get().trim();
         String jobRole = argMultimap.getValue(PREFIX_JOB_ROLE).get().trim();
-        LocalDateTime startTime = TimeParser.parseDate(argMultimap.getValue(PREFIX_START_TIME).get().trim());
-        LocalDateTime endTime = TimeParser.parseDate(argMultimap.getValue(PREFIX_END_TIME).get().trim());
+        LocalDateTime startTime = TimeParser.parseDate(
+                argMultimap.getValue(PREFIX_START_TIME).get().trim(),
+                false);
+        LocalDateTime endTime = TimeParser.parseDate(
+                argMultimap.getValue(PREFIX_END_TIME).get().trim(),
+                false);
 
         if (endTime.isBefore(startTime)) {
             throw new ParseException(AddInterviewCommand.MESSAGE_INVALID_TIME);

@@ -29,8 +29,8 @@ public class Interview {
         this.applicant = app;
         this.jobRole = role;
         this.rating = new Rating("0.0");
-        this.startTime = new Time(TimeParser.parseDate(startTimeString));
-        this.endTime = new Time(TimeParser.parseDate(endTimeString));
+        this.startTime = new Time(TimeParser.parseDate(startTimeString, false));
+        this.endTime = new Time(TimeParser.parseDate(endTimeString, false));
         this.isDone = false;
     }
 
@@ -51,8 +51,8 @@ public class Interview {
         requireAllNonNull(app, role, startTimeString, endTimeString);
         this.applicant = app;
         this.jobRole = role;
-        this.startTime = new Time(TimeParser.parseDate(startTimeString));
-        this.endTime = new Time(TimeParser.parseDate(endTimeString));
+        this.startTime = new Time(TimeParser.parseDate(startTimeString, false));
+        this.endTime = new Time(TimeParser.parseDate(endTimeString, false));
         this.rating = rating;
         this.isDone = isDone;
     }
@@ -72,8 +72,8 @@ public class Interview {
         requireAllNonNull(app, role, startTimeString, endTimeString);
         this.applicant = app;
         this.jobRole = role;
-        this.startTime = new Time(TimeParser.parseDate(startTimeString));
-        this.endTime = new Time(TimeParser.parseDate(endTimeString));
+        this.startTime = new Time(TimeParser.parseDate(startTimeString, false));
+        this.endTime = new Time(TimeParser.parseDate(endTimeString, false));
         this.rating = new Rating("0.0");
         this.isDone = isDone;
     }

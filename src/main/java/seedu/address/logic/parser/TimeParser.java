@@ -2,6 +2,7 @@ package seedu.address.logic.parser;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
@@ -54,22 +55,42 @@ public class TimeParser {
             },
     };
 
-    private static final String MISSING_TIME_ERROR_MESSAGE = "Please enter an interview time!";
-    // todo: make this more meaningful (e.g. Date cannot be in the past!)
-    private static final String PAST_DATE_ERROR_MESSAGE = "Please specify a valid date!";
+    protected static final String[][] DATE_ONLY_FORMATS = new String[][] {
+            // time string with day (formatID == 0)
+            {
+            "E"
+            },
+            // time with all required information: year, month, day of month (formatID == 1)
+            {
+            "d MMM yyyy",
+            "dd-MM-y",
+            "d/M/y"
+            },
+            // time with these information: month, day of month, time (formatID == 2)
+            {
+            "dd MMM",
+            "d/M"
+            },
+    };
+
+    protected static final String MISSING_TIME_ERROR_MESSAGE = "Please enter an interview time!";
+    protected static final String PAST_DATE_ERROR_MESSAGE = "Input date cannot be in the past!";
 
     /**
-     * Converts the string date into a Datetime object.
+     * Converts the string date into a LocalDatetime object. Only accepts valid time Strings
+     * that have time as their suffix.
      *
      * @author Tan Kerway
      * @param time the String that contains the data for the date
      * @return datetime object that represents the string
+     * @throws seedu.address.logic.parser.exceptions.ParseException when the time String is not valid
      */
-    public static LocalDateTime parseDate(String time)
+    public static LocalDateTime parseDate(String time, boolean dateOnly)
             throws seedu.address.logic.parser.exceptions.ParseException {
-        for (int currentFormatID = 0; currentFormatID < DATE_FORMATS.length; currentFormatID++) {
+        String[][] formatList = dateOnly ? DATE_ONLY_FORMATS : DATE_FORMATS;
+        for (int currentFormatID = 0; currentFormatID < formatList.length; currentFormatID++) {
             // find a date format string that matches the user pattern
-            for (String formatString : DATE_FORMATS[currentFormatID]) {
+            for (String formatString : formatList[currentFormatID]) {
                 try {
                     SimpleDateFormat simpleDateFormat = new SimpleDateFormat(formatString);
                     simpleDateFormat.setLenient(false);
@@ -78,7 +99,7 @@ public class TimeParser {
                             .toInstant()
                             .atZone(ZoneId.systemDefault())
                             .toLocalDateTime();
-                    return addMissingDateFields(temp, currentFormatID);
+                    return addMissingDateFields(temp, currentFormatID, dateOnly);
                 } catch (ParseException ignored) {
                     String s = "";
                 }
@@ -94,7 +115,7 @@ public class TimeParser {
      * @param currentFormatID the given type of date object
      * @return a LocalDateTime object that has all the required information
      */
-    private static LocalDateTime addMissingDateFields(LocalDateTime temp, int currentFormatID)
+    private static LocalDateTime addMissingDateFields(LocalDateTime temp, int currentFormatID, boolean dateOnly)
             throws seedu.address.logic.parser.exceptions.ParseException {
         switch (currentFormatID) {
         case 0: // case where user entered a day of the week and time
@@ -107,10 +128,15 @@ public class TimeParser {
             break;
         default: // case where the user did not enter an interview time
             // inform the user that their input is missing an interview time
-            throw new seedu.address.logic.parser.exceptions.ParseException(MISSING_TIME_ERROR_MESSAGE);
+            if (!dateOnly) {
+                throw new seedu.address.logic.parser.exceptions.ParseException(MISSING_TIME_ERROR_MESSAGE);
+            }
+            // exit normally if the user does not need a time
+            break;
         }
         // guard clause: the given date is before today's date even after parsing
-        if (temp.isBefore(LocalDateTime.now())) {
+        if ((!dateOnly && temp.isBefore(LocalDateTime.now()))
+                || (dateOnly && temp.toLocalDate().isBefore(LocalDate.now()))) {
             throw new seedu.address.logic.parser.exceptions.ParseException(PAST_DATE_ERROR_MESSAGE);
         }
         return temp;

@@ -34,7 +34,7 @@ class TimeParserTest {
     @Test
     void testMissingTimeErrorMessage() {
         try {
-            TimeParser.parseDate("Sunday");
+            TimeParser.parseDate("Sunday", false);
         } catch (ParseException parseException) {
             assertEquals(parseException.getMessage(), "Please enter an interview time!");
         }
@@ -43,9 +43,9 @@ class TimeParserTest {
     @Test
     void testTimeErrorMessages() {
         try {
-            TimeParser.parseDate("24/10/1988 1930");
+            TimeParser.parseDate("24/10/1988 1930", false);
         } catch (ParseException parseException) {
-            assertEquals(parseException.getMessage(), "Please specify a valid date!");
+            assertEquals(parseException.getMessage(), TimeParser.PAST_DATE_ERROR_MESSAGE);
         }
     }
 
@@ -54,7 +54,7 @@ class TimeParserTest {
     void testParseDateInvalidDateUnsuccessfulParse() {
         boolean hasError = false;
         try {
-            TimeParser.parseDate("whenever I say so");
+            TimeParser.parseDate("whenever I say so", false);
         } catch (ParseException parseException) {
             hasError = true;
         }
@@ -66,7 +66,7 @@ class TimeParserTest {
     void testParseDateDayIncompleteUnsuccessfulParse() {
         boolean hasError = false;
         try {
-            TimeParser.parseDate("T 1630");
+            TimeParser.parseDate("T 1630", false);
         } catch (ParseException ignored) {
             hasError = true;
         }
@@ -77,7 +77,7 @@ class TimeParserTest {
     void testParseDateDayIncompleteUnsuccessfulParse2() {
         boolean hasError = false;
         try {
-            TimeParser.parseDate("Tu 1630");
+            TimeParser.parseDate("Tu 1630", false);
         } catch (ParseException ignored) {
             hasError = true;
         }
@@ -86,103 +86,103 @@ class TimeParserTest {
 
     @Test
     void testParseDateDayAnd24hTimeWithMinutesSuccessfulParse() throws ParseException {
-        TimeParser.parseDate("Tue 1630");
+        TimeParser.parseDate("Tue 1630", false);
     }
 
     @Test
     void testParseDateDayAnd12hTimeWithMinutesSuccessfulParse() throws ParseException {
-        TimeParser.parseDate("Tue 4.30pm");
+        TimeParser.parseDate("Tue 4.30pm", false);
     }
 
     // TODO: FIX THIS FROM PASSING
     @Test
     void testParseDateDayAnd12hTimeWithoutMinutesUnsuccessfulParse() throws ParseException {
-        TimeParser.parseDate("Tue 4amdfjs");
+        TimeParser.parseDate("Tue 4amdfjs", false);
     }
 
     @Test
     void testParseDateDayAnd12hTimeWithoutMinutesSuccessfulParse() throws ParseException {
-        TimeParser.parseDate("Tue 4pm");
+        TimeParser.parseDate("Tue 4pm", false);
     }
 
     // TESTS FOR VALID DATES WITH YEAR, MONTH, DAY OF MONTH, AND TIME
     @Test
     void testParseDateYearMonthDayTimeSuccessfulParse() throws ParseException {
-        TimeParser.parseDate("21/12/2024 5pm");
+        TimeParser.parseDate("21/12/2024 5pm", false);
     }
 
     @Test
     void testParseDateYearMonthDayTime2SuccessfulParse() throws ParseException {
-        TimeParser.parseDate("21/12/24 1730");
+        TimeParser.parseDate("21/12/24 1730", false);
     }
 
     @Test
     void testParseDateYearMonthDayTime3SuccessfulParse() throws ParseException {
-        TimeParser.parseDate("21-12-2024 1730");
+        TimeParser.parseDate("21-12-2024 1730", false);
     }
 
     @Test
     void testParseDateYearMonthDayTime4SuccessfulParse() throws ParseException {
-        TimeParser.parseDate("21-12-2024 1730pm");
+        TimeParser.parseDate("21-12-2024 1730pm", false);
     }
 
     @Test
     void testParseDateYearMonthDayTime5SuccessfulParse() throws ParseException {
-        TimeParser.parseDate("15 Dec 2023 1.30pm");
+        TimeParser.parseDate("15 Dec 2023 1.30pm", false);
     }
 
     @Test
     void testParseDateYearMonthDayTime6SuccessfulParse() throws ParseException {
-        TimeParser.parseDate("31 mar 2099 1453");
+        TimeParser.parseDate("31 mar 2099 1453", false);
     }
 
     @Test
     void testParseDateYearMonthDayTime7SuccessfulParse() throws ParseException {
-        TimeParser.parseDate("12-12-2023 1647");
+        TimeParser.parseDate("12-12-2023 1647", false);
     }
 
     @Test
     void testParseDateYearMonthDayTime8SuccessfulParse() throws ParseException {
-        TimeParser.parseDate("21/12/2024 5.30pm");
+        TimeParser.parseDate("21/12/2024 5.30pm", false);
     }
 
     @Test
     void testParseDateYearMonthDayTime9SuccessfulParse() throws ParseException {
-        TimeParser.parseDate("21/12/2024 5pm");
+        TimeParser.parseDate("21/12/2024 5pm", false);
     }
 
     @Test
     void testParseDateYearMonthDayTime10SuccessfulParse() throws ParseException {
-        TimeParser.parseDate("21/12/24 5.30pm");
+        TimeParser.parseDate("21/12/24 5.30pm", false);
     }
 
     @Test
     void testParseDateYearMonthDayTime11SuccessfulParse() throws ParseException {
-        TimeParser.parseDate("21-12-2024 5pm");
+        TimeParser.parseDate("21-12-2024 5pm", false);
     }
 
     // TESTS FOR VALID DATES WITH MONTH, DAY OF MONTH, AND TIME
 
     @Test
     void testParseDateMonthDayTime2SuccessfulParse() throws ParseException {
-        TimeParser.parseDate("15 Jan 2.13pm");
+        TimeParser.parseDate("15 Jan 2.13pm", false);
     }
 
     @Test
     void testParseDateMonthDayTime3SuccessfulParse() throws ParseException {
-        TimeParser.parseDate("15 Jan 1456");
+        TimeParser.parseDate("15 Jan 1456", false);
     }
 
     @Test
     void testParseDateMonthDayTime5SuccessfulParse() throws ParseException {
-        TimeParser.parseDate("15/01 1456");
+        TimeParser.parseDate("15/01 1456", false);
     }
 
     @Test
     void testParseDateMonthDayTime6UnsuccessfulParse() {
         boolean hasError = false;
         try {
-            TimeParser.parseDate("15/13 1456");
+            TimeParser.parseDate("15/13 1456", false);
         } catch (ParseException ignored) {
             hasError = true;
         }
@@ -191,7 +191,7 @@ class TimeParserTest {
 
     @Test
     void testParseDateMonthDayTime8SuccessfulParse() throws ParseException {
-        TimeParser.parseDate("16 May 3.15pm");
+        TimeParser.parseDate("16 May 3.15pm", false);
     }
 
     // TESTS FOR VALID DATES BUT WITH MISSING TIMES
@@ -199,7 +199,7 @@ class TimeParserTest {
     void testParseDayOnlyUnsuccessfulParse() {
         boolean hasError = false;
         try {
-            TimeParser.parseDate("Tue");
+            TimeParser.parseDate("Tue", false);
         } catch (ParseException ignored) {
             hasError = true;
         }
@@ -210,7 +210,7 @@ class TimeParserTest {
     void testParseDayOnlyUnsuccessfulParse2() {
         boolean hasError = false;
         try {
-            TimeParser.parseDate("Tuesday");
+            TimeParser.parseDate("Tuesday", false);
         } catch (ParseException ignored) {
             hasError = true;
         }
@@ -221,7 +221,7 @@ class TimeParserTest {
     void testParseDayOnlyUnsuccessfulParse3() {
         boolean hasError = false;
         try {
-            TimeParser.parseDate("Tues");
+            TimeParser.parseDate("Tues", false);
         } catch (ParseException ignored) {
             hasError = true;
         }
@@ -231,7 +231,7 @@ class TimeParserTest {
     void testParseDayOnlyUnsuccessfulParse4() {
         boolean hasError = false;
         try {
-            TimeParser.parseDate("Tuesd");
+            TimeParser.parseDate("Tuesd", false);
         } catch (ParseException ignored) {
             hasError = true;
         }
@@ -242,7 +242,7 @@ class TimeParserTest {
     void testParseDayOnlyUnsuccessfulParse5() {
         boolean hasError = false;
         try {
-            TimeParser.parseDate("Tuesda");
+            TimeParser.parseDate("Tuesda", false);
         } catch (ParseException ignored) {
             hasError = true;
         }
@@ -253,7 +253,7 @@ class TimeParserTest {
     void testParseDateParseDateWithDdMmYyyyUnsuccessfulParse() {
         boolean hasError = false;
         try {
-            TimeParser.parseDate("01/01/2099");
+            TimeParser.parseDate("01/01/2099", false);
         } catch (ParseException ignored) {
             hasError = true;
         }
@@ -264,7 +264,7 @@ class TimeParserTest {
     void testParseDateParseDateWithPastDateUnsuccessfulParse() {
         boolean hasError = false;
         try {
-            TimeParser.parseDate("01/01/1970");
+            TimeParser.parseDate("01/01/1970", false);
         } catch (ParseException parseException) {
             hasError = true;
         }
