@@ -192,12 +192,12 @@ Alias: `find`
 
 | Symbol / Operator | Description              | Precedence |
 |-------------------|--------------------------|------------|
-| `/`               | Logical OR               | -          |
-| `&`               | Logical AND              | low        |
+| `&`               | Logical AND              | lowest     |
+| `/`               | Logical OR               | low        |
 | `' '` (space)     | Logical AND              | high       |
-| `(` and `)`       | Parentheses for grouping | -          |
+| `(` and `)`       | Parentheses for grouping | highest    |
 
-  e.g. `a & b | c d` is the same as `a & (b | (c & d))`.
+  e.g. `a & b / c d` is the same as `a & (b / (c & d))`.
 
 </div>
 
@@ -208,7 +208,7 @@ Examples:
   * lists entries which match "John Doe", "Doe John", "Johnny Doe", and "Mary" who lives on "John Doe Street".
 * `find john john doe` 
   * is redundant and gives the same result as `find john doe`.
-* `list "John" | zam & doe`
+* `list "John" / zam & doe`
   * lists entries which match "John Doe" and "Doe Shazam", but not "John Grahm".
 
 ### Viewing a fosterer's detail: `view`
@@ -219,9 +219,9 @@ Format: `view INDEX`
 
 Parameters:
 
-| Parameter | About                                                                                                                                                                 | Example |
-|-----------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------|
-| `INDEX`     | - Index of a fosterer displayed in the list obtained from a `list`/`find` command <br/> - At least one index must be provided<br/> - Index must be a positive integer | `1`, `2`, `3` |
+| Parameter | About                                                                                                                                                                 | Example       |
+|-----------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------|
+| `INDEX`   | - Index of a fosterer displayed in the list obtained from a `list`/`find` command <br/> - At least one index must be provided<br/> - Index must be a positive integer | `1`, `2`, `3` |
 
 <div markdown="span" class="alert alert-warning">
   :exclamation: <b>Important:</b> <br/>

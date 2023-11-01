@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<SplitPane dividerPositions="0.4" maxWidth="Infinity" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1">
+   <StackPane alignment="CENTER_RIGHT" maxWidth="Infinity" HBox.hgrow="ALWAYS">
+      <Label fx:id="keyLabel" text="PLACEHOLDER LEFT" />
+      <padding>
+         <Insets left="10.0" right="10.0" />
+      </padding>
+   </StackPane>
+   <StackPane alignment="CENTER_LEFT" maxWidth="Infinity" onMouseClicked="#setFocus" HBox.hgrow="ALWAYS">
+      <TextArea fx:id="valueField" prefRowCount="1" wrapText="true" />
+      <FlowPane fx:id="valueFlowPane" hgap="10.0" vgap="5.0" />
+      <padding>
+         <Insets left="10.0" right="10.0" />
+      </padding>
+   </StackPane>
+</SplitPane>
