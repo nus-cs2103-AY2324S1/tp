@@ -36,6 +36,7 @@ public class ShowCalendarCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         ScheduleIsOnDatePredicate predicate = new ScheduleIsOnDatePredicate(date);
+        model.updateFilteredScheduleList(Model.PREDICATE_SHOW_ALL_SCHEDULES);
         model.updateFilteredCalendarScheduleList(predicate);
         return new CommandResult(MESSAGE_SUCCESS);
     }
