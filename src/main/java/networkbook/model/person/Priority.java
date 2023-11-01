@@ -57,6 +57,14 @@ public class Priority implements Comparable<Priority> {
         return priorityLevel != PriorityLevel.INVALID;
     }
 
+    /**
+     * Returns priority level.
+     */
+    public PriorityLevel getPriorityLevel() {
+        return value; // Can return value directly as it is final.
+    }
+
+
     @Override
     public String toString() {
         assert isValidPriority(value) : "Valid priority level should fall within the three categories";

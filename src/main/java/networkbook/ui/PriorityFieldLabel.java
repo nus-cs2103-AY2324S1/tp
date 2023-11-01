@@ -10,6 +10,7 @@ import networkbook.model.person.Priority;
 public class PriorityFieldLabel extends FieldLabel {
 
     private static final String PRIORITY_STYLE_CLASS_PREFIX = "priority_";
+    private static final String PRIORITY_CHAR = "★";
 
     /**
      * Creates a {@code PriorityFieldLabel} with the given priority.
@@ -17,7 +18,21 @@ public class PriorityFieldLabel extends FieldLabel {
     public PriorityFieldLabel(Priority priority) {
         super("");
         requireAllNonNull(priority);
-        this.setText(priority.toString());
+        StringBuilder labelText = new StringBuilder("");
+        switch (priority.getPriorityLevel()) {
+        case HIGH:
+            labelText.append(PRIORITY_CHAR);
+            // Fallthrough
+        case MEDIUM:
+            labelText.append(PRIORITY_CHAR);
+            // Fallthrough
+        case LOW:
+            labelText.append(PRIORITY_CHAR);
+            // Fallthrough
+        default:
+            break;
+        }
+        this.setText(labelText.toString());
         this.getStyleClass().add(PRIORITY_STYLE_CLASS_PREFIX + priority.toString());
     }
 
