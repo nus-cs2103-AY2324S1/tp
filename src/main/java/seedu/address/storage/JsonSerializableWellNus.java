@@ -22,7 +22,7 @@ class JsonSerializableWellNus {
 
     public static final String MESSAGE_DUPLICATE_STUDENT = "Students list contains duplicate student(s).";
     public static final String MESSAGE_DUPLICATE_APPOINTMENT = "Appointments list contains duplicate appointment(s).";
-    public static final String MESSAGE_STUDENT_NOT_FOUND = "Appointments list contains appointment(s) whose"
+    public static final String MESSAGE_STUDENT_NOT_FOUND = "Appointments list contains appointment(s) whose "
             + "corresponding student is not found in students list";
 
     private final List<JsonAdaptedStudent> students = new ArrayList<>();
@@ -75,5 +75,4 @@ class JsonSerializableWellNus {
         }
         return wellNus;
     }
-
 }

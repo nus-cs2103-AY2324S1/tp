@@ -21,7 +21,8 @@ public class JsonSerializableWellNusTest {
     private static final Path DUPLICATE_STUDENT_FILE = TEST_DATA_FOLDER.resolve("duplicateStudentWellNus.json");
     private static final Path INVALID_APPOINTMENT_FILE = TEST_DATA_FOLDER.resolve("invalidAppointmentWellNus.json");
     private static final Path DUPLICATE_APPOINTMENT_FILE = TEST_DATA_FOLDER.resolve("duplicateAppointmentWellNus.json");
-    private static final Path APPOINTMENT_STUDENT_NOT_FOUND_FILE = TEST_DATA_FOLDER.resolve("appointmentStudentNotFoundWellNus.json");
+    private static final Path APPOINTMENT_STUDENT_NOT_FOUND_FILE = TEST_DATA_FOLDER
+            .resolve("appointmentStudentNotFoundWellNus.json");
 
     @Test
     public void toModelType_typicalWellNusFile_success() throws Exception {
