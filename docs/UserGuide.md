@@ -418,7 +418,7 @@ Adds a schedule to a specified tutor.
 
 Edits an existing schedule in TutorConnect.
 
-##### :beginner: First time users
+##### :star: First time users
 {:.no_toc}
 
 **Scenario**
@@ -441,7 +441,7 @@ Tada! The schedule has now been updated to 8am.
 ![edit schedule](images/editSchedule.png)
 
 
-##### :hammer: Experienced users
+##### :star::star::star: Experienced users
 {:.no_toc}
 
 **Command format**
@@ -451,17 +451,19 @@ Tada! The schedule has now been updated to 8am.
 **Errors you might encounter**
 
 Here is a list of the error messages you may encounter, when the command is entered incorrectly:
-* `Invalid command format!`: Invalid or missing SCHEDULE_INDEX.
-* `EndTime should only contain a valid date and time in the format "yyyy-MM-ddTHH:mm", and it should not be blank`:
-  The end time entered is not in the correct datetime format.
-* `StartTime should only contain a valid date and time in the format "yyyy-MM-ddTHH:mm", and it should not be
-  blank`: The start time entered is not in the correct datetime format.
-* `Multiple values specified for the following single-valued field(s): st/`: More than 1 `st/` was given in the command
-* `Multiple values specified for the following single-valued field(s): et/`: More than 1 `et/` was given in the command
-* `This schedule already exists in the address book`: There is a schedule for the same tutor with the same start and end time in the address book.
-* `This tutor has a clashing schedule in the address book`: There is a schedule for the same tutor with overlapping times in the address book.
-* `At least one field to edit must be provided.`: There is no `st/` or `et/` tag provided to edit a field.
-* `Schedules start time should be before its end time.`: The start time provided is before the end time.
+
+| Errors                                                                                                             | Reason                                                                                      |
+|--------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------|
+| `Invalid command format!`                                                                                          | SCHEDULE_INDEX entered is not in the range of number of schedules                           |
+| `EndTime should only contain a valid date and time in the format "yyyy-MM-ddTHH:mm", and it should not be blank`   | The end time entered is not in the correct datetime format                                  |
+| `StartTime should only contain a valid date and time in the format "yyyy-MM-ddTHH:mm", and it should not be blank` | The start time entered is not in the correct datetime format                                |
+| `Multiple values specified for the following single-valued field(s): st/`                                          | More than 1 `st/` was given in the command                                                  |
+| `Multiple values specified for the following single-valued field(s): et/`                                          | More than 1 `et/` was given in the command                                                  |
+| `This schedule already exists in the address book`                                                                 | There is a schedule for the same tutor with the same start and end time in the address book |
+| `This tutor has a clashing schedule in the address book`                                                           | There is a schedule for the same tutor with overlapping times in the address book           |
+| `At least one field to edit must be provided.`                                                                     | There is no `st/` or `et/` tag provided to edit a field                                     |
+| `Schedules start time should be before its end time.`                                                              | The start time provided is before the end time                                              |
+
 
 You can also refer to [input information](#input-examples) for details about valid inputs.
 
