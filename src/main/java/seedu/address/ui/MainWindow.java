@@ -19,6 +19,7 @@ import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.Model;
 import seedu.address.model.lessons.Lesson;
 import seedu.address.model.person.Person;
 import seedu.address.model.state.State;
@@ -35,6 +36,7 @@ public class MainWindow extends UiPart<Stage> {
 
     private Stage primaryStage;
     private Logic logic;
+    private Model model;
 
     // Independent Ui parts residing in this Ui container
     private PersonListPanel personListPanel;
@@ -85,12 +87,13 @@ public class MainWindow extends UiPart<Stage> {
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
      */
-    public MainWindow(Stage primaryStage, Logic logic) {
+    public MainWindow(Stage primaryStage, Logic logic, Model model) {
         super(FXML, primaryStage);
 
         // Set dependencies
         this.primaryStage = primaryStage;
         this.logic = logic;
+        this.model = model;
 
         // Configure the UI
         setWindowDefaultSize(logic.getGuiSettings());
@@ -145,7 +148,7 @@ public class MainWindow extends UiPart<Stage> {
         personListPanel = new PersonListPanel(logic);
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
-        lessonListPanel = new LessonListPanel(logic);
+        lessonListPanel = new LessonListPanel(logic, model);
         scheduleListPanelPlaceholder.getChildren().add(lessonListPanel.getRoot());
 
         studentDetailListPanel = new StudentDetailListPanel(logic);
@@ -266,7 +269,7 @@ public class MainWindow extends UiPart<Stage> {
      */
     public void handleShowPerson(Person person) {
         studentDetailList.setVisible(true);
-        studentDetailListPanel.setPersonDetails(person);
+        studentDetailListPanel.setPersonDetails(person, model);
     }
 
     /**
@@ -276,6 +279,6 @@ public class MainWindow extends UiPart<Stage> {
      */
     public void handleShowLesson(Lesson lesson) {
         lessonDetailList.setVisible(true);
-        lessonDetailListPanel.setLessonDetails(lesson);
+        lessonDetailListPanel.setLessonDetails(lesson, model);
     }
 }

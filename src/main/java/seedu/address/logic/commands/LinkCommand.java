@@ -45,7 +45,7 @@ public class LinkCommand extends Command {
         } else {
             Person person = personSet.iterator().next();
             Lesson lesson = lessonSet.iterator().next();
-            model.link(person, lesson);
+            model.linkWith(person, lesson);
             return new CommandResult("Linked " + person.getName() + " to " + lesson.getName());
         }
     }

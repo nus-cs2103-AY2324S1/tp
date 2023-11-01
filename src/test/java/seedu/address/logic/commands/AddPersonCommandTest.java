@@ -50,11 +50,10 @@ public class AddPersonCommandTest {
     }
 
     @Test
-    public void execute_duplicatePerson_throwsCommandException() {
+    public void execute_duplicatePerson_throwsCommandException() throws CommandException {
         Person validPerson = new PersonBuilder().build();
         AddPersonCommand addPersonCommand = new AddPersonCommand(validPerson);
         ModelStub modelStub = new ModelStubWithPerson(validPerson);
-
         assertThrows(CommandException.class,
                 AddPersonCommand.MESSAGE_DUPLICATE_PERSON, () -> addPersonCommand.execute(modelStub));
     }
@@ -253,9 +252,23 @@ public class AddPersonCommandTest {
             return null;
         }
 
-        @Override
-        public void link(Person person, Lesson lesson) {
+        public void linkWith(Person person, Lesson lesson) {
 
+        }
+
+        @Override
+        public void unLinkWith(Person person, Lesson lesson) {
+
+        }
+
+        @Override
+        public String getLinkedPersonNameStr(Lesson lesson) {
+
+            return null;
+        }
+
+        public String getLinkedLessonNameStr(Person person) {
+            return null;
         }
 
         @Override
@@ -290,6 +303,10 @@ public class AddPersonCommandTest {
             requireNonNull(person);
             return this.person.isSamePerson(person);
         }
+        @Override
+        public Boolean hasPersonClashWith(Person person) {
+            return this.person.hasSameName(person);
+        }
     }
 
     /**
@@ -308,6 +325,10 @@ public class AddPersonCommandTest {
         public void addPerson(Person person) {
             requireNonNull(person);
             personsAdded.add(person);
+        }
+        @Override
+        public Boolean hasPersonClashWith(Person person) {
+            return personsAdded.stream().anyMatch(person::hasSameName);
         }
 
         @Override
