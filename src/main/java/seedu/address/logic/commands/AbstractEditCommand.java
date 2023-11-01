@@ -66,6 +66,7 @@ public abstract class AbstractEditCommand<T extends ListEntry<? extends T>> exte
         init();
         editFields();
         validateEditedAndWriteBack();
+        model.resetAllShowFields();
         return new CommandResult("Edited : " + edited.toString());
     }
     /**
@@ -104,6 +105,7 @@ public abstract class AbstractEditCommand<T extends ListEntry<? extends T>> exte
                 try {
                     original = list.get(index - 1);
                 } catch (IndexOutOfBoundsException e) {
+                    // NOTE: should it be list.size() instead?
                     throw new CommandException("Index out of bounds, expected 1 to "
                             + model.getFilteredPersonList().size() + " but got " + index + ".");
                 }

@@ -49,7 +49,6 @@ public class ModelManager implements Model {
 
         this.addressBook = new AddressBook(addressBook);
         this.scheduleList = new ScheduleList(scheduleList);
-        // to add: filtered list of lessons
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
         filteredLessons = new FilteredList<>(this.scheduleList.getLessonList());
@@ -296,7 +295,37 @@ public class ModelManager implements Model {
         ModelManager otherModelManager = (ModelManager) other;
         return addressBook.equals(otherModelManager.addressBook)
                 && userPrefs.equals(otherModelManager.userPrefs)
-                && filteredPersons.equals(otherModelManager.filteredPersons);
+                && filteredPersons.equals(otherModelManager.filteredPersons)
+                && filteredLessons.equals(otherModelManager.filteredLessons);
+    }
+    //=========== Modify tasks in Lesson  =============================================================
+
+    @Override
+    public boolean hasTaskClashWith(Task task, int index) {
+        // elaine: to check whether implementation below violates any principles
+        return filteredLessons.get(index).hasSameTask(task);
+    }
+    @Override
+    public void addTask(Task task, int index) {
+        requireNonNull(task);
+        requireNonNull(index);
+        Lesson target = filteredLessons.get(index);
+        Lesson editedLesson = target.clone();
+        editedLesson.addToTaskList(task);
+        setLesson(target, editedLesson);
+    }
+    @Override
+    public Task getTaskClashWith(Task task, int index) {
+        requireNonNull(task);
+        requireNonNull(index);
+        return filteredLessons.get(index).getTaskClashWith(task);
+    }
+
+    @Override
+    public String deleteTask(Lesson lesson, int index) {
+        requireNonNull(index);
+        requireNonNull(lesson);
+        return lesson.removeFromTaskList(index);
     }
 
     //=========== App State Changing =============================================================
@@ -318,6 +347,12 @@ public class ModelManager implements Model {
 
     public boolean hasCurrentShownEntry() {
         return currentShowingPerson != null || currentShowingLesson != null || currentShowingTask != null;
+    }
+    @Override
+    public void resetAllShowFields() {
+        this.currentShowingLesson = null;
+        this.currentShowingPerson = null;
+        this.currentShowingTask = null;
     }
 
     public Person getCurrentlyDisplayedPerson() {

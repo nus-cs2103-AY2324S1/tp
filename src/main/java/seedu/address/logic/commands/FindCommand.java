@@ -31,9 +31,10 @@ public class FindCommand extends Command {
         this.trimmedArgs = trimmedArgs;
     }
 
-    @Override
+    @Override @SuppressWarnings("unchecked")
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+        model.resetAllShowFields();
         switch (model.getState()) {
         case STUDENT:
             predicate = new NameContainsKeywordsPredicate(trimmedArgs);
