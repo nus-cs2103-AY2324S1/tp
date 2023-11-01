@@ -60,7 +60,6 @@ public class CommandBox extends UiPart<Region> {
         }
     }
 
-
     /**
      * Updates the text field with the previous input in {@code historySnapshot},
      * if there exists a previous input in {@code historySnapshot}
