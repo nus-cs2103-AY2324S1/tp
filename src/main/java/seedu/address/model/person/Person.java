@@ -113,8 +113,6 @@ public class Person {
         return interactions;
     }
 
-<<<<<<< HEAD
-=======
     /**
      * Returns the reminder associated with this person.
      */
@@ -122,7 +120,6 @@ public class Person {
         return this.reminder;
     }
 
->>>>>>> f91d8d07f4e3b44fbefa58a590572ef8b8224796
     /**
      * Returns a filtered list of {@code Interaction} that matches the given predicate.
      */

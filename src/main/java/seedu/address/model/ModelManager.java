@@ -28,12 +28,8 @@ public class ModelManager implements Model {
     private final SimpleObjectProperty<Person> selectedPerson = new SimpleObjectProperty<>();
     private final UniqueReminderList reminderList;
     private final Dashboard dashboard = new Dashboard(this);
-<<<<<<< HEAD
-    private final UniqueReminderList reminderList;
-=======
     private final ReminderScheduler reminderScheduler;
     private final Object reminderMutex = new Object();
->>>>>>> f91d8d07f4e3b44fbefa58a590572ef8b8224796
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
