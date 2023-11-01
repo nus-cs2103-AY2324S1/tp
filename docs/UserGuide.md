@@ -256,7 +256,7 @@ Edits an existing tutor found in TutorConnect.
 **Scenario**
 
 Imagine that tutor John Doe has changed his phone number to **87654321**.\
-As a tuition centre coordinator you want to have the most up-to-date information on your tutors.  
+As a tuition centre coordinator, you want to have the most up-to-date information on your tutors.  
 
 Let's use the edit tutor command to update his phone number!
 
@@ -268,7 +268,7 @@ Let's use the edit tutor command to update his phone number!
 
 **What you can expect to see**
 
-Viola! His phone has now been updated to **87654321**.
+Viola! His phone number has now been updated to **87654321**.
 
 ![edit tutor](images/editTutor.png)
 
