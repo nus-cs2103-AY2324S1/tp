@@ -177,16 +177,16 @@ Shows contacts whose names have a word that fully matches any of the specified k
 **Format:**
 `find KEYWORD...`
 
-- The search is case-insensitive.
+- The search is case-insensitive.\
 e.g Keyword `john` will match the name `John`.
 
-- The order of the keywords does not matter.
+- The order of the keywords does not matter.\
 e.g. Keywords `Amy John` will show the same contacts as keywords `John Amy`.
 
-- Only full words will be matched.
+- Only full words will be matched.\
 e.g. Keyword `John` will not match the names `Johnny` or `Jo`.
 
-- Each name only needs one word to fully match at least one keyword (i.e. `OR` search).
+- Each name only needs one word to fully match at least one keyword (i.e. `OR` search).\
 e.g. `find Bee John` will match the names `Amy Bee` and `John Doe`.
 
 **Examples:**
@@ -227,11 +227,11 @@ Your contacts get automatically saved to the file system after each successful c
 
 ## Known limitations
 
-1. **Long contact details are not in the product's scope.**
-e.g. names/phone numbers/emails/notes/tags/alternate contacts with hundreds of characters.
-Such long text is likely to get shortened with ellipses (`...`) or cut off by the app's window.
+1. **Long contact details are not in the product's scope.**\
+e.g. names/phone numbers/emails/notes/tags/alternate contacts with hundreds of characters.\
+Such long text is likely to get shortened with ellipses (`...`) or cut off by the app's window.\
 You may try to remedy this by resizing the app's window to be wider.
 
-1. **Multiple monitors are not in the product's scope.**
-When using multiple monitors, if you move the app's window to a secondary monitor, then later switch to using just the primary monitor, the GUI will reopen off-screen.
+1. **Multiple monitors are not in the product's scope.**\
+When using multiple monitors, if you move the app's window to a secondary monitor, then later switch to using just the primary monitor, the GUI will reopen off-screen.\
 You can remedy this by deleting the `settings.json` file created by the app before running the app again.
