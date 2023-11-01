@@ -146,8 +146,8 @@ public class Student {
     /**
      * Marks the student as having participated in the specific tutorial.
      */
-    public void setGrade(Index assignmentNumber, int grade) throws CommandException {
-        this.classDetails.setGrade(assignmentNumber, grade);
+    public void setGrade(Index assignmentIndex, int grade) throws CommandException {
+        this.classDetails.setGrade(assignmentIndex, grade);
     }
 
 

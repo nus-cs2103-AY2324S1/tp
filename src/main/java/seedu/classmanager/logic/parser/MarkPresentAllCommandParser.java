@@ -6,6 +6,7 @@ import static seedu.classmanager.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import seedu.classmanager.commons.core.index.Index;
 import seedu.classmanager.logic.commands.MarkPresentAllCommand;
 import seedu.classmanager.logic.parser.exceptions.ParseException;
+import seedu.classmanager.model.student.ClassDetails;
 
 /**
  * Parses input arguments and creates a new MarkPresentAllCommand object
@@ -26,7 +27,12 @@ public class MarkPresentAllCommandParser implements Parser<MarkPresentAllCommand
                     MarkPresentAllCommand.MESSAGE_USAGE));
         }
 
-        Index index = ParserUtil.parseIndex(argMultimap.getPreamble());
+        Index index;
+        try {
+            index = ParserUtil.parseIndex(argMultimap.getPreamble());
+        } catch (ParseException e) {
+            throw new ParseException(ClassDetails.getMessageInvalidTutorialIndex());
+        }
 
         return new MarkPresentAllCommand(index);
     }

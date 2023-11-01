@@ -36,15 +36,15 @@ public class SetGradeCommand extends Command {
 
 
     private final StudentNumber studentNumber;
-    private final Index assignmentNumber;
+    private final Index assignmentIndex;
     private final int grade;
 
     /**
      * Creates an SetGradeCommand to set the specified {@code Student}'s grade
      */
-    public SetGradeCommand(StudentNumber studentNumber, Index assignmentNumber, int grade) {
+    public SetGradeCommand(StudentNumber studentNumber, Index assignmentIndex, int grade) {
         this.studentNumber = studentNumber;
-        this.assignmentNumber = assignmentNumber;
+        this.assignmentIndex = assignmentIndex;
         this.grade = grade;
     }
 
@@ -59,7 +59,7 @@ public class SetGradeCommand extends Command {
 
         Student studentToGrade = model.getStudent(studentNumber);
         Student gradedStudent = studentToGrade.copy();
-        gradedStudent.setGrade(assignmentNumber, grade);
+        gradedStudent.setGrade(assignmentIndex, grade);
         model.setStudent(studentToGrade, gradedStudent);
         model.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
         model.setSelectedStudent(gradedStudent);
@@ -82,7 +82,7 @@ public class SetGradeCommand extends Command {
 
         SetGradeCommand otherSetGradeCommand = (SetGradeCommand) other;
         return studentNumber.equals(otherSetGradeCommand.studentNumber)
-                && assignmentNumber.equals(otherSetGradeCommand.assignmentNumber)
+                && assignmentIndex.equals(otherSetGradeCommand.assignmentIndex)
                 && grade == otherSetGradeCommand.grade;
     }
 
@@ -90,7 +90,7 @@ public class SetGradeCommand extends Command {
     public String toString() {
         return new ToStringBuilder(this)
                 .add("studentNumber", studentNumber)
-                .add("assignmentNumber", assignmentNumber)
+                .add("assignmentIndex", assignmentIndex)
                 .add("grade", grade)
                 .toString();
     }

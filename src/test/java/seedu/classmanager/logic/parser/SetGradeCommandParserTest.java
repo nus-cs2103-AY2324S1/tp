@@ -17,6 +17,7 @@ import org.junit.jupiter.api.Test;
 import seedu.classmanager.commons.core.index.Index;
 import seedu.classmanager.logic.Messages;
 import seedu.classmanager.logic.commands.SetGradeCommand;
+import seedu.classmanager.model.student.ClassDetails;
 import seedu.classmanager.model.student.StudentNumber;
 
 public class SetGradeCommandParserTest {
@@ -53,11 +54,12 @@ public class SetGradeCommandParserTest {
 
     @Test
     public void parse_invalidValue_failure() {
+        ClassDetails.setAssignmentCount(10);
         assertParseFailure(parser, INVALID_STUDENT_NUMBER_DESC + VALID_ASSIGNMENT_DESC + VALID_GRADE_DESC,
                 StudentNumber.MESSAGE_CONSTRAINTS); // invalid student number
 
         assertParseFailure(parser, STUDENT_NUMBER_DESC_AMY + INVALID_ASSIGNMENT_DESC + VALID_GRADE_DESC,
-                ParserUtil.MESSAGE_INVALID_INDEX); // invalid assignment
+                ClassDetails.getMessageInvalidAssignmentIndex()); // invalid assignment
 
         assertParseFailure(parser, STUDENT_NUMBER_DESC_AMY + VALID_ASSIGNMENT_DESC + INVALID_GRADE_DESC,
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, SetGradeCommand.MESSAGE_USAGE)); // invalid grade

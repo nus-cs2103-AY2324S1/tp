@@ -17,6 +17,7 @@ import org.junit.jupiter.api.Test;
 import seedu.classmanager.commons.core.index.Index;
 import seedu.classmanager.logic.Messages;
 import seedu.classmanager.logic.commands.RecordClassParticipationCommand;
+import seedu.classmanager.model.student.ClassDetails;
 import seedu.classmanager.model.student.StudentNumber;
 
 public class RecordClassParticipationCommandParserTest {
@@ -53,11 +54,12 @@ public class RecordClassParticipationCommandParserTest {
 
     @Test
     public void parse_invalidValue_failure() {
+        ClassDetails.setTutorialCount(10);
         assertParseFailure(parser, INVALID_STUDENT_NUMBER_DESC + VALID_TUT_DESC + VALID_PARTICIPATION_DESC,
                 StudentNumber.MESSAGE_CONSTRAINTS); // invalid student number
 
         assertParseFailure(parser, STUDENT_NUMBER_DESC_AMY + INVALID_TUT_DESC + VALID_PARTICIPATION_DESC,
-                ParserUtil.MESSAGE_INVALID_INDEX); // invalid tut
+                ClassDetails.getMessageInvalidTutorialIndex()); // invalid tut
 
         assertParseFailure(parser, STUDENT_NUMBER_DESC_AMY + VALID_TUT_DESC + INVALID_PARTICIPATION_DESC,
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT,

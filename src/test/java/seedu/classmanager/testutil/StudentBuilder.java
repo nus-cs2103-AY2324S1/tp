@@ -98,9 +98,9 @@ public class StudentBuilder {
      * Sets a {@code Assignment} in {@code AssignmentTracker} of the
      * {@code ClassDetails} that we are building.
      */
-    public StudentBuilder withAssignmentDetails(Index assignmentNumber, int marks) {
+    public StudentBuilder withAssignmentDetails(Index assignmentIndex, int marks) {
         try {
-            this.classDetails.setGrade(assignmentNumber, marks);
+            this.classDetails.setGrade(assignmentIndex, marks);
         } catch (CommandException e) {
             e.printStackTrace();
         }

@@ -277,12 +277,12 @@ public class VersionedClassManagerTest {
      * Creates and returns a {@code versionedClassManager} with the {@code ClassManagerStates} added into it, and the
      * {@code versionedClassManager#currentStatePointer} at the end of list.
      */
-    private VersionedClassManager prepareClassManagerList(ReadOnlyClassManager... ClassManagerStates) {
-        assertFalse(ClassManagerStates.length == 0);
+    private VersionedClassManager prepareClassManagerList(ReadOnlyClassManager... classManagerStates) {
+        assertFalse(classManagerStates.length == 0);
 
-        VersionedClassManager versionedClassManager = new VersionedClassManager(ClassManagerStates[0]);
-        for (int i = 1; i < ClassManagerStates.length; i++) {
-            versionedClassManager.resetData(ClassManagerStates[i]);
+        VersionedClassManager versionedClassManager = new VersionedClassManager(classManagerStates[0]);
+        for (int i = 1; i < classManagerStates.length; i++) {
+            versionedClassManager.resetData(classManagerStates[i]);
             versionedClassManager.commit();
         }
 

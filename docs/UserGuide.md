@@ -23,7 +23,7 @@ management tasks done faster than traditional GUI apps.
 
 3. Copy the file to the folder you want to use as the _home folder_ for your ClassManager.
 
-4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar Class.Manager.2023.jar` command to run the application.<br>
+4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar Class.Manager.2023.jar` command to run the application.
    Note the app contains some sample data.<br>
 
 5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
@@ -241,7 +241,7 @@ Marking tutorial attendance for an existing student as present in the class mana
 Format: `present TUTORIAL_INDEX s/STUDENT_NUMBER`
 
 * The `STUDENT_NUMBER` must be valid and exist.
-* The `TUTORIAL_INDEX` must be a valid positive integer, within the configured tutorial count given in the [**<u>`config`<u>**](#configuring-class-manager-config) command.
+* The `TUTORIAL_INDEX` must be a valid positive integer, within the configured tutorial count given in the [**<u>`config`</u>**](#configuring-class-manager-config) command.
 
 Examples:
 * `present 1 s/A0249112A`
@@ -254,7 +254,7 @@ Marking tutorial attendance for all students in current list displayed as presen
 
 Format: `mark-pre-all TUTORIAL_INDEX`
 
-* The `TUTORIAL_INDEX` must be a valid positive integer, within the configured tutorial count given in the [**<u>`config`<u>**](#configuring-class-manager-config) command.
+* The `TUTORIAL_INDEX` must be a valid positive integer, within the configured tutorial count given in the [**<u>`config`</u>**](#configuring-class-manager-config) command.
 
 Examples:
 * `present-all 1`
@@ -268,7 +268,7 @@ Marking tutorial attendance for an existing student as absent in the class manag
 Format: `absent TUTORIAL_INDEX s/STUDENT_NUMBER`
 
 * The `STUDENT_NUMBER` must be valid and exist.
-* The `TUTORIAL_INDEX` must be a valid positive integer, within the configured tutorial count given in the [**<u>`config`<u>**](#configuring-class-manager-config) command.
+* The `TUTORIAL_INDEX` must be a valid positive integer, within the configured tutorial count given in the [**<u>`config`</u>**](#configuring-class-manager-config) command.
 
 Examples:
 * `absent 1 s/A0249112A`
@@ -282,7 +282,7 @@ Setting an assignment grade for an existing student in the class manager.
 Format: `grade s/STUDENT_NUMBER a/ASSIGNMENT_INDEX g/GRADE`
 
 * The `STUDENT_NUMBER` must be valid and exist.
-* The `ASSIGNMENT_INDEX` must be a valid positive integer, within the configured assignment count given in the [**<u>`config`<u>**](#configuring-class-manager-config) command.
+* The `ASSIGNMENT_INDEX` must be a valid positive integer, within the configured assignment count given in the [**<u>`config`</u>**](#configuring-class-manager-config) command.
 * The `GRADE` must be a valid integer between 0 and 100.
 
 Examples:
@@ -297,7 +297,7 @@ Recording the class participation level for an existing student in the class man
 Format: `class-part s/STUDENT_NUMBER tut/TUTORIAL_INDEX part/PARTICIPATION_LEVEL`
 
 * The `STUDENT_NUMBER` must be valid and exist.
-* The `TUTORIAL_INDEX` must be a valid positive integer, within the configured tutorial count given in the [**<u>`config`<u>**](#configuring-class-manager-config) command.
+* The `TUTORIAL_INDEX` must be a valid positive integer, within the configured tutorial count given in the [**<u>`config`</u>**](#configuring-class-manager-config) command.
 * The `PARTICIPATION_LEVEL` must be either `true` or `false`.
   * The `true` value indicates that the student has participated in the tutorial, while the `false` value indicates that the student has not participated in the tutorial.
 * The `PARTICIPATION_LEVEL` is case-insensitive.
@@ -311,7 +311,7 @@ Examples:
 
 ### View a student's class details: `view`
 
-Views the class details of a student that will be displayed on the right side of the application.
+View the class details of a student that will be displayed on the right side of the application.
 
 Format: `view s/STUDENT_NUMBER`
 
@@ -357,7 +357,7 @@ Undo the previous command that changes Class Manager. Undo only works with comma
 
 Format: `undo`
 
-Here are the list of commands that can be undone/redone:
+Here is the list of commands that can be undone/redone:
 * `add`
 * `class-part`
 * `clear`
@@ -382,7 +382,7 @@ Redo a previously undone command that changes Class Manager. Redo only works wit
 
 Format: `redo`
 
-Here are the list of commands that can be redone after they are undone (same list as undo):
+Here is the list of commands that can be redone after they are undone (same list as undo):
 * `add`
 * `class-part`
 * `clear`
@@ -440,7 +440,7 @@ Class Manager 2023 data is saved automatically as a JSON file `[JAR file locatio
 <box type="warning" seamless>
 
 **Caution:**
-If your changes to the data file makes its format invalid, Class Manager 2023 will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.
+If your changes to the data file make its format invalid, Class Manager 2023 will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.
 </box>
 
 ---

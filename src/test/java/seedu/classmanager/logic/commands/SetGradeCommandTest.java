@@ -128,7 +128,7 @@ public class SetGradeCommandTest {
 
         String expected = SetGradeCommand.class.getCanonicalName()
                 + "{studentNumber=" + VALID_STUDENT_NUMBER_AMY + ", "
-                + "assignmentNumber=seedu.classmanager.commons.core.index.Index{zeroBasedIndex=0}, grade=50}";
+                + "assignmentIndex=seedu.classmanager.commons.core.index.Index{zeroBasedIndex=0}, grade=50}";
         assertEquals(expected, setGradeCommand.toString());
     }
 }

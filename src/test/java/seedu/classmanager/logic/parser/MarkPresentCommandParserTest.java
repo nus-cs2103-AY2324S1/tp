@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.classmanager.commons.core.index.Index;
 import seedu.classmanager.logic.commands.MarkPresentCommand;
+import seedu.classmanager.model.student.ClassDetails;
 import seedu.classmanager.model.student.StudentNumber;
 
 /**
@@ -47,5 +48,14 @@ public class MarkPresentCommandParserTest {
     public void parse_invalidStudentNumber_throwsParseException() {
         int tut = 1;
         assertParseFailure(parser, " " + tut + INVALID_STUDENT_NUMBER_DESC, StudentNumber.MESSAGE_CONSTRAINTS);
+    }
+
+    @Test
+    public void parse_invalidTutorialIndex_throwsParseException() {
+        ClassDetails.setTutorialCount(10);
+        assertParseFailure(parser, " -1" + STUDENT_NUMBER_DESC_BOB,
+                ClassDetails.getMessageInvalidTutorialIndex());
+        assertParseFailure(parser, " test" + STUDENT_NUMBER_DESC_BOB,
+                ClassDetails.getMessageInvalidTutorialIndex());
     }
 }

@@ -7,6 +7,7 @@ import static seedu.classmanager.logic.parser.CliSyntax.PREFIX_STUDENT_NUMBER;
 import seedu.classmanager.commons.core.index.Index;
 import seedu.classmanager.logic.commands.MarkPresentCommand;
 import seedu.classmanager.logic.parser.exceptions.ParseException;
+import seedu.classmanager.model.student.ClassDetails;
 import seedu.classmanager.model.student.StudentNumber;
 
 /**
@@ -30,7 +31,13 @@ public class MarkPresentCommandParser implements Parser<MarkPresentCommand> {
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_STUDENT_NUMBER);
 
-        Index index = ParserUtil.parseIndex(argMultimap.getPreamble());
+        Index index;
+        try {
+            index = ParserUtil.parseIndex(argMultimap.getPreamble());
+        } catch (ParseException e) {
+            throw new ParseException(ClassDetails.getMessageInvalidTutorialIndex());
+        }
+
         StudentNumber studentNumber = ParserUtil.parseStudentNumber(argMultimap.getValue(PREFIX_STUDENT_NUMBER).get());
 
         return new MarkPresentCommand(index, studentNumber);
