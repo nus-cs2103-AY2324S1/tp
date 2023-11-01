@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.Messages.MESSAGE_PERSONS_LISTED_OVERVIEW_PAYROLL;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import seedu.address.commons.core.index.Index;
@@ -75,14 +76,22 @@ public class PayrollCommand extends Command {
      */
     public CommandResult executeByIndex(Model model) throws CommandException {
         List<Person> lastShownList = model.getFilteredPersonList();
+        LocalDate localDate = LocalDate.now();
         if (index.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
         Person employeeToCalculate = lastShownList.get(index.getZeroBased());
+        Payroll latestPayroll = employeeToCalculate.getLatestPayroll();
+
+        if (latestPayroll.getStartDate().equals(localDate.withDayOfMonth(1))) {
+            model.updateFilteredPersonList(person -> person.equals(employeeToCalculate));
+            return new CommandResult(String.format(MESSAGE_ARGUMENTS,
+                    latestPayroll.calculatePayrollString()), List.of(index.getOneBased()));
+        }
+
         Payroll monthPayroll = new Payroll(employeeToCalculate.getSalary());
         employeeToCalculate.addPayroll(monthPayroll);
-
         model.updateFilteredPersonList(person -> person.equals(employeeToCalculate));
         return new CommandResult(String.format(MESSAGE_ARGUMENTS,
                 monthPayroll.calculatePayrollString()), List.of(index.getOneBased()));
@@ -97,12 +106,21 @@ public class PayrollCommand extends Command {
     public CommandResult executeByName(Model model) throws CommandException {
         List<Person> lastShownList = model.getFilteredPersonList();
         List<Integer> indexes = model.getIndexOfFilteredPersonList(this.name);
+        LocalDate localDate = LocalDate.now();
 
         if (indexes.isEmpty()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_NAME);
         }
         if (indexes.size() == 1) {
             Person employeeToCalculate = lastShownList.get(indexes.get(0) - 1);
+            Payroll latestPayroll = employeeToCalculate.getLatestPayroll();
+
+            if (latestPayroll.getStartDate().equals(localDate.withDayOfMonth(1))) {
+                model.updateFilteredPersonList(person -> person.equals(employeeToCalculate));
+                return new CommandResult(String.format(MESSAGE_ARGUMENTS,
+                        latestPayroll.calculatePayrollString()), indexes);
+            }
+
             Payroll monthPayroll = new Payroll(employeeToCalculate.getSalary());
             employeeToCalculate.addPayroll(monthPayroll);
             model.updateFilteredPersonList(this.name);
