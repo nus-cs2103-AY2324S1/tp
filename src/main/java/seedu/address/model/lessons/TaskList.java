@@ -11,6 +11,9 @@ import java.util.Set;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+
+
+import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.ListEntryField;
 import seedu.address.model.lessons.exceptions.DuplicateTaskException;
@@ -59,6 +62,15 @@ public class TaskList extends ListEntryField implements Iterable<Task> {
         requireNonNull(toCheck);
         return internalTaskList.stream().anyMatch(toCheck::isSameTask);
     }
+    /**
+     * Returns the task that clashes with the given argument.
+     * @param toCheck Task to check
+     * @return Task that clashes with the given argument.
+     */
+    public Task getTaskClashWith(Task toCheck) {
+        requireNonNull(toCheck);
+        return internalTaskList.stream().filter(toCheck::isSameTask).findFirst().get();
+    }
 
     /**
      * Adds a task to the list.
@@ -96,11 +108,13 @@ public class TaskList extends ListEntryField implements Iterable<Task> {
      * Removes the equivalent task from the list.
      * The task must exist in the list.
      */
-    public void remove(Task toRemove) {
-        requireNonNull(toRemove);
+    public String remove(int index) {
+        requireNonNull(index);
+        Task toRemove = internalTaskList.get(index);
         if (!internalTaskList.remove(toRemove)) {
             throw new TaskNotFoundException();
         }
+        return toRemove.toString();
     }
 
     public void setTasks(TaskList replacement) {
@@ -126,8 +140,8 @@ public class TaskList extends ListEntryField implements Iterable<Task> {
      *
      * @return A TaskList
      */
+
     public static TaskList of(List<JsonAdaptedTask> tasks) throws ParseException {
-        // TODO: parse
         TaskList taskList = new TaskList();
         for (JsonAdaptedTask taskString : tasks) {
             // parse the task
@@ -171,8 +185,6 @@ public class TaskList extends ListEntryField implements Iterable<Task> {
         return internalTaskList.hashCode();
     }
 
-
-
     /**
      * Returns true if {@code tasks} contains only unique tasks.
      */
@@ -200,7 +212,7 @@ public class TaskList extends ListEntryField implements Iterable<Task> {
     }
 
     @Override
-    public ListEntryField clone() {
+    public TaskList clone() {
         TaskList cloned = new TaskList();
         internalTaskList.forEach(task -> {
             cloned.add(new Task(task.getDescription(), task.isDone()));

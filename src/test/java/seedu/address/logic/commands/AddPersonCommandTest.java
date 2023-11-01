@@ -11,6 +11,7 @@ import static seedu.address.testutil.TypicalPersons.ALICE;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Set;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
@@ -22,9 +23,11 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyFullTaskList;
 import seedu.address.model.ReadOnlySchedule;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.lessons.Lesson;
+import seedu.address.model.lessons.Task;
 import seedu.address.model.person.Person;
 import seedu.address.model.state.State;
 import seedu.address.testutil.PersonBuilder;
@@ -210,10 +213,13 @@ public class AddPersonCommandTest {
         }
         @Override
         public void showLesson(Lesson lessonToShow) {
-            //TODO
+            throw new AssertionError("This method should not be called.");
         }
         @Override
         public void showPerson(Person personToShow) {
+        }
+        @Override
+        public void showTask(Task taskToShow) {
             throw new AssertionError("This method should not be called.");
         }
         @Override
@@ -242,11 +248,25 @@ public class AddPersonCommandTest {
         }
 
         @Override
+        public ReadOnlyFullTaskList getFullTaskListObject() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<Task> getFullTaskList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public Boolean hasPersonClashWith(Person person) {
             return null;
         }
 
         @Override
+        public Set<Person> getPersonsFulfill(Predicate<Person> predicate) {
+            return null;
+        }
+
         public void linkWith(Person person, Lesson lesson) {
 
         }
@@ -258,10 +278,10 @@ public class AddPersonCommandTest {
 
         @Override
         public String getLinkedPersonNameStr(Lesson lesson) {
+
             return null;
         }
 
-        @Override
         public String getLinkedLessonNameStr(Person person) {
             return null;
         }
@@ -272,8 +292,32 @@ public class AddPersonCommandTest {
         }
 
         @Override
+        public Set<Lesson> getLessonsFulfill(Predicate<Lesson> predicate) {
+            return null;
+        }
+
+        @Override
         public Lesson getLessonClashWith(Lesson lesson) {
             throw new AssertionError("This method should not be called.");
+        }
+        @Override
+        public void addTask(Task task, int index) {
+            throw new AssertionError("This method should not be called.");
+        }
+        @Override
+        public Task getTaskClashWith(Task task, int index) {
+            throw new AssertionError("This method should not be called.");
+        }
+        @Override
+        public boolean hasTaskClashWith(Task task, int index) {
+            throw new AssertionError("This method should not be called.");
+        }
+        @Override
+        public String deleteTask(Lesson lesson, int index) {
+            throw new AssertionError("This method should not be called.");
+        }
+        @Override
+        public void resetAllShowFields() {
         }
     }
 

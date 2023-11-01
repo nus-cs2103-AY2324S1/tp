@@ -22,6 +22,10 @@ public class Lesson extends ListEntry<Lesson> {
     // Data fields
     private Subject subject;
     private Day day;
+
+    /**
+     * The Task List to store the Lesson Tasks.
+     */
     private TaskList taskList;
 
     /**
@@ -36,7 +40,7 @@ public class Lesson extends ListEntry<Lesson> {
      * @see seedu.address.logic.parser.ParserUtil
      */
     public Lesson(Name name, Time start, Time end, Day day, Subject subject, TaskList taskList, Name... studentNames) {
-        requireAllNonNull(name, start, end, day, subject, studentNames);
+        requireAllNonNull(name, start, end, day, subject, taskList, studentNames);
         this.name = name;
         this.start = start;
         this.end = end;
@@ -47,18 +51,19 @@ public class Lesson extends ListEntry<Lesson> {
 
     /**
      * Used to construct sample data.
-     * @param name
-     * @param start
-     * @param end
-     * @param day
-     * @param subject
-     * @param taskList
-     * @throws ParseException
+     * @param name // TODO
+     * @param start The start time of the lesson
+     * @param end The end time of the lesson
+     * @param day The date of the lesson
+     * @param subject The subject of this lesson
+     * @param taskList the tasks to be completed
+     * @throws ParseException // TODO
      */
     public Lesson(String name, String start, String end, String day, String subject, TaskList taskList)
             throws ParseException {
         this(new Name(name), new Time(start), new Time(end), Day.of(day), new Subject(subject), taskList);
     }
+
     private Lesson() {
         this.name = Name.DEFAULT_NAME;
         this.start = Time.DEFAULT_TIME;
@@ -99,18 +104,18 @@ public class Lesson extends ListEntry<Lesson> {
     }
 
     /**
-     * Gets the date of a lesson.
+     * Gets the date of a lesson. // TODO
      * If the start and end date are the same, then only one date string is returned.
      * Else, the date will be returned as: [start date] - [end date]
-     * @return
+     * @return // TODO
      */
     public String getLessonNameStr() {
         return name.toString();
     }
 
     /**
-     * Gets the name of a lesson.
-     * @return
+     * Returns a string representation of the lesson date.
+     * @return String with the lesson day
      */
     public String getLessonDateStr() {
         return day.toString();
@@ -118,7 +123,7 @@ public class Lesson extends ListEntry<Lesson> {
 
     /**
      * Returns a comma-separated list of students.
-     * @return
+     * @return String of students
      */
     public String getStudentsStr() {
         return "getStudentsStr in lesson is to be implemented";
@@ -189,6 +194,33 @@ public class Lesson extends ListEntry<Lesson> {
     public TaskList getTaskList() {
         return taskList;
     }
+    public void setTaskList(TaskList tasks) {
+        this.taskList = tasks;
+    }
+    public void setTaskListIfNotDefault(TaskList tasks) {
+        if (tasks != null && !tasks.equals(TaskList.DEFAULT_TASKLIST)) {
+            setTaskList(tasks);
+        }
+    }
+
+    /**
+     * Adds a task to the task list of current lesson
+     * @param task task to add
+     */
+    public void addToTaskList(Task task) {
+        if (task != null) {
+            this.taskList.add(task);
+        }
+    }
+    public String removeFromTaskList(int index) {
+        return this.taskList.remove(index);
+    }
+    public boolean hasSameTask(Task toAdd) {
+        return this.taskList.contains(toAdd);
+    }
+    public Task getTaskClashWith(Task toAdd) {
+        return this.taskList.getTaskClashWith(toAdd);
+    }
 
     /**
      * Returns the list of tasks as a set.
@@ -211,6 +243,7 @@ public class Lesson extends ListEntry<Lesson> {
         }
     }
 
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -228,7 +261,8 @@ public class Lesson extends ListEntry<Lesson> {
                 && subject.equals(otherLesson.subject)
                 && name.equals(otherLesson.name)
                 && day.equals(otherLesson.day)
-                && remark.equals(otherLesson.remark);
+                && remark.equals(otherLesson.remark)
+                && taskList.equals(otherLesson.taskList);
     }
     @Override
     public int hashCode() {
@@ -265,6 +299,7 @@ public class Lesson extends ListEntry<Lesson> {
     }
     @Override
     public String toString() {
+        // TODO: Add number of tasks to complete
         String subjectStr = subject == null
                              ? ""
                              : " for " + subject;
@@ -283,6 +318,7 @@ public class Lesson extends ListEntry<Lesson> {
         cloned.setNameIfNotDefault(this.name);
         cloned.setDayIfNotDefault(this.day);
         cloned.setRemarkIfNotDefault(this.remark);
+        cloned.taskList = taskList.clone();
         return cloned;
     }
 }

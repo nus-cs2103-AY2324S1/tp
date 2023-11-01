@@ -2,6 +2,7 @@ package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.model.state.State.SCHEDULE;
 import static seedu.address.model.state.State.STUDENT;
 
 import java.util.logging.Logger;
@@ -11,16 +12,20 @@ import java.util.regex.Pattern;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.AddLessonCommand;
 import seedu.address.logic.commands.AddPersonCommand;
+import seedu.address.logic.commands.AddTaskCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DeleteLessonCommand;
 import seedu.address.logic.commands.DeletePersonCommand;
+import seedu.address.logic.commands.DeleteTaskCommand;
 import seedu.address.logic.commands.EditLessonCommand;
 import seedu.address.logic.commands.EditPersonCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
+import seedu.address.logic.commands.LinkCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.NavigateCommand;
 import seedu.address.logic.commands.ShowCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
@@ -56,13 +61,28 @@ public class AddressBookParser {
         String commandWord = matcher.group("commandWord");
         switch (commandWord) {
         case "delete":
-            commandWord = model.getState().equals(STUDENT) ? "deletePerson" : "deleteLesson";
+            commandWord = model.getState().equals(STUDENT)
+                          ? "deletePerson"
+                          : model.getState().equals(SCHEDULE)
+                          ? "deleteLesson"
+                          : "deleteTask";
             break;
         case "add":
-            commandWord = model.getState().equals(STUDENT) ? "addPerson" : "addLesson";
+            commandWord = model.getState().equals(STUDENT)
+                    ? "addPerson"
+                    : model.getState().equals(SCHEDULE)
+                    ? "addLesson"
+                    : "addTask";
             break;
         case "edit":
-            commandWord = model.getState().equals(STUDENT) ? "editPerson" : "editLesson";
+            commandWord = model.getState().equals(STUDENT)
+                    ? "editPerson"
+                    : model.getState().equals(SCHEDULE)
+                    ? "editLesson"
+                    : "editTask";
+            if (commandWord.equals("editTask")) {
+                throw new ParseException("Editing tasks is not supported yet");
+            }
             break;
         default:
             break;
@@ -85,28 +105,34 @@ public class AddressBookParser {
             return new DeletePersonCommandParser().parse(arguments);
         case DeleteLessonCommand.COMMAND_WORD:
             return new DeleteLessonCommandParser().parse(arguments);
-
         case ShowCommand.COMMAND_WORD:
             return new ShowCommandParser().parse(arguments);
-
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
-
         case FindCommand.COMMAND_WORD:
             return new FindCommandParser().parse(arguments);
-
         case ListCommand.COMMAND_WORD:
             return new ListCommandParser().parse(arguments);
-
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
-
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
         case AddLessonCommand.COMMAND_WORD:
             return new AddLessonCommandParser().parse(userInput);
         case EditLessonCommand.COMMAND_WORD:
             return new EditLessonCommandParser().parse(userInput);
+        case LinkCommand.STATEFUL_COMMAND_WORD:
+            return new LinkCommandParser(model).parse(arguments);
+        case LinkCommand.COMMAND_WORD:
+            return new LinkCommandParser().parse(arguments);
+        case AddTaskCommand.COMMAND_WORD:
+            return new AddTaskCommandParser().parse(userInput);
+        case DeleteTaskCommand.COMMAND_WORD:
+            return new DeleteTaskCommandParser().parse(userInput);
+        case NavigateCommand.COMMAND_WORD:
+            return new NavigateCommand();
+        case "nav":
+            return new NavigateCommand();
         default:
             logger.finer("This user input caused a ParseException: " + userInput);
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

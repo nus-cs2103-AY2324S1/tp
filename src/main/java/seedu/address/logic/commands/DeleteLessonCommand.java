@@ -39,6 +39,10 @@ public class DeleteLessonCommand extends Command {
 
         Lesson lessonToDelete = lastShownList.get(targetIndex - 1);
         model.deleteLesson(lessonToDelete);
+        Lesson currentLesson = model.getCurrentlyDisplayedLesson();
+        if (currentLesson != null && currentLesson.equals(lessonToDelete)) {
+            model.showLesson(null);
+        }
         return new CommandResult(String.format(MESSAGE_DELETE_LESSON_SUCCESS, lessonToDelete.toString()));
     }
 }

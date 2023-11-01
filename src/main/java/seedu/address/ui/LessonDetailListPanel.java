@@ -5,7 +5,6 @@ import java.util.logging.Logger;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListCell;
-import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
@@ -44,8 +43,6 @@ public class LessonDetailListPanel extends UiPart<Region> {
     private TextField subject;
 
     @FXML
-    private ListView<Task> taskListView;
-    @FXML
     private VBox taskListContainer;
 
 
@@ -70,12 +67,9 @@ public class LessonDetailListPanel extends UiPart<Region> {
         endTime.setText(lesson.getEnd().toString());
         students.setText(model.getLinkedPersonNameStr(lesson));
         subject.setText(lesson.getSubject().toString());
-        //taskListView.setItems("to be implemented");
-        //taskListView.setCellFactory(listView -> new LessonDetailListPanel.TaskListViewCell());
         subject.setText(lesson.getSubject().toString());
 
         taskListContainer.getChildren().clear();
-
         ObservableList<Task> taskList = lesson.getTaskList().asUnmodifiableObservableList();
         for (int i = 0; i < taskList.size(); i++) {
             Task task = taskList.get(i);

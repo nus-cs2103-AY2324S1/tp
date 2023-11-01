@@ -1,6 +1,7 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
+import java.util.Set;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
@@ -120,6 +121,7 @@ public interface Model {
     boolean hasLesson(Lesson lesson);
 
     boolean hasLessonClashWith(Lesson lesson);
+    public Set<Lesson> getLessonsFulfill(Predicate<Lesson> predicate);
 
     Lesson getLessonClashWith(Lesson lesson);
 
@@ -145,7 +147,7 @@ public interface Model {
      * Shows the details of the given lesson.
      * The lesson must exist in the application.
      */
-    void showLesson(Lesson lessonToShow); //TODO
+    void showLesson(Lesson lessonToShow);
     ObservableList<Lesson> getFilteredScheduleList();
     /**
      * Updates the filter of the filtered lesson list to filter by the given {@code predicate}.
@@ -176,6 +178,12 @@ public interface Model {
      */
     boolean sameState(State state);
 
+    /**
+     * Shows the details of the given task.
+     * The task must exist in the application.
+     */
+    void showTask(Task taskToShow);
+
 
     public boolean hasCurrentShownEntry();
 
@@ -189,22 +197,28 @@ public interface Model {
         return null;
     }
 
-    // todo: implement everything below here properly
+    /** Returns the full task list object */
+    ReadOnlyFullTaskList getFullTaskListObject();
+
+    /** Returns a view of the full task list */
+    ObservableList<Task> getFullTaskList();
+
+    public void resetAllShowFields();
     default void setTask(Task target, Task editedTask) {
     }
-    default void addTask(Task task) {
-    }
-    default void deleteTask(Task target) {
-    }
+    void addTask(Task task, int index);
+    String deleteTask(Lesson target, int index);
+    // elaine: not having a updatedFilteredTaskList?
     default void updateFilteredTaskList(Predicate<Task> predicate) {
     }
-    default Boolean hasTaskClashWith(Task task) {
-        return null;
-    }
+    boolean hasTaskClashWith(Task task, int index);
+    Task getTaskClashWith(Task task, int index);
     Boolean hasPersonClashWith(Person person);
+    public Set<Person> getPersonsFulfill(Predicate<Person> predicate);
     default BiDirectionalMap<Person, Lesson> getPersonLessonMap() {
         return null;
     }
+
     void linkWith(Person person, Lesson lesson);
     void unLinkWith(Person person, Lesson lesson);
     String getLinkedPersonNameStr(Lesson lesson);
