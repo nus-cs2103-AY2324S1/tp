@@ -21,7 +21,6 @@ public class Task {
      */
     public Task(String taskName) {
         requireNonNull(taskName);
-        checkArgument(isValidTaskName(taskName), MESSAGE_CONSTRAINTS);
         this.taskName = taskName;
     }
 

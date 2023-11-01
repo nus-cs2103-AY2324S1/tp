@@ -50,6 +50,9 @@ public class MainWindow extends UiPart<Stage> {
     private StackPane applicantListPanelPlaceholder;
 
     @FXML
+    private StackPane taskListPanelPlaceholder;
+
+    @FXML
     private StackPane tagListPanelPlaceholder;
 
     @FXML

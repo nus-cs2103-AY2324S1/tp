@@ -1,7 +1,5 @@
 package seedu.address.ui;
 
-import java.util.logging.Logger;
-
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListCell;
@@ -10,29 +8,31 @@ import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.person.Member;
 
+import java.util.logging.Logger;
+
 /**
  * Panel containing the list of members.
  */
-public class MemberListPanel extends UiPart<Region> {
-    private static final String FXML = "MemberListPanel.fxml";
-    private final Logger logger = LogsCenter.getLogger(MemberListPanel.class);
+public class TaskListPanel extends UiPart<Region> {
+    private static final String FXML = "TaskListPanel.fxml";
+    private final Logger logger = LogsCenter.getLogger(TaskListPanel.class);
 
     @FXML
-    private ListView<Member> memberListView;
+    private ListView<Member> taskListView;
 
     /**
-     * Creates a {@code MemberListPanel} with the given {@code ObservableList}.
+     * Creates a {@code TaskListPanel} with the given {@code ObservableList}.
      */
-    public MemberListPanel(ObservableList<Member> memberList) {
+    public TaskListPanel(ObservableList<Member> taskList) {
         super(FXML);
-        memberListView.setItems(memberList);
-        memberListView.setCellFactory(listView -> new MemberListViewCell());
+        taskListView.setItems(taskList);
+        taskListView.setCellFactory(listView -> new TaskListViewCell());
     }
 
     /**
      * Custom {@code ListCell} that displays the graphics of a {@code Member} using a {@code MemberCard}.
      */
-    class MemberListViewCell extends ListCell<Member> {
+    class TaskListViewCell extends ListCell<Member> {
         @Override
         protected void updateItem(Member member, boolean empty) {
             super.updateItem(member, empty);

@@ -23,23 +23,23 @@ public class SampleDataUtil {
     public static Member[] getSampleMembers() {
         return new Member[]{
             new Member(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
-                    new Telegram("alexyeoh"),
+                    new Telegram("@alexyeoh"),
                     getTagSet("friends"),
                     getTaskSet("finish_proposal")),
             new Member(new Name("Bernice Yu"), new Phone("99272758"), new Email("berniceyu@example.com"),
-                    new Telegram("berniceyu"),
+                    new Telegram("@berniceyu"),
                     getTagSet("colleagues", "friends")),
             new Member(new Name("Charlotte Oliveiro"), new Phone("93210283"), new Email("charlotte@example.com"),
-                    new Telegram("charlotteoliveiro"),
+                    new Telegram("@charlotteoliveiro"),
                     getTagSet("neighbours")),
             new Member(new Name("David Li"), new Phone("91031282"), new Email("lidavid@example.com"),
-                    new Telegram("davidli"),
+                    new Telegram("@davidli"),
                     getTagSet("family")),
             new Member(new Name("Irfan Ibrahim"), new Phone("92492021"), new Email("irfan@example.com"),
-                    new Telegram("irfanibrahim"),
+                    new Telegram("@irfanibrahim"),
                     getTagSet("classmates")),
             new Member(new Name("Roy Balakrishnan"), new Phone("92624417"), new Email("royb@example.com"),
-                    new Telegram("roybalakrishnan"),
+                    new Telegram("@roybalakrishnan"),
                     getTagSet("colleagues"))
         };
     }

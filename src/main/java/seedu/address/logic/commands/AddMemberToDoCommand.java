@@ -71,14 +71,16 @@ public class AddMemberToDoCommand extends Command{
     private static Member assignTaskToMember(Member member, AddMemberToDoDescriptor addMemberToDoDescriptor) {
         assert member != null;
 
-        Name updatedName = addMemberToDoDescriptor.getName().orElse(member.getName());
-        Phone updatedPhone = addMemberToDoDescriptor.getPhone().orElse(member.getPhone());
-        Email updatedEmail = addMemberToDoDescriptor.getEmail().orElse(member.getEmail());
-        Telegram updatedTelegram = addMemberToDoDescriptor.getTelegram().orElse(member.getTelegram());
-        Set<Tag> updatedTags = addMemberToDoDescriptor.getTags().orElse(member.getTags());
-        Set<Task> updatedTasks = addMemberToDoDescriptor.getTasks().orElse(member.getTasks());
+        Set<Task> updatedTasks;
+        if (addMemberToDoDescriptor.getTasks().isPresent()) {
+            updatedTasks = addMemberToDoDescriptor.getTasks().get();
+            updatedTasks.addAll(member.getTasks());
+        } else {
+            updatedTasks = member.getTasks();
+        }
 
-        return new Member(updatedName, updatedPhone, updatedEmail, updatedTelegram, updatedTags, updatedTasks);
+        return new Member(member.getName(), member.getPhone(), member.getEmail(),
+                member.getTelegram(), member.getTags(), updatedTasks);
 
     }
 
@@ -157,7 +159,6 @@ public class AddMemberToDoCommand extends Command{
 
         public void setTasks(Set<Task> tasks) {
             this.tasks = tasks;
-            System.out.println(this.tasks);
         }
 
         public Optional<Set<Task>> getTasks() {
