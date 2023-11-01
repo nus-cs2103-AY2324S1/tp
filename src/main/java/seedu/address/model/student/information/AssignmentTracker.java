@@ -66,7 +66,7 @@ public class AssignmentTracker implements Tracker {
                     try {
                         newAssignmentList[i] = new Assignment(this.assignmentList[i].getMarks());
                     } catch (IllegalValueException e) {
-                        throw new RuntimeException(e);
+                        throw new AssertionError("Execution of command should not fail.", e);
                     }
                 });
         return new AssignmentTracker(newAssignmentList);
@@ -111,11 +111,9 @@ public class AssignmentTracker implements Tracker {
         }
         int score = 0;
         int totalScore = 0;
-        for (int i = 0; i < assignmentList.length; i++) {
-            if (assignmentList[i] != null) {
-                totalScore += 100;
-                score += assignmentList[i].getMarks();
-            }
+        for (Assignment assignment : assignmentList) {
+            totalScore += 100;
+            score += assignment.getMarks();
         }
         return (double) score / totalScore * 100;
     }

@@ -1,5 +1,7 @@
 package seedu.address.model.student.information;
 
+import static java.util.Objects.requireNonNull;
+
 import seedu.address.commons.exceptions.IllegalValueException;
 
 /**
@@ -16,6 +18,7 @@ public class Assignment {
      * Constructs a {@code Assignment}. With a given mark between 0 and 100.
      */
     public Assignment(Integer marks) throws IllegalValueException {
+        requireNonNull(marks);
         if (marks > 100 || marks < 0) {
             throw new IllegalValueException(MESSAGE_CONSTRAINTS);
         }

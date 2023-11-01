@@ -5,6 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
+import java.util.stream.IntStream;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
@@ -28,8 +30,18 @@ public class AssignmentTrackerTest {
     }
 
     @Test
-    public void constructor_nullAssignmentList() {
+    public void constructor_nullAssignmentList_throwsAssertionError() {
         assertThrows(AssertionError.class, () -> new AssignmentTracker((Assignment[]) null));
+    }
+
+    @Test
+    public void constructor_validAssignmentList_success() {
+        int numOfAssignments = 3;
+        Assignment[] assignmentList = new Assignment[numOfAssignments];
+        IntStream.range(0, numOfAssignments).forEach(i -> assignmentList[i] = new Assignment());
+        AssignmentTracker assignmentTracker = new AssignmentTracker(assignmentList);
+        AssignmentTracker newAssignmentTracker = new AssignmentTracker(3);
+        assertEquals(assignmentTracker, newAssignmentTracker);
     }
 
     @Test

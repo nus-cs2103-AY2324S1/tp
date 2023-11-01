@@ -77,6 +77,7 @@ public class LogicManagerTest {
         String invalidCommand = "uicfhmowqewca";
         assertParseException(invalidCommand, MESSAGE_UNKNOWN_COMMAND);
         assertHistoryCorrect(invalidCommand);
+
     }
 
     @Test
@@ -301,15 +302,12 @@ public class LogicManagerTest {
         expectedModel.setConfigured(true);
         expectedModel.addStudent(expectedStudent);
         expectedModel.commitAddressBook();
-        saveAddressBook(expectedModel.getAddressBook(),
-                expectedModel.getAddressBookFilePath());
+        //saveAddressBook(expectedModel.getAddressBook(), expectedModel.getAddressBookFilePath());
         assertCommandFailure(addCommand, CommandException.class, expectedMessage, expectedModel);
         assertHistoryCorrect(addCommand);
     }
-
-    /**
-     * Saves {@code addressBook} at the specified {@code filePath}.
-     */
+    /*
+    Saves {@code addressBook} at the specified {@code filePath}.
     private void saveAddressBook(ReadOnlyAddressBook addressBook, Path filePath) {
         try {
             new JsonAddressBookStorage(filePath)
@@ -317,6 +315,37 @@ public class LogicManagerTest {
         } catch (IOException ioe) {
             throw new AssertionError("There should not be an error writing to the file.", ioe);
         }
+    }
+    */
+
+    /**
+     * Tests the Logic component's saving of data to the Storage component.
+     */
+    @Test
+    public void assertCommandSuccessWithSave() throws IOException,
+            CommandException, ParseException {
+        Path prefPath = temporaryFolder.resolve("ExceptionUserPrefs.json");
+
+        JsonAddressBookStorage addressBookStorage = new JsonAddressBookStorage(prefPath);
+
+        JsonUserPrefsStorage userPrefsStorage =
+                new JsonUserPrefsStorage(temporaryFolder.resolve("ExceptionUserPrefs.json"));
+        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
+
+        logic = new LogicManager(model, storage);
+
+        // Triggers the saveAddressBook method by executing an add command
+        String addCommand = AddCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY
+                + EMAIL_DESC_AMY + STUDENT_NUMBER_DESC_AMY + CLASS_NUMBER_DESC_AMY;
+        Student expectedStudent = new StudentBuilder(AMY).withTags().build();
+        ModelManager expectedModel = new ModelManager();
+        expectedModel.setConfigured(true);
+        expectedModel.addStudent(expectedStudent);
+        expectedModel.commitAddressBook();
+        storage.saveAddressBook(expectedModel.getAddressBook(), expectedModel.getAddressBookFilePath());
+        assertCommandSuccess(addCommand,
+                String.format(AddCommand.MESSAGE_SUCCESS, Messages.format(expectedStudent)), expectedModel);
+        assertHistoryCorrect(addCommand);
     }
 
     private void assertLoadCommandFailureForExceptionFromStorage(IOException e, String expectedMessage) {
