@@ -44,9 +44,14 @@ management tasks done faster than traditional GUI apps.
 
 ## GUI Overview
 
-TODO: Add a screenshot of the GUI
+<img alt="Gui" src="images/Ui.png" width="600">
 
-TODO: Add a description of the GUI
+The **GUI** is split up into 4 main sections.
+
+1. **Command Box** - (_Located at the top_) This is where you can type in commands to execute.
+2. **Result Display** - (_Located below command box_) This is where the results of the commands will be displayed.
+3. **Student List** - (_Located on the bottom left_) This is where the list of students will be displayed.
+4. **Student Details** - (_Located on the bottom right_) This is where the details of the selected student will be displayed.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -474,3 +479,5 @@ Format: `theme`
 * **Email**: Any valid email address, such as NUS email address (eXXXXXXX@u.nus.edu).
 * **CLI**: Command Line Interface.
 * **GUI**: Graphical User Interface.
+* **JSON**: JavaScript Object Notation, a lightweight data-interchange format.
+* **JAR**: Java Archive, a package file format typically used to aggregate many Java class files and associated metadata and resources (text, images, etc.) into one file to distribute application software or libraries on the Java platform.
