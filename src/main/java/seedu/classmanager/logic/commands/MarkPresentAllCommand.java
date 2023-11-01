@@ -15,7 +15,7 @@ import seedu.classmanager.model.student.Student;
  * Marks all displayed students' attendance as present.
  */
 public class MarkPresentAllCommand extends Command {
-    public static final String COMMAND_WORD = "mark-pre-all";
+    public static final String COMMAND_WORD = "present-all";
     public static final String MESSAGE_MARK_SUCCESS = "Successfully mark attendance as present.";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Marks all the students displayed as present.\n"
             + "Parameters: INDEX\n"
