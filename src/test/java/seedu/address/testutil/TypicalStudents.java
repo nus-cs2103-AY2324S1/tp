@@ -44,11 +44,16 @@ public class TypicalStudents {
     public static final Student IDA = new StudentBuilder().withName("Ida Mueller").withPhone("84821310")
             .withAddress("chicago ave").build();
 
+    // To be used in conjunction with default appointment builder to test in ScheduleCommandTest
+    public static final Student JON_ANG = new StudentBuilder().withName("Jon Ang").withPhone("97980852")
+            .withAddress("Blk 349 Woodlands Ave 3").build();
+
     // Manually added - Student's details found in {@code CommandTestUtil}
     public static final Student AMY = new StudentBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
             .withAddress(VALID_ADDRESS_AMY).withTags(VALID_RISK_LEVEL_HIGH).build();
     public static final Student BOB = new StudentBuilder().withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
             .withAddress(VALID_ADDRESS_BOB).withTags(VALID_RISK_LEVEL_LOW).build();
+
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
 

@@ -12,7 +12,7 @@ import seedu.address.model.student.Name;
  */
 public class AppointmentBuilder {
 
-    public static final String DEFAULT_NAME = "John Doe";
+    public static final String DEFAULT_NAME = "Jon Ang";
     public static final String DEFAULT_DATE = "2023-12-31";
     public static final String DEFAULT_START_TIME = "16:30";
     public static final String DEFAULT_END_TIME = "17:30";
