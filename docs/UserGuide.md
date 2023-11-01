@@ -103,7 +103,7 @@ Key in <code>save</code> and press enter to save the changes.
 <br/>
 ![Save command after](images/screenshots/SaveCommandAfter.png)
 <br/>
-This saves the changes you made and updates the details of a fosterer or adds a new fosterer with the details. 
+This saves the changes you made and updates the details of a fosterer or adds a new fosterer with the details (depending on the command used to open the UI). 
 
 #### Exiting the profile page
 Entering <code>exit</code> closes the profile page and leads you back to the main view.
