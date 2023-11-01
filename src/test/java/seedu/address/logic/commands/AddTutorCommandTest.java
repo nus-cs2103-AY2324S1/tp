@@ -200,6 +200,16 @@ public class AddTutorCommandTest {
         }
 
         @Override
+        public ObservableList<Schedule> getFilteredCalendarScheduleList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateFilteredCalendarScheduleList(Predicate<Schedule> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public ObservableList<Schedule> getSchedulesFromTutor(Person tutor) throws PersonNotFoundException {
             throw new AssertionError("This method should not be called.");
         }

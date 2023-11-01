@@ -34,8 +34,11 @@ public interface Logic {
     /** Returns an unmodifiable view of the filtered list of persons */
     ObservableList<Person> getFilteredPersonList();
 
-    /** Returns an unmodifiable view of the filtered list of persons */
+    /** Returns an unmodifiable view of the filtered list of schedules */
     ObservableList<Schedule> getFilteredScheduleList();
+
+    /** Returns an unmodifiable view of the filtered list of calendar schedules */
+    ObservableList<Schedule> getFilteredCalendarScheduleList();
 
     /**
      * Returns the user prefs' address book file path.
