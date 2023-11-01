@@ -6,13 +6,9 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSucces
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 
-import java.util.Optional;
-
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.MergeCommand;
-import seedu.address.model.predicate.ContainsTagPredicate;
-import seedu.address.model.tag.Tag;
 
 /**
  * As we are only doing white-box testing, our test cases do not cover path variations
