@@ -13,8 +13,8 @@ import seedu.address.model.schedule.Status;
  */
 public class ScheduleBuilder {
     public static final Person DEFAULT_TUTOR = TypicalPersons.ALICE;
-    public static final LocalDateTime DEFAULT_START_TIME = LocalDateTime.of(2023, 1, 1, 0, 0, 0);
-    public static final LocalDateTime DEFAULT_END_TIME = LocalDateTime.of(2023, 1, 1, 1, 0, 0);
+    public static final LocalDateTime DEFAULT_START_TIME = LocalDateTime.of(2023, 1, 1, 12, 0, 0);
+    public static final LocalDateTime DEFAULT_END_TIME = LocalDateTime.of(2023, 1, 1, 13, 0, 0);
     private Person tutor;
     private StartTime startTime;
     private EndTime endTime;

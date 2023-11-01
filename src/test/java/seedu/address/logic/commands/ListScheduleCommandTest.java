@@ -51,7 +51,7 @@ public class ListScheduleCommandTest {
         TutorPredicate predicate = new TutorPredicate(tutor);
         ListScheduleCommand listScheduleCommand = new ListScheduleCommand(INDEX_FIRST_PERSON, null);
 
-        String expectedMessage = String.format(Messages.MESSAGE_SCHEDULES_LISTED_OVERVIEW, 2);
+        String expectedMessage = String.format(Messages.MESSAGE_SCHEDULES_LISTED_OVERVIEW, 3);
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.updateFilteredScheduleList(predicate);
 

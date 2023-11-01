@@ -6,7 +6,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_SCHEDULES_LISTED_OVERVIEW;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalSchedules.SCHEDULE_ALICE_FIRST_JAN;
-import static seedu.address.testutil.TypicalSchedules.SCHEDULE_ALICE_SECOND_JAN;
+import static seedu.address.testutil.TypicalSchedules.SCHEDULE_ALICE_SECOND_JAN_1;
+import static seedu.address.testutil.TypicalSchedules.SCHEDULE_ALICE_SECOND_JAN_2;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -73,12 +74,12 @@ public class FindScheduleCommandTest {
 
     @Test
     public void execute_multipleKeywords_multipleSchedulesFound() {
-        String expectedMessage = String.format(MESSAGE_SCHEDULES_LISTED_OVERVIEW, 2);
+        String expectedMessage = String.format(MESSAGE_SCHEDULES_LISTED_OVERVIEW, 3);
         TutorNameContainsKeywordsPredicate predicate = preparePredicate("Alice");
         FindScheduleCommand command = new FindScheduleCommand(predicate);
         expectedModel.updateFilteredScheduleList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(SCHEDULE_ALICE_SECOND_JAN, SCHEDULE_ALICE_FIRST_JAN),
+        assertEquals(Arrays.asList(SCHEDULE_ALICE_SECOND_JAN_2, SCHEDULE_ALICE_SECOND_JAN_1, SCHEDULE_ALICE_FIRST_JAN),
             model.getFilteredScheduleList());
     }
 
