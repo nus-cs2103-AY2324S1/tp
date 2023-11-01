@@ -104,6 +104,7 @@ Shows a list of all persons in the database.
 
 Format: `list`
 
+
 ### Editing a client : `edit`
 
 Modify and/or updates existing policy information in the database.
@@ -134,7 +135,6 @@ Expected output upon failure:
 * Any of the mandatory fields are missing: `Error: Please provide all required fields.`
 
 
-
 ### Locating clients by fields : `find`
 
 Finds client(s) whose fields matches any of the given fields.
@@ -155,7 +155,8 @@ Examples:
 * `find n/Hans Bo` returns all clients that has the name `Hans Bo` but not those with names `Hans` or `Bo` in it
 * `find n/john pn/AB12345J` returns all clients whose name contains `John` with policy number `AB12345J`
 
-Expected output upon success:
+Expected output upon success:<br>
+![FindSuccess](images/FindSuccess.png)
 
 Expected output upon failure:
 * Format error in any field:<br>
@@ -177,7 +178,7 @@ Deletes the specified person from the database.
 Format: `delete INDEX`
 
 * Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed list of car owners and is a compulsory field.
+* The index refers to the index number shown in the displayed list of clients and is a compulsory field.
 
 Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the database.
@@ -189,9 +190,13 @@ Acceptable values for each parameter:
 Expected output upon success : `Deleted person: [Information of person at INDEX]`
 
 Expected output upon failure:
-* Profile at the specified `INDEX` cannot be found: `Error: Invalid Index`
-* Missing `INDEX` parameter: `Error: Missing Index`
-* Incorrect `INDEX` parameter: `Error: The parameter is not of the type positive integer`
+* Profile at the specified `INDEX` cannot be found:<br>
+`Error: Invalid Index`
+* Missing `INDEX` parameter:<br>
+`Error: Missing Index`
+* Incorrect `INDEX` parameter:<br>
+`Error: The parameter is not of the type positive integer`
+
 
 ### Sorting clients by policy expiration date : `sort`
 
@@ -207,6 +212,7 @@ Examples:
 
 Expected output upon success : `Address book has been sorted!`
 
+
 ### Remind user of clients policy expiration date : `remind`
 
 Reminds the user of clients that have approaching policy expiration date within a certain number of days.
@@ -221,17 +227,49 @@ Examples:
 Acceptable values for each parameter:
 * `NUMBER_OF_DAYS` : Numeric, range from _0_ to _7305_
 
-Expected output upon success:
+Expected output upon success (Current date is 1-11-2023):<br>
+![RemindSuccess](images/RemindSuccess.png)
 
 Expected output upon failure:
-* `NUMBER_OF_DAYS` is not in range _0_ to _7305_:<br>
+* `NUMBER_OF_DAYS` not in range _0_ to _7305_:<br>
 `Error: The value has to be between 0 and 7305 (both inclusive)`
-* `NUMBER_OF_DAYS` is not numeric:<br>
+* `NUMBER_OF_DAYS` not numeric:<br>
 `Invalid command format! Error: The value is not a number`
-* `NUMBER_OF_DAYS` is not given:<br>
+* `NUMBER_OF_DAYS` not given:<br>
 `Invalid command format!  
-  remind: Finds all persons whose policy expiry dates is within the specified number of days.
-Parameters: Number of days Example: remind 30`
+  remind: Finds all persons whose policy expiry dates is within the specified number of days.  
+  Parameters: Number of days  
+  Example: remind 30`
+
+
+### Add or remove remark to a client : `remark`
+
+Adds or remove a remark/comment to a client.
+
+Format: `remark INDEX r/[REMARK]`
+
+* `REMARK` is the remark that is going to be attached to the client
+* `INDEX` refers to the index number shown in the displayed list of clients and is a compulsory field
+* If `REMARK` is not given, it will remove the remark for the client at `INDEX`
+
+Examples:
+* `remark 1 r/Likes to go hiking` will attach the comment `Likes to go hiking` to the client that is at index `1`
+* `remark 1` or `remark 1 r/` will remove the comment that is attached to client that is at index `1`
+
+Acceptable values for each parameter:
+* `INDEX` : It must be a **must be a positive integer** 1, 2, 3, …​
+* `REMARK` : Any characters
+
+Expected output upon success:<br>
+![RemindSuccess](images/RemindSuccess.png)
+
+Expected output upon failure:
+* Invalid `INDEX` parameter or no `INDEX` :<br>
+`Invalid command format!  
+  remark: Edits the remark of the person identified by the index number used in the last person listing. Existing remark will be overwritten by the input.
+  Parameters: INDEX (must be a positive integer) r/REMARK
+  Example: remark 1 r/ Likes to swim.`
+
 
 ### Clearing all entries : `clear`
 
@@ -239,15 +277,18 @@ Clears all entries from the database.
 
 Format: `clear`
 
+
 ### Exiting the program : `exit`
 
 Exits the program.
 
 Format: `exit`
 
+
 ### Saving the data
 
 InsureIQ data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+
 
 ### Editing the data file
 
@@ -256,6 +297,7 @@ InsureIQ data are saved automatically as a JSON file `[JAR file location]/data/i
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If your changes to the data file makes its format invalid, InsureIQ will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.
 </div>
+
 
 ### Archiving data files `[coming in v2.0]`
 
@@ -278,13 +320,15 @@ _Details coming soon ..._
 
 ## Command summary
 
-| Action     | Format, Examples                                                                                                                                                     |
-|------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**    | `add n/NAME i/NRIC c/CONTACT NUMBER l/LICENCE PLATE…​` <br> e.g., `add n/Mary i/627A c/73052859 l/SLU5237J`                                                          |
-| **Clear**  | `clear`                                                                                                                                                              |
-| **Delete** | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                  |
-| **Edit**   | `edit INDEX [l/LICENCEPLATE] [pn/POLICY NUMBER] [pi/POLICY ISSUE DATE] [pe/POLICY EXPIRY DATE]…​`<br> e.g.,`edit 2 pn/AB12345J pe/31-12-2024`                        |
-| **Find**   | `find [n/NAME] [i/NRIC] [c/CONTACT NUMBER] [l/LICENCE PLATE] [pn/POLICY NUMBER] [pi/POLICY ISSUE DATE] [pe/POLICY EXPIRY DATE]`<br> e.g., `find n/John /pn AB12345J` |
-| **List**   | `list`                                                                                                                                                               |
-| **Help**   | `help`                                                                                                                                                               |
-| **Sort**   | `sort`                                                                                                                                                                  |
+| Action     | Format, Examples                                                                                                                                                                                  |
+|------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**    | `add n/NAME i/NRIC c/CONTACT NUMBER l/LICENCE PLATE…​` <br> e.g., `add n/Mary i/627A c/73052859 l/SLU5237J`                                                                                       |
+| **Clear**  | `clear`                                                                                                                                                                                           |
+| **Delete** | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                               |
+| **Edit**   | `edit INDEX [l/LICENCEPLATE] [pn/POLICY NUMBER] [pi/POLICY ISSUE DATE] [pe/POLICY EXPIRY DATE]…​`<br> e.g.,`edit 2 pn/AB12345J pe/31-12-2024`                                                     |
+| **Find**   | `find [n/NAME] [i/NRIC] [c/CONTACT NUMBER] [l/LICENCE PLATE] [e/EMAIL] [t/TAG] [c/COMPANY] [pn/POLICY NUMBER] [pi/POLICY ISSUE DATE] [pe/POLICY EXPIRY DATE]`<br> e.g. `find n/John /pn AB12345J` |
+| **List**   | `list`                                                                                                                                                                                            |
+| **Help**   | `help`                                                                                                                                                                                            |
+| **Sort**   | `sort`                                                                                                                                                                                            |
+| **Remind** | `remind NUMBER_OF_DAYS`<br> e.g. `remind 30`                                                                                                                                                      | 
+| **Remark** | `remark INDEX r/[REMARK]`<br> e.g. `remark 1 r/Likes to swim`                                                                                                                                     | 
