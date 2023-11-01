@@ -85,8 +85,7 @@ public class Person {
     }
 
     /**
-     * Returns true if both persons have the same name.
-     * This defines a weaker notion of equality between two persons.
+     * Returns true if both persons have the same id.
      */
     public boolean isSamePerson(Person otherPerson) {
         if (otherPerson == this) {
@@ -94,7 +93,7 @@ public class Person {
         }
 
         return otherPerson != null
-                && otherPerson.equals(this);
+                && otherPerson.name.equals(this.name);
     }
 
     public void addAttendance(Attendance attendance) {
