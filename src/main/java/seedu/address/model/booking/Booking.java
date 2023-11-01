@@ -1,6 +1,7 @@
 package seedu.address.model.booking;
 
 import java.util.Objects;
+
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.booking.exceptions.BookingPeriodNotFoundException;
 import seedu.address.model.booking.exceptions.RoomNotFoundException;

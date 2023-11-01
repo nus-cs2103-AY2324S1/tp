@@ -72,7 +72,8 @@ public class BookingCard extends UiPart<Region> {
         }
         Tag tag = booking.getTags();
         Label tagLabel = new Label(tag.tagName);
-        tagLabel.setStyle("-fx-font-weight: bold; -fx-font-size: 14; -fx-background-color: #64a4db; -fx-background-radius: 15; -fx-padding: 5px;");
+        tagLabel.setStyle("-fx-font-weight: bold; -fx-font-size: 14; -fx-background-color: #64a4db;"
+                 + " -fx-background-radius: 15; -fx-padding: 5px;");
         tags.getChildren().add(tagLabel);
 
         // Adding spacing between tags and room
