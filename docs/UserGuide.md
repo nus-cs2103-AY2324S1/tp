@@ -37,7 +37,11 @@ HouR is a **desktop app for managing employee records, optimized for use via a C
 
    * `delete EID1234-5678` : Deletes the employee with employee id EID1234-5678 shown in the list.
 
-   * `sort by/Salary`: Sorts the employees by their salaries in ascending order.
+   * `sort f/salary in/asc`: Sorts the employees by their salaries in ascending order.
+
+   * `addleave id/EID1234-5678 from/2023-12-26 to/2023-12-28`: Adds leave dates from 29 to 31 October 2023 inclusive for employee with id EID1234-5678
+
+   * `deleteleave id/EID1234-5678 from/2023-12-26 to/2023-12-28`: Deletes all leave dates of an employee with id EID1234-5678 that fall between 29 and 31 October 2023 inclusive 
 
    * `report EID1234-5678`: Generates a report with details on leaves and overtime for employee with id EID1234-5678.
 
@@ -57,7 +61,9 @@ HouR is a **desktop app for managing employee records, optimized for use via a C
 - Edits an employee: `edit`
 - List all employees: `list`
 - Find employees: `find`
-- Sorts employees by attribute: `sort`
+- Sort employees by attribute: `sort`
+- Add leave dates for an employee: `addleave`
+- Delete leave dates of an employee: `deleteleave`
 - Get details on employee performance: `report`
 - Clear all employees: `clear`
 - Exit the program: `exit`
@@ -74,6 +80,8 @@ HouR is a **desktop app for managing employee records, optimized for use via a C
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/POSITION`, `p/POSITION n/NAME` is also acceptable.
+
+* Date parameters should be in the form of `yyyy-MM-dd`, for example `2023-10-31`
 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
@@ -173,20 +181,63 @@ Examples:
 
 Sorts the employee list by a given attribute.
 
-Format: `sort by/ATTRIBUTE`
+Format: `sort f/FIELD in/ORDER`
 
-* Sorts the employee list by the specified `ATTRIBUTE` in ascending order (by default).
-* The attribute has to be non-empty and exist (Position/ID/Phone/Email/Salary)
+* Sorts the employee list by the specified `FIELD` in the given `ORDER`.
+* The field has to be non-empty and can have 4 values: `name`, `salary`, `overtime`, or `leaves`.
+* The order is either ascending (`asc`) or descending (`desc`)
 
 Examples:
-* `sort by/Salary` sorts the employee list such that their salaries are arranged 
+* `sort f/salary in/asc` sorts the employee list such that their salaries are arranged 
   in ascending order from top to bottom
 
 ![sort success](images/sortSuccess.png)
 
-* `sort by/blah` is invalid because it does not exist.
+* `sort f/blah in/desc` is invalid because field `blah` does not exist.
 
 ![sort failure](images/sortFailure.png)
+
+### Adding a leave date for an employee : `addleave`
+
+Adds the dates between a specified period of time to the leaves taken by the specified employee.
+
+Format: `add  id/EMPLOYEE_ID from/START_DATE to/END_DATE`
+
+* Add dates between `START_DATE` and `END_DATE` inclusive into the leaves taken by employee with id `EMPLOYEE_ID`.
+* `START_DATE` must not be after `END_DATE`.
+
+Examples:
+* `addleave id/EID1234-5678 from/2023-12-26 to/2023-12-28` adds the dates 26, 27, and 28 December 2023 to the leaves taken
+  by employee with id EID1234-5678.
+
+![addleave success](images/addLeaveSuccess.png)
+
+* `addleave id/EID1234-5678 from/2023-12-31 to/2023-12-28` is invalid because the start date 2023-12-31 is after the end date 2023-12-28, which is impossible.
+
+![addleave failure](images/addLeaveFailure.png)
+
+
+### Deleting a leave date of an employee : `deleteleave`
+
+Deletes the leave dates that an employee has that fall into the specified period of time.
+
+Format: `add  id/EMPLOYEE_ID from/START_DATE to/END_DATE`
+
+* Delete leave dates that are between `START_DATE` and `END_DATE` inclusive from the leaves taken by employee with id `EMPLOYEE_ID`.
+* `START_DATE` must not be after `END_DATE`.
+* If the employee does not have any leaves taken that fall between the period between `START_DATE`and `END_DATE`,
+  the command will output an error and will not change anything.
+
+Examples:
+* `deleteleave id/EID1234-5678 from/2023-12-26 to/2023-12-28` deletes all leave dates
+  of employee with id EID1234-5678 that fall on 26, 27, or 28 December 2023.
+
+![deleteleave success](images/deleteLeaveSuccess.png)
+
+* `deleteleave id/EID1234-5678 from/2023-12-31 to/2023-12-28` is invalid because the start date 2023-12-31 is after the end date 2023-12-28, which is impossible.
+
+![deleteleave failure](images/deleteLeaveFailure.png)
+
 
 ### Generating a report : `report`
 
@@ -254,14 +305,16 @@ _Details coming soon ..._
 
 ## Command summary
 
-| Action     | Format, Examples                                                                                                                                                                             |
-|------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**    | `add n/NAME pos/POSITION id/EMPLOYEE_ID p/PHONE_NUMBER e/EMAIL s/SALARY [d/DEPARTMENT]...` <br> e.g., `add n/James Ho pos/Auditor id/EID2023-0928 p/87651234 e/jamesho@example.com s/$8,000` |
-| **Clear**  | `clear`                                                                                                                                                                                      |
-| **Delete** | `delete EMPLOYEE-ID`<br> e.g., `delete EID1234-5678`                                                                                                                                         |
-| **Edit**   | `edit INDEX [n/NAME] [p/POSITION] [id/EMPLOYEE_ID] [p/PHONE_NUMBER] [e/EMAIL] [s/SALARY] [d/DEPARTMENT]...`<br> e.g.,`edit 2 n/James Lee pos/Head Auditor`                                   |
-| **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                                   |
-| **List**   | `list`                                                                                                                                                                                       |
-| **Sort**   | `sort by/ATTRIBUTE`                                                                                                                                                                          |
-| **Help**   | `help`                                                                                                                                                                                       |
-| **Exit**   | `exit`                                                                                                                                                                                       |
+| Action          | Format, Examples                                                                                                                                                                             |
+|-----------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**         | `add n/NAME pos/POSITION id/EMPLOYEE_ID p/PHONE_NUMBER e/EMAIL s/SALARY [d/DEPARTMENT]...` <br> e.g., `add n/James Ho pos/Auditor id/EID2023-0928 p/87651234 e/jamesho@example.com s/$8,000` |
+| **Clear**       | `clear`                                                                                                                                                                                      |
+| **Delete**      | `delete EMPLOYEE-ID`<br> e.g., `delete EID1234-5678`                                                                                                                                         |
+| **Edit**        | `edit INDEX [n/NAME] [p/POSITION] [id/EMPLOYEE_ID] [p/PHONE_NUMBER] [e/EMAIL] [s/SALARY] [d/DEPARTMENT]...`<br> e.g.,`edit 2 n/James Lee pos/Head Auditor`                                   |
+| **Find**        | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                                   |
+| **List**        | `list`                                                                                                                                                                                       |
+| **Sort**        | `sort f/FIELD in/ORDER`                                                                                                                                                                      |
+| **AddLeave**    | `addleave id/EMPLOYEE_ID from/START_DATE to/END_DATE` <br/> e.g., `addleave id/EID1234-5678 from/2023-12-26 to/2023-12-28`                                                                   |
+| **DeleteLeave** | `deleteleave id/EMPLOYEE_ID from/START_DATE to/END_DATE` <br/> e.g., `deleteleave id/EID1234-5678 from/2023-12-26 to/2023-12-28`                                                             |
+| **Help**        | `help`                                                                                                                                                                                       |
+| **Exit**        | `exit`                                                                                                                                                                                       |
