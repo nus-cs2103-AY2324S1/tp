@@ -2,7 +2,6 @@ package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.*;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 
 import java.util.stream.Stream;
 
@@ -13,7 +12,7 @@ import seedu.address.model.group.Group;
 /**
  * Parses input arguments and creates a new newCommand object
  */
-public class AddGroupParser implements Parser<AddGroupCommand> {
+public class AddGroupCommandParser implements Parser<AddGroupCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the CreateGroupCommand

@@ -2,11 +2,7 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUPTAG;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.*;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;
@@ -37,7 +33,6 @@ public class CommandTestUtil {
     public static final String VALID_GROUP_AMY = "CS2103T, CS2100";
     public static final String VALID_GROUP_BOB = "ST2334";
 
-
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
     public static final String PHONE_DESC_AMY = " " + PREFIX_PHONE + VALID_PHONE_AMY;
@@ -53,6 +48,21 @@ public class CommandTestUtil {
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
     public static final String INVALID_GROUP_DESC_BLANK = " " + PREFIX_GROUPTAG; // empty string not allowed for group
     public static final String INVALID_GROUP_DESC = " " + PREFIX_GROUPTAG + "CS2103T&"; // '&' not allowed in group names
+
+    public static final String VALID_TIME_MON = "mon 1300 - mon 1400";
+    public static final String VALID_TIME_TUE = "tue 1300 - tue 1400";
+    public static final String VALID_TIME_MON_CAPS = "MON 1300 - mOn 1400";
+    public static final String INVALID_TIME_MON = "mond 1300 - monday 1400";
+    public static final String INVALID_TIME_MON_2 = "mon 11pm - mon 2500";
+    public static final String INVALID_TIME_START_AFTER_END = "mon 1100 - mon 1000";
+
+    public static final String VALID_TIME_DESC_MON = " " + PREFIX_FREETIME + VALID_TIME_MON;
+    public static final String VALID_TIME_DESC_TUE = " " + PREFIX_FREETIME + VALID_TIME_TUE;
+    public static final String VALID_TIME_DESC_MON_2 = " " + PREFIX_FREETIME + VALID_TIME_MON_CAPS;
+
+    public static final String INVALID_TIME_DESC_MON = " " + PREFIX_FREETIME + INVALID_TIME_MON;
+    public static final String INVALID_TIME_DESC_TUE = " " + PREFIX_FREETIME + INVALID_TIME_MON_2;
+    public static final String INVALID_TIME_DESC_START_AFTER_END = " " + PREFIX_FREETIME + INVALID_TIME_START_AFTER_END;
 
     public static final String VALID_GROUP_CS = "CS";
     public static final String VALID_GROUP_CS2103T = "CS2103T";

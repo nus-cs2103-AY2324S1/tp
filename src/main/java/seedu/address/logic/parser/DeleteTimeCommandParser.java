@@ -20,34 +20,36 @@ public class DeleteTimeCommandParser implements Parser<DeleteTimeCommand>{
      * @throws ParseException if the user input does not conform the expected format
      */
     public DeleteTimeCommand parse(String args) throws ParseException {
+        String trimmedArgs = args.trim();
+        if (trimmedArgs.isEmpty()) {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteTimeCommand.MESSAGE_USAGE));
+        }
+
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_GROUPTAG, PREFIX_FREETIME);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_FREETIME)
-                || !argMultimap.getPreamble().isEmpty()) {
+        if (!arePrefixesPresent(argMultimap, PREFIX_FREETIME) || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteTimeCommand.MESSAGE_USAGE));
         }
-
-        try {
-            argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_GROUPTAG);
-        } catch (ParseException e) {
-            throw new ParseException(String.format(DeleteCommand.MESSAGE_TWO_PARAMETERS, DeleteCommand.MESSAGE_USAGE));
-        }
-
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_GROUPTAG);
         ArrayList<TimeInterval> timeInterval = ParserUtil.parseInterval(argMultimap.getAllValues(PREFIX_FREETIME));
-
-        if ((arePrefixesPresent(argMultimap, PREFIX_NAME) && arePrefixesPresent(argMultimap, PREFIX_GROUPTAG))
-                || !argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(DeleteCommand.MESSAGE_TWO_PARAMETERS, DeleteCommand.MESSAGE_USAGE));
-        } else if (arePrefixesPresent(argMultimap, PREFIX_NAME)) {
+        if ((arePrefixesPresent(argMultimap, PREFIX_NAME) && arePrefixesPresent(argMultimap, PREFIX_GROUPTAG))) {
+            throw new ParseException(String.format(DeleteCommand.MESSAGE_TWO_PARAMETERS, DeleteTimeCommand.MESSAGE_USAGE));
+        }
+        if (arePrefixesPresent(argMultimap, PREFIX_NAME)) {
+            System.out.println("gas");
             Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
             return new DeletePersonTimeCommand(name, timeInterval);
-        } else if (arePrefixesPresent(argMultimap, PREFIX_GROUPTAG)) {
+        }
+        if (arePrefixesPresent(argMultimap, PREFIX_GROUPTAG)) {
             Group group = ParserUtil.parseGroup(argMultimap.getValue(PREFIX_GROUPTAG).get());
             return new DeleteGroupTimeCommand(group, timeInterval);
-        } else {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
         }
+
+        // Should not reach here
+        throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteTimeCommand.MESSAGE_USAGE));
+
     }
 
     private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
