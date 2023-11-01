@@ -63,6 +63,28 @@ public class NameOrGroupContainsKeywordsPredicateTest {
     }
 
     @Test
+    public void test_groupContainsKeywords_returnsTrue() {
+        // One keyword
+        NameOrGroupContainsKeywordsPredicate predicate =
+                new NameOrGroupContainsKeywordsPredicate(Collections.singletonList("friends"));
+        assertTrue(predicate.test(new PersonBuilder().withName("Alice Bob").withGroups("friends").build()));
+
+        // Multiple keywords
+        predicate = new NameOrGroupContainsKeywordsPredicate(Arrays.asList("friends", "classmates"));
+        assertTrue(predicate.test(new PersonBuilder().withName("Alice Bob")
+                .withGroups("friends", "classmates").build()));
+
+        // Only one matching keyword
+        predicate = new NameOrGroupContainsKeywordsPredicate(Arrays.asList("friends", "family"));
+        assertTrue(predicate.test(new PersonBuilder().withName("Alice Carol").withGroups("friends").build()));
+
+        // Mixed-case keywords
+        predicate = new NameOrGroupContainsKeywordsPredicate(Arrays.asList("fRiENds", "cLAsSmaTes"));
+        assertTrue(predicate.test(new PersonBuilder().withName("Alice Bob")
+                .withGroups("friends", "classmates").build()));
+    }
+
+    @Test
     public void test_nameDoesNotContainKeywords_returnsFalse() {
         // Zero keywords
         NameOrGroupContainsKeywordsPredicate predicate =
@@ -78,6 +100,24 @@ public class NameOrGroupContainsKeywordsPredicateTest {
                 Arrays.asList("12345", "alice@email.com", "Main", "Street"));
         assertFalse(predicate.test(new PersonBuilder().withName("Alice").withPhone("12345")
                 .withEmail("alice@email.com").withAddress("Main Street").build()));
+    }
+
+    @Test
+    public void test_groupDoesNotContainKeywords_returnsFalse() {
+        // Zero keywords
+        NameOrGroupContainsKeywordsPredicate predicate =
+                new NameOrGroupContainsKeywordsPredicate(Collections.emptyList());
+        assertFalse(predicate.test(new PersonBuilder().withName("Alice").build()));
+
+        // Non-matching keyword
+        predicate = new NameOrGroupContainsKeywordsPredicate(Arrays.asList("family"));
+        assertFalse(predicate.test(new PersonBuilder().withName("Alice Bob").withGroups("friends").build()));
+
+        // Keywords match phone, email and address, but does not match group
+        predicate = new NameOrGroupContainsKeywordsPredicate(
+                Arrays.asList("12345", "alice@email.com", "Main", "Street"));
+        assertFalse(predicate.test(new PersonBuilder().withName("Alice").withPhone("12345")
+                .withEmail("alice@email.com").withAddress("Main Street").withGroups("friends").build()));
     }
 
     @Test

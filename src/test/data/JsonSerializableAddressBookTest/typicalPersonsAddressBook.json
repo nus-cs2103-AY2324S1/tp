@@ -20,7 +20,7 @@
     "email" : "heinz@example.com",
     "address" : "wall street",
     "birthday": "1998-01-03",
-    "groups" : [ ]
+    "groups" : [ "family" ]
   }, {
     "name" : "Daniel Meier",
     "phone" : "87652533",
