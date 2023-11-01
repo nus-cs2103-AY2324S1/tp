@@ -53,6 +53,7 @@ public class UniquePersonList implements Iterable<Person> {
             throw new DuplicatePersonException();
         }
         internalList.add(toAdd);
+        internalList.sort(Person::compareTo);
     }
 
     /**
@@ -73,6 +74,7 @@ public class UniquePersonList implements Iterable<Person> {
         }
 
         internalList.set(index, editedPerson);
+        internalList.sort(Person::compareTo);
     }
 
     /**
@@ -84,11 +86,13 @@ public class UniquePersonList implements Iterable<Person> {
         if (!internalList.remove(toRemove)) {
             throw new PersonNotFoundException();
         }
+        internalList.sort(Person::compareTo);
     }
 
     public void setPersons(UniquePersonList replacement) {
         requireNonNull(replacement);
         internalList.setAll(replacement.internalList);
+        internalList.sort(Person::compareTo);
     }
 
     /**
@@ -102,6 +106,7 @@ public class UniquePersonList implements Iterable<Person> {
         }
 
         internalList.setAll(persons);
+        internalList.sort(Person::compareTo);
     }
 
     /**

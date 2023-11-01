@@ -31,7 +31,7 @@ public class FindCommand extends Command {
         this.trimmedArgs = trimmedArgs;
     }
 
-    @Override
+    @Override @SuppressWarnings("unchecked")
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         switch (model.getState()) {
