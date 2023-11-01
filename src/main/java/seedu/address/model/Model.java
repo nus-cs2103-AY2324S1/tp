@@ -1,6 +1,7 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
+import java.util.Set;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
@@ -120,6 +121,7 @@ public interface Model {
     boolean hasLesson(Lesson lesson);
 
     boolean hasLessonClashWith(Lesson lesson);
+    public Set<Lesson> getLessonsFulfill(Predicate<Lesson> predicate);
 
     Lesson getLessonClashWith(Lesson lesson);
 
@@ -200,9 +202,11 @@ public interface Model {
     boolean hasTaskClashWith(Task task, int index);
     Task getTaskClashWith(Task task, int index);
     Boolean hasPersonClashWith(Person person);
+    public Set<Person> getPersonsFulfill(Predicate<Person> predicate);
     default BiDirectionalMap<Person, Lesson> getPersonLessonMap() {
         return null;
     }
+
     void linkWith(Person person, Lesson lesson);
     void unLinkWith(Person person, Lesson lesson);
     String getLinkedPersonNameStr(Lesson lesson);
