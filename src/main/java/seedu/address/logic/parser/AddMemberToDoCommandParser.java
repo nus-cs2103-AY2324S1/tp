@@ -4,16 +4,16 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TODO;
 
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
+import java.util.Optional;
+
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.AddMemberTaskCommand;
 import seedu.address.logic.commands.AddMemberTaskCommand.AddMemberTaskDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.task.Task;
-
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
 
 public class AddMemberToDoCommandParser implements Parser<AddMemberTaskCommand> {
     @Override
@@ -53,7 +53,7 @@ public class AddMemberToDoCommandParser implements Parser<AddMemberTaskCommand> 
         if (tasks.isEmpty()) {
             return Optional.empty();
         }
-        Collection<String> taskSet = tasks.size() == 1 && tasks.contains("") ? Collections.emptyList()  : tasks;
+        Collection<String> taskSet = tasks.size() == 1 && tasks.contains("") ? Collections.emptyList() : tasks;
         return Optional.of(ParserUtil.parseTasks(taskSet));
     }
 }
