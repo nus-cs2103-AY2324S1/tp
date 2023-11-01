@@ -79,4 +79,21 @@ public class CardTest {
                 + ", answer=" + CS1101S.getAnswer() + ", tags=[]" + "}";
         assertEquals(expected, CS1101S.toString());
     }
+
+    @Test
+    public void getSolveCountMethod() {
+        Card cs1101sCopy = new CardBuilder(CS1101S).build();
+
+        // solve count on creation = 0;
+        assertTrue(cs1101sCopy.getSolveCount().equals(0));
+    }
+
+    @Test
+    public void incrementSolveCountMethod() {
+        Card cs1101sCopy = new CardBuilder(CS1101S).build();
+
+        // solve count on creation = 0;
+        cs1101sCopy.incrementSolveCount();
+        assertTrue(cs1101sCopy.getSolveCount().equals(1));
+    }
 }
