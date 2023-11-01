@@ -148,56 +148,56 @@ view 1
 
 --------------------------------------------------------------------------------------------------------------------
 
-### Marking a client as Cold, Warm, or Hot Leads [to be implemented]
+### Edit Feature
 
-Tag a client as a "hot lead", "warm lead", or "cold lead" to prioritise your interactions.
+#### Editing a client profile: ***edit***
 
-Format
-```text
-lead <lead_category> <client_name>
+Each different client may be marked with different lead (e.g. hot, warm, cold) that may change over time.
+Not only that, you might find yourself needing to update the details of a client profile sometimes.
+
+Connectify got you covered with the ***edit*** command.
+
+Format: `edit INDEX [n/CLIENT_NAME] [p/PROFESSION] [e/EMAIL] [a/ADDRESS] [t/TAG]... [tg/TELEGRAM] [i/INCOME] [d/DETAILS] [l/LEAD]`
+<br/>
+Where INDEX refers to the index of the client profile in the displayed list of clients.
+
+Note that at least one of the optional parameters must be provided.
+
+Example of editing a name:
+```
+edit 1 n/Kamili
 ```
 
-Example
-```text
-lead hot John Doe
+Example of editing a lead:
+```
+edit 1 l/warm
+``` 
+
+Example of editing multiple fields:
+```
+edit 1 n/Chemmy Lee p/98765432 l/hot t/friends
 ```
 
-Acceptable Values
-- <lead_category>: "hot", "warm" or "cold"
-- <client_name>: Alphanumeric, the name of an existing client
+[↑ Back to table of contents](#table-of-contents)
 
-Expected Output (Success)
-- The specified client is marked with the chosen lead category
-- The GUI should display the updated lead category for the client
+--------------------------------------------------------------------------------------------------------------------
 
-Expected Output (Failure)
-- Invalid lead category: "Invalid lead category. Please choose 'hot,' 'warm,' or 'cold.'"
-- Client not found: "Client not found in the address book."
+### Delete Feature
 
-### Delete a client profile [to be implemented]
+#### Deleting a client profile: ***delete***
 
-Delete a client's profile from the address book.
+Keep the list of clients in Connectify clean by deleting client profiles that are no longer relevant.
 
-Format
-```text
-delete profile <client_name>
+Deleting a client profile is easy with the ***delete*** command.
+
+Format: `delete INDEX`
+
+Example:
+```
+delete 1
 ```
 
-Example
-```text
-delete profile John Doe
-```
-
-Acceptable Values:
-- <client_name>: Alphanumeric, the name of an existing client
-
-Expected Output (Success)
-- The specified client profile is deleted from the address book
-- The GUI should reflect the removal of the client profile
-
-- Expected Output (Failure)
-- Client not found: "Client not found in the address book."
-- Missing client name parameter: "Please enter the client name."
+[↑ Back to table of contents](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
 
