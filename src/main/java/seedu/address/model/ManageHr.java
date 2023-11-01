@@ -92,8 +92,7 @@ public class ManageHr implements ReadOnlyManageHr {
      * @param target The original employee to be updated.
      * @param editedEmployee The updated employee.
      * @throws SubordinatePresentException If the original employee manages subordinates, preventing the update.
-     * @throws SupervisorNotFoundException If the supervisor of the updated employee is not found in the list or if the
-     * original employee is a supervisor of the updated employee.
+     * @throws SupervisorNotFoundException If the target employee is the supervisor of the editedEmployee.
      */
     public void setEmployee(Employee target, Employee editedEmployee) {
         requireNonNull(editedEmployee);
