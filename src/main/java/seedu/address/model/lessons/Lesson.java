@@ -309,11 +309,7 @@ public class Lesson extends ListEntry<Lesson> {
         cloned.setNameIfNotDefault(this.name);
         cloned.setDayIfNotDefault(this.day);
         cloned.setRemarkIfNotDefault(this.remark);
-<<<<<<< HEAD
         cloned.taskList = taskList.clone();
-=======
-        cloned.setTaskListIfNotDefault(this.taskList);
->>>>>>> b4b4385ab17e1d16fd079068db14bc2c252bf392
         return cloned;
     }
 }
