@@ -6,6 +6,8 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
+import java.util.function.Predicate;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -84,6 +86,12 @@ public class Schedule implements Iterable<Lesson> {
     public Lesson getLessonClashWith(Lesson toCheck) {
         requireNonNull(toCheck);
         return internalSchedule.stream().filter(toCheck::isClashWith).findFirst().get();
+    }
+
+    public Set<Lesson> getLessonsFulfill(Predicate<Lesson> predicate) {
+        requireNonNull(predicate);
+        return internalSchedule.stream().filter(predicate)
+                .map(Lesson::clone).collect(java.util.stream.Collectors.toSet());
     }
 
     /**

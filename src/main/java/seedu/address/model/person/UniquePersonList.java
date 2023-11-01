@@ -5,6 +5,8 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
+import java.util.function.Predicate;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -41,6 +43,12 @@ public class UniquePersonList implements Iterable<Person> {
     public boolean hasPersonClashWith(Person toCheck) {
         requireNonNull(toCheck);
         return internalList.stream().anyMatch(toCheck::hasSameName);
+    }
+
+    public Set<Person> getPersonsFulfill(Predicate<Person> predicate) {
+        requireNonNull(predicate);
+        return internalList.stream().filter(predicate)
+                .map(Person::clone).collect(java.util.stream.Collectors.toSet());
     }
 
     /**

@@ -3,6 +3,8 @@ package seedu.address.model;
 import static java.util.Objects.requireNonNull;
 
 import java.util.List;
+import java.util.Set;
+import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
@@ -73,6 +75,11 @@ public class ScheduleList implements ReadOnlySchedule {
     public boolean hasLessonClashWith(Lesson lesson) {
         requireNonNull(lesson);
         return lessons.hasLessonClashWith(lesson);
+    }
+
+    public Set<Lesson> getLessonsFulfill(Predicate<Lesson> predicate) {
+        requireNonNull(predicate);
+        return lessons.getLessonsFulfill(predicate);
     }
 
     /**
