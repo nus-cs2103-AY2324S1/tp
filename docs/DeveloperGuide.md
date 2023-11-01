@@ -478,30 +478,24 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User requests to list students
-2.  ClassManager shows a list of students
-3.  User requests to delete a specific student in the list
-4.  ClassManager deletes the student
+1.  User requests to delete a specific student in the list with the student's student number
+2.  ClassManager deletes the student
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 1a. The given student number is invalid.
 
-  Use case ends.
+    * 1a1. ClassManager shows an error message.
 
-* 3a. The given student number is invalid.
+      Use case resumes at step 1.
 
-    * 3a1. ClassManager shows an error message.
+* 1b. The given student number does not exist in the list.
 
-      Use case resumes at step 2.
+    * 1b1. ClassManager shows an error message.
 
-* 3b. The given student number does not exist in the list.
-
-    * 3b1. ClassManager shows an error message.
-
-      Use case resumes at step 2.
+      Use case resumes at step 1.
 
 **Use case: Tag a student with a label**
 
@@ -569,7 +563,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
-* **Student Number**: Matriculation number of NUS student
+* **Student Number**: Matriculation number of NUS student (starting with A)
 * **Email**: NUS email address (eXXXXXXX@u.nus.edu)
 * **CLI**: Command Line Interface
 * **GUI**: Graphical User Interface
@@ -606,9 +600,7 @@ testers are expected to do more *exploratory* testing.
 
 ### Deleting a student
 
-1. Deleting a student while all students are being shown
-
-   1. Prerequisites: List all students using the `list` command. Multiple students in the list.
+1. Deleting a student from the current students added in the class manager.
 
    1. Test case: `delete s/STUDENT_NUMBER`<br>
       Expected: The student with STUDENT_NUMBER is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
