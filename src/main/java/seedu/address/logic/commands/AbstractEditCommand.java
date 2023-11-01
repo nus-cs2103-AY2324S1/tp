@@ -31,6 +31,7 @@ public abstract class AbstractEditCommand<T extends ListEntry<? extends T>> exte
     protected Predicate<T> hasClashWith;
     protected Consumer<T> deleteMethod;
     protected Consumer<T> addMethod;
+    protected Consumer<T> showMethod;
 
     /**
      * Pass in index to indicate which entry to edit
@@ -66,6 +67,8 @@ public abstract class AbstractEditCommand<T extends ListEntry<? extends T>> exte
         init();
         editFields();
         validateEditedAndWriteBack();
+        model.resetAllShowFields();
+        showMethod.accept(edited);
         return new CommandResult("Edited : " + edited.toString());
     }
     /**
@@ -104,6 +107,7 @@ public abstract class AbstractEditCommand<T extends ListEntry<? extends T>> exte
                 try {
                     original = list.get(index - 1);
                 } catch (IndexOutOfBoundsException e) {
+                    // NOTE: should it be list.size() instead?
                     throw new CommandException("Index out of bounds, expected 1 to "
                             + model.getFilteredPersonList().size() + " but got " + index + ".");
                 }

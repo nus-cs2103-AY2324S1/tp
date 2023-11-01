@@ -3,6 +3,8 @@ package seedu.address.model;
 import static java.util.Objects.requireNonNull;
 
 import java.util.List;
+import java.util.Set;
+import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
@@ -73,6 +75,11 @@ public class AddressBook implements ReadOnlyAddressBook {
     public boolean hasPersonClashWith(Person person) {
         requireNonNull(person);
         return persons.hasPersonClashWith(person);
+    }
+
+    public Set<Person> getPersonsFulfill(Predicate<Person> predicate) {
+        requireNonNull(predicate);
+        return persons.getPersonsFulfill(predicate);
     }
 
     /**

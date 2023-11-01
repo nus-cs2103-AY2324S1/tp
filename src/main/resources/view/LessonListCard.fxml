@@ -26,13 +26,18 @@
               <Region fx:constant="USE_PREF_SIZE" />
             </minWidth>
           </Label>
-          <Label fx:id="overview" styleClass="cell_big_label" textFill="WHITE">
+          <Label fx:id="name" styleClass="cell_big_label" textFill="WHITE">
             <minWidth>
               <!-- Ensures that the label text is never truncated -->
               <Region fx:constant="USE_PREF_SIZE" />
             </minWidth>
           </Label>
         </HBox>
+            <Label fx:id="date" layoutX="10.0" layoutY="32.0" styleClass="cell_small_label" textFill="WHITE">
+               <minWidth>
+                  <Region fx:constant="USE_PREF_SIZE" />
+               </minWidth>
+            </Label>
         <Label fx:id="duration" styleClass="cell_small_label" textFill="WHITE">
           <minWidth>
             <!-- Ensures that the label text is never truncated -->

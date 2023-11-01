@@ -28,8 +28,9 @@ public class AddLessonCommand extends Command {
             throw new CommandException("Lesson already exists in the specified time slot: "
                     + clashingLesson.toString());
         }
-
         model.addLesson(lesson);
+        model.resetAllShowFields();
+        model.showLesson(lesson);
         return new CommandResult(String.format("New lesson added: " + lesson.toString()));
     }
 

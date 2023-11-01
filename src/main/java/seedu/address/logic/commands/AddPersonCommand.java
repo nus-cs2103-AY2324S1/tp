@@ -21,7 +21,7 @@ import seedu.address.model.person.Person;
  */
 public class AddPersonCommand extends Command {
 
-    public static final String COMMAND_WORD = "add";
+    public static final String COMMAND_WORD = "addPerson";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a person to the address book. "
             + "Parameters: "
@@ -42,7 +42,7 @@ public class AddPersonCommand extends Command {
             + PREFIX_SCHEDULE + "Monday 1200 1400 weekly";
 
     public static final String MESSAGE_SUCCESS = "New person added: %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
+    public static final String MESSAGE_DUPLICATE_PERSON = "Person with this name already exists in the address book";
 
     private final Person toAdd;
     private Lesson lesson = null;
@@ -67,7 +67,7 @@ public class AddPersonCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        if (model.hasPerson(toAdd)) {
+        if (model.hasPersonClashWith(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
         if (lesson != null) {
@@ -81,6 +81,8 @@ public class AddPersonCommand extends Command {
             model.addLesson(lesson);
         }
         model.addPerson(toAdd);
+        model.resetAllShowFields();
+        model.showPerson(toAdd);
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
     }
 

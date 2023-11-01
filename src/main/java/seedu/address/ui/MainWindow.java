@@ -19,6 +19,7 @@ import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.Model;
 import seedu.address.model.lessons.Lesson;
 import seedu.address.model.lessons.Task;
 import seedu.address.model.person.Person;
@@ -36,6 +37,7 @@ public class MainWindow extends UiPart<Stage> {
 
     private Stage primaryStage;
     private Logic logic;
+    private Model model;
 
     // Independent Ui parts residing in this Ui container
     private PersonListPanel personListPanel;
@@ -98,12 +100,13 @@ public class MainWindow extends UiPart<Stage> {
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
      */
-    public MainWindow(Stage primaryStage, Logic logic) {
+    public MainWindow(Stage primaryStage, Logic logic, Model model) {
         super(FXML, primaryStage);
 
         // Set dependencies
         this.primaryStage = primaryStage;
         this.logic = logic;
+        this.model = model;
 
         // Configure the UI
         setWindowDefaultSize(logic.getGuiSettings());
@@ -158,7 +161,7 @@ public class MainWindow extends UiPart<Stage> {
         personListPanel = new PersonListPanel(logic);
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
-        lessonListPanel = new LessonListPanel(logic);
+        lessonListPanel = new LessonListPanel(logic, model);
         scheduleListPanelPlaceholder.getChildren().add(lessonListPanel.getRoot());
 
         fullTaskListPanel = new FullTaskListPanel(logic);
@@ -292,8 +295,12 @@ public class MainWindow extends UiPart<Stage> {
      * @param person The person to show the details of.
      */
     public void handleShowPerson(Person person) {
+        if (person == null) {
+            studentDetailList.setVisible(false);
+            return;
+        }
         studentDetailList.setVisible(true);
-        studentDetailListPanel.setPersonDetails(person);
+        studentDetailListPanel.setPersonDetails(person, model);
     }
 
     /**
@@ -302,8 +309,12 @@ public class MainWindow extends UiPart<Stage> {
      * @param lesson The lesson to show the details of.
      */
     public void handleShowLesson(Lesson lesson) {
+        if (lesson == null) {
+            lessonDetailList.setVisible(false);
+            return;
+        }
         lessonDetailList.setVisible(true);
-        lessonDetailListPanel.setLessonDetails(lesson);
+        lessonDetailListPanel.setLessonDetails(lesson, model);
     }
 
     /**

@@ -104,21 +104,21 @@ public class TaskListTest {
         taskList.add(TASK_2);
         assertThrows(DuplicateTaskException.class, () -> taskList.setTask(TASK_1, TASK_2));
     }
-
-    @Test
+    // To remove? -> change in implementation.
+    /*@Test
     public void remove_nullTask_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> taskList.remove(null));
-    }
-
-    @Test
-    public void remove_taskDoesNotExist_throwsTaskNotFoundException() {
-        assertThrows(TaskNotFoundException.class, () -> taskList.remove(TASK_1));
-    }
+    }*/
+    // To remove? -> change in implementation.
+    /*@Test
+    public void remove_taskIndexDoesNotExist_IndexOutOfBoundsException() {
+        assertThrows(IndexOutOfBoundsException.class, () -> taskList.remove(-1));
+    }*/
 
     @Test
     public void remove_existingTask_removesTask() {
         taskList.add(TASK_1);
-        taskList.remove(TASK_1);
+        taskList.remove(0);
         TaskList expectedTaskList = new TaskList();
         assertEquals(expectedTaskList, taskList);
     }

@@ -8,6 +8,7 @@ import seedu.address.model.lessons.Lesson;
  * Edits the details of an existing lesson in the schedule.
  */
 public class EditLessonCommand extends AbstractEditCommand<Lesson> {
+    public static final String COMMAND_WORD = "editLesson";
     public EditLessonCommand(int index, Lesson editDescriptor) {
         super(index, editDescriptor);
     }
@@ -27,6 +28,7 @@ public class EditLessonCommand extends AbstractEditCommand<Lesson> {
         hasClashWith = model::hasLessonClashWith;
         deleteMethod = model::deleteLesson;
         addMethod = model::addLesson;
+        showMethod = model::showLesson;
     }
 
     @Override

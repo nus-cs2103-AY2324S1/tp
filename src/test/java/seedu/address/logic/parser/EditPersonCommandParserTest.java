@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.commands.EditPersonCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 public class EditPersonCommandParserTest {
@@ -14,9 +15,9 @@ public class EditPersonCommandParserTest {
     @Test
     void happyCases() {
         try {
-            p.parse("edit 1 -name Yiwen");
-            p.parse("edit 1 -phone 98765432");
-            p.parse("edit 1 -email fakeEmail@com");
+            p.parse(EditPersonCommand.COMMAND_WORD + " 1 -name Yiwen");
+            p.parse(EditPersonCommand.COMMAND_WORD + " 1 -phone 98765432");
+            p.parse(EditPersonCommand.COMMAND_WORD + " 1 -email fakeEmail@com");
         } catch (ParseException e) {
             fail();
         }

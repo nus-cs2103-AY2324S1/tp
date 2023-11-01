@@ -4,6 +4,8 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.Arrays;
+import java.util.Set;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -13,6 +15,7 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.lessons.Lesson;
 import seedu.address.model.lessons.Task;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.state.State;
 import seedu.address.ui.Ui;
@@ -36,7 +39,7 @@ public class ModelManager implements Model {
     private Person currentShowingPerson = null;
     private Lesson currentShowingLesson = null;
     private Task currentShowingTask = null;
-    private Task currentEditingLesson = null;
+    private BiDirectionalMap<Person, Lesson> personToLessonMap;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -49,12 +52,25 @@ public class ModelManager implements Model {
 
         this.addressBook = new AddressBook(addressBook);
         this.scheduleList = new ScheduleList(scheduleList);
-        // to add: filtered list of lessons
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
         filteredLessons = new FilteredList<>(this.scheduleList.getLessonList());
         this.fullTaskList = new FullTaskList();
         this.fullTaskList.setFullTaskList(scheduleList);
+        personToLessonMap = new BiDirectionalMap<>();
+    }
+
+    /**
+     * Initializes a ModelManager with the given addressBook and userPrefs and scheduleList and map.
+     * @param addressBook
+     * @param userPrefs
+     * @param scheduleList
+     * @param map
+     */
+    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs,
+                        ReadOnlySchedule scheduleList, BiDirectionalMap<Person, Lesson> map) {
+        this(addressBook, userPrefs, scheduleList);
+        personToLessonMap = map;
     }
 
     public ModelManager() {
@@ -130,10 +146,15 @@ public class ModelManager implements Model {
         requireNonNull(person);
         return addressBook.hasPersonClashWith(person);
     }
+    public Set<Person> getPersonsFulfill(Predicate<Person> predicate) {
+        requireNonNull(predicate);
+        return addressBook.getPersonsFulfill(predicate);
+    }
 
     @Override
     public void deletePerson(Person target) {
         addressBook.removePerson(target);
+        personToLessonMap.remove(target);
     }
 
     @Override
@@ -146,7 +167,7 @@ public class ModelManager implements Model {
     public void setPerson(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
         addressBook.setPerson(target, editedPerson);
-
+        personToLessonMap.update(target, editedPerson);
     }
 
 
@@ -200,10 +221,15 @@ public class ModelManager implements Model {
         requireNonNull(lesson);
         return scheduleList.getLessonClashWith(lesson);
     }
+    public Set<Lesson> getLessonsFulfill(Predicate<Lesson> predicate) {
+        requireNonNull(predicate);
+        return scheduleList.getLessonsFulfill(predicate);
+    }
 
     @Override
     public void deleteLesson(Lesson target) {
         scheduleList.removeLesson(target);
+        personToLessonMap.removeReverse(target);
     }
 
     @Override
@@ -217,6 +243,7 @@ public class ModelManager implements Model {
         requireAllNonNull(target, editedLesson);
         scheduleList.setLesson(target, editedLesson);
         updateFilteredScheduleList(PREDICATE_SHOW_ALL_LESSONS);
+        personToLessonMap.updateReverse(target, editedLesson);
     }
 
     //=========== Filtered Lesson List Accessors =============================================================
@@ -256,7 +283,7 @@ public class ModelManager implements Model {
 
     @Override
     public void showPerson(Person person) {
-        requireNonNull(person);
+        //requireNonNull(person);
         if (ui != null) {
             currentShowingPerson = person;
             ui.showPersonDetails(person);
@@ -265,7 +292,7 @@ public class ModelManager implements Model {
 
     @Override
     public void showLesson(Lesson lesson) {
-        requireNonNull(lesson);
+        //requireNonNull(lesson);
         if (ui != null) {
             currentShowingLesson = lesson;
             ui.showLessonDetails(lesson);
@@ -295,7 +322,37 @@ public class ModelManager implements Model {
         ModelManager otherModelManager = (ModelManager) other;
         return addressBook.equals(otherModelManager.addressBook)
                 && userPrefs.equals(otherModelManager.userPrefs)
-                && filteredPersons.equals(otherModelManager.filteredPersons);
+                && filteredPersons.equals(otherModelManager.filteredPersons)
+                && filteredLessons.equals(otherModelManager.filteredLessons);
+    }
+    //=========== Modify tasks in Lesson  =============================================================
+
+    @Override
+    public boolean hasTaskClashWith(Task task, int index) {
+        // elaine: to check whether implementation below violates any principles
+        return filteredLessons.get(index).hasSameTask(task);
+    }
+    @Override
+    public void addTask(Task task, int index) {
+        requireNonNull(task);
+        requireNonNull(index);
+        Lesson target = filteredLessons.get(index);
+        Lesson editedLesson = target.clone();
+        editedLesson.addToTaskList(task);
+        setLesson(target, editedLesson);
+    }
+    @Override
+    public Task getTaskClashWith(Task task, int index) {
+        requireNonNull(task);
+        requireNonNull(index);
+        return filteredLessons.get(index).getTaskClashWith(task);
+    }
+
+    @Override
+    public String deleteTask(Lesson lesson, int index) {
+        requireNonNull(index);
+        requireNonNull(lesson);
+        return lesson.removeFromTaskList(index);
     }
 
     //=========== App State Changing =============================================================
@@ -316,7 +373,13 @@ public class ModelManager implements Model {
     }
 
     public boolean hasCurrentShownEntry() {
-        return currentShowingPerson != null || currentShowingLesson != null || currentEditingLesson != null;
+        return currentShowingPerson != null || currentShowingLesson != null || currentShowingTask != null;
+    }
+    @Override
+    public void resetAllShowFields() {
+        this.currentShowingLesson = null;
+        this.currentShowingPerson = null;
+        this.currentShowingTask = null;
     }
 
     public Person getCurrentlyDisplayedPerson() {
@@ -327,8 +390,26 @@ public class ModelManager implements Model {
         return currentShowingLesson;
     }
 
-    public Task getCurrentlyEditingLesson() {
-        return currentEditingLesson;
+    public Task getCurrentlyDisplayedTask() {
+        return currentShowingTask;
+    }
+
+    public BiDirectionalMap<Person, Lesson> getPersonLessonMap() {
+        return personToLessonMap;
+    }
+    public void linkWith(Person person, Lesson lesson) {
+        personToLessonMap.addMapping(person, lesson);
+    }
+    public void unLinkWith(Person person, Lesson lesson) {
+        personToLessonMap.removeMapping(person, lesson);
+    }
+    public String getLinkedPersonNameStr(Lesson lesson) {
+        return Arrays.stream(personToLessonMap.getReversed(lesson)).map(Name::toString)
+                .reduce((a, b) -> a + ", " + b).orElse("Not linked to any Students yet");
+    }
+    public String getLinkedLessonNameStr(Person person) {
+        return Arrays.stream(personToLessonMap.get(person)).map(Name::toString)
+                .reduce((a, b) -> a + ", " + b).orElse("Not linked to any Lessons yet");
     }
 
 }

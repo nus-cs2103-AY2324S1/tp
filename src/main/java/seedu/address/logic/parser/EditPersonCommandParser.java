@@ -17,9 +17,8 @@ public class EditPersonCommandParser implements Parser<EditPersonCommand> {
     public EditPersonCommand parse(String args) throws ParseException {
 
         int index = TypeParsingUtil.parseNum(TypeParsingUtil
-                .getValueImmediatelyAfterCommandName("edit", "index", args));
+                .getValueImmediatelyAfterCommandName(EditPersonCommand.COMMAND_WORD, "index", args));
         Person person = AddPersonCommandParser.parsePerson(args);
         return new EditPersonCommand(index, person);
-
     }
 }
