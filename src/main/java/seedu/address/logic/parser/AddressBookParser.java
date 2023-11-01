@@ -29,6 +29,7 @@ import seedu.address.logic.commands.RateCommand;
 import seedu.address.logic.commands.ShowDoneCommand;
 import seedu.address.logic.commands.ShowUndoneCommand;
 import seedu.address.logic.commands.SortRateCommand;
+import seedu.address.logic.commands.SortTimeCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -119,6 +120,9 @@ public class AddressBookParser {
 
         case SortRateCommand.COMMAND_WORD:
             return new SortRateCommand();
+
+        case SortTimeCommand.COMMAND_WORD:
+            return new SortTimeCommand();
 
         case ShowDoneCommand.COMMAND_WORD:
             return new ShowDoneCommand();
