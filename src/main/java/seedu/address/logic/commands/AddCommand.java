@@ -48,7 +48,7 @@ public class AddCommand extends Command {
             + PREFIX_ROLE + "ROLE "
             + "[" + PREFIX_MANAGER + "MANAGER]...\n"
             + "[" + PREFIX_DEPARTMENT + "DEPARTMENT]...\n"
-            + "Example: " + MESSAGE_EXAMPLE + " "
+            + "Example: " + MESSAGE_EXAMPLE + " ";
 
 
     public static final String MESSAGE_SUCCESS = "New employee added: %1$s";
