@@ -98,7 +98,7 @@ Format: `teach c/COURSE_CODE`
 - Filters the list of TAs teaching under the course automatically.
 - The default course is saved even after the user closes the application.
 
-Example: `course c/CS2103T` sets the default course to the given course code.
+Example: `teach c/CS2103T` sets the default course to the given course code.
 
 When the command succeeds:
 
@@ -230,6 +230,7 @@ Snowflake; Phone: 83124113; Email: snowflake@example.com; Course of study: Compu
 Snowman; Phone: 83172153; Email: snowman@example.com; Course of study: Computer Science; Year of Study: 2;
 ```
 
+<<<<<<< Updated upstream
 ### Updating Hours for All TAs in View: `hour`
 
 ![update Hour](images/updateHour.png)
@@ -256,6 +257,8 @@ When the command fails:
 
 - Invalid command format (updated new hour is invalid, either below 0 or above 9999): `Invalid command format!`
 
+=======
+>>>>>>> Stashed changes
 
 ### Clearing all entries : `clear`
 
@@ -302,8 +305,14 @@ Action | Format, Examples
 --------|------------------
 **Add** | `add n/NAME p/PHONE e/EMAIL tele/TELEGRAM [from/FROM to/TO] [t/TAG]... [c/COURSE_CODE]... h/HOUR` <br> e.g., `add n/Snowball p/98765432 e/snowball@example.com tele/@snowball from/10:00 to/12:00 t/fulltime c/CS1231S h/10`
 **Clear** | `clear`
+**Course** | `course c/[COURSE_CODE]`<br> e.g. `course c/CS2103T`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Find** | `find PREFIX KEYWORD [MORE_KEYWORDS]`<br> e.g., `find n/Alex`, `find c/cs1231s`, `find from/10:00 to/12:00`, `find n/Alex c/cs1231s`, `find c/cs2103t from/10:00 to/12:00`
+<<<<<<< Updated upstream
 **Hour** | `hour 6`
+=======
+**Hour** | `hour INTEGER`<br> e.g., `hour 2` 
+>>>>>>> Stashed changes
 **List** | `list`
 **Help** | `help`
+**Teach** | `teach c/[COURSE_CODE]`<br> e.g. `teach c/CS2103T`
