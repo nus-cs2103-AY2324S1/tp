@@ -51,7 +51,6 @@ public class ListCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        model.resetAllShowFields();
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         model.updateFilteredScheduleList(PREDICATE_SHOW_ALL_LESSONS);
         if (model.sameState(state)) {
