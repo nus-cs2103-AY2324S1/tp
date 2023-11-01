@@ -11,6 +11,7 @@ public enum State {
 
     STUDENT,
     SCHEDULE,
+    TASK,
     NONE;
 
     public static final String MESSAGE_CONSTRAINTS =

@@ -1,6 +1,7 @@
 package seedu.address.model.util;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Set;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
@@ -87,14 +88,15 @@ public class SampleDataUtil {
 
     public static Lesson[] getSampleLessons() {
         try {
-            TaskList sample = new TaskList();
-            sample.add(new Task("Test task 1"));
-            sample.add(new Task("Test task 2"));
+            TaskList taskList = new TaskList();
+            List<Task> tasks = Arrays.asList(new Task("first"), new Task("second"),
+                    new Task("third long words test sentrence bomvasnv haha loanfafsszzzz sss"));
+            taskList.setTasks(tasks);
             return new Lesson[] {
-                new Lesson("lesson1", "12:30", "14:30", "20", "Mathematics", sample),
-                new Lesson("lesson2", "13:30", "15:30", "21", "Physics", sample),
-                new Lesson("lesson3", "14:30", "16:30", "22", "Biology", sample),
-                new Lesson("lesson4", "15:30", "17:30", "23", "Chemistry", sample),
+                new Lesson("lesson1", "12:30", "14:30", "20", "Mathematics", taskList),
+                new Lesson("lesson2", "13:30", "15:30", "21", "Physics", taskList),
+                new Lesson("lesson3", "14:30", "16:30", "22", "Biology", taskList),
+                new Lesson("lesson4", "15:30", "17:30", "23", "Chemistry", taskList),
             };
         } catch (ParseException e) {
             Logger logger = Logger.getLogger(SampleDataUtil.class.getName());
