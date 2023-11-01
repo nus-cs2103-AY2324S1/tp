@@ -15,7 +15,6 @@ import java.util.Optional;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.exceptions.DataLoadingException;
-import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -24,8 +23,6 @@ import seedu.address.storage.JsonUserPrefsStorage;
 import seedu.address.storage.UserPrefsStorage;
 
 public class ConfigCommandTest {
-
-    private CommandHistory commandHistory = new CommandHistory();
 
     @Test
     public void configure_validArg_success() throws CommandException {
@@ -44,7 +41,7 @@ public class ConfigCommandTest {
         CommandResult expectedCommandResult = new CommandResult(
                 String.format(MESSAGE_CONFIG_SUCCESS, tutorialCount, assignmentCount));
 
-        assertCommandSuccess(configCommand, model, expectedCommandResult, expectedModel, commandHistory);
+        assertCommandSuccess(configCommand, model, expectedCommandResult, expectedModel);
     }
 
     public UserPrefs getUserPrefs(Path userPrefsPath) throws CommandException {

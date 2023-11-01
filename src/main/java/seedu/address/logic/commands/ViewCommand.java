@@ -3,7 +3,6 @@ package seedu.address.logic.commands;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.student.Student;
@@ -20,7 +19,7 @@ public class ViewCommand extends Command {
         + "Parameters: s/STUDENT_NUMBER\n"
         + "Example: " + COMMAND_WORD + " s/A1234567N";
     public static final String MESSAGE_COMMAND_SUCCESS =
-        "You are now viewing the class details of student: %1$s";
+        "You are now viewing the class details of Student %1$s";
     public static final String MESSAGE_COMMAND_FAILURE =
         "Please check that the student exist in the address book.";
     protected final StudentNumber studentNumber;
@@ -35,7 +34,7 @@ public class ViewCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Model model, CommandHistory commandHistory) throws CommandException {
+    public CommandResult execute(Model model) throws CommandException {
         if (!model.hasStudent(new Student(studentNumber))) {
             throw new CommandException(MESSAGE_COMMAND_FAILURE);
         }

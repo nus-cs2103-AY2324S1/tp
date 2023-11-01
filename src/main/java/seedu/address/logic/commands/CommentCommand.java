@@ -5,7 +5,6 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_COMMENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT_NUMBER;
 
-import seedu.address.logic.CommandHistory;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -21,7 +20,7 @@ public class CommentCommand extends Command {
     public static final String COMMAND_WORD = "comment";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the comment of the person identified "
-            + "by the student number used.\n"
+            + "by the student number used. "
             + "Existing comment will be overwritten by the input.\n"
             + "Parameters: " + PREFIX_STUDENT_NUMBER + "[StudentNumber] (must be an existing student number) "
             + PREFIX_COMMENT + "[Comment]\n"
@@ -46,7 +45,7 @@ public class CommentCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Model model, CommandHistory commandHistory) throws CommandException {
+    public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
         if (!model.hasStudent(new Student(studentNumber))) {
@@ -60,7 +59,6 @@ public class CommentCommand extends Command {
                 student.getStudentNumber(), student.getClassDetails(), student.getTags(), comment);
 
         model.setStudent(student, editedStudent);
-        model.commitAddressBook();
 
         return new CommandResult(String.format(MESSAGE_COMMENT_SUCCESS, Messages.format(student)));
     }

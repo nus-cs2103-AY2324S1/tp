@@ -13,7 +13,6 @@ import static seedu.address.testutil.TypicalStudents.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.CommandHistory;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -29,8 +28,7 @@ import seedu.address.testutil.TypicalStudents;
  */
 public class ViewCommandTest {
 
-    private final Model model = new ModelManager(new AddressBook(getTypicalAddressBook()), new UserPrefs());
-    private final CommandHistory commandHistory = new CommandHistory();
+    private Model model = new ModelManager(new AddressBook(getTypicalAddressBook()), new UserPrefs());
 
     @Test
     public void execute_validStudentNumber_success() {
@@ -43,14 +41,14 @@ public class ViewCommandTest {
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.setSelectedStudent(studentToView);
 
-        assertCommandSuccess(viewCommand, model, expectedMessage, expectedModel, commandHistory);
+        assertCommandSuccess(viewCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
     public void execute_nonExistentStudentNumber_failure() {
         ViewCommand viewCommand = new ViewCommand(NONEXISTENT_STUDENT_NUMBER);
 
-        assertCommandFailure(viewCommand, model, ViewCommand.MESSAGE_COMMAND_FAILURE, commandHistory);
+        assertCommandFailure(viewCommand, model, ViewCommand.MESSAGE_COMMAND_FAILURE);
     }
 
     @Test

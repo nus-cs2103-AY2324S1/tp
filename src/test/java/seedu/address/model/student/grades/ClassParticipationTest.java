@@ -1,4 +1,4 @@
-package seedu.address.model.student.information;
+package seedu.address.model.student.grades;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -12,14 +12,14 @@ public class ClassParticipationTest {
     public void mark_success() {
         ClassParticipation classParticipation = new ClassParticipation();
         classParticipation.mark();
-        assertTrue(classParticipation.getHasParticipated());
+        assertTrue(classParticipation.getParticipated());
     }
 
     @Test
     public void unmark_success() {
         ClassParticipation classParticipation = new ClassParticipation();
         classParticipation.unmark();
-        assertFalse(classParticipation.getHasParticipated());
+        assertFalse(classParticipation.getParticipated());
     }
 
     @Test

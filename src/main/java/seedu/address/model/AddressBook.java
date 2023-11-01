@@ -4,9 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.List;
 
-import javafx.beans.InvalidationListener;
 import javafx.collections.ObservableList;
-import seedu.address.commons.util.InvalidationListenerManager;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.StudentNumber;
@@ -19,7 +17,6 @@ import seedu.address.model.student.UniqueStudentList;
 public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniqueStudentList students;
-    private final InvalidationListenerManager invalidationListenerManager = new InvalidationListenerManager();
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -86,7 +83,6 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void addStudent(Student p) {
         students.add(p);
-        indicateModified();
     }
 
     /**
@@ -99,7 +95,6 @@ public class AddressBook implements ReadOnlyAddressBook {
         requireNonNull(editedStudent);
 
         students.setStudent(target, editedStudent);
-        indicateModified();
     }
 
     /**
@@ -108,7 +103,6 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void removeStudent(Student key) {
         students.remove(key);
-        indicateModified();
     }
 
     /**
@@ -118,14 +112,6 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void setSelectedStudent(Student student) {
         students.setSelectedStudent(student);
-        indicateModified();
-    }
-
-    /**
-     * Resets the selected student for load command.
-     */
-    public void resetSelectedStudent() {
-        students.clearSelectedStudent();
     }
 
     //// util methods
@@ -145,31 +131,6 @@ public class AddressBook implements ReadOnlyAddressBook {
     @Override
     public ObservableList<Student> getSelectedStudent() {
         return students.getSelectedStudent();
-    }
-
-    /**
-     * Adds an {@code InvalidationListener} to this {@code AddressBook}.
-     * @param listener The listener to be added.
-     */
-    @Override
-    public void addListener(InvalidationListener listener) {
-        invalidationListenerManager.addListener(listener);
-    }
-
-    /**
-     * Removes an {@code InvalidationListener} from this {@code AddressBook}.
-     * @param listener The listener to be removed.
-     */
-    @Override
-    public void removeListener(InvalidationListener listener) {
-        invalidationListenerManager.removeListener(listener);
-    }
-
-    /**
-     * Notifies listeners that the address book has been modified.
-     */
-    protected void indicateModified() {
-        invalidationListenerManager.callListeners(this);
     }
 
     @Override

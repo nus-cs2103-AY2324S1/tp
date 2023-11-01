@@ -1,4 +1,4 @@
-package seedu.address.model.student.information;
+package seedu.address.model.student.grades;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;

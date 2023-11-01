@@ -4,13 +4,12 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ASSIGNMENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GRADE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT_NUMBER;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
 
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.logic.CommandHistory;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.student.ClassDetails;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.StudentNumber;
 
@@ -18,20 +17,20 @@ import seedu.address.model.student.StudentNumber;
  * Sets a specific assignment grade for a student.
  */
 public class SetGradeCommand extends Command {
-    public static final String COMMAND_WORD = "grade";
+    public static final String COMMAND_WORD = "set-grade";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Set Student grade for a particular assignment.\n"
-            + "Parameters: "
+            + ": Set a specific assignment grade of for a student.\n"
+            + "Parameters: \n"
             + PREFIX_STUDENT_NUMBER + "STUDENT_NUMBER "
             + PREFIX_ASSIGNMENT + "ASSIGNMENT_NUMBER "
             + PREFIX_GRADE + "GRADE\n"
-            + "Example: "
-            + COMMAND_WORD + " " + PREFIX_STUDENT_NUMBER + "A0123456X "
+            + "Example: \n"
+            + COMMAND_WORD + " " + PREFIX_STUDENT_NUMBER + "A0299999X "
             + PREFIX_ASSIGNMENT + "1 " + PREFIX_GRADE + "100";
 
-    public static final String MESSAGE_SUCCESS = "Grade set for Student: %1$s\n"
-            + "Here are the details:\n";
+    public static final String MESSAGE_SUCCESS = "Grade set for student: %1$s, "
+            + "here are the details:\n";
 
 
     private final StudentNumber studentNumber;
@@ -48,8 +47,7 @@ public class SetGradeCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Model model, CommandHistory commandHistory)
-            throws CommandException {
+    public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
         if (!model.hasStudent(new Student(studentNumber))) {
@@ -57,16 +55,22 @@ public class SetGradeCommand extends Command {
         }
 
         Student studentToGrade = model.getStudent(studentNumber);
-        Student gradedStudent = studentToGrade.copy();
-        gradedStudent.setGrade(assignmentNumber, grade);
+        ClassDetails classDetails = studentToGrade.getClassDetails();
+        classDetails.setAssignGrade(assignmentNumber, grade);
+        Student gradedStudent = new Student(studentToGrade.getName(), studentToGrade.getPhone(),
+            studentToGrade.getEmail(), studentToGrade.getStudentNumber(), classDetails, studentToGrade.getTags(),
+                studentToGrade.getComment());
+
         model.setStudent(studentToGrade, gradedStudent);
-        model.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
-        model.setSelectedStudent(gradedStudent);
-        model.commitAddressBook();
+
+        if (model.isSelectedStudent(gradedStudent)) {
+            model.setSelectedStudent(gradedStudent);
+        }
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, studentNumber)
-                + studentToGrade.getClassDetails().displayAssignments());
+                + classDetails.displayAssignments());
     }
+
 
     @Override
     public boolean equals(Object other) {

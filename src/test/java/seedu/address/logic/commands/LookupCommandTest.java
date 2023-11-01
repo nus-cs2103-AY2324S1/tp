@@ -16,7 +16,6 @@ import java.util.Collections;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.CommandHistory;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -27,9 +26,8 @@ import seedu.address.testutil.TypicalStudents;
  * Contains integration tests (interaction with the Model) for {@code LookupCommand}.
  */
 public class LookupCommandTest {
-    private final Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-    private final Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-    private final CommandHistory commandHistory = new CommandHistory();
+    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
     public void equals() {
@@ -76,7 +74,7 @@ public class LookupCommandTest {
         StudentContainsKeywordsPredicate predicate = new StudentContainsKeywordsPredicate(null,
                 null, null, null, null, null);
         LookupCommand command = new LookupCommand(predicate);
-        assertCommandSuccess(command, model, expectedMessage, expectedModel, commandHistory);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(expectedModel.getFilteredStudentList(), model.getFilteredStudentList());
     }
 
@@ -89,7 +87,7 @@ public class LookupCommandTest {
                 null, TypicalStudents.KEYWORD_MATCHING_MEIER, null, null, null);
         LookupCommand command = new LookupCommand(predicate);
         expectedModel.updateFilteredStudentList(predicate);
-        assertCommandSuccess(command, model, expectedMessage, expectedModel, commandHistory);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(BENSON, DANIEL, HOON), model.getFilteredStudentList());
         expectedModel.deleteStudent(HOON);
         model.deleteStudent(HOON);
@@ -102,7 +100,7 @@ public class LookupCommandTest {
                 null, null, null, null, "friends");
         LookupCommand command = new LookupCommand(predicate);
         expectedModel.updateFilteredStudentList(predicate);
-        assertCommandSuccess(command, model, expectedMessage, expectedModel, commandHistory);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(ALICE, BENSON, DANIEL), model.getFilteredStudentList());
 
         expectedMessage = String.format(MESSAGE_STUDENTS_LISTED_OVERVIEW, 2);
@@ -110,7 +108,7 @@ public class LookupCommandTest {
                 null, TypicalStudents.KEYWORD_MATCHING_MEIER, null, null, "friends");
         command = new LookupCommand(predicate);
         expectedModel.updateFilteredStudentList(predicate);
-        assertCommandSuccess(command, model, expectedMessage, expectedModel, commandHistory);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(BENSON, DANIEL), model.getFilteredStudentList());
     }
 
@@ -122,7 +120,7 @@ public class LookupCommandTest {
                 null, null, null, null, null);
         LookupCommand command = new LookupCommand(predicate);
         expectedModel.updateFilteredStudentList(predicate);
-        assertCommandSuccess(command, model, expectedMessage, expectedModel, commandHistory);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Collections.emptyList(), model.getFilteredStudentList());
 
         // multiple prefixes
@@ -130,7 +128,7 @@ public class LookupCommandTest {
                 null, "thisIsATestName", null, null, "tagTagTag");
         command = new LookupCommand(predicate);
         expectedModel.updateFilteredStudentList(predicate);
-        assertCommandSuccess(command, model, expectedMessage, expectedModel, commandHistory);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Collections.emptyList(), model.getFilteredStudentList());
     }
 

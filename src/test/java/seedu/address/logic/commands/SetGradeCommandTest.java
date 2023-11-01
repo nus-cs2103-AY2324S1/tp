@@ -8,13 +8,11 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_STUDENT_NUMBER_
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showStudentAtIndex;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_STUDENT;
 import static seedu.address.testutil.TypicalStudents.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.CommandHistory;
 import seedu.address.logic.Messages;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
@@ -30,8 +28,7 @@ import seedu.address.testutil.TypicalStudents;
  */
 public class SetGradeCommandTest {
 
-    private final Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-    private final CommandHistory commandHistory = new CommandHistory();
+    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
@@ -47,10 +44,8 @@ public class SetGradeCommandTest {
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setStudent(model.getStudent(editedStudent.getStudentNumber()), editedStudent);
-        expectedModel.setSelectedStudent(editedStudent);
-        expectedModel.commitAddressBook();
 
-        assertCommandSuccess(setGradeCommand, model, expectedMessage, expectedModel, commandHistory);
+        assertCommandSuccess(setGradeCommand, model, expectedMessage, expectedModel);
         assertEquals(editedStudent, model.getSelectedStudent().get(0));
     }
 
@@ -70,11 +65,8 @@ public class SetGradeCommandTest {
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         showStudentAtIndex(expectedModel, INDEX_FIRST_STUDENT);
         expectedModel.setStudent(model.getStudent(editedStudent.getStudentNumber()), editedStudent);
-        expectedModel.setSelectedStudent(editedStudent);
-        expectedModel.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
-        expectedModel.commitAddressBook();
 
-        assertCommandSuccess(setGradeCommand, model, expectedMessage, expectedModel, commandHistory);
+        assertCommandSuccess(setGradeCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
@@ -83,7 +75,7 @@ public class SetGradeCommandTest {
         assertFalse(model.hasStudent(ida));
         SetGradeCommand setGradeCommand = new SetGradeCommand(ida.getStudentNumber(), 1, 100);
 
-        assertCommandFailure(setGradeCommand, model, Messages.MESSAGE_NONEXISTENT_STUDENT_NUMBER, commandHistory);
+        assertCommandFailure(setGradeCommand, model, Messages.MESSAGE_NONEXISTENT_STUDENT_NUMBER);
     }
 
     @Test
@@ -127,4 +119,5 @@ public class SetGradeCommandTest {
                 + "{studentNumber=" + VALID_STUDENT_NUMBER_AMY + ", assignmentNumber=1, grade=50}";
         assertEquals(expected, setGradeCommand.toString());
     }
+
 }

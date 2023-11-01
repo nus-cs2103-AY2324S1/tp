@@ -1,37 +1,38 @@
-package seedu.address.model.student.information;
+package seedu.address.model.student.grades;
 
 /**
  * Represents the class participation of a specific tutorial slot.
  */
 public class ClassParticipation {
 
-    private boolean hasParticipated = false;
+    private boolean isParticipated;
 
     public ClassParticipation() {
+        isParticipated = false;
     }
 
     /**
-     * Constructs a {@code ClassParticipation} with the given hasParticipated value.
+     * Constructs a {@code ClassParticipation} with the given isParticipated value.
      */
-    public ClassParticipation(boolean hasParticipated) {
-        this.hasParticipated = hasParticipated;
+    public ClassParticipation(boolean isParticipated) {
+        this.isParticipated = isParticipated;
     }
 
     public void mark() {
-        hasParticipated = true;
+        isParticipated = true;
     }
 
     public void unmark() {
-        hasParticipated = false;
+        isParticipated = false;
     }
 
-    public boolean getHasParticipated() {
-        return hasParticipated;
+    public boolean getParticipated() {
+        return isParticipated;
     }
 
     @Override
     public String toString() {
-        return hasParticipated ? "Participated" : "Did not Participate";
+        return isParticipated ? "Participated" : "Did not Participate";
     }
 
     @Override
@@ -46,11 +47,11 @@ public class ClassParticipation {
         }
 
         ClassParticipation otherClassParticipation = (ClassParticipation) other;
-        return hasParticipated == otherClassParticipation.hasParticipated;
+        return isParticipated == otherClassParticipation.isParticipated;
     }
 
     @Override
     public int hashCode() {
-        return Boolean.hashCode(hasParticipated);
+        return Boolean.hashCode(isParticipated);
     }
 }

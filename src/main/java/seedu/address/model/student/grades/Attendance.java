@@ -1,13 +1,14 @@
-package seedu.address.model.student.information;
+package seedu.address.model.student.grades;
 
 /**
  * Represents the attendance for a specific tutorial slot.
  */
 public class Attendance {
 
-    private boolean isPresent = false;
+    private boolean isPresent;
 
     public Attendance() {
+        isPresent = false;
     }
 
     /**

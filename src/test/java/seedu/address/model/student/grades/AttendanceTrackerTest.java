@@ -1,4 +1,4 @@
-package seedu.address.model.student.information;
+package seedu.address.model.student.grades;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -8,14 +8,9 @@ import static seedu.address.testutil.Assert.assertThrows;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.student.grades.exceptions.InvalidTutorialIndexException;
 
 public class AttendanceTrackerTest {
-
-    @Test
-    public void constructor_nullAttendanceList_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new AttendanceTracker((Attendance[]) null));
-    }
 
     @Test
     public void constructor_invalidNumOfTut_throwsIllegalArgumentException() {
@@ -46,7 +41,7 @@ public class AttendanceTrackerTest {
     }
 
     @Test
-    public void attendancePercentage_validValues_returnsCorrectPercentage() throws CommandException {
+    public void attendancePercentage_validValues_returnsCorrectPercentage() {
         AttendanceTracker attendanceTracker = new AttendanceTracker(10);
         attendanceTracker.markPresent(Index.fromZeroBased(0));
         attendanceTracker.markPresent(Index.fromZeroBased(2));
@@ -60,61 +55,24 @@ public class AttendanceTrackerTest {
     }
 
     @Test
-    public void markPresent_validTutorialIndex_success() throws CommandException {
+    public void markPresent_validTutorialIndex_success() {
         AttendanceTracker attendanceTracker = new AttendanceTracker(10);
         int tutNum = 1;
         attendanceTracker.markPresent(Index.fromOneBased(tutNum));
-        assertTrue(attendanceTracker.isPresent(Index.fromOneBased(tutNum)));
+        assertEquals(true, attendanceTracker.isPresent(Index.fromOneBased(tutNum)));
     }
 
     @Test
-    public void markPresent_invalidTutorialIndex_throwsCommandException() {
+    public void markPresent_invalidTutorialIndex_throwsInvalidTutorialIndexException() {
         int total = 10;
         AttendanceTracker attendanceTracker = new AttendanceTracker(total);
 
         int num = 100;
-        assertThrows(
-                CommandException.class, ()
-                        -> attendanceTracker.markPresent(Index.fromZeroBased(num)));
+        assertThrows(InvalidTutorialIndexException.class, () -> attendanceTracker.markPresent(Index.fromOneBased(num)));
 
         // edge case
         int edg = total + 1;
-        assertThrows(
-                CommandException.class, ()
-                        -> attendanceTracker.markPresent(Index.fromZeroBased(edg)));
-    }
-
-    @Test
-    public void markAbsent_invalidTutorialIndex_throwsCommandException() {
-        int total = 10;
-        AttendanceTracker attendanceTracker = new AttendanceTracker(total);
-
-        int num = 100;
-        assertThrows(
-                CommandException.class, ()
-                        -> attendanceTracker.markAbsent(Index.fromZeroBased(num)));
-        // edge case
-        int edg = total + 1;
-        assertThrows(
-                CommandException.class, ()
-                        -> attendanceTracker.markAbsent(Index.fromZeroBased(edg)));
-    }
-
-    @Test
-    public void isPresent_invalidTutorialIndex_throwsCommandException() {
-        int total = 10;
-        AttendanceTracker attendanceTracker = new AttendanceTracker(total);
-
-        int num = 100;
-        assertThrows(
-                CommandException.class, ()
-                        -> attendanceTracker.isPresent(Index.fromZeroBased(num)));
-
-        // edge case
-        int edg = total + 1;
-        assertThrows(
-                CommandException.class, ()
-                        -> attendanceTracker.isPresent(Index.fromZeroBased(edg)));
+        assertThrows(InvalidTutorialIndexException.class, () -> attendanceTracker.markPresent(Index.fromOneBased(edg)));
     }
 
     @Test

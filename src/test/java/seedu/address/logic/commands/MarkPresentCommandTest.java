@@ -12,10 +12,7 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_STUDENT;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.logic.CommandHistory;
 import seedu.address.logic.Messages;
-import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -28,11 +25,10 @@ import seedu.address.testutil.TypicalStudents;
  */
 public class MarkPresentCommandTest {
 
-    private final Model model = new ModelManager(TypicalStudents.getTypicalAddressBook(), new UserPrefs());
-    private final CommandHistory commandHistory = new CommandHistory();
+    private Model model = new ModelManager(TypicalStudents.getTypicalAddressBook(), new UserPrefs());
 
     @Test
-    public void execute_validStudentNumber_success() throws IllegalValueException, CommandException {
+    public void execute_validStudentNumber_success() {
         Student studentToMark = TypicalStudents.getTypicalStudents().get(INDEX_FIRST_STUDENT.getZeroBased());
         Index i = Index.fromOneBased(ClassDetails.DEFAULT_COUNT);
         model.setSelectedStudent(studentToMark);
@@ -42,26 +38,20 @@ public class MarkPresentCommandTest {
         String expectedMessage = MarkPresentCommand.MESSAGE_MARK_SUCCESS;
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        Student markedStudent = studentToMark.copy();
-        markedStudent.markPresent(i);
-        expectedModel.setStudent(studentToMark, markedStudent);
-        expectedModel.commitAddressBook();
+        expectedModel.setStudent(studentToMark, studentToMark.markPresent(i));
 
-        assertCommandSuccess(markPresentCommand, model, expectedMessage, expectedModel, commandHistory);
+        assertCommandSuccess(markPresentCommand, model, expectedMessage, expectedModel);
         assertEquals(studentToMark, model.getSelectedStudent().get(0));
     }
 
     @Test
     public void execute_invalidTutorialIndex_throwsCommandException() {
         Student studentToMark = TypicalStudents.getTypicalStudents().get(INDEX_FIRST_STUDENT.getZeroBased());
-        Index i = Index.fromZeroBased(ClassDetails.DEFAULT_COUNT + 1);
+        Index i = Index.fromOneBased(ClassDetails.DEFAULT_COUNT + 1);
 
         MarkPresentCommand markPresentCommand = new MarkPresentCommand(i, studentToMark.getStudentNumber());
 
-        assertCommandFailure(
-                markPresentCommand, model,
-                String.format(ClassDetails.MESSAGE_INVALID_TUTORIAL_SESSION_NUMBER, ClassDetails.DEFAULT_COUNT),
-                commandHistory);
+        assertCommandFailure(markPresentCommand, model, Messages.MESSAGE_INVALID_TUTORIAL_INDEX);
     }
 
     @Test
@@ -69,7 +59,7 @@ public class MarkPresentCommandTest {
         MarkPresentCommand markPresentCommand = new MarkPresentCommand(Index.fromOneBased(1),
                 NONEXISTENT_STUDENT_NUMBER);
 
-        assertCommandFailure(markPresentCommand, model, Messages.MESSAGE_NONEXISTENT_STUDENT_NUMBER, commandHistory);
+        assertCommandFailure(markPresentCommand, model, Messages.MESSAGE_NONEXISTENT_STUDENT_NUMBER);
     }
 
     @Test

@@ -12,7 +12,7 @@ import javafx.scene.layout.Region;
 import seedu.address.model.student.Student;
 
 /**
- * A UI component that displays information of a {@code Student}.
+ * An UI component that displays information of a {@code Student}.
  */
 public class StudentCard extends UiPart<Region> {
 
@@ -78,11 +78,11 @@ public class StudentCard extends UiPart<Region> {
     public XYChart.Series initBarChart(Student student) {
         XYChart.Series<String, Double> series = new XYChart.Series();
         series.setName("Grades");
-        series.getData().add(new XYChart.Data("Assignment marks",
+        series.getData().add(new XYChart.Data("Assignment",
                 student.getClassDetails().getAssignmentPercentage()));
         series.getData().add(new XYChart.Data("Attendance",
                 student.getClassDetails().getAttendancePercentage()));
-        series.getData().add(new XYChart.Data("Class participation",
+        series.getData().add(new XYChart.Data("Class Participation",
                 student.getClassDetails().getClassParticipationPercentage()));
         return series;
     }

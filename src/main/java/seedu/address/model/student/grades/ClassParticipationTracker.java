@@ -1,4 +1,4 @@
-package seedu.address.model.student.information;
+package seedu.address.model.student.grades;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
@@ -12,13 +12,13 @@ import seedu.address.commons.core.index.Index;
 
 /**
  * Represents a Student's class participation grades in the class manager.
- * Guarantees: is valid as declared in {@link #isValidClassParticipation(int)}
+ * Guarantees: is valid as declared in {@link #isValidClassPart(int)}
  */
 public class ClassParticipationTracker implements Tracker {
 
-    public static final String MESSAGE_CONSTRAINTS = "Class participation needs to be a positive integer";
+    public static final String MESSAGE_CONSTRAINTS = "Class Participation needs to be a positive integer";
 
-    private ClassParticipation[] classParticipationList;
+    private ClassParticipation[] classPartList;
 
     /**
      * Constructs an {@code ClassParticipationTracker}.
@@ -27,9 +27,9 @@ public class ClassParticipationTracker implements Tracker {
      *
      */
     public ClassParticipationTracker(int numOfTut) {
-        checkArgument(isValidClassParticipation(numOfTut), MESSAGE_CONSTRAINTS);
-        classParticipationList = new ClassParticipation[numOfTut];
-        IntStream.range(0, numOfTut).forEach(i -> classParticipationList[i] = new ClassParticipation());
+        checkArgument(isValidClassPart(numOfTut), MESSAGE_CONSTRAINTS);
+        classPartList = new ClassParticipation[numOfTut];
+        IntStream.range(0, numOfTut).forEach(i -> classPartList[i] = new ClassParticipation());
     }
 
     /**
@@ -39,41 +39,15 @@ public class ClassParticipationTracker implements Tracker {
      */
     public ClassParticipationTracker(List<Boolean> classParticipationTracker) {
         requireNonNull(classParticipationTracker);
-        classParticipationList = new ClassParticipation[classParticipationTracker.size()];
+        classPartList = new ClassParticipation[classParticipationTracker.size()];
         IntStream.range(0, classParticipationTracker.size())
-                .forEach(i -> classParticipationList[i] = new ClassParticipation(classParticipationTracker.get(i)));
+                .forEach(i -> classPartList[i] = new ClassParticipation(classParticipationTracker.get(i)));
     }
-
-    /**
-     * Constructs an {@code ClassParticipationTracker} with a given class participation list.
-     * Used for duplication.
-     * @param classParticipationList A list of booleans stored in {@code ClassParticipation}.
-     */
-    public ClassParticipationTracker(ClassParticipation[] classParticipationList) {
-        requireNonNull(classParticipationList);
-        this.classParticipationList = classParticipationList;
-    }
-
-    /**
-     * Returns a deep copy of the class participation tracker.
-     * @return A deep copy of {@code ClassParticipationTracker}.
-     */
-    public ClassParticipationTracker copy() {
-        ClassParticipation[] newClassParticipationList = new ClassParticipation[this.classParticipationList.length];
-        for (int i = 0; i < this.classParticipationList.length; i++) {
-            newClassParticipationList[i] = new ClassParticipation();
-            if (this.classParticipationList[i].getHasParticipated()) {
-                newClassParticipationList[i].mark();
-            }
-        }
-        return new ClassParticipationTracker(newClassParticipationList);
-    }
-
 
     /**
      * Returns true if a given int is a valid number of tutorials.
      */
-    public static boolean isValidClassParticipation(int numOfTut) {
+    public static boolean isValidClassPart(int numOfTut) {
         return numOfTut >= 0;
     }
 
@@ -83,7 +57,7 @@ public class ClassParticipationTracker implements Tracker {
      * @param tutNum The tutorial number.
      */
     public void markParticipated(Index tutNum) {
-        classParticipationList[tutNum.getZeroBased()].mark();
+        classPartList[tutNum.getZeroBased()].mark();
     }
 
     /**
@@ -92,7 +66,7 @@ public class ClassParticipationTracker implements Tracker {
      * @param tutNum The tutorial number.
      */
     public void markDidNotParticipate(Index tutNum) {
-        classParticipationList[tutNum.getZeroBased()].unmark();
+        classPartList[tutNum.getZeroBased()].unmark();
     }
 
     /**
@@ -114,8 +88,8 @@ public class ClassParticipationTracker implements Tracker {
      */
     public List<Boolean> getJson() {
         List<Boolean> classParticipationTracker = new ArrayList<>();
-        for (ClassParticipation classParticipation : classParticipationList) {
-            classParticipationTracker.add(classParticipation.getHasParticipated());
+        for (ClassParticipation classParticipation : classPartList) {
+            classParticipationTracker.add(classParticipation.getParticipated());
         }
         return classParticipationTracker;
     }
@@ -127,15 +101,15 @@ public class ClassParticipationTracker implements Tracker {
      */
     public double getPercentage() {
         // Case when there are no tutorials
-        if (classParticipationList.length == 0) {
+        if (classPartList.length == 0) {
             return 100;
         }
         int score = 0;
         int totalScore = 0;
-        for (int i = 0; i < classParticipationList.length; i++) {
-            if (classParticipationList[i] != null) {
+        for (int i = 0; i < classPartList.length; i++) {
+            if (classPartList[i] != null) {
                 totalScore += 1;
-                if (classParticipationList[i].getHasParticipated()) {
+                if (classPartList[i].getParticipated()) {
                     score += 1;
                 }
             }
@@ -145,10 +119,9 @@ public class ClassParticipationTracker implements Tracker {
 
     @Override
     public String toString() {
-        StringBuilder ret = new StringBuilder("Class participation:\n");
-        for (int i = 0; i < classParticipationList.length; i++) {
-            ret.append("Tutorial ").append(i + 1).append(": ")
-                    .append(classParticipationList[i].toString()).append("\n");
+        StringBuilder ret = new StringBuilder("Class Part:\n");
+        for (int i = 0; i < classPartList.length; i++) {
+            ret.append("Tutorial ").append(i + 1).append(": ").append(classPartList[i].toString()).append("\n");
         }
         return ret.toString();
     }
@@ -165,29 +138,29 @@ public class ClassParticipationTracker implements Tracker {
         }
 
         ClassParticipationTracker otherClassParticipationTracker = (ClassParticipationTracker) other;
-        return Arrays.equals(classParticipationList, otherClassParticipationTracker.classParticipationList);
+        return Arrays.equals(classPartList, otherClassParticipationTracker.classPartList);
     }
 
     @Override
     public int hashCode() {
-        return Arrays.hashCode(classParticipationList);
+        return Arrays.hashCode(classPartList);
     }
 
     /**
      * Updates the length of the class participation tracker. Whenever the tutorial count changes.
      */
     public void updateTutorialCountChange(int tutorialCount) {
-        if (tutorialCount == classParticipationList.length) {
+        if (tutorialCount == classPartList.length) {
             return;
         }
-        ClassParticipation[] newClassParticipationList = new ClassParticipation[tutorialCount];
+        ClassParticipation[] newClassPartList = new ClassParticipation[tutorialCount];
         for (int i = 0; i < tutorialCount; i++) {
-            if (i < classParticipationList.length) {
-                newClassParticipationList[i] = classParticipationList[i];
+            if (i < classPartList.length) {
+                newClassPartList[i] = classPartList[i];
             } else {
-                newClassParticipationList[i] = new ClassParticipation();
+                newClassPartList[i] = new ClassParticipation();
             }
         }
-        classParticipationList = newClassParticipationList;
+        classPartList = newClassPartList;
     }
 }

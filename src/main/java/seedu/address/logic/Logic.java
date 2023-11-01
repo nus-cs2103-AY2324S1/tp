@@ -55,12 +55,6 @@ public interface Logic {
     void setGuiSettings(GuiSettings guiSettings);
 
     /**
-     * Returns an unmodifiable view of the list of commands entered by the user.
-     * The list is ordered from the least recent command to the most recent command.
-     */
-    ObservableList<String> getHistory();
-
-    /**
      * Returns the user prefs' theme.
      */
     String getTheme();

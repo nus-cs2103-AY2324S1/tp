@@ -14,7 +14,7 @@ public class ClassDetailCard extends UiPart<Region> {
 
     private static final String FXML = "ClassDetailCard.fxml";
 
-    private static final String DIVIDER = " ";
+    private static final String DIVIDER = "-----------------------------------";
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -42,8 +42,6 @@ public class ClassDetailCard extends UiPart<Region> {
     private Label divider1;
     @FXML
     private Label divider2;
-    @FXML
-    private Label divider3;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Student} and index to display.
@@ -58,7 +56,6 @@ public class ClassDetailCard extends UiPart<Region> {
         assignments.setText(student.getClassDetails().assignmentTracker.toString());
         divider1.setText(DIVIDER);
         divider2.setText(DIVIDER);
-        divider3.setText(DIVIDER);
     }
 
 }

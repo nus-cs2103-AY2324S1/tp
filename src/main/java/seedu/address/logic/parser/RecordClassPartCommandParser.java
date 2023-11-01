@@ -6,21 +6,21 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PARTICIPATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT_NUMBER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TUTORIAL_SESSION;
 
-import seedu.address.logic.commands.RecordClassParticipationCommand;
+import seedu.address.logic.commands.RecordClassPartCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.student.StudentNumber;
 
 /**
- * Parses input arguments and creates a new RecordClassParticipationCommand object
+ * Parses input arguments and creates a new RecordClassPartCommand object
  */
-public class RecordClassParticipationCommandParser implements Parser<RecordClassParticipationCommand> {
+public class RecordClassPartCommandParser implements Parser<RecordClassPartCommand> {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the RecordClassParticipationCommand
+     * Parses the given {@code String} of arguments in the context of the RecordClassPartCommand
      * and returns an SetGradeCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
-    public RecordClassParticipationCommand parse(String args) throws ParseException {
+    public RecordClassPartCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_STUDENT_NUMBER,
                PREFIX_TUTORIAL_SESSION, PREFIX_PARTICIPATION);
@@ -28,7 +28,7 @@ public class RecordClassParticipationCommandParser implements Parser<RecordClass
         if (!argMultimap.arePrefixesPresent(PREFIX_STUDENT_NUMBER, PREFIX_TUTORIAL_SESSION, PREFIX_PARTICIPATION)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, RecordClassParticipationCommand.MESSAGE_USAGE));
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, RecordClassPartCommand.MESSAGE_USAGE));
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_STUDENT_NUMBER,
@@ -40,17 +40,17 @@ public class RecordClassParticipationCommandParser implements Parser<RecordClass
             sessionNumber = Integer.parseInt(argMultimap.getValue(PREFIX_TUTORIAL_SESSION).get());
         } catch (NumberFormatException e) {
             throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, RecordClassParticipationCommand.MESSAGE_USAGE));
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, RecordClassPartCommand.MESSAGE_USAGE));
         }
 
         String participation = argMultimap.getValue(PREFIX_PARTICIPATION).get();
         if (!participation.equalsIgnoreCase("true")
                 && !participation.equalsIgnoreCase("false")) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    RecordClassParticipationCommand.MESSAGE_USAGE));
+                    RecordClassPartCommand.MESSAGE_USAGE));
         }
-        boolean hasParticipated = Boolean.parseBoolean(participation);
-        return new RecordClassParticipationCommand(studentNumber, sessionNumber, hasParticipated);
+        boolean isParticipated = Boolean.parseBoolean(participation);
+        return new RecordClassPartCommand(studentNumber, sessionNumber, isParticipated);
     }
 
 }

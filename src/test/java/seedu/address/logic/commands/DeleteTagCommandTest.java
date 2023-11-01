@@ -13,7 +13,6 @@ import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.CommandHistory;
 import seedu.address.logic.Messages;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
@@ -28,8 +27,7 @@ import seedu.address.testutil.TypicalStudents;
 
 public class DeleteTagCommandTest {
 
-    private final Model model = new ModelManager(new AddressBook(getTypicalAddressBook()), new UserPrefs());
-    private final CommandHistory commentHistory = new CommandHistory();
+    private Model model = new ModelManager(new AddressBook(getTypicalAddressBook()), new UserPrefs());
 
     @Test
     public void execute_deleteTag_success() {
@@ -45,9 +43,8 @@ public class DeleteTagCommandTest {
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setStudent(model.getFilteredStudentList().get(1), taggedStudent);
-        expectedModel.commitAddressBook();
 
-        assertCommandSuccess(deleteTagCommand, model, expectedMessage, expectedModel, commentHistory);
+        assertCommandSuccess(deleteTagCommand, model, expectedMessage, expectedModel);
         assertEquals(taggedStudent.getTags(), model.getFilteredStudentList().get(1).getTags());
     }
 
@@ -57,7 +54,7 @@ public class DeleteTagCommandTest {
             new StudentNumber(VALID_STUDENT_NUMBER_AMY),
             TypicalStudents.ALICE.getTags());
 
-        assertCommandFailure(deleteTagCommand, model, Messages.MESSAGE_STUDENT_DOES_NOT_EXIST, commentHistory);
+        assertCommandFailure(deleteTagCommand, model, Messages.MESSAGE_STUDENT_DOES_NOT_EXIST);
     }
 
     @Test

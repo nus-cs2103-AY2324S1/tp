@@ -9,8 +9,7 @@ src/main/resources/docs/
 /*.iml
 
 # Storage/log files
-data/*
-!data/classmanager.json
+/data/
 /config.json
 /preferences.json
 /*.log.*
