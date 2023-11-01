@@ -9,6 +9,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.appointment.Appointment;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.BloodType;
 import seedu.address.model.person.Condition;
@@ -40,9 +41,10 @@ public class JsonAdaptedPatient extends JsonAdaptedPerson {
                               @JsonProperty("email") String email, @JsonProperty("address") String address,
                               @JsonProperty("remark") String remark, @JsonProperty("gender") String gender,
                               @JsonProperty("ic") String ic, @JsonProperty("tags") List<JsonAdaptedTag> tags,
+                              @JsonProperty("appointments") List<JsonAdaptedAppointment> appointments,
                               @JsonProperty("condition") String condition, @JsonProperty("bloodType") String bloodType,
                               @JsonProperty("emergencyContact") String emergencyContact) {
-        super(name, phone, email, address, remark, gender, ic, tags);
+        super(name, phone, email, address, remark, gender, ic, appointments, tags);
         this.condition = condition;
         this.bloodType = bloodType;
         this.emergencyContact = emergencyContact;
@@ -79,8 +81,13 @@ public class JsonAdaptedPatient extends JsonAdaptedPerson {
         final Set<Tag> modelTags = new HashSet<>(personTags);
         final Condition modelCondition = checkCondition();
         final BloodType modelBloodType = checkBloodType();
+        final List<Appointment> personAppointments = new ArrayList<>();
+        for (JsonAdaptedAppointment appointment : this.getAppointments()) {
+            personAppointments.add(appointment.toModelType());
+        }
+        final Set<Appointment> modelAppointments = new HashSet<>(personAppointments);
         return new Patient(modelName, modelPhone, modelEmergencyContact, modelEmail, modelAddress, modelRemark,
-                modelGender, modelIc, modelCondition, modelBloodType, modelTags);
+                modelGender, modelIc, modelCondition, modelBloodType, modelAppointments, modelTags);
     }
 
     /**

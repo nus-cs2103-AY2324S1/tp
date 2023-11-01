@@ -12,8 +12,8 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_NRIC_CHERYL;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NRIC_DEREK;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_CHERYL;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_DEREK;
-import static seedu.address.testutil.TypicalPatient.AMY;
-import static seedu.address.testutil.TypicalPatient.BENSON;
+import static seedu.address.testutil.TypicalAppointment.APPOINTMENT_1;
+import static seedu.address.testutil.TypicalAppointment.APPOINTMENT_2;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -30,11 +30,11 @@ public class TypicalDoctor {
     public static final Doctor ALICE = new DoctorBuilder().withName("Alice Pauline")
             .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")
             .withPhone("94351253").withRemark("She wants to become a Surgeon.").withGender("F").withIc("S9631267K")
-            .withTags("friends").withPatients(new ArrayList<>(Arrays.asList(AMY, BENSON))).build();
+            .withTags("friends").withAppointments(APPOINTMENT_1, APPOINTMENT_2).build();
     public static final Doctor BOYD = new DoctorBuilder().withName("Boyd Anders")
             .withAddress("311, Clementi Ave 2, #02-25").withRemark("His weakness is being a Perfectionist")
             .withEmail("boyda@example.com").withPhone("98765432").withGender("M").withIc("S9331268K")
-            .withTags("owesMoney", "friends").withPatients(new ArrayList<>(Arrays.asList(AMY))).build();
+            .withTags("owesMoney", "friends").withAppointments(APPOINTMENT_1).build();
     public static final Doctor CARLOS = new DoctorBuilder().withName("Carlos Sainz").withPhone("95352563")
             .withEmail("smoothoperator@example.com").withAddress("wall street").withGender("M")
             .withIc("S9831269K").build();

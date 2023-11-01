@@ -9,18 +9,20 @@ import org.junit.jupiter.api.Test;
 import seedu.address.testutil.PatientBuilder;
 
 public class GenderPredicateTest {
-
     @Test
-    public void testGenderPredicate() {
+    public void correctGenderPredicate_returnsTrue() {
         GenderPredicate malePredicate = new GenderPredicate("M");
         GenderPredicate femalePredicate = new GenderPredicate("F");
-
         // Test with a person having MALE gender
         assertTrue(malePredicate.test(new PatientBuilder().withGender("M").build()));
-
         // Test with a person having FEMALE gender
         assertTrue(femalePredicate.test(new PatientBuilder().withGender("F").build()));
+    }
 
+    @Test
+    public void wrongGenderPredicate_returnsFalse() {
+        GenderPredicate malePredicate = new GenderPredicate("M");
+        GenderPredicate femalePredicate = new GenderPredicate("F");
         // Test with a person having a different gender
         assertFalse(malePredicate.test(new PatientBuilder().withGender("F").build()));
         assertFalse(femalePredicate.test(new PatientBuilder().withGender("M").build()));
