@@ -2,6 +2,7 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT_NUMBER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_WILDCARD;
 
@@ -33,14 +34,15 @@ public class TagCommandParser implements Parser<TagCommand> {
     public TagCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args,
-                PREFIX_TAG, PREFIX_WILDCARD);
+                PREFIX_TAG, PREFIX_WILDCARD, PREFIX_STUDENT_NUMBER);
 
-        if (!StudentNumber.isValidStudentNumber(argMultimap.getPreamble())) {
+        String number = argMultimap.getValue(PREFIX_STUDENT_NUMBER).orElse("");
+        if (!StudentNumber.isValidStudentNumber(number)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    TagCommand.MESSAGE_USAGE));
+                    TagCommand.MESSAGE_TAG_FAILED + TagCommand.MESSAGE_USAGE));
         }
 
-        StudentNumber studentNumber = new StudentNumber(argMultimap.getPreamble());
+        StudentNumber studentNumber = new StudentNumber(number);
 
         parseTags(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(this::setTags);
 

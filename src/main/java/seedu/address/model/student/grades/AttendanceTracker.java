@@ -66,6 +66,19 @@ public class AttendanceTracker implements Tracker {
     }
 
     /**
+     * Marks attendanceTracker of a student as absent.
+     *
+     * @param tutNum The tutorial number.
+     */
+    public void markAbsent(Index tutNum) throws InvalidTutorialIndexException {
+        requireNonNull(tutNum);
+        if (tutNum.getZeroBased() >= attendanceList.length) {
+            throw new InvalidTutorialIndexException();
+        }
+        attendanceList[tutNum.getZeroBased()].unmark();
+    }
+
+    /**
      * Returns true if the attendance is present for the given tutorial number
      *
      * @param tutNum The tutorial number.
@@ -75,15 +88,6 @@ public class AttendanceTracker implements Tracker {
             throw new InvalidTutorialIndexException();
         }
         return attendanceList[tutNum.getZeroBased()].getIsPresent();
-    }
-
-    /**
-     * Marks attendanceTracker of a student as absent.
-     *
-     * @param tutNum The tutorial number.
-     */
-    public void markAbsent(Index tutNum) {
-        attendanceList[tutNum.getZeroBased()].unmark();
     }
 
     /**

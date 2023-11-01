@@ -15,7 +15,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_FILE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT_NUMBER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TUTORIAL_COUNT;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_STUDENT;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -35,7 +34,10 @@ import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.LoadCommand;
 import seedu.address.logic.commands.LookupCommand;
-import seedu.address.logic.commands.MarkCommand;
+import seedu.address.logic.commands.MarkAbsentCommand;
+import seedu.address.logic.commands.MarkPresentAllCommand;
+import seedu.address.logic.commands.MarkPresentCommand;
+import seedu.address.logic.commands.RandomCommand;
 import seedu.address.logic.commands.RecordClassPartCommand;
 import seedu.address.logic.commands.SetGradeCommand;
 import seedu.address.logic.commands.TagCommand;
@@ -81,16 +83,16 @@ public class AddressBookParserTest {
         Student student = new StudentBuilder().build();
         EditStudentDescriptor descriptor = new EditStudentDescriptorBuilder(student).build();
         EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
-                + INDEX_FIRST_STUDENT.getOneBased() + " "
+                + TypicalStudents.ALICE.getStudentNumber() + " "
                 + StudentUtil.getEditStudentDescriptorDetails(descriptor), true);
-        assertEquals(new EditCommand(INDEX_FIRST_STUDENT, descriptor), command);
+        assertEquals(new EditCommand(TypicalStudents.ALICE.getStudentNumber(), descriptor), command);
     }
 
     @Test
     public void parseCommand_tag() throws Exception {
         TagCommand command = (TagCommand) parser.parseCommand(TagCommand.COMMAND_WORD
             + " "
-            + TypicalStudents.ALICE.getStudentNumber()
+            + PREFIX_STUDENT_NUMBER + TypicalStudents.ALICE.getStudentNumber()
             + " "
             + StudentUtil.getTagDetails(TypicalStudents.ALICE), true);
         assertEquals(new TagCommand(TypicalStudents.ALICE.getStudentNumber(), TypicalStudents.ALICE.getTags()),
@@ -98,13 +100,40 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommand_mark() throws Exception {
+    public void parseCommand_markPresent() throws Exception {
         int tut = ClassDetails.DEFAULT_COUNT;
         Student student = new StudentBuilder().build();
-        MarkCommand command = (MarkCommand) parser.parseCommand(MarkCommand.COMMAND_WORD + " "
+        MarkPresentCommand command = (MarkPresentCommand) parser.parseCommand(MarkPresentCommand.COMMAND_WORD + " "
                 + tut + " " + PREFIX_STUDENT_NUMBER + student.getStudentNumber(),
                 true);
-        assertEquals(new MarkCommand(Index.fromOneBased(tut), student.getStudentNumber()), command);
+        assertEquals(new MarkPresentCommand(Index.fromOneBased(tut), student.getStudentNumber()), command);
+    }
+
+    @Test
+    public void parseCommand_markPresentAll() throws Exception {
+        int tut = ClassDetails.DEFAULT_COUNT;
+        MarkPresentAllCommand command = (MarkPresentAllCommand) parser
+                .parseCommand(MarkPresentAllCommand.COMMAND_WORD + " " + tut, true);
+        assertEquals(new MarkPresentAllCommand(Index.fromOneBased(tut)), command);
+    }
+
+    @Test
+    public void parseCommand_markAbsent() throws Exception {
+        int tut = ClassDetails.DEFAULT_COUNT;
+        Student student = new StudentBuilder().build();
+        MarkAbsentCommand command = (MarkAbsentCommand) parser.parseCommand(MarkAbsentCommand.COMMAND_WORD + " "
+                        + tut + " " + PREFIX_STUDENT_NUMBER + student.getStudentNumber(),
+                true);
+        assertEquals(new MarkAbsentCommand(Index.fromOneBased(tut), student.getStudentNumber()), command);
+    }
+
+    @Test
+    public void parseCommand_random() throws Exception {
+        int num = 1;
+        RandomCommand command = (RandomCommand) parser.parseCommand(RandomCommand.COMMAND_WORD + " "
+                        + num,
+                true);
+        assertEquals(new RandomCommand(Index.fromOneBased(num)), command);
     }
 
     @Test
@@ -171,7 +200,7 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_view() throws Exception {
         ViewCommand command = (ViewCommand) parser.parseCommand(
-                ViewCommand.COMMAND_WORD + " " + VALID_STUDENT_NUMBER_AMY, true);
+                ViewCommand.COMMAND_WORD + " " + STUDENT_NUMBER_DESC_AMY, true);
         assertEquals(new ViewCommand(new StudentNumber(VALID_STUDENT_NUMBER_AMY)), command);
         assertThrows(ParseException.class,
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewCommand.MESSAGE_USAGE), ()

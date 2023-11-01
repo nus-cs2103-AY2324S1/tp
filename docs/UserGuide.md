@@ -5,7 +5,7 @@
 ---
 # Class Manager 2023 User Guide
 
-Class Manager 2023 (CM 23) is a **desktop app for managing your students' contacts,
+Class Manager 2023 (CM 23) is a **desktop app for managing your students' contacts in the class,
 optimized for use via a Command Line Interface** (CLI) while still having the benefits of a
 Graphical User Interface (GUI). If you can type fast, CM 23 can get your contact
 management tasks done faster than traditional GUI apps.
@@ -34,9 +34,7 @@ management tasks done faster than traditional GUI apps.
 
    * `add n/John Doe p/98765432 e/johnd@example.com s/A0245234A c/T11` : Adds a student named `John Doe` to the Class Manager.
 
-   * `delete 3` : Deletes the 3rd student detail shown in the current list.
-
-   * `clear` : Deletes all student details.
+   * `delete A0245234A` : Deletes the student with student number A0245234A, which is added in the previous step.
 
    * `exit` : Exits the app.
 
@@ -79,14 +77,18 @@ Format: `help`
 ---
 ### Adding a student : `add`
 
-This feature in Class Manager 2023 is a robust tool that empowers CS2103T TAs to add new student information according
-to the specified parameters (FIRST NAME, LAST NAME, SCHOOL EMAIL, CLASS NUMBER, and STUDENT NUMBER, TAG[Optional]).
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL s/STUDENT_NUMBER c/CLASS_NUMBER [t/TAG]…​`
+Adds a student to the class manager.
+
+
+Format: `add n/NAME p/PHONE e/EMAIL s/STUDENT NUMBER c/CLASS NUMBER [t/TAG]...​`
 
 * **ALL** the fields must be provided.
-* The FIRST NAME and LAST NAME fields are case-sensitive.
+* The NAME fields are case-sensitive.
 * STUDENT NUMBER needs to be unique
+* The class details of a student will be automatically populated to be 0 for all fields during the 
+creation of a student.
+* Comment for a student can only be added after the student is instantiated.
 
 <box type="tip" seamless>
 
@@ -94,8 +96,9 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL s/STUDENT_NUMBER c/CLASS_NUMBER [t/TA
 </box>
 
 Examples:
-* `add n/ Ngee Yong Lim e/ e0930481@u.nus.edu c/ T11 s/ A0249112A t/Best Student t/Possible TA`
-* `add n/ Boh Shin Yeo e/ e09301234@u.nus.edu c/ T5 s/ A0126362A`
+* `add n/John Doe p/98765432 e/johnd@example.com s/A0245234A c/T11 t/friends t/owesMoney`
+* `add n/John Doe p/98765432 e/johnd@example.com s/A0245234A c/T11`
+
 
 ---
 ### Listing all student details : `list`
@@ -109,11 +112,13 @@ Format: `list`
 
 Edits an existing student in the class manager.
 
-Format: `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]​`
+Format: `edit STUDENT_NUMBER [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [s/NEW_STUDENT_NUMBER] [c/CLASS_NUMBER]`
 
-* Edits the student at the specified `INDEX`. The index refers to the index number shown in the displayed student list. The index **must be a positive integer** 1, 2, 3, …​
+* Edits the student with the student number `STUDENT_NUMBER`.
+* The STUDENT_NUMBER must be valid and exist.
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
+* The NEW_STUDENT_NUMBER must be valid and unique (does not exist in the class manager).
 
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st student to be `91234567` and `johndoe@example.com` respectively.
@@ -124,18 +129,17 @@ Examples:
 
 Tags the existing student in the class manager.
 
-Format: `tag STUDENT_NUMBER [/add] [/delete] t/[TAG]…​`
+Format: `tag s/STUDENT_NUMBER [/add] [/delete] t/[TAG]…​`
 
 * Tags the student with the specified `STUDENT_NUMBER`.
-* When editing tags without `/add` or `/delete`, the existing tags of the student will be removed.
-* You can remove all the student’s tags by typing without `/add` and `/delete`
-  and `t/` without specifying any tags after it.
+* When editing tags without `/add` or `/delete`, the existing tags of the student will be overwritten.
+* You can remove all the student’s tags by typing `t/` without specifying any tags after it.
 
 Examples:
-* `tag A1234567N t/smart t/shy t/funny` replace all tags of the specified student with smart, shy and funny.
-* `tag A1234567N /add t/Java` adds the Java tag to specified student.
-* `tag A1234567N /delete t/shy` removes the shy tag from the specified student.
-* `tag A1234567N t/` clear all tags from the specified student.
+* `tag s/A1234567N t/smart t/shy t/funny` replace all tags of the specified student with smart, shy and funny.
+* `tag s/A1234567N /add t/Java` adds the Java tag to specified student.
+* `tag s/A1234567N /delete t/shy` removes the shy tag from the specified student.
+* `tag s/A1234567N t/` clear all tags from the specified student.
 
 ---
 ### Adding comment to a student : `comment`
@@ -191,17 +195,42 @@ Examples:
 * `config #t/2 #a/3` sets the tutorial count to 2 and assignment count to 3.
 
 ---
-### Marking tutorial attendance for a student : `mark`
+### Marking tutorial attendance for a student as present : `mark-pre`
 
-Marking tutorial attendance for an existing student in the class manager.
+Marking tutorial attendance for an existing student as present in the class manager.
 
-Format: `mark TUTORIAL_INDEX s/STUDENT_NUMBER`
+Format: `mark-pre TUTORIAL_INDEX s/STUDENT_NUMBER`
 
 * The `STUDENT_NUMBER` must be valid and exist.
 * The `TUTORIAL_INDEX` must be a valid positive integer, within the configured tutorial count using the `config` command.
 
 Examples:
-* `mark 1 s/A0249112A`
+* `mark-pre 1 s/A0249112A`
+
+---
+### Marking tutorial attendance for all students displayed as present : `mark-pre-all`
+
+Marking tutorial attendance for all students displayed as present in the class manager.
+
+Format: `mark-pre-all TUTORIAL_INDEX`
+
+* The `TUTORIAL_INDEX` must be a valid positive integer, within the configured tutorial count using the `config` command.
+
+Examples:
+* `mark-pre-all 1`
+
+---
+### Marking tutorial attendance for a student as absent : `mark-abs`
+
+Marking tutorial attendance for an existing student as absent in the class manager.
+
+Format: `mark-abs TUTORIAL_INDEX s/STUDENT_NUMBER`
+
+* The `STUDENT_NUMBER` must be valid and exist.
+* The `TUTORIAL_INDEX` must be a valid positive integer, within the configured tutorial count using the `config` command.
+
+Examples:
+* `mark-abs 1 s/A0249112A`
 
 ---
 ### Setting assignment grade for a student : `set-grade`
@@ -240,25 +269,38 @@ Examples:
 
 Views the class details of a student that will be displayed on the right side of the application.
 
-Format: `view STUDENT_NUMBER`
+Format: `view s/STUDENT_NUMBER`
 
 * The STUDENT_NUMBER must be valid e.g `T*`.
 * The STUDENT_NUMBER must belong to a student in the class manager.
 
 Example:
-* `view A0245234A`
-![result for 'view A0245234A'](images/ViewCommand.png)
+
+* `view s/A0245234A`
+![result for 'view s/A0245234A'](images/ViewCommand.png)
 
 ---
+### Selecting students randomly: `random`
+
+Select a specific number of students from all students displayed in the class manager.
+
+Format: `random INDEX`
+
+* The `INDEX` must be a valid positive integer.
+
+Example:
+
+* `random 2`
+
 ### Deleting a student : `delete`
 
 Deletes the specific student.
 
 Format: `delete s/STUDENT_NUMBER`
 
-* The STUDENT NUMBER must be valid and exist.
+* The STUDENT_NUMBER must be valid and exist.
 
-Examples:
+Example:
 * `delete s/A0249112A`
 
 ---
@@ -340,23 +382,31 @@ _Details coming soon ..._
 --------------------------------------------------------------------------------------------------------------------
 
 ## Command summary
-| Action     | Format, Examples                                                                                                                                    |
-|------------|-----------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL c/CLASS_NUMBER [t/TAG]…​` <br> e.g `add n/James Ho p/22224444 e/jamesho@example.com c/T11 t/friend t/colleague`  |
-| **Comment**| `comment s/STUDENT_NUMBER c/COMMENT` <br> e.g. `comment s/A0249112A c/This student is very hardworking.`                                            |
-| **Delete** | `delete s/STUDENT_NUMBER`<br> e.g. `delete s/A0249112A`                                                                                             |
-| **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]​`<br> e.g.`edit 2 n/James Lee e/jameslee@example.com`                                   |
-| **Tag**    | `tag STUDENT_NUMBER [/add] [/delete] t/[TAG]…​` <br> e.g. `tag A0123456N t/smart t/shy`                                                             |
-| **Lookup** | `lookup [c/CLASS_NUMBER] [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [s/STUDENT_NUMBER] [t/TAG]` <br> e.g. `lookup c/T11`                                   |
-| **Config** | `config #t/TUTORIAL_COUNT #a/ASSIGNMENT_COUNT`<br> e.g. `config #t/13 #a/3`                                                                         |
-| **Mark**   | `mark TUTORIAL_INDEX s/STUDENT_NUMBER` <br> e.g. `mark 1 s/A0245234A`                                                                               |
-| **Set Grade**   | `set-grade s/STUDENT_NUMBER a/ASSIGNMENT_INDEX g/GRADE` <br> e.g. `set-grade s/A0245234A a/1 g/100`                                                 |
-| **Record Part** | `record-part s/STUDENT_NUMBER tut/TUTORIAL_INDEX part/PARTICIPATION_LEVEL` <br> e.g. `record-part s/A0245234A tut/1 part/true`                      |
-| **View**   | `view STUDENT_NUMBER` <br> e.g. `view A0245234A`                                                                                                    |
-| **Load**   | `load f/FILE_NAME`<br> e.g. `load f/export-v1`                                                                                                      |
-| **Clear**  | `clear`                                                                                                                                             |
-| **List**   | `list`                                                                                                                                              |
-| **Help**   | `help`                                                                                                                                              |
-| **Exit**   | `exit`                                                                                                                                              |
-| **Theme**  | `theme`                                                                                                                                             |
+| Action               | Format, Examples                                                                                                                                                 |
+|----------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**              | `add n/NAME p/PHONE_NUMBER e/EMAIL c/CLASS_NUMBER [t/TAG]…​` <br> e.g `add n/James Ho p/22224444 e/jamesho@example.com c/T11 t/friend t/colleague`               |
+| **Comment**          | `comment s/STUDENT_NUMBER c/COMMENT` <br> e.g. `comment s/A0249112A c/This student is very hardworking.`                                                         |
+| **Delete**           | `delete s/STUDENT_NUMBER`<br> e.g. `delete s/A0249112A`                                                                                                          |
+| **Edit**             | `edit STUDENT_NUMBER [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [s/NEW_STUDENT_NUMBER] [c/CLASS_NUMBER]`<br> e.g.`edit A0245234A n/John Bob p/98761234 e/johnd@exp.com` |
+| **Tag**              | `tag STUDENT_NUMBER [/add] [/delete] t/[TAG]…​` <br> e.g. `tag A0123456N t/smart t/shy`                                                                          |
+| **Lookup**           | `lookup [c/CLASS_NUMBER] [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [s/STUDENT_NUMBER] [t/TAG]` <br> e.g. `lookup c/T11`                                                |
+| **Config**           | `config #t/TUTORIAL_COUNT #a/ASSIGNMENT_COUNT`<br> e.g. `config #t/13 #a/3`                                                                                      |
+| **Mark Present**     | `mark-pre TUTORIAL_INDEX s/STUDENT_NUMBER` <br> e.g. `mark-pre 1 s/A0245234A`                                                                                    |
+| **Mark Present All** | `mark-pre-all TUTORIAL_INDEX` <br> e.g. `mark-pre-all 1`                                                                                                         |
+| **Mark Absent**      | `mark-abs TUTORIAL_INDEX s/STUDENT_NUMBER` <br> e.g. `mark-abs 1 s/A0245234A`
+| **Set Grade**        | `set-grade s/STUDENT_NUMBER a/ASSIGNMENT_INDEX g/GRADE` <br> e.g. `set-grade s/A0245234A a/1 g/100`                                                              |
+| **Record Part**      | `record-part s/STUDENT_NUMBER tut/TUTORIAL_INDEX part/PARTICIPATION_LEVEL` <br> e.g. `record-part s/A0245234A tut/1 part/true`                                   |
+| **Random**           | `random INDEX` <br> e.g. `random 2`                                   |
+| **View**             | `view STUDENT_NUMBER` <br> e.g. `view A0245234A`                                                                                                                 |
+| **Load**             | `load f/FILE_NAME`<br> e.g. `load f/export-v1`                                                                                                                   |
+| **Clear**            | `clear`                                                                                                                                                          |
+| **List**             | `list`                                                                                                                                                           |
+| **Help**             | `help`                                                                                                                                                           |
+| **Exit**             | `exit`                                                                                                                                                           |
+| **Theme**            | `theme`                                                                                                                                                          |
 
+--------------------------------------------------------------------------------------------------------------------
+
+## Glossary
+
+* TODO: add glossary

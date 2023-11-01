@@ -78,6 +78,9 @@ public class Student {
     public ClassDetails getClassDetails() {
         return classDetails;
     }
+    public String getClassNumber() {
+        return this.classDetails.getClassNumber();
+    }
 
     public JsonAdaptedClassDetails getJsonAdaptedClassDetails() {
         return classDetails.getJsonAdaptedClassDetails();
@@ -115,6 +118,15 @@ public class Student {
         return new Student(this.name, this.phone, this.email,
                 this.studentNumber, this.classDetails.markPresent(tutNum), this.tags, this.comment);
     }
+
+    /**
+     * Marks the specific tutorial as absent.
+     */
+    public Student markAbsent(Index tutNum) {
+        return new Student(this.name, this.phone, this.email,
+                this.studentNumber, this.classDetails.markAbsent(tutNum), this.tags, this.comment);
+    }
+
 
     /**
      * Returns true if both persons have the same identity and data fields.
