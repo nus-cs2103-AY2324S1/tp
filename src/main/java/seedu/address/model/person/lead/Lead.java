@@ -7,6 +7,11 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Lead {
     public static final String MESSAGE_CONSTRAINTS = "Lead should only take values hot|warm|cold";
+    // Number of weeks before next followup
+    private static final int HOT_LEAD_FOLLOWUP = 1;
+    private static final int WARM_LEAD_FOLLOWUP = 4;
+    private static final int COLD_LEAD_FOLLOWUP = 8;
+    private static final int NO_LEAD_FOLLOWUP = 4;
     private final LeadType leadType;
 
     /**
@@ -23,6 +28,19 @@ public class Lead {
         this.leadType = lead;
     }
 
+    public int getFollowUpPeriod() {
+        switch (leadType) {
+        case HOT:
+            return HOT_LEAD_FOLLOWUP;
+        case WARM:
+            return WARM_LEAD_FOLLOWUP;
+        case COLD:
+            return COLD_LEAD_FOLLOWUP;
+        default:
+            return NO_LEAD_FOLLOWUP;
+        }
+    }
+
     /**
      * Determines whether a given string is a valid lead.
      * A valid lead is either "hot", "warm" or "cold".
@@ -34,6 +52,27 @@ public class Lead {
         return lead.equalsIgnoreCase("HOT")
                 || lead.equalsIgnoreCase("WARM")
                 || lead.equalsIgnoreCase("COLD");
+    }
+
+    /**
+     * Returns true if the lead is hot.
+     */
+    public boolean isHot() {
+        return leadType.equals(LeadType.HOT);
+    }
+
+    /**
+     * Returns true if the lead is warm.
+     */
+    public boolean isWarm() {
+        return leadType.equals(LeadType.WARM);
+    }
+
+    /**
+     * Returns true if the lead is cold.
+     */
+    public boolean isCold() {
+        return leadType.equals(LeadType.COLD);
     }
 
     @Override

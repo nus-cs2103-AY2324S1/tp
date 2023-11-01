@@ -1,7 +1,7 @@
 package seedu.address.model.person.interaction;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 /**
  * Represents an interaction with the client in the addressbook.
@@ -30,11 +30,11 @@ public class Interaction {
         }
     }
 
-    public static final SimpleDateFormat DEFAULT_DATE_FORMAT = new SimpleDateFormat("dd-MMM-yyyy");
+    public static final DateTimeFormatter DEFAULT_DATE_FORMAT = DateTimeFormatter.ofPattern("dd-MMM-yyyy");
 
     private final String interactionNote;
     private final Outcome outcome;
-    private final Date date;
+    private final LocalDate date;
 
     /**
     * Constructs a {@code Interaction} with a default LeadStatus of UNKNOWN.
@@ -45,7 +45,7 @@ public class Interaction {
     public Interaction(String interactionNote) {
         this.interactionNote = interactionNote;
         this.outcome = Outcome.UNKNOWN;
-        this.date = new Date();
+        this.date = LocalDate.now();
     }
 
     /**
@@ -57,7 +57,7 @@ public class Interaction {
     public Interaction(String interactionNote, Outcome outcome) {
         this.interactionNote = interactionNote;
         this.outcome = outcome;
-        this.date = new Date();
+        this.date = LocalDate.now();
     }
 
     /**
@@ -67,10 +67,10 @@ public class Interaction {
      * @param outcome A valid LeadStatus.
      * @param date A valid date.
      */
-    public Interaction(String interactionNote, Outcome outcome, Date date) {
+    public Interaction(String interactionNote, Outcome outcome, LocalDate date) {
         this.interactionNote = interactionNote;
         this.outcome = outcome;
-        this.date = date;
+        this.date = LocalDate.now();
     }
 
     public String getInteractionNote() {
@@ -81,7 +81,7 @@ public class Interaction {
         return this.outcome;
     }
 
-    public Date getDate() {
+    public LocalDate getDate() {
         return this.date;
     }
 
