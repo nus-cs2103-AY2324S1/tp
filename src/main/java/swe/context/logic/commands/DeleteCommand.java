@@ -41,7 +41,7 @@ public class DeleteCommand extends Command {
         // Collect contacts to delete
         for (Index index : targetIndices) {
             if (index.getZeroBased() >= currentContactList.size()) {
-                throw new CommandException(Messages.INVALID_CONTACT_DISPLAYED_INDEX);
+                throw new CommandException(Messages.INVALID_DELETE_INDEX);
             }
             contactsToDelete.add(currentContactList.get(index.getZeroBased()));
         }

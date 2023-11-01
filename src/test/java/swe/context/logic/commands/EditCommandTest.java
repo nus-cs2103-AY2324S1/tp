@@ -123,7 +123,7 @@ public class EditCommandTest {
         EditContactDescriptor descriptor = new EditContactDescriptorBuilder().withName(TestData.Valid.NAME_BOB).build();
         EditCommand editCommand = new EditCommand(outOfBoundIndex, descriptor);
 
-        assertCommandFailure(editCommand, model, Messages.INVALID_CONTACT_DISPLAYED_INDEX);
+        assertCommandFailure(editCommand, model, Messages.INVALID_EDIT_INDEX);
     }
 
     /**
@@ -140,7 +140,7 @@ public class EditCommandTest {
         EditCommand editCommand = new EditCommand(outOfBoundIndex,
                 new EditContactDescriptorBuilder().withName(TestData.Valid.NAME_BOB).build());
 
-        assertCommandFailure(editCommand, model, Messages.INVALID_CONTACT_DISPLAYED_INDEX);
+        assertCommandFailure(editCommand, model, Messages.INVALID_EDIT_INDEX);
     }
 
     @Test

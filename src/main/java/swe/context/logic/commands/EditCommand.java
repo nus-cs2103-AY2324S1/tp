@@ -73,7 +73,7 @@ public class EditCommand extends Command {
         List<Contact> lastShownList = model.getFilteredContactList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.INVALID_CONTACT_DISPLAYED_INDEX);
+            throw new CommandException(Messages.INVALID_EDIT_INDEX);
         }
 
         Contact contactToEdit = lastShownList.get(index.getZeroBased());

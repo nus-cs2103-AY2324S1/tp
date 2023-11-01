@@ -29,11 +29,13 @@ public final class Messages {
     // Specific commands
     public static final String COMMAND_CLEAR_SUCCESS = "All contacts have been removed!";
     public static final String COMMAND_EXIT_SUCCESS = "Exiting app...";
+    public static final String INVALID_DELETE_INDEX =
+            "One or more of the contact indices provided are invalid";
+    public static final String INVALID_EDIT_INDEX =
+            "The contact index provided is invalid";
 
     // Contacts
     // Messages associated with Attributes constraints
-    public static final String INVALID_CONTACT_DISPLAYED_INDEX =
-        "One or more of the contact indices provided are invalid";
     public static final String NAME_INVALID =
             "Names must be alphanumeric (spaces allowed).";
     public static final String PHONE_INVALID =
