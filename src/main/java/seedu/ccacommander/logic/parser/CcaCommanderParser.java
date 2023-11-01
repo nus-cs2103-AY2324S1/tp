@@ -25,6 +25,7 @@ import seedu.ccacommander.logic.commands.HelpCommand;
 import seedu.ccacommander.logic.commands.ListCommand;
 import seedu.ccacommander.logic.commands.RedoCommand;
 import seedu.ccacommander.logic.commands.UndoCommand;
+import seedu.ccacommander.logic.commands.UnenrolCommand;
 import seedu.ccacommander.logic.parser.exceptions.ParseException;
 
 /**
@@ -84,6 +85,9 @@ public class CcaCommanderParser {
 
         case EnrolCommand.COMMAND_WORD:
             return new EnrolCommandParser().parse(arguments);
+
+        case UnenrolCommand.COMMAND_WORD:
+            return new UnenrolCommandParser().parse(arguments);
 
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();

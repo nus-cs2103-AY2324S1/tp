@@ -112,7 +112,7 @@ public class EditEnrolmentCommandTest {
     }
 
     @Test
-    public void execute_invalidEventIndexUnfilteredList_failure() {
+    public void execute_invalidMemberIndexUnfilteredList_failure() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredMemberList().size() + 1);
         EditEnrolmentDescriptor descriptor = new EditEnrolmentDescriptorBuilder().withHours(VALID_HOURS_BOXING).build();
         EditEnrolmentCommand editEventCommand =
@@ -122,7 +122,7 @@ public class EditEnrolmentCommandTest {
     }
 
     @Test
-    public void execute_invalidMemberIndexUnfilteredList_failure() {
+    public void execute_invalidEventIndexUnfilteredList_failure() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredEventList().size() + 1);
         EditEnrolmentDescriptor descriptor = new EditEnrolmentDescriptorBuilder().withHours(VALID_HOURS_BOXING).build();
         EditEnrolmentCommand editEventCommand =
@@ -134,10 +134,10 @@ public class EditEnrolmentCommandTest {
     @Test
     public void execute_enrolmentDoesNotExist_failure() {
         EditEnrolmentDescriptor descriptor = new EditEnrolmentDescriptorBuilder().withHours(VALID_HOURS_BOXING).build();
-        EditEnrolmentCommand editEventCommand =
+        EditEnrolmentCommand editEnrolmentCommand =
                 new EditEnrolmentCommand(INDEX_FIRST_MEMBER, INDEX_SECOND_EVENT, descriptor);
 
-        assertCommandFailure(editEventCommand, model, String.format(Messages.MESSAGE_ENROLMENT_DOES_NOT_EXIST,
+        assertCommandFailure(editEnrolmentCommand, model, String.format(Messages.MESSAGE_ENROLMENT_DOES_NOT_EXIST,
                 INDEX_FIRST_MEMBER.getOneBased(), INDEX_SECOND_EVENT.getOneBased()));
     }
 
