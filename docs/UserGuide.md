@@ -111,11 +111,14 @@ Below is a quick overview of the various components of our interface.
 
 ![ui overview](images/uiOverview.png)
 
-| Component      | Description                                                                                | 
-|----------------|--------------------------------------------------------------------------------------------|
-| Command Box    | You will enter your [commands](#glossary) along with its [parameters](#glossary) here.     | 
-| Result Display | Displays the results of your commands.<br/>Any error messages will also be displayed here. | 
-| Tutor Details  | Contains information related to the tutor like name, phone number etc.                     |
+| Component        | Description                                                                                | 
+|------------------|--------------------------------------------------------------------------------------------|
+| Command Box      | You will enter your [commands](#glossary) along with its [parameters](#glossary) here.     |
+| Menu Bar         | Contains dropdown menu options for the application.                                        |
+| Result Display   | Displays the results of your commands.<br/>Any error messages will also be displayed here. | 
+| Tutor Details    | Contains information related to the tutor like name, phone number etc.                     |
+| Schedule Details | Contains information related to the schedule like assigned tutor, start time etc.          |
+| Current Time     | Displays the current date and time.                                                        |
 
 [Back To Top](#table-of-contents)
 
@@ -248,39 +251,57 @@ Refer to [input information](#input-examples) for details about valid inputs.
 
 #### Editing a tutor: `edit-t`
 
-Edits an existing tutor in the addressbook.
+Edits an existing tutor found in TutorConnect.
+
+##### :star: First time users
+{:.no_toc}
+
+**Scenario**
+
+Imagine that tutor John Doe has changed his phone number to **87654321**.\
+As a tuition centre coordinator, you want to have the most up-to-date information on your tutors.  
+
+Let's use the edit tutor command to update his phone number!
+
+**Follow these steps**
+
+1. Type in `list-t`, press enter, and find John Doe in the list of tutors.
+2. Let's say you found him at position 9.
+3. Type in `edit-t 9 p/87654321` and press enter.
+
+**What you can expect to see**
+
+Viola! His phone number has now been updated to **87654321**.
 
 ![edit tutor](images/editTutor.png)
 
-**Format**: `edit-t TUTOR_INDEX n/NAME p/PHONE NUMBER e/EMAIL`
+##### :star::star::star: Experienced users
+{:.no_toc}
 
-**Examples**:
-* `edit-t 1 n/John Doe`
-* `edit-t 2 n/John Doe e/johndoe@email.com`
+**Command format**
 
-**Acceptable values for each parameter**:
-* `TUTOR_INDEX`: Only number input accepted, starting from 1 to the last tutor index shown in the list of
-  tutors.
-* `NAME`: Only contain alphanumeric characters and spaces, and should not be blank
-* `PHONE NUMBER`: Only contain numbers, and should be at least 3 digits long
-* `EMAIL`: Of the format local-part@domain
+![edit tutor command](images/editTutorCommandSyntax.png)
 
-**Expected output**:
-* `Edited Tutor: John Doe; Phone: 99272758; Email: johndoe@email.com`
+**Errors you might encounter**
 
-**Error messages**:
-* `Invalid command format!`: Invalid or missing TUTOR_INDEX.
-* `Names should only contain alphanumeric characters and spaces, and it should not be blank`: Tutor name input was
-  either invalid or blank.
-* `Phone numbers should only contain numbers, and it should be at least 3 digits long`: Tutor phone number input was
-  either invalid or blank.
-* `Emails should be of the format local-part@domain and adhere to the following constraints:`: Tutor email input was
-  either invalid or blank.
-* `Multiple values specified for the following single-valued field(s): n/`: More than 1 `n/` was given in the command
-* `Multiple values specified for the following single-valued field(s): p/`: More than 1 `p/` was given in the command
-* `Multiple values specified for the following single-valued field(s): e/`: More than 1 `e/` was given in the command
-* `This tutor already exists in the address book.`: There is a tutor with the same name in the address book.
-* `At least one field to edit must be provided.`: There is no `n/`, `p/` or `e/` tag provided to edit a field.
+Here is a list of the error messages you may encounter, when the command is entered incorrectly:
+
+| Error Message                                                                              | Reason                                                      |
+|--------------------------------------------------------------------------------------------|-------------------------------------------------------------|
+| `Invalid command format!`                                                                  | Invalid or missing TUTOR_INDEX                              |
+| `The person index provided is invalid`                                                     | TUTOR_INDEX entered is not in the range of number of tutors |
+| `Names should only contain alphanumeric characters and spaces, and it should not be blank` | Tutor name input was either invalid or blank                |
+| `Phone numbers should only contain numbers, and it should be at least 3 digits long`       | Tutor phone number input was either invalid or blank        |
+| `Emails should be of the format local-part@domain and adhere to the following constraints` | Tutor email input was either invalid or blank               |
+| `Multiple values specified for the following single-valued field(s): n/`                   | More than 1 `n/` was given in the command                   |
+| `Multiple values specified for the following single-valued field(s): p/`                   | More than 1 `p/` was given in the command                   |
+| `Multiple values specified for the following single-valued field(s): e/`                   | More than 1 `e/` was given in the command                   |
+| `This tutor already exists in the address book`                                            | There is a tutor with the same name in the address book     |
+| `At least one field to edit must be provided`                                              | There is no `n/`, `p/` or `e/` tag provided to edit a field |
+
+You can also refer to [input information](#input-examples) for details about valid inputs.
+
+[Back To Top](#table-of-contents)
 
 #### Listing all tutors: `list-t`
 
@@ -312,35 +333,55 @@ Displays a list of all tutors in the address book in a table format.
 
 Find tutors whose names contain any of the given keywords.
 
+##### :star: First time users
+{:.no_toc}
+
+**Scenario**
+
+You would like to contact tutor **John Doe**, but you can't remember his phone number. You try to look for him in the 
+list of tutors but the list has gotten far too long, and you can't find him.
+
+Fret not! The find tutor command is here to save the day.
+
+**Follow these steps**
+
+Type in `find-t john` and press enter.
+
+**What you can expect to see**
+
+Tada! You have found tutor **John Doe** (and any other tutors whose name contains John).
+
 ![find tutor](images/findTutor.png)
 
-**Format**: `find-t KEYWORD [MORE_KEYWORDS]`
+##### :star::star::star: Experienced users
+{:.no_toc}
 
-**Examples**:
-* `find-t John` returns `John Smith` and `John Doe`
-* `find-t Alex David Li` returns `Alex David Li`
+**Command format**
 
-**Acceptable values for each parameter**:
-* `KEYWORD`: Any input accepted
+![find tutor command](images/findTutorCommandSyntax.png)
 
-    <div markdown="block" class="alert alert-info">
+**Errors you might encounter**
 
-    **:information_source: Search behaviour**<br>
+This command is relatively straight forward to use and has only 1 possible error:
 
-    * Search is case-insensitive. e.g. `hans` will match `Hans`
-    * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-    * Only the tutor name is searched.
-    * Only full words will be matched. e.g. `Han` will not match `Hans`
-    * Tutors matching at least one keyword will be returned (i.e. OR search). e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+| Error Message             | Reason                         |
+|---------------------------|--------------------------------|
+| `Invalid command format!` | No search keyword was provided |
 
-    </div>
+<div markdown="block" class="alert alert-info">
 
-**Expected output**:
-* `2 tutors listed!`
-* `0 tutors listed!`
+**:information_source: Search behaviour**<br>
 
-**Error messages**:
-* `Invalid command format!`: No search keyword provided.
+* The search is case-insensitive. e.g. `hans` will match for `Hans` too!
+* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
+* Only full words will be matched. e.g. `Han` will not match `Hans`
+* Tutors matching at least one keyword will be matched. e.g. `Hans Bo` will match both `Hans Gruber` and `Bo Yang`
+
+</div>
+
+You can also refer to [input information](#input-examples) for details about valid inputs.
+
+[Back To Top](#table-of-contents)
 
 #### Deleting a tutor: `delete-t`
 
@@ -454,7 +495,8 @@ Here is a list of the error messages you may encounter, when the command is ente
 
 | Error Message                                                                                                      | Reason                                                                                      |
 |--------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------|
-| `Invalid command format!`                                                                                          | SCHEDULE_INDEX entered is not in the range of number of schedules                           |
+| `Invalid command format!`                                                                                          | Invalid or missing SCHEDULE_INDEX                                                           |
+| `The schedule index provided is invalid`                                                                           | SCHEDULE_INDEX entered is not in the range of number of schedules                           |
 | `EndTime should only contain a valid date and time in the format "yyyy-MM-ddTHH:mm", and it should not be blank`   | The end time entered is not in the correct datetime format                                  |
 | `StartTime should only contain a valid date and time in the format "yyyy-MM-ddTHH:mm", and it should not be blank` | The start time entered is not in the correct datetime format                                |
 | `Multiple values specified for the following single-valued field(s): st/`                                          | More than 1 `st/` was given in the command                                                  |
@@ -645,25 +687,49 @@ specified schedule.
 
 #### Unmarking a schedule: `unmark`
 
-Removes the status of a schedule in the address book based on their index number in the table of schedules listed.
+Removes the status of a schedule.
+
+##### :star: First time users
+{:.no_toc}
+
+**Scenario**
+
+You have accidentally marked the wrong schedule to be COMPLETED.\
+The class for that schedule has yet to occur so its status should be left empty.
+
+Don't worry as you can do just that with the unmark command.
+
+**Follow these steps**
+
+1. Type in `list-s`, press enter, and find the schedule you want to unmark.
+2. Let's say the schedule to be unmarked is at position 1.
+3. Type in `unmark 1` and press enter.
+
+**What you can expect to see**
+
+Phew! The schedule has now been unmarked.
 
 ![unmark schedule](images/unmarkSchedule.png)
 
-**Format:** `unmark SCHEDULE_INDEX`
+##### :star::star::star: Experienced users
+{:.no_toc}
 
-**Example:**
-* `unmark 5` removes the status of the schedule indexed at 5 in the schedule list.
-* `list-s` followed by `unmark 2` removes the status of the schedule indexed at 2 in the schedule list.
+**Command format**
 
-**Acceptable values for each parameter:**
-* `SCHEDULE_INDEX`: Only numerical input that ranges from 1 to the last schedule shown in the list of schedules.
+![unmark schedule command](images/unmarkScheduleCommandSyntax.png)
 
-**Expected output:**
-* `Unmarked Schedule: Alex Yeoh; Start Time: Sep 15 2023 09:00; End Time: Sep 15 2023 11:00`
+**Errors you might encounter**
 
-**Error messages:**
-* `Index number given is out of range`: The schedule index provided is invalid
-* `Invalid command format!`: Invalid or missing SCHEDULE_INDEX.
+Here is a list of the error messages you may encounter, when the command is entered incorrectly:
+
+| Error Message                            | Reason                                                            |
+|------------------------------------------|-------------------------------------------------------------------|
+| `Invalid command format!`                | Invalid or missing SCHEDULE_INDEX                                 |
+| `The schedule index provided is invalid` | SCHEDULE_INDEX entered is not in the range of number of schedules |
+
+You can also refer to [input information](#input-examples) for details about valid inputs.
+
+[Back To Top](#table-of-contents)
 
 #### Deleting a schedule: `delete-s`
 
@@ -690,33 +756,51 @@ Deletes a schedule in the address book based on their index number in the table 
 
 #### View calendar: `show`
 
-Display schedules on a specified day as a calendar view.
+Displays schedules on a specified day as a calendar view.
 
-**Format:** `show DATE`
+##### :star: First time users
+{:.no_toc}
 
-**Acceptable values**:
-* `DATE`: Only dates in `yyyy-MM-dd` format is accepted
+**Scenario**
 
-**Example:**
-* `show 2023-01-06` shows all schedules on 6 Jan 2023.
-* `show 2023-09-25` shows all schedules on 25 September 2023.
+After adding all your tutor's schedules, you would like to view the schedules on a given day as a calendar.
 
-**Expected output:**
-* Viewing calendar.
+You're in luck with the calendar view command!
+
+**Follow these steps**
+
+To view the schedules on **15 September 2023** as a calendar, type in `show 2023-09-15` and press enter.
+
+**What you can expect to see**
+
+Woah look at that! The schedules are now being displayed in a calendar form.
 
 ![show calendar](images/showCalendar.png)
 
-**Error messages**:
-* `Invalid command format!`: Invalid or missing DATE.
+##### :star::star::star: Experienced users
+{:.no_toc}
+
+**Command format**
+
+![show calendar command](images/showCommandSyntax.png)
+
+**Errors you might encounter**
+
+This command might seem complicated, but it is easy to use with only 1 possible error:
+
+| Error Message             | Reason                  |
+|---------------------------|-------------------------|
+| `Invalid command format!` | Invalid or missing DATE |
 
 <div markdown="block" class="alert alert-warning">
 
 **:warning: Calendar Limitations**<br>
-* Currently, the calendar does not support displaying of schedules that extend over multiple days.
 * Schedules with very short duration may not be displayed correctly (the schedule's index, status and time will not be visible).
-* Adding or modifying schedules will hide the calendar view. Use `show DATE` to view calendar again. 
+* Using any other commands will hide the calendar view. Use the `show` command to view calendar again. 
 
 </div>
+
+You can also refer to [input information](#input-examples) for details about valid inputs.
 
 [Back To Top](#table-of-contents)
 
@@ -771,19 +855,64 @@ You can also refer to [input information](#input-examples) for details about val
 
 Clears all data in TutorConnect.
 
-More details coming soon...
+##### :star: First time users
+{:.no_toc}
+
+**Scenario**
+
+You realised that all your current tutors and schedules created are wrong, and you would like to delete them all.
+
+Instead of deleting them one by one, use the clear command!
 
 <div markdown="block" class="alert alert-warning">
 
 **:warning: Warning**<br>
 
-This action is irreversible! Do not enter the command unless you are very sure.
+This action is irreversible! Your tutors and schedules will be gone **FOREVER**.
+
+Do not enter the command unless you are very sure.
 
 </div>
 
+**Follow these steps**
+
+Type in `clear` and press enter.
+
+**What you can expect to see**
+
+That's it. It's all gone. TutorConnect should now display an empty address book.
+
+![clear addressbook](images/clearAddressBook.png)
+
+##### :star::star::star: Experienced users
+{:.no_toc}
+
+There are no additional information about this command.
+
+As an experienced user, you should be aware of the dangers of the `clear` command.  
+
+[Back To Top](#table-of-contents)
+
 #### Help: `help`
 
-More details coming soon...
+Opens a window with instructions for getting help.
+
+**Scenario**
+
+Unsure on how to use a command or encounter an unknown error?
+
+Get help from within the app by using the help command!
+
+**Follow these steps**
+
+Type in `help` and press enter.
+
+**What you can expect to see**
+
+Is that a bird? Is that a plane?
+Nope it's the help window!
+
+![help window](images/helpWindow.png)
 
 <div markdown="block" class="alert alert-success">
 
