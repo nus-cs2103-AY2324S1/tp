@@ -4,9 +4,46 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.text.Text?>
+
 <HBox xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml/1" stylesheets="@css/dashboard.css">
-    <VBox styleClass="charts">
-        <Label text="Interaction Statistics"/>
-        <PieChart fx:id="pieChart" legendVisible="false"/>
+    <VBox styleClass="stats">
+        <HBox spacing="8">
+            <VBox styleClass="stats-card">
+                <Label text="Clients" styleClass="stats-title"/>
+                <Text styleClass="subtitle">uncontacted / contacting / closed</Text>
+                <HBox alignment="CENTER_LEFT">
+                    <Label fx:id="uncontacted" id="uncontacted" styleClass="big-number"/>
+                    <Label text=" / " styleClass="big-number"/>
+                    <Label fx:id="contacting" id="contacting" styleClass="big-number"/>
+                    <Label text=" / " styleClass="big-number"/>
+                    <Label fx:id="closed" id="closed" styleClass="big-number"/>
+                </HBox>
+            </VBox>
+            <VBox styleClass="stats-card">
+                <Label text="Average interactions" styleClass="stats-title"/>
+                <Text styleClass="subtitle">per client</Text>
+                <Label fx:id="interactionsPerClient" styleClass="big-number" style="-fx-text-fill: #85c1e9;"/>
+            </VBox>
+        </HBox>
+
+
+        <VBox alignment="CENTER">
+            <Label text="Interaction Outcomes" styleClass="chart-title"/>
+            <PieChart fx:id="pieChart" legendVisible="false"/>
+        </VBox>
+
+        <BarChart fx:id="barChart" legendVisible="false" horizontalGridLinesVisible="false"
+                  verticalGridLinesVisible="false">
+            <xAxis>
+                <CategoryAxis fx:id="xAxis" side="BOTTOM"/>
+            </xAxis>
+            <yAxis>
+                <NumberAxis fx:id="yAxis" side="LEFT"/>
+            </yAxis>
+        </BarChart>
     </VBox>
 </HBox>
