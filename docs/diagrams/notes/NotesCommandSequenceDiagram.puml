@@ -26,7 +26,7 @@ deactivate Command
 -> Command : execute(model)
 
 activate Command
-Command -> Model : lastShownList = getFilteredPersonList()
+Command -> Model : getFilteredPersonList()
 activate Model
 Model --> Command : lastShownList
 deactivate Model
