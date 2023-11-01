@@ -1,19 +1,20 @@
 #copyButton, #helpMessage {
-    -fx-text-fill: white;
+    -fx-text-fill: white; /* White text for better contrast */
+    -fx-font-size: 14; /* Smaller font size for better readability */
 }
 
 #copyButton {
-    -fx-background-color: dimgray;
+    -fx-background-color: #4CAF50; /* A pleasant green color */
 }
 
 #copyButton:hover {
-    -fx-background-color: gray;
+    -fx-background-color: #43A047; /* Slightly darker green on hover */
 }
 
 #copyButton:armed {
-    -fx-background-color: darkgray;
+    -fx-background-color: #388E3C; /* Darker green when button is pressed */
 }
 
 #helpMessageContainer {
-    -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-background-color: #2E3192; /* Dark blue-purple for the message container */
 }

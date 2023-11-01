@@ -18,3 +18,18 @@
 .tooltip-text {
     -fx-text-fill: white;
 }
+
+/* MenuItems */
+.menu-item {
+    -fx-background-color: #2e4a8a; /* Fill color */
+}
+
+/* Hover effect for MenuItems */
+.menu-item:hover {
+    -fx-background-color: green; /* Change the color on hover */
+}
+
+/* File and Help Menus */
+.menu {
+    -fx-spacing: 5; /* Add spacing between File and Help buttons */
+}

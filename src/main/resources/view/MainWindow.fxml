@@ -38,27 +38,46 @@
                       layoutX="61.0"
                       layoutY="83.0"
                       pickOnBounds="true"
-                      preserveRatio="true"
-              >
+                      preserveRatio="true">
                 <image>
-                  <Image
-                          url="@/images/logo_large.png"
-                  />
+                  <Image url="@/images/logo_large.png"/>
                 </image>
               </ImageView>
             </children>
             <padding>
-              <Insets bottom="10" left="10" right="10" top="20" />
+              <Insets bottom="10" left="10" right="10" top="20"/>
             </padding>
             <HBox>
-              <MenuBar fx:id="menuBar" VBox.vgrow="NEVER" styleClass="sideBar">
-                <Menu mnemonicParsing="false" text="File">
-                  <MenuItem mnemonicParsing="false" onAction="#handleExit" text="Exit" />
-                </Menu>
-                <Menu mnemonicParsing="false" text="Help">
-                  <MenuItem fx:id="helpMenuItem" mnemonicParsing="false" onAction="#handleHelp" text="Help" />
-                </Menu>
-              </MenuBar>
+              <VBox styleClass="menu">
+                <MenuBar fx:id="fileBar" VBox.vgrow="NEVER">
+                  <Menu mnemonicParsing="false" text="File" styleClass="menu-item">
+                    <MenuItem mnemonicParsing="false" onAction="#handleExit" text="Exit" styleClass="menu-item">
+                      <graphic>
+                        <ImageView fitHeight="16.0" fitWidth="16.0">
+                          <image>
+                            <Image url="@/images/Exit.png"/>
+                          </image>
+                        </ImageView>
+                      </graphic>
+                    </MenuItem>
+                  </Menu>
+                </MenuBar>
+              </VBox>
+              <VBox styleClass="menu">
+                <MenuBar fx:id="menuBar" VBox.vgrow="NEVER">
+                  <Menu mnemonicParsing="false" text="Help">
+                    <MenuItem fx:id="helpMenuItem" mnemonicParsing="false" onAction="#handleHelp" text="Help" styleClass="menu-item">
+                      <graphic>
+                        <ImageView fitHeight="16.0" fitWidth="16.0">
+                          <image>
+                            <Image url="@/images/help_icon.png"/>
+                          </image>
+                        </ImageView>
+                      </graphic>
+                    </MenuItem>
+                  </Menu>
+                </MenuBar>
+              </VBox>
             </HBox>
           </VBox>
           <VBox fx:id="bookingList" styleClass="pane-with-border" minWidth="340" prefWidth="340" HBox.hgrow="ALWAYS">
