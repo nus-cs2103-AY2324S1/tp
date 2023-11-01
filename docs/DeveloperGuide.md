@@ -206,7 +206,7 @@ The following activity diagram summarises what happens when a user executes an e
 - Can type fast and prefer typing
 - Are reasonably comfortable with command-line inputs
 - Wish to label contacts by category (e.g. professors, classmates from certain courses)
-- Have many different ways to reach their contacts (e.g. local/overseas phone number, NUS/personal/other university email/gmail, Telegram, Discord etc.)
+- Have many different ways to reach their contacts (e.g. local/overseas phone number, Telegram, Discord etc.)
 
 **Value proposition**: Manage contacts quickly via text commands, with useful features relevant to SoC students.
 

@@ -9,7 +9,7 @@ It is optimised for use via an in-app Command Line Interface (CLI), while still 
 It has useful features relevant to NUS SoC students:
 
 - Tagging contacts by category: You could tag all your professors and classmates with custom tags such as "Professor", "Tutorial mate", "CS2103" etc., then filter by tag.
-- Storing different ways to reach people: By adding alternate contact details, you could have multiple phone numbers, NUS email, gmail, Telegram, Discord etc. all in the same contact.
+- Storing different ways to reach people: By adding alternate contact details, you could have local phone number, overseas phone number, Telegram, Discord etc. all in the same contact.
 
 If you can type fast, prefer typing, and are reasonably comfortable with CLI inputs, ConText can let you manage contacts faster than traditional GUI apps.
 
