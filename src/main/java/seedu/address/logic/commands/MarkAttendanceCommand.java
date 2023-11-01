@@ -36,6 +36,7 @@ public class MarkAttendanceCommand extends Command {
     public static final String MESSAGE_PRESENT = " is present for week ";
     public static final String MESSAGE_UPDATED_SUCCESS = "Attendance updated for person: ";
     public static final String MESSAGE_PERSON_NOT_FOUND = "Person not found.";
+    public static final String MESSAGE_PERSON_NOT_FOUND_MULTIPLE = "Persons not found: ";
     private final List<String> identifiers; // This can be either studentName or studentID
     private final boolean isPresent;
     private final Week week;
@@ -59,6 +60,7 @@ public class MarkAttendanceCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         StringBuilder successMessage = new StringBuilder();
+        StringBuilder errorMessage = new StringBuilder();
 
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
@@ -71,8 +73,13 @@ public class MarkAttendanceCommand extends Command {
                     .findFirst()
                     .orElse(null);
 
-            if (targetPerson == null) {
+            if (targetPerson == null && identifiers.size() == 1) {
                 throw new CommandException(MESSAGE_PERSON_NOT_FOUND);
+            }
+
+            if (targetPerson == null && identifiers.size() > 1) {
+                errorMessage.append(String.format(MESSAGE_PERSON_NOT_FOUND_MULTIPLE + "%s\n", identifier));
+                continue;
             }
 
             Optional<Attendance> existingAttendance = targetPerson.getAttendanceForSpecifiedWeek(week);
@@ -110,6 +117,10 @@ public class MarkAttendanceCommand extends Command {
                             attendance.getReason()));
                 }
             }
+        }
+
+        if (errorMessage.length() > 0) {
+            successMessage.append(errorMessage.toString());
         }
 
         // Allows marked attendance to be shown immediately, but breaks all MarkAttendanceCommandTests
