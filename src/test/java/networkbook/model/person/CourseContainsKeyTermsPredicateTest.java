@@ -3,6 +3,7 @@ package networkbook.model.person;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Arrays;
@@ -12,6 +13,7 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 
 import networkbook.model.person.filter.CourseContainsKeyTermsPredicate;
+import networkbook.model.person.filter.SpecContainsKeyTermsPredicate;
 import networkbook.testutil.PersonBuilder;
 
 public class CourseContainsKeyTermsPredicateTest {
@@ -177,5 +179,16 @@ public class CourseContainsKeyTermsPredicateTest {
         List<Course> expected = List.of(new Course("First"), new Course("Third"));
 
         assertEquals(expected, predicate.getCourses(personWithSomeMatchingCourses));
+    }
+
+    @Test
+    public void instance_withNull_throwsAssertionError() {
+        assertThrows(AssertionError.class, () -> new SpecContainsKeyTermsPredicate(null));
+    }
+
+    @Test
+    public void test_withNull_throwsAssertionError() {
+        assertThrows(AssertionError.class, () ->
+                new SpecContainsKeyTermsPredicate(List.of("Spec")).test(null));
     }
 }
