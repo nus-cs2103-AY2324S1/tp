@@ -356,48 +356,26 @@ To manage notes for a person in a list, use the following commands:
 To add a note, use the `addnote` command followed by the position number and the note text. To remove a note, use the `removenote` command followed by the position number and the note index. To view all notes, use the `viewnotes` command followed by the position number. Closing the notes window can be done via the "Close" button or by pressing ESC.
 </box>
 
-## Birthday Notifications
+## Notifications
 
-###  Receive upcoming birthday notifications
+For our forgetful users, CampusConnect provides a useful Notification System!
+Upon opening the app, the notification system will prompt you about any upcoming notable events.
 
-Receives a pop-up notification for each contact in CampusConnect whose birthday is within a day.
+At the moment, only birthday notifications are supported.
+More notification types will be supported in future releases of CampusConnect.
 
-Upon launching the application, if any of your contacts’ birthday in CampusConnect is coming within a day, you should see the following pop-up notification: <br>
+###  Birthday notifications
+
+To ensure that you never forget to wish happy birthday to your friends, CampusConnect has an in-built birthday notification system.
+Every time you open CampusConnect, a pop-up notification will appear for contacts whose birthdays are within one day.
+
+<box type="info">
+
+Here is what a sample birthday notification will look like when you open your CampusConnect app.
 
 ![birthdayNotification](images/birthdayNotification.png)
 
-The notification will contain the names of the birthday individuals saved in CampusConnect.
-
-###  Opt out notification [Coming soon]
-
-Opts you out from receiving birthday related notifications, such as turning off actual birthday notification feature.
-
-Format: `optout NOTIFICATION_DESCRIPTION`
-
-- `NOTIFICATION_DESCRIPTION` Mandatory field to enter which only includes the following and are not case-sensitive:
-    - `Notify Birthdays`
-    - `All`
-
-Examples:
-- `optout notify birthdays`
-- `optout Notify Birthdays`
-- `optout NOTIFY BIRTHDAYS`
-    - Requests to opt out from receiving actual birthday notifications in the future.
-- `optout all`
-    - Requests to turn off all kinds of notifications CampusConnect will send.
-
-Upon request to opt out notification, you should see the following pop-up message: <br>
-
-![optOutNotification](images/optOutNotification.png)
-
-Select `OK` to opt out notifications or `Cancel` to cancel the request.
-
-Below shows some examples of ___invalid usage___ of the command and the response that CampusConnect will provide.
-
-Invalid Input Example | Application Output
----|---
-**optout notifications** | Invalid `NOTIFICATION_DESCRIPTION` (refer to aforementioned for the list of `NOTIFICATION_DESCRIPTION` to enter).
-**optout** | `NOTIFICATION_DESCRIPTION` cannot be empty.
+</box>
 
 
 ## Payments
