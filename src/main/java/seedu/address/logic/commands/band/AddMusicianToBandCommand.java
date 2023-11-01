@@ -13,6 +13,7 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.band.Band;
+import seedu.address.model.band.BandNameContainsKeywordsPredicate;
 import seedu.address.model.musician.Musician;
 
 /**
@@ -64,6 +65,10 @@ public class AddMusicianToBandCommand extends Command {
         Band band = lastShownBandList.get(bandToAddInto.getZeroBased());
         Musician musician = lastShownMusicianList.get(musicianToAdd.getZeroBased());
         model.addMusicianToBand(bandToAddInto.getZeroBased(), musicianToAdd.getZeroBased());
+
+        // update the filtered band list to show ONLY the band that the musician is added to and
+        // update the filtered musician list to show ONLY the members in the band
+        model.updateFilteredBandMusicianList(new BandNameContainsKeywordsPredicate(band.getName().toString()));
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(band, musician)));
     }
 }
