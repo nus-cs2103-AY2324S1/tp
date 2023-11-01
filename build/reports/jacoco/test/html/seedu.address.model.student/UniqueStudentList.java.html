@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>UniqueStudentList.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">tp</a> &gt; <a href="index.source.html" class="el_package">seedu.address.model.student</a> &gt; <span class="el_source">UniqueStudentList.java</span></div><h1>UniqueStudentList.java</h1><pre class="source lang-java linenums">package seedu.address.model.student;
+
+import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+
+import java.util.Iterator;
+import java.util.List;
+
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import seedu.address.model.student.exceptions.DuplicateStudentException;
+import seedu.address.model.student.exceptions.StudentNotFoundException;
+
+/**
+ * A list of persons that enforces uniqueness between its elements and does not allow nulls.
+ * A student is considered unique by comparing using {@code Student#isSamePerson(Student)}.
+ * As such, adding and updating of
+ * persons uses Student#isSamePerson(Student) for equality so as to ensure that the student being added or updated is
+ * unique in terms of identity in the UniqueStudentList. However, the removal of a student uses
+ * Student#equals(Object) so as to ensure that the student with exactly the same fields will be removed.
+ * Supports a minimal set of list operations.
+ *
+ * @see Student#isSameStudent(Student)
+ */
+<span class="fc" id="L25">public class UniqueStudentList implements Iterable&lt;Student&gt; {</span>
+
+<span class="fc" id="L27">    private final ObservableList&lt;Student&gt; internalList = FXCollections.observableArrayList();</span>
+<span class="fc" id="L28">    private final ObservableList&lt;Student&gt; internalUnmodifiableList =</span>
+<span class="fc" id="L29">            FXCollections.unmodifiableObservableList(internalList);</span>
+<span class="fc" id="L30">    private final ObservableList&lt;Student&gt; selectedStudent =</span>
+<span class="fc" id="L31">        FXCollections.observableArrayList();</span>
+
+    /**
+     * Returns true if the list contains an equivalent student as the given argument.
+     */
+    public boolean contains(Student toCheck) {
+<span class="fc" id="L37">        requireNonNull(toCheck);</span>
+<span class="fc" id="L38">        return internalList.stream().anyMatch(toCheck::isSameStudent);</span>
+    }
+
+    /**
+     * Adds a student to the list.
+     * The student must not already exist in the list.
+     */
+    public void add(Student toAdd) {
+<span class="fc" id="L46">        requireNonNull(toAdd);</span>
+<span class="fc bfc" id="L47" title="All 2 branches covered.">        if (contains(toAdd)) {</span>
+<span class="fc" id="L48">            throw new DuplicateStudentException();</span>
+        }
+<span class="fc" id="L50">        internalList.add(toAdd);</span>
+<span class="fc" id="L51">    }</span>
+
+    /**
+     * Replaces the student {@code target} in the list with {@code editedStudent}.
+     * {@code target} must exist in the list.
+     * The student identity of {@code editedStudent} must not be the same as another existing student in the list.
+     */
+    public void setStudent(Student target, Student editedStudent) {
+<span class="fc" id="L59">        requireAllNonNull(target, editedStudent);</span>
+
+<span class="fc" id="L61">        int index = internalList.indexOf(target);</span>
+<span class="fc bfc" id="L62" title="All 2 branches covered.">        if (index == -1) {</span>
+<span class="fc" id="L63">            throw new StudentNotFoundException();</span>
+        }
+
+<span class="fc bfc" id="L66" title="All 4 branches covered.">        if (!target.isSameStudent(editedStudent) &amp;&amp; contains(editedStudent)) {</span>
+<span class="fc" id="L67">            throw new DuplicateStudentException();</span>
+        }
+
+<span class="fc" id="L70">        internalList.set(index, editedStudent);</span>
+<span class="fc" id="L71">    }</span>
+
+    /**
+     * Returns the student with the given student number.
+     *
+     * @param studentNumber the given student number.
+     */
+    public Student getStudent(StudentNumber studentNumber) {
+<span class="fc" id="L79">        requireAllNonNull(studentNumber);</span>
+<span class="fc" id="L80">        int index = internalList.indexOf(new Student(studentNumber));</span>
+<span class="fc" id="L81">        return internalList.get(index);</span>
+    }
+
+    /**
+     * Removes the equivalent student from the list.
+     * The student must exist in the list.
+     */
+    public void remove(Student toRemove) {
+<span class="fc" id="L89">        requireNonNull(toRemove);</span>
+<span class="fc bfc" id="L90" title="All 2 branches covered.">        if (!internalList.remove(toRemove)) {</span>
+<span class="fc" id="L91">            throw new StudentNotFoundException();</span>
+        }
+<span class="fc" id="L93">    }</span>
+
+    public void setStudents(UniqueStudentList replacement) {
+<span class="fc" id="L96">        requireNonNull(replacement);</span>
+<span class="fc" id="L97">        internalList.setAll(replacement.internalList);</span>
+<span class="fc" id="L98">    }</span>
+
+    /**
+     * Replaces the contents of this list with {@code students}.
+     * {@code students} must not contain duplicate students.
+     */
+    public void setStudents(List&lt;Student&gt; students) {
+<span class="fc" id="L105">        requireAllNonNull(students);</span>
+<span class="fc bfc" id="L106" title="All 2 branches covered.">        if (!studentsAreUnique(students)) {</span>
+<span class="fc" id="L107">            throw new DuplicateStudentException();</span>
+        }
+
+<span class="fc" id="L110">        internalList.setAll(students);</span>
+<span class="fc" id="L111">    }</span>
+
+    /**
+     * Replace the selected student with the input student.
+     * @param student to be selected
+     */
+    public void setSelectedStudent(Student student) {
+<span class="fc" id="L118">        requireNonNull(student);</span>
+<span class="fc bfc" id="L119" title="All 2 branches covered.">        if (selectedStudent.isEmpty()) {</span>
+<span class="fc" id="L120">            selectedStudent.add(student);</span>
+        } else {
+<span class="fc" id="L122">            selectedStudent.set(0, student);</span>
+        }
+<span class="fc" id="L124">    }</span>
+
+    /**
+     * Clears the selection of a student so that no student is currently selected.
+     */
+    public void clearSelectedStudent() {
+<span class="fc" id="L130">        selectedStudent.clear();</span>
+<span class="fc" id="L131">    }</span>
+
+
+    /**
+     * Returns the backing list as an unmodifiable {@code ObservableList}.
+     */
+    public ObservableList&lt;Student&gt; asUnmodifiableObservableList() {
+<span class="fc" id="L138">        return internalUnmodifiableList;</span>
+    }
+
+    /**
+     * Returns the {@code ObservableList} containing the selected student.
+     */
+    public ObservableList&lt;Student&gt; getSelectedStudent() {
+<span class="fc" id="L145">        return selectedStudent;</span>
+    }
+
+    @Override
+    public Iterator&lt;Student&gt; iterator() {
+<span class="nc" id="L150">        return internalList.iterator();</span>
+    }
+
+    @Override
+    public boolean equals(Object other) {
+<span class="fc bfc" id="L155" title="All 2 branches covered.">        if (other == this) {</span>
+<span class="fc" id="L156">            return true;</span>
+        }
+
+        // instanceof handles nulls
+<span class="fc bfc" id="L160" title="All 2 branches covered.">        if (!(other instanceof UniqueStudentList)) {</span>
+<span class="fc" id="L161">            return false;</span>
+        }
+
+<span class="fc" id="L164">        UniqueStudentList otherUniqueStudentList = (UniqueStudentList) other;</span>
+<span class="fc" id="L165">        return internalList.equals(otherUniqueStudentList.internalList);</span>
+    }
+
+    @Override
+    public int hashCode() {
+<span class="fc" id="L170">        return internalList.hashCode();</span>
+    }
+
+    @Override
+    public String toString() {
+<span class="fc" id="L175">        return internalList.toString();</span>
+    }
+
+    /**
+     * Returns true if {@code students} contains only unique students.
+     */
+    private boolean studentsAreUnique(List&lt;Student&gt; students) {
+<span class="fc bfc" id="L182" title="All 2 branches covered.">        for (int i = 0; i &lt; students.size() - 1; i++) {</span>
+<span class="fc bfc" id="L183" title="All 2 branches covered.">            for (int j = i + 1; j &lt; students.size(); j++) {</span>
+<span class="fc bfc" id="L184" title="All 2 branches covered.">                if (students.get(i).isSameStudent(students.get(j))) {</span>
+<span class="fc" id="L185">                    return false;</span>
+                }
+            }
+        }
+<span class="fc" id="L189">        return true;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

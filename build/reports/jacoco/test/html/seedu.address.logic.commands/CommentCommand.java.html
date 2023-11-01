@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>CommentCommand.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">tp</a> &gt; <a href="index.source.html" class="el_package">seedu.address.logic.commands</a> &gt; <span class="el_source">CommentCommand.java</span></div><h1>CommentCommand.java</h1><pre class="source lang-java linenums">package seedu.address.logic.commands;
+
+import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_COMMENT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT_NUMBER;
+
+import seedu.address.logic.Messages;
+import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.Model;
+import seedu.address.model.student.Comment;
+import seedu.address.model.student.Student;
+import seedu.address.model.student.StudentNumber;
+
+/**
+ * Adds a comment to a student.
+ */
+public class CommentCommand extends Command {
+
+    public static final String COMMAND_WORD = &quot;comment&quot;;
+
+<span class="fc" id="L22">    public static final String MESSAGE_USAGE = COMMAND_WORD + &quot;: Edits the comment of the person identified &quot;</span>
+            + &quot;by the student number used. &quot;
+            + &quot;Existing comment will be overwritten by the input.\n&quot;
+            + &quot;Parameters: &quot; + PREFIX_STUDENT_NUMBER + &quot;[StudentNumber] (must be an existing student number) &quot;
+            + PREFIX_COMMENT + &quot;[Comment]\n&quot;
+            + &quot;Example: &quot; + COMMAND_WORD + &quot; &quot; + PREFIX_STUDENT_NUMBER + &quot;A1234567M&quot; + &quot; &quot;
+            + PREFIX_COMMENT + &quot; Struggling with tutorials.&quot;;
+
+    public static final String MESSAGE_COMMENT_SUCCESS = &quot;Comment added successfully.&quot;;
+
+
+    private final StudentNumber studentNumber;
+    private final Comment comment;
+
+
+    /**
+     * Creates an CommentCommand to add the specified {@code Comment} to a student.
+     */
+<span class="fc" id="L40">    public CommentCommand(StudentNumber studentNumber, Comment comment) {</span>
+<span class="fc" id="L41">        requireAllNonNull(studentNumber, comment);</span>
+
+<span class="fc" id="L43">        this.studentNumber = studentNumber;</span>
+<span class="fc" id="L44">        this.comment = comment;</span>
+<span class="fc" id="L45">    }</span>
+
+    @Override
+    public CommandResult execute(Model model) throws CommandException {
+<span class="fc" id="L49">        requireNonNull(model);</span>
+
+<span class="fc bfc" id="L51" title="All 2 branches covered.">        if (!model.hasStudent(new Student(studentNumber))) {</span>
+<span class="fc" id="L52">            throw new CommandException(Messages.MESSAGE_NONEXISTENT_STUDENT_NUMBER);</span>
+        }
+
+<span class="fc" id="L55">        Student student = model.getStudent(studentNumber);</span>
+
+<span class="fc" id="L57">        Student editedStudent = new Student(</span>
+<span class="fc" id="L58">                student.getName(), student.getPhone(), student.getEmail(),</span>
+<span class="fc" id="L59">                student.getStudentNumber(), student.getClassDetails(), student.getTags(), comment);</span>
+
+<span class="fc" id="L61">        model.setStudent(student, editedStudent);</span>
+
+<span class="fc" id="L63">        return new CommandResult(String.format(MESSAGE_COMMENT_SUCCESS, Messages.format(student)));</span>
+    }
+
+    @Override
+    public boolean equals(Object other) {
+<span class="pc bpc" id="L68" title="1 of 2 branches missed.">        if (other == this) {</span>
+<span class="nc" id="L69">            return true;</span>
+        }
+
+        // instanceof handles nulls
+<span class="pc bpc" id="L73" title="1 of 2 branches missed.">        if (!(other instanceof CommentCommand)) {</span>
+<span class="nc" id="L74">            return false;</span>
+        }
+
+<span class="fc" id="L77">        CommentCommand e = (CommentCommand) other;</span>
+<span class="pc bpc" id="L78" title="1 of 2 branches missed.">        return studentNumber.equals(e.studentNumber)</span>
+<span class="pc bpc" id="L79" title="1 of 2 branches missed.">                &amp;&amp; comment.equals(e.comment);</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

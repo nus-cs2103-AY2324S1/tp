@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="seedu.address.testutil.NameContainsKeywordsPredicateTest" tests="4" skipped="0" failures="0" errors="0" timestamp="2023-11-01T10:51:09" hostname="Bohs-Air" time="0.0">
+  <properties/>
+  <testcase name="equals()" classname="seedu.address.testutil.NameContainsKeywordsPredicateTest" time="0.0"/>
+  <testcase name="toStringMethod()" classname="seedu.address.testutil.NameContainsKeywordsPredicateTest" time="0.0"/>
+  <testcase name="test_nameContainsKeywords_returnsTrue()" classname="seedu.address.testutil.NameContainsKeywordsPredicateTest" time="0.0"/>
+  <testcase name="test_nameDoesNotContainKeywords_returnsFalse()" classname="seedu.address.testutil.NameContainsKeywordsPredicateTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

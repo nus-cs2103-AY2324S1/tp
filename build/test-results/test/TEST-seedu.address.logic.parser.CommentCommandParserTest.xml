@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="seedu.address.logic.parser.CommentCommandParserTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2023-11-01T10:51:08" hostname="Bohs-Air" time="0.001">
+  <properties/>
+  <testcase name="parse_emptyArg_throwsParseException()" classname="seedu.address.logic.parser.CommentCommandParserTest" time="0.001"/>
+  <testcase name="parse_validArgs_returnsCommentCommand()" classname="seedu.address.logic.parser.CommentCommandParserTest" time="0.0"/>
+  <testcase name="parse_invalidStudentNumber_throwsParseException()" classname="seedu.address.logic.parser.CommentCommandParserTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

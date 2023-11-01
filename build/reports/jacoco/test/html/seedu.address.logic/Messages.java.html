@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Messages.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">tp</a> &gt; <a href="index.source.html" class="el_package">seedu.address.logic</a> &gt; <span class="el_source">Messages.java</span></div><h1>Messages.java</h1><pre class="source lang-java linenums">package seedu.address.logic;
+
+import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+import seedu.address.logic.parser.Prefix;
+import seedu.address.model.student.Student;
+
+/**
+ * Container for user visible messages.
+ */
+<span class="pc bpc" id="L13" title="1 of 2 branches missed.">public class Messages {</span>
+
+    public static final String MESSAGE_UNKNOWN_COMMAND = &quot;Unknown command&quot;;
+    public static final String MESSAGE_INVALID_COMMAND_FORMAT = &quot;Invalid command format! \n%1$s&quot;;
+    public static final String MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX = &quot;The student index provided is invalid&quot;;
+    public static final String MESSAGE_NONEXISTENT_STUDENT_NUMBER = &quot;The student number provided does not exist here.&quot;;
+    public static final String MESSAGE_STUDENTS_LISTED_OVERVIEW = &quot;Lookup successful!\n&quot;
+            + &quot;%1$d students listed!&quot;;
+    public static final String MESSAGE_DUPLICATE_FIELDS =
+                &quot;Multiple values specified for the following single-valued field(s): &quot;;
+    public static final String MESSAGE_STUDENT_DOES_NOT_EXIST = &quot;There is no student with the given student number.&quot;;
+    public static final String MESSAGE_INVALID_TUTORIAL_INDEX = &quot;Index is invalid.&quot;;
+    public static final String MESSAGE_CLASS_MANAGER_NOT_CONFIGURED = &quot;Class Manager is not configured yet. &quot;
+            + &quot;Please enter config to configure Class Manager.&quot;;
+    public static final String MESSAGE_CLASS_MANAGER_ALREADY_CONFIGURED = &quot;Class Manager has been configured &quot;
+            + &quot;previously. You are not allowed to configure it again.&quot;;
+    public static final String MESSAGE_USER_PREFS_CANNOT_LOAD = &quot;Unable to load user preferences from preferences.json&quot;;
+
+    /**
+     * Returns an error message indicating the duplicate prefixes.
+     */
+    public static String getErrorMessageForDuplicatePrefixes(Prefix... duplicatePrefixes) {
+<span class="pc bpc" id="L35" title="2 of 4 branches missed.">        assert duplicatePrefixes.length &gt; 0;</span>
+
+<span class="fc" id="L37">        Set&lt;String&gt; duplicateFields =</span>
+<span class="fc" id="L38">                Stream.of(duplicatePrefixes).map(Prefix::toString).collect(Collectors.toSet());</span>
+
+<span class="fc" id="L40">        return MESSAGE_DUPLICATE_FIELDS + String.join(&quot; &quot;, duplicateFields);</span>
+    }
+
+    /**
+     * Formats the {@code student} for display to the user.
+     */
+    public static String format(Student student) {
+<span class="fc" id="L47">        final StringBuilder builder = new StringBuilder();</span>
+<span class="fc" id="L48">        builder.append(student.getName())</span>
+<span class="fc" id="L49">                .append(&quot;;\n Phone: &quot;)</span>
+<span class="fc" id="L50">                .append(student.getPhone())</span>
+<span class="fc" id="L51">                .append(&quot;;\n Email: &quot;)</span>
+<span class="fc" id="L52">                .append(student.getEmail())</span>
+<span class="fc" id="L53">                .append(&quot;;\n Student Number: &quot;)</span>
+<span class="fc" id="L54">                .append(student.getStudentNumber())</span>
+<span class="fc" id="L55">                .append(&quot;;\n Class Number: &quot;)</span>
+<span class="fc" id="L56">                .append(student.getClassDetails())</span>
+<span class="fc" id="L57">                .append(&quot;;\n Tags: &quot;);</span>
+<span class="fc" id="L58">        student.getTags().forEach(builder::append);</span>
+<span class="fc" id="L59">        return builder.toString();</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

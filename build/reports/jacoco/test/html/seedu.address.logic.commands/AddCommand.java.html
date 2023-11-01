@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>AddCommand.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">tp</a> &gt; <a href="index.source.html" class="el_package">seedu.address.logic.commands</a> &gt; <span class="el_source">AddCommand.java</span></div><h1>AddCommand.java</h1><pre class="source lang-java linenums">package seedu.address.logic.commands;
+
+import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CLASS_NUMBER;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT_NUMBER;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+
+import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.logic.Messages;
+import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.Model;
+import seedu.address.model.student.Student;
+
+/**
+ * Adds a student to the address book.
+ */
+public class AddCommand extends Command {
+
+    public static final String COMMAND_WORD = &quot;add&quot;;
+
+<span class="fc" id="L24">    public static final String MESSAGE_USAGE = COMMAND_WORD + &quot;: Adds a student to the address book.\n&quot;</span>
+            + &quot;Parameters: &quot;
+            + PREFIX_NAME + &quot;NAME &quot;
+            + PREFIX_PHONE + &quot;PHONE &quot;
+            + PREFIX_EMAIL + &quot;EMAIL &quot;
+            + PREFIX_STUDENT_NUMBER + &quot;STUDENT NUMBER &quot;
+            + PREFIX_CLASS_NUMBER + &quot;CLASS NUMBER &quot;
+            + &quot;[&quot; + PREFIX_TAG + &quot;TAG]...\n&quot;
+            + &quot;Example: &quot; + COMMAND_WORD + &quot; &quot;
+            + PREFIX_NAME + &quot;John Doe &quot;
+            + PREFIX_PHONE + &quot;98765432 &quot;
+            + PREFIX_EMAIL + &quot;johnd@example.com &quot;
+            + PREFIX_STUDENT_NUMBER + &quot;A0245234A &quot;
+            + PREFIX_CLASS_NUMBER + &quot;T11 &quot;
+            + PREFIX_TAG + &quot;friends &quot;
+            + PREFIX_TAG + &quot;owesMoney &quot;;
+
+    public static final String MESSAGE_SUCCESS = &quot;New student added: %1$s&quot;;
+    public static final String MESSAGE_DUPLICATE_STUDENT = &quot;This student already exists in the address book&quot;;
+
+    private final Student toAdd;
+
+    /**
+     * Creates an AddCommand to add the specified {@code Student}
+     */
+<span class="fc" id="L49">    public AddCommand(Student student) {</span>
+<span class="fc" id="L50">        requireNonNull(student);</span>
+<span class="fc" id="L51">        toAdd = student;</span>
+<span class="fc" id="L52">    }</span>
+
+    @Override
+    public CommandResult execute(Model model) throws CommandException {
+<span class="fc" id="L56">        requireNonNull(model);</span>
+
+<span class="fc bfc" id="L58" title="All 2 branches covered.">        if (model.hasStudent(toAdd)) {</span>
+<span class="fc" id="L59">            throw new CommandException(MESSAGE_DUPLICATE_STUDENT);</span>
+        }
+
+<span class="fc" id="L62">        model.addStudent(toAdd);</span>
+<span class="fc" id="L63">        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));</span>
+    }
+
+    @Override
+    public boolean equals(Object other) {
+<span class="fc bfc" id="L68" title="All 2 branches covered.">        if (other == this) {</span>
+<span class="fc" id="L69">            return true;</span>
+        }
+
+        // instanceof handles nulls
+<span class="fc bfc" id="L73" title="All 2 branches covered.">        if (!(other instanceof AddCommand)) {</span>
+<span class="fc" id="L74">            return false;</span>
+        }
+
+<span class="fc" id="L77">        AddCommand otherAddCommand = (AddCommand) other;</span>
+<span class="fc" id="L78">        return toAdd.equals(otherAddCommand.toAdd);</span>
+    }
+
+    @Override
+    public String toString() {
+<span class="fc" id="L83">        return new ToStringBuilder(this)</span>
+<span class="fc" id="L84">                .add(&quot;toAdd&quot;, toAdd)</span>
+<span class="fc" id="L85">                .toString();</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

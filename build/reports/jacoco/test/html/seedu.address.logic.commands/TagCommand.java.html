@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>TagCommand.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">tp</a> &gt; <a href="index.source.html" class="el_package">seedu.address.logic.commands</a> &gt; <span class="el_source">TagCommand.java</span></div><h1>TagCommand.java</h1><pre class="source lang-java linenums">package seedu.address.logic.commands;
+
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.address.logic.Messages.MESSAGE_STUDENT_DOES_NOT_EXIST;
+
+import java.util.List;
+import java.util.Set;
+
+import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.Model;
+import seedu.address.model.student.Student;
+import seedu.address.model.student.StudentNumber;
+import seedu.address.model.tag.Tag;
+
+/**
+ * Changes the tags of an existing student in the address book.
+ */
+public class TagCommand extends Command {
+
+    public static final String COMMAND_WORD = &quot;tag&quot;;
+    public static final String ADD_TAGS = &quot;add&quot;;
+    public static final String DELETE_TAGS = &quot;delete&quot;;
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + &quot;: Edits the tags of the student identified by the student number.\n&quot;
+            + &quot;Existing tags will be overwritten by the input.\n&quot;
+            + &quot;Use /add to add or /delete to delete tags without overwriting all tags.\n&quot;
+            + &quot;Parameters: s/STUDENT_NUMBER (exists in address book) [/add] [/delete] t/[TAG]\n&quot;
+            + &quot;Example: &quot; + COMMAND_WORD + &quot; s/A1234567N /add t/smart.&quot;;
+    public static final String MESSAGE_ADD_TAG_SUCCESS = &quot;Added following tags to Student %1$s:\n&quot;;
+    public static final String MESSAGE_DELETE_TAG_SUCCESS = &quot;Removed following tags from Student %1$s:\n&quot;;
+    public static final String MESSAGE_REPLACE_ALL_TAG_SUCCESS = &quot;Replace all tags of Student %1$s with:\n&quot;;
+    public static final String MESSAGE_DELETE_ALL_TAG_SUCCESS = &quot;Removed all tags from Student %1$s:\n&quot;;
+    public static final String MESSAGE_TAG_FAILED = &quot;There was an issue tagging the student.\n&quot;
+        + &quot;Please check that the student with the student number exists or each tag has the “t/” prefix.\n&quot;;
+    protected final StudentNumber studentNumber;
+    protected final Set&lt;Tag&gt; tags;
+
+    /**
+     * @param studentNumber of the student in the filtered student list to edit their tags.
+     * @param tags of the student to be updated to.
+     */
+<span class="fc" id="L43">    public TagCommand(StudentNumber studentNumber, Set&lt;Tag&gt; tags) {</span>
+<span class="fc" id="L44">        requireAllNonNull(studentNumber, tags);</span>
+<span class="fc" id="L45">        this.studentNumber = studentNumber;</span>
+<span class="fc" id="L46">        this.tags = tags;</span>
+<span class="fc" id="L47">    }</span>
+
+    @Override
+    public CommandResult execute(Model model) throws CommandException {
+<span class="fc" id="L51">        List&lt;Student&gt; lastShownList = model.getFilteredStudentList();</span>
+
+        Student studentToTag;
+        try {
+<span class="fc" id="L55">            studentToTag = getStudentByStudentNumber(lastShownList, studentNumber);</span>
+<span class="fc" id="L56">        } catch (NullPointerException ive) {</span>
+<span class="fc" id="L57">            throw new CommandException(MESSAGE_STUDENT_DOES_NOT_EXIST);</span>
+<span class="fc" id="L58">        }</span>
+
+<span class="fc" id="L60">        Student editedStudent = new Student(</span>
+<span class="fc" id="L61">                studentToTag.getName(), studentToTag.getPhone(), studentToTag.getEmail(),</span>
+<span class="fc" id="L62">                studentToTag.getStudentNumber(), studentToTag.getClassDetails(), this.tags, studentToTag.getComment());</span>
+
+<span class="fc" id="L64">        model.setStudent(studentToTag, editedStudent);</span>
+<span class="fc" id="L65">        model.updateFilteredStudentList(Model.PREDICATE_SHOW_ALL_STUDENTS);</span>
+
+<span class="fc" id="L67">        return new CommandResult(generateSuccessMessage(editedStudent));</span>
+    }
+
+    /**
+     * Generates a command execution success message based on whether
+     * the tag is added to or removed from {@code studentToTag}.
+     */
+    private String generateSuccessMessage(Student studentToTag) {
+<span class="fc bfc" id="L75" title="All 2 branches covered.">        String message = !tags.isEmpty() ? MESSAGE_REPLACE_ALL_TAG_SUCCESS : MESSAGE_DELETE_ALL_TAG_SUCCESS;</span>
+<span class="fc" id="L76">        return String.format(message, studentToTag.getName()) + studentToTag.getTags();</span>
+    }
+
+    protected Student getStudentByStudentNumber(List&lt;Student&gt; list, StudentNumber studentNumber) {
+<span class="fc" id="L80">        return list.stream()</span>
+<span class="fc" id="L81">            .filter(student -&gt; student.getStudentNumber().equals(studentNumber))</span>
+<span class="fc" id="L82">            .findAny().orElseThrow(NullPointerException::new);</span>
+    }
+
+    @Override
+    public boolean equals(Object other) {
+<span class="fc bfc" id="L87" title="All 2 branches covered.">        if (other == this) {</span>
+<span class="fc" id="L88">            return true;</span>
+        }
+
+        // instanceof handles nulls
+<span class="fc bfc" id="L92" title="All 2 branches covered.">        if (!(other instanceof TagCommand)) {</span>
+<span class="fc" id="L93">            return false;</span>
+        }
+
+<span class="fc" id="L96">        TagCommand e = (TagCommand) other;</span>
+<span class="pc bpc" id="L97" title="1 of 2 branches missed.">        return studentNumber.equals(e.studentNumber)</span>
+<span class="pc bpc" id="L98" title="1 of 2 branches missed.">                &amp;&amp; tags.equals(e.tags);</span>
+    }
+
+    @Override
+    public String toString() {
+<span class="fc" id="L103">        return new ToStringBuilder(this)</span>
+<span class="fc" id="L104">                .add(&quot;tags&quot;, tags)</span>
+<span class="fc" id="L105">                .toString();</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

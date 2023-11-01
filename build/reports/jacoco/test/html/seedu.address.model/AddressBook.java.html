@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>AddressBook.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">tp</a> &gt; <a href="index.source.html" class="el_package">seedu.address.model</a> &gt; <span class="el_source">AddressBook.java</span></div><h1>AddressBook.java</h1><pre class="source lang-java linenums">package seedu.address.model;
+
+import static java.util.Objects.requireNonNull;
+
+import java.util.List;
+
+import javafx.collections.ObservableList;
+import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.student.Student;
+import seedu.address.model.student.StudentNumber;
+import seedu.address.model.student.UniqueStudentList;
+
+/**
+ * Wraps all data at the address-book level
+ * Duplicates are not allowed (by .isSameStudent comparison)
+ */
+public class AddressBook implements ReadOnlyAddressBook {
+
+    private final UniqueStudentList students;
+
+    /*
+     * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
+     * between constructors. See https://docs.oracle.com/javase/tutorial/java/javaOO/initial.html
+     *
+     * Note that non-static init blocks are not recommended to use. There are other ways to avoid duplication
+     *   among constructors.
+     */
+    {
+<span class="fc" id="L29">        students = new UniqueStudentList();</span>
+    }
+
+<span class="fc" id="L32">    public AddressBook() {}</span>
+
+    /**
+     * Creates an AddressBook using the Students in the {@code toBeCopied}
+     */
+    public AddressBook(ReadOnlyAddressBook toBeCopied) {
+<span class="fc" id="L38">        this();</span>
+<span class="fc" id="L39">        resetData(toBeCopied);</span>
+<span class="fc" id="L40">    }</span>
+
+    //// list overwrite operations
+
+    /**
+     * Replaces the contents of the student list with {@code students}.
+     * {@code students} must not contain duplicate students.
+     */
+    public void setStudents(List&lt;Student&gt; students) {
+<span class="fc" id="L49">        this.students.setStudents(students);</span>
+<span class="fc" id="L50">    }</span>
+
+    /**
+     * Resets the existing data of this {@code AddressBook} with {@code newData}.
+     */
+    public void resetData(ReadOnlyAddressBook newData) {
+<span class="fc" id="L56">        requireNonNull(newData);</span>
+<span class="fc" id="L57">        setStudents(newData.getStudentList());</span>
+<span class="fc" id="L58">    }</span>
+
+    //// student-level operations
+
+    /**
+     * Returns true if a student with the same identity as {@code student} exists in the address book.
+     */
+    public boolean hasStudent(Student student) {
+<span class="fc" id="L66">        requireNonNull(student);</span>
+<span class="fc" id="L67">        return students.contains(student);</span>
+    }
+
+    /**
+     * Returns the student with the given student number.
+     *
+     * @param studentNumber the given student number.
+     */
+    public Student getStudent(StudentNumber studentNumber) {
+<span class="fc" id="L76">        requireNonNull(studentNumber);</span>
+<span class="fc" id="L77">        return students.getStudent(studentNumber);</span>
+    }
+
+    /**
+     * Adds a student to the address book.
+     * The student must not already exist in the address book.
+     */
+    public void addStudent(Student p) {
+<span class="fc" id="L85">        students.add(p);</span>
+<span class="fc" id="L86">    }</span>
+
+    /**
+     * Replaces the given student {@code target} in the list with {@code editedStudent}.
+     * {@code target} must exist in the address book.
+     * The student identity of {@code editedStudent} must not be the same as another
+     * existing student in the address book.
+     */
+    public void setStudent(Student target, Student editedStudent) {
+<span class="fc" id="L95">        requireNonNull(editedStudent);</span>
+
+<span class="fc" id="L97">        students.setStudent(target, editedStudent);</span>
+<span class="fc" id="L98">    }</span>
+
+    /**
+     * Removes {@code key} from this {@code AddressBook}.
+     * {@code key} must exist in the address book.
+     */
+    public void removeStudent(Student key) {
+<span class="fc" id="L105">        students.remove(key);</span>
+<span class="fc" id="L106">    }</span>
+
+    /**
+     * Sets the student to be the selected student.
+     *
+     * @param student to be selected
+     */
+    public void setSelectedStudent(Student student) {
+<span class="fc" id="L114">        students.setSelectedStudent(student);</span>
+<span class="fc" id="L115">    }</span>
+
+    //// util methods
+
+    @Override
+    public String toString() {
+<span class="fc" id="L121">        return new ToStringBuilder(this)</span>
+<span class="fc" id="L122">                .add(&quot;students&quot;, students)</span>
+<span class="fc" id="L123">                .toString();</span>
+    }
+
+    @Override
+    public ObservableList&lt;Student&gt; getStudentList() {
+<span class="fc" id="L128">        return students.asUnmodifiableObservableList();</span>
+    }
+
+    @Override
+    public ObservableList&lt;Student&gt; getSelectedStudent() {
+<span class="fc" id="L133">        return students.getSelectedStudent();</span>
+    }
+
+    @Override
+    public boolean equals(Object other) {
+<span class="fc bfc" id="L138" title="All 2 branches covered.">        if (other == this) {</span>
+<span class="fc" id="L139">            return true;</span>
+        }
+
+        // instanceof handles nulls
+<span class="fc bfc" id="L143" title="All 2 branches covered.">        if (!(other instanceof AddressBook)) {</span>
+<span class="fc" id="L144">            return false;</span>
+        }
+
+<span class="fc" id="L147">        AddressBook otherAddressBook = (AddressBook) other;</span>
+<span class="fc" id="L148">        return students.equals(otherAddressBook.students);</span>
+    }
+
+    @Override
+    public int hashCode() {
+<span class="fc" id="L153">        return students.hashCode();</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

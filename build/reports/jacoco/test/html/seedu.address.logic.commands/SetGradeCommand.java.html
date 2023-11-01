@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>SetGradeCommand.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">tp</a> &gt; <a href="index.source.html" class="el_package">seedu.address.logic.commands</a> &gt; <span class="el_source">SetGradeCommand.java</span></div><h1>SetGradeCommand.java</h1><pre class="source lang-java linenums">package seedu.address.logic.commands;
+
+import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ASSIGNMENT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_GRADE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT_NUMBER;
+
+import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.logic.Messages;
+import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.Model;
+import seedu.address.model.student.ClassDetails;
+import seedu.address.model.student.Student;
+import seedu.address.model.student.StudentNumber;
+
+/**
+ * Sets a specific assignment grade for a student.
+ */
+public class SetGradeCommand extends Command {
+    public static final String COMMAND_WORD = &quot;set-grade&quot;;
+
+<span class="fc" id="L22">    public static final String MESSAGE_USAGE = COMMAND_WORD</span>
+            + &quot;: Set a specific assignment grade of for a student.\n&quot;
+            + &quot;Parameters: \n&quot;
+            + PREFIX_STUDENT_NUMBER + &quot;STUDENT_NUMBER &quot;
+            + PREFIX_ASSIGNMENT + &quot;ASSIGNMENT_NUMBER &quot;
+            + PREFIX_GRADE + &quot;GRADE\n&quot;
+            + &quot;Example: \n&quot;
+            + COMMAND_WORD + &quot; &quot; + PREFIX_STUDENT_NUMBER + &quot;A0299999X &quot;
+            + PREFIX_ASSIGNMENT + &quot;1 &quot; + PREFIX_GRADE + &quot;100&quot;;
+
+    public static final String MESSAGE_SUCCESS = &quot;Grade set for student: %1$s, &quot;
+            + &quot;here are the details:\n&quot;;
+
+
+    private final StudentNumber studentNumber;
+    private final int assignmentNumber;
+    private final int grade;
+
+    /**
+     * Creates an SetGradeCommand to set the specified {@code Student}'s grade
+     */
+<span class="fc" id="L43">    public SetGradeCommand(StudentNumber studentNumber, int assignmentNumber, int grade) {</span>
+<span class="fc" id="L44">        this.studentNumber = studentNumber;</span>
+<span class="fc" id="L45">        this.assignmentNumber = assignmentNumber;</span>
+<span class="fc" id="L46">        this.grade = grade;</span>
+<span class="fc" id="L47">    }</span>
+
+    @Override
+    public CommandResult execute(Model model) throws CommandException {
+<span class="fc" id="L51">        requireNonNull(model);</span>
+
+<span class="fc bfc" id="L53" title="All 2 branches covered.">        if (!model.hasStudent(new Student(studentNumber))) {</span>
+<span class="fc" id="L54">            throw new CommandException(Messages.MESSAGE_NONEXISTENT_STUDENT_NUMBER);</span>
+        }
+
+<span class="fc" id="L57">        Student studentToGrade = model.getStudent(studentNumber);</span>
+<span class="fc" id="L58">        ClassDetails classDetails = studentToGrade.getClassDetails();</span>
+<span class="fc" id="L59">        classDetails.setAssignGrade(assignmentNumber, grade);</span>
+<span class="fc" id="L60">        Student gradedStudent = new Student(studentToGrade.getName(), studentToGrade.getPhone(),</span>
+<span class="fc" id="L61">            studentToGrade.getEmail(), studentToGrade.getStudentNumber(), classDetails, studentToGrade.getTags(),</span>
+<span class="fc" id="L62">                studentToGrade.getComment());</span>
+
+<span class="fc" id="L64">        model.setStudent(studentToGrade, gradedStudent);</span>
+
+<span class="fc bfc" id="L66" title="All 2 branches covered.">        if (model.isSelectedStudent(gradedStudent)) {</span>
+<span class="fc" id="L67">            model.setSelectedStudent(gradedStudent);</span>
+        }
+
+<span class="fc" id="L70">        return new CommandResult(String.format(MESSAGE_SUCCESS, studentNumber)</span>
+<span class="fc" id="L71">                + classDetails.displayAssignments());</span>
+    }
+
+
+    @Override
+    public boolean equals(Object other) {
+<span class="fc bfc" id="L77" title="All 2 branches covered.">        if (other == this) {</span>
+<span class="fc" id="L78">            return true;</span>
+        }
+
+        // instanceof handles nulls
+<span class="fc bfc" id="L82" title="All 2 branches covered.">        if (!(other instanceof SetGradeCommand)) {</span>
+<span class="fc" id="L83">            return false;</span>
+        }
+
+<span class="fc" id="L86">        SetGradeCommand otherSetGradeCommand = (SetGradeCommand) other;</span>
+<span class="fc bfc" id="L87" title="All 6 branches covered.">        return studentNumber.equals(otherSetGradeCommand.studentNumber)</span>
+                &amp;&amp; assignmentNumber == otherSetGradeCommand.assignmentNumber
+                &amp;&amp; grade == otherSetGradeCommand.grade;
+    }
+
+    @Override
+    public String toString() {
+<span class="fc" id="L94">        return new ToStringBuilder(this)</span>
+<span class="fc" id="L95">                .add(&quot;studentNumber&quot;, studentNumber)</span>
+<span class="fc" id="L96">                .add(&quot;assignmentNumber&quot;, assignmentNumber)</span>
+<span class="fc" id="L97">                .add(&quot;grade&quot;, grade)</span>
+<span class="fc" id="L98">                .toString();</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

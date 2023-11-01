@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>LoadCommand.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">tp</a> &gt; <a href="index.source.html" class="el_package">seedu.address.logic.commands</a> &gt; <span class="el_source">LoadCommand.java</span></div><h1>LoadCommand.java</h1><pre class="source lang-java linenums">package seedu.address.logic.commands;
+
+import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_FILE;
+
+import java.io.File;
+import java.nio.file.Path;
+import java.util.Objects;
+import java.util.Optional;
+
+import seedu.address.commons.exceptions.DataLoadingException;
+import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.Model;
+import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.util.SampleDataUtil;
+import seedu.address.storage.AddressBookStorage;
+import seedu.address.storage.JsonAddressBookStorage;
+
+/**
+ * Loads student information from an existing JSON file in the data folder.
+ */
+public class LoadCommand extends Command {
+
+    public static final String COMMAND_WORD = &quot;load&quot;;
+<span class="fc" id="L26">    public static final String MESSAGE_USAGE = COMMAND_WORD</span>
+            + &quot;: Load student information from an existing JSON file in the data folder. &quot;
+            + &quot;The file becomes the new default save file. &quot;
+            + &quot;Parameters: &quot; + PREFIX_FILE + &quot;FILE_NAME\n&quot;
+            + &quot;Example: &quot; + COMMAND_WORD + &quot; &quot; + PREFIX_FILE + &quot;export-v1&quot;;
+    public static final String MESSAGE_LOAD_SUCCESS = &quot;The file %1$s.json has successfully loaded!\n&quot;
+            + &quot;This will be the new default save file.\n&quot;;
+    public static final String MESSAGE_FILE_NOT_FOUND = &quot;The file %1$s.json cannot be found.\n&quot;
+            + &quot;Please make sure the file is in the /data folder.\n&quot;;
+    public static final String MESSAGE_FILE_CANNOT_LOAD = &quot;The file %1$s.json cannot be loaded.\n&quot;
+            + &quot;Please make sure the file is formatted correctly.\n&quot;;
+
+    private final String fileName;
+    private final Path filePath;
+
+    /**
+     * Constructor for {@code LoadCommand}
+     * @param fileName New save file
+     * @param filePath Relative path of the new save file
+     */
+<span class="fc" id="L46">    public LoadCommand(String fileName, Path filePath) {</span>
+<span class="fc" id="L47">        this.fileName = fileName;</span>
+<span class="fc" id="L48">        this.filePath = filePath;</span>
+<span class="fc" id="L49">    }</span>
+
+    /**
+     * Checks if the file exists and loads the file into the address book.
+     * If the file cannot be loaded or does not exist, an exception is thrown.
+     * @param  model {@code Model} which the command should operate on.
+     * @return A {@code CommandResult} with the success message.
+     * @throws CommandException If the file cannot be loaded or does not exist.
+     */
+    @Override
+    public CommandResult execute(Model model) throws CommandException {
+<span class="fc" id="L60">        File f = filePath.toFile();</span>
+<span class="fc bfc" id="L61" title="All 2 branches covered.">        if (!f.isFile()) {</span>
+<span class="fc" id="L62">            throw new CommandException(String.format(MESSAGE_FILE_NOT_FOUND, fileName));</span>
+        }
+<span class="fc" id="L64">        requireNonNull(model);</span>
+<span class="fc" id="L65">        AddressBookStorage tempAddressBookStorage = new JsonAddressBookStorage(filePath);</span>
+        Optional&lt;ReadOnlyAddressBook&gt; addressBookOptional;
+        ReadOnlyAddressBook newData;
+        try {
+<span class="fc" id="L69">            addressBookOptional = tempAddressBookStorage.readAddressBook();</span>
+<span class="fc" id="L70">            newData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);</span>
+<span class="fc" id="L71">        } catch (DataLoadingException e) {</span>
+<span class="fc" id="L72">            throw new CommandException(String.format(MESSAGE_FILE_CANNOT_LOAD, fileName));</span>
+<span class="fc" id="L73">        }</span>
+<span class="fc" id="L74">        model.setAddressBookFilePath(filePath);</span>
+<span class="fc" id="L75">        model.setAddressBook(newData);</span>
+<span class="fc" id="L76">        return new CommandResult(String.format(MESSAGE_LOAD_SUCCESS, fileName), false, false, true, false);</span>
+    }
+
+    /**
+     * Returns the string representation of the file path and file name.
+     * @return String representation of the file path and file name.
+     */
+    @Override
+    public String toString() {
+<span class="fc" id="L85">        return new ToStringBuilder(this)</span>
+<span class="fc" id="L86">                .add(&quot;load&quot;, fileName)</span>
+<span class="fc" id="L87">                .toString();</span>
+    }
+
+    /**
+     * Checks if the file path and file name are the same.
+     * @param other Object to compare with.
+     * @return True if the file path and file name are the same.
+     */
+    @Override
+    public boolean equals(Object other) {
+<span class="fc bfc" id="L97" title="All 2 branches covered.">        if (other == this) {</span>
+<span class="fc" id="L98">            return true;</span>
+        }
+
+        // instanceof handles nulls
+<span class="fc bfc" id="L102" title="All 2 branches covered.">        if (!(other instanceof LoadCommand)) {</span>
+<span class="fc" id="L103">            return false;</span>
+        }
+
+<span class="fc" id="L106">        LoadCommand e = (LoadCommand) other;</span>
+<span class="pc bpc" id="L107" title="1 of 4 branches missed.">        return filePath.equals(e.filePath) &amp;&amp; fileName.equals(e.fileName);</span>
+    }
+
+    /**
+     * Returns the hashcode of the file path and file name.
+     * @return
+     */
+    @Override
+    public int hashCode() {
+<span class="fc" id="L116">        return Objects.hash(fileName, filePath);</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

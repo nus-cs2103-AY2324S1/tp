@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>JsonAdaptedClassDetails.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">tp</a> &gt; <a href="index.source.html" class="el_package">seedu.address.storage</a> &gt; <span class="el_source">JsonAdaptedClassDetails.java</span></div><h1>JsonAdaptedClassDetails.java</h1><pre class="source lang-java linenums">package seedu.address.storage;
+
+import static seedu.address.storage.JsonAdaptedStudent.MISSING_FIELD_MESSAGE_FORMAT;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.student.ClassDetails;
+import seedu.address.model.student.grades.AssignmentTracker;
+import seedu.address.model.student.grades.AttendanceTracker;
+import seedu.address.model.student.grades.ClassParticipationTracker;
+
+/**
+ * Jackson-friendly version of {@link ClassDetails}.
+ */
+public class JsonAdaptedClassDetails {
+    private final String classNumber;
+<span class="fc" id="L22">    private final List&lt;Boolean&gt; attendanceTracker = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L23">    private final List&lt;Integer&gt; assignmentTracker = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L24">    private final List&lt;Boolean&gt; classParticipationTracker = new ArrayList&lt;&gt;();</span>
+
+    /**
+     * Constructs a {@code JsonAdaptedClassDetails} with the given {@code classDetails}.
+     */
+    @JsonCreator
+    public JsonAdaptedClassDetails(@JsonProperty(&quot;classNumber&quot;) String classNumber,
+                                   @JsonProperty(&quot;attendanceTracker&quot;) List&lt;Boolean&gt; attendanceTracker,
+                                   @JsonProperty(&quot;assignmentTracker&quot;) List&lt;Integer&gt; assignmentTracker,
+                                   @JsonProperty(&quot;classParticipationTracker&quot;)
+<span class="fc" id="L34">                                       List&lt;Boolean&gt; classParticipationTracker) {</span>
+
+<span class="fc" id="L36">        this.classNumber = classNumber;</span>
+<span class="pc bpc" id="L37" title="1 of 2 branches missed.">        if (attendanceTracker != null) {</span>
+<span class="fc" id="L38">            this.attendanceTracker.addAll(attendanceTracker);</span>
+        }
+<span class="pc bpc" id="L40" title="1 of 2 branches missed.">        if (assignmentTracker != null) {</span>
+<span class="fc" id="L41">            this.assignmentTracker.addAll(assignmentTracker);</span>
+        }
+<span class="pc bpc" id="L43" title="1 of 2 branches missed.">        if (classParticipationTracker != null) {</span>
+<span class="fc" id="L44">            this.classParticipationTracker.addAll(classParticipationTracker);</span>
+        }
+<span class="fc" id="L46">    }</span>
+
+    /**
+     * Converts this Jackson-friendly adapted ClassDetails object into the model's {@code ClassDetails} object.
+     *
+     * @throws IllegalValueException if there were any data constraints violated in the adapted ClassDetails.
+     */
+    public ClassDetails toModelType() throws IllegalValueException {
+<span class="fc bfc" id="L54" title="All 2 branches covered.">        if (classNumber == null) {</span>
+<span class="fc" id="L55">            throw new IllegalValueException(</span>
+<span class="fc" id="L56">                    String.format(MISSING_FIELD_MESSAGE_FORMAT, ClassDetails.class.getSimpleName()));</span>
+        }
+<span class="fc bfc" id="L58" title="All 2 branches covered.">        if (!ClassDetails.isValidClassDetails(classNumber)) {</span>
+<span class="fc" id="L59">            throw new IllegalValueException(ClassDetails.MESSAGE_CONSTRAINTS);</span>
+        }
+<span class="fc bfc" id="L61" title="All 2 branches covered.">        if (attendanceTracker.size() != classParticipationTracker.size()) {</span>
+<span class="fc" id="L62">            throw new IllegalValueException(ClassDetails.MESSAGE_UNEQUAL_LENGTH);</span>
+        }
+
+<span class="fc" id="L65">        AssignmentTracker assignmentTracker = new AssignmentTracker(this.assignmentTracker);</span>
+<span class="fc" id="L66">        AttendanceTracker attendanceTracker = new AttendanceTracker(this.attendanceTracker);</span>
+<span class="fc" id="L67">        ClassParticipationTracker classParticipationTracker = new ClassParticipationTracker(</span>
+                this.classParticipationTracker);
+<span class="fc" id="L69">        return new ClassDetails(classNumber, attendanceTracker, assignmentTracker, classParticipationTracker);</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

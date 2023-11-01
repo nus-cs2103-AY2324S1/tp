@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ClassDetails.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">tp</a> &gt; <a href="index.source.html" class="el_package">seedu.address.model.student</a> &gt; <span class="el_source">ClassDetails.java</span></div><h1>ClassDetails.java</h1><pre class="source lang-java linenums">package seedu.address.model.student;
+
+import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.AppUtil.checkArgument;
+
+import java.util.Objects;
+
+import seedu.address.commons.core.index.Index;
+import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.student.grades.AssignmentTracker;
+import seedu.address.model.student.grades.AttendanceTracker;
+import seedu.address.model.student.grades.ClassParticipationTracker;
+import seedu.address.storage.JsonAdaptedClassDetails;
+
+/**
+ * Represents a Student's Class Number in Class Manager.
+ * Guarantees: is valid as declared in {@link #isValidClassDetails(String)}
+ */
+<span class="pc bpc" id="L20" title="1 of 2 branches missed.">public class ClassDetails {</span>
+
+    public static final String MESSAGE_CONSTRAINTS = &quot;Class number can take any values, and it should not be blank&quot;;
+    public static final String MESSAGE_INVALID_GRADE = &quot;Grade should be between 0 and 100&quot;;
+    public static final String MESSAGE_INVALID_ASSIGNMENT_NUMBER = &quot;Assignment number should &quot;
+            + &quot;be between 1 and %s&quot;;
+    public static final String MESSAGE_INVALID_TUTORIAL_SESSION_NUMBER = &quot;Tutorial session number should &quot;
+            + &quot;be between 1 and %s&quot;;
+    public static final String MESSAGE_UNEQUAL_LENGTH = &quot;The number of tutorial sessions and &quot;
+            + &quot;attendance records should be equal.&quot;;
+
+    // The class number should start with &quot;T&quot;.
+    public static final String VALIDATION_REGEX = &quot;T.*&quot;;
+    public static final int DEFAULT_COUNT = 10;
+<span class="fc" id="L34">    private static int tutorialCount = DEFAULT_COUNT;</span>
+<span class="fc" id="L35">    private static int assignmentCount = DEFAULT_COUNT;</span>
+
+    public final String classNumber;
+    public final AttendanceTracker attendanceTracker;
+    public final AssignmentTracker assignmentTracker;
+    public final ClassParticipationTracker classParticipationTracker;
+
+    /**
+     * Constructs an {@code ClassDetails}.
+     *
+     * @param classNumber A valid Class Number
+     *
+     */
+<span class="fc" id="L48">    public ClassDetails(String classNumber) {</span>
+<span class="fc" id="L49">        requireNonNull(classNumber);</span>
+<span class="fc" id="L50">        checkArgument(isValidClassDetails(classNumber), MESSAGE_CONSTRAINTS);</span>
+<span class="fc" id="L51">        this.classNumber = classNumber;</span>
+<span class="fc" id="L52">        attendanceTracker = new AttendanceTracker(tutorialCount);</span>
+<span class="fc" id="L53">        classParticipationTracker = new ClassParticipationTracker(tutorialCount);</span>
+<span class="fc" id="L54">        assignmentTracker = new AssignmentTracker(assignmentCount);</span>
+<span class="fc" id="L55">    }</span>
+
+    /**
+     * Constructs an {@code ClassDetails}, with the given class number, attendance tracker,
+     * assignment tracker and class participation tracker.
+     */
+    public ClassDetails(String classNumber, AttendanceTracker attendanceTracker,
+<span class="fc" id="L62">                        AssignmentTracker assignmentTracker, ClassParticipationTracker classParticipationTracker) {</span>
+<span class="fc" id="L63">        requireNonNull(classNumber);</span>
+<span class="fc" id="L64">        requireNonNull(attendanceTracker);</span>
+<span class="fc" id="L65">        requireNonNull(assignmentTracker);</span>
+<span class="fc" id="L66">        requireNonNull(classParticipationTracker);</span>
+<span class="fc" id="L67">        checkArgument(isValidClassDetails(classNumber), MESSAGE_CONSTRAINTS);</span>
+<span class="fc" id="L68">        this.classNumber = classNumber;</span>
+<span class="fc" id="L69">        this.attendanceTracker = attendanceTracker;</span>
+<span class="fc" id="L70">        this.classParticipationTracker = classParticipationTracker;</span>
+<span class="fc" id="L71">        this.assignmentTracker = assignmentTracker;</span>
+<span class="fc" id="L72">    }</span>
+
+    /**
+     * Marks the specific tutorial as present.
+     */
+    public ClassDetails markPresent(Index tutNum) {
+<span class="fc" id="L78">        requireNonNull(tutNum);</span>
+<span class="fc" id="L79">        updateAssignmentAndTutorialCount();</span>
+<span class="fc" id="L80">        this.attendanceTracker.markPresent(tutNum);</span>
+<span class="fc" id="L81">        return this;</span>
+    }
+
+    /**
+     * Marks the specific tutorial as absent.
+     */
+    public ClassDetails markAbsent(Index tutNum) {
+<span class="fc" id="L88">        requireNonNull(tutNum);</span>
+<span class="fc" id="L89">        updateAssignmentAndTutorialCount();</span>
+<span class="fc" id="L90">        this.attendanceTracker.markAbsent(tutNum);</span>
+<span class="fc" id="L91">        return this;</span>
+    }
+
+    public String getClassNumber() {
+<span class="fc" id="L95">        return this.classNumber;</span>
+    }
+
+    /**
+     * Returns true if a given string is a valid class number.
+     */
+    public static boolean isValidClassDetails(String test) {
+<span class="fc" id="L102">        return (test.matches(VALIDATION_REGEX));</span>
+    }
+
+    public static void setTutorialCount(int tutorialCount) {
+<span class="fc" id="L106">        ClassDetails.tutorialCount = tutorialCount;</span>
+<span class="fc" id="L107">    }</span>
+
+    public static void setAssignmentCount(int assignmentCount) {
+<span class="fc" id="L110">        ClassDetails.assignmentCount = assignmentCount;</span>
+<span class="fc" id="L111">    }</span>
+
+    /**
+     * Gets the attendance percentage.
+     *
+     * @return Percentage of attendance.
+     * @throws IllegalValueException When there is no attendance tracker.
+     */
+    public double getAttendancePercentage() {
+<span class="pc bpc" id="L120" title="2 of 4 branches missed.">        assert (attendanceTracker != null);</span>
+<span class="fc" id="L121">        return attendanceTracker.getPercentage();</span>
+    }
+
+    /**
+     * Gets the class participation percentage.
+     *
+     * @return Percentage of class participation.
+     * @throws IllegalValueException When there is no class participation tracker.
+     */
+    public double getClassParticipationPercentage() {
+<span class="pc bpc" id="L131" title="2 of 4 branches missed.">        assert (classParticipationTracker != null);</span>
+<span class="fc" id="L132">        return classParticipationTracker.getPercentage();</span>
+    }
+
+    /**
+     * Gets the assignment percentage.
+     *
+     * @return Percentage of overall assignment grades.
+     * @throws IllegalValueException When there is no assignment tracker.
+     */
+    public double getAssignmentPercentage() {
+<span class="pc bpc" id="L142" title="2 of 4 branches missed.">        assert (assignmentTracker != null);</span>
+<span class="fc" id="L143">        return assignmentTracker.getPercentage();</span>
+    }
+
+    public ClassDetails setClassNumber(String classNumber) {
+<span class="fc" id="L147">        return new ClassDetails(classNumber, this.attendanceTracker,</span>
+                this.assignmentTracker, this.classParticipationTracker);
+    }
+
+    @Override
+    public String toString() {
+<span class="fc" id="L153">        return classNumber;</span>
+    }
+
+    @Override
+    public boolean equals(Object other) {
+<span class="fc bfc" id="L158" title="All 2 branches covered.">        if (other == this) {</span>
+<span class="fc" id="L159">            return true;</span>
+        }
+
+        // instanceof handles nulls
+<span class="fc bfc" id="L163" title="All 2 branches covered.">        if (!(other instanceof ClassDetails)) {</span>
+<span class="fc" id="L164">            return false;</span>
+        }
+
+<span class="fc" id="L167">        ClassDetails otherAddress = (ClassDetails) other;</span>
+<span class="fc bfc" id="L168" title="All 2 branches covered.">        return classNumber.equals(otherAddress.classNumber)</span>
+<span class="fc bfc" id="L169" title="All 2 branches covered.">                &amp;&amp; attendanceTracker.equals(otherAddress.attendanceTracker)</span>
+<span class="pc bpc" id="L170" title="1 of 2 branches missed.">                &amp;&amp; classParticipationTracker.equals(otherAddress.classParticipationTracker)</span>
+<span class="pc bpc" id="L171" title="1 of 2 branches missed.">                &amp;&amp; assignmentTracker.equals(otherAddress.assignmentTracker);</span>
+    }
+
+    @Override
+    public int hashCode() {
+<span class="fc" id="L176">        return Objects.hash(classNumber, attendanceTracker, classParticipationTracker, assignmentTracker);</span>
+    }
+
+    /**
+     * Sets the grade of the student for a particular assignment number.
+     * @param assignmentNumber the assignment number
+     * @param grade the grade to be set
+     * @throws CommandException if the assignment number or grade is invalid
+     */
+    public void setAssignGrade(int assignmentNumber, int grade) throws CommandException {
+<span class="fc bfc" id="L186" title="All 4 branches covered.">        if (assignmentNumber &gt; assignmentCount || assignmentNumber &lt;= 0) {</span>
+<span class="fc" id="L187">            throw new CommandException(</span>
+<span class="fc" id="L188">                    String.format(MESSAGE_INVALID_ASSIGNMENT_NUMBER, assignmentCount));</span>
+        }
+<span class="fc bfc" id="L190" title="All 4 branches covered.">        if (grade &lt; 0 || grade &gt; 100) {</span>
+<span class="fc" id="L191">            throw new CommandException(MESSAGE_INVALID_GRADE);</span>
+        }
+<span class="fc" id="L193">        updateAssignmentAndTutorialCount();</span>
+<span class="fc" id="L194">        assignmentTracker.editMarks(Index.fromOneBased(assignmentNumber), grade);</span>
+<span class="fc" id="L195">    }</span>
+
+    /**
+     * Displays the list of assignments and their grades.
+     * @return the display message of the assignments and their grades.
+     */
+    public String displayAssignments() {
+<span class="fc" id="L202">        return assignmentTracker.toString();</span>
+    }
+
+    /**
+     * Records the class participation of the student for a particular tutorial session.
+     */
+    public void recordClassPart(int sessionNumber, boolean participated) throws CommandException {
+<span class="fc bfc" id="L209" title="All 4 branches covered.">        if (sessionNumber &gt; tutorialCount || sessionNumber &lt;= 0) {</span>
+<span class="fc" id="L210">            throw new CommandException(</span>
+<span class="fc" id="L211">                    String.format(MESSAGE_INVALID_TUTORIAL_SESSION_NUMBER, tutorialCount));</span>
+        }
+<span class="fc" id="L213">        updateAssignmentAndTutorialCount();</span>
+<span class="fc" id="L214">        classParticipationTracker.markParticipation(Index.fromOneBased(sessionNumber), participated);</span>
+<span class="fc" id="L215">    }</span>
+
+    /**
+     * Updates the assignment and tutorial count in the attendance tracker,
+     * class participation tracker and assignment tracker. Whenever the assignment count
+     * or tutorial count is changed.
+     */
+    private void updateAssignmentAndTutorialCount() {
+<span class="fc" id="L223">        attendanceTracker.updateTutorialCountChange(tutorialCount);</span>
+<span class="fc" id="L224">        classParticipationTracker.updateTutorialCountChange(tutorialCount);</span>
+<span class="fc" id="L225">        assignmentTracker.updateAssignmentCountChange(assignmentCount);</span>
+<span class="fc" id="L226">    }</span>
+
+    /**
+     * Displays the list of tutorial sessions and their participation status.
+     * @return the display message of the tutorial sessions and their participation status.
+     */
+    public String displayParticipations() {
+<span class="fc" id="L233">        return classParticipationTracker.toString();</span>
+    }
+
+    public JsonAdaptedClassDetails getJsonAdaptedClassDetails() {
+<span class="fc" id="L237">        return new JsonAdaptedClassDetails(classNumber,</span>
+<span class="fc" id="L238">                attendanceTracker.getJson(),</span>
+<span class="fc" id="L239">                assignmentTracker.getJson(),</span>
+<span class="fc" id="L240">                classParticipationTracker.getJson());</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

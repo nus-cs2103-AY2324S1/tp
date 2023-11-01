@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<checkstyle version="10.2">
+<file name="/Users/bohshinyeo/Desktop/tp/src/main/java/seedu/address/AppParameters.java">
+</file>
+<file name="/Users/bohshinyeo/Desktop/tp/src/main/java/seedu/address/Main.java">
+</file>
+<file name="/Users/bohshinyeo/Desktop/tp/src/main/java/seedu/address/MainApp.java">
+</file>
+<file name="/Users/bohshinyeo/Desktop/tp/src/main/java/seedu/address/commons/core/Config.java">
+</file>
+<file name="/Users/bohshinyeo/Desktop/tp/src/main/java/seedu/address/commons/core/GuiSettings.java">
+</file>
+<file name="/Users/bohshinyeo/Desktop/tp/src/main/java/seedu/address/commons/core/LogsCenter.java">
+</file>
+<file name="/Users/bohshinyeo/Desktop/tp/src/main/java/seedu/address/commons/core/Version.java">
+</file>
+<file name="/Users/bohshinyeo/Desktop/tp/src/main/java/seedu/address/commons/core/index/Index.java">
+</file>
+<file name="/Users/bohshinyeo/Desktop/tp/src/main/java/seedu/address/commons/exceptions/DataLoadingException.java">
+</file>
+<file name="/Users/bohshinyeo/Desktop/tp/src/main/java/seedu/address/commons/exceptions/IllegalValueException.java">
+</file>
+<file name="/Users/bohshinyeo/Desktop/tp/src/main/java/seedu/address/commons/util/AppUtil.java">
+</file>
+<file name="/Users/bohshinyeo/Desktop/tp/src/main/java/seedu/address/commons/util/CollectionUtil.java">
+</file>
+<file name="/Users/bohshinyeo/Desktop/tp/src/main/java/seedu/address/commons/util/ConfigUtil.java">
+</file>
+<file name="/Users/bohshinyeo/Desktop/tp/src/main/java/seedu/address/commons/util/FileUtil.java">
+</file>
+<file name="/Users/bohshinyeo/Desktop/tp/src/main/java/seedu/address/commons/util/JsonUtil.java">
+</file>
+<file name="/Users/bohshinyeo/Desktop/tp/src/main/java/seedu/address/commons/util/StringUtil.java">
+</file>
+<file name="/Users/bohshinyeo/Desktop/tp/src/main/java/seedu/address/commons/util/ToStringBuilder.java">
+</file>
+<file name="/Users/bohshinyeo/Desktop/tp/src/main/java/seedu/address/logic/Logic.java">
+</file>
+<file name="/Users/bohshinyeo/Desktop/tp/src/main/java/seedu/address/logic/LogicManager.java">
+</file>
+<file name="/Users/bohshinyeo/Desktop/tp/src/main/java/seedu/address/logic/Messages.java">
+</file>
+<file name="/Users/bohshinyeo/Desktop/tp/src/main/java/seedu/address/logic/commands/AddCommand.java">
+</file>
+<file name="/Users/bohshinyeo/Desktop/tp/src/main/java/seedu/address/logic/commands/AddTagCommand.java">
+</file>
+<file name="/Users/bohshinyeo/Desktop/tp/src/main/java/seedu/address/logic/commands/ClearCommand.java">
+</file>
+<file name="/Users/bohshinyeo/Desktop/tp/src/main/java/seedu/address/logic/commands/Command.java">
+</file>
+<file name="/Users/bohshinyeo/Desktop/tp/src/main/java/seedu/address/logic/commands/CommandResult.java">
+</file>
+<file name="/Users/bohshinyeo/Desktop/tp/src/main/java/seedu/address/logic/commands/CommentCommand.java">
+</file>
+<file name="/Users/bohshinyeo/Desktop/tp/src/main/java/seedu/address/logic/commands/ConfigCommand.java">
+</file>
+<file name="/Users/bohshinyeo/Desktop/tp/src/main/java/seedu/address/logic/commands/DeleteCommand.java">
+</file>
+<file name="/Users/bohshinyeo/Desktop/tp/src/main/java/seedu/address/logic/commands/DeleteTagCommand.java">
+</file>
+<file name="/Users/bohshinyeo/Desktop/tp/src/main/java/seedu/address/logic/commands/EditCommand.java">
+</file>
+<file name="/Users/bohshinyeo/Desktop/tp/src/main/java/seedu/address/logic/commands/ExitCommand.java">
+</file>
+<file name="/Users/bohshinyeo/Desktop/tp/src/main/java/seedu/address/logic/commands/HelpCommand.java">
+</file>
+<file name="/Users/bohshinyeo/Desktop/tp/src/main/java/seedu/address/logic/commands/ListCommand.java">
+</file>
+<file name="/Users/bohshinyeo/Desktop/tp/src/main/java/seedu/address/logic/commands/LoadCommand.java">
+</file>
+<file name="/Users/bohshinyeo/Desktop/tp/src/main/java/seedu/address/logic/commands/LookupCommand.java">
+</file>
+<file name="/Users/bohshinyeo/Desktop/tp/src/main/java/seedu/address/logic/commands/MarkAbsentCommand.java">
+</file>
+<file name="/Users/bohshinyeo/Desktop/tp/src/main/java/seedu/address/logic/commands/MarkPresentAllCommand.java">
+</file>
+<file name="/Users/bohshinyeo/Desktop/tp/src/main/java/seedu/address/logic/commands/MarkPresentCommand.java">
+</file>
+<file name="/Users/bohshinyeo/Desktop/tp/src/main/java/seedu/address/logic/commands/RandomCommand.java">
+</file>
+<file name="/Users/bohshinyeo/Desktop/tp/src/main/java/seedu/address/logic/commands/RecordClassPartCommand.java">
+</file>
+<file name="/Users/bohshinyeo/Desktop/tp/src/main/java/seedu/address/logic/commands/SetGradeCommand.java">
+</file>
+<file name="/Users/bohshinyeo/Desktop/tp/src/main/java/seedu/address/logic/commands/TagCommand.java">
+</file>
+<file name="/Users/bohshinyeo/Desktop/tp/src/main/java/seedu/address/logic/commands/ThemeCommand.java">
+</file>
+<file name="/Users/bohshinyeo/Desktop/tp/src/main/java/seedu/address/logic/commands/ViewCommand.java">
+</file>
+<file name="/Users/bohshinyeo/Desktop/tp/src/main/java/seedu/address/logic/commands/exceptions/CommandException.java">
+</file>
+<file name="/Users/bohshinyeo/Desktop/tp/src/main/java/seedu/address/logic/parser/AddCommandParser.java">
+</file>
+<file name="/Users/bohshinyeo/Desktop/tp/src/main/java/seedu/address/logic/parser/AddressBookParser.java">
+</file>
+<file name="/Users/bohshinyeo/Desktop/tp/src/main/java/seedu/address/logic/parser/ArgumentMultimap.java">
+</file>
+<file name="/Users/bohshinyeo/Desktop/tp/src/main/java/seedu/address/logic/parser/ArgumentTokenizer.java">
+</file>
+<file name="/Users/bohshinyeo/Desktop/tp/src/main/java/seedu/address/logic/parser/CliSyntax.java">
+</file>
+<file name="/Users/bohshinyeo/Desktop/tp/src/main/java/seedu/address/logic/parser/CommentCommandParser.java">
+</file>
+<file name="/Users/bohshinyeo/Desktop/tp/src/main/java/seedu/address/logic/parser/ConfigCommandParser.java">
+</file>
+<file name="/Users/bohshinyeo/Desktop/tp/src/main/java/seedu/address/logic/parser/DeleteCommandParser.java">
+</file>
+<file name="/Users/bohshinyeo/Desktop/tp/src/main/java/seedu/address/logic/parser/EditCommandParser.java">
+</file>
+<file name="/Users/bohshinyeo/Desktop/tp/src/main/java/seedu/address/logic/parser/LoadCommandParser.java">
+</file>
+<file name="/Users/bohshinyeo/Desktop/tp/src/main/java/seedu/address/logic/parser/LookupCommandParser.java">
+</file>
+<file name="/Users/bohshinyeo/Desktop/tp/src/main/java/seedu/address/logic/parser/MarkAbsentCommandParser.java">
+</file>
+<file name="/Users/bohshinyeo/Desktop/tp/src/main/java/seedu/address/logic/parser/MarkPresentAllCommandParser.java">
+</file>
+<file name="/Users/bohshinyeo/Desktop/tp/src/main/java/seedu/address/logic/parser/MarkPresentCommandParser.java">
+</file>
+<file name="/Users/bohshinyeo/Desktop/tp/src/main/java/seedu/address/logic/parser/Parser.java">
+</file>
+<file name="/Users/bohshinyeo/Desktop/tp/src/main/java/seedu/address/logic/parser/ParserUtil.java">
+</file>
+<file name="/Users/bohshinyeo/Desktop/tp/src/main/java/seedu/address/logic/parser/Prefix.java">
+</file>
+<file name="/Users/bohshinyeo/Desktop/tp/src/main/java/seedu/address/logic/parser/RandomCommandParser.java">
+</file>
+<file name="/Users/bohshinyeo/Desktop/tp/src/main/java/seedu/address/logic/parser/RecordClassPartCommandParser.java">
+</file>
+<file name="/Users/bohshinyeo/Desktop/tp/src/main/java/seedu/address/logic/parser/SetGradeCommandParser.java">
+</file>
+<file name="/Users/bohshinyeo/Desktop/tp/src/main/java/seedu/address/logic/parser/TagCommandParser.java">
+</file>
+<file name="/Users/bohshinyeo/Desktop/tp/src/main/java/seedu/address/logic/parser/ViewCommandParser.java">
+</file>
+<file name="/Users/bohshinyeo/Desktop/tp/src/main/java/seedu/address/logic/parser/exceptions/ParseException.java">
+</file>
+<file name="/Users/bohshinyeo/Desktop/tp/src/main/java/seedu/address/model/AddressBook.java">
+</file>
+<file name="/Users/bohshinyeo/Desktop/tp/src/main/java/seedu/address/model/Model.java">
+</file>
+<file name="/Users/bohshinyeo/Desktop/tp/src/main/java/seedu/address/model/ModelManager.java">
+</file>
+<file name="/Users/bohshinyeo/Desktop/tp/src/main/java/seedu/address/model/ReadOnlyAddressBook.java">
+</file>
+<file name="/Users/bohshinyeo/Desktop/tp/src/main/java/seedu/address/model/ReadOnlyUserPrefs.java">
+</file>
+<file name="/Users/bohshinyeo/Desktop/tp/src/main/java/seedu/address/model/UserPrefs.java">
+</file>
+<file name="/Users/bohshinyeo/Desktop/tp/src/main/java/seedu/address/model/student/ClassDetails.java">
+</file>
+<file name="/Users/bohshinyeo/Desktop/tp/src/main/java/seedu/address/model/student/Comment.java">
+</file>
+<file name="/Users/bohshinyeo/Desktop/tp/src/main/java/seedu/address/model/student/Email.java">
+</file>
+<file name="/Users/bohshinyeo/Desktop/tp/src/main/java/seedu/address/model/student/Name.java">
+</file>
+<file name="/Users/bohshinyeo/Desktop/tp/src/main/java/seedu/address/model/student/Phone.java">
+</file>
+<file name="/Users/bohshinyeo/Desktop/tp/src/main/java/seedu/address/model/student/Student.java">
+</file>
+<file name="/Users/bohshinyeo/Desktop/tp/src/main/java/seedu/address/model/student/StudentContainsKeywordsPredicate.java">
+</file>
+<file name="/Users/bohshinyeo/Desktop/tp/src/main/java/seedu/address/model/student/StudentNumber.java">
+</file>
+<file name="/Users/bohshinyeo/Desktop/tp/src/main/java/seedu/address/model/student/UniqueStudentList.java">
+</file>
+<file name="/Users/bohshinyeo/Desktop/tp/src/main/java/seedu/address/model/student/exceptions/DuplicateStudentException.java">
+</file>
+<file name="/Users/bohshinyeo/Desktop/tp/src/main/java/seedu/address/model/student/exceptions/StudentNotFoundException.java">
+</file>
+<file name="/Users/bohshinyeo/Desktop/tp/src/main/java/seedu/address/model/student/grades/Assignment.java">
+</file>
+<file name="/Users/bohshinyeo/Desktop/tp/src/main/java/seedu/address/model/student/grades/AssignmentTracker.java">
+</file>
+<file name="/Users/bohshinyeo/Desktop/tp/src/main/java/seedu/address/model/student/grades/Attendance.java">
+</file>
+<file name="/Users/bohshinyeo/Desktop/tp/src/main/java/seedu/address/model/student/grades/AttendanceTracker.java">
+</file>
+<file name="/Users/bohshinyeo/Desktop/tp/src/main/java/seedu/address/model/student/grades/ClassParticipation.java">
+</file>
+<file name="/Users/bohshinyeo/Desktop/tp/src/main/java/seedu/address/model/student/grades/ClassParticipationTracker.java">
+</file>
+<file name="/Users/bohshinyeo/Desktop/tp/src/main/java/seedu/address/model/student/grades/Tracker.java">
+</file>
+<file name="/Users/bohshinyeo/Desktop/tp/src/main/java/seedu/address/model/student/grades/exceptions/InvalidTutorialIndexException.java">
+</file>
+<file name="/Users/bohshinyeo/Desktop/tp/src/main/java/seedu/address/model/tag/Tag.java">
+</file>
+<file name="/Users/bohshinyeo/Desktop/tp/src/main/java/seedu/address/model/util/SampleDataUtil.java">
+</file>
+<file name="/Users/bohshinyeo/Desktop/tp/src/main/java/seedu/address/storage/AddressBookStorage.java">
+</file>
+<file name="/Users/bohshinyeo/Desktop/tp/src/main/java/seedu/address/storage/JsonAdaptedClassDetails.java">
+</file>
+<file name="/Users/bohshinyeo/Desktop/tp/src/main/java/seedu/address/storage/JsonAdaptedStudent.java">
+</file>
+<file name="/Users/bohshinyeo/Desktop/tp/src/main/java/seedu/address/storage/JsonAdaptedTag.java">
+</file>
+<file name="/Users/bohshinyeo/Desktop/tp/src/main/java/seedu/address/storage/JsonAddressBookStorage.java">
+</file>
+<file name="/Users/bohshinyeo/Desktop/tp/src/main/java/seedu/address/storage/JsonSerializableAddressBook.java">
+</file>
+<file name="/Users/bohshinyeo/Desktop/tp/src/main/java/seedu/address/storage/JsonUserPrefsStorage.java">
+</file>
+<file name="/Users/bohshinyeo/Desktop/tp/src/main/java/seedu/address/storage/Storage.java">
+</file>
+<file name="/Users/bohshinyeo/Desktop/tp/src/main/java/seedu/address/storage/StorageManager.java">
+</file>
+<file name="/Users/bohshinyeo/Desktop/tp/src/main/java/seedu/address/storage/UserPrefsStorage.java">
+</file>
+<file name="/Users/bohshinyeo/Desktop/tp/src/main/java/seedu/address/ui/ClassDetailBox.java">
+</file>
+<file name="/Users/bohshinyeo/Desktop/tp/src/main/java/seedu/address/ui/ClassDetailCard.java">
+</file>
+<file name="/Users/bohshinyeo/Desktop/tp/src/main/java/seedu/address/ui/CommandBox.java">
+</file>
+<file name="/Users/bohshinyeo/Desktop/tp/src/main/java/seedu/address/ui/HelpWindow.java">
+</file>
+<file name="/Users/bohshinyeo/Desktop/tp/src/main/java/seedu/address/ui/MainWindow.java">
+</file>
+<file name="/Users/bohshinyeo/Desktop/tp/src/main/java/seedu/address/ui/ResultDisplay.java">
+</file>
+<file name="/Users/bohshinyeo/Desktop/tp/src/main/java/seedu/address/ui/StatusBarFooter.java">
+</file>
+<file name="/Users/bohshinyeo/Desktop/tp/src/main/java/seedu/address/ui/StudentCard.java">
+</file>
+<file name="/Users/bohshinyeo/Desktop/tp/src/main/java/seedu/address/ui/StudentListPanel.java">
+</file>
+<file name="/Users/bohshinyeo/Desktop/tp/src/main/java/seedu/address/ui/Ui.java">
+</file>
+<file name="/Users/bohshinyeo/Desktop/tp/src/main/java/seedu/address/ui/UiManager.java">
+</file>
+<file name="/Users/bohshinyeo/Desktop/tp/src/main/java/seedu/address/ui/UiPart.java">
+</file>
+</checkstyle>

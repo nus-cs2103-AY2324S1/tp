@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="seedu.address.storage.JsonAdaptedClassDetailsTest" tests="5" skipped="0" failures="0" errors="0" timestamp="2023-11-01T10:51:08" hostname="Bohs-Air" time="0.001">
+  <properties/>
+  <testcase name="toModelType_nullClassNumber_throwsIllegalValueException()" classname="seedu.address.storage.JsonAdaptedClassDetailsTest" time="0.0"/>
+  <testcase name="toModelType_validClassDetails_returnsClassDetails()" classname="seedu.address.storage.JsonAdaptedClassDetailsTest" time="0.0"/>
+  <testcase name="toModelType_invalidClassNumber_throwsIllegalValueException()" classname="seedu.address.storage.JsonAdaptedClassDetailsTest" time="0.0"/>
+  <testcase name="toModelType_unequalLength_throwsIllegalValueException()" classname="seedu.address.storage.JsonAdaptedClassDetailsTest" time="0.0"/>
+  <testcase name="toModelType_invalidAssignmentTracker_throwsIllegalValueException()" classname="seedu.address.storage.JsonAdaptedClassDetailsTest" time="0.001"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

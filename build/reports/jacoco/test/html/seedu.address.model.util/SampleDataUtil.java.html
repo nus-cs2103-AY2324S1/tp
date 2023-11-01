@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>SampleDataUtil.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">tp</a> &gt; <a href="index.source.html" class="el_package">seedu.address.model.util</a> &gt; <span class="el_source">SampleDataUtil.java</span></div><h1>SampleDataUtil.java</h1><pre class="source lang-java linenums">package seedu.address.model.util;
+
+import java.util.Arrays;
+import java.util.Set;
+import java.util.stream.Collectors;
+
+import seedu.address.model.AddressBook;
+import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.student.ClassDetails;
+import seedu.address.model.student.Comment;
+import seedu.address.model.student.Email;
+import seedu.address.model.student.Name;
+import seedu.address.model.student.Phone;
+import seedu.address.model.student.Student;
+import seedu.address.model.student.StudentNumber;
+import seedu.address.model.tag.Tag;
+
+/**
+ * Contains utility methods for populating {@code AddressBook} with sample data.
+ */
+<span class="nc" id="L21">public class SampleDataUtil {</span>
+
+    public static Student[] getSampleStudents() {
+<span class="nc" id="L24">        return new Student[] {</span>
+            new Student(new Name(&quot;Alex Yeoh&quot;), new Phone(&quot;87438807&quot;), new Email(&quot;alexyeoh@example.com&quot;),
+                new StudentNumber(&quot;A0247243A&quot;), new ClassDetails(&quot;T11&quot;),
+<span class="nc" id="L27">                getTagSet(&quot;friends&quot;), new Comment(&quot;Good at math&quot;)),</span>
+            new Student(new Name(&quot;Bernice Yu&quot;), new Phone(&quot;99272758&quot;), new Email(&quot;berniceyu@example.com&quot;),
+                new StudentNumber(&quot;A0231018A&quot;), new ClassDetails(&quot;T12&quot;),
+<span class="nc" id="L30">                getTagSet(&quot;colleagues&quot;, &quot;friends&quot;), new Comment(&quot;Good at science&quot;)),</span>
+            new Student(new Name(&quot;Charlotte Oliveiro&quot;), new Phone(&quot;93210283&quot;), new Email(&quot;charlotte@example.com&quot;),
+                new StudentNumber(&quot;A0241243A&quot;), new ClassDetails(&quot;T12&quot;),
+<span class="nc" id="L33">                getTagSet(&quot;neighbours&quot;), new Comment(&quot;Needs help&quot;)),</span>
+            new Student(new Name(&quot;David Li&quot;), new Phone(&quot;91031282&quot;), new Email(&quot;lidavid@example.com&quot;),
+                new StudentNumber(&quot;A0123243A&quot;), new ClassDetails(&quot;T11&quot;),
+<span class="nc" id="L36">                getTagSet(&quot;family&quot;), new Comment(&quot;&quot;)),</span>
+            new Student(new Name(&quot;Irfan Ibrahim&quot;), new Phone(&quot;92492021&quot;), new Email(&quot;irfan@example.com&quot;),
+                new StudentNumber(&quot;A0234543A&quot;), new ClassDetails(&quot;T10&quot;),
+<span class="nc" id="L39">                getTagSet(&quot;classmates&quot;), new Comment(&quot;&quot;)),</span>
+            new Student(new Name(&quot;Roy Balakrishnan&quot;), new Phone(&quot;92624417&quot;), new Email(&quot;royb@example.com&quot;),
+                new StudentNumber(&quot;A0224543A&quot;), new ClassDetails(&quot;T11&quot;),
+<span class="nc" id="L42">                getTagSet(&quot;colleagues&quot;), new Comment(&quot;&quot;))</span>
+        };
+    }
+
+    public static ReadOnlyAddressBook getSampleAddressBook() {
+<span class="nc" id="L47">        AddressBook sampleAb = new AddressBook();</span>
+<span class="nc bnc" id="L48" title="All 2 branches missed.">        for (Student sampleStudent : getSampleStudents()) {</span>
+<span class="nc" id="L49">            sampleAb.addStudent(sampleStudent);</span>
+        }
+<span class="nc" id="L51">        return sampleAb;</span>
+    }
+
+    /**
+     * Returns a tag set containing the list of strings given.
+     */
+    public static Set&lt;Tag&gt; getTagSet(String... strings) {
+<span class="fc" id="L58">        return Arrays.stream(strings)</span>
+<span class="fc" id="L59">                .map(Tag::new)</span>
+<span class="fc" id="L60">                .collect(Collectors.toSet());</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

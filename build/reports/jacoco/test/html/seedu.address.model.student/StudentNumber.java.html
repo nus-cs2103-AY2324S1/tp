@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>StudentNumber.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">tp</a> &gt; <a href="index.source.html" class="el_package">seedu.address.model.student</a> &gt; <span class="el_source">StudentNumber.java</span></div><h1>StudentNumber.java</h1><pre class="source lang-java linenums">package seedu.address.model.student;
+
+import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.AppUtil.checkArgument;
+
+/**
+ * Represents a Student's Student Number in the address book.
+ * Guarantees: immutable; is valid as declared in {@link #isValidStudentNumber(String)}
+ */
+public class StudentNumber {
+
+    public static final String MESSAGE_CONSTRAINTS = &quot;Student Number can take any value starting with A, &quot;
+            + &quot;and it should not be blank&quot;;
+
+    /*
+     * The first character of the student number needs to be &quot;A&quot;.
+     */
+    public static final String VALIDATION_REGEX = &quot;A.*&quot;;
+
+    public final String value;
+
+    /**
+     * Constructs an {@code StudentNumber}.
+     *
+     * @param studentNumber A valid student number.
+     */
+<span class="fc" id="L27">    public StudentNumber(String studentNumber) {</span>
+<span class="fc" id="L28">        requireNonNull(studentNumber);</span>
+<span class="fc" id="L29">        studentNumber = studentNumber.toUpperCase().trim();</span>
+<span class="fc" id="L30">        checkArgument(isValidStudentNumber(studentNumber), MESSAGE_CONSTRAINTS);</span>
+<span class="fc" id="L31">        value = studentNumber;</span>
+<span class="fc" id="L32">    }</span>
+
+    /**
+     * Returns true if a given string is a valid email,
+     * checks if the student number already exists.
+     */
+    public static boolean isValidStudentNumber(String test) {
+<span class="fc" id="L39">        return (test.matches(VALIDATION_REGEX));</span>
+    }
+
+    /**
+     * Checks if the student number is valid.
+     */
+    public boolean isValid() {
+<span class="nc" id="L46">        return this.value.matches(VALIDATION_REGEX);</span>
+    }
+
+    @Override
+    public String toString() {
+<span class="fc" id="L51">        return value;</span>
+    }
+
+    @Override
+    public boolean equals(Object other) {
+<span class="fc bfc" id="L56" title="All 2 branches covered.">        if (other == this) {</span>
+<span class="fc" id="L57">            return true;</span>
+        }
+
+        // instanceof handles nulls
+<span class="fc bfc" id="L61" title="All 2 branches covered.">        if (!(other instanceof StudentNumber)) {</span>
+<span class="fc" id="L62">            return false;</span>
+        }
+
+<span class="fc" id="L65">        StudentNumber otherStudentNumber = (StudentNumber) other;</span>
+<span class="fc" id="L66">        return value.equals(otherStudentNumber.value);</span>
+    }
+
+    @Override
+    public int hashCode() {
+<span class="fc" id="L71">        return value.hashCode();</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>
