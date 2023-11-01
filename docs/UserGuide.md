@@ -31,7 +31,7 @@ A window should open with a GUI similar to the one below. Note how the app start
 ![Ui](images/Ui.png)
 
 1. The text box at the top of the window should be automatically selected. This is where you can type your text commands. Press <kbd>Enter</kbd> to execute them.\
-The feedback from each command's execution will be displayed below the text box, and the currently displayed list of contacts is at the bottom.
+The feedback from each command's execution will be displayed below the text box, with the currently displayed list of contacts below that.
 
 1. Refer to the [Features](#Features) section below to find out about the various commands.
 
@@ -51,8 +51,9 @@ The feedback from each command's execution will be displayed below the text box,
     - Some commands take in parameters.
     e.g. in `add n/NAME`, the `add` command takes in an `n/` parameter.
 
-    - Words in `UPPER_CASE` are placeholders for values to be specified for a parameter.\
-    e.g. in `n/NAME`, you should specify a `NAME` such as `n/John Doe`.
+    - Words in `UPPER_CASE` are placeholders for values to be specified.\
+    e.g. in `edit INDEX`, you should specify an `INDEX` such as `edit 1`.\
+    e.g. in `add n/NAME`, you should specify a `NAME` such as `add n/John Doe`.
 
     - Parameters in square brackets are optional.\
     e.g in `n/NAME [o/NOTE]`, you could specify `n/John Doe o/Good at SE.`, or just `n/John Doe`.
@@ -69,31 +70,48 @@ The feedback from each command's execution will be displayed below the text box,
     - If you are using the PDF version of this user guide, be careful when copy-pasting commands that span multiple lines. Spaces surrounding line breaks may get omitted when copied over to the app.
 </div>
 
-### Adding a Contact: `add`
+### Adding a contact: `add`
 
-Easily add a new contact to your list with the `add` command.
+Adds a new contact.
 
 **Format:**
-`add n/FULL_NAME p/PHONE_NUMBER e/EMAIL [o/NOTE] [t/TAG]... [a/ALTERNATE_CONTACT]...`
+`add n/NAME p/PHONE_NUMBER e/EMAIL [o/NOTE] [t/TAG]... [a/ALTERNATE_CONTACT]...`
 
-* A contact can have 0 or 1 note
-* A contact can have any number of tags (including 0)
-* A contact can have any number of alternate contacts (including 0)
+<div markdown="span" class="alert alert-primary">
+    :bulb: **Tip:**
+    The format for `ALTERNATE_CONTACT` is `TYPE: USERNAME`, roughly looking like `SocialMedia: Username`.
+</div>
 
 **Examples:**
+
 - `add n/John Doe p/98765432 e/john.doe@email.com`
-- `add n/John Doe p/98765432 e/john.doe@email.com o/CS2103 Prof. t/NUS t/CS2103 course a/Telegram@JohnDoe`
+- `add n/John Doe p/98765432 e/john.doe@email.com o/Good at SE. t/NUS t/CS2103 course a/Telegram: JohnDoe`
 
----
+### Editing a contact: `edit`
 
-### Viewing All Contacts: `list`
-
-Display all your stored contacts.
+Edits an existing contact.
 
 **Format:**
-`list`
+`edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [o/NOTE] [t/TAG]... [a/ALTERNATE_CONTACT]...`
 
----
+- Edits the contact at the specified `INDEX`.
+Index refers to the index number currently shown in the displayed contact list.
+Indices must be a positive integer to be valid (1, 2, 3 etc.), and must exist in the displayed contact list.
+
+- At least one of the optional parameters must be specified.
+
+- Each specified parameter will have its new value(s) replace all existing value(s) for that parameter.\
+e.g. `edit 1 n/The Myth` will edit the name of contact #`1` to `The Myth`, without changing any other parameter values for that contact.
+    - When editing tags, the new specified tag(s) will similarly replace all existing tag(s).\
+    You can specify no tags via a _single_ `t/` without a value.
+    - Likewise, when editing alternate contacts, you can specify no alternate contacts via a _single_ `a/` without a value.
+
+**Examples:**
+
+- `edit 1 p/87654321 e/jane_doe@nus.edu.sg`
+(Edits the phone number and email address of contact #`1` to `87654321` and `jane_doe@nus.edu.sg` respectively.)
+
+- `edit 3 o/Member of NUS S/U t/` (Edits the note of contact #`3` to `Member of NUS S/U` and clears any of its existing tags.)
 
 ### Deleting Contacts: `delete`
 
@@ -114,13 +132,19 @@ Removes one or more contacts based on their indices. The indices refer to the in
 - `delete 1 3 5`
   Deletes the contacts at the specified indices: 1, 3, and 5.
 
----
+### Clearing All Entries: `clear`
 
-### Viewing Help: `help`
+Remove all contacts from your list. Apply with caution!
 
-Click the help button on the top to navigate to a comprehensive help manual.
+**Format:**
+`clear`
 
----
+### Listing all contacts: `list`
+
+Shows all contacts.
+
+**Format:**
+`list`
 
 ### Locating Contacts by Name: `find`
 
@@ -132,36 +156,24 @@ Search and display contacts with names containing any of the given keywords.
 **Example:**
 `find John Alice`
 
----
+### Filtering by tag: `filter`
 
-### Clearing All Entries: `clear`
+//TODO
 
-Remove all contacts from your list. Apply with caution!
+### Viewing Help: `help`
+
+Opens a subwindow with a convenient link to the user guide.
 
 **Format:**
-`clear`
+`help`
 
----
+Alternatively, you can press <kbd>F1</kbd> or click Help → Help in the top toolbar.
 
 ### Exiting the Program: `exit`
+
+//TODO top tab
 
 Close the ConText application.
 
 **Format:**
 `exit`
-
----
-
-### Editing a Contact: `edit`
-
-Modify an existing contact's details in your list.
-
-**Format:**
-`edit INDEX n/FULL_NAME p/PHONE_NUMBER e/EMAIL`
-
-**Example:**
-`edit 2 n/John Doe p/98765432 e/john.doe@email.com`
-
----
-
-Remember, whenever in doubt, you can always navigate to the help webpage via the `help` tab at the top.
