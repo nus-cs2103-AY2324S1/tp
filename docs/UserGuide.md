@@ -429,6 +429,8 @@ The fields you enter should follow the following format:
 
 </panel>
 
+<br>
+
 <box type="info">
 To manage notes for a person in a list, use the following commands:
 
