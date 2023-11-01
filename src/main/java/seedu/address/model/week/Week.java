@@ -5,8 +5,6 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import seedu.address.model.person.Attendance;
-
 /**
  * Represents a Week in TAvigator.
  * Guarantees: immutable; week is valid as declared in {@link #isValidWeek(int)}

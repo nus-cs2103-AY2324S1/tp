@@ -112,7 +112,7 @@ class JsonAdaptedPerson {
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
 
-        final List<Attendance> modelAttendances  = new ArrayList<>();
+        final List<Attendance> modelAttendances = new ArrayList<>();
         modelAttendances.addAll(attendances);
 
         return new Person(modelName, modelPhone, modelEmail, modelId, modelTags, modelAttendances);
