@@ -22,7 +22,7 @@ public class FindCommand extends Command {
             + " whose details match the given keywords (case-insensitive) "
             + "and displays them as a list with index numbers.\n"
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
-            + "Example: " + COMMAND_WORD + " n/alex bernice st/interviewed t/software engineer";
+            + "Example: " + COMMAND_WORD + " n/alex bernice st/interviewed t/softwareEngineer";
 
     private final List<Predicate<Person>> predicatesList;
 
