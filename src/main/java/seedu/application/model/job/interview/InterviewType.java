@@ -15,7 +15,7 @@ public class InterviewType {
                     + "BEHAVIOURAL, TECHNICAL, CASE, GROUP, PHONE, VIDEO, ONLINE, ONSITE, OTHER";
 
     public static final String TO_ADD_INTERVIEW_TYPE = "TO_ADD_INTERVIEW_TYPE";
-    public static final InterviewType EMPTY_INTERVIEW_TYPE = new InterviewType(TO_ADD_INTERVIEW_TYPE);
+    public static final InterviewType DEFAULT_INTERVIEW_TYPE = new InterviewType(TO_ADD_INTERVIEW_TYPE);
     public final String interviewType;
     /**
      * Enum for interview types

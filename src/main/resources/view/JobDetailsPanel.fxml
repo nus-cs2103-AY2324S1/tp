@@ -4,6 +4,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.Region?>
@@ -18,7 +19,7 @@
             <Insets bottom="0" left="15" right="15" top="15"/>
         </padding>
         <Label fx:id="company" styleClass="cell_big_label" text="\$company" wrapText="true"/>
-        <GridPane>
+        <GridPane minHeight = "20">
             <columnConstraints>
                 <ColumnConstraints minWidth="100.0"/>
             </columnConstraints>
@@ -43,17 +44,17 @@
             <Label fx:id="jobType" styleClass="cell_small_label" text="\$jobType" GridPane.columnIndex="1"
                    GridPane.rowIndex="4"/>
         </GridPane>
+        <Label fx:id="interviewPreamble" styleClass="cell_big_label" text="\$interviewPreamble"/>
     </VBox>
 
-    <VBox VBox.vgrow="ALWAYS">
+    <AnchorPane minWidth="100" minHeight="50.0" prefWidth="250" VBox.vgrow="ALWAYS" >
         <padding>
-            <Insets bottom="15" left="15" right="15" top="0"/>
+            <Insets top="5" right="5" bottom="5" left="15" />
         </padding>
-        <Label fx:id="interviewTitle" styleClass="cell_big_label" text="\$interviews"/>
-        <Region minHeight="5" prefHeight="5" maxHeight="5"/>
-        <AnchorPane minHeight="200" prefHeight="200" prefWidth="195.0" styleClass="interviewListPanel"
-                    AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
-                    AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" VBox.vgrow="ALWAYS">
-        </AnchorPane>
-    </VBox>
+        <StackPane fx:id="interviewListPanelPlaceHolder" minHeight="100" prefHeight="500"
+                   prefWidth="195.0" styleClass="pane-with-border" AnchorPane.bottomAnchor="0.0"
+                   AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+                   AnchorPane.topAnchor="0.0">
+        </StackPane>
+    </AnchorPane>
 </VBox>

@@ -11,7 +11,7 @@ import seedu.application.model.job.interview.Interview;
  */
 public class InterviewCard extends UiPart<Region> {
 
-    public static final String FXML = "InterviewCard.fxml";
+    public static final String FXML = "InterviewListCard.fxml";
 
     public final Interview interview;
 
@@ -22,7 +22,7 @@ public class InterviewCard extends UiPart<Region> {
     private Label title;
 
     @FXML
-    private Label date;
+    private Label dateTime;
 
     @FXML
     private Label address;
@@ -33,6 +33,9 @@ public class InterviewCard extends UiPart<Region> {
     public InterviewCard(Interview interview, int index) {
         super(FXML);
         this.interview = interview;
-        String title = "Interview ";
+        String type = interview.getInterviewType().toString();
+        this.title.setText(index + ". " + type + " Interview");
+        dateTime.setText(interview.getInterviewDateTime().toString());
+        address.setText(interview.getInterviewAddress().toString());
     }
 }
