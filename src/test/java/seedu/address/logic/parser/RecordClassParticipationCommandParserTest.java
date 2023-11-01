@@ -15,10 +15,10 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSucces
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.Messages;
-import seedu.address.logic.commands.RecordClassPartCommand;
+import seedu.address.logic.commands.RecordClassParticipationCommand;
 import seedu.address.model.student.StudentNumber;
 
-public class RecordClassPartCommandParserTest {
+public class RecordClassParticipationCommandParserTest {
     public static final String INVALID_TUT_DESC = " " + PREFIX_TUTORIAL_SESSION + "first";
     public static final String INVALID_PARTICIPATION_DESC = " " + PREFIX_PARTICIPATION + "execellent";
     public static final String VALID_TUT = "1";
@@ -27,9 +27,9 @@ public class RecordClassPartCommandParserTest {
     public static final String VALID_PARTICIPATION_DESC = " " + PREFIX_PARTICIPATION + VALID_PARTICIPATION;
 
     private static final String MESSAGE_INVALID_FORMAT =
-            String.format(MESSAGE_INVALID_COMMAND_FORMAT, RecordClassPartCommand.MESSAGE_USAGE);
+            String.format(MESSAGE_INVALID_COMMAND_FORMAT, RecordClassParticipationCommand.MESSAGE_USAGE);
 
-    private final RecordClassPartCommandParser parser = new RecordClassPartCommandParser();
+    private final RecordClassParticipationCommandParser parser = new RecordClassParticipationCommandParser();
 
     @Test
     public void parse_missingParts_failure() {
@@ -57,19 +57,21 @@ public class RecordClassPartCommandParserTest {
 
         assertParseFailure(parser, STUDENT_NUMBER_DESC_AMY + INVALID_TUT_DESC + VALID_PARTICIPATION_DESC,
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                        RecordClassPartCommand.MESSAGE_USAGE)); // invalid tut
+                        RecordClassParticipationCommand.MESSAGE_USAGE)); // invalid tut
 
         assertParseFailure(parser, STUDENT_NUMBER_DESC_AMY + VALID_TUT_DESC + INVALID_PARTICIPATION_DESC,
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                        RecordClassPartCommand.MESSAGE_USAGE)); // invalid participation
+                        RecordClassParticipationCommand.MESSAGE_USAGE)); // invalid participation
     }
 
     @Test
     public void parse_allFieldsSpecified_success() {
         String userInput = STUDENT_NUMBER_DESC_AMY + VALID_TUT_DESC + VALID_PARTICIPATION_DESC;
 
-        RecordClassPartCommand expectedCommand = new RecordClassPartCommand(new StudentNumber(VALID_STUDENT_NUMBER_AMY),
-                Integer.parseInt(VALID_TUT), Boolean.parseBoolean(VALID_PARTICIPATION));
+        RecordClassParticipationCommand expectedCommand = new RecordClassParticipationCommand(
+                new StudentNumber(VALID_STUDENT_NUMBER_AMY),
+                Integer.parseInt(VALID_TUT),
+                Boolean.parseBoolean(VALID_PARTICIPATION));
         assertParseSuccess(parser, userInput, expectedCommand);
     }
 
@@ -77,8 +79,10 @@ public class RecordClassPartCommandParserTest {
     public void parse_differentOrdering_success() {
         String userInput = VALID_PARTICIPATION_DESC + VALID_TUT_DESC + STUDENT_NUMBER_DESC_AMY;
 
-        RecordClassPartCommand expectedCommand = new RecordClassPartCommand(new StudentNumber(VALID_STUDENT_NUMBER_AMY),
-                Integer.parseInt(VALID_TUT), Boolean.parseBoolean(VALID_PARTICIPATION));
+        RecordClassParticipationCommand expectedCommand = new RecordClassParticipationCommand(
+                new StudentNumber(VALID_STUDENT_NUMBER_AMY),
+                Integer.parseInt(VALID_TUT),
+                Boolean.parseBoolean(VALID_PARTICIPATION));
         assertParseSuccess(parser, userInput, expectedCommand);
 
         userInput = VALID_TUT_DESC + VALID_PARTICIPATION_DESC + STUDENT_NUMBER_DESC_AMY;

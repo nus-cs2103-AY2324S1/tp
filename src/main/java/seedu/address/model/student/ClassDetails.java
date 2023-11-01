@@ -8,9 +8,9 @@ import java.util.Objects;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.student.grades.AssignmentTracker;
-import seedu.address.model.student.grades.AttendanceTracker;
-import seedu.address.model.student.grades.ClassParticipationTracker;
+import seedu.address.model.student.information.AssignmentTracker;
+import seedu.address.model.student.information.AttendanceTracker;
+import seedu.address.model.student.information.ClassParticipationTracker;
 import seedu.address.storage.JsonAdaptedClassDetails;
 
 /**
@@ -72,23 +72,40 @@ public class ClassDetails {
     }
 
     /**
+     * Creates a deep copy of the class details.
+     * @return A deep copy of {@Code ClassDetails}.
+     */
+    public ClassDetails copy() {
+        AttendanceTracker newAttendanceTracker = this.attendanceTracker.copy();
+        AssignmentTracker newAssignmentTracker = this.assignmentTracker.copy();
+        ClassParticipationTracker newClassParticipationTracker = this.classParticipationTracker.copy();
+        return new ClassDetails(classNumber, newAttendanceTracker, newAssignmentTracker, newClassParticipationTracker);
+    }
+
+    /**
      * Marks the specific tutorial as present.
      */
-    public ClassDetails markPresent(Index tutNum) {
+    public void markPresent(Index tutNum) throws CommandException {
         requireNonNull(tutNum);
+        if (tutNum.getZeroBased() > tutorialCount || tutNum.getZeroBased() <= 0) {
+            throw new CommandException(
+                    String.format(MESSAGE_INVALID_TUTORIAL_SESSION_NUMBER, tutorialCount));
+        }
         updateAssignmentAndTutorialCount();
         this.attendanceTracker.markPresent(tutNum);
-        return this;
     }
 
     /**
      * Marks the specific tutorial as absent.
      */
-    public ClassDetails markAbsent(Index tutNum) {
+    public void markAbsent(Index tutNum) throws CommandException {
         requireNonNull(tutNum);
+        if (tutNum.getZeroBased() > tutorialCount || tutNum.getZeroBased() <= 0) {
+            throw new CommandException(
+                    String.format(MESSAGE_INVALID_TUTORIAL_SESSION_NUMBER, tutorialCount));
+        }
         updateAssignmentAndTutorialCount();
         this.attendanceTracker.markAbsent(tutNum);
-        return this;
     }
 
     public String getClassNumber() {
@@ -148,6 +165,70 @@ public class ClassDetails {
                 this.assignmentTracker, this.classParticipationTracker);
     }
 
+    /**
+     * Sets the grade of the student for a particular assignment number.
+     * @param assignmentNumber the assignment number
+     * @param grade the grade to be set
+     * @throws CommandException if the assignment number or grade is invalid
+     */
+    public void setGrade(int assignmentNumber, int grade) throws CommandException {
+        if (assignmentNumber > assignmentCount || assignmentNumber <= 0) {
+            throw new CommandException(
+                    String.format(MESSAGE_INVALID_ASSIGNMENT_NUMBER, assignmentCount));
+        }
+        if (grade < 0 || grade > 100) {
+            throw new CommandException(MESSAGE_INVALID_GRADE);
+        }
+        updateAssignmentAndTutorialCount();
+        assignmentTracker.editMarks(Index.fromOneBased(assignmentNumber), grade);
+    }
+
+    /**
+     * Displays the list of assignments and their grades.
+     * @return the display message of the assignments and their grades.
+     */
+    public String displayAssignments() {
+        return assignmentTracker.toString();
+    }
+
+    /**
+     * Records the class participation of the student for a particular tutorial session.
+     */
+    public void recordClassParticipation(int sessionNumber, boolean participated) throws CommandException {
+        if (sessionNumber > tutorialCount || sessionNumber <= 0) {
+            throw new CommandException(
+                    String.format(MESSAGE_INVALID_TUTORIAL_SESSION_NUMBER, tutorialCount));
+        }
+        updateAssignmentAndTutorialCount();
+        classParticipationTracker.markParticipation(Index.fromOneBased(sessionNumber), participated);
+    }
+
+    /**
+     * Updates the assignment and tutorial count in the attendance tracker,
+     * class participation tracker and assignment tracker. Whenever the assignment count
+     * or tutorial count is changed.
+     */
+    private void updateAssignmentAndTutorialCount() {
+        attendanceTracker.updateTutorialCountChange(tutorialCount);
+        classParticipationTracker.updateTutorialCountChange(tutorialCount);
+        assignmentTracker.updateAssignmentCountChange(assignmentCount);
+    }
+
+    /**
+     * Displays the list of tutorial sessions and their participation status.
+     * @return the display message of the tutorial sessions and their participation status.
+     */
+    public String displayParticipation() {
+        return classParticipationTracker.toString();
+    }
+
+    public JsonAdaptedClassDetails getJsonAdaptedClassDetails() {
+        return new JsonAdaptedClassDetails(classNumber,
+                attendanceTracker.getJson(),
+                assignmentTracker.getJson(),
+                classParticipationTracker.getJson());
+    }
+
     @Override
     public String toString() {
         return classNumber;
@@ -174,69 +255,5 @@ public class ClassDetails {
     @Override
     public int hashCode() {
         return Objects.hash(classNumber, attendanceTracker, classParticipationTracker, assignmentTracker);
-    }
-
-    /**
-     * Sets the grade of the student for a particular assignment number.
-     * @param assignmentNumber the assignment number
-     * @param grade the grade to be set
-     * @throws CommandException if the assignment number or grade is invalid
-     */
-    public void setAssignGrade(int assignmentNumber, int grade) throws CommandException {
-        if (assignmentNumber > assignmentCount || assignmentNumber <= 0) {
-            throw new CommandException(
-                    String.format(MESSAGE_INVALID_ASSIGNMENT_NUMBER, assignmentCount));
-        }
-        if (grade < 0 || grade > 100) {
-            throw new CommandException(MESSAGE_INVALID_GRADE);
-        }
-        updateAssignmentAndTutorialCount();
-        assignmentTracker.editMarks(Index.fromOneBased(assignmentNumber), grade);
-    }
-
-    /**
-     * Displays the list of assignments and their grades.
-     * @return the display message of the assignments and their grades.
-     */
-    public String displayAssignments() {
-        return assignmentTracker.toString();
-    }
-
-    /**
-     * Records the class participation of the student for a particular tutorial session.
-     */
-    public void recordClassPart(int sessionNumber, boolean participated) throws CommandException {
-        if (sessionNumber > tutorialCount || sessionNumber <= 0) {
-            throw new CommandException(
-                    String.format(MESSAGE_INVALID_TUTORIAL_SESSION_NUMBER, tutorialCount));
-        }
-        updateAssignmentAndTutorialCount();
-        classParticipationTracker.markParticipation(Index.fromOneBased(sessionNumber), participated);
-    }
-
-    /**
-     * Updates the assignment and tutorial count in the attendance tracker,
-     * class participation tracker and assignment tracker. Whenever the assignment count
-     * or tutorial count is changed.
-     */
-    private void updateAssignmentAndTutorialCount() {
-        attendanceTracker.updateTutorialCountChange(tutorialCount);
-        classParticipationTracker.updateTutorialCountChange(tutorialCount);
-        assignmentTracker.updateAssignmentCountChange(assignmentCount);
-    }
-
-    /**
-     * Displays the list of tutorial sessions and their participation status.
-     * @return the display message of the tutorial sessions and their participation status.
-     */
-    public String displayParticipations() {
-        return classParticipationTracker.toString();
-    }
-
-    public JsonAdaptedClassDetails getJsonAdaptedClassDetails() {
-        return new JsonAdaptedClassDetails(classNumber,
-                attendanceTracker.getJson(),
-                assignmentTracker.getJson(),
-                classParticipationTracker.getJson());
     }
 }

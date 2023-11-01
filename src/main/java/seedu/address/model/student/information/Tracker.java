@@ -1,4 +1,4 @@
-package seedu.address.model.student.grades;
+package seedu.address.model.student.information;
 
 import java.util.List;
 
@@ -12,12 +12,12 @@ public interface Tracker {
      *
      * @return Average result of objects in the tracker.
      */
-    public double getPercentage();
+    double getPercentage();
 
     /**
      * Returns a Json Friendly representation of the tracker.
      *
      * @return Json Friendly representation of the tracker.
      */
-    public List getJson();
+    List getJson();
 }
