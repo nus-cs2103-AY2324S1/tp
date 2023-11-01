@@ -56,7 +56,11 @@ public class Name {
         }
 
         Name otherName = (Name) other;
-        return fullName.toUpperCase().equals(otherName.fullName.toUpperCase());
+        // replaceAll("\\s+", " ") replaces 1 or more spaces with a single space
+        String nameRemovedSpaces = fullName.replaceAll("\\s+", " ");
+        String otherNameRemovedSpaces = otherName.fullName.replaceAll("\\s+", " ");
+        // equalsIgnoreCase() method compares two strings, ignoring lower case and upper case differences
+        return nameRemovedSpaces.equalsIgnoreCase(otherNameRemovedSpaces);
     }
 
     @Override
