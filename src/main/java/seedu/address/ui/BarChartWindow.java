@@ -19,8 +19,6 @@ import seedu.address.logic.commands.barchartresults.SecLevelBarChartCommandResul
 import seedu.address.logic.commands.barchartresults.SubjectBarChartCommandResult;
 import seedu.address.model.tag.Subject;
 
-
-
 /**
  * Controller of a table page.
  */
@@ -186,6 +184,5 @@ public class BarChartWindow extends UiPart<Stage> {
     public void focus() {
         getRoot().requestFocus();
     }
-
 
 }
