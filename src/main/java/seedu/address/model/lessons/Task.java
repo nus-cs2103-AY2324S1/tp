@@ -169,7 +169,7 @@ public class Task extends ListEntryField {
      */
     @Override
     public String toString() {
-        return this.isDone ? "+" : "-" + this.description;
+        return (this.isDone ? "+" : "-") + this.description;
     }
 
     public Task clone() {
