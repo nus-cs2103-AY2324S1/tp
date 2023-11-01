@@ -5,6 +5,7 @@
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
@@ -33,7 +34,9 @@
       <Label fx:id="email" styleClass="cell_small_label" text="\$email" />
       <Label fx:id="nric" styleClass="cell_small_label" text="\$nric" />
       <Label fx:id="licencePlate" styleClass="cell_small_label" text="\$licensePlate" />
-      <Label fx:id="policy" styleClass="cell_small_label" text="\${policy}" />
     </VBox>
+    <StackPane>
+      <Label fx:id="policy" styleClass="cell_small_label" text="\${policy}" />
+    </StackPane>
   </GridPane>
 </HBox>
