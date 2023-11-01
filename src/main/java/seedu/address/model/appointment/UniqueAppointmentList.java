@@ -172,19 +172,9 @@ public class UniqueAppointmentList implements Iterable<Appointment> {
      */
     private void sortByDateAndTime(boolean isAscending) {
         if (isAscending) {
-            internalList.sort(new Comparator<Appointment>() {
-                @Override
-                public int compare(Appointment appointment1, Appointment appointment2) {
-                    return appointment1.compareTo(appointment2);
-                }
-            });
+            internalList.sort(Comparator.naturalOrder());
         } else {
-            internalList.sort(new Comparator<Appointment>() {
-                @Override
-                public int compare(Appointment appointment1, Appointment appointment2) {
-                    return -appointment1.compareTo(appointment2);
-                }
-            });
+            internalList.sort((appointment1, appointment2) -> -appointment1.compareTo(appointment2));
         }
     }
     /**
@@ -193,19 +183,11 @@ public class UniqueAppointmentList implements Iterable<Appointment> {
      */
     public void sortByPriority(boolean isAscending) {
         if (isAscending) {
-            internalList.sort(new Comparator<Appointment>() {
-                @Override
-                public int compare(Appointment appointment1, Appointment appointment2) {
-                    return appointment1.getPriorityTag().compareTo(appointment2.getPriorityTag());
-                }
-            });
+            internalList.sort(
+                    Comparator.comparing(Appointment::getPriorityTag));
         } else {
-            internalList.sort(new Comparator<Appointment>() {
-                @Override
-                public int compare(Appointment appointment1, Appointment appointment2) {
-                    return -appointment1.getPriorityTag().compareTo(appointment2.getPriorityTag());
-                }
-            });
+            internalList.sort((appointment1, appointment2) ->
+                    -appointment1.getPriorityTag().compareTo(appointment2.getPriorityTag()));
         }
     }
 }
