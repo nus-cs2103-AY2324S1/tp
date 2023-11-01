@@ -234,21 +234,21 @@ Examples:
 
 ---
 
-### Marking tutorial attendance for a student as present : `mark-pre`
+### Marking tutorial attendance for a student as present : `present`
 
 Marking tutorial attendance for an existing student as present in the class manager.
 
-Format: `mark-pre TUTORIAL_INDEX s/STUDENT_NUMBER`
+Format: `present TUTORIAL_INDEX s/STUDENT_NUMBER`
 
 * The `STUDENT_NUMBER` must be valid and exist.
 * The `TUTORIAL_INDEX` must be a valid positive integer, within the configured tutorial count given in the [**<u>`config`<u>**](#configuring-class-manager-config) command.
 
 Examples:
-* `mark-pre 1 s/A0249112A`
+* `present 1 s/A0249112A`
 
 ---
 
-### Marking tutorial attendance for all students displayed as present : `mark-pre-all`
+### Marking tutorial attendance for all students displayed as present : `present-all`
 
 Marking tutorial attendance for all students in current list displayed as present in the class manager.
 
@@ -257,21 +257,21 @@ Format: `mark-pre-all TUTORIAL_INDEX`
 * The `TUTORIAL_INDEX` must be a valid positive integer, within the configured tutorial count given in the [**<u>`config`<u>**](#configuring-class-manager-config) command.
 
 Examples:
-* `mark-pre-all 1`
+* `present-all 1`
 
 ---
 
-### Marking tutorial attendance for a student as absent : `mark-abs`
+### Marking tutorial attendance for a student as absent : `absent`
 
 Marking tutorial attendance for an existing student as absent in the class manager.
 
-Format: `mark-abs TUTORIAL_INDEX s/STUDENT_NUMBER`
+Format: `absent TUTORIAL_INDEX s/STUDENT_NUMBER`
 
 * The `STUDENT_NUMBER` must be valid and exist.
 * The `TUTORIAL_INDEX` must be a valid positive integer, within the configured tutorial count given in the [**<u>`config`<u>**](#configuring-class-manager-config) command.
 
 Examples:
-* `mark-abs 1 s/A0249112A`
+* `absent 1 s/A0249112A`
 
 ---
 
@@ -365,9 +365,9 @@ Here are the list of commands that can be undone/redone:
 * `delete`
 * `edit`
 * `grade`
-* `mark-abs`
-* `mark-pre-all`
-* `mark-pre`
+* `absent`
+* `present-all`
+* `present`
 * `tag`
 
 Displayed result if undo is successful: `Undo success!`
@@ -390,9 +390,9 @@ Here are the list of commands that can be redone after they are undone (same lis
 * `delete`
 * `edit`
 * `grade`
-* `mark-abs`
-* `mark-pre-all`
-* `mark-pre`
+* `absent`
+* `present-all`
+* `present`
 * `tag`
 
 Displayed result if redo is successful: `Redo success!`
@@ -433,7 +433,9 @@ Class Manager 2023 data is saved in the hard disk automatically after any comman
 
 ### Editing the data file
 
-Class Manager 2023 data is saved automatically as a JSON file `[JAR file location]/data/classmanager.json`. Advanced users are welcome to update data directly by editing that data file.
+Class Manager 2023 data is saved automatically as a JSON file `[JAR file location]/data/classmanager.json`. Advanced users are welcome to update data directly by editing that data file. You can refer to a valid sample of the JSON file in the image below.
+
+<img alt="sample_contents" src="images/sample-contents.png" width="750"> <br><br>
 
 <box type="warning" seamless>
 
@@ -450,7 +452,7 @@ Format: `load f/FILE_NAME`
 * File name does not need to include .json extension.
 * File name is case-insensitive
 
-Examples:
+Example:
 * `load f/sample` loads the sample.json file in the data folder.
 
 <img alt="load_outcome" src="images/load-outcome.png" width="750"> <br><br>
@@ -496,12 +498,13 @@ Format: `theme`
 | **Open help window**        | `help`                                                                      |
 
 ### Core commands without parameters
-| Action                 | Format, Examples                                                                                                                                                 |
-|------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Clear student list** | `clear`                                                                                                                                                          |
-| **Exit Class Manager** | `exit`                                                                                                                                                           |
-| **List all students**  | `list`                                                                                                                                                           |
-| **Toggle theme**       | `theme`                                                                                                                                                          |
+| Action                   | Format, Examples |
+|--------------------------|------------------|
+| **Clear student list**   | `clear`          |
+| **Exit Class Manager**   | `exit`           |
+| **View command history** | `history`        |
+| **List all students**    | `list`           |
+| **Toggle theme**         | `theme`          |
 
 ### Core commands with parameters
 | Action                         | Format, Examples                                                                                                                                                    |
@@ -512,9 +515,9 @@ Format: `theme`
 | **Edit**                       | `edit STUDENT_NUMBER [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [s/NEW_STUDENT_NUMBER] [c/CLASS_NUMBER]`<br> e.g.`edit A0245234A n/John Bob p/98761234 e/johnd@exp.com`    |
 | **Lookup**                     | `lookup [c/CLASS_NUMBER] [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [s/STUDENT_NUMBER] [t/TAG]` <br> e.g. `lookup c/T11`                                                   |
 | **Load**                       | `load f/FILE_NAME`<br> e.g. `load f/sample`                                                                                                                         |
-| **Mark Absent**                | `mark-abs TUTORIAL_INDEX s/STUDENT_NUMBER` <br> e.g. `mark-abs 1 s/A0245234A`                                                                                       |
-| **Mark Present**               | `mark-pre TUTORIAL_INDEX s/STUDENT_NUMBER` <br> e.g. `mark-pre 1 s/A0245234A`                                                                                       |
-| **Mark Present All**           | `mark-pre-all TUTORIAL_INDEX` <br> e.g. `mark-pre-all 1`                                                                                                            |
+| **Absent**                | `absent TUTORIAL_INDEX s/STUDENT_NUMBER` <br> e.g. `absent 1 s/A0245234A`                                                                                           |
+| **Present**               | `present TUTORIAL_INDEX s/STUDENT_NUMBER` <br> e.g. `present 1 s/A0245234A`                                                                                         |
+| **Present All**           | `present-all TUTORIAL_INDEX` <br> e.g. `present-all 1`                                                                                                              |
 | **Random**                     | `random NUM_OF_STUDENTS` <br> e.g. `random 2`                                                                                                                       |
 | **Record Class participation** | `class-part s/STUDENT_NUMBER tut/TUTORIAL_INDEX part/PARTICIPATION_LEVEL` <br> e.g. `class-part s/A0245234A tut/1 part/true`                                        |
 | **Set Grade**                  | `grade s/STUDENT_NUMBER a/ASSIGNMENT_INDEX g/GRADE` <br> e.g. `grade s/A0245234A a/1 g/100`                                                                         |

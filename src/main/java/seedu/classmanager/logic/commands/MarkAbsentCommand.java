@@ -17,7 +17,7 @@ import seedu.classmanager.model.student.StudentNumber;
  * Marks a student's attendance.
  */
 public class MarkAbsentCommand extends Command {
-    public static final String COMMAND_WORD = "mark-abs";
+    public static final String COMMAND_WORD = "absent";
     public static final String MESSAGE_MARK_SUCCESS = "Successfully mark the student as absent.";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Marks a student as absent.\n"
             + "Parameters: INDEX "
