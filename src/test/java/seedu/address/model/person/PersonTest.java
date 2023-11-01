@@ -13,6 +13,7 @@ import static seedu.address.testutil.TypicalPersons.BOB;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.Messages;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.testutil.PersonBuilder;
 
@@ -86,9 +87,7 @@ public class PersonTest {
 
     @Test
     public void toStringMethod() {
-        String expected = "Alice Pauline; Phone: 94351253; Email: "
-                + "alice@example.com; Address: 123, Jurong West Ave 6, #08-111;"
-                + " Subjects: CHEMISTRYBIOLOGY; Tags: [friends]; Remark: ";
+        String expected = Messages.format(ALICE);
         assertEquals(expected, ALICE.toString());
     }
 }
