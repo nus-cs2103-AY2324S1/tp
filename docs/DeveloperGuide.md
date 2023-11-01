@@ -336,7 +336,7 @@ The `load` command is facilitated by `LoadCommand` and `LoadCommandParser`. `Loa
 
 #### About this feature
 
-The mark feature allows users to mark a specific student to be present in a specific tutorial in the app.
+The mark present feature allows users to mark a specific student to be present in a specific tutorial in the app.
 
 This feature builds upon the current design of Student and ClassDetails.
 
@@ -344,7 +344,7 @@ This feature builds upon the current design of Student and ClassDetails.
 
 <puml src="diagrams/MarkPresentSequenceDiagram.puml" alt="MarkPresentSequenceDiagram" />
 
-**Note:** The diagram above only shows the part within model, since the part within logic is similar to other commands.
+**Note:** The diagram above only shows part of the interactions within the model component.
 
 ### Config feature
 
