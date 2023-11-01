@@ -1,0 +1,66 @@
+.label {
+    -fx-text-fill: white;
+}
+
+.stats {
+    -fx-padding: 20px;
+    -fx-spacing: 16px;
+}
+
+.stats-card {
+    -fx-padding: 16px;
+    -fx-background-color: #555555;
+    -fx-background-radius: 8px;
+}
+
+.stats-title {
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+}
+
+.subtitle {
+    -fx-font-size: 14px;
+    -fx-fill: #AAAAAA;
+}
+
+.big-number {
+    -fx-font-size: 32px;
+    -fx-font-weight: bold;
+}
+
+.chart-title {
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+}
+
+.chart-pie-label {
+    -fx-fill: white;
+}
+
+.axis {
+    -fx-tick-label-fill: white;
+}
+
+.bar-chart .label {
+    -fx-font-size: 16px;
+}
+
+.bar-chart .chart-plot-background {
+    -fx-background-color: transparent;
+}
+
+.chart-bar {
+    -fx-background-color: #85c1e9;
+}
+
+#uncontacted {
+    -fx-text-fill: #ffffff;
+}
+
+#contacting {
+    -fx-text-fill: #54A954;
+}
+
+#closed {
+    -fx-text-fill: #BBBBBB;
+}
