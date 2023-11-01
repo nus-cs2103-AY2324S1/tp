@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_COURSE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FROM;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TO;
 
 import java.util.ArrayList;
@@ -31,6 +32,7 @@ public class FindCommand extends Command {
             + "Parameters: PREFIX KEYWORD [MORE_KEYWORDS]...\n"
             + "Examples: " + COMMAND_WORD + " " + PREFIX_NAME + "alice bob charlie" + ", "
             + COMMAND_WORD + " " + PREFIX_COURSE + "cs1231s" + ", "
+            + COMMAND_WORD + " " + PREFIX_TAG + "tutorial" + ", "
             + COMMAND_WORD + " " + PREFIX_FROM + "10:00" + " " + PREFIX_TO + "12:00";
 
     private final ArrayList<Predicate<Person>> predicateList = new ArrayList<>();
