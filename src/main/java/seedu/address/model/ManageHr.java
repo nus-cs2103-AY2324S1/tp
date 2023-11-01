@@ -10,6 +10,8 @@ import seedu.address.model.department.Department;
 import seedu.address.model.department.UniqueDepartmentList;
 import seedu.address.model.employee.Employee;
 import seedu.address.model.employee.UniqueEmployeeList;
+import seedu.address.model.employee.exceptions.SubordinatePresentException;
+import seedu.address.model.employee.exceptions.SupervisorNotFoundException;
 
 /**
  * Wraps all data at the ManageHR level
@@ -76,28 +78,57 @@ public class ManageHr implements ReadOnlyManageHr {
     /**
      * Adds an employee to ManageHR.
      * The employee must not already exist in ManageHR.
+     *
+     * @param p The employee to be added to the list.
+     * @throws SupervisorNotFoundException If the supervisor of the employee is not found in the list.
      */
-    public void addEmployee(Employee employee) {
-        employee.checkValidDepartments(departments);
-        employees.add(employee);
+
+    public void addEmployee(Employee p) {
+        requireNonNull(p);
+        p.checkValidDepartments(departments);
+        if (!employees.containsManager(p)) {
+            throw new SupervisorNotFoundException();
+        }
+        employees.add(p);
     }
 
     /**
      * Replaces the given employee {@code target} in the list with {@code editedEmployee}.
      * {@code target} must exist in the ManageHR.
      * The employee identity of {@code editedEmployee} must not be the same as another existing employee in ManageHR.
+     *
+     * @param target The original employee to be updated.
+     * @param editedEmployee The updated employee.
+     * @throws SubordinatePresentException If the original employee manages subordinates, preventing the update.
+     * @throws SupervisorNotFoundException If the target employee is the supervisor of the editedEmployee.
      */
     public void setEmployee(Employee target, Employee editedEmployee) {
         requireNonNull(editedEmployee);
         editedEmployee.checkValidDepartments(departments);
+        if (employees.hasSubordinates(target)) {
+            throw new SubordinatePresentException();
+        }
+        if (!employees.containsManager(editedEmployee)) {
+            throw new SupervisorNotFoundException();
+        }
+        if (target.isSupervisorOf(editedEmployee)) {
+            throw new SupervisorNotFoundException();
+        }
+
         employees.setEmployee(target, editedEmployee);
     }
 
     /**
      * Removes {@code key} from this {@code ManageHr}.
      * {@code key} must exist in the ManageHr.
+     *
+     * @param key The employee to be removed.
+     * @throws SubordinatePresentException If the employee manages subordinates, preventing removal.
      */
     public void removeEmployee(Employee key) {
+        if (employees.hasSubordinates(key)) {
+            throw new SubordinatePresentException();
+        }
         employees.remove(key);
     }
 

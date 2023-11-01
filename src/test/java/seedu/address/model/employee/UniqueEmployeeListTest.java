@@ -8,6 +8,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_DEPARTMENT_LOGI
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalEmployees.ALICE;
 import static seedu.address.testutil.TypicalEmployees.AMY;
+import static seedu.address.testutil.TypicalEmployees.BENSON;
 import static seedu.address.testutil.TypicalEmployees.BOB;
 
 import java.util.Arrays;
@@ -19,6 +20,8 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.model.employee.exceptions.DuplicateEmployeeException;
 import seedu.address.model.employee.exceptions.EmployeeNotFoundException;
+import seedu.address.model.employee.exceptions.SubordinatePresentException;
+import seedu.address.model.employee.exceptions.SupervisorNotFoundException;
 import seedu.address.testutil.EmployeeBuilder;
 
 public class UniqueEmployeeListTest {
@@ -62,6 +65,11 @@ public class UniqueEmployeeListTest {
     }
 
     @Test
+    public void add_employeeWithSupervisorsNotFoundInList_throwsSupervisorNotFoundException() {
+        assertThrows(SupervisorNotFoundException.class, () -> uniqueEmployeeList.add(BOB));
+    }
+
+    @Test
     public void setEmployee_nullTargetEmployee_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> uniqueEmployeeList.setEmployee(null, ALICE));
     }
@@ -74,6 +82,26 @@ public class UniqueEmployeeListTest {
     @Test
     public void setEmployee_targetEmployeeNotInList_throwsEmployeeNotFoundException() {
         assertThrows(EmployeeNotFoundException.class, () -> uniqueEmployeeList.setEmployee(ALICE, ALICE));
+    }
+
+    @Test
+    public void setEmployee_targetEmployeeWhoIsSupervisorToOthers_throwsSubordinatePresentException() {
+        uniqueEmployeeList.add(AMY);
+        uniqueEmployeeList.add(BOB);
+        assertThrows(SubordinatePresentException.class, () -> uniqueEmployeeList.setEmployee(AMY, ALICE));
+    }
+
+    @Test
+    public void setEmployee_targetEmployeeIsSupervisorOfEditedEmployee_throwsSupervisorNotFoundException() {
+        uniqueEmployeeList.add(ALICE);
+        uniqueEmployeeList.add(AMY);
+        assertThrows(SupervisorNotFoundException.class, () -> uniqueEmployeeList.setEmployee(AMY, BOB));
+    }
+
+    @Test
+    public void setEmployee_editedEmployeeWithSupervisorsNotFoundInList_throwsSupervisorNotFoundException() {
+        uniqueEmployeeList.add(ALICE);
+        assertThrows(SupervisorNotFoundException.class, () -> uniqueEmployeeList.setEmployee(ALICE, BOB));
     }
 
     @Test
@@ -100,17 +128,17 @@ public class UniqueEmployeeListTest {
     @Test
     public void setEmployee_editedEmployeeHasDifferentIdentity_success() {
         uniqueEmployeeList.add(ALICE);
-        uniqueEmployeeList.setEmployee(ALICE, BOB);
+        uniqueEmployeeList.setEmployee(ALICE, BENSON);
         UniqueEmployeeList expectedUniqueEmployeeList = new UniqueEmployeeList();
-        expectedUniqueEmployeeList.add(BOB);
+        expectedUniqueEmployeeList.add(BENSON);
         assertEquals(expectedUniqueEmployeeList, uniqueEmployeeList);
     }
 
     @Test
     public void setEmployee_editedEmployeeHasNonUniqueIdentity_throwsDuplicateEmployeeException() {
-        uniqueEmployeeList.add(ALICE);
+        uniqueEmployeeList.add(AMY);
         uniqueEmployeeList.add(BOB);
-        assertThrows(DuplicateEmployeeException.class, () -> uniqueEmployeeList.setEmployee(ALICE, BOB));
+        assertThrows(DuplicateEmployeeException.class, () -> uniqueEmployeeList.setEmployee(BOB, AMY));
     }
 
     @Test
@@ -132,6 +160,13 @@ public class UniqueEmployeeListTest {
     }
 
     @Test
+    public void remove_existingEmployeeHasSubordinate_throwsSubordinatePresentException() {
+        uniqueEmployeeList.add(AMY);
+        uniqueEmployeeList.add(BOB);
+        assertThrows(SubordinatePresentException.class, () -> uniqueEmployeeList.remove(AMY));
+    }
+
+    @Test
     public void setEmployees_nullUniqueEmployeeList_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> uniqueEmployeeList.setEmployees((UniqueEmployeeList) null));
     }
@@ -140,7 +175,7 @@ public class UniqueEmployeeListTest {
     public void setEmployees_uniqueEmployeeList_replacesOwnListWithProvidedUniqueEmployeeList() {
         uniqueEmployeeList.add(ALICE);
         UniqueEmployeeList expectedUniqueEmployeeList = new UniqueEmployeeList();
-        expectedUniqueEmployeeList.add(BOB);
+        expectedUniqueEmployeeList.add(BENSON);
         uniqueEmployeeList.setEmployees(expectedUniqueEmployeeList);
         assertEquals(expectedUniqueEmployeeList, uniqueEmployeeList);
     }
@@ -153,10 +188,10 @@ public class UniqueEmployeeListTest {
     @Test
     public void setEmployees_list_replacesOwnListWithProvidedList() {
         uniqueEmployeeList.add(ALICE);
-        List<Employee> employeeList = Collections.singletonList(BOB);
+        List<Employee> employeeList = Collections.singletonList(AMY);
         uniqueEmployeeList.setEmployees(employeeList);
         UniqueEmployeeList expectedUniqueEmployeeList = new UniqueEmployeeList();
-        expectedUniqueEmployeeList.add(BOB);
+        expectedUniqueEmployeeList.add(AMY);
         assertEquals(expectedUniqueEmployeeList, uniqueEmployeeList);
     }
 

@@ -10,6 +10,7 @@ import seedu.address.model.employee.Employee;
 import seedu.address.model.employee.Leave;
 import seedu.address.model.employee.Name;
 import seedu.address.model.employee.Phone;
+import seedu.address.model.employee.Role;
 import seedu.address.model.employee.Salary;
 import seedu.address.model.util.SampleDataUtil;
 
@@ -24,12 +25,15 @@ public class EmployeeBuilder {
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
     public static final String DEFAULT_SALARY = "1234";
     public static final String DEFAULT_LEAVE = "14";
+    private static final String DEFAULT_ROLE = "manager";
     private Name name;
     private Phone phone;
     private Email email;
     private Address address;
     private Salary salary;
     private Leave leave;
+    private Role role;
+    private Set<Name> supervisors;
     private Set<Department> departments;
 
     /**
@@ -42,6 +46,8 @@ public class EmployeeBuilder {
         address = new Address(DEFAULT_ADDRESS);
         salary = new Salary(DEFAULT_SALARY);
         leave = new Leave(DEFAULT_LEAVE);
+        role = new Role(DEFAULT_ROLE);
+        supervisors = new HashSet<>();
         departments = new HashSet<>();
     }
 
@@ -55,6 +61,8 @@ public class EmployeeBuilder {
         address = employeeToCopy.getAddress();
         salary = employeeToCopy.getSalary();
         leave = employeeToCopy.getLeave();
+        role = employeeToCopy.getRole();
+        supervisors = new HashSet<>(employeeToCopy.getSupervisors());
         departments = new HashSet<>(employeeToCopy.getDepartments());
     }
 
@@ -72,6 +80,15 @@ public class EmployeeBuilder {
      */
     public EmployeeBuilder withDepartments(String ... departments) {
         this.departments = SampleDataUtil.getDepartmentSet(departments);
+        return this;
+    }
+
+    /**
+     * Parses the {@code supervisorName} into a {@code Set<Name>} and set it to the
+     * {@code Employee} that we are building.
+     */
+    public EmployeeBuilder withSupervisors(String ... supervisorName) {
+        this.supervisors = SampleDataUtil.getSupervisorNameSet(supervisorName);
         return this;
     }
 
@@ -115,8 +132,16 @@ public class EmployeeBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code role} of the {@code Employee} that we are building.
+     */
+    public EmployeeBuilder withRole(String role) {
+        this.role = new Role(role);
+        return this;
+    }
+
     public Employee build() {
-        return new Employee(name, phone, email, address, salary, leave, departments);
+        return new Employee(name, phone, email, address, salary, leave, role, supervisors, departments);
     }
 
 }

@@ -27,13 +27,15 @@ public class Employee {
     private final Address address;
     private final Salary salary;
     private final Leave leave;
+    private final Role role;
+    private final Set<Name> supervisors = new HashSet<>();
     private final Set<Department> departments = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
     public Employee(Name name, Phone phone, Email email, Address address, Salary salary, Leave leave,
-                    Set<Department> departments) {
+                    Role role, Set<Name> supervisors, Set<Department> departments) {
         requireAllNonNull(name, phone, email, address, salary, leave, departments);
         this.name = name;
         this.phone = phone;
@@ -41,6 +43,8 @@ public class Employee {
         this.address = address;
         this.salary = salary;
         this.leave = leave;
+        this.role = role;
+        this.supervisors.addAll(supervisors);
         this.departments.addAll(departments);
     }
 
@@ -75,6 +79,10 @@ public class Employee {
             }
         }
     }
+    public Role getRole() {
+        return role;
+    }
+
     /**
      * Returns an immutable department set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
@@ -84,8 +92,20 @@ public class Employee {
     }
 
     /**
-     * Returns true if both employees have the same name.
-     * This defines a weaker notion of equality between two employees.
+     * Returns an immutable name set, which throws {@code UnsupportedOperationException}
+     * if modification is attempted.
+     */
+    public Set<Name> getSupervisors() {
+        return Collections.unmodifiableSet(supervisors);
+    }
+
+    /**
+     * Checks if another employee is the same as this employee.
+     *
+     * @param otherEmployee The other employee to compare with this employee.
+     * @return {@code true} if the provided 'otherEmployee' is the same as this employee,
+     *         {@code false} otherwise. Two employees are considered the same if they have
+     *         the same name (case-sensitive) and are not both null.
      */
     public boolean isSameEmployee(Employee otherEmployee) {
         if (otherEmployee == this) {
@@ -94,6 +114,37 @@ public class Employee {
 
         return otherEmployee != null
                 && otherEmployee.getName().equals(getName());
+    }
+
+    /**
+     * Checks if the name of another employee matches the name of this employee.
+     *
+     * @param otherEmployee The other employee whose name is to be compared.
+     * @return {@code true} if the provided 'otherEmployee' is not null and has the same name
+     *         as this employee, {@code false} otherwise.
+     */
+    public boolean hasSameEmployeeName(Name otherEmployee) {
+        return otherEmployee != null
+                && otherEmployee.equals(getName());
+    }
+
+    /**
+     * Checks if this employee holds a managerial role.
+     *
+     * @return {@code true} if this employee's role is a managerial role, {@code false} otherwise.
+     */
+    public boolean isManager() {
+        return role.isManager();
+    }
+
+    /**
+     * Checks if this employee is a supervisor of the provided subordinate.
+     *
+     * @param subordinate The subordinate employee to check.
+     * @return {@code true} if this employee is a supervisor of the provided 'subordinate,' {@code false} otherwise.
+     */
+    public boolean isSupervisorOf(Employee subordinate) {
+        return subordinate.getSupervisors().stream().anyMatch(x -> x.equals(this.getName()));
     }
 
     /**
@@ -118,13 +169,15 @@ public class Employee {
                 && address.equals(otherEmployee.address)
                 && salary.equals(otherEmployee.salary)
                 && leave.equals(otherEmployee.leave)
+                && role.equals(otherEmployee.role)
+                && supervisors.equals(otherEmployee.supervisors)
                 && departments.equals(otherEmployee.departments);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, salary, leave, departments);
+        return Objects.hash(name, phone, email, address, salary, leave, role, supervisors, departments);
     }
 
     @Override
@@ -136,6 +189,8 @@ public class Employee {
                 .add("address", address)
                 .add("salary", salary)
                 .add("leave", leave)
+                .add("role", role)
+                .add("supervisors", supervisors)
                 .add("departments", departments)
                 .toString();
     }
