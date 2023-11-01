@@ -51,7 +51,8 @@ public class UnenrolCommandTest {
     @Test
     public void execute_unenrolmentForNonExistentEnrolmentUnfilteredList_throwsCommandException() {
         UnenrolCommand unenrolCommand = new UnenrolCommand(INDEX_FIRST_MEMBER, INDEX_SECOND_EVENT);
-        String expectedFailedMessage = Messages.MESSAGE_ENROLMENT_NOT_FOUND;
+        String expectedFailedMessage = String.format(Messages.MESSAGE_ENROLMENT_DOES_NOT_EXIST,
+                INDEX_FIRST_MEMBER.getOneBased(), INDEX_SECOND_EVENT.getOneBased());
         assertCommandFailure(unenrolCommand, model, expectedFailedMessage);
     }
 
@@ -64,7 +65,8 @@ public class UnenrolCommandTest {
                 enrolmentToDelete.getMemberAndEventEnrolment());
         String expectedSuccessMessage = String.format(UnenrolCommand.MESSAGE_DELETE_ENROLMENT_SUCCESS,
                 Messages.format(enrolmentToDelete));
-        String expectedFailedMessage = Messages.MESSAGE_ENROLMENT_NOT_FOUND;
+        String expectedFailedMessage = String.format(Messages.MESSAGE_ENROLMENT_DOES_NOT_EXIST,
+                INDEX_FIRST_MEMBER.getOneBased(), INDEX_FIRST_EVENT.getOneBased());
 
         ModelManager expectedModel = new ModelManager(model.getCcaCommander(), new UserPrefs());
         expectedModel.deleteEnrolment(enrolmentToDelete);
@@ -94,7 +96,8 @@ public class UnenrolCommandTest {
 
         // Proceed to unenrol first member from first event, should throw CommandException as first member
         // is no longer existent
-        String expectedFailedMessage = Messages.MESSAGE_ENROLMENT_NOT_FOUND;
+        String expectedFailedMessage = String.format(Messages.MESSAGE_ENROLMENT_DOES_NOT_EXIST,
+                INDEX_FIRST_MEMBER.getOneBased(), INDEX_FIRST_EVENT.getOneBased());
         assertCommandFailure(unenrolCommand, model, expectedFailedMessage);
     }
 
@@ -118,7 +121,8 @@ public class UnenrolCommandTest {
 
         // Proceed to unenrol first member from first event, should throw CommandException as first event
         // is no longer existent
-        String expectedFailedMessage = Messages.MESSAGE_ENROLMENT_NOT_FOUND;
+        String expectedFailedMessage = String.format(Messages.MESSAGE_ENROLMENT_DOES_NOT_EXIST,
+                INDEX_FIRST_MEMBER.getOneBased(), INDEX_FIRST_EVENT.getOneBased());
         assertCommandFailure(unenrolCommand, model, expectedFailedMessage);
     }
 

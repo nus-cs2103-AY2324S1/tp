@@ -71,7 +71,8 @@ public class UnenrolCommand extends Command {
         try {
             enrolmentToDelete = findEnrolmentFromList(lastShownEnrolmentList, memberName, eventName);
         } catch (EnrolmentNotFoundException ee) {
-            throw new CommandException(Messages.MESSAGE_ENROLMENT_NOT_FOUND);
+            throw new CommandException(String.format(Messages.MESSAGE_ENROLMENT_DOES_NOT_EXIST,
+                    memberIndex.getOneBased(), eventIndex.getOneBased()));
         }
 
         assert enrolmentToDelete != null : "The enrolment to delete should be null";
