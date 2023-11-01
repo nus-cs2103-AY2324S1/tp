@@ -10,7 +10,8 @@
       "salary": "12000",
       "departments": ["Finance"],
       "overtime": 0,
-      "leaveList": [ ]
+      "leaveList": [ ],
+      "remarkList": [ ]
     },
     {
       "name": "Benson Meier",
@@ -21,7 +22,8 @@
       "salary": "6000",
       "departments": ["IT", "Operations"],
       "overtime": 0,
-      "leaveList": [ ]
+      "leaveList": [ ],
+      "remarkList": [ ]
     },
     {
       "name": "Carl Kurz",
@@ -32,7 +34,8 @@
       "salary": "5800",
       "departments": [],
       "overtime": 0,
-      "leaveList": [ ]
+      "leaveList": [ ],
+      "remarkList": [ ]
     },
     {
       "name": "Daniel Meier",
@@ -43,7 +46,8 @@
       "salary": "5000",
       "departments": ["IT"],
       "overtime": 0,
-      "leaveList": [ ]
+      "leaveList": [ ],
+      "remarkList": [ ]
     },
     {
       "name": "Elle Meyer",
@@ -54,7 +58,8 @@
       "salary": "4000",
       "departments": [],
       "overtime": 0,
-      "leaveList": [ ]
+      "leaveList": [ ],
+      "remarkList": [ ]
     },
     {
       "name": "Fiona Kunz",
@@ -65,7 +70,8 @@
       "salary": "8000",
       "departments": [],
       "overtime": 0,
-      "leaveList": [ ]
+      "leaveList": [ ],
+      "remarkList": [ ]
     },
     {
       "name": "George Best",
@@ -76,7 +82,8 @@
       "salary": "1000",
       "departments": [],
       "overtime": 0,
-      "leaveList": [ ]
+      "leaveList": [ ],
+      "remarkList": [ ]
     }
   ]
 }

@@ -23,6 +23,7 @@ import seedu.address.model.Model;
 import seedu.address.model.employee.Employee;
 import seedu.address.model.employee.EmployeeContainsKeywordsPredicate;
 import seedu.address.model.employee.Leave;
+import seedu.address.model.remark.Remark;
 import seedu.address.testutil.EditEmployeeDescriptorBuilder;
 
 /**
@@ -48,6 +49,8 @@ public class CommandTestUtil {
     public static final int VALID_OVERTIME_HOURS_BOB = 1;
     public static final ArrayList<Leave> VALID_LEAVELIST_AMY = new ArrayList<>();
     public static final ArrayList<Leave> VALID_LEAVELIST_BOB = new ArrayList<>(List.of(new Leave(LocalDate.now())));
+    public static final ArrayList<Remark> VALID_REMARKLIST_AMY = new ArrayList<>();
+    public static final ArrayList<Remark> VALID_REMARKLIST_BOB = new ArrayList<>(List.of(new Remark("Remark")));
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
     public static final String POSITION_DESC_AMY = " " + PREFIX_POSITION + VALID_POSITION_AMY;
@@ -80,14 +83,18 @@ public class CommandTestUtil {
     public static final EditCommand.EditEmployeeDescriptor DESC_BOB;
 
     static {
-        DESC_AMY = new EditEmployeeDescriptorBuilder().withName(VALID_NAME_AMY).withPosition(VALID_POSITION_AMY)
+        DESC_AMY = new EditEmployeeDescriptorBuilder().withName(VALID_NAME_AMY)
+                .withPosition(VALID_POSITION_AMY)
                 .withId(VALID_ID_AMY)
-                .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY)
+                .withPhone(VALID_PHONE_AMY)
+                .withEmail(VALID_EMAIL_AMY)
                 .withDepartments(VALID_DEPARTMENT_FINANCE)
                 .withSalary(VALID_SALARY_AMY).build();
-        DESC_BOB = new EditEmployeeDescriptorBuilder().withName(VALID_NAME_BOB).withPosition(VALID_POSITION_BOB)
+        DESC_BOB = new EditEmployeeDescriptorBuilder().withName(VALID_NAME_BOB)
+                .withPosition(VALID_POSITION_BOB)
                 .withId(VALID_ID_BOB)
-                .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
+                .withPhone(VALID_PHONE_BOB)
+                .withEmail(VALID_EMAIL_BOB)
                 .withDepartments(VALID_DEPARTMENT_FINANCE, VALID_DEPARTMENT_IT)
                 .withSalary(VALID_SALARY_BOB).build();
     }

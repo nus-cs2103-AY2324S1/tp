@@ -19,9 +19,11 @@ import static seedu.address.testutil.TypicalEmployees.BOB;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.model.remark.Remark;
 import seedu.address.testutil.EmployeeBuilder;
 
 public class EmployeeTest {
@@ -129,6 +131,10 @@ public class EmployeeTest {
         // different overtime hours left -> returns false
         editedAlice = new EmployeeBuilder(ALICE).withOvertimeHours(VALID_OVERTIME_HOURS_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
+
+        // different remark list -> returns false
+        editedAlice = new EmployeeBuilder(ALICE).withRemarkList(new ArrayList<>(List.of(new Remark("Remark")))).build();
+        assertFalse(ALICE.equals(editedAlice));
     }
 
     @Test
@@ -137,7 +143,8 @@ public class EmployeeTest {
                 + ", position=" + ALICE.getPosition() + ", id=" + ALICE.getId() + ", phone=" + ALICE.getPhone()
                 + ", email=" + ALICE.getEmail() + ", salary=" + ALICE.getSalary()
                 + ", departments=" + ALICE.getDepartments() + ", overtimeHours=" + ALICE.getOvertimeHours()
-                + ", leaves=" + ALICE.getLeaveList() + "}";
+                + ", leaves=" + ALICE.getLeaveList()
+                + ", remarks=" + ALICE.getRemarkList() + "}";
         assertEquals(expected, ALICE.toString());
     }
 }

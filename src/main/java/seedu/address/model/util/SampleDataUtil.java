@@ -19,6 +19,7 @@ import seedu.address.model.employee.OvertimeHours;
 import seedu.address.model.employee.Phone;
 import seedu.address.model.employee.Position;
 import seedu.address.model.employee.Salary;
+import seedu.address.model.remark.RemarkList;
 
 /**
  * Contains utility methods for populating {@code AddressBook} with sample data.
@@ -33,7 +34,8 @@ public class SampleDataUtil {
                 new Salary("8500"),
                 getDepartmentSet("IT"),
                 new OvertimeHours(DEFAULT_OVERTIME_HOURS),
-                new LeaveList()),
+                new LeaveList(),
+                new RemarkList()),
 
             new Employee(new Name("Bernice Yu"), new Position("Systems analyst"),
                 new Id("EID5678-1234"),
@@ -49,7 +51,8 @@ public class SampleDataUtil {
                 new Salary("8000"),
                 getDepartmentSet("Marketing"),
                 new OvertimeHours(MAX_OVERTIME_HOURS),
-                new LeaveList()),
+                new LeaveList(),
+                new RemarkList()),
 
             new Employee(new Name("David Li"), new Position("Operations manager"),
                 new Id("EID2023-5678"),
@@ -65,7 +68,8 @@ public class SampleDataUtil {
                 new Salary("8500"),
                 getDepartmentSet("IT"),
                 new OvertimeHours(MAX_OVERTIME_HOURS),
-                new LeaveList()),
+                new LeaveList(),
+                new RemarkList()),
 
             new Employee(new Name("Roy Balakrishnan"), new Position("Graphic design intern"),
                 new Id("EID2024-5678"),
