@@ -75,7 +75,7 @@ public class FilterCommandParser implements Parser<FilterCommand> {
     public FilterCommand parseCourse(String course) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(
-                        " " + course,
+                        course,
                         CliSyntax.PREFIX_FILTER_FIN
                 );
 
@@ -84,7 +84,8 @@ public class FilterCommandParser implements Parser<FilterCommand> {
         );
 
         Optional<String> fieldString = Optional.ofNullable(argMultimap.getPreamble());
-        if (fieldString.isEmpty()) {
+
+        if ((fieldString.get().startsWith(CliSyntax.PREFIX_FILTER_FIN.getPrefix()))) {
             throw new ParseException(MISSING_FIELD);
         }
 
