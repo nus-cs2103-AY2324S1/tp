@@ -24,6 +24,7 @@ import seedu.address.logic.commands.musician.ListCommand;
 import seedu.address.logic.parser.band.AddBandCommandParser;
 import seedu.address.logic.parser.band.AddMusicianToBandCommandParser;
 import seedu.address.logic.parser.band.DeleteBandCommandParser;
+import seedu.address.logic.parser.band.FindBandCommandParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.logic.parser.musician.AddCommandParser;
 import seedu.address.logic.parser.musician.DeleteCommandParser;
