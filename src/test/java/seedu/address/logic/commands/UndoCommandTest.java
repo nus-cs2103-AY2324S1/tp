@@ -54,12 +54,12 @@ public class UndoCommandTest {
     private static final String SAMPLE_SCHEDULE_COMMAND = "schedule patient=John Doe "
             + "start=2023/10/20 12:00 end=2023/10/20 13:00 "
             + "description=Follow up on Chest X-Ray "
-            + "prioritytag=high";
+            + "priority=high";
 
     private static final String SAMPLE_SCHEDULE_ANCIENT_APPOINTMENT_COMMAND = "schedule patient=John Doe "
             + "start=1800/10/20 12:00 end=1800/10/20 13:00 "
             + "description=Injuries from getting stoned "
-            + "prioritytag=medium";
+            + "priority=medium";
 
     private static final String SAMPLE_TODAY_COMMAND = "today";
 

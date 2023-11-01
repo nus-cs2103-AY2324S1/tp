@@ -4,7 +4,7 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_APPOINTMENT_DESCRIPTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_APPOINTMENT_END;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_APPOINTMENT_PATIENT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_APPOINTMENT_PRIORITYTAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_APPOINTMENT_PRIORITY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_APPOINTMENT_START;
 
 import java.time.LocalDateTime;
@@ -38,17 +38,17 @@ public class ScheduleCommandParser implements Parser<ScheduleCommand> {
     public ScheduleCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_APPOINTMENT_PATIENT, PREFIX_APPOINTMENT_START,
-                        PREFIX_APPOINTMENT_END, PREFIX_APPOINTMENT_DESCRIPTION, PREFIX_APPOINTMENT_PRIORITYTAG);
+                        PREFIX_APPOINTMENT_END, PREFIX_APPOINTMENT_DESCRIPTION, PREFIX_APPOINTMENT_PRIORITY);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_APPOINTMENT_PATIENT, PREFIX_APPOINTMENT_START,
-                PREFIX_APPOINTMENT_END, PREFIX_APPOINTMENT_DESCRIPTION, PREFIX_APPOINTMENT_PRIORITYTAG)
+                PREFIX_APPOINTMENT_END, PREFIX_APPOINTMENT_DESCRIPTION, PREFIX_APPOINTMENT_PRIORITY)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     ScheduleCommand.MESSAGE_USAGE));
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_APPOINTMENT_PATIENT, PREFIX_APPOINTMENT_START,
-                PREFIX_APPOINTMENT_END, PREFIX_APPOINTMENT_DESCRIPTION, PREFIX_APPOINTMENT_PRIORITYTAG);
+                PREFIX_APPOINTMENT_END, PREFIX_APPOINTMENT_DESCRIPTION, PREFIX_APPOINTMENT_PRIORITY);
 
         LocalDateTime startTime = ParserUtil.parseDateTime(argMultimap.getValue(PREFIX_APPOINTMENT_START).get());
         LocalDateTime endTime = ParserUtil.parseDateTime(argMultimap.getValue(PREFIX_APPOINTMENT_END).get());
@@ -56,7 +56,7 @@ public class ScheduleCommandParser implements Parser<ScheduleCommand> {
                 .getValue(PREFIX_APPOINTMENT_DESCRIPTION).get());
 
         PriorityTag priorityTag = ParserUtil.parsePriorityTag(argMultimap
-                .getValue(PREFIX_APPOINTMENT_PRIORITYTAG).get());
+                .getValue(PREFIX_APPOINTMENT_PRIORITY).get());
 
         AppointmentTime appointmentTime;
 

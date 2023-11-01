@@ -72,7 +72,7 @@ public class JsonUserPrefsStorageTest {
 
     private UserPrefs getTypicalUserPrefs() {
         UserPrefs userPrefs = new UserPrefs();
-        userPrefs.setGuiSettings(new GuiSettings(1000, 500, 300, 100, true));
+        userPrefs.setGuiSettings(new GuiSettings(1000, 500, 300, 100, false));
         userPrefs.setAddressBookFilePath(Paths.get("mediflowr.json"));
         return userPrefs;
     }
