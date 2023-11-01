@@ -39,7 +39,11 @@ public class Lesson {
     }
 
     public static boolean isValid(Begin begin, End end) {
-        return begin.getTime().compareTo(end.getTime()) < 0;
+        return begin.getTime().compareTo(end.getTime()) < 0; 
+    }
+  
+    public String getTimeSlot() {
+        return begin.toString() + " - " + end.toString();
     }
 
     @Override
