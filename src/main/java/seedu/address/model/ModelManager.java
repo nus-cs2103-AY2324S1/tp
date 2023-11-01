@@ -46,6 +46,7 @@ public class ModelManager implements Model {
         filteredDoctors = new FilteredList<>(this.addressBook.getDoctorList());
         filteredPatients = new FilteredList<>(this.addressBook.getPatientList());
     }
+
     public ModelManager() {
         this(new AddressBook(), new UserPrefs());
     }
@@ -57,6 +58,7 @@ public class ModelManager implements Model {
         undoList.add(new AddressBook(addressBook));
         redoList.clear();
     }
+
     @Override
     public void undo() throws CommandException {
         if (!undoList.isEmpty()) {
@@ -66,6 +68,7 @@ public class ModelManager implements Model {
             throw new CommandException(UndoCommand.MESSAGE_EMPTY);
         }
     }
+
     @Override
     public void redo() throws CommandException {
         if (!redoList.isEmpty()) {
@@ -204,6 +207,7 @@ public class ModelManager implements Model {
         filteredPatients.setPredicate(predicate);
         filteredDoctors.setPredicate(predicate);
     }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -217,8 +221,8 @@ public class ModelManager implements Model {
 
         ModelManager otherModelManager = (ModelManager) other;
         return addressBook.equals(otherModelManager.addressBook)
-            && userPrefs.equals(otherModelManager.userPrefs)
-            && filteredDoctors.equals(otherModelManager.filteredDoctors)
-            && filteredPatients.equals(otherModelManager.filteredPatients);
+                && userPrefs.equals(otherModelManager.userPrefs)
+                && filteredDoctors.equals(otherModelManager.filteredDoctors)
+                && filteredPatients.equals(otherModelManager.filteredPatients);
     }
 }

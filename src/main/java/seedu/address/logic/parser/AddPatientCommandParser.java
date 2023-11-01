@@ -13,11 +13,13 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
+import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.AddPatientCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.appointment.Appointment;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.BloodType;
 import seedu.address.model.person.Condition;
@@ -66,9 +68,11 @@ public class AddPatientCommandParser implements Parser<AddPatientCommand> {
         BloodType bloodType = ParserUtil.parseBloodType(argMultimap.getValue(PREFIX_BLOODTYPE).get());
         Condition condition = ParserUtil.parseCondition(argMultimap.getValue(PREFIX_CONDITION).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
+        // appointments need to be added separately, so we initialise patients with empty appointments
+        Set<Appointment> appointmentList = new HashSet<>();
         Patient patient =
                 new Patient(name, phone, emergencyContact, email, address, remark, gender, ic, condition, bloodType,
-                        tagList);
+                        appointmentList, tagList);
 
         return new AddPatientCommand(patient);
     }

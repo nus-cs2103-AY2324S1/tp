@@ -1,13 +1,16 @@
 package seedu.address.model.person;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.appointment.Appointment;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -27,13 +30,14 @@ public class Person {
     protected final Address address;
     protected final Set<Tag> tags = new HashSet<>();
     protected final Remark remark;
+    protected final Set<Appointment> appointments = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
     public Person(Name name, Phone phone, Email email, Address address, Remark remark, Gender gender, Ic ic,
-                  Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, gender, ic, tags);
+                  Set<Appointment> appointments, Set<Tag> tags) {
+        requireAllNonNull(name, phone, email, address, gender, ic, appointments, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -42,6 +46,7 @@ public class Person {
         this.gender = gender;
         this.ic = ic;
         this.tags.addAll(tags);
+        this.appointments.addAll(appointments);
     }
 
     public Name getName() {
@@ -94,6 +99,48 @@ public class Person {
     }
 
     /**
+     * Returns true if this person has the given {@code ic}.
+     */
+    public boolean hasIc(Ic ic) {
+        return this.ic.equals(ic);
+    }
+
+    /**
+     * Checks if this person has an appointment at the given {@Code dateTime}.
+     *
+     * @param dateTime the time of appointment to be checked.
+     * @return true is this person has an appointment at the specified time.
+     */
+    public boolean hasAppointmentAt(LocalDateTime dateTime) {
+        requireNonNull(dateTime);
+        // check from set of appointments
+        for (Appointment a : appointments) {
+            if (a.getAppointmentTime().equals(dateTime)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Adds the given {@Code appointment} to this person's set of appointments.
+     *
+     * @param appointment the appointment to be added.
+     */
+    public void addAppointment(Appointment appointment) {
+        this.appointments.add(appointment);
+    }
+
+    /**
+     * Retrieves the list of patients stored in this medical facility.
+     *
+     * @return An ArrayList containing the patients currently registered in the facility.
+     */
+    public Set<Appointment> getAppointments() {
+        return appointments;
+    }
+
+    /**
      * Returns true if person is a patient.
      */
     public boolean isPatient() {
@@ -129,13 +176,14 @@ public class Person {
                 && address.equals(otherPerson.address)
                 && gender.equals(otherPerson.gender)
                 && ic.equals(otherPerson.ic)
+                && appointments.equals(otherPerson.appointments)
                 && tags.equals(otherPerson.tags);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, gender, ic, tags);
+        return Objects.hash(name, phone, email, address, gender, ic, appointments, tags);
     }
 
     @Override
@@ -148,6 +196,7 @@ public class Person {
                 .add("remark", remark)
                 .add("gender", gender)
                 .add("nric", ic)
+                .add("appointments", appointments)
                 .add("tags", tags)
                 .toString();
     }

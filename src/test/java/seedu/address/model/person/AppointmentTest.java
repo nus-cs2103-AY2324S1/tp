@@ -5,11 +5,11 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_1;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_2;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NRIC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NRIC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NRIC_CHERYL;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NRIC_DEREK;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalDoctor.CHERYL;
-import static seedu.address.testutil.TypicalDoctor.DEREK;
-import static seedu.address.testutil.TypicalPatient.AMY;
-import static seedu.address.testutil.TypicalPatient.BOB;
 
 import org.junit.jupiter.api.Test;
 
@@ -23,74 +23,81 @@ public class AppointmentTest {
 
     @Test
     public void constructor_nullDoctor_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new Appointment(null, AMY,
+        assertThrows(NullPointerException.class, () -> new Appointment(null, new Ic(VALID_NRIC_AMY),
                 VALID_DATE_1));
     }
+
     @Test
     public void constructor_nullPatient_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new Appointment(DEREK, null,
+        assertThrows(NullPointerException.class, () -> new Appointment(new Ic(VALID_NRIC_DEREK), null,
                 VALID_DATE_1));
     }
 
     @Test
     public void constructor_nullAppointmentTime_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new Appointment(DEREK, AMY, null));
+        assertThrows(NullPointerException.class, (
+        ) -> new Appointment(new Ic(VALID_NRIC_DEREK), new Ic(VALID_NRIC_AMY), null));
     }
 
     @Test
     public void secondConstructor_nullDoctor_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new Appointment(null, AMY,
+        assertThrows(NullPointerException.class, () -> new Appointment(null, new Ic(VALID_NRIC_AMY),
                 VALID_DATE_1, "Follow-Up"));
     }
+
     @Test
     public void secondConstructorr_nullPatient_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new Appointment(DEREK, null,
+        assertThrows(NullPointerException.class, () -> new Appointment(new Ic(VALID_NRIC_DEREK), null,
                 VALID_DATE_1, "Follow-Up"));
     }
 
     @Test
     public void secondConstructor_nullAppointmentTime_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new Appointment(DEREK, AMY,
+        assertThrows(NullPointerException.class, () -> new Appointment(new Ic(VALID_NRIC_DEREK), new Ic(VALID_NRIC_AMY),
                 null, "Follow-Up"));
     }
+
     @Test
     public void constructor_nullStatus() { // should this throw a nullPointerException?
-        assertThrows(NullPointerException.class, () -> new Appointment(DEREK, AMY, VALID_DATE_1, null));
+        assertThrows(NullPointerException.class, (
+        ) -> new Appointment(new Ic(VALID_NRIC_DEREK), new Ic(VALID_NRIC_AMY), VALID_DATE_1, null));
     }
 
     @Test
     public void testGetDoctor() {
-        Appointment newAppointment = new Appointment(DEREK, AMY, VALID_DATE_1);
-        assertEquals(newAppointment.getDoctor(), DEREK);
+        Appointment newAppointment = new Appointment(new Ic(VALID_NRIC_DEREK), new Ic(VALID_NRIC_AMY), VALID_DATE_1);
+        assertEquals(newAppointment.getDoctor(), new Ic(VALID_NRIC_DEREK));
     }
 
     @Test
     public void testGetPatient() {
-        Appointment newAppointment = new Appointment(DEREK, AMY, VALID_DATE_1);
-        assertEquals(newAppointment.getPatient(), AMY);
+        Appointment newAppointment = new Appointment(new Ic(VALID_NRIC_DEREK), new Ic(VALID_NRIC_AMY), VALID_DATE_1);
+        assertEquals(newAppointment.getPatient(), new Ic(VALID_NRIC_AMY));
     }
 
     @Test
     public void testGetAppointmentTime() {
-        Appointment newAppointment = new Appointment(DEREK, AMY, VALID_DATE_1);
+        Appointment newAppointment = new Appointment(new Ic(VALID_NRIC_DEREK), new Ic(VALID_NRIC_AMY), VALID_DATE_1);
         assertEquals(newAppointment.getAppointmentTime(), VALID_DATE_1);
     }
+
     @Test
     public void testChangeDoctor() {
-        Appointment newAppointment = new Appointment(DEREK, AMY, VALID_DATE_1);
-        newAppointment.changeDoctor(CHERYL);
-        assertEquals(newAppointment.getDoctor(), CHERYL);
+        Appointment newAppointment = new Appointment(new Ic(VALID_NRIC_DEREK), new Ic(VALID_NRIC_AMY), VALID_DATE_1);
+        newAppointment.changeDoctor(new Ic(VALID_NRIC_CHERYL));
+        assertEquals(newAppointment.getDoctor(), new Ic(VALID_NRIC_CHERYL));
     }
 
     @Test
     public void testChangePatient() {
-        Appointment newAppointment = new Appointment(DEREK, AMY, VALID_DATE_1);
-        newAppointment.changePatient(BOB);
-        assertEquals(newAppointment.getPatient(), BOB);
+        Appointment newAppointment = new Appointment(new Ic(VALID_NRIC_DEREK), new Ic(VALID_NRIC_AMY), VALID_DATE_1);
+        newAppointment.changePatient(new Ic(VALID_NRIC_BOB));
+        assertEquals(newAppointment.getPatient(), new Ic(VALID_NRIC_BOB));
     }
+
     @Test
     public void testSetAppointmentTime() {
-        Appointment newAppointment = new Appointment(DEREK, AMY, VALID_DATE_1);
+        Appointment newAppointment = new Appointment(new Ic(VALID_NRIC_DEREK), new Ic(VALID_NRIC_AMY), VALID_DATE_1);
         newAppointment.setAppointmentTime(VALID_DATE_2);
         assertEquals(newAppointment.getAppointmentTime(), VALID_DATE_2);
     }
@@ -98,17 +105,18 @@ public class AppointmentTest {
     @Test
     public void testChangeStatus() {
         String newStatus = "Completed";
-        Appointment newAppointment = new Appointment(DEREK, AMY, VALID_DATE_1);
+        Appointment newAppointment = new Appointment(new Ic(VALID_NRIC_DEREK), new Ic(VALID_NRIC_AMY), VALID_DATE_1);
         newAppointment.changeStatus(newStatus);
         assertEquals(newAppointment.getStatus(), newStatus);
     }
 
     @Test
     public void equals() {
-        Appointment newAppointment = new Appointment(DEREK, AMY, VALID_DATE_1);
+        Appointment newAppointment = new Appointment(new Ic(VALID_NRIC_DEREK), new Ic(VALID_NRIC_AMY), VALID_DATE_1);
 
         // same values -> returns true
-        assertTrue(newAppointment.equals(new Appointment(DEREK, AMY, VALID_DATE_1)));
+        assertTrue(
+                newAppointment.equals(new Appointment(new Ic(VALID_NRIC_DEREK), new Ic(VALID_NRIC_AMY), VALID_DATE_1)));
 
         // same object -> returns true
         assertTrue(newAppointment.equals(newAppointment));
@@ -120,6 +128,7 @@ public class AppointmentTest {
         assertFalse(newAppointment.equals(5.0f));
 
         // different values -> returns false
-        assertFalse(newAppointment.equals(new Appointment(CHERYL, AMY, VALID_DATE_1)));
+        assertFalse(newAppointment.equals(
+                new Appointment(new Ic(VALID_NRIC_CHERYL), new Ic(VALID_NRIC_AMY), VALID_DATE_1)));
     }
 }

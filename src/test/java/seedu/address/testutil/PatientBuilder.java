@@ -99,7 +99,8 @@ public class PatientBuilder {
     }
 
     /**
-     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Patient} that we are building.
+     * Parses the {@code appointments} into a {@code Set<Appointment>}
+     * and set it to the {@code Patient} that we are building.
      */
     public PatientBuilder withAppointments(Appointment... appointments) {
         this.appointments = SampleDataUtil.getAppointmentSet(appointments);
@@ -185,7 +186,7 @@ public class PatientBuilder {
      */
     public Patient build() {
         return new Patient(name, phone, emergencyContact, email, address, remark, gender, ic, condition, bloodType,
-                tags);
+                appointments, tags);
     }
 
 }

@@ -10,11 +10,13 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
+import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.AddDoctorCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.appointment.Appointment;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Doctor;
 import seedu.address.model.person.Email;
@@ -58,8 +60,10 @@ public class AddDoctorCommandParser implements Parser<AddDoctorCommand> {
         Gender gender = ParserUtil.parseGender(argMultimap.getValue(PREFIX_GENDER).get());
         Ic ic = ParserUtil.parseIc(argMultimap.getValue(PREFIX_NRIC).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
+        // appointments need to be added separately, so we initialise doctors with empty appointments
+        Set<Appointment> appointmentList = new HashSet<>();
 
-        Doctor doctor = new Doctor(name, phone, email, address, remark, gender, ic, tagList);
+        Doctor doctor = new Doctor(name, phone, email, address, remark, gender, ic, appointmentList, tagList);
 
         return new AddDoctorCommand(doctor);
     }

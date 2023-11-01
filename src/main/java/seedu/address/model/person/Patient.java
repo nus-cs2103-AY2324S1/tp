@@ -26,9 +26,10 @@ public class Patient extends Person {
      * Every field must be present and not null.
      */
     public Patient(Name name, Phone phone, Phone emergencyContact, Email email, Address address, Remark remark,
-                   Gender gender, Ic ic, Condition condition, BloodType bloodType, Set<Tag> tags) {
-        super(name, phone, email, address, remark, gender, ic, tags);
-        requireAllNonNull(condition, bloodType);
+                   Gender gender, Ic ic, Condition condition, BloodType bloodType, Set<Appointment> appointments,
+                   Set<Tag> tags) {
+        super(name, phone, email, address, remark, gender, ic, appointments, tags);
+        requireAllNonNull(condition, bloodType, emergencyContact);
         this.condition = condition;
         this.bloodType = bloodType;
         this.emergencyContact = emergencyContact;
@@ -44,24 +45,6 @@ public class Patient extends Person {
 
     public Phone getEmergencyContact() {
         return emergencyContact;
-    }
-
-    /**
-     * Retrieves the list of patients stored in this medical facility.
-     *
-     * @return An ArrayList containing the patients currently registered in the facility.
-     */
-    public Set<Appointment> getAppointments() {
-        return appointments;
-    }
-
-    /**
-     * Adds a new patient to the medical facility's list of patients.
-     *
-     * @param appointment The Patient object representing the individual to be added.
-     */
-    public void addAppointment(Appointment appointment) {
-        this.appointments.add(appointment);
     }
 
     /**
@@ -112,7 +95,7 @@ public class Patient extends Person {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, gender, ic, condition, bloodType, tags);
+        return Objects.hash(name, phone, email, address, gender, ic, condition, bloodType, appointments, tags);
     }
 
     @Override

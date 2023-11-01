@@ -10,6 +10,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.appointment.Appointment;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Gender;
@@ -35,6 +36,7 @@ class JsonAdaptedPerson {
     private final String gender;
     private final String ic;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
+    private final List<JsonAdaptedAppointment> appointments = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
@@ -43,7 +45,9 @@ class JsonAdaptedPerson {
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
                              @JsonProperty("email") String email, @JsonProperty("address") String address,
                              @JsonProperty("remark") String remark, @JsonProperty("gender") String gender,
-                             @JsonProperty("ic") String ic, @JsonProperty("tags") List<JsonAdaptedTag> tags) {
+                             @JsonProperty("ic") String ic,
+                             @JsonProperty("appointments") List<JsonAdaptedAppointment> appointments,
+                             @JsonProperty("tags") List<JsonAdaptedTag> tags) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -53,6 +57,9 @@ class JsonAdaptedPerson {
         this.ic = ic;
         if (tags != null) {
             this.tags.addAll(tags);
+        }
+        if (appointments != null) {
+            this.appointments.addAll(appointments);
         }
     }
 
@@ -70,6 +77,9 @@ class JsonAdaptedPerson {
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
+        appointments.addAll(source.getAppointments().stream()
+                .map(JsonAdaptedAppointment::new)
+                .collect(Collectors.toList()));
     }
 
     /**
@@ -82,7 +92,9 @@ class JsonAdaptedPerson {
         for (JsonAdaptedTag tag : tags) {
             personTags.add(tag.toModelType());
         }
+
         final Set<Tag> modelTags = new HashSet<>(personTags);
+        final Set<Appointment> modelAppointments = new HashSet<>(checkAppointments());
         final Name modelName = checkName();
         final Phone modelPhone = checkPhone();
         final Email modelEmail = checkEmail();
@@ -91,7 +103,7 @@ class JsonAdaptedPerson {
         final Gender modelGender = checkGender();
         final Ic modelIc = checkIc();
         return new Person(modelName, modelPhone, modelEmail, modelAddress, modelRemark, modelGender, modelIc,
-                modelTags);
+                modelAppointments, modelTags);
     }
 
     /**
@@ -201,6 +213,14 @@ class JsonAdaptedPerson {
             throw new IllegalValueException(Ic.MESSAGE_CONSTRAINTS);
         }
         return new Ic(ic);
+    }
+
+    private List<Appointment> checkAppointments() throws IllegalValueException {
+        final List<Appointment> listOfAppointments = new ArrayList<>();
+        for (JsonAdaptedAppointment appointment : appointments) {
+            listOfAppointments.add(appointment.toModelType());
+        }
+        return listOfAppointments;
     }
 }
 

@@ -1,7 +1,9 @@
 package seedu.address.testutil;
+
 import java.util.HashSet;
 import java.util.Set;
 
+import seedu.address.model.appointment.Appointment;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Gender;
@@ -33,6 +35,7 @@ public class PersonBuilder {
     private Gender gender;
     private Ic ic;
     private Set<Tag> tags;
+    private Set<Appointment> appointments;
 
     /**
      * Constructor for the PersonBuilder class that initialises
@@ -47,6 +50,7 @@ public class PersonBuilder {
         gender = new Gender(DEFAULT_GENDER);
         ic = new Ic(DEFAULT_NRIC);
         tags = new HashSet<>();
+        appointments = new HashSet<>();
     }
 
     /**
@@ -61,6 +65,7 @@ public class PersonBuilder {
         gender = personToCopy.getGender();
         ic = personToCopy.getIc();
         tags = new HashSet<>(personToCopy.getTags());
+        appointments = new HashSet<>(personToCopy.getAppointments());
     }
 
     /**
@@ -70,13 +75,24 @@ public class PersonBuilder {
         this.name = new Name(name);
         return this;
     }
+
     /**
      * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Person} that we are building.
      */
-    public PersonBuilder withTags(String ... tags) {
+    public PersonBuilder withTags(String... tags) {
         this.tags = SampleDataUtil.getTagSet(tags);
         return this;
     }
+
+    /**
+     * Parses the {@code appointments} into a {@code Set<Appointment>}
+     * and set it to the {@code Patient} that we are building.
+     */
+    public PersonBuilder withAppointments(Appointment... appointments) {
+        this.appointments = SampleDataUtil.getAppointmentSet(appointments);
+        return this;
+    }
+
     /**
      * Sets the {@code Address} of the {@code Person} that we are building.
      */
@@ -84,6 +100,7 @@ public class PersonBuilder {
         this.address = new Address(address);
         return this;
     }
+
     /**
      * Sets the {@code Phone} of the {@code Person} that we are building.
      */
@@ -91,6 +108,7 @@ public class PersonBuilder {
         this.phone = new Phone(phone);
         return this;
     }
+
     /**
      * Sets the {@code Email} of the {@code Person} that we are building.
      */
@@ -124,9 +142,8 @@ public class PersonBuilder {
     }
 
 
-
     public Person build() {
-        return new Person(name, phone, email, address, remark, gender, ic, tags);
+        return new Person(name, phone, email, address, remark, gender, ic, appointments, tags);
     }
 
 }
