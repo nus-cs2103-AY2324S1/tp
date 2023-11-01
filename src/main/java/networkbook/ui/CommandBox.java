@@ -76,7 +76,7 @@ public class CommandBox extends UiPart<Region> {
      * Inputs the given command string into the command box and executes it.
      * @param commandText String command to execute.
      */
-    public void submitCommand(String commandText) {
+    protected void submitCommand(String commandText) {
         requireAllNonNull(commandText);
         commandTextField.setText(commandText);
         handleCommandEntered();
