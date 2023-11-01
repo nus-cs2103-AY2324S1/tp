@@ -469,26 +469,140 @@ You can also refer to [input information](#input-examples) for details about val
 
 [Back To Top](#table-of-contents)
 
-#### List all schedules: `list-s`
+#### Listing all schedules: `list-s`
 
-Displays a list of all schedules in the address book in a table format. List can be filtered by tutors whose names contain any of the given keywords.
+Displays a list of all schedules in the address book in a table format. List can be filtered by tutors using the index number provided in the tutor list, or filter by `COMPLETED` or `MISSING` status.
 
-![view schedule](images/viewSchedule.png)
+##### :star: First time users
+{:.no_toc}
 
-**Format:** `list-s` or `list-s KEYWORD [MORE_KEYWORDS]`
+**Scenario**
 
-**Example:**
-* `list-s` shows all recorded schedules in the address book.
-* `list-s John` returns schedules by `John Smith` and `John Doe`.
-* `list-s Alice Pauline` returns schedules by `Alice Pauline`.
+You wish to view the list of schedules from tutor Irfan Ibrahim that are marked as `COMPLETED`.
 
-**Expected output:**
-* Displays a table of schedules with columns for List number, Tutor Name, Start Time, and End Time
+The list schedule function is here for that!
 
-![list schedule](images/listScheduleAll.png)
-* If name of the tutor is added as an optional keyword search, the list will be filtered accordingly to show the schedules based on the tutor's name.
+**Follow these steps**
 
-![list schedule filtered](images/listScheduleFilter.png)
+1. On the left panel that shows the list of tutors, check the `TUTOR_INDEX` of Irfan Ibrahim, in this case, his number is 2.
+![list schedule](images/list-schedules/list-s.png)
+2. Type in `list-s 2 m/1` where `m/1` represents schedules marked as `COMPLETED` and press enter.
+3. If you wish to view the schedules that are marked as `MISSED` only, you can also enter `list-s m/0` where `m/0` represents schedules marked as `MISSED` and press enter.
+
+**What you can expect to see**
+
+Tada! For step 2, the schedule list has now been updated to show schedules from tutor Irfan Ibrahim that are marked as `COMPLETED`.
+
+![list schedule tutor completed](images/list-schedules/list-s-tutor-completed.png)
+
+
+For step 3, the schedule list has been updated to show schedules that are marked as `MISSED`.
+
+![list schedule missed](images/list-schedules/list-s-missed.png)
+
+<div markdown="block" class="alert alert-success">
+
+**:bulb: Tip**<br>
+
+`list-s` command is equipped with flexible options to view a list of schedules that covers the following scenarios:
+- `list-s` : To show all schedules.
+- `list-s 1` : To show schedules by tutor that associates with `tutor_index`1.
+- `list-s m/0` : To show schedules marked as `MISSING`.
+- `list-s m/1` : To show schedules marked as `COMPLETED`.
+- `list-s 1 m/0` : To show schedules by `tutor_index` 1 marked as `MISSING`.
+
+</div>
+
+##### :star::star::star: Experienced users
+{:.no_toc}
+
+**Command format**
+
+![list schedule command](images/list-schedules/list-s-syntax.png)
+
+<div markdown="block" class="alert alert-warning">
+
+**:warning: Warning**<br>
+
+`TUTOR_INDEX` and `m/` are optional flags to add as per type of usage. However an error will still occur if invalid values are passed into these flags.
+
+</div>
+
+**Errors you might encounter**
+
+Here is a list of the error messages you may encounter, when the command is entered incorrectly:
+
+| Error Message                                                             | Reason                                                                                      |
+|---------------------------------------------------------------------------|---------------------------------------------------------------------------------------------|
+| `Invalid command format!`                                                 | `TUTOR_INDEX` is not a valid number                                                         |
+| `The person index provided is invalid`                                    | `TUTOR_INDEX` entered is not in the range of number of tutors                               |
+| `Status has to be either MISSED (m/0) or COMPLETED (m/1)`                 | Invalid value of `/m` was entered                                                           |
+| `Multiple values specified for the following single-valued field(s): m/`  | More than 1 `m/` was given in the command                                                   |
+
+
+
+You can also refer to [input information](#input-examples) for details about valid inputs.
+
+[Back To Top](#table-of-contents)
+
+#### Locating schedules by name: `find-s`
+
+Find schedules whose tutor's names contain any of the given keywords.
+
+##### :star: First time users
+{:.no_toc}
+
+**Scenario**
+
+You wish to view the list of schedules from a tutor named Bernice. But unfortunately, you forgot what's her last name.
+
+The find schedule function is here for that!
+
+**Follow these steps**
+
+1. Type in `find-s Bernice` and press enter.
+
+**What you can expect to see**
+
+Tada! The schedule list has now been updated to show schedules from tutor that contains the name "Bernice".
+
+![find schedule tutor](images/find-schedules/find-s.png)
+
+
+<div markdown="block" class="alert alert-success">
+
+**:information_source: Search behaviour**<br>
+
+* Search is case-insensitive. (E.g. `hans` will match `Hans`)
+* The order of the keywords does not matter. (E.g. `Hans Bo` will match `Bo Hans`)
+* Only the tutor name is searched.
+* Only full words will be matched. (E.g. `Han` will not match `Hans`)
+* Tutors matching at least one keyword will be returned. (E.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`)
+
+
+</div>
+
+##### :star::star::star: Experienced users
+{:.no_toc}
+
+**Command format**
+
+![find schedule command](images/find-schedules/find-s-syntax.png)
+
+
+**Errors you might encounter**
+
+Here is a list of the error messages you may encounter, when the command is entered incorrectly:
+
+| Error Message             | Reason                      |
+|---------------------------|-----------------------------|
+| `Invalid command format!` | No search keyword provided. |
+
+
+You can also refer to [input information](#input-examples) for details about valid inputs.
+
+[Back To Top](#table-of-contents)
+
 
 #### Marking a schedule: `mark`
 
