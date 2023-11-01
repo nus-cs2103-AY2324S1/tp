@@ -8,7 +8,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 
 public class Duration {
-    public static final String MESSAGE_CONSTRAINTS = "The duration must be an integer";
+    public static final String MESSAGE_CONSTRAINTS = "The duration must be a positive integer";
 
     public final String value;
 
@@ -26,8 +26,8 @@ public class Duration {
 
     public static boolean isValidDuration(String test) {
         try {
-            Integer.parseInt(test);
-            return true;
+            int number = Integer.parseInt(test);
+            return number > 0;
         } catch (NumberFormatException e) {
             return false;
         }

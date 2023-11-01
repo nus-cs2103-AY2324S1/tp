@@ -1,6 +1,7 @@
 package seedu.address.model.interval;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import java.time.DayOfWeek;
 
@@ -25,6 +26,7 @@ public class IntervalDay {
      */
     public IntervalDay(String day) {
         requireNonNull(day);
+        checkArgument(isValidDay(day), MESSAGE_CONSTRAINTS);
         value = parse(day);
         stringValue = parseDay(day);
     }
@@ -104,7 +106,7 @@ public class IntervalDay {
                 result = "Sun";
                 break;
             default:
-
+                throw new IllegalArgumentException(MESSAGE_CONSTRAINTS);
         }
         return result;
     }
@@ -121,8 +123,8 @@ public class IntervalDay {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof seedu.address.model.person.Day // instanceof handles nulls
-                && value.equals(((seedu.address.model.person.Day) other).value)); // state check
+                || (other instanceof seedu.address.model.interval.IntervalDay // instanceof handles nulls
+                && value.equals(((seedu.address.model.interval.IntervalDay) other).value)); // state check
     }
 
     @Override

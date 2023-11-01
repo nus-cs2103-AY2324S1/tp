@@ -46,6 +46,7 @@ public class TimeSlot {
                 lastEnd = timeslot.end;
             }
         }
+
         if (lastEnd.before(interval.getIntervalEnd().getTime())) {
             availableTime.add(new TimeSlot(lastEnd, interval.getIntervalEnd().getTime()));
         }
@@ -66,5 +67,21 @@ public class TimeSlot {
             result = result + "Free from " + startTime + " - " + endTime + "\n";
         }
         return result;
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof TimeSlot)) {
+            return false;
+        }
+
+        TimeSlot otherTimeslot = (TimeSlot) other;
+        return start.equals(otherTimeslot.start)
+                && end.equals(otherTimeslot.end);
     }
 }

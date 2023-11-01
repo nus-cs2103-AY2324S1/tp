@@ -33,20 +33,10 @@ public class IntervalEnd {
         return test.matches(VALIDATION_REGEX);
     }
 
-    private Date parse(String test) throws ParseException {
-        assert isValidEnd(test);
-
-        SimpleDateFormat dateFormat = new SimpleDateFormat("HHmm");
-
-        return dateFormat.parse(test);
-    }
-
     public Date getTime() throws ParseException {
-        return parse(value);
-    }
-
-    public int toInt() {
-        return Integer.parseInt(value);
+        assert isValidEnd(value);
+        SimpleDateFormat dateFormat = new SimpleDateFormat("HHmm");
+        return dateFormat.parse(value);
     }
 
     @Override
@@ -61,11 +51,11 @@ public class IntervalEnd {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof seedu.address.model.person.End)) {
+        if (!(other instanceof seedu.address.model.interval.IntervalEnd)) {
             return false;
         }
 
-        seedu.address.model.person.End otherEnd = (seedu.address.model.person.End) other;
+        seedu.address.model.interval.IntervalEnd otherEnd = (seedu.address.model.interval.IntervalEnd) other;
         return value.equals(otherEnd.value);
     }
 }

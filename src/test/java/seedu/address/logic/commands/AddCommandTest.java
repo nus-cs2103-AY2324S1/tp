@@ -10,6 +10,7 @@ import static seedu.address.testutil.TypicalPersons.ALICE;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
@@ -22,6 +23,7 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.interval.Interval;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
 
@@ -141,6 +143,11 @@ public class AddCommandTest {
         @Override
         public boolean hasDate(Person person) {
             throw new AssertionError("This hasDate method should not be called.");
+        }
+
+        @Override
+        public List<String> findInterval(Interval interval) {
+            throw new AssertionError("This findInterval method should not be called");
         }
 
         @Override

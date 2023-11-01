@@ -35,19 +35,13 @@ public class IntervalBegin {
         return test.matches(VALIDATION_REGEX);
     }
 
-    private Date parse(String test) throws ParseException {
-        assert isValidBegin(test);
-        SimpleDateFormat dateFormat = new SimpleDateFormat("HHmm");
-        return dateFormat.parse(test);
-    }
-
     public Date getTime() throws ParseException {
-        return parse(value);
+        assert isValidBegin(value);
+        SimpleDateFormat dateFormat = new SimpleDateFormat("HHmm");
+
+        return dateFormat.parse(value);
     }
 
-    public int toInt() {
-        return Integer.parseInt(value);
-    }
 
     @Override
     public String toString() {
@@ -61,11 +55,11 @@ public class IntervalBegin {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof seedu.address.model.person.Begin)) {
+        if (!(other instanceof seedu.address.model.interval.IntervalBegin)) {
             return false;
         }
 
-        seedu.address.model.person.Begin otherBegin = (seedu.address.model.person.Begin) other;
+        seedu.address.model.interval.IntervalBegin otherBegin = (seedu.address.model.interval.IntervalBegin) other;
         return value.equals(otherBegin.value);
     }
 }
