@@ -520,7 +520,7 @@ Displays a list of all schedules in the address book in a table format. List can
 
 **Scenario**
 
-You wish to view the list of schedules from tutor Irfan Ibrahim that are marked as `COMPLETED`.
+You wish to view the list of schedules from tutor **Irfan Ibrahim** that are marked as `COMPLETED`.
 
 The list schedule function is here for that!
 
@@ -596,7 +596,7 @@ Find schedules whose tutor's names contain any of the given keywords.
 
 **Scenario**
 
-You wish to view the list of schedules from a tutor named Bernice. But unfortunately, you forgot what's her last name.
+You wish to view the list of schedules from a tutor named **Bernice**. But unfortunately, you forgot what's her last name.
 
 The find schedule function is here for that!
 
