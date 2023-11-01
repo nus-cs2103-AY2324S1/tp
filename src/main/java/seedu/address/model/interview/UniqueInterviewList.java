@@ -10,6 +10,7 @@ import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.interview.exceptions.DuplicateInterviewException;
+import seedu.address.model.interview.exceptions.InterviewClashException;
 import seedu.address.model.interview.exceptions.InterviewNotFoundException;
 
 /**
@@ -34,6 +35,14 @@ public class UniqueInterviewList implements Iterable<Interview> {
     public boolean contains(Interview toCheck) {
         requireNonNull(toCheck);
         return internalList.stream().anyMatch(toCheck::isSameInterview);
+    }
+
+    /**
+     * Returns true if any interview in the list clashes with the interview in the given argument.
+     */
+    public boolean anyClash(Interview toCheck) {
+        requireNonNull(toCheck);
+        return internalList.stream().anyMatch(toCheck::isClashingWith);
     }
 
     /**
@@ -94,6 +103,10 @@ public class UniqueInterviewList implements Iterable<Interview> {
             throw new DuplicateInterviewException();
         }
 
+        if (!interviewsDoNotClash(interviews)) {
+            throw new InterviewClashException();
+        }
+
         internalList.setAll(interviews);
     }
 
@@ -149,6 +162,20 @@ public class UniqueInterviewList implements Iterable<Interview> {
         for (int i = 0; i < interviews.size() - 1; i++) {
             for (int j = i + 1; j < interviews.size(); j++) {
                 if (interviews.get(i).isSameInterview(interviews.get(j))) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    /**
+     * Returns true if {@code interviews} contains only interviews that do not clash.
+     */
+    private boolean interviewsDoNotClash(List<Interview> interviews) {
+        for (int i = 0; i < interviews.size() - 1; i++) {
+            for (int j = i + 1; j < interviews.size(); j++) {
+                if (interviews.get(i).isClashingWith(interviews.get(j))) {
                     return false;
                 }
             }
