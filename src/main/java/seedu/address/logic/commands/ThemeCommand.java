@@ -1,5 +1,6 @@
 package seedu.address.logic.commands;
 
+import seedu.address.logic.CommandHistory;
 import seedu.address.model.Model;
 
 /**
@@ -12,7 +13,7 @@ public class ThemeCommand extends Command {
     public static final String SHOWING_THEME_MESSAGE = "Theme has been toggled.";
 
     @Override
-    public CommandResult execute(Model model) {
+    public CommandResult execute(Model model, CommandHistory commandHistory) {
         model.toggleColorTheme();
         return new CommandResult(SHOWING_THEME_MESSAGE, false, false, false, true);
     }

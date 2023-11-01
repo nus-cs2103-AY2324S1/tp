@@ -3,14 +3,15 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT_NUMBER;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.CommandHistory;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.StudentNumber;
-import seedu.address.model.student.grades.exceptions.InvalidTutorialIndexException;
 
 /**
  * Marks a student's attendance.
@@ -40,24 +41,27 @@ public class MarkAbsentCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Model model) throws CommandException {
+    public CommandResult execute(Model model, CommandHistory commandHistory)
+            throws CommandException {
         requireNonNull(model);
 
         if (!model.hasStudent(new Student(targetStudentNumber))) {
             throw new CommandException(Messages.MESSAGE_NONEXISTENT_STUDENT_NUMBER);
         }
 
-        Student student = model.getStudent(targetStudentNumber);
+        Student studentToMark = model.getStudent(targetStudentNumber);
+        Student markedStudent = studentToMark.copy();
 
         try {
-            model.setStudent(student, student.markAbsent(this.index));
-        } catch (InvalidTutorialIndexException e) {
+            markedStudent.markAbsent(this.index);
+            model.setStudent(studentToMark, markedStudent);
+        } catch (CommandException e) {
             throw new CommandException(e.getMessage());
         }
 
-        if (model.isSelectedStudent(student)) {
-            model.setSelectedStudent(student);
-        }
+        model.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
+        model.setSelectedStudent(markedStudent);
+        model.commitAddressBook();
 
         return new CommandResult(MESSAGE_MARK_SUCCESS);
     }

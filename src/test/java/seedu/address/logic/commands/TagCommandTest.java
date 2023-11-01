@@ -15,6 +15,7 @@ import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.CommandHistory;
 import seedu.address.logic.Messages;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
@@ -33,7 +34,8 @@ import seedu.address.testutil.TypicalStudents;
  */
 public class TagCommandTest {
 
-    private Model model = new ModelManager(new AddressBook(getTypicalAddressBook()), new UserPrefs());
+    private final Model model = new ModelManager(new AddressBook(getTypicalAddressBook()), new UserPrefs());
+    private final CommandHistory commandHistory = new CommandHistory();
 
     @Test
     public void execute_replaceAllTag_success() {
@@ -49,8 +51,9 @@ public class TagCommandTest {
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setStudent(model.getFilteredStudentList().get(0), studentToTag);
+        expectedModel.commitAddressBook();
 
-        assertCommandSuccess(tagCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(tagCommand, model, expectedMessage, expectedModel, commandHistory);
     }
 
     @Test
@@ -66,8 +69,9 @@ public class TagCommandTest {
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setStudent(model.getFilteredStudentList().get(2), studentToRemoveTag);
+        expectedModel.commitAddressBook();
 
-        assertCommandSuccess(tagCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(tagCommand, model, expectedMessage, expectedModel, commandHistory);
     }
 
     @Test
@@ -76,7 +80,7 @@ public class TagCommandTest {
             new StudentNumber(VALID_STUDENT_NUMBER_AMY),
             TypicalStudents.ALICE.getTags());
 
-        assertCommandFailure(tagCommand, model, Messages.MESSAGE_STUDENT_DOES_NOT_EXIST);
+        assertCommandFailure(tagCommand, model, Messages.MESSAGE_STUDENT_DOES_NOT_EXIST, commandHistory);
     }
 
     @Test

@@ -31,6 +31,7 @@ import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditStudentDescriptor;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.HelpCommand;
+import seedu.address.logic.commands.HistoryCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.LoadCommand;
 import seedu.address.logic.commands.LookupCommand;
@@ -38,10 +39,12 @@ import seedu.address.logic.commands.MarkAbsentCommand;
 import seedu.address.logic.commands.MarkPresentAllCommand;
 import seedu.address.logic.commands.MarkPresentCommand;
 import seedu.address.logic.commands.RandomCommand;
-import seedu.address.logic.commands.RecordClassPartCommand;
+import seedu.address.logic.commands.RecordClassParticipationCommand;
+import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.SetGradeCommand;
 import seedu.address.logic.commands.TagCommand;
 import seedu.address.logic.commands.ThemeCommand;
+import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.commands.ViewCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.student.ClassDetails;
@@ -161,13 +164,13 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommand_recordClassPart() throws Exception {
-        RecordClassPartCommand command = (RecordClassPartCommand) parser.parseCommand(
-                RecordClassPartCommand.COMMAND_WORD
-                + STUDENT_NUMBER_DESC_AMY + RecordClassPartCommandParserTest.VALID_TUT_DESC
-                + RecordClassPartCommandParserTest.VALID_PARTICIPATION_DESC, true);
-        assertEquals(new RecordClassPartCommand(new StudentNumber(VALID_STUDENT_NUMBER_AMY),
-                Integer.parseInt(RecordClassPartCommandParserTest.VALID_TUT),
+    public void parseCommand_recordClassParticipation() throws Exception {
+        RecordClassParticipationCommand command = (RecordClassParticipationCommand) parser.parseCommand(
+                RecordClassParticipationCommand.COMMAND_WORD
+                + STUDENT_NUMBER_DESC_AMY + RecordClassParticipationCommandParserTest.VALID_TUT_DESC
+                + RecordClassParticipationCommandParserTest.VALID_PARTICIPATION_DESC, true);
+        assertEquals(new RecordClassParticipationCommand(new StudentNumber(VALID_STUDENT_NUMBER_AMY),
+                Integer.parseInt(RecordClassParticipationCommandParserTest.VALID_TUT),
                 true), command);
     }
 
@@ -249,6 +252,33 @@ public class AddressBookParserTest {
         assertTrue(parser.parseCommand(ExitCommand.COMMAND_WORD, false) instanceof ExitCommand);
         assertTrue(parser.parseCommand(ExitCommand.COMMAND_WORD + " 3", false) instanceof ExitCommand);
     }
+
+    @Test
+    public void parseCommand_history() throws Exception {
+        assertTrue(parser.parseCommand(HistoryCommand.COMMAND_WORD, true) instanceof HistoryCommand);
+        assertTrue(parser.parseCommand(HistoryCommand.COMMAND_WORD + " 3", true) instanceof HistoryCommand);
+
+        try {
+            parser.parseCommand("histories", true);
+            throw new AssertionError("The expected ParseException was not thrown.");
+        } catch (ParseException pe) {
+            assertEquals(MESSAGE_UNKNOWN_COMMAND, pe.getMessage());
+        }
+    }
+
+
+    @Test
+    public void parseCommand_redoCommandWord_returnsRedoCommand() throws Exception {
+        assertTrue(parser.parseCommand(RedoCommand.COMMAND_WORD, true) instanceof RedoCommand);
+        assertTrue(parser.parseCommand("redo 1", true) instanceof RedoCommand);
+    }
+
+    @Test
+    public void parseCommand_undoCommandWord_returnsUndoCommand() throws Exception {
+        assertTrue(parser.parseCommand(UndoCommand.COMMAND_WORD, true) instanceof UndoCommand);
+        assertTrue(parser.parseCommand("undo 3", true) instanceof UndoCommand);
+    }
+
 
     @Test
     public void parseCommand_unrecognisedInput_throwsParseException() {
