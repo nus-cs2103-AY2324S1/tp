@@ -58,23 +58,24 @@ public class UniqueTagList implements Iterable<Tag> {
      * @return The tag with the specified name.
      * @throws ParseException If the tag is not found in the list.
      */
-    public static Tag getTag(String tagName) throws ParseException {
+    public Tag getTag(String tagName, String tagCategory) throws ParseException {
         Optional<Tag> foundTag = internalList.stream()
-                .filter(tag -> tag.tagName.equals(tagName))
+                .filter(tag -> tag.tagName.equals(tagName) && tag.tagCategory.contains(tagCategory))
                 .findFirst();
         if (foundTag.isPresent()) {
             long occurrence = internalList.stream()
-                    .filter(tag -> tag.tagName.equals(tagName))
+                    .filter(tag -> tag.tagName.equals(tagName) && tag.tagCategory.contains(tagCategory))
                     .count();
             if (occurrence > 1) {
                 throw new ParseException("Multiple tags exists with the same name! Specify the category of the tag when adding it to a person e.g. edit 1 t/experience 3");
             }
             return foundTag.get();
-        } else {
-            System.out.println("uncategorised");
-            return new Tag(tagName, "uncategorised");
+        } else if (!tagCategory.isEmpty()) {
+            Tag newTag = new Tag(tagName, tagCategory);
+            add(newTag);
+            return newTag;
         }
-
+        return new Tag(tagName, "uncategorised");
     }
 
     /**

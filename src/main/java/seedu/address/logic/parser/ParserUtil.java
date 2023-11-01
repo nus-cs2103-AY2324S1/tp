@@ -141,13 +141,15 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code tag} is invalid.
      */
-    public static Tag parseTag(String tag) throws ParseException {
-        requireNonNull(tag);
-        String trimmedTag = tag.trim();
+    public static Tag parseTag(String tagName, String tagCategory) throws ParseException {
+        requireNonNull(tagName);
+        requireNonNull(tagCategory);
+        UniqueTagList uniqueTagList = new UniqueTagList();
+        String trimmedTag = tagName.trim();
         if (!Tag.isValidTagName(trimmedTag)) {
             throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
         }
-        return UniqueTagList.getTag(tag);
+        return uniqueTagList.getTag(tagName, tagCategory);
     }
 
     /**
@@ -156,8 +158,18 @@ public class ParserUtil {
     public static Set<Tag> parseTags(Collection<String> tags) throws ParseException {
         requireNonNull(tags);
         final Set<Tag> tagSet = new HashSet<>();
-        for (String tagName : tags) {
-            tagSet.add(parseTag(tagName));
+        String[] tagNameCategoryPairs = parseTagCategories(tags);
+        for (String tagNameCategory : tagNameCategoryPairs) {
+            if (tagNameCategory.split("\\s+").length > 1) {
+                String[] nameCategory = tagNameCategory.split("\\s+");
+                // category specified
+                String tagName = nameCategory[1];
+                String tagCategory = nameCategory[0];
+                tagSet.add(parseTag(tagName, tagCategory));
+            } else {
+                // category not specified
+                tagSet.add(parseTag(tagNameCategory, ""));
+            }
         }
         return tagSet;
     }
@@ -287,7 +299,7 @@ public class ParserUtil {
         if (tagScorePairArr.length != 2) {
             throw new ParseException("Invalid score, score must be non-negative integer.");
         }
-        Tag tag = parseTag(tagScorePairArr[0]);
+        Tag tag = parseTag(tagScorePairArr[0], "");
         Score score = parseScore(tagScorePairArr[1]);
         return new Pair<>(tag, score);
     }
