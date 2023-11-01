@@ -1,5 +1,6 @@
 package seedu.address.testutil;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import seedu.address.logic.commands.EditCommand;
@@ -54,6 +55,15 @@ public class EditCardDescriptorBuilder {
      */
     public EditCardDescriptorBuilder withTags(List<Tag> tags) {
         descriptor.setTags(tags);
+        return this;
+    }
+
+    /**
+     * @returns an EditCardDescriptorBuilder
+     */
+
+    public EditCardDescriptorBuilder withTags() {
+        descriptor.setTags(new ArrayList<>());
         return this;
     }
 

@@ -74,10 +74,10 @@ public class Messages {
         final StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("Solved Question ")
                 .append(index.getOneBased())
-                .append(" : ")
+                .append(": ")
                 .append(card.getQuestion())
                 .append("\n")
-                .append("Answer :")
+                .append("Answer: ")
                 .append(card.getAnswer());
         return stringBuilder.toString();
     }

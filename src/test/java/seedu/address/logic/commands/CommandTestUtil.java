@@ -22,14 +22,16 @@ import seedu.address.testutil.EditCardDescriptorBuilder;
 public class CommandTestUtil {
 
     public static final String VALID_QUESTION_CS2100 = "What is 5 in 2's complement";
-    public static final String VALID_QUESTION_CS1101S = "What colour is grey";
-
+    public static final String VALID_QUESTION_CS2100_R = "R-Format instruction opcode";
+    public static final String VALID_QUESTION_CS1101S = "What is the language used for this mod?";
     public static final String VALID_ANSWER_CS2100 = "0101";
-    public static final String VALID_ANSWER_CS1101S = "Grey";
+    public static final String VALID_ANSWER_CS1101S = "Source";
+    public static final String VALID_ANSWER_CS2100_R = "0";
 
     public static final List<Tag> VALID_TAG_CS2100 = new ArrayList<>(Collections.singleton(new Tag("CS2100")));
     public static final List<Tag> VALID_TAG_CS1101S = new ArrayList<>(Collections.singleton(new Tag("CS1101S")));
 
+    public static final String VALID_SINGULAR_TAG_CS2100 = "CS2100";
 
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";

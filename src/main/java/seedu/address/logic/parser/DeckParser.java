@@ -20,8 +20,6 @@ import seedu.address.logic.commands.SetDifficultyCommand;
 import seedu.address.logic.commands.SolveCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
-
-
 /**
  * Parses user input.
  */
@@ -66,7 +64,7 @@ public class DeckParser {
             return new DeleteCommandParser().parse(arguments);
 
         case ListCommand.COMMAND_WORD:
-            return new ListCommand();
+            return new ListCommandParser().parse(arguments);
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();

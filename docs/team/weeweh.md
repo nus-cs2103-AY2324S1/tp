@@ -16,16 +16,20 @@ Given below are my contributions to the project.
   * Justification: Why it is needed
   * Highlights: Key things to note
   * Credits:
-  
+
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=weeweh&breakdown=true)
 
 * **Project management**:
 
 * **Enhancements to existing features**:
   * Which enhancements were written by me (include PR number)
-  * e.g. Added `Tag` functionality to `Card`. Allowing users to categorise cards based on content (Pull requests )
-  * e.g. Wrote additional tests for `AddCommand` and `EditCommand` and their relevant parsers to cover the 
+  * Added `Tag` functionality to `Card`. Allowing users to categorise cards based on content (Pull requests )
+  * Wrote additional tests for `AddCommand` and `EditCommand` and their relevant parsers to cover the
   additional `Tag` field for a `Card` (Pull requests [\#36](), [\#38]())
+  * Added search functionality in `ListCommand`. Allowing users to search cards via 3 ways:
+    * `Question` starting with specified prefix
+    * Cards containing specified `Tag`(s)
+    * or both in the same search
 
 * **Documentation**:
   * Which documentation were written by me for which guide (include PR number)
@@ -35,6 +39,7 @@ Given below are my contributions to the project.
     * Added User Stories
     * Added Non-Functional Requirements
     * Refactored documentation to remove traces of AB3
+    * Edit `list` feature to match its functionality to search for specific cards
   * Developer Guide:
     * Refactored documentation to remove traces of AB3
     * Added Table of Content and some visual tweaks
