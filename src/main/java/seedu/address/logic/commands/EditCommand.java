@@ -12,6 +12,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TELEGRAM;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -68,7 +69,7 @@ public class EditCommand extends Command {
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
     public static final String MESSAGE_DUPLICATE_EMAIL = "Both primary and secondary email are the same "
             + "for Person: %1$s";
-    public static final String MESSAGE_USE_ADDALT_COMMAND = "Empty alternative contact field(s): %1$s \n"
+    public static final String MESSAGE_USE_ADDALT_COMMAND = "Empty alternative contact field(s): %s \n"
             + "Use the addalt command to fill in the alternative contact fields.";
 
     private final Index index;
@@ -133,23 +134,24 @@ public class EditCommand extends Command {
                 updatedLinkedin, updatedSecondaryEmail, updatedTelegram, updatedTags, id, notes, balance);
 
         // Records down the alternative contact fields that are initially empty.
-        String emptyAlternativeContactField = "";
+        ArrayList<String> emptyAlternativeContactFields = new ArrayList<>();
 
         if (!personToEdit.hasValidLinkedin() && updatedPerson.hasValidLinkedin()) {
-            emptyAlternativeContactField += "Linkedin ";
+            emptyAlternativeContactFields.add("Linkedin");
         }
         if (!personToEdit.hasValidBirthday() && updatedPerson.hasValidBirthday()) {
-            emptyAlternativeContactField += "Birthday ";
+            emptyAlternativeContactFields.add("Birthday");
         }
         if (!personToEdit.hasValidSecondaryEmail() && updatedPerson.hasValidSecondaryEmail()) {
-            emptyAlternativeContactField += "Secondary Email ";
+            emptyAlternativeContactFields.add("Secondary Email");
         }
         if (!personToEdit.hasValidTelegram() && updatedPerson.hasValidTelegram()) {
-            emptyAlternativeContactField += "Telegram ";
+            emptyAlternativeContactFields.add("Telegram");
         }
 
-        if (!emptyAlternativeContactField.isEmpty()) {
-            throw new CommandException(String.format(MESSAGE_USE_ADDALT_COMMAND, emptyAlternativeContactField));
+        if (!emptyAlternativeContactFields.isEmpty()) {
+            String fields = String.join(", ", emptyAlternativeContactFields);
+            throw new CommandException(String.format(MESSAGE_USE_ADDALT_COMMAND, fields));
         } else if (updatedPerson.hasRepeatedEmail()) {
             throw new CommandException(String.format(MESSAGE_DUPLICATE_EMAIL, personToEdit.getName()));
         } else if (updatedPerson.equals(personToEdit)) {

@@ -7,6 +7,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_SECONDARY_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TELEGRAM;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -51,7 +52,7 @@ public class AddAltCommand extends Command {
     public static final String MESSAGE_ADDALT_SUCCESS = "Added alternative contact information to Person: %1$s";
     public static final String MESSAGE_ADDALT_DUPLICATE_EMAIL = "Secondary email is same as primary email "
             + "for Person: %1$s";
-    public static final String MESSAGE_ADDALT_FAILURE = "There is existing %1$sto Person: %2$s. "
+    public static final String MESSAGE_ADDALT_FAILURE = "Person %s already has the following field(s) (%s). "
             + "\nTo change the corresponding fields, use the edit command.";
     private final Index index;
     private final AddAltPersonDescriptor addAltPersonDescriptor;
@@ -112,23 +113,24 @@ public class AddAltCommand extends Command {
                 updatedSecondaryEmail, updatedTelegram, tags, id, notes, balance);
 
         // Records down the alternative contact fields that are not initially empty.
-        String existingAlternativeContactField = "";
+        ArrayList<String> existingAlternativeContactFields = new ArrayList<>();
 
         if (personToEdit.hasValidLinkedin() && addAltPersonDescriptor.hasValidLinkedin()) {
-            existingAlternativeContactField += "Linkedin ";
+            existingAlternativeContactFields.add("Linkedin");
         }
         if (personToEdit.hasValidBirthday() && addAltPersonDescriptor.hasValidBirthday()) {
-            existingAlternativeContactField += "Birthday ";
+            existingAlternativeContactFields.add("Birthday");
         }
         if (personToEdit.hasValidSecondaryEmail() && addAltPersonDescriptor.hasValidSecondaryEmail()) {
-            existingAlternativeContactField += "Secondary Email ";
+            existingAlternativeContactFields.add("Secondary Email");
         }
         if (personToEdit.hasValidTelegram() && addAltPersonDescriptor.hasValidTelegram()) {
-            existingAlternativeContactField += "Telegram ";
+            existingAlternativeContactFields.add("Telegram");
         }
 
-        if (!existingAlternativeContactField.isEmpty()) {
-            throw new CommandException(String.format(MESSAGE_ADDALT_FAILURE, existingAlternativeContactField, name));
+        if (!existingAlternativeContactFields.isEmpty()) {
+            String fields = String.join(", ", existingAlternativeContactFields);
+            throw new CommandException(String.format(MESSAGE_ADDALT_FAILURE, name, fields));
         } else if (updatedPerson.hasRepeatedEmail()) {
             throw new CommandException(String.format(MESSAGE_ADDALT_DUPLICATE_EMAIL, name));
         } else {
