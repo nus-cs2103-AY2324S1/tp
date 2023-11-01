@@ -36,17 +36,8 @@ public class Person implements Identifiable<Person> {
             LOGGER.info(String.format(LINK_OPENING_MESSAGE, url, "Mac OS"));
             Runtime.getRuntime().exec(new String[] { "open", url });
         } else if (System.getProperty("os.name").startsWith("Linux")) {
-            for (String browser: BROWSERS) {
-                boolean isBrowserSupported = Runtime.getRuntime()
-                        .exec(new String[] { "which", browser })
-                        .getInputStream().read() != -1;
-                if (isBrowserSupported) {
-                    LOGGER.info(String.format(LINK_OPENING_MESSAGE, url, "Ubuntu"));
-                    Runtime.getRuntime().exec(new String[] { browser, url });
-                    return;
-                }
-            }
-            LOGGER.warning("No browser found.");
+            LOGGER.info(String.format(LINK_OPENING_MESSAGE, url, "Ubuntu"));
+            Runtime.getRuntime().exec(new String[] { "xdg-open", url });
         } else {
             LOGGER.warning(String.format("Unrecognised OS: %s", System.getProperty("os.name")));
         }
