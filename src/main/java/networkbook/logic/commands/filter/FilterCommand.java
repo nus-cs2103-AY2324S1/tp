@@ -26,7 +26,6 @@ public abstract class FilterCommand extends Command {
             + "[" + CliSyntax.PREFIX_FILTER_FIN + " true/false (false by default)]\n"
             + "Example: " + COMMAND_WORD + " /with a b c /taken false";
 
-    public static final String MESSAGE_SUCCESS = "Here is the list of contacts whose courses contain %1$s:";
     public static final String MESSAGE_EXCL_FIN = "\n(excluding contacts who have finished taking)";
     public static final String MESSAGE_PERSONS_FOUND_OVERVIEW = "\n(%1$s contacts found)";
 

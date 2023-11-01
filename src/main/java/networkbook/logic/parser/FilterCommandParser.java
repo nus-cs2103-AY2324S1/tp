@@ -4,14 +4,17 @@ import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import networkbook.logic.Messages;
 import networkbook.logic.commands.filter.FilterCommand;
 import networkbook.logic.commands.filter.FilterCourseCommand;
+import networkbook.logic.commands.filter.FilterGradCommand;
 import networkbook.logic.commands.filter.FilterSpecCommand;
 import networkbook.logic.parser.exceptions.ParseException;
 import networkbook.model.person.filter.CourseContainsKeyTermsPredicate;
 import networkbook.model.person.filter.CourseIsStillBeingTakenPredicate;
+import networkbook.model.person.filter.GradEqualsOneOfPredicate;
 import networkbook.model.person.filter.SpecContainsKeyTermsPredicate;
 
 /**
@@ -54,6 +57,8 @@ public class FilterCommandParser implements Parser<FilterCommand> {
             return parseSpec(compArgs);
         case FilterCourseCommand.FIELD_NAME:
             return parseCourse(compArgs);
+        case FilterGradCommand.FIELD_NAME:
+            return parseGrad(compArgs);
         default:
             break;
         }
@@ -115,5 +120,25 @@ public class FilterCommandParser implements Parser<FilterCommand> {
         String[] predicateTerms = fieldString.get().trim().split("\\s+");
 
         return new FilterSpecCommand(new SpecContainsKeyTermsPredicate(List.of(predicateTerms)));
+    }
+
+    /**
+     * Parses the text and create a FilterGradCommand object.
+     *
+     * @param grad
+     * @return A FilterGradCommand
+     */
+    public FilterCommand parseGrad(String grad) throws ParseException {
+        Optional<String> fieldString = Optional.ofNullable(grad);
+        String[] predicateTerms = fieldString.get().trim().split("\\s+");
+        try {
+            List<Integer> yearsPredicate = Arrays.stream(predicateTerms)
+                    .map(String::trim)
+                    .map(Integer::parseInt)
+                    .collect(Collectors.toList());
+            return new FilterGradCommand(new GradEqualsOneOfPredicate(yearsPredicate));
+        } catch (NumberFormatException e) {
+            throw new ParseException(FilterGradCommand.ALL_NUMBERS);
+        }
     }
 }

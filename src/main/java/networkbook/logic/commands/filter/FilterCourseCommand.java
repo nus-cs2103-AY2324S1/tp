@@ -16,6 +16,8 @@ import networkbook.model.person.filter.CourseIsStillBeingTakenPredicate;
 public class FilterCourseCommand extends FilterCommand {
 
     public static final String FIELD_NAME = "course";
+
+    public static final String MESSAGE_SUCCESS = "Here is the list of contacts whose courses contain %1$s:";
     private final CourseContainsKeyTermsPredicate keyTermsPredicate;
     private final CourseIsStillBeingTakenPredicate takenPredicate;
     private final boolean checkFin;

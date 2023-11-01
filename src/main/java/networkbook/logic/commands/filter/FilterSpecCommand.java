@@ -11,6 +11,8 @@ import networkbook.model.person.filter.SpecContainsKeyTermsPredicate;
  */
 public class FilterSpecCommand extends FilterCommand {
     public static final String FIELD_NAME = "spec";
+
+    public static final String MESSAGE_SUCCESS = "Here is the list of contacts whose specialisations contain %1$s:";
     private SpecContainsKeyTermsPredicate keyTermsPredicate;
     public FilterSpecCommand(SpecContainsKeyTermsPredicate keyTermsPredicate) {
         this.keyTermsPredicate = keyTermsPredicate;

@@ -89,7 +89,7 @@ public class FilterCourseCommandTest {
         Model model = new ModelManager(TypicalPersons.getTypicalNetworkBook(), new UserPrefs());
         Model expectedModel = new ModelManager(TypicalPersons.getTypicalNetworkBook(), new UserPrefs());
 
-        String expectedMessage = String.format(FilterCommand.MESSAGE_SUCCESS, "")
+        String expectedMessage = String.format(FilterCourseCommand.MESSAGE_SUCCESS, "")
                 + String.format(FilterCommand.MESSAGE_PERSONS_FOUND_OVERVIEW, 0);
         CourseContainsKeyTermsPredicate keyPredicate = new CourseContainsKeyTermsPredicate(Collections.emptyList());
         CourseIsStillBeingTakenPredicate takenPredicate =
@@ -117,7 +117,7 @@ public class FilterCourseCommandTest {
 
         FilterCommand command = new FilterCourseCommand(keyPredicate, takenPredicate, false);
 
-        String expectedMessage = String.format(FilterCommand.MESSAGE_SUCCESS, "\"Fourth\"")
+        String expectedMessage = String.format(FilterCourseCommand.MESSAGE_SUCCESS, "\"Fourth\"")
                 + String.format(FilterCommand.MESSAGE_PERSONS_FOUND_OVERVIEW, 0);
 
         expectedModel.updateFilteredPersonList(keyPredicate);
@@ -140,7 +140,7 @@ public class FilterCourseCommandTest {
 
         FilterCommand command = new FilterCourseCommand(keyPredicate, takenPredicate, false);
 
-        String expectedMessage = String.format(FilterCommand.MESSAGE_SUCCESS, "\"First\"")
+        String expectedMessage = String.format(FilterCourseCommand.MESSAGE_SUCCESS, "\"First\"")
                 + String.format(FilterCommand.MESSAGE_PERSONS_FOUND_OVERVIEW, 2);
 
         expectedModel.updateFilteredPersonList(keyPredicate);
@@ -164,7 +164,7 @@ public class FilterCourseCommandTest {
 
         FilterCommand command = new FilterCourseCommand(keyPredicate, takenPredicate, false);
 
-        String expectedMessage = String.format(FilterCommand.MESSAGE_SUCCESS, "\"Fourth\", \"Third\"")
+        String expectedMessage = String.format(FilterCourseCommand.MESSAGE_SUCCESS, "\"Fourth\", \"Third\"")
                 + String.format(FilterCommand.MESSAGE_PERSONS_FOUND_OVERVIEW, 1);
 
         expectedModel.updateFilteredPersonList(keyPredicate);
@@ -187,7 +187,7 @@ public class FilterCourseCommandTest {
 
         FilterCommand command = new FilterCourseCommand(keyPredicate, takenPredicate, true);
 
-        String expectedMessage = String.format(FilterCommand.MESSAGE_SUCCESS, "\"First\"")
+        String expectedMessage = String.format(FilterCourseCommand.MESSAGE_SUCCESS, "\"First\"")
                 + FilterCommand.MESSAGE_EXCL_FIN
                 + String.format(FilterCommand.MESSAGE_PERSONS_FOUND_OVERVIEW, 0);
 
@@ -219,7 +219,7 @@ public class FilterCourseCommandTest {
 
         FilterCommand command = new FilterCourseCommand(keyPredicate, takenPredicate, true);
 
-        String expectedMessage = String.format(FilterCommand.MESSAGE_SUCCESS, "\"First\"")
+        String expectedMessage = String.format(FilterCourseCommand.MESSAGE_SUCCESS, "\"First\"")
                 + FilterCommand.MESSAGE_EXCL_FIN
                 + String.format(FilterCommand.MESSAGE_PERSONS_FOUND_OVERVIEW, 1);
 
@@ -248,7 +248,7 @@ public class FilterCourseCommandTest {
 
         FilterCommand command = new FilterCourseCommand(keyPredicate, takenPredicate, false);
 
-        String expectedMessage = String.format(FilterCommand.MESSAGE_SUCCESS, "\"Fir\"")
+        String expectedMessage = String.format(FilterCourseCommand.MESSAGE_SUCCESS, "\"Fir\"")
                 + String.format(FilterCommand.MESSAGE_PERSONS_FOUND_OVERVIEW, 2);
 
         expectedModel.updateFilteredPersonList(keyPredicate);
