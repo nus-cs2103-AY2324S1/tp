@@ -74,6 +74,19 @@ class FlashCardTest {
     }
 
     @Test
+    void isSameFlashCardBySameWordDifferentTranslation() {
+        FlashCard fc1 = new FlashCard(new OriginalWord("Hello", "eng"),
+                new TranslatedWord("Ni Hao", "chi"),
+                new Date(),
+                new ProficiencyLevel(1));
+        FlashCard fc2 = new FlashCard(new OriginalWord("Hello", "eng"),
+                new TranslatedWord("你好", "chi"),
+                new Date(),
+                new ProficiencyLevel(1));
+        assert(!fc1.isSameFlashCard(fc2));
+    }
+
+    @Test
     void hasKeyword() {
     }
 

@@ -74,7 +74,8 @@ public class FlashCard {
         }
 
         return otherFlashCard != null
-            && otherFlashCard.getOriginalWord().equals(getOriginalWord());
+            && otherFlashCard.getOriginalWord().equals(getOriginalWord())
+            && otherFlashCard.getTranslatedWord().equals(getTranslatedWord());
     }
 
     /**
