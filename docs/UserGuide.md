@@ -461,6 +461,7 @@ Here is a list of the error messages you may encounter, when the command is ente
 * `This schedule already exists in the address book`: There is a schedule for the same tutor with the same start and end time in the address book.
 * `This tutor has a clashing schedule in the address book`: There is a schedule for the same tutor with overlapping times in the address book.
 * `At least one field to edit must be provided.`: There is no `st/` or `et/` tag provided to edit a field.
+* `Schedules start time should be before its end time.`: The start time provided is before the end time.
 
 You can also refer to [input information](#input-examples) for details about valid inputs.
 
