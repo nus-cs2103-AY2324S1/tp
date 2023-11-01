@@ -144,7 +144,14 @@ Click on any of these below to jump to the respective sections of the guide!
 ### Start
 ![start](images/tutorial/start.png)
 
-When you first launch TutorConnect, you will be greeted with an empty screen with no tutors. It's time to start adding your tutors to TutorConnect.
+When you first launch TutorConnect, you will notice that it comes preloaded with sample data for you to experiment with.
+You may use the sample data to familiarize yourself with the various [features](#features) that TutorConnect provide.
+
+Alternatively, if you're ready to start with your own data, you can easily remove all the sample entries:
+1. Simply type into the Command Box: `clear`
+2. Hit enter
+
+Now it's time to start adding your tutors to TutorConnect!
 
 ### Adding your first tutor
 
