@@ -232,10 +232,10 @@ public class ParserUtil {
      */
     public static boolean parseIsAscending(String argument) throws ParseException {
         requireNonNull(argument);
-        boolean isAscending = argument.equals("asc");
-        if (isAscending == false && !argument.equals("asc")) {
+        if (!argument.equals("asc") && !argument.equals("desc")) {
             throw new ParseException("This is neither ascending or descending");
         }
+        boolean isAscending = argument.equals("asc");
 
         return isAscending;
     }

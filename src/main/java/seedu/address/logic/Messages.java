@@ -31,7 +31,7 @@ public class Messages {
     public static final String MESSAGE_INVALID_APPOINTMENT_DISPLAYED_INDEX = "The appointment index provided is"
             + "invalid";
     public static final String MESSAGE_INVALID_APPOINTMENT_SORT_ATTRIBUTE = "The attribute given is invalid, please"
-            + "give one of the following attributes: $s";
+            + " give one of the following attributes: %1$s";
     public static final String MESSAGE_PATIENT_DOES_NOT_EXIST = "Patient provided does not exist";
     public static final String MESSAGE_INVALID_START_AND_END_TIMES =
             "Your start time is either before or on the same time as the end "
