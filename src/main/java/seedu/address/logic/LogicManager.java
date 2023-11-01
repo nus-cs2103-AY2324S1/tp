@@ -44,8 +44,6 @@ public class LogicManager implements Logic {
     private boolean isViewCommand = false;
     private boolean isViewExitCommand = false;
     private final Model backupModel;
-    private final Path backupPath = Path.of("data\\addressbookbackup.json");
-    private final Path mainPath = Path.of("data\\addressbookbackup.json");
 
     /**
      * Constructs a {@code LogicManager} with the given {@code Model} and {@code Storage}.
@@ -57,6 +55,7 @@ public class LogicManager implements Logic {
         viewModeParser = new ViewModeParser();
         this.parser = addressBookParser;
         this.backupModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Path mainPath = Path.of("data\\addressbookbackup.json");
         backupModel.setAddressBookFilePath(mainPath);
     }
 
@@ -133,9 +132,5 @@ public class LogicManager implements Logic {
 
     public void setParser(Parser parser) {
         this.parser = parser;
-    }
-
-    public void checkUndo() {
-
     }
 }

@@ -9,5 +9,4 @@ public class DataLoadingException extends Exception {
     }
 
 
-    public DataLoadingException(String s) {}
 }
