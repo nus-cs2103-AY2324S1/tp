@@ -65,6 +65,9 @@ class JsonAdaptedEmployee {
         if (leaveList != null) {
             this.leaveList.addAll(leaveList);
         }
+        if (remarkList != null) {
+            this.remarkList.addAll(remarkList);
+        }
     }
 
     /**
@@ -83,6 +86,9 @@ class JsonAdaptedEmployee {
         overtimeHours = source.getOvertimeHours().value;
         leaveList.addAll(source.getLeaveList().leaveList.stream()
                 .map(JsonAdaptedLeave::new)
+                .collect(Collectors.toList()));
+        remarkList.addAll(source.getRemarkList().remarkList.stream()
+                .map(JsonAdaptedRemark::new)
                 .collect(Collectors.toList()));
     }
 

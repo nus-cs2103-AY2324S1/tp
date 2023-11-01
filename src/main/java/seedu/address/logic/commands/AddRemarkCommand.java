@@ -7,6 +7,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_EMPLOYEES;
 
 import java.util.List;
+import java.util.Locale;
 
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -61,6 +62,7 @@ public class AddRemarkCommand extends Command {
                         employee.getOvertimeHours(), employee.getLeaveList(), updatedList);
 
                 model.setEmployee(employee, employeeWithRemark);
+                model.updateFilteredEmployeeList(PREDICATE_SHOW_ALL_EMPLOYEES);
                 return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.formatRemarks(employeeWithRemark)));
             }
         }
