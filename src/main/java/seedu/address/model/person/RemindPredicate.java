@@ -1,5 +1,7 @@
 package seedu.address.model.person;
 
+import seedu.address.model.policy.PolicyDate;
+
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.function.Predicate;
@@ -22,7 +24,8 @@ public class RemindPredicate implements Predicate<Person> {
 
     @Override
     public boolean test(Person person) {
-        return ChronoUnit.DAYS.between(LocalDate.now(), person.getPolicy().getPolicyExpiryDate().date) <= days;
+        return !person.getPolicy().getPolicyExpiryDate().toString().equals(PolicyDate.DEFAULT_VALUE)
+                && ChronoUnit.DAYS.between(LocalDate.now(), person.getPolicy().getPolicyExpiryDate().date) <= days;
     }
 
     @Override
