@@ -29,7 +29,7 @@ public class ModelManager implements Model {
     private final UniqueReminderList reminderList;
     private final Dashboard dashboard = new Dashboard(this);
     private final ReminderScheduler reminderScheduler;
-    private final Object reminderMutext = new Object();
+    private final Object reminderMutex = new Object();
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -44,6 +44,7 @@ public class ModelManager implements Model {
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
         this.reminderList = new UniqueReminderList(this);
         this.reminderList.updateReminders();
+        this.reminderScheduler = new ReminderScheduler(this, reminderMutex);
     }
 
     public ModelManager() {

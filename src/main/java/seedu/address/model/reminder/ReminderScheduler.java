@@ -69,7 +69,7 @@ public class ReminderScheduler extends Thread {
                     //TODO: @zhyuhan Rather than changing the reminderlist which could cause thread access issues
                     //(ie someone just nice update the reminderlist at the same time)),
                     //Change this to just update the Dashboard/Reminder UI with reminders after for the new day
-                    model.getReminderList().updateReminders(model.getAddressBook().getPersonList());
+                    model.getReminderList().updateReminders();
                 } catch (InterruptedException e) {
                     logger.info("ReminderManager thread interrupted");
 
