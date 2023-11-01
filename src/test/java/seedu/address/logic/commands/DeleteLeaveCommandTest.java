@@ -1,15 +1,17 @@
 package seedu.address.logic.commands;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DEPARTMENT_FINANCE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DEPARTMENT_IT;
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.DeleteLeaveCommand.MESSAGE_NO_LEAVES_FOUND;
 import static seedu.address.logic.commands.DeleteLeaveCommand.MESSAGE_SUCCESS;
 import static seedu.address.testutil.TypicalEmployees.BOB;
 import static seedu.address.testutil.TypicalEmployees.getTypicalAddressBook;
+
+import java.time.LocalDate;
 
 import org.junit.jupiter.api.Test;
 
@@ -19,15 +21,9 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.employee.Employee;
-import seedu.address.model.employee.EmployeeContainsKeywordsPredicate;
 import seedu.address.model.employee.Leave;
 import seedu.address.model.employee.LeaveList;
 import seedu.address.testutil.EmployeeBuilder;
-
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.Arrays;
-
 
 class DeleteLeaveCommandTest {
 

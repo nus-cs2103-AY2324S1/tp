@@ -1,19 +1,19 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FROM;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TO;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.DeleteLeaveCommand;
 import seedu.address.model.employee.Id;
-
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
 class DeleteLeaveCommandParserTest {
 
@@ -33,7 +33,7 @@ class DeleteLeaveCommandParserTest {
     }
 
     @Test
-    public void parse_validArgs_returnsDeleteLeaveCommand(){
+    public void parse_validArgs_returnsDeleteLeaveCommand() {
 
         String userInput = " " + PREFIX_ID + "EID1234-5678 " + PREFIX_FROM + "2023-12-26 " + PREFIX_TO + "2023-12-28";
 
