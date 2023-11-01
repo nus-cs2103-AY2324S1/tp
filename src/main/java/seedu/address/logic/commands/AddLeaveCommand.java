@@ -129,7 +129,9 @@ public class AddLeaveCommand extends Command {
         }
 
         AddLeaveCommand otherAddLeaveCommand = (AddLeaveCommand) other;
-        return targetId.equals(otherAddLeaveCommand.targetId);
+        return targetId.equals(otherAddLeaveCommand.targetId)
+                && from.equals(otherAddLeaveCommand.from)
+                && to.equals(otherAddLeaveCommand.to);
     }
 
     @Override

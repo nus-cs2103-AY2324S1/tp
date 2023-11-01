@@ -126,7 +126,9 @@ public class DeleteLeaveCommand extends Command {
         }
 
         DeleteLeaveCommand otherDeleteLeaveCommand = (DeleteLeaveCommand) other;
-        return targetId.equals(otherDeleteLeaveCommand.targetId);
+        return targetId.equals(otherDeleteLeaveCommand.targetId)
+                && from.equals(otherDeleteLeaveCommand.from)
+                && to.equals(otherDeleteLeaveCommand.to);
     }
 
     @Override
