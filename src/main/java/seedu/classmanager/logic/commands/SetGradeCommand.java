@@ -6,6 +6,7 @@ import static seedu.classmanager.logic.parser.CliSyntax.PREFIX_GRADE;
 import static seedu.classmanager.logic.parser.CliSyntax.PREFIX_STUDENT_NUMBER;
 import static seedu.classmanager.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
 
+import seedu.classmanager.commons.core.index.Index;
 import seedu.classmanager.commons.util.ToStringBuilder;
 import seedu.classmanager.logic.CommandHistory;
 import seedu.classmanager.logic.Messages;
@@ -35,13 +36,13 @@ public class SetGradeCommand extends Command {
 
 
     private final StudentNumber studentNumber;
-    private final int assignmentNumber;
+    private final Index assignmentNumber;
     private final int grade;
 
     /**
      * Creates an SetGradeCommand to set the specified {@code Student}'s grade
      */
-    public SetGradeCommand(StudentNumber studentNumber, int assignmentNumber, int grade) {
+    public SetGradeCommand(StudentNumber studentNumber, Index assignmentNumber, int grade) {
         this.studentNumber = studentNumber;
         this.assignmentNumber = assignmentNumber;
         this.grade = grade;
@@ -81,7 +82,7 @@ public class SetGradeCommand extends Command {
 
         SetGradeCommand otherSetGradeCommand = (SetGradeCommand) other;
         return studentNumber.equals(otherSetGradeCommand.studentNumber)
-                && assignmentNumber == otherSetGradeCommand.assignmentNumber
+                && assignmentNumber.equals(otherSetGradeCommand.assignmentNumber)
                 && grade == otherSetGradeCommand.grade;
     }
 

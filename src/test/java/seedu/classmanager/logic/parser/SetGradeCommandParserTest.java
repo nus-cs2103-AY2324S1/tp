@@ -14,6 +14,7 @@ import static seedu.classmanager.logic.parser.CommandParserTestUtil.assertParseS
 
 import org.junit.jupiter.api.Test;
 
+import seedu.classmanager.commons.core.index.Index;
 import seedu.classmanager.logic.Messages;
 import seedu.classmanager.logic.commands.SetGradeCommand;
 import seedu.classmanager.model.student.StudentNumber;
@@ -56,7 +57,7 @@ public class SetGradeCommandParserTest {
                 StudentNumber.MESSAGE_CONSTRAINTS); // invalid student number
 
         assertParseFailure(parser, STUDENT_NUMBER_DESC_AMY + INVALID_ASSIGNMENT_DESC + VALID_GRADE_DESC,
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, SetGradeCommand.MESSAGE_USAGE)); // invalid assignment
+                ParserUtil.MESSAGE_INVALID_INDEX); // invalid assignment
 
         assertParseFailure(parser, STUDENT_NUMBER_DESC_AMY + VALID_ASSIGNMENT_DESC + INVALID_GRADE_DESC,
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, SetGradeCommand.MESSAGE_USAGE)); // invalid grade
@@ -67,7 +68,7 @@ public class SetGradeCommandParserTest {
         String userInput = STUDENT_NUMBER_DESC_AMY + VALID_ASSIGNMENT_DESC + VALID_GRADE_DESC;
 
         SetGradeCommand expectedCommand = new SetGradeCommand(new StudentNumber(VALID_STUDENT_NUMBER_AMY),
-                Integer.parseInt(VALID_ASSIGNMENT), Integer.parseInt(VALID_GRADE));
+                Index.fromOneBased(Integer.parseInt(VALID_ASSIGNMENT)), Integer.parseInt(VALID_GRADE));
         assertParseSuccess(parser, userInput, expectedCommand);
     }
 
@@ -76,7 +77,7 @@ public class SetGradeCommandParserTest {
         String userInput = VALID_GRADE_DESC + VALID_ASSIGNMENT_DESC + STUDENT_NUMBER_DESC_AMY;
 
         SetGradeCommand expectedCommand = new SetGradeCommand(new StudentNumber(VALID_STUDENT_NUMBER_AMY),
-                Integer.parseInt(VALID_ASSIGNMENT), Integer.parseInt(VALID_GRADE));
+                Index.fromOneBased(Integer.parseInt(VALID_ASSIGNMENT)), Integer.parseInt(VALID_GRADE));
         assertParseSuccess(parser, userInput, expectedCommand);
 
         userInput = VALID_ASSIGNMENT_DESC + VALID_GRADE_DESC + STUDENT_NUMBER_DESC_AMY;

@@ -14,6 +14,7 @@ import static seedu.classmanager.logic.parser.CommandParserTestUtil.assertParseS
 
 import org.junit.jupiter.api.Test;
 
+import seedu.classmanager.commons.core.index.Index;
 import seedu.classmanager.logic.Messages;
 import seedu.classmanager.logic.commands.RecordClassParticipationCommand;
 import seedu.classmanager.model.student.StudentNumber;
@@ -56,8 +57,7 @@ public class RecordClassParticipationCommandParserTest {
                 StudentNumber.MESSAGE_CONSTRAINTS); // invalid student number
 
         assertParseFailure(parser, STUDENT_NUMBER_DESC_AMY + INVALID_TUT_DESC + VALID_PARTICIPATION_DESC,
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                        RecordClassParticipationCommand.MESSAGE_USAGE)); // invalid tut
+                ParserUtil.MESSAGE_INVALID_INDEX); // invalid tut
 
         assertParseFailure(parser, STUDENT_NUMBER_DESC_AMY + VALID_TUT_DESC + INVALID_PARTICIPATION_DESC,
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT,
@@ -70,7 +70,7 @@ public class RecordClassParticipationCommandParserTest {
 
         RecordClassParticipationCommand expectedCommand = new RecordClassParticipationCommand(
                 new StudentNumber(VALID_STUDENT_NUMBER_AMY),
-                Integer.parseInt(VALID_TUT),
+                Index.fromOneBased(Integer.parseInt(VALID_TUT)),
                 Boolean.parseBoolean(VALID_PARTICIPATION));
         assertParseSuccess(parser, userInput, expectedCommand);
     }
@@ -81,7 +81,7 @@ public class RecordClassParticipationCommandParserTest {
 
         RecordClassParticipationCommand expectedCommand = new RecordClassParticipationCommand(
                 new StudentNumber(VALID_STUDENT_NUMBER_AMY),
-                Integer.parseInt(VALID_TUT),
+                Index.fromOneBased(Integer.parseInt(VALID_TUT)),
                 Boolean.parseBoolean(VALID_PARTICIPATION));
         assertParseSuccess(parser, userInput, expectedCommand);
 

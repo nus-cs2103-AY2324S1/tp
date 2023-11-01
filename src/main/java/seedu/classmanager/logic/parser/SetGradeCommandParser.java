@@ -6,6 +6,7 @@ import static seedu.classmanager.logic.parser.CliSyntax.PREFIX_ASSIGNMENT;
 import static seedu.classmanager.logic.parser.CliSyntax.PREFIX_GRADE;
 import static seedu.classmanager.logic.parser.CliSyntax.PREFIX_STUDENT_NUMBER;
 
+import seedu.classmanager.commons.core.index.Index;
 import seedu.classmanager.logic.commands.SetGradeCommand;
 import seedu.classmanager.logic.parser.exceptions.ParseException;
 import seedu.classmanager.model.student.StudentNumber;
@@ -33,10 +34,9 @@ public class SetGradeCommandParser implements Parser<SetGradeCommand> {
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_STUDENT_NUMBER, PREFIX_ASSIGNMENT, PREFIX_GRADE);
         StudentNumber studentNumber = ParserUtil.parseStudentNumber(
                 argMultimap.getValue(PREFIX_STUDENT_NUMBER).get());
-        int assignmentNumber;
+        Index assignmentNumber = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_ASSIGNMENT).get());
         int grade;
         try {
-            assignmentNumber = Integer.parseInt(argMultimap.getValue(PREFIX_ASSIGNMENT).get());
             grade = Integer.parseInt(argMultimap.getValue(PREFIX_GRADE).get());
         } catch (NumberFormatException e) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SetGradeCommand.MESSAGE_USAGE));

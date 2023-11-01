@@ -23,7 +23,7 @@ public class ClassDetails {
     public static final String MESSAGE_INVALID_GRADE = "Grade should be between 0 and 100";
     public static final String MESSAGE_INVALID_ASSIGNMENT_NUMBER = "Assignment number should "
             + "be between 1 and %s";
-    public static final String MESSAGE_INVALID_TUTORIAL_SESSION_NUMBER = "Tutorial session number should "
+    public static final String MESSAGE_INVALID_TUTORIAL_INDEX = "Tutorial index should "
             + "be between 1 and %s";
     public static final String MESSAGE_UNEQUAL_LENGTH = "The number of tutorial sessions and "
             + "attendance records should be equal.";
@@ -87,9 +87,9 @@ public class ClassDetails {
      */
     public void markPresent(Index tutNum) throws CommandException {
         requireNonNull(tutNum);
-        if (tutNum.getOneBased() > tutorialCount || tutNum.getOneBased() <= 0) {
+        if (tutNum.getOneBased() > tutorialCount) {
             throw new CommandException(
-                    String.format(MESSAGE_INVALID_TUTORIAL_SESSION_NUMBER, tutorialCount));
+                    String.format(MESSAGE_INVALID_TUTORIAL_INDEX, tutorialCount));
         }
         updateAssignmentAndTutorialCount();
         this.attendanceTracker.markPresent(tutNum);
@@ -100,9 +100,9 @@ public class ClassDetails {
      */
     public void markAbsent(Index tutNum) throws CommandException {
         requireNonNull(tutNum);
-        if (tutNum.getOneBased() > tutorialCount || tutNum.getOneBased() <= 0) {
+        if (tutNum.getOneBased() > tutorialCount) {
             throw new CommandException(
-                    String.format(MESSAGE_INVALID_TUTORIAL_SESSION_NUMBER, tutorialCount));
+                    String.format(MESSAGE_INVALID_TUTORIAL_INDEX, tutorialCount));
         }
         updateAssignmentAndTutorialCount();
         this.attendanceTracker.markAbsent(tutNum);
@@ -171,8 +171,8 @@ public class ClassDetails {
      * @param grade the grade to be set
      * @throws CommandException if the assignment number or grade is invalid
      */
-    public void setGrade(int assignmentNumber, int grade) throws CommandException {
-        if (assignmentNumber > assignmentCount || assignmentNumber <= 0) {
+    public void setGrade(Index assignmentNumber, int grade) throws CommandException {
+        if (assignmentNumber.getOneBased() > assignmentCount) {
             throw new CommandException(
                     String.format(MESSAGE_INVALID_ASSIGNMENT_NUMBER, assignmentCount));
         }
@@ -180,7 +180,7 @@ public class ClassDetails {
             throw new CommandException(MESSAGE_INVALID_GRADE);
         }
         updateAssignmentAndTutorialCount();
-        assignmentTracker.editMarks(Index.fromOneBased(assignmentNumber), grade);
+        assignmentTracker.editMarks(assignmentNumber, grade);
     }
 
     /**
@@ -194,13 +194,13 @@ public class ClassDetails {
     /**
      * Records the class participation of the student for a particular tutorial session.
      */
-    public void recordClassParticipation(int sessionNumber, boolean participated) throws CommandException {
-        if (sessionNumber > tutorialCount || sessionNumber <= 0) {
+    public void recordClassParticipation(Index tutorialIndex, boolean participated) throws CommandException {
+        if (tutorialIndex.getOneBased() > tutorialCount) {
             throw new CommandException(
-                    String.format(MESSAGE_INVALID_TUTORIAL_SESSION_NUMBER, tutorialCount));
+                    String.format(MESSAGE_INVALID_TUTORIAL_INDEX, tutorialCount));
         }
         updateAssignmentAndTutorialCount();
-        classParticipationTracker.markParticipation(Index.fromOneBased(sessionNumber), participated);
+        classParticipationTracker.markParticipation(tutorialIndex, participated);
     }
 
     /**

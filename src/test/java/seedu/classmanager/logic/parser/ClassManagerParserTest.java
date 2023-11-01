@@ -159,7 +159,7 @@ public class ClassManagerParserTest {
                 + STUDENT_NUMBER_DESC_AMY + SetGradeCommandParserTest.VALID_ASSIGNMENT_DESC
                 + SetGradeCommandParserTest.VALID_GRADE_DESC, true);
         assertEquals(new SetGradeCommand(new StudentNumber(VALID_STUDENT_NUMBER_AMY),
-                Integer.parseInt(SetGradeCommandParserTest.VALID_ASSIGNMENT),
+                Index.fromOneBased(Integer.parseInt(SetGradeCommandParserTest.VALID_ASSIGNMENT)),
                 Integer.parseInt(SetGradeCommandParserTest.VALID_GRADE)), command);
     }
 
@@ -170,7 +170,7 @@ public class ClassManagerParserTest {
                 + STUDENT_NUMBER_DESC_AMY + RecordClassParticipationCommandParserTest.VALID_TUT_DESC
                 + RecordClassParticipationCommandParserTest.VALID_PARTICIPATION_DESC, true);
         assertEquals(new RecordClassParticipationCommand(new StudentNumber(VALID_STUDENT_NUMBER_AMY),
-                Integer.parseInt(RecordClassParticipationCommandParserTest.VALID_TUT),
+                Index.fromOneBased(Integer.parseInt(RecordClassParticipationCommandParserTest.VALID_TUT)),
                 true), command);
     }
 

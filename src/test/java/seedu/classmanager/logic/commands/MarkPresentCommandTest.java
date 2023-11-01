@@ -60,7 +60,7 @@ public class MarkPresentCommandTest {
 
         assertCommandFailure(
                 markPresentCommand, model,
-                String.format(ClassDetails.MESSAGE_INVALID_TUTORIAL_SESSION_NUMBER, ClassDetails.DEFAULT_COUNT),
+                String.format(ClassDetails.MESSAGE_INVALID_TUTORIAL_INDEX, ClassDetails.DEFAULT_COUNT),
                 commandHistory);
     }
 
