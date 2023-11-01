@@ -3,7 +3,7 @@ layout: page
 title: User Guide
 ---
 
-FumbleLog is a **productivity desktop app for managing contacts and tracking events. It is optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI).
+FumbleLog is a **productivity desktop app for managing contacts and tracking events.**
 
 In this user guide, you will learn the basics of our application and how you can use it to manage your tasks and interpersonal relationships better.
 

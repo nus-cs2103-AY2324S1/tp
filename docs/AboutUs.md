@@ -5,7 +5,7 @@ title: About Us
 
 We are a team based in the [School of Computing, National University of Singapore](http://www.comp.nus.edu.sg).
 
-You can reach us at the email `seer[at]comp.nus.edu.sg`
+You can visit our project repository at our [organisation github](https://github.com/AY2324S1-CS2103T-T12-2).
 
 ## Project team
 
@@ -27,7 +27,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[portfolio](team/kurtyjlee.md)]
 
 * Role: Developer
-* Responsibilities: UI
+* Responsibilities: Back-end and QA
 
 ### Leong Yu Jun Nicholas
 
