@@ -39,6 +39,9 @@ public class Messages {
     public static final String MESSAGE_PERSONS_LISTED_OVERVIEW_PAYSLIP =
             "%1$d employees found! Refer to their indexes for payslip generation";
 
+    public static final String MESSAGE_NO_EMPLOYEE_ON_LEAVE =
+            "There are no employee on leave on %1$s";
+
     /**
      * Returns an error message indicating the duplicate prefixes.
      */

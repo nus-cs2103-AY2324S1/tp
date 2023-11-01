@@ -40,8 +40,6 @@ public class JsonAdaptedPersonTest {
     private static final ArrayList<String> VALID_ATTENDANCE_STORAGE = BENSON.getAttendanceStorage().getValue();
     private static final ArrayList<String> VALID_PAYROLL_STORAGE = BENSON.getPayrollStorage().getValue();
 
-
-
     @Test
     public void toModelType_validPersonDetails_returnsPerson() throws Exception {
         JsonAdaptedPerson person = new JsonAdaptedPerson(BENSON);
