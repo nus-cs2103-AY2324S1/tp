@@ -1,0 +1,26 @@
+@startuml
+!include ../style.puml
+skinparam ArrowFontStyle plain
+
+title Create EditMeetingCommand
+
+Participant ":LogicManager" as logic LOGIC_COLOR
+Participant ":AddressBookParser" as abp LOGIC_COLOR
+Participant ":EditMeetingCommandParser" as emcp LOGIC_COLOR
+Participant "editMeetingDescriptor:EditMeetingDescriptor" as emd LOGIC_COLOR
+Participant "command:EditMeetingCommand" as emc LOGIC_COLOR
+
+activate logic
+logic -> abp ++: parseCommand(commandText)
+create emcp
+abp -> emcp ++: parse(arguments)
+create emd
+emcp -> emd ++: EditMeetingDescriptor()
+emd --> emcp --:
+create emc
+emcp -> emc ++: EditMeetingCommand(targetIndex, editMeetingDescriptor)
+emc --> emcp --: command
+emcp --> abp --: command
+abp --> logic --: command
+
+@enduml

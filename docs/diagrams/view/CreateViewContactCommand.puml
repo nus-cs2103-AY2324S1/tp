@@ -2,7 +2,7 @@
 !include ../style.puml
 skinparam ArrowFontStyle plain
 
-title View Contact Command Sequence
+title Create ViewContactCommand
 
 Participant ":LogicManager" as logic LOGIC_COLOR
 Participant ":AddressBookParser" as abp LOGIC_COLOR
@@ -13,11 +13,10 @@ Participant "command:ViewContactCommand" as ec LOGIC_COLOR
 activate logic
 logic -> abp ++: parseCommand(commandText)
 create vccp
-abp -> vccp
 abp -> vccp ++: parse(arguments)
 create ec
-vccp -> ec ++: index
-ec --> vccp --
+vccp -> ec ++: ViewContactCommand(targetIndex)
+ec --> vccp --: command
 vccp --> abp --: command
 abp --> logic --: command
 
