@@ -1,12 +1,20 @@
 package seedu.address.model.util;
 
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.event.Event;
+import seedu.address.model.event.EventDate;
+import seedu.address.model.event.EventList;
+import seedu.address.model.event.EventName;
+import seedu.address.model.event.EventTime;
+import seedu.address.model.event.Meeting;
 import seedu.address.model.group.Group;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Birthday;
@@ -58,10 +66,46 @@ public class SampleDataUtil {
         };
     }
 
+    public static Event[] getSampleEvents() {
+        try {
+            return new Event[]{
+                    new Meeting(new EventName("Group meeting"),
+                            new EventDate("2023-10-10"),
+                            Optional.of(EventTime.of("1000")),
+                            Optional.of(EventTime.of("1200")),
+                            getNameSet("Alex Yeoh", "Bernice Yu"),
+                            getGroupSet("classmates")
+                    ),
+                    new Meeting(new EventName("Lunch with friends"),
+                            new EventDate("2023-12-10"),
+                            Optional.of(EventTime.NULL_EVENT_TIME),
+                            Optional.of(EventTime.NULL_EVENT_TIME),
+                            new HashSet<>(),
+                            getGroupSet("friends")
+                    ),
+                    new Meeting(new EventName("Family dinner"),
+                            new EventDate("2023-12-11"),
+                            Optional.of(EventTime.of("1800")),
+                            Optional.of(EventTime.NULL_EVENT_TIME),
+                            getNameSet("David Li"),
+                            new HashSet<>()
+                    )
+            };
+        } catch (ParseException e) {
+            return new Event[]{};
+        }
+    }
+
+
+
     public static ReadOnlyAddressBook getSampleAddressBook() {
         AddressBook sampleAb = new AddressBook();
         for (Person samplePerson : getSamplePersons()) {
             sampleAb.addPerson(samplePerson);
+        }
+
+        for (Event sampleEvent : getSampleEvents()) {
+            sampleAb.addEvent(sampleEvent);
         }
         return sampleAb;
     }
@@ -70,12 +114,22 @@ public class SampleDataUtil {
      * Returns a group set containing the list of strings given.
      */
     public static Set<Group> getGroupSet(String... strings) {
+        if (strings.length == 0) {
+            return Set.of();
+        } else if (strings.length == 1 && strings[0].equals("")) {
+            return Set.of();
+        }
         return Arrays.stream(strings)
                 .map(Group::new)
                 .collect(Collectors.toSet());
     }
 
     public static Set<Name> getNameSet(String... strings) {
+        if (strings.length == 0) {
+            return Set.of();
+        } else if (strings.length == 1 && strings[0].equals("")) {
+            return Set.of();
+        }
         return Arrays.stream(strings)
                 .map(Name::new)
                 .collect(Collectors.toSet());
