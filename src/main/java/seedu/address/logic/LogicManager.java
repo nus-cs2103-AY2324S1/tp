@@ -1,7 +1,5 @@
 package seedu.address.logic;
 
-import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
-
 import java.io.IOException;
 import java.nio.file.AccessDeniedException;
 import java.nio.file.Path;
@@ -60,8 +58,6 @@ public class LogicManager implements Logic {
         try {
             command = addressBookParser.parseCommand(commandText, model.getConfigured());
             commandResult = command.execute(model, history);
-        } catch (ParseException pe) {
-            throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         } finally {
             history.add(commandText);
         }

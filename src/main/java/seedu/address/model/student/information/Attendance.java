@@ -5,10 +5,9 @@ package seedu.address.model.student.information;
  */
 public class Attendance {
 
-    private boolean isPresent;
+    private boolean isPresent = false;
 
     public Attendance() {
-        isPresent = false;
     }
 
     /**

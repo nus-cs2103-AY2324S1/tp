@@ -5,10 +5,9 @@ package seedu.address.model.student.information;
  */
 public class ClassParticipation {
 
-    private boolean hasParticipated;
+    private boolean hasParticipated = false;
 
     public ClassParticipation() {
-        hasParticipated = false;
     }
 
     /**
@@ -26,7 +25,7 @@ public class ClassParticipation {
         hasParticipated = false;
     }
 
-    public boolean getParticipation() {
+    public boolean getHasParticipated() {
         return hasParticipated;
     }
 

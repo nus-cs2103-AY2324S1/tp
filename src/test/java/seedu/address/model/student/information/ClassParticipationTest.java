@@ -12,14 +12,14 @@ public class ClassParticipationTest {
     public void mark_success() {
         ClassParticipation classParticipation = new ClassParticipation();
         classParticipation.mark();
-        assertTrue(classParticipation.getParticipation());
+        assertTrue(classParticipation.getHasParticipated());
     }
 
     @Test
     public void unmark_success() {
         ClassParticipation classParticipation = new ClassParticipation();
         classParticipation.unmark();
-        assertFalse(classParticipation.getParticipation());
+        assertFalse(classParticipation.getHasParticipated());
     }
 
     @Test

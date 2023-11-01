@@ -60,9 +60,12 @@ public class ClassParticipationTracker implements Tracker {
      */
     public ClassParticipationTracker copy() {
         ClassParticipation[] newClassParticipationList = new ClassParticipation[this.classParticipationList.length];
-        IntStream.range(0, this.classParticipationList.length)
-                .forEach(i -> newClassParticipationList[i] =
-                        new ClassParticipation(this.classParticipationList[i].getParticipation()));
+        for (int i = 0; i < this.classParticipationList.length; i++) {
+            newClassParticipationList[i] = new ClassParticipation();
+            if (this.classParticipationList[i].getHasParticipated()) {
+                newClassParticipationList[i].mark();
+            }
+        }
         return new ClassParticipationTracker(newClassParticipationList);
     }
 
@@ -112,7 +115,7 @@ public class ClassParticipationTracker implements Tracker {
     public List<Boolean> getJson() {
         List<Boolean> classParticipationTracker = new ArrayList<>();
         for (ClassParticipation classParticipation : classParticipationList) {
-            classParticipationTracker.add(classParticipation.getParticipation());
+            classParticipationTracker.add(classParticipation.getHasParticipated());
         }
         return classParticipationTracker;
     }
@@ -132,7 +135,7 @@ public class ClassParticipationTracker implements Tracker {
         for (int i = 0; i < classParticipationList.length; i++) {
             if (classParticipationList[i] != null) {
                 totalScore += 1;
-                if (classParticipationList[i].getParticipation()) {
+                if (classParticipationList[i].getHasParticipated()) {
                     score += 1;
                 }
             }

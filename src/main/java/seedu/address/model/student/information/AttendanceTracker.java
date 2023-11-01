@@ -62,8 +62,12 @@ public class AttendanceTracker implements Tracker {
      */
     public AttendanceTracker copy() {
         Attendance[] newAttendanceList = new Attendance[this.attendanceList.length];
-        IntStream.range(0, this.attendanceList.length)
-                .forEach(i -> newAttendanceList[i] = new Attendance(this.attendanceList[i].getIsPresent()));
+        for (int i = 0; i < this.attendanceList.length; i++) {
+            newAttendanceList[i] = new Attendance();
+            if (this.attendanceList[i].getIsPresent()) {
+                newAttendanceList[i].mark();
+            }
+        }
         return new AttendanceTracker(newAttendanceList);
     }
 

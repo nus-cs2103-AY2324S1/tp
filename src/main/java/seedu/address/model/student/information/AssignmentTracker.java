@@ -61,14 +61,10 @@ public class AssignmentTracker implements Tracker {
      */
     public AssignmentTracker copy() {
         Assignment[] newAssignmentList = new Assignment[this.assignmentList.length];
-        IntStream.range(0, this.assignmentList.length)
-                .forEach(i -> {
-                    try {
-                        newAssignmentList[i] = new Assignment(this.assignmentList[i].getMarks());
-                    } catch (IllegalValueException e) {
-                        throw new AssertionError("Execution of command should not fail.", e);
-                    }
-                });
+        for (int i = 0; i < this.assignmentList.length; i++) {
+            newAssignmentList[i] = new Assignment();
+            newAssignmentList[i].setMarks(this.assignmentList[i].getMarks());
+        }
         return new AssignmentTracker(newAssignmentList);
     }
 
