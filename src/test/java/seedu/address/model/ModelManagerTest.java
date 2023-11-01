@@ -17,7 +17,7 @@ import java.util.Arrays;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.model.event.EventNameContainsKeywordsPredicate;
+import seedu.address.model.event.EventNameOrGroupContainsKeywordsPredicate;
 import seedu.address.model.person.NameOrGroupContainsKeywordsPredicate;
 import seedu.address.testutil.AddressBookBuilder;
 
@@ -133,7 +133,7 @@ public class ModelManagerTest {
 
         // different filteredEventList -> returns false
         keywords = MEETING_BIRTHDAY_PARTY.getName().toString().split("\\s+");
-        modelManager.updateFilteredEventList(new EventNameContainsKeywordsPredicate(Arrays.asList(keywords)));
+        modelManager.updateFilteredEventList(new EventNameOrGroupContainsKeywordsPredicate(Arrays.asList(keywords)));
         assertFalse(modelManager.equals(new ModelManager(addressBookWithEvent, userPrefs)));
 
         // resets modelManager to initial state for upcoming tests

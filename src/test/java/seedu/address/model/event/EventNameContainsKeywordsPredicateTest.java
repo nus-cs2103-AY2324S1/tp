@@ -21,17 +21,17 @@ public class EventNameContainsKeywordsPredicateTest {
         List<String> firstPredicateKeywordList = Collections.singletonList("first");
         List<String> secondPredicateKeywordList = Arrays.asList("first", "second");
 
-        EventNameContainsKeywordsPredicate firstPredicate =
-                new EventNameContainsKeywordsPredicate(firstPredicateKeywordList);
-        EventNameContainsKeywordsPredicate secondPredicate =
-                new EventNameContainsKeywordsPredicate(secondPredicateKeywordList);
+        EventNameOrGroupContainsKeywordsPredicate firstPredicate =
+                new EventNameOrGroupContainsKeywordsPredicate(firstPredicateKeywordList);
+        EventNameOrGroupContainsKeywordsPredicate secondPredicate =
+                new EventNameOrGroupContainsKeywordsPredicate(secondPredicateKeywordList);
 
         // same object -> returns true
         assertTrue(firstPredicate.equals(firstPredicate));
 
         // same values -> returns true
-        EventNameContainsKeywordsPredicate firstPredicateCopy =
-                new EventNameContainsKeywordsPredicate(firstPredicateKeywordList);
+        EventNameOrGroupContainsKeywordsPredicate firstPredicateCopy =
+                new EventNameOrGroupContainsKeywordsPredicate(firstPredicateKeywordList);
         assertTrue(firstPredicate.equals(firstPredicateCopy));
 
         // different types -> returns false
@@ -57,20 +57,20 @@ public class EventNameContainsKeywordsPredicateTest {
         }
 
         // One keyword
-        EventNameContainsKeywordsPredicate predicate =
-                new EventNameContainsKeywordsPredicate(Collections.singletonList("Birthday"));
+        EventNameOrGroupContainsKeywordsPredicate predicate =
+                new EventNameOrGroupContainsKeywordsPredicate(Collections.singletonList("Birthday"));
         assertTrue(predicate.test(testEvent));
 
         // Multiple keywords
-        predicate = new EventNameContainsKeywordsPredicate(Arrays.asList("Birthday", "Party"));
+        predicate = new EventNameOrGroupContainsKeywordsPredicate(Arrays.asList("Birthday", "Party"));
         assertTrue(predicate.test(testEvent));
 
         // Only one matching keyword
-        predicate = new EventNameContainsKeywordsPredicate(Arrays.asList("Party", "Event"));
+        predicate = new EventNameOrGroupContainsKeywordsPredicate(Arrays.asList("Party", "Event"));
         assertTrue(predicate.test(testEvent));
 
         // Mixed-case keywords
-        predicate = new EventNameContainsKeywordsPredicate(Arrays.asList("bIRthDaY", "pArTY"));
+        predicate = new EventNameOrGroupContainsKeywordsPredicate(Arrays.asList("bIRthDaY", "pArTY"));
         assertTrue(predicate.test(testEvent));
     }
 
@@ -89,16 +89,16 @@ public class EventNameContainsKeywordsPredicateTest {
         }
 
         // Zero keywords
-        EventNameContainsKeywordsPredicate predicate =
-                new EventNameContainsKeywordsPredicate(Collections.emptyList());
+        EventNameOrGroupContainsKeywordsPredicate predicate =
+                new EventNameOrGroupContainsKeywordsPredicate(Collections.emptyList());
         assertFalse(predicate.test(testEvent));
 
         // Non-matching keyword
-        predicate = new EventNameContainsKeywordsPredicate(Arrays.asList("Carol"));
+        predicate = new EventNameOrGroupContainsKeywordsPredicate(Arrays.asList("Carol"));
         assertFalse(predicate.test(testEvent));
 
         // Keywords match date, start time and end time, but does not match name
-        predicate = new EventNameContainsKeywordsPredicate(
+        predicate = new EventNameOrGroupContainsKeywordsPredicate(
                 Arrays.asList(LocalDate.now().plusDays(1).toString(), "1300", "1400"));
         assertFalse(predicate.test(testEvent));
     }
@@ -106,9 +106,10 @@ public class EventNameContainsKeywordsPredicateTest {
     @Test
     public void toStringMethod() {
         List<String> keywords = List.of("keyword1", "keyword2");
-        EventNameContainsKeywordsPredicate predicate = new EventNameContainsKeywordsPredicate(keywords);
+        EventNameOrGroupContainsKeywordsPredicate predicate = new EventNameOrGroupContainsKeywordsPredicate(keywords);
 
-        String expected = EventNameContainsKeywordsPredicate.class.getCanonicalName() + "{keywords=" + keywords + "}";
+        String expected = EventNameOrGroupContainsKeywordsPredicate.class.getCanonicalName() + "{keywords=" + keywords
+                + "}";
         assertEquals(expected, predicate.toString());
     }
 }

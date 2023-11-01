@@ -9,7 +9,7 @@ import seedu.address.commons.util.ToStringBuilder;
 /**
  * Tests that a {@code Event}'s {@code Name} matches any of the keywords given.
  */
-public class EventNameContainsKeywordsPredicate implements Predicate<Event> {
+public class EventNameOrGroupContainsKeywordsPredicate implements Predicate<Event> {
     private final List<String> keywords;
 
     /**
@@ -17,13 +17,17 @@ public class EventNameContainsKeywordsPredicate implements Predicate<Event> {
      *
      * @param keywords keywords from user input.
      */
-    public EventNameContainsKeywordsPredicate(List<String> keywords) {
+    public EventNameOrGroupContainsKeywordsPredicate(List<String> keywords) {
         this.keywords = keywords;
     }
     @Override
     public boolean test(Event event) {
         return this.keywords.stream()
-                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(event.getName().toString(), keyword));
+                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(event.getName().toString(), keyword)
+                        || event.getGroups().stream().anyMatch(group ->
+                                StringUtil.containsWordIgnoreCase(group.groupName, keyword))
+                        || event.getNames().stream().anyMatch(name -> StringUtil.containsWordIgnoreCase(
+                                name.fullName, keyword)));
     }
 
     @Override
@@ -33,12 +37,12 @@ public class EventNameContainsKeywordsPredicate implements Predicate<Event> {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof EventNameContainsKeywordsPredicate)) {
+        if (!(other instanceof EventNameOrGroupContainsKeywordsPredicate)) {
             return false;
         }
 
-        EventNameContainsKeywordsPredicate otherEventNameContainsKeywordsPredicate =
-                (EventNameContainsKeywordsPredicate) other;
+        EventNameOrGroupContainsKeywordsPredicate otherEventNameContainsKeywordsPredicate =
+                (EventNameOrGroupContainsKeywordsPredicate) other;
         return keywords.equals(otherEventNameContainsKeywordsPredicate.keywords);
     }
 

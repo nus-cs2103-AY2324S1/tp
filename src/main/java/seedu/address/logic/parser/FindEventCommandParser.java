@@ -6,7 +6,7 @@ import java.util.Arrays;
 
 import seedu.address.logic.commands.FindEventCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.event.EventNameContainsKeywordsPredicate;
+import seedu.address.model.event.EventNameOrGroupContainsKeywordsPredicate;
 
 /**
  * Parses input arguments and creates a new FindEventCommand object
@@ -27,7 +27,7 @@ public class FindEventCommandParser implements Parser<FindEventCommand> {
 
         String[] nameKeywords = trimmedArgs.split("\\s+");
 
-        return new FindEventCommand(new EventNameContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
+        return new FindEventCommand(new EventNameOrGroupContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
     }
 
 }
