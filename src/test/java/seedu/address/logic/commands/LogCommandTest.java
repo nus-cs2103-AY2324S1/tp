@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.nio.file.Path;
@@ -14,6 +15,8 @@ import org.junit.jupiter.api.Test;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.logic.Messages;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.LogBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -186,7 +189,7 @@ public class LogCommandTest {
         public void addPerson(Person person) {
             requireNonNull(person);
             personsAdded.add(person);
-            logBook.addPerson(person); // Log the added person
+            logBook.addPerson(person);
         }
 
         @Override
@@ -203,6 +206,45 @@ public class LogCommandTest {
         public void addToHistory(UndoableCommand undoableCommand) {
             commandHistory.add(undoableCommand);
         }
+
+        @Override
+        public boolean isCommandHistoryEmpty() {
+            return false;
+        }
     }
+
+    private class ModelStubNoPersonsFound extends ModelStubLoggingPersonAdded {
+        @Override
+        public ObservableList<Person> getFoundPersonsList() {
+            return FXCollections.observableArrayList(); // Return an empty list
+        }
+
+        @Override
+        public ObservableList<Person> getFilteredPersonList() {
+            return FXCollections.observableArrayList(); // Return an empty list
+        }
+
+        @Override
+        public boolean isCommandHistoryEmpty() {
+            return false;
+        }
+    }
+
+    @Test
+    public void execute_noPersonsFound_logNotExecuted() {
+        ModelStubNoPersonsFound model = new ModelStubNoPersonsFound();
+        LogCommand logCommand = new LogCommand();
+
+        // Use assertThrows to capture the exception thrown by logCommand.execute(model)
+        CommandException exception = assertThrows(CommandException.class, () -> logCommand.execute(model));
+
+        // Expect an error message indicating no found persons.
+        assertEquals(Messages.MESSAGE_EMPTY_FIND_RESULT, exception.getMessage());
+
+        // Assert that the log book's size remains 0.
+        assertEquals(0, model.getLogBook().getPersonList().size());
+    }
+
+
 
 }
