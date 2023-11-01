@@ -203,7 +203,7 @@ tracking tutor information within your tuition centre.
 
 Adds a tutor to TutorConnect.
 
-##### :beginner: First time users
+##### :star: First time users
 {:.no_toc}
 
 **Scenario**
@@ -224,7 +224,7 @@ Amazing! Tutor John Doe has now been added to the bottom of the displayed list.
 ![add tutor](images/addTutor.png)
 
 
-##### :hammer: Experienced users
+##### :star::star::star: Experienced users
 {:.no_toc}
 
 **Command format**
@@ -234,13 +234,13 @@ Amazing! Tutor John Doe has now been added to the bottom of the displayed list.
 **Errors you might encounter**
 
 Here is a list of the error messages you may encounter, when the command is entered incorrectly:
-* `Invalid command format!`: One or more of the tags n/, p/, e/ is missing.
-* `Names should only contain alphanumeric characters and spaces, and it should not be blank`: Tutor name input was 
-  either invalid or blank.
-* `Phone numbers should only contain numbers, and it should be at least 3 digits long`: Tutor phone number input was 
-  either invalid or blank.
-* `Emails should be of the format local-part@domain and adhere to the following constraints`: Tutor email input was 
-  either invalid or blank.
+
+| Error Message                                                                              | Reason                                                |
+|--------------------------------------------------------------------------------------------|-------------------------------------------------------|
+| `Invalid command format!`                                                                  | One or more of the tags n/, p/, e/ is missing.        |
+| `Names should only contain alphanumeric characters and spaces, and it should not be blank` | Tutor name input was either invalid or blank.         |
+| `Phone numbers should only contain numbers, and it should be at least 3 digits long`       | Tutor phone number input was either invalid or blank. |
+| `Emails should be of the format local-part@domain and adhere to the following constraints` | Tutor email input was either invalid or blank.        |
 
 Refer to [input information](#input-examples) for details about valid inputs.
 
@@ -452,7 +452,7 @@ Tada! The schedule has now been updated to 8am.
 
 Here is a list of the error messages you may encounter, when the command is entered incorrectly:
 
-| Errors                                                                                                             | Reason                                                                                      |
+| Error Message                                                                                                      | Reason                                                                                      |
 |--------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------|
 | `Invalid command format!`                                                                                          | SCHEDULE_INDEX entered is not in the range of number of schedules                           |
 | `EndTime should only contain a valid date and time in the format "yyyy-MM-ddTHH:mm", and it should not be blank`   | The end time entered is not in the correct datetime format                                  |
@@ -615,7 +615,7 @@ additional system features to take your experience with us to the next level!
 
 Changes the theme of TutorConnect.
 
-##### :beginner: First time users
+##### :star: First time users
 {:.no_toc}
 
 **Scenario**
@@ -633,7 +633,7 @@ Wow! A whole new colour scheme.
 
 ![change theme](images/changeTheme.png)
 
-##### :hammer: Experienced users
+##### :star::star::star: Experienced users
 {:.no_toc}
 
 **Command format**
@@ -643,8 +643,11 @@ Wow! A whole new colour scheme.
 **Errors you might encounter**
 
 Here is a list of the error messages you may encounter, when the command is entered incorrectly:
-* `Invalid command format!`: New theme field was left blank and not specified.
-* `Theme provided does not exist`: New theme field was not `dark`, `light` or `blue`.
+
+| Error Message                   | Reason                                              |
+|---------------------------------|-----------------------------------------------------|
+| `Invalid command format!`       | New theme field was left blank and not specified.   |
+| `Theme provided does not exist` | New theme field was not `dark`, `light` or `blue`.  |
 
 You can also refer to [input information](#input-examples) for details about valid inputs.
 
