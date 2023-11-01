@@ -27,7 +27,7 @@ public class TypicalInterviews {
                     "StandardJobRole3",
                                          LocalDateTime.of(2024, 5, 21, 9, 0),
                     LocalDateTime.of(2024, 5, 21, 11, 0),
-                            false
+                            true
                             );
     public static final Interview STANDARD_INTERVIEW_4 = new Interview(TypicalApplicants.DANIEL,
                     "StandardJobRole4",
