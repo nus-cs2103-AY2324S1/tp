@@ -209,7 +209,8 @@ Adds a tutor to TutorConnect.
 
 **Scenario**
 
-A new tutor named John Doe has just joined your tuition centre. His phone number is 987654321 and his email address is johnd@example.com.
+A new tutor named **John Doe** has just joined your tuition centre. His phone number is **98765432** and his email 
+address is **johnd@example.com**.
 
 Let’s add him into TutorConnect.
 
@@ -231,7 +232,7 @@ Amazing! Tutor John Doe has now been added to the bottom of the displayed list.
 
 ![add tutor command](images/addTutorCommandSyntax.png)
 
-**Errors**
+**Errors you might encounter**
 
 Here is a list of the error messages you may encounter, when the command is entered incorrectly:
 * `Invalid command format!`: One or more of the tags n/, p/, e/ is missing.
@@ -448,7 +449,7 @@ Tada! The schedule has now been updated to 8am.
 
 ![edit schedule command](images/editScheduleCommandSyntax.png)
 
-**Errors**
+**Errors you might encounter**
 
 Here is a list of the error messages you may encounter, when the command is entered incorrectly:
 * `Invalid command format!`: Invalid or missing SCHEDULE_INDEX.
@@ -637,7 +638,7 @@ Wow! A whole new colour scheme.
 
 ![theme command](images/themeCommandSyntax.png)
 
-**Errors**
+**Errors you might encounter**
 
 Here is a list of the error messages you may encounter, when the command is entered incorrectly:
 * `Invalid command format!`: New theme field was left blank and not specified.
