@@ -41,7 +41,6 @@ public class UndoCommand extends Command {
     private static final Logger logger = Logger.getLogger(UndoCommand.class.getName());
     private int stepsToUndo;
 
-
     /**
      * Constructs an UndoCommand for the specified number of undo steps.
      *
