@@ -146,15 +146,28 @@ Shows all contacts.
 **Format:**
 `list`
 
-### Locating Contacts by Name: `find`
+### Finding by name: `find`
 
-Search and display contacts with names containing any of the given keywords.
+Shows contacts whose names have a word that fully matches any of the specified keywords.
 
 **Format:**
-`find [KEYWORD]...`
+`find KEYWORD...`
 
-**Example:**
-`find John Alice`
+- The search is case-insensitive.
+e.g Keyword `john` will match the name `John`.
+
+- The order of the keywords does not matter.
+e.g. Keywords `Amy John` will show the same contacts as keywords `John Amy`.
+
+- Only full words will be matched.
+e.g. Keyword `John` will not match the names `Johnny` or `Jo`.
+
+- Each name only needs one word to fully match at least one keyword (i.e. `OR` search).
+e.g. `find Bee John` will match the names `Amy Bee` and `John Doe`.
+
+**Examples:**
+- `find John`
+- `find alex Bernice CHARLOTTE`
 
 ### Filtering by tag: `filter`
 
