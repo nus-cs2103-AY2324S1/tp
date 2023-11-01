@@ -11,9 +11,9 @@ import networkbook.model.util.Identifiable;
  */
 public class Tag implements Identifiable<Tag> {
 
-    public static final String MESSAGE_CONSTRAINTS = "Tags names should only contain alphanumeric characters, "
-            + "white space, hyphen or underscore.";
-    public static final String VALIDATION_REGEX = "^[a-zA-Z0-9\\-_ ]+$+";
+    public static final String MESSAGE_CONSTRAINTS = "Tag names should only contain alphanumeric characters, "
+            + "white space, hyphen, underscore, comma or apostrophe.";
+    public static final String VALIDATION_REGEX = "^[a-zA-Z0-9\\-_\\s,']+$+";
 
     private final String tagName;
 
