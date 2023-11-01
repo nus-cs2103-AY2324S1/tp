@@ -223,4 +223,20 @@ public class ParserUtil {
         }
         return new AppointmentDescription(trimmedDescription);
     }
+
+    /**
+     * Parses a {@code String argument} and {@code String preamble} into a {@code int SortType}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code description} is invalid.
+     */
+    public static boolean parseIsAscending(String argument) throws ParseException {
+        requireNonNull(argument);
+        boolean isAscending = argument.equals("asc");
+        if (isAscending == false && !argument.equals("asc")) {
+            throw new ParseException("This is neither ascending or descending");
+        }
+
+        return isAscending;
+    }
 }
