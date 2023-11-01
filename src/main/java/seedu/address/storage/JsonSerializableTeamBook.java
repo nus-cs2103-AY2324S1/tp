@@ -17,7 +17,7 @@ import seedu.address.model.team.Team;
  */
 public class JsonSerializableTeamBook {
 
-    private static final String MESSAGE_DUPLICATE_TEAM = "Team list contains duplicate team(s).";
+    public static final String MESSAGE_DUPLICATE_TEAM = "Team list contains duplicate team(s).";
     private final List<JsonAdaptedTeam> teams = new ArrayList<>();
 
     /**
