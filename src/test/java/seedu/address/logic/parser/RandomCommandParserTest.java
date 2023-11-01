@@ -13,7 +13,8 @@ import seedu.address.logic.commands.RandomCommand;
  * Tests RandomCommandParser.
  */
 public class RandomCommandParserTest {
-    public static final String MESSAGE_INVALID_FORMAT = String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+
+    private static final String MESSAGE_INVALID_FORMAT = String.format(MESSAGE_INVALID_COMMAND_FORMAT,
         RandomCommand.MESSAGE_USAGE);
 
     private RandomCommandParser parser = new RandomCommandParser();
@@ -30,7 +31,7 @@ public class RandomCommandParserTest {
     }
 
     @Test
-    public void parse_invalidNumOfStudent_throwsParseException() {
+    public void parse_invalidArgs_throwsParseException() {
         assertParseFailure(parser, STUDENT_NUMBER_DESC_BOB, MESSAGE_INVALID_FORMAT);
     }
 }
