@@ -69,12 +69,14 @@ Staff-Snap is an application meant HR managers hiring candidates to make applica
     You should see the GUI displayed as shown below.
 
 <a name="glossary"></a> 
+
 ## Glossary 
 
 As Staff-Snap is packed with features and components to take note of, 
 we’ve prepared tables summarising the important definitions, command formats, and parameters to take note of.
 
 <a name="definitions"></a>
+
 ### Definitions <br>
 
 | Term                           | Definition                                                                                                                                     |
@@ -82,10 +84,14 @@ we’ve prepared tables summarising the important definitions, command formats, 
 | Parameter                      | Parameters are the details needed to perform a specific command. (e.g. When adding an applicant, a parameter can be the name of the applicant) |
 | Command                        | A Command is an instruction given by the user to perform a certain action.                                                                     |
 | Index                          | The position of a certain applicant in a list. The first applicant on a list in Staff-Snap will always have the index 1.                       |
+| User Interface (UI)            | An User Interface is the visual display of the application where users can interact with the application.                                      |
 | Graphical User Interface (GUI) | The GUI is the visual display of the application which users can interact with.                                                                |
 | Command Line Interface (CLI)   | The CLI is a text-based interface that allows users to type in commands to interact with the application.                                      |
+| Component                      | A component is part of the user interface.                                                                                                     |
+| Alphanumeric                   | Text that is consisting of or using both letters and numerals.                                                                                 |
 
 <a name="parameters"></a>
+
 ### Parameters <br>
 
 | Parameter | Description                   | Constraints                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  | Valid Examples                 | Invalid Examples                    |
@@ -101,6 +107,7 @@ we’ve prepared tables summarising the important definitions, command formats, 
 | **s/**    | Status of applicant           | The status of an applicant can only be "o" (offered), "r" (rejected), or "u" (undecided).                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    | o, r, u                        | offered, 999                        |
 
 <a name="notation-guide"></a>
+
 ### Notation Guide <br>
 
 | Notation                                                                                                                     | Explanation                                                                                               | Example                                                                                                                                            |
@@ -111,9 +118,11 @@ we’ve prepared tables summarising the important definitions, command formats, 
 | Extraneous parameters for commands that do not take in parameters such as `help`, `list`, `clear`, `exit` will be ignored.   | If any parameters are given for commands that do not require them, the given parameters will be ignored.  |
 
 <a name="user-interface-guide"></a>
+
 ## User Interface Guide
 
 <a name="main-window-gui"></a>
+
 ### Main Window GUI <br>
 
 ![Main Window guide](images/user-guide/MainWindowGuide.png)
@@ -125,6 +134,7 @@ we’ve prepared tables summarising the important definitions, command formats, 
 | Working Area  | This is where the list of applicants is displayed.                      |
 
 <a name="applicant-card-gui"></a>
+
 ### Applicant Card GUI <br>
 
 ![Applicant Card guide](images/user-guide/ApplicantCardGuide.png)
@@ -137,10 +147,11 @@ we’ve prepared tables summarising the important definitions, command formats, 
 | Interview score   | This is where the score for a specific interview is stored.                                                                                   |
 
 <a name="features"></a>
-## Features
 
+## Features
 ---
 <a name="help"></a>
+
 ### `help` : Viewing help
 
 Opens up the user guide in the browser. Also displays a list of basic commands the user can use.
@@ -152,6 +163,7 @@ UI mockup:
 
 ---
 <a name="add"></a>
+
 ### `add` : Adding a new applicant
 
 Adds a new applicant to the current list.
@@ -167,6 +179,7 @@ UI mockup:
 
 ---
 <a name="edit"></a>
+
 ### `edit` : Editing an applicant
 
 Edits the details of an applicant in the list.
@@ -185,6 +198,7 @@ UI mockup:
 
 ---
 <a name="list"></a>
+
 ### `list` : Listing all applicants
 
 Displays the full list of all applicants.
@@ -196,6 +210,7 @@ UI mockup:
 
 ---
 <a name="delete"></a>
+
 ### `delete` : Deleting an applicant
 
 Deletes a particular applicant based on their index number.
@@ -214,6 +229,7 @@ UI mockup:
 
 ---
 <a name="find"></a>
+
 ### `find` : Finding an applicant by name
 
 Find employees whose name contains a particular keyword.
@@ -234,6 +250,7 @@ UI mockup:
 
 ---
 <a name="sort"></a>
+
 ### `sort`: Sorting applicants by descriptor
 
 Sorts the applicant list by using a particular descriptor as the sorting criteria.
@@ -254,6 +271,7 @@ UI mockup:
 
 ---
 <a name="addi"></a>
+
 ### `addi` : Adding an interview to an applicant
 
 Adds a new interview to an applicant. In the case of duplicate names, the system will automatically increment the last 
@@ -272,6 +290,7 @@ Examples:
 
 ---
 <a name="editi"></a>
+
 ### `editi` : Editing an interview of an applicant
 
 Edits an interview of an applicant.
@@ -288,6 +307,7 @@ Examples:
 
 ---
 <a name="deletei"></a>
+
 ### `deletei` : Deleting an interview from an applicant
 
 Deletes an interview from an applicant.
@@ -299,6 +319,7 @@ Examples:
 
 ---
 <a name="status"></a>
+
 ### `status` : Editing an applicant status
 
 Edits the status of an applicant.
@@ -312,6 +333,7 @@ Examples:
 
 ---
 <a name="clear"></a>
+
 ### `clear` : Clearing all applicant entries
 
 After typing `clear`, system asks the user to confirm clearing. If user types `yes`, all the current data stored 
@@ -324,6 +346,7 @@ UI mockup:
 
 ---
 <a name="exiting-the-program"></a>
+
 ### `exit` : Exiting the program
 
 Exits the program.
@@ -332,12 +355,14 @@ Format: `exit`
 
 ---
 <a name="saving-the-data"></a>
+
 ### Saving the data
 
 Automatically saves the data to a local storage whenever there is a change to the applicant list. There is no need to save manually.
 
 ---
 <a name="editing-the-data-file"></a>
+
 ### Editing the data file
 
 <box type="warning" header="**Caution**">
