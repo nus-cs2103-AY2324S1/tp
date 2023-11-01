@@ -30,6 +30,10 @@ public abstract class FilterCommand extends Command {
     public static final String MESSAGE_EXCL_FIN = "\n(excluding contacts who have finished taking)";
     public static final String MESSAGE_PERSONS_FOUND_OVERVIEW = "\n(%1$s contacts found)";
 
+    public FilterCommand() {
+        super(false);
+    }
+
     /**
      * Executes the FilterCommand object and returns a message to the user.
      *
