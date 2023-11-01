@@ -10,8 +10,7 @@ public class Answer {
     public static final String MESSAGE_CONSTRAINTS =
             "Answers should only contain alphanumeric characters, some special characters "
                     + "and spaces, and it should not be blank";
-    public static final String VALIDATION_REGEX = "^(?=.*[\\p{Alnum}.,?'():-])\\s*[\\p{Alnum}.,?'(): -]+$";
-
+    public static final String VALIDATION_REGEX = "^[^\\x00-\\x1F]+$";
     public final String answer;
 
     /**
