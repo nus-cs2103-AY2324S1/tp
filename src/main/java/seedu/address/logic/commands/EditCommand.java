@@ -26,6 +26,7 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.availability.FreeTime;
+import seedu.address.model.availability.TimeInterval;
 import seedu.address.model.course.Course;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Hour;
@@ -158,6 +159,7 @@ public class EditCommand extends Command {
         private FreeTime freeTime;
         private Set<Course> courses;
         private Hour hour;
+        private TimeInterval timeInterval;
 
         public EditPersonDescriptor() {
         }
@@ -175,13 +177,15 @@ public class EditCommand extends Command {
             setFreeTime(toCopy.freeTime);
             setCourses(toCopy.courses);
             setHour(toCopy.hour);
+            setTimeInterval(toCopy.timeInterval);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, telegram, tags, courses, freeTime, hour);
+            return CollectionUtil.isAnyNonNull(name, phone, email, telegram, tags,
+                    courses, freeTime, hour, timeInterval);
         }
 
         public Optional<Name> getName() {
@@ -268,6 +272,13 @@ public class EditCommand extends Command {
 
         public void setHour(Hour hour) {
             this.hour = hour;
+        }
+
+        public Optional<TimeInterval> getTimeInterval() {
+            return Optional.ofNullable(timeInterval);
+        }
+        public void setTimeInterval(TimeInterval timeInterval) {
+            this.timeInterval = timeInterval;
         }
 
         @Override
