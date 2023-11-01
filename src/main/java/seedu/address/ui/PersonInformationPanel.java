@@ -11,6 +11,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Status;
 import seedu.address.model.person.StatusTypes;
+import seedu.address.model.tag.Tag;
 
 /**
  * An UI component that displays information of a {@code Person}
@@ -56,13 +57,14 @@ public class PersonInformationPanel extends UiPart<Region> {
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
         remark.setText(person.getRemark().value);
-        person.getTags().stream()
-                .sorted(java.util.Comparator.comparing(tag -> tag.tagName))
-                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
         linkedIn.setText(person.getLinkedIn().value);
         github.setText(person.getGithub().value);
         setResultButton(person.getStatus(), status);
         setButton(person.getStatus());
+        for (Tag tag : person.getTags()) {
+            Label label = new Label(tag.tagName);
+            tags.getChildren().add(label);
+        }
     }
 
 

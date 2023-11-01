@@ -14,10 +14,13 @@ import java.util.Collections;
 import java.util.Optional;
 import java.util.Set;
 
+import javafx.util.Pair;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.Score;
+import seedu.address.model.person.ScoreList;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -61,12 +64,19 @@ public class EditCommandParser implements Parser<EditCommand> {
             editPersonDescriptor.setAddress(ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get()));
         }
         if (argMultimap.getValue(PREFIX_SCORE).isPresent()) {
-            editPersonDescriptor.setScore(ParserUtil.parseScore(argMultimap.getValue(PREFIX_SCORE).get()));
+            ScoreList scoreList = createScoreListForParse(argMultimap.getValue(PREFIX_SCORE).get());
+            editPersonDescriptor.setScoreList(scoreList);
         }
+
         parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editPersonDescriptor::setTags);
 
         if (!editPersonDescriptor.isAnyFieldEdited()) {
             throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
+        }
+
+        // Return empty score list if not edited, just like tags, scorelist is optional
+        if (!editPersonDescriptor.getScoreList().isPresent()) {
+            editPersonDescriptor.setScoreList(new ScoreList());
         }
 
         return new EditCommand(index, editPersonDescriptor);
@@ -86,5 +96,13 @@ public class EditCommandParser implements Parser<EditCommand> {
         Collection<String> tagSet = tags.size() == 1 && tags.contains("") ? Collections.emptySet() : tags;
         return Optional.of(ParserUtil.parseTags(tagSet));
     }
+
+    private ScoreList createScoreListForParse(String scoreWithTag) throws ParseException {
+        ScoreList scoreList = new ScoreList();
+        Pair<Tag, Score> tagScorePair = ParserUtil.parseTagScore(scoreWithTag);
+        scoreList.updateScoreList(tagScorePair.getKey(), tagScorePair.getValue());
+        return scoreList;
+    }
+
 
 }

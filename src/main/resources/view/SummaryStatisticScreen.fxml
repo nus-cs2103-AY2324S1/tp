@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.VBox?>
+
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.layout.VBox?>
+
+<?import javafx.scene.control.TableView?>
+
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
+<ListView id="summaryStatisticScreen" fx:id="summaryStatisticScreenPlaceholder" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+    <VBox>
+        <TableView fx:id="tableView">
+            <columns>
+            <TableColumn text="Tag" minWidth="130">
+                <cellValueFactory>
+                    <PropertyValueFactory property="tag" />
+                </cellValueFactory>
+            </TableColumn>
+            <TableColumn text="Score" minWidth="80">
+                <cellValueFactory>
+                    <PropertyValueFactory property="currentScore" />
+                </cellValueFactory>
+            </TableColumn>
+            <TableColumn text="Mean" minWidth="100">
+                <cellValueFactory>
+                    <PropertyValueFactory property="mean" />
+                </cellValueFactory>
+            </TableColumn>
+            <TableColumn text="Median" minWidth="120">
+                <cellValueFactory>
+                    <PropertyValueFactory property="median" />
+                </cellValueFactory>
+            </TableColumn>
+            <TableColumn text="Min" minWidth="80">
+                <cellValueFactory>
+                    <PropertyValueFactory property="min" />
+                </cellValueFactory>
+            </TableColumn>
+            <TableColumn text="Max" minWidth="80">
+                <cellValueFactory>
+                    <PropertyValueFactory property="max" />
+                </cellValueFactory>
+            </TableColumn>
+            <TableColumn text="Percentile" minWidth="150">
+                <cellValueFactory>
+                    <PropertyValueFactory property="percentile" />
+                </cellValueFactory>
+            </TableColumn>
+            </columns>
+        </TableView>
+    </VBox>
+</ListView>
