@@ -11,7 +11,7 @@ import seedu.address.model.appointment.Appointment;
  */
 public class AppointmentCard extends UiPart<Region> {
 
-    private static final String FXML = "AppointmentCard.fxml";
+    private static final String FXML = "AppointmentListCard.fxml";
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -27,9 +27,9 @@ public class AppointmentCard extends UiPart<Region> {
     @FXML
     private Label id;
     @FXML
-    private Label patientName;
+    private Label patientIc;
     @FXML
-    private Label doctorName;
+    private Label doctorIc;
     @FXML
     private Label appointmentTime;
 
@@ -40,8 +40,8 @@ public class AppointmentCard extends UiPart<Region> {
         super(FXML);
         this.appointment = appointment;
         id.setText(displayedIndex + ". ");
-        patientName.setText(this.appointment.getPatient().toString());
-        doctorName.setText(this.appointment.getDoctor().toString());
+        patientIc.setText(this.appointment.getPatient().toString());
+        doctorIc.setText(this.appointment.getDoctor().toString());
         appointmentTime.setText(this.appointment.getAppointmentTime().toString());
     }
 }

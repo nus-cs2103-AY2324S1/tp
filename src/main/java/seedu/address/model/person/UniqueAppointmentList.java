@@ -8,7 +8,9 @@ import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.appointment.Appointment;
+import seedu.address.model.person.exceptions.DuplicateObjectException;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
+import seedu.address.model.person.exceptions.ObjectNotFoundException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
 
 /**
@@ -50,7 +52,7 @@ public class UniqueAppointmentList extends UniqueObjectList<Appointment> {
     public void add(Appointment toAdd) {
         requireNonNull(toAdd);
         if (contains(toAdd)) {
-            throw new DuplicatePersonException();
+            throw new DuplicateObjectException();
         }
         internalList.add(toAdd);
     }
@@ -66,7 +68,7 @@ public class UniqueAppointmentList extends UniqueObjectList<Appointment> {
 
         int index = internalList.indexOf(target);
         if (index == -1) {
-            throw new PersonNotFoundException();
+            throw new ObjectNotFoundException();
         }
 
         if (!target.equals(editedAppointment) && contains(editedAppointment)) {
@@ -84,7 +86,7 @@ public class UniqueAppointmentList extends UniqueObjectList<Appointment> {
     public void remove(Appointment toRemove) {
         requireNonNull(toRemove);
         if (!internalList.remove(toRemove)) {
-            throw new PersonNotFoundException();
+            throw new ObjectNotFoundException();
         }
     }
 
@@ -96,7 +98,7 @@ public class UniqueAppointmentList extends UniqueObjectList<Appointment> {
     public void setObjects(List<Appointment> appointments) {
         requireAllNonNull(appointments);
         if (!objectsAreUnique(appointments)) {
-            throw new DuplicatePersonException();
+            throw new DuplicateObjectException();
         }
 
         internalList.setAll(appointments);
