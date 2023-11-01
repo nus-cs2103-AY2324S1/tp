@@ -495,7 +495,8 @@ Here is a list of the error messages you may encounter, when the command is ente
 
 | Error Message                                                                                                      | Reason                                                                                      |
 |--------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------|
-| `Invalid command format!`                                                                                          | SCHEDULE_INDEX entered is not in the range of number of schedules                           |
+| `Invalid command format!`                                                                                          | Invalid or missing SCHEDULE_INDEX                                                           |
+| `The schedule index provided is invalid`                                                                           | SCHEDULE_INDEX entered is not in the range of number of schedules                           |
 | `EndTime should only contain a valid date and time in the format "yyyy-MM-ddTHH:mm", and it should not be blank`   | The end time entered is not in the correct datetime format                                  |
 | `StartTime should only contain a valid date and time in the format "yyyy-MM-ddTHH:mm", and it should not be blank` | The start time entered is not in the correct datetime format                                |
 | `Multiple values specified for the following single-valued field(s): st/`                                          | More than 1 `st/` was given in the command                                                  |
