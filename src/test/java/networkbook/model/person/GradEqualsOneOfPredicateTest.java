@@ -12,7 +12,6 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 
 import networkbook.model.person.filter.GradEqualsOneOfPredicate;
-import networkbook.model.person.filter.SpecContainsKeyTermsPredicate;
 import networkbook.testutil.PersonBuilder;
 
 public class GradEqualsOneOfPredicateTest {
