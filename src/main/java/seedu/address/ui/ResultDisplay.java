@@ -2,14 +2,14 @@ package seedu.address.ui;
 
 import static java.util.Objects.requireNonNull;
 
-import com.vladsch.flexmark.html.HtmlRenderer;
-import com.vladsch.flexmark.parser.Parser;
-import com.vladsch.flexmark.util.ast.Document;
 import javafx.fxml.FXML;
 import javafx.scene.layout.Region;
 import javafx.scene.paint.Color;
-import javafx.scene.text.*;
-
+import javafx.scene.text.Font;
+import javafx.scene.text.FontPosture;
+import javafx.scene.text.FontWeight;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextFlow;
 /**
  * A UI for the status bar that is displayed at the header of the application.
  */
