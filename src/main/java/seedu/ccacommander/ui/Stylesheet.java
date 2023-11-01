@@ -1,5 +1,8 @@
 package seedu.ccacommander.ui;
 
+/**
+ * A class to encapsulate the stylesheet setting and path.
+ */
 public enum Stylesheet {
     LIGHT("LightTheme.css"),
     DARK("DarkTheme.css"),
@@ -36,7 +39,7 @@ public enum Stylesheet {
         return path;
     }
 
-    public String getStylesheet()  {
+    public String getStylesheet() {
         return getClass().getResource(DIRECTORY + path).toExternalForm();
     }
 }

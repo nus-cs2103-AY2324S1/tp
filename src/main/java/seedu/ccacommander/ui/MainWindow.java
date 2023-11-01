@@ -1,5 +1,7 @@
 package seedu.ccacommander.ui;
 
+import static seedu.ccacommander.ui.Stylesheet.constructStylesheet;
+
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
@@ -17,8 +19,6 @@ import seedu.ccacommander.logic.Logic;
 import seedu.ccacommander.logic.commands.CommandResult;
 import seedu.ccacommander.logic.commands.exceptions.CommandException;
 import seedu.ccacommander.logic.parser.exceptions.ParseException;
-
-import static seedu.ccacommander.ui.Stylesheet.constructStylesheet;
 
 /**
  * The Main Window. Provides the basic application layout containing

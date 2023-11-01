@@ -1,12 +1,12 @@
 package seedu.ccacommander.commons.core;
 
+import static seedu.ccacommander.ui.Stylesheet.DEFAULT_STYLESHEET;
+
 import java.awt.Point;
 import java.io.Serializable;
 import java.util.Objects;
 
 import seedu.ccacommander.commons.util.ToStringBuilder;
-
-import static seedu.ccacommander.ui.Stylesheet.DEFAULT_STYLESHEET;
 
 /**
  * A Serializable class that contains the GUI settings.
@@ -85,7 +85,6 @@ public class GuiSettings implements Serializable {
                 .add("windowWidth", windowWidth)
                 .add("windowHeight", windowHeight)
                 .add("windowCoordinates", windowCoordinates)
-                .add("Stylesheet", stylesheet)
                 .toString();
     }
 }
