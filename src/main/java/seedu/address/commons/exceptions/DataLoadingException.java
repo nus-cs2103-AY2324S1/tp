@@ -8,4 +8,6 @@ public class DataLoadingException extends Exception {
         super(cause);
     }
 
+
+    public DataLoadingException(String s) {}
 }
