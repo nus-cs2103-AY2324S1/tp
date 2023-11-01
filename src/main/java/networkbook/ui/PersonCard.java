@@ -27,11 +27,6 @@ public class PersonCard extends UiPart<Region> {
     private static final String COURSE_HEADER = "Courses: ";
     private static final String SPECIALISATION_HEADER = "Specialisations: ";
     private static final String PRIORITY_HEADER = "Priority: ";
-    private static final String EMPTY_FIELD = "-";
-
-    private static final String FIELD_STYLE_CLASS = "cell_field";
-    private static final String EMPTY_STYLE_CLASS = "empty";
-    private static final String PRIORITY_STYLE_CLASS_PREFIX = "priority_";
 
     private static final Logger LOGGER = Logger.getLogger("PersonCard");
 
@@ -62,7 +57,7 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label graduationHeader;
     @FXML
-    private Label graduation;
+    private FlowPane graduation;
     @FXML
     private Label coursesHeader;
     @FXML
@@ -78,9 +73,9 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private FlowPane tags;
     @FXML
-    private Label priority;
-    @FXML
     private Label priorityHeader;
+    @FXML
+    private FlowPane priority;
 
     /**
      * Creates a {@code PersonCard} with the given {@code Person} and index to display.
@@ -96,14 +91,11 @@ public class PersonCard extends UiPart<Region> {
 
         // Phone numbers
         phonesHeader.setText(PHONES_HEADER);
-        person.getPhones().stream()
-                .forEach(phone -> {
-                    Label phoneLabel = new Label(phone.getValue());
-                    phoneLabel.getStyleClass().add(FIELD_STYLE_CLASS);
-                    phones.getChildren().add(phoneLabel);
-                });
         if (person.getPhones().isEmpty()) {
-            phones.getChildren().add(getEmptyFieldLabel());
+            phones.getChildren().add(new EmptyFieldLabel());
+        } else {
+            person.getPhones().stream()
+                    .forEach(phone -> phones.getChildren().add(new FieldLabel(phone.getValue())));
         }
 
         // Email addresses
@@ -114,7 +106,7 @@ public class PersonCard extends UiPart<Region> {
                     LOGGER.log(Level.INFO, "Opening email: " + email.getValue());
                 })));
         if (person.getEmails().isEmpty()) {
-            emails.getChildren().add(getEmptyFieldLabel());
+            emails.getChildren().add(new EmptyFieldLabel());
         }
 
         // Website links
@@ -125,41 +117,33 @@ public class PersonCard extends UiPart<Region> {
                     LOGGER.log(Level.INFO, "Opening link: " + link.getValue());
                 })));
         if (person.getLinks().isEmpty()) {
-            links.getChildren().add(getEmptyFieldLabel());
+            links.getChildren().add(new EmptyFieldLabel());
         }
 
         // Graduation
         graduationHeader.setText(GRADUATION_HEADER);
         person.getGraduation().ifPresentOrElse((Graduation g) -> {
-                graduation.setText(g.getFullString());
-                graduation.getStyleClass().add(EMPTY_STYLE_CLASS);
+                graduation.getChildren().add(new FieldLabel(g.getFullString()));
             }, () -> {
-                graduation.setText(EMPTY_FIELD);
-                graduation.getStyleClass().add(EMPTY_STYLE_CLASS);
+                graduation.getChildren().add(new EmptyFieldLabel());
             });
 
         // Courses
         coursesHeader.setText(COURSE_HEADER);
-        person.getCourses().stream()
-                .forEach(course -> {
-                    Label courseLabel = new Label(course.getValue());
-                    courseLabel.getStyleClass().add(FIELD_STYLE_CLASS);
-                    courses.getChildren().add(courseLabel);
-                });
         if (person.getCourses().isEmpty()) {
-            courses.getChildren().add(getEmptyFieldLabel());
+            courses.getChildren().add(new EmptyFieldLabel());
+        } else {
+            person.getCourses().stream()
+                .forEach(course -> courses.getChildren().add(new FieldLabel(course.getValue())));   
         }
 
         // Specialisations
         specialisationsHeader.setText(SPECIALISATION_HEADER);
-        person.getSpecialisations().stream()
-                .forEach(spec -> {
-                    Label specLabel = new Label(spec.getValue());
-                    specLabel.getStyleClass().add(FIELD_STYLE_CLASS);
-                    specialisations.getChildren().add(specLabel);
-                });
         if (person.getSpecialisations().isEmpty()) {
-            specialisations.getChildren().add(getEmptyFieldLabel());
+            specialisations.getChildren().add(new EmptyFieldLabel());
+        } else {
+            person.getSpecialisations().stream()
+                .forEach(spec -> specialisations.getChildren().add(new FieldLabel(spec.getValue())));
         }
 
         // Tags
@@ -169,29 +153,11 @@ public class PersonCard extends UiPart<Region> {
         // Priority
         priorityHeader.setText(PRIORITY_HEADER);
         person.getPriority().ifPresentOrElse((Priority p) -> {
-            priority.setText(p.toString());
-            priority.getStyleClass().add(PRIORITY_STYLE_CLASS_PREFIX + p.toString());
+            priority.getChildren().add(new PriorityFieldLabel(p));
         }, () -> {
-            priority.setText(EMPTY_FIELD);
-            priority.getStyleClass().add(EMPTY_STYLE_CLASS);
+            priority.getChildren().add(new EmptyFieldLabel());
         });
     }
 
-    /**
-     * Returns new label to indicate empty field or list.
-     */
-    private static Label getEmptyFieldLabel() {
-        Label emptyFieldLabel = new Label(EMPTY_FIELD);
-        emptyFieldLabel.getStyleClass().add(FIELD_STYLE_CLASS);
-        emptyFieldLabel.getStyleClass().add(EMPTY_STYLE_CLASS);
-        return emptyFieldLabel;
-    }
-
     // Below: getter methods for testing
-    public Label getGraduation() {
-        return graduation;
-    }
-    public Label getPriority() {
-        return priority;
-    }
 }
