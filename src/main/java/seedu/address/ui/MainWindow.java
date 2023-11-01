@@ -208,7 +208,6 @@ public class MainWindow extends UiPart<Stage> {
      * Shows calendar of filtered schedule cards.
      */
     void showCalendar() {
-        System.out.println(10);
         listPanelPlaceholder.getChildren().clear();
         listPanelPlaceholder.getChildren().add(calendarPanel.getRoot());
     }
