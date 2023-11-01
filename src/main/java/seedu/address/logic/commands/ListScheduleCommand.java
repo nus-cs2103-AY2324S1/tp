@@ -31,7 +31,7 @@ public class ListScheduleCommand extends Command {
         + "Parameters: \nINDEX (must be a positive integer, optional to add) \n"
         + PREFIX_STATUS + "STATUS (0 or 1 value, optional to add)"
         + "Example: \n"
-        + COMMAND_WORD + " 1, \n" + COMMAND_WORD + " m/0 \n" + COMMAND_WORD + " 1 m/1";
+        + COMMAND_WORD + " 1, \n" + COMMAND_WORD + " m/0, \n" + COMMAND_WORD + " 1 m/1";
 
     private final Index targetIndex;
     private final Status status;
