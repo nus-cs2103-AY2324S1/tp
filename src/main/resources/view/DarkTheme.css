@@ -356,16 +356,12 @@
     -fx-vgap: 3;
 }
 
-.cell_field.hyperlink {
+.cell_field.hyperlink, .cell_field.hyperlink:visited {
     -fx-background-color: #6093b5;
 }
 
-.cell_field.hyperlink:hover {
+.cell_field.hyperlink:hover, .cell_field.hyperlink:visited:hover {
     -fx-background-color: #80b5d8;
-}
-
-.cell_field.hyperlink:visited {
-    -fx-background-color: #6093b5;
 }
 
 .cell_header {
