@@ -1,15 +1,14 @@
 package seedu.address.model.task;
 
+import static java.util.Objects.requireNonNull;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Comparator;
-import java.util.Optional;
-
-import static java.util.Objects.requireNonNull;
 
 public class Task {
     private final TaskDescription description;
-    private final Optional<LocalDateTime> deadline;
+    private final Deadline deadline;
     public static final DateTimeFormatter DATE_TIME_STRING_FORMATTER = DateTimeFormatter.ofPattern(
             "yyyy-MM-dd HH:mm");
 
@@ -17,7 +16,7 @@ public class Task {
         requireNonNull(description);
 
         this.description = new TaskDescription(description);
-        this.deadline = Optional.ofNullable(deadline);
+        this.deadline = new Deadline(deadline);
     }
 
     public TaskDescription getDescription() {
@@ -28,28 +27,22 @@ public class Task {
         return description.get();
     }
 
-    public Optional<LocalDateTime> getDeadline() {
+    public Deadline getDeadline() {
         return deadline;
     }
 
-    public String getFormattedDeadline() {
-        return deadline.orElseThrow().format(DATE_TIME_STRING_FORMATTER);
+    public String getDeadlineString() {
+        return deadline.getFormattedDeadline();
     }
 
     public static class TaskDeadlineComparator implements Comparator<Task> {
         @Override
         public int compare(Task task1, Task task2) {
-            boolean oneHasDeadline = task1.getDeadline().isPresent();
-            boolean twoHasDeadline = task2.getDeadline().isPresent();
-            if (oneHasDeadline && twoHasDeadline) {
-                return task1.getDeadline().get().compareTo(task2.getDeadline().get());
-            } else if (oneHasDeadline) {
-                return -1;
-            } else if (twoHasDeadline) {
-                return 1;
-            } else {
+            int firstResult = task1.deadline.compareTo(task2.deadline);
+            if (firstResult == 0) {
                 return new TaskDescriptorComparator().compare(task1, task2);
             }
+            return firstResult;
         }
     }
 
@@ -57,5 +50,22 @@ public class Task {
         public int compare(Task task1, Task task2) {
             return task1.getDescription().compareTo(task2.getDescription());
         }
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof Task)) {
+            return false;
+        }
+
+        Task otherTask = (Task) other;
+        boolean descriptionMatches = description.equals(otherTask.description);
+        boolean deadlineMatches = deadline.equals(otherTask.deadline);
+        return descriptionMatches && deadlineMatches;
     }
 }

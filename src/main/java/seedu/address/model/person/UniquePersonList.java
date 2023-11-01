@@ -104,7 +104,7 @@ public class UniquePersonList implements Iterable<Person> {
      * @param comparator
      */
     public void sortPersons(Comparator<Person> comparator) {
-        internalList.setAll(new SortedList<Person>(this.internalList, comparator));
+        internalList.setAll(new SortedList<Person>(internalList, comparator));
     }
 
     /**

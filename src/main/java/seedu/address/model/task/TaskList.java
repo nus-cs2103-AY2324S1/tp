@@ -1,45 +1,136 @@
 package seedu.address.model.task;
 
-import java.util.ArrayList;
+import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+
 import java.util.Comparator;
+import java.util.Iterator;
+import java.util.List;
 
-public class TaskList {
-    private final ArrayList<Task> list;
-    private Comparator<Task> sortingOrder;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.collections.transformation.SortedList;
+import seedu.address.model.task.exceptions.DuplicateTaskException;
+import seedu.address.model.task.exceptions.TaskNotFoundException;
 
-    public TaskList() {
-        this.list = new ArrayList<Task>(100);
+public class TaskList implements Iterable<Task> {
+    private Comparator<Task> sortingOrder = new Task.TaskDeadlineComparator();
+    private final ObservableList<Task> internalList = FXCollections.observableArrayList();
+    private final ObservableList<Task> internalUnmodifiableList =
+            FXCollections.unmodifiableObservableList(internalList);
+
+    /**
+     * Returns true if the list contains an equivalent task as the given argument.
+     */
+    public boolean contains(Task toCheck) {
+        requireNonNull(toCheck);
+        return internalList.stream().anyMatch(toCheck::equals);
     }
 
-    public TaskList(ArrayList<Task> list) {
-        this.list = list;
-    }
-
-    public Task get(int index) {
-        return list.get(index);
-    }
-
-    public ArrayList<Task> getList() {
-        return list;
-    }
-
+    /**
+     * Adds a task to the list.
+     * An equivalent task must not already exist in the list.
+     */
     public void add(Task task) {
-        list.add(task);
-        list.sort(sortingOrder);
+        requireNonNull(task);
+        if (contains(task)) {
+            throw new DuplicateTaskException();
+        }
+        internalList.add(task);
     }
 
-    public Task delete(int index) {
-        Task toDelete = list.get(index);
-        list.remove(index);
-        list.sort(sortingOrder);
-        return toDelete;
+    /**
+     * Removes the equivalent task from the list.
+     * The task must exist in the list.
+     */
+    public void remove(Task toRemove) {
+        requireNonNull(toRemove);
+        if (!internalList.remove(toRemove)) {
+            throw new TaskNotFoundException();
+        }
     }
 
+    public void setTasks(TaskList replacement) {
+        requireNonNull(replacement);
+        internalList.setAll(replacement.internalList);
+    }
+
+    /**
+     * Replaces the contents of this list with {@code tasks}.
+     * {@code tasks} must not contain duplicate tasks.
+     */
+    public void setTasks(List<Task> tasks) {
+        requireAllNonNull(tasks);
+        if (!tasksAreUnique(tasks)) {
+            throw new DuplicateTaskException();
+        }
+        internalList.setAll(tasks);
+    }
+
+    /**
+     * Sorts tasks in the list according to the current sorting order setting of the list.
+     */
+    public void sortTasks() {
+        internalList.setAll(new SortedList<Task>(internalList, sortingOrder));
+    }
+
+    /**
+     * Returns the backing list as an unmodifiable {@code ObservableList}.
+     */
+    public ObservableList<Task> asUnmodifiableObservableList() {
+        return internalUnmodifiableList;
+    }
+
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof TaskList)) {
+            return false;
+        }
+
+        TaskList otherTaskList = (TaskList) other;
+        return internalList.equals(otherTaskList.internalList);
+    }
+
+    /**
+     * Returns true if {@code tasks} contains only unique tasks.
+     */
+    private boolean tasksAreUnique(List<Task> tasks) {
+        for (int i = 0; i < tasks.size() - 1; i++) {
+            for (int j = i + 1; j < tasks.size(); j++) {
+                if (tasks.get(i).equals(tasks.get(j))) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return internalList.toString();
+    }
+
+
+    @Override
+    public Iterator<Task> iterator() {
+        return internalList.iterator();
+    }
+
+    /**
+     * Sets the sorting order setting to sort by deadline.
+     */
     public void setSortDeadline() {
         sortingOrder = new Task.TaskDeadlineComparator();
     }
 
-    public void setSortDescriptor() {
+    /**
+     * Sets the sorting order setting to sort by description.
+     */
+    public void setSortDescription() {
         sortingOrder = new Task.TaskDescriptorComparator();
     }
 }
