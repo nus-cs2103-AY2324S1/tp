@@ -101,6 +101,11 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Creates a new Person object using the specified attributes.
+     * If a calendar is present, it is included in the Person object;
+     * otherwise, a Person object is created without a calendar.
+     */
     public Person build() {
         return this.calendar.map(calendar -> new Person(name, phone, email, address, tags, calendar))
                 .orElseGet(() -> new Person(name, phone, email, address, tags));
