@@ -28,6 +28,8 @@ public class MergeCommandParser implements Parser<MergeCommand> {
                         String.format(MESSAGE_INVALID_COMMAND_FORMAT, MergeCommand.MESSAGE_USAGE));
             }
 
+            assert str.length == 2;
+
             Index primaryIndex = ParserUtil.parseIndex(str[0]);
             Index secondaryIndex = ParserUtil.parseIndex(str[1]);
 
