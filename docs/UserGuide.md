@@ -3,16 +3,69 @@ layout: page
 title: User Guide
 ---
 
+# Welcome to Connectify!
+
+![Ui](images/Ui.png)
+
 Connectify is a **desktop app for managing clients, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, Connectify can get your client management tasks done faster than traditional GUI apps.
 
-![Ui Markup](images/Ui.png)
+Connectify helps salespersons manage their clients so that that can build customer relationships!
 
+In this user guide, you will find instructions on how to install Connectify and use its many features to manage your clients.
+
+Choose a topic from the table of contents below to find out how to manage your clients using Connectify!
+
+# Table of Contents
 * Table of Contents
 {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Quick start [coming soon]
+# Quick start
+
+1. Ensure that you have Java 11 installed on your Computer.
+
+2. Download the latest `connectify.jar` from our [releases](https://github.com/AY2324S1-CS2103T-F11-4/tp/releases/).
+
+3. Copy the file over to the folder you would want to use as the home folder for Connectify. An option is to create a folder named `Connectify` in your`Desktop` and place the file there.
+
+4. Open the command terminal.
+   
+    a. For Windows, you can open `Command Prompt` from your list of installed applications.
+
+    b. For macOS and other operating systems, open the `Terminal` app.
+
+5. Change the directory of the terminal by using the `cd` command.
+
+    a. For example, if I saved my file at `C:\Users\John\Desktop\Connectify\connectify.jar`, run the command `cd C:\Users\John\Desktop\Connectify` in your terminal.
+
+6. Run `java -jar connectify.jar` to start the application.
+
+7. A window similar to the one below should appear in a few seconds, containing sample data.
+
+   <figure>
+       <img src="images/StartupGUI.png" alt="Connectify GUI during start-up">
+       <figcaption align="center">
+           <em>The GUI you see on start-up may be slightly different due to differences in data.</em>
+       </figcaption>
+   </figure>
+   <br>
+   
+8. Type the command in the command box and press `Enter` to execute it.
+   
+   Some examples you can try:
+
+   - `list`: Lists all client profiles.
+   
+   - `create n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`: Creates a client named `John Doe` in the client list.
+   
+   - `delete 3`: Deletes the 3rd contact currently shown in the displayed client list.
+   
+   - `exit`: Exits the app.
+
+9. Refer to [Features](#features) below for more commands and details for each command.
+
+[↑ Back to Table of Contents](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
 
