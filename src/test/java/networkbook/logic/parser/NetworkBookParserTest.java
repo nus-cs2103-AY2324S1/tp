@@ -142,8 +142,9 @@ public class NetworkBookParserTest {
 
     @Test
     public void parseCommand_save() throws Exception {
-        assertTrue(parser.parseCommand(SaveCommand.COMMAND_WORD) instanceof SaveCommand);
-        assertTrue(parser.parseCommand(SaveCommand.COMMAND_WORD + " 3") instanceof SaveCommand);
+        SaveCommand expectedCommand = new SaveCommand();
+        assertEquals(expectedCommand, parser.parseCommand(SaveCommand.COMMAND_WORD));
+        assertEquals(expectedCommand, parser.parseCommand(SaveCommand.COMMAND_WORD + " 3"));
     }
 
     @Test

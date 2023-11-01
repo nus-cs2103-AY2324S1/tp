@@ -23,4 +23,9 @@ public class SaveCommand extends Command {
     public CommandResult execute(Model model) {
         return new CommandResult(MESSAGE_SUCCESS);
     }
+
+    @Override
+    public boolean equals(Object other) {
+        return other instanceof SaveCommand;
+    }
 }
