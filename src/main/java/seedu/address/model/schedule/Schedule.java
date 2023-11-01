@@ -14,7 +14,8 @@ import seedu.address.model.person.Person;
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Schedule implements Comparable<Schedule> {
-    public static final String MESSAGE_CONSTRAINTS = "Schedules start time should be before its end time.";
+    public static final String MESSAGE_CONSTRAINTS = "Schedules start time must be before its end time and both "
+            + "should be on the same day";
     private final Person tutor;
     private final StartTime startTime;
     private final EndTime endTime;
@@ -47,7 +48,9 @@ public class Schedule implements Comparable<Schedule> {
     }
 
     private boolean isValidSchedule(StartTime startTime, EndTime endTime) {
-        return startTime.getTime().isBefore(endTime.getTime());
+        boolean isStartTimeAfterEndTime = startTime.getTime().isBefore(endTime.getTime());
+        boolean isSameDay = startTime.compareDays(endTime) == 0;
+        return isStartTimeAfterEndTime && isSameDay;
     }
 
     public Person getTutor() {
@@ -97,8 +100,8 @@ public class Schedule implements Comparable<Schedule> {
         }
 
         return tutor.equals(other.tutor)
-            && startTime.equals(other.startTime)
-            && endTime.equals(other.endTime);
+                && startTime.equals(other.startTime)
+                && endTime.equals(other.endTime);
     }
 
     /**
