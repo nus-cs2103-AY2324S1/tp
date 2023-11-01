@@ -47,6 +47,9 @@ public class FullTaskList implements ReadOnlyFullTaskList {
         refreshFullTaskList();
     }
 
+    /**
+     * Refreshes the Full Task List.
+     */
     public void refreshFullTaskList() {
         fullTaskList.clear();
         for (Lesson lesson : lessonList) {
