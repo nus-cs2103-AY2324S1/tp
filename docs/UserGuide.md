@@ -38,6 +38,8 @@ management tasks done faster than traditional GUI apps.
 
    * `exit` : Exits the app.
 
+6. Configure Class Manager using the 
+
 6. Refer to the [Commands](#commands) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
@@ -183,7 +185,7 @@ Examples:
 
 ### Adding comment to a student : `comment`
 
-Adds a comment to an existing student in the address book.
+Adds a comment to an existing student in Class Manager.
 
 Format: `comment s/STUDENT_NUMBER c/COMMENT`
 
