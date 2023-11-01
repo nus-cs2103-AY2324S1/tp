@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.Locale;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
@@ -15,6 +16,7 @@ import seedu.address.model.employee.Email;
 import seedu.address.model.employee.Leave;
 import seedu.address.model.employee.Name;
 import seedu.address.model.employee.Phone;
+import seedu.address.model.employee.Role;
 import seedu.address.model.employee.Salary;
 
 /**
@@ -113,7 +115,7 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String leave} into a {@code leave}.
+     * Parses a {@code String leave} into a {@code Leave}.
      * Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code leave} is invalid.
@@ -125,6 +127,48 @@ public class ParserUtil {
             throw new ParseException(Leave.MESSAGE_CONSTRAINTS);
         }
         return new Leave(trimmedLeave);
+    }
+
+    /**
+     * Parses a {@code String role} into a {@code Role}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code role} is invalid.
+     */
+    public static Role parseRole(String role) throws ParseException {
+        requireNonNull(role);
+        String trimmedRole = role.trim().toLowerCase(Locale.ROOT);
+        if (!Role.isValidRole(trimmedRole)) {
+            throw new ParseException(Role.MESSAGE_CONSTRAINTS);
+        }
+        return new Role(trimmedRole);
+    }
+
+    /**
+     * Parses a {@code String supervisor} into a {@code Name}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code supervisor} is invalid.
+     */
+    public static Name parseSupervisor(String supervisor) throws ParseException {
+        requireNonNull(supervisor);
+        String trimmedSupervisorName = supervisor.trim();
+        if (!Name.isValidName(trimmedSupervisorName)) {
+            throw new ParseException(Department.MESSAGE_CONSTRAINTS);
+        }
+        return new Name(trimmedSupervisorName);
+    }
+
+    /**
+     * Parses {@code Collection<String> supervisors} into a {@code Set<Name>}.
+     */
+    public static Set<Name> parseSupervisors(Collection<String> supervisors) throws ParseException {
+        requireNonNull(supervisors);
+        final Set<Name> supervisorNameSet = new HashSet<>();
+        for (String supervisor : supervisors) {
+            supervisorNameSet.add(parseSupervisor(supervisor));
+        }
+        return supervisorNameSet;
     }
 
     /**

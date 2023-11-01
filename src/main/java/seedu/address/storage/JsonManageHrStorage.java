@@ -45,14 +45,14 @@ public class JsonManageHrStorage implements ManageHrStorage {
     public Optional<ReadOnlyManageHr> readManageHr(Path filePath) throws DataLoadingException {
         requireNonNull(filePath);
 
-        Optional<JsonSerializableManageHr> jsonManageHR = JsonUtil.readJsonFile(
+        Optional<JsonSerializableManageHr> jsonManageHr = JsonUtil.readJsonFile(
                 filePath, JsonSerializableManageHr.class);
-        if (!jsonManageHR.isPresent()) {
+        if (!jsonManageHr.isPresent()) {
             return Optional.empty();
         }
 
         try {
-            return Optional.of(jsonManageHR.get().toModelType());
+            return Optional.of(jsonManageHr.get().toModelType());
         } catch (IllegalValueException ive) {
             logger.info("Illegal values found in " + filePath + ": " + ive.getMessage());
             throw new DataLoadingException(ive);
