@@ -242,6 +242,15 @@ Amazing! Tutor John Doe has now been added to the bottom of the displayed list.
 
 ![add tutor command](images/addTutorCommandSyntax.png)
 
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Tutor's name**<br>
+
+* Tutor's name can only letters and numbers.
+* Tutor's name is case-sensitive. E.g., `John` and `john` is different!
+
+</div>
+
 **Errors you might encounter**
 
 Here is a list of the error messages you may encounter, when the command is entered incorrectly:
