@@ -416,14 +416,13 @@ Deletes a tutor in TutorConnect based on their index number in the tutor list.
 **Scenario**
 
 Imagine the tutor **John Doe** has left the tuition centre and you want to remove him from the tutor list to keep
-the updated list of tutors.
+the list of tutors updated.
 
 No worries! Let the delete tutor command help you to remove **John Doe** from the tutor list.
 
 **Follow these steps**
 
-1. Type `list-t` and press enter to get the index number of the tutor with the name **John Doe** from the tutor list, 
-   which is index 9.
+1. Type `list-t` and press enter to get the index number of the tutor to be deleted.
 2. Let's say the tutor to be deleted **John Doe**, is in position 9 of the tutor list.
 3. Type `delete-t 9` to remove the tutor in index 9 of the tutor list, which is **John Doe**.
 
@@ -441,7 +440,7 @@ Well done! You have deleted tutor **John Doe**.
 
 **Errors you might encounter**
 
-This command is relatively straight forward to use and has only 1 possible error:
+Here is a list of the error messages you may encounter, when the command is entered incorrectly:
 
 | Error Message                          | Reason                                                       |
 |----------------------------------------|--------------------------------------------------------------|
@@ -578,16 +577,16 @@ Displays a list of all schedules in the address book in a table format. List can
 
 #### Marking a schedule: `mark`
 
-Adds the status of a schedule in TutorConnect based on their index number in the list of schedules.
+Sets the status of a schedule in TutorConnect.
 
 ##### :star: First time users
 {:.no_toc}
 
 **Scenario**
 
-The class for one of the schedules has successfully COMPLETED, so its status should be marked as COMPLETED.
+A class has ended and hence the schedule representing that class should be now marked as COMPLETED.
 
-Fred not as you can do just that with the mark command.
+Fret not as you can do just that with the mark command.
 
 **Follow these steps**
 
@@ -614,8 +613,6 @@ Yay! The schedule has been marked as COMPLETED.
 
 * There are only two types of Schedule status: MISSED or COMPLETED.
 * To set the status of the specified schedule to MISSED, input `m/0` as 0 indicates the MISSED status.
-* The success message for marking a schedule as MISSED is the same as COMPLETED, apart from replacing the 
-  word `COMPLETED` with `MISSED`.
 * To set the status of the specified schedule to COMPLETED, input `m/1` as 1 indicates the COMPLETED status.
 * Any inputs other than 0 or 1 will result in an invalid status message displayed.
 
@@ -625,11 +622,11 @@ Yay! The schedule has been marked as COMPLETED.
 
 Here is a list of the error messages you may encounter, when the command is entered incorrectly:
 
-| Error Message                                             | Reason                                                              |
-|-----------------------------------------------------------|---------------------------------------------------------------------|
-| `Invalid command format!`                                 | Invalid or missing SCHEDULE_INDEX or SCHEDULE_STATUS or both.       |
-| `The schedule index provided is invalid`                  | SCHEDULE_INDEX entered is not in the range of number of schedules.  |
-| `Status has to be either MISSED (m/0) or COMPLETED (m/1)` | SCHEDULE_STATUS entered is not in the range of number of schedules. |
+| Error Message                                             | Reason                                                             |
+|-----------------------------------------------------------|--------------------------------------------------------------------|
+| `Invalid command format!`                                 | Invalid or missing SCHEDULE_INDEX or SCHEDULE_STATUS or both.      |
+| `The schedule index provided is invalid`                  | SCHEDULE_INDEX entered is not in the range of number of schedules. |
+| `Status has to be either MISSED (m/0) or COMPLETED (m/1)` | SCHEDULE_STATUS entered is not 0 or 1.                             |
 
 You can also refer to [input information](#input-examples) for details about valid inputs.
 
