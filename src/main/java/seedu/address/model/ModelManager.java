@@ -213,9 +213,4 @@ public class ModelManager implements Model {
                 && filteredApplicants.equals(otherModelManager.filteredApplicants)
                 && filteredInterviews.equals(otherModelManager.filteredInterviews);
     }
-
-    @Override
-    public String toString() {
-        return this.filteredInterviews.toString();
-    }
 }
