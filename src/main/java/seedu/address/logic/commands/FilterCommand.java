@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.employee.ContainsDepartmentPredicate;
@@ -28,5 +29,27 @@ public class FilterCommand extends Command {
         model.updateFilteredEmployeeList(predicate);
         return new CommandResult(
                 String.format(Messages.MESSAGE_EMPLOYEES_LISTED_OVERVIEW, model.getFilteredEmployeeList().size()));
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof FilterCommand)) {
+            return false;
+        }
+
+        FilterCommand otherFilterCommand = (FilterCommand) other;
+        return predicate.equals(otherFilterCommand.predicate);
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .add("predicate", predicate)
+                .toString();
     }
 }
