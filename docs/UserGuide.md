@@ -71,6 +71,7 @@ Flashlingo is a **desktop app for learning words by flashcard, optimized for use
   e.g. in `add w/<WORD> t/<TRANSLATION> [wl/WORD_LANGUAGE] [tl/TRANSLATION_LANGUAGE]`, the `WORD` and `TRANSLATION` parameters are *MANDATORY*, whereas the `WORD_LANGUAGE` and `TRANSLATION_LANGUAGE` do not need to be in the command.
   For example, both `add w/entschuldigung wl/Deutsch t/sorry tl/English` and `add w/regarder t/look` are valid usage of the command
 
+* If the parameters have ... as a suffix, ie. `<UPPER_CASE...>`, it means that it can take multiple parameters that are comma separated.
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`and `exit`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
@@ -137,10 +138,11 @@ Finds words whose original word or translation contains the given keyword.
 * Finds a flashcard.
 * The search is insensitive. e.g `look` will match `Look`
 
-Format: `find <KEYWORD>`
+Format: `find <KEYWORDS...>`
 
 Examples:
-* `find look` returns the flashcard list  and its translation that contains the keyword `look`
+* `find look` returns the flashcard list and its translation that contains the keyword `look`
+* `find look, hello, goodbye` returns the flashcard list that has all flashcards that contain `look`, `hello` and `goodbye`
 
 
 ###  Starts review session : `start`
