@@ -117,6 +117,48 @@ public class Person {
     }
 
     /**
+     * Returns true if the person has not been contacted yet, i.e. no interactions.
+     */
+    public boolean isUncontacted() {
+        return this.interactions.isEmpty();
+    }
+
+    /**
+     * Returns true if the person has a closed interaction.
+     */
+    public boolean isClosed() {
+        return this.interactions.stream().anyMatch(i -> i.isOutcome(Interaction.Outcome.CLOSED));
+    }
+
+    /**
+     * Returns true if the person is still in contact.
+     */
+    public boolean isContacting() {
+        return !isUncontacted() && !isClosed();
+    }
+
+    /**
+     * Returns true if the person is a hot lead.
+     */
+    public boolean isHotLead() {
+        return this.lead.isHot();
+    }
+
+    /**
+     * Returns true if the person is a warm lead.
+     */
+    public boolean isWarmLead() {
+        return this.lead.isWarm();
+    }
+
+    /**
+     * Returns true if the person is a cold lead.
+     */
+    public boolean isColdLead() {
+        return this.lead.isCold();
+    }
+
+    /**
      * Adds an interaction to the person.
      * @param interactions the set of interaction to be added
      * @return the updated set of interactions
