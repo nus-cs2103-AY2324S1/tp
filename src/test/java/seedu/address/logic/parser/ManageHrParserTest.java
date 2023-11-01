@@ -117,6 +117,13 @@ public class ManageHrParserTest {
     }
 
     @Test
+    public void checkCommand_clear() throws Exception {
+        Employee employee = new EmployeeBuilder().build();
+        Pair<String, String> command = parser.checkCommandUsage(ClearCommand.COMMAND_WORD);
+        assertEquals(new Pair<String, String>(ClearCommand.MESSAGE_USAGE, ClearCommand.MESSAGE_EXAMPLE), command);
+    }
+
+    @Test
     public void checkCommand_delete() throws Exception {
         Pair<String, String> command = parser.checkCommandUsage(
                 DeleteCommand.COMMAND_WORD + " " + INDEX_FIRST_EMPLOYEE.getOneBased());
@@ -157,6 +164,17 @@ public class ManageHrParserTest {
     public void checkCommand_list() throws Exception {
         Pair<String, String> command = parser.checkCommandUsage(ListCommand.COMMAND_WORD);
         assertEquals(command, new Pair<String, String>(ListCommand.MESSAGE_USAGE, ListCommand.MESSAGE_EXAMPLE));
+    }
+
+    @Test
+    public void checkCommand_unrecognisedInput_throwsParseException() {
+        assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE), ()
+                -> parser.checkCommandUsage(""));
+    }
+
+    @Test
+    public void checkCommand_unknownCommand_throwsParseException() {
+        assertThrows(ParseException.class, MESSAGE_UNKNOWN_COMMAND, () -> parser.checkCommandUsage("unknownCommand"));
     }
 
 }
