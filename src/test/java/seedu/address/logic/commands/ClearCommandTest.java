@@ -1,7 +1,6 @@
 package seedu.address.logic.commands;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
@@ -78,6 +77,22 @@ public class ClearCommandTest {
         CommandResult expectedCommandResult = new CommandResult(ClearCommand.MESSAGE_USAGE);
 
         assertCommandSuccess(new ClearCommand("null"), model, expectedCommandResult, model);
+    }
+    @Test
+    public void hashCode_sameConfirmation_sameHashCode() {
+        ClearCommand clearCommand1 = new ClearCommand("confirm");
+        ClearCommand clearCommand2 = new ClearCommand("confirm");
+
+        assertEquals(clearCommand1.hashCode(), clearCommand2.hashCode());
+    }
+
+    @Test
+    public void hashCode_differentConfirmation_differentHashCode() {
+        ClearCommand clearCommand1 = new ClearCommand("confirm");
+        ClearCommand clearCommand3 = new ClearCommand("different");
+
+        // Ensure that hash codes are not equal
+        assertNotEquals(clearCommand1.hashCode(), clearCommand3.hashCode());
     }
 
 
