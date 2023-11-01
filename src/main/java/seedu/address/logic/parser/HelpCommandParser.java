@@ -14,7 +14,7 @@ import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
- * The parser for all secondary {@code delete} commands
+ * The parser for {@code help} command
  */
 public class HelpCommandParser implements Parser<HelpCommand> {
     @Override

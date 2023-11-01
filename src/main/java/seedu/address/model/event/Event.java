@@ -2,6 +2,8 @@ package seedu.address.model.event;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.time.LocalDateTime;
+
 /**
  * The class for holding an Event
  */
@@ -60,7 +62,6 @@ public class Event {
      * @return The start time in string
      */
     public String getStartString() {
-        // Temporary, can use Util class instead
         return this.start.toString();
     }
 
@@ -70,6 +71,22 @@ public class Event {
      */
     public String getEndString() {
         return this.end.toString();
+    }
+
+    /**
+     * Get the start time of the event, represented in {@code LocalDateTime}
+     * @return The start time in {@code LocalDateTime}
+     */
+    public LocalDateTime getStartTime() {
+        return this.start.getTime();
+    }
+
+    /**
+     * Get the end time of the event, represented in {@code LocalDateTime}
+     * @return The end time in {@code LocalDateTime}
+     */
+    public LocalDateTime getEndTime() {
+        return this.end.getTime();
     }
 
     /**
