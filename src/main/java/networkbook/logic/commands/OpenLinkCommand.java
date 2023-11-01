@@ -34,10 +34,12 @@ public class OpenLinkCommand extends Command {
 
     /**
      * Creates a new {@code OpenLinkCommand}.
+     * This command is not data-changing, so parent constructor is called with false.
      * @param personIndex The index of the person to open the link.
      * @param linkIndex The index of the link in the link list of the person.
      */
     public OpenLinkCommand(Index personIndex, Index linkIndex) {
+        super(false);
         requireAllNonNull(personIndex, linkIndex);
         this.personIndex = personIndex;
         this.linkIndex = linkIndex;
