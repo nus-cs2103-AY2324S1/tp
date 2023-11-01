@@ -1,7 +1,7 @@
 package seedu.classmanager.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.classmanager.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.classmanager.commons.util.AppUtil.checkArgument;
 
 import java.util.HashSet;
 import java.util.List;
@@ -23,6 +23,8 @@ public class RandomCommand extends Command {
             + "Example: " + COMMAND_WORD + " 2";
     public static final String MESSAGE_TOO_MUCH_TO_BE_SELECTED =
             "The number of students to be selected exceeds that of current students displayed";
+    public static final String MESSAGE_INVALID_NUM_OF_STUDENT =
+        "Number of student to be selected must be more than 0";
     private final Integer numOfStudent;
 
     /**
@@ -31,7 +33,7 @@ public class RandomCommand extends Command {
      * @param numOfStudent the number of students to be selected.
      */
     public RandomCommand(Integer numOfStudent) {
-        requireAllNonNull(numOfStudent);
+        checkArgument(isValidNumOfStudent(numOfStudent), MESSAGE_INVALID_NUM_OF_STUDENT);
 
         this.numOfStudent = numOfStudent;
     }
@@ -63,6 +65,10 @@ public class RandomCommand extends Command {
         }
 
         return new CommandResult(result.toString());
+    }
+
+    public boolean isValidNumOfStudent(Integer numOfStudent) {
+        return numOfStudent > 0;
     }
 
     @Override
