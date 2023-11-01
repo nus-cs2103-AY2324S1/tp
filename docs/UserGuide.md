@@ -27,7 +27,8 @@ applications.
 5. A GUI similar to the below should appear in a few seconds. Note that the app contains some sample data.<br><br>
    ![Ui](images/Ui.png)
 
-6. Type the command in the command box and press Enter to execute it. For example, typing **`help`** and pressing Enter will
+6. Type the command in the command box and press Enter to execute it. For example, typing **`help`** and pressing Enter
+   will
    open the help window.<br>
    Some example commands you can try:
 
@@ -76,18 +77,17 @@ The following are valid statuses:
 
 The following are valid job types:
 
-| Job Type     | Remark              |
-|--------------|---------------------|
-| `FULL_TIME`  | A full time job     |
-| `PART_TIME`  | A part time job     |
-| `INTERNSHIP` | An internship       |
-| `TEMPORARY`  | A temporary job     |
-| `CONTRACT`   | A contract job      |
-| `FREELANCE`  | A freelance job     |
-| `VOLUNTEER`  | A volunteered job   |
+| Job Type     | Remark            |
+|--------------|-------------------|
+| `FULL_TIME`  | A full time job   |
+| `PART_TIME`  | A part time job   |
+| `INTERNSHIP` | An internship     |
+| `TEMPORARY`  | A temporary job   |
+| `CONTRACT`   | A contract job    |
+| `FREELANCE`  | A freelance job   |
+| `VOLUNTEER`  | A volunteered job |
 
 ### Structure of an interview
-
 
 ### Command format
 
@@ -112,8 +112,8 @@ The following are valid job types:
   ignored.<br>
     * e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
-* The same prefix cannot be used multiple times in the same command. 
-  * e.g. `add r/Cleaner c/Google c/Microsoft` is an invalid input. 
+* The same prefix cannot be used multiple times in the same command.
+    * e.g. `add r/Cleaner c/Google c/Microsoft` is an invalid input.
 
 
 * `INDEX` refers to the index number of the chosen application in the displayed application list and must be a _positive

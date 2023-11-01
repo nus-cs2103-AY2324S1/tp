@@ -1,0 +1,22 @@
+/* Interview List View*/
+.interview-list-view {
+    -fx-background-insets: 0;
+    -fx-padding: 0;
+    -fx-background-color: #dcdcdc;
+    -fx-background-radius: 20px;
+    -fx-control-inner-background: #FAF0FF;
+    -fx-control-inner-background-alt: #FAF0FF;
+    -fx-border-radius: 20px;
+}
+
+.interview-list-view .list-cell {
+    -fx-padding: 10px 0px 5px 0px;
+}
+
+.interview-list-view .list-cell:selected {
+    -fx-background-color: #FAF0FF;
+}
+
+.interview-list-view .list-cell:selected #interviewCardPane {
+    -fx-background-color: #E4E1FF;
+}
