@@ -2,7 +2,9 @@ package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
-import static seedu.address.model.state.State.*;
+import static seedu.address.model.state.State.SCHEDULE;
+import static seedu.address.model.state.State.STUDENT;
+import static seedu.address.model.state.State.TASK;
 
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
@@ -77,7 +79,7 @@ public class AddressBookParser {
             } else if (model.getState().equals(STUDENT)) {
                 commandWord = "addPerson";
                 break;
-            } else if (model.getState().equals(TASK)){
+            } else if (model.getState().equals(TASK)) {
                 throw new ParseException("Please add tasks in the schedule list.");
             }
             break;

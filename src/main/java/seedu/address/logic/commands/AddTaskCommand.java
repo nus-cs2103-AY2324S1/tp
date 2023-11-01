@@ -24,6 +24,10 @@ public class AddTaskCommand extends Command {
         this.task = task;
         this.index = index;
     }
+
+    /**
+     * Creates an AddTaskCommand to add the specified {@code Task} to the current shown lesson
+     */
     public AddTaskCommand(Task task) {
         requireNonNull(task);
         this.task = task;
@@ -35,7 +39,8 @@ public class AddTaskCommand extends Command {
         if (this.index == null) {
             Lesson lesson = model.getCurrentlyDisplayedLesson();
             if (lesson == null) {
-                throw new CommandException("Please use show lesson Index before adding task when no lesson is displayed!");
+                throw new CommandException("Please use show lesson Index before"
+                        + " adding task when no lesson is displayed!");
             }
             if (lesson.hasSameTask(task)) {
                 throw new CommandException("Existing task with same task description with index "
