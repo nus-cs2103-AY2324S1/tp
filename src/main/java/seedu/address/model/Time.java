@@ -86,25 +86,44 @@ public class Time implements Comparable<Time> {
      * @return a list of interviews whose start time is today, as given by LocalDateTime.now()
      */
     public static List<Interview> listInterviewsToday(UniqueInterviewList interviews) {
-        // get today's day, month, and year for checking
-        LocalDateTime today = LocalDateTime.now();
-        int todayDay = today.getDayOfMonth();
-        int todayMonth = today.getMonthValue();
-        int todayYear = today.getYear();
+        return listInterviewsOnGivenDay(LocalDateTime.now(), interviews);
+    }
+
+    /**
+     * Compiles a list of interviews that the user has on a given day
+     *
+     * @author Tan Kerway
+     * @return a list of interviews whose start time is the given day, as given by LocalDateTime.now()
+     */
+    public static List<Interview> listInterviewsOnGivenDay(LocalDateTime day, UniqueInterviewList interviews) {
         List<Interview> res = new ArrayList<>();
         // loop over all the interviews, and add those that have today as the start time
         for (Interview interview : interviews) {
-            LocalDateTime currentInterviewStartTime = interview.getInterviewStartTime();
-            int currentInterviewDay = currentInterviewStartTime.getDayOfMonth();
-            int currentInterviewMonth = currentInterviewStartTime.getMonthValue();
-            int currentInterviewYear = currentInterviewStartTime.getYear();
-            if (currentInterviewDay == todayDay
-                    && currentInterviewMonth == todayMonth
-                    && currentInterviewYear == todayYear) {
+            LocalDateTime currentInterviewStartDate = interview.getInterviewStartTime();
+            if (isSameDay(day, currentInterviewStartDate)) {
                 res.add(interview); // add the current interview if its start date is today
             }
         }
         return res;
+    }
+
+    /**
+     * Checks whether two LocalDateTimes are the same.
+     *
+     * @author Tan Kerway
+     *
+     */
+    public static boolean isSameDay(LocalDateTime date1, LocalDateTime date2) {
+        return date1.toLocalDate().equals(date2.toLocalDate());
+    }
+
+    /**
+     * Checks whether the given LocalDateTime so happens to be today.
+     *
+     * @author Tan Kerway
+     */
+    public static boolean isToday(LocalDateTime day) {
+        return isSameDay(LocalDateTime.now(), day);
     }
 
     /**
@@ -206,32 +225,6 @@ public class Time implements Comparable<Time> {
     }
 
     /**
-     * Compiles a list of interviews that the user has on a given day
-     *
-     * @author Tan Kerway
-     *
-     */
-    public static List<Interview> listInterviewsOnGivenDay(LocalDateTime day, UniqueInterviewList interviews) {
-        int todayDay = day.getDayOfMonth();
-        int todayMonth = day.getMonthValue();
-        int todayYear = day.getYear();
-        List<Interview> res = new ArrayList<>();
-        // loop over all the interviews, and add those that have today as the start time
-        for (Interview interview : interviews) {
-            LocalDateTime currentInterviewStartTime = interview.getInterviewStartTime();
-            int currentInterviewDay = currentInterviewStartTime.getDayOfMonth();
-            int currentInterviewMonth = currentInterviewStartTime.getMonthValue();
-            int currentInterviewYear = currentInterviewStartTime.getYear();
-            if (currentInterviewDay == todayDay
-                    && currentInterviewMonth == todayMonth
-                    && currentInterviewYear == todayYear) {
-                res.add(interview); // add the current interview if its start date is today
-            }
-        }
-        return res;
-    }
-
-    /**
      * Compares the other given time to this instance.
      *
      * @author Tan Kerway
@@ -250,17 +243,6 @@ public class Time implements Comparable<Time> {
      * @return true if this instance is before the otherTime, false otherwise
      */
     public boolean isBefore(Time otherTime) {
-        return this.time.isBefore(otherTime.time);
-    }
-
-    /**
-     * Checks whether this instance is after the given time.
-     *
-     * @author Tan Kerway
-     * @param otherTime the other time to compare to
-     * @return true if this instance is after the otherTime, false otherwise
-     */
-    public boolean isAfter(Time otherTime) {
         return this.time.isBefore(otherTime.time);
     }
 
