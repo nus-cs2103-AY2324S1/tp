@@ -24,7 +24,7 @@ public class ReadCommand extends Command {
             + "The app will then display the information accordingly.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + "/field\n"
-            + "Example: " + COMMAND_WORD + " 1 b";
+            + "Example: " + COMMAND_WORD + " 1 /b";
 
     public static final String MESSAGE_READ_PERSON_SUCCESS = "Read %s";
 
