@@ -86,7 +86,7 @@ public class LogicManager implements Logic {
     public void handleTransactionsExport() throws CommandException {
 
         try {
-            storage.saveTransactionBook(model.getTransactionBook(), storage.getExportTransactionsFilePath());
+            storage.saveTransactionBook(model.getTransactionBook(), model.getExportFilePath());
         } catch (IOException ioe) {
             throw new CommandException(String.format(FILE_OPS_ERROR_FORMAT, ioe.getMessage()), ioe);
         }
@@ -103,7 +103,7 @@ public class LogicManager implements Logic {
         ReadOnlyTransactionBook importedTransactionData;
 
         try {
-            transactionBookOptional = storage.readTransactionBook(storage.getImportTransactionsFilePath());
+            transactionBookOptional = storage.readTransactionBook(model.getImportFilePath());
             if (!transactionBookOptional.isPresent()) {
                 logger.info("No Import file present");
                 throw new CommandException(IMPORT_FILE_MISSING);
@@ -116,7 +116,7 @@ public class LogicManager implements Logic {
                 }
             }
         } catch (DataLoadingException e) {
-            logger.warning("Import file at " + storage.getImportTransactionsFilePath() + " could not be loaded.");
+            logger.warning("Import file at " + model.getImportFilePath() + " could not be loaded.");
         }
     }
 

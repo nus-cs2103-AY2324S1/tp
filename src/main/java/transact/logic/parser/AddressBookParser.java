@@ -110,7 +110,6 @@ public class AddressBookParser {
         case ClearResultBoxCommand.COMMAND_WORD:
             return new ClearResultBoxCommand();
 
-<<<<<<< HEAD
         case SortCommand.COMMAND_WORD:
             return new SortCommandParser().parse(arguments);
 
@@ -123,13 +122,12 @@ public class AddressBookParser {
         case ClearFilterCommand.COMMAND_WORD:
             return new ClearFilterCommand();
 
-=======
         case ExportTransactionCommand.COMMAND_WORD:
-            return new ExportTransactionCommand();
+            return new ExportTransactionParser().parse(arguments);
 
         case ImportTransactionCommand.COMMAND_WORD:
-            return new ImportTransactionCommand();
->>>>>>> 5bf1f0c8 (Add import and export functions for transaction book)
+            return new ImportTransactionParser().parse(arguments);
+
         default:
             logger.finer("This user input caused a ParseException: " + userInput);
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

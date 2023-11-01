@@ -16,8 +16,8 @@ public class UserPrefs implements ReadOnlyUserPrefs {
     private GuiSettings guiSettings = new GuiSettings();
     private Path addressBookFilePath = Paths.get("data", "addressbook.json");
     private Path transactionBookFilePath = Paths.get("data", "transactionbook.csv");
-    private Path importTransactionsFilePath = Paths.get("import", "importTransactions.csv");
-    private Path exportTransactionsFilePath = Paths.get("export", "exportTransactions.csv");
+    private Path importFilePath = Paths.get("import");
+    private Path exportFilePath = Paths.get("export");
 
     /**
      * Creates a {@code UserPrefs} with default values.
@@ -41,8 +41,8 @@ public class UserPrefs implements ReadOnlyUserPrefs {
         setGuiSettings(newUserPrefs.getGuiSettings());
         setAddressBookFilePath(newUserPrefs.getAddressBookFilePath());
         setTransactionBookFilePath(newUserPrefs.getTransactionBookFilePath());
-        setImportTransactionsFilePath(newUserPrefs.getTransactionsImportFilePath());
-        setExportTransactionsFilePath(newUserPrefs.getTransactionsExportFilePath());
+        setImportFilePath(newUserPrefs.getImportFilePath());
+        setExportFilePath(newUserPrefs.getExportFilePath());
     }
 
     public GuiSettings getGuiSettings() {
@@ -72,22 +72,22 @@ public class UserPrefs implements ReadOnlyUserPrefs {
         this.transactionBookFilePath = transactionBookFilePath;
     }
 
-    public Path getTransactionsExportFilePath() {
-        return exportTransactionsFilePath;
+    public Path getExportFilePath() {
+        return exportFilePath;
     }
 
-    public void setExportTransactionsFilePath(Path exportFilePath) {
+    public void setExportFilePath(Path exportFilePath) {
         requireNonNull(exportFilePath);
-        this.exportTransactionsFilePath = exportFilePath;
+        this.exportFilePath = exportFilePath;
     }
 
-    public Path getTransactionsImportFilePath() {
-        return importTransactionsFilePath;
+    public Path getImportFilePath() {
+        return importFilePath;
     }
 
-    public void setImportTransactionsFilePath(Path importFilePath) {
+    public void setImportFilePath(Path importFilePath) {
         requireNonNull(importFilePath);
-        this.importTransactionsFilePath = importFilePath;
+        this.importFilePath = importFilePath;
     }
 
     @Override

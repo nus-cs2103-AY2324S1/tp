@@ -29,7 +29,7 @@ public class CsvAdaptedTransactionStorageManualTest {
 
         ReadOnlyTransactionBook transactionBook = createTestTransactionBook();
 
-        CsvAdaptedTransactionStorage storage = new CsvAdaptedTransactionStorage(filePath, importPath, exportPath);
+        CsvAdaptedTransactionStorage storage = new CsvAdaptedTransactionStorage(filePath);
 
         try {
             storage.saveTransactionBook(transactionBook);
