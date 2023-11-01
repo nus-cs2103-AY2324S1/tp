@@ -213,5 +213,4 @@ public class ModelManager implements Model {
                 && filteredApplicants.equals(otherModelManager.filteredApplicants)
                 && filteredInterviews.equals(otherModelManager.filteredInterviews);
     }
-
 }
