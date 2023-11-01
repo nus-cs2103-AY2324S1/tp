@@ -6,10 +6,10 @@ participant ":ClassDetails" as ClassDetails MODEL_COLOR
 participant ":AttendanceTracker" as AttendanceTracker MODEL_COLOR
 participant ":Attendance" as Attendance MODEL_COLOR
 
-[-> ClassDetails : markPresent()
+[-> ClassDetails : markPresent(tutNum)
 activate ClassDetails
 
-ClassDetails -> AttendanceTracker : markPresent()
+ClassDetails -> AttendanceTracker : markPresent(tutNum)
 activate AttendanceTracker
 
 AttendanceTracker -> Attendance : mark()

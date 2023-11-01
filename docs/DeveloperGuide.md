@@ -344,7 +344,7 @@ This feature builds upon the current design of Student and ClassDetails.
 
 <puml src="diagrams/MarkPresentSequenceDiagram.puml" alt="MarkPresentSequenceDiagram" />
 
-The `mark-pre` command is facilitated by `MarkPresentCommand` and `MarkPresentCommandParser`. 
+**Note:** The diagram above only shows the part within model, since the part within model is similar to other commands.
 
 ### Config feature
 
