@@ -3,7 +3,7 @@ package seedu.address.storage;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.storage.JsonAdaptedStudent.MISSING_FIELD_MESSAGE_FORMAT;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalStudents.BENSON;
+import static seedu.address.testutil.TypicalStudents.BENNY;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,18 +22,18 @@ public class JsonAdaptedStudentTest {
     private static final String INVALID_ADDRESS = " ";
     private static final String INVALID_TAG = "#friend";
 
-    private static final String VALID_NAME = BENSON.getName().toString();
-    private static final String VALID_PHONE = BENSON.getPhone().toString();
-    private static final String VALID_ADDRESS = BENSON.getAddress().toString();
-    private static final List<JsonAdaptedRiskLevel> VALID_TAGS = BENSON.getTags().stream()
+    private static final String VALID_NAME = BENNY.getName().toString();
+    private static final String VALID_PHONE = BENNY.getPhone().toString();
+    private static final String VALID_ADDRESS = BENNY.getAddress().toString();
+    private static final List<JsonAdaptedRiskLevel> VALID_TAGS = BENNY.getTags().stream()
             .map(JsonAdaptedRiskLevel::new)
             .collect(Collectors.toList());
-    private static final String VALID_NOTE = BENSON.getNote().toString();
+    private static final String VALID_NOTE = BENNY.getNote().toString();
 
     @Test
     public void toModelType_validStudentDetails_returnsStudent() throws Exception {
-        JsonAdaptedStudent student = new JsonAdaptedStudent(BENSON);
-        assertEquals(BENSON, student.toModelType());
+        JsonAdaptedStudent student = new JsonAdaptedStudent(BENNY);
+        assertEquals(BENNY, student.toModelType());
     }
 
     @Test

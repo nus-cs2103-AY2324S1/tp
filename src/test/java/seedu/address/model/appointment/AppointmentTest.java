@@ -10,7 +10,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_START_TIME_AMY;
 import static seedu.address.testutil.TypicalAppointments.ALICE_APPOINTMENT;
 import static seedu.address.testutil.TypicalAppointments.ALICE_SECOND_APPOINTMENT;
-import static seedu.address.testutil.TypicalAppointments.BERNICE_APPOINTMENT;
+import static seedu.address.testutil.TypicalAppointments.BENNY_APPOINTMENT;
 import static seedu.address.testutil.TypicalAppointments.DAVID_APPOINTMENT;
 import static seedu.address.testutil.TypicalAppointments.JOHN_APPOINTMENT;
 
@@ -46,7 +46,7 @@ public class AppointmentTest {
 
         // different appointment -> returns false
         assertFalse(ALICE_APPOINTMENT.equals(ALICE_SECOND_APPOINTMENT));
-        assertFalse(ALICE_APPOINTMENT.equals(BERNICE_APPOINTMENT));
+        assertFalse(ALICE_APPOINTMENT.equals(BENNY_APPOINTMENT));
 
         // different name -> returns false
         Appointment editedAlexAppointment = new AppointmentBuilder(ALICE_APPOINTMENT).withName(VALID_NAME_BOB).build();
