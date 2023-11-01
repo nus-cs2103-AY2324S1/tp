@@ -110,25 +110,25 @@ All planned enhancements will also be listed in the [Planned Enhancements / Know
 ---
 
 # Table of Contents
-1. Quick Start
-2. Features
-   - Manage Contacts
-     - Add contact: `add`
-     - Add alternative information to contact: `addalt`
-     - Edit contact information: `edit`
-     - Update contact's photo: `updatephoto`
-     - List all contacts: `list`
-     - Delete contact: `delete`
-   - Notes
-   - Notifications
-     - Birthday notifications
-   - Payments
-   - Find Contacts
-     - Basic Filtering
-     - Advanced Filtering
-3. FAQ
-4. Planned Enhancements / Known Issues
-5. Command summary
+1. [Quick Start](#quick-start)
+2. [Features](#features)
+   - [Manage Contacts](#manage-contacts)
+     - [Add contact: `add`](#add-contact-add)
+     - [Add alternative information to contact: `addalt`](#add-alternative-information-to-contact-addalt)
+     - [Edit contact information: `edit`](#edit-contact-information-edit)
+     - [Update contact's photo: `updatephoto`](#update-contacts-photo-updatephoto)
+     - [List all contacts: `list`](#list-all-contacts-list)
+     - [Delete contact: `delete`](#delete-contact-delete)
+   - [Notes](#notes)
+   - [Notifications](#notifications)
+     - [Birthday notifications](#birthday-notifications)
+   - [Payments](#payments)
+   - [Find Contacts](#find-contacts)
+     - [Basic Filtering](#basic-filtering)
+     - [Advanced Filtering](#advanced-filtering)
+3. [FAQ](#faq)
+4. [Planned Enhancements / Known Issues](#planned-enhancements--known-issues)
+5. [Command summary](#command-summary)
 
 --------------------------------------------------------------------------------------------------------------------
 
