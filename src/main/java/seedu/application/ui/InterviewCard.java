@@ -16,7 +16,7 @@ public class InterviewCard extends UiPart<Region> {
     public final Interview interview;
 
     @FXML
-    private HBox cardPane;
+    private HBox interviewCardPane;
 
     @FXML
     private Label title;
@@ -34,7 +34,7 @@ public class InterviewCard extends UiPart<Region> {
         super(FXML);
         this.interview = interview;
         String type = interview.getInterviewType().toString();
-        this.title.setText(index + ". " + type + " Interview");
+        title.setText(index + ". " + type + " Interview");
         dateTime.setText(interview.getInterviewDateTime().toString());
         address.setText(interview.getInterviewAddress().toString());
     }

@@ -1,0 +1,9 @@
+.interviewCardPane {
+    -fx-background-color: transparent, #ffffff;
+    -fx-background-insects: 0, 5;
+    -fx-background-radius: 20px;
+    -fx-border-color: #E1E1E1;
+    -fx-border-size: 2;
+    -fx-border-radius: 20px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.25), 4, 0, 2, 2);
+}

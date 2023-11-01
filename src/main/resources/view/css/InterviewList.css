@@ -1,0 +1,6 @@
+/* Interview List */
+.interviewListPanel {
+    -fx-background-color: #dcdcdc;
+    -fx-background-radius: 15px;
+    -fx-border-radius: 15px;
+}
