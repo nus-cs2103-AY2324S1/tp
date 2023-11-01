@@ -79,7 +79,7 @@ public class ModelManager implements Model {
         userPrefs.setAddressBookFilePath(addressBookFilePath);
     }
 
-    //=========== AddressBook Applicants ================================================================================
+    //=========== AddressBook Applicants ===========================================================================
 
     @Override
     public void setAddressBook(ReadOnlyAddressBook addressBook) {
@@ -165,7 +165,7 @@ public class ModelManager implements Model {
         addressBook.removeInterview(target);
     }
 
-    //=========== Filtered Applicant and Interview List Accessors =============================================================
+    //=========== Filtered Applicant and Interview List Accessors =================================================
 
     /**
      * Returns an unmodifiable view of the list of {@code Applicant} backed by the internal list of

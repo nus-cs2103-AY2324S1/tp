@@ -10,6 +10,7 @@ import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.interview.exceptions.DuplicateInterviewException;
+import seedu.address.model.interview.exceptions.InterviewClashException;
 import seedu.address.model.interview.exceptions.InterviewNotFoundException;
 
 /**
@@ -98,8 +99,12 @@ public class UniqueInterviewList implements Iterable<Interview> {
      */
     public void setInterviews(List<Interview> interviews) {
         requireAllNonNull(interviews);
-        if (!interviewsAreUnique(interviews) || !interviewsDoNotClash(interviews)) {
+        if (!interviewsAreUnique(interviews)) {
             throw new DuplicateInterviewException();
+        }
+
+        if (!interviewsDoNotClash(interviews)) {
+            throw new InterviewClashException();
         }
 
         internalList.setAll(interviews);

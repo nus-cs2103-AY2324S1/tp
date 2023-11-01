@@ -127,7 +127,7 @@ public class Interview {
     }
 
     /**
-     * Returns true if both Interviews have the same Applicant & Timing or if both Interviews are the same object
+     * Returns true if both Interviews have the same Applicant or if both Interviews are the same object
      * Adapted from AB3's Person.isSamePerson() method
      */
     public boolean isSameInterview(Interview otherInterview) {

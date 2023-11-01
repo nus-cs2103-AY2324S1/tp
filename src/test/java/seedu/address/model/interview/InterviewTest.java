@@ -33,8 +33,8 @@ public class InterviewTest {
         // different Applicant, all other attributes same -> returns false
         assertFalse(STANDARD_INTERVIEW.isSameInterview(STANDARD_INTERVIEW_DIFFERENT_APPLICANT));
 
-        // different Time, all other attributes same -> return false
-        assertFalse(STANDARD_INTERVIEW.isSameInterview(STANDARD_INTERVIEW_DIFFERENT_TIME));
+        // different Time, all other attributes same -> return true
+        assertTrue(STANDARD_INTERVIEW.isSameInterview(STANDARD_INTERVIEW_DIFFERENT_TIME));
     }
 
     @Test
