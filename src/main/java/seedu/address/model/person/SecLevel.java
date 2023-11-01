@@ -68,6 +68,26 @@ public class SecLevel {
         }
     }
 
+    /**
+     * @return the integer representation of sec level.
+     */
+    public int getValue() {
+        return Integer.parseInt(value);
+    }
+
+    /**
+     * @return a new SecLevel object with sec level increased by one.
+     */
+    public SecLevel getUpSecLevel() {
+        int currentSec = this.getValue();
+        if (currentSec == 4) {
+            return new SecLevel("4");
+        } else {
+            String newSecInString = String.valueOf(currentSec + 1);
+            return new SecLevel(newSecInString);
+        }
+    }
+
     @Override
     public String toString() {
         return value;
