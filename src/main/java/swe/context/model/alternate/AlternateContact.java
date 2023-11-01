@@ -11,17 +11,17 @@ import swe.context.model.contact.Contact;
  */
 public final class AlternateContact {
     /*
-     * Requires a form similar to AlternateContact@name.
+     * Requires a form similar to AlternateContact: name.
      */
     public static final String REGEX_VALID =
-            "^[a-zA-Z\\d]+(?:[a-zA-Z\\d]+)*" + ":\\s([._-]?[a-zA-Z0-9]+)*";
+            "^[a-zA-Z\\d]+(?:[a-zA-Z\\d]+)*" + ":\\s([._-]?[a-zA-Z0-9]+)+";
 
     public final String value;
 
     /**
      * Returns whether the specified value is valid.
      *
-     * Alternate Contacts must roughly be of the form AlternateContact@name.
+     * Alternate Contacts must roughly be of the form AlternateContact: name.
      */
     public static boolean isValid(String value) {
         return value.matches(REGEX_VALID);

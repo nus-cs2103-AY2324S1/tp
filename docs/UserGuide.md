@@ -133,12 +133,11 @@ The index must be a positive integer 1, 2, 3, ...
 contacts after it.
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-The format for alternate contact is "Type of alternate contact": "Name of alternate contact"
+The format for alternate contact is the same as mentioned above in the <a href="#adding-a-contact-add">Adding a Contact</a> section.
 </div>
 
 **Example:**
 `edit 2 n/John Doe p/98765432 e/john.doe@email.com`
 
 ---
-
 Remember, whenever in doubt, you can always navigate to the help webpage via the `help` tab at the top.
