@@ -42,7 +42,6 @@ public class ViewExitCommand extends Command {
 
         // for exiting from empty profile page with not every field filled out
         if (index == null && newFosterer == null) {
-            System.out.println("fosterer is null.");
             return new CommandResult(
                     MESSAGE_CONFIRM_EXIT_WITHOUT_DETAILS,
                     null,
