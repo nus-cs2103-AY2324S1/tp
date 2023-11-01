@@ -26,15 +26,15 @@ public class EditCommand extends Command {
             + "by the index number used in the displayed person list. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: [LIST INDEX OF CONTACT] "
-            + "[" + CliSyntax.PREFIX_NAME + "NAME] "
-            + "[" + CliSyntax.PREFIX_PHONE + "PHONE] "
-            + "[" + CliSyntax.PREFIX_EMAIL + "EMAIL] "
-            + "[" + CliSyntax.PREFIX_LINK + "LINK] "
+            + "[" + CliSyntax.PREFIX_NAME + " NAME] "
+            + "[" + CliSyntax.PREFIX_PHONE + " PHONE] "
+            + "[" + CliSyntax.PREFIX_EMAIL + " EMAIL] "
+            + "[" + CliSyntax.PREFIX_LINK + " LINK] "
             + "[" + CliSyntax.PREFIX_GRADUATION + " GRADUATION DATE] "
-            + "[" + CliSyntax.PREFIX_COURSE + "COURSE OF STUDY] "
-            + "[" + CliSyntax.PREFIX_SPECIALISATION + "SPECIALISATION] "
-            + "[" + CliSyntax.PREFIX_TAG + "TAG] "
-            + "[" + CliSyntax.PREFIX_PRIORITY + "PRIORITY]...\n"
+            + "[" + CliSyntax.PREFIX_COURSE + " COURSE OF STUDY] "
+            + "[" + CliSyntax.PREFIX_SPECIALISATION + " SPECIALISATION] "
+            + "[" + CliSyntax.PREFIX_TAG + " TAG] "
+            + "[" + CliSyntax.PREFIX_PRIORITY + " PRIORITY]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + CliSyntax.PREFIX_PHONE + " 91234567 "
             + CliSyntax.PREFIX_EMAIL + " johndoe@example.com";
@@ -46,10 +46,13 @@ public class EditCommand extends Command {
     private final EditAction editAction;
 
     /**
+     * Constructor that instantiates a new {@code EditCommand} object.
+     * This command is data-changing, so parent constructor is called with true.
      * @param index of the person in the filtered person list to edit.
      * @param editAction the action to edit the person.
      */
     public EditCommand(Index index, EditAction editAction) {
+        super(true);
         requireAllNonNull(index, editAction);
 
         this.index = index;

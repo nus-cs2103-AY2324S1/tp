@@ -36,7 +36,13 @@ public class DeletePersonCommand extends Command {
 
     private final Index targetIndex;
 
+    /**
+     * Constructor that instantiates a new {@code DeletePersonCommand} object.
+     * This command is data-changing, so parent constructor is called with true.
+     * @param targetIndex is the {@code Index} of the person to delete in the displayed list.
+     */
     public DeletePersonCommand(Index targetIndex) {
+        super(true);
         this.targetIndex = targetIndex;
     }
 

@@ -44,10 +44,12 @@ public class FilterCommand extends Command {
      * Creates a FilterCommand object that searches using a list of key terms,
      * a specified date to check whether a course is being taken, and a
      * boolean that specifies whether the date check needs to be done.
+     * This command is not data-changing, so parent constructor is called with false.
      */
     public FilterCommand(CourseContainsKeyTermsPredicate keyTermsPredicate,
                          CourseIsStillBeingTakenPredicate takenPredicate,
                          boolean checkFin) {
+        super(false);
         this.keyTermsPredicate = keyTermsPredicate;
         this.takenPredicate = takenPredicate;
         this.checkFin = checkFin;

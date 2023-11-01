@@ -26,7 +26,13 @@ public class SortCommand extends Command {
 
     private final PersonSortComparator comparator;
 
+    /**
+     * Constructor that instantiates a new {@code SortCommand} object.
+     * This command is not data-changing, so parent constructor is called with false.
+     * @param comparator
+     */
     public SortCommand(PersonSortComparator comparator) {
+        super(false);
         this.comparator = comparator;
     }
 

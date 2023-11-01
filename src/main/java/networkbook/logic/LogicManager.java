@@ -50,6 +50,10 @@ public class LogicManager implements Logic {
         Command command = networkBookParser.parseCommand(commandText);
         commandResult = command.execute(model);
 
+        if (!command.getIsChangingData()) {
+            return commandResult;
+        }
+
         try {
             storage.saveNetworkBook(model.getNetworkBook());
         } catch (AccessDeniedException e) {
