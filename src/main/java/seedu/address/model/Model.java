@@ -13,6 +13,7 @@ import seedu.address.model.employee.Employee;
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
     Predicate<Employee> PREDICATE_SHOW_ALL_EMPLOYEES = unused -> true;
+    Predicate<Employee> PREDICATE_SHOW_EMPLOYEES_ON_LEAVE = Employee::isOnLeaveToday;
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.

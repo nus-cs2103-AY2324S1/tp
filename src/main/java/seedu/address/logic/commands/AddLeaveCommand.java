@@ -50,7 +50,7 @@ public class AddLeaveCommand extends Command {
     private final LocalDate to;
 
     /**
-     * Creates an AddLeaveCommand to add the specified {@code Employee}
+     * Creates an AddLeaveCommand to add the specified {@code Leave}
      */
     public AddLeaveCommand(Id targetId, LocalDate from, LocalDate to) {
         requireAllNonNull(from, to);
