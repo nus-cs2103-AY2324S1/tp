@@ -32,8 +32,8 @@ public class ReminderScheduler extends Thread {
      * @param reminderMutex
      */
     public ReminderScheduler(Model model, Object reminderMutex) {
-        this.model = model;
         this.mutex = reminderMutex;
+        this.model = model;
     }
 
     /**
@@ -72,6 +72,7 @@ public class ReminderScheduler extends Thread {
                     model.getReminderList().updateReminders(model.getAddressBook().getPersonList());
                 } catch (InterruptedException e) {
                     logger.info("ReminderManager thread interrupted");
+
                 }
             }
         }

@@ -42,9 +42,8 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
-        this.reminderList = UniqueReminderList.getInstance();
-        this.reminderList.updateReminders(addressBook.getPersonList());
-        this.reminderScheduler = new ReminderScheduler(this, reminderMutext);
+        this.reminderList = new UniqueReminderList(this);
+        this.reminderList.updateReminders();
     }
 
     public ModelManager() {
