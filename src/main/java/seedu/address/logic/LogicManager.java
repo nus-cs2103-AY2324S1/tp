@@ -66,7 +66,7 @@ public class LogicManager implements Logic {
         Command command;
         CommandResult commandResult;
         command = parser.parseCommand(commandText);
-
+        //checking for undo command
         if (command instanceof UndoCommand) {
             model.setAddressBook(backupModel.getAddressBook());
         } else {
