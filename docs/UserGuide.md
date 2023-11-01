@@ -3,37 +3,88 @@ layout: page
 title: User Guide
 ---
 # BandConnect++ User Guide
-BandConnect++ is a powerful desktop app that helps musicians manage contact with other musicians to easily form a band. You can use it to manage musician contacts, select band members, and form a band of your preference, all within a few clicks or a few seconds of typing!
+Unlock your musical potential with **_BandConnect++_** ! 
+
+**_BandConnect++_** is a powerful desktop app that helps music producers manage their musician contacts and form bands with ease. It is created with a convenient and intuitive Command Line Interface (CLI) that speeds up your work routine.
+
+**_BandConnect++_** is developed by a driven team of musicians/programmers who strives to make life easier for musicians and music producers.  Discover your perfect musical match and create your next big hit now!
 
 --------------------------------------------------------------------------------------------------------------------
 ## About this guide
-Welcome to the *BandConnect++ User Guide*! This user guide provides an in-depth documentation on everything about *BandConnect++*, including installation, set up, features, common FAQ and troubleshooting recommendations. 
+Welcome to the *BandConnect++ User Guide*! This user guide walks you through everything about *BandConnect++*. Whether you are new to our app or a seasoned user, you can always find something useful in this guide. 
 
 For first-time users, please go to the [Quick start](#quick-start) section below to start an end-to-end tutorial that gets you onboard. Should you encounter any difficulty understanding the terminology, don't forget to refer to the [Glossary](#glossary)!
 
-### Table of Contents
+For experienced users, if you need help in remembering a particular command, please see [Command Summary](#command-summary). For common troubleshooting, please see [Troubleshooting](#troubleshooting).
+
+## Table of Contents
 * [Glossary](#glossary)
 * [Quick start](#quick-start)
 * [Features](#features)
+  * [Command Format](#command-format)
+  * [Get help](#get-help--help)
+  * [List all](#list-all-musicians-and-bands--list)
+  * [Features for musicians](#features-for-managing-musicians)
+    * [Add musician](#add-musician--add)
+    * [Remove musician](#remove-musician--remove)
+    * [Edit musician](#edit-musician--edit)
+    * [Tag musician](#tag-musician)
+    * [Find musicians](#find-musicians--find)
+  * [Features for bands](#features-for-managing-bands)
+    * [Create band](#create-band--addb)
+    * [Add musician to band](#add-musician-to-band--addm)
+  * [Clear data](#clear-data--clear)
+  * [Exit app](#exit-app--exit)
+  * [Save data](#save-data)
 * [Command Summary](#command-summary)
 * [Troubleshooting](#troubleshooting)
 
-
 ## Glossary
 To be added.
+CLI, GUI, Java
+--------------------------------------------------------------------------------------------------------------------
+
+# Quick start
+1. Ensure you have Java 11 or above installed in your Computer. If you have never downloaded it before, download from [here](https://www.oracle.com/sg/java/technologies/javase/jdk11-archive-downloads.html).
+
+
+2. Download the latest version of [BandConnect++](https://github.com/AY2324S1-CS2103T-W11-3/tp/releases/latest).
+
+
+3. Move the file to the home folder you want to access the app. 
+
+     Recommended: Drag the downloaded file to your desktop so that you can access it from there.
+
+
+4. From the home folder, open "Terminal" on MacOS or "Command Prompt" in Windows, and type `java -jar BandConnect++.jar` to run the application. A GUI similar to the below should appear in a few seconds.
+   ![to be updated with components labelled](images/tobeupdated.png)
+Note how the app contains some sample data.
+Type the command in the command box and press Enter to execute it. 
+
+
+5. Some example commands you can try:
+   * `help` : Open the help window.
+   * `list` : Lists all contacts. 
+   * `add n/John Doe p/98765432 e/johnd@example.com i/bass g/rock`: Adds rock bassist John Doe.
+   * `delete 3` : Deletes the 3rd musician shown in the current list.
+   * `clear` : Deletes all contacts. 
+   * `exit` : Exits the app.
+   
+Please refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Quick start
-To be added.
+# Features
 
---------------------------------------------------------------------------------------------------------------------
+## Command Format
+to be updated.
 
-## Features
+## Get help: `help`
 
-### Formatting Convention
+## List all musicians and bands: `list`
 
-### Adding a musician contact: `add`
+## Features for managing musicians
+### Add musician: `add`
 
 Adds a musician to the contact book. Name, phone number, email, and instrument can be recorded.
 
@@ -53,7 +104,7 @@ You will see a message indicating successful addition of the musician like below
 Should you input a musician which is already in your contact book (ie. have the same phone number or email as an existing contact),
 you will see an error message showing the possible error. Please input a different phone/email for the current contact or modify the original contact's relevant details.
 
-### Removing a musician contact: `remove`
+### Remove musician: `remove`
 
 Removes a musician contact from the address book.
 
@@ -77,7 +128,11 @@ containing 5 musicians), or input a non-positive index (e.g. `remove 0` or `remo
 
 Please verify that the index is correct and try again.
 
-### Tagging a musician with instruments: `tag instrument`
+### Edit musician: `edit`
+
+### Tag musician
+[combine tag i and g]
+with instruments: `tag instrument`
 
 Tags a musician with one or more instruments he/she is proficient in.
 
@@ -103,7 +158,7 @@ Should you try to tag a musician with zero instrument tags or empty tags, i.e., 
 `tag instrument 1`, you will see a message like below:
 [insert image]
 
-### Tagging a musician with genres: `tag genre`
+Tag musician with genres: `tag genre`
 
 Tags a musician with one or more genres he/she is proficient in.
 
@@ -129,7 +184,7 @@ Should you try to tag a musician with zero genre tags or empty tags, i.e., `tag 
 you will see a message like below:
 [insert image]
 
-### Locating musicians by name: `find`
+### Find musicians: `find`
 
 Finds all musicians whose names contain any of the given keywords.
 
@@ -148,7 +203,8 @@ You will see a list of musicians as follows:
 Should you input `find` without any keyword, you will see a message like below:
 [insert image]
 
-### Creating a band: `addb`
+## Features for managing bands
+### Create band: `addb`
 
 Creates a band with the specified band name.
 
@@ -169,7 +225,7 @@ existing band), you will see an error message showing the possible error. Please
 band or change the name of the existing band.
 [insert image]
 
-### Adding a musician to a band: `addm`
+### Add musician to band: `addm`
 
 Adds a musician to a specified band.
 
@@ -189,25 +245,23 @@ Should you input an index that does not exist, you will see an error message sho
 Please input a different index as pointed out by the error message.
 [insert image]
 
-### Exiting the program : `exit`
+## Clear data: `clear`
+
+## Exit app : `exit`
 
 Exits the program.
 
 Format: `exit`
 
-### Saving the data
+## Save data
 
 BandConnect++ data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
---------------------------------------------------------------------------------------------------------------------
+Congratulations! You are now ready to use **_BandConnect++_**!
 
-## Troubleshooting
-
-[to be added soon]
+If you wish, please refer to the below section for a more succinct [command summary](#command-summary).
 
 --------------------------------------------------------------------------------------------------------------------
-
-
 ## Command summary
 
 
@@ -218,3 +272,11 @@ BandConnect++ data are saved in the hard disk automatically after any command th
 | **Tag Instrument** | `tag instrument INDEX i/INSTRUMENT…​`<br> e.g.,`tag instrument 1 i/piano i/guitar`                             |
 | **Tag Genre**      | `tag genre INDEX g/GENRE…​`<br> e.g., `tag genre 1 g/rock g/pop`                                               |
 | **Find**           | `find KEYWORD`                                                                                                 |
+
+
+
+--------------------------------------------------------------------------------------------------------------------
+## Troubleshooting
+
+[to be added soon]
+
