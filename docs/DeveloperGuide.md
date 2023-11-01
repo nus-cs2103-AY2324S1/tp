@@ -346,7 +346,7 @@ This feature builds upon the current design of Student and ClassDetails.
 
 <box type="info" seamless>
 
-**Note:** The diagram above only shows part of the interactions within the model component.
+**Note:** The diagram above only shows part of the interactions within the model component. The interactions within the logic component are similar to other commands.
 
 </box>
 
