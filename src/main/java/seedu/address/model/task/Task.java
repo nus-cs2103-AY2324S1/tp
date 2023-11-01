@@ -1,7 +1,5 @@
 package seedu.address.model.task;
 
-import seedu.address.commons.util.ToStringBuilder;
-
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
@@ -9,12 +7,20 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Comparator;
 
+import seedu.address.commons.util.ToStringBuilder;
+
+/**
+ * Represents a task in the task list.
+ */
 public class Task {
-    private final TaskDescription description;
-    private final Deadline deadline;
     public static final DateTimeFormatter DATE_TIME_STRING_FORMATTER = DateTimeFormatter.ofPattern(
             "yyyy-MM-dd HH:mm");
+    private final TaskDescription description;
+    private final Deadline deadline;
 
+    /**
+     * Constructs a Task object with the given description and deadline
+     */
     public Task(String description, LocalDateTime deadline) {
         requireNonNull(description);
 
@@ -22,6 +28,9 @@ public class Task {
         this.deadline = new Deadline(deadline);
     }
 
+    /**
+     * Constructs a Task object with the given {@code TaskDescription} and {@code Deadline}
+     */
     public Task(TaskDescription description, Deadline deadline) {
         requireAllNonNull(description, deadline);
 
@@ -70,6 +79,9 @@ public class Task {
                 .toString();
     }
 
+    /**
+     * A comparator to sort the task list by deadline.
+     */
     public static class TaskDeadlineComparator implements Comparator<Task> {
         @Override
         public int compare(Task task1, Task task2) {
@@ -86,6 +98,9 @@ public class Task {
         }
     }
 
+    /**
+     * A comparator to sort the task list by description, alphabetically.
+     */
     public static class TaskDescriptorComparator implements Comparator<Task> {
         public int compare(Task task1, Task task2) {
             return task1.getDescription().compareTo(task2.getDescription());

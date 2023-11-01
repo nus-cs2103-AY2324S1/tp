@@ -231,6 +231,11 @@ public class ModelManager implements Model {
         return taskManager.deleteTask(index);
     }
 
+    @Override
+    public ObservableList<Task> getTaskList() {
+        return taskManager.getTaskList();
+    }
+
     //=========== Filtered Person List Accessors =============================================================
 
     /**

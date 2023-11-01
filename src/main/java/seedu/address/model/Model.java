@@ -155,6 +155,9 @@ public interface Model {
     /** Returns a view of the event list */
     ObservableList<Event> getEventList();
 
+    /** Returns a view of the task list */
+    ObservableList<Task> getTaskList();
+
     /** Returns a view of the event list for the current week */
     ObservableList<Event> getCurrentWeekEventList();
 

@@ -19,6 +19,9 @@ public class CommandResult {
     /** The application should exit. */
     private final boolean exit;
 
+    /** The application should show the task list in the bottom list slot. */
+    private final boolean switchBottomList;
+
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
@@ -26,6 +29,18 @@ public class CommandResult {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
         this.exit = exit;
+        this.switchBottomList = false;
+    }
+
+    /**
+     * Constructs a {@code CommandResult} with the specified {@code feedbackToUser},
+     * the specified boolean to show the task list and default values for the other field.
+     */
+    public CommandResult(String feedbackToUser, boolean switchBottomList) {
+        this.feedbackToUser = feedbackToUser;
+        this.showHelp = false;
+        this.exit = false;
+        this.switchBottomList = switchBottomList;
     }
 
     /**
@@ -46,6 +61,10 @@ public class CommandResult {
 
     public boolean isExit() {
         return exit;
+    }
+
+    public boolean isSwitchBottomList() {
+        return switchBottomList;
     }
 
     @Override
