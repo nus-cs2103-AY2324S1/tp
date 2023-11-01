@@ -4,5 +4,23 @@ skinparam ArrowFontStyle plain
 
 participant ":ClassDetails" as ClassDetails MODEL_COLOR
 participant ":AttendanceTracker" as AttendanceTracker MODEL_COLOR
+participant ":Attendance" as Attendance MODEL_COLOR
 
-[-> ClassDetails : execute("delete s/A0249112A")
+[-> ClassDetails : markPresent()
+activate ClassDetails
+
+ClassDetails -> AttendanceTracker : markPresent()
+activate AttendanceTracker
+
+AttendanceTracker -> Attendance : mark()
+activate Attendance
+
+Attendance --> AttendanceTracker
+deactivate Attendance
+
+AttendanceTracker --> ClassDetails
+deactivate AttendanceTracker
+
+[<--ClassDetails
+deactivate ClassDetails
+@enduml
