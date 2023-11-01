@@ -555,3 +555,18 @@ Action        | Format, Examples
 **Addalt**    | `addalt INDEX [tg/TELEGRAM] [e2/SECONDARY_EMAIL] [li/LINKEDIN]` <br> e.g., `addalt 1 tg/johndoe_telegram e2/johndoe2@example.com`
 **Find**      | `find FIELD/KEYWORD [FIELD/KEYWORD]`
 
+
+<style>
+
+#content-wrapper h1 {
+}
+
+#content-wrapper h2 {
+  margin-top: 3rem;
+}
+
+#content-wrapper h3 {
+  margin-top: 2.5rem;
+}
+
+</style>
