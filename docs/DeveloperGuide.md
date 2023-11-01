@@ -13,7 +13,7 @@
 
 ## **Acknowledgements**
 
-Staff-Snap is based on the [AddressBook-Level3](https://se-education.org/addressbook-level3/) project created by the [SE-EDU initiative](https://se-education.org) and it incorporates the following third-party libraries: [JavaFX](https://openjfx.io/), [Jackson](https://github.com/FasterXML/jackson), [JUnit5](https://junit.org/junit5/), [OpenCSV](https://opencsv.sourceforge.net/project-info.html), [TestFX](https://testfx.github.io/TestFX/docs/javadoc/testfx-core/javadoc/org.testfx/module-summary.html).
+Staff-Snap is based on the [AddressBook-Level3](https://se-education.org/addressbook-level3/) project created by the [SE-EDU initiative](https://se-education.org), and it incorporates the following third-party libraries: [JavaFX](https://openjfx.io/), [Jackson](https://github.com/FasterXML/jackson), [JUnit5](https://junit.org/junit5/), [OpenCSV](https://opencsv.sourceforge.net/project-info.html), [TestFX](https://testfx.github.io/TestFX/docs/javadoc/testfx-core/javadoc/org.testfx/module-summary.html).
 
 
 --------------------------------------------------------------------------------------------------------------------
@@ -64,7 +64,7 @@ Each of the four main components (also shown in the diagram above),
 
 * defines its *API* in an `interface` with the same name as the Component.
 * implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding
-  API `interface` mentioned in the previous point.
+  API `interface` mentioned in the previous point).
 
 For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using
 the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component
@@ -166,8 +166,7 @@ The `Model` component,
 
 The `Storage` component,
 
-* can save both applicant book data and user preference data in JSON format, and read them back into corresponding
-  objects.
+* can save both applicant book data and user preference data in JSON format, and read them back into corresponding objects.
 * inherits from both `ApplicantBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only
   the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects
@@ -202,14 +201,10 @@ The edit applicant feature allows users to edit the details of an applicant.
 
 #### Steps to trigger
 1. The user launches the application.
-2. The user executes `edit 1 hp/87654321 p/front-end engineer` to edit the phone number and position of 
-the first applicant.
-3. The `EditCommandParser#parse()` checks whether the index of the applicant is valid and at least one prefix with
-the required values are provided.
-4. If the check is successful, the `EditCommand#execute()` checks if the identity of the applicant after the edit 
-is the same as the identity of another existing applicant. 
-5. If the identity is not the same, the `Model#setApplicant()` updates the details of the applicant while
-the `Model#updateFilteredApplicantList()` updates applicant list to display the updated applicant list.
+2. The user executes `edit 1 hp/87654321 p/front-end engineer` to edit the phone number and position of the first applicant.
+3. The `EditCommandParser#parse()` checks whether the index of the applicant is valid and at least one prefix with the required values are provided.
+4. If the check is successful, the `EditCommand#execute()` checks if the identity of the applicant after the edit is the same as the identity of another existing applicant. 
+5. If the identity is not the same, the `Model#setApplicant()` updates the details of the applicant while the `Model#updateFilteredApplicantList()` updates applicant list to display the updated applicant list.
 
 ### Help feature
 
@@ -241,19 +236,14 @@ the `Model#updateFilteredApplicantList()` updates applicant list to display the 
 #### Implementation
 
 1. This features requires the state of the parser to be known.
-2. The parser is modified to store the previous taken in command, in this case whether the previous command was a
-   successful clear command.
-3. If the previous command is not a clear command, it looks for the keyword clear. Otherwise, it looks for the keyword
-   yes.
-4. Hence, the user will first need to call clear, before calling yes to invoke the clear mechanism, ensuring safety of
-   data.
+2. The parser is modified to store the previous taken in command, in this case whether the previous command was a successful clear command.
+3. If the previous command is not a clear command, it looks for the keyword clear. Otherwise, it looks for the keyword yes.
+4. Hence, the user will first need to call clear, before calling yes to invoke the clear mechanism, ensuring safety of data.
 
 #### Notes
 
-1. If you would like to extend the code for more features that require state, please do change the case condition for
-   this feature.
-2. Currently, it follows the default commands if a word other than yes is given. But this will be improved in a future
-   update.
+1. If you would like to extend the code for more features that require state, please do change the case condition for this feature.
+2. Currently, it follows the default commands if a word other than yes is given. But this will be improved in a future update.
 3. The state of the parser, rather than the app is used to reduce the chances of accidental clears.
 
 ### Interview feature
@@ -267,37 +257,21 @@ implementation process.
 
 #### Implementation
 
-The `Interview` class is used to store the information of each interview. It contains the following attributes: `type` and `rating`.
-The `type` attribute represents the type of interview, while the `rating` attribute represents how well the applicant performed in 
-an interview (out of 10). The CRUD commands involving `Interview` includes the `AddInterviewCommand`, `EditInterviewCommand`, and 
-`DeleteInterviewCommand`. These are implementation in a largely similar manner to the `Applicant` class. The main difference is in how 
-an `EditInterviewDescriptor` class facilitates the editing of an interview and how the edit and delete commands requires 2 indices: the 
-applicant index as well as the chosen interview index.
+The `Interview` class is used to store the information of each interview. It contains the following attributes: `type` and `rating`. The `type` attribute represents the type of interview, while the `rating` attribute represents how well the applicant performed in an interview (out of 10). The CRUD commands involving `Interview` includes the `AddInterviewCommand`, `EditInterviewCommand`, and `DeleteInterviewCommand`. These are implementation in a largely similar manner to the `Applicant` class. The main difference is in how an `EditInterviewDescriptor` class facilitates the editing of an interview and how the edit and delete commands requires 2 indices: the applicant index as well as the chosen interview index.
 
 #### Design Considerations
 
-In deciding the data structure to house our Interview objects, we were torn between using a `PriorityQueue` and a `List`.
-A `PriorityQueue` would have been useful in sorting the interviews by rating, but it would have been difficult to implement
-the `EditInterviewCommand` and `DeleteInterviewCommand` as the `PriorityQueue` does not have a `get()` method. Also, if we wanted to
-extend a sorting function for interviews in the future, a `PriorityQueue` would make it more difficult for us to change the comparator
-for `Interview` objects. For the sake of extensibility of the codebase, we decided to use a `List` instead. This is because a `List` 
-provides us with greater abstraction and code flexibility in extending various functions for the `Interview` class. 
+In deciding the data structure to house our Interview objects, we were torn between using a `PriorityQueue` and a `List`. A `PriorityQueue` would have been useful in sorting the interviews by rating, but it would have been difficult to implement the `EditInterviewCommand` and `DeleteInterviewCommand` as the `PriorityQueue` does not have a `get()` method. Also, if we wanted to extend a sorting function for interviews in the future, a `PriorityQueue` would make it more difficult for us to change the comparator for `Interview` objects. For the sake of extensibility of the codebase, we decided to use a `List` instead. This is because a `List` provides us with greater abstraction and code flexibility in extending various functions for the `Interview` class. 
 
 ### Sort feature
 
 #### Implementation
 
-The sort feature is facilitated by `Descriptor`, an enumeration which describes the valid fields which can be used to
-sort an applicant.
+The sort feature is facilitated by `Descriptor`, an enumeration which describes the valid fields which can be used to sort an applicant.
 
-To enable sorting, `Applicant` implements `Comparable<Applicant>`, to allow for comparison between applicants.
-To allow for applicants to be sorted by different descriptors, `Applicant` is augmented to contain a static `Descriptor`
-field. This is used in `Applicant#compareTo()`, where a switch case checking the state of the `Descriptor` field will
-then compare the specified field of both applicants.
+To enable sorting, `Applicant` implements `Comparable<Applicant>`, to allow for comparison between applicants. To allow for applicants to be sorted by different descriptors, `Applicant` is augmented to contain a static `Descriptor` field. This is used in `Applicant#compareTo()`, where a switch case checking the state of the `Descriptor` field will then compare the specified field of both applicants.
 
-In order to enable comparison of each valid field, these fields will implement the `Comparable` interface. Currently
-valid
-fields for sorting are
+In order to enable comparison of each valid field, these fields will implement the `Comparable` interface. Currently valid fields for sorting are
 
 1. Name
 2. Phone
@@ -340,12 +314,9 @@ The following diagram summarises what happens when a user executes a Sort comman
 
 #### Implementation
 
-The filter feature works by updating the `Predicate` used in the `FilteredList<Applicant>` of `ModelManager`. Using
-the predicate, minimal changes to the implementation of StaffSnap is required.
+The filter feature works by updating the `Predicate` used in the `FilteredList<Applicant>` of `ModelManager`. Using the predicate, minimal changes to the implementation of StaffSnap is required.
 
-To create a single predicate that is able to search and filter for multiple fields, a `CustomFilterPredicate` class is
-created
-It currently contains the following fields and is able to filter for applicants which match all specified fields.
+To create a single predicate that is able to search and filter for multiple fields, a `CustomFilterPredicate` class is created. It currently contains the following fields and is able to filter for applicants which match all specified fields.
 
 1. Name
 2. Phone
@@ -356,8 +327,7 @@ It currently contains the following fields and is able to filter for applicants 
 7. Greater than score
 
 When `CustomFilterPredicate#test` is called, it will check if the specified fields are a substring of the same field of
-the applicant,
-returning true if all specified fields match, and false otherwise.
+the applicant, returning true if all specified fields match, and false otherwise.
 
 #### Steps to trigger
 
@@ -366,7 +336,7 @@ returning true if all specified fields match, and false otherwise.
    be filtered by
 
 Once step 2 is complete, the GUI will update and refresh the applicant list with only applicants which match all
-specified fields.
+specified fields. 
 The following diagram summarises what happens when a user executes a Filter command:
 
 <puml src="diagrams/FilterCommandActivityDiagram.puml" alt="FilterCommandActivityDiagram" />
@@ -407,21 +377,14 @@ The following diagram summarises what happens when a user executes a Filter comm
 ### Find feature
 
 #### Purpose
-The find feature allows HR managers to find applicants by name, allowing for a faster and more efficient 
-way of finding and tracking specific candidates.
+The find feature allows HR managers to find applicants by name, allowing for a faster and more efficient way of finding and tracking specific candidates.
 
 #### Implementation
-After the user enters the find command in the format `find KEYWORD [MORE_KEYWORDS]`, the input is passed to
-the `ApplicantBookParser` class which calls `FindCommandParser#parse()` which parses the keywords in the input 
-and creates a list of keywords.
+After the user enters the find command in the format `find KEYWORD [MORE_KEYWORDS]`, the input is passed to the `ApplicantBookParser` class which calls `FindCommandParser#parse()` which parses the keywords in the input and creates a list of keywords.
 
-`FindCommandParser` then creates a new instance of `NameContainsKeywordsPredicate` with this list of keywords.
-This `NameContainsKeywordsPredicate` object is then used as the parameter to instantiate a new `FindComand` object.
-`LogicManager#execute()` then calls `FindCommand#execute()` and the current applicant book is updated by
-calling `ModelManager#updateFilteredApplicantList()` which checks which applicant's name contains any of the keywords.
+`FindCommandParser` then creates a new instance of `NameContainsKeywordsPredicate` with this list of keywords. This `NameContainsKeywordsPredicate` object is then used as the parameter to instantiate a new `FindComand` object. `LogicManager#execute()` then calls `FindCommand#execute()` and the current applicant book is updated by calling `ModelManager#updateFilteredApplicantList()` which checks which applicant's name contains any of the keywords.
 
-An instance of `CommandResult` is then created which contains the message and information that will be displayed to
-the user. The GUI then updates to show this information to the user.
+An instance of `CommandResult` is then created which contains the message and information that will be displayed to the user. The GUI then updates to show this information to the user.
 
 
 #### Steps to trigger
@@ -465,8 +428,7 @@ the user. The GUI then updates to show this information to the user.
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: introduces organisation to applicant management, recruitment processes and
-streamlines hiring decisions
+**Value proposition**: introduces organisation to applicant management, recruitment processes and streamlines hiring decisions
 
 ### User stories
 
@@ -577,7 +539,7 @@ Guarantees: The applicants with name matching the search will be listed.
 
 **MSS**
 
-1. User inputs the command to to find an applicant by name.
+1. User inputs the command to find an applicant by name.
 2. Staff-Snap displays the list of all applicants that match the search.
 
    Use case ends.
@@ -792,9 +754,9 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases …​ }_
 
-### Deleting a applicant
+### Deleting an applicant
 
-1. Deleting a applicant while all applicants are being shown
+1. Deleting an applicant while all applicants are being shown
 
     1. Prerequisites: List all applicants using the `list` command. Multiple applicants in the list.
 
