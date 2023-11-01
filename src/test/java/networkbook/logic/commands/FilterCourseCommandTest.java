@@ -2,6 +2,7 @@ package networkbook.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.time.LocalDate;
 import java.util.Collections;
@@ -256,5 +257,16 @@ public class FilterCourseCommandTest {
         expectedModel.updateFilteredPersonList(keyPredicate);
 
         CommandTestUtil.assertCommandSuccess(command, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void filterCourseCommand_executeWithNull_throwsAssertionError() {
+        CourseContainsKeyTermsPredicate keyPredicate = new CourseContainsKeyTermsPredicate(List.of("Fir"));
+        CourseIsStillBeingTakenPredicate takenPredicate =
+                new CourseIsStillBeingTakenPredicate(LocalDate.ofYearDay(2000, 1));
+
+        FilterCommand command = new FilterCourseCommand(keyPredicate, takenPredicate, false);
+
+        assertThrows(AssertionError.class, () -> command.execute(null));
     }
 }
