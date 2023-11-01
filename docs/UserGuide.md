@@ -33,7 +33,7 @@ A window should open with a GUI similar to the one below. Note how the app start
 1. The text box at the top of the window should be automatically selected. This is where you can type your text commands. Press <kbd>Enter</kbd> to execute them.\
 The feedback from each command's execution will be displayed below the text box, with the currently displayed list of contacts below that.
 
-1. Refer to the [Features](#Features) section below to find out about the various commands.
+1. Refer to the [Features](#features) section below to find out about the various commands.
 
 <div markdown="span" class="alert alert-primary">
     :bulb: **Tip:**
@@ -46,7 +46,7 @@ The feedback from each command's execution will be displayed below the text box,
 ## Features
 
 <div markdown="block" class="alert alert-info">
-    **:information_source: Notes about the command format:**\
+    **:information_source: About the command format:**\
 
     - Some commands take in parameters.
     e.g. in `add n/NAME`, the `add` command takes in an `n/` parameter.
@@ -78,7 +78,7 @@ Adds a new contact.
 `add n/NAME p/PHONE_NUMBER e/EMAIL [o/NOTE] [t/TAG]... [a/ALTERNATE_CONTACT]...`
 
 <div markdown="span" class="alert alert-primary">
-    :bulb: **Tip:**
+    :bulb: **About the alternate contact format:**
     The format for `ALTERNATE_CONTACT` is `TYPE: USERNAME`, roughly looking like `SocialMedia: Username`.
 </div>
 
@@ -89,14 +89,21 @@ Adds a new contact.
 
 ### Editing a contact: `edit`
 
-Edits an existing contact.
+Edits an existing contact at the specified `INDEX`.
 
 **Format:**
 `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [o/NOTE] [t/TAG]... [a/ALTERNATE_CONTACT]...`
 
-- Edits the contact at the specified `INDEX`.
-Index refers to the index number currently shown in the displayed contact list.
-Indices must be a positive integer to be valid (1, 2, 3 etc.), and must exist in the displayed contact list.
+<div markdown="span" class="alert alert-primary">
+    :bulb: **About index numbers:**
+    `INDEX` refers to the index number currently shown in the displayed contact list (#1, #2, #3 etc.).
+    Indices must be a positive integer to be valid (1, 2, 3 etc.), and must exist in the displayed contact list.
+</div>
+
+<div markdown="span" class="alert alert-primary">
+    :bulb: **About the alternate contact format:**
+    Please refer to the [above](#adding-a-contact-add).
+</div>
 
 - At least one of the optional parameters must be specified.
 
@@ -113,31 +120,43 @@ e.g. `edit 1 n/The Myth` will edit the name of contact #`1` to `The Myth`, witho
 
 - `edit 3 o/Member of NUS S/U t/` (Edits the note of contact #`3` to `Member of NUS S/U` and clears any of its existing tags.)
 
-### Deleting Contacts: `delete`
+### Deleting contacts: `delete`
 
-Removes one or more contacts based on their indices. The indices refer to the index numbers shown in the displayed contact list.
+Deletes the contact(s) at the specified `INDEX` or indices.
 
 **Format:**
-`delete INDEX [INDEX]...`
+`delete INDEX...`
+
+<div markdown="span" class="alert alert-primary">
+    :bulb: **About index numbers:**
+    Please refer to the [above](#editing-a-contact-edit).
+</div>
 
 - You can delete multiple contacts at once by specifying multiple indices separated by spaces.
-- Indices **must be positive integers** like 1, 2, 3, …​
-- Duplicated indices are only count once.
+
+- Duplicate indices are only counted once.
+
 - Invalid indices will cause abortion of the delete command.
 
 **Examples:**
+
 - `delete 1`
-  Deletes the contact at index 1.
+(Deletes the contact at index #1.)
 
 - `delete 1 3 5`
-  Deletes the contacts at the specified indices: 1, 3, and 5.
+(Deletes the contacts at indices #1, #3, and #5.)
 
-### Clearing All Entries: `clear`
+### Clearing all contacts: `clear`
 
-Remove all contacts from your list. Apply with caution!
+Deletes all contacts!
 
 **Format:**
 `clear`
+
+<div markdown="span" class="alert alert-warning">
+    :exclamation: **Caution:**
+    This command will immediately delete all your contacts. **Use with caution!**
+</div>
 
 ### Listing all contacts: `list`
 
