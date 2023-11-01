@@ -262,8 +262,8 @@ public class PersonProfile extends UiPart<Region> {
     }
 
     private boolean editingInProgress() {
-        return uiElements.values().stream().anyMatch(PersonProfileField::isEditing) ||
-                tagUI.isEditing() || noteUI.isEditing();
+        return uiElements.values().stream().anyMatch(PersonProfileField::isEditing)
+                || tagUI.isEditing() || noteUI.isEditing();
     }
 
     private void sendFeedback(String string) {
