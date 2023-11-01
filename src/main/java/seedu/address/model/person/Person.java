@@ -2,7 +2,14 @@ package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
+import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.tag.Tag;
@@ -78,8 +85,7 @@ public class Person {
     }
 
     /**
-     * Returns true if both persons have the same name.
-     * This defines a weaker notion of equality between two persons.
+     * Returns true if both persons have the same id.
      */
     public boolean isSamePerson(Person otherPerson) {
         if (otherPerson == this) {
@@ -87,7 +93,7 @@ public class Person {
         }
 
         return otherPerson != null
-                && otherPerson.equals(this);
+                && otherPerson.name.equals(this.name);
     }
 
     public void addAttendance(Attendance attendance) {
@@ -123,14 +129,14 @@ public class Person {
      */
     public void mergeAttendanceRecords(List<Attendance> thisAttendanceRecords, List<Attendance> otherAttendanceRecords,
                                        Person newPerson) {
-        HashMap<Week, Attendance> weekAttendanceHashMap = new HashMap<>();
+        HashMap<Integer, Attendance> weekAttendanceHashMap = new HashMap<>();
         for (Attendance a : thisAttendanceRecords) {
-            weekAttendanceHashMap.put(a.getWeek(), a);
+            weekAttendanceHashMap.put(a.getWeek().getWeekNumber(), a);
             newPerson.addAttendance(a);
         }
         for (Attendance a : otherAttendanceRecords) {
-            if (!weekAttendanceHashMap.containsKey(a.getWeek())) {
-                weekAttendanceHashMap.put(a.getWeek(), a);
+            if (!weekAttendanceHashMap.containsKey(a.getWeek().getWeekNumber())) {
+                weekAttendanceHashMap.put(a.getWeek().getWeekNumber(), a);
                 newPerson.addAttendance(a);
             }
         }
