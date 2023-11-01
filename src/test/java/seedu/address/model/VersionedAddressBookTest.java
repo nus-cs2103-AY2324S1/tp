@@ -295,4 +295,25 @@ public class VersionedAddressBookTest {
             versionedAddressBook.undo();
         }
     }
+
+    @Test
+    public void equalsMethod() {
+        VersionedAddressBook versionedAddressBook = prepareAddressBookList(emptyAddressBook);
+        VersionedAddressBook newVersionedAddressBook = prepareAddressBookList(emptyAddressBook);
+
+        // same object -> returns true
+        assertTrue(versionedAddressBook.equals(versionedAddressBook));
+
+        // same value -> returns true
+        assertTrue(versionedAddressBook.equals(newVersionedAddressBook));
+
+        // null -> return false
+        assertFalse(versionedAddressBook.equals(null));
+
+        newVersionedAddressBook.addStudent(AMY);
+        newVersionedAddressBook.setSelectedStudent(AMY);
+
+        // different value -> returns false;
+        assertFalse(versionedAddressBook.equals(newVersionedAddressBook));
+    }
 }
