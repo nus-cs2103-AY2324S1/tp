@@ -1,12 +1,13 @@
 package seedu.address.model.lessons;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.AppUtil.checkArgument;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Objects;
 
+import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.ListEntryField;
+
 
 
 /**
@@ -40,7 +41,9 @@ public class Task extends ListEntryField {
      */
     public Task(String description) {
         requireNonNull(description);
-        checkArgument(isValidTask(description), MESSAGE_CONSTRAINTS);
+        if (!isValidTask(description)) {
+            throw new IllegalArgumentException();
+        }
         this.description = description;
         this.isDone = false;
     }
@@ -48,14 +51,24 @@ public class Task extends ListEntryField {
     /**
      * Constructs a {@code Task}, given the done status
      *
-     * @param description
-     * @param isDone
+     * @param description A valid description of the task.
+     * @param isDone The completion status of the task.
      */
     public Task(String description, boolean isDone) {
         requireAllNonNull(description, isDone);
-        checkArgument(isValidTask(description), MESSAGE_CONSTRAINTS);
+        if (!isValidTask(description)) {
+            throw new IllegalArgumentException();
+        }
         this.description = description;
         this.isDone = isDone;
+    }
+
+    /**
+     * Constructs a {@code Task} used for testing
+     */
+    public Task() {
+        this.description = "testing";
+        this.isDone = false;
     }
 
     /**
@@ -64,8 +77,6 @@ public class Task extends ListEntryField {
     public static boolean isValidTask(String test) {
         return test.matches(VALIDATION_REGEX);
     }
-
-
 
     /**
      * Returns the description of the Task.
@@ -101,6 +112,13 @@ public class Task extends ListEntryField {
     }
 
     /**
+     * Marks the Task as done or not done.
+     * @param isDone The completion status of task to mark/ unmark as.
+     */
+    public void isDoneTask(boolean isDone) {
+        this.isDone = isDone;
+    }
+    /**
      * Returns true if both tasks have the same description.
      * This defines a weaker notion of equality between two tasks.
      */
@@ -124,7 +142,7 @@ public class Task extends ListEntryField {
      * @param task
      * @return
      */
-    public static Task of(String task) {
+    public static Task of(String task) throws ParseException {
         // parse the task
         String description = task.substring(1);
         if (task.charAt(0) == '+') {
@@ -172,8 +190,10 @@ public class Task extends ListEntryField {
         return this.isDone ? "+" : "-" + this.description;
     }
 
+    /**
+     * Returns a clone of this task that is equal to this task.
+     */
     public Task clone() {
-        return new Task(this.description, this.isDone);
+        return new Task(description);
     }
-
 }
