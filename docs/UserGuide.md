@@ -287,18 +287,18 @@ Viola! His phone number has now been updated to **87654321**.
 
 Here is a list of the error messages you may encounter, when the command is entered incorrectly:
 
-| Error Message                                                                              | Reason                                                      |
-|--------------------------------------------------------------------------------------------|-------------------------------------------------------------|
-| `Invalid command format!`                                                                  | Invalid or missing TUTOR_INDEX                              |
-| `The person index provided is invalid`                                                     | TUTOR_INDEX entered is not in the range of number of tutors |
-| `Names should only contain alphanumeric characters and spaces, and it should not be blank` | Tutor name input was either invalid or blank                |
-| `Phone numbers should only contain numbers, and it should be at least 3 digits long`       | Tutor phone number input was either invalid or blank        |
-| `Emails should be of the format local-part@domain and adhere to the following constraints` | Tutor email input was either invalid or blank               |
-| `Multiple values specified for the following single-valued field(s): n/`                   | More than 1 `n/` was given in the command                   |
-| `Multiple values specified for the following single-valued field(s): p/`                   | More than 1 `p/` was given in the command                   |
-| `Multiple values specified for the following single-valued field(s): e/`                   | More than 1 `e/` was given in the command                   |
-| `This tutor already exists in the address book`                                            | There is a tutor with the same name in the address book     |
-| `At least one field to edit must be provided`                                              | There is no `n/`, `p/` or `e/` tag provided to edit a field |
+| Error Message                                                                              | Reason                                                       |
+|--------------------------------------------------------------------------------------------|--------------------------------------------------------------|
+| `Invalid command format!`                                                                  | Invalid or missing TUTOR_INDEX.                              |
+| `The person index provided is invalid`                                                     | TUTOR_INDEX entered is not in the range of number of tutors. |
+| `Names should only contain alphanumeric characters and spaces, and it should not be blank` | Tutor name input was either invalid or blank.                |
+| `Phone numbers should only contain numbers, and it should be at least 3 digits long`       | Tutor phone number input was either invalid or blank.        |
+| `Emails should be of the format local-part@domain and adhere to the following constraints` | Tutor email input was either invalid or blank.               |
+| `Multiple values specified for the following single-valued field(s): n/`                   | More than 1 `n/` was given in the command.                   |
+| `Multiple values specified for the following single-valued field(s): p/`                   | More than 1 `p/` was given in the command.                   |
+| `Multiple values specified for the following single-valued field(s): e/`                   | More than 1 `e/` was given in the command.                   |
+| `This tutor already exists in the address book`                                            | There is a tutor with the same name in the address book.     |
+| `At least one field to edit must be provided`                                              | There is no `n/`, `p/` or `e/` tag provided to edit a field. |
 
 You can also refer to [input information](#input-examples) for details about valid inputs.
 
@@ -306,29 +306,37 @@ You can also refer to [input information](#input-examples) for details about val
 
 #### Listing all tutors: `list-t`
 
-Displays a list of all tutors in the address book in a table format.
+Displays a list of all tutors in TutorConnect.
+
+##### :star: First time users
+{:.no_toc}
+
+**Scenario**
+
+Imagine that you have found the details of the tutor **John Doe** and want to go back to view the list of tutors.\
+As a tuition centre coordinator, you want to view the list of tutors after filtering the list of tutors.
+
+Let's use the list tutor command to view the most updated list of tutors!
+
+**Follow these steps:**
+
+1. Type in `find-t John` and press enter to find any tutors with the name John.
+2. Let's say you have successfully found one tutor named John Doe.
+3. Type in `list-t` and press enter to go back to view the full updated list of tutors.
+
+**What you can expect to see**
+
+Great job! You have found the full updated list of tutors.
 
 ![list tutor](images/listTutor.png)
 
-**Format**: `list-t`
+##### :star::star::star: Experienced users
+{:.no_toc}
 
-**Example**:
-* `list-t`
+Unlike [`list-s`](#listing-all-schedules-list-s), `list-t` does not take in any fields.\
+Anything you type after `list-t` will be ignored.
 
-**Expected Output**:
-* `Listed all tutors`
-
-    <div markdown="block" class="alert alert-info">
-
-    **:information_source: Information**<br>
-    
-    * list-t command does not take in any parameters.
-    * Any extraneous parameters after `list-t` will be ignored.
-      e.g. if the command specifies `list-t 123`, it will be interpreted as `list-t`.
-    * No error messages as anything typed behind is ignored.
-    
-    </div>
-
+[Back To Top](#table-of-contents)
 
 #### Locating tutors by name: `find-t`
 
@@ -365,9 +373,9 @@ Tada! You have found tutor **John Doe** (and any other tutors whose name contain
 
 This command is relatively straight forward to use and has only 1 possible error:
 
-| Error Message             | Reason                         |
-|---------------------------|--------------------------------|
-| `Invalid command format!` | No search keyword was provided |
+| Error Message             | Reason                          |
+|---------------------------|---------------------------------|
+| `Invalid command format!` | No search keyword was provided. |
 
 <div markdown="block" class="alert alert-info">
 
@@ -386,26 +394,46 @@ You can also refer to [input information](#input-examples) for details about val
 
 #### Deleting a tutor: `delete-t`
 
-Deletes a tutor in the address book based on their index number in the table.
+Deletes a tutor from TutorConnect.
+
+##### :star: First time users
+{:.no_toc}
+
+**Scenario**
+
+Imagine the tutor **John Doe** has left the tuition centre and you want to remove him from the tutor list to keep
+the list of tutors updated.
+
+No worries! Let the delete tutor command help you to remove **John Doe** from the tutor list.
+
+**Follow these steps**
+
+1. Type `list-t` and press enter to get the index number of the tutor to be deleted.
+2. Let's say the tutor to be deleted **John Doe**, is in position 9 of the tutor list.
+3. Type `delete-t 9` and press enter.
+
+**What you can expect to see**
+
+Well done! You have deleted tutor **John Doe**.
 
 ![delete tutor](images/deleteTutor.png)
 
-**Format**: `delete-t TUTOR_INDEX`
+##### :star::star::star: Experienced users
+{:.no_toc}
 
-**Examples**:
-* `delete-t 5` deletes the tutor that is indexed as 5 in the address book.
-* `list` followed by `delete-t 2` deletes the 2nd person in the address book.
+**Command format**
+![delete tutor command](images/deleteTutorCommandSyntax.png)
 
-**Acceptable values for each parameter**:
-* `TUTOR_INDEX`: Only accepts numerical value
+**Errors you might encounter**
 
-**Expected output**:
-* `Tutor has been deleted: Alex Yeoh; Phone: 87438807;
-  Email: alexyeoh@example.com`
+Here is a list of the error messages you may encounter, when the command is entered incorrectly:
 
-**Error messages**:
-* `Invalid command format!`: No tutor index provided or parameter given is not a numerical value.
-* `Tutor index provided is out of range`: Given tutor index is out of range.
+| Error Message                          | Reason                                                       |
+|----------------------------------------|--------------------------------------------------------------|
+| `Invalid command format!`              | Invalid or missing TUTOR_INDEX.                              |
+| `The person index provided is invalid` | TUTOR_INDEX entered is not in the range of number of tutors. |
+
+You can also refer to [input information](#input-examples) for details about valid inputs.
 
 [Back To Top](#table-of-contents)
 
@@ -641,11 +669,35 @@ You can also refer to [input information](#input-examples) for details about val
 
 #### Marking a schedule: `mark`
 
-Adds the status of a schedule in the address book based on their index number in the table of schedules listed.
+Sets the status of a schedule in TutorConnect.
+
+##### :star: First time users
+{:.no_toc}
+
+**Scenario**
+
+A class has ended and hence the schedule representing that class should be now marked as COMPLETED.
+
+Fret not as you can do just that with the mark command.
+
+**Follow these steps**
+
+1. Type in `list-s`, press enter, and find the schedule you want to mark as COMPLETED.
+2. Let's say the schedule is at position 1.
+3. Type in `mark 1 m/1` and press enter.
+
+**What you can expect to see**
+
+Yay! The schedule has been marked as COMPLETED.
 
 ![mark schedule](images/markSchedule.png)
-**Format:** `mark SCHEDULE_INDEX m/SCHEDULE_STATUS`
 
+##### :star::star::star: Experienced users
+{:.no_toc}
+
+**Command format**
+
+![mark schedule command](images/markScheduleCommandSyntax.png)
 
 <div markdown="block" class="alert alert-info">
 
@@ -654,29 +706,23 @@ Adds the status of a schedule in the address book based on their index number in
 * There are only two types of Schedule status: MISSED or COMPLETED.
 * To set the status of the specified schedule to MISSED, input `m/0` as 0 indicates the MISSED status.
 * To set the status of the specified schedule to COMPLETED, input `m/1` as 1 indicates the COMPLETED status.
-</div>
 * Any inputs other than 0 or 1 will result in an invalid status message displayed.
 
+</div>
 
-**Example:**
-* `mark 5 m/0` adds the MISSED status to the schedule indexed at 5 in the schedule list.
-* `mark 5 m/1` adds the COMPLETED status to the schedule indexed at 5 in the schedule list.
-* `list-s` followed by `mark 1 m/0` adds the MISSED status to the schedule indexed at 1 in the schedule list.
-* `list-s` followed by `mark 1 m/1` adds the COMPLETED status to the schedule indexed at 1 in the schedule list.
-**Acceptable values for each parameter:**
+**Errors you might encounter**
 
-* `SCHEDULE_STATUS`: Only numerical inputs of 0 to indicate MISSED and 1 to indicate COMPLETED status of the 
-* `SCHEDULE_INDEX`: Only numerical input that ranges from 1 to the last schedule shown in the list of schedules.
+Here is a list of the error messages you may encounter, when the command is entered incorrectly:
 
-specified schedule.
-**Expected Output:**
-* `Marked Schedule as Completed: John Doe; Start Time: Sep 15 2023 09:00; End Time: Sep 15 2023 11:00`
+| Error Message                                             | Reason                                                             |
+|-----------------------------------------------------------|--------------------------------------------------------------------|
+| `Invalid command format!`                                 | Invalid or missing SCHEDULE_INDEX or SCHEDULE_STATUS or both.      |
+| `The schedule index provided is invalid`                  | SCHEDULE_INDEX entered is not in the range of number of schedules. |
+| `Status has to be either MISSED (m/0) or COMPLETED (m/1)` | SCHEDULE_STATUS entered is not 0 or 1.                             |
 
-**Error Messages:**
-* `Marked Schedule as Missed: Betsy Crowe; Start Time: Sep 16 2023 17:00; End Time: Sep 15 2023 19:00`
-* `Invalid command format!`: Invalid or missing SCHEDULE_INDEX OR SCHEDULE_STATUS or both.
-* `Index number given is out of range`: The schedule index provided is invalid.
-* `Status has to be either MISSED (m/0) or COMPLETED (m/1)`: The schedule status provided is invalid.
+You can also refer to [input information](#input-examples) for details about valid inputs.
+
+[Back To Top](#table-of-contents)
 
 #### Unmarking a schedule: `unmark`
 
@@ -715,10 +761,10 @@ Phew! The schedule has now been unmarked.
 
 Here is a list of the error messages you may encounter, when the command is entered incorrectly:
 
-| Error Message                            | Reason                                                            |
-|------------------------------------------|-------------------------------------------------------------------|
-| `Invalid command format!`                | Invalid or missing SCHEDULE_INDEX                                 |
-| `The schedule index provided is invalid` | SCHEDULE_INDEX entered is not in the range of number of schedules |
+| Error Message                            | Reason                                                             |
+|------------------------------------------|--------------------------------------------------------------------|
+| `Invalid command format!`                | Invalid or missing SCHEDULE_INDEX.                                 |
+| `The schedule index provided is invalid` | SCHEDULE_INDEX entered is not in the range of number of schedules. |
 
 You can also refer to [input information](#input-examples) for details about valid inputs.
 
@@ -747,7 +793,7 @@ Deletes a schedule in the address book based on their index number in the table 
 * `Invalid value in parameter SCHEDULE_INDEX`: Parameter given is not a numerical value.
 * `Missing parameter SCHEDULE_INDEX`: A numerical value is not provided when calling the command `delete-s`.
 
-#### View calendar: `show`
+#### Viewing calendar: `show`
 
 Displays schedules on a specified day as a calendar view.
 
