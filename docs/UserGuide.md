@@ -25,13 +25,11 @@ InsureIQ is a **contact management system of large car owners database with poli
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-   * `list` : Lists all persons.
+   * `list` : Lists all clients.
 
-   * `add n/Mary i/627A c/73052859 l/SLU5237J` : Adds a person named `Mary` to InsureIQ.
+   * `delete 3` : Deletes the 3rd client shown in the current list.
 
-   * `delete 3` : Deletes the 3rd person shown in the current list.
-
-   * `clear` : Deletes all persons.
+   * `clear` : Deletes all clients.
 
    * `exit` : Exits the app.
 
@@ -100,7 +98,7 @@ Expected output upon failure:
 
 ### Listing all clients : `list`
 
-Shows a list of all persons in the database.
+Shows a list of all clients in the database.
 
 Format: `list`
 
@@ -173,16 +171,16 @@ Expected output upon failure:
 
 ### Deleting a client : `delete`
 
-Deletes the specified person from the database.
+Deletes the specified client from the database.
 
 Format: `delete INDEX`
 
-* Deletes the person at the specified `INDEX`.
+* Deletes the client at the specified `INDEX`.
 * The index refers to the index number shown in the displayed list of clients and is a compulsory field.
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the database.
-* `find n/Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+* `list` followed by `delete 2` deletes the 2nd client in the database.
+* `find n/Betsy` followed by `delete 1` deletes the 1st client in the results of the `find` command.
 
 Acceptable values for each parameter:
 * `INDEX` : It must be a **must be a positive integer** 1, 2, 3, …​
