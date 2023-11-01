@@ -153,15 +153,7 @@ licence plates contains `SLA`
 Examples:
 * `find n/mary` returns all clients that has the name `Mary` such as `Mary Lim`, `Mary Koh`, `Mary White`
 * `find n/Hans Bo` returns all clients that has the name `Hans Bo` but not those with names `Hans` or `Bo` in it
-* `find n/john pn/AB12345J` returns the clients whose name contains `John` with policy number `AB12345J`
-
-Acceptable values for each parameter:
-* `n/NAME` : Alphabets 
-* `i/NRIC` : Alphanumeric, _exactly_ 4 characters 
-* `c/CONTACT NUMBER` : Numeric, _exactly_ 8 characters 
-* `l/LICENCE PLATE` : Alphanumeric, _up to_ 9 characters 
-  * `pn/POLICY NUMBER` : Alphanumeric, _exactly_ 8 characters
-* `pi/POLICY ISSUE DATE` and `pe/POLICY EXPIRY DATE` : Date in the format _dd-mm-yyyy_
+* `find n/john pn/AB12345J` returns all clients whose name contains `John` with policy number `AB12345J`
 
 Expected output upon success:
 
@@ -215,24 +207,16 @@ Examples:
 
 Expected output upon success : `Address book has been sorted!`
 
-### Header think of it later : `remind`
+### Remind user of clients policy expiration date : `remind`
 
 Reminds the user of clients that have approaching policy expiration date within a certain number of days.
 
 Format: `remind NUMBER_OF_DAYS`
 
-* The search is case-insensitive e.g. `hans` will match `Hans`
-* The order of the fields does not matter. e.g. `find n/Hans i/123B` is the same as `find i/123B n/Hans`
-* **At least one** of the fields must be present
-* Value given with white spaces for each field is treated as 1 value e.g. `find n/Hans Bo` will return clients with
-  names `Hans Bo` in it
-* Clients that partially matches with the field given will be returned e.g. `find l/SLA` will return all clients whose
-  licence plates contains `SLA`
+* Filters the list based on policy expiry date that is within `NUMBER_OF_DAYS` from current date
 
 Examples:
-* `find n/mary` returns all clients that has the name `Mary` such as `Mary Lim`, `Mary Koh`, `Mary White`
-* `find n/Hans Bo` returns all clients that has the name `Hans Bo` but not those with names `Hans` or `Bo` in it
-* `find n/john pn/AB12345J` returns the clients whose name contains `John` with policy number `AB12345J`
+* `remind 30` returns the all clients with policy expiry date within 30 days from current date
 
 Acceptable values for each parameter:
 * `NUMBER_OF_DAYS` : Numeric, range from _0_ to _7305_
@@ -240,16 +224,14 @@ Acceptable values for each parameter:
 Expected output upon success:
 
 Expected output upon failure:
-* Format error in any field:<br>
-  `Error: Please adhere to the format for the fields`
-* No field given:<br>
-  `Invalid command format!  
-  find: Finds all persons whose names contain any of the specified fields (case-insensitive for values) and displays them as a list with index numbers.  
-  Parameters: [n/NAME] [l/LICENCE PLATE] [n/NAME] [i/NRIC] [c/CONTACT NUMBER] [l/LICENCE PLATE] [e/EMAIL][c/COMPANY] [pn/POLICY NUMBER] [pi/POLICY ISSUE DATE] [pe/POLICY EXPIRY DATE]  
-  At least one parameter must be present.  
-  Example: find n/Alice Rodriguez`
-* Field flag given but no value:<br>
-  `Error: Please give a value in the field(s) indicated`
+* `NUMBER_OF_DAYS` is not in range _0_ to _7305_:<br>
+`Error: The value has to be between 0 and 7305 (both inclusive)`
+* `NUMBER_OF_DAYS` is not numeric:<br>
+`Invalid command format! Error: The value is not a number`
+* `NUMBER_OF_DAYS` is not given:<br>
+`Invalid command format!  
+  remind: Finds all persons whose policy expiry dates is within the specified number of days.
+Parameters: Number of days Example: remind 30`
 
 ### Clearing all entries : `clear`
 
