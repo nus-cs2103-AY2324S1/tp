@@ -18,6 +18,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.note.Note;
+import seedu.address.model.note.NoteID;
 import seedu.address.model.person.ContactID;
 
 public class DeleteNoteCommandTest {
@@ -34,25 +35,27 @@ public class DeleteNoteCommandTest {
     @Test
     public void execute_correctCommand_success() throws CommandException {
         ContactID contactId = ContactID.fromInt(1);
+        NoteID noteId = NoteID.fromInt(1);
         model.findPersonByUserFriendlyId(contactId).addNote(VALID_NOTE_0);
-        assertCommandSuccessWithFeedback(() -> new DeleteNoteCommand(contactId.getId(), 1)
-                .execute(model), DeleteNoteCommand.MESSAGE_SUCCESS + "1");
+        assertCommandSuccessWithFeedback(() -> new DeleteNoteCommand(contactId, noteId)
+                .execute(model), DeleteNoteCommand.MESSAGE_SUCCESS + "1. Meeting Topics");
     }
 
     @Test
     public void execute_personNotFound_fails() throws CommandException {
-        int personId = 999;
-        assertCommandFailWithFeedback(() -> new DeleteNoteCommand(personId, 1)
-                .execute(model), DeleteNoteCommand.MESSAGE_PERSON_NOT_FOUND + personId);
+        ContactID contactId = ContactID.fromInt(999);
+        NoteID noteId = NoteID.fromInt(1);
+        assertCommandFailWithFeedback(() -> new DeleteNoteCommand(contactId, noteId)
+                .execute(model), DeleteNoteCommand.MESSAGE_PERSON_NOT_FOUND + contactId.getId());
     }
 
     @Test
     public void execute_noteNotFound_fails() throws CommandException {
         ContactID contactId = ContactID.fromInt(1);
-        int invalidNoteId = 99999;
+        NoteID invalidNoteId = NoteID.fromInt(99999);
         model.findPersonByUserFriendlyId(contactId).addNote(VALID_NOTE_0);
-        assertCommandFailWithFeedback(() -> new DeleteNoteCommand(contactId.getId(), invalidNoteId)
-                .execute(model), DeleteNoteCommand.MESSAGE_NOTE_NOT_FOUND + invalidNoteId);
+        assertCommandFailWithFeedback(() -> new DeleteNoteCommand(contactId, invalidNoteId)
+                .execute(model), DeleteNoteCommand.MESSAGE_NOTE_NOT_FOUND + invalidNoteId.getId());
     }
 
     private void assertCommandSuccessWithFeedback(ThrowingSupplier<CommandResult> function, String result) {
@@ -78,17 +81,17 @@ public class DeleteNoteCommandTest {
 
     @Test
     public void equals() {
-        DeleteNoteCommand deleteNoteACommand = new DeleteNoteCommand(Integer.parseInt(VALID_NOTE_A_PERSON_ID),
-                Integer.parseInt(VALID_NOTE_A_NOTE_ID));
-        DeleteNoteCommand deleteNoteBCommand = new DeleteNoteCommand(Integer.parseInt(VALID_NOTE_B_PERSON_ID),
-                Integer.parseInt(VALID_NOTE_B_NOTE_ID));
+        DeleteNoteCommand deleteNoteACommand = new DeleteNoteCommand(ContactID.fromString(VALID_NOTE_A_PERSON_ID),
+                NoteID.fromString(VALID_NOTE_A_NOTE_ID));
+        DeleteNoteCommand deleteNoteBCommand = new DeleteNoteCommand(ContactID.fromString(VALID_NOTE_B_PERSON_ID),
+                NoteID.fromString(VALID_NOTE_B_NOTE_ID));
 
         // same object -> returns true
         assertTrue(deleteNoteACommand.equals(deleteNoteACommand));
 
         // same values -> returns true
-        DeleteNoteCommand deleteNoteACommandCopy = new DeleteNoteCommand(Integer.parseInt(VALID_NOTE_A_PERSON_ID),
-                Integer.parseInt(VALID_NOTE_A_NOTE_ID));
+        DeleteNoteCommand deleteNoteACommandCopy = new DeleteNoteCommand(ContactID.fromString(VALID_NOTE_A_PERSON_ID),
+                NoteID.fromString(VALID_NOTE_A_NOTE_ID));
         assertTrue(deleteNoteACommand.equals(deleteNoteACommandCopy));
 
         // different types -> returns false
