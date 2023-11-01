@@ -268,6 +268,10 @@ public class MainWindow extends UiPart<Stage> {
      * @param person The person to show the details of.
      */
     public void handleShowPerson(Person person) {
+        if (person == null) {
+            studentDetailList.setVisible(false);
+            return;
+        }
         studentDetailList.setVisible(true);
         studentDetailListPanel.setPersonDetails(person, model);
     }
@@ -278,6 +282,10 @@ public class MainWindow extends UiPart<Stage> {
      * @param lesson The lesson to show the details of.
      */
     public void handleShowLesson(Lesson lesson) {
+        if (lesson == null) {
+            lessonDetailList.setVisible(false);
+            return;
+        }
         lessonDetailList.setVisible(true);
         lessonDetailListPanel.setLessonDetails(lesson, model);
     }

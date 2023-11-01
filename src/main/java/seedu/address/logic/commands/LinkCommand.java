@@ -7,6 +7,7 @@ import seedu.address.model.Model;
 import seedu.address.model.lessons.Lesson;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
+import seedu.address.model.state.State;
 
 /**
  * Links a student to a lesson
@@ -46,6 +47,12 @@ public class LinkCommand extends Command {
             Person person = personSet.iterator().next();
             Lesson lesson = lessonSet.iterator().next();
             model.linkWith(person, lesson);
+            State state = model.getState();
+            if (state == State.STUDENT && model.getCurrentlyDisplayedPerson().equals(person)) {
+                model.showPerson(person);
+            } else if (state == State.SCHEDULE && model.getCurrentlyDisplayedLesson().equals(lesson)) {
+                model.showLesson(lesson);
+            }
             return new CommandResult("Linked " + person.getName() + " to " + lesson.getName());
         }
     }

@@ -28,6 +28,7 @@ public class EditLessonCommand extends AbstractEditCommand<Lesson> {
         hasClashWith = model::hasLessonClashWith;
         deleteMethod = model::deleteLesson;
         addMethod = model::addLesson;
+        showMethod = model::showLesson;
     }
 
     @Override
