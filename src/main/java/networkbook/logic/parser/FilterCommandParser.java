@@ -50,9 +50,9 @@ public class FilterCommandParser implements Parser<FilterCommand> {
         String compArgs = argMultimap.getValue(CliSyntax.PREFIX_FILTER_ARGS).orElse("");
 
         switch (field) {
-        case "spec":
+        case FilterSpecCommand.FIELD_NAME:
             return parseSpec(compArgs);
-        case "course":
+        case FilterCourseCommand.FIELD_NAME:
             return parseCourse(compArgs);
         default:
             break;
@@ -70,7 +70,7 @@ public class FilterCommandParser implements Parser<FilterCommand> {
     public FilterCommand parseCourse(String course) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(
-                        course,
+                        " " + course,
                         CliSyntax.PREFIX_FILTER_FIN
                 );
 
