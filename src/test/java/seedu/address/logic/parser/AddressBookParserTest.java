@@ -136,7 +136,7 @@ public class AddressBookParserTest {
         RandomCommand command = (RandomCommand) parser.parseCommand(RandomCommand.COMMAND_WORD + " "
                         + num,
                 true);
-        assertEquals(new RandomCommand(Index.fromOneBased(num)), command);
+        assertEquals(new RandomCommand(num), command);
     }
 
     @Test

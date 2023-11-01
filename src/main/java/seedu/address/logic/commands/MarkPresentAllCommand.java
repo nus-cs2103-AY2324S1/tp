@@ -41,6 +41,9 @@ public class MarkPresentAllCommand extends Command {
                 Student markedStudent = studentToMark.copy();
                 markedStudent.markPresent(index);
                 model.setStudent(studentToMark, markedStudent);
+                if (model.isSelectedStudent(studentToMark)) {
+                    model.setSelectedStudent(markedStudent);
+                }
             }
         } catch (CommandException e) {
             throw new CommandException(e.getMessage());

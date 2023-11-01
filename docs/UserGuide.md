@@ -118,7 +118,7 @@ Format: `help`
 
 Adds a student to the class manager.
 
-Format: `add n/NAME p/PHONE e/EMAIL s/STUDENT NUMBER c/CLASS NUMBER [t/TAG]...​`
+Format: `add n/NAME p/PHONE e/EMAIL s/STUDENT_NUMBER c/CLASS_NUMBER [t/TAG]…​`
 
 * **ALL** the fields must be provided.
 * The NAME fields are case-sensitive.
@@ -139,7 +139,7 @@ Examples:
 ---
 ### Listing all student details : `list`
 
-Shows a list of all student details in the class manager.
+Shows a list of all students in the class manager.
 
 Format: `list`
 
@@ -158,8 +158,8 @@ Format: `edit STUDENT_NUMBER [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [s/NEW_STUDENT_
 * The NEW_STUDENT_NUMBER must be valid and unique (does not exist in the class manager).
 
 Examples:
-*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st student to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower` Edits the name of the 2nd student to be `Betsy Crower`.
+*  `edit A0245234A p/91234567 e/johndoe@example.com` Edits the phone number and email address of the student with `STUDENT_NUMBER` A0245234A to be `91234567` and `johndoe@example.com` respectively.
+*  `edit A0223344A n/Betsy Crower` Edits the name of the student with `STUDENT_NUMBER` A0223344A to be `Betsy Crower`.
 
 ---
 
@@ -200,7 +200,7 @@ Examples:
 
 ### Lookup students : `lookup`
 
-Lookup student details containing any of the given fields.
+Lookup students with any of the given fields.
 
 Format: `lookup [c/CLASS_NUMBER] [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [s/STUDENT_NUMBER] [t/TAG]`
 
@@ -244,7 +244,7 @@ Marking tutorial attendance for an existing student as present in the class mana
 Format: `mark-pre TUTORIAL_INDEX s/STUDENT_NUMBER`
 
 * The `STUDENT_NUMBER` must be valid and exist.
-* The `TUTORIAL_INDEX` must be a valid positive integer, within the configured tutorial count using the `config` command.
+* The `TUTORIAL_INDEX` must be a valid positive integer, within the configured tutorial count given in the `config` command.
 
 Examples:
 * `mark-pre 1 s/A0249112A`
@@ -253,11 +253,11 @@ Examples:
 
 ### Marking tutorial attendance for all students displayed as present : `mark-pre-all`
 
-Marking tutorial attendance for all students displayed as present in the class manager.
+Marking tutorial attendance for all students in current list displayed as present in the class manager.
 
 Format: `mark-pre-all TUTORIAL_INDEX`
 
-* The `TUTORIAL_INDEX` must be a valid positive integer, within the configured tutorial count using the `config` command.
+* The `TUTORIAL_INDEX` must be a valid positive integer, within the configured tutorial count given in the `config` command.
 
 Examples:
 * `mark-pre-all 1`
@@ -271,7 +271,7 @@ Marking tutorial attendance for an existing student as absent in the class manag
 Format: `mark-abs TUTORIAL_INDEX s/STUDENT_NUMBER`
 
 * The `STUDENT_NUMBER` must be valid and exist.
-* The `TUTORIAL_INDEX` must be a valid positive integer, within the configured tutorial count using the `config` command.
+* The `TUTORIAL_INDEX` must be a valid positive integer, within the configured tutorial count given in the `config` command.
 
 Examples:
 * `mark-abs 1 s/A0249112A`
@@ -285,7 +285,7 @@ Setting an assignment grade for an existing student in the class manager.
 Format: `grade s/STUDENT_NUMBER a/ASSIGNMENT_INDEX g/GRADE`
 
 * The `STUDENT_NUMBER` must be valid and exist.
-* The `ASSIGNMENT_INDEX` must be a valid positive integer, within the configured assignment count using the `config` command.
+* The `ASSIGNMENT_INDEX` must be a valid positive integer, within the configured assignment count given in the `config` command.
 * The `GRADE` must be a valid integer between 0 and 100.
 
 Examples:
@@ -300,7 +300,7 @@ Recording the class participation level for an existing student in the class man
 Format: `class-part s/STUDENT_NUMBER tut/TUTORIAL_INDEX part/PARTICIPATION_LEVEL`
 
 * The `STUDENT_NUMBER` must be valid and exist.
-* The `TUTORIAL_INDEX` must be a valid positive integer, within the configured tutorial count using the `config` command.
+* The `TUTORIAL_INDEX` must be a valid positive integer, within the configured tutorial count given in the `config` command.
 * The `PARTICIPATION_LEVEL` must be either `true` or `false`.
   * The `true` value indicates that the student has participated in the tutorial, while the `false` value indicates that the student has not participated in the tutorial.
 * The `PARTICIPATION_LEVEL` is case-insensitive.
@@ -332,9 +332,9 @@ Example:
 
 Select a specific number of students from all students displayed in the class manager.
 
-Format: `random INDEX`
+Format: `random NUMBER_OF_STUDENTS`
 
-* The `INDEX` must be a valid positive integer.
+* The `NUMBER_OF_STUDENT` must be a valid positive integer.
 
 Example:
 
@@ -346,7 +346,7 @@ Deletes the specific student.
 
 Format: `delete s/STUDENT_NUMBER`
 
-* The STUDENT_NUMBER must be valid and exist.
+* The `STUDENT_NUMBER` must be valid and exist.
 
 Example:
 * `delete s/A0249112A`
@@ -361,9 +361,9 @@ Format: `clear`
 
 ---
 
-### Exiting the program : `exit`
+### Exiting the application : `exit`
 
-Exits the program.
+Exits the application.
 
 Format: `exit`
 
@@ -450,7 +450,7 @@ Format: `theme`
 ### Core commands with parameters
 | Action                         | Format, Examples                                                                                                                                                 |
 |--------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**                        | `add n/NAME p/PHONE_NUMBER e/EMAIL c/CLASS_NUMBER [t/TAG]…​` <br> e.g `add n/James Ho p/22224444 e/jamesho@example.com c/T11 t/friend t/colleague`               |
+| **Add**                        | `add n/NAME p/PHONE_NUMBER e/EMAIL c/CLASS_NUMBER s/STUDENT_NUMBER [t/TAG]…​` <br> e.g `add n/James Ho p/22224444 e/jamesho@example.com s/A0245234A c/T11 t/friend` |
 | **Comment**                    | `comment s/STUDENT_NUMBER c/COMMENT` <br> e.g. `comment s/A0249112A c/This student is very hardworking.`                                                         |
 | **Delete**                     | `delete s/STUDENT_NUMBER`<br> e.g. `delete s/A0249112A`                                                                                                          |
 | **Edit**                       | `edit STUDENT_NUMBER [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [s/NEW_STUDENT_NUMBER] [c/CLASS_NUMBER]`<br> e.g.`edit A0245234A n/John Bob p/98761234 e/johnd@exp.com` |
@@ -459,11 +459,11 @@ Format: `theme`
 | **Mark Absent**                | `mark-abs TUTORIAL_INDEX s/STUDENT_NUMBER` <br> e.g. `mark-abs 1 s/A0245234A`                                                                                    |
 | **Mark Present**               | `mark-pre TUTORIAL_INDEX s/STUDENT_NUMBER` <br> e.g. `mark-pre 1 s/A0245234A`                                                                                    |
 | **Mark Present All**           | `mark-pre-all TUTORIAL_INDEX` <br> e.g. `mark-pre-all 1`                                                                                                         |
-| **Random**                     | `random INDEX` <br> e.g. `random 2`                                                                                                                              |
+| **Random**                     | `random NUM_OF_STUDENTS` <br> e.g. `random 2`                                                                                                                     |
 | **Record Class participation** | `class-part s/STUDENT_NUMBER tut/TUTORIAL_INDEX part/PARTICIPATION_LEVEL` <br> e.g. `class-part s/A0245234A tut/1 part/true`                                     |
 | **Set Grade**                  | `grade s/STUDENT_NUMBER a/ASSIGNMENT_INDEX g/GRADE` <br> e.g. `grade s/A0245234A a/1 g/100`                                                                      |
-| **Tag**                        | `tag STUDENT_NUMBER [/add] [/delete] t/[TAG]…​` <br> e.g. `tag A0123456N t/smart t/shy`                                                                          |
-| **View**                       | `view STUDENT_NUMBER` <br> e.g. `view A0245234A`                                                                                                                 |
+| **Tag**                        | `tag s/STUDENT_NUMBER [/add] [/delete] t/[TAG]…​` <br> e.g. `tag s/A0123456N t/smart t/shy`                                                                      |
+| **View**                       | `view s/STUDENT_NUMBER` <br> e.g. `view s/A0245234A`                                                                                                             |
 
 --------------------------------------------------------------------------------------------------------------------
 
