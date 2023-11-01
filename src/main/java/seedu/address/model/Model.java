@@ -98,6 +98,12 @@ public interface Model {
     boolean hasInterview(Interview interview);
 
     /**
+     * Returns true if an interview with a timing that clashes with {@code interview}
+     * exists in the address book.
+     */
+    public boolean hasInterviewClash(Interview interview);
+
+    /**
      * Adds the given interview.
      * {@code interview} must not already exist in the address book.
      */
