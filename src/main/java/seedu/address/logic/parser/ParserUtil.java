@@ -182,7 +182,7 @@ public class ParserUtil {
      */
     public static Remark parseRemark(String remark) {
         requireNonNull(remark);
-        String trimmedDate = remark.trim();
+        String trimmedDRemark = remark.trim();
         return new Remark(remark);
     }
 }

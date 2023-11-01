@@ -1,5 +1,7 @@
 package seedu.address.storage;
 
+import java.time.LocalDate;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
@@ -15,7 +17,7 @@ public class JsonAdaptedRemark {
      * Constructs a {@code JsonAdaptedRemark} with the given {@code remark}.
      */
     @JsonCreator
-    public JsonAdaptedRemark(String remark) {
+    public JsonAdaptedRemark(String remark, LocalDate remarkDate) {
         this.remark = remark;
     }
 
