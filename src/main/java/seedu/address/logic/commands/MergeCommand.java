@@ -2,6 +2,8 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.List;
+
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
@@ -9,8 +11,9 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 
-import java.util.List;
-
+/**
+ * Merges two people in the address book.
+ */
 public class MergeCommand extends Command {
 
     public static final String COMMAND_WORD = "merge";
@@ -23,6 +26,9 @@ public class MergeCommand extends Command {
     private final Index primaryIndex;
     private final Index secondaryIndex;
 
+    /**
+     * Creates a MergeCommand to add the specified {@code Person}
+     */
     public MergeCommand(Index primaryIndex, Index secondaryIndex) {
         this.primaryIndex = primaryIndex;
         this.secondaryIndex = secondaryIndex;
@@ -33,8 +39,8 @@ public class MergeCommand extends Command {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
 
-        if (primaryIndex.getZeroBased() >= lastShownList.size() ||
-                secondaryIndex.getZeroBased() >= lastShownList.size()) {
+        if (primaryIndex.getZeroBased() >= lastShownList.size()
+                || secondaryIndex.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
@@ -61,8 +67,8 @@ public class MergeCommand extends Command {
         }
 
         MergeCommand otherMergeCommand = (MergeCommand) other;
-        return primaryIndex.equals(otherMergeCommand.primaryIndex) &&
-                secondaryIndex.equals(otherMergeCommand.secondaryIndex);
+        return primaryIndex.equals(otherMergeCommand.primaryIndex)
+                && secondaryIndex.equals(otherMergeCommand.secondaryIndex);
     }
 
     @Override
