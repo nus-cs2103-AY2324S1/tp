@@ -30,8 +30,7 @@ public class PriorityTag extends Tag {
      * Returns true if a given string is a valid tag name.
      */
     public static boolean isValidPriorityTag(String test) {
-        String temp = test.toLowerCase();
-        return temp.equals("high") || temp.equals("medium") || temp.equals("low");
+        return test.equals("high") || test.equals("medium") || test.equals("low");
     }
 
     @Override
