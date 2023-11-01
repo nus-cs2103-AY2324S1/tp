@@ -13,6 +13,7 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.event.Event;
 import seedu.address.model.event.EventID;
+import seedu.address.model.event.exceptions.EventNotFoundException;
 import seedu.address.model.note.Note;
 import seedu.address.model.note.NoteID;
 import seedu.address.model.tag.Tag;
@@ -138,7 +139,7 @@ public class Person {
 
     private Event removeEventByIndex(int index) {
         if (index < 0 || index >= this.events.size()) {
-            return null;
+            throw new EventNotFoundException();
         }
         return this.events.remove(index);
     }

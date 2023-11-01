@@ -6,6 +6,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.event.Event;
 import seedu.address.model.event.EventID;
+import seedu.address.model.event.exceptions.EventNotFoundException;
 import seedu.address.model.person.ContactID;
 import seedu.address.model.person.Person;
 
@@ -39,11 +40,12 @@ public class DeleteEventCommand extends DeleteCommand {
         if (person == null) {
             throw new CommandException(MESSAGE_PERSON_NOT_FOUND + this.contactId);
         }
-        Event deletedEvent = person.removeEventByUserFriendlyId(this.eventIdToDelete);
-        if (deletedEvent == null) {
+        try {
+            Event deletedEvent = model.removeEventByID(this.eventIdToDelete, person);
+            return new CommandResult(MESSAGE_SUCCESS + this.eventIdToDelete
+                    + ". " + deletedEvent.getName());
+        } catch (EventNotFoundException e) {
             throw new CommandException(MESSAGE_EVENT_NOT_FOUND + this.eventIdToDelete);
         }
-
-        return new CommandResult(MESSAGE_SUCCESS + this.eventIdToDelete + ". " + deletedEvent.getName());
     }
 }

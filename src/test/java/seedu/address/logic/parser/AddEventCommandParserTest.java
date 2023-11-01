@@ -2,6 +2,7 @@ package seedu.address.logic.parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.Messages.MESSAGE_START_TIME_AFTER_END_TIME;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 
 import org.junit.jupiter.api.Test;
@@ -16,7 +17,7 @@ import seedu.address.model.event.EventLocation;
 import seedu.address.model.event.EventName;
 import seedu.address.model.event.EventTime;
 
-public class AddCommandParserTest {
+public class AddEventCommandParserTest {
 
     private AddCommandParser parser = new AddCommandParser();
 
@@ -57,6 +58,14 @@ public class AddCommandParserTest {
         assertParseFailedWithError(() -> parser.parse(" "
                         + AddEventCommand.SECONDARY_COMMAND_WORD + " -id 1 -en Sample -st 12:00 -info"),
                 EventInformation.MESSAGE_CONSTRAINTS);
+    }
+
+    @Test
+    public void execute_startTimeAfterEndTime_fails() {
+        assertParseFailedWithError(() -> parser.parse(" "
+                        + AddEventCommand.SECONDARY_COMMAND_WORD
+                        + " -id 1 -en 2 -st 2023-11-02 12:00 -et 2023-11-01 23:00"),
+                String.format(MESSAGE_START_TIME_AFTER_END_TIME, "2023-11-02 12:00:00", "2023-11-01 23:00:00"));
     }
 
     private void assertParseSuccessWithCommand(ThrowingSupplier<Command> function, String commandClassName) {

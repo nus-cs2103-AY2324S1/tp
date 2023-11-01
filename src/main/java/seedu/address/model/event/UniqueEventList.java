@@ -3,24 +3,23 @@ package seedu.address.model.event;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.time.LocalDateTime;
 import java.util.Iterator;
 import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.commons.util.DateTimeUtil;
 import seedu.address.model.event.exceptions.DuplicateEventException;
 import seedu.address.model.event.exceptions.EventNotFoundException;
+import seedu.address.model.event.exceptions.EventOverlapException;
 
 /**
- * A list of persons that enforces uniqueness between its elements and does not allow nulls.
- * A person is considered unique by comparing using {@code Person#isSamePerson(Person)}. As such, adding and updating of
- * persons uses Person#isSamePerson(Person) for equality so as to ensure that the person being added or updated is
- * unique in terms of identity in the UniquePersonList. However, the removal of a person uses Person#equals(Object) so
- * as to ensure that the person with exactly the same fields will be removed.
- *
+ * A list of events that enforces uniqueness between its elements, does not allow overlaps and does not allow nulls.
+ * An event can be added only if it does not already exist in the list,
+ * and it does not overlap with all currently existed events by time
  * Supports a minimal set of list operations.
  *
- * @see Person#isSamePerson(Person)
  */
 public class UniqueEventList implements Iterable<Event> {
 
@@ -29,7 +28,7 @@ public class UniqueEventList implements Iterable<Event> {
             FXCollections.unmodifiableObservableList(internalList);
 
     /**
-     * Returns true if the list contains an equivalent person as the given argument.
+     * Returns true if the list contains an equivalent event as the given argument.
      */
     public boolean contains(Event toCheck) {
         requireNonNull(toCheck);
@@ -44,15 +43,19 @@ public class UniqueEventList implements Iterable<Event> {
         if (this.contains(toAdd)) {
             throw new DuplicateEventException();
         }
+        Event overlappingEvent = this.getOverlappingEvent(toAdd);
+        if (overlappingEvent != null) {
+            throw new EventOverlapException(toAdd, overlappingEvent);
+        }
         internalList.add(toAdd);
     }
 
     /**
-     * Replaces the person {@code target} in the list with {@code editedPerson}.
+     * Replaces the event {@code target} in the list with {@code editedEvent}.
      * {@code target} must exist in the list.
-     * The person identity of {@code editedPerson} must not be the same as another existing person in the list.
+     * The event identity of {@code editedPerson} must not be the same as another existing event in the list.
      */
-    public void setPerson(Event target, Event editedEvent) {
+    public void setEvent(Event target, Event editedEvent) {
         requireAllNonNull(target, editedEvent);
 
         int index = internalList.indexOf(target);
@@ -68,8 +71,8 @@ public class UniqueEventList implements Iterable<Event> {
     }
 
     /**
-     * Removes the equivalent person from the list.
-     * The person must exist in the list.
+     * Removes the equivalent event from the list.
+     * The event must exist in the list.
      */
     public void remove(Event toRemove) {
         requireNonNull(toRemove);
@@ -78,16 +81,16 @@ public class UniqueEventList implements Iterable<Event> {
         }
     }
 
-    public void setPersons(UniqueEventList replacement) {
+    public void setEvents(UniqueEventList replacement) {
         requireNonNull(replacement);
         internalList.setAll(replacement.internalList);
     }
 
     /**
-     * Replaces the contents of this list with {@code persons}.
-     * {@code persons} must not contain duplicate persons.
+     * Replaces the contents of this list with {@code events}.
+     * {@code persons} must not contain duplicate events.
      */
-    public void setPersons(List<Event> events) {
+    public void setEvents(List<Event> events) {
         requireAllNonNull(events);
         if (!eventsAreUnique(events)) {
             throw new DuplicateEventException();
@@ -134,7 +137,7 @@ public class UniqueEventList implements Iterable<Event> {
     }
 
     /**
-     * Returns true if {@code persons} contains only unique persons.
+     * Returns true if {@code events} contains only unique events.
      */
     private boolean eventsAreUnique(List<Event> events) {
         for (int i = 0; i < events.size() - 1; i++) {
@@ -145,5 +148,28 @@ public class UniqueEventList implements Iterable<Event> {
             }
         }
         return true;
+    }
+
+    /**
+     * Return an event in the list that is overlapping with {@code newEvent}.
+     * If no overlapping event is found, return {@code null}
+     * {@code newEvent} must not exists in the list.
+     *
+     * @param newEvent The event for checking overlapping
+     * @return The overlapping event or {@code null}.
+     */
+    private Event getOverlappingEvent(Event newEvent) {
+        requireNonNull(newEvent);
+        assert !this.contains(newEvent);
+        LocalDateTime newEventStartTime = newEvent.getStartTime();
+        LocalDateTime newEventEndTime = newEvent.getEndTime();
+        for (Event e : this.internalList) {
+            LocalDateTime startTime = e.getStartTime();
+            LocalDateTime endTime = e.getEndTime();
+            if (DateTimeUtil.timeIntervalsOverlap(newEventStartTime, newEventEndTime, startTime, endTime)) {
+                return e;
+            }
+        }
+        return null;
     }
 }
