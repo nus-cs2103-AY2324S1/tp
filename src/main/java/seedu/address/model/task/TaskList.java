@@ -19,6 +19,7 @@ public class TaskList implements Iterable<Task> {
     private final ObservableList<Task> internalUnmodifiableList =
             FXCollections.unmodifiableObservableList(internalList);
 
+
     /**
      * Returns true if the list contains an equivalent task as the given argument.
      */
@@ -74,12 +75,14 @@ public class TaskList implements Iterable<Task> {
         internalList.setAll(new SortedList<Task>(internalList, sortingOrder));
     }
 
+
     /**
      * Returns the backing list as an unmodifiable {@code ObservableList}.
      */
-    public ObservableList<Task> asUnmodifiableObservableList() {
+    public ObservableList<Task> asUnmodifiableList() {
         return internalUnmodifiableList;
     }
+
 
     public boolean equals(Object other) {
         if (other == this) {

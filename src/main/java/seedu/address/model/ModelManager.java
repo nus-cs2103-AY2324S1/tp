@@ -21,7 +21,8 @@ import seedu.address.model.event.Event;
 import seedu.address.model.event.EventPeriod;
 import seedu.address.model.event.exceptions.EventNotFoundException;
 import seedu.address.model.person.Person;
-import seedu.address.model.task.TaskList;
+import seedu.address.model.task.ReadOnlyTaskManager;
+import seedu.address.model.task.TaskManager;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -31,26 +32,28 @@ public class ModelManager implements Model {
 
     private final AddressBook addressBook;
     private final Calendar calendar;
-    //private final TaskList taskList;
+    private final TaskManager taskManager;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
 
     /**
      * Initializes a ModelManager with the given addressBook, calendar and userPrefs.
      */
-    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyCalendar calendar, ReadOnlyUserPrefs userPrefs) {
+    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyCalendar calendar, ReadOnlyTaskManager taskManager,
+                        ReadOnlyUserPrefs userPrefs) {
         requireAllNonNull(addressBook, userPrefs);
 
         logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
 
         this.addressBook = new AddressBook(addressBook);
         this.calendar = new Calendar(calendar);
+        this.taskManager = new TaskManager(taskManager);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
     }
 
     public ModelManager() {
-        this(new AddressBook(), new Calendar(), new UserPrefs());
+        this(new AddressBook(), new Calendar(), new TaskManager(), new UserPrefs());
     }
 
     //=========== UserPrefs ==================================================================================
