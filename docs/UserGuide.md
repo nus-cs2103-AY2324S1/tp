@@ -35,6 +35,7 @@
   * [Editing the data file](#editing-the-data-file)
 
 ---
+<br>
 
 <a name="introduction"></a>
 ## Introduction
@@ -46,18 +47,19 @@ Welcome to the User Guide of **Staff-Snap**! Here you'll find everything you nee
 While **Staff-Snap** has a simple and intuitive [Graphical User Interface (GUI)](#TODO), it is optimised for use with a [Command Line Interface (CLI)](#TODO). If you are a fast typer, **Staff-Snap** can get your applicant management tasks done faster than traditional GUI applications.
 
 ---
+<br>
 
 <a name="quick-start"></a>
 ## Quick Start 
 
 1. Ensure you have [Java](#TODO) 11 or above installed in your computer.
 2. Download the latest `staffsnap.jar` from [here](https://github.com/AY2324S1-CS2103T-W08-1/tp/releases/tag/v1.3).
-3. Copy the [JAR](#TODO) file to an empty folder that you would like to use as the [home folder](#TODO) for **Staff-Snap**.
+3. Copy the [JAR](#TODO) file to an empty folder that you would like to use as the [home folder](#TODO) for Staff-Snap.
 4. Open the [command terminal](#TODO).
 5. Navigate into your home folder with the `cd` command.
 6. Enter the `java -jar staffsnap.jar` command to run the application.
-7. You should see the [GUI](#TODO) displayed as shown below. Note how the application contains some sample data.
-   ![Main Window view](images/user-guide/MainWindow.png)
+7. You should see the [GUI](#TODO) displayed as shown below. Note how the application contains some sample data.<br>
+   ![Main Window view](images/user-guide/MainWindow.png)<br>
 8. Type the command in the command box and press <kbd>Enter</kbd> to execute it. e.g. typing `help` and pressing <kbd>Enter</kbd> will open this User Guide in your browser window.<br>
    Some example commands that you can try:
    * `add n/John Doe hp/81238123 p/Boss e/john@mail.com` : Adds an applicant named John Doe to the list. 
@@ -69,18 +71,18 @@ While **Staff-Snap** has a simple and intuitive [Graphical User Interface (GUI)]
 
 <box type="tip" header="**For macOS users**" seamless>
 
-If you are unfamiliar with the command terminal, you can right-click the `staffsnap.jar` file and select **Open With > JavaLauncher.app** to launch the application. If you are shown the warning below, click Open to continue launching **Staff-Snap**.
-![mac_os_warning](images/user-guide/mac_os_warning.png)
+If you are unfamiliar with the command terminal, you can right-click the `staffsnap.jar` file and select **Open With > JavaLauncher.app** to launch the application. If you are shown the warning below, click Open to continue launching Staff-Snap.
+<pic src="images/user-guide/mac_os_warning.png" height="446" width="372" alt="mac_os_warning" />
 
 </box>
 
 ---
+<br>
 
 <a name="using-this-guide"></a>
 ## Using this Guide
 
-This section introduces the symbols and notations used throughout this guide.
-We recommend you to read this section closely before using this guide.
+This section introduces the symbols and notations used throughout this guide. We recommend that you read this section closely before using this guide.
 
 
 <a name="parameters"></a>
@@ -138,48 +140,54 @@ We recommend you to read this section closely before using this guide.
 | Overall score     | This is where the overall score of the applicant is displayed. This allows for a fast and easy way to know the performance of each applicant. |
 | Interview score   | This is where the score for a specific interview is stored.                                                                                   |
 
-<a name="features"></a>
+---
+<br>
 
+<a name="features"></a>
 ## Features
 
 ---
-<a name="help"></a>
+<br>
 
+<a name="help"></a>
 ### `help` : Viewing help
 
 Opens up the user guide in the browser. Also displays a list of basic commands the user can use.
 
 Format: `help`
 
----
-<a name="add"></a>
+<br>
 
+---
+<br>
+
+<a name="add"></a>
 ### `add` : Adding a new applicant
 
-Adds a new applicant to the current list.
+Adds a new applicant to the list.
 
 Format: `add n/NAME hp/PHONE e/EMAIL p/POSITION`
-
-Example:
-* `add n/John Doe hp/91234567 e/johndoe@gmail.com p/Software Engineer`
-* `add n/Jane Greenwood p/Project Manager e/janeg@yahoo.com hp/81234567`
 
 <box type="warning" header="**Caution**">
     No duplicate applicants allowed. Two applicants are considered duplicates if they have the same phone number or email.
 </box>
 
-UI mockup:
-![Add UI Mockup](images/user-guide/add.png)
+Example:
+* `add n/John Doe hp/91234567 e/johndoe@gmail.com p/Software Engineer`
+* `add n/Jane Greenwood p/Project Manager e/janeg@yahoo.com hp/81234567`
+
+<br>
 
 ---
-<a name="edit"></a>
+<br>
 
+<a name="edit"></a>
 ### `edit` : Editing an applicant
 
 Edits the details of an applicant in the list.
 
 Format: `edit INDEX [n/NAME] [hp/PHONE] [e/EMAIL] [p/POSITION]`
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list.
+* Edits the applicant at the specified `INDEX`. The index refers to the index number shown in the displayed person list.
 * At least one of the optional fields must be provided.
 * Existing values will be updated by the input values.
 
@@ -187,30 +195,30 @@ Example:
 * `edit 1 n/Vijay Sankar Kumar` edits the name of the 1st applicant in the list.
 * `edit 2 hp/80081234 e/newEmail@hotmail.com` edits the phone number and email of the 2nd applicant in the list.
 
-UI mockup:
-![Edit UI Mockup](images/user-guide/edit.png)
+<br>
 
 ---
-<a name="list"></a>
+<br>
 
+<a name="list"></a>
 ### `list` : Listing all applicants
 
 Displays the full list of all applicants.
 
 Format: `list`
 
-UI mockup:
-![List UI Mockup](images/user-guide/list.png)
+<br>
 
 ---
-<a name="delete"></a>
+<br>
 
+<a name="delete"></a>
 ### `delete` : Deleting an applicant
 
 Deletes a particular applicant based on their index number.
 
 Format: `delete INDEX`
-* Deletes the person at the specified `INDEX`.
+* Deletes the applicant at the specified `INDEX`.
 * The index refers to the index number shown in the displayed applicant list.
 * The index **must be a positive integer** 1, 2, 3, ….
 
@@ -218,51 +226,29 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the applicant list.
 * `sort d/name` followed by `delete 3` deletes the 3rd person in the sorted applicant list.
 
-UI mockup:
-![Delete UI Mockup](images/user-guide/delete.png)
+<br>
 
 ---
-<a name="find"></a>
+<br>
 
-### `find` : Finding an applicant by name
+<a name="status"></a>
+### `status` : Editing an applicant status
 
-Find employees whose name contains a particular keyword.
+Edits the status of an applicant.
 
-Format: `find KEYWORD [MORE_KEYWORDS]`
-* The search is case-insensitive, e.g. `JOHN` will return `john`.
-* The order of the keywords does not matter, e.g. `Alice Tan` will match `Tan Alice`.
-* Only the applicant name is searched.
-* Any person whose name contains the sequence of characters given as the keyword will be given as a result, e.g. `Ed` will match both `Edward` and `Ed`.
-* Persons matching at least one keyword will be returned (i.e. OR search), e.g. `Ben Bobby` will return `Ben Yang`, `Bobby Chin`.
+Format: `status INDEX s/STATUS`
+* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list.
+* `STATUS` must be either `o`(offered) or `r`(rejected) or `u`(undecided).
 
 Examples:
-* `find IVAN` finds any applicant whose name contains “ivan”.
-* `find IVAN CHEW` finds any applicant whose name contains “ivan” or contains “chew”.
+* `status 3 s/o` updates the status of the 3rd person in the displayed applicant list to OFFERED.
+
+<br>
 
 ---
-<a name="sort"></a>
+<br>
 
-### `sort`: Sorting applicants by descriptor
-
-Sorts the applicant list by using a particular descriptor as the sorting criteria.
-
-Format: `sort d/DESCRIPTOR`
-* `DESCRIPTOR` must be either `name` or `phone` or `email` or `position` or `score` or `status`.
-
-Examples:
-* `sort d/name` sorts the applicant list by name in alphabetical order.
-* `sort d/phone` sorts the applicant list by phone numbers in ascending order.
-* `sort d/email` sorts the applicant list by email in alphabetical order.
-* `sort d/position` sorts the applicant list by positions in alphabetical order.
-* `sort d/score` sorts the applicant list by score in descending order.
-* `sort d/status` sorts the applicant list by status in alphabetical order.
-
-UI mockup:
-![Sort UI Mockup](images/user-guide/sort.png)
-
----
 <a name="addi"></a>
-
 ### `addi` : Adding an interview to an applicant
 
 Adds a new interview to an applicant. In the case of duplicate names, the system will automatically increment the last 
@@ -280,21 +266,24 @@ Examples:
 * `addi 3 t/screening` adds a Screening interview without rating to the 3rd person in the displayed applicant list.
 
 <box type="warning" header="**Caution**">
-    Rating will be rounded to the nearest 1dp if more than 1dp is provided.
+    Rating will be rounded to the nearest 1 decimal place if more than 1 decimal place is provided.
 </box>
 
 UI mockup:
 ![addi.png](images/user-guide/addi.png)
 
----
-<a name="editi"></a>
+<br>
 
+---
+<br>
+
+<a name="editi"></a>
 ### `editi` : Editing an interview of an applicant
 
 Edits an interview of an applicant.
 
 Format: `editi INDEX i/INTERVIEW_INDEX [t/TYPE] [r/RATING]`
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list.
+* Edits the applicant at the specified `INDEX`. The index refers to the index number shown in the displayed person list.
 * At least one of the optional fields must be provided.
 * Existing values will be updated by the input values.
 
@@ -303,9 +292,12 @@ Examples:
 * `editi 3 i/2 t/screening` edits the 2nd interview type of the 3rd person in the displayed applicant list to a screening interview.
 * `editi 2 i/1 r/8.9` edits the 1st interview rating of the 2nd person in the displayed applicant list to 8.9.
 
----
-<a name="deletei"></a>
+<br>
 
+---
+<br>
+
+<a name="deletei"></a>
 ### `deletei` : Deleting an interview from an applicant
 
 Deletes an interview from an applicant.
@@ -315,23 +307,88 @@ Format: `deletei INDEX i/INTERVIEW_INDEX`
 Examples:
 * `deletei 1 i/2` deletes the 2nd interview of the 1st person in the displayed applicant list.
 
+<br>
+
 ---
-<a name="status"></a>
+<br>
 
-### `status` : Editing an applicant status
+<a name="find"></a>
+### `find` : Finding an applicant by name
 
-Edits the status of an applicant.
+Find employees whose name contains a particular keyword.
 
-Format: `status INDEX s/STATUS`
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list.
-* `STATUS` must be either `o`(offered) or `r`(rejected) or `u`(undecided).
+Format: `find KEYWORD [MORE_KEYWORDS]`
+* The search is case-insensitive, e.g. `JOHN` will return `john`.
+* The order of the keywords does not matter, e.g. `Alice Tan` will match `Tan Alice`.
+* Only the applicant name is searched.
+* Any applicant whose name contains the sequence of characters given as the keyword will be given as a result, e.g. `Ed` will match both `Edward` and `Ed`.
+* Applicants matching at least one keyword will be returned (i.e. OR search), e.g. `Ben Bobby` will return `Ben Yang`, `Bobby Chin`.
 
 Examples:
-* `status 3 s/o` updates the status of the 3rd person in the displayed applicant list to OFFERED.
+* `find IVAN` finds any applicant whose name contains “ivan”.
+* `find IVAN CHEW` finds any applicant whose name contains “ivan” or contains “chew”.
+
+<br>
 
 ---
-<a name="clear"></a>
+<br>
 
+<a name="sort"></a>
+### `sort`: Sorting applicants by descriptor
+
+Sorts the applicant list by using a particular descriptor as the sorting criteria.
+
+Format: `sort d/DESCRIPTOR`
+* `DESCRIPTOR` must be either `name` or `phone` or `email` or `position` or `score` or `status`.
+
+Examples:
+* `sort d/name` sorts the applicant list by name in alphabetical order.
+* `sort d/phone` sorts the applicant list by phone numbers in ascending order.
+* `sort d/email` sorts the applicant list by email in alphabetical order.
+* `sort d/position` sorts the applicant list by positions in alphabetical order.
+* `sort d/score` sorts the applicant list by score in descending order.
+* `sort d/status` sorts the applicant list by status in alphabetical order.
+
+<br>
+
+---
+<br>
+
+<a name="filter"></a>
+### `filter`: Filtering applicants by descriptor criterion
+
+Filters the applicant list by using a particular descriptor criterion.
+
+Format: `filter ???`
+* blahblah
+
+Examples:
+* `filter n/iejdie` blahblah
+* `filter n/iejdie` blahblah
+
+<br>
+
+---
+<br>
+
+<a name="import"></a>
+### `import` : Importing from csv
+
+Imports applicants from a csv file.
+
+Format: `import f/FILENAME`
+* `FILENAME` must be a valid csv file.
+
+Examples:
+* `import f/applicants.csv`
+* `import f/classList.csv`
+
+<br>
+
+---
+<br>
+
+<a name="clear"></a>
 ### `clear` : Clearing all applicant entries
 
 After typing `clear`, system asks the user to confirm clearing. If user types `yes`, all the current data stored 
@@ -342,25 +399,34 @@ Format: `clear`
 UI mockup:
 ![Clear UI Mockup](images/user-guide/clear.png)
 
----
-<a name="exiting-the-program"></a>
+<br>
 
+---
+<br>
+
+<a name="exit"></a>
 ### `exit` : Exiting the program
 
 Exits the program.
 
 Format: `exit`
 
----
-<a name="saving-the-data"></a>
+<br>
 
+---
+<br>
+
+<a name="saving-the-data"></a>
 ### Saving the data
 
 Automatically saves the data to a local storage whenever there is a change to the applicant list. There is no need to save manually.
 
----
-<a name="editing-the-data-file"></a>
+<br>
 
+---
+<br>
+
+<a name="editing-the-data-file"></a>
 ### Editing the data file
 
 <box type="warning" header="**Caution**">
@@ -369,7 +435,10 @@ Automatically saves the data to a local storage whenever there is a change to th
 
 Staff-Snap applicant data are saved automatically as a JSON file `[JAR file location]/data/applicantBook.json`. Advanced users are welcome to update data directly by editing that data file.
 
+<br>
+
 ---
+<br>
 
 <a name="glossary"></a>
 ## Glossary
