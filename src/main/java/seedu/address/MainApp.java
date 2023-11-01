@@ -36,7 +36,7 @@ import seedu.address.ui.UiManager;
  */
 public class MainApp extends Application {
 
-    public static final Version VERSION = new Version(0, 2, 2, true);
+    public static final Version VERSION = new Version(1, 2, 1, true);
 
     private static final Logger logger = LogsCenter.getLogger(MainApp.class);
 
@@ -57,7 +57,7 @@ public class MainApp extends Application {
 
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         UserPrefs userPrefs = initPrefs(userPrefsStorage);
-        WellNusStorage wellNusStorage = new JsonWellNusStorage(userPrefs.getAddressBookFilePath());
+        WellNusStorage wellNusStorage = new JsonWellNusStorage(userPrefs.getWellNusFilePath());
         storage = new StorageManager(wellNusStorage, userPrefsStorage);
 
         model = initModelManager(storage, userPrefs);

@@ -1,0 +1,27 @@
+{
+  "students": [ {
+    "name": "Student with invalid name field: Ha!ns Mu@ster",
+    "phone": "9482424",
+    "address": "4th street",
+    "note" : " "
+  } ],
+  "appointments" : [ {
+    "name" : "John Doe",
+    "date" : "2023-11-30",
+    "startTime" : "16:30",
+    "endTime" : "17:30",
+    "description" : "First Session"
+  }, {
+    "name" : "John Loh",
+    "date" : "2023-10-14",
+    "startTime" : "17:30",
+    "endTime" : "18:30",
+    "description" : "Second Session"
+  }, {
+    "name" : "John Doe",
+    "date" : "2024-02-06",
+    "startTime" : "17:30",
+    "endTime" : "18:30",
+    "description" : "Third Session"
+  } ]
+}

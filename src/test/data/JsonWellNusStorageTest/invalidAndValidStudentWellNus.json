@@ -1,0 +1,32 @@
+{
+  "students": [ {
+    "name": "Valid Student",
+    "phone": "94824240",
+    "address": "4th street",
+    "note" : " "
+  }, {
+    "name": "Student With Invalid Phone Field",
+    "phone": "948asdf2424",
+    "address": "4th street",
+    "note" : " "
+  } ],
+  "appointments" : [ {
+    "name" : "Valid Student",
+    "date" : "2023-11-30",
+    "startTime" : "16:30",
+    "endTime" : "17:30",
+    "description" : "First Session"
+  }, {
+    "name" : "Valid Student",
+    "date" : "2023-10-14",
+    "startTime" : "17:30",
+    "endTime" : "18:30",
+    "description" : "Second Session"
+  }, {
+    "name" : "Valid Student",
+    "date" : "2024-02-06",
+    "startTime" : "17:30",
+    "endTime" : "18:30",
+    "description" : "Third Session"
+  } ]
+}

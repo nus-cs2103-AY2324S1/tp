@@ -13,7 +13,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import seedu.address.model.WellNus;
 import seedu.address.model.student.Student;
 
 /**
@@ -22,13 +21,12 @@ import seedu.address.model.student.Student;
 public class TypicalStudents {
 
     public static final Student ALICE = new StudentBuilder().withName("Alice Pauline")
-            .withAddress("123, Jurong West Ave 6, #08-111")
-            .withPhone("94351253")
-            .withTags("high").build();
+            .withAddress("123, Jurong West Ave 6, #08-111").withPhone("94351253")
+            .withTags("high").withNote("course: computer science").build();
     public static final Student BENSON = new StudentBuilder().withName("Benson Meier")
             .withAddress("311, Clementi Ave 2, #02-25")
             .withPhone("98765432")
-            .withTags("medium").build();
+            .withTags("medium").withNote("Likes dogs").build();
     public static final Student CARL = new StudentBuilder().withName("Carl Kurz").withPhone("95352563")
             .withAddress("wall street").build();
     public static final Student DANIEL = new StudentBuilder().withName("Daniel Meier").withPhone("87652533")
@@ -55,17 +53,6 @@ public class TypicalStudents {
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
 
     private TypicalStudents() {} // prevents instantiation
-
-    /**
-     * Returns an {@code AddressBook} with all the typical students.
-     */
-    public static WellNus getTypicalAddressBook() {
-        WellNus ab = new WellNus();
-        for (Student student : getTypicalStudents()) {
-            ab.addStudent(student);
-        }
-        return ab;
-    }
 
     public static List<Student> getTypicalStudents() {
         return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));

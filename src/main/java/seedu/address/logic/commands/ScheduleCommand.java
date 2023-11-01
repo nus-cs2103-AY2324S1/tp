@@ -1,9 +1,11 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DATETIME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_END_TIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_START_TIME;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
@@ -20,17 +22,23 @@ public class ScheduleCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Schedules a new appointment. "
             + "Parameters: "
-            + PREFIX_DESCRIPTION + "DESCRIPTION "
-            + PREFIX_DATETIME + "DATETIME "
-            + PREFIX_NAME + "STUDENT\n"
+            + PREFIX_NAME + "STUDENT "
+            + PREFIX_DATE + "DATE "
+            + PREFIX_START_TIME + "STARTTIME "
+            + PREFIX_END_TIME + "ENDTIME "
+            + PREFIX_DESCRIPTION + "DESCRIPTION\n"
             + "Example: "
             + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
-            + PREFIX_DATETIME + "2023-12-31 16:30:00 "
+            + PREFIX_DATE + "2023-12-31 "
+            + PREFIX_START_TIME + "16:30 "
+            + PREFIX_END_TIME + "17:30 "
             + PREFIX_DESCRIPTION + "First Session";
 
     public static final String MESSAGE_SUCCESS = "New appointment scheduled: %1$s";
-    public static final String MESSAGE_DUPLICATE_APPOINTMENT = "This appointment clashes with an existing appointment";
+    public static final String MESSAGE_DUPLICATE_APPOINTMENT = "This appointment already exists";
+    public static final String MESSAGE_OVERLAPPING_APPOINTMENTS = "This appointment overlaps "
+                                                                  + "with an existing appointment!";
 
     private final Appointment toAdd;
 
@@ -50,6 +58,10 @@ public class ScheduleCommand extends Command {
 
         if (model.hasAppointment(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_APPOINTMENT);
+        }
+
+        if (model.hasOverlapsWithAppointments(toAdd)) {
+            throw new CommandException(MESSAGE_OVERLAPPING_APPOINTMENTS);
         }
 
         model.addAppointment(toAdd);

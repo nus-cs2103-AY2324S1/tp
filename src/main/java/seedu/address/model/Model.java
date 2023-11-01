@@ -40,20 +40,20 @@ public interface Model {
     /**
      * Returns the user prefs' address book file path.
      */
-    Path getAddressBookFilePath();
+    Path getWellNusFilePath();
 
     /**
      * Sets the user prefs' address book file path.
      */
-    void setAddressBookFilePath(Path addressBookFilePath);
+    void setWellNusFilePath(Path addressBookFilePath);
 
     /**
      * Replaces address book data with the data in {@code addressBook}.
      */
-    void setAddressBook(ReadOnlyWellNus addressBook);
+    void setWellNusData(ReadOnlyWellNus addressBook);
 
     /** Returns the AddressBook */
-    ReadOnlyWellNus getAddressBook();
+    ReadOnlyWellNus getWellNusData();
 
     /**
      * Returns true if a student with the same identity as {@code student} exists in the address book.
@@ -81,6 +81,8 @@ public interface Model {
     void setStudent(Student target, Student editedStudent);
 
     boolean hasAppointment(Appointment appointment);
+
+    boolean hasOverlapsWithAppointments(Appointment appointment);
 
     void addAppointment(Appointment appointment);
 

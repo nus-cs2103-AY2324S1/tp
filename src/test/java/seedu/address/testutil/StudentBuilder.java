@@ -6,6 +6,7 @@ import java.util.Set;
 import seedu.address.model.risklevel.RiskLevel;
 import seedu.address.model.student.Address;
 import seedu.address.model.student.Name;
+import seedu.address.model.student.Note;
 import seedu.address.model.student.Phone;
 import seedu.address.model.student.Student;
 import seedu.address.model.util.SampleDataUtil;
@@ -18,11 +19,13 @@ public class StudentBuilder {
     public static final String DEFAULT_NAME = "Amy Bee";
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
+    public static final String DEFAULT_NOTE = "Likes dogs.";
 
     private Name name;
     private Phone phone;
     private Address address;
     private Set<RiskLevel> riskLevel;
+    private Note note;
 
     /**
      * Creates a {@code StudentBuilder} with the default details.
@@ -32,6 +35,7 @@ public class StudentBuilder {
         phone = new Phone(DEFAULT_PHONE);
         address = new Address(DEFAULT_ADDRESS);
         riskLevel = new HashSet<>();
+        note = new Note(DEFAULT_NOTE);
     }
 
     /**
@@ -42,6 +46,7 @@ public class StudentBuilder {
         phone = studentToCopy.getPhone();
         address = studentToCopy.getAddress();
         riskLevel = new HashSet<>(studentToCopy.getTags());
+        note = studentToCopy.getNote();
     }
 
     /**
@@ -76,8 +81,16 @@ public class StudentBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code Note} of the {@code Person} that we are building.
+     */
+    public StudentBuilder withNote(String note) {
+        this.note = new Note(note);
+        return this;
+    }
+
     public Student build() {
-        return new Student(name, phone, address, riskLevel);
+        return new Student(name, phone, address, riskLevel, note);
     }
 
 }

@@ -3,13 +3,17 @@ package seedu.address.model.appointment;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
+import java.util.function.Predicate;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.address.model.student.exceptions.DuplicateStudentException;
-import seedu.address.model.student.exceptions.StudentNotFoundException;
+import seedu.address.model.appointment.exceptions.AppointmentNotFoundException;
+import seedu.address.model.appointment.exceptions.DuplicateAppointmentException;
+import seedu.address.model.student.Name;
+
 
 /**
  * A list of appointments that enforces uniqueness between its elements and does not allow nulls.
@@ -29,36 +33,24 @@ public class UniqueAppointmentList implements Iterable<Appointment> {
     }
 
     /**
+     * Returns true if the list contains an overlapping appointment as the given argument.
+     */
+    public boolean overlaps(Appointment toCheck) {
+        requireNonNull(toCheck);
+        return internalList.stream().anyMatch(toCheck::isOverlappingAppointment);
+    }
+
+    /**
      * Adds an appointment to the list.
      * The appointment must not already exist in the list.
      */
     public void add(Appointment toAdd) {
         requireNonNull(toAdd);
         if (contains(toAdd)) {
-            throw new DuplicateStudentException();
+            throw new DuplicateAppointmentException();
         }
         internalList.add(toAdd);
-    }
-
-    /**
-     * Replaces the appointment {@code target} in the list with {@code editedAppointment}.
-     * {@code target} must exist in the list.
-     * The student identity of {@code editedAppointment} must not be the same as another existing appointment in the
-     * list.
-     */
-    public void setAppointment(Appointment target, Appointment editedAppointment) {
-        requireAllNonNull(target, editedAppointment);
-
-        int index = internalList.indexOf(target);
-        if (index == -1) {
-            throw new StudentNotFoundException();
-        }
-
-        if (!target.equals(editedAppointment) && contains(editedAppointment)) {
-            throw new DuplicateStudentException();
-        }
-
-        internalList.set(index, editedAppointment);
+        Collections.sort(internalList);
     }
 
     /**
@@ -68,13 +60,25 @@ public class UniqueAppointmentList implements Iterable<Appointment> {
     public void remove(Appointment toRemove) {
         requireNonNull(toRemove);
         if (!internalList.remove(toRemove)) {
-            throw new StudentNotFoundException();
+            throw new AppointmentNotFoundException();
         }
+        Collections.sort(internalList);
+    }
+
+    /**
+     * Removes all appointments which contain the name {@code toRemove} from the list.
+     */
+    public void removeRelatedAppointments(Name toRemove) {
+        requireNonNull(toRemove);
+        Predicate<Appointment> hasSameName = appointment -> appointment.getName().equals(toRemove);
+        internalList.removeIf(hasSameName);
+        Collections.sort(internalList);
     }
 
     public void setAppointments(UniqueAppointmentList replacement) {
         requireNonNull(replacement);
         internalList.setAll(replacement.internalList);
+        Collections.sort(internalList);
     }
 
     /**
@@ -84,9 +88,10 @@ public class UniqueAppointmentList implements Iterable<Appointment> {
     public void setAppointments(List<Appointment> appointments) {
         requireAllNonNull(appointments);
         if (!appointmentsAreUnique(appointments)) {
-            throw new DuplicateStudentException();
+            throw new DuplicateAppointmentException();
         }
         internalList.setAll(appointments);
+        Collections.sort(internalList);
     }
 
     /**
@@ -133,6 +138,17 @@ public class UniqueAppointmentList implements Iterable<Appointment> {
         for (int i = 0; i < appointments.size() - 1; i++) {
             for (int j = i + 1; j < appointments.size(); j++) {
                 if (appointments.get(i).equals(appointments.get(j))) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    private boolean appointmentsDoNotOverlap(List<Appointment> appointments) {
+        for (int i = 0; i < appointments.size() - 1; i++) {
+            for (int j = i + 1; j < appointments.size(); j++) {
+                if (appointments.get(i).isOverlappingAppointment(appointments.get(j))) {
                     return false;
                 }
             }

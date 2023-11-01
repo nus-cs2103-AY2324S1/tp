@@ -1,0 +1,78 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":WellNusParser" as WellNusParser LOGIC_COLOR
+participant ":NoteCommandParser" as NoteCommandParser LOGIC_COLOR
+participant "n:NoteCommand" as NoteCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+participant "editedStudent:Student" as Student LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("note 1 note/Likes dogs.")
+activate LogicManager
+
+LogicManager -> WellNusParser : parseCommand("note 1 note/Likes dogs.")
+activate WellNusParser
+
+create NoteCommandParser
+WellNusParser -> NoteCommandParser
+activate NoteCommandParser
+
+NoteCommandParser --> WellNusParser
+deactivate NoteCommandParser
+
+WellNusParser -> NoteCommandParser : parse("1 note/Likes dogs.")
+activate NoteCommandParser
+
+create NoteCommand
+NoteCommandParser -> NoteCommand
+activate NoteCommand
+
+NoteCommand --> NoteCommandParser : n
+deactivate NoteCommand
+
+NoteCommandParser --> WellNusParser : n
+deactivate NoteCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+NoteCommandParser -[hidden]-> WellNusParser
+destroy NoteCommandParser
+
+WellNusParser --> LogicManager : d
+deactivate WellNusParser
+
+LogicManager -> NoteCommand : execute()
+activate NoteCommand
+
+create Student
+NoteCommand -> Student
+activate Student
+
+Student --> NoteCommand
+deactivate Student
+
+NoteCommand -> Model : setStudent(editedStudent)
+activate Model
+
+Model --> NoteCommand
+deactivate Model
+
+create CommandResult
+NoteCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> NoteCommand
+deactivate CommandResult
+
+NoteCommand --> LogicManager : result
+deactivate NoteCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml
