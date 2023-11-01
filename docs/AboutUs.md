@@ -75,3 +75,4 @@ You can reach us at the email `craigton.lian[at]gmail.com`
 * Role: Developer
 * Responsibilities:
   * Coordinate documentation
+  * UI Design

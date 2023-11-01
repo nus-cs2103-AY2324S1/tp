@@ -9,9 +9,9 @@ This is a CS2103T project by [**AY2324S1-CS2103T-W08-1**](https://github.com/org
 
 ![Ui](docs/images/Ui.png)
 
-Staff-Snap is a desktop app for Hiring Managers to track staff information, optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, Staff-Snap can get your staff information management tasks done faster than traditional GUI apps.
+**Staff-Snap** is a desktop app for Hiring Managers to track applicants through the recruitment cycle, optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, Staff-Snap can get your staff information management tasks done faster than traditional GUI apps.
 
-## Features v1.2
+## Features v1.3
 * Add an applicant
 * Edit an applicant's details
 * Delete an applicant
@@ -22,6 +22,7 @@ Staff-Snap is a desktop app for Hiring Managers to track staff information, opti
 * Add an interview to an applicant
 * Edit an interview of an applicant
 * Delete an interview of an applicant
+* Edit an applicant's status
 * Import csv data
 * Save data to file
 * Clear all data
