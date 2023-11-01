@@ -12,6 +12,7 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 
 import networkbook.model.person.filter.GradEqualsOneOfPredicate;
+import networkbook.model.util.UniqueList;
 import networkbook.testutil.PersonBuilder;
 
 public class GradEqualsOneOfPredicateTest {
@@ -60,7 +61,15 @@ public class GradEqualsOneOfPredicateTest {
         assertFalse(new GradEqualsOneOfPredicate(Collections.emptyList())
                 .test(new PersonBuilder().withGraduation("AY2324-S1").build()));
         assertFalse(new GradEqualsOneOfPredicate(List.of(2022, 2023))
-                .test(new PersonBuilder().build()));
+                .test(new Person(new Name("Ok"),
+                        new UniqueList<>(),
+                        new UniqueList<>(),
+                        new UniqueList<>(),
+                        null,
+                        new UniqueList<>(),
+                        new UniqueList<>(),
+                        new UniqueList<>(),
+                        null)));
     }
 
     @Test
