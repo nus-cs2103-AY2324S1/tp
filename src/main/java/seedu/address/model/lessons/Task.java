@@ -16,6 +16,7 @@ import seedu.address.model.ListEntryField;
 public class Task extends ListEntryField {
 
     public static final String MESSAGE_CONSTRAINTS = "Tasks can take any values, and it should not be blank";
+    public static final Task DEFAULT_TASK = new Task("Sample Task");
 
     /*
      * The first character of the task description must not be a whitespace,

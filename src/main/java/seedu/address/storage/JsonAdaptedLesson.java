@@ -15,6 +15,10 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Remark;
 import seedu.address.model.person.Subject;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
 
 /**
  * Jackson-friendly version of {@link Lesson}
@@ -26,7 +30,7 @@ public class JsonAdaptedLesson {
     private final String subject;
     private final String name;
     private final String remark;
-    private final String taskList;
+    private final List<JsonAdaptedTask> taskList = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
@@ -38,14 +42,16 @@ public class JsonAdaptedLesson {
                              @JsonProperty("day") String day,
                              @JsonProperty("subject") String subject,
                              @JsonProperty("remarks") String remark,
-                             @JsonProperty("taskList") String taskList) {
+                             @JsonProperty("taskList") List<JsonAdaptedTask> taskList) {
         this.name = name;
         this.start = start;
         this.end = end;
         this.day = day;
         this.subject = subject;
         this.remark = remark;
-        this.taskList = taskList;
+        if (taskList != null) {
+            this.taskList.addAll(taskList);
+        }
     }
 
     /**
@@ -58,7 +64,8 @@ public class JsonAdaptedLesson {
         day = serialize(source.getDay());
         subject = serialize(source.getSubject());
         remark = serialize(source.getRemark());
-        taskList = serialize(source.getTaskList());
+//        taskList = serialize(source.getTaskList());
+        taskList.addAll(source.getTasksSet().stream().map(JsonAdaptedTask::new).collect(Collectors.toList()));
     }
     /**
      * Converts this Jackson-friendly adapted lesson object into the model's {@code Lesson} object.
@@ -73,7 +80,8 @@ public class JsonAdaptedLesson {
             Day day = deserialize(Day.DEFAULT_DAY, Day::deserialize, this.day);
             Subject subject = deserialize(Subject.DEFAULT_SUBJECT, Subject::of, this.subject);
             Remark remark = deserialize(Remark.DEFAULT_REMARK, Remark::of, this.remark);
-            TaskList taskList = deserialize(TaskList.DEFAULT_TASKLIST, TaskList::of, this.taskList);
+            TaskList taskList = TaskList.of(this.taskList);
+
             return new Lesson(name, start, end, day, subject, taskList);
         } catch (Exception e) {
             throw new IllegalValueException(e.getMessage());
