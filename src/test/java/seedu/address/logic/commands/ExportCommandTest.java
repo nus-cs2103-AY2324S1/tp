@@ -36,9 +36,10 @@ public class ExportCommandTest {
 
     @Test
     public void toStringMethod() {
-        Visual validVisual = new Visual("TABLE");
+        String visual = "TABLE";
+        Visual validVisual = new Visual(visual);
         ExportCommand sortCommand = new ExportCommand(validVisual);
-        String expected = ExportCommand.class.getCanonicalName() + "{}";
+        String expected = ExportCommand.class.getCanonicalName() + "{visual=" + visual + "}";
         assertEquals(expected, sortCommand.toString());
     }
 
