@@ -332,7 +332,7 @@ Great job! You have found the full updated list of tutors.
 ##### :star::star::star: Experienced users
 {:.no_toc}
 
-Unlike [`list-s`](#listing-all-schedules--list-s), `list-t` does not take in any fields.\
+Unlike [`list-s`](#listing-all-schedules-list-s), `list-t` does not take in any fields.\
 Anything you type after `list-t` will be ignored.
 
 [Back To Top](#table-of-contents)
