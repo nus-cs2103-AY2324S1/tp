@@ -2,6 +2,8 @@ package seedu.address.ui;
 
 import java.util.logging.Logger;
 
+import javafx.application.Platform;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -31,6 +33,42 @@ public class PersonListPanel extends UiPart<Region> {
      */
     public PersonListPanel(ObservableList<Person> personList) {
         super(FXML);
+        // Set the text initially to handle the case when personList is empty
+        if (personList.isEmpty()) {
+            personType.setText("No data found");
+        } else if (personList.get(0) instanceof Patient) {
+            personType.setText("Patients");
+        } else {
+            personType.setText("Specialists");
+        }
+
+        // set the text fill color after JavaFX initialization to prevent race condition
+        Platform.runLater(() -> {
+            if (personList.isEmpty()) {
+                personType.setTextFill(Color.GREY);
+            } else if (personList.get(0) instanceof Patient) {
+                personType.setTextFill(Color.AQUA);
+            } else {
+                personType.setTextFill(Color.GREENYELLOW);
+            }
+        });
+        personList.addListener(
+                new ListChangeListener<Person>() {
+                    @Override
+                    public void onChanged(Change<? extends Person> c) {
+                        if (personList.isEmpty()) {
+                            personType.setText("No data found");
+                            personType.setTextFill(Color.GREY);
+                        } else if (personList.get(0) instanceof Patient) {
+                            personType.setText("Patients");
+                            personType.setTextFill(Color.AQUA);
+                        } else {
+                            personType.setText("Specialists");
+                            personType.setTextFill(Color.GREENYELLOW);
+                        }
+                    }
+                }
+        );
         personListView.setItems(personList);
         personListView.setCellFactory(listView -> new PersonListViewCell());
     }
@@ -42,18 +80,13 @@ public class PersonListPanel extends UiPart<Region> {
         @Override
         protected void updateItem(Person person, boolean empty) {
             super.updateItem(person, empty);
-
             if (empty || person == null) {
                 setGraphic(null);
                 setText(null);
             } else {
                 if (person instanceof Patient) {
-                    personType.setText("Patient");
-                    personType.setTextFill(Color.AQUA);
                     setGraphic(new PatientCard((Patient) person, getIndex() + 1).getRoot());
                 } else {
-                    personType.setText("Specialist");
-                    personType.setTextFill(Color.GREENYELLOW);
                     setGraphic(new SpecialistCard((Specialist) person, getIndex() + 1).getRoot());
                 }
             }

@@ -13,10 +13,8 @@ import seedu.address.commons.core.ShortcutSettings;
  * Represents User's preferences.
  */
 public class UserPrefs implements ReadOnlyUserPrefs {
-
     private GuiSettings guiSettings = new GuiSettings();
     private Path addressBookFilePath = Paths.get("data" , "addressbook.json");
-
     private ShortcutSettings shortcutSettings = new ShortcutSettings();
 
     /**
@@ -97,7 +95,7 @@ public class UserPrefs implements ReadOnlyUserPrefs {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("Gui Settings : " + guiSettings);
-        sb.append("ShortcutAlias Settings : " + shortcutSettings);
+        sb.append("\nShortcutAlias Settings : " + shortcutSettings);
         sb.append("\nLocal data file location : " + addressBookFilePath);
         return sb.toString();
     }

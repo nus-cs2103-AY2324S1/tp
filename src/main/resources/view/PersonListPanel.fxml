@@ -5,13 +5,13 @@
 <?import javafx.scene.control.Label?>
 
 <?import javafx.geometry.Insets?>
-<VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
-  <VBox VBox.vgrow="ALWAYS" style="-fx-border-color: black; -fx-background-color: rgb(51,51,51);" maxHeight="40">
+<VBox fx:id="personListPanel" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+  <VBox fx:id="listPanelTitle" VBox.vgrow="ALWAYS" maxHeight="40">
     <padding>
       <Insets left="10.0" />
     </padding>
     <Label fx:id="personType" styleClass="cell_view_medicalHistory_label" />
   </VBox>
   <VBox minHeight="10" />
-  <ListView fx:id="personListView" VBox.vgrow="ALWAYS" />
+  <ListView fx:id="personListView" VBox.vgrow="ALWAYS"/>
 </VBox>

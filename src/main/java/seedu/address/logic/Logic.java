@@ -2,6 +2,7 @@ package seedu.address.logic;
 
 import java.nio.file.Path;
 
+import javafx.beans.value.ChangeListener;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.ShortcutSettings;
@@ -9,6 +10,7 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.Theme;
 import seedu.address.model.person.Person;
 
 /**
@@ -75,4 +77,15 @@ public interface Logic {
      * Adds the most recent command string input by the user to the CommandStringStash.
      */
     void addCommandString(String commandString);
+
+    /**
+     * Sets the current theme of the application to be {@code theme}
+     */
+    void setTheme(Theme theme);
+
+    /**
+     * Adds @code{changeListener} as an observer to the application theme.
+     */
+    void addThemeListener(ChangeListener<? super Theme> changeListener);
+
 }

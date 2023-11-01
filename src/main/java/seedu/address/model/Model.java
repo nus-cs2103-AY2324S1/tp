@@ -3,6 +3,7 @@ package seedu.address.model;
 import java.nio.file.Path;
 import java.util.function.Predicate;
 
+import javafx.beans.value.ChangeListener;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.ShortcutSettings;
@@ -128,6 +129,16 @@ public interface Model {
      * Adds the most recent command string input by the user to the CommandStringStash.
      */
     void addCommandString(String commandString);
+
+    /**
+     * Sets the current theme of the application to be {@code theme}
+     */
+    void setTheme(Theme theme);
+
+    /**
+     * Adds @code{changeListener} as an observer to the application theme.
+     */
+    void addThemeListener(ChangeListener<? super Theme> changeListener);
 
     boolean hasHistory();
     boolean canRedo();
