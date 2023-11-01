@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.Messages.MESSAGE_BEGIN_AFTER_END;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
@@ -81,6 +82,22 @@ public class EditCommandTest {
     }
 
     @Test
+    public void execute_validBeginAndEndTimes_success() {
+        Person validPerson = new PersonBuilder()
+                .withBegin("2100")
+                .withEnd("2200")
+                .build();
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(validPerson).build();
+        EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON, descriptor);
+
+        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(validPerson));
+
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        expectedModel.setPerson(model.getFilteredPersonList().get(0), validPerson);
+
+        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
+    }
+    @Test
     public void execute_filteredList_success() {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
 
@@ -142,6 +159,18 @@ public class EditCommandTest {
                 new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB).build());
 
         assertCommandFailure(editCommand, model, Messages.MESSAGE_INVALID_TUTEE_DISPLAYED_INDEX);
+    }
+
+    @Test
+    public void execute_invalidBeginAndEndTimes_failure() {
+        Person invalidPerson = new PersonBuilder()
+                .withBegin("1500")
+                .withEnd("1400")
+                .build();
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(invalidPerson).build();
+        EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON, descriptor);
+
+        assertCommandFailure(editCommand, model, MESSAGE_BEGIN_AFTER_END);
     }
 
     @Test

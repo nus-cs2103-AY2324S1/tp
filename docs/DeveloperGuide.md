@@ -154,9 +154,24 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### List by day feature
+
+The `ListByDayCommand` extends the `ListCommand` class. It is initialised with a `DayPredicate` and updates
+the `FilteredPersonList` to only display Persons whose `Day` field matches the specified input.
+
+* **Alternative 1 (current choice):** Extend the `ListCommand` class.
+    * Pros: Greater use of OOP.
+    * Cons: Harder to implement.
+
+* **Alternative 2:** Individual command class without extending `ListCommand`.
+    * Pros: Easier to implement.
+    * Cons: Less abstraction.
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
+
+
 
 The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
 
@@ -238,6 +253,33 @@ _{more aspects and alternatives to be added}_
 
 _{Explain here how the data archiving feature will be implemented}_
 
+### \[Proposed\] Mark paid/check paid features
+The proposed mark paid/check paid mechanism can check whether the person has paid or not by implementing a new boolean field 'paid' in the person object, it implements the following operations:
+
+* `paid [index]` — Mark the person at the index as paid.
+* `ispaid [index]` — Check whether the person at the index is paid.
+* `list unpaid` — List all the persons who haven't paid in the list.
+
+Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
+
+More graphs To be added. 
+
+#### Design considerations:
+
+_{more aspects and alternatives to be added}_
+
+### [Proposed] Total revenue command
+#### Proposed implementation
+The proposed total revenue command is facilitated by the payRate field in Person class, as well as the start and end fields in person class.
+
+The following sequence diagram shows how the total revenue command works:
+_{to be implemented in the future}_
+
+The logic behind finding total revenue is
+
+*Total Revenue* = payRate.value x hours of lesson x  number of lessons in current month
+
+
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -272,13 +314,14 @@ _{Explain here how the data archiving feature will be implemented}_
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                                | So that I can…​                                                 |
-| -------- |--------------------------------------------|---------------------------------------------|-----------------------------------------------------------------|
-| `* * *`  | tutor                                      | view a list of all tutees                   |                                                                 |
-| `* * *`  | tutor                                      | view the specific details of a single tutee |                                                                 |
-| `* * *`  | tutor                                      | add a new tutee                             |                                                                 |
-| `* * *`  | tutor                                      | edit their details                          | account for changes in their information e.g. change in address |
-| `* *`    | tutor                                      | remove tutees from the list                 | keep track of tutees that I have stopped teaching               |
+| Priority | As a …​                                    | I want to …​                                | So that I can…​                                                        |
+| ------ |--------------------------------------------|---------------------------------------------|------------------------------------------------------------------------|
+| `* * *` | tutor                                      | view a list of all tutees                   |                                                                        |
+| `* *`  | tutor                                      | view a list tutees on a specified day       | so that I can be reminded if I have any classes on that particular day |
+| `* * *` | tutor                                      | view the specific details of a single tutee |                                                                        |
+| `* * *` | tutor                                      | add a new tutee                             |                                                                        |
+| `* * *` | tutor                                      | edit their details                          | account for changes in their information e.g. change in address        |
+| `* *`  | tutor                                      | remove tutees from the list                 | keep track of tutees that I have stopped teaching                      |
 
 *{More to be added}*
 
@@ -327,7 +370,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     - 1c1. System informs user of the clash in schedules.
 
       Use case resumes at 1.
+  
+- 1d. User inputs begin time which is greater than the end time.
+  - 1d1. System informs that begin time must be smaller than the end time.
 
+    Use case resumes at 1.
+  
 **Use case: UC03 - Delete a tutee**
 
 **MSS**
@@ -340,9 +388,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 2a1. User tries to edit the schedule of a tutee which clashes with an existing schedule.
-
-    Use case ends.
+- 2a. The tutee that the user is trying to delete does not exist in the list.
+    - 2a1. System informs that user does not exist.
 
 **Use case: UC04 - Editing a tutee**
 
@@ -356,18 +403,26 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-- 2a. The tutee that the user is trying to delete does not exist in the list.
-  - 2a1. System informs that user does not exist.
   
-    Use case resumes at 2.
-  - 
-- 2b. The schedule of the edited tutee clashes with an existing schedule.
-  - 2b1. System informs that there is a clash in schedules.
+- 2a. The schedule of the edited tutee clashes with an existing schedule.
+  - 2a1. System informs that there is a clash in schedules.
 
     Use case resumes at 2.
+  
+- 2b. The edited begin time is after than the original end time.
+  - 2b1. System informs that begin time must be smaller than the end time.
 
+    Use case resumes at 2.
+  
+- 2c. The edited end time is before the original begin time.
+  - System informs that begin time must be smaller than the end time.
 
-  Use case ends.
+    Use case resumes at 2.
+  
+- 2d. The edited begin time is after the edited begin time.
+  - 2d1. System informs that begin time must be smaller than the end time.
+    
+    Use case resumes at 2.
 
 *{More to be added}*
 

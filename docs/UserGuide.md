@@ -25,11 +25,11 @@ Tuition connect is a desktop app that helps tutors keep track of their tutees an
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-    * `list` : Lists all tutees.
+   * `list` : Lists all tutees.
 
-    * `add n/John Doe p/98765432 a/John street, block 123, #01-01 sb/Primary 4 Math d/wed b/1500 e/1600` : Adds a tutee named `John Doe` to the list.
+   * `add n/John Doe p/98765432 a/John street, block 123, #01-01 sb/Primary 4 Math d/wed b/1500 e/1600` : Adds a tutee named `John Doe` to the list.
 
-    * `delete 3` : Deletes the 3rd tutee shown in the current list.
+   * `delete 3` : Deletes the 3rd tutee shown in the current list.
 
 1. Refer to the [Features](#features) below for details of each command.
 
@@ -48,9 +48,10 @@ Tuition connect is a desktop app that helps tutors keep track of their tutees an
 * **Phone number (Optional field)**: 8 digit number.
 * **Address (Optional field)**: String without restriction in characters.
 * **Subject (Optional field)**: String without restriction in characters.
-* **Day (Optional field)**: String with restrictions in characters, non-case sensitive (Mon/Tues/Wed/Thurs/Fri/Sat/Sun).
+* **Day (Optional field)**: String with restrictions in characters, non-case sensitive (Mon/Tue/Wed/Thu/Fri/Sat/Sun).
 * **Begin (Optional field)**: String with restrictions (HHMM).
 * **End (Optional field)**: String with restrictions (HHMM).
+* **PayRate (Compulsory field)**: String with restrictions in characters, only numbers allowed (no negative numbers).
 
 **Expected Output when the command succeeds**: Successfully added tutee XXX(Name)
 
@@ -61,10 +62,11 @@ Tuition connect is a desktop app that helps tutors keep track of their tutees an
 * **Invalid Day**: Please input a valid day
 * **Invalid Begin**: Please input a valid time for Begin in HHMM
 * **Invalid End**: Please input a valid time for End in HHMM
+* **Invalid PayRate**: PayRate can take any values, as long as they are integers.
 
 **Examples**:
-* `add n/John Doe p/98765432 a/John street, block 123, #01-01 sb/Primary 4 Math d/wed b/1500 e/1600`
-* `add n/Betsy Crowe p/92939402 e/betsycrowe@example.com a/Newgate Prison p/1234567 s/Secondary 3 Physics d/mon b/1900 e/1930`
+* `add n/John Doe p/98765432 a/John street, block 123, #01-01 sb/Primary 4 Math d/wed b/1500 e/1600 pr/20`
+* `add n/Betsy Crowe p/92939402 e/betsycrowe@example.com a/Newgate Prison p/1234567 s/Secondary 3 Physics d/mon b/1900 e/1930 pr/35`
 
 ### View the list : `list`
 
@@ -72,11 +74,20 @@ Tuition connect is a desktop app that helps tutors keep track of their tutees an
 
 Format: `list`
 
+### View the list of tutees specified by day : `list [DAY]`
+
+**Description** : Shows the current list of tutees filtered by the specified dat.
+
+Format: `list [DAY]`
+
+**Expected Input**:
+* **Day (Optional field)**: String with restrictions in characters, non-case sensitive (Mon/Tue/Wed/Thu/Fri/Sat/Sun).
+
 ### Editing a tutee : `edit`
 
 **Description** : Edit a tutee in the current list.
 
-**Format**: `edit INDEX n/NAME p/PHONE_NUMBER a/ADDRESS s/SUBJECTS d/DAY b/BEGIN e/END`
+**Format**: `edit INDEX n/NAME p/PHONE_NUMBER a/ADDRESS s/SUBJECTS d/DAY b/BEGIN e/END pr/PAYRATE`
 
 **Expected Input**:
 * **Index (Compulsory Field)**: Numbers between 1 to the number of people inside the list.
@@ -84,9 +95,10 @@ Format: `list`
 * **Phone number (Optional field)**: 8 digit number.
 * **Address (Optional field)**: String without restriction in characters.
 * **Subject (Optional field)**: String without restriction in characters.
-* **Day (Optional field)**: String with restrictions in characters, non-case sensitive (Mon/Tues/Wed/Thurs/Fri/Sat/Sun).
+* **Day (Optional field)**: String with restrictions in characters, non-case sensitive (Mon/Tue/Wed/Thu/Fri/Sat/Sun).
 * **Begin (Optional field)**: String with restrictions (HHMM).
 * **End (Optional field)**: String with restrictions (HHMM).
+* **PayRate (Optional field)** String with restrictions in characters, only numbers allowed (no negative numbers).
 
 **Expected Output when the command succeeds**: Successfully edited XXX(Name)
 
@@ -96,6 +108,7 @@ Format: `list`
 * **Invalid Day**: Please input a valid day.
 * **Invalid Begin**: Please input a valid time for Begin in HHMM.
 * **Invalid End**: Please input a valid time for End in HHMM.
+* **Invalid PayRate**: PayRate can take any values, as long as they are integers.
 
 **Examples**:
 
@@ -122,6 +135,28 @@ To edit name and address of your tutee:
 Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the list.
 
+### Marking a person as paid : `paid`
+
+**Description** Mark the specific tutee as paid in the list.
+
+**Format**: `paid INDEX`
+
+**Expected Input**:
+
+* **Index (Compulsory Field)**: Numbers between 1 to the number of people inside the list.
+
+**Expected Output when the command succeeds**: MARK PERSON PAID SUCCESS, Paid: true
+
+**Expected Output when the command fails**: Invalid command format! paidExample: paid 1
+
+Examples:
+* `list` followed by `paid 2` marks the 2nd person in the list.
+
+### Show all the unpaid persons : `list unpaid`
+
+**Description** : Shows all the unpaid tutees in your list.
+
+Format: `list unpaid`
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -139,9 +174,11 @@ To be added soon
 
 ## Command summary
 
-| Action     | Format, Examples                                                                                                                                                                 |
-|------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**    | `add n/NAME p/PHONE_NUMBER a/ADDRESS s/SUBJECT d/DAY b/BEGIN e/END` <br> e.g., `add n/John Doe p/98765432 a/John street, block 123, #01-01 sb/Primary 4 Math d/wed b/1500 e/1600` |
-| **Delete** | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                              |
-| **Edit**   | `edit INDEX n/NAME p/PHONE_NUMBER a/ADDRESS s/SUBJECTS d/DAY b/BEGIN e/END`<br> e.g.,`edit p/91234567 d/Sun`                                                                     |
-| **List**   | `list`|
+| Action          | Format, Examples                                                                                                                                                                                   |
+|-----------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **add**         | `add n/NAME p/PHONE_NUMBER a/ADDRESS s/SUBJECT d/DAY b/BEGIN e/END pr/PAYRATE` <br> e.g., `add n/John Doe p/98765432 a/John street, block 123, #01-01 sb/Primary 4 Math d/wed b/1500 e/1600 pr/20` |
+| **delete**      | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                                |
+| **edit**        | `edit INDEX n/NAME p/PHONE_NUMBER a/ADDRESS s/SUBJECTS d/DAY b/BEGIN e/END pr/PAYRATE`<br> e.g.,`edit p/91234567 d/Sun`                                                                            |
+| **list**        | `list`                                                                                                                                                                                             |
+| **paid**        | `paid INDEX`<br> e.g., `paid 1`                                                                                                                                                                    |
+| **list unpaid** | `list unpaid`                                                                                                                                                                                      |

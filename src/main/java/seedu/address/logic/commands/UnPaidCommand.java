@@ -12,22 +12,19 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 
 /**
- * Deletes a person identified using it's displayed index from the address book.
+ * Mark the tutee as unpaid.
  */
-public class DeleteCommand extends Command {
-
-    public static final String COMMAND_WORD = "delete";
+public class UnPaidCommand extends Command {
+    public static final String COMMAND_WORD = "unpaid";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the person identified by the index number used in the displayed person list.\n"
-            + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
+    public static final String MESSAGE_MARK_PERSON_UNPAID_SUCCESS = "MARK PERSON UNPAID SUCCESS, paid: %1$s";
 
     private final Index targetIndex;
 
-    public DeleteCommand(Index targetIndex) {
+    public UnPaidCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
     }
 
@@ -40,13 +37,10 @@ public class DeleteCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_TUTEE_DISPLAYED_INDEX);
         }
 
-        Person personToDelete = lastShownList.get(targetIndex.getZeroBased());
+        Person personToMarkUnPaid = lastShownList.get(targetIndex.getZeroBased());
+        model.markPersonUnPaid(personToMarkUnPaid);
+        return new CommandResult(String.format(MESSAGE_MARK_PERSON_UNPAID_SUCCESS, (personToMarkUnPaid.getPaid())));
 
-        model.purgeAddressBook();
-        model.deletePerson(personToDelete);
-        model.commitAddressBook();
-
-        return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(personToDelete)));
     }
 
     @Override
@@ -56,12 +50,12 @@ public class DeleteCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof DeleteCommand)) {
+        if (!(other instanceof UnPaidCommand)) {
             return false;
         }
 
-        DeleteCommand otherDeleteCommand = (DeleteCommand) other;
-        return targetIndex.equals(otherDeleteCommand.targetIndex);
+        UnPaidCommand otherUnPaidCommands = (UnPaidCommand) other;
+        return targetIndex.equals(otherUnPaidCommands.targetIndex);
     }
 
     @Override
