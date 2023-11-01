@@ -13,6 +13,7 @@ public class CliSyntax {
     public static final Prefix PREFIX_EMAIL = new Prefix("email=");
     public static final Prefix PREFIX_ADDRESS = new Prefix("address=");
     public static final Prefix PREFIX_ILLNESSES = new Prefix("illnesses=");
+    public static final Prefix PREFIX_BY = new Prefix("by=");
 
     /* Appointment prefix definitions */
     public static final Prefix PREFIX_APPOINTMENT_START = new Prefix("start=");
@@ -20,4 +21,6 @@ public class CliSyntax {
     public static final Prefix PREFIX_APPOINTMENT_DESCRIPTION = new Prefix("description=");
     public static final Prefix PREFIX_APPOINTMENT_PATIENT = new Prefix("patient=");
     public static final Prefix PREFIX_APPOINTMENT_PRIORITY = new Prefix("priority=");
+
+
 }

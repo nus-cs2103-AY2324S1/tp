@@ -225,7 +225,7 @@ public class ModelManager implements Model {
         this.userHistory.redo();
     }
     @Override
-    public void sortAppointmentList() {
-        addressBook.sortAppointmentList();
+    public void sortAppointmentList(boolean isAscending, String attribute) {
+        addressBook.sortAppointmentList(isAscending, attribute);
     }
 }
