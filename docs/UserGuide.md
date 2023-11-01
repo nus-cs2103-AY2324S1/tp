@@ -397,10 +397,6 @@ Invalid Input Example | Application Output
 ### Notes
 
 <div style="display:flex; justify-content:space-around; align-items:center;">
-
-[//]: # (  <img src="images/notes/window_with_notes.png" alt="Window with Notes" style="height:400px; margin:10px;">)
-
-[//]: # (  <img src="images/notes/notes_window.png" alt="Notes Window" style="height:400px; margin:10px;">)
   <img src="images/notes/noteswindow2.png" alt="Window with Notes" style="height:400px; margin:10px;">
 </div>
 
