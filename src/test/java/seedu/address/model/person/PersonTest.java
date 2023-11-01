@@ -89,7 +89,7 @@ public class PersonTest {
                 + ", email=" + ALICE.getEmail() + ", address=" + ALICE.getAddress()
                 + ", bankAccount=" + ALICE.getBankAccount()
                 + ", joinDate=" + ALICE.getJoinDate() + ", salary=" + ALICE.getSalary()
-                + ", annualLeave=" + ALICE.getAnnualLeave()
+                + ", annualLeave=" + ALICE.getAnnualLeave().value
                 + "}";
         assertEquals(expected, ALICE.toString());
     }

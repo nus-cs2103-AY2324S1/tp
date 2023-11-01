@@ -15,14 +15,15 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.AnnualLeave;
 import seedu.address.model.person.Person;
+
 /**
- * Adds leave to an existing employee in the list.
+ * Deletes leave from an existing employee in the list.
  */
-public class AddLeaveCommand extends Command {
+public class DeleteLeaveCommand extends Command {
 
-    public static final String COMMAND_WORD = "addleave";
+    public static final String COMMAND_WORD = "deleteleave";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds leave to an employee.\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Deletes leave from an employee.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
             + PREFIX_ADD_ANNUAL_LEAVE_ON + " DATE     "
             + "OR     "
@@ -34,17 +35,17 @@ public class AddLeaveCommand extends Command {
             + PREFIX_ADD_ANNUAL_LEAVE_FROM + " 01/01/2023 "
             + PREFIX_ADD_ANNUAL_LEAVE_TO + " 05/01/2023 \n";
 
-    public static final String MESSAGE_SUCCESS = "Leave has been added for employee: %1$s!\n";
+    public static final String MESSAGE_SUCCESS = "Leave has been deleted for employee: %1$s!\n";
     private final Index index;
     private final LocalDate startDate;
     private final LocalDate endDate;
 
     /**
-     * Creates an AddLeaveCommand to add leave to the specified employee at {@code index}
+     * Creates a DeleteLeaveCommand to delete leave from specified employee at {@code index}
      * @param index of the employee in the filtered employee list to edit
-     * @param startDate The date of leave to add to the specified employee at {@code index}
+     * @param startDate The date of leave to be deleted from the specified employee at {@code index}
      */
-    public AddLeaveCommand(Index index, LocalDate startDate) {
+    public DeleteLeaveCommand(Index index, LocalDate startDate) {
         requireNonNull(index);
         this.index = index;
         this.startDate = startDate;
@@ -52,13 +53,13 @@ public class AddLeaveCommand extends Command {
     }
 
     /**
-     * Creates an AddLeaveCommand to add a range of leave to the employee at specified {@code index}
+     * Creates an DeleteLeaveCommand to delete a range of leave from the employee at specified {@code index}
      * from the startDate to the endDate.
      * @param index of the employee in the filtered employee list to edit
-     * @param startDate The starting date of leave to add to the specified employee at {@code index}
-     * @param endDate The ending date of leave to add to the specified employee at {@code index}
+     * @param startDate The starting date of leave to be deleted from the specified employee at {@code index}
+     * @param endDate The ending date of leave to be deleted from to the specified employee at {@code index}
      */
-    public AddLeaveCommand(Index index, LocalDate startDate, LocalDate endDate) {
+    public DeleteLeaveCommand(Index index, LocalDate startDate, LocalDate endDate) {
         requireNonNull(index);
         this.index = index;
         this.startDate = startDate;
@@ -72,31 +73,27 @@ public class AddLeaveCommand extends Command {
         if (index.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
-        Person employeeToAddLeave = lastShownList.get(index.getZeroBased());
+        Person employeeToDeleteLeave = lastShownList.get(index.getZeroBased());
         if (startDate.isBefore(LocalDate.now())) {
-            throw new CommandException(String.format(AnnualLeave.MESSAGE_ADD_EXPIRED_LEAVE));
-        }
-        if (employeeToAddLeave.getAnnualLeave().containsDuplicateLeave(startDate, endDate)) {
-            throw new CommandException(AnnualLeave.MESSAGE_ADD_DUPLICATE_LEAVE);
+            throw new CommandException(String.format(AnnualLeave.MESSAGE_DELETE_EXPIRED_LEAVE));
         }
         if (endDate == null) {
-            if (employeeToAddLeave.getAnnualLeave().isValidAddLeave(startDate, startDate)) {
-                employeeToAddLeave.getAnnualLeave().addLeave(startDate);
-            } else {
-                throw new CommandException(AnnualLeave.MESSAGE_LEAVE_CONSTRAINTS);
+            if (!employeeToDeleteLeave.getAnnualLeave().containsAllLeave(startDate, startDate)) {
+                throw new CommandException(AnnualLeave.MESSAGE_DELETE_INVALID_LEAVE);
             }
+            employeeToDeleteLeave.getAnnualLeave().deleteLeave(startDate);
         } else {
             if (!endDate.isAfter(startDate)) {
                 throw new CommandException(AnnualLeave.MESSAGE_INVALID_LEAVE);
-            }
-            if (employeeToAddLeave.getAnnualLeave().isValidAddLeave(startDate, endDate)) {
-                employeeToAddLeave.getAnnualLeave().addLeave(startDate, endDate);
             } else {
-                throw new CommandException(AnnualLeave.MESSAGE_LEAVE_CONSTRAINTS);
+                if (!employeeToDeleteLeave.getAnnualLeave().containsAllLeave(startDate, endDate)) {
+                    throw new CommandException(AnnualLeave.MESSAGE_DELETE_INVALID_LEAVE);
+                }
+                employeeToDeleteLeave.getAnnualLeave().deleteLeave(startDate, endDate);
             }
         }
-        return new CommandResult(String.format(MESSAGE_SUCCESS + this.getLeaveStatusMessage(employeeToAddLeave),
-                Messages.format(employeeToAddLeave)), false, false, true, false, false, false);
+        return new CommandResult(String.format(MESSAGE_SUCCESS + this.getLeaveStatusMessage(employeeToDeleteLeave),
+                Messages.format(employeeToDeleteLeave)), false, false, true, false, false, false);
     }
 
     @Override
@@ -106,32 +103,33 @@ public class AddLeaveCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof AddLeaveCommand)) {
+        if (!(other instanceof DeleteLeaveCommand)) {
             return false;
         }
 
-        AddLeaveCommand otherAddLeaveCommand = (AddLeaveCommand) other;
-        if (this.endDate == null || otherAddLeaveCommand.endDate == null) {
-            if (this.endDate == null && otherAddLeaveCommand.endDate == null) {
-                return this.index.equals(otherAddLeaveCommand.index)
-                        && this.startDate.equals(otherAddLeaveCommand.startDate);
+        DeleteLeaveCommand otherDeleteLeaveCommand = (DeleteLeaveCommand) other;
+        if (this.endDate == null || otherDeleteLeaveCommand.endDate == null) {
+            if (this.endDate == null && otherDeleteLeaveCommand.endDate == null) {
+                return this.index.equals(otherDeleteLeaveCommand.index)
+                        && this.startDate.equals(otherDeleteLeaveCommand.startDate);
             }
             return false;
         }
-        return this.index.equals(otherAddLeaveCommand.index) && this.startDate.equals(otherAddLeaveCommand.startDate)
-                && this.endDate.equals(otherAddLeaveCommand.endDate);
+        return this.index.equals(otherDeleteLeaveCommand.index)
+                && this.startDate.equals(otherDeleteLeaveCommand.startDate)
+                && this.endDate.equals(otherDeleteLeaveCommand.endDate);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("toAddLeave", index)
+                .add("toDeleteLeave", index)
                 .toString();
     }
 
     /**
      * Returns a string of message to indicate the number of days of leave left for an employee for the current year.
-     * @param employee The employee that has their leave added.
+     * @param employee The employee that has their leave deleted.
      * @return The message that shows remaining days of leave for an employee for the current year.
      */
     public static String getLeaveStatusMessage(Person employee) {
