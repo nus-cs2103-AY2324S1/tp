@@ -77,4 +77,10 @@ public class ReminderScheduler extends Thread {
             }
         }
     }
+
+    public void shutdown() {
+        isRunning = false;
+        this.interrupt();
+    }
+
 }
