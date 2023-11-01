@@ -1,60 +1,112 @@
 package seedu.address.ui;
 
-
 import static java.util.Objects.requireNonNull;
-
-import com.vladsch.flexmark.html.HtmlRenderer;
-import com.vladsch.flexmark.parser.Parser;
-import com.vladsch.flexmark.util.ast.Document;
 
 import javafx.fxml.FXML;
 import javafx.scene.layout.Region;
 import javafx.scene.paint.Color;
-import javafx.scene.web.WebView;
-
-
+import javafx.scene.text.Font;
+import javafx.scene.text.FontPosture;
+import javafx.scene.text.FontWeight;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextFlow;
 /**
- * A ui for the status bar that is displayed at the header of the application.
+ * A UI for the status bar that is displayed at the header of the application.
  */
 public class ResultDisplay extends UiPart<Region> {
-
     private static final String FXML = "ResultDisplay.fxml";
 
     @FXML
-    private WebView resultDisplay;
+    private TextFlow resultDisplay;
 
     /**
-     * Constructs a ResultDisplay and sets the text to wrap.
+     * Constructs a ResultDisplay.
      */
     public ResultDisplay() {
         super(FXML);
     }
 
-
     public void setFeedbackToUser(String feedbackToUser) {
         requireNonNull(feedbackToUser);
-        // Convert the Markdown string to HTML
-        Parser parser = Parser.builder().build();
-        Document document = parser.parse(feedbackToUser);
-        HtmlRenderer renderer = HtmlRenderer.builder().build();
-        String htmlContent = renderer.render(document);
+        setTextWithMarkdown(resultDisplay, feedbackToUser);
+    }
+    private void setTextWithMarkdown(TextFlow textFlowControl, String content) {
+        textFlowControl.getChildren().clear(); // clear existing children
 
-        // Load the HTML content into the WebView
-        String styledContent = "<!DOCTYPE html><html><head>"
-                + "<style>"
-                + "body { "
-                + "background-color: #D3EFBD; "
-                + "font-family: Arial; "
-                + "font-size: 18px; "
-                + "color: #34403A; "
-                + "}"
-                + "</style>"
-                + "</head><body>"
-                + htmlContent
-                + "</body></html>";
+        // Initialize flags for formatting
+        boolean isBold = false;
+        boolean isItalic = false;
+        boolean isUnderlined = false;
 
-        resultDisplay.setPageFill(Color.web("#383838"));
-        resultDisplay.getEngine().loadContent(styledContent);
+        StringBuilder currentSegment = new StringBuilder();
+
+        for (int i = 0; i < content.length(); i++) {
+            char c = content.charAt(i);
+
+            // Check for underline tags
+            if (i + 2 < content.length() && content.substring(i, i + 3).equals("<u>")) {
+                if (currentSegment.length() > 0) {
+                    addTextSegment(textFlowControl, currentSegment.toString(), isBold, isItalic, isUnderlined);
+                    currentSegment.setLength(0);
+                }
+                isUnderlined = true;
+                i += 2; // Skip over the <u> tag
+            } else if (i + 3 < content.length() && content.substring(i, i + 4).equals("</u>")) {
+                if (currentSegment.length() > 0) {
+                    addTextSegment(textFlowControl, currentSegment.toString(), isBold, isItalic, isUnderlined);
+                    currentSegment.setLength(0);
+                }
+                isUnderlined = false;
+                i += 3; // Skip over the </u> tag
+            } else if (c == '*') {
+                if (i < content.length() - 1 && content.charAt(i + 1) == '*') {
+                    // Double asterisks indicate bold
+                    if (currentSegment.length() > 0) {
+                        addTextSegment(textFlowControl, currentSegment.toString(), isBold, isItalic, isUnderlined);
+                        currentSegment.setLength(0); // Clear the current segment
+                    }
+                    isBold = !isBold;
+                    i++; // Skip the next asterisk
+                } else {
+                    // Single asterisk indicates italic
+                    if (currentSegment.length() > 0) {
+                        addTextSegment(textFlowControl, currentSegment.toString(), isBold, isItalic, isUnderlined);
+                        currentSegment.setLength(0); // Clear the current segment
+                    }
+                    isItalic = !isItalic;
+                }
+            } else {
+                currentSegment.append(c);
+            }
+        }
+
+        // Handle any remaining text
+        if (currentSegment.length() > 0) {
+            addTextSegment(textFlowControl, currentSegment.toString(), isBold, isItalic, isUnderlined);
+        }
+    }
+
+    private void addTextSegment(TextFlow textFlowControl, String content,
+                                boolean isBold, boolean isItalic, boolean isUnderlined) {
+        Text textSegment = new Text(content);
+
+        if (isBold && isItalic) {
+            textSegment.setFont(Font.font("Arial", FontWeight.BOLD, FontPosture.ITALIC, 15));
+        } else if (isBold) {
+            textSegment.setFont(Font.font("Arial", FontWeight.BOLD, 15));
+        } else if (isItalic) {
+            textSegment.setFont(Font.font("Arial", FontPosture.ITALIC, 15));
+        } else {
+            textSegment.setFont(Font.font("Arial", 15));
+        }
+
+        if (isUnderlined) {
+            textSegment.setUnderline(true);
+        }
+
+        textSegment.setFill(Color.BLACK); // Set text color to black
+
+        textFlowControl.getChildren().add(textSegment);
     }
 
 }

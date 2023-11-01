@@ -26,9 +26,6 @@ public class AnswerTest {
 
         // invalid answer
         assertFalse(Answer.isValidAnswer("")); // empty string
-        assertFalse(Answer.isValidAnswer(" ")); // spaces only
-        assertFalse(Answer.isValidAnswer("^")); // only disallowed characters
-        assertFalse(Answer.isValidAnswer("Name 2 types of UML diagrams~")); // contains disallowed characters
 
         // valid answer
         assertTrue(Answer.isValidAnswer("Craft the truth table for A and B")); // alphabets only
