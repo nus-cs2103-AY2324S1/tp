@@ -19,6 +19,9 @@ import seedu.address.model.event.EventInformation;
 import seedu.address.model.event.EventLocation;
 import seedu.address.model.event.EventName;
 import seedu.address.model.event.EventTime;
+import seedu.address.model.note.NoteContent;
+import seedu.address.model.note.NoteID;
+import seedu.address.model.note.NoteTitle;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.ContactID;
 import seedu.address.model.person.Email;
@@ -154,6 +157,56 @@ public class ParserUtil {
         return result;
     }
 
+    /**
+     * Parses a {@code String noteTitle} into a {@code NoteTitle}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code noteTitle} is invalid.
+     */
+    public static NoteTitle parseNoteTitle(String noteTitle) throws ParseException {
+        requireNonNull(noteTitle);
+        String trimmedNoteTitle = noteTitle.trim();
+        if (!NoteTitle.isValidNoteTitle(trimmedNoteTitle)) {
+            throw new ParseException(NoteTitle.MESSAGE_CONSTRAINTS);
+        }
+        return NoteTitle.fromString(trimmedNoteTitle);
+    }
+
+    /**
+     * Parses a {@code String noteContent} into a {@code NoteContent}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code noteContent} is invalid.
+     */
+    public static NoteContent parseNoteContent(String noteContent) throws ParseException {
+        requireNonNull(noteContent);
+        String trimmedNoteContent = noteContent.trim();
+        if (!NoteContent.isValidNoteContent(trimmedNoteContent)) {
+            throw new ParseException(NoteContent.MESSAGE_CONSTRAINTS);
+        }
+        return NoteContent.fromString(trimmedNoteContent);
+    }
+
+    /**
+     * Parses a {@code String noteID} into a {@code NoteID}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code noteID} is invalid.
+     */
+    public static NoteID parseNoteID(String noteID) throws ParseException {
+        requireNonNull(noteID);
+        String trimmedNoteID = noteID.trim();
+        if (trimmedNoteID.isEmpty()) {
+            throw new ParseException(NoteID.MESSAGE_NON_EMPTY);
+        }
+        NoteID result = null;
+        try {
+            result = NoteID.fromString(trimmedNoteID);
+        } catch (NumberFormatException e) {
+            throw new ParseException(String.format(MESSAGE_INVALID_INTEGER_ARGUMENT, e.getMessage()));
+        }
+        return result;
+    }
 
     /**
      * Parses a {@code String eventName} into a {@code EventName}.

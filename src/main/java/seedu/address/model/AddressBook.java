@@ -6,6 +6,8 @@ import java.util.List;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.event.Event;
+import seedu.address.model.event.UniqueEventList;
 import seedu.address.model.note.Note;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
@@ -139,6 +141,16 @@ public class AddressBook implements ReadOnlyAddressBook {
     @Override
     public ObservableList<Person> getPersonList() {
         return persons.asUnmodifiableObservableList();
+    }
+
+    public ObservableList<Event> getEventList() {
+        UniqueEventList out = new UniqueEventList();
+        persons.forEach(
+                person -> person.getEvents().forEach(
+                        event -> out.add(event)
+                )
+        );
+        return out.asUnmodifiableObservableList();
     }
 
     @Override
