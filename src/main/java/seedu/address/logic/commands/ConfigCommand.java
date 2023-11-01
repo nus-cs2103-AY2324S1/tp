@@ -7,6 +7,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TUTORIAL_COUNT;
 import java.util.Objects;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.logic.CommandHistory;
 import seedu.address.model.Model;
 import seedu.address.model.student.ClassDetails;
 
@@ -51,7 +52,7 @@ public class ConfigCommand extends Command {
      * @return A {@code CommandResult} with the success message.
      */
     @Override
-    public CommandResult execute(Model model) {
+    public CommandResult execute(Model model, CommandHistory commandHistory) {
         try {
             requireNonNull(model);
             ClassDetails.setTutorialCount(tutorialCount);

@@ -296,7 +296,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 * **Alternative 1 (current choice):** Use a list to store the history of address book states.
   * Pros: Easy to understand.
   * Cons: Logic is duplicated twice. For example, when a new command is executed, we must remember to update both `HistoryManager` and `VersionedAddressBook`.
-  * 
+
 * **Alternative 2:** Use `HistoryManager` for undo/redo.
   * Pros: We do not need to maintain a separate list, and just reuse what is already in the codebase.
   * Cons: Requires dealing with commands that have already been undone: We must remember to skip these commands. Violates Single Responsibility Principle and Separation of Concerns as `HistoryManager` now needs to do two different things.
@@ -304,8 +304,8 @@ The following activity diagram summarizes what happens when a user executes a ne
 **Aspect: Commands that support undo & redo**
 
 * **Alternative 1 (current choice):** Not supporting undo/redo for `load` and `config`
-  * Pros: Ensures that Class Manager will not run into issues when undoing `load` for missing saved files. Enforces the immutability of tutorial and attendance count after `config` has been entered.
-  * Cons: Unable to change tutorial and attendance count after `config` has been entered.
+  * Pros: Ensures that Class Manager will not run into issues when undoing `load` for missing saved files. Enforces the immutability of tutorial and assignment count after `config` has been entered.
+  * Cons: Unable to change tutorial and assignment count after `config` has been entered.
 * **Alternative 2:**Supporting undo/redo for all commands.
   * Pros: Ensures that app is consistent with undo/redo and users will not be unsure if a certain command can be undone.
   * Cons: Can be confusing for the user to use undo/redo with `load`.
@@ -316,7 +316,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 The load feature allows users to load a saved JSON file into the app. Load allows data from the new JSON file to be displayed in Class Manager, while setting the new default save file to be the new JSON file. The status bar footer also updates to show the current file.
 
-This feature is an improvement to the previous method of directly editing the `classmanager.json` file located in `[JAR file location]/data`. Users are now able to have multiple JSON files in `[JAR file location]/data` and choose which file is to be loaded into Class Manager. This allows TAs with multiple courses to have a JSON file for each course, and load the JSON file for the course they are currently teaching. 
+This feature is an improvement to the previous method of directly editing the `classmanager.json` file located in `[JAR file location]/data`. Users are now able to have multiple JSON files in `[JAR file location]/data` and choose which file is to be loaded into Class Manager. This allows TAs with multiple courses to have a JSON file for each course, and load the JSON file for the course they are currently teaching.
 
 #### How it is implemented
 
@@ -569,10 +569,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
-* **Student Number**: Matriculation number of NUS student
-* **Email**: NUS email address (eXXXXXXX@u.nus.edu)
-* **CLI**: Command Line Interface
-* **GUI**: Graphical User Interface
+* **Student Number**: Matriculation number of NUS student. It must begin with capital A, followed by any number of alphanumeric characters. It must not be blank.
+* **Email**: Any valid email address, such as NUS email address (eXXXXXXX@u.nus.edu).
+* **CLI**: Command Line Interface.
+* **GUI**: Graphical User Interface.
 
 --------------------------------------------------------------------------------------------------------------------
 
