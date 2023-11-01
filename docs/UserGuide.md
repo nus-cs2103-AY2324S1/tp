@@ -7,9 +7,7 @@ title: User Guide
 
 ![Ui](images/Ui.png)
 
-Connectify is a **desktop app for managing clients, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, Connectify can get your client management tasks done faster than traditional GUI apps.
-
-Connectify helps salespersons manage their clients so that that can build customer relationships!
+Connectify is a **desktop app for managing clients, optimized for use via a Command Line Interface** (CLI). Connectify helps salespersons manage their clients information records and data, boosting their efficiency in building customer relationships! If you can type fast, Connectify can get your client management tasks done faster than traditional GUI apps.
 
 In this user guide, you will find instructions on how to install Connectify and use its many features to manage your clients.
 
@@ -17,7 +15,42 @@ Choose a topic from the table of contents below to find out how to manage your c
 
 # Table of Contents
 * Table of Contents
-{:toc}
+  - [Welcome to Connectify!](#welcome-to-connectify)
+- [Welcome to Connectify!](#welcome-to-connectify)
+- [Table of Contents](#table-of-contents)
+- [Quick start](#quick-start)
+  - [Reading the examples in this user guide](#reading-the-examples-in-this-user-guide)
+  - [Features](#features)
+    - [Quick notes about the command format](#quick-notes-about-the-command-format)
+- [Features](#features-1)
+    - [Viewing help: ***help***](#viewing-help-help)
+  - [Adding](#adding)
+    - [Adding a client profile: ***create***](#adding-a-client-profile-create)
+      - [Format](#format)
+      - [Example](#example)
+      - [Adding a client interaction: ***interaction***](#adding-a-client-interaction-interaction)
+      - [Format](#format-1)
+      - [Examples](#examples)
+  - [Viewing](#viewing)
+    - [Viewing the dashboard: ***dashboard***](#viewing-the-dashboard-dashboard)
+      - [Format](#format-2)
+    - [Viewing the list of clients: ***list***](#viewing-the-list-of-clients-list)
+    - [Finding a client by name: ***find***](#finding-a-client-by-name-find)
+    - [Viewing the full details of a client: ***view***](#viewing-the-full-details-of-a-client-view)
+  - [Editing](#editing)
+    - [Editing a client profile: ***edit***](#editing-a-client-profile-edit)
+  - [Deleting](#deleting)
+    - [Deleting a client profile: ***delete***](#deleting-a-client-profile-delete)
+- [FAQ \[coming soon\]](#faq-coming-soon)
+- [Known issues \[coming soon\]](#known-issues-coming-soon)
+  - [Command summary](#command-summary)
+    - [Add](#add)
+    - [View](#view)
+    - [Edit](#edit)
+    - [Delete](#delete)
+    - [Exit](#exit)
+- [Command summary](#command-summary-1)
+
 
 --------------------------------------------------------------------------------------------------------------------
 
