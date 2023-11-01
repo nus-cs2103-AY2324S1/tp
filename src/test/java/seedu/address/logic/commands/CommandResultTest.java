@@ -67,7 +67,7 @@ public class CommandResultTest {
                 + commandResult.getFeedbackToUser()
                 + ", person=" + commandResult.getPersonToView()
                 + ", targetIndex=" + commandResult.getTargetIndex()
-                +", commandType=" + commandResult.getCommandType()
+                + ", commandType=" + commandResult.getCommandType()
                 + ", isFostererEdited=" + commandResult.getIsFostererEdited() + "}";
         assertEquals(expected, commandResult.toString());
     }
@@ -88,7 +88,7 @@ public class CommandResultTest {
                 + commandResult.getFeedbackToUser()
                 + ", person=" + commandResult.getPersonToView()
                 + ", targetIndex=" + commandResult.getTargetIndex()
-                +", commandType=" + commandResult.getCommandType()
+                + ", commandType=" + commandResult.getCommandType()
                 + ", isFostererEdited=" + commandResult.getIsFostererEdited() + "}";
         assertEquals(expected, commandResult.toString());
     }
