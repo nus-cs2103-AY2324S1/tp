@@ -43,6 +43,18 @@ public class Person {
         this.identitycode = new IdentityCode(String.valueOf(IdentityCodeManager.getNextIdentityCode()));
     }
 
+    public Person(Name name, Phone phone, Email email, Address address, Remark remark,
+                  Set<Tag> tags, IdentityCode identityCode) {
+        requireAllNonNull(name, phone, email, address, tags);
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.address = address;
+        this.tags.addAll(tags);
+        this.remark = remark;
+        this.identitycode = identityCode;
+    }
+
 
     public Name getName() {
         return name;

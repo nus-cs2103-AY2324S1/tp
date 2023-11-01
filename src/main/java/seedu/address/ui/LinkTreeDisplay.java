@@ -6,15 +6,14 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import javafx.scene.shape.Line;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.Logic;
 import seedu.address.model.ReadOnlyTeamBook;
-import seedu.address.model.TeamBook;
 import seedu.address.model.person.IdentityCode;
 import seedu.address.model.person.Person;
 import seedu.address.model.team.Team;
 
-import java.util.List;
 import java.util.Set;
 import java.util.logging.Logger;
 
@@ -32,12 +31,12 @@ public class LinkTreeDisplay extends UiPart<Region> {
     private Logic logic;
     private ObservableList<Team> teams;
 
-    public LinkTreeDisplay(ReadOnlyTeamBook teamBook, Logic logic, String projectName) {
+    public LinkTreeDisplay(Logic logic, String projectName) {
 
         super(FXML);
         this.logic = logic;
-        this.teams = teamBook.getTeamList();
-        this.projectName.setText(projectName);
+        this.teams = logic.getTeamBook().getTeamList();
+        this.projectName.setText("Project name: " + projectName);
 
         addAllTeamStructure();
 

@@ -32,7 +32,7 @@ public class AddDevToTeamCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "New developer added: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This developer already exists in this team!";
-    public static final String MESSAGE_INVALID_TEAM = "This team already exists!";
+    public static final String MESSAGE_INVALID_TEAM = "This team does not exists!";
     private static final String MESSAGE_TEAMLEADER_ADD_DEV = "The leader of team cannot be added as a developer!";
 
     private final Name devToAdd;
