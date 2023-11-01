@@ -10,8 +10,11 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TITLE;
 
 import java.time.LocalDateTime;
 import java.util.Set;
+import java.util.logging.Logger;
 import java.util.stream.Stream;
 
+import seedu.address.Main;
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.AddMeetingCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.meeting.Attendee;
@@ -27,12 +30,15 @@ import seedu.address.model.tag.Tag;
  */
 public class AddMeetingCommandParser implements Parser<AddMeetingCommand> {
 
+    private static Logger logger = LogsCenter.getLogger(Main.class);
+
     /**
      * Parses the given {@code String} of arguments in the context of the AddCommand
      * and returns an AddCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
     public AddMeetingCommand parse(String args) throws ParseException {
+        logger.info("Begin AddMeetingCommand Parse");
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_TITLE, PREFIX_LOCATION, PREFIX_START, PREFIX_END, PREFIX_TAG);
 
@@ -44,8 +50,8 @@ public class AddMeetingCommandParser implements Parser<AddMeetingCommand> {
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_TITLE, PREFIX_LOCATION, PREFIX_START, PREFIX_END);
         Title title = ParserUtil.parseTitle(argMultimap.getValue(PREFIX_TITLE).get());
         Location location = ParserUtil.parseLocation(argMultimap.getValue(PREFIX_LOCATION).get());
-        LocalDateTime start = ParserUtil.parseTime(argMultimap.getValue(PREFIX_START).get());
-        LocalDateTime end = ParserUtil.parseTime(argMultimap.getValue(PREFIX_END).get());
+        LocalDateTime start = ParserUtil.parseMeetingTime(argMultimap.getValue(PREFIX_START).get());
+        LocalDateTime end = ParserUtil.parseMeetingTime(argMultimap.getValue(PREFIX_END).get());
         if (!MeetingTime.isValidMeetingTime(start, end)) {
             throw new ParseException(MeetingTime.MESSAGE_CONSTRAINTS);
         }

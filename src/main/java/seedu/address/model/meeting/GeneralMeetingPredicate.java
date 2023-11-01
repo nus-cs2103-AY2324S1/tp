@@ -1,17 +1,18 @@
 package seedu.address.model.meeting;
 
+import java.time.LocalDateTime;
+import java.util.Arrays;
 import java.util.function.Predicate;
 
-
 /**
- * The predicate class that brings together of all the other predicate class.
+ * The predicate class that brings together of all the other predicate class for Meeting.
  */
 public class GeneralMeetingPredicate implements Predicate<Meeting> {
     private final TitleContainsKeywordsPredicate titlePredicate;
     private final LocationContainsKeywordsPredicate locationPredicate;
     private final MeetingTimeContainsPredicate meetingTimePredicate;
     private final AttendeeContainsKeywordsPredicate attendeePredicate;
-    private final TagContainsKeywordsPredicate tagPredicate;
+    private final MeetingTagContainsKeywordsPredicate tagPredicate;
 
     /**
      * Constructs a predicate class that fulfills all the argument predicates
@@ -25,12 +26,30 @@ public class GeneralMeetingPredicate implements Predicate<Meeting> {
                                              LocationContainsKeywordsPredicate locationPredicate,
                                              MeetingTimeContainsPredicate meetingTimePredicate,
                                              AttendeeContainsKeywordsPredicate attendeePredicate,
-                                             TagContainsKeywordsPredicate tagPredicate) {
+                                             MeetingTagContainsKeywordsPredicate tagPredicate) {
         this.titlePredicate = titlePredicate;
         this.locationPredicate = locationPredicate;
         this.meetingTimePredicate = meetingTimePredicate;
         this.attendeePredicate = attendeePredicate;
         this.tagPredicate = tagPredicate;
+    }
+
+    /**
+     * Constructs a predicate class that fulfills all the argument predicates
+     * @param titleKeyWords String array that will be used to construct TitleContainsKeywordsPredicate
+     * @param locationKeyWords String array that will be used to construct LocationContainsKeywordsPredicate
+     * @param start The start time of MeetingTimeContainsPredicate
+     * @param end the end time of MeetingTimeContainsPredicate
+     * @param attendeeKeyWords String array that will be used to construct AttendeeContainsKeywordsPredicate
+     * @param tagKeyWords String array that will be used to construct TagContainsKeywordsPredicate
+     */
+    public GeneralMeetingPredicate(String[] titleKeyWords, String[] locationKeyWords, LocalDateTime start,
+                                           LocalDateTime end, String[] attendeeKeyWords, String[] tagKeyWords) {
+        this.titlePredicate = new TitleContainsKeywordsPredicate(Arrays.asList(titleKeyWords));
+        this.locationPredicate = new LocationContainsKeywordsPredicate(Arrays.asList(locationKeyWords));
+        this.meetingTimePredicate = new MeetingTimeContainsPredicate(start, end);
+        this.attendeePredicate = new AttendeeContainsKeywordsPredicate(Arrays.asList(attendeeKeyWords));
+        this.tagPredicate = new MeetingTagContainsKeywordsPredicate(Arrays.asList(tagKeyWords));
     }
 
     @Override

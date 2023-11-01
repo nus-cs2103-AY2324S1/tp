@@ -5,9 +5,7 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailur
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.logic.parser.ParserUtil.FORMAT;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
@@ -16,16 +14,16 @@ import seedu.address.logic.commands.FindMeetingCommand;
 import seedu.address.model.meeting.AttendeeContainsKeywordsPredicate;
 import seedu.address.model.meeting.GeneralMeetingPredicate;
 import seedu.address.model.meeting.LocationContainsKeywordsPredicate;
+import seedu.address.model.meeting.MeetingTagContainsKeywordsPredicate;
 import seedu.address.model.meeting.MeetingTime;
 import seedu.address.model.meeting.MeetingTimeContainsPredicate;
-import seedu.address.model.meeting.TagContainsKeywordsPredicate;
 import seedu.address.model.meeting.TitleContainsKeywordsPredicate;
 
 public class FindMeetingCommandParserTest {
 
     private FindMeetingCommandParser parser = new FindMeetingCommandParser();
-    private LocalDateTime start = LocalDateTime.of(LocalDate.of(0001, 01, 01), LocalTime.of(00, 00));
-    private LocalDateTime end = LocalDateTime.of(LocalDate.of(9999, 12, 31), LocalTime.of(23, 59));
+    private LocalDateTime start = LocalDateTime.MIN;
+    private LocalDateTime end = LocalDateTime.MAX;
     @Test
     public void parse_nonEmptyPreambleArg_throwsParseException() {
         assertParseFailure(parser, " dfvuv m/CS2103T",
@@ -99,6 +97,6 @@ public class FindMeetingCommandParserTest {
                 new LocationContainsKeywordsPredicate(List.of(userInput[1].split("\\s+"))),
                 new MeetingTimeContainsPredicate(start, end),
                 new AttendeeContainsKeywordsPredicate(List.of(userInput[2].split("\\s+"))),
-                new TagContainsKeywordsPredicate(List.of(userInput[3].split("\\s+"))));
+                new MeetingTagContainsKeywordsPredicate(List.of(userInput[3].split("\\s+"))));
     }
 }

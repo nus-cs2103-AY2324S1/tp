@@ -6,12 +6,11 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.parser.ParserUtil.FORMAT;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_MEETING;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
 import java.time.LocalDateTime;
-import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
@@ -21,6 +20,8 @@ import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
+import seedu.address.logic.commands.EditMeetingCommand;
+import seedu.address.logic.commands.EditMeetingCommand.EditMeetingDescriptor;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.FindMeetingCommand;
@@ -36,11 +37,18 @@ import seedu.address.model.meeting.AttendeeContainsKeywordsPredicate;
 import seedu.address.model.meeting.GeneralMeetingPredicate;
 import seedu.address.model.meeting.LocationContainsKeywordsPredicate;
 import seedu.address.model.meeting.Meeting;
+import seedu.address.model.meeting.MeetingTagContainsKeywordsPredicate;
 import seedu.address.model.meeting.MeetingTimeContainsPredicate;
-import seedu.address.model.meeting.TagContainsKeywordsPredicate;
 import seedu.address.model.meeting.TitleContainsKeywordsPredicate;
+import seedu.address.model.person.EmailContainsKeywordsPredicate;
+import seedu.address.model.person.GeneralPersonPredicate;
+import seedu.address.model.person.LastContactTimeContainsPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.PersonTagContainsKeywordsPredicate;
+import seedu.address.model.person.PhoneContainsPredicate;
+import seedu.address.model.person.StatusContainsKeywordsPredicate;
+import seedu.address.testutil.EditMeetingDescriptorBuilder;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.MeetingBuilder;
 import seedu.address.testutil.MeetingUtil;
@@ -89,28 +97,40 @@ public class AddressBookParserTest {
     }
 
     @Test
+    public void parseCommand_editm() throws Exception {
+        Meeting meeting = new MeetingBuilder().build();
+        EditMeetingDescriptor descriptor = new EditMeetingDescriptorBuilder(meeting).build();
+        String str = EditMeetingCommand.COMMAND_WORD + " " + INDEX_FIRST_MEETING.getOneBased() + " "
+                + MeetingUtil.getEditMeetingDescriptorDetails(descriptor);
+        EditMeetingCommand command = (EditMeetingCommand) parser.parseCommand(str);
+        assertEquals(new EditMeetingCommand(INDEX_FIRST_MEETING, descriptor), command);
+    }
+
+    @Test
     public void parseCommand_exit() throws Exception {
         assertTrue(parser.parseCommand(ExitCommand.COMMAND_WORD) instanceof ExitCommand);
         assertTrue(parser.parseCommand(ExitCommand.COMMAND_WORD + " 3") instanceof ExitCommand);
     }
 
     @Test
-    public void parseCommand_find() throws Exception {
-        List<String> keywords = Arrays.asList("foo", "bar", "baz");
+    public void parseCommand_findc() throws Exception {
+        LocalDateTime lastContacted = LocalDateTime.parse("20.09.2023 1000", FORMAT);
         FindCommand command = (FindCommand) parser
-                .parseCommand(FindCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
-        assertEquals(new FindCommand(new NameContainsKeywordsPredicate(keywords)), command);
+                .parseCommand(FindCommand.COMMAND_WORD + " n/Alice p/913 e/gmail lc/20.09.2023 1000 s/Active t/friend");
+        assertEquals(new FindCommand(
+                preparePersonPredicate(new String[]{"Alice", "913", "gmail", "Active", "friend"}, lastContacted)),
+                command);
     }
 
     @Test
-    public void parseCommand_filterm() throws Exception {
+    public void parseCommand_findm() throws Exception {
         LocalDateTime start = LocalDateTime.parse("20.09.2023 1000", FORMAT);
         LocalDateTime end = LocalDateTime.parse("20.09.2023 1200", FORMAT);
         FindMeetingCommand command = (FindMeetingCommand) parser
-                .parseCommand(seedu.address.logic.commands.FindMeetingCommand.COMMAND_WORD
+                .parseCommand(FindMeetingCommand.COMMAND_WORD
                         + " m/CS2103T a/Zoom s/20.09.2023 1000 e/20.09.2023 1200 n/Alice Bob t/friend");
-        assertEquals(new FindMeetingCommand(preparePredicate(new String[] {"CS2103T", "Zoom", "Alice Bob", "friend"},
-                start, end)),
+        assertEquals(new FindMeetingCommand(
+                prepareMeetingPredicate(new String[] {"CS2103T", "Zoom", "Alice Bob", "friend"}, start, end)),
                 command);
     }
 
@@ -165,13 +185,28 @@ public class AddressBookParserTest {
     }
 
     /**
-     * Parses {@code userInput} into a {@code NameContainsKeywordsPredicate}.
+     * Parses {@code userInput} into a {@code GeneralMeetingPredicate}.
      */
-    private GeneralMeetingPredicate preparePredicate(String[] userInput, LocalDateTime start, LocalDateTime end) {
+    private GeneralMeetingPredicate prepareMeetingPredicate(String[] userInput,
+                                                            LocalDateTime start, LocalDateTime end) {
         return new GeneralMeetingPredicate(new TitleContainsKeywordsPredicate(List.of(userInput[0].split("\\s+"))),
                 new LocationContainsKeywordsPredicate(List.of(userInput[1].split("\\s+"))),
                 new MeetingTimeContainsPredicate(start, end),
                 new AttendeeContainsKeywordsPredicate(List.of(userInput[2].split("\\s+"))),
-                new TagContainsKeywordsPredicate(List.of(userInput[3].split("\\s+"))));
+                new MeetingTagContainsKeywordsPredicate(List.of(userInput[3].split("\\s+"))));
+    }
+
+    /**
+     * Parses {@code userInput} into a {@code GeneralPersonPredicate}.
+     */
+    private GeneralPersonPredicate preparePersonPredicate(String[] userInput, LocalDateTime lastContacted) {
+        return new GeneralPersonPredicate(
+                new NameContainsKeywordsPredicate(List.of(userInput[0].split("\\s+"))),
+                new PhoneContainsPredicate(List.of(userInput[1].split("\\s+"))),
+                new EmailContainsKeywordsPredicate(List.of(userInput[2].split("\\s+"))),
+                new LastContactTimeContainsPredicate(lastContacted),
+                new StatusContainsKeywordsPredicate(List.of(userInput[3].split("\\s+"))),
+                new PersonTagContainsKeywordsPredicate(List.of(userInput[4].split("\\s+")))
+        );
     }
 }

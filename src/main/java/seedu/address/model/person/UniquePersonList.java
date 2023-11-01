@@ -3,6 +3,7 @@ package seedu.address.model.person;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 
@@ -24,9 +25,17 @@ import seedu.address.model.person.exceptions.PersonNotFoundException;
  */
 public class UniquePersonList implements Iterable<Person> {
 
+    private final Comparator<Person> sortByLastContactComparator = Comparator.comparing(Person::getLastContactedTime);
     private final ObservableList<Person> internalList = FXCollections.observableArrayList();
-    private final ObservableList<Person> internalUnmodifiableList =
-            FXCollections.unmodifiableObservableList(internalList);
+    private final ObservableList<Person> internalUnmodifiableList;
+
+    /**
+     * Creates a UniquePersonList object that is sorted by last contact time.
+     */
+    public UniquePersonList() {
+        FXCollections.sort(internalList, sortByLastContactComparator);
+        internalUnmodifiableList = FXCollections.unmodifiableObservableList(internalList);
+    }
 
     /**
      * Returns true if the list contains an equivalent person as the given argument.
@@ -54,6 +63,7 @@ public class UniquePersonList implements Iterable<Person> {
             throw new DuplicatePersonException();
         }
         internalList.add(toAdd);
+        FXCollections.sort(internalList, sortByLastContactComparator);
     }
 
     /**
@@ -89,6 +99,7 @@ public class UniquePersonList implements Iterable<Person> {
         }
 
         internalList.set(index, editedPerson);
+        FXCollections.sort(internalList, sortByLastContactComparator);
     }
 
     /**
@@ -100,11 +111,13 @@ public class UniquePersonList implements Iterable<Person> {
         if (!internalList.remove(toRemove)) {
             throw new PersonNotFoundException();
         }
+        FXCollections.sort(internalList, sortByLastContactComparator);
     }
 
     public void setPersons(UniquePersonList replacement) {
         requireNonNull(replacement);
         internalList.setAll(replacement.internalList);
+        FXCollections.sort(internalList, sortByLastContactComparator);
     }
 
     /**
@@ -118,6 +131,7 @@ public class UniquePersonList implements Iterable<Person> {
         }
 
         internalList.setAll(persons);
+        FXCollections.sort(internalList, sortByLastContactComparator);
     }
 
     /**

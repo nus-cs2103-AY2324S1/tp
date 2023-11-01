@@ -19,6 +19,7 @@ import seedu.address.model.meeting.Location;
 import seedu.address.model.meeting.MeetingTime;
 import seedu.address.model.meeting.Title;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.LastContactedTime;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Remark;
@@ -151,7 +152,31 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code start} is invalid.
      */
-    public static LocalDateTime parseTime(String time) throws ParseException {
+    public static LocalDateTime parseContactTime(String time) throws ParseException {
+        requireNonNull(time);
+        String trimmedStart = time.trim();
+        //set last contacted to LocalDateTime.MIN if last contacted field is not specified
+        if (trimmedStart.isEmpty()) {
+            return LocalDateTime.MIN;
+        }
+        try {
+            LocalDateTime preppedTime = LocalDateTime.parse(trimmedStart, FORMAT);
+            if (!LastContactedTime.isValidLastContactedTime(preppedTime)) {
+                throw new ParseException(LastContactedTime.MESSAGE_CONSTRAINTS);
+            }
+            return preppedTime;
+        } catch (DateTimeParseException e) {
+            throw new ParseException(LastContactedTime.MESSAGE_CONSTRAINTS);
+        }
+    }
+
+    /**
+     * Parses a {@code String start} into an {@code LocalDateTime}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code start} is invalid.
+     */
+    public static LocalDateTime parseMeetingTime(String time) throws ParseException {
         requireNonNull(time);
         String trimmedStart = time.trim();
         try {
