@@ -44,7 +44,7 @@ If you can type fast, WellNUS can get your contact management tasks done faster 
   which can be used as `add n/John Doe c/98172645`.
 
 * Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+  e.g `n/NAME [r/RISK_LEVEL]` can be used as `n/John Doe r/low` or as `n/John Doe`.
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
@@ -75,7 +75,7 @@ Format: `help`
 
 Adds a student with his/her relevant details.
 
-Format: `add n/NAME c/CONTACT_NUMBER a/HOME_ADDRESS`
+Format: `add n/STUDENT_NAME c/CONTACT_NUMBER a/HOME_ADDRESS [r/RISK_LEVEL]`
 
 **Parameters**:
 1. Name
@@ -93,21 +93,21 @@ Examples:
 
 Deletes an existing student.
 
-Format: `delete INDEX`
+Format: `delete STUDENT_INDEX`
 
 **Parameters**:
-1. Appointment Index
-   - Index must be an integer more than 0
+1. Student Index
+   - Index must be an integer starting from 1
 
 ### 2.2.3 Adding notes for a student: `note`
 
 Adds a note to an existing student, overwrites any existing note.
 
-Format: `note INDEX note/[NOTE]`
+Format: `note STUDENT_INDEX note/NOTE`
 
 **Parameters**:
 1. Student Index
-   - Index must be an integer more than 0
+   - Must be an integer starting from 1
 2. Note
    - Must be 200 characters or less, can be empty
 
@@ -122,14 +122,13 @@ Format: `view g/CATEGORY`
 1. Category
     - Only 'students', 'appointments' or 'all'
 
-
-
+    
 #### 2.2.6 Finding Students by Name: `find`
 
 Find students and their related appointments based on their name. Can choose to find student based on their first name, last name or full name
 If the name does not match entirely, the student will not be shown. Refer to the examples below for a better understanding
 
-Format: `find <NAME>`
+Format: `find STUDENT_NAME`
 
 Example Scenario:
 
@@ -146,16 +145,16 @@ Student Name: Roy Lee
 
 Tags a student to a specific risk level.
 
-Format: `tag INDEX r/RISK_LEVEL`
+Format: `tag STUDENT_INDEX r/RISK_LEVEL`
 
 **Parameters**:
 1. Student Index
-   - Index must be an integer more than 0
+   - Must be an integer starting from 1
 2. Risk Level
    - Must be `high`, `medium`, or `low`
 
 Examples:
-* `tag 2 /high`
+* `tag 2 r/high`
 
 
 ### 2.3 Appointment Commands
@@ -164,27 +163,30 @@ Examples:
 
 Schedules a new appointment for a student.
 
-Format: `schedule d/DESCRIPTION s/DATETIME n/STUDENT`
+Format: `schedule n/STUDENT_NAME date/DATE from/START_TIME to/END_TIME d/DESCRIPTION`
 
 **Parameters**:
-1. Date/Time of appointment
-   - Must be in one of the following formats: `yyyy-MM-dd HH:mm`, or `HH:mm`. If in `HH:mm` the appointment date is set on the date of creation
-2. Name
-   - Alphabetical characters only
+1. Name
+    - Alphabetical characters only
+2. Date
+    - Must be in the following format: `yyyy-MM-dd`
+3. Start/End Time
+    - Must be in the following format: `HH:mm`
 
 Examples:
-- `schedule d/monthly check-up s/2023-12-31 16:30 n/Jon`
-- `schedule d/family issues consultation s/18:30 n/Kiat`
+- `schedule n/Jon date/2023-12-30 from/16:30 to/17:30 d/monthly check-up`
+- `schedule n/Yin Kiat date/2023-01-09 from/07:00 to/10:45 d/first counselling session`
+
 
 #### 2.3.2 Cancelling an Appointment: `cancel`
 
 Cancels an existing appointment.
 
-Format: `cancel <INDEX>`
+Format: `cancel APPOINTMENT_INDEX`
 
 **Parameters**:
 1. Appointment Index
-   - Numerical characters only
+   - Must be an integer starting from 1
 
 Examples:
 * `cancel 2`
@@ -243,19 +245,19 @@ _Details coming soon ..._
 
 ## 5. Command summary
 
-| Action                     | Format, Examples                                                                                                       |
-|----------------------------|------------------------------------------------------------------------------------------------------------------------|
-| [Add Student]()            | `add n/NAME c/PHONE_NUMBER a/ADDRESS` <br> e.g., `add n/John c/81349705 a/Yishun Street 56 Blk 21 #05-07`              |
-| [Delete Student]()         | `delete INDEX`<br> e.g., `delete 3`                                                                                    |
-| [Add Student Note]()       | `note INDEX note/[NOTE]` <br> e.g., `note 1 note/Likes dogs`                                                           |
-| [Edit Student]()           |                                                                                                                        |
-| [View Students]()          |                                                                                                                        |
-| [Find Students]()          |                                                                                                                        |
-| [Assign Risk to Student]() | `tag_student INDEX RISK_LEVEL`<br> e.g.,`tag_student 4 HIGH`                                                           |
-| [Schedule Appointment]()   | `schedule d/DESCRIPTION s/DATETIME n/NAME_OF_STUDENT`<br> e.g., `schedule d/monthly check-up s/2023-12-31 16:30 n/Jon` |
-| [Cancel Appointment]()     | `cancel INDEX`<br> e.g., `cancel 3`                                                                                    |
-| [View Appointments]()      | `view g/CATEGORY` <br> e.g., `view g/appointments`                                                                     |
-| [Filter Appointments]()    |                                                                                                                        |
-| [Help]()                   | `help`                                                                                                                 |
-| [Exit]()                   | `exit`                                                                                                                 |
+| Action                     | Format, Examples                                                                                                                                                |
+|----------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| [Add Student]()            | `add n/STUDENT_NAME c/PHONE_NUMBER a/ADDRESS [r/RISK_LEVEL]` <br> e.g., `add n/John c/81349705 a/Yishun Street 56 Blk 21 #05-07 r/medium`                       |
+| [Delete Student]()         | `delete STUDENT_INDEX`<br> e.g., `delete 3`                                                                                                                     |
+| [Add Student Note]()       | `note STUDENT_INDEX note/NOTE` <br> e.g., `note 1 note/Likes dogs`                                                                                              |
+| [Edit Student]()           |                                                                                                                                                                 |
+| [View Students]()          |                                                                                                                                                                 |
+| [Find Students]()          |                                                                                                                                                                 |
+| [Assign Risk to Student]() | `tag STUDENT_INDEX r/RISK_LEVEL`<br> e.g.,`tag 4 r/high`                                                                                                        |
+| [Schedule Appointment]()   | `schedule n/STUDENT_NAME date/DATE from/START_TIME to/END_TIME d/DESCRIPTION`<br> e.g., `schedule n/Jon date/2023-12-30 from/16:30 to/17:30 d/monthly check-up` |
+| [Cancel Appointment]()     | `cancel APPOINTMENT_INDEX`<br> e.g., `cancel 3`                                                                                                                 |
+| [View Appointments]()      | `view g/CATEGORY` <br> e.g., `view g/appointments`                                                                                                              |
+| [Filter Appointments]()    |                                                                                                                                                                 |
+| [Help]()                   | `help`                                                                                                                                                          |
+| [Exit]()                   | `exit`                                                                                                                                                          |
 
