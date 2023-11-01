@@ -23,6 +23,10 @@ public class ClearCommandParser {
         }
         try {
             String confirmation = ParserUtil.parseSimpleString(args);
+            if (!confirmation.equals("confirm")) {
+                throw new ParseException(
+                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, ClearCommand.MESSAGE_USAGE));
+            }
             return new ClearCommand(confirmation);
         } catch (ParseException pe) {
             throw new ParseException(

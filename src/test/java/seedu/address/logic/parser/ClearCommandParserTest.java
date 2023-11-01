@@ -14,7 +14,7 @@ class ClearCommandParserTest {
 
     @Test
     public void parse_validArgs_returnsClearCommand() throws ParseException {
-        String validArgs = "confirmation";
+        String validArgs = "confirm";
         ClearCommand expectedClearCommand = new ClearCommand(validArgs);
         ClearCommand clearCommand = parser.parse(validArgs);
         assertEquals(expectedClearCommand, clearCommand);
@@ -25,6 +25,14 @@ class ClearCommandParserTest {
         String emptyArgs = "";
         String expectedErrorMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, ClearCommand.MESSAGE_USAGE);
         ParseException exception = assertThrows(ParseException.class, () -> parser.parse(emptyArgs));
+        assertEquals(expectedErrorMessage, exception.getMessage());
+    }
+
+    @Test
+    public void parse_invalidArgs_throwsParseException() {
+        String invalidArgs = "invalid confirmation";
+        String expectedErrorMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, ClearCommand.MESSAGE_USAGE);
+        ParseException exception = assertThrows(ParseException.class, () -> parser.parse(invalidArgs));
         assertEquals(expectedErrorMessage, exception.getMessage());
     }
 }
