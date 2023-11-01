@@ -4,7 +4,6 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.model.util.SerializeUtil.deserialize;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
@@ -12,13 +11,10 @@ import java.util.Set;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.ListEntryField;
 import seedu.address.model.lessons.exceptions.DuplicateTaskException;
 import seedu.address.model.lessons.exceptions.TaskNotFoundException;
-import seedu.address.model.person.Subject;
-import seedu.address.storage.JsonAdaptedLesson;
 import seedu.address.storage.JsonAdaptedTask;
 
 
@@ -127,7 +123,7 @@ public class TaskList extends ListEntryField implements Iterable<Task> {
 
     /**
      * Parses a Tasklist from a String input.
-     * @param input The save file input
+     *
      * @return A TaskList
      */
     public static TaskList of(List<JsonAdaptedTask> tasks) throws ParseException {

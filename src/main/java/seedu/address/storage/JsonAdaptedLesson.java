@@ -3,6 +3,10 @@ package seedu.address.storage;
 import static seedu.address.model.util.SerializeUtil.deserialize;
 import static seedu.address.model.util.SerializeUtil.serialize;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -14,10 +18,6 @@ import seedu.address.model.lessons.Time;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Remark;
 import seedu.address.model.person.Subject;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
 
 
 /**
@@ -64,7 +64,6 @@ public class JsonAdaptedLesson {
         day = serialize(source.getDay());
         subject = serialize(source.getSubject());
         remark = serialize(source.getRemark());
-//        taskList = serialize(source.getTaskList());
         taskList.addAll(source.getTasksSet().stream().map(JsonAdaptedTask::new).collect(Collectors.toList()));
     }
     /**

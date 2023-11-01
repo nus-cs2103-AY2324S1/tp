@@ -1,12 +1,14 @@
 package seedu.address.storage;
 
+import static seedu.address.model.util.SerializeUtil.deserialize;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
+
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.lessons.Task;
 import seedu.address.model.tag.Tag;
 
-import static seedu.address.model.util.SerializeUtil.deserialize;
 
 /**
  * Jackson-friendly version of {@link Tag}.
@@ -41,10 +43,6 @@ public class JsonAdaptedTask {
      * @throws IllegalValueException if there were any data constraints violated in the adapted subject.
      */
     public Task toModelType() throws IllegalValueException {
-//        if (!Task.isValidTask(descriptionWithStatus)) {
-//            throw new IllegalValueException(Tag.MESSAGE_CONSTRAINTS);
-//        }
-//        return new Tag(descriptionWithStatus);
         if (!Task.isValidEncodedTask(descriptionWithStatus)) {
             throw new IllegalValueException(Task.DECODED_CONSTRAINTS);
         }

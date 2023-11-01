@@ -17,8 +17,8 @@ import seedu.address.model.ListEntryField;
 public class Task extends ListEntryField {
 
     public static final String MESSAGE_CONSTRAINTS = "Tasks can take any values, and it should not be blank";
-    public static final String DECODED_CONSTRAINTS = "Incorrect task encoding! The encoded task should have a \"+\" " +
-            "or \"-\" at the beginning of the string,";
+    public static final String DECODED_CONSTRAINTS = "Incorrect task encoding! The encoded task should have a \"+\" "
+            + "or \"-\" at the beginning of the string,";
     public static final Task DEFAULT_TASK = new Task("Sample Task");
 
     /*
@@ -129,8 +129,8 @@ public class Task extends ListEntryField {
      * Defaults to undone if not present.
      *
      * @param task
+     * @return Task
      * @throws ParseException if the string doesn't contain a + or - at the start.
-     * @return
      */
     public static Task of(String task) throws ParseException {
         // parse the task
