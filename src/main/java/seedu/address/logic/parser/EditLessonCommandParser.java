@@ -21,7 +21,7 @@ public class EditLessonCommandParser implements Parser<EditLessonCommand> {
         String indexStr = getValueImmediatelyAfterCommandName(EditLessonCommand.COMMAND_WORD, "index", args, true);
         Lesson lesson;
         try {
-            lesson = AddLessonCommandParser.parseLesson(args);
+            lesson = AddLessonCommandParser.parseLesson(args, true);
         } catch (ParseException e) {
             throw new ParseException("Invalid lesson format. " + e.getMessage() + getUsageInfo());
         }

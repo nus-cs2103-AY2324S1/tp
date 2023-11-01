@@ -68,7 +68,7 @@ public abstract class AbstractEditCommand<T extends ListEntry<? extends T>> exte
         init();
         editFields();
         validateEditedAndWriteBack();
-        return new CommandResult("edited : " + edited.toString());
+        return new CommandResult("Edit success.\n from: " + original.toString() + "\n to: " + edited.toString());
     }
     /**
      * You need to override this method and set the following fields:
@@ -146,7 +146,7 @@ public abstract class AbstractEditCommand<T extends ListEntry<? extends T>> exte
                         + " error adding deleted original entry back. original: "
                         + original.toString() + " edited: " + edited.toString() + ".");
             }
-            throw new CommandException("Clash detected, edited: " + edited.toString() + " clashes with: "
+            throw new CommandException("Clash detected.\nEdited: " + edited.toString() + "\nClashes with: "
                     + getClashingEntry.apply(edited).toString() + ".");
         }
         addMethod.accept(edited);

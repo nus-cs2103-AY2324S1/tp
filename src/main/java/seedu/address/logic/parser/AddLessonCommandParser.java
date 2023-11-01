@@ -19,7 +19,7 @@ public class AddLessonCommandParser implements Parser<AddLessonCommand> {
 
     @Override
     public AddLessonCommand parse(String args) throws ParseException {
-        return new AddLessonCommand(parseLesson(args));
+        return new AddLessonCommand(parseLesson(args, false));
     }
 
     /**
@@ -28,10 +28,10 @@ public class AddLessonCommandParser implements Parser<AddLessonCommand> {
      * @return a lesson object
      * @throws ParseException if the user input is of wrong format or the lesson clashes with existing lessons
      */
-    public static Lesson parseLesson(String args) throws ParseException {
+    public static Lesson parseLesson(String args, boolean nameIsOptional) throws ParseException {
         try {
             Lesson lesson = Lesson.getDefaultLesson();
-            lesson.setNameIfNotDefault(parseField("name", args, Name::of, false));
+            lesson.setNameIfNotDefault(parseField("name", args, Name::of, nameIsOptional));
             lesson.setSubjectIfNotDefault(parseField("subject", args, Subject::of));
             lesson.setDayIfNotDefault(parseField("day", args, Day::of));
             lesson.setStartIfNotDefault(parseField("start", args, Time::of));

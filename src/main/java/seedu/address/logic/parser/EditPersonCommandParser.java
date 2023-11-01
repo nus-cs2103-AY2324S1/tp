@@ -20,7 +20,7 @@ public class EditPersonCommandParser implements Parser<EditPersonCommand> {
         String indexStr = getValueImmediatelyAfterCommandName(EditPersonCommand.COMMAND_WORD, "index", args, true);
         Person person;
         try {
-            person = AddPersonCommandParser.parsePerson(args);
+            person = AddPersonCommandParser.parsePerson(args, true);
         } catch (ParseException e) {
             throw new ParseException("Invalid person format. " + e.getMessage() + getUsageInfo());
         }

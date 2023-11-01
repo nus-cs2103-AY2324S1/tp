@@ -58,7 +58,7 @@ public class AddPersonCommandParserTest {
         try {
             Person actualPerson = AddPersonCommandParser.parsePerson("add -name Yiwen"
                     + " -phone 12345678 -email email@u.com -address Blk 123, Clementi Ave 3, #12,34 "
-                    + "-tag friends -subject English");
+                    + "-tag friends -subject English", false);
             Person expectedPerson = new Person(new Name("Yiwen"));
             expectedPerson.setPhone(new Phone("12345678"));
             expectedPerson.setEmail(new Email("email@u.com"));
