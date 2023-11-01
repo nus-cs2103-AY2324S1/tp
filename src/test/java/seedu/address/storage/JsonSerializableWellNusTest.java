@@ -21,7 +21,7 @@ public class JsonSerializableWellNusTest {
     private static final Path DUPLICATE_STUDENT_FILE = TEST_DATA_FOLDER.resolve("duplicateStudentWellNus.json");
     private static final Path INVALID_APPOINTMENT_FILE = TEST_DATA_FOLDER.resolve("invalidAppointmentWellNus.json");
     private static final Path DUPLICATE_APPOINTMENT_FILE = TEST_DATA_FOLDER.resolve("duplicateAppointmentWellNus.json");
-
+    private static final Path APPOINTMENT_STUDENT_NOT_FOUND_FILE = TEST_DATA_FOLDER.resolve("appointmentStudentNotFoundWellNus.json");
 
     @Test
     public void toModelType_typicalWellNusFile_success() throws Exception {
@@ -59,6 +59,14 @@ public class JsonSerializableWellNusTest {
         JsonSerializableWellNus dataFromFile = JsonUtil.readJsonFile(DUPLICATE_APPOINTMENT_FILE,
                 JsonSerializableWellNus.class).get();
         assertThrows(IllegalValueException.class, JsonSerializableWellNus.MESSAGE_DUPLICATE_APPOINTMENT,
+                dataFromFile::toModelType);
+    }
+
+    @Test
+    public void toModelType_appointmentStudentNotFound_throwsIllegalValueException() throws Exception {
+        JsonSerializableWellNus dataFromFile = JsonUtil.readJsonFile(APPOINTMENT_STUDENT_NOT_FOUND_FILE,
+                JsonSerializableWellNus.class).get();
+        assertThrows(IllegalValueException.class, JsonSerializableWellNus.MESSAGE_STUDENT_NOT_FOUND,
                 dataFromFile::toModelType);
     }
 }

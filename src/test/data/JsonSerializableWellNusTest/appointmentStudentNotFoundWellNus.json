@@ -1,0 +1,34 @@
+{
+  "students" : [ {
+    "name" : "Alice Pauline",
+    "phone" : "94351253",
+    "address" : "123, Jurong West Ave 6, #08-111",
+    "tags" : [ "high" ],
+    "note": " "
+  }, {
+    "name" : "Benson Meier",
+    "phone" : "98765432",
+    "address" : "311, Clementi Ave 2, #02-25",
+    "tags" : [ "medium" ],
+    "note": " "
+  } ],
+  "appointments" : [ {
+    "name" : "Alice Pauline",
+    "date" : "2023-10-15",
+    "startTime" : "16:30",
+    "endTime" : "17:30",
+    "description" : "First Session"
+  }, {
+    "name" : "Alice Pauline",
+    "date" : "2023-11-01",
+    "startTime" : "13:30",
+    "endTime" : "15:30",
+    "description" : "Follow-up"
+  }, {
+    "name" : "Daniel Meier",
+    "date" : "2023-12-02",
+    "startTime" : "17:30",
+    "endTime" : "18:30",
+    "description" : "Third Session"
+  } ]
+}
