@@ -8,6 +8,8 @@ import static seedu.address.testutil.TypicalTasks.TASK_1;
 import static seedu.address.testutil.TypicalTasks.TASK_2;
 
 import org.junit.jupiter.api.Test;
+import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.storage.JsonAdaptedTask;
 
 
 public class TaskTest {
@@ -82,7 +84,22 @@ public class TaskTest {
 
     @Test
     public void toStringMethod() {
-        String expected = TASK_1.isDone() ? "+" : "-" + TASK_1.getDescription();
+        String expected = (TASK_1.isDone() ? "+" : "-") + TASK_1.getDescription();
         assertEquals(expected, TASK_1.toString());
+    }
+
+    @Test
+    public void of_task_parsesTask() throws ParseException {
+        Task doneTask = new Task("Sample", true);
+        String doneTaskString = "+Sample";
+
+        Task parsedDoneTask = Task.of(doneTaskString);
+        assertEquals(doneTask, parsedDoneTask);
+    }
+
+    @Test
+    public void of_task_throwsParseError() {
+        String failedTaskString = "Sample";
+        assertThrows(IllegalArgumentException.class, () -> Task.of(failedTaskString));
     }
 }

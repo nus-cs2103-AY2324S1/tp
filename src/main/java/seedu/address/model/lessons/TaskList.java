@@ -175,14 +175,7 @@ public class TaskList extends ListEntryField implements Iterable<Task> {
         return internalTaskList.hashCode();
     }
 
-    /**
-     * Encodes into a string
-     * @return
-     */
-    @Override
-    public String toString() {
-        return StringUtil.joinArray(new ArrayList<>(this.internalTaskList), ",");
-    }
+
 
     /**
      * Returns true if {@code tasks} contains only unique tasks.

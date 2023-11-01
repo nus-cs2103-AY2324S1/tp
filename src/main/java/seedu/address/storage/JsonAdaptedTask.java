@@ -45,6 +45,9 @@ public class JsonAdaptedTask {
 //            throw new IllegalValueException(Tag.MESSAGE_CONSTRAINTS);
 //        }
 //        return new Tag(descriptionWithStatus);
+        if (!Task.isValidEncodedTask(descriptionWithStatus)) {
+            throw new IllegalValueException(Task.DECODED_CONSTRAINTS);
+        }
         return deserialize(Task.DEFAULT_TASK, Task::of, descriptionWithStatus);
     }
 
