@@ -258,20 +258,16 @@ public class MainWindow extends UiPart<Stage> {
             if (!commandResult.getState().equals(State.NONE)) {
                 State state = commandResult.getState();
                 double[] dividerPositions = contentSplitPane.getDividerPositions();
+                contentSplitPane.getItems().removeAll(personList, studentDetailList,
+                        scheduleList, lessonDetailList, fullTaskList, taskDetailListPanel);
                 switch (state) {
                 case SCHEDULE:
-                    contentSplitPane.getItems().removeAll(personList, studentDetailList,
-                            fullTaskList, taskDetailListPanel);
                     contentSplitPane.getItems().addAll(scheduleList, lessonDetailList);
                     break;
                 case STUDENT:
-                    contentSplitPane.getItems().removeAll(scheduleList, lessonDetailList,
-                            fullTaskList, taskDetailListPanel);
                     contentSplitPane.getItems().addAll(personList, studentDetailList);
                     break;
                 case TASK:
-                    contentSplitPane.getItems().removeAll(scheduleList, lessonDetailList,
-                            personList, studentDetailList);
                     contentSplitPane.getItems().addAll(fullTaskList, taskDetailListPanel);
                     break;
                 default:
