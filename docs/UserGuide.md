@@ -423,7 +423,8 @@ Edits an existing schedule in TutorConnect.
 
 **Scenario**
 
-One day, tutor Alex Yeoh requested to change a class timing, so that it starts at 1pm instead.
+One day, tutor Bernice Yu requested to change the timing of a class on 15th September, so that it starts at 8am 
+instead of 9am.
 
 The edit schedule function is here for that!
 
@@ -431,11 +432,11 @@ The edit schedule function is here for that!
 
 1. Type in `list-s` to find the schedule to update.
 2. Let's say the schedule to be updated is in position 1.
-3. Type in `edit-s 1 st/2023-09-15T13:00` and press enter.
+3. Type in `edit-s 1 st/2023-09-15T08:00` and press enter.
 
 **What you can expect to see**
 
-Tada! The schedule has now been updated to 1pm.
+Tada! The schedule has now been updated to 8am.
 
 ![edit schedule](images/editSchedule.png)
 
