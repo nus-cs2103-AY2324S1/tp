@@ -87,7 +87,7 @@ In the example above, entering <code>name</code>, or others that are close to na
 
 ![Profile navigate field](images/screenshots/NavigatingFields.png)
 
-After you finish editing, pressing enter key brings your cursor back to the command box.
+After you finish editing, pressing enter key brings your cursor back to the command box with your new changes intact.
 ![Cursor back to commandbox](images/screenshots/CursorBackToCommandbox.png)
 In the example above, after changing name from 'Meie' to 'Mei' an enter key was pressed. 
 
