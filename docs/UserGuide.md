@@ -772,26 +772,47 @@ You can also refer to [input information](#input-examples) for details about val
 
 #### Deleting a schedule: `delete-s`
 
-Deletes a schedule in the address book based on their index number in the table of schedules listed.
+Deletes a schedule from TutorConnect.
 
-![delete schedule](images/deleteSchedule.png)
+##### :star: First time users
+{:.no_toc}
 
-**Format:** `delete-s SCHEDULE_INDEX`
+**Scenario**
 
-**Example:**
-* `delete-s 5` deletes the schedule that is indexed as 5 in the schedule list.
-* `list-s` followed by `delete-s 2` deletes the 2nd schedule in the schedule list.
+Imagine the schedule assigned to **Bernice Yu** on **15 September 9am to 11am** has been cancelled, and you want to remove the schedule.
 
-**Acceptable values for each parameter:**
-* `SCHEDULE_INDEX`: Only numerical input that ranges from 1 to the last schedule shown in the list of schedules.
+No worries! Let the delete schedule command help you to remove the specific schedule from the tutor list.
 
-**Expected output:**
-* `Schedule has been deleted: Tutor: John Doe; Start date: Sep 15, 2023 09:00; End date: Sep 15, 2023 11:00;`
+**Follow these steps**
 
-**Error messages:**
-* `Index number given is out of range`: Given index is out of range.
-* `Invalid value in parameter SCHEDULE_INDEX`: Parameter given is not a numerical value.
-* `Missing parameter SCHEDULE_INDEX`: A numerical value is not provided when calling the command `delete-s`.
+1. Type `list-s` and press enter to get the index number of the schedule to be deleted.
+2. Let's say the schedule to be deleted is in position 1 of the tutor list.
+3. Type `delete-s 1` and press enter.
+
+**What you can expect to see**
+
+Well done! You have deleted the schedule assigned to **Bernice Yu**.
+
+![delete schedule](images/delete-schedules/delete-s.png)
+
+##### :star::star::star: Experienced users
+{:.no_toc}
+
+**Command format**
+![delete schedule command](images/delete-schedules/delete-s-syntax.png)
+
+**Errors you might encounter**
+
+Here is a list of the error messages you may encounter, when the command is entered incorrectly:
+
+| Error Message                          | Reason                                                       |
+|----------------------------------------|--------------------------------------------------------------|
+| `Invalid command format!`              | Invalid or missing `SCHEDULE_INDEX`.                           |
+| `The person index provided is invalid` | `SCHEDULE_INDEX` entered is not in the range of number of tutors. |
+
+You can also refer to [input information](#input-examples) for details about valid inputs.
+
+[Back To Top](#table-of-contents)
 
 #### Viewing calendar: `show`
 
