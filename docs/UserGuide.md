@@ -651,7 +651,7 @@ You're in luck with the calendar view command!
 
 **Follow these steps**
 
-Type in `show 2023-09-15` to view the schedules on **15 September 2023** as a calendar.
+To view the schedules on **15 September 2023** as a calendar, type in `show 2023-09-15` and press enter.
 
 **What you can expect to see**
 
