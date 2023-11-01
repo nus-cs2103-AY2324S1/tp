@@ -43,9 +43,9 @@ public class AddLessonCommandParser implements Parser<AddLessonCommand> {
         }
     }
     private static String getUsageInfo() {
-        return "Usage: addLesson -name [NAME] (any number of -[subject|day|start|end|remark] [value]). "
-                + "For example, addLesson -name John -subject Math -day Monday -start 14:30 -end 16:30"
-                + "If you are currently displaying lesson list, you could use 'add' inplace of 'addLesson'. "
-                + "Note you must provide a 'name' not already in the schedule and 'start' must be before 'end'.";
+        return "\nUsage: addLesson -name [NAME] (any number of -[subject|day|start|end|remark] [value]). "
+                + "\n For example, addLesson -name John -subject Math -day Monday -start 14:30 -end 16:30"
+                + "\n If you are currently displaying lesson list, you could use 'add' inplace of 'addLesson'. "
+                + "\n Note you must provide a 'name' not already in the schedule and 'start' must be before 'end'.";
     }
 }

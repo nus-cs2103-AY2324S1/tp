@@ -22,7 +22,7 @@ public class EditLessonCommandParser implements Parser<EditLessonCommand> {
         try {
             lesson = AddLessonCommandParser.parseLesson(args);
         } catch (ParseException e) {
-            throw new ParseException("In valid lesson format. " + getUsageInfo());
+            throw new ParseException("Invalid lesson format. " + e.getMessage() + getUsageInfo());
         }
         if (indexStr != null) {
             try {
@@ -37,9 +37,9 @@ public class EditLessonCommandParser implements Parser<EditLessonCommand> {
     }
 
     public static String getUsageInfo() {
-        return "Usage: edit <Index> (at least one of -[name|subject|day|start|end|remark] [value]). "
-                + "For example, edit 1 -name lesson2 -subject Math -day Monday -start 14:30 -end 16:30"
-                + "If you want to edit the currently shown lesson, you could omit the index. "
-                + "Note your edited 'name' must not already in the schedule and 'start' must be before 'end'.";
+        return "\nUsage: edit <Index> (at least one of -[name|subject|day|start|end|remark] [value]). "
+                + "\nFor example, edit 1 -name lesson2 -subject Math -day Monday -start 14:30 -end 16:30"
+                + "\nIf you want to edit the currently shown lesson, you could omit the index. "
+                + "\nNote your edited 'name' must not already in the schedule and 'start' must be before 'end'.";
     }
 }

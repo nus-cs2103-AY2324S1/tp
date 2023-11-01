@@ -204,6 +204,7 @@ public interface Model {
         return null;
     }
     Boolean hasPersonClashWith(Person person);
+    Person getPersonClashWith(Person person);
     public Set<Person> getPersonsFulfill(Predicate<Person> predicate);
     default BiDirectionalMap<Person, Lesson> getPersonLessonMap() {
         return null;

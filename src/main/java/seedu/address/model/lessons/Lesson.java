@@ -237,6 +237,9 @@ public class Lesson extends ListEntry<Lesson> {
         if (otherLesson == this) {
             return true;
         }
+        if (this.name.equals(otherLesson.getName())) {
+            return true;
+        }
         if (this.day == Day.DEFAULT_DAY || otherLesson.getDay() == Day.DEFAULT_DAY) {
             return false;
         }

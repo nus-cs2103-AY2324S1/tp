@@ -19,8 +19,13 @@ public class EditPersonCommandParser implements Parser<EditPersonCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public EditPersonCommand parse(String args) throws ParseException {
-        String indexStr = getValueImmediatelyAfterCommandName(EditLessonCommand.COMMAND_WORD, "index", args, true);
-        Person person = AddPersonCommandParser.parsePerson(args);
+        String indexStr = getValueImmediatelyAfterCommandName(EditPersonCommand.COMMAND_WORD, "index", args, true);
+        Person person;
+        try {
+            person = AddPersonCommandParser.parsePerson(args);
+        } catch (ParseException e) {
+            throw new ParseException("Invalid person format. " + e.getMessage() + getUsageInfo());
+        }
         if (indexStr != null) {
             try {
                 int index = TypeParsingUtil.parseNum(indexStr);
@@ -33,9 +38,9 @@ public class EditPersonCommandParser implements Parser<EditPersonCommand> {
         }
     }
     public static String getUsageInfo() {
-        return "Usage: edit <Index> (at least one of -[name|phone|email|address|subject|tag|remark] [value]). "
-                + "For example, edit 1 -name John -phone 91234567"
-                + "If you want to edit the currently shown person, you could omit the index. "
-                + "Note your edited 'name' must not already in the address book.";
+        return "\nUsage: edit <Index> (at least one of -[name|phone|email|address|subject|tag|remark] [value]). "
+                + "\nFor example, edit 1 -name John -phone 91234567"
+                + "\nIf you want to edit the currently shown person, you could omit the index. "
+                + "\nNote your edited 'name' must not already in the address book.";
     }
 }
