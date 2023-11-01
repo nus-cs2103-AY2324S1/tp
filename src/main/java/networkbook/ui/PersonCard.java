@@ -178,20 +178,6 @@ public class PersonCard extends UiPart<Region> {
     }
 
     /**
-     * Populates field with single value.
-     * @param <T> Type of value.
-     * @param item Value.
-     * @param pane FlowPane to populate.
-     */
-    private <T> void populateField(Optional<T> item, FlowPane pane) {
-        item.ifPresentOrElse((T t) -> {
-            pane.getChildren().add(new FieldLabel(t.toString()));
-        }, () -> {
-            pane.getChildren().add(new EmptyFieldLabel());
-        });
-    }
-
-    /**
      * Populates graduation.
      * @param g Optional of Graduation.
      * @param pane FlowPane to populate.
