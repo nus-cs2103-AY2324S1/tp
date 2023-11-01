@@ -421,7 +421,7 @@ public class MainWindow extends UiPart<Stage> {
         //todo: maybe add functions to define project name
         String projectName = "LinkTree";
 
-        LinkTreeDisplay linkTreeDisplay = new LinkTreeDisplay(logic.getTeamBook(), logic, projectName);
+        LinkTreeDisplay linkTreeDisplay = new LinkTreeDisplay(logic, projectName);
         tree.getChildren().add(linkTreeDisplay.getRoot());
         tree.setVisible(true);
 
