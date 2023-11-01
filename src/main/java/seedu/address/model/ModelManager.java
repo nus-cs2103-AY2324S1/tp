@@ -53,7 +53,7 @@ public class ModelManager implements Model {
         requireAllNonNull(addressBook, userPrefs, userHistory);
 
         logger.fine("Initializing with address book: " + addressBook + " and user prefs" + userPrefs
-                +    " with their command history");
+                + " with their command history");
 
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
@@ -220,7 +220,8 @@ public class ModelManager implements Model {
         return addressBook.equals(otherModelManager.addressBook)
                 && userPrefs.equals(otherModelManager.userPrefs)
                 && filteredPersons.equals(otherModelManager.filteredPersons)
-                && filteredAppointments.equals(otherModelManager.filteredAppointments);
+                && filteredAppointments.equals(otherModelManager.filteredAppointments)
+                && userHistory.equals(otherModelManager.userHistory);
     }
 
     @Override

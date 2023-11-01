@@ -12,7 +12,6 @@ import org.junit.jupiter.api.io.TempDir;
 import seedu.address.logic.Logic;
 import seedu.address.logic.LogicManager;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.parser.AddressBookParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -44,7 +43,6 @@ public class RedoCommandTest {
     private Logic logic;
     private Model model = new ModelManager();
     private Storage storage;
-    private AddressBookParser addressBookParser = new AddressBookParser();
     private Command redoCommand = new RedoCommand();
 
     @BeforeEach

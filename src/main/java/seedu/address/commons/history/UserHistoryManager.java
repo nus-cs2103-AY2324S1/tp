@@ -118,4 +118,15 @@ public class UserHistoryManager {
     public boolean canRedo() {
         return !redoHistory.isEmpty();
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (!(obj instanceof UserHistoryManager)) {
+            return false;
+        }
+
+        UserHistoryManager otherUserHistory = (UserHistoryManager) obj;
+        return this.undoHistory.equals(otherUserHistory.undoHistory)
+                && this.redoHistory.equals(otherUserHistory.redoHistory);
+    }
 }

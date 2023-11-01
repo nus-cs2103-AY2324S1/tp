@@ -32,7 +32,7 @@ public class CancelCommandTest {
         String expectedMessage = String.format(CancelCommand.MESSAGE_CANCEL_APPOINTMENT_SUCCESS,
                 Messages.format(appointmentToCancel));
 
-        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(), model.getUserHistoryManager());
         expectedModel.deleteAppointment(appointmentToCancel);
 
         assertCommandSuccess(cancelCommand, model, expectedMessage, expectedModel);
@@ -58,7 +58,7 @@ public class CancelCommandTest {
         String expectedMessage = String.format(CancelCommand.MESSAGE_CANCEL_APPOINTMENT_SUCCESS,
                 Messages.format(appointmentToCancel));
 
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(), model.getUserHistoryManager());
         expectedModel.deleteAppointment(appointmentToCancel);
         showNoAppointment(expectedModel);
 

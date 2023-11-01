@@ -51,7 +51,7 @@ public class DiagnoseCommandTest {
         String expectedMessage = String.format(DiagnoseCommand.MESSAGE_DIAGNOSE_PERSON_SUCCESS,
                 Messages.format(diagnosedPerson));
 
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(), model.getUserHistoryManager());
         expectedModel.setPerson(expectedModel.getFilteredPersonList().get(0), diagnosedPerson);
 
         assertCommandSuccess(diagnoseCommand, model, expectedMessage, expectedModel);
@@ -74,7 +74,7 @@ public class DiagnoseCommandTest {
         String expectedMessage = String.format(DiagnoseCommand.MESSAGE_DIAGNOSE_PERSON_SUCCESS,
                 Messages.format(diagnosedPerson));
 
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(), model.getUserHistoryManager());
         expectedModel.setPerson(expectedModel.getFilteredPersonList().get(1), diagnosedPerson);
 
         assertCommandSuccess(diagnoseCommand, model, expectedMessage, expectedModel);
@@ -82,7 +82,7 @@ public class DiagnoseCommandTest {
 
     @Test
     public void execute_validIndexOneIllnessFilteredList_success() {
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(), model.getUserHistoryManager());
 
         showPersonAtIndex(model, INDEX_SECOND_PERSON);
         Person personToDiagnose = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
@@ -107,7 +107,7 @@ public class DiagnoseCommandTest {
 
     @Test
     public void execute_validIndexTwoIllnessesFilteredList_success() {
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(), model.getUserHistoryManager());
 
         showPersonAtIndex(model, INDEX_THIRD_PERSON);
         Person personToDiagnose = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
