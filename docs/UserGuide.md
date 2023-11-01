@@ -332,23 +332,8 @@ Great job! You have found the full updated list of tutors.
 ##### :star::star::star: Experienced users
 {:.no_toc}
 
-**Command format**
-
-![list tutor command](images/listTutorCommandSyntax.png)
-
-
-<div markdown="block" class="alert alert-info">
-
-**:information_source: Information**<br>
-    
-* list-t command does not take in any parameters.
-* Any extraneous parameters after `list-t` will be ignored.
-  e.g. if the command specifies `list-t 123`, it will be interpreted as `list-t`.
-* No error messages as anything typed behind is ignored.
-    
-</div>
-
-You can also refer to [input information](#input-examples) for details about valid inputs.
+Unlike [`list-s`](#listing-all-schedules--list-s), `list-t` does not take in any fields.\
+Anything you type after `list-t` will be ignored.
 
 [Back To Top](#table-of-contents)
 
@@ -408,7 +393,7 @@ You can also refer to [input information](#input-examples) for details about val
 
 #### Deleting a tutor: `delete-t`
 
-Deletes a tutor in TutorConnect based on their index number in the tutor list.
+Deletes a tutor from TutorConnect.
 
 ##### :star: First time users
 {:.no_toc}
@@ -591,7 +576,7 @@ Fret not as you can do just that with the mark command.
 **Follow these steps**
 
 1. Type in `list-s`, press enter, and find the schedule you want to mark as COMPLETED.
-2. Let's say the schedule to be marked as COMPLETED is at position 1.
+2. Let's say the schedule is at position 1.
 3. Type in `mark 1 m/1` and press enter.
 
 **What you can expect to see**
