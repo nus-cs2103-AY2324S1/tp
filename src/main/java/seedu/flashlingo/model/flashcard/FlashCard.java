@@ -55,18 +55,13 @@ public class FlashCard {
 
     /**
      * Edits the flashCard
-     * @param newWord The new word to replace the old word
-     * @param newTranslation The new translation to replace old translation
+     * @param changes The new word to replace the old word
      * @return The new flashcard
      */
-    public FlashCard editFlashCard(String newWord, String newTranslation) {
-        OriginalWord originalWord = this.originalWord.editWord(newWord);
-        TranslatedWord translatedWord = this.translatedWord.editWord(newTranslation);
-        if (this.originalWord.equals(originalWord) && this.translatedWord.equals(translatedWord)) {
-            return null;
-        } else {
-            return new FlashCard(originalWord, translatedWord, whenToReview, currentLevel);
-        }
+    public FlashCard editFlashCard(String[] changes) {
+        OriginalWord originalWord = this.originalWord.editWord(changes[0], changes[1]);
+        TranslatedWord translatedWord = this.translatedWord.editWord(changes[2], changes[3]);
+        return new FlashCard(originalWord, translatedWord, whenToReview, currentLevel);
     }
 
     /**

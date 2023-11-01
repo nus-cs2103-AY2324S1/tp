@@ -50,8 +50,9 @@ public class FlashcardBoxNoButton extends UiPart<Region> {
     public FlashcardBoxNoButton(FlashCard fc, int displayedIndex) {
         super(FXML);
         this.flashCard = fc;
-        // Ensure that FlashCard with no buttons is only created when not in review session
+        //@@author itsNatTan
         assert(!SessionManager.getInstance().isReviewSession());
+        //@@author itsNatTan
         id.setText(displayedIndex + ") ");
         original.setText(fc.getOriginalWord().toString() + ": ");
         translation.setText("");

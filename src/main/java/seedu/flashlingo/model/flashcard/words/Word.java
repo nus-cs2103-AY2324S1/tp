@@ -50,7 +50,7 @@ abstract class Word {
      */
     abstract boolean isTranslatedWord();
 
-    public abstract Word editWord(String newWord);
+    public abstract Word editWord(String newWord, String newLanguage);
 
     /**
      * Evaluates and returns this word

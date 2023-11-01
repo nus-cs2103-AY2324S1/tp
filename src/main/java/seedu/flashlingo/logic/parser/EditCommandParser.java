@@ -1,16 +1,19 @@
 package seedu.flashlingo.logic.parser;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.flashlingo.logic.Messages.MESSAGE_EMPTY_VALUE;
 import static seedu.flashlingo.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.flashlingo.logic.parser.CliSyntax.PREFIX_ORIGINAL_WORD;
 import static seedu.flashlingo.logic.parser.CliSyntax.PREFIX_ORIGINAL_WORD_LANGUAGE;
 import static seedu.flashlingo.logic.parser.CliSyntax.PREFIX_TRANSLATED_WORD;
 import static seedu.flashlingo.logic.parser.CliSyntax.PREFIX_TRANSLATED_WORD_LANGUAGE;
 
+import java.util.Optional;
+
 import seedu.flashlingo.commons.core.index.Index;
 import seedu.flashlingo.logic.commands.EditCommand;
 import seedu.flashlingo.logic.parser.exceptions.ParseException;
+
+
 
 /**
  * Parses input arguments and creates a new EditCommand object
@@ -24,9 +27,12 @@ public class EditCommandParser implements Parser<EditCommand> {
      */
     public EditCommand parse(String args) throws ParseException {
         requireNonNull(args);
+        boolean isEdited = false;
+        Prefix[] prefixes = new Prefix[] {PREFIX_ORIGINAL_WORD, PREFIX_ORIGINAL_WORD_LANGUAGE,
+            PREFIX_TRANSLATED_WORD, PREFIX_TRANSLATED_WORD_LANGUAGE};
+        String[] changes = new String[]{"", "", "", ""};
         ArgumentMultimap argMultimap =
-            ArgumentTokenizer.tokenize(args, PREFIX_ORIGINAL_WORD, PREFIX_ORIGINAL_WORD_LANGUAGE,
-                    PREFIX_TRANSLATED_WORD, PREFIX_TRANSLATED_WORD_LANGUAGE);
+            ArgumentTokenizer.tokenize(args, prefixes);
 
         Index index;
 
@@ -39,12 +45,18 @@ public class EditCommandParser implements Parser<EditCommand> {
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_ORIGINAL_WORD, PREFIX_ORIGINAL_WORD_LANGUAGE,
                 PREFIX_TRANSLATED_WORD, PREFIX_TRANSLATED_WORD_LANGUAGE);
 
-        String originalWord = argMultimap.getValue(PREFIX_ORIGINAL_WORD).get().trim();
-        String translationWord = argMultimap.getValue(PREFIX_TRANSLATED_WORD).get().trim();
-        if (originalWord.isEmpty() | translationWord.isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_EMPTY_VALUE, EditCommand.MESSAGE_USAGE));
+        for (int i = 0; i < prefixes.length; i++) {
+            Optional<String> temp = argMultimap.getValue(prefixes[i]);
+            if (temp.isPresent()) {
+                isEdited = true;
+                changes[i] = temp.get().trim();
+            }
         }
 
-        return new EditCommand(index, originalWord, translationWord);
+        if (!isEdited) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
+        }
+
+        return new EditCommand(index, changes);
     }
 }
