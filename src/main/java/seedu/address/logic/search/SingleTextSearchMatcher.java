@@ -1,20 +1,38 @@
 package seedu.address.logic.search;
 
 import java.util.AbstractMap;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * Searches for a single string of text
+ * Searches for a single string of text.
+ * Applies full word matching on tags regardless of the flag's presence.
  */
 class SingleTextSearchMatcher extends SearchMatcher {
+    private static final Set<String> fullMatches;
+
+    static {
+        fullMatches = new HashSet<>();
+        fullMatches.add("housing");
+        fullMatches.add("availability");
+    }
+
     private final String textToFind;
 
     public SingleTextSearchMatcher(String search) {
         textToFind = search;
+    }
+
+    public static SingleTextSearchMatcher getQuotedMatch(String text) {
+        SingleTextSearchMatcher matcher = new SingleTextSearchMatcher(text);
+        matcher.setFlag(Flag.CASE_SENSITIVITY, true);
+        matcher.setFlag(Flag.FULL_WORD_MATCHING_ONLY, true);
+        return matcher;
     }
 
     @Override
@@ -29,35 +47,34 @@ class SingleTextSearchMatcher extends SearchMatcher {
     }
 
     private Map.Entry<String, Range> getFieldRangeEntryElseNull(Map.Entry<String, String> entry) {
-        String strToSearch;
+        Range range;
         if (entry.getValue() == null) {
-            strToSearch = entry.getKey();
+            range = getRangeIfMatchElseNull(entry.getKey(), false);
+        } else if (fullMatches.contains(entry.getKey())) {
+            range = getRangeIfMatchElseNull(entry.getValue(), true);
         } else {
-            strToSearch = entry.getValue();
+            range = getRangeIfMatchElseNull(entry.getValue(), isFlagApplied(Flag.FULL_WORD_MATCHING_ONLY));
         }
-        Range range = getRangeIfMatchElseNull(strToSearch);
         if (range == null) {
             return null;
         }
         return new AbstractMap.SimpleEntry<>(entry.getKey(), range);
     }
 
-    private Range getRangeIfMatchElseNull(String target) {
-        int index;
-        if (isFlagApplied(Flag.FULL_WORD_MATCHING_ONLY)) {
-            String regex = "\\b" + Pattern.quote(textToFind) + "\\b";
-            index = index(target, regex);
-        } else {
-            index = index(target, Pattern.quote(textToFind));
-        }
+    private Range getRangeIfMatchElseNull(String target, boolean isFullWord) {
+        int index = index(target, isFullWord);
         if (index == -1) {
             return null;
         }
         return new Range(index, index + textToFind.length() - 1);
     }
 
-    public int index(String toSearch, String regex) {
 
+
+    public int index(String toSearch, boolean isFullWord) {
+        String regex = isFullWord
+                ? "\\b" + Pattern.quote(textToFind) + "\\b"
+                : Pattern.quote(textToFind);
         Pattern pattern = isFlagApplied(Flag.CASE_SENSITIVITY)
                 ? Pattern.compile(regex)
                 : Pattern.compile(regex, Pattern.CASE_INSENSITIVE);

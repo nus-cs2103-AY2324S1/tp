@@ -18,6 +18,14 @@ import seedu.address.model.tag.Tag;
  */
 public class Person {
 
+    // Error Messages
+    public static final String AVAILABLE_WHILE_ANIMAL_NAMED_MESSAGE =
+            "When an animal name is provided, availability should not be 'Available' or 'nil'.";
+    public static final String ANIMAL_NAME_TYPE_MISMATCH_WHEN_UNAVAILABLE_MESSAGE =
+            "When availability is 'NotAvailable', animal name and type have to either be both 'nil' or both not 'nil'.";
+    public static final String NIL_WORD = "nil";
+    private static final String NAME_CANNOT_BE_NIL_MESSAGE = "Name of fosterer cannot be 'nil'!";
+
     // Identity fields
     private final Name name;
     private final Phone phone;
@@ -31,14 +39,15 @@ public class Person {
     private final Availability availability;
     private final Housing housing;
     private final AnimalType animalType;
+    private String note;
 
     /**
-     * Every field must be present and not null.
+     * Constructor for Person object. Ensures that required fields are not null.
      */
     public Person(Name name, Phone phone, Email email, Address address, Housing housing,
                   Availability availability, Name animalName, AnimalType animalType,
                   Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
+        requireAllNonNull(name, phone, email, address, housing, availability, animalName, animalType, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -48,10 +57,54 @@ public class Person {
         this.animalName = animalName;
         this.animalType = animalType;
         this.tags.addAll(tags);
+
+        if (Objects.equals(name.fullName, Person.NIL_WORD)) {
+            throw new IllegalArgumentException(NAME_CANNOT_BE_NIL_MESSAGE);
+        }
+
+        if (!isAvailabilityValidWhenAnimalNameNotNil()) {
+            throw new IllegalArgumentException(AVAILABLE_WHILE_ANIMAL_NAMED_MESSAGE);
+        }
+        if (!isAnimalNameTypeValidWhenNotAvailable()) {
+            throw new IllegalArgumentException(ANIMAL_NAME_TYPE_MISMATCH_WHEN_UNAVAILABLE_MESSAGE);
+        }
     }
 
+    /**
+     * Minimal constructor that fills non-required fields with placeholder values (nil).
+     */
     public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
-        this(name, phone, email, address, null, null, null, null, tags);
+        this(name, phone, email, address, new Housing(NIL_WORD), new Availability(NIL_WORD),
+                new Name(NIL_WORD), new AnimalType(NIL_WORD, new Availability(NIL_WORD)), tags);
+    }
+
+    /**
+     * Returns boolean value to check if animal name is valid based on availability status.
+     *
+     * @return a boolean value which represents if animal name is valid.
+     */
+    boolean isAvailabilityValidWhenAnimalNameNotNil() {
+        String avail = availability.value;
+        if (!animalName.fullName.equals(Person.NIL_WORD)) {
+            return !(avail.equals("Available") || avail.equals(Person.NIL_WORD));
+        }
+        return true;
+    }
+
+    /**
+     * Returns boolean value to check if animal name and type are valid when NotAvailable.
+     *
+     * @return a boolean value which represents if animal name and type are valid.
+     */
+    boolean isAnimalNameTypeValidWhenNotAvailable() {
+        String avail = availability.value;
+        if (avail.equals("NotAvailable")) {
+            String type = animalType.value;
+            String name = animalName.fullName;
+            return (name.equals("nil") && type.equals("nil"))
+                    || (!name.equals("nil") && !type.equals("nil"));
+        }
+        return true;
     }
 
     public Name getAnimalName() {
@@ -86,6 +139,14 @@ public class Person {
         return address;
     }
 
+    public String getNote() {
+        return Objects.requireNonNullElse(note, "");
+    }
+
+    public void setNote(String note) {
+        this.note = note;
+    }
+
     /**
      * Returns a map of fields and their existing attributes as strings.
      * Intended for use with predicates generated through the find command.
@@ -103,9 +164,8 @@ public class Person {
         tryPut(map, "availability", getAvailability());
         tryPut(map, "animal name", getAnimalName());
         tryPut(map, "animal type", getAnimalType());
-        for (Tag tag : getTags()) {
-            map.put(tag.tagName, null);
-        }
+        getTags().forEach(tag -> map.put(tag.tagName, null));
+        tryPut(map, "note", getNote());
         return map;
     }
 
@@ -161,7 +221,8 @@ public class Person {
                 && animalName.equals(otherPerson.animalName)
                 && availability.equals(otherPerson.availability)
                 && animalType.equals(otherPerson.animalType)
-                && housing.equals(otherPerson.housing);
+                && housing.equals(otherPerson.housing)
+                && this.getNote().equals(otherPerson.getNote());
     }
 
     @Override
@@ -184,5 +245,4 @@ public class Person {
                 .add("housing", housing)
                 .toString();
     }
-
 }

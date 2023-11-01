@@ -7,7 +7,7 @@ import java.util.TreeSet;
 import seedu.address.commons.util.ToStringBuilder;
 
 /**
- * Represents one or more sorted, unique Index objects.
+ * Represents zero or more sorted, unique Index objects.
  * <p>
  * All Index objects in Indices have to be either zero-based or one-based. Similar to {@code Index},
  * it should be used right from the start when parsing new user input that allows for more than
@@ -30,6 +30,7 @@ public class Indices {
      * Creates a new {@code Indices} using zero-based indices.
      */
     public static Indices fromZeroBased(int[] zeroBasedIndices) {
+        assert(zeroBasedIndices != null);
         SortedSet<Index> result = new TreeSet<>();
 
         for (int index : zeroBasedIndices) {
@@ -43,6 +44,7 @@ public class Indices {
      * Creates a new {@code Indices} using one-based indices.
      */
     public static Indices fromOneBased(int[] oneBasedIndices) {
+        assert(oneBasedIndices != null);
         SortedSet<Index> result = new TreeSet<>();
 
         for (int index : oneBasedIndices) {

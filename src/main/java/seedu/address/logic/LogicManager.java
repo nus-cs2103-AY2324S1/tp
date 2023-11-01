@@ -9,14 +9,15 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.exceptions.DataLoadingException;
-import seedu.address.logic.commands.Command;
-import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.commands.ViewCommand;
 import seedu.address.logic.commands.ViewExitCommand;
+import seedu.address.commons.core.index.Index;
+import seedu.address.logic.commands.Command;
+import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.CommandType;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.AddressBookParser;
-import seedu.address.logic.parser.Parser;
 import seedu.address.logic.parser.ViewModeParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
@@ -38,12 +39,12 @@ public class LogicManager implements Logic {
 
     private final Model model;
     private final Storage storage;
-    private Parser parser;
     private final AddressBookParser addressBookParser;
     private final ViewModeParser viewModeParser;
     private boolean isViewCommand = false;
     private boolean isViewExitCommand = false;
     private final Model backupModel;
+    private boolean isEditFieldCommand = false;
 
     /**
      * Constructs a {@code LogicManager} with the given {@code Model} and {@code Storage}.
@@ -74,14 +75,41 @@ public class LogicManager implements Logic {
         }
         commandResult = command.execute(model);
 
-        if (command instanceof ViewCommand) {
+        if (commandResult.getCommandType() == CommandType.VIEW) {
             isViewCommand = true;
-            isViewExitCommand = false;
-            this.setParser(viewModeParser);
-        } else if (command instanceof ViewExitCommand) {
+        } else {
+            isViewCommand = false;
+        }
+        isViewExitCommand = false;
+
+        try {
+            storage.saveAddressBook(model.getAddressBook());
+        } catch (AccessDeniedException e) {
+            throw new CommandException(String.format(FILE_OPS_PERMISSION_ERROR_FORMAT, e.getMessage()), e);
+        } catch (IOException ioe) {
+            throw new CommandException(String.format(FILE_OPS_ERROR_FORMAT, ioe.getMessage()), ioe);
+        }
+
+        return commandResult;
+    }
+
+    @Override
+    public CommandResult executeInView(String commandText, Person newPerson, Index targetIndex)
+            throws CommandException, ParseException {
+        logger.info("----------------[USER COMMAND][" + commandText + "]");
+        Command command;
+        CommandResult commandResult;
+
+        command = viewModeParser.parseCommand(commandText, newPerson, targetIndex);
+        commandResult = command.execute(model);
+
+        // when it is EditFieldCommand
+        if (commandResult == null) {
+            return null;
+        }
+        if (commandResult.getCommandType() == CommandType.VIEW_EXIT) {
             isViewExitCommand = true;
             isViewCommand = false;
-            this.setParser(addressBookParser);
         } else {
             isViewCommand = false;
             isViewExitCommand = false;
@@ -97,6 +125,7 @@ public class LogicManager implements Logic {
 
         return commandResult;
     }
+
     @Override
     public ReadOnlyAddressBook getAddressBook() {
         return model.getAddressBook();
@@ -128,9 +157,5 @@ public class LogicManager implements Logic {
 
     public boolean getIsViewExitCommand() {
         return isViewExitCommand;
-    }
-
-    public void setParser(Parser parser) {
-        this.parser = parser;
     }
 }

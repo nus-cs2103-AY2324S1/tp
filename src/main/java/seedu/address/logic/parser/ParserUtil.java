@@ -16,6 +16,7 @@ import seedu.address.model.person.Availability;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Housing;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
 
@@ -183,7 +184,7 @@ public class ParserUtil {
             throw new ParseException(AnimalType.MESSAGE_CONSTRAINTS);
         }
 
-        if (availability.equals(new Availability("nil")) && !AnimalType.isValidAnimalType(trimmedAnimalType,
+        if (availability.equals(new Availability(Person.NIL_WORD)) && !AnimalType.isValidAnimalType(trimmedAnimalType,
                 AnimalType.VALIDATION_REGEX_NIL)) {
             throw new ParseException(AnimalType.MESSAGE_CONSTRAINTS);
         }
