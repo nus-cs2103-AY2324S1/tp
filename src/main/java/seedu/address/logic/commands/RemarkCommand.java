@@ -58,6 +58,7 @@ public class RemarkCommand extends Command {
         Person editedPerson = getEditedPerson(model, personToEdit);
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
+        logger.info("Successfully added remark to person");
         return new CommandResult(generateSuccessMessage(editedPerson));
     }
     private Person getPersonToEdit(Model model) throws CommandException {
