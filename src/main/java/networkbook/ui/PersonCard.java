@@ -12,11 +12,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import networkbook.logic.commands.OpenLinkCommand;
-import networkbook.model.person.Email;
-import networkbook.model.person.Graduation;
 import networkbook.model.person.Person;
-import networkbook.model.person.Phone;
 import networkbook.model.person.Priority;
 import networkbook.model.util.Identifiable;
 import networkbook.model.util.UniqueList;
@@ -109,7 +105,7 @@ public class PersonCard extends UiPart<Region> {
         // Website links
         linksHeader.setText(LINKS_HEADER);
         populateHyperlinkListChildren(person.getLinks(), links, (link)-> {
-        // TODO: implement actual link opening
+            // TODO: implement actual link opening
             LOGGER.log(Level.INFO, "Opening link: " + link.getValue());
         });
 
@@ -158,14 +154,15 @@ public class PersonCard extends UiPart<Region> {
      * @param pane FlowPane to populate.
      * @param action Action to perform on link click. Takes in list item.
      */
-    private <T extends Identifiable<T>> void populateHyperlinkListChildren(UniqueList<T> list, FlowPane pane, Consumer<T> action) {
+    private <T extends Identifiable<T>> void populateHyperlinkListChildren(UniqueList<T> list,
+            FlowPane pane, Consumer<T> action) {
         if (list.isEmpty()) {
             pane.getChildren().add(new EmptyFieldLabel());
         } else {
             for (int i = 0; i < list.size(); i++) {
                 T link = list.get(i);
-                FieldHyperlink hyperlink = 
-                new FieldHyperlink(String.format(FIELD_WITH_INDEX_FORMAT, i + 1, link.getValue()), () -> action.accept(link));
+                FieldHyperlink hyperlink = new FieldHyperlink(
+                        String.format(FIELD_WITH_INDEX_FORMAT, i + 1, link.getValue()), () -> action.accept(link));
                 pane.getChildren().add(hyperlink);
             }
         }
@@ -177,25 +174,25 @@ public class PersonCard extends UiPart<Region> {
      * @param item Value.
      * @param pane FlowPane to populate.
      */
-    private <T> void populateField(Optional<T> item, FlowPane pane) { 
+    private <T> void populateField(Optional<T> item, FlowPane pane) {
         item.ifPresentOrElse((T t) -> {
             pane.getChildren().add(new FieldLabel(t.toString()));
         }, () -> {
             pane.getChildren().add(new EmptyFieldLabel());
         });
-    } 
+    }
 
     /**
      * Populates priority.
      * @param p Optional of Priority.
      * @param pane FlowPane to populate.
      */
-    private void populatePriority(Optional<Priority> p, FlowPane pane) { 
+    private void populatePriority(Optional<Priority> p, FlowPane pane) {
         p.ifPresentOrElse((Priority priority) -> {
             pane.getChildren().add(new PriorityFieldLabel(priority));
         }, () -> {
             pane.getChildren().add(new EmptyFieldLabel());
         });
-    } 
+    }
     // Below: getter methods for testing
 }
