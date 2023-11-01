@@ -18,7 +18,7 @@ If you can type fast, prefer typing, and are reasonably comfortable with CLI inp
 
 ---
 
-## Getting Started
+## Quick start
 
 Upon launching ConText, you'll be presented with a clean interface. At the top is the command input box. Right below it, feedback from the commands you input will be displayed. Beneath the feedback section, you'll find a list of your contacts.
 
@@ -32,9 +32,9 @@ Any feedback, including errors, will appear directly below the input box.
 
 ---
 
-### Adding a Contact: `add`
+## Features
 
-//TODO UG needs quite a lot of updates. We should take from or re-edit off the original AB3 documentation to make ours more fleshed out. We should also make ours match the messages in the code.
+### Adding a Contact: `add`
 
 Easily add a new contact to your list with the `add` command.
 
