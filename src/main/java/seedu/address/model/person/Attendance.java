@@ -2,6 +2,10 @@ package seedu.address.model.person;
 
 import java.util.Objects;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import seedu.address.model.tag.Tag;
 import seedu.address.model.week.Week;
 
 /**
@@ -26,6 +30,12 @@ public class Attendance {
         this.week = week;
         this.isPresent = isPresent;
         this.reason = reason;
+    }
+
+    @JsonCreator
+    public static Attendance create(@JsonProperty("week") Week week, @JsonProperty("isPresent") boolean isPresent,
+                                    @JsonProperty("reason") String reason) {
+        return new Attendance(week, isPresent, reason);
     }
 
     /**

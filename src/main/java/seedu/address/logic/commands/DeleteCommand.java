@@ -32,8 +32,8 @@ public class DeleteCommand extends Command {
             + COMMAND_WORD + " all " + PREFIX_TUTORIALGROUP + "G01";
 
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
-    public static final String MESSAGE_DELETE_TAGGED_SUCCESS = "Deleted all contacts from Tutorial Group %1$s";
-    public static final String MESSAGE_DELETE_NO_TAG_SUCCESS = "Deleted all contacts";
+    public static final String MESSAGE_DELETE_TAGGED_SUCCESS = "Deleted all contacts from %1$s Tutorial Group %2$s";
+    public static final String MESSAGE_DELETE_NO_TAG_SUCCESS = "Deleted all contacts from %1$s";
 
     private final Index targetIndex;
     private final Optional<Tag> tag;
@@ -62,6 +62,7 @@ public class DeleteCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
+        String courseCode = model.getAddressBook().getCourseCode();
 
         if (!(targetIndex == null)) {
             if (targetIndex.getZeroBased() >= lastShownList.size()) {
@@ -87,8 +88,8 @@ public class DeleteCommand extends Command {
         model.clearFilters();
 
         return tag.isPresent()
-                ? new CommandResult(String.format(MESSAGE_DELETE_TAGGED_SUCCESS, tag.get().getTagName()))
-                : new CommandResult(String.format(MESSAGE_DELETE_NO_TAG_SUCCESS));
+                ? new CommandResult(String.format(MESSAGE_DELETE_TAGGED_SUCCESS, courseCode, tag.get().getTagName()))
+                : new CommandResult(String.format(MESSAGE_DELETE_NO_TAG_SUCCESS, courseCode));
     }
 
     @Override

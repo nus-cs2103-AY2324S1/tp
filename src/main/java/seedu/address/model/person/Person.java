@@ -33,13 +33,14 @@ public class Person {
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, ID id, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, id, tags);
+    public Person(Name name, Phone phone, Email email, ID id, Set<Tag> tags, List<Attendance> attendances) {
+        requireAllNonNull(name, phone, email, id, tags, attendances);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.id = id;
         this.tags.addAll(tags);
+        this.attendanceRecords.addAll(attendances);
     }
 
     public Name getName() {
