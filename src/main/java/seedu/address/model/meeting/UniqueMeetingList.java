@@ -81,6 +81,23 @@ public class UniqueMeetingList implements Iterable<Meeting> {
     }
 
     /**
+     * Updates the given attendee {@code targetAttendee} with {@code editedAttendee} for all meetings.
+     * @param targetAttendee The Attendee name to be replaced from all meetings.
+     * @param editedAttendee The Attendee name to replace the {@code targetAttendee}.
+     */
+    public void updateAttendee(String targetAttendee, String editedAttendee) {
+        internalList.forEach(meeting -> meeting.updateAttendee(targetAttendee, editedAttendee));
+    }
+
+    /**
+     * Deletes the given attendee {@code targetAttendee} from all meetings.
+     * @param targetAttendee The attendee name to be deleted.
+     */
+    public void deleteAttendee(String targetAttendee) {
+        internalList.forEach(meeting -> meeting.deleteAttendee(targetAttendee));
+    }
+
+    /**
      * Removes the equivalent meeting from the list.
      * The meeting must exist in the list.
      */
@@ -162,4 +179,6 @@ public class UniqueMeetingList implements Iterable<Meeting> {
         }
         return true;
     }
+
+
 }

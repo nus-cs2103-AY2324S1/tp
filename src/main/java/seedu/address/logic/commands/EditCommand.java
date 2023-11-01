@@ -90,6 +90,7 @@ public class EditCommand extends Command {
         }
 
         model.setPerson(personToEdit, editedPerson);
+        model.updateAttendee(personToEdit.getName().fullName, editedPerson.getName().fullName);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)));
     }

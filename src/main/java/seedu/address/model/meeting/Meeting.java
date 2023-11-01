@@ -77,6 +77,26 @@ public class Meeting {
     }
 
     /**
+     * Updates the given attendee {@code targetAttendee} with {@code editedAttendee} for all meetings.
+     * @param targetAttendee The Attendee name to be replaced from all meetings.
+     * @param editedAttendee The Attendee name to replace the {@code targetAttendee}.
+     */
+    public void updateAttendee(String targetAttendee, String editedAttendee) {
+        if (attendees.contains(new Attendee(targetAttendee))) {
+            attendees.remove(new Attendee(targetAttendee));
+            attendees.add(new Attendee(editedAttendee));
+        }
+    }
+
+    /**
+     * Deletes the given attendee {@code targetAttendee} from all meetings.
+     * @param targetAttendee The attendee name to be deleted.
+     */
+    public void deleteAttendee(String targetAttendee) {
+        attendees.remove(new Attendee(targetAttendee));
+    }
+
+    /**
      * Returns an immutable tag set, which throws
      * {@code UnsupportedOperationException} if modification is attempted.
      */
