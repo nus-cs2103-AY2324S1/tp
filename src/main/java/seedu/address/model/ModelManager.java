@@ -28,9 +28,12 @@ public class ModelManager implements Model {
 
     private final AddressBook addressBook;
     private final ScheduleList scheduleList;
+
+    private final FullTaskList fullTaskList;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
     private final FilteredList<Lesson> filteredLessons;
+
     private Ui ui = null;
     private State state = State.SCHEDULE; // Default state of app. Can be either SCHEDULE or STUDENTS
     private Person currentShowingPerson = null;
@@ -52,6 +55,8 @@ public class ModelManager implements Model {
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
         filteredLessons = new FilteredList<>(this.scheduleList.getLessonList());
+        this.fullTaskList = new FullTaskList();
+        this.fullTaskList.setFullTaskList(scheduleList);
         personToLessonMap = new BiDirectionalMap<>();
     }
 
@@ -257,6 +262,19 @@ public class ModelManager implements Model {
         requireNonNull(predicate);
         filteredLessons.setPredicate(predicate);
     }
+
+    //=========== Full Task List ================================================================================
+
+    @Override
+    public ReadOnlyFullTaskList getFullTaskListObject() {
+        return fullTaskList;
+    }
+
+    @Override
+    public ObservableList<Task> getFullTaskList() {
+        return fullTaskList.getFullTaskList();
+    }
+
     //=========== Ui Changing =============================================================
 
     public void linkUi(Ui ui) {
@@ -265,7 +283,7 @@ public class ModelManager implements Model {
 
     @Override
     public void showPerson(Person person) {
-        requireNonNull(person);
+        //requireNonNull(person);
         if (ui != null) {
             currentShowingPerson = person;
             ui.showPersonDetails(person);
@@ -274,10 +292,19 @@ public class ModelManager implements Model {
 
     @Override
     public void showLesson(Lesson lesson) {
-        requireNonNull(lesson);
+        //requireNonNull(lesson);
         if (ui != null) {
             currentShowingLesson = lesson;
             ui.showLessonDetails(lesson);
+        }
+    }
+
+    @Override
+    public void showTask(Task task) {
+        requireNonNull(task);
+        if (ui != null) {
+            currentShowingTask = task;
+            ui.showTaskDetails(task);
         }
     }
 

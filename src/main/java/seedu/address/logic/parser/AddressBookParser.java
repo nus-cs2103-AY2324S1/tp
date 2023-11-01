@@ -2,6 +2,7 @@ package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.model.state.State.SCHEDULE;
 import static seedu.address.model.state.State.STUDENT;
 
 import java.util.logging.Logger;
@@ -60,13 +61,28 @@ public class AddressBookParser {
         String commandWord = matcher.group("commandWord");
         switch (commandWord) {
         case "delete":
-            commandWord = model.getState().equals(STUDENT) ? "deletePerson" : "deleteLesson";
+            commandWord = model.getState().equals(STUDENT)
+                          ? "deletePerson"
+                          : model.getState().equals(SCHEDULE)
+                          ? "deleteLesson"
+                          : "deleteTask";
             break;
         case "add":
-            commandWord = model.getState().equals(STUDENT) ? "addPerson" : "addLesson";
+            commandWord = model.getState().equals(STUDENT)
+                    ? "addPerson"
+                    : model.getState().equals(SCHEDULE)
+                    ? "addLesson"
+                    : "addTask";
             break;
         case "edit":
-            commandWord = model.getState().equals(STUDENT) ? "editPerson" : "editLesson";
+            commandWord = model.getState().equals(STUDENT)
+                    ? "editPerson"
+                    : model.getState().equals(SCHEDULE)
+                    ? "editLesson"
+                    : "editTask";
+            if (commandWord.equals("editTask")) {
+                throw new ParseException("Editing tasks is not supported yet");
+            }
             break;
         default:
             break;
@@ -114,6 +130,8 @@ public class AddressBookParser {
         case DeleteTaskCommand.COMMAND_WORD:
             return new DeleteTaskCommandParser().parse(userInput);
         case NavigateCommand.COMMAND_WORD:
+            return new NavigateCommand();
+        case "nav":
             return new NavigateCommand();
         default:
             logger.finer("This user input caused a ParseException: " + userInput);

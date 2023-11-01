@@ -46,7 +46,10 @@ public class DeletePersonCommand extends Command {
 
         Person personToDelete = lastShownList.get(targetIndex - 1);
         model.deletePerson(personToDelete);
-        model.resetAllShowFields();
+        Person currentPerson = model.getCurrentlyDisplayedPerson();
+        if (currentPerson != null && currentPerson.equals(personToDelete)) {
+            model.showPerson(null);
+        }
         return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(personToDelete)));
     }
 

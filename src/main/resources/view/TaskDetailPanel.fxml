@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<ScrollPane fitToHeight="true" fitToWidth="true" style="-fx-background: #231F31; -fx-background-radius: 10; -fx-border-width: 0; -fx-background-color: transparent;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
+    <content>
+        <AnchorPane prefHeight="340.0" prefWidth="340.0" style="-fx-background-color: #322D46; -fx-background-radius: 10;">
+            <children>
+                <Label layoutX="10.0" layoutY="6.0" style="-fx-text-fill: white;" styleClass="panel-label" text="Task Details" />
+                <VBox layoutX="10.0" layoutY="48.0" prefHeight="200.0" prefWidth="320.0" spacing="10.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="60.0">
+                    <children>
+                        <HBox fillHeight="false">
+                            <children>
+                                <ImageView fitHeight="21.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@../images/note-sticky.png" />
+                                    </image>
+                           <HBox.margin>
+                              <Insets right="5.0" />
+                           </HBox.margin>
+                                </ImageView>
+                        <Label fx:id="desc" style="-fx-background-color: transparent; -fx-text-fill: white;" text="\$desc" wrapText="true" HBox.hgrow="ALWAYS" />
+                            </children>
+                        </HBox>
+                  <HBox prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <Label text="Is Done?" style="-fx-background-color: transparent; -fx-text-fill: white;">
+                           <HBox.margin>
+                              <Insets right="5.0" />
+                           </HBox.margin>
+                        </Label>
+                        <Label fx:id="isDone" text="\\$value" style="-fx-background-color: transparent; -fx-text-fill: white;"/>
+                     </children>
+                  </HBox>
+                    </children>
+                </VBox>
+            </children>
+        </AnchorPane>
+    </content>
+</ScrollPane>

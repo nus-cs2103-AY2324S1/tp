@@ -28,7 +28,8 @@ import seedu.address.model.state.State;
  */
 public class ShowCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs(), getTypicalScheduleList());
+    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs(),
+            getTypicalScheduleList());
 
     @Test
     public void execute_validIndexUnfilteredStudentList_success() {
@@ -37,7 +38,8 @@ public class ShowCommandTest {
         ShowCommand showCommand = new ShowCommand(INDEX_FIRST_PERSON);
         String expectedMessage = String.format(ShowCommand.MESSAGE_SHOW_PERSON_SUCCESS,
                 Messages.format(personToShow));
-        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(), model.getScheduleList());
+        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(),
+                model.getScheduleList());
         expectedModel.showPerson(personToShow);
 
         assertCommandSuccess(showCommand, model, expectedMessage, expectedModel);
@@ -50,7 +52,8 @@ public class ShowCommandTest {
         ShowCommand showCommand = new ShowCommand(INDEX_FIRST_PERSON);
         String expectedMessage = String.format(ShowCommand.MESSAGE_SHOW_LESSON_SUCCESS,
                 Messages.formatLesson(lessonToShow));
-        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(), model.getScheduleList());
+        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(),
+                model.getScheduleList());
         expectedModel.showLesson(lessonToShow);
 
         assertCommandSuccess(showCommand, model, expectedMessage, expectedModel);

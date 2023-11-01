@@ -6,6 +6,7 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.parser.Prefix;
 import seedu.address.model.lessons.Lesson;
+import seedu.address.model.lessons.Task;
 import seedu.address.model.person.Person;
 
 /**
@@ -68,5 +69,16 @@ public class Messages {
                 .append(lesson.getEnd());
         return builder.toString();
     }
+
+    /**
+     * Formats the {@code task} for display to the user.
+     */
+    public static String formatTask(Task task) {
+        final StringBuilder builder = new StringBuilder();
+        builder.append("Description: ")
+                .append(task.getDescription());
+        return builder.toString();
+    }
+
 
 }

@@ -82,6 +82,7 @@ public class AddPersonCommand extends Command {
         }
         model.addPerson(toAdd);
         model.resetAllShowFields();
+        model.showPerson(toAdd);
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
     }
 

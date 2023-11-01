@@ -10,6 +10,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.lessons.Lesson;
+import seedu.address.model.lessons.Task;
 import seedu.address.model.person.Person;
 
 /**
@@ -37,6 +38,9 @@ public interface Logic {
 
     /** Returns an unmodifiable view of the filtered list of schedules */
     ObservableList<Lesson> getFilteredScheduleList();
+
+    /** Returns a view of the full task list */
+    ObservableList<Task> getFullTaskList();
 
     /**
      * Returns the user prefs' address book file path.
