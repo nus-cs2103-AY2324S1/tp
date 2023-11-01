@@ -65,7 +65,7 @@ public class SetGradeCommand extends Command {
         model.commitClassManager();
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, studentNumber)
-                + studentToGrade.getClassDetails().displayAssignments());
+                + gradedStudent.getClassDetails().displayAssignments());
     }
 
     @Override

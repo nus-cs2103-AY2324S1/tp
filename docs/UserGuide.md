@@ -19,13 +19,12 @@ management tasks done faster than traditional GUI apps.
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-2. Download the latest `ClassManager.jar` from [here](https://github.com/AY2324S1-CS2103T-T11-1/tp/releases).
+2. Download the latest `Class.Manager.2023.jar` from [here](https://github.com/AY2324S1-CS2103T-T11-1/tp/releases).
 
 3. Copy the file to the folder you want to use as the _home folder_ for your ClassManager.
 
-4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar classmanager.jar` command to run the application.<br>
-   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-   <img alt="Ui" src="images/Ui.png" width="600">
+4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar Class.Manager.2023.jar` command to run the application.<br>
+   Note the app contains some sample data.<br>
 
 5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
@@ -47,7 +46,7 @@ management tasks done faster than traditional GUI apps.
 
 ## GUI Overview
 
-<img alt="Gui" src="images/Ui.png" width="600">
+<img alt="Gui" src="images/Ui.png" width="600"> </br>
 
 The **GUI** is split up into 4 main sections.
 
@@ -89,7 +88,7 @@ The **GUI** is split up into 4 main sections.
 
 ### Command navigation
 
-* Class Manager allows you to navigate to previously entered commands using the arrow keys. Navigate to earlier commands using the up arrow key, and later commands using the down arrow key.
+* Class Manager allows you to navigate to previously entered commands using the arrow keys. Navigate to earlier commands using the **up arrow** key, and later commands using the **down arrow** key.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -129,7 +128,7 @@ Adds a student to the class manager.
 Format: `add n/NAME p/PHONE e/EMAIL s/STUDENT_NUMBER c/CLASS_NUMBER [t/TAG]…​`
 
 * **ALL** the fields must be provided.
-* The NAME fields are case-sensitive.
+* The NAME field is case-sensitive.
 * STUDENT NUMBER needs to be unique
 * The class details of a student will be automatically populated to be 0 for all fields during the creation of a student.
 * Comment for a student can only be added after the student is instantiated.
@@ -208,7 +207,7 @@ Examples:
 
 ### Lookup students : `lookup`
 
-Lookup students with any of the given fields.
+Search and display students satisfying all given fields (Only one keyword needs to match per field).
 
 Format: `lookup [c/CLASS_NUMBER] [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [s/STUDENT_NUMBER] [t/TAG]`
 
@@ -223,25 +222,15 @@ _At least one_ of the optional fields must be provided. `lookup` alone is not al
 * The order of the fields does **not** matter. e.g. `lookup n/li c/T11` will return the same result as `lookup c/T11 n/li`
 * Field with nothing will be ignored. e.g. `lookup n/ c/T11` will return the same result as `lookup c/T11`.
 * This command can take multiple words per field. e.g. `lookup c/T11 T12` will return all students in `T11` or `T12`.
+  * Complicated lookup can be done by combining multiple fields. e.g. `lookup n/alex david c/t11 t12` 
+  will return all students with name `alex` or `david` **and** is in class `t11` or `t12`.
 
 Examples:
 
 * `lookup n/alex david` returns `Alex Yeoh`, `David Li`<br>
-<img alt="result for 'lookup n/alex david'" src="images/lookupNameResult.png" width="600"> </br></br>
+<img alt="result for 'lookup n/alex david'" src="images/lookupNameResult.png" width="700"> </br></br>
 * `lookup c/t11` returns all students in class number T11<br>
-<img alt="result for 'lookup c/t11'" src="images/lookupClassResult.png" width="600"> </br></br>
-
----
-
-### Configuring Class Manager: `config`
-
-Configures Class Manager 2023 with the module information, such as tutorial count and assignment count.
-
-Format: `config #t/TUTORIAL_COUNT #a/ASSIGNMENT_COUNT`
-* Parameters must be zero or greater.
-
-Examples:
-* `config #t/2 #a/3` sets the tutorial count to 2 and assignment count to 3.
+<img alt="result for 'lookup c/t11'" src="images/lookupClassResult.png" width="700"> </br></br>
 
 ---
 
@@ -252,7 +241,7 @@ Marking tutorial attendance for an existing student as present in the class mana
 Format: `mark-pre TUTORIAL_INDEX s/STUDENT_NUMBER`
 
 * The `STUDENT_NUMBER` must be valid and exist.
-* The `TUTORIAL_INDEX` must be a valid positive integer, within the configured tutorial count given in the `config` command.
+* The `TUTORIAL_INDEX` must be a valid positive integer, within the configured tutorial count given in the [**<u>`config`<u>**](#configuring-class-manager-config) command.
 
 Examples:
 * `mark-pre 1 s/A0249112A`
@@ -265,7 +254,7 @@ Marking tutorial attendance for all students in current list displayed as presen
 
 Format: `mark-pre-all TUTORIAL_INDEX`
 
-* The `TUTORIAL_INDEX` must be a valid positive integer, within the configured tutorial count given in the `config` command.
+* The `TUTORIAL_INDEX` must be a valid positive integer, within the configured tutorial count given in the [**<u>`config`<u>**](#configuring-class-manager-config) command.
 
 Examples:
 * `mark-pre-all 1`
@@ -279,7 +268,7 @@ Marking tutorial attendance for an existing student as absent in the class manag
 Format: `mark-abs TUTORIAL_INDEX s/STUDENT_NUMBER`
 
 * The `STUDENT_NUMBER` must be valid and exist.
-* The `TUTORIAL_INDEX` must be a valid positive integer, within the configured tutorial count given in the `config` command.
+* The `TUTORIAL_INDEX` must be a valid positive integer, within the configured tutorial count given in the [**<u>`config`<u>**](#configuring-class-manager-config) command.
 
 Examples:
 * `mark-abs 1 s/A0249112A`
@@ -293,7 +282,7 @@ Setting an assignment grade for an existing student in the class manager.
 Format: `grade s/STUDENT_NUMBER a/ASSIGNMENT_INDEX g/GRADE`
 
 * The `STUDENT_NUMBER` must be valid and exist.
-* The `ASSIGNMENT_INDEX` must be a valid positive integer, within the configured assignment count given in the `config` command.
+* The `ASSIGNMENT_INDEX` must be a valid positive integer, within the configured assignment count given in the [**<u>`config`<u>**](#configuring-class-manager-config) command.
 * The `GRADE` must be a valid integer between 0 and 100.
 
 Examples:
@@ -308,11 +297,11 @@ Recording the class participation level for an existing student in the class man
 Format: `class-part s/STUDENT_NUMBER tut/TUTORIAL_INDEX part/PARTICIPATION_LEVEL`
 
 * The `STUDENT_NUMBER` must be valid and exist.
-* The `TUTORIAL_INDEX` must be a valid positive integer, within the configured tutorial count given in the `config` command.
+* The `TUTORIAL_INDEX` must be a valid positive integer, within the configured tutorial count given in the [**<u>`config`<u>**](#configuring-class-manager-config) command.
 * The `PARTICIPATION_LEVEL` must be either `true` or `false`.
   * The `true` value indicates that the student has participated in the tutorial, while the `false` value indicates that the student has not participated in the tutorial.
 * The `PARTICIPATION_LEVEL` is case-insensitive.
-* In future versions, the `PARTICIPATION_LEVEL` will be replaced with various levels of participation.
+* _**Coming soon**_, the `PARTICIPATION_LEVEL` will be replaced with various levels of participation.
   * The proposed levels includes: `none`, `sufficient`, `good`, `excellent`.
 
 Examples:
@@ -332,7 +321,8 @@ Format: `view s/STUDENT_NUMBER`
 Example:
 
 * `view s/A0245234A`
-![result for 'view s/A0245234A'](images/ViewCommand.png)
+
+<img alt="result for 'view s/A0245234A'" src="images/ViewCommand.png" width="750" >
 
 ---
 
@@ -461,11 +451,11 @@ Format: `load f/FILE_NAME`
 * File name is case-insensitive
 
 Examples:
-* `load f/t2` loads the t2.json file in the data folder.
+* `load f/sample` loads the sample.json file in the data folder.
 
-* ![load_outcome](images/load-outcome.png)
+<img alt="load_outcome" src="images/load-outcome.png" width="750"> <br><br>
 
-* ![t2_contents](images/t2-contents.png)
+<img alt="sample_contents" src="images/sample-contents.png" width="750"> <br><br>
 
 ---
 
@@ -475,10 +465,10 @@ Toggles between light and dark color themes.
 
 Format: `theme`
 ##### Dark theme
-<img alt="theme_dark" src="images/theme-dark.png" width="575" > <br><br>
+<img alt="theme_dark" src="images/theme-dark.png" width="600" > <br><br>
 
 ##### Light theme
-<img alt="theme_light" src="images/theme-light.png" width="575" >
+<img alt="theme_light" src="images/theme-light.png" width="600" >
 
 ---
 
@@ -500,10 +490,10 @@ Format: `theme`
 ## Command summary (in alphabetical order)
 
 ### Useful commands
-| Action                      | Format, Examples                                                                                                                                                 |
-|-----------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Configure Class Manager** | `config #t/TUTORIAL_COUNT #a/ASSIGNMENT_COUNT`<br> e.g. `config #t/13 #a/3`                                                                                      |
-| **Open help window**        | `help`                                                                                                                                                           |
+| Action                      | Format, Examples                                                            |
+|-----------------------------|-----------------------------------------------------------------------------|
+| **Configure Class Manager** | `config #t/TUTORIAL_COUNT #a/ASSIGNMENT_COUNT`<br> e.g. `config #t/10 #a/3` |
+| **Open help window**        | `help`                                                                      |
 
 ### Core commands without parameters
 | Action                 | Format, Examples                                                                                                                                                 |
@@ -514,22 +504,22 @@ Format: `theme`
 | **Toggle theme**       | `theme`                                                                                                                                                          |
 
 ### Core commands with parameters
-| Action                         | Format, Examples                                                                                                                                                 |
-|--------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Action                         | Format, Examples                                                                                                                                                    |
+|--------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Add**                        | `add n/NAME p/PHONE_NUMBER e/EMAIL c/CLASS_NUMBER s/STUDENT_NUMBER [t/TAG]…​` <br> e.g `add n/James Ho p/22224444 e/jamesho@example.com s/A0245234A c/T11 t/friend` |
-| **Comment**                    | `comment s/STUDENT_NUMBER c/COMMENT` <br> e.g. `comment s/A0249112A c/This student is very hardworking.`                                                         |
-| **Delete**                     | `delete s/STUDENT_NUMBER`<br> e.g. `delete s/A0249112A`                                                                                                          |
-| **Edit**                       | `edit STUDENT_NUMBER [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [s/NEW_STUDENT_NUMBER] [c/CLASS_NUMBER]`<br> e.g.`edit A0245234A n/John Bob p/98761234 e/johnd@exp.com` |
-| **Lookup**                     | `lookup [c/CLASS_NUMBER] [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [s/STUDENT_NUMBER] [t/TAG]` <br> e.g. `lookup c/T11`                                                |
-| **Load**                       | `load f/FILE_NAME`<br> e.g. `load f/export-v1`                                                                                                                   |
-| **Mark Absent**                | `mark-abs TUTORIAL_INDEX s/STUDENT_NUMBER` <br> e.g. `mark-abs 1 s/A0245234A`                                                                                    |
-| **Mark Present**               | `mark-pre TUTORIAL_INDEX s/STUDENT_NUMBER` <br> e.g. `mark-pre 1 s/A0245234A`                                                                                    |
-| **Mark Present All**           | `mark-pre-all TUTORIAL_INDEX` <br> e.g. `mark-pre-all 1`                                                                                                         |
-| **Random**                     | `random NUM_OF_STUDENTS` <br> e.g. `random 2`                                                                                                                     |
-| **Record Class participation** | `class-part s/STUDENT_NUMBER tut/TUTORIAL_INDEX part/PARTICIPATION_LEVEL` <br> e.g. `class-part s/A0245234A tut/1 part/true`                                     |
-| **Set Grade**                  | `grade s/STUDENT_NUMBER a/ASSIGNMENT_INDEX g/GRADE` <br> e.g. `grade s/A0245234A a/1 g/100`                                                                      |
-| **Tag**                        | `tag s/STUDENT_NUMBER [/add] [/delete] t/[TAG]…​` <br> e.g. `tag s/A0123456N t/smart t/shy`                                                                      |
-| **View**                       | `view s/STUDENT_NUMBER` <br> e.g. `view s/A0245234A`                                                                                                             |
+| **Comment**                    | `comment s/STUDENT_NUMBER c/COMMENT` <br> e.g. `comment s/A0249112A c/This student is very hardworking.`                                                            |
+| **Delete**                     | `delete s/STUDENT_NUMBER`<br> e.g. `delete s/A0249112A`                                                                                                             |
+| **Edit**                       | `edit STUDENT_NUMBER [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [s/NEW_STUDENT_NUMBER] [c/CLASS_NUMBER]`<br> e.g.`edit A0245234A n/John Bob p/98761234 e/johnd@exp.com`    |
+| **Lookup**                     | `lookup [c/CLASS_NUMBER] [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [s/STUDENT_NUMBER] [t/TAG]` <br> e.g. `lookup c/T11`                                                   |
+| **Load**                       | `load f/FILE_NAME`<br> e.g. `load f/sample`                                                                                                                         |
+| **Mark Absent**                | `mark-abs TUTORIAL_INDEX s/STUDENT_NUMBER` <br> e.g. `mark-abs 1 s/A0245234A`                                                                                       |
+| **Mark Present**               | `mark-pre TUTORIAL_INDEX s/STUDENT_NUMBER` <br> e.g. `mark-pre 1 s/A0245234A`                                                                                       |
+| **Mark Present All**           | `mark-pre-all TUTORIAL_INDEX` <br> e.g. `mark-pre-all 1`                                                                                                            |
+| **Random**                     | `random NUM_OF_STUDENTS` <br> e.g. `random 2`                                                                                                                       |
+| **Record Class participation** | `class-part s/STUDENT_NUMBER tut/TUTORIAL_INDEX part/PARTICIPATION_LEVEL` <br> e.g. `class-part s/A0245234A tut/1 part/true`                                        |
+| **Set Grade**                  | `grade s/STUDENT_NUMBER a/ASSIGNMENT_INDEX g/GRADE` <br> e.g. `grade s/A0245234A a/1 g/100`                                                                         |
+| **Tag**                        | `tag s/STUDENT_NUMBER [/add] [/delete] t/[TAG]…​` <br> e.g. `tag s/A0123456N t/smart t/shy`                                                                         |
+| **View**                       | `view s/STUDENT_NUMBER` <br> e.g. `view s/A0245234A`                                                                                                                |
 
 --------------------------------------------------------------------------------------------------------------------
 

@@ -67,16 +67,16 @@ public class ClassDetailsTest {
     public void markAttendancePresent_invalidValues_exceptionThrown() {
         ClassDetails classDetails = new ClassDetails("T11");
         ClassDetails.setTutorialCount(13);
-        assertThrows(CommandException.class, () -> classDetails.markPresent(Index.fromZeroBased(14)));
-        assertThrows(CommandException.class, () -> classDetails.markPresent(Index.fromZeroBased(0)));
+        assertThrows(CommandException.class, () -> classDetails.markPresent(Index.fromOneBased(14)));
+        assertThrows(IndexOutOfBoundsException.class, () -> classDetails.markPresent(Index.fromOneBased(0)));
     }
 
     @Test
     public void markAttendanceAbsent_invalidValues_exceptionThrown() {
         ClassDetails classDetails = new ClassDetails("T11");
         ClassDetails.setTutorialCount(13);
-        assertThrows(CommandException.class, () -> classDetails.markAbsent(Index.fromZeroBased(14)));
-        assertThrows(CommandException.class, () -> classDetails.markAbsent(Index.fromZeroBased(0)));
+        assertThrows(CommandException.class, () -> classDetails.markAbsent(Index.fromOneBased(14)));
+        assertThrows(IndexOutOfBoundsException.class, () -> classDetails.markAbsent(Index.fromOneBased(0)));
     }
 
     @Test

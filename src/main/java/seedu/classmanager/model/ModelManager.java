@@ -245,7 +245,6 @@ public class ModelManager implements Model {
     @Override
     public void reset(ReadOnlyClassManager classManager) {
         this.versionedClassManager.reset(classManager);
-        this.filteredStudents = new FilteredList<>(this.versionedClassManager.getStudentList());
         versionedClassManager.resetSelectedStudent();
     }
 
