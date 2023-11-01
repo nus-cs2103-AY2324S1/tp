@@ -19,6 +19,7 @@ import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.HelpCommand;
+import seedu.address.logic.commands.HistoryCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.LoadCommand;
 import seedu.address.logic.commands.LookupCommand;
@@ -26,10 +27,12 @@ import seedu.address.logic.commands.MarkAbsentCommand;
 import seedu.address.logic.commands.MarkPresentAllCommand;
 import seedu.address.logic.commands.MarkPresentCommand;
 import seedu.address.logic.commands.RandomCommand;
-import seedu.address.logic.commands.RecordClassPartCommand;
+import seedu.address.logic.commands.RecordClassParticipationCommand;
+import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.SetGradeCommand;
 import seedu.address.logic.commands.TagCommand;
 import seedu.address.logic.commands.ThemeCommand;
+import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.commands.ViewCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -125,8 +128,8 @@ public class AddressBookParser {
         case SetGradeCommand.COMMAND_WORD:
             return new SetGradeCommandParser().parse(arguments);
 
-        case RecordClassPartCommand.COMMAND_WORD:
-            return new RecordClassPartCommandParser().parse(arguments);
+        case RecordClassParticipationCommand.COMMAND_WORD:
+            return new RecordClassParticipationCommandParser().parse(arguments);
 
         case MarkPresentCommand.COMMAND_WORD:
             return new MarkPresentCommandParser().parse(arguments);
@@ -145,6 +148,15 @@ public class AddressBookParser {
 
         case ConfigCommand.COMMAND_WORD:
             throw new ParseException(MESSAGE_CLASS_MANAGER_ALREADY_CONFIGURED);
+
+        case UndoCommand.COMMAND_WORD:
+            return new UndoCommand();
+
+        case RedoCommand.COMMAND_WORD:
+            return new RedoCommand();
+
+        case HistoryCommand.COMMAND_WORD:
+            return new HistoryCommand();
 
         case ThemeCommand.COMMAND_WORD:
             return new ThemeCommand();

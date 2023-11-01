@@ -9,7 +9,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class StudentNumber {
 
-    public static final String MESSAGE_CONSTRAINTS = "Student Number can take any value starting with A, "
+    public static final String MESSAGE_CONSTRAINTS = "Student Number can take any value starting with captial 'A', "
             + "and it should not be blank";
 
     /*

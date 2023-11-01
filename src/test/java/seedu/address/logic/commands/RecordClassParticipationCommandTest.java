@@ -13,6 +13,7 @@ import static seedu.address.testutil.TypicalStudents.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.CommandHistory;
 import seedu.address.logic.Messages;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
@@ -24,29 +25,33 @@ import seedu.address.testutil.StudentBuilder;
 import seedu.address.testutil.TypicalStudents;
 
 /**
- * Contains integration tests (interaction with the Model) and unit tests for RecordClassPartCommand.
+ * Contains integration tests (interaction with the Model) and unit tests for RecordClassParticpationCommand.
  */
-public class RecordClassPartCommandTest {
+public class RecordClassParticipationCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private final Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private final CommandHistory commandHistory = new CommandHistory();
 
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
         Student editedStudent = new StudentBuilder(TypicalStudents.ALICE)
-                .withClassPartDetails(1, true)
+                .withClassParticipationDetails(1, true)
                 .build();
         model.setSelectedStudent(editedStudent);
         StudentNumber studentNumber = editedStudent.getStudentNumber();
-        RecordClassPartCommand recordClassPartCommand = new RecordClassPartCommand(studentNumber, 1, true);
+        RecordClassParticipationCommand recordClassParticipationCommand =
+                new RecordClassParticipationCommand(studentNumber, 1, true);
 
-        String expectedMessage = String.format(RecordClassPartCommand.MESSAGE_SUCCESS,
+        String expectedMessage = String.format(RecordClassParticipationCommand.MESSAGE_SUCCESS,
                 editedStudent.getStudentNumber())
-                + editedStudent.getClassDetails().displayParticipations();
+                + editedStudent.getClassDetails().displayParticipation();
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setStudent(model.getStudent(editedStudent.getStudentNumber()), editedStudent);
+        expectedModel.setSelectedStudent(editedStudent);
+        expectedModel.commitAddressBook();
 
-        assertCommandSuccess(recordClassPartCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(recordClassParticipationCommand, model, expectedMessage, expectedModel, commandHistory);
         assertEquals(editedStudent, model.getSelectedStudent().get(0));
     }
 
@@ -56,39 +61,43 @@ public class RecordClassPartCommandTest {
 
         Student studentInFilteredList = model.getFilteredStudentList().get(INDEX_FIRST_STUDENT.getZeroBased());
         Student editedStudent = new StudentBuilder(studentInFilteredList)
-                .withClassPartDetails(1, true)
+                .withClassParticipationDetails(1, true)
                 .build();
-        RecordClassPartCommand recordClassPartCommand = new RecordClassPartCommand(
+        RecordClassParticipationCommand recordClassParticipationCommand = new RecordClassParticipationCommand(
                 editedStudent.getStudentNumber(), 1, true);
 
-        String expectedMessage = String.format(RecordClassPartCommand.MESSAGE_SUCCESS,
+        String expectedMessage = String.format(RecordClassParticipationCommand.MESSAGE_SUCCESS,
                 editedStudent.getStudentNumber())
-                + editedStudent.getClassDetails().displayParticipations();
+                + editedStudent.getClassDetails().displayParticipation();
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         showStudentAtIndex(expectedModel, INDEX_FIRST_STUDENT);
         expectedModel.setStudent(model.getStudent(editedStudent.getStudentNumber()), editedStudent);
+        expectedModel.setSelectedStudent(editedStudent);
+        expectedModel.updateFilteredStudentList(Model.PREDICATE_SHOW_ALL_STUDENTS);
+        expectedModel.commitAddressBook();
 
-        assertCommandSuccess(recordClassPartCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(recordClassParticipationCommand, model, expectedMessage, expectedModel, commandHistory);
     }
 
     @Test
     public void execute_studentDoesNotExist_failure() {
         Student ida = TypicalStudents.IDA;
         assertFalse(model.hasStudent(ida));
-        RecordClassPartCommand recordClassPartCommand = new RecordClassPartCommand(
+        RecordClassParticipationCommand recordClassParticipationCommand = new RecordClassParticipationCommand(
                 ida.getStudentNumber(), 1, true);
 
-        assertCommandFailure(recordClassPartCommand, model, Messages.MESSAGE_NONEXISTENT_STUDENT_NUMBER);
+        assertCommandFailure(
+                recordClassParticipationCommand, model, Messages.MESSAGE_NONEXISTENT_STUDENT_NUMBER, commandHistory);
     }
 
     @Test
     public void equals() {
-        final RecordClassPartCommand standardCommand = new RecordClassPartCommand(
+        final RecordClassParticipationCommand standardCommand = new RecordClassParticipationCommand(
                 new StudentNumber(VALID_STUDENT_NUMBER_AMY), 1, true);
 
         // same values -> returns true
-        RecordClassPartCommand commandWithSameValues = new RecordClassPartCommand(
+        RecordClassParticipationCommand commandWithSameValues = new RecordClassParticipationCommand(
                 new StudentNumber(VALID_STUDENT_NUMBER_AMY), 1, true);
         assertTrue(standardCommand.equals(commandWithSameValues));
 
@@ -102,26 +111,26 @@ public class RecordClassPartCommandTest {
         assertFalse(standardCommand.equals(new ClearCommand()));
 
         // different tutorial session -> returns false
-        assertFalse(standardCommand.equals(new RecordClassPartCommand(
+        assertFalse(standardCommand.equals(new RecordClassParticipationCommand(
                 new StudentNumber(VALID_STUDENT_NUMBER_AMY), 2, true)));
 
         // different participation -> returns false
-        assertFalse(standardCommand.equals(new RecordClassPartCommand(
+        assertFalse(standardCommand.equals(new RecordClassParticipationCommand(
                 new StudentNumber(VALID_STUDENT_NUMBER_AMY), 1, false)));
 
         // different student number -> returns false
-        assertFalse(standardCommand.equals(new RecordClassPartCommand(
+        assertFalse(standardCommand.equals(new RecordClassParticipationCommand(
                 new StudentNumber(VALID_STUDENT_NUMBER_BOB), 1, true)));
     }
 
     @Test
     public void toStringMethod() {
-        RecordClassPartCommand recordClassPartCommand = new RecordClassPartCommand(
+        RecordClassParticipationCommand recordClassParticipationCommand = new RecordClassParticipationCommand(
                 new StudentNumber(VALID_STUDENT_NUMBER_AMY), 1, true);
 
-        String expected = RecordClassPartCommand.class.getCanonicalName()
-                + "{studentNumber=" + VALID_STUDENT_NUMBER_AMY + ", sessionNumber=1, isParticipated=true}";
-        assertEquals(expected, recordClassPartCommand.toString());
+        String expected = RecordClassParticipationCommand.class.getCanonicalName()
+                + "{studentNumber=" + VALID_STUDENT_NUMBER_AMY + ", sessionNumber=1, hasParticipated=true}";
+        assertEquals(expected, recordClassParticipationCommand.toString());
     }
 
 }
