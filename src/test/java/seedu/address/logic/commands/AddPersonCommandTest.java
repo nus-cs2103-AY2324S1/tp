@@ -269,6 +269,13 @@ public class AddPersonCommandTest {
         public boolean hasTaskClashWith(Task task, int index) {
             throw new AssertionError("This method should not be called.");
         }
+        @Override
+        public String deleteTask(Lesson lesson, int index) {
+            throw new AssertionError("This method should not be called.");
+        }
+        @Override
+        public void resetAllShowFields() {
+        }
     }
 
     /**

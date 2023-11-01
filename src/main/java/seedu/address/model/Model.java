@@ -188,12 +188,12 @@ public interface Model {
     default Task getCurrentlyDisplayedTask() {
         return null;
     }
+    public void resetAllShowFields();
     // todo: implement everything below here properly
     default void setTask(Task target, Task editedTask) {
     }
     void addTask(Task task, int index);
-    default void deleteTask(Task target) {
-    }
+    String deleteTask(Lesson target, int index);
     // elaine: not having a updatedFilteredTaskList?
     default void updateFilteredTaskList(Predicate<Task> predicate) {
     }

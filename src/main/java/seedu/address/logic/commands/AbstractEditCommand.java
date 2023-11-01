@@ -66,6 +66,7 @@ public abstract class AbstractEditCommand<T extends ListEntry<? extends T>> exte
         init();
         editFields();
         validateEditedAndWriteBack();
+        model.resetAllShowFields();
         return new CommandResult("Edited : " + edited.toString());
     }
     /**

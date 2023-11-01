@@ -142,7 +142,6 @@ public class ModelManager implements Model {
         requireAllNonNull(target, editedPerson);
         addressBook.setPerson(target, editedPerson);
         personToLessonMap.update(target, editedPerson);
-
     }
 
 
@@ -283,6 +282,8 @@ public class ModelManager implements Model {
     }
     @Override
     public void addTask(Task task, int index) {
+        requireNonNull(task);
+        requireNonNull(index);
         Lesson target = filteredLessons.get(index);
         Lesson editedLesson = target.clone();
         editedLesson.addToTaskList(task);
@@ -291,7 +292,15 @@ public class ModelManager implements Model {
     @Override
     public Task getTaskClashWith(Task task, int index) {
         requireNonNull(task);
-        return filteredLessons.get(index).getTaskList().getTaskClashWith(task);
+        requireNonNull(index);
+        return filteredLessons.get(index).getTaskClashWith(task);
+    }
+
+    @Override
+    public String deleteTask(Lesson lesson, int index) {
+        requireNonNull(index);
+        requireNonNull(lesson);
+        return lesson.removeFromTaskList(index);
     }
 
     //=========== App State Changing =============================================================
@@ -313,6 +322,12 @@ public class ModelManager implements Model {
 
     public boolean hasCurrentShownEntry() {
         return currentShowingPerson != null || currentShowingLesson != null || currentShowingTask != null;
+    }
+    @Override
+    public void resetAllShowFields() {
+        this.currentShowingLesson = null;
+        this.currentShowingPerson = null;
+        this.currentShowingTask = null;
     }
 
     public Person getCurrentlyDisplayedPerson() {

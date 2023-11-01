@@ -206,8 +206,14 @@ public class Lesson extends ListEntry<Lesson> {
             this.taskList.add(task);
         }
     }
+    public String removeFromTaskList(int index) {
+        return this.taskList.remove(index);
+    }
     public boolean hasSameTask(Task toAdd) {
         return this.taskList.contains(toAdd);
+    }
+    public Task getTaskClashWith(Task toAdd) {
+        return this.taskList.getTaskClashWith(toAdd);
     }
 
     public Name getName() {

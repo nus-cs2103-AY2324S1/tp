@@ -10,6 +10,7 @@ import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.StringUtil;
+import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.ListEntryField;
 import seedu.address.model.lessons.exceptions.DuplicateTaskException;
 import seedu.address.model.lessons.exceptions.TaskNotFoundException;
@@ -86,11 +87,13 @@ public class TaskList extends ListEntryField implements Iterable<Task> {
      * Removes the equivalent task from the list.
      * The task must exist in the list.
      */
-    public void remove(Task toRemove) {
-        requireNonNull(toRemove);
+    public String remove(int index) {
+        requireNonNull(index);
+        Task toRemove = internalTaskList.get(index);
         if (!internalTaskList.remove(toRemove)) {
             throw new TaskNotFoundException();
         }
+        return toRemove.toString();
     }
 
     public void setTasks(TaskList replacement) {
@@ -116,7 +119,7 @@ public class TaskList extends ListEntryField implements Iterable<Task> {
      * @param input The save file input
      * @return A TaskList
      */
-    public static TaskList of(String input) {
+    public static TaskList of(String input) throws ParseException {
         // TODO: parse
         String[] tasksArray = input.split(",");
         TaskList taskList = new TaskList();
