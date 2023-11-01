@@ -13,8 +13,8 @@
 
 ## **Acknowledgements**
 
-_{ list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the
-original source as well }_
+Staff-Snap is based on the [AddressBook-Level3](https://se-education.org/addressbook-level3/) project created by the [SE-EDU initiative](https://se-education.org) and it incorporates the following third-party libraries: [JavaFX](https://openjfx.io/), [Jackson](https://github.com/FasterXML/jackson), [JUnit5](https://junit.org/junit5/), [OpenCSV](https://opencsv.sourceforge.net/project-info.html), [TestFX](https://testfx.github.io/TestFX/docs/javadoc/testfx-core/javadoc/org.testfx/module-summary.html).
+
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -83,11 +83,11 @@ in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main
 <puml src="diagrams/UiClassDiagram.puml" alt="Structure of the UI Component"/>
 
 The UI consists of a `MainWindow` that is made up of parts
-e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`,
+e.g.`CommandBox`, `ResultDisplay`, `ApplicantListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`,
 inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the
 visible GUI.
 
-The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that
+The `UI` component uses the JavaFX UI framework. The layout of these UI parts are defined in matching `.fxml` files that
 are in the `src/main/resources/view` folder. For example, the layout of
 the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java)
 is specified
@@ -98,12 +98,11 @@ The `UI` component,
 * executes user commands using the `Logic` component.
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
-* depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
+* depends on some classes in the `Model` component, as it displays `Applicant` object residing in the `Model`.
 
 ### Logic component
 
-**API
-** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
+**API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
@@ -121,11 +120,11 @@ PlantUML, the lifeline reaches the end of diagram.
 
 How the `Logic` component works:
 
-1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates
+1. When `Logic` is called upon to execute a command, it is passed to an `ApplicantBookParser` object which in turn creates
    a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
 1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which
    is executed by the `LogicManager`.
-1. The command can communicate with the `Model` when it is executed (e.g. to delete a person).
+1. The command can communicate with the `Model` when it is executed (e.g. to delete a applicant).
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
@@ -134,46 +133,34 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 
 How the parsing works:
 
-* When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a
+* When called upon to parse a user command, the `ApplicantBookParser` class creates an `XYZCommandParser` (`XYZ` is a
   placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse
-  the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as
+  the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `ApplicantBookParser` returns back as
   a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser`
   interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
 
-**API
-** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+**API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
 
 <puml src="diagrams/ModelClassDiagram.puml" width="450" />
 
 
 The `Model` component,
 
-* stores the applicant book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
-* stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which
-  is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to
+* stores the applicant book data i.e., all `Applicant` objects (which are contained in a `UniqueApplicantList` object).
+* stores the currently 'selected' `Applicant` objects (e.g., results of a search query) as a separate _filtered_ list which
+  is exposed to outsiders as an unmodifiable `ObservableList<Applicant>` that can be 'observed' e.g. the UI can be bound to
   this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as
   a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they
   should make sense on their own without depending on other components)
 
-<box type="info" seamless>
-
-**Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`,
-which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of
-each `Person` needing their own `Tag` objects.<br>
-
-<puml src="diagrams/BetterModelClassDiagram.puml" width="450" />
-
-</box>
-
 ### Storage component
 
-**API
-** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
 
 <puml src="diagrams/StorageClassDiagram.puml" width="550" />
 
@@ -181,136 +168,20 @@ The `Storage` component,
 
 * can save both applicant book data and user preference data in JSON format, and read them back into corresponding
   objects.
-* inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only
+* inherits from both `ApplicantBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only
   the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects
   that belong to the `Model`)
 
 ### Common classes
 
-Classes used by multiple components are in the `seedu.addressbook.commons` package.
+Classes used by multiple components are in the `seedu.staffsnap.commons` package.
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Implementation**
 
 This section describes some noteworthy details on how certain features are implemented.
-
-### \[Proposed\] Undo/redo feature
-
-#### Proposed Implementation
-
-The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo
-history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the
-following operations:
-
-* `VersionedAddressBook#commit()`— Saves the current applicant book state in its history.
-* `VersionedAddressBook#undo()`— Restores the previous applicant book state from its history.
-* `VersionedAddressBook#redo()`— Restores a previously undone applicant book state from its history.
-
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()`
-and `Model#redoAddressBook()` respectively.
-
-Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
-
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the
-initial applicant book state, and the `currentStatePointer` pointing to that single applicant book state.
-
-<puml src="diagrams/UndoRedoState0.puml" alt="UndoRedoState0" />
-
-Step 2. The user executes `delete 5` command to delete the 5th person in the applicant book. The `delete` command
-calls `Model#commitAddressBook()`, causing the modified state of the applicant book after the `delete 5` command
-executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted
-applicant book state.
-
-<puml src="diagrams/UndoRedoState1.puml" alt="UndoRedoState1" />
-
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also
-calls `Model#commitAddressBook()`, causing another modified applicant book state to be saved into
-the `addressBookStateList`.
-
-<puml src="diagrams/UndoRedoState2.puml" alt="UndoRedoState2" />
-
-<box type="info" seamless>
-
-**Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the applicant book state
-will not be saved into the `addressBookStateList`.
-
-</box>
-
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing
-the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer`
-once to the left, pointing it to the previous applicant book state, and restores the applicant book to that state.
-
-<puml src="diagrams/UndoRedoState3.puml" alt="UndoRedoState3" />
-
-
-<box type="info" seamless>
-
-**Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no
-previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the
-case. If so, it will return an error to the user rather
-than attempting to perform the undo.
-
-</box>
-
-The following sequence diagram shows how the undo operation works:
-
-<puml src="diagrams/UndoSequenceDiagram.puml" alt="UndoSequenceDiagram" />
-
-<box type="info" seamless>
-
-**Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the
-lifeline reaches the end of diagram.
-
-</box>
-
-The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once
-to the right, pointing to the previously undone state, and restores the applicant book to that state.
-
-<box type="info" seamless>
-
-**Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest applicant
-book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()`
-to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
-
-</box>
-
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the applicant book, such
-as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`.
-Thus, the `addressBookStateList` remains unchanged.
-
-<puml src="diagrams/UndoRedoState4.puml" alt="UndoRedoState4" />
-
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not
-pointing at the end of the `addressBookStateList`, all applicant book states after the `currentStatePointer` will be
-purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern
-desktop applications follow.
-
-<puml src="diagrams/UndoRedoState5.puml" alt="UndoRedoState5" />
-
-The following activity diagram summarizes what happens when a user executes a new command:
-
-<puml src="diagrams/CommitActivityDiagram.puml" width="250" />
-
-#### Design considerations:
-
-**Aspect: How undo & redo executes:**
-
-* **Alternative 1 (current choice):** Saves the entire applicant book.
-    * Pros: Easy to implement.
-    * Cons: May have performance issues in terms of memory usage.
-
-* **Alternative 2:** Individual command knows how to undo/redo by
-  itself.
-    * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
-    * Cons: We must ensure that the implementation of each individual command are correct.
-
-_{more aspects and alternatives to be added}_
-
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
 
 ### Add applicant feature
 
@@ -564,8 +435,8 @@ the user. The GUI then updates to show this information to the user.
 1. The search is case-insensitive, e.g. `find JOHN` will return both john and John. 
 2. The order of the keywords does not matter. e.g. `find Alice Tan` will match Tan Alice. 
 3. Only the applicant name is searched. 
-4. Any person whose name contains the sequence of characters given as the keyword will be given as a result. e.g. Ed will match both Edward and Ed.
-   Persons matching at least one keyword will be returned (i.e. OR search). 
+4. Any applicant whose name contains the sequence of characters given as the keyword will be given as a result. e.g. Ed will match both Edward and Ed.
+   Applicants matching at least one keyword will be returned (i.e. OR search). 
    e.g. `find Ben Bobby` will return Ben Yang, Bobby Chin.
 
 
@@ -888,6 +759,8 @@ Guarantees: A new interview will be added to the applicant.
   (e.g. a `.txt` file)
 * **Graphical User Interface (GUI)**: A type of user interface that allows users to interact with software through
   graphical icons and visual indicators.
+* **UI**:
+* 
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -919,28 +792,18 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases …​ }_
 
-### Deleting a person
+### Deleting a applicant
 
-1. Deleting a person while all persons are being shown
+1. Deleting a applicant while all applicants are being shown
 
-    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+    1. Prerequisites: List all applicants using the `list` command. Multiple applicants in the list.
 
     1. Test case: `delete 1`<br>
        Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message.
        Timestamp in the status bar is updated.
 
     1. Test case: `delete 0`<br>
-       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+       Expected: No applicant is deleted. Error details shown in the status message. Status bar remains the same.
 
     1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
        Expected: Similar to previous.
-
-1. _{ more test cases …​ }_
-
-### Saving data
-
-1. Dealing with missing/corrupted data files
-
-    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
-
-1. _{ more test cases …​ }_
