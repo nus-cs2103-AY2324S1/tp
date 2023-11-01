@@ -19,6 +19,9 @@ public class SingleTextSearchMatcherTest {
         TEST_PERSON = new HashMap<>();
         TEST_PERSON.put("field A", "Lorem ipsum, dolor sit amet.");
         TEST_PERSON.put("field B", "Ut enim; ad@minim veNiam!");
+        TEST_PERSON.put("field C", "aBd");
+        TEST_PERSON.put("field D", "abd aBde");
+        TEST_PERSON.put("availability", "Available");
         TEST_PERSON.put("tagABC", null);
         TEST_PERSON.put("tag123", null);
     }
@@ -104,10 +107,18 @@ public class SingleTextSearchMatcherTest {
 
     @Test
     public void test_withTagMatch() {
-        assertEquals("ABC", testMatchString("ABC", true));
-        assertNull(testMatchString("abc", false));
-        assertEquals("12", testMatchString("12", true));
-        assertEquals("12", testMatchString("12", false));
+        assertEquals("tagABC", testMatchString("tagABC", true));
+    }
+
+    @Test
+    public void test_fieldWithFullMatch() {
+        assertEquals("Available", testMatchString("available", true));
+        assertNull(testMatchString("avail", true));
+    }
+
+    @Test
+    public void test_toString() {
+        assertEquals("test", new SingleTextSearchMatcher("test").toString());
     }
 
 }

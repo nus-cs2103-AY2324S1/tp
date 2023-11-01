@@ -49,6 +49,7 @@ public class ParserUtilTest {
     @Test
     public void parseIndex_invalidInput_throwsParseException() {
         assertThrows(ParseException.class, () -> ParserUtil.parseIndex("10 a"));
+        assertThrows(ParseException.class, () -> ParserUtil.parseIndex("-9"));
     }
 
     @Test
@@ -69,6 +70,8 @@ public class ParserUtilTest {
     @Test
     public void parseIndices_invalidInput_throwsParseException() {
         assertThrows(ParseException.class, () -> ParserUtil.parseIndex("1 2 a b 3 c"));
+        assertThrows(ParseException.class, () -> ParserUtil.parseIndex("-1 2 -4 6 3 -9"));
+
     }
 
     @Test

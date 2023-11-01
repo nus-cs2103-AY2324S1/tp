@@ -3,7 +3,10 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 
 import java.util.List;
+import java.util.logging.Logger;
 
+import seedu.address.MainApp;
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.index.Indices;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
@@ -20,12 +23,14 @@ public class DeleteCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes fosterers identified by the index number used in the displayed person list.\n"
-            + "Parameters: INDEX (must be a positive integer)\n"
+            + "Parameters: INDEX [INDEX...] (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1 2 3";
 
-    public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Fosterer:\n%1$s";
+    public static final String MESSAGE_DELETE_PERSON_SUCCESS = "1 fosterer deleted:\n%1$s";
 
-    public static final String MESSAGE_DELETE_PEOPLE_SUCCESS = "Deleted Fosterers:\n%1$s";
+    public static final String MESSAGE_DELETE_PEOPLE_SUCCESS = "%1$d fosterers deleted:\n%2$s";
+
+    private static final Logger logger = LogsCenter.getLogger(MainApp.class);
 
     private final Indices targetIndices;
 
@@ -49,6 +54,7 @@ public class DeleteCommand extends Command {
      * @throws CommandException when target index is out of bounds.
      */
     public Person[] getPeopleToDelete(List<Person> lastShownList) throws CommandException {
+        logger.info("Retrieving people to delete from last shown list.");
         int[] zeroBasedIndices = this.targetIndices.getZeroBased();
         int numberOfDeletions = this.targetIndices.getSize();
         Person[] peopleToDelete = new Person[numberOfDeletions];
@@ -64,6 +70,14 @@ public class DeleteCommand extends Command {
         return peopleToDelete;
     }
 
+    public String getDeleteResultMessage(Person[] peopleToDelete) {
+        int numberDeleted = peopleToDelete.length;
+        if (numberDeleted == 1) {
+            return String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(peopleToDelete));
+        }
+        return String.format(MESSAGE_DELETE_PEOPLE_SUCCESS, numberDeleted, Messages.format(peopleToDelete));
+    }
+
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
@@ -73,11 +87,8 @@ public class DeleteCommand extends Command {
         for (Person personToDelete : peopleToDelete) {
             model.deletePerson(personToDelete);
         }
-
-        if (peopleToDelete.length == 1) {
-            return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(peopleToDelete)));
-        }
-        return new CommandResult(String.format(MESSAGE_DELETE_PEOPLE_SUCCESS, Messages.format(peopleToDelete)));
+        String message = getDeleteResultMessage(peopleToDelete);
+        return new CommandResult(message);
     }
 
     @Override

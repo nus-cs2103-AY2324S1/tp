@@ -19,28 +19,40 @@ public class ViewCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Shows the profile of the user.\n"
             + "Example: " + COMMAND_WORD + " 1";
     public static final String VIEWING_PROFILE_SUCCESS = "Viewing Person: %1$s";
-    private final Index targetIndex;
+    public static final String VIEWING_NEW_PROFILE_SUCCESS = "Viewing New Fosterer Profile";
+    private final Index indexOfTheFostererToView;
 
     public ViewCommand(Index index) {
-        this.targetIndex = index;
+        this.indexOfTheFostererToView = index;
+    }
+    public ViewCommand() {
+        this.indexOfTheFostererToView = null;
     }
     @Override
     public CommandResult execute(Model model) throws CommandException {
+        // Viewing empty profile for adding new fosterer
+        if (indexOfTheFostererToView == null) {
+            return new CommandResult(
+                    VIEWING_NEW_PROFILE_SUCCESS,
+                    CommandType.VIEW
+            );
+        }
+
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
 
-        if (targetIndex.getZeroBased() >= lastShownList.size()) {
+        if (indexOfTheFostererToView.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
-        Person personToView = lastShownList.get(targetIndex.getZeroBased());
+        Person personToView = lastShownList.get(indexOfTheFostererToView.getZeroBased());
         return new CommandResult(
                 String.format(VIEWING_PROFILE_SUCCESS, Messages.format(personToView)),
-                false,
-                false,
-                true,
                 personToView,
-                false);
+                indexOfTheFostererToView,
+                CommandType.VIEW,
+                false
+        );
     }
 
     @Override
@@ -55,13 +67,13 @@ public class ViewCommand extends Command {
         }
 
         ViewCommand e = (ViewCommand) other;
-        return targetIndex.equals(e.targetIndex);
+        return indexOfTheFostererToView.equals(e.indexOfTheFostererToView);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("targetIndex", targetIndex)
+                .add("indexOfTheFostererToView", indexOfTheFostererToView)
                 .toString();
     }
 }
