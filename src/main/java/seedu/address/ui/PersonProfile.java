@@ -112,6 +112,7 @@ public class PersonProfile extends UiPart<Region> {
 
     // region Final
     private final MainWindow mainWindow;
+    private Person person;
     private final Map<Field, String> fields = new EnumMap<>(Field.class);
     private Set<Tag> tags;
     private String note;
@@ -122,7 +123,6 @@ public class PersonProfile extends UiPart<Region> {
     private final Map<Event, List<Runnable>> eventHandlers = new EnumMap<>(Event.class);
     // endregion
 
-    private Person person;
     // endregion
 
     // region Constructor
@@ -134,7 +134,6 @@ public class PersonProfile extends UiPart<Region> {
         super(FXML);
         this.mainWindow = mainWindow;
         this.person = person;
-
         fields.put(Field.NAME, person.getName().toString());
         fields.put(Field.PHONE, person.getPhone().toString());
         fields.put(Field.EMAIL, person.getEmail().toString());

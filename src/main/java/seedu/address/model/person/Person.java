@@ -221,7 +221,8 @@ public class Person {
                 && animalName.equals(otherPerson.animalName)
                 && availability.equals(otherPerson.availability)
                 && animalType.equals(otherPerson.animalType)
-                && housing.equals(otherPerson.housing);
+                && housing.equals(otherPerson.housing)
+                && this.getNote().equals(otherPerson.getNote());
     }
 
     @Override

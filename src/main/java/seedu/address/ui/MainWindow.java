@@ -1,5 +1,7 @@
 package seedu.address.ui;
 
+import java.util.Arrays;
+import java.util.Optional;
 import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
@@ -12,8 +14,10 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.CommandType;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Person;
@@ -36,7 +40,11 @@ public class MainWindow extends UiPart<Stage> {
 
     private PersonProfile personProfile;
     private ResultDisplay resultDisplay;
-    private final HelpWindow helpWindow;
+    private HelpWindow helpWindow;
+    private boolean isViewExit = false;
+    private boolean isSaved;
+
+    private Index indexOfAFostererToView;
     @FXML
     private StackPane commandBoxPlaceholder;
 
@@ -87,6 +95,7 @@ public class MainWindow extends UiPart<Stage> {
 
     /**
      * Sets the accelerator of a MenuItem.
+     *
      * @param keyCombination the KeyCombination value of the accelerator
      */
     private void setAccelerator(MenuItem menuItem, KeyCombination keyCombination) {
@@ -128,7 +137,7 @@ public class MainWindow extends UiPart<Stage> {
         StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
-        CommandBox commandBox = new CommandBox(this::executeCommand);
+        CommandBox commandBox = new CommandBox(this, this::executeCommand);
         this.commandBox = commandBox;
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
     }
@@ -179,9 +188,15 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private void handleView(Person personToView) {
-        if (personListPanelPlaceholder.isVisible()) {
+        if (personListPanelPlaceholder.isVisible() && personToView != null) {
             personProfile = new PersonProfile(personToView, this);
-            //personProfile = new PersonProfile(this);
+            personProfilePlaceholder.getChildren().add(personProfile.getRoot());
+            personProfilePlaceholder.setVisible(true);
+            personListPanelPlaceholder.setVisible(false);
+        }
+
+        if (personListPanelPlaceholder.isVisible() && personToView == null) {
+            personProfile = new PersonProfile(this);
             personProfilePlaceholder.getChildren().add(personProfile.getRoot());
             personProfilePlaceholder.setVisible(true);
             personListPanelPlaceholder.setVisible(false);
@@ -189,10 +204,28 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     @FXML
-    private void handleViewExit() {
-        personListPanelPlaceholder.setVisible(true);
-        personProfilePlaceholder.getChildren().remove(personProfile.getRoot());
-        personProfilePlaceholder.setVisible(false);
+    private void handleFocusField(PersonProfile.Field field) {
+        if (personProfilePlaceholder.isVisible()) {
+            personProfile.setFocus(field);
+        }
+    }
+
+    @FXML
+    void handleViewExit() {
+        if (isSaved || commandBox.getInConfirmationDialog()) {
+            commandBox.setInConfirmationDialog(false);
+            personListPanelPlaceholder.setVisible(true);
+            personProfilePlaceholder.getChildren().remove(personProfile.getRoot());
+            personProfilePlaceholder.setVisible(false);
+            sendFeedback("Exiting view as requested.");
+        } else {
+            commandBox.setInConfirmationDialog(true);
+        }
+    }
+
+    void handleCancelViewExit() {
+        sendFeedback("Cancelled exit.");
+        commandBox.setInConfirmationDialog(false);
     }
 
     /**
@@ -202,26 +235,73 @@ public class MainWindow extends UiPart<Stage> {
      */
     private CommandResult executeCommand(String commandText) throws CommandException, ParseException {
         try {
-            CommandResult commandResult = logic.execute(commandText);
+            CommandResult commandResult;
+            if (personListPanelPlaceholder.isVisible()) {
+                commandResult = logic.execute(commandText);
+            } else {
+                commandResult = logic.executeInView(commandText, personProfile.getPerson(), indexOfAFostererToView);
+            }
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
-
-            if (commandResult.isShowHelp()) {
+            if (commandResult.getCommandType() == CommandType.HELP) {
                 handleHelp();
             }
 
-            if (commandResult.isExit()) {
+            if (commandResult.getCommandType() == CommandType.EXIT) {
                 handleExit();
             }
 
-            if (logic.getIsViewCommand()) {
+            if (commandResult.getCommandType() == CommandType.VIEW) {
+                indexOfAFostererToView = commandResult.getTargetIndex();
                 handleView(commandResult.getPersonToView());
             }
 
-            if (logic.getIsViewExitCommand()) {
+            if (commandResult.getCommandType() == CommandType.VIEW_EXIT) {
+                isSaved = commandResult.getIsFostererEdited();
                 handleViewExit();
             }
+            if (commandResult.getCommandType() == CommandType.EDIT_FIELD) {
+                String [] tagAndNote = new String[]{"tags", "notes"};
+                Optional<String> tagOrNote = null;
 
+                Optional<PersonProfile.Field> field = Arrays.stream(PersonProfile.Field.values())
+                        .filter(f -> f.getDisplayName().toLowerCase().startsWith(commandText.toLowerCase().trim()))
+                        .findFirst();
+
+                if (!field.isPresent()) {
+                    tagOrNote = Arrays.stream(tagAndNote)
+                            .filter(f -> f.startsWith(commandText.toLowerCase().trim()))
+                            .findFirst();
+                }
+
+                if (!field.isPresent() && !tagOrNote.isPresent()) {
+                    field = Arrays.stream(PersonProfile.Field.values())
+                            .filter(f -> f.getDisplayName().toLowerCase().contains(commandText.toLowerCase().trim()))
+                            .findFirst();
+                }
+
+                if (!field.isPresent() && !tagOrNote.isPresent()) {
+                    tagOrNote = Arrays.stream(tagAndNote)
+                            .filter(f -> f.contains(commandText.toLowerCase().trim()))
+                            .findFirst();
+                }
+
+                if (!field.isPresent() && !tagOrNote.isPresent()) {
+                    sendFeedback("No such field found");
+                }
+
+                field.ifPresent(personProfile::setFocus);
+
+                if (!field.isPresent()) {
+                    tagOrNote.ifPresent(f -> {
+                        if (f.equals("tags")) {
+                            personProfile.setFocusTags();
+                        } else {
+                            personProfile.setFocusNotes();
+                        }
+                    });
+                }
+            }
             return commandResult;
         } catch (CommandException | ParseException e) {
             logger.info("An error occurred while executing command: " + commandText);
