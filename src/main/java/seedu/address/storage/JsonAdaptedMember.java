@@ -120,7 +120,7 @@ class JsonAdaptedMember {
         final Telegram modelTelegram = new Telegram(telegram);
 
         final Set<Tag> modelTags = new HashSet<>(memberTags);
-        final Set<Task> modelTasks = new HashSet<>(taskList);
+        final List<Task> modelTasks = new ArrayList<>(taskList);
 
         return new Member(modelName, modelPhone, modelEmail, modelTelegram, modelTags, modelTasks);
     }

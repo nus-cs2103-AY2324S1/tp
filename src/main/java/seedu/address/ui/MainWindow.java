@@ -16,6 +16,7 @@ import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.task.Task;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -34,6 +35,7 @@ public class MainWindow extends UiPart<Stage> {
     private MemberListPanel memberListPanel;
     private ApplicantListPanel applicantListPanel;
     private TagListPanel tagListPanel;
+    private TaskListPanel taskListPanel;
     private ResultDisplay resultDisplay;
     private final HelpWindow helpWindow;
 
@@ -125,10 +127,12 @@ public class MainWindow extends UiPart<Stage> {
         memberListPanel = new MemberListPanel(logic.getFilteredMemberList());
         applicantListPanel = new ApplicantListPanel(logic.getFilteredApplicantList());
         tagListPanel = new TagListPanel(logic.getFilteredTagList());
+        taskListPanel = new TaskListPanel(logic.getFilteredTaskList());
 
         memberListPanelPlaceholder.getChildren().add(memberListPanel.getRoot());
         applicantListPanelPlaceholder.getChildren().add(applicantListPanel.getRoot());
         tagListPanelPlaceholder.getChildren().add(tagListPanel.getRoot());
+        taskListPanelPlaceholder.getChildren().add(taskListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());

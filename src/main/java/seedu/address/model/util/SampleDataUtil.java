@@ -1,6 +1,7 @@
 package seedu.address.model.util;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -25,7 +26,7 @@ public class SampleDataUtil {
             new Member(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
                     new Telegram("@alexyeoh"),
                     getTagSet("friends"),
-                    getTaskSet("finish_proposal")),
+                    getTaskList("finish_proposal")),
             new Member(new Name("Bernice Yu"), new Phone("99272758"), new Email("berniceyu@example.com"),
                     new Telegram("@berniceyu"),
                     getTagSet("colleagues", "friends")),
@@ -76,9 +77,9 @@ public class SampleDataUtil {
                 .collect(Collectors.toSet());
     }
 
-    public static Set<Task> getTaskSet(String... strings) {
+    public static List<Task> getTaskList(String... strings) {
         return Arrays.stream(strings)
                 .map(Task::new)
-                .collect(Collectors.toSet());
+                .collect(Collectors.toList());
     }
 }

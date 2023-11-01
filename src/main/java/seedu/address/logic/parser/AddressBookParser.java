@@ -24,6 +24,7 @@ import seedu.address.logic.commands.FindApplicantCommand;
 import seedu.address.logic.commands.FindMemberCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ViewApplicantsCommand;
+import seedu.address.logic.commands.ViewMemberTaskCommand;
 import seedu.address.logic.commands.ViewMembersCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -107,6 +108,10 @@ public class AddressBookParser {
         case AddMemberToDoCommand.COMMAND_WORD:
         case AddMemberToDoCommand.COMMAND_ALIAS:
             return new AddMemberToDoCommandParser().parse(arguments);
+
+        case ViewMemberTaskCommand.COMMAND_WORD:
+        case ViewMemberTaskCommand.COMMAND_ALIAS:
+            return new ViewMemberTaskCommandParser().parse(arguments);
 
         case CopyMemberCommand.COMMAND_WORD:
         case CopyMemberCommand.COMMAND_ALIAS:

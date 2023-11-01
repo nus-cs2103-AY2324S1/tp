@@ -10,18 +10,10 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Member;
-import seedu.address.model.person.fields.Email;
-import seedu.address.model.person.fields.Name;
-import seedu.address.model.person.fields.Phone;
-import seedu.address.model.person.fields.Telegram;
-import seedu.address.model.tag.Tag;
 import seedu.address.model.task.Task;
 
-import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
 public class AddMemberToDoCommand extends Command{
 
@@ -54,7 +46,6 @@ public class AddMemberToDoCommand extends Command{
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         List<Member> lastShownList = model.getFilteredMemberList();
-        System.out.println(lastShownList);
 
         if (index.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_MEMBER_DISPLAYED_INDEX);
@@ -65,13 +56,14 @@ public class AddMemberToDoCommand extends Command{
 
         model.setMember(memberToAssign, taskAddedMember);
         model.updateFilteredMemberList(PREDICATE_SHOW_ALL_PERSONS);
+        model.setTaskListForMember(taskAddedMember);
         return new CommandResult(String.format(MESSAGE_ADD_TODO_SUCCESS, Messages.format(memberToAssign)));
     }
 
     private static Member assignTaskToMember(Member member, AddMemberToDoDescriptor addMemberToDoDescriptor) {
         assert member != null;
 
-        Set<Task> updatedTasks;
+        List<Task> updatedTasks;
         if (addMemberToDoDescriptor.getTasks().isPresent()) {
             updatedTasks = addMemberToDoDescriptor.getTasks().get();
             updatedTasks.addAll(member.getTasks());
@@ -85,12 +77,7 @@ public class AddMemberToDoCommand extends Command{
     }
 
     public static class AddMemberToDoDescriptor {
-        private Name name;
-        private Phone phone;
-        private Email email;
-        private Telegram telegram;
-        private Set<Tag> tags;
-        private Set<Task> tasks;
+        private List<Task> tasks;
 
         public AddMemberToDoDescriptor() {
         }
@@ -100,79 +87,20 @@ public class AddMemberToDoCommand extends Command{
          * A defensive copy of {@code tags} is used internally.
          */
         public AddMemberToDoDescriptor(AddMemberToDoDescriptor toCopy) {
-            setName(toCopy.name);
-            setPhone(toCopy.phone);
-            setEmail(toCopy.email);
-            setTelegram(toCopy.telegram);
-            setTags(toCopy.tags);
             setTasks(toCopy.tasks);
         }
 
-        public void setName(Name name) {
-            this.name = name;
-        }
-
-        public Optional<Name> getName() {
-            return Optional.ofNullable(name);
-        }
-
-        public void setPhone(Phone phone) {
-            this.phone = phone;
-        }
-
-        public Optional<Phone> getPhone() {
-            return Optional.ofNullable(phone);
-        }
-
-        public void setEmail(Email email) {
-            this.email = email;
-        }
-
-        public Optional<Email> getEmail() {
-            return Optional.ofNullable(email);
-        }
-
-        public void setTelegram(Telegram telegram) {
-            this.telegram = telegram;
-        }
-
-        public Optional<Telegram> getTelegram() {
-            return Optional.ofNullable(telegram);
-        }
-
-        /**
-         * Sets {@code tags} to this object's {@code tags}.
-         * A defensive copy of {@code tags} is used internally.
-         */
-        public void setTags(Set<Tag> tags) {
-            this.tags = (tags != null) ? new HashSet<>(tags) : null;
-        }
-
-        /**
-         * Returns an unmodifiable tag set, which throws {@code UnsupportedOperationException}
-         * if modification is attempted.
-         * Returns {@code Optional#empty()} if {@code tags} is null.
-         */
-        public Optional<Set<Tag>> getTags() {
-            return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
-        }
-
-        public void setTasks(Set<Task> tasks) {
+        public void setTasks(List<Task> tasks) {
             this.tasks = tasks;
         }
 
-        public Optional<Set<Task>> getTasks() {
+        public Optional<List<Task>> getTasks() {
             return Optional.ofNullable(this.tasks);
         }
 
         @Override
         public String toString() {
             return new ToStringBuilder(this)
-                    .add("name", name)
-                    .add("phone", phone)
-                    .add("email", email)
-                    .add("telegram", telegram)
-                    .add("tags", tags)
                     .add("tasks", tasks)
                     .toString();
         }

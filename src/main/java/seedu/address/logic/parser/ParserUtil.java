@@ -2,8 +2,10 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
@@ -157,12 +159,12 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code telegram} is invalid.
      */
-    public static Set<Task> parseTasks(Collection<String> tasks) throws ParseException {
+    public static List<Task> parseTasks(Collection<String> tasks) throws ParseException {
         requireNonNull(tasks);
-        final Set<Task> taskSet = new HashSet<>();
+        final List<Task> taskList = new ArrayList<>();
         for (String taskName : tasks) {
-            taskSet.add(parseTask(taskName));
+            taskList.add(parseTask(taskName));
         }
-        return taskSet;
+        return taskList;
     }
 }

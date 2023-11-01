@@ -7,6 +7,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.person.Member;
+import seedu.address.model.task.Task;
 
 import java.util.logging.Logger;
 
@@ -18,12 +19,12 @@ public class TaskListPanel extends UiPart<Region> {
     private final Logger logger = LogsCenter.getLogger(TaskListPanel.class);
 
     @FXML
-    private ListView<Member> taskListView;
+    private ListView<Task> taskListView;
 
     /**
      * Creates a {@code TaskListPanel} with the given {@code ObservableList}.
      */
-    public TaskListPanel(ObservableList<Member> taskList) {
+    public TaskListPanel(ObservableList<Task> taskList) {
         super(FXML);
         taskListView.setItems(taskList);
         taskListView.setCellFactory(listView -> new TaskListViewCell());
@@ -32,16 +33,16 @@ public class TaskListPanel extends UiPart<Region> {
     /**
      * Custom {@code ListCell} that displays the graphics of a {@code Member} using a {@code MemberCard}.
      */
-    class TaskListViewCell extends ListCell<Member> {
+    class TaskListViewCell extends ListCell<Task> {
         @Override
-        protected void updateItem(Member member, boolean empty) {
-            super.updateItem(member, empty);
+        protected void updateItem(Task task, boolean empty) {
+            super.updateItem(task, empty);
 
-            if (empty || member == null) {
+            if (empty || task == null) {
                 setGraphic(null);
                 setText(null);
             } else {
-                setGraphic(new MemberCard(member, getIndex() + 1).getRoot());
+                setGraphic(new TaskCard(task, getIndex() + 1).getRoot());
             }
         }
     }

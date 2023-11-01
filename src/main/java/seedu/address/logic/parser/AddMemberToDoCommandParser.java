@@ -14,6 +14,7 @@ import seedu.address.model.task.Task;
 
 import java.util.Collection;
 import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
@@ -49,13 +50,13 @@ public class AddMemberToDoCommandParser implements Parser<AddMemberToDoCommand> 
      * If {@code tags} contain only one element which is an empty string, it will be parsed into a
      * {@code Set<Tag>} containing zero tags.
      */
-    private Optional<Set<Task>> parseTasksForEdit(Collection<String> tasks) throws ParseException {
+    private Optional<List<Task>> parseTasksForEdit(Collection<String> tasks) throws ParseException {
         assert tasks != null;
 
         if (tasks.isEmpty()) {
             return Optional.empty();
         }
-        Collection<String> taskSet = tasks.size() == 1 && tasks.contains("") ? Collections.emptySet() : tasks;
+        Collection<String> taskSet = tasks.size() == 1 && tasks.contains("") ? Collections.emptyList()  : tasks;
         return Optional.of(ParserUtil.parseTasks(taskSet));
     }
 }

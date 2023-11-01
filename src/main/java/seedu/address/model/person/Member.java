@@ -2,8 +2,10 @@ package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -27,7 +29,7 @@ public class Member extends Person {
     private final Email email;
     private final Telegram telegram;
     private final Set<Tag> tags = new HashSet<>();
-    private final Set<Task> tasks = new HashSet<>();
+    private final List<Task> tasks = new ArrayList<>();
 
     /**
      * Every field must be present and not null.
@@ -47,7 +49,7 @@ public class Member extends Person {
         this.tags.addAll(tags);
     }
 
-    public Member(Name name, Phone phone, Email email, Telegram telegram, Set<Tag> tags, Set<Task> todo) {
+    public Member(Name name, Phone phone, Email email, Telegram telegram, Set<Tag> tags, List<Task> todo) {
         super(name);
         requireAllNonNull(telegram);
         this.phone = phone;
@@ -77,8 +79,8 @@ public class Member extends Person {
         return Collections.unmodifiableSet(tags);
     }
 
-    public Set<Task> getTasks() {
-        return Collections.unmodifiableSet(tasks);
+    public List<Task> getTasks() {
+        return Collections.unmodifiableList(tasks);
     }
 
     /**
