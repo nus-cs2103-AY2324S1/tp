@@ -46,13 +46,13 @@ public class Lesson extends ListEntry<Lesson> {
 
     /**
      * Used to construct sample data.
-     * @param name
-     * @param start
-     * @param end
-     * @param day
-     * @param subject
-     * @param taskList
-     * @throws ParseException
+     * @param name // TODO
+     * @param start The start time of the lesson
+     * @param end The end time of the lesson
+     * @param day The date of the lesson
+     * @param subject The subject of this lesson
+     * @param taskList the tasks to be completed
+     * @throws ParseException // TODO
      */
     public Lesson(String name, String start, String end, String day, String subject, TaskList taskList)
             throws ParseException {
@@ -98,18 +98,18 @@ public class Lesson extends ListEntry<Lesson> {
     }
 
     /**
-     * Gets the date of a lesson.
+     * Gets the date of a lesson. // TODO
      * If the start and end date are the same, then only one date string is returned.
      * Else, the date will be returned as: [start date] - [end date]
-     * @return
+     * @return // TODO
      */
     public String getLessonNameStr() {
         return name.toString();
     }
 
     /**
-     * Gets the name of a lesson.
-     * @return
+     * Returns a string representation of the lesson date.
+     * @return String with the lesson day
      */
     public String getLessonDateStr() {
         return day.toString();
@@ -117,7 +117,7 @@ public class Lesson extends ListEntry<Lesson> {
 
     /**
      * Returns a comma-separated list of students.
-     * @return
+     * @return String of students
      */
     public String getStudentsStr() {
         return "getStudentsStr in lesson is to be implemented";
@@ -190,6 +190,33 @@ public class Lesson extends ListEntry<Lesson> {
     public TaskList getTaskList() {
         return taskList;
     }
+    public void setTaskList(TaskList tasks) {
+        this.taskList = tasks;
+    }
+    public void setTaskListIfNotDefault(TaskList tasks) {
+        if (tasks != null && !tasks.equals(TaskList.DEFAULT_TASKLIST)) {
+            setTaskList(tasks);
+        }
+    }
+
+    /**
+     * Adds a task to the task list of current lesson
+     * @param task task to add
+     */
+    public void addToTaskList(Task task) {
+        if (task != null) {
+            this.taskList.add(task);
+        }
+    }
+    public String removeFromTaskList(int index) {
+        return this.taskList.remove(index);
+    }
+    public boolean hasSameTask(Task toAdd) {
+        return this.taskList.contains(toAdd);
+    }
+    public Task getTaskClashWith(Task toAdd) {
+        return this.taskList.getTaskClashWith(toAdd);
+    }
 
     public Name getName() {
         return name;
@@ -221,7 +248,8 @@ public class Lesson extends ListEntry<Lesson> {
                 && subject.equals(otherLesson.subject)
                 && name.equals(otherLesson.name)
                 && day.equals(otherLesson.day)
-                && remark.equals(otherLesson.remark);
+                && remark.equals(otherLesson.remark)
+                && taskList.equals(otherLesson.taskList);
     }
     @Override
     public int hashCode() {
@@ -267,6 +295,7 @@ public class Lesson extends ListEntry<Lesson> {
         String subjectStr = subject == Subject.DEFAULT_SUBJECT
                              ? ""
                              : " for " + subject;
+        // TODO: Add number of tasks to complete
         return "Lesson " + name + startEndStr + subjectStr;
     }
 
@@ -282,6 +311,7 @@ public class Lesson extends ListEntry<Lesson> {
         cloned.setNameIfNotDefault(this.name);
         cloned.setDayIfNotDefault(this.day);
         cloned.setRemarkIfNotDefault(this.remark);
+        cloned.setTaskListIfNotDefault(this.taskList);
         return cloned;
     }
 }

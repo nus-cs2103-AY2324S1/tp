@@ -190,19 +190,17 @@ public interface Model {
     default Task getCurrentlyDisplayedTask() {
         return null;
     }
-
+    public void resetAllShowFields();
     // todo: implement everything below here properly
     default void setTask(Task target, Task editedTask) {
     }
-    default void addTask(Task task) {
-    }
-    default void deleteTask(Task target) {
-    }
+    void addTask(Task task, int index);
+    String deleteTask(Lesson target, int index);
+    // elaine: not having a updatedFilteredTaskList?
     default void updateFilteredTaskList(Predicate<Task> predicate) {
     }
-    default Boolean hasTaskClashWith(Task task) {
-        return null;
-    }
+    boolean hasTaskClashWith(Task task, int index);
+    Task getTaskClashWith(Task task, int index);
     Boolean hasPersonClashWith(Person person);
     Person getPersonClashWith(Person person);
     public Set<Person> getPersonsFulfill(Predicate<Person> predicate);

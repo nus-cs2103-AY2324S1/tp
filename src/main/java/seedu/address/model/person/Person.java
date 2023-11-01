@@ -194,4 +194,8 @@ public class Person extends ListEntry<Person> {
                 subjects.getSubjectSetClone(), tags.getTagSetClone(), remark.clone());
     }
 
+    int compareTo(Person p) {
+        return name.compareTo(p.name);
+    }
+
 }
