@@ -70,7 +70,16 @@ public class MeetingBuilder {
         for (String name : names) {
             this.names.add(new Name(name));
         }
+        return this;
+    }
 
+    /**
+     * Sets the {@code names} of the {@code Meeting} that we are building.
+     * @param names names of the persons
+     * @return this instance of MeetingBuilder
+     */
+    public MeetingBuilder withPerson(Set<Name> names) {
+        this.names = names;
         return this;
     }
 
@@ -84,7 +93,16 @@ public class MeetingBuilder {
         for (String group : groups) {
             this.groups.add(new Group(group));
         }
+        return this;
+    }
 
+    /**
+     * Sets the {@code groups} of the {@code Meeting} that we are building.
+     * @param groups the groups to add
+     * @return this instance of MeetingBuilder
+     */
+    public MeetingBuilder withGroups(Set<Group> groups) {
+        this.groups = groups;
         return this;
     }
 

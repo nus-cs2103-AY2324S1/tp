@@ -137,6 +137,9 @@ public class ParserUtil {
         requireNonNull(groups);
         final Set<Group> groupSet = new HashSet<>();
         for (String groupName : groups) {
+            if (groupName.isBlank()) {
+                throw new ParseException(Group.MESSAGE_CONSTRAINTS);
+            }
             groupSet.add(parseGroup(groupName));
         }
         return groupSet;
@@ -149,6 +152,9 @@ public class ParserUtil {
         requireNonNull(names);
         final Set<Name> nameSet = new HashSet<>();
         for (String name : names) {
+            if (name.isBlank()) {
+                throw new ParseException(Name.MESSAGE_CONSTRAINTS);
+            }
             nameSet.add(parseName(name));
         }
         return nameSet;
@@ -184,6 +190,9 @@ public class ParserUtil {
     public static EventTime parseEventTime(String time) throws ParseException {
         requireNonNull(time);
         String trimmedTime = time.trim();
+        if (!EventTime.isValidTime(trimmedTime)) {
+            throw new ParseException(EventTime.MESSAGE_CONSTRAINTS);
+        }
         return EventTime.of(trimmedTime);
     }
 

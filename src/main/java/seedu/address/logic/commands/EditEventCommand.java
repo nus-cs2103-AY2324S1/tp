@@ -1,5 +1,6 @@
 package seedu.address.logic.commands;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_END_TIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT_NAME;
@@ -55,6 +56,8 @@ public class EditEventCommand extends Command {
             + PREFIX_NAME + "Ken "
             + PREFIX_GROUP + "Team2 ";
 
+    public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
+
     public static final String MESSAGE_EDIT_SUCCESS = "Edited event: %1$s";
 
     public final Index index;
@@ -66,6 +69,8 @@ public class EditEventCommand extends Command {
      * @param editEventDescriptor details to edit the meeting with
      */
     public EditEventCommand(Index index, EditEventDescriptor editEventDescriptor) {
+        requireNonNull(index);
+        requireNonNull(editEventDescriptor);
         this.index = index;
         this.editEventDescriptor = editEventDescriptor;
     }
@@ -82,7 +87,7 @@ public class EditEventCommand extends Command {
         Event meetingToEdit = lastShownList.get(index.getZeroBased());
         Event editedMeeting = createEditedMeeting(meetingToEdit, this.editEventDescriptor, model);
 
-        //ensure that the user is not editing a valid time into an invalid time
+        // ensure that the user is not editing a valid time into an invalid time
         if (this.editEventDescriptor.getDate().isPresent()
                 || this.editEventDescriptor.getStartTime().isPresent()
                 || this.editEventDescriptor.getEndTime().isPresent()) {
@@ -324,6 +329,10 @@ public class EditEventCommand extends Command {
                     .add("date", this.date.toString())
                     .add("start time", this.startTime.toString())
                     .add("end time", this.endTime.toString())
+                    .add("assign persons", this.assignPersons)
+                    .add("unassign persons", this.unassignPersons)
+                    .add("assign groups", this.assignGroups)
+                    .add("unassign groups", this.unassignGroups)
                     .toString();
         }
 
