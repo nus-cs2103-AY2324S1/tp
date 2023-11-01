@@ -22,6 +22,7 @@ public class HelpWindow extends UiPart<Stage> {
             + "Core Commands without Parameters\n"
             + "Clear student list - clear\n"
             + "Exit Class Manager - exit\n"
+            + "View command history - history\n"
             + "List all students - list\n"
             + "Toggle theme - theme\n\n"
             + "Core Commands with Parameters\n"

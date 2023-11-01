@@ -126,9 +126,9 @@ public class ClassDetailsTest {
         ClassDetails classDetails = new ClassDetails("T11");
         try {
             ClassDetails.setTutorialCount(10);
-            classDetails.markPresent(Index.fromZeroBased(1));
-            classDetails.markPresent(Index.fromZeroBased(3));
-            classDetails.markPresent(Index.fromZeroBased(6));
+            classDetails.markPresent(Index.fromOneBased(1));
+            classDetails.markPresent(Index.fromOneBased(3));
+            classDetails.markPresent(Index.fromOneBased(6));
             assertEquals(30, classDetails.getAttendancePercentage());
         } catch (Exception e) {
             fail();
@@ -157,9 +157,9 @@ public class ClassDetailsTest {
     public void getAttendancePercentage_invalidValues_fail() {
         try {
             ClassDetails classDetails = new ClassDetails("T11", null, null, null);
-            classDetails.markPresent(Index.fromZeroBased(-1));
-            classDetails.markPresent(Index.fromZeroBased(1));
-            classDetails.markPresent(Index.fromZeroBased(66));
+            classDetails.markPresent(Index.fromOneBased(-1));
+            classDetails.markPresent(Index.fromOneBased(1));
+            classDetails.markPresent(Index.fromOneBased(66));
             assertNotEquals(0, classDetails.getAttendancePercentage());
         } catch (Exception e) {
             assertTrue(e instanceof NullPointerException);

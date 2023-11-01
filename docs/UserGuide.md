@@ -433,7 +433,9 @@ Class Manager 2023 data is saved in the hard disk automatically after any comman
 
 ### Editing the data file
 
-Class Manager 2023 data is saved automatically as a JSON file `[JAR file location]/data/classmanager.json`. Advanced users are welcome to update data directly by editing that data file.
+Class Manager 2023 data is saved automatically as a JSON file `[JAR file location]/data/classmanager.json`. Advanced users are welcome to update data directly by editing that data file. You can refer to a valid sample of the JSON file in the image below.
+
+<img alt="sample_contents" src="images/sample-contents.png" width="750"> <br><br>
 
 <box type="warning" seamless>
 
@@ -450,7 +452,7 @@ Format: `load f/FILE_NAME`
 * File name does not need to include .json extension.
 * File name is case-insensitive
 
-Examples:
+Example:
 * `load f/sample` loads the sample.json file in the data folder.
 
 <img alt="load_outcome" src="images/load-outcome.png" width="750"> <br><br>
@@ -496,12 +498,13 @@ Format: `theme`
 | **Open help window**        | `help`                                                                      |
 
 ### Core commands without parameters
-| Action                 | Format, Examples                                                                                                                                                 |
-|------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Clear student list** | `clear`                                                                                                                                                          |
-| **Exit Class Manager** | `exit`                                                                                                                                                           |
-| **List all students**  | `list`                                                                                                                                                           |
-| **Toggle theme**       | `theme`                                                                                                                                                          |
+| Action                   | Format, Examples |
+|--------------------------|------------------|
+| **Clear student list**   | `clear`          |
+| **Exit Class Manager**   | `exit`           |
+| **View command history** | `history`        |
+| **List all students**    | `list`           |
+| **Toggle theme**         | `theme`          |
 
 ### Core commands with parameters
 | Action                         | Format, Examples                                                                                                                                                    |
