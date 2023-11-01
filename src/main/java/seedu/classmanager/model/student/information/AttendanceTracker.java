@@ -2,7 +2,7 @@ package seedu.classmanager.model.student.information;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.classmanager.commons.util.AppUtil.checkArgument;
-import static seedu.classmanager.model.student.ClassDetails.MESSAGE_INVALID_TUTORIAL_SESSION_NUMBER;
+import static seedu.classmanager.model.student.ClassDetails.MESSAGE_INVALID_TUTORIAL_INDEX;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -87,7 +87,7 @@ public class AttendanceTracker implements Tracker {
         requireNonNull(tutNum);
         if (tutNum.getZeroBased() >= attendanceList.length) {
             throw new CommandException(
-                    String.format(MESSAGE_INVALID_TUTORIAL_SESSION_NUMBER, attendanceList.length));
+                    String.format(MESSAGE_INVALID_TUTORIAL_INDEX, attendanceList.length));
         }
         attendanceList[tutNum.getZeroBased()].mark();
     }
@@ -101,7 +101,7 @@ public class AttendanceTracker implements Tracker {
         requireNonNull(tutNum);
         if (tutNum.getZeroBased() >= attendanceList.length) {
             throw new CommandException(
-                    String.format(MESSAGE_INVALID_TUTORIAL_SESSION_NUMBER, attendanceList.length));
+                    String.format(MESSAGE_INVALID_TUTORIAL_INDEX, attendanceList.length));
         }
         attendanceList[tutNum.getZeroBased()].unmark();
     }
@@ -114,7 +114,7 @@ public class AttendanceTracker implements Tracker {
     public boolean isPresent(Index tutNum) throws CommandException {
         if (tutNum.getZeroBased() >= attendanceList.length) {
             throw new CommandException(
-                    String.format(MESSAGE_INVALID_TUTORIAL_SESSION_NUMBER, attendanceList.length));
+                    String.format(MESSAGE_INVALID_TUTORIAL_INDEX, attendanceList.length));
         }
         return attendanceList[tutNum.getZeroBased()].getIsPresent();
     }
