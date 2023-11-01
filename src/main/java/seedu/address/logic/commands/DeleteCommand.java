@@ -6,6 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TUTORIALGROUP;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
@@ -31,9 +32,12 @@ public class DeleteCommand extends Command {
             + "Examples: " + COMMAND_WORD + " 1, " + COMMAND_WORD + " all, "
             + COMMAND_WORD + " all " + PREFIX_TUTORIALGROUP + "G01";
 
-    public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
-    public static final String MESSAGE_DELETE_TAGGED_SUCCESS = "Deleted all contacts from %1$s Tutorial Group %2$s";
-    public static final String MESSAGE_DELETE_NO_TAG_SUCCESS = "Deleted all contacts from %1$s";
+    public static final String MESSAGE_NO_STUDENTS = "No students to delete from %1$s!";
+    public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted student: %1$s";
+    public static final String MESSAGE_DELETE_TAGGED_SUCCESS = "Deleted all students from %1$s Tutorial Group %2$s!\n"
+            + "Deleted student(s):\n%3$s";
+    public static final String MESSAGE_DELETE_NO_TAG_SUCCESS = "Deleted all students from %1$s!\n"
+            + "Deleted student(s):\n%2$s";
 
     private final Index targetIndex;
     private final Optional<Tag> tag;
@@ -76,6 +80,7 @@ public class DeleteCommand extends Command {
         }
 
         model.clearFilters();
+
         if (tag.isPresent()) {
             model.addFilter(tagPredicate);
         }
@@ -83,14 +88,24 @@ public class DeleteCommand extends Command {
         List<Person> toDeleteList = model.getFilteredPersonList();
         List<Person> copyDeleteList = new ArrayList<>(toDeleteList);
 
+        if (toDeleteList.isEmpty()) {
+            String toDeleteListDesc = tag.isPresent() ? String.format("%s %s", courseCode, tag) : courseCode;
+            return new CommandResult(String.format(MESSAGE_NO_STUDENTS, toDeleteListDesc));
+        }
+
+        ArrayList<Person> deletedPersons = new ArrayList<>();
         for (Person p : copyDeleteList) {
+            deletedPersons.add(p);
             model.deletePerson(p);
         }
+        String nameList = deletedPersons.stream().map(person -> Messages.format(person))
+                .collect(Collectors.joining(",\n"));
 
         model.clearFilters();
         return tag.isPresent()
-                ? new CommandResult(String.format(MESSAGE_DELETE_TAGGED_SUCCESS, courseCode, tag.get().getTagName()))
-                : new CommandResult(String.format(MESSAGE_DELETE_NO_TAG_SUCCESS, courseCode));
+                ? new CommandResult(String.format(MESSAGE_DELETE_TAGGED_SUCCESS,
+                        courseCode, tag.get().getTagName(), nameList))
+                : new CommandResult(String.format(MESSAGE_DELETE_NO_TAG_SUCCESS, courseCode, nameList));
     }
 
     @Override
