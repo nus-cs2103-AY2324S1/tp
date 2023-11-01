@@ -9,6 +9,9 @@ import seedu.address.model.person.RemindPredicate;
  * Parses input arguments and creates a new RemindCommand object
  */
 public class RemindCommandParser implements Parser<RemindCommand> {
+
+    private static final int VALID_DAYS_FROM = 0;
+    private static final int VALID_DAYS_TO = 7305;
     /**
      * Parses the given {@code String} of arguments in the context of the RemindCommand
      * and returns a RemindCommand object for execution.
@@ -24,9 +27,8 @@ public class RemindCommandParser implements Parser<RemindCommand> {
         try {
             int parsedArgs = Integer.parseInt(trimmedArgs);
 
-            if (parsedArgs < 0) {
-                throw new ParseException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
-                        Messages.MESSAGE_NOT_POSITIVE_NUMBER));
+            if (parsedArgs < VALID_DAYS_FROM || parsedArgs > VALID_DAYS_TO) {
+                throw new ParseException(String.format(Messages.MESSAGE_NOT_IN_RANGE, VALID_DAYS_FROM, VALID_DAYS_TO));
             }
             return new RemindCommand(new RemindPredicate(parsedArgs));
         } catch (NumberFormatException e) {

@@ -87,7 +87,8 @@ public class Policy {
         }
 
         if (isPersonCard) {
-            return company + "\n" + policyNumber + "\n" + policyIssueDate + "\n" + policyExpiryDate;
+            return "Company: " + company + "\n" + "Policy Number: " + policyNumber + "\n"
+                    + "Policy Issue Date: " + policyIssueDate + "\n" + "Policy Expiry Date: " + policyExpiryDate;
         }
         return company + ", " + policyNumber + ", " + policyIssueDate + ", " + policyExpiryDate;
     }
