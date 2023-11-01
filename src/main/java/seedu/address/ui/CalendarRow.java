@@ -75,6 +75,7 @@ public class CalendarRow extends UiPart<Region> {
                 width,
                 startX - initialX, calculateScheduleColor(i));
 
+            initialX += width;
             schedulesPane.getChildren().add(card.getRoot());
         }
     }
