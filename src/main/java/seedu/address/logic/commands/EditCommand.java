@@ -38,7 +38,9 @@ import seedu.address.model.employee.Salary;
 public class EditCommand extends Command {
 
     public static final String COMMAND_WORD = "edit";
-
+    public static final String MESSAGE_EXAMPLE = COMMAND_WORD + " 1 "
+            + PREFIX_PHONE + "91234567 "
+            + PREFIX_EMAIL + "johndoe@example.com";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the employee identified "
             + "by the index number used in the displayed employee list. "
             + "Existing values will be overwritten by the input values.\n"
@@ -50,9 +52,7 @@ public class EditCommand extends Command {
             + "[" + PREFIX_SALARY + "SALARY] "
             + "[" + PREFIX_LEAVE + "LEAVE] "
             + "[" + PREFIX_DEPARTMENT + "DEPARTMENT]...\n"
-            + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_PHONE + "91234567 "
-            + PREFIX_EMAIL + "johndoe@example.com";
+            + "Example: " + MESSAGE_EXAMPLE;
 
     public static final String MESSAGE_EDIT_EMPLOYEE_SUCCESS = "Edited Employee: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";

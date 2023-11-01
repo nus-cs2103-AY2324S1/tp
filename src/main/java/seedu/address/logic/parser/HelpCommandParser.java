@@ -2,6 +2,7 @@ package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
+import javafx.util.Pair;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -21,8 +22,10 @@ public class HelpCommandParser implements Parser<HelpCommand> {
             if (args.isEmpty()) {
                 return new HelpCommand();
             } else {
-                String usage = commandParser.checkCommandUsage(args);
-                return new HelpCommand(usage);
+                Pair<String, String> cmdUsage = commandParser.checkCommandUsage(args);
+                String usage = cmdUsage.getKey();
+                String example = cmdUsage.getValue();
+                return new HelpCommand(usage, example);
             }
         } catch (ParseException pe) {
             throw new ParseException(

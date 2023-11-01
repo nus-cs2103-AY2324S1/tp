@@ -169,9 +169,9 @@ public class MainWindow extends UiPart<Stage> {
      * @params cmd Command to display help for
      */
     @FXML
-    public void handleHelp(String cmdUsage) {
+    public void handleHelp(String cmdUsage, String cmdExample) {
         helpWindow.setHelpText(cmdUsage); // Set the text to the command help
-        //helpWindow.setHelpCopy(cmdExample); // Set URL to command example.
+        helpWindow.setHelpCopy(cmdExample); // Set URL to command example.
         if (!helpWindow.isShowing()) {
             helpWindow.show();
         } else {
@@ -212,11 +212,12 @@ public class MainWindow extends UiPart<Stage> {
             if (commandResult.isShowHelp()) {
                 // Handle help, pass command over to handler to create special page
                 String cmdUsage = commandResult.getCmdUsage();
+                String cmdExample = commandResult.getCmdExample();
                 // If empty string, it's to display all help.
                 if (cmdUsage.isEmpty()) {
                     handleHelp();
                 } else {
-                    handleHelp(cmdUsage);
+                    handleHelp(cmdUsage, cmdExample);
                 }
             }
 
