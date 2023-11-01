@@ -574,12 +574,12 @@ For step 3, the schedule list has been updated to show schedules that are marked
 
 Here is a list of the error messages you may encounter, when the command is entered incorrectly:
 
-| Error Message                                                             | Reason                                                         |
-|---------------------------------------------------------------------------|----------------------------------------------------------------|
-| `Invalid command format!`                                                 | `TUTOR_INDEX` is not a valid number.                           |
-| `The person index provided is invalid.`                                   | `TUTOR_INDEX` entered is not in the range of number of tutors. |
-| `Status has to be either MISSED (m/0) or COMPLETED (m/1).`                | Invalid value of `/m` was entered.                             |
-| `Multiple values specified for the following single-valued field(s): m/.` | More than 1 `m/` was given in the command.                     |
+| Error Message                                                            | Reason                                                         |
+|--------------------------------------------------------------------------|----------------------------------------------------------------|
+| `Invalid command format!`                                                | `TUTOR_INDEX` is not a valid number.                           |
+| `The person index provided is invalid`                                   | `TUTOR_INDEX` entered is not in the range of number of tutors. |
+| `Status has to be either MISSED (m/0) or COMPLETED (m/1)`                | Invalid value of `/m` was entered.                             |
+| `Multiple values specified for the following single-valued field(s): m/` | More than 1 `m/` was given in the command.                     |
 
 
 
