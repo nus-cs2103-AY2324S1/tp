@@ -59,7 +59,7 @@ public class EditCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         assert model != null : "Model should not be null";
-        List<Person> lastShownList = model.getFilteredPersonList();
+        List<Person> lastShownList = model.getDisplayedPersonList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
@@ -76,7 +76,7 @@ public class EditCommand extends Command {
         }
 
         model.setItem(personToEdit, editedPerson);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        model.updateDisplayedPersonList(PREDICATE_SHOW_ALL_PERSONS, null);
         return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)));
     }
 

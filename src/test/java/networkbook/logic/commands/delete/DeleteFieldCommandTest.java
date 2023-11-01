@@ -31,7 +31,7 @@ public class DeleteFieldCommandTest {
             new ModelManager(TypicalPersons.getTypicalNetworkBook(), new UserPrefs());
     private static final Index INDEX_ONE = Index.fromOneBased(1);
     private static final Index INVALID_INDEX = Index.fromOneBased(
-            model.getFilteredPersonList().size() + 1);
+            model.getDisplayedPersonList().size() + 1);
     private static final DeleteCourseAction DELETE_FIRST_COURSE_ACTION = new DeleteCourseAction(INDEX_ONE);
     private static final DeleteEmailAction DELETE_FIRST_EMAIL_ACTION = new DeleteEmailAction(INDEX_ONE);
     private static final DeleteLinkAction DELETE_FIRST_LINK_ACTION = new DeleteLinkAction(INDEX_ONE);
@@ -61,33 +61,33 @@ public class DeleteFieldCommandTest {
 
     @Test
     public void execute_invalidIndexOfOldValue_commandException() {
-        int numberOfCourses = model.getFilteredPersonList().get(0).getCourses().size();
+        int numberOfCourses = model.getDisplayedPersonList().get(0).getCourses().size();
         DeleteFieldCommand deleteInvalidCourseCommand = new DeleteFieldCommand(INDEX_ONE,
                 new DeleteCourseAction(Index.fromZeroBased(numberOfCourses + 1)));
         assertCommandFailure(deleteInvalidCourseCommand, model, DeletePersonDescriptor.MESSAGE_INVALID_COURSE_INDEX);
 
-        int numberOfPhones = model.getFilteredPersonList().get(0).getPhones().size();
+        int numberOfPhones = model.getDisplayedPersonList().get(0).getPhones().size();
         DeleteFieldCommand deleteInvalidPhoneCommand = new DeleteFieldCommand(INDEX_ONE,
                 new DeletePhoneAction(Index.fromZeroBased(numberOfPhones + 1)));
         assertCommandFailure(deleteInvalidPhoneCommand, model, DeletePersonDescriptor.MESSAGE_INVALID_PHONE_INDEX);
 
-        int numberOfEmails = model.getFilteredPersonList().get(0).getEmails().size();
+        int numberOfEmails = model.getDisplayedPersonList().get(0).getEmails().size();
         DeleteFieldCommand deleteInvalidEmailCommand = new DeleteFieldCommand(INDEX_ONE,
                 new DeleteEmailAction(Index.fromZeroBased(numberOfEmails + 1)));
         assertCommandFailure(deleteInvalidEmailCommand, model, DeletePersonDescriptor.MESSAGE_INVALID_EMAIL_INDEX);
 
-        int numberOfLinks = model.getFilteredPersonList().get(0).getLinks().size();
+        int numberOfLinks = model.getDisplayedPersonList().get(0).getLinks().size();
         DeleteFieldCommand deleteInvalidLinkCommand = new DeleteFieldCommand(INDEX_ONE,
                 new DeleteLinkAction(Index.fromZeroBased(numberOfLinks + 1)));
         assertCommandFailure(deleteInvalidLinkCommand, model, DeletePersonDescriptor.MESSAGE_INVALID_LINK_INDEX);
 
-        int numberOfSpecs = model.getFilteredPersonList().get(0).getSpecialisations().size();
+        int numberOfSpecs = model.getDisplayedPersonList().get(0).getSpecialisations().size();
         DeleteFieldCommand deleteInvalidSpecCommand = new DeleteFieldCommand(INDEX_ONE,
                 new DeleteSpecialisationAction(Index.fromZeroBased(numberOfSpecs + 1)));
         assertCommandFailure(deleteInvalidSpecCommand, model,
                 DeletePersonDescriptor.MESSAGE_INVALID_SPECIALISATION_INDEX);
 
-        int numberOfTags = model.getFilteredPersonList().get(0).getTags().size();
+        int numberOfTags = model.getDisplayedPersonList().get(0).getTags().size();
         DeleteFieldCommand deleteInvalidTagCommand = new DeleteFieldCommand(INDEX_ONE,
                 new DeleteTagAction(Index.fromZeroBased(numberOfTags + 1)));
         assertCommandFailure(deleteInvalidTagCommand, model, DeletePersonDescriptor.MESSAGE_INVALID_TAG_INDEX);
@@ -96,7 +96,7 @@ public class DeleteFieldCommandTest {
     @Test
     public void execute_validCommand_success() {
         Model originalModel = new ModelManager(new NetworkBook(model.getNetworkBook()), new UserPrefs());
-        originalModel.setItem(model.getFilteredPersonList().get(0), TypicalPersons.JACK);
+        originalModel.setItem(model.getDisplayedPersonList().get(0), TypicalPersons.JACK);
 
         Name jackName = TypicalPersons.JACK.getName();
         UniqueList<Phone> jackPhones = TypicalPersons.JACK.getPhones();
@@ -221,70 +221,70 @@ public class DeleteFieldCommandTest {
         DeleteFieldCommand deletePhoneCommand = new DeleteFieldCommand(INDEX_ONE, DELETE_FIRST_PHONE_ACTION);
         Model expectedModelAfterDeletingPhone =
                 new ModelManager(new NetworkBook(model.getNetworkBook()), new UserPrefs());
-        expectedModelAfterDeletingPhone.setItem(model.getFilteredPersonList().get(0), jackWithoutFirstPhone);
+        expectedModelAfterDeletingPhone.setItem(model.getDisplayedPersonList().get(0), jackWithoutFirstPhone);
         assertCommandSuccess(deletePhoneCommand, originalModel,
                 String.format(MESSAGE_DELETE_PERSON_FIELD_SUCCESS, Messages.format(jackWithoutFirstPhone)),
                 expectedModelAfterDeletingPhone);
 
-        originalModel.setItem(originalModel.getFilteredPersonList().get(0), TypicalPersons.JACK);
+        originalModel.setItem(originalModel.getDisplayedPersonList().get(0), TypicalPersons.JACK);
         DeleteFieldCommand deleteEmailCommand = new DeleteFieldCommand(INDEX_ONE, DELETE_FIRST_EMAIL_ACTION);
         Model expectedModelAfterDeletingEmail =
                 new ModelManager(new NetworkBook(model.getNetworkBook()), new UserPrefs());
-        expectedModelAfterDeletingEmail.setItem(model.getFilteredPersonList().get(0), jackWithoutFirstEmail);
+        expectedModelAfterDeletingEmail.setItem(model.getDisplayedPersonList().get(0), jackWithoutFirstEmail);
         assertCommandSuccess(deleteEmailCommand, originalModel,
                 String.format(MESSAGE_DELETE_PERSON_FIELD_SUCCESS, Messages.format(jackWithoutFirstEmail)),
                 expectedModelAfterDeletingEmail);
 
-        originalModel.setItem(originalModel.getFilteredPersonList().get(0), TypicalPersons.JACK);
+        originalModel.setItem(originalModel.getDisplayedPersonList().get(0), TypicalPersons.JACK);
         DeleteFieldCommand deleteLinkCommand = new DeleteFieldCommand(INDEX_ONE, DELETE_FIRST_LINK_ACTION);
         Model expectedModelAfterDeletingLink =
                 new ModelManager(new NetworkBook(model.getNetworkBook()), new UserPrefs());
-        expectedModelAfterDeletingLink.setItem(model.getFilteredPersonList().get(0), jackWithoutFirstLink);
+        expectedModelAfterDeletingLink.setItem(model.getDisplayedPersonList().get(0), jackWithoutFirstLink);
         assertCommandSuccess(deleteLinkCommand, originalModel,
                 String.format(MESSAGE_DELETE_PERSON_FIELD_SUCCESS, Messages.format(jackWithoutFirstLink)),
                 expectedModelAfterDeletingLink);
 
-        originalModel.setItem(originalModel.getFilteredPersonList().get(0), TypicalPersons.JACK);
+        originalModel.setItem(originalModel.getDisplayedPersonList().get(0), TypicalPersons.JACK);
         DeleteFieldCommand deleteCourseCommand = new DeleteFieldCommand(INDEX_ONE, DELETE_FIRST_COURSE_ACTION);
         Model expectedModelAfterDeletingCourse =
                 new ModelManager(new NetworkBook(model.getNetworkBook()), new UserPrefs());
-        expectedModelAfterDeletingCourse.setItem(model.getFilteredPersonList().get(0), jackWithoutFirstCourse);
+        expectedModelAfterDeletingCourse.setItem(model.getDisplayedPersonList().get(0), jackWithoutFirstCourse);
         assertCommandSuccess(deleteCourseCommand, originalModel,
                 String.format(MESSAGE_DELETE_PERSON_FIELD_SUCCESS, Messages.format(jackWithoutFirstCourse)),
                 expectedModelAfterDeletingCourse);
 
-        originalModel.setItem(originalModel.getFilteredPersonList().get(0), TypicalPersons.JACK);
+        originalModel.setItem(originalModel.getDisplayedPersonList().get(0), TypicalPersons.JACK);
         DeleteFieldCommand deleteSpecCommand = new DeleteFieldCommand(INDEX_ONE, DELETE_FIRST_SPEC_ACTION);
         Model expectedModelAfterDeletingSpec =
                 new ModelManager(new NetworkBook(model.getNetworkBook()), new UserPrefs());
-        expectedModelAfterDeletingSpec.setItem(model.getFilteredPersonList().get(0), jackWithoutFirstSpec);
+        expectedModelAfterDeletingSpec.setItem(model.getDisplayedPersonList().get(0), jackWithoutFirstSpec);
         assertCommandSuccess(deleteSpecCommand, originalModel,
                 String.format(MESSAGE_DELETE_PERSON_FIELD_SUCCESS, Messages.format(jackWithoutFirstSpec)),
                 expectedModelAfterDeletingSpec);
 
-        originalModel.setItem(originalModel.getFilteredPersonList().get(0), TypicalPersons.JACK);
+        originalModel.setItem(originalModel.getDisplayedPersonList().get(0), TypicalPersons.JACK);
         DeleteFieldCommand deleteTagCommand = new DeleteFieldCommand(INDEX_ONE, DELETE_FIRST_TAG_ACTION);
         Model expectedModelAfterDeletingTag =
                 new ModelManager(new NetworkBook(model.getNetworkBook()), new UserPrefs());
-        expectedModelAfterDeletingTag.setItem(model.getFilteredPersonList().get(0), jackWithoutFirstTag);
+        expectedModelAfterDeletingTag.setItem(model.getDisplayedPersonList().get(0), jackWithoutFirstTag);
         assertCommandSuccess(deleteTagCommand, originalModel,
                 String.format(MESSAGE_DELETE_PERSON_FIELD_SUCCESS, Messages.format(jackWithoutFirstTag)),
                 expectedModelAfterDeletingTag);
 
-        originalModel.setItem(originalModel.getFilteredPersonList().get(0), TypicalPersons.JACK);
+        originalModel.setItem(originalModel.getDisplayedPersonList().get(0), TypicalPersons.JACK);
         DeleteFieldCommand deleteGraduationCommand = new DeleteFieldCommand(INDEX_ONE, DELETE_GRADUATION_ACTION);
         Model expectedModelAfterDeletingGraduation =
                 new ModelManager(new NetworkBook(model.getNetworkBook()), new UserPrefs());
-        expectedModelAfterDeletingGraduation.setItem(model.getFilteredPersonList().get(0), jackWithoutGraduation);
+        expectedModelAfterDeletingGraduation.setItem(model.getDisplayedPersonList().get(0), jackWithoutGraduation);
         assertCommandSuccess(deleteGraduationCommand, originalModel,
                 String.format(MESSAGE_DELETE_PERSON_FIELD_SUCCESS, Messages.format(jackWithoutGraduation)),
                 expectedModelAfterDeletingGraduation);
 
-        originalModel.setItem(originalModel.getFilteredPersonList().get(0), TypicalPersons.JACK);
+        originalModel.setItem(originalModel.getDisplayedPersonList().get(0), TypicalPersons.JACK);
         DeleteFieldCommand deletePriorityCommand = new DeleteFieldCommand(INDEX_ONE, DELETE_PRIORITY_ACTION);
         Model expectedModelAfterDeletingPriority =
                 new ModelManager(new NetworkBook(model.getNetworkBook()), new UserPrefs());
-        expectedModelAfterDeletingPriority.setItem(model.getFilteredPersonList().get(0), jackWithoutPriority);
+        expectedModelAfterDeletingPriority.setItem(model.getDisplayedPersonList().get(0), jackWithoutPriority);
         assertCommandSuccess(deletePriorityCommand, originalModel,
                 String.format(MESSAGE_DELETE_PERSON_FIELD_SUCCESS, Messages.format(jackWithoutPriority)),
                 expectedModelAfterDeletingPriority);

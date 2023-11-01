@@ -15,14 +15,13 @@ import networkbook.commons.core.index.Index;
 import networkbook.commons.util.ToStringBuilder;
 import networkbook.model.person.Link;
 import networkbook.model.person.Person;
-import networkbook.model.util.Identifiable;
 import networkbook.model.util.UniqueList;
 
 /**
  * Wraps all data at the network-book level
  * Duplicate contacts are not allowed (by .isSame comparison)
  */
-public class NetworkBook implements ReadOnlyNetworkBook, Identifiable<NetworkBook> {
+public class NetworkBook implements ReadOnlyNetworkBook {
 
     private final UniqueList<Person> persons;
     private final FilteredList<Person> filteredPersons;
@@ -60,8 +59,8 @@ public class NetworkBook implements ReadOnlyNetworkBook, Identifiable<NetworkBoo
     public void resetData(ReadOnlyNetworkBook newData) {
         requireNonNull(newData);
         setItems(newData.getPersonList());
-        Optional.of(newData.getFilterPredicate()).ifPresent(this::setFilterPredicate);
-        Optional.of(newData.getSortComparator()).ifPresent(this::setSortComparator);
+        Optional.ofNullable(newData.getFilterPredicate()).ifPresent(this::setFilterPredicate);
+        Optional.ofNullable(newData.getSortComparator()).ifPresent(this::setSortComparator);
     }
 
     /**
@@ -159,16 +158,6 @@ public class NetworkBook implements ReadOnlyNetworkBook, Identifiable<NetworkBoo
     public ObservableList<Person> getDisplayedPersonList() {
         return displayedPersons;
     }
-
-    @Override
-    public boolean isSame(NetworkBook another) {
-        return this == another;
-    }
-
-    @Override
-    public String getValue() {
-        return "";
-    }
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -181,7 +170,17 @@ public class NetworkBook implements ReadOnlyNetworkBook, Identifiable<NetworkBoo
         }
 
         NetworkBook otherNetworkBook = (NetworkBook) other;
-        return persons.equals(otherNetworkBook.persons);
+        UniqueList<Person> localFilteredPersons = new UniqueList<>();
+        UniqueList<Person> localDisplayedPersons = new UniqueList<>();
+        UniqueList<Person> otherFilteredPersons = new UniqueList<>();
+        UniqueList<Person> otherDisplayedPersons = new UniqueList<>();
+        localFilteredPersons.setItems(this.filteredPersons);
+        localDisplayedPersons.setItems(this.displayedPersons);
+        otherFilteredPersons.setItems(otherNetworkBook.filteredPersons);
+        otherDisplayedPersons.setItems(otherNetworkBook.displayedPersons);
+        return this.persons.equals(otherNetworkBook.persons)
+                && localFilteredPersons.equals(otherFilteredPersons)
+                && localDisplayedPersons.equals(otherDisplayedPersons);
     }
 
     @Override

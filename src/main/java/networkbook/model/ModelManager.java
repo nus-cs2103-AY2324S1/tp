@@ -10,8 +10,6 @@ import java.util.function.Predicate;
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
-import javafx.collections.transformation.FilteredList;
-import javafx.collections.transformation.SortedList;
 import networkbook.commons.core.GuiSettings;
 import networkbook.commons.core.LogsCenter;
 import networkbook.commons.core.index.Index;
@@ -28,8 +26,6 @@ public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
     private final VersionedNetworkBook versionedNetworkBook;
     private final UserPrefs userPrefs;
-    private final FilteredList<Person> filteredPersons;
-    private final SortedList<Person> filteredSortedPersons;
 
     /**
      * Initializes a ModelManager with the given networkBook and userPrefs.
@@ -41,8 +37,6 @@ public class ModelManager implements Model {
 
         this.versionedNetworkBook = new VersionedNetworkBook(networkBook);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredPersons = new FilteredList<>(this.versionedNetworkBook.getPersonList());
-        filteredSortedPersons = new SortedList<>(filteredPersons, null);
     }
 
     public ModelManager() {
@@ -161,6 +155,7 @@ public class ModelManager implements Model {
         if (comparator != null) {
             versionedNetworkBook.setSortComparator(comparator);
         }
+        versionedNetworkBook.commit();
     }
 
     @Override
@@ -181,9 +176,7 @@ public class ModelManager implements Model {
 
         ModelManager otherModelManager = (ModelManager) other;
         return versionedNetworkBook.equals(otherModelManager.versionedNetworkBook)
-                && userPrefs.equals(otherModelManager.userPrefs)
-                && filteredPersons.equals(otherModelManager.filteredPersons)
-                && filteredSortedPersons.equals(otherModelManager.filteredSortedPersons);
+                && userPrefs.equals(otherModelManager.userPrefs);
     }
 
 }
