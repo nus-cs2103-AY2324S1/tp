@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_INTERVIEWS;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -62,6 +63,8 @@ public class ListFreeTimeCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
+        // update the filtered list to show all interviews
+        model.updateFilteredInterviewList(PREDICATE_SHOW_ALL_INTERVIEWS);
         List<Interview> temp = model.getFilteredInterviewList();
         UniqueInterviewList interviews = new UniqueInterviewList();
         interviews.setInterviews(temp);
