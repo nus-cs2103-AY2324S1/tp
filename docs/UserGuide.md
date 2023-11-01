@@ -640,31 +640,50 @@ Deletes a schedule in the address book based on their index number in the table 
 
 Display schedules on a specified day as a calendar view.
 
-**Format:** `show DATE`
+##### :star: First time users
+{:.no_toc}
 
-**Acceptable values**:
-* `DATE`: Only dates in `yyyy-MM-dd` format is accepted
+**Scenario**
 
-**Example:**
-* `show 2023-01-06` shows all schedules on 6 Jan 2023.
-* `show 2023-09-25` shows all schedules on 25 September 2023.
+After adding all your tutor's schedules, you would like to view the schedules on a given day as a calendar.
 
-**Expected output:**
-* Viewing calendar.
+You're in luck with the calendar view command!
+
+**Follow these steps**
+
+Type in `show 2023-09-15` to view the schedules on **15 September 2023** as a calendar.
+
+**What you can expect to see**
+
+Woah look at that! The schedules are now being displayed in a calendar form.
 
 ![show calendar](images/showCalendar.png)
 
-**Error messages**:
-* `Invalid command format!`: Invalid or missing DATE.
+##### :star::star::star: Experienced users
+{:.no_toc}
+
+**Command format**
+
+![show calendar command](images/showCommandSyntax.png)
+
+**Errors you might encounter**
+
+This command might seem complicated, but it is easy to use with only 1 possible error:
+
+| Error Message             | Reason                  |
+|---------------------------|-------------------------|
+| `Invalid command format!` | Invalid or missing DATE |
 
 <div markdown="block" class="alert alert-warning">
 
 **:warning: Calendar Limitations**<br>
 * Currently, the calendar does not support displaying of schedules that extend over multiple days.
 * Schedules with very short duration may not be displayed correctly (the schedule's index, status and time will not be visible).
-* Adding or modifying schedules will hide the calendar view. Use `show DATE` to view calendar again. 
+* Using any other commands will hide the calendar view. Use the `show` command to view calendar again. 
 
 </div>
+
+You can also refer to [input information](#input-examples) for details about valid inputs.
 
 [Back To Top](#table-of-contents)
 
