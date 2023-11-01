@@ -4,7 +4,7 @@ package seedu.address.model.card;
  * Represents the number of times the card is solved.
  */
 public class SolveCount {
-    private static Integer solveCount = 0;
+    private Integer solveCount = 0;
 
     public Integer getSolveCount() {
         return solveCount;
@@ -30,7 +30,7 @@ public class SolveCount {
 
         // instanceof Integer
         if (other instanceof Integer) {
-            return solveCount == other;
+            return getSolveCount() == other;
         }
 
         // instanceof handles nulls

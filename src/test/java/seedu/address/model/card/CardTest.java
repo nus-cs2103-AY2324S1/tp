@@ -82,10 +82,11 @@ public class CardTest {
 
     @Test
     public void getSolveCountMethod() {
-        Card cs1101sCopy = new CardBuilder(CS1101S).build();
+        Card cs1231sCopy = new CardBuilder(CS1231S).build();
 
+        System.out.println(cs1231sCopy.getSolveCount());
         // solve count on creation = 0;
-        assertTrue(cs1101sCopy.getSolveCount().equals(0));
+        assertTrue(cs1231sCopy.getSolveCount().equals(0));
     }
 
     @Test
