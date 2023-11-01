@@ -92,7 +92,7 @@ public class MarkCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof DeleteCommand)) {
+        if (!(other instanceof MarkCommand)) {
             return false;
         }
 
