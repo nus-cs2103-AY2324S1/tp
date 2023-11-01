@@ -1,13 +1,19 @@
 package seedu.address.logic.parser;
 
+import static java.time.format.DateTimeFormatter.ISO_LOCAL_DATE;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_FROM;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TO;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIds.ID_FIRST_EMPLOYEE;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_EMPLOYEE;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -15,6 +21,7 @@ import java.util.stream.Collectors;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.AddLeaveCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
@@ -23,11 +30,13 @@ import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.ListLeaveCommand;
 import seedu.address.logic.commands.ResetCommand;
 import seedu.address.logic.commands.SortCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.employee.Employee;
 import seedu.address.model.employee.EmployeeContainsKeywordsPredicate;
+import seedu.address.model.employee.Id;
 import seedu.address.testutil.EditEmployeeDescriptorBuilder;
 import seedu.address.testutil.EmployeeBuilder;
 import seedu.address.testutil.EmployeeUtil;
@@ -77,6 +86,29 @@ public class AddressBookParserTest {
         FindCommand command = (FindCommand) parser.parseCommand(
                 FindCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
         assertEquals(new FindCommand(new EmployeeContainsKeywordsPredicate(keywords)), command);
+    }
+
+    @Test
+    public void parseCommand_addLeave() throws Exception {
+        AddLeaveCommand command = (AddLeaveCommand) parser.parseCommand(
+                AddLeaveCommand.COMMAND_WORD + " " + PREFIX_ID + "EID1234-5678 "
+                        + PREFIX_FROM + "2023-10-30 " + PREFIX_TO + "2023-11-01");
+        assertEquals(
+                new AddLeaveCommand(new Id("EID1234-5678"),
+                        LocalDate.parse("2023-10-30", ISO_LOCAL_DATE),
+                        LocalDate.parse("2023-11-01", ISO_LOCAL_DATE)),
+                command
+        );
+    }
+
+    @Test
+    public void parseCommand_listLeave() throws Exception {
+        ListLeaveCommand command = (ListLeaveCommand) parser.parseCommand(
+                ListLeaveCommand.COMMAND_WORD + " on/ " + "2023-11-01");
+        assertEquals(
+                new ListLeaveCommand(LocalDate.parse("2023-11-01", ISO_LOCAL_DATE)),
+                command
+        );
     }
 
     @Test

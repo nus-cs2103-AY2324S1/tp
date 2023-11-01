@@ -175,7 +175,7 @@ public class ParserUtil {
         if (!Leave.isValidLeaveDate(trimmedDate)) {
             throw new ParseException(Leave.MESSAGE_CONSTRAINTS);
         }
-        return LocalDate.parse(leaveDate, Leave.VALID_DATE_FORMAT);
+        return LocalDate.parse(trimmedDate, Leave.VALID_DATE_FORMAT);
     }
 
     /**

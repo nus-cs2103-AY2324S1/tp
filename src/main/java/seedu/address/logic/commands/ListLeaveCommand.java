@@ -5,6 +5,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ON;
 
 import java.time.LocalDate;
 
+import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.employee.EmployeeContainsKeywordsPredicate;
@@ -35,5 +36,27 @@ public class ListLeaveCommand extends Command {
         model.updateFilteredEmployeeList(employee -> employee.isOnLeave(date));
         return new CommandResult(
                 String.format(Messages.MESSAGE_EMPLOYEES_ON_LEAVE_OVERVIEW, model.getFilteredEmployeeList().size()));
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof ListLeaveCommand)) {
+            return false;
+        }
+
+        ListLeaveCommand otherListLeaveCommand = (ListLeaveCommand) other;
+        return date.equals(otherListLeaveCommand.date);
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .add("date", date)
+                .toString();
     }
 }
