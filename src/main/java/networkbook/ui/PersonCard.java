@@ -3,6 +3,7 @@ package networkbook.ui;
 import static java.util.Objects.requireNonNull;
 
 import java.util.Optional;
+import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -12,6 +13,8 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import networkbook.commons.core.index.Index;
+import networkbook.logic.parser.OpenLinkCommandParser;
 import networkbook.model.person.Person;
 import networkbook.model.person.Priority;
 import networkbook.model.util.Identifiable;
@@ -78,13 +81,16 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private FlowPane priority;
 
+    private final Consumer<String> submitCommandCallback;
+
     /**
      * Creates a {@code PersonCard} with the given {@code Person} and index to display.
      */
-    public PersonCard(Person person, int displayedIndex) {
+    public PersonCard(Person person, int displayedIndex, Consumer<String> submitCommandCallback) {
         super(FXML);
         requireNonNull(person);
         this.person = person;
+        this.submitCommandCallback = submitCommandCallback;
 
         // Name and ID
         id.setText(displayedIndex + ". ");
@@ -96,16 +102,17 @@ public class PersonCard extends UiPart<Region> {
 
         // Email addresses
         emailsHeader.setText(EMAILS_HEADER);
-        populateHyperlinkListChildren(person.getEmails(), emails, (email) -> {
+        populateHyperlinkListChildren(person.getEmails(), emails, (email, index) -> {
             // TODO: implement actual email opening
             LOGGER.log(Level.INFO, "Opening email: " + email.getValue());
         });
 
         // Website links
         linksHeader.setText(LINKS_HEADER);
-        populateHyperlinkListChildren(person.getLinks(), links, (link)-> {
-            // TODO: implement actual link opening
+        populateHyperlinkListChildren(person.getLinks(), links, (link, index)-> {
             LOGGER.log(Level.INFO, "Opening link: " + link.getValue());
+            submitCommandCallback.accept(
+                    OpenLinkCommandParser.generateCommandString(displayedIndex, index.getOneBased()));
         });
 
         // Graduation
@@ -151,17 +158,19 @@ public class PersonCard extends UiPart<Region> {
      * @param <T> Type of list item.
      * @param list Source list of items.
      * @param pane FlowPane to populate.
-     * @param action Action to perform on link click. Takes in list item.
+     * @param action Action to perform on link click. Takes in list item and index of list item.
      */
     private <T extends Identifiable<T>> void populateHyperlinkListChildren(UniqueList<T> list,
-            FlowPane pane, Consumer<T> action) {
+            FlowPane pane, BiConsumer<T, Index> action) {
         if (list.isEmpty()) {
             pane.getChildren().add(new EmptyFieldLabel());
         } else {
             for (int i = 0; i < list.size(); i++) {
                 T link = list.get(i);
+                Index index = Index.fromZeroBased(i);
                 FieldHyperlink hyperlink = new FieldHyperlink(
-                        String.format(FIELD_WITH_INDEX_FORMAT, i + 1, link.getValue()), () -> action.accept(link));
+                        String.format(FIELD_WITH_INDEX_FORMAT, index.getOneBased(), link.getValue()), () ->
+                        action.accept(link, index));
                 pane.getChildren().add(hyperlink);
             }
         }
