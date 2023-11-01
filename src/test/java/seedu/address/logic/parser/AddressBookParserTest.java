@@ -115,4 +115,5 @@ public class AddressBookParserTest {
         Command result = parser.parseCommand(userInput);
         assertEquals(ListCommand.class, result.getClass());
     }
+
 }
