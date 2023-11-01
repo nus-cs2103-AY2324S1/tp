@@ -182,7 +182,7 @@ public class ParserUtil {
      */
     public static Remark parseRemark(String remark) {
         requireNonNull(remark);
-        String trimmedDRemark = remark.trim();
-        return new Remark(remark);
+        String trimmedRemark = remark.trim();
+        return new Remark(trimmedRemark);
     }
 }
