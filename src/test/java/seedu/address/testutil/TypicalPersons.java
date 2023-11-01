@@ -37,13 +37,12 @@ public class TypicalPersons {
 
     public static final Person ALICE = new PersonBuilder().withName("Alice Pauline")
             .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")
-            .withPhone("94351253")
-            .withTags("friends").withNric("000A").withLicencePlate("SBA1234A")
+            .withPhone("94351253").withTags("friends").withNric("000A").withLicencePlate("SBA1234A").withRemark("")
             .withPolicy("NTUC", "AIA1", "01-01-2020", "01-02-2020").build();
     public static final Person BENSON = new PersonBuilder().withName("Benson Meier")
             .withAddress("311, Clementi Ave 2, #02-25")
             .withEmail("johnd@example.com").withPhone("98765432")
-            .withTags("owesMoney", "friends").withNric("001B").withLicencePlate("SBA5555B")
+            .withTags("owesMoney", "friends").withNric("001B").withLicencePlate("SBA5555B").withRemark("")
             .withPolicy("InsureMe", "AIA2", "12-12-2010", "12-12-2020").build();
     public static final Person CARL = new PersonBuilder().withName("Carl Kurz").withPhone("95352563")
             .withEmail("heinz@example.com").withAddress("wall street").withNric("123C").withLicencePlate("SLR8E")

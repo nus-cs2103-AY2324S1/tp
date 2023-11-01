@@ -14,6 +14,7 @@ import seedu.address.model.policy.Company;
 import seedu.address.model.policy.Policy;
 import seedu.address.model.policy.PolicyDate;
 import seedu.address.model.policy.PolicyNumber;
+import seedu.address.model.person.Remark;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
@@ -32,6 +33,7 @@ public class PersonBuilder {
     private static final String DEFAULT_POLICY_NUMBER = "AIA1234";
     private static final String DEFAULT_POLICY_ISSUE_DATE = "01-01-2023";
     private static final String DEFAULT_POLICY_EXPIRY_DATE = "01-01-2030";
+    public static final String DEFAULT_REMARK = "";
 
     private Name name;
     private Phone phone;
@@ -41,6 +43,7 @@ public class PersonBuilder {
     private Nric nric;
     private LicencePlate licencePlate;
     private Policy policy;
+    private Remark remark;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -53,6 +56,7 @@ public class PersonBuilder {
         tags = new HashSet<>();
         nric = new Nric(DEFAULT_NRIC);
         licencePlate = new LicencePlate(DEFAULT_LICENCE_PLATE);
+        remark = new Remark(DEFAULT_REMARK);
         Company company = new Company(DEFAULT_COMPANY);
         PolicyNumber policyNumber = new PolicyNumber(DEFAULT_POLICY_NUMBER);
         PolicyDate policyIssueDate = new PolicyDate(DEFAULT_POLICY_ISSUE_DATE);
@@ -71,6 +75,7 @@ public class PersonBuilder {
         tags = new HashSet<>(personToCopy.getTags());
         nric = personToCopy.getNric();
         licencePlate = personToCopy.getLicencePlate();
+        remark = personToCopy.getRemark();
         policy = personToCopy.getPolicy();
     }
 
@@ -144,8 +149,16 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code Remark} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withRemark(String remark) {
+        this.remark = new Remark(remark);
+        return this;
+    }
+
     public Person build() {
-        return new Person(name, phone, email, address, tags, nric, licencePlate, policy);
+        return new Person(name, phone, email, address, tags, nric, licencePlate, remark, policy);
     }
 
 }
