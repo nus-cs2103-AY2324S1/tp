@@ -66,7 +66,9 @@ public class UniqueBandList implements Iterable<Band> {
         requireNonNull(target);
 
         for (int i = 0; i < internalList.size(); i++) {
-            internalList.get(i).setMusician(target, editedMusician);
+            if (internalList.get(i).hasMusician(target)) {
+                internalList.get(i).setMusician(target, editedMusician);
+            }
         }
     }
 
