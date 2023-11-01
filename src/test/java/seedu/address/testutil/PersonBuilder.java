@@ -11,7 +11,6 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Remark;
-import seedu.address.model.person.Score;
 import seedu.address.model.person.ScoreList;
 import seedu.address.model.person.Status;
 import seedu.address.model.person.StatusTypes;
@@ -124,8 +123,8 @@ public class PersonBuilder {
     }
 
     /**
-     * Sets the {@code Score} of the {@code Person} that we are building.
-     * @param score integer value of score
+     * Sets the {@code ScoreList} of the {@code Person} that we are building.
+     * @param scoreList the score list to be set
      * @return PersonBuilder
      */
     public PersonBuilder withScoreList(ScoreList scoreList) {
@@ -170,7 +169,6 @@ public class PersonBuilder {
      */
     public Person build() {
         Person createdPerson = new Person(name, phone, email, address, remark, tags);
-        createdPerson.setScoreList(scoreList);
         return createdPerson;
     }
 

@@ -24,6 +24,7 @@ import seedu.address.model.person.Score;
 import seedu.address.model.person.Status;
 import seedu.address.model.person.StatusTypes;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.tag.UniqueTagList;
 
 
 /**
@@ -140,13 +141,15 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code tag} is invalid.
      */
-    public static Tag parseTag(String tag) throws ParseException {
-        requireNonNull(tag);
-        String trimmedTag = tag.trim();
+    public static Tag parseTag(String tagName, String tagCategory) throws ParseException {
+        requireNonNull(tagName);
+        requireNonNull(tagCategory);
+        UniqueTagList uniqueTagList = new UniqueTagList();
+        String trimmedTag = tagName.trim();
         if (!Tag.isValidTagName(trimmedTag)) {
             throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
         }
-        return new Tag(trimmedTag);
+        return uniqueTagList.getTag(tagName, tagCategory);
     }
 
     /**
@@ -155,10 +158,35 @@ public class ParserUtil {
     public static Set<Tag> parseTags(Collection<String> tags) throws ParseException {
         requireNonNull(tags);
         final Set<Tag> tagSet = new HashSet<>();
-        for (String tagName : tags) {
-            tagSet.add(parseTag(tagName));
+        String[] tagNameCategoryPairs = parseTagCategories(tags);
+        for (String tagNameCategory : tagNameCategoryPairs) {
+            if (tagNameCategory.split("\\s+").length > 1) {
+                String[] nameCategory = tagNameCategory.split("\\s+");
+                // category specified
+                String tagName = nameCategory[1];
+                String tagCategory = nameCategory[0];
+                tagSet.add(parseTag(tagName, tagCategory));
+            } else {
+                // category not specified
+                tagSet.add(parseTag(tagNameCategory, ""));
+            }
         }
         return tagSet;
+    }
+
+    /**
+     * Parses a collection of tag strings into an array of tag categories.
+     *
+     * @param tags A collection of tag strings to be parsed.
+     * @return An array of tag categories extracted from the provided collection of tag strings.
+     * @throws ParseException If there is an issue with parsing the tag categories.
+     */
+    public static String[] parseTagCategories(Collection<String> tags) throws ParseException {
+        requireNonNull(tags);
+        String listTags = tags.toString();
+        String cleanedList = listTags.replaceAll("[\\[\\]]", "");
+        String[] tagParams = cleanedList.split(",\\s*");
+        return tagParams;
     }
 
     /**
@@ -259,9 +287,9 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String tagScorePair} into a {@code Pair<Tag, Score>}.
+     * Parses a Tag Score string input and turns it into a Pair with head as Tag and tail as Score.
      * @param tagScore String to be parsed
-     * @return Pair<Tag, Score> object
+     * @return Pair with head as Tag and tail as Score
      * @throws ParseException if the given {@code tagScorePair} is invalid.
      */
     public static Pair<Tag, Score> parseTagScore(String tagScore) throws ParseException {
@@ -271,7 +299,7 @@ public class ParserUtil {
         if (tagScorePairArr.length != 2) {
             throw new ParseException("Invalid score, score must be non-negative integer.");
         }
-        Tag tag = parseTag(tagScorePairArr[0]);
+        Tag tag = parseTag(tagScorePairArr[0], "");
         Score score = parseScore(tagScorePairArr[1]);
         return new Pair<>(tag, score);
     }

@@ -1,9 +1,7 @@
 package seedu.address.model.statistics;
 
-import seedu.address.model.tag.Tag;
 import seedu.address.model.person.Person;
-
-import java.util.stream.Stream;
+import seedu.address.model.tag.Tag;
 
 
 /**

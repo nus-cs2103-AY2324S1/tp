@@ -2,6 +2,11 @@ package seedu.address.model.statistics;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.List;
+import java.util.logging.Logger;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.person.Person;
@@ -9,22 +14,15 @@ import seedu.address.model.person.Score;
 import seedu.address.model.person.ScoreList;
 import seedu.address.model.tag.Tag;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.function.Supplier;
-import java.util.logging.Logger;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
-
 /**
  * Represents the summary statistic of the address book.
  * Using terminal operations on Stream like count() consumes the stream and closes it.
  * This can throw an IllegalStateException if you try to use the stream after it is closed.
  */
 public class SummaryStatistic implements ReadOnlySummaryStatistic {
-    ObservableList<Person> personData;
-    private List<Person> personList;
     private static final Logger logger = LogsCenter.getLogger(SummaryStatistic.class);
+    private ObservableList<Person> personData;
+    private List<Person> personList;
 
     /**
      * Initializes a SummaryStatistic with the observable list of given person data.
@@ -174,10 +172,9 @@ public class SummaryStatistic implements ReadOnlySummaryStatistic {
             logger.warning("No people in the list, percentile will be left as default of 0");
             return percentile;
         }
-        percentile =  Math.ceil((double) filteredListWithScoreValue.size() / filteredList.size() * 100);
+        percentile = Math.ceil((double) filteredListWithScoreValue.size() / filteredList.size() * 100);
         return percentile;
     }
-
     /**
      * Generate the Max score of the people associated with that tag.
      * @param tag tag to be associated with

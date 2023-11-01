@@ -24,12 +24,15 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Github;
+import seedu.address.model.person.LinkedIn;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Remark;
 import seedu.address.model.person.Score;
 import seedu.address.model.person.ScoreList;
+import seedu.address.model.person.Status;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -107,6 +110,9 @@ public class EditCommand extends Command {
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         Remark updatedRemark = personToEdit.getRemark();
+        LinkedIn updatedLinkedIn = personToEdit.getLinkedIn();
+        Github updatedGithub = personToEdit.getGithub();
+        Status updatedStatus = personToEdit.getStatus();
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
         Person editedPerson = new Person(updatedName, updatedPhone,
                 updatedEmail, updatedAddress, updatedRemark, updatedTags);
@@ -115,6 +121,10 @@ public class EditCommand extends Command {
         ScoreList updatedScoreList = createEditedScoreList(personToEdit.getScoreList(),
                 editPersonDescriptor.getScoreList());
         editedPerson.setScoreList(updatedScoreList);
+        editedPerson.setGithub(updatedGithub);
+        editedPerson.setLinkedIn(updatedLinkedIn);
+        editedPerson.setStatus(updatedStatus);
+
         return editedPerson;
     }
 
@@ -225,7 +235,7 @@ public class EditCommand extends Command {
         }
 
         public void setScoreList(ScoreList scoreList) {
-            this.scoreList = scoreList;
+            this.scoreList = (scoreList != null) ? scoreList : null;
         }
 
         public Optional<ScoreList> getScoreList() {

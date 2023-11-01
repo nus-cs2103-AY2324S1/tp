@@ -16,6 +16,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.index.Index;
 import seedu.address.model.event.Event;
 import seedu.address.model.person.Person;
+import seedu.address.model.tag.Tag;
 import seedu.address.model.statistics.ReadOnlySummaryStatistic;
 import seedu.address.model.statistics.SummaryStatistic;
 
@@ -244,6 +245,15 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public boolean hasTag(Tag tag) {
+        requireNonNull(tag);
+        return addressBook.hasTag(tag);
+    }
+    @Override
+    public void addTag(Tag tag) {
+        addressBook.addTag(tag);
+    }
+
     public void loadSummaryStatistics() {
         summaryStatistic.updatePersonData(addressBook.getPersonList());
     }

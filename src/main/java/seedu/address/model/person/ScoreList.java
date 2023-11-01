@@ -1,15 +1,14 @@
 package seedu.address.model.person;
 
-import seedu.address.model.tag.Tag;
+import static seedu.address.commons.util.AppUtil.checkArgument;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
-import static seedu.address.commons.util.AppUtil.checkArgument;
-import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import seedu.address.model.tag.Tag;
 
 /**
  * Represents the score list of a person.
@@ -17,10 +16,10 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 public class ScoreList {
     private static final String MESSAGE_CONSTRAINTS = "Score tag should start with Interview or Technical Assessment";
     private static final String MESSAGE_MISSING_TAG = "Tag does not exist in score list";
-    private final HashMap<String, Score> scoreList;
+    private final HashMap<Tag, Score> scoreList;
 
     public ScoreList() {
-        scoreList = new HashMap<String, Score>();
+        scoreList = new HashMap<Tag, Score>();
     }
 
     // TODO: have a TAG parser that checks if its a interview-related tag
@@ -34,7 +33,7 @@ public class ScoreList {
         requireAllNonNull(tag, score);
         checkArgument(isValidScoreTag(tag), MESSAGE_CONSTRAINTS);
         checkArgument(Score.isValidScore(score), Score.MESSAGE_CONSTRAINTS);
-        scoreList.put(tag.tagName, score);
+        scoreList.put(tag, score);
     }
 
     /**
@@ -43,8 +42,8 @@ public class ScoreList {
      * @return score associated with the tag
      */
     public Score getScore(Tag tag) {
-        checkArgument(scoreList.containsKey(tag.tagName), MESSAGE_MISSING_TAG);
-        return scoreList.get(tag.tagName);
+        checkArgument(scoreList.containsKey(tag), MESSAGE_MISSING_TAG);
+        return scoreList.get(tag);
     }
 
     /**
@@ -56,10 +55,10 @@ public class ScoreList {
         if (scoreList.isEmpty()) {
             return result;
         }
-        Set<String> tags = scoreList.keySet();
+        Set<Tag> tags = scoreList.keySet();
 
-        for (String tag : tags) {
-            result.add(new Tag(tag));
+        for (Tag tag : tags) {
+            result.add(tag);
         }
         return result;
     }
@@ -70,11 +69,8 @@ public class ScoreList {
      * @return true if a given tag is a valid score tag
      */
     public static boolean isValidScoreTag(Tag tag) {
-        String trimmedTag = tag.tagName.trim();
-        if (trimmedTag.startsWith("Interview") || trimmedTag.startsWith("Technical Assessment")) {
-            return true;
-        }
-        return false;
+        return tag.tagCategory.toLowerCase().contains("interview")
+                || tag.tagCategory.toLowerCase().contains("technical assessment");
     }
 
     /**
