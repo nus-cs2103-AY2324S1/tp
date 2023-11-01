@@ -22,20 +22,21 @@ public class TimeTest {
         List<Interview> interviewList = TypicalInterviews.getTypicalInterviews();
         UniqueInterviewList uniqueInterviewList = new UniqueInterviewList();
         uniqueInterviewList.setInterviews(interviewList);
-        LocalDateTime startTime = LocalDateTime.of(2024, 12, 21, 20, 0);
-        LocalDateTime endTime = LocalDateTime.of(2024, 12, 21, 20, 30);
+        Time startTime = new Time(LocalDateTime.of(2024, 12, 21, 20, 0));
+        Time endTime = new Time(LocalDateTime.of(2024, 12, 21, 20, 30));
         List<Interview> expected = new ArrayList<>();
         expected.add(TypicalInterviews.STANDARD_INTERVIEW);
         List<Interview> actual = Time.listInterviewClashes(startTime, endTime, uniqueInterviewList);
         assertEquals(expected, actual);
     }
 
+    @Test
     void testListInterviewClashesListFirstElement2() {
         List<Interview> interviewList = TypicalInterviews.getTypicalInterviews();
         UniqueInterviewList uniqueInterviewList = new UniqueInterviewList();
         uniqueInterviewList.setInterviews(interviewList);
-        LocalDateTime startTime = LocalDateTime.of(2024, 12, 21, 18, 0);
-        LocalDateTime endTime = LocalDateTime.of(2024, 12, 21, 22, 0);
+        Time startTime = new Time(LocalDateTime.of(2024, 12, 21, 18, 0));
+        Time endTime = new Time(LocalDateTime.of(2024, 12, 21, 22, 0));
         List<Interview> expected = new ArrayList<>();
         expected.add(TypicalInterviews.STANDARD_INTERVIEW);
         List<Interview> actual = Time.listInterviewClashes(startTime, endTime, uniqueInterviewList);
@@ -47,8 +48,8 @@ public class TimeTest {
         List<Interview> interviewList = TypicalInterviews.getTypicalInterviews();
         UniqueInterviewList uniqueInterviewList = new UniqueInterviewList();
         uniqueInterviewList.setInterviews(interviewList);
-        LocalDateTime startTime = LocalDateTime.of(2024, 12, 21, 18, 0);
-        LocalDateTime endTime = LocalDateTime.of(2024, 12, 21, 19, 1);
+        Time startTime = new Time(LocalDateTime.of(2024, 12, 21, 18, 0));
+        Time endTime = new Time(LocalDateTime.of(2024, 12, 21, 19, 1));
         List<Interview> expected = new ArrayList<>();
         expected.add(TypicalInterviews.STANDARD_INTERVIEW);
         List<Interview> actual = Time.listInterviewClashes(startTime, endTime, uniqueInterviewList);
@@ -60,8 +61,109 @@ public class TimeTest {
         List<Interview> interviewList = TypicalInterviews.getTypicalInterviews();
         UniqueInterviewList uniqueInterviewList = new UniqueInterviewList();
         uniqueInterviewList.setInterviews(interviewList);
-        LocalDateTime startTime = LocalDateTime.of(2024, 12, 21, 20, 0);
-        LocalDateTime endTime = LocalDateTime.of(2024, 12, 21, 22, 0);
+        Time startTime = new Time(LocalDateTime.of(2024, 12, 21, 20, 0));
+        Time endTime = new Time(LocalDateTime.of(2024, 12, 21, 22, 0));
+        List<Interview> expected = new ArrayList<>();
+        expected.add(TypicalInterviews.STANDARD_INTERVIEW);
+        List<Interview> actual = Time.listInterviewClashes(startTime, endTime, uniqueInterviewList);
+        assertEquals(expected, actual);
+    }
+
+    // test case 1: the current interview is completely within the interview to be added
+    @Test
+    void testListInterviewClashesListFirstElement5() {
+        List<Interview> interviewList = TypicalInterviews.getTypicalInterviews();
+        UniqueInterviewList uniqueInterviewList = new UniqueInterviewList();
+        uniqueInterviewList.setInterviews(interviewList);
+        Time startTime = new Time(LocalDateTime.of(2024, 12, 21, 18, 59));
+        Time endTime = new Time(LocalDateTime.of(2024, 12, 21, 21, 1));
+        List<Interview> expected = new ArrayList<>();
+        expected.add(TypicalInterviews.STANDARD_INTERVIEW);
+        List<Interview> actual = Time.listInterviewClashes(startTime, endTime, uniqueInterviewList);
+        assertEquals(expected, actual);
+    }
+
+    // test case 2: the interview to be added is completely within the current interview
+    @Test
+    void testListInterviewClashesListFirstElement6() {
+        List<Interview> interviewList = TypicalInterviews.getTypicalInterviews();
+        UniqueInterviewList uniqueInterviewList = new UniqueInterviewList();
+        uniqueInterviewList.setInterviews(interviewList);
+        Time startTime = new Time(LocalDateTime.of(2024, 12, 21, 19, 1));
+        Time endTime = new Time(LocalDateTime.of(2024, 12, 21, 20, 59));
+        List<Interview> expected = new ArrayList<>();
+        expected.add(TypicalInterviews.STANDARD_INTERVIEW);
+        List<Interview> actual = Time.listInterviewClashes(startTime, endTime, uniqueInterviewList);
+        assertEquals(expected, actual);
+    }
+
+    // test case 3: the end time of the interview to be added falls within the current interview window
+    @Test
+    void testListInterviewClashesListFirstElement7() {
+        List<Interview> interviewList = TypicalInterviews.getTypicalInterviews();
+        UniqueInterviewList uniqueInterviewList = new UniqueInterviewList();
+        uniqueInterviewList.setInterviews(interviewList);
+        Time startTime = new Time(LocalDateTime.of(2024, 12, 21, 14, 0));
+        Time endTime = new Time(LocalDateTime.of(2024, 12, 21, 20, 59));
+        List<Interview> expected = new ArrayList<>();
+        expected.add(TypicalInterviews.STANDARD_INTERVIEW);
+        List<Interview> actual = Time.listInterviewClashes(startTime, endTime, uniqueInterviewList);
+        assertEquals(expected, actual);
+    }
+
+    // test case 4: the start time of the interview to be added falls within the current interview window
+    @Test
+    void testListInterviewClashesListFirstElement8() {
+        List<Interview> interviewList = TypicalInterviews.getTypicalInterviews();
+        UniqueInterviewList uniqueInterviewList = new UniqueInterviewList();
+        uniqueInterviewList.setInterviews(interviewList);
+        Time startTime = new Time(LocalDateTime.of(2024, 12, 21, 19, 1));
+        Time endTime = new Time(LocalDateTime.of(2024, 12, 21, 22, 0));
+        List<Interview> expected = new ArrayList<>();
+        expected.add(TypicalInterviews.STANDARD_INTERVIEW);
+        List<Interview> actual = Time.listInterviewClashes(startTime, endTime, uniqueInterviewList);
+        assertEquals(expected, actual);
+    }
+
+    // test case 5: the interview to be added has the exact same start and end time as the
+    // current interview
+    @Test
+    void testListInterviewClashesListFirstElement9() {
+        List<Interview> interviewList = TypicalInterviews.getTypicalInterviews();
+        UniqueInterviewList uniqueInterviewList = new UniqueInterviewList();
+        uniqueInterviewList.setInterviews(interviewList);
+        Time startTime = new Time(LocalDateTime.of(2024, 12, 21, 19, 0));
+        Time endTime = new Time(LocalDateTime.of(2024, 12, 21, 21, 0));
+        List<Interview> expected = new ArrayList<>();
+        expected.add(TypicalInterviews.STANDARD_INTERVIEW);
+        List<Interview> actual = Time.listInterviewClashes(startTime, endTime, uniqueInterviewList);
+        assertEquals(expected, actual);
+    }
+
+    // test case 6: the interview to be added has an end time that is after the end time of the current interview
+    // and the start time of the interview to be added has a start time equals to the current interview
+    @Test
+    void testListInterviewClashesListFirstElement10() {
+        List<Interview> interviewList = TypicalInterviews.getTypicalInterviews();
+        UniqueInterviewList uniqueInterviewList = new UniqueInterviewList();
+        uniqueInterviewList.setInterviews(interviewList);
+        Time startTime = new Time(LocalDateTime.of(2024, 12, 21, 19, 0));
+        Time endTime = new Time(LocalDateTime.of(2024, 12, 21, 22, 0));
+        List<Interview> expected = new ArrayList<>();
+        expected.add(TypicalInterviews.STANDARD_INTERVIEW);
+        List<Interview> actual = Time.listInterviewClashes(startTime, endTime, uniqueInterviewList);
+        assertEquals(expected, actual);
+    }
+
+    // test case 7: the interview to be added has a start time before the start time of the current interview
+    // and the end time of the interview to be added has an end time equals to the current interview
+    @Test
+    void testListInterviewClashesListFirstElement11() {
+        List<Interview> interviewList = TypicalInterviews.getTypicalInterviews();
+        UniqueInterviewList uniqueInterviewList = new UniqueInterviewList();
+        uniqueInterviewList.setInterviews(interviewList);
+        Time startTime = new Time(LocalDateTime.of(2024, 12, 21, 18, 59));
+        Time endTime = new Time(LocalDateTime.of(2024, 12, 21, 21, 0));
         List<Interview> expected = new ArrayList<>();
         expected.add(TypicalInterviews.STANDARD_INTERVIEW);
         List<Interview> actual = Time.listInterviewClashes(startTime, endTime, uniqueInterviewList);
@@ -73,8 +175,8 @@ public class TimeTest {
         List<Interview> interviewList = TypicalInterviews.getTypicalInterviews();
         UniqueInterviewList uniqueInterviewList = new UniqueInterviewList();
         uniqueInterviewList.setInterviews(interviewList);
-        LocalDateTime startTime = LocalDateTime.of(2024, 7, 12, 9, 0);
-        LocalDateTime endTime = LocalDateTime.of(2024, 12, 21, 22, 0);
+        Time startTime = new Time(LocalDateTime.of(2024, 7, 12, 9, 0));
+        Time endTime = new Time(LocalDateTime.of(2024, 12, 21, 22, 0));
         List<Interview> expected = new ArrayList<>();
         expected.add(TypicalInterviews.STANDARD_INTERVIEW);
         expected.add(TypicalInterviews.STANDARD_INTERVIEW_4);
@@ -87,8 +189,8 @@ public class TimeTest {
         List<Interview> interviewList = TypicalInterviews.getTypicalInterviews();
         UniqueInterviewList uniqueInterviewList = new UniqueInterviewList();
         uniqueInterviewList.setInterviews(interviewList);
-        LocalDateTime startTime = LocalDateTime.of(2024, 5, 12, 9, 0);
-        LocalDateTime endTime = LocalDateTime.of(2024, 12, 21, 22, 0);
+        Time startTime = new Time(LocalDateTime.of(2024, 5, 12, 9, 0));
+        Time endTime = new Time(LocalDateTime.of(2024, 12, 21, 22, 0));
         List<Interview> expected = new ArrayList<>();
         expected.add(TypicalInterviews.STANDARD_INTERVIEW);
         expected.add(TypicalInterviews.STANDARD_INTERVIEW_3);
@@ -102,8 +204,8 @@ public class TimeTest {
         List<Interview> interviewList = TypicalInterviews.getTypicalInterviews();
         UniqueInterviewList uniqueInterviewList = new UniqueInterviewList();
         uniqueInterviewList.setInterviews(interviewList);
-        LocalDateTime startTime = LocalDateTime.of(2023, 5, 12, 9, 0);
-        LocalDateTime endTime = LocalDateTime.of(2025, 12, 21, 14, 0);
+        Time startTime = new Time(LocalDateTime.of(2023, 5, 12, 9, 0));
+        Time endTime = new Time(LocalDateTime.of(2025, 12, 21, 14, 0));
         List<Interview> expected = new ArrayList<>();
         expected.add(TypicalInterviews.STANDARD_INTERVIEW);
         expected.add(TypicalInterviews.STANDARD_INTERVIEW_3);
@@ -117,8 +219,8 @@ public class TimeTest {
         List<Interview> interviewList = TypicalInterviews.getTypicalInterviews();
         UniqueInterviewList uniqueInterviewList = new UniqueInterviewList();
         uniqueInterviewList.setInterviews(interviewList);
-        LocalDateTime startTime = LocalDateTime.of(2023, 5, 12, 9, 0);
-        LocalDateTime endTime = LocalDateTime.of(2025, 12, 21, 22, 0);
+        Time startTime = new Time(LocalDateTime.of(2023, 5, 12, 9, 0));
+        Time endTime = new Time(LocalDateTime.of(2025, 12, 21, 22, 0));
         List<Interview> expected = new ArrayList<>();
         expected.add(TypicalInterviews.STANDARD_INTERVIEW);
         expected.add(TypicalInterviews.STANDARD_INTERVIEW_2);
@@ -133,8 +235,8 @@ public class TimeTest {
         List<Interview> interviewList = TypicalInterviews.getTypicalInterviews();
         UniqueInterviewList uniqueInterviewList = new UniqueInterviewList();
         uniqueInterviewList.setInterviews(interviewList);
-        LocalDateTime startTime = LocalDateTime.of(2023, 5, 12, 9, 0);
-        LocalDateTime endTime = LocalDateTime.of(2023, 12, 21, 22, 0);
+        Time startTime = new Time(LocalDateTime.of(2023, 5, 12, 9, 0));
+        Time endTime = new Time(LocalDateTime.of(2023, 12, 21, 22, 0));
         List<Interview> expected = new ArrayList<>();
         List<Interview> actual = Time.listInterviewClashes(startTime, endTime, uniqueInterviewList);
         assertEquals(expected, actual);
