@@ -171,7 +171,7 @@ This section describes some noteworthy details on how certain features are imple
   * Previous help feature simply opens a page with a link to the website, this is bad because:
     * The flow is lengthy
     * User may not be able to access website when operating without the internet
-    
+
     Therefore, we want to make this better by simplifying the flow. We do this by adding:
     * Making the help command return things in the application console
     * Letting users enter an extra argument to specify what command they need guiding on
@@ -309,8 +309,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | user                                                       | delete a contact            | remove a contact (by name) that I do not need                                                                               |
 | `* * *`  | user                                                       | view all contact            | easily see and know what contacts are currently stored in the application in one place                                      |
 | `* *`    | user                                                        | view all notes              | easily see and know what notes are currently stored in the application in one place                                         |
-| `* *`    | user                                                        | add notes to a contact      | record additional information about that contact in the notes                                                               |
-| `* *`    | user                                                        | delete notes to a contact   | remove additional information that are no longer needed about that contact in the notes                                     |
+| `* *`    | user                                                        | add notes to a contact      | record additional information about that contact as a note                                                                  |
+| `* *`    | user                                                        | delete notes to a contact   | remove additional information about that contact that are no longer relevant                                                |
 | `* *`    | user who has some event to do             | add an event                | record an event with start time and also end time, location and any additional information like what to do during the event |
 | `* *`    | user who has/had some event to do      | delete an event             | remove an event after it is obsolete, cancelled or no longer needed to be recorded                                          |
 | `* *`    | tidy user | tag a contact with a label  | keep my contacts oraganised and categorised                                                                                 |
@@ -412,7 +412,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1.  User requests to add a note to a contact.
-2.  KeepInTouch adds the note to the contact.
+2.  KeepInTouch adds a note to the contact.
 
     Use case ends.
 
@@ -434,8 +434,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User requests to delete a note from a contact.
-2.  KeepInTouch deletes the note from the contact.
+1.  User requests to delete an existing note from a contact.
+2.  KeepInTouch deletes the specified note from the contact.
 
     Use case ends.
 
@@ -456,7 +456,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 1c. User inputs a note that does not exist.
 
     * 1c1. KeepInTouch shows a message indicating that the note cannot be found.
-  
+
       Use case ends.
 
 **Use case: UC08 - Add an event**

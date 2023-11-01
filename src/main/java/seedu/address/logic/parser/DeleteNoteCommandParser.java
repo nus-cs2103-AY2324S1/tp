@@ -1,12 +1,13 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.Messages.MESSAGE_INVALID_INTEGER_ARGUMENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTE_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PERSON_ID;
 
 import seedu.address.logic.commands.DeleteNoteCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.note.NoteID;
+import seedu.address.model.person.ContactID;
 
 /**
  * Parses input arguments and creates a new DeleteNoteCommand object
@@ -22,14 +23,9 @@ public class DeleteNoteCommandParser implements Parser<DeleteNoteCommand> {
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_PERSON_ID, PREFIX_NOTE_ID);
-        int contactId = -1;
-        int noteId = -1;
-        try {
-            contactId = Integer.parseInt(argMultimap.getValue(PREFIX_PERSON_ID).get());
-            noteId = Integer.parseInt(argMultimap.getValue(PREFIX_NOTE_ID).get());
-        } catch (NumberFormatException e) {
-            throw new ParseException(String.format(MESSAGE_INVALID_INTEGER_ARGUMENT, e.getMessage()));
-        }
+
+        ContactID contactId = ParserUtil.parseContactID(argMultimap.getValue(PREFIX_PERSON_ID).get());
+        NoteID noteId = ParserUtil.parseNoteID(argMultimap.getValue(PREFIX_NOTE_ID).get());
 
         return new DeleteNoteCommand(contactId, noteId);
     }
