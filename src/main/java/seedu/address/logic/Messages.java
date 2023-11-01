@@ -22,8 +22,6 @@ public class Messages {
     public static final String MESSAGE_REPORT_STRING =
                 "Name: %1$s\nOvertime hours: %2$s\nOvertime pay: $%3$s\nNumber of leaves: %4$s";
 
-    public static final String MESSAGE_INVALID_OVERTIME_HOURS = "Overtime hours must be a positive integer";
-
     /**
      * Returns an error message indicating the duplicate prefixes.
      */
@@ -54,6 +52,18 @@ public class Messages {
                 .append(employee.getSalary())
                 .append("; Departments: ");
         employee.getDepartments().forEach(builder::append);
+        return builder.toString();
+    }
+
+    public static String formatOvertimeHours(Employee employee) {
+        final StringBuilder builder = new StringBuilder();
+        builder.append(employee.getName())
+                .append("; Position: ")
+                .append(employee.getPosition())
+                .append("; Id: ")
+                .append(employee.getId())
+                .append("; Overtime hours: ")
+                .append(employee.getOvertimeHours());
         return builder.toString();
     }
 

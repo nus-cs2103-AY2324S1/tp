@@ -15,31 +15,32 @@ import seedu.address.model.employee.OvertimeHours;
 import java.util.List;
 import java.util.Objects;
 
-/**
- * Increases the overtime hours of an employee.
+/*
+ * Updates the overtime hours of an employee.
  */
-public class OvertimeCommand extends Command{
+public class OvertimeCommand extends Command {
     public static final String COMMAND_WORD = "overtime";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Increases/Decreases the overtime hours of an employee by the specified amount.\n"
+            + ": Increases/Decreases (inc/dec) the overtime hours of an employee by the specified amount.\n"
             + "Parameters: " + PREFIX_ID + "ID (must be in the exact EID format) "
             + PREFIX_OPERATION + "OPERATION "
             + PREFIX_AMOUNT + "AMOUNT (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_ID + " EID1234-5678 "
+            + PREFIX_ID + "EID1234-5678 "
             + PREFIX_OPERATION + "inc "
             + PREFIX_AMOUNT + "2";
 
-    public static final String MESSAGE_OVERTIME_EMPLOYEE_SUCCESS = "Overtime hours of employee %1$s increased by %2$s";
+    public static final String MESSAGE_OVERTIME_INCREASE_SUCCESS = "Overtime hours of employee %1$s increased by %2$s";
+    public static final String MESSAGE_OVERTIME_DECREASE_SUCCESS = "Overtime hours of employee %1$s decreased by %2$s";
     public static final String MISSING_OPERATION_AMOUNT = "Operation and amount must be specified";
     private final Id targetId;
-    private final int hoursToEdit;
+    private final OvertimeHours overtimeHoursToChange;
     private final String operation;
 
-    public OvertimeCommand(Id targetId, int hoursToEdit, String operation) {
+    public OvertimeCommand(Id targetId, OvertimeHours overtimeHoursToChange, String operation) {
         this.targetId = targetId;
-        this.hoursToEdit = hoursToEdit;
+        this.overtimeHoursToChange = overtimeHoursToChange;
         this.operation = operation;
     }
 
@@ -47,34 +48,42 @@ public class OvertimeCommand extends Command{
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        if (hoursToEdit <= 0) {
-            throw new CommandException(Messages.MESSAGE_INVALID_OVERTIME_HOURS);
-        }
-
         List<Employee> lastShownList = model.getFilteredEmployeeList();
-        Employee employeeToEdit = lastShownList.stream().filter(employee -> employee.getId().equals(targetId))
+        Employee employeeToUpdate = lastShownList.stream().filter(employee -> employee.getId().equals(targetId))
                 .findFirst().orElse(null);
-        
-        if (employeeToEdit != null) {
-            Employee editedEmployee = editEmployeeOvertime(employeeToEdit);
-            model.setEmployee(employeeToEdit, editedEmployee);
-            return new CommandResult(String.format(MESSAGE_OVERTIME_EMPLOYEE_SUCCESS, 
-                    Messages.format(editedEmployee), hoursToEdit));
+
+        if (employeeToUpdate != null) {
+            Employee updatedEmployee = updateEmployeeOvertime(employeeToUpdate);
+            model.setEmployee(employeeToUpdate, updatedEmployee);
+            if (Objects.equals(operation, "dec")) {
+                return new CommandResult(String.format(MESSAGE_OVERTIME_DECREASE_SUCCESS,
+                        Messages.formatOvertimeHours(updatedEmployee), updatedEmployee.getOvertimeHours()));
+            } else if (Objects.equals(operation, "inc")) {
+                return new CommandResult(String.format(MESSAGE_OVERTIME_INCREASE_SUCCESS,
+                        Messages.formatOvertimeHours(updatedEmployee), updatedEmployee.getOvertimeHours()));
+            }
         }
         throw new CommandException(Messages.MESSAGE_INVALID_EMPLOYEE_DISPLAYED_ID);
     }
 
-    private Employee editEmployeeOvertime(Employee employeeToEdit) {
-        int updatedHours = 0;
-        if (Objects.equals(operation, "inc")) {
-            updatedHours = employeeToEdit.getOvertimeHours().value + hoursToEdit;
-        } else if (Objects.equals(operation, "dec")) {
-            updatedHours = employeeToEdit.getOvertimeHours().value - hoursToEdit;
-        }
-        OvertimeHours updatedOvertimeHours = new OvertimeHours(updatedHours);
+    private Employee updateEmployeeOvertime(Employee employeeToEdit) throws CommandException {
+        OvertimeHours updatedOvertimeHours = updateOvertimeHours(employeeToEdit.getOvertimeHours());
         return new Employee(employeeToEdit.getName(), employeeToEdit.getPosition(),
                 employeeToEdit.getId(), employeeToEdit.getPhone(), employeeToEdit.getEmail(),
                 employeeToEdit.getSalary(), employeeToEdit.getDepartments(), updatedOvertimeHours,
                 employeeToEdit.getLeaveList());
+    }
+
+    private OvertimeHours updateOvertimeHours(OvertimeHours overtimeHours) throws CommandException {
+        int updatedHours = 0;
+        if (Objects.equals(operation, "inc")) {
+            updatedHours = overtimeHours.value + overtimeHoursToChange.value;
+        } else if (Objects.equals(operation, "dec")) {
+            updatedHours = overtimeHours.value - overtimeHoursToChange.value;
+        }
+        if (!OvertimeHours.isValidOvertimeHours(updatedHours)) {
+            throw new CommandException(OvertimeHours.MESSAGE_CONSTRAINTS);
+        }
+        return new OvertimeHours(updatedHours);
     }
 }
