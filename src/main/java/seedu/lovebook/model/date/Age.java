@@ -9,8 +9,8 @@ import static seedu.lovebook.commons.util.AppUtil.checkArgument;
  */
 public class Age implements Comparable<Age> {
     public static final String MESSAGE_CONSTRAINTS =
-            "Age should only contain positive numbers.";
-    public static final String VALIDATION_REGEX = "^(?:[1-9]|[1-9][0-9]|1[0-4][0-9]|150)$"; // 1-150 Age Accepted
+            "Age should only contain positive numbers in the range 18-150 years.";
+    public static final String VALIDATION_REGEX = "^(1[89]|[2-9][0-9]|1[0-4][0-9]|150)$"; // 18-150 Age Accepted
     public final String value;
 
     /**

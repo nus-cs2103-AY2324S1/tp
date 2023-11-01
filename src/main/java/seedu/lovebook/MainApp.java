@@ -104,6 +104,7 @@ public class MainApp extends Application {
             }
             initialDatePrefs = datePrefsOptional.orElseGet(SampleDatePrefUtil::getSamplePreferences);
         } catch (DataLoadingException e) {
+            System.out.println(e);
             logger.warning("Data file at " + storage.getDatePrefsFilePath() + " could not be loaded."
                     + " Will be starting with empty preferences.");
             initialDatePrefs = new DatePrefs();

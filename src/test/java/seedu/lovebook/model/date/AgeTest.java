@@ -32,6 +32,8 @@ public class AgeTest {
         assertFalse(Age.isValidAge("9312 1534")); // spaces within digits
         assertFalse(Age.isValidAge("-23")); // Negative Age
         assertFalse(Age.isValidAge("0")); // Zero Age
+        assertFalse(Age.isValidAge("17")); // Age below 18
+        assertFalse(Age.isValidAge("151")); // Age above 150
 
         // valid age numbers
         assertTrue(Age.isValidAge("91")); // exactly 3 numbers
@@ -41,10 +43,10 @@ public class AgeTest {
 
     @Test
     public void equals() {
-        Age age = new Age("15");
+        Age age = new Age("18");
 
         // same values -> returns true
-        assertTrue(age.equals(new Age("15")));
+        assertTrue(age.equals(new Age("18")));
 
         // same object -> returns true
         assertTrue(age.equals(age));
@@ -56,6 +58,6 @@ public class AgeTest {
         assertFalse(age.equals(5.0f));
 
         // different values -> returns false
-        assertFalse(age.equals(new Age("14")));
+        assertFalse(age.equals(new Age("19")));
     }
 }

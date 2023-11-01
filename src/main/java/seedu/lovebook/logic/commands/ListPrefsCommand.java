@@ -18,7 +18,7 @@ public class ListPrefsCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        DatePrefs prefs = model.getDatePrefs().getPreferences();
+        DatePrefs prefs = model.getDatePrefs().getPreferences().get(0);
         return new CommandResult(MESSAGE_SUCCESS + Messages.format(prefs));
     }
 }

@@ -1,5 +1,9 @@
 package seedu.lovebook.storage;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
@@ -13,15 +17,14 @@ import seedu.lovebook.model.ReadOnlyDatePrefs;
  */
 @JsonRootName(value = "DatePrefs")
 public class JsonSerializableDatePrefs {
-    private JsonAdaptedDatePrefs jsonDatePrefs;
-    private DatePrefs datePrefs;
+    private final List<JsonAdaptedDatePrefs> prefs = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonSerializableDatePrefs} with the given preferences.
      */
     @JsonCreator
-    public JsonSerializableDatePrefs(@JsonProperty("prefs") JsonAdaptedDatePrefs prefs) {
-        this.jsonDatePrefs = prefs;
+    public JsonSerializableDatePrefs(@JsonProperty("prefs") List<JsonAdaptedDatePrefs> prefs) {
+        this.prefs.addAll(prefs);
     }
 
     /**
@@ -30,7 +33,7 @@ public class JsonSerializableDatePrefs {
      * @param source future changes to this will not affect the created {@code JsonSerializableDatePrefs}.
      */
     public JsonSerializableDatePrefs(ReadOnlyDatePrefs source) {
-        datePrefs = source.getPreferences();
+        prefs.addAll(source.getPreferences().stream().map(JsonAdaptedDatePrefs::new).collect(Collectors.toList()));
     }
 
     /**
@@ -39,6 +42,10 @@ public class JsonSerializableDatePrefs {
      * @throws IllegalValueException if there were any data constraints violated.
      */
     public DatePrefs toModelType() throws IllegalValueException {
-        return jsonDatePrefs.toModelType();
+        DatePrefs preferences = new DatePrefs();
+        for (JsonAdaptedDatePrefs jsonAdaptedDatePrefs : prefs) {
+            preferences = jsonAdaptedDatePrefs.toModelType();
+        }
+        return preferences;
     }
 }

@@ -208,13 +208,12 @@ public class Date implements Comparable<Date> {
                 && gender.equals(otherDate.gender)
                 && height.equals(otherDate.height)
                 && income.equals(otherDate.income)
-                && horoscope.equals(otherDate.horoscope)
-                && star.equals(otherDate.star);
+                && horoscope.equals(otherDate.horoscope);
     }
 
     @Override
     public int hashCode() {
-        // use this method for custom fields hashing instead of implementing your own
+        // use this method for custom fields hashing instead of implementing :your own
         return Objects.hash(name, age, gender, height, income, horoscope, avatar);
     }
 
