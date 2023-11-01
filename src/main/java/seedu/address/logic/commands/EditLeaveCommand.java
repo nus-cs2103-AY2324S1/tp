@@ -125,7 +125,9 @@ public class EditLeaveCommand extends Command {
         }
 
         EditLeaveCommand otherEditLeaveCommand = (EditLeaveCommand) other;
-        return targetId.equals(otherEditLeaveCommand.targetId);
+        return targetId.equals(otherEditLeaveCommand.targetId)
+                && oldDate.equals(otherEditLeaveCommand.oldDate)
+                && newDate.equals(otherEditLeaveCommand.newDate);
     }
 
     @Override

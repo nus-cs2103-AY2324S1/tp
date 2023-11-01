@@ -49,7 +49,7 @@ public class EditLeaveCommandParserTest {
         userInput = " " + PREFIX_ID + VALID_ID_BOB + " " + PREFIX_OLD + " " + PREFIX_NEW + "2023-10-11";
         assertParseFailure(parser, userInput, Leave.MESSAGE_CONSTRAINTS);
 
-        // invalid end date
+        // invalid new date
         userInput = " " + PREFIX_ID + VALID_ID_BOB + " " + PREFIX_OLD + "2023-10-10 " + PREFIX_NEW + " ";
         assertParseFailure(parser, userInput, Leave.MESSAGE_CONSTRAINTS);
     }
