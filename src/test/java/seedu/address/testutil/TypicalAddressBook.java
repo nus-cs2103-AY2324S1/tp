@@ -24,4 +24,15 @@ public class TypicalAddressBook {
         }
         return ab;
     }
+
+    /**
+     * Returns an {@code AddressBook} with all the typical applicants but no interviews.
+     */
+    public static AddressBook getTypicalAddressBookWithNoInterviews() {
+        AddressBook ab = new AddressBook();
+        for (Applicant applicant : TypicalApplicants.getTypicalApplicants()) {
+            ab.addApplicant(applicant);
+        }
+        return ab;
+    }
 }

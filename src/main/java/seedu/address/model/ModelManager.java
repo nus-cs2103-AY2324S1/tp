@@ -214,4 +214,8 @@ public class ModelManager implements Model {
                 && filteredInterviews.equals(otherModelManager.filteredInterviews);
     }
 
+    @Override
+    public String toString() {
+        return this.filteredInterviews.toString();
+    }
 }

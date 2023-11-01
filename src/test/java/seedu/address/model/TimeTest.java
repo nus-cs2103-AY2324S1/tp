@@ -354,13 +354,13 @@ public class TimeTest {
     void testListInterviewsToday7() {
         List<Interview> interviewList = TypicalInterviews.getTypicalInterviews();
         LocalDateTime today = LocalDateTime.now();
-        int todayDay = today.getDayOfMonth();
+        int todayDay = 2;
         int todayMonth = today.getMonthValue();
         int todayYear = today.getYear();
         Interview interviewNow = new Interview(TypicalApplicants.ALICE,
                 "SWE",
-                LocalDateTime.of(todayYear, todayMonth, todayDay - 1, 9, 11),
-                LocalDateTime.of(todayYear, todayMonth, todayDay - 1, 11, 11)
+                LocalDateTime.of(todayYear, todayMonth, todayDay, 9, 11),
+                LocalDateTime.of(todayYear, todayMonth, todayDay, 11, 11)
         );
         interviewList.add(interviewNow);
         UniqueInterviewList uniqueInterviewList = new UniqueInterviewList();
