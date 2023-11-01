@@ -38,7 +38,10 @@ management tasks done faster than traditional GUI apps.
 
    * `exit` : Exits the app.
 
-6. Refer to the [Commands](#commands) below for details of each command.
+6. To begin using Class Manager, configure Class Manager with your module information using the `config` command. For example: 
+   * `config #t/13 #a/1` configures Class Manager to have 13 tutorials and 1 assignment.
+
+7. That's it! You can now explore Class Manager! Refer to the [Commands](#commands) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -188,7 +191,7 @@ Examples:
 
 ### Adding comment to a student : `comment`
 
-Adds a comment to an existing student in the address book.
+Adds a comment to an existing student in Class Manager.
 
 Format: `comment s/STUDENT_NUMBER c/COMMENT`
 
@@ -355,6 +358,64 @@ Format: `delete s/STUDENT_NUMBER`
 
 Example:
 * `delete s/A0249112A`
+
+--- 
+
+### Undoing the previous command : `undo`
+
+Undo the previous command that changes Class Manager. Undo only works with commands that changes Class Manager, and does not work with commands such as `load` and `config`. Undo can be used multiple times to undo multiple commands, or until Class Manager reaches its initial state. 
+
+Format: `undo`
+
+Here are the list of commands that can be undone/redone:
+* `add`
+* `class-part`
+* `clear`
+* `comment`
+* `delete`
+* `edit`
+* `grade`
+* `mark-abs`
+* `mark-pre-all`
+* `mark-pre`
+* `tag`
+
+Displayed result if undo is successful: `Undo success!`
+
+Displayed result if there are no more commands to undo: `No more commands to undo!`
+
+--- 
+
+### Redoing an undone command : `redo`
+
+Redo a previously undone command that changes Class Manager. Redo only works with commands that can be undone. Redo can be used multiple times to redo multiple commands, or until Class Manager reaches its most recent state.
+
+Format: `redo`
+
+Here are the list of commands that can be redone after they are undone (same list as undo):
+* `add`
+* `class-part`
+* `clear`
+* `comment`
+* `delete`
+* `edit`
+* `grade`
+* `mark-abs`
+* `mark-pre-all`
+* `mark-pre`
+* `tag`
+
+Displayed result if redo is successful: `Redo success!`
+
+Displayed result if there are no more commands to redo: `No more commands to redo!`
+
+---
+
+### Viewing command history `history`
+
+Shows a list of all previously entered inputs in the result display box, with the most recent inputs at the top of the list.
+
+Format: `history`
 
 ---
 
