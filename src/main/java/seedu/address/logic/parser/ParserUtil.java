@@ -3,7 +3,6 @@ package seedu.address.logic.parser;
 import static java.util.Objects.requireNonNull;
 
 import java.util.Collection;
-import java.util.HashSet;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
@@ -17,6 +16,7 @@ import seedu.address.model.student.Address;
 import seedu.address.model.student.Name;
 import seedu.address.model.student.Note;
 import seedu.address.model.student.Phone;
+import seedu.address.model.util.LimitedHashSet;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -148,7 +148,7 @@ public class ParserUtil {
      */
     public static Set<RiskLevel> parseRiskLevel(Collection<String> tags) throws ParseException {
         requireNonNull(tags);
-        final Set<RiskLevel> tagSet = new HashSet<>();
+        final Set<RiskLevel> tagSet = new LimitedHashSet<>(1);
         for (String tagName : tags) {
             tagSet.add(parseRiskLevel(tagName));
         }
