@@ -2,15 +2,7 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_GENDER;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NEAREST_MRT_STATION;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_SEC_LEVEL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_SORT_IN;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
+import static seedu.address.logic.parser.CliSyntax.*;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;
@@ -90,6 +82,11 @@ public class CommandTestUtil {
 
     public static final String SEQUENCE_ASC = " " + PREFIX_SORT_IN + VALID_SEQUENCE_ASC;
     public static final String SEQUENCE_DESC = " " + PREFIX_SORT_IN + VALID_SEQUENCE_DESC;
+    public static final String VALID_VISUAL_TABLE = "TABLE";
+    public static final String VALID_VISUAL_BAR = "BAR";
+
+    public static final String VISUAL_TABLE = " " + PREFIX_VISUAL_TYPE + VALID_VISUAL_TABLE;
+    public static final String VISUAL_BAR = " " + PREFIX_VISUAL_TYPE + VALID_VISUAL_BAR;
 
 
 

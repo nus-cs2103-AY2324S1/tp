@@ -30,6 +30,7 @@ import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.SortIn;
 import seedu.address.model.person.Student;
+import seedu.address.model.person.Visual;
 
 class ImportCommandTest {
 
@@ -202,6 +203,11 @@ class ImportCommandTest {
 
         @Override
         public void updateSortedPersonList(SortIn sortIn) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void export(Visual visual) throws Exception {
             throw new AssertionError("This method should not be called.");
         }
 
