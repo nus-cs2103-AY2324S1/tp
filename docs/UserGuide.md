@@ -33,7 +33,7 @@ HouR is a **desktop app for managing employee records, optimized for use via a C
    
    * `edit 1 n/Alex Yeoh`: Edits the name of the 1st employee shown in the current list to `Alex Yeoh`.
    
-   * `find Alex`: Lists all employees with the keyword `Alex`.
+   * `find Alex Manager`: Lists all employees with the keywords `Alex` or `Manager`.
 
    * `delete EID1234-5678` : Deletes the employee with employee id EID1234-5678 shown in the list.
 
@@ -56,7 +56,7 @@ HouR is a **desktop app for managing employee records, optimized for use via a C
 - Delete an employee: `delete`
 - Edits an employee: `edit`
 - List all employees: `list`
-- Find employees by name: `find`
+- Find employees: `find`
 - Sorts employees by attribute: `sort`
 - Get details on employee performance: `report`
 - Clear all employees: `clear`
@@ -133,15 +133,14 @@ Examples:
 
 ![edit failure](images/editFailure.png)
 
-### Locating employees by name: `find`
+### Locating employees: `find`
 
-Finds employees whose names contain any of the given keywords.
+Finds employees whose name, position, department, phone number, email, or ID contain any of the given keywords.
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
 * The search is case-insensitive. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
 * Only full words will be matched e.g. `Han` will not match `Hans`
 * Persons matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
@@ -149,7 +148,7 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 Examples:
 * `find Alex` returns `Alex Yeoh`
 
-* ![find sucess](images/findSuccess.png)
+* ![find success](images/findSuccess.png)
 
 ### Deleting an employee : `delete`
 
