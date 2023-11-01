@@ -2,7 +2,6 @@ package networkbook.logic.commands.edit;
 
 import static networkbook.logic.commands.CommandTestUtil.assertCommandFailure;
 import static networkbook.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static networkbook.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static networkbook.testutil.Assert.assertThrowsAssertionError;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
