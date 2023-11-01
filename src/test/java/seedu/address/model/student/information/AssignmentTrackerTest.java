@@ -1,9 +1,11 @@
-package seedu.address.model.student.grades;
+package seedu.address.model.student.information;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
+
+import java.util.stream.IntStream;
 
 import org.junit.jupiter.api.Test;
 
@@ -12,9 +14,34 @@ import seedu.address.commons.core.index.Index;
 public class AssignmentTrackerTest {
 
     @Test
+    public void copy_success() {
+        AssignmentTracker assignmentTracker = new AssignmentTracker(3);
+        assignmentTracker.editMarks(Index.fromZeroBased(0), 50);
+        assignmentTracker.editMarks(Index.fromZeroBased(1), 10);
+        assignmentTracker.editMarks(Index.fromZeroBased(2), 75);
+        AssignmentTracker copy = assignmentTracker.copy();
+        assertEquals(assignmentTracker, copy);
+    }
+
+    @Test
     public void constructor_invalidNumOfAssignments_throwsIllegalArgumentException() {
         int invalidNumOfAssignments = -1;
         assertThrows(IllegalArgumentException.class, () -> new AssignmentTracker(invalidNumOfAssignments));
+    }
+
+    @Test
+    public void constructor_nullAssignmentList_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> new AssignmentTracker((Assignment[]) null));
+    }
+
+    @Test
+    public void constructor_validAssignmentList_success() {
+        int numOfAssignments = 3;
+        Assignment[] assignmentList = new Assignment[numOfAssignments];
+        IntStream.range(0, numOfAssignments).forEach(i -> assignmentList[i] = new Assignment());
+        AssignmentTracker assignmentTracker = new AssignmentTracker(assignmentList);
+        AssignmentTracker newAssignmentTracker = new AssignmentTracker(3);
+        assertEquals(assignmentTracker, newAssignmentTracker);
     }
 
     @Test
@@ -54,8 +81,6 @@ public class AssignmentTrackerTest {
         assertEquals(100, assignmentTracker.getPercentage());
     }
 
-
-
     @Test
     public void equals() {
         AssignmentTracker assignmentTracker = new AssignmentTracker(13);
@@ -77,7 +102,7 @@ public class AssignmentTrackerTest {
     public void toStringMethod() {
         AssignmentTracker assignmentTracker = new AssignmentTracker(3);
 
-        assertEquals("Assignments and marks:\n"
+        assertEquals("Assignment marks:\n"
                 + "Assignment 1: 0 / 100\n"
                 + "Assignment 2: 0 / 100\n"
                 + "Assignment 3: 0 / 100\n", assignmentTracker.toString());

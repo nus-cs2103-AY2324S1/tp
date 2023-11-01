@@ -8,7 +8,9 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.Messages;
+import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.logic.CommandHistory;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -21,10 +23,11 @@ import seedu.address.testutil.TypicalStudents;
  */
 public class MarkPresentAllCommandTest {
 
-    private Model model = new ModelManager(TypicalStudents.getTypicalAddressBook(), new UserPrefs());
+    private final Model model = new ModelManager(TypicalStudents.getTypicalAddressBook(), new UserPrefs());
+    private final CommandHistory commandHistory = new CommandHistory();
 
     @Test
-    public void execute_success() {
+    public void execute_success() throws IllegalValueException, CommandException {
         Index i = Index.fromOneBased(ClassDetails.DEFAULT_COUNT);
 
         MarkPresentAllCommand markPresentAllCommand = new MarkPresentAllCommand(i);
@@ -33,19 +36,25 @@ public class MarkPresentAllCommandTest {
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         for (Student s : TypicalStudents.getTypicalStudents()) {
-            expectedModel.setStudent(s, s.markPresent(i));
+            Student markedStudent = s.copy();
+            markedStudent.markPresent(i);
+            expectedModel.setStudent(s, markedStudent);
         }
+        expectedModel.commitAddressBook();
 
-        assertCommandSuccess(markPresentAllCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(markPresentAllCommand, model, expectedMessage, expectedModel, commandHistory);
     }
 
     @Test
     public void execute_invalidTutorialIndex_throwsCommandException() {
-        Index i = Index.fromOneBased(ClassDetails.DEFAULT_COUNT + 1);
+        Index i = Index.fromZeroBased(ClassDetails.DEFAULT_COUNT + 1);
 
         MarkPresentAllCommand markPresentAllCommand = new MarkPresentAllCommand(i);
 
-        assertCommandFailure(markPresentAllCommand, model, Messages.MESSAGE_INVALID_TUTORIAL_INDEX);
+        assertCommandFailure(
+                markPresentAllCommand, model,
+                String.format(ClassDetails.MESSAGE_INVALID_TUTORIAL_SESSION_NUMBER, ClassDetails.DEFAULT_COUNT),
+                commandHistory);
     }
 
     @Test
