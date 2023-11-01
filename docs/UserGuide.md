@@ -542,7 +542,7 @@ For step 3, the schedule list has been updated to show schedules that are marked
 
 ![list schedule missed](images/list-schedules/list-s-missed.png)
 
-<div markdown="block" class="alert alert-success">
+<div markdown="block" class="alert alert-info">
 
 **:bulb: Tip**<br>
 
@@ -611,7 +611,7 @@ Tada! The schedule list has now been updated to show schedules from tutor that c
 ![find schedule tutor](images/find-schedules/find-s.png)
 
 
-<div markdown="block" class="alert alert-success">
+<div markdown="block" class="alert alert-info">
 
 **:information_source: Search behaviour**<br>
 
@@ -1039,10 +1039,11 @@ The domain name must:
 | **Find Tutor**      | `find-t KEYWORD [MORE_KEYWORDS]`<br> e.g., `find-t James Jake`                                               |
 | **Add Schedule**    | `add-s TUTOR_INDEX st/START_TIME et/END_TIME` <br> e.g., `add-s ti/1 st/2023-09-15T09:00 e/2023-09-15T11:00` |
 | **Edit Schedule**   | `edit-s SCHEDULE_INDEX [st/START_TIME] [etEND_TIME]` <br> e.g., `edit-s 1 st/2023-09-15T13:00`               |
-| **List Schedule**   | `list-s`, `list-s KEYWORD [MORE_KEYWORDS]` <br> e.g., `list-s Alice Pauline`                                 |
+| **List Schedule**   | `list-s`, `list-s TUTOR_INDEX m/SCHEDULE_STATUS` <br> e.g., `list-s 1 m/0`                                   |
 | **Mark Schedule**   | `mark SCHEDULE_INDEX m/SCHEDULE_STATUS`<br> e.g., `mark 3 m/0`                                               |
 | **Unmark Schedule** | `unmark SCHEDULE_INDEX`<br> e.g., `unmark 3`                                                                 |
 | **Delete Schedule** | `delete-s SCHEDULE_INDEX`<br> e.g., `delete-s 3`                                                             |
+| **Find Schedule**   | `find-s KEYWORD [MORE_KEYWORDS]`<br> e.g., `find-s James Jake`                                               |
 | **Change Theme**    | `theme NEW_THEME` <br> e.g., `theme dark`                                                                    |
 | **Clear**           | `clear`                                                                                                      |
 
