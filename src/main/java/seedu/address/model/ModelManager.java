@@ -134,8 +134,13 @@ public class ModelManager implements Model {
     public void setEvent(Event target, Event editedEvent) {
         requireAllNonNull(target, editedEvent);
 
+        Predicate<? super Person> personPredicate = this.filteredPersons.getPredicate();
+
+        // Reset the current persons list first
+        this.filteredPersons.setPredicate(PREDICATE_SHOW_ALL_PERSONS);
         this.addressBook.setEvent(target, editedEvent);
         sort();
+        this.filteredPersons.setPredicate(personPredicate);
     }
 
     @Override
@@ -153,10 +158,15 @@ public class ModelManager implements Model {
 
     @Override
     public void updateGroups() {
+        Predicate<? super Person> personPredicate = this.filteredPersons.getPredicate();
+
+        // Reset the current persons list first
+        this.filteredPersons.setPredicate(PREDICATE_SHOW_ALL_PERSONS);
         for (Event event: events) {
             event.updateGroups();
             setEvent(event, event);
         }
+        this.filteredPersons.setPredicate(personPredicate);
     }
 
     //=========== Filtered Person List Accessors =============================================================
@@ -188,7 +198,32 @@ public class ModelManager implements Model {
     @Override
     public void updateFilteredEventList(Predicate<Event> predicate) {
         requireNonNull(predicate);
+        Predicate<? super Person> personPredicate = this.filteredPersons.getPredicate();
+
+        // Reset the current persons list first
+        this.filteredPersons.setPredicate(PREDICATE_SHOW_ALL_PERSONS);
         this.events.setPredicate(predicate);
+
+        // Switch back to the previous filtered persons list
+        this.filteredPersons.setPredicate(personPredicate);
+    }
+
+    /**
+     * Updates the filtered event list without affecting the filtered person list.
+     * @param predicate Predicate to filter the event list.
+     */
+    public void updateFilteredEventListOnly(Predicate<Event> predicate) {
+        requireNonNull(predicate);
+        Predicate<? super Person> personPredicate = this.filteredPersons.getPredicate();
+
+        // Reset the current persons list first
+        this.filteredPersons.setPredicate(PREDICATE_SHOW_ALL_PERSONS);
+
+        // Reset the current events list
+        this.events.setPredicate(predicate);
+
+        // Switch back to the previous filtered persons list
+        this.filteredPersons.setPredicate(personPredicate);
     }
 
     /**
@@ -271,11 +306,19 @@ public class ModelManager implements Model {
     }
 
     private boolean checkGroupExists(Group group) {
+        Predicate<? super Person> personPredicate = this.filteredPersons.getPredicate();
+
+        // Reset the current persons list first
+        this.filteredPersons.setPredicate(PREDICATE_SHOW_ALL_PERSONS);
         for (Person person : this.filteredPersons) {
             if (person.getGroups().contains(group)) {
+                // Switch back to the previous filtered persons list
+                this.filteredPersons.setPredicate(personPredicate);
                 return true;
             }
         }
+        // Switch back to the previous filtered persons list
+        this.filteredPersons.setPredicate(personPredicate);
         return false;
     }
 
@@ -296,4 +339,8 @@ public class ModelManager implements Model {
                 && this.filteredPersons.equals(otherModelManager.filteredPersons);
     }
 
+    @Override
+    public String toString() {
+        return this.filteredPersons.toString() + "\n" + this.events.toString();
+    }
 }

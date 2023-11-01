@@ -1,6 +1,8 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_EVENTS;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -41,8 +43,13 @@ public class RemindCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        model.updateFilteredPersonList(birthdayPredicate);
+        // Show everything first before filtering
+        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        model.updateFilteredEventList(PREDICATE_SHOW_ALL_EVENTS);
+
+        // Events must be filtered before persons, if not persons will be filtered out of events
         model.updateFilteredEventList(eventPredicate);
+        model.updateFilteredPersonList(birthdayPredicate);
         return new CommandResult(String.format(MESSAGE_REMIND_SUCCESS, days));
     }
 
