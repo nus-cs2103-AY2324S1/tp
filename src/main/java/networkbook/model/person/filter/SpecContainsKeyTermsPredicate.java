@@ -43,8 +43,8 @@ public class SpecContainsKeyTermsPredicate implements Predicate<Person> {
             return false;
         }
 
-        SpecContainsKeyTermsPredicate otherCourseContainsKeyTermsPredicate = (SpecContainsKeyTermsPredicate) other;
-        return keyTerms.equals(otherCourseContainsKeyTermsPredicate.keyTerms);
+        SpecContainsKeyTermsPredicate otherSpecContainsKeyTermsPredicate = (SpecContainsKeyTermsPredicate) other;
+        return keyTerms.equals(otherSpecContainsKeyTermsPredicate.keyTerms);
     }
 
     @Override

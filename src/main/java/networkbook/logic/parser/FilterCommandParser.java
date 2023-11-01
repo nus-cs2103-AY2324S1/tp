@@ -109,22 +109,10 @@ public class FilterCommandParser implements Parser<FilterCommand> {
      *
      * @param spec
      * @return A FilterSpecCommand
-     * @throws ParseException if the user input does not conform to the expected format
      */
-    public FilterCommand parseSpec(String spec) throws ParseException {
+    public FilterCommand parseSpec(String spec) {
         Optional<String> fieldString = Optional.ofNullable(spec);
-        if (fieldString.isEmpty()) {
-            throw new ParseException(
-                    String.format(MISSING_FIELD)
-            );
-        }
-
         String[] predicateTerms = fieldString.get().trim().split("\\s+");
-        if (Arrays.stream(predicateTerms).anyMatch(s -> s.equals(""))) {
-            throw new ParseException(
-                    String.format(MISSING_FIELD)
-            );
-        }
 
         return new FilterSpecCommand(new SpecContainsKeyTermsPredicate(List.of(predicateTerms)));
     }

@@ -39,12 +39,24 @@ public class FilterCommandParserTest {
     }
 
     @Test
+    public void parse_unknownField_throwsParseException() {
+        assertParseFailure(parser, "filter /by what /with what",
+                String.format(FilterCommandParser.UNKNOWN_FIELD));
+    }
+
+    @Test
     public void parse_fields_returnsMatchingType() throws Exception {
         FilterCommand courseCommand = parser.parse("filter /by course /with a");
         FilterCommand specCommand = parser.parse("filter /by spec /with a");
 
         assertTrue(courseCommand instanceof FilterCourseCommand);
         assertTrue(specCommand instanceof FilterSpecCommand);
+    }
+
+    @Test
+    public void parseCourse_noArgs_throwsParseException() {
+        assertParseFailure(parser, "filter /by course /with /taken false",
+                FilterCommandParser.MISSING_FIELD);
     }
 
     @Test

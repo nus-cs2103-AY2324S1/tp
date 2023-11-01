@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.function.Predicate;
 
 import networkbook.commons.util.CollectionUtil;
+import networkbook.commons.util.ToStringBuilder;
 import networkbook.model.person.Person;
 
 /**
@@ -30,5 +31,29 @@ public class GradEqualsOneOfPredicate implements Predicate<Person> {
         }
         return gradYears.stream()
                 .anyMatch(year -> year == person.getGraduation().get().getGradYear());
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof GradEqualsOneOfPredicate)) {
+            return false;
+        }
+
+        GradEqualsOneOfPredicate otherGradEqualsOneOfPredicate = (GradEqualsOneOfPredicate) other;
+        return gradYears.equals(otherGradEqualsOneOfPredicate.gradYears);
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this).add("years", gradYears).toString();
+    }
+
+    public List<Integer> getGradYears() {
+        return gradYears;
     }
 }
