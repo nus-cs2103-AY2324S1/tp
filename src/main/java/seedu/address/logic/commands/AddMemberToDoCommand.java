@@ -5,14 +5,24 @@ import static seedu.address.logic.parser.CliSyntax.*;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Member;
+import seedu.address.model.person.fields.Email;
+import seedu.address.model.person.fields.Name;
+import seedu.address.model.person.fields.Phone;
+import seedu.address.model.person.fields.Tasklist;
+import seedu.address.model.person.fields.Telegram;
+import seedu.address.model.tag.Tag;
 import seedu.address.task.ToDo;
 
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 public class AddMemberToDoCommand extends Command{
 
@@ -52,22 +62,34 @@ public class AddMemberToDoCommand extends Command{
         }
 
         Member memberToAssign = lastShownList.get(index.getZeroBased());
-        assignTaskToMember(memberToAssign, addMemberToDoDescriptor);
+        Member taskAddedMember = assignTaskToMember(memberToAssign, addMemberToDoDescriptor);
+
+        model.setMember(memberToAssign, taskAddedMember);
         model.updateFilteredMemberList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(String.format(MESSAGE_ADD_TODO_SUCCESS, Messages.format(memberToAssign)));
     }
 
-    private static void assignTaskToMember(Member member, AddMemberToDoDescriptor addMemberToDoDescriptor) {
+    private static Member assignTaskToMember(Member member, AddMemberToDoDescriptor addMemberToDoDescriptor) {
         assert member != null;
 
-        ToDo taskToAdd = addMemberToDoDescriptor.getTask().orElse(null);
-        if (taskToAdd != null) {
-            member.addToDo(taskToAdd);
-        }
+        Name updatedName = addMemberToDoDescriptor.getName().orElse(member.getName());
+        Phone updatedPhone = addMemberToDoDescriptor.getPhone().orElse(member.getPhone());
+        Email updatedEmail = addMemberToDoDescriptor.getEmail().orElse(member.getEmail());
+        Telegram updatedTelegram = addMemberToDoDescriptor.getTelegram().orElse(member.getTelegram());
+        Set<Tag> updatedTags = addMemberToDoDescriptor.getTags().orElse(member.getTags());
+        Tasklist updatedTasks = addMemberToDoDescriptor.getTasks().orElse(member.getTasks());
+
+        return new Member(updatedName, updatedPhone, updatedEmail, updatedTelegram, updatedTags, updatedTasks);
+
     }
 
     public static class AddMemberToDoDescriptor {
-        private ToDo task;
+        private Name name;
+        private Phone phone;
+        private Email email;
+        private Telegram telegram;
+        private Set<Tag> tags;
+        private Tasklist tasks;
 
         public AddMemberToDoDescriptor() {
         }
@@ -77,15 +99,82 @@ public class AddMemberToDoCommand extends Command{
          * A defensive copy of {@code tags} is used internally.
          */
         public AddMemberToDoDescriptor(AddMemberToDoDescriptor toCopy) {
-            setTask(toCopy.task);
+            setName(toCopy.name);
+            setPhone(toCopy.phone);
+            setEmail(toCopy.email);
+            setTelegram(toCopy.telegram);
+            setTags(toCopy.tags);
+            setTasks(toCopy.tasks);
         }
 
-        public void setTask(ToDo task) {
-            this.task = task;
+        public void setName(Name name) {
+            this.name = name;
         }
 
-        public Optional<ToDo> getTask() {
-            return Optional.ofNullable(this.task);
+        public Optional<Name> getName() {
+            return Optional.ofNullable(name);
+        }
+
+        public void setPhone(Phone phone) {
+            this.phone = phone;
+        }
+
+        public Optional<Phone> getPhone() {
+            return Optional.ofNullable(phone);
+        }
+
+        public void setEmail(Email email) {
+            this.email = email;
+        }
+
+        public Optional<Email> getEmail() {
+            return Optional.ofNullable(email);
+        }
+
+        public void setTelegram(Telegram telegram) {
+            this.telegram = telegram;
+        }
+
+        public Optional<Telegram> getTelegram() {
+            return Optional.ofNullable(telegram);
+        }
+
+        /**
+         * Sets {@code tags} to this object's {@code tags}.
+         * A defensive copy of {@code tags} is used internally.
+         */
+        public void setTags(Set<Tag> tags) {
+            this.tags = (tags != null) ? new HashSet<>(tags) : null;
+        }
+
+        /**
+         * Returns an unmodifiable tag set, which throws {@code UnsupportedOperationException}
+         * if modification is attempted.
+         * Returns {@code Optional#empty()} if {@code tags} is null.
+         */
+        public Optional<Set<Tag>> getTags() {
+            return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
+        }
+
+        public void setTasks(Tasklist tasks) {
+            this.tasks = tasks;
+            System.out.println(this.tasks);
+        }
+
+        public Optional<Tasklist> getTasks() {
+            return Optional.ofNullable(this.tasks);
+        }
+
+        @Override
+        public String toString() {
+            return new ToStringBuilder(this)
+                    .add("name", name)
+                    .add("phone", phone)
+                    .add("email", email)
+                    .add("telegram", telegram)
+                    .add("tags", tags)
+                    .add("tasks", tasks)
+                    .toString();
         }
     }
 }

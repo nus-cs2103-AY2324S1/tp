@@ -8,6 +8,9 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.AddMemberToDoCommand;
 import seedu.address.logic.commands.AddMemberToDoCommand.AddMemberToDoDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.fields.Tasklist;
+
+import java.util.HashSet;
 
 public class AddMemberToDoCommandParser implements Parser<AddMemberToDoCommand> {
     @Override
@@ -29,8 +32,10 @@ public class AddMemberToDoCommandParser implements Parser<AddMemberToDoCommand> 
 
         AddMemberToDoDescriptor addMemberToDoDescriptor = new AddMemberToDoDescriptor();
         if (argMultimap.getValue(PREFIX_TODO).isPresent()) {
-            addMemberToDoDescriptor.setTask(ParserUtil.parseToDo(argMultimap.getValue(PREFIX_TODO).get()));
+            System.out.println("LOOK EHRE" + (argMultimap.getValue(PREFIX_TODO).get()));
+            addMemberToDoDescriptor.setTasks(new Tasklist(argMultimap.getValue(PREFIX_TODO).get()));
         }
+        System.out.println(addMemberToDoDescriptor);
         return new AddMemberToDoCommand(index, addMemberToDoDescriptor);
     }
 }
