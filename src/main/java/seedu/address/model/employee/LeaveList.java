@@ -67,6 +67,16 @@ public class LeaveList {
     }
 
     /**
+     * Deletes the Leave object if it exists inside the LeaveList.
+     *
+     * @param leave The leave that is deleted to the list.
+     * @return true if Leave object existed in the list before being deleted, and false otherwise
+     */
+    public boolean deleteLeave(Leave leave) {
+        return leaveList.remove(leave);
+    }
+
+    /**
      * Returns true if the LeaveList contains the specified Leave.
      *
      * @param date The Leave to be checked.

@@ -23,13 +23,13 @@ import seedu.address.model.employee.Leave;
 import seedu.address.model.employee.LeaveList;
 
 /**
- * Adds a leave period of an employee.
+ * Deletes a leave period on an employee
  */
-public class AddLeaveCommand extends Command {
-    public static final String COMMAND_WORD = "addleave";
+public class DeleteLeaveCommand extends Command {
+    public static final String COMMAND_WORD = "deleteleave";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Adds a leave period of an employee to the employee book. "
+            + ": Deletes a leave period of an employee to the employee book. "
             + "Parameters: "
             + PREFIX_ID + "EMPLOYEE ID "
             + PREFIX_FROM + "START DATE "
@@ -39,20 +39,19 @@ public class AddLeaveCommand extends Command {
             + PREFIX_FROM + "2023-12-26 "
             + PREFIX_TO + "2023-12-28";
 
-    public static final String MESSAGE_SUCCESS = "New leave period added: %1$s";
+    public static final String MESSAGE_SUCCESS = "Leave period deleted: %1$s";
     public static final String MISSING_DATE = "No date given! "
             + "Leaves must have date in yyyy-MM-dd format.";
     public static final String MESSAGE_INVALID_DATE_ORDER = "START DATE should not be after END DATE!";
-    public static final String MESSAGE_DUPLICATE_LEAVE = "This leave period overlaps with an existing leave";
-    public static final String MESSAGE_NOT_ENOUGH_LEAVES = "This leave period exceeds the number of leaves remaining";
+    public static final String MESSAGE_NO_LEAVES_FOUND = "There are no leaves to be deleted in the specified period";
     private final Id targetId;
     private final LocalDate from;
     private final LocalDate to;
 
     /**
-     * Creates an AddLeaveCommand to add the specified {@code Leave}
+     * Creates a DeleteLeaveCommand to delete the specified {@code Leave}
      */
-    public AddLeaveCommand(Id targetId, LocalDate from, LocalDate to) {
+    public DeleteLeaveCommand(Id targetId, LocalDate from, LocalDate to) {
         requireAllNonNull(from, to);
 
         this.targetId = targetId;
@@ -69,7 +68,7 @@ public class AddLeaveCommand extends Command {
         for (Employee employee : lastShownList) {
             if (employee.getId().equals(targetId)) {
                 LeaveList leaveListToUpdate = employee.getLeaveList();
-                LeaveList updatedList = addLeavesToList(leaveListToUpdate, from, to);
+                LeaveList updatedList = deleteLeavesFromList(leaveListToUpdate, from, to);
 
                 Employee employeeWithLeave = new Employee(employee.getName(), employee.getPosition(), employee.getId(),
                         employee.getPhone(), employee.getEmail(), employee.getSalary(), employee.getDepartments(),
@@ -100,19 +99,17 @@ public class AddLeaveCommand extends Command {
      * @return LeaveList with leaves added
      * @throws CommandException if the user input does not conform the expected format
      */
-    private LeaveList addLeavesToList(LeaveList currentList, LocalDate startDate, LocalDate endDate)
+    private LeaveList deleteLeavesFromList(LeaveList currentList, LocalDate startDate, LocalDate endDate)
             throws CommandException {
-        ArrayList<Leave> datesToAdd = getDatesBetween(startDate, endDate);
-        if ((Employee.MAX_NUM_OF_LEAVES - currentList.getSize()) < datesToAdd.size()) {
-            throw new CommandException(MESSAGE_NOT_ENOUGH_LEAVES);
-        }
-        for (Leave leaveDate : datesToAdd) { // ensure no duplicate dates
-            if (currentList.contains(leaveDate)) {
-                throw new CommandException(MESSAGE_DUPLICATE_LEAVE);
+        int count = 0;
+        ArrayList<Leave> deleteDatesPeriod = getDatesBetween(startDate, endDate);
+        for (Leave leaveDate : deleteDatesPeriod) {
+            if (currentList.deleteLeave(leaveDate)) {
+                count = count + 1;
             }
         }
-        for (Leave leaveDate : datesToAdd) {
-            currentList.addLeave(leaveDate);
+        if (count == 0) {
+            throw new CommandException(MESSAGE_NO_LEAVES_FOUND);
         }
         return currentList;
     }
@@ -124,12 +121,12 @@ public class AddLeaveCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof AddLeaveCommand)) {
+        if (!(other instanceof DeleteLeaveCommand)) {
             return false;
         }
 
-        AddLeaveCommand otherAddLeaveCommand = (AddLeaveCommand) other;
-        return targetId.equals(otherAddLeaveCommand.targetId);
+        DeleteLeaveCommand otherDeleteLeaveCommand = (DeleteLeaveCommand) other;
+        return targetId.equals(otherDeleteLeaveCommand.targetId);
     }
 
     @Override
