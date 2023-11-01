@@ -34,11 +34,18 @@ public class AddLessonCommandParser implements Parser<AddLessonCommand> {
             lesson.setNameIfNotDefault(parseField("name", args, Name::of, nameIsOptional));
             lesson.setSubjectIfNotDefault(parseField("subject", args, Subject::of));
             lesson.setDayIfNotDefault(parseField("day", args, Day::of));
-            lesson.setStartIfNotDefault(parseField("start", args, Time::of));
-            lesson.setEndIfNotDefault(parseField("end", args, Time::of));
+            Time start = parseField("start", args, Time::of);
+            if (start == null) {
+                start = Time.DEFAULT_TIME;
+            }
+            Time end = parseField("end", args, Time::of);
+            if (end == null) {
+                end = Time.DEFAULT_TIME;
+            }
+            lesson.updateStartAndEnd(start, end);
             return lesson;
         } catch (ParseException e) {
-            throw new ParseException("Invalid lesson format: " + e.getMessage() + ". "
+            throw new ParseException("Invalid lesson input: " + e.getMessage() + ". "
                     + getUsageInfo());
         }
     }
