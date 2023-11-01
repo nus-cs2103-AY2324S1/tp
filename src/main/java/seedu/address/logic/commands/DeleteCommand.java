@@ -15,7 +15,7 @@ import seedu.address.model.Model;
 import seedu.address.model.booking.Booking;
 
 /**
- * Deletes one or more bookings identified using their displayed indices from the address book.
+ * Deletes one or more bookings identif ied using their displayed indices from the address book.
  */
 public class DeleteCommand extends Command {
 
