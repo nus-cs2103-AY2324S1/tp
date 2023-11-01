@@ -35,13 +35,12 @@ public class HelpWindow extends UiPart<Stage> {
             + "Mark Absent - mark-abs TUTORIAL_INDEX s/STUDENT_NUMBER\n"
             + "Mark Present - mark-pre TUTORIAL_INDEX s/STUDENT_NUMBER\n"
             + "Mark Present All - mark-pre-all TUTORIAL_INDEX\n"
-            + "Random - random INDEX\n"
+            + "Random - random NUM_OF_STUDENT\n"
             + "Record Class participation - class-part s/STUDENT_NUMBER tut/TUTORIAL_INDEX "
             + "part/PARTICIPATION_LEVEL\n"
             + "Set Grade - grade s/STUDENT_NUMBER a/ASSIGNMENT_INDEX g/GRADE\n"
             + "Tag - tag s/STUDENT_NUMBER [/add] [/delete] t/[TAG]…\n"
             + "View - view s/STUDENT_NUMBER\n";
-
 
     public static final String HELP_MESSAGE = COMMAND_TABLE + "\nRefer to the user guide: " + USERGUIDE_URL;
 
