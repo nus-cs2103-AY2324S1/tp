@@ -5,16 +5,19 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
  * Represents a Person's telegram in the address book.
- * Is valid as declared in {@link #isValidTelegram(String)}
+ * Guarantees: immutable; is valid as declared in {@link #isValidTelegram(String)}
  */
 public class Telegram {
+
+    /**
+     * Message constraints for telegram which is the format used for user input.
+     */
     public static final String MESSAGE_CONSTRAINTS = "Telegram should start with the '@' symbol, "
-            + "should not contain whitespace, should not be blank, with a minimum length of 5 characters. Use "
+            + "should not contain whitespace, should not be blank, with a minimum length of 5 characters.\nUse "
             + "a-z, 0-9 and underscores.";
 
-    /*
-     * The first character of the address must not be a whitespace,
-     * otherwise " " (a blank string) becomes a valid input.
+    /**
+     * Regex for Telegram when represented as a telegram handle
      */
     public static final String VALIDATION_REGEX = "@[a-z0-9_]{5,}$";
 

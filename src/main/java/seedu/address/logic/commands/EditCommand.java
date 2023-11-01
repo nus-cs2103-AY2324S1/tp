@@ -12,6 +12,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TELEGRAM;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -21,7 +22,6 @@ import java.util.Set;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.index.Index;
-import seedu.address.commons.util.CollectionUtil;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -39,7 +39,7 @@ import seedu.address.model.person.Telegram;
 import seedu.address.model.tag.Tag;
 
 /**
- * Edits the details of an existing person in the address book.
+ * Edits the details of an existing person.
  */
 public class EditCommand extends Command {
 
@@ -47,30 +47,30 @@ public class EditCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the person identified "
             + "by the index number used in the displayed person list. "
-            + "Existing values will be overwritten by the input values.\n"
+            + "Existing values must be non empty and will be overwritten by the input values.\n"
+            + "At least one field to edit must be provided.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
-            + "[" + PREFIX_TAG + "TAG]...\n"
-            + "[" + PREFIX_SECONDARY_EMAIL + "SECONDARYEMAIL]...\n"
-            + "[" + PREFIX_LINKEDIN + "LINKEDIN]...\n"
-            + "[" + PREFIX_BIRTHDAY + "BIRTHDAY]...\n"
-            + "[" + PREFIX_TELEGRAM + "TELEGRAM]...\n"
+            + "[" + PREFIX_TAG + "TAG]... "
+            + "[" + PREFIX_SECONDARY_EMAIL + "SECONDARYEMAIL] "
+            + "[" + PREFIX_LINKEDIN + "LINKEDIN] "
+            + "[" + PREFIX_BIRTHDAY + "BIRTHDAY] "
+            + "[" + PREFIX_TELEGRAM + "TELEGRAM] "
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
-    public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_EDIT_FIELDS_SAME = "The input fields of this person: %1$s you are editing"
+    public static final String MESSAGE_NO_CHANGE = "The input fields of this person: %1$s you are editing"
             + " is the same.";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
-    public static final String MESSAGE_EDIT_DUPLICATE_EMAIL = "Both primary and secondary email are the same "
+    public static final String MESSAGE_DUPLICATE_EMAIL = "Both primary and secondary email are the same "
             + "for Person: %1$s";
-    public static final String MESSAGE_EDIT_ALTERNATIVE_FAIL = "The current alternative contact field is empty."
-            + " Use the addalt command to fill in the alternative contact details.";
+    public static final String MESSAGE_USE_ADDALT_COMMAND = "Empty alternative contact field(s): %s \n"
+            + "Use the addalt command to fill in the alternative contact fields.";
 
     private final Index index;
     private final EditPersonDescriptor editPersonDescriptor;
@@ -133,17 +133,29 @@ public class EditCommand extends Command {
         Person updatedPerson = new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedBirthday,
                 updatedLinkedin, updatedSecondaryEmail, updatedTelegram, updatedTags, id, notes, balance);
 
-        if ((!personToEdit.hasValidBirthday() && !updatedBirthday.equals(Optional.empty()))
-                || (!personToEdit.hasValidLinkedin() && !updatedLinkedin.equals(Optional.empty()))
-                || (!personToEdit.hasValidTelegram() && !updatedTelegram.equals(Optional.empty()))
-                || (!personToEdit.hasValidSecondaryEmail() && !updatedSecondaryEmail.equals(Optional.empty()))) {
-            throw new CommandException(MESSAGE_EDIT_ALTERNATIVE_FAIL);
+        // Records down the alternative contact fields that are initially empty.
+        ArrayList<String> emptyAlternativeContactFields = new ArrayList<>();
+
+        if (!personToEdit.hasValidLinkedin() && updatedPerson.hasValidLinkedin()) {
+            emptyAlternativeContactFields.add("Linkedin");
+        }
+        if (!personToEdit.hasValidBirthday() && updatedPerson.hasValidBirthday()) {
+            emptyAlternativeContactFields.add("Birthday");
+        }
+        if (!personToEdit.hasValidSecondaryEmail() && updatedPerson.hasValidSecondaryEmail()) {
+            emptyAlternativeContactFields.add("Secondary Email");
+        }
+        if (!personToEdit.hasValidTelegram() && updatedPerson.hasValidTelegram()) {
+            emptyAlternativeContactFields.add("Telegram");
+        }
+
+        if (!emptyAlternativeContactFields.isEmpty()) {
+            String fields = String.join(", ", emptyAlternativeContactFields);
+            throw new CommandException(String.format(MESSAGE_USE_ADDALT_COMMAND, fields));
+        } else if (updatedPerson.hasRepeatedEmail()) {
+            throw new CommandException(String.format(MESSAGE_DUPLICATE_EMAIL, personToEdit.getName()));
         } else if (updatedPerson.equals(personToEdit)) {
-            throw new CommandException(String.format(MESSAGE_EDIT_FIELDS_SAME, updatedName));
-        } else if (updatedPerson.hasValidSecondaryEmail()) {
-            if (updatedPerson.hasRepeatedEmail()) {
-                throw new CommandException(String.format(MESSAGE_EDIT_DUPLICATE_EMAIL, updatedName));
-            }
+            throw new CommandException(String.format(MESSAGE_NO_CHANGE, updatedName));
         }
 
         return updatedPerson;
@@ -204,14 +216,6 @@ public class EditCommand extends Command {
             setBirthday(toCopy.birthday);
             setLinkedin(toCopy.linkedin);
             setTags(toCopy.tags);
-        }
-
-        /**
-         * Returns true if at least one field is edited.
-         */
-        public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address,
-                    birthday, linkedin, telegram, secondaryEmail, tags);
         }
 
         public void setName(Name name) {

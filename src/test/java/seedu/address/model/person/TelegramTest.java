@@ -1,5 +1,6 @@
 package seedu.address.model.person;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -26,16 +27,15 @@ public class TelegramTest {
         // invalid telegram
         assertFalse(Telegram.isValidTelegram("")); // empty string
         assertFalse(Telegram.isValidTelegram(" ")); // spaces only
-        assertFalse(Telegram.isValidTelegram("?")); // weird telegram
-        assertFalse(Telegram.isValidTelegram("john?")); // prohibited characters
+        assertFalse(Telegram.isValidTelegram("?")); // invalid special characters
         assertFalse(Telegram.isValidTelegram("johndoe")); // not following telegram format
         assertFalse(Telegram.isValidTelegram("john")); // less than minimum of 5 characters
         assertFalse(Telegram.isValidTelegram("Johndoe")); // no capitalised letters
 
         // valid telegram
-        assertTrue(Telegram.isValidTelegram("@johndoe"));
+        assertTrue(Telegram.isValidTelegram("@johndoe")); // alphabets
         assertTrue(Telegram.isValidTelegram("@johndoe123")); // alphanumeric
-        assertTrue(Telegram.isValidTelegram("@john_doe123")); // alphanumeric with hyphens
+        assertTrue(Telegram.isValidTelegram("@john_doe123")); // alphanumeric with underscores
     }
 
     @Test
@@ -56,5 +56,17 @@ public class TelegramTest {
 
         // different values -> returns false
         assertFalse(telegram.equals(new Telegram("@othervalidtelegram")));
+    }
+
+    @Test
+    public void testToString() {
+        assertEquals("@telegram", new Telegram("@telegram").toString());
+    }
+
+    @Test
+    public void testHashCode() {
+        Telegram telegram1 = new Telegram("@telegram");
+        Telegram telegram2 = new Telegram("@telegram");
+        assertEquals(telegram1.hashCode(), telegram2.hashCode());
     }
 }

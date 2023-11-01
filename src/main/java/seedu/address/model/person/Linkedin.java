@@ -8,14 +8,19 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  * Guarantees: immutable; is valid as declared in {@link #isValidLinkedin(String)}
  */
 public class Linkedin {
-    public static final String MESSAGE_CONSTRAINTS = "Linkedin should not be blank and should be in the following form."
-            + "\ne.g. john-doe-b9a38128a, which is the unique username on the linkedin profile website.";
 
-    /*
-     * The first character of the address must not be a whitespace,
-     * otherwise " " (a blank string) becomes a valid input.
+    /**
+     * Message constraints for Linkedin which is the format used for user input.
      */
-    public static final String VALIDATION_REGEX = "^(?!\\s)[a-zA-Z0-9_-][a-zA-Z0-9_-]*$";
+    public static final String MESSAGE_CONSTRAINTS = "Linkedin should not be blank, no whitespaces and alphanumeric "
+            + "characters only.\ne.g. john-doe-b9a38128a, which is the unique username on the linkedin "
+            + "profile website.";
+
+    /**
+     * Regex for Linkedin when represented as the person's unique username on Linkedin.
+     */
+    public static final String VALIDATION_REGEX = "^(?!\\s*$)[a-zA-Z0-9_-]+$";
+
 
     public final String value;
 

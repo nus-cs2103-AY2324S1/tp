@@ -91,13 +91,16 @@ public class ParserUtil {
      * Parses a {@code String birthday} into an {@code Birthday}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code birthday} is invalid.
-     * @throws DateTimeParseException if the given {@code birthday} doesn't follow the specified format.
+     * @throws ParseException if the given {@code birthday} is invalid or doesn't follow the specified format.
      */
-    public static Birthday parseBirthday(String birthday) throws DateTimeParseException {
+    public static Birthday parseBirthday(String birthday) throws ParseException {
         requireNonNull(birthday);
         String trimmedBirthday = birthday.trim();
-        return new Birthday(MonthDay.parse(trimmedBirthday, FORMATTER));
+        try {
+            return new Birthday(MonthDay.parse(trimmedBirthday, FORMATTER));
+        } catch (DateTimeParseException e) {
+            throw new ParseException(Birthday.MESSAGE_INVALID);
+        }
     }
 
     /**

@@ -1,5 +1,6 @@
 package seedu.address.model.person;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -27,12 +28,12 @@ public class LinkedinTest {
         // invalid linkedin
         assertFalse(Linkedin.isValidLinkedin("")); // empty string
         assertFalse(Linkedin.isValidLinkedin(" ")); // spaces only
-        assertFalse(Linkedin.isValidLinkedin("?")); // weird linkedin
+        assertFalse(Linkedin.isValidLinkedin("?")); // invalid special characters
 
         // valid linkedin
-        assertTrue(Linkedin.isValidLinkedin("johndoe"));
+        assertTrue(Linkedin.isValidLinkedin("johndoe")); // alphabets
         assertTrue(Linkedin.isValidLinkedin("j")); // one character
-        assertTrue(Linkedin.isValidLinkedin("john-doe")); // with hyphens
+        assertTrue(Linkedin.isValidLinkedin("john-doe")); // alphabets with hyphens
         assertTrue(Linkedin.isValidLinkedin("john-doe12")); // alphanumeric with hyphens
     }
 
@@ -54,5 +55,17 @@ public class LinkedinTest {
 
         // different values -> returns false
         assertFalse(linkedin.equals(new Linkedin("OtherValidLinkedin")));
+    }
+
+    @Test
+    public void testToString() {
+        assertEquals("linkedin", new Linkedin("linkedin").toString());
+    }
+
+    @Test
+    public void testHashCode() {
+        Linkedin linkedin1 = new Linkedin("linkedin");
+        Linkedin linkedin2 = new Linkedin("linkedin");
+        assertEquals(linkedin1.hashCode(), linkedin2.hashCode());
     }
 }
