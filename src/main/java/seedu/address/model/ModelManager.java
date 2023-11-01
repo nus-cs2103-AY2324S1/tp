@@ -141,6 +141,7 @@ public class ModelManager implements Model {
         requireNonNull(person);
         return addressBook.hasPersonClashWith(person);
     }
+
     public Person getPersonClashWith(Person person) {
         requireNonNull(person);
         Set<Person> persons = addressBook.getPersonsFulfill(p -> p.hasSameName(person));
