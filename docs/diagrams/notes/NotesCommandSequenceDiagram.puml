@@ -1,40 +1,42 @@
 @startuml
+hide footbox
 
-participant "AddNoteCommandParser" as Parser
-participant "ParserUtil" as Util
-participant "AddNoteCommand" as Command
-participant "Model" as Model
-participant "Person" as Person
-participant "Note" as Note
+participant ":AddNoteCommandParser" as Parser #lightgreen
+participant ":ParserUtil" as Util #lightblue
+participant ":AddNoteCommand" as Command #lightsalmon
+participant ":Model" as Model #lightpink
+participant ":Person" as Person #lightyellow
+participant ":Note" as Note #lightyellow
 
-Parser -> Util : parseIndex(args[0])
+Parser -> Util : parseIndex(splitArgs[0])
 activate Util
-Util --> Parser : index: Index
+Util --> Parser : index
 deactivate Util
 
-Parser -> Note : new Note(args[1].trim())
+Parser -> Note : new Note(splitArgs[1].trim())
 activate Note
-Note --> Parser
+Note --> Parser : note
 deactivate Note
 
-Parser --> Command : new AddNoteCommand(index, note)
+Parser -> Command : new AddNoteCommand(index, note)
+activate Command
+Command --> Parser : command
+deactivate Command
 
-Command -> Model : execute(model)
+-> Command : execute(model)
+
+activate Command
+Command -> Model : lastShownList = getFilteredPersonList()
 activate Model
-
-Model --> Model : lastShownList = getFilteredPersonList()
-
-Model -> Person : Person p = lastShownList.get(index.getZeroBased())
-activate Person
-Person --> Model
-deactivate Person
-
-Model -> Person : p.addNote(note)
-activate Person
-Person --> Model
-deactivate Person
-
-Model --> Command : return new CommandResult(message)
+Model --> Command : lastShownList
 deactivate Model
+
+Command -> Person : addNote(note)
+activate Person
+Person --> Command
+deactivate Person
+
+<-- Command : new CommandResult(MESSAGE_NOTE_SUCCESS)
+deactivate Command
 
 @enduml
