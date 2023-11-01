@@ -88,6 +88,7 @@ public class Student {
     public ClassDetails getClassDetails() {
         return classDetails;
     }
+
     public String getClassNumber() {
         return this.classDetails.getClassNumber();
     }
