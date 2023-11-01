@@ -78,6 +78,11 @@ Adds a new contact.
 `add n/NAME p/PHONE_NUMBER e/EMAIL [o/NOTE] [t/TAG]... [a/ALTERNATE_CONTACT]...`
 
 <div markdown="span" class="alert alert-primary">
+    :bulb: **About tags:**
+    Duplicate tags are only counted once.
+</div>
+
+<div markdown="span" class="alert alert-primary">
     :bulb: **About the alternate contact format:**
     The format for `ALTERNATE_CONTACT` is `TYPE: USERNAME`, roughly looking like `SocialMedia: Username`.
 </div>
@@ -101,7 +106,7 @@ Edits an existing contact at the specified `INDEX`.
 </div>
 
 <div markdown="span" class="alert alert-primary">
-    :bulb: **About the alternate contact format:**
+    :bulb: **About tags/the alternate contact format:**
     Please refer to the [above](#adding-a-contact-add).
 </div>
 
@@ -218,3 +223,15 @@ The displayed contact list is always automatically sorted in ascending alphabeti
 
 Your contacts get automatically saved to the file system after each successful command execution. There is no need to save manually.
 
+---
+
+## Known limitations
+
+1. **Long contact details are not in the product's scope.**
+e.g. names/phone numbers/emails/notes/tags/alternate contacts with hundreds of characters.
+Such long text is likely to get shortened with ellipses (`...`) or cut off by the app's window.
+You may try to remedy this by resizing the app's window to be wider.
+
+1. **Multiple monitors are not in the product's scope.**
+When using multiple monitors, if you move the app's window to a secondary monitor, then later switch to using just the primary monitor, the GUI will reopen off-screen.
+You can remedy this by deleting the `settings.json` file created by the app before running the app again.
