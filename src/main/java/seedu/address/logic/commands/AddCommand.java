@@ -10,10 +10,14 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SALARY;
 
+import java.util.List;
+
+import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.person.Payroll;
 import seedu.address.model.person.Person;
 
 /**
@@ -65,6 +69,7 @@ public class AddCommand extends Command {
         }
 
         model.addPerson(toAdd);
+        toAdd.addPayroll(new Payroll(toAdd.getSalary()));
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
     }
 
