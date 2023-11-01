@@ -114,13 +114,13 @@ public class ListScheduleCommandParserTest {
 
     @Test
     public void parse_nullArgs_returnsListScheduleCommand() {
-        ListScheduleCommand expectedListCommand = new ListScheduleCommand(null);
+        ListScheduleCommand expectedListCommand = new ListScheduleCommand(null, null);
         assertParseSuccess(parser, null, expectedListCommand);
     }
 
     @Test
     public void parse_emptyArgs_returnsListScheduleCommand() {
-        ListScheduleCommand expectedListCommand = new ListScheduleCommand(null);
+        ListScheduleCommand expectedListCommand = new ListScheduleCommand(null, null);
         assertParseSuccess(parser, "", expectedListCommand);
         assertParseSuccess(parser, "  ", expectedListCommand);
     }
