@@ -63,18 +63,6 @@ public class PersonInformationPanel extends UiPart<Region> {
         setButton(person.getStatus());
         for (Tag tag : person.getTags()) {
             Label label = new Label(tag.tagName);
-            if (tag.tagName.equals("marketing") || tag.tagName.equals("software")) {
-                label.getStyleClass().add("label1");
-            }
-            else if (tag.tagName.equals("developer")) {
-                label.getStyleClass().add("label2");
-            }
-            else if (tag.tagName.equals("intern") || tag.tagName.equals("fulltime")) {
-                label.getStyleClass().add("label3");
-            }
-            else {
-                label.getStyleClass().add("label4");
-            }
             tags.getChildren().add(label);
         }
     }

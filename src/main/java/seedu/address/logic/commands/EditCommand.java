@@ -235,7 +235,7 @@ public class EditCommand extends Command {
         }
 
         public void setScoreList(ScoreList scoreList) {
-            this.scoreList = scoreList;
+            this.scoreList = (scoreList != null) ? scoreList : null;
         }
 
         public Optional<ScoreList> getScoreList() {

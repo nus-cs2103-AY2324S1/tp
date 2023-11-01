@@ -29,6 +29,7 @@ import seedu.address.model.ReadOnlyEventBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.event.Event;
 import seedu.address.model.person.Person;
+import seedu.address.model.statistics.SummaryStatistic;
 import seedu.address.testutil.PersonBuilder;
 
 public class AddCommandTest {
@@ -243,6 +244,16 @@ public class AddCommandTest {
         public void setLastViewedPersonIndex(Index index) {
             throw new AssertionError("This method should not be called.");
 
+        }
+
+        @Override
+        public void loadSummaryStatistics() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public SummaryStatistic getSummaryStatistic() {
+            throw new AssertionError("This method should not be called.");
         }
     }
 

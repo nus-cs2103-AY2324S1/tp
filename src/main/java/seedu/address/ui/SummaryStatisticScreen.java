@@ -1,18 +1,15 @@
 package seedu.address.ui;
 
+import java.util.List;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.Region;
 import seedu.address.model.person.Person;
 import seedu.address.model.statistics.ReadOnlySummaryStatistic;
 import seedu.address.model.tag.Tag;
-
-import java.net.URL;
-import java.util.List;
-import java.util.ResourceBundle;
 
 /**
  * Controller for a Summary Statistic page
@@ -25,16 +22,17 @@ public class SummaryStatisticScreen extends UiPart<Region> {
     @FXML
     private TableView<StatisticData> tableView;
 
-
-    // Other @FXML fields for TableColumns are not required
-
+    /**
+     * Constructor for summary statistic screen.
+     * @param summaryStatistic summary statistic
+     * @param person person
+     */
     public SummaryStatisticScreen(ReadOnlySummaryStatistic summaryStatistic, Person person) {
         super(FXML);
         this.summaryStatistic = summaryStatistic;
         this.person = person;
         updateTableView();
     }
-
 
     /**
      * Updates the table view with the statistic data.
@@ -67,22 +65,6 @@ public class SummaryStatisticScreen extends UiPart<Region> {
         return statisticData;
     }
 
-
-
-    /**
-      Alternative
-    private void initializeTableColumns() {
-        TableColumn<StatisticData, String> statisticColumn = new TableColumn<>("Statistic Measure");
-        statisticColumn.setMinWidth(100);
-        TableColumn<StatisticData, String> valueColumn = new TableColumn<>("Value");
-        valueColumn.setMinWidth(100);
-
-        // Set cell value factories for the TableColumns
-        statisticColumn.setCellValueFactory(new PropertyValueFactory<>("statisticMeasure"));
-        valueColumn.setCellValueFactory(new PropertyValueFactory<>("value"));
-
-    }
-    */
 
     /**
      * Represents the statistic data.
