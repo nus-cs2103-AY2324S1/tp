@@ -52,7 +52,7 @@ public class MainWindowTest {
                 RedoCommand.MESSAGE_REDO_DISALLOWED);
 
         robot.clickOn(textField);
-        robot.write("create /name a").press(KeyCode.ENTER).release(KeyCode.ENTER);
+        robot.write(CreateCommand.COMMAND_WORD + " /name a").press(KeyCode.ENTER).release(KeyCode.ENTER);
         assertEquals(resultDisplay.getText().substring(0, 20),
                 String.format(CreateCommand.MESSAGE_SUCCESS, Messages.format(
                         new PersonBuilder().withoutOptionalFields().withName("a").build()))

@@ -5,8 +5,6 @@ import static networkbook.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import networkbook.model.Model;
 
-import java.util.List;
-
 /**
  * Lists all persons in the network book to the user.
  */

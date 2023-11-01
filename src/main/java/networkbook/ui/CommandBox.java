@@ -13,6 +13,11 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Region;
 import networkbook.logic.Logic;
 import networkbook.logic.commands.CommandResult;
+import networkbook.logic.commands.CreateCommand;
+import networkbook.logic.commands.FindCommand;
+import networkbook.logic.commands.RedoCommand;
+import networkbook.logic.commands.UndoCommand;
+import networkbook.logic.commands.edit.EditCommand;
 import networkbook.logic.commands.exceptions.CommandException;
 import networkbook.logic.parser.exceptions.ParseException;
 
@@ -35,6 +40,7 @@ public class CommandBox extends UiPart<Region> {
             new KeyCharacterCombination("R", KeyCombination.SHORTCUT_DOWN);
     private static final KeyCode SHORTCUT_UP = KeyCode.UP;
     private static final KeyCode SHORTCUT_DOWN = KeyCode.DOWN;
+    private static final String WHITESPACE = " ";
 
     private final CommandExecutor commandExecutor;
     private final ArrayList<String> commandHistory;
@@ -61,19 +67,19 @@ public class CommandBox extends UiPart<Region> {
             @Override
             public void handle(KeyEvent event) {
                 if (SHORTCUT_FIND.match(event)) {
-                    autoFillCommandIfEmpty("find ");
+                    autoFillCommandIfEmpty(FindCommand.COMMAND_WORD + WHITESPACE);
                     event.consume();
                 } else if (SHORTCUT_CREATE.match(event)) {
-                    autoFillCommandIfEmpty("create ");
+                    autoFillCommandIfEmpty(CreateCommand.COMMAND_WORD + WHITESPACE);
                     event.consume();
                 } else if (SHORTCUT_EDIT.match(event)) {
-                    autoFillCommandIfEmpty("edit ");
+                    autoFillCommandIfEmpty(EditCommand.COMMAND_WORD + WHITESPACE);
                     event.consume();
                 } else if (SHORTCUT_UNDO.match(event)) {
-                    autoFillCommandIfEmpty("undo");
+                    autoFillCommandIfEmpty(UndoCommand.COMMAND_WORD);
                     event.consume();
                 } else if (SHORTCUT_REDO.match(event)) {
-                    autoFillCommandIfEmpty("redo");
+                    autoFillCommandIfEmpty(RedoCommand.COMMAND_WORD);
                     event.consume();
                 } else if (noModifier(event) && event.getCode() == SHORTCUT_UP) {
                     navigateCommandHistory(true);
