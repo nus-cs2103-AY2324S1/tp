@@ -7,6 +7,7 @@ import java.util.Optional;
 
 import networkbook.logic.Messages;
 import networkbook.logic.commands.filter.FilterCommand;
+import networkbook.logic.commands.filter.FilterCourseCommand;
 import networkbook.logic.parser.exceptions.ParseException;
 import networkbook.model.person.filter.CourseContainsKeyTermsPredicate;
 import networkbook.model.person.filter.CourseIsStillBeingTakenPredicate;
@@ -65,7 +66,7 @@ public class FilterCommandParser implements Parser<FilterCommand> {
                     String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));
         }
 
-        return new FilterCommand(
+        return new FilterCourseCommand(
                 new CourseContainsKeyTermsPredicate(List.of(predicateTerms)),
                 new CourseIsStillBeingTakenPredicate(LocalDate.now()),
                 Boolean.parseBoolean(booleanToCheck.orElse("false")));

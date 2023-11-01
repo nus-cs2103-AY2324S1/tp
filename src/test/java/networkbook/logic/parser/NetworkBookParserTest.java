@@ -29,6 +29,7 @@ import networkbook.logic.commands.delete.DeletePersonCommand;
 import networkbook.logic.commands.edit.EditCommand;
 import networkbook.logic.commands.edit.EditNameAction;
 import networkbook.logic.commands.filter.FilterCommand;
+import networkbook.logic.commands.filter.FilterCourseCommand;
 import networkbook.logic.parser.exceptions.ParseException;
 import networkbook.model.person.Name;
 import networkbook.model.person.NameContainsKeyTermsPredicate;
@@ -119,7 +120,7 @@ public class NetworkBookParserTest {
                         + CliSyntax.PREFIX_FILTER_FIELD + " "
                         + keywords.stream().collect(Collectors.joining(" "))
         );
-        assertEquals(new FilterCommand(
+        assertEquals(new FilterCourseCommand(
                 new CourseContainsKeyTermsPredicate(keywords),
                 new CourseIsStillBeingTakenPredicate(LocalDate.now()),
                 false), command);

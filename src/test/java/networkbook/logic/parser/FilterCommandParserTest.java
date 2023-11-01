@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Test;
 
 import networkbook.logic.Messages;
 import networkbook.logic.commands.filter.FilterCommand;
+import networkbook.logic.commands.filter.FilterCourseCommand;
 import networkbook.model.person.filter.CourseContainsKeyTermsPredicate;
 import networkbook.model.person.filter.CourseIsStillBeingTakenPredicate;
 
@@ -30,8 +31,8 @@ public class FilterCommandParserTest {
     }
 
     @Test
-    public void parse_validArgs_returnsFilterCommand() {
-        FilterCommand expectedCommand = new FilterCommand(
+    public void parse_validArgs_returnsFilterCourseCommand() {
+        FilterCommand expectedCommand = new FilterCourseCommand(
                 new CourseContainsKeyTermsPredicate(List.of("Alice", "Bob")),
                 new CourseIsStillBeingTakenPredicate(LocalDate.now()),
                 false);
@@ -51,7 +52,7 @@ public class FilterCommandParserTest {
 
     @Test
     public void parse_validTakenField_success() {
-        FilterCommand expectedCommand = new FilterCommand(
+        FilterCommand expectedCommand = new FilterCourseCommand(
                 new CourseContainsKeyTermsPredicate(List.of("Alice", "Bob")),
                 new CourseIsStillBeingTakenPredicate(LocalDate.now()),
                 true);

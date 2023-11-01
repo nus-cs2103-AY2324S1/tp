@@ -10,6 +10,7 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 
 import networkbook.logic.commands.filter.FilterCommand;
+import networkbook.logic.commands.filter.FilterCourseCommand;
 import networkbook.model.Model;
 import networkbook.model.ModelManager;
 import networkbook.model.NetworkBook;
@@ -20,7 +21,7 @@ import networkbook.model.person.filter.CourseIsStillBeingTakenPredicate;
 import networkbook.testutil.PersonBuilder;
 import networkbook.testutil.TypicalPersons;
 
-public class FilterCommandTest {
+public class FilterCourseCommandTest {
     private Person personWithDatedCourse = new PersonBuilder()
             .withName("A")
             .addCourse("First", "01-01-2000", "03-01-2000")
@@ -48,22 +49,22 @@ public class FilterCommandTest {
         CourseContainsKeyTermsPredicate secondKeyTermsPredicate =
                 new CourseContainsKeyTermsPredicate(List.of("second"));
 
-        FilterCommand firstCommand = new FilterCommand(firstKeyTermsPredicate, firstTakenPredicate, true);
+        FilterCommand firstCommand = new FilterCourseCommand(firstKeyTermsPredicate, firstTakenPredicate, true);
 
         // same object -> returns true
         assertEquals(firstCommand, firstCommand);
 
         // same values -> return true
         assertEquals(firstCommand,
-                new FilterCommand(firstKeyTermsPredicate, firstTakenPredicate, true));
+                new FilterCourseCommand(firstKeyTermsPredicate, firstTakenPredicate, true));
 
         // at least one value doesn't match -> return false
         assertNotEquals(firstCommand,
-                new FilterCommand(secondKeyTermsPredicate, firstTakenPredicate, true));
+                new FilterCourseCommand(secondKeyTermsPredicate, firstTakenPredicate, true));
         assertNotEquals(firstCommand,
-                new FilterCommand(firstKeyTermsPredicate, secondTakenPredicate, true));
+                new FilterCourseCommand(firstKeyTermsPredicate, secondTakenPredicate, true));
         assertNotEquals(firstCommand,
-                new FilterCommand(firstKeyTermsPredicate, firstTakenPredicate, false));
+                new FilterCourseCommand(firstKeyTermsPredicate, firstTakenPredicate, false));
 
         // null -> returns false
         assertNotEquals(firstCommand, null);
@@ -78,11 +79,11 @@ public class FilterCommandTest {
                 new CourseIsStillBeingTakenPredicate(LocalDate.ofYearDay(2000, 1));
         CourseContainsKeyTermsPredicate keyTermsPredicate =
                 new CourseContainsKeyTermsPredicate(List.of("first"));
-        String expected = FilterCommand.class.getCanonicalName()
+        String expected = FilterCourseCommand.class.getCanonicalName()
                 + "{predicate=" + keyTermsPredicate
                 + ", time=" + takenPredicate
                 + ", taken=true}";
-        assertEquals(expected, new FilterCommand(keyTermsPredicate, takenPredicate, true).toString());
+        assertEquals(expected, new FilterCourseCommand(keyTermsPredicate, takenPredicate, true).toString());
     }
 
     @Test
@@ -96,7 +97,7 @@ public class FilterCommandTest {
         CourseIsStillBeingTakenPredicate takenPredicate =
                 new CourseIsStillBeingTakenPredicate(LocalDate.ofYearDay(2000, 1));
 
-        FilterCommand command = new FilterCommand(keyPredicate, takenPredicate, false);
+        FilterCommand command = new FilterCourseCommand(keyPredicate, takenPredicate, false);
 
         expectedModel.updateFilteredPersonList(keyPredicate);
 
@@ -116,7 +117,7 @@ public class FilterCommandTest {
         CourseIsStillBeingTakenPredicate takenPredicate =
                 new CourseIsStillBeingTakenPredicate(LocalDate.ofYearDay(2000, 1));
 
-        FilterCommand command = new FilterCommand(keyPredicate, takenPredicate, false);
+        FilterCommand command = new FilterCourseCommand(keyPredicate, takenPredicate, false);
 
         String expectedMessage = String.format(FilterCommand.MESSAGE_SUCCESS, "\"Fourth\"")
                 + String.format(FilterCommand.MESSAGE_PERSONS_FOUND_OVERVIEW, 0);
@@ -139,7 +140,7 @@ public class FilterCommandTest {
         CourseIsStillBeingTakenPredicate takenPredicate =
                 new CourseIsStillBeingTakenPredicate(LocalDate.ofYearDay(2000, 1));
 
-        FilterCommand command = new FilterCommand(keyPredicate, takenPredicate, false);
+        FilterCommand command = new FilterCourseCommand(keyPredicate, takenPredicate, false);
 
         String expectedMessage = String.format(FilterCommand.MESSAGE_SUCCESS, "\"First\"")
                 + String.format(FilterCommand.MESSAGE_PERSONS_FOUND_OVERVIEW, 2);
@@ -163,7 +164,7 @@ public class FilterCommandTest {
         CourseIsStillBeingTakenPredicate takenPredicate =
                 new CourseIsStillBeingTakenPredicate(LocalDate.ofYearDay(2000, 1));
 
-        FilterCommand command = new FilterCommand(keyPredicate, takenPredicate, false);
+        FilterCommand command = new FilterCourseCommand(keyPredicate, takenPredicate, false);
 
         String expectedMessage = String.format(FilterCommand.MESSAGE_SUCCESS, "\"Fourth\", \"Third\"")
                 + String.format(FilterCommand.MESSAGE_PERSONS_FOUND_OVERVIEW, 1);
@@ -186,7 +187,7 @@ public class FilterCommandTest {
         CourseIsStillBeingTakenPredicate takenPredicate =
                 new CourseIsStillBeingTakenPredicate(LocalDate.ofYearDay(2000, 10));
 
-        FilterCommand command = new FilterCommand(keyPredicate, takenPredicate, true);
+        FilterCommand command = new FilterCourseCommand(keyPredicate, takenPredicate, true);
 
         String expectedMessage = String.format(FilterCommand.MESSAGE_SUCCESS, "\"First\"")
                 + FilterCommand.MESSAGE_EXCL_FIN
@@ -218,7 +219,7 @@ public class FilterCommandTest {
         CourseIsStillBeingTakenPredicate takenPredicate =
                 new CourseIsStillBeingTakenPredicate(LocalDate.ofYearDay(2000, 10));
 
-        FilterCommand command = new FilterCommand(keyPredicate, takenPredicate, true);
+        FilterCommand command = new FilterCourseCommand(keyPredicate, takenPredicate, true);
 
         String expectedMessage = String.format(FilterCommand.MESSAGE_SUCCESS, "\"First\"")
                 + FilterCommand.MESSAGE_EXCL_FIN
@@ -247,7 +248,7 @@ public class FilterCommandTest {
         CourseIsStillBeingTakenPredicate takenPredicate =
                 new CourseIsStillBeingTakenPredicate(LocalDate.ofYearDay(2000, 1));
 
-        FilterCommand command = new FilterCommand(keyPredicate, takenPredicate, false);
+        FilterCommand command = new FilterCourseCommand(keyPredicate, takenPredicate, false);
 
         String expectedMessage = String.format(FilterCommand.MESSAGE_SUCCESS, "\"Fir\"")
                 + String.format(FilterCommand.MESSAGE_PERSONS_FOUND_OVERVIEW, 2);
