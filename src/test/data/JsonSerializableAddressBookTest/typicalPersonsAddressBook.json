@@ -42,22 +42,19 @@
               "name": "Lecture",
               "courseCode": "CS2103T",
               "dayOfWeek": "MONDAY",
-              "startTime": "10:00",
-              "endTime": "12:00"
+              "timeInterval" : "10:00-12:00"
             },
             {
               "name": "Tutorial",
               "courseCode": "CS2103T",
               "dayOfWeek": "TUESDAY",
-              "startTime": "10:00",
-              "endTime": "12:00"
+              "timeInterval" : "10:00-12:00"
             },
             {
               "name": "Laboratory",
               "courseCode": "CS2103T",
               "dayOfWeek": "WEDNESDAY",
-              "startTime": "10:00",
-              "endTime": "12:00"
+              "timeInterval" : "10:00-12:00"
             }
           ]
         }
@@ -67,8 +64,7 @@
           "name": "Tutorial",
           "courseCode": "CS2103T",
           "dayOfWeek": "TUESDAY",
-          "startTime": "10:00",
-          "endTime": "12:00"
+          "timeInterval" : "10:00-12:00"
         }
       ],
       "hour": "14"

@@ -13,6 +13,7 @@ import javafx.stage.Stage;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.Logic;
+import seedu.address.logic.commands.ClearTeachCommand;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -27,13 +28,13 @@ public class MainWindow extends UiPart<Stage> {
 
     private final Logger logger = LogsCenter.getLogger(getClass());
 
-    private Stage primaryStage;
-    private Logic logic;
+    private final Stage primaryStage;
+    private final Logic logic;
 
     // Independent Ui parts residing in this Ui container
     private PersonListPanel personListPanel;
     private ResultDisplay resultDisplay;
-    private HelpWindow helpWindow;
+    private final HelpWindow helpWindow;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -81,6 +82,7 @@ public class MainWindow extends UiPart<Stage> {
 
     /**
      * Sets the accelerator of a MenuItem.
+     *
      * @param keyCombination the KeyCombination value of the accelerator
      */
     private void setAccelerator(MenuItem menuItem, KeyCombination keyCombination) {
@@ -191,7 +193,12 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.isTeach()) {
                 String course = commandResult.getFeedbackToUser().split(" ")[0];
-                this.getRoot().setTitle("TAManager (" + course + ")");
+                String resetString = ClearTeachCommand.MESSAGE_SUCCESS.split(" ")[0];
+                if (course.equals(resetString)) {
+                    this.getRoot().setTitle("TAManager");
+                } else {
+                    this.getRoot().setTitle("TAManager (" + course + ")");
+                }
             }
 
             return commandResult;

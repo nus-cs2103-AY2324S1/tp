@@ -15,6 +15,7 @@ public class UserPrefs implements ReadOnlyUserPrefs {
 
     private GuiSettings guiSettings = new GuiSettings();
     private Path addressBookFilePath = Paths.get("data" , "addressbook.json");
+    private Path coursesFilePath = Paths.get("data" , "courses.json");
 
     private String teaching = "";
     /**
@@ -51,6 +52,10 @@ public class UserPrefs implements ReadOnlyUserPrefs {
 
     public Path getAddressBookFilePath() {
         return addressBookFilePath;
+    }
+
+    public Path getCoursesFilePath() {
+        return coursesFilePath;
     }
 
     public void setAddressBookFilePath(Path addressBookFilePath) {

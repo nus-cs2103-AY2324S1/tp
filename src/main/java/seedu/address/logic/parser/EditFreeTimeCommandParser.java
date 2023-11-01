@@ -35,7 +35,7 @@ public class EditFreeTimeCommandParser implements Parser<EditFreeTimeCommand> {
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
             dayOfWeek = Integer.parseInt(argMultimap.getValue(PREFIX_DAY).get());
-            if (dayOfWeek < 1 || dayOfWeek > 5 ) {
+            if (dayOfWeek < 1 || dayOfWeek > 5) {
                 throw new ParseException(EditFreeTimeCommand.MESSAGE_INVALID_DAY);
             }
             argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_FROM, PREFIX_TO, PREFIX_DAY);

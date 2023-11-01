@@ -12,7 +12,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.course.Course;
-import seedu.address.model.course.CourseData;
+import seedu.address.model.course.UniqueCourseList;
 import seedu.address.model.person.predicates.TeachingCoursePredicate;
 
 /**
@@ -22,7 +22,7 @@ import seedu.address.model.person.predicates.TeachingCoursePredicate;
 public class TeachCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
-    private final Course course = CourseData.getCourseList().get(0);
+    private final Course course = UniqueCourseList.getList().get(0);
 
     @Test
     public void execute_validCourse_success() {

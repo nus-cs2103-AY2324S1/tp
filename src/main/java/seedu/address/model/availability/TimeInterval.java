@@ -5,6 +5,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Objects;
 
 /**
  * Represents a period of time
@@ -87,5 +88,10 @@ public class TimeInterval {
         TimeInterval otherInterval = (TimeInterval) other;
 
         return from.equals(otherInterval.from) && to.equals(otherInterval.to);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(from, to);
     }
 }
