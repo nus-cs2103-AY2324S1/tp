@@ -118,10 +118,10 @@ public class AddressBookParser {
             return new ClearFilterCommand();
 
         case ExportTransactionCommand.COMMAND_WORD:
-            return new ExportTransactionCommand();
+            return new ExportTransactionParser().parse(arguments);
 
         case ImportTransactionCommand.COMMAND_WORD:
-            return new ImportTransactionCommand();
+            return new ImportTransactionParser().parse(arguments);
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);

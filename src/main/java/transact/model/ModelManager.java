@@ -99,6 +99,28 @@ public class ModelManager implements Model {
         userPrefs.setTransactionBookFilePath(transactionBookFilePath);
     }
 
+    @Override
+    public void setExportFilePath(Path path) {
+        requireAllNonNull(path);
+        userPrefs.setExportFilePath(path);
+    }
+
+    @Override
+    public Path getExportFilePath() {
+        return userPrefs.getExportFilePath();
+    }
+
+    @Override
+    public void setImportFilePath(Path path) {
+        requireAllNonNull(path);
+        userPrefs.setImportFilePath(path);
+    }
+
+    @Override
+    public Path getImportFilePath() {
+        return userPrefs.getImportFilePath();
+    }
+
     // =========== AddressBook
     // ================================================================================
 

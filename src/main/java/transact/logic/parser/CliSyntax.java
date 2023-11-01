@@ -24,5 +24,6 @@ public class CliSyntax {
     public static final Prefix PREFIX_MORE_THAN_AMOUNT = new Prefix("more/");
     public static final Prefix PREFIX_LESS_THAN_AMOUNT = new Prefix("less/");
     public static final Prefix PREFIX_BY_PERSON = new Prefix("by/");
+    public static final Prefix PREFIX_DIRECTORY = new Prefix("f/");
 
 }

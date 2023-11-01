@@ -1,5 +1,6 @@
 package transact.ui;
 
+import java.io.File;
 import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
@@ -9,6 +10,8 @@ import javafx.scene.control.TabPane;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
+import javafx.stage.DirectoryChooser;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import transact.MainApp;
 import transact.commons.core.GuiSettings;
@@ -23,16 +26,11 @@ import transact.logic.parser.exceptions.ParseException;
  * a menu bar and space where other JavaFX elements can be placed.
  */
 public class MainWindow extends UiPart<Stage> {
-
     private static final String FXML = "MainWindow.fxml";
-
     private static final String USER_GUIDE_URL = "https://ay2324s1-cs2103t-w13-3.github.io/tp/UserGuide.html";
-
     private final Logger logger = LogsCenter.getLogger(getClass());
-
     private Stage primaryStage;
     private Logic logic;
-
     // Independent Ui parts residing in this Ui container
     private OverviewPanel overviewPanel;
     private TransactionTablePanel transactionTablePanel;
@@ -48,19 +46,14 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private MenuItem userGuideMenuItem;
-
     @FXML
     private TabPane tabPane;
-
     @FXML
     private Tab overviewTab;
-
     @FXML
     private Tab cardListTab;
-
     @FXML
     private Tab transactionTab;
-
     @FXML
     private VBox bottomBar;
 
@@ -94,8 +87,7 @@ public class MainWindow extends UiPart<Stage> {
     /**
      * Sets the accelerator of a MenuItem.
      *
-     * @param keyCombination
-     *            the KeyCombination value of the accelerator
+     * @param keyCombination the KeyCombination value of the accelerator
      */
     private void setAccelerator(MenuItem menuItem, KeyCombination keyCombination) {
         menuItem.setAccelerator(keyCombination);
@@ -104,8 +96,7 @@ public class MainWindow extends UiPart<Stage> {
     /**
      * Switch tabs. If tabWindow is set to current, do nothing.
      *
-     * @param tabWindow
-     *            The tab to switch to
+     * @param tabWindow The tab to switch to
      */
     void switchTab(TabWindow tabWindow) {
         if (tabWindow != TabWindow.CURRENT) {
@@ -216,16 +207,25 @@ public class MainWindow extends UiPart<Stage> {
      */
     @FXML
     private void handleExportTransactions() throws CommandException, ParseException {
-        String commandText = "exporttransactions";
-        try {
-            CommandResult commandResult = logic.execute(commandText);
-            logger.info("Result: " + commandResult.getFeedbackToUser());
-            resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
-            switchTab(commandResult.getTabWindow());
-        } catch (CommandException | ParseException e) {
-            logger.info("An error occurred while executing command: " + commandText);
-            resultDisplay.setFeedbackToUser(e.getMessage());
-            throw e;
+        DirectoryChooser directoryChooser = new DirectoryChooser();
+        directoryChooser.setTitle("Choose Directory to Export Transactions");
+
+        // Show the directory chooser dialog
+        File selectedDirectory = directoryChooser.showDialog(primaryStage);
+
+        if (selectedDirectory != null) {
+            String chosenDirectoryPath = selectedDirectory.getAbsolutePath();
+            String commandText = "exporttransactions f/" + chosenDirectoryPath;
+            try {
+                CommandResult commandResult = logic.execute(commandText);
+                logger.info("Result: " + commandResult.getFeedbackToUser());
+                resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
+                switchTab(commandResult.getTabWindow());
+            } catch (CommandException | ParseException e) {
+                logger.info("An error occurred while executing command: " + commandText);
+                resultDisplay.setFeedbackToUser(e.getMessage());
+                throw e;
+            }
         }
     }
 
@@ -234,16 +234,31 @@ public class MainWindow extends UiPart<Stage> {
      */
     @FXML
     private void handleImportTransactions() throws CommandException, ParseException {
-        String commandText = "importtransactions";
-        try {
-            CommandResult commandResult = logic.execute(commandText);
-            logger.info("Result: " + commandResult.getFeedbackToUser());
-            resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
-            switchTab(commandResult.getTabWindow());
-        } catch (CommandException | ParseException e) {
-            logger.info("An error occurred while executing command: " + commandText);
-            resultDisplay.setFeedbackToUser(e.getMessage());
-            throw e;
+        // Create a FileChooser
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Choose File to Import");
+
+        // Set a file extension filter (optional) to restrict the type of files the user can select
+        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("CSV Files (*.csv)", "*.csv");
+        fileChooser.getExtensionFilters().add(extFilter);
+
+        // Show the file chooser dialog
+        File selectedFile = fileChooser.showOpenDialog(primaryStage);
+
+        if (selectedFile != null) {
+            String chosenFilePath = selectedFile.getAbsolutePath();
+            String commandText = "importtransactions f/" + chosenFilePath;
+
+            try {
+                CommandResult commandResult = logic.execute(commandText);
+                logger.info("Result: " + commandResult.getFeedbackToUser());
+                resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
+                switchTab(commandResult.getTabWindow());
+            } catch (CommandException | ParseException e) {
+                logger.info("An error occurred while executing command: " + commandText);
+                resultDisplay.setFeedbackToUser(e.getMessage());
+                throw e;
+            }
         }
     }
 

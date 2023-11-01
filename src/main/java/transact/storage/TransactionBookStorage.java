@@ -17,15 +17,6 @@ public interface TransactionBookStorage {
      */
     Path getTransactionBookFilePath();
 
-    /**
-     * Returns the file path of the import file.
-     */
-    Path getImportTransactionsFilePath();
-
-    /**
-     * Returns the file path of the export file.
-     */
-    Path getExportTransactionsFilePath();
 
     /**
      * Returns transaction log data as a {@link ReadOnlyTransactionBook}.

@@ -30,35 +30,19 @@ import transact.model.transaction.info.TransactionType;
 public class CsvAdaptedTransactionStorage implements TransactionBookStorage {
 
     private Path filePath;
-    private Path exportFilePath;
-    private Path importFilePath;
 
     /**
      * Creates CsvAdaptedTransactionStorage Object
      *
      * @param filePath for storage data
-     * @param importFilePath
-     * @param exportFilePath
      */
-    public CsvAdaptedTransactionStorage(Path filePath, Path importFilePath, Path exportFilePath) {
+    public CsvAdaptedTransactionStorage(Path filePath) {
         this.filePath = filePath;
-        this.importFilePath = importFilePath;
-        this.exportFilePath = exportFilePath;
     }
 
     @Override
     public Path getTransactionBookFilePath() {
         return filePath;
-    }
-
-    @Override
-    public Path getImportTransactionsFilePath() {
-        return importFilePath;
-    }
-
-    @Override
-    public Path getExportTransactionsFilePath() {
-        return exportFilePath;
     }
 
     @Override

@@ -50,7 +50,7 @@ public class LogicManagerTest {
         JsonAddressBookStorage addressBookStorage = new JsonAddressBookStorage(
                 temporaryFolder.resolve("addressBook.json"));
         CsvAdaptedTransactionStorage transactionBookStorage = new CsvAdaptedTransactionStorage(
-                temporaryFolder.resolve("transactionBook.csv"), temporaryFolder.resolve("importTransactionBook.csv"), temporaryFolder.resolve("exportTransactionBook.csv"));
+                temporaryFolder.resolve("transactionBook.csv"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(temporaryFolder.resolve("userPrefs.json"));
         StorageManager storage = new StorageManager(addressBookStorage, transactionBookStorage, userPrefsStorage);
         logic = new LogicManager(model, storage);
@@ -184,8 +184,7 @@ public class LogicManagerTest {
         };
 
         CsvAdaptedTransactionStorage transactionBookStorage = new CsvAdaptedTransactionStorage(
-                temporaryFolder.resolve("ExceptionTransactionBook.csv"), temporaryFolder.resolve("importTransactionBook.csv"),
-                temporaryFolder.resolve("exportTransactionBook.csv")) {
+                temporaryFolder.resolve("ExceptionTransactionBook.csv")) {
             @Override
             public void saveTransactionBook(ReadOnlyTransactionBook transactionBook)
                     throws IOException {
