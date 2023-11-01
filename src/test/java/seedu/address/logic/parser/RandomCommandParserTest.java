@@ -7,31 +7,30 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSucces
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.RandomCommand;
 
 /**
  * Tests RandomCommandParser.
  */
 public class RandomCommandParserTest {
+    public static final String MESSAGE_INVALID_FORMAT = String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+        RandomCommand.MESSAGE_USAGE);
+
     private RandomCommandParser parser = new RandomCommandParser();
 
     @Test
     public void parse_emptyArg_throwsParseException() {
-        assertParseFailure(parser, "",
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, RandomCommand.MESSAGE_USAGE));
-        assertParseFailure(parser, "     ",
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, RandomCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "", MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, "     ", MESSAGE_INVALID_FORMAT);
     }
 
     @Test
     public void parse_validArgs_returnsRandomCommand() {
-        int i = 1;
-        assertParseSuccess(parser, " " + i, new RandomCommand(Index.fromOneBased(i)));
+        assertParseSuccess(parser, "1", new RandomCommand(1));
     }
 
     @Test
-    public void parse_invalidIndex_throwsParseException() {
-        assertParseFailure(parser, STUDENT_NUMBER_DESC_BOB, ParserUtil.MESSAGE_INVALID_INDEX);
+    public void parse_invalidNumOfStudent_throwsParseException() {
+        assertParseFailure(parser, STUDENT_NUMBER_DESC_BOB, MESSAGE_INVALID_FORMAT);
     }
 }
