@@ -20,6 +20,7 @@ import seedu.flashlingo.logic.commands.FindCommand;
 import seedu.flashlingo.logic.commands.HelpCommand;
 import seedu.flashlingo.logic.commands.LanguageCommand;
 import seedu.flashlingo.logic.commands.ListCommand;
+import seedu.flashlingo.logic.commands.LoadCommand;
 import seedu.flashlingo.logic.commands.NoCommand;
 import seedu.flashlingo.logic.commands.RevealCommand;
 import seedu.flashlingo.logic.commands.ReviewCommand;
@@ -114,6 +115,8 @@ public class FlashlingoParser {
             return new SwitchCommand();
         case RevealCommand.COMMAND_WORD:
             throw new ParseException(MESSAGE_NOT_IN_REVIEW_SESSION);
+        case LoadCommand.COMMAND_WORD:
+            return new LoadCommandParser().parse(arguments);
         default:
             logger.finer("This user input caused a ParseException: " + userInput);
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.flashlingo.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.flashlingo.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.flashlingo.testutil.Assert.assertThrows;
+import static seedu.flashlingo.testutil.TestUtil.SANDBOX_FOLDER;
 import static seedu.flashlingo.testutil.TypicalIndexes.INDEX_FIRST_FLASHCARD;
 
 import org.junit.jupiter.api.Test;
@@ -14,6 +15,7 @@ import seedu.flashlingo.logic.commands.DeleteCommand;
 import seedu.flashlingo.logic.commands.ExitCommand;
 import seedu.flashlingo.logic.commands.HelpCommand;
 import seedu.flashlingo.logic.commands.ListCommand;
+import seedu.flashlingo.logic.commands.LoadCommand;
 import seedu.flashlingo.logic.parser.exceptions.ParseException;
 import seedu.flashlingo.model.flashcard.FlashCard;
 import seedu.flashlingo.testutil.FlashCardBuilder;
@@ -53,6 +55,11 @@ public class FlashlingoParserTest {
     public void parseCommand_list() throws Exception {
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD) instanceof ListCommand);
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " 3") instanceof ListCommand);
+    }
+
+    @Test
+    public void parseCommand_load() throws Exception {
+        assertTrue(parser.parseCommand(LoadCommand.COMMAND_WORD + " " + SANDBOX_FOLDER) instanceof LoadCommand);
     }
 
     @Test
