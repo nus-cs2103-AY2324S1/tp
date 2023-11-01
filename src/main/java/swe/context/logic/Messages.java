@@ -31,8 +31,8 @@ public final class Messages {
     public static final String COMMAND_EXIT_SUCCESS = "Exiting app...";
     public static final String INVALID_DELETE_INDEX =
             "One or more of the contact indices provided are invalid";
-    public static final String INVALID_EDIT_INDEX =
-            "The contact index provided is invalid";
+    public static final String INVALID_EDIT_INDEX = "The contact index provided is invalid";
+    public static final String INVALID_PARSER_INDEX = "Index is not a non-zero unsigned integer.";
 
     // Contacts
     // Messages associated with Attributes constraints
