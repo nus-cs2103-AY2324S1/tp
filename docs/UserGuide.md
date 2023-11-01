@@ -479,3 +479,5 @@ Format: `theme`
 * **Email**: Any valid email address, such as NUS email address (eXXXXXXX@u.nus.edu).
 * **CLI**: Command Line Interface.
 * **GUI**: Graphical User Interface.
+* **JSON**: JavaScript Object Notation, a lightweight data-interchange format.
+* **JAR**: Java Archive, a package file format typically used to aggregate many Java class files and associated metadata and resources (text, images, etc.) into one file to distribute application software or libraries on the Java platform.
