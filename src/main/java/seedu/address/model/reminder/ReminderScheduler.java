@@ -22,11 +22,11 @@ public class ReminderScheduler extends Thread {
 
     private Logger logger = LogsCenter.getLogger(ReminderScheduler.class);
 
-    //This is defensive programming to prevent multiple ReminderManager from running
+    //This is defensive programming to prevent multiple ReminderScheduler from running
     private boolean isRunning = false;
 
     /**
-     * Creates a ReminderManager object.
+     * Creates a ReminderScheduler object.
      *
      * @param taskQueue
      * @param reminderMutex
@@ -50,7 +50,7 @@ public class ReminderScheduler extends Thread {
         LocalDateTime nextMidnight = LocalDateTime.of(LocalDate.now().plusDays(1), LocalTime.MIDNIGHT);
         long initialDelay = ChronoUnit.MILLIS.between(now, nextMidnight);
 
-        // Start the scheduler to wake up the ReminderManager occasionally
+        // Start the scheduler to wake up the ReminderScheduler occasionally
         ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
         scheduler.scheduleAtFixedRate(() -> {
             synchronized (mutex) {
@@ -65,13 +65,13 @@ public class ReminderScheduler extends Thread {
             synchronized (mutex) {
                 try {
                     mutex.wait();
-                    logger.info("ReminderManager thread woken up");
+                    logger.info("ReminderScheduler thread woken up");
                     //TODO: @zhyuhan Rather than changing the reminderlist which could cause thread access issues
                     //(ie someone just nice update the reminderlist at the same time)),
                     //Change this to just update the Dashboard/Reminder UI with reminders after for the new day
                     model.getReminderList().updateReminders();
                 } catch (InterruptedException e) {
-                    logger.info("ReminderManager thread interrupted");
+                    logger.info("ReminderScheduler thread interrupted");
 
                 }
             }
