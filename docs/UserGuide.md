@@ -778,7 +778,24 @@ As an experienced user, you should be aware of the dangers of the `clear` comman
 
 #### Help: `help`
 
-More details coming soon...
+Opens a window with instructions for getting help.
+
+**Scenario**
+
+Unsure on how to use a command or encounter an unknown error?
+
+Get help from within the app by using the help command!
+
+**Follow these steps**
+
+Type in `help` and press enter.
+
+**What you can expect to see**
+
+Is that a bird? Is that a plane?
+Nope it's the help window!
+
+![help window](images/helpWindow.png)
 
 <div markdown="block" class="alert alert-success">
 
