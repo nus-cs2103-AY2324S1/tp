@@ -65,7 +65,8 @@ public class InterviewDeleteCommand extends InterviewCommand {
 
         jobToDeleteInterview.deleteInterview(interviewIndex);
         model.updateFilteredJobList(Model.PREDICATE_SHOW_ALL_JOBS);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(jobToDeleteInterview)));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(jobToDeleteInterview)),
+                false, false, jobIndex);
     }
 
     /**

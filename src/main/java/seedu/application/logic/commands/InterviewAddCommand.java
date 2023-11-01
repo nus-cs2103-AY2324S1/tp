@@ -53,7 +53,8 @@ public class InterviewAddCommand extends InterviewCommand {
 
         jobToAddInterview.addInterview(toAdd);
         model.updateFilteredJobList(Model.PREDICATE_SHOW_ALL_JOBS);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)), false,
+                false, index);
     }
 
     @Override
