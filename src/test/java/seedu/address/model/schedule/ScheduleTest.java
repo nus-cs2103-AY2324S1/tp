@@ -34,6 +34,14 @@ class ScheduleTest {
     @Test
     public void constructor_startTimeAfterEndTime_throwsIllegalArgumentException() {
         assertThrows(IllegalArgumentException.class, () -> new ScheduleBuilder()
+                .withStartTime(LocalDateTime.of(2023, 1, 1, 10, 0, 0))
+                .withEndTime(LocalDateTime.of(2023, 1, 1, 0, 0, 0))
+                .build());
+    }
+
+    @Test
+    public void constructor_differentDayStartTimeAndEndTime_throwsIllegalArgumentException() {
+        assertThrows(IllegalArgumentException.class, () -> new ScheduleBuilder()
                 .withStartTime(LocalDateTime.of(2023, 1, 2, 0, 0, 0))
                 .withEndTime(LocalDateTime.of(2023, 1, 1, 0, 0, 0))
                 .build());
