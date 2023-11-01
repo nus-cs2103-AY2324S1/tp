@@ -19,6 +19,7 @@ public class ClearCommand extends Command {
         requireNonNull(model);
         model.setAddressBook(new AddressBook());
         model.setScheduleList(new ScheduleList());
+        model.updateFullTaskList();
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }
