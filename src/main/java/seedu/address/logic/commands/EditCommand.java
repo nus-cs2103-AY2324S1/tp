@@ -39,6 +39,7 @@ import seedu.address.model.policy.Company;
 import seedu.address.model.policy.Policy;
 import seedu.address.model.policy.PolicyDate;
 import seedu.address.model.policy.PolicyNumber;
+import seedu.address.model.person.Remark;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -126,10 +127,11 @@ public class EditCommand extends Command {
         Nric updatedNric = editPersonDescriptor.getNric().orElse(personToEdit.getNric());
         LicencePlate updatedLicencePlate =
                 editPersonDescriptor.getLicencePlate().orElse(personToEdit.getLicencePlate());
+        Remark updatedRemark = personToEdit.getRemark(); // edit command does not allow editing remarks
         Policy updatedPolicy = getUpdatedPolicy(personToEdit, editPersonDescriptor);
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, updatedNric,
-                updatedLicencePlate, updatedPolicy);
+                updatedLicencePlate, updatedRemark, updatedPolicy);
     }
 
     private static Policy getUpdatedPolicy(Person personToEdit, EditPersonDescriptor editPersonDescriptor) {

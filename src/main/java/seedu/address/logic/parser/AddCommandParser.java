@@ -32,6 +32,7 @@ import seedu.address.model.policy.Company;
 import seedu.address.model.policy.Policy;
 import seedu.address.model.policy.PolicyDate;
 import seedu.address.model.policy.PolicyNumber;
+import seedu.address.model.person.Remark;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -87,6 +88,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         LicencePlate licencePlate = ParserUtil.parseLicencePlate(argMultimap.getValue(PREFIX_LICENCE_PLATE).get());
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
+        Remark remark = new Remark("");
 
         if (!arePrefixesAbsent(argMultimap, PREFIX_COMPANY, PREFIX_POLICY_NUMBER, PREFIX_POLICY_ISSUE_DATE,
                 PREFIX_POLICY_EXPIRY_DATE)) {
@@ -127,7 +129,7 @@ public class AddCommandParser implements Parser<AddCommand> {
 
         Policy policy = new Policy(company, policyNumber, policyIssueDate, policyExpiryDate);
 
-        Person person = new Person(name, phone, email, address, tagList, nric, licencePlate, policy);
+        Person person = new Person(name, phone, email, address, tagList, nric, licencePlate, remark, policy);
 
         return new AddCommand(person);
     }

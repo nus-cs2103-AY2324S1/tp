@@ -21,6 +21,7 @@ import seedu.address.model.policy.Company;
 import seedu.address.model.policy.Policy;
 import seedu.address.model.policy.PolicyDate;
 import seedu.address.model.policy.PolicyNumber;
+import seedu.address.model.person.Remark;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -37,6 +38,7 @@ class JsonAdaptedPerson {
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
     private final String nric;
     private final String licencePlate;
+    private final String remark;
     private final String company;
     private final String policyNumber;
     private final String policyIssueDate;
@@ -49,7 +51,8 @@ class JsonAdaptedPerson {
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("address") String address,
             @JsonProperty("tags") List<JsonAdaptedTag> tags, @JsonProperty("nric") String nric,
-            @JsonProperty("licencePlate") String licencePlate, @JsonProperty("company") String company,
+            @JsonProperty("licencePlate") String licencePlate, @JsonProperty("remark") String remark,
+            @JsonProperty("company") String company,
             @JsonProperty("policyNumber") String policyNumber,
             @JsonProperty("policyIssueDate") String policyIssueDate,
             @JsonProperty("policyExpiryDate") String policyExpiryDate) {
@@ -62,6 +65,7 @@ class JsonAdaptedPerson {
         }
         this.nric = nric;
         this.licencePlate = licencePlate;
+        this.remark = remark;
         this.company = company;
         this.policyNumber = policyNumber;
         this.policyIssueDate = policyIssueDate;
@@ -81,6 +85,7 @@ class JsonAdaptedPerson {
                 .collect(Collectors.toList()));
         nric = source.getNric().value;
         licencePlate = source.getLicencePlate().value;
+        remark = source.getRemark().value;
         Policy sourcePolicy = source.getPolicy();
         company = sourcePolicy.getCompany().value;
         policyNumber = sourcePolicy.getPolicyNumber().value;
@@ -130,6 +135,9 @@ class JsonAdaptedPerson {
             throw new IllegalValueException(Address.MESSAGE_CONSTRAINTS);
         }
         final Address modelAddress = new Address(address);
+        if (remark == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Remark.class.getSimpleName()));
+        }
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
 
@@ -150,6 +158,8 @@ class JsonAdaptedPerson {
             throw new IllegalValueException(LicencePlate.MESSAGE_CONSTRAINTS);
         }
         final LicencePlate modelLicencePlate = new LicencePlate(licencePlate);
+
+        final Remark modelRemark = new Remark(remark);
 
         // Policy fields
         if (company == null) {
@@ -196,7 +206,7 @@ class JsonAdaptedPerson {
         );
 
         return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags,
-                modelNric, modelLicencePlate, modelPolicy);
+                modelNric, modelLicencePlate, modelRemark, modelPolicy);
     }
 
 }

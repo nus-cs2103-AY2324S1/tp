@@ -29,14 +29,14 @@ public class Person {
     private final Nric nric;
     private final LicencePlate licencePlate;
     private final Policy policy;
-
+    private final Remark remark;
     /**
      * Every field must be present and not null.
      * In the case of leads with null policy fields, default values will be put in place by the respective classes.
      */
     public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags, Nric nric,
-                  LicencePlate licencePlate, Policy policy) {
-        requireAllNonNull(name, phone, email, nric, licencePlate, address, tags, policy);
+                  LicencePlate licencePlate, Remark remark, Policy policy) {
+        requireAllNonNull(name, phone, email, nric, licencePlate, address, tags, remark, policy);
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -45,6 +45,7 @@ public class Person {
         this.nric = nric;
         this.licencePlate = licencePlate;
         this.policy = policy;
+        this.remark = remark;
     }
 
     public Name getName() {
@@ -81,6 +82,10 @@ public class Person {
 
     public Policy getPolicy() {
         return policy;
+    }
+
+    public Remark getRemark() {
+        return remark;
     }
 
     /**
@@ -135,13 +140,14 @@ public class Person {
                 && tags.equals(otherPerson.tags)
                 && nric.equals(otherPerson.nric)
                 && licencePlate.equals(otherPerson.licencePlate)
-                && policy.equals(otherPerson.policy);
+                && policy.equals(otherPerson.policy)
+                && remark.equals(otherPerson.remark);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags, nric, licencePlate, policy);
+        return Objects.hash(name, phone, email, address, tags, nric, licencePlate, remark, policy);
     }
 
     @Override
@@ -154,6 +160,7 @@ public class Person {
                 .add("tags", tags)
                 .add("nric", nric)
                 .add("licence plate", licencePlate)
+                .add("remark", remark)
                 .add("policy", policy)
                 .toString();
     }

@@ -34,6 +34,7 @@
       <Label fx:id="nric" styleClass="cell_small_label" text="\$nric" />
       <Label fx:id="licencePlate" styleClass="cell_small_label" text="\$licensePlate" />
       <Label fx:id="policy" styleClass="cell_small_label" text="\${policy}" />
+      <Label fx:id="remark" styleClass="cell_small_label" text="\$remark" />
     </VBox>
   </GridPane>
 </HBox>

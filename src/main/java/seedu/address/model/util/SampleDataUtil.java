@@ -17,12 +17,15 @@ import seedu.address.model.policy.Company;
 import seedu.address.model.policy.Policy;
 import seedu.address.model.policy.PolicyDate;
 import seedu.address.model.policy.PolicyNumber;
+import seedu.address.model.person.Remark;
 import seedu.address.model.tag.Tag;
 
 /**
  * Contains utility methods for populating {@code AddressBook} with sample data.
  */
 public class SampleDataUtil {
+    public static final Remark EMPTY_REMARK = new Remark("");
+
     public static Person[] getSamplePersons() {
         return new Person[]{
             new Person(
@@ -33,6 +36,7 @@ public class SampleDataUtil {
                 getTagSet("friends"),
                 new Nric("023A"),
                 new LicencePlate("SNB9538E"),
+                EMPTY_REMARK,
                 new Policy(
                     new Company("NTUC"),
                     new PolicyNumber("A1231X"),
@@ -48,6 +52,7 @@ public class SampleDataUtil {
                 getTagSet("colleagues", "friends"),
                 new Nric("362D"),
                 new LicencePlate("SLR5E"),
+                EMPTY_REMARK,
                 new Policy(
                     new Company("InsureMe"),
                     new PolicyNumber("B3425"),
@@ -63,6 +68,7 @@ public class SampleDataUtil {
                 getTagSet("neighbours"),
                 new Nric("743G"),
                 new LicencePlate("SBA1234A"),
+                EMPTY_REMARK,
                 new Policy(
                     new Company("NTUC"),
                     new PolicyNumber("B3425"),
@@ -78,6 +84,7 @@ public class SampleDataUtil {
                 getTagSet("family"),
                 new Nric("362D"),
                 new LicencePlate("SDN5345A"),
+                EMPTY_REMARK,
                 new Policy(
                     new Company(Company.DEFAULT_VALUE),
                     new PolicyNumber(PolicyNumber.DEFAULT_VALUE),
@@ -93,6 +100,7 @@ public class SampleDataUtil {
                 getTagSet("classmates"),
                 new Nric("752X"),
                 new LicencePlate("SBP8888T"),
+                EMPTY_REMARK,
                 new Policy(
                     new Company(Company.DEFAULT_VALUE),
                     new PolicyNumber(PolicyNumber.DEFAULT_VALUE),
@@ -108,6 +116,7 @@ public class SampleDataUtil {
                 getTagSet("colleagues"),
                 new Nric("764J"),
                 new LicencePlate("SJD6453Y"),
+                EMPTY_REMARK,
                 new Policy(
                     new Company(Company.DEFAULT_VALUE),
                     new PolicyNumber(PolicyNumber.DEFAULT_VALUE),
@@ -123,6 +132,7 @@ public class SampleDataUtil {
                 getTagSet("colleagues"),
                 new Nric("456B"),
                 new LicencePlate("SGP5678Y"),
+                EMPTY_REMARK,
                 new Policy(
                     new Company("ABC Insurance"),
                     new PolicyNumber("RS67890"),
@@ -138,6 +148,7 @@ public class SampleDataUtil {
                 getTagSet("friends"),
                 new Nric("567C"),
                 new LicencePlate("SGP6789Z"),
+                EMPTY_REMARK,
                 new Policy(
                     new Company("XYZ Insurance"),
                     new PolicyNumber("TP12345"),
@@ -153,6 +164,7 @@ public class SampleDataUtil {
                 getTagSet("neighbors"),
                 new Nric("123A"),
                 new LicencePlate("SGP1234A"),
+                EMPTY_REMARK,
                 new Policy(
                     new Company("PQR Insurance"),
                     new PolicyNumber("XY123456"),
@@ -168,6 +180,7 @@ public class SampleDataUtil {
                 getTagSet("friends", "colleagues"),
                 new Nric("234B"),
                 new LicencePlate("SGP2345B"),
+                    EMPTY_REMARK,
                 new Policy(
                     new Company("LMN Insurance"),
                     new PolicyNumber("YZ345678"),
@@ -183,6 +196,7 @@ public class SampleDataUtil {
                 getTagSet("friends", "shopping"),
                 new Nric("567C"),
                 new LicencePlate("SGP5678C"),
+                EMPTY_REMARK,
                 new Policy(
                     new Company("ABC Insurance"),
                     new PolicyNumber("ZA987654"),
@@ -198,6 +212,7 @@ public class SampleDataUtil {
                 getTagSet("neighbors"),
                 new Nric("789E"),
                 new LicencePlate("SGP7890E"),
+                EMPTY_REMARK,
                 new Policy(
                     new Company("DEF Insurance"),
                     new PolicyNumber("UT678901"),
@@ -213,6 +228,7 @@ public class SampleDataUtil {
                 getTagSet("friends", "gaming"),
                 new Nric("890F"),
                 new LicencePlate("SGP8901A"),
+                EMPTY_REMARK,
                 new Policy(
                     new Company("GHI Insurance"),
                     new PolicyNumber("SR123456"),
@@ -228,6 +244,7 @@ public class SampleDataUtil {
                 getTagSet("family", "shopping"),
                 new Nric("901G"),
                 new LicencePlate("SGP9012G"),
+                EMPTY_REMARK,
                 new Policy(
                     new Company("JKL Insurance"),
                     new PolicyNumber("QP654321"),
@@ -243,6 +260,7 @@ public class SampleDataUtil {
                 getTagSet("colleagues"),
                 new Nric("012H"),
                 new LicencePlate("SGP0123H"),
+                EMPTY_REMARK,
                 new Policy(
                     new Company("MNO Insurance"),
                     new PolicyNumber("ST987654"),
@@ -258,6 +276,7 @@ public class SampleDataUtil {
                 getTagSet("friends", "travel"),
                 new Nric("345K"),
                 new LicencePlate("SGP3456K"),
+                EMPTY_REMARK,
                 new Policy(
                     new Company("PQR Insurance"),
                     new PolicyNumber("XZ123456"),
@@ -273,6 +292,7 @@ public class SampleDataUtil {
                 getTagSet("family", "movies"),
                 new Nric("456L"),
                 new LicencePlate("SGP4567L"),
+                EMPTY_REMARK,
                 new Policy(
                     new Company("GHI Insurance"),
                     new PolicyNumber("YX654321"),
@@ -288,6 +308,7 @@ public class SampleDataUtil {
                 getTagSet("neighbors", "reading"),
                 new Nric("567M"),
                 new LicencePlate("SGP5678M"),
+                EMPTY_REMARK,
                 new Policy(
                     new Company("JKL Insurance"),
                     new PolicyNumber("WV987654"),
@@ -303,6 +324,7 @@ public class SampleDataUtil {
                 getTagSet("friends", "sports"),
                 new Nric("678N"),
                 new LicencePlate("SGP6789B"),
+                EMPTY_REMARK,
                 new Policy(
                     new Company("ABC Insurance"),
                     new PolicyNumber("AB123456"),
@@ -318,6 +340,7 @@ public class SampleDataUtil {
                 getTagSet("family", "cooking"),
                 new Nric("789P"),
                 new LicencePlate("SGP7890P"),
+                EMPTY_REMARK,
                 new Policy(
                     new Company("XYZ Insurance"),
                     new PolicyNumber("ZY654321"),
@@ -333,6 +356,7 @@ public class SampleDataUtil {
                 getTagSet("neighbors", "gardening"),
                 new Nric("890Q"),
                 new LicencePlate("SGP8901X"),
+                EMPTY_REMARK,
                 new Policy(
                     new Company("MNO Insurance"),
                     new PolicyNumber("MN987654"),
@@ -348,6 +372,7 @@ public class SampleDataUtil {
                 getTagSet("friends", "reading"),
                 new Nric("901R"),
                 new LicencePlate("SGP9012R"),
+                EMPTY_REMARK,
                 new Policy(
                     new Company("EFG Insurance"),
                     new PolicyNumber("EF123456"),
@@ -363,6 +388,7 @@ public class SampleDataUtil {
                 getTagSet("colleagues", "travel"),
                 new Nric("012S"),
                 new LicencePlate("SGP0123S"),
+                EMPTY_REMARK,
                 new Policy(
                     new Company("PQR Insurance"),
                     new PolicyNumber("PQ987654"),
@@ -378,6 +404,7 @@ public class SampleDataUtil {
                 getTagSet("neighbors", "cooking"),
                 new Nric("345T"),
                 new LicencePlate("SGP3456T"),
+                EMPTY_REMARK,
                 new Policy(
                     new Company(Company.DEFAULT_VALUE),
                     new PolicyNumber(PolicyNumber.DEFAULT_VALUE),
@@ -393,6 +420,7 @@ public class SampleDataUtil {
                 getTagSet("neighbors", "sewing"),
                 new Nric("901F"),
                 new LicencePlate("SGP9012G"),
+                EMPTY_REMARK,
                 new Policy(
                     new Company("DEF Insurance"),
                     new PolicyNumber("DE123456"),
@@ -408,6 +436,7 @@ public class SampleDataUtil {
                 getTagSet("friends", "gaming"),
                 new Nric("567Y"),
                 new LicencePlate("SGP5678E"),
+                EMPTY_REMARK,
                 new Policy(
                     new Company(Company.DEFAULT_VALUE),
                     new PolicyNumber(PolicyNumber.DEFAULT_VALUE),
@@ -423,6 +452,7 @@ public class SampleDataUtil {
                 getTagSet("neighbors", "gardening"),
                 new Nric("901C"),
                 new LicencePlate("SGP9012Z"),
+                EMPTY_REMARK,
                 new Policy(
                     new Company("GHI Insurance"),
                     new PolicyNumber("GH123456"),
@@ -438,6 +468,7 @@ public class SampleDataUtil {
                 getTagSet("friends", "reading"),
                 new Nric("234D"),
                 new LicencePlate("SGP2345E"),
+                EMPTY_REMARK,
                 new Policy(
                     new Company("JKL Insurance"),
                     new PolicyNumber("JK123456"),
@@ -453,6 +484,7 @@ public class SampleDataUtil {
                 getTagSet("friends", "fitness"),
                 new Nric("678G"),
                 new LicencePlate("SGP6789H"),
+                EMPTY_REMARK,
                 new Policy(
                     new Company(Company.DEFAULT_VALUE),
                     new PolicyNumber(PolicyNumber.DEFAULT_VALUE),
@@ -468,6 +500,7 @@ public class SampleDataUtil {
                 getTagSet("friends", "cooking"),
                 new Nric("567L"),
                 new LicencePlate("SGP5678M"),
+                EMPTY_REMARK,
                 new Policy(
                     new Company("UVW Insurance"),
                     new PolicyNumber("UV123456"),
@@ -483,6 +516,7 @@ public class SampleDataUtil {
                 getTagSet("neighbors", "reading"),
                 new Nric("789M"),
                 new LicencePlate("SGP7890H"),
+                EMPTY_REMARK,
                 new Policy(
                     new Company("WXY Insurance"),
                     new PolicyNumber("WX123456"),
@@ -498,6 +532,7 @@ public class SampleDataUtil {
                 getTagSet("neighbors", "cooking"),
                 new Nric("901S"),
                 new LicencePlate("SGP9012T"),
+                EMPTY_REMARK,
                 new Policy(
                     new Company("DEF Insurance"),
                     new PolicyNumber("DE123456"),
@@ -513,6 +548,7 @@ public class SampleDataUtil {
                 getTagSet("family", "movies"),
                 new Nric("234U"),
                 new LicencePlate("SGP2345X"),
+                EMPTY_REMARK,
                 new Policy(
                     new Company(Company.DEFAULT_VALUE),
                     new PolicyNumber(PolicyNumber.DEFAULT_VALUE),
@@ -528,6 +564,7 @@ public class SampleDataUtil {
                 getTagSet("friends", "cricket"),
                 new Nric("345E"),
                 new LicencePlate("SGP3456J"),
+                EMPTY_REMARK,
                 new Policy(
                     new Company("PQR Insurance"),
                     new PolicyNumber("PQ123456"),
@@ -543,6 +580,7 @@ public class SampleDataUtil {
                 getTagSet("friends", "gaming"),
                 new Nric("901V"),
                 new LicencePlate("SGP9012H"),
+                EMPTY_REMARK,
                 new Policy(
                     new Company("WXY Insurance"),
                     new PolicyNumber("WX123456"),
@@ -558,6 +596,7 @@ public class SampleDataUtil {
                 getTagSet("neighbors", "music"),
                 new Nric("567W"),
                 new LicencePlate("SGP5678X"),
+                EMPTY_REMARK,
                 new Policy(
                     new Company("XYZ Insurance"),
                     new PolicyNumber("XY123456"),
@@ -573,6 +612,7 @@ public class SampleDataUtil {
                 getTagSet("friends", "travel"),
                 new Nric("901X"),
                 new LicencePlate("SGP9012Y"),
+                EMPTY_REMARK,
                 new Policy(
                     new Company("ABC Insurance"),
                     new PolicyNumber("AB123456"),
@@ -588,6 +628,7 @@ public class SampleDataUtil {
                 getTagSet("friends", "sports"),
                 new Nric("567Y"),
                 new LicencePlate("SGP5678Z"),
+                EMPTY_REMARK,
                 new Policy(
                     new Company("LMN Insurance"),
                     new PolicyNumber("LM123456"),
@@ -603,6 +644,7 @@ public class SampleDataUtil {
                 getTagSet("neighbors", "cooking"),
                 new Nric("345H"),
                 new LicencePlate("SGP3456J"),
+                EMPTY_REMARK,
                 new Policy(
                     new Company("QRS Insurance"),
                     new PolicyNumber("QR123456"),
@@ -618,6 +660,7 @@ public class SampleDataUtil {
                 getTagSet("family", "music"),
                 new Nric("234M"),
                 new LicencePlate("SGP2345A"),
+                EMPTY_REMARK,
                 new Policy(
                     new Company("GHI Insurance"),
                     new PolicyNumber("GH123456"),
@@ -633,6 +676,7 @@ public class SampleDataUtil {
                 getTagSet("friends", "travel"),
                 new Nric("901Q"),
                 new LicencePlate("SGP9012R"),
+                EMPTY_REMARK,
                 new Policy(
                     new Company("ABC Insurance"),
                     new PolicyNumber("AB123456"),
@@ -648,6 +692,7 @@ public class SampleDataUtil {
                 getTagSet("friends", "pets"),
                 new Nric("678R"),
                 new LicencePlate("SGP6789S"),
+                EMPTY_REMARK,
                 new Policy(
                     new Company(Company.DEFAULT_VALUE),
                     new PolicyNumber(PolicyNumber.DEFAULT_VALUE),
@@ -663,6 +708,7 @@ public class SampleDataUtil {
                 getTagSet("friends", "travelling"),
                 new Nric("901M"),
                 new LicencePlate("SGP9012Z"),
+                EMPTY_REMARK,
                 new Policy(
                     new Company("DEF Insurance"),
                     new PolicyNumber("DE123456"),
@@ -678,6 +724,7 @@ public class SampleDataUtil {
                 getTagSet("neighbors", "reading"),
                 new Nric("890K"),
                 new LicencePlate("SGP8901L"),
+                EMPTY_REMARK,
                 new Policy(
                     new Company("PQR Insurance"),
                     new PolicyNumber("PQ123456"),
@@ -693,6 +740,7 @@ public class SampleDataUtil {
                 getTagSet("friends", "yoga"),
                 new Nric("567D"),
                 new LicencePlate("SGP5678E"),
+                EMPTY_REMARK,
                 new Policy(
                     new Company("XYZ Insurance"),
                     new PolicyNumber("XY123456"),
@@ -708,6 +756,7 @@ public class SampleDataUtil {
                 getTagSet("friends", "shopping"),
                 new Nric("234H"),
                 new LicencePlate("SGP2345K"),
+                EMPTY_REMARK,
                 new Policy(
                     new Company("QRS Insurance"),
                     new PolicyNumber("QR123456"),
@@ -723,6 +772,7 @@ public class SampleDataUtil {
                 getTagSet("neighbors", "cooking"),
                 new Nric("678Y"),
                 new LicencePlate("SGP6789H"),
+                EMPTY_REMARK,
                 new Policy(
                     new Company("ABC Insurance"),
                     new PolicyNumber("AB123456"),
@@ -738,6 +788,7 @@ public class SampleDataUtil {
                 getTagSet("friends", "volunteering"),
                 new Nric("901N"),
                 new LicencePlate("SGP9012P"),
+                EMPTY_REMARK,
                 new Policy(
                     new Company("QRS Insurance"),
                     new PolicyNumber("QR123456"),
@@ -753,6 +804,7 @@ public class SampleDataUtil {
                 getTagSet("friends", "fitness"),
                 new Nric("567P"),
                 new LicencePlate("SGP5678H"),
+                EMPTY_REMARK,
                 new Policy(
                     new Company(Company.DEFAULT_VALUE),
                     new PolicyNumber(PolicyNumber.DEFAULT_VALUE),
@@ -768,6 +820,7 @@ public class SampleDataUtil {
                 getTagSet("friends", "travel"),
                 new Nric("345S"),
                 new LicencePlate("SGP3456T"),
+                EMPTY_REMARK,
                 new Policy(
                     new Company("PQR Insurance"),
                     new PolicyNumber("PQ123456"),
@@ -783,6 +836,7 @@ public class SampleDataUtil {
                 getTagSet("friends", "gaming"),
                 new Nric("901Z"),
                 new LicencePlate("SGP9012P"),
+                EMPTY_REMARK,
                 new Policy(
                     new Company("GHI Insurance"),
                     new PolicyNumber("GH123456"),
@@ -798,6 +852,7 @@ public class SampleDataUtil {
                 getTagSet("friends", "cooking"),
                 new Nric("678P"),
                 new LicencePlate("SGP6789J"),
+                EMPTY_REMARK,
                 new Policy(
                     new Company("QRS Insurance"),
                     new PolicyNumber("QR123456"),
@@ -813,6 +868,7 @@ public class SampleDataUtil {
                 getTagSet("friends", "travelling"),
                 new Nric("678Y"),
                 new LicencePlate("SGP6789Z"),
+                EMPTY_REMARK,
                 new Policy(
                     new Company("ABC Insurance"),
                     new PolicyNumber("AB123456"),
