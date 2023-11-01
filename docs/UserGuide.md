@@ -185,12 +185,27 @@ Examples:
 Acceptable values for each parameter:
 * `INDEX` : It must be a **must be a positive integer** 1, 2, 3, …​
 
-Expected output upon success : [coming soon]
+Expected output upon success : `Deleted person: [Information of person at INDEX]`
 
 Expected output upon failure:
 * Profile at the specified `INDEX` cannot be found: `Error: Invalid Index`
 * Missing `INDEX` parameter: `Error: Missing Index`
 * Incorrect `INDEX` parameter: `Error: The parameter is not of the type positive integer`
+
+### Sorting all entries by policy expiration date : `sort`
+
+Format: `sort`
+
+* Sorts the list from earliest to latest policy expiration date.
+* People in the list with no policy data will be at the end of the sorted list.
+* The parameter, if any, inputted after `sort` is ignored.
+
+Examples:
+* `sort` rearranges the displayed list to show which policies are expiring soonest.
+* `find c/Google` followed by `sort` shows the policies expiring soonest in the results of the `find` command.
+
+Expected output upon success : `Address book has been sorted!`
+
 
 ### Clearing all entries : `clear`
 
