@@ -97,11 +97,12 @@ public class EditScheduleCommandTest {
         showScheduleAtIndex(model, INDEX_FIRST_SCHEDULE);
 
         Schedule scheduleInFilteredList = model.getFilteredScheduleList().get(INDEX_FIRST_SCHEDULE.getZeroBased());
+        LocalDateTime newStartTime = scheduleInFilteredList.getStartTime().getTime().minusHours(1);
         Schedule editedSchedule =
             new ScheduleBuilder(scheduleInFilteredList)
-                .withStartTime(LocalDateTime.parse(VALID_START_TIME_ONE)).build();
+                .withStartTime(newStartTime).build();
         EditScheduleCommand editScheduleCommand = new EditScheduleCommand(INDEX_FIRST_SCHEDULE,
-            new EditScheduleDescriptorBuilder().withStartTime(VALID_START_TIME_ONE).build());
+            new EditScheduleDescriptorBuilder().withStartTime(newStartTime.toString()).build());
 
         String expectedMessage = String.format(EditScheduleCommand.MESSAGE_EDIT_SCHEDULE_SUCCESS,
             Messages.format(editedSchedule));
@@ -149,6 +150,18 @@ public class EditScheduleCommandTest {
                 .withStartTime(new StartTime(SCHEDULE_ALICE_FIRST_JAN.getEndTime().value))
                 .withEndTime(endTime)
                 .build();
+        EditScheduleCommand editScheduleCommand = new EditScheduleCommand(INDEX_THIRD_SCHEDULE, descriptor);
+
+        assertCommandFailure(editScheduleCommand, model, Schedule.MESSAGE_CONSTRAINTS);
+    }
+
+    @Test
+    public void execute_differentDays_failure() {
+        EditScheduleDescriptor descriptor =
+                new EditScheduleDescriptorBuilder(SCHEDULE_ALICE_FIRST_JAN)
+                        .withStartTime(new StartTime(SCHEDULE_ALICE_FIRST_JAN.getStartTime().getTime().minusDays(1)))
+                        .withEndTime(SCHEDULE_ALICE_FIRST_JAN.getEndTime())
+                        .build();
         EditScheduleCommand editScheduleCommand = new EditScheduleCommand(INDEX_THIRD_SCHEDULE, descriptor);
 
         assertCommandFailure(editScheduleCommand, model, Schedule.MESSAGE_CONSTRAINTS);
