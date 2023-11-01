@@ -76,7 +76,7 @@ The examples in this guide are formatted with the following conventions:
 * **Flags** - Indicators to differentiate various parts of the command. Always take the format `$/` followed by a **Parameter**. The `$` varies depending on the type of flag. <br/> E.g., `o/` in ***interaction*** command specifies the **Outcome** of the interaction, while `l/` in ***edit*** command specifies the **Lead** of the client.
 * **Parameters** - Component of the command that usually follows a **Flag**. A parameter might be written without a flag for some commands where it is clear what the parameter is referring to. <br/> E.g., `INDEX` following an ***edit*** command specifies the index of the client to be edited.
 
-[↑ Back to table of contents](#table-of-contents)
+[↑ Back to Table of Contents](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -91,35 +91,60 @@ The examples in this guide are formatted with the following conventions:
 [↑ Back to table of contents](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
+# Features
 
-### Viewing help [coming soon]
+### Viewing help: ***help***
 
-### Add Features
-#### Adding a client profile: ***create***
+Shows a message explaining how to access the user guide.
+
+<figure>
+    <img src="images/HelpMessage.png" alt="Help Message">
+    <figcaption align="center">
+        <em>Pop-up message that appears after running help.</em>
+    </figcaption>
+</figure>
+
+## Adding
+
+### Adding a client profile: ***create***
 
 Your job as a salesperson starts with adding a client profile to Connectify. This is a one-time process for each client that has been made simple for you.
-Use the ***create*** command to add a client profile to Connectify with the following format:
+Use the ***create*** command to add a client profile.
 
-Format: `create n/CLIENT_NAME p/PROFESSION e/EMAIL a/ADDRESS [t/TAG]... [tg/TELEGRAM] [i/INCOME] [d/DETAILS]`
+#### Format
+```text
+create n/NAME p/PHONE e/EMAIL a/ADDRESS [t/TAG]... [tg/TELEGRAM]
+[pf/PROFESSION] [i/INCOME] [d/DETAILS]
+```
 
-Examples: 
+#### Example
+```text
+create n/Bernice Yu p/99272758 e/berniceyu@example.com
+a/Blk 30 Lorong 3 Serangoon Gardens, #07-18 t/colleagues
+t/friends tg/@yuyubern pf/Graphic Designer i/60000
 ```
-create n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 t/friends t/owesMoney tg/meowies pf/student i/1000 d/Likes to play games 
-```
-```
-create n/Chemmy Lee p/98765432 e/chemmy@gmail.com a/311, Clementi Ave 2, #02-25 tg/meowies`
-```
+
+<figure>
+    <img src="images/ExampleCreateAfter.png" alt="Bernice Yu's client card after creating">
+    <figcaption align="center">
+        <em>Result of executing the above create command: Bernice Yu's profile is at index 7. Indices may be different.</em>
+    </figcaption>
+</figure>
+<br>
+
 You should directly see the client profile added to the list of clients in the application window. After adding a client profile, you can now perform various operations on the client profile as specified in the next few sections!
 
 #### Adding a client interaction: ***interaction***
 
-After adding a client profile, you can now log your interactions with the client. 
-Use the ***interaction*** command to add an interaction to a client profile with the following format:
+After adding a client profile, you can now log your interactions with the client.  Use the ***interaction*** command to add an interaction to a client profile.
 
-Format: `interaction INDEX o/OUTCOME [DETAILS]`
-Where INDEX refers to the index of the client profile in the displayed list of clients.
+#### Format
+```text
+interaction INDEX o/OUTCOME [DETAILS]
+```
+where INDEX refers to the index of the client profile in the displayed list of clients.
 
-Examples:
+#### Examples
 ```
 interaction 1 o/Meeting with client d/Client is interested in our products
 ```
@@ -129,46 +154,50 @@ interaction 1 o/Meeting with client
 
 You should directly see the interaction added to the client profile in the application window.
 
-[↑ Back to table of contents](#table-of-contents)
+[↑ Back to Table of Contents](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
 
-### View Features
+## Viewing
 
 Sometimes, you may want to view the details of a client profile or the interactions you have had with a client to quickly catch up on the client's profile before contacting them.
 Or, you might just want to view the list of clients you have added to Connectify.
-<br/>
-This section contains multiple commands that allow you to view various details of your clients and collate them in a single place for your convenience.
 
-#### Viewing the dashboard: ***dashboard***
+This section contains multiple commands that allow you to view various details of your clients that is collated in a single view and collate them in a single place for your convenience.
 
-The ***dashboard*** command allows you to view a summarized information of all your clients and their interactions with you in a single place.
-Use the ***dashboard*** command with the following format:
+### Viewing the dashboard: ***dashboard***
 
-Format: `dashboard`
+Use the ***dashboard*** command to view a summarized information of all your clients and their interactions with you in a single place.
 
-Example:
-```
+#### Format
+````text
 dashboard
+````
+
+You should see the dashboard view in the application window.
+
+### Viewing the list of clients: ***list***
+
+You might want to go back to the list of clients you have added to Connectify. Use the ***list*** command to view all clients.
+
+**Format**
+```text
+list
 ```
-You should see a dashboard as shown below:
-
-#### Viewing the list of clients: ***list***
-
-You might want to go back to the list of clients you have added to Connectify to view the details of a particular client.
-Use the ***list*** command with the following format:
-
-Format: `list`
 
 You should then see the list of clients in the application window.
 
-#### Finding a client by name: ***find***
+### Finding a client by name: ***find***
 
 Managing a large number of clients can be difficult. Some of our commands use indexes to refer to a client profile. This might be difficult to remember if you have a large number of clients.
-Don't worry, though, we have a solution for you! You can use the ***find*** command to search for a client by name and get their index.
 
-Format: `find CLIENT_NAME`
-<br/>
+Don't worry, though, we have a solution for you! You can use the ***find*** command to search for a client by name.
+
+**Format**
+```text
+find NAME
+```
+
 You don't need to type the full name of the client. You can type a part of the name and the command will return the index of the first client whose name contains the search term.
 
 Example:
@@ -183,61 +212,51 @@ Finding a client with the name "Chemmy Lee". Notice that you don't need to type 
 find Chemmy
 ```
 
-#### Viewing the full details of a client: ***view***
+### Viewing the full details of a client: ***view***
 
 Catching up on the details of a client before contacting them is important. Most of the time, remembering the details of previous interactions with a client is difficult as the data is scattered everywhere.
-Well, not anymore! With Connectify, you can view the full details of a client in a single place using the ***view*** command.
 
-Format: `view INDEX`
-<br/>
-Where INDEX refers to the index of the client profile in the displayed list of clients.
+Well, not anymore! With Connectify, you can view the full details of a client and past interactions in a single place using the ***view*** command.
 
-Example:
+**Format**
+```text
+view INDEX
 ```
-view 1
+where INDEX refers to the index of the client profile in the displayed list of clients.
+
+## Editing
+
+### Editing a client profile: ***edit***
+
+Each different client may be marked with different lead (hot, warm, cold) that may change over time.
+Not only that, you might find yourself needing to update the details of a client profile. Use the command ***edit*** to edit the specified client profile in your client list.
+
+**Format**
+```text
+edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG] [l/LEAD]
+[tg/TELEGRAM] [pf/PROFESSION] [i/INCOME] [d/DETAILS]
 ```
-
-[↑ Back to table of contents](#table-of-contents)
-
---------------------------------------------------------------------------------------------------------------------
-
-### Edit Feature
-
-#### Editing a client profile: ***edit***
-
-Each different client may be marked with different lead (e.g. hot, warm, cold) that may change over time.
-Not only that, you might find yourself needing to update the details of a client profile sometimes.
-
-Connectify got you covered with the ***edit*** command.
-
-Format: `edit INDEX [n/CLIENT_NAME] [p/PROFESSION] [e/EMAIL] [a/ADDRESS] [t/TAG]... [tg/TELEGRAM] [i/INCOME] [d/DETAILS] [l/LEAD]`
-<br/>
-Where INDEX refers to the index of the client profile in the displayed list of clients.
 
 Note that at least one of the optional parameters must be provided.
 
-Example of editing a name:
-```
-edit 1 n/Kamili
-```
+Example
+1. `edit 1 l/HOT`
+2. `edit 2 e/berniceyu@gmail.com p/123456789`
+3. `edit 3 t/buddies t/relatives`
 
-Example of editing a lead:
-```
-edit 1 l/warm
-``` 
+![Clients before editing](images/ExampleEditBefore.png)
+*Initial state of 4 contacts.*
 
-Example of editing multiple fields:
-```
-edit 1 n/Chemmy Lee p/98765432 l/hot t/friends
-```
+![Clients after editing](images/ExampleEditAfter.png)
+*Result of running commands (1) to (3).*
 
-[↑ Back to table of contents](#table-of-contents)
+[↑ Back to Table of Contents](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
 
-### Delete Feature
+## Deleting
 
-#### Deleting a client profile: ***delete***
+### Deleting a client profile: ***delete***
 
 Keep the list of clients in Connectify clean by deleting client profiles that are no longer relevant.
 
@@ -250,16 +269,16 @@ Example:
 delete 1
 ```
 
-[↑ Back to table of contents](#table-of-contents)
+[↑ Back to Table of Contents](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
 
-## FAQ [coming soon]
+# FAQ [coming soon]
 
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Known issues [coming soon]
+# Known issues [coming soon]
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -283,4 +302,12 @@ delete 1
 ### Exit
 * Exit the application: ***exit***
 
-[↑ Back to table of contents](#table-of-contents)
+# Command summary
+
+| Action     | Format                                                                                                            | Example                                                                                                                                                              |
+|------------|-------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Help       | `help`                                                                                                            | `help`                                                                                                                                                               |
+| Add Client | `create n/NAME p/PHONE e/EMAIL a/ADDRESS [t/TAG] [tg/TELEGRAM] [pf/PROFESSION] [i/INCOME] [d/DETAILS]`            | `create n/Bernice Yu p/99272758 e/berniceyu@example.com a/Blk 30 Lorong 3 Serangoon Gardens, #07-18 t/colleagues t/friends tg/@yuyubern pf/Graphic Designer i/60000` |
+| Edit Client| `edit INDEX [n/NAME] [e/EMAIL] [a/ADDRESS] [t/TAG] [l/LEAD] [tg/TELEGRAM] [pf/PROFESSION] [i/INCOME] [d/DETAILS]` |                                                                                                                                                                      |
+
+[↑ Back to Table of Contents](#table-of-contents)
