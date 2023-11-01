@@ -250,7 +250,7 @@ Refer to [input information](#input-examples) for details about valid inputs.
 
 Edits an existing tutor found in TutorConnect.
 
-##### :beginner: First time users
+##### :star: First time users
 {:.no_toc}
 
 **Scenario**
@@ -272,7 +272,7 @@ Viola! His phone has now been updated to **87654321**.
 
 ![edit tutor](images/editTutor.png)
 
-##### :hammer: Experienced users
+##### :star::star::star: Experienced users
 {:.no_toc}
 
 **Command format**
@@ -282,18 +282,19 @@ Viola! His phone has now been updated to **87654321**.
 **Errors you might encounter**
 
 Here is a list of the error messages you may encounter, when the command is entered incorrectly:
-* `Invalid command format!`: Invalid or missing TUTOR_INDEX.
-* `Names should only contain alphanumeric characters and spaces, and it should not be blank`: Tutor name input was
-  either invalid or blank.
-* `Phone numbers should only contain numbers, and it should be at least 3 digits long`: Tutor phone number input was
-  either invalid or blank.
-* `Emails should be of the format local-part@domain and adhere to the following constraints:`: Tutor email input was
-  either invalid or blank.
-* `Multiple values specified for the following single-valued field(s): n/`: More than 1 `n/` was given in the command
-* `Multiple values specified for the following single-valued field(s): p/`: More than 1 `p/` was given in the command
-* `Multiple values specified for the following single-valued field(s): e/`: More than 1 `e/` was given in the command
-* `This tutor already exists in the address book.`: There is a tutor with the same name in the address book.
-* `At least one field to edit must be provided.`: There is no `n/`, `p/` or `e/` tag provided to edit a field.
+
+| Error Message                                                                              | Reason                                                      |
+|--------------------------------------------------------------------------------------------|-------------------------------------------------------------|
+| `Invalid command format!`                                                                  | Invalid or missing TUTOR_INDEX                              |
+| `The person index provided is invalid`                                                     | TUTOR_INDEX entered is not in the range of number of tutors |
+| `Names should only contain alphanumeric characters and spaces, and it should not be blank` | Tutor name input was either invalid or blank                |
+| `Phone numbers should only contain numbers, and it should be at least 3 digits long`       | Tutor phone number input was either invalid or blank        |
+| `Emails should be of the format local-part@domain and adhere to the following constraints` | Tutor email input was either invalid or blank               |
+| `Multiple values specified for the following single-valued field(s): n/`                   | More than 1 `n/` was given in the command                   |
+| `Multiple values specified for the following single-valued field(s): p/`                   | More than 1 `p/` was given in the command                   |
+| `Multiple values specified for the following single-valued field(s): e/`                   | More than 1 `e/` was given in the command                   |
+| `This tutor already exists in the address book`                                            | There is a tutor with the same name in the address book     |
+| `At least one field to edit must be provided`                                              | There is no `n/`, `p/` or `e/` tag provided to edit a field |
 
 You can also refer to [input information](#input-examples) for details about valid inputs.
 
@@ -329,7 +330,7 @@ Displays a list of all tutors in the address book in a table format.
 
 Find tutors whose names contain any of the given keywords.
 
-##### :beginner: First time users
+##### :star: First time users
 {:.no_toc}
 
 **Scenario**
@@ -349,7 +350,7 @@ Tada! You have found tutor **John Doe** (and any other tutors whose name contain
 
 ![find tutor](images/findTutor.png)
 
-##### :hammer: Experienced users
+##### :star::star::star: Experienced users
 {:.no_toc}
 
 **Command format**
@@ -359,7 +360,10 @@ Tada! You have found tutor **John Doe** (and any other tutors whose name contain
 **Errors you might encounter**
 
 This command is relatively straight forward to use and has only 1 possible error:
-* `Invalid command format!`: No search keyword provided.
+
+| Error Message             | Reason                         |
+|---------------------------|--------------------------------|
+| `Invalid command format!` | No search keyword was provided |
 
 <div markdown="block" class="alert alert-info">
 
@@ -567,7 +571,7 @@ specified schedule.
 
 Removes the status of a schedule.
 
-##### :beginner: First time users
+##### :star: First time users
 {:.no_toc}
 
 **Scenario**
@@ -589,7 +593,7 @@ Phew! The schedule has now been unmarked.
 
 ![unmark schedule](images/unmarkSchedule.png)
 
-#### :hammer: Experienced users
+##### :star::star::star: Experienced users
 {:.no_toc}
 
 **Command format**
@@ -599,8 +603,11 @@ Phew! The schedule has now been unmarked.
 **Errors you might encounter**
 
 Here is a list of the error messages you may encounter, when the command is entered incorrectly:
-* `Index number given is out of range`: The schedule index provided is invalid
-* `Invalid command format!`: Invalid or missing SCHEDULE_INDEX.
+
+| Error Message                            | Reason                                                            |
+|------------------------------------------|-------------------------------------------------------------------|
+| `Invalid command format!`                | Invalid or missing SCHEDULE_INDEX                                 |
+| `The schedule index provided is invalid` | SCHEDULE_INDEX entered is not in the range of number of schedules |
 
 You can also refer to [input information](#input-examples) for details about valid inputs.
 
