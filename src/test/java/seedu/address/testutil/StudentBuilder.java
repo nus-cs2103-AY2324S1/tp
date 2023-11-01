@@ -99,7 +99,7 @@ public class StudentBuilder {
      */
     public StudentBuilder withAssignmentDetails(int assignmentNumber, int marks) {
         try {
-            this.classDetails.setAssignGrade(assignmentNumber, marks);
+            this.classDetails.setGrade(assignmentNumber, marks);
         } catch (CommandException e) {
             e.printStackTrace();
         }
@@ -110,9 +110,9 @@ public class StudentBuilder {
      * Sets a {@code ClassParticipation} in {@code ClassParticipationTracker} of the
      * {@code ClassDetails} that we are building.
      */
-    public StudentBuilder withClassPartDetails(int tutNum, boolean isPresent) {
+    public StudentBuilder withClassParticipationDetails(int tutNum, boolean isPresent) {
         try {
-            this.classDetails.recordClassPart(tutNum, isPresent);
+            this.classDetails.recordClassParticipation(tutNum, isPresent);
         } catch (CommandException e) {
             e.printStackTrace();
         }

@@ -11,9 +11,9 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.student.grades.AssignmentTracker;
-import seedu.address.model.student.grades.AttendanceTracker;
-import seedu.address.model.student.grades.ClassParticipationTracker;
+import seedu.address.model.student.information.AssignmentTracker;
+import seedu.address.model.student.information.AttendanceTracker;
+import seedu.address.model.student.information.ClassParticipationTracker;
 
 public class ClassDetailsTest {
 
@@ -64,13 +64,29 @@ public class ClassDetailsTest {
     }
 
     @Test
+    public void markAttendancePresent_invalidValues_exceptionThrown() {
+        ClassDetails classDetails = new ClassDetails("T11");
+        ClassDetails.setTutorialCount(13);
+        assertThrows(CommandException.class, () -> classDetails.markPresent(Index.fromZeroBased(14)));
+        assertThrows(CommandException.class, () -> classDetails.markPresent(Index.fromZeroBased(0)));
+    }
+
+    @Test
+    public void markAttendanceAbsent_invalidValues_exceptionThrown() {
+        ClassDetails classDetails = new ClassDetails("T11");
+        ClassDetails.setTutorialCount(13);
+        assertThrows(CommandException.class, () -> classDetails.markAbsent(Index.fromZeroBased(14)));
+        assertThrows(CommandException.class, () -> classDetails.markAbsent(Index.fromZeroBased(0)));
+    }
+
+    @Test
     public void setAssignmentGrade_invalidValues_exceptionThrown() {
         ClassDetails classDetails = new ClassDetails("T11");
         ClassDetails.setAssignmentCount(3);
-        assertThrows(CommandException.class, () -> classDetails.setAssignGrade(4, 0));
-        assertThrows(CommandException.class, () -> classDetails.setAssignGrade(-1, 0));
-        assertThrows(CommandException.class, () -> classDetails.setAssignGrade(1, -1));
-        assertThrows(CommandException.class, () -> classDetails.setAssignGrade(1, 200));
+        assertThrows(CommandException.class, () -> classDetails.setGrade(4, 0));
+        assertThrows(CommandException.class, () -> classDetails.setGrade(-1, 0));
+        assertThrows(CommandException.class, () -> classDetails.setGrade(1, -1));
+        assertThrows(CommandException.class, () -> classDetails.setGrade(1, 200));
     }
 
     @Test
@@ -78,28 +94,28 @@ public class ClassDetailsTest {
         ClassDetails classDetails = new ClassDetails("T11");
         ClassDetails.setAssignmentCount(3);
         try {
-            classDetails.setAssignGrade(3, 0);
-            classDetails.setAssignGrade(1, 100);
+            classDetails.setGrade(3, 0);
+            classDetails.setGrade(1, 100);
         } catch (CommandException e) {
             fail();
         }
     }
 
     @Test
-    public void recordClassPart_invalidValues_exceptionThrown() {
+    public void recordClassParticipation_invalidValues_exceptionThrown() {
         ClassDetails classDetails = new ClassDetails("T11");
         ClassDetails.setTutorialCount(10);
-        assertThrows(CommandException.class, () -> classDetails.recordClassPart(11, true));
-        assertThrows(CommandException.class, () -> classDetails.recordClassPart(-1, false));
+        assertThrows(CommandException.class, () -> classDetails.recordClassParticipation(11, true));
+        assertThrows(CommandException.class, () -> classDetails.recordClassParticipation(-1, false));
     }
 
     @Test
-    public void recordClassPart_validValues_success() {
+    public void recordClassParticipation_validValues_success() {
         ClassDetails classDetails = new ClassDetails("T11");
         ClassDetails.setTutorialCount(10);
         try {
-            classDetails.recordClassPart(1, true);
-            classDetails.recordClassPart(10, false);
+            classDetails.recordClassParticipation(1, true);
+            classDetails.recordClassParticipation(10, false);
         } catch (CommandException e) {
             fail();
         }
@@ -110,8 +126,8 @@ public class ClassDetailsTest {
         ClassDetails classDetails = new ClassDetails("T11");
         try {
             ClassDetails.setTutorialCount(10);
-            classDetails.markPresent(Index.fromZeroBased(0));
             classDetails.markPresent(Index.fromZeroBased(1));
+            classDetails.markPresent(Index.fromZeroBased(3));
             classDetails.markPresent(Index.fromZeroBased(6));
             assertEquals(30, classDetails.getAttendancePercentage());
         } catch (Exception e) {
@@ -141,9 +157,9 @@ public class ClassDetailsTest {
     public void getAttendancePercentage_invalidValues_fail() {
         try {
             ClassDetails classDetails = new ClassDetails("T11", null, null, null);
-            classDetails.markPresent(Index.fromZeroBased(0));
+            classDetails.markPresent(Index.fromZeroBased(-1));
             classDetails.markPresent(Index.fromZeroBased(1));
-            classDetails.markPresent(Index.fromZeroBased(6));
+            classDetails.markPresent(Index.fromZeroBased(66));
             assertNotEquals(0, classDetails.getAttendancePercentage());
         } catch (Exception e) {
             assertTrue(e instanceof NullPointerException);
@@ -155,9 +171,9 @@ public class ClassDetailsTest {
         ClassDetails classDetails = new ClassDetails("T11");
         ClassDetails.setTutorialCount(10);
         try {
-            classDetails.recordClassPart(1, true);
-            classDetails.recordClassPart(2, true);
-            classDetails.recordClassPart(8, true);
+            classDetails.recordClassParticipation(1, true);
+            classDetails.recordClassParticipation(2, true);
+            classDetails.recordClassParticipation(8, true);
             assertEquals(30, classDetails.getClassParticipationPercentage());
         } catch (Exception e) {
             fail();
@@ -186,9 +202,9 @@ public class ClassDetailsTest {
     public void getClassPartPercentage_invalidValues_fail() {
         try {
             ClassDetails classDetails = new ClassDetails("T11", null, null, null);
-            classDetails.recordClassPart(1, true);
-            classDetails.recordClassPart(2, true);
-            classDetails.recordClassPart(7, true);
+            classDetails.recordClassParticipation(1, true);
+            classDetails.recordClassParticipation(2, true);
+            classDetails.recordClassParticipation(7, true);
             assertNotEquals(0.0, classDetails.getClassParticipationPercentage());
         } catch (Exception e) {
             assertTrue(e instanceof NullPointerException);
@@ -200,9 +216,9 @@ public class ClassDetailsTest {
         ClassDetails classDetails = new ClassDetails("T11");
         ClassDetails.setAssignmentCount(3);
         try {
-            classDetails.setAssignGrade(1, 30);
-            classDetails.setAssignGrade(2, 40);
-            classDetails.setAssignGrade(3, 50);
+            classDetails.setGrade(1, 30);
+            classDetails.setGrade(2, 40);
+            classDetails.setGrade(3, 50);
             assertEquals(40, classDetails.getAssignmentPercentage());
         } catch (Exception e) {
             fail();
@@ -231,9 +247,9 @@ public class ClassDetailsTest {
     public void getAssignmentPercentage_invalidValues_fail() {
         try {
             ClassDetails classDetails = new ClassDetails("T11", null, null, null);
-            classDetails.setAssignGrade(1, 30);
-            classDetails.setAssignGrade(2, 40);
-            classDetails.setAssignGrade(3, 50);
+            classDetails.setGrade(1, 30);
+            classDetails.setGrade(2, 40);
+            classDetails.setGrade(3, 50);
             assertEquals(40, classDetails.getAssignmentPercentage());
         } catch (Exception e) {
             assertTrue(e instanceof NullPointerException);

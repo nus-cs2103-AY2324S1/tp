@@ -6,6 +6,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.student.Student;
@@ -22,7 +23,7 @@ public class AddTagCommand extends TagCommand {
     }
 
     @Override
-    public CommandResult execute(Model model) throws CommandException {
+    public CommandResult execute(Model model, CommandHistory commandHistory) throws CommandException {
         List<Student> lastShownList = model.getFilteredStudentList();
 
         Student studentToTag;
@@ -36,9 +37,9 @@ public class AddTagCommand extends TagCommand {
                 studentToTag.getName(), studentToTag.getPhone(), studentToTag.getEmail(),
                 studentToTag.getStudentNumber(), studentToTag.getClassDetails(), newTags, studentToTag.getComment());
 
-
         model.setStudent(studentToTag, editedStudent);
         model.updateFilteredStudentList(Model.PREDICATE_SHOW_ALL_STUDENTS);
+        model.commitAddressBook();
 
         return new CommandResult(generateSuccessMessage(editedStudent));
     }

@@ -1,7 +1,8 @@
-package seedu.address.model.student.grades;
+package seedu.address.model.student.information;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
+import static seedu.address.model.student.ClassDetails.MESSAGE_INVALID_TUTORIAL_SESSION_NUMBER;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -9,7 +10,7 @@ import java.util.List;
 import java.util.stream.IntStream;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.model.student.grades.exceptions.InvalidTutorialIndexException;
+import seedu.address.logic.commands.exceptions.CommandException;
 
 /**
  * Represents a Student's AttendanceTracker grades in the class manager.
@@ -34,7 +35,7 @@ public class AttendanceTracker implements Tracker {
     }
 
     /**
-     * Constructs an {@code AttendanceTracker}. With a given attendance tracker list.
+     * Constructs an {@code AttendanceTracker} with a given attendance tracker list.
      *
      * @param attendanceTracker A list of booleans to represent attendance.
      */
@@ -43,6 +44,31 @@ public class AttendanceTracker implements Tracker {
         attendanceList = new Attendance[attendanceTracker.size()];
         IntStream.range(0, attendanceTracker.size())
                 .forEach(i -> attendanceList[i] = new Attendance(attendanceTracker.get(i)));
+    }
+
+    /**
+     * Constructs an {@code AttendanceTracker} with a given attendance list.
+     * Used for duplication.
+     * @param attendanceList A list of booleans stored in {@code Attendance}.
+     */
+    public AttendanceTracker(Attendance[] attendanceList) {
+        requireNonNull(attendanceList);
+        this.attendanceList = attendanceList;
+    }
+
+    /**
+     * Returns a deep copy of the attendance tracker.
+     * @return A deep copy of {@code AttendanceTracker}.
+     */
+    public AttendanceTracker copy() {
+        Attendance[] newAttendanceList = new Attendance[this.attendanceList.length];
+        for (int i = 0; i < this.attendanceList.length; i++) {
+            newAttendanceList[i] = new Attendance();
+            if (this.attendanceList[i].getIsPresent()) {
+                newAttendanceList[i].mark();
+            }
+        }
+        return new AttendanceTracker(newAttendanceList);
     }
 
     /**
@@ -57,10 +83,11 @@ public class AttendanceTracker implements Tracker {
      *
      * @param tutNum The tutorial number.
      */
-    public void markPresent(Index tutNum) throws InvalidTutorialIndexException {
+    public void markPresent(Index tutNum) throws CommandException {
         requireNonNull(tutNum);
         if (tutNum.getZeroBased() >= attendanceList.length) {
-            throw new InvalidTutorialIndexException();
+            throw new CommandException(
+                    String.format(MESSAGE_INVALID_TUTORIAL_SESSION_NUMBER, attendanceList.length));
         }
         attendanceList[tutNum.getZeroBased()].mark();
     }
@@ -70,10 +97,11 @@ public class AttendanceTracker implements Tracker {
      *
      * @param tutNum The tutorial number.
      */
-    public void markAbsent(Index tutNum) throws InvalidTutorialIndexException {
+    public void markAbsent(Index tutNum) throws CommandException {
         requireNonNull(tutNum);
         if (tutNum.getZeroBased() >= attendanceList.length) {
-            throw new InvalidTutorialIndexException();
+            throw new CommandException(
+                    String.format(MESSAGE_INVALID_TUTORIAL_SESSION_NUMBER, attendanceList.length));
         }
         attendanceList[tutNum.getZeroBased()].unmark();
     }
@@ -83,9 +111,10 @@ public class AttendanceTracker implements Tracker {
      *
      * @param tutNum The tutorial number.
      */
-    public boolean isPresent(Index tutNum) throws InvalidTutorialIndexException {
+    public boolean isPresent(Index tutNum) throws CommandException {
         if (tutNum.getZeroBased() >= attendanceList.length) {
-            throw new InvalidTutorialIndexException();
+            throw new CommandException(
+                    String.format(MESSAGE_INVALID_TUTORIAL_SESSION_NUMBER, attendanceList.length));
         }
         return attendanceList[tutNum.getZeroBased()].getIsPresent();
     }
@@ -99,13 +128,6 @@ public class AttendanceTracker implements Tracker {
             attendanceTracker.add(attendance.getIsPresent());
         }
         return attendanceTracker;
-    }
-
-    /**
-     * Returns the total number of tutorials.
-     */
-    public int getNumOfTut() {
-        return this.attendanceList.length;
     }
 
     /**

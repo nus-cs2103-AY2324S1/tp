@@ -8,6 +8,7 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_STUDENT;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.CommandHistory;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -19,7 +20,8 @@ import seedu.address.testutil.TypicalStudents;
  */
 public class RandomCommandTest {
 
-    private Model model = new ModelManager(TypicalStudents.getTypicalAddressBook(), new UserPrefs());
+    private final Model model = new ModelManager(TypicalStudents.getTypicalAddressBook(), new UserPrefs());
+    private final CommandHistory commandHistory = new CommandHistory();
 
     @Test
     public void execute_success() {
@@ -31,7 +33,7 @@ public class RandomCommandTest {
         String expectedMessage = RandomCommand.MESSAGE_RANDOM_SUCCESS
                 + studentToSelect.getName() + " " + studentToSelect.getStudentNumber() + "\n";
 
-        assertCommandSuccess(randomCommand, model, expectedMessage, model);
+        assertCommandSuccess(randomCommand, model, expectedMessage, model, commandHistory);
     }
 
     @Test
@@ -40,7 +42,7 @@ public class RandomCommandTest {
 
         RandomCommand randomCommand = new RandomCommand(invalid);
 
-        assertCommandFailure(randomCommand, model, RandomCommand.MESSAGE_TOO_MUCH_TO_BE_SELECTED);
+        assertCommandFailure(randomCommand, model, RandomCommand.MESSAGE_TOO_MUCH_TO_BE_SELECTED, commandHistory);
     }
 
     @Test
