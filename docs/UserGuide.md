@@ -427,7 +427,7 @@ The fields you enter should follow the following format:
 
 <br>
 
-<box type="info">
+<box type="info" icon=":fa-solid-magnifying-glass:">
 To manage notes for a person in a list, use the following commands:
 
 | Action                                  | Command                                           | Description                                             |
