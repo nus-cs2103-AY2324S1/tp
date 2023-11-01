@@ -332,6 +332,28 @@ The `load` command is facilitated by `LoadCommand` and `LoadCommandParser`. `Loa
 4. The file name is then check to ensure that it is valid. If the file name is missing, null or contains a forward slash, a ParseException would be thrown.
 5. The `LoadCommandParser` then creates the `LoadCommand` based on the processed input.
 
+### Mark present feature
+
+#### About this feature
+
+The mark present feature allows users to mark a specific student to be present in a specific tutorial in the app.
+
+This feature builds upon the current design of Student and ClassDetails.
+
+#### How it is implemented
+
+<puml src="diagrams/MarkPresentSequenceDiagram.puml" alt="MarkPresentSequenceDiagram" />
+
+<box type="info" seamless>
+
+**Note:** The diagram above only shows part of the interactions within the model component. The interactions within the logic component are similar to other commands.
+
+</box>
+
+#### Design considerations:
+
+The feature should be implemented upon the current design of Student and ClassDetails. Alternative designs may exist, such as treating the attendance and participation as association classes. 
+
 ### Config feature
 
 The config feature is mandatory for TAs to enter before using Class Manager. It allows TAs to set the number of tutorials and the number of assignments in a module. This allows Class Manager to be able to display the correct number of tutorials and assignments for the TA to enter the grades for each student.
@@ -478,30 +500,24 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User requests to list students
-2.  ClassManager shows a list of students
-3.  User requests to delete a specific student in the list
-4.  ClassManager deletes the student
+1.  User requests to delete a specific student in the list with the student's student number
+2.  ClassManager deletes the student
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 1a. The given student number is invalid.
 
-  Use case ends.
+    * 1a1. ClassManager shows an error message.
 
-* 3a. The given student number is invalid.
+      Use case resumes at step 1.
 
-    * 3a1. ClassManager shows an error message.
+* 1b. The given student number does not exist in the list.
 
-      Use case resumes at step 2.
+    * 1b1. ClassManager shows an error message.
 
-* 3b. The given student number does not exist in the list.
-
-    * 3b1. ClassManager shows an error message.
-
-      Use case resumes at step 2.
+      Use case resumes at step 1.
 
 **Use case: Tag a student with a label**
 
@@ -606,9 +622,7 @@ testers are expected to do more *exploratory* testing.
 
 ### Deleting a student
 
-1. Deleting a student while all students are being shown
-
-   1. Prerequisites: List all students using the `list` command. Multiple students in the list.
+1. Deleting a student from the current students added in the class manager.
 
    1. Test case: `delete s/STUDENT_NUMBER`<br>
       Expected: The student with STUDENT_NUMBER is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.

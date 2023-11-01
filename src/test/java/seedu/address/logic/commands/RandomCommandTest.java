@@ -8,7 +8,6 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_STUDENT;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.commons.core.index.Index;
 import seedu.address.logic.CommandHistory;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -29,7 +28,7 @@ public class RandomCommandTest {
         Student studentToSelect = TypicalStudents.getTypicalStudents().get(INDEX_FIRST_STUDENT.getZeroBased());
         model.updateFilteredStudentList(s -> s.equals(studentToSelect));
 
-        RandomCommand randomCommand = new RandomCommand(Index.fromOneBased(1));
+        RandomCommand randomCommand = new RandomCommand(1);
 
         String expectedMessage = RandomCommand.MESSAGE_RANDOM_SUCCESS
                 + studentToSelect.getName() + " " + studentToSelect.getStudentNumber() + "\n";
@@ -41,15 +40,15 @@ public class RandomCommandTest {
     public void execute_invalidIndex_throwsCommandException() {
         int invalid = TypicalStudents.getTypicalStudents().size() + 1;
 
-        RandomCommand randomCommand = new RandomCommand(Index.fromOneBased(invalid));
+        RandomCommand randomCommand = new RandomCommand(invalid);
 
         assertCommandFailure(randomCommand, model, RandomCommand.MESSAGE_TOO_MUCH_TO_BE_SELECTED, commandHistory);
     }
 
     @Test
     public void equals() {
-        RandomCommand randomOne = new RandomCommand(Index.fromOneBased(1));
-        RandomCommand randomTwo = new RandomCommand(Index.fromOneBased(2));
+        RandomCommand randomOne = new RandomCommand(1);
+        RandomCommand randomTwo = new RandomCommand(2);
 
         // same object -> returns true
         assertTrue(randomOne.equals(randomOne));

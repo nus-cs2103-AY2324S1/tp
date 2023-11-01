@@ -3,7 +3,6 @@ package seedu.address.logic.parser;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
-import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.RandomCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -21,12 +20,13 @@ public class RandomCommandParser implements Parser<RandomCommand> {
 
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args);
 
-        if (argMultimap.getPreamble().isEmpty()) {
+        Integer numOfStudent;
+        try {
+            numOfStudent = Integer.parseInt(argMultimap.getPreamble());
+        } catch (NumberFormatException e) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, RandomCommand.MESSAGE_USAGE));
         }
 
-        Index index = ParserUtil.parseIndex(argMultimap.getPreamble());
-
-        return new RandomCommand(index);
+        return new RandomCommand(numOfStudent);
     }
 }
