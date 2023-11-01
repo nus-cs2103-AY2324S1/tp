@@ -31,6 +31,8 @@ public class ApplicantCard extends UiPart<Region> {
     private Label id;
     @FXML
     private Label phone;
+    @FXML
+    private Label interviewTime;
 
     /**
      * Creates a {@code ApplicantCard} with the given {@code Applicant} and index to display.
@@ -41,5 +43,6 @@ public class ApplicantCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         name.setText(applicant.getName().fullName);
         phone.setText(applicant.getPhone().value);
+        interviewTime.setText(applicant.getInterviewTime().toString());
     }
 }

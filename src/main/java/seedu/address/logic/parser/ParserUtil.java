@@ -11,6 +11,7 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.fields.Address;
 import seedu.address.model.person.fields.Email;
+import seedu.address.model.person.fields.InterviewTime;
 import seedu.address.model.person.fields.Name;
 import seedu.address.model.person.fields.Phone;
 import seedu.address.model.person.fields.Telegram;
@@ -49,6 +50,25 @@ public class ParserUtil {
             throw new ParseException(Name.MESSAGE_CONSTRAINTS);
         }
         return new Name(trimmedName);
+    }
+
+    /**
+     * Parses a {@code String interviewTime} into an {@code InterviewTime}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @param interviewTime A valid interview time string.
+     * @return An {@code InterviewTime} object representing the parsed time.
+     * @throws ParseException if the given {@code interviewTime} is invalid or cannot be parsed.
+     */
+
+    public static InterviewTime parseInterviewTime(String interviewTime) throws ParseException {
+        requireNonNull(interviewTime);
+        String trimmedTime = interviewTime.trim();
+        if (!InterviewTime.isValidTime(trimmedTime)) {
+            throw new ParseException(InterviewTime.MESSAGE_CONSTRAINTS);
+        }
+        return new InterviewTime(trimmedTime);
+
     }
 
     /**

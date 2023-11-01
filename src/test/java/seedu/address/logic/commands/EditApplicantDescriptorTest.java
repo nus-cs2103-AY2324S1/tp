@@ -48,7 +48,8 @@ public class EditApplicantDescriptorTest {
         EditApplicantDescriptor editApplicantDescriptor = new EditApplicantDescriptor();
         String expected = EditApplicantDescriptor.class.getCanonicalName() + "{name="
                 + editApplicantDescriptor.getName().orElse(null) + ", phone="
-                + editApplicantDescriptor.getPhone().orElse(null) + "}";
+                + editApplicantDescriptor.getPhone().orElse(null) + ", interview time="
+                + editApplicantDescriptor.getInterviewTime().orElse(null) + "}";
         assertEquals(expected, editApplicantDescriptor.toString());
     }
 }
