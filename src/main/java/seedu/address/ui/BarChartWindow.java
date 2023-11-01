@@ -1,17 +1,30 @@
 package seedu.address.ui;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.Arrays;
+import java.util.Optional;
 import java.util.logging.Logger;
+import javax.imageio.ImageIO;
 
+import javafx.animation.PauseTransition;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
+import javafx.scene.SnapshotParameters;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
+import javafx.scene.image.WritableImage;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.barchartresults.GenderBarChartCommandResult;
@@ -36,6 +49,7 @@ public class BarChartWindow extends UiPart<Stage> {
     public BarChartWindow(CommandResult commandResult) {
         super(FXML, new Stage());
         barChart = createBarChart(commandResult);
+        exportAsPng();
         initialize();
     }
 
@@ -184,5 +198,66 @@ public class BarChartWindow extends UiPart<Stage> {
     public void focus() {
         getRoot().requestFocus();
     }
+
+    /**
+     * Displays a file chooser dialog for saving the current bar chart as a PNG image.
+     * If the selected file already exists, prompts the user for confirmation before overwriting.
+     * The image is saved after a short delay to allow JavaFX to properly render the chart.
+     */
+    public void exportAsPng() {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setInitialFileName("bar_chart.png");
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("PNG Files", "*.png"));
+        fileChooser.setInitialDirectory(new File(System.getProperty("user.home")));
+
+        File file = fileChooser.showSaveDialog(super.getRoot());
+
+        if (file != null) {
+            if (file.exists()) {
+                // File already exists, prompt user to confirm overwrite
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                alert.setTitle("Confirmation");
+                alert.setHeaderText("File Already Exists");
+                alert.setContentText("The file already exists. Do you want to overwrite it?");
+
+                Optional<ButtonType> result = alert.showAndWait();
+                if (result.isPresent() && result.get() == ButtonType.OK) {
+                    // User confirmed, proceed with saving the image after a delay
+                    Platform.runLater(() -> saveImage(file));
+                }
+            } else {
+                // File doesn't exist, directly save the image after a delay
+                Platform.runLater(() -> saveImage(file));
+            }
+        }
+    }
+
+    /**
+     * Saves the current state of the bar chart as a PNG image to the specified file.
+     * The method captures a snapshot of the bar chart after a delay and writes it to the file.
+     *
+     * @param file The file where the bar chart image will be saved.
+     */
+    private void saveImage(File file) {
+        PauseTransition pause = new PauseTransition(Duration.millis(600));
+        pause.setOnFinished(event -> {
+            WritableImage image = barChart.snapshot(new SnapshotParameters(), null);
+            try {
+                ImageIO.write(SwingFXUtils.fromFXImage(image, null), "png", file);
+                System.out.println("Image saved successfully.");
+            } catch (IOException e) {
+                // Handle IO exception, e.g., show an error dialog or log the exception
+                e.printStackTrace();
+                // Display an error dialog to the user
+                Alert errorAlert = new Alert(Alert.AlertType.ERROR);
+                errorAlert.setTitle("Error");
+                errorAlert.setHeaderText("Error Saving Image");
+                errorAlert.setContentText("An error occurred while saving the image. Please try again.");
+                errorAlert.showAndWait();
+            }
+        });
+        pause.play();
+    }
+
 
 }
