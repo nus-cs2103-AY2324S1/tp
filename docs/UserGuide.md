@@ -305,28 +305,48 @@ You can also refer to [input information](#input-examples) for details about val
 
 #### Listing all tutors: `list-t`
 
-Displays a list of all tutors in the address book in a table format.
+Displays a list of all tutors in TutorConnect.
+
+##### :star: First time users
+{:.no_toc}
+
+**Scenario**
+
+Imagine that you have found the details of the tutor John Doe and want to go back to view the list of tutors.\
+As a tuition centre coordinator, you want to view the list of tutors after filtering the list of tutors.
+
+Let's use the list tutor command to view the most updated list of tutors!
+
+**Follow these steps:**
+
+1. Type in `find-t John` and press enter to find any tutors with the name John.
+2. Let's say you have successfully found one tutor named John Doe.
+3. Type in `list-t` and press enter to go back to view the full updated list of tutors.
+
+**What you can expect to see**
+
+Great job! You have found the full updated list of tutors.
 
 ![list tutor](images/listTutor.png)
 
-**Format**: `list-t`
+##### :star::star::star: Experienced users
+{:.no_toc}
 
-**Example**:
-* `list-t`
+**Command format**
 
-**Expected Output**:
-* `Listed all tutors`
+![list tutor command](images/listTutorCommandSyntax.png)
 
-    <div markdown="block" class="alert alert-info">
 
-    **:information_source: Information**<br>
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Information**<br>
     
-    * list-t command does not take in any parameters.
-    * Any extraneous parameters after `list-t` will be ignored.
-      e.g. if the command specifies `list-t 123`, it will be interpreted as `list-t`.
-    * No error messages as anything typed behind is ignored.
+* list-t command does not take in any parameters.
+* Any extraneous parameters after `list-t` will be ignored.
+  e.g. if the command specifies `list-t 123`, it will be interpreted as `list-t`.
+* No error messages as anything typed behind is ignored.
     
-    </div>
+</div>
 
 
 #### Locating tutors by name: `find-t`
