@@ -60,11 +60,11 @@ public class EditFreeTimeCommand extends Command {
      * edited with {@code editPersonDescriptor}.
      */
     private static Person createEditedFreeTimePerson(Person personToEdit, Integer dayOfWeek,
-                                             EditCommand.EditPersonDescriptor editPersonDescriptor) {
+                                                     EditCommand.EditPersonDescriptor editPersonDescriptor) {
         assert personToEdit != null;
         FreeTime freeTimeToEdit = personToEdit.getFreeTime();
         FreeTime updatedFreeTime = freeTimeToEdit.updateAvailabilityForDay(dayOfWeek,
-                editPersonDescriptor.getTimeInterval().get());
+                editPersonDescriptor.getTimeInterval().orElse(freeTimeToEdit.getDay(dayOfWeek)));
 
         return new Person(personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
                 personToEdit.getTelegram(), personToEdit.getTags(), updatedFreeTime,

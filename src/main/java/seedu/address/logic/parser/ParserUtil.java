@@ -132,31 +132,6 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a collection of {@code intervals} into a {@code FreeTime}.
-     */
-    public static FreeTime parseFreeTime(Collection<String> intervals) throws DateTimeParseException, ParseException {
-        try {
-            requireNonNull(intervals);
-            final ArrayList<TimeInterval> timeIntervals = new ArrayList<>();
-            for (String interval : intervals) {
-                String[] splitInterval = interval.split("-");
-                LocalTime from = LocalTime.parse(splitInterval[0]);
-                LocalTime to = LocalTime.parse(splitInterval[1]);
-                if (!TimeInterval.isValidTimeInterval(from, to)) {
-                    throw new ParseException(TimeInterval.MESSAGE_CONSTRAINTS);
-                }
-                timeIntervals.add(new TimeInterval(from, to));
-            }
-            if (!FreeTime.isValidFreeTime(timeIntervals)) {
-                throw new ParseException(FreeTime.MESSAGE_CONSTRAINTS);
-            }
-            return new FreeTime(timeIntervals);
-        } catch (DateTimeParseException e) {
-            throw new ParseException(FreeTime.MESSAGE_CONSTRAINTS);
-        }
-    }
-
-    /**
      * Parses a collection of {@code String from} and {@code String to} into a {@code FreeTime}.
      * This assumes that the TA has the same availability throughout the week.
      */
@@ -167,12 +142,8 @@ public class ParserUtil {
             }
             final ArrayList<TimeInterval> timeIntervals = new ArrayList<>();
             for (int i = 0; i < FreeTime.NUM_DAYS; i++) {
-                LocalTime fromDate = LocalTime.parse(from);
-                LocalTime toDate = LocalTime.parse(to);
-                if (!TimeInterval.isValidTimeInterval(fromDate, toDate)) {
-                    throw new ParseException(TimeInterval.MESSAGE_CONSTRAINTS);
-                }
-                timeIntervals.add(new TimeInterval(fromDate, toDate));
+                TimeInterval timeInterval = parseTimeInterval(from, to);
+                timeIntervals.add(timeInterval);
             }
             if (!FreeTime.isValidFreeTime(timeIntervals)) {
                 throw new ParseException(FreeTime.MESSAGE_CONSTRAINTS);
