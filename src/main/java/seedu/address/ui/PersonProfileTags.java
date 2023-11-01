@@ -29,8 +29,8 @@ public class PersonProfileTags extends UiPart<SplitPane> {
     private static final String KEY_NAME = "Tags";
     private static final String TAG_SEPARATOR_REGEX = "[ ,;\n]";
     private static final String DEFAULT_TAG_SEPARATOR = "\n";
-    private static final String TAGS_HINT = Tag.MESSAGE_CONSTRAINTS + "\n" +
-            "Tag names can be separated by spaces, commas, semicolons or new lines.";
+    private static final String TAGS_HINT = Tag.MESSAGE_CONSTRAINTS + "\n"
+            + "Tag names can be separated by spaces, commas, semicolons or new lines.";
     private static final String TAG_INVALID_MESSAGE = "is not a valid tag.";
     // endregion
 
@@ -146,8 +146,8 @@ public class PersonProfileTags extends UiPart<SplitPane> {
                 .filter(notValid)
                 .findAny();
         if (invalid.isPresent()) {
-            sendValueInvalid("'" + invalid.get() + "' " + TAG_INVALID_MESSAGE + "\n" +
-                    Tag.MESSAGE_CONSTRAINTS);
+            sendValueInvalid("'" + invalid.get() + "' " + TAG_INVALID_MESSAGE + "\n"
+                    + Tag.MESSAGE_CONSTRAINTS);
             return false;
         }
         this.tags = Arrays.stream(text.split(TAG_SEPARATOR_REGEX))
@@ -196,7 +196,7 @@ public class PersonProfileTags extends UiPart<SplitPane> {
                 String before = text.substring(0, cursor);
                 String after = text.substring(cursor);
                 valueField.setText(before + "\n" + after);
-                valueField.positionCaret(cursor+1);
+                valueField.positionCaret(cursor + 1);
                 return;
             }
             if (confirmIfValid()) {

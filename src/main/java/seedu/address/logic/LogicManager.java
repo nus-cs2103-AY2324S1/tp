@@ -90,7 +90,6 @@ public class LogicManager implements Logic {
         if (commandResult == null) {
             return null;
         }
-        
         if (commandResult.getCommandType() == CommandType.VIEW_EXIT) {
             isViewExitCommand = true;
             isViewCommand = false;

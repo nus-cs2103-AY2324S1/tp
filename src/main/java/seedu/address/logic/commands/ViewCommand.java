@@ -25,7 +25,9 @@ public class ViewCommand extends Command {
     public ViewCommand(Index index) {
         this.indexOfTheFostererToView = index;
     }
-    public ViewCommand() { this.indexOfTheFostererToView = null; }
+    public ViewCommand() {
+        this.indexOfTheFostererToView = null;
+    }
     @Override
     public CommandResult execute(Model model) throws CommandException {
         // Viewing empty profile for adding new fosterer

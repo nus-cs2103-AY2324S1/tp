@@ -152,7 +152,7 @@ public class PersonProfileNote extends UiPart<SplitPane> {
                 String before = text.substring(0, cursor);
                 String after = text.substring(cursor);
                 valueField.setText(before + "\n" + after);
-                valueField.positionCaret(cursor+1);
+                valueField.positionCaret(cursor + 1);
                 return;
             }
             if (confirm()) {

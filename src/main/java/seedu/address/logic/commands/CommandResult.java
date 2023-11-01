@@ -3,11 +3,10 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 
 import java.util.Objects;
-import java.util.function.Predicate;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.model.person.*;
+import seedu.address.model.person.Person;
 
 /**
  * Represents the result of a command execution.
@@ -71,11 +70,17 @@ public class CommandResult {
         return personToView;
     }
 
-    public Index getTargetIndex() { return targetIndex; }
+    public Index getTargetIndex() {
+        return targetIndex;
+    }
 
-    public CommandType getCommandType() { return commandType; }
+    public CommandType getCommandType() {
+        return commandType;
+    }
 
-    public boolean getIsFostererEdited() { return isFostererEdited; }
+    public boolean getIsFostererEdited() {
+        return isFostererEdited;
+    }
 
     @Override
     public boolean equals(Object other) {
