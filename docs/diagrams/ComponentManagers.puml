@@ -20,6 +20,7 @@ Class StorageManager
 }
 
 Class HiddenOutside #FFFFFF
+HiddenOutside ..> Logic
 
 LogicManager .up.|> Logic
 ModelManager .up.|> Model
