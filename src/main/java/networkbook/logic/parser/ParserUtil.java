@@ -194,25 +194,76 @@ public class ParserUtil {
      */
     public static UniqueList<Course> parseCourses(Collection<String> courses) throws ParseException {
         requireNonNull(courses);
+
         if (!verifyNoDuplicates(courses)) {
             throw new ParseException(MESSAGE_COURSE_DUPLICATE);
         }
         UniqueList<Course> result = new UniqueList<>();
-        for (String link : courses) {
-            result.add(parseCourse(link));
+        for (String course : courses) {
+            result.add(parseCourseWithPrefixes(course));
         }
         return result;
+    }
+
+    /**
+     * Parses a given string with prefixes into a {@code Course} object.
+     *
+     * @throws ParseException If there is no course name, or if there is an end date but no start date
+     */
+    public static Course parseCourseWithPrefixes(String courseText) throws ParseException {
+        ArgumentMultimap argMultiMap =
+                ArgumentTokenizer.tokenize(
+                        courseText,
+                        CliSyntax.PREFIX_COURSE_START,
+                        CliSyntax.PREFIX_COURSE_END
+                );
+
+        if (argMultiMap.getPreamble().isEmpty()) {
+            throw new ParseException(Course.NO_COURSE_NAME);
+        }
+
+        argMultiMap.verifyNoDuplicatePrefixesFor(CliSyntax.PREFIX_COURSE_START, CliSyntax.PREFIX_COURSE_END);
+
+        // Throws exception if there is an end date but no start date
+        if (ArgumentMultimap.arePrefixesPresent(argMultiMap, CliSyntax.PREFIX_COURSE_END)
+                && !ArgumentMultimap.arePrefixesPresent(argMultiMap, CliSyntax.PREFIX_COURSE_START)) {
+            throw new ParseException(Course.END_DATE_WITH_NO_START);
+        }
+
+        return parseCourse(argMultiMap.getPreamble(),
+                argMultiMap.getValue(CliSyntax.PREFIX_COURSE_START).orElse(""),
+                argMultiMap.getValue(CliSyntax.PREFIX_COURSE_END).orElse(""));
     }
 
     /**
      * Parses a {@code course} from {@code String} into a {@code Course}.
      * @throws ParseException When the {@code course} is invalid.
      */
-    public static Course parseCourse(String course) throws ParseException {
+    public static Course parseCourse(String course, String start, String end) throws ParseException {
         requireNonNull(course);
         String trimmedCourse = course.trim();
         if (!Course.isValidCourse(trimmedCourse)) {
             throw new ParseException(Course.MESSAGE_CONSTRAINTS);
+        }
+
+        // Process dates, if they are not empty strings
+        if (!start.equals("")) {
+            String trimmedStart = start.trim();
+            if (!Course.isValidDate(trimmedStart)) {
+                throw new ParseException(Course.DATE_CONSTRAINTS);
+            }
+            if (!end.equals("")) {
+                String trimmedEnd = end.trim();
+                if (!Course.isValidDate(trimmedEnd)) {
+                    throw new ParseException(Course.DATE_CONSTRAINTS);
+                }
+                try {
+                    return new Course(trimmedCourse, trimmedStart, trimmedEnd);
+                } catch (IllegalArgumentException e) {
+                    throw new ParseException(e.getMessage());
+                }
+            }
+            return new Course(trimmedCourse, trimmedStart);
         }
         return new Course(trimmedCourse);
     }

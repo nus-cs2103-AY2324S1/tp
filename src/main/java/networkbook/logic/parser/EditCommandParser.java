@@ -2,6 +2,8 @@ package networkbook.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.Collections;
+
 import networkbook.commons.core.index.Index;
 import networkbook.logic.Messages;
 import networkbook.logic.commands.edit.EditAction;
@@ -148,7 +150,7 @@ public class EditCommandParser implements Parser<EditCommand> {
     }
 
     private static EditAction generateCourseAction(ArgumentMultimap argMultimap) throws ParseException {
-        Course course = ParserUtil.parseCourse(argMultimap.getValue(CliSyntax.PREFIX_COURSE).get());
+        Course course = ParserUtil.parseCourseWithPrefixes(argMultimap.getValue(CliSyntax.PREFIX_COURSE).get());
         Index index = ParserUtil.parseIndex(argMultimap.getValue(CliSyntax.PREFIX_INDEX).get());
         return new EditCourseAction(index, course);
     }

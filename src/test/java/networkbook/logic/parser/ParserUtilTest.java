@@ -211,7 +211,7 @@ public class ParserUtilTest {
 
     @Test
     public void parseCourse_invalidValue_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseCourse(INVALID_COURSE));
+        assertThrows(ParseException.class, () -> ParserUtil.parseCourse(INVALID_COURSE, "", ""));
     }
 
     @Test

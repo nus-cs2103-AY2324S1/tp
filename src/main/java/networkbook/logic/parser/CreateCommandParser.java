@@ -42,7 +42,7 @@ public class CreateCommandParser implements Parser<CreateCommand> {
                         CliSyntax.PREFIX_PRIORITY
                 );
 
-        if (!arePrefixesPresent(
+        if (!ArgumentMultimap.arePrefixesPresent(
                 argMultimap,
                 CliSyntax.PREFIX_NAME
         ) || !argMultimap.getPreamble().isEmpty()) {
@@ -73,14 +73,6 @@ public class CreateCommandParser implements Parser<CreateCommand> {
                     tagList, priority);
 
         return new CreateCommand(person);
-    }
-
-    /**
-     * Returns true if none of the prefixes contains empty {@code Optional} values in the given
-     * {@code ArgumentMultimap}.
-     */
-    private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
-        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
 
 }
