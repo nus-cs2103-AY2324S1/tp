@@ -8,8 +8,8 @@ It is optimised for use via an in-app Command Line Interface (CLI), while still 
 
 It has useful features relevant to NUS SoC students:
 
-- Tagging contacts by category: You could tag all your professors and classmates with custom tags such as "Professor", "Tutorial mate", "CS2103" etc., then filter by tag
-- Storing different ways to reach people: By adding alternate contact details, you could have multiple phone numbers, NUS email, gmail, Telegram, Discord etc. all in the same contact
+- Tagging contacts by category: You could tag all your professors and classmates with custom tags such as "Professor", "Tutorial mate", "CS2103" etc., then filter by tag.
+- Storing different ways to reach people: By adding alternate contact details, you could have multiple phone numbers, NUS email, gmail, Telegram, Discord etc. all in the same contact.
 
 If you can type fast, prefer typing, and are reasonably comfortable with CLI inputs, ConText can let you manage contacts faster than traditional GUI apps.
 
@@ -20,15 +20,25 @@ If you can type fast, prefer typing, and are reasonably comfortable with CLI inp
 
 ## Quick start
 
-Upon launching ConText, you'll be presented with a clean interface. At the top is the command input box. Right below it, feedback from the commands you input will be displayed. Beneath the feedback section, you'll find a list of your contacts.
+1. Ensure you have [Java 11](https://openjdk.org/) or above installed.
 
-### Entering text commands
+1. Download the latest `context.jar` [here](https://github.com/AY2324S1-CS2103-W14-3/tp/releases).
 
-1. Click on the command input box at the top of the application.
-2. Type your command.
-3. Press `Enter` to run the command.
+1. Place the JAR file in the folder you want to use as the app's home folder.
 
-Any feedback, including errors, will appear directly below the input box.
+1. Open a command terminal, `cd` into the folder you put the JAR file in, and use the `java -jar context.jar` command to run the application.\
+A window should open with a GUI similar to the one below. Note how the app starts off with some sample data.\
+![Ui](images/Ui.png)
+
+1. The text box at the top of the window should be automatically selected. This is where you can type your text commands. Press <kbd>Enter</kbd> to execute them.\
+The feedback from each command's execution will be displayed below the text box, and the currently displayed list of contacts is at the bottom.
+
+1. Refer to the [Features](#Features) section below to find out about the various commands.
+
+<div markdown="span" class="alert alert-primary">
+    :bulb: **Tip:**
+    You could test out some commands on the sample data. Once you are familiarised, feel free to use the `clear` command to delete all the sample data, and start adding your own contacts!
+</div>
 
 ---
 
