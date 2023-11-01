@@ -286,7 +286,7 @@ The following activity diagram summarizes what happens when a user executes a ne
   * Pros: Easy to implement.
   * Cons: May have performance issues in terms of memory usage.
 
-* **Alternative 2:** Individual command knows how to undo/redo by
+* **Alternative 2:** Individual command knomarws how to undo/redo by
   itself.
   * Pros: Will use less memory (e.g. for `delete`, just save the student being deleted).
   * Cons: We must ensure that the implementation of each individual command are correct.
@@ -344,7 +344,15 @@ This feature builds upon the current design of Student and ClassDetails.
 
 <puml src="diagrams/MarkPresentSequenceDiagram.puml" alt="MarkPresentSequenceDiagram" />
 
+<box type="info" seamless>
+
 **Note:** The diagram above only shows part of the interactions within the model component.
+
+</box>
+
+#### Design considerations:
+
+The feature should be implemented upon the current design of Student and ClassDetails. Alternative designs may exist, such as treating the attendance and participation as association classes. 
 
 ### Config feature
 
