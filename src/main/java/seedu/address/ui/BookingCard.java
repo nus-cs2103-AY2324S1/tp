@@ -1,6 +1,7 @@
 package seedu.address.ui;
 
 import javafx.fxml.FXML;
+import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tooltip;
@@ -65,7 +66,11 @@ public class BookingCard extends UiPart<Region> {
         remark.setText(booking.getRemark().value);
         Tag tag = booking.getTags();
         Label tagLabel = new Label(tag.tagName);
+        tagLabel.setStyle("-fx-font-weight: bold; -fx-font-size: 14; -fx-background-color: #64a4db; -fx-background-radius: 15; -fx-padding: 5px;");
         tags.getChildren().add(tagLabel);
+
+        // Adding spacing between tags and room
+        FlowPane.setMargin(tagLabel, new Insets(0, 0, 0, 50)); // Adjust the insets as needed
     }
 
     @FXML

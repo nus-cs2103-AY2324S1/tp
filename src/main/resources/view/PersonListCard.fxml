@@ -28,8 +28,8 @@
             <Region fx:constant="USE_PREF_SIZE" />
           </minWidth>
         </Label>
+        <FlowPane fx:id="tags" maxWidth="Infinity" HBox.hgrow="ALWAYS" />
       </HBox>
-      <FlowPane fx:id="tags" maxWidth="Infinity" />
       <FlowPane>
         <children>
           <Label fx:id="bookingPeriod" styleClass="cell_small_label" text="\$bookingPeriod" textFill="WHITE">

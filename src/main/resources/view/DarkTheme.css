@@ -199,7 +199,16 @@
     -fx-background-color: transparent;
 }
 
+/* File and Help Menus */
+.menu {
+    -fx-background-radius: 15;
+    -fx-border-radius: 15;
+    -fx-spacing: 5; /* Add spacing between File and Help buttons */
+}
+
 .menu-bar {
+    -fx-background-radius: 15;
+    -fx-border-radius: 15;
     -fx-background-color: #2e4a8a;
     -fx-border-width: 0 0 1 0;
     -fx-border-color: transparent;
@@ -213,15 +222,34 @@
 }
 
 .menu .left-container {
+    -fx-background-radius: 15;
+    -fx-border-radius: 15;
     -fx-background-color: black;
 }
 
 .context-menu {
+    -fx-background-radius: 15;
+    -fx-border-radius: 15;
     -fx-background-color: #2e4a8a;
 }
 
+/* File and Help MenuItems */
+.menu-item {
+    -fx-background-radius: 15;
+    -fx-border-radius: 15;
+    -fx-padding: 5 10; /* Adjust the padding as needed */
+    -fx-background-color: #a30808; /* Fill color */
+}
+
 .menu-item .label {
+    -fx-background-radius: 15;
+    -fx-border-radius: 15;
     -fx-text-fill: white;
+}
+
+/* Hover effect for MenuItems */
+.menu-item:hover {
+    -fx-background-color: #a30808; /* Change the color on hover */
 }
 
 /*
@@ -230,10 +258,11 @@
  * http://pixelduke.wordpress.com/2012/10/23/jmetro-windows-8-controls-on-java/
  */
 .button {
+    -fx-background-radius: 15;
+    -fx-border-radius: 15;
     -fx-padding: 5 22 5 22;
     -fx-border-color: #e2e2e2;
     -fx-border-width: 2;
-    -fx-background-radius: 0;
     -fx-background-color: #1d1d1d;
     -fx-font-family: "Arial";
     -fx-font-size: 11pt;
@@ -242,10 +271,14 @@
 }
 
 .button:hover {
+    -fx-background-radius: 15;
+    -fx-border-radius: 15;
     -fx-background-color: #3a3a3a;
 }
 
 .button:pressed, .button:default:hover:pressed {
+    -fx-background-radius: 15;
+    -fx-border-radius: 15;
     -fx-background-color: white;
     -fx-text-fill: #1d1d1d;
 }
