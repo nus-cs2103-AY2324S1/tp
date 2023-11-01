@@ -26,28 +26,57 @@ public class CommandHistoryTest {
     }
 
     @Test
-    public void addCommand() {
+    public void addSingleCommand_commandIsAdded() {
         commandHistory.addCommand(COMMAND_1);
-        commandHistoryWithMaxCommands.addCommand(COMMAND_1);
         assertEquals(COMMAND_1, commandHistory.getPreviousCommand());
         assertEquals("", commandHistory.getNextCommand());
+    }
 
+    @Test
+    public void addMultipleCommands_commandsAreAddedInOrder() {
+        commandHistory.addCommand(COMMAND_1);
         commandHistory.addCommand(COMMAND_2);
-        commandHistoryWithMaxCommands.addCommand(COMMAND_2);
         assertEquals(COMMAND_2, commandHistory.getPreviousCommand());
         assertEquals(COMMAND_1, commandHistory.getPreviousCommand());
+    }
+
+    @Test
+    public void addDuplicateSuccessiveCommands_onlyOneCommandIsAdded() {
+        commandHistory.addCommand(COMMAND_1);
+        commandHistory.addCommand(COMMAND_1); // Duplicate
         assertEquals(COMMAND_1, commandHistory.getPreviousCommand());
-        assertEquals(COMMAND_2, commandHistory.getNextCommand());
         assertEquals("", commandHistory.getNextCommand());
+    }
 
-        commandHistory.addCommand("COMMAND_2");
-        assertEquals("COMMAND_2", commandHistory.getPreviousCommand());
+    @Test
+    public void addEmptyCommand_emptyCommandIsNotAdded() {
+        commandHistory.addCommand("");
+        assertEquals("", commandHistory.getPreviousCommand());
         assertEquals("", commandHistory.getNextCommand());
+    }
 
-        commandHistoryWithMaxCommands.addCommand(COMMAND_3);
+    @Test
+    public void addCommandsExceedingMaxHistorySize_oldestCommandIsRemoved() {
+        commandHistoryWithMaxCommands.addCommand(COMMAND_1);
+        commandHistoryWithMaxCommands.addCommand(COMMAND_2);
+        commandHistoryWithMaxCommands.addCommand(COMMAND_3); // Should remove COMMAND_1
         assertEquals(COMMAND_3, commandHistoryWithMaxCommands.getPreviousCommand());
         assertEquals(COMMAND_2, commandHistoryWithMaxCommands.getPreviousCommand());
         assertEquals(COMMAND_2, commandHistoryWithMaxCommands.getPreviousCommand());
-        commandHistoryWithMaxCommands.resetCurrentCommandIndex();
+    }
+
+    @Test
+    public void addCommandToCustomMaxSizeHistory_commandIsAdded() {
+        commandHistoryWithMaxCommands.addCommand(COMMAND_1);
+        assertEquals(COMMAND_1, commandHistoryWithMaxCommands.getPreviousCommand());
+    }
+
+    @Test
+    public void resetCurrentCommandIndex_indexIsReset() {
+        commandHistory.addCommand(COMMAND_1);
+        commandHistory.addCommand(COMMAND_2);
+        commandHistory.getPreviousCommand(); // Move index back
+        commandHistory.resetCurrentCommandIndex();
+        assertEquals("", commandHistory.getNextCommand());
     }
 }
