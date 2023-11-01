@@ -738,15 +738,43 @@ You can also refer to [input information](#input-examples) for details about val
 
 Clears all data in TutorConnect.
 
-More details coming soon...
+##### :star: First time users
+{:.no_toc}
+
+**Scenario**
+
+You realised that all your current tutors and schedules created are all wrong, and you would like to delete them all.
+
+Instead of deleting them one by one, use the clear command!
 
 <div markdown="block" class="alert alert-warning">
 
 **:warning: Warning**<br>
 
-This action is irreversible! Do not enter the command unless you are very sure.
+This action is irreversible! Your tutors and schedules will be gone **FOREVER**.
+
+Do not enter the command unless you are very sure.
 
 </div>
+
+**Follow these steps**
+
+Type in `clear` and press enter.
+
+**What you can expect to see**
+
+That's it. It's all gone. TutorConnect should now display an empty address book.
+
+![clear addressbook](images/clearAddressBook.png)
+
+##### :star::star::star: Experienced users
+{:.no_toc}
+
+There are no additional information about this command.
+
+As an experienced user, you should be aware of the dangers of the `clear` command.  
+
+[Back To Top](#table-of-contents)
 
 #### Help: `help`
 
