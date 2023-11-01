@@ -98,8 +98,11 @@ public class AddressBookParser {
         case SortCommand.COMMAND_WORD:
             return new SortCommandParser().parse(arguments);
 
-        case UpdateSecLevelCommand.COMMAND_WORD:
+        case UpdateSecLevelCommand.UPDATE_COMMAND_WORD:
             return new UpdateSecLevelCommand();
+
+        case UpdateSecLevelCommand.UNDO_COMMAND_WORD:
+            return new UpdateSecLevelCommand(true);
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);

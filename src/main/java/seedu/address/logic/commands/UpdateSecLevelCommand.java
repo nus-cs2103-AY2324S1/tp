@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
+import static seedu.address.logic.commands.EditCommand.MESSAGE_DUPLICATE_PERSON;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ENROL_DATE;
@@ -26,6 +27,7 @@ import seedu.address.commons.util.CollectionUtil;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
@@ -38,27 +40,52 @@ import seedu.address.model.person.Student;
 import seedu.address.model.tag.Subject;
 public class UpdateSecLevelCommand extends Command {
 
-    public static final String COMMAND_WORD = "uplevel";
+    public static final String UPDATE_COMMAND_WORD = "uplevel";
+    public static final String UNDO_COMMAND_WORD = "undolevel";
 
     public static final String MESSAGE_UPDATE_SUCCESS = "Sec Levels for all students have been updated.\n"
                                                         + "Sec Levels for students with sec level 1-3 have been increased by 1\n"
                                                         + "Sec Levels for students with sec level 4 have been deleted";
-    public UpdateSecLevelCommand() {}
+
+    public static final String MESSAGE_UNDO_SUCCESS = "All of the students records before last sec level update have been restored";
+    public static final String MESSAGE_UNDO_FAILURE = "There is no sec level update record since you last open this application.";
+    private static Student[] beforeLastUpdateStudents = null;
+    private boolean isUndo;
+    public UpdateSecLevelCommand(boolean isUndo) {
+        this.isUndo = isUndo;
+    }
+
+    public UpdateSecLevelCommand() {
+        this(false);
+    }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        Student[] students = model.getFilteredPersonList().toArray(new Student[0]);
-         for (Student student : students){
-            if (student.getSecLevel().getValue() > 3) {
-                model.deletePerson(student);
-            } else {
-                Student updatedStudent = createUpdatedSecStudent(student);
-                model.setPerson(student, updatedStudent);
+        if (isUndo) {
+            if (beforeLastUpdateStudents == null) {
+                return new CommandResult(MESSAGE_UNDO_FAILURE);
             }
+            model.setAddressBook(new AddressBook());
+            for (Student student: beforeLastUpdateStudents) {
+                model.addPerson(student);
+            }
+            return new CommandResult(MESSAGE_UNDO_SUCCESS);
+        } else {
+            Student[] students = model.getFilteredPersonList().toArray(new Student[0]);
+            // record the students before performing the update for undo purpose.
+            beforeLastUpdateStudents = students;
+            for (Student student : students) {
+                if (student.getSecLevel().getValue() > 3) {
+                    model.deletePerson(student);
+                } else {
+                    Student updatedStudent = createUpdatedSecStudent(student);
+                    model.setPerson(student, updatedStudent);
+                }
+            }
+            model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+            return new CommandResult(MESSAGE_UPDATE_SUCCESS);
         }
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(MESSAGE_UPDATE_SUCCESS);
     }
 
 
@@ -92,10 +119,5 @@ public class UpdateSecLevelCommand extends Command {
         }
 
         return true;
-    }
-
-    @Override
-    public String toString() {
-        return "command to update all sec level by one";
     }
 }
