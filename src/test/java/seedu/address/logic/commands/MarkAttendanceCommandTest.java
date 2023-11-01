@@ -6,6 +6,7 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.MarkAttendanceCommand.MESSAGE_ABSENT;
 import static seedu.address.logic.commands.MarkAttendanceCommand.MESSAGE_PERSON_NOT_FOUND;
+import static seedu.address.logic.commands.MarkAttendanceCommand.MESSAGE_PERSON_NOT_FOUND_MULTIPLE;
 import static seedu.address.logic.commands.MarkAttendanceCommand.MESSAGE_PRESENT;
 import static seedu.address.logic.commands.MarkAttendanceCommand.MESSAGE_SUCCESS;
 import static seedu.address.logic.commands.MarkAttendanceCommand.MESSAGE_UPDATED_SUCCESS;
@@ -68,7 +69,7 @@ public class MarkAttendanceCommandTest {
                 amy.getName(), amy.getName(), "Late");
 
         Person expectedAmy = new PersonBuilder(amy)
-                .withAttendance(new Attendance(new Week(1), true, null))
+                .withAttendance(new Attendance(new Week(1), true, "Late"))
                 .build();
         expectedModel.addPerson(expectedAmy);
 
@@ -102,13 +103,13 @@ public class MarkAttendanceCommandTest {
     public void execute_marksAttendanceAsAbsentWithValidPersonID_success() {
         Person amy = new PersonBuilder().build();
         model.addPerson(amy);
-        MarkAttendanceCommand markAttendanceCommand = new MarkAttendanceCommand(List.of("A1234567E"), true,
-                new Week(1), null);
-        String expectedMessage = String.format(MESSAGE_SUCCESS + "%s\n" + "%s" + MESSAGE_PRESENT + "1\n",
-                amy.getName(), amy.getName());
+        MarkAttendanceCommand markAttendanceCommand = new MarkAttendanceCommand(List.of("A1234567E"), false,
+                new Week(1), "Late");
+        String expectedMessage = String.format(MESSAGE_SUCCESS + "%s\n" + "%s" + MESSAGE_ABSENT + "1\nReason: %s\n",
+                amy.getName(), amy.getName(), "Late");
 
         Person expectedAmy = new PersonBuilder(amy)
-                .withAttendance(new Attendance(new Week(1), true, null))
+                .withAttendance(new Attendance(new Week(1), true, "Late"))
                 .build();
         expectedModel.addPerson(expectedAmy);
 
@@ -137,6 +138,204 @@ public class MarkAttendanceCommandTest {
         MarkAttendanceCommand markAttendanceCommand = new MarkAttendanceCommand(List.of("A1234555E"), true,
                 new Week(1), null);
         assertCommandFailure(markAttendanceCommand, model, MESSAGE_PERSON_NOT_FOUND);
+    }
+
+    /**
+     * Test for marking attendance as present using multiple valid person's name.
+     */
+    @Test
+    public void execute_marksAttendanceAsPresentWithMultipleValidPersonName_success() {
+
+        StringBuilder expectedMessage = new StringBuilder();
+
+        Person amy = new PersonBuilder().build();
+        Person bob = new PersonBuilder().withName("Bob").withId("A0000123Z").build();
+        model.addPerson(amy);
+        model.addPerson(bob);
+
+        MarkAttendanceCommand markAttendanceCommand = new MarkAttendanceCommand(List.of("Amy Bee", "Bob"), true,
+                new Week(1), null);
+
+        expectedMessage.append(String.format(MESSAGE_SUCCESS + "%s\n" + "%s" + MESSAGE_PRESENT + "1\n",
+                amy.getName(), amy.getName()));
+        expectedMessage.append(String.format(MESSAGE_SUCCESS + "%s\n" + "%s" + MESSAGE_PRESENT + "1\n",
+                bob.getName(), bob.getName()));
+
+        Person expectedAmy = new PersonBuilder(amy)
+                .withAttendance(new Attendance(new Week(1), true, null))
+                .build();
+        Person expectedBob = new PersonBuilder(bob)
+                .withAttendance(new Attendance(new Week(1), true, null))
+                .build();
+
+        expectedModel.addPerson(expectedAmy);
+        expectedModel.addPerson(expectedBob);
+
+        assertCommandSuccess(markAttendanceCommand, model, expectedMessage.toString(), expectedModel);
+    }
+
+    /**
+     * Test for marking attendance as absent using multiple valid person's name.
+     */
+    @Test
+    public void execute_marksAttendanceAsAbsentWithMultipleValidPersonName_success() {
+
+        StringBuilder expectedMessage = new StringBuilder();
+
+        Person amy = new PersonBuilder().build();
+        Person bob = new PersonBuilder().withName("Bob").withId("A0000123Z").build();
+        model.addPerson(amy);
+        model.addPerson(bob);
+
+        MarkAttendanceCommand markAttendanceCommand = new MarkAttendanceCommand(List.of("Amy Bee", "Bob"), false,
+                new Week(1), "Late");
+
+        expectedMessage.append(String.format(MESSAGE_SUCCESS + "%s\n" + "%s" + MESSAGE_ABSENT + "1\nReason: %s\n",
+                amy.getName(), amy.getName(), "Late"));
+        expectedMessage.append(String.format(MESSAGE_SUCCESS + "%s\n" + "%s" + MESSAGE_ABSENT + "1\nReason: %s\n",
+                bob.getName(), bob.getName(), "Late"));
+
+        Person expectedAmy = new PersonBuilder(amy)
+                .withAttendance(new Attendance(new Week(1), true, "Late"))
+                .build();
+        Person expectedBob = new PersonBuilder(bob)
+                .withAttendance(new Attendance(new Week(1), true, "Late"))
+                .build();
+
+        expectedModel.addPerson(expectedAmy);
+        expectedModel.addPerson(expectedBob);
+
+        assertCommandSuccess(markAttendanceCommand, model, expectedMessage.toString(), expectedModel);
+    }
+
+    /**
+     * Test for marking attendance as present using multiple valid person's ID.
+     */
+    @Test
+    public void execute_marksAttendanceAsPresentWithMultipleValidPersonID_success() {
+
+        StringBuilder expectedMessage = new StringBuilder();
+
+        Person amy = new PersonBuilder().build();
+        Person bob = new PersonBuilder().withName("Bob").withId("A0000123Z").build();
+        model.addPerson(amy);
+        model.addPerson(bob);
+
+        MarkAttendanceCommand markAttendanceCommand = new MarkAttendanceCommand(List.of("A1234567E", "A0000123Z"), true,
+                new Week(1), null);
+
+        expectedMessage.append(String.format(MESSAGE_SUCCESS + "%s\n" + "%s" + MESSAGE_PRESENT + "1\n",
+                amy.getName(), amy.getName()));
+        expectedMessage.append(String.format(MESSAGE_SUCCESS + "%s\n" + "%s" + MESSAGE_PRESENT + "1\n",
+                bob.getName(), bob.getName()));
+
+        Person expectedAmy = new PersonBuilder(amy)
+                .withAttendance(new Attendance(new Week(1), true, null))
+                .build();
+        Person expectedBob = new PersonBuilder(bob)
+                .withAttendance(new Attendance(new Week(1), true, null))
+                .build();
+
+        expectedModel.addPerson(expectedAmy);
+        expectedModel.addPerson(expectedBob);
+
+        assertCommandSuccess(markAttendanceCommand, model, expectedMessage.toString(), expectedModel);
+    }
+
+    /**
+     * Test for marking attendance as absent using mulitple valid person's ID.
+     */
+    @Test
+    public void execute_marksAttendanceAsAbsentWithMultipleValidPersonID_success() {
+
+        StringBuilder expectedMessage = new StringBuilder();
+
+        Person amy = new PersonBuilder().build();
+        Person bob = new PersonBuilder().withName("Bob").withId("A0000123Z").build();
+        model.addPerson(amy);
+        model.addPerson(bob);
+
+        MarkAttendanceCommand markAttendanceCommand = new MarkAttendanceCommand(List.of("A1234567E", "A0000123Z"),
+                false, new Week(1), "Late");
+
+        expectedMessage.append(String.format(MESSAGE_SUCCESS + "%s\n" + "%s" + MESSAGE_ABSENT + "1\nReason: %s\n",
+                amy.getName(), amy.getName(), "Late"));
+        expectedMessage.append(String.format(MESSAGE_SUCCESS + "%s\n" + "%s" + MESSAGE_ABSENT + "1\nReason: %s\n",
+                bob.getName(), bob.getName(), "Late"));
+
+        Person expectedAmy = new PersonBuilder(amy)
+                .withAttendance(new Attendance(new Week(1), false, "Late"))
+                .build();
+        Person expectedBob = new PersonBuilder(bob)
+                .withAttendance(new Attendance(new Week(1), false, "Late"))
+                .build();
+
+        expectedModel.addPerson(expectedAmy);
+        expectedModel.addPerson(expectedBob);
+
+        assertCommandSuccess(markAttendanceCommand, model, expectedMessage.toString(), expectedModel);
+    }
+
+    /**
+     * Test for marking attendance using multiple names present but containing an invalid person's name.
+     */
+    @Test
+    public void execute_marksAttendanceWithMultipleContainingInvalidPersonName_success() {
+
+        StringBuilder expectedMessage = new StringBuilder();
+
+        Person amy = new PersonBuilder().build();
+        Person bob = new PersonBuilder().withName("Bob").withId("A0000123Z").build();
+        model.addPerson(amy);
+        model.addPerson(bob);
+
+        MarkAttendanceCommand markAttendanceCommand = new MarkAttendanceCommand(List.of("Amy Bee", "Zac"), true,
+                new Week(1), null);
+
+        expectedMessage.append(String.format(MESSAGE_SUCCESS + "%s\n" + "%s" + MESSAGE_PRESENT + "1\n",
+                amy.getName(), amy.getName()));
+        expectedMessage.append(String.format(MESSAGE_PERSON_NOT_FOUND_MULTIPLE + "%s\n", "Zac"));
+
+        Person expectedAmy = new PersonBuilder(amy)
+                .withAttendance(new Attendance(new Week(1), true, null))
+                .build();
+        Person expectedBob = new PersonBuilder(bob).build();
+
+        expectedModel.addPerson(expectedAmy);
+        expectedModel.addPerson(expectedBob);
+
+        assertCommandSuccess(markAttendanceCommand, model, expectedMessage.toString(), expectedModel);
+    }
+
+    /**
+     * Test for marking attendance using multiple IDs present but containing an invalid person's ID.
+     */
+    @Test
+    public void execute_marksAttendanceWithMultipleContainingInvalidPersonID_success() {
+
+        StringBuilder expectedMessage = new StringBuilder();
+
+        Person amy = new PersonBuilder().build();
+        Person bob = new PersonBuilder().withName("Bob").withId("A0000123Z").build();
+        model.addPerson(amy);
+        model.addPerson(bob);
+
+        MarkAttendanceCommand markAttendanceCommand = new MarkAttendanceCommand(List.of("A1234567E", "AA000123Z"), true,
+                new Week(1), null);
+
+        expectedMessage.append(String.format(MESSAGE_SUCCESS + "%s\n" + "%s" + MESSAGE_PRESENT + "1\n",
+                amy.getName(), amy.getName()));
+        expectedMessage.append(String.format(MESSAGE_PERSON_NOT_FOUND_MULTIPLE + "%s\n", "AA000123Z"));
+
+        Person expectedAmy = new PersonBuilder(amy)
+                .withAttendance(new Attendance(new Week(1), true, null))
+                .build();
+        Person expectedBob = new PersonBuilder(bob).build();
+
+        expectedModel.addPerson(expectedAmy);
+        expectedModel.addPerson(expectedBob);
+
+        assertCommandSuccess(markAttendanceCommand, model, expectedMessage.toString(), expectedModel);
     }
 
     /**
