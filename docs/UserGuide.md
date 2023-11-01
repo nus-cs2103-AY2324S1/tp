@@ -168,4 +168,24 @@ Expected Output (Failure)
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Command summary [coming soon]
+## Command summary
+### Add
+* Add a client profile: ***create***
+* Add a client interaction: ***interaction***
+
+### View
+* View the dashboard: ***dashboard***
+* View the list of clients: ***list***
+* Find a client by name: ***find***
+* View the full details of a client: ***view***
+
+### Edit
+* Edit a client profile: ***edit***
+
+### Delete
+* Delete a client profile: ***delete***
+
+### Exit
+* Exit the application: ***exit***
+
+[↑ Back to table of contents](#table-of-contents)
