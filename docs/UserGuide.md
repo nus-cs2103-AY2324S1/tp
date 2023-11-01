@@ -111,7 +111,7 @@ Parameters:
 **:bulb: Tip:**<br>
 
 * A person can have any number of tags (including 0).
-* `nil` can be indicated for `HOUSING_TYPE`, `AVAILABILITY`, `ANIMAL_NAME` and `YPE_OF_ANIMAL` if that specific information is not currently available.
+* `nil` can be indicated for `HOUSING_TYPE`, `AVAILABILITY`, `ANIMAL_NAME` and `TYPE_OF_ANIMAL` if that specific information is not currently available.
 
 </div>
 
@@ -130,7 +130,7 @@ Valid cases:
 
 <div markdown="span" class="alert alert-warning">
   :exclamation: <b>Important:</b> <br/>
-Duplicate fosterers cannot be added; this is detected by the fosterer's name.</br>
+Duplicate fosterers cannot be added; this is detected by the fosterer's name.
 e.g. <code>"Anne Tay"</code> is the same person as <code>"anne tay"</code> and <code>"anne     tay"</code>.
 </div> 
 
