@@ -58,6 +58,10 @@ public class TimeSlot {
     }
 
     public static String printResults(List<TimeSlot> timeslots) {
+        if (timeslots.size() == 0) {
+            return "There are no available timeslots.";
+        }
+
         String result = "";
 
         for (TimeSlot timeslot : timeslots) {

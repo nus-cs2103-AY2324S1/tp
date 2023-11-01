@@ -1,15 +1,13 @@
 package seedu.address.logic.commands;
 
 import seedu.address.logic.commands.exceptions.CommandException;
-
 import seedu.address.model.Model;
 import seedu.address.model.interval.Interval;
 import seedu.address.model.interval.TimeSlot;
 
-import static java.util.Objects.requireNonNull;
-
 import java.text.ParseException;
 import java.util.List;
+import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_BEGIN;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DAY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DURATION;
@@ -27,7 +25,7 @@ public class FreeTimeCommand extends Command {
             + PREFIX_END + "END "
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_DAY + "Monday "
-            + PREFIX_DURATION+ "60 "
+            + PREFIX_DURATION + "60 "
             + PREFIX_BEGIN + "0800 "
             + PREFIX_END + "2200 ";
     public static final String MESSAGE_ERROR = "An error occurred when executing the freeTime command.";
@@ -52,5 +50,20 @@ public class FreeTimeCommand extends Command {
         } catch (ParseException e) {
             throw new CommandException(MESSAGE_ERROR);
         }
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof FreeTimeCommand)) {
+            return false;
+        }
+
+        FreeTimeCommand otherFindCommand = (FreeTimeCommand) other;
+        return toFind.equals(otherFindCommand.toFind);
     }
 }
