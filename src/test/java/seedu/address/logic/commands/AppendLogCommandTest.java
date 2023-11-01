@@ -15,8 +15,6 @@ import org.junit.jupiter.api.Test;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.logic.Messages;
-import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.LogBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -264,9 +262,7 @@ public class AppendLogCommandTest {
         ModelStubNoPersonsFound model = new ModelStubNoPersonsFound();
         AppendLogCommand appendLogCommand = new AppendLogCommand();
 
-        CommandException exception = assertThrows(CommandException.class, () -> appendLogCommand.execute(model));
-
-        assertEquals(Messages.MESSAGE_EMPTY_FIND_RESULT, exception.getMessage());
+        assertThrows(AssertionError.class, () -> appendLogCommand.execute(model));
 
         assertEquals(0, model.getLogBook().getPersonList().size());
     }

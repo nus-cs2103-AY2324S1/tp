@@ -2,7 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
-import seedu.address.logic.Messages;
+//import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.LogBook;
 import seedu.address.model.Model;
@@ -42,16 +42,15 @@ public class LogCommand extends UndoableCommand {
         model.addToHistory(this);
 
         model.getLogBook().setPersons(model.getFoundPersonsList());
-        if (model.getFoundPersonsList().isEmpty()) {
-            throw new CommandException(Messages.MESSAGE_EMPTY_FIND_RESULT);
-        } else {
-            return new CommandResult(MESSAGE_SUCCESS);
-        }
+
+        // Ensure that there are results from the most recent FindCommand
+        assert !model.getFoundPersonsList().isEmpty();
+        return new CommandResult(MESSAGE_SUCCESS);
+
     }
 
     /**
      * Undoes the LogCommand, restoring the logger tab to its state before saving the results.
-     *
      * @param model The current model that contains the data.
      * @return A CommandResult indicating the success of the undo operation.
      */
