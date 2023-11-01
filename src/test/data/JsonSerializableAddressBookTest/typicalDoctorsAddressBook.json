@@ -10,6 +10,20 @@
       "remark": "She wants to become a Surgeon.",
       "gender": "F",
       "ic": "S9631267K",
+      "appointments": [
+        {
+          "doctorIc": "S9712346B",
+          "patientIc": "S8192320E",
+          "appointmentTime": "2022-02-14 13:30:00",
+          "status": "Scheduled"
+        },
+        {
+          "doctorIc": "S9812345A",
+          "patientIc": "S8192320E",
+          "appointmentTime": "2022-02-28 13:30:00",
+          "status": "Scheduled"
+        }
+      ],
       "tags": [
         "friends"
       ]
@@ -22,6 +36,14 @@
       "remark": "His weakness is being a Perfectionist!",
       "gender": "M",
       "ic": "S9331268K",
+      "appointments": [
+        {
+          "doctorIc": "S9712346B",
+          "patientIc": "S8192320E",
+          "appointmentTime": "2022-02-14 13:30:00",
+          "status": "Scheduled"
+        }
+      ],
       "tags": [
         "owesMoney",
         "friends"
@@ -35,6 +57,7 @@
       "remark": "She hated Medical School",
       "gender": "M",
       "ic": "S9831269K",
+      "appointments": [],
       "tags": []
     },
     {
@@ -45,6 +68,7 @@
       "remark": "She hated Medical School.",
       "gender": "M",
       "ic": "S7531260K",
+      "appointments": [],
       "tags": []
     },
     {
@@ -55,6 +79,7 @@
       "remark": "She hated Medical School.",
       "gender": "F",
       "ic": "S7231261K",
+      "appointments": [],
       "tags": []
     },
     {
@@ -65,6 +90,7 @@
       "remark": "She hated Medical School.",
       "gender": "M",
       "ic": "S9531263K",
+      "appointments": [],
       "tags": []
     },
     {
@@ -75,6 +101,7 @@
       "remark": "She hated Medical School.",
       "gender": "M",
       "ic": "S9831263J",
+      "appointments": [],
       "tags": []
     },
     {
@@ -85,6 +112,7 @@
       "remark": "She hated Medical School.",
       "gender": "F",
       "ic": "S8931263P",
+      "appointments": [],
       "tags": []
     }
   ]

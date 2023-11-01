@@ -2,10 +2,12 @@ package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.appointment.Appointment;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -17,16 +19,17 @@ public class Patient extends Person {
     // Patient specific fields
     private final Condition condition;
     private final BloodType bloodType;
-    //private final Doctor doctor;    to be implemented after Doctor class created
-    private Phone emergencyContact;
+    private final Set<Appointment> appointments = new HashSet<>();
+    private final Phone emergencyContact;
 
     /**
      * Every field must be present and not null.
      */
     public Patient(Name name, Phone phone, Phone emergencyContact, Email email, Address address, Remark remark,
-                   Gender gender, Ic ic, Condition condition, BloodType bloodType, Set<Tag> tags) {
-        super(name, phone, email, address, remark, gender, ic, tags);
-        requireAllNonNull(condition, bloodType);
+                   Gender gender, Ic ic, Condition condition, BloodType bloodType, Set<Appointment> appointments,
+                   Set<Tag> tags) {
+        super(name, phone, email, address, remark, gender, ic, appointments, tags);
+        requireAllNonNull(condition, bloodType, emergencyContact);
         this.condition = condition;
         this.bloodType = bloodType;
         this.emergencyContact = emergencyContact;
@@ -85,13 +88,14 @@ public class Patient extends Person {
                 && ic.equals(otherPatient.ic)
                 && tags.equals(otherPatient.tags)
                 && condition.equals(otherPatient.condition)
-                && bloodType.equals(otherPatient.bloodType);
+                && bloodType.equals(otherPatient.bloodType)
+                && appointments.equals(otherPatient.appointments);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, gender, ic, condition, bloodType, tags);
+        return Objects.hash(name, phone, email, address, gender, ic, condition, bloodType, appointments, tags);
     }
 
     @Override
@@ -107,9 +111,9 @@ public class Patient extends Person {
                 .add("nric", ic)
                 .add("condition", condition)
                 .add("bloodType", bloodType)
+                .add("appointments", appointments)
                 .add("tags", tags)
                 .toString();
     }
-
 }
 
