@@ -6,7 +6,6 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
@@ -15,22 +14,25 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Member;
 import seedu.address.model.task.Task;
 
+/**
+ * Deletes a task from the Member in the address book.
+ */
 public class DeleteMemberTaskCommand extends Command {
 
     public static final String COMMAND_WORD = "deleteTask";
     public static final String COMMAND_ALIAS = "delt";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Deletes a task from the specified member "
-            + "by the index number used in the displayed member list and the task index. \n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Deletes a specified task from the specified member "
+            + "by the index number used in the displayed member list "
+            + "and the task index used in the displayed task list. \n"
             + "Parameters: MEMBER_INDEX (must be a positive integer) "
             + PREFIX_TASK + "TASK_INDEX";
 
-    public static final String MESSAGE_DELETE_TASK_SUCCESS = "Task deleted from member %1$s";
-
+    public static final String MESSAGE_DELETE_TASK_SUCCESS = "Task %1$s deleted from member %2$s";
     private final Index memberIndex;
     private final Index taskIndex;
     /**
-     * Creates a DeleteTaskCommand to delete a task from the specified {@code Member}.
+     * Creates an DeleteMemberTaskCommand to delete the specified {@code Task}
      */
     public DeleteMemberTaskCommand(Index memberIndex, Index taskIndex) {
         requireNonNull(memberIndex);
@@ -51,8 +53,8 @@ public class DeleteMemberTaskCommand extends Command {
 
         Member memberToDeleteTaskFrom = lastShownList.get(memberIndex.getZeroBased());
 
-        if (taskIndex.getZeroBased() < 0 || taskIndex.getZeroBased() >= memberToDeleteTaskFrom.getTasks().size()) {
-            throw new CommandException("Index out of bounds");
+        if (taskIndex.getZeroBased() >= memberToDeleteTaskFrom.getTasks().size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
         }
 
         Task taskToDelete = memberToDeleteTaskFrom.getTasks().get(taskIndex.getZeroBased());
@@ -62,9 +64,10 @@ public class DeleteMemberTaskCommand extends Command {
         model.setMember(memberToDeleteTaskFrom, taskDeletedMember);
         model.updateFilteredMemberList(PREDICATE_SHOW_ALL_PERSONS);
         model.setTaskListForMember(taskDeletedMember);
-        return new CommandResult(String.format(MESSAGE_DELETE_TASK_SUCCESS, memberToDeleteTaskFrom));
-    }
 
+        return new CommandResult(String.format(MESSAGE_DELETE_TASK_SUCCESS, taskToDelete,
+                Messages.format(memberToDeleteTaskFrom)));
+    }
 
     private static Member removeTaskFromMember(Member member, Task taskToDelete) {
         assert member != null;
