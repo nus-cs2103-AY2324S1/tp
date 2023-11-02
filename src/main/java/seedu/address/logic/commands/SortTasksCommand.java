@@ -1,16 +1,16 @@
 package seedu.address.logic.commands;
 
+import static java.util.Objects.requireNonNull;
+
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.task.exceptions.InvalidSortingOrderException;
 
-import static java.util.Objects.requireNonNull;
-
 /**
  * Changes the sorting order of tasks in the task manager.
  */
-public class SortTasksCommand extends Command  {
+public class SortTasksCommand extends Command {
     public static final String COMMAND_WORD = "sortTasks";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Changes the way tasks in the task list are sorted."
