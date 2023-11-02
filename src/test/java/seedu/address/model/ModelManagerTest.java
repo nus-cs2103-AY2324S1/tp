@@ -21,6 +21,7 @@ import seedu.address.model.person.NameContainsKeywordPredicate;
 import seedu.address.model.person.Student;
 import seedu.address.testutil.AddressBookBuilder;
 
+
 public class ModelManagerTest {
 
     private ModelManager modelManager = new ModelManager();
@@ -44,8 +45,38 @@ public class ModelManagerTest {
     }
 
     @Test
+    public void testGetTableWithNullArgument() {
+        assertThrows(NullPointerException.class, () -> ModelManager.getTable(null));
+    }
+
+    @Test
+    public void testGetBarWithNullArgument() {
+        assertThrows(NullPointerException.class, () -> ModelManager.getBarChart(null));
+    }
+
+    @Test
+    public void testExportWithNullVisual() {
+        assertThrows(NullPointerException.class, () -> modelManager.export(null));
+    }
+
+    @Test
     public void setUserPrefs_nullUserPrefs_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> modelManager.setUserPrefs(null));
+    }
+
+    @Test
+    public void getNullTable_throwsException() {
+        assertThrows(NullPointerException.class, () -> ModelManager.getTable(null));
+    }
+
+    @Test
+    public void getNullBarChart_throwsException() {
+        assertThrows(NullPointerException.class, () -> ModelManager.getBarChart(null));
+    }
+
+    @Test
+    public void exportWithNullVisual_throwsException() {
+        assertThrows(NullPointerException.class, () -> modelManager.export(null));
     }
 
     @Test

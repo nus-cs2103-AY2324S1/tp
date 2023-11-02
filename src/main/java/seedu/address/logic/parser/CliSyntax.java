@@ -17,5 +17,7 @@ public class CliSyntax {
     public static final Prefix PREFIX_ENROL_DATE = new Prefix("d/");
 
     public static final Prefix PREFIX_SORT_IN = new Prefix("in/");
+    public static final Prefix PREFIX_VISUAL_TYPE = new Prefix("v/");
+
 
 }
