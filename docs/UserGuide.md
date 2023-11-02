@@ -530,7 +530,6 @@ Examples:
 
 Output:
 * If the index is not within the numbers in the list, the app should display `The employee index provided is invalid.`
-  <br>![result for incorrect mark index](images/incorrectMarkIndex.png)
 * If the command is incorrect, the app should display `Invalid command format!`
   <br>![result for incorrect command](images/incorrectMarkCommand.png)
 * If the ATTENDANCE_TYPE is not within the valid list, the app should display `Invalid attendance type, only Absent, Late and Present are allowed.`
@@ -555,7 +554,6 @@ Examples:
 
 Output:
 * If the index is not within the numbers in the list, the app should display `The employee index provided is invalid.`
-  <br>![result for incorrect attendance index](images/incorrectAttendanceIndex.png)
 * If the command is incorrect, the app should display `Invalid command format!`
   <br>![result for incorrect command](images/incorrectAttendanceCommand.png)
 * If the command is successful, the app should display the attendance. The address book’s display of the employee’s attendance status.
