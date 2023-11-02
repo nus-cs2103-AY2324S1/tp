@@ -1,5 +1,6 @@
 package seedu.address.logic.commands;
 
+import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.Model;
 import seedu.address.model.card.Card;
 
@@ -48,5 +49,28 @@ public class ListCommand extends Command {
 
         model.updateFilteredCardList(predicate);
         return new CommandResult(MESSAGE_SUCCESS);
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof ListCommand)) {
+            return false;
+        }
+
+        // compares Index equality
+        ListCommand otherListCommand = (ListCommand) other;
+        return predicates.equals(otherListCommand.predicates);
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .add("Predicates", predicates)
+                .toString();
     }
 }

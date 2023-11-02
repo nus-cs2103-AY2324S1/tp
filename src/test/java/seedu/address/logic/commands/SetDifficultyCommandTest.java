@@ -17,10 +17,10 @@ public class SetDifficultyCommandTest {
     private final Model model = new ModelManager(getTypicalDeck(), new UserPrefs());
 
     @Test
-    public void execute_setLowestPriority_success() {
+    public void execute_setDifficultyEasy_success() {
         SetDifficultyCommand setDifficultyCommand = new SetDifficultyCommand(Index.fromZeroBased(0), "easy");
 
-        String expectedMessage = "Set Difficulty for Question 1 (Difficulty level: easy)";
+        String expectedMessage = "Set Difficulty for Question 1 (Difficulty level: EASY)";
 
 
         Model expectedModel = new ModelManager(new Deck(model.getDeck()), new UserPrefs());
@@ -35,7 +35,7 @@ public class SetDifficultyCommandTest {
     public void execute_setDifficultyMiddle_success() {
         SetDifficultyCommand setDifficultyCommand = new SetDifficultyCommand(Index.fromZeroBased(0), "medium");
 
-        String expectedMessage = "Set Difficulty for Question 1 (Difficulty level: medium)";
+        String expectedMessage = "Set Difficulty for Question 1 (Difficulty level: MEDIUM)";
 
         Model expectedModel = new ModelManager(new Deck(model.getDeck()), new UserPrefs());
         expectedModel.getDeck().getCardList().get(0).setDifficulty(Difficulty.MEDIUM);
@@ -49,7 +49,7 @@ public class SetDifficultyCommandTest {
     public void execute_setDifficultyHigh_success() {
         SetDifficultyCommand setDifficultyCommand = new SetDifficultyCommand(Index.fromZeroBased(0), "hard");
 
-        String expectedMessage = "Set Difficulty for Question 1 (Difficulty level: hard)";
+        String expectedMessage = "Set Difficulty for Question 1 (Difficulty level: HARD)";
 
         Model expectedModel = new ModelManager(new Deck(model.getDeck()), new UserPrefs());
         expectedModel.getDeck().getCardList().get(0).setDifficulty(Difficulty.HARD);
