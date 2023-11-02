@@ -16,8 +16,8 @@ public class UserPrefs implements ReadOnlyUserPrefs {
 
     private GuiSettings guiSettings = new GuiSettings();
     private Path classManagerFilePath = Paths.get("data" , "classmanager.json");
-    private int tutorialCount = ClassDetails.DEFAULT_TUTORIAL_COUNT;
-    private int assignmentCount = ClassDetails.DEFAULT_ASSIGNMENT_COUNT;
+    private int tutorialCount = ClassDetails.getTutorialCount();
+    private int assignmentCount = ClassDetails.getAssignmentCount();
     private String theme = "dark";
 
     /**

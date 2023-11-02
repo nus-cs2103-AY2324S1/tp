@@ -48,6 +48,7 @@ import seedu.classmanager.logic.commands.ThemeCommand;
 import seedu.classmanager.logic.commands.UndoCommand;
 import seedu.classmanager.logic.commands.ViewCommand;
 import seedu.classmanager.logic.parser.exceptions.ParseException;
+import seedu.classmanager.model.student.ClassDetails;
 import seedu.classmanager.model.student.Comment;
 import seedu.classmanager.model.student.Student;
 import seedu.classmanager.model.student.StudentContainsKeywordsPredicate;
@@ -203,6 +204,8 @@ public class ClassManagerParserTest {
         ConfigCommand command = (ConfigCommand) parser.parseCommand(
                 ConfigCommand.COMMAND_WORD + " " + PREFIX_TUTORIAL_COUNT + "23 " + PREFIX_ASSIGNMENT_COUNT + "3");
         assertEquals(new ConfigCommand(23, 3), command);
+        ClassDetails.setTutorialCount(13);
+        ClassDetails.setAssignmentCount(6);
     }
 
     @Test

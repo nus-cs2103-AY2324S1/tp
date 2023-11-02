@@ -36,10 +36,9 @@ public class ClassDetails {
 
     // The class number should start with "T".
     public static final String VALIDATION_REGEX = "T.*";
-    public static final int DEFAULT_TUTORIAL_COUNT = 13;
-    public static final int DEFAULT_ASSIGNMENT_COUNT = 6;
-    public static int tutorialCount = DEFAULT_TUTORIAL_COUNT;
-    public static int assignmentCount = DEFAULT_ASSIGNMENT_COUNT;
+
+    private static int tutorialCount = 13;
+    private static int assignmentCount = 6;
 
     public final String classNumber;
     public final AttendanceTracker attendanceTracker;
@@ -116,7 +115,6 @@ public class ClassDetails {
     public String getClassNumber() {
         return this.classNumber;
     }
-
     /**
      * Returns true if a given string is a valid class number.
      */
@@ -130,6 +128,14 @@ public class ClassDetails {
 
     public static void setAssignmentCount(int assignmentCount) {
         ClassDetails.assignmentCount = assignmentCount;
+    }
+
+    public static int getTutorialCount() {
+        return tutorialCount;
+    }
+
+    public static int getAssignmentCount() {
+        return assignmentCount;
     }
 
     /**

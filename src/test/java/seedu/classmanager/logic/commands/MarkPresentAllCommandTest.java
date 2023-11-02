@@ -28,7 +28,7 @@ public class MarkPresentAllCommandTest {
 
     @Test
     public void execute_success() throws CommandException {
-        Index i = Index.fromOneBased(ClassDetails.DEFAULT_TUTORIAL_COUNT);
+        Index i = Index.fromOneBased(ClassDetails.getTutorialCount());
         Student selectedStudent = TypicalStudents.getTypicalStudents().get(0);
         model.setSelectedStudent(selectedStudent);
         MarkPresentAllCommand markPresentAllCommand = new MarkPresentAllCommand(i);
@@ -49,13 +49,13 @@ public class MarkPresentAllCommandTest {
 
     @Test
     public void execute_invalidTutorialIndex_throwsCommandException() {
-        Index i = Index.fromZeroBased(ClassDetails.DEFAULT_TUTORIAL_COUNT + 1);
+        Index i = Index.fromZeroBased(ClassDetails.getTutorialCount() + 1);
 
         MarkPresentAllCommand markPresentAllCommand = new MarkPresentAllCommand(i);
 
         assertCommandFailure(
                 markPresentAllCommand, model,
-                String.format(ClassDetails.MESSAGE_INVALID_TUTORIAL_INDEX, ClassDetails.DEFAULT_TUTORIAL_COUNT),
+                String.format(ClassDetails.MESSAGE_INVALID_TUTORIAL_INDEX, ClassDetails.getTutorialCount()),
                 commandHistory);
     }
 

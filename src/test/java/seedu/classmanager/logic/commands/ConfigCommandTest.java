@@ -20,6 +20,7 @@ import seedu.classmanager.logic.commands.exceptions.CommandException;
 import seedu.classmanager.model.Model;
 import seedu.classmanager.model.ModelManager;
 import seedu.classmanager.model.UserPrefs;
+import seedu.classmanager.model.student.ClassDetails;
 import seedu.classmanager.storage.JsonUserPrefsStorage;
 import seedu.classmanager.storage.UserPrefsStorage;
 
@@ -45,6 +46,8 @@ public class ConfigCommandTest {
                 String.format(MESSAGE_CONFIG_SUCCESS, tutorialCount, assignmentCount));
 
         assertCommandSuccess(configCommand, model, expectedCommandResult, expectedModel, commandHistory);
+        ClassDetails.setTutorialCount(13);
+        ClassDetails.setAssignmentCount(6);
     }
 
     public UserPrefs getUserPrefs(Path userPrefsPath) throws CommandException {
@@ -66,6 +69,8 @@ public class ConfigCommandTest {
         String expectedString = "seedu.classmanager.logic.commands.ConfigCommand{tutorialCount=" + tutorialCount + ", "
                 + "assignmentCount=" + assignmentCount + "}";
         assertEquals(configCommand.toString(), expectedString);
+        ClassDetails.setTutorialCount(13);
+        ClassDetails.setAssignmentCount(6);
     }
 
     @Test
@@ -88,6 +93,8 @@ public class ConfigCommandTest {
 
         // different student -> returns false
         assertFalse(configCommand.equals(otherConfigCommand));
+        ClassDetails.setTutorialCount(13);
+        ClassDetails.setAssignmentCount(6);
     }
 
     @Test
@@ -110,5 +117,7 @@ public class ConfigCommandTest {
 
         // different student -> returns false
         assertFalse(configCommand.hashCode() == otherConfigCommand.hashCode());
+        ClassDetails.setTutorialCount(13);
+        ClassDetails.setAssignmentCount(6);
     }
 }

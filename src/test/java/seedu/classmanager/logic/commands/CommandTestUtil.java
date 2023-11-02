@@ -61,7 +61,7 @@ public class CommandTestUtil {
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
     public static final int TEST_FIRST_TUTORIAL = 1;
     public static final String TEST_FIRST_TUTORIAL_DESC = " " + PREFIX_TUTORIAL_INDEX + TEST_FIRST_TUTORIAL;
-    public static final int TEST_DEFAULT_TUTORIAL = ClassDetails.DEFAULT_TUTORIAL_COUNT;
+    public static final int TEST_DEFAULT_TUTORIAL = ClassDetails.getTutorialCount();
     public static final String TEST_DEFAULT_TUTORIAL_DESC = " " + PREFIX_TUTORIAL_INDEX + TEST_DEFAULT_TUTORIAL;
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones

@@ -58,7 +58,7 @@ public class LogicManagerTest {
     private final Model model = new ModelManager();
     private Logic logic;
     private final int tutorialCount = 13;
-    private final int assignmentCount = 4;
+    private final int assignmentCount = 6;
     private final String fileName = "logicmanagertest";
     private final String loadCommand = "load f/" + fileName;
 
