@@ -131,7 +131,7 @@ Valid cases:
 <div markdown="span" class="alert alert-warning">
   :exclamation: <b>Important:</b> <br/>
 Duplicate fosterers cannot be added; this is detected by the fosterer's name.</br>
-e.g. <code>"Anne Tay"</code> is the same person as <code>"anne tay"</code> and <code>"anne     tay"</code>.
+e.g. <code>"Anne Tay"</code> is the same person as <code>"anne tay"</code> and <code>"anne  (multiple spaces)  tay"</code>.
 </div> 
 
 Examples:
@@ -170,7 +170,7 @@ Alias: `find`
 
 <div markdown="block" class="alert alert-info">
 
-**:information_source: Notes about this command:**<br>
+**:information_source: Notes about the command:**<br>
 
 * The keywords are case-insensitive.
 
@@ -384,15 +384,10 @@ Format: `sort`
 ![Sort](images/screenshots/Sort.png)
 
 ### Viewing Statistics of Available Fosterers : `stats avail`
-Displays statistics about fosterers who are available to foster, and the animals they can foster.
+
+Displays statistics about fosterers who are available to foster, and the animals they can foster. Percentages are calculated to 2 decimal places.
 
 Format: `stats avail`
-
-<div markdown="span" class="alert alert-warning">:exclamation: <b>Caution:</b><br/>
-All statistic commands are calculated based on the currently displayed list.
-
-If you enter `find avail` before `stats avail`, the resulting statistic will show that 100% of listed fosterers are available. Hence, please ensure that the current list of fosterers is the desired list you want your statistics to be calculated from.
-</div>
 
 Examples:
 * `list` followed by `stats avail` 
@@ -400,10 +395,23 @@ Examples:
 * `find cat` followed by `stats avail` 
   * calculates statistics of available fosterers, based on fosterers who are either currently fostering a cat or are able to foster a cat.
 
+
+<div markdown="span" class="alert alert-warning">:exclamation: <b>Caution:</b><br/>
+
+*  All statistic commands are calculated based on the currently displayed list.
+
+If you enter `find avail` before `stats avail`, the resulting statistic will show that 100% of listed fosterers are available. Hence, please ensure that the current list of fosterers is the desired list you want your statistics to be calculated from.
+
+* Percentages may not add up to 100.00%. 
+
+For example, there are 3 available fosterers: 1 is able to foster a dog, 1 is able to foster a cat, and 1 is unknown. The calculated percentages will be all be 33.33%, adding up to 99.99%. It can be assumed that each group takes up 1/3 out of 100.00%.
+</div>
+
 ![Stats](images/screenshots/StatsAvail.png)
 
+
 ### Viewing Statistics of Current Fosterers : `stats current`
-Displays statistics about fosterers who are currently fostering, and the type of animals they are fostering.
+Displays statistics about fosterers who are currently fostering, and the type of animals they are fostering. Percentages are calculated to 2 decimal places.
 
 Format: `stats current`
 
@@ -413,11 +421,12 @@ Examples:
 * `find dog` followed by `stats current`
   * calculates statistics of current fosterers, based on fosterers who are either currently fostering a dog,  or are able to foster a dog.
 
-![Stats](images/screenshots/StatsCurr.png)
+![Stats](images/screenshots/StatsCurrent.png)
 
 
 ### Viewing Housing Statistics : `stats housing`
 Displays statistics about fosterers who are living in a HDB, Condo or Landed.
+Percentages are calculated to 2 decimal places.
 
 Format: `stats housing`
 
