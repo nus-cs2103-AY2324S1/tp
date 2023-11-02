@@ -21,6 +21,7 @@ import seedu.classmanager.model.ModelManager;
 import seedu.classmanager.model.ReadOnlyClassManager;
 import seedu.classmanager.model.ReadOnlyUserPrefs;
 import seedu.classmanager.model.UserPrefs;
+import seedu.classmanager.model.student.ClassDetails;
 import seedu.classmanager.model.util.SampleDataUtil;
 import seedu.classmanager.storage.ClassManagerStorage;
 import seedu.classmanager.storage.JsonClassManagerStorage;
@@ -152,6 +153,11 @@ public class MainApp extends Application {
                 logger.info("Creating new preference file " + prefsFilePath);
             }
             initializedPrefs = prefsOptional.orElse(new UserPrefs());
+            if (initializedPrefs.getAssignmentCount() < 1 || initializedPrefs.getTutorialCount() < 1) {
+                logger.warning("Preference file at " + prefsFilePath + " could not be loaded."
+                        + " Because of Illegal values. Using default preferences.");
+                initializedPrefs = new UserPrefs();
+            }
         } catch (DataLoadingException e) {
             logger.warning("Preference file at " + prefsFilePath + " could not be loaded."
                     + " Using default preferences.");
@@ -165,6 +171,10 @@ public class MainApp extends Application {
             logger.warning("Failed to save config file : " + StringUtil.getDetails(e));
         }
 
+        logger.info("Set the tutorial count to " + initializedPrefs.getTutorialCount());
+        logger.info("Set the assignment count to " + initializedPrefs.getAssignmentCount());
+        ClassDetails.setTutorialCount(initializedPrefs.getTutorialCount());
+        ClassDetails.setAssignmentCount(initializedPrefs.getAssignmentCount());
         return initializedPrefs;
     }
 
