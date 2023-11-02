@@ -223,7 +223,6 @@ Format: `list unpaid`
 **Description** : Mark all the persons as not paid.
 
 Format: `unpaidAll`
-=======
 
 ### Finding Free Time : `freeTime`
 
@@ -301,6 +300,7 @@ To be added soon
 | **delete**      | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                                |
 | **edit**        | `edit INDEX n/NAME p/PHONE_NUMBER a/ADDRESS s/SUBJECTS d/DAY b/BEGIN e/END pr/PAYRATE`<br> e.g.,`edit p/91234567 d/Sun`                                                                            |
 | **list**        | `list`                                                                                                                                                                                             |
+| **find**        | `find n/NAME sb/SUBJECT` <br> e.g., `find n/Alex sb/Math`, `find n/Alex`, `find sb/Maths`
 | **list by day** | `list DAY` <br> e.g., `list Monday`                                                                                                                                                                |
 | **paid**        | `paid INDEX`<br> e.g., `paid 1`                                                                                                                                                                    |
 | **unpaid**      | `unpaid INDEX`<br> e.g., `unpaid 1`                                                                                                                                                                |
