@@ -222,11 +222,24 @@ The star feature is implemented using the `StarCommand` class. The `StarCommand`
 object as a parameter. The 'Index' object is used to identify the `Date` object in the `Model` component to be
 starred. The `StarCommand` class then returns a `CommandResult` object that contains the starred `Date` object
 
+The _Acitvity_ diagram summarises what happens after the user enters a star command.
+![Star Activity.png](..%2F..%2F..%2FStar%20Activity.png)
+
+The _Sequence_ Diagram below shows how the components interact with each other for the scenario where the user issues
+the command `star 1`
+![Star Sequence.png](..%2F..%2F..%2FStar%20Sequence.png)
+
 ### Unstar dates
 The unstar feature is implemented using the `UnstarCommand` class. The `UnstarCommand` class takes in a an 'Index' 
 object as a parameter. The 'Index' object is used to identify the `Date` object in the `Model` component to be
 unstarred. The `UnstarCommand` class then returns a `CommandResult` object that contains the unstarred `Date` object
 
+The _Activity_ diagram summarises what happens after the user enters a star command.
+![Unstar Activity.png](..%2F..%2F..%2FUnstar%20Activity.png)
+
+The _Sequence_ Diagram below shows how the components interact with each other for the scenario where the user issues
+the command `star 1`
+![Unstar Sequence.png](..%2F..%2F..%2FUnstar%20Sequence.png)
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
