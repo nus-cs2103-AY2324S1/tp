@@ -117,7 +117,7 @@ public class CommandResult {
     /**
      * An indicator class to indicate if an event list is being viewed.
      */
-    private static class ViewEventsIndicator {
+    public static class ViewEventsIndicator {
         private static final int MINIMUM_INDEX = 1;
         private final Index index;
         private final boolean isViewEvents;
@@ -125,7 +125,7 @@ public class CommandResult {
         /**
          * Constructs a valid indicator if the index is above 1 and an invalid one otherwise.
          */
-        private ViewEventsIndicator(int index) {
+        public ViewEventsIndicator(int index) {
             if (index >= MINIMUM_INDEX) {
                 this.index = Index.fromOneBased(index);
                 isViewEvents = true;
@@ -138,11 +138,11 @@ public class CommandResult {
         /**
          * Checks if the result requires events to be viewed.
          */
-        private boolean isViewEvents() {
+        public boolean isViewEvents() {
             return isViewEvents;
         }
 
-        private Index getIndex() {
+        public Index getIndex() {
             return index;
         }
     }

@@ -85,6 +85,18 @@ public class DeleteCommandTest {
     }
 
     @Test
+    public void isViewEvents_validViewEventsIndicator_success() {
+        CommandResult.ViewEventsIndicator viewEventsIndicator = new CommandResult.ViewEventsIndicator(1);
+        assertTrue(viewEventsIndicator.isViewEvents());
+    }
+
+    @Test
+    public void getIndex_validViewEventsIndicator_success() {
+        CommandResult.ViewEventsIndicator viewEventsIndicator = new CommandResult.ViewEventsIndicator(1);
+        assertEquals(viewEventsIndicator.getIndex(), Index.fromOneBased(1));
+    }
+
+    @Test
     public void equals() {
         DeleteCommand deleteFirstCommand = new DeleteCommand(INDEX_FIRST_PERSON);
         DeleteCommand deleteSecondCommand = new DeleteCommand(INDEX_SECOND_PERSON);
