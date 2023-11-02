@@ -20,6 +20,7 @@ import networkbook.model.person.Phone;
 import networkbook.model.person.Specialisation;
 import networkbook.model.person.Tag;
 import networkbook.model.util.UniqueList;
+import networkbook.testutil.TypicalIndexes;
 import networkbook.testutil.TypicalPersons;
 
 public class EditPersonDescriptorTest {
@@ -74,15 +75,19 @@ public class EditPersonDescriptorTest {
     @Test
     public void setPhone_null_throwsAssertionError() {
         EditPersonDescriptor actualDescriptor = new EditPersonDescriptor(JACK);
-        assertThrowsAssertionError(() -> actualDescriptor.setPhone(null, EditCommandUtil.VALID_PHONE));
-        assertThrowsAssertionError(() -> actualDescriptor.setPhone(EditCommandUtil.VALID_INDEX, null));
-        assertThrowsAssertionError(() -> actualDescriptor.setPhone(null, null));
+        assertThrowsAssertionError(() -> actualDescriptor.setPhone(null, EditCommandUtil.VALID_PHONE,
+                TypicalIndexes.INDEX_FIRST_PERSON));
+        assertThrowsAssertionError(() -> actualDescriptor.setPhone(EditCommandUtil.VALID_INDEX, null,
+                TypicalIndexes.INDEX_FIRST_PERSON));
+        assertThrowsAssertionError(() -> actualDescriptor.setPhone(null, null,
+                TypicalIndexes.INDEX_FIRST_PERSON));
     }
 
     @Test
     public void setPhone_validPhoneAndIndex_success() throws Exception {
         EditPersonDescriptor actualDescriptor = new EditPersonDescriptor(JACK);
-        actualDescriptor.setPhone(EditCommandUtil.VALID_INDEX, EditCommandUtil.VALID_PHONE);
+        actualDescriptor.setPhone(EditCommandUtil.VALID_INDEX, EditCommandUtil.VALID_PHONE,
+                TypicalIndexes.INDEX_FIRST_PERSON);
 
         UniqueList<Phone> newPhoneList = JACK.getPhones();
         newPhoneList.setItem(EditCommandUtil.VALID_INDEX.getZeroBased(), EditCommandUtil.VALID_PHONE);
@@ -107,28 +112,34 @@ public class EditPersonDescriptorTest {
         EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor(JACK);
         Phone duplicatePhone = new Phone("12345678");
         Index index = Index.fromOneBased(2);
-        assertThrows(CommandException.class, () -> editPersonDescriptor.setPhone(index, duplicatePhone));
+        assertThrows(CommandException.class, () -> editPersonDescriptor.setPhone(index, duplicatePhone,
+                TypicalIndexes.INDEX_FIRST_PERSON));
     }
 
     @Test
     public void setPhone_invalidIndex_throwsCommandException() {
         EditPersonDescriptor actualDescriptor = new EditPersonDescriptor(JACK);
         assertThrows(CommandException.class, ()
-                -> actualDescriptor.setPhone(EditCommandUtil.INVALID_INDEX, EditCommandUtil.VALID_PHONE));
+                -> actualDescriptor.setPhone(EditCommandUtil.INVALID_INDEX, EditCommandUtil.VALID_PHONE,
+                TypicalIndexes.INDEX_FIRST_PERSON));
     }
 
     @Test
     public void setEmail_null_throwsAssertionError() {
         EditPersonDescriptor actualDescriptor = new EditPersonDescriptor(JACK);
-        assertThrowsAssertionError(() -> actualDescriptor.setEmail(null, EditCommandUtil.VALID_EMAIL));
-        assertThrowsAssertionError(() -> actualDescriptor.setEmail(EditCommandUtil.VALID_INDEX, null));
-        assertThrowsAssertionError(() -> actualDescriptor.setEmail(null, null));
+        assertThrowsAssertionError(() -> actualDescriptor.setEmail(null, EditCommandUtil.VALID_EMAIL,
+                TypicalIndexes.INDEX_FIRST_PERSON));
+        assertThrowsAssertionError(() -> actualDescriptor.setEmail(EditCommandUtil.VALID_INDEX, null,
+                TypicalIndexes.INDEX_FIRST_PERSON));
+        assertThrowsAssertionError(() -> actualDescriptor.setEmail(null, null,
+                TypicalIndexes.INDEX_FIRST_PERSON));
     }
 
     @Test
     public void setEmail_validEmailAndIndex_success() throws Exception {
         EditPersonDescriptor actualDescriptor = new EditPersonDescriptor(JACK);
-        actualDescriptor.setEmail(EditCommandUtil.VALID_INDEX, EditCommandUtil.VALID_EMAIL);
+        actualDescriptor.setEmail(EditCommandUtil.VALID_INDEX, EditCommandUtil.VALID_EMAIL,
+                TypicalIndexes.INDEX_FIRST_PERSON);
 
         UniqueList<Email> newEmailList = JACK.getEmails();
         newEmailList.setItem(EditCommandUtil.VALID_INDEX.getZeroBased(), EditCommandUtil.VALID_EMAIL);
@@ -153,28 +164,34 @@ public class EditPersonDescriptorTest {
         EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor(JACK);
         Email duplicateEmail = new Email("jack@gmail.com");
         Index index = Index.fromOneBased(2);
-        assertThrows(CommandException.class, () -> editPersonDescriptor.setEmail(index, duplicateEmail));
+        assertThrows(CommandException.class, () -> editPersonDescriptor.setEmail(index, duplicateEmail,
+                TypicalIndexes.INDEX_FIRST_PERSON));
     }
 
     @Test
     public void setEmail_invalidIndex_throwsCommandException() {
         EditPersonDescriptor actualDescriptor = new EditPersonDescriptor(JACK);
         assertThrows(CommandException.class, ()
-                -> actualDescriptor.setEmail(EditCommandUtil.INVALID_INDEX, EditCommandUtil.VALID_EMAIL));
+                -> actualDescriptor.setEmail(EditCommandUtil.INVALID_INDEX, EditCommandUtil.VALID_EMAIL,
+                TypicalIndexes.INDEX_FIRST_PERSON));
     }
 
     @Test
     public void setLink_null_throwsAssertionError() {
         EditPersonDescriptor actualDescriptor = new EditPersonDescriptor(JACK);
-        assertThrowsAssertionError(() -> actualDescriptor.setLink(null, EditCommandUtil.VALID_LINK));
-        assertThrowsAssertionError(() -> actualDescriptor.setLink(EditCommandUtil.VALID_INDEX, null));
-        assertThrowsAssertionError(() -> actualDescriptor.setLink(null, null));
+        assertThrowsAssertionError(() -> actualDescriptor.setLink(null, EditCommandUtil.VALID_LINK,
+                TypicalIndexes.INDEX_FIRST_PERSON));
+        assertThrowsAssertionError(() -> actualDescriptor.setLink(EditCommandUtil.VALID_INDEX, null,
+                TypicalIndexes.INDEX_FIRST_PERSON));
+        assertThrowsAssertionError(() -> actualDescriptor.setLink(null, null,
+                TypicalIndexes.INDEX_FIRST_PERSON));
     }
 
     @Test
     public void setLink_validLinkAndIndex_success() throws Exception {
         EditPersonDescriptor actualDescriptor = new EditPersonDescriptor(JACK);
-        actualDescriptor.setLink(EditCommandUtil.VALID_INDEX, EditCommandUtil.VALID_LINK);
+        actualDescriptor.setLink(EditCommandUtil.VALID_INDEX, EditCommandUtil.VALID_LINK,
+                TypicalIndexes.INDEX_FIRST_PERSON);
 
         UniqueList<Link> newLinkList = JACK.getLinks();
         newLinkList.setItem(EditCommandUtil.VALID_INDEX.getZeroBased(), EditCommandUtil.VALID_LINK);
@@ -199,14 +216,16 @@ public class EditPersonDescriptorTest {
         EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor(JACK);
         Link duplicateLink = TypicalPersons.JACK_FIRST_LINK;
         Index index = Index.fromOneBased(2);
-        assertThrows(CommandException.class, () -> editPersonDescriptor.setLink(index, duplicateLink));
+        assertThrows(CommandException.class, () -> editPersonDescriptor.setLink(index, duplicateLink,
+                TypicalIndexes.INDEX_FIRST_PERSON));
     }
 
     @Test
     public void setLink_invalidIndex_throwsCommandException() {
         EditPersonDescriptor actualDescriptor = new EditPersonDescriptor(JACK);
         assertThrows(CommandException.class, ()
-                -> actualDescriptor.setLink(EditCommandUtil.INVALID_INDEX, EditCommandUtil.VALID_LINK));
+                -> actualDescriptor.setLink(EditCommandUtil.INVALID_INDEX, EditCommandUtil.VALID_LINK,
+                TypicalIndexes.INDEX_FIRST_PERSON));
     }
 
     @Test
@@ -238,15 +257,19 @@ public class EditPersonDescriptorTest {
     @Test
     public void setCourse_null_throwsAssertionError() {
         EditPersonDescriptor actualDescriptor = new EditPersonDescriptor(JACK);
-        assertThrowsAssertionError(() -> actualDescriptor.setCourse(null, EditCommandUtil.VALID_COURSE));
-        assertThrowsAssertionError(() -> actualDescriptor.setCourse(EditCommandUtil.VALID_INDEX, null));
-        assertThrowsAssertionError(() -> actualDescriptor.setCourse(null, null));
+        assertThrowsAssertionError(() -> actualDescriptor.setCourse(null, EditCommandUtil.VALID_COURSE,
+                TypicalIndexes.INDEX_FIRST_PERSON));
+        assertThrowsAssertionError(() -> actualDescriptor.setCourse(EditCommandUtil.VALID_INDEX, null,
+                TypicalIndexes.INDEX_FIRST_PERSON));
+        assertThrowsAssertionError(() -> actualDescriptor.setCourse(null, null,
+                TypicalIndexes.INDEX_FIRST_PERSON));
     }
 
     @Test
     public void setCourse_validCourseAndIndex_success() throws Exception {
         EditPersonDescriptor actualDescriptor = new EditPersonDescriptor(JACK);
-        actualDescriptor.setCourse(EditCommandUtil.VALID_INDEX, EditCommandUtil.VALID_COURSE);
+        actualDescriptor.setCourse(EditCommandUtil.VALID_INDEX, EditCommandUtil.VALID_COURSE,
+                TypicalIndexes.INDEX_FIRST_PERSON);
 
         UniqueList<Course> newCourseList = JACK.getCourses();
         newCourseList.setItem(EditCommandUtil.VALID_INDEX.getZeroBased(), EditCommandUtil.VALID_COURSE);
@@ -271,30 +294,36 @@ public class EditPersonDescriptorTest {
         EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor(JACK);
         Course duplicateCourse = new Course("CS2103T");
         Index index = Index.fromOneBased(2);
-        assertThrows(CommandException.class, () -> editPersonDescriptor.setCourse(index, duplicateCourse));
+        assertThrows(CommandException.class, () -> editPersonDescriptor.setCourse(index, duplicateCourse,
+                TypicalIndexes.INDEX_FIRST_PERSON));
     }
 
     @Test
     public void setCourse_invalidIndex_throwsCommandException() {
         EditPersonDescriptor actualDescriptor = new EditPersonDescriptor(JACK);
         assertThrows(CommandException.class, ()
-                -> actualDescriptor.setCourse(EditCommandUtil.INVALID_INDEX, EditCommandUtil.VALID_COURSE));
+                -> actualDescriptor.setCourse(EditCommandUtil.INVALID_INDEX, EditCommandUtil.VALID_COURSE,
+                TypicalIndexes.INDEX_FIRST_PERSON));
     }
 
     @Test
     public void setSpecialisation_null_throwsAssertionError() {
         EditPersonDescriptor actualDescriptor = new EditPersonDescriptor(JACK);
         assertThrowsAssertionError(()
-                -> actualDescriptor.setSpecialisation(null, EditCommandUtil.VALID_SPECIALISATION));
+                -> actualDescriptor.setSpecialisation(null, EditCommandUtil.VALID_SPECIALISATION,
+                TypicalIndexes.INDEX_FIRST_PERSON));
         assertThrowsAssertionError(()
-                -> actualDescriptor.setSpecialisation(EditCommandUtil.VALID_INDEX, null));
-        assertThrowsAssertionError(() -> actualDescriptor.setSpecialisation(null, null));
+                -> actualDescriptor.setSpecialisation(EditCommandUtil.VALID_INDEX, null,
+                TypicalIndexes.INDEX_FIRST_PERSON));
+        assertThrowsAssertionError(() -> actualDescriptor.setSpecialisation(null, null,
+                TypicalIndexes.INDEX_FIRST_PERSON));
     }
 
     @Test
     public void setSpecialisation_validCourseAndIndex_success() throws Exception {
         EditPersonDescriptor actualDescriptor = new EditPersonDescriptor(JACK);
-        actualDescriptor.setSpecialisation(EditCommandUtil.VALID_INDEX, EditCommandUtil.VALID_SPECIALISATION);
+        actualDescriptor.setSpecialisation(EditCommandUtil.VALID_INDEX, EditCommandUtil.VALID_SPECIALISATION,
+                TypicalIndexes.INDEX_FIRST_PERSON);
 
         UniqueList<Specialisation> newSpecialisationList = JACK.getSpecialisations();
         newSpecialisationList.setItem(
@@ -321,7 +350,8 @@ public class EditPersonDescriptorTest {
         Specialisation duplicateSpecialisation = new Specialisation("Software Engineering");
         Index index = Index.fromOneBased(2);
         assertThrows(CommandException.class, ()
-                -> editPersonDescriptor.setSpecialisation(index, duplicateSpecialisation));
+                -> editPersonDescriptor.setSpecialisation(index, duplicateSpecialisation,
+                TypicalIndexes.INDEX_FIRST_PERSON));
     }
 
     @Test
@@ -329,21 +359,26 @@ public class EditPersonDescriptorTest {
         EditPersonDescriptor actualDescriptor = new EditPersonDescriptor(JACK);
         assertThrows(CommandException.class, ()
                 -> actualDescriptor.setSpecialisation(
-                        EditCommandUtil.INVALID_INDEX, EditCommandUtil.VALID_SPECIALISATION));
+                        EditCommandUtil.INVALID_INDEX, EditCommandUtil.VALID_SPECIALISATION,
+                TypicalIndexes.INDEX_FIRST_PERSON));
     }
 
     @Test
     public void setTag_null_throwsAssertionError() {
         EditPersonDescriptor actualDescriptor = new EditPersonDescriptor(JACK);
-        assertThrowsAssertionError(() -> actualDescriptor.setTag(null, EditCommandUtil.VALID_TAG));
-        assertThrowsAssertionError(() -> actualDescriptor.setTag(EditCommandUtil.VALID_INDEX, null));
-        assertThrowsAssertionError(() -> actualDescriptor.setTag(null, null));
+        assertThrowsAssertionError(() -> actualDescriptor.setTag(null, EditCommandUtil.VALID_TAG,
+                TypicalIndexes.INDEX_FIRST_PERSON));
+        assertThrowsAssertionError(() -> actualDescriptor.setTag(EditCommandUtil.VALID_INDEX, null,
+                TypicalIndexes.INDEX_FIRST_PERSON));
+        assertThrowsAssertionError(() -> actualDescriptor.setTag(null, null,
+                TypicalIndexes.INDEX_FIRST_PERSON));
     }
 
     @Test
     public void setTag_validTagAndIndex_success() throws Exception {
         EditPersonDescriptor actualDescriptor = new EditPersonDescriptor(JACK);
-        actualDescriptor.setTag(EditCommandUtil.VALID_INDEX, EditCommandUtil.VALID_TAG);
+        actualDescriptor.setTag(EditCommandUtil.VALID_INDEX, EditCommandUtil.VALID_TAG,
+                TypicalIndexes.INDEX_FIRST_PERSON);
 
         UniqueList<Tag> newTagList = JACK.getTags();
         newTagList.setItem(EditCommandUtil.VALID_INDEX.getZeroBased(), EditCommandUtil.VALID_TAG);
@@ -368,14 +403,16 @@ public class EditPersonDescriptorTest {
         EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor(JACK);
         Tag duplicateTag = new Tag("software eng enthusiast");
         Index index = Index.fromOneBased(2);
-        assertThrows(CommandException.class, () -> editPersonDescriptor.setTag(index, duplicateTag));
+        assertThrows(CommandException.class, () -> editPersonDescriptor.setTag(index, duplicateTag,
+                TypicalIndexes.INDEX_FIRST_PERSON));
     }
 
     @Test
     public void setTag_invalidIndex_throwsCommandException() {
         EditPersonDescriptor actualDescriptor = new EditPersonDescriptor(JACK);
         assertThrows(CommandException.class, ()
-                -> actualDescriptor.setTag(EditCommandUtil.INVALID_INDEX, EditCommandUtil.VALID_TAG));
+                -> actualDescriptor.setTag(EditCommandUtil.INVALID_INDEX, EditCommandUtil.VALID_TAG,
+                TypicalIndexes.INDEX_FIRST_PERSON));
     }
 
     @Test

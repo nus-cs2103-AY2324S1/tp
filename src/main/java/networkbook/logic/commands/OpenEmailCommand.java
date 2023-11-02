@@ -27,8 +27,6 @@ public class OpenEmailCommand extends Command {
             + COMMAND_WORD + " 1 " + CliSyntax.PREFIX_INDEX + " 1\n";
     public static final String MESSAGE_SUCCESS = "Successfully opened email box to send a new email to %s";
     public static final String MESSAGE_CANNOT_OPEN_EMAIL = "Oops, your computer does not allow me to open email box";
-    public static final String MESSAGE_INVALID_EMAIL_INDEX =
-            "The person at index %d does not have an email at index %d";
 
     private final Index personIndex;
     private final Index emailIndex;
@@ -54,8 +52,8 @@ public class OpenEmailCommand extends Command {
         }
 
         if (!model.isValidEmailIndex(personIndex, emailIndex)) {
-            throw new CommandException(String.format(MESSAGE_INVALID_EMAIL_INDEX,
-                    personIndex.getOneBased(), emailIndex.getOneBased()));
+            throw new CommandException(String.format(Messages.MESSAGE_INVALID_MULTIVALUED_FIELD_ENTRY_INDEX,
+                    personIndex.getOneBased(), "an email", emailIndex.getOneBased()));
         }
 
         try {

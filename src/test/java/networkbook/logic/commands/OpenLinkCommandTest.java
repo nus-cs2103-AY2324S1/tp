@@ -146,8 +146,9 @@ public class OpenLinkCommandTest {
         OpenLinkCommand openLinkCommand = new OpenLinkCommand(
                 TypicalIndexes.INDEX_FIRST_PERSON, CommandTestUtil.INVALID_LINK_INDEX_AMY);
         assertCommandFailure(openLinkCommand, MODEL,
-                String.format(OpenLinkCommand.MESSAGE_INVALID_LINK_INDEX,
+                String.format(Messages.MESSAGE_INVALID_MULTIVALUED_FIELD_ENTRY_INDEX,
                         TypicalIndexes.INDEX_FIRST_PERSON.getOneBased(),
+                        "a link",
                         CommandTestUtil.INVALID_LINK_INDEX_AMY.getOneBased()));
     }
 

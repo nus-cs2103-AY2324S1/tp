@@ -46,7 +46,7 @@ public class DeleteFieldCommand extends Command {
 
         Person personToDeleteField = lastShownList.get(this.indexOfPerson.getZeroBased());
         DeletePersonDescriptor descriptor = new DeletePersonDescriptor(personToDeleteField);
-        action.delete(descriptor);
+        action.delete(descriptor, indexOfPerson);
         Person personWithFieldDeleted = descriptor.toPerson();
 
         model.setItem(personToDeleteField, personWithFieldDeleted);

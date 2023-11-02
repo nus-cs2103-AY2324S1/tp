@@ -63,34 +63,45 @@ public class DeleteFieldCommandTest {
     public void execute_invalidIndexOfOldValue_commandException() {
         int numberOfCourses = model.getDisplayedPersonList().get(0).getCourses().size();
         DeleteFieldCommand deleteInvalidCourseCommand = new DeleteFieldCommand(INDEX_ONE,
-                new DeleteCourseAction(Index.fromZeroBased(numberOfCourses + 1)));
-        assertCommandFailure(deleteInvalidCourseCommand, model, DeletePersonDescriptor.MESSAGE_INVALID_COURSE_INDEX);
+                new DeleteCourseAction(Index.fromOneBased(numberOfCourses + 1)));
+        assertCommandFailure(deleteInvalidCourseCommand, model,
+                String.format(Messages.MESSAGE_INVALID_MULTIVALUED_FIELD_ENTRY_INDEX,
+                        INDEX_ONE.getOneBased(), "a course", numberOfCourses + 1));
 
         int numberOfPhones = model.getDisplayedPersonList().get(0).getPhones().size();
         DeleteFieldCommand deleteInvalidPhoneCommand = new DeleteFieldCommand(INDEX_ONE,
-                new DeletePhoneAction(Index.fromZeroBased(numberOfPhones + 1)));
-        assertCommandFailure(deleteInvalidPhoneCommand, model, DeletePersonDescriptor.MESSAGE_INVALID_PHONE_INDEX);
+                new DeletePhoneAction(Index.fromOneBased(numberOfPhones + 1)));
+        assertCommandFailure(deleteInvalidPhoneCommand, model,
+                String.format(Messages.MESSAGE_INVALID_MULTIVALUED_FIELD_ENTRY_INDEX,
+                        INDEX_ONE.getOneBased(), "a phone", numberOfPhones + 1));
 
         int numberOfEmails = model.getDisplayedPersonList().get(0).getEmails().size();
         DeleteFieldCommand deleteInvalidEmailCommand = new DeleteFieldCommand(INDEX_ONE,
-                new DeleteEmailAction(Index.fromZeroBased(numberOfEmails + 1)));
-        assertCommandFailure(deleteInvalidEmailCommand, model, DeletePersonDescriptor.MESSAGE_INVALID_EMAIL_INDEX);
+                new DeleteEmailAction(Index.fromOneBased(numberOfEmails + 1)));
+        assertCommandFailure(deleteInvalidEmailCommand, model,
+                String.format(Messages.MESSAGE_INVALID_MULTIVALUED_FIELD_ENTRY_INDEX,
+                        INDEX_ONE.getOneBased(), "an email", numberOfEmails + 1));
 
         int numberOfLinks = model.getDisplayedPersonList().get(0).getLinks().size();
         DeleteFieldCommand deleteInvalidLinkCommand = new DeleteFieldCommand(INDEX_ONE,
-                new DeleteLinkAction(Index.fromZeroBased(numberOfLinks + 1)));
-        assertCommandFailure(deleteInvalidLinkCommand, model, DeletePersonDescriptor.MESSAGE_INVALID_LINK_INDEX);
+                new DeleteLinkAction(Index.fromOneBased(numberOfLinks + 1)));
+        assertCommandFailure(deleteInvalidLinkCommand, model,
+                String.format(Messages.MESSAGE_INVALID_MULTIVALUED_FIELD_ENTRY_INDEX,
+                        INDEX_ONE.getOneBased(), "a link", numberOfLinks + 1));
 
         int numberOfSpecs = model.getDisplayedPersonList().get(0).getSpecialisations().size();
         DeleteFieldCommand deleteInvalidSpecCommand = new DeleteFieldCommand(INDEX_ONE,
-                new DeleteSpecialisationAction(Index.fromZeroBased(numberOfSpecs + 1)));
+                new DeleteSpecialisationAction(Index.fromOneBased(numberOfSpecs + 1)));
         assertCommandFailure(deleteInvalidSpecCommand, model,
-                DeletePersonDescriptor.MESSAGE_INVALID_SPECIALISATION_INDEX);
+                String.format(Messages.MESSAGE_INVALID_MULTIVALUED_FIELD_ENTRY_INDEX,
+                        INDEX_ONE.getOneBased(), "a specialisation", numberOfSpecs + 1));
 
         int numberOfTags = model.getDisplayedPersonList().get(0).getTags().size();
         DeleteFieldCommand deleteInvalidTagCommand = new DeleteFieldCommand(INDEX_ONE,
-                new DeleteTagAction(Index.fromZeroBased(numberOfTags + 1)));
-        assertCommandFailure(deleteInvalidTagCommand, model, DeletePersonDescriptor.MESSAGE_INVALID_TAG_INDEX);
+                new DeleteTagAction(Index.fromOneBased(numberOfTags + 1)));
+        assertCommandFailure(deleteInvalidTagCommand, model,
+                String.format(Messages.MESSAGE_INVALID_MULTIVALUED_FIELD_ENTRY_INDEX,
+                        INDEX_ONE.getOneBased(), "a tag", numberOfTags + 1));
     }
 
     @Test

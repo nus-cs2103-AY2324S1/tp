@@ -120,12 +120,11 @@ public class ArgumentMultimap {
      * then the {@code prefixThenPresent} must also be present with only one corresponding value.
      * Otherwise, {@code prefixThenPresent} must be absent.
      */
-    public void verifyIfPresentThenOnlyOne(Prefix[] prefixesIfPresent, Prefix prefixThenPresent) throws ParseException {
+    public void verifyIfPresentThenAtMostOne(Prefix[] prefixesIfPresent, Prefix prefixThenPresent)
+            throws ParseException {
         Prefix firstPresentPrefix = this.firstPresentPrefix(prefixesIfPresent);
         if (firstPresentPrefix != null) {
-            if (!argMultimap.containsKey(prefixThenPresent) || argMultimap.get(prefixThenPresent).size() > 1) {
-                throw new ParseException(String.format(Messages.MESSAGE_INDEX_MUST_BE_PRESENT, firstPresentPrefix));
-            }
+            verifyNoDuplicatePrefixesFor(prefixThenPresent);
         } else {
             if (argMultimap.containsKey(prefixThenPresent)) {
                 throw new ParseException(Messages.MESSAGE_INDEX_CANNOT_BE_PRESENT);

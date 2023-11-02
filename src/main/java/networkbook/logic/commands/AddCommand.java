@@ -50,7 +50,7 @@ public class AddCommand extends Command {
 
     public static final String MESSAGE_NO_INFO = "At least one field to add must be provided.";
     public static final String MESSAGE_MULTIPLE_UNIQUE_FIELD = "Some fields provided cannot have multiple values.\n"
-            + "Please use the 'update' command instead.";
+            + "Please use the 'edit' command instead.";
     public static final String MESSAGE_ADD_INFO_SUCCESS = "Added information to this contact: %1$s";
 
     private final Index index;

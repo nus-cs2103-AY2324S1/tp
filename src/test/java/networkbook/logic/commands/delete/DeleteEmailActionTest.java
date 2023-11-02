@@ -9,10 +9,12 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 
 import networkbook.commons.core.index.Index;
+import networkbook.logic.Messages;
 import networkbook.logic.commands.exceptions.CommandException;
 import networkbook.model.person.Email;
 import networkbook.model.person.Person;
 import networkbook.model.util.UniqueList;
+import networkbook.testutil.TypicalIndexes;
 import networkbook.testutil.TypicalPersons;
 
 public class DeleteEmailActionTest {
@@ -45,9 +47,9 @@ public class DeleteEmailActionTest {
     public void delete_deleteEmailValidIndex_success() throws CommandException {
         DeletePersonDescriptor descriptor = new DeletePersonDescriptor(JACK);
         DeleteEmailAction action = new DeleteEmailAction(firstIndex);
-        action.delete(descriptor);
+        action.delete(descriptor, TypicalIndexes.INDEX_FIRST_PERSON);
         assertEquals(descriptor, jackWithoutFirstEmail);
-        action.delete(descriptor);
+        action.delete(descriptor, TypicalIndexes.INDEX_FIRST_PERSON);
         assertEquals(descriptor, jackWithoutAnyEmail);
     }
 
@@ -64,17 +66,24 @@ public class DeleteEmailActionTest {
                 JACK.getSpecialisations(),
                 JACK.getTags(),
                 JACK.getPriority().get()));
-        assertThrows(CommandException.class, () -> deleteFirstAction.delete(descriptorWithoutEmail));
+        assertThrows(CommandException.class, () -> deleteFirstAction.delete(descriptorWithoutEmail,
+                TypicalIndexes.INDEX_SECOND_PERSON),
+                String.format(Messages.MESSAGE_INVALID_MULTIVALUED_FIELD_ENTRY_INDEX,
+                        TypicalIndexes.INDEX_SECOND_PERSON.getOneBased(), "an email", firstIndex.getOneBased()));
 
         DeleteEmailAction deleteTenthAction = new DeleteEmailAction(tenthIndex);
         DeletePersonDescriptor descriptorWithTwoEmails = new DeletePersonDescriptor(JACK);
-        assertThrows(CommandException.class, () -> deleteTenthAction.delete(descriptorWithTwoEmails));
+        assertThrows(CommandException.class, () -> deleteTenthAction.delete(descriptorWithTwoEmails,
+                TypicalIndexes.INDEX_THIRD_PERSON),
+                String.format(Messages.MESSAGE_INVALID_MULTIVALUED_FIELD_ENTRY_INDEX,
+                        TypicalIndexes.INDEX_THIRD_PERSON.getOneBased(), "an email", tenthIndex.getOneBased()));
     }
 
     @Test
     public void delete_deleteNull_nullPointerException() {
         DeleteEmailAction deleteFirstAction = new DeleteEmailAction(firstIndex);
-        assertThrows(NullPointerException.class, () -> deleteFirstAction.delete(null));
+        assertThrows(NullPointerException.class, () -> deleteFirstAction.delete(null,
+                TypicalIndexes.INDEX_FIRST_PERSON));
     }
 
     @Test

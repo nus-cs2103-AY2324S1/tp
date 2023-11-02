@@ -78,7 +78,7 @@ public class DeleteCommandParser implements Parser<Command> {
             return new DeletePersonCommand(index);
         }
 
-        argMultimap.verifyIfPresentThenOnlyOne(new Prefix[] {
+        argMultimap.verifyIfPresentThenAtMostOne(new Prefix[] {
             CliSyntax.PREFIX_PHONE,
             CliSyntax.PREFIX_EMAIL,
             CliSyntax.PREFIX_LINK,
@@ -118,38 +118,38 @@ public class DeleteCommandParser implements Parser<Command> {
 
     private DeletePhoneAction generatePhoneAction(ArgumentMultimap argMultimap) throws ParseException {
         argMultimap.verifyPrefixHasEmptyValue(CliSyntax.PREFIX_PHONE);
-        Index index = ParserUtil.parseIndex(argMultimap.getValue(CliSyntax.PREFIX_INDEX).get());
+        Index index = ParserUtil.parseIndex(argMultimap.getValue(CliSyntax.PREFIX_INDEX).orElse("1"));
         return new DeletePhoneAction(index);
     }
 
     private DeleteEmailAction generateEmailAction(ArgumentMultimap argMultimap) throws ParseException {
         argMultimap.verifyPrefixHasEmptyValue(CliSyntax.PREFIX_EMAIL);
-        Index index = ParserUtil.parseIndex(argMultimap.getValue(CliSyntax.PREFIX_INDEX).get());
+        Index index = ParserUtil.parseIndex(argMultimap.getValue(CliSyntax.PREFIX_INDEX).orElse("1"));
         return new DeleteEmailAction(index);
     }
 
     private DeleteLinkAction generateLinkAction(ArgumentMultimap argMultimap) throws ParseException {
         argMultimap.verifyPrefixHasEmptyValue(CliSyntax.PREFIX_LINK);
-        Index index = ParserUtil.parseIndex(argMultimap.getValue(CliSyntax.PREFIX_INDEX).get());
+        Index index = ParserUtil.parseIndex(argMultimap.getValue(CliSyntax.PREFIX_INDEX).orElse("1"));
         return new DeleteLinkAction(index);
     }
 
     private DeleteCourseAction generateCourseAction(ArgumentMultimap argMultimap) throws ParseException {
         argMultimap.verifyPrefixHasEmptyValue(CliSyntax.PREFIX_COURSE);
-        Index index = ParserUtil.parseIndex(argMultimap.getValue(CliSyntax.PREFIX_INDEX).get());
+        Index index = ParserUtil.parseIndex(argMultimap.getValue(CliSyntax.PREFIX_INDEX).orElse("1"));
         return new DeleteCourseAction(index);
     }
 
     private DeleteSpecialisationAction generateSpecialisationAction(ArgumentMultimap argMultimap)
             throws ParseException {
         argMultimap.verifyPrefixHasEmptyValue(CliSyntax.PREFIX_SPECIALISATION);
-        Index index = ParserUtil.parseIndex(argMultimap.getValue(CliSyntax.PREFIX_INDEX).get());
+        Index index = ParserUtil.parseIndex(argMultimap.getValue(CliSyntax.PREFIX_INDEX).orElse("1"));
         return new DeleteSpecialisationAction(index);
     }
 
     private DeleteTagAction generateTagAction(ArgumentMultimap argMultimap) throws ParseException {
         argMultimap.verifyPrefixHasEmptyValue(CliSyntax.PREFIX_TAG);
-        Index index = ParserUtil.parseIndex(argMultimap.getValue(CliSyntax.PREFIX_INDEX).get());
+        Index index = ParserUtil.parseIndex(argMultimap.getValue(CliSyntax.PREFIX_INDEX).orElse("1"));
         return new DeleteTagAction(index);
     }
 

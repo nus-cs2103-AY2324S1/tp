@@ -23,9 +23,9 @@ public class EditPhoneAction implements EditAction {
     }
 
     @Override
-    public void edit(EditPersonDescriptor editPersonDescriptor) throws CommandException {
+    public void edit(EditPersonDescriptor editPersonDescriptor, Index indexOfPerson) throws CommandException {
         assert editPersonDescriptor != null : "editPersonDescriptor should not be null";
-        editPersonDescriptor.setPhone(index, phone);
+        editPersonDescriptor.setPhone(index, phone, indexOfPerson);
     }
 
     @Override

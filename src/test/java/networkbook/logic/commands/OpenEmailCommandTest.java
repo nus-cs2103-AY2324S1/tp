@@ -144,8 +144,9 @@ public class OpenEmailCommandTest {
         OpenEmailCommand openEmailCommand = new OpenEmailCommand(
                 TypicalIndexes.INDEX_FIRST_PERSON, CommandTestUtil.INVALID_EMAIL_INDEX_AMY);
         assertCommandFailure(openEmailCommand, MODEL,
-                String.format(OpenEmailCommand.MESSAGE_INVALID_EMAIL_INDEX,
+                String.format(Messages.MESSAGE_INVALID_MULTIVALUED_FIELD_ENTRY_INDEX,
                         TypicalIndexes.INDEX_FIRST_PERSON.getOneBased(),
+                        "an email",
                         CommandTestUtil.INVALID_EMAIL_INDEX_AMY.getOneBased()));
     }
 

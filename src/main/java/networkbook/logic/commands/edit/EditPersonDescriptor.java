@@ -3,6 +3,7 @@ package networkbook.logic.commands.edit;
 import static networkbook.commons.util.CollectionUtil.requireAllNonNull;
 
 import networkbook.commons.core.index.Index;
+import networkbook.logic.Messages;
 import networkbook.logic.commands.exceptions.CommandException;
 import networkbook.model.person.Course;
 import networkbook.model.person.Email;
@@ -20,12 +21,6 @@ import networkbook.model.util.UniqueList;
  * Constructs a new person from an original person based on the edit actions.
  */
 public class EditPersonDescriptor {
-    public static final String MESSAGE_INVALID_PHONE_INDEX = "The phone index provided is invalid.";
-    public static final String MESSAGE_INVALID_EMAIL_INDEX = "The email index provided is invalid.";
-    public static final String MESSAGE_INVALID_LINK_INDEX = "The link index provided is invalid.";
-    public static final String MESSAGE_INVALID_COURSE_INDEX = "The course index provided is invalid.";
-    public static final String MESSAGE_INVALID_SPECIALISATION_INDEX = "The specialisation index provided is invalid.";
-    public static final String MESSAGE_INVALID_TAG_INDEX = "The tag index provided is invalid.";
     public static final String MESSAGE_DUPLICATE_EXISTS = "The contact already has the new %s provided.";
     private Name name;
     private UniqueList<Phone> phones;
@@ -57,10 +52,11 @@ public class EditPersonDescriptor {
         this.name = name;
     }
 
-    public void setPhone(Index index, Phone phone) throws CommandException {
+    public void setPhone(Index index, Phone phone, Index indexOfPerson) throws CommandException {
         requireAllNonNull(index, phone);
         if (index.getZeroBased() >= this.phones.size()) {
-            throw new CommandException(MESSAGE_INVALID_PHONE_INDEX);
+            throw new CommandException(String.format(Messages.MESSAGE_INVALID_MULTIVALUED_FIELD_ENTRY_INDEX,
+                    indexOfPerson.getOneBased(), "a phone", index.getOneBased()));
         }
 
         if (this.phones.containsNotAtIndex(phone, index.getZeroBased())) {
@@ -70,10 +66,11 @@ public class EditPersonDescriptor {
         this.phones.setItem(index.getZeroBased(), phone);
     }
 
-    public void setEmail(Index index, Email email) throws CommandException {
+    public void setEmail(Index index, Email email, Index indexOfPerson) throws CommandException {
         requireAllNonNull(index, email);
         if (index.getZeroBased() >= this.emails.size()) {
-            throw new CommandException(MESSAGE_INVALID_EMAIL_INDEX);
+            throw new CommandException(String.format(Messages.MESSAGE_INVALID_MULTIVALUED_FIELD_ENTRY_INDEX,
+                    indexOfPerson.getOneBased(), "an email", index.getOneBased()));
         }
 
         if (this.emails.containsNotAtIndex(email, index.getZeroBased())) {
@@ -83,10 +80,11 @@ public class EditPersonDescriptor {
         this.emails.setItem(index.getZeroBased(), email);
     }
 
-    public void setLink(Index index, Link link) throws CommandException {
+    public void setLink(Index index, Link link, Index indexOfPerson) throws CommandException {
         requireAllNonNull(index, link);
         if (index.getZeroBased() >= this.links.size()) {
-            throw new CommandException(MESSAGE_INVALID_LINK_INDEX);
+            throw new CommandException(String.format(Messages.MESSAGE_INVALID_MULTIVALUED_FIELD_ENTRY_INDEX,
+                    indexOfPerson.getOneBased(), "a link", index.getOneBased()));
         }
 
         if (this.links.containsNotAtIndex(link, index.getZeroBased())) {
@@ -101,10 +99,11 @@ public class EditPersonDescriptor {
         this.graduation = graduation;
     }
 
-    public void setCourse(Index index, Course course) throws CommandException {
+    public void setCourse(Index index, Course course, Index indexOfPerson) throws CommandException {
         requireAllNonNull(index, course);
         if (index.getZeroBased() >= this.courses.size()) {
-            throw new CommandException(MESSAGE_INVALID_COURSE_INDEX);
+            throw new CommandException(String.format(Messages.MESSAGE_INVALID_MULTIVALUED_FIELD_ENTRY_INDEX,
+                    indexOfPerson.getOneBased(), "a course", index.getOneBased()));
         }
 
         if (this.courses.containsNotAtIndex(course, index.getZeroBased())) {
@@ -114,10 +113,12 @@ public class EditPersonDescriptor {
         this.courses.setItem(index.getZeroBased(), course);
     }
 
-    public void setSpecialisation(Index index, Specialisation specialisation) throws CommandException {
+    public void setSpecialisation(Index index, Specialisation specialisation, Index indexOfPerson)
+            throws CommandException {
         requireAllNonNull(index, specialisation);
         if (index.getZeroBased() >= this.specialisations.size()) {
-            throw new CommandException(MESSAGE_INVALID_SPECIALISATION_INDEX);
+            throw new CommandException(String.format(Messages.MESSAGE_INVALID_MULTIVALUED_FIELD_ENTRY_INDEX,
+                    indexOfPerson.getOneBased(), "a specialisation", index.getOneBased()));
         }
 
         if (this.specialisations.containsNotAtIndex(specialisation, index.getZeroBased())) {
@@ -127,10 +128,11 @@ public class EditPersonDescriptor {
         this.specialisations.setItem(index.getZeroBased(), specialisation);
     }
 
-    public void setTag(Index index, Tag tag) throws CommandException {
+    public void setTag(Index index, Tag tag, Index indexOfPerson) throws CommandException {
         requireAllNonNull(index, tag);
         if (index.getZeroBased() >= this.tags.size()) {
-            throw new CommandException(MESSAGE_INVALID_TAG_INDEX);
+            throw new CommandException(String.format(Messages.MESSAGE_INVALID_MULTIVALUED_FIELD_ENTRY_INDEX,
+                    indexOfPerson.getOneBased(), "a tag", index.getOneBased()));
         }
 
         if (this.tags.containsNotAtIndex(tag, index.getZeroBased())) {

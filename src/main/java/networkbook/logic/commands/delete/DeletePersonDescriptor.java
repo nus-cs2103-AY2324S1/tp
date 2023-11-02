@@ -5,6 +5,7 @@ import static java.util.Objects.requireNonNull;
 import java.util.Objects;
 
 import networkbook.commons.core.index.Index;
+import networkbook.logic.Messages;
 import networkbook.logic.commands.exceptions.CommandException;
 import networkbook.model.person.Course;
 import networkbook.model.person.Email;
@@ -22,12 +23,6 @@ import networkbook.model.util.UniqueList;
  * Class that contains temporary information about a person whose field is being deleted.
  */
 public class DeletePersonDescriptor {
-    public static final String MESSAGE_INVALID_PHONE_INDEX = "The phone index provided is invalid.";
-    public static final String MESSAGE_INVALID_EMAIL_INDEX = "The email index provided is invalid.";
-    public static final String MESSAGE_INVALID_LINK_INDEX = "The link index provided is invalid.";
-    public static final String MESSAGE_INVALID_COURSE_INDEX = "The course index provided is invalid.";
-    public static final String MESSAGE_INVALID_SPECIALISATION_INDEX = "The specialisation index provided is invalid.";
-    public static final String MESSAGE_INVALID_TAG_INDEX = "The tag index provided is invalid.";
     private Name name;
     private UniqueList<Phone> phones;
     private UniqueList<Email> emails;
@@ -55,87 +50,117 @@ public class DeletePersonDescriptor {
 
     /**
      * Deletes the phone entry at {@code index} in the descriptor's list of phones.
-     * @param index is the zero-based index of the entry to delete.
+     * @param index is the index of the entry to delete.
+     * @param indexOfPerson is the index of the person in the displayed list to delete phone.
      * @throws CommandException when the index is invalid in the list.
      */
-    public void deletePhone(Index index) throws CommandException {
+    public void deletePhone(Index index, Index indexOfPerson) throws CommandException {
         requireNonNull(index);
         if (index.getZeroBased() >= this.phones.size()) {
-            throw new CommandException(MESSAGE_INVALID_PHONE_INDEX);
+            throw new CommandException(String.format(Messages.MESSAGE_INVALID_MULTIVALUED_FIELD_ENTRY_INDEX,
+                    indexOfPerson.getOneBased(), "a phone", index.getOneBased()));
         }
         this.phones.removeAtIndex(index.getZeroBased());
     }
 
     /**
      * Deletes the email entry at {@code index} in the descriptor's list of emails.
-     * @param index is the zero-based index of the entry to delete.
+     * @param index is the index of the entry to delete.
+     * @param indexOfPerson is the index of the person in the displayed list to delete email.
      * @throws CommandException when the index is invalid in the list.
      */
-    public void deleteEmail(Index index) throws CommandException {
+    public void deleteEmail(Index index, Index indexOfPerson) throws CommandException {
         requireNonNull(index);
         if (index.getZeroBased() >= this.emails.size()) {
-            throw new CommandException(MESSAGE_INVALID_EMAIL_INDEX);
+            throw new CommandException(String.format(Messages.MESSAGE_INVALID_MULTIVALUED_FIELD_ENTRY_INDEX,
+                    indexOfPerson.getOneBased(), "an email", index.getOneBased()));
         }
         this.emails.removeAtIndex(index.getZeroBased());
     }
 
     /**
      * Deletes the link entry at {@code index} in the descriptor's list of links.
-     * @param index is the zero-based index of the entry to delete.
+     * @param index is the index of the entry to delete.
+     * @param indexOfPerson is the index of the person in the displayed list to delete link.
      * @throws CommandException when the index is invalid in the list.
      */
-    public void deleteLink(Index index) throws CommandException {
+    public void deleteLink(Index index, Index indexOfPerson) throws CommandException {
         requireNonNull(index);
         if (index.getZeroBased() >= this.links.size()) {
-            throw new CommandException(MESSAGE_INVALID_LINK_INDEX);
+            throw new CommandException(String.format(Messages.MESSAGE_INVALID_MULTIVALUED_FIELD_ENTRY_INDEX,
+                    indexOfPerson.getOneBased(), "a link", index.getOneBased()));
         }
         this.links.removeAtIndex(index.getZeroBased());
     }
 
     /**
      * Deletes the course entry at {@code index} in the descriptor's list of courses.
-     * @param index is the zero-based index of the entry to delete.
+     * @param index is the index of the entry to delete.
+     * @param indexOfPerson is the index of the person in the displayed list to delete course.
      * @throws CommandException when the index is invalid in the list.
      */
-    public void deleteCourse(Index index) throws CommandException {
+    public void deleteCourse(Index index, Index indexOfPerson) throws CommandException {
         requireNonNull(index);
         if (index.getZeroBased() >= this.courses.size()) {
-            throw new CommandException(MESSAGE_INVALID_COURSE_INDEX);
+            throw new CommandException(String.format(Messages.MESSAGE_INVALID_MULTIVALUED_FIELD_ENTRY_INDEX,
+                    indexOfPerson.getOneBased(), "a course", index.getOneBased()));
         }
         this.courses.removeAtIndex(index.getZeroBased());
     }
 
     /**
      * Deletes the specialisation entry at {@code index} in the descriptor's list of specialisations.
-     * @param index is the zero-based index of the entry to delete.
+     * @param index is the index of the entry to delete.
+     * @param indexOfPerson is the index of the person in the displayed list to delete specialisation.
      * @throws CommandException when the index is invalid in the list.
      */
-    public void deleteSpecialisation(Index index) throws CommandException {
+    public void deleteSpecialisation(Index index, Index indexOfPerson) throws CommandException {
         requireNonNull(index);
         if (index.getZeroBased() >= this.specialisations.size()) {
-            throw new CommandException(MESSAGE_INVALID_SPECIALISATION_INDEX);
+            throw new CommandException(String.format(Messages.MESSAGE_INVALID_MULTIVALUED_FIELD_ENTRY_INDEX,
+                    indexOfPerson.getOneBased(), "a specialisation", index.getOneBased()));
         }
         this.specialisations.removeAtIndex(index.getZeroBased());
     }
 
     /**
      * Deletes the tag entry at {@code index} in the descriptor's list of tags.
-     * @param index is the zero-based index of the entry to delete.
+     * @param index is the index of the entry to delete.
+     * @param indexOfPerson is the index of the person in the displayed list to delete tag.
      * @throws CommandException when the index is invalid in the list.
      */
-    public void deleteTag(Index index) throws CommandException {
+    public void deleteTag(Index index, Index indexOfPerson) throws CommandException {
         requireNonNull(index);
         if (index.getZeroBased() >= this.tags.size()) {
-            throw new CommandException(MESSAGE_INVALID_TAG_INDEX);
+            throw new CommandException(String.format(Messages.MESSAGE_INVALID_MULTIVALUED_FIELD_ENTRY_INDEX,
+                    indexOfPerson.getOneBased(), "a tag", index.getOneBased()));
         }
         this.tags.removeAtIndex(index.getZeroBased());
     }
 
-    public void deleteGraduation() {
+    /**
+     * Deletes the graduation of the descriptor.
+     * @param indexOfPerson is the index of the person in the displayed list to delete graduation.
+     * @throws CommandException when the person has no graduation.
+     */
+    public void deleteGraduation(Index indexOfPerson) throws CommandException {
+        if (this.graduation == null) {
+            throw new CommandException(String.format(Messages.MESSAGE_DELETE_EMPTY_SINGLE_VALUED_FIELD,
+                    indexOfPerson.getOneBased(), "a graduation semester"));
+        }
         this.graduation = null;
     }
 
-    public void deletePriority() {
+    /**
+     * Deletes the graduation of the descriptor.
+     * @param indexOfPerson is the index of the person in the displayed list to delete priority.
+     * @throws CommandException when the person has no priority.
+     */
+    public void deletePriority(Index indexOfPerson) throws CommandException {
+        if (this.priority == null) {
+            throw new CommandException(String.format(Messages.MESSAGE_DELETE_EMPTY_SINGLE_VALUED_FIELD,
+                    indexOfPerson.getOneBased(), "a priority"));
+        }
         this.priority = null;
     }
 

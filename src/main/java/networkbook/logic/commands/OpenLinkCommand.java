@@ -27,7 +27,6 @@ public class OpenLinkCommand extends Command {
             + COMMAND_WORD + " 1 " + CliSyntax.PREFIX_INDEX + " 1";
     public static final String MESSAGE_SUCCESS = "Successfully opened %s";
     public static final String MESSAGE_CANNOT_OPEN_LINK = "Oops, your computer does not allow me to open a link.";
-    public static final String MESSAGE_INVALID_LINK_INDEX = "The person at index %d does not have a link at index %d.";
 
     private final Index personIndex;
     private final Index linkIndex;
@@ -54,8 +53,8 @@ public class OpenLinkCommand extends Command {
         }
 
         if (!model.isValidLinkIndex(personIndex, linkIndex)) {
-            throw new CommandException(String.format(MESSAGE_INVALID_LINK_INDEX,
-                    personIndex.getOneBased(), linkIndex.getOneBased()));
+            throw new CommandException(String.format(Messages.MESSAGE_INVALID_MULTIVALUED_FIELD_ENTRY_INDEX,
+                    personIndex.getOneBased(), "a link", linkIndex.getOneBased()));
         }
 
         try {

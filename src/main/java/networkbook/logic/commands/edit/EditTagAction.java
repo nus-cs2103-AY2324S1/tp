@@ -23,9 +23,9 @@ public class EditTagAction implements EditAction {
     }
 
     @Override
-    public void edit(EditPersonDescriptor editPersonDescriptor) throws CommandException {
+    public void edit(EditPersonDescriptor editPersonDescriptor, Index indexOfPerson) throws CommandException {
         assert editPersonDescriptor != null : "editPersonDescriptor should not be null";
-        editPersonDescriptor.setTag(index, tag);
+        editPersonDescriptor.setTag(index, tag, indexOfPerson);
     }
 
     @Override

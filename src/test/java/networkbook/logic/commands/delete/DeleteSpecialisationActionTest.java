@@ -9,10 +9,12 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 
 import networkbook.commons.core.index.Index;
+import networkbook.logic.Messages;
 import networkbook.logic.commands.exceptions.CommandException;
 import networkbook.model.person.Person;
 import networkbook.model.person.Specialisation;
 import networkbook.model.util.UniqueList;
+import networkbook.testutil.TypicalIndexes;
 import networkbook.testutil.TypicalPersons;
 
 public class DeleteSpecialisationActionTest {
@@ -45,9 +47,9 @@ public class DeleteSpecialisationActionTest {
     public void delete_deleteSpecialisationValidIndex_success() throws CommandException {
         DeletePersonDescriptor descriptor = new DeletePersonDescriptor(JACK);
         DeleteSpecialisationAction action = new DeleteSpecialisationAction(firstIndex);
-        action.delete(descriptor);
+        action.delete(descriptor, TypicalIndexes.INDEX_FIRST_PERSON);
         assertEquals(descriptor, jackWithoutFirstSpecialisation);
-        action.delete(descriptor);
+        action.delete(descriptor, TypicalIndexes.INDEX_FIRST_PERSON);
         assertEquals(descriptor, jackWithoutAnySpecialisation);
     }
 
@@ -64,17 +66,26 @@ public class DeleteSpecialisationActionTest {
                 new UniqueList<Specialisation>(),
                 JACK.getTags(),
                 JACK.getPriority().get()));
-        assertThrows(CommandException.class, () -> deleteFirstAction.delete(descriptorWithoutSpecialisation));
+        assertThrows(CommandException.class, () -> deleteFirstAction.delete(descriptorWithoutSpecialisation,
+                TypicalIndexes.INDEX_SECOND_PERSON),
+                String.format(Messages.MESSAGE_INVALID_MULTIVALUED_FIELD_ENTRY_INDEX,
+                        TypicalIndexes.INDEX_SECOND_PERSON.getOneBased(),
+                        "a specialisation", firstIndex.getOneBased()));
 
         DeleteSpecialisationAction deleteTenthAction = new DeleteSpecialisationAction(tenthIndex);
         DeletePersonDescriptor descriptorWithTwoSpecialisations = new DeletePersonDescriptor(JACK);
-        assertThrows(CommandException.class, () -> deleteTenthAction.delete(descriptorWithTwoSpecialisations));
+        assertThrows(CommandException.class, () -> deleteTenthAction.delete(descriptorWithTwoSpecialisations,
+                TypicalIndexes.INDEX_THIRD_PERSON),
+                String.format(Messages.MESSAGE_INVALID_MULTIVALUED_FIELD_ENTRY_INDEX,
+                        TypicalIndexes.INDEX_THIRD_PERSON.getOneBased(),
+                        "a specialisation", tenthIndex.getOneBased()));
     }
 
     @Test
     public void delete_deleteNull_nullPointerException() {
         DeleteSpecialisationAction deleteFirstAction = new DeleteSpecialisationAction(firstIndex);
-        assertThrows(NullPointerException.class, () -> deleteFirstAction.delete(null));
+        assertThrows(NullPointerException.class, () -> deleteFirstAction.delete(null,
+                TypicalIndexes.INDEX_FIRST_PERSON));
     }
 
     @Test

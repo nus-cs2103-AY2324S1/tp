@@ -21,8 +21,8 @@ public class DeletePhoneAction implements DeleteFieldAction {
      * @param descriptor
      */
     @Override
-    public void delete(DeletePersonDescriptor descriptor) throws CommandException {
-        descriptor.deletePhone(index);
+    public void delete(DeletePersonDescriptor descriptor, Index indexOfPerson) throws CommandException {
+        descriptor.deletePhone(index, indexOfPerson);
     }
 
     @Override

@@ -70,7 +70,7 @@ public class EditCommand extends Command {
 
         Person personToEdit = lastShownList.get(index.getZeroBased());
         EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor(personToEdit);
-        this.editAction.edit(editPersonDescriptor);
+        this.editAction.edit(editPersonDescriptor, index);
         Person editedPerson = editPersonDescriptor.toPerson();
         assert editedPerson != null : "Edited person should not be null";
 

@@ -21,8 +21,8 @@ public class DeleteTagAction implements DeleteFieldAction {
      * @param descriptor
      */
     @Override
-    public void delete(DeletePersonDescriptor descriptor) throws CommandException {
-        descriptor.deleteTag(index);
+    public void delete(DeletePersonDescriptor descriptor, Index indexOfPerson) throws CommandException {
+        descriptor.deleteTag(index, indexOfPerson);
     }
 
     @Override

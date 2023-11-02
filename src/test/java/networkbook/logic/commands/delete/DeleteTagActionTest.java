@@ -9,10 +9,12 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 
 import networkbook.commons.core.index.Index;
+import networkbook.logic.Messages;
 import networkbook.logic.commands.exceptions.CommandException;
 import networkbook.model.person.Person;
 import networkbook.model.person.Tag;
 import networkbook.model.util.UniqueList;
+import networkbook.testutil.TypicalIndexes;
 import networkbook.testutil.TypicalPersons;
 
 public class DeleteTagActionTest {
@@ -45,9 +47,9 @@ public class DeleteTagActionTest {
     public void delete_deleteTagValidIndex_success() throws CommandException {
         DeletePersonDescriptor descriptor = new DeletePersonDescriptor(JACK);
         DeleteTagAction action = new DeleteTagAction(firstIndex);
-        action.delete(descriptor);
+        action.delete(descriptor, TypicalIndexes.INDEX_FIRST_PERSON);
         assertEquals(descriptor, jackWithoutFirstTag);
-        action.delete(descriptor);
+        action.delete(descriptor, TypicalIndexes.INDEX_FIRST_PERSON);
         assertEquals(descriptor, jackWithoutAnyTag);
     }
 
@@ -64,17 +66,24 @@ public class DeleteTagActionTest {
                 JACK.getSpecialisations(),
                 new UniqueList<Tag>(),
                 JACK.getPriority().get()));
-        assertThrows(CommandException.class, () -> deleteFirstAction.delete(descriptorWithoutTag));
+        assertThrows(CommandException.class, () -> deleteFirstAction.delete(descriptorWithoutTag,
+                TypicalIndexes.INDEX_FIRST_PERSON),
+                String.format(Messages.MESSAGE_INVALID_MULTIVALUED_FIELD_ENTRY_INDEX,
+                        TypicalIndexes.INDEX_FIRST_PERSON.getOneBased(), "a tag", firstIndex.getOneBased()));
 
         DeleteTagAction deleteTenthAction = new DeleteTagAction(tenthIndex);
         DeletePersonDescriptor descriptorWithTwoTags = new DeletePersonDescriptor(JACK);
-        assertThrows(CommandException.class, () -> deleteTenthAction.delete(descriptorWithTwoTags));
+        assertThrows(CommandException.class, () -> deleteTenthAction.delete(descriptorWithTwoTags,
+                TypicalIndexes.INDEX_SECOND_PERSON),
+                String.format(Messages.MESSAGE_INVALID_MULTIVALUED_FIELD_ENTRY_INDEX,
+                        TypicalIndexes.INDEX_SECOND_PERSON.getOneBased(), "a tag", tenthIndex.getOneBased()));
     }
 
     @Test
     public void delete_deleteNull_nullPointerException() {
         DeleteTagAction deleteFirstAction = new DeleteTagAction(firstIndex);
-        assertThrows(NullPointerException.class, () -> deleteFirstAction.delete(null));
+        assertThrows(NullPointerException.class, () -> deleteFirstAction.delete(null,
+                TypicalIndexes.INDEX_FIRST_PERSON));
     }
 
     @Test
