@@ -20,7 +20,7 @@ public class ReportCommand extends Command {
     public static final String COMMAND_WORD = "report";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Reports the performance metrics (overtime hours, "
-            + "overtime pay, number of leaves) of an employee in the address book.\n"
+            + "overtime pay, number of leaves, remarks (if any)) of an employee in the address book.\n"
             + "Parameters: EMPLOYEE_ID\n"
             + "Example: " + COMMAND_WORD + " EID1234-5678";
 
@@ -39,7 +39,7 @@ public class ReportCommand extends Command {
             if (employee.getId().equals(targetId)) {
                 return new CommandResult(String.format(Messages.MESSAGE_REPORT_STRING,
                         employee.getName(), employee.getOvertimeHours(),
-                        employee.getOvertimePay(), employee.getNumOfLeaves()));
+                        employee.getOvertimePay(), employee.getNumOfLeaves(), employee.getRemarkList()));
             }
         }
         throw new CommandException(Messages.MESSAGE_INVALID_EMPLOYEE_DISPLAYED_ID);
