@@ -35,10 +35,12 @@ public class MarkAbsentCommandParserTest {
 
     @Test
     public void parse_validArgs_returnsMarkCommand() {
+        // first tutorial
         assertParseSuccess(parser, STUDENT_NUMBER_DESC_BOB + TEST_FIRST_TUTORIAL_DESC,
                 new MarkAbsentCommand(Index.fromOneBased(TEST_FIRST_TUTORIAL),
                         new StudentNumber(VALID_STUDENT_NUMBER_BOB)));
 
+        // default tutorial
         assertParseSuccess(parser, STUDENT_NUMBER_DESC_BOB + TEST_DEFAULT_TUTORIAL_DESC,
                 new MarkAbsentCommand(Index.fromOneBased(TEST_DEFAULT_TUTORIAL),
                         new StudentNumber(VALID_STUDENT_NUMBER_BOB)));
@@ -46,11 +48,8 @@ public class MarkAbsentCommandParserTest {
 
     @Test
     public void parse_invalidArgs_throwsParseException() {
-        // first tutorial
         assertParseFailure(parser, STUDENT_NUMBER_DESC_BOB,
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, MarkAbsentCommand.MESSAGE_USAGE));
-
-        // default tutorial
         assertParseFailure(parser, TEST_FIRST_TUTORIAL_DESC,
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, MarkAbsentCommand.MESSAGE_USAGE));
     }
