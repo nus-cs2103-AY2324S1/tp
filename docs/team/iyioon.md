@@ -34,7 +34,7 @@ Given below are my contributions to the project.
     * Added implementation details of the `prefix complete` feature.
 
 * **Community**:
-  * PRs reviewed (with non-trivial review comments): [\#176](https://github.com/AY2324S1-CS2103T-F10-1/tp/pull/176)
-  * Contributed to forum discussions (examples: [1](), [2](), [3](), [4]())
-  * Reported bugs and suggestions for other teams in the class (examples: [1](https://github.com/AY2324S1-CS2103T-F10-1/tp/issues/136))
+  * PRs reviewed (with non-trivial review comments): [\#176](https://github.com/AY2324S1-CS2103T-F10-1/tp/pull/176), [\#182](https://github.com/AY2324S1-CS2103T-F10-1/tp/pull/182), [#185](https://github.com/AY2324S1-CS2103T-F10-1/tp/pull/185)
+  * Contributed to forum discussions (examples: [1](https://github.com/AY2324S1-CS2103T-F10-1/tp/issues/136), [2](https://github.com/AY2324S1-CS2103T-F10-1/tp/issues/181))
+  * Reported bugs and suggestions for other teams in the class (examples: )
   * Some parts of the booking period feature I added was adopted by a classmate ([1](https://github.com/AY2324S1-CS2103T-F10-1/tp/pull/123))
