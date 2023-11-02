@@ -75,10 +75,13 @@ public class PatientCard extends UiPart<Region> {
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
         person.getAppointments().stream()
                 .sorted(Comparator.comparing(Appointment::getAppointmentTime))
-                .forEach(appointment -> appointments.getChildren()
-                        .add(new Label("Appointment with Doctor: " + appointment.getDoctor() + " at "
-                                + appointment.getAppointmentTime().format(Appointment.FORMATTER))));
-
+                .forEach(appointment -> {
+                    Label appointmentLabel = new Label("Appointment with Doctor: " + appointment.getDoctor() + " at "
+                            + appointment.getAppointmentTime().format(Appointment.FORMATTER));
+                    appointmentLabel.setWrapText(true); // Enable text wrapping
+                    appointmentLabel.setPrefWidth(250); // Set the maximum width for text wrapping (adjust as needed)
+                    appointments.getChildren().add(appointmentLabel);
+                });
         condition.setText("Condition: " + person.getCondition().value);
         bloodType.setText("Blood Type: " + person.getBloodType().value);
         emergencyContact.setText("Emergency Contact: " + person.getEmergencyContact().value);
