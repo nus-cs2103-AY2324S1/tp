@@ -575,7 +575,7 @@ If you then find that the basic filtering is insufficient for your use case, you
 
 
 
-<panel header="**Supported Fields**" type="primary" id="find-fields-table" expanded no-close>
+<panel header=":fa-solid-book: **Supported Fields**" type="secondary" id="find-fields-table" expanded no-close>
 Across both basic and advanced filtering, the following fields are supported:<br><br>
 
 | Field | Prefix | Description |
@@ -602,11 +602,6 @@ Note that in all cases, the search is case-insensitive for alphabetic characters
 </box>
 
 
-<box type="warning">
-
-For now, search keywords cannot contain spaces. For example, `n/John Doe` will not work as expected. Functionality to search for keywords which spaces like `"John Doe"` will be added in a future release.
-</box>
-
 ### Basic Filtering
 
 Contacts can be filtered by a single field by typing:
@@ -618,8 +613,22 @@ Such a search will return all contacts whose field matches the keyword based on 
 
 We call this basic block of filtering a **find condition**, which is the smallest unit that act as a valid [**`FIND_EXPRESSION`**](#find-contacts).
 
+<box theme="primary" icon=":fa-solid-lightbulb:">
 
-<box>
+By default, keywords can contain alphanumeric characters, alongside `@`, `$`, `#`, `_`, `-`, `,`, and `.`.
+
+However, if you surround the keyword in **double-quote characters** (`"`), you may also include `(`, `)`, `!`, `&`, `|`, and **spaces** (` `) in the keyword.
+This is especially useful for searching through fields that frequently contain spaces and special characters, such as addresses.
+</box>
+
+
+<box type="warning">
+
+For now, there is no way to search for the double-quote character (`"`) itself.
+This functionality will be added in a future release.
+</box>
+
+<box theme="info" icon=":fa-solid-magnifying-glass:">
 
 For example, given the following contacts (some fields omitted for brevity):
 
@@ -640,15 +649,20 @@ Since `n/do` and `t/friend` are both **find conditions**, they can constitute a 
 - `find n/do`
 - `find t/friend`
 
+Additionally, **using the double-quote characters**, valid **find conditions** include:
+
+- `a/"John street, block 123, #01-01"`
+- `n/"Xiao Ming"`
+
 </box>
 
 ### Advanced Filtering
 
 While basic filtering is sufficient for most use cases, you may find that you need to perform more complex filtering. For example, you may want to find all contacts who have the tag `"friend"` *and* whose names contain the substring `"do"`. Or you may want to find all contacts whose addresses contain the substring `"street"` *or* whose names *do not* contain the substring `"ye"`.
 
-You can accomplish this and more using our powerful advanced filtering syntax, which supports arbitrarily-complex **`FIND_EXPRESSIONs`**, which can be composed of many **find conditions** combined or transformed by **logical operators**.
+You can accomplish this and more using our powerful advanced filtering syntax, which supports arbitrarily-complex **`FIND_EXPRESSION`**, which can be composed of many **find conditions** combined or transformed by **logical operators**.
 
-<panel header="**Supported Logical Operators**" type="primary" id="find-logical-operators-table" expanded no-close>
+<panel header=":fa-solid-book: **Supported Logical Operators**" type="secondary" id="find-logical-operators-table" expanded no-close>
 
 The following logical operators are supported, and are listed in order of precedence (from highest to lowest):
 
@@ -669,7 +683,7 @@ Note that the smallest possible **find expressions** is simply a **find conditio
 
 <br>
 
-<box>
+<box theme="info" icon=":fa-solid-magnifying-glass:">
 
 For example, given the following contacts (some fields omitted for brevity):
 
