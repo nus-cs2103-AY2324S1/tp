@@ -22,7 +22,7 @@ import seedu.address.logic.commands.musician.AddCommand;
 import seedu.address.logic.commands.musician.DeleteCommand;
 import seedu.address.logic.commands.musician.EditCommand;
 import seedu.address.logic.commands.musician.FindCommand;
-import seedu.address.logic.commands.musician.ListCommand;
+import seedu.address.logic.commands.general.ListCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.musician.Musician;
 import seedu.address.model.musician.NameContainsKeywordsPredicate;
