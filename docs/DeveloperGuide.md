@@ -717,7 +717,7 @@ Use case ends.
 **Extensions**
 * 2a. System detects an invalid index entered.
   * 2a1. System shows an error message.
-  * 2a2. User enters a new add note request.
+  * 2a2. User enters a new add note request.<br>
   Steps 2a1- 2a2 are repeated until the data entered is correct. <br>
   Use case resumes from step 3.
 
@@ -783,7 +783,7 @@ Use case ends.
 **Extensions**
 * 2a. System detects an invalid index entered.
   * 2a1. System shows an error message.
-  * 2a2. User enters a new update photo request.
+  * 2a2. User enters a new update photo request.<br>
   Steps 2a1- 2a2 are repeated until the data entered is correct. <br>
   Use case resumes from step 3.
 * 2b. System detects an invalid file path entered.
