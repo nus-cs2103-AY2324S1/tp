@@ -116,18 +116,19 @@ public class UniqueEmployeeList implements Iterable<Employee> {
         if (!target.isSameEmployee(editedEmployee) && contains(editedEmployee)) {
             throw new DuplicateEmployeeException();
         }
-        if (!containsManager(editedEmployee)) {
-            throw new SupervisorNotFoundException();
-        }
-        if (hasSubordinates(target)) {
+        if (!target.isSameEmployee(editedEmployee) && hasSubordinates(target)) {
             throw new SubordinatePresentException();
         }
         if (target.isSupervisorOf(editedEmployee)) {
             throw new SupervisorNotFoundException();
         }
+        if (!containsManager(editedEmployee)) {
+            throw new SupervisorNotFoundException();
+        }
 
         internalList.set(index, editedEmployee);
     }
+
 
     /**
      * Removes the equivalent employee from the list.

@@ -6,6 +6,7 @@ import java.util.List;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.department.Department;
 import seedu.address.model.department.UniqueDepartmentList;
 import seedu.address.model.department.exceptions.DepartmentNotFoundException;
@@ -160,14 +161,14 @@ public class ManageHr implements ReadOnlyManageHr {
      * @throws SubordinatePresentException If the original employee manages subordinates, preventing the update.
      * @throws SupervisorNotFoundException If the target employee is the supervisor of the editedEmployee.
      */
-    public void setEmployee(Employee target, Employee editedEmployee) {
+    public void setEmployee(Employee target, Employee editedEmployee) throws CommandException {
         requireNonNull(editedEmployee);
         for (Department department : departments) {
             department.removeEmployeeIfPresent(target);
             departments.setDepartment(department, department);
         }
-        updateDepartments(editedEmployee);
-        if (employees.hasSubordinates(target)) {
+
+        if (!target.isSameEmployee(editedEmployee) && employees.hasSubordinates(target)) {
             throw new SubordinatePresentException();
         }
         if (!employees.containsManager(editedEmployee)) {
@@ -176,8 +177,15 @@ public class ManageHr implements ReadOnlyManageHr {
         if (target.isSupervisorOf(editedEmployee)) {
             throw new SupervisorNotFoundException();
         }
-
+        if (target.isSameEmployee(editedEmployee) && !hasPermissibleEdits(target, editedEmployee)
+                && employees.hasSubordinates(target)) {
+            throw new CommandException("Name and role should not be edited when he is still managing other employees");
+        }
         employees.setEmployee(target, editedEmployee);
+    }
+
+    private boolean hasPermissibleEdits(Employee target, Employee editedEmployee) {
+        return !target.isSameEmployee(editedEmployee) || target.hasSameRole(editedEmployee);
     }
 
     /**

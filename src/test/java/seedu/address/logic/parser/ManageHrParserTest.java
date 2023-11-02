@@ -80,9 +80,11 @@ public class ManageHrParserTest {
 
     @Test
     public void parseCommand_filter() throws Exception {
-        String keyword = "R&D";
+        String keyword = "d/R&D";
         FilterCommand command = (FilterCommand) parser.parseCommand(FilterCommand.COMMAND_WORD + " " + keyword);
-        assertEquals(new FilterCommand(new ContainsDepartmentPredicate(keyword)), command);
+        ContainsDepartmentPredicate predicate = new ContainsDepartmentPredicate();
+        predicate.setDepartment("R&D");
+        assertEquals(new FilterCommand(predicate), command);
     }
 
     @Test
