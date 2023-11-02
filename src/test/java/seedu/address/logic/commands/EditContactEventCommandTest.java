@@ -7,6 +7,7 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalEvents.getTypicalCalendar;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_EVENT;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INVALID_INDEX;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
@@ -161,6 +162,29 @@ public class EditContactEventCommandTest {
         String expected = "{" + "eventDescription=" + desc + ", start=" + startTimeString1
                 + ", end=" + endTimeString1 + "}";
         assertEquals(descriptor1.toString(), expected);
+    }
+
+    @Test
+    public void execute_equalTo_success() {
+        EventDescription expectedEventDescription = new EventDescription("Eat Tacos");
+        EditContactEventCommand.EditEventDescriptor descriptor = new EditContactEventCommand.EditEventDescriptor();
+        descriptor.setEventDescription(expectedEventDescription);
+        String startTime = "2023-10-10 10:00";
+        String endTime = "2023-10-10 12:00";
+        descriptor.setStart(startTime);
+        descriptor.setEnd(endTime);
+        ArrayList<Index> indexArrayList = new ArrayList<>();
+        indexArrayList.add(INDEX_FIRST_PERSON);
+        indexArrayList.add(INDEX_FIRST_EVENT);
+        ArrayList<Index> indexArrayList2 = new ArrayList<>();
+        indexArrayList2.add(INDEX_SECOND_PERSON);
+        indexArrayList2.add(INDEX_FIRST_EVENT);
+        EditContactEventCommand editContactEventCommand1 = new EditContactEventCommand(indexArrayList, descriptor);
+        EditContactEventCommand editContactEventCommand2 = new EditContactEventCommand(indexArrayList2, descriptor);
+
+        assertEquals(editContactEventCommand1, editContactEventCommand1);
+        assertNotEquals(editContactEventCommand1, null);
+        assertNotEquals(editContactEventCommand2, editContactEventCommand1);
     }
 
 }
