@@ -21,6 +21,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.lessons.Lesson;
+import seedu.address.model.lessons.Task;
 import seedu.address.model.person.Person;
 import seedu.address.model.state.State;
 
@@ -43,6 +44,8 @@ public class MainWindow extends UiPart<Stage> {
     private LessonListPanel lessonListPanel;
     private StudentDetailListPanel studentDetailListPanel;
     private LessonDetailListPanel lessonDetailListPanel;
+    private FullTaskListPanel fullTaskListPanel;
+    private TaskDetailPanel taskDetailPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
 
@@ -64,6 +67,16 @@ public class MainWindow extends UiPart<Stage> {
     private VBox scheduleList;
     @FXML
     private StackPane scheduleListPanelPlaceholder;
+
+    @FXML
+    private VBox fullTaskList;
+    @FXML
+    private StackPane fullTaskListPanelPlaceholder;
+
+    @FXML
+    private VBox taskDetailListPanel;
+    @FXML
+    private StackPane taskDetailListPanelPlaceholder;
 
     @FXML
     private VBox studentDetailList;
@@ -151,6 +164,12 @@ public class MainWindow extends UiPart<Stage> {
         lessonListPanel = new LessonListPanel(logic, model);
         scheduleListPanelPlaceholder.getChildren().add(lessonListPanel.getRoot());
 
+        fullTaskListPanel = new FullTaskListPanel(logic);
+        fullTaskListPanelPlaceholder.getChildren().add(fullTaskListPanel.getRoot());
+
+        taskDetailPanel = new TaskDetailPanel(logic);
+        taskDetailListPanelPlaceholder.getChildren().add(taskDetailPanel.getRoot());
+
         studentDetailListPanel = new StudentDetailListPanel(logic);
         studentDetailListPanelPlaceholder.getChildren().add(studentDetailListPanel.getRoot());
 
@@ -168,8 +187,9 @@ public class MainWindow extends UiPart<Stage> {
 
         studentDetailList.setVisible(false);
         lessonDetailList.setVisible(false);
+        taskDetailListPanel.setVisible(false);
 
-        contentSplitPane.getItems().removeAll(personList, studentDetailList);
+        contentSplitPane.getItems().removeAll(personList, studentDetailList, fullTaskList, taskDetailListPanel);
     }
 
     /**
@@ -238,14 +258,17 @@ public class MainWindow extends UiPart<Stage> {
             if (!commandResult.getState().equals(State.NONE)) {
                 State state = commandResult.getState();
                 double[] dividerPositions = contentSplitPane.getDividerPositions();
+                contentSplitPane.getItems().removeAll(personList, studentDetailList,
+                        scheduleList, lessonDetailList, fullTaskList, taskDetailListPanel);
                 switch (state) {
                 case SCHEDULE:
-                    contentSplitPane.getItems().removeAll(personList, studentDetailList);
                     contentSplitPane.getItems().addAll(scheduleList, lessonDetailList);
                     break;
                 case STUDENT:
-                    contentSplitPane.getItems().removeAll(scheduleList, lessonDetailList);
                     contentSplitPane.getItems().addAll(personList, studentDetailList);
+                    break;
+                case TASK:
+                    contentSplitPane.getItems().addAll(fullTaskList, taskDetailListPanel);
                     break;
                 default:
                     System.out.println("unknown panel asked for");
@@ -268,6 +291,10 @@ public class MainWindow extends UiPart<Stage> {
      * @param person The person to show the details of.
      */
     public void handleShowPerson(Person person) {
+        if (person == null) {
+            studentDetailList.setVisible(false);
+            return;
+        }
         studentDetailList.setVisible(true);
         studentDetailListPanel.setPersonDetails(person, model);
     }
@@ -278,7 +305,21 @@ public class MainWindow extends UiPart<Stage> {
      * @param lesson The lesson to show the details of.
      */
     public void handleShowLesson(Lesson lesson) {
+        if (lesson == null) {
+            lessonDetailList.setVisible(false);
+            return;
+        }
         lessonDetailList.setVisible(true);
         lessonDetailListPanel.setLessonDetails(lesson, model);
+    }
+
+    /**
+     * Sets the Task Details in the Task Detail Panel and shows it.
+     *
+     * @param task The task to show the details of.
+     */
+    public void handleShowTask(Task task) {
+        taskDetailListPanel.setVisible(true);
+        taskDetailPanel.setTaskDetails(task);
     }
 }

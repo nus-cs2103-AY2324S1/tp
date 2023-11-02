@@ -5,6 +5,7 @@ import static java.util.Objects.requireNonNull;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.lessons.Lesson;
+import seedu.address.model.state.State;
 
 /**
  * Adds a lesson to the schedule.
@@ -28,10 +29,11 @@ public class AddLessonCommand extends Command {
             throw new CommandException("Exist lesson clashes with this lesson: "
                     + clashingLesson.toString());
         }
-
         model.addLesson(lesson);
         model.resetAllShowFields();
-        return new CommandResult(String.format("New lesson added: " + lesson.toString()));
+        model.setState(State.SCHEDULE);
+        model.showLesson(lesson);
+        return new CommandResult(String.format("New lesson added: " + lesson.toString()), State.SCHEDULE);
     }
 
 }

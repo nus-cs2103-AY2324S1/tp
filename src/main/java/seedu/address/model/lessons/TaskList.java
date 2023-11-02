@@ -2,18 +2,20 @@ package seedu.address.model.lessons;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.address.model.util.SerializeUtil.deserialize;
 
-import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.ListEntryField;
 import seedu.address.model.lessons.exceptions.DuplicateTaskException;
 import seedu.address.model.lessons.exceptions.TaskNotFoundException;
+import seedu.address.storage.JsonAdaptedTask;
 
 
 /**
@@ -33,6 +35,22 @@ public class TaskList extends ListEntryField implements Iterable<Task> {
 
     private final ObservableList<Task> internalUnmodifiableTaskList =
             FXCollections.unmodifiableObservableList(internalTaskList);
+
+
+    /**
+     * Default constructor
+     */
+    public TaskList() {
+
+    }
+
+    /**
+     * Constructor for a TaskList, given a set of tasks
+     */
+    public TaskList(Set<Task> tasks) {
+        this.internalTaskList.addAll(tasks);
+    }
+
 
     /**
      * Returns true if the list contains an equivalent task as the given argument.
@@ -116,17 +134,19 @@ public class TaskList extends ListEntryField implements Iterable<Task> {
 
     /**
      * Parses a Tasklist from a String input.
-     * @param input The save file input
+     *
      * @return A TaskList
      */
-    public static TaskList of(String input) throws ParseException {
-        // TODO: parse
-        String[] tasksArray = input.split(",");
+
+    public static TaskList of(List<JsonAdaptedTask> tasks) throws ParseException {
         TaskList taskList = new TaskList();
-        for (int i = 0; i < tasksArray.length; i++) {
-            taskList.add(Task.of(tasksArray[i]));
+        for (JsonAdaptedTask taskString : tasks) {
+            // parse the task
+            Task task = deserialize(Task.DEFAULT_TASK, Task::of, taskString.getTaskName());
+            taskList.add(task);
         }
         return taskList;
+
     }
 
 
@@ -163,15 +183,6 @@ public class TaskList extends ListEntryField implements Iterable<Task> {
     }
 
     /**
-     * Encodes into a string
-     * @return String of tasks
-     */
-    @Override
-    public String toString() {
-        return StringUtil.joinArray(new ArrayList<>(this.internalTaskList), ",");
-    }
-
-    /**
      * Returns true if {@code tasks} contains only unique tasks.
      */
     private boolean tasksAreUnique(List<Task> tasks) {
@@ -185,8 +196,20 @@ public class TaskList extends ListEntryField implements Iterable<Task> {
         return true;
     }
 
+    /**
+     * Returns the set of tasks in this tasklist.
+     * @return
+     */
+    public Set<Task> getTaskSetClone() {
+        HashSet<Task> tasksClone = new HashSet<>();
+        for (Task task : internalTaskList) {
+            tasksClone.add(task.clone());
+        }
+        return tasksClone;
+    }
+
     @Override
-    public ListEntryField clone() {
+    public TaskList clone() {
         TaskList cloned = new TaskList();
         internalTaskList.forEach(task -> {
             cloned.add(new Task(task.getDescription(), task.isDone()));

@@ -15,6 +15,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.lessons.Lesson;
 import seedu.address.model.person.Person;
+import seedu.address.model.state.State;
 
 /**
  * Adds a person to the address book.
@@ -82,7 +83,9 @@ public class AddPersonCommand extends Command {
         }
         model.addPerson(toAdd);
         model.resetAllShowFields();
-        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
+        model.setState(State.STUDENT);
+        model.showPerson(toAdd);
+        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)), State.STUDENT);
     }
 
     @Override

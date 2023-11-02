@@ -33,6 +33,7 @@ public abstract class AbstractEditCommand<T extends ListEntry<? extends T>> exte
     protected Consumer<T> deleteMethod;
     protected Consumer<T> addMethod;
     protected Function<T, T> getClashingEntry;
+    protected Consumer<T> showMethod;
 
     /**
      * Pass in index to indicate which entry to edit
@@ -68,6 +69,8 @@ public abstract class AbstractEditCommand<T extends ListEntry<? extends T>> exte
         init();
         editFields();
         validateEditedAndWriteBack();
+        model.resetAllShowFields();
+        showMethod.accept(edited);
         return new CommandResult("Edit success.\n from: " + original.toString() + "\n to: " + edited.toString());
     }
     /**

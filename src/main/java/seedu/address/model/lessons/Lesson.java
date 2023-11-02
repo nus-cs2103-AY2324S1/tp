@@ -3,6 +3,7 @@ package seedu.address.model.lessons;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Objects;
+import java.util.Set;
 
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.ListEntry;
@@ -21,6 +22,10 @@ public class Lesson extends ListEntry<Lesson> {
     // Data fields
     private Subject subject;
     private Day day;
+
+    /**
+     * The Task List to store the Lesson Tasks.
+     */
     private TaskList taskList;
 
     /**
@@ -35,7 +40,7 @@ public class Lesson extends ListEntry<Lesson> {
      * @see seedu.address.logic.parser.ParserUtil
      */
     public Lesson(Name name, Time start, Time end, Day day, Subject subject, TaskList taskList, Name... studentNames) {
-        requireAllNonNull(name, start, end, day, subject, studentNames);
+        requireAllNonNull(name, start, end, day, subject, taskList, studentNames);
         this.name = name;
         this.start = start;
         this.end = end;
@@ -58,6 +63,7 @@ public class Lesson extends ListEntry<Lesson> {
             throws ParseException {
         this(new Name(name), new Time(start), new Time(end), Day.of(day), new Subject(subject), taskList);
     }
+
     private Lesson() {
         this.name = Name.DEFAULT_NAME;
         this.start = Time.DEFAULT_TIME;
@@ -218,6 +224,14 @@ public class Lesson extends ListEntry<Lesson> {
         return this.taskList.getTaskClashWith(toAdd);
     }
 
+    /**
+     * Returns the list of tasks as a set.
+     * @return
+     */
+    public Set<Task> getTasksSet() {
+        return taskList.getTaskSetClone();
+    }
+
     public Name getName() {
         return name;
     }
@@ -230,6 +244,7 @@ public class Lesson extends ListEntry<Lesson> {
             setName(name);
         }
     }
+
 
     @Override
     public boolean equals(Object other) {
@@ -311,7 +326,7 @@ public class Lesson extends ListEntry<Lesson> {
         cloned.setNameIfNotDefault(this.name);
         cloned.setDayIfNotDefault(this.day);
         cloned.setRemarkIfNotDefault(this.remark);
-        cloned.setTaskListIfNotDefault(this.taskList);
+        cloned.taskList = taskList.clone();
         return cloned;
     }
 }

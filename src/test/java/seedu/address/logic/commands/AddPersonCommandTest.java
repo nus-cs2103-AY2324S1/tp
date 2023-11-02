@@ -23,6 +23,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyFullTaskList;
 import seedu.address.model.ReadOnlySchedule;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.lessons.Lesson;
@@ -212,10 +213,13 @@ public class AddPersonCommandTest {
         }
         @Override
         public void showLesson(Lesson lessonToShow) {
-            //TODO
+            throw new AssertionError("This method should not be called.");
         }
         @Override
         public void showPerson(Person personToShow) {
+        }
+        @Override
+        public void showTask(Task taskToShow) {
             throw new AssertionError("This method should not be called.");
         }
         @Override
@@ -225,12 +229,12 @@ public class AddPersonCommandTest {
 
         @Override
         public State getState() {
-            throw new AssertionError("This method should not be called.");
+            return State.STUDENT;
         }
 
         @Override
         public void setState(State state) {
-            throw new AssertionError("This method should not be called.");
+            //throw new AssertionError("This method should not be called.");
         }
 
         @Override
@@ -241,6 +245,16 @@ public class AddPersonCommandTest {
         @Override
         public boolean hasCurrentShownEntry() {
             return false;
+        }
+
+        @Override
+        public ReadOnlyFullTaskList getFullTaskListObject() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<Task> getFullTaskList() {
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override
