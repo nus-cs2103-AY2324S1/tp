@@ -21,10 +21,8 @@ public class ImportWindow extends UiPart<Stage> {
 
     @FXML
     private Button importButton;
-
     @FXML
     private Label warningMessage;
-
     @FXML
     private TextArea inputTextArea;
     @FXML
@@ -111,5 +109,14 @@ public class ImportWindow extends UiPart<Stage> {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+    }
+
+    /**
+     * Needs to have the cards as starting input in json file
+     * @return Boolean based on if the input has
+     */
+
+    private boolean verifyImportData(String inputData) {
+        return true;
     }
 }

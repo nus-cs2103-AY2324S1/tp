@@ -23,6 +23,8 @@ public class ExportWindow extends UiPart<Stage> {
     private static final Logger logger = LogsCenter.getLogger(ExportWindow.class);
     private static final String FXML = "ExportWindow.fxml";
 
+    private String filePath = "data/deck.json";
+
     @FXML
     private Button copyButton;
 
@@ -37,7 +39,7 @@ public class ExportWindow extends UiPart<Stage> {
     public ExportWindow(Stage root) {
         super(FXML, root);
         exportMessage.setText("");
-        autoReadDeckFileAndDisplayContent();
+        autoReadDeckFileAndDisplayContent(filePath);
     }
 
     /**
@@ -104,9 +106,8 @@ public class ExportWindow extends UiPart<Stage> {
     }
 
     @FXML
-    private void autoReadDeckFileAndDisplayContent() {
+    private void autoReadDeckFileAndDisplayContent(String filePath) {
         // Specify the path to the data/deck.json file
-        String filePath = "data/deck.json";
 
         File selectedFile = new File(filePath);
         if (selectedFile.exists()) {
