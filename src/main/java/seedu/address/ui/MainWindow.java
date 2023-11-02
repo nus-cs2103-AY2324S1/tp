@@ -24,14 +24,16 @@ import seedu.address.logic.parser.exceptions.ParseException;
 public class MainWindow extends UiPart<Stage> {
 
     private static final String FXML = "MainWindow.fxml";
+    private static final int BOTTOM_LIST_MODES = 2;
 
     private final Logger logger = LogsCenter.getLogger(getClass());
 
     private Stage primaryStage;
     private Logic logic;
+    private int bottomListIndicator;
 
     // Independent Ui parts residing in this Ui container
-    private EventListPanel eventListPanel;
+    private BottomListPanel bottomListPanel;
     private PersonListPanel personListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
@@ -43,7 +45,7 @@ public class MainWindow extends UiPart<Stage> {
     private MenuItem helpMenuItem;
 
     @FXML
-    private StackPane eventListPanelPlaceholder;
+    private StackPane bottomListPanelPlaceholder;
 
     @FXML
     private StackPane personListPanelPlaceholder;
@@ -56,6 +58,10 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane calendarPlaceholder;
+
+    private EventListPanel eventListPanel;
+
+    private TaskListPanel taskListPanel;
 
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
@@ -73,6 +79,7 @@ public class MainWindow extends UiPart<Stage> {
         setAccelerators();
 
         helpWindow = new HelpWindow();
+        bottomListIndicator = 0;
     }
 
     public Stage getPrimaryStage() {
@@ -118,7 +125,10 @@ public class MainWindow extends UiPart<Stage> {
      */
     void fillInnerParts() {
         eventListPanel = new EventListPanel(logic.getEventList());
-        eventListPanelPlaceholder.getChildren().add(eventListPanel.getRoot());
+        taskListPanel = new TaskListPanel(logic.getTaskList());
+
+        bottomListPanel = eventListPanel;
+        bottomListPanelPlaceholder.getChildren().add(bottomListPanel.getRoot());
 
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
@@ -181,6 +191,19 @@ public class MainWindow extends UiPart<Stage> {
 
     }
 
+    /**
+     * Switches the bottom list between the available lists.
+     */
+    @FXML
+    private void handleSwitchBottomList() {
+        if (bottomListIndicator == 0) {
+            switchToTaskList();
+        } else {
+            switchToEventList();
+        }
+        bottomListIndicator = (bottomListIndicator + 1) % BOTTOM_LIST_MODES;
+    }
+
     public PersonListPanel getPersonListPanel() {
         return personListPanel;
     }
@@ -204,11 +227,31 @@ public class MainWindow extends UiPart<Stage> {
                 handleExit();
             }
 
+            if (commandResult.isSwitchBottomList()) {
+                handleSwitchBottomList();
+            }
+
             return commandResult;
         } catch (CommandException | ParseException e) {
             logger.info("An error occurred while executing command: " + commandText);
             resultDisplay.setFeedbackToUser(e.getMessage());
             throw e;
         }
+    }
+
+    /**
+     * Switches the Bottom List Panel to display the task list instead.
+     */
+    public void switchToTaskList() {
+        bottomListPanel = taskListPanel;
+        bottomListPanelPlaceholder.getChildren().setAll(bottomListPanel.getRoot());
+    }
+
+    /**
+     * Switches the Bottom List Panel to display the event list instead.
+     */
+    public void switchToEventList() {
+        bottomListPanel = eventListPanel;
+        bottomListPanelPlaceholder.getChildren().setAll(bottomListPanel.getRoot());
     }
 }
