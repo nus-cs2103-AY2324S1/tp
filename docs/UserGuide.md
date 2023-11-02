@@ -306,26 +306,28 @@ fields have to be specified.
 
 #### Usage:
 
-`editApplicant {index} /name {applicantName} /phone {phoneNumber}`
+`editApplicant {index} /name {applicantName} /phone {phoneNumber} /interview {interviewTime}`
 
-`edita {index} /name {applicantName} /phone {phoneNumber}`
+`edita {index} /name {applicantName} /phone {phoneNumber} /interview {interviewTime}`
 
 #### Acceptable values for parameters:
 
 - `index`: Only numbers are allowed, starting from 1
 - `applicantName`: Only alphabetical characters, @, () are allowed
 - `phoneNumber`: Only numbers are allowed
+- `interviewTime` : Only dates in the format of "DD/MM/YYYY HhMm" are allowed. To remove an interview time from an 
+applicant, 'cancel' is also allowed.
 
 #### Example of usage:
 
-`editApplicant 1 /name Aliciaa /phone 12345678`
+`editApplicant 1 /name Alicia /phone 12345678 /interivew 12/10/2023 1400`
 
-`edita 1 /name Aliciaa /phone 12345678`
+`edita 1 /name Alicia /phone 12345678 /interview 12/10/2023 1400`
 
 #### Expected Outcome:
 
 ```
-Edited applicant: Aliciaa
+Edited applicant: Alicia
 ```
 
 #### If name is invalid:
@@ -338,6 +340,13 @@ Names should only contain alphanumeric characters and spaces, and it should not 
 
 ```
 Phone numbers should only contain numbers, and it should be at least 3 digits long
+```
+
+#### If interview date is invalid:
+
+```
+Interview time should be in the format of DD/MM/YYYY HHmm. 
+To cancel the interview, enter 'cancel' (case sensitive)
 ```
 
 ### Find Applicant(s)
