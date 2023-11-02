@@ -403,6 +403,37 @@ Sequence Diagram for FindExpressionParser showing how a sample input is parsed u
   * **Pros**: Smoother user experience.
   * **Cons**: User might not realize they made a mistake.
 
+### Update photo feature
+#### Implementation
+##### Commmand logic
+The `UpdatePhotoCommand` feature allows users to update photo of a specific contact. This functionality is essential for forgetful users who want to store photos of contacts to remember them easier.
+
+Two key classes are involved in this implementation:
+- `UpdatePhotoCommand`: Handles the logic for updating photo.
+- `Avatar`: Represents the photo of a contact.
+
+Photos are stored as an `Avatar` within the Person model.
+
+The `Avatar` class contains a `String` representing the path to the chosen photo.
+
+When a user inputs a command to update photo of a contact, the `UpdatePhotoCommandParser` parses the user input and creates a new `UpdatePhotoCommand` object. This object is then executed, which results in the update of the contact's photo.
+
+
+The process can be summarized in the following logic flow:
+<puml src="diagrams\updatephoto-command/UpdatePhotoCommandSequenceDiagram.puml" />
+
+1. Parse user input to create a `UpdatePhotoCommand` object.
+2. Execute the `UpdatePhotoCommand`, which involves:
+    - Retrieving the list of all persons.
+    - Validating the provided index.
+    - Creating an exact copy of the person at the provided index, except for the `Avatar`.
+    - Replacing the specified person with their copy.
+3. Return a `CommandResult` indicating the outcome.
+
+Key methods in this implementation include:
+- `UpdatePhotoCommand(int index, String path)`: Constructor to initialize the command.
+- `execute(Model model)`: Updates the photo as well as the model.
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
@@ -706,6 +737,7 @@ Use case ends.
   Steps 2a1- 2a2 are repeated until the data entered is correct.<br>
   Use case resumes from step 3. <br>
 
+
 **Use Case UC6 - Add note**
 
 **MSS**
@@ -735,7 +767,6 @@ Use case ends.
   * 2a2. User enters a new remove note request.<br>
   Steps 2a1- 2a2 are repeated until the data entered is correct. <br>
   Use case resumes from step 3.
-
 
 **Use Case UC8 - Record payment**
 
@@ -824,6 +855,7 @@ Use case ends.
 | tg/    | Telegram handle of contact     | `tg/@johndoe`                    |
 | e2/    | Secondary email of contact     | `e2/johndoe@hotmail.com`         |
 | b/     | Birthday of contact            | `b/23/10`                        |
+| path/  | Path to the photo of contact   | `path/D:/images/john-doe.png`    |
 
 --------------------------------------------------------------------------------------------------------------------
 
