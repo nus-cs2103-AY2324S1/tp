@@ -46,6 +46,8 @@ Welcome to the User Guide of **Staff-Snap**! Here you'll find everything you nee
 
 While **Staff-Snap** has a simple and intuitive [Graphical User Interface (GUI)](#TODO), it is optimised for use with a [Command Line Interface (CLI)](#TODO). If you are a fast typer, **Staff-Snap** can get your applicant management tasks done faster than traditional GUI applications.
 
+<br>
+
 ---
 <br>
 
@@ -59,7 +61,9 @@ While **Staff-Snap** has a simple and intuitive [Graphical User Interface (GUI)]
 5. Navigate into your home folder with the `cd` command.
 6. Enter the `java -jar staffsnap.jar` command to run the application.
 7. You should see the [GUI](#TODO) displayed as shown below. Note how the application contains some sample data.<br>
+
    ![Main Window view](images/user-guide/MainWindow.png)<br>
+
 8. Type the command in the command box and press <kbd>Enter</kbd> to execute it. e.g. typing `help` and pressing <kbd>Enter</kbd> will open this User Guide in your browser window.<br>
    Some example commands that you can try:
    * `add n/John Doe hp/81238123 p/Boss e/john@mail.com` : Adds an applicant named John Doe to the list. 
@@ -71,7 +75,8 @@ While **Staff-Snap** has a simple and intuitive [Graphical User Interface (GUI)]
 
 <box type="tip" header="**For macOS users**" seamless>
 
-If you are unfamiliar with the command terminal, you can right-click the `staffsnap.jar` file and select **Open With > JavaLauncher.app** to launch the application. If you are shown the warning below, click Open to continue launching Staff-Snap.
+If you are unfamiliar with the command terminal, you can right-click the `staffsnap.jar` file and select **Open With > JavaLauncher.app** to launch the application. If you are shown the warning below, click Open to continue launching Staff-Snap.<br>
+
 <pic src="images/user-guide/mac_os_warning.png" height="446" width="372" alt="mac_os_warning" />
 
 </box>
@@ -149,8 +154,19 @@ This section introduces the symbols and notations used throughout this guide. We
 ---
 <br>
 
+### Applicant Management
+
+#### Command Parameters
+
+notation table for NAME, EMAIL, POSITION, PHONE, STATUS, INDEX
+
+<br>
+
+---
+<br>
+
 <a name="help"></a>
-### `help` : Viewing help
+#### Viewing help: `help`
 
 Opens up the user guide in the browser. Also displays a list of basic commands the user can use.
 
@@ -162,14 +178,14 @@ Format: `help`
 <br>
 
 <a name="add"></a>
-### `add` : Adding a new applicant
+#### Adding a new applicant: `add`
 
 Adds a new applicant to the list.
 
 Format: `add n/NAME hp/PHONE e/EMAIL p/POSITION`
 
 <box type="warning" header="**Caution**">
-    No duplicate applicants allowed. Two applicants are considered duplicates if they have the same phone number or email.
+    Duplicate applicants are not allowed. Two applicants are considered duplicates if they have the same phone number or email.
 </box>
 
 Example:
@@ -182,7 +198,7 @@ Example:
 <br>
 
 <a name="edit"></a>
-### `edit` : Editing an applicant
+#### Editing an applicant: `edit`
 
 Edits the details of an applicant in the list.
 
@@ -200,8 +216,25 @@ Example:
 ---
 <br>
 
+<a name="delete"></a>
+#### Deleting an applicant: `delete`
+
+Deletes an applicant from the list.
+
+Format: `delete INDEX`
+* Deletes the applicant at the specified `INDEX`. The index refers to the index number shown in the displayed applicant list.
+
+Example:
+* `list` followed by `delete 2` deletes the 2nd person in the applicant list.
+* `sort d/name` followed by `delete 3` deletes the 3rd person in the sorted applicant list.
+
+<br>
+
+---
+<br>
+
 <a name="list"></a>
-### `list` : Listing all applicants
+#### Listing all applicants: `list`
 
 Displays the full list of all applicants.
 
@@ -212,36 +245,28 @@ Format: `list`
 ---
 <br>
 
-<a name="delete"></a>
-### `delete` : Deleting an applicant
+<a name="status"></a>
+#### Editing an applicant status: `status`
 
-Deletes a particular applicant based on their index number.
+Edits the status of an applicant.
 
-Format: `delete INDEX`
-* Deletes the applicant at the specified `INDEX`.
-* The index refers to the index number shown in the displayed applicant list.
-* The index **must be a positive integer** 1, 2, 3, ….
+Format: `status INDEX s/STATUS`
+* Edits the applicant at the specified `INDEX`. The index refers to the index number shown in the displayed person list.
+* `STATUS` must be either `o`(offered) or `r`(rejected) or `u`(undecided).
 
-Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the applicant list.
-* `sort d/name` followed by `delete 3` deletes the 3rd person in the sorted applicant list.
+Example:
+* `status 3 s/o` updates the status of the 3rd person in the displayed applicant list to _OFFERED_.
 
 <br>
 
 ---
 <br>
 
-<a name="status"></a>
-### `status` : Editing an applicant status
+### Interview Management
 
-Edits the status of an applicant.
+#### Command Parameters
 
-Format: `status INDEX s/STATUS`
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list.
-* `STATUS` must be either `o`(offered) or `r`(rejected) or `u`(undecided).
-
-Examples:
-* `status 3 s/o` updates the status of the 3rd person in the displayed applicant list to OFFERED.
+Parameter table for TYPE, RATING, INTERVIEW_INDEX, INDEX
 
 <br>
 
@@ -249,7 +274,7 @@ Examples:
 <br>
 
 <a name="addi"></a>
-### `addi` : Adding an interview to an applicant
+#### Adding an interview to an applicant: `addi`
 
 Adds a new interview to an applicant. In the case of duplicate names, the system will automatically increment the last 
 number in the user input by 1, or add 1 if there is no number.
@@ -261,7 +286,7 @@ Duplicate handling:
 
 Format: `addi INDEX t/TYPE [r/RATING]`
 
-Examples:
+Example:
 * `addi 1 t/technical r/8.6` adds a Technical interview with rating 8.6 to the 1st person in the displayed applicant list.
 * `addi 3 t/screening` adds a Screening interview without rating to the 3rd person in the displayed applicant list.
 
@@ -278,7 +303,7 @@ UI mockup:
 <br>
 
 <a name="editi"></a>
-### `editi` : Editing an interview of an applicant
+#### Editing an interview of an applicant: `editi`
 
 Edits an interview of an applicant.
 
@@ -287,7 +312,7 @@ Format: `editi INDEX i/INTERVIEW_INDEX [t/TYPE] [r/RATING]`
 * At least one of the optional fields must be provided.
 * Existing values will be updated by the input values.
 
-Examples:
+Example:
 * `editi 1 i/1 t/technical r/7.8` edits the 1st interview of the 1st person in the displayed applicant list to a technical interview with rating 7.8.
 * `editi 3 i/2 t/screening` edits the 2nd interview type of the 3rd person in the displayed applicant list to a screening interview.
 * `editi 2 i/1 r/8.9` edits the 1st interview rating of the 2nd person in the displayed applicant list to 8.9.
@@ -298,13 +323,14 @@ Examples:
 <br>
 
 <a name="deletei"></a>
-### `deletei` : Deleting an interview from an applicant
+#### Deleting an interview from an applicant: `deletei`
 
 Deletes an interview from an applicant.
 
 Format: `deletei INDEX i/INTERVIEW_INDEX`
+* Deletes from the applicant at the specified `INDEX`. The index refers to the index number shown in the displayed person list.
 
-Examples:
+Example:
 * `deletei 1 i/2` deletes the 2nd interview of the 1st person in the displayed applicant list.
 
 <br>
@@ -312,8 +338,19 @@ Examples:
 ---
 <br>
 
+### Applicant Processing
+
+#### Command Parameters
+
+Parameter table for DESCRIPTOR, KEYWORD, MORE_KEYWORDS, FILENAME
+
+<br>
+
+---
+<br>
+
 <a name="find"></a>
-### `find` : Finding an applicant by name
+#### Finding an applicant by name: `find`
 
 Find employees whose name contains a particular keyword.
 
@@ -334,7 +371,7 @@ Examples:
 <br>
 
 <a name="sort"></a>
-### `sort`: Sorting applicants by descriptor
+#### Sorting applicants by descriptor: `sort`
 
 Sorts the applicant list by using a particular descriptor as the sorting criteria.
 
@@ -355,7 +392,7 @@ Examples:
 <br>
 
 <a name="filter"></a>
-### `filter`: Filtering applicants by descriptor criterion
+#### Filtering applicants by descriptor criterion: `filter`
 
 Filters the applicant list by using a particular descriptor criterion.
 
@@ -372,24 +409,31 @@ Examples:
 <br>
 
 <a name="import"></a>
-### `import` : Importing from csv
+#### Importing from csv: `import`
 
-Imports applicants from a csv file.
+Imports applicants from a [csv](#TODO) file.
 
 Format: `import f/FILENAME`
-* `FILENAME` must be a valid csv file.
+* The csv file must be placed in the home folder of Staff-Snap.
+* The csv file must have the following headers: `name`, `phone`, `email`, `position` in that order, as shown below.<br>
+![csv_header](images/user-guide/csv_header.png)<br>
+
+* The fields of the columns must satisfy the requirements for `NAME`, `PHONE`, `EMAIL`, and `POSITION` respectively.
+* A sample csv file can be found [here](demo.csv).
 
 Examples:
-* `import f/applicants.csv`
-* `import f/classList.csv`
+* `import f/demo.csv`
 
 <br>
 
 ---
+
+### Miscellaneous Functions
+
 <br>
 
 <a name="clear"></a>
-### `clear` : Clearing all applicant entries
+#### Clearing all applicant entries: `clear`
 
 After typing `clear`, system asks the user to confirm clearing. If user types `yes`, all the current data stored 
 in the system is the cleared. Else, the clear process is cancelled. 
@@ -401,11 +445,8 @@ UI mockup:
 
 <br>
 
----
-<br>
-
 <a name="exit"></a>
-### `exit` : Exiting the program
+#### Exiting the program: `exit`
 
 Exits the program.
 
@@ -413,32 +454,25 @@ Format: `exit`
 
 <br>
 
----
-<br>
-
 <a name="saving-the-data"></a>
-### Saving the data
+#### Saving the data
 
 Automatically saves the data to a local storage whenever there is a change to the applicant list. There is no need to save manually.
 
 <br>
 
----
-<br>
-
 <a name="editing-the-data-file"></a>
-### Editing the data file
+#### Editing the data file
 
 <box type="warning" header="**Caution**">
-    If the format of the edited data file is invalid, Staff-Snap will override the existing data file with an empty data file in the next run. Please make a backup before you attempt to edit the data file!
+    **Please make a backup copy before you attempt to edit the data file.** If the format of the edited data file is invalid, Staff-Snap will override the existing data file with an empty data file in the next run. 
 </box>
 
-Staff-Snap applicant data are saved automatically as a JSON file `[JAR file location]/data/applicantBook.json`. Advanced users are welcome to update data directly by editing that data file.
+Staff-Snap applicant data are saved automatically as a [JSON](#TODO) file `[JAR file location]/data/applicantBook.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <br>
 
 ---
-<br>
 
 <a name="glossary"></a>
 ## Glossary
