@@ -77,10 +77,6 @@ public class CourseCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        if (operation == null) {
-            throw new CommandException(MESSAGE_INVALID_OPERATION_FAILURE);
-        }
-
         switch (operation) {
         case CREATE:
             return addAddressBookHelper(model);
