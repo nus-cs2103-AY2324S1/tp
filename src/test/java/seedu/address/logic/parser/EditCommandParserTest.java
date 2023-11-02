@@ -128,7 +128,6 @@ public class EditCommandParserTest {
         Index targetIndex = INDEX_SECOND_EMPLOYEE;
         String userInput = targetIndex.getOneBased() + PHONE_DESC_BOB + DEPARTMENT_DESC_LOGISTIC + SALARY_DESC_BOB
                 + EMAIL_DESC_AMY + ADDRESS_DESC_AMY + NAME_DESC_AMY + LEAVE_DESC_AMY + DEPARTMENT_DESC_INVESTMENT;
-
         EditCommand.EditEmployeeDescriptor descriptor = new EditEmployeeDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
                 .withDepartments(VALID_DEPARTMENT_LOGISTIC, VALID_DEPARTMENT_INVESTMENT)

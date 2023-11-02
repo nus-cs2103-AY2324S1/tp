@@ -11,6 +11,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.department.Department;
 import seedu.address.model.employee.Employee;
 import seedu.address.model.name.DepartmentName;
@@ -113,7 +114,7 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void setEmployee(Employee target, Employee editedEmployee) {
+    public void setEmployee(Employee target, Employee editedEmployee) throws CommandException {
         requireAllNonNull(target, editedEmployee);
 
         manageHr.setEmployee(target, editedEmployee);

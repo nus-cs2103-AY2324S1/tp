@@ -9,15 +9,36 @@ import seedu.address.model.name.DepartmentName;
  * Tests that an {@code Employee}'s {@code Name} matches the keyword given.
  */
 public class ContainsDepartmentPredicate implements Predicate<Employee> {
-    private final String keyword;
+    private String keyword = "";
+    private Salary salary = new Salary("0");
 
-    public ContainsDepartmentPredicate(String keyword) {
-        this.keyword = keyword;
+    public ContainsDepartmentPredicate() {
     }
 
     @Override
     public boolean test(Employee employee) {
-        return employee.getDepartments().contains(new DepartmentName(keyword));
+        boolean departmentResult = true;
+        boolean salaryResult = true;
+
+        if (keyword != "") {
+            departmentResult = employee.getDepartments().contains(new DepartmentName(keyword)) ? true : false;
+        }
+
+        if (salary.value != "0") {
+            Integer actualValue = Integer.valueOf(employee.getSalary().toString());
+            Integer filterValue = Integer.valueOf(salary.toString());
+            salaryResult = actualValue <= filterValue ? true : false;
+        }
+
+        return departmentResult && salaryResult;
+    }
+
+    public void setDepartment(String keyword) {
+        this.keyword = keyword;
+    }
+
+    public void setSalary(Salary salary) {
+        this.salary = salary;
     }
 
     @Override
@@ -32,11 +53,15 @@ public class ContainsDepartmentPredicate implements Predicate<Employee> {
         }
 
         ContainsDepartmentPredicate otherContainsDepartmentPredicate = (ContainsDepartmentPredicate) other;
-        return keyword.equals(otherContainsDepartmentPredicate.keyword);
+        return keyword.equals(otherContainsDepartmentPredicate.keyword)
+                && salary.equals(otherContainsDepartmentPredicate.salary);
     }
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this).add("keyword", keyword).toString();
+        return new ToStringBuilder(this)
+                .add("keyword", keyword)
+                .add("salary", salary)
+                .toString();
     }
 }
