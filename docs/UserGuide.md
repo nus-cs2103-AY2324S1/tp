@@ -56,10 +56,10 @@ Display all your stored contacts.
 
 ### Filtering Contacts by Tag: `filter`
 
-Search and display contacts with tag matching the given keyword (case-insensitive).
+Search and display contacts with tag matching the given keywords (case-insensitive).
 
 **Format:**
-`filter [KEYWORD]`
+`filter [KEYWORDS]`
 
 **Example:**
 `filter Friend`
