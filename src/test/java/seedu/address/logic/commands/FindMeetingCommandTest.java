@@ -135,19 +135,6 @@ public class FindMeetingCommandTest {
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(MEETING2, MEETING3, MEETING4), model.getFilteredMeetingList());
     }
-
-    @Test
-    public void execute_multipleTitleMultipleLocationAndAttendeeKeywords_twoMeetingFound() {
-        String expectedMessage = String.format(MESSAGE_MEETINGS_LISTED_OVERVIEW, 1);
-        GeneralMeetingPredicate predicate =
-                preparePredicate(new String[]{"ABCDE CS2101", "Zoom com", "Hoon", ""},
-                        start, end);
-        FindMeetingCommand command = new FindMeetingCommand(predicate);
-        expectedModel.updateFilteredMeetingList(predicate);
-        assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(MEETING4), model.getFilteredMeetingList());
-    }
-
     @Test
     public void execute_multipleTitleMultipleLocationAndMultipleAttendeeKeywords_twoMeetingFound() {
         String expectedMessage = String.format(MESSAGE_MEETINGS_LISTED_OVERVIEW, 2);

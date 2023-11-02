@@ -18,12 +18,12 @@ public class TypicalAddressBook {
     public static AddressBook getTypicalAddressBook() {
         AddressBook ab = new AddressBook();
 
-        for (Meeting meeting : TypicalMeetings.getTypicalMeetings()) {
-            ab.addMeeting(meeting);
-        }
-
         for (Person person : TypicalPersons.getTypicalPersons()) {
             ab.addPerson(person);
+        }
+
+        for (Meeting meeting : TypicalMeetings.getTypicalMeetings()) {
+            ab.addMeeting(meeting);
         }
 
         return ab;
