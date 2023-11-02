@@ -6,6 +6,11 @@ Text {
     -fx-fill: white;
 }
 
+.lead {
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+}
+
 #name {
     -fx-font-size: 32px;
     -fx-text-fill: white;
