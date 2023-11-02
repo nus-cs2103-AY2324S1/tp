@@ -18,7 +18,7 @@ If you can type fast, WellNUS can get your contact management tasks done faster 
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-2. Download the latest `wellnus.jar` from [here](https://github.com/AY2324S1-CS2103T-W13-4/tp).
+2. Download the latest `wellnus.jar` from [here](https://github.com/AY2324S1-CS2103T-W13-4/tp/releases/tag/v1.3).
 
 3. Copy the file to the folder you want to use as the _home folder_ for WellNUS.
 
