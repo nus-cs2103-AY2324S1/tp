@@ -48,3 +48,6 @@ docs/_site/
 
 # binary files
 bin/
+
+# Report files
+reports/

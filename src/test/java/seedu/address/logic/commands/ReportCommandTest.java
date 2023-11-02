@@ -58,7 +58,8 @@ public class ReportCommandTest {
         ReportCommand reportCommand = new ReportCommand(employee.getId());
 
         String expectedMessage = String.format(Messages.MESSAGE_REPORT_STRING, employee.getName(),
-                employee.getOvertimeHours(), employee.getOvertimePay(), employee.getNumOfLeaves());
+                employee.getOvertimeHours(), employee.getOvertimePay(),
+                employee.getNumOfLeaves(), employee.getRemarkList());
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.setEmployee(model.getFilteredEmployeeList().get(0), employee);
@@ -76,7 +77,6 @@ public class ReportCommandTest {
 
     @Test
     public void toStringMethod() {
-        //Index targetIndex = Index.fromOneBased(1);
         ReportCommand reportCommand = new ReportCommand(ID_FIRST_EMPLOYEE);
         String expected = ReportCommand.class.getCanonicalName() + "{targetId=" + ID_FIRST_EMPLOYEE + "}";
         assertEquals(expected, reportCommand.toString());
