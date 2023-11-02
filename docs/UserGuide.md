@@ -82,8 +82,8 @@ If you are unsure about the course code, you can simply type `course` and a list
 When the command succeeds:
 ```
 Course: CS2103T Software Engineering
-CS2103T Tutorial 10:00-12:00
 CS2103T Lecture 10:00-12:00
+CS2103T Tutorial 10:00-12:00
 CS2103T Laboratory 10:00-12:00
 ```
 
@@ -91,7 +91,7 @@ CS2103T Laboratory 10:00-12:00
 
 Adds a default course to the address book.
 
-![teach command](images/teachCommand.png)
+![teach command](images/teachCourse.png)
 
 Format: `teach c/COURSE_CODE`
 - Updates the name of the window to the default course.
@@ -114,17 +114,17 @@ When the command fails:
 
 Resets the default course in the address book.
 
-![clearteach command](images/clearteachCommand.png)
+![clearteach command](images/clearTeach.png)
 
 Example: `clearteach`
 
 When the command succeeds:
 
-```Default course has been cleared.```
+```Default course has been cleared!```
 
 ### Adding a Teaching Assistant: `add`
 
-Adds a new teaching assistant to the address book.
+Adds a new teaching assistant to TAManager.
 
 ![add TA](images/addTA.png)
 
@@ -133,8 +133,7 @@ Format: `add n/NAME p/PHONE e/EMAIL tele/TELEGRAM [from/FROM to/TO] [t/TAG]... [
 - `NAME` should be a string.
 - `PHONE` should be an 8-digit integer.
 - `EMAIL` should contain "@".
-- `COURSE_OF_STUDY` should be a string.
-- `YEAR` should be an integer.
+- `TELEGRAM` should be between 5-32 characters and start with "@".
 - `FROM` should be a time in "HH:SS" format
 - `TO` should be a time in "HH:SS" format
 - `TAG` should be an alphanumeric string without spaces.
@@ -142,29 +141,88 @@ Format: `add n/NAME p/PHONE e/EMAIL tele/TELEGRAM [from/FROM to/TO] [t/TAG]... [
 - `HOUR` should be an integer
 
 Examples:
-- `add n/Snowball p/98765432 e/snowball@example.com tele/@snowball from/10:00 to/12:00 t/fulltime c/CS1231S h/10`
+- `add n/ Rayner Toh p/93812311 e/rayner@example.com tele/@raynertjx from/08:00 to/12:00 t/parttime c/CS2103T h/4`
 
 When the command succeeds:
 
 ```
-New teaching assistant added: Snowball; Phone: 98765432; Email: snowball@example.com; Telegram: @snowball;
-Free Time: 10:00-12:00; Tags: [fulltime]; Courses: [CS1231S]; Work Hour: 10
+New teaching assistant added: Rayner Toh; Phone: 93812311; Email: rayner@example.com; Telegram: @raynertjx; 
+Free Time: 
+Mon: 08:00-12:00
+Tue: 08:00-12:00
+Wed: 08:00-12:00
+Thu: 08:00-12:00
+Fri: 08:00-12:00
+Tags: [parttime]; 
+Courses:
+Name: Software Engineering
+Lessons: [CS2103T Lecture 10:00-12:00, CS2103T Tutorial 10:00-12:00, CS2103T Laboratory 10:00-12:00]; 
+Work Hour: 4
 ```
 
 When the command fails:
 
 - Incorrect format (e.g., missing information): `Invalid command format!`
 - Duplicate input (the TA is already in the address book): `This TA has been registered.`
+- Invalid telegram handle: `Telegram handle should be between 5-32 characters, and it should start with @`
 - Invalid course code: `Course codes should have 2-3 alphabets, followed by 4 digits,
 and optionally end with an alphabet.`
 - Invalid free time: `TA's free time should have a start and end time in HH:mm format`
 - Invalid work hour: `Hour should only be positive integers and should be less than 9999`
 
+### Editing a Teaching Assistant: `edit`
+
+Edits a teaching assistant in TAManager.
+
+![edit TA](images/editTA.png)
+
+Format: `edit INDEX n/NAME p/PHONE e/EMAIL tele/TELEGRAM [from/FROM to/TO] [t/TAG]... [c/COURSE_CODE]... h/HOUR`
+
+- `NAME` should be a string.
+- `PHONE` should be an 8-digit integer.
+- `EMAIL` should contain "@".
+- `TELEGRAM` should be between 5-32 characters and start with "@".
+- `FROM` should be a time in "HH:SS" format
+- `TO` should be a time in "HH:SS" format
+- `TAG` should be an alphanumeric string without spaces.
+- `COURSE_CODE` should start with 2-3 alphabets, followed by 4 numbers, and optionally end with an alphabet.
+- `HOUR` should be an integer
+
+Examples:
+- `edit INDEX tele/@raynertohjingxiang`
+
+When the command succeeds:
+
+```
+Edited Teaching Assistant: Rayner Toh; Phone: 93812311; Email: rayner@example.com; Telegram: @raynertohjingxiang; 
+Free Time: 
+Mon: 08:00-12:00
+Tue: 08:00-12:00
+Wed: 08:00-12:00
+Thu: 08:00-12:00
+Fri: 08:00-12:00
+Tags: [parttime]; 
+Courses:
+Name: Software Engineering
+Lessons: [CS2103T Lecture 10:00-12:00, CS2103T Tutorial 10:00-12:00, CS2103T Laboratory 10:00-12:00]; 
+Work Hour: 4
+```
+
+When the command fails:
+
+- Incorrect format (e.g., missing information): `Invalid command format!`
+- Duplicate input (the TA is already in the address book): `This TA has been registered.`
+- - Invalid telegram handle: `Telegram handle should be between 5-32 characters, and it should start with @`
+- Invalid course code: `Course codes should have 2-3 alphabets, followed by 4 digits,
+  and optionally end with an alphabet.`
+- Invalid free time: `TA's free time should have a start and end time in HH:mm format`
+- Invalid work hour: `Hour should only be positive integers and should be less than 9999`
+
 ### Removing a Teaching Assistant: `delete`
 
-Removes the specified teaching assistant from the address book.
+Removes the specified teaching assistant from TAManager.
 
-![remove TA](images/removeTA.png)
+![remove TA](images/deleteTA.png)
 
 Format: `delete INDEX`
 
@@ -180,7 +238,18 @@ Examples:
 When the command succeeds:
 
 ```
-Deleted Teaching Assistant: Snowball; Phone: 98765432; Email: snowball@example.com; Telegram: @snowball; Free Time: 10:00-12:00; Tags: [fulltime]; Courses: [CS1231S]; Work Hour: 10
+Deleted Teaching Assistant: Rayner Toh; Phone: 93812311; Email: rayner@example.com; Telegram: @raynertohjingxiang; 
+Free Time: 
+Mon: 08:00-12:00
+Tue: 08:00-12:00
+Wed: 08:00-12:00
+Thu: 08:00-12:00
+Fri: 08:00-12:00
+Tags: [parttime]; 
+Courses:
+Name: Software Engineering
+Lessons: [CS2103T Lecture 10:00-12:00, CS2103T Tutorial 10:00-12:00, CS2103T Laboratory 10:00-12:00]; 
+Work Hour: 4
 ```
 
 When the command fails:
@@ -194,14 +263,16 @@ When the command fails:
 
 Finds specified teaching assistants from the address book using search parameters.
 
-![remove TA](images/findTA.png)
+![find TA](images/findTA.png)
 
 Format: `find PREFIX KEYWORD [MORE_KEYWORDS]`
 
 - We can search by name, course or free time, using the prefixes `n/`, `c/` or `d/ from/ to/` respectively.
 - The search is case-insensitive. e.g `alex` will match `Alex`, `cs1231s` will match `CS1231S`.
-- We can apply multiple search filters to narrow down the search results.
+- We can apply multiple search filters to narrow down the search results, through including multiple filters in 
+one command.
 - Teaching assistants matching all the search parameters will be returned.
+- The search filters are applied to the original list of TAs, not the current view of TAs.
 
 Examples:
 
@@ -226,6 +297,8 @@ When the command fails:
 
 Displays a list of all teaching assistants in the address book.
 
+![list TA](images/listTA.png)
+
 Format: `list`
 
 Example: `list`
@@ -233,13 +306,8 @@ Example: `list`
 When the command succeeds:
 
 ```
-Here is a list of TAs:
-
-Snowball; Phone: 87098312; Email: snowball@example.com; Course of study: Computer Science; Year of Study: 2;
-
-Snowflake; Phone: 83124113; Email: snowflake@example.com; Course of study: Computer Science; Year of Study: 2;
-
-Snowman; Phone: 83172153; Email: snowman@example.com; Course of study: Computer Science; Year of Study: 2;
+Listed all teaching assistants
+[list of TAs]
 ```
 
 <<<<<<< Updated upstream
@@ -247,7 +315,7 @@ Snowman; Phone: 83172153; Email: snowman@example.com; Course of study: Computer 
 
 Updates the hour field to all TAs in the current list.
 
-![update Hour](images/updateHour.png)
+![update Hour](images/addHours.png)
 
 Format: `hour HOUR`
 
@@ -274,11 +342,11 @@ When the command fails:
 =======
 >>>>>>> Stashed changes
 
-### Updating Hours for All TAs in View: `editft`
+### Edit free time for a teaching assistant: `editft`
 
 Edits the free time for a specified day for a TA with a specified index.
 
-![update Hour](images/updateHour.png)
+![update Hour](images/editFreeTime.png)
 
 Format: `editft INDEX d/DAY from/FROM to/TO`
 
