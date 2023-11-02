@@ -53,8 +53,8 @@ public class EventCard extends UiPart<Region> {
         this.event = event;
         id.setText(displayedIndex + ". ");
         name.setText(event.getName().name);
-        eventLocation.setText(event.getLocation().value);
-        eventDate.setText(event.getDate().toString());
+        eventLocation.setText("Location: " + event.getLocation().value);
+        eventDate.setText("Date: " + event.getDate().toString());
         event.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));

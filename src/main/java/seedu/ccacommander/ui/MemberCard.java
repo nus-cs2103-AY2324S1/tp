@@ -55,10 +55,10 @@ public class MemberCard extends UiPart<Region> {
         this.member = member;
         id.setText(displayedIndex + ". ");
         name.setText(member.getName().name);
-        gender.setText(member.getGender().toString());
-        phone.setText(member.getPhone().value);
-        address.setText(member.getAddress().value);
-        email.setText(member.getEmail().value);
+        gender.setText("Gender: " + member.getGender().toString());
+        phone.setText("Phone: " + member.getPhone().value);
+        address.setText("Address: " + member.getAddress().value);
+        email.setText("Email: " + member.getEmail().value);
         memberHours.setText("Hours: " + member.getHours().toString());
         memberRemark.setText("Remark: " + member.getRemark());
         if (!displayMemberHoursAndRemark) {
