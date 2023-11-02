@@ -717,12 +717,27 @@ Use case ends.
 **Extensions**
 * 2a. System detects an invalid index entered.
   * 2a1. System shows an error message.
-  * 2a2. User enters a new addnote request.
+  * 2a2. User enters a new add note request.
+  Steps 2a1- 2a2 are repeated until the data entered is correct. <br>
+  Use case resumes from step 3.
+
+**Use Case UC7 - Remove note**
+
+**MSS**
+1. User <ins>lists all contacts (UC2).</ins>
+2. User enters an index of the specified contact alongside the index of the note to be removed.
+3. System removes the note from the contact.<br>
+Use case ends.
+
+**Extensions**
+* 2a. System detects an invalid contact or note index entered.
+  * 2a1. System shows an error message.
+  * 2a2. User enters a new remove note request.<br>
   Steps 2a1- 2a2 are repeated until the data entered is correct. <br>
   Use case resumes from step 3.
 
 
-**Use Case UC7 - Record payment**
+**Use Case UC8 - Record payment**
 
 **MSS**
 1. User <ins>lists all contacts (UC2).</ins>
@@ -743,7 +758,7 @@ Use case ends.
   Steps 2b1- 2b2 are repeated until the data entered is correct. <br>
   Use case resumes from step 3.
 
-**Use Case UC8 - Search for contact**
+**Use Case UC9 - Search for contact**
 
 **MSS**
 1. User enters a search criteria to find a contact.
@@ -757,6 +772,23 @@ Use case ends.
   Steps 1a1 - 1a2 are repeated until the data entered is correct.<br>
   Use case resumes from step 2.
 
+**Use Case UC10 - Update contact photo**
+
+**MSS**
+1. User <ins>lists all contacts (UC2).</ins>
+2. User enters an index of the specified contact alongside the file path of the new contact photo.
+3. System updates the contact's photo to the specified image.<br>
+Use case ends.
+
+**Extensions**
+* 2a. System detects an invalid index entered.
+  * 2a1. System shows an error message.
+  * 2a2. User enters a new update photo request.
+  Steps 2a1- 2a2 are repeated until the data entered is correct. <br>
+  Use case resumes from step 3.
+* 2b. System detects an invalid file path entered.
+  * 2b1. System shows an error message.<br>
+  Use case ends.
 
 ### Non-Functional Requirements
 
