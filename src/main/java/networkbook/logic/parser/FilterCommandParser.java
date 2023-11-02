@@ -54,6 +54,10 @@ public class FilterCommandParser implements Parser<FilterCommand> {
         String field = argMultimap.getValue(CliSyntax.PREFIX_FILTER_FIELD).orElse("").trim();
         String compArgs = argMultimap.getValue(CliSyntax.PREFIX_FILTER_ARGS).orElse("");
 
+        if (compArgs.equals("")) {
+            throw new ParseException(MISSING_FIELD);
+        }
+
         switch (field) {
         case FilterSpecCommand.FIELD_NAME:
             return parseSpec(compArgs);
