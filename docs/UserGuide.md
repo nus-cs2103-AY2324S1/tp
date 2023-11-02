@@ -14,7 +14,7 @@ If you can type fast, WellNUS can get your contact management tasks done faster 
 
 ## 1. Getting started
 
-####  1.1 Accessing the app
+###  1.1 Accessing the app
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
@@ -26,13 +26,14 @@ If you can type fast, WellNUS can get your contact management tasks done faster 
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
-5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+5. Type the command in the command box and press Enter to execute it.
    Some example commands you can try:
-
+   * `help` : Opens the help window.
    * `exit` : Exits the app.
-6. Refer to the [Features](#features) below for details of each command.
 
-#### 1.2 Prefixes and parameters used in commands
+6. Refer to the [Features](#2-features) below for details of each command.
+
+### 1.2 Prefixes and parameters used in commands
 
 <div markdown="block" class="alert alert-info">
 
@@ -62,7 +63,7 @@ If you can type fast, WellNUS can get your contact management tasks done faster 
 
 #### 2.1.1 Viewing help: `help`
 
-Shows a message explaining how to access the help page.
+Shows a message with a link to the help page.
 
 ![help message](images/helpMessage.png)
 
@@ -72,7 +73,7 @@ Format: `help`
 
 #### 2.2.1 Adding a Student: `add`
 
-Adds a student with his/her relevant details.
+Adds a student with their relevant details.
 
 Format: `add n/STUDENT_NAME c/CONTACT_NUMBER a/HOME_ADDRESS [r/RISK_LEVEL]`
 
@@ -80,15 +81,21 @@ Format: `add n/STUDENT_NAME c/CONTACT_NUMBER a/HOME_ADDRESS [r/RISK_LEVEL]`
 1. Name
    - Alphabetical characters only
 2. Contact Number
-   - Numerical characters only, must be 8 characters long
+   - Numbers only, must be 8 characters long
 3. Home Address
-   - No restrictions
+   - Maximum of 200 characters
+4. Risk Level
+   - Must be `high`, `medium`, or `low`
 
 Examples:
 * `add n/John c/81349705 a/Yishun Street 56 Blk 21 #05-07`
-* `add n/Sally c/94149785 a/Woodlands Street 11 Blk 888 #08-08`
+* `add n/Sally c/94149785 a/Woodlands Street 11 Blk 888 #08-08 r/low`
 
 #### 2.2.2 Deleting a Student: `delete`
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:**
+Deleting a Student also cancels all appointments associated to that Student !
+</div>
 
 Deletes an existing student.
 
@@ -96,9 +103,15 @@ Format: `delete STUDENT_INDEX`
 
 **Parameters**:
 1. Student Index
-   - Index must be an integer starting from 1
+   - Must be an integer starting from 1
+   - Must be found in the students list
 
-### 2.2.3 Adding notes for a student: `note`
+#### 2.2.3 Adding notes for a Student: `note`
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:**
+Double clicking on the Student card displays the Student notes under the Notes section!
+The "Notes" column will
+</div>
 
 Adds a note to an existing student, overwrites any existing note.
 
@@ -107,34 +120,13 @@ Format: `note STUDENT_INDEX note/NOTE`
 **Parameters**:
 1. Student Index
    - Must be an integer starting from 1
+   - Must be found in the students list
 2. Note
-   - Must be 200 characters or less, can be empty
+   - Maximum of 500 characters
 
-#### 2.2.4 Viewing Student Notes:
+#### 2.2.4 Finding Students by Name: `find`
 
-No commands needed. Double-click on the student card under the "Students" column for the notes of the student
-you intend to view. The notes for the specified student will be shown under the "Notes" column. The "Notes" column
-will inform you if no notes are available for the student chosen.
-
-
-#### 2.2.5 Editing a Student: `edit`
-
-#### 2.2.6 Viewing all Students: `view`
-
-Shows a list of all available students or appointments, depending on specified input.
-
-Format: `view g/CATEGORY`
-
-**Parameters**:
-1. Category
-    - Only 'students', 'appointments' or 'all'
-
-Examples:
-* `view g/students`
-
-#### 2.2.7 Finding Students by Name: `find`
-
-Find students and their related appointments based on their name. Can choose to find student based on their first name, last name or full name
+Find students and their related appointments based on their name. Can choose to find student based on their first name, last name or full name.
 If the name does not match entirely, the student will not be shown. Refer to the examples below for a better understanding
 
 Format: `find STUDENT_NAME`
@@ -149,7 +141,7 @@ Student Name: Roy Lee
 * "find Le" does not work
 * "find Roy L" does not work
 
-#### 2.2.8 Assigning risk status to student: `tag`
+#### 2.2.5 Assigning risk level to Student: `tag`
 
 Tags a student to a specific risk level.
 
@@ -158,12 +150,13 @@ Format: `tag STUDENT_INDEX r/RISK_LEVEL`
 **Parameters**:
 1. Student Index
    - Must be an integer starting from 1
+   - Must 
+   - be found in the students list
 2. Risk Level
    - Must be `high`, `medium`, or `low`
 
 Examples:
 * `tag 2 r/high`
-
 
 ### 2.3 Appointment Commands
 
@@ -173,20 +166,24 @@ Appointments will be automatically sorted by Date and Time in ascending order.
 
 #### 2.3.1 Scheduling an Appointment: `schedule`
 
+<div markdown="span" class="alert alert-info">:information_source: **Note:**
+The Student must exist before an Appointment can be scheduled for the Student !
+</div>
+
 Schedules a new appointment for a student.
 
-Format: `schedule n/NAME_OF_STUDENT date/DATE from/START_TIME to/END_TIME d/DESCRIPTION`
+Format: `schedule n/STUDENT_NAME date/DATE from/START_TIME to/END_TIME d/DESCRIPTION`
 
 **Parameters**:
 1. Name
     - Alphabetical characters only
-    - The name must exist within the student list
+    - Must be the name of a student found in the students list
 2. Date
-    - Must be in the following format: `yyyy-MM-dd`
+    - Must be in the following format: `yyyy-mm-dd`
 3. Start/End Time
     - Must be in the following format: `HH:mm`
 4. Description
-   - Description should have a minimum length of 1 character and maximum length of 100 characters
+   - Minimum length of 1 character and maximum of 100 characters
 
 Examples:
 - `schedule n/Jon date/2023-12-30 from/16:30 to/17:30 d/monthly check-up`
@@ -201,24 +198,12 @@ Format: `cancel APPOINTMENT_INDEX`
 **Parameters**:
 1. Appointment Index
    - Must be an integer starting from 1
+   - Must be found in the appointments list
 
 Examples:
 * `cancel 2`
 
-#### 2.3.3 Viewing all Appointments: `view`
-
-Shows a list of all available students or appointments, depending on specified input.
-
-Format: `view g/CATEGORY`
-
-**Parameters**:
-1. Category
-   - Only 'students', 'appointments' or 'all'
-
-Examples:
-* `view g/appointments`
-
-#### 2.3.4 Filtering Appointments by Date: `filter`
+#### 2.3.3 Filtering Appointments by Date: `filter`
 
 Filters appointments based on given date. 
 
@@ -226,37 +211,52 @@ Format: `filter DATE`
 
 **Parameters**
 1. Date
-    - Date should follow yyyy-MM-dd format
+   - Must be in the following format: `yyyy-mm-dd`
 
 Examples:
 * `filter 2023-10-16`
 
 ### 2.4 Others
 
-#### 2.4.1 Exiting the program: `exit`
+#### 2.4.1 Viewing all Students and/or Appointments: `view`
+
+Shows a list of all available Students and/or Appointments, depending on specified input.
+
+Format: `view g/CATEGORY`
+
+**Parameters**:
+1. Category
+   - Must be 'students', 'appointments' or 'all'
+
+Examples:
+* `view g/all`
+* `view g/appointments`
+* `view g/students`
+
+#### 2.4.2 Exiting the program: `exit`
 
 Exits the program.
 
 Format: `exit`
 
-#### 2.4.2 Clearing storage: `clear`
+#### 2.4.3 Clearing storage: `clear`
 
 Resets the storage, deleting **all** Appointments and Students. 
 
 Format: `clear`
 
-#### 2.4.3 Saving the data
+#### 2.4.4 Saving the data
 
 WellNUS data is saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
-### 2.4.4 Editing the data file
+#### 2.4.5 Editing the data file
 
 WellNUS data is saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If your changes to the data file makes its format invalid, WellNUS will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.
 </div>
 
-### 2.5 Tracking TODOS `[coming in v1.4]`
+### 2.5 Tracking TODOS `[Coming soon]`
 
 _Details coming soon ..._
 
@@ -277,20 +277,19 @@ _Details coming soon ..._
 
 ## 5. Command summary
 
-| Action                     | Format, Examples                                                                                                                                                |
-|----------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| [Add Student]()            | `add n/STUDENT_NAME c/PHONE_NUMBER a/ADDRESS [r/RISK_LEVEL]` <br> e.g., `add n/John c/81349705 a/Yishun Street 56 Blk 21 #05-07 r/medium`                       |
-| [Delete Student]()         | `delete STUDENT_INDEX`<br> e.g., `delete 3`                                                                                                                     |
-| [Add Student Note]()       | `note STUDENT_INDEX note/NOTE` <br> e.g., `note 1 note/Likes dogs`                                                                                              |
-| [Edit Student]()           |                                                                                                                                                                 |
-| [View Students]()          |                                                                                                                                                                 |
-| [Find Students]()          |                                                                                                                                                                 |
-| [Assign Risk to Student]() | `tag STUDENT_INDEX r/RISK_LEVEL`<br> e.g.,`tag 4 r/high`                                                                                                        |
-| [Schedule Appointment]()   | `schedule n/STUDENT_NAME date/DATE from/START_TIME to/END_TIME d/DESCRIPTION`<br> e.g., `schedule n/Jon date/2023-12-30 from/16:30 to/17:30 d/monthly check-up` |
-| [Cancel Appointment]()     | `cancel APPOINTMENT_INDEX`<br> e.g., `cancel 3`                                                                                                                 |
-| [View Appointments]()      | `view g/CATEGORY` <br> e.g., `view g/appointments`                                                                                                              |
-| [Filter Appointments]()    | `filter DATE` <br> e.g., `filter 2023-10-16`                                                                                                                    |
-| [Help]()                   | `help`                                                                                                                                                          |
-| [Exit]()                   | `exit`                                                                                                                                                          |
+| Action                                                                                     | Format, Examples                                                                                                                                                |
+|--------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| [Help](#211-viewing-help-help)                                                             | `help`                                                                                                                                                          |
+| [Add Student](#221-adding-a-student-add)                                                   | `add n/STUDENT_NAME c/CONTACT_NUMBER a/HOME_ADDRESS [r/RISK_LEVEL]` <br> e.g., `add n/John c/81349705 a/Yishun Street 56 Blk 21 #05-07 r/medium`                |
+| [Delete Student](#222-deleting-a-student-delete)                                           | `delete STUDENT_INDEX`<br> e.g., `delete 3`                                                                                                                     |
+| [Add Student Note](#223-adding-notes-for-a-student-note)                                   | `note STUDENT_INDEX note/NOTE` <br> e.g., `note 1 note/Likes dogs`                                                                                              |
+| [Find Students](#224-finding-students-by-name-find)                                        | `find STUDENT_NAME` <br> e.g., `find John`                                                                                                                      |
+| [Assign Risk Level to Student](#225-assigning-risk-level-to-student-tag)                   | `tag STUDENT_INDEX r/RISK_LEVEL`<br> e.g.,`tag 4 r/high`                                                                                                        |
+| [Schedule Appointment](#231-scheduling-an-appointment-schedule)                            | `schedule n/STUDENT_NAME date/DATE from/START_TIME to/END_TIME d/DESCRIPTION`<br> e.g., `schedule n/Jon date/2023-12-30 from/16:30 to/17:30 d/monthly check-up` |
+| [Cancel Appointment](#232-cancelling-an-appointment-cancel)                                | `cancel APPOINTMENT_INDEX`<br> e.g., `cancel 3`                                                                                                                 |
+| [Filter Appointments](#233-filtering-appointments-by-date-filter)                          | `filter DATE` <br> e.g., `filter 2023-10-16`                                                                                                                    |
+| [View all Students and/or Appointments](#241-viewing-all-students-andor-appointments-view) | `view g/CATEGORY` <br> e.g., `view g/all`                                                                                                                       |
+| [Exit](#242-exiting-the-program-exit)                                                      | `exit`                                                                                                                                                          |
+| [Delete all data](#243-clearing-storage-clear)                                             | `clear`                                                                                                                                                         |
 
 

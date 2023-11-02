@@ -25,20 +25,27 @@ public class SampleDataUtil {
 
     public static final Note EMPTY_NOTE = new Note(" ");
 
+
     public static Student[] getSampleStudents() {
         return new Student[] {
             new Student(new Name("Alex Yeoh"), new Phone("87438807"),
-                new Address("Blk 30 Geylang Street 29, #06-40"), getTagSet("high"), EMPTY_NOTE),
+                new Address("Blk 30 Geylang Street 29, #06-40"), getTagSet("high"),
+                    new Note("Alex is experiencing high levels of stress and anxiety due to academic pressure.")),
             new Student(new Name("Bernice Yu"), new Phone("99272758"),
-                new Address("Blk 30 Lorong 3 Serangoon Gardens, #07-18"), getTagSet("medium"), EMPTY_NOTE),
+                new Address("Blk 30 Lorong 3 Serangoon Gardens, #07-18"), getTagSet("medium"),
+                    new Note("Bernice is seeking counseling for relationship issues and emotional well-being.")),
             new Student(new Name("Charlotte Oliveiro"), new Phone("93210283"),
-                new Address("Blk 11 Ang Mo Kio Street 74, #11-04"), getTagSet("low"), EMPTY_NOTE),
+                new Address("Blk 11 Ang Mo Kio Street 74, #11-04"), getTagSet("low"),
+                    new Note("Charlotte is dealing with depression and self-esteem issues.")),
             new Student(new Name("David Li"), new Phone("91031282"),
-                new Address("Blk 436 Serangoon Gardens Street 26, #16-43"), getTagSet("high"), EMPTY_NOTE),
+                new Address("Blk 436 Serangoon Gardens Street 26, #16-43"), getTagSet("high"),
+                    new Note("David is struggling with anxiety and panic attacks.")),
             new Student(new Name("Irfan Ibrahim"), new Phone("92492021"),
-                new Address("Blk 47 Tampines Street 20, #17-35"), getTagSet("medium"), EMPTY_NOTE),
+                new Address("Blk 47 Tampines Street 20, #17-35"), getTagSet("medium"),
+                    new Note("Irfan is looking for guidance on managing stress and improving mental health.")),
             new Student(new Name("Roy Balakrishnan"), new Phone("92624417"),
-                new Address("Blk 45 Aljunied Street 85, #11-31"), getTagSet("low"), EMPTY_NOTE)
+                new Address("Blk 45 Aljunied Street 85, #11-31"), getTagSet("low"),
+                    new Note("Roy is seeking counseling for coping with grief and loss."))
         };
     }
 
