@@ -13,6 +13,7 @@ import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.logic.commands.DepartmentCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FilterCommand;
@@ -82,6 +83,9 @@ public class ManageHrParser {
         case FilterCommand.COMMAND_WORD:
             return new FilterCommandParser().parse(arguments);
 
+        case DepartmentCommand.COMMAND_WORD:
+            return new DepartmentCommandParser().parse(arguments);
+
         default:
             logger.finer("This user input caused a ParseException: " + userInput);
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
@@ -136,6 +140,9 @@ public class ManageHrParser {
 
         case FilterCommand.COMMAND_WORD:
             return new Pair<String, String>(FilterCommand.MESSAGE_USAGE, FilterCommand.MESSAGE_EXAMPLE);
+
+        case DepartmentCommand.COMMAND_WORD:
+            return new Pair<String, String>(DepartmentCommand.MESSAGE_USAGE, DepartmentCommand.MESSAGE_EXAMPLE);
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);

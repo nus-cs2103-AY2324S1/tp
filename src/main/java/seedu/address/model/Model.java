@@ -110,14 +110,6 @@ public interface Model {
     void addDepartment(Department department);
 
     /**
-     * Replaces the given department {@code target} in the list with {@code editedDepartment}.
-     * {@code target} must exist in the ManageHR.
-     * The department identity of {@code editedDepartment} must not be the same as another
-     * existing department in ManageHR.
-     */
-    void setDepartment(Department target, Department editedDepartment);
-
-    /**
      * Removes {@code key} from this {@code ManageHr}.
      * {@code key} must exist in the ManageHr's department list.
      */

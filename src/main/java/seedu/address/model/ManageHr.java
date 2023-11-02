@@ -11,6 +11,7 @@ import seedu.address.model.department.UniqueDepartmentList;
 import seedu.address.model.department.exceptions.DepartmentNotFoundException;
 import seedu.address.model.employee.Employee;
 import seedu.address.model.employee.UniqueEmployeeList;
+import seedu.address.model.employee.exceptions.InvalidEmployeeDepartmentMatchingException;
 import seedu.address.model.employee.exceptions.SubordinatePresentException;
 import seedu.address.model.employee.exceptions.SupervisorNotFoundException;
 import seedu.address.model.name.DepartmentName;
@@ -79,8 +80,22 @@ public class ManageHr implements ReadOnlyManageHr {
         requireNonNull(newData);
         setDepartments(newData.getDepartmentList());
         setEmployees(newData.getEmployeeList());
+        checkEmployeeDepartmentValidity();
     }
 
+    /**
+     * Checks for any errors in the fields of employees and department
+     */
+    public void checkEmployeeDepartmentValidity() {
+        for (Employee employee : employees) {
+            for (Department department : departments) {
+                if ((employee.isInDepartment(department) && !department.hasEmployee(employee))
+                        || (department.hasEmployee(employee) && !employee.isInDepartment(department))) {
+                    throw new InvalidEmployeeDepartmentMatchingException();
+                }
+            }
+        }
+    }
     //// employee-level operations
 
     /**
@@ -98,6 +113,26 @@ public class ManageHr implements ReadOnlyManageHr {
         requireNonNull(name);
         return employees.contains(name);
     }
+
+    /**
+     * Updates the departments with respect to changes in employee
+     *
+     * @param employee The employee to be added/changed
+     */
+    private void updateDepartments(Employee employee) {
+        for (DepartmentName departmentName : employee.getDepartments()) {
+            if (!departments.contains(departmentName)) {
+                throw new DepartmentNotFoundException();
+            }
+            for (Department department : departments) {
+                if (department.isSameDepartmentName(departmentName)) {
+                    department.addEmployee(employee);
+                    departments.setDepartment(department, department);
+                }
+            }
+        }
+    }
+
     /**
      * Adds an employee to ManageHR.
      * The employee must not already exist in ManageHR.
@@ -108,11 +143,7 @@ public class ManageHr implements ReadOnlyManageHr {
 
     public void addEmployee(Employee employee) {
         requireNonNull(employee);
-        for (DepartmentName departmentName : employee.getDepartments()) {
-            if (!departments.contains(departmentName)) {
-                throw new DepartmentNotFoundException();
-            }
-        }
+        updateDepartments(employee);
         if (!employees.containsManager(employee)) {
             throw new SupervisorNotFoundException();
         }
@@ -131,11 +162,11 @@ public class ManageHr implements ReadOnlyManageHr {
      */
     public void setEmployee(Employee target, Employee editedEmployee) {
         requireNonNull(editedEmployee);
-        for (DepartmentName departmentName : editedEmployee.getDepartments()) {
-            if (!departments.contains(departmentName)) {
-                throw new DepartmentNotFoundException();
-            }
+        for (Department department : departments) {
+            department.removeEmployeeIfPresent(target);
+            departments.setDepartment(department, department);
         }
+        updateDepartments(editedEmployee);
         if (employees.hasSubordinates(target)) {
             throw new SubordinatePresentException();
         }
@@ -160,11 +191,15 @@ public class ManageHr implements ReadOnlyManageHr {
         if (employees.hasSubordinates(key)) {
             throw new SubordinatePresentException();
         }
+        for (Department department : departments) {
+            department.removeEmployeeIfPresent(key);
+            departments.setDepartment(department, department);
+        }
         employees.remove(key);
     }
 
     /**
-     * Returns true if an department with the same identity as {@code department} exists in the storage.
+     * Returns true if a department with the same identity as {@code department} exists in the storage.
      */
     public boolean hasDepartment(Department department) {
         requireNonNull(department);
@@ -184,17 +219,8 @@ public class ManageHr implements ReadOnlyManageHr {
      * The employee must not already exist in ManageHR.
      */
     public void addDepartment(Department d) {
+        requireNonNull(d);
         departments.add(d);
-    }
-
-    /**
-     * Replaces the given employee {@code target} in the list with {@code editedEmployee}.
-     * {@code target} must exist in the ManageHR.
-     * The employee identity of {@code editedEmployee} must not be the same as another existing employee in ManageHR.
-     */
-    public void setDepartment(Department target, Department editedDepartment) {
-        requireNonNull(editedDepartment);
-        departments.setDepartment(target, editedDepartment);
     }
 
     /**
@@ -202,7 +228,14 @@ public class ManageHr implements ReadOnlyManageHr {
      * {@code key} must exist in the ManageHr.
      */
     public void removeDepartment(Department key) {
-        departments.remove(key);
+        requireNonNull(key);
+        if (departments.contains(key)) {
+            departments.remove(key);
+            for (Employee employee : employees) {
+                employee.removeDepartmentIfPresent(key);
+                employees.setEmployee(employee, employee);
+            }
+        }
     }
     //// util methods
 

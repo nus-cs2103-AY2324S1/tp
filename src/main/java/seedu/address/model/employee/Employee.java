@@ -8,6 +8,7 @@ import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.department.Department;
 import seedu.address.model.name.DepartmentName;
 import seedu.address.model.name.EmployeeName;
 
@@ -83,6 +84,13 @@ public class Employee {
         return Collections.unmodifiableSet(departments);
     }
 
+    public boolean isInDepartment(Department department) {
+        return departments.contains(department.name);
+    }
+
+    public void removeDepartmentIfPresent(Department department) {
+        departments.remove(department.name);
+    }
     /**
      * Returns an immutable name set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
@@ -107,7 +115,6 @@ public class Employee {
         return otherEmployee != null
                 && otherEmployee.getName().equals(getName());
     }
-
     /**
      * Checks if the name of another employee matches the name of this employee.
      *
