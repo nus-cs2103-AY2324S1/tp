@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.classmanager.commons.core.index.Index;
 import seedu.classmanager.logic.commands.MarkPresentAllCommand;
+import seedu.classmanager.model.student.ClassDetails;
 
 /**
  * Tests MarkPresentAllCommandParser.
@@ -29,5 +30,14 @@ public class MarkPresentAllCommandParserTest {
     public void parse_validArgs_returnsMarkCommand() {
         assertParseSuccess(parser, TEST_TUTORIAL_DESC,
                 new MarkPresentAllCommand(Index.fromOneBased(TEST_TUTORIAL)));
+    }
+
+    @Test
+    public void parse_invalidTutorialIndex_throwsParseException() {
+        ClassDetails.setTutorialCount(10);
+        assertParseFailure(parser, " " + TEST_TUTORIAL_DESC + " test",
+                ClassDetails.getMessageInvalidTutorialIndex());
+        assertParseFailure(parser, " " + TEST_TUTORIAL_DESC + " -1",
+                ClassDetails.getMessageInvalidTutorialIndex());
     }
 }

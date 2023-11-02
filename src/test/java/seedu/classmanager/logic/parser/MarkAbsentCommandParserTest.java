@@ -13,6 +13,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.classmanager.commons.core.index.Index;
 import seedu.classmanager.logic.commands.MarkAbsentCommand;
+import seedu.classmanager.model.student.ClassDetails;
 import seedu.classmanager.model.student.StudentNumber;
 
 /**
@@ -46,5 +47,14 @@ public class MarkAbsentCommandParserTest {
     @Test
     public void parse_invalidStudentNumber_throwsParseException() {
         assertParseFailure(parser, INVALID_STUDENT_NUMBER_DESC + TEST_TUTORIAL_DESC, StudentNumber.MESSAGE_CONSTRAINTS);
+    }
+
+    @Test
+    public void parse_invalidTutorialIndex_throwsParseException() {
+        ClassDetails.setTutorialCount(10);
+        assertParseFailure(parser, STUDENT_NUMBER_DESC_BOB + " " + TEST_TUTORIAL_DESC + " test",
+                ClassDetails.getMessageInvalidTutorialIndex());
+        assertParseFailure(parser, STUDENT_NUMBER_DESC_BOB + " " + TEST_TUTORIAL_DESC + " -1",
+                ClassDetails.getMessageInvalidTutorialIndex());
     }
 }

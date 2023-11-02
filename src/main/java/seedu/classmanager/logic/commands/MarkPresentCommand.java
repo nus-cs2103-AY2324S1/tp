@@ -55,13 +55,8 @@ public class MarkPresentCommand extends Command {
         Student studentToMark = model.getStudent(targetStudentNumber);
         Student markedStudent = studentToMark.copy();
 
-        try {
-            markedStudent.markPresent(this.index);
-            model.setStudent(studentToMark, markedStudent);
-        } catch (CommandException e) {
-            throw new CommandException(e.getMessage());
-        }
-
+        markedStudent.markPresent(this.index);
+        model.setStudent(studentToMark, markedStudent);
         model.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
         model.setSelectedStudent(markedStudent);
         model.commitClassManager();

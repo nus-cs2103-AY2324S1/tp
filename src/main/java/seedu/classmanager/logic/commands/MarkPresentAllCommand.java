@@ -39,19 +39,15 @@ public class MarkPresentAllCommand extends Command {
         requireNonNull(model);
 
         List<Student> lastShownList = model.getFilteredStudentList();
-        try {
-            for (Student studentToMark : lastShownList) {
-                Student markedStudent = studentToMark.copy();
-                markedStudent.markPresent(index);
-                model.setStudent(studentToMark, markedStudent);
-                if (model.isSelectedStudent(studentToMark)) {
-                    model.setSelectedStudent(markedStudent);
-                }
-            }
-        } catch (CommandException e) {
-            throw new CommandException(e.getMessage());
-        }
 
+        for (Student studentToMark : lastShownList) {
+            Student markedStudent = studentToMark.copy();
+            markedStudent.markPresent(index);
+            model.setStudent(studentToMark, markedStudent);
+            if (model.isSelectedStudent(studentToMark)) {
+                model.setSelectedStudent(markedStudent);
+            }
+        }
         model.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
         model.commitClassManager();
 
