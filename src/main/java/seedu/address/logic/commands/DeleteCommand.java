@@ -26,7 +26,8 @@ public class DeleteCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the student identified by the index number used in the displayed person list,\n"
-            + " all students identified by the tutorial group ID entered or all students.\n"
+            + " all students in the course  identified by the tutorial group ID entered "
+            + "or all students in the course.\n"
             + "Parameters: INDEX (must be a positive integer) || "
             + "all [" + PREFIX_TUTORIALGROUP + "TUTORIAL_GROUP_ID]\n"
             + "Examples: " + COMMAND_WORD + " 1, " + COMMAND_WORD + " all, "
