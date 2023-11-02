@@ -4,7 +4,6 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
@@ -16,10 +15,6 @@ public class Tag {
     public static final String MESSAGE_CONSTRAINTS = "Tags names should be alphanumeric";
     public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
     public final String tagName;
-    @JsonIgnore
-    public final String courseCode;
-    @JsonIgnore
-    public final String tutorialGroup;
 
     /**
      * Constructs a {@code Tag}.
@@ -29,12 +24,7 @@ public class Tag {
     public Tag(String tagName) {
         requireNonNull(tagName);
         checkArgument(isValidTagName(tagName), MESSAGE_CONSTRAINTS);
-        String[] str = tagName.split(" ", 2);
-        String courseCode = str[0];
-        String tutorialGroup = str.length == 2 ? str[1] : null;
         this.tagName = tagName;
-        this.courseCode = courseCode;
-        this.tutorialGroup = tutorialGroup;
     }
 
     @JsonCreator
@@ -79,13 +69,4 @@ public class Tag {
     public String toString() {
         return '[' + tagName + ']';
     }
-
-    public String getCourseCode() {
-        return courseCode;
-    }
-
-    public String getTutorialGroup() {
-        return tutorialGroup;
-    }
-
 }
