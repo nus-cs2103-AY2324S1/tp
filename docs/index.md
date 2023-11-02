@@ -1,14 +1,12 @@
 ---
 layout: page
-title: AddressBook Level-3
+title: WellNUS
 ---
 
 [![CI Status](https://github.com/se-edu/addressbook-level3/workflows/Java%20CI/badge.svg)](https://github.com/se-edu/addressbook-level3/actions)
 [![codecov](https://codecov.io/gh/se-edu/addressbook-level3/branch/master/graph/badge.svg)](https://codecov.io/gh/se-edu/addressbook-level3)
 
 ![Ui](images/Ui.png)
-
-# WellNUS
 
 WellNUS is a contact management application for NUS Student Counsellors.
 WellNUS helps counsellors better schedule their appointments with students, as well as store the information of students for easy referencing.
