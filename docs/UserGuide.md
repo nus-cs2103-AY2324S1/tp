@@ -179,13 +179,10 @@ Examples:
 * No prefix is required, only the command.
 Examples: `uplevel`, `undolevel`
 
-  <br>
   ![before entering 'uplevel'](images/ug_images/beforeUpdate.png)
 
-  <br>
   ![after entering 'uplevel'](images/ug_images/afterUpdate.png)
 
-  <br>
   ![after entering 'undolevel'](images/ug_images/undoUpdate.png)
 
 ### Filtering data : `filter`
@@ -242,6 +239,20 @@ Examples:
 * `table s/` will show a table categorized by student subject.
 * `table d/2023` will show a table categorized by months in year 2023.
 
+### Showing bar chart
+Showing a bar chart either categorized by gender, sec level or subject.
+
+Format: `bar {prefix}`
+
+* FIELD_VALUE is not needed.
+* prefix is case-sensitive.
+* Exactly one of `g/`, `l/`, or `s/` must be provided.
+
+Examples:
+* `bar g/` will show a bar chart categorized by student gender.
+* `bar l/` will show a bar chart categorized by student sec level.
+* `bar s/` will show a bar chart categorized by student subject.
+
 ### Saving the data
 
 Tutorium data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
@@ -283,8 +294,11 @@ Action     | Format, Examples
 **Import** | `import FILENAME.csv`<br> e.g., `import student_data.csv`
 **Edit**   | `edit INDEX prefix1/[field1] prefix2/[field2]`  <br> or `edit NAME prefix/[field] prefix/[field] prefix/[field]` <br> e.g., `edit John Doe n/Joe e/johndoe@example.com t/English`
 **Search** | `search [KEYWORD]`<br> e.g., `search Lee`
-**Delete** | `delete ME`<br> or `delete JOE` <br> e.g., `delete Joe`
+**Delete** | `delete INDEX`<br> or `delete NAME` <br> e.g., `delete Joe`
+**Update** | `uplevel`<br> or `undolevel` <br>
 **Filter** | `filter prefix/FIELD_VALUE [MORE FIELDS]` <br> e.g., `filter g/F s/English s/Physics`
 **Sort**   | `sort in/ [DESCRIPTION]` <br> e.g., `sort in/ ASC`
 **Clear**  | `clear`
+**Show Table** | `table prefix/`<br> or `table d/YEAR` <br>
+**Show Bar Chart** | `bar prefix/`
 **Help**   | `help`
