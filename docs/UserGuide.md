@@ -258,7 +258,7 @@ Refer to [properties of contact](#properties-of-contact) on the accepted formats
 
 <box type="warning">
 
-* You should provide a positive integer that is smaller than or equal to the number of contacts stored in CampusConnect for `PERSON_INDEX`.
+* You should provide a positive integer that is smaller than or equal to the number of contacts currently displayed in CampusConnect for `PERSON_INDEX`.
 * You should provide at least one of the parameters, i.e. alternative information for the command to work.
 
 </box>
@@ -284,7 +284,7 @@ Refer to [properties of contact](#properties-of-contact) on the accepted formats
 
 <box type="warning">
 
-* You should provide a positive integer that is smaller than or equal to the number of contacts stored in CampusConnect for `PERSON_INDEX`. 
+* You should provide a positive integer that is smaller than or equal to the number of contacts currently displayed in CampusConnect for `PERSON_INDEX`. 
 * You should provide at least one of the parameters under [properties of contact](#properties-of-contact) for the command to work.
 * You should not edit any empty alternative information i.e. `TELEGRAM`, `SECONDARY_EMAIL`, `LINKEDIN`, `BIRTHDAY` of your contact using this command. Refer to [add alternative information to contact](#add-alternative-information-to-contact) to add these information.
 * You should not input 'NAME' with a name ___(case sensitive)___ that already exists in CampusConnect.
@@ -342,7 +342,7 @@ Below are some examples on how to use the command:
 
 <box type="warning">
 
-You should provide a positive integer that is smaller than or equal to the number of contacts stored in CampusConnect for `PERSON_INDEX`.
+You should provide a positive integer that is smaller than or equal to the number of contacts currently displayed in CampusConnect for `PERSON_INDEX`.
 
 </box>
 
