@@ -122,6 +122,7 @@ public class EditContactEventCommandTest {
                 .withEventDescription("Sleep").withEventStartTime(startTimeString)
                 .withEventEndTime(endTimeString).build();
         assertEquals(descriptor1, descriptor2);
+        assertTrue(descriptor1.equals(descriptor1));
     }
 
     @Test
@@ -135,6 +136,7 @@ public class EditContactEventCommandTest {
                 .withEventDescription("Sleep").withEventStartTime(startTimeString)
                 .withEventEndTime(endTimeString).build();
         assertFalse(descriptor1.equals(descriptor2));
+        assertFalse(descriptor1.equals(null));
     }
 
     @Test
