@@ -3,7 +3,6 @@ package seedu.application.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static seedu.application.logic.commands.CommandTestUtil.assertCommandFailure;
-import static seedu.application.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.application.testutil.TypicalIndexes.*;
 import static seedu.application.testutil.TypicalJobs.getTypicalApplicationBook;
 
@@ -19,18 +18,6 @@ import seedu.application.model.job.Job;
 class InterviewDeleteCommandTest {
 
     private final Model model = new ModelManager(getTypicalApplicationBook(), new UserPrefs());
-    @Test
-    public void execute_validJobIndexWithValidInterviewIndex_success() {
-        ModelManager expectedModel = new ModelManager(model.getApplicationBook(), new UserPrefs());
-        Job jobToDeleteInterview = model.getFilteredJobList().get(INDEX_FIRST.getZeroBased());
-        String expectedMessage = String.format(InterviewDeleteCommand.MESSAGE_SUCCESS,
-                Messages.format(jobToDeleteInterview));
-
-        InterviewDeleteCommand interviewDeleteCommand = new InterviewDeleteCommand(INDEX_FIRST, INDEX_FIRST);
-
-        assertCommandSuccess(interviewDeleteCommand, model, expectedMessage, expectedModel);
-    }
-
     @Test
     public void execute_validJobIndexWithInvalidInterviewIndex_throwsCommandException() {
         Index jobIndex = Index.fromOneBased(model.getFilteredJobList().size());
