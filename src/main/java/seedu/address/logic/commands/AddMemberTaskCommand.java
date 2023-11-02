@@ -1,7 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TODO;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.List;
@@ -15,6 +15,9 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Member;
 import seedu.address.model.task.Task;
 
+/**
+ * Assigns a task to the Member in the address book.
+ */
 public class AddMemberTaskCommand extends Command {
 
     public static final String COMMAND_WORD = "addTask";
@@ -23,7 +26,7 @@ public class AddMemberTaskCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a task to the specified member "
             + "by the index number used in the displayed member list. \n"
             + "Parameters: INDEX (must be a positive integer) "
-            + PREFIX_TODO + " {taskName} ";
+            + PREFIX_TASK + " {taskName} ";
 
     public static final String MESSAGE_ADD_TODO_SUCCESS = "Task added to member %1$s";
 
@@ -76,6 +79,9 @@ public class AddMemberTaskCommand extends Command {
 
     }
 
+    /**
+     * Helper function for AddMemberTaskCommand
+     */
     public static class AddMemberTaskDescriptor {
         private List<Task> tasks;
 

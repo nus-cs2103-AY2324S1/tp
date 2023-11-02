@@ -49,14 +49,24 @@ public class Member extends Person {
         this.tags.addAll(tags);
     }
 
-    public Member(Name name, Phone phone, Email email, Telegram telegram, Set<Tag> tags, List<Task> todo) {
+    /**
+     * Every field must be present and not null.
+     *
+     * @param name     The name of the member.
+     * @param phone    The phone number of the member.
+     * @param email    The email of the member.
+     * @param telegram The telegram handle of the member.
+     * @param tags     The tags of the member.
+     * @param tasks    The tasks of the member.
+     */
+    public Member(Name name, Phone phone, Email email, Telegram telegram, Set<Tag> tags, List<Task> tasks) {
         super(name);
         requireAllNonNull(telegram);
         this.phone = phone;
         this.email = email;
         this.telegram = telegram;
         this.tags.addAll(tags);
-        this.tasks.addAll(todo);
+        this.tasks.addAll(tasks);
     }
 
     public Phone getPhone() {

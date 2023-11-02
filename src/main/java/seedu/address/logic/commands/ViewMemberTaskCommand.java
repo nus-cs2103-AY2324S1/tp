@@ -10,6 +10,9 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Member;
 
+/**
+ * Views tasks assigned to the Member in the address book.
+ */
 public class ViewMemberTaskCommand extends Command {
 
     public static final String COMMAND_WORD = "viewTask";

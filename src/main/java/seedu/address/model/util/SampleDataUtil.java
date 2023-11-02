@@ -77,6 +77,9 @@ public class SampleDataUtil {
                 .collect(Collectors.toSet());
     }
 
+    /**
+     * Returns a task set containing the list of strings given.
+     */
     public static List<Task> getTaskList(String... strings) {
         return Arrays.stream(strings)
                 .map(Task::new)

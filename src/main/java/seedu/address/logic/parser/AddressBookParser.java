@@ -107,7 +107,7 @@ public class AddressBookParser {
 
         case AddMemberTaskCommand.COMMAND_WORD:
         case AddMemberTaskCommand.COMMAND_ALIAS:
-            return new AddMemberToDoCommandParser().parse(arguments);
+            return new AddMemberTaskCommandParser().parse(arguments);
 
         case ViewMemberTaskCommand.COMMAND_WORD:
         case ViewMemberTaskCommand.COMMAND_ALIAS:

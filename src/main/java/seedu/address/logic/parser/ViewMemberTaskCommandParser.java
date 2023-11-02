@@ -13,6 +13,9 @@ import seedu.address.logic.commands.ViewMemberTaskCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.task.Task;
 
+/**
+ * Parses input arguments and creates a new ViewMemberTaskCommand object
+ */
 public class ViewMemberTaskCommandParser implements Parser<ViewMemberTaskCommand> {
     @Override
     public ViewMemberTaskCommand parse(String args) throws ParseException {
