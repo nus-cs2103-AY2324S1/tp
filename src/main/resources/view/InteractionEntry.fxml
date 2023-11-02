@@ -2,6 +2,7 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
 <VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" spacing="4">
@@ -9,6 +10,9 @@
         <Insets top="8" right="8" bottom="8" left="8" />
     </padding>
 
-    <Label fx:id="outcome" styleClass="outcome" />
+    <HBox spacing="8">
+        <Label fx:id="date" styleClass="date" />
+        <Label fx:id="outcome" styleClass="outcome" />
+    </HBox>
     <Label fx:id="note" />
 </VBox>

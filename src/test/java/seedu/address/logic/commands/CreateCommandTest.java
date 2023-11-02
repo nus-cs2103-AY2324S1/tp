@@ -186,6 +186,11 @@ public class CreateCommandTest {
         public SimpleObjectProperty<Person> getSelectedPerson() {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public void setSelectedPerson(Person person) {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     /**

@@ -108,7 +108,12 @@ public interface Model {
     void updateFilteredPersonList(Predicate<Person> predicate);
 
     /**
-     * Returns the currently selected person
+     * Returns the currently selected person.
      */
     SimpleObjectProperty<Person> getSelectedPerson();
+
+    /**
+     * Sets the currently selected person.
+     */
+    void setSelectedPerson(Person person);
 }
