@@ -11,7 +11,7 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Visual;
 
 /**
- * Sorts students in the address book.
+ * Exports a visual presentation.
  */
 public class ExportCommand extends Command {
 

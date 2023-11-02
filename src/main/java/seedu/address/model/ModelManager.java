@@ -163,12 +163,8 @@ public class ModelManager implements Model {
     public void export(Visual visual) throws Exception {
         requireNonNull(visual);
         if (visual.toString().equals("TABLE") && !isNull(tableWindow)) {
-//        if (visual.toString().equals("TABLE")) {
-
-                tableWindow.exportAsPng();
+            tableWindow.exportAsPng();
         } else if (visual.toString().equals("BAR") && !isNull(barChartWindow)) {
-//        } else if (visual.toString().equals("BAR")) {
-
             barChartWindow.exportAsPng();
         } else {
             throw new Exception();
