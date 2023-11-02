@@ -12,6 +12,7 @@ import static seedu.ccacommander.testutil.TypicalRemarks.REMARK_ONE;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
@@ -135,7 +136,8 @@ public class CcaCommanderParserTest {
                         + " e/" + INDEX_FIRST_EVENT.getOneBased()
                         + " h/" + HOURS_ZERO.toString()
                         + " r/" + REMARK_ONE.toString());
-        assertEquals(new EnrolCommand(INDEX_FIRST_MEMBER, INDEX_FIRST_EVENT, HOURS_ZERO, REMARK_ONE), command);
+        assertEquals(new EnrolCommand(INDEX_FIRST_MEMBER, INDEX_FIRST_EVENT, Optional.of(HOURS_ZERO),
+                Optional.of(REMARK_ONE)), command);
     }
 
     @Test

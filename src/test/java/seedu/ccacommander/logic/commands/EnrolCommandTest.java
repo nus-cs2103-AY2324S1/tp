@@ -18,6 +18,7 @@ import static seedu.ccacommander.testutil.TypicalMembers.ALICE;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Optional;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
@@ -52,7 +53,8 @@ public class EnrolCommandTest {
         Enrolment validEnrolment = new EnrolmentBuilder().build();
 
         CommandResult commandResult =
-                new EnrolCommand(VALID_INDEX_ONE, VALID_INDEX_ONE, VALID_HOURS_A, VALID_REMARK_A)
+                new EnrolCommand(VALID_INDEX_ONE, VALID_INDEX_ONE,
+                        Optional.of(VALID_HOURS_A), Optional.of(VALID_REMARK_A))
                         .execute(modelStub);
 
         assertEquals(String.format(EnrolCommand.MESSAGE_SUCCESS, Messages.format(validEnrolment)),
@@ -63,7 +65,8 @@ public class EnrolCommandTest {
     @Test
     public void execute_duplicateEnrolment_throwsCommandException() {
         EnrolCommand enrolCommand =
-                new EnrolCommand(VALID_INDEX_ONE, VALID_INDEX_ONE, VALID_HOURS_A, VALID_REMARK_A);
+                new EnrolCommand(VALID_INDEX_ONE, VALID_INDEX_ONE,
+                        Optional.of(VALID_HOURS_A), Optional.of(VALID_REMARK_A));
         ModelStubWithEnrolment modelStub = new ModelStubWithEnrolment(ALICE_AURORA);
 
         assertThrows(CommandException.class,
@@ -73,16 +76,19 @@ public class EnrolCommandTest {
     @Test
     public void equals() {
         EnrolCommand enrolEventOneCommand =
-                new EnrolCommand(VALID_INDEX_ONE, VALID_INDEX_ONE, VALID_HOURS_A, VALID_REMARK_A);
+                new EnrolCommand(VALID_INDEX_ONE, VALID_INDEX_ONE,
+                        Optional.of(VALID_HOURS_A), Optional.of(VALID_REMARK_A));
         EnrolCommand enrolEventTwoCommand =
-                new EnrolCommand(VALID_INDEX_TWO, VALID_INDEX_TWO, VALID_HOURS_B, VALID_REMARK_B);
+                new EnrolCommand(VALID_INDEX_TWO, VALID_INDEX_TWO,
+                        Optional.of(VALID_HOURS_B), Optional.of(VALID_REMARK_B));
 
         // same object -> returns true
         assertTrue(enrolEventOneCommand.equals(enrolEventOneCommand));
 
         // same values -> returns true
         EnrolCommand enrolEventOneCommandCopy =
-                new EnrolCommand(VALID_INDEX_ONE, VALID_INDEX_ONE, VALID_HOURS_A, VALID_REMARK_A);
+                new EnrolCommand(VALID_INDEX_ONE, VALID_INDEX_ONE,
+                        Optional.of(VALID_HOURS_A), Optional.of(VALID_REMARK_A));
         assertTrue(enrolEventOneCommand.equals(enrolEventOneCommandCopy));
 
         // different types -> returns false
@@ -98,10 +104,11 @@ public class EnrolCommandTest {
     @Test
     public void toStringMethod() {
         EnrolCommand enrolCommand =
-                new EnrolCommand(VALID_INDEX_ONE, VALID_INDEX_ONE, VALID_HOURS_A, VALID_REMARK_A);
+                new EnrolCommand(VALID_INDEX_ONE, VALID_INDEX_ONE,
+                        Optional.of(VALID_HOURS_A), Optional.of(VALID_REMARK_A));
         String expected = EnrolCommand.class.getCanonicalName() + "{member index=" + VALID_INDEX_ONE
-                + ", event index=" + VALID_INDEX_ONE + ", hours=" + VALID_HOURS_A
-                + ", remark=" + VALID_REMARK_A + "}";
+                + ", event index=" + VALID_INDEX_ONE + ", hours=" + Optional.of(VALID_HOURS_A)
+                + ", remark=" + Optional.of(VALID_REMARK_A) + "}";
         assertEquals(enrolCommand.toString(), expected);
     }
 
