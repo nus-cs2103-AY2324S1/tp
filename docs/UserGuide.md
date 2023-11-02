@@ -72,20 +72,20 @@ Format: `help`
 
 ### Adding a client: `add`
 
-Adds a person to the database.
+Adds a client to the database.
 
-Format: `add n/NAME i/NRIC c/CONTACT NUMBER l/LICENCE PLATE…​`
+Format: `add n/NAME i/NRIC p/CONTACT NUMBER l/LICENCE PLATE…​`
 
-* Add a person's details in the database.
-* **All** of the fields must be present when using this command.
+* Add a client's details in the database.
+* **All** fields must be present when using this command.
 
 Examples:
-* `add n/Mary i/627A c/73052859 l/SLU5237J` creates a person whose name is `Mary`, NRIC last four digits is `627A`, contact number is `73052859`, licence plate is `SLU5237J` in the database.
+* `add n/Mary i/627A p/91234567 l/SLU5237J` creates a client whose name is `Mary`, NRIC last four digits is `627A`, contact number is `91234567`, licence plate is `SLU5237J` in the database.
 
 Acceptable values for each parameter:
 * `n/NAME`: Alphabets
 * `i/NRIC`: Alphanumeric, _exactly_ 4 characters
-* `c/CONTACT NUMBER`: Numeric, _exactly_ 8 characters
+* `p/CONTACT NUMBER`: Numeric, _exactly_ 8 characters
 * `l/LICENCE PLATE`: Alphanumeric, _up to_ 9 characters
 
 Expected output upon success: [coming soon]
@@ -137,7 +137,7 @@ Expected output upon failure:
 
 Finds client(s) whose fields matches any of the given fields.
 
-Format: `find [n/NAME] [i/NRIC] [c/CONTACT NUMBER] [l/LICENCE PLATE] [e/EMAIL] [t/TAG]
+Format: `find [n/NAME] [i/NRIC] [p/CONTACT NUMBER] [l/LICENCE PLATE] [e/EMAIL] [t/TAG]
 [c/COMPANY] [pn/POLICY NUMBER] [pi/POLICY ISSUE DATE] [pe/POLICY EXPIRY DATE]`
 
 * The search is case-insensitive e.g. `hans` will match `Hans`
@@ -163,7 +163,7 @@ Expected output upon failure:
 ```
 Invalid command format!  
 find: Finds all persons whose names contain any of the specified fields (case-insensitive for values) and displays them as a list with index numbers.  
-Parameters: [n/NAME] [l/LICENCE PLATE] [n/NAME] [i/NRIC] [c/CONTACT NUMBER] [l/LICENCE PLATE] [e/EMAIL][c/COMPANY] [pn/POLICY NUMBER] [pi/POLICY ISSUE DATE] [pe/POLICY EXPIRY DATE]  
+Parameters: [n/NAME] [l/LICENCE PLATE] [n/NAME] [i/NRIC] [p/CONTACT NUMBER] [l/LICENCE PLATE] [e/EMAIL][c/COMPANY] [pn/POLICY NUMBER] [pi/POLICY ISSUE DATE] [pe/POLICY EXPIRY DATE]  
 At least one parameter must be present.  
 Example: find n/Alice Rodriguez
 ```
@@ -326,11 +326,11 @@ _Details coming soon ..._
 
 | Action     | Format, Examples                                                                                                                                                                                  |
 |------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**    | `add n/NAME i/NRIC c/CONTACT NUMBER l/LICENCE PLATE…​` <br> e.g., `add n/Mary i/627A c/73052859 l/SLU5237J`                                                                                       |
+| **Add**    | `add n/NAME i/NRIC p/CONTACT NUMBER l/LICENCE PLATE…​` <br> e.g., `add n/Mary i/627A p/73052859 l/SLU5237J`                                                                                       |
 | **Clear**  | `clear`                                                                                                                                                                                           |
 | **Delete** | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                               |
 | **Edit**   | `edit INDEX [l/LICENCEPLATE] [pn/POLICY NUMBER] [pi/POLICY ISSUE DATE] [pe/POLICY EXPIRY DATE]…​`<br> e.g.,`edit 2 pn/AB12345J pe/31-12-2024`                                                     |
-| **Find**   | `find [n/NAME] [i/NRIC] [c/CONTACT NUMBER] [l/LICENCE PLATE] [e/EMAIL] [t/TAG] [c/COMPANY] [pn/POLICY NUMBER] [pi/POLICY ISSUE DATE] [pe/POLICY EXPIRY DATE]`<br> e.g. `find n/John /pn AB12345J` |
+| **Find**   | `find [n/NAME] [i/NRIC] [p/CONTACT NUMBER] [l/LICENCE PLATE] [e/EMAIL] [t/TAG] [c/COMPANY] [pn/POLICY NUMBER] [pi/POLICY ISSUE DATE] [pe/POLICY EXPIRY DATE]`<br> e.g. `find n/John /pn AB12345J` |
 | **List**   | `list`                                                                                                                                                                                            |
 | **Help**   | `help`                                                                                                                                                                                            |
 | **Sort**   | `sort`                                                                                                                                                                                            |
