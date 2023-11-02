@@ -26,8 +26,8 @@ import seedu.address.ui.TableWindow;
  */
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
-    private static BarChartWindow barChartWindow = null;
-    private static TableWindow tableWindow = null;
+    protected static BarChartWindow barChartWindow = null;
+    protected static TableWindow tableWindow = null;
 
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;

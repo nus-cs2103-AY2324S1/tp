@@ -12,14 +12,17 @@ import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+import javafx.application.Platform;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.commands.CommandResult;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.NameContainsKeywordPredicate;
 import seedu.address.model.person.Student;
 import seedu.address.testutil.AddressBookBuilder;
+import seedu.address.ui.TableWindow;
 
 public class ModelManagerTest {
 
