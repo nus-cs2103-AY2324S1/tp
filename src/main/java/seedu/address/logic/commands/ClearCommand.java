@@ -39,7 +39,7 @@ public class ClearCommand extends Command {
         if (Objects.equals(this.confirmation, "confirm")) {
             requireNonNull(model);
             model.setAddressBook(new AddressBook());
-            return new CommandResult(MESSAGE_SUCCESS, CommandType.CLEAR);
+            return new CommandResult(MESSAGE_SUCCESS);
         } else {
             return new CommandResult(MESSAGE_USAGE);
         }

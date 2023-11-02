@@ -2,7 +2,6 @@ package seedu.address.logic.parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import org.junit.jupiter.api.Test;
 
@@ -23,7 +22,7 @@ class ClearCommandParserTest {
     @Test
     public void parse_emptyArgs_throwsParseException() {
         String emptyArgs = "";
-        String expectedErrorMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, ClearCommand.MESSAGE_USAGE);
+        String expectedErrorMessage = String.format(ClearCommand.MESSAGE_USAGE);
         ParseException exception = assertThrows(ParseException.class, () -> parser.parse(emptyArgs));
         assertEquals(expectedErrorMessage, exception.getMessage());
     }
@@ -31,7 +30,7 @@ class ClearCommandParserTest {
     @Test
     public void parse_invalidArgs_throwsParseException() {
         String invalidArgs = "invalid confirmation";
-        String expectedErrorMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, ClearCommand.MESSAGE_USAGE);
+        String expectedErrorMessage = String.format(ClearCommand.MESSAGE_USAGE);
         ParseException exception = assertThrows(ParseException.class, () -> parser.parse(invalidArgs));
         assertEquals(expectedErrorMessage, exception.getMessage());
     }

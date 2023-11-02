@@ -9,7 +9,7 @@ public class UndoCommand extends Command {
     public static final String COMMAND_WORD = "undo";
     public static final String MESSAGE_SUCCESS = "Undo Completed";
     public static final String MESSAGE_USAGE = "This command will undo the last command";
-    public static final String MESSAGE_UNDO_DONE ="No more undo history found!";
+    public static final String MESSAGE_UNDO_DONE = "No more undo history found!";
 
 
     @Override
