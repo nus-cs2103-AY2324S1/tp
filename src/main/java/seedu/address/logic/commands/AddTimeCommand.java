@@ -22,7 +22,7 @@ public class AddTimeCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds free time to an existing person. \n"
         + "Parameters: "
         + PREFIX_NAME + "NAME "
-        + PREFIX_FREETIME + "FREE TIME \n"
+        + PREFIX_FREETIME + "FREE_TIME \n"
         + "Example: " + COMMAND_WORD + " "
         + PREFIX_NAME + "Alex Yeoh "
         + PREFIX_FREETIME + "mon 1200 - mon 1400" + PREFIX_FREETIME +"tue 1000 - wed 1600";
