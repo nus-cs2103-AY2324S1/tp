@@ -1,7 +1,10 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.*;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ENROL_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_GENDER;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SEC_LEVEL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.OrganizeData;
@@ -25,7 +28,7 @@ public class TableCommand extends Command {
             + "[" + PREFIX_SEC_LEVEL + "] "
             + "[" + PREFIX_SUBJECT + "]"
             + "[" + PREFIX_ENROL_DATE + "{year}" + "]...\n"
-            + "Example: " + COMMAND_WORD + " " +  PREFIX_GENDER;
+            + "Example: " + COMMAND_WORD + " " + PREFIX_GENDER;
 
     public static final String MESSAGE_INCORRECT_COMMAND = "To view a table, please do one of the following:\n"
                                                         + COMMAND_WORD + " " + PREFIX_GENDER + " or\n"
@@ -44,6 +47,11 @@ public class TableCommand extends Command {
 
     }
 
+    /**
+     * Constructor for TableCommand for user input d/yyyy
+     * @param args represents the category for table, d/
+     * @param year represents the year in integer
+     */
     public TableCommand(String args, int year) {
         this.args = args.trim();
         this.year = year;

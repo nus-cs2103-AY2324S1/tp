@@ -14,7 +14,6 @@ import seedu.address.model.person.Student;
 import seedu.address.model.person.StudentIsGenderPredicate;
 import seedu.address.model.person.StudentIsSecLevelPredicate;
 import seedu.address.model.person.StudentTakesSubjectPredicate;
-import seedu.address.model.tag.EnrolDate;
 import seedu.address.model.tag.Subject;
 
 /**
@@ -133,11 +132,16 @@ public class OrganizeData {
         return columnValueMapping;
     }
 
+    /**
+     * Maps Month with the number of students
+     * @param model instance of Model subclass, e.g. ModelManager instance
+     * @return a map of Month in String with the number of students
+     */
     public static Map<String, Integer> byEnrolDate(Model model, int year) {
         Student[] students = model.getFilteredPersonList().toArray(new Student[0]);
         Map<String, Integer> columnValueMapping = new HashMap<>();
         String[] titles = new String[] {"Jan", "Feb", "Mar", "Apr", "May",
-                "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};
+            "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};
         int[] counts = new int[13];
 
         for (Student student : students) {

@@ -5,7 +5,6 @@ import java.util.Objects;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.commands.CommandResult;
-import seedu.address.model.tag.Subject;
 
 /**
  * Represents for the command result for enrol date table generation.

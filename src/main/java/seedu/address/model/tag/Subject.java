@@ -1,9 +1,10 @@
 package seedu.address.model.tag;
 
-import java.time.YearMonth;
-
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
+
+import java.time.YearMonth;
+
 
 /**
  * Represents a Subject in the address book.

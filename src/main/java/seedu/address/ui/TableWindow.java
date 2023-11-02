@@ -50,7 +50,7 @@ public class TableWindow extends UiPart<Stage> {
         } else if (commandResult instanceof SecLevelTableCommandResult) {
             SecLevelTableCommandResult secLevelTableCommandResult = (SecLevelTableCommandResult) commandResult;
             return createSecLevelTable(secLevelTableCommandResult);
-        } else if (commandResult instanceof SubjectTableCommandResult){
+        } else if (commandResult instanceof SubjectTableCommandResult) {
             SubjectTableCommandResult subjectTableCommandResult = (SubjectTableCommandResult) commandResult;
             return createSubjectTable(subjectTableCommandResult);
         } else {
@@ -163,7 +163,8 @@ public class TableWindow extends UiPart<Stage> {
      * @param commandResult EnrolDateTableCommandResult instance containing column titles and counts mapping.
      * @return a TableView instance generated with given column titles and counts from argument passed in.
      */
-    private static TableView<EnrolDateTableCommandResult> createEnrolDateTable(EnrolDateTableCommandResult commandResult) {
+    private static TableView<EnrolDateTableCommandResult> createEnrolDateTable(EnrolDateTableCommandResult
+                                                                                       commandResult) {
         TableView<EnrolDateTableCommandResult> tableToCreate = new TableView<>();
 
         TableColumn<EnrolDateTableCommandResult, Integer> janColumn = new TableColumn<>("Jan");
