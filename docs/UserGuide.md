@@ -381,7 +381,7 @@ This command is relatively straight forward to use and has only 1 possible error
 |---------------------------|---------------------------------|
 | `Invalid command format!` | No search keyword was provided. |
 
-<div markdown="block" class="alert alert-info">
+<div markdown="block" id="search-behaviour" class="alert alert-info">
 
 **:information_source: Search behaviour**<br>
 
@@ -644,7 +644,7 @@ The find schedule function is here for that!
 
 **What you can expect to see**
 
-Tada! The schedule list has now been updated to show schedules from tutor that contains the name "Bernice" [<sup>3</sup>](#note3).
+Tada! The schedule list has now been updated to show schedules from tutor that contains the name "Bernice".
 
 ![find schedule tutor](images/find-schedules/find-s.png)
 
@@ -656,6 +656,7 @@ Tada! The schedule list has now been updated to show schedules from tutor that c
 
 ![find schedule command](images/find-schedules/find-s-syntax.png)
 
+Learn more about the [search behaviour](#search-behaviour) and supercharge your search now!
 
 **Errors you might encounter**
 
@@ -720,9 +721,9 @@ Here is a list of the error messages you may encounter, when the command is ente
 
 | Error Message                                             | Reason                                                             |
 |-----------------------------------------------------------|--------------------------------------------------------------------|
-| `Invalid command format!`                                 | Invalid or missing SCHEDULE_INDEX or SCHEDULE_STATUS or both.      |
+| `Invalid command format!`                                 | Invalid or missing SCHEDULE_INDEX or missing schedule status.      |
 | `The schedule index provided is invalid`                  | SCHEDULE_INDEX entered is not in the range of number of schedules. |
-| `Status has to be either MISSED (m/0) or COMPLETED (m/1)` | SCHEDULE_STATUS entered is not 0 or 1.                             |
+| `Status has to be either MISSED (m/0) or COMPLETED (m/1)` | Schedule status entered is not 0 or 1.                             |
 
 You can also refer to [input information](#input-examples) for details about valid inputs.
 
@@ -1042,16 +1043,16 @@ Here are some descriptions of the words you might come across in the User Guide:
 
 ### Input Examples
 
-| Input Fields                       | ✅                                                  | ❌                                   |
-|------------------------------------|----------------------------------------------------|-------------------------------------|
-| `n/NAME`                           | John Doe, John Doe123                              | John@Doe                            |
-| `p/PHONE NUMBER`                   | 98765432, 987                                      | abc, 98                             |
-| `e/EMAIL`                          | johnd@example.com,<br/>jo@example123-example.com   | johnd, johnd@p                      |
-| `p/PHONE NUMBER`                   | 98765432, 987                                      | abc, 98                             |
-| `st/START_TIME`<br/>`et/END_TIME`  | 2023-09-15T09:00,<br/>2023-09-15T11:00             | 2023-09-15 09:00,<br/>2023-09-15T09 |
-| `m/SCHEDULE_STATUS`                | 0, 1                                               | 3, abc                              |
-| `TUTOR_INDEX`<br/>`SCHEDULE_INDEX` | 1                                                  | 0, abc                              |
-| `NEW_THEME`                        | dark, light, blue                                  | white, brown, black                 |
+| Input Fields                       | ✅                                                | ❌                                             |
+|------------------------------------|--------------------------------------------------|-----------------------------------------------|
+| `n/NAME`                           | John Doe, John Doe123                            | John@Doe                                      |
+| `p/PHONE NUMBER`                   | 98765432, 987                                    | abc, 98                                       |
+| `e/EMAIL`                          | johnd@example.com,<br/>jo@example123-example.com | johnd, johnd@p                                |
+| `st/START_TIME`<br/>`et/END_TIME`  | 2023-09-15T09:00,<br/>2023-09-15T11:00           | 2023-09-15 09:00,<br/>2023-09-15T09           |
+| `m/SCHEDULE STATUS`                | 0, 1                                             | 3, abc                                        |
+| `TUTOR_INDEX`<br/>`SCHEDULE_INDEX` | 1                                                | 0, abc                                        |
+| `DATE`                             | 2023-09-15                                       | 2023-09-15T09:00                              |
+| `NEW_THEME`                        | dark, light, blue                                | white, brown, black                           |
 
 ### Input Information
 Here are some inputs you might come across in the User Guide:
@@ -1063,9 +1064,10 @@ Here are some inputs you might come across in the User Guide:
 | `e/EMAIL`           | Refers to the email address of the tutor.         | Of the format local-part@domain[<sup>1</sup>](#note1).                                       |
 | `st/START_TIME`     | Refers to the start time of the schedule.         | Only datetime in `yyyy-MM-ddTHH:mm`[<sup>2</sup>](#note2) format is accepted.                |
 | `et/END_TIME`       | Refers to the end time of the schedule.           | Only datetime in `yyyy-MM-ddTHH:mm`[<sup>2</sup>](#note2) format is accepted.                |
-| `m/SCHEDULE_STATUS` | Refers to the status of schedule in the list.     | Only numerical inputs of 0 for MISSED status and 1 for COMPLETED status is accepted          |
+| `m/SCHEDULE STATUS` | Refers to the status of schedule in the list.     | Only numerical inputs of 0 for MISSED status and 1 for COMPLETED status is accepted          |
 | `TUTOR_INDEX`       | Refers to the position of tutor in the list.      | Only numerical input that ranges from 1 to the last tutor shown in the list of tutors.       |
 | `SCHEDULE_INDEX`    | Refers to the position of schedule in the list.   | Only numerical input that ranges from 1 to the last schedule shown in the list of schedules. |
+| `DATE`              | Refers to the date to view schedules for.         | Only date in `yyyy-MM-dd` format is accepted.                                                |
 | `NEW_THEME`         | Refers to the name of the new theme to switch to. | Only `dark`, `light` and `blue` themes are supported.                                        |
 
 **<sup id="note1">1</sup> Email Format**
@@ -1086,15 +1088,6 @@ The domain name must:
 * `HH` represents the **hour** in **24-hour format** with a leading zero (e.g., 09 for 9 AM, 21 for 9 PM).
 * `mm` represents the **minutes** with a leading zero (e.g., 05).
 
-**<sup id="note3">3</sup> `find-t` and `find-s` search behaviour**
-* Search is case-insensitive. (E.g. `hans` will match `Hans`)
-* The order of the keywords does not matter. (E.g. `Hans Bo` will match `Bo Hans`)
-* Only the tutor name is searched.
-* Only full words will be matched. (E.g. `Han` will not match `Hans`)
-* Tutors matching at least one keyword will be returned. (E.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`)
-
-
-
 [Back To Top](#table-of-contents)
 
 
@@ -1102,21 +1095,22 @@ The domain name must:
 
 ## Command summary
 
-| Action              | Format, Examples                                                                                             |
-|---------------------|--------------------------------------------------------------------------------------------------------------|
-| **Add Tutor**       | `add-t n/NAME p/PHONE NUMBER e/EMAIL` <br> e.g., `add-t n/John Doe p/98765432 e/johnd@example.com`           |
-| **Edit Tutor**      | `edit-t TUTOR_INDEX n/NAME p/PHONE_NUMBER e/EMAIL`<br> e.g.,`edit-t 2 n/James Lee e/jameslee@example.com`    |
-| **List Tutor**      | `list-t`                                                                                                     |
-| **Delete Tutor**    | `delete-t TUTOR_INDEX`<br> e.g., `delete-t 3`                                                                |
-| **Find Tutor**      | `find-t KEYWORD [MORE_KEYWORDS]`<br> e.g., `find-t James Jake`                                               |
-| **Add Schedule**    | `add-s TUTOR_INDEX st/START_TIME et/END_TIME` <br> e.g., `add-s 1 st/2023-09-15T09:00 et/2023-09-15T11:00`   |
-| **Edit Schedule**   | `edit-s SCHEDULE_INDEX [st/START_TIME] [et/END_TIME]` <br> e.g., `edit-s 1 st/2023-09-15T13:00`              |
-| **List Schedule**   | `list-s`, `list-s TUTOR_INDEX m/SCHEDULE_STATUS` <br> e.g., `list-s 1 m/0`                                   |
-| **Mark Schedule**   | `mark SCHEDULE_INDEX m/SCHEDULE_STATUS`<br> e.g., `mark 3 m/0`                                               |
-| **Unmark Schedule** | `unmark SCHEDULE_INDEX`<br> e.g., `unmark 3`                                                                 |
-| **Delete Schedule** | `delete-s SCHEDULE_INDEX`<br> e.g., `delete-s 3`                                                             |
-| **Find Schedule**   | `find-s KEYWORD [MORE_KEYWORDS]`<br> e.g., `find-s James Jake`                                               |
-| **Change Theme**    | `theme NEW_THEME` <br> e.g., `theme dark`                                                                    |
-| **Clear**           | `clear`                                                                                                      |
+| Action              | Format, Examples                                                                                           |
+|---------------------|------------------------------------------------------------------------------------------------------------|
+| **Add Tutor**       | `add-t n/NAME p/PHONE NUMBER e/EMAIL` <br> e.g., `add-t n/John Doe p/98765432 e/johnd@example.com`         |
+| **Edit Tutor**      | `edit-t TUTOR_INDEX n/NAME p/PHONE_NUMBER e/EMAIL`<br> e.g.,`edit-t 2 n/James Lee e/jameslee@example.com`  |
+| **List Tutor**      | `list-t`                                                                                                   |
+| **Delete Tutor**    | `delete-t TUTOR_INDEX`<br> e.g., `delete-t 3`                                                              |
+| **Find Tutor**      | `find-t KEYWORD [MORE_KEYWORDS]`<br> e.g., `find-t James Jake`                                             |
+| **Add Schedule**    | `add-s TUTOR_INDEX st/START_TIME et/END_TIME` <br> e.g., `add-s 1 st/2023-09-15T09:00 et/2023-09-15T11:00` |
+| **Edit Schedule**   | `edit-s SCHEDULE_INDEX [st/START_TIME] [et/END_TIME]` <br> e.g., `edit-s 1 st/2023-09-15T13:00`            |
+| **List Schedule**   | `list-s`, `list-s TUTOR_INDEX m/SCHEDULE STATUS` <br> e.g., `list-s 1 m/0`                                 |
+| **Mark Schedule**   | `mark SCHEDULE_INDEX m/SCHEDULE STATUS`<br> e.g., `mark 3 m/0`                                             |
+| **Unmark Schedule** | `unmark SCHEDULE_INDEX`<br> e.g., `unmark 3`                                                               |
+| **Delete Schedule** | `delete-s SCHEDULE_INDEX`<br> e.g., `delete-s 3`                                                           |
+| **Find Schedule**   | `find-s KEYWORD [MORE_KEYWORDS]`<br> e.g., `find-s James Jake`                                             |
+| **View Calendar**   | `show DATE` <br> e.g., `show 2023-09-15`                                                                   |
+| **Change Theme**    | `theme NEW_THEME` <br> e.g., `theme dark`                                                                  |
+| **Clear**           | `clear`                                                                                                    |
 
 [Back To Top](#table-of-contents)
