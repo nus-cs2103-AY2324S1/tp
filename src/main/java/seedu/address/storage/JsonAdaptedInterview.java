@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.logic.parser.TimeParser;
 import seedu.address.model.applicant.Applicant;
 import seedu.address.model.interview.Interview;
 import seedu.address.model.interview.Rating;
@@ -92,7 +93,10 @@ class JsonAdaptedInterview {
 
         final Rating modelRating = new Rating(rating);
 
-        return new Interview(modelApplicant, jobRole, interviewStartTime, interviewEndTime, modelRating, isDone);
+        return new Interview(modelApplicant, jobRole, modelRating,
+                TimeParser.parseDate(interviewStartTime, false),
+                TimeParser.parseDate(interviewEndTime, false),
+                isDone);
     }
 
 }

@@ -56,9 +56,9 @@ public class RateCommand extends Command {
         Interview ratedInterview = new Interview(
                 interviewToRate.getInterviewApplicant(),
                 interviewToRate.getJobRole(),
+                newRating,
                 interviewToRate.getInterviewStartTime(),
                 interviewToRate.getInterviewEndTime(),
-                newRating,
                 interviewToRate.isDone()
         );
         model.setInterview(interviewToRate, ratedInterview);

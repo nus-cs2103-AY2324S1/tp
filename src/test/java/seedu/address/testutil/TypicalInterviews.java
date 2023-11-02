@@ -5,7 +5,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import seedu.address.model.Time;
 import seedu.address.model.interview.Interview;
+import seedu.address.model.interview.Rating;
 
 /**
  * A utility class containing a list of {@code Interview} objects to be used in tests.
@@ -15,41 +17,48 @@ public class TypicalInterviews {
     // TODO: MAKE SAME
     public static final Interview STANDARD_INTERVIEW = new Interview(TypicalApplicants.ALICE,
                     "StandardJobRole",
-                                       LocalDateTime.of(2024, 12, 21, 19, 0),
-                    LocalDateTime.of(2024, 12, 21, 21, 0),
+            new Rating("2.0"),
+            new Time(LocalDateTime.of(2024, 12, 21, 19, 0)),
+            new Time(LocalDateTime.of(2024, 12, 21, 21, 0)),
                             false);
     public static final Interview STANDARD_INTERVIEW_2 = new Interview(TypicalApplicants.BENSON,
                     "StandardJobRole2",
-                                         LocalDateTime.of(2025, 12, 21, 14, 0),
-                    LocalDateTime.of(2025, 12, 21, 16, 0),
+            new Rating("2.0"),
+            new Time(LocalDateTime.of(2025, 12, 21, 14, 0)),
+            new Time(LocalDateTime.of(2025, 12, 21, 16, 0)),
                             false);
     public static final Interview STANDARD_INTERVIEW_3 = new Interview(TypicalApplicants.CARL,
                     "StandardJobRole3",
-                                         LocalDateTime.of(2024, 5, 21, 9, 0),
-                    LocalDateTime.of(2024, 5, 21, 11, 0),
+             new Rating("2.0"),
+            new Time(LocalDateTime.of(2024, 5, 21, 9, 0)),
+            new Time(LocalDateTime.of(2024, 5, 21, 11, 0)),
                             true
                             );
     public static final Interview STANDARD_INTERVIEW_4 = new Interview(TypicalApplicants.DANIEL,
                     "StandardJobRole4",
-                                         LocalDateTime.of(2024, 7, 12, 10, 45),
-                    LocalDateTime.of(2024, 7, 12, 12, 45),
+                                         new Rating("2.0"),
+            new Time(LocalDateTime.of(2024, 7, 12, 10, 45)),
+            new Time(LocalDateTime.of(2024, 7, 12, 12, 45)),
                             false
                             );
     public static final Interview STANDARD_INTERVIEW_DIFFERENT_ROLE = new Interview(TypicalApplicants.ALICE,
                     "DifferentStandardJobRole",
-                        LocalDateTime.of(2024, 12, 21, 19, 0),
-                        LocalDateTime.of(2024, 12, 21, 21, 0),
+                        new Rating("2.0"),
+            new Time(LocalDateTime.of(2024, 12, 21, 19, 0)),
+            new Time(LocalDateTime.of(2024, 12, 21, 21, 0)),
             false);
     public static final Interview STANDARD_INTERVIEW_DIFFERENT_APPLICANT =
             new Interview(TypicalApplicants.ELLE, "StandardJobRole",
-                          LocalDateTime.of(2024, 10, 27, 14, 0),
-                            LocalDateTime.of(2024, 10, 27, 16, 0),
+                  new Rating("2.0"),
+                    new Time(LocalDateTime.of(2024, 10, 27, 14, 0)),
+                    new Time(LocalDateTime.of(2024, 10, 27, 16, 0)),
                                     false
                                     );
     public static final Interview STANDARD_INTERVIEW_DIFFERENT_TIME = new Interview(TypicalApplicants.ALICE,
                     "StandardJobRole",
-                                                      LocalDateTime.of(2024, 11, 6, 15, 0),
-                    LocalDateTime.of(2024, 11, 6, 17, 0),
+            new Rating("2.0"),
+            new Time(LocalDateTime.of(2024, 11, 6, 15, 0)),
+            new Time(LocalDateTime.of(2024, 11, 6, 17, 0)),
                             false);
 
     /** Prevents instantiation - Code reused and Adapted from AB3's TypicalPersons.java */

@@ -11,11 +11,13 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.List;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
 
 import javafx.collections.ObservableList;
+import javafx.util.Pair;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -23,6 +25,7 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.Time;
 import seedu.address.model.applicant.Applicant;
 import seedu.address.model.interview.Interview;
 import seedu.address.testutil.ApplicantBuilder;
@@ -198,6 +201,11 @@ public class AddCommandTest {
 
         @Override
         public void sortInterviewList(Comparator<Interview> comparator) {
+            throw new AssertionError("This method should not be called");
+        }
+
+        @Override
+        public List<Pair<Time, Time>> listPocketsOfTimeOnGivenDay(Time day) {
             throw new AssertionError("This method should not be called");
         }
     }

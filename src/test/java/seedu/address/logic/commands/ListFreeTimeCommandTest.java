@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
+import seedu.address.model.Time;
 import seedu.address.model.UserPrefs;
 
 class ListFreeTimeCommandTest {
@@ -34,7 +35,7 @@ class ListFreeTimeCommandTest {
     @Test
     void testFormatFreeTimeSuccess() {
         LocalDateTime today = LocalDateTime.now();
-        ListFreeTimeCommand listFreeTimeCommand = new ListFreeTimeCommand(today);
+        ListFreeTimeCommand listFreeTimeCommand = new ListFreeTimeCommand(new Time(today));
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         String expectedMessage = "Free times on " + today.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"))
                 + ":\nfrom: 09:00 to: 17:00\n";

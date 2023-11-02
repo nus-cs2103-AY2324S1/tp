@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.Time;
 import seedu.address.model.applicant.Address;
 import seedu.address.model.applicant.Applicant;
 import seedu.address.model.applicant.Email;
@@ -61,18 +62,18 @@ public class SampleDataUtil {
         return new Interview[] {
             new Interview(sampleApplicant,
                     "Frontend Engineer",
-                    LocalDateTime.of(2025, 1, 1, 10, 0),
-                    LocalDateTime.of(2025, 1, 1, 12, 0)
+                    new Time(LocalDateTime.of(2025, 1, 1, 10, 0)),
+                    new Time(LocalDateTime.of(2025, 1, 1, 12, 0))
             ),
             new Interview(sampleApplicant2,
                     "Backend Engineer",
-                    LocalDateTime.of(2025, 1, 2, 10, 0),
-                    LocalDateTime.of(2025, 1, 2, 12, 0)
+                    new Time(LocalDateTime.of(2025, 1, 2, 10, 0)),
+                    new Time(LocalDateTime.of(2025, 1, 2, 12, 0))
             ),
             new Interview(sampleApplicant3,
                     "SWE",
-                    LocalDateTime.of(2025, 1, 3, 10, 0),
-                    LocalDateTime.of(2025, 1, 3, 12, 0)
+                    new Time(LocalDateTime.of(2025, 1, 3, 10, 0)),
+                    new Time(LocalDateTime.of(2025, 1, 3, 12, 0))
             )
         };
     }

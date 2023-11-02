@@ -1,16 +1,13 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_INTERVIEWS;
 
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
+import javafx.util.Pair;
 import seedu.address.model.Model;
 import seedu.address.model.Time;
-import seedu.address.model.interview.Interview;
-import seedu.address.model.interview.UniqueInterviewList;
 
 /**
  * Encapsulates the list-freetime command.
@@ -25,7 +22,7 @@ public class ListFreeTimeCommand extends Command {
             + "Parameters: DATE (Cannot be an invalid date or a date in the past)\n"
             + "Example: " + COMMAND_WORD + " 12/12/2034";
 
-    private final LocalDateTime givenDay;
+    private final Time givenDay;
 
     /**
      * Constructs an instance of the ListFreeTimeCommand
@@ -33,7 +30,7 @@ public class ListFreeTimeCommand extends Command {
      * @author Tan Kerway
      * @param givenDay the day to list out free time on
      */
-    public ListFreeTimeCommand(LocalDateTime givenDay) {
+    public ListFreeTimeCommand(Time givenDay) {
         this.givenDay = givenDay;
     }
 
@@ -44,11 +41,12 @@ public class ListFreeTimeCommand extends Command {
      * @param freeTimes the list of free times
      * @return a String of free times
      */
-    private String formatFreeTime(List<List<LocalDateTime>> freeTimes) {
+    private String formatFreeTime(List<Pair<Time, Time>> freeTimes) {
+        System.out.println(freeTimes);
         StringBuilder sb = new StringBuilder();
-        for (List<LocalDateTime> pocketOfFreeTime : freeTimes) {
-            sb.append("from: ").append(pocketOfFreeTime.get(0).toLocalTime())
-                    .append(" ").append("to: ").append(pocketOfFreeTime.get(1).toLocalTime())
+        for (Pair<Time, Time> pocketOfFreeTime : freeTimes) {
+            sb.append("from: ").append(pocketOfFreeTime.getKey().getTime())
+                    .append(" ").append("to: ").append(pocketOfFreeTime.getValue().getTime())
                     .append("\n");
         }
         return sb.toString();
@@ -63,14 +61,9 @@ public class ListFreeTimeCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        // update the filtered list to show all interviews
-        model.updateFilteredInterviewList(PREDICATE_SHOW_ALL_INTERVIEWS);
-        List<Interview> temp = model.getFilteredInterviewList();
-        UniqueInterviewList interviews = new UniqueInterviewList();
-        interviews.setInterviews(temp);
-        List<List<LocalDateTime>> freeTimes = Time.listPocketsOfTimeOnGivenDay(givenDay, interviews);
+        List<Pair<Time, Time>> freeTimes = model.listPocketsOfTimeOnGivenDay(givenDay);
         String formattedFreeTime = formatFreeTime(freeTimes);
-        String formattedDate = givenDay.toLocalDate().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+        String formattedDate = givenDay.getDate().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
         return new CommandResult(String.format(MESSAGE_LIST_FREETIME_SUCCESS, formattedDate, formattedFreeTime));
     }
 
