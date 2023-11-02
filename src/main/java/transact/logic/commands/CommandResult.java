@@ -24,6 +24,10 @@ public class CommandResult {
 
     private final boolean clearResultDisplay;
 
+    private final boolean exportTransactions;
+
+    private final boolean exportStaff;
+
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
@@ -33,7 +37,10 @@ public class CommandResult {
         this.showHelp = showHelp;
         this.exit = exit;
         this.clearResultDisplay = false;
+        this.exportTransactions = false;
+        this.exportStaff = false;
     }
+
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
@@ -43,6 +50,22 @@ public class CommandResult {
         this.showHelp = showHelp;
         this.exit = exit;
         this.clearResultDisplay = clearResultDisplay;
+        this.exportTransactions = false;
+        this.exportStaff = false;
+    }
+
+    /**
+     * Constructs a {@code CommandResult} with the specified fields, including export details
+     */
+    public CommandResult(String feedbackToUser, TabWindow tabWindow, boolean showHelp, boolean exit, boolean clearResultDisplay,
+                         boolean exportTransactions, boolean exportStaff) {
+        this.feedbackToUser = requireNonNull(feedbackToUser);
+        this.tabWindow = tabWindow;
+        this.showHelp = showHelp;
+        this.exit = exit;
+        this.clearResultDisplay = clearResultDisplay;
+        this.exportTransactions = exportTransactions;
+        this.exportStaff = exportStaff;
     }
 
     /**
@@ -80,6 +103,14 @@ public class CommandResult {
 
     public boolean isClearResultDisplay() {
         return clearResultDisplay;
+    }
+
+    public boolean isExportTransactions() {
+        return exportTransactions;
+    }
+
+    public boolean isExportStaff() {
+        return exportStaff;
     }
 
 

@@ -17,6 +17,7 @@ public interface TransactionBookStorage {
      */
     Path getTransactionBookFilePath();
 
+
     /**
      * Returns transaction log data as a {@link ReadOnlyTransactionBook}.
      * Returns {@code Optional.empty()} if the storage file is not found.
@@ -42,5 +43,6 @@ public interface TransactionBookStorage {
      * @see #saveTransactionBook(ReadOnlyTransactionBook)
      */
     void saveTransactionBook(ReadOnlyTransactionBook transactionBook, Path filePath) throws IOException;
+
 }
 

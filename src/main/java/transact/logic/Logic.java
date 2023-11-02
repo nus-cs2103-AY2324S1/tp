@@ -29,6 +29,20 @@ public interface Logic {
     CommandResult execute(String commandText) throws CommandException, ParseException;
 
     /**
+     * Handles commandResult with exportTransactions as true.
+     *
+     * @throws CommandException
+     */
+    void handleTransactionsExport() throws CommandException;
+
+    /**
+     * Handles commandResult with exportStaff as true.
+     *
+     * @throws CommandException
+     */
+    void handleStaffExport() throws CommandException;
+
+    /**
      * Returns the AddressBook.
      *
      * @see transact.model.Model#getAddressBook()

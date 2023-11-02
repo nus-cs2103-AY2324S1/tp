@@ -21,6 +21,8 @@ import transact.logic.commands.DeleteTransactionCommand;
 import transact.logic.commands.EditStaffCommand;
 import transact.logic.commands.EditTransactionCommand;
 import transact.logic.commands.ExitCommand;
+import transact.logic.commands.ExportStaffCommand;
+import transact.logic.commands.ExportTransactionCommand;
 import transact.logic.commands.FilterCommand;
 import transact.logic.commands.FindCommand;
 import transact.logic.commands.HelpCommand;
@@ -114,6 +116,12 @@ public class AddressBookParser {
 
         case ClearFilterCommand.COMMAND_WORD:
             return new ClearFilterCommand();
+
+        case ExportTransactionCommand.COMMAND_WORD:
+            return new ExportTransactionCommandParser().parse(arguments);
+
+        case ExportStaffCommand.COMMAND_WORD:
+            return new ExportStaffCommandParser().parse(arguments);
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);

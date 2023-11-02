@@ -111,6 +111,18 @@ public class ModelManagerTest {
     }
 
     @Test
+    public void setExportFilePath_nullPath_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.setExportFilePath(null));
+    }
+
+    @Test
+    public void setExportFilePath_validPath_setsTransactionBookFilePath() {
+        Path path = Paths.get("/export/file/path");
+        modelManager.setExportFilePath(path);
+        assertEquals(path, modelManager.getExportFilePath());
+    }
+
+    @Test
     public void hasTransaction_nullTransaction_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> modelManager.hasTransaction(null));
     }

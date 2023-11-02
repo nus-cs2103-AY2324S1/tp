@@ -75,6 +75,10 @@ public interface Model {
      */
     void setTransactionBookFilePath(Path transactionBookFilePath);
 
+    public void setExportFilePath(Path path);
+
+    public Path getExportFilePath();
+
     /**
      * Replaces transaction book data with the data in {@code transactionBook}.
      */

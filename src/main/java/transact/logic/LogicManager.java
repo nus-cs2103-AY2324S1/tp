@@ -51,6 +51,14 @@ public class LogicManager implements Logic {
         Command command = addressBookParser.parseCommand(commandText);
         commandResult = command.execute(model);
 
+        if (commandResult.isExportTransactions()) {
+            handleTransactionsExport();
+        }
+
+        if (commandResult.isExportStaff()) {
+            handleStaffExport();
+        }
+
         try {
             storage.saveAddressBook(model.getAddressBook());
             storage.saveTransactionBook(model.getTransactionBook());
@@ -61,6 +69,29 @@ public class LogicManager implements Logic {
         }
 
         return commandResult;
+    }
+
+    /**
+     * Handles commandResult of ExportTransactionsCommand by exporting transaction book to specified exportFilePath
+     *
+     * @throws CommandException
+     */
+    @Override
+    public void handleTransactionsExport() throws CommandException {
+        try {
+            storage.saveTransactionBook(model.getTransactionBook(), model.getExportFilePath());
+        } catch (IOException ioe) {
+            throw new CommandException(String.format(FILE_OPS_ERROR_FORMAT, ioe.getMessage()), ioe);
+        }
+    }
+
+    @Override
+    public void handleStaffExport() throws CommandException {
+        try {
+            storage.saveAddressBook(model.getAddressBook(), model.getExportFilePath());
+        } catch (IOException ioe) {
+            throw new CommandException(String.format(FILE_OPS_ERROR_FORMAT, ioe.getMessage()), ioe);
+        }
     }
 
     @Override

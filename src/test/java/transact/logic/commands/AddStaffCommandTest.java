@@ -148,6 +148,16 @@ public class AddStaffCommandTest {
         }
 
         @Override
+        public void setExportFilePath(Path path) {
+
+        }
+
+        @Override
+        public Path getExportFilePath() {
+            return null;
+        }
+
+        @Override
         public void setTransactionBook(ReadOnlyTransactionBook transactionBook) {
             throw new AssertionError("This method should not be called.");
         }
