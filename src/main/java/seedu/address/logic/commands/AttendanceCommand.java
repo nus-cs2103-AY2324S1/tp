@@ -126,7 +126,8 @@ public class AttendanceCommand extends Command {
             Person employeeToReport = fullList.get(indexes.get(0) - 1);
             int[] attendanceValues = employeeToReport
                     .getAttendanceStorage()
-                    .getAttendanceReport(employeeToReport.getJoinDate());
+                    .getAttendanceReport(employeeToReport.getJoinDate(),
+                            employeeToReport.getAnnualLeave().getTotalLeaveTaken());
             return new CommandResult(String.format(MESSAGE_REPORT_ATTENDANCE,
                     employeeToReport.getName(),
                     attendanceValues[0],
@@ -153,7 +154,8 @@ public class AttendanceCommand extends Command {
         Person employeeToReport = lastShownList.get(targetIndex.getZeroBased());
         int[] attendanceValues = employeeToReport
                 .getAttendanceStorage()
-                .getAttendanceReport(employeeToReport.getJoinDate());
+                .getAttendanceReport(employeeToReport.getJoinDate(),
+                        employeeToReport.getAnnualLeave().getTotalLeaveTaken());
         return new CommandResult(String.format(MESSAGE_REPORT_ATTENDANCE,
                 employeeToReport.getName(),
                 attendanceValues[0],

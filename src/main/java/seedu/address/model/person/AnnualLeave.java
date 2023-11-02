@@ -308,4 +308,8 @@ public class AnnualLeave {
         this.leaveList = list;
     }
 
+    public int getTotalLeaveTaken() {
+        return this.leaveList.size();
+    }
+
 }
