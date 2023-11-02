@@ -30,7 +30,6 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
-
     private final FilteredList<Event> filteredEvents;
 
     /**

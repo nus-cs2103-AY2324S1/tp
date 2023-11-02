@@ -193,6 +193,8 @@ public class TypicalEvents {
         try {
             MEETING_BIRTHDAY_PARTY = new MeetingBuilder().withEventName("Birthday party")
                     .withEventDate(LocalDate.now().plusDays(1).toString())
+                    .withPerson("Alice", "Bob", "Daniel")
+                    .withGroups("friends", "family")
                     .build();
         } catch (ParseException e) {
             throw new RuntimeException(e);
@@ -205,6 +207,7 @@ public class TypicalEvents {
         try {
             MEETING_PROJECT_DISCUSSION = new MeetingBuilder().withEventName("Project Discussion")
                     .withEventDate(LocalDate.now().plusDays(2).toString())
+                    .withGroups("CS2103T")
                     .build();
         } catch (ParseException e) {
             throw new RuntimeException(e);
@@ -217,6 +220,8 @@ public class TypicalEvents {
         try {
             MEETING_ASSIGNMENT_SUBMISSION = new MeetingBuilder().withEventName("Assignment Submission")
                     .withEventDate(LocalDate.now().plusDays(1).toString())
+                    .withPerson("Alice", "Carl")
+                    .withGroups("classmates")
                     .build();
         } catch (ParseException e) {
             throw new RuntimeException(e);
@@ -229,6 +234,7 @@ public class TypicalEvents {
         try {
             MEETING_PROJECT_PRESENTATION = new MeetingBuilder().withEventName("Project Presentation")
                     .withEventDate(LocalDate.now().plusDays(3).toString())
+                    .withGroups("CS2103T")
                     .build();
         } catch (ParseException e) {
             throw new RuntimeException(e);
