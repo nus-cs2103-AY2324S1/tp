@@ -27,7 +27,7 @@ Tuition connect is a desktop app that helps tutors keep track of their tutees an
 
    * `list` : Lists all tutees.
 
-   * `add n/John Doe p/98765432 a/John street, block 123, #01-01 sb/Primary 4 Math d/wed b/1500 e/1600` : Adds a tutee named `John Doe` to the list.
+   * `add n/John Doe p/98765432 e/johnny@example.com a/John street, block 123, #01-01 sb/Primary 4 Math d/wed b/1500 e/1600` : Adds a tutee named `John Doe` to the list.
 
    * `delete 3` : Deletes the 3rd tutee shown in the current list.
 
@@ -41,16 +41,17 @@ Tuition connect is a desktop app that helps tutors keep track of their tutees an
 
 **Description**: Adds a tutee into the list.
 
-**Format**: `add n/NAME p/PHONE_NUMBER a/ADDRESS s/SUBJECT d/DAY b/BEGIN e/END`
+**Format**: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS sb/SUBJECT d/DAY b/BEGIN e/END`
 
 **Expected Input**:
 * **Name (Compulsory field)**: String composed of character between A-Z and a-z.
-* **Phone number (Optional field)**: 8 digit number.
-* **Address (Optional field)**: String without restriction in characters.
-* **Subject (Optional field)**: String without restriction in characters.
-* **Day (Optional field)**: String with restrictions in characters, non-case sensitive (Mon/Tue/Wed/Thu/Fri/Sat/Sun).
-* **Begin (Optional field)**: String with restrictions (HHMM).
-* **End (Optional field)**: String with restrictions (HHMM).
+* **Phone number (Compulsory field)**: 8 digit number.
+* **Address (Compulsory field)**: String without restriction in characters.
+* **Email (Compulsory field)** String with restrictions in characters (XXXXXXXX@emaildomain.com)
+* **Subject (Compulsory field)**: String without restriction in characters.
+* **Day (Compulsory field)**: String with restrictions in characters, non-case sensitive (Mon/Tue/Wed/Thu/Fri/Sat/Sun).
+* **Begin (Compulsory field)**: String with restrictions (HHMM).
+* **End (Compulsory field)**: String with restrictions (HHMM).
 * **PayRate (Compulsory field)**: String with restrictions in characters, only numbers allowed (no negative numbers).
 
 **Expected Output when the command succeeds**: Successfully added tutee XXX(Name)
@@ -62,10 +63,10 @@ Tuition connect is a desktop app that helps tutors keep track of their tutees an
 * **Invalid Day**: Please input a valid day
 * **Invalid Begin**: Please input a valid time for Begin in HHMM
 * **Invalid End**: Please input a valid time for End in HHMM
-* **Invalid PayRate**: PayRate can take any values, as long as they are integers.
+* **Invalid PayRate**: PayRate can be either integers or decimals of up to 2 decimal places. It cannot be negative
 
 **Examples**:
-* `add n/John Doe p/98765432 a/John street, block 123, #01-01 sb/Primary 4 Math d/wed b/1500 e/1600 pr/20`
+* `add n/John Doe p/98765432 e/johnny@example.com a/John street, block 123, #01-01 sb/Primary 4 Math d/wed b/1500 e/1600 pr/20`
 * `add n/Betsy Crowe p/92939402 e/betsycrowe@example.com a/Newgate Prison p/1234567 s/Secondary 3 Physics d/mon b/1900 e/1930 pr/35`
 
 
@@ -97,6 +98,7 @@ Format: `list [DAY]`
 * **Name (Optional field)**: String composed of character between A-Z and a-z.
 * **Phone number (Optional field)**: 8 digit number.
 * **Address (Optional field)**: String without restriction in characters.
+* **Email (Compulsory field)** String with restrictions in characters (XXXXXXXX@emaildomain.com)
 * **Subject (Optional field)**: String without restriction in characters.
 * **Day (Optional field)**: String with restrictions in characters, non-case sensitive (Mon/Tue/Wed/Thu/Fri/Sat/Sun).
 * **Begin (Optional field)**: String with restrictions (HHMM).
@@ -111,7 +113,7 @@ Format: `list [DAY]`
 * **Invalid Day**: Please input a valid day.
 * **Invalid Begin**: Please input a valid time for Begin in HHMM.
 * **Invalid End**: Please input a valid time for End in HHMM.
-* **Invalid PayRate**: PayRate can take any values, as long as they are integers.
+* **Invalid PayRate**: PayRate can be either integers or decimals of up to 2 decimal places. It cannot be negative
 
 **Examples**:
 
@@ -186,6 +188,7 @@ Format: `list unpaid`
 * **Invalid Begin**: Begin has a format of HHMM
 * **Invalid End**: End has a format of HHMM
 
+
 ### Undo previous command : `undo`
 
 **Description**: Undo the previous command that modifies the data of tutees.
@@ -206,9 +209,19 @@ Format: `list unpaid`
 
 **Expected Output when the command fails**: Nothing to redo!
 
-
 **Format**: `freeTime d/DAY dur/DURATION b/BEGIN end/END`
 
+
+### Calculating Monthly Revenue: `rev`
+
+**Description**: Displays the total revenue monthly calculated from all tutees
+
+**Format**: `rev`
+
+**Expected Output**: Successfully calculated!! Total monthly revenue: *$monthlyrevenue*
+
+
+>>>>>>> master
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
@@ -238,3 +251,4 @@ To be added soon
 | **freeTime**    | `d/DAY dur/DURATION b/BEGIN end/END`                                                                                                                                                               |
 | **undo**        | `undo`                                                                                                                                                                                             |
 | **redo**        | `redo`                                                                                                                                                                                             |
+| **rev**         | `rev`                                                                                                                                                                                              |
