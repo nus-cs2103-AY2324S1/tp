@@ -101,13 +101,15 @@ Format: `editMember MEMBER_INDEX [n/MEMBER_NAME] [g/GENDER] [p/PHONE_NUMBER] [e/
 * Acceptable values for `EMAIL`: A string with an email extension (e.g. `@gmail.com`).
 
 Examples:
-* `editMember 1 a/RH t/Musician` edits the address and the tag of the 1st member in the member list.
+* `editMember 1 a/RH t/Musician` edits the address and the tag fields of the 1st member in the member list.
 
 ### Create an Event : `createEvent`
 
-Creates a new event and adds it to the database.
+Creates a new event with accompanying details (name, location, date, tag).
 
 Format: `createEvent n/EVENT_NAME l/LOCATION d/DATE [t/TAG]`
+
+* Acceptable values for `DATE`: Dates in the format of `YYYY-MM-DD`.
 
 Examples:
 * `createEvent n/Party l/Raffles Hall d/16-09-2023` creates an event `Party` in CCACommander.
@@ -135,46 +137,46 @@ Format: `editEvent EVENT_INDEX [n/EVENT_NAME] [l/LOCATION] [d/DATE] [t/TAG]`
 * The index refers to the index number shown in the displayed event list.
 * The index **must be a positive integer** that is within the range of the length of the member list.
 * At least one field to edit must be provided.
-* EVENT_NAME **must only contain** Alphanumeric Characters and spaces, and it should not be blank
-* LOCATION **must not** be blank and can take in any values.
-* DATE **must be a valid date** in the format of **YYYY-MM-DD** e.g. 2023-10-31.
-* TAG **must only contain** Alphanumeric Characters with no space in between.
+* `EVENT_NAME` **must only contain** Alphanumeric Characters and spaces, and it should not be blank
+* `LOCATION` **must not** be blank and can take in any values.
+* `DATE` **must be a valid date** in the format of **YYYY-MM-DD**.
+* `TAG` **must only contain** Alphanumeric Characters with no space in between.
 
 Examples:
 * `editEvent 5 n/Halloween Surprise Party l/UTR d/2023-10-31 t/sem1` edits the 5th event in the event list to change the name to `Halloween
 Surprise Party`, the location to `UTR`, the date to `2023-10-31` and the tag to `sem1`.
 * `editEvent 3 l/UCC Theater` edits the 3rd event in the event list to change the location to `UCC Theater`.
 
-### Link a Member to an Event: `enrol`
+### Enrol a Member to an Event: `enrol`
 
-Links a member to an event.
+Enrols a member to an event.
 
 Format: `enrol m/MEMBER_INDEX e/EVENT_INDEX [h/NUMBER_OF_HOURS] [r/REMARK]`
 
-* Links the member at the specified `MEMBER_INDEX` to the event at the specified `EVENT_INDEX` with `NUMBER_OF_HOURS` specifying the number of hours that the member contributed and `REMARK` stating extra remarks about the member and event.
+* Enrols the member at the specified `MEMBER_INDEX` to the event at the specified `EVENT_INDEX` with `NUMBER_OF_HOURS` specifying the number of hours that the member contributed and `REMARK` stating extra remarks about the member and event.
 * The `MEMBER_INDEX`/`EVENT_INDEX` refers to the index number shown in the displayed member/event list.
 * The `MEMBER_INDEX`/`EVENT_INDEX` **must be a positive integer** that is within the range of the length of the member/event list.
 * The `NUMBER_OF_HOURS` **must be a positive integer** and **must be less than or equal to 2147483647**.
 
 Examples:
-* `enrol m/1 e/5 h/3 r/did planning` links the 1st member in the member list to the 5th event in the event list, where the member had 3 hours of contributions to that event and has a remark stating that the member "did planning"".
-* `enrol m/5 e/1` links the 5th member in the member list to the 1st event in the event list.
+* `enrol m/1 e/5 h/3 r/did planning` enrols the 1st member in the member list to the 5th event in the event list, where the member had 3 hours of contributions to that event and has a remark stating that the member "did planning".
+* `enrol m/5 e/1` enrols the 5th member in the member list to the 1st event in the event list.
 
-### Unlink a Member from an Event: `unenrol`
+### Unenrol a Member from an Event: `unenrol`
 
-Unlink a member from an event.
+Unenrol a member from an event.
 
 Format: `unenrol m/MEMBER_INDEX e/EVENT_INDEX`
 
-* Unlink the member at the specified `MEMBER_INDEX` from the event at the specified `EVENT_INDEX`.
+* Unenrol the member at the specified `MEMBER_INDEX` from the event at the specified `EVENT_INDEX`.
 * The member at `MEMBER_INDEX` must be a part of the event at `EVENT_INDEX`.
 * The `MEMBER_INDEX`/`EVENT_INDEX` refers to the index number shown in the displayed member/event list.
 * The `MEMBER_INDEX`/`EVENT_INDEX` **must be a positive integer** that is within the range of the length of the member/event list.
 
 
 Examples:
-* `unenrol m/1 e/5` unlinks the 1st member in the member list from the 5th event in the event list.
-* `unenrol m/5 e/1` unlinks the 5th member in the member list from the 1st event in the event list.
+* `unenrol m/1 e/5` unenrols the 1st member in the member list from the 5th event in the event list.
+* `unenrol m/5 e/1` unenrols the 5th member in the member list from the 1st event in the event list.
 
 ### Edit an enrolment: `editEnrolment`
 Edits the enrolment details of a specified member at a specified event with the specified attributes.
@@ -193,7 +195,7 @@ Examples:
 
 ### List all Members and all Events : `list`
 
-List all members and all events in the CCA in 2 separate columns.
+List all members and all events in the CCA in two separate columns.
 
 Format: `list`
 
@@ -262,6 +264,18 @@ Redoes a command that the user has undone previously.
 
 Format: `redo`
 
+### Help: `help`
+
+Displays a pop-out window that shows a link to this User Guide.
+
+Format: `help`
+
+### Exit: `exit`
+
+Closes CCACommander.
+
+Format: `exit`
+
 ### Recall previous commands
 
 CCA Leaders can quickly recall previously entered commands for convenience. Example use cases include marking attendance for a group of members, editing slightly wrong details and more.
@@ -326,4 +340,5 @@ Action | Format, Examples
 **Find event in list** | `findEvent KEYWORD [MORE_KEYWORDS]` <br> e.g.`findEvent party`
 **Redo** | `redo`
 **Undo** | `undo`
-**Help** | coming soon...
+**Help** | `help`
+**Exit** | `exit`
