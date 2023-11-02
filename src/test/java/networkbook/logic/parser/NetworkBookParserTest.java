@@ -21,6 +21,7 @@ import networkbook.logic.commands.ExitCommand;
 import networkbook.logic.commands.FindCommand;
 import networkbook.logic.commands.HelpCommand;
 import networkbook.logic.commands.ListCommand;
+import networkbook.logic.commands.OpenEmailCommand;
 import networkbook.logic.commands.OpenLinkCommand;
 import networkbook.logic.commands.RedoCommand;
 import networkbook.logic.commands.SaveCommand;
@@ -131,6 +132,14 @@ public class NetworkBookParserTest {
         String userInput = OpenLinkCommand.COMMAND_WORD + " 1 " + CliSyntax.PREFIX_INDEX + " 1 ";
         Command actualCommand = parser.parseCommand(userInput);
         Command expectedCommand = new OpenLinkCommand(Index.fromOneBased(1), Index.fromOneBased(1));
+        assertEquals(expectedCommand, actualCommand);
+    }
+
+    @Test
+    public void parseCommand_openEmail() throws Exception {
+        String userInput = OpenEmailCommand.COMMAND_WORD + " 1 " + CliSyntax.PREFIX_INDEX + " 1 ";
+        Command actualCommand = parser.parseCommand(userInput);
+        Command expectedCommand = new OpenEmailCommand(Index.fromOneBased(1), Index.fromOneBased(1));
         assertEquals(expectedCommand, actualCommand);
     }
 

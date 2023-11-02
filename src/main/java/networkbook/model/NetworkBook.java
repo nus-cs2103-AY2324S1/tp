@@ -13,6 +13,7 @@ import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import networkbook.commons.core.index.Index;
 import networkbook.commons.util.ToStringBuilder;
+import networkbook.model.person.Email;
 import networkbook.model.person.Link;
 import networkbook.model.person.Person;
 import networkbook.model.util.UniqueList;
@@ -137,11 +138,30 @@ public class NetworkBook implements ReadOnlyNetworkBook {
     /**
      * Opens the link at {@code linkIndex} in the link list of the person
      * at index {@code personIndex}.
+     * @return The link that has been opened.
      */
     public Link openLink(Index personIndex, Index linkIndex) throws IOException {
         return persons.consumeAndComputeItem(personIndex.getZeroBased(),
                 person -> person.openLink(linkIndex), person -> person.getLink(linkIndex.getZeroBased()));
     }
+
+    /**
+     * Checks if the indices for a link of a contact is valid.
+     */
+    public boolean isValidEmailIndex(Index personIndex, Index emailIndex) {
+        return persons.test(personIndex.getZeroBased(), person -> person.isValidEmailIndex(emailIndex));
+    }
+
+    /**
+     * Opens the email at {@code emailIndex} in the email list of the person
+     * at index {@code personIndex}.
+     * @return The email that has been opened.
+     */
+    public Email openEmail(Index personIndex, Index emailIndex) throws IOException {
+        return persons.consumeAndComputeItem(personIndex.getZeroBased(),
+                person -> person.openEmail(emailIndex), person -> person.getEmail(emailIndex.getZeroBased()));
+    }
+
     //// util methods
     @Override
     public String toString() {
