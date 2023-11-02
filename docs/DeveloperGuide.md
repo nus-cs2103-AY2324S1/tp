@@ -100,7 +100,7 @@ The `UI` component,
 * executes user commands using the `Logic` component.
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
-* depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
+* depends on some classes in the `Model` component, as it displays `Member`, `Applicant` and `Tag` objects residing in the `Model`.
 
 ### Logic component
 
@@ -160,11 +160,10 @@ The `Model` component,
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they
   should make sense on their own without depending on other components)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
+<img src="images/ModelPersonClassDiagram.png" width="530" />
 
-<img src="images/BetterModelClassDiagram.png" width="450" />
-
-</div>
+The `Member` and `Applicant` classes both extend from the abstract `Person` class, and each of these classes have the
+associated fields specific to them.
 
 ### Storage component
 
@@ -338,19 +337,20 @@ clipboard.
 * Step 4: The `CopyApplicantCommand` calls the copies the applicant's details given by the `Applicant` `detailsToCopy()`
   method into the clipboard.
 
-### \[Proposed\] View all available tags
+### View all available tags
 
 The view tags mechanism lists all available tags in the address book that a user can use to tag a member.
-The `ViewTagsCommand` object's `execute()` method is called. All available tags in the address book are shown to the
-user in the tags list.
+All available tags in the address book are shown to the user in the tags list.
+When a new member is added, deleted or edited, the `updateTags` method is called to update the list of available tags.
 
-<img src="images/TagListClassDiagram.png" width="200" alt="TagListClassDiagram"/>
+<img src="images/ViewTagsSequenceDiagram.png" width="543" alt="ViewTagsSequenceDiagram"/>
 
-The implementation will follow the Observer design pattern, where the UI will observe the changes made to the list of
-tags
-available for the user to tag other members. The `TagsListPanel` will implement the `Observer` interface and the
-`TagList` class will have a method `notifyUis()` to notify the `Observer` of its changes and an `addUi()` method to
-add classes implementing `Observer` that will be updated of its changes.
+In the above diagram, when the `DeleteMemberCommand::execute` method is called,`Member` is deleted from 
+the `ModelManager` using the `deleteMember()` method, which then updates the `tags` in `AddressBook` using 
+the `updateTags()` method.
+
+`tags` is an `ObservableList` which will update the `TagsListPanel` UI component when there is a change in the `tags`
+list.
 
 ### \[Proposed\] Allocating tasks to Members
 
