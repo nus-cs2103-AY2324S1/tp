@@ -3,10 +3,38 @@ layout: page
 title: User Guide
 ---
 
-* Table of Contents
-  {:toc}
+## Table of Contents
+
+1. [Introduction](#introduction)
+2. [Quick Start](#quick-start)
+3. [Key Information](#key-information)
+   1. [User Interface](#user-interface) 
+   2. [Structure of a job application](#structure-of-a-job-application)
+   3. [Valid statuses](#valid-statuses)
+   4. [Valid job types](#valid-job-types)
+   5. [Structure of an interview](#structure-of-an-interview)
+   6. [Valid interview types](#valid-interview-types)
+   7. [Command Format](#command-format)
+4. [Features](#features)
+   1. [Command Summary](#command-summary)
+   2. [Asking for help: `help`](#asking-for-help--help)
+   3. [Listing all applications: `list`](#listing-all-applications--list)
+   4. [Adding an application: `add`](#adding-an-application--add)
+   5. [Deleting an application: `delete`](#deleting-an-application--delete)
+   6. [Editing an application: `edit`](#editing-an-application--edit)
+   7. [Finding an application: `find`](#finding-an-application--find)
+   8. [Sorting the applications: `sort`](#sorting-all-applications--sort)
+   9. [Interview Add Command](#adding-an-interview--interview-add) 
+   10. [Interview Delete Command](#deleting-an-application--delete) 
+   11. [Interview Edit Command](#editing-an-interview--interview-edit)
+   12. [Clear Command](#clearing-all-applications--clear)
+   13. [Exit Command](#exiting-the-programme--exit)
+5. [FAQ](#faq)
+6. [Glossary](#glossary)
 
 --------------------------------------------------------------------------------------------------------------------
+
+## Introduction
 
 JobFindr is a **Contact Book app** for NUS fresh graduates who are looking for jobs.
 
@@ -27,8 +55,7 @@ applications.
 5. A GUI similar to the below should appear in a few seconds. Note that the app contains some sample data.<br><br>
    ![Ui](images/Ui.png)
 
-6. Type the command in the command box and press Enter to execute it. For example, typing **`help`** and pressing Enter
-   will
+6. Type the command in the command box and press Enter to execute it. For example, typing **`help`** and pressing Enter will
    open the help window.<br>
    Some example commands you can try:
 
@@ -59,25 +86,27 @@ applications.
 |----------|--------|---------------------------------------------------------------------------------------------------------------------|-----------|---------------|
 | Company  | `c/`   | No restrictions                                                                                                     | No        | Alphabetical  |
 | Role     | `r/`   | Must only contain alphanumeric characters and spaces                                                                | No        | Alphabetical  |
-| Status   | `s/`   | Possible values in "[Valid statuses and job types](#valid-statuses-and-job-types)"                                  | No        | Alphabetical  |
+| Status   | `s/`   | Possible values in "[Valid statuses](#valid-statuses)"                                                              | No        | Alphabetical  |
 | Industry | `i/`   | Must start with an alphanumeric character                                                                           | Yes       | Alphabetical  |
 | Deadline | `d/`   | Must be in the format MMM dd yyyy HHmm (e.g. Dec 31 2030 1200) and cannot be earlier than the current date and time | Yes       | Chronological |
-| Type     | `t/`   | Possible values in "[Valid statuses and job types](#valid-statuses-and-job-types)"                                  |           |               |
+| Type     | `t/`   | Possible values in "[Valid job types](#valid-job-types)"                                                            |           |               |
 
-### Valid statuses and job types
+### Valid statuses
 
 The following are valid statuses:
 
-| Status            | Remark                                                                                  |
+| Status            | Remarks                                                                                 |
 |-------------------|-----------------------------------------------------------------------------------------|
 | `TO_BE_SUBMITTED` | An application that you plan to apply for. The default status if no status is specified |
 | `PENDING`         | An application that you have applied for but have yet to receive a result               |
 | `APPROVED`        | An application that you have received a job offer for                                   |
 | `REJECTED`        | An application that you have been rejected for                                          |
 
+### Valid job types
+
 The following are valid job types:
 
-| Job Type     | Remark            |
+| Job Type     | Remarks           |
 |--------------|-------------------|
 | `FULL_TIME`  | A full time job   |
 | `PART_TIME`  | A part time job   |
@@ -88,6 +117,28 @@ The following are valid job types:
 | `VOLUNTEER`  | A volunteered job |
 
 ### Structure of an interview
+
+| Field    | Prefix | Remarks                                                                                                             | Optional? |
+|----------|--------|---------------------------------------------------------------------------------------------------------------------|-----------|
+| Type     | `t/`   | Possible values in "[Valid interview types](#valid-interview-types)"                                                | No        |
+| DateTime | `d/`   | Must be in the format MMM dd yyyy HHmm (e.g. Dec 31 2030 1200) and cannot be earlier than the current date and time | No        |
+| Address  | `a/`   | Must start with an alphanumeric character                                                                           | No        |
+
+### Valid interview types
+
+The following are valid interview types:
+
+| Interview Type | Remarks                 |
+|----------------|-------------------------|
+| `BEHAVIOURAL`  | A behavioural interview |
+| `TECHNICAL`    | A technical interview   |
+| `CASE`         | A case interview        |
+| `GROUP`        | A group interview       |
+| `PHONE`        | A phone interview       |
+| `VIDEO`        | A video interview       |
+| `ONLINE`       | An online interview     |
+| `ONSITE`       | An onsite interview     |
+| `OTHER`        | Other interviews        |
 
 ### Command format
 
@@ -112,14 +163,54 @@ The following are valid job types:
   ignored.<br>
     * e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
-* The same prefix cannot be used multiple times in the same command.
-    * e.g. `add r/Cleaner c/Google c/Microsoft` is an invalid input.
+* The same prefix cannot be used multiple times in the same command. 
+  * e.g. `add r/Cleaner c/Google c/Microsoft` is an invalid input. 
 
 
 * `INDEX` refers to the index number of the chosen application in the displayed application list and must be a _positive
   integer_ 1, 2, 3, …
 
 </div>
+
+--------------------------------------------------------------------------------------------------------------------
+
+## Command summary
+
+| Action               | Format                                                                                   |
+|----------------------|------------------------------------------------------------------------------------------|
+| **Add**              | `add c/COMPANY r/ROLE [d/DEADLINE] [s/STATUS] [i/INDUSTRY] [t/JOB_TYPE]`                 |
+| **Edit**             | `edit INDEX [c/COMPANY] [r/ROLE] [d/DEADLINE] [s/STATUS] [i/INDUSTRY] [t/JOB_TYPE]`      |
+| **Delete**           | `delete INDEX`                                                                           |
+| **List**             | `list`                                                                                   |
+| **Find**             | `find [KEYWORDS] [c/COMPANY] [r/ROLE] [d/DEADLINE] [s/STATUS] [i/INDUSTRY] [t/JOB_TYPE]` |
+| **Sort**             | `sort FIELD_SPECIFIER`                                                                   |
+| **Interview add**    | `interview add INDEX t/TYPE d/DATETIME a/ADDRESS`                                        |
+| **Interview delete** |                                                                                          |
+| **Interview edit**   |                                                                                          |
+| **Help**             | `help`                                                                                   |
+| **Clear**            | `clear`                                                                                  |
+| **Exit**             | `exit`                                                                                   |
+
+--------------------------------------------------------------------------------------------------------------------
+
+## Features
+
+### Asking for help: `help`
+
+Shows a list of commands and how they can be used.
+
+**Format:** `help`
+
+---
+
+### Listing all applications : `list`
+
+Shows a list of all applications in the list in alphabetical order.
+
+**Format:** `list`
+
+**UI mockup:**
+![ListCommand](images/user-guide/ListCommand.png)
 
 ---
 
@@ -142,24 +233,6 @@ Adds a job application to the list.
 
 ---
 
-### Editing an application : `edit`
-
-Edits an application in the list.
-
-**Format:** `edit INDEX [c/COMPANY] [r/ROLE] [d/DEADLINE] [s/STATUS] [i/INDUSTRY] [t/JOB_TYPE]`
-
-* Edits the application to the company at the specified `INDEX`.
-* At least one of the optional fields must be provided.
-
-**Examples:**
-
-* `edit 1 r/Announcer`
-  Changes the role of the 1st job application to an announcer.
-* `edit 5 s/approved t/volunteer`
-  Changes the status and job type of the 5th job application to `APPROVED` and volunteer respectively.
-
----
-
 ### Deleting an application : `delete`
 
 Deletes the specified application from the list.
@@ -178,14 +251,21 @@ Deletes the specified application from the list.
 
 ---
 
-### Listing all applications : `list`
+### Editing an application : `edit`
 
-Shows a list of all applications in the list in alphabetical order.
+Edits an application in the list.
 
-**Format:** `list`
+**Format:** `edit INDEX [c/COMPANY] [r/ROLE] [d/DEADLINE] [s/STATUS] [i/INDUSTRY] [t/JOB_TYPE]`
 
-**UI mockup:**
-![ListCommand](images/user-guide/ListCommand.png)
+* Edits the application to the company at the specified `INDEX`.
+* At least one of the optional fields must be provided.
+
+**Examples:**
+
+* `edit 1 r/Announcer`
+  Changes the role of the 1st job application to an announcer.
+* `edit 5 s/approved t/volunteer`
+  Changes the status and job type of the 5th job application to `APPROVED` and volunteer respectively.
 
 ---
 
@@ -210,7 +290,7 @@ Finds all applications with the specified fields containing any of the given key
 
 ---
 
-### Sorting the list : `sort`
+### Sorting all applications : `sort`
 
 Sorts the list based on the field specifier provided.
 
@@ -229,11 +309,26 @@ Sorts the list based on the field specifier provided.
 
 ---
 
-### Asking for help: `help`
+### Adding an interview: `interview add`
 
-Shows a list of commands and how they can be used.
+Adds an interview to the specified application from the list.
 
-**Format:** `help`
+**Format:** `interview add INDEX t/TYPE d/DATETIME a/ADDRESS`
+
+**Examples:**
+
+* `interview add 1 t/Technical d/Nov 12 2022 1200 a/Home`
+  Adds a technical interview at Nov 12 2022 1200 at Home to the first application in the list.
+
+**UI mockup:**
+
+---
+
+### Deleting an interview: `interview delete`
+
+---
+
+### Editing an interview: `interview edit`
 
 ---
 
@@ -253,16 +348,8 @@ Exits the program.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Command summary
+## FAQ
 
-| Action     | Format                                                                                   |
-|------------|------------------------------------------------------------------------------------------|
-| **Add**    | `add [c/COMPANY] [r/ROLE] [d/DEADLINE] [s/STATUS] [i/INDUSTRY] [t/JOB_TYPE]`             |
-| **Edit**   | `edit INDEX [c/COMPANY] [r/ROLE] [d/DEADLINE] [s/STATUS] [i/INDUSTRY] [t/JOB_TYPE]`      |
-| **Delete** | `delete INDEX`                                                                           |
-| **List**   | `list`                                                                                   |
-| **Find**   | `find [KEYWORDS] [c/COMPANY] [r/ROLE] [d/DEADLINE] [s/STATUS] [i/INDUSTRY] [t/JOB_TYPE]` |
-| **Sort**   | `sort FIELD_SPECIFIER`                                                                   |
-| **Help**   | `help`                                                                                   |
-| **Clear**  | `clear`                                                                                  |
-| **Exit**   | `exit`                                                                                   |
+--------------------------------------------------------------------------------------------------------------------
+
+## Glossary
