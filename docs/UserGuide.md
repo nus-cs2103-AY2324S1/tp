@@ -69,6 +69,8 @@ hospital management tasks done faster than the other apps in the industry.
         - [Finding patients by name: `find-p`](#finding-patients-by-name-find)
 
         - [Finding patients by illness: `find-i`](#finding-patients-by-illness-find-illness)
+      
+        - [Sorting patients: `sort-p`](#sorting-patients-sort-p)
 
     - [Appointment Commands](#appointment-commands)
 
@@ -88,7 +90,7 @@ hospital management tasks done faster than the other apps in the industry.
 
         - [Displaying all upcoming appointments: `upcoming`](#displaying-all-upcoming-appointments-upcoming)
 
-        - [Sorting appointments: `sort-a`](#sorting-appointments-sort)
+        - [Sorting appointments: `sort-a`](#sorting-appointments-sort-a)
 
     - [Miscellaneous Commands](#miscellaneous-commands)
 
@@ -402,6 +404,22 @@ This example command will find all patients with illnesses that contain either `
   with illnesses that contain the full `flu` but will not find patients
   with illnesses such as `influenza`.
 
+### Sorting patients: `sort-p`
+
+This command sorts the patients list by name or birthday, in ascending or descending order.
+
+:clipboard: **Format**: `sort-p DIRECTION by=ATTRIBUTE`
+
+:paperclip: **Example**: `sort-p asc by=name`
+
+This example command will sort the patients by the _names_ in _ascending order_.
+
+:pencil2: **Notes:**
+
+- The direction can only be `asc` or `desc`, i.e. ascending or descending order respectively.
+
+- The attribute to sort the patients by can only be `name` or `birthday`.
+
 ## Appointment Commands
 
 ### Scheduling a new appointment: `schedule`
@@ -596,6 +614,7 @@ Return to the [Table of Contents](#table-of-contents)
 | [**Displaying all patients**](#displaying-all-patients-patients)                                             | `patients`                                                                                                                                                                                                                                                             |
 | [**Finding patients by name**](#finding-patients-by-name-find-p)                                             | `find-p NAME`<br> e.g., `find alex david`                                                                                                                                                                                                                              |
 | [**Finding patients by illness**](#finding-patients-by-illness-find-i)                                       | `find-i ILLNESS`<br> e.g., `find-i fever flu`                                                                                                                                                                                                                          |
+| [**Sorting patients`**](#sorting-patients-sort-p)                                                            | `sort-p DIRECTION by=ATTRIBUTE`<br> e.g., `sort-p asc by=name`                                                                                                                                                                                                         |
 | [**Scheduling a new appointment**](#scheduling-a-new-appointment-schedule)                                   | `schedule patient=PATIENT start=START end=END description=DESCRIPTION priority=PRIORITY` <br> e.g., `schedule patient=Alex Yeoh start=2023/10/20 12:00 end=2023/10/20 13:00 description=Follow up on Chest X-Ray priority=high`                                        |
 | [**Rescheduling an appointment**](#rescheduling-an-appointment-reschedule)                                   | `reschedule INDEX start=START end=END`<br> e.g., `reschedule 1 start=2023/05/02 09:00 end=2023/05/02 11:00`                                                                                                                                                            |
 | [**Triaging an appointment**](#triaging-an-appointment-triage)                                               | `triage INDEX priority=PRIORITY`<br> e.g., `triage 1 priority=high`                                                                                                                                                                                                    |
