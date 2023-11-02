@@ -169,7 +169,7 @@ Examples:
   <br>
   ![result for 'delete John Doe'](images/ug_images/deletedResult.png)
 
-### update sec level : `uplevel`, `undolevel`
+### Update sec level : `uplevel`, `undolevel`
 
 - `uplevel` : update the sec levels for all students and remove all sec level 4 students.
   - `undolevel` : restore the student records before the last update.
@@ -205,11 +205,14 @@ Examples:
 
 Sort the list of students data that fulfills the given conditions.
 
-Format: `sort in/ [DESCRIPTION]`
+Format: `sort in/[DESCRIPTION]` 
+
+* `DESCRIPTION` should be `ASC` or `DESC`, non-case-sensitive.
 
 Examples:
-* `sort in/ ASC` <br>
+* `sort in/ASC` <br>
   ![result for 'sort in/ ASC'](images/ug_images/sortedResult.png)
+
 
 ### Clearing all entries : `clear`
 
@@ -252,6 +255,20 @@ Examples:
 * `bar g/` will show a bar chart categorized by student gender.
 * `bar l/` will show a bar chart categorized by student sec level.
 * `bar s/` will show a bar chart categorized by student subject.
+
+
+### Export visual representation : `export`
+
+Export the statistical table or bar chart into PNG format.
+
+Format: `export v/[VISUAL]` 
+
+* `VISUAL` should be `TABLE` or `BAR`, non-case-sensitive.
+* `TABLE` indicates exporting the table created, while `BAR` indicates exporting the bar chart created.
+* A table should be created before exporting, this applies to exporting bar chart as well.
+
+Examples:
+* `export v/TABLE` <br>
 
 ### Saving the data
 
