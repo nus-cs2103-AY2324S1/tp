@@ -89,6 +89,13 @@ public class TaskManager implements ReadOnlyTaskManager {
     }
 
     /**
+     * Returns the sorting order.
+     */
+    public Comparator<Task> getSortingOrder() {
+        return sortingOrder;
+    }
+
+    /**
      * Sets the sorting order of the task list to the specified comparator type.
      */
     public void sortTasksBy(String comparatorType) {

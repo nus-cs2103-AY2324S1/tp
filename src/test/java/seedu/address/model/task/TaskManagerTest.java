@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalTasks.ASSIGNMENT;
 import static seedu.address.testutil.TypicalTasks.HYDRATION;
+import static seedu.address.testutil.TypicalTasks.MEAL;
 
 import org.junit.jupiter.api.Test;
 
@@ -40,6 +41,30 @@ class TaskManagerTest {
     public void deleteTask_taskFound_success() {
         taskManager.addTask(ASSIGNMENT);
         assertEquals(ASSIGNMENT, taskManager.deleteTask(1));
+    }
+
+    @Test
+    public void sortDescription_success() {
+        taskManager.addTask(ASSIGNMENT);
+        taskManager.addTask(MEAL);
+
+        taskManager.sortTasksBy("Deadline");
+        taskManager.sortTasksBy("Description");
+
+        assertTrue(taskManager.deleteTask(1).equals(MEAL));
+        assertTrue(taskManager.deleteTask(1).equals(ASSIGNMENT));
+    }
+
+    @Test
+    public void sortDeadline_success() {
+        taskManager.addTask(ASSIGNMENT);
+        taskManager.addTask(MEAL);
+
+        taskManager.sortTasksBy("Description");
+        taskManager.sortTasksBy("Deadline");
+
+        assertTrue(taskManager.deleteTask(1).equals(ASSIGNMENT));
+        assertTrue(taskManager.deleteTask(1).equals(MEAL));
     }
 
     @Test
