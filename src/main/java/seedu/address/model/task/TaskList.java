@@ -90,7 +90,7 @@ public class TaskList implements Iterable<Task> {
      * Returns the backing list as an unmodifiable {@code ObservableList}.
      */
     public ObservableList<Task> asUnmodifiableList() {
-        return internalList;
+        return internalUnmodifiableList;
     }
 
     @Override
