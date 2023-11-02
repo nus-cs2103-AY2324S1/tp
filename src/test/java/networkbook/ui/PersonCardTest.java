@@ -16,6 +16,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.List;
+import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Consumer;
 
 import org.junit.jupiter.api.BeforeAll;
@@ -249,5 +250,30 @@ public class PersonCardTest {
         testChildLabel(priorityPane, 0, EXPECTED_EMPTY_FIELD_TEXT);
     }
 
+    @Test
+    public void linkHyperlink_onAction_callsMainCallback() {
+        AtomicReference<String> callbackCommand = new AtomicReference<String>("");
+        String expectedCommand = "open 1 /index 1";
+        Consumer<String> callback = (str) -> callbackCommand.set(str);
+        Person person = new PersonBuilder().withName("Bob").withLinks(List.of(VALID_LINK_BOB)).build();
+        PersonCard personCard = new PersonCard(person, 1, callback);
+        FlowPane linksPane = personCard.getLinks();
+        Hyperlink link = (Hyperlink) linksPane.getChildren().get(0);
+        link.fire();
+        assertEquals(expectedCommand, callbackCommand.get());
+    }
+
+    @Test
+    public void emailHyperlink_onAction_callsMainCallback() {
+        AtomicReference<String> callbackCommand = new AtomicReference<String>("");
+        String expectedCommand = "email 1 /index 1";
+        Consumer<String> callback = (str) -> callbackCommand.set(str);
+        Person person = new PersonBuilder().withName("Bob").withEmails(List.of(VALID_EMAIL_BOB)).build();
+        PersonCard personCard = new PersonCard(person, 1, callback);
+        FlowPane emailsPane = personCard.getLinks();
+        Hyperlink link = (Hyperlink) emailsPane.getChildren().get(0);
+        link.fire();
+        assertEquals(expectedCommand, callbackCommand.get());
+    }
 
 }

@@ -2,6 +2,9 @@ package networkbook.ui;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import java.util.concurrent.atomic.AtomicBoolean;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -54,4 +57,12 @@ public class FieldHyperlinkTest {
         });
     }
 
+    @Test
+    public void action_onFire_performsAction() {
+        AtomicBoolean hasRun = new AtomicBoolean(false);
+        Runnable action = () -> hasRun.set(true);
+        FieldHyperlink link = new FieldHyperlink("", action);
+        link.fire();
+        assertTrue(hasRun.get());
+    }
 }
