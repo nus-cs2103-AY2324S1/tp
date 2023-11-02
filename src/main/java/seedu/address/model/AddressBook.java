@@ -3,13 +3,16 @@ package seedu.address.model;
 import static java.util.Objects.hash;
 import static java.util.Objects.requireNonNull;
 
+import java.util.HashSet;
 import java.util.List;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.person.Applicant;
 import seedu.address.model.person.Member;
 import seedu.address.model.person.UniquePersonList;
+import seedu.address.model.tag.Tag;
 
 /**
  * Wraps all data at the address-book level
@@ -19,6 +22,7 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniquePersonList<Member> members;
     private final UniquePersonList<Applicant> applicants;
+    private final ObservableList<Tag> tags = FXCollections.observableArrayList();
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -163,6 +167,24 @@ public class AddressBook implements ReadOnlyAddressBook {
     @Override
     public ObservableList<Applicant> getApplicantList() {
         return applicants.asUnmodifiableObservableList();
+    }
+
+    @Override
+    public ObservableList<Tag> getTagList() {
+        updateTags();
+        return tags;
+    }
+
+    /**
+     * Updates the tags list to contain all tags in the address book.
+     */
+    public void updateTags() {
+        ObservableList<Member> allMembers = getMemberList();
+        HashSet<Tag> allTags = new HashSet<>();
+        for (Member member : allMembers) {
+            allTags.addAll(member.getTags());
+        }
+        tags.setAll(allTags);
     }
 
     @Override

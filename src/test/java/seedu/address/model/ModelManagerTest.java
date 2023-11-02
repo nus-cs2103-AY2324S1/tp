@@ -108,6 +108,20 @@ public class ModelManagerTest {
     }
 
     @Test
+    public void deleteMember_memberInAddressBook_returnsFalse() {
+        modelManager.addMember(ALAN_MEMBER);
+        modelManager.deleteMember(ALAN_MEMBER);
+        assertFalse(modelManager.hasMember(ALAN_MEMBER));
+    }
+
+    @Test
+    public void deleteApplicant_applicantInAddressBook_returnsFalse() {
+        modelManager.addApplicant(ALICE_APPLICANT);
+        modelManager.deleteApplicant(ALICE_APPLICANT);
+        assertFalse(modelManager.hasApplicant(ALICE_APPLICANT));
+    }
+
+    @Test
     public void getFilteredMemberList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredMemberList().remove(0));
     }
