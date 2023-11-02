@@ -43,7 +43,7 @@ public class FindCommandParser implements Parser<FindCommand> {
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_COURSE, PREFIX_TAG,
                         PREFIX_DAY, PREFIX_FROM, PREFIX_TO);
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_COURSE, PREFIX_TAG,
-                        PREFIX_DAY, PREFIX_FROM, PREFIX_TO);
+                PREFIX_DAY, PREFIX_FROM, PREFIX_TO);
         if (trimmedArgs.isEmpty()) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
@@ -63,9 +63,9 @@ public class FindCommandParser implements Parser<FindCommand> {
         }
         if (argMultimap.getValue(PREFIX_DAY).isPresent()
                 && argMultimap.getValue(PREFIX_FROM).isPresent()
-                    && argMultimap.getValue(PREFIX_TO).isPresent()) {
+                && argMultimap.getValue(PREFIX_TO).isPresent()) {
             try {
-                int dayOfWeek = Integer.parseInt(argMultimap.getValue(PREFIX_DAY).orElse(null));
+                int dayOfWeek = Integer.parseInt(argMultimap.getValue(PREFIX_DAY).get());
                 if (dayOfWeek < 1 || dayOfWeek > 5) {
                     throw new ParseException(EditFreeTimeCommand.MESSAGE_INVALID_DAY);
                 }
