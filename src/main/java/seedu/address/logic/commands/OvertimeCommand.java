@@ -113,7 +113,7 @@ public class OvertimeCommand extends Command {
         return new ToStringBuilder(this)
                 .add("targetId", targetId)
                 .add("changeInOvertimeHours", changeInOvertimeHours)
-                .add("increment", isIncrement)
+                .add("isIncrement", isIncrement)
                 .toString();
     }
 }
