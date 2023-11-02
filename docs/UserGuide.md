@@ -242,6 +242,29 @@ Events can be viewed from the calendar that appears on the right.
 Additionally, a list of all events are displayed by default at the bottom. This list at the bottom can be switched to a
 task list with the `switchList` command. More information can be found under `Viewing all Tasks`.
 
+### Adding an event to a contact
+
+Adds an event to a contact's calendar.
+
+Format: `addContactEvent INDEX d/DESCRIPTION ts/START_DATE_TIME ts/END_DATE_TIME`
+
+* Adds the event starting from `START_DATE_TIME` and ending at `END_DATE_TIME`
+* `START_DATE_TIME` and `END_DATE_TIME` must be in `yyyy-MM-dd HH:mm` format
+
+Example:
+* `addContactEvent 1 d/Team Meeting ts/2024-01-01 09:00 te/2024-01-01 11:00`
+
+### Deleting an event from a contact
+
+Deletes an event from a contact's calendar.
+
+Format `deleteContactEvent INDEX ts/START_DATE_TIME`
+
+* Deletes an event that contains the `START_DATE_TIME` from the contact
+
+Example:
+* `deleteContactEvent 1 ts/2024-01-01 09:00`
+
 ### Viewing another person's events: `viewContactEvents`
 
 Creates a pop-up that displays a list of all events of a calendar belonging to a person in the Addressbook.
@@ -311,11 +334,14 @@ Format: `save`
 
 ### Saving the data
 
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+All data is saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 ### Editing the data file
 
-AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+AddressBook data is saved automatically as a JSON file `[JAR file location]/data/addressbook.json`.
+Calendar data is saved automatically as a JSON file `[JAR file location]/data/calendar.json`.
+Task-list data is saved automatically as a JSON file `[JAR file location]/data/taskmanager.json`.
+Advanced users are welcome to update data directly by editing the data files.
 
 <box type="warning" seamless>
 
