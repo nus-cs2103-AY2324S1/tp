@@ -123,9 +123,8 @@ public class MarkAttendanceCommand extends Command {
             successMessage.append(errorMessage.toString());
         }
 
-        // Allows marked attendance to be shown immediately, but breaks all MarkAttendanceCommandTests
-        // ArrayList<Person> copyList = new ArrayList<>(lastShownList);
-        // model.addFilter(new SerializablePredicate(person -> copyList.contains(person)));
+        // TODO: Find a better way to refresh the address book to show marked attendance
+        model.setAddressBook(model.getAddressBook());
 
         return new CommandResult(successMessage.toString());
     }
