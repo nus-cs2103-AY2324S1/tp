@@ -90,13 +90,13 @@ public class AddressBookParser {
             return new HelpCommand();
 
         case AddEventCommand.COMMAND_WORD:
-            return new AddMeetingCommandParser().parse(arguments);
+            return new AddEventCommandParser().parse(arguments);
 
         case EditEventCommand.COMMAND_WORD:
-            return new EditMeetingCommandParser().parse(arguments);
+            return new EditEventCommandParser().parse(arguments);
 
         case DeleteEventCommand.COMMAND_WORD:
-            return new DeleteMeetingCommandParser().parse(arguments);
+            return new DeleteEventCommandParser().parse(arguments);
 
         case RemindCommand.COMMAND_WORD:
             return new RemindCommandParser().parse(arguments);
