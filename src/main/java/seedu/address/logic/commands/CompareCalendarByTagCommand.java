@@ -41,6 +41,6 @@ public class CompareCalendarByTagCommand extends Command {
 
         model.setComparisonCalendar(comparisonCalendar);
 
-        return new CommandResult(MESSAGE_SUCCESS, false, false, true);
+        return new CommandResult(MESSAGE_SUCCESS, false, false, true, false);
     }
 }

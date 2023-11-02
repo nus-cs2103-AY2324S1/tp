@@ -51,6 +51,6 @@ public class CompareCalendarByIndexCommand extends Command {
 
         model.setComparisonCalendar(combinedCalendar);
 
-        return new CommandResult(MESSAGE_SUCCESS, false, false, true);
+        return new CommandResult(MESSAGE_SUCCESS, false, false, true, false);
     }
 }

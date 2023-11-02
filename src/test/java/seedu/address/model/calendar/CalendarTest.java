@@ -122,7 +122,7 @@ public class CalendarTest {
 
     @Test
     public void hasEvents_noEvent_false() {
-        Calendar noEventCalendar = new Calendar();
+        UniMateCalendar noEventCalendar = new UniMateCalendar();
         assertFalse(noEventCalendar.hasEvents());
     }
 

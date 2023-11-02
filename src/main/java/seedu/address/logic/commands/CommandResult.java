@@ -32,23 +32,12 @@ public class CommandResult {
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
-    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, boolean showCalendarComparison) {
-        this.feedbackToUser = feedbackToUser;
-        this.showHelp = showHelp;
-        this.exit = exit;
-        this.showCalendarComparison = showCalendarComparison;
-        switchBottomList = false;
-        this.eventViewIndex = new ViewEventsIndicator(INVALID_INDEX);
-    }
-
-    /**
-     * Constructs a {@code CommandResult} with the specified fields.
-     */
-    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, boolean switchBottomList) {
+    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, boolean showCalendarComparison,
+                         boolean switchBottomList) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
         this.exit = exit;
-        showCalendarComparison = false;
+        this.showCalendarComparison = showCalendarComparison;
         this.switchBottomList = switchBottomList;
         this.eventViewIndex = new ViewEventsIndicator(INVALID_INDEX);
     }
@@ -58,7 +47,7 @@ public class CommandResult {
      * and other fields set to their default value.
      */
     public CommandResult(String feedbackToUser) {
-        this(feedbackToUser, false, false, false);
+        this(feedbackToUser, false, false, false, false);
     }
 
     /**
@@ -69,6 +58,7 @@ public class CommandResult {
         this.feedbackToUser = feedbackToUser;
         this.showHelp = false;
         this.exit = false;
+        this.showCalendarComparison = false;
         this.switchBottomList = false;
         this.eventViewIndex = new ViewEventsIndicator(eventViewIndex.getOneBased());
     }
