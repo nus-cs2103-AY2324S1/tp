@@ -70,8 +70,8 @@ public class BarChartWindow extends UiPart<Stage> {
             SubjectBarChartCommandResult subjectBarChartCommandResult = (SubjectBarChartCommandResult) commandResult;
             return createSubjectBarChart(subjectBarChartCommandResult);
         } else {
-            EnrolDateBarChartCommandResult enrolDateBarChartCommandResult
-                    = (EnrolDateBarChartCommandResult) commandResult;
+            EnrolDateBarChartCommandResult enrolDateBarChartCommandResult =
+                    (EnrolDateBarChartCommandResult) commandResult;
             return createEnrolDateBarChart(enrolDateBarChartCommandResult);
         }
     }
