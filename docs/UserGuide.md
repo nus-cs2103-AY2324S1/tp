@@ -430,17 +430,17 @@ _Details coming soon ..._
  Action                   | Format, Examples                                                                                                                                               
 --------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------
  **Create**               | `create t/CATEGORY NAME…​` <br> e.g. `create t/dept software`
- **Add**                  | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/[CATEGORY] TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague` 
+ **Add**                  | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/[CATEGORY] TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/developer t/intern` 
  **Remark**               | `remark r/REMARK` <br> e.g., `remark 1 r/Great attitude, hardworking`                                                                                          
  **View**                 | `view INDEX` <br> e.g., `view 1`                                                                                                                               
  **Add Github/LinkedIn**  | `addL INDEX u/USERNAME` or `addG INDEX u/USERNAME` e.g., `addL 1 u/alex-yeoh`, `addG 2 u/bernicesanders123`                                                    
  **Open Github/LinkedIn** | `linkedin INDEX` or `github INDEX` e.g., `linkedin 1`, `github 2`                                                                                              
  **Clear**                | `clear`                                                                                                                                                        
- **Delete**               | `delete INDEX`<br> e.g., `delete 3`                                                                                                                            
+ **Delete**               | `delete INDEX` or `delete (t/TAG [MORE TAGS] st/STATUS)` <br> e.g., `delete 3`, `delete t/intern st/rejected`                                                                                                                           
  **Set**                  | `set INDEX STATUS`<br> e.g., `set 2 Interviewed`                                                                                                               
  **Edit**                 | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/[CATEGORY] TAGNAME]... [sc/TAGNAME SCORE]​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com t\MarketingInterview sc\MarketingInterview 50`                                   
- **Search**               | `search (n/KEYWORD [MORE KEYWORDS] / st/KEYWORD [MORE KEYWORDS] / t/KEYWORD [MORE KEYWORDS])` <br> e.g., `search n/alex`
- **List**                 | `list so/ATTRIBUTE` <br> e.g. `list so/name`    `hello`
+ **Search**               | `search (n/NAME [MORE NAME] / st/STATUS [MORE STATUS] / t/TAGS [MORE TAGS])` <br> e.g., `search n/alex`
+ **List**                 | `list so/ATTRIBUTE` <br> e.g. `list so/name`
  **ListT**                | `listT`
  **Export**               | `export`                                                                                                                                                       
  **Help**                 | `help`

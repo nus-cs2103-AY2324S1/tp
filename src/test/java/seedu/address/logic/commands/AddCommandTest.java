@@ -248,7 +248,7 @@ public class AddCommandTest {
 
         @Override
         public void updateFilteredTagList(Predicate<Tag> predicate) {
-           throw new AssertionError("This method should not be called.");
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override
