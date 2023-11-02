@@ -71,6 +71,6 @@ public class DoctorCard extends UiPart<Region> {
                 .sorted(Comparator.comparing(Appointment::getAppointmentTime))
                 .forEach(appointment -> appointments.getChildren()
                         .add(new Label("Appointment with Patient: " + appointment.getPatient() + " at "
-                                + appointment.getAppointmentTime().format(Appointment.FORMATTER))));
+                                + appointment.getAppointmentTime().toString())));
     }
 }

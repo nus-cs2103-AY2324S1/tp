@@ -77,7 +77,7 @@ public class PatientCard extends UiPart<Region> {
                 .sorted(Comparator.comparing(Appointment::getAppointmentTime))
                 .forEach(appointment -> appointments.getChildren()
                         .add(new Label("Appointment with Doctor: " + appointment.getDoctor() + " at "
-                                + appointment.getAppointmentTime().format(Appointment.FORMATTER))));
+                                + appointment.getAppointmentTime().toString())));
 
         condition.setText("Condition: " + person.getCondition().value);
         bloodType.setText("Blood Type: " + person.getBloodType().value);

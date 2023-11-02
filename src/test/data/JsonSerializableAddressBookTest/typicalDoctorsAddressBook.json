@@ -14,13 +14,13 @@
         {
           "doctorIc": "S9712346B",
           "patientIc": "S8192320E",
-          "appointmentTime": "2022-02-14 13:30:00",
+          "appointmentTime": "2022-02-14 13:30",
           "status": "Scheduled"
         },
         {
           "doctorIc": "S9812345A",
           "patientIc": "S8192320E",
-          "appointmentTime": "2022-02-28 13:30:00",
+          "appointmentTime": "2022-02-28 13:30",
           "status": "Scheduled"
         }
       ],
@@ -40,7 +40,7 @@
         {
           "doctorIc": "S9712346B",
           "patientIc": "S8192320E",
-          "appointmentTime": "2022-02-14 13:30:00",
+          "appointmentTime": "2022-02-14 13:30",
           "status": "Scheduled"
         }
       ],

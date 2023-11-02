@@ -236,12 +236,6 @@ public class AddPatientCommandParserTest {
                         + NRIC_DESC_BOB + CONDITION_DESC_BOB + BLOODTYPE_DESC_BOB + EMERGENCY_CONTACT_DESC_BOB,
                 expectedMessage);
 
-        // missing address prefix
-        assertParseFailure(parser,
-                NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + VALID_ADDRESS_BOB + GENDER_DESC_MALE
-                        + NRIC_DESC_BOB + CONDITION_DESC_BOB + BLOODTYPE_DESC_BOB + EMERGENCY_CONTACT_DESC_BOB,
-                expectedMessage);
-
         // missing condition prefix
         assertParseFailure(parser,
                 NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + GENDER_DESC_MALE

@@ -3,20 +3,21 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_APPOINTMENT_TIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_BLOODTYPE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CONDITION;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DOCTOR_IC;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMERGENCY_CONTACT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GENDER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PATIENT_IC;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.testutil.Assert.assertThrows;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -71,6 +72,10 @@ public class CommandTestUtil {
     public static final String VALID_BLOODTYPE_BOB = "A+";
     public static final String VALID_BLOODTYPE_AMY = "A+";
     public static final String VALID_CONDITION_AMY = "Diabetes";
+    public static final String VALID_DATE_1 = "2022-02-14 13:30";
+    public static final String VALID_DATE_2 = "2022-02-28 13:30";
+    public static final String VALID_DATE_1_DESC = " " + PREFIX_APPOINTMENT_TIME + VALID_DATE_1;
+    public static final String VALID_DATE_2_DESC = " " + PREFIX_APPOINTMENT_TIME + VALID_DATE_2;
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
     public static final String NAME_DESC_CHERYL = " " + PREFIX_NAME + VALID_NAME_CHERYL;
@@ -106,6 +111,12 @@ public class CommandTestUtil {
     public static final String BLOODTYPE_DESC_BOB = " " + PREFIX_BLOODTYPE + VALID_BLOODTYPE_BOB;
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
+    public static final String APPOINTMENT_DOCTOR_NRIC_DESC_DEREK = " " + PREFIX_DOCTOR_IC + VALID_NRIC_DEREK;
+
+    public static final String APPOINTMENT_DOCTOR_NRIC_DESC_CHERYL = " " + PREFIX_DOCTOR_IC + VALID_NRIC_CHERYL;
+
+    public static final String APPOINTMENT_PATIENT_NRIC_DESC_BOB = " " + PREFIX_PATIENT_IC + VALID_NRIC_BOB;
+    public static final String APPOINTMENT_PATIENT_NRIC_DESC_AMY = " " + PREFIX_PATIENT_IC + VALID_NRIC_AMY;
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
@@ -116,17 +127,18 @@ public class CommandTestUtil {
     public static final String INVALID_EMERGENCY_CONTACT_DESC = " " + PREFIX_EMERGENCY_CONTACT + "+6A";
     public static final String INVALID_NRIC = "A1234567G";
     public static final String INVALID_GENDER_DESC = " " + PREFIX_GENDER + "Alien";
+
+    public static final String INVALID_APPOINTMENT_DOCTOR_NRIC_DESC = " " + PREFIX_DOCTOR_IC + INVALID_NRIC;
+
+    public static final String INVALID_APPOINTMENT_PATIENT_NRIC_DESC = " " + PREFIX_PATIENT_IC + INVALID_NRIC;
+    public static final String INVALID_DATE_DESC = " " + PREFIX_APPOINTMENT_TIME + "100-100-12";
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
     public static final EditCommand.EditPersonDescriptor DESC_AMY;
     public static final EditCommand.EditPersonDescriptor DESC_BOB;
     public static final EditCommand.EditPersonDescriptor DESC_CHERYL;
-    private static final EditCommand.EditPersonDescriptor DESC_DEREK;
-    private static final String VALID_DATE_1_DESC = "2022-02-14 13:30:00";
-    private static final String VALID_DATE_2_DESC = "2022-02-28 13:30:00";
-    private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-    public static final LocalDateTime VALID_DATE_1 = LocalDateTime.parse(VALID_DATE_1_DESC, formatter);
-    public static final LocalDateTime VALID_DATE_2 = LocalDateTime.parse(VALID_DATE_2_DESC, formatter);
+    public static final EditCommand.EditPersonDescriptor DESC_DEREK;
+
 
     static {
         DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)

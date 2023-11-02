@@ -8,6 +8,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import seedu.address.model.appointment.Appointment;
+import seedu.address.model.appointment.AppointmentTime;
 import seedu.address.model.person.Ic;
 
 /**
@@ -18,7 +19,7 @@ public class TypicalAppointment {
     public static final Appointment APPOINTMENT_1 = new AppointmentBuilder().build();
 
     public static final Appointment APPOINTMENT_2 = new AppointmentBuilder().withDoctorIc(new Ic(VALID_NRIC_CHERYL))
-            .withAppointmentTime(VALID_DATE_2).build();
+            .withAppointmentTime(new AppointmentTime(VALID_DATE_2)).build();
 
     private TypicalAppointment() {
     } // prevents instantiation

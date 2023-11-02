@@ -16,7 +16,7 @@ import seedu.address.model.person.Ic;
 import seedu.address.model.person.Patient;
 
 /**
- * Adds a person to the address book.
+ * Adds an Appointment to the address book.
  */
 public class AddAppointmentCommand extends Command {
 
@@ -56,6 +56,10 @@ public class AddAppointmentCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
+        if (toAdd.getDoctor().equals(toAdd.getPatient())) {
+            throw new CommandException(MESSAGE_SAME_DOCTOR_AND_PATIENT);
+        }
+
         Patient chosenPatient = findPatient(model);
         Doctor chosenDoctor = findDoctor(model);
         if (chosenPatient == null) {
@@ -65,24 +69,15 @@ public class AddAppointmentCommand extends Command {
             throw new CommandException(MESSAGE_INVALID_DOCTOR);
         }
 
-        // check that patient and doctor are not the same person
-        if (chosenPatient.isSamePerson(chosenDoctor)) {
-            throw new CommandException(MESSAGE_SAME_DOCTOR_AND_PATIENT);
-        }
-
-
-        // check that the patient and doctor do not have appointment scheduled at the same time
         if (chosenPatient.hasAppointmentAt(toAdd.getAppointmentTime())) {
             throw new CommandException(MESSAGE_DUPLICATE_APPOINTMENT_PATIENT);
         }
         if (chosenDoctor.hasAppointmentAt(toAdd.getAppointmentTime())) {
             throw new CommandException(MESSAGE_DUPLICATE_APPOINTMENT_DOCTOR);
         }
-        // add appointment to the specified doctor's appointment set
-        // add appointment to the specified patient's appointment set
+
         chosenPatient.addAppointment(toAdd);
         chosenDoctor.addAppointment(toAdd);
-
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
     }
 
