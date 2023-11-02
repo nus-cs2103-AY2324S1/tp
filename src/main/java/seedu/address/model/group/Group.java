@@ -19,7 +19,7 @@ import java.util.stream.Stream;
  * Class representing a group
  */
 public class Group {
-    public static final String MESSAGE_CONSTRAINTS = "Group names should be alphanumeric and must not be black";
+    public static final String MESSAGE_CONSTRAINTS = "Group names should be alphanumeric and must not be blank";
     private final ObservableList<Person> listOfGroupMates = FXCollections.observableArrayList();
     private final String groupName;
     private GroupRemark groupRemark;
