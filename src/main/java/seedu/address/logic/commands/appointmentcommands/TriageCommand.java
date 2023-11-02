@@ -70,7 +70,8 @@ public class TriageCommand extends Command {
                 String.format(MESSAGE_SUCCESS, Messages.format(triagedAppointment)), false, false, false, true);
     }
 
-    private static Appointment createChangedPriorityAppointment(Appointment appointmentToTriage, PriorityTag priorityTag) {
+    private static Appointment createChangedPriorityAppointment(Appointment appointmentToTriage,
+                                                                PriorityTag priorityTag) {
         assert appointmentToTriage != null;
 
         Person patient = appointmentToTriage.getPerson();
