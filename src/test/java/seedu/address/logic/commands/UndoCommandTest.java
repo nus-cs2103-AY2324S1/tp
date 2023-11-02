@@ -32,4 +32,17 @@ public class UndoCommandTest {
 
         assertEquals(expectedModel, model);
     }
+
+    @Test
+    public void execute_undoCommand_nullModel_success() {
+        UndoCommand undoCommand = new UndoCommand();
+
+        // Set the model to null
+        model = null;
+
+        CommandResult commandResult = undoCommand.execute(model);
+
+        assertEquals(UndoCommand.MESSAGE_UNDO_DONE, commandResult.getFeedbackToUser());
+    }
+
 }

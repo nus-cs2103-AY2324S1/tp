@@ -16,7 +16,7 @@ public class ClearCommand extends Command {
     public static final String MESSAGE_SUCCESS = "Address book has been cleared!";
     public static final String MESSAGE_USAGE = "This command will erase the entire Address Book.\n"
             + "Are you sure you want to do this? "
-            + "If you are sure, Enter 'reset confirm'";
+            + "If you are sure, Enter 'reset confirm'.";
 
     private final String confirmation;
 
