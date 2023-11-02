@@ -58,7 +58,7 @@ public class ReportCommandTest {
         ReportCommand reportCommand = new ReportCommand(employee.getId());
 
         String expectedMessage = String.format(Messages.MESSAGE_REPORT_STRING, employee.getName(),
-                employee.getOvertimeHours(), employee.getOvertimePay(), employee.getNumOfLeaves());
+                employee.getOvertimeHours(), employee.getOvertimePay(), employee.getNumOfLeaves(), employee.getRemarkList());
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.setEmployee(model.getFilteredEmployeeList().get(0), employee);
