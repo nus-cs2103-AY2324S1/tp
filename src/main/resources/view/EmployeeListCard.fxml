@@ -9,6 +9,8 @@
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
 <HBox id="cardPane" fx:id="cardPane" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
   <GridPane HBox.hgrow="ALWAYS">
     <columnConstraints>
@@ -27,13 +29,54 @@
         </Label>
         <Label fx:id="name" text="\$first" styleClass="cell_big_label" />
       </HBox>
+
       <Label fx:id="isOnLeave" styleClass="cell_small_label" text="\$isOnLeave"/>
-      <FlowPane fx:id="departments" />
-      <Label fx:id="position" styleClass="cell_small_label" text="\$position" />
-      <Label fx:id="employeeId" styleClass="cell_small_label" text="\$employeeId" />
-      <Label fx:id="phone" styleClass="cell_small_label" text="\$phone" />
-      <Label fx:id="email" styleClass="cell_small_label" text="\$email" />
-      <Label fx:id="salary" styleClass="cell_small_label" text="\$salary" />
+      <FlowPane fx:id="departments"/>
+
+      <HBox styleClass="ec-label-container" alignment="CENTER_LEFT">
+        <ImageView>
+          <fitWidth>25.0</fitWidth>
+          <fitHeight>25.0</fitHeight>
+          <Image url="/images/position-icon.png"/>
+        </ImageView>
+        <Label fx:id="position" styleClass="cell_small_label" text="\$position" />
+      </HBox>
+
+      <HBox styleClass="ec-label-container" alignment="CENTER_LEFT">
+        <ImageView>
+          <fitWidth>25.0</fitWidth>
+          <fitHeight>25.0</fitHeight>
+          <Image url="/images/id-icon.png"/>
+        </ImageView>
+        <Label fx:id="employeeId" styleClass="cell_small_label" text="\$employeeId" />
+      </HBox>
+
+      <HBox styleClass="ec-label-container" alignment="CENTER_LEFT">
+        <ImageView>
+          <fitWidth>25.0</fitWidth>
+          <fitHeight>25.0</fitHeight>
+          <Image url="/images/phone-icon.png"/>
+        </ImageView>
+        <Label fx:id="phone" styleClass="cell_small_label" text="\$phone"/>
+      </HBox>
+
+      <HBox styleClass="ec-label-container" alignment="CENTER_LEFT">
+        <ImageView>
+          <fitWidth>25.0</fitWidth>
+          <fitHeight>25.0</fitHeight>
+          <Image url="/images/email-icon.png"/>
+        </ImageView>
+        <Label fx:id="email" styleClass="cell_small_label" text="\$email"/>
+      </HBox>
+
+      <HBox styleClass="ec-label-container" alignment="CENTER_LEFT">
+        <ImageView>
+          <fitWidth>25.0</fitWidth>
+          <fitHeight>25.0</fitHeight>
+          <Image url="/images/salary-icon.png"/>
+        </ImageView>
+        <Label fx:id="salary" styleClass="cell_small_label" text="\$salary"/>
+      </HBox>
     </VBox>
   </GridPane>
 </HBox>
