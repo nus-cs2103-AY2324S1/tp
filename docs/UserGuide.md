@@ -83,6 +83,7 @@ While **Staff-Snap** has a simple and intuitive [Graphical User Interface (GUI)]
    * `delete 1` : Deletes the 1st applicant shown in the current list.
    * `clear` : Clears all applicants from the list.
    * `exit` : Exits the application.<br>
+   
 9. Refer to the [Features](#TODO) below for details of each command.
 
 <box type="tip" header="**For macOS users**" seamless>
@@ -170,10 +171,8 @@ This section introduces the symbols and notations used throughout this guide. We
 
 <br>
 
-<a name="applicant-management-param"></a>
+<a name="command-parameters-1"></a>
 #### Command Parameters
-
-notation table for NAME, EMAIL, POSITION, PHONE, STATUS, INDEX
 
 | Parameter  | Description​                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                | Valid Examples​                                                      | Invalid Examples​                                                        |
 |------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------|--------------------------------------------------------------------------|
@@ -185,18 +184,6 @@ notation table for NAME, EMAIL, POSITION, PHONE, STATUS, INDEX
 | `INDEX`    | The index of the applicant in the displayed list. <br/> <br/> It must be a positive integer and not more than the total number of applicants.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               | <ul><li>`2`</li></ul>                                                | <ul><li>`0`</li><li>`two`</li></ul>                                      |
 
 
-
-<br>
-
----
-<br>
-
-<a name="help"></a>
-#### Viewing help: `help`
-
-Opens up the user guide in the browser. Also displays a list of basic commands the user can use.
-
-Format: `help`
 
 <br>
 
@@ -449,7 +436,7 @@ Format: `import f/FILENAME`
   
 <img src="images/user-guide/csv_header.png" alt="mac_os_warning">
 
-* The fields of the columns must satisfy the constraints for `NAME`, `PHONE`, `EMAIL`, and `POSITION` respectively.
+* The fields of the columns must satisfy the [parameter constraints](#command-parameters-1) for `NAME`, `PHONE`, `EMAIL`, and `POSITION` respectively.
 * A sample csv file can be found [here](demo.csv).
 
 Examples:
@@ -460,6 +447,15 @@ Examples:
 ---
 
 ### Miscellaneous Functions
+
+<br>
+
+<a name="help"></a>
+#### Viewing help: `help`
+
+Opens up the user guide in the browser. Also displays a list of basic commands the user can use.
+
+Format: `help`
 
 <br>
 
