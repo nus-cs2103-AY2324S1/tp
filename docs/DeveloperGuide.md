@@ -717,7 +717,7 @@ Use case ends.
 **Extensions**
 * 2a. System detects an invalid index entered.
   * 2a1. System shows an error message.
-  * 2a2. User tries to add a note to a contact again.<br>
+  * 2a2. User enters a new addnote request.
   Steps 2a1- 2a2 are repeated until the data entered is correct. <br>
   Use case resumes from step 3.
 
