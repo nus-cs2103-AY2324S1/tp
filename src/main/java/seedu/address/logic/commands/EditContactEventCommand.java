@@ -119,12 +119,10 @@ public class EditContactEventCommand extends Command {
     }
 
     /**
-     * Updates an event in the given calendar with the new information provided in the EditEventDescriptor.
+     * Updates an event by its {@code eventIndex} in the given {@code calendar} with the new information provided in
+     * the {@code editEventDescriptor}.
      *
-     * @param calendar              The calendar containing the event to be updated.
-     * @param eventIndex            The index of the event to be updated in the calendar's event list.
-     * @param editEventDescriptor   The descriptor containing the new information for the event.
-     * @return                      The updated event list.
+     * @return The updated event list.
      */
     public static List<Event> updateEventList(Calendar calendar, Index eventIndex,
                                              EditEventDescriptor editEventDescriptor) throws CommandException {
