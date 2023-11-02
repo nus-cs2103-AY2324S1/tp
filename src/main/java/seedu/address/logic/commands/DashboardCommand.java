@@ -21,4 +21,10 @@ public class DashboardCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         return new CommandResult(SHOWING_DASHBOARD_MESSAGE, true, false, false);
     }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || other instanceof DashboardCommand; // instanceof handles nulls
+    }
 }
