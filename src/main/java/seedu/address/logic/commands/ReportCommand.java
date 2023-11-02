@@ -47,7 +47,7 @@ public class ReportCommand extends Command {
                     throw new CommandException(Messages.MESSAGE_REPORT_SAVE_ERROR);
                 }
                 return new CommandResult(String.format(Messages.MESSAGE_REPORT_STRING,
-                        report.employee.getName().fullName, report.overtimeHours, report.overtimePay,
+                        report.employee.getName().fullName, employee.getOvertimeHours(), report.overtimePay,
                         report.numOfLeaves, report.remarkList));
             }
         }
