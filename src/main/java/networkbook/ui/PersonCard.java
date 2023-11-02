@@ -14,6 +14,7 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import networkbook.commons.core.index.Index;
+import networkbook.logic.parser.OpenEmailCommandParser;
 import networkbook.logic.parser.OpenLinkCommandParser;
 import networkbook.model.person.Graduation;
 import networkbook.model.person.Person;
@@ -104,8 +105,9 @@ public class PersonCard extends UiPart<Region> {
         // Email addresses
         emailsHeader.setText(EMAILS_HEADER);
         populateHyperlinkListChildren(person.getEmails(), emails, (email, index) -> {
-            // TODO: implement actual email opening
             LOGGER.log(Level.INFO, "Opening email: " + email.getValue());
+            submitCommandCallback.accept(
+                    OpenEmailCommandParser.generateCommandString(displayedIndex, index.getOneBased()));
         });
 
         // Website links
