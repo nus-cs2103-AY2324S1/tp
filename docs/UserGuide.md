@@ -246,7 +246,7 @@ Examples:
 
 Adds the dates between a specified period of time to the leaves taken by the specified employee.
 
-Format: `add  id/EMPLOYEE_ID from/START_DATE to/END_DATE`
+Format: `addleave id/EMPLOYEE_ID from/START_DATE to/END_DATE`
 
 * Add dates between `START_DATE` and `END_DATE` inclusive into the leaves taken by employee with id `EMPLOYEE_ID`.
 * `START_DATE` must not be after `END_DATE`.
@@ -340,6 +340,10 @@ Examples:
 
 ![addremark success](images/addremarkSuccess.png)
 
+* `addremark id/EID1234-5678 r/GOOD WORKER` is invalid because there is already a remark `good worker` for the employee.
+
+![addremark_failure](images/addremarkFailure.png)
+
 ### Deleting a remark of an employee : `deleteremark`
 
 Deletes the specified remark from the specified employee.
@@ -396,11 +400,11 @@ Format: `report EMPLOYEE_ID`
 Examples:
 * `report EID1234-5678` generates and downloads a report for the employee with employee id EID1234-5678.
 
-![report success](images/reportSuccess.jpg)
+![report success](images/reportSuccess.png)
 
 * `report EID0000-0000` is invalid because the id does not exist.
 
-![report failure](images/reportFailure.jpg)
+![report failure](images/reportFailure.png)
 
 ### Resetting fields : `reset`
 
@@ -413,15 +417,15 @@ Format: `reset f/FIELD`
 Examples:
 * `reset f/overtime` resets the overtime hours of all employees in the list to the default value 0.
 
-![reset success](images/resetOvertimeSuccess.jpg)
+![reset success](images/resetOvertimeSuccess.png)
 
 * `reset f/leaves` resets the number of leaves taken by all employees in the list to the default value 0.
 
-![reset success](images/resetLeavesSuccess.jpg)
+![reset success](images/resetLeavesSuccess.png)
 
 * `reset f/name` is an invalid field and cannot be reset.
 
-![reset failure](images/resetFailure.jpg)
+![reset failure](images/resetFailure.png)
 
 ### Clearing all entries : `clear`
 
