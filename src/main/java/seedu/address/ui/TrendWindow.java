@@ -21,6 +21,18 @@ import java.util.logging.Logger;
  */
 public class TrendWindow extends UiPart<Stage> {
     public static final String FXML = "TrendWindow.fxml";
+    public static final String JAN = "JAN";
+    public static final String FEB = "FEB";
+    public static final String MAR = "MAR";
+    public static final String APR = "APR";
+    public static final String MAY = "MAY";
+    public static final String JUN = "JUN";
+    public static final String JUL = "JUL";
+    public static final String AUG = "AUG";
+    public static final String SEP = "SEP";
+    public static final String OCT = "OCT";
+    public static final String NOV = "NOV";
+    public static final String DEC = "DEC";
     private static final Logger logger = LogsCenter.getLogger(TrendWindow.class);
     private static final String[] months = new String[]{
             "JAN", "FEB", "MAR", "APR", "MAY", "JUN",
@@ -62,8 +74,8 @@ public class TrendWindow extends UiPart<Stage> {
 
         XYChart.Series<String, Number> series = new XYChart.Series<>();
         for (int i = 0; i < NUMBER_OF_MONTHS; i++) {
-//            series.getData().add(new XYChart.Data<>(months[i], commandResult.getEnrolmentCountOnMonth(i)));
-            series.getData().add(new XYChart.Data<>(months[i], 0));
+            series.getData().add(new XYChart.Data<>(months[i], commandResult.getEnrolmentCountOnMonth(i)));
+//            series.getData().add(new XYChart.Data<>(months[i], 0));
         }
 
         lineChart.getData().add(series);

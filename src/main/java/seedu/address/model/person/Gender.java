@@ -17,6 +17,9 @@ public class Gender {
         INVALID
     }
 
+    public static final String MALE = "Male";
+    public static final String FEMALE = "Female";
+
     public static final String MESSAGE_CONSTRAINTS =
             "Please Enter a Valid Gender, M for Male, F for Female";
     public final String value;

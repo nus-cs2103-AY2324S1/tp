@@ -110,7 +110,7 @@ public class AddressBookParser {
             return new UpdateSecLevelCommand(true);
 
         case TrendCommand.COMMAND_WORD:
-            return new TrendCommand();
+            return new TrendCommand(arguments);
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);
