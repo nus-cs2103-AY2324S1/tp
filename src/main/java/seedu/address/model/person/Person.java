@@ -156,7 +156,7 @@ public class Person {
         Set<Tag> tags = new HashSet<>();
         tags.addAll(this.tags);
         tags.addAll(otherPerson.tags);
-        Person newPerson = new Person(name, phone, email, id, tags);
+        Person newPerson = new Person(name, phone, email, id, tags, this.attendanceRecords);
         newPerson.mergeAttendanceRecords(this.attendanceRecords, otherPerson.attendanceRecords, newPerson);
         return newPerson;
     }

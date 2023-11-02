@@ -12,6 +12,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_T09;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BOB;
+import static seedu.address.testutil.TypicalPersons.GEORGE;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -136,14 +137,14 @@ public class PersonTest {
         List<Attendance> attendanceRecords2 = new ArrayList<>();
         attendanceRecords2.add(attendance2);
 
-        Person emptyAlice = new PersonBuilder(ALICE).build();
-        emptyAlice.mergeAttendanceRecords(attendanceRecords1, attendanceRecords2, emptyAlice);
+        Person emptyBob = new PersonBuilder(BOB).build();
+        emptyBob.mergeAttendanceRecords(attendanceRecords1, attendanceRecords2, emptyBob);
 
         List<Attendance> expectedRecords = new ArrayList<>();
         expectedRecords.add(attendance1);
         expectedRecords.add(attendance2);
 
-        assertEquals(expectedRecords, emptyAlice.getAttendanceRecords());
+        assertEquals(expectedRecords, emptyBob.getAttendanceRecords());
     }
 
     @Test
@@ -158,13 +159,13 @@ public class PersonTest {
         List<Attendance> attendanceRecords2 = new ArrayList<>();
         attendanceRecords2.add(attendance2);
 
-        Person emptyAlice = new PersonBuilder(ALICE).build();
-        emptyAlice.mergeAttendanceRecords(attendanceRecords1, attendanceRecords2, emptyAlice);
+        Person emptyGeorge = new PersonBuilder(GEORGE).build();
+        emptyGeorge.mergeAttendanceRecords(attendanceRecords1, attendanceRecords2, emptyGeorge);
 
         List<Attendance> expectedRecords = new ArrayList<>();
         expectedRecords.add(attendance1);
 
-        assertEquals(expectedRecords, emptyAlice.getAttendanceRecords());
+        assertEquals(expectedRecords, emptyGeorge.getAttendanceRecords());
     }
 
     @Test
