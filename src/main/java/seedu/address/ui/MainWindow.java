@@ -33,6 +33,7 @@ public class MainWindow extends UiPart<Stage> {
     // Independent Ui parts residing in this Ui container
     private StudentListPanel studentListPanel;
     private AppointmentListPanel appointmentListPanel;
+    private StudentNotePanel studentNotePanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
 
@@ -47,6 +48,9 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane appointmentListPanelPlaceholder;
+
+    @FXML
+    private StackPane studentNotePlaceholder;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
@@ -114,10 +118,12 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        studentListPanel = new StudentListPanel(logic.getFilteredStudentList());
+        studentListPanel = new StudentListPanel(logic.getFilteredStudentList(), this::showNote);
         studentListPanelPlaceholder.getChildren().add(studentListPanel.getRoot());
         appointmentListPanel = new AppointmentListPanel(logic.getFilteredAppointmentList());
         appointmentListPanelPlaceholder.getChildren().add(appointmentListPanel.getRoot());
+        studentNotePanel = new StudentNotePanel("No student information chosen currently", "");
+        studentNotePlaceholder.getChildren().add(studentNotePanel.getRoot());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
@@ -141,6 +147,7 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
+
     /**
      * Opens the help window or focuses on it if it's already opened.
      */
@@ -152,6 +159,7 @@ public class MainWindow extends UiPart<Stage> {
             helpWindow.focus();
         }
     }
+
 
     void show() {
         primaryStage.show();
@@ -198,5 +206,10 @@ public class MainWindow extends UiPart<Stage> {
             resultDisplay.setFeedbackToUser(e.getMessage());
             throw e;
         }
+    }
+
+    private void showNote(int studentIndex) {
+        studentNotePanel.updateNotes(logic.getStudentName(studentIndex).value,
+                logic.getStudentNote(studentIndex).value);
     }
 }
