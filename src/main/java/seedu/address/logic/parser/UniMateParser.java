@@ -24,6 +24,7 @@ import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.SortCommand;
+import seedu.address.logic.commands.SortTasksCommand;
 import seedu.address.logic.commands.SwitchListCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -108,6 +109,9 @@ public class UniMateParser {
 
         case SwitchListCommand.COMMAND_WORD:
             return new SwitchListCommand();
+
+        case SortTasksCommand.COMMAND_WORD:
+            return new SortTasksCommandParser().parse(arguments);
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);

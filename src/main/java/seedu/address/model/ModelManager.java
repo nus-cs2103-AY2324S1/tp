@@ -236,6 +236,11 @@ public class ModelManager implements Model {
         return taskManager.getTaskList();
     }
 
+    @Override
+    public void sortTasksBy(String comparatorType) {
+        taskManager.sortTasksBy(comparatorType);
+    }
+
     //=========== Filtered Person List Accessors =============================================================
 
     /**
