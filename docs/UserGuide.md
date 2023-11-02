@@ -271,7 +271,7 @@ Format: set INDEX DIFFICULTY
 2. Index cannot exceed size of the deck
 3. Difficulty must be either ‘easy’, ‘medium’, ‘hard’
 
-#### Examples:
+#### Example:
 ```
 set 1
 ```
@@ -302,10 +302,30 @@ For user who wish to incorporate styling in lesSON, there are 3 font styles curr
 ### Bold
 To bold a line of text, wrap text with `**`
 
+#### Example:
+```
+edit 1 q/ How many bits can a **Half Adder** add up
+```
+#### Expected Result:
+![usage of bold syntax](./images/UserGuide/1.3_bold.png)
+
 ### Italic
 To italicise a line of text, wrap text with `*`
+
+#### Example:
+```
+edit 1 q/ How many bits can a *Half Adder* add up
+```
+#### Expected Result:
+![usage of bold syntax](./images/UserGuide/1.3_italic.png)
 
 ### Underline
 To underline a line of text, insert `<u>` at the beginning of the text,
 and end with `</u>` at the end of the underlined text.
 
+#### Example:
+```
+edit 1 q/ How many bits can a <u>Half Adder</u> add up
+```
+#### Expected Result:
+![usage of bold syntax](./images/UserGuide/1.3_underline.png)
