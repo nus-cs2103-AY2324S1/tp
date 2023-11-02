@@ -18,7 +18,6 @@ public class FilterCommand extends Command {
             + "the specified keyword (case-sensitive) and displays them as a list with index numbers.\n"
             + "Parameters: KEYWORD\n"
             + "Example: " + MESSAGE_EXAMPLE;
-  
     private final ContainsDepartmentPredicate predicate;
 
     public FilterCommand(ContainsDepartmentPredicate predicate) {
