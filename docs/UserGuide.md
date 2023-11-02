@@ -91,7 +91,7 @@ Creates a tag and categorises it to the specified category.
 You can customize these categories as per your needs and tags will be 
 color coded by the different categories. 
 
-The only restriction is you can only define up to 5 different categories.
+The only restriction is that you can only define up to 5 different categories (excluding the *assessment* category for score-related tags).
 
 Format: `create t/CATEGORY TAGNAME…​`
 
