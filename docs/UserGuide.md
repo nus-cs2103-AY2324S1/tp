@@ -66,9 +66,9 @@ hospital management tasks done faster than the other apps in the industry.
 
         - [Displaying all patients: `patients`](#displaying-all-patients-patients)
 
-        - [Finding patients by name: `find`](#finding-patients-by-name-find)
+        - [Finding patients by name: `find-p`](#finding-patients-by-name-find)
 
-        - [Finding patients by illness: `find-illness`](#finding-patients-by-illness-find-illness)
+        - [Finding patients by illness: `find-i`](#finding-patients-by-illness-find-illness)
 
     - [Appointment Commands](#appointment-commands)
 
@@ -82,13 +82,13 @@ hospital management tasks done faster than the other apps in the industry.
 
         - [Displaying all appointments: `appointments`](#displaying-all-appointments-appointments)
 
-        - [Finding appointments by patient name: `find-appointment`](#finding-appointments-by-patient-name-find-appointment)
+        - [Finding appointments by patient name: `find-a`](#finding-appointments-by-patient-name-find-appointment)
      
         - [Displaying all appointments for today: `today`](#displaying-all-appointments-for-today-today)
 
         - [Displaying all upcoming appointments: `upcoming`](#displaying-all-upcoming-appointments-upcoming)
 
-        - [Sorting appointments: `sort`](#sorting-appointments-sort)
+        - [Sorting appointments: `sort-a`](#sorting-appointments-sort)
 
     - [Miscellaneous Commands](#miscellaneous-commands)
 
@@ -216,7 +216,7 @@ of MediFlowR. Please follow the instructions [here](#quick-start) first to set u
 - You should get this result screen. Scroll down in the patients list to confirm that the birthdate and phone of patient _John Doe_ have indeed been edited. Try editing other attributes or editing other patients to familiarise yourself with the command.
 
 
-- Let us try **finding a patient**. Enter the command `find alex bernice` in the command box.
+- Let us try **finding a patient**. Enter the command `find-p alex bernice` in the command box.
 
 ![Command result for find](images/userguide/FindPatient.png)
 
@@ -364,13 +364,13 @@ This command shows a list of all patients currently recorded in the MediFlowR ap
 
 :clipboard: **Format**: `patients`
 
-### Finding patients by name: `find`
+### Finding patients by name: `find-p`
 
 This command finds patients whose names contain any of the keywords that you specified.
 
-:clipboard: **Format**: `find NAME`
+:clipboard: **Format**: `find-p NAME`
 
-:paperclip: **Example**: `find alex david`
+:paperclip: **Example**: `find-p alex david`
 
 This example command will find all patients with names that contain either `alex` or `david`, e.g. `Alex Yeoh` and `David Li`.
 
@@ -383,13 +383,13 @@ will return the same results as the keyword `john`.
 with names that contain the full `Tom` but will not find patients
 with names such as `Tommy`.
 
-### Finding patients by illness: `find-illness`
+### Finding patients by illness: `find-i`
 
 This command finds patients with illnesses that contain any of the keywords that you specified.
 
-:clipboard: **Format**: `find-illness ILLNESS`
+:clipboard: **Format**: `find-i ILLNESS`
 
-:paperclip: **Example**: `find-illness alex david`
+:paperclip: **Example**: `find-i alex david`
 
 This example command will find all patients with illnesses that contain either `fever` or `flu`.
 
@@ -486,13 +486,13 @@ This command shows a list of all appointments currently scheduled.
 
 :clipboard: **Format**: `appointments`
 
-### Finding appointments by patient name: `find-appointment`
+### Finding appointments by patient name: `find-a`
 
 This command finds appointments with patient names that contain any of the keywords that you specified.
 
-:clipboard: **Format**: `find-appointment PATIENT`
+:clipboard: **Format**: `find-a PATIENT`
 
-:paperclip: **Example**: `find-appointment alex david`
+:paperclip: **Example**: `find-a alex david`
 
 This example command will find all appointments with patient names that contain either `alex` or `david`, e.g. `Alex Yeoh` or `David Li`.
 
@@ -518,13 +518,13 @@ This command shows a list of all upcoming appointments currently scheduled.
 
 :clipboard: **Format**: `upcoming`
 
-### Sorting appointments: `sort`
+### Sorting appointments: `sort-a`
 
 This command sorts the appointments list by date or priority, in ascending or descending order.
 
-:clipboard: **Format**: `sort DIRECTION by=ATTRIBUTE`
+:clipboard: **Format**: `sort-a DIRECTION by=ATTRIBUTE`
 
-:paperclip: **Example**: `sort asc by=time`
+:paperclip: **Example**: `sort-a asc by=time`
 
 This example command will sort the appointments by the _times_ in _ascending order_.
 
@@ -594,17 +594,17 @@ Return to the [Table of Contents](#table-of-contents)
 | [**Undiagnosing a patient**](#undiagnosing-a-patient-undiagnose)                                             | `undiagnose INDEX illnesses=ILLNESS`<br> e.g., `undiagnose 1 illnesses=fever`                                                                                                                                                                                          |
 | [**Removing a patient**](#removing-a-patient-delete)                                                         | `delete INDEX`<br> e.g., `delete 1`                                                                                                                                                                                                                                    |
 | [**Displaying all patients**](#displaying-all-patients-patients)                                             | `patients`                                                                                                                                                                                                                                                             |
-| [**Finding patients by name**](#finding-patients-by-name-find)                                               | `find NAME`<br> e.g., `find alex david`                                                                                                                                                                                                                                |
-| [**Finding patients by illness**](#finding-patients-by-illness-find-illness)                                 | `find-illness ILLNESS`<br> e.g., `find-illness fever flu`                                                                                                                                                                                                              |
+| [**Finding patients by name**](#finding-patients-by-name-find-p)                                             | `find-p NAME`<br> e.g., `find alex david`                                                                                                                                                                                                                              |
+| [**Finding patients by illness**](#finding-patients-by-illness-find-i)                                       | `find-i ILLNESS`<br> e.g., `find-i fever flu`                                                                                                                                                                                                                          |
 | [**Scheduling a new appointment**](#scheduling-a-new-appointment-schedule)                                   | `schedule patient=PATIENT start=START end=END description=DESCRIPTION priority=PRIORITY` <br> e.g., `schedule patient=Alex Yeoh start=2023/10/20 12:00 end=2023/10/20 13:00 description=Follow up on Chest X-Ray priority=high`                                        |
 | [**Rescheduling an appointment**](#rescheduling-an-appointment-reschedule)                                   | `reschedule INDEX start=START end=END`<br> e.g., `reschedule 1 start=2023/05/02 09:00 end=2023/05/02 11:00`                                                                                                                                                            |
 | [**Triaging an appointment**](#triaging-an-appointment-triage)                                               | `triage INDEX priority=PRIORITY`<br> e.g., `triage 1 priority=high`                                                                                                                                                                                                    |
 | [**Cancelling an appointment**](#cancelling-an-appointment-cancel)                                           | `cancel INDEX`<br> e.g., `cancel 1`                                                                                                                                                                                                                                    |
 | [**Displaying all appointments**](#displaying-all-appointments-appointments)                                 | `appointments`                                                                                                                                                                                                                                                         |
-| [**Finding appointments by patient name**](#finding-appointments-by-patient-name-find-appointment)           | `find-appointment PATIENT`<br> e.g., `find-appointment alex david`                                                                                                                                                                                                     |
+| [**Finding appointments by patient name**](#finding-appointments-by-patient-name-find-a)                     | `find-a PATIENT`<br> e.g., `find-a alex david`                                                                                                                                                                                                                         |
 | [**Displaying all appointments for today**](#displaying-all-appointments-for-today-today)                    | `today`                                                                                                                                                                                                                                                                |
 | [**Displaying all upcoming appointments**](#displaying-all-upcoming-appointments-upcoming)                   | `upcoming`                                                                                                                                                                                                                                                             |
-| [**Sorting appointments**](#sorting-appointments-sort)                                                       | `sort DIRECTION by=ATTRIBUTE`<br> e.g., `sort asc by=time`                                                                                                                                                                                                             |
+| [**Sorting appointments**](#sorting-appointments-sort-a)                                                     | `sort-a DIRECTION by=ATTRIBUTE`<br> e.g., `sort-a asc by=time`                                                                                                                                                                                                         |
 | [**Displaying all patient records and appointments**](#displaying-all-patient-records-and-appointments-list) | `list`                                                                                                                                                                                                                                                                 |
 | [**Undoing a previous command**](#undoing-a-previous-command-undo)                                           | `undo`                                                                                                                                                                                                                                                                 |
 | [**Redoing a previous command**](#redoing-a-previous-command-redo)                                           | `redo`                                                                                                                                                                                                                                                                 |

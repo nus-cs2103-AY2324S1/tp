@@ -40,7 +40,7 @@ public class UndoCommandTest {
                     + "email=janed@example.com address=311, Bedok Ave 3, #04-48 illnesses=fever";
     private static final String SAMPLE_DELETE_COMMAND = "delete 1";
     private static final String SAMPLE_EDIT_COMMAND = "edit 1 phone=91272464";
-    private static final String SAMPLE_FIND_COMMAND = "find john";
+    private static final String SAMPLE_FIND_COMMAND = "find-p john";
     private static final String SAMPLE_LIST_COMMAND = "list";
 
     private static final String SAMPLE_DIAGNOSE_COMMAND = "diagnose 1 illnesses=Covid19, Covid20";
@@ -68,9 +68,9 @@ public class UndoCommandTest {
     private static final String SAMPLE_TODAY_COMMAND = "today";
 
     private static final String SAMPLE_UPCOMING_COMMAND = "today";
-    private static final String SAMPLE_FIND_PATIENT_APPOINTMENT_COMMAND = "find-appointment john";
+    private static final String SAMPLE_FIND_PATIENT_APPOINTMENT_COMMAND = "find-a john";
 
-    private static final String SAMPLE_SORT_COMMAND = "sort asc by=time";
+    private static final String SAMPLE_SORT_COMMAND = "sort-a asc by=time";
 
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~MISC COMMANDS~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     private static final String SAMPLE_UNDO_COMMAND = "undo";

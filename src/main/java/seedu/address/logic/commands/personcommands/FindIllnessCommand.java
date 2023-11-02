@@ -15,7 +15,7 @@ import seedu.address.model.person.IllnessContainsKeywordsPredicate;
  */
 public class FindIllnessCommand extends Command {
 
-    public static final String COMMAND_WORD = "find-illness";
+    public static final String COMMAND_WORD = "find-i";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all patients with the illness that matches "
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\nNote: The"

@@ -19,7 +19,7 @@ import seedu.address.model.appointment.appointmentfilters.FindPatientFilter;
  **/
 public class FindAppointmentCommand extends Command {
 
-    public static final String COMMAND_WORD = "find-appointment";
+    public static final String COMMAND_WORD = "find-a";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Lists all appointments belonging to the patients"
             + " whose names are provided.\nThe keywords are case-insensitive and may just contain part of the patient's"

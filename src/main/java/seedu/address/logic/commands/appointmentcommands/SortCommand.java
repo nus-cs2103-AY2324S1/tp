@@ -11,10 +11,10 @@ import seedu.address.model.Model;
  * Sorts all appointments by the attribute provided.
  */
 public class SortCommand extends Command {
-    public static final String COMMAND_WORD = "sort";
+    public static final String COMMAND_WORD = "sort-a";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Sorts the appointment by the corresponding parameters.\n"
+            + ": Sorts the appointment list by the corresponding parameters.\n"
             + "The direction should either be asc or desc. The parameter must be one of [time, priority].\n"
             + "Parameters: DIRECTION "
             + "by=ATTRIBUTE\n"
