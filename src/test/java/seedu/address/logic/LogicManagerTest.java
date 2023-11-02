@@ -32,6 +32,7 @@ import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.calendar.Calendar;
 import seedu.address.model.person.Person;
+import seedu.address.model.task.TaskManager;
 import seedu.address.storage.JsonAddressBookStorage;
 import seedu.address.storage.JsonCalendarStorage;
 import seedu.address.storage.JsonTaskManagerStorage;
@@ -80,12 +81,23 @@ public class LogicManagerTest {
     }
 
     @Test
+    public void getTaskList() {
+        assertEquals(logic.getTaskList(), FXCollections.observableArrayList());
+    }
+
+    @Test
     public void getAddressBook() {
         assertEquals(logic.getAddressBook(), new AddressBook());
     }
+
     @Test
     public void getCalendar() {
         assertEquals(logic.getCalendar(), new Calendar());
+    }
+
+    @Test
+    public void getTaskManager() {
+        assertEquals(logic.getTaskManager(), new TaskManager());
     }
 
     @Test
