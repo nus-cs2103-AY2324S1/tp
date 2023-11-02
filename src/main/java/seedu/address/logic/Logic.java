@@ -10,6 +10,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyDeck;
 import seedu.address.model.card.Card;
+import seedu.address.model.goal.Goal;
 
 /**
  * API of the Logic component
@@ -49,4 +50,6 @@ public interface Logic {
      * Set the user prefs' GUI settings.
      */
     void setGuiSettings(GuiSettings guiSettings);
+
+    Goal getGoal();
 }
