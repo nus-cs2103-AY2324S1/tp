@@ -15,11 +15,14 @@ import seedu.address.logic.commands.AddTaskCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.ClearEventsCommand;
 import seedu.address.logic.commands.Command;
+import seedu.address.logic.commands.CompareCalendarByIndexCommand;
+import seedu.address.logic.commands.CompareCalendarByTagCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.DeleteContactEventCommand;
 import seedu.address.logic.commands.DeleteEventCommand;
 import seedu.address.logic.commands.DeleteTaskCommand;
 import seedu.address.logic.commands.EditCommand;
+import seedu.address.logic.commands.EditContactEventCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FilterCommand;
 import seedu.address.logic.commands.FindCommand;
@@ -107,6 +110,9 @@ public class UniMateParser {
         case AddContactEventCommand.COMMAND_WORD:
             return new AddContactEventCommandParser().parse(arguments);
 
+        case EditContactEventCommand.COMMAND_WORD:
+            return new EditContactEventCommandParser().parse(arguments);
+
         case DeleteContactEventCommand.COMMAND_WORD:
             return new DeleteContactEventCommandParser().parse(arguments);
 
@@ -124,6 +130,12 @@ public class UniMateParser {
 
         case ViewContactEventsCommand.COMMAND_WORD:
             return new ViewContactEventsCommandParser().parse(arguments);
+
+        case CompareCalendarByIndexCommand.COMMAND_WORD:
+            return new CompareCalendarByIndexCommandParser().parse(arguments);
+
+        case CompareCalendarByTagCommand.COMMAND_WORD:
+            return new CompareCalendarByTagCommandParser().parse(arguments);
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);

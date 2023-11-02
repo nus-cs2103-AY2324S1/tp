@@ -57,7 +57,7 @@
 
           <BorderPane minWidth="340" prefWidth="340" styleClass="pane-with-border" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
             <top>
-              <Label alignment="CENTER" minHeight="40" minWidth="340" prefHeight="40.0" prefWidth="340.0" styleClass="calendar_header_label" text="Calendar" textAlignment="CENTER" BorderPane.alignment="CENTER" HBox.hgrow="ALWAYS" VBox.vgrow="NEVER" />
+              <Label alignment="CENTER" minHeight="40" minWidth="340" prefHeight="40.0" prefWidth="340.0" styleClass="calendar_header_label" text="Calendar For Current Week" textAlignment="CENTER" BorderPane.alignment="CENTER" HBox.hgrow="ALWAYS" VBox.vgrow="NEVER" />
             </top>
 
             <center>

@@ -1,5 +1,8 @@
 package seedu.address.ui;
 
+import static seedu.address.ui.UiConstants.POPUP_CALENDAR_HEIGHT;
+import static seedu.address.ui.UiConstants.POPUP_CALENDAR_WIDTH;
+
 import java.util.Comparator;
 
 import javafx.event.EventHandler;
@@ -22,8 +25,6 @@ public class PersonCard extends UiPart<Region> {
     private static final String FXML = "PersonListCard.fxml";
     private static final String TITLE_STRING_AFTER_NAME = "'s Calendar";
     private static final int NUMBER_OF_CLICK_TO_SHOW_CALENDAR = 2;
-    private static final int POPUP_CALENDAR_HEIGHT = 285;
-    private static final int POPUP_CALENDAR_WIDTH = 555;
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -91,7 +92,7 @@ public class PersonCard extends UiPart<Region> {
         calendarStage.setTitle(person.getName().toString() + TITLE_STRING_AFTER_NAME);
         calendarStage.setMinHeight(POPUP_CALENDAR_HEIGHT);
         calendarStage.setMinWidth(POPUP_CALENDAR_WIDTH);
-        CalendarContainer root = new CalendarContainer(person.getCalendar());
+        CalendarContainer root = CalendarContainer.createDefaultCalendar(person.getReadOnlyCalendar());
         calendarStage.setScene(new Scene(root.getRoot()));
         calendarStage.show();
     }

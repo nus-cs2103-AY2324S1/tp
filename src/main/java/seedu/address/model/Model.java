@@ -9,6 +9,7 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.calendar.ReadOnlyCalendar;
+import seedu.address.model.calendar.UniMateCalendar;
 import seedu.address.model.event.Event;
 import seedu.address.model.event.EventPeriod;
 import seedu.address.model.event.exceptions.EventNotFoundException;
@@ -80,6 +81,9 @@ public interface Model {
      * Returns the Calendar
      */
     ReadOnlyCalendar getCalendar();
+
+    /** Return the underlying UniMateCalendar for the user */
+    UniMateCalendar getUnderlyingCalendar();
 
     /**
      * Sets the user prefs' task manager file path.
@@ -161,6 +165,19 @@ public interface Model {
      * @param range an {@code EventPeriod} representing a time range.
      */
     void deleteEventsInRange(EventPeriod range);
+
+
+    /**
+     * Get the calendar resulting from the calendar comparison operation.
+     */
+    ReadOnlyCalendar getComparisonCalendar();
+
+    /**
+     * Set the event list after comparison of calendars.
+     *
+     * @param eventList event list generated from comparison of calendars.
+     */
+    void setComparisonCalendar(ReadOnlyCalendar eventList);
 
     /** Returns a view of the event list */
     ObservableList<Event> getEventList();

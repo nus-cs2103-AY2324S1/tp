@@ -10,7 +10,8 @@ import java.util.Set;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.model.calendar.Calendar;
+import seedu.address.model.calendar.ReadOnlyCalendar;
+import seedu.address.model.calendar.UniMateCalendar;
 import seedu.address.model.event.Event;
 import seedu.address.model.tag.Tag;
 
@@ -28,7 +29,7 @@ public class Person {
     // Data fields
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
-    private final Calendar calendar = new Calendar();
+    private final UniMateCalendar calendar = new UniMateCalendar();
 
     /**
      * Primary constructor for a person object.
@@ -48,7 +49,7 @@ public class Person {
      * Every field must be present and not null.
      *
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags, Calendar calendar) {
+    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags, UniMateCalendar calendar) {
         requireAllNonNull(name, phone, email, address, tags);
         this.name = name;
         this.phone = phone;
@@ -75,7 +76,11 @@ public class Person {
         return address;
     }
 
-    public Calendar getCalendar() {
+    public UniMateCalendar getCalendar() {
+        return calendar;
+    }
+
+    public ReadOnlyCalendar getReadOnlyCalendar() {
         return calendar;
     }
 
@@ -126,6 +131,16 @@ public class Person {
      */
     public Event findEvent(LocalDateTime targetTime) {
         return calendar.findEventAt(targetTime).get();
+    }
+
+    /**
+     * Checks if the person is tagged with the input tag.
+     *
+     * @param tag input tag to be checked.
+     * @return true if this person is tagged with the input tag.
+     */
+    public boolean hasTag(Tag tag) {
+        return getTags().stream().anyMatch(tag::equals);
     }
 
     /**

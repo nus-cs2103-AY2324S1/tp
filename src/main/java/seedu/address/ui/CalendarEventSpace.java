@@ -54,11 +54,36 @@ public class CalendarEventSpace extends UiPart<Region> {
         super(FXML);
         this.calendar = calendar;
         eventList = calendar.getCurrentWeekEventList();
+    }
 
-        updateStartAndEnd();
-        initializeEventSpace();
-        addEventCards();
-        addListenerToEventList();
+    /**
+     * Creates the default EventSpace layout for calendar UI.
+     *
+     * @param calendar ReadOnlyCalendar to be displayed in the event space.
+     * @return CalendarEventSpace object with default layout.
+     */
+    public static CalendarEventSpace createDefaultEventSpace(ReadOnlyCalendar calendar) {
+        CalendarEventSpace defaultEventSpace = new CalendarEventSpace(calendar);
+        defaultEventSpace.updateStartAndEnd();
+        defaultEventSpace.initializeEventSpace();
+        defaultEventSpace.addEventCards();
+        defaultEventSpace.addListenerToEventList();
+        return defaultEventSpace;
+    }
+
+    /**
+     * Creates the EventSpace layout for comparison calendar UI.
+     *
+     * @param calendar ReadOnlyCalendar generated from comparison to be displayed in the event space.
+     * @return CalendarEventSpace object with comparison layout.
+     */
+    public static CalendarEventSpace createComparisonCalendarEventSpace(ReadOnlyCalendar calendar) {
+        CalendarEventSpace comparisonEventSpace = new CalendarEventSpace(calendar);
+        comparisonEventSpace.updateStartAndEnd();
+        comparisonEventSpace.initializeEventSpace();
+        comparisonEventSpace.addSolidEventCards();
+        comparisonEventSpace.addListenerToComparisonCalendarEventList();
+        return comparisonEventSpace;
     }
 
     /**
@@ -83,6 +108,18 @@ public class CalendarEventSpace extends UiPart<Region> {
             updateStartAndEnd();
             initializeEventSpace();
             addEventCards();
+        });
+    }
+
+    /**
+     * Adds a listener to the event list for the comparison calendar to update the event space when events change.
+     */
+    private void addListenerToComparisonCalendarEventList() {
+        eventList.addListener((ListChangeListener<Event>) c -> {
+            clear();
+            updateStartAndEnd();
+            initializeEventSpace();
+            addSolidEventCards();
         });
     }
 
@@ -117,7 +154,7 @@ public class CalendarEventSpace extends UiPart<Region> {
                 .map(time -> {
                     return time.minusMinutes(time.getMinute());
                 })
-                .orElse(calendarStartTime);
+                .orElse(DEFAULT_CALENDAR_START_TIME);
         LocalTime newEndTime = calendar.getLatestEventEndTimeInCurrentWeek()
                 .map(time -> {
                     if (time.getMinute() == 0 || time.getHour() == MAXIMUM_DISPLAY_HOUR_OF_DAY) {
@@ -125,7 +162,7 @@ public class CalendarEventSpace extends UiPart<Region> {
                     }
                     return time.plusMinutes(NUMBER_OF_MINUTES_IN_AN_HOUR - time.getMinute());
                 })
-                .orElse(calendarEndTime);
+                .orElse(DEFAULT_CALENDAR_END_TIME);
 
         calendarStartTime = newStartTime.isBefore(DEFAULT_CALENDAR_START_TIME)
                 ? newStartTime : DEFAULT_CALENDAR_START_TIME;
@@ -139,6 +176,17 @@ public class CalendarEventSpace extends UiPart<Region> {
     private void addEventCards() {
         eventList.forEach(event -> {
             StackPane eventNode = generateEventCard(event);
+            rowList.get(findRow(event)).getChildren().add(eventNode);
+            AnchorPane.setLeftAnchor(eventNode, findLeftOffset(event));
+        });
+    }
+
+    /**
+     * Adds solid event cards to the event space for comparison calendar.
+     */
+    private void addSolidEventCards() {
+        eventList.forEach(event -> {
+            StackPane eventNode = generateSolidEventCard(event);
             rowList.get(findRow(event)).getChildren().add(eventNode);
             AnchorPane.setLeftAnchor(eventNode, findLeftOffset(event));
         });
@@ -173,6 +221,23 @@ public class CalendarEventSpace extends UiPart<Region> {
     }
 
     /**
+     * Generates a solid event card (no description and single color) for the given event.
+     *
+     * @param event The event for which to create a card.
+     * @return A StackPane containing the solid event card.
+     */
+    private StackPane generateSolidEventCard(Event event) {
+        double widthMultiplier = (double) event.getDurationOfEvent().toMinutes() / NUMBER_OF_MINUTES_IN_AN_HOUR;
+        StackPane cardHolder = new StackPane();
+        Rectangle cardRectangle = new Rectangle();
+        cardRectangle.setHeight(NODE_HEIGHT);
+        cardRectangle.setWidth(widthMultiplier * NODE_WIDTH_PER_HALF_HOUR * NUMBER_OF_HALF_HOURS_IN_HOUR);
+        cardRectangle.setFill(Color.GREY);
+        cardHolder.getChildren().add(cardRectangle);
+        return cardHolder;
+    }
+
+    /**
      * Determines the row (day) in which an event should be placed in the event space.
      *
      * @param event The event for which to find the row.
@@ -193,5 +258,4 @@ public class CalendarEventSpace extends UiPart<Region> {
         return ((double) event.getMinutesFromTimeToStartTime(calendarStartTime)
                 / NUMBER_OF_MINUTES_IN_HALF_HOUR) * NODE_WIDTH_PER_HALF_HOUR;
     }
-
 }

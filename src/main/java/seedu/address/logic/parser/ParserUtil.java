@@ -5,6 +5,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
@@ -14,6 +15,7 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.logic.parser.exceptions.RuntimeParseException;
 import seedu.address.model.event.EventDescription;
 import seedu.address.model.event.EventPeriod;
 import seedu.address.model.person.Address;
@@ -28,9 +30,10 @@ import seedu.address.model.tag.Tag;
 public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+    public static final String NUMBER_INDEX_INVALID_INDEX = "Number of arguments provided is invalid.";
     public static final DateTimeFormatter DATE_TIME_STRING_FORMATTER = DateTimeFormatter.ofPattern(
             "yyyy-MM-dd HH:mm");
-
+    private static final String SPLIT_SPACE_DELIMITER = " ";
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
      * trimmed.
@@ -42,6 +45,47 @@ public class ParserUtil {
             throw new ParseException(MESSAGE_INVALID_INDEX);
         }
         return Index.fromOneBased(Integer.parseInt(trimmedIndex));
+    }
+
+    /**
+     * Parses given string and returns an array consisting of 2 Indexes. Leading and trailing whitespaces will be
+     * trimmed.
+     * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
+     */
+    public static ArrayList<Index> parseDualIndexes(String oneBasedIndex) throws ParseException {
+        final int maxParseIndexes = 2;
+
+        ArrayList<Index> arrayList = new ArrayList<>();
+        String[] indexArray = oneBasedIndex.split(SPLIT_SPACE_DELIMITER);
+
+        if (indexArray.length != maxParseIndexes) {
+            throw new ParseException(NUMBER_INDEX_INVALID_INDEX);
+        }
+
+        String trimmedIndex1 = indexArray[0].trim();
+        String trimmedIndex2 = indexArray[1].trim();
+        if (!StringUtil.isNonZeroUnsignedInteger(trimmedIndex1)
+                || !StringUtil.isNonZeroUnsignedInteger(trimmedIndex2)) {
+            throw new ParseException(MESSAGE_INVALID_INDEX);
+        }
+        arrayList.add(Index.fromOneBased(Integer.parseInt(trimmedIndex1)));
+        arrayList.add(Index.fromOneBased(Integer.parseInt(trimmedIndex2)));
+        return arrayList;
+    }
+
+    /**
+     * Wrapped version of parseIndex that throws a RuntimeException instead.
+     *
+     * @param oneBasedIndex index integer to be converted into Index object.
+     * @return Index object that is parsed from the input index integer.
+     * @throws RuntimeException if the specified index is invalid (not non-zero unsigned integer).
+     */
+    public static Index parseIndexSafe(String oneBasedIndex) throws RuntimeParseException {
+        try {
+            return parseIndex(oneBasedIndex);
+        } catch (ParseException pe) {
+            throw new RuntimeException();
+        }
     }
 
     /**

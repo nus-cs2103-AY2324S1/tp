@@ -61,7 +61,17 @@ public class SingleDayEventList {
         if (!isEventAddValid(event)) {
             throw new ConflictingEventException();
         }
-        this.eventTree.put(event.getEventPeriod(), event);
+        eventTree.put(event.getEventPeriod(), event);
+    }
+
+    /**
+     * Forcibly add the event to the event tree, disregarding time period conflict.
+     *
+     * @param event The event to be added.
+     */
+    public void forceAddEvent(Event event) {
+        requireNonNull(event);
+        eventTree.put(event.getEventPeriod(), event);
     }
 
     /**

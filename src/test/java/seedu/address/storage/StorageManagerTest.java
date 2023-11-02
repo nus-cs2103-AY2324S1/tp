@@ -16,8 +16,8 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.calendar.Calendar;
 import seedu.address.model.calendar.ReadOnlyCalendar;
+import seedu.address.model.calendar.UniMateCalendar;
 import seedu.address.model.task.ReadOnlyTaskManager;
 import seedu.address.model.task.TaskManager;
 
@@ -75,10 +75,10 @@ public class StorageManagerTest {
          * {@link JsonCalendarStorage} class.
          * More extensive testing of UserPref saving/reading is done in {@link JsonCalendarStorageTest} class.
          */
-        Calendar original = getTypicalCalendar();
+        UniMateCalendar original = getTypicalCalendar();
         storageManager.saveCalendar(original);
         ReadOnlyCalendar retrieved = storageManager.readCalendar().get();
-        assertEquals(original, new Calendar(retrieved));
+        assertEquals(original, new UniMateCalendar(retrieved));
     }
 
     @Test

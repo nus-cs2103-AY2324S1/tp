@@ -11,8 +11,9 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import seedu.address.model.event.exceptions.DateOutOfBoundsException;
 
@@ -44,6 +45,12 @@ public class EventPeriod implements Comparable<EventPeriod> {
                 LocalDateTime.parse(endString, DATE_TIME_STRING_FORMATTER));
     }
 
+    /**
+     * Constructs an EventPeriod object with the given start and end date/time LocalDateTime.
+     *
+     * @param start The LocalDateTime representation of the start date and time.
+     * @param end The LocalDateTime representation of the end date and time.
+     */
     private EventPeriod(LocalDateTime start, LocalDateTime end) {
         this.start = start;
         this.end = end;
@@ -51,6 +58,10 @@ public class EventPeriod implements Comparable<EventPeriod> {
 
     public LocalDateTime getStart() {
         return this.start;
+    }
+
+    public LocalDateTime getEnd() {
+        return this.end;
     }
 
     /**
@@ -145,13 +156,10 @@ public class EventPeriod implements Comparable<EventPeriod> {
      * @return list of the dates the eventPeriod spans.
      */
     public List<LocalDate> getDates() {
-        Duration durationBetweenStartAndEnd = Duration.between(start, end);
-        long numberOfDays = durationBetweenStartAndEnd.toDays();
-        List<LocalDate> listOfDates = new ArrayList<LocalDate>();
-        for (long i = 0; i <= numberOfDays; i++) {
-            listOfDates.add(this.start.toLocalDate().plusDays(i));
-        }
-        return listOfDates;
+        LocalDate startDate = start.toLocalDate();
+        LocalDate endDate = end.toLocalDate();
+        return Stream.iterate(startDate, date -> !date.isAfter(endDate), date -> date.plusDays(1))
+                .collect(Collectors.toList());
     }
 
     /**
