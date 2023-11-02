@@ -34,6 +34,7 @@ public class SolveCommand extends Command {
      * @param targetIndex The index of the target to card.
      */
     public SolveCommand(Index targetIndex) {
+        requireNonNull(targetIndex);
         this.targetIndex = targetIndex;
 
     }

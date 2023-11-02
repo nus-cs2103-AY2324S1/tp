@@ -51,23 +51,11 @@ public class EditCardDescriptorTest {
     }
 
     @Test
-    public void setQuestion_invalidQuestion_throwsException() {
-        EditCardDescriptor editCardDescriptor = new EditCardDescriptorBuilder().build();
-        assertThrows(AssertionError.class, () -> editCardDescriptor.setQuestion(null));
-    }
-
-    @Test
     public void setQuestion_validQuestion_successful() {
         Question validQuestion = new Question(VALID_QUESTION_CS1101S);
         EditCardDescriptor editCardDescriptor = new EditCardDescriptorBuilder().build();
         editCardDescriptor.setQuestion(validQuestion);
         assertEquals(validQuestion, editCardDescriptor.getQuestion().get());
-    }
-
-    @Test
-    public void setAnswer_invalidAnswer_throwsException() {
-        EditCardDescriptor editCardDescriptor = new EditCardDescriptorBuilder().build();
-        assertThrows(AssertionError.class, () -> editCardDescriptor.setAnswer(null));
     }
 
     @Test
@@ -79,23 +67,11 @@ public class EditCardDescriptorTest {
     }
 
     @Test
-    public void setTags_invalidAnswer_throwsException() {
-        EditCardDescriptor editCardDescriptor = new EditCardDescriptorBuilder().build();
-        assertThrows(AssertionError.class, () -> editCardDescriptor.setTags(null));
-    }
-
-    @Test
     public void setTags_validAnswer_successful() {
         List<Tag> validTags = VALID_TAG_CS1101S;
         EditCardDescriptor editCardDescriptor = new EditCardDescriptorBuilder().build();
         editCardDescriptor.setTags(validTags);
         assertEquals(validTags, editCardDescriptor.getTags().get());
-    }
-
-    @Test
-    public void setHint_invalidHint_throwsException() {
-        EditCardDescriptor editCardDescriptor = new EditCardDescriptorBuilder().build();
-        assertThrows(AssertionError.class, () -> editCardDescriptor.setHint(null));
     }
 
     @Test

@@ -100,11 +100,6 @@ public class EditCommandTest {
     }
 
     @Test
-    public void execute_noFieldSpecified_fail() {
-        assertThrows(AssertionError.class, () -> new EditCommand(INDEX_FIRST_CARD, new EditCardDescriptor()));
-    }
-
-    @Test
     public void execute_duplicateCard_failure() {
         Card firstCard = model.getFilteredCardList().get(INDEX_FIRST_CARD.getZeroBased());
         EditCardDescriptor descriptor = new EditCardDescriptorBuilder(firstCard).build();

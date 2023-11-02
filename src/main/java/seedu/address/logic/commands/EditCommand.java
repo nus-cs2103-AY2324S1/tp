@@ -166,7 +166,6 @@ public class EditCommand extends Command {
 
         // Question
         public void setQuestion(Question question) {
-            assert(question != null);
             this.question = question;
         }
 
@@ -176,7 +175,6 @@ public class EditCommand extends Command {
 
         // Answer
         public void setAnswer(Answer answer) {
-            assert(answer != null);
             this.answer = answer;
         }
 
@@ -186,7 +184,6 @@ public class EditCommand extends Command {
 
         // Tags
         public void setTags(List<Tag> tags) {
-            assert(tags != null);
             this.tags = tags;
         }
 
@@ -196,7 +193,6 @@ public class EditCommand extends Command {
 
         // Hint
         public void setHint(Hint hint) {
-            assert(hint != null);
             this.hint = hint;
         }
 

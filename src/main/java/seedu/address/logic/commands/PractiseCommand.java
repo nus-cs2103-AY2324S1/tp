@@ -34,6 +34,7 @@ public class PractiseCommand extends Command {
      * @param targetIndex The index of the target card.
      */
     public PractiseCommand(Index targetIndex) {
+        requireNonNull(targetIndex);
         this.targetIndex = targetIndex;
     }
 
