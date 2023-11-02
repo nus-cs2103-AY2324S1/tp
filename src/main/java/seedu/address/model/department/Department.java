@@ -1,7 +1,13 @@
 package seedu.address.model.department;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.AppUtil.checkArgument;
+
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
+
+import seedu.address.model.name.DepartmentName;
+import seedu.address.model.name.EmployeeName;
 
 /**
  * Represents a Department in the ManageHR.
@@ -9,28 +15,46 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Department {
 
-    public static final String MESSAGE_CONSTRAINTS = "Departments names should be alphabets"
-            + " and/or ascii characters only";
-    public static final String VALIDATION_REGEX = "[A-Za-z\\p{ASCII}&&[^0-9]]+";
-
-    public final String departmentName;
+    public final DepartmentName name;
+    private final Set<EmployeeName> employees = new HashSet<>();
 
     /**
      * Constructs a {@code Department}.
      *
-     * @param departmentName A valid department name.
+     * @param name A valid department name of type String.
      */
-    public Department(String departmentName) {
-        requireNonNull(departmentName);
-        checkArgument(isValidDepartmentName(departmentName), MESSAGE_CONSTRAINTS);
-        this.departmentName = departmentName;
+    public Department(String name) {
+        requireNonNull(name);
+        this.name = new DepartmentName(name);
     }
 
     /**
-     * Returns true if a given string is a valid department name.
+     * Constructs a {@code Department}.
+     *
+     * @param name A valid department name of type Name.
      */
-    public static boolean isValidDepartmentName(String test) {
-        return test.matches(VALIDATION_REGEX);
+    public Department(DepartmentName name) {
+        requireNonNull(name);
+        this.name = name;
+    }
+
+    /**
+     * Constructs a {@code Department}.
+     *
+     * @param name A valid department name of type Name.
+     */
+    public Department(DepartmentName name, Set<EmployeeName> employees) {
+        requireNonNull(name);
+        requireNonNull(employees);
+        this.name = name;
+        this.employees.addAll(employees);
+    }
+    public String getName() {
+        return name.fullName;
+    }
+
+    public Set<EmployeeName> getEmployees() {
+        return Collections.unmodifiableSet(employees);
     }
 
     @Override
@@ -45,19 +69,31 @@ public class Department {
         }
 
         Department otherDepartment = (Department) other;
-        return departmentName.equals(otherDepartment.departmentName);
+        return this.getName().equals(otherDepartment.getName());
+    }
+
+    /**
+     * Returns true if both department have the same name.
+     * This defines a weaker notion of equality between two department.
+     */
+    public boolean isSameDepartment(Department otherDepartment) {
+        return otherDepartment.equals(this);
+    }
+
+    public boolean isSameDepartmentName(DepartmentName name) {
+        return this.name.equals(name);
     }
 
     @Override
     public int hashCode() {
-        return departmentName.hashCode();
+        return name.hashCode();
     }
 
     /**
      * Format state as text for viewing.
      */
     public String toString() {
-        return '[' + departmentName + ']';
+        return '[' + name.fullName + ']';
     }
 
 }

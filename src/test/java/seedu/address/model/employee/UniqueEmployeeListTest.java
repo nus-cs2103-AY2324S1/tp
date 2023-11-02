@@ -30,7 +30,8 @@ public class UniqueEmployeeListTest {
 
     @Test
     public void contains_nullEmployee_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> uniqueEmployeeList.contains(null));
+        Employee employee = null;
+        assertThrows(NullPointerException.class, () -> uniqueEmployeeList.contains(employee));
     }
 
     @Test

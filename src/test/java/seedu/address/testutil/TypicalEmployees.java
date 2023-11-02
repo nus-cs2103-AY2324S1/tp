@@ -23,6 +23,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import seedu.address.model.ManageHr;
+import seedu.address.model.department.Department;
 import seedu.address.model.employee.Employee;
 
 /**
@@ -90,6 +91,9 @@ public class TypicalEmployees {
      */
     public static ManageHr getTypicalManageHr() {
         ManageHr hr = new ManageHr();
+        for (Department department: DepartmentBuilder.getTypicalDepartments()) {
+            hr.addDepartment(department);
+        }
         for (Employee employee : getTypicalEmployees()) {
             hr.addEmployee(employee);
         }

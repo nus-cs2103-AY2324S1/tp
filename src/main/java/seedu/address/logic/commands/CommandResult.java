@@ -18,14 +18,26 @@ public class CommandResult {
 
     /** The application should exit. */
     private final boolean exit;
+    private final String cmdUsage;
+    private final String cmdExample;
+
+    /**
+     * Constructs a {@code CommandResult} with the specified fields.
+     */
+    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit,
+                         String cmdUsage, String cmdExample) {
+        this.feedbackToUser = requireNonNull(feedbackToUser);
+        this.showHelp = showHelp;
+        this.exit = exit;
+        this.cmdUsage = cmdUsage;
+        this.cmdExample = cmdExample;
+    }
 
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
     public CommandResult(String feedbackToUser, boolean showHelp, boolean exit) {
-        this.feedbackToUser = requireNonNull(feedbackToUser);
-        this.showHelp = showHelp;
-        this.exit = exit;
+        this(feedbackToUser, showHelp, exit, "", "");
     }
 
     /**
@@ -33,7 +45,7 @@ public class CommandResult {
      * and other fields set to their default value.
      */
     public CommandResult(String feedbackToUser) {
-        this(feedbackToUser, false, false);
+        this(feedbackToUser, false, false, "", "");
     }
 
     public String getFeedbackToUser() {
@@ -46,6 +58,21 @@ public class CommandResult {
 
     public boolean isExit() {
         return exit;
+    }
+
+    /**
+     * Gets Command Usage syntax.
+     * @return String with help instructions on command usage.
+     */
+    public String getCmdUsage() {
+        return cmdUsage;
+    }
+    /**
+     * Gets Command example syntax.
+     * @return String with help instructions on command example. Can be copy-pasted.
+     */
+    public String getCmdExample() {
+        return cmdExample;
     }
 
     @Override

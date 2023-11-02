@@ -7,10 +7,15 @@ import java.util.List;
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.department.Department;
+import seedu.address.model.department.UniqueDepartmentList;
+import seedu.address.model.department.exceptions.DepartmentNotFoundException;
 import seedu.address.model.employee.Employee;
 import seedu.address.model.employee.UniqueEmployeeList;
 import seedu.address.model.employee.exceptions.SubordinatePresentException;
 import seedu.address.model.employee.exceptions.SupervisorNotFoundException;
+import seedu.address.model.name.DepartmentName;
+import seedu.address.model.name.EmployeeName;
 
 /**
  * Wraps all data at the ManageHR level
@@ -20,6 +25,7 @@ public class ManageHr implements ReadOnlyManageHr {
 
     private final UniqueEmployeeList employees;
 
+    private final UniqueDepartmentList departments;
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
      * between constructors. See https://docs.oracle.com/javase/tutorial/java/javaOO/initial.html
@@ -28,6 +34,7 @@ public class ManageHr implements ReadOnlyManageHr {
      *   among constructors.
      */
     {
+        departments = new UniqueDepartmentList();
         employees = new UniqueEmployeeList();
     }
 
@@ -44,10 +51,25 @@ public class ManageHr implements ReadOnlyManageHr {
     //// list overwrite operations
 
     /**
+     * Replaces the contents of the department list with {@code departments}.
+     * {@code departments} must not contain duplicate department.
+     */
+    public void setDepartments(List<Department> departments) {
+        this.departments.setDepartments(departments);
+    }
+
+    /**
      * Replaces the contents of the employee list with {@code people}.
      * {@code people} must not contain duplicate people.
      */
     public void setEmployees(List<Employee> people) {
+        for (Employee employee : people) {
+            for (DepartmentName departmentName : employee.getDepartments()) {
+                if (!departments.contains(departmentName)) {
+                    throw new DepartmentNotFoundException();
+                }
+            }
+        }
         this.employees.setEmployees(people);
     }
 
@@ -56,7 +78,7 @@ public class ManageHr implements ReadOnlyManageHr {
      */
     public void resetData(ReadOnlyManageHr newData) {
         requireNonNull(newData);
-
+        setDepartments(newData.getDepartmentList());
         setEmployees(newData.getEmployeeList());
     }
 
@@ -71,18 +93,31 @@ public class ManageHr implements ReadOnlyManageHr {
     }
 
     /**
+     * Returns true if an employee with the same identity as {@code name} exists in the storage.
+     */
+    public boolean hasEmployeeWithName(EmployeeName name) {
+        requireNonNull(name);
+        return employees.contains(name);
+    }
+    /**
      * Adds an employee to ManageHR.
      * The employee must not already exist in ManageHR.
      *
-     * @param p The employee to be added to the list.
+     * @param employee The employee to be added to the list.
      * @throws SupervisorNotFoundException If the supervisor of the employee is not found in the list.
      */
-    public void addEmployee(Employee p) {
-        requireNonNull(p);
-        if (!employees.containsManager(p)) {
+
+    public void addEmployee(Employee employee) {
+        requireNonNull(employee);
+        for (DepartmentName departmentName : employee.getDepartments()) {
+            if (!departments.contains(departmentName)) {
+                throw new DepartmentNotFoundException();
+            }
+        }
+        if (!employees.containsManager(employee)) {
             throw new SupervisorNotFoundException();
         }
-        employees.add(p);
+        employees.add(employee);
     }
 
     /**
@@ -97,6 +132,11 @@ public class ManageHr implements ReadOnlyManageHr {
      */
     public void setEmployee(Employee target, Employee editedEmployee) throws CommandException {
         requireNonNull(editedEmployee);
+        for (DepartmentName departmentName : editedEmployee.getDepartments()) {
+            if (!departments.contains(departmentName)) {
+                throw new DepartmentNotFoundException();
+            }
+        }
         if (!target.isSameEmployee(editedEmployee) && employees.hasSubordinates(target)) {
             throw new SubordinatePresentException();
         }
@@ -131,6 +171,47 @@ public class ManageHr implements ReadOnlyManageHr {
         employees.remove(key);
     }
 
+    /**
+     * Returns true if an department with the same identity as {@code department} exists in the storage.
+     */
+    public boolean hasDepartment(Department department) {
+        requireNonNull(department);
+        return departments.contains(department);
+    }
+
+    /**
+     * Returns true if a department with the same identity as {@code name} exists in the storage.
+     */
+    public boolean hasDepartmentWithName(DepartmentName name) {
+        requireNonNull(name);
+        return departments.contains(name);
+    }
+
+    /**
+     * Adds a department to ManageHR.
+     * The employee must not already exist in ManageHR.
+     */
+    public void addDepartment(Department d) {
+        departments.add(d);
+    }
+
+    /**
+     * Replaces the given employee {@code target} in the list with {@code editedEmployee}.
+     * {@code target} must exist in the ManageHR.
+     * The employee identity of {@code editedEmployee} must not be the same as another existing employee in ManageHR.
+     */
+    public void setDepartment(Department target, Department editedDepartment) {
+        requireNonNull(editedDepartment);
+        departments.setDepartment(target, editedDepartment);
+    }
+
+    /**
+     * Removes {@code key} from this {@code ManageHr}.
+     * {@code key} must exist in the ManageHr.
+     */
+    public void removeDepartment(Department key) {
+        departments.remove(key);
+    }
     //// util methods
 
     @Override
@@ -143,6 +224,11 @@ public class ManageHr implements ReadOnlyManageHr {
     @Override
     public ObservableList<Employee> getEmployeeList() {
         return employees.asUnmodifiableObservableList();
+    }
+
+    @Override
+    public ObservableList<Department> getDepartmentList() {
+        return departments.asUnmodifiableObservableList();
     }
 
     @Override

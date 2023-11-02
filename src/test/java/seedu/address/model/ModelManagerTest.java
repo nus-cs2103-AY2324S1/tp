@@ -5,8 +5,11 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_EMPLOYEES;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.DepartmentBuilder.DEPARTMENT_INVESTMENT;
+import static seedu.address.testutil.DepartmentBuilder.DEPARTMENT_LOGISTICS;
 import static seedu.address.testutil.TypicalEmployees.ALICE;
 import static seedu.address.testutil.TypicalEmployees.BENSON;
+import static seedu.address.testutil.TypicalEmployees.ELLE;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -15,7 +18,7 @@ import java.util.Arrays;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.model.employee.NameContainsKeywordsPredicate;
+import seedu.address.model.name.NameContainsKeywordsPredicate;
 import seedu.address.testutil.ManageHrBuilder;
 
 public class ModelManagerTest {
@@ -84,8 +87,8 @@ public class ModelManagerTest {
 
     @Test
     public void hasEmployee_employeeInManageHr_returnsTrue() {
-        modelManager.addEmployee(ALICE);
-        assertTrue(modelManager.hasEmployee(ALICE));
+        modelManager.addEmployee(ELLE);
+        assertTrue(modelManager.hasEmployee(ELLE));
     }
 
     @Test
@@ -95,7 +98,8 @@ public class ModelManagerTest {
 
     @Test
     public void equals() {
-        ManageHr manageHR = new ManageHrBuilder().withEmployee(ALICE).withEmployee(BENSON).build();
+        ManageHr manageHR = new ManageHrBuilder().withDepartment(DEPARTMENT_INVESTMENT)
+                .withDepartment(DEPARTMENT_LOGISTICS).withEmployee(ALICE).withEmployee(BENSON).build();
         ManageHr differentManageHr = new ManageHr();
         UserPrefs userPrefs = new UserPrefs();
 

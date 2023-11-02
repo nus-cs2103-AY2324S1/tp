@@ -8,7 +8,9 @@ import seedu.address.model.Model;
 public class ExitCommand extends Command {
 
     public static final String COMMAND_WORD = "exit";
-
+    public static final String MESSAGE_EXAMPLE = COMMAND_WORD;
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Closes ManageHR.\n"
+            + "Example: " + MESSAGE_EXAMPLE;
     public static final String MESSAGE_EXIT_ACKNOWLEDGEMENT = "Exiting ManageHR app as requested ...";
 
     @Override

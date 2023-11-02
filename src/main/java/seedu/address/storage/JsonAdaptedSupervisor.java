@@ -4,10 +4,10 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.employee.Name;
+import seedu.address.model.name.EmployeeName;
 
 /**
- * Jackson-friendly version of {@link Name}.
+ * Jackson-friendly version of {@link EmployeeName}.
  */
 class JsonAdaptedSupervisor {
 
@@ -24,7 +24,7 @@ class JsonAdaptedSupervisor {
     /**
      * Converts a given {@code Name} into this class for Jackson use.
      */
-    public JsonAdaptedSupervisor(Name source) {
+    public JsonAdaptedSupervisor(EmployeeName source) {
         managerName = source.fullName;
     }
 
@@ -38,11 +38,11 @@ class JsonAdaptedSupervisor {
      *
      * @throws IllegalValueException if there were any data constraints violated in the adapted department.
      */
-    public Name toModelType() throws IllegalValueException {
-        if (!Name.isValidName(managerName)) {
-            throw new IllegalValueException(Name.MESSAGE_CONSTRAINTS);
+    public EmployeeName toModelType() throws IllegalValueException {
+        if (!EmployeeName.isValidName(managerName)) {
+            throw new IllegalValueException(EmployeeName.MESSAGE_CONSTRAINTS);
         }
-        return new Name(managerName);
+        return new EmployeeName(managerName);
     }
 
 }
