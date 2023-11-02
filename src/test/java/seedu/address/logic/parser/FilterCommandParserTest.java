@@ -13,6 +13,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.FilterCommand;
 import seedu.address.model.employee.ContainsDepartmentPredicate;
+import seedu.address.model.employee.Salary;
 
 public class FilterCommandParserTest {
     private FilterCommandParser parser = new FilterCommandParser();
@@ -26,12 +27,14 @@ public class FilterCommandParserTest {
     @Test
     public void parse_validArgs_returnsFilterCommand() {
         String userInput = DEPARTMENT_DESC_INVESTMENT;
-        FilterCommand expectedFilterCommand =
-                new FilterCommand(new ContainsDepartmentPredicate(VALID_DEPARTMENT_INVESTMENT));
+        ContainsDepartmentPredicate predicate = new ContainsDepartmentPredicate();
+        predicate.setDepartment(VALID_DEPARTMENT_INVESTMENT);
+        FilterCommand expectedFilterCommand = new FilterCommand(predicate);
         assertParseSuccess(parser, userInput, expectedFilterCommand);
 
         userInput = DEPARTMENT_DESC_LOGISTIC;
-        expectedFilterCommand = new FilterCommand(new ContainsDepartmentPredicate(VALID_DEPARTMENT_LOGISTIC));
+        predicate.setDepartment(VALID_DEPARTMENT_LOGISTIC);
+        expectedFilterCommand = new FilterCommand(predicate);
         assertParseSuccess(parser, userInput, expectedFilterCommand);
     }
 
@@ -40,5 +43,30 @@ public class FilterCommandParserTest {
         String userInput = DEPARTMENT_DESC_INVESTMENT + DEPARTMENT_DESC_LOGISTIC;
         assertParseFailure(parser, userInput, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 FilterCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void parse_validSalaryArgs_returnsFilterCommand() {
+        String userInput = " s/4000";
+        ContainsDepartmentPredicate predicate = new ContainsDepartmentPredicate();
+        predicate.setSalary(new Salary("4000"));
+        FilterCommand expectedFilterCommand = new FilterCommand(predicate);
+        assertParseSuccess(parser, userInput, expectedFilterCommand);
+
+        userInput = " s/8000";
+        predicate = new ContainsDepartmentPredicate();
+        predicate.setSalary(new Salary("8000"));
+        expectedFilterCommand = new FilterCommand(predicate);
+        assertParseSuccess(parser, userInput, expectedFilterCommand);
+    }
+
+    @Test
+    public void parse_validSalaryAndDepartmentArgs_returnsFilterCommand() {
+        String userInput = " d/R&D s/2000";
+        ContainsDepartmentPredicate predicate = new ContainsDepartmentPredicate();
+        predicate.setDepartment("R&D");
+        predicate.setSalary(new Salary("2000"));
+        FilterCommand expectedFilterCommand = new FilterCommand(predicate);
+        assertParseSuccess(parser, userInput, expectedFilterCommand);
     }
 }

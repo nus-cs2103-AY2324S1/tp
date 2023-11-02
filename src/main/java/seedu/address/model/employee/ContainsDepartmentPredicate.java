@@ -9,8 +9,8 @@ import seedu.address.model.name.DepartmentName;
  * Tests that an {@code Employee}'s {@code Name} matches the keyword given.
  */
 public class ContainsDepartmentPredicate implements Predicate<Employee> {
-    private String keyword;
-    private Salary salary;
+    private String keyword = "";
+    private Salary salary = new Salary("0");
 
     public ContainsDepartmentPredicate() {
     }
@@ -20,14 +20,14 @@ public class ContainsDepartmentPredicate implements Predicate<Employee> {
         boolean departmentResult = true;
         boolean salaryResult = true;
 
-        if (keyword != null) {
+        if (keyword != "") {
             departmentResult = employee.getDepartments().contains(new DepartmentName(keyword)) ? true : false;
         }
 
-        if (salary != null) {
-            Integer actual = Integer.valueOf(employee.getSalary().toString());
-            Integer test = Integer.valueOf(salary.toString());
-            salaryResult = actual <= test ? true : false;
+        if (salary.value != "0") {
+            Integer actualValue = Integer.valueOf(employee.getSalary().toString());
+            Integer filterValue = Integer.valueOf(salary.toString());
+            salaryResult = actualValue <= filterValue ? true : false;
         }
 
         return departmentResult && salaryResult;
@@ -53,11 +53,15 @@ public class ContainsDepartmentPredicate implements Predicate<Employee> {
         }
 
         ContainsDepartmentPredicate otherContainsDepartmentPredicate = (ContainsDepartmentPredicate) other;
-        return keyword.equals(otherContainsDepartmentPredicate.keyword);
+        return keyword.equals(otherContainsDepartmentPredicate.keyword)
+                && salary.equals(otherContainsDepartmentPredicate.salary);
     }
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this).add("keyword", keyword).toString();
+        return new ToStringBuilder(this)
+                .add("keyword", keyword)
+                .add("salary", salary)
+                .toString();
     }
 }
