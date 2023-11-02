@@ -49,7 +49,5 @@ public class InteractionEntry extends UiPart<Region> {
         default:
             outcome.getStyleClass().add("unknown");
         }
-
-        System.out.println(outcome.getStyleClass());
     }
 }
