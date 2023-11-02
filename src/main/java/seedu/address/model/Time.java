@@ -39,46 +39,6 @@ public class Time implements Comparable<Time> {
     }
 
     /**
-     * Returns the interviews which clash with the current interview
-     *
-     * @author Tan Kerway
-     * @param startTime the start time of the interview that the user wants to schedule
-     * @param endTime the end time of the interview that the user wants to schedule
-     * @param interviews the list of interviews that the user has already
-     *                   scheduled
-     * @return a list of interviews that clash with the interview to be
-     *         scheduled
-     */
-    public static List<Interview> listInterviewClashes(LocalDateTime startTime,
-                                                       LocalDateTime endTime, UniqueInterviewList interviews) {
-        List<Interview> res = new ArrayList<>();
-        for (Interview currentInterview : interviews) {
-            // get the start time of the current interview
-            LocalDateTime currentInterviewStartTime = currentInterview.getInterviewStartTime();
-            // get the end time of the current interview
-            LocalDateTime currentInterviewEndTime = currentInterview.getInterviewEndTime();
-            // case 1: the current interview is completely within the interview to be added
-            boolean completelyInside = (currentInterviewStartTime.isAfter(startTime)
-                    && currentInterviewStartTime.isBefore(endTime))
-                    && (currentInterviewEndTime.isAfter(startTime)
-                    && currentInterviewEndTime.isBefore(endTime));
-            // case 2: the interview to be added is completely within the current interview
-            boolean completelyOutside = currentInterviewStartTime.isBefore(startTime)
-                    && currentInterviewEndTime.isAfter(endTime);
-            // case 3: the current interview end time falls within the interview to be added
-            boolean endInside = currentInterviewEndTime.isAfter(startTime)
-                    && currentInterviewEndTime.isBefore(endTime);
-            // case 4: the current interview start time falls within the interview to be added
-            boolean startInside = currentInterviewStartTime.isAfter(startTime)
-                    && currentInterviewStartTime.isBefore(endTime);
-            if (completelyInside || completelyOutside || endInside || startInside) {
-                res.add(currentInterview);
-            }
-        }
-        return res;
-    }
-
-    /**
      * Lists out all interviews that have a start time of today
      *
      * @author Tan Kerway
