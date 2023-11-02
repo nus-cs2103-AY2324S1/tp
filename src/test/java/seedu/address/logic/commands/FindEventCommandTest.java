@@ -60,7 +60,9 @@ public class FindEventCommandTest {
         String expectedMessage = String.format(MESSAGE_EVENTS_LISTED_OVERVIEW, 0);
         EventNameOrGroupContainsKeywordsPredicate predicate = preparePredicate(" ");
         FindEventCommand command = new FindEventCommand(predicate);
+        predicate.setPersonList(expectedModel.getFullPersonList());
         expectedModel.updateFilteredEventList(predicate);
+        predicate.setPersonList(model.getFullPersonList());
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Collections.emptyList(), model.getFilteredEventList());
     }
@@ -71,7 +73,9 @@ public class FindEventCommandTest {
         String expectedMessage = String.format(MESSAGE_EVENTS_LISTED_OVERVIEW, 2);
         EventNameOrGroupContainsKeywordsPredicate predicate = preparePredicate("Project");
         FindEventCommand command = new FindEventCommand(predicate);
+        predicate.setPersonList(expectedModel.getFullPersonList());
         expectedModel.updateFilteredEventList(predicate);
+        predicate.setPersonList(model.getFullPersonList());
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(MEETING_PROJECT_DISCUSSION, MEETING_PROJECT_PRESENTATION),
                 model.getFilteredEventList());
@@ -80,7 +84,9 @@ public class FindEventCommandTest {
         expectedMessage = String.format(MESSAGE_EVENTS_LISTED_OVERVIEW, 2);
         predicate = preparePredicate("Alice");
         command = new FindEventCommand(predicate);
+        predicate.setPersonList(expectedModel.getFullPersonList());
         expectedModel.updateFilteredEventList(predicate);
+        predicate.setPersonList(model.getFullPersonList());
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(MEETING_BIRTHDAY_PARTY, MEETING_ASSIGNMENT_SUBMISSION),
                 model.getFilteredEventList());
@@ -89,7 +95,9 @@ public class FindEventCommandTest {
         expectedMessage = String.format(MESSAGE_EVENTS_LISTED_OVERVIEW, 2);
         predicate = preparePredicate("CS2103T");
         command = new FindEventCommand(predicate);
+        predicate.setPersonList(expectedModel.getFullPersonList());
         expectedModel.updateFilteredEventList(predicate);
+        predicate.setPersonList(model.getFullPersonList());
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(MEETING_PROJECT_DISCUSSION, MEETING_PROJECT_PRESENTATION),
                 model.getFilteredEventList());
@@ -101,7 +109,9 @@ public class FindEventCommandTest {
         String expectedMessage = String.format(MESSAGE_EVENTS_LISTED_OVERVIEW, 3);
         EventNameOrGroupContainsKeywordsPredicate predicate = preparePredicate("party submission presentation");
         FindEventCommand command = new FindEventCommand(predicate);
+        predicate.setPersonList(expectedModel.getFullPersonList());
         expectedModel.updateFilteredEventList(predicate);
+        predicate.setPersonList(model.getFullPersonList());
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(MEETING_BIRTHDAY_PARTY, MEETING_ASSIGNMENT_SUBMISSION, MEETING_PROJECT_PRESENTATION),
                 model.getFilteredEventList());
@@ -110,7 +120,9 @@ public class FindEventCommandTest {
         expectedMessage = String.format(MESSAGE_EVENTS_LISTED_OVERVIEW, 2);
         predicate = preparePredicate("Bob Carl");
         command = new FindEventCommand(predicate);
+        predicate.setPersonList(expectedModel.getFullPersonList());
         expectedModel.updateFilteredEventList(predicate);
+        predicate.setPersonList(model.getFullPersonList());
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(MEETING_BIRTHDAY_PARTY, MEETING_ASSIGNMENT_SUBMISSION),
                 model.getFilteredEventList());
@@ -119,7 +131,9 @@ public class FindEventCommandTest {
         expectedMessage = String.format(MESSAGE_EVENTS_LISTED_OVERVIEW, 2);
         predicate = preparePredicate("friends classmates");
         command = new FindEventCommand(predicate);
+        predicate.setPersonList(expectedModel.getFullPersonList());
         expectedModel.updateFilteredEventList(predicate);
+        predicate.setPersonList(model.getFullPersonList());
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(MEETING_BIRTHDAY_PARTY, MEETING_ASSIGNMENT_SUBMISSION),
                 model.getFilteredEventList());
@@ -128,7 +142,9 @@ public class FindEventCommandTest {
         expectedMessage = String.format(MESSAGE_EVENTS_LISTED_OVERVIEW, 2);
         predicate = preparePredicate("Bob Submission");
         command = new FindEventCommand(predicate);
+        predicate.setPersonList(expectedModel.getFullPersonList());
         expectedModel.updateFilteredEventList(predicate);
+        predicate.setPersonList(model.getFullPersonList());
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(MEETING_BIRTHDAY_PARTY, MEETING_ASSIGNMENT_SUBMISSION),
                 model.getFilteredEventList());
@@ -137,7 +153,9 @@ public class FindEventCommandTest {
         expectedMessage = String.format(MESSAGE_EVENTS_LISTED_OVERVIEW, 2);
         predicate = preparePredicate("friends Carl");
         command = new FindEventCommand(predicate);
+        predicate.setPersonList(expectedModel.getFullPersonList());
         expectedModel.updateFilteredEventList(predicate);
+        predicate.setPersonList(model.getFullPersonList());
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(MEETING_BIRTHDAY_PARTY, MEETING_ASSIGNMENT_SUBMISSION),
                 model.getFilteredEventList());
@@ -146,7 +164,9 @@ public class FindEventCommandTest {
         expectedMessage = String.format(MESSAGE_EVENTS_LISTED_OVERVIEW, 2);
         predicate = preparePredicate("friends Submission");
         command = new FindEventCommand(predicate);
+        predicate.setPersonList(expectedModel.getFullPersonList());
         expectedModel.updateFilteredEventList(predicate);
+        predicate.setPersonList(model.getFullPersonList());
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(MEETING_BIRTHDAY_PARTY, MEETING_ASSIGNMENT_SUBMISSION),
                 model.getFilteredEventList());
@@ -155,7 +175,9 @@ public class FindEventCommandTest {
         expectedMessage = String.format(MESSAGE_EVENTS_LISTED_OVERVIEW, 4);
         predicate = preparePredicate("friends Submission CS2103T");
         command = new FindEventCommand(predicate);
+        predicate.setPersonList(expectedModel.getFullPersonList());
         expectedModel.updateFilteredEventList(predicate);
+        predicate.setPersonList(model.getFullPersonList());
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(MEETING_BIRTHDAY_PARTY, MEETING_ASSIGNMENT_SUBMISSION, MEETING_PROJECT_DISCUSSION,
                         MEETING_PROJECT_PRESENTATION),
@@ -168,7 +190,9 @@ public class FindEventCommandTest {
         String expectedMessage = String.format(MESSAGE_EVENTS_LISTED_OVERVIEW, 1);
         EventNameOrGroupContainsKeywordsPredicate predicate = preparePredicate("birthday party");
         FindEventCommand command = new FindEventCommand(predicate);
+        predicate.setPersonList(expectedModel.getFullPersonList());
         expectedModel.updateFilteredEventList(predicate);
+        predicate.setPersonList(model.getFullPersonList());
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(MEETING_BIRTHDAY_PARTY), model.getFilteredEventList());
 
@@ -176,7 +200,9 @@ public class FindEventCommandTest {
         expectedMessage = String.format(MESSAGE_EVENTS_LISTED_OVERVIEW, 1);
         predicate = preparePredicate("Bob Daniel");
         command = new FindEventCommand(predicate);
+        predicate.setPersonList(expectedModel.getFullPersonList());
         expectedModel.updateFilteredEventList(predicate);
+        predicate.setPersonList(model.getFullPersonList());
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(MEETING_BIRTHDAY_PARTY),
                 model.getFilteredEventList());
@@ -185,7 +211,9 @@ public class FindEventCommandTest {
         expectedMessage = String.format(MESSAGE_EVENTS_LISTED_OVERVIEW, 1);
         predicate = preparePredicate("friends family");
         command = new FindEventCommand(predicate);
+        predicate.setPersonList(expectedModel.getFullPersonList());
         expectedModel.updateFilteredEventList(predicate);
+        predicate.setPersonList(model.getFullPersonList());
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(MEETING_BIRTHDAY_PARTY),
                 model.getFilteredEventList());
@@ -194,37 +222,43 @@ public class FindEventCommandTest {
         expectedMessage = String.format(MESSAGE_EVENTS_LISTED_OVERVIEW, 1);
         predicate = preparePredicate("Bob Party");
         command = new FindEventCommand(predicate);
+        predicate.setPersonList(expectedModel.getFullPersonList());
         expectedModel.updateFilteredEventList(predicate);
+        predicate.setPersonList(model.getFullPersonList());
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(MEETING_BIRTHDAY_PARTY),
                 model.getFilteredEventList());
 
         // Person and group name
         expectedMessage = String.format(MESSAGE_EVENTS_LISTED_OVERVIEW, 1);
-        predicate = preparePredicate("classmates Carl");
+        predicate = preparePredicate("family Bob");
         command = new FindEventCommand(predicate);
+        predicate.setPersonList(expectedModel.getFullPersonList());
         expectedModel.updateFilteredEventList(predicate);
+        predicate.setPersonList(model.getFullPersonList());
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(MEETING_ASSIGNMENT_SUBMISSION),
-                model.getFilteredEventList());
+        assertEquals(Arrays.asList(MEETING_BIRTHDAY_PARTY), model.getFilteredEventList());
 
         // Event and group name
         expectedMessage = String.format(MESSAGE_EVENTS_LISTED_OVERVIEW, 1);
         predicate = preparePredicate("Party friends");
         command = new FindEventCommand(predicate);
+        predicate.setPersonList(expectedModel.getFullPersonList());
         expectedModel.updateFilteredEventList(predicate);
+        predicate.setPersonList(model.getFullPersonList());
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(MEETING_BIRTHDAY_PARTY),
                 model.getFilteredEventList());
 
-        // Event, person and group name
+        // Event, person and group name (problem)
         expectedMessage = String.format(MESSAGE_EVENTS_LISTED_OVERVIEW, 1);
-        predicate = preparePredicate("Carl Submission classmates");
+        predicate = preparePredicate("Bob Party friends");
         command = new FindEventCommand(predicate);
+        predicate.setPersonList(expectedModel.getFullPersonList());
         expectedModel.updateFilteredEventList(predicate);
+        predicate.setPersonList(model.getFullPersonList());
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(MEETING_ASSIGNMENT_SUBMISSION),
-                model.getFilteredEventList());
+        assertEquals(Arrays.asList(MEETING_BIRTHDAY_PARTY), model.getFilteredEventList());
     }
 
     @Test

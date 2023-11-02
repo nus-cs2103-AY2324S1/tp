@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import javafx.collections.FXCollections;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
@@ -153,7 +154,10 @@ public class CommandTestUtil {
 
         Event event = model.getFilteredEventList().get(targetIndex.getZeroBased());
         final String[] splitName = event.getName().toString().split("\\s+");
-        model.updateFilteredEventList(new EventNameOrGroupContainsKeywordsPredicate(Arrays.asList(splitName[0])));
+        EventNameOrGroupContainsKeywordsPredicate predicate =
+                new EventNameOrGroupContainsKeywordsPredicate(Arrays.asList(splitName[0]));
+        predicate.setPersonList(FXCollections.observableArrayList());
+        model.updateFilteredEventList(predicate);
     }
 
 }

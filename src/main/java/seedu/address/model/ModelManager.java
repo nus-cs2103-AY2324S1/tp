@@ -179,6 +179,11 @@ public class ModelManager implements Model {
         return this.filteredPersons;
     }
 
+    @Override
+    public ObservableList<Person> getFullPersonList() {
+        return this.addressBook.getPersonList();
+    }
+
     /**
      * Returns the list of events
      * @return ArrayList of events
