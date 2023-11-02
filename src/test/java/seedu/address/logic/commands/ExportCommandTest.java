@@ -1,8 +1,8 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.*;
+import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -14,10 +14,8 @@ import org.junit.jupiter.api.Test;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.index.Index;
-import seedu.address.model.AddressBook;
-import seedu.address.model.Model;
-import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.*;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.SortIn;
 import seedu.address.model.person.Student;
@@ -33,6 +31,16 @@ public class ExportCommandTest {
         CommandResult commandResult = new ExportCommand(validVisual).execute(modelStub);
 
         assertEquals(String.format(ExportCommand.MESSAGE_SUCCESS), commandResult.getFeedbackToUser());
+    }
+
+    @Test
+    public void execute_emptyTable_exportFailed() {
+        ModelManager model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        Visual validVisual = new Visual("TABLE");
+
+        ExportCommand exportCommand = new ExportCommand(validVisual);
+
+        assertThrows(CommandException.class, () -> exportCommand.execute(model));
     }
 
     @Test
