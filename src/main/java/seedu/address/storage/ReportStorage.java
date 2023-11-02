@@ -1,16 +1,14 @@
 package seedu.address.storage;
 
-import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.employee.Report;
-import seedu.address.logic.Messages;
-
-
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.time.LocalDate;
 
-import java.io.IOException;
-import java.io.File;
-import java.io.BufferedWriter;
-import java.io.FileWriter;
+import seedu.address.logic.Messages;
+import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.employee.Report;
 
 /**
  * Class with methods to handle report storage
@@ -20,6 +18,11 @@ public class ReportStorage {
 
     private ReportStorage() {}
 
+    /**
+     * Saves a report as a txt file in the reports folder
+     * @param report Report to be saved
+     * @throws CommandException If report is null or if there is an error writing to the file
+     */
     public static void saveReport(Report report) throws CommandException {
         //Check if report is valid
         if (report == null) {
@@ -28,7 +31,7 @@ public class ReportStorage {
 
         // Generate report as txt file using file writer
         String reportString = report.toString();
-        String fileName = LocalDate.now() + "_" + report.employee.getName().fullName +  ".txt";
+        String fileName = LocalDate.now() + "_" + report.employee.getName().fullName + ".txt";
 
         // Create reports folder if it does not exist
         File reportFolder = new File(REPORT_FOLDER);

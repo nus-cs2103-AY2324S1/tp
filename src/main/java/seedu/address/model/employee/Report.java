@@ -1,11 +1,11 @@
 package seedu.address.model.employee;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.AppUtil.checkArgument;
+
+import java.time.LocalDate;
 
 import seedu.address.model.remark.RemarkList;
 
-import java.time.LocalDate;
 
 /**
  * Represents an Employee's report.
@@ -18,6 +18,14 @@ public class Report {
     public final int numOfLeaves;
     public final RemarkList remarkList;
 
+    /**
+     * Constructs a {@code Report}.
+     * @param employee A valid employee.
+     * @param overtimeHours valid overtime hours.
+     * @param overtimePay valid overtime pay.
+     * @param numOfLeaves valid number of leaves.
+     * @param remarkList valid remark list.
+     */
     public Report(Employee employee, double overtimeHours, double overtimePay, int numOfLeaves,
                   RemarkList remarkList) {
 
