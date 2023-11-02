@@ -18,6 +18,7 @@ import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.calendar.ReadOnlyCalendar;
 import seedu.address.model.event.Event;
 import seedu.address.model.person.Person;
+import seedu.address.model.task.Task;
 import seedu.address.storage.Storage;
 
 /**
@@ -77,6 +78,11 @@ public class LogicManager implements Logic {
     @Override
     public ObservableList<Event> getEventList() {
         return model.getEventList();
+    }
+
+    @Override
+    public ObservableList<Task> getTaskList() {
+        return model.getTaskList();
     }
 
     @Override

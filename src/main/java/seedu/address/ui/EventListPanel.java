@@ -6,14 +6,13 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
-import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.event.Event;
 
 /**
- * Panel containing the list of persons.
+ * Panel containing the list of events.
  */
-public class EventListPanel extends UiPart<Region> {
+public class EventListPanel extends BottomListPanel {
     private static final String FXML = "EventListPanel.fxml";
     private final Logger logger = LogsCenter.getLogger(EventListPanel.class);
 
@@ -21,7 +20,7 @@ public class EventListPanel extends UiPart<Region> {
     private ListView<Event> eventListView;
 
     /**
-     * Creates a {@code PersonListPanel} with the given {@code ObservableList}.
+     * Creates a {@code EventListPanel} with the given {@code ObservableList}.
      */
     public EventListPanel(ObservableList<Event> eventList) {
         super(FXML);
@@ -30,7 +29,7 @@ public class EventListPanel extends UiPart<Region> {
     }
 
     /**
-     * Custom {@code ListCell} that displays the graphics of a {@code Person} using a {@code PersonCard}.
+     * Custom {@code ListCell} that displays the graphics of a {@code Event} using a {@code EventCard}.
      */
     class EventListViewCell extends ListCell<Event> {
         @Override

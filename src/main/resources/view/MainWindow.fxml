@@ -1,14 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.net.*?>
-<?import javafx.geometry.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.stage.*?>
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Scene?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.stage.Stage?>
 
-<fx:root minHeight="800" minWidth="450" onCloseRequest="#handleExit" title="Address App" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root minHeight="800" minWidth="450" onCloseRequest="#handleExit" title="Address App" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
   <icons>
     <Image url="@/images/address_book_32.png" />
   </icons>
@@ -49,30 +55,26 @@
             <StackPane fx:id="personListPanelPlaceholder" VBox.vgrow="ALWAYS" />
           </VBox>
 
-          <BorderPane minWidth="340" prefWidth="340" styleClass="pane-with-border" HBox.hgrow="ALWAYS"
-                      VBox.vgrow="ALWAYS">
+          <BorderPane minWidth="340" prefWidth="340" styleClass="pane-with-border" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
             <top>
-              <Label alignment="CENTER" minHeight="40" minWidth="340" prefHeight="40.0" prefWidth="340.0"
-                     styleClass="calendar_header_label" text="Calendar" textAlignment="CENTER"
-                     BorderPane.alignment="CENTER" HBox.hgrow="ALWAYS" VBox.vgrow="NEVER"/>
+              <Label alignment="CENTER" minHeight="40" minWidth="340" prefHeight="40.0" prefWidth="340.0" styleClass="calendar_header_label" text="Calendar" textAlignment="CENTER" BorderPane.alignment="CENTER" HBox.hgrow="ALWAYS" VBox.vgrow="NEVER" />
             </top>
 
             <center>
-              <StackPane fx:id="calendarPlaceholder" minWidth="340" prefWidth="340" styleClass="pane-without-border"
-                         HBox.hgrow="ALWAYS" VBox.vgrow="NEVER" minHeight="240" prefHeight="240">
+              <StackPane fx:id="calendarPlaceholder" minHeight="240" minWidth="340" prefHeight="240" prefWidth="340" styleClass="pane-without-border" HBox.hgrow="ALWAYS" VBox.vgrow="NEVER">
                 <padding>
-                  <Insets bottom="10" left="10" right="10" top="10"/>
+                  <Insets bottom="10" left="10" right="10" top="10" />
                 </padding>
               </StackPane>
             </center>
           </BorderPane>
         </HBox>
 
-        <VBox fx:id="eventList" minWidth="340" prefWidth="340" styleClass="pane-with-border" VBox.vgrow="ALWAYS">
+        <VBox fx:id="bottomList" minWidth="340" prefWidth="340" styleClass="pane-with-border" VBox.vgrow="ALWAYS">
           <padding>
             <Insets bottom="10" left="10" right="10" top="10" />
           </padding>
-          <StackPane fx:id="eventListPanelPlaceholder" VBox.vgrow="ALWAYS" />
+          <StackPane fx:id="bottomListPanelPlaceholder" VBox.vgrow="ALWAYS" />
         </VBox>
 
         <StackPane fx:id="statusbarPlaceholder" VBox.vgrow="NEVER" />
