@@ -46,25 +46,25 @@ Once you are familiarised, feel free to use the `clear` command to delete all th
 ## Features
 
 <div markdown="block" class="alert alert-info">
-**:information_source: About the command format:**\
+**:information_source: About the command format:**<br />
 
 - Some commands take in parameters.
 e.g. in `add n/NAME`, the `add` command takes in an `n/` parameter.
 
-- Words in `UPPER_CASE` are placeholders for values to be specified.\
-e.g. in `edit INDEX`, you should specify an `INDEX` such as `edit 1`.\
+- Words in `UPPER_CASE` are placeholders for values to be specified.<br />
+e.g. in `edit INDEX`, you should specify an `INDEX` such as `edit 1`.<br />
 e.g. in `add n/NAME`, you should specify a `NAME` such as `add n/John Doe`.
 
-- Parameters in square brackets are optional.\
+- Parameters in square brackets are optional.<br />
 e.g in `n/NAME [o/NOTE]`, you could specify `n/John Doe o/Good at SE.`, or just `n/John Doe`.
 
-- Parameters with `…`​ after them can be specified multiple times.\
+- Parameters with `…`​ after them can be specified multiple times.<br />
 e.g. in `[t/TAG]…​`, which is optional but can also be specified multiple times, you could specify ` ` (none specified), `t/NUS`, `t/NUS t/CS2103 course` etc.
 
-- Parameters can be specified in any order.\
+- Parameters can be specified in any order.<br />
 e.g. in `n/NAME p/PHONE_NUMBER`, the order `p/PHONE_NUMBER n/NAME` also works.
 
-- Extra words for commands that do not take any parameters (such as `list` or `help`) will be ignored.\
+- Extra words for commands that do not take any parameters (such as `list` or `help`) will be ignored.<br />
 e.g. `list 10 n/John Doe z/Extra` will be interpreted as just `list`.
 
 - If you are using the PDF version of this user guide, be careful when copy-pasting commands that span multiple lines. Spaces surrounding line breaks may get omitted when copied over to the app.
