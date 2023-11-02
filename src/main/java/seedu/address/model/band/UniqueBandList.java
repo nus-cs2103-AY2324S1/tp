@@ -146,10 +146,10 @@ public class UniqueBandList implements Iterable<Band> {
     /**
      * Returns true if musician already exists in the band.
      */
-    public boolean hasMusician(int bandIndex, Musician musician) {
-        requireNonNull(bandIndex);
+    public boolean hasMusician(Band band, Musician musician) {
+        requireNonNull(band);
         requireNonNull(musician);
-        return internalList.get(bandIndex).hasMusician(musician);
+        return band.hasMusician(musician);
     }
     /**
      * Adds a musician to a band.
@@ -166,11 +166,13 @@ public class UniqueBandList implements Iterable<Band> {
     /**
      * Removes a musician from a band.
      */
-    public void removeMusician(int bandIndex, Musician musician) {
-        if (!internalList.get(bandIndex).getModifiableMusicianList().contains(musician)) {
+    public void removeMusician(Band band, Musician musician) {
+        requireNonNull(band);
+        requireNonNull(musician);
+        if (!band.getModifiableMusicianList().contains(musician)) {
             throw new MusicianNotFoundException();
         }
-        internalList.get(bandIndex).getModifiableMusicianList().remove(musician);
+        band.getModifiableMusicianList().remove(musician);
     }
 
     /**

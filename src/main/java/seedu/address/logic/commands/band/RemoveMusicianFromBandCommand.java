@@ -58,7 +58,7 @@ public class RemoveMusicianFromBandCommand extends Command {
         }
 
         model.removeMusicianFromBand(bandTargetIndex.getZeroBased(), musicianTargetIndex.getZeroBased());
-        String bandName = model.getFilteredBandList().get(bandTargetIndex.getZeroBased()).getName().toString();
+        String bandName = model.getFilteredBandList().get(bandTargetIndex.getZeroBased()).getName().fullName;
         model.updateFilteredBandMusicianList(new BandNameContainsKeywordsPredicate(bandName));
         return new CommandResult(String.format(MESSAGE_REMOVE_MUSICIAN_SUCCESS, Messages.format(musicianToRemove)));
     }
