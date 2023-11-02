@@ -62,7 +62,7 @@ public final class Messages {
 
     private static final String UNFORMATTED_ALTERNATECONTACT_INVALID =
             "\"%s\" is not a valid alternate contact. "
-            + "Alternate contacts must roughly be of the form \"socialMedia@name\"";
+            + "Alternate contacts must roughly be of the form \"socialMedia: name\"";
 
     // JSON
     public static final String CONVERT_CONTACTS_DUPLICATE = "Encountered duplicate while converting contacts.";

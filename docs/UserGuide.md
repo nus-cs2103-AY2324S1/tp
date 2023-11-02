@@ -39,9 +39,13 @@ Easily add a new contact to your list with the `add` command.
 * A contact can have any number of tags (including 0)
 * A contact can have any number of alternate contacts (including 0)
 
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+The format for alternate contact is "Type of alternate contact": "Name of alternate contact"
+</div>
+
 **Examples:**
 - `add n/John Doe p/98765432 e/john.doe@email.com`
-- `add n/John Doe p/98765432 e/john.doe@email.com o/CS2103 Prof. t/NUS t/CS2103 course a/Telegram@JohnDoe`
+- `add n/John Doe p/98765432 e/john.doe@email.com o/CS2103 Prof. t/NUS t/CS2103 course a/Telegram: JohnDoe`
 
 ---
 
@@ -116,11 +120,24 @@ Close the ConText application.
 Modify an existing contact's details in your list.
 
 **Format:**
-`edit INDEX n/FULL_NAME p/PHONE_NUMBER e/EMAIL`
+`edit INDEX [n/FULL_NAME] [p/PHONE_NUMBER] [e/EMAIL] [o/NOTE] [t/TAGS]... [a/ALTERNATE_CONTACT]...`
+
+* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. 
+The index must be a positive integer 1, 2, 3, ...
+* At least one of the optional fields must be provided.
+* Existing values will be updated to the input values.
+* When editing tags, existing tags will be removed. The adding of tags is not cumulative.
+* Similar to tags, existing alternate contacts will be removed when editing them.
+* You can remove all the contact's tags by typing `t/` without specifying any tags after it.
+* Similar to tags, you can remove all the contact's alternate contacts by typing `a/` without specifying any alternate
+contacts after it.
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+The format for alternate contact is the same as mentioned above in the <a href="#adding-a-contact-add">Adding a Contact</a> section.
+</div>
 
 **Example:**
 `edit 2 n/John Doe p/98765432 e/john.doe@email.com`
 
 ---
-
 Remember, whenever in doubt, you can always navigate to the help webpage via the `help` tab at the top.

@@ -74,8 +74,8 @@ public final class TestData {
          * Holds {@code AlternateContact}-related data.
          */
         public static final class AlternateContact {
-            public static final String ALPHANUMERIC = "Test1@Example1";
-            public static final String ALPHANUMERIC_UNDERSCORE = "Test2@Example_2";
+            public static final String ALPHANUMERIC = "Test1: Example1";
+            public static final String ALPHANUMERIC_UNDERSCORE = "Test2: Example_2";
             public static final String FLAG = " " + PREFIX_ALTERNATE;
             public static final String FLAG_ALPHANUMERIC = FLAG + ALPHANUMERIC;
             public static final String FLAG_ALPHANUMERIC_UNDERSCORE = FLAG + ALPHANUMERIC_UNDERSCORE;
@@ -93,7 +93,7 @@ public final class TestData {
                             .withEmail("alice@example.com")
                             .withPhone("94351253")
                             .withTags("friends")
-                            .withAlternateContacts("Example@Alice")
+                            .withAlternateContacts("Example: Alice")
                             .build();
             public static final swe.context.model.contact.Contact BENSON =
                     new ContactBuilder()
@@ -102,7 +102,7 @@ public final class TestData {
                             .withEmail("johnd@example.com")
                             .withPhone("98765432")
                             .withTags("owesMoney", "friends")
-                            .withAlternateContacts("Example@Benson", "Example@Benson.Meier")
+                            .withAlternateContacts("Example: Benson", "Example: Benson.Meier")
                             .build();
 
             public static final swe.context.model.contact.Contact CARL =
@@ -119,7 +119,7 @@ public final class TestData {
                             .withPhone("87652533")
                             .withEmail("cornelia@example.com")
                             .withTags("friends")
-                            .withAlternateContacts("Example@Daniel")
+                            .withAlternateContacts("Example: Daniel")
                             .build();
             public static final swe.context.model.contact.Contact ELLE =
                     new ContactBuilder()
@@ -229,8 +229,9 @@ public final class TestData {
          * Holds {@code AlternateContact}-related data.
          */
         public static final class AlternateContact {
-            public static final String MISSING_SYMBOL = "ExampleName";
-            public static final String WHITESPACE = "Example@N ame";
+            public static final String MISSING_SYMBOL = "Example Name";
+            public static final String NO_WHITESPACE = "Example:Name";
+            public static final String WHITESPACE_IN_NAME = "Example: N ame";
             public static final String FLAG_MISSING_SYMBOL = Valid.AlternateContact.FLAG + MISSING_SYMBOL;
         }
     }
