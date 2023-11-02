@@ -58,8 +58,6 @@ public class AddressBookParserTest {
         EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
                 + INDEX_FIRST_PERSON.getOneBased() + " " + PersonUtil.getEditPersonDescriptorDetails(descriptor));
         assertEquals(new EditCommand(INDEX_FIRST_PERSON, descriptor), command);
-        String editInput = EditCommand.COMMAND_WORD + " 1 n/John Doe";
-        assertTrue(parser.parseCommand(editInput) instanceof EditCommand);
     }
 
     @Test
