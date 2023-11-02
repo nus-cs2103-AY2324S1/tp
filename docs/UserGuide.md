@@ -119,7 +119,7 @@ Examples:
 
 Shows a message explaining how to access the help page.
 
-<img alt="help message" src="images/helpMessage.png" width="600">
+<img alt="help message" src="images/helpMessage.png" width="900">
 
 Format: `help`
 
