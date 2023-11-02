@@ -39,6 +39,7 @@ public class InterviewListPanel extends UiPart<Region> {
             if (empty || interview == null) {
                 setGraphic(null);
                 setText(null);
+                setStyle("-fx-background-color: #FAF0FF;");
             } else {
                 setGraphic(new InterviewCard(interview, getIndex() + 1).getRoot());
             }
