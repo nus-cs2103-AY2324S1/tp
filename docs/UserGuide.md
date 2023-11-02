@@ -54,6 +54,88 @@ These are symbols we will be using to highlight certain information to you.
 | :bulb:               | Tips to optimise the use of Foster Family |
 | :exclamation:        | Warning about the usage of commands       |
 
+--------------------------------------------------------------------------------------------------------------------
+## User Interface
+There are mainly two different screens that you may face using Foster Family. 
+
+### The Main Window 
+![Ui](images/Ui.png)
+This is the main view that welcomes you when you first open up Foster Family.
+
+### The Profile Page 
+![Profile](images/screenshots/ProfilePage.png)
+This is the profile view that you can use to add a fosterer or edit an already existing fosterer. 
+
+#### How to open profile
+There are mainly two ways you can use to open this profile page. 
+1. Enter <code>add</code> to view an empty profile page to [add](#adding-a-fosterer-through-the-profile-page-add) a fosterer.
+2. Enter either <code>edit INDEX</code> or <code>view INDEX</code> to [edit](#editing-a-fosterers-detail-through-the-profile-page-edit) or [view](#viewing-a-fosterers-detail-view) the fosterer at index <code>INDEX</code> in Foster Family.
+
+Let's say you want to open a profile of a fosterer name Benson Meie who is currently on index 1. 
+![Benson](images/screenshots/BensonMeieView.png)
+
+Simply enter <code>view 1</code> like the example above, which opens a profile page of a fosterer at index 1, Benson Meie. 
+
+![Example profile](images/screenshots/EditExample.png)
+
+#### Navigating through fields
+Typing in the name of the field of the fosterer - or letters that are close to the name of the field - directs your cursor to the textbox, allowing you to make changes.
+
+![Before typing name](images/screenshots/BeforeEnteringName.png)
+
+In the example above, entering <code>name</code>, or others that are partially name like <code>nam</code> sets focus on the name field.
+
+![Profile navigate field](images/screenshots/NavigatingFields.png)
+
+After you finish editing, pressing the Enter key brings your cursor back to the command box with your new changes intact. <br>
+If you want to revert back to the original value of the field while editing on the textbox, press the Esc key to cancel the changes and bring your cursor back to the command box. 
+
+![Cursor back to commandbox](images/screenshots/CursorBackToCommandbox.png)
+In the example above, after changing name from 'Meie' to 'Mei' the Enter key was pressed. 
+
+The same process can be applied to other fields.
+
+#### Saving changes
+Entering <code>save</code> saves the changes you made into the storage.
+
+Let's say after changing the name, you want to save your changes.
+![Cursor back to commandbox](images/screenshots/SaveCommandBefore.png)
+<br/>
+Key in <code>save</code> and press Enter to save the changes. 
+<br/>
+![Save command after](images/screenshots/SaveCommandAfter.png)
+<br/>
+This saves the changes you made and updates the details of a fosterer or adds a new fosterer with the details (depending on the command used to open the UI). 
+
+#### Exiting the profile page
+Entering <code>exit</code> closes the profile page and leads you back to the main window.
+Attempting to exit without saving your changes will give you a warning message, advising you to save your changes. 
+
+**1. Changes are saved** <br/>
+Let's say you saved your changes already. 
+<br/>
+![Exit command saved before](images/screenshots/ExitCommandSavedBefore.png)
+<br/>
+Type in <code>exit</code> and press Enter to close the profile page.
+<br/>
+![Exit command saved after](images/screenshots/ExitCommandSavedAfter.png) 
+
+**2. Changes are not saved** <br/>
+Let's say you did not save your changes and entered <code>exit</code>. 
+<br/>
+![Exit command not saved warning](images/screenshots/ExitCommandNotSavedWarning.png)
+<br/>
+If you press Enter again, your changes are discarded and you are led back to the main view.
+If you press Esc key, the exit is cancelled and you can continue working on the profile page.
+<br/>
+![Exit command not saved cancel](images/screenshots/ExitCommandNotSavedCancel.png)
+<br/>
+The example above is the result of pressing the Esc key after you are warned.
+
+
+To learn more about **adding a new fosterer from profile page**, refer to a section [Adding a fosterer through the main window: add](#adding-a-fosterer-through-the-profile-page-add). <br/>
+To learn more about **editing a fosterer in profile page**, refer to a section about [Editing a fosterer's detail through the profile page: edit](#editing-a-fosterers-detail-through-the-profile-page-edit). 
+
 
 ## Features
 
@@ -111,7 +193,7 @@ Parameters:
 **:bulb: Tip:**<br>
 
 * A person can have any number of tags (including 0).
-* `nil` can be indicated for `HOUSING_TYPE`, `AVAILABILITY`, `ANIMAL_NAME` and `YPE_OF_ANIMAL` if that specific information is not currently available.
+* `nil` can be indicated for `HOUSING_TYPE`, `AVAILABILITY`, `ANIMAL_NAME` and `TYPE_OF_ANIMAL` if that specific information is not currently available.
 
 </div>
 
@@ -130,6 +212,7 @@ Valid cases:
 
 <div markdown="span" class="alert alert-warning">
   :exclamation: <b>Important:</b> <br/>
+
 Duplicate fosterers cannot be added; this is detected by the fosterer's name.</br>
 e.g. <code>"Anne Tay"</code> is the same person as <code>"anne tay"</code> and <code>"anne  (multiple spaces)  tay"</code>.
 </div> 
@@ -156,9 +239,13 @@ Format: `add`
 
 **:information_source: Notes about the command format:**<br>
 
-*  Valid cases of a fosterer entry in the section 'Adding a fosterer through the main window' are still applied in this alternative way to add a fosterer.
+*  Valid cases of a fosterer entry in the section [Adding a fosterer through the main window](#adding-a-fosterer-through-the-main-window-add) are still applied in this alternative way to add a fosterer.
 
 </div>
+
+![Profile](images/screenshots/ProfilePage.png)
+
+To learn more about profile page, please refer to the section [User Interface: the Profile View](#the-profile-view).  
 
 ### Listing fosterers: `list` (Alias: `find`)
 
@@ -232,14 +319,15 @@ Examples:
 * `list` followed by `view 2`
   * views the profile of the 2nd fosterer in the address book.
 
-=======
+To learn more about profile page, please refer to the section [User Interface: the Profile View](#the-profile-view). 
+
 #### Editing a fosterer’s details in profile page:
 
 1. Enter a fosterer’s profile page with `view INDEX`.
 2. Type in the name of the field you want to edit onto the command box, for example `name`. This will make the textbox visible next to the `name` field and automatically set the text cursor to the textbox.
 3. Edit the original value - if it exists - to a new value, for example `John`.
-4. Press enter to return the text cursor back to the command box.
-5. Type in `save` command and enter to save the changes of the fosterer. 
+4. Press Enter to return the text cursor back to the command box.
+5. Type in `save` command and Enter to save the changes of the fosterer. 
 
 Example:
 * `list` followed by `view 2`
@@ -333,7 +421,7 @@ Parameters:
   * Duration / end date of foster, whichever the foster manager prefers
   * Identifiable physical traits of the animal
 *  The respective updated field descriptions can be keyed in and saved by the user through the `save` command.
-  * Please refer to the section 'Viewing a fosterer's detail: Editing a fosterer’s details in profile page' for the specific steps to do so.
+  * Please refer to the section [Viewing a fosterer's detail: Editing a fosterer’s details in profile page](#editing-a-fosterers-details-in-profile-page) for the specific steps to do so.
  
 </div>
 
@@ -341,6 +429,11 @@ Parameters:
 Edit may cause information loss. 
 Before you type the save command, make sure there is no accidental overwrite with faulty information. 
 </div>
+<br/>
+
+![Example profile 1](images/screenshots/EditExample.png)
+
+To learn more about profile page, please refer to the section [User Interface: the Profile View](#the-profile-view). 
 
 ### Deleting a fosterer : `delete`
 
@@ -450,10 +543,14 @@ Exits the program.
 
 Format: `exit`
 
-<div markdown="span" class="alert alert-primary">
-  :bulb: <b>Tip:</b><br/>
-  As mentioned in the <code>view</code>, <code>exit</code> exits the program when executed on the normal foster family list view, while on the profile page you are exited out of the page back to the list view. 
+<div markdown="block" class="alert alert-primary">
+
+**:bulb: Tip:**<br>
+
+* On the profile view, entering <code>exit</code> leads you out of the page back to the list view. 
+* On the profile view, attempting to <code>exit</code> without saving changes with <code>save</code> prompts a warning message (refer to [User Interface: The Profile View: Exiting the profile page](#exiting-the-profile-page)). 
 </div>
+
 
 ### Saving data
 
