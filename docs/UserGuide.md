@@ -157,8 +157,6 @@ Expected output upon success:<br>
 ![FindSuccess](images/FindSuccess.png)
 
 Expected output upon failure:
-* Format error in any field:<br>
-`Error: Please adhere to the format for the fields`
 * No field given:
 ```
 Invalid command format!  
@@ -168,7 +166,7 @@ At least one parameter must be present.
 Example: find n/Alice Rodriguez
 ```
 * Field flag given but no value:<br>
-`Error: Please give a value in the field(s) indicated`
+`Error: No value detected for the following field(s): `
 
 
 ### Deleting a client : `delete`
