@@ -74,7 +74,7 @@ While **Staff-Snap** has a simple and intuitive [Graphical User Interface (GUI)]
 6. Enter the `java -jar staffsnap.jar` command to run the application.
 7. You should see the [GUI](#TODO) displayed as shown below. Note how the application contains some sample data.<br>
 
-   ![Main Window view](images/user-guide/MainWindow.png)<br>
+   ![Main Window view](images/user-guide/MainWindow.png)
 
 8. Type the command in the command box and press <kbd>Enter</kbd> to execute it. e.g. typing `help` and pressing <kbd>Enter</kbd> will open this User Guide in your browser window.<br>
    Some example commands that you can try:
@@ -82,15 +82,14 @@ While **Staff-Snap** has a simple and intuitive [Graphical User Interface (GUI)]
    * `list` : Lists all applicants.
    * `delete 1` : Deletes the 1st applicant shown in the current list.
    * `clear` : Clears all applicants from the list.
-   * `exit` : Exits the application.
-
+   * `exit` : Exits the application.<br>
 9. Refer to the [Features](#TODO) below for details of each command.
 
 <box type="tip" header="**For macOS users**" seamless>
 
 If you are unfamiliar with the command terminal, you can right-click the `staffsnap.jar` file and select **Open With > JavaLauncher.app** to launch the application. If you are shown the warning below, click Open to continue launching Staff-Snap.<br>
 
-<img src="images/user-guide/mac_os_warning.png" alt="mac_os_warning">
+<img src="images/user-guide/mac_os_warning.png" height="400" width="334" alt="mac_os_warning">
 
 </box>
 
@@ -175,6 +174,17 @@ This section introduces the symbols and notations used throughout this guide. We
 #### Command Parameters
 
 notation table for NAME, EMAIL, POSITION, PHONE, STATUS, INDEX
+
+| Parameter  | Description​                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                | Valid Examples​                                                      | Invalid Examples​                                                        |
+|------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------|--------------------------------------------------------------------------|
+| `NAME`     | The applicant's name.<br/> <br/> It can only contain alphanumeric characters and space, should be at least 1 character long, and should not exceed 25 characters.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           | <ul><li>`n/James Lee`</li><li>`n/Rosemary Lee Curtis`</li></ul>      | <ul><li>`n/~Avaa~`</li><li>`n/晓明`</li><li>`n/Nur b/e Fatimah `</li></ul> |
+| `PHONE`    | The applicant's phone number. <br/> <br/> It can only contain numbers, should be at least 3 digits long, and should not exceed 30 digits.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   | <ul><li>`hp/91234726`</li><li>`hp/1234567890123`</li></ul>           | <ul><li>`hp/9aaa9123`</li><li>`hp/69`</li></ul>                          |
+| `EMAIL`    | The applicant's email. <br/> <br/> It should be of the format **local-part@domain**. <br/><br/> The **local-part** should only contain alphanumeric characters and these special characters, excluding the parentheses, (+_.-). The **local-part** may not start or end with any special characters. <br/><br/> This is followed by a **'@'** and then a **domain name**. The **domain name** is made up of domain labels separated by periods. The domain name must end with a domain label at least 2 characters long, have each domain label start and end with alphanumeric characters, and have each domain label consist of alphanumeric characters, separated only by hyphens, if any. <br/><br/> The entire email address must not be more than 30 characters long. | <ul><li>`e/james@gmail.com`</li><li>`e/e01920@u.nus.edu`</li></ul>   | <ul><li>`e/james.com`</li></ul>                                          |
+| `POSITION` | The position applied for by the applicant. <br/> <br/> It can take any value, should not be blank and should not be more than 30 characters long.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           | <ul><li>`p/Software Engineer`</li><li>`p/A.I. Architect 2`</li></ul> | <ul><li>`p/`</li></ul>                                                   |
+| `STATUS`   | The status of the applicant. <br/> <br/> It can only be `o` for _OFFERED_, `r` for _REJECTED_, or `u` for _UNDECIDED_.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      | <ul><li>`s/o`</li><li>`s/r`</li></ul>                                | <ul><li>`s/offered`</li></ul>                                            |
+| `INDEX`    | The index of the applicant in the displayed list. <br/> <br/> It must be a positive integer and not more than the total number of applicants.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               | <ul><li>`2`</li></ul>                                                | <ul><li>`0`</li><li>`two`</li></ul>                                      |
+
+
 
 <br>
 
@@ -280,6 +290,8 @@ Example:
 
 ### Interview Management
 
+<br>
+
 #### Command Parameters
 
 Parameter table for TYPE, RATING, INTERVIEW_INDEX, INDEX
@@ -355,6 +367,8 @@ Example:
 <br>
 
 ### Applicant Processing
+
+<br>
 
 #### Command Parameters
 
@@ -482,7 +496,7 @@ Automatically saves the data to a local storage whenever there is a change to th
 #### Editing the data file
 
 <box type="warning" header="**Caution**">
-    **Please make a backup copy before you attempt to edit the data file.** If the format of the edited data file is invalid, Staff-Snap will override the existing data file with an empty data file in the next run. 
+    Please make a backup copy before you attempt to edit the data file. If the format of the edited data file is invalid, Staff-Snap will override the existing data file with an empty data file in the next run. 
 </box>
 
 Staff-Snap applicant data are saved automatically as a [JSON](#TODO) file `[JAR file location]/data/applicantBook.json`. Advanced users are welcome to update data directly by editing that data file.
