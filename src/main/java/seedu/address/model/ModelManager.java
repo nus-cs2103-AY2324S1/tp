@@ -30,6 +30,7 @@ public class ModelManager implements Model {
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
     private final FilteredList<Person> loggedFilteredPersons;
+    private FilteredList<Person> foundPersonsList;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -43,6 +44,7 @@ public class ModelManager implements Model {
         this.logBook = new LogBook();
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        foundPersonsList = new FilteredList<>(this.addressBook.getPersonList());
         loggedFilteredPersons = new FilteredList<>(this.logBook.getPersonList());
     }
 
@@ -165,6 +167,19 @@ public class ModelManager implements Model {
         filteredPersons.setPredicate(predicate);
     }
 
+    /**
+     * Updates the foundPersonsList for logbook, executed by Find Command only
+     * @param predicate This is the condition to filter the personsList by
+     */
+    public void updateFoundPersonsList(Predicate<Person> predicate) {
+        requireNonNull(predicate);
+        foundPersonsList.setPredicate(predicate);
+    }
+
+    public FilteredList<Person> getFoundPersonsList() {
+        return foundPersonsList;
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -180,6 +195,18 @@ public class ModelManager implements Model {
         return addressBook.equals(otherModelManager.addressBook)
                 && userPrefs.equals(otherModelManager.userPrefs)
                 && filteredPersons.equals(otherModelManager.filteredPersons);
+    }
+
+    //=========== LogBook ================================================================================
+
+    @Override
+    public LogBook getLogBook() {
+        return logBook;
+    }
+
+    @Override
+    public void setLogBook(LogBook logBook) {
+        this.logBook.resetData(logBook);
     }
 
 }
