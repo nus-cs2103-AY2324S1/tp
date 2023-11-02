@@ -22,6 +22,7 @@ import seedu.address.logic.commands.AddTaskCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.ClearEventsCommand;
 import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.logic.commands.DeleteContactEventCommand;
 import seedu.address.logic.commands.DeleteEventCommand;
 import seedu.address.logic.commands.DeleteTaskCommand;
 import seedu.address.logic.commands.EditCommand;
@@ -148,6 +149,18 @@ public class UniMateParserTest {
                 + INDEX_FIRST_PERSON.getOneBased() + " " + validArg);
 
         assertEquals(command, new AddContactEventCommand(INDEX_FIRST_PERSON, eventBuilder.build()));
+    }
+
+    @Test
+    public void parserCommand_deleteContactEvent() throws Exception {
+        String targetDateTime = "2023-10-10 10:00";
+        LocalDateTime localDateTime = LocalDateTime.parse(targetDateTime, DATE_TIME_STRING_FORMATTER);
+        String validArg = "ts/" + targetDateTime;
+        DeleteContactEventCommand command =
+                (DeleteContactEventCommand) parser.parseCommand(DeleteContactEventCommand.COMMAND_WORD + " "
+                        + INDEX_FIRST_PERSON.getOneBased() + " " + validArg);
+
+        assertEquals(command, new DeleteContactEventCommand(INDEX_FIRST_PERSON, localDateTime));
     }
 
     @Test
