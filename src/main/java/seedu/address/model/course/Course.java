@@ -96,6 +96,6 @@ public class Course {
 
     @Override
     public String toString() {
-        return "Name:" + name + "\nLessons:" + lessons;
+        return "Name: " + name + "\nLessons: " + lessons;
     }
 }
