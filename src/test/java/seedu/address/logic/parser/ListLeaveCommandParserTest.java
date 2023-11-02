@@ -42,7 +42,7 @@ public class ListLeaveCommandParserTest {
         assertParseFailure(parser, " on/30 Dec 2023", Messages.MESSAGE_INVALID_DATE);
     }
 
-        @Test
+    @Test
     public void parse_validArgs_returnsListLeaveCommand() {
         LocalDate date = LocalDate.parse("2023-11-11", DateTimeFormatter.ISO_LOCAL_DATE);
         ListLeaveCommand expectedListLeaveCommand = new ListLeaveCommand(date);

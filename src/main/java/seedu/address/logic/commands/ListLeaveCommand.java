@@ -8,7 +8,6 @@ import java.time.LocalDate;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.model.Model;
-import seedu.address.model.employee.EmployeeContainsKeywordsPredicate;
 
 /**
  * Lists all employees in address book who are on leave on the specified date.
@@ -26,6 +25,9 @@ public class ListLeaveCommand extends Command {
 
     private final LocalDate date;
 
+    /**
+     * Creates a ListLeaveCommand to view employees on leave on the specified date
+     */
     public ListLeaveCommand(LocalDate date) {
         this.date = date;
     }

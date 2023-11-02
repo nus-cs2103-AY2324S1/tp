@@ -5,28 +5,19 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_EMPLOYEES_ON_LEAVE_OVERVIEW;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_EMPLOYEES;
-import static seedu.address.testutil.TypicalEmployees.ALICE;
-import static seedu.address.testutil.TypicalEmployees.BENSON;
 import static seedu.address.testutil.TypicalEmployees.BOB;
-import static seedu.address.testutil.TypicalEmployees.CARL;
-import static seedu.address.testutil.TypicalEmployees.DANIEL;
-import static seedu.address.testutil.TypicalEmployees.ELLE;
-import static seedu.address.testutil.TypicalEmployees.FIONA;
 import static seedu.address.testutil.TypicalEmployees.getTypicalAddressBook;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.employee.EmployeeContainsKeywordsPredicate;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code ListLeaveCommand}.
