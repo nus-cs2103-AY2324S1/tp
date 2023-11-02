@@ -171,10 +171,10 @@ All planned enhancements will also be listed in the [Planned Enhancements / Know
 **Notes about the command format:**<br>
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  e.g. In `add n/NAME`, `NAME` is an parameters which can be used as `add n/John Doe`.
+  e.g. In `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
-* Parameters in square brackets are optional fields, **with `addalt` and `edit` as an exception. (Refer to [Add alternative information to contact](#add-alternative-information-to-contact) and [Edit contact information](#edit-contact-information) under Features)**<br>
-  e.g In `n/NAME [t/TAG]`, `[t/TAG]` is an optional field which can be used as `n/John Doe t/friend` or as `n/John Doe`.
+* Parameters in square brackets are optional, **with `addalt` and `edit` as an exception. (Refer to [Add alternative information to contact](#add-alternative-information-to-contact) and [Edit contact information](#edit-contact-information) under Features)**<br>
+  e.g In `n/NAME [t/TAG]`, `[t/TAG]` is an optional parameter which can be used as `n/John Doe t/friend` or as `n/John Doe`.
 
 * Parameters with `…`​ after them can be used multiple times including zero times.<br>
   e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
@@ -258,7 +258,7 @@ Refer to [properties of contact](#properties-of-contact) on the accepted formats
 
 <box type="warning">
 
-* You should provide a positive integer that is smaller than the number of contacts stored in CampusConnect for `PERSON_INDEX`.
+* You should provide a positive integer that is smaller than or equal to the number of contacts stored in CampusConnect for `PERSON_INDEX`.
 * You should provide at least one of the parameters, i.e. alternative information for the command to work.
 
 </box>
@@ -284,7 +284,7 @@ Refer to [properties of contact](#properties-of-contact) on the accepted formats
 
 <box type="warning">
 
-* You should provide a positive integer that is smaller than the number of contacts stored in CampusConnect for `PERSON_INDEX`. 
+* You should provide a positive integer that is smaller than or equal to the number of contacts stored in CampusConnect for `PERSON_INDEX`. 
 * You should provide at least one of the parameters under [properties of contact](#properties-of-contact) for the command to work.
 * You should not edit any empty alternative information i.e. `TELEGRAM`, `SECONDARY_EMAIL`, `LINKEDIN`, `BIRTHDAY` of your contact using this command. Refer to [add alternative information to contact](#add-alternative-information-to-contact) to add these information.
 * You should not input 'NAME' with a name ___(case sensitive)___ that already exists in CampusConnect.
@@ -310,7 +310,7 @@ You are required to input the absolute path to the photo for this command. If yo
 
 ###  List all contacts: `list`
 
-After using CampusConnect's [find contact](#find-contacts) feature that filters the contacts you are looking for, you may want to have an oversight of all your contacts again! Thus, CampusConnect allows you to list all your contacts.
+After using CampusConnect's [find contact](#find-contacts) feature that filters the contacts you are looking for, you may want to have an overview of all your contacts again! Thus, CampusConnect allows you to list all your contacts.
 
 Format: `list`
 
@@ -342,7 +342,7 @@ Below are some examples on how to use the command:
 
 <box type="warning">
 
-You should provide a positive integer that is smaller than the number of contacts stored in CampusConnect for `PERSON_INDEX`.
+You should provide a positive integer that is smaller than or equal to the number of contacts stored in CampusConnect for `PERSON_INDEX`.
 
 </box>
 
@@ -579,7 +579,7 @@ Note that the last example is **not equivalent** to `n/do && t/friend || t/colle
 # Planned Enhancements / Known Issues
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
-2. **When executing `addalt` command**, if you input other prefixes that is not accepted by the command format, the error message shown does not prompt you to remove those prefixes and adhere strictly to the command format. We will be working on this in the future to improve the specificity of error messages.
+2. **When executing `addalt` command**, if you input other prefixes that are not accepted by the command format, the error message shown does not prompt you to remove those prefixes and adhere strictly to the command format. We will be working on this in the future to improve the specificity of error messages.
 3. **When executing `edit` command**, if you try to edit a specified contact to have the same [properties](#properties-of-contact) of another saved contact **(besides `NAME` with the same casing) in your contact list, CampusConnect allows you to do so. We plan to enhance the `edit` command such that it takes into account what makes a contact unique in your contact list.
 4. **When executing commands with `PERSON_INDEX`**, if you did not input an appropriate index, the error message shown is generic; CampusConnect informs you the format of the command you should adhere too instead of prompting you to input a positive index. We will be working on this in the future to improve the specificity of error messages.
 
