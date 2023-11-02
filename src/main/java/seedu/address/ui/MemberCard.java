@@ -40,6 +40,8 @@ public class MemberCard extends UiPart<Region> {
     private Label telegram;
     @FXML
     private FlowPane tags;
+    @FXML
+    private Label tasks;
 
     /**
      * Creates a {@code MemberCard} with the given {@code Member} and index to display.
@@ -55,5 +57,7 @@ public class MemberCard extends UiPart<Region> {
         member.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        int numTasks = member.getTasks().size();
+        tasks.setText((numTasks == 0 ? "No" : numTasks) + " task" + (numTasks == 1 ? "" : "s") + " assigned.");
     }
 }

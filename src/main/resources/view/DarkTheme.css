@@ -361,3 +361,7 @@
     -fx-height: 0;
     -fx-padding: 0 5px;
 }
+
+.highlight {
+    -fx-background-color: #454545;
+}

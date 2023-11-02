@@ -7,6 +7,7 @@ import java.nio.file.Path;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
@@ -14,6 +15,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.person.Applicant;
 import seedu.address.model.person.Member;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.task.Task;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -26,6 +28,7 @@ public class ModelManager implements Model {
     private final FilteredList<Member> filteredMembers;
     private final FilteredList<Applicant> filteredApplicants;
     private FilteredList<Tag> filteredTags;
+    private ObservableList<Task> filteredTasks;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -40,6 +43,9 @@ public class ModelManager implements Model {
         filteredMembers = new FilteredList<>(this.addressBook.getMemberList());
         filteredApplicants = new FilteredList<>(this.addressBook.getApplicantList());
         filteredTags = new FilteredList<>(this.addressBook.getTagList());
+
+        // Displayed tasks should be empty at first
+        filteredTasks = FXCollections.observableArrayList();
     }
 
     public ModelManager() {
@@ -178,6 +184,15 @@ public class ModelManager implements Model {
     @Override
     public ObservableList<Tag> getFilteredTagList() {
         return filteredTags;
+    }
+    @Override
+    public ObservableList<Task> getFilteredTaskList() {
+        return filteredTasks;
+    }
+
+    @Override
+    public void setTaskListForMember(Member member) {
+        this.filteredTasks.setAll(member.getTasks());
     }
 
     @Override

@@ -18,17 +18,25 @@ import seedu.address.model.person.Applicant;
 public class TypicalApplicants {
 
     public static final Applicant ALICE_APPLICANT =
-            new ApplicantBuilder().withName("Alice Pauline").withPhone("94351253").build();
+            new ApplicantBuilder().withName("Alice Pauline").withPhone("94351253")
+                    .withInterviewTime("01/01/2001 0100").build();
     public static final Applicant BENSON_APPLICANT =
-            new ApplicantBuilder().withName("Benson Meier").withPhone("98765432").build();
+            new ApplicantBuilder().withName("Benson Meier").withPhone("98765432")
+                    .withInterviewTime("02/02/2002 0200").build();
     public static final Applicant CARL_APPLICANT =
-            new ApplicantBuilder().withName("Carl Kurz").withPhone("95352563").build();
+            new ApplicantBuilder().withName("Carl Kurz").withPhone("95352563")
+                    .withInterviewTime("03/03/2003 0300").build();
     public static final Applicant DANIEL_APPLICANT =
-            new ApplicantBuilder().withName("Daniel Meier").withPhone("87652533").build();
+            new ApplicantBuilder().withName("Daniel Meier").withPhone("87652533")
+                    .withInterviewTime("04/04/2004 0400").build();
     public static final Applicant ELLE_APPLICANT =
-            new ApplicantBuilder().withName("Elle Meyer").withPhone("9482224").build();
+            new ApplicantBuilder().withName("Elle Meyer").withPhone("9482224")
+                    .withInterviewTime("05/05/2005 0500").build();
     public static final Applicant FIONA_APPLICANT =
-            new ApplicantBuilder().withName("Fiona Kunz").withPhone("9482427").build();
+            new ApplicantBuilder().withName("Fiona Kunz").withPhone("9482427")
+                    .withInterviewTime("06/06/2006 0600").build();
+
+    //no interview time scheduled yet
     public static final Applicant GEORGE_APPLICANT =
             new ApplicantBuilder().withName("George Best").withPhone("9482442").build();
 

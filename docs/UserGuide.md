@@ -26,15 +26,13 @@ This project is based on the AddressBook-Level3 project created by the [SE-EDU i
 
 2. Download the latest clubmemberscontact.jar from [here](https://github.com/se-edu/addressbook-level3/releases).
 
-3. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+3. Locate your jar file in your computer and double click on it to run the application. Alternatively, you can run the
+   jar file from the command line using the java -jar clubmemberscontact.jar command.
 
-4. Open a command terminal, cd into the folder you put the jar file in, and use the java -jar addressbook.jar command to
-   run the application.
-
-5. A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+4. A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
-6. Type the command in the command box and press Enter to execute it.
+5. Type the command in the command box and press Enter to execute it.
    Try the following commands in order:
 
     1. `addm /name Alicia /phone 92345678 /email Alicia@xyz.com /tele @Alicia` : Adds a member named Alicia to the
@@ -46,7 +44,7 @@ This project is based on the AddressBook-Level3 project created by the [SE-EDU i
     5. `findm Alicia Johndoe@xyz.com` : Both members Alicia and John Doe will be listed under the members list
     6. `delm 2` : Member John Doe will be deleted from the members list
 
-7. Refer to the [Features](#features) below for details of each command.
+6. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -54,71 +52,46 @@ This project is based on the AddressBook-Level3 project created by the [SE-EDU i
 
 <div markdown="span" class="alert alert-primary">
 
-:information_source: **Note:** Many of the commands below have _aliases_, or short-form versions that make them easier
+**Note:** Many of the commands below have _aliases_, or short-form versions that make them easier
 to type. For example, the command `addMember` can be typed as `addm`. Usages of the aliases are documented below
 alongside the full command word, and all aliases can be used interchangeably with the full command word.
 
 </div>
 
-### Add Member
+### Add Member/Applicant
 
-Adds a new member to the members list. Tag field is optional.
+You can easily add a new member/applicant to the members/applicants list.
+
+- Use `addMember` or `addm` to use add a member
+- Use `addApplicant` or `adda` to use add an applicant
 
 #### Usage:
+
+##### Adding member:
 
 `addMember /name {memberName} /phone {phoneNumber} /email {email} /tele {telegramHandle} /tag {tag}`
 
 `addm /name {memberName} /phone {phoneNumber} /email {email} /tele {telegramHandle} /tag {tag}`
 
+##### Adding applicant:
+
+`addApplicant /name {applicantName} /phone {phoneNumber}`
+
+`adda /name {applicantName} /phone {phoneNumber}`
+
 #### Acceptable values for parameters:
 
-- `memberName`: Only alphabetical characters, @, () are allowed
+- `name`: Only alphabetical characters, @, () are allowed
 - `phoneNumber`: Only numbers are allowed
 - `email`: Must follow the format of xyz@abc.wsd
 - `telegramHandle`: Only alphanumeric characters and underscore are allowed
-- `tag`: Only alphanumeric characters are allowed
+- `tag`: Only alphanumeric characters are allowed, tags are optional
 
 #### Example of usage:
 
-`addMember /name Alicia /phone 92345678 /email Alicia@xyz.com /tele @Alicia`
+`addm /name John Doe /phone 92345678 /email johndoe@xyz.com /tele @johndoe /tag WelfareHead`
 
-`addm /name Alicia /phone 92345678 /email Alicia@xyz.com /tele @Alicia`
-
-#### Expected Outcome:
-
-```
-New member added: Alicia
-```
-
-#### If any field(s) not specified:
-
-```
-Invalid command format! 
-```
-
-#### If name is invalid:
-
-```
-Names should only contain alphanumeric characters and spaces, and it should not be blank
-```
-
-#### If phone number is invalid:
-
-```
-Phone numbers should only contain numbers, and it should be at least 3 digits long
-```
-
-#### If telegram handle is invalid:
-
-```
-Telegram handle should follow the format: @exampleHandle 
-```
-
-#### If tag is invalid:
-
-```
-Tags names should be alphanumeric
-```
+`adda /name John Doe /phone 92345678`
 
 ### Delete Member
 
@@ -261,51 +234,6 @@ Generates a list of all existing member(s) in the members list.
 
 ```
 Listed all members
-```
-
-### Add Applicant
-
-Adds a new applicant to the applicants list.
-
-#### Usage:
-
-`addApplicant /name {applicantName} /phone {phoneNumber}`
-
-`adda /name {applicantName} /phone {phoneNumber}`
-
-#### Acceptable values for parameters:
-
-- `applicantName`: Only alphabetical characters, @, () are allowed
-- `phoneNumber`: Only numbers are allowed
-
-#### Example of usage:
-
-`addApplicant /name Alicia /phone 92345678`
-
-`adda /name Alicia /phone 92345678`
-
-#### Expected Outcome:
-
-```
-New applicant added: Alicia
-```
-
-#### If any field(s) not specified:
-
-```
-Invalid command format! 
-```
-
-#### If name is invalid:
-
-```
-Names should only contain alphanumeric characters and spaces, and it should not be blank
-```
-
-#### If phone number is invalid:
-
-```
-Phone numbers should only contain numbers, and it should be at least 3 digits long
 ```
 
 ### Delete Applicant
