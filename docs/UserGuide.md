@@ -169,7 +169,7 @@ Examples:
   <br>
   ![result for 'delete John Doe'](images/ug_images/deletedResult.png)
 
-### update sec level : `uplevel`, `undolevel`
+### Update sec level : `uplevel`, `undolevel`
 
 - `uplevel` : update the sec levels for all students and remove all sec level 4 students.
   - `undolevel` : restore the student records before the last update.
@@ -179,13 +179,10 @@ Examples:
 * No prefix is required, only the command.
 Examples: `uplevel`, `undolevel`
 
-  <br>
   ![before entering 'uplevel'](images/ug_images/beforeUpdate.png)
 
-  <br>
   ![after entering 'uplevel'](images/ug_images/afterUpdate.png)
 
-  <br>
   ![after entering 'undolevel'](images/ug_images/undoUpdate.png)
 
 ### Filtering data : `filter`
@@ -208,11 +205,14 @@ Examples:
 
 Sort the list of students data that fulfills the given conditions.
 
-Format: `sort in/ [DESCRIPTION]`
+Format: `sort in/[DESCRIPTION]` 
+
+* `DESCRIPTION` should be `ASC` or `DESC`, non-case-sensitive.
 
 Examples:
-* `sort in/ ASC` <br>
+* `sort in/ASC` <br>
   ![result for 'sort in/ ASC'](images/ug_images/sortedResult.png)
+
 
 ### Clearing all entries : `clear`
 
@@ -241,6 +241,34 @@ Examples:
 * `table l/` will show a table categorized by student sec level.
 * `table s/` will show a table categorized by student subject.
 * `table d/2023` will show a table categorized by months in year 2023.
+
+### Showing bar chart
+Showing a bar chart either categorized by gender, sec level or subject.
+
+Format: `bar {prefix}`
+
+* FIELD_VALUE is not needed.
+* prefix is case-sensitive.
+* Exactly one of `g/`, `l/`, or `s/` must be provided.
+
+Examples:
+* `bar g/` will show a bar chart categorized by student gender.
+* `bar l/` will show a bar chart categorized by student sec level.
+* `bar s/` will show a bar chart categorized by student subject.
+
+
+### Export visual representation : `export`
+
+Export the statistical table or bar chart into PNG format.
+
+Format: `export v/[VISUAL]` 
+
+* `VISUAL` should be `TABLE` or `BAR`, non-case-sensitive.
+* `TABLE` indicates exporting the table created, while `BAR` indicates exporting the bar chart created.
+* A table should be created before exporting, this applies to exporting bar chart as well.
+
+Examples:
+* `export v/TABLE` <br>
 
 ### Saving the data
 
@@ -283,8 +311,11 @@ Action     | Format, Examples
 **Import** | `import FILENAME.csv`<br> e.g., `import student_data.csv`
 **Edit**   | `edit INDEX prefix1/[field1] prefix2/[field2]`  <br> or `edit NAME prefix/[field] prefix/[field] prefix/[field]` <br> e.g., `edit John Doe n/Joe e/johndoe@example.com t/English`
 **Search** | `search [KEYWORD]`<br> e.g., `search Lee`
-**Delete** | `delete ME`<br> or `delete JOE` <br> e.g., `delete Joe`
+**Delete** | `delete INDEX`<br> or `delete NAME` <br> e.g., `delete Joe`
+**Update** | `uplevel`<br> or `undolevel` <br>
 **Filter** | `filter prefix/FIELD_VALUE [MORE FIELDS]` <br> e.g., `filter g/F s/English s/Physics`
 **Sort**   | `sort in/ [DESCRIPTION]` <br> e.g., `sort in/ ASC`
 **Clear**  | `clear`
+**Show Table** | `table prefix/`<br> or `table d/YEAR` <br>
+**Show Bar Chart** | `bar prefix/`
 **Help**   | `help`
