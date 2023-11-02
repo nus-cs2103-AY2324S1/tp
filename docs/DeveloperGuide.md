@@ -775,26 +775,54 @@ assigned to the event individually.
 
       Use case ends.
  
-**Use case: UC09 - Find persons by group**
-
-1. User requests to find persons by specifying a group
-2. FumbleLog shows the list of persons that belong in the specified group
+**Use case: UC09 - Find persons**
+1. User requests to list all the persons.
+2. FumbleLog shows a list of persons
+3. User requests to find persons by specifying a group or name
+4. FumbleLog shows the list of persons that belong in the specified group
 
    Use case ends.
 
 **Extensions**
 
-* 1a. The group does not exist
+* 3a. The group does not exist
 
-    * 1a1. FumbleLog shows an error message
+    * 3a1. FumbleLog shows an empty list.
 
-    Use case resumes at step 1.
+    Use case resumes at step 3.
 
-* 2a. The list is empty
+* 3b. The person does not exist
+
+    * 3b1. FumbleLog shows an empty list. 
+
+    Use case resumes at step 3.
+
+* 4a. The list is empty
 
   Use case ends.
 
-**Use case: UC10 - Show reminders for events/birthdays happening soon**
+**Use case: UC10 - Find events**
+1. User requests to list all the events.
+2. FumbleLog shows a list of events
+3. User requests to find events by specifying a group or event name
+4. FumbleLog shows the list of events that belong in the specified group
+
+   Use case ends.
+
+**Extensions**
+
+* 3a. The group does not exist
+    * 3a1. FumbleLog shows an empty list.
+
+    Use case resumes at step 3.
+* 3b. The event does not exist
+    * 3b1. FumbleLog shows an empty list. 
+* 4a. The list is empty
+
+  Use case ends.
+
+
+**Use case: UC11 - Show reminders for events/birthdays happening soon**
 
 **MSS**
 1. User request a reminder for events/birthdays happening soon
