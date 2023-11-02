@@ -5,8 +5,35 @@ title: User Guide
 
 HouR is a **desktop app for managing employee records, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, HouR can get your HR management tasks done faster than traditional GUI apps.
 
-* Table of Contents
-{:toc}
+<div style="page-break-after: always;"></div>
+
+## Table of Contents
+
+- [Quick Start](#quick-start)
+- [Features](#features)
+    - [Viewing Help](#viewing-help--help): `help`
+    - [Adding an employee](#adding-an-employee--add): `add`
+    - [Deleting an employee](#deleting-an-employee--delete): `delete`
+    - [Editing an employee](#editing-an-employee--edit): `edit`
+    - [Listing all employees](#listing-all-employees--list): `list`
+    - [Locating employees](#locating-employees--find): `find`
+    - [Sorting employees](#sorting-all-employees--sort): `sort`
+    - [Adding a leave period](#adding-leave-date--s--for-an-employee--addleave): `addleave`
+    - [Deleting a leave period](#deleting-leave-date--s--of-an-employee--deleteleave): `deleteleave`
+    - [Editing a leave date](#editing-a-leave-date-of-an-employee--editleave): `editleave`
+    - [Listing employees on leave](#listing-the-employees-on-leave-on-a-specified-date--listleave) `listleave`
+    - [Adding remarks](#adding-a-remark-for-an-employee--addremark): `addremark`
+    - [Deleting remarks](#deleting-a-remark-of-an-employee--deleteremark): `deleteremark`
+    - [Updating overtime hours](#updating-overtime-hours-of-an-employee--overtime): `overtime`
+    - [Generating an employee report](#generating-a-report--report): `report`
+    - [Resetting fields](#resetting-fields--reset): `reset`
+    - [Clearing all employees](#clearing-all-entries--clear): `clear`
+    - [Exiting the program](#exiting-the-program--exit): `exit`
+- [FAQ](#faq)
+- [Known Issues](#known-issues)
+- [Command Summary](#command-summary)
+
+<div style="page-break-after: always;"></div>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -35,15 +62,17 @@ HouR is a **desktop app for managing employee records, optimized for use via a C
    
    * `find Alex Manager`: Lists all employees with the keywords `Alex` or `Manager`.
 
-   * `delete EID1234-5678` : Deletes the employee with employee id EID1234-5678 shown in the list.
+   * `delete EID2024-1234` : Deletes the employee with employee id EID1234-5678 shown in the list.
 
    * `sort f/salary in/asc`: Sorts the employees by their salaries in ascending order.
 
    * `addleave id/EID1234-5678 from/2023-12-26 to/2023-12-28`: Adds leave dates from 29 to 31 October 2023 inclusive for employee with id EID1234-5678.
 
-   * `deleteleave id/EID1234-5678 from/2023-12-26 to/2023-12-28`: Deletes all leave dates of an employee with id EID1234-5678 that fall between 29 and 31 October 2023 inclusive.
+   * `deleteleave id/EID1234-5678 from/2023-12-27 to/2023-12-27`: Deletes all leave dates of an employee with id EID1234-5678 that fall on 27 December 2023.
    
-   * `editleave id/EID1234-5678 old/2023-12-26 new/2023-12-28`: Edits the old leave date `2023-12-26` of an employee with id EID1234-5678 to new leave date `2023-12-28`.
+   * `editleave id/EID1234-5678 old/2023-12-26 new/2023-12-29`: Edits the old leave date `2023-12-26` of an employee with id EID1234-5678 to new leave date `2023-12-29`.
+   
+   * `listleave on/2023-12-28`: Lists all employees on leave on 28 December 2023.
    
    * `addremark id/EID1234-5678 r/good worker`: Adds the remark `good worker` to the employee with id EID1234-6788.
    
@@ -52,18 +81,20 @@ HouR is a **desktop app for managing employee records, optimized for use via a C
    * `overtime id/EID1234-5678 o/inc a/10`: Increases the overtime hours of employee with id EID1234-5678 to 10 hours.
    
    * `report EID1234-5678`: Generates a report with details on leaves and overtime for employee with id EID1234-5678.
-
+   
+   * `reset f/overtime`: Resets the overtime hours field of all employees to the default value 0.
+   
    * `clear` : Deletes all employees.
 
    * `exit` : Exits the app.
 
-1. Refer to the [Features](#features) below for details of each command.
+1. Refer to the [Features](#features) below for details of each command
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## Features
 
-- List of commands: `help`
+- View list of commands: `help`
 - Add an employee: `add`
 - Delete an employee: `delete`
 - Edit an employee: `edit`
@@ -73,16 +104,18 @@ HouR is a **desktop app for managing employee records, optimized for use via a C
 - Add leave dates for an employee: `addleave`
 - Delete leave dates of an employee: `deleteleave`
 - Edit leave of an employee: `editleave`
+- List employees on leave: `listleave`
 - Add remarks for an employee: `addremark`
 - Delete remarks of an employee: `deleteremark`
 - Update overtime hours of an employee: `overtime`
 - Get details on employee performance: `report`
+- Reset specified field to default number: `reset`
 - Clear all employees: `clear`
 - Exit the program: `exit`
 
 <div markdown="block" class="alert alert-info">
 
-**:information_source: Notes about the command format:**<br>
+**information_source: Notes about the command format**<br>
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
@@ -109,7 +142,6 @@ Shows a message explaining how to access the help page.
 
 Format: `help`
 
-
 ### Adding an employee: `add`
 
 Adds an employee to the employee list.
@@ -127,13 +159,24 @@ Examples:
 
 ![add failure](images/addFailure.png)
 
-### Listing all employees : `list`
+### Deleting an employee : `delete`
 
-Shows a list of all employees in the employee list.
+Deletes an employee from the employee list.
 
-Format: `list`
+Format: `delete EMPLOYEE_ID`
 
-![list success](images/list.png)
+* Deletes the employee at the specified `EMPLOYEE_ID`.
+* The employee id refers to each employee's unique employee id.
+* The employee id **must follow the EID format** (EID[4 digits]-[4 digits])
+
+Examples:
+* `delete EID1234-5678` deletes the employee with employee id EID1234-5678 in the employee list.
+
+![delete success](images/deleteSuccess.png)
+
+* `delete EID000-0000` is invalid because the id does not exist.
+
+![delete failure](images/deleteFailure.png)
 
 ### Editing an employee : `edit`
 
@@ -154,6 +197,14 @@ Examples:
 
 ![edit failure](images/editFailure.png)
 
+### Listing all employees : `list`
+
+Shows a list of all employees in the employee list.
+
+Format: `list`
+
+![list success](images/list.png)
+
 ### Locating employees: `find`
 
 Finds employees whose name, position, department, phone number, email, or ID contain any of the given keywords.
@@ -167,28 +218,9 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
 Examples:
-* `find Alex` returns `Alex Yeoh`
+`find Alex` returns `Alex Yeoh`
 
 * ![find success](images/findSuccess.png)
-
-### Deleting an employee : `delete`
-
-Deletes an employee from the employee list.
-
-Format: `delete EMPLOYEE_ID`
-
-* Deletes the employee at the specified `EMPLOYEE_ID`.
-* The employee id refers to each employee's unique employee id.
-* The employee id **must follow the EID format** (EID[4 digits]-[4 digits])
-
-Examples:
-* `delete EID1234-5678` deletes the employee with employee id EID1234-5678 in the employee list.
- 
-![delete success](images/deleteSuccess.png)  
-
-* `delete EID000-0000` is invalid because the id does not exist.
-
-![delete failure](images/deleteFailure.png)
 
 ### Sorting all employees : `sort`
 
@@ -210,7 +242,7 @@ Examples:
 
 ![sort failure](images/sortFailure.png)
 
-### Adding a leave date for an employee : `addleave`
+### Adding leave date(s) for an employee : `addleave`
 
 Adds the dates between a specified period of time to the leaves taken by the specified employee.
 
@@ -229,31 +261,34 @@ Examples:
 
 ![addleave failure](images/addLeaveFailure.png)
 
+### Deleting leave date(s) of an employee : `deleteleave`
 
-### Deleting a leave date of an employee : `deleteleave`
+Deletes the specified leave dates of an employee.
 
-Deletes the leave dates that an employee has that fall into the specified period of time.
-
-Format: `addleave id/EMPLOYEE_ID from/START_DATE to/END_DATE`
+Format: `deleteleave id/EMPLOYEE_ID from/START_DATE to/END_DATE`
 
 * Delete leave dates that are between `START_DATE` and `END_DATE` inclusive from the leaves taken by employee with id `EMPLOYEE_ID`.
 * `START_DATE` must not be after `END_DATE`.
-* If the employee does not have any leaves taken that fall between the period between `START_DATE`and `END_DATE`,
+* If the employee does not have leaves taken that fall anytime during the period between `START_DATE`and `END_DATE`,
   the command will output an error and will not change anything.
 
 Examples:
 * `deleteleave id/EID1234-5678 from/2023-12-26 to/2023-12-28` deletes all leave dates
-  of employee with id EID1234-5678 that fall on 26, 27, or 28 December 2023.
+  of employee with id EID1234-5678 that fall on 26, 27, and 28 December 2023.
 
 ![deleteleave success](images/deleteLeaveSuccess.png)
 
 * `deleteleave id/EID1234-5678 from/2023-12-31 to/2023-12-28` is invalid because the start date 2023-12-31 is after the end date 2023-12-28, which is impossible.
 
-![deleteleave failure](images/deleteLeaveFailure.png)
+![deleteleave failure](images/deleteLeaveFailure1.png)
+
+* `deleteleave id/EID1234-5678 from/2023-12-28 to/2023-12-28` is invalid because there is no existing leave on 28 December 2023.
+
+![deleteleave failure](images/deleteLeaveFailure2.png)
 
 ### Editing a leave date of an employee : `editleave`
 
-Edits the old leave date specified to the new leave date of the specified employee.
+Edits the old leave date to the new leave date of the specified employee.
 
 Format: `editleave id/EMPLOYEE_ID old/OLD_DATE new/NEW_DATE`
 
@@ -261,14 +296,33 @@ Format: `editleave id/EMPLOYEE_ID old/OLD_DATE new/NEW_DATE`
 * `OLD_DATE` must already exist and `NEW_DATE` must not already exist.
 
 Examples:
-* `editleave id/EID1234-5678 from/2023-12-26 to/2023-12-28` edits the leave on 26 December 2023 to 28 December 2023
+* `editleave id/EID1234-5678 old/2023-12-26 new/2023-12-28` edits the leave on 26 December 2023 to 28 December 2023
   for employee with id EID1234-5678.
 
 ![editleave success](images/editLeaveSuccess.png)
 
-* `addleave id/EID1234-5678 from/2023-12-31 to/2023-12-28` is invalid because the start date 2023-12-31 is after the end date 2023-12-28, which is impossible.
+* `editleave id/EID1234-5678 old/2023-12-31 new/2023-12-28` is invalid because there is no existing leave on 31 December 2023.
 
-![editleave failure](images/editLeaveFailure.png)
+![editleave failure](images/editLeaveFailure1.png)
+
+* `editleave id/EID1234-5678 old/2023-12-31 new/2023-12-28` is invalid because there is an existing leave on 28 December 2023.
+
+![editleave failure](images/editLeaveFailure2.png)
+
+### Listing the employees on leave on a specified date : `listleave`
+
+Lists all the employees on leave on the specified date.
+
+Format: `listleave on/DATE`
+
+Examples:
+* `listleave on/2023-12-28` lists all the employees that are on leave on 28 December 2023.
+
+![listleave success](images/listLeaveSuccess.png)
+
+* `listleave on/2023-12-28` displays an empty list because there are no employees that are on leave on 28 December 2023.
+
+![listleave empty](images/listLeaveEmpty.png)
 
 ### Adding a remark for an employee : `addremark`
 
@@ -276,7 +330,9 @@ Adds the specified remark to the specified employee.
 
 Format: `addremark id/EMPLOYEE_ID r/REMARK`
 
-* `REMARK` must not already exist (and is case-insensitive so `good worker` and `GOOD WORKER` are considered as the same remark).
+* `REMARK` must not already exist. Duplicate remarks are not allowed.
+* Remarks are case-insensitive.
+  * `good worker` and `GOOD WORKER` are considered as the same remark.
 
 Examples:
 * `addremark id/EID1234-5678 r/good worker` adds the remark `good worker` to
@@ -284,17 +340,15 @@ Examples:
 
 ![addremark success](images/addremarkSuccess.png)
 
-* `addleave id/EID1234-5678 from/2023-12-31 to/2023-12-28` is invalid because the start date 2023-12-31 is after the end date 2023-12-28, which is impossible.
-
-![addremark failure](images/addremarkFailure.png)
-
 ### Deleting a remark of an employee : `deleteremark`
 
 Deletes the specified remark from the specified employee.
 
 Format: `deleteremark id/EMPLOYEE_ID r/REMARK`
 
-* `REMARK` must already exist (and is case-insensitive so `good worker` and `GOOD WORKER` are considered as the same remark).
+* `REMARK` must already exist
+* Remarks are case-insensitive.
+    * `good worker` and `GOOD WORKER` are considered as the same remark.
 
 Examples:
 * `deleteremark id/EID1234-5678 r/good worker` deletes the remark `good worker` from
@@ -302,7 +356,8 @@ Examples:
 
 ![deleteremark success](images/deleteremarkSuccess.png)
 
-* `addleave id/EID1234-5678 from/2023-12-31 to/2023-12-28` is invalid because the start date 2023-12-31 is after the end date 2023-12-28, which is impossible.
+* `deleteremark id/EID1234-5678 r/team player` is invalid because the remark `team player` does not exist under 
+  the employee with id EID1234-5678.
 
 ![deleteremark failure](images/deleteremarkFailure.png)
 
@@ -328,22 +383,45 @@ Examples:
 
 ### Generating a report : `report`
 
-Generates a report with details on leaves and overtime for an employee.
+Generates a report with details on leaves, overtime hours and remarks for an employee.
 
 Format: `report EMPLOYEE_ID`
 
 * Generates and downloads a report for the employee with the specified `EMPLOYEE_ID`.
-* The employee id refers to each employee's unique employee id.
 * The employee id **must follow the EID format** (EID[4 digits]-[4 digits])
+* The report is downloaded in a `.txt` file, located in the `reports` folder in the location of `hour.jar`.
+  * The `.txt` file follows the naming convention `DATE_NAME` where `DATE` is the date the report is created, 
+    and `NAME` is the name of the corresponding employee.
 
 Examples:
-* `report EID1234-5678` generates and downloads a report for the employee with employee id EID1234-5678 in the employee list.
+* `report EID1234-5678` generates and downloads a report for the employee with employee id EID1234-5678.
 
 ![report success](images/reportSuccess.jpg)
 
 * `report EID000-0000` is invalid because the id does not exist.
 
 ![report failure](images/reportFailure.jpg)
+
+### Resetting fields : `reset`
+
+Resets the specified field to its default value.
+
+Format: `reset f/FIELD`
+
+* The field has to be non-empty and can have 2 values: `overtime` or `leaves`.
+
+Examples:
+* `reset f/overtime` resets the overtime hours of all employees in the list to the default value 0.
+
+![reset success](images/resetOvertimeSuccess.jpg)
+
+* `reset f/leaves` resets the number of leaves taken by all employees in the list to the default value 0.
+
+![reset success](images/resetLeavesSuccess.jpg)
+
+* `reset f/name` is an invalid field and cannot be reset.
+
+![reset failure](images/resetFailure.jpg)
 
 ### Clearing all entries : `clear`
 
@@ -371,16 +449,62 @@ HouR data are saved automatically as a JSON file `[JAR file location]/data/hour.
 If your changes to the data file makes its format invalid, HouR will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.
 </div>
 
-### Archiving data files `[coming in v2.0]`
-
-_Details coming soon ..._
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
 
+### Launching HouR
+
+**Q**: How can I launch HouR if clicking on the JAR file does not work?<br>
+**A**: There are two possible methods to launch HouR.
+
+**Method 1**: For users familiar with the Command Prompt
+1. Open the Command Prompt
+2. Navigate to the directory where the JAR file is located using `cd [JAR file location]`
+3. Type `java -jar hour.jar` and press Enter 
+4. HouR should launch
+
+**Method 2**: For users that wish to create a script to launch HouR (Recommended)
+1. Create a new text file 
+2. Copy and paste the following into the text file: `java -jar [JAR file location]/hour.jar` 
+3. Save the text file as `hour.bat` (Windows) or `hour.sh` (MacOS/Linux)
+4. Change the admin settings of the script to allow it to run as program:
+   * Windows: Right-click on the script and select **Properties**. Under **General**, check the box that says `Allow this file to run as a program`. 
+   * MacOS/Linux: Open the Terminal and navigate to the directory where the script is located. Type `chmod +x [script name]` and press Enter.<br> 
+     Note: (`chmod +x` changes permissions of the script to allow it to be executed)
+5. Double-click on the script to launch HouR 
+6. HouR should launch
+
+If you have any further issues, please raise an issue on our [Github page](https://github.com/AY2324S1-CS2103T-W12-1/tp/issues). We will attend to you as soon as we can.
+
+### Checking Java Version
+
+**Q**: How can I check my Java version?<br>
+**A**: Open a Command Prompt and type `java -version`. If you do not have Java installed, you can install Java 11 using the Oracle guide [here](https://www.oracle.com/java/technologies/downloads/#java11). Alternatively, you can install the OpenJDK version.
+
+For Mac users, you may wish to follow the instructions listed [here](https://nus-cs2103-ay2324s1.github.io/website/admin/programmingLanguages.html).
+
+### Loading Data from Another Computer
+
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous HouR home folder.
+**A**: Install HouR in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous HouR home folder.
+
+**Q**: How can I load data from one computer into HouR installed on another computer?<br>
+**A**: This can be done by following the three steps below.
+1. Delete the `hour.json` file (stored at `[hour.jar file location]/data/hour.json`) from the computer that you wish to use HouR on.
+2. Copy over the `hour.json` file from the computer which you no longer wish to use HouR on.
+3. Boot up HouR to check whether your employee information is properly loaded into the new computer
+
+### Using HouR
+
+**Q**: What are the available commands?<br>
+**A**: Refer to the Command Summary for the list of available commands. Alternatively, from the main application window, you can type `help` to view the list of available commands.
+
+**Q**: Do I need an internet connection to use HouR?<br>
+**A**: All of HouR’s functionality can be used offline! No internet connection is required.
+
+**Q**: How do I save my data?<br>
+**A**: Data is saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -392,17 +516,23 @@ _Details coming soon ..._
 
 ## Command summary
 
-| Action          | Format, Examples                                                                                                                                                                             |
-|-----------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**         | `add n/NAME pos/POSITION id/EMPLOYEE_ID p/PHONE_NUMBER e/EMAIL s/SALARY [d/DEPARTMENT]...` <br> e.g., `add n/James Ho pos/Auditor id/EID2023-0928 p/87651234 e/jamesho@example.com s/$8,000` |
-| **Clear**       | `clear`                                                                                                                                                                                      |
-| **Delete**      | `delete EMPLOYEE-ID`<br> e.g., `delete EID1234-5678`                                                                                                                                         |
-| **Edit**        | `edit INDEX [n/NAME] [p/POSITION] [id/EMPLOYEE_ID] [p/PHONE_NUMBER] [e/EMAIL] [s/SALARY] [d/DEPARTMENT]...`<br> e.g.,`edit 2 n/James Lee pos/Head Auditor`                                   |
-| **Find**        | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                                   |
-| **List**        | `list`                                                                                                                                                                                       |
-| **Sort**        | `sort f/FIELD in/ORDER`                                                                                                                                                                      |
-| **AddLeave**    | `addleave id/EMPLOYEE_ID from/START_DATE to/END_DATE` <br/> e.g., `addleave id/EID1234-5678 from/2023-12-26 to/2023-12-28`                                                                   |
-| **DeleteLeave** | `deleteleave id/EMPLOYEE_ID from/START_DATE to/END_DATE` <br/> e.g., `deleteleave id/EID1234-5678 from/2023-12-26 to/2023-12-28`                                                             |
-| **Overtime**    | `overtime id/EMPLOYEE_ID o/OPERATION a/AMOUNT` <br/> e.g., `overtime id/EID1234-5678 o/inc a/10`                                                                                             |
-| **Help**        | `help`                                                                                                                                                                                       |
-| **Exit**        | `exit`                                                                                                                                                                                       |
+| Action           | Format, Examples                                                                                                                                                                           |
+|------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**          | `add n/NAME pos/POSITION id/EMPLOYEE_ID p/PHONE_NUMBER e/EMAIL s/SALARY [d/DEPARTMENT]...` <br> e.g., `add n/James Ho pos/Auditor id/EID2023-0928 p/87651234 e/jamesho@example.com s/8000` |
+| **Delete**       | `delete EMPLOYEE-ID`<br> e.g., `delete EID1234-5678`                                                                                                                                       |
+| **Edit**         | `edit INDEX [n/NAME] [p/POSITION] [id/EMPLOYEE_ID] [p/PHONE_NUMBER] [e/EMAIL] [s/SALARY] [d/DEPARTMENT]...`<br> e.g.,`edit 2 n/James Lee pos/Head Auditor`                                 |
+| **List**         | `list`                                                                                                                                                                                     |
+| **Find**         | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Manager`                                                                                                                              |
+| **Sort**         | `sort f/FIELD in/ORDER`                                                                                                                                                                    |
+| **AddLeave**     | `addleave id/EMPLOYEE_ID from/START_DATE to/END_DATE` <br/> e.g., `addleave id/EID1234-5678 from/2023-12-26 to/2023-12-28`                                                                 |
+| **DeleteLeave**  | `deleteleave id/EMPLOYEE_ID from/START_DATE to/END_DATE` <br/> e.g., `deleteleave id/EID1234-5678 from/2023-12-26 to/2023-12-28`                                                           |
+| **EditLeave**    | `editleave id/EMPLOYEE_ID old/OLD DATE new/NEW DATE` <br/> e.g., `editleave id/EID1234-5678 old/2023-12-26 new/2023-12-28`                                                                 |
+| **ListLeave**    | `listleave on/DATE` <br/> e.g., `listleave on/2023-11-30`                                                                                                                                  |
+| **Overtime**     | `overtime id/EMPLOYEE_ID o/OPERATION a/AMOUNT` <br/> e.g., `overtime id/EID1234-5678 o/inc a/10`                                                                                           |
+| **AddRemark**    | `addremark id/EMPLOYEE_ID r/REMARK` <br/> e.g., `addremark id/EID1234-5678 r/Good worker`                                                                                                  |
+| **DeleteRemark** | `deleteremark id/EMPLOYEE_ID r/REMARK` <br/> e.g., `addremark id/EID1234-5678 r/Good worker`                                                                                               |
+| **Report**       | `report EMPLOYEE_ID` <br/> e.g., `report EID1234-5678`                                                                                                                                     |
+| **Reset**        | `reset f/FIELD` <br/> e.g., `reset f/overtime`                                                                                                                                             |
+| **Help**         | `help`                                                                                                                                                                                     |
+| **Clear**        | `clear`                                                                                                                                                                                    |
+| **Exit**         | `exit`                                                                                                                                                                                     |

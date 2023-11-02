@@ -97,19 +97,7 @@
     -fx-label-padding: 0 0 0 0;
     -fx-graphic-text-gap : 0;
     -fx-padding: 0 0 0 0;
-}
-
-.list-cell:filled {
     -fx-background-color: derive(#2E4374, 20%);
-}
-
-.list-cell:filled:selected {
-    -fx-background-color: #4070d6;
-}
-
-.list-cell:filled:selected #cardPane {
-    -fx-border-color: #3e7b91;
-    -fx-border-width: 1;
 }
 
 .list-cell .label {
