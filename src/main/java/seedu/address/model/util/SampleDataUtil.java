@@ -10,10 +10,10 @@ import seedu.address.model.booking.Booking;
 import seedu.address.model.booking.BookingPeriod;
 import seedu.address.model.booking.Remark;
 import seedu.address.model.booking.Room;
+import seedu.address.model.booking.RoomTypeTag;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
-import seedu.address.model.tag.Tag;
 
 /**
  * Contains utility methods for populating {@code AddressBook} with sample data.
@@ -61,9 +61,9 @@ public class SampleDataUtil {
     /**
      * Returns a tag set containing the list of strings given.
      */
-    public static Set<Tag> getTagSet(String... strings) {
+    public static Set<RoomTypeTag> getTagSet(String... strings) {
         return Arrays.stream(strings)
-                .map(Tag::new)
+                .map(RoomTypeTag::new)
                 .collect(Collectors.toSet());
     }
 

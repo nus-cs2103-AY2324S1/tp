@@ -181,7 +181,7 @@ public class AddCommandParserTest {
 
     @Test
     public void parse_invalidValue_failure() {
-        // invalid name
+        // invalid room
         assertParseFailure(parser, INVALID_ROOM_DESC + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
                 + BOOKING_PERIOD_DESC_BOB, Room.MESSAGE_CONSTRAINTS);
 
