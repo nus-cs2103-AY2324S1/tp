@@ -10,7 +10,6 @@ import java.util.ArrayList;
 
 import org.junit.jupiter.api.Test;
 
-import networkbook.model.person.PersonSortComparator;
 import networkbook.testutil.TypicalPersons;
 
 public class VersionedNetworkBookTest {
