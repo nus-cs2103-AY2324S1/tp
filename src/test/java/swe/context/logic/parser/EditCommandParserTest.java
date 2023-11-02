@@ -27,7 +27,7 @@ public class EditCommandParserTest {
         assertParseFailure(parser, TestData.Valid.NAME_AMY, MESSAGE_INVALID_FORMAT);
 
         // no field specified
-        assertParseFailure(parser, "1", Messages.EDIT_COMMAND_NOT_EDITED);
+        assertParseFailure(parser, "1", Messages.COMMAND_EDIT_NO_PARAM);
 
         // no index and no field specified
         assertParseFailure(parser, "", MESSAGE_INVALID_FORMAT);

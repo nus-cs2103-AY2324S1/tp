@@ -7,8 +7,6 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.Arrays;
 
-import swe.context.logic.Messages;
-
 /**
  * Helper functions for handling strings.
  */
@@ -30,8 +28,8 @@ public class StringUtil {
         requireNonNull(word);
 
         String preppedWord = word.trim();
-        checkArgument(!preppedWord.isEmpty(), Messages.EMPTY_WORD_PARAMETER);
-        checkArgument(preppedWord.split("\\s+").length == 1, Messages.SINGLE_WORD_EXPECTED);
+        checkArgument(!preppedWord.isEmpty(), "Keyword cannot be empty.");
+        checkArgument(preppedWord.split("\\s+").length == 1, "Keyword should be a single word.");
 
         String preppedSentence = sentence;
         String[] wordsInPreppedSentence = preppedSentence.split("\\s+");

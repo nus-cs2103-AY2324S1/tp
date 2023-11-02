@@ -11,7 +11,6 @@ import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
-import swe.context.logic.Messages;
 import swe.context.logic.parser.exceptions.ParseException;
 import swe.context.model.alternate.AlternateContact;
 import swe.context.model.contact.Email;
@@ -20,6 +19,8 @@ import swe.context.model.contact.Note;
 import swe.context.model.contact.Phone;
 import swe.context.model.tag.Tag;
 import swe.context.testutil.TestData;
+
+
 
 public class ParserUtilTest {
 
@@ -30,7 +31,7 @@ public class ParserUtilTest {
 
     @Test
     public void parseIndex_outOfRangeInput_throwsParseException() {
-        assertThrows(ParseException.class, Messages.INVALID_PARSER_INDEX, ()
+        assertThrows(ParseException.class, ParserUtil.MESSAGE_INDEX_NOT_POSITIVE, ()
             -> ParserUtil.parseIndex(Long.toString(Integer.MAX_VALUE + 1)));
     }
 

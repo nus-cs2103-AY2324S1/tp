@@ -61,7 +61,7 @@ public class LogicManagerTest {
     @Test
     public void execute_validCommand_success() throws Exception {
         String listCommand = ListCommand.COMMAND_WORD;
-        assertCommandSuccess(listCommand, Messages.LIST_COMMAND_SUCCESS, model);
+        assertCommandSuccess(listCommand, Messages.COMMAND_LIST_SUCCESS, model);
     }
 
     @Test
