@@ -18,9 +18,9 @@ import seedu.address.model.person.Person;
 /**
  * Deletes a person identified using it's displayed index from the address book.
  */
-public class DeleteCommand extends Command {
+public class DeletePersonCommand extends Command {
 
-    public static final String COMMAND_WORD = "delete";
+    public static final String COMMAND_WORD = "delete_person";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the person identified by the index number used in the displayed person list.\n"
@@ -31,9 +31,9 @@ public class DeleteCommand extends Command {
 
     private final Index targetIndex;
 
-    private Logger logger = LogsCenter.getLogger(DeleteCommand.class);
+    private Logger logger = LogsCenter.getLogger(DeletePersonCommand.class);
 
-    public DeleteCommand(Index targetIndex) {
+    public DeletePersonCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
     }
 
@@ -71,12 +71,12 @@ public class DeleteCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof DeleteCommand)) {
+        if (!(other instanceof DeletePersonCommand)) {
             return false;
         }
 
-        DeleteCommand otherDeleteCommand = (DeleteCommand) other;
-        return targetIndex.equals(otherDeleteCommand.targetIndex);
+        DeletePersonCommand otherDeletePersonCommand = (DeletePersonCommand) other;
+        return targetIndex.equals(otherDeletePersonCommand.targetIndex);
     }
 
     @Override

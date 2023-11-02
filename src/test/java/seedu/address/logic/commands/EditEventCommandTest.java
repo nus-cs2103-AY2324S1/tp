@@ -32,7 +32,7 @@ import seedu.address.testutil.MeetingBuilder;
 
 public class EditEventCommandTest {
 
-    private final Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
     public void constructor_nullEvent_throwsNullPointerException() {
@@ -156,10 +156,30 @@ public class EditEventCommandTest {
 
     @Test
     public void execute_unassignNames_success() throws Exception {
+        Event eventToEdit = new MeetingBuilder()
+                .withEventDate("2050-10-10")
+                .withEventStartTime("1400")
+                .withEventEndTime("1500")
+                .withPerson("Alice Pauline", "Benson Meier")
+                .withGroups("friends").build();
+
+        // Making sure that the event that we are about to test is consistent
+        Model targetModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        targetModel
+                .setEvent(targetModel.getFilteredEventList().get(INDEX_TYPICAL_PERSON_EVENT.getZeroBased()),
+                        eventToEdit);
+
+        // edited event where we are trying to unassign Alice Pauline
         Event editedEvent = new MeetingBuilder()
                 .withEventDate("2050-10-10")
                 .withEventStartTime("1400")
-                .withEventEndTime("1500").build();
+                .withEventEndTime("1500")
+                .withPerson("Alice Pauline", "Benson Meier")
+                .withGroups("friends").build();
+
+        EditEventDescriptor descriptor = new EditEventDescriptorBuilder(editedEvent).build();
+        descriptor.setUnassignPersons(new HashSet<>(Set.of(new Name("Alice Pauline"))));
+        EditEventCommand editEventCommand = new EditEventCommand(INDEX_TYPICAL_PERSON_EVENT, descriptor);
 
         Event expectedEvent = new MeetingBuilder()
                 .withEventDate("2050-10-10")
@@ -167,16 +187,13 @@ public class EditEventCommandTest {
                 .withEventEndTime("1500")
                 .withPerson("Benson Meier").build();
 
-        EditEventDescriptor descriptor = new EditEventDescriptorBuilder(editedEvent).build();
-        descriptor.setUnassignPersons(new HashSet<>(Set.of(new Name("Alice Pauline"))));
-        EditEventCommand editEventCommand = new EditEventCommand(INDEX_TYPICAL_PERSON_EVENT, descriptor);
+        Model expectedModel = new ModelManager(new AddressBook(targetModel.getAddressBook()), new UserPrefs());
+        expectedModel
+                .setEvent(targetModel.getFilteredEventList().get(INDEX_TYPICAL_PERSON_EVENT.getZeroBased()),
+                        expectedEvent);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-        expectedModel.setEvent(model.getFilteredEventList()
-                .get(INDEX_TYPICAL_PERSON_EVENT.getZeroBased()), expectedEvent);
-
-        CommandResult result = editEventCommand.execute(model);
-        assertEquals(expectedModel, model);
+        editEventCommand.execute(targetModel);
+        assertEquals(expectedModel, targetModel);
     }
 
     @Test
