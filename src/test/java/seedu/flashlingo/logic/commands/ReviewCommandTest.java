@@ -1,9 +1,8 @@
 package seedu.flashlingo.logic.commands;
 
-import static seedu.flashlingo.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.flashlingo.testutil.TypicalFlashCards.getTypicalFlashlingo;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.flashlingo.testutil.TypicalFlashCards.getTypicalFlashlingo;
 
 import org.junit.jupiter.api.Test;
 

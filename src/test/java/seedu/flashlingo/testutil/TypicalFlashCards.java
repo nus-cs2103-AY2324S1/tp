@@ -94,9 +94,12 @@ public class TypicalFlashCards {
             .withTranslatedWord(CommandTestUtil.VALID_TRANSLATION_BOB, "")
             .build();
     public static final String WORD_DESC_AMY = " " + PREFIX_ORIGINAL_WORD + CommandTestUtil.VALID_ORIGINAL_WORD_AMY;
-    public static final String WORD_DESC_BOB = " " + PREFIX_ORIGINAL_WORD + CommandTestUtil.VALID_ORIGINAL_WORD_BOB;
-    public static final String TRANSLATION_DESC_AMY = " " + PREFIX_TRANSLATED_WORD + CommandTestUtil.VALID_TRANSLATION_AMY;
-    public static final String TRANSLATION_DESC_BOB = " " + PREFIX_TRANSLATED_WORD + CommandTestUtil.VALID_TRANSLATION_BOB;
+    public static final String WORD_DESC_BOB = " " + PREFIX_ORIGINAL_WORD
+            + CommandTestUtil.VALID_ORIGINAL_WORD_BOB;
+    public static final String TRANSLATION_DESC_AMY = " " + PREFIX_TRANSLATED_WORD
+            + CommandTestUtil.VALID_TRANSLATION_AMY;
+    public static final String TRANSLATION_DESC_BOB = " " + PREFIX_TRANSLATED_WORD
+            + CommandTestUtil.VALID_TRANSLATION_BOB;
     public static final FlashCard WORD = new FlashCardBuilder().withOriginalWord("你好", "Chinese")
             .withTranslatedWord("hi", "English").withLevel(2)
             .withWhenToReview(Date.from(Instant.parse(DEFAULT_WHEN_TO_REVIEW))).build();

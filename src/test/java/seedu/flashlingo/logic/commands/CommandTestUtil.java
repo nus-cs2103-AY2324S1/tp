@@ -1,10 +1,10 @@
 package seedu.flashlingo.logic.commands;
 
-import static seedu.flashlingo.testutil.Assert.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.flashlingo.logic.parser.CliSyntax.PREFIX_ORIGINAL_WORD;
 import static seedu.flashlingo.logic.parser.CliSyntax.PREFIX_TRANSLATED_WORD;
+import static seedu.flashlingo.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;
 import java.util.Arrays;

@@ -1,7 +1,5 @@
 package seedu.flashlingo.logic.parser;
 
-import seedu.flashlingo.logic.parser.Prefix;
-
 /**
  * Contains Command Line Interface (CLI) syntax definitions common to multiple commands
  */

@@ -6,8 +6,6 @@ import java.util.Date;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.flashlingo.model.flashcard.FlashCard;
-import seedu.flashlingo.model.flashcard.ProficiencyLevel;
 import seedu.flashlingo.model.flashcard.words.OriginalWord;
 import seedu.flashlingo.model.flashcard.words.TranslatedWord;
 

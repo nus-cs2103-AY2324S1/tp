@@ -1,8 +1,8 @@
 package seedu.flashlingo.storage;
 
-import static seedu.flashlingo.testutil.TypicalFlashCards.getTypicalFlashlingo;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static seedu.flashlingo.testutil.TypicalFlashCards.getTypicalFlashlingo;
 
 import java.nio.file.Path;
 

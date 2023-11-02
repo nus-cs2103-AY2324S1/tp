@@ -7,8 +7,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.flashlingo.logic.commands.CommandResult;
-
 /**
  * Represents the result of a command execution.
  */

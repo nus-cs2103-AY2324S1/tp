@@ -7,8 +7,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.flashlingo.commons.core.Config;
-
 public class ConfigTest {
 
     @Test

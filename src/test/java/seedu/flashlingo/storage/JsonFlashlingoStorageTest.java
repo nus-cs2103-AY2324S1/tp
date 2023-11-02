@@ -1,11 +1,11 @@
 package seedu.flashlingo.storage;
 
-import static seedu.flashlingo.testutil.Assert.assertThrows;
-import static seedu.flashlingo.testutil.TypicalFlashCards.WORD;
-import static seedu.flashlingo.testutil.TypicalFlashCards.getTypicalFlashlingo;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.fail;
+import static seedu.flashlingo.testutil.Assert.assertThrows;
+import static seedu.flashlingo.testutil.TypicalFlashCards.WORD;
+import static seedu.flashlingo.testutil.TypicalFlashCards.getTypicalFlashlingo;
 
 import java.io.IOException;
 import java.nio.file.Path;

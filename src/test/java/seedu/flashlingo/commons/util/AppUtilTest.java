@@ -6,8 +6,6 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.flashlingo.commons.util.AppUtil;
-
 public class AppUtilTest {
 
     @Test

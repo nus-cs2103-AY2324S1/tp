@@ -1,10 +1,11 @@
 package seedu.flashlingo.storage;
-import static seedu.flashlingo.testutil.Assert.assertThrows;
-import static seedu.flashlingo.testutil.TypicalFlashCards.WORD;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.flashlingo.storage.JsonAdaptedFlashCard.DATE_PATTERN;
 import static seedu.flashlingo.storage.JsonAdaptedFlashCard.INVALID_DATE_FORMAT_MESSAGE;
 import static seedu.flashlingo.storage.JsonAdaptedFlashCard.MISSING_FIELD_MESSAGE_FORMAT;
+import static seedu.flashlingo.testutil.Assert.assertThrows;
+import static seedu.flashlingo.testutil.TypicalFlashCards.WORD;
 
 import java.time.ZoneOffset;
 import java.time.ZonedDateTime;

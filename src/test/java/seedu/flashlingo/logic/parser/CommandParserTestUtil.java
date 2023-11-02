@@ -3,7 +3,6 @@ package seedu.flashlingo.logic.parser;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import seedu.flashlingo.logic.commands.Command;
-import seedu.flashlingo.logic.parser.Parser;
 import seedu.flashlingo.logic.parser.exceptions.ParseException;
 
 /**

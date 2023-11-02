@@ -1,12 +1,12 @@
 package seedu.flashlingo.model;
 
-import static seedu.flashlingo.testutil.Assert.assertThrows;
-import static seedu.flashlingo.testutil.TypicalFlashCards.ALICE;
-import static seedu.flashlingo.testutil.TypicalFlashCards.WORD;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.flashlingo.model.Model.PREDICATE_SHOW_ALL_FLASHCARDS;
+import static seedu.flashlingo.testutil.Assert.assertThrows;
+import static seedu.flashlingo.testutil.TypicalFlashCards.ALICE;
+import static seedu.flashlingo.testutil.TypicalFlashCards.WORD;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -15,10 +15,10 @@ import java.util.Arrays;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.flashlingo.testutil.FlashlingoBuilder;
 import seedu.flashlingo.commons.core.GuiSettings;
 import seedu.flashlingo.model.flashcard.FlashCard;
 import seedu.flashlingo.model.flashcard.WordContainsKeywordsPredicate;
+import seedu.flashlingo.testutil.FlashlingoBuilder;
 
 public class ModelManagerTest {
     private ModelManager modelManager = new ModelManager();

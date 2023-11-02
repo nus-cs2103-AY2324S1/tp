@@ -1,10 +1,10 @@
 package seedu.flashlingo.logic;
 
-import static seedu.flashlingo.testutil.Assert.assertThrows;
-import static seedu.flashlingo.testutil.TypicalFlashCards.AMY;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.flashlingo.logic.Messages.MESSAGE_INVALID_FLASHCARD_DISPLAYED_INDEX;
 import static seedu.flashlingo.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.flashlingo.testutil.Assert.assertThrows;
+import static seedu.flashlingo.testutil.TypicalFlashCards.AMY;
 
 import java.io.IOException;
 import java.nio.file.AccessDeniedException;
@@ -14,7 +14,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
-import seedu.flashlingo.testutil.FlashCardBuilder;
 import seedu.flashlingo.logic.commands.AddCommand;
 import seedu.flashlingo.logic.commands.CommandResult;
 import seedu.flashlingo.logic.commands.CommandTestUtil;
@@ -29,6 +28,7 @@ import seedu.flashlingo.model.flashcard.FlashCard;
 import seedu.flashlingo.storage.JsonFlashlingoStorage;
 import seedu.flashlingo.storage.JsonUserPrefsStorage;
 import seedu.flashlingo.storage.StorageManager;
+import seedu.flashlingo.testutil.FlashCardBuilder;
 
 public class LogicManagerTest {
     private static final IOException DUMMY_IO_EXCEPTION = new IOException("dummy IO exception");
@@ -159,9 +159,10 @@ public class LogicManagerTest {
                 new JsonUserPrefsStorage(temporaryFolder.resolve("ExceptionUserPrefs.json"));
         StorageManager storage = new StorageManager(flashlingoStorage, userPrefsStorage);
 
-        logic = (Logic) new LogicManager(model, storage);
+        logic = new LogicManager(model, storage);
 
-        String addCommand = AddCommand.COMMAND_WORD + CommandTestUtil.WORD_DESC_AMY + CommandTestUtil.TRANSLATION_DESC_AMY;
+        String addCommand = AddCommand.COMMAND_WORD + CommandTestUtil.WORD_DESC_AMY
+                + CommandTestUtil.TRANSLATION_DESC_AMY;
         FlashCard expectedFlashCard = new FlashCardBuilder(AMY).build();
         ModelManager expectedModel = new ModelManager();
         expectedModel.addFlashCard(expectedFlashCard);

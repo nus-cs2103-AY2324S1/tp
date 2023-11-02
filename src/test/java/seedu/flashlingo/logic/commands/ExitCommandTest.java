@@ -1,6 +1,5 @@
 package seedu.flashlingo.logic.commands;
 
-import static seedu.flashlingo.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.flashlingo.logic.commands.ExitCommand.MESSAGE_EXIT_ACKNOWLEDGEMENT;
 
 import org.junit.jupiter.api.Test;

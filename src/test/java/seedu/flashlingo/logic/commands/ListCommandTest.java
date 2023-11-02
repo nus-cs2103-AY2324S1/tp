@@ -1,6 +1,5 @@
 package seedu.flashlingo.logic.commands;
 
-import static seedu.flashlingo.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.flashlingo.testutil.TypicalFlashCards.getTypicalFlashlingo;
 import static seedu.flashlingo.testutil.TypicalIndexes.INDEX_FIRST_FLASHCARD;
 

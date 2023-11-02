@@ -1,8 +1,7 @@
 package seedu.flashlingo.logic.parser;
-
+import static seedu.flashlingo.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.flashlingo.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.flashlingo.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.flashlingo.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import java.util.Arrays;
 
