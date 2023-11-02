@@ -179,6 +179,17 @@ public class CreateEventCommandTest {
         public boolean hasEnrolment(Enrolment enrolment) {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public void deleteEnrolment(Enrolment target) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setEnrolment(Enrolment enrolment, Enrolment editedEnrolment) {
+            throw new AssertionError("This method should not be called.");
+        }
+
         @Override
         public void setEnrolment(Enrolment enrolment, Enrolment editedEnrolment) {
             throw new AssertionError("This method should not be called.");
