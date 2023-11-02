@@ -30,13 +30,14 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Remark;
 
 /**
  * Edits the details of an existing person in the address book.
  */
-public class EditCommand extends Command {
+public class EditPersonCommand extends Command {
 
-    public static final String COMMAND_WORD = "edit";
+    public static final String COMMAND_WORD = "edit_person";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the person identified "
             + "by the index number used in the displayed person list. "
@@ -59,13 +60,13 @@ public class EditCommand extends Command {
     private final Index index;
     private final EditPersonDescriptor editPersonDescriptor;
 
-    private Logger logger = LogsCenter.getLogger(EditCommand.class);
+    private final Logger logger = LogsCenter.getLogger(EditPersonCommand.class);
 
     /**
      * @param index of the person in the filtered person list to edit
      * @param editPersonDescriptor details to edit the person with
      */
-    public EditCommand(Index index, EditPersonDescriptor editPersonDescriptor) {
+    public EditPersonCommand(Index index, EditPersonDescriptor editPersonDescriptor) {
         requireNonNull(index);
         requireNonNull(editPersonDescriptor);
 
@@ -125,7 +126,6 @@ public class EditCommand extends Command {
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         Birthday updatedBirthday = editPersonDescriptor.getBirthday().orElse(personToEdit.getBirthday());
 
-
         Set<Group> updatedGroups = new HashSet<>();
 
         if (editPersonDescriptor.getGroups().isPresent()) {
@@ -148,11 +148,15 @@ public class EditCommand extends Command {
             updatedGroups.removeAll(editPersonDescriptor.getUnassignGroups().get());
         }
 
+        Remark updatedRemark = editPersonDescriptor.getRemark().orElse(personToEdit.getRemark());
+
+
         Optional<Phone> phone = Optional.ofNullable(updatedPhone);
         Optional<Email> email = Optional.ofNullable(updatedEmail);
         Optional<Address> address = Optional.ofNullable(updatedAddress);
         Optional<Birthday> birthday = Optional.ofNullable(updatedBirthday);
-        return new Person(updatedName, phone, email, address, birthday, updatedGroups);
+        Optional<Remark> remark = Optional.ofNullable(updatedRemark);
+        return new Person(updatedName, phone, email, address, birthday, remark, updatedGroups);
     }
 
     private static Set<Group> getInvalidGroups(Person personToEdit, Set<Group> groups) {
@@ -184,13 +188,13 @@ public class EditCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof EditCommand)) {
+        if (!(other instanceof EditPersonCommand)) {
             return false;
         }
 
-        EditCommand otherEditCommand = (EditCommand) other;
-        return index.equals(otherEditCommand.index)
-                && editPersonDescriptor.equals(otherEditCommand.editPersonDescriptor);
+        EditPersonCommand otherEditPersonCommand = (EditPersonCommand) other;
+        return index.equals(otherEditPersonCommand.index)
+                && editPersonDescriptor.equals(otherEditPersonCommand.editPersonDescriptor);
     }
 
     @Override
@@ -211,6 +215,7 @@ public class EditCommand extends Command {
         private Email email;
         private Address address;
         private Birthday birthday;
+        private Remark remark;
         private Set<Group> groups;
 
         private Set<Group> unassignGroups;
@@ -227,6 +232,7 @@ public class EditCommand extends Command {
             setEmail(toCopy.email);
             setAddress(toCopy.address);
             setBirthday(toCopy.birthday);
+            setRemark(toCopy.remark);
             setGroups(toCopy.groups);
             setUnassignGroups(toCopy.unassignGroups);
         }
@@ -275,6 +281,14 @@ public class EditCommand extends Command {
 
         public Optional<Birthday> getBirthday() {
             return Optional.ofNullable(birthday);
+        }
+
+        public void setRemark(Remark remark) {
+            this.remark = remark;
+        }
+
+        public Optional<Remark> getRemark() {
+            return Optional.ofNullable(remark);
         }
 
         /**
@@ -328,6 +342,7 @@ public class EditCommand extends Command {
                     && Objects.equals(email, otherEditPersonDescriptor.email)
                     && Objects.equals(address, otherEditPersonDescriptor.address)
                     && Objects.equals(birthday, otherEditPersonDescriptor.birthday)
+                    && Objects.equals(remark, otherEditPersonDescriptor.remark)
                     && Objects.equals(groups, otherEditPersonDescriptor.groups);
         }
 
@@ -339,6 +354,7 @@ public class EditCommand extends Command {
                     .add("email", email)
                     .add("address", address)
                     .add("birthday", birthday)
+                    .add("remark", remark)
                     .add("groups", groups)
                     .toString();
         }

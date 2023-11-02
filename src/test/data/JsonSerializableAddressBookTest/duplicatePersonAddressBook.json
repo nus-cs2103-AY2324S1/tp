@@ -5,6 +5,7 @@
     "email": "alice@example.com",
     "address": "123, Jurong West Ave 6, #08-111",
     "birthday": "2001-12-12",
+    "remark": "Likes cats",
     "tags": [ "friends" ]
   }, {
     "name": "Alice Pauline",
@@ -12,6 +13,7 @@
     "email": "pauline@example.com",
     "address": "4th street",
     "birthday": "2001-12-12",
+    "remark": "Likes dogs",
     "tags" : []
   } ],
   "events" : [ {

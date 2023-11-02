@@ -18,6 +18,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Remark;
 
 /**
  * Jackson-friendly version of {@link Person}.
@@ -31,6 +32,7 @@ class JsonAdaptedPerson {
     private final String email;
     private final String address;
     private final String birthday;
+    private final String remark;
     private final List<JsonAdaptedGroup> groups = new ArrayList<>();
 
     /**
@@ -40,12 +42,14 @@ class JsonAdaptedPerson {
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("address") String address,
             @JsonProperty("birthday") String birthday,
+            @JsonProperty("remark") String remark,
             @JsonProperty("groups") List<JsonAdaptedGroup> groups) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.birthday = birthday;
+        this.remark = remark;
         if (groups != null) {
             this.groups.addAll(groups);
         }
@@ -60,6 +64,7 @@ class JsonAdaptedPerson {
         email = source.hasEmail() ? source.getEmail().toString() : "";
         address = source.hasAddress() ? source.getAddress().toString() : "";
         birthday = source.hasBirthday() ? source.getBirthday().toString() : "";
+        remark = source.hasRemark() ? source.getRemark().toString() : "";
         groups.addAll(source.getGroups().stream()
                 .map(JsonAdaptedGroup::new)
                 .collect(Collectors.toList()));
@@ -117,8 +122,14 @@ class JsonAdaptedPerson {
         }
         final Birthday modelBirthday = new Birthday(birthday);
 
+        if (remark == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Remark.class.getSimpleName()));
+        }
+        final Remark modelRemark = new Remark(remark);
+
         final Set<Group> modelGroups = new HashSet<>(personGroups);
         return new Person(modelName, Optional.of(modelPhone), Optional.of(modelEmail), Optional.of(modelAddress),
-                Optional.of(modelBirthday), modelGroups);
+                Optional.of(modelBirthday), Optional.of(modelRemark), modelGroups);
     }
 }

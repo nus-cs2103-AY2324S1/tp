@@ -25,6 +25,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Remark;
 
 public class SampleDataUtilTest {
 
@@ -34,7 +35,9 @@ public class SampleDataUtilTest {
                 Optional.of(new Phone("87438807")),
                 Optional.of(new Email("alexyeoh@example.com")),
                 Optional.of(new Address("Blk 30 Geylang Street 29, #06-40")),
-                Optional.of(new Birthday("2001-12-20")), getGroupSet("friends"));
+                Optional.of(new Birthday("2001-12-20")),
+                Optional.of(new Remark("")),
+                getGroupSet("friends"));
 
         Person[] samplePersons = SampleDataUtil.getSamplePersons();
 
@@ -47,7 +50,9 @@ public class SampleDataUtilTest {
                 Optional.of(new Phone("87438807")),
                 Optional.of(new Email("alexyeoh@example.com")),
                 Optional.of(new Address("Blk 30 Geylang Street 29, #06-40")),
-                Optional.of(new Birthday("2001-12-20")), getGroupSet("friends"));
+                Optional.of(new Birthday("2001-12-20")),
+                Optional.of(new Remark("")),
+                getGroupSet("friends"));
 
         Person[] samplePersons = SampleDataUtil.getSamplePersons();
 
