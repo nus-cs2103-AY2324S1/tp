@@ -54,10 +54,10 @@ public class ListCommand extends Command {
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         model.updateFilteredScheduleList(PREDICATE_SHOW_ALL_LESSONS);
         if (model.sameState(state)) {
-            return new CommandResult(MESSAGE_SUCCESS, displayParams);
+            return new CommandResult(MESSAGE_SUCCESS + " " + state.toString(), displayParams);
         } else {
             model.setState(state); // Only can pass in "STUDENTS","SCHEDULE" or "TASKS", has been filtered by parser
-            return new CommandResult(MESSAGE_SUCCESS, state, displayParams);
+            return new CommandResult(MESSAGE_SUCCESS + " " + state.toString(), state, displayParams);
         }
     }
 
