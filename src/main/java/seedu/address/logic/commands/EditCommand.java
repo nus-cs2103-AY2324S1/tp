@@ -25,15 +25,14 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.department.Department;
 import seedu.address.model.employee.Address;
 import seedu.address.model.employee.Email;
 import seedu.address.model.employee.Employee;
 import seedu.address.model.employee.Leave;
-import seedu.address.model.employee.Name;
 import seedu.address.model.employee.Phone;
 import seedu.address.model.employee.Role;
 import seedu.address.model.employee.Salary;
+import seedu.address.model.name.Name;
 
 /**
  * Edits the details of an existing employee in the ManageHR app.
@@ -62,6 +61,7 @@ public class EditCommand extends Command {
     public static final String MESSAGE_EDIT_EMPLOYEE_SUCCESS = "Edited Employee: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_EMPLOYEE = "This employee already exists in the ManageHR app.";
+    public static final String MESSAGE_UNDEFINED_DEPARTMENT = "The department(s) currently do not exist in ManageHR.";
 
     private final Index index;
     private final EditEmployeeDescriptor editEmployeeDescriptor;
@@ -94,6 +94,12 @@ public class EditCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_EMPLOYEE);
         }
 
+        for (Name departmentName : editedEmployee.getDepartments()) {
+            if (!model.hasDepartmentWithName(departmentName)) {
+                throw new CommandException(MESSAGE_UNDEFINED_DEPARTMENT);
+            }
+        }
+
         model.setEmployee(employeeToEdit, editedEmployee);
         model.updateFilteredEmployeeList(PREDICATE_SHOW_ALL_EMPLOYEES);
         return new CommandResult(String.format(MESSAGE_EDIT_EMPLOYEE_SUCCESS, Messages.format(editedEmployee)));
@@ -116,7 +122,7 @@ public class EditCommand extends Command {
         Role updatedRole = editEmployeeDescriptor.getRole().orElse(employeeToEdit.getRole());
         Set<Name> updatedSupervisors = editEmployeeDescriptor
                 .getSupervisors().orElse(employeeToEdit.getSupervisors());
-        Set<Department> updatedDepartments = editEmployeeDescriptor
+        Set<Name> updatedDepartments = editEmployeeDescriptor
                 .getDepartments().orElse(employeeToEdit.getDepartments());
 
         return new Employee(updatedName, updatedPhone, updatedEmail, updatedAddress,
@@ -160,7 +166,7 @@ public class EditCommand extends Command {
         private Leave leave;
         private Role role;
         private Set<Name> supervisors;
-        private Set<Department> departments;
+        private Set<Name> departments;
 
         public EditEmployeeDescriptor() {}
 
@@ -266,7 +272,7 @@ public class EditCommand extends Command {
          * Sets {@code departments} to this object's {@code departments}.
          * A defensive copy of {@code departments} is used internally.
          */
-        public void setDepartments(Set<Department> departments) {
+        public void setDepartments(Set<Name> departments) {
             this.departments = (departments != null) ? new HashSet<>(departments) : null;
         }
 
@@ -275,7 +281,7 @@ public class EditCommand extends Command {
          * if modification is attempted.
          * Returns {@code Optional#empty()} if {@code departments} is null.
          */
-        public Optional<Set<Department>> getDepartments() {
+        public Optional<Set<Name>> getDepartments() {
             return (departments != null) ? Optional.of(Collections.unmodifiableSet(departments)) : Optional.empty();
         }
 

@@ -52,15 +52,14 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.AddCommand;
-import seedu.address.model.department.Department;
 import seedu.address.model.employee.Address;
 import seedu.address.model.employee.Email;
 import seedu.address.model.employee.Employee;
 import seedu.address.model.employee.Leave;
-import seedu.address.model.employee.Name;
 import seedu.address.model.employee.Phone;
 import seedu.address.model.employee.Role;
 import seedu.address.model.employee.Salary;
+import seedu.address.model.name.Name;
 import seedu.address.testutil.EmployeeBuilder;
 
 public class AddCommandParserTest {
@@ -271,7 +270,7 @@ public class AddCommandParserTest {
         // invalid department
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
                 + ADDRESS_DESC_BOB + SALARY_DESC_BOB + LEAVE_DESC_BOB + ROLE_DESC_BOB + MANAGER_DESC_AMY
-                + INVALID_DEPARTMENT_DESC + VALID_DEPARTMENT_INVESTMENT, Department.MESSAGE_CONSTRAINTS);
+                + INVALID_DEPARTMENT_DESC + VALID_DEPARTMENT_INVESTMENT, Name.MESSAGE_CONSTRAINTS);
 
         // two invalid values, only first invalid value reported
         assertParseFailure(parser, INVALID_NAME_DESC + PHONE_DESC_BOB + EMAIL_DESC_BOB

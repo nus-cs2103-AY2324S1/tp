@@ -44,7 +44,7 @@ public class EmployeeCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         name.setText(employee.getName().fullName);
         employee.getDepartments().stream()
-                .sorted(Comparator.comparing(department -> department.departmentName))
-                .forEach(department -> departments.getChildren().add(new Label(department.departmentName)));
+                .sorted(Comparator.comparing(department -> department.fullName))
+                .forEach(department -> departments.getChildren().add(new Label(department.fullName)));
     }
 }

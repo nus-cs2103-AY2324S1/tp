@@ -7,6 +7,7 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.department.Department;
 import seedu.address.model.employee.Employee;
+import seedu.address.model.name.Name;
 
 /**
  * The API of the Model component.
@@ -59,6 +60,11 @@ public interface Model {
     boolean hasEmployee(Employee employee);
 
     /**
+     * Returns true if an employee with the identity as {@code name} exists in ManageHR.
+     */
+    boolean hasEmployeeWithName(Name name);
+
+    /**
      * Deletes the given employee.
      * The employee must exist in ManageHR.
      */
@@ -87,27 +93,31 @@ public interface Model {
     void updateFilteredEmployeeList(Predicate<Employee> predicate);
 
     /**
-     * Adds an department to ManageHR.
-     * The employee must not already exist in ManageHR.
+     * Returns true if an department with the same identity as {@code department} exists in ManageHR.
      */
     boolean hasDepartment(Department department);
 
     /**
-     * Adds an department to ManageHR.
-     * The employee must not already exist in ManageHR.
+     * Returns true if a department with the identity as {@code name} exists in ManageHR.
+     */
+    boolean hasDepartmentWithName(Name name);
+
+    /**
+     * Adds a department to ManageHR.
+     * The department must not already exist in ManageHR.
      */
     void addDepartment(Department department);
 
     /**
-     * Replaces the given employee {@code target} in the list with {@code editedEmployee}.
+     * Replaces the given department {@code target} in the list with {@code editedDepartment}.
      * {@code target} must exist in the ManageHR.
-     * The employee identity of {@code editedEmployee} must not be the same as another existing employee in ManageHR.
+     * The department identity of {@code editedDepartment} must not be the same as another existing department in ManageHR.
      */
     void setDepartment(Department target, Department editedDepartment);
 
     /**
      * Removes {@code key} from this {@code ManageHr}.
-     * {@code key} must exist in the ManageHr.
+     * {@code key} must exist in the ManageHr's department list.
      */
     void deleteDepartment(Department target);
 }

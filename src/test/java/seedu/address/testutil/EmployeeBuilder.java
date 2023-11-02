@@ -3,15 +3,14 @@ package seedu.address.testutil;
 import java.util.HashSet;
 import java.util.Set;
 
-import seedu.address.model.department.Department;
 import seedu.address.model.employee.Address;
 import seedu.address.model.employee.Email;
 import seedu.address.model.employee.Employee;
 import seedu.address.model.employee.Leave;
-import seedu.address.model.employee.Name;
 import seedu.address.model.employee.Phone;
 import seedu.address.model.employee.Role;
 import seedu.address.model.employee.Salary;
+import seedu.address.model.name.Name;
 import seedu.address.model.util.SampleDataUtil;
 
 /**
@@ -34,7 +33,7 @@ public class EmployeeBuilder {
     private Leave leave;
     private Role role;
     private Set<Name> supervisors;
-    private Set<Department> departments;
+    private Set<Name> departments;
 
     /**
      * Creates a {@code EmployeeBuilder} with the default details.
@@ -79,7 +78,7 @@ public class EmployeeBuilder {
      * {@code Employee} that we are building.
      */
     public EmployeeBuilder withDepartments(String ... departments) {
-        this.departments = SampleDataUtil.getDepartmentSet(departments);
+        this.departments = SampleDataUtil.getNameSet(departments);
         return this;
     }
 
@@ -88,7 +87,7 @@ public class EmployeeBuilder {
      * {@code Employee} that we are building.
      */
     public EmployeeBuilder withSupervisors(String ... supervisorName) {
-        this.supervisors = SampleDataUtil.getSupervisorNameSet(supervisorName);
+        this.supervisors = SampleDataUtil.getNameSet(supervisorName);
         return this;
     }
 

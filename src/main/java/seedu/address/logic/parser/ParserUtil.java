@@ -10,14 +10,13 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.department.Department;
 import seedu.address.model.employee.Address;
 import seedu.address.model.employee.Email;
 import seedu.address.model.employee.Leave;
-import seedu.address.model.employee.Name;
 import seedu.address.model.employee.Phone;
 import seedu.address.model.employee.Role;
 import seedu.address.model.employee.Salary;
+import seedu.address.model.name.Name;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -154,7 +153,7 @@ public class ParserUtil {
         requireNonNull(supervisor);
         String trimmedSupervisorName = supervisor.trim();
         if (!Name.isValidName(trimmedSupervisorName)) {
-            throw new ParseException(Department.MESSAGE_CONSTRAINTS);
+            throw new ParseException(Name.MESSAGE_CONSTRAINTS);
         }
         return new Name(trimmedSupervisorName);
     }
@@ -177,21 +176,21 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code department} is invalid.
      */
-    public static Department parseDepartment(String department) throws ParseException {
+    public static Name parseDepartment(String department) throws ParseException {
         requireNonNull(department);
         String trimmedDepartment = department.trim();
-        if (!Department.isValidDepartmentName(trimmedDepartment)) {
-            throw new ParseException(Department.MESSAGE_CONSTRAINTS);
+        if (!Name.isValidName(trimmedDepartment)) {
+            throw new ParseException(Name.MESSAGE_CONSTRAINTS);
         }
-        return new Department(trimmedDepartment);
+        return new Name(trimmedDepartment);
     }
 
     /**
      * Parses {@code Collection<String> departments} into a {@code Set<Department>}.
      */
-    public static Set<Department> parseDepartments(Collection<String> departments) throws ParseException {
+    public static Set<Name> parseDepartments(Collection<String> departments) throws ParseException {
         requireNonNull(departments);
-        final Set<Department> departmentSet = new HashSet<>();
+        final Set<Name> departmentSet = new HashSet<>();
         for (String departmentName : departments) {
             departmentSet.add(parseDepartment(departmentName));
         }

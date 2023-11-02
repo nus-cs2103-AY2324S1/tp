@@ -8,10 +8,12 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.department.Department;
 import seedu.address.model.department.UniqueDepartmentList;
+import seedu.address.model.department.exceptions.DepartmentNotFoundException;
 import seedu.address.model.employee.Employee;
 import seedu.address.model.employee.UniqueEmployeeList;
 import seedu.address.model.employee.exceptions.SubordinatePresentException;
 import seedu.address.model.employee.exceptions.SupervisorNotFoundException;
+import seedu.address.model.name.Name;
 
 /**
  * Wraps all data at the ManageHR level
@@ -47,12 +49,24 @@ public class ManageHr implements ReadOnlyManageHr {
     //// list overwrite operations
 
     /**
+     * Replaces the contents of the department list with {@code departments}.
+     * {@code departments} must not contain duplicate department.
+     */
+    public void setDepartments(List<Department> departments) {
+        this.departments.setDepartments(departments);
+    }
+
+    /**
      * Replaces the contents of the employee list with {@code people}.
      * {@code people} must not contain duplicate people.
      */
     public void setEmployees(List<Employee> people) {
         for (Employee employee : people) {
-            employee.checkValidDepartments(departments);
+            for (Name departmentName : employee.getDepartments()) {
+                if (!departments.contains(departmentName)) {
+                    throw new DepartmentNotFoundException();
+                }
+            }
         }
         this.employees.setEmployees(people);
     }
@@ -62,6 +76,7 @@ public class ManageHr implements ReadOnlyManageHr {
      */
     public void resetData(ReadOnlyManageHr newData) {
         requireNonNull(newData);
+        setDepartments(newData.getDepartmentList());
         setEmployees(newData.getEmployeeList());
     }
 
@@ -76,20 +91,31 @@ public class ManageHr implements ReadOnlyManageHr {
     }
 
     /**
+     * Returns true if an employee with the same identity as {@code name} exists in the storage.
+     */
+    public boolean hasEmployeeWithName(Name name) {
+        requireNonNull(name);
+        return employees.contains(name);
+    }
+    /**
      * Adds an employee to ManageHR.
      * The employee must not already exist in ManageHR.
      *
-     * @param p The employee to be added to the list.
+     * @param employee The employee to be added to the list.
      * @throws SupervisorNotFoundException If the supervisor of the employee is not found in the list.
      */
 
-    public void addEmployee(Employee p) {
-        requireNonNull(p);
-        p.checkValidDepartments(departments);
-        if (!employees.containsManager(p)) {
+    public void addEmployee(Employee employee) {
+        requireNonNull(employee);
+        for (Name departmentName : employee.getDepartments()) {
+            if (!departments.contains(departmentName)) {
+                throw new DepartmentNotFoundException();
+            }
+        }
+        if (!employees.containsManager(employee)) {
             throw new SupervisorNotFoundException();
         }
-        employees.add(p);
+        employees.add(employee);
     }
 
     /**
@@ -104,7 +130,11 @@ public class ManageHr implements ReadOnlyManageHr {
      */
     public void setEmployee(Employee target, Employee editedEmployee) {
         requireNonNull(editedEmployee);
-        editedEmployee.checkValidDepartments(departments);
+        for (Name departmentName : editedEmployee.getDepartments()) {
+            if (!departments.contains(departmentName)) {
+                throw new DepartmentNotFoundException();
+            }
+        }
         if (employees.hasSubordinates(target)) {
             throw new SubordinatePresentException();
         }
@@ -133,12 +163,19 @@ public class ManageHr implements ReadOnlyManageHr {
     }
 
     /**
-     * Adds an department to ManageHR.
-     * The employee must not already exist in ManageHR.
+     * Returns true if an department with the same identity as {@code department} exists in the storage.
      */
     public boolean hasDepartment(Department department) {
         requireNonNull(department);
         return departments.contains(department);
+    }
+
+    /**
+     * Returns true if a department with the same identity as {@code name} exists in the storage.
+     */
+    public boolean hasDepartmentWithName(Name name) {
+        requireNonNull(name);
+        return departments.contains(name);
     }
 
     /**

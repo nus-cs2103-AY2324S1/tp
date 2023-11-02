@@ -15,10 +15,10 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.employee.Address;
 import seedu.address.model.employee.Email;
 import seedu.address.model.employee.Leave;
-import seedu.address.model.employee.Name;
 import seedu.address.model.employee.Phone;
 import seedu.address.model.employee.Role;
 import seedu.address.model.employee.Salary;
+import seedu.address.model.name.Name;
 
 public class JsonAdaptedEmployeeTest {
     private static final String INVALID_NAME = "R@chel";
@@ -41,8 +41,8 @@ public class JsonAdaptedEmployeeTest {
     private static final List<JsonAdaptedSupervisor> VALID_MANAGERS = BENSON.getSupervisors().stream()
             .map(JsonAdaptedSupervisor::new)
             .collect(Collectors.toList());
-    private static final List<JsonAdaptedDepartment> VALID_DEPARTMENTS = BENSON.getDepartments().stream()
-            .map(JsonAdaptedDepartment::new)
+    private static final List<JsonAdaptedName> VALID_DEPARTMENTS = BENSON.getDepartments().stream()
+            .map(JsonAdaptedName::new)
             .collect(Collectors.toList());
 
     @Test
@@ -178,8 +178,8 @@ public class JsonAdaptedEmployeeTest {
 
     @Test
     public void toModelType_invalidDepartments_throwsIllegalValueException() {
-        List<JsonAdaptedDepartment> invalidDepartments = new ArrayList<>(VALID_DEPARTMENTS);
-        invalidDepartments.add(new JsonAdaptedDepartment(INVALID_DEPARTMENT));
+        List<JsonAdaptedName> invalidDepartments = new ArrayList<>(VALID_DEPARTMENTS);
+        invalidDepartments.add(new JsonAdaptedName(INVALID_DEPARTMENT));
         JsonAdaptedEmployee employee =
                 new JsonAdaptedEmployee(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
                         VALID_SALARY, VALID_LEAVE, VALID_ROLE, VALID_MANAGERS, invalidDepartments);

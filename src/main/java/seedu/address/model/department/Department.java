@@ -3,35 +3,57 @@ package seedu.address.model.department;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
+
+import seedu.address.model.name.Name;
 /**
  * Represents a Department in the ManageHR.
  * Guarantees: immutable; name is valid as declared in {@link #isValidDepartmentName(String)}
  */
 public class Department {
 
-    public static final String MESSAGE_CONSTRAINTS = "Departments names should be alphabets"
-            + " and/or ascii characters only";
-    public static final String VALIDATION_REGEX = "[A-Za-z\\p{ASCII}&&[^0-9]]+";
-
-    public final String departmentName;
+    public final Name name;
+    private final Set<Name> employees = new HashSet<>();
 
     /**
      * Constructs a {@code Department}.
      *
-     * @param departmentName A valid department name.
+     * @param name A valid department name of type String.
      */
-    public Department(String departmentName) {
-        requireNonNull(departmentName);
-        checkArgument(isValidDepartmentName(departmentName), MESSAGE_CONSTRAINTS);
-        this.departmentName = departmentName;
+    public Department(String name) {
+        requireNonNull(name);
+        checkArgument(Name.isValidName(name), Name.MESSAGE_CONSTRAINTS);
+        this.name = new Name(name);
     }
 
     /**
-     * Returns true if a given string is a valid department name.
+     * Constructs a {@code Department}.
+     *
+     * @param name A valid department name of type Name.
      */
-    public static boolean isValidDepartmentName(String test) {
-        return test.matches(VALIDATION_REGEX);
+    public Department(Name name) {
+        requireNonNull(name);
+        this.name = name;
     }
+
+    /**
+     * Constructs a {@code Department}.
+     *
+     * @param name A valid department name of type Name.
+     */
+    public Department(Name name, Set<Name> employees) {
+        requireNonNull(name);
+        requireNonNull(employees);
+        this.name = name;
+        this.employees.addAll(employees);
+    }
+    public String getName() {
+        return name.fullName;
+    }
+
+    public Set<Name> getEmployees() { return Collections.unmodifiableSet(employees); }
 
     @Override
     public boolean equals(Object other) {
@@ -45,7 +67,7 @@ public class Department {
         }
 
         Department otherDepartment = (Department) other;
-        return departmentName.equals(otherDepartment.departmentName);
+        return this.getName().equals(otherDepartment.getName());
     }
 
     /**
@@ -58,14 +80,14 @@ public class Department {
 
     @Override
     public int hashCode() {
-        return departmentName.hashCode();
+        return name.hashCode();
     }
 
     /**
      * Format state as text for viewing.
      */
     public String toString() {
-        return '[' + departmentName + ']';
+        return '[' + name.fullName + ']';
     }
 
 }

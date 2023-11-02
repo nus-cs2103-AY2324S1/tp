@@ -8,10 +8,12 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.model.employee.Employee;
 import seedu.address.model.employee.exceptions.DuplicateEmployeeException;
 import seedu.address.model.employee.exceptions.EmployeeNotFoundException;
 import seedu.address.model.employee.exceptions.SubordinatePresentException;
 import seedu.address.model.employee.exceptions.SupervisorNotFoundException;
+import seedu.address.model.name.Name;
 
 /**
  * A list of employees that enforces uniqueness between its elements and does not allow nulls.
@@ -38,6 +40,13 @@ public class UniqueEmployeeList implements Iterable<Employee> {
         return internalList.stream().anyMatch(toCheck::isSameEmployee);
     }
 
+    /**
+     * Returns true if the list contains an employee with the same identity as the given argument.
+     */
+    public boolean contains(Name toCheck) {
+        requireNonNull(toCheck);
+        return internalList.stream().anyMatch(employee -> employee.hasSameEmployeeName(toCheck));
+    }
     /**
      * Returns true if all the managers of the given argument is within the list.
      */

@@ -8,8 +8,9 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.address.model.department.exceptions.DuplicateDepartmentException;
 import seedu.address.model.department.exceptions.DepartmentNotFoundException;
+import seedu.address.model.department.exceptions.DuplicateDepartmentException;
+import seedu.address.model.name.Name;
 
 /**
  * A list of departments that enforces uniqueness between its elements and does not allow nulls.
@@ -38,6 +39,14 @@ public class UniqueDepartmentList implements Iterable<Department> {
     }
 
     /**
+     * Returns true if the list contains an equivalent department as the given argument.
+     */
+    public boolean contains(Name toCheck) {
+        requireNonNull(toCheck);
+        return internalList.stream().anyMatch(new Department(toCheck)::isSameDepartment);
+    }
+
+    /**
      * Adds an department to the list.
      * The department must not already exist in the list.
      */
@@ -52,7 +61,8 @@ public class UniqueDepartmentList implements Iterable<Department> {
     /**
      * Replaces the department {@code target} in the list with {@code editeddepartment}.
      * {@code target} must exist in the list.
-     * The department identity of {@code editeddepartment} must not be the same as another existing department in the list.
+     * The department identity of {@code editedDepartment} must not be the same as another
+     * existing department in the list.
      */
     public void setDepartment(Department target, Department editedDepartment) {
         requireAllNonNull(target, editedDepartment);

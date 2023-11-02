@@ -5,15 +5,14 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.EditCommand;
-import seedu.address.model.department.Department;
 import seedu.address.model.employee.Address;
 import seedu.address.model.employee.Email;
 import seedu.address.model.employee.Employee;
 import seedu.address.model.employee.Leave;
-import seedu.address.model.employee.Name;
 import seedu.address.model.employee.Phone;
 import seedu.address.model.employee.Role;
 import seedu.address.model.employee.Salary;
+import seedu.address.model.name.Name;
 
 /**
  * A utility class to help with building EditEmployeeDescriptor objects.
@@ -115,7 +114,7 @@ public class EditEmployeeDescriptorBuilder {
      * that we are building.
      */
     public EditEmployeeDescriptorBuilder withDepartments(String... departments) {
-        Set<Department> departmentSet = Stream.of(departments).map(Department::new).collect(Collectors.toSet());
+        Set<Name> departmentSet = Stream.of(departments).map(Name::new).collect(Collectors.toSet());
         descriptor.setDepartments(departmentSet);
         return this;
     }

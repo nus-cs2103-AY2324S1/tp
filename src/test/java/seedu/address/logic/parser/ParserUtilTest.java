@@ -17,8 +17,8 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.department.Department;
 import seedu.address.model.employee.Address;
 import seedu.address.model.employee.Email;
-import seedu.address.model.employee.Name;
 import seedu.address.model.employee.Phone;
+import seedu.address.model.name.Name;
 
 public class ParserUtilTest {
     private static final String INVALID_NAME = "R@chel";
@@ -189,7 +189,7 @@ public class ParserUtilTest {
 
     @Test
     public void parseDepartments_collectionWithValidDepartments_returnsDepartmentSet() throws Exception {
-        Set<Department> actualDepartmentSet = ParserUtil.parseDepartments(
+        Set<Name> actualDepartmentSet = ParserUtil.parseDepartments(
                 Arrays.asList(VALID_DEPARTMENT_1, VALID_DEPARTMENT_2));
         Set<Department> expectedDepartmentSet = new HashSet<Department>(Arrays.asList(
                 new Department(VALID_DEPARTMENT_1), new Department(VALID_DEPARTMENT_2)));

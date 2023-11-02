@@ -8,9 +8,7 @@ import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.model.department.Department;
-import seedu.address.model.department.UniqueDepartmentList;
-import seedu.address.model.department.exceptions.DepartmentNotFoundException;
+import seedu.address.model.name.Name;
 
 /**
  * Represents an Employee in the ManageHR app.
@@ -29,13 +27,13 @@ public class Employee {
     private final Leave leave;
     private final Role role;
     private final Set<Name> supervisors = new HashSet<>();
-    private final Set<Department> departments = new HashSet<>();
+    private final Set<Name> departments = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
     public Employee(Name name, Phone phone, Email email, Address address, Salary salary, Leave leave,
-                    Role role, Set<Name> supervisors, Set<Department> departments) {
+                    Role role, Set<Name> supervisors, Set<Name> departments) {
         requireAllNonNull(name, phone, email, address, salary, leave, departments);
         this.name = name;
         this.phone = phone;
@@ -72,13 +70,6 @@ public class Employee {
         return leave;
     }
 
-    public void checkValidDepartments(UniqueDepartmentList validDepartments) {
-        for (Department department : departments) {
-            if (!validDepartments.contains(department)) {
-                throw new DepartmentNotFoundException();
-            }
-        }
-    }
     public Role getRole() {
         return role;
     }
@@ -87,7 +78,7 @@ public class Employee {
      * Returns an immutable department set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
-    public Set<Department> getDepartments() {
+    public Set<Name> getDepartments() {
         return Collections.unmodifiableSet(departments);
     }
 

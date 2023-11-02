@@ -9,9 +9,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.department.Department;
 import seedu.address.model.ManageHr;
 import seedu.address.model.ReadOnlyManageHr;
+import seedu.address.model.department.Department;
 import seedu.address.model.employee.Employee;
 
 /**
@@ -43,7 +43,8 @@ class JsonSerializableManageHr {
      */
     public JsonSerializableManageHr(ReadOnlyManageHr source) {
         employees.addAll(source.getEmployeeList().stream().map(JsonAdaptedEmployee::new).collect(Collectors.toList()));
-        departments.addAll(source.getDepartmentList().stream().map(JsonAdaptedDepartment::new).collect(Collectors.toList()));
+        departments.addAll(source.getDepartmentList().stream().map(
+                JsonAdaptedDepartment::new).collect(Collectors.toList()));
     }
 
     /**

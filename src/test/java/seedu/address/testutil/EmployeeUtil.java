@@ -14,9 +14,8 @@ import java.util.Set;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.EditCommand.EditEmployeeDescriptor;
-import seedu.address.model.department.Department;
 import seedu.address.model.employee.Employee;
-import seedu.address.model.employee.Name;
+import seedu.address.model.name.Name;
 
 /**
  * A utility class for Employee.
@@ -46,7 +45,7 @@ public class EmployeeUtil {
                 x -> sb.append(PREFIX_MANAGER + x.toString() + " ")
         );
         employee.getDepartments().stream().forEach(
-            s -> sb.append(PREFIX_DEPARTMENT + s.departmentName + " ")
+            s -> sb.append(PREFIX_DEPARTMENT + s.fullName + " ")
         );
         return sb.toString();
     }
@@ -72,11 +71,11 @@ public class EmployeeUtil {
             }
         }
         if (descriptor.getDepartments().isPresent()) {
-            Set<Department> departments = descriptor.getDepartments().get();
+            Set<Name> departments = descriptor.getDepartments().get();
             if (departments.isEmpty()) {
                 sb.append(PREFIX_DEPARTMENT);
             } else {
-                departments.forEach(s -> sb.append(PREFIX_DEPARTMENT).append(s.departmentName).append(" "));
+                departments.forEach(s -> sb.append(PREFIX_DEPARTMENT).append(s.fullName).append(" "));
             }
         }
         return sb.toString();

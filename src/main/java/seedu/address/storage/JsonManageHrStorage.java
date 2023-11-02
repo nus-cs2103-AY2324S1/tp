@@ -47,7 +47,7 @@ public class JsonManageHrStorage implements ManageHrStorage {
 
         Optional<JsonSerializableManageHr> jsonManageHr = JsonUtil.readJsonFile(
                 filePath, JsonSerializableManageHr.class);
-        if (!jsonManageHr.isPresent()) {
+        if (jsonManageHr.isEmpty()) {
             return Optional.empty();
         }
 
@@ -74,7 +74,8 @@ public class JsonManageHrStorage implements ManageHrStorage {
         requireNonNull(filePath);
 
         FileUtil.createIfMissing(filePath);
-        JsonUtil.saveJsonFile(new JsonSerializableManageHr(manageHr), filePath);
+        JsonSerializableManageHr jsonManageHr = new JsonSerializableManageHr(manageHr);
+        JsonUtil.saveJsonFile(jsonManageHr, filePath);
     }
 
 }

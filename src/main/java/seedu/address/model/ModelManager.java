@@ -13,13 +13,13 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.department.Department;
 import seedu.address.model.employee.Employee;
+import seedu.address.model.name.Name;
 
 /**
  * Represents the in-memory model of the ManageHR data.
  */
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
-
     private final ManageHr manageHr;
     private final UserPrefs userPrefs;
     private final FilteredList<Employee> filteredPeople;
@@ -95,6 +95,12 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public boolean hasEmployeeWithName(Name name) {
+        requireNonNull(name);
+        return manageHr.hasEmployeeWithName(name);
+    }
+
+    @Override
     public void deleteEmployee(Employee target) {
         manageHr.removeEmployee(target);
     }
@@ -119,6 +125,12 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public boolean hasDepartmentWithName(Name name) {
+        requireNonNull(name);
+        return manageHr.hasDepartmentWithName(name);
+    }
+
+    @Override
     public void deleteDepartment(Department target) {
         manageHr.removeDepartment(target);
     }
@@ -134,7 +146,6 @@ public class ModelManager implements Model {
 
         manageHr.setDepartment(target, editedDepartment);
     }
-    
     //=========== Filtered Employee List Accessors =============================================================
 
     /**

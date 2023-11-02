@@ -20,8 +20,7 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.department.Department;
-import seedu.address.model.employee.Name;
+import seedu.address.model.name.Name;
 
 /**
  * Parses input arguments and creates a new EditCommand object
@@ -109,7 +108,7 @@ public class EditCommandParser implements Parser<EditCommand> {
      * If {@code departments} contain only one element which is an empty string, it will be parsed into a
      * {@code Set<Department>} containing zero departments.
      */
-    private Optional<Set<Department>> parseDepartmentsForEdit(Collection<String> departments) throws ParseException {
+    private Optional<Set<Name>> parseDepartmentsForEdit(Collection<String> departments) throws ParseException {
         assert departments != null;
 
         if (departments.isEmpty()) {

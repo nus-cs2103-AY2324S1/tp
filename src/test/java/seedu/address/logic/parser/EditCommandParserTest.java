@@ -49,13 +49,12 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditEmployeeDescriptor;
-import seedu.address.model.department.Department;
 import seedu.address.model.employee.Address;
 import seedu.address.model.employee.Email;
 import seedu.address.model.employee.Leave;
-import seedu.address.model.employee.Name;
 import seedu.address.model.employee.Phone;
 import seedu.address.model.employee.Salary;
+import seedu.address.model.name.Name;
 import seedu.address.testutil.EditEmployeeDescriptorBuilder;
 
 public class EditCommandParserTest {
@@ -102,7 +101,7 @@ public class EditCommandParserTest {
         assertParseFailure(parser, "1" + INVALID_ADDRESS_DESC, Address.MESSAGE_CONSTRAINTS); // invalid address
         assertParseFailure(parser, "1" + INVALID_SALARY_DESC, Salary.MESSAGE_CONSTRAINTS); // invalid salary
         assertParseFailure(parser, "1" + INVALID_LEAVE_DESC, Leave.MESSAGE_CONSTRAINTS); // invalid leave
-        assertParseFailure(parser, "1" + INVALID_DEPARTMENT_DESC, Department.MESSAGE_CONSTRAINTS); // invalid department
+        assertParseFailure(parser, "1" + INVALID_DEPARTMENT_DESC, Name.MESSAGE_CONSTRAINTS); // invalid department
 
         // invalid phone followed by valid email
         assertParseFailure(parser, "1" + INVALID_PHONE_DESC + EMAIL_DESC_AMY, Phone.MESSAGE_CONSTRAINTS);
@@ -110,11 +109,11 @@ public class EditCommandParserTest {
         // while parsing {@code PREFIX_DEPARTMENT} alone will reset the departments of the {@code Employee}
         // being edited, parsing it together with a valid department results in error
         assertParseFailure(parser, "1" + DEPARTMENT_DESC_INVESTMENT + DEPARTMENT_DESC_LOGISTIC
-                + DEPARTMENT_EMPTY, Department.MESSAGE_CONSTRAINTS);
+                + DEPARTMENT_EMPTY, Name.MESSAGE_CONSTRAINTS);
         assertParseFailure(parser, "1" + DEPARTMENT_DESC_INVESTMENT
-                + DEPARTMENT_EMPTY + DEPARTMENT_DESC_LOGISTIC, Department.MESSAGE_CONSTRAINTS);
+                + DEPARTMENT_EMPTY + DEPARTMENT_DESC_LOGISTIC, Name.MESSAGE_CONSTRAINTS);
         assertParseFailure(parser, "1" + DEPARTMENT_EMPTY + DEPARTMENT_DESC_INVESTMENT
-                + DEPARTMENT_DESC_LOGISTIC, Department.MESSAGE_CONSTRAINTS);
+                + DEPARTMENT_DESC_LOGISTIC, Name.MESSAGE_CONSTRAINTS);
 
         // multiple invalid values, but only the first invalid value is captured
         assertParseFailure(parser, "1" + INVALID_NAME_DESC + INVALID_EMAIL_DESC + VALID_ADDRESS_AMY
