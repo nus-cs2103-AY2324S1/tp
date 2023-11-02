@@ -12,7 +12,7 @@ public class CommandResultTest {
 
         // same values -> returns true
         assertEquals(commandResult, new CommandResult("feedback"));
-        assertEquals(commandResult, new CommandResult("feedback", false, false, null));
+        assertEquals(commandResult, new CommandResult("feedback", false, false, -1));
 
         // same object -> returns true
         assertEquals(commandResult, commandResult);
@@ -27,10 +27,10 @@ public class CommandResultTest {
         assertNotEquals(commandResult, new CommandResult("different"));
 
         // different showHelp value -> returns false
-        assertNotEquals(commandResult, new CommandResult("feedback", true, false, null));
+        assertNotEquals(commandResult, new CommandResult("feedback", true, false, -1));
 
         // different exit value -> returns false
-        assertNotEquals(commandResult, new CommandResult("feedback", false, true, null));
+        assertNotEquals(commandResult, new CommandResult("feedback", false, true, -1));
     }
 
     @Test
@@ -44,10 +44,12 @@ public class CommandResultTest {
         assertNotEquals(commandResult.hashCode(), new CommandResult("different").hashCode());
 
         // different showHelp value -> returns different hashcode
-        assertNotEquals(commandResult.hashCode(), new CommandResult("feedback", true, false, null).hashCode());
+        assertNotEquals(commandResult.hashCode(), new CommandResult("feedback", true,
+                false, -1).hashCode());
 
         // different exit value -> returns different hashcode
-        assertNotEquals(commandResult.hashCode(), new CommandResult("feedback", false, true, null).hashCode());
+        assertNotEquals(commandResult.hashCode(), new CommandResult("feedback", false,
+                true, -1).hashCode());
     }
 
     @Test
@@ -55,7 +57,7 @@ public class CommandResultTest {
         CommandResult commandResult = new CommandResult("feedback");
         String expected = CommandResult.class.getCanonicalName() + "{feedbackToUser="
                 + commandResult.getFeedbackToUser() + ", showHelp=" + commandResult.isShowHelp()
-                + ", exit=" + commandResult.isExit() + ", interview=" + commandResult.isInterview() + "}";
+                + ", exit=" + commandResult.isExit() + ", interview=" + commandResult.interviewIndex() + "}";
         assertEquals(expected, commandResult.toString());
     }
 }

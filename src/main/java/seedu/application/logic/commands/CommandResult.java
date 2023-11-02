@@ -4,7 +4,6 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.Objects;
 
-import seedu.application.commons.core.index.Index;
 import seedu.application.commons.util.ToStringBuilder;
 
 /**
@@ -51,7 +50,7 @@ public class CommandResult {
         return exit;
     }
 
-    public int isInterview() {
+    public int interviewIndex() {
         return interview;
     }
 

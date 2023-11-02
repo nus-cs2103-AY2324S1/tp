@@ -1,6 +1,5 @@
 package seedu.application.logic.commands;
 
-import seedu.application.commons.core.index.Index;
 import seedu.application.model.Model;
 
 /**
