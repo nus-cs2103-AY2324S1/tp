@@ -5,6 +5,7 @@ package seedu.address.model.person;
  * Guarantees: immutable; is valid as declared in {@link #isValidPhone(String)}
  */
 public class NextOfKinPhone extends Phone {
+    public static final String MESSAGE_CONSTRAINTS = "Next of Kin's " + Phone.MESSAGE_CONSTRAINTS;
     /**
      * Constructs a {@code NextOfKinPhone}.
      *
