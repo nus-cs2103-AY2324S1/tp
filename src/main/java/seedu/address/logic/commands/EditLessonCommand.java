@@ -9,7 +9,7 @@ import seedu.address.model.lessons.Lesson;
  * Edits the details of an existing lesson in the schedule.
  */
 public class EditLessonCommand extends AbstractEditCommand<Lesson> {
-    public static final String COMMAND_WORD = "editLesson";
+    public static final String COMMAND_WORD = "editlesson";
     public EditLessonCommand(int index, Lesson editDescriptor) {
         super(index, editDescriptor);
     }

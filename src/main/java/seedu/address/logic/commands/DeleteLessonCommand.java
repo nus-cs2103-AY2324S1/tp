@@ -12,7 +12,7 @@ import seedu.address.model.lessons.Lesson;
  * Deletes a lesson identified using it's displayed index from the schedule.
  */
 public class DeleteLessonCommand extends Command {
-    public static final String COMMAND_WORD = "deleteLesson";
+    public static final String COMMAND_WORD = "deletelesson";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the lesson identified by the index number used in the displayed lesson list.\n"

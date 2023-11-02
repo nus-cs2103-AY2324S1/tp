@@ -20,7 +20,7 @@ public class LinkCommand extends Command {
     /**
      * The COMMAND_WORD where only the name of the linked lesson or student is required
      */
-    public static final String STATEFUL_COMMAND_WORD = "linkTo";
+    public static final String STATEFUL_COMMAND_WORD = "linkto";
     private Name lessonName;
     private Name studentName;
 
