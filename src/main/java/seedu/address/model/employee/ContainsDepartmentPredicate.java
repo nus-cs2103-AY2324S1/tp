@@ -9,15 +9,36 @@ import seedu.address.model.name.DepartmentName;
  * Tests that an {@code Employee}'s {@code Name} matches the keyword given.
  */
 public class ContainsDepartmentPredicate implements Predicate<Employee> {
-    private final String keyword;
+    private String keyword;
+    private Salary salary;
 
-    public ContainsDepartmentPredicate(String keyword) {
-        this.keyword = keyword;
+    public ContainsDepartmentPredicate() {
     }
 
     @Override
     public boolean test(Employee employee) {
-        return employee.getDepartments().contains(new DepartmentName(keyword));
+        boolean departmentResult = true;
+        boolean salaryResult = true;
+
+        if (keyword != null) {
+            departmentResult = employee.getDepartments().contains(new DepartmentName(keyword)) ? true : false;
+        }
+
+        if (salary != null) {
+            Integer actual = Integer.valueOf(employee.getSalary().toString());
+            Integer test = Integer.valueOf(salary.toString());
+            salaryResult = actual <= test ? true : false;
+        }
+
+        return departmentResult && salaryResult;
+    }
+
+    public void setDepartment(String keyword) {
+        this.keyword = keyword;
+    }
+
+    public void setSalary(Salary salary) {
+        this.salary = salary;
     }
 
     @Override
