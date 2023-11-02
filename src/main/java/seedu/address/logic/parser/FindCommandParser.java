@@ -30,8 +30,8 @@ public class FindCommandParser implements Parser<FindCommand> {
         FindFilterStringTokenizer tokenizer = new FindFilterStringTokenizer(args);
         List<Token> tokens = tokenizer.tokenize();
 
-        FindExpressionParser parser = new FindExpressionParser();
-        Predicate<Person> checkAllFields = parser.parseToPredicate(tokens);
+        FindExpressionParser parser = new FindExpressionParser(tokens);
+        Predicate<Person> checkAllFields = parser.parseToPredicate();
 
         return new FindCommand(checkAllFields);
     }

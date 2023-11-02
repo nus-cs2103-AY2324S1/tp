@@ -265,7 +265,7 @@ As this command merely adds additional attributes to a `Person` object, this can
     * Cons:
         * Many cases of empty/*null* inputs in the optional fields have to be accounted for when saving the data and testing.
 
-### Edit Feature
+### Edit feature
 
 #### Implementation Details
 
@@ -324,31 +324,20 @@ The find command is not just a simple string matching utility within our system.
 
 The heart of the Find command system is the combination of `FindCommand` and `FindCommandParser`. The latter is responsible for processing raw user input, tokenizing the search criteria using the `FindFilterStringTokenizer`, and subsequently parsing it with the `FindExpressionParser`. The end product is a `FindCommand` object that executes the search based on a `Predicate<Person>` that checks all relevant fields of a `Person`.
 
-Sequence Diagram for FindCommandParser:
-
-<puml src="diagrams/find-command/FindCommandParserSequenceDiagram.puml" alt="FindCommandParserSequenceDiagram" />
 
 ##### `FindFilterStringTokenizer`
 
 The `FindFilterStringTokenizer` is tailored to break down the user's search criteria, a `String` into meaningful tokens which can later be parsed into a final `Predicate<Person>`. This process includes recognizing individual terms (in the form of conditions of the form `PREFIX/KEYWORD`), Boolean operators (including `!`, `&&`, and `||`), and parentheses (`(` and `)`).
 
-Class Diagram for FindFilterStringTokenizer:
-
-<puml src="diagrams/find-command/FindFilterStringTokenizerClassDiagram.puml" alt="FindFilterStringTokenizerClassDiagram" />
 
 ##### `FindExpressionParser`
 
 The `FindExpressionParser` ingests the tokens produced by the `FindFilterStringTokenizer` and interprets them, creating a singular complete `Predicate<Person>` that's applied on the PersonList.
 
-Class Diagram for FindExpressionParser:
-
-<puml src="diagrams/find-command/FindExpressionParserClassDiagram.puml" alt="FindExpressionParserClassDiagram" />
-
 FindExpressionParser uses the recursive gradient descent algorithm to parse the tokens into a `Predicate<Person>`.
 
 Sequence Diagram for FindExpressionParser showing how a sample input is parsed using the recursive gradient descent algorithm:
 
-<puml src="diagrams/find-command/FindExpressionParserSequenceDiagram.puml" alt="FindExpressionParserSequenceDiagram" />
 
 #### Design considerations:
 
@@ -420,7 +409,7 @@ When a user inputs a command to update photo of a contact, the `UpdatePhotoComma
 
 
 The process can be summarized in the following logic flow:
-<puml src="diagrams\updatephoto-command/UpdatePhotoCommandSequenceDiagram.puml" />
+<puml src="diagrams/updatephoto-command/UpdatePhotoCommandSequenceDiagram.puml" />
 
 1. Parse user input to create a `UpdatePhotoCommand` object.
 2. Execute the `UpdatePhotoCommand`, which involves:
@@ -434,94 +423,25 @@ Key methods in this implementation include:
 - `UpdatePhotoCommand(int index, String path)`: Constructor to initialize the command.
 - `execute(Model model)`: Updates the photo as well as the model.
 
-### \[Proposed\] Undo/redo feature
+### Payments feature
 
-#### Proposed Implementation
+#### Implementation
 
-The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
+The Payments feature allows users to keep track of the money they owe to and are owed by their contacts. This feature is useful for users who wish to keep track of their financial transactions with their contacts.
 
-* `VersionedAddressBook#commit()` — Saves the current address book state in its history.
-* `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
-* `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
+Money is represented with a `Balance` class, which is effectively a wrapper around an `int` value representing a monetary value in cents. Validation, including ensuring that values of balances cannot exceed the transaction limit of CampusConnect (currently set at $10,000), is handled by the `Balance` class.
 
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
+#### Design considerations
 
-Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
+**Aspect: Using integers to represent money value**
 
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
+* **Alternative 1 (current choice):** Use `int` to represent money value in cents.
+  * **Pros**: Simple and straightforward.
+  * **Cons**: Requires more complex processing when converting to human-friendly string representations.
+* **Alternative 2:** Use `double` to represent money value in dollars.
+  * **Pros**: More human-friendly.
+  * **Cons**: Vulnerable to floating-point precision errors.
 
-<puml src="diagrams/UndoRedoState0.puml" alt="UndoRedoState0" />
-
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
-
-<puml src="diagrams/UndoRedoState1.puml" alt="UndoRedoState1" />
-
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
-
-<puml src="diagrams/UndoRedoState2.puml" alt="UndoRedoState2" />
-
-<box type="info" seamless>
-
-**Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
-
-</box>
-
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
-
-<puml src="diagrams/UndoRedoState3.puml" alt="UndoRedoState3" />
-
-
-<box type="info" seamless>
-
-**Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
-than attempting to perform the undo.
-
-</box>
-
-The following sequence diagram shows how the undo operation works:
-
-<puml src="diagrams/UndoSequenceDiagram.puml" alt="UndoSequenceDiagram" />
-
-<box type="info" seamless>
-
-**Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-
-</box>
-
-The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
-
-<box type="info" seamless>
-
-**Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
-
-</box>
-
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
-
-<puml src="diagrams/UndoRedoState4.puml" alt="UndoRedoState4" />
-
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
-
-<puml src="diagrams/UndoRedoState5.puml" alt="UndoRedoState5" />
-
-The following activity diagram summarizes what happens when a user executes a new command:
-
-<puml src="diagrams/CommitActivityDiagram.puml" width="250" />
-
-#### Design considerations:
-
-**Aspect: How undo & redo executes:**
-
-* **Alternative 1 (current choice):** Saves the entire address book.
-  * Pros: Easy to implement.
-  * Cons: May have performance issues in terms of memory usage.
-
-* **Alternative 2:** Individual command knows how to undo/redo by
-  itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
-  * Cons: We must ensure that the implementation of each individual command are correct.
-
-_{more aspects and alternatives to be added}_
 
 ### Notes feature
 #### Implementation
@@ -607,6 +527,18 @@ Take note that UI tests have to be run on the `JavaFX` thread, so UI tests have 
 * [DevOps guide](DevOps.md)
 
 --------------------------------------------------------------------------------------------------------------------
+
+## Planned Enhancements / Known Issues
+
+1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
+2. **When executing `add`/`edit` command**, if you try to add/edit a new/existing contact with the same [properties](#properties-of-contact) of another saved contact **(Note: 2 names are considered the same if both of them have the same casing and whitespaces)** in your contact list, CampusConnect allows you to do so. We plan to enhance the `add`/`edit` command such that it **takes into account what makes a contact unique in your contact list.**
+3. **When executing `addalt` command**, if you input other prefixes that are not accepted by the command format, the error message shown does not prompt you to remove those prefixes and adhere strictly to the command format. We will be working on this in the future to **improve the specificity of error messages.**
+4. **When executing commands with `PERSON_INDEX`**, if you did not input an appropriate index, the error message shown is generic; CampusConnect informs you the format of the command you should adhere to instead of prompting you to input a positive index. We will be working on this in the future to **improve the specificity of error messages.**
+5. **When executing `updatephoto` command**, if the `PERSON_INDEX` contains characters besides `0-9`, CampusConnect will be unresponsive as we assume that you will input a valid integer for `PERSON_INDEX`. Moreover, successful execution of the same `updatephoto` command with the same image will still result in `Photo updated` even though the photo is not updated. In addition, you can input multiple valid paths and the command will update your contact profile with the last image. We will be working on **handling more errors and improving the specificity of messages in the future.**
+6. **When executing all commands**, CampusConnect only accepts printable ASCII characters. Additionally, certain commands may only accept alphanumeric input (such as name field in `add` not accepting slashes). We plan to improve our internationalization support in the future, allowing for Unicode characters to be used throughout the app since users could have contacts with names including diacritics or non-alphabetic characters (e.g. Tamil, Arabic or Chinese names).
+7. **When executing the `find` command**, if you input a `FIND_EXPRESSION` that is not accepted by the command format, the error message shows fairly general error messages. We will be working on this in the future to **improve the specificity of error messages.**
+8. **When executing the `find` command**, it is impossible to search for keywords that include the double-quote character (`"`) under any circumstance. We will be working on this in the future to **support searching for the double-quote character**, which could appear in fields such as notes.
+9. **When executing the `find` command**, the behavior of the `bal` field is not intuitive, especially for users who do not read the User Guide in-depth. We will be working on this in the future to **improve the ergonomics of `bal` field**, by implementing `>` and `<` operators so users can search for balance amounts below or above the keywords.
 
 ## **Appendix: Requirements**
 
@@ -911,3 +843,4 @@ testers are expected to do more *exploratory* testing.
    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
 1. _{ more test cases …​ }_
+

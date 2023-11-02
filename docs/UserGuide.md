@@ -590,7 +590,7 @@ If you then find that the basic filtering is insufficient for your use case, you
 
 
 
-<panel header="**Supported Fields**" type="primary" id="find-fields-table" expanded no-close>
+<panel header=":fa-solid-book: **Supported Fields**" type="secondary" id="find-fields-table" expanded no-close>
 Across both basic and advanced filtering, the following fields are supported:<br><br>
 
 | Field | Prefix | Description |
@@ -617,11 +617,6 @@ Note that in all cases, the search is case-insensitive for alphabetic characters
 </box>
 
 
-<box type="warning">
-
-For now, search keywords cannot contain spaces. For example, `n/John Doe` will not work as expected. Functionality to search for keywords which spaces like `"John Doe"` will be added in a future release.
-</box>
-
 ### Basic Filtering
 
 Contacts can be filtered by a single field by typing:
@@ -633,8 +628,22 @@ Such a search will return all contacts whose field matches the keyword based on 
 
 We call this basic block of filtering a **find condition**, which is the smallest unit that act as a valid [**`FIND_EXPRESSION`**](#find-contacts).
 
+<box theme="primary" icon=":fa-solid-lightbulb:">
 
-<box>
+By default, keywords can contain alphanumeric characters, alongside `@`, `$`, `#`, `_`, `-`, `,`, and `.`.
+
+However, if you surround the keyword in **double-quote characters** (`"`), you may also include `(`, `)`, `!`, `&`, `|`, and **spaces** (` `) in the keyword.
+This is especially useful for searching through fields that frequently contain spaces and special characters, such as addresses.
+</box>
+
+
+<box type="warning">
+
+For now, there is no way to search for the double-quote character (`"`) itself.
+This functionality will be added in a future release.
+</box>
+
+<box theme="info" icon=":fa-solid-magnifying-glass:">
 
 For example, given the following contacts (some fields omitted for brevity):
 
@@ -655,15 +664,20 @@ Since `n/do` and `t/friend` are both **find conditions**, they can constitute a 
 - `find n/do`
 - `find t/friend`
 
+Additionally, **using the double-quote characters**, valid **find conditions** include:
+
+- `a/"John street, block 123, #01-01"`
+- `n/"Xiao Ming"`
+
 </box>
 
 ### Advanced Filtering
 
 While basic filtering is sufficient for most use cases, you may find that you need to perform more complex filtering. For example, you may want to find all contacts who have the tag `"friend"` *and* whose names contain the substring `"do"`. Or you may want to find all contacts whose addresses contain the substring `"street"` *or* whose names *do not* contain the substring `"ye"`.
 
-You can accomplish this and more using our powerful advanced filtering syntax, which supports arbitrarily-complex **`FIND_EXPRESSIONs`**, which can be composed of many **find conditions** combined or transformed by **logical operators**.
+You can accomplish this and more using our powerful advanced filtering syntax, which supports arbitrarily-complex **`FIND_EXPRESSION`**, which can be composed of many **find conditions** combined or transformed by **logical operators**.
 
-<panel header="**Supported Logical Operators**" type="primary" id="find-logical-operators-table" expanded no-close>
+<panel header=":fa-solid-book: **Supported Logical Operators**" type="secondary" id="find-logical-operators-table" expanded no-close>
 
 The following logical operators are supported, and are listed in order of precedence (from highest to lowest):
 
@@ -684,7 +698,7 @@ Note that the smallest possible **find expressions** is simply a **find conditio
 
 <br>
 
-<box>
+<box theme="info" icon=":fa-solid-magnifying-glass:">
 
 For example, given the following contacts (some fields omitted for brevity):
 
@@ -712,6 +726,7 @@ Note that the last example is **not equivalent** to `n/do && t/friend || t/colle
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous CampusConnect home folder.
+
 **Q**: Why can't I type in characters that aren't printable ASCII characters?
 **A**: Currently, we only support printable ASCII characters. We plan to support Unicode characters in the future for greater internationalization support.
 
@@ -724,6 +739,13 @@ Note that the last example is **not equivalent** to `n/do && t/friend || t/colle
 3. **When executing `addalt` command**, if you input other prefixes that are not accepted by the command format, the error message shown does not prompt you to remove those prefixes and adhere strictly to the command format. We will be working on this in the future to **improve the specificity of error messages.**
 4. **When executing commands with `PERSON_INDEX`**, if you did not input an appropriate index, the error message shown is generic; CampusConnect informs you the format of the command you should adhere to instead of prompting you to input a positive index. We will be working on this in the future to **improve the specificity of error messages.**
 5. **When executing `updatephoto` command**, if the `PERSON_INDEX` contains characters besides `0-9`, CampusConnect will be unresponsive as we assume that you will input a valid integer for `PERSON_INDEX`. Moreover, successful execution of the same `updatephoto` command with the same image will still result in `Photo updated` even though the photo is not updated. In addition, you can input multiple valid paths and the command will update your contact profile with the last image. We will be working on **handling more errors and improving the specificity of messages in the future.**
+6. **When executing all commands**, CampusConnect only accepts printable ASCII characters. Additionally, certain commands may only accept alphanumeric input (such as name field in `add` not accepting slashes). We plan to improve our internationalization support in the future, allowing for Unicode characters to be used throughout the app since users could have contacts with names including diacritics or non-alphabetic characters (e.g. Tamil, Arabic or Chinese names).
+7. **When executing the `find` command**, if you input a `FIND_EXPRESSION` that is not accepted by the command format, the error message shows fairly general error messages. We will be working on this in the future to **improve the specificity of error messages.**
+8. **When executing the `find` command**, it is impossible to search for keywords that include the double-quote character (`"`) under any circumstance. We will be working on this in the future to **support searching for the double-quote character**, which could appear in fields such as notes.
+9. **When executing the `find` command**, the behavior of the `bal` field is not intuitive, especially for users who do not read the User Guide in-depth. We will be working on this in the future to **improve the ergonomics of `bal` field**, by implementing `>` and `<` operators so users can search for balance amounts below or above the keywords.
+
+
+
 
 --------------------------------------------------------------------------------------------------------------------
 

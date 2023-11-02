@@ -2,6 +2,7 @@ package seedu.address.logic.parser;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Pattern;
 
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -10,6 +11,8 @@ import seedu.address.logic.parser.exceptions.ParseException;
  */
 public class FindFilterStringTokenizer {
 
+    public static final Pattern VALID_CONDITION = Pattern
+            .compile("^[a-zA-Z0-9]+/(?:[a-zA-Z0-9,@.\\-_#$]+|\"[a-zA-Z0-9,@.\\-_#$()/!&| ]+\")");
     private final String filterString;
     private int pos = 0;
 
@@ -27,7 +30,7 @@ public class FindFilterStringTokenizer {
      *
      * @return a list of tokens representing the filter string components
      */
-    List<Token> tokenize() throws ParseException {
+    public List<Token> tokenize() throws ParseException {
         List<Token> tokens = new ArrayList<>();
 
         while (pos < filterString.length()) {
@@ -49,41 +52,54 @@ public class FindFilterStringTokenizer {
                         ? Token.Type.LPAREN
                         : Token.Type.RPAREN, String.valueOf(current)));
                 pos++;
-            } else if (isPartOfCondition(current)) {
-                StringBuilder sb = new StringBuilder();
-                while (pos < filterString.length() && isPartOfCondition(peek())) {
-                    sb.append(next());
-
-                    // When a '/' is encountered, determine the next part of the condition.
-                    if (sb.charAt(sb.length() - 1) == '/' && peek() == '\"') {
-                        sb.append(next()); // Consume the opening double-quote
-
-                        while (pos < filterString.length() && peek() != '\"') {
-                            sb.append(next());
-                        }
-
-                        if (peek() == '\"') {
-                            sb.append(next()); // Consume the closing double-quote
-                        } else {
-                            throw new ParseException("Invalid filter string: "
-                                    + "Unmatched double-quote in filter string!");
-                        }
-
-                        // Check that the closing double-quote is the end of the condition
-                        if (sb.charAt(sb.length() - 1) == '\"' && isPartOfCondition(peek())) {
-                            throw new ParseException("Invalid filter string: "
-                                    + "Closing double-quote should be the end of condition!");
-                        }
-                    }
-
-                }
-                tokens.add(new Token(Token.Type.CONDITION, sb.toString()));
             } else {
-                throw new ParseException("Invalid filter string: Syntax error!");
+                String conditionString = readConditionToken();
+                if (!isValidCondition(conditionString)) {
+                    throw new ParseException("Invalid filter string: "
+                            + "Condition should be of the form 'FIELD/KEYWORD' or 'FIELD/\"KEYWORD WITH SPACES\"'!"
+                            + "\nAdditionally, if special characters like (, ), |, &, /, ! are used in the keyword,"
+                            + " it should be enclosed in double-quotes!"
+                            + "\nYou may not search for the double-quote character itself!");
+                }
+
+                tokens.add(new Token(Token.Type.CONDITION, conditionString));
             }
         }
 
         return tokens;
+    }
+
+    private String readConditionToken() throws ParseException {
+        StringBuilder sb = new StringBuilder();
+
+        while (pos < filterString.length() && isPartOfCondition(peek())) {
+            sb.append(next());
+
+            // When a '/' is encountered, determine the next part of the condition.
+            if (sb.charAt(sb.length() - 1) == '/' && peek() == '\"') {
+                sb.append(next()); // Consume the opening double-quote
+
+                while (pos < filterString.length() && peek() != '\"') {
+                    sb.append(next());
+                }
+
+                if (peek() == '\"') {
+                    sb.append(next()); // Consume the closing double-quote
+                } else {
+                    throw new ParseException("Invalid filter string: "
+                            + "Unmatched double-quote in filter string!");
+                }
+
+                // Check that the closing double-quote is the end of the condition
+                if (sb.charAt(sb.length() - 1) == '\"' && isPartOfCondition(peek())) {
+                    throw new ParseException("Invalid filter string: "
+                            + "Closing double-quote should be the end of condition!");
+                }
+            }
+        }
+
+        return sb.toString();
+
     }
 
     private boolean isPartOfCondition(char c) {
@@ -91,6 +107,11 @@ public class FindFilterStringTokenizer {
                 || c == '/' || c == ',' || c == '@' || c == '.' || c == '-'
                 || c == '_' || c == '#' || c == '$' || c == '\"';
     }
+
+    private boolean isValidCondition(String conditionString) {
+        return VALID_CONDITION.matcher(conditionString).matches();
+    }
+
 
     private char next() {
         return filterString.charAt(pos++);
