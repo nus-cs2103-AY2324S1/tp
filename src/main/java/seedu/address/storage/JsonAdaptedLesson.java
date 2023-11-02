@@ -64,7 +64,7 @@ public class JsonAdaptedLesson {
         day = serialize(source.getDay());
         subject = serialize(source.getSubject());
         remark = serialize(source.getRemark());
-        taskList.addAll(source.getTasksSet().stream().map(JsonAdaptedTask::new).collect(Collectors.toList()));
+        taskList.addAll(source.getTaskListClone().stream().map(JsonAdaptedTask::new).collect(Collectors.toList()));
     }
     /**
      * Converts this Jackson-friendly adapted lesson object into the model's {@code Lesson} object.
