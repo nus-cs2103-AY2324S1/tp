@@ -32,6 +32,7 @@ public class RandomCommandParserTest {
     public void parse_invalidNumberOfStudent_throwsParseException() {
         // Not a number
         assertParseFailure(parser, " text", MESSAGE_INVALID_NUM_OF_STUDENT);
+        assertParseFailure(parser, " 1 n/ alice", MESSAGE_INVALID_NUM_OF_STUDENT);
 
         // Not an integer
         assertParseFailure(parser, " 1.1", MESSAGE_INVALID_NUM_OF_STUDENT);

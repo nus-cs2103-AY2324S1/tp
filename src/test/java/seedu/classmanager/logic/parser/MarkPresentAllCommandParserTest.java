@@ -1,6 +1,8 @@
 package seedu.classmanager.logic.parser;
 
 import static seedu.classmanager.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.classmanager.logic.commands.CommandTestUtil.NAME_DESC_AMY;
+import static seedu.classmanager.logic.commands.CommandTestUtil.STUDENT_NUMBER_DESC_AMY;
 import static seedu.classmanager.logic.commands.CommandTestUtil.TEST_DEFAULT_TUTORIAL;
 import static seedu.classmanager.logic.commands.CommandTestUtil.TEST_DEFAULT_TUTORIAL_DESC;
 import static seedu.classmanager.logic.commands.CommandTestUtil.TEST_FIRST_TUTORIAL;
@@ -51,5 +53,19 @@ public class MarkPresentAllCommandParserTest {
         // index negative
         assertParseFailure(parser, " " + PREFIX_TUTORIAL_INDEX + " -1",
                 ClassDetails.getMessageInvalidTutorialIndex());
+    }
+
+    @Test
+    public void parse_nonEmptyPreamble_throwsParseException() {
+        assertParseFailure(parser, " test" + TEST_FIRST_TUTORIAL_DESC,
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, MarkPresentAllCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void parse_additionalPrefix_throwsParseException() {
+        assertParseFailure(parser, TEST_FIRST_TUTORIAL_DESC + STUDENT_NUMBER_DESC_AMY,
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, MarkPresentAllCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, TEST_FIRST_TUTORIAL_DESC + NAME_DESC_AMY,
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, MarkPresentAllCommand.MESSAGE_USAGE));
     }
 }

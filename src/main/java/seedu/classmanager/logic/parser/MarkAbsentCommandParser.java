@@ -3,8 +3,6 @@ package seedu.classmanager.logic.parser;
 import static java.util.Objects.requireNonNull;
 import static seedu.classmanager.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.classmanager.logic.parser.ArgumentMultimap.areAdditionalPrefixesPresent;
-import static seedu.classmanager.logic.parser.CliSyntax.PREFIX_ASSIGNMENT;
-import static seedu.classmanager.logic.parser.CliSyntax.PREFIX_GRADE;
 import static seedu.classmanager.logic.parser.CliSyntax.PREFIX_STUDENT_NUMBER;
 import static seedu.classmanager.logic.parser.CliSyntax.PREFIX_TUTORIAL_INDEX;
 

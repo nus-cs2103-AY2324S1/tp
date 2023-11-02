@@ -1,7 +1,5 @@
 package seedu.classmanager.logic.parser;
 
-import java.util.List;
-
 /**
  * Contains Command Line Interface (CLI) syntax definitions common to multiple commands
  */

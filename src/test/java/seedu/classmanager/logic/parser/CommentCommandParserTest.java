@@ -44,7 +44,7 @@ public class CommentCommandParserTest {
     }
 
     @Test
-    public void parse_additionalPrefixes_throwsParseException() {
+    public void parse_additionalPrefix_throwsParseException() {
         assertParseFailure(parser, " s/ " + VALID_STUDENT_NUMBER_BOB + " n/ bob cm/ Good student",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, CommentCommand.MESSAGE_USAGE));
     }

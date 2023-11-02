@@ -33,7 +33,7 @@ public class LoadCommandParser implements Parser<LoadCommand> {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_FILE);
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_FILE);
         String fileName = argMultimap.getValue(PREFIX_FILE).orElse("");
-        if (fileName.isEmpty()  || !argMultimap.getPreamble().isEmpty()
+        if (fileName.isEmpty() || !argMultimap.getPreamble().isEmpty()
                 || areAdditionalPrefixesPresent(args, PREFIX_FILE)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, LoadCommand.MESSAGE_USAGE));
         } else if (fileName.contains("/")) {

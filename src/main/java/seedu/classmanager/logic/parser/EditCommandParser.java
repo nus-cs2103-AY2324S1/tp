@@ -31,8 +31,8 @@ public class EditCommandParser implements Parser<EditCommand> {
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_STUDENT_NUMBER,
                 PREFIX_CLASS_NUMBER);
 
-        if (argMultimap.getPreamble().isEmpty() ||
-                areAdditionalPrefixesPresent(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
+        if (argMultimap.getPreamble().isEmpty()
+                || areAdditionalPrefixesPresent(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
                 PREFIX_STUDENT_NUMBER, PREFIX_CLASS_NUMBER)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
         }

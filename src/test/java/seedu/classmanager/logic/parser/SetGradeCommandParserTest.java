@@ -1,9 +1,12 @@
 package seedu.classmanager.logic.parser;
 
 import static seedu.classmanager.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.classmanager.logic.commands.CommandTestUtil.CLASS_NUMBER_DESC_AMY;
 import static seedu.classmanager.logic.commands.CommandTestUtil.INVALID_STUDENT_NUMBER_DESC;
+import static seedu.classmanager.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.classmanager.logic.commands.CommandTestUtil.STUDENT_NUMBER_DESC_AMY;
 import static seedu.classmanager.logic.commands.CommandTestUtil.STUDENT_NUMBER_DESC_BOB;
+import static seedu.classmanager.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
 import static seedu.classmanager.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.classmanager.logic.commands.CommandTestUtil.VALID_STUDENT_NUMBER_AMY;
 import static seedu.classmanager.logic.parser.CliSyntax.PREFIX_ASSIGNMENT;
@@ -108,5 +111,27 @@ public class SetGradeCommandParserTest {
 
         assertParseFailure(parser, userInput,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_ASSIGNMENT, PREFIX_GRADE, PREFIX_STUDENT_NUMBER));
+    }
+
+    @Test
+    public void parse_additionalPrefix_failure() {
+        // additional prefix at different location
+        assertParseFailure(parser, STUDENT_NUMBER_DESC_AMY + VALID_ASSIGNMENT_DESC
+                + NAME_DESC_AMY + VALID_GRADE_DESC, MESSAGE_INVALID_FORMAT);
+
+        assertParseFailure(parser, STUDENT_NUMBER_DESC_AMY + VALID_ASSIGNMENT_DESC
+                + VALID_GRADE_DESC + NAME_DESC_AMY, MESSAGE_INVALID_FORMAT);
+
+        assertParseFailure(parser, STUDENT_NUMBER_DESC_AMY + NAME_DESC_AMY + VALID_ASSIGNMENT_DESC
+                + VALID_GRADE_DESC, MESSAGE_INVALID_FORMAT);
+
+        assertParseFailure(parser, NAME_DESC_AMY + STUDENT_NUMBER_DESC_AMY + VALID_ASSIGNMENT_DESC
+                + VALID_GRADE_DESC, MESSAGE_INVALID_FORMAT);
+
+        // different additional prefix
+        assertParseFailure(parser, STUDENT_NUMBER_DESC_AMY + VALID_ASSIGNMENT_DESC + TAG_DESC_FRIEND
+                + VALID_GRADE_DESC, MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, STUDENT_NUMBER_DESC_AMY + VALID_ASSIGNMENT_DESC + CLASS_NUMBER_DESC_AMY
+                + VALID_GRADE_DESC, MESSAGE_INVALID_FORMAT);
     }
 }
