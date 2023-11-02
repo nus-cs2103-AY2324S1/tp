@@ -29,7 +29,7 @@ public class JsonAdaptedTask {
      * Converts a given {@code Task} into this class for Jackson use.
      */
     public JsonAdaptedTask(Task source) {
-        descriptionWithStatus = source.toString();
+        descriptionWithStatus = source.serialize();
     }
 
     @JsonValue
