@@ -206,7 +206,7 @@ e.g. `find Bee John` will match the names `Amy Bee` and `John Doe`.
 Search and display contacts with tag matching the given keywords (case-insensitive).
 
 **Format:**
-`filter [KEYWORDS]`
+`filter KEYWORDS`
 
 **Example:**
 
