@@ -289,7 +289,7 @@ The _Activity_ diagram summarises what happens after the user enters a star comm
 <puml src="diagrams/UnstarActivity.puml" width="450" />
 
 The _Sequence_ Diagram below shows how the components interact with each other for the scenario where the user issues
-the command `star 1`
+the command `unstar 1`
 
 <puml src="diagrams/UnstarSequence.puml" width="450" />
 
