@@ -72,7 +72,7 @@ public class FilterGradCommandTest {
         String expectedMessage = String.format(FilterGradCommand.MESSAGE_SUCCESS, "")
                 + String.format(FilterCommand.MESSAGE_PERSONS_FOUND_OVERVIEW, 0);
 
-        expectedModel.updateFilteredPersonList(pred);
+        expectedModel.updateDisplayedPersonList(pred, null);
 
         CommandTestUtil.assertCommandSuccess(command, model, expectedMessage, expectedModel);
     }
@@ -93,7 +93,7 @@ public class FilterGradCommandTest {
         String expectedMessage = String.format(FilterGradCommand.MESSAGE_SUCCESS, "\"2000\"")
                 + String.format(FilterCommand.MESSAGE_PERSONS_FOUND_OVERVIEW, 0);
 
-        expectedModel.updateFilteredPersonList(pred);
+        expectedModel.updateDisplayedPersonList(pred, null);
 
         CommandTestUtil.assertCommandSuccess(command, model, expectedMessage, expectedModel);
     }
@@ -114,7 +114,7 @@ public class FilterGradCommandTest {
         String expectedMessage = String.format(FilterGradCommand.MESSAGE_SUCCESS, "\"2023\"")
                 + String.format(FilterCommand.MESSAGE_PERSONS_FOUND_OVERVIEW, 0);
 
-        expectedModel.updateFilteredPersonList(pred);
+        expectedModel.updateDisplayedPersonList(pred, null);
 
         CommandTestUtil.assertCommandSuccess(command, model, expectedMessage, expectedModel);
     }
@@ -136,7 +136,7 @@ public class FilterGradCommandTest {
         String expectedMessage = String.format(FilterGradCommand.MESSAGE_SUCCESS, "\"2022\"")
                 + String.format(FilterCommand.MESSAGE_PERSONS_FOUND_OVERVIEW, 1);
 
-        expectedModel.updateFilteredPersonList(pred);
+        expectedModel.updateDisplayedPersonList(pred, null);
 
         CommandTestUtil.assertCommandSuccess(command, model, expectedMessage, expectedModel);
     }
@@ -158,7 +158,7 @@ public class FilterGradCommandTest {
         String expectedMessage = String.format(FilterGradCommand.MESSAGE_SUCCESS, "\"2022\", \"2023\"")
                 + String.format(FilterCommand.MESSAGE_PERSONS_FOUND_OVERVIEW, 2);
 
-        expectedModel.updateFilteredPersonList(pred);
+        expectedModel.updateDisplayedPersonList(pred, null);
 
         CommandTestUtil.assertCommandSuccess(command, model, expectedMessage, expectedModel);
     }

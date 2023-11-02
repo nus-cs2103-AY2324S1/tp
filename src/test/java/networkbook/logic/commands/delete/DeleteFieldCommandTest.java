@@ -98,7 +98,6 @@ public class DeleteFieldCommandTest {
         Model originalModel = new ModelManager(new NetworkBook(model.getNetworkBook()), new UserPrefs());
         originalModel.setItem(originalModel.getDisplayedPersonList().get(0),
                 TypicalPersons.ADAM);
-
         Name adamName = TypicalPersons.ADAM.getName();
         UniqueList<Phone> adamPhones = TypicalPersons.ADAM.getPhones();
         UniqueList<Email> adamEmails = TypicalPersons.ADAM.getEmails();
