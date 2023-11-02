@@ -14,13 +14,13 @@ My contributions to the project are listed below.
   - Added command and parser
 
 - **New Feature**: Mark meeting command
-  - Added command and parser 
-  - Updates last contacted time for contacts 
+  - Added command and parser
+  - Updates last contacted time for contacts
 
 - **Code contributed**: [RepoSense link](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=jason-raiin&breakdown=true)
 
 - **Project management**:
-  - Contributed issues 
+  - Contributed issues
   - Reviewed PRs
 
 - **Enhancements to existing features**:
@@ -48,4 +48,4 @@ My contributions to the project are listed below.
 
 - **Tools**:
   - Added util method `parseIndexes`
-  - Improved methods for `typicalMeetings` and `typicalAddressBook` 
+  - Improved methods for `typicalMeetings` and `typicalAddressBook`

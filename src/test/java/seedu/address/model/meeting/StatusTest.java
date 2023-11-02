@@ -33,5 +33,4 @@ public class StatusTest {
         // different values -> returns false
         assertFalse(status.equals(new MeetingStatus(true)));
     }
-    
 }

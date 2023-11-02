@@ -61,7 +61,7 @@ public class UniquePersonListTest {
         uniquePersonList.add(ALICE);
         assertThrows(DuplicatePersonException.class, () -> uniquePersonList.add(ALICE));
     }
-    
+
     @Test
     public void getPerson_isInList_success() {
         uniquePersonList.add(ALICE);

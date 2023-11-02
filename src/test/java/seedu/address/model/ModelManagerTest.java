@@ -88,7 +88,7 @@ public class ModelManagerTest {
         modelManager.addPerson(ALICE);
         assertTrue(modelManager.hasPerson(ALICE));
     }
-    
+
     @Test
     public void getPerson_isInList_success() {
         modelManager.addPerson(ALICE);

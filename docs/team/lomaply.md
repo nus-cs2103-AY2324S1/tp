@@ -26,7 +26,7 @@ My contributions to the project are listed below.
     - Review and merge pull requests
 
 - **Enhancements to existing features**:
-  
+
   - Sort contacts by last contacted time
   - New Command
     - "editm"

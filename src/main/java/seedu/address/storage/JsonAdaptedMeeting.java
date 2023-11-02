@@ -15,8 +15,8 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.meeting.Attendee;
 import seedu.address.model.meeting.Location;
 import seedu.address.model.meeting.Meeting;
-import seedu.address.model.meeting.MeetingTime;
 import seedu.address.model.meeting.MeetingStatus;
+import seedu.address.model.meeting.MeetingTime;
 import seedu.address.model.meeting.Title;
 import seedu.address.model.tag.Tag;
 

@@ -27,7 +27,7 @@ public class JsonAdaptedMeetingTest {
     private static final String INVALID_ATTENDEE = " ";
     private static final String INVALID_TAG = "#friend";
     private static final String INVALID_STATUS = "untrue";
-    
+
     private static final String VALID_TITLE = MEETING1.getTitle().toString();
     private static final String VALID_LOCATION = MEETING1.getLocation().toString();
     private static final String VALID_START = MEETING1.getStart().toString();

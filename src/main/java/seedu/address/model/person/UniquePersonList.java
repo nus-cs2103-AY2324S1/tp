@@ -67,7 +67,7 @@ public class UniquePersonList implements Iterable<Person> {
     }
 
     /**
-     * Returns the person with the given name 
+     * Returns the person with the given name
      * or throws {@code IndexOutOfBoundsException} if it does not exist.
      */
     public Person getPerson(String fullName) {

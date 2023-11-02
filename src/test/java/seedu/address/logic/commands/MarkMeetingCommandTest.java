@@ -10,12 +10,11 @@ import static seedu.address.logic.parser.ParserUtil.FORMAT;
 import static seedu.address.testutil.TypicalAddressBook.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_MEETING;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_OUT_OF_BOUNDS;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_MEETING;
 
 import java.time.LocalDateTime;
 import java.util.Iterator;
-
-import static seedu.address.testutil.TypicalIndexes.INDEX_OUT_OF_BOUNDS;
 
 import org.junit.jupiter.api.Test;
 

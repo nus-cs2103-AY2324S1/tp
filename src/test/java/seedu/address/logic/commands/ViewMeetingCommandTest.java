@@ -6,9 +6,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showMeetingAtIndex;
+import static seedu.address.testutil.TypicalAddressBook.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_MEETING;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_MEETING;
-import static seedu.address.testutil.TypicalAddressBook.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
 
@@ -36,7 +36,7 @@ public class ViewMeetingCommandTest {
                 + "Location: Zoom call url\n"
                 + "Start: 20 November 2023, 1000\n"
                 + "End: 20 November 2023, 1200\n"
-                + "Attendees: [\n1: Daniel Meier \n2: Elle Meyer " 
+                + "Attendees: [\n1: Daniel Meier \n2: Elle Meyer "
                 + "\n3: Fiona Kunz \n4: George Best]\n";
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
