@@ -7,6 +7,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.SplitPane;
 import javafx.scene.control.TextInputControl;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
@@ -97,6 +98,9 @@ public class MainWindow extends UiPart<Stage> {
     @FXML
     private SplitPane contentSplitPane;
 
+    CommandBox commandBox;
+    String prevcmd = "";
+
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
      */
@@ -114,6 +118,8 @@ public class MainWindow extends UiPart<Stage> {
         setAccelerators();
 
         helpWindow = new HelpWindow();
+        commandBox = new CommandBox(this::executeCommand);
+
     }
 
     public Stage getPrimaryStage() {
@@ -147,6 +153,9 @@ public class MainWindow extends UiPart<Stage> {
          * in CommandBox or ResultDisplay.
          */
         getRoot().addEventFilter(KeyEvent.KEY_PRESSED, event -> {
+            if (event.getCode() == KeyCode.UP) {
+                commandBox.changeText(prevcmd);
+            }
             if (event.getTarget() instanceof TextInputControl && keyCombination.match(event)) {
                 menuItem.getOnAction().handle(new ActionEvent());
                 event.consume();
@@ -182,7 +191,6 @@ public class MainWindow extends UiPart<Stage> {
         StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
-        CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
 
         studentDetailList.setVisible(false);
@@ -243,6 +251,7 @@ public class MainWindow extends UiPart<Stage> {
      */
     private CommandResult executeCommand(String commandText) throws CommandException, ParseException {
         try {
+            prevcmd = commandText;
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
