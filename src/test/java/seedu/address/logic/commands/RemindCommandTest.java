@@ -50,6 +50,7 @@ class RemindCommandTest {
         //same values -> returns true
         RemindCommand remindFirstCommandCopy =
                 new RemindCommand(firstBirthdayPredicate, firstEventPredicate, firstDays);
+
         assertTrue(remindFirstCommand.equals(remindFirstCommandCopy));
 
         //different types -> returns false

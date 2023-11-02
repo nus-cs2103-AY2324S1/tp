@@ -16,20 +16,27 @@ AddressBook - Level 3 is a desktop address book application used for teaching So
 * **Code contributed**: [nicleongyj](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=nicleongyj&breakdown=true)
 
 * **Project management**:
-    * To be added soon
+  * *{To be added}*
 
 * **Enhancements to existing features**:
-    * To be added soon
+  * *{To be added}*
 
-
-* **Contributions to User Guide**:
-    * To be added soon
-
-* **Contributions to Developer Guide**:
-    * To be added soon
-
-* **Contributions to team-based tasks**:
-    * To be added soon
+* **Documentation**:
+  * User Guide:
+    * Added documentation for the features:
+      * `remind`
+    * Did cosmetic tweaks to existing documentation of features:
+      * `quick start`
+    * Added UI screenshots throughout the user guide
+  * Developer Guide:
+    * Added documentation for the features:
+      * `remind`
 
 * **Community**:
-    * To be added soon
+  * PRs reviewed (with non-trivial review comments): *{To be added}*
+  * Contributed to forum discussions: *{To be added}*
+  * Reported bugs and suggestions for other teams in the class: *{To be added}*
+  * Some parts of the history feature I added was adopted by several other class mates: *{To be added}*
+
+* **Tools**:
+  * *{To be added}*

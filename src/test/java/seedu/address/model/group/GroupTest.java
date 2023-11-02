@@ -23,4 +23,26 @@ public class GroupTest {
         assertThrows(NullPointerException.class, () -> Group.isValidGroupName(null));
     }
 
+    @Test
+    public void groupsNotEqualTest() {
+        Group group1 = new Group("group1");
+        Group group2 = new Group("group2");
+        assert(!group1.equals(group2));
+    }
+
+    @Test
+    public void groupsEqualTest() {
+        Group group1 = new Group("group1");
+        Group group2 = new Group("group1");
+        assert(group1.equals(group2));
+    }
+
+    @Test
+    public void groupsNotEqualDifferentTypeTest() {
+        Group group1 = new Group("group1");
+        String group2 = "group1";
+
+        assert(!group1.equals(group2));
+    }
+
 }

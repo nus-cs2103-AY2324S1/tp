@@ -11,6 +11,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
+import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
@@ -20,6 +21,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.EditPersonCommand.EditPersonDescriptor;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -37,7 +39,7 @@ public class EditPersonCommandTest {
 
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
-        Person editedPerson = new PersonBuilder().build();
+        Person editedPerson = new PersonBuilder().withGroups("friends").build();
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(editedPerson).build();
         EditPersonCommand editPersonCommand = new EditPersonCommand(INDEX_FIRST_PERSON, descriptor);
 
@@ -132,6 +134,108 @@ public class EditPersonCommandTest {
         EditPersonCommand editPersonCommand = new EditPersonCommand(outOfBoundIndex, descriptor);
 
         assertCommandFailure(editPersonCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+    }
+
+    @Test
+    public void execute_addGroup() {
+        Person personInFilteredList = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+
+        Person editedPerson = new PersonBuilder(personInFilteredList).withGroups("friends", "family").build();
+
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withGroups("family").build();
+
+        EditPersonCommand editCommand = new EditPersonCommand(INDEX_FIRST_PERSON, descriptor);
+
+        try {
+            assertEquals(String.format(EditPersonCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)),
+                    editCommand.execute(model).getFeedbackToUser());
+        } catch (CommandException e) {
+            throw new AssertionError("Error in execution");
+        }
+    }
+
+    @Test
+    public void executeAddMultipleGroups() {
+        Person personInFilteredList = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+
+        Person editedPerson = new PersonBuilder(personInFilteredList)
+                .withGroups("friends", "family", "colleague").build();
+
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder()
+                .withGroups("family", "colleague").build();
+
+        EditPersonCommand editCommand = new EditPersonCommand(INDEX_FIRST_PERSON, descriptor);
+
+        try {
+            assertEquals(String.format(EditPersonCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)),
+                    editCommand.execute(model).getFeedbackToUser());
+        } catch (CommandException e) {
+            throw new AssertionError("Error in execution");
+        }
+    }
+
+    @Test
+    public void execute_addBlankGroup() {
+        Person personInFilteredList = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+
+        Person editedPerson = new PersonBuilder(personInFilteredList).withGroups("friends").build();
+
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withGroups().build();
+
+        EditPersonCommand editCommand = new EditPersonCommand(INDEX_FIRST_PERSON, descriptor);
+
+        try {
+            assertEquals(String.format(EditPersonCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)),
+                    editCommand.execute(model).getFeedbackToUser());
+        } catch (CommandException e) {
+            throw new AssertionError("Error in execution");
+        }
+    }
+
+    @Test
+    public void execute_removeGroup() {
+        Person personInFilteredList = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+
+        Person editedPerson = new PersonBuilder(personInFilteredList).withGroups().build();
+
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withUnassignGroups("friends").build();
+
+        EditPersonCommand editCommand = new EditPersonCommand(INDEX_FIRST_PERSON, descriptor);
+
+        try {
+            assertEquals(String.format(EditPersonCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)),
+                    editCommand.execute(model).getFeedbackToUser());
+        } catch (CommandException e) {
+            throw new AssertionError("Error in execution");
+        }
+    }
+
+    @Test
+    public void execute_removeInvalidGroup() {
+        Person personInFilteredList = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+
+
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withUnassignGroups("family").build();
+
+        EditPersonCommand editCommand = new EditPersonCommand(INDEX_FIRST_PERSON, descriptor);
+
+
+        assertThrows(CommandException.class, () -> editCommand.execute(model));
+
+    }
+    @Test
+    public void execute_removeInvalidGroupWithValidGroup() {
+        Person personInFilteredList = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+
+
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder()
+                .withUnassignGroups("friends", "family").build();
+
+        EditPersonCommand editCommand = new EditPersonCommand(INDEX_FIRST_PERSON, descriptor);
+
+
+        assertThrows(CommandException.class, () -> editCommand.execute(model));
+
     }
 
     /**

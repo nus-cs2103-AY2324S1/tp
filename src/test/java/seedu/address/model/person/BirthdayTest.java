@@ -1,6 +1,8 @@
 package seedu.address.model.person;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
@@ -52,6 +54,25 @@ class BirthdayTest {
 
         // different values -> returns false
         assertFalse(birthday.equals(new Birthday("2001-12-15")));
+    }
+
+    @Test
+    public void of_invalidBirthday_throwsIllegalValueException() {
+        assertThrows(IllegalArgumentException.class, () -> Birthday.of("30-30-2023"));
+
+        assertEquals(Birthday.NULL_BIRTHDAY, Birthday.of(""));
+    }
+
+    @Test
+    public void hashcode() {
+        String validBirthday = "2001-12-14";
+        Birthday birthday = new Birthday(validBirthday);
+
+        // same values -> returns same hashcode
+        assertEquals(birthday.hashCode(), new Birthday(validBirthday).hashCode());
+
+        // different birthday value -> returns different hashcode
+        assertNotEquals(birthday.hashCode(), new Birthday("2001-12-15").hashCode());
     }
 
 }
