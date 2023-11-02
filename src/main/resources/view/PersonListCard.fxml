@@ -35,9 +35,11 @@
       <Label fx:id="address" styleClass="cell_small_label" text="\$address" />
       <Label fx:id="email" styleClass="cell_small_label" text="\$email" />
       <Label fx:id="subject" styleClass="cell_small_label" text="\$subject" />
-      <Label fx:id="lesson" styleClass="cell_small_label" text="\$lesson" />
       <Label fx:id="payRate" styleClass="cell_small_label" text="\$payrate" />
       <Label fx:id="paid" styleClass="cell_small_label" text= "\$paid" />
+      <HBox spacing="5" alignment="CENTER_RIGHT">
+        <Label fx:id="lesson" text="\$lesson" styleClass="cell_small_label" />
+      </HBox>
     </VBox>
   </GridPane>
 </HBox>
