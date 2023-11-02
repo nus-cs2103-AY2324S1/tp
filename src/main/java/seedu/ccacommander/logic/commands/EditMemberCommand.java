@@ -7,7 +7,6 @@ import static seedu.ccacommander.logic.parser.CliSyntax.PREFIX_GENDER;
 import static seedu.ccacommander.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.ccacommander.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.ccacommander.logic.parser.CliSyntax.PREFIX_TAG;
-import static seedu.ccacommander.model.Model.PREDICATE_SHOW_ALL_ENROLMENTS;
 import static seedu.ccacommander.model.Model.PREDICATE_SHOW_ALL_MEMBERS;
 
 import java.util.Collections;
@@ -23,8 +22,6 @@ import seedu.ccacommander.commons.util.ToStringBuilder;
 import seedu.ccacommander.logic.Messages;
 import seedu.ccacommander.logic.commands.exceptions.CommandException;
 import seedu.ccacommander.model.Model;
-import seedu.ccacommander.model.enrolment.Enrolment;
-import seedu.ccacommander.model.enrolment.EnrolmentContainsMemberPredicate;
 import seedu.ccacommander.model.member.Address;
 import seedu.ccacommander.model.member.Email;
 import seedu.ccacommander.model.member.Gender;
@@ -94,15 +91,7 @@ public class EditMemberCommand extends Command {
         Name newName = editedMember.getName();
         // If member's name is edited, the corresponding enrolment objects are edited also
         if (!prevName.equals(newName)) {
-            // update filtered enrolment list to contain only the enrolments that has member of previous name
-            model.updateFilteredEnrolmentList(new EnrolmentContainsMemberPredicate(prevName));
-            List<Enrolment> enrolmentsToEditList = model.getFilteredEnrolmentList();
-            model.updateFilteredEnrolmentList(PREDICATE_SHOW_ALL_ENROLMENTS);
-            for (Enrolment enrolment: enrolmentsToEditList) {
-                Enrolment editedEnrolment = new Enrolment(newName, enrolment.getEventName(),
-                        enrolment.getHours(), enrolment.getRemark());
-                model.setEnrolment(enrolment, editedEnrolment);
-            }
+            model.editEnrolmentsWithMemberName(prevName, newName);
         }
 
         model.setMember(memberToEdit, editedMember);

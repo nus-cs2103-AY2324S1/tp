@@ -220,6 +220,48 @@ public class ModelManager implements Model {
         }
     }
 
+    /**
+     *  Edit the Enrolments from the enrolment list which
+     *  contain an event that have the same name as {@param prevName}
+     *  to match the {@param newName} of the event
+     * @param prevName
+     * @param newName
+     */
+    @Override
+    public void editEnrolmentsWithEventName(Name prevName, Name newName) {
+        updateFilteredEnrolmentList(PREDICATE_SHOW_ALL_ENROLMENTS);
+        // get the enrolments list then loop through to edit matching enrolments
+        List<Enrolment> enrolmentList = getFilteredEnrolmentList();
+        for (Enrolment enrolment: enrolmentList) {
+            if (enrolment.getEventName().equals(prevName)) {
+                Enrolment editedEnrolment = new Enrolment(enrolment.getMemberName(), newName,
+                        enrolment.getHours(), enrolment.getRemark());
+                setEnrolment(enrolment, editedEnrolment);
+            }
+        }
+    }
+
+    /**
+     *  Edit the Enrolments from the enrolment list which
+     *  contain a Member that have the same name as {@param prevName}
+     *  to match the {@param newName} of the member
+     * @param prevName
+     * @param newName
+     */
+    @Override
+    public void editEnrolmentsWithMemberName(Name prevName, Name newName) {
+        updateFilteredEnrolmentList(PREDICATE_SHOW_ALL_ENROLMENTS);
+        // get the enrolments list then loop through to edit matching enrolments
+        List<Enrolment> enrolmentList = getFilteredEnrolmentList();
+        for (Enrolment enrolment: enrolmentList) {
+            if (enrolment.getMemberName().equals(prevName)) {
+                Enrolment editedEnrolment = new Enrolment(newName, enrolment.getEventName(),
+                        enrolment.getHours(), enrolment.getRemark());
+                setEnrolment(enrolment, editedEnrolment);
+            }
+        }
+    }
+
     @Override
     public void setEnrolment(Enrolment target, Enrolment editedEnrolment) {
         requireAllNonNull(target, editedEnrolment);

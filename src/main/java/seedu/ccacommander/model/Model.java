@@ -133,6 +133,25 @@ public interface Model {
     void createEnrolment(Enrolment enrolment);
 
     /**
+     *  Edit the Enrolments from the enrolment list which
+     *  contain an event that have the same name as {@param prevName}
+     *  to match the {@param newName} of the event
+     * @param prevName
+     * @param newName
+     */
+    void editEnrolmentsWithEventName(Name prevName, Name newName);
+
+    /**
+     *  Edit the Enrolments from the enrolment list which
+     *  contain a Member that have the same name as {@param prevName}
+     *  to match the {@param newName} of the member
+     * @param prevName
+     * @param newName
+     */
+    void editEnrolmentsWithMemberName(Name prevName, Name newName);
+
+
+    /**
      * Replaces the given member {@code target} with {@code editedEnrolment}.
      * {@code target} must exist in CcaCommander.
      */
