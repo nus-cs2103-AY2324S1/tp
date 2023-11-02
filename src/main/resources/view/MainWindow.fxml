@@ -11,9 +11,10 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Label?>
 
 <fx:root type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
-         title="Address App" minWidth="500" minHeight="600" onCloseRequest="#handleExit">
+         title="UNOFAS" minWidth="500" minHeight="600" onCloseRequest="#handleExit">
   <icons>
     <Image url="@/images/address_book_32.png" />
   </icons>
@@ -46,15 +47,16 @@
             <Insets top="5" right="10" bottom="5" left="10" />
           </padding>
         </StackPane>
-
         <HBox prefHeight="500.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
         <VBox fx:id="personList" minWidth="300.0" prefWidth="500.0" styleClass="pane-with-border" HBox.hgrow="ALWAYS">
+          <Label text="Contacts" styleClass="title-pane" />
           <padding>
             <Insets top="10" right="10" bottom="10" left="10" />
           </padding>
           <StackPane fx:id="personListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
         </VBox>
         <VBox fx:id="appointmentList" minWidth="150.0" prefWidth="200.0" styleClass="pane-with-border" HBox.hgrow="ALWAYS">
+          <Label text="Appointments" styleClass="title-pane" />
           <padding>
             <Insets top="10" right="10" bottom="10" left="10" />
           </padding>
