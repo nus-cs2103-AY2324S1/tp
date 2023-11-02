@@ -150,8 +150,7 @@ Format: `tag STUDENT_INDEX r/RISK_LEVEL`
 **Parameters**:
 1. Student Index
    - Must be an integer starting from 1
-   - Must 
-   - be found in the students list
+   - Must be found in the students list
 2. Risk Level
    - Must be `high`, `medium`, or `low`
 
