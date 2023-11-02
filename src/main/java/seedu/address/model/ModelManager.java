@@ -196,12 +196,6 @@ public class ModelManager implements Model {
         filteredPersons.setPredicate(predicate);
     }
 
-    @Override
-    public void updateFilteredSubjectList(Predicate<Person> subject) {
-        requireNonNull(subject);
-        filteredPersons.setPredicate(subject);
-    }
-
     //=========== Schedule List Accessors =============================================================
 
     /**

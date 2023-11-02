@@ -134,5 +134,4 @@ public interface Model {
      * @return a boolean to indicate whether an undo operation is possible
      */
     boolean canRedoAddressBook();
->>>>>>> master
 }
