@@ -14,6 +14,7 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 
+import javafx.collections.ObservableList;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.commons.util.ToStringBuilder;
@@ -126,7 +127,7 @@ public class EditContactEventCommand extends Command {
      */
     public static List<Event> updateEventList(Calendar calendar, Index eventIndex,
                                              EditEventDescriptor editEventDescriptor) throws CommandException {
-        List<Event> eventList = calendar.getEventManager().asEventList();
+        ObservableList<Event> eventList = calendar.getEventManager().asUnmodifiableObservableList();
         Event updateEvent;
         try {
             updateEvent = eventList.get(eventIndex.getZeroBased());
