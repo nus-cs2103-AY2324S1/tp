@@ -157,9 +157,9 @@ Examples:
 
 Output:
 
-Before edit         |  After edit
-:-------------------------:|:-------------------------:
-![img.png](images/BeforeEdit.png)  | ![img.png](images/AfterEdit.png)
+|            Before edit            |            After edit            |
+|:---------------------------------:|:--------------------------------:|
+| ![img.png](images/BeforeEdit.png) | ![img.png](images/AfterEdit.png) |
 
 **Note**
 * Users are not allowed to edit a flash card to an existing flash card
@@ -226,7 +226,7 @@ Examples:![img.png](images/Reveal.png)
 **Note**
 * `reveal` command will only take effect during review session. Otherwise, error message `You are not in a review session.`  
 will be printed out.
-* Pressing `reveal` button will have the same effect, and users can reveal the translation without the constrain of review session.
+* Pressing `reveal` button will have the same effect, and users can reveal the translation without the constraint of review session.
 
 ### Indicating user has memorized the word : `yes`
 
@@ -281,16 +281,42 @@ Format: `language <SPECIFIED_LANGUAGE>`
 
 Format: `review`
 
+### Loading list of words: `load`
+Loads an Excel file of words into the app. The words will be added to the current list of flash cards and included in the
+review session automatically.
+
+Format: `load <FILE_NAME>`
+
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Notes about the file input:**<br>
+* **File format:** The file must be an Excel Workbook with the `.xlsx` extension.
+* **File location:** The file must be located in the **same folder** as the `flashlingo.jar` file.
+* **File content:** The app would only read the **first sheet** of the workbook. The sheet must contain only the following 
+**two** columns:
+  1. First column - The original words
+  2. Second column - The translation of the words 
+* **Resources:** A sample file can be found [here](SampleData.xlsx).
+</div>
+
+Output: 
+* `You have successfully loaded file: <FILE_NAME>`: Successful loading.
+* `File not found or accessible.`: ⚠️ Make sure the file is in the correct directory with read permission.
+* `File cannot be read due to invalid content or format.`: ⚠️ Make sure the file contains only two columns with the nonempty words/translations.
+* `FLASH_CARD flash card already exists!`: ⚠️ Modify the duplicated word/translation in the file.
+
 ### Switching color theme : `switch`
-* `switch` : Switches between light and dark appearance for UI.
+Switches between light and dark appearance of UI dashboard.
+* The theme will be saved and loaded when Flashlingo is restarted.
+* Default color theme is the **light theme**.
 
 Format: `switch`
 
-Output:
-![img.png](images/DarkTheme.png)
+Output:  
 
-Execute the `switch` command again:
-![img.png](images/LightTheme.png)
+|            light theme            |            dark theme            |
+|:---------------------------------:|:--------------------------------:|
+| ![img.png](images/LightTheme.png) | ![img.png](images/DarkTheme.png) |
 
 ### Exiting the program : `exit`
 
@@ -334,21 +360,22 @@ _Details coming soon ..._
 
 ## Command summary
 
- Action                 | Format, Examples                                                
-------------------------|-----------------------------------------------------------------
- **Help**               | `help`  
- **List**               | `list`
- **Add**                | `add w/WORD t/TRANSLATION` <br> e.g., `add w/regarder t/look`
- **Delete**             | `delete w/WORD`<br> e.g., `del w/look`
- **Edit**               | `edit index w/WORD t/TRANSLATION`<br> e.g., `edit 1 w/bye t/再见`
- **Find**               | `find KEYWORD`<br> e.g., `find bye`
- **Start**              | `start`
- **Reveal**             | `reveal`
- **Yes**                | `yes`
- **No**                 | `no` 
- **End**               | `end`
- **Language**           | `language SPECIFIED_LANGUAGE`<br> e.g., `language French`
- **Review**             | `review`
- **Learning Statistics** | `stats`
- **Switch**              | `switch`
- **Exit**                | `exit`
+| Action                  | Format, Examples                                                |
+|-------------------------|-----------------------------------------------------------------|
+| **Help**                | `help`                                                          |
+| **List**                | `list`                                                          |
+| **Add**                 | `add w/WORD t/TRANSLATION` <br> e.g., `add w/regarder t/look`   |
+| **Delete**              | `delete w/WORD`<br> e.g., `del w/look`                          |
+| **Edit**                | `edit index w/WORD t/TRANSLATION`<br> e.g., `edit 1 w/bye t/再见` |
+| **Find**                | `find KEYWORD`<br> e.g., `find bye`                             |
+| **Start**               | `start`                                                         |
+| **Reveal**              | `reveal`                                                        |
+| **Yes**                 | `yes`                                                           |
+| **No**                  | `no`                                                            |
+| **End**                 | `end`                                                           |
+| **Language**            | `language SPECIFIED_LANGUAGE`<br> e.g., `language French`       |
+| **Review**              | `review`                                                        |
+| **Learning Statistics** | `stats`                                                         |
+| **Load**                | `load FILE_NAME`<br> e.g., `load SampleData.xlsx`               |
+| **Switch**              | `switch`                                                        |
+| **Exit**                | `exit`                                                          |
