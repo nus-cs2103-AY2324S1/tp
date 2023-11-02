@@ -7,6 +7,7 @@ import static transact.logic.parser.CliSyntax.PREFIX_BY_PERSON;
 import static transact.logic.parser.CliSyntax.PREFIX_DESCRIPTION_HAS;
 import static transact.logic.parser.CliSyntax.PREFIX_LESS_THAN_AMOUNT;
 import static transact.logic.parser.CliSyntax.PREFIX_MORE_THAN_AMOUNT;
+import static transact.logic.parser.CliSyntax.PREFIX_TYPE;
 
 import java.util.List;
 import java.util.Optional;
@@ -31,14 +32,19 @@ public class FilterCommandParser implements Parser<FilterCommand> {
     public FilterCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_DESCRIPTION_HAS,
                 PREFIX_AFTER_DATE, PREFIX_BEFORE_DATE, PREFIX_MORE_THAN_AMOUNT, PREFIX_LESS_THAN_AMOUNT,
-                PREFIX_BY_PERSON);
+                PREFIX_BY_PERSON, PREFIX_TYPE);
         argMultimap.verifyNotEmpty(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 FilterCommand.MESSAGE_USAGE));
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_DESCRIPTION_HAS, PREFIX_AFTER_DATE,
                 PREFIX_BEFORE_DATE, PREFIX_MORE_THAN_AMOUNT, PREFIX_LESS_THAN_AMOUNT,
-                PREFIX_BY_PERSON);
+                PREFIX_BY_PERSON, PREFIX_TYPE);
 
         FilterCommand.FilterConditions filterConditions = new FilterCommand.FilterConditions();
+
+        Optional<String> transactionType = argMultimap.getValue(PREFIX_TYPE);
+        if (transactionType.isPresent()) {
+            filterConditions.setTransactionType(ParserUtil.parseType(transactionType.get()));
+        }
 
         argMultimap.getValue(PREFIX_DESCRIPTION_HAS).ifPresent(
                 string -> filterConditions.setDescriptionHas(List.of(string.split(" "))));
