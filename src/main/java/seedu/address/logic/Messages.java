@@ -6,7 +6,7 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.parser.Prefix;
 import seedu.address.model.booking.Booking;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.booking.RoomTypeTag;
 
 /**
  * Container for user visible messages.
@@ -50,8 +50,8 @@ public class Messages {
                 .append("; Remark: ")
                 .append(booking.getRemark())
                 .append("; Tags: ");
-        Tag tag = booking.getTags();
-        builder.append(tag.tagName);
+        RoomTypeTag tag = booking.getTags();
+        builder.append(tag.roomTypeTagName);
         return builder.toString();
     }
 

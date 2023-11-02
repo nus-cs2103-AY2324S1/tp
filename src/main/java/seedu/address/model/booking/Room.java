@@ -5,13 +5,11 @@ import static java.util.Objects.requireNonNull;
 import java.util.HashMap;
 import java.util.Map;
 
-import seedu.address.model.tag.Tag;
-
 /**
  * Represents a hotel room that a client is staying in.
  */
 public class Room {
-    public static final String MESSAGE_CONSTRAINTS = "Room is not a between 1 and 500 inclusive.";
+    public static final String MESSAGE_CONSTRAINTS = "Room numbers are between 1 and 500 inclusive.";
     public static final int NUMBER_OF_NORMAL_ROOMS = 100;
     public static final int NUMBER_OF_STUDIO_ROOMS = 100;
     public static final int NUMBER_OF_DELUXE_ROOMS = 100;
@@ -22,16 +20,15 @@ public class Room {
      * Represents the different types of rooms available in the hotel.
      * <p>
      * The hotel provides various room types ranging from standard rooms (NORMAL) to more luxurious and exclusive
-     * options like the VIP suites. Each room type is associated with a specific range of room numbers. This mapping
-     * ensures that, based on a room number, one can determine the type of the room.
+     * options like the Presidential Suites. Each room type is associated with a specific range of room numbers.
+     * This mapping ensures that, based on a room number, one can determine the category of the room.
      * </p>
      * <ul>
-     *     <li>NORMAL rooms are numbered from 1 to 83.</li>
-     *     <li>STUDIO rooms range from 84 to 166.</li>
-     *     <li>DELUXE rooms span from 167 to 249.</li>
-     *     <li>SUITES are between 250 and 332.</li>
-     *     <li>PRESIDENTIAL_SUITE rooms range from 333 to 415.</li>
-     *     <li>VIP suites cover 416 to 500.</li>
+     *     <li>NORMAL rooms are numbered from 1 to 100.</li>
+     *     <li>STUDIO rooms range from 101 to 200.</li>
+     *     <li>DELUXE rooms span from 201 to 300.</li>
+     *     <li>SUITES are between 301 and 400.</li>
+     *     <li>PRESIDENTIAL_SUITE rooms range from 401 to 500.</li>
      * </ul>
      */
     public enum RoomType {
@@ -74,8 +71,7 @@ public class Room {
 
     public final Integer value;
     public final RoomType type;
-
-    public final Tag tag;
+    public final RoomTypeTag roomTypeTag;
 
     /**
      * Constructs a Room object with the specified room number.
@@ -86,7 +82,7 @@ public class Room {
         requireNonNull(value);
         this.value = Integer.parseInt(value);
         this.type = RoomType.getRoomTypeByNumber(this.value);
-        this.tag = new Tag(this.type.name());
+        this.roomTypeTag = new RoomTypeTag(this.type.name());
     }
 
     /**

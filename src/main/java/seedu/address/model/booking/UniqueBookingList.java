@@ -48,16 +48,14 @@ public class UniqueBookingList implements Iterable<Booking> {
      *
      * @param toAdd The booking to add.
      * @throws BookingNotFoundException if the provided booking is null.
-     * @throws DuplicateBookingException if the booking already exists in the list.
      */
     public void add(Booking toAdd) {
         if (toAdd == null) {
             throw new BookingNotFoundException();
         }
-        if (contains(toAdd)) {
-            throw new DuplicateBookingException();
+        if (!contains(toAdd)) {
+            internalList.add(toAdd);
         }
-        internalList.add(toAdd);
     }
 
     /**

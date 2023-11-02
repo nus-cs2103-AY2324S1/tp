@@ -11,7 +11,6 @@ import seedu.address.model.person.Phone;
 import seedu.address.model.person.exceptions.EmailNotFoundException;
 import seedu.address.model.person.exceptions.NameNotFoundException;
 import seedu.address.model.person.exceptions.PhoneNotFoundException;
-import seedu.address.model.tag.Tag;
 
 /**
  * Represents a Booking in the bookings book.
@@ -104,8 +103,8 @@ public class Booking {
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
-    public Tag getTags() {
-        return this.room.tag;
+    public RoomTypeTag getTags() {
+        return this.room.roomTypeTag;
     }
 
     // Other methods

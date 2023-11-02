@@ -106,9 +106,9 @@ The sequence diagram below illustrates the interactions within the `Logic` compo
 How the `Logic` component works:
 
 1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
-1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`.
-1. The command can communicate with the `Model` when it is executed (e.g. to delete a person).
-1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
+2.This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`.
+3.The command can communicate with the `Model` when it is executed (e.g. to delete a person).
+4.The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
 
@@ -136,7 +136,6 @@ The `Model` component,
 <img src="images/BetterModelClassDiagram.png" width="450" />
 
 </div>
-
 
 ### Storage component
 
@@ -231,8 +230,8 @@ The following sequence diagram provides a visual representation of the prefix au
 - **Choice:** Uses a predefined list of prefixes and examples for each command.
     - Pros: Simplified implementation. Easy to maintain and update.
     - Cons:
-      - Limited to predefined prefixes and commands.
-      - Subject to manual change when prefix changes.
+      -Limited to predefined prefixes and commands.
+      -Subject to manual change when prefix changes.
 
 - **Alternative:** Dynamically generate example suggestions based on user's history or frequently used parameter.
     - Pros: Offers more personalized and relevant suggestions.
@@ -248,16 +247,55 @@ The following sequence diagram provides a visual representation of the prefix au
     - Pros: Less intrusive. Clearly communicates the message to the user.
     - Cons: Potential to clutter the UI if not managed gracefully.
 
-### Room Tags
+### RoomType Tags
+
 #### Implementation
-Tag is a required field when inputting the add command.
-This tags the booking with the type of room that the guest has requested.
-Tag takes in an enum class RoomTypes.
+
+The Room class uses the RoomType enumeration to categorize rooms by type and employs the RoomTypeTag class to generate 
+corresponding UI labels. The RoomType enumeration inside the Room class is equipped with a static mapping from room 
+numbers to their associated types, enabling swift identification of a room's category based on its number. 
+This categorization is then visually represented in the UI by creating RoomTypeTag objects that serve as labels for each room.
+
+The primary functions of the class include:
+
+- `RoomType getRoomTypeByNumber(int roomNumber)` - Uses an internal map to associate room numbers with specific room types, thus enabling quick determination of a room's type.
+
+Given below is an example usage senario and how the prefix completion mechanism behaves at each step.
+
+1. The user enters the `add`command with the room number.
+2. A Room object is instantiated with a room number passed as a string to the constructor.
+3. The constructor parses the string into an integer and calls RoomType.getRoomTypeByNumber to ascertain the room's category.
+4. A RoomTypeTag object is created using the name of the determined RoomType, which then facilitates the creation of a UI label for display.
+
+The following sequence diagram provides a visual representation of the prefix autocomplete operation within the `CommandBox`:
+
+![](images/PrefixCompletionSequenceDiagram.png)
 
 #### Design Considerations:
-Room types are usually fixed in hotels so an enum class was chosen.
-Implementing this as tags rather than a variable in room allows for more flexibility as hotels can adjust the number of
-rooms available for each type depending on their size.
+
+**Aspect: Management of room types:**
+
+- **Choice:** Utilize the RoomType enumeration within the Room class.
+    - Pros: Ensures clear and centralized room type definitions, simplifying updates and maintenance.
+    - Cons:
+        -The static nature of enumeration can limit flexibility, making it harder to adapt to dynamic changes.
+        -The direct association between room numbers and types might not easily support modifications in room categorization.
+
+- **Alternative:** Implement a separate RoomType class with dynamic properties.
+    - Pros: Adds the ability to handle dynamic changes and offers potential for future scalability.
+    - Cons: Complicates the implementation, possibly necessitating new mechanisms for maintaining and retrieving room type information.
+
+**Aspect: Representation of room types as UI labels:**
+
+- **Choice:** Create RoomTypeTag objects from the names of RoomType enumeration constants.
+    - Pros: This direct conversion guarantees that the data model aligns seamlessly with the UI's visual elements.
+    - Cons:
+        -Utilizes the RoomTypeTag class, which may have been initially intended for a broader tagging purpose.
+        -Could lead to unnecessary complexity if the RoomTypeTag class functionality significantly overlaps with the RoomType enumeration.
+
+- **Alternative:** Design a specialized UI component dedicated to room types.
+    - Pros: Enables custom behavior and appearance specific to room type representation.
+    - Cons: Requires additional development work and may result in code redundancy if not carefully integrated with the existing UI components.
 
 ### JSON Injection Parser
 
@@ -286,8 +324,8 @@ The following sequence diagram provides a visual representation of the JsonInjec
 - **Alternative:** Sanitise the input, ie: remove the banned characters from the input and execute the command.
     - Pros: Less inconvenience to the user.
     - Cons:
-        - More complex implementation.
-        - Due to the input having some characters removed, the command may either may no sense at all, or in successful execution the details of the command may not make sense to the user at all.
+        -More complex implementation.
+        -Due to the input having some characters removed, the command may either may no sense at all, or in successful execution the details of the command may not make sense to the user at all.
 
 ### Flag and Unflag Command
 
