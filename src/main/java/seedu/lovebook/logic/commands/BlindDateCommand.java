@@ -17,9 +17,9 @@ public class BlindDateCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        System.out.println("Generating random Date");
+        System.out.println("Generating random person");
         model.getRandomPerson();
-        System.out.println("random Date generated");
+        System.out.println("random person generated");
         return new CommandResult(Messages.MESSAGE_RANDOM_PERSON_SUCCESS);
     }
     @Override
