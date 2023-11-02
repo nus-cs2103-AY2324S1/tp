@@ -48,7 +48,7 @@ public class SampleDataUtil {
                 new Name("Bernice Yu"),
                 new Phone("99272758"),
                 new Email("berniceyu@example.com"),
-                new Address("Blk 30 Lorong 3 Serangoon Gardens, #07-18"),
+                new Address("Blk 30 Serangoon North, #07-18"),
                 getTagSet("colleagues", "friends"),
                 new Nric("362D"),
                 new LicencePlate("SLR5E"),
