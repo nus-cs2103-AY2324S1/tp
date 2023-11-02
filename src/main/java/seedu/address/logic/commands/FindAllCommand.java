@@ -38,6 +38,7 @@ public class FindAllCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
+        eventPredicate.setPersonList(model.getFullPersonList());
         model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
         model.updateFilteredEventList(Model.PREDICATE_SHOW_ALL_EVENTS);
         model.updateFilteredEventList(eventPredicate);
