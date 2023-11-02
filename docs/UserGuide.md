@@ -175,10 +175,9 @@ Format: `list`
 
 Acceptable values for each parameter:
 
-| Parameters | Accepted input |
-| --- | --- |
-| nil | - |
-
+| Parameters  | Accepted input |
+|-------------|----------------|
+| nil         | -              |
 Succeed:
 
 * Outcome: If the command is successful, it lists all employees and
@@ -222,6 +221,38 @@ Examples:
 * `find John` returns `john` and `John Doe`
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
+
+### Filtering employees: `filter`
+
+Filters employees by prefix parameters.
+
+Format: `filter [n/NAME] [e/EMAIL] [a/ADDRESS] [s/SALARY] [l/LEAVE] [r/ROLE] [m/MANAGERNAME] [d/DEPARTMENT]`
+
+* The filter is case-sensetive. eg. `R&D` will not match `r&d`
+* At least one of the optional fields must be provided.
+
+Examples:
+* `filter d/R&D` returns employees with the `R&D` department
+* `filter s/4000` returns employees with salary equal to or less than 4000
+
+| Parameters | Accepted input | Remarks                                                                         |
+| --- |-------------------------------------|---------------------------------------------------------------------------------|
+| `NAME` | Alphabets                           | Full name is needed (case-sensitive)                                            |
+| `EMAIL` | Email with the pattern x@x.com where ‘x’ are alphanumerics ||
+| `ADDRESS` | Alphanumerics and ascii characters i.e. #, - ||
+| `SALARY` | Numerals                            | Returns employees with salary less than or equals to the given salary parameter |
+| `LEAVE` | Numerals                            ||
+| `ROLE` | `manager` or `subordinate` (Case-insensitive) | `m/MANAGER` shows subordinates of `MANAGER`                                     |
+| `DEPARTMENT` | Alphabets and ascii characters i.e. &, - | Able to filter by multiple `d/` parameters                                      |
+
+Expected outputs:
+
+| Outcome | Output                            |
+| --- |-----------------------------------|
+| **Success** | X employees listed!    |
+| **Fail** | Invalid command format!| 
+
+![filterCommandExample](images/filterCommandExample.png)
 
 ### Deleting an employee : `delete`
 
