@@ -231,7 +231,7 @@ Example Command: `log` (after entering a FindCommand)
 ![result for 'log'](images/logResult.jpg)
 
 Expected outputs when the command succeeds:
-* `The last filtered values have overridden the logger tab.`
+* `The last filtered values have overwritten the logger tab.`
 
 Expected output when the command fails:
 * `Cannot log an empty list.`
