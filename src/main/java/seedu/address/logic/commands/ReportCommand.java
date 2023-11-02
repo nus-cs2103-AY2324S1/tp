@@ -10,10 +10,12 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.employee.Employee;
 import seedu.address.model.employee.Id;
+import seedu.address.model.employee.Report;
+import seedu.address.storage.ReportStorage;
 
 /**
  * Reports the performance metrics (overtime hours, overtime pay, number of leaves) of an employee in the address book.
- * Keyword matching is case insensitive.
+ * Downloads the report as a PDF file.
  */
 public class ReportCommand extends Command {
 
@@ -37,11 +39,20 @@ public class ReportCommand extends Command {
 
         for (Employee employee : lastShownList) {
             if (employee.getId().equals(targetId)) {
+                Report report = new Report(employee, employee.getOvertimeHours().value, employee.getOvertimePay(),
+                        employee.getNumOfLeaves(), employee.getRemarkList());
+                try {
+                    ReportStorage.saveReport(report);
+                } catch (CommandException e) {
+                    throw new CommandException(Messages.MESSAGE_REPORT_SAVE_ERROR);
+                }
                 return new CommandResult(String.format(Messages.MESSAGE_REPORT_STRING,
-                        employee.getName(), employee.getOvertimeHours(),
-                        employee.getOvertimePay(), employee.getNumOfLeaves(), employee.getRemarkList()));
+                        report.employee.getName().fullName, report.overtimeHours, report.overtimePay,
+                        report.numOfLeaves, report.remarkList));
             }
         }
+
+
         throw new CommandException(Messages.MESSAGE_INVALID_EMPLOYEE_DISPLAYED_ID);
     }
 
