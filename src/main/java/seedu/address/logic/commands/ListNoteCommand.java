@@ -13,7 +13,7 @@ import seedu.address.model.person.Person;
  */
 public class ListNoteCommand extends ListCommand {
     public static final String SECONDARY_COMMAND_WORD = "notes";
-    public static final String MESSAGE = "Here are all the notes in this address book:\n";
+    public static final String MESSAGE_SUCCESS = "Here are all the notes in this address book:\n";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + SECONDARY_COMMAND_WORD
             + ": Lists all notes in the address book";
@@ -22,7 +22,7 @@ public class ListNoteCommand extends ListCommand {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         List<Person> persons = model.getAddressBook().getPersonList();
-        String result = MESSAGE + model.getAddressBook().noteListToString();
+        String result = MESSAGE_SUCCESS + model.getAddressBook().noteListToString();
         return new CommandResult(result);
     }
 }
