@@ -29,8 +29,8 @@ public class SampleDataUtil {
 
         ArrayList<Event> sampleEvents = new ArrayList<Event>();
         sampleEvents.add(new Event("Sample event",
-                LocalDateTime.now().format(DateTimeFormatter.ofPattern("HH:mm:ss")),
-                LocalDateTime.now().plusHours(1).format(DateTimeFormatter.ofPattern("HH:mm:ss")),
+                LocalDateTime.now().format(DateTimeFormatter.ofPattern("YYYY-MM-dd HH:mm:ss")),
+                LocalDateTime.now().plusHours(1).format(DateTimeFormatter.ofPattern("YYYY-MM-dd HH:mm:ss")),
                 "Some Location",
                 "Some Information"));
 
