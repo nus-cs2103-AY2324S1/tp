@@ -14,6 +14,7 @@ import seedu.ccacommander.commons.core.GuiSettings;
 import seedu.ccacommander.model.CcaCommander;
 import seedu.ccacommander.model.ReadOnlyCcaCommander;
 import seedu.ccacommander.model.UserPrefs;
+import seedu.ccacommander.ui.Stylesheet;
 
 public class StorageManagerTest {
 
@@ -41,7 +42,7 @@ public class StorageManagerTest {
          * More extensive testing of UserPref saving/reading is done in {@link JsonUserPrefsStorageTest} class.
          */
         UserPrefs original = new UserPrefs();
-        original.setGuiSettings(new GuiSettings(300, 600, 4, 6));
+        original.setGuiSettings(new GuiSettings(300, 600, 4, 6, Stylesheet.LIGHT.toString()));
         storageManager.saveUserPrefs(original);
         UserPrefs retrieved = storageManager.readUserPrefs().get();
         assertEquals(original, retrieved);

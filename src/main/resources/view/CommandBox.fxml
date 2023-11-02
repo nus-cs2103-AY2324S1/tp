@@ -9,15 +9,5 @@
 <?import javafx.geometry.Insets?>
 <HBox styleClass="stack-pane" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" spacing="10">
   <TextField styleClass="command-text-region" fx:id="commandTextField" onAction="#handleCommandEntered" HBox.hgrow="ALWAYS" promptText="Enter command here..."/>
-  <Button fx:id="sendButton" styleClass="send-button" onAction="#handleCommandEntered" mnemonicParsing="false">
-    <graphic>
-      <ImageView fitHeight="20.0" fitWidth="20.0" fx:id="buttonImage">
-        <Image url="images/icon-send.png" />
-      </ImageView>
-    </graphic>
-    <padding>
-      <Insets top="10" />
-    </padding>
-  </Button>
 </HBox>
 

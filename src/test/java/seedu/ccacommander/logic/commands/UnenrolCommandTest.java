@@ -83,6 +83,7 @@ public class UnenrolCommandTest {
 
         // Delete the first member first and assert if the command is successful
         Member memberToDelete = model.getFilteredMemberList().get(INDEX_FIRST_MEMBER.getZeroBased());
+        Enrolment enrolmentToDelete = model.getFilteredEnrolmentList().get(INDEX_FIRST_ENROLMENT.getZeroBased());
         DeleteMemberCommand deleteMemberCommand = new DeleteMemberCommand(INDEX_FIRST_MEMBER);
 
         String commitMessage = String.format(DeleteMemberCommand.MESSAGE_COMMIT, memberToDelete.getName());
@@ -91,6 +92,7 @@ public class UnenrolCommandTest {
 
         ModelManager expectedModel = new ModelManager(model.getCcaCommander(), new UserPrefs());
         expectedModel.deleteMember(memberToDelete);
+        expectedModel.deleteEnrolment(enrolmentToDelete);
         expectedModel.commit(commitMessage);
         assertCommandSuccess(deleteMemberCommand, model, expectedMessage, expectedModel);
 
@@ -108,6 +110,7 @@ public class UnenrolCommandTest {
 
         // Delete the first event first and assert if the command is successful
         Event eventToDelete = model.getFilteredEventList().get(INDEX_FIRST_EVENT.getZeroBased());
+        Enrolment enrolmentToDelete = model.getFilteredEnrolmentList().get(INDEX_FIRST_ENROLMENT.getZeroBased());
         DeleteEventCommand deleteEventCommand = new DeleteEventCommand(INDEX_FIRST_EVENT);
 
         String commitMessage = String.format(deleteEventCommand.MESSAGE_COMMIT, eventToDelete.getName());
@@ -116,6 +119,7 @@ public class UnenrolCommandTest {
 
         ModelManager expectedModel = new ModelManager(model.getCcaCommander(), new UserPrefs());
         expectedModel.deleteEvent(eventToDelete);
+        expectedModel.deleteEnrolment(enrolmentToDelete);
         expectedModel.commit(commitMessage);
         assertCommandSuccess(deleteEventCommand, model, expectedMessage, expectedModel);
 

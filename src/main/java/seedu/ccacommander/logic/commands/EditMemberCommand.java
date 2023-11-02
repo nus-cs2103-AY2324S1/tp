@@ -87,6 +87,13 @@ public class EditMemberCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_MEMBER);
         }
 
+        Name prevName = memberToEdit.getName();
+        Name newName = editedMember.getName();
+        // If member's name is edited, the corresponding enrolment objects are edited also
+        if (!prevName.equals(newName)) {
+            model.editEnrolmentsWithMemberName(prevName, newName);
+        }
+
         model.setMember(memberToEdit, editedMember);
         model.updateFilteredMemberList(PREDICATE_SHOW_ALL_MEMBERS);
         model.commit(String.format(MESSAGE_COMMIT, editedMember.getName()));
