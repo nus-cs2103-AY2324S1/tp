@@ -10,7 +10,7 @@ can get your patients management tasks done faster than traditional GUI apps.
 ### Table of Contents
 
 * Table of Contents
-  {:toc}
+{:toc}
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -238,7 +238,7 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 * It is recommended to use `list` to restore the view of all data after a `find` command
 
   | Attribute | Example keywords |
-    |-----------|-----------------|
+        |-----------|-----------------|
   | NRIC      | T1125957G       |
   | Gender    | M       |
   | Blood Type | Blood Type A+   |
@@ -278,7 +278,7 @@ Undoes the effect of the last command.
 
 Format: `undo`
 
-* Can only do upto 5 undos at any one time.
+* Can only do up to 5 undos at any one time.
 
 ### Redo last action : `redo`
 
@@ -286,7 +286,7 @@ Repeats the previous command; an `undo` for an `undo` command.
 
 Format: `redo`
 
-* Can only do upto 5 redos at any one time.
+* Can only do up to 5 redos at any one time.
 
 ### Exiting the program : `exit`
 
