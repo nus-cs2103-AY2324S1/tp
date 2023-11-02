@@ -94,7 +94,7 @@ class OvertimeCommandParserTest {
                 OvertimeCommand.MESSAGE_INVALID_AMOUNT);
 
         // invalid amount (EP: [-MAX_INT, -1])
-        assertParseFailure(parser, ID_DESC_BOB + OPERATION_DESC_BOB + " " + PREFIX_AMOUNT + "-5",
+        assertParseFailure(parser, ID_DESC_BOB + OPERATION_DESC_BOB + " " + PREFIX_AMOUNT + "-1",
                 OvertimeCommand.MESSAGE_INVALID_AMOUNT);
 
         // invalid amount (EP: [73, MAX_INT])
