@@ -39,7 +39,7 @@ This user guide contains all the commands available to you, along with step-by-s
 
   * `delete 3` : Deletes the 3rd fosterer shown in the current list.
 
-  * `reset` : Deletes all fosterers.
+  * `reset`, followed by `reset confirm` : Deletes all fosterers.
 
   * `exit` : Exits the app.
 6. Refer to the [Features](#features) section for details of each command.
@@ -55,8 +55,8 @@ These are symbols we will be using to highlight certain information to you.
 | :exclamation:        | Warning about the usage of commands       |
 
 --------------------------------------------------------------------------------------------------------------------
-## User Interface
-There are mainly two different screens that you may face using Foster Family. 
+## User Interface (UI)
+There are mainly two different screens that you may face when using Foster Family. 
 
 ### The Main Window 
 ![Ui](images/Ui.png)
@@ -133,8 +133,8 @@ If you press Esc key, the exit is cancelled and you can continue working on the 
 The example above is the result of pressing the Esc key after you are warned.
 
 
-To learn more about **adding a new fosterer from profile page**, refer to a section [Adding a fosterer through the profile page: add](#adding-a-fosterer-through-the-profile-page-add). <br/>
-To learn more about **editing a fosterer in profile page**, refer to a section about [Editing a fosterer's detail through the profile page: edit](#editing-a-fosterers-detail-through-the-profile-page-edit). 
+To learn more about **adding a new fosterer through the profile page**, refer to a section [Adding a fosterer through the profile page: add](#adding-a-fosterer-through-the-profile-page-add). <br/>
+To learn more about **editing a fosterer through the profile page**, refer to a section about [Editing a fosterer's detail through the profile page: edit](#editing-a-fosterers-detail-through-the-profile-page-edit). 
 
 
 ## Features
@@ -246,7 +246,7 @@ Format: `add`
 
 ![Profile](images/screenshots/ProfilePage.png)
 
-To learn more about profile page, please refer to the section [User Interface: The Profile Page](#the-profile-page).  
+To learn more about the profile page, please refer to the section [User Interface: The Profile Page](#the-profile-page).  
 
 ### Listing fosterers: `list` (Alias: `find`)
 
@@ -543,8 +543,10 @@ Format: `undo`
 
 **:information_source: Notes about the command:**<br>
 
-*  The `undo` command can only be executed **once**, and it will undo the last successful command.
-   * This is provided that the previous command was a successful `add`, `delete`, or `edit`.
+*  The `undo` command can only be executed **once** at a time, and it will undo the last successful command. When the `undo` command is executed consecutively more than once, an error message will be shown:
+![Undo](images/screenshots/UndoError.png)
+   * Provided that the previous command was a successful `add`, `delete`, or `edit`, the `undo` command will be executed successfully.
+![Undo](images/screenshots/Undo.png)
 
 </div>
 
@@ -558,8 +560,9 @@ Format: `reset` and `reset confirm`
 
 **:information_source: Notes about the command:**<br>
 
-*  Upon entering `reset`, a confirmation message would be shown for the user to verify if he/she really wants to clear all the data entries.
+*  Upon entering `reset`, a confirmation message will be shown for the user to verify if he/she really wants to clear all the data entries.
 ![Reset](images/screenshots/Reset.png)
+
    * User is prompted to enter `reset confirm` to confirm and execute the deletion of all data entries.
 ![Reset](images/screenshots/ResetConfirm.png)
 
