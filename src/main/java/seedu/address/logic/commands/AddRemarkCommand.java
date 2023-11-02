@@ -8,6 +8,7 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_EMPLOYEES;
 
 import java.util.List;
 
+import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -82,5 +83,29 @@ public class AddRemarkCommand extends Command {
             currentList.addRemark(remark);
         }
         return currentList;
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof AddRemarkCommand)) {
+            return false;
+        }
+
+        AddRemarkCommand otherAddRemarkCommand = (AddRemarkCommand) other;
+        return targetId.equals(otherAddRemarkCommand.targetId)
+                && remark.equals(otherAddRemarkCommand.remark);
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .add("targetId", targetId)
+                .add("remark", remark)
+                .toString();
     }
 }
