@@ -110,7 +110,7 @@ Format: `delete STUDENT_INDEX`
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:**
 Double clicking on the Student card displays the Student notes under the Notes section!
-The "Notes" column will
+The "Notes" column will inform you if there are no student notes available.
 </div>
 
 Adds a note to an existing student, overwrites any existing note.
@@ -157,6 +157,22 @@ Format: `tag STUDENT_INDEX r/RISK_LEVEL`
 
 Examples:
 * `tag 2 r/high`
+
+#### 2.2.6 Editing Student details: `edit`
+
+Edit a student's contact number or address
+
+Format `edit STUDENT_INDEX c/CONTACT_NUMBER A/HOME_ADDRESS`
+
+**Parameters**:
+1. Student Index
+   - Must be an integer starting from 1
+   - Must
+   - be found in the students list
+2. Contact Number
+   - Numbers only, must be 8 characters long
+3. Home Address
+   - Maximum of 200 characters
 
 ### 2.3 Appointment Commands
 
