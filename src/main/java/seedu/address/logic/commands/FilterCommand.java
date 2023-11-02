@@ -18,11 +18,13 @@ public class FilterCommand extends Command {
             + "the specified keyword (case-sensitive) and displays them as a list with index numbers.\n"
             + "Parameters: KEYWORD\n"
             + "Example: " + COMMAND_WORD + " R&D";
-    private final ContainsDepartmentPredicate predicate;
+
+    public final ContainsDepartmentPredicate predicate;
 
     public FilterCommand(ContainsDepartmentPredicate predicate) {
         this.predicate = predicate;
     }
+
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);

@@ -27,9 +27,8 @@ public class FilterCommandTest {
     @Test
     public void execute_noEmployeesFound() {
         String expectedMessage = String.format(MESSAGE_EMPLOYEES_LISTED_OVERVIEW, 0);
-        ContainsDepartmentPredicate predicate = new ContainsDepartmentPredicate(" ");
-        FilterCommand command = new FilterCommand(predicate);
-        expectedModel.updateFilteredEmployeeList(predicate);
+        FilterCommand command = new FilterCommand(new ContainsDepartmentPredicate(" "));
+        expectedModel.updateFilteredEmployeeList(new ContainsDepartmentPredicate(" "));
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Collections.emptyList(), model.getFilteredEmployeeList());
     }
@@ -37,16 +36,14 @@ public class FilterCommandTest {
     @Test
     public void execute_multipleEmployeesFound() {
         String expectedMessage = String.format(MESSAGE_EMPLOYEES_LISTED_OVERVIEW, 3);
-        ContainsDepartmentPredicate predicate = new ContainsDepartmentPredicate("investment");
-        FilterCommand command = new FilterCommand(predicate);
-        expectedModel.updateFilteredEmployeeList(predicate);
+        FilterCommand command = new FilterCommand(new ContainsDepartmentPredicate("investment"));
+        expectedModel.updateFilteredEmployeeList(new ContainsDepartmentPredicate("investment"));
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(ALICE, BENSON, DANIEL), model.getFilteredEmployeeList());
 
         expectedMessage = String.format(MESSAGE_EMPLOYEES_LISTED_OVERVIEW, 1);
-        predicate = new ContainsDepartmentPredicate("logistics");
-        command = new FilterCommand(predicate);
-        expectedModel.updateFilteredEmployeeList(predicate);
+        command = new FilterCommand(new ContainsDepartmentPredicate("logistics"));
+        expectedModel.updateFilteredEmployeeList(new ContainsDepartmentPredicate("logistics"));
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(BENSON), model.getFilteredEmployeeList());
     }
@@ -79,8 +76,9 @@ public class FilterCommandTest {
     @Test
     public void toStringMethod() {
         ContainsDepartmentPredicate predicate = new ContainsDepartmentPredicate("keyword");
-        FilterCommand findCommand = new FilterCommand(predicate);
-        String expected = FilterCommand.class.getCanonicalName() + "{predicate=" + predicate + "}";
-        assertEquals(expected, findCommand.toString());
+        FilterCommand filterCommand = new FilterCommand(predicate);
+        String expected = FilterCommand.class.getCanonicalName() + "{predicate="
+                + predicate + "}";
+        assertEquals(expected, filterCommand.toString());
     }
 }
