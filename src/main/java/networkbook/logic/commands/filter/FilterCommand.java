@@ -1,24 +1,17 @@
 package networkbook.logic.commands.filter;
 
-import networkbook.commons.util.ToStringBuilder;
 import networkbook.logic.commands.Command;
 import networkbook.logic.commands.CommandResult;
 import networkbook.logic.parser.CliSyntax;
 import networkbook.model.Model;
-import networkbook.model.person.filter.CourseContainsKeyTermsPredicate;
-import networkbook.model.person.filter.CourseIsStillBeingTakenPredicate;
 
 /**
- * Filters the list of contacts to contacts that have courses that contain
- * at least one course that contains some specified key terms.
+ * Filter contacts based on a specified set of criteria; valid fields to check are
+ * course, specialisation, and grad year.
  *
- * Additionally, we can further specify whether all courses should be counted,
- * or only contacts that are currently taking the courses are counted.
- *
- * TODO: Implement filter
  * TODO: Extend functionality to grad year and specialisation
  */
-public class FilterCommand extends Command {
+public abstract class FilterCommand extends Command {
 
     public static final String COMMAND_WORD = "filter";
 
@@ -29,30 +22,15 @@ public class FilterCommand extends Command {
             + " who have finished the course or graduated.\n"
             + "Parameters: "
             + CliSyntax.PREFIX_FILTER_FIELD + " FIELD "
+            + CliSyntax.PREFIX_FILTER_ARGS + " ARGS "
             + "[" + CliSyntax.PREFIX_FILTER_FIN + " true/false (false by default)]\n"
             + "Example: " + COMMAND_WORD + " /with a b c /taken false";
 
-    public static final String MESSAGE_SUCCESS = "Here is the list of contacts whose courses contain %1$s:";
     public static final String MESSAGE_EXCL_FIN = "\n(excluding contacts who have finished taking)";
     public static final String MESSAGE_PERSONS_FOUND_OVERVIEW = "\n(%1$s contacts found)";
 
-    private final CourseContainsKeyTermsPredicate keyTermsPredicate;
-    private final CourseIsStillBeingTakenPredicate takenPredicate;
-    private final boolean checkFin;
-
-    /**
-     * Creates a FilterCommand object that searches using a list of key terms,
-     * a specified date to check whether a course is being taken, and a
-     * boolean that specifies whether the date check needs to be done.
-     * This command is not data-changing, so parent constructor is called with false.
-     */
-    public FilterCommand(CourseContainsKeyTermsPredicate keyTermsPredicate,
-                         CourseIsStillBeingTakenPredicate takenPredicate,
-                         boolean checkFin) {
+    public FilterCommand() {
         super(false);
-        this.keyTermsPredicate = keyTermsPredicate;
-        this.takenPredicate = takenPredicate;
-        this.checkFin = checkFin;
     }
 
     /**
@@ -60,47 +38,7 @@ public class FilterCommand extends Command {
      *
      * @param model {@code Model} which the command should operate on.
      */
-    public CommandResult execute(Model model) {
-        assert model != null : "Model should not be null";
-        model.updateDisplayedPersonList(keyTermsPredicate, null);
-        String feedback = String.format(MESSAGE_SUCCESS, keyTermsPredicate.getKeyTerms()
-                .stream()
-                .reduce("", (acc, term) -> acc + " \"" + term + "\"")
-                .trim()
-                .replace(" ", ", "));
-        if (checkFin) {
-            model.updateDisplayedPersonList(person -> keyTermsPredicate.getCourses(person)
-                    .stream()
-                    .anyMatch(course -> takenPredicate.test(course)), null);
-            feedback += MESSAGE_EXCL_FIN;
-        }
-        return new CommandResult(feedback
-                + String.format(MESSAGE_PERSONS_FOUND_OVERVIEW, model.getDisplayedPersonList().size()));
-    }
+    public abstract CommandResult execute(Model model);
 
-    @Override
-    public boolean equals(Object other) {
-        if (other == this) {
-            return true;
-        }
 
-        // instanceof handles nulls
-        if (!(other instanceof FilterCommand)) {
-            return false;
-        }
-
-        FilterCommand otherFilterCommand = (FilterCommand) other;
-        return takenPredicate.equals(otherFilterCommand.takenPredicate)
-                && keyTermsPredicate.equals(otherFilterCommand.keyTermsPredicate)
-                && checkFin == otherFilterCommand.checkFin;
-    }
-
-    @Override
-    public String toString() {
-        return new ToStringBuilder(this)
-                .add("predicate", keyTermsPredicate)
-                .add("time", takenPredicate)
-                .add("taken", checkFin)
-                .toString();
-    }
 }
