@@ -24,7 +24,7 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 ## **Design**
 
 <div markdown="span" class="alert alert-primary">
-    :bulb: **Tip:** The `.puml` files used to create diagrams in this document are in the `docs/diagrams` folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
+:bulb: **Tip:** The `.puml` files used to create diagrams in this document are in the `docs/diagrams` folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
 </div>
 
 ### Architecture
@@ -165,8 +165,8 @@ The following sequence diagram shows how the add command works:
 
 ![FilterSequenceDiagram](images/FilterSequenceDiagram.png)
 
-It filters contacts by calling `Model#setContactsFilter` with a `ContainsTagPredicate predicate` as argument, which sets the `predicate` 
-on the list of contacts in the `ModelManager`. 
+It filters contacts by calling `Model#setContactsFilter` with a `ContainsTagPredicate predicate` as argument, which sets the `predicate`
+on the list of contacts in the `ModelManager`.
 
 ### Maintaining sorting while supporting filtering
 
@@ -372,7 +372,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 Given below are instructions to test the app manually.
 
 <div markdown="span" class="alert alert-info">
-    :information_source: **Note:** These instructions only provide a starting point for testers to work on;
+:information_source: **Note:** These instructions only provide a starting point for testers to work on;
 testers are expected to do more *exploratory* testing.
 </div>
 

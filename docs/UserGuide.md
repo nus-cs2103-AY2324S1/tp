@@ -36,9 +36,9 @@ The feedback from each command's execution will be displayed below the text box,
 1. Refer to the [Features](#features) section below to find out about the various commands.
 
 <div markdown="span" class="alert alert-primary">
-    :bulb: **Tip:**
-    You could test out some commands on the sample data.
-    Once you are familiarised, feel free to use the `clear` command to delete all the sample data, and start adding your own contacts!
+:bulb: **Tip:**
+You could test out some commands on the sample data.
+Once you are familiarised, feel free to use the `clear` command to delete all the sample data, and start adding your own contacts!
 </div>
 
 ---
@@ -46,28 +46,28 @@ The feedback from each command's execution will be displayed below the text box,
 ## Features
 
 <div markdown="block" class="alert alert-info">
-    **:information_source: About the command format:**\
+**:information_source: About the command format:**\
 
-    - Some commands take in parameters.
-    e.g. in `add n/NAME`, the `add` command takes in an `n/` parameter.
+- Some commands take in parameters.
+e.g. in `add n/NAME`, the `add` command takes in an `n/` parameter.
 
-    - Words in `UPPER_CASE` are placeholders for values to be specified.\
-    e.g. in `edit INDEX`, you should specify an `INDEX` such as `edit 1`.\
-    e.g. in `add n/NAME`, you should specify a `NAME` such as `add n/John Doe`.
+- Words in `UPPER_CASE` are placeholders for values to be specified.\
+e.g. in `edit INDEX`, you should specify an `INDEX` such as `edit 1`.\
+e.g. in `add n/NAME`, you should specify a `NAME` such as `add n/John Doe`.
 
-    - Parameters in square brackets are optional.\
-    e.g in `n/NAME [o/NOTE]`, you could specify `n/John Doe o/Good at SE.`, or just `n/John Doe`.
+- Parameters in square brackets are optional.\
+e.g in `n/NAME [o/NOTE]`, you could specify `n/John Doe o/Good at SE.`, or just `n/John Doe`.
 
-    - Parameters with `…`​ after them can be specified multiple times.\
-    e.g. in `[t/TAG]…​`, which is optional but can also be specified multiple times, you could specify ` ` (none specified), `t/NUS`, `t/NUS t/CS2103 course` etc.
+- Parameters with `…`​ after them can be specified multiple times.\
+e.g. in `[t/TAG]…​`, which is optional but can also be specified multiple times, you could specify ` ` (none specified), `t/NUS`, `t/NUS t/CS2103 course` etc.
 
-    - Parameters can be specified in any order.\
-    e.g. in `n/NAME p/PHONE_NUMBER`, the order `p/PHONE_NUMBER n/NAME` also works.
+- Parameters can be specified in any order.\
+e.g. in `n/NAME p/PHONE_NUMBER`, the order `p/PHONE_NUMBER n/NAME` also works.
 
-    - Extra words for commands that do not take any parameters (such as `list` or `help`) will be ignored.\
-    e.g. `list 10 n/John Doe z/Extra` will be interpreted as just `list`.
+- Extra words for commands that do not take any parameters (such as `list` or `help`) will be ignored.\
+e.g. `list 10 n/John Doe z/Extra` will be interpreted as just `list`.
 
-    - If you are using the PDF version of this user guide, be careful when copy-pasting commands that span multiple lines. Spaces surrounding line breaks may get omitted when copied over to the app.
+- If you are using the PDF version of this user guide, be careful when copy-pasting commands that span multiple lines. Spaces surrounding line breaks may get omitted when copied over to the app.
 </div>
 
 ### Adding a contact: `add`
@@ -78,13 +78,13 @@ Adds a new contact.
 `add n/NAME p/PHONE_NUMBER e/EMAIL [o/NOTE] [t/TAG]... [a/ALTERNATE_CONTACT]...`
 
 <div markdown="span" class="alert alert-primary">
-    :bulb: **About tags:**
-    Duplicate tags are only counted once.
+:bulb: **About tags:**
+Duplicate tags are only counted once.
 </div>
 
 <div markdown="span" class="alert alert-primary">
-    :bulb: **About the alternate contact format:**
-    The format for `ALTERNATE_CONTACT` is `TYPE: USERNAME`, roughly looking like `SocialMedia: Username`.
+:bulb: **About the alternate contact format:**
+The format for `ALTERNATE_CONTACT` is `TYPE: USERNAME`, roughly looking like `SocialMedia: Username`.
 </div>
 
 **Examples:**
@@ -100,14 +100,14 @@ Edits an existing contact at the specified `INDEX`.
 `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [o/NOTE] [t/TAG]... [a/ALTERNATE_CONTACT]...`
 
 <div markdown="span" class="alert alert-primary">
-    :bulb: **About index numbers:**
-    `INDEX` refers to the index number currently shown in the displayed contact list (#1, #2, #3 etc.).
-    Indices must be a positive integer to be valid (1, 2, 3 etc.), and must exist in the displayed contact list.
+:bulb: **About index numbers:**
+`INDEX` refers to the index number currently shown in the displayed contact list (#1, #2, #3 etc.).
+Indices must be a positive integer to be valid (1, 2, 3 etc.), and must exist in the displayed contact list.
 </div>
 
 <div markdown="span" class="alert alert-primary">
-    :bulb: **About tags/the alternate contact format:**
-    Please refer to the [above](#adding-a-contact-add).
+:bulb: **About tags/the alternate contact format:**
+Please refer to the [above](#adding-a-contact-add).
 </div>
 
 - At least one of the optional parameters must be specified.
@@ -133,8 +133,8 @@ Deletes the contact(s) at the specified `INDEX` or indices.
 `delete INDEX...`
 
 <div markdown="span" class="alert alert-primary">
-    :bulb: **About index numbers:**
-    Please refer to the [above](#editing-a-contact-edit).
+:bulb: **About index numbers:**
+Please refer to the [above](#editing-a-contact-edit).
 </div>
 
 - You can delete multiple contacts at once by specifying multiple indices separated by spaces.
@@ -159,8 +159,8 @@ Deletes all contacts!
 `clear`
 
 <div markdown="span" class="alert alert-warning">
-    :exclamation: **Caution:**
-    This command will immediately delete all your contacts. **Use with caution!**
+:exclamation: **Caution:**
+This command will immediately delete all your contacts. **Use with caution!**
 </div>
 
 ### Listing all contacts: `list`
