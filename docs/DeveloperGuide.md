@@ -333,12 +333,12 @@ Currently, the default add command may be too long for an average typer to key i
 
 We are also planning to shorten some input parameters when adding or editing a fosterer:
 
-| Current                   | Enhancement |
-|---------------------------|-----------|
-| availability/Available    | avail/true |
-| availability/NotAvailable | avail/false |
-| availability/nil          | avail/nil |
-| animalType/               | type/     |
+| Current                   | Enhancement  |
+|---------------------------|--------------|
+| availability/Available    | avail/true   |
+| availability/NotAvailable | avail/false  |
+| availability/nil          | avail/nil    |
+| animalType/               | type/        |
 
 ### Case-sensitivity of Inputs
 Currently, the fields and parameters for housing, availability and animal type are case-sensitive. An enhancement to this would be to make these fields and their parameters case-insensitive to improve the user experience. Moreover, the aforementioned enhancements to shorten the command format will also be case-insensitive.
