@@ -32,7 +32,7 @@ title: User Guide
     - [Marking an interview as done: `mark`](#marking-an-interview--mark)
     - [Rating an interview: `rate`](#rating-an-interview--rate)
     - [Listing all completed interview: `list-i-done`](#listing-all-completed-interview--list-i-done)
-    - [Listing all incomplete interview: `list-i-notdone`](#listing-all-incomplete-interview--list-i-notdone)
+    - [Listing all incomplete interview: `list-i-not-done`](#listing-all-incomplete-interview--list-i-not-done)
     - [Sorting the interview list by rating: `sort-rate`](#sorting-interviews-by-rating--sort-rate)
     - [Sorting the interview list by start-time: `sort-time`](#sorting-interviews-by-start-time--sort-time)
 - [Frequently Asked Questions](#frequently-asked-questions)
@@ -206,8 +206,8 @@ Examples:
 
 Finds applicants whose attributes contain any of the given keywords.
 
-Format: ``find-a [n/KEYWORDS [MORE_KEYWORDS]...] [p/NUMBER]
-[e/KEYWORDS [MORE_KEYWORDS]...] [a/KEYWORDS [MORE_KEYWORDS]...] [t/KEYWORDS [MORE_KEYWORDS]...]``
+Format: ``find-a [n/KEYWORDS...] [p/NUMBER]
+[e/KEYWORDS...] [a/KEYWORDS...] [t/KEYWORDS...]``
 
 * The search is case-insensitive. e.g. `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
@@ -219,7 +219,11 @@ Format: ``find-a [n/KEYWORDS [MORE_KEYWORDS]...] [p/NUMBER]
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
 Examples:
-* `find-a n/John` returns `john` and `John Doe`
+* `find-a n/Alex` returns `Alex` and `Alex Yeoh`
+
+Before find-a command:
+
+![]
 * `find-a n/alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find-a n/alex david'](images/findAlexDavidResult.png)
 * `find-a p/874 a/serangoon ang` returns `97438807`, `Serangoon Gardens`,
@@ -349,6 +353,20 @@ Format: `list-i`
 
 ### Marking an interview : `mark`
 
+Mark the specified interview in the address book.
+
+Format: `mark INDEX`
+
+* Marks the interview at the specified `INDEX' as done.
+* The index refers to the index number shown in the displayed interview list.
+* The index **must be a positive integer** 1, 2, 3, …​ The upper limit of
+valid integers is the number of interviews currently displayed in the interview
+list.
+
+Examples:
+* `mark 1` marks the first interview shown on the list as done.
+* `mark 3` marks the third interview shown on the list as done
+
 ### Rating an interview : `rate`
 
 Rate the specified interview in the address book.
@@ -365,7 +383,17 @@ Examples:
 
 ### Listing all completed interview : `list-i-done`
 
-### Listing all incomplete interview : `list-i-notdone`
+Shows a list of all interviews in the address book 
+that are done onto the GUI.
+
+Format: `list-i-done`
+
+### Listing all incomplete interview : `list-i-not-done`
+
+Show a list of all interviews in the address book that are 
+not done onto the GUI.
+
+Format:`list-i-not-done`
 
 ### Sorting interviews by rating : `sort-rate`
 
@@ -438,7 +466,7 @@ If your changes to the data file makes its format invalid, InterviewHub will dis
 | **Mark interview as done**       | `mark INTERVIEW_INDEX` <br> e.g., `mark 3`                                                                                            |
 | **Rate interview**               | `rate INTERVIEW_INDEX RATING` <br> e.g., `rate 1 3.0`                                                                                 |
 | **List completed interview**     | `list-i-done`                                                                                                                         |
-| **List incomplete interview**    | `list-i-notdone`                                                                                                                      |
+| **List incomplete interview**    | `list-i-not-done`                                                                                                                     |
 | **Sort interview by rating**     | `sort-rate`                                                                                                                           |
 | **Sort interview by start time** | `sort-time`                                                                                                                           |
 
