@@ -177,7 +177,7 @@ public class ParserUtil {
                 tagSet.add(parseTag(tagName, tagCategory));
             } else {
                 // category not specified
-                tagSet.add(parseTag(tagNameCategory, ""));
+                tagSet.add(parseTag(tagNameCategory, "uncategorised"));
             }
         }
         return tagSet;
@@ -188,9 +188,8 @@ public class ParserUtil {
      *
      * @param tags A collection of tag strings to be parsed.
      * @return An array of tag categories extracted from the provided collection of tag strings.
-     * @throws ParseException If there is an issue with parsing the tag categories.
      */
-    public static String[] parseTagCategories(Collection<String> tags) throws ParseException {
+    public static String[] parseTagCategories(Collection<String> tags) {
         requireNonNull(tags);
         String listTags = tags.toString();
         String cleanedList = listTags.replaceAll("[\\[\\]]", "");

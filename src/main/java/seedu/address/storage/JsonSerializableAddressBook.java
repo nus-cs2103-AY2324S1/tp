@@ -72,10 +72,20 @@ class JsonSerializableAddressBook {
             }
             addressBook.addPerson(person);
         }
+//        for (Map<String, String> tagData : tagList) {
+//            String tagCategory = tagData.get("tagCategory");
+//            String tagName = tagData.get("tagName");
+//            addressBook.addTag(new Tag(tagName, tagCategory));
+//        }
         for (Map<String, String> tagData : tagList) {
             String tagCategory = tagData.get("tagCategory");
             String tagName = tagData.get("tagName");
-            addressBook.addTag(new Tag(tagName, tagCategory));
+
+            Tag tag = new Tag(tagName, tagCategory);
+
+            if (!addressBook.hasTag(tag)) {
+                addressBook.addTag(tag);
+            }
         }
         return addressBook;
     }
