@@ -2,10 +2,12 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_AMOUNT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DEPARTMENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_OPERATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_POSITION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SALARY;
@@ -30,7 +32,6 @@ import seedu.address.testutil.EditEmployeeDescriptorBuilder;
  * Contains helper methods for testing commands.
  */
 public class CommandTestUtil {
-
     public static final String VALID_NAME_AMY = "Amy Bee";
     public static final String VALID_NAME_BOB = "Bob Choo";
     public static final String VALID_POSITION_AMY = "Manager";
@@ -46,7 +47,7 @@ public class CommandTestUtil {
     public static final String VALID_SALARY_AMY = "7000";
     public static final String VALID_SALARY_BOB = "5000";
     public static final int VALID_OVERTIME_HOURS_AMY = 0;
-    public static final int VALID_OVERTIME_HOURS_BOB = 1;
+    public static final int VALID_OVERTIME_HOURS_BOB = 72;
     public static final ArrayList<Leave> VALID_LEAVELIST_AMY = new ArrayList<>();
     public static final ArrayList<Leave> VALID_LEAVELIST_BOB = new ArrayList<>(
             List.of(new Leave(LocalDate.parse("2023-11-01", DateTimeFormatter.ISO_LOCAL_DATE))));
@@ -62,19 +63,20 @@ public class CommandTestUtil {
     public static final String EMAIL_DESC_BOB = " " + PREFIX_EMAIL + VALID_EMAIL_BOB;
     public static final String DEPARTMENT_DESC_FINANCE = " " + PREFIX_DEPARTMENT + VALID_DEPARTMENT_FINANCE;
     public static final String DEPARTMENT_DESC_IT = " " + PREFIX_DEPARTMENT + VALID_DEPARTMENT_IT;
-
     public static final String SALARY_DESC_AMY = " " + PREFIX_SALARY + VALID_SALARY_AMY;
     public static final String SALARY_DESC_BOB = " " + PREFIX_SALARY + VALID_SALARY_BOB;
-
+    public static final String AMOUNT_DESC_BOB = " " + PREFIX_AMOUNT + VALID_OVERTIME_HOURS_BOB;
+    public static final String OPERATION_DESC_AMY = " " + PREFIX_OPERATION + "inc";
+    public static final String OPERATION_DESC_BOB = " " + PREFIX_OPERATION + "dec";
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_POSITION_DESC = " " + PREFIX_POSITION; // empty string not allowed for positions
-    public static final String INVALID_ID_DESC = " " + PREFIX_ID; // empty string not allowed for ids
+    public static final String INVALID_ID_DESC = " " + PREFIX_ID + "ID1234-5678";
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
     public static final String INVALID_DEPARTMENT_DESC = " "
             + PREFIX_DEPARTMENT + "Finance*"; // '*' not allowed in departments
     public static final String INVALID_SALARY_DESC = " " + PREFIX_SALARY + "10,000"; // missing '$' symbol
-
+    public static final String INVALID_OPERATION = " " + PREFIX_OPERATION + "incs"; // invalid operation
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
 

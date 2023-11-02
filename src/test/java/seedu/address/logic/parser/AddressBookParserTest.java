@@ -5,9 +5,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_AMOUNT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FROM;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ON;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_OPERATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TO;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIds.ID_FIRST_EMPLOYEE;
@@ -33,12 +35,14 @@ import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.ListLeaveCommand;
+import seedu.address.logic.commands.OvertimeCommand;
 import seedu.address.logic.commands.ResetCommand;
 import seedu.address.logic.commands.SortCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.employee.Employee;
 import seedu.address.model.employee.EmployeeContainsKeywordsPredicate;
 import seedu.address.model.employee.Id;
+import seedu.address.model.employee.OvertimeHours;
 import seedu.address.testutil.EditEmployeeDescriptorBuilder;
 import seedu.address.testutil.EmployeeBuilder;
 import seedu.address.testutil.EmployeeUtil;
@@ -146,6 +150,14 @@ public class AddressBookParserTest {
         ResetCommand command = (ResetCommand) parser.parseCommand(
                 ResetCommand.COMMAND_WORD + " f/ " + "overtime");
         assertEquals(new ResetCommand("overtime"), command);
+    }
+
+    @Test
+    public void parseCommand_overtime() throws Exception {
+        OvertimeCommand command = (OvertimeCommand) parser.parseCommand(
+                OvertimeCommand.COMMAND_WORD + " " + PREFIX_ID + ID_FIRST_EMPLOYEE + " " + PREFIX_OPERATION
+                        + "inc " + PREFIX_AMOUNT + "2");
+        assertEquals(new OvertimeCommand(ID_FIRST_EMPLOYEE, new OvertimeHours(2), true), command);
     }
 
     @Test
