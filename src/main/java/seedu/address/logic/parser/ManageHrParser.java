@@ -7,6 +7,7 @@ import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import javafx.util.Pair;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.ClearCommand;
@@ -76,7 +77,7 @@ public class ManageHrParser {
             return new ExitCommand();
 
         case HelpCommand.COMMAND_WORD:
-            return new HelpCommand();
+            return new HelpCommandParser().parse(arguments);
 
         case FilterCommand.COMMAND_WORD:
             return new FilterCommandParser().parse(arguments);
@@ -85,6 +86,62 @@ public class ManageHrParser {
             logger.finer("This user input caused a ParseException: " + userInput);
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }
+    }
+
+    /**
+     * Checks if the command is valid, and creates a fake command to access the usage instructions.
+     *
+     * @param userInput full user input string
+     * @return the command based on the user input
+     * @throws ParseException if the user input is not a command
+     */
+    public Pair<String, String> checkCommandUsage(String userInput) throws ParseException {
+        final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
+        if (!matcher.matches()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
+        }
+
+        final String commandWord = matcher.group("commandWord");
+        final String arguments = matcher.group("arguments");
+
+        // Note to developers: Change the log level in config.json to enable lower level (i.e., FINE, FINER and lower)
+        // log messages such as the one below.
+        // Lower level log messages are used sparingly to minimize noise in the code.
+        logger.fine("Checking command, command word: " + commandWord + "; Arguments: " + arguments);
+
+        switch (commandWord) {
+        case AddCommand.COMMAND_WORD:
+            return new Pair<String, String>(AddCommand.MESSAGE_USAGE, AddCommand.MESSAGE_EXAMPLE);
+
+        case EditCommand.COMMAND_WORD:
+            return new Pair<String, String>(EditCommand.MESSAGE_USAGE, EditCommand.MESSAGE_EXAMPLE);
+
+        case DeleteCommand.COMMAND_WORD:
+            return new Pair<String, String>(DeleteCommand.MESSAGE_USAGE, DeleteCommand.MESSAGE_EXAMPLE);
+
+        case ClearCommand.COMMAND_WORD:
+            return new Pair<String, String>(ClearCommand.MESSAGE_USAGE, ClearCommand.MESSAGE_EXAMPLE);
+
+        case FindCommand.COMMAND_WORD:
+            return new Pair<String, String>(FindCommand.MESSAGE_USAGE, FindCommand.MESSAGE_EXAMPLE);
+
+        case ListCommand.COMMAND_WORD:
+            return new Pair<String, String>(ListCommand.MESSAGE_USAGE, ListCommand.MESSAGE_EXAMPLE);
+
+        case ExitCommand.COMMAND_WORD:
+            return new Pair<String, String>(ExitCommand.MESSAGE_USAGE, ExitCommand.MESSAGE_EXAMPLE);
+
+        case HelpCommand.COMMAND_WORD:
+            return new Pair<String, String>(HelpCommand.MESSAGE_USAGE, HelpCommand.MESSAGE_EXAMPLE);
+
+        case FilterCommand.COMMAND_WORD:
+            return new Pair<String, String>(FilterCommand.MESSAGE_USAGE, FilterCommand.MESSAGE_EXAMPLE);
+
+        default:
+            logger.finer("This user input caused a ParseException: " + userInput);
+            throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
+        }
+
     }
 
 }

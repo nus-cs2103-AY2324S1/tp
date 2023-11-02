@@ -14,11 +14,11 @@ import java.util.Set;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.department.Department;
 import seedu.address.model.employee.Address;
 import seedu.address.model.employee.Email;
-import seedu.address.model.employee.Name;
 import seedu.address.model.employee.Phone;
+import seedu.address.model.name.DepartmentName;
+import seedu.address.model.name.EmployeeName;
 
 public class ParserUtilTest {
     private static final String INVALID_NAME = "R@chel";
@@ -68,14 +68,14 @@ public class ParserUtilTest {
 
     @Test
     public void parseName_validValueWithoutWhitespace_returnsName() throws Exception {
-        Name expectedName = new Name(VALID_NAME);
+        EmployeeName expectedName = new EmployeeName(VALID_NAME);
         assertEquals(expectedName, ParserUtil.parseName(VALID_NAME));
     }
 
     @Test
     public void parseName_validValueWithWhitespace_returnsTrimmedName() throws Exception {
         String nameWithWhitespace = WHITESPACE + VALID_NAME + WHITESPACE;
-        Name expectedName = new Name(VALID_NAME);
+        EmployeeName expectedName = new EmployeeName(VALID_NAME);
         assertEquals(expectedName, ParserUtil.parseName(nameWithWhitespace));
     }
 
@@ -160,14 +160,14 @@ public class ParserUtilTest {
 
     @Test
     public void parseDepartment_validValueWithoutWhitespace_returnsDepartment() throws Exception {
-        Department expectedDepartment = new Department(VALID_DEPARTMENT_1);
+        DepartmentName expectedDepartment = new DepartmentName(VALID_DEPARTMENT_1);
         assertEquals(expectedDepartment, ParserUtil.parseDepartment(VALID_DEPARTMENT_1));
     }
 
     @Test
     public void parseDepartment_validValueWithWhitespace_returnsTrimmedDepartment() throws Exception {
         String departmentWithWhitespace = WHITESPACE + VALID_DEPARTMENT_1 + WHITESPACE;
-        Department expectedDepartment = new Department(VALID_DEPARTMENT_1);
+        DepartmentName expectedDepartment = new DepartmentName(VALID_DEPARTMENT_1);
         assertEquals(expectedDepartment, ParserUtil.parseDepartment(departmentWithWhitespace));
     }
 
@@ -189,10 +189,10 @@ public class ParserUtilTest {
 
     @Test
     public void parseDepartments_collectionWithValidDepartments_returnsDepartmentSet() throws Exception {
-        Set<Department> actualDepartmentSet = ParserUtil.parseDepartments(
+        Set<DepartmentName> actualDepartmentSet = ParserUtil.parseDepartments(
                 Arrays.asList(VALID_DEPARTMENT_1, VALID_DEPARTMENT_2));
-        Set<Department> expectedDepartmentSet = new HashSet<Department>(Arrays.asList(
-                new Department(VALID_DEPARTMENT_1), new Department(VALID_DEPARTMENT_2)));
+        Set<DepartmentName> expectedDepartmentSet = new HashSet<DepartmentName>(Arrays.asList(
+                new DepartmentName(VALID_DEPARTMENT_1), new DepartmentName(VALID_DEPARTMENT_2)));
 
         assertEquals(expectedDepartmentSet, actualDepartmentSet);
     }

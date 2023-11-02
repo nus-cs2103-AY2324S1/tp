@@ -136,7 +136,7 @@ Acceptable values for each parameter:
 
 Succeed:
 
-* Outcome: If the command is successful, it lists all employees and 
+* Outcome: If the command is successful, it lists all employees and
   displays a message "Listed all employees" along with a table of employee data as shown below.
 
 ![Display from list Command](images/listDisplay.png)
@@ -196,7 +196,7 @@ Fail:
 * If the employee to be deleted does not exist, a warning will be displayed.
 “The employee you’re trying to delete does not exist.”
 
-  
+
 ### Exiting the program : `exit`
 
 Exits the application.

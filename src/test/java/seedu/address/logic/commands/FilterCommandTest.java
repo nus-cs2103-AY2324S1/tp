@@ -27,8 +27,9 @@ public class FilterCommandTest {
     @Test
     public void execute_noEmployeesFound() {
         String expectedMessage = String.format(MESSAGE_EMPLOYEES_LISTED_OVERVIEW, 0);
-        FilterCommand command = new FilterCommand(new ContainsDepartmentPredicate(" "));
-        expectedModel.updateFilteredEmployeeList(new ContainsDepartmentPredicate(" "));
+        ContainsDepartmentPredicate predicate = new ContainsDepartmentPredicate("A");
+        FilterCommand command = new FilterCommand(predicate);
+        expectedModel.updateFilteredEmployeeList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Collections.emptyList(), model.getFilteredEmployeeList());
     }

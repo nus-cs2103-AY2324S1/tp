@@ -10,14 +10,15 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.department.Department;
 import seedu.address.model.employee.Address;
 import seedu.address.model.employee.Email;
 import seedu.address.model.employee.Employee;
 import seedu.address.model.employee.Leave;
-import seedu.address.model.employee.Name;
 import seedu.address.model.employee.Phone;
+import seedu.address.model.employee.Role;
 import seedu.address.model.employee.Salary;
+import seedu.address.model.name.DepartmentName;
+import seedu.address.model.name.EmployeeName;
 
 /**
  * Jackson-friendly version of {@link Employee}.
@@ -32,7 +33,9 @@ class JsonAdaptedEmployee {
     private final String address;
     private final String salary;
     private final String leave;
-    private final List<JsonAdaptedDepartment> departments = new ArrayList<>();
+    private final String role;
+    private final List<JsonAdaptedSupervisor> supervisors = new ArrayList<>();
+    private final List<JsonAdaptedDepartmentName> departments = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedEmployee} with the given employee details.
@@ -41,13 +44,19 @@ class JsonAdaptedEmployee {
     public JsonAdaptedEmployee(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
                                @JsonProperty("email") String email, @JsonProperty("address") String address,
                                @JsonProperty("salary") String salary, @JsonProperty("leave") String leave,
-                               @JsonProperty("departments") List<JsonAdaptedDepartment> departments) {
+                               @JsonProperty("role") String role,
+                               @JsonProperty("supervisors") List<JsonAdaptedSupervisor> supervisors,
+                               @JsonProperty("departments") List<JsonAdaptedDepartmentName> departments) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.salary = salary;
         this.leave = leave;
+        this.role = role;
+        if (supervisors != null) {
+            this.supervisors.addAll(supervisors);
+        }
         if (departments != null) {
             this.departments.addAll(departments);
         }
@@ -63,8 +72,12 @@ class JsonAdaptedEmployee {
         address = source.getAddress().value;
         salary = source.getSalary().value;
         leave = source.getLeave().value;
+        role = source.getRole().toString();
+        supervisors.addAll(source.getSupervisors().stream()
+                .map(JsonAdaptedSupervisor::new)
+                .collect(Collectors.toList()));
         departments.addAll(source.getDepartments().stream()
-                .map(JsonAdaptedDepartment::new)
+                .map(JsonAdaptedDepartmentName::new)
                 .collect(Collectors.toList()));
     }
 
@@ -74,18 +87,23 @@ class JsonAdaptedEmployee {
      * @throws IllegalValueException if there were any data constraints violated in the adapted employee.
      */
     public Employee toModelType() throws IllegalValueException {
-        final List<Department> employeeDepartments = new ArrayList<>();
-        for (JsonAdaptedDepartment department : departments) {
+        final List<DepartmentName> employeeDepartments = new ArrayList<>();
+        for (JsonAdaptedDepartmentName department : departments) {
             employeeDepartments.add(department.toModelType());
+        }
+        final List<EmployeeName> managers = new ArrayList<>();
+        for (JsonAdaptedSupervisor supervisor : supervisors) {
+            managers.add(supervisor.toModelType());
         }
 
         if (name == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
+            throw new IllegalValueException(String.format(
+                    MISSING_FIELD_MESSAGE_FORMAT, EmployeeName.class.getSimpleName()));
         }
-        if (!Name.isValidName(name)) {
-            throw new IllegalValueException(Name.MESSAGE_CONSTRAINTS);
+        if (!EmployeeName.isValidName(name)) {
+            throw new IllegalValueException(EmployeeName.MESSAGE_CONSTRAINTS);
         }
-        final Name modelName = new Name(name);
+        final EmployeeName modelName = new EmployeeName(name);
 
         if (phone == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Phone.class.getSimpleName()));
@@ -127,8 +145,17 @@ class JsonAdaptedEmployee {
         }
         final Leave modelLeave = new Leave(leave);
 
-        final Set<Department> modelDepartments = new HashSet<>(employeeDepartments);
-        return new Employee(modelName, modelPhone, modelEmail, modelAddress, modelSalary, modelLeave, modelDepartments);
+        if (role == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Role.class.getSimpleName()));
+        }
+        if (!Role.isValidRole(role)) {
+            throw new IllegalValueException(Role.MESSAGE_CONSTRAINTS);
+        }
+        final Role modelRole = new Role(role);
+        final Set<EmployeeName> modelSupervisors = new HashSet<>(managers);
+        final Set<DepartmentName> modelDepartments = new HashSet<>(employeeDepartments);
+        return new Employee(modelName, modelPhone, modelEmail, modelAddress, modelSalary, modelLeave,
+                 modelRole, modelSupervisors, modelDepartments);
     }
 
 }

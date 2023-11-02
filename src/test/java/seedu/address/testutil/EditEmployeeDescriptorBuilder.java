@@ -5,14 +5,15 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.EditCommand;
-import seedu.address.model.department.Department;
 import seedu.address.model.employee.Address;
 import seedu.address.model.employee.Email;
 import seedu.address.model.employee.Employee;
 import seedu.address.model.employee.Leave;
-import seedu.address.model.employee.Name;
 import seedu.address.model.employee.Phone;
+import seedu.address.model.employee.Role;
 import seedu.address.model.employee.Salary;
+import seedu.address.model.name.DepartmentName;
+import seedu.address.model.name.EmployeeName;
 
 /**
  * A utility class to help with building EditEmployeeDescriptor objects.
@@ -47,7 +48,7 @@ public class EditEmployeeDescriptorBuilder {
      * Sets the {@code Name} of the {@code EditEmployeeDescriptor} that we are building.
      */
     public EditEmployeeDescriptorBuilder withName(String name) {
-        descriptor.setName(new Name(name));
+        descriptor.setName(new EmployeeName(name));
         return this;
     }
 
@@ -92,11 +93,29 @@ public class EditEmployeeDescriptorBuilder {
     }
 
     /**
+     * Sets the {@code role} of the {@code EditEmployeeDescriptor} that we are building.
+     */
+    public EditEmployeeDescriptorBuilder withRole(String role) {
+        descriptor.setRole(new Role(role));
+        return this;
+    }
+
+    /**
+     * Parses the {@code supervisors} into a {@code Set<Name>} and set it to the {@code EditEmployeeDescriptor}
+     * that we are building.
+     */
+    public EditEmployeeDescriptorBuilder withSupervisors(String... supervisors) {
+        Set<EmployeeName> supervisorNameSet = Stream.of(supervisors).map(EmployeeName::new).collect(Collectors.toSet());
+        descriptor.setSupervisors(supervisorNameSet);
+        return this;
+    }
+
+    /**
      * Parses the {@code departments} into a {@code Set<Department>} and set it to the {@code EditEmployeeDescriptor}
      * that we are building.
      */
     public EditEmployeeDescriptorBuilder withDepartments(String... departments) {
-        Set<Department> departmentSet = Stream.of(departments).map(Department::new).collect(Collectors.toSet());
+        Set<DepartmentName> departmentSet = Stream.of(departments).map(DepartmentName::new).collect(Collectors.toSet());
         descriptor.setDepartments(departmentSet);
         return this;
     }

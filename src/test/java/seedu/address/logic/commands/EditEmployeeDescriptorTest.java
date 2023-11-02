@@ -77,6 +77,8 @@ public class EditEmployeeDescriptorTest {
                 + ", address=" + editEmployeeDescriptor.getAddress().orElse(null)
                 + ", salary=" + editEmployeeDescriptor.getSalary().orElse(null)
                 + ", leave=" + editEmployeeDescriptor.getLeave().orElse(null)
+                + ", role=" + editEmployeeDescriptor.getRole().orElse(null)
+                + ", supervisors=" + editEmployeeDescriptor.getSupervisors().orElse(null)
                 + ", departments=" + editEmployeeDescriptor.getDepartments().orElse(null) + "}";
         assertEquals(expected, editEmployeeDescriptor.toString());
     }

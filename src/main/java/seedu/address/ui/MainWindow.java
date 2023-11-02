@@ -16,6 +16,7 @@ import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.employee.exceptions.ModelException;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -154,6 +155,24 @@ public class MainWindow extends UiPart<Stage> {
      */
     @FXML
     public void handleHelp() {
+        helpWindow.resetHelpText();
+        helpWindow.resetHelpCopy();
+        if (!helpWindow.isShowing()) {
+            helpWindow.show();
+        } else {
+            helpWindow.focus();
+        }
+    }
+
+    /**
+     * Opens the help window with specific help for command.
+     *
+     * @params cmd Command to display help for
+     */
+    @FXML
+    public void handleHelp(String cmdUsage, String cmdExample) {
+        helpWindow.setHelpText(cmdUsage); // Set the text to the command help
+        helpWindow.setHelpCopy(cmdExample); // Set URL to command example.
         if (!helpWindow.isShowing()) {
             helpWindow.show();
         } else {
@@ -192,7 +211,15 @@ public class MainWindow extends UiPart<Stage> {
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
 
             if (commandResult.isShowHelp()) {
-                handleHelp();
+                // Handle help, pass command over to handler to create special page
+                String cmdUsage = commandResult.getCmdUsage();
+                String cmdExample = commandResult.getCmdExample();
+                // If empty string, it's to display all help.
+                if (cmdUsage.isEmpty()) {
+                    handleHelp();
+                } else {
+                    handleHelp(cmdUsage, cmdExample);
+                }
             }
 
             if (commandResult.isExit()) {
@@ -200,7 +227,7 @@ public class MainWindow extends UiPart<Stage> {
             }
 
             return commandResult;
-        } catch (CommandException | ParseException e) {
+        } catch (CommandException | ParseException | ModelException e) {
             logger.info("An error occurred while executing command: " + commandText);
             resultDisplay.setFeedbackToUser(e.getMessage());
             throw e;
