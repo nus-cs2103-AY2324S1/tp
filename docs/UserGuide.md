@@ -7,22 +7,9 @@ CheckMate is a **desktop app for streamlining the process of room bookings for h
 
 ## Table of Contents
 
-1. [Quick Start](#quick-start)
-2. [Input Formats](#input-formats)
-   1. [`Command Format`](#command-format)
-   2. [`Parameter Format`](#parameter-format)
-3. [Commands](#commands)
-   1. [`help`](#viewing-help--help)
-   2. [`add`](#adding-a-booking-add)
-   3. [`list`](#listing-all-bookings--list)
-   4. [`edit`](#editing-a-booking--edit)
-   5. [`find`](#locating-bookings-by-name-or-room-find)
-   6. [`delete`](#deleting-a-booking--delete)
-   7. [`clear`](#clearing-all-entries--clear)
-   8. [`exit`](#exiting-the-program--exit)
-4. [FAQ](#faq)
-5. [Known Issues](#known-issues)
-6. [Commands Summary](#commands-summary)
+* Table of Contents
+  {:toc}
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Quick start
