@@ -264,7 +264,7 @@ Format: `redo`
 
 ### Recall previous commands
 
-CCA Leaders can quickly recall previous commands and edit it slightly, allowing users to mark attendance for a group of members quickly.
+CCA Leaders can quickly recall previously entered commands for convenience. Example use cases include marking attendance for a group of members, editing slightly wrong details and more.
 
 CCACommander stores almost all (see the info card below to see what commands are stored) commands entered by the user. Users can use the <kbd>↑</kbd> to <kbd>↓</kbd> key to navigate through the commands entered upon selecting the command box.
 
