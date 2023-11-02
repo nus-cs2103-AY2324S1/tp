@@ -13,6 +13,10 @@ public class ListGroupCommand extends Command {
 
     public static final String COMMAND_WORD = "listgroup";
 
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Lists all groups in the contact list. "
+            + "Should not contain any extra inputs.\n"
+            + "Example: " + COMMAND_WORD;
+
     public static final StringBuilder MESSAGE_SUCCESS = new StringBuilder();
 
 

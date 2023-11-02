@@ -8,16 +8,11 @@ import java.util.List;
 import java.util.stream.Stream;
 
 import javafx.collections.FXCollections;
-import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import seedu.address.logic.Messages;
-import seedu.address.logic.commands.GroupPersonCommand;
-import seedu.address.logic.commands.UngroupPersonCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.group.exceptions.DuplicateGroupException;
 import seedu.address.model.group.exceptions.GroupNotFoundException;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.exceptions.DuplicatePersonException;
 
 /**
  * A list containing groups
@@ -96,6 +91,21 @@ public class GroupList implements Iterable<Group> {
     public Group getGroup(String groupName) throws CommandException {
         for (Group group : this.internalList) {
             if (group.nameEquals(groupName)) {
+                return group;
+            }
+        }
+        throw new CommandException(Messages.MESSAGE_NO_GROUP_WITH_NAME_FOUND);
+    }
+
+    /**
+     * Returns a group with the {@code groupName} from the GroupList.
+     * @param groupToGet Group to look for
+     * @return The group with the group name
+     * @throws CommandException If GroupList does not contain a group with the name
+     */
+    public Group getGroup(Group groupToGet) throws CommandException {
+        for (Group group : this.internalList) {
+            if (group.nameEquals(groupToGet.getGroupName())) {
                 return group;
             }
         }

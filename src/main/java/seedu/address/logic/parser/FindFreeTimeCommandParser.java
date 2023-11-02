@@ -11,14 +11,13 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Duration;
 
 /**
- * Parses input arguments and creates a new AddCommand object
+ * Parses input arguments and creates a new FindFreeTimeCommand object
  */
-public class FindFreeTimeParser implements Parser<FindFreeTimeCommand> {
+public class FindFreeTimeCommandParser implements Parser<FindFreeTimeCommand> {
 
 	/**
-	 * Parses the given {@code String} of arguments in the context of the AddCommand
-	 * and returns an AddCommand object for execution.
-	 *
+	 * Parses the given {@code String} of arguments in the context of the FindFreeTimeCommand
+	 * and returns an FindFreeTimeCommand object for execution.
 	 * @throws ParseException if the user input does not conform the expected format
 	 */
 

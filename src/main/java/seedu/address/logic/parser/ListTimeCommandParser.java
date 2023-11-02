@@ -47,7 +47,7 @@ public class ListTimeCommandParser implements Parser<ListTimeCommand> {
         // if n/ is present
         if (arePrefixesPresent(argMultimap, PREFIX_NAME)) {
             // check if g/ is present
-            if (arePrefixesPresent(argMultimap, PREFIX_GROUPTAG)) { // g/ present
+            if (arePrefixesPresent(argMultimap, PREFIX_GROUPTAG)) {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListTimeCommand.MESSAGE_USAGE));
             } else {
                 String personName = argMultimap.getValue(PREFIX_NAME).get();
@@ -55,6 +55,8 @@ public class ListTimeCommandParser implements Parser<ListTimeCommand> {
                 return new ListTimePersonCommand(name);
             }
         }
+
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_GROUPTAG);
 
         // n/ not present, g/ should be present
         String groupName = argMultimap.getValue(PREFIX_GROUPTAG).get();
