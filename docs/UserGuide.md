@@ -71,7 +71,7 @@ Refer to the [Features](#features) below for details of each command.
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
+* Extraneous parameters for commands that do not take in parameters (such as `help`, `listT`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
@@ -231,7 +231,19 @@ lowercase letters as distinct. This may result in names being sorted as A B C a 
 
 Examples:
 * `list` Shows a list of all persons.
-* `list s/name` Show a list of all persons, sorted by name in ascending order.
+* `list s/name` Shows a list of all persons, sorted by name in ascending order.
+
+### Listing all tags: `listT`
+
+Shows a list of all tags in the address book.
+
+Format: `listT`
+
+* The `listT` command does not require any additional parameters or arguments.
+* Tags listed by the `listT` command are unique and do not repeat.
+
+**Example:**
+* `listT` Shows a list of all tags.
 
 ### Editing a person : `edit`
 
@@ -527,17 +539,18 @@ _Details coming soon ..._
  Action                   | Format, Examples                                                                                                                                               
 --------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------
  **Create**               | `create t/CATEGORY NAME…​` <br> e.g. `create t/dept software`
- **Add**                  | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/[CATEGORY] TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague` 
+ **Add**                  | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/[CATEGORY] TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/developer t/intern` 
  **Remark**               | `remark r/REMARK` <br> e.g., `remark 1 r/Great attitude, hardworking`                                                                                          
  **View**                 | `view INDEX` <br> e.g., `view 1`                                                                                                                               
  **Add Github/LinkedIn**  | `addL INDEX u/USERNAME` or `addG INDEX u/USERNAME` e.g., `addL 1 u/alex-yeoh`, `addG 2 u/bernicesanders123`                                                    
  **Open Github/LinkedIn** | `linkedin INDEX` or `github INDEX` e.g., `linkedin 1`, `github 2`                                                                                              
  **Clear**                | `clear`                                                                                                                                                        
- **Delete**               | `delete INDEX`<br> e.g., `delete 3`                                                                                                                            
+ **Delete**               | `delete INDEX` or `delete (t/TAG [MORE TAGS] st/STATUS)` <br> e.g., `delete 3`, `delete t/intern st/rejected`                                                                                                                           
  **Set**                  | `set INDEX STATUS`<br> e.g., `set 2 Interviewed`                                                                                                               
  **Edit**                 | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/[CATEGORY] TAGNAME]... [sc/TAGNAME SCORE]​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com t\MarketingInterview sc\MarketingInterview 50`                                   
- **Search**               | `search (n/KEYWORD [MORE KEYWORDS] / st/KEYWORD [MORE KEYWORDS] / t/KEYWORD [MORE KEYWORDS])` <br> e.g., `search n/alex`
- **List**                 | `list s/ATTRIBUTE` <br> e.g. `list s/name`    `hello`                                                                                                                 
+ **Search**               | `search (n/NAME [MORE NAME] / st/STATUS [MORE STATUS] / t/TAGS [MORE TAGS])` <br> e.g., `search n/alex`
+ **List**                 | `list so/ATTRIBUTE` <br> e.g. `list so/name`
+ **ListT**                | `listT`
  **Export**               | `export`                                                                                                                                                       
  **Help**                 | `help`
 

@@ -22,16 +22,19 @@ public class CommandResult {
     private final boolean isView;
 
     private final boolean showEvent;
+    private final boolean listTags;
 
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
-    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, boolean isView, boolean showEvent) {
+    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, boolean isView,
+                         boolean showEvent, boolean listTags) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
         this.exit = exit;
         this.isView = isView;
         this.showEvent = showEvent;
+        this.listTags = listTags;
     }
 
     /**
@@ -39,7 +42,7 @@ public class CommandResult {
      * and other fields set to their default value.
      */
     public CommandResult(String feedbackToUser) {
-        this(feedbackToUser, false, false, false, false);
+        this(feedbackToUser, false, false, false, false, false);
     }
 
     /**
@@ -48,7 +51,7 @@ public class CommandResult {
      * @param isView whether to show the view
      */
     public CommandResult(String feedbackToUser, boolean isView) {
-        this(feedbackToUser, false, false, isView, false);
+        this(feedbackToUser, false, false, isView, false, false);
     }
 
     public String getFeedbackToUser() {
@@ -75,6 +78,10 @@ public class CommandResult {
         return showEvent;
     }
 
+    public boolean isListTags() {
+        return listTags;
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -91,12 +98,13 @@ public class CommandResult {
                 && showHelp == otherCommandResult.showHelp
                 && exit == otherCommandResult.exit
                 && isView == otherCommandResult.isView
-                && showEvent == otherCommandResult.showEvent;
+                && showEvent == otherCommandResult.showEvent
+                && listTags == otherCommandResult.listTags;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(feedbackToUser, showHelp, exit, isView);
+        return Objects.hash(feedbackToUser, showHelp, exit, isView, showEvent, listTags);
     }
 
     @Override
@@ -107,6 +115,7 @@ public class CommandResult {
                 .add("exit", exit)
                 .add("isView", isView)
                 .add("showEvent", showEvent)
+                .add("listTags", listTags)
                 .toString();
     }
 

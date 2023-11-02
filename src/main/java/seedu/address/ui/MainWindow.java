@@ -20,7 +20,6 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.ScoreList;
 
-
 /**
  * The Main Window. Provides the basic application layout containing
  * a menu bar and space where other JavaFX elements can be placed.
@@ -42,6 +41,8 @@ public class MainWindow extends UiPart<Stage> {
     private HelpWindow helpWindow;
 
     private EventWindow eventWindow;
+
+    private TagListWindow tagListWindow;
 
     private PersonInformationPanel personInformationPanel;
 
@@ -87,6 +88,7 @@ public class MainWindow extends UiPart<Stage> {
 
         helpWindow = new HelpWindow();
         eventWindow = new EventWindow(new Stage(), logic);
+        tagListWindow = new TagListWindow(new Stage(), logic);
     }
 
     public Stage getPrimaryStage() {
@@ -181,6 +183,18 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
+    /**
+     * Opens the tag list window.
+     */
+    @FXML
+    public void handleListTags() {
+        if (!tagListWindow.isShowing()) {
+            tagListWindow.show();
+        } else {
+            tagListWindow.focus();
+        }
+    }
+
     void show() {
         primaryStage.show();
     }
@@ -226,7 +240,6 @@ public class MainWindow extends UiPart<Stage> {
     }
 
 
-
     public PersonListPanel getPersonListPanel() {
         return personListPanel;
     }
@@ -262,6 +275,10 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.isShowEvent()) {
                 handleEvent();
+            }
+
+            if (commandResult.isListTags()) {
+                handleListTags();
             }
 
             return commandResult;
