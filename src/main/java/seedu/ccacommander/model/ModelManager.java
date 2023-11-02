@@ -4,9 +4,11 @@ import static java.util.Objects.requireNonNull;
 import static seedu.ccacommander.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -15,6 +17,7 @@ import javafx.collections.transformation.FilteredList;
 import seedu.ccacommander.commons.core.GuiSettings;
 import seedu.ccacommander.commons.core.LogsCenter;
 import seedu.ccacommander.model.enrolment.Enrolment;
+import seedu.ccacommander.model.enrolment.exceptions.EnrolmentNotFoundException;
 import seedu.ccacommander.model.event.Event;
 import seedu.ccacommander.model.member.Member;
 import seedu.ccacommander.model.shared.Name;
@@ -149,10 +152,126 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void deleteEnrolment(Enrolment target) {
+        versionedCcaCommander.removeEnrolment(target);
+    }
+
+    @Override
+    public void deleteEnrolmentsWithEventName(Name eventName) {
+        List<Enrolment> enrolmentsToBeDeletedList = new ArrayList<>();
+        for (Enrolment enrolment: this.filteredEnrolments) {
+            if (enrolment.getEventName().equals(eventName)) {
+                // The enrolments cannot directly be deleted as it will affect the iteration of enrolments here.
+                enrolmentsToBeDeletedList.add(enrolment);
+            }
+        }
+
+        for (Enrolment enrolment: enrolmentsToBeDeletedList) {
+            this.deleteEnrolment(enrolment);
+        }
+    }
+
+    @Override
+    public void deleteEnrolmentsWithMemberName(Name memberName) {
+        List<Enrolment> enrolmentsToBeDeletedList = new ArrayList<>();
+        for (Enrolment enrolment: this.filteredEnrolments) {
+            if (enrolment.getMemberName().equals(memberName)) {
+                // The enrolments cannot directly be deleted as it will affect the iteration of enrolments here.
+                enrolmentsToBeDeletedList.add(enrolment);
+            }
+        }
+
+        for (Enrolment enrolment: enrolmentsToBeDeletedList) {
+            this.deleteEnrolment(enrolment);
+        }
+    }
+    @Override
     public void createEnrolment(Enrolment enrolment) {
         versionedCcaCommander.createEnrolment(enrolment);
         updateFilteredEnrolmentList(PREDICATE_SHOW_ALL_ENROLMENTS);
     }
+
+    /**
+     *  Checks if the {@code lastShownEnrolmentList} contains a specific Enrolment object that has a Member and an
+     *  Event that matches the given {@param memberName} and {@param eventName} respectively, and returns that
+     *  specific Enrolment.
+     * @param lastShownEnrolmentList
+     * @param memberName
+     * @param eventName
+     * @throws EnrolmentNotFoundException if the enrolment cannot be found from the {@code lastShownEnrolmentList}
+     */
+    public static Enrolment findEnrolmentFromList(List<Enrolment> lastShownEnrolmentList,
+                                                  Name memberName, Name eventName) throws EnrolmentNotFoundException {
+        Enrolment selectedEnrolment = null;
+        int enrolmentListPointer = 0;
+
+        for (int i = 0; i < lastShownEnrolmentList.size(); i++) {
+            selectedEnrolment = lastShownEnrolmentList.get(i);
+            Name selectedMemberName = selectedEnrolment.getMemberName();
+            Name selectedEventName = selectedEnrolment.getEventName();
+
+            if (memberName.equals(selectedMemberName) && eventName.equals(selectedEventName)) {
+                break;
+            }
+            enrolmentListPointer++;
+        }
+
+        if (enrolmentListPointer == lastShownEnrolmentList.size()) {
+            throw new EnrolmentNotFoundException();
+        } else {
+            return selectedEnrolment;
+        }
+    }
+
+    /**
+     *  Edit the Enrolments from the enrolment list which
+     *  contain an event that have the same name as {@param prevName}
+     *  to match the {@param newName} of the event
+     * @param prevName
+     * @param newName
+     */
+    @Override
+    public void editEnrolmentsWithEventName(Name prevName, Name newName) {
+        updateFilteredEnrolmentList(PREDICATE_SHOW_ALL_ENROLMENTS);
+        // get the enrolments list then loop through to edit matching enrolments
+        List<Enrolment> enrolmentList = getFilteredEnrolmentList();
+        for (Enrolment enrolment: enrolmentList) {
+            if (enrolment.getEventName().equals(prevName)) {
+                Enrolment editedEnrolment = new Enrolment(enrolment.getMemberName(), newName,
+                        Optional.of(enrolment.getHours()), Optional.of(enrolment.getRemark()));
+                setEnrolment(enrolment, editedEnrolment);
+            }
+        }
+    }
+
+    /**
+     *  Edit the Enrolments from the enrolment list which
+     *  contain a Member that have the same name as {@param prevName}
+     *  to match the {@param newName} of the member
+     * @param prevName
+     * @param newName
+     */
+    @Override
+    public void editEnrolmentsWithMemberName(Name prevName, Name newName) {
+        updateFilteredEnrolmentList(PREDICATE_SHOW_ALL_ENROLMENTS);
+        // get the enrolments list then loop through to edit matching enrolments
+        List<Enrolment> enrolmentList = getFilteredEnrolmentList();
+        for (Enrolment enrolment: enrolmentList) {
+            if (enrolment.getMemberName().equals(prevName)) {
+                Enrolment editedEnrolment = new Enrolment(newName, enrolment.getEventName(),
+                        Optional.of(enrolment.getHours()), Optional.of(enrolment.getRemark()));
+                setEnrolment(enrolment, editedEnrolment);
+            }
+        }
+    }
+
+    @Override
+    public void setEnrolment(Enrolment target, Enrolment editedEnrolment) {
+        requireAllNonNull(target, editedEnrolment);
+
+        versionedCcaCommander.setEnrolment(target, editedEnrolment);
+    }
+
 
     @Override
     public void commit(String commitMessage) {

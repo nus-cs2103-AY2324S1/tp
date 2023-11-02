@@ -5,16 +5,21 @@ skinparam ArrowFontSize 12
 start
 :User presses '↓' or '↑' while \nthe command box is selected.;
 
-if () then ([↑])
+switch ()
+case ( [↑])
     if() then ([has previous\ncommand])
     :Set the previous command\n in commandBox;
     else ([else])
     endif
-else ([↓])
+case ( [↓])
     if() then ([has next\ncommand])
     :Set the next command\n in commandBox;
     else ([else])
     endif
-endif
+case ( [↵ or ⌫])
+    :resets currentCommandPointer;
+case ([else])
+
+endswitch
 stop
 @enduml

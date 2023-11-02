@@ -84,6 +84,14 @@ public class EditEventCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_EVENT);
         }
 
+
+        Name prevName = eventToEdit.getName();
+        Name newName = editedEvent.getName();
+
+        if (!prevName.equals(newName)) {
+            model.editEnrolmentsWithEventName(prevName, newName);
+        }
+
         model.setEvent(eventToEdit, editedEvent);
         model.updateFilteredEventList(PREDICATE_SHOW_ALL_EVENTS);
         model.updateFilteredMemberList(PREDICATE_SHOW_ALL_MEMBERS);

@@ -7,6 +7,7 @@ import static seedu.ccacommander.logic.commands.CommandTestUtil.assertCommandFai
 import static seedu.ccacommander.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.ccacommander.logic.commands.CommandTestUtil.showEventAtIndex;
 import static seedu.ccacommander.testutil.TypicalCcaCommander.getTypicalCcaCommander;
+import static seedu.ccacommander.testutil.TypicalIndexes.INDEX_FIRST_ENROLMENT;
 import static seedu.ccacommander.testutil.TypicalIndexes.INDEX_FIRST_EVENT;
 import static seedu.ccacommander.testutil.TypicalIndexes.INDEX_SECOND_EVENT;
 
@@ -17,6 +18,7 @@ import seedu.ccacommander.logic.Messages;
 import seedu.ccacommander.model.Model;
 import seedu.ccacommander.model.ModelManager;
 import seedu.ccacommander.model.UserPrefs;
+import seedu.ccacommander.model.enrolment.Enrolment;
 import seedu.ccacommander.model.event.Event;
 
 /**
@@ -30,6 +32,7 @@ public class DeleteEventCommandTest {
     @Test
     public void execute_validIndexUnfilteredList_success() {
         Event eventToDelete = model.getFilteredEventList().get(INDEX_FIRST_EVENT.getZeroBased());
+        Enrolment enrolmentToDelete = model.getFilteredEnrolmentList().get(INDEX_FIRST_ENROLMENT.getZeroBased());
         DeleteEventCommand deleteEventCommand = new DeleteEventCommand(INDEX_FIRST_EVENT);
 
         String commitMessage = String.format(DeleteEventCommand.MESSAGE_COMMIT, eventToDelete.getName());
@@ -38,6 +41,7 @@ public class DeleteEventCommandTest {
 
         ModelManager expectedModel = new ModelManager(model.getCcaCommander(), new UserPrefs());
         expectedModel.deleteEvent(eventToDelete);
+        expectedModel.deleteEnrolment(enrolmentToDelete);
         expectedModel.commit(commitMessage);
 
         assertCommandSuccess(deleteEventCommand, model, expectedMessage, expectedModel);
@@ -56,6 +60,7 @@ public class DeleteEventCommandTest {
         showEventAtIndex(model, INDEX_FIRST_EVENT);
 
         Event eventToDelete = model.getFilteredEventList().get(INDEX_FIRST_EVENT.getZeroBased());
+        Enrolment enrolmentToDelete = model.getFilteredEnrolmentList().get(INDEX_FIRST_ENROLMENT.getZeroBased());
         DeleteEventCommand deleteEventCommand = new DeleteEventCommand(INDEX_FIRST_EVENT);
 
         String commitMessage = String.format(DeleteEventCommand.MESSAGE_COMMIT, eventToDelete.getName());
@@ -64,6 +69,7 @@ public class DeleteEventCommandTest {
 
         Model expectedModel = new ModelManager(model.getCcaCommander(), new UserPrefs());
         expectedModel.deleteEvent(eventToDelete);
+        expectedModel.deleteEnrolment(enrolmentToDelete);
         expectedModel.commit(commitMessage);
         showNoEvent(expectedModel);
 

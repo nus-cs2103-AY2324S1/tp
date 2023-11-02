@@ -10,3 +10,13 @@
     height: 21px;
     width: 21px
 }
+kbd {
+  border: 0.1em solid #AAA;
+  border-radius:0.2em;
+  box-shadow: 0.1em 0.2em 0.2em #DDD;
+  background-color: #F9F9F9;
+  background-image: linear-gradient(to bottom, #EEE, #F9F9F9, #EEE);
+  padding: 0.1em 0.3em;
+  font-family: inherit;
+  font-size: 0.85em;
+}

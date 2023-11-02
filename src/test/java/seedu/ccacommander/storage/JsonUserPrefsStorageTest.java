@@ -15,6 +15,7 @@ import org.junit.jupiter.api.io.TempDir;
 import seedu.ccacommander.commons.core.GuiSettings;
 import seedu.ccacommander.commons.exceptions.DataLoadingException;
 import seedu.ccacommander.model.UserPrefs;
+import seedu.ccacommander.ui.Stylesheet;
 
 public class JsonUserPrefsStorageTest {
 
@@ -48,7 +49,6 @@ public class JsonUserPrefsStorageTest {
                 ? TEST_DATA_FOLDER.resolve(userPrefsFileInTestDataFolder)
                 : null;
     }
-
     @Test
     public void readUserPrefs_fileInOrder_successfullyRead() throws DataLoadingException {
         UserPrefs expected = getTypicalUserPrefs();
@@ -61,7 +61,6 @@ public class JsonUserPrefsStorageTest {
         UserPrefs actual = readUserPrefs("EmptyUserPrefs.json").get();
         assertEquals(new UserPrefs(), actual);
     }
-
     @Test
     public void readUserPrefs_extraValuesInFile_extraValuesIgnored() throws DataLoadingException {
         UserPrefs expected = getTypicalUserPrefs();
@@ -72,7 +71,7 @@ public class JsonUserPrefsStorageTest {
 
     private UserPrefs getTypicalUserPrefs() {
         UserPrefs userPrefs = new UserPrefs();
-        userPrefs.setGuiSettings(new GuiSettings(1000, 500, 300, 100));
+        userPrefs.setGuiSettings(new GuiSettings(1000, 500, 300, 100, Stylesheet.DARK.toString()));
         userPrefs.setCcaCommanderFilePath(Paths.get("ccacommander.json"));
         return userPrefs;
     }
@@ -103,7 +102,7 @@ public class JsonUserPrefsStorageTest {
     public void saveUserPrefs_allInOrder_success() throws DataLoadingException, IOException {
 
         UserPrefs original = new UserPrefs();
-        original.setGuiSettings(new GuiSettings(1200, 200, 0, 2));
+        original.setGuiSettings(new GuiSettings(1200, 200, 0, 2, Stylesheet.LIGHT.toString()));
 
         Path pefsFilePath = testFolder.resolve("TempPrefs.json");
         JsonUserPrefsStorage jsonUserPrefsStorage = new JsonUserPrefsStorage(pefsFilePath);
@@ -114,7 +113,7 @@ public class JsonUserPrefsStorageTest {
         assertEquals(original, readBack);
 
         //Try saving when the file exists
-        original.setGuiSettings(new GuiSettings(5, 5, 5, 5));
+        original.setGuiSettings(new GuiSettings(5, 5, 5, 5, Stylesheet.LIGHT.toString()));
         jsonUserPrefsStorage.saveUserPrefs(original);
         readBack = jsonUserPrefsStorage.readUserPrefs().get();
         assertEquals(original, readBack);

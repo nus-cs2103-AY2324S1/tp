@@ -90,6 +90,13 @@ public class EditMemberCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_MEMBER);
         }
 
+        Name prevName = memberToEdit.getName();
+        Name newName = editedMember.getName();
+        // If member's name is edited, the corresponding enrolment objects are edited also
+        if (!prevName.equals(newName)) {
+            model.editEnrolmentsWithMemberName(prevName, newName);
+        }
+
         model.setMember(memberToEdit, editedMember);
         model.updateFilteredMemberList(PREDICATE_SHOW_ALL_MEMBERS);
         model.updateFilteredEventList(PREDICATE_SHOW_ALL_EVENTS);
@@ -115,7 +122,8 @@ public class EditMemberCommand extends Command {
         Address updatedAddress = editMemberDescriptor.getAddress().orElse(memberToEdit.getAddress());
         Set<Tag> updatedTags = editMemberDescriptor.getTags().orElse(memberToEdit.getTags());
 
-        return new Member(updatedName, updatedGender, updatedPhone, updatedEmail, updatedAddress, updatedTags);
+        return new Member(updatedName, updatedGender, Optional.of(updatedPhone),
+                Optional.of(updatedEmail), Optional.of(updatedAddress), updatedTags);
     }
 
     @Override

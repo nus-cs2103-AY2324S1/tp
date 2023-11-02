@@ -233,7 +233,7 @@ Format: `findMember KEYWORD [MORE_KEYWORDS]`
 * More than 1 `KEYWORD` can be provided to find more members.
 * The `KEYWORD` must match minimally one of the words in the name of the member to be found, where capitalisation does not matter.
 
-* Examples:
+Examples:
 * `findMember alice` displays the member(s) whose name(s) contain 'alice'
 * `findMember alice bob charlie` displays the member(s) whose name(s) contain 'alice', 'bob' and/or 'charlie'.
 
@@ -246,7 +246,7 @@ Format: `findEvent KEYWORD [MORE_KEYWORDS]`
 * More than 1 `KEYWORD` can be provided to find more events.
 * The `KEYWORD` must match minimally one of the words in the name of the event to be found, where capitalisation does not matter.
 
-* Examples:
+Examples:
 * `findEvent party` displays the event(s) which name(s) contain 'party'
 * `findEvent party marathon gaming` displays the event(s) which name(s) contain 'party', 'marathon' and/or 'gaming'.
 
@@ -261,6 +261,22 @@ Format: `redo`
 Redoes a command that the user has undone previously.
 
 Format: `redo`
+
+### Recall previous commands
+
+CCA Leaders can quickly recall previously entered commands for convenience. Example use cases include marking attendance for a group of members, editing slightly wrong details and more.
+
+CCACommander stores almost all (see the info card below to see what commands are stored) commands entered by the user. Users can use the <kbd>↑</kbd> to <kbd>↓</kbd> key to navigate through the commands entered upon selecting the command box.
+
+Example:
+1. A CCA Leader has just marked attendance for the first member in the member list using the `editEnrolment m/1 e/1 r/Present` command.
+2. The CCA Leader can then use <kbd>↑</kbd> to get `editEnrolment m/1 e/1 r/Present` 
+3. The CCA Leader can edit the member index to get `editEnrolment m/2 e/1 r/Present` to mark the second member as present.
+
+<div markdown="block" class="alert alert-info">:information_source: CCACommander will not store 2 of the same commands if they were entered twice in a row. Likewise, "commands" containing exclusively of blank spaces will not be stored as well. 
+
+Upon entering the <kbd>⌫ Backspace</kbd> or the <kbd>↵ Enter</kbd> key, users will have to re-navigate from the most recent command as it was treated as an edit or entry of command.
+</div>
 
 ### Saving the data
 

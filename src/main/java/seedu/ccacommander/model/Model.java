@@ -87,6 +87,10 @@ public interface Model {
      */
     boolean hasEvent(Event event);
 
+    /**
+     * Deletes the given event.
+     * The event must exist in CcaCommander.
+     */
     void deleteEvent(Event target);
 
     /**
@@ -108,10 +112,51 @@ public interface Model {
     boolean hasEnrolment(Enrolment enrolment);
 
     /**
+     * Deletes the given enrolment.
+     * The enrolment must exist in CcaCommander.
+     */
+    void deleteEnrolment(Enrolment target);
+
+    /**
+     * Deletes all enrolments with matching eventName.
+     */
+    void deleteEnrolmentsWithEventName(Name eventName);
+
+    /**
+     * Deletes all enrolments with matching memberName
+     */
+    void deleteEnrolmentsWithMemberName(Name memberName);
+
+    /**
      * Creates the given event.
      * {@code enrolment} must not already exist in CcaCommander.
      */
     void createEnrolment(Enrolment enrolment);
+
+    /**
+     *  Edit the Enrolments from the enrolment list which
+     *  contain an event that have the same name as {@param prevName}
+     *  to match the {@param newName} of the event
+     * @param prevName
+     * @param newName
+     */
+    void editEnrolmentsWithEventName(Name prevName, Name newName);
+
+    /**
+     *  Edit the Enrolments from the enrolment list which
+     *  contain a Member that have the same name as {@param prevName}
+     *  to match the {@param newName} of the member
+     * @param prevName
+     * @param newName
+     */
+    void editEnrolmentsWithMemberName(Name prevName, Name newName);
+
+
+    /**
+     * Replaces the given member {@code target} with {@code editedEnrolment}.
+     * {@code target} must exist in CcaCommander.
+     */
+    void setEnrolment(Enrolment target, Enrolment editedEnrolment);
 
     /** Returns an unmodifiable view of the filtered member list */
     ObservableList<Member> getFilteredMemberList();

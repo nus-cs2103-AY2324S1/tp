@@ -324,7 +324,7 @@ The following activity diagram summarizes what happens when a user executes a ne
   * Cons: We must ensure that the implementation of each individual command are correct.
 
 
-### [Proposed] Command History
+### Command History
 
 #### Implementation
 The proposed commandHistory mechanism is facilitated by `CommandHistory`. It contains `commandHistoryList` and `currentCommandPointer`. Additionally, it implements the following operations:
@@ -333,6 +333,9 @@ The proposed commandHistory mechanism is facilitated by `CommandHistory`. It con
 * `CommandHistory#getPreviousCommand()` — Restores the previous command from its history based on `currentCommandPointer`.
 * `CommandHistory#getNextCommand()` — Restores the next command from its history based on `currentCommandPointer`.
 * `CommandHistory#addCommand()` — Add the command into the history.
+* `CommandHistory#isLastCommandEqualCommand()` — Returns if the command is equal to the last command added into the `commandHistoryList`.
+* `CommandHistory#resetPointer()` — Resets the pointer to be start from the most recent command again.
+* `CommandHistory#isLastCommand()` — Returns if `currentCommandPointer` is at the last command.
 
 
 Given below is an example usage scenario and how the commandHistory behaves at each step.
@@ -343,7 +346,9 @@ The `CommandHistory` will save the command and the `currentCommandPointer` won't
 ![CommandHistoryState0](images/CommandHistoryState0.png)
 
 Step 2. The user presses '↑' while the commandBox is selected. `CommandHistory#getPreviousCommand()` is called and the previous command is displayed in the commandBox. 
-When the previous command is entered into the commandBox, the newly edited version of command will not be stored in `CommandHistory`.
+When the previous command is entered into the commandBox, the new version of command will not be stored in `CommandHistory` after calling `CommandHistory#isLastCommandEqualCommand()`
+and it returns true.
+
 
 ![CommandHistoryState1](images/CommandHistoryState1.png)
 
@@ -367,7 +372,8 @@ index 0, pointing to the initial first command, then there are no previous comma
 The opposite occurs too when calling the next command  —  the program calls `CommandHistory#hasNextCommand()`, which shifts the `currentCommandPointer` once to the right, pointing to the previously entered command and displaying that command instead.
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** If the `commandHistoryPointer` is at index `commandHistoryList.size()`, pointing to nothing, and there are no undone CcaCommander states to restore. 
-The program uses `CommandHistory#hasNextCommand()` to check if this is the case. If so, it will not change anything.
+The program uses `CommandHistory#hasNextCommand()` to check if this is the case. If so, it will not call `CommandHistory#getNextCommand()`
+but will instead use `CommandHistory#isLastCommand()` to check if the `commandHistoryPointer` is at the last command and set the commandBox to be blank.
 
 </div>
 
@@ -382,7 +388,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 * **Alternative 1 (current choice):** Stores the list of all commands.
     * Pros: Allows user to iterate through all commands listed.
-    * Cons: May have performance issues in terms of memory usage.
+    * Cons: May have performance issues in terms of memory usage after prolonged usage.
 
 * **Alternative 2:** CommandHistory only stores previous command.
     * Pros: Will use less memory and reduces user error.
