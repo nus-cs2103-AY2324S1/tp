@@ -21,11 +21,12 @@ import networkbook.model.person.filter.SpecContainsKeyTermsPredicate;
  * Parses input arguments and creates a new FilterCommand object.
  */
 public class FilterCommandParser implements Parser<FilterCommand> {
-    private static final String CMD_STRING_FORMAT = FilterCommand.COMMAND_WORD + " "
-                + CliSyntax.PREFIX_FILTER_FIELD + " %s";
     public static final String MISSING_FIELD = "Filter command must have a /by and /with field, and both fields cannot"
             + " be empty!";
     public static final String UNKNOWN_FIELD = "Can only filter by spec, course, or grad year!";
+
+    private static final String CMD_STRING_FORMAT = FilterCommand.COMMAND_WORD + " "
+                + CliSyntax.PREFIX_FILTER_FIELD + " %s";
 
     /**
      * Parses the given string of arguments
@@ -120,7 +121,7 @@ public class FilterCommandParser implements Parser<FilterCommand> {
     public static String generateCommandString(String fieldName) {
         return String.format(CMD_STRING_FORMAT, fieldName);
     }
-    
+
     /**
      * Parses the text and create a FilterSpecCommand object.
      *
