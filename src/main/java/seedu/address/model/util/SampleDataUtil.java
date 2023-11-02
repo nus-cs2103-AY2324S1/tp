@@ -1,5 +1,6 @@
 package seedu.address.model.util;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -20,22 +21,22 @@ public class SampleDataUtil {
     public static Person[] getSampleCS2103TPersons() {
         return new Person[] {
             new Person(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
-                new ID("A1234567E"), getTagSet("G02")),
+                new ID("A1234567E"), getTagSet("G01"), new ArrayList<>()),
             new Person(new Name("Bernice Yu"), new Phone("99272758"), new Email("berniceyu@example.com"),
-                new ID("A1234567B"), getTagSet("G02")),
+                new ID("A1234567B"), getTagSet("G01"), new ArrayList<>()),
             new Person(new Name("Charlotte Oliveiro"), new Phone("93210283"), new Email("charlotte@example.com"),
-                new ID("A1234567X"), getTagSet("G02"))
+                new ID("A1234567X"), getTagSet("G01"), new ArrayList<>())
         };
     }
 
     public static Person[] getSampleCS2030SPersons() {
         return new Person[] {
             new Person(new Name("David Li"), new Phone("91031282"), new Email("lidavid@example.com"),
-                new ID("A1234567F"), getTagSet("T08")),
+                new ID("A1234567F"), getTagSet("T01"), new ArrayList<>()),
             new Person(new Name("Irfan Ibrahim"), new Phone("92492021"), new Email("irfan@example.com"),
-                new ID("A1234567K"), getTagSet("T08")),
+                new ID("A1234567K"), getTagSet("T01"), new ArrayList<>()),
             new Person(new Name("Roy Balakrishnan"), new Phone("92624417"), new Email("royb@example.com"),
-                new ID("A1234567A"), getTagSet("T08"))
+                new ID("A1234567A"), getTagSet("T01"), new ArrayList<>())
         };
     }
 

@@ -2,6 +2,9 @@ package seedu.address.model.week;
 
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 /**
  * Represents a Week in TAvigator.
  * Guarantees: immutable; week is valid as declared in {@link #isValidWeek(int)}
@@ -18,6 +21,11 @@ public class Week {
     public Week(int weekNumber) {
         checkArgument(isValidWeek(weekNumber), MESSAGE_CONSTRAINTS);
         this.weekNumber = weekNumber;
+    }
+
+    @JsonCreator
+    public static Week create(@JsonProperty("weekNumber") int weekNumber) {
+        return new Week(weekNumber);
     }
 
     /**

@@ -54,9 +54,8 @@ public class PersonTest {
      */
     @Test
     public void getAttendanceForCurrentWeek_noAttendance_emptyOptional() {
-        Person emptyAmy = new PersonBuilder(AMY).build();
-        Optional<Attendance> result = emptyAmy.getAttendanceForSpecifiedWeek(new Week(1));
-        System.out.println(result);
+        Person emptyBob = new PersonBuilder(BOB).build();
+        Optional<Attendance> result = emptyBob.getAttendanceForSpecifiedWeek(new Week(1));
         assertFalse(result.isPresent());
     }
 
@@ -128,14 +127,14 @@ public class PersonTest {
         List<Attendance> attendanceRecords2 = new ArrayList<>();
         attendanceRecords2.add(attendance2);
 
-        Person emptyAmy = new PersonBuilder(AMY).build();
-        emptyAmy.mergeAttendanceRecords(attendanceRecords1, attendanceRecords2, emptyAmy);
+        Person emptyBob = new PersonBuilder(BOB).build();
+        emptyBob.mergeAttendanceRecords(attendanceRecords1, attendanceRecords2, emptyBob);
 
         List<Attendance> expectedRecords = new ArrayList<>();
         expectedRecords.add(attendance1);
         expectedRecords.add(attendance2);
 
-        assertEquals(expectedRecords, emptyAmy.getAttendanceRecords());
+        assertEquals(expectedRecords, emptyBob.getAttendanceRecords());
     }
 
     @Test
@@ -150,7 +149,7 @@ public class PersonTest {
         List<Attendance> attendanceRecords2 = new ArrayList<>();
         attendanceRecords2.add(attendance2);
 
-        Person emptyAmy = new PersonBuilder(AMY).build();
+        Person emptyAmy = new PersonBuilder().build();
         emptyAmy.mergeAttendanceRecords(attendanceRecords1, attendanceRecords2, emptyAmy);
 
         List<Attendance> expectedRecords = new ArrayList<>();

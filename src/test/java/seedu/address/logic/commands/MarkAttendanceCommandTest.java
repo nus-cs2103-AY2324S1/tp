@@ -10,6 +10,7 @@ import static seedu.address.logic.commands.MarkAttendanceCommand.MESSAGE_PERSON_
 import static seedu.address.logic.commands.MarkAttendanceCommand.MESSAGE_PRESENT;
 import static seedu.address.logic.commands.MarkAttendanceCommand.MESSAGE_SUCCESS;
 import static seedu.address.logic.commands.MarkAttendanceCommand.MESSAGE_UPDATED_SUCCESS;
+import static seedu.address.testutil.TypicalPersons.BOB;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBookManager;
 
 import java.util.List;
@@ -40,6 +41,7 @@ public class MarkAttendanceCommandTest {
     @Test
     public void execute_marksAttendanceAsPresentWithValidPersonName_success() {
         Person amy = new PersonBuilder().build();
+
         model.addPerson(amy);
         MarkAttendanceCommand markAttendanceCommand = new MarkAttendanceCommand(List.of("Amy Bee"), true,
                 new Week(1), null);
@@ -47,9 +49,8 @@ public class MarkAttendanceCommandTest {
         String expectedMessage = String.format(MESSAGE_SUCCESS + "%s\n" + "%s" + MESSAGE_PRESENT + "1\n",
                 amy.getName(), amy.getName());
 
-        Person expectedAmy = new PersonBuilder(amy)
-                .withAttendance(new Attendance(new Week(1), true, null))
-                .build();
+        Person expectedAmy = new PersonBuilder(amy).build();
+        expectedAmy.addAttendance(new Attendance(new Week(1), true, null));
         expectedModel.addPerson(expectedAmy);
 
         assertCommandSuccess(markAttendanceCommand, model, expectedMessage, expectedModel);
@@ -68,9 +69,8 @@ public class MarkAttendanceCommandTest {
         String expectedMessage = String.format(MESSAGE_SUCCESS + "%s\n" + "%s" + MESSAGE_ABSENT + "1\nReason: %s\n",
                 amy.getName(), amy.getName(), "Late");
 
-        Person expectedAmy = new PersonBuilder(amy)
-                .withAttendance(new Attendance(new Week(1), true, "Late"))
-                .build();
+        Person expectedAmy = new PersonBuilder(amy).build();
+        expectedAmy.addAttendance(new Attendance(new Week(1), true, "Late"));
         expectedModel.addPerson(expectedAmy);
 
         assertCommandSuccess(markAttendanceCommand, model, expectedMessage, expectedModel);
@@ -83,14 +83,13 @@ public class MarkAttendanceCommandTest {
     public void execute_marksAttendanceAsPresentWithValidPersonID_success() {
         Person amy = new PersonBuilder().build();
         model.addPerson(amy);
-        MarkAttendanceCommand markAttendanceCommand = new MarkAttendanceCommand(List.of("A1234567E"), true,
+        MarkAttendanceCommand markAttendanceCommand = new MarkAttendanceCommand(List.of("A1234567A"), true,
                 new Week(1), null);
         String expectedMessage = String.format(MESSAGE_SUCCESS + "%s\n" + "%s" + MESSAGE_PRESENT + "1\n",
                 amy.getName(), amy.getName());
 
-        Person expectedAmy = new PersonBuilder(amy)
-                .withAttendance(new Attendance(new Week(1), true, null))
-                .build();
+        Person expectedAmy = new PersonBuilder(amy).build();
+        expectedAmy.addAttendance(new Attendance(new Week(1), true, null));
         expectedModel.addPerson(expectedAmy);
 
         assertCommandSuccess(markAttendanceCommand, model, expectedMessage, expectedModel);
@@ -103,14 +102,13 @@ public class MarkAttendanceCommandTest {
     public void execute_marksAttendanceAsAbsentWithValidPersonID_success() {
         Person amy = new PersonBuilder().build();
         model.addPerson(amy);
-        MarkAttendanceCommand markAttendanceCommand = new MarkAttendanceCommand(List.of("A1234567E"), false,
+        MarkAttendanceCommand markAttendanceCommand = new MarkAttendanceCommand(List.of("A1234567A"), false,
                 new Week(1), "Late");
         String expectedMessage = String.format(MESSAGE_SUCCESS + "%s\n" + "%s" + MESSAGE_ABSENT + "1\nReason: %s\n",
                 amy.getName(), amy.getName(), "Late");
 
-        Person expectedAmy = new PersonBuilder(amy)
-                .withAttendance(new Attendance(new Week(1), true, "Late"))
-                .build();
+        Person expectedAmy = new PersonBuilder(amy).build();
+        expectedAmy.addAttendance(new Attendance(new Week(1), true, "Late"));
         expectedModel.addPerson(expectedAmy);
 
         assertCommandSuccess(markAttendanceCommand, model, expectedMessage, expectedModel);
@@ -149,24 +147,22 @@ public class MarkAttendanceCommandTest {
         StringBuilder expectedMessage = new StringBuilder();
 
         Person amy = new PersonBuilder().build();
-        Person bob = new PersonBuilder().withName("Bob").withId("A0000123Z").build();
+        Person bob = new PersonBuilder(BOB).build();
         model.addPerson(amy);
         model.addPerson(bob);
 
-        MarkAttendanceCommand markAttendanceCommand = new MarkAttendanceCommand(List.of("Amy Bee", "Bob"), true,
-                new Week(1), null);
+        MarkAttendanceCommand markAttendanceCommand = new MarkAttendanceCommand(List.of("Amy Bee", "Bob Choo"),
+                true, new Week(1), null);
 
         expectedMessage.append(String.format(MESSAGE_SUCCESS + "%s\n" + "%s" + MESSAGE_PRESENT + "1\n",
                 amy.getName(), amy.getName()));
         expectedMessage.append(String.format(MESSAGE_SUCCESS + "%s\n" + "%s" + MESSAGE_PRESENT + "1\n",
                 bob.getName(), bob.getName()));
 
-        Person expectedAmy = new PersonBuilder(amy)
-                .withAttendance(new Attendance(new Week(1), true, null))
-                .build();
-        Person expectedBob = new PersonBuilder(bob)
-                .withAttendance(new Attendance(new Week(1), true, null))
-                .build();
+        Person expectedAmy = new PersonBuilder(amy).build();
+        expectedAmy.addAttendance(new Attendance(new Week(1), true, null));
+        Person expectedBob = new PersonBuilder(bob).build();
+        expectedBob.addAttendance(new Attendance(new Week(1), true, null));
 
         expectedModel.addPerson(expectedAmy);
         expectedModel.addPerson(expectedBob);
@@ -183,24 +179,22 @@ public class MarkAttendanceCommandTest {
         StringBuilder expectedMessage = new StringBuilder();
 
         Person amy = new PersonBuilder().build();
-        Person bob = new PersonBuilder().withName("Bob").withId("A0000123Z").build();
+        Person bob = new PersonBuilder(BOB).build();
         model.addPerson(amy);
         model.addPerson(bob);
 
-        MarkAttendanceCommand markAttendanceCommand = new MarkAttendanceCommand(List.of("Amy Bee", "Bob"), false,
-                new Week(1), "Late");
+        MarkAttendanceCommand markAttendanceCommand = new MarkAttendanceCommand(List.of("Amy Bee", "Bob Choo"),
+                false, new Week(1), "Late");
 
         expectedMessage.append(String.format(MESSAGE_SUCCESS + "%s\n" + "%s" + MESSAGE_ABSENT + "1\nReason: %s\n",
                 amy.getName(), amy.getName(), "Late"));
         expectedMessage.append(String.format(MESSAGE_SUCCESS + "%s\n" + "%s" + MESSAGE_ABSENT + "1\nReason: %s\n",
                 bob.getName(), bob.getName(), "Late"));
 
-        Person expectedAmy = new PersonBuilder(amy)
-                .withAttendance(new Attendance(new Week(1), true, "Late"))
-                .build();
-        Person expectedBob = new PersonBuilder(bob)
-                .withAttendance(new Attendance(new Week(1), true, "Late"))
-                .build();
+        Person expectedAmy = new PersonBuilder(amy).build();
+        expectedAmy.addAttendance(new Attendance(new Week(1), false, "Late"));
+        Person expectedBob = new PersonBuilder(bob).build();
+        expectedBob.addAttendance(new Attendance(new Week(1), true, "Late"));
 
         expectedModel.addPerson(expectedAmy);
         expectedModel.addPerson(expectedBob);
@@ -217,24 +211,22 @@ public class MarkAttendanceCommandTest {
         StringBuilder expectedMessage = new StringBuilder();
 
         Person amy = new PersonBuilder().build();
-        Person bob = new PersonBuilder().withName("Bob").withId("A0000123Z").build();
+        Person bob = new PersonBuilder(BOB).build();
         model.addPerson(amy);
         model.addPerson(bob);
 
-        MarkAttendanceCommand markAttendanceCommand = new MarkAttendanceCommand(List.of("A1234567E", "A0000123Z"), true,
-                new Week(1), null);
+        MarkAttendanceCommand markAttendanceCommand = new MarkAttendanceCommand(List.of("A1234567A", "A2345678B"),
+                true, new Week(1), null);
 
         expectedMessage.append(String.format(MESSAGE_SUCCESS + "%s\n" + "%s" + MESSAGE_PRESENT + "1\n",
                 amy.getName(), amy.getName()));
         expectedMessage.append(String.format(MESSAGE_SUCCESS + "%s\n" + "%s" + MESSAGE_PRESENT + "1\n",
                 bob.getName(), bob.getName()));
 
-        Person expectedAmy = new PersonBuilder(amy)
-                .withAttendance(new Attendance(new Week(1), true, null))
-                .build();
-        Person expectedBob = new PersonBuilder(bob)
-                .withAttendance(new Attendance(new Week(1), true, null))
-                .build();
+        Person expectedAmy = new PersonBuilder(amy).build();
+        expectedAmy.addAttendance(new Attendance(new Week(1), true, null));
+        Person expectedBob = new PersonBuilder(bob).build();
+        expectedBob.addAttendance(new Attendance(new Week(1), true, null));
 
         expectedModel.addPerson(expectedAmy);
         expectedModel.addPerson(expectedBob);
@@ -251,11 +243,11 @@ public class MarkAttendanceCommandTest {
         StringBuilder expectedMessage = new StringBuilder();
 
         Person amy = new PersonBuilder().build();
-        Person bob = new PersonBuilder().withName("Bob").withId("A0000123Z").build();
+        Person bob = new PersonBuilder(BOB).build();
         model.addPerson(amy);
         model.addPerson(bob);
 
-        MarkAttendanceCommand markAttendanceCommand = new MarkAttendanceCommand(List.of("A1234567E", "A0000123Z"),
+        MarkAttendanceCommand markAttendanceCommand = new MarkAttendanceCommand(List.of("A1234567A", "A2345678B"),
                 false, new Week(1), "Late");
 
         expectedMessage.append(String.format(MESSAGE_SUCCESS + "%s\n" + "%s" + MESSAGE_ABSENT + "1\nReason: %s\n",
@@ -263,12 +255,10 @@ public class MarkAttendanceCommandTest {
         expectedMessage.append(String.format(MESSAGE_SUCCESS + "%s\n" + "%s" + MESSAGE_ABSENT + "1\nReason: %s\n",
                 bob.getName(), bob.getName(), "Late"));
 
-        Person expectedAmy = new PersonBuilder(amy)
-                .withAttendance(new Attendance(new Week(1), false, "Late"))
-                .build();
-        Person expectedBob = new PersonBuilder(bob)
-                .withAttendance(new Attendance(new Week(1), false, "Late"))
-                .build();
+        Person expectedAmy = new PersonBuilder(amy).build();
+        expectedAmy.addAttendance(new Attendance(new Week(1), false, "Late"));
+        Person expectedBob = new PersonBuilder(bob).build();
+        expectedBob.addAttendance(new Attendance(new Week(1), false, "Late"));
 
         expectedModel.addPerson(expectedAmy);
         expectedModel.addPerson(expectedBob);
@@ -285,7 +275,7 @@ public class MarkAttendanceCommandTest {
         StringBuilder expectedMessage = new StringBuilder();
 
         Person amy = new PersonBuilder().build();
-        Person bob = new PersonBuilder().withName("Bob").withId("A0000123Z").build();
+        Person bob = new PersonBuilder(BOB).build();
         model.addPerson(amy);
         model.addPerson(bob);
 
@@ -296,9 +286,8 @@ public class MarkAttendanceCommandTest {
                 amy.getName(), amy.getName()));
         expectedMessage.append(String.format(MESSAGE_PERSON_NOT_FOUND_MULTIPLE + "%s\n", "Zac"));
 
-        Person expectedAmy = new PersonBuilder(amy)
-                .withAttendance(new Attendance(new Week(1), true, null))
-                .build();
+        Person expectedAmy = new PersonBuilder(amy).build();
+        expectedAmy.addAttendance(new Attendance(new Week(1), true, null));
         Person expectedBob = new PersonBuilder(bob).build();
 
         expectedModel.addPerson(expectedAmy);
@@ -316,20 +305,19 @@ public class MarkAttendanceCommandTest {
         StringBuilder expectedMessage = new StringBuilder();
 
         Person amy = new PersonBuilder().build();
-        Person bob = new PersonBuilder().withName("Bob").withId("A0000123Z").build();
+        Person bob = new PersonBuilder(BOB).build();
         model.addPerson(amy);
         model.addPerson(bob);
 
-        MarkAttendanceCommand markAttendanceCommand = new MarkAttendanceCommand(List.of("A1234567E", "AA000123Z"), true,
+        MarkAttendanceCommand markAttendanceCommand = new MarkAttendanceCommand(List.of("A1234567A", "A0000000Z"), true,
                 new Week(1), null);
 
         expectedMessage.append(String.format(MESSAGE_SUCCESS + "%s\n" + "%s" + MESSAGE_PRESENT + "1\n",
                 amy.getName(), amy.getName()));
-        expectedMessage.append(String.format(MESSAGE_PERSON_NOT_FOUND_MULTIPLE + "%s\n", "AA000123Z"));
+        expectedMessage.append(String.format(MESSAGE_PERSON_NOT_FOUND_MULTIPLE + "%s\n", "A0000000Z"));
 
-        Person expectedAmy = new PersonBuilder(amy)
-                .withAttendance(new Attendance(new Week(1), true, null))
-                .build();
+        Person expectedAmy = new PersonBuilder(amy).build();
+        expectedAmy.addAttendance(new Attendance(new Week(1), true, null));
         Person expectedBob = new PersonBuilder(bob).build();
 
         expectedModel.addPerson(expectedAmy);
@@ -348,7 +336,7 @@ public class MarkAttendanceCommandTest {
         Week testWeek = new Week(1);
         model.addPerson(amy);
         amy.addAttendance(new Attendance(testWeek, false, "Late"));
-        MarkAttendanceCommand markAttendanceCommand = new MarkAttendanceCommand(List.of("A1234567E"), true,
+        MarkAttendanceCommand markAttendanceCommand = new MarkAttendanceCommand(List.of("A1234567A"), true,
                 testWeek, null);
 
         String expectedMessage = String.format(MESSAGE_UPDATED_SUCCESS + "%s\n%s" + MESSAGE_PRESENT + "%d\n",
@@ -369,7 +357,7 @@ public class MarkAttendanceCommandTest {
         Week testWeek = new Week(1);
         model.addPerson(amy);
         amy.addAttendance(new Attendance(testWeek, true, null));
-        MarkAttendanceCommand markAttendanceCommand = new MarkAttendanceCommand(List.of("A1234567E"), false,
+        MarkAttendanceCommand markAttendanceCommand = new MarkAttendanceCommand(List.of("A1234567A"), false,
                 testWeek, "Late");
 
         String expectedMessage = String.format(MESSAGE_UPDATED_SUCCESS + "%s\n" + "%s" + MESSAGE_ABSENT
@@ -389,13 +377,14 @@ public class MarkAttendanceCommandTest {
         Person amy = new PersonBuilder().build();
         Week testWeek = new Week(1);
         model.addPerson(amy);
-        MarkAttendanceCommand markAttendanceCommand = new MarkAttendanceCommand(List.of("A1234567E"), true,
+        MarkAttendanceCommand markAttendanceCommand = new MarkAttendanceCommand(List.of("A1234567A"), true,
             testWeek, null);
 
         String expectedMessage = String.format(MESSAGE_SUCCESS + "%s\n" + "%s" + MESSAGE_PRESENT + "1\n",
                 amy.getName(), amy.getName());
 
-        Person expectedAmy = new PersonBuilder(amy).withAttendance(new Attendance(testWeek, true, null)).build();
+        Person expectedAmy = new PersonBuilder(amy).build();
+        expectedAmy.addAttendance(new Attendance(testWeek, true, null));
         expectedModel.addPerson(expectedAmy);
         assertCommandSuccess(markAttendanceCommand, model, expectedMessage, expectedModel);
     }

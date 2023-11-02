@@ -40,7 +40,8 @@ public class ListStudentsCommandTest {
 
     @Test
     public void execute_listStudents_success() {
-        CommandResult expectedCommandResult = new CommandResult(MESSAGE_SUCCESS);
+        CommandResult expectedCommandResult = new CommandResult(String.format(
+                MESSAGE_SUCCESS, expectedModel.getAddressBook().getCourseCode()));
         assertCommandSuccess(new ListStudentsCommand(), model, expectedCommandResult, expectedModel);
     }
 }

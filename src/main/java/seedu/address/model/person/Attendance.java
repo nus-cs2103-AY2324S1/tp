@@ -2,6 +2,9 @@ package seedu.address.model.person;
 
 import java.util.Objects;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import seedu.address.model.week.Week;
 
 /**
@@ -28,6 +31,12 @@ public class Attendance {
         this.reason = reason;
     }
 
+    @JsonCreator
+    public static Attendance create(@JsonProperty("week") Week week, @JsonProperty("isPresent") boolean isPresent,
+                                    @JsonProperty("reason") String reason) {
+        return new Attendance(week, isPresent, reason);
+    }
+
     /**
      * Returns the reason for student's absence.
      *
@@ -44,10 +53,6 @@ public class Attendance {
      */
     public Week getWeek() {
         return week;
-    }
-
-    public boolean isSameWeek(Attendance a) {
-        return this.week.equals(a.week);
     }
 
     /**

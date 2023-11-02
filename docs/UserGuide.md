@@ -76,7 +76,7 @@ solution to manage your student details, including attendance records and assign
 
 ### Viewing help : `help`
 
-Shows a message explaning how to access the help page.
+Shows a message explaining how to access the help page.
 
 ![help message](images/helpMessage.png)
 
@@ -86,7 +86,7 @@ Format: `help`
 
 Creates a new addressbook.
 
-Format: `course create coursetg/COURSECODE`
+Format: `course create course/COURSECODE`
 
 * Creates a new addressbook with course code `COURSECODE`
 * `COURSECODE` should be a string made up of alphabetical characters and numbers, with no special characters.
@@ -94,13 +94,13 @@ Format: `course create coursetg/COURSECODE`
 * `COURSECODE` address book must not exist.
 
 Example:
-* `course create coursetg/CS2103T` creates a new addressbook with course code CS2103T.
+* `course create course/CS2103T` creates a new addressbook with course code CS2103T.
 
 ### Deleting an addressbook: `course delete`
 
 Delete an addressbook.
 
-Format: `course delete coursetg/COURSECODE`
+Format: `course delete course/COURSECODE`
 
 * Deletes the addressbook with course code `COURSECODE`
 * `COURSECODE` should be a string made up of alphabetical characters and numbers, with no special characters.
@@ -108,13 +108,13 @@ Format: `course delete coursetg/COURSECODE`
 * `COURSECODE` address book must exist.
 
 Example:
-* `course delete coursetg/CS2103T` deletes the addressbook with course code CS2103T.
+* `course delete course/CS2103T` deletes the addressbook with course code CS2103T.
 
 ### Switching an addressbook: `course switch`
 
 Switches the active addressbook.
 
-Format: `course switch coursetg/COURSECODE`
+Format: `course switch course/COURSECODE`
 
 * Switches to the addressbook with course code `COURSECODE`
 * `COURSECODE` should be a string made up of alphabetical characters and numbers, with no special characters.
@@ -122,13 +122,13 @@ Format: `course switch coursetg/COURSECODE`
 * `COURSECODE` address book must exist.
 
 Example:
-* `course switch coursetg/CS2103T` switches to the addressbook with course code CS2103T.
+* `course switch course/CS2103T` switches to the addressbook with course code CS2103T.
 
 ### Editing an addressbook: `course edit`
 
 Edits the active addressbook course code.
 
-Format: `course edit coursetg/COURSECODE`
+Format: `course edit course/COURSECODE`
 
 * Changes the course code of active addressbook to `COURSECODE`
 * `COURSECODE` should be a string made up of alphabetical characters and numbers, with no special characters.
@@ -136,15 +136,15 @@ Format: `course edit coursetg/COURSECODE`
 * `COURSECODE` address book must not exist.
 
 Example:
-* `course edit coursetg/CS2103T` changes the active addressbook's course code to CS2103T.
+* `course edit course/CS2103T` changes the active addressbook's course code to CS2103T.
 
 ### Adding a new contact: `add`
 
-Creates a new contact with the specified name and course code.
+Creates a new contact in the course with the specified name and details.
 
 ![add contact](images/addContact.png)
 
-Format: `add n/STUDENT_NAME p/PHONE_NUMBER e/EMAIL id/STUDENT_ID [t/COURSE_CODE TUTORIAL_GROUP]…`
+Format: `add n/STUDENT_NAME p/PHONE_NUMBER e/EMAIL id/STUDENT_ID [t/TUTORIAL_GROUP]…`
 
 * `STUDENT_NAME` should be a string made up of alphabetical characters, with no numbers or special characters.
 * `PHONE_NUMBER` should be a string made up of numbers
@@ -160,7 +160,7 @@ Edits the contact details.
 
 ![edit contact](images/editContact.png)
 
-Format: `edit INDEX [n/STUDENT_NAME] [p/PHONE] [e/EMAIL] [id/STUDENT_ID] [t/COURSE_CODE TUTORIAL_GROUP]...`
+Format: `edit INDEX [n/STUDENT_NAME] [p/PHONE] [e/EMAIL] [id/STUDENT_ID] [t/TUTORIAL_GROUP]...`
 
 * Edits the person at the specified INDEX. The index refers to the index number shown in the displayed person list. The index must be a positive integer 1, 2, 3, …
 * At least one of the optional fields must be provided.
@@ -170,7 +170,7 @@ Format: `edit INDEX [n/STUDENT_NAME] [p/PHONE] [e/EMAIL] [id/STUDENT_ID] [t/COUR
 
 Examples:
 *  `edit 1 n/Tan Liyan` Edits the name of the first person to be Tan Liyan.
-*  `edit 2 p/92345678 t/` Edits the phone number of the second person and removes all tags.
+*  `edit 2 p/92345678 t/` Edits the phone number of the second person and removes all tutorial group tags from contact.
 
 ### Marking attendance of student: `mark`
 
@@ -200,12 +200,13 @@ Shows a summary of attendance records including list of absentees.
 ![list attendance](images/listAttendance.png)
 
 Format: `list attendance w/WEEKNUMBER [tg/TUTORIALGROUPID]`
-*  Shows a list of absentees and summary of the attendance records of all students or students corresponding to the specified tutorial group for the specified week number.
+* If tutorial group is specified, shows a list of absentees and summary of the attendance of students corresponding to the specified tutorial group in the course for the specified week number.
+* If tutorial group is not specified, shows a list of absentees and summary of the attendance of all students in the course for the specified week number.
 * `TUTORIALGROUPID` is optional.
 
 Examples:
-*  `list attendance w/1` Shows a summary of attendance records of all students for Week 1.
-*  `list attendance w/3 tg/G01` Shows a summary of attendance records of the students in the tutorial group G01 for Week 3.
+* `list attendance w/1` Shows a list of absentees and a summary of attendance records of all students in the course for Week 1.
+* `list attendance w/3 tg/G01` Shows a list of absentees and a summary of attendance records of the students in the tutorial group G01 in the course for Week 3.
 
 ### Searching for student's contact via keyword : `find`
 
@@ -229,10 +230,10 @@ Shows a list of students.
 ![list students](images/listStudents.png)
 
 Format: `list students`
-*  Shows a list of all students.
+*  Shows a list of all students in the course.
 
 
-### Deleting a person : `delete`
+### Deleting a student : `delete`
 
 Deletes the specified person from TAvigator.
 
@@ -248,20 +249,21 @@ Examples:
 * `list students` followed by `delete 2` deletes the 2nd person in TAvigator.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
-### Deleting all students : `delete all`
+### Deleting multiple students : `delete all`
 
-Deletes all students from current address book or the specified tutorial group in the current address book.
+Deletes all students from the course or all students from the specified tutorial group in the course.
 
 ![delete all](images/deleteAll.png)
 
 Format: `delete all [tg/TUTORIALGROUPID]`
 
-* Deletes all students or the students from the specified tutorial group.
+* If tutorial group is specified, deletes all students corresponding to the specified tutorial group in the course.
+* If tutorial group is not specified, deletes all students in the course.
 * `TUTORIALGROUPID` is optional.
 
 Examples:
-* `delete all` deletes all students from the current address book.
-* `delete all tg/G02` deletes all students from tutorial group G02.
+* `delete all` deletes all students from the course.
+* `delete all tg/G02` deletes all students from tutorial group G02 in the course.
 
 ### Merging two students : `merge`
 
@@ -269,7 +271,7 @@ Merges two students in the current address book.
 
 ![merge](images/mergeCommand.png)
 
-Format: `merge [PRIMARY_INDEX] [SECONDARY_INDEX]`
+Format: `merge PRIMARY_INDEX SECONDARY_INDEX`
 
 * Information of the primary student is retained.
 * If any information fields of the primary student are empty, they are filled with information of the secondary student.
@@ -278,6 +280,19 @@ Format: `merge [PRIMARY_INDEX] [SECONDARY_INDEX]`
 Examples:
 * `merge 1 2` merges the information of the first two displayed students.
 
+### Viewing detailed attendance records : `view`
+
+Displays the detailed attendance record of the specified student.
+
+![view](images/viewCommand.png)
+
+Format: `view INDEX`
+
+* If the student has no attendance records, it will return a message indicating that the student has no attendance records.
+* If the student has attendance records, the attendance record will be shown week by week with the reason being provided for absences.
+
+Examples:
+* `view 1` views the attendance record for the student with index 1.
 
 ### Clearing all entries : `clear`
 
@@ -326,16 +341,17 @@ _Details coming soon ..._
 
 ## Command summary
 
-| Action     | Format, Examples                                                                                                                                                            |
-|------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**    | `add n/STUDENT_NAME p/PHONE_NUMBER e/EMAIL id/STUDENT_ID [t/COURSE_CODE TUTORIAL_GROUP]…` <br> e.g., `add n/Fu Yiqiao p/91234567 e/fyq@gmail.com id/A1234567E t/CS2103T G2` |
-| **Clear**  | `clear`                                                                                                                                                                     |
-| **Delete** | `delete all [tg/TUTORIALGROUPID]` `delete INDEX` <br> e.g., `delete all tg/G10` `delete 3`                                                                                  |
-| **Edit**   | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [id/STUDENT_ID] [t/COURSECODE TUTORIALGROUPID]...`<br> e.g., `edit 1 n/Tan Liyan` `edit 2 p/92345678 t/`                           |
-| **Exit**   | `exit`                                                                                                                                                                      |
-| **Course** | `course [create/delete/switch/clear] `coursetg/COURSECODE`                                                                                                      |
-| **Find**   | `find n/STUDENT_NAME [STUDENT_NAME]… \                                                                                                                                      | id/STUDENT_ID [STUDENT_ID]…`<br> e.g., `find n/Anthony Yiqiao`                                                                                                          |
-| **List**   | `list attendance w/WEEKNUMBER [tg/TUTORIALGROUPID]` `list students`                                                                                                         |                                                           |
-| **Help**   | `help`                                                                                                                                                                      |
-| **Mark**   | `mark n/STUDENT_NAME[, STUDENT_NAME]… \                                                                                                                                     | id/STUDENT_ID[, STUDENT_ID]… a/ATTENDANCE w/WEEKNUMBER [r/REASON_OF_ABSENCE]`<br/> e.g., `mark id/A0123456E, A0123457E a/1 w/1` `mark id/A0123456E, A0123457E a/1 w/1` |
-| **merge**  | `merge [PRIMARY_INDEX] [SECONDARY_INDEX]`                                                                                                                                   |
+| Action     | Format, Examples                                                                                                                                                                                              |
+|------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**    | `add n/STUDENT_NAME p/PHONE_NUMBER e/EMAIL id/STUDENT_ID [t/TUTORIAL_GROUP]…` <br> e.g., `add n/Fu Yiqiao p/91234567 e/fyq@gmail.com id/A1234567E t/G2`                                                       |
+| **Clear**  | `clear`                                                                                                                                                                                                       |
+| **Delete** | `delete all [tg/TUTORIALGROUPID]` `delete INDEX` <br> e.g., `delete all tg/G10` `delete 3`                                                                                                                    |
+| **Edit**   | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [id/STUDENT_ID] [t/TUTORIALGROUPID]...`<br> e.g., `edit 1 n/Tan Liyan` `edit 2 p/92345678 t/`                                                                        |
+| **Exit**   | `exit`                                                                                                                                                                                                        |
+| **Course** | `course [create/delete/switch/clear] course/COURSECODE`<br/> e.g., `course create course/CS2103T`                                                                                          |
+| **Find**   | `find n/STUDENT_NAME [STUDENT_NAME]… / id/STUDENT_ID [STUDENT_ID]…` <br/> e.g., `find n/Anthony Yiqiao`                                                                                                       |                                                                                                   
+| **List**   | `list attendance w/WEEKNUMBER [tg/TUTORIALGROUPID]`<br/> e.g., `list students`                                                                                                                                |                                                          
+| **Help**   | `help`                                                                                                                                                                                                        |
+| **Mark**   | `mark n/STUDENT_NAME[, STUDENT_NAME]… / id/STUDENT_ID[, STUDENT_ID]… a/ATTENDANCE w/WEEKNUMBER [r/REASON_OF_ABSENCE]` <br/> e.g., `mark n/Zong Jin, Fu Yiqiao a/1 w/1` `mark id/A0123456E, A0123457E a/1 w/1` |
+| **Merge**  | `merge [PRIMARY_INDEX] [SECONDARY_INDEX]` <br/> e.g., `merge 1 2`                                                                                                                                             |
+| **View**   | `view INDEX` <br/> e.g., `view 1`                                                                                                                                                                             |

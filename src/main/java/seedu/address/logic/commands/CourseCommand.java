@@ -1,7 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_COURSETUTORIAL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_COURSE;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.ParserUtil.CourseOperation;
@@ -17,10 +17,10 @@ public class CourseCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Create, delete, switch or edit address books\n"
             + "Parameters: OPERATION (create, delete, switch or edit) \n"
-            + PREFIX_COURSETUTORIAL + "COURSE_CODE \n"
+            + PREFIX_COURSE + "COURSE_CODE \n"
             + "Example: " + COMMAND_WORD + " "
-            + "add "
-            + PREFIX_COURSETUTORIAL + "CS2103T ";
+            + "create "
+            + PREFIX_COURSE + "CS2103T ";
 
     public static final String MESSAGE_CREATE_SUCCESS = "Created %1$s address book.";
     public static final String MESSAGE_DELETE_SUCCESS = "Deleted %1$s address book.";

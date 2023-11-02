@@ -109,19 +109,19 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommand_course() throws Exception {
-        assertTrue(parser.parseCommand(
-                CourseCommand.COMMAND_WORD + " create coursetg/CS2103T") instanceof CourseCommand);
-        assertTrue(parser.parseCommand(
-                CourseCommand.COMMAND_WORD + " delete coursetg/CS2103T") instanceof CourseCommand);
-        assertTrue(parser.parseCommand(
-                CourseCommand.COMMAND_WORD + " switch coursetg/CS2103T") instanceof CourseCommand);
-    }
-
-    @Test
     public void parseCommand_merge() throws Exception {
         assertTrue(parser.parseCommand(
                 MergeCommand.COMMAND_WORD + " 1 2") instanceof MergeCommand);
+    }
+
+    @Test
+    public void parseCommand_course() throws Exception {
+        assertTrue(parser.parseCommand(
+                CourseCommand.COMMAND_WORD + " create course/CS2103T") instanceof CourseCommand);
+        assertTrue(parser.parseCommand(
+                CourseCommand.COMMAND_WORD + " delete course/CS2103T") instanceof CourseCommand);
+        assertTrue(parser.parseCommand(
+                CourseCommand.COMMAND_WORD + " switch course/CS2103T") instanceof CourseCommand);
     }
 
     @Test

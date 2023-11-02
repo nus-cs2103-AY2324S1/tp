@@ -10,6 +10,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.person.Attendance;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.ID;
 import seedu.address.model.person.Name;
@@ -29,6 +30,7 @@ class JsonAdaptedPerson {
     private final String email;
     private final String id;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
+    private final List<Attendance> attendances = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
@@ -36,13 +38,17 @@ class JsonAdaptedPerson {
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
                              @JsonProperty("email") String email, @JsonProperty("id") String id,
-                             @JsonProperty("tags") List<JsonAdaptedTag> tags) {
+                             @JsonProperty("tags") List<JsonAdaptedTag> tags,
+                             @JsonProperty("attendances") List<Attendance> attendances) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.id = id;
         if (tags != null) {
             this.tags.addAll(tags);
+        }
+        if (!attendances.isEmpty()) {
+            this.attendances.addAll(attendances);
         }
     }
 
@@ -57,6 +63,8 @@ class JsonAdaptedPerson {
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
+        attendances.clear();
+        attendances.addAll(source.getAttendanceRecords());
     }
 
     /**
@@ -104,7 +112,10 @@ class JsonAdaptedPerson {
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
 
-        return new Person(modelName, modelPhone, modelEmail, modelId, modelTags);
+        final List<Attendance> modelAttendances = new ArrayList<>();
+        modelAttendances.addAll(attendances);
+
+        return new Person(modelName, modelPhone, modelEmail, modelId, modelTags, modelAttendances);
     }
 
 }

@@ -13,7 +13,7 @@ public class ListStudentsCommand extends ListCommand {
     public static final String MESSAGE_USAGE = "list " + COMMAND_WORD
             + ": Lists all students.\n"
             + "Example: list " + COMMAND_WORD;
-    public static final String MESSAGE_SUCCESS = "Listed all students!";
+    public static final String MESSAGE_SUCCESS = "Listed all students from %s.";
 
     @Override
     public boolean equals(Object other) {
@@ -24,6 +24,6 @@ public class ListStudentsCommand extends ListCommand {
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.clearFilters();
-        return new CommandResult(MESSAGE_SUCCESS);
+        return new CommandResult(String.format(MESSAGE_SUCCESS, model.getAddressBook().getCourseCode()));
     }
 }

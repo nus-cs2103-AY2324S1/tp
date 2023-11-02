@@ -14,13 +14,13 @@ public class CourseCommandParserTest {
 
     @Test
     public void parse_validArgs_returnsCourseCommand() {
-        assertParseSuccess(parser, "create coursetg/CS2030S",
+        assertParseSuccess(parser, "create course/CS2030S",
                 new CourseCommand(CourseOperation.CREATE, "CS2030S"));
-        assertParseSuccess(parser, "switch coursetg/CS2030S",
+        assertParseSuccess(parser, "switch course/CS2030S",
                 new CourseCommand(CourseOperation.SWITCH, "CS2030S"));
-        assertParseSuccess(parser, "delete coursetg/CS2030S",
+        assertParseSuccess(parser, "delete course/CS2030S",
                 new CourseCommand(CourseOperation.DELETE, "CS2030S"));
-        assertParseSuccess(parser, "edit coursetg/CS2030S",
+        assertParseSuccess(parser, "edit course/CS2030S",
                 new CourseCommand(CourseOperation.EDIT, "CS2030S"));
     }
 
