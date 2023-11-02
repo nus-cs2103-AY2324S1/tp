@@ -153,24 +153,34 @@ public class MainApp extends Application {
                 logger.info("Creating new preference file " + prefsFilePath);
             }
             initializedPrefs = prefsOptional.orElse(new UserPrefs());
-            if (initializedPrefs.getAssignmentCount() < 1 || initializedPrefs.getTutorialCount() < 1) {
-                logger.warning("Preference file at " + prefsFilePath + " could not be loaded."
-                        + " Because of Illegal values. Using default preferences.");
-                initializedPrefs = new UserPrefs();
-            }
         } catch (DataLoadingException e) {
             logger.warning("Preference file at " + prefsFilePath + " could not be loaded."
                     + " Using default preferences.");
             initializedPrefs = new UserPrefs();
         }
 
-        //Update prefs file in case it was missing to begin with or there are new/unused fields
+        // Check if the assignment count and tutorial count are valid
+        if (initializedPrefs.getAssignmentCount() < 0 || initializedPrefs.getTutorialCount() < 0) {
+            logger.warning("Preference file at " + prefsFilePath + " could not be loaded."
+                    + " Because of Illegal values. Using default preferences.");
+            initializedPrefs = new UserPrefs();
+        }
+        // Check if the theme is valid
+        if (!initializedPrefs.getTheme().equalsIgnoreCase("dark")
+                && !initializedPrefs.getTheme().equalsIgnoreCase("light")) {
+            logger.warning("Preference file at " + prefsFilePath + " could not be loaded."
+                    + " Because of Illegal values. Using default preferences.");
+            initializedPrefs = new UserPrefs();
+        }
+
+        // Update prefs file in case it was missing to begin with or there are new/unused fields
         try {
             storage.saveUserPrefs(initializedPrefs);
         } catch (IOException e) {
             logger.warning("Failed to save config file : " + StringUtil.getDetails(e));
         }
 
+        // Set the tutorial count and assignment count
         logger.info("Set the tutorial count to " + initializedPrefs.getTutorialCount());
         logger.info("Set the assignment count to " + initializedPrefs.getAssignmentCount());
         ClassDetails.setTutorialCount(initializedPrefs.getTutorialCount());
