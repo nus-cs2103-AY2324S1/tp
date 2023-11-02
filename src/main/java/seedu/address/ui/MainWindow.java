@@ -30,6 +30,7 @@ public class MainWindow extends UiPart<Stage> {
     private CardListPanel cardListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+    private ExportWindow exportWindow;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -60,6 +61,7 @@ public class MainWindow extends UiPart<Stage> {
         setWindowDefaultSize(logic.getGuiSettings());
 
         helpWindow = new HelpWindow();
+        exportWindow = new ExportWindow();
     }
 
     public Stage getPrimaryStage() {
@@ -108,6 +110,13 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
+    public void handleExport() {
+        if (!exportWindow.isShowing()) {
+            exportWindow.show();
+        } else {
+            exportWindow.focus();
+        }
+    }
     void show() {
         primaryStage.show();
     }
