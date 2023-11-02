@@ -15,8 +15,8 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.model.calendar.Calendar;
 import seedu.address.model.calendar.ReadOnlyCalendar;
+import seedu.address.model.calendar.UniMateCalendar;
 import seedu.address.model.event.Event;
 import seedu.address.model.event.EventPeriod;
 import seedu.address.model.event.exceptions.EventNotFoundException;
@@ -32,10 +32,11 @@ public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
     private final AddressBook addressBook;
-    private final Calendar calendar;
+    private final UniMateCalendar calendar;
     private final TaskManager taskManager;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
+    private ReadOnlyCalendar comparisonCalendar;
 
     /**
      * Initializes a ModelManager with the given addressBook, calendar and userPrefs.
@@ -47,14 +48,15 @@ public class ModelManager implements Model {
         logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
 
         this.addressBook = new AddressBook(addressBook);
-        this.calendar = new Calendar(calendar);
+        this.calendar = new UniMateCalendar(calendar);
         this.taskManager = new TaskManager(taskManager);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        comparisonCalendar = new UniMateCalendar();
     }
 
     public ModelManager() {
-        this(new AddressBook(), new Calendar(), new TaskManager(), new UserPrefs());
+        this(new AddressBook(), new UniMateCalendar(), new TaskManager(), new UserPrefs());
     }
 
     //=========== UserPrefs ==================================================================================
@@ -170,6 +172,11 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public UniMateCalendar getUnderlyingCalendar() {
+        return calendar;
+    }
+
+    @Override
     public ObservableList<Event> getEventList() {
         return calendar.getEventList();
     }
@@ -221,6 +228,18 @@ public class ModelManager implements Model {
         requireNonNull(range);
 
         calendar.deleteEventsInRange(range);
+    }
+
+    @Override
+    public ReadOnlyCalendar getComparisonCalendar() {
+        return comparisonCalendar;
+    }
+
+    @Override
+    public void setComparisonCalendar(ReadOnlyCalendar comparisonCalendar) {
+        requireNonNull(comparisonCalendar);
+
+        this.comparisonCalendar = comparisonCalendar;
     }
 
     //=========== TaskManager ================================================================================
