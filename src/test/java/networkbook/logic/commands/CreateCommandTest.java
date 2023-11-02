@@ -164,7 +164,7 @@ public class CreateCommandTest {
         }
 
         @Override
-        public ObservableList<Person> getFilteredPersonList() {
+        public ObservableList<Person> getDisplayedPersonList() {
             // Invoked during the create command test
             // Emulate the addition of a new Person into the list
             ObservableList<Person> listToFill = FXCollections.observableArrayList();
@@ -173,12 +173,7 @@ public class CreateCommandTest {
         }
 
         @Override
-        public void updateFilteredPersonList(Predicate<Person> predicate) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void updateSortedPersonList(Comparator<Person> comparator) {
+        public void updateDisplayedPersonList(Predicate<Person> predicate, Comparator<Person> comparator) {
             throw new AssertionError("This method should not be called.");
         }
 

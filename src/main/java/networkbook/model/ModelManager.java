@@ -10,8 +10,6 @@ import java.util.function.Predicate;
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
-import javafx.collections.transformation.FilteredList;
-import javafx.collections.transformation.SortedList;
 import networkbook.commons.core.GuiSettings;
 import networkbook.commons.core.LogsCenter;
 import networkbook.commons.core.index.Index;
@@ -29,8 +27,6 @@ public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
     private final VersionedNetworkBook versionedNetworkBook;
     private final UserPrefs userPrefs;
-    private final FilteredList<Person> filteredPersons;
-    private final SortedList<Person> filteredSortedPersons;
 
     /**
      * Initializes a ModelManager with the given networkBook and userPrefs.
@@ -42,8 +38,6 @@ public class ModelManager implements Model {
 
         this.versionedNetworkBook = new VersionedNetworkBook(networkBook);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredPersons = new FilteredList<>(this.versionedNetworkBook.getPersonList());
-        filteredSortedPersons = new SortedList<>(filteredPersons, null);
     }
 
     public ModelManager() {
@@ -107,13 +101,14 @@ public class ModelManager implements Model {
     @Override
     public void deletePerson(Person target) {
         versionedNetworkBook.removePerson(target);
+        versionedNetworkBook.setFilterPredicate(PREDICATE_SHOW_ALL_PERSONS);
         versionedNetworkBook.commit();
     }
 
     @Override
     public void addPerson(Person person) {
         versionedNetworkBook.addPerson(person);
-        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        versionedNetworkBook.setFilterPredicate(PREDICATE_SHOW_ALL_PERSONS);
         versionedNetworkBook.commit();
     }
 
@@ -162,28 +157,21 @@ public class ModelManager implements Model {
         requireAllNonNull(personIndex, emailIndex);
         return versionedNetworkBook.openEmail(personIndex, emailIndex);
     }
-
-    //=========== Filtered Person List Accessors =============================================================
-
-    /**
-     * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
-     * {@code versionedNetworkBook}
-     */
+    //=========== Displayed Person List Accessors =============================================================
     @Override
-    public ObservableList<Person> getFilteredPersonList() {
-        return filteredSortedPersons;
+    public void updateDisplayedPersonList(Predicate<Person> predicate, Comparator<Person> comparator) {
+        assert (predicate == null || comparator == null);
+        if (predicate != null) {
+            versionedNetworkBook.setFilterPredicate(predicate);
+        } else if (comparator != null) {
+            versionedNetworkBook.setSortComparator(comparator);
+        }
+        versionedNetworkBook.commit();
     }
 
     @Override
-    public void updateFilteredPersonList(Predicate<Person> predicate) {
-        requireNonNull(predicate);
-        filteredPersons.setPredicate(predicate);
-    }
-
-    @Override
-    public void updateSortedPersonList(Comparator<Person> comparator) {
-        requireNonNull(comparator);
-        filteredSortedPersons.setComparator(comparator);
+    public ObservableList<Person> getDisplayedPersonList() {
+        return versionedNetworkBook.getDisplayedPersonList();
     }
 
     @Override
@@ -199,9 +187,7 @@ public class ModelManager implements Model {
 
         ModelManager otherModelManager = (ModelManager) other;
         return versionedNetworkBook.equals(otherModelManager.versionedNetworkBook)
-                && userPrefs.equals(otherModelManager.userPrefs)
-                && filteredPersons.equals(otherModelManager.filteredPersons)
-                && filteredSortedPersons.equals(otherModelManager.filteredSortedPersons);
+                && userPrefs.equals(otherModelManager.userPrefs);
     }
 
 }

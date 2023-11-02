@@ -37,7 +37,7 @@ public class FindCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        model.updateFilteredPersonList(predicate);
+        model.updateDisplayedPersonList(predicate, null);
         return new CommandResult(
                 String.format(MESSAGE_SUCCESS,
                         predicate.getKeyTerms()
@@ -45,7 +45,7 @@ public class FindCommand extends Command {
                                 .reduce("", (acc, term) -> acc + " \"" + term + "\"")
                                 .trim()
                                 .replace(" ", ", "))
-                        + String.format(MESSAGE_PERSONS_FOUND_OVERVIEW, model.getFilteredPersonList().size()));
+                        + String.format(MESSAGE_PERSONS_FOUND_OVERVIEW, model.getDisplayedPersonList().size()));
     }
 
     @Override

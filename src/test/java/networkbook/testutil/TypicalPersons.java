@@ -31,6 +31,15 @@ import networkbook.model.person.Person;
  */
 public class TypicalPersons {
 
+    public static final Person ADAM = new PersonBuilder().withName("Adam Jacky")
+            .withPhones(List.of("12345678", "61828284"))
+            .withEmails(List.of("jack@gmail.com", "jacky@test.com"))
+            .withLinks(List.of("github.com", "https://nknguyenhc.github.io"))
+            .withGraduation("AY2526-S2")
+            .withCourses(List.of("CS2103T", "CS2109S"))
+            .withSpecialisations(List.of("Software Engineering", "Artificial Intelligence"))
+            .withPriority("High")
+            .withTags("software eng enthusiast", "AI enthusiast").build();
     public static final Person ALICE = new PersonBuilder().withName("Alice Pauline")
             .withEmails(List.of("alice@example.com"))
             .withPhones(List.of("94351253"))

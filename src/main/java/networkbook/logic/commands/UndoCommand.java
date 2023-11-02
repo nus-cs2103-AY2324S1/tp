@@ -4,7 +4,7 @@ import networkbook.logic.commands.exceptions.CommandException;
 import networkbook.model.Model;
 
 /**
- * Clears the network book.
+ * Undoes the last change to the NetworkBook's full list of contacts and/or list of displayed contacts.
  */
 public class UndoCommand extends Command {
 

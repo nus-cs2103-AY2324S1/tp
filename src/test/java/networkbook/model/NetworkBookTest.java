@@ -2,6 +2,7 @@ package networkbook.model;
 
 import static networkbook.logic.commands.CommandTestUtil.VALID_COURSE_BOB;
 import static networkbook.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static networkbook.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static networkbook.testutil.Assert.assertThrows;
 import static networkbook.testutil.Assert.assertThrowsAssertionError;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -11,7 +12,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
+import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
 
@@ -87,15 +90,6 @@ public class NetworkBookTest {
         assertThrows(UnsupportedOperationException.class, () -> networkBook.getPersonList().remove(0));
     }
 
-    @Test
-    public void isSame_sameNetworkBook_returnTrue() {
-        NetworkBook testBook = new NetworkBook();
-        assertTrue(testBook.isSame(testBook));
-    }
-    @Test
-    public void isSame_anotherEmptyNetworkBook_returnFalse() {
-        assertFalse(new NetworkBook().isSame(new NetworkBook()));
-    }
 
     @Test
     public void isValidLinkIndex_validIndices_returnsTrue() {
@@ -170,6 +164,8 @@ public class NetworkBookTest {
      */
     private static class NetworkBookStub implements ReadOnlyNetworkBook {
         private final ObservableList<Person> persons = FXCollections.observableArrayList();
+        private final Predicate<Person> predicate = PREDICATE_SHOW_ALL_PERSONS;
+        private final Comparator<Person> comparator = null;
 
         NetworkBookStub(Collection<Person> persons) {
             this.persons.setAll(persons);
@@ -178,6 +174,21 @@ public class NetworkBookTest {
         @Override
         public ObservableList<Person> getPersonList() {
             return persons;
+        }
+
+        @Override
+        public ObservableList<Person> getDisplayedPersonList() {
+            return getDisplayedPersonList();
+        }
+
+        @Override
+        public Predicate<Person> getFilterPredicate() {
+            return predicate;
+        }
+
+        @Override
+        public Comparator<Person> getSortComparator() {
+            return comparator;
         }
     }
 
