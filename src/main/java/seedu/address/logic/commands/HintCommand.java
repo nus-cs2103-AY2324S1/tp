@@ -12,28 +12,28 @@ import seedu.address.model.Model;
 import seedu.address.model.card.Card;
 
 /**
- * Practises a question using it's displayed index from the Deck.
+ * Displays the hint of a question using it's displayed index from the Deck.
  */
-public class PractiseCommand extends Command {
+public class HintCommand extends Command {
 
-    public static final String COMMAND_WORD = "practise";
+    public static final String COMMAND_WORD = "hint";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": practise the card identified by the index number used in the displayed card list.\n"
+            + ": displays the hint for a question identified by its index in the displayed card list.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_PRACTISE_CARD_SUCCESS = "%1$s";
+    public static final String MESSAGE_HINT_CARD_SUCCESS = "%1$s";
 
-    /** Specific {@code Index} in Deck to practise */
+    /** Specific {@code Index} in Deck to display hint for */
     private final Index targetIndex;
 
     /**
      * Constructs a {@code PractiseCommand} with the specified {@code targetIndex}
      *
-     * @param targetIndex The index of the target card.
+     * @param targetIndex The index of the target to card.
      */
-    public PractiseCommand(Index targetIndex) {
+    public HintCommand(Index targetIndex) {
         requireNonNull(targetIndex);
         this.targetIndex = targetIndex;
     }
@@ -48,11 +48,10 @@ public class PractiseCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_CARD_DISPLAYED_INDEX);
         }
 
-        Card cardToPractise = lastShownList.get(targetIndex.getZeroBased());
+        Card cardToHint = lastShownList.get(targetIndex.getZeroBased());
 
-        return new CommandResult(
-                String.format(Messages.MESSAGE_CARDS_PRACTISE_VIEW,
-                        Messages.formatPractise(cardToPractise, targetIndex)));
+        return new CommandResult(String.format(Messages.MESSAGE_CARDS_HINT_VIEW,
+                Messages.formatHint(cardToHint, targetIndex)));
     }
 
     @Override
@@ -62,13 +61,13 @@ public class PractiseCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof PractiseCommand)) {
+        if (!(other instanceof HintCommand)) {
             return false;
         }
 
         // compare Index equality
-        PractiseCommand otherPractiseCommand = (PractiseCommand) other;
-        return targetIndex.equals(otherPractiseCommand.targetIndex);
+        HintCommand otherHintCommand = (HintCommand) other;
+        return targetIndex.equals(otherHintCommand.targetIndex);
     }
 
     @Override

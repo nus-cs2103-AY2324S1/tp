@@ -16,6 +16,7 @@ import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.GoalCommand;
 import seedu.address.logic.commands.HelpCommand;
+import seedu.address.logic.commands.HintCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.PractiseCommand;
 import seedu.address.logic.commands.SetDifficultyCommand;
@@ -73,15 +74,21 @@ public class DeckParser {
 
         case PractiseCommand.COMMAND_WORD:
             return new PractiseCommandParser().parse(arguments);
+
         case SolveCommand.COMMAND_WORD:
             return new SolveCommandParser().parse(arguments);
+
         case SetDifficultyCommand.COMMAND_WORD:
             return new SetDifficultyCommandParser().parse(arguments);
+
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
 
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
+
+        case HintCommand.COMMAND_WORD:
+            return new HintCommandParser().parse(arguments);
 
         case GoalCommand.COMMAND_WORD:
             return new GoalCommandParser().parse(arguments);
@@ -91,5 +98,4 @@ public class DeckParser {
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }
     }
-
 }

@@ -45,5 +45,4 @@ public class CardListPanel extends UiPart<Region> {
             }
         }
     }
-
 }

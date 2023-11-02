@@ -12,28 +12,29 @@ import seedu.address.model.Model;
 import seedu.address.model.card.Card;
 
 /**
- * Practises a question using it's displayed index from the address book.
+ * Solves a question using it's displayed index from the Deck.
  */
 public class SolveCommand extends Command {
 
     public static final String COMMAND_WORD = "solve";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": solve the card identified by the index number used in the displayed card list.\n"
+            + ": solve the card identified by its index in the displayed card list.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_SOLVE_CARD_SUCCESS = "%1$s";
 
+    /** Specific {@code Index} in Deck to solve */
     private final Index targetIndex;
 
-
     /**
-     * Constructs a {@code PractiseCommand} with the specified {@code targetIndex} and {@code difficulty}.
+     * Constructs a {@code PractiseCommand} with the specified {@code targetIndex}
      *
      * @param targetIndex The index of the target to card.
      */
     public SolveCommand(Index targetIndex) {
+        requireNonNull(targetIndex);
         this.targetIndex = targetIndex;
 
     }
@@ -43,21 +44,19 @@ public class SolveCommand extends Command {
         requireNonNull(model);
 
         List<Card> lastShownList = model.getFilteredCardList();
-        int deckSize = lastShownList.size();
 
-        if (targetIndex.getZeroBased() >= deckSize) {
+        if (targetIndex.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_CARD_DISPLAYED_INDEX);
         }
+
         Card cardToSolve = lastShownList.get(targetIndex.getZeroBased());
         cardToSolve.incrementSolveCount();
         //sets to show the update on the Ui
         model.setCard(cardToSolve, cardToSolve);
         model.getGoal().solvedCard();
 
-        return new CommandResult(
-                String.format(Messages.MESSAGE_CARDS_SOLVE_VIEW,
+        return new CommandResult(String.format(Messages.MESSAGE_CARDS_SOLVE_VIEW,
                         Messages.formatSolve(cardToSolve, targetIndex)));
-
     }
 
     @Override
@@ -71,6 +70,7 @@ public class SolveCommand extends Command {
             return false;
         }
 
+        // compare Index equality
         SolveCommand otherSolveCommand = (SolveCommand) other;
         return targetIndex.equals(otherSolveCommand.targetIndex);
     }
@@ -81,5 +81,4 @@ public class SolveCommand extends Command {
                 .add("targetIndex", targetIndex)
                 .toString();
     }
-
 }

@@ -14,6 +14,7 @@ import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 import seedu.address.model.card.Card;
 
+
 /**
  * DisplayCard class to showcase the question and the answer
  */
@@ -27,7 +28,6 @@ public class DisplayCard extends UiPart<Region> {
      *
      * @see <a href="https://github.com/se-edu/addressbook-level4/issues/336">The issue on AddressBook level 4</a>
      */
-
     public final Card card;
 
     @javafx.fxml.FXML
@@ -143,7 +143,4 @@ public class DisplayCard extends UiPart<Region> {
 
         textFlowControl.getChildren().add(textSegment);
     }
-
-
-
 }

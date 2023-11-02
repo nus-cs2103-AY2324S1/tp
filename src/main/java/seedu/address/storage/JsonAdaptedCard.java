@@ -11,6 +11,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.card.Answer;
 import seedu.address.model.card.Card;
+import seedu.address.model.card.Difficulty;
+import seedu.address.model.card.Hint;
 import seedu.address.model.card.PracticeDate;
 import seedu.address.model.card.Question;
 import seedu.address.model.card.SolveCount;
@@ -32,6 +34,7 @@ class JsonAdaptedCard {
     private final String lastPracticeDate;
     private final String solveCount;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
+    private final String hint;
 
     /**
      * Constructs a {@code JsonAdaptedCard} with the given card details.
@@ -43,7 +46,8 @@ class JsonAdaptedCard {
             @JsonProperty("tags") List<JsonAdaptedTag> tags,
             @JsonProperty("solveCount") String solveCount,
             @JsonProperty("next-practice-date") String nextPracticeDate,
-            @JsonProperty("last-practice-date") String lastPracticeDate) {
+            @JsonProperty("last-practice-date") String lastPracticeDate,
+            @JsonProperty("hint") String hint) {
         this.question = question;
         this.answer = answer;
         this.difficulty = difficulty;
@@ -53,6 +57,7 @@ class JsonAdaptedCard {
         this.nextPracticeDate = nextPracticeDate;
         this.lastPracticeDate = lastPracticeDate;
         this.solveCount = solveCount;
+        this.hint = hint;
     }
 
     /**
@@ -68,6 +73,7 @@ class JsonAdaptedCard {
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
+        hint = source.getHint().hint;
     }
 
     /**
@@ -79,6 +85,7 @@ class JsonAdaptedCard {
      */
     public Card toModelType() throws IllegalValueException {
 
+        // Question
         if (question == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     Question.class.getSimpleName()));
@@ -90,6 +97,7 @@ class JsonAdaptedCard {
 
         final Question modelQuestion = new Question(question);
 
+        // Answer
         if (answer == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Answer.class.getSimpleName()));
         }
@@ -100,11 +108,17 @@ class JsonAdaptedCard {
 
         final Answer modelAnswer = new Answer(answer);
 
-        final List<Tag> cardTags = new ArrayList<>();
+        // Tags
+        final List<Tag> modelCardTags = new ArrayList<>();
+
         for (JsonAdaptedTag tag : tags) {
-            cardTags.add(tag.toModelType());
+            modelCardTags.add(tag.toModelType());
         }
 
+        // Difficulty
+        Difficulty modelDifficulty = Difficulty.valueOf(difficulty.toUpperCase());
+
+        // PractiseDate
         if (nextPracticeDate == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, NEXT_PRACTICE_DATE_FIELD_NAME));
         }
@@ -125,9 +139,11 @@ class JsonAdaptedCard {
         final PracticeDate modelLastPracticeDate = lastPracticeDate != null
                 ? new PracticeDate(LocalDateTime.parse(lastPracticeDate))
                 : null;
-        final SolveCount modelsolveCount = new SolveCount(Integer.parseInt(solveCount));
-        return new Card(modelQuestion, modelAnswer, difficulty, cardTags, modelNextPracticeDate,
-                modelLastPracticeDate, modelsolveCount);
-    }
 
+        final SolveCount modelsolveCount = new SolveCount(Integer.parseInt(solveCount));
+        final Hint modelHint = new Hint(hint);
+
+        return new Card(modelQuestion, modelAnswer, modelDifficulty, modelCardTags,
+                modelNextPracticeDate, modelLastPracticeDate, modelsolveCount, modelHint);
+    }
 }

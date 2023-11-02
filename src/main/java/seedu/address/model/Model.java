@@ -50,7 +50,6 @@ public interface Model {
      */
     ReadOnlyDeck getDeck();
 
-
     /**
      * Returns true if a Card with the same identity as {@code person} exists in the Deck.
      */

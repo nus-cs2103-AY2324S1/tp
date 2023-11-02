@@ -43,8 +43,6 @@ public class ModelManager implements Model {
         this(new Deck(), new UserPrefs());
     }
 
-
-
     //=========== UserPrefs ==================================================================================
 
     @Override
@@ -105,7 +103,6 @@ public class ModelManager implements Model {
     @Override
     public void addCard(Card card) {
         deck.addCard(card);
-        updateFilteredCardList(PREDICATE_SHOW_ALL_CARDS);
     }
 
     @Override
@@ -143,6 +140,7 @@ public class ModelManager implements Model {
             return false;
         }
 
+        // compare Deck, UserPrefs and FilteredList equality
         ModelManager otherModelManager = (ModelManager) other;
         return deck.equals(otherModelManager.deck)
                 && userPrefs.equals(otherModelManager.userPrefs)

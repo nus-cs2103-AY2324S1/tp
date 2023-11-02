@@ -99,5 +99,4 @@ public class JsonDeckStorage implements DeckStorage {
         FileUtil.createIfMissing(filePath);
         JsonUtil.saveJsonFile(new JsonSerializableDeck(deck), filePath);
     }
-
 }

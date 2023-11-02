@@ -25,15 +25,21 @@ public class DeleteCommand extends Command {
 
     public static final String MESSAGE_DELETE_CARD_SUCCESS = "Deleted Card: %1$s";
 
+    /** Specific {@code Index} in Deck to delete from */
     private final Index targetIndex;
 
+    /**
+     * Constructs a DeleteCommand object with a specified {@code targetIndex} to delete at
+     */
     public DeleteCommand(Index targetIndex) {
+        requireNonNull(targetIndex);
         this.targetIndex = targetIndex;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+
         List<Card> lastShownList = model.getFilteredCardList();
 
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
@@ -42,6 +48,7 @@ public class DeleteCommand extends Command {
 
         Card cardToDelete = lastShownList.get(targetIndex.getZeroBased());
         model.deleteCard(cardToDelete);
+
         return new CommandResult(String.format(MESSAGE_DELETE_CARD_SUCCESS, Messages.format(cardToDelete)));
     }
 
@@ -56,6 +63,7 @@ public class DeleteCommand extends Command {
             return false;
         }
 
+        // compares Index equality
         DeleteCommand otherDeleteCommand = (DeleteCommand) other;
         return targetIndex.equals(otherDeleteCommand.targetIndex);
     }
@@ -66,5 +74,4 @@ public class DeleteCommand extends Command {
                 .add("targetIndex", targetIndex)
                 .toString();
     }
-
 }

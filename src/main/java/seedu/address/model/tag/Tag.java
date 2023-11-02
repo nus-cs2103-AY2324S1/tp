@@ -43,6 +43,7 @@ public class Tag {
             return false;
         }
 
+        // compare String equality
         Tag otherTag = (Tag) other;
         return tagName.equals(otherTag.tagName);
     }
@@ -58,5 +59,4 @@ public class Tag {
     public String toString() {
         return '[' + tagName + ']';
     }
-
 }

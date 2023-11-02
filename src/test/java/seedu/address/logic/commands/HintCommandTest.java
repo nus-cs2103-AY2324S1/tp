@@ -19,73 +19,67 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.card.Card;
 
-/**
- * Contains integration tests (interaction with the Model) and unit tests for
- * {@code DeleteCommand}.
- */
-public class DeleteCommandTest {
+class HintCommandTest {
 
     private Model model = new ModelManager(getTypicalDeck(), new UserPrefs());
 
     @Test
     public void constructor_invalidTarget_throwsException() {
-        assertThrows(NullPointerException.class, () -> new DeleteCommand(null));
+        assertThrows(NullPointerException.class, () -> new HintCommand(null));
     }
 
     @Test
     public void execute_invalidModel_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new DeleteCommand(INDEX_FIRST_CARD).execute(null));
+        assertThrows(NullPointerException.class, () -> new HintCommand(INDEX_FIRST_CARD).execute(null));
     }
 
     @Test
     public void execute_validIndex_success() {
-        Card cardToDelete = model.getFilteredCardList().get(INDEX_FIRST_CARD.getZeroBased());
-        DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_CARD);
+        Card cardToHint = model.getFilteredCardList().get(INDEX_FIRST_CARD.getZeroBased());
+        HintCommand hintCommand = new HintCommand(INDEX_FIRST_CARD);
 
-        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_CARD_SUCCESS,
-                Messages.format(cardToDelete));
+        String expectedMessage = Messages.formatHint(cardToHint, INDEX_FIRST_CARD);
 
         ModelManager expectedModel = new ModelManager(model.getDeck(), new UserPrefs());
-        expectedModel.deleteCard(cardToDelete);
 
-        assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(hintCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
     public void execute_invalidIndex_throwsCommandException() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredCardList().size() + 1);
-        DeleteCommand deleteCommand = new DeleteCommand(outOfBoundIndex);
+        HintCommand hintCommand = new HintCommand(outOfBoundIndex);
 
-        assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_CARD_DISPLAYED_INDEX);
+        assertCommandFailure(hintCommand, model, Messages.MESSAGE_INVALID_CARD_DISPLAYED_INDEX);
     }
 
     @Test
     public void equals() {
-        DeleteCommand deleteFirstCommand = new DeleteCommand(INDEX_FIRST_CARD);
-        DeleteCommand deleteSecondCommand = new DeleteCommand(INDEX_SECOND_CARD);
+        HintCommand hintCommand = new HintCommand(INDEX_FIRST_CARD);
+        HintCommand otherHintCommand = new HintCommand(INDEX_SECOND_CARD);
 
         // same object -> returns true
-        assertTrue(deleteFirstCommand.equals(deleteFirstCommand));
+        assertTrue(hintCommand.equals(hintCommand));
 
         // same values -> returns true
-        DeleteCommand deleteFirstCommandCopy = new DeleteCommand(INDEX_FIRST_CARD);
-        assertTrue(deleteFirstCommand.equals(deleteFirstCommandCopy));
+        HintCommand deleteFirstCommandCopy = new HintCommand(INDEX_FIRST_CARD);
+        assertTrue(hintCommand.equals(deleteFirstCommandCopy));
 
         // different types -> returns false
-        assertFalse(deleteFirstCommand.equals(1));
+        assertFalse(hintCommand.equals(1));
 
         // null -> returns false
-        assertFalse(deleteFirstCommand.equals(null));
+        assertFalse(hintCommand.equals(null));
 
         // different Card -> returns false
-        assertFalse(deleteFirstCommand.equals(deleteSecondCommand));
+        assertFalse(hintCommand.equals(otherHintCommand));
     }
 
     @Test
     public void toStringMethod() {
         Index targetIndex = Index.fromOneBased(1);
-        DeleteCommand deleteCommand = new DeleteCommand(targetIndex);
-        String expected = DeleteCommand.class.getCanonicalName() + "{targetIndex=" + targetIndex + "}";
-        assertEquals(expected, deleteCommand.toString());
+        HintCommand hintCommand = new HintCommand(targetIndex);
+        String expected = HintCommand.class.getCanonicalName() + "{targetIndex=" + targetIndex + "}";
+        assertEquals(expected, hintCommand.toString());
     }
 }

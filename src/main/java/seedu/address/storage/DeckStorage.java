@@ -41,5 +41,4 @@ public interface DeckStorage {
      * @see #saveDeck(ReadOnlyDeck)
      */
     void saveDeck(ReadOnlyDeck deck, Path filePath) throws IOException;
-
 }
