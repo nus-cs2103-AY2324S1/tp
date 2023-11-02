@@ -116,7 +116,7 @@ public class ParserUtil {
      */
     public static int parseTarget(String target) throws ParseException {
         requireNonNull(target);
-        
+
         String trimmedTarget = target.trim();
         if (!StringUtil.isNonZeroUnsignedInteger(trimmedTarget)) {
             throw new ParseException(Goal.MESSAGE_CONSTRAINTS);
