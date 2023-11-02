@@ -197,7 +197,8 @@ Examples:
 Acceptable values for each parameter:
 * `INDEX` : It must be a **must be a positive integer** 1, 2, 3, …​
 
-Expected output upon success : `Deleted person: [Information of person at INDEX]`
+Expected output upon success :
+![DeleteSuccess](images/DeleteSuccess.png)
 
 Expected output upon failure:
 * Profile at the specified `INDEX` cannot be found:<br>
@@ -220,7 +221,8 @@ Examples:
 * `sort` rearranges the displayed list to show which policies are expiring soonest.
 * `find c/Google` followed by `sort` shows the policies expiring soonest in the results of the `find` command.
 
-Expected output upon success : `Address book has been sorted!`
+Expected output upon success :
+![SortSuccess](images/SortSuccess.png)
 
 
 ### Remind user of clients policy expiration date : `remind`
