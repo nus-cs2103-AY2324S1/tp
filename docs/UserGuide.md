@@ -239,16 +239,16 @@ Amazing! Tutor John Doe has now been added to the bottom of the displayed list.
 
 Here is a list of the error messages you may encounter, when the command is entered incorrectly:
 
-| Error Message                                                                              | Reason                                                               |
-|--------------------------------------------------------------------------------------------|----------------------------------------------------------------------|
-| `Invalid command format!`                                                                  | One or more of the tags `n/`, `p/`, `e/` is missing.                 |
-| `Names should only contain alphanumeric characters and spaces, and it should not be blank` | Tutor name input was either invalid or blank.                        |
-| `Phone numbers should only contain numbers, and it should be at least 3 digits long`       | Tutor phone number input was either invalid or blank.                |
-| `Emails should be of the format local-part@domain and adhere to the following constraints` | Tutor email input was either invalid or blank[<sup>2</sup>](#note1). |
-| `Multiple values specified for the following single-valued field(s): n/`                   | More than 1 `n/` was given in the command.                           |
-| `Multiple values specified for the following single-valued field(s): p/`                   | More than 1 `p/` was given in the command.                           |
-| `Multiple values specified for the following single-valued field(s): e/`                   | More than 1 `e/` was given in the command.                           |
-| `This tutor already exists in the address book`                                            | There is a tutor with the same name in the address book.             |
+| Error Message                                                                              | Reason                                                                    |
+|--------------------------------------------------------------------------------------------|---------------------------------------------------------------------------|
+| `Invalid command format!`                                                                  | One or more of the tags `n/`, `p/`, `e/` is missing.                      |
+| `Names should only contain alphanumeric characters and spaces, and it should not be blank` | Tutor name input was either invalid or blank.                             |
+| `Phone numbers should only contain numbers, and it should be at least 3 digits long`       | Tutor phone number input was either invalid or blank.                     |
+| `Emails should be of the format local-part@domain and adhere to the following constraints` | Tutor email input was <br/>either invalid or blank[<sup>1</sup>](#note1). |
+| `Multiple values specified for the following single-valued field(s): n/`                   | More than 1 `n/` was given in the command.                                |
+| `Multiple values specified for the following single-valued field(s): p/`                   | More than 1 `p/` was given in the command.                                |
+| `Multiple values specified for the following single-valued field(s): e/`                   | More than 1 `e/` was given in the command.                                |
+| `This tutor already exists in the address book`                                            | There is a tutor with the same name in the address book.                  |
 
 Refer to [input information](#input-examples) for details about valid inputs.
 
@@ -291,18 +291,18 @@ Viola! His phone number has now been updated to **87654321**.
 
 Here is a list of the error messages you may encounter, when the command is entered incorrectly:
 
-| Error Message                                                                              | Reason                                                                |
-|--------------------------------------------------------------------------------------------|-----------------------------------------------------------------------|
-| `Invalid command format!`                                                                  | Invalid or missing TUTOR_INDEX.                                       |
-| `The person index provided is invalid`                                                     | TUTOR_INDEX entered is not in the range of number of tutors.          |
-| `Names should only contain alphanumeric characters and spaces, and it should not be blank` | Tutor name input was either invalid or blank.                         |
-| `Phone numbers should only contain numbers, and it should be at least 3 digits long`       | Tutor phone number input was either invalid or blank.                 |
-| `Emails should be of the format local-part@domain and adhere to the following constraints` | Tutor email input was either invalid or blank[<sup>2</sup>](#note1).  |
-| `Multiple values specified for the following single-valued field(s): n/`                   | More than 1 `n/` was given in the command.                            |
-| `Multiple values specified for the following single-valued field(s): p/`                   | More than 1 `p/` was given in the command.                            |
-| `Multiple values specified for the following single-valued field(s): e/`                   | More than 1 `e/` was given in the command.                            |
-| `This tutor already exists in the address book`                                            | There is a tutor with the same name in the address book.              |
-| `At least one field to edit must be provided`                                              | There is no `n/`, `p/` or `e/` tag provided to edit a field.          |
+| Error Message                                                                              | Reason                                                               |
+|--------------------------------------------------------------------------------------------|----------------------------------------------------------------------|
+| `Invalid command format!`                                                                  | Invalid or missing TUTOR_INDEX.                                      |
+| `The person index provided is invalid`                                                     | TUTOR_INDEX entered is not in the range of number of tutors.         |
+| `Names should only contain alphanumeric characters and spaces, and it should not be blank` | Tutor name input was either invalid or blank.                        |
+| `Phone numbers should only contain numbers, and it should be at least 3 digits long`       | Tutor phone number input was either invalid or blank.                |
+| `Emails should be of the format local-part@domain and adhere to the following constraints` | Tutor email input was either invalid or blank[<sup>1</sup>](#note1). |
+| `Multiple values specified for the following single-valued field(s): n/`                   | More than 1 `n/` was given in the command.                           |
+| `Multiple values specified for the following single-valued field(s): p/`                   | More than 1 `p/` was given in the command.                           |
+| `Multiple values specified for the following single-valued field(s): e/`                   | More than 1 `e/` was given in the command.                           |
+| `This tutor already exists in the address book`                                            | There is a tutor with the same name in the address book.             |
+| `At least one field to edit must be provided`                                              | There is no `n/`, `p/` or `e/` tag provided to edit a field.         |
 
 You can also refer to [input information](#input-examples) for details about valid inputs.
 
