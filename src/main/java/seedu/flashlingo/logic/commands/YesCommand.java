@@ -18,7 +18,7 @@ public class YesCommand extends Command {
 
     // For help function
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Indicates user has successfully memorized the word.\n"
-        + "Example: " + COMMAND_WORD + " ";
+            + "Example: " + COMMAND_WORD + " ";
 
     public static final String MESSAGE_SUCCESS = "Great Job! You have indicated that you have memorized the word!";
     /**
@@ -57,6 +57,6 @@ public class YesCommand extends Command {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-          .toString();
+                .toString();
     }
 }

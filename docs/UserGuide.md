@@ -3,7 +3,7 @@ layout: page
 title: User Guide
 ---
 
-Flashlingo is a **desktop app for learning words by flashcard, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). Flashlingo is designed with beginner language learners in mind, specialising in helping them expand their vocabulary.
+Flashlingo is a **desktop app for learning words by flash cards, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). Flashlingo is designed with beginner language learners in mind, specialising in helping them expand their vocabulary.
 
 * Table of Contents
 {:toc}
@@ -43,9 +43,9 @@ Flashlingo is a **desktop app for learning words by flashcard, optimized for use
    * `delete index` : Deletes a words and its related information at the given index.
    * `edit index w/WORD t/TRANSALTION` : Edits the word and its translation at the given index.
    * `find KEYWORD` : Finds words whose original word or translation contains the given keyword.
-   * `start` : Starts today’s flashcard session.
-   * `end` :  Ends the current flashcard review session.
-   * `reveal` : Shows the other side of the flashcard.
+   * `start` : Starts today’s flash card session.
+   * `end` :  Ends the current flash card review session.
+   * `reveal` : Shows the other side of the flash card.
    * `yes` :  Indicates user has memorized the word.
    * `no` :  Indicates user has forgotten the word.
    * `stats` : Displays learning statistics for current user.
@@ -84,24 +84,24 @@ Opens a browser with the help page (User Guide).
 
 Format: `help`
 
-### Listing all flashcards : `list`
+### Listing all flash cards : `list`
 
-Shows the list of flashcards with both the original word and the corresponding translation.
+Shows the list of flash cards with both the original word and the corresponding translation.
 
 Format: `list`
 
 Output:
-* `Listed all flashcards`
+* `Listed all flash cards`
 `1. ORIGINAL_WORD - TRANSLATION`
   `2. ORIGINAL_WORD - TRANSLATION`
   `3. ORIGINAL_WORD - TRANSLATION`
   `...`
 
 
-### Adding a flashcard: `add`
+### Adding a flash card: `add`
 
-Adds a word to the flashcard with its translation.
-* Creates a wild flashcard.
+Adds a word to the flash card with its translation.
+* Creates a wild flash card.
 * Works to add a word with its translation in their respective languages.
 * The already saved translation can be overridden with a new translation in a different language.
 
@@ -112,12 +112,12 @@ Examples:
 * `add w/雪 t/snow` saves the translation of **雪** as **snow**
 * `add w/雪 wl/Chinese t/snow tl/English` saves the translation of the **Chinese** word **雪** as an **English** word **snow**
 
-Words without language          |  Words with language
-:-------------------------:|:-------------------------:
-![img.png](images/WordWithoutLanguage.png)  | ![img.png](images/WordWithLanguage.png)
+| Words without language  | ![img.png](images/WordWithoutLanguage.png) |
+|:-----------------------:|:------------------------------------------:|
+| **Words with language** |  ![img.png](images/WordWithLanguage.png)   |
 
 **Note**
-* Users are not allowed to add two **exactly** the same flashcards
+* Users are not allowed to add two **exact** same flash cards
   * Same word **and** word language
   * Same translation **and** translation language
 * Users can add two flash cards with the **same word and translation BUT in different language**<br>
@@ -126,13 +126,13 @@ Words without language          |  Words with language
   * `add w/雪 t/snow wl/Chinese tl/English`
   * `add w/雪 t/snow wl/Japanese tl/English`
 > The error message:<br>
-> This flashcard already exists
+> This flash card already exists
 
 
-### Deleting a flashcard : `delete`
+### Deleting a flash card : `delete`
 
 Deletes a words and its related information
-* Deletes a flashcard.
+* Deletes a flash card.
 
 Format: `delete <INDEX>`
 
@@ -141,42 +141,48 @@ Examples:
 
 Output:
 
-Before delete         |  After delete
-:-------------------------:|:-------------------------:
-![img.png](images/BeforeDelete.png)  | ![img.png](images/AfterDelete.png)
+|  Before delete   | ![img.png](images/BeforeDelete.png) |
+|:----------------:|:-----------------------------------:|
+| **After delete** | ![img.png](images/AfterDelete.png)  |
 
-### Editing a flashcard : `edit`
+### Editing a flash card : `edit`
 
 Edits the word and its translation at the given index.
-* Edits a wild flashcard.
+* Edits a wild flash card.
 
-Format: `edit <INDEX> w/<WORD> t/<TRANSLATION>`
+Format: `edit <INDEX> [w/<WORD>] [t/<TRANSLATION>] [wl/<WORD_LANGUAGE>] [tl/<TRANSLATION_LANGUAGE>]`
 
 Examples:
-* `edit 1 w/こんにちわ t/Hello` edits the word and its translation at index 1
+* `edit 1 w/こんにちわ t/Hello` edits the translation at index 1
 
 Output:
 
-Before edit         |  After edit
-:-------------------------:|:-------------------------:
-![img.png](images/BeforeEdit.png)  | ![img.png](images/AfterEdit.png)
+|  Before edit   |![img.png](images/BeforeEdit.png)  |
+|:--------------:|:---------------------------------:|
+| **After edit** | ![img.png](images/AfterEdit.png)  |
 
 **Note**
 * Users are not allowed to edit a flash card to an existing flash card
+* `<INDEX>` is the index of each flash card in the `list`
+* Users change at **LEAST** one certain parameter by using certain prefix 
+  * Word: `w/WORD`
+  * Word Language: `wl/WORD_LANGUAGE`
+  * Translation: `t/TRANSLATION`
+  * Translation Language: `tl/TRANSLATION_LANGUAGE`
 > The error message: <br>
-> `This flashcard already exists in Flashlingo`
+> `This flash card already exists in Flashlingo`
 
-### Finding a flashcard : `find`
+### Finding a flash card : `find`
 
 Finds words whose original word or translation contains the given keyword.
-* Finds a flashcard.
+* Finds a flash card.
 * The search is insensitive. e.g `look` will match `Look`
 
 Format: `find <KEYWORDS...>`
 
 Examples:
-* `find look` returns the flashcard list and its translation that contains the keyword `look`
-* `find look, hello, goodbye` returns the flashcard list that has all flashcards that contain `look`, `hello` and `goodbye`
+* `find look` returns the flash card list and its translation that contains the keyword `look`
+* `find look, hello, goodbye` returns the flash card list that has all flash cards that contain `look`, `hello` and `goodbye`
 
 
 ###  Starts review session : `start`
@@ -191,13 +197,13 @@ Output: `Review Session has been started.`
 * Users are not allowed to start a new review session if they are already in one. In this case,   
 `Sorry, currently you are in a review session. Your command is not supported.`   
 `Please end the review session first.` will be prompted.
-* If there are no words to review, users will not be able to start review session. `There's no FlashCards to review. Well done!`  
+* If there are no words to review, users will not be able to start review session. `You have no more words to review!`  
 will be displayed.
 
 
 ### Ending the current review session : `end`
 
-Ends the current flashcard session and returns to the main menu.
+Ends the current flash card session and returns to the main menu.
 
 Format: `end`
 
@@ -207,20 +213,20 @@ Output: `Review Session has ended.`
 * Users are not allowed to end a review session if the session hasn't been started yet. The message of `You are not in a review session.`  
 will be given.
 
-### Revealing translation of the flashcard : `reveal`
+### Revealing translation of the flash card : `reveal`
 
-To show the translation of the flashcard in 
+To show the translation of the flash card in 
 
 Format: `reveal`
 
-Output : `The translation is [CURRENT FLASHCARD'S TRANSLATION]`  
+Output : `The translation is [CURRENT FLASH CARD'S TRANSLATION]`  
 
 Examples:![img.png](images/Reveal.png)
 
 **Note**
 * `reveal` command will only take effect during review session. Otherwise, error message `You are not in a review session.`  
 will be printed out.
-* Pressing `reveal` button will have the same effect, and users can reveal the translation without the constrain of review session.
+* Pressing `reveal` button will have the same effect, and users can reveal the translation without the constraint of review session.
 
 ### Indicating user has memorized the word : `yes`
 
@@ -257,7 +263,7 @@ if there's no word left in the review session.
 
 ### Show learning statistics : `stats`
 
-Displays learning statistics, i.e, the total number of flashcards and the number of words remembered.
+Displays learning statistics, i.e, the total number of flash cards and the number of words remembered.
 
 Format: `stats`
 
@@ -275,16 +281,45 @@ Format: `language <SPECIFIED_LANGUAGE>`
 
 Format: `review`
 
+### Loading list of words: `load`
+Loads an Excel file of words into the app. The words will be added to the current list of flash cards and included in the
+review session automatically.
+
+Format: `load <FILE_NAME>`
+
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Notes about the file input:**<br>
+* **File format:** The file must be an Excel Workbook with the `.xlsx` extension.
+* **File location:** The file must be located in the **same folder** as the `flashlingo.jar` file.
+* **File content:** The app would only read the **first sheet** of the workbook. The sheet must contain only the following 
+**two** columns:
+  1. First column - The original words
+  2. Second column - The translation of the words 
+* **Resources:** A sample file can be found [here](SampleData.xlsx).
+</div>
+
+Output: 
+* You have successfully loaded file: `<FILE_NAME>`: Successful loading.
+* File not found or accessible: 
+>⚠️ Make sure the file is in the correct directory with read permission.
+* File cannot be read due to invalid content or format: 
+>⚠️ Make sure the file contains only two columns with the nonempty words/translations.
+* `FLASH_CARD` flash card already exists!:
+>⚠️ Modify the duplicated word/translation in the file.
+
 ### Switching color theme : `switch`
-* `switch` : Switches between light and dark appearance for UI.
+Switches between light and dark appearance of UI dashboard.
+* The theme will be saved and loaded when Flashlingo is restarted.
+* Default color theme is the **light theme**.
 
 Format: `switch`
 
-Output:
-![img.png](images/DarkTheme.png)
+Output:  
 
-Execute the `switch` command again:
-![img.png](images/LightTheme.png)
+|  light theme   | ![img.png](images/LightTheme.png) |
+|:--------------:|:---------------------------------:|
+| **dark theme** | ![img.png](images/DarkTheme.png)  |
 
 ### Exiting the program : `exit`
 
@@ -328,21 +363,22 @@ _Details coming soon ..._
 
 ## Command summary
 
- Action                 | Format, Examples                                                
-------------------------|-----------------------------------------------------------------
- **Help**               | `help`  
- **List**               | `list`
- **Add**                | `add w/WORD t/TRANSLATION` <br> e.g., `add w/regarder t/look`
- **Delete**             | `delete w/WORD`<br> e.g., `del w/look`
- **Edit**               | `edit index w/WORD t/TRANSLATION`<br> e.g., `edit 1 w/bye t/再见`
- **Find**               | `find KEYWORD`<br> e.g., `find bye`
- **Start**              | `start`
- **Reveal**             | `reveal`
- **Yes**                | `yes`
- **No**                 | `no` 
- **End**               | `end`
- **Language**           | `language SPECIFIED_LANGUAGE`<br> e.g., `language French`
- **Review**             | `review`
- **Learning Statistics** | `stats`
- **Switch**              | `switch`
- **Exit**                | `exit`
+| Action                  | Format, Examples                                                |
+|-------------------------|-----------------------------------------------------------------|
+| **Help**                | `help`                                                          |
+| **List**                | `list`                                                          |
+| **Add**                 | `add w/<WORD> t/<TRANSLATION> [wl/<WORD_LANGUAGE>] [tl/<TRANSLATION_LANGUAGE>]` <br> e.g., `add w/regarder t/look`   |
+| **Delete**              | `delete w/WORD`<br> e.g., `del w/look`                          |
+| **Edit**                | `edit <INDEX> [w/<WORD>] [t/<TRANSLATION>] [wl/<WORD_LANGUAGE>] [tl/<TRANSLATION_LANGUAGE>]`<br> e.g., `edit 1 w/bye t/再见` |
+| **Find**                | `find KEYWORD`<br> e.g., `find bye`                             |
+| **Start**               | `start`                                                         |
+| **Reveal**              | `reveal`                                                        |
+| **Yes**                 | `yes`                                                           |
+| **No**                  | `no`                                                            |
+| **End**                 | `end`                                                           |
+| **Language**            | `language SPECIFIED_LANGUAGE`<br> e.g., `language French`       |
+| **Review**              | `review`                                                        |
+| **Learning Statistics** | `stats`                                                         |
+| **Load**                | `load FILE_NAME`<br> e.g., `load SampleData.xlsx`               |
+| **Switch**              | `switch`                                                        |
+| **Exit**                | `exit`                                                          |

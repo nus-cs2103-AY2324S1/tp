@@ -28,8 +28,7 @@ public class ModelManager implements Model {
     private final UserPrefs userPrefs;
     private final FilteredList<FlashCard> filteredFlashCards;
     //private final FilteredList<FlashCard> tempFlashCards;
-    private int numberOfFlashCards;
-    private int numberOfRememberedWords;
+
     /**
      * Initializes a ModelManager with the given flashlingo and userPrefs.
      */
@@ -123,13 +122,11 @@ public class ModelManager implements Model {
     @Override
     public void deleteFlashCard(FlashCard target) {
         flashlingo.removeFlashCard(target);
-        this.numberOfFlashCards--;
     }
 
     @Override
     public void addFlashCard(FlashCard flashCard) {
         flashlingo.addFlashCard(flashCard);
-        this.numberOfFlashCards++;
         updateFilteredFlashCardList(PREDICATE_SHOW_ALL_FLASHCARDS);
     }
 
@@ -137,7 +134,6 @@ public class ModelManager implements Model {
     public void addFlashCards(ArrayList<FlashCard> flashCards) {
         for (FlashCard flashCard : flashCards) {
             flashlingo.addFlashCard(flashCard);
-            this.numberOfFlashCards++;
         }
         updateFilteredFlashCardList(PREDICATE_SHOW_ALL_FLASHCARDS);
     }
@@ -149,15 +145,7 @@ public class ModelManager implements Model {
     }
     @Override
     public int getNumberOfFlashCards() {
-        return this.numberOfFlashCards;
-    }
-    @Override
-    public int getNumberOfRememberedWords() {
-        return this.numberOfRememberedWords;
-    }
-    @Override
-    public void incrementRememberedWords() {
-        this.numberOfRememberedWords++;
+        return this.filteredFlashCards.size();
     }
 
     @Override
@@ -196,6 +184,16 @@ public class ModelManager implements Model {
         filteredFlashCards.setPredicate(predicate);
     }
 
+    @Override
+    public int getNumberOfRememberedWords() {
+        int numOfFlashCardsRemembered = 0;
+        for (FlashCard flashCard : filteredFlashCards) {
+            if (flashCard.isRecalled()) {
+                numOfFlashCardsRemembered += 1;
+            }
+        }
+        return numOfFlashCardsRemembered;
+    }
     @Override
     public void setReviewWord(Predicate<FlashCard> predicate, FlashCard flashCard) {
         filteredFlashCards.setPredicate(predicate);

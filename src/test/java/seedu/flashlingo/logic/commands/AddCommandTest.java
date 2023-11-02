@@ -7,10 +7,8 @@ import org.junit.jupiter.api.Test;
 import seedu.flashlingo.model.flashcard.words.OriginalWord;
 import seedu.flashlingo.model.flashcard.words.TranslatedWord;
 
-/**
- * Adds a flashcard to Flashlingo.
- */
 public class AddCommandTest {
+
     @Test
     public void constructor_nullFlashCard_throwsNullPointerException() {
         // Check that the constructor throws a NullPointerException when a null FlashCard is provided.

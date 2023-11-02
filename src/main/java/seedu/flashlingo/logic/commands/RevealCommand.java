@@ -16,7 +16,7 @@ public class RevealCommand extends Command {
 
     // For help function
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Reveals the translation.\n"
-        + "Example: " + COMMAND_WORD + " ";
+            + "Example: " + COMMAND_WORD + " ";
 
     public static final String MESSAGE_SUCCESS = "The translation is: ";
 
@@ -49,6 +49,6 @@ public class RevealCommand extends Command {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-          .toString();
+                .toString();
     }
 }

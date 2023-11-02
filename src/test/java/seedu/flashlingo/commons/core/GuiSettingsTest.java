@@ -14,4 +14,3 @@ public class GuiSettingsTest {
         assertEquals(expected, guiSettings.toString());
     }
 }
-

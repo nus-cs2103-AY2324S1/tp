@@ -16,7 +16,7 @@ public class StartCommand extends Command {
 
     // For help function
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Starts reviewing session.\n"
-        + "Example: " + COMMAND_WORD + " ";
+            + "Example: " + COMMAND_WORD + " ";
 
     public static final String MESSAGE_SUCCESS = "Review Session has been started.";
     @Override
@@ -43,7 +43,7 @@ public class StartCommand extends Command {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-          .add("start", "")
-          .toString();
+                .add("start", "")
+                .toString();
     }
 }

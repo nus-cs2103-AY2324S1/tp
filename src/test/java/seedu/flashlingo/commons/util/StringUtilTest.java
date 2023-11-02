@@ -1,9 +1,8 @@
 package seedu.flashlingo.commons.util;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.flashlingo.testutil.Assert.assertThrows;
 
 import java.io.FileNotFoundException;
 
@@ -62,21 +61,14 @@ public class StringUtilTest {
 
     @Test
     public void containsWordIgnoreCase_emptyWord_throwsIllegalArgumentException() {
-        IllegalArgumentException exception = assertThrows(
-                IllegalArgumentException.class, () ->
-                        StringUtil.containsWordIgnoreCase("typical sentence", "  ")
-        );
-        assertEquals("Word parameter cannot be empty", exception.getMessage());
-
+        assertThrows(IllegalArgumentException.class, "Word parameter cannot be empty", ()
+            -> StringUtil.containsWordIgnoreCase("typical sentence", "  "));
     }
 
     @Test
     public void containsWordIgnoreCase_multipleWords_throwsIllegalArgumentException() {
-        IllegalArgumentException exception = assertThrows(
-                IllegalArgumentException.class, () ->
-                        StringUtil.containsWordIgnoreCase("typical sentence", "aaa BBB")
-        );
-        assertEquals("Word parameter should be a single word", exception.getMessage());
+        assertThrows(IllegalArgumentException.class, "Word parameter should be a single word", ()
+            -> StringUtil.containsWordIgnoreCase("typical sentence", "aaa BBB"));
     }
 
     @Test

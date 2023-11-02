@@ -18,7 +18,7 @@ public class NoCommand extends Command {
 
     // For help function
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Indicates user hasn't memorized the word.\n"
-        + "Example: " + COMMAND_WORD + " ";
+            + "Example: " + COMMAND_WORD + " ";
 
     public static final String MESSAGE_SUCCESS = "It seems like that you did not memorize this word well.";
 
@@ -58,6 +58,6 @@ public class NoCommand extends Command {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-          .toString();
+                .toString();
     }
 }

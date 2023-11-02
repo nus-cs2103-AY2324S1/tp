@@ -16,7 +16,7 @@ public class EndCommand extends Command {
 
     // For help function
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Ends reviewing session.\n"
-        + "Example: " + COMMAND_WORD + " ";
+            + "Example: " + COMMAND_WORD + " ";
 
     public static final String MESSAGE_SUCCESS = "Review Session has ended.";
     public static final String MESSAGE_STATE_REPEATED = "Review session hasn't been started!";
@@ -45,7 +45,7 @@ public class EndCommand extends Command {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-          .add("start", "")
-          .toString();
+                .add("start", "")
+                .toString();
     }
 }

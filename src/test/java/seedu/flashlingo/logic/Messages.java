@@ -18,11 +18,11 @@ public class Messages {
     public static final String MESSAGE_INVALID_FLASHCARD_DISPLAYED_INDEX = "The flashcard index provided is invalid";
     public static final String MESSAGE_FLASHCARDS_LISTED_OVERVIEW = "%1$d flashcards listed!";
     public static final String MESSAGE_DUPLICATE_FIELDS =
-                "Multiple values specified for the following single-valued field(s): ";
+            "Multiple values specified for the following single-valued field(s): ";
     public static final String MESSAGE_DUPLICATE_FLASHCARD = "Duplicated Flashcards found!";
 
     public static final String MESSAGE_IN_REVIEW_SESSION = "Sorry, currently you are in a review session. Your command "
-        + "is not supported.\nPlease end the review session first.";
+            + "is not supported.\nPlease end the review session first.";
     public static final String MESSAGE_NOT_IN_REVIEW_SESSION = "You are not in a review session.";
     /**
      * Returns an error message indicating the duplicate prefixes.

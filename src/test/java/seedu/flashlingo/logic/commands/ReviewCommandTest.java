@@ -21,7 +21,7 @@ public class ReviewCommandTest {
     public void execute_review_success() {
 
         Model expectedModel = new ModelManager(new Flashlingo(model.getFlashlingo()), new UserPrefs());
-        String expectedMessage = ReviewCommand.MESSAGE_SUCCESS + "\n" + "0 flashcards listed!" + "\n[]";
+        String expectedMessage = ReviewCommand.MESSAGE_SUCCESS + "\n" + "0 flash cards listed!" + "\n[]";
         CommandTestUtil.assertCommandSuccess(new ReviewCommand(), model, expectedMessage, expectedModel);
     }
     @Test

@@ -2,7 +2,7 @@ package seedu.flashlingo.commons.util;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static seedu.flashlingo.testutil.Assert.assertThrows;
 
 import java.io.IOException;
 import java.nio.file.Path;

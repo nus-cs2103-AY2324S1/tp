@@ -1,8 +1,7 @@
 package seedu.flashlingo.commons.util;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static seedu.flashlingo.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
@@ -32,9 +31,6 @@ public class AppUtilTest {
     @Test
     public void checkArgument_falseWithErrorMessage_throwsIllegalArgumentException() {
         String errorMessage = "error message";
-        IllegalArgumentException exception = assertThrows(
-                IllegalArgumentException.class, () -> AppUtil.checkArgument(false, errorMessage)
-        );
-        assertEquals(errorMessage, exception.getMessage());
+        assertThrows(IllegalArgumentException.class, errorMessage, () -> AppUtil.checkArgument(false, errorMessage));
     }
 }

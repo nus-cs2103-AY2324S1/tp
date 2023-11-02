@@ -24,7 +24,7 @@ public class AddCommandParserTest {
 
         // whitespace only preamble
         assertParseSuccess(parser, CommandTestUtil.PREAMBLE_WHITESPACE
-                        + CommandTestUtil.WORD_DESC_BOB + TRANSLATION_DESC_BOB, new AddCommand(expectedFlashCard));
+                + CommandTestUtil.WORD_DESC_BOB + TRANSLATION_DESC_BOB, new AddCommand(expectedFlashCard));
     }
 
     @Test

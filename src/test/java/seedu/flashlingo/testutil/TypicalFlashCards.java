@@ -52,13 +52,13 @@ public class TypicalFlashCards {
     public static final FlashCard BENSON = new FlashCardBuilder()
             .withOriginalWord("Benson Meier", "English")
             .withTranslatedWord("本森·梅尔", "Mandarin")
-           .build();
+            .build();
     public static final FlashCard CARL = new FlashCardBuilder()
             .withOriginalWord("Carl Kurz", "English")
             .withTranslatedWord("卡尔·库尔兹", "Mandarin")
             .build();
     public static final FlashCard DANIEL = new FlashCardBuilder().withOriginalWord("Daniel Meier",
-                     "English")
+                    "English")
             .withTranslatedWord("丹尼尔·梅尔", "Mandarin")
             .build();
     public static final FlashCard ELLE = new FlashCardBuilder().withOriginalWord("Elle Meyer",
@@ -66,22 +66,22 @@ public class TypicalFlashCards {
             .withTranslatedWord("艾尔·迈耶", "Mandarin")
             .build();
     public static final FlashCard FIONA = new FlashCardBuilder().withOriginalWord("Fiona Kunz",
-                     "English")
+                    "English")
             .withTranslatedWord("菲奥娜昆兹", "Mandarin")
             .build();
 
     public static final FlashCard GEORGE = new FlashCardBuilder().withOriginalWord("George Best",
-                     "English")
+                    "English")
             .withTranslatedWord("乔治·贝斯特", "Mandarin")
             .build();
 
     // Manually added
     public static final FlashCard HOON = new FlashCardBuilder().withOriginalWord("Hoon Meier",
-                     "English")
+                    "English")
             .withTranslatedWord("胡恩·梅尔", "Mandarin")
             .build();
     public static final FlashCard IDA = new FlashCardBuilder().withOriginalWord("Ida Mueller",
-                     "English")
+                    "English")
             .withTranslatedWord("艾达·米勒", "Mandarin")
             .build();
 

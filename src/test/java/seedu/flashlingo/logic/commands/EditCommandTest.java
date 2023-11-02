@@ -59,7 +59,7 @@ public class EditCommandTest {
         FlashCard editedFlashCard = flashCardInList.withOriginalWord(CommandTestUtil.VALID_ORIGINAL_WORD_BOB, "")
                 .withTranslatedWord(CommandTestUtil.VALID_TRANSLATION_BOB, "")
                 .withWhenToReview(new GregorianCalendar(2023, Calendar.DECEMBER, 23).getTime())
-                        .withLevel(1).build();
+                .withLevel(1).build();
         OriginalWord editedOriginalWord = editedFlashCard.getOriginalWord();
         TranslatedWord editedTranslatedWord = editedFlashCard.getTranslatedWord();
         EditCommand editCommand = new EditCommand(indexLastFlashCard, new String[]{ editedOriginalWord.getWord(),
@@ -111,7 +111,7 @@ public class EditCommandTest {
                 firstTranslatedWord.getWord(), firstTranslatedWord.getLanguage()
         });
 
-        CommandTestUtil.assertCommandFailure(editCommand, model, EditCommand.MESSAGE_DUPLICATE_FLASHCARD);
+        CommandTestUtil.assertCommandFailure(editCommand, model, Messages.MESSAGE_DUPLICATE_FLASHCARD);
     }
 
     @Test
@@ -126,14 +126,14 @@ public class EditCommandTest {
                 new String[]{originalWord.getWord(), originalWord.getLanguage(),
                         translatedWord.getWord(), translatedWord.getLanguage()});
 
-        CommandTestUtil.assertCommandFailure(editCommand, model, EditCommand.MESSAGE_DUPLICATE_FLASHCARD);
+        CommandTestUtil.assertCommandFailure(editCommand, model, Messages.MESSAGE_DUPLICATE_FLASHCARD);
     }
 
     @Test
     public void execute_invalidFlashCardIndexUnfilteredList_failure() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredFlashCardList().size() + 1);
         FlashCard editedFlashCard = new FlashCardBuilder().withOriginalWord(
-                CommandTestUtil.VALID_TRANSLATED_WORD_THANKS, "")
+                        CommandTestUtil.VALID_TRANSLATED_WORD_THANKS, "")
                 .build();
         OriginalWord editedOriginalWord = editedFlashCard.getOriginalWord();
         TranslatedWord editedTranslatedWord = editedFlashCard.getTranslatedWord();
@@ -155,7 +155,7 @@ public class EditCommandTest {
         // ensures that outOfBoundIndex is still in bounds of address book list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getFlashlingo().getFlashCardList().size());
         FlashCard editedFlashCard = new FlashCardBuilder().withOriginalWord(
-                CommandTestUtil.VALID_ORIGINAL_WORD_WELCOME, "")
+                        CommandTestUtil.VALID_ORIGINAL_WORD_WELCOME, "")
                 .build();
         OriginalWord editedOriginalWord = editedFlashCard.getOriginalWord();
         TranslatedWord editedTranslatedWord = editedFlashCard.getTranslatedWord();
@@ -181,7 +181,7 @@ public class EditCommandTest {
 
         // same values -> returns true
         FlashCard copyFlashCard = new FlashCardBuilder().withOriginalWord(
-                CommandTestUtil.VALID_ORIGINAL_WORD_PLEASE, "")
+                        CommandTestUtil.VALID_ORIGINAL_WORD_PLEASE, "")
                 .withTranslatedWord(CommandTestUtil.VALID_TRANSLATED_WORD_PLEASE, "")
                 .withWhenToReview(new GregorianCalendar(2023, Calendar.DECEMBER, 24).getTime())
                 .withLevel(1).build();
@@ -210,7 +210,7 @@ public class EditCommandTest {
                         standardTranslatedWord.getWord(), standardTranslatedWord.getLanguage()})));
 
         FlashCard differentFlashCard = new FlashCardBuilder().withOriginalWord(
-                CommandTestUtil.VALID_ORIGINAL_WORD_THANKS, "")
+                        CommandTestUtil.VALID_ORIGINAL_WORD_THANKS, "")
                 .withTranslatedWord(CommandTestUtil.VALID_TRANSLATED_WORD_THANKS, "")
                 .withWhenToReview(new GregorianCalendar(2023, Calendar.DECEMBER, 24).getTime())
                 .withLevel(1).build();
@@ -219,7 +219,7 @@ public class EditCommandTest {
         // different descriptor -> returns false
         assertFalse(standardCommand.equals(new EditCommand(TypicalIndexes.INDEX_FIRST_FLASHCARD,
                 new String[]{differentOriginalWord.getWord(), differentOriginalWord.getLanguage(),
-                differentTranslatedWord.getWord(), differentTranslatedWord.getLanguage()})));
+                        differentTranslatedWord.getWord(), differentTranslatedWord.getLanguage()})));
     }
 
     @Test

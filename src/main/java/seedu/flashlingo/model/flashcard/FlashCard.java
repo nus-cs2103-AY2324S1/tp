@@ -17,6 +17,7 @@ public class FlashCard {
     private final TranslatedWord translatedWord;
     private Date whenToReview; // Date the flashcard was needs to be reviewed
     private ProficiencyLevel currentLevel; // How many times successfully remembered
+    private boolean isRemembered;//if successfully remembers word
 
     /**
      * Constructor for Flashcard
@@ -32,6 +33,24 @@ public class FlashCard {
         this.whenToReview = whenToReview;
         this.translatedWord = translatedWord;
         this.originalWord = originalWord;
+    }
+
+    /**
+     * Constructor for Flashcard
+     *
+     * @param originalWord   The word in the original language
+     * @param translatedWord The word in the language you are learning
+     * @param whenToReview   The date of when you need to review this word
+     * @param level          The level of familiarity with the word
+     * @param isRemembered   Whether the word was remembered
+     */
+    public FlashCard(OriginalWord originalWord, TranslatedWord translatedWord, Date whenToReview,
+                     ProficiencyLevel level, boolean isRemembered) {
+        this.currentLevel = level;
+        this.whenToReview = whenToReview;
+        this.translatedWord = translatedWord;
+        this.originalWord = originalWord;
+        this.isRemembered = isRemembered;
     }
     public OriginalWord getOriginalWord() {
         return originalWord;
@@ -117,6 +136,26 @@ public class FlashCard {
         }
     }
 
+    /**
+     * Sets this FlashCard as remembered
+     */
+    public void recallFlashCard() {
+        this.isRemembered = true;
+    }
+
+    /**
+     * Sets this FlashCard as forgotten
+     */
+    public void forgetFlashCard() {
+        this.isRemembered = false;
+    }
+
+    /**
+     * Evaluates and returns if this FlashCard is remembered
+     */
+    public boolean isRecalled() {
+        return this.isRemembered;
+    }
     /**
      * Formats Flashcard for writing to textFile
      *
