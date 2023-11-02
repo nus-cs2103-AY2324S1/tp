@@ -39,9 +39,15 @@ HouR is a **desktop app for managing employee records, optimized for use via a C
 
    * `sort f/salary in/asc`: Sorts the employees by their salaries in ascending order.
 
-   * `addleave id/EID1234-5678 from/2023-12-26 to/2023-12-28`: Adds leave dates from 29 to 31 October 2023 inclusive for employee with id EID1234-5678
+   * `addleave id/EID1234-5678 from/2023-12-26 to/2023-12-28`: Adds leave dates from 29 to 31 October 2023 inclusive for employee with id EID1234-5678.
 
-   * `deleteleave id/EID1234-5678 from/2023-12-26 to/2023-12-28`: Deletes all leave dates of an employee with id EID1234-5678 that fall between 29 and 31 October 2023 inclusive
+   * `deleteleave id/EID1234-5678 from/2023-12-26 to/2023-12-28`: Deletes all leave dates of an employee with id EID1234-5678 that fall between 29 and 31 October 2023 inclusive.
+   
+   * `editleave id/EID1234-5678 old/2023-12-26 new/2023-12-28`: Edits the old leave date `2023-12-26` of an employee with id EID1234-5678 to new leave date `2023-12-28`.
+   
+   * `addremark id/EID1234-5678 r/good worker`: Adds the remark `good worker` to the employee with id EID1234-6788.
+   
+   * `deleteremark id/EID1234-5678 r/good worker`: Deletes the remark `good worker` from the employee with id EID1234-5678.
    
    * `overtime id/EID1234-5678 o/inc a/10`: Increases the overtime hours of employee with id EID1234-5678 to 10 hours.
    
@@ -60,12 +66,15 @@ HouR is a **desktop app for managing employee records, optimized for use via a C
 - List of commands: `help`
 - Add an employee: `add`
 - Delete an employee: `delete`
-- Edits an employee: `edit`
+- Edit an employee: `edit`
 - List all employees: `list`
 - Find employees: `find`
 - Sort employees by attribute: `sort`
 - Add leave dates for an employee: `addleave`
 - Delete leave dates of an employee: `deleteleave`
+- Edit leave of an employee: `editleave`
+- Add remarks for an employee: `addremark`
+- Delete remarks of an employee: `deleteremark`
 - Update overtime hours of an employee: `overtime`
 - Get details on employee performance: `report`
 - Clear all employees: `clear`
@@ -225,7 +234,7 @@ Examples:
 
 Deletes the leave dates that an employee has that fall into the specified period of time.
 
-Format: `add  id/EMPLOYEE_ID from/START_DATE to/END_DATE`
+Format: `addleave id/EMPLOYEE_ID from/START_DATE to/END_DATE`
 
 * Delete leave dates that are between `START_DATE` and `END_DATE` inclusive from the leaves taken by employee with id `EMPLOYEE_ID`.
 * `START_DATE` must not be after `END_DATE`.
@@ -241,6 +250,61 @@ Examples:
 * `deleteleave id/EID1234-5678 from/2023-12-31 to/2023-12-28` is invalid because the start date 2023-12-31 is after the end date 2023-12-28, which is impossible.
 
 ![deleteleave failure](images/deleteLeaveFailure.png)
+
+### Editing a leave date of an employee : `editleave`
+
+Edits the old leave date specified to the new leave date of the specified employee.
+
+Format: `editleave id/EMPLOYEE_ID old/OLD_DATE new/NEW_DATE`
+
+* Edits leave on `OLD_DATE` to `NEW_DATE` of the specified employee with id `EMPLOYEE_ID`.
+* `OLD_DATE` must already exist and `NEW_DATE` must not already exist.
+
+Examples:
+* `editleave id/EID1234-5678 from/2023-12-26 to/2023-12-28` edits the leave on 26 December 2023 to 28 December 2023
+  for employee with id EID1234-5678.
+
+![editleave success](images/editLeaveSuccess.png)
+
+* `addleave id/EID1234-5678 from/2023-12-31 to/2023-12-28` is invalid because the start date 2023-12-31 is after the end date 2023-12-28, which is impossible.
+
+![editleave failure](images/editLeaveFailure.png)
+
+### Adding a remark for an employee : `addremark`
+
+Adds the specified remark to the specified employee.
+
+Format: `addremark id/EMPLOYEE_ID r/REMARK`
+
+* `REMARK` must not already exist (and is case-insensitive so `good worker` and `GOOD WORKER` are considered as the same remark).
+
+Examples:
+* `addremark id/EID1234-5678 r/good worker` adds the remark `good worker` to
+   employee with id EID1234-5678.
+
+![addremark success](images/addremarkSuccess.png)
+
+* `addleave id/EID1234-5678 from/2023-12-31 to/2023-12-28` is invalid because the start date 2023-12-31 is after the end date 2023-12-28, which is impossible.
+
+![addremark failure](images/addremarkFailure.png)
+
+### Deleting a remark of an employee : `deleteremark`
+
+Deletes the specified remark from the specified employee.
+
+Format: `deleteremark id/EMPLOYEE_ID r/REMARK`
+
+* `REMARK` must already exist (and is case-insensitive so `good worker` and `GOOD WORKER` are considered as the same remark).
+
+Examples:
+* `deleteremark id/EID1234-5678 r/good worker` deletes the remark `good worker` from
+  employee with id EID1234-5678.
+
+![deleteremark success](images/deleteremarkSuccess.png)
+
+* `addleave id/EID1234-5678 from/2023-12-31 to/2023-12-28` is invalid because the start date 2023-12-31 is after the end date 2023-12-28, which is impossible.
+
+![deleteremark failure](images/deleteremarkFailure.png)
 
 ### Updating overtime hours of an employee : `overtime`
 
