@@ -113,7 +113,7 @@ Below is a quick overview of the various components of our interface.
 
 | Component        | Description                                                                                | 
 |------------------|--------------------------------------------------------------------------------------------|
-| Command Box      | You will enter your [commands](#glossary) along with its [parameters](#glossary) here.     |
+| Command Box      | You will enter your [commands](#glossary) along with its input here.                       |
 | Menu Bar         | Contains dropdown menu options for the application.                                        |
 | Result Display   | Displays the results of your commands.<br/>Any error messages will also be displayed here. | 
 | Tutor Details    | Contains information related to the tutor like name, phone number etc.                     |
@@ -542,7 +542,7 @@ Here is a list of the error messages you may encounter, when the command is ente
 | `This schedule already exists in the address book`                                                                 | There is a schedule for the same tutor with the same start and end time in the address book. |
 | `This tutor has a clashing schedule in the address book`                                                           | There is a schedule for the same tutor with overlapping times in the address book.           |
 | `At least one field to edit must be provided`                                                                      | There is no `st/` or `et/` tag provided to edit a field.                                     |
-| `Schedules start time should be before its end time`                                                               | The start time provided is before the end time.                                              |
+| `Schedules start time must be before its end time and both should be on the same day`                              | The provided start time is either before the end time or they are not on the same day.       |
 
 
 You can also refer to [input information](#input-examples) for details about valid inputs.
@@ -1014,7 +1014,6 @@ Here are some descriptions of the words you might come across in the User Guide:
 
 | Term                       | Definition                                                                                                                                                                                                                                                 |
 |----------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Parameter                  | Parameters are like fields in a form you are required to fill up. They include details you provide to execute a command. <br> For example, in the command `add-t n/NAME p/PHONE NUMBER e/EMAIL`, `n/NAME`, `p/PHONE NUMBER`, and `e/EMAIL` are parameters. |
 | Command                    | A command is an instruction given to the application to perform a specific action. For example, `list-t` is a command to list all tutors in the address book.                                                                                              |
 | GUI                        | GUI is a user interface that allows users to interact with the application using graphical elements like text fields, buttons, and menus.                                                                                                                  |
 | <span id="cli">CLI</span>  | CLI is a text-based user interface that allows users to interact with the application by typing commands.                                                                                                                                                  |
@@ -1036,7 +1035,7 @@ Here are some descriptions of the words you might come across in the User Guide:
 ### Input Information
 Here are some inputs you might come across in the User Guide:
 
-| Parameter           | Description                                       | Limitations                                                                                  |
+| Input               | Description                                       | Limitations                                                                                  |
 |---------------------|---------------------------------------------------|----------------------------------------------------------------------------------------------|
 | `n/NAME`            | Refers to the name of the tutor.                  | Only contain alphanumeric characters and spaces, and <br/>should <br/>not be blank.          |
 | `p/PHONE NUMBER`    | Refers to the phone number of the tutor.          | Only contain numbers, and should be at least 3 <br/>digits long.                             |
