@@ -81,4 +81,7 @@ public class Tags extends ListEntryField {
         Tags otherTags = (Tags) other;
         return tags.equals(otherTags.tags);
     }
+    public boolean containAll(Tags other) {
+        return tags.containsAll(other.tags);
+    }
 }

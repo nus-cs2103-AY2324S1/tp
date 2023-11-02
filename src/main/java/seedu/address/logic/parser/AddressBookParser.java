@@ -22,6 +22,7 @@ import seedu.address.logic.commands.DeleteTaskCommand;
 import seedu.address.logic.commands.EditLessonCommand;
 import seedu.address.logic.commands.EditPersonCommand;
 import seedu.address.logic.commands.ExitCommand;
+import seedu.address.logic.commands.FilterCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.LinkCommand;
@@ -153,6 +154,8 @@ public class AddressBookParser {
             return new NavigateCommand();
         case "nav":
             return new NavigateCommand();
+        case FilterCommand.COMMAND_WORD:
+            return new FilterCommandParser(model.getState()).parse(arguments);
         default:
             logger.finer("This user input caused a ParseException: " + userInput);
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
