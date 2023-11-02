@@ -55,10 +55,14 @@ public class AddressBookParserTest {
     public void parseCommand_edit() throws Exception {
         Person person = new PersonBuilder().build();
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(person).build();
-        EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
-                + INDEX_FIRST_PERSON.getOneBased() + " " + PersonUtil.getEditPersonDescriptorDetails(descriptor));
+        String editCommand = EditCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased()
+                + " " + PersonUtil.getEditPersonDescriptorDetails(descriptor);
+
+        EditCommand command = (EditCommand) parser.parseCommand(editCommand);
+
         assertEquals(new EditCommand(INDEX_FIRST_PERSON, descriptor), command);
     }
+
 
     @Test
     public void parseCommand_exit() throws Exception {
@@ -96,6 +100,14 @@ public class AddressBookParserTest {
     public void parseCommand_sort() throws Exception {
         assertTrue(parser.parseCommand(SortCommand.COMMAND_WORD) instanceof SortCommand);
     }
+
+    @Test
+    public void parseCommand_validFindCommand_returnsFindCommand() throws ParseException {
+        String userInput = "find Alice";
+        Command result = parser.parseCommand(userInput);
+        assertEquals(FindCommand.class, result.getClass());
+    }
+
 
     @Test
     public void parseCommand_unrecognisedInput_throwsParseException() {
