@@ -28,7 +28,7 @@ public class JsonAdaptedApplicant {
         @JsonProperty("interviewTime") String interviewTime) {
         this.name = name;
         this.phone = phone;
-        this.interviewTime = interviewTime;
+        this.interviewTime = interviewTime == null ? "cancel" : interviewTime;
     }
 
     /**
@@ -37,11 +37,7 @@ public class JsonAdaptedApplicant {
     public JsonAdaptedApplicant(Applicant source) {
         name = source.getName().fullName;
         phone = source.getPhone().value;
-        if (source.getInterviewTime().getTime() == null) {
-            interviewTime = null;
-        } else {
-            interviewTime = source.getInterviewTime().getTime();
-        }
+        interviewTime = source.getInterviewTime().getTime() == null ? "cancel" : source.getInterviewTime().getTime();
     }
 
     /**

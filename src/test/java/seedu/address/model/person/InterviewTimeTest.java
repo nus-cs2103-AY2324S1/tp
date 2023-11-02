@@ -29,15 +29,15 @@ public class InterviewTimeTest {
         assertTrue(InterviewTime.isValidTime("15/12/2015 1500")); // correct format
         assertTrue(InterviewTime.isValidTime("07/01/2003 1900")); // correct format
         assertTrue(InterviewTime.isValidTime("19/10/1970 2200")); // correct format
-        assertTrue(InterviewTime.isValidTime(null)); // correct format
+        assertTrue(InterviewTime.isValidTime("cancel")); // correct format
     }
 
     @Test
     public void equals() {
-        InterviewTime interviewTime = new InterviewTime(null);
+        InterviewTime interviewTime = new InterviewTime("cancel");
 
         // same values -> returns true
-        assertTrue(interviewTime.equals(new InterviewTime(null)));
+        assertTrue(interviewTime.equals(new InterviewTime("cancel")));
 
         // same object -> returns true
         assertTrue(interviewTime.equals(interviewTime));

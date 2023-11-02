@@ -13,7 +13,7 @@ public class InterviewTime {
 
     public static final String MESSAGE_CONSTRAINTS =
         "Interview time should be in the format of DD/MM/YYYY HHmm. To cancel the interview, enter "
-            + "'Interview time has not been set'(case sensitive)";
+            + "'cancel' (case sensitive)";
 
     public static final String VALIDATION_REGEX = "^\\d{2}/\\d{2}/\\d{4} \\d{4}$";
 
@@ -36,7 +36,7 @@ public class InterviewTime {
      * @return True if the string is a valid interview time, false otherwise.
      */
     public static boolean isValidTime(String test) {
-        return test == null || test.matches(VALIDATION_REGEX);
+        return test.equals("cancel") || test.matches(VALIDATION_REGEX);
     }
 
     @Override
@@ -57,7 +57,7 @@ public class InterviewTime {
 
     @Override
     public String toString() {
-        if (time == null) {
+        if (time.equals("cancel")) {
             return "Interview time has not been set";
         }
         DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");

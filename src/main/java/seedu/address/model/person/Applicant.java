@@ -38,7 +38,7 @@ public class Applicant extends Person {
     public Applicant(Name name, Phone phone) {
         super(name);
         this.phone = phone;
-        this.interviewTime = new InterviewTime(null);
+        this.interviewTime = new InterviewTime("cancel");
     }
 
     /**
@@ -59,7 +59,7 @@ public class Applicant extends Person {
         Applicant otherApplicant = (Applicant) other;
         // applicants are considered the same if they have the same name or phone
         return getName().equals(otherApplicant.getName())
-                || this.phone.equals(otherApplicant.phone);
+            || this.phone.equals(otherApplicant.phone);
     }
 
     public Phone getPhone() {
@@ -87,8 +87,8 @@ public class Applicant extends Person {
 
         Applicant otherApplicant = (Applicant) other;
         return getName().equals(otherApplicant.getName())
-                && this.phone.equals(otherApplicant.phone)
-                && this.interviewTime.equals(otherApplicant.interviewTime);
+            && this.phone.equals(otherApplicant.phone)
+            && this.interviewTime.equals(otherApplicant.interviewTime);
     }
 
     @Override
@@ -100,16 +100,16 @@ public class Applicant extends Person {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("name", getName())
-                .add("phone", phone)
-                .add("interview time", interviewTime)
-                .toString();
+            .add("name", getName())
+            .add("phone", phone)
+            .add("interview time", interviewTime)
+            .toString();
     }
 
     @Override
     public String detailsToCopy() {
         return "Name: " + getName() + "\n"
-                + "Phone: " + getPhone() + "\n"
-                + "Interview Time: " + interviewTime;
+            + "Phone: " + getPhone() + "\n"
+            + "Interview Time: " + interviewTime;
     }
 }

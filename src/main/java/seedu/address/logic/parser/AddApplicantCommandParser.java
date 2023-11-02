@@ -26,10 +26,10 @@ public class AddApplicantCommandParser implements Parser<AddApplicantCommand> {
      */
     public AddApplicantCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_INTERVIEW);
+            ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_INTERVIEW);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_PHONE)
-                || !argMultimap.getPreamble().isEmpty()) {
+            || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddApplicantCommand.MESSAGE_USAGE));
         }
 
@@ -40,7 +40,7 @@ public class AddApplicantCommandParser implements Parser<AddApplicantCommand> {
         if (argMultimap.getValue(PREFIX_INTERVIEW).isPresent()) {
             interviewTime = ParserUtil.parseInterviewTime(argMultimap.getValue(PREFIX_INTERVIEW).get());
         } else {
-            interviewTime = new InterviewTime(null);
+            interviewTime = new InterviewTime("cancel");
         }
 
         Applicant applicant = new Applicant(name, phone, interviewTime);
