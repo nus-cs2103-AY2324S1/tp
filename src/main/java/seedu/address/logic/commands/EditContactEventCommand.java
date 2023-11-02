@@ -94,8 +94,8 @@ public class EditContactEventCommand extends Command {
     }
 
     /**
-     * Creates and returns a {@code Person} with the details of {@code personToEdit}
-     * edited with {@code editPersonDescriptor}.
+     * Creates and returns a {@code Person} with the details of {@code personToEdit}, editing the event with index
+     * {@code eventIndex} with {@code editEventDescriptor}.
      */
     private static Person createPersonsEditedEvent(Index eventIndex,
                                                    Person personToEdit, EditEventDescriptor editEventDescriptor) {
@@ -116,6 +116,14 @@ public class EditContactEventCommand extends Command {
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, updatedCalendar);
     }
 
+    /**
+     * Updates an event in the given calendar with the new information provided in the EditEventDescriptor.
+     *
+     * @param calendar              The calendar containing the event to be updated.
+     * @param eventIndex            The index of the event to be updated in the calendar's event list.
+     * @param editEventDescriptor   The descriptor containing the new information for the event.
+     * @return                      The updated event list.
+     */
     public static List<Event> updateEventList(Calendar calendar, Index eventIndex,
                                              EditEventDescriptor editEventDescriptor) {
         List<Event> eventList = calendar.getEventManager().asEventList();
@@ -132,6 +140,23 @@ public class EditContactEventCommand extends Command {
         Event updatedEvent = new Event(newEventDescription, newEventPeriod);
         eventList.set(eventIndex.getZeroBased(), updatedEvent);
         return eventList;
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof EditContactEventCommand)) {
+            return false;
+        }
+
+        EditContactEventCommand otherEditCommand = (EditContactEventCommand) other;
+        return personIndex.equals(otherEditCommand.personIndex)
+                && eventIndex.equals(otherEditCommand.eventIndex)
+                && editEventDescriptor.equals(otherEditCommand.editEventDescriptor);
     }
 
     /**
@@ -161,7 +186,7 @@ public class EditContactEventCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(start, end, eventPeriod);
+            return CollectionUtil.isAnyNonNull(start, end, eventDescription);
         }
 
         public void setEventDescription(EventDescription eventDescription) {
@@ -174,6 +199,8 @@ public class EditContactEventCommand extends Command {
 
         public void setEventPeriod(EventPeriod eventPeriod) {
             this.eventPeriod = eventPeriod;
+            setStart(eventPeriod.getStart());
+            setEnd(eventPeriod.getEnd());
         }
 
         public Optional<EventPeriod> getEventPeriod() {
@@ -185,6 +212,10 @@ public class EditContactEventCommand extends Command {
             this.start = start;
         }
 
+        public void setStart(LocalDateTime start) {
+            this.start = start;
+        }
+
         public Optional<LocalDateTime> getStart() {
             return Optional.ofNullable(start);
         }
@@ -192,6 +223,10 @@ public class EditContactEventCommand extends Command {
         public void setEnd(String endString) {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
             LocalDateTime end = LocalDateTime.parse(endString, formatter);
+            this.end = end;
+        }
+
+        public void setEnd(LocalDateTime end) {
             this.end = end;
         }
 
@@ -212,7 +247,8 @@ public class EditContactEventCommand extends Command {
 
             EditEventDescriptor otherEditEventDescriptor = (EditEventDescriptor) other;
             return Objects.equals(eventDescription, otherEditEventDescriptor.eventDescription)
-                    && Objects.equals(eventPeriod, otherEditEventDescriptor.eventPeriod);
+                    && Objects.equals(start, otherEditEventDescriptor.start)
+                    && Objects.equals(end, otherEditEventDescriptor.end);
         }
 
         @Override
