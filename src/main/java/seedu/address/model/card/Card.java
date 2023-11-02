@@ -48,6 +48,9 @@ public class Card implements Comparable<Card> {
         this.solveCount = new SolveCount();
     }
 
+    /**
+     * Every field must be present, and taking in if solveCount is provided
+     */
     public Card(Question question, Answer answer, String difficulty, List<Tag> tags,
                 PracticeDate nextPracticeDate, PracticeDate lastPracticeDate, SolveCount solveCount) {
         requireAllNonNull(question, answer, difficulty, tags, nextPracticeDate);
