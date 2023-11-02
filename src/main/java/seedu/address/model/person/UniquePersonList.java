@@ -55,11 +55,9 @@ public class UniquePersonList implements Iterable<Person> {
      */
     public List<String> findInterval(Interval interval) {
         requireNonNull(interval);
-        List<String> filteredSchedule = internalList.stream()
+        return internalList.stream()
                 .filter(person -> person.getDay().toString().equals(interval.getIntervalDay().toString()))
-                .map(person -> person.getLesson().getTimeSlot())
-                .collect(Collectors.toList());
-        return filteredSchedule;
+                .map(person -> person.getLesson().getTimeSlot()).collect(Collectors.toList());
     }
 
     /**
