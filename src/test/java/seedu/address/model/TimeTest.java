@@ -191,10 +191,9 @@ public class TimeTest {
     @Test
     void testListInterviewsToday4() {
         List<Interview> interviewList = TypicalInterviews.getTypicalInterviews();
-        LocalDateTime today = LocalDateTime.now();
         int todayDay = 1;
-        int todayMonth = today.getMonthValue();
-        int todayYear = today.getYear();
+        int todayMonth = 1;
+        int todayYear = 2099;
         Interview interviewNow = new Interview(TypicalApplicants.IDA,
                 "SWE",
                 LocalDateTime.of(todayYear, todayMonth, todayDay + 1, 9, 11),
@@ -251,10 +250,9 @@ public class TimeTest {
     @Test
     void testListInterviewsToday7() {
         List<Interview> interviewList = TypicalInterviews.getTypicalInterviews();
-        LocalDateTime today = LocalDateTime.now();
-        int todayDay = 2;
-        int todayMonth = today.getMonthValue();
-        int todayYear = today.getYear();
+        int todayDay = 1;
+        int todayMonth = 1;
+        int todayYear = 2099;
         Interview interviewNow = new Interview(TypicalApplicants.IDA,
                 "SWE",
                 LocalDateTime.of(todayYear, todayMonth, todayDay, 9, 11),
