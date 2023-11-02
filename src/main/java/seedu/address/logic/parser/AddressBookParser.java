@@ -17,11 +17,12 @@ import seedu.address.logic.commands.band.FindBandCommand;
 import seedu.address.logic.commands.general.ClearCommand;
 import seedu.address.logic.commands.general.ExitCommand;
 import seedu.address.logic.commands.general.HelpCommand;
+import seedu.address.logic.commands.general.ListCommand;
 import seedu.address.logic.commands.musician.AddCommand;
 import seedu.address.logic.commands.musician.DeleteCommand;
 import seedu.address.logic.commands.musician.EditCommand;
 import seedu.address.logic.commands.musician.FindCommand;
-import seedu.address.logic.commands.musician.ListCommand;
+import seedu.address.logic.commands.musician.ListAllTagsCommand;
 import seedu.address.logic.parser.band.AddBandCommandParser;
 import seedu.address.logic.parser.band.AddMusicianToBandCommandParser;
 import seedu.address.logic.parser.band.DeleteBandCommandParser;
@@ -76,17 +77,17 @@ public class AddressBookParser {
         case DeleteCommand.COMMAND_WORD:
             return new DeleteCommandParser().parse(arguments);
 
-        case ClearCommand.COMMAND_WORD:
-            return new ClearCommand();
-
         case FindCommand.COMMAND_WORD:
             return new FindCommandParser().parse(arguments);
+
+        case ClearCommand.COMMAND_WORD:
+            return new ClearCommand();
 
         case ListCommand.COMMAND_WORD:
             return new ListCommand();
 
-        case FindBandCommand.COMMAND_WORD:
-            return new FindBandCommandParser().parse(arguments);
+        case ListAllTagsCommand.COMMAND_WORD:
+            return new ListAllTagsCommand();
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
@@ -105,6 +106,9 @@ public class AddressBookParser {
 
         case EditBandCommand.COMMAND_WORD:
             return new EditBandCommandParser().parse(arguments);
+
+        case FindBandCommand.COMMAND_WORD:
+            return new FindBandCommandParser().parse(arguments);
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);

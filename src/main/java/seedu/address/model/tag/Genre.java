@@ -4,6 +4,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 
 /**
  * Represents a Genre Tag in the address book.
@@ -12,8 +13,9 @@ import java.util.HashSet;
 public class Genre extends Tag {
 
     public static final String MESSAGE_CONSTRAINTS = "Genre tags names should be a valid genre name";
-    public static final HashSet<String> VALID_GENRES = new HashSet<String>(Arrays.asList(
-            "pop", "rock", "jazz", "r&b", "classical", "hiphop", "country", "metal"
+    public static final HashSet<String> VALID_GENRES = new LinkedHashSet<>(Arrays.asList(
+            "blues", "classical", "country", "electronic", "folk", "hiphop", "jazz",
+            "latin", "metal", "pop", "rock", "soul", "other"
     ));
 
     /**
