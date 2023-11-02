@@ -1,8 +1,11 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+
 import static seedu.address.logic.commands.CommandTestUtil.DEPARTMENT_DESC_INVESTMENT;
+import static seedu.address.logic.commands.CommandTestUtil.DEPARTMENT_DESC_LOGISTIC;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DEPARTMENT_INVESTMENT;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DEPARTMENT_LOGISTIC;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DEPARTMENT;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
@@ -26,6 +29,10 @@ public class FilterCommandParserTest {
         String userInput = DEPARTMENT_DESC_INVESTMENT;
         FilterCommand expectedFilterCommand =
                 new FilterCommand(new ContainsDepartmentPredicate(VALID_DEPARTMENT_INVESTMENT));
+        assertParseSuccess(parser, userInput, expectedFilterCommand);
+
+        userInput = DEPARTMENT_DESC_LOGISTIC;
+        expectedFilterCommand = new FilterCommand(new ContainsDepartmentPredicate(VALID_DEPARTMENT_LOGISTIC));
         assertParseSuccess(parser, userInput, expectedFilterCommand);
     }
 }
