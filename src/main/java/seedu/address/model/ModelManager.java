@@ -160,6 +160,17 @@ public class ModelManager implements Model {
         setToDefaultGui();
     }
 
+    @Override
+    public void setBand(Band target, Band editedBand) {
+        requireAllNonNull(target, editedBand);
+        addressBook.setBand(target, editedBand);
+
+        updateFilteredMusicianList(PREDICATE_SHOW_ALL_MUSICIANS);
+        updateFilteredBandList(PREDICATE_SHOW_ALL_BANDS);
+
+
+    }
+
     //=========== Filtered Musician List Accessors =============================================================
 
     /**
