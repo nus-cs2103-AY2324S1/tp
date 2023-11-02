@@ -33,7 +33,7 @@ public class RedoCommandTest {
 
     // APPOINTMENT COMMANDS
     private static final String SAMPLE_SCHEDULE_COMMAND_1 =
-            "schedule patient=John Doe start=2023/10/20 12:00 end=2023/10/20 13:59 description=test";
+            "schedule patient=John Doe start=2023/10/20 12:00 end=2023/10/20 13:59 description=test priority=high";
     // OTHER COMMANDS
     private static final String SAMPLE_UNDO_COMMAND = "undo";
     private static final String SAMPLE_REDO_COMMAND = "redo";

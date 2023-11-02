@@ -29,7 +29,7 @@ public class ListCommandTest {
         model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         model.addAppointment(APPOINTMENT1);
         model.addAppointment(APPOINTMENT2);
-        expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(), model.getUserHistoryManager());
     }
 
     @Test

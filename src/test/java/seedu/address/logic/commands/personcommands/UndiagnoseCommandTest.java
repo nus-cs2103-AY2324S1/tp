@@ -106,7 +106,7 @@ public class UndiagnoseCommandTest {
 
     @Test
     public void execute_validIndexTwoIllnessesFilteredList_success() {
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(), model.getUserHistoryManager());
 
         showPersonAtIndex(model, INDEX_THIRD_PERSON);
         Person personToUndiagnose = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
@@ -118,7 +118,6 @@ public class UndiagnoseCommandTest {
         Person undiagnosedPerson = new PersonBuilder(personToUndiagnose).withTags(newTagsString).build();
 
         UndiagnoseCommand undiagnoseCommand = new UndiagnoseCommand(INDEX_FIRST_PERSON, existingTags);
-        System.out.println(existingTags);
         String expectedMessage = String.format(UndiagnoseCommand.MESSAGE_UNDIAGNOSE_PERSON_SUCCESS,
                 undiagnosedPerson.getName(), getIllnessesOriginallyThere(personToUndiagnose, existingTags));
 
