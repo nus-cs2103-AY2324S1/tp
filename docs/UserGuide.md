@@ -14,15 +14,14 @@ If you can type fast, KeepInTouch can get your contact management tasks done fas
 * [Quick Start](#quick-start)
 * [Features](#features)
   * [Viewing help : `help`](#viewing-help--help)
-  * [Listing all contacts: `list contact`](#listing-all-contacts--list-contact)
+  * [Listing contacts: `list contact`](#listing-contacts--list-contact)
   * [Adding a contact: `add contact`](#adding-a-contact--add-contact)
   * [Deleting a contact: `delete contact`](#deleting-a-contact--delete-contact)
   * [Adding tags: `add tag`](#adding-tags--add-tag)
   * [Deleting tags: `delete tag`](#deleting-tags--delete-tag)
-  * [Listing all notes: `list notes`](#listing-all-notes--list-notes)
   * [Adding a note: `add note`](#adding-notes-to-a-contact--add-note)
   * [Deleting a note: `delete note`](#deleting-a-note--delete-note)
-  * [Listing all events: `list events`](#listing-all-events--list-events)
+  * [Listing events: `list events`](#listing-events--list-events)
   * [Adding an event: `add event`](#adding-events--add-event)
   * [Deleting an event: `delete event`](#deleting-an-event--delete-event)
   * [Exit: `exit`](#exiting-the-program--exit)
@@ -82,11 +81,19 @@ Shows a list of commands with the functionalities.
 
 Format: `help`
 
-### Listing all contacts : `list contact`
+### Listing contacts : `list contact`
 
-Shows a list of all contacts in the contact list.
+Shows a list of all contacts in the contact list if tags not specified. 
+Otherwise, shows a list of contacts which contains one of the specified tags. 
 
-Format: `list contact`
+Format: `list contact [-t TAGNAME...]`
+
+* Lists all contacts if no tags passed. 
+* If tags argument passed, lists only contacts that contain one of the tags.
+
+Examples:
+* `list contact` to show all contacts.
+* `list contact -t Recruiter` to show all contacts which have a recruiter tag.
 
 ### Adding a contact : `add contact`
 
@@ -95,7 +102,7 @@ Adds a contact to the contact list.
 Format: `add contact -n NAME -p PHONE_NUMBER -a ADDRESS -e EMAIL [-t TAGNAME...]`
 
 Examples:
-* `add contact -n Aaron -p 12345678 -a Baker Street 12 -e aaron123@gmail.com -t Frontend`
+* `add contact -n Aaron -p 12345678 -a Baker Street 12 -e aaron123@gmail.com`
 
 ### Deleting a contact : `delete contact`
 
@@ -138,11 +145,6 @@ Examples:
 * `delete tag -id 1 -t Frontend` deletes a tag with tag name "Frontend" from the first contact in the contact list.
 * `add tag -id 1 -t Frontend -t Java` deletes two tags with tag name "Frontend" and "Java" from the first contact in the contact list.
 
-### Listing all notes : `list notes`
-
-Shows a list of all notes from all contacts in the contact list.
-
-Format: `list notes`
 ### Adding notes to a contact : `add note`
 
 Adds a note to a contact from the contact list.
@@ -164,7 +166,7 @@ Format: `delete note -id CONTACT_ID -nid NOTE_ID`
 Examples:
 * `delete note -id 1 -nid 1` deletes the first note from the first contact in the contact list.
 
-### Listing all events : `list events`
+### Listing events : `list events`
 
 Shows a list of all events or events within a specified time interval.
 
@@ -249,12 +251,11 @@ _No known issues at the moment_
 
 Action             | Format, Examples
 -------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**List Contact**   | `list contact`
+**List Contact**   | `list contact [-t TAGNAME...]` <br> e.g., `list contact -t Recruiter`
 **Add Contact**    | `add contact -n NAME -p PHONE_NUMBER -a ADDRESS -e EMAIL [-t TAGNAME...]` <br> e.g., `add contact -n Aaron -p 12345678 -a Baker Street 12 -e aaron123@gmail.com -t Frontend`
 **Delete Contact** | `delete contact CONTACT_ID`<br> e.g., `delete contact 1`
 **Add Tag**        | `add tag -id CONTACT_ID -t TAGNAME...` <br> eg., `add tag -id 1 -t Frontend`
 **Delete Tag**        | `delete tag -id CONTACT_ID -t TAGNAME...` <br> eg., `delete tag -id 1 -t Frontend`
-**List Notes**     | `list notes`
 **Add Note**       | `add note -id CONTACT_ID -t NOTE_TITLE -c NOTE_CONTENT` <br> e.g., `add note -id 2 -tit Open Position -con Applications for SWE full-time positions will open soon`
 **Delete Note**    | `delete note -id CONTACT_ID -t NOTE_TITLE`<br> e.g., `delete note -id 2 -t Meeting Topics`
 **List Events**    | `list events [-descending] [-st filter_start_time] [-et filter_end_time]`<br> e.g., `list events -descending -st 2023-11-01 -et 2023-11-02`

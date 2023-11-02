@@ -4,7 +4,6 @@ import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.ListEventCommand;
-import seedu.address.logic.commands.ListNoteCommand;
 import seedu.address.logic.commands.ListPersonCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -18,9 +17,7 @@ public class ListCommandParser implements Parser<ListCommand> {
         String args = SecondaryCommandSelector.getArguments(secondaryCommandWord, userInput);
         switch (secondaryCommandWord) {
         case ListPersonCommand.SECONDARY_COMMAND_WORD:
-            return new ListPersonCommand();
-        case ListNoteCommand.SECONDARY_COMMAND_WORD:
-            return new ListNoteCommand();
+            return new ListPersonCommandParser().parse(args);
         case ListEventCommand.SECONDARY_COMMAND_WORD:
             return new ListEventCommandParser().parse(args);
         default:
