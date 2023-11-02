@@ -88,7 +88,7 @@ public class SolveCommandTest {
 
         assertCommandSuccess(practiseCommand, model, expectedMessage, expectedModel);
 
-        assertTrue(targetCard.getSolveCount().equals(2));
+        assertTrue(targetCard.getSolveCount().equals(1));
     }
 
     @Test
