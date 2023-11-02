@@ -7,17 +7,15 @@ title: User Guide
 
 ![Ui](images/Ui.png)
 
-Connectify is a **desktop app for managing clients, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, Connectify can get your client management tasks done faster than traditional GUI apps.
-
-Connectify helps salespersons manage their clients so that that can build customer relationships!
+Connectify is a **desktop app for managing clients, optimized for use via a Command Line Interface** (CLI). Connectify helps salespersons manage their clients information records and data, boosting their efficiency in building customer relationships! If you can type fast, Connectify can get your client management tasks done faster than traditional GUI apps.
 
 In this user guide, you will find instructions on how to install Connectify and use its many features to manage your clients.
 
 Choose a topic from the table of contents below to find out how to manage your clients using Connectify!
 
 # Table of Contents
-* Table of Contents
 {:toc}
+
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -138,11 +136,16 @@ After adding a client profile, you can now log your interactions with the client
 ```text
 interaction INDEX o/OUTCOME [DETAILS]
 ```
-where INDEX refers to the index of the client profile in the displayed list of clients.
+Where `INDEX` refers to the index of the client profile in the displayed list of clients.
+
+Note that at least one of the `OUTCOME` or `DETAILS` parameters must be provided.
 
 **Examples**
 ```
-interaction 1 o/INTERESTED d/Client is interested in our products
+interaction 1 o/INTERESTED Meeting with client
+```
+```
+interaction 1 Meeting with client
 ```
 
 You should directly see the interaction added to the client profile in the application window.
