@@ -2,7 +2,7 @@
 .interview-list-view {
     -fx-background-insets: 0;
     -fx-padding: 0;
-    -fx-background-color: #dcdcdc;
+    -fx-background-color: transparent;
     -fx-background-radius: 20px;
     -fx-control-inner-background: #FAF0FF;
     -fx-control-inner-background-alt: #FAF0FF;
@@ -10,7 +10,7 @@
 }
 
 .interview-list-view .list-cell {
-    -fx-padding: 10px 0px 5px 0px;
+    -fx-padding: 10px 5px 5px 5px;
 }
 
 .interview-list-view .list-cell:selected {
