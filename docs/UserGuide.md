@@ -155,23 +155,43 @@ Examples:
 
 * `new-appt pic/T0123456H dic/S9851586G time/2023-10-30T13:00:00`
 
-### Finding an Appointment : `find-appt`
+### Deleting an Appointment : `delete-appt`
 
-Finds all appointments that involve a specific patient/doctor.
+Deletes an existing appointment.
 
-Format: `find-appt IC`
+Format: `delete-appt INDEX`
 
 <div markdown="block" class="alert alert-info">
 **:information_source: Take Note:**<br>
 
-- All fields are Required.
-- IC must contain the valid IC of a Patient or Doctor in the Database.
+- Index is according to the list view in the application.
+- Use `list` command to find index of desired appointment.
 
 </div>
 
 Examples:
 
-* `find-appt T0123456H`
+* `delete-appt 1`
+
+### Finding a Appointment : `find-appt`
+
+Finds all appointments that involve a specific patient/doctor.
+
+Format: `find-appt NRIC`
+
+<div markdown="block" class="alert alert-info">
+**:information_source: Take Note:**<br>
+
+- All fields are Required.
+- NRIC must contain the valid NRIC of a Patient or Doctor in the Database.
+- Either Doctor NRIC or Patient NRIC can be used in the search
+- It is recommended to use `list` to restore the view of all data after a `find` command.
+
+</div>
+
+Examples:
+
+* `find-appt T0001222Q`
 
 ### Listing all persons : `list`
 
@@ -207,15 +227,21 @@ Finds persons that match the query. Supports gender, NRIC and name.
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
-* The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
+* When searching names, the search is case-insensitive. e.g `hans` will match `Hans`
+* When searching names, the order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
+* When searching names, only full words will be matched e.g. `Han` will not match `Hans`
+* When searching names, Persons matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
-* When searching by NRIC, input the NRIC as the keyword.
-* When searching by gender, input either `M` or `F` as the keyword.
-* When searching by name, input the names as per above.
+* Other supported attributes like NRIC, Gender and Blood Type will only handle one query `KEYWORD`, anything afterward is discarded.
+* Below we have supported attributes and their example `KEYWORD`.
+* It is recommended to use `list` to restore the view of all data after a `find` command
+
+  | Attribute | Example keywords |
+  |-----------|-----------------|
+  | NRIC      | T1125957G       |
+  | Gender    | M       |
+   | Blood Type | Blood Type A+   |
+     | Name | Travis Kelce
 
 Examples:
 
