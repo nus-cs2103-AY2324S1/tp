@@ -16,7 +16,7 @@ public class GoalCommandTest {
         GoalCommand goalCommand = new GoalCommand(5);
         CommandResult commandResult = goalCommand.execute(model);
         assertEquals(GoalCommand.MESSAGE_SUCCESS, commandResult.getFeedbackToUser());
-        assertEquals(5, model.getGoal());
+        assertEquals(5, model.getGoal().getTarget());
     }
 
     @Test

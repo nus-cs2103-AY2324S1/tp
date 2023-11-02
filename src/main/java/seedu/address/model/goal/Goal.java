@@ -58,11 +58,13 @@ public class Goal implements Observable {
 
     public void setTarget(int target) {
         this.target = target;
+        isMet = current >= target;
         updateGoalText();
     }
 
     public void setCurrent(int current) {
         this.current = current;
+        isMet = current >= target;
         updateGoalText();
     }
 
