@@ -18,7 +18,12 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.*;
+import seedu.address.model.person.Address;
+import seedu.address.model.person.Email;
+import seedu.address.model.person.Name;
+import seedu.address.model.person.Phone;
+import seedu.address.model.person.SortIn;
+import seedu.address.model.person.Visual;
 import seedu.address.model.tag.EnrolDate;
 import seedu.address.model.tag.Subject;
 
