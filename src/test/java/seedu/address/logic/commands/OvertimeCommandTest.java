@@ -1,5 +1,10 @@
 package seedu.address.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ID_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ID_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_OVERTIME_HOURS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
@@ -14,6 +19,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.employee.Employee;
+import seedu.address.model.employee.Id;
 import seedu.address.model.employee.OvertimeHours;
 import seedu.address.testutil.EmployeeBuilder;
 
@@ -77,5 +83,51 @@ class OvertimeCommandTest {
         OvertimeCommand overtimeCommand = new OvertimeCommand(employee.getId(), changeInOvertimeHours, false);
 
         assertCommandFailure(overtimeCommand, model, OvertimeHours.MESSAGE_CONSTRAINTS);
+    }
+
+    @Test
+    public void equals() {
+        OvertimeHours changeInOvertimeHours = new OvertimeHours(VALID_OVERTIME_HOURS_BOB);
+        Id idBob = new Id(VALID_ID_BOB);
+        OvertimeCommand overtimeCommand = new OvertimeCommand(idBob, changeInOvertimeHours, true);
+
+        // same object -> returns true
+        assertTrue(overtimeCommand.equals(overtimeCommand));
+
+        // same values -> returns true
+        OvertimeCommand overtimeCommandCopy = new OvertimeCommand(idBob, changeInOvertimeHours, true);
+        assertTrue(overtimeCommand.equals(overtimeCommandCopy));
+
+        // different types -> returns false
+        assertFalse(overtimeCommand.equals(new ClearCommand()));
+
+        // null -> returns false
+        assertFalse(overtimeCommand.equals(null));
+
+        // different employee -> returns false
+        Id idAmy = new Id(VALID_ID_AMY);
+        OvertimeCommand differentEmployeeCommand = new OvertimeCommand(idAmy, changeInOvertimeHours,
+                false);
+        assertFalse(overtimeCommand.equals(differentEmployeeCommand));
+
+        // different change in overtime hours -> returns false
+        OvertimeCommand differentChangeInOvertimeHoursCommand = new OvertimeCommand(idBob,
+                new OvertimeHours(VALID_OVERTIME_HOURS_BOB + 1), true);
+        assertFalse(overtimeCommand.equals(differentChangeInOvertimeHoursCommand));
+
+        // different isIncrement -> returns false
+        OvertimeCommand differentIsIncrementCommand = new OvertimeCommand(idBob, changeInOvertimeHours,
+                false);
+        assertFalse(overtimeCommand.equals(differentIsIncrementCommand));
+    }
+
+    @Test
+    public void toStringMethod() {
+        OvertimeHours changeInOvertimeHours = new OvertimeHours(VALID_OVERTIME_HOURS_BOB);
+        Id idBob = new Id(VALID_ID_BOB);
+        OvertimeCommand overtimeCommand = new OvertimeCommand(idBob, changeInOvertimeHours, true);
+        String expectedString = OvertimeCommand.class.getCanonicalName() + "{targetId=" + idBob
+                + ", changeInOvertimeHours=" + changeInOvertimeHours + ", isIncrement=true}";
+        assertEquals(expectedString, overtimeCommand.toString());
     }
 }
