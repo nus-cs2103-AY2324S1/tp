@@ -32,6 +32,10 @@ Any feedback, including errors, will appear directly below the input box.
 
 Easily add a new contact to your list with the `add` command.
 
+Note that contacts are identified by their name in ConText, and contacts with the same name are considered the same contact. 
+Hence, you will not be able to add a new contact with the same name as an existing contact.
+Should you need to make changes to an existing contact, use the `edit` command as explained below. 
+
 **Format:**
 `add n/FULL_NAME p/PHONE_NUMBER e/EMAIL [o/NOTE] [t/TAG]... [a/ALTERNATE_CONTACT]...`
 
@@ -55,6 +59,32 @@ Display all your stored contacts.
 
 **Format:**
 `list`
+
+---
+
+### Editing a Contact: `edit`
+
+Modify an existing contact's details in your list.
+
+**Format:**
+`edit INDEX [n/FULL_NAME] [p/PHONE_NUMBER] [e/EMAIL] [o/NOTE] [t/TAGS]... [a/ALTERNATE_CONTACT]...`
+
+* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list.
+  The index must be a positive integer 1, 2, 3, ...
+* At least one of the optional fields must be provided.
+* Existing values will be updated to the input values.
+* When editing tags, existing tags will be removed. The adding of tags is not cumulative.
+* Similar to tags, existing alternate contacts will be removed when editing them.
+* You can remove all the contact's tags by typing `t/` without specifying any tags after it.
+* Similar to tags, you can remove all the contact's alternate contacts by typing `a/` without specifying any alternate
+  contacts after it.
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+The format for alternate contact is the same as mentioned above in the <a href="#adding-a-contact-add">Adding a Contact</a> section.
+</div>
+
+**Example:**
+`edit 2 n/John Doe p/98765432 e/john.doe@email.com`
 
 ---
 
@@ -115,29 +145,4 @@ Close the ConText application.
 
 ---
 
-### Editing a Contact: `edit`
-
-Modify an existing contact's details in your list.
-
-**Format:**
-`edit INDEX [n/FULL_NAME] [p/PHONE_NUMBER] [e/EMAIL] [o/NOTE] [t/TAGS]... [a/ALTERNATE_CONTACT]...`
-
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. 
-The index must be a positive integer 1, 2, 3, ...
-* At least one of the optional fields must be provided.
-* Existing values will be updated to the input values.
-* When editing tags, existing tags will be removed. The adding of tags is not cumulative.
-* Similar to tags, existing alternate contacts will be removed when editing them.
-* You can remove all the contact's tags by typing `t/` without specifying any tags after it.
-* Similar to tags, you can remove all the contact's alternate contacts by typing `a/` without specifying any alternate
-contacts after it.
-
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-The format for alternate contact is the same as mentioned above in the <a href="#adding-a-contact-add">Adding a Contact</a> section.
-</div>
-
-**Example:**
-`edit 2 n/John Doe p/98765432 e/john.doe@email.com`
-
----
 Remember, whenever in doubt, you can always navigate to the help webpage via the `help` tab at the top.
