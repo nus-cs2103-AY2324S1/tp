@@ -33,18 +33,26 @@ public class DeleteCommand extends UndoableCommand {
     public static final String COMMAND_WORD_ALIAS = "d";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + " or " + COMMAND_WORD_ALIAS
-            + ": Delete the patient identified by the full name or nric of the patient.\n"
-            + "Parameters: n/Name or id/Nric (must be valid)\n"
-            + "Fields that can be deleted: ap/ (Appointment) m/ (Medical History) \n"
+            + ": Delete the Patient identified by the full Name or NRIC of the patient.\n"
+            + "Parameters: n/NAME or id/NRIC\n"
+            + "Fields that can be deleted: ap/APPOINTMENT m/MEDICAL_HISTORY \n"
             + "Example 1: " + COMMAND_WORD + " n/John Doe or " + COMMAND_WORD + " id/S1234567A " + "ap/ m/\n"
-            + "Example 1: " + COMMAND_WORD_ALIAS + " n/Alex Yeoh or " + COMMAND_WORD_ALIAS + " id/T0123456F";
+            + "Example 2: " + COMMAND_WORD_ALIAS + " n/Alex Yeoh or " + COMMAND_WORD_ALIAS + " id/T0123456F";
 
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Patient: %1$s";
 
     public static final String MESSAGE_DELETE_PERSON_FIELD_SUCCESS = "Deleted Patient's field: %1$s";
 
     public static final String MESSAGE_PERSON_NOT_FOUND =
-            "The given combination of Name and NRIC does not match any patient in the patients list.";
+            "The given combination of Name and NRIC does not match any patient in the Patient List.";
+
+    public static final String MESSAGE_NO_APPOINTMENT_TO_DELETE = "Patient does not have an appointment to delete";
+
+    public static final String MESSAGE_NO_MEDICAL_HISTORY_TO_DELETE =
+            "Patient does not have any medical histories to delete";
+
+    public static final String MESSAGE_INVALID_MEDICAL_HISTORY =
+            "Patient does not have the medical histories specified.";
 
     public static final String MESSAGE_UNDO_DELETE_PERSON_SUCCESS = "Undoing the deletion of Patient:  %1$s";
 
@@ -79,7 +87,7 @@ public class DeleteCommand extends UndoableCommand {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Person> lastShownList = model.getFilteredPersonList();
+        List<Person> lastShownList = model.getUnfilteredPersonList();
 
         Optional<Person> personOptional = CommandUtil.findPersonByIdentifier(name, nric, lastShownList);
 
@@ -93,6 +101,7 @@ public class DeleteCommand extends UndoableCommand {
         if (deletePersonDescriptor.isAllFalse()) {
             model.deletePerson(personToDelete);
             model.addToHistory(this);
+            model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
             return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(personToDelete)));
         } else {
             editedPerson = createDeletePerson(personToDelete, deletePersonDescriptor);
@@ -150,8 +159,11 @@ public class DeleteCommand extends UndoableCommand {
     /**
      * Creates and returns a {@code Person} with the details of {@code personToEdit}
      * edited with {@code deletePersonDescriptor}.
+     *
+     * @throws CommandException
      */
-    public static Person createDeletePerson(Person personToEdit, DeletePersonDescriptor deletePersonDescriptor) {
+    public static Person createDeletePerson(Person personToEdit, DeletePersonDescriptor deletePersonDescriptor)
+            throws CommandException {
         assert personToEdit != null;
 
         Name updatedName = personToEdit.getName();
@@ -164,12 +176,34 @@ public class DeleteCommand extends UndoableCommand {
         Appointment updatedAppointment = personToEdit.getAppointment().isPresent() ? personToEdit.getAppointment().get()
                 : null;
 
-        if (deletePersonDescriptor.shouldDeleteMedicalHistory()) {
-            updatedMedicalHistories = new HashSet<MedicalHistory>();
+        if (deletePersonDescriptor.shouldDeleteAppointment()) {
+            if (updatedAppointment == null) {
+                throw new CommandException(MESSAGE_NO_APPOINTMENT_TO_DELETE);
+            } else {
+                updatedAppointment = null;
+            }
         }
 
-        if (deletePersonDescriptor.shouldDeleteAppointment()) {
-            updatedAppointment = null;
+        if (deletePersonDescriptor.shouldDeleteMedicalHistory()) {
+            if (updatedMedicalHistories.isEmpty()) {
+                throw new CommandException(MESSAGE_NO_MEDICAL_HISTORY_TO_DELETE);
+            }
+
+            Set<MedicalHistory> medicalHistoriesToDelete = deletePersonDescriptor.getMedicalHistories();
+            Set<MedicalHistory> medicalHistoriesToKeep = new HashSet<>(updatedMedicalHistories);
+
+            if (medicalHistoriesToDelete.isEmpty()) {
+                updatedMedicalHistories = medicalHistoriesToDelete;
+            } else {
+                for (MedicalHistory medicalHistory : medicalHistoriesToDelete) {
+                    if (updatedMedicalHistories.contains(medicalHistory)) {
+                        medicalHistoriesToKeep.remove(medicalHistory);
+                    } else {
+                        throw new CommandException(MESSAGE_INVALID_MEDICAL_HISTORY);
+                    }
+                }
+                updatedMedicalHistories = medicalHistoriesToKeep;
+            }
         }
 
         return new Person(updatedName, updatedNric, updatedPhone, updatedEmail, updatedAddress, updatedAppointment,
@@ -177,12 +211,13 @@ public class DeleteCommand extends UndoableCommand {
     }
 
     /**
-     * Stores the boolean value of the fields that is to be deleted from a patient
+     * Stores the values of the fields that is to be deleted from a patient
      * in HealthSync.
      */
     public static class DeletePersonDescriptor {
         private boolean shouldDeleteAppointment;
         private boolean shouldDeleteMedicalHistory;
+        private Set<MedicalHistory> medicalHistories;
 
         public DeletePersonDescriptor() {
         }
@@ -193,6 +228,14 @@ public class DeleteCommand extends UndoableCommand {
 
         public boolean shouldDeleteMedicalHistory() {
             return this.shouldDeleteMedicalHistory;
+        }
+
+        public void setMedicalHistory(Set<MedicalHistory> medicalHistories) {
+            this.medicalHistories = medicalHistories;
+        }
+
+        public Set<MedicalHistory> getMedicalHistories() {
+            return this.medicalHistories;
         }
 
         public void setDeleteAppointment() {
@@ -207,7 +250,7 @@ public class DeleteCommand extends UndoableCommand {
          * Returns true if all fields are false.
          */
         public boolean isAllFalse() {
-            return !(shouldDeleteMedicalHistory || shouldDeleteAppointment);
+            return !shouldDeleteAppointment && !shouldDeleteMedicalHistory;
         }
 
         @Override
@@ -222,13 +265,16 @@ public class DeleteCommand extends UndoableCommand {
             }
 
             DeletePersonDescriptor otherDeletePersonDescriptor = (DeletePersonDescriptor) other;
-            return Objects.equals(shouldDeleteMedicalHistory, otherDeletePersonDescriptor.shouldDeleteMedicalHistory)
+            return Objects.equals(medicalHistories, otherDeletePersonDescriptor.medicalHistories)
+                    && Objects.equals(shouldDeleteMedicalHistory,
+                            otherDeletePersonDescriptor.shouldDeleteMedicalHistory)
                     && Objects.equals(shouldDeleteAppointment, otherDeletePersonDescriptor.shouldDeleteAppointment);
         }
 
         @Override
         public String toString() {
             return new ToStringBuilder(this)
+                    .add("medicalHistories", medicalHistories)
                     .add("shouldDeleteMedicalHistory", shouldDeleteMedicalHistory)
                     .add("shouldDeleteAppointment", shouldDeleteAppointment)
                     .toString();

@@ -25,7 +25,7 @@ public class AddCommand extends UndoableCommand {
     public static final String COMMAND_WORD_ALIAS = "a";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + " or " + COMMAND_WORD_ALIAS
-            + ": Adds a Patient to the patient list. "
+            + ": Adds a Patient to the Patient list. "
             + "Parameters: "
             + PREFIX_NAME + "NAME "
             + PREFIX_NRIC + "NRIC "
@@ -42,7 +42,7 @@ public class AddCommand extends UndoableCommand {
             + PREFIX_ADDRESS + "311, Clementi Ave 2, #02-25 "
             + PREFIX_APPOINTMENT + "17-10-2023 11:00 13:00 "
             + PREFIX_MEDICAL + "hypochondriac "
-            + PREFIX_MEDICAL + "on Medicine XYZ "
+            + PREFIX_MEDICAL + "on Medicine XYZ \n"
             + "Example 2: " + COMMAND_WORD_ALIAS + " "
             + PREFIX_NAME + "Alex Yeoh "
             + PREFIX_NRIC + "S6742632F "
@@ -54,7 +54,7 @@ public class AddCommand extends UndoableCommand {
             + PREFIX_MEDICAL + "on Medicine CHS ";
 
     public static final String MESSAGE_SUCCESS = "New Patient added: %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This Patient already exists in the address book";
+    public static final String MESSAGE_DUPLICATE_PERSON = "This Patient already exists in HealthSync.";
     public static final String MESSAGE_UNDO_ADD_SUCCESS = "Undoing the adding of Patient:  %1$s";
 
     private final Person toAdd;

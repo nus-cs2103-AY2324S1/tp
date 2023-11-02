@@ -11,9 +11,13 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.DeleteCommand.DeletePersonDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.MedicalHistory;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Nric;
 
@@ -41,7 +45,7 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
         }
 
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_NRIC, PREFIX_APPOINTMENT, PREFIX_MEDICAL);
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_NRIC, PREFIX_APPOINTMENT);
 
         boolean hasNamePrefix = argMultimap.getValue(PREFIX_NAME).isPresent();
         boolean hasNricPrefix = argMultimap.getValue(PREFIX_NRIC).isPresent();
@@ -64,6 +68,13 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
 
         if (argMultimap.prefixExist(PREFIX_MEDICAL)) {
             deletePersonDescriptor.setDeleteMedicalHistory();
+            if (argMultimap.getValue(PREFIX_MEDICAL).get().equals("")) {
+                deletePersonDescriptor.setMedicalHistory(new HashSet<>());
+            } else {
+                Set<MedicalHistory> medicalHistories = ParserUtil.parseMedicals(
+                        argMultimap.getAllValues(PREFIX_MEDICAL));
+                deletePersonDescriptor.setMedicalHistory(medicalHistories);
+            }
         }
 
         if (argMultimap.prefixExist(PREFIX_APPOINTMENT)) {

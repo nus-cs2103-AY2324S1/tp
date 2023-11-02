@@ -3,9 +3,13 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+
+import java.util.HashSet;
+import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
@@ -15,6 +19,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.person.MedicalHistory;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Nric;
 import seedu.address.model.person.Person;
@@ -83,19 +88,105 @@ public class DeleteCommandTest {
     }
 
     @Test
-    public void execute_deleteFields_success() throws CommandException {
+    public void execute_deleteAppointmentField_success() throws CommandException {
         Person firstPerson = model.getFilteredPersonList().get(0);
 
         DeletePersonDescriptor descriptor = new DeletePersonDescriptor();
         descriptor.setDeleteAppointment();
-        descriptor.setDeleteMedicalHistory();
 
         DeleteCommand command = new DeleteCommand(firstPerson.getNric(), null, descriptor);
         command.execute(model);
 
         Person editedPerson = model.getFilteredPersonList().get(0);
         assertTrue(editedPerson.getAppointment().isEmpty());
+    }
+
+    @Test
+    public void execute_deleteMedicalHistoryField_success() throws CommandException {
+        Person firstPerson = model.getFilteredPersonList().get(0);
+
+        DeletePersonDescriptor descriptor = new DeletePersonDescriptor();
+        descriptor.setDeleteMedicalHistory();
+        descriptor.setMedicalHistory(new HashSet<>());
+
+        DeleteCommand deleteCommand = new DeleteCommand(firstPerson.getNric(), null, descriptor);
+        deleteCommand.execute(model);
+
+        Person editedPerson = model.getFilteredPersonList().get(0);
         assertTrue(editedPerson.getMedicalHistories().isEmpty());
+
+    }
+
+    @Test
+    public void execute_deleteSpecificMedicalHistoryField_success() throws CommandException {
+        Person secondPerson = model.getFilteredPersonList().get(1);
+        MedicalHistory medicalHistory1 = new MedicalHistory("diabetes");
+        MedicalHistory medicalHistory2 = new MedicalHistory("high-risk");
+        assertTrue(secondPerson.getMedicalHistories().contains(medicalHistory1));
+
+        DeletePersonDescriptor descriptor = new DeletePersonDescriptor();
+        Set<MedicalHistory> medicalHistories = new HashSet<>();
+        medicalHistories.add(medicalHistory1);
+        descriptor.setDeleteMedicalHistory();
+        descriptor.setMedicalHistory(medicalHistories);
+
+        DeleteCommand deleteCommand = new DeleteCommand(secondPerson.getNric(), null, descriptor);
+        deleteCommand.execute(model);
+
+        Person editedPerson = model.getFilteredPersonList().get(1);
+        assertTrue(editedPerson.getMedicalHistories().contains(medicalHistory2));
+        assertFalse(editedPerson.getMedicalHistories().contains(medicalHistory1));
+
+    }
+
+    @Test
+    public void execute_patientNoAppointment() throws CommandException {
+        Person personToDelete = new PersonBuilder().withoutAppointment().build();
+        model.addPerson(personToDelete);
+        Name name = personToDelete.getName();
+        DeletePersonDescriptor descriptor = new DeletePersonDescriptor();
+        descriptor.setDeleteAppointment();
+        DeleteCommand deleteCommand = new DeleteCommand(null, name, descriptor);
+
+        String expectedMessage = String.format(DeleteCommand.MESSAGE_NO_APPOINTMENT_TO_DELETE,
+                Messages.format(personToDelete));
+
+        assertCommandFailure(deleteCommand, model, expectedMessage);
+    }
+
+    @Test
+    public void execute_patientNoMedicalHistory() throws CommandException {
+        Person personToDelete = new PersonBuilder().build();
+        model.addPerson(personToDelete);
+        Name name = personToDelete.getName();
+        DeletePersonDescriptor descriptor = new DeletePersonDescriptor();
+        descriptor.setDeleteMedicalHistory();
+        DeleteCommand deleteCommand = new DeleteCommand(null, name, descriptor);
+
+        String expectedMessage = String.format(DeleteCommand.MESSAGE_NO_MEDICAL_HISTORY_TO_DELETE,
+                Messages.format(personToDelete));
+
+        assertCommandFailure(deleteCommand, model, expectedMessage);
+    }
+
+    @Test
+    public void execute_patientNoMedicalHistorySpecified() throws CommandException {
+        Person secondPerson = model.getFilteredPersonList().get(1);
+        MedicalHistory medicalHistory1 = new MedicalHistory("ABC disease");
+        assertFalse(secondPerson.getMedicalHistories().contains(medicalHistory1));
+
+        DeletePersonDescriptor descriptor = new DeletePersonDescriptor();
+        Set<MedicalHistory> medicalHistories = new HashSet<>();
+        medicalHistories.add(medicalHistory1);
+        descriptor.setDeleteMedicalHistory();
+        descriptor.setMedicalHistory(medicalHistories);
+
+        DeleteCommand deleteCommand = new DeleteCommand(secondPerson.getNric(), null, descriptor);
+
+        String expectedMessage = String.format(DeleteCommand.MESSAGE_INVALID_MEDICAL_HISTORY,
+                Messages.format(secondPerson));
+
+        assertCommandFailure(deleteCommand, model, expectedMessage);
     }
 
     @Test
@@ -111,7 +202,6 @@ public class DeleteCommandTest {
 
     @Test
     public void deletePersonDescriptor_isAllFalse() {
-
         DeletePersonDescriptor descriptor = new DeletePersonDescriptor();
 
         assertTrue(descriptor.isAllFalse());
@@ -119,6 +209,20 @@ public class DeleteCommandTest {
         descriptor.setDeleteAppointment();
 
         assertFalse(descriptor.isAllFalse());
+    }
+
+    @Test
+    public void deletePersonDescriptor_getMedicalHistories() {
+        DeletePersonDescriptor descriptor = new DeletePersonDescriptor();
+
+        Set<MedicalHistory> medicalHistories = new HashSet<>();
+        medicalHistories.add(new MedicalHistory("diabetes"));
+        medicalHistories.add(new MedicalHistory("high-risk"));
+        Set<MedicalHistory> medicalHistoriesCopy = new HashSet<>(medicalHistories);
+
+        descriptor.setMedicalHistory(medicalHistories);
+
+        assertEquals(medicalHistoriesCopy, descriptor.getMedicalHistories());
     }
 
     @Test
@@ -217,4 +321,3 @@ public class DeleteCommandTest {
                 Messages.format(editedPerson)), undoResult.getFeedbackToUser());
     }
 }
-
