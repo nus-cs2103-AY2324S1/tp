@@ -170,7 +170,7 @@ Edits an existing applicant in the address book.
 Format: `edit-a APPLICANT_INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]`
 
 * Edits the person at the specified `APPLICANT_INDEX`. The index refers to the index number shown in the displayed applicant list.
-* The index **must be a positive integer** 1, 2, 3, …​
+* The index **must be a positive integer** 1, 2, 3, …​ The upper limit of valid integers is the number of applicants currently displayed in the applicant list
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 
@@ -182,10 +182,10 @@ Examples:
 
 Edit an existing interview in the address book.
 
-Format: `edit-i INTERVIEW_INDEX [app/APPLICANT_ID] [jr/JOB_TITLE] [time/INTERVIEW_DATETIME]`
+Format: `edit-i INTERVIEW_INDEX [app/APPLICANT_ID] [jr/JOB_TITLE] [start/START_DATE_AND_TIME] [end/END_DATE_AND_TIME]`
 
 * Edits the interview at the specified `INTERVIEW_INDEX`. The index refers to the index number shown in the displayed interview list.
-* The index **must be a positive integer** 1, 2, 3, …​
+* The index **must be a positive integer** 1, 2, 3, …​ The upper limit of valid integers is the number of interviews currently displayed in the interview list
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 
@@ -201,7 +201,7 @@ Format: `delete-a INDEX`
 
 * Deletes the applicant at the specified `INDEX`.
 * The index refers to the index number shown in the displayed applicant list.
-* The index **must be a positive integer** 1, 2, 3, …​
+* The index **must be a positive integer** 1, 2, 3, …​ The upper limit of valid integers is the number of applicants currently displayed in the applicant list
 
 Examples:
 * `delete-a 1` deletes the 1st applicant in the address book.
@@ -214,7 +214,7 @@ Format: `delete-i INDEX`
 
 * Deletes the interview at the specified `INDEX`.
 * The index refers to the index number shown in the displayed interview list.
-* The index **must be a positive integer** 1, 2, 3, …​
+* The index **must be a positive integer** 1, 2, 3, …​ The upper limit of valid integers is the number of interviews currently displayed in the interview list
 
 Examples:
 * `delete-i 1` deletes the 1st interview in the address book.
@@ -267,7 +267,7 @@ Format: `rate INDEX RATING`
 
 * Rates the interview at the specified `INDEX`.
 * The index refers to the index number shown in the displayed interview list.
-* The index **must be a positive integer** 1, 2, 3, …​
+* The index **must be a positive integer** 1, 2, 3, …​ The upper limit of valid integers is the number of interviews currently displayed in the interview list
 * The `RATING` must be a non-negative one decimal place number between 0.0 to 5.0 inclusive.
 
 Examples:
