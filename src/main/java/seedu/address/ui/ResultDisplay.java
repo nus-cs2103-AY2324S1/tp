@@ -1,15 +1,11 @@
 package seedu.address.ui;
 
-import static java.util.Objects.requireNonNull;
-
 import javafx.fxml.FXML;
 import javafx.scene.layout.Region;
 import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontPosture;
-import javafx.scene.text.FontWeight;
-import javafx.scene.text.Text;
-import javafx.scene.text.TextFlow;
+import javafx.scene.text.*;
+
+import static java.util.Objects.requireNonNull;
 /**
  * A UI for the status bar that is displayed at the header of the application.
  */
@@ -108,5 +104,4 @@ public class ResultDisplay extends UiPart<Region> {
 
         textFlowControl.getChildren().add(textSegment);
     }
-
 }

@@ -1,11 +1,11 @@
 package seedu.address.ui;
 
-import java.nio.file.Path;
-import java.nio.file.Paths;
-
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Region;
+
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 /**
  * A ui for the status bar that is displayed at the footer of the application.
@@ -24,5 +24,4 @@ public class StatusBarFooter extends UiPart<Region> {
         super(FXML);
         saveLocationStatus.setText(Paths.get(".").resolve(saveLocation).toString());
     }
-
 }

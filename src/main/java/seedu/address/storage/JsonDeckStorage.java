@@ -1,6 +1,11 @@
 package seedu.address.storage;
 
-import static java.util.Objects.requireNonNull;
+import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.exceptions.DataLoadingException;
+import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.commons.util.FileUtil;
+import seedu.address.commons.util.JsonUtil;
+import seedu.address.model.ReadOnlyDeck;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -9,12 +14,7 @@ import java.nio.file.Path;
 import java.util.Optional;
 import java.util.logging.Logger;
 
-import seedu.address.commons.core.LogsCenter;
-import seedu.address.commons.exceptions.DataLoadingException;
-import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.commons.util.FileUtil;
-import seedu.address.commons.util.JsonUtil;
-import seedu.address.model.ReadOnlyDeck;
+import static java.util.Objects.requireNonNull;
 
 /**
  * A class to access Deck data stored as a json file on the hard disk.
@@ -99,5 +99,4 @@ public class JsonDeckStorage implements DeckStorage {
         FileUtil.createIfMissing(filePath);
         JsonUtil.saveJsonFile(new JsonSerializableDeck(deck), filePath);
     }
-
 }

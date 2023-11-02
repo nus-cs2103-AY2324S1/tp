@@ -38,6 +38,7 @@ public class SolveCount {
             return false;
         }
 
+        // compare Integer equality
         SolveCount otherSolveCount = (SolveCount) other;
         return solveCount.equals(otherSolveCount.solveCount);
     }

@@ -1,12 +1,12 @@
 package seedu.address.ui;
 
-import static java.util.Objects.requireNonNull;
+import javafx.fxml.FXMLLoader;
+import seedu.address.MainApp;
 
 import java.io.IOException;
 import java.net.URL;
 
-import javafx.fxml.FXMLLoader;
-import seedu.address.MainApp;
+import static java.util.Objects.requireNonNull;
 
 /**
  * Represents a distinct part of the UI. e.g. Windows, dialogs, panels, status bars, etc.
@@ -84,5 +84,4 @@ public abstract class UiPart<T> {
         URL fxmlFileUrl = MainApp.class.getResource(fxmlFileNameWithFolder);
         return requireNonNull(fxmlFileUrl);
     }
-
 }

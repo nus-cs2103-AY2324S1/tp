@@ -1,11 +1,11 @@
 package seedu.address.storage;
 
+import seedu.address.commons.exceptions.DataLoadingException;
+import seedu.address.model.ReadOnlyDeck;
+
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Optional;
-
-import seedu.address.commons.exceptions.DataLoadingException;
-import seedu.address.model.ReadOnlyDeck;
 
 /**
  * Represents a storage for {@link seedu.address.model.Deck}.
@@ -41,5 +41,4 @@ public interface DeckStorage {
      * @see #saveDeck(ReadOnlyDeck)
      */
     void saveDeck(ReadOnlyDeck deck, Path filePath) throws IOException;
-
 }

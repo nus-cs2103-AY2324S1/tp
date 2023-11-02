@@ -1,15 +1,5 @@
 package seedu.address.logic.commands;
 
-import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ANSWER;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_QUESTION;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_CARDS;
-
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
-
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.commons.util.ToStringBuilder;
@@ -21,6 +11,16 @@ import seedu.address.model.card.Card;
 import seedu.address.model.card.Question;
 import seedu.address.model.tag.Tag;
 
+import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
+
+import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ANSWER;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_QUESTION;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_CARDS;
+
 /**
  * Edits the details of an existing Card in the Deck.
  */
@@ -29,7 +29,7 @@ public class EditCommand extends Command {
     public static final String COMMAND_WORD = "edit";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the Card identified "
-            + "by the index number used in the displayed Card list. "
+            + "by the index number used in the displayed card list. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_QUESTION + "QUESTION] "
@@ -40,11 +40,14 @@ public class EditCommand extends Command {
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_CARD = "This card already exists in the Deck.";
 
+    /** Specific {@code Index} in Deck to edit */
     private final Index index;
+
+    /** A representation of the edited details of the new {@code Card} */
     private final EditCardDescriptor editCardDescriptor;
 
     /**
-     * @param index              of the Card in the filtered Card list to edit
+     * @param index              of the Card in the filtered Deck to edit
      * @param editCardDescriptor details to edit the Card with
      */
     public EditCommand(Index index, EditCardDescriptor editCardDescriptor) {
@@ -102,6 +105,7 @@ public class EditCommand extends Command {
             return false;
         }
 
+        // compare Index and EditCardDescriptor equality
         EditCommand otherEditCommand = (EditCommand) other;
         return index.equals(otherEditCommand.index)
                 && editCardDescriptor.equals(otherEditCommand.editCardDescriptor);
@@ -117,8 +121,7 @@ public class EditCommand extends Command {
 
     /**
      * Stores the details to edit the Card with. Each non-empty field value will
-     * replace the
-     * corresponding field value of the Card.
+     * replace the corresponding field value of the Card.
      */
     public static class EditCardDescriptor {
         private Question question;
@@ -145,6 +148,7 @@ public class EditCommand extends Command {
             return CollectionUtil.isAnyNonNull(question, answer, tags);
         }
 
+        // Question
         public void setQuestion(Question question) {
             this.question = question;
         }
@@ -153,6 +157,7 @@ public class EditCommand extends Command {
             return Optional.ofNullable(question);
         }
 
+        // Answer
         public void setAnswer(Answer answer) {
             this.answer = answer;
         }
@@ -161,6 +166,7 @@ public class EditCommand extends Command {
             return Optional.ofNullable(answer);
         }
 
+        // Tags
         public void setTags(List<Tag> tags) {
             this.tags = tags;
         }
@@ -180,6 +186,7 @@ public class EditCommand extends Command {
                 return false;
             }
 
+            // compare Question, Answer and Tag equality
             EditCardDescriptor otherEditCardDescriptor = (EditCardDescriptor) other;
             return Objects.equals(question, otherEditCardDescriptor.question)
                     && Objects.equals(answer, otherEditCardDescriptor.answer)
@@ -195,5 +202,4 @@ public class EditCommand extends Command {
                     .toString();
         }
     }
-
 }

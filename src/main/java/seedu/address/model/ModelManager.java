@@ -1,17 +1,17 @@
 package seedu.address.model;
 
-import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
-
-import java.nio.file.Path;
-import java.util.function.Predicate;
-import java.util.logging.Logger;
-
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.card.Card;
+
+import java.nio.file.Path;
+import java.util.function.Predicate;
+import java.util.logging.Logger;
+
+import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 /**
  * Represents the in-memory model of the Deck data.
@@ -39,8 +39,6 @@ public class ModelManager implements Model {
     public ModelManager() {
         this(new Deck(), new UserPrefs());
     }
-
-
 
     //=========== UserPrefs ==================================================================================
 
@@ -140,6 +138,7 @@ public class ModelManager implements Model {
             return false;
         }
 
+        // compare Deck, UserPrefs and FilteredList equality
         ModelManager otherModelManager = (ModelManager) other;
         return deck.equals(otherModelManager.deck)
                 && userPrefs.equals(otherModelManager.userPrefs)

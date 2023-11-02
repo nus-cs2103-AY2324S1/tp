@@ -1,15 +1,15 @@
 package seedu.address.logic.commands;
 
-import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ANSWER;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_QUESTION;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
-
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.card.Card;
+
+import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ANSWER;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_QUESTION;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 /**
  * Adds a Card to the Deck.
@@ -27,6 +27,7 @@ public class AddCommand extends Command {
     public static final String MESSAGE_SUCCESS = "New Card added: %1$s";
     public static final String MESSAGE_DUPLICATE_CARD = "This Card already exists in the Deck";
 
+    /** {@code Card} to be added into {@code Deck} */
     private final Card toAdd;
 
     /**
@@ -60,6 +61,7 @@ public class AddCommand extends Command {
             return false;
         }
 
+        // compare Card equality
         AddCommand otherAddCommand = (AddCommand) other;
         return toAdd.equals(otherAddCommand.toAdd);
     }
@@ -70,5 +72,4 @@ public class AddCommand extends Command {
                 .add("toAdd", toAdd)
                 .toString();
     }
-
 }

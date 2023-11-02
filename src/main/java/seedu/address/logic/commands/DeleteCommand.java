@@ -1,15 +1,15 @@
 package seedu.address.logic.commands;
 
-import static java.util.Objects.requireNonNull;
-
-import java.util.List;
-
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.card.Card;
+
+import java.util.List;
+
+import static java.util.Objects.requireNonNull;
 
 /**
  * Deletes a Card identified using it's displayed index from the Deck.
@@ -25,6 +25,7 @@ public class DeleteCommand extends Command {
 
     public static final String MESSAGE_DELETE_CARD_SUCCESS = "Deleted Card: %1$s";
 
+    /** Specific {@code Index} in Deck to delete from */
     private final Index targetIndex;
 
     public DeleteCommand(Index targetIndex) {
@@ -34,6 +35,7 @@ public class DeleteCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+
         List<Card> lastShownList = model.getFilteredCardList();
 
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
@@ -42,6 +44,7 @@ public class DeleteCommand extends Command {
 
         Card cardToDelete = lastShownList.get(targetIndex.getZeroBased());
         model.deleteCard(cardToDelete);
+
         return new CommandResult(String.format(MESSAGE_DELETE_CARD_SUCCESS, Messages.format(cardToDelete)));
     }
 
@@ -56,6 +59,7 @@ public class DeleteCommand extends Command {
             return false;
         }
 
+        // compares Index equality
         DeleteCommand otherDeleteCommand = (DeleteCommand) other;
         return targetIndex.equals(otherDeleteCommand.targetIndex);
     }
@@ -66,5 +70,4 @@ public class DeleteCommand extends Command {
                 .add("targetIndex", targetIndex)
                 .toString();
     }
-
 }

@@ -1,11 +1,11 @@
 package seedu.address.model;
 
-import java.nio.file.Path;
-import java.util.function.Predicate;
-
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.card.Card;
+
+import java.nio.file.Path;
+import java.util.function.Predicate;
 
 /**
  * The API of the Model component.
@@ -49,7 +49,6 @@ public interface Model {
      */
     ReadOnlyDeck getDeck();
 
-
     /**
      * Returns true if a Card with the same identity as {@code person} exists in the Deck.
      */
@@ -85,5 +84,4 @@ public interface Model {
      * Replaces Deck data with the data in {@code deck}.
      */
     public void setDeck(ReadOnlyDeck deck);
-
 }

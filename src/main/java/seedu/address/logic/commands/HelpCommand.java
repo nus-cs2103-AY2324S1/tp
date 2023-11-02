@@ -20,5 +20,4 @@ public class HelpCommand extends Command {
         assert(model != null);
         return new CommandResult(SHOWING_HELP_MESSAGE, true, false);
     }
-
 }

@@ -1,19 +1,18 @@
 package seedu.address.storage;
 
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
-
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
-
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.card.Answer;
 import seedu.address.model.card.Card;
 import seedu.address.model.card.PracticeDate;
 import seedu.address.model.card.Question;
 import seedu.address.model.tag.Tag;
+
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Jackson-friendly version of {@link Card}.
@@ -74,6 +73,7 @@ class JsonAdaptedCard {
      */
     public Card toModelType() throws IllegalValueException {
 
+        // Question
         if (question == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     Question.class.getSimpleName()));
@@ -85,6 +85,7 @@ class JsonAdaptedCard {
 
         final Question modelQuestion = new Question(question);
 
+        // Answer
         if (answer == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Answer.class.getSimpleName()));
         }
@@ -95,11 +96,14 @@ class JsonAdaptedCard {
 
         final Answer modelAnswer = new Answer(answer);
 
+        // Tags
         final List<Tag> cardTags = new ArrayList<>();
+
         for (JsonAdaptedTag tag : tags) {
             cardTags.add(tag.toModelType());
         }
 
+        // PractiseDate
         if (nextPracticeDate == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, NEXT_PRACTICE_DATE_FIELD_NAME));
         }
@@ -123,5 +127,4 @@ class JsonAdaptedCard {
 
         return new Card(modelQuestion, modelAnswer, difficulty, cardTags, modelNextPracticeDate, modelLastPracticeDate);
     }
-
 }

@@ -1,15 +1,15 @@
 package seedu.address.logic.commands;
 
-import static java.util.Objects.requireNonNull;
-
-import java.util.List;
-
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.card.Card;
+
+import java.util.List;
+
+import static java.util.Objects.requireNonNull;
 
 /**
  * Practises a question using it's displayed index from the Deck.
@@ -21,25 +21,21 @@ public class PractiseCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": practise the card identified by the index number used in the displayed card list.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
-            + "Parameters: DIFFICULTY (must not be empty)\n"
-            + "Example: " + COMMAND_WORD + " 1" + " d/ easy";
+            + "Example: " + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_PRACTISE_CARD_SUCCESS = "%1$s";
 
+    /** Specific {@code Index} in Deck to practise */
     private final Index targetIndex;
 
     /**
-     * Constructs a {@code PractiseCommand} with the specified {@code targetIndex} and {@code difficulty}.
+     * Constructs a {@code PractiseCommand} with the specified {@code targetIndex}
      *
-     * @param targetIndex The index of the target to card.
+     * @param targetIndex The index of the target card.
      */
     public PractiseCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
     }
-
-
-
-
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
@@ -65,10 +61,11 @@ public class PractiseCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof PractiseCommand) || other == null) {
+        if (!(other instanceof PractiseCommand)) {
             return false;
         }
 
+        // compare Index equality
         PractiseCommand otherPractiseCommand = (PractiseCommand) other;
         return targetIndex.equals(otherPractiseCommand.targetIndex);
     }
@@ -79,5 +76,4 @@ public class PractiseCommand extends Command {
                 .add("targetIndex", targetIndex)
                 .toString();
     }
-
 }

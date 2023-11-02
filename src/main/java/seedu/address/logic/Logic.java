@@ -1,7 +1,5 @@
 package seedu.address.logic;
 
-import java.nio.file.Path;
-
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.commands.CommandResult;
@@ -10,6 +8,8 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyDeck;
 import seedu.address.model.card.Card;
+
+import java.nio.file.Path;
 
 /**
  * API of the Logic component
@@ -49,5 +49,4 @@ public interface Logic {
      * Set the user prefs' GUI settings.
      */
     void setGuiSettings(GuiSettings guiSettings);
-
 }
