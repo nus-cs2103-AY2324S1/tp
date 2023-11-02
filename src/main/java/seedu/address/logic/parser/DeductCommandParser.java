@@ -39,7 +39,7 @@ public class DeductCommandParser implements Parser<DeductCommand> {
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_VALUE, PREFIX_REASON);
 
         if (argMultimap.getValue(PREFIX_REASON).isPresent()) {
-            reason = ParserUtil.parseReason(argMultimap.getValue(PREFIX_REASON).get());
+            reason = ParserUtil.parseDeductionReason(argMultimap.getValue(PREFIX_REASON).get());
         } else {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, Reason.MISSING_ALERT));
         }

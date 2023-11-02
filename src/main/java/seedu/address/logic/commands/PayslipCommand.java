@@ -27,12 +27,17 @@ public class PayslipCommand extends Command {
         + "Parameters: INDEX (must be a positive integer) or NAME\n"
         + "Example 1 (index): " + COMMAND_WORD + " 1\n"
         + "Example 2 (name): " + COMMAND_WORD + " /n john\n"
-        + "You can also include a parameter to specify the month and year of the payroll to generate the payslip for.\n"
+        + "You can also include a parameter to specify the month and year of the payroll to generate the payslip for, "
+        + "by providing a date in the format of dd/mm/yyyy.\n"
         + "Example 3 (index and month): " + COMMAND_WORD + " 1 /t 06/10/2023\n";
 
     public static final String EMPTY_PAYROLL_ERROR = "The payroll list for the specified employee is empty.\n"
         + "Please use the payroll command to add a payroll for the employee first.\n"
         + PayrollCommand.MESSAGE_USAGE;
+
+    public static final String WRONG_DATE_FORMAT_ERROR = "The date format is wrong.\n"
+        + "Please use the format of dd/mm/yyyy.\n"
+        + "Example: 06/10/2023";
 
     public static final String MESSAGE_PAYSLIP_SUCCESS = "Payslip generated for Employee: %1$s";
 

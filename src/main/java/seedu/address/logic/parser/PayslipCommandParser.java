@@ -5,6 +5,7 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MONTH_YEAR;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
+import java.time.format.DateTimeParseException;
 import java.util.Arrays;
 
 import seedu.address.commons.core.index.Index;
@@ -33,9 +34,17 @@ public class PayslipCommandParser implements Parser<PayslipCommand> {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_MONTH_YEAR);
 
         Index index;
-        //LocalDate monthYear;
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_MONTH_YEAR);
+
+        if (argMultimap.getValue(PREFIX_MONTH_YEAR).isPresent()) {
+            try {
+                ParserUtil.stringToDate(argMultimap.getValue(PREFIX_MONTH_YEAR).get());
+            } catch (DateTimeParseException dtpe) {
+                throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, PayslipCommand.WRONG_DATE_FORMAT_ERROR), dtpe);
+            }
+        }
 
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());

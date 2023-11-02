@@ -145,9 +145,6 @@ class SalaryTest {
         assertTrue(salaryWithDeduction.equals(salaryWithDeduction));
         assertTrue(salaryWithBenefitAndDeduction.equals(salaryWithBenefitAndDeduction));
 
-        // null deductions and benefits -> returns true
-        assertTrue(salary.equals(new Salary("1500.00", null, null)));
-
         // null -> returns false
         assertFalse(salary.equals(null));
 

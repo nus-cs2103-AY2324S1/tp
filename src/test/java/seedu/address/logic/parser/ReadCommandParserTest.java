@@ -48,7 +48,7 @@ class ReadCommandParserTest {
         assertEquals(parser.fieldNameToString("e"), "email");
         assertEquals(parser.fieldNameToString("b"), "bank account");
         assertEquals(parser.fieldNameToString("l"), "annual leave");
-        assertEquals(parser.fieldNameToString("j"), "join date");
+        assertEquals(parser.fieldNameToString("jd"), "join date");
         assertEquals(parser.fieldNameToString("s"), "salary");
     }
 }
