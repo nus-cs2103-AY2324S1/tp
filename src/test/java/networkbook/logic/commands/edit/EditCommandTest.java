@@ -2,7 +2,6 @@ package networkbook.logic.commands.edit;
 
 import static networkbook.logic.commands.CommandTestUtil.assertCommandFailure;
 import static networkbook.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static networkbook.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static networkbook.testutil.Assert.assertThrowsAssertionError;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -46,7 +45,7 @@ public class EditCommandTest {
 
     @Test
     public void execute_invalidPersonIndexUnfilteredList_commandFailure() {
-        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
+        Index outOfBoundIndex = Index.fromOneBased(model.getDisplayedPersonList().size() + 1);
         EditCommand editCommand = new EditCommand(outOfBoundIndex, VALID_EDIT_ACTION);
 
         assertCommandFailure(editCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
@@ -54,18 +53,16 @@ public class EditCommandTest {
 
     @Test
     public void execute_changeNameToAnExistingContact_commandFailure() {
-        Index lastIndex = Index.fromOneBased(model.getFilteredPersonList().size());
-        Person duplicateInModel = model.getFilteredPersonList().get(0);
-        EditCommand editCommand = new EditCommand(lastIndex, (editPersonDescriptor, index)
-                -> editPersonDescriptor.setName(duplicateInModel.getName()));
+        Index lastIndex = Index.fromOneBased(model.getDisplayedPersonList().size());
+        Person duplicateInModel = model.getDisplayedPersonList().get(0);
+        EditCommand editCommand = new EditCommand(lastIndex, (editPersonDescriptor, index) ->
+                editPersonDescriptor.setName(duplicateInModel.getName()));
         assertCommandFailure(editCommand, model, EditCommand.MESSAGE_DUPLICATE_PERSON);
     }
 
     @Test
     public void execute_validName_success() {
-        showPersonAtIndex(model, TypicalIndexes.INDEX_FIRST_PERSON);
-
-        Person originalPerson = model.getFilteredPersonList()
+        Person originalPerson = model.getDisplayedPersonList()
                 .get(TypicalIndexes.INDEX_FIRST_PERSON.getZeroBased());
         Person editedPerson = new Person(
                 EditCommandUtil.VALID_NAME,
@@ -85,16 +82,14 @@ public class EditCommandTest {
                 String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson));
 
         Model expectedModel = new ModelManager(new NetworkBook(model.getNetworkBook()), new UserPrefs());
-        expectedModel.setItem(model.getFilteredPersonList().get(0), editedPerson);
+        expectedModel.setItem(expectedModel.getDisplayedPersonList().get(0), editedPerson);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
     public void execute_validPhoneAndIndex_success() {
-        showPersonAtIndex(model, TypicalIndexes.INDEX_FIRST_PERSON);
-
-        Person originalPerson = model.getFilteredPersonList()
+        Person originalPerson = model.getDisplayedPersonList()
                 .get(TypicalIndexes.INDEX_FIRST_PERSON.getZeroBased());
         UniqueList<Phone> newPhoneList = originalPerson.getPhones();
         newPhoneList.setItem(EditCommandUtil.VALID_INDEX.getZeroBased(), EditCommandUtil.VALID_PHONE);
@@ -117,7 +112,7 @@ public class EditCommandTest {
                 String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson));
 
         Model expectedModel = new ModelManager(new NetworkBook(model.getNetworkBook()), new UserPrefs());
-        expectedModel.setItem(model.getFilteredPersonList().get(0), editedPerson);
+        expectedModel.setItem(expectedModel.getDisplayedPersonList().get(0), editedPerson);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
@@ -135,9 +130,7 @@ public class EditCommandTest {
 
     @Test
     public void execute_validEmailAndIndex_success() {
-        showPersonAtIndex(model, TypicalIndexes.INDEX_FIRST_PERSON);
-
-        Person originalPerson = model.getFilteredPersonList()
+        Person originalPerson = model.getDisplayedPersonList()
                 .get(TypicalIndexes.INDEX_FIRST_PERSON.getZeroBased());
         UniqueList<Email> newEmailList = originalPerson.getEmails();
         newEmailList.setItem(EditCommandUtil.VALID_INDEX.getZeroBased(), EditCommandUtil.VALID_EMAIL);
@@ -160,7 +153,7 @@ public class EditCommandTest {
                 String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson));
 
         Model expectedModel = new ModelManager(new NetworkBook(model.getNetworkBook()), new UserPrefs());
-        expectedModel.setItem(model.getFilteredPersonList().get(0), editedPerson);
+        expectedModel.setItem(model.getDisplayedPersonList().get(0), editedPerson);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
@@ -178,9 +171,7 @@ public class EditCommandTest {
 
     @Test
     public void execute_validLinkAndIndex_success() {
-        showPersonAtIndex(model, TypicalIndexes.INDEX_FIRST_PERSON);
-
-        Person originalPerson = model.getFilteredPersonList()
+        Person originalPerson = model.getDisplayedPersonList()
                 .get(TypicalIndexes.INDEX_FIRST_PERSON.getZeroBased());
         UniqueList<Link> newLinkList = originalPerson.getLinks();
         newLinkList.setItem(EditCommandUtil.VALID_INDEX.getZeroBased(), EditCommandUtil.VALID_LINK);
@@ -203,7 +194,7 @@ public class EditCommandTest {
                 String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson));
 
         Model expectedModel = new ModelManager(new NetworkBook(model.getNetworkBook()), new UserPrefs());
-        expectedModel.setItem(model.getFilteredPersonList().get(0), editedPerson);
+        expectedModel.setItem(model.getDisplayedPersonList().get(0), editedPerson);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
@@ -221,9 +212,7 @@ public class EditCommandTest {
 
     @Test
     public void execute_validGraduation_success() {
-        showPersonAtIndex(model, TypicalIndexes.INDEX_FIRST_PERSON);
-
-        Person originalPerson = model.getFilteredPersonList()
+        Person originalPerson = model.getDisplayedPersonList()
                 .get(TypicalIndexes.INDEX_FIRST_PERSON.getZeroBased());
         Person editedPerson = new Person(
                 originalPerson.getName(),
@@ -243,16 +232,14 @@ public class EditCommandTest {
                 String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson));
 
         Model expectedModel = new ModelManager(new NetworkBook(model.getNetworkBook()), new UserPrefs());
-        expectedModel.setItem(model.getFilteredPersonList().get(0), editedPerson);
+        expectedModel.setItem(model.getDisplayedPersonList().get(0), editedPerson);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
     public void execute_validCourseAndIndex_success() {
-        showPersonAtIndex(model, TypicalIndexes.INDEX_FIRST_PERSON);
-
-        Person originalPerson = model.getFilteredPersonList()
+        Person originalPerson = model.getDisplayedPersonList()
                 .get(TypicalIndexes.INDEX_FIRST_PERSON.getZeroBased());
         UniqueList<Course> newCourseList = originalPerson.getCourses();
         newCourseList.setItem(EditCommandUtil.VALID_INDEX.getZeroBased(), EditCommandUtil.VALID_COURSE);
@@ -275,7 +262,7 @@ public class EditCommandTest {
                 String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson));
 
         Model expectedModel = new ModelManager(new NetworkBook(model.getNetworkBook()), new UserPrefs());
-        expectedModel.setItem(model.getFilteredPersonList().get(0), editedPerson);
+        expectedModel.setItem(model.getDisplayedPersonList().get(0), editedPerson);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
@@ -293,9 +280,7 @@ public class EditCommandTest {
 
     @Test
     public void execute_validSpecialisationAndIndex_success() {
-        showPersonAtIndex(model, TypicalIndexes.INDEX_FIRST_PERSON);
-
-        Person originalPerson = model.getFilteredPersonList()
+        Person originalPerson = model.getDisplayedPersonList()
                 .get(TypicalIndexes.INDEX_FIRST_PERSON.getZeroBased());
         UniqueList<Specialisation> newSpecialisationList = originalPerson.getSpecialisations();
         newSpecialisationList.setItem(EditCommandUtil.VALID_INDEX.getZeroBased(), EditCommandUtil.VALID_SPECIALISATION);
@@ -318,7 +303,7 @@ public class EditCommandTest {
                 String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson));
 
         Model expectedModel = new ModelManager(new NetworkBook(model.getNetworkBook()), new UserPrefs());
-        expectedModel.setItem(model.getFilteredPersonList().get(0), editedPerson);
+        expectedModel.setItem(model.getDisplayedPersonList().get(0), editedPerson);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
@@ -336,9 +321,7 @@ public class EditCommandTest {
 
     @Test
     public void execute_validTagAndIndex_success() {
-        showPersonAtIndex(model, TypicalIndexes.INDEX_FIRST_PERSON);
-
-        Person originalPerson = model.getFilteredPersonList()
+        Person originalPerson = model.getDisplayedPersonList()
                 .get(TypicalIndexes.INDEX_FIRST_PERSON.getZeroBased());
         UniqueList<Tag> newTagList = originalPerson.getTags();
         newTagList.setItem(EditCommandUtil.VALID_INDEX.getZeroBased(), EditCommandUtil.VALID_TAG);
@@ -361,7 +344,7 @@ public class EditCommandTest {
                 String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson));
 
         Model expectedModel = new ModelManager(new NetworkBook(model.getNetworkBook()), new UserPrefs());
-        expectedModel.setItem(model.getFilteredPersonList().get(0), editedPerson);
+        expectedModel.setItem(model.getDisplayedPersonList().get(0), editedPerson);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
@@ -379,9 +362,7 @@ public class EditCommandTest {
 
     @Test
     public void execute_validPriority_success() {
-        showPersonAtIndex(model, TypicalIndexes.INDEX_FIRST_PERSON);
-
-        Person originalPerson = model.getFilteredPersonList()
+        Person originalPerson = model.getDisplayedPersonList()
                 .get(TypicalIndexes.INDEX_FIRST_PERSON.getZeroBased());
         Person editedPerson = new Person(
                 originalPerson.getName(),
@@ -401,7 +382,7 @@ public class EditCommandTest {
                 String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson));
 
         Model expectedModel = new ModelManager(new NetworkBook(model.getNetworkBook()), new UserPrefs());
-        expectedModel.setItem(model.getFilteredPersonList().get(0), editedPerson);
+        expectedModel.setItem(model.getDisplayedPersonList().get(0), editedPerson);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }

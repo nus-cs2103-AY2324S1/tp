@@ -104,6 +104,17 @@ public interface Model {
      * @return The link that has been opened.
      */
     Link openLink(Index personIndex, Index linkIndex) throws IOException;
+    /**
+     * Returns an unmodifiable view of the list of {@code Person} to be displayed,
+     * which are backed by the internal list of {@code versionedNetworkBook}.
+     */
+    ObservableList<Person> getDisplayedPersonList();
+    /**
+     * Updates the displayed person list to be filtered by the given {@code predicate} if {@code predicate} is not null.
+     * Also updates the displayed person list to be sorted by the given {@code comparator} if {@code comparator} is not
+     * null.
+     */
+    void updateDisplayedPersonList(Predicate<Person> predicate, Comparator<Person> comparator);
 
     /**
      * Checks if the indices for an email of a contact are valid.
@@ -116,19 +127,4 @@ public interface Model {
      * @return The email that has been opened.
      */
     Email openEmail(Index personIndex, Index linkIndex) throws IOException;
-
-    /** Returns an unmodifiable view of the filtered person list */
-    ObservableList<Person> getFilteredPersonList();
-
-    /**
-     * Updates the filter of the filtered person list to filter by the given {@code predicate}.
-     * @throws NullPointerException if {@code predicate} is null.
-     */
-    void updateFilteredPersonList(Predicate<Person> predicate);
-
-    /**
-     * Updates the sort of the filtered person list to sort by the given {@code comparator}.
-     * @throws NullPointerException if {@code comparator} is null.
-     */
-    void updateSortedPersonList(Comparator<Person> comparator);
 }

@@ -39,9 +39,9 @@ public class SortCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        model.updateSortedPersonList(comparator);
+        model.updateDisplayedPersonList(null, comparator);
         return new CommandResult(
-                String.format(Messages.MESSAGE_PERSONS_SORTED_OVERVIEW, model.getFilteredPersonList().size()));
+                String.format(Messages.MESSAGE_PERSONS_SORTED_OVERVIEW, model.getDisplayedPersonList().size()));
     }
 
     @Override

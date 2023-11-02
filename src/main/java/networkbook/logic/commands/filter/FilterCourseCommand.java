@@ -42,20 +42,21 @@ public class FilterCourseCommand extends FilterCommand {
      */
     public CommandResult execute(Model model) {
         assert model != null : "Model should not be null";
-        model.updateFilteredPersonList(keyTermsPredicate);
+        model.updateDisplayedPersonList(keyTermsPredicate, null);
         String feedback = String.format(MESSAGE_SUCCESS, keyTermsPredicate.getKeyTerms()
                 .stream()
                 .reduce("", (acc, term) -> acc + " \"" + term + "\"")
                 .trim()
                 .replace(" ", ", "));
         if (checkFin) {
-            model.updateFilteredPersonList(person -> keyTermsPredicate.getCourses(person)
+            model.updateDisplayedPersonList(person -> keyTermsPredicate.getCourses(person)
                     .stream()
-                    .anyMatch(course -> takenPredicate.test(course)));
+                    .anyMatch(course -> takenPredicate.test(course)),
+                    null);
             feedback += MESSAGE_EXCL_FIN;
         }
         return new CommandResult(feedback
-                + String.format(MESSAGE_PERSONS_FOUND_OVERVIEW, model.getFilteredPersonList().size()));
+                + String.format(MESSAGE_PERSONS_FOUND_OVERVIEW, model.getDisplayedPersonList().size()));
     }
 
     @Override

@@ -47,7 +47,7 @@ public class OpenLinkCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         assert model != null : "Model should not be null.";
-        List<Person> lastShownList = model.getFilteredPersonList();
+        List<Person> lastShownList = model.getDisplayedPersonList();
         if (this.personIndex.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }

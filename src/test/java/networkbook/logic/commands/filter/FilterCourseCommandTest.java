@@ -97,7 +97,7 @@ public class FilterCourseCommandTest {
 
         FilterCommand command = new FilterCourseCommand(keyPredicate, takenPredicate, false);
 
-        expectedModel.updateFilteredPersonList(keyPredicate);
+        expectedModel.updateDisplayedPersonList(keyPredicate, null);
 
         CommandTestUtil.assertCommandSuccess(command, model, expectedMessage, expectedModel);
     }
@@ -120,7 +120,7 @@ public class FilterCourseCommandTest {
         String expectedMessage = String.format(FilterCourseCommand.MESSAGE_SUCCESS, "\"Fourth\"")
                 + String.format(FilterCommand.MESSAGE_PERSONS_FOUND_OVERVIEW, 0);
 
-        expectedModel.updateFilteredPersonList(keyPredicate);
+        expectedModel.updateDisplayedPersonList(keyPredicate, null);
 
         CommandTestUtil.assertCommandSuccess(command, model, expectedMessage, expectedModel);
     }
@@ -143,7 +143,7 @@ public class FilterCourseCommandTest {
         String expectedMessage = String.format(FilterCourseCommand.MESSAGE_SUCCESS, "\"First\"")
                 + String.format(FilterCommand.MESSAGE_PERSONS_FOUND_OVERVIEW, 2);
 
-        expectedModel.updateFilteredPersonList(keyPredicate);
+        expectedModel.updateDisplayedPersonList(keyPredicate, null);
 
         CommandTestUtil.assertCommandSuccess(command, model, expectedMessage, expectedModel);
     }
@@ -167,7 +167,7 @@ public class FilterCourseCommandTest {
         String expectedMessage = String.format(FilterCourseCommand.MESSAGE_SUCCESS, "\"Fourth\", \"Third\"")
                 + String.format(FilterCommand.MESSAGE_PERSONS_FOUND_OVERVIEW, 1);
 
-        expectedModel.updateFilteredPersonList(keyPredicate);
+        expectedModel.updateDisplayedPersonList(keyPredicate, null);
 
         CommandTestUtil.assertCommandSuccess(command, model, expectedMessage, expectedModel);
     }
@@ -191,11 +191,12 @@ public class FilterCourseCommandTest {
                 + FilterCommand.MESSAGE_EXCL_FIN
                 + String.format(FilterCommand.MESSAGE_PERSONS_FOUND_OVERVIEW, 0);
 
-        expectedModel.updateFilteredPersonList(keyPredicate);
-        expectedModel.updateFilteredPersonList(
+        expectedModel.updateDisplayedPersonList(keyPredicate, null);
+        expectedModel.updateDisplayedPersonList(
                 p -> keyPredicate.getCourses(p)
                         .stream()
-                        .anyMatch(c -> takenPredicate.test(c))
+                        .anyMatch(c -> takenPredicate.test(c)),
+                null
         );
 
         CommandTestUtil.assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -223,11 +224,12 @@ public class FilterCourseCommandTest {
                 + FilterCommand.MESSAGE_EXCL_FIN
                 + String.format(FilterCommand.MESSAGE_PERSONS_FOUND_OVERVIEW, 1);
 
-        expectedModel.updateFilteredPersonList(keyPredicate);
-        expectedModel.updateFilteredPersonList(
+        expectedModel.updateDisplayedPersonList(keyPredicate, null);
+        expectedModel.updateDisplayedPersonList(
                 p -> keyPredicate.getCourses(p)
                         .stream()
-                        .anyMatch(c -> takenPredicate.test(c))
+                        .anyMatch(c -> takenPredicate.test(c)),
+                null
         );
 
         CommandTestUtil.assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -251,7 +253,7 @@ public class FilterCourseCommandTest {
         String expectedMessage = String.format(FilterCourseCommand.MESSAGE_SUCCESS, "\"Fir\"")
                 + String.format(FilterCommand.MESSAGE_PERSONS_FOUND_OVERVIEW, 2);
 
-        expectedModel.updateFilteredPersonList(keyPredicate);
+        expectedModel.updateDisplayedPersonList(keyPredicate, null);
 
         CommandTestUtil.assertCommandSuccess(command, model, expectedMessage, expectedModel);
     }

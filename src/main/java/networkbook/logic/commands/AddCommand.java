@@ -1,7 +1,6 @@
 package networkbook.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static networkbook.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.List;
 import java.util.Objects;
@@ -76,16 +75,15 @@ public class AddCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         assert model != null : "Model should not be null";
-        List<Person> lastShownList = model.getFilteredPersonList();
+        List<Person> lastShownList = model.getDisplayedPersonList();
         if (index.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
         Person personToAddInfo = lastShownList.get(index.getZeroBased());
         Person personAfterAddingInfo = addInfoToPerson(personToAddInfo, addPersonDescriptor);
         model.setItem(personToAddInfo, personAfterAddingInfo);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(
-                String.format(MESSAGE_ADD_INFO_SUCCESS, Messages.format(personAfterAddingInfo)));
+        return new CommandResult(String.format(MESSAGE_ADD_INFO_SUCCESS, Messages.format(personAfterAddingInfo)));
+
     }
 
     /**
