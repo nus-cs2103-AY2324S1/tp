@@ -177,12 +177,15 @@ public class ModelManager implements Model {
 
     @Override
     public Person getSelectedPerson() {
+        if (null == selectedPerson || hasPerson(selectedPerson)) {
+            return selectedPerson;
+        }
+        this.selectedPerson = filteredPersons.size() == 0 ? null : filteredPersons.get(0);
         return selectedPerson;
     }
 
     @Override
     public void updateSelectedPerson(Person person) {
-        requireNonNull(person);
         selectedPerson = person;
     }
 
