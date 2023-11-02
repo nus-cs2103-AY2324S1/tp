@@ -114,9 +114,9 @@ Shows a message explaining how to access the help page. The link will bring the 
 
 Format: `help`
 
->:bulb: Use **h** as a shorcut to utilise the help command
+>:bulb: Use `h` as a shortcut to utilise the `help` command
 
->:bulb: Click on the Copy URL after entering the help command and paste the link in your preferred browser
+>:bulb: Click on `Copy URL` after entering the `help` command and paste the link in your preferred browser
 
 ### Listing All Patients: `list`
 
@@ -124,7 +124,7 @@ Shows a list of all patients in HealthSync.
 
 Format: `list`
 
->:bulb: Use **ls** as a shorcut for list
+>:bulb: Use `ls` as a shortcut for `list`
 
 ![result for 'list'](images/listResult.jpg)
 
@@ -139,7 +139,7 @@ Adds a patient into HealthSync, with the given patient information.
 
 Format: `add n/NAME id/IC_NUMBER [field] ...`
 
->:bulb: Use **a** as a shorcut for add
+>:bulb: Use `a` as a shortcut for `add`
 
 Example commands:
 
@@ -147,6 +147,7 @@ Example commands:
 
 ![result for 'add n/Aaron Tan Jun Jie id/S8943782H p/98114839 e/example@mailhere a/Serangoon HDB 123'](images/addResult.jpg)
 
+Expected outputs when the command succeeds:
 * `New Patient added: ...`
 
 Expected outputs when the command fails:
@@ -163,14 +164,14 @@ Edits an existing patient's details in HealthSync.
  * Existing fields will be updated to the input values.
  * If the fields do not exist, the corresponding field with details will be added.
 
+>:bulb: Update multiple fields in a single `edit` command to save time
+
 Format: `edit n/NAME or id/IC_NUMBER [field] ...`
 
->:bulb: Use **e** as a shorcut for edit
+>:bulb: Use `e` as a shortcut for `edit`
 
 Example commands:
  * `edit n/Alex Yeoh p/91234567 e/alexyeoh@example.com`
-
->:bulb: Update multiple fields in a single edit command to save time
 
 ![result for 'edit n/Alex Yeoh p/91234567 e/alexyeoh@example.com'](images/editResult.jpg)
 
@@ -198,7 +199,7 @@ Example commands:
 * `delete n/Alex Yeoh`
 * `delete n/John Doe m/`
 
->:bulb: Specify the medical history to be deleted using m/ if it's only the medical history data that is to be deleted
+>:bulb: Specify the medical history to be deleted using `m/` if it's only the medical history data that is to be deleted
 
 ![result for 'delete n/Alex Yeoh'](images/deleteResult.jpg)
 
@@ -215,7 +216,7 @@ Deletes all patients from HealthSync.
 
 Format: `clear`
 
->:bulb: Use **c** as a shorcut for clear
+>:bulb: Use `c` as a shortcut for `clear`
 
 ![result for 'clear'](images/clearResult.jpg)
 
@@ -296,7 +297,6 @@ Expected output when the command fails:
 
 >:bulb: `alog` does not overwrite the data and instead adds on to it, so you do not have to keep performing `log` to save more data
 
-
 ### Clearing data from the log: `clog`
 
 Clears all current data in the logger tab.
@@ -325,8 +325,9 @@ Undoes an undo-able command within HealthSync.
 Format:
 * `undo [number]`
 
->:bulb: Use **u** as a shorcut for undo
->:bulb: Simply entering **undo** will undo the last command
+>:bulb: Use `u` as a shortcut for `undo`
+
+>:bulb: Simply entering `undo` will undo the last command
 
 Example commands:
 *  `undo 2`
@@ -348,7 +349,7 @@ Exits HealthSync.
 
 Format: `exit`
 
->:bulb: Use **ex** as a shorcut for exit
+>:bulb: Use `ex` as a shortcut for `exit`
 
 ### Auto Save
 
