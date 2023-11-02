@@ -5,6 +5,7 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalAddressBook.getTypicalAddressBook;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 import org.junit.jupiter.api.Test;
 
@@ -32,10 +33,11 @@ class ListFreeTimeCommandTest {
 
     @Test
     void testFormatFreeTimeSuccess() {
-        ListFreeTimeCommand listFreeTimeCommand = new ListFreeTimeCommand(LocalDateTime.now());
+        LocalDateTime today = LocalDateTime.now();
+        ListFreeTimeCommand listFreeTimeCommand = new ListFreeTimeCommand(today);
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        String expectedMessage = "Free times on 01/11/2023:\n"
-                + "from: 09:00 to: 17:00\n";
+        String expectedMessage = "Free times on " + today.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"))
+                + ":\nfrom: 09:00 to: 17:00\n";
         assertCommandSuccess(listFreeTimeCommand, model, expectedMessage, expectedModel);
     }
 }
