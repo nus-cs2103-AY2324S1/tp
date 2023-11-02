@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DEPARTMENT_LOGISTIC;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalEmployees.ALICE;
+import static seedu.address.testutil.TypicalEmployees.ELLE;
 import static seedu.address.testutil.TypicalEmployees.getTypicalManageHr;
 
 import java.util.Arrays;
@@ -47,10 +47,9 @@ public class ManageHrTest {
     @Test
     public void resetData_withDuplicateEmployees_throwsDuplicateEmployeeException() {
         // Two people with the same identity fields
-        Employee editedAlice = new EmployeeBuilder(ALICE).withAddress(VALID_ADDRESS_BOB)
-                .withDepartments(VALID_DEPARTMENT_LOGISTIC)
+        Employee editedElle = new EmployeeBuilder(ELLE).withAddress(VALID_ADDRESS_BOB)
                 .build();
-        List<Employee> newPeople = Arrays.asList(ALICE, editedAlice);
+        List<Employee> newPeople = Arrays.asList(ELLE, editedElle);
         ManageHrStub newData = new ManageHrStub(newPeople);
 
         assertThrows(DuplicateEmployeeException.class, () -> manageHr.resetData(newData));
@@ -63,22 +62,22 @@ public class ManageHrTest {
 
     @Test
     public void hasEmployee_employeeNotInManageHr_returnsFalse() {
-        assertFalse(manageHr.hasEmployee(ALICE));
+        assertFalse(manageHr.hasEmployee(ELLE));
     }
 
     @Test
     public void hasEmployee_employeeInManageHr_returnsTrue() {
-        manageHr.addEmployee(ALICE);
-        assertTrue(manageHr.hasEmployee(ALICE));
+        manageHr.addEmployee(ELLE);
+        assertTrue(manageHr.hasEmployee(ELLE));
     }
 
     @Test
     public void hasEmployee_employeeWithSameIdentityFieldsInManageHr_returnsTrue() {
-        manageHr.addEmployee(ALICE);
-        Employee editedAlice = new EmployeeBuilder(ALICE).withAddress(VALID_ADDRESS_BOB)
+        manageHr.addEmployee(ELLE);
+        Employee editedElle = new EmployeeBuilder(ELLE).withAddress(VALID_ADDRESS_BOB)
                 .withDepartments(VALID_DEPARTMENT_LOGISTIC)
                 .build();
-        assertTrue(manageHr.hasEmployee(editedAlice));
+        assertTrue(manageHr.hasEmployee(editedElle));
     }
 
     @Test
@@ -102,7 +101,7 @@ public class ManageHrTest {
         assertTrue(manageHr.equals(other));
 
         // different values -> returns false
-        other.addEmployee(ALICE);
+        other.addEmployee(ELLE);
         assertFalse(manageHr.equals(other));
 
         // same object -> returns true

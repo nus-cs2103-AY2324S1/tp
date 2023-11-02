@@ -10,14 +10,14 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.department.exceptions.DepartmentNotFoundException;
 import seedu.address.model.department.exceptions.DuplicateDepartmentException;
-import seedu.address.model.name.Name;
+import seedu.address.model.name.DepartmentName;
 
 /**
  * A list of departments that enforces uniqueness between its elements and does not allow nulls.
  * An department is considered unique by comparing using {@code Department#isSameDepartment(Department)}.
  * As such, adding and updating of departments uses Department#isSameDepartment(Department) for equality to ensure
- * that the department being added or updated is unique in terms of identity in the UniquedepartmentList.
- * However, the removal of an department uses Department#equals(Object) to ensure that the department with
+ * that the department being added or updated is unique in terms of identity in the UniqueDepartmentList.
+ * However, the removal of a department uses Department#equals(Object) to ensure that the department with
  * exactly the same fields will be removed.
  *
  * Supports a minimal set of list operations.
@@ -41,13 +41,13 @@ public class UniqueDepartmentList implements Iterable<Department> {
     /**
      * Returns true if the list contains an equivalent department as the given argument.
      */
-    public boolean contains(Name toCheck) {
+    public boolean contains(DepartmentName toCheck) {
         requireNonNull(toCheck);
-        return internalList.stream().anyMatch(new Department(toCheck)::isSameDepartment);
+        return internalList.stream().anyMatch(department -> department.isSameDepartmentName(toCheck));
     }
 
     /**
-     * Adds an department to the list.
+     * Adds a department to the list.
      * The department must not already exist in the list.
      */
     public void add(Department toAdd) {

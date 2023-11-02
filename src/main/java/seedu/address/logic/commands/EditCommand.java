@@ -32,7 +32,8 @@ import seedu.address.model.employee.Leave;
 import seedu.address.model.employee.Phone;
 import seedu.address.model.employee.Role;
 import seedu.address.model.employee.Salary;
-import seedu.address.model.name.Name;
+import seedu.address.model.name.DepartmentName;
+import seedu.address.model.name.EmployeeName;
 
 /**
  * Edits the details of an existing employee in the ManageHR app.
@@ -94,7 +95,7 @@ public class EditCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_EMPLOYEE);
         }
 
-        for (Name departmentName : editedEmployee.getDepartments()) {
+        for (DepartmentName departmentName : editedEmployee.getDepartments()) {
             if (!model.hasDepartmentWithName(departmentName)) {
                 throw new CommandException(MESSAGE_UNDEFINED_DEPARTMENT);
             }
@@ -113,16 +114,16 @@ public class EditCommand extends Command {
                                                  EditEmployeeDescriptor editEmployeeDescriptor) {
         assert employeeToEdit != null;
 
-        Name updatedName = editEmployeeDescriptor.getName().orElse(employeeToEdit.getName());
+        EmployeeName updatedName = editEmployeeDescriptor.getName().orElse(employeeToEdit.getName());
         Phone updatedPhone = editEmployeeDescriptor.getPhone().orElse(employeeToEdit.getPhone());
         Email updatedEmail = editEmployeeDescriptor.getEmail().orElse(employeeToEdit.getEmail());
         Address updatedAddress = editEmployeeDescriptor.getAddress().orElse(employeeToEdit.getAddress());
         Salary updatedSalary = editEmployeeDescriptor.getSalary().orElse(employeeToEdit.getSalary());
         Leave updatedLeave = editEmployeeDescriptor.getLeave().orElse(employeeToEdit.getLeave());
         Role updatedRole = editEmployeeDescriptor.getRole().orElse(employeeToEdit.getRole());
-        Set<Name> updatedSupervisors = editEmployeeDescriptor
+        Set<EmployeeName> updatedSupervisors = editEmployeeDescriptor
                 .getSupervisors().orElse(employeeToEdit.getSupervisors());
-        Set<Name> updatedDepartments = editEmployeeDescriptor
+        Set<DepartmentName> updatedDepartments = editEmployeeDescriptor
                 .getDepartments().orElse(employeeToEdit.getDepartments());
 
         return new Employee(updatedName, updatedPhone, updatedEmail, updatedAddress,
@@ -158,15 +159,15 @@ public class EditCommand extends Command {
      * corresponding field value of the employee.
      */
     public static class EditEmployeeDescriptor {
-        private Name name;
+        private EmployeeName name;
         private Phone phone;
         private Email email;
         private Address address;
         private Salary salary;
         private Leave leave;
         private Role role;
-        private Set<Name> supervisors;
-        private Set<Name> departments;
+        private Set<EmployeeName> supervisors;
+        private Set<DepartmentName> departments;
 
         public EditEmployeeDescriptor() {}
 
@@ -194,11 +195,11 @@ public class EditCommand extends Command {
                     leave, role, supervisors, departments);
         }
 
-        public void setName(Name name) {
+        public void setName(EmployeeName name) {
             this.name = name;
         }
 
-        public Optional<Name> getName() {
+        public Optional<EmployeeName> getName() {
             return Optional.ofNullable(name);
         }
 
@@ -254,7 +255,7 @@ public class EditCommand extends Command {
          * Sets {@code supervisors} to this object's {@code supervisors}.
          * A defensive copy of {@code supervisors} is used internally.
          */
-        public void setSupervisors(Set<Name> supervisors) {
+        public void setSupervisors(Set<EmployeeName> supervisors) {
             this.supervisors = (supervisors != null) ? new HashSet<>(supervisors) : null;
         }
 
@@ -263,7 +264,7 @@ public class EditCommand extends Command {
          * if modification is attempted.
          * Returns {@code Optional#empty()} if {@code supervisors} is null.
          */
-        public Optional<Set<Name>> getSupervisors() {
+        public Optional<Set<EmployeeName>> getSupervisors() {
             return (supervisors != null)
                     ? Optional.of(Collections.unmodifiableSet(supervisors)) : Optional.empty();
         }
@@ -272,7 +273,7 @@ public class EditCommand extends Command {
          * Sets {@code departments} to this object's {@code departments}.
          * A defensive copy of {@code departments} is used internally.
          */
-        public void setDepartments(Set<Name> departments) {
+        public void setDepartments(Set<DepartmentName> departments) {
             this.departments = (departments != null) ? new HashSet<>(departments) : null;
         }
 
@@ -281,7 +282,7 @@ public class EditCommand extends Command {
          * if modification is attempted.
          * Returns {@code Optional#empty()} if {@code departments} is null.
          */
-        public Optional<Set<Name>> getDepartments() {
+        public Optional<Set<DepartmentName>> getDepartments() {
             return (departments != null) ? Optional.of(Collections.unmodifiableSet(departments)) : Optional.empty();
         }
 

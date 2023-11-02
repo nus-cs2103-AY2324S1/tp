@@ -1,21 +1,22 @@
 package seedu.address.model.department;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
-import seedu.address.model.name.Name;
+import seedu.address.model.name.DepartmentName;
+import seedu.address.model.name.EmployeeName;
+
 /**
  * Represents a Department in the ManageHR.
  * Guarantees: immutable; name is valid as declared in {@link #isValidDepartmentName(String)}
  */
 public class Department {
 
-    public final Name name;
-    private final Set<Name> employees = new HashSet<>();
+    public final DepartmentName name;
+    private final Set<EmployeeName> employees = new HashSet<>();
 
     /**
      * Constructs a {@code Department}.
@@ -24,8 +25,7 @@ public class Department {
      */
     public Department(String name) {
         requireNonNull(name);
-        checkArgument(Name.isValidName(name), Name.MESSAGE_CONSTRAINTS);
-        this.name = new Name(name);
+        this.name = new DepartmentName(name);
     }
 
     /**
@@ -33,7 +33,7 @@ public class Department {
      *
      * @param name A valid department name of type Name.
      */
-    public Department(Name name) {
+    public Department(DepartmentName name) {
         requireNonNull(name);
         this.name = name;
     }
@@ -43,7 +43,7 @@ public class Department {
      *
      * @param name A valid department name of type Name.
      */
-    public Department(Name name, Set<Name> employees) {
+    public Department(DepartmentName name, Set<EmployeeName> employees) {
         requireNonNull(name);
         requireNonNull(employees);
         this.name = name;
@@ -53,7 +53,9 @@ public class Department {
         return name.fullName;
     }
 
-    public Set<Name> getEmployees() { return Collections.unmodifiableSet(employees); }
+    public Set<EmployeeName> getEmployees() {
+        return Collections.unmodifiableSet(employees);
+    }
 
     @Override
     public boolean equals(Object other) {
@@ -76,6 +78,10 @@ public class Department {
      */
     public boolean isSameDepartment(Department otherDepartment) {
         return otherDepartment.equals(this);
+    }
+
+    public boolean isSameDepartmentName(DepartmentName name) {
+        return this.name.equals(name);
     }
 
     @Override

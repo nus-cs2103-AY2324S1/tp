@@ -4,28 +4,26 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.department.Department;
-import seedu.address.model.employee.Employee;
-import seedu.address.model.name.Name;
+import seedu.address.model.name.DepartmentName;
 
 /**
- * Jackson-friendly version of {@link Name}, in a single string format.
+ * Jackson-friendly version of {@link DepartmentName}, in a single string format.
  */
-public class JsonAdaptedName {
+public class JsonAdaptedDepartmentName {
     private final String name;
 
     /**
      * Constructs a {@code JsonAdaptedDepartment} with the given {@code name}.
      */
     @JsonCreator
-    public JsonAdaptedName(String name) {
+    public JsonAdaptedDepartmentName(String name) {
         this.name = name;
     }
 
     /**
      * Converts a given {@code Name} into this class for Jackson use.
      */
-    public JsonAdaptedName(Name name) {
+    public JsonAdaptedDepartmentName(DepartmentName name) {
         this.name = name.fullName;
     }
 
@@ -42,11 +40,11 @@ public class JsonAdaptedName {
      *
      * @throws IllegalValueException if there were any data constraints violated in the adapted department.
      */
-    public Name toModelType() throws IllegalValueException {
-        if (!Name.isValidName(this.name)) {
-            throw new IllegalValueException(Name.MESSAGE_CONSTRAINTS);
+    public DepartmentName toModelType() throws IllegalValueException {
+        if (!DepartmentName.isValidName(this.name)) {
+            throw new IllegalValueException(DepartmentName.MESSAGE_CONSTRAINTS);
         }
-        return new Name(this.name);
+        return new DepartmentName(this.name);
     }
 
 }

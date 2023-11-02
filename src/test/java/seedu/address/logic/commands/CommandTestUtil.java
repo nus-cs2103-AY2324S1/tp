@@ -45,7 +45,7 @@ public class CommandTestUtil {
     public static final String VALID_ROLE_AMY = "manager";
     public static final String VALID_ROLE_BOB = "subordinate";
     public static final String VALID_MANAGER_AMY = "Amy Bee";
-    public static final String VALID_DEPARTMENT_LOGISTIC = "logistic";
+    public static final String VALID_DEPARTMENT_LOGISTIC = "logistics";
     public static final String VALID_DEPARTMENT_INVESTMENT = "investment";
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;

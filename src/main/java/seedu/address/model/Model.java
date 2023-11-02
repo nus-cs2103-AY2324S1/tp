@@ -7,7 +7,8 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.department.Department;
 import seedu.address.model.employee.Employee;
-import seedu.address.model.name.Name;
+import seedu.address.model.name.DepartmentName;
+import seedu.address.model.name.EmployeeName;
 
 /**
  * The API of the Model component.
@@ -62,7 +63,7 @@ public interface Model {
     /**
      * Returns true if an employee with the identity as {@code name} exists in ManageHR.
      */
-    boolean hasEmployeeWithName(Name name);
+    boolean hasEmployeeWithName(EmployeeName name);
 
     /**
      * Deletes the given employee.
@@ -100,7 +101,7 @@ public interface Model {
     /**
      * Returns true if a department with the identity as {@code name} exists in ManageHR.
      */
-    boolean hasDepartmentWithName(Name name);
+    boolean hasDepartmentWithName(DepartmentName name);
 
     /**
      * Adds a department to ManageHR.
@@ -111,7 +112,8 @@ public interface Model {
     /**
      * Replaces the given department {@code target} in the list with {@code editedDepartment}.
      * {@code target} must exist in the ManageHR.
-     * The department identity of {@code editedDepartment} must not be the same as another existing department in ManageHR.
+     * The department identity of {@code editedDepartment} must not be the same as another
+     * existing department in ManageHR.
      */
     void setDepartment(Department target, Department editedDepartment);
 

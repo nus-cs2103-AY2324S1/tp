@@ -8,11 +8,11 @@ import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonValue;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.department.Department;
-import seedu.address.model.name.Name;
+import seedu.address.model.name.DepartmentName;
+import seedu.address.model.name.EmployeeName;
 
 /**
  * Jackson-friendly version of {@link Department}, in an object format.
@@ -20,14 +20,14 @@ import seedu.address.model.name.Name;
 class JsonAdaptedDepartment {
 
     private final String name;
-    private final List<JsonAdaptedName> employees = new ArrayList<>();
+    private final List<JsonAdaptedEmployeeName> employees = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedDepartment} with the given {@code name}.
      */
     @JsonCreator
     public JsonAdaptedDepartment(@JsonProperty("name") String name,
-                                @JsonProperty("employees") List<JsonAdaptedName> employees) {
+                                @JsonProperty("employees") List<JsonAdaptedEmployeeName> employees) {
         this.name = name;
         if (employees != null) {
             this.employees.addAll(employees);
@@ -41,7 +41,7 @@ class JsonAdaptedDepartment {
 
         this.name = source.getName();
         employees.addAll(source.getEmployees().stream()
-                .map(JsonAdaptedName::new)
+                .map(JsonAdaptedEmployeeName::new)
                 .collect(Collectors.toList()));
     }
 
@@ -51,14 +51,14 @@ class JsonAdaptedDepartment {
      * @throws IllegalValueException if there were any data constraints violated in the adapted department.
      */
     public Department toModelType() throws IllegalValueException {
-        if (!Name.isValidName(this.name)) {
-            throw new IllegalValueException(Name.MESSAGE_CONSTRAINTS);
+        if (!DepartmentName.isValidName(this.name)) {
+            throw new IllegalValueException(DepartmentName.MESSAGE_CONSTRAINTS);
         }
-        Set<Name> employees = new HashSet<>();
-        for (JsonAdaptedName jsonName : this.employees) {
+        Set<EmployeeName> employees = new HashSet<>();
+        for (JsonAdaptedEmployeeName jsonName : this.employees) {
             employees.add(jsonName.toModelType());
         }
-        return new Department(new Name(this.name), employees);
+        return new Department(new DepartmentName(this.name), employees);
     }
 
 }

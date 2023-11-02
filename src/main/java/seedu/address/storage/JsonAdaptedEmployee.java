@@ -17,7 +17,8 @@ import seedu.address.model.employee.Leave;
 import seedu.address.model.employee.Phone;
 import seedu.address.model.employee.Role;
 import seedu.address.model.employee.Salary;
-import seedu.address.model.name.Name;
+import seedu.address.model.name.DepartmentName;
+import seedu.address.model.name.EmployeeName;
 
 /**
  * Jackson-friendly version of {@link Employee}.
@@ -34,7 +35,7 @@ class JsonAdaptedEmployee {
     private final String leave;
     private final String role;
     private final List<JsonAdaptedSupervisor> supervisors = new ArrayList<>();
-    private final List<JsonAdaptedName> departments = new ArrayList<>();
+    private final List<JsonAdaptedDepartmentName> departments = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedEmployee} with the given employee details.
@@ -45,7 +46,7 @@ class JsonAdaptedEmployee {
                                @JsonProperty("salary") String salary, @JsonProperty("leave") String leave,
                                @JsonProperty("role") String role,
                                @JsonProperty("supervisors") List<JsonAdaptedSupervisor> supervisors,
-                               @JsonProperty("departments") List<JsonAdaptedName> departments) {
+                               @JsonProperty("departments") List<JsonAdaptedDepartmentName> departments) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -76,7 +77,7 @@ class JsonAdaptedEmployee {
                 .map(JsonAdaptedSupervisor::new)
                 .collect(Collectors.toList()));
         departments.addAll(source.getDepartments().stream()
-                .map(JsonAdaptedName::new)
+                .map(JsonAdaptedDepartmentName::new)
                 .collect(Collectors.toList()));
     }
 
@@ -86,22 +87,23 @@ class JsonAdaptedEmployee {
      * @throws IllegalValueException if there were any data constraints violated in the adapted employee.
      */
     public Employee toModelType() throws IllegalValueException {
-        final List<Name> employeeDepartments = new ArrayList<>();
-        for (JsonAdaptedName department : departments) {
+        final List<DepartmentName> employeeDepartments = new ArrayList<>();
+        for (JsonAdaptedDepartmentName department : departments) {
             employeeDepartments.add(department.toModelType());
         }
-        final List<Name> managers = new ArrayList<>();
+        final List<EmployeeName> managers = new ArrayList<>();
         for (JsonAdaptedSupervisor supervisor : supervisors) {
             managers.add(supervisor.toModelType());
         }
 
         if (name == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
+            throw new IllegalValueException(String.format(
+                    MISSING_FIELD_MESSAGE_FORMAT, EmployeeName.class.getSimpleName()));
         }
-        if (!Name.isValidName(name)) {
-            throw new IllegalValueException(Name.MESSAGE_CONSTRAINTS);
+        if (!EmployeeName.isValidName(name)) {
+            throw new IllegalValueException(EmployeeName.MESSAGE_CONSTRAINTS);
         }
-        final Name modelName = new Name(name);
+        final EmployeeName modelName = new EmployeeName(name);
 
         if (phone == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Phone.class.getSimpleName()));
@@ -150,8 +152,8 @@ class JsonAdaptedEmployee {
             throw new IllegalValueException(Role.MESSAGE_CONSTRAINTS);
         }
         final Role modelRole = new Role(role);
-        final Set<Name> modelSupervisors = new HashSet<>(managers);
-        final Set<Name> modelDepartments = new HashSet<>(employeeDepartments);
+        final Set<EmployeeName> modelSupervisors = new HashSet<>(managers);
+        final Set<DepartmentName> modelDepartments = new HashSet<>(employeeDepartments);
         return new Employee(modelName, modelPhone, modelEmail, modelAddress, modelSalary, modelLeave,
                  modelRole, modelSupervisors, modelDepartments);
     }

@@ -16,7 +16,7 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.employee.Employee;
-import seedu.address.model.name.Name;
+import seedu.address.model.name.DepartmentName;
 
 /**
  * Adds an employee to the ManageHR.
@@ -71,7 +71,7 @@ public class AddCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_EMPLOYEE);
         }
 
-        for (Name departmentName : toAdd.getDepartments()) {
+        for (DepartmentName departmentName : toAdd.getDepartments()) {
             if (!model.hasDepartmentWithName(departmentName)) {
                 throw new CommandException(MESSAGE_UNDEFINED_DEPARTMENT);
             }

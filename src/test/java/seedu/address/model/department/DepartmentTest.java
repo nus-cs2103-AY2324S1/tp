@@ -4,13 +4,13 @@ import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.model.name.Name;
+import seedu.address.model.name.DepartmentName;
 
 public class DepartmentTest {
 
     @Test
     public void constructor_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new Department(new Name(null)));
+        assertThrows(NullPointerException.class, () -> new Department(new DepartmentName(null)));
     }
 
     @Test

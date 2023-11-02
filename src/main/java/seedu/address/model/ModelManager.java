@@ -13,7 +13,8 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.department.Department;
 import seedu.address.model.employee.Employee;
-import seedu.address.model.name.Name;
+import seedu.address.model.name.DepartmentName;
+import seedu.address.model.name.EmployeeName;
 
 /**
  * Represents the in-memory model of the ManageHR data.
@@ -95,7 +96,7 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public boolean hasEmployeeWithName(Name name) {
+    public boolean hasEmployeeWithName(EmployeeName name) {
         requireNonNull(name);
         return manageHr.hasEmployeeWithName(name);
     }
@@ -125,7 +126,7 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public boolean hasDepartmentWithName(Name name) {
+    public boolean hasDepartmentWithName(DepartmentName name) {
         requireNonNull(name);
         return manageHr.hasDepartmentWithName(name);
     }

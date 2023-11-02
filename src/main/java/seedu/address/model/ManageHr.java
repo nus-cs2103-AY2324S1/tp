@@ -13,7 +13,8 @@ import seedu.address.model.employee.Employee;
 import seedu.address.model.employee.UniqueEmployeeList;
 import seedu.address.model.employee.exceptions.SubordinatePresentException;
 import seedu.address.model.employee.exceptions.SupervisorNotFoundException;
-import seedu.address.model.name.Name;
+import seedu.address.model.name.DepartmentName;
+import seedu.address.model.name.EmployeeName;
 
 /**
  * Wraps all data at the ManageHR level
@@ -62,7 +63,7 @@ public class ManageHr implements ReadOnlyManageHr {
      */
     public void setEmployees(List<Employee> people) {
         for (Employee employee : people) {
-            for (Name departmentName : employee.getDepartments()) {
+            for (DepartmentName departmentName : employee.getDepartments()) {
                 if (!departments.contains(departmentName)) {
                     throw new DepartmentNotFoundException();
                 }
@@ -93,7 +94,7 @@ public class ManageHr implements ReadOnlyManageHr {
     /**
      * Returns true if an employee with the same identity as {@code name} exists in the storage.
      */
-    public boolean hasEmployeeWithName(Name name) {
+    public boolean hasEmployeeWithName(EmployeeName name) {
         requireNonNull(name);
         return employees.contains(name);
     }
@@ -107,7 +108,7 @@ public class ManageHr implements ReadOnlyManageHr {
 
     public void addEmployee(Employee employee) {
         requireNonNull(employee);
-        for (Name departmentName : employee.getDepartments()) {
+        for (DepartmentName departmentName : employee.getDepartments()) {
             if (!departments.contains(departmentName)) {
                 throw new DepartmentNotFoundException();
             }
@@ -130,7 +131,7 @@ public class ManageHr implements ReadOnlyManageHr {
      */
     public void setEmployee(Employee target, Employee editedEmployee) {
         requireNonNull(editedEmployee);
-        for (Name departmentName : editedEmployee.getDepartments()) {
+        for (DepartmentName departmentName : editedEmployee.getDepartments()) {
             if (!departments.contains(departmentName)) {
                 throw new DepartmentNotFoundException();
             }
@@ -173,13 +174,13 @@ public class ManageHr implements ReadOnlyManageHr {
     /**
      * Returns true if a department with the same identity as {@code name} exists in the storage.
      */
-    public boolean hasDepartmentWithName(Name name) {
+    public boolean hasDepartmentWithName(DepartmentName name) {
         requireNonNull(name);
         return departments.contains(name);
     }
 
     /**
-     * Adds an department to ManageHR.
+     * Adds a department to ManageHR.
      * The employee must not already exist in ManageHR.
      */
     public void addDepartment(Department d) {
