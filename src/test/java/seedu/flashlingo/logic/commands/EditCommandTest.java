@@ -2,6 +2,7 @@ package seedu.flashlingo.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.flashlingo.logic.Messages.MESSAGE_DUPLICATE_FLASHCARD;
 import static seedu.flashlingo.logic.commands.CommandTestUtil.VALID_ORIGINAL_WORD_BOB;
 import static seedu.flashlingo.logic.commands.CommandTestUtil.VALID_ORIGINAL_WORD_LANGUAGE;
 import static seedu.flashlingo.logic.commands.CommandTestUtil.VALID_TRANSLATION_BOB;
@@ -80,7 +81,7 @@ public class EditCommandTest {
                 descriptor.getTranslatedWord().getWord(), ""
         });
 
-        assertCommandFailure(editCommand, model, EditCommand.MESSAGE_DUPLICATE_FLASHCARD);
+        assertCommandFailure(editCommand, model, MESSAGE_DUPLICATE_FLASHCARD);
     }
 
     @Test
@@ -95,7 +96,7 @@ public class EditCommandTest {
                 editedFlashcard.getTranslatedWord().getWord(), ""
         });
 
-        assertCommandFailure(editCommand, model, EditCommand.MESSAGE_DUPLICATE_FLASHCARD);
+        assertCommandFailure(editCommand, model, MESSAGE_DUPLICATE_FLASHCARD);
     }
 
     @Test

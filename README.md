@@ -9,7 +9,7 @@
 * The project is based on a software project for a desktop application (called _AddressBook_) used for managing contact details.
   * It is **written in OOP fashion**. It provides a **reasonably well-written** code base **bigger** (around 6 KLoC) than what students usually write in beginner-level SE modules, without being overwhelmingly big.
   * It comes with a **reasonable level of user and developer documentation**.
-* It is named `Flashlingo` because it was initially inspired by **flashcards** and **duolingo**.
+* It is named `Flashlingo` because it was initially inspired by **flash cards** and **duolingo**.
 * For the detailed documentation of this project, see the **[Flashlingo Product Website](https://ay2324s1-cs2103t-t11-4.github.io/tp/)**.
 
 ## Acknowledgments
