@@ -225,6 +225,20 @@ public class MainWindow extends UiPart<Stage> {
             commandBox.setInConfirmationDialog(true);
         }
     }
+    /*
+    void handleConfirm() {
+        if (commandBox.getInConfirmationDialog()) {
+            commandBox.setInConfirmationDialog(false);
+            personListPanelPlaceholder.setVisible(true);
+            personProfilePlaceholder.getChildren().remove(personProfile.getRoot());
+            personProfilePlaceholder.setVisible(false);
+            sendFeedback("Exiting view as requested.");
+        } else {
+            commandBox.setInConfirmationDialog(true);
+        }
+    }
+
+    */
 
     void handleCancelViewExit() {
         sendFeedback("Cancelled exit.");
@@ -249,6 +263,12 @@ public class MainWindow extends UiPart<Stage> {
             if (commandResult.getCommandType() == CommandType.HELP) {
                 handleHelp();
             }
+            /*
+            if (commandResult.getCommandType() == CommandType.CLEAR) {
+                handleConfirm();
+            }
+
+            */
 
             if (commandResult.getCommandType() == CommandType.EXIT) {
                 handleExit();
@@ -316,6 +336,8 @@ public class MainWindow extends UiPart<Stage> {
             throw new RuntimeException(e);
         }
     }
+
+
 
     protected void sendFeedback(String feedback) {
         resultDisplay.setFeedbackToUser(feedback);

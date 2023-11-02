@@ -25,6 +25,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
+import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.exceptions.DataLoadingException;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.CommandResult;
@@ -162,6 +163,29 @@ public class LogicManagerTest {
         assertNotEquals(nonUndoResult.getFeedbackToUser(), UndoCommand.MESSAGE_SUCCESS);
         assertEquals(model.getAddressBook(), expectedModel.getAddressBook());
     }
+
+    @Test
+    public void execute_undoCommandWithNullModel_success() throws CommandException, ParseException,
+            DataLoadingException, IOException {
+        String undoCommand = "undo";
+        CommandResult undoResult = logic.execute(undoCommand);
+
+        assertEquals(UndoCommand.MESSAGE_UNDO_DONE, undoResult.getFeedbackToUser());
+        assertEquals(backupModel, model);
+    }
+
+    @Test
+    public void setGuiSettings_validGuiSettings_success() {
+        GuiSettings guiSettings = new GuiSettings(800, 600, 2, 2);
+
+        logic.setGuiSettings(guiSettings);
+
+        GuiSettings updatedGuiSettings = model.getGuiSettings();
+
+        assertEquals(guiSettings, updatedGuiSettings);
+    }
+
+
 
 
 
