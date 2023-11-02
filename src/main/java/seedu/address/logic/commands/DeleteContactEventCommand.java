@@ -2,24 +2,18 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT_START_DATE_TIME;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.calendar.Calendar;
 import seedu.address.model.event.Event;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
-import seedu.address.model.tag.Tag;
 
 /**
  * Delete an event from the calendar of an existing person in the address book.
@@ -31,9 +25,9 @@ public class DeleteContactEventCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Deletes an event from the calendar of the person "
             + "identified by the index number used in the displayed person list.\n"
             + "Parameters: INDEX (must be a positive integer) "
-            + "ANY TIME WITHIN EVENT DURATION \n"
+            + PREFIX_EVENT_START_DATE_TIME + "ANY TIME WITHIN EVENT DURATION \n"
             + "Example: " + COMMAND_WORD + " 1 "
-            + "2024-01-01 12:00 ";
+            + PREFIX_EVENT_START_DATE_TIME + "2024-01-01 12:00 ";
 
     public static final String MESSAGE_DELETE_EVENT_FROM_PERSON_SUCCESS = "Event deleted from %s: %2$s";
     public static final String MESSAGE_NO_EVENT = "There is no valid existing event at this timing.";

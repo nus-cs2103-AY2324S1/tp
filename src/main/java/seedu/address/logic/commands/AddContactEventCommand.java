@@ -7,22 +7,15 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT_END_DATE_TIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT_START_DATE_TIME;
 
 import java.util.List;
-import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.calendar.Calendar;
 import seedu.address.model.event.Event;
 import seedu.address.model.event.exceptions.ConflictingEventException;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
-import seedu.address.model.tag.Tag;
 
 /**
  * Adds an event to the calendar of an existing person in the address book.
