@@ -1,6 +1,7 @@
 package seedu.application.ui;
 import java.util.logging.Logger;
 
+import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Region;
@@ -18,11 +19,12 @@ public class JobDetailsPanel extends UiPart<Region> {
     private final Logger logger = LogsCenter.getLogger(JobDetailsPanel.class);
 
     private final Job job;
-
-    // TODO Declare Interview List here
+    private InterviewListPanel interviewListPanel;
 
     @FXML
     private StackPane detailsPanelPlaceholder;
+    @FXML
+    private StackPane interviewListPanelPlaceHolder;
     @FXML
     private VBox jobDetailsPanel;
     @FXML
@@ -38,7 +40,7 @@ public class JobDetailsPanel extends UiPart<Region> {
     @FXML
     private Label industry;
     @FXML
-    private Label interviewTitle;
+    private Label interviewPreamble;
 
     /**
      * Creates a {@code JobDetailsPanel} with the selected {@code Job}.
@@ -52,8 +54,10 @@ public class JobDetailsPanel extends UiPart<Region> {
         deadline.setText(job.getDeadline().deadline);
         jobType.setText(job.getJobType().jobType);
         industry.setText(job.getIndustry().industry);
-        interviewTitle.setText("Interviews: ");
-        //TODO Initialise Interview List here
+        interviewPreamble.setText("Interviews: ");
+        interviewListPanel = new InterviewListPanel(
+            FXCollections.observableArrayList(job.getInterviews()));
+        interviewListPanelPlaceHolder.getChildren().add(interviewListPanel.getRoot());
     }
 }
 

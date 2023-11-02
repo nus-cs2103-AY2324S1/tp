@@ -123,7 +123,7 @@
 }
 
 .grid-pane .stack-pane {
-    -fx-background-color: derive(#1d1d1d, 30%);
+    -fx-background-color: derive(#ffffff, 30%);
 }
 
 .dialog-pane {
@@ -155,4 +155,22 @@
     -fx-effect: innershadow(gaussian, black, 10, 0, 0, 0);
 }
 
+.cell_big_label {
+    -fx-font-family: "Verdana", sans-serif;
+    -fx-font-weight: bold;
+    -fx-font-size: 22px;
+    -fx-text-fill: #343434;
+}
 
+.cell_small_label {
+    -fx-font-family: "Verdana", sans-serif;
+    -fx-font-size: 14px;
+    -fx-text-fill: #787878;
+}
+
+.cell_index_label {
+    -fx-font-family: "Verdana", sans-serif;
+    -fx-font-weight: bold;
+    -fx-font-size: 16px;
+    -fx-text-fill: #343434;
+}

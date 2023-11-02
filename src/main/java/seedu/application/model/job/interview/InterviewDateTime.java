@@ -19,7 +19,7 @@ public class InterviewDateTime {
                     + "Eg. Dec 31 2030 1200";
 
     public static final String TO_ADD_INTERVIEW_DATE_TIME = "TO_ADD_INTERVIEW_DATE_TIME";
-    public static final InterviewDateTime EMPTY_INTERVIEW_DATE_TIME =
+    public static final InterviewDateTime DEFAULT_INTERVIEW_DATE_TIME =
             new InterviewDateTime(TO_ADD_INTERVIEW_DATE_TIME);
     public static final String DEFAULT_DATETIME_FORMAT = "MMM dd yyyy HHmm";
     public static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern(DEFAULT_DATETIME_FORMAT);

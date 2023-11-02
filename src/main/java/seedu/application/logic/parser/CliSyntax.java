@@ -12,9 +12,9 @@ public class CliSyntax {
     public static final Prefix PREFIX_INDUSTRY = new Prefix("i/");
     public static final Prefix PREFIX_DEADLINE = new Prefix("d/");
     public static final Prefix PREFIX_JOB_TYPE = new Prefix("t/");
-    public static final Prefix PREFIX_INTERVIEW_TYPE = new Prefix("it/");
-    public static final Prefix PREFIX_INTERVIEW_ADDRESS = new Prefix("ia/");
-    public static final Prefix PREFIX_INTERVIEW_DATETIME = new Prefix("id/");
-    public static final Prefix PREFIX_INTERVIEW_DELETE = new Prefix("from/");
+    public static final Prefix PREFIX_INTERVIEW_TYPE = new Prefix("t/");
+    public static final Prefix PREFIX_INTERVIEW_ADDRESS = new Prefix("a/");
+    public static final Prefix PREFIX_INTERVIEW_DATETIME = new Prefix("d/");
+    public static final Prefix PREFIX_JOB_SOURCE = new Prefix("from/");
 
 }

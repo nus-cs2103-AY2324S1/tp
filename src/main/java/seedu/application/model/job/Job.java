@@ -1,5 +1,7 @@
 package seedu.application.model.job;
 
+import static seedu.application.commons.util.CollectionUtil.requireAllNonNull;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -8,6 +10,8 @@ import seedu.application.commons.core.index.Index;
 import seedu.application.commons.util.CollectionUtil;
 import seedu.application.commons.util.ToStringBuilder;
 import seedu.application.model.job.interview.Interview;
+import seedu.application.model.job.interview.exceptions.DuplicateInterviewException;
+import seedu.application.model.job.interview.exceptions.InterviewNotFoundException;
 
 /**
  * Represents a Job in the application book.
@@ -81,6 +85,9 @@ public class Job {
     public List<Interview> getInterviews() {
         return interviews;
     }
+    public Interview getInterview(Index index) {
+        return interviews.get(index.getZeroBased());
+    }
 
     /**
      * Adds an interview to the list of interviews for a job.
@@ -91,13 +98,38 @@ public class Job {
     }
 
     /**
+     * Replaces the interview {@code target} in the list with {@code editedInterview}.
+     * {@code target} must exist in the list of interviews.
+     * The interview identity of {@code editedInterview} must not be the same as another existing interview in the list.
+     */
+    public void setInterview(Interview target, Interview editedInterview) {
+        requireAllNonNull(target, editedInterview);
+
+        int index = interviews.indexOf(target);
+        if (index == -1) {
+            throw new InterviewNotFoundException();
+        }
+
+        if (!target.isSameInterview(editedInterview) && interviews.contains(editedInterview)) {
+            throw new DuplicateInterviewException();
+        }
+
+        interviews.set(index, editedInterview);
+    }
+
+    /**
      * Deletes an interview in the list of interviews for a job.
      * The interview must exist for the job.
      */
     public void deleteInterview(Index index) {
-        System.out.println(interviews);
         interviews.remove(index.getZeroBased());
-        System.out.println(interviews);
+    }
+
+    /**
+     * Returns number of interviews for a job.
+     */
+    public int interviewLength() {
+        return interviews.size();
     }
 
     /**

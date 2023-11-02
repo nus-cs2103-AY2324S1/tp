@@ -11,6 +11,8 @@ import seedu.application.commons.util.ToStringBuilder;
  */
 public class Interview {
 
+    public static final Interview DEFAULT_INTERVIEW = new Interview(InterviewType.DEFAULT_INTERVIEW_TYPE,
+            InterviewDateTime.DEFAULT_INTERVIEW_DATE_TIME, InterviewAddress.DEFAULT_INTERVIEW_ADDRESS);
     public final InterviewType interviewType;
     public final InterviewDateTime interviewDateTime;
     public final InterviewAddress interviewAddress;
@@ -40,6 +42,21 @@ public class Interview {
 
     public InterviewAddress getInterviewAddress() {
         return interviewAddress;
+    }
+
+    /**
+     * Returns true if both interview have the same interview type, date time and address.
+     * This defines a weaker notion of equality between two interview.
+     */
+    public boolean isSameInterview(Interview otherInterview) {
+        if (otherInterview == this) {
+            return true;
+        }
+
+        return otherInterview != null
+                && otherInterview.getInterviewType().equals(getInterviewType())
+                && otherInterview.getInterviewDateTime().equals(getInterviewDateTime())
+                && otherInterview.getInterviewAddress().equals(getInterviewAddress());
     }
 
     @Override

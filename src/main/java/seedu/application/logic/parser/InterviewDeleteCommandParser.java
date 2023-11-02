@@ -21,19 +21,19 @@ public class InterviewDeleteCommandParser implements Parser<InterviewDeleteComma
     public InterviewDeleteCommand parse(String args) throws ParseException {
 
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_INTERVIEW_DELETE);
+                ArgumentTokenizer.tokenize(args, PREFIX_JOB_SOURCE);
 
         Index jobIndex;
         Index interviewIndex;
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_INTERVIEW_DELETE)) {
+        if (!arePrefixesPresent(argMultimap, PREFIX_JOB_SOURCE)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     InterviewDeleteCommand.MESSAGE_USAGE));
         }
 
         try {
             interviewIndex = ParserUtil.parseIndex(argMultimap.getPreamble());
-            jobIndex = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_INTERVIEW_DELETE).get());
+            jobIndex = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_JOB_SOURCE).get());
             return new InterviewDeleteCommand(jobIndex, interviewIndex);
         } catch (ParseException pe) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,

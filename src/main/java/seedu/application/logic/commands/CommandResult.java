@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.Objects;
 
+import seedu.application.commons.core.index.Index;
 import seedu.application.commons.util.ToStringBuilder;
 
 /**
@@ -18,14 +19,16 @@ public class CommandResult {
 
     /** The application should exit. */
     private final boolean exit;
+    private final Index interview;
 
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
-    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit) {
+    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, Index interview) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
         this.exit = exit;
+        this.interview = interview;
     }
 
     /**
@@ -33,7 +36,7 @@ public class CommandResult {
      * and other fields set to their default value.
      */
     public CommandResult(String feedbackToUser) {
-        this(feedbackToUser, false, false);
+        this(feedbackToUser, false, false, Index.fromZeroBased(0));
     }
 
     public String getFeedbackToUser() {
@@ -46,6 +49,10 @@ public class CommandResult {
 
     public boolean isExit() {
         return exit;
+    }
+
+    public Index isInterview() {
+        return interview;
     }
 
     @Override
@@ -76,6 +83,7 @@ public class CommandResult {
                 .add("feedbackToUser", feedbackToUser)
                 .add("showHelp", showHelp)
                 .add("exit", exit)
+                .add("interview", interview)
                 .toString();
     }
 
