@@ -1,5 +1,6 @@
 package seedu.address.ui;
 
+import java.util.ArrayList;
 import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
@@ -39,7 +40,8 @@ public class MainWindow extends UiPart<Stage> {
     private Stage primaryStage;
     private Logic logic;
     private Model model;
-    private String prevCommand = "";
+    private ArrayList<String> prevCommand = new ArrayList<>();
+    private int prevCommandId = 0;
 
     // Independent Ui parts residing in this Ui container
     private PersonListPanel personListPanel;
@@ -153,7 +155,16 @@ public class MainWindow extends UiPart<Stage> {
          */
         getRoot().addEventFilter(KeyEvent.KEY_PRESSED, event -> {
             if (event.getCode() == KeyCode.UP) {
-                commandBox.changeText(prevCommand);
+                if (prevCommandId - 1 >= 0 && prevCommandId - 1 < prevCommand.size()) {
+                    prevCommandId--;
+                    commandBox.changeText(prevCommand.get(prevCommandId));
+                }
+            }
+            if (event.getCode() == KeyCode.DOWN) {
+                if (prevCommandId + 1 >= 0 && prevCommandId + 1 < prevCommand.size()) {
+                    prevCommandId++;
+                    commandBox.changeText(prevCommand.get(prevCommandId));
+                }
             }
             if (event.getTarget() instanceof TextInputControl && keyCombination.match(event)) {
                 menuItem.getOnAction().handle(new ActionEvent());
@@ -250,7 +261,8 @@ public class MainWindow extends UiPart<Stage> {
      */
     private CommandResult executeCommand(String commandText) throws CommandException, ParseException {
         try {
-            prevCommand = commandText;
+            prevCommand.add(commandText);
+            prevCommandId = prevCommand.size();
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
