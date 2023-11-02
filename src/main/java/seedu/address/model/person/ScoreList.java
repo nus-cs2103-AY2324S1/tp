@@ -15,7 +15,7 @@ import seedu.address.model.tag.Tag;
  * Represents the score list of a person.
  */
 public class ScoreList {
-    private static final String MESSAGE_CONSTRAINTS = "Score tag should start assessment";
+    private static final String MESSAGE_CONSTRAINTS = "Score tag should start with assessment";
     private static final String MESSAGE_MISSING_TAG = "Tag does not exist in score list";
     private final HashMap<String, Score> scoreList;
 
@@ -36,6 +36,7 @@ public class ScoreList {
      */
     public void updateScoreList(Tag tag, Score score) {
         requireAllNonNull(tag, score);
+        isValidScoreTag(tag);
         checkArgument(isValidScoreTag(tag), MESSAGE_CONSTRAINTS);
         checkArgument(Score.isValidScore(score), Score.MESSAGE_CONSTRAINTS);
         scoreList.put(tag.tagName, score);
@@ -101,6 +102,7 @@ public class ScoreList {
      * @return true if a given tag is a valid score tag
      */
     public static boolean isValidScoreTag(Tag tag) {
+        System.out.println("tag category: " + tag.tagCategory + " " + tag.tagName);
         return tag.tagCategory.toLowerCase().contains("assessment");
     }
 
