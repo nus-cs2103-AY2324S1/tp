@@ -1,5 +1,9 @@
 package seedu.address.model.person.predicates;
 
+import java.time.DayOfWeek;
+import java.time.format.TextStyle;
+import java.util.Locale;
+
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.availability.TimeInterval;
 import seedu.address.model.person.Person;
@@ -8,7 +12,6 @@ import seedu.address.model.person.Person;
  * Tests that a {@code Person}'s {@code FreeTime} is within the FreeTime that is given.
  */
 public class AvailableTimePredicate implements FindCommandPredicate {
-    private static final String[] DAY_OF_WEEK = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday"};
     private final TimeInterval interval;
     private final Integer day;
 
@@ -30,8 +33,8 @@ public class AvailableTimePredicate implements FindCommandPredicate {
      */
     @Override
     public String toFilterString() {
-        return "\nday: " + AvailableTimePredicate.DAY_OF_WEEK[day - 1]
-                + "\nfree time: [" + interval.toString() + "]";
+        return "\nday: " + DayOfWeek.of(day).getDisplayName(TextStyle.SHORT, Locale.ENGLISH)
+            + "\nfree time: [" + interval.toString() + "]";
     }
 
     @Override
@@ -40,7 +43,7 @@ public class AvailableTimePredicate implements FindCommandPredicate {
             return false;
         }
 
-        TimeInterval timeInterval = person.getFreeTime().getIntervals().get(day - 1);
+        TimeInterval timeInterval = person.getFreeTime().getDay(day - 1);
         if (timeInterval != null) {
             return timeInterval.isInBetween(interval);
         }
