@@ -23,8 +23,10 @@ ManaGease is a **desktop app for managing full time staff in any workplace, opti
     * [View the calendar of current month: `cm`](#view-the-calendar-of-current-month-cm)
     * [Adding a deduction to the payroll of an employee: `deduct`](#adding-a-deduction-to-the-payroll-of-an-employee-deduct)
     * [Adding a benefit to the payroll of an employee: `benefit`](#adding-a-benefit-to-the-payroll-of-an-employee-benefit)
-    * [Calculating payroll of an employee: `payroll`](#calculating-payroll-of-an-employee-payroll)
+    * [Calculating an employee's payroll: `payroll`](#calculating-an-employees-payroll-payroll)
     * [Generating payslips for an employee: `payslip`](#generating-payslips-for-an-employee-payslip)
+    * [Marking employee's attendance: `mark`](#marking-employees-attendance-mark)
+    * [View employee's attendance report: `attendance`](#view-employees-attendance-report-attendance)
     * [Listing all employees: `list`](#listing-all-employees-list)
     * [Clearing all entries: `clear`](#clearing-all-entries-clear)
     * [Locating employees by name: `find`](#locating-employees-by-name-find)
@@ -149,8 +151,7 @@ Output:
 * The employee's profile should be updated with the provided information.
   ![result for adding employee](images/addSuccess.png)
 
-* If prefix used is not defined, an error message will appear and say `Prefix not found, please use any of the following prefixes: /n, /e, /p, /a, /b, /jd, /s, /l`
-
+* If prefix used is not defined, an error message will appear.
 
 ![failed result for adding employee](images/addFailed.png)
 
@@ -302,19 +303,19 @@ Examples:
 Output:
 
 * If the index is not within the numbers in the list, or the format of the command is incorrect, the app should display the following error message.
-  ![result for incorrect deleteleave command](images/deleteLeaveInvalidIndexAndCommand.png)
+  <br>![result for incorrect deleteleave command](images/deleteLeaveInvalidIndexAndCommand.png)
 
 * If the `DATE` provided is not in the correct format, the app should display the following error message.
-  ![result for incorrect date format for deleteleave command](images/addLeaveInvalidDateFormat.png)
+  <br>![result for incorrect date format for deleteleave command](images/addLeaveInvalidDateFormat.png)
 
 * If the `DATE` has not been added to the employee, the app should display the following error message.
-  ![result for invalid leave for deleteleave command](images/deleteLeaveInvalidLeave.png)
+  <br>![result for invalid leave for deleteleave command](images/deleteLeaveInvalidLeave.png)
 
 * If the second `DATE` is before the first `DATE` when adding in multiple days of leave, the app should display the following error message.
-  ![result for invalid leave range for deleteleave command](images/addLeaveStartEndDateError.png)
+  <br>![result for invalid leave range for deleteleave command](images/addLeaveStartEndDateError.png)
 
 * Otherwise, if there are no errors, the app should display the following success message that the leave(s) has been added and display the number of leave left for the current year and the following year.
-  ![result for successful deleteleave command](images/deleteLeaveSuccessMsg.png)
+  <br>![result for successful deleteleave command](images/deleteLeaveSuccessMsg.png)
 
 
 
@@ -398,14 +399,14 @@ Examples:
 Output:
 
 * ManaGease should display the deduction information of the employee specified, including the newly added deduction, if the input is valid.
-  ![result for adding deduction](images/deductSuccess.png)
+  <br>![result for adding deduction](images/deductSuccess.png)
 * If the index is not within the numbers in the list, the app should display `The employee index provided is invalid`.
 * If the command is incorrect, the app should display the following message.
-![result for incorrect deduct command](images/incorrectDeductCommand.png)
+  <br>![result for incorrect deduct command](images/incorrectDeductCommand.png)
 * If the `VALUE` provided is not in the correct format, the app should display the following message.
-![result for incorrect deduct value format](images/incorrectDeductValueFormat.png)
+  <br>![result for incorrect deduct value format](images/incorrectDeductValueFormat.png)
 * If the `REASON` provided is not valid, the app should display the following message.
-![result for unknown deduction reason](images/unknownDeductionReason.png)
+  <br>![result for unknown deduction reason](images/unknownDeductionReason.png)
 
 
 ### Adding a benefit to the payroll of an employee: `benefit`
@@ -433,17 +434,17 @@ Examples:
 Output:
 
 * ManaGease should display the benefit information of the employee specified, including the newly added benefit, if the input is valid.
-  ![result for adding benefit](images/benefitSuccess.png)
+  <br>![result for adding benefit](images/benefitSuccess.png)
 * If the index is not within the numbers in the list, the app should display `The employee index provided is invalid`.
 * If the command is incorrect, the app should display the following message.
-  ![result for incorrect benefit command](images/incorrectBenefitCommand.png)
+  <br>![result for incorrect benefit command](images/incorrectBenefitCommand.png)
 * If the `VALUE` provided is not in the correct format, the app should display the following message.
-  ![result for incorrect benefit value format](images/incorrectDeductValueFormat.png)
+  <br>![result for incorrect benefit value format](images/incorrectDeductValueFormat.png)
 * If the `REASON` provided is not valid, the app should display the following message.
-  ![result for unknown benefit reason](images/unknownBenefitReason.png)
+  <br>![result for unknown benefit reason](images/unknownBenefitReason.png)
 
 
-### Calculating an employee's payroll : `payroll`
+### Calculating an employee's payroll: `payroll`
 
 **What it does**
 
@@ -464,13 +465,13 @@ Examples:
 
 Output:
 * ManaGease should display the payroll of the employee specified by the `INDEX` or `NAME`, if the input is valid.
-  ![result for generating payslip](images/payrollSuccess.png)
+  <br>![result for generating payslip](images/payrollSuccess.png)
 * If the index is not within the numbers in the list, the app should display `The employee index provided is invalid`.
-  ![result for incorrect index](images/incorrectPayrollIndex.png)
+  <br>![result for incorrect index](images/incorrectPayrollIndex.png)
 * If there are more than one employee with the same name in the command, the app will display `x employees found! Refer to their indexes for payroll calculation` and will list down those employees for the user to view. The user should then use their index numbers to calculate the payroll.
-  ![result for same name](images/payrollWithSameName.png)
+  <br>![result for same name](images/payrollWithSameName.png)
 * If the command is incorrect, the app should display `Invalid command format!`.
-  ![result for incorrect payroll command](images/incorrectPayrollCommand.png)
+  <br>![result for incorrect payroll command](images/incorrectPayrollCommand.png)
 
 
 ### Generating payslips for an employee: `payslip`
@@ -499,17 +500,17 @@ Examples:
 Output:
 
 * ManaGease should display a success message saying that the payslip has been generated successfully, if the input is valid.
-  ![result for generating payslip](images/payslipSuccess.png)
+  <br>![result for generating payslip](images/payslipSuccess.png)
 * A payslip report in PDF format will be generated in the `payslips` folder in the ManaGease home directory.
   <br>![location of payslip](images/payslipLocation.png)
-  ![payslip content](images/payslipContent.png)
+  <br>![payslip content](images/payslipContent.png)
 * If the index is not within the numbers in the list, the app should display `The employee index provided is invalid`.
 * If the command is incorrect, the app should display the following message.
-  ![result for incorrect payslip command](images/incorrectPayslipCommand.png)
+  <br>![result for incorrect payslip command](images/incorrectPayslipCommand.png)
 * If the date provided is not in the correct format, the app should display the following message.
-  ![result for incorrect payslip date format](images/incorrectDateFormat.png)
+  <br>![result for incorrect payslip date format](images/incorrectDateFormat.png)
 
-### Marking employee's attendance : `mark`
+### Marking employee's attendance: `mark`
 
 **What it does**
 
@@ -529,15 +530,15 @@ Examples:
 
 Output:
 * If the index is not within the numbers in the list, the app should display `The employee index provided is invalid.`
-  ![result for incorrect mark index](images/incorrectMarkIndex.png)
+  <br>![result for incorrect mark index](images/incorrectMarkIndex.png)
 * If the command is incorrect, the app should display `Invalid command format!`
-  ![result for incorrect command](images/incorrectMarkCommand.png)
+  <br>![result for incorrect command](images/incorrectMarkCommand.png)
 * If the ATTENDANCE_TYPE is not within the valid list, the app should display `Invalid attendance type, only Absent, Late and Present are allowed.`
-  ![result for incorrect attendance type](images/incorrectAttendanceType.png)
+  <br>![result for incorrect attendance type](images/incorrectAttendanceType.png)
 * If the command is successful, the app should display `Successfully marked NAME as ATTENDANCE TYPE`. The addressbook’s display of the employee’s attendance status should also be updated accordingly.
-  ![result for marking an employee to be absent](images/markSuccess.png)
+  <br>![result for marking an employee to be absent](images/markSuccess.png)
 
-### View employees’s attendance report : `attendance`
+### View employee's attendance report: `attendance`
 
 **What it does**
 
@@ -554,11 +555,11 @@ Examples:
 
 Output:
 * If the index is not within the numbers in the list, the app should display `The employee index provided is invalid.`
-  ![result for incorrect attendance index](images/incorrectAttendanceIndex.png)
+  <br>![result for incorrect attendance index](images/incorrectAttendanceIndex.png)
 * If the command is incorrect, the app should display `Invalid command format!`
-  ![result for incorrect command](images/incorrectAttendanceCommand.png)
+  <br>![result for incorrect command](images/incorrectAttendanceCommand.png)
 * If the command is successful, the app should display the attendance. The address book’s display of the employee’s attendance status.
-  ![result for attendance report](images/attendanceSuccess.png)
+  <br>![result for attendance report](images/attendanceSuccess.png)
 
 
 ### Listing all employees: `list`
@@ -574,7 +575,7 @@ Shows a list of all employees in the workplace.
 Output:
 
 * ManaGease should display a list of all employees in the workplace.
-  ![result for listing all employees](images/listSuccess.png)
+  <br>![result for listing all employees](images/listSuccess.png)
 
 ### Clearing all entries: `clear`
 
@@ -596,7 +597,7 @@ Finds employees whose names contain any of the given keywords.
 
 `find KEYWORD [MORE_KEYWORDS]`
 
-* The search is case-insensitive. e.g `alex` will match `Alex`
+* The search is case-insensitive. e.g. `alex` will match `Alex`
 * The order of the keywords does not matter. e.g. `Yeoh Alex` will match `Alex Yeoh`
 * Only the name is searched.
 * Only full words will be matched e.g. `Ale` will not match `Alex`
@@ -605,7 +606,7 @@ Finds employees whose names contain any of the given keywords.
 
 Example:
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
+  <br>![result for 'find alex david'](images/findAlexDavidResult.png)
 
 
 ### Exiting the program: `exit`
@@ -627,7 +628,7 @@ AddressBook data are saved in the hard disk automatically after any command that
 ManaGease data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file makes its format invalid, Managease will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.
+If your changes to the data file makes its format invalid, ManaGease will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.
 </div>
 
 --------------------------------------------------------------------------------------------------------------------
@@ -647,29 +648,29 @@ If your changes to the data file makes its format invalid, Managease will discar
 
 ## Command summary
 
-| Action                                                            | Format and Examples                                                                                                                                                                                                         |
-|-------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **[Add](#adding-a-employee-add)**                                 | `add /n NAME /e EMAIL /p PHONE /a ADDRESS /b BANK_ACCOUNT /jd JOIN_DATE /s SALARY /l ANNUAL_LEAVE`<br /> e.g., `add /n Jane Smith /e jane@email.com /p 12345678 /a 123 Main St /b 123456789/jd 12/09/2023 /s 1000.00 /l 10` |
-| **[Clear](#clearing-all-entries-clear)**                          | `clear`                                                                                                                                                                                                                     |
-| **[Delete](#deleting-a-employee-delete)**                         | `delete INDEX`<br /> e.g., `delete 3`                                                                                                                                                                                       |
-| **[Edit](#editing-a-employee-edit)**                              | `edit INDEX [/n NAME] [/e EMAIL] [/p PHONE] [/a ADDRESS] [/b BANK_ACCOUNT] [/jd JOIN_DATE] [/s SALARY] [/l ANNUAL_LEAVE]`<br /> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                            |
-| **[Read](#reading-a-employees-information-read)**                 | `read INDEX PREFIX`<br /> e.g., `read 3 /n`                                                                                                                                                                                 |
-| **[List](#listing-all-employees-list)**                           | `list`                                                                                                                                                                                                                      |
-| **[Find](#locating-employees-by-name-find)**                      | `find KEYWORD [MORE_KEYWORDS]`<br /> e.g., `find alex`                                                                                                                                                                      |
+| Action                                                                 | Format and Examples                                                                                                                                                                                                         |
+|------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **[Add](#adding-a-employee-add)**                                      | `add /n NAME /e EMAIL /p PHONE /a ADDRESS /b BANK_ACCOUNT /jd JOIN_DATE /s SALARY /l ANNUAL_LEAVE`<br /> e.g., `add /n Jane Smith /e jane@email.com /p 12345678 /a 123 Main St /b 123456789/jd 12/09/2023 /s 1000.00 /l 10` |
+| **[Clear](#clearing-all-entries-clear)**                               | `clear`                                                                                                                                                                                                                     |
+| **[Delete](#deleting-a-employee-delete)**                              | `delete INDEX`<br /> e.g., `delete 3`                                                                                                                                                                                       |
+| **[Edit](#editing-a-employee-edit)**                                   | `edit INDEX [/n NAME] [/e EMAIL] [/p PHONE] [/a ADDRESS] [/b BANK_ACCOUNT] [/jd JOIN_DATE] [/s SALARY] [/l ANNUAL_LEAVE]`<br /> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                            |
+| **[Read](#reading-a-employees-information-read)**                      | `read INDEX PREFIX`<br /> e.g., `read 3 /n`                                                                                                                                                                                 |
+| **[List](#listing-all-employees-list)**                                | `list`                                                                                                                                                                                                                      |
+| **[Find](#locating-employees-by-name-find)**                           | `find KEYWORD [MORE_KEYWORDS]`<br /> e.g., `find alex`                                                                                                                                                                      |
 | **[Deduct](#adding-a-deduction-to-the-payroll-of-an-employee-deduct)** | `deduct INDEX /v VALUE /r REASON` or `deduct /n NAME /v VALUE /r REASON`<br /> e.g., `deduct 3 /v 200.00 /r cpf`                                                                                                            |
 | **[Benefit](#adding-a-benefit-to-the-payroll-of-an-employee-benefit)** | `benefit INDEX /v VALUE /r REASON` or `benefit /n NAME /v VALUE /r REASON`<br /> e.g., `benefit 3 /v 1000.00 /r bonus`                                                                                                      |
-| **[Payroll](#calculating-payroll-of-an-employee-payroll)**        | `payroll INDEX` or `payroll /n NAME`<br /> e.g., `payroll 3`                                                                                                                                                                |
-| **[Payslip](#generating-payslips-for-an-employee-payslip)**       | `payslip INDEX [/t DD/MM/YYYY]` or `payslip /n NAME [/t DD/MM/YYYY]`<br /> e.g., `payslip 3`                                                                                                                                |
-| **[Add Leave](#adding-leave-to-an-employee-addleave)**            | `addleave INDEX /on DATE` or `addleave INDEX /from DATE /to DATE`<br /> e.g., `addleave 3 /from 12/12/2024 /to 14/12/2024`                                                                                                  |
-| **[Delete Leave](#deleting-leave-from-an-employee-deleteleave)**  | `deleteleave INDEX /on DATE` or `deleteleave INDEX /from DATE /to DATE`<br /> e.g., `deleteleave 3 /from 12/12/2024 /to 14/12/2024`                                                                                         |
-| **[View Leave](#view-employee-who-is-on-leave-viewleave)**        | `viewleave /on DATE`<br /> e.g., `viewleave /on 12/12/2024`                                                                                                                                                                 |
-| **[View Previous Month](#view-the-calendar-of-previous-month-pm)** | `pm`                                                                                                                                                                                                                        |
-| **[View Current Month](#view-the-calendar-of-current-month-cm)**  | `cm`                                                                                                                                                                                                                        |
-| **[View Next Month](#view-the-calendar-of-upcoming-month-nm)**    | `nm`                                                                                                                                                                                                                        |
-| **[Mark](#mark-the-attendance-type-of-an-enployee)**              | `mark INDEX /at ATTENDANCE_TYPE` or `mark /n NAME /at ATTENDANCE_TYPE`<br /> e.g, `mark 3 /at present`                                                                                                                      |
-| **[Attendance](#view-the-attendance-list-of-an-enployee)**        | `attendance INDEX` or `attendance /n NAME`<br /> e.g, `attendance 3`                                                                                                                                                        |
-| **[Help](#viewing-help-help)**                                    | `help`                                                                                                                                                                                                                      |
-| **[Exit](#exiting-the-program-exit)**                             | `exit`                                                                                                                                                                                                                      |
+| **[Payroll](#calculating-an-employees-payroll-payroll)**               | `payroll INDEX` or `payroll /n NAME`<br /> e.g., `payroll 3`                                                                                                                                                                |
+| **[Payslip](#generating-payslips-for-an-employee-payslip)**            | `payslip INDEX [/t DD/MM/YYYY]` or `payslip /n NAME [/t DD/MM/YYYY]`<br /> e.g., `payslip 3`                                                                                                                                |
+| **[Add Leave](#adding-leave-to-an-employee-addleave)**                 | `addleave INDEX /on DATE` or `addleave INDEX /from DATE /to DATE`<br /> e.g., `addleave 3 /from 12/12/2024 /to 14/12/2024`                                                                                                  |
+| **[Delete Leave](#deleting-leave-from-an-employee-deleteleave)**       | `deleteleave INDEX /on DATE` or `deleteleave INDEX /from DATE /to DATE`<br /> e.g., `deleteleave 3 /from 12/12/2024 /to 14/12/2024`                                                                                         |
+| **[View Leave](#view-employee-who-is-on-leave-viewleave)**             | `viewleave /on DATE`<br /> e.g., `viewleave /on 12/12/2024`                                                                                                                                                                 |
+| **[View Previous Month](#view-the-calendar-of-previous-month-pm)**     | `pm`                                                                                                                                                                                                                        |
+| **[View Current Month](#view-the-calendar-of-current-month-cm)**       | `cm`                                                                                                                                                                                                                        |
+| **[View Next Month](#view-the-calendar-of-upcoming-month-nm)**         | `nm`                                                                                                                                                                                                                        |
+| **[Mark](#marking-employees-attendance-mark)**                         | `mark INDEX /at ATTENDANCE_TYPE` or `mark /n NAME /at ATTENDANCE_TYPE`<br /> e.g, `mark 3 /at present`                                                                                                                      |
+| **[Attendance](#view-employees-attendance-report-attendance)**         | `attendance INDEX` or `attendance /n NAME`<br /> e.g, `attendance 3`                                                                                                                                                        |
+| **[Help](#viewing-help-help)**                                         | `help`                                                                                                                                                                                                                      |
+| **[Exit](#exiting-the-program-exit)**                                  | `exit`                                                                                                                                                                                                                      |
 
 
 * Go back to [Features](#features)
