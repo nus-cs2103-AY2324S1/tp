@@ -39,10 +39,10 @@ public class EditCommand extends UndoableCommand {
     public static final String COMMAND_WORD_ALIAS = "e";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + " or " + COMMAND_WORD_ALIAS
-            + ": Edits the details of the Person identified "
-            + "by the name or NRIC of the Patient.\n"
+            + ": Edits the details of the Patient identified "
+            + "by the full Name or NRIC of the Patient.\n"
             + "Existing values will be overwritten by the input values.\n"
-            + "Format: edit n/NAME or id/IC_NUMBER [Fields] ...\n"
+            + "Format: edit n/NAME or id/NRIC [Fields] ...\n"
             + "Example 1: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
             + PREFIX_PHONE + "91234567 \n"
@@ -56,7 +56,7 @@ public class EditCommand extends UndoableCommand {
             + "Fields include phone (p/), email (e/), "
             + "address (a/), appointment (ap/) and medical history (m/)\n"
             + "Name and NRIC cannot be edited\n";
-    public static final String MESSAGE_PERSON_NOT_FOUND = "INVALID name and/or Nric!\n"
+    public static final String MESSAGE_PERSON_NOT_FOUND = "INVALID name and/or NRIC!\n"
             + "The given combination of Name and/or NRIC does not match any person in the Patient list.";
 
     private static final Logger logger = Logger.getLogger(EditCommand.class.getName());
@@ -90,7 +90,7 @@ public class EditCommand extends UndoableCommand {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Person> lastShownList = model.getFilteredPersonList();
+        List<Person> lastShownList = model.getUnfilteredPersonList();
         Optional<Person> personOptional = CommandUtil.findPersonByIdentifier(name, nric, lastShownList);
 
         if (personOptional.isEmpty()) {

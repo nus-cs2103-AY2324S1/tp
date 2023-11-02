@@ -29,10 +29,10 @@ public class UndoCommand extends Command {
             + "An undo-able command includes an add, clear, delete, edit, log, alog, and clog command.\n"
             + "Optionally, you can specify the number of commands to undo.\n"
             + COMMAND_FORMAT;
-    public static final String INVALID_STEPS_TO_UNDO = "Undo step count cannot be a negative number or zero.\n";
+    public static final String INVALID_STEPS_TO_UNDO = "Undo count cannot be a negative number or zero.\n";
 
-    public static final String INVALID_NATURAL_NUMBER_TO_UNDO = "Please provide a valid number of steps to undo, "
-            + "not exceeding the available command history";
+    public static final String INVALID_NATURAL_NUMBER_TO_UNDO = "Please provide a valid number of commands to undo, "
+            + "not exceeding the available command history size";
 
     public static final String NO_HISTORY_EXISTS_FAILURE = "There is no history of un-doable commands to be undone.\n"
             + "Please execute some undo-able commands first.\n"

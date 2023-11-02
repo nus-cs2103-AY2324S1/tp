@@ -33,18 +33,18 @@ public class DeleteCommand extends UndoableCommand {
     public static final String COMMAND_WORD_ALIAS = "d";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + " or " + COMMAND_WORD_ALIAS
-            + ": Delete the patient identified by the full name or nric of the patient.\n"
-            + "Parameters: n/Name or id/Nric (must be valid)\n"
-            + "Fields that can be deleted: ap/ (Appointment) m/ (Medical History) \n"
+            + ": Delete the Patient identified by the full Name or NRIC of the patient.\n"
+            + "Parameters: n/NAME or id/NRIC\n"
+            + "Fields that can be deleted: ap/APPOINTMENT m/MEDICAL_HISTORY \n"
             + "Example 1: " + COMMAND_WORD + " n/John Doe or " + COMMAND_WORD + " id/S1234567A " + "ap/ m/\n"
-            + "Example 1: " + COMMAND_WORD_ALIAS + " n/Alex Yeoh or " + COMMAND_WORD_ALIAS + " id/T0123456F";
+            + "Example 2: " + COMMAND_WORD_ALIAS + " n/Alex Yeoh or " + COMMAND_WORD_ALIAS + " id/T0123456F";
 
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Patient: %1$s";
 
     public static final String MESSAGE_DELETE_PERSON_FIELD_SUCCESS = "Deleted Patient's field: %1$s";
 
     public static final String MESSAGE_PERSON_NOT_FOUND =
-            "The given combination of Name and NRIC does not match any patient in the patients list.";
+            "The given combination of Name and NRIC does not match any patient in the Patient List.";
 
     public static final String MESSAGE_NO_APPOINTMENT_TO_DELETE = "Patient does not have an appointment to delete";
 
@@ -87,7 +87,7 @@ public class DeleteCommand extends UndoableCommand {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Person> lastShownList = model.getFilteredPersonList();
+        List<Person> lastShownList = model.getUnfilteredPersonList();
 
         Optional<Person> personOptional = CommandUtil.findPersonByIdentifier(name, nric, lastShownList);
 
@@ -101,6 +101,7 @@ public class DeleteCommand extends UndoableCommand {
         if (deletePersonDescriptor.isAllFalse()) {
             model.deletePerson(personToDelete);
             model.addToHistory(this);
+            model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
             return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(personToDelete)));
         } else {
             editedPerson = createDeletePerson(personToDelete, deletePersonDescriptor);

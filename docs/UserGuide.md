@@ -10,6 +10,7 @@ HealthSync is a **desktop app for managing patient details, optimised for use vi
 while still having the benefits of a Graphical User Interface (GUI). If you can type fast, HealthSync can help you
 organise and manage patient details faster than traditional GUI apps.
 
+
 <!-- * Table of Contents -->
 <page-nav-print />
 
@@ -23,7 +24,7 @@ organise and manage patient details faster than traditional GUI apps.
 
 3. Copy the file to the folder you want to use as the _home folder_ for your HealthSync.
 
-4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar healthsync.jar`
+4. Open a command terminal, `cd` into the folder you put the JAR file in, and use the `java -jar healthsync.jar`
    command to run the application.<br>
 
 
@@ -31,20 +32,25 @@ organise and manage patient details faster than traditional GUI apps.
 
    ![Ui](images/Ui_v1.3.1.jpg)
 
+> :bulb: The main application consists of the:
+> 1. Patient List View
+> 2. Output Box
+> 3. Command Box
+> 4. Logger Tab
+
 5. Type the command in the command box and press Enter to execute it.
    e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
    * `list` : Lists all patients.
 
-   * `add n/John Doe id/S8943782H p/98114839 e/example@email.com a/Example Street` :
-      Adds a patient named `John Doe` with the relevant field details to HealthSync.
+   * `add n/John Doe id/S8943782H p/98114839 e/john@example/com a/Kent Ridge Avenue 21 ` : Adds a patient named `John Doe` with the relevant field details to HealthSync.
 
    * `delete n/Alex Yeoh` : Deletes Alex Yeoh's details from the current list.
 
    * `clear` : Deletes all patients.
 
-   * `exit` : Exits the app.
+   * `exit` : Exits HealthSync.
 
 6. Refer to the [Features](#features) below for details of each command.
 
@@ -59,61 +65,56 @@ organise and manage patient details faster than traditional GUI apps.
     <a href="#glossary" class="badge bg-primary">Check it out here.</a>
 </box>
 
-### Auto Save
+>:exclamation: To enhance the User Guide's clarity, command outputs have been simplified and are now presented with added information indicated by an ellipsis (...).
 
-HealthSync data are saved in the hard disk automatically after any command that changes the data.
-There is no need to save manually.
+### Viewing Help: `help`
 
-
-### Viewing help: `help`
-
-Shows a message explaining how to access the help page.
-
-![help message](images/helpMessage.png)
+Shows a message explaining how to access the help page. The link will bring the user to the User Guide.
 
 Format: `help`
 
+>:bulb: Use `h` as a shortcut to utilise the `help` command
 
-### Adding a patient: `add`
+>:bulb: Click on `Copy URL` after entering the `help` command and paste the link in your preferred browser
 
-Adds a patient into the program, with the given patient information.
+### Listing All Patients: `list`
 
-* A patient's name and IC Number are required when creating a new patient entry.
+Shows a list of all patients in HealthSync.
+
+Format: `list`
+
+>:bulb: Use `ls` as a shortcut for `list`
+
+![result for 'list'](images/listResult.jpg)
+
+### Adding a Patient: `add`
+
+Adds a patient into HealthSync, with the given patient information.
+
+* A patient's name and IC are required when creating a new entry into HealthSync.
+* All the compulsory fields must be provided.
+* Optional fields like appointment and medical history need not be provided.
 
 Format: `add n/NAME id/IC_NUMBER [field] ...`
 
-Example commands:
- * `add n/Aaron Tan Jun Jie id/S8943782H p/98114839 e/example@mailhere a/Serangoon HDB 123`
+>:bulb: Use `a` as a shortcut for `add`
 
+Example commands:
+
+* `add n/Aaron Tan Jun Jie id/S8943782H p/98114839 e/example@mailhere a/Serangoon HDB 123`
 
 ![result for 'add n/Aaron Tan Jun Jie id/S8943782H p/98114839 e/example@mailhere a/Serangoon HDB 123'](images/addResult.jpg)
 
 Expected outputs when the command succeeds:
- * `Patient Aaron Tan Jun Jie has been added with the fields: id/S8943782H
-    p/98114839 e/example@mailhere a/Serangoon HDB 123`
+* `New Patient added: ...`
 
 Expected outputs when the command fails:
- * `Unable to add the patient to the database: Patient already exists.`
- * `Unable to add the patient to the database: IC required.`
-
-Tips:
-* Use the shortcut `a` for faster data entry
-* Double-check patient data to prevent unnecessary errors later on
-
-
-### Listing all persons: `list`
-
-Shows a list of all persons in the address book.
-
-Format: `list`
-
-
-![result for 'list'](images/listResult.jpg)
-
+* `Patient already exists in HealthSync.`
+* `Invalid command format! ...`
 
 ### Editing a patient's details: `edit`
 
-Edits an existing patient's details in the address book.
+Edits an existing patient's details in HealthSync.
 
  * Edits the person with the specified name or id.
  * If an invalid name or IC Number is passed, an error message will be logged.
@@ -121,87 +122,90 @@ Edits an existing patient's details in the address book.
  * Existing fields will be updated to the input values.
  * If the fields do not exist, the corresponding field with details will be added.
 
+>:bulb: Update multiple fields in a single `edit` command to save time
+
 Format: `edit n/NAME or id/IC_NUMBER [field] ...`
+
+>:bulb: Use `e` as a shortcut for `edit`
 
 Example commands:
  * `edit n/Alex Yeoh p/91234567 e/alexyeoh@example.com`
 
-
 ![result for 'edit n/Alex Yeoh p/91234567 e/alexyeoh@example.com'](images/editResult.jpg)
 
 Expected outputs when the command succeeds:
-* `Patient Alex Yeoh has been updated with the fields: p/91234567 e/alexyeoh@example.com`
+* `Edited patient: ...`
 
 Expected outputs when command fails:
-* `Unable to edit the patient: Patient identification does not exist.`
+* `INVALID name and/or NRIC! ...`
 
-Tips:
-* Use the shortcut `e` for faster data editing
-* Update multiple fields in a single edit command to save time
+### Deleting a person or field: `delete`
 
+Deletes the specified patient or an optional fields of the patient from HealthSync.
 
-### Undoing a command: `undo`
+* Deletes the patient or an optional field of the patient with the specified `n/NAME or id/IC_NUMBER`.
+* The name or IC must be valid.
+* To delete a specified field only instead of the entire person, we indicate the field after the identification.
+* If multiple people has the same name, HealthSync will display a list of people with that name together with their IC number.
 
-Undoes an undo-able command within the address book.
+Format: `delete n/NAME or id/IC_NUMBER [field]`
 
-* An undo-able command includes an edit command, add commmand or delete command
-* The command allows you to undo the last command or to undo a specific number of previous commands
-
-Format:
-* `undo` or `undo [number]`
+>:bulb: Use the shortcut `d` for faster patient-deleting
 
 Example commands:
-*  `undo`
-*  `undo 2`
 
+* `delete n/Alex Yeoh`
+* `delete n/John Doe m/`
 
-![result for 'undo'](images/undoResult.jpg)
+>:bulb: Specify the medical history to be deleted using `m/` if it's only the medical history data that is to be deleted
+
+![result for 'delete n/Alex Yeoh'](images/deleteResult.jpg)
 
 Expected outputs when the command succeeds:
-* `The last command has been undone`
-* `The last 2 commands have been undone`
+* `Deleted Patient: ...`
+* `Deleted Patient's field: ...`
 
-Expected outputs when command fails:
-* `There is no valid command to be undone`
+Expected output when the command fails:
+* `The given combination of Name and NRIC does not match any patient in the Patients list`.
 
-Tips:
-* Use the shortcut `u` for faster command undoing
-* Undo multiple commands at once to save time
+### Delete All Patients: `clear`
 
+Deletes all patients from HealthSync.
 
-### Locating persons by name or IC Number: `find`
+Format: `clear`
+
+>:bulb: Use `c` as a shortcut for `clear`
+
+![result for 'clear'](images/clearResult.jpg)
+
+### Locating Patients by Name or NRIC: `find`
 
 Searches the patient list for all patients matching the name or IC Number and returns their related information.
 
- * The search is case-insensitive. e.g `hans` will match `Hans`.
- * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`.
- * Only the name or IC number is searched.
- * Only full words will be matched e.g. `Han` will not match `Hans`.
- * For the name, only persons matching at least one keyword will be returned (i.e. `OR` search).
-   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`.
+* The search is case-insensitive. e.g `hans` will match `Hans`.
+* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`.
+* Only the name or IC number is searched.
+* Only full words will be matched e.g. `Han` will not match `Hans`.
+* For the name, only persons matching at least one keyword will be returned (i.e. `OR` search).
+  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`.
+  
+Format: `find n/NAME or id/IC_NUMBER`
 
-Format: `find n/NAME` *or* `id/IC_NUMBER`
+>:bulb: Use the shortcut `f` for faster patient-finding
 
 Example commands:
-* `find n/John` returns `john` and `John Doe`
-* `find id/T0123456F` returns `Alex Yeoh`, with IC number `T0123456F` <br>
-
+* `find n/Alex Yeoh`
+* `find id/T0123436F` 
 
 ![result for 'find id/T0123456F'](images/findidT0123456FResult.jpg)
 
-Expected outputs when the command succeeds:
- * `Patient n/NAME or id/IC_NUMBER: [field] …`
+>:bulb: This list command can be used to show the original patient list after a find command is executed
 
-Expected output when the command fails:
- * `Unable to find the patient. Check if the patient’s information is correct.`
-
-Tips:
-* Use the shortcut `f` for faster patient-finding
-
-
-### Preserving a `find` command result: `log`
+### Preserving a `find` Command Result: `log`
 
 Logs the result of the find command to the logger tab, which can be viewed at all times.
+
+>:bulb: Use `log` command to save data you want to continue referring to
 
 * Saving to the logger tab only works for results of the `find` command.
 * The entire result will be saved.
@@ -210,8 +214,9 @@ Logs the result of the find command to the logger tab, which can be viewed at al
 
 Format: `log`
 
-Example Command: `log` (after entering a FindCommand)
+>:bulb: Use the shortcut `lo` for faster patient-logging
 
+Example Command: `log` (after entering a FindCommand)
 
 ![result for 'log'](images/logResult.jpg)
 
@@ -221,15 +226,13 @@ Expected outputs when the command succeeds:
 Expected output when the command fails:
 * `There are no FindCommand results. There is nothing to be saved to the logger tab.`
 
-Tips:
-* Use the shortcut `lo` for faster patient-logging
-* Use `log` command to save data you want to continue referring to
-* `log` overwrites the data currently in the logger tab, so you do not need to perform clearing prior
-
+>:bulb: `log` overwrites the data currently in the logger tab, so you do not need to perform clearing prior
 
 ### Adding a new `find` command result to the log: `alog`
 
 Appends the new results of the most recent find command to the current data in the logger tab, which can be viewed at all times.
+
+>:bulb: Use `alog` command to save data you want to continue referring to, on top of some others
 
 * Adding to the logger tab only works for results of the `find` command.
 * The previously-saved result will remain the same.
@@ -238,8 +241,9 @@ Appends the new results of the most recent find command to the current data in t
 
 Format: `alog`
 
-Example Command: `alog` (after entering a FindCommand)
+>:bulb: Use the shortcut `al` for faster log-appending
 
+Example Command: `alog` (after entering a FindCommand)
 
 ![result for 'alog'](images/alogResult.jpg)
 
@@ -249,101 +253,79 @@ Expected outputs when the command succeeds:
 Expected output when the command fails:
 * `There are no FindCommand results. There is nothing to be saved to the logger tab.`
 
-
-Tips:
-* Use the shortcut `al` for faster log-appending
-* Use `alog` command to save data you want to continue referring to, on top of some others
-* `alog` does not overwrite the data and instead adds on to it, so you do not have to keep performing `log` to save more data
-
+>:bulb: `alog` does not overwrite the data and instead adds on to it, so you do not have to keep performing `log` to save more data
 
 ### Clearing data from the log: `clog`
 
 Clears all current data in the logger tab.
 
+>:bulb: Use `clog` command if you do not need the data in the current logger tab anymore
+
 Format: `clog`
 
-Example Command: `clog`
+>:bulb:  Use the shortcut `cl` for faster log-clearing
 
+Example Command: `clog`
 
 ![result for 'clog'](images/clogResult.jpg)
 
 Expected output:
 * `Logger tab has been cleared!`
 
+### Undoing a Command: `undo`
 
-Tips:
-* Use the shortcut `cl` for faster log-clearing
-* Use `clog` command if you do not need the data in the current logger tab anymore
+Undoes an undo-able command within HealthSync.
 
+* An undo-able command include an add, clear, delete, edit, log, alog and clog command.
+* The command allows you to undo a specific number of previous commands.
+* The command can only undo a positive number of previous commands provided it does not exceed the size of the command history stack.
 
-### Deleting a person or field: `delete`
+Format:
+* `undo [number]`
 
-Deletes the specified person or the fields for the person from HealthSync.
+>:bulb: Use `u` as a shortcut for `undo`
 
-* Deletes the person with the specified `n/NAME or id/IC_NUMBER`.
-* The name or IC number must be a valid input.
-* To delete a specified field only instead of the entire person, we indicate the field behind of the identification.
-* If multiple people has the same name, HealthSync will display a list of people with that name together with their IC number.
-
-Format: `delete n/NAME or id/IC_NUMBER [field]`
+>:bulb: Simply entering `undo` will undo the last command
 
 Example commands:
-* `delete id/S9987362H` deletes all the details of the person with the specified IC number from HealthSync.
-* `delete n/Alex Yeoh` deletes all the details of Alex Yeoh from HealthSync.
-* `delete n/Alex Yeoh p/` deletes Alex Yeoh's phone number from his profile.
+*  `undo 2`
 
-
-![result for 'delete n/Alex Yeoh'](images/deleteResult.jpg)
+![result for 'undo'](images/undoResult.jpg)
 
 Expected outputs when the command succeeds:
- * `Patient n/NAME or id/IC_NUMBER has been removed from the database`
- * `The [field] of Patient n/NAME or id/IC_NUMBER has been removed from the database`
+* `Undoing 2 command(s): ...`
 
-Expected output when the command fails:
- * `Error code’s message (i.e. Invalid NRIC/ Invalid Field(s) / Database Error) `
-
-Tips:
-* Use the shortcut `d` for faster patient-deleting
-* Specify the medical history to be deleted using m/ if it's only the medical history data that is to be deleted
-
-
-<!--
-Original format, can consider using
-list followed by delete 2 deletes the 2nd person in the address book.
-find Betsy followed by delete 1 deletes the 1st person in the results of the find command.
--->
-
-
-### Delete all patients: `clear`
-
-Deletes all patients from the program.
-
-Format: `clear`
-
-
-![result for 'clear'](images/clearResult.jpg)
+Expected outputs when command fails:
+* `Please proved a valid number of steps to undo, not exceeding the available command history.`
+* `Undo step count cannot be a negative number or zero.`
 
 
 ### Exiting the program: `exit`
 
-Exits the program.
+
+Exits HealthSync.
 
 Format: `exit`
 
+>:bulb: Use `ex` as a shortcut for `exit`
+
+### Auto Save
+
+HealthSync data are saved in the hard disk automatically after any command that changes the data is executed.
+There is no need to save manually.
 
 ### Editing the data file
 
 HealthSync data are saved automatically as a JSON file `[JAR file location]/data/healthsync.json`.
 Advanced users are welcome to update data directly by editing that data file.
 
-<box type="warning" seamless>
 
-**Caution:**
-If your changes to the data file makes its format invalid, HealthSync will discard all data and start with an empty
-data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.
-</box>
+>:warning: **Caution:**
+>If your changes to the data file makes its format invalid, HealthSync will discard all data and start with an empty
+>data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.
 
---------------------------------------------------------------------------------------------------------------------
+### Archiving data files `[coming in v5.0]`
+
 
 ## [FAQ](#faq)
 
@@ -563,18 +545,19 @@ JavaScript Object Notation. This is the file format used by HealthSync to save a
 
 --------------------------------------------------------------------------------------------------------------------
 
-## [Command summary](#command-summary)
+## Command summary
 
-| Action         | Shortcut | Format, Examples                                                                                                           |
-|----------------|----------|----------------------------------------------------------------------------------------------------------------------------|
-| **Add**        | `a`      | `add n/NAME id/IC_NUMBER [field] ...` <br> e.g., `add n/James Ho id/SXXXX123D p/91234567 a/A Estate, Clementi Rd, 1234665` |
-| **Clear**      | `c`      | `clear`                                                                                                                    |
-| **Delete**     | `d`      | `delete n/NAME [field]` *or* `delete id/IC_NUMBER [field]`<br> e.g., `delete n/John Doe e/`                                |
-| **Edit**       | `e`      | `edit n/NAME [field]` *or* `edit id/IC_NUMBER [field] ... `<br> e.g.,`edit n/James Lee e/jameslee@example.com`             |
-| **Find**       | `f`      | `find n/NAME [field]` *or* `find id/IC_NUMBER [field]`<br> e.g., `find n/James Jake` *or* `find id/S872D`                  |
-| **Help**       | `h`      | `help`                                                                                                                     |
-| **List**       | `li`     | `list`                                                                                                                     |
-| **Log**        | `lo`     | `log`                                                                                                                      |
-| **Append Log** | `al`     | `alog`                                                                                                                     |
-| **Clear Log**  | `cl`     | `clog`                                                                                                                     |
-| **Exit**       | `ex`     | `exit`                                                                                                                     |
+| Action         | Shortcut | Format, Examples                                                                                                                               |
+|----------------|----------|------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Help**       | `h`      | `help`                                                                                                                                         |
+| **List**       | `ls`     | `list`                                                                                                                                         |
+| **Add**        | `a`      | `add n/NAME id/IC_NUMBER [field] ...` <br> e.g., `add n/James Ho id/SXXXX123D p/91234567 a/A Estate, Clementi Rd, 1234665 e/james@example.com` |
+| **Edit**       | `e`      | `edit n/NAME [field]` *or* `edit id/IC_NUMBER [field] ... `<br> e.g.,`edit n/James Lee e/jameslee@example.com`                                 |
+| **Delete**     | `d`      | `delete n/NAME`                                                                                                                                |
+| **Clear**      | `c`      | `clear`                                                                                                                                        |
+| **Find**       | `f`      | `find n/NAME [field]` *or* `find id/IC_NUMBER [field]`<br> e.g., `find n/James Jake` *or* `find id/T0123436F`                                  |
+| **Log**        | `l`      | `log`                                                                                                                                          |
+| **Append Log** | `al`     | `alog`                                                                                                                                         |
+| **Clear Log**  | `cl`     | `clog`                                                                                                                                         |
+| **Undo**       | `u`      | `undo`                                                                                                                                         |
+| **Exit**       | `e`      | `exit`                                                                                                                                         |
