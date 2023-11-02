@@ -179,6 +179,7 @@ Once the instance of `ViewContactCommand` is created, it is executed. During exe
 Once the indexes of the `Person` and `Meeting` objects to view (if any) are stored in `ModelManager`, their corresponding `Person` and `Meeting` objects (in this case the 2nd `Person` as displayed on the list) are obtained by the `MainWindow` as a `Pair` through the `getViewedItems` method of the `LogicManager` class. As such, both objects can then be forwarded to the `InfoDisplayPanel` using `setViewedModel`, which then displays detailed information of both objects. This process is denoted in the final Sequence Diagram below.
 
 ![ForwardViewedPersonMeetingtoUiDiagram](images/tracing/UiViewItemsSequenceDiagram-ForwardViewedPerson&MeetingToUi.png)
+
 #### Design Considerations and Rationale
 
 1. Passing viewed `Person` and `Meeting` from Model to Ui through Logic:
@@ -194,7 +195,6 @@ Once the indexes of the `Person` and `Meeting` objects to view (if any) are stor
    - Since the stored `Index` may now reference a different item, or even point out-of-bounds in the case of the display list being shortened, this implementation may potentially lead to unpredictable results for both view commands.
    - For the case of `editc` and `editm`, this is judged to not be an issue as the view commands still obey their definition of displaying the item at a specified list index.
    - For the case of `deletec`, `deletem`, `findc` and `findm`, a simple fix is to simply set the stored `Index` to null only for these commands.
-
 
 ### Find meeting feature
 
@@ -224,7 +224,6 @@ Step 2. The `FindMeetingCommand` will be immediately executed and will call `set
 The following diagrams show the entire sequence flow for `LogicManager#execute()` for FindMeetingCommand.
 ![FindMeetingSequence2](images/FindMeetingSequence2.png)
 
-
 #### Design Considerations and Rationale
 
 1. Given the amount of predicates `FindMeetingCommand` is supposed to use, every predicate needs to be combined in order to maintain good SLAP.
@@ -253,15 +252,14 @@ The following sequence diagram shows how the add attendee operation works:
 A Person object can be obtained from a Meeting's list of attendees by searching through `UniquePersonList`
 for a `Person` with a name matching `attendeeName`.
 
-
 ### Remove attendee feature
+
 User can specify an Attendee to remove from a specified Meeting by specifying its index in the list of Attendees.
 This is the main motivation behind using a LinkedHashSet for the implementation of the Attendee Set.
 
 The following sequence diagram shows how the remove attendee operation works:
 
 ![RemoveAttendeeSequenceDiagram](images/RemoveAttendeeSequenceDiagram.png)
-
 
 ### \[Proposed\] Undo/redo feature
 
@@ -402,7 +400,7 @@ This is facilitated by the addition of the `MarkDoneCommand`. When a meeting is 
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                   | I want to …​                    | So that I can…​                       |
+| Priority | As a …​                                    | I want to …​                     | So that I can…​                        |
 | -------- | ----------------------------------------- | ------------------------------- | ------------------------------------- |
 | `[EPIC]` | agent who has meetings                    | have a meeting schedule         | keep track of them                    |
 | `* * *`  | agent                                     | create new meetings             |                                       |
@@ -424,6 +422,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | agent                                     | add contacts to meetings        |                                       |
 | `* * *`  | agent                                     | remove contacts from meetings   |                                       |
 | `* * *`  | agent                                     | view contacts in meetings       |                                       |
+| `* *`    | agent                                     | mark meetings as complete       | know which meetings are still pending |
 | `*`      | agent who wants to meet clients regularly | know the last contacted date    | when to touch base with a client      |
 
 _{More to be added}_
@@ -479,10 +478,10 @@ _{More to be added}_
 2.  OutBook shows a list of meetings.
 3.  User requests to view details of a specific meeting.
 4.  OutBook shows the details of the meeting.
-4.  User requests to remove a specific contact from the meeting.
-5.  OutBook removes the contact from the meeting.
 5.  User requests to remove a specific contact from the meeting.
 6.  OutBook removes the contact from the meeting.
+7.  User requests to remove a specific contact from the meeting.
+8.  OutBook removes the contact from the meeting.
 
     Use case ends.
 

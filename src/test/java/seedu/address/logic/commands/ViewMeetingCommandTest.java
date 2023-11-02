@@ -34,8 +34,8 @@ public class ViewMeetingCommandTest {
         String expectedMessage = String.format(Messages.MESSAGE_MEETING_VIEWED_OVERVIEW, meetingToView.getTitle());
         String expectedDisplayString = "Title: CS2101 meeting\n"
                 + "Location: Zoom call url\n"
-                + "Start: 20 September 2023, 1000\n"
-                + "End: 20 September 2023, 1200\n"
+                + "Start: 20 November 2023, 1000\n"
+                + "End: 20 November 2023, 1200\n"
                 + "Attendees: [\n1: Daniel Meier \n2: Elle Meyer " 
                 + "\n3: Fiona Kunz \n4: George Best]\n";
 

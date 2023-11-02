@@ -36,8 +36,8 @@ public class FindMeetingCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
     private Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
     private LocalDateTime start = LocalDateTime.of(LocalDate.of(0001, 01, 01), LocalTime.of(00, 00));
-    private LocalDateTime startOn30 = LocalDateTime.of(LocalDate.of(2023, 9, 30), LocalTime.of(10, 00));
-    private LocalDateTime endOn30 = LocalDateTime.of(LocalDate.of(2023, 9, 30), LocalTime.of(12, 00));
+    private LocalDateTime startOn30 = LocalDateTime.of(LocalDate.of(2023, 11, 30), LocalTime.of(10, 00));
+    private LocalDateTime endOn30 = LocalDateTime.of(LocalDate.of(2023, 11, 30), LocalTime.of(12, 00));
     private LocalDateTime start2 = LocalDateTime.of(LocalDate.of(0001, 01, 02), LocalTime.of(00, 00));
     private LocalDateTime end = LocalDateTime.of(LocalDate.of(9999, 12, 31), LocalTime.of(23, 59));
     @Test
@@ -188,7 +188,7 @@ public class FindMeetingCommandTest {
     public void execute_titleLocationAttendeeTagTimeKeywords_oneMeetingFound() {
         String expectedMessage = String.format(MESSAGE_MEETINGS_LISTED_OVERVIEW, 1);
         GeneralMeetingPredicate predicate =
-                preparePredicate(new String[]{"ABCDE CS2101", "Zoom com", "Alice Benson", "work important"},
+                preparePredicate(new String[]{"ABCDE CS2101", "Zoom com", "", "work important"},
                         startOn30, endOn30);
         FindMeetingCommand command = new FindMeetingCommand(predicate);
         expectedModel.updateFilteredMeetingList(predicate);
