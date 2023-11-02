@@ -2,108 +2,36 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalPersons.ALICE;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Stack;
+import java.util.List;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.AddressBook;
 import seedu.address.model.LogBook;
 import seedu.address.model.Model;
+import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
 
-public class AddCommandTest {
+public class AppendLogCommandTest {
 
-    @Test
-    public void constructor_nullPerson_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new AddCommand(null));
-    }
+    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
-    @Test
-    public void execute_personAcceptedByModel_addSuccessful() throws Exception {
-        ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
-        Person validPerson = new PersonBuilder().build();
+    private final ObservableList<Person> foundPersonsList = FXCollections.observableArrayList();
+    private final List<UndoableCommand> commandHistory = new ArrayList<>();
 
-        CommandResult commandResult = new AddCommand(validPerson).execute(modelStub);
-
-        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, Messages.format(validPerson)),
-                commandResult.getFeedbackToUser());
-        assertEquals(Arrays.asList(validPerson), modelStub.personsAdded);
-    }
-
-    @Test
-    public void execute_duplicatePerson_throwsCommandException() {
-        Person validPerson = new PersonBuilder().build();
-        AddCommand addCommand = new AddCommand(validPerson);
-        ModelStub modelStub = new ModelStubWithPerson(validPerson);
-
-        assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_PERSON, () -> addCommand.execute(modelStub));
-    }
-
-    @Test
-    public void equals() {
-        Person alice = new PersonBuilder().withName("Alice").build();
-        Person bob = new PersonBuilder().withName("Bob").build();
-        AddCommand addAliceCommand = new AddCommand(alice);
-        AddCommand addBobCommand = new AddCommand(bob);
-
-        // same object -> returns true
-        assertTrue(addAliceCommand.equals(addAliceCommand));
-
-        // same values -> returns true
-        AddCommand addAliceCommandCopy = new AddCommand(alice);
-        assertTrue(addAliceCommand.equals(addAliceCommandCopy));
-
-        // different types -> returns false
-        assertFalse(addAliceCommand.equals(1));
-
-        // null -> returns false
-        assertFalse(addAliceCommand.equals(null));
-
-        // different person -> returns false
-        assertFalse(addAliceCommand.equals(addBobCommand));
-    }
-
-    @Test
-    public void toStringMethod() {
-        AddCommand addCommand = new AddCommand(ALICE);
-        String expected = AddCommand.class.getCanonicalName() + "{toAdd=" + ALICE + "}";
-        assertEquals(expected, addCommand.toString());
-    }
-
-    @Test
-    public void execute_undo_successful() throws Exception {
-        AddCommand addCommand = new AddCommand(ALICE);
-        ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
-
-        addCommand.execute(modelStub);
-        assertTrue(modelStub.hasPerson(ALICE));
-
-        CommandResult undoResult = addCommand.undo(modelStub);
-        assertEquals(String.format(AddCommand.MESSAGE_UNDO_ADD_SUCCESS, Messages.format(ALICE)),
-                undoResult.getFeedbackToUser());
-
-        assertFalse(modelStub.hasPerson(ALICE));
-    }
-
-    /**
-     * A default model stub that have all of the methods failing.
-     */
     private class ModelStub implements Model {
 
         @Override
@@ -222,32 +150,12 @@ public class AddCommandTest {
         public int getCommandHistorySize() {
             throw new AssertionError("This method should not be called.");
         }
+
     }
 
-    /**
-     * A Model stub that contains a single person.
-     */
-    private class ModelStubWithPerson extends ModelStub {
-        private final Person person;
-
-        ModelStubWithPerson(Person person) {
-            requireNonNull(person);
-            this.person = person;
-        }
-
-        @Override
-        public boolean hasPerson(Person person) {
-            requireNonNull(person);
-            return this.person.isSamePerson(person);
-        }
-    }
-
-    /**
-     * A Model stub that always accept the person being added.
-     */
-    private class ModelStubAcceptingPersonAdded extends ModelStub {
+    private class ModelStubLoggingPersonAdded extends ModelStub {
         final ArrayList<Person> personsAdded = new ArrayList<>();
-        private Stack<UndoableCommand> commandHistory = new Stack<>();
+        private LogBook logBook = new LogBook();
 
         @Override
         public boolean hasPerson(Person person) {
@@ -259,22 +167,122 @@ public class AddCommandTest {
         public void addPerson(Person person) {
             requireNonNull(person);
             personsAdded.add(person);
+            logBook.addPerson(person);
         }
 
         @Override
-        public ReadOnlyAddressBook getAddressBook() {
-            return new AddressBook();
+        public LogBook getLogBook() {
+            return logBook;
+        }
+
+        @Override
+        public ObservableList<Person> getFoundPersonsList() {
+            return foundPersonsList;
         }
 
         @Override
         public void addToHistory(UndoableCommand undoableCommand) {
-            this.commandHistory.push(undoableCommand);
+            commandHistory.add(undoableCommand);
         }
 
         @Override
-        public void deletePerson(Person person) {
-            requireNonNull(person);
-            personsAdded.remove(person);
+        public boolean isCommandHistoryEmpty() {
+            return false;
+        }
+
+        @Override
+        public void setLogBook(LogBook logBook) {
+            this.logBook.resetData(logBook);
         }
     }
+
+    private class ModelStubNoPersonsFound extends ModelStubLoggingPersonAdded {
+        @Override
+        public ObservableList<Person> getFoundPersonsList() {
+            return FXCollections.observableArrayList(); // Return an empty list
+        }
+
+        @Override
+        public ObservableList<Person> getFilteredPersonList() {
+            return FXCollections.observableArrayList(); // Return an empty list
+        }
+
+        @Override
+        public boolean isCommandHistoryEmpty() {
+            return false;
+        }
+    }
+
+    private class ModelStubAppendingPersonFound extends ModelStubLoggingPersonAdded {
+        @Override
+        public ObservableList<Person> getFoundPersonsList() {
+            List<Person> persons = new ArrayList<>();
+            persons.add(new PersonBuilder().withName("Alice").build());
+            return FXCollections.observableArrayList(persons);
+        }
+    }
+
+    @Test
+    public void execute_resultsAppendedToEmptyLogBook_success() throws Exception {
+
+        ModelStubAppendingPersonFound model = new ModelStubAppendingPersonFound();
+        Person personToAppend = new PersonBuilder().withName("Alice").build();
+
+        AppendLogCommand appendLogCommand = new AppendLogCommand();
+
+        CommandResult commandResult = appendLogCommand.execute(model);
+
+        assertEquals(AppendLogCommand.MESSAGE_SUCCESS, commandResult.getFeedbackToUser());
+
+        assertEquals(model.getLogBook().getPersonList().size(), 1);
+        assertEquals(model.getLogBook().getPersonList().get(0), personToAppend);
+    }
+
+    @Test
+    public void execute_resultsAppendedToNonEmptyLogBook_success() throws Exception {
+
+        ModelStubAppendingPersonFound model = new ModelStubAppendingPersonFound();
+        Person existingPerson = new PersonBuilder().withName("Benson").build();
+        Person personToAppend = new PersonBuilder().withName("Alice").build();
+
+        model.addPerson(existingPerson);
+
+        AppendLogCommand appendLogCommand = new AppendLogCommand();
+
+        CommandResult commandResult = appendLogCommand.execute(model);
+
+        assertEquals(AppendLogCommand.MESSAGE_SUCCESS, commandResult.getFeedbackToUser());
+
+        assertEquals(model.getLogBook().getPersonList().size(), 2);
+        assertEquals(model.getLogBook().getPersonList().get(1), personToAppend);
+    }
+
+    @Test
+    public void execute_noPersonsFound_appendNotExecuted() {
+
+        ModelStubNoPersonsFound model = new ModelStubNoPersonsFound();
+        AppendLogCommand appendLogCommand = new AppendLogCommand();
+
+        assertThrows(CommandException.class, () -> appendLogCommand.execute(model));
+
+        assertEquals(0, model.getLogBook().getPersonList().size());
+    }
+
+    @Test
+    public void undo_executeCommand_resultsUndone() throws Exception {
+        ModelStubAppendingPersonFound model = new ModelStubAppendingPersonFound();
+        Person existingPerson = new PersonBuilder().withName("Benson").build();
+
+        model.addPerson(existingPerson);
+
+        AppendLogCommand appendLogCommand = new AppendLogCommand();
+        appendLogCommand.execute(model);
+
+        CommandResult undoResult = appendLogCommand.undo(model);
+
+        assertEquals(AppendLogCommand.MESSAGE_UNDO_ALOG_SUCCESS, undoResult.getFeedbackToUser());
+
+        assertEquals(model.getLogBook().getPersons().asUnmodifiableObservableList().size(), 1);
+    }
+
 }

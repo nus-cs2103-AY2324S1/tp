@@ -15,9 +15,13 @@ import java.util.EmptyStackException;
 
 import org.junit.jupiter.api.Test;
 
+import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.ClearCommand;
+import seedu.address.logic.commands.LogCommand;
+import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.person.Person;
 import seedu.address.model.person.predicates.NameContainsKeywordsPredicate;
 import seedu.address.testutil.AddressBookBuilder;
 
@@ -180,4 +184,21 @@ public class ModelManagerTest {
 
         assertEquals(2, modelManager.getCommandHistorySize());
     }
+
+    @Test
+    public void getFoundPersonsList_nonEmptyList_returnsListWithSameSize() throws CommandException {
+        ModelManager modelManager = new ModelManager();
+
+        modelManager.addPerson(ALICE);
+        modelManager.addPerson(BENSON);
+
+        LogCommand logCommand = new LogCommand();
+        modelManager.updateFoundPersonsList(person -> true);
+        logCommand.execute(modelManager);
+
+        FilteredList<Person> foundPersonsList = modelManager.getFoundPersonsList();
+
+        assertEquals(2, foundPersonsList.size());
+    }
+
 }
