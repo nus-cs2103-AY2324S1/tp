@@ -11,7 +11,7 @@ import transact.logic.parser.exceptions.ParseException;
 /**
  * Parses args and returns Export Transaction Command
  */
-public class ExportTransactionParser implements Parser<ExportTransactionCommand> {
+public class ExportTransactionCommandParser implements Parser<ExportTransactionCommand> {
     @Override
     public ExportTransactionCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_DIRECTORY);

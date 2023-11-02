@@ -16,7 +16,6 @@ public class UserPrefs implements ReadOnlyUserPrefs {
     private GuiSettings guiSettings = new GuiSettings();
     private Path addressBookFilePath = Paths.get("data", "addressbook.json");
     private Path transactionBookFilePath = Paths.get("data", "transactionbook.csv");
-    private Path importFilePath = Paths.get("import");
     private Path exportFilePath = Paths.get("export");
 
     /**
@@ -41,7 +40,6 @@ public class UserPrefs implements ReadOnlyUserPrefs {
         setGuiSettings(newUserPrefs.getGuiSettings());
         setAddressBookFilePath(newUserPrefs.getAddressBookFilePath());
         setTransactionBookFilePath(newUserPrefs.getTransactionBookFilePath());
-        setImportFilePath(newUserPrefs.getImportFilePath());
         setExportFilePath(newUserPrefs.getExportFilePath());
     }
 
@@ -79,15 +77,6 @@ public class UserPrefs implements ReadOnlyUserPrefs {
     public void setExportFilePath(Path exportFilePath) {
         requireNonNull(exportFilePath);
         this.exportFilePath = exportFilePath;
-    }
-
-    public Path getImportFilePath() {
-        return importFilePath;
-    }
-
-    public void setImportFilePath(Path importFilePath) {
-        requireNonNull(importFilePath);
-        this.importFilePath = importFilePath;
     }
 
     @Override

@@ -110,17 +110,6 @@ public class ModelManager implements Model {
         return userPrefs.getExportFilePath();
     }
 
-    @Override
-    public void setImportFilePath(Path path) {
-        requireAllNonNull(path);
-        userPrefs.setImportFilePath(path);
-    }
-
-    @Override
-    public Path getImportFilePath() {
-        return userPrefs.getImportFilePath();
-    }
-
     // =========== AddressBook
     // ================================================================================
 

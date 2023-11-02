@@ -11,7 +11,6 @@ import javafx.scene.input.KeyCombination;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.stage.DirectoryChooser;
-import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import transact.MainApp;
 import transact.commons.core.GuiSettings;
@@ -230,25 +229,19 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
-     * Import the Transaction Book.
+     * Export the Staff Book.
      */
     @FXML
-    private void handleImportTransactions() throws CommandException, ParseException {
-        // Create a FileChooser
-        FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Choose File to Import");
+    private void handleExportStaff() throws CommandException, ParseException {
+        DirectoryChooser directoryChooser = new DirectoryChooser();
+        directoryChooser.setTitle("Choose Directory to Export Staff");
 
-        // Set a file extension filter (optional) to restrict the type of files the user can select
-        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("CSV Files (*.csv)", "*.csv");
-        fileChooser.getExtensionFilters().add(extFilter);
+        // Show the directory chooser dialog
+        File selectedDirectory = directoryChooser.showDialog(primaryStage);
 
-        // Show the file chooser dialog
-        File selectedFile = fileChooser.showOpenDialog(primaryStage);
-
-        if (selectedFile != null) {
-            String chosenFilePath = selectedFile.getAbsolutePath();
-            String commandText = "importtransactions f/" + chosenFilePath;
-
+        if (selectedDirectory != null) {
+            String chosenDirectoryPath = selectedDirectory.getAbsolutePath();
+            String commandText = "exportstaff f/" + chosenDirectoryPath;
             try {
                 CommandResult commandResult = logic.execute(commandText);
                 logger.info("Result: " + commandResult.getFeedbackToUser());
@@ -261,6 +254,7 @@ public class MainWindow extends UiPart<Stage> {
             }
         }
     }
+
 
     public CardListPanel getCardListPanel() {
         return cardListPanel;

@@ -21,17 +21,12 @@ import transact.logic.commands.DeleteTransactionCommand;
 import transact.logic.commands.EditStaffCommand;
 import transact.logic.commands.EditTransactionCommand;
 import transact.logic.commands.ExitCommand;
-<<<<<<< HEAD
+import transact.logic.commands.ExportStaffCommand;
+import transact.logic.commands.ExportTransactionCommand;
 import transact.logic.commands.FilterCommand;
 import transact.logic.commands.FindCommand;
 import transact.logic.commands.HelpCommand;
 import transact.logic.commands.SortCommand;
-=======
-import transact.logic.commands.ExportTransactionCommand;
-import transact.logic.commands.FindCommand;
-import transact.logic.commands.HelpCommand;
-import transact.logic.commands.ImportTransactionCommand;
->>>>>>> 5bf1f0c8 (Add import and export functions for transaction book)
 import transact.logic.commands.ViewCommand;
 import transact.logic.parser.exceptions.ParseException;
 
@@ -123,10 +118,10 @@ public class AddressBookParser {
             return new ClearFilterCommand();
 
         case ExportTransactionCommand.COMMAND_WORD:
-            return new ExportTransactionParser().parse(arguments);
+            return new ExportTransactionCommandParser().parse(arguments);
 
-        case ImportTransactionCommand.COMMAND_WORD:
-            return new ImportTransactionParser().parse(arguments);
+        case ExportStaffCommand.COMMAND_WORD:
+            return new ExportStaffCommandParser().parse(arguments);
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);

@@ -157,15 +157,6 @@ public class AddStaffCommandTest {
             return null;
         }
 
-        @Override
-        public void setImportFilePath(Path path) {
-
-        }
-
-        @Override
-        public Path getImportFilePath() {
-            return null;
-        }
 
         @Override
         public void setTransactionBook(ReadOnlyTransactionBook transactionBook) {

@@ -79,11 +79,6 @@ public interface Model {
 
     public Path getExportFilePath();
 
-
-    public void setImportFilePath(Path path);
-
-    public Path getImportFilePath();
-
     /**
      * Replaces transaction book data with the data in {@code transactionBook}.
      */

@@ -26,7 +26,7 @@ public class CommandResult {
 
     private final boolean exportTransactions;
 
-    private final boolean importTransactions;
+    private final boolean exportStaff;
 
     /**
      * Constructs a {@code CommandResult} with the specified fields.
@@ -38,7 +38,7 @@ public class CommandResult {
         this.exit = exit;
         this.clearResultDisplay = false;
         this.exportTransactions = false;
-        this.importTransactions = false;
+        this.exportStaff = false;
     }
     /**
      * Constructs a {@code CommandResult} with the specified fields.
@@ -50,21 +50,21 @@ public class CommandResult {
         this.exit = exit;
         this.clearResultDisplay = clearResultDisplay;
         this.exportTransactions = false;
-        this.importTransactions = false;
+        this.exportStaff = false;
     }
 
     /**
-     * Constructs a {@code CommandResult} with the specified fields, including export/import details
+     * Constructs a {@code CommandResult} with the specified fields, including export details
      */
     public CommandResult(String feedbackToUser, TabWindow tabWindow, boolean showHelp, boolean exit, boolean clearResultDisplay,
-                         boolean exportTransactions, boolean importTransactions) {
+                         boolean exportTransactions, boolean exportStaff) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.tabWindow = tabWindow;
         this.showHelp = showHelp;
         this.exit = exit;
         this.clearResultDisplay = clearResultDisplay;
         this.exportTransactions = exportTransactions;
-        this.importTransactions = importTransactions;
+        this.exportStaff = exportStaff;
     }
 
     /**
@@ -108,8 +108,8 @@ public class CommandResult {
         return exportTransactions;
     }
 
-    public boolean isImportTransactions() {
-        return importTransactions;
+    public boolean isExportStaff() {
+        return exportStaff;
     }
 
 
