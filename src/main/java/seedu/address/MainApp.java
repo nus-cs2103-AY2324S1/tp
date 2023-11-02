@@ -21,7 +21,7 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.calendar.Calendar;
+import seedu.address.model.calendar.UniMateCalendar;
 import seedu.address.model.calendar.ReadOnlyCalendar;
 import seedu.address.model.util.SampleCalendarUtil;
 import seedu.address.model.util.SampleDataUtil;
@@ -109,7 +109,7 @@ public class MainApp extends Application {
         } catch (DataLoadingException e) {
             logger.warning("Data file at " + storage.getAddressBookFilePath() + " could not be loaded."
                     + " Will be starting with an empty AddressBook.");
-            calendarInitialData = new Calendar();
+            calendarInitialData = new UniMateCalendar();
         }
 
         return new ModelManager(addressBookInitialData, calendarInitialData, userPrefs);

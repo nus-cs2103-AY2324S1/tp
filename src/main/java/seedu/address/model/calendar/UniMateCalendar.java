@@ -18,7 +18,7 @@ import seedu.address.model.event.EventPeriod;
 /**
  * Represents a calendar that stores and manages events.
  */
-public class Calendar implements ReadOnlyCalendar {
+public class UniMateCalendar implements ReadOnlyCalendar {
     private static final int DAYS_IN_WEEK = 7;
     private static final LocalDate DATE_OF_START_OF_CURRENT_WEEK = LocalDate.now().minusDays(
             LocalDate.now().getDayOfWeek().getValue() - 1);
@@ -31,14 +31,14 @@ public class Calendar implements ReadOnlyCalendar {
     /**
      * Constructs a Calendar object with an empty event tree.
      */
-    public Calendar() {
+    public UniMateCalendar() {
         this.eventManager = new AllDaysEventListManager();
     }
 
     /**
      * Creates a Calendar using the Events in the {@code toBeCopied}
      */
-    public Calendar(ReadOnlyCalendar toBeCopied) {
+    public UniMateCalendar(ReadOnlyCalendar toBeCopied) {
         this();
         resetData(toBeCopied);
     }
@@ -195,7 +195,7 @@ public class Calendar implements ReadOnlyCalendar {
     public ReadOnlyCalendar combineCalendar(ReadOnlyCalendar other) {
         requireNonNull(other);
 
-        Calendar combinedCalendar = new Calendar();
+        UniMateCalendar combinedCalendar = new UniMateCalendar();
         Stream.concat(internalList.stream(), other.getEventList().stream()).forEach(combinedCalendar::forceAddEvent);
         return combinedCalendar;
     }
@@ -226,11 +226,11 @@ public class Calendar implements ReadOnlyCalendar {
             return true;
         }
 
-        if (!(other instanceof Calendar)) {
+        if (!(other instanceof UniMateCalendar)) {
             return false;
         }
 
-        Calendar otherCalendar = (Calendar) other;
+        UniMateCalendar otherCalendar = (UniMateCalendar) other;
         return this.eventManager.equals(otherCalendar.eventManager);
     }
 }

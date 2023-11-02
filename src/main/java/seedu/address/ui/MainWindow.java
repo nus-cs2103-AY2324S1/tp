@@ -1,5 +1,7 @@
 package seedu.address.ui;
 
+import java.io.File;
+import java.util.Optional;
 import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
@@ -9,6 +11,7 @@ import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.StackPane;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
@@ -24,6 +27,9 @@ import seedu.address.logic.parser.exceptions.ParseException;
 public class MainWindow extends UiPart<Stage> {
 
     private static final String FXML = "MainWindow.fxml";
+    private static final String VALID_IMPORT_FILE_TYPE = ".ics Files";
+    private static final String VALID_IMPORT_FILE_EXTENSION = "*.ics";
+    private static final String USER_CALENDAR_IMPORT_FILE_CHOOSER_TITLE = "Open .ics File";
 
     private final Logger logger = LogsCenter.getLogger(getClass());
 
@@ -180,10 +186,17 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     @FXML
-    private void handleComingSoon() {
-
+    private void handleImportForUser() {
+        Stage fileChooserStage = new Stage();
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle(USER_CALENDAR_IMPORT_FILE_CHOOSER_TITLE);
+        fileChooser.getExtensionFilters().add(
+                new FileChooser.ExtensionFilter(VALID_IMPORT_FILE_TYPE, VALID_IMPORT_FILE_EXTENSION));
+        Optional<File> calendarFileOptional = Optional.<File>ofNullable(fileChooser.showOpenDialog(fileChooserStage));
+        if (calendarFileOptional.isPresent()) {
+            logic.importUserCalendar(calendarFileOptional.orElseThrow());
+        }
     }
-
     public PersonListPanel getPersonListPanel() {
         return personListPanel;
     }
