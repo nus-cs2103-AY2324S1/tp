@@ -8,12 +8,15 @@ import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_EMPLOYEE;
 
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
 import javafx.util.Pair;
+import seedu.address.commons.util.CustomSet;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.DeleteCommand;
@@ -24,8 +27,9 @@ import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.employee.ContainsDepartmentPredicate;
+import seedu.address.model.employee.ContainsAllPredicate;
 import seedu.address.model.employee.Employee;
+import seedu.address.model.name.DepartmentName;
 import seedu.address.model.name.NameContainsKeywordsPredicate;
 import seedu.address.testutil.EditEmployeeDescriptorBuilder;
 import seedu.address.testutil.EmployeeBuilder;
@@ -81,9 +85,12 @@ public class ManageHrParserTest {
     @Test
     public void parseCommand_filter() throws Exception {
         String keyword = "d/R&D";
-        FilterCommand command = (FilterCommand) parser.parseCommand(FilterCommand.COMMAND_WORD + " " + keyword);
-        ContainsDepartmentPredicate predicate = new ContainsDepartmentPredicate();
-        predicate.setDepartment("R&D");
+        FilterCommand command = (FilterCommand) parser.parseCommand(FilterCommand.COMMAND_WORD
+                + " " + keyword);
+        Set<DepartmentName> departmentNameSet = new CustomSet<>();
+        departmentNameSet.add(new DepartmentName("R&D"));
+        ContainsAllPredicate predicate = new ContainsAllPredicate(new CustomSet<>(), new HashSet<>(), new HashSet<>(),
+                new HashSet<>(), new HashSet<>(), new HashSet<>(), new HashSet<>(), new HashSet<>(), departmentNameSet);
         assertEquals(new FilterCommand(predicate), command);
     }
 

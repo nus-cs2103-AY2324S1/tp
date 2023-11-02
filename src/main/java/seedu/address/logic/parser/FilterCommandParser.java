@@ -1,24 +1,33 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.*;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DEPARTMENT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LEAVE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MANAGER;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SALARY;
+
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Set;
 
 import seedu.address.commons.util.CustomSet;
 import seedu.address.logic.commands.FilterCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.employee.Address;
+import seedu.address.model.employee.ContainsAllPredicate;
 import seedu.address.model.employee.Email;
 import seedu.address.model.employee.Leave;
 import seedu.address.model.employee.Phone;
 import seedu.address.model.employee.Role;
 import seedu.address.model.employee.Salary;
-import seedu.address.model.employee.ContainsDepartmentPredicate;
 import seedu.address.model.name.DepartmentName;
 import seedu.address.model.name.EmployeeName;
 
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Set;
 
 /**
  * Parses input arguments and creates a new FilterCommand object.
@@ -49,7 +58,7 @@ public class FilterCommandParser implements Parser<FilterCommand> {
         Set<EmployeeName> supervisorNameSet = parseSupervisorsForFilter(argMultimap.getAllValues(PREFIX_MANAGER));
         Set<DepartmentName> departmentSet = parseDepartmentsForFilter(argMultimap.getAllValues(PREFIX_DEPARTMENT));
 
-        return new FilterCommand(new ContainsDepartmentPredicate(nameSet, phoneSet, emailSet, addressSet,
+        return new FilterCommand(new ContainsAllPredicate(nameSet, phoneSet, emailSet, addressSet,
                 salarySet, leaveSet, roleSet, supervisorNameSet, departmentSet));
     }
 

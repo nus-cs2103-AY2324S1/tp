@@ -5,7 +5,7 @@ import static java.util.Objects.requireNonNull;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.model.Model;
-import seedu.address.model.employee.ContainsDepartmentPredicate;
+import seedu.address.model.employee.ContainsAllPredicate;
 
 /**
  * Filters employees in ManageHR app whose department(s) contains the argument keyword.
@@ -18,9 +18,9 @@ public class FilterCommand extends Command {
             + "the specified keyword (case-sensitive) and displays them as a list with index numbers.\n"
             + "Parameters: KEYWORD\n"
             + "Example: " + MESSAGE_EXAMPLE;
-    private final ContainsDepartmentPredicate predicate;
+    private final ContainsAllPredicate predicate;
 
-    public FilterCommand(ContainsDepartmentPredicate predicate) {
+    public FilterCommand(ContainsAllPredicate predicate) {
         this.predicate = predicate;
     }
 
