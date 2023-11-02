@@ -2,6 +2,7 @@ package seedu.address.model.event;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.TypicalEvents.MEETING_WITHOUT_TIME;
 import static seedu.address.testutil.TypicalEvents.TP_MEETING;
@@ -58,4 +59,28 @@ public class MeetingTest {
         assertTrue(TP_MEETING.hasEndTime());
         assertFalse(MEETING_WITHOUT_TIME.hasEndTime());
     }
+
+    @Test
+    public void toStringTest() {
+        assertEquals("TP MEETING TEST; Date: 2023-10-18; "
+                + "Start_Time: 0000; End_Time: 2359; "
+                + "Assigned_Persons: []; Assigned_Groups: [];", TP_MEETING.toString());
+    }
+
+    @Test
+    public void equalsTest() {
+        Meeting expected = new MeetingBuilder(TP_MEETING).build();
+        assertEquals(expected, TP_MEETING);
+    }
+
+    @Test
+    public void equalsWrongType() {
+        assertNotEquals(1, TP_MEETING);
+    }
+
+    @Test
+    public void isSameMeetingWrongType() {
+        assertFalse(TP_MEETING.isSameEvent(null));
+    }
+
 }
