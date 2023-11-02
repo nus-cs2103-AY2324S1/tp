@@ -12,8 +12,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 /**
  * Represents a Card in lesSON.
- * Guarantees: details are present and not null, field values are validated,
- * immutable.
+ * Guarantees: details are present and not null, field values are validated
  */
 public class Card implements Comparable<Card> {
     // Identity fields
@@ -21,7 +20,7 @@ public class Card implements Comparable<Card> {
     private final Answer answer;
 
     // Data fields for card
-    private String difficulty;
+    private Difficulty difficulty;
     private PracticeDate lastPracticeDate; // last date card was practiced, can be null.
     private PracticeDate nextPracticeDate; // next date card should be practiced.
     private final List<Tag> tags = new ArrayList<>();
@@ -30,7 +29,7 @@ public class Card implements Comparable<Card> {
     /**
      * Every field must be present and not null.
      */
-    public Card(Question question, Answer answer, String difficulty, List<Tag> tags,
+    public Card(Question question, Answer answer, Difficulty difficulty, List<Tag> tags,
             PracticeDate nextPracticeDate, PracticeDate lastPracticeDate) {
         requireAllNonNull(question, answer, difficulty, tags, nextPracticeDate);
 
@@ -51,12 +50,12 @@ public class Card implements Comparable<Card> {
     }
 
     // Difficulty
-    public void setDifficulty(String difficulty) {
+    public void setDifficulty(Difficulty difficulty) {
         this.difficulty = difficulty;
     }
 
     public String getDifficulty() {
-        return this.difficulty;
+        return this.difficulty.toString();
     }
 
     // Question
@@ -92,7 +91,7 @@ public class Card implements Comparable<Card> {
      * Sets a new practice date based on {@code difficulty}.
      * @param difficulty the difficulty of the Card to adjust the new practise date
      */
-    public void setNewPracticeDateWith(String difficulty) {
+    public void setNewPracticeDateWith(Difficulty difficulty) {
         PracticeDate newPracticeDate = PracticeDate.calculateNewPracticeDate(this.lastPracticeDate,
                 this.nextPracticeDate, difficulty);
 

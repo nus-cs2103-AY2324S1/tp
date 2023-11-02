@@ -51,10 +51,8 @@ public class SolveCommand extends Command {
         Card cardToSolve = lastShownList.get(targetIndex.getZeroBased());
         cardToSolve.incrementSolveCount();
 
-        return new CommandResult(
-                String.format(Messages.MESSAGE_CARDS_SOLVE_VIEW,
+        return new CommandResult(String.format(Messages.MESSAGE_CARDS_SOLVE_VIEW,
                         Messages.formatSolve(cardToSolve, targetIndex)));
-
     }
 
     @Override

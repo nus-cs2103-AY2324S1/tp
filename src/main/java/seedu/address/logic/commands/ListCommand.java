@@ -20,7 +20,8 @@ public class ListCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Lists Card from Deck. "
             + "Parameters: \n"
-            + PREFIX_QUESTION + "WORD(s) questions start with (Cannot be left blank)\n"
+            + "and/or " + PREFIX_QUESTION + "WORD(s) questions start with (Cannot be left blank. Markdown syntax" +
+            " should be included.)\n"
             + "and/or " + PREFIX_TAG + "Tag (Cannot be left blank. Multiple tags can be included.)";
 
     public static final String MESSAGE_SUCCESS = "Listed all cards";

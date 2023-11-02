@@ -2,10 +2,7 @@ package seedu.address.logic.parser;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.card.Answer;
-import seedu.address.model.card.Card;
-import seedu.address.model.card.PracticeDate;
-import seedu.address.model.card.Question;
+import seedu.address.model.card.*;
 import seedu.address.model.tag.Tag;
 
 import java.time.LocalDateTime;
@@ -44,8 +41,9 @@ public class AddCommandParser implements Parser<AddCommand> {
 
         PracticeDate practiceDate = new PracticeDate(LocalDateTime.now());
         List<Tag> tags = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
+        Difficulty difficulty = Difficulty.NEW;
 
-        Card card = new Card(question, answer, "new", tags, practiceDate, null);
+        Card card = new Card(question, answer, difficulty, tags, practiceDate, null);
 
         return new AddCommand(card);
     }

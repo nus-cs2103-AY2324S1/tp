@@ -3,10 +3,7 @@ package seedu.address.storage;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.card.Answer;
-import seedu.address.model.card.Card;
-import seedu.address.model.card.PracticeDate;
-import seedu.address.model.card.Question;
+import seedu.address.model.card.*;
 import seedu.address.model.tag.Tag;
 
 import java.time.LocalDateTime;
@@ -97,11 +94,14 @@ class JsonAdaptedCard {
         final Answer modelAnswer = new Answer(answer);
 
         // Tags
-        final List<Tag> cardTags = new ArrayList<>();
+        final List<Tag> modalCardTags = new ArrayList<>();
 
         for (JsonAdaptedTag tag : tags) {
-            cardTags.add(tag.toModelType());
+            modalCardTags.add(tag.toModelType());
         }
+
+        // Difficulty
+        Difficulty modalDifficulty = Difficulty.valueOf(difficulty.toUpperCase());
 
         // PractiseDate
         if (nextPracticeDate == null) {
@@ -125,6 +125,7 @@ class JsonAdaptedCard {
                 ? new PracticeDate(LocalDateTime.parse(lastPracticeDate))
                 : null;
 
-        return new Card(modelQuestion, modelAnswer, difficulty, cardTags, modelNextPracticeDate, modelLastPracticeDate);
+        return new Card(modelQuestion, modelAnswer, modalDifficulty, modalCardTags,
+                modelNextPracticeDate, modelLastPracticeDate);
     }
 }

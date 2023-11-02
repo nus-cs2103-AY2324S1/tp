@@ -100,7 +100,6 @@ public class ModelManager implements Model {
     @Override
     public void addCard(Card card) {
         deck.addCard(card);
-        updateFilteredCardList(PREDICATE_SHOW_ALL_CARDS);
     }
 
     @Override

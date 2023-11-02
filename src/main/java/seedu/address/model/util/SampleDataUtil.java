@@ -1,10 +1,7 @@
 package seedu.address.model.util;
 
 import seedu.address.model.Deck;
-import seedu.address.model.card.Answer;
-import seedu.address.model.card.Card;
-import seedu.address.model.card.PracticeDate;
-import seedu.address.model.card.Question;
+import seedu.address.model.card.*;
 import seedu.address.model.tag.Tag;
 
 import java.time.LocalDateTime;
@@ -24,12 +21,12 @@ public class SampleDataUtil {
         return new Card[] {
             new Card(new Question("What is 1 + 1"),
                     new Answer("2"),
-                    "new",
+                    Difficulty.EASY,
                     new ArrayList<>(Collections.singleton(new Tag("Math"))),
                     new PracticeDate(LocalDateTime.now()), null),
             new Card(new Question("What is 1 + 3"),
                     new Answer("4"),
-                    "easy",
+                    Difficulty.EASY,
                     new ArrayList<>(Collections.singleton(new Tag("Math"))),
                     new PracticeDate(LocalDateTime.now()), null)
         };

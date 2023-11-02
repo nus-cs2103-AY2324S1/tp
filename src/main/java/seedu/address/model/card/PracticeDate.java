@@ -65,13 +65,13 @@ public class PracticeDate implements Comparable<PracticeDate> {
      * @return a new PractiseDate after calculation
      */
     public static PracticeDate calculateNewPracticeDate(
-            PracticeDate cardLastPracticeDate, PracticeDate cardNextPracticeDate, String difficulty) {
+            PracticeDate cardLastPracticeDate, PracticeDate cardNextPracticeDate, Difficulty difficulty) {
         switch (difficulty) {
-        case "easy":
+        case EASY:
             return new PracticeDate(cardLastPracticeDate, cardNextPracticeDate, EASY_MULTIPLIER);
-        case "medium":
+        case MEDIUM:
             return new PracticeDate(cardLastPracticeDate, cardNextPracticeDate, MEDIUM_MULTIPLIER);
-        case "hard":
+        case HARD:
         default:
             return new PracticeDate(cardLastPracticeDate, cardNextPracticeDate, HARD_MULTIPLIER);
         }

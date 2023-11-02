@@ -6,14 +6,14 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.card.Card;
+import seedu.address.model.card.Difficulty;
 
 import java.util.List;
-import java.util.Objects;
 
 import static java.util.Objects.requireNonNull;
 
 /**
- * Practises a Card using its displayed index from the Deck.
+ * Set the difficulty of a Card using its displayed index from the Deck.
  */
 public class SetDifficultyCommand extends Command {
 
@@ -31,7 +31,7 @@ public class SetDifficultyCommand extends Command {
     private final Index targetIndex;
 
     /** Difficulty of {@code Card} to set to */
-    private final String difficulty;
+    private final Difficulty difficulty;
 
     /**
      * Constructs a {@code PractiseCommand} with the specified {@code targetIndex} and {@code difficulty}.
@@ -41,7 +41,7 @@ public class SetDifficultyCommand extends Command {
      */
     public SetDifficultyCommand(Index targetIndex, String difficulty) {
         this.targetIndex = targetIndex;
-        this.difficulty = difficulty.toLowerCase();
+        this.difficulty = Difficulty.valueOf(difficulty.toUpperCase());
     }
 
     @Override
@@ -55,34 +55,28 @@ public class SetDifficultyCommand extends Command {
         }
         Card cardToSetDifficulty = lastShownList.get(targetIndex.getZeroBased());
 
-        if (Objects.equals(difficulty, "easy")) {
-            cardToSetDifficulty.setDifficulty(difficulty);
-            cardToSetDifficulty.setNewPracticeDateWith(difficulty);
-            model.getDeck().sort();
-            return new CommandResult(
-                    String.format(Messages.MESSAGE_CARDS_SET_DIFFICULTY_VIEW_EASY,
-                            Messages.formatSetDifficulty(cardToSetDifficulty, targetIndex)));
-        }
-
-        if (Objects.equals(difficulty, "medium")) {
-            cardToSetDifficulty.setDifficulty(difficulty);
-            cardToSetDifficulty.setNewPracticeDateWith(difficulty);
-            model.getDeck().sort();
-            return new CommandResult(
-                    String.format(Messages.MESSAGE_CARDS_SET_DIFFICULTY_VIEW_MEDIUM,
-                            Messages.formatSetDifficulty(cardToSetDifficulty, targetIndex)));
-        }
-
-        if (Objects.equals(difficulty, "hard")) {
-            cardToSetDifficulty.setDifficulty(difficulty);
-            cardToSetDifficulty.setNewPracticeDateWith(difficulty);
-            model.getDeck().sort();
-            return new CommandResult(
-                    String.format(Messages.MESSAGE_CARDS_SET_DIFFICULTY_VIEW_HARD,
-                            Messages.formatSetDifficulty(cardToSetDifficulty, targetIndex)));
-        } else {
+        switch (difficulty) {
+        case EASY: return updatePracticeDate(model,
+                difficulty,cardToSetDifficulty, Messages.MESSAGE_CARDS_SET_DIFFICULTY_VIEW_EASY);
+        case MEDIUM: return updatePracticeDate(model,
+                difficulty,cardToSetDifficulty, Messages.MESSAGE_CARDS_SET_DIFFICULTY_VIEW_MEDIUM);
+        case HARD: return updatePracticeDate(model,
+                difficulty,cardToSetDifficulty, Messages.MESSAGE_CARDS_SET_DIFFICULTY_VIEW_HARD);
+        default:
             throw new CommandException(difficulty + Messages.MESSAGE_CARDS_SET_DIFFICULTY_VIEW_INVALID);
         }
+    }
+
+    private CommandResult updatePracticeDate(Model model, Difficulty difficulty, Card card, String message) {
+        assert(model != null);
+        assert(difficulty != null);
+        assert(!message.isEmpty());
+
+        card.setDifficulty(difficulty);
+        card.setNewPracticeDateWith(difficulty);
+        model.getDeck().sort();
+        return new CommandResult(
+                String.format(message, Messages.formatSetDifficulty(card, targetIndex)));
     }
 
     @Override
