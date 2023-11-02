@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.time.LocalDateTime;
@@ -47,8 +48,7 @@ public class DeleteContactEventCommand extends Command {
      * @param eventTime time of the event to delete.
      */
     public DeleteContactEventCommand(Index index, LocalDateTime eventTime) {
-        requireNonNull(index);
-        requireNonNull(eventTime);
+        requireAllNonNull(index, eventTime);
 
         this.index = index;
         this.eventTime = eventTime;
