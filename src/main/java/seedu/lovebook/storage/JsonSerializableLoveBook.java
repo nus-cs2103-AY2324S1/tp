@@ -41,7 +41,7 @@ class JsonSerializableLoveBook {
     }
 
     /**
-     * Converts this lovebook book into the model's {@code LoveBook} object.
+     * Converts this LoveBook into the model's {@code LoveBook} object.
      *
      * @throws IllegalValueException if there were any data constraints violated.
      */

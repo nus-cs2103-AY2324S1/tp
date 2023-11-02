@@ -9,13 +9,13 @@ import seedu.lovebook.model.Model;
 import seedu.lovebook.model.date.Date;
 
 /**
- * Lists all dates in the lovebook book to the user.
+ * Lists all Dates in the LoveBook to the user.
  */
 public class ListCommand extends Command {
 
     public static final String COMMAND_WORD = "list";
 
-    public static final String MESSAGE_SUCCESS = "Listed all dates";
+    public static final String MESSAGE_SUCCESS = "Listed all Dates";
 
 
     @Override

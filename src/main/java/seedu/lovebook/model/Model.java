@@ -36,17 +36,17 @@ public interface Model {
     void setGuiSettings(GuiSettings guiSettings);
 
     /**
-     * Returns the user prefs' lovebook book file path.
+     * Returns the user prefs' LoveBook file path.
      */
     Path getLoveBookFilePath();
 
     /**
-     * Sets the user prefs' lovebook book file path.
+     * Sets the user prefs' LoveBook file path.
      */
     void setLoveBookFilePath(Path loveBookFilePath);
 
     /**
-     * Replaces lovebook book data with the data in {@code LoveBook}.
+     * Replaces LoveBook data with the data in {@code LoveBook}.
      */
     void setLoveBook(ReadOnlyLoveBook loveBook);
 
@@ -54,26 +54,26 @@ public interface Model {
     ReadOnlyLoveBook getLoveBook();
 
     /**
-     * Returns true if a date with the same identity as {@code date} exists in the lovebook book.
+     * Returns true if a date with the same identity as {@code date} exists in the LoveBook.
      */
     boolean hasPerson(Date date);
 
     /**
      * Deletes the given date.
-     * The date must exist in the lovebook book.
+     * The date must exist in the LoveBook.
      */
     void deletePerson(Date target);
 
     /**
      * Adds the given date.
-     * {@code date} must not already exist in the lovebook book.
+     * {@code date} must not already exist in the LoveBook.
      */
     void addPerson(Date date);
 
     /**
      * Replaces the given date {@code target} with {@code editedDate}.
-     * {@code target} must exist in the lovebook book.
-     * The date identity of {@code editedDate} must not be the same as another existing date in the lovebook book.
+     * {@code target} must exist in the LoveBook.
+     * The date identity of {@code editedDate} must not be the same as another existing date in the LoveBook.
      */
     void setPerson(Date target, Date editedDate);
 

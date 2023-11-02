@@ -8,25 +8,25 @@ import org.junit.jupiter.api.Test;
 import seedu.lovebook.model.Model;
 
 
-public class RandomCommandTest {
+public class BlindDateCommandTest {
     private Model model;
     private Model expectedModel;
 
     @Test
     public void equals() {
-        RandomCommand randomCommand = new RandomCommand();
-        RandomCommand randomCommandCopy = new RandomCommand();
+        BlindDateCommand blindDateCommand = new BlindDateCommand();
+        BlindDateCommand blindDateCommandCopy = new BlindDateCommand();
 
         // same object -> returns true
-        assertTrue(randomCommand.equals(randomCommand));
+        assertTrue(blindDateCommand.equals(blindDateCommand));
 
         // same values -> returns true
-        assertTrue(randomCommand.equals(randomCommandCopy));
+        assertTrue(blindDateCommand.equals(blindDateCommandCopy));
 
         // different types -> returns false
-        assertFalse(randomCommand.equals(1));
+        assertFalse(blindDateCommand.equals(1));
 
         // null -> returns false
-        assertFalse(randomCommand.equals(null));
+        assertFalse(blindDateCommand.equals(null));
     }
 }

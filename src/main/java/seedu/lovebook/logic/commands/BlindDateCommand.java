@@ -7,11 +7,11 @@ import seedu.lovebook.logic.commands.exceptions.CommandException;
 import seedu.lovebook.model.Model;
 
 /**
- * Generates a random date
+ * Generates a random Date
  */
-public class RandomCommand extends Command {
-    public static final String COMMAND_WORD = "blinddate";
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Generates a blind date"
+public class BlindDateCommand extends Command {
+    public static final String COMMAND_WORD = "blindDate";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Generates a blind Date"
             + "Example: " + COMMAND_WORD;
 
     @Override
@@ -28,6 +28,6 @@ public class RandomCommand extends Command {
             return true;
         }
         // instanceof handles nulls
-        return other instanceof RandomCommand;
+        return other instanceof BlindDateCommand;
     }
 }

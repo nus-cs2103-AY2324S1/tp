@@ -23,7 +23,7 @@ import seedu.lovebook.model.date.Income;
 import seedu.lovebook.model.date.horoscope.Horoscope;
 
 /**
- * Sets the Preference of the user in the LoveBook.
+ * Sets the Date Preference of the user in the LoveBook.
  */
 public class SetPrefCommand extends Command {
 
@@ -32,7 +32,7 @@ public class SetPrefCommand extends Command {
     /**
      * editP only for Age, Gender, Height, Income
      */
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Sets date preference. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Sets Date Preference. "
             + "Parameters: "
             + PREFIX_AGE + "AGE "
             + PREFIX_GENDER + "GENDER "
@@ -46,7 +46,7 @@ public class SetPrefCommand extends Command {
             + PREFIX_INCOME + "3000 "
             + PREFIX_HOROSCOPE + "Scorpio ";
 
-    public static final String MESSAGE_EDIT_PREF_SUCCESS = "Updated preferences: %1$s";
+    public static final String MESSAGE_EDIT_PREF_SUCCESS = "Updated Preferences: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.\n"
             + "Please try the following command format:\n"
             + MESSAGE_USAGE;
