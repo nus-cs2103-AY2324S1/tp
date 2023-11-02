@@ -7,7 +7,7 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailur
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalTags.INVALID_TAG_STRING;
-import static seedu.address.testutil.TypicalTags.TEST_TAG_STRING;
+import static seedu.address.testutil.TypicalTags.TEST_TAG_NAME_STRING;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,10 +47,10 @@ public class DeleteCommandParserTest {
     // Delete by tags and status tests
     @Test
     public void parse_validTags_returnsDeleteCommand() {
-        String userInput = " " + CliSyntax.PREFIX_TAG + TEST_TAG_STRING;
+        String userInput = " " + CliSyntax.PREFIX_TAG + TEST_TAG_NAME_STRING;
 
         // Create predicate based on the expected tag value
-        TagContainsKeywordsPredicate tagPredicate = new TagContainsKeywordsPredicate(List.of(TEST_TAG_STRING));
+        TagContainsKeywordsPredicate tagPredicate = new TagContainsKeywordsPredicate(List.of(TEST_TAG_NAME_STRING));
         List<Predicate<Person>> predicateList = new ArrayList<>() {{
                 add(tagPredicate);
             }};

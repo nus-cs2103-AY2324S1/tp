@@ -1,10 +1,11 @@
 package seedu.address.storage;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -33,7 +34,7 @@ class JsonAdaptedPerson {
     private final String phone;
     private final String email;
     private final String address;
-    private final List<JsonAdaptedTag> tags = new ArrayList<>();
+    private final List<Map<String, String>> tags = new ArrayList<>();
     private final JsonAdaptedScoreList scoreList;
     private final String linkedIn;
     private final String github;
@@ -49,7 +50,7 @@ class JsonAdaptedPerson {
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("address") String address,
-            @JsonProperty("tags") List<JsonAdaptedTag> tags,
+            @JsonProperty("tags") List<Map<String, String>> tags,
             @JsonProperty("scoreList") JsonAdaptedScoreList scoreList,
             @JsonProperty("linkedIn") String linkedIn,
             @JsonProperty("github") String github,
@@ -76,9 +77,13 @@ class JsonAdaptedPerson {
         phone = source.getPhone().value;
         email = source.getEmail().value;
         address = source.getAddress().value;
-        tags.addAll(source.getTags().stream()
-                .map(JsonAdaptedTag::new)
-                .collect(Collectors.toList()));
+        Set<Tag> personTags = source.getTags();
+        for (Tag tag : personTags) {
+            Map<String, String> map = new HashMap<>();
+            map.put("tagCategory", tag.tagCategory);
+            map.put("tagName", tag.tagName);
+            this.tags.add(map);
+        }
         scoreList = new JsonAdaptedScoreList(source.getScoreList());
         linkedIn = source.getLinkedIn().value;
         github = source.getGithub().value;
@@ -93,11 +98,15 @@ class JsonAdaptedPerson {
      */
     public Person toModelType() throws IllegalValueException {
         final List<Tag> personTags = new ArrayList<>();
-        for (JsonAdaptedTag tag : tags) {
-            personTags.add(tag.toModelType());
+        for (Map<String, String> tagData : tags) {
+            String tagCategory = tagData.get("tagCategory");
+            String tagName = tagData.get("tagName");
+            if (!Tag.isValidTagName(tagName)) {
+                throw new IllegalValueException(Tag.MESSAGE_CONSTRAINTS);
+            }
+
+            personTags.add(new Tag(tagName, tagCategory));
         }
-
-
         if (name == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
         }
@@ -135,6 +144,7 @@ class JsonAdaptedPerson {
         final Remark modelRemark = new Remark(remark);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
+
         Person p = new Person(modelName, modelPhone, modelEmail, modelAddress, modelRemark, modelTags);
         if (linkedIn != null) {
             p.setLinkedIn(new LinkedIn(linkedIn));
