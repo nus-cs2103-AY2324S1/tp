@@ -48,7 +48,7 @@ img
   * [Saving the data](#saving-the-data)
   * [Editing the data file](#editing-the-data-file)
 
---- {.double}
+---
 <br>
 
 <a name="introduction"></a>
@@ -62,7 +62,7 @@ While **Staff-Snap** has a simple and intuitive [Graphical User Interface (GUI)]
 
 <br>
 
---- {.double}
+---
 <br>
 
 <a name="quick-start"></a>
@@ -84,6 +84,9 @@ While **Staff-Snap** has a simple and intuitive [Graphical User Interface (GUI)]
    * `delete 1` : Deletes the 1st applicant shown in the current list.
    * `clear` : Clears all applicants from the list.
    * `exit` : Exits the application.
+
+<br>
+
 9. Refer to the [Features](#features) below for details of each command.
 
 <box type="tip" header="**For macOS users**" seamless>
@@ -174,14 +177,14 @@ This section introduces the symbols and notations used throughout this guide. We
 <a name="command-parameters-1"></a>
 #### Command Parameters
 
-| Parameter  | Description​                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       | Examples​                                                              |
-|------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------|
-| `NAME`     | The applicant's name.<br/> <br/> It can only contain alphanumeric characters and space, should be at least 1 character long, and should not exceed 25 characters.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  | <ul><li>`n/James Lee`</li><li>`n/Rosemary Lee Curtis`</li></ul>        |
-| `PHONE`    | The applicant's phone number. <br/> <br/> It can only contain numbers, should be at least 3 digits long, and should not exceed 30 digits.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          | <ul><li>`hp/91234726`</li><li>`hp/1234567890123`</li></ul>             |
-| `EMAIL`    | The applicant's email. <br/> <br/> It should be of the format **local-part@domain**. <br/><br/> The **local-part** should only contain alphanumeric characters and these special characters, excluding the parentheses, (+_.-). The **local-part** may not start or end with any special characters. <br/><br/> This is followed by a **'@'** and then a **domain name**. The **domain name** is made up of domain labels separated by periods. The domain name must end with a domain label at least 2 characters long, have each domain label start and end with alphanumeric characters, and have each domain label consist of alphanumeric characters, separated only by hyphens, if any. <br/><br/> The entire email address should not exceed 30 characters. | <ul><li>`e/james@gmail.com`</li><li>`e/e9867626@u.nus.edu`</li></ul>   |
-| `POSITION` | The position applied for by the applicant. <br/> <br/> It can take any value, should not be blank and should not exceed 30 characters.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             | <ul><li>`p/Software Engineer`</li><li>`p/AI Architect 2`</li></ul>     |
-| `STATUS`   | The status of the applicant. <br/> <br/> It can only be `o` for _OFFERED_, `r` for _REJECTED_, or `u` for _UNDECIDED_.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             | <ul><li>`s/o`</li><li>`s/r`</li></ul>                                  |
-| `INDEX`    | The index of the applicant in the displayed list. <br/> <br/> It must be a positive integer and not more than the total number of applicants.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      | <ul><li>`2`</li></ul>                                                  |
+| Parameter  | Description​                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       | Examples​                                                    |
+|------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------|
+| `NAME`     | The applicant's name.<br/> <br/> It can only contain alphanumeric characters and space, should be at least 1 character long, and should not exceed 25 characters.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  | <ul><li>`James Lee`</li><li>`Rosemary Lee Curtis`</li></ul>  |
+| `PHONE`    | The applicant's phone number. <br/> <br/> It can only contain numbers, should be at least 3 digits long, and should not exceed 30 digits.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          | <ul><li>`91234726`</li><li>`1234567890123`</li></ul>         |
+| `EMAIL`    | The applicant's email. <br/> <br/> It should be of the format **local-part@domain**. <br/><br/> The **local-part** should only contain alphanumeric characters and these special characters, excluding the parentheses, (+_.-). The **local-part** may not start or end with any special characters. <br/><br/> This is followed by a **'@'** and then a **domain name**. The **domain name** is made up of domain labels separated by periods. The domain name must end with a domain label at least 2 characters long, have each domain label start and end with alphanumeric characters, and have each domain label consist of alphanumeric characters, separated only by hyphens, if any. <br/><br/> The entire email address should not exceed 30 characters. | <ul><li>`james@gmail.com`</li><li>`e9867626@u.nus.edu`</li></ul> |
+| `POSITION` | The position applied for by the applicant. <br/> <br/> It can take any value, should not be blank and should not exceed 30 characters.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             | <ul><li>`Software Engineer`</li><li>`AI Architect 2`</li></ul> |
+| `STATUS`   | The status of the applicant. <br/> <br/> It can only be `o` for _OFFERED_, `r` for _REJECTED_, or `u` for _UNDECIDED_.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             | <ul><li>`s/o`</li><li>`s/r`</li></ul>                        |
+| `INDEX`    | The index of the applicant in the displayed list. <br/> <br/> It must be a positive integer and not more than the total number of applicants.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      | <ul><li>`2`</li></ul>                                        |
 
 
 
@@ -282,12 +285,12 @@ Example:
 <a name="command-parameters-2"></a>
 #### Command Parameters
 
-| Parameter         | Description​                                                                                                                                                          | Examples​                                              |
-|-------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------|
-| `TYPE`            | The interview type.<br/> <br/> It should not be empty and should not exceed 14 characters.                                                                            | <ul><li>`t/technical`</li><li>`t/behavioral`</li></ul> |
-| `RATING`          | The interview rating. <br/> <br/> It should be a number between 0.0 and 10.0 inclusive, to 1 decimal place.                                                           | <ul><li>`r/9.6`</li><li>`r/0.0`</li></ul>              |
-| `INTERVIEW_INDEX` | The index of the applicant's interview in the applicant card. <br/> <br/> It must be a positive integer and not more than the applicant's total number of interviews. | <ul><li>`i/1`</li><li>`i/2`</li></ul>                  |
-| `INDEX`           | The index of the applicant in the displayed list. <br/> <br/> It must be a positive integer and not more than the total number of applicants.                         | <ul><li>`2`</li></ul>                                  |
+| Parameter         | Description​                                                                                                                                                          | Examples​                                          |
+|-------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------|
+| `TYPE`            | The interview type.<br/> <br/> It should not be empty and should not exceed 14 characters.                                                                            | <ul><li>`technical`</li><li>`behavioral`</li></ul> |
+| `RATING`          | The interview rating. <br/> <br/> It should be a number between 0.0 and 10.0 inclusive, to 1 decimal place.                                                           | <ul><li>`9.6`</li><li>`0.0`</li></ul>              |
+| `INTERVIEW_INDEX` | The index of the applicant's interview in the applicant card. <br/> <br/> It must be a positive integer and not more than the applicant's total number of interviews. | <ul><li>`1`</li><li>`2`</li></ul>                  |
+| `INDEX`           | The index of the applicant in the displayed list. <br/> <br/> It must be a positive integer and not more than the total number of applicants.                         | <ul><li>`2`</li></ul>                              |
 
 
 <br>
@@ -363,18 +366,14 @@ Example:
 
 <br>
 
-#### Command Parameters
-
-Parameter table for DESCRIPTOR, KEYWORD, MORE_KEYWORDS, FILENAME
-
 <a name="command-parameters-3"></a>
 #### Command Parameters
 
-| Parameter    | Description​                                                                                                                           | Examples​                                                    |
-|--------------|----------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------|
-| `DESCRIPTOR` | The applicant descriptor to sort by.<br/> <br/> It should be either `name` or `phone` or `email` or `position` or `score` or `status`. | <ul><li>`d/name`</li><li>`d/score`</li></ul>                 |
-| `KEYWORD`    | The keyword to find in an applicant's name. <br/> <br/> It should be ???.                                                              | <ul><li>`Lee`</li><li>`Zhang Jordan`</li></ul>               |
-| `FILENAME`   | The file name of the csv file to import. <br/> <br/> It should end with the `.csv` suffix and should not be blank.                     | <ul><li>`f/demo.csv`</li><li>`f/applicantBook.csv`</li></ul> |
+| Parameter    | Description​                                                                                                                           | Examples​                                                |
+|--------------|----------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------|
+| `DESCRIPTOR` | The applicant descriptor to sort by.<br/> <br/> It should be either `name` or `phone` or `email` or `position` or `score` or `status`. | <ul><li>`name`</li><li>`score`</li></ul>                 |
+| `KEYWORD`    | The keyword to find in an applicant's name. <br/> <br/> It should be ???.                                                              | <ul><li>`Lee`</li><li>`Zhang Jordan`</li></ul>           |
+| `FILENAME`   | The file name of the csv file to import. <br/> <br/> It should end with the `.csv` suffix and should not be blank.                     | <ul><li>`demo.csv`</li><li>`applicantBook.csv`</li></ul> |
 
 
 <br>
@@ -432,7 +431,7 @@ Filters the applicant list by using a particular descriptor criterion.
 Format: `filter ???`
 * blahblah
 
-Examples:
+Example:
 * `filter n/iejdie` blahblah
 * `filter n/iejdie` blahblah
 
@@ -455,7 +454,7 @@ Format: `import f/FILENAME`
 * The fields of the columns must satisfy the [parameter constraints](#command-parameters-1) for `NAME`, `PHONE`, `EMAIL`, and `POSITION` respectively.
 * A sample csv file can be found [here](demo.csv).
 
-Examples:
+Example:
 * `import f/demo.csv`
 
 <br>
@@ -515,6 +514,7 @@ Staff-Snap applicant data are saved automatically as a [JSON](#glossary) file `[
 <br>
 
 ---
+<br>
 
 <a name="glossary"></a>
 ## Glossary
