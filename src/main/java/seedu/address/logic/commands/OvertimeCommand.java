@@ -75,7 +75,7 @@ public class OvertimeCommand extends Command {
         return new Employee(employeeToEdit.getName(), employeeToEdit.getPosition(),
                 employeeToEdit.getId(), employeeToEdit.getPhone(), employeeToEdit.getEmail(),
                 employeeToEdit.getSalary(), employeeToEdit.getDepartments(), updatedOvertimeHours,
-                employeeToEdit.getLeaveList());
+                employeeToEdit.getLeaveList(), employeeToEdit.getRemarkList());
     }
 
     private OvertimeHours updateOvertimeHours(OvertimeHours overtimeHours) throws CommandException {

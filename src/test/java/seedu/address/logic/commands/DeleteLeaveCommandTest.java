@@ -44,6 +44,7 @@ class DeleteLeaveCommandTest {
                 .withSalary(BOB.getSalary().value)
                 .withOvertimeHours(BOB.getOvertimeHours().value)
                 .withLeaveList(editedLeaveList.leaveList)
+                .withRemarkList(BOB.getRemarkList().remarkList)
                 .build();
         String expectedMessage = String.format(MESSAGE_SUCCESS, Messages.formatLeaves(editedEmployee));
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());

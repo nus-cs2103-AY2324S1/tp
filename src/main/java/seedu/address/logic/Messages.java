@@ -87,4 +87,19 @@ public class Messages {
         return builder.toString();
     }
 
+    /**
+     * Formats the Remarks of {@code employee} for display to the user.
+     */
+    public static String formatRemarks(Employee employee) {
+        final StringBuilder builder = new StringBuilder();
+        builder.append(employee.getName())
+                .append("; Position: ")
+                .append(employee.getPosition())
+                .append("; Id: ")
+                .append(employee.getId())
+                .append("; \nRemarks: \n")
+                .append(employee.getRemarkList().toString());
+        return builder.toString();
+    }
+
 }

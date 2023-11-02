@@ -21,6 +21,8 @@ import seedu.address.model.employee.OvertimeHours;
 import seedu.address.model.employee.Phone;
 import seedu.address.model.employee.Position;
 import seedu.address.model.employee.Salary;
+import seedu.address.model.remark.Remark;
+import seedu.address.model.remark.RemarkList;
 
 /**
  * Jackson-friendly version of {@link Employee}.
@@ -38,6 +40,7 @@ class JsonAdaptedEmployee {
     private final String salary;
     private final int overtimeHours;
     private final List<JsonAdaptedLeave> leaveList = new ArrayList<>();
+    private final List<JsonAdaptedRemark> remarkList = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedEmployee} with the given employee details.
@@ -47,7 +50,8 @@ class JsonAdaptedEmployee {
             @JsonProperty("id") String id, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("departments") List<JsonAdaptedDepartment> departments,
             @JsonProperty("salary") String salary, @JsonProperty("overtime") int overtimeHours,
-                               @JsonProperty("leaves") List<JsonAdaptedLeave> leaveList) {
+            @JsonProperty("leaves") List<JsonAdaptedLeave> leaveList,
+            @JsonProperty("remarks") List<JsonAdaptedRemark> remarkList) {
         this.name = name;
         this.position = position;
         this.id = id;
@@ -60,6 +64,9 @@ class JsonAdaptedEmployee {
         this.overtimeHours = overtimeHours;
         if (leaveList != null) {
             this.leaveList.addAll(leaveList);
+        }
+        if (remarkList != null) {
+            this.remarkList.addAll(remarkList);
         }
     }
 
@@ -79,6 +86,9 @@ class JsonAdaptedEmployee {
         overtimeHours = source.getOvertimeHours().value;
         leaveList.addAll(source.getLeaveList().leaveList.stream()
                 .map(JsonAdaptedLeave::new)
+                .collect(Collectors.toList()));
+        remarkList.addAll(source.getRemarkList().remarkList.stream()
+                .map(JsonAdaptedRemark::new)
                 .collect(Collectors.toList()));
     }
 
@@ -159,7 +169,16 @@ class JsonAdaptedEmployee {
         }
         final LeaveList modelLeaveList = new LeaveList(employeeLeaves);
 
+        final ArrayList<Remark> employeeRemarks = new ArrayList<>();
+        for (JsonAdaptedRemark remark : remarkList) {
+            if (!Remark.isValidRemark(remark.toModelType().toString())) {
+                throw new IllegalValueException(Remark.MESSAGE_CONSTRAINTS);
+            }
+            employeeRemarks.add(remark.toModelType());
+        }
+        final RemarkList modelRemarkList = new RemarkList(employeeRemarks);
+
         return new Employee(modelName, modelPosition, modelId, modelPhone,
-                modelEmail, modelSalary, modelDepartments, modelOvertimeHours, modelLeaveList);
+                modelEmail, modelSalary, modelDepartments, modelOvertimeHours, modelLeaveList, modelRemarkList);
     }
 }

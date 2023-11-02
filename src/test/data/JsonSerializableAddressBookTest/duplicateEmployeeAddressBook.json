@@ -10,7 +10,8 @@
         "Management"
       ],
       "salary": "14000",
-      "leaveList": [ ]
+      "leaveList": [ ],
+      "remarkList": [ ]
     },
     {
       "name": "Alice Pauline",
@@ -19,7 +20,8 @@
       "phone": "94351253",
       "email": "pauline@example.com",
       "salary": "14000",
-      "leaveList": [ ]
+      "leaveList": [ ],
+      "remarkList": [ ]
     }
   ]
 }

@@ -6,18 +6,17 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_DEPARTMENT_FINA
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DEPARTMENT_IT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ID_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_LEAVELIST_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_OVERTIME_HOURS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_POSITION_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_REMARKLIST_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_SALARY_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.testutil.TypicalEmployees.AMY;
 import static seedu.address.testutil.TypicalEmployees.BOB;
 import static seedu.address.testutil.TypicalEmployees.getTypicalAddressBook;
-
-import java.time.LocalDate;
 
 import org.junit.jupiter.api.Test;
 
@@ -27,20 +26,19 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.employee.Employee;
-import seedu.address.model.employee.Leave;
-import seedu.address.model.employee.LeaveList;
+import seedu.address.model.remark.Remark;
+import seedu.address.model.remark.RemarkList;
 import seedu.address.testutil.EmployeeBuilder;
 
-public class EditLeaveCommandTest {
+public class AddRemarkCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
-    void execute_oldLeaveExist_success() {
-        LocalDate oldLeaveDate = BOB.getLeaveList().getLeave(0).leaveDate;
-        LocalDate newLeaveDate = LocalDate.of(2023, 12, 12);
-        EditLeaveCommand editLeaveCommand = new EditLeaveCommand(BOB.getId(), oldLeaveDate, newLeaveDate);
-        LeaveList editedLeaveList = new LeaveList();
-        editedLeaveList.addLeave(new Leave(newLeaveDate)); // since bob only has one leave
+    void execute_remarkNotExist_success() {
+        Remark remark = new Remark("good worker");
+        AddRemarkCommand addRemarkCommand = new AddRemarkCommand(BOB.getId(), remark);
+        RemarkList editedRemarkList = new RemarkList(BOB.getRemarkList().remarkList);
+        editedRemarkList.addRemark(remark);
         Employee editedEmployee = new EmployeeBuilder().withName(VALID_NAME_BOB)
                 .withPosition(VALID_POSITION_BOB)
                 .withId(VALID_ID_BOB)
@@ -49,52 +47,47 @@ public class EditLeaveCommandTest {
                 .withDepartments(VALID_DEPARTMENT_FINANCE, VALID_DEPARTMENT_IT)
                 .withSalary(VALID_SALARY_BOB)
                 .withOvertimeHours(VALID_OVERTIME_HOURS_BOB)
-                .withLeaveList(editedLeaveList.leaveList)
-                .withRemarkList(VALID_REMARKLIST_BOB)
+                .withLeaveList(VALID_LEAVELIST_BOB)
+                .withRemarkList(editedRemarkList.remarkList)
                 .build();
-        String expectedMessage = String.format(EditLeaveCommand.MESSAGE_SUCCESS, Messages.formatLeaves(editedEmployee));
+        String expectedMessage = String.format(AddRemarkCommand.MESSAGE_SUCCESS,
+                Messages.formatRemarks(editedEmployee));
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
 
         model.addEmployee(BOB);
         expectedModel.addEmployee(editedEmployee);
 
-        assertCommandSuccess(editLeaveCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(addRemarkCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
-    void execute_oldLeaveNotExist_failure() {
-        LocalDate oldLeaveDate = BOB.getLeaveList().getLeave(0).leaveDate.plusDays(2);
-        LocalDate newLeaveDate = LocalDate.of(2023, 12, 12);
-        EditLeaveCommand editLeaveCommand = new EditLeaveCommand(BOB.getId(), oldLeaveDate, newLeaveDate);
+    void execute_remarkExist_failure() {
+        Remark remark = BOB.getRemarkList().getRemark(0);
+        AddRemarkCommand addRemarkCommand = new AddRemarkCommand(BOB.getId(), remark);
+
         model.addEmployee(BOB);
-        assertCommandFailure(editLeaveCommand, model, EditLeaveCommand.MESSAGE_NON_EXISTENT_LEAVE);
+
+        assertCommandFailure(addRemarkCommand, model, AddRemarkCommand.MESSAGE_DUPLICATE_REMARK);
     }
 
     @Test
-    void execute_oldLeaveNewLeaveSame_failure() {
-        // also tests for if new leave already exists (since to reach this stage, old leave has to exist)
-        LocalDate oldLeaveDate = BOB.getLeaveList().getLeave(0).leaveDate;
-        EditLeaveCommand editLeaveCommand = new EditLeaveCommand(BOB.getId(), oldLeaveDate, oldLeaveDate);
-        model.addEmployee(BOB);
-        assertCommandFailure(editLeaveCommand, model, EditLeaveCommand.MESSAGE_DUPLICATE_LEAVE);
-    }
+    void equals() {
+        Remark remark = new Remark("good worker");
+        Remark remarkUppercase = new Remark("GOOD WORKER");
 
-    @Test
-    public void equals() {
-        LocalDate oldLeaveDate = BOB.getLeaveList().getLeave(0).leaveDate;
-
-        EditLeaveCommand firstCommand = new EditLeaveCommand(BOB.getId(), oldLeaveDate,
-                oldLeaveDate.plusDays(2));
-        EditLeaveCommand secondCommand = new EditLeaveCommand(BOB.getId(), oldLeaveDate,
-                oldLeaveDate.plusDays(5));
+        AddRemarkCommand firstCommand = new AddRemarkCommand(BOB.getId(), remark);
+        AddRemarkCommand secondCommand = new AddRemarkCommand(AMY.getId(), remark);
+        AddRemarkCommand thirdCommand = new AddRemarkCommand(BOB.getId(), remarkUppercase);
 
         // same object -> returns true
         assertTrue(firstCommand.equals(firstCommand));
 
         // same values -> returns true
-        EditLeaveCommand copyCommand = new EditLeaveCommand(BOB.getId(), oldLeaveDate,
-                oldLeaveDate.plusDays(2));
+        AddRemarkCommand copyCommand = new AddRemarkCommand(BOB.getId(), remark);
         assertTrue(firstCommand.equals(copyCommand));
+
+        // different case -> returns true
+        assertTrue(firstCommand.equals(thirdCommand));
 
         // different types -> returns false
         assertFalse(firstCommand.equals(1));
@@ -102,7 +95,7 @@ public class EditLeaveCommandTest {
         // null -> returns false
         assertFalse(firstCommand.equals(null));
 
-        // different values -> return false
+        // different employee -> false
         assertFalse(firstCommand.equals(secondCommand));
     }
 }
