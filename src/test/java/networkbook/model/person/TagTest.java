@@ -35,6 +35,7 @@ public class TagTest {
     @Test
     public void isValidTagName() {
         assertFalse(Tag.isValidTagName("")); // empty tag
+        assertFalse(Tag.isValidTagName("   ")); // only white space
         assertFalse(Tag.isValidTagName("/talk")); // disallowed character "/"
 
         assertTrue(Tag.isValidTagName("fe892j")); // alphanumeric characters
