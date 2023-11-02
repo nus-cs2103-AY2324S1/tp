@@ -52,7 +52,7 @@ public class ViewEventCommand extends Command {
         Name eventName = event.getName();
 
 
-        Collection<Name> memberNameCollection = model.updateEventHoursAndRemark(eventName);
+        Collection<Name> memberNameCollection = model.updateMemberHoursAndRemark(eventName);
 
         MemberListPanel.setDisplayMemberHoursAndRemark(true);
         EventListPanel.setDisplayEventHoursAndRemark(false);

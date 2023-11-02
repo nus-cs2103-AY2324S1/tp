@@ -104,7 +104,7 @@ public class ViewMemberCommandTest {
         Member member = lastShownMemberList.get(targetIndex.getZeroBased());
         Name memberName = member.getName();
 
-        model.updateMemberHoursAndRemark(memberName);
+        model.updateEventHoursAndRemark(memberName);
         return member;
     }
 }
