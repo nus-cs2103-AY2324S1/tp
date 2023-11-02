@@ -775,6 +775,7 @@ Use case ends.
 | tg/    | Telegram handle of contact     | `tg/@johndoe`                    |
 | e2/    | Secondary email of contact     | `e2/johndoe@hotmail.com`         |
 | b/     | Birthday of contact            | `b/23/10`                        |
+| path/  | Path to the photo of contact   | `path/D:/images/john-doe.png`    |
 
 --------------------------------------------------------------------------------------------------------------------
 
