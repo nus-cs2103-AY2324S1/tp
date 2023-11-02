@@ -299,24 +299,31 @@ Refer to [properties of contact](#properties-of-contact) on the accepted formats
 
 ###  Update contact's photo: `updatephoto`
 
-After adding a new contact, there is a default photo coming with it. With `updatephoto` command, CampusConnect gives you the freedom to choose how each contact looks like in the address book.
+If you are afraid that you may forget who the saved contact is in CampusConnect, our application enables you to update the photo of your contact so that you can visually remember and recognize them!
 
 This feature involves the command: `updatephoto`, which updates the photo of an existing contact.
 
-Format: `updatephoto PERSON_INDEX path/NEW_PHOTO_PATH`
+Format: `updatephoto PERSON_INDEX [path/NEW_PHOTO_PATH]`
+
+You can get the path to the photo by using the following steps: 
+  * Right click on the photo that you want to use.
+  * Choose the option: Copy as path (on Windows) or Copy "name_of_file" as Pathname (on MacOS).
+  * After pasting the copied path in CampusConnect, remember to remove the double quotation marks!
+
+  ![photo_path](images/photopath.png)
 
 <box type="info" icon=":fa-solid-magnifying-glass:">
 
 Below are some examples on how to use the command:
-* `updatephoto 1 path/C:/photos/new_johndoe.jpg`: Updates the photo for the first person in the address book with a new image from the specified path.
-* `updatephoto 2 path/D:/images/new_betsycrowe.png`: Updates the photo for the second person in the address book with a new image from the specified path.
+* `updatephoto 1 path/C:/photos/new_johndoe.jpg`: Updates the photo to the contact at index 1 with a new image from the specified path.
+* `updatephoto 2 path/D:/images/new_betsycrowe.png`: Updates the photo to the contact at index 2 with a new image from the specified path.
 
 </box>  
 
 <box type="warning">
 
-* You should provide a positive integer that must not exceed the number of contacts currently listed in CampusConnect for `PERSON_INDEX`.
-* You are required to input the absolute path to the photo for this command. If you use an invalid path, a default photo will be chosen for your specified contact.
+* You should provide a positive integer that is smaller than or equal to the number of contacts currently displayed in CampusConnect for `PERSON_INDEX`. 
+
 </box>
 
 ###  List all contacts: `list`
