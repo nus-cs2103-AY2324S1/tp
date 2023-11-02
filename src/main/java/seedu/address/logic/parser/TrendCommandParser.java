@@ -23,12 +23,13 @@ public class TrendCommandParser implements Parser<TrendCommand> {
      */
     public TrendCommand parse(String args) throws ParseException {
         requireNonNull(args);
-        if (args.isEmpty() || !args.trim().matches("^\\d{4}$")) {
+        args = args.trim();
+        if (args.isEmpty() || !args.matches("^y/\\d{4}$")) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, TrendCommand.MESSAGE_USAGE)
             );
         }
 
-        return new TrendCommand(args.trim());
+        return new TrendCommand(args.substring(2));
     }
 }
