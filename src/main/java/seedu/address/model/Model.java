@@ -119,6 +119,14 @@ public interface Model {
     void deleteBand(Band bandToDelete);
 
     /**
+     * Replaces the given band {@code target} with {@code editedBand}.
+     * {@code target} must exist in the address book.
+     * The band identity of {@code editedBand} must not be the same as another existing band
+     * in the address book.
+     */
+    void setBand(Band target, Band editedBand);
+
+    /**
      * Returns true if a band already contains the musician.
      * {@code musician} must not already exist in the band.
      */

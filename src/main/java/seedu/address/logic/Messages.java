@@ -1,5 +1,6 @@
 package seedu.address.logic;
 
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -7,6 +8,7 @@ import java.util.stream.Stream;
 import seedu.address.logic.parser.Prefix;
 import seedu.address.model.band.Band;
 import seedu.address.model.musician.Musician;
+import seedu.address.model.musician.Name;
 
 /**
  * Container for user visible messages.
@@ -68,6 +70,19 @@ public class Messages {
                 .append(band.getName())
                 .append("; Musician Name: ")
                 .append(musician.getName());
+        return builder.toString();
+    }
+
+    /**
+     * Formats the {@code band} for display to the user.
+     */
+    public static String format(Band band, List<Musician> musicians) {
+        final StringBuilder builder = new StringBuilder();
+        builder.append("Band Name: ")
+                .append(band.getName())
+                .append("; Musician Names: ")
+                .append(musicians.stream().map(Musician::getName)
+                        .map(Name::toString).collect(Collectors.joining(", ")));
         return builder.toString();
     }
 

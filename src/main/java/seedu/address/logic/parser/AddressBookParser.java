@@ -12,6 +12,7 @@ import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.band.AddBandCommand;
 import seedu.address.logic.commands.band.AddMusicianToBandCommand;
 import seedu.address.logic.commands.band.DeleteBandCommand;
+import seedu.address.logic.commands.band.EditBandCommand;
 import seedu.address.logic.commands.band.FindBandCommand;
 import seedu.address.logic.commands.band.RemoveMusicianFromBandCommand;
 import seedu.address.logic.commands.general.ClearCommand;
@@ -26,6 +27,8 @@ import seedu.address.logic.parser.band.AddBandCommandParser;
 import seedu.address.logic.parser.band.AddMusicianToBandCommandParser;
 import seedu.address.logic.parser.band.DeleteBandCommandParser;
 import seedu.address.logic.parser.band.RemoveMusicianFromBandCommandParser;
+import seedu.address.logic.parser.band.EditBandCommandParser;
+import seedu.address.logic.parser.band.FindBandCommandParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.logic.parser.musician.AddCommandParser;
 import seedu.address.logic.parser.musician.DeleteCommandParser;
@@ -104,6 +107,9 @@ public class AddressBookParser {
 
         case DeleteBandCommand.COMMAND_WORD:
             return new DeleteBandCommandParser().parse(arguments);
+
+        case EditBandCommand.COMMAND_WORD:
+            return new EditBandCommandParser().parse(arguments);
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);

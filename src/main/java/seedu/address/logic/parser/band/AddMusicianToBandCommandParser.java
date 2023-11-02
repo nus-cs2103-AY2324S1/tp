@@ -4,6 +4,8 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_BINDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MINDEX;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.stream.Stream;
 
 import seedu.address.commons.core.index.Index;
@@ -33,8 +35,11 @@ public class AddMusicianToBandCommandParser implements Parser<AddMusicianToBandC
         }
         try {
             Index bandIndex = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_BINDEX).get());
-            Index musicianIndex = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_MINDEX).get());
-            return new AddMusicianToBandCommand(bandIndex, musicianIndex);
+            List<Index> musicianIndices = new ArrayList<>();
+            for (String indexString : argMultimap.getAllValues(PREFIX_MINDEX)) {
+                musicianIndices.add(ParserUtil.parseIndex(indexString));
+            }
+            return new AddMusicianToBandCommand(bandIndex, musicianIndices);
         } catch (ParseException pe) {
             throw new ParseException(
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddMusicianToBandCommand.MESSAGE_USAGE), pe);
