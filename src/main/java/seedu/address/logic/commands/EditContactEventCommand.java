@@ -259,10 +259,11 @@ public class EditContactEventCommand extends Command {
 
         @Override
         public String toString() {
-            return new ToStringBuilder(this)
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+            return new ToStringBuilder("")
                     .add("eventDescription", eventDescription)
-                    .add("start", eventPeriod.getStart())
-                    .add("end", eventPeriod.getEnd())
+                    .add("start", formatter.format(eventPeriod.getStart()))
+                    .add("end", formatter.format(eventPeriod.getEnd()))
                     .toString();
         }
     }

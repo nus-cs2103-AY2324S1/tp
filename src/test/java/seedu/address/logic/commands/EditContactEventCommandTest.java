@@ -1,10 +1,13 @@
 package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalEvents.getTypicalCalendar;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_EVENT;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INVALID_INDEX;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.time.LocalDateTime;
@@ -19,9 +22,12 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.event.Event;
 import seedu.address.model.event.EventDescription;
+import seedu.address.model.event.EventPeriod;
 import seedu.address.model.person.Person;
 import seedu.address.model.task.TaskManager;
+import seedu.address.testutil.EditEventDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
 
 public class EditContactEventCommandTest {
@@ -30,34 +36,16 @@ public class EditContactEventCommandTest {
             new UserPrefs());
 
     @Test
-    public void execute_someFieldsSpecifiedUnfilteredList_success() {
-        Person editedPerson = new PersonBuilder().withCalendar().build();
-        EventDescription expectedEventDescription = new EventDescription("Eat Tacos");
-        EditContactEventCommand.EditEventDescriptor descriptor = new EditContactEventCommand.EditEventDescriptor();
-        descriptor.setEventDescription(expectedEventDescription);
-        ArrayList<Index> indexArrayList = new ArrayList<>();
-        indexArrayList.add(INDEX_FIRST_PERSON);
-        indexArrayList.add(INDEX_FIRST_EVENT);
-        EditContactEventCommand editContactEventCommand = new EditContactEventCommand(indexArrayList, descriptor);
-
-        String expectedMessage = String.format(EditContactEventCommand.MESSAGE_EDIT_PERSON_SUCCESS,
-                Messages.format(editedPerson));
-
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()),
-                model.getCalendar(), model.getTaskManager(), new UserPrefs());
-        expectedModel.setPerson(model.getFilteredPersonList().get(0), editedPerson);
-
-        assertTrue(true);
-    }
-
-    @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
-        Person editedPerson = new PersonBuilder().withCalendar().build();
+        Person editedPerson = new PersonBuilder().withName("Alice Pauline").withPhone("94351253")
+                .withEmail("alice@example.com").withTags("friends").withCalendar().build();
         EventDescription expectedEventDescription = new EventDescription("Eat Tacos");
         EditContactEventCommand.EditEventDescriptor descriptor = new EditContactEventCommand.EditEventDescriptor();
         descriptor.setEventDescription(expectedEventDescription);
-        descriptor.setStart("2023-10-10 10:00");
-        descriptor.setEnd("2023-10-10 12:00");
+        String startTime = "2023-10-10 10:00";
+        String endTime = "2023-10-10 12:00";
+        descriptor.setStart(startTime);
+        descriptor.setEnd(endTime);
         ArrayList<Index> indexArrayList = new ArrayList<>();
         indexArrayList.add(INDEX_FIRST_PERSON);
         indexArrayList.add(INDEX_FIRST_EVENT);
@@ -66,11 +54,17 @@ public class EditContactEventCommandTest {
         String expectedMessage = String.format(EditContactEventCommand.MESSAGE_EDIT_PERSON_SUCCESS,
                 Messages.format(editedPerson));
 
+        EventDescription newDescription = new EventDescription("Nap");
+        EventPeriod newEventPeriod = new EventPeriod(startTime, endTime);
+        Event newEvent = new Event(newDescription, newEventPeriod);
+
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()),
                 model.getCalendar(), model.getTaskManager(), new UserPrefs());
+        model.getAddressBook().getPersonList().get(INDEX_FIRST_PERSON.getOneBased()).getCalendar()
+                .getEventList().add(newEvent);
         expectedModel.setPerson(model.getFilteredPersonList().get(0), editedPerson);
 
-        assertTrue(true);
+        assertCommandSuccess(editContactEventCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
@@ -91,6 +85,82 @@ public class EditContactEventCommandTest {
         assertEquals(editEventDescriptor.getStart().get(), startDateTime);
         assertEquals(editEventDescriptor.getEnd().get(), endDateTime);
         assertEquals(editEventDescriptor.getEventDescription().get().getDescription(), desc);
+    }
+
+    @Test
+    public void execute_eventIndexOutOfBoundsEvent_failure() {
+        EditContactEventCommand.EditEventDescriptor descriptor = new EditEventDescriptorBuilder().build();
+        ArrayList<Index> indexArrayList = new ArrayList<>();
+        indexArrayList.add(INDEX_FIRST_PERSON);
+        indexArrayList.add(INVALID_INDEX);
+        EditContactEventCommand editContactEventCommand = new EditContactEventCommand(indexArrayList, descriptor);
+
+        assertCommandFailure(editContactEventCommand, model, EditContactEventCommand.INVALID_EVENT_INDEX);
+    }
+
+    @Test
+    public void execute_personIndexOutOfBoundsEvent_failure() {
+        EditContactEventCommand.EditEventDescriptor descriptor = new EditEventDescriptorBuilder().build();
+        ArrayList<Index> indexArrayList = new ArrayList<>();
+        indexArrayList.add(INVALID_INDEX);
+        indexArrayList.add(INDEX_FIRST_EVENT);
+        EditContactEventCommand editContactEventCommand = new EditContactEventCommand(indexArrayList, descriptor);
+
+        assertCommandFailure(editContactEventCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+    }
+
+    @Test
+    public void execute_editEventDescriptorEquals_success() {
+        String startTimeString = "2023-10-10 10:10";
+        String endTimeString = "2023-11-11 11:11";
+        EditContactEventCommand.EditEventDescriptor descriptor1 = new EditEventDescriptorBuilder()
+                .withEventDescription("Sleep").withEventStartTime(startTimeString)
+                .withEventEndTime(endTimeString).build();
+        EditContactEventCommand.EditEventDescriptor descriptor2 = new EditEventDescriptorBuilder()
+                .withEventDescription("Sleep").withEventStartTime(startTimeString)
+                .withEventEndTime(endTimeString).build();
+        assertEquals(descriptor1, descriptor2);
+    }
+
+    @Test
+    public void execute_editEventDescriptorNotEquals_failure() {
+        String startTimeString = "2023-10-10 10:10";
+        String endTimeString = "2023-11-11 11:11";
+        EditContactEventCommand.EditEventDescriptor descriptor1 = new EditEventDescriptorBuilder()
+                .withEventDescription("Nap").withEventStartTime(startTimeString)
+                .withEventEndTime(endTimeString).build();
+        EditContactEventCommand.EditEventDescriptor descriptor2 = new EditEventDescriptorBuilder()
+                .withEventDescription("Sleep").withEventStartTime(startTimeString)
+                .withEventEndTime(endTimeString).build();
+        assertNotEquals(descriptor1, descriptor2);
+    }
+
+    @Test
+    public void execute_editEventDescriptorNotEquals_failure2() {
+        String desc = "Nap";
+        String startTimeString1 = "2023-10-10 10:10";
+        String endTimeString1 = "2023-11-11 11:11";
+        String startTimeString2 = "2023-10-11 10:10";
+        EditContactEventCommand.EditEventDescriptor descriptor1 = new EditEventDescriptorBuilder()
+                .withEventDescription(desc).withEventStartTime(startTimeString1)
+                .withEventEndTime(endTimeString1).build();
+        EditContactEventCommand.EditEventDescriptor descriptor2 = new EditEventDescriptorBuilder()
+                .withEventDescription(desc).withEventStartTime(startTimeString2)
+                .withEventEndTime(endTimeString1).build();
+        assertNotEquals(descriptor1, descriptor2);
+    }
+
+    @Test
+    public void execute_editEventDescriptorToString_success() {
+        String desc = "Nap";
+        String startTimeString1 = "2023-10-10 10:10";
+        String endTimeString1 = "2023-11-11 11:11";
+        EditContactEventCommand.EditEventDescriptor descriptor1 = new EditContactEventCommand.EditEventDescriptor();
+        descriptor1.setEventDescription(new EventDescription(desc));
+        descriptor1.setEventPeriod(new EventPeriod(startTimeString1, endTimeString1));
+        String expected = "{" + "eventDescription=" + desc + ", start=" + startTimeString1
+                + ", end=" + endTimeString1 + "}";
+        assertEquals(descriptor1.toString(), expected);
     }
 
 }
