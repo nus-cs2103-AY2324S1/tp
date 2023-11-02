@@ -36,7 +36,7 @@ public class FilterCommandParser implements Parser<FilterCommand> {
                 MacroPredicate<Person> predicate = new MacroPredicate<>();
                 Name name = parseField("name", userInput, Name::of);
                 if (name != null) {
-                    predicate.addPredicate(person -> person.getName().equals(name));
+                    predicate.addPredicate(person -> person.getName().contains(name));
                 }
                 Subjects subjects = parseField("subject", userInput, Subjects::of);
                 if (subjects != null) {
@@ -75,7 +75,7 @@ public class FilterCommandParser implements Parser<FilterCommand> {
                 MacroPredicate<Lesson> predicate = new MacroPredicate<>();
                 Name name = parseField("name", userInput, Name::of);
                 if (name != null) {
-                    predicate.addPredicate(lesson -> lesson.getName().equals(name));
+                    predicate.addPredicate(lesson -> lesson.getName().contains(name));
                 }
                 Subjects subjects = parseField("subject", userInput, Subjects::of);
 
