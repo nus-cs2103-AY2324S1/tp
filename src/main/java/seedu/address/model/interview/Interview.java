@@ -91,8 +91,8 @@ public class Interview {
             return false;
         }
 
-        Time otherStartTime = otherInterview.getStartTime();
-        Time otherEndTime = otherInterview.getEndTime();
+        Time otherStartTime = otherInterview.getInterviewStartTime();
+        Time otherEndTime = otherInterview.getInterviewEndTime();
 
         return (startTime.isBetween(otherStartTime, otherEndTime) || startTime.equals(otherStartTime))
                 || (endTime.isBetween(otherStartTime, otherEndTime) || endTime.equals(otherEndTime))
@@ -120,14 +120,6 @@ public class Interview {
     }
 
     public Time getInterviewEndTime() {
-        return endTime;
-    }
-
-    public Time getStartTime() {
-        return startTime;
-    }
-
-    public Time getEndTime() {
         return endTime;
     }
 

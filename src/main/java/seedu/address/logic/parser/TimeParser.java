@@ -2,7 +2,6 @@ package seedu.address.logic.parser;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
@@ -76,7 +75,6 @@ public class TimeParser {
     };
 
     protected static final String MISSING_TIME_ERROR_MESSAGE = "Please enter an interview time!";
-    protected static final String PAST_DATE_ERROR_MESSAGE = "Input date cannot be in the past!";
 
     /**
      * Converts the string date into a LocalDatetime object. Only accepts valid time Strings
@@ -135,11 +133,6 @@ public class TimeParser {
             }
             // exit normally if the user does not need a time
             break;
-        }
-        // guard clause: the given date is before today's date even after parsing
-        if ((!dateOnly && temp.isBefore(LocalDateTime.now()))
-                || (dateOnly && temp.toLocalDate().isBefore(LocalDate.now()))) {
-            throw new seedu.address.logic.parser.exceptions.ParseException(PAST_DATE_ERROR_MESSAGE);
         }
         return temp;
     }

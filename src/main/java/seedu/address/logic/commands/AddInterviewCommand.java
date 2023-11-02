@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.address.logic.Messages.MESSAGE_PAST_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_APPLICANT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_END_TIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_JOB_ROLE;
@@ -94,6 +95,10 @@ public class AddInterviewCommand extends Command {
 
         if (!toAdd.isValid()) {
             throw new CommandException(MESSAGE_INVALID_TIME);
+        }
+
+        if (toAdd.getInterviewStartTime().isPast()) {
+            throw new CommandException(MESSAGE_PAST_DATE);
         }
 
         if (model.hasInterview(toAdd)) {
