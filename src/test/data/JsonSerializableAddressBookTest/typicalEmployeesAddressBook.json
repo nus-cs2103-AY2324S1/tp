@@ -32,7 +32,7 @@
       "salary": "5800",
       "departments": [],
       "overtime": 0,
-      "leaveList": [ ]
+      "leaveList": [ "2023-12-12" ]
     },
     {
       "name": "Daniel Meier",

@@ -51,6 +51,9 @@ public class CommandTestUtil {
     public static final ArrayList<Leave> VALID_LEAVELIST_AMY = new ArrayList<>();
     public static final ArrayList<Leave> VALID_LEAVELIST_BOB = new ArrayList<>(
             List.of(new Leave(LocalDate.parse("2023-11-01", DateTimeFormatter.ISO_LOCAL_DATE))));
+    public static final ArrayList<Leave> VALID_LEAVELIST_CARL = new ArrayList<>(List.of(new Leave(
+            LocalDate.of(2023, 12, 12)))
+    );
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
     public static final String POSITION_DESC_AMY = " " + PREFIX_POSITION + VALID_POSITION_AMY;

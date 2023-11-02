@@ -8,6 +8,8 @@ import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_AMOUNT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FROM;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NEW;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_OLD;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ON;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_OPERATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TO;
@@ -30,6 +32,7 @@ import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.DeleteLeaveCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditEmployeeDescriptor;
+import seedu.address.logic.commands.EditLeaveCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
@@ -133,6 +136,17 @@ public class AddressBookParserTest {
         LocalDate startDate = LocalDate.parse("2023-10-12", DateTimeFormatter.ISO_LOCAL_DATE);
         LocalDate endDate = LocalDate.parse("2023-10-15", DateTimeFormatter.ISO_LOCAL_DATE);
         assertEquals(new DeleteLeaveCommand(id, startDate, endDate), command);
+    }
+
+    @Test
+    public void parseCommand_editLeave() throws Exception {
+        EditLeaveCommand command = (EditLeaveCommand) parser.parseCommand(
+                EditLeaveCommand.COMMAND_WORD + " " + PREFIX_ID + "EID1234-5678 "
+                        + PREFIX_OLD + "2023-10-12 " + PREFIX_NEW + "2023-10-15");
+        Id id = new Id("EID1234-5678");
+        LocalDate oldDate = LocalDate.parse("2023-10-12", DateTimeFormatter.ISO_LOCAL_DATE);
+        LocalDate newDate = LocalDate.parse("2023-10-15", DateTimeFormatter.ISO_LOCAL_DATE);
+        assertEquals(new EditLeaveCommand(id, oldDate, newDate), command);
     }
 
     @Test

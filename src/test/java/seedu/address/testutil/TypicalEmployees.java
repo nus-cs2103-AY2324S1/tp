@@ -8,6 +8,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_ID_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ID_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_LEAVELIST_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_LEAVELIST_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_LEAVELIST_CARL;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_OVERTIME_HOURS_AMY;
@@ -58,7 +59,7 @@ public class TypicalEmployees {
                 .withEmail("heinz@example.com")
                 .withSalary("5800")
                 .withOvertimeHours(DEFAULT_OVERTIME_HOURS)
-                .withLeaveList(DEFAULT_LEAVELIST).build();
+                .withLeaveList(VALID_LEAVELIST_CARL).build();
     public static final Employee DANIEL = new EmployeeBuilder().withName("Daniel Meier")
                 .withPosition("Tester")
                 .withId("EID4321-5678")
