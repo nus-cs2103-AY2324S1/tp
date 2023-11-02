@@ -167,6 +167,12 @@ public class ManageHrParserTest {
     }
 
     @Test
+    public void checkCommand_filter() throws Exception {
+        Pair<String, String> command = parser.checkCommandUsage(FilterCommand.COMMAND_WORD);
+        assertEquals(command, new Pair<String, String>(FilterCommand.MESSAGE_USAGE, FilterCommand.MESSAGE_EXAMPLE));
+    }
+
+    @Test
     public void checkCommand_unrecognisedInput_throwsParseException() {
         assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE), ()
                 -> parser.checkCommandUsage(""));
