@@ -32,8 +32,12 @@ Any feedback, including errors, will appear directly below the input box.
 
 Easily add a new contact to your list with the `add` command.
 
-Note that contacts are identified by their name in ConText, and contacts with the same name are considered the same contact. 
+Note that contacts are identified by their name in ConText, and contacts with exactly the same name (including casing) are considered the same contact. 
 Hence, you will not be able to add a new contact with the same name as an existing contact.
+
+For example, if you already have a contact with name "John Doe", you will not be able to add another contact with the same name "John Doe".
+However, you may add another contact with name "John Alex Doe", or "John doe", or you may first modify the name of the existing contact. 
+
 Should you need to make changes to an existing contact, use the `edit` command as explained below. 
 
 **Format:**
