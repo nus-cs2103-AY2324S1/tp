@@ -72,9 +72,10 @@ public class EditMemberCommandTest {
                     expectedModel.setEnrolment(enrolment, editedEnrolment);
                 }
             }
-        }
-        expectedModel.commit(commitMessage);
 
+        }
+
+        expectedModel.commit(commitMessage);
         assertCommandSuccess(editMemberCommand, model, expectedMessage, expectedModel);
     }
 
@@ -106,20 +107,18 @@ public class EditMemberCommandTest {
             expectedModel.updateFilteredEnrolmentList(new EnrolmentContainsMemberPredicate(prevName));
 
             List<Enrolment> enrolmentsToEditList = expectedModel.getFilteredEnrolmentList();
-            model.updateFilteredEnrolmentList(Model.PREDICATE_SHOW_ALL_ENROLMENTS);
             expectedModel.updateFilteredEnrolmentList(Model.PREDICATE_SHOW_ALL_ENROLMENTS);
 
             if (!enrolmentsToEditList.isEmpty()) {
                 for (Enrolment enrolment : enrolmentsToEditList) {
                     Enrolment editedEnrolment = new Enrolment(newName, enrolment.getEventName(),
                             enrolment.getHours(), enrolment.getRemark());
-                    model.setEnrolment(enrolment, editedEnrolment);
                     expectedModel.setEnrolment(enrolment, editedEnrolment);
                 }
             }
         }
-        expectedModel.commit(commitMessage);
 
+        expectedModel.commit(commitMessage);
         assertCommandSuccess(editMemberCommand, model, expectedMessage, expectedModel);
     }
 
@@ -164,14 +163,12 @@ public class EditMemberCommandTest {
             expectedModel.updateFilteredEnrolmentList(new EnrolmentContainsMemberPredicate(prevName));
 
             List<Enrolment> enrolmentsToEditList = expectedModel.getFilteredEnrolmentList();
-            model.updateFilteredEnrolmentList(Model.PREDICATE_SHOW_ALL_ENROLMENTS);
             expectedModel.updateFilteredEnrolmentList(Model.PREDICATE_SHOW_ALL_ENROLMENTS);
 
             if (!enrolmentsToEditList.isEmpty()) {
                 for (Enrolment enrolment : enrolmentsToEditList) {
                     Enrolment editedEnrolment = new Enrolment(newName, enrolment.getEventName(),
                             enrolment.getHours(), enrolment.getRemark());
-                    model.setEnrolment(enrolment, editedEnrolment);
                     expectedModel.setEnrolment(enrolment, editedEnrolment);
                 }
             }

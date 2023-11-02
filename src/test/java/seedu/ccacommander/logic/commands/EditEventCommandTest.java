@@ -94,7 +94,6 @@ public class EditEventCommandTest {
                 Messages.format(editedEvent));
 
         Model expectedModel = new ModelManager(new CcaCommander(model.getCcaCommander()), new UserPrefs());
-        model.setEvent(lastEvent, editedEvent);
         expectedModel.setEvent(lastEvent, editedEvent);
 
         Name prevName = lastEvent.getName();
@@ -103,13 +102,11 @@ public class EditEventCommandTest {
         if (!prevName.equals(newName)) {
             // update filtered enrolment list to contain only the enrolments that has event of previous name
             expectedModel.updateFilteredEnrolmentList(new EnrolmentContainsEventPredicate(prevName));
-            List<Enrolment> enrolmentsToEditList = model.getFilteredEnrolmentList();
-            model.updateFilteredEnrolmentList(Model.PREDICATE_SHOW_ALL_ENROLMENTS);
+            List<Enrolment> enrolmentsToEditList = expectedModel.getFilteredEnrolmentList();
             expectedModel.updateFilteredEnrolmentList(Model.PREDICATE_SHOW_ALL_ENROLMENTS);
             for (Enrolment enrolment : enrolmentsToEditList) {
                 Enrolment editedEnrolment = new Enrolment(enrolment.getMemberName(), newName,
                             enrolment.getHours(), enrolment.getRemark());
-                model.setEnrolment(enrolment, editedEnrolment);
                 expectedModel.setEnrolment(enrolment, editedEnrolment);
             }
 
@@ -158,13 +155,11 @@ public class EditEventCommandTest {
         if (!prevName.equals(newName)) {
             // update filtered enrolment list to contain only the enrolments that has event of previous name
             expectedModel.updateFilteredEnrolmentList(new EnrolmentContainsEventPredicate(prevName));
-            List<Enrolment> enrolmentsToEditList = model.getFilteredEnrolmentList();
-            model.updateFilteredEnrolmentList(Model.PREDICATE_SHOW_ALL_ENROLMENTS);
+            List<Enrolment> enrolmentsToEditList = expectedModel.getFilteredEnrolmentList();
             expectedModel.updateFilteredEnrolmentList(Model.PREDICATE_SHOW_ALL_ENROLMENTS);
             for (Enrolment enrolment : enrolmentsToEditList) {
                 Enrolment editedEnrolment = new Enrolment(enrolment.getMemberName(), newName,
                         enrolment.getHours(), enrolment.getRemark());
-                model.setEnrolment(enrolment, editedEnrolment);
                 expectedModel.setEnrolment(enrolment, editedEnrolment);
             }
 
