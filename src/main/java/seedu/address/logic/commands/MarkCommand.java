@@ -169,6 +169,9 @@ public class MarkCommand extends Command {
 
         Person employeeToMark = lastShownList.get(targetIndex.getZeroBased());
         Person markedEmployee = markEmployee(employeeToMark);
+        if (markedEmployee.getWorkingStatusToday() == AttendanceType.ON_LEAVE) {
+            throw new CommandException(MESSAGE_PERSON_ON_LEAVE);
+        }
 
         model.setPerson(employeeToMark, markedEmployee);
         return new CommandResult(

@@ -211,32 +211,80 @@ Output:
 
 
 
-### Adding leave to am employee : `addleave`
+### Adding leave to an employee : `addleave`
 
 **What it does**
 
-This feature allows users to add leave to an employee.
+This feature allows users to add leave(s) to an employee.
 
 **Command Format**
 
-`addleave INDEX /on DATE` or `addleave INDEX /from STARTDATE /to ENDDATE`
+`addleave INDEX /on DATE` or `addleave INDEX /from DATE /to DATE`
 
 * Adds leave to the employee specified by the `INDEX`, can be a single day of leave or multiple days of leave.
 * The `INDEX` refers to the index number shown in the displayed person list.
 * The `INDEX` **must be a positive integer**, and **must be within the range of the list**.
+* The `DATE` must be in `dd/MM/yyyy` format.
+* For adding in multiple days of leave, the second `DATE` must be after the first `DATE`.
 
 Examples:
-* `addleave 3 /on 01/01/2024` adds leave to the third person in the most recently displayed list.
+* `addleave 3 /on 01/01/2024` adds a single day of leave of `01/01/2024` to the third person in the most recently displayed list.
+* `addleave 3 /from 01/01/2024 /to 04/01/2024` adds in multiple days of leave to the third person in the most recently displayed list from `01/01/2024` to `04/01/2024`, inclusive.
 
 Output:
 
-* If the index is not within the numbers in the list, the app should display `The employee index provided is invalid`.
+* If the index is not within the numbers in the list, or the format of the command is incorrect, the app should display the following error message.
+  ![result for incorrect addleave command](images/addLeaveInvalidIndexAndCommand.png)
 
-* If the command is incorrect, the app should display `Please use the following format to read information : read INDEX INFORMATION`.
+* If the `DATE` provided is not in the correct format, the app should display the following error message.
+  ![result for incorrect date format for addleave command](images/addLeaveInvalidDateFormat.png)
 
-* If the `DATE` provided is not in the correct format, the app should display `Please provide a valid information prefix to read`.
+* If the `DATE` has already been added to the employee, the app should display the following error message.
+  ![result for invalid leave for addleave command](images/addleaveInvalidLeave.png)
 
-* If the `DATE` has already been added to the employee, the app should display `There isn’t any information on this employee’s specified PREFIX`.
+* If the second `DATE` is before the first `DATE` when adding in multiple days of leave, the app should display the following error message.
+  ![result for invalid leave range for addleave command](images/addLeaveStartEndDateError.png)
+
+* Otherwise, if there are no errors, the app should display the following success message that the leave(s) has been added and display the number of leave left for the current year and the following year.
+  ![result for successful addleave command](images/addLeaveSuccessMsg.png)
+
+### Deleting leave from an employee : `deleteleave`
+
+**What it does**
+
+This feature allows users to delete leave(s) from an employee.
+
+**Command Format**
+
+`deleteleave INDEX /on DATE` or `deleteleave INDEX /from DATE /to DATE`
+
+* Deletes leave from the employee specified by the `INDEX`, can be a single day of leave or multiple days of leave.
+* The `INDEX` refers to the index number shown in the displayed person list.
+* The `INDEX` **must be a positive integer**, and **must be within the range of the list**.
+* The `DATE` must be in `dd/MM/yyyy` format.
+* For deleting multiple days of leave, the second `DATE` must be after the first `DATE`.
+
+Examples:
+* `deleteleave 3 /on 01/01/2024` deletes a single day of leave of `01/01/2024` from the third person in the most recently displayed list.
+* `deleteleave 3 /from 01/01/2024 /to 04/01/2024` deletes multiple days of leave from the third person in the most recently displayed list from `01/01/2024` to `04/01/2024`, inclusive.
+
+Output:
+
+* If the index is not within the numbers in the list, or the format of the command is incorrect, the app should display the following error message.
+  ![result for incorrect deleteleave command](images/deleteLeaveInvalidIndexAndCommand.png)
+
+* If the `DATE` provided is not in the correct format, the app should display the following error message.
+  ![result for incorrect date format for deleteleave command](images/addLeaveInvalidDateFormat.png)
+
+* If the `DATE` has not been added to the employee, the app should display the following error message.
+  ![result for invalid leave for deleteleave command](images/deleteLeaveInvalidLeave.png)
+
+* If the second `DATE` is before the first `DATE` when adding in multiple days of leave, the app should display the following error message.
+  ![result for invalid leave range for deleteleave command](images/addLeaveStartEndDateError.png)
+
+* Otherwise, if there are no errors, the app should display the following success message that the leave(s) has been added and display the number of leave left for the current year and the following year.
+  ![result for successful deleteleave command](images/deleteLeaveSuccessMsg.png)
+
 
 
 ### View employee who is on leave: `viewleave`
@@ -251,7 +299,7 @@ This feature allows users to view employee who is on leave on a specific date.
 
 * Views employee who is on leave on a specific DATE, must be a single date.
   
-* The Date must be in dd/MM/yyyy format.
+* The `DATE` must be in `dd/MM/yyyy` format.
 
 Examples:
 * `viewleave /on 01/01/2024` view employee who is on leave on 01/01/2024.
@@ -516,17 +564,20 @@ _Details coming soon ..._
 
 ## Command summary
 
-| Action      | Format, Examples                                                                                                                                                                                                               |
-|-------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**     | `add /n NAME /e EMAIL /p PHONE /a ADDRESS /b BANK_ACCOUNT /jd JOIN_DATE /s SALARY /l ANNUAL_LEAVE`     <br> e.g., `add /n Jane Smith /e jane@email.com /p 12345678 /a 123 Main St /b 123456789/jd 12/09/2023 /s 1000.00 /l 10` |
-| **Clear**   | `clear`                                                                                                                                                                                                                        |
-| **Delete**  | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                                                            |
-| **Edit**    | `edit INDEX [/n NAME] [/e EMAIL] [/p PHONE] [/a ADDRESS] [/b BANK_ACCOUNT] [/jd JOIN_DATE] [/s SALARY] [/l ANNUAL_LEAVE]`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                                 |
-| **Read**    | `read INDEX PREFIX`<br> e.g., `read 3 /n`                                                                                                                                                                                      |
-| **List**    | `list`                                                                                                                                                                                                                         |
-| **Find**    | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find alex`                                                                                                                                                                           |
-| **Deduct**  | `deduct INDEX /v VALUE /r REASON` or `deduct /n NAME /v VALUE /r REASON`<br> e.g., `deduct 3 /v 200.00 /r cpf`                                                                                                                 |
-| **Benefit** | `benefit INDEX /v VALUE /r REASON` or `benefit /n NAME /v VALUE /r REASON`<br> e.g., `benefit 3 /v 1000.00 /r bonus`                                                                                                           |
-| **Payroll** | `payroll INDEX` or `payroll /n NAME`<br> e.g., `payroll 3`                                                                                                                                                                     |
-| **Payslip** | `payslip INDEX [/t DD/MM/YYYY]` or `payslip /n NAME [/t DD/MM/YYYY]`<br> e.g., `payslip 3`                                                                                                                                     |
-| **Help**    | `help`                                                                                                                                                                                                                         |
+| Action           | Format, Examples                                                                                                                                                                                                               |
+|------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**          | `add /n NAME /e EMAIL /p PHONE /a ADDRESS /b BANK_ACCOUNT /jd JOIN_DATE /s SALARY /l ANNUAL_LEAVE`     <br> e.g., `add /n Jane Smith /e jane@email.com /p 12345678 /a 123 Main St /b 123456789/jd 12/09/2023 /s 1000.00 /l 10` |
+| **Clear**        | `clear`                                                                                                                                                                                                                        |
+| **Delete**       | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                                                            |
+| **Edit**         | `edit INDEX [/n NAME] [/e EMAIL] [/p PHONE] [/a ADDRESS] [/b BANK_ACCOUNT] [/jd JOIN_DATE] [/s SALARY] [/l ANNUAL_LEAVE]`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                                 |
+| **Read**         | `read INDEX PREFIX`<br> e.g., `read 3 /n`                                                                                                                                                                                      |
+| **List**         | `list`                                                                                                                                                                                                                         |
+| **Find**         | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find alex`                                                                                                                                                                           |
+| **Deduct**       | `deduct INDEX /v VALUE /r REASON` or `deduct /n NAME /v VALUE /r REASON`<br> e.g., `deduct 3 /v 200.00 /r cpf`                                                                                                                 |
+| **Benefit**      | `benefit INDEX /v VALUE /r REASON` or `benefit /n NAME /v VALUE /r REASON`<br> e.g., `benefit 3 /v 1000.00 /r bonus`                                                                                                           |
+| **Payroll**      | `payroll INDEX` or `payroll /n NAME`<br> e.g., `payroll 3`                                                                                                                                                                     |
+| **Payslip**      | `payslip INDEX [/t DD/MM/YYYY]` or `payslip /n NAME [/t DD/MM/YYYY]`<br> e.g., `payslip 3`                                                                                                                                     |
+| **Add Leave**    | `addleave INDEX /on DATE` or `addleave INDEX /from DATE /to DATE`<br> e.g., `addleave 3 /from 12/12/2024 /to 14/12/2024`                                                                                                       |
+| **Delete Leave** | `deleteleave INDEX /on DATE` or `deleteleave INDEX /from DATE /to DATE`<br> e.g., `deleteleave 3 /from 12/12/2024 /to 14/12/2024`                                                                                              |
+| **View Leave**   | `viewleave /on DATE`<br> e.g., `viewleave /on 12/12/2024`                                                                                                                                                        |
+| **Help**         | `help`                                                                                                                                                                                                                         |
