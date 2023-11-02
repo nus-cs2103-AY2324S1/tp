@@ -24,8 +24,8 @@ public class Card implements Comparable<Card> {
     private String difficulty;
     private PracticeDate lastPracticeDate; // last date card was practiced, can be null.
     private PracticeDate nextPracticeDate; // next date card should be practiced.
-    private Integer priority;
     private List<Tag> tags = new ArrayList<>();
+    private SolveCount solveCount = new SolveCount();
 
     /**
      * Every field must be present and not null.
@@ -155,6 +155,12 @@ public class Card implements Comparable<Card> {
 
     public String answertoString() {
         return "Answer: " + this.getAnswer().toString();
+    }
+    public SolveCount getSolveCount() {
+        return solveCount;
+    }
+    public void incrementSolveCount() {
+        this.solveCount.incrementSolveCount();
     }
 
 }
