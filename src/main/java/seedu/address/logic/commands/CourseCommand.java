@@ -9,14 +9,14 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 
 /**
- * Adds, deletes or clears filters.
+ * Create, delete, switch or edit address books.
  */
 public class CourseCommand extends Command {
     public static final String COMMAND_WORD = "course";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Create, delete or switch address books\n"
-            + "Parameters: OPERATION (either create, delete or switch) \n"
+            + ": Create, delete, switch or edit address books\n"
+            + "Parameters: OPERATION (create, delete, switch or edit) \n"
             + PREFIX_COURSETUTORIAL + "COURSE_CODE \n"
             + "Example: " + COMMAND_WORD + " "
             + "add "
@@ -25,10 +25,12 @@ public class CourseCommand extends Command {
     public static final String MESSAGE_CREATE_SUCCESS = "Created %1$s address book.";
     public static final String MESSAGE_DELETE_SUCCESS = "Deleted %1$s address book.";
     public static final String MESSAGE_SWITCH_SUCCESS = "Switched to %1$s address book.";
+    public static final String MESSAGE_EDIT_SUCCESS = "Edited address book course code to %1$s.";
 
     public static final String MESSAGE_INVALID_OPERATION_FAILURE = "Invalid course operation";
     public static final String MESSAGE_CREATE_DUPLICATE_FAILURE = "%1$s address book exists";
     public static final String MESSAGE_NO_EXIST_FAILURE = "%1$s address book does not exist";
+    public static final String MESSAGE_NO_ADDRESS_BOOK_FAILURE = "No address book selected";
 
     private final CourseOperation operation;
     private final String courseCode;
@@ -72,6 +74,15 @@ public class CourseCommand extends Command {
         return new CommandResult(String.format(MESSAGE_SWITCH_SUCCESS, courseCode));
     }
 
+    private CommandResult editAddressBookHelper(Model model) throws CommandException {
+        if (model.getAddressBook() == null) {
+            throw new CommandException(String.format(MESSAGE_NO_ADDRESS_BOOK_FAILURE));
+        }
+
+        model.setAddressBook(new AddressBook(courseCode, model.getAddressBook()));
+        model.setActiveAddressBook(courseCode);
+        return new CommandResult(String.format(MESSAGE_EDIT_SUCCESS, courseCode));
+    }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
@@ -84,6 +95,8 @@ public class CourseCommand extends Command {
             return deleteAddressBookHelper(model);
         case SWITCH:
             return changeAddressBookHelper(model);
+        case EDIT:
+            return editAddressBookHelper(model);
         default:
             throw new CommandException(MESSAGE_INVALID_OPERATION_FAILURE);
         }

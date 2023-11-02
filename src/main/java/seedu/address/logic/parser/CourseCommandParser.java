@@ -32,7 +32,7 @@ public class CourseCommandParser implements Parser<CourseCommand> {
         }
 
         try {
-            operation = ParserUtil.parseFilterOperation(argMultimap.getPreamble());
+            operation = ParserUtil.parseCourseOperation(argMultimap.getPreamble());
         } catch (ParseException pe) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, CourseCommand.MESSAGE_USAGE), pe);
         }

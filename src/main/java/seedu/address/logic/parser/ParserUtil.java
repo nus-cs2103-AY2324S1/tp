@@ -27,7 +27,7 @@ public class ParserUtil {
      * Enum for filter operations.
      */
     public static enum CourseOperation {
-        CREATE, DELETE, SWITCH
+        CREATE, DELETE, SWITCH, EDIT
     }
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
@@ -171,11 +171,11 @@ public class ParserUtil {
     }
 
     /**
-     * Parses {@code String operation} into a {@code FilterOperation}.
+     * Parses {@code String operation} into a {@code CourseOperation}.
      *
      * @throws ParseException if the given {@code operation} is invalid.
      */
-    public static CourseOperation parseFilterOperation(String operation) throws ParseException {
+    public static CourseOperation parseCourseOperation(String operation) throws ParseException {
         requireNonNull(operation);
         String trimmedOperation = operation.trim().toLowerCase();
         switch (trimmedOperation) {
@@ -185,6 +185,8 @@ public class ParserUtil {
             return CourseOperation.DELETE;
         case "switch":
             return CourseOperation.SWITCH;
+        case "edit":
+            return CourseOperation.EDIT;
         default:
             throw new ParseException("Invalid course operation");
         }

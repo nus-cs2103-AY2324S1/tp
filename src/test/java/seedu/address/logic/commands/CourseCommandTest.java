@@ -90,6 +90,19 @@ public class CourseCommandTest {
     }
 
     @Test
+    public void execute_editOperation_success() {
+        model.setAddressBook(new AddressBook("CS2101"));
+
+        CourseCommand courseCommand = new CourseCommand(CourseOperation.EDIT, "CS2103T");
+        String expectedMessage = String.format(CourseCommand.MESSAGE_EDIT_SUCCESS, "CS2103T");
+
+        ModelManager expectedModel = new ModelManager(model.getAddressBookManager(), new UserPrefs());
+        expectedModel.setAddressBook(new AddressBook("CS2103T", expectedModel.getAddressBook()));
+
+        assertCommandSuccess(courseCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
     public void equals() {
         CourseCommand firstCourseCommand = new CourseCommand(CourseOperation.CREATE, "CS2103T");
         CourseCommand secondCourseCommand = new CourseCommand(CourseOperation.CREATE, "CS2101");
