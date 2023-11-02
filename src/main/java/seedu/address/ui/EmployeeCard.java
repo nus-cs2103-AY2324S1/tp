@@ -3,10 +3,13 @@ package seedu.address.ui;
 import java.util.Comparator;
 
 import javafx.fxml.FXML;
+import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
 import seedu.address.model.employee.Employee;
 
 /**
@@ -28,6 +31,8 @@ public class EmployeeCard extends UiPart<Region> {
 
     @FXML
     private HBox cardPane;
+    @FXML
+    private GridPane cardEmployee;
     @FXML
     private Label id;
     @FXML
@@ -60,6 +65,8 @@ public class EmployeeCard extends UiPart<Region> {
         phone.setText(employee.getPhone().toString());
         email.setText(employee.getEmail().value);
         salary.setText(employee.getSalary().toString());
+        VBox.setMargin(isOnLeave, new Insets(1, 0, 1, 4));
+        VBox.setMargin(departments, new Insets(1, 0, 1, 4));
         employee.getDepartments().stream()
                 .sorted(Comparator.comparing(department -> department.departmentName))
                 .forEach(department -> departments.getChildren().add(new Label(department.departmentName)));
