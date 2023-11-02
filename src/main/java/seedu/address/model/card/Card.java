@@ -25,26 +25,32 @@ public class Card implements Comparable<Card> {
     private PracticeDate nextPracticeDate; // next date card should be practiced.
     private final List<Tag> tags = new ArrayList<>();
     private final SolveCount solveCount;
+    private final Hint hint;
 
     /**
      * Every field must be present, and taking in if solveCount is provided
      */
-    public Card(Question question, Answer answer, Difficulty difficulty, List<Tag> tags,
-                PracticeDate nextPracticeDate, PracticeDate lastPracticeDate, SolveCount solveCount) {
+    public Card(Question question, Answer answer, Difficulty difficulty,
+                List<Tag> tags, PracticeDate nextPracticeDate, PracticeDate lastPracticeDate,
+                SolveCount solveCount, Hint hint) {
         requireAllNonNull(question, answer, difficulty, tags, nextPracticeDate);
+        assert(question != null);
+        assert(answer != null);
+
         this.question = question;
         this.answer = answer;
-        assert(this.question != null);
-        assert(this.answer != null);
         this.difficulty = difficulty;
         this.tags.addAll(tags);
+
         if (lastPracticeDate == null) {
             this.lastPracticeDate = nextPracticeDate;
         } else {
             this.lastPracticeDate = lastPracticeDate;
         }
+
         this.nextPracticeDate = nextPracticeDate;
         this.solveCount = solveCount;
+        this.hint = hint;
     }
 
     // Difficulty
@@ -107,6 +113,11 @@ public class Card implements Comparable<Card> {
     }
     public void incrementSolveCount() {
         this.solveCount.incrementSolveCount();
+    }
+
+    // Hint
+    public Hint getHint() {
+        return this.hint;
     }
 
     /**

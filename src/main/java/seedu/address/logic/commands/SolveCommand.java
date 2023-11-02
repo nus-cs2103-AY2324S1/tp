@@ -12,14 +12,14 @@ import java.util.List;
 import static java.util.Objects.requireNonNull;
 
 /**
- * Practises a question using it's displayed index from the address book.
+ * Solves a question using it's displayed index from the Deck.
  */
 public class SolveCommand extends Command {
 
     public static final String COMMAND_WORD = "solve";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": solve the card identified by the index number used in the displayed card list.\n"
+            + ": solve the card identified by its index in the displayed card list.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 

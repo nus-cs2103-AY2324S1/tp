@@ -4,6 +4,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.card.Answer;
+import seedu.address.model.card.Hint;
 import seedu.address.model.card.Question;
 import seedu.address.model.tag.Tag;
 
@@ -30,7 +31,7 @@ public class EditCommandParser implements Parser<EditCommand> {
         requireNonNull(args);
 
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_QUESTION, PREFIX_ANSWER, PREFIX_TAG);
+                ArgumentTokenizer.tokenize(args, PREFIX_QUESTION, PREFIX_ANSWER, PREFIX_TAG, PREFIX_HINT);
 
         Index index;
 
@@ -41,7 +42,7 @@ public class EditCommandParser implements Parser<EditCommand> {
         }
 
         // Only one Question and Answer allowed for each Card
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_QUESTION, PREFIX_ANSWER);
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_QUESTION, PREFIX_ANSWER, PREFIX_HINT);
 
         EditCommand.EditCardDescriptor editCardDescriptor = new EditCommand.EditCardDescriptor();
 
@@ -59,6 +60,12 @@ public class EditCommandParser implements Parser<EditCommand> {
 
         // Tags
         parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editCardDescriptor::setTags);
+
+        // Hint
+        if (argMultimap.getValue(PREFIX_HINT).isPresent()) {
+            Hint newHint = ParserUtil.parseHint(argMultimap.getValue(PREFIX_HINT).get());
+            editCardDescriptor.setHint(newHint);
+        }
 
         // Throw exception if no details are changed
         if (!editCardDescriptor.isAnyFieldEdited()) {

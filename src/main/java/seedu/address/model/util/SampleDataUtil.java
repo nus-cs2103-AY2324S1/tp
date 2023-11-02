@@ -24,13 +24,15 @@ public class SampleDataUtil {
                     Difficulty.EASY,
                     new ArrayList<>(Collections.singleton(new Tag("Math"))),
                     new PracticeDate(LocalDateTime.now()), null,
-                    new SolveCount()),
+                    new SolveCount(),
+                    new Hint.EmptyHint()),
             new Card(new Question("What is 1 + 3"),
                     new Answer("4"),
                     Difficulty.EASY,
                     new ArrayList<>(Collections.singleton(new Tag("Math"))),
                     new PracticeDate(LocalDateTime.now()), null,
-                    new SolveCount())
+                    new SolveCount(),
+                    new Hint.EmptyHint())
         };
     }
 

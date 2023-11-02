@@ -85,7 +85,13 @@ public class CardBuilder {
     }
 
     public Card build() {
-        return new Card(question, answer, Difficulty.NEW, tags, nextPracticeDate, null, new SolveCount());
+        Difficulty difficulty = Difficulty.NEW;
+        PracticeDate lastPracticeDate = null;
+        SolveCount solveCount = new SolveCount();
+        Hint emptyHint = new Hint.EmptyHint();
+        return new Card(question, answer, difficulty,
+                tags, nextPracticeDate, lastPracticeDate,
+                solveCount, emptyHint);
     }
 
 }

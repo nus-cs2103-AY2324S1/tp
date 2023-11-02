@@ -3,12 +3,7 @@ package seedu.address.storage;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.card.Answer;
-import seedu.address.model.card.Card;
-import seedu.address.model.card.Difficulty;
-import seedu.address.model.card.PracticeDate;
-import seedu.address.model.card.Question;
-import seedu.address.model.card.SolveCount;
+import seedu.address.model.card.*;
 import seedu.address.model.tag.Tag;
 
 import java.time.LocalDateTime;
@@ -32,6 +27,7 @@ class JsonAdaptedCard {
     private final String lastPracticeDate;
     private final String solveCount;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
+    private final String hint;
 
     /**
      * Constructs a {@code JsonAdaptedCard} with the given card details.
@@ -43,7 +39,8 @@ class JsonAdaptedCard {
             @JsonProperty("tags") List<JsonAdaptedTag> tags,
             @JsonProperty("solveCount") String solveCount,
             @JsonProperty("next-practice-date") String nextPracticeDate,
-            @JsonProperty("last-practice-date") String lastPracticeDate) {
+            @JsonProperty("last-practice-date") String lastPracticeDate,
+            @JsonProperty("hint") String hint) {
         this.question = question;
         this.answer = answer;
         this.difficulty = difficulty;
@@ -53,6 +50,7 @@ class JsonAdaptedCard {
         this.nextPracticeDate = nextPracticeDate;
         this.lastPracticeDate = lastPracticeDate;
         this.solveCount = solveCount;
+        this.hint = hint;
     }
 
     /**
@@ -68,6 +66,7 @@ class JsonAdaptedCard {
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
+        hint = source.getHint().hint;
     }
 
     /**
@@ -103,14 +102,14 @@ class JsonAdaptedCard {
         final Answer modelAnswer = new Answer(answer);
 
         // Tags
-        final List<Tag> modalCardTags = new ArrayList<>();
+        final List<Tag> modelCardTags = new ArrayList<>();
 
         for (JsonAdaptedTag tag : tags) {
-            modalCardTags.add(tag.toModelType());
+            modelCardTags.add(tag.toModelType());
         }
 
         // Difficulty
-        Difficulty modalDifficulty = Difficulty.valueOf(difficulty.toUpperCase());
+        Difficulty modelDifficulty = Difficulty.valueOf(difficulty.toUpperCase());
 
         // PractiseDate
         if (nextPracticeDate == null) {
@@ -135,9 +134,9 @@ class JsonAdaptedCard {
                 : null;
 
         final SolveCount modelsolveCount = new SolveCount(Integer.parseInt(solveCount));
+        final Hint modelHint = new Hint(hint);
 
-
-        return new Card(modelQuestion, modelAnswer, modalDifficulty, modalCardTags,
-                modelNextPracticeDate, modelLastPracticeDate, modelsolveCount);
+        return new Card(modelQuestion, modelAnswer, modelDifficulty, modelCardTags,
+                modelNextPracticeDate, modelLastPracticeDate, modelsolveCount, modelHint);
     }
 }

@@ -24,7 +24,7 @@ public class AddCommandParser implements Parser<AddCommand> {
      */
     public AddCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_QUESTION, PREFIX_ANSWER,
-                PREFIX_TAG);
+                PREFIX_TAG, PREFIX_HINT);
 
         // Compulsory fields: Question, Answer
         // No extra input in between Command word and Prefixes
@@ -39,12 +39,21 @@ public class AddCommandParser implements Parser<AddCommand> {
         Question question = ParserUtil.parseQuestion(argMultimap.getValue(PREFIX_QUESTION).get());
         Answer answer = ParserUtil.parseAnswer(argMultimap.getValue(PREFIX_ANSWER).get());
 
-        PracticeDate practiceDate = new PracticeDate(LocalDateTime.now());
         List<Tag> tags = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
+        Hint hint;
+        if (argMultimap.getValue(PREFIX_HINT).isPresent()) {
+            hint = ParserUtil.parseHint(argMultimap.getValue(PREFIX_HINT).get());
+        } else {
+            // If the prefix doesn't exist, create an empty hint
+            hint = new Hint.EmptyHint();
+        }
+
+        // Default values
         Difficulty difficulty = Difficulty.NEW;
         SolveCount solveCount = new SolveCount();
+        PracticeDate practiceDate = new PracticeDate(LocalDateTime.now());
 
-        Card card = new Card(question, answer, difficulty, tags, practiceDate, null, solveCount);
+        Card card = new Card(question, answer, difficulty, tags, practiceDate, null, solveCount, hint);
 
         return new AddCommand(card);
     }

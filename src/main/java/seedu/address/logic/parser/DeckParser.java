@@ -62,15 +62,21 @@ public class DeckParser {
 
         case PractiseCommand.COMMAND_WORD:
             return new PractiseCommandParser().parse(arguments);
+
         case SolveCommand.COMMAND_WORD:
             return new SolveCommandParser().parse(arguments);
+
         case SetDifficultyCommand.COMMAND_WORD:
             return new SetDifficultyCommandParser().parse(arguments);
+
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
 
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
+
+        case HintCommand.COMMAND_WORD:
+            return new HintCommandParser().parse(arguments);
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);

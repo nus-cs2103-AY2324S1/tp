@@ -4,6 +4,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.card.Answer;
+import seedu.address.model.card.Hint;
 import seedu.address.model.card.Question;
 import seedu.address.model.tag.Tag;
 
@@ -88,5 +89,21 @@ public class ParserUtil {
             throw new ParseException(Answer.MESSAGE_CONSTRAINTS);
         }
         return new Answer(trimmedAnswer);
+    }
+
+    /**
+     * Parses a {@code String hint} into a {@code Hint}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code hint} is invalid.
+     */
+    public static Hint parseHint(String hint) throws ParseException {
+        requireNonNull(hint);
+
+        String trimmedHint = hint.trim();
+        if (!Hint.isValidHint(trimmedHint)) {
+            throw new ParseException(Hint.MESSAGE_CONSTRAINTS);
+        }
+        return new Hint(trimmedHint);
     }
 }

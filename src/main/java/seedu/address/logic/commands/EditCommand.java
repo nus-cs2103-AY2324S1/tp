@@ -6,10 +6,7 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.card.Answer;
-import seedu.address.model.card.Card;
-import seedu.address.model.card.Difficulty;
-import seedu.address.model.card.Question;
+import seedu.address.model.card.*;
 import seedu.address.model.tag.Tag;
 
 import java.util.List;
@@ -32,7 +29,8 @@ public class EditCommand extends Command {
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_QUESTION + "QUESTION] "
             + "[" + PREFIX_ANSWER + "ANSWER] "
-            + "[" + PREFIX_TAG + "TAG] ";
+            + "[" + PREFIX_TAG + "TAG] "
+            + "[" + PREFIX_HINT + "[HINT] ";
 
     public static final String MESSAGE_EDIT_CARD_SUCCESS = "Edited Card: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
@@ -88,9 +86,13 @@ public class EditCommand extends Command {
         Answer updatedAnswer = editCardDescriptor.getAnswer().orElse(cardToEdit.getAnswer());
         List<Tag> updatedTags = editCardDescriptor.getTags().orElse((cardToEdit.getTags()));
         Difficulty difficulty = Difficulty.NEW;
+        PracticeDate nextPracticeDate = cardToEdit.getNextPracticeDate();
+        PracticeDate lastPracticeDate = cardToEdit.getLastPracticeDate();
+        SolveCount solveCount = cardToEdit.getSolveCount();
+        Hint hint = editCardDescriptor.getHint().orElse(cardToEdit.getHint());
 
         return new Card(updatedQuestion, updatedAnswer, difficulty, updatedTags,
-                cardToEdit.getNextPracticeDate(), cardToEdit.getLastPracticeDate(), cardToEdit.getSolveCount());
+                nextPracticeDate, lastPracticeDate, solveCount, hint);
     }
 
     @Override
@@ -126,6 +128,7 @@ public class EditCommand extends Command {
         private Question question;
         private Answer answer;
         private List<Tag> tags;
+        private Hint hint;
 
         public EditCardDescriptor() {
         }
@@ -138,13 +141,14 @@ public class EditCommand extends Command {
             setQuestion(toCopy.question);
             setAnswer(toCopy.answer);
             setTags(toCopy.tags);
+            setHint(toCopy.hint);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(question, answer, tags);
+            return CollectionUtil.isAnyNonNull(question, answer, tags, hint);
         }
 
         // Question
@@ -174,6 +178,14 @@ public class EditCommand extends Command {
             return Optional.ofNullable(tags);
         }
 
+        // Hint
+        public Optional<Hint> getHint() {
+            return Optional.ofNullable(hint);
+        }
+        public void setHint(Hint hint) {
+            this.hint = hint;
+        }
+
         @Override
         public boolean equals(Object other) {
             if (other == this) {
@@ -189,7 +201,8 @@ public class EditCommand extends Command {
             EditCardDescriptor otherEditCardDescriptor = (EditCardDescriptor) other;
             return Objects.equals(question, otherEditCardDescriptor.question)
                     && Objects.equals(answer, otherEditCardDescriptor.answer)
-                    && Objects.equals(tags, otherEditCardDescriptor.tags);
+                    && Objects.equals(tags, otherEditCardDescriptor.tags)
+                    && Objects.equals(hint, otherEditCardDescriptor.hint);
         }
 
         @Override
@@ -198,6 +211,7 @@ public class EditCommand extends Command {
                     .add("question", question)
                     .add("answer", answer)
                     .add("tags", tags)
+                    .add("hint", hint)
                     .toString();
         }
     }

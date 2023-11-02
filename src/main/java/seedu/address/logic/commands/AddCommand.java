@@ -20,7 +20,8 @@ public class AddCommand extends Command {
             + "Parameters: "
             + PREFIX_QUESTION + "QUESTION "
             + PREFIX_ANSWER + "ANSWER "
-            + PREFIX_TAG + "TAG ";
+            + PREFIX_TAG + "TAG "
+            + PREFIX_HINT + "HINT";
 
     public static final String MESSAGE_SUCCESS = "New Card added: %1$s";
     public static final String MESSAGE_DUPLICATE_CARD = "This Card already exists in the Deck";
