@@ -16,6 +16,7 @@ import seedu.address.model.Deck;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.card.Card;
 
 public class SolveCommandTest {
 
@@ -70,6 +71,24 @@ public class SolveCommandTest {
         SolveCommand practiseCommand = new SolveCommand(outOfBoundIndex);
 
         assertCommandFailure(practiseCommand, model, Messages.MESSAGE_INVALID_CARD_DISPLAYED_INDEX);
+    }
+
+    @Test
+    public void execute_incrementSolveCount() {
+        int ind = 2;
+        Index index = Index.fromZeroBased(ind);
+        SolveCommand practiseCommand = new SolveCommand(index);
+        Card targetCard = model.getFilteredCardList().get(ind);
+
+        String expectedMessage = String.format(SolveCommand.MESSAGE_SOLVE_CARD_SUCCESS,
+                Messages.formatSolve(model.getFilteredCardList()
+                        .get(ind), index));
+
+        Model expectedModel = new ModelManager(new Deck(model.getDeck()), new UserPrefs());
+
+        assertCommandSuccess(practiseCommand, model, expectedMessage, expectedModel);
+
+        assertTrue(targetCard.getSolveCount().equals(1));
     }
 
     @Test
