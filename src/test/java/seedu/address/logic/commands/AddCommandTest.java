@@ -30,6 +30,7 @@ import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.event.Event;
 import seedu.address.model.person.Person;
 import seedu.address.model.statistics.SummaryStatistic;
+import seedu.address.model.tag.Tag;
 import seedu.address.testutil.PersonBuilder;
 
 public class AddCommandTest {
@@ -176,6 +177,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public boolean hasTag(Tag tag) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void deletePerson(Person target) {
             throw new AssertionError("This method should not be called.");
         }
@@ -243,7 +249,11 @@ public class AddCommandTest {
         @Override
         public void setLastViewedPersonIndex(Index index) {
             throw new AssertionError("This method should not be called.");
+        }
 
+        @Override
+        public void addTag(Tag tag) {
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override

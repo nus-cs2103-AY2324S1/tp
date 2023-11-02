@@ -33,9 +33,18 @@ public class JsonAdaptedPersonTest {
 
     private static final String VALID_REMARK = BENSON.getRemark().toString();
 
-    private static final List<JsonAdaptedTag> VALID_TAGS = BENSON.getTags().stream()
-            .map(JsonAdaptedTag::new)
+    private static Map<String, String> map = new HashMap<>();
+
+    private static final List<Map<String, String>> VALID_TAGS = BENSON.getTags().stream()
+            .map(tag -> {
+                Map<String, String> map = new HashMap<>();
+                map.put("tagCategory", tag.tagCategory);
+                map.put("tagName", tag.tagName);
+                return map;
+            })
             .collect(Collectors.toList());
+
+
     private static final String VALID_LINKEDIN = BENSON.getLinkedIn().toString();
     private static final String VALID_GITHUB = BENSON.getGithub().toString();
     private static final String VALID_STATUS = BENSON.getStatus().toString();
@@ -117,8 +126,11 @@ public class JsonAdaptedPersonTest {
 
     @Test
     public void toModelType_invalidTags_throwsIllegalValueException() {
-        List<JsonAdaptedTag> invalidTags = new ArrayList<>(VALID_TAGS);
-        invalidTags.add(new JsonAdaptedTag(INVALID_TAG));
+        Map<String, String> map = new HashMap<>();
+        List<Map<String, String>> invalidTags = new ArrayList<>(VALID_TAGS);
+        map.put("tagCategory", "uncategorised");
+        map.put("tagName", INVALID_TAG);
+        invalidTags.add(map);
         JsonAdaptedPerson person =
                 new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
                         invalidTags, VALID_SCORELIST, VALID_LINKEDIN, VALID_GITHUB, VALID_REMARK, VALID_STATUS);

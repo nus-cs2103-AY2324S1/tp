@@ -13,16 +13,18 @@ public class Tag {
     public static final String VALIDATION_REGEX = "\\p{Alnum}+";
 
     public final String tagName;
+    public final String tagCategory;
 
     /**
      * Constructs a {@code Tag}.
      *
      * @param tagName A valid tag name.
      */
-    public Tag(String tagName) {
+    public Tag(String tagName, String tagCategory) {
         requireNonNull(tagName);
         checkArgument(isValidTagName(tagName), MESSAGE_CONSTRAINTS);
         this.tagName = tagName;
+        this.tagCategory = tagCategory;
     }
 
     /**
@@ -44,7 +46,7 @@ public class Tag {
         }
 
         Tag otherTag = (Tag) other;
-        return tagName.equals(otherTag.tagName);
+        return tagName.equals(otherTag.tagName) && tagCategory.equals(otherTag.tagCategory);
     }
 
     @Override

@@ -56,7 +56,7 @@ public class JsonAdaptedScoreList {
             return scoreList;
         }
         for (Map.Entry<String, Integer> entry : scores.entrySet()) {
-            scoreList.updateScoreList(new Tag(entry.getKey()), new Score(entry.getValue()));
+            scoreList.updateScoreList(new Tag(entry.getKey(), "assessment"), new Score(entry.getValue()));
         }
         return scoreList;
     }

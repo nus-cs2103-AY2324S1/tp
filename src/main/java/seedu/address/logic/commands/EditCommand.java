@@ -87,6 +87,8 @@ public class EditCommand extends Command {
         Person personToEdit = lastShownList.get(index.getZeroBased());
         Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
 
+        containsIllegalTagScore(editedPerson);
+
         if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
@@ -164,6 +166,16 @@ public class EditCommand extends Command {
         oldScoreList.updateScoreList(newTag, newScore);
         return oldScoreList;
 
+    }
+    private boolean containsIllegalTagScore(Person person) throws CommandException {
+        Set<Tag> currentTags = person.getTags();
+        List<Tag> tagsWithScore = person.getScoreList().getTagsWithScore();
+        for (Tag tag : tagsWithScore) {
+            if (!currentTags.contains(tag)) {
+                throw new CommandException(Messages.MESSAGE_ILLEGAL_TAG_SCORE);
+            }
+        }
+        return false;
     }
 
     @Override
