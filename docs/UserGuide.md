@@ -105,7 +105,7 @@ Before you begin using Class Manager, it is recommended that you configure the n
 
 Format: `config #t/TUTORIAL_COUNT #a/ASSIGNMENT_COUNT`
 
-* TUTORIAL_COUNT and ASSIGNMENT_COUNT must be integers between 0 to 99 inclusive.
+* TUTORIAL_COUNT and ASSIGNMENT_COUNT must be 0 or a positive integer.
 * Inputting the same TUTORIAL_COUNT or ASSIGNMENT_COUNT as the previous configuration will also reset the class details of all students.
 
 Examples:

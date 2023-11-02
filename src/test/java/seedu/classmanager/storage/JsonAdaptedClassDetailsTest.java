@@ -22,16 +22,23 @@ import seedu.classmanager.model.student.information.ClassParticipationTracker;
 
 public class JsonAdaptedClassDetailsTest {
     private final String validClassNumber = BENSON.getClassDetails().toString();
-    private final Boolean[] tutorialArray = new Boolean[ClassDetails.getTutorialCount()];
-    private final Integer[] assignmentArray = new Integer[ClassDetails.getAssignmentCount()];
-    private final List<Boolean> validAttendanceTracker = Arrays.asList(tutorialArray);
-    private final List<Integer> validAssignmentTracker = Arrays.asList(assignmentArray);
-    private final List<Boolean> validClassParticipationTracker = Arrays.asList(tutorialArray);
+    private final Boolean[] validTutorialArray = new Boolean[ClassDetails.getTutorialCount()];
+    private final Integer[] validAssignmentArray = new Integer[ClassDetails.getAssignmentCount()];
+    private final Boolean[] invalidTutorialArray = new Boolean[ClassDetails.getTutorialCount() + 1];
+    private final Integer[] invalidAssignmentArray = new Integer[ClassDetails.getAssignmentCount() + 1];
+    private final List<Boolean> validAttendanceTracker = Arrays.asList(validTutorialArray);
+    private final List<Integer> validAssignmentTracker = Arrays.asList(validAssignmentArray);
+    private final List<Boolean> validClassParticipationTracker = Arrays.asList(validTutorialArray);
+    private final List<Boolean> invalidAttendanceTracker = Arrays.asList(invalidTutorialArray);
+    private final List<Integer> invalidAssignmentTracker = Arrays.asList(invalidAssignmentArray);
+    private final List<Boolean> invalidClassParticipationTracker = Arrays.asList(invalidTutorialArray);
 
     @BeforeEach
     public void setUp() {
-        Arrays.fill(tutorialArray, FALSE);
-        Arrays.fill(assignmentArray, 0);
+        Arrays.fill(validTutorialArray, FALSE);
+        Arrays.fill(validAssignmentArray, 0);
+        Arrays.fill(invalidTutorialArray, FALSE);
+        Arrays.fill(invalidAssignmentArray, 0);
     }
 
     @Test
@@ -93,4 +100,23 @@ public class JsonAdaptedClassDetailsTest {
         assertThrows(IllegalValueException.class, expectedMessage, classDetails::toModelType);
     }
 
+    @Test
+    public void toModelType_unequalTutorialCount_throwsIllegalValueException() {
+        JsonAdaptedClassDetails classDetails = new JsonAdaptedClassDetails(validClassNumber,
+                invalidAttendanceTracker,
+                validAssignmentTracker,
+                invalidClassParticipationTracker);
+        String expectedMessage = ClassDetails.MESSAGE_TUTORIAL_COUNT_MISMATCH;
+        assertThrows(IllegalValueException.class, expectedMessage, classDetails::toModelType);
+    }
+
+    @Test
+    public void toModelType_unequalAssignmentCount_throwsIllegalValueException() {
+        JsonAdaptedClassDetails classDetails = new JsonAdaptedClassDetails(validClassNumber,
+                validAttendanceTracker,
+                invalidAssignmentTracker,
+                validClassParticipationTracker);
+        String expectedMessage = ClassDetails.MESSAGE_ASSIGNMENT_COUNT_MISMATCH;
+        assertThrows(IllegalValueException.class, expectedMessage, classDetails::toModelType);
+    }
 }

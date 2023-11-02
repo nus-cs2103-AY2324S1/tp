@@ -5,7 +5,6 @@ import static seedu.classmanager.logic.parser.CliSyntax.PREFIX_ASSIGNMENT_COUNT;
 import static seedu.classmanager.logic.parser.CliSyntax.PREFIX_TUTORIAL_COUNT;
 import static seedu.classmanager.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.classmanager.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.classmanager.logic.parser.ConfigCommandParser.MESSAGE_INVALID_COUNT_VALUE_TOO_LARGE;
 import static seedu.classmanager.logic.parser.ConfigCommandParser.MESSAGE_INVALID_COUNT_VALUE_TOO_SMALL;
 
 import org.junit.jupiter.api.Test;
@@ -49,13 +48,6 @@ public class ConfigCommandParserTest {
         String argument = " " + PREFIX_ASSIGNMENT_COUNT + "-1 "
                 + PREFIX_TUTORIAL_COUNT + "2";
         assertParseFailure(parser, argument, String.format(MESSAGE_INVALID_COUNT_VALUE_TOO_SMALL, "assignments"));
-    }
-
-    @Test
-    public void parse_tooLargeIntArg_failure() {
-        String argument = " " + PREFIX_ASSIGNMENT_COUNT + "100 "
-                + PREFIX_TUTORIAL_COUNT + "2";
-        assertParseFailure(parser, argument, String.format(MESSAGE_INVALID_COUNT_VALUE_TOO_LARGE, "assignments"));
     }
 
     @Test

@@ -14,8 +14,6 @@ import seedu.classmanager.logic.parser.exceptions.ParseException;
 public class ConfigCommandParser implements Parser<ConfigCommand> {
     public static final String MESSAGE_INVALID_COUNT_VALUE_TOO_SMALL = "Invalid count value!"
             + "The count value of %1$s cannot be less than 0.";
-    public static final String MESSAGE_INVALID_COUNT_VALUE_TOO_LARGE = "Invalid count value!"
-            + "The count value of %1$s cannot be more than 99.";
 
     /**
      * Parses the given {@code String} of arguments in the context of the ConfigCommand
@@ -47,15 +45,13 @@ public class ConfigCommandParser implements Parser<ConfigCommand> {
 
     /**
      * Checks if the count value is valid.
-     * Count value is valid when it is between 0 to 99 inclusive.
+     * Count value is valid when it is 0 or larger.
      * @param count Count value of tutorials or assignments.
-     * @throws ParseException if the count value is less than 0 or more than 99.
+     * @throws ParseException if the count value is less than 0.
      */
     private void validCountParser(int count, String attribute) throws ParseException {
         if (count < 0) {
             throw new ParseException(String.format(MESSAGE_INVALID_COUNT_VALUE_TOO_SMALL, attribute));
-        } else if (count > 99) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COUNT_VALUE_TOO_LARGE, attribute));
         }
     }
 }

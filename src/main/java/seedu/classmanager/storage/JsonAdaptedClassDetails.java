@@ -62,13 +62,9 @@ public class JsonAdaptedClassDetails {
             throw new IllegalValueException(ClassDetails.MESSAGE_UNEQUAL_LENGTH);
         }
         if (attendanceTracker.size() != ClassDetails.getTutorialCount()) {
-            System.out.println(attendanceTracker.size());
-            System.out.println(ClassDetails.getTutorialCount());
             throw new IllegalValueException(ClassDetails.MESSAGE_TUTORIAL_COUNT_MISMATCH);
         }
         if (assignmentTracker.size() != ClassDetails.getAssignmentCount()) {
-            System.out.println(assignmentTracker.size());
-            System.out.println(ClassDetails.getAssignmentCount());
             throw new IllegalValueException(ClassDetails.MESSAGE_ASSIGNMENT_COUNT_MISMATCH);
         }
 
