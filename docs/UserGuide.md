@@ -539,6 +539,15 @@ Undoes the previous command, given that the previous command successfully execut
 
 Format: `undo`
 
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Notes about the command:**<br>
+
+*  The `undo` command can only be executed **once**, and it will undo the last successful command.
+   * This is provided that the previous command was a successful `add`, `delete`, or `edit`.
+
+</div>
+
 ### Clearing all entries : `reset`, followed by `reset confirm`
 
 Clears all entries from the address book.
