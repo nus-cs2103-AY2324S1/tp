@@ -120,6 +120,13 @@ public class Time implements Comparable<Time> {
     }
 
     /**
+     * Returns true if the datetime is before the current datetime.
+     */
+    public boolean isPast() {
+        return time.isBefore(LocalDateTime.now());
+    }
+
+    /**
      * Returns the time associated with the current Time instance.
      *
      * @author Tan Kerway

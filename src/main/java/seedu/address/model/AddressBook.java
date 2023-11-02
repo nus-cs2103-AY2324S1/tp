@@ -205,8 +205,6 @@ public class AddressBook implements ReadOnlyAddressBook {
                 Time.WORK_END.getHour(),
                 0
         ));
-        System.out.println(startOfWorkDay.getDateAndTime());
-        System.out.println(endOfWorkDay.getDateAndTime());
         // get the list of interviews on the given day
         List<Interview> temp = new ArrayList<>();
         for (Interview value : interviews) {
