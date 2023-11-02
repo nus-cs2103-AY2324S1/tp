@@ -125,6 +125,9 @@ public class EditCommand extends Command {
 
     private boolean containsIllegalTagScore(Person person) throws CommandException {
         Set<Tag> currentTags = person.getTags();
+        if (currentTags.isEmpty()) {
+            return false;
+        }
         List<Tag> tagsWithScore = person.getScoreList().getTagsWithScore();
         for (Tag tag : tagsWithScore) {
             if (!currentTags.contains(tag)) {
