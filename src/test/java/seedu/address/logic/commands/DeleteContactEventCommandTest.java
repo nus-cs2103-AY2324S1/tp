@@ -13,6 +13,7 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalTasks.getTypicalTaskManager;
 
 import java.time.LocalDateTime;
 
@@ -29,7 +30,8 @@ import seedu.address.model.person.Person;
 
 public class DeleteContactEventCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), getTypicalCalendar(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalAddressBook(), getTypicalCalendar(),
+            getTypicalTaskManager(), new UserPrefs());
 
     @Test
     public void execute_deleteEvent_success() {
@@ -42,7 +44,7 @@ public class DeleteContactEventCommandTest {
         String expectedMessage = String.format(DeleteContactEventCommand.MESSAGE_DELETE_EVENT_FROM_PERSON_SUCCESS,
                 person.getName(), Messages.format(event));
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()),
-                model.getCalendar(), new UserPrefs());
+                model.getCalendar(), model.getTaskManager(), new UserPrefs());
         expectedModel.setPerson(model.getFilteredPersonList().get(0), person);
 
         assertCommandSuccess(deleteContactEventCommand, model, expectedMessage, expectedModel);
