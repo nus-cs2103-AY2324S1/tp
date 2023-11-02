@@ -9,6 +9,7 @@ import seedu.address.model.person.Applicant;
 import seedu.address.model.person.Member;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.task.Task;
 
 /**
  * The API of the Model component.
@@ -118,6 +119,9 @@ public interface Model {
      * Returns an unmodifiable view of the filtered tag list
      */
     ObservableList<Tag> getFilteredTagList();
+    ObservableList<Task> getFilteredTaskList();
+
+    void setTaskListForMember(Member member);
 
     /**
      * Updates the filter of the filtered member list to filter by the given {@code predicate}.
