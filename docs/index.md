@@ -17,7 +17,6 @@ Example usages:
 * adding, deleting and viewing student profiles
 * tag students with risk levels depending on their condition
 * adding, deleting and viewing appointments
-* adding, deleting and viewing todos or follow-up actions [Coming soon]
 
 
 If you are interested in using WellNUS, head over to the [_Quick Start_ section of the **User Guide**](UserGuide.html#quick-start).
