@@ -129,7 +129,8 @@ For each applicant and each interview, we see the following details:
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit`, `nuke` and `clear`) will be ignored.<br>
+* Extraneous parameters for commands that do not take in parameters (such as `help`, `list-i`, `list-a`, `list-i-done`, `list-i-not-done`,
+`list-today`, `sort-rate`, `sort-time`, `exit`, and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 [Back to the Table of Contents](#table-of-contents)
@@ -447,6 +448,11 @@ If your changes to the data file makes its format invalid, InterviewHub will dis
 
 # Glossary
 
-TBD
+| Term          | Definition                                                                                                                                                                                               |
+|---------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **JAR File**  | JAR (Java Archive) files are archive files that include a Java-specific manifest file. They are built on the ZIP format and typically have a `.jar` file extension.                                      |
+| **JSON File** | JSON (JavaScript Object Notation) is a lightweight data interchange format that is easy to understand and use.                                                                                           |
+| **CLI**       | A CLI (Command Line Interface) is a means of interacting with a computer program by inputting lines of text called command-lines.                                                                        |
+| **GUI**       | A GUI (Graphical User Interface) is user interface that allows users to interact with the program with interactive visual components instead of text-based UIs, typed command labels or text navigation. |
 
 [Back to the Table of Contents](#table-of-contents)
