@@ -34,6 +34,7 @@ public class AddressBookParser {
     /**
      * Used for initial separation of command word and args.
      */
+    public static final String MESSAGE_NON_ASCII = "Non-ASCII characters are not allowed.";
     private static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
     private static final Pattern ASCII_STRING = Pattern.compile("\\A\\p{ASCII}*\\z");
     private static final Logger logger = LogsCenter.getLogger(AddressBookParser.class);
@@ -48,7 +49,7 @@ public class AddressBookParser {
     public Command parseCommand(String userInput) throws ParseException {
         final Matcher asciiMatcher = ASCII_STRING.matcher(userInput.trim());
         if (!asciiMatcher.matches()) {
-            throw new ParseException("Non-ASCII characters are not allowed.");
+            throw new ParseException(MESSAGE_NON_ASCII);
         }
 
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
