@@ -28,7 +28,7 @@ public abstract class FindCommand extends Command {
             + "Example: " + COMMAND_WORD + " " + PREFIX_NAME + "nicholas\n"
             + "Example: " + COMMAND_WORD + " " + PREFIX_GROUPTAG + "CS2103T";
 
-    public static final String MESSAGE_EMPTY_NAME = "Person does not exist";
+    public static final String MESSAGE_EMPTY_NAME = "Person's name cannot be empty";
 
     @Override
     public abstract CommandResult execute(Model model) throws CommandException;

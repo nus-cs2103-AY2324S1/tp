@@ -66,11 +66,9 @@ public class TimeIntervalList implements Iterable<TimeInterval> {
                 timeDeleted = true;
             }
         }
-        System.out.println(errorCompilation.length());
         if (timeDeleted) {
             errorCompilation.append("The other times have been deleted\n");
         }
-        System.out.println(errorCompilation.length());
         if ((timeDeleted && errorCompilation.length() > 87) || (!timeDeleted && errorCompilation.length() > 53)) {
             throw new CommandException(errorCompilation.toString());
         }
@@ -181,6 +179,9 @@ public class TimeIntervalList implements Iterable<TimeInterval> {
         return newFreeTime;
     }
 
+    public int size() {
+        return this.internalList.size();
+    }
 
     @Override
     public Iterator<TimeInterval> iterator() {

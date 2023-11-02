@@ -13,7 +13,7 @@ import seedu.address.model.Duration;
 /**
  * Parses input arguments and creates a new AddCommand object
  */
-public class FindFreeTimeParser implements Parser<FindFreeTimeCommand> {
+public class FindFreeTimeCommandParser implements Parser<FindFreeTimeCommand> {
 
 	/**
 	 * Parses the given {@code String} of arguments in the context of the AddCommand

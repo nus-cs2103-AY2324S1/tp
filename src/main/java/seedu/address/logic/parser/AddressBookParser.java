@@ -55,7 +55,7 @@ public class AddressBookParser {
             return new DeleteTimeCommandParser().parse(arguments);
 
         case AddGroupCommand.COMMAND_WORD:
-            return new AddGroupParser().parse(arguments);
+            return new AddGroupCommandParser().parse(arguments);
 
         case GroupPersonCommand.COMMAND_WORD:
              return new GroupPersonCommandParser().parse(arguments);
@@ -88,7 +88,7 @@ public class AddressBookParser {
             return new ListGroupCommand();
 
         case FindFreeTimeCommand.COMMAND_WORD:
-            return new FindFreeTimeParser().parse(arguments);
+            return new FindFreeTimeCommandParser().parse(arguments);
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();

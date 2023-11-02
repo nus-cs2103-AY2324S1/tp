@@ -33,4 +33,28 @@ public class DeleteGroupTimeCommand extends DeleteTimeCommand {
         }
         return new CommandResult(String.format(MESSAGE_DELETE_TIME_SUCCESS, group.getGroupName()));
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof DeleteGroupTimeCommand)) {
+            return false;
+        }
+
+        DeleteGroupTimeCommand otherDeleteGroupTimeCommand = (DeleteGroupTimeCommand) other;
+        if (timeIntervalsToDelete.size() != otherDeleteGroupTimeCommand.timeIntervalsToDelete.size()) {
+            return false;
+        }
+        boolean isSameArray = true;
+        for (int i = 0; i < timeIntervalsToDelete.size(); i++) {
+            isSameArray = isSameArray && timeIntervalsToDelete.get(i).equals(
+                    otherDeleteGroupTimeCommand.timeIntervalsToDelete.get(i));
+        }
+        return group.nameEquals(otherDeleteGroupTimeCommand.group.getGroupName())
+                && isSameArray;
+    }
 }

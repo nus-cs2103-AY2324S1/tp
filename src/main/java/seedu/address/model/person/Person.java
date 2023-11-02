@@ -214,6 +214,10 @@ public class Person {
         this.timeIntervalList.deleteTime(toAddFreeTime);
     }
 
+    public boolean hasFreeTime(TimeInterval freeTime) {
+        return this.timeIntervalList.hasTime(freeTime);
+    }
+
     /**
      * Check whether Person has input their free time
      * @return boolean, whether person is not free
