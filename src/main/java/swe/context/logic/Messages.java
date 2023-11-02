@@ -13,7 +13,8 @@ public final class Messages {
     // Generic commands
     public static final String DUPLICATE_FIELDS
     = "Multiple values specified for the following single-valued parameters(s): ";
-    public static final String COMMAND_DUPLICATE_CONTACT = "There is an existing contact with the same name.";
+    public static final String COMMAND_DUPLICATE_CONTACT =
+            "There is an existing contact with the same name.";
     private static final String UNFORMATTED_COMMAND_INVALID_FORMAT = "Invalid command format.%n%s";
     private static final String UNFORMATTED_COMMAND_UNKNOWN = "Unknown command.%n%s";
     private static final String UNFORMATTED_CONTACTS_LISTED_OVERVIEW = "%d contacts listed.";
@@ -22,7 +23,8 @@ public final class Messages {
     private static final String UNFORMATTED_EDIT_COMMAND_SUCCESS = "Edited contact: %s";
 
     // Specific commands
-    public static final String COMMAND_EDIT_NO_PARAM = "At least one optional parameter to edit must be provided.";
+    public static final String COMMAND_EDIT_NO_PARAM =
+            "At least one optional parameter to edit must be provided.";
     public static final String COMMAND_CLEAR_SUCCESS = "Removed all contacts!";
     public static final String COMMAND_LIST_SUCCESS = "Listed all contacts.";
     public static final String COMMAND_HELP_SUCCESS = "Opened help window.";
@@ -32,29 +34,28 @@ public final class Messages {
             = "One or more of the contact indices provided are invalid.";
     public static final String INVALID_EDIT_INDEX = "The contact index provided is invalid.";
 
-    // Messages associated with Attributes constraints
-    public static final String NAME_INVALID
-            = "Names must be alphanumeric (spaces allowed).";
-    public static final String PHONE_INVALID
-            = "Phone numbers must start with at least 3 digits.";
-    public static final String EMAIL_INVALID
-            = "Emails must roughly be of the form \"example_email@foo-domain.sg.\"";
-    private static final String UNFORMATTED_TAG_INVALID
-            = "\"%s\" is not a valid tag. Tags must be alphanumeric (spaces allowed).";
-
-    private static final String UNFORMATTED_ALTERNATECONTACT_INVALID
-            = "\"%s\" is not a valid alternate contact. "
+    // Validation messages for command parameter constraints
+    public static final String NAME_INVALID = "Names must be alphanumeric (spaces allowed).";
+    public static final String PHONE_INVALID = "Phone numbers must start with at least 3 digits.";
+    public static final String EMAIL_INVALID =
+            "Emails must roughly be of the form \"example_email@foo-domain.sg.\"";
+    private static final String UNFORMATTED_TAG_INVALID =
+            "\"%s\" is not a valid tag. Tags must be alphanumeric (spaces allowed).";
+    private static final String UNFORMATTED_ALTERNATECONTACT_INVALID =
+            "\"%s\" is not a valid alternate contact. "
             + "Alternate contacts must roughly be of the form \"socialMedia: name\"";
 
     // JSON
-    public static final String CONVERT_CONTACTS_DUPLICATE = "Encountered duplicate while converting contacts.";
+    public static final String CONVERT_CONTACTS_DUPLICATE =
+            "Encountered duplicate while converting contacts.";
 
     // Exceptions
-    public static final String DUPLICATE_CONTACT_EXCEPTION = "Operation would result in duplicate contacts";
-    private static final String UNFORMATTED_FILE_OPS_ERROR_FORMAT
-            = "Could not save data due to the following error: %s";
-    private static final String UNFORMATTED_FILE_OPS_PERMISSION_ERROR_FORMAT
-            = "Could not save data to file %s due to insufficient permissions to write to the file or the folder.";
+    public static final String DUPLICATE_CONTACT_EXCEPTION =
+            "Operation would result in duplicate contacts";
+    private static final String UNFORMATTED_FILE_OPS_ERROR_FORMAT =
+            "Could not save data due to the following error: %s";
+    private static final String UNFORMATTED_FILE_OPS_PERMISSION_ERROR_FORMAT =
+            "Could not save data to file %s due to insufficient permissions to write to the file or the folder.";
 
     private static final String UNFORMATTED_FIELD_MISSING = "Contact's %s field is missing.";
 
