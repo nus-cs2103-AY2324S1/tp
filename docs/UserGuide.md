@@ -187,7 +187,7 @@ Format: `clear`
 
 Format: `clearstaff`
 
-Cleared staff list
+Removes all entries in the staff list
 
 ### Clearing transactions: `cleartransaction`
 
