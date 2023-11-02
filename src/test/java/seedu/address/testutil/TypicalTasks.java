@@ -23,6 +23,15 @@ public class TypicalTasks {
             .withDescription("Lunch")
             .withDeadline("2023-11-15 15:00").build();
 
+    // Manually added
+    public static final Task REPORT = new TaskBuilder()
+            .withDescription("Finish Report")
+            .withNoDeadline().build();
+
+    public static final Task FEATURE = new TaskBuilder()
+            .withDescription("Push Feature")
+            .withDeadline("2023-11-15 15:00").build();
+
     private TypicalTasks() {} // prevents instantiation
 
     /**

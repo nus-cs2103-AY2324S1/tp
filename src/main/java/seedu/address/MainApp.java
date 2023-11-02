@@ -27,13 +27,16 @@ import seedu.address.model.task.ReadOnlyTaskManager;
 import seedu.address.model.task.TaskManager;
 import seedu.address.model.util.SampleCalendarUtil;
 import seedu.address.model.util.SampleDataUtil;
+import seedu.address.model.util.SampleTaskManagerUtil;
 import seedu.address.storage.AddressBookStorage;
 import seedu.address.storage.CalendarStorage;
 import seedu.address.storage.JsonAddressBookStorage;
 import seedu.address.storage.JsonCalendarStorage;
+import seedu.address.storage.JsonTaskManagerStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
 import seedu.address.storage.Storage;
 import seedu.address.storage.StorageManager;
+import seedu.address.storage.TaskManagerStorage;
 import seedu.address.storage.UserPrefsStorage;
 import seedu.address.ui.Ui;
 import seedu.address.ui.UiManager;
@@ -66,7 +69,8 @@ public class MainApp extends Application {
         UserPrefs userPrefs = initPrefs(userPrefsStorage);
         AddressBookStorage addressBookStorage = new JsonAddressBookStorage(userPrefs.getAddressBookFilePath());
         CalendarStorage calendarStorage = new JsonCalendarStorage(userPrefs.getCalendarFilePath());
-        storage = new StorageManager(addressBookStorage, calendarStorage, userPrefsStorage);
+        TaskManagerStorage taskManagerStorage = new JsonTaskManagerStorage(userPrefs.getTaskManagerFilePath());
+        storage = new StorageManager(addressBookStorage, calendarStorage, taskManagerStorage, userPrefsStorage);
 
         model = initModelManager(storage, userPrefs);
 
@@ -87,6 +91,8 @@ public class MainApp extends Application {
         ReadOnlyAddressBook addressBookInitialData;
         Optional<ReadOnlyCalendar> calendarOptional;
         ReadOnlyCalendar calendarInitialData;
+        Optional<ReadOnlyTaskManager> taskManagerOptional;
+        ReadOnlyTaskManager taskManagerInitialData;
 
         try {
             addressBookOptional = storage.readAddressBook();
@@ -109,14 +115,25 @@ public class MainApp extends Application {
             }
             calendarInitialData = calendarOptional.orElseGet(SampleCalendarUtil::getSampleCalendar);
         } catch (DataLoadingException e) {
-            logger.warning("Data file at " + storage.getAddressBookFilePath() + " could not be loaded."
+            logger.warning("Data file at " + storage.getCalendarFilePath() + " could not be loaded."
                     + " Will be starting with an empty AddressBook.");
             calendarInitialData = new Calendar();
         }
 
-        ReadOnlyTaskManager taskManager = new TaskManager();
+        try {
+            taskManagerOptional = storage.readTaskManager();
+            if (!taskManagerOptional.isPresent()) {
+                logger.info("Creating a new data file " + storage.getTaskManagerFilePath()
+                        + " populated with a sample Task Manager.");
+            }
+            taskManagerInitialData = taskManagerOptional.orElseGet(SampleTaskManagerUtil::getSampleTaskManager);
+        } catch (DataLoadingException e) {
+            logger.warning("Data file at " + storage.getTaskManagerFilePath() + " could not be loaded."
+                    + " Will be starting with an empty AddressBook.");
+            taskManagerInitialData = new TaskManager();
+        }
 
-        return new ModelManager(addressBookInitialData, calendarInitialData, taskManager, userPrefs);
+        return new ModelManager(addressBookInitialData, calendarInitialData, taskManagerInitialData, userPrefs);
     }
 
     private void initLogging(Config config) {

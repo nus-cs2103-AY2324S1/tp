@@ -164,7 +164,7 @@ Examples:
 ### Sort persons : `sort`
 
 * Sorts all persons by specified `comparator`.
-* The comparator refers to the attribute(s) provided for the basis to sort. 
+* The comparator refers to the attribute(s) provided for the basis to sort.
 * Sorting is done in ascending order by default. To sort by descending order, the keyword `reverse` can be used (see Examples below).
 
 Examples:

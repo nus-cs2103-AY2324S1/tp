@@ -39,6 +39,7 @@ import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.SortCommand;
 import seedu.address.logic.commands.SortTasksCommand;
 import seedu.address.logic.commands.SwitchListCommand;
+import seedu.address.logic.commands.ViewContactEventsCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.event.Event;
 import seedu.address.model.event.EventPeriod;
@@ -259,6 +260,13 @@ public class UniMateParserTest {
         DeleteTaskCommand command = (DeleteTaskCommand) parser.parseCommand(
                 DeleteTaskCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
         assertEquals(new DeleteTaskCommand(INDEX_FIRST_PERSON), command);
+    }
+
+    @Test
+    public void parseCommand_viewContactEvents() throws Exception {
+        ViewContactEventsCommand command = (ViewContactEventsCommand) parser.parseCommand(
+                ViewContactEventsCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
+        assertEquals(new ViewContactEventsCommand(INDEX_FIRST_PERSON), command);
     }
 
     @Test
