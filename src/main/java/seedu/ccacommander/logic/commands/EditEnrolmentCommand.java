@@ -84,8 +84,8 @@ public class EditEnrolmentCommand extends Command {
         Member targetMember = lastShownMemberList.get(memberIndex.getZeroBased());
         Event targetEvent = lastShownEventList.get(eventIndex.getZeroBased());
         Enrolment enrolmentToCheck =
-                new Enrolment(targetMember.getName(), targetEvent.getName(), new Hours("0"),
-                        new Remark("UNUSED REMARK"));
+                new Enrolment(targetMember.getName(), targetEvent.getName(), Optional.of(new Hours("0")),
+                        Optional.of(new Remark("UNUSED REMARK")));
 
         model.updateFilteredEnrolmentList(new EnrolmentExistsPredicate(enrolmentToCheck));
         List<Enrolment> enrolmentToEditList = model.getFilteredEnrolmentList();
@@ -118,7 +118,7 @@ public class EditEnrolmentCommand extends Command {
         Hours updatedHours = editEnrolmentDescriptor.getHours().orElse(enrolmentToEdit.getHours());
         Remark updatedRemark = editEnrolmentDescriptor.getRemark().orElse(enrolmentToEdit.getRemark());
 
-        return new Enrolment(memberName, eventName, updatedHours, updatedRemark);
+        return new Enrolment(memberName, eventName, Optional.of(updatedHours), Optional.of(updatedRemark));
     }
 
     @Override

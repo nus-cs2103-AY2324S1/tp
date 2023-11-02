@@ -6,6 +6,7 @@ import static seedu.ccacommander.commons.util.CollectionUtil.requireAllNonNull;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -235,7 +236,7 @@ public class ModelManager implements Model {
         for (Enrolment enrolment: enrolmentList) {
             if (enrolment.getEventName().equals(prevName)) {
                 Enrolment editedEnrolment = new Enrolment(enrolment.getMemberName(), newName,
-                        enrolment.getHours(), enrolment.getRemark());
+                        Optional.of(enrolment.getHours()), Optional.of(enrolment.getRemark()));
                 setEnrolment(enrolment, editedEnrolment);
             }
         }
@@ -256,7 +257,7 @@ public class ModelManager implements Model {
         for (Enrolment enrolment: enrolmentList) {
             if (enrolment.getMemberName().equals(prevName)) {
                 Enrolment editedEnrolment = new Enrolment(newName, enrolment.getEventName(),
-                        enrolment.getHours(), enrolment.getRemark());
+                        Optional.of(enrolment.getHours()), Optional.of(enrolment.getRemark()));
                 setEnrolment(enrolment, editedEnrolment);
             }
         }
