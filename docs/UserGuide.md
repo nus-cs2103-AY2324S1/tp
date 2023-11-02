@@ -82,6 +82,62 @@ Shows a message explaning how to access the help page.
 
 Format: `help`
 
+### Creating an addressbook: `course create`
+
+Creates a new addressbook.
+
+Format: `course create coursetg/COURSECODE`
+
+* Creates a new addressbook with course code `COURSECODE`
+* `COURSECODE` should be a string made up of alphabetical characters and numbers, with no special characters.
+* `COURSECODE` must be specified.
+* `COURSECODE` address book must not exist.
+
+Example:
+* `course create coursetg/CS2103T` creates a new addressbook with course code CS2103T.
+
+### Deleting an addressbook: `course delete`
+
+Delete an addressbook.
+
+Format: `course create coursetg/COURSECODE`
+
+* Deletes the addressbook with course code `COURSECODE`
+* `COURSECODE` should be a string made up of alphabetical characters and numbers, with no special characters.
+* `COURSECODE` must be specified.
+* `COURSECODE` address book must exist.
+
+Example:
+* `course delete coursetg/CS2103T` deletes the addressbook with course code CS2103T.
+
+### Switching an addressbook: `course switch`
+
+Switches the active addressbook.
+
+Format: `course switch coursetg/COURSECODE`
+
+* Switches to the addressbook with course code `COURSECODE`
+* `COURSECODE` should be a string made up of alphabetical characters and numbers, with no special characters.
+* `COURSECODE` must be specified.
+* `COURSECODE` address book must exist.
+
+Example:
+* `course switch coursetg/CS2103T` switches to the addressbook with course code CS2103T.
+
+### Editing an addressbook: `course edit`
+
+Edits the active addressbook.
+
+Format: `course edit coursetg/COURSECODE`
+
+* Changes the course code of active addressbook to `COURSECODE`
+* `COURSECODE` should be a string made up of alphabetical characters and numbers, with no special characters.
+* `COURSECODE` must be specified.
+* `COURSECODE` address book must not exist.
+
+Example:
+* `course edit coursetg/CS2103T` changes the active addressbook's course code to CS2103T.
+
 ### Adding a new contact: `add`
 
 Creates a new contact with the specified name and course code.
@@ -96,7 +152,7 @@ Format: `add n/STUDENT_NAME p/PHONE_NUMBER e/EMAIL id/STUDENT_ID [t/COURSE_CODE 
 
 Examples:
 * `add n/Fu Yiqiao p/91234567 e/fyq@gmail.com id/A1234567E`
-* `add n/Fu Yiqiao p/91234567 e/fyq@gmail.com id/A1234567E t/CS2103T G2`
+* `add n/Fu Yiqiao p/91234567 e/fyq@gmail.com id/A1234567E t/G2`
 
 ### Editing a contact : `edit`
 
