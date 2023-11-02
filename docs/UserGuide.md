@@ -37,7 +37,7 @@ It is able to add, edit and delete any contacts and meetings you want. As well a
 
    - `listc` : Lists all contacts.
 
-   - `addc n/John Doe p/98765432 e/johnd@example.com l/10.10.2023 1000 o/NUS` : Adds a contact named `John Doe` to OutBook.
+   - `addc n/John Doe p/98765432 e/johnd@example.com lc/10.10.2023 1000 o/NUS` : Adds a contact named `John Doe` to OutBook.
 
    - `deletec 3` : Deletes the 3rd contact shown in the contact list.
 
@@ -145,7 +145,7 @@ Examples:
 
 Edits an existing contact in OutBook.
 
-Format: `editc INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [l/LAST_CONTACTED_TIME] [s/STATUS] [r/REMARK] [t/TAG]…​`
+Format: `editc INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [lc/LAST_CONTACTED_TIME] [s/STATUS] [r/REMARK] [t/TAG]…​`
 
 - Edits the contact at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 - All fields are optional, but at least one must be provided.
@@ -178,7 +178,7 @@ Format: `viewc INDEX`
 * The displayed contact may change when `editc` is used in a way that modifies the order of the displayed person list, such as by editing the `LAST_CONTACTED_DATE`. This is intentional as the `editc` command is meant to display information based on the contact list index.
 
 Examples:
-
+* `viewc 2` Displays detailed information related to the 2nd contact on the list.
 
 <br/><br/><br/><br/>
 
@@ -408,7 +408,7 @@ If your changes to the data file makes its format invalid, OutBook will discard 
 
 | Action                          | Format, Examples                                                                                                                                                                           |
 |---------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add contact**                 | `addc n/NAME p/PHONE_NUMBER e/EMAIL lc/LAST_CONTACTED_TIME [r/REMARK] [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com l/09.09.2023 0000 o/NUS t/friend t/colleague` |
+| **Add contact**                 | `addc n/NAME p/PHONE_NUMBER e/EMAIL lc/LAST_CONTACTED_TIME [r/REMARK] [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com lc/09.09.2023 0000 o/NUS t/friend t/colleague` |
 | **Add contact to meeting**      | `addmc MEETING_INDEX CONTACT_INDEX` <br> e.g., `addmc 2 1`                                                                                                                                 |
 | **Add meeting**                 | `addm m/TITLE a/LOCATION s/START e/END [t/TAG]…​` <br> e.g., `addm m/Lunch a/Cafeteria s/20.09.2023 1200 e/20.09.2023 1300`                                                                |
 | **Clear**                       | `clear`                                                                                                                                                                                    |
