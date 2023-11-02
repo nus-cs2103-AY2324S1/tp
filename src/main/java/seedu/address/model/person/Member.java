@@ -111,9 +111,9 @@ public class Member extends Person {
         Member otherMember = (Member) other;
         // members are considered the same if they have the same name, phone, email or telegram handle
         return getName().equals(otherMember.getName())
-                || this.phone.equals(otherMember.phone)
-                || this.email.equals(otherMember.email)
-                || this.telegram.equals(otherMember.telegram);
+            || this.phone.equals(otherMember.phone)
+            || this.email.equals(otherMember.email)
+            || this.telegram.equals(otherMember.telegram);
     }
 
     /**
@@ -133,10 +133,10 @@ public class Member extends Person {
 
         Member otherMember = (Member) other;
         return getName().equals(otherMember.getName())
-                && getPhone().equals(otherMember.getPhone())
-                && getEmail().equals(otherMember.getEmail())
-                && getTags().equals(otherMember.getTags())
-                && getTelegram().equals(otherMember.getTelegram());
+            && getPhone().equals(otherMember.getPhone())
+            && getEmail().equals(otherMember.getEmail())
+            && getTags().equals(otherMember.getTags())
+            && getTelegram().equals(otherMember.getTelegram());
     }
 
     @Override
@@ -148,22 +148,22 @@ public class Member extends Person {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("name", getName())
-                .add("phone", getPhone())
-                .add("email", getEmail())
-                .add("telegram", getTelegram())
-                .add("tags", getTags())
-                .add("tasks", getTasks())
-                .toString();
+            .add("name", getName())
+            .add("phone", getPhone())
+            .add("email", getEmail())
+            .add("telegram", getTelegram())
+            .add("tags", getTags())
+            .add("tasks", getTasks())
+            .toString();
     }
 
     @Override
     public String detailsToCopy() {
         return "Name: " + getName() + "\n"
-                + "Phone: " + getPhone() + "\n"
-                + "Email: " + getEmail() + "\n"
-                + "Telegram: " + getTelegram() + "\n"
-                + "Tags: " + getTags().stream().map(Tag::toString).collect(Collectors.joining(", "))
-                + "Tasks: " + getTasks().stream().map(Task::toString).collect(Collectors.joining(", "));
+            + "Phone: " + getPhone() + "\n"
+            + "Email: " + getEmail() + "\n"
+            + "Telegram: " + getTelegram() + "\n"
+            + "Tags: " + getTags().stream().map(Tag::toString).collect(Collectors.joining(", ")) + "\n"
+            + "Tasks: " + getTasks().stream().map(Task::toString).collect(Collectors.joining(", "));
     }
 }
