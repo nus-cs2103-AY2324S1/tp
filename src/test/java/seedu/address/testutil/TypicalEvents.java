@@ -8,7 +8,7 @@ import seedu.address.model.event.Meeting;
 /**
  * A utility class containing a list of {@code Meeting} objects to be used in tests.
  */
-public class TypicalMeetings {
+public class TypicalEvents {
 
     public static final Meeting TP_MEETING;
 
@@ -18,12 +18,42 @@ public class TypicalMeetings {
                     .withEventDate("2023-10-18")
                     .withEventStartTime("0000")
                     .withEventEndTime("2359")
+                    .build();
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static final Meeting TP_MEETING_WITH_PERSONS;
+
+    static {
+        try {
+            TP_MEETING_WITH_PERSONS = new MeetingBuilder().withEventName("TP MEETING TEST")
+                    .withEventDate("2023-10-18")
+                    .withEventStartTime("0000")
+                    .withEventEndTime("2359")
                     .withPerson("Alice Pauline", "Benson Meier")
                     .build();
         } catch (ParseException e) {
             throw new RuntimeException(e);
         }
     }
+
+    public static final Meeting TP_MEETING_WITH_GROUPS;
+
+    static {
+        try {
+            TP_MEETING_WITH_GROUPS = new MeetingBuilder().withEventName("TP MEETING TEST")
+                    .withEventDate("2023-10-18")
+                    .withEventStartTime("0000")
+                    .withEventEndTime("2359")
+                    .withGroups("friends", "owesMoney")
+                    .build();
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 
     public static final Meeting TP_MEETING_LATER_START_TIME;
 

@@ -107,8 +107,8 @@ public class JsonAdaptedEvent {
             throw new IllegalValueException(
                     String.format(MISSING_FIELD_MESSAGE_FORMAT, EventName.class.getSimpleName()));
         }
-        if (!Name.isValidName(name)) {
-            throw new IllegalValueException(Name.MESSAGE_CONSTRAINTS);
+        if (!EventName.isValidName(name)) {
+            throw new IllegalValueException(EventName.MESSAGE_CONSTRAINTS);
         }
         final EventName modelName = new EventName(name);
 

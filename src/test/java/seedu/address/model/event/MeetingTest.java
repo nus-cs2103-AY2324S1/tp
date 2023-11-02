@@ -3,8 +3,8 @@ package seedu.address.model.event;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.testutil.TypicalMeetings.MEETING_WITHOUT_TIME;
-import static seedu.address.testutil.TypicalMeetings.TP_MEETING;
+import static seedu.address.testutil.TypicalEvents.MEETING_WITHOUT_TIME;
+import static seedu.address.testutil.TypicalEvents.TP_MEETING;
 
 import org.junit.jupiter.api.Test;
 

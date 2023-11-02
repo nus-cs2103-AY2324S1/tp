@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showEventAtIndex;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_MEETING;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_EVENT;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
@@ -24,8 +24,8 @@ public class DeleteEventCommandTest {
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
-        Event eventToDelete = model.getEventList().get(INDEX_FIRST_MEETING.getZeroBased());
-        DeleteEventCommand deleteEventCommand = new DeleteEventCommand(INDEX_FIRST_MEETING);
+        Event eventToDelete = model.getEventList().get(INDEX_FIRST_EVENT.getZeroBased());
+        DeleteEventCommand deleteEventCommand = new DeleteEventCommand(INDEX_FIRST_EVENT);
 
         String expectedMessage = String.format(DeleteEventCommand.MESSAGE_DELETE_EVENT_SUCCESS,
                 Messages.formatEvent(eventToDelete));
@@ -46,10 +46,10 @@ public class DeleteEventCommandTest {
 
     @Test
     public void execute_validIndexFilteredList_success() {
-        showEventAtIndex(model, INDEX_FIRST_MEETING);
+        showEventAtIndex(model, INDEX_FIRST_EVENT);
 
-        Event eventToDelete = model.getEventList().get(INDEX_FIRST_MEETING.getZeroBased());
-        DeleteEventCommand deleteEventCommand = new DeleteEventCommand(INDEX_FIRST_MEETING);
+        Event eventToDelete = model.getEventList().get(INDEX_FIRST_EVENT.getZeroBased());
+        DeleteEventCommand deleteEventCommand = new DeleteEventCommand(INDEX_FIRST_EVENT);
 
         String expectedMessage = String.format(DeleteEventCommand.MESSAGE_DELETE_EVENT_SUCCESS,
                 Messages.formatEvent(eventToDelete));
