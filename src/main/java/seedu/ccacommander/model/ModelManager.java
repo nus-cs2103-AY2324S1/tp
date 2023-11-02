@@ -355,8 +355,8 @@ public class ModelManager implements Model {
                 memberNameCollection.add(memName);
                 for (Member member: lastShownMemberList) {
                     if (member.getName().equals(memName)) {
-                        member.setHours(enrolment.getHours());
-                        member.setRemark(enrolment.getRemark());
+                        member.setHours(Optional.of(enrolment.getHours()));
+                        member.setRemark(Optional.of(enrolment.getRemark()));
                     }
                 }
             }
@@ -380,8 +380,8 @@ public class ModelManager implements Model {
                 eventNameCollection.add(eventName);
                 for (Event event: lastShownEventList) {
                     if (event.getName().equals(eventName)) {
-                        event.setHours(enrolment.getHours());
-                        event.setRemark(enrolment.getRemark());
+                        event.setHours(Optional.of(enrolment.getHours()));
+                        event.setRemark(Optional.of(enrolment.getRemark()));
                     }
                 }
             }

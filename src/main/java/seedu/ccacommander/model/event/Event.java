@@ -5,6 +5,7 @@ import static seedu.ccacommander.commons.util.CollectionUtil.requireAllNonNull;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.Set;
 
 import seedu.ccacommander.commons.util.ToStringBuilder;
@@ -27,8 +28,8 @@ public class Event {
     private final EventDate eventDate;
 
     // Enrolment data fields
-    private Hours hours;
-    private Remark remark;
+    private Optional<Hours> hours;
+    private Optional<Remark> remark;
     private final Set<Tag> tags = new HashSet<>();
 
     /**
@@ -40,8 +41,8 @@ public class Event {
         this.eventDate = eventDate;
         this.location = location;
         this.tags.addAll(tags);
-        this.hours = new Hours("0");
-        this.remark = new Remark("None");
+        this.hours = Optional.of(Hours.EMPTY_HOURS);
+        this.remark = Optional.of(Remark.EMPTY_REMARK);
     }
 
     public Name getName() {
@@ -57,16 +58,15 @@ public class Event {
     }
 
     public Hours getHours() {
-        return this.hours;
+        return hours.orElse(Hours.EMPTY_HOURS);
     }
     public Remark getRemark() {
-        return this.remark;
+        return remark.orElse(Remark.EMPTY_REMARK);
     }
-    public void setHours(Hours hours) {
+    public void setHours(Optional<Hours> hours) {
         this.hours = hours;
     }
-
-    public void setRemark(Remark remark) {
+    public void setRemark(Optional<Remark> remark) {
         this.remark = remark;
     }
 

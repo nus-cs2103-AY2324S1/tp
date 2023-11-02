@@ -30,8 +30,8 @@ public class Member {
     // Data fields
     private final Optional<Address> address;
     private final Set<Tag> tags = new HashSet<>();
-    private Hours hours;
-    private Remark remark;
+    private Optional<Hours> hours;
+    private Optional<Remark> remark;
 
     /**
      * Every field must be present and not null.
@@ -46,8 +46,8 @@ public class Member {
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
-        this.hours = new Hours("0");
-        this.remark = new Remark("None");
+        this.hours = Optional.of(Hours.EMPTY_HOURS);
+        this.remark = Optional.of(Remark.EMPTY_REMARK);
     }
 
     public Name getName() {
@@ -71,10 +71,10 @@ public class Member {
     }
 
     public Hours getHours() {
-        return hours;
+        return hours.orElse(Hours.EMPTY_HOURS);
     }
     public Remark getRemark() {
-        return remark;
+        return remark.orElse(Remark.EMPTY_REMARK);
     }
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
@@ -83,10 +83,10 @@ public class Member {
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
     }
-    public void setHours(Hours hours) {
+    public void setHours(Optional<Hours> hours) {
         this.hours = hours;
     }
-    public void setRemark(Remark remark) {
+    public void setRemark(Optional<Remark> remark) {
         this.remark = remark;
     }
     /**
