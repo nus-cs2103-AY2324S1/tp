@@ -141,11 +141,11 @@ public class MarkCommand extends Command {
         }
         if (indexes.size() == 1) {
             Person employeeToMark = fullList.get(indexes.get(0) - 1);
-            Person markedEmployee = markEmployee(employeeToMark);
-            if (markedEmployee.getWorkingStatusToday().equals(AttendanceType.ON_LEAVE)) {
+            if (employeeToMark.getWorkingStatusToday().equals(AttendanceType.ON_LEAVE)) {
                 throw new CommandException(MESSAGE_PERSON_ON_LEAVE);
             }
 
+            Person markedEmployee = markEmployee(employeeToMark);
             model.setPerson(employeeToMark, markedEmployee);
             return new CommandResult(String.format(MESSAGE_MARK_PERSON_SUCCESS,
                     attendanceType.toString().toLowerCase(), employeeToMark.getName()));
@@ -168,11 +168,11 @@ public class MarkCommand extends Command {
         }
 
         Person employeeToMark = lastShownList.get(targetIndex.getZeroBased());
-        Person markedEmployee = markEmployee(employeeToMark);
-        if (markedEmployee.getWorkingStatusToday() == AttendanceType.ON_LEAVE) {
+        if (employeeToMark.getWorkingStatusToday() == AttendanceType.ON_LEAVE) {
             throw new CommandException(MESSAGE_PERSON_ON_LEAVE);
         }
 
+        Person markedEmployee = markEmployee(employeeToMark);
         model.setPerson(employeeToMark, markedEmployee);
         return new CommandResult(
                 String.format(MESSAGE_MARK_PERSON_SUCCESS,
