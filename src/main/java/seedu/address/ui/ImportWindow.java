@@ -11,7 +11,7 @@ import javafx.scene.control.TextArea;
 import javafx.stage.Stage;
 import seedu.address.commons.core.LogsCenter;
 /**
- * Controller for a help page
+ * Controller for a importWindow page, used when user wishes to import cards
  */
 public class ImportWindow extends UiPart<Stage> {
 
@@ -38,9 +38,9 @@ public class ImportWindow extends UiPart<Stage> {
      */
     public ImportWindow(Stage root, Stage primaryStage) {
         super(FXML, root);
-        warningMessage.setText(warningData);
         this.stage = root;
         this.primaryStage = primaryStage;
+        warningMessage.setText(warningData);
     }
 
     /**
