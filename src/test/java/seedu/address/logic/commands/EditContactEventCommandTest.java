@@ -1,7 +1,9 @@
 package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalEvents.getTypicalCalendar;
@@ -133,7 +135,7 @@ public class EditContactEventCommandTest {
         EditContactEventCommand.EditEventDescriptor descriptor2 = new EditEventDescriptorBuilder()
                 .withEventDescription("Sleep").withEventStartTime(startTimeString)
                 .withEventEndTime(endTimeString).build();
-        assertNotEquals(descriptor1, descriptor2);
+        assertFalse(descriptor1.equals(descriptor2));
     }
 
     @Test
@@ -148,7 +150,7 @@ public class EditContactEventCommandTest {
         EditContactEventCommand.EditEventDescriptor descriptor2 = new EditEventDescriptorBuilder()
                 .withEventDescription(desc).withEventStartTime(startTimeString2)
                 .withEventEndTime(endTimeString1).build();
-        assertNotEquals(descriptor1, descriptor2);
+        assertFalse(descriptor1.equals(descriptor2));
     }
 
     @Test
@@ -182,9 +184,9 @@ public class EditContactEventCommandTest {
         EditContactEventCommand editContactEventCommand1 = new EditContactEventCommand(indexArrayList, descriptor);
         EditContactEventCommand editContactEventCommand2 = new EditContactEventCommand(indexArrayList2, descriptor);
 
-        assertEquals(editContactEventCommand1, editContactEventCommand1);
-        assertNotEquals(editContactEventCommand1, null);
-        assertNotEquals(editContactEventCommand2, editContactEventCommand1);
+        assertTrue(editContactEventCommand1.equals(editContactEventCommand1));
+        assertFalse(editContactEventCommand1.equals(null));
+        assertFalse(editContactEventCommand1.equals(editContactEventCommand2));
     }
 
 }
