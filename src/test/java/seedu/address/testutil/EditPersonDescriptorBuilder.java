@@ -37,14 +37,14 @@ public class EditPersonDescriptorBuilder {
     /**
      * Returns an {@code EditPersonDescriptor} with fields containing {@code person}'s details
      */
-    public EditPersonDescriptorBuilder(Person person) {
+    public EditPersonDescriptorBuilder(Ic nric, Person person) {
         descriptor = new EditPersonDescriptor();
+        descriptor.setIc(nric);
         descriptor.setName(person.getName());
         descriptor.setPhone(person.getPhone());
         descriptor.setEmail(person.getEmail());
         descriptor.setAddress(person.getAddress());
         descriptor.setGender(person.getGender());
-        descriptor.setIc(person.getIc());
         descriptor.setTags(person.getTags());
         descriptor.setRemark(person.getRemark());
         if (person.isPatient()) {
@@ -104,13 +104,6 @@ public class EditPersonDescriptorBuilder {
         return this;
     }
 
-    /**
-     * Sets the {@code Ic} of the {@code EditPersonDescriptor} that we are building.
-     */
-    public EditPersonDescriptorBuilder withIc(String ic) {
-        descriptor.setIc(new Ic(ic));
-        return this;
-    }
 
     /**
      * Sets the {@code BloodType} of the {@code EditPersonDescriptor} that we are building.

@@ -17,7 +17,7 @@
                 <Insets top="5" right="5" bottom="5" left="15"/>
             </padding>
             <HBox spacing="5" alignment="CENTER_LEFT">
-                <Label fx:id="id" styleClass="cell_big_label">
+                <Label fx:id="id" styleClass="cell_big_label" style="-fx-font-weight: bold;">
                     <minWidth>
                         <!-- Ensures that the label text is never truncated -->
                         <Region fx:constant="USE_PREF_SIZE"/>
@@ -26,7 +26,7 @@
             </HBox>
             <Label fx:id="patientIc" styleClass="cell_small_label" text="\$patientIc"/>
             <Label fx:id="doctorIc" styleClass="cell_small_label" text="\$doctorIc"/>
-            <Label fx:id="appointmentTime" styleClass="cell_small_label" text="\$appointmentTime"/>
+            <Label fx:id="appointmentTime" styleClass="cell_small_label" text="\$appointmentTime" wrapText="true"/>
         </VBox>
     </GridPane>
 </HBox>

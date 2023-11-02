@@ -61,6 +61,7 @@ public class AddAppointmentCommand extends Command {
         checkValidAppointment(chosenPatient, chosenDoctor, toAdd);
         chosenPatient.addAppointment(toAdd);
         chosenDoctor.addAppointment(toAdd);
+        model.addAppointment(toAdd);
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
     }
 

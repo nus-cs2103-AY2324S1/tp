@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.StackPane?>
 <VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
     <StackPane styleClass="pane-with-white-border">
-        <Label text="Patient" styleClass="label-list-header" />
+        <Label text="Patient" styleClass="label-list-header" style="-fx-font-weight: bold;"/>
     </StackPane>
     <ListView fx:id="patientListView" VBox.vgrow="ALWAYS"/>
 </VBox>

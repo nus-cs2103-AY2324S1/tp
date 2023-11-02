@@ -31,10 +31,12 @@ import seedu.address.model.tag.Tag;
  * Parses input arguments and creates a new EditCommand object
  */
 public class EditCommandParser implements Parser<EditCommand> {
+    public static final String CANNOT_CHANGE_IC_MESSAGE = "You cannot modify a person's IC";
     private static final Logger logger = LogsCenter.getLogger(EditCommand.class);
     /**
      * Parses the given {@code String} of arguments in the context of the EditCommand
      * and returns an EditCommand object for execution.
+     *
      * @throws ParseException if the user input does not conform the expected format
      */
     public EditCommand parse(String args) throws ParseException {
@@ -57,6 +59,9 @@ public class EditCommandParser implements Parser<EditCommand> {
 
         EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
 
+        if (argMultimap.getValue(PREFIX_NRIC).isPresent()) {
+            editPersonDescriptor.setIc(ParserUtil.parseIc(argMultimap.getValue(PREFIX_NRIC).get()));
+        }
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
             editPersonDescriptor.setName(ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()));
         }
@@ -71,9 +76,6 @@ public class EditCommandParser implements Parser<EditCommand> {
         }
         if (argMultimap.getValue(PREFIX_GENDER).isPresent()) {
             editPersonDescriptor.setGender(ParserUtil.parseGender(argMultimap.getValue(PREFIX_GENDER).get()));
-        }
-        if (argMultimap.getValue(PREFIX_NRIC).isPresent()) {
-            editPersonDescriptor.setIc(ParserUtil.parseIc(argMultimap.getValue(PREFIX_NRIC).get()));
         }
         if (argMultimap.getValue(PREFIX_CONDITION).isPresent()) {
             editPersonDescriptor.setCondition(ParserUtil.parseCondition(argMultimap.getValue(PREFIX_CONDITION).get()));

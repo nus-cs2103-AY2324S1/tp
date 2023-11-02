@@ -173,6 +173,13 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void deleteAppointment(Appointment appointment) {
+        updateBackup();
+        addressBook.removeAppointment(appointment);
+        updateFilteredAppointmentList(PREDICATE_SHOW_ALL_APPOINTMENTS);
+    }
+
+    @Override
     public void setPerson(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
         if (target instanceof Patient && editedPerson instanceof Patient) {

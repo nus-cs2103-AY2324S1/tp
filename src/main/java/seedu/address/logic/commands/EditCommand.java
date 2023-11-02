@@ -8,7 +8,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMERGENCY_CONTACT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GENDER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
@@ -62,7 +61,6 @@ public class EditCommand extends Command {
             + "[" + PREFIX_GENDER + "GENDER] "
             + "[" + PREFIX_CONDITION + "CONDITION] "
             + "[" + PREFIX_BLOODTYPE + "BLOOD TYPE] "
-            + "[" + PREFIX_NRIC + "NRIC] "
             + "[" + PREFIX_EMERGENCY_CONTACT + "EMAIL] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " T0123456H "
@@ -73,6 +71,7 @@ public class EditCommand extends Command {
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
     public static final String MESSAGE_DOESNT_EXIST = "This person hasn't been saved";
+    public static final String MESSAGE_IC_CHANGED = "You can't change a person's IC";
     private static final Logger logger = LogsCenter.getLogger(EditCommand.class.getName());
     private final Ic nric;
     private final EditPersonDescriptor editPersonDescriptor;
@@ -92,6 +91,10 @@ public class EditCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+        if (editPersonDescriptor.getIc().isPresent() && !(editPersonDescriptor.getIc().get().equals(nric))) {
+            throw new CommandException(MESSAGE_IC_CHANGED);
+        }
+
         // combine doctor list and patient list
         Person personToEdit = getPersonToEdit(model);
         Person editedPerson = getEditedPerson(model, personToEdit);
@@ -162,7 +165,7 @@ public class EditCommand extends Command {
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         Remark updatedRemarks = editPersonDescriptor.getRemark().orElse(personToEdit.getRemark());
         Gender updatedGender = editPersonDescriptor.getGender().orElse(personToEdit.getGender());
-        Ic updatedIc = editPersonDescriptor.getIc().orElse(personToEdit.getIc());
+        Ic updatedIc = personToEdit.getIc(); // since you can't modify ic
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
         Set<Appointment> updatedAppointments =
                 editPersonDescriptor.getAppointments().orElse(personToEdit.getAppointments());
@@ -185,7 +188,7 @@ public class EditCommand extends Command {
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         Remark updatedRemarks = editPersonDescriptor.getRemark().orElse(personToEdit.getRemark());
         Gender updatedGender = editPersonDescriptor.getGender().orElse(personToEdit.getGender());
-        Ic updatedIc = editPersonDescriptor.getIc().orElse(personToEdit.getIc());
+        Ic updatedIc = personToEdit.getIc(); // since you can't modify ic
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
         Set<Appointment> updatedAppointments =
                 editPersonDescriptor.getAppointments().orElse(personToEdit.getAppointments());
