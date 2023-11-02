@@ -43,7 +43,7 @@ public final class Messages {
             "\"%s\" is not a valid tag. Tags must be alphanumeric (spaces allowed).";
     private static final String UNFORMATTED_ALTERNATECONTACT_INVALID =
             "\"%s\" is not a valid alternate contact. "
-            + "Alternate contacts must roughly be of the form \"socialMedia: name\"";
+            + "Alternate contacts must roughly be of the form \"SocialMedia: Username\"";
 
     // JSON
     public static final String CONVERT_CONTACTS_DUPLICATE =
