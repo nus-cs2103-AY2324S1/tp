@@ -21,7 +21,7 @@ public class ListPersonCommand extends ListCommand {
     private final Set<Tag> tags;
 
     /**
-     * Creates an AddPersonCommand to add the specified {@code Person}
+     * Creates a ListPersonCommand to list contacts based on tags (may be empty) {@code Person}
      */
     public ListPersonCommand(Set<Tag> tags) {
         requireNonNull(tags);

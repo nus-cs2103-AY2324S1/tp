@@ -107,9 +107,17 @@ Examples:
 
 ### Listing all persons : `list contact`
 
-Shows a list of all persons in the contact list.
+Shows a list of all contacts in the contact list if tags not specified. 
+Otherwise, shows a list of contacts which contains one of the specified tags. 
 
-Format: `list contact`
+Format: `list contact -t TAGNAME...`
+
+* Lists all contacts if no tags passed. 
+* If tags argument passed, lists only contacts that contain one of the tags.
+
+Examples:
+* `list contact` to show all contacts.
+* `list contact -t recruiter` to show all contacts which have a recruiter tag.
 
 ### Deleting a person : `delete contact`
 
