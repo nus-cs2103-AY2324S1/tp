@@ -219,6 +219,55 @@ public class SummaryStatistic implements ReadOnlySummaryStatistic {
         return minScore;
     }
 
+    /**
+     * Returns the list of people in the address book associated with that tag and has a value greater than
+     * or equal to the metric and value provided by the user.
+     * @param tag
+     * @param metric
+     * @param value
+     * @return
+     */
+    public List<Person> filteredPersonList(Tag tag, StatisticMetric metric, int value) {
+        switch (metric) {
+        case SCORE:
+            Stream<Person> filteredStream = personData.stream().filter(person -> person.getTags().contains(tag));
+            Stream<ScoreList> scoreListStream = filteredStream.map(person -> person.getScoreList());
+            Stream<Score> scoreStream = scoreListStream.map(scoreList -> scoreList.getScore(tag));
+            Stream<Integer> scoreValueStream = scoreStream.map(score -> score.value);
+            Stream<Person> filteredPersonStream = scoreValueStream.filter(scoreValue -> scoreValue >= value)
+                    .map(scoreValue -> personData.stream().filter(person -> person.getTags().contains(tag))
+                            .filter(person -> person.getScoreForTag(tag).value >= scoreValue))
+                    .flatMap(personStream -> personStream);
+            List<Person> filteredPersonList = filteredPersonStream.collect(Collectors.toList());
+            return filteredPersonList;
+        case MEAN:
+            Stream<Integer> sortedScoreValueStream = getSortedScoreValueStream(tag);
+            int mean = calculateMean(sortedScoreValueStream);
+            Stream<Person> filteredPersonStreamWithMean = personData.stream()
+                    .filter(person -> person.getTags().contains(tag))
+                    .filter(person -> person.getScoreForTag(tag).value >= mean);
+            List<Person> filteredPersonListWithMean = filteredPersonStreamWithMean.collect(Collectors.toList());
+            return filteredPersonListWithMean;
+        case MEDIAN:
+            Stream<Integer> sortedScoreValueStreamWithMedian = getSortedScoreValueStream(tag);
+            int median = calculateMedian(sortedScoreValueStreamWithMedian);
+            Stream<Person> filteredPersonStreamWithMedian = personData.stream()
+                    .filter(person -> person.getTags().contains(tag))
+                    .filter(person -> person.getScoreForTag(tag).value >= median);
+            List<Person> filteredPersonListWithMedian = filteredPersonStreamWithMedian.collect(Collectors.toList());
+            return filteredPersonListWithMedian;
+        case PERCENTILE:
+            Stream<Person> filteredStreamWithPercentile = personData.stream()
+                    .filter(person -> person.getTags().contains(tag))
+                    .filter(person -> generatePercentileWithTag(person, tag) >= value);
+            List<Person> filteredPersonListWithPercentile = filteredStreamWithPercentile.collect(Collectors.toList());
+            return filteredPersonListWithPercentile;
+        default:
+            assert false : "Invalid metric";
+            return List.of();
+        }
+    }
+
 
 }
 

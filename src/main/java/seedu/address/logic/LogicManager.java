@@ -57,7 +57,6 @@ public class LogicManager implements Logic {
 
 
         try {
-            System.out.println("in try");
             storage.saveAddressBook(model.getAddressBook());
             storage.saveEventBook(model.getEventBook());
         } catch (AccessDeniedException e) {

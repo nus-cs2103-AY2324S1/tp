@@ -92,6 +92,7 @@ public class EditCommand extends Command {
         if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
+
         updateScoreList(personToEdit, editedPerson);
         model.setPerson(personToEdit, editedPerson);
         model.setLastViewedPersonIndex(index);
@@ -120,6 +121,20 @@ public class EditCommand extends Command {
             }
         }
         editedPerson.setScoreList(newScoreList);
+    }
+
+    private boolean containsIllegalTagScore(Person person) throws CommandException {
+        Set<Tag> currentTags = person.getTags();
+        if (currentTags.isEmpty()) {
+            return false;
+        }
+        List<Tag> tagsWithScore = person.getScoreList().getTagsWithScore();
+        for (Tag tag : tagsWithScore) {
+            if (!currentTags.contains(tag)) {
+                throw new CommandException(Messages.MESSAGE_ILLEGAL_TAG_SCORE);
+            }
+        }
+        return false;
     }
 
     /**
@@ -166,16 +181,6 @@ public class EditCommand extends Command {
         oldScoreList.updateScoreList(newTag, newScore);
         return oldScoreList;
 
-    }
-    private boolean containsIllegalTagScore(Person person) throws CommandException {
-        Set<Tag> currentTags = person.getTags();
-        List<Tag> tagsWithScore = person.getScoreList().getTagsWithScore();
-        for (Tag tag : tagsWithScore) {
-            if (!currentTags.contains(tag)) {
-                throw new CommandException(Messages.MESSAGE_ILLEGAL_TAG_SCORE);
-            }
-        }
-        return false;
     }
 
     @Override

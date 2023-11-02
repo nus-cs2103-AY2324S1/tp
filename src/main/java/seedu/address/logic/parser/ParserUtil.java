@@ -21,6 +21,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Score;
+import seedu.address.model.person.ScoreList;
 import seedu.address.model.person.Status;
 import seedu.address.model.person.StatusTypes;
 import seedu.address.model.tag.Tag;
@@ -317,6 +318,10 @@ public class ParserUtil {
             throw new ParseException("Invalid score, score must be non-negative integer.");
         }
         Tag tag = parseTag(tagScorePairArr[0], "");
+        if (!ScoreList.isValidScoreTag(tag)) {
+            throw new ParseException("Invalid score tag, tag must a tag of the category assessment (made using "
+                    + "the create command.");
+        }
         Score score = parseScore(tagScorePairArr[1]);
         return new Pair<>(tag, score);
     }
