@@ -217,12 +217,13 @@ public class AddCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(graduation, tags, priority)
+            return CollectionUtil.isAnyNonNull(graduation, priority)
                     || (phones != null && !phones.isEmpty())
                     || (emails != null && !emails.isEmpty())
                     || (links != null && !links.isEmpty())
                     || (courses != null && !courses.isEmpty())
-                    || (specialisations != null && !specialisations.isEmpty());
+                    || (specialisations != null && !specialisations.isEmpty())
+                    || (tags != null && !tags.isEmpty());
         }
 
         public void setPhones(UniqueList<Phone> phones) {

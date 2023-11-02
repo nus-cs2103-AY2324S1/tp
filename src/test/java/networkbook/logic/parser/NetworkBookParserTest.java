@@ -31,6 +31,7 @@ import networkbook.logic.commands.delete.DeletePersonCommand;
 import networkbook.logic.commands.edit.EditCommand;
 import networkbook.logic.commands.edit.EditNameAction;
 import networkbook.logic.commands.filter.FilterCommand;
+import networkbook.logic.commands.filter.FilterCourseCommand;
 import networkbook.logic.parser.exceptions.ParseException;
 import networkbook.model.person.Name;
 import networkbook.model.person.NameContainsKeyTermsPredicate;
@@ -118,10 +119,11 @@ public class NetworkBookParserTest {
         List<String> keywords = Arrays.asList("foo", "bar", "baz");
         FilterCommand command = (FilterCommand) parser.parseCommand(
                 FilterCommand.COMMAND_WORD + " "
-                        + CliSyntax.PREFIX_FILTER_FIELD + " "
+                        + CliSyntax.PREFIX_FILTER_FIELD + " course "
+                        + CliSyntax.PREFIX_FILTER_ARGS + " "
                         + keywords.stream().collect(Collectors.joining(" "))
         );
-        assertEquals(new FilterCommand(
+        assertEquals(new FilterCourseCommand(
                 new CourseContainsKeyTermsPredicate(keywords),
                 new CourseIsStillBeingTakenPredicate(LocalDate.now()),
                 false), command);
