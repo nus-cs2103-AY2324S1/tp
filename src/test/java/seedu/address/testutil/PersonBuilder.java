@@ -149,11 +149,18 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code payrollStorage} of the {@code Person} that we are building
+     */
     public PersonBuilder withPayrollStorage(ArrayList<Payroll> payrollStorage) {
         this.payrollStorage = new PayrollStorage(payrollStorage);
         return this;
     }
 
+    /**
+     * Turn the {@code PersonBuilder} object into {@code Person} object
+     * @return person object
+     */
     public Person build() {
         return new Person(name, phone, email, address, bankAccount,
                 joinDate, salary, annualLeave, attendanceStorage, payrollStorage);
