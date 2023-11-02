@@ -8,9 +8,9 @@ It is optimized for use via an in-app Command Line Interface (CLI), while still 
 
 It has useful features relevant to NUS SoC students:
 
-- Tagging contacts by category: You can tag your professors and classmates with custom tags such as "Professor", "Tutorial mate", "CS2103" etc., then filter by tag to view all contacts with a certain tag.
-- Storing different ways to reach people: By adding alternate contact details, you could have local phone number, overseas phone number, Telegram, Discord etc. all in the same contact.
-- Works like a usual CLI: You can use the up/down arrow keys to switch between previously-entered commands, making entering and repeating commands (e.g. adding many new contacts) easier. 
+- Tagging contacts by category: You can tag your professors and classmates with custom tags such as "prof", "friend", "CS2103 course" etc., then filter by tag to view all contacts with a certain tag.
+- Storing different ways to reach people: By adding alternate contact details, you could have Telegram, Discord, mobile phone, house phone etc. all in the same contact.
+- Works like a usual CLI: You can use the up/down arrow keys to switch between previously-entered commands, making entering and repeating commands (e.g. adding many new contacts) easier.
 
 If you can type fast, prefer typing, and are reasonably comfortable with CLI inputs, ConText can let you manage contacts faster than traditional GUI apps.
 
@@ -199,7 +199,7 @@ e.g. `find Bee John` will match the names `Amy Bee` and `John Doe`.
 **Examples:**
 
 - `find John`
-- `find alex Bernice CHARLOTTE`
+- `find alex Ben CHARLOTTE`
 
 ### Filtering by tag: `filter`
 
@@ -210,7 +210,7 @@ Search and display contacts with tag matching the given keywords (case-insensiti
 
 **Example:**
 
-- `filter Friend`
+- `filter NUS`
 
 ### Viewing help: `help`
 
