@@ -40,7 +40,7 @@ public class AddCommand extends Command {
             + PREFIX_GENRE + "jazz";
 
     public static final String MESSAGE_SUCCESS = "New musician added: %1$s";
-    public static final String MESSAGE_DUPLICATE_MUSICIAN = "This musician already exists in the address book";
+    public static final String MESSAGE_DUPLICATE_MUSICIAN = "This musician already exists in your contact list";
 
     private final Musician toAdd;
 
