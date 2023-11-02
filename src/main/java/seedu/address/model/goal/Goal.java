@@ -1,5 +1,9 @@
 package seedu.address.model.goal;
 
+import javafx.beans.InvalidationListener;
+import javafx.beans.Observable;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import seedu.address.model.Deck;
 
 /**
@@ -7,10 +11,16 @@ import seedu.address.model.Deck;
  * solved in the session, current number of cards solved, as well
  * as whether the goal is met.
  */
-public class Goal {
+public class Goal implements Observable {
+    public static final String MESSAGE_CONSTRAINTS =
+            "Goal can only be a positive integer and must not be blank";
+
     private int target;
     private int current;
     private boolean isMet;
+
+    // Define a StringProperty to hold the goal text
+    private final StringProperty goalTextProperty = new SimpleStringProperty();
 
     /**
      * Constructor for the Goal class.
@@ -22,7 +32,8 @@ public class Goal {
     public Goal(Deck deck) {
         this.target = deck.getNumberOfCards();
         this.current = 0;
-        this.isMet = target == current;
+        this.isMet = target >= current;
+        updateGoalText();
     }
 
     public int getTarget() {
@@ -37,12 +48,22 @@ public class Goal {
         return this.isMet;
     }
 
+    public StringProperty goalTextProperty() {
+        return goalTextProperty;
+    }
+
+    public String getGoalText() {
+        return goalTextProperty.get();
+    }
+
     public void setTarget(int target) {
         this.target = target;
+        updateGoalText();
     }
 
     public void setCurrent(int current) {
         this.current = current;
+        updateGoalText();
     }
 
     /**
@@ -51,15 +72,15 @@ public class Goal {
      */
     public void solvedCard() {
         this.current += 1;
-        isMet = current == target;
+        isMet = current >= target;
+        updateGoalText();
     }
 
-    @Override
-    public String toString() {
+    private void updateGoalText() {
         String goalMet = isMet
                 ? "Congratulations, you have met your goal!"
                 : "Goal has not been met, please solve more cards!";
-        return "Goal: " + current + "/" + target + ", " + goalMet;
+        goalTextProperty.set("Goal: " + current + "/" + target + ", " + goalMet);
     }
 
     @Override
@@ -68,12 +89,21 @@ public class Goal {
             return true;
         }
 
-        // instanceof handles nulls
         if (!(other instanceof Goal)) {
             return false;
         }
 
         Goal otherGoal = (Goal) other;
         return target == otherGoal.target && current == otherGoal.current;
+    }
+
+    @Override
+    public void addListener(InvalidationListener listener) {
+        goalTextProperty.addListener(listener);
+    }
+
+    @Override
+    public void removeListener(InvalidationListener listener) {
+        goalTextProperty.removeListener(listener);
     }
 }
