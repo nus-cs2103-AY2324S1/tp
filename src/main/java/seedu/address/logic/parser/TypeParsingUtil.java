@@ -119,7 +119,9 @@ public class TypeParsingUtil {
             return LocalDate.of(now.getYear(), now.getMonth(), day);
         } else {
             throw new InvalidInputException(input
-                    + " is not a valid date, please use yyyy/mm/dd or mm/dd or dd");
+                    + " is not a valid date, please use yyyy/mm/dd or mm/dd or dd"
+                    + "\nfor example, assume today is 2023/11/3, to add 2023/11/29, could"
+                    + " use 29, 11/29, 2023/11/29 or 23/11/29");
         }
     }
 
