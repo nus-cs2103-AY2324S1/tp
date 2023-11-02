@@ -18,7 +18,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.event.EventNameOrGroupContainsKeywordsPredicate;
-import seedu.address.model.person.NameOrGroupContainsKeywordsPredicate;
+import seedu.address.model.person.PersonNameOrGroupContainsKeywordsPredicate;
 import seedu.address.testutil.AddressBookBuilder;
 
 public class ModelManagerTest {
@@ -128,7 +128,7 @@ public class ModelManagerTest {
 
         // different filteredPersonList -> returns false
         String[] keywords = ALICE.getName().fullName.split("\\s+");
-        modelManager.updateFilteredPersonList(new NameOrGroupContainsKeywordsPredicate(Arrays.asList(keywords)));
+        modelManager.updateFilteredPersonList(new PersonNameOrGroupContainsKeywordsPredicate(Arrays.asList(keywords)));
         assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs)));
 
         // different filteredEventList -> returns false

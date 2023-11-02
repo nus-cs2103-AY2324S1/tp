@@ -9,7 +9,7 @@ import seedu.address.commons.util.ToStringBuilder;
 /**
  * Tests that a {@code Person}'s {@code Name} or {@code Group} matches any of the keywords given.
  */
-public class NameOrGroupContainsKeywordsPredicate implements Predicate<Person> {
+public class PersonNameOrGroupContainsKeywordsPredicate implements Predicate<Person> {
     private final List<String> keywords;
 
     /**
@@ -17,7 +17,7 @@ public class NameOrGroupContainsKeywordsPredicate implements Predicate<Person> {
      *
      * @param keywords keywords from user input.
      */
-    public NameOrGroupContainsKeywordsPredicate(List<String> keywords) {
+    public PersonNameOrGroupContainsKeywordsPredicate(List<String> keywords) {
         assert keywords != null;
 
         this.keywords = keywords;
@@ -38,12 +38,12 @@ public class NameOrGroupContainsKeywordsPredicate implements Predicate<Person> {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof NameOrGroupContainsKeywordsPredicate)) {
+        if (!(other instanceof PersonNameOrGroupContainsKeywordsPredicate)) {
             return false;
         }
 
-        NameOrGroupContainsKeywordsPredicate otherNameOrGroupContainsKeywordsPredicate =
-                (NameOrGroupContainsKeywordsPredicate) other;
+        PersonNameOrGroupContainsKeywordsPredicate otherNameOrGroupContainsKeywordsPredicate =
+                (PersonNameOrGroupContainsKeywordsPredicate) other;
         return keywords.equals(otherNameOrGroupContainsKeywordsPredicate.keywords);
     }
 
