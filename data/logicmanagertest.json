@@ -1,16 +1,16 @@
 {
   "students" : [ {
-    "name" : "Amy Bee",
-    "phone" : "11111111",
-    "email" : "amy@example.com",
-    "studentNumber" : "A0218510F",
+    "name" : "John Doe",
+    "phone" : "98765432",
+    "email" : "johnd@example.com",
+    "studentNumber" : "A0245234A",
     "classDetails" : {
       "classNumber" : "T11",
-      "attendanceTracker" : [ false, false, false, false, false, false, false, false, false, false ],
-      "assignmentTracker" : [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
-      "classParticipationTracker" : [ false, false, false, false, false, false, false, false, false, false ]
+      "attendanceTracker" : [ false, false, false, false, false, false, false, false, false, false, false, false, false ],
+      "assignmentTracker" : [ 0, 0, 0, 0 ],
+      "classParticipationTracker" : [ false, false, false, false, false, false, false, false, false, false, false, false, false ]
     },
-    "tags" : [ ],
+    "tags" : [ "owesMoney", "friends" ],
     "comment" : ""
   } ]
 }

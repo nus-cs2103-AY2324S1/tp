@@ -20,6 +20,7 @@ import seedu.classmanager.logic.CommandHistory;
 import seedu.classmanager.logic.commands.exceptions.CommandException;
 import seedu.classmanager.model.ClassManager;
 import seedu.classmanager.model.Model;
+import seedu.classmanager.model.student.ClassDetails;
 import seedu.classmanager.model.student.Student;
 import seedu.classmanager.model.student.StudentNumber;
 import seedu.classmanager.testutil.EditStudentDescriptorBuilder;
@@ -64,8 +65,10 @@ public class CommandTestUtil {
     public static final String COMMENT_DESC_BOB = " " + PREFIX_CLASS_NUMBER + VALID_COMMENT_BOB;
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
-    public static final int TEST_TUTORIAL = 1;
-    public static final String TEST_TUTORIAL_DESC = " " + PREFIX_TUTORIAL_INDEX + TEST_TUTORIAL;
+    public static final int TEST_FIRST_TUTORIAL = 1;
+    public static final String TEST_FIRST_TUTORIAL_DESC = " " + PREFIX_TUTORIAL_INDEX + TEST_FIRST_TUTORIAL;
+    public static final int TEST_DEFAULT_TUTORIAL = ClassDetails.DEFAULT_COUNT;
+    public static final String TEST_DEFAULT_TUTORIAL_DESC = " " + PREFIX_TUTORIAL_INDEX + TEST_DEFAULT_TUTORIAL;
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
