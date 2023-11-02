@@ -225,7 +225,7 @@ public class AddEventCommandTest {
         }
 
         @Override
-        public ObservableList<Event> getEventList() {
+        public ObservableList<Event> getFilteredEventList() {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -252,11 +252,6 @@ public class AddEventCommandTest {
         @Override
         public void updateGroups() {
             return;
-        }
-
-        @Override
-        public void updateFilteredEventListOnly(Predicate<Event> predicate) {
-            throw new AssertionError("This method should not be called.");
         }
     }
 

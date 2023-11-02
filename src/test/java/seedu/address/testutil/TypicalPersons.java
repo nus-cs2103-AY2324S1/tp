@@ -37,10 +37,10 @@ public class TypicalPersons {
             .withAddress("311, Clementi Ave 2, #02-25")
             .withEmail("johnd@example.com").withPhone("98765432")
             .withBirthday("1998-01-02").withRemark("He owes me money")
-            .withGroups("owesMoney", "friends").build();
+            .withGroups("owesMoney", "friends", "teammates").build();
     public static final Person CARL = new PersonBuilder().withName("Carl Kurz").withPhone("95352563")
             .withEmail("heinz@example.com").withAddress("wall street")
-            .withBirthday("1998-01-03").withRemark("He likes to swim").build();
+            .withBirthday("1998-01-03").withRemark("He likes to swim").withGroups("family").build();
     public static final Person DANIEL = new PersonBuilder().withName("Daniel Meier").withPhone("87652533")
             .withEmail("cornelia@example.com").withAddress("10th street")
             .withBirthday("1998-01-04").withGroups("friends")
@@ -48,7 +48,7 @@ public class TypicalPersons {
     public static final Person ELLE = new PersonBuilder().withName("Elle Meyer").withPhone("9482224")
             .withEmail("werner@example.com").withAddress("michegan ave")
             .withBirthday("1998-01-05").withRemark("She likes to eat cheese")
-            .build();
+            .withGroups("teammates").build();
     public static final Person FIONA = new PersonBuilder().withName("Fiona Kunz").withPhone("9482427")
             .withEmail("lydia@example.com").withAddress("little tokyo")
             .withBirthday("1998-01-06").withRemark("She likes steak")
@@ -56,6 +56,7 @@ public class TypicalPersons {
     public static final Person GEORGE = new PersonBuilder().withName("George Best").withPhone("9482442")
             .withEmail("anna@example.com").withAddress("4th street")
             .withBirthday("1998-01-07").withRemark("He likes to play football").build();
+
 
     // Manually added
     public static final Person HOON = new PersonBuilder().withName("Hoon Meier").withPhone("8482424")
