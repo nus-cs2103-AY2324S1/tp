@@ -244,7 +244,7 @@ task list with the `switchList` command. More information can be found under `Vi
 
 ### Adding an event to a contact
 
-Adds an event to a contact's calendar.
+Adds an event to a contact's calendar at the specified index.
 
 Format: `addContactEvent INDEX d/DESCRIPTION ts/START_DATE_TIME ts/END_DATE_TIME`
 
@@ -256,7 +256,7 @@ Example:
 
 ### Deleting an event from a contact
 
-Deletes an event from a contact's calendar.
+Deletes an event from a contact's calendar at the specified index.
 
 Format `deleteContactEvent INDEX ts/DATE_TIME`
 
