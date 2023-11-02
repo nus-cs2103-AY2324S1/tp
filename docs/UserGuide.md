@@ -216,6 +216,7 @@ Expected output: `NAME has been unstarred!`
 
 Output if error:
 `The index you have provided is out of bounds of your current list of dates`
+
 --------------------------------------------------------------------------------------------------------------------
 
 # 3 [FAQ](#3-faq)
