@@ -117,8 +117,13 @@ How the parsing works:
 ### Model component
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
 
+Here's a class diagram of the `Model` component:
+
 <puml src="diagrams/ModelClassDiagram.puml" width="450" />
 
+<br> Below is a class diagram on the `Person` class and the classes related to its attributes:
+
+<puml src="diagrams/PersonClassDiagram.puml" alt="PersonClassDiagram" />
 
 The `Model` component,
 
@@ -213,12 +218,7 @@ A generic event system was created, even though CampusConnect only requires a sp
 The `addalt` feature involves creating a new `Person` object with additional contact details to replace the previous `Person` object.
 This is done using the `AddAltPersonDescriptor` class; `AddAltPersonDescriptor` object stores the additional contact information to be added to the previous `Person` object.
 
-As a result, the existing `Person` class in AB3's implementation is enhanced to have the capacity of containing more attributes.
-Below is a class diagram on the `Person` class and the classes related to its attributes:
-
-<puml src="diagrams/PersonClassDiagram.puml" alt="PersonClassDiagram" />
-
-The `Person` object is now composed of the following additional attributes due to the `addalt` feature:
+As a result, the existing `Person` class in AB3's implementation is enhanced to have the capacity of containing more attributes. The `Person` object is now composed of the following additional attributes due to the `addalt` feature on top of the existing attributes from AB3's implementation:
 
 * `Email`: The secondary email address of the contact.
 * `Linkedin`: The linkedin of the contact.
@@ -240,7 +240,7 @@ The flow for the `addalt` command is described by the following sequence diagram
 <puml src="diagrams/AddAltSequenceDiagram.puml" alt="AddAltSequenceDiagram" />
 
 #### Feature details
-1. The application will validate the arguments supplied by the user; whether the `INDEX` provided is valid and each of the additional attribute input follows the pre-determined formats defined in their respective classes.
+1. The application will validate the arguments supplied by the user; whether the `INDEX` provided is valid and each of the additional attribute input follows the pre-determined formats defined in their respective classes. It also checks that the added secondary email does not result in the contact to have duplicate emails.
 2. If any of the inputs fails the validation check, an error message is provided with details of the input error and prompts the user for a corrected input.
 3. If all of the inputs pass the validation check, a new `Person` objected with the updated attributes is created and stored in the `AddressBook`.
 
@@ -248,7 +248,8 @@ The flow for the `addalt` command is described by the following sequence diagram
 
 **Aspect: Generic design**
 
-The additional attributes to be added into a `Person` object on top of the original AB3 attributes are encapsulated into their respective classes: `Linkedin`, `Telegram` and `Birthday`. These classes are implemented similarly to the other existing attributes of `Person`, but they are modified according to the respective input patterns that model the real world.
+The additional attributes to be added into a `Person` object on top of the original AB3 attributes are encapsulated into their respective classes: `Linkedin`, `Telegram` and `Birthday`. These classes are implemented similarly to the other existing attributes of `Person`, but they are modified according to the respective input patterns that model the real world.<br>
+
 As these attributes are additional information for a `Person` object, every attribute has been made optional in the case when user only keys in several, but not all of the additional attributes into the command. However, the purpose of using this command only exists when users would like to add additional attributes to a `Person` in the contact list. Thus, the `addalt` command is designed to ensure that the user adds at least one of the additional attributes aforementioned.
 
 As this command merely adds additional attributes to a `Person` object, this can be done by enhancing the `add` command.
@@ -275,10 +276,11 @@ The `edit` command has similar input fields to the [**`addalt`**](#addalt-featur
 
 * `Note`: The notes of the contact. Read [**`Notes feature`**](#notes-feature) for more details.
 * `Avatar`: The profile picture of the contact. Read [**`Update photo feature`**](#update-photo-feature) for more details.
+* `Balance`: The amount that the contact owes. Read [**`Payments feature`**](#payments-feature) for more details.
 
 <box type="info">
 
-While all the fields are optional, at least one needs to be given to the `edit` command.
+While all the fields are optional, at least one needs to be given to the `edit` command. Users who wishes to `edit` empty additional attributes of `Person` object should use [`addalt`](#addalt-feature) instead.
 </box>
 
 #### Feature details
@@ -296,15 +298,14 @@ The flow for the `edit` command is described by the following sequence diagram:
 
 <puml src="diagrams/EditSequenceDiagram.puml" alt="EditSequenceDiagram" />
 
-#### General Design Considerations
+#### Design Considerations
 Since `edit` command updates attributes of a `Person` object, setting the values directly to the `Person` object could be another viable option.
 
-* **Alternative 1 (Current choice):** Create a new `Person` object.
+* **Alternative 1 (current choice):** Create a new `Person` object.
     * Pros:
         * Guarantees immutability of `Person` class, reducing possible bugs.
     * Cons:
         * Performance overhead; a `Person` object is always created even if for instance, only one attribute of `Person` object is changed.
-
 * **Alternative 2:** Set the edited attributes to the existing `Person` object.
     * Pros:
         * Minimal performance overhead; less memory usage.
@@ -634,48 +635,96 @@ Use case ends.
 **Extensions**
    * 1a. System detects an error in data entered.
      * 1a1. System shows the correct format for request.
-     * 1a2. User enters a new opt out request.
-
+     * 1a2. User enters a new opt out request. <br>
      Steps 1a1-1a2 are repeated until the data entered are correct. <br>
-     Use case resumes from step 4.
+     Use case resumes from step 4. <br>
 
-**Use case: UC2 - List contacts**
+**Use case: UC2 - Add new contact**
+
+**MSS**
+1. User enters information of the new contact to be added.
+2. System shows a list of all contacts. <br>
+   Use case ends.
+
+**Extensions**
+* 1a. System detects an error in the entered data.
+    * 1a1. System shows an error message.
+    * 1a2. User enters a new add request. <br>
+      Steps 1a1- 1a2 are repeated until the data entered are correct.<br>
+      Use case resumes from step 2. <br>
+
+**Use case: UC3 - List all contacts**
 
 **MSS**
 1. User requests list all contacts.
-2. System shows a list of all contacts. <br>
+2. System adds the new contact into its system. <br>
 Use case ends.
 
 **Extensions**
-* 1a. System shows an empty contact list.
-Use case ends.
-* 2a. System detects an invalid index entered.
-  * 2a1. System shows an error message.
-  * 2a2. User enters a new delete request. <br>
-  Steps 2a1- 2a2 are repeated until the data entered are correct. <br>
-  Use case resumes from step 3.
+* 1a. System shows an empty contact list. <br>
+  Use case ends. <br>
 
-**Use case: UC3 - Delete contact**
+**Use case: UC4 - Add alternative information to existing contact**
 
 **MSS**
-1. User <ins>lists all contacts (UC2).</ins>
+1. User <ins>lists all contacts (UC3).</ins>
+2. User enters an index with alternative information to be added for an existing contact in the system.
+3. System adds the alternative information to the specified contact inside its system. <br>
+   Use case ends.
+
+**Extensions**
+* 1a. System shows an empty contact list. <br>
+  Use case ends.
+* 2a. System detects an error in the entered data.
+    * 2a1. System shows an error message.
+    * 2a2. User enters a new addalt request. <br>
+      Steps 2a1- 2a2 are repeated until the data entered are correct.<br>
+      Use case resumes from step 3.
+* 3a. System detects that the field of the specified contact is non-empty.
+  * 3a1. System shows an error message and prompts users to use edit command. <br>
+    Use case ends. <br>
+
+**Use case: UC5 - Edit information of existing contact**
+
+**MSS**
+1. User <ins>lists all contacts (UC3).</ins>
+2. User enters an index and information to be edited for an existing contact in the system.
+3. System edits the information of the specified contact inside its system. <br>
+   Use case ends.
+
+**Extensions**
+* 1a. System shows an empty contact list. <br>
+  Use case ends.
+* 2a. System detects an error in the entered data.
+    * 2a1. System shows an error message.
+    * 2a2. User enters a new edit request. <br>
+      Steps 2a1- 2a2 are repeated until the data entered are correct.<br>
+      Use case resumes from step 3.
+* 3a. System detects that the additional fields of the specified contact is empty.
+    * 3a1. System shows an error message and prompts users to use addalt command. <br>
+      Use case ends. <br>
+
+**Use case: UC6 - Delete contact**
+
+**MSS**
+1. User <ins>lists all contacts (UC3).</ins>
 2. User enters an index to delete a contact from the system.
 3. System deletes contact inside its system. <br>
 Use case ends.
 
 **Extensions**
-* 1a. System shows an empty contact list.
+* 1a. System shows an empty contact list. <br>
 Use case ends.
 * 2a. System detects an invalid index entered.
   * 2a1. System shows an error message.
   * 2a2. User enters a new delete request. <br>
   Steps 2a1- 2a2 are repeated until the data entered are correct.<br>
-  Use case resumes from step 3.
+  Use case resumes from step 3. <br>
 
-**Use Case UC5: Add emergency contact**
+**Use Case UC7: Add emergency contact**
 
 **MSS**
-1. User <ins>lists all contacts (UC2).</ins>
+1. User <ins>lists all contacts (UC3).</ins>
 2. User adds a contact to the emergency contact list.
 3. System adds the contact into the emergency contact list. <br>
 Use case ends.

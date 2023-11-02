@@ -123,6 +123,9 @@ All planned enhancements will also be listed in the [Planned Enhancements / Know
    - [Notifications](#notifications)
      - [Birthday notifications](#birthday-notifications)
    - [Payments](#payments)
+     - [Money Amount Format](#money-amount-format)
+     - [Pay a contact money: `pay`](#pay-a-contact-money-pay)
+     - [Owe a contact money: `owe`](#owe-a-contact-money-owe)
    - [Find Contacts](#find-contacts)
      - [Basic Filtering](#basic-filtering)
      - [Advanced Filtering](#advanced-filtering)
@@ -352,21 +355,12 @@ You should provide a positive integer that is smaller than or equal to the numbe
   <img src="images/notes/noteswindow2.png" alt="Window with Notes" style="height:400px; margin:10px;">
 </div>
 
-Allows you to add notes to a person and remove notes from a person.
+The notes feature allows you to add and remove notes for a person, and provides a convenient pop-up window to view all notes for a person. You can add notes to a person with the `addnote` command, remove notes with the `removenote` command, and view notes by using either the `viewnotes` command or by clicking the `Notes` button in the person's information window.
 
-You can add notes to a person with the `addnote` command, remove notes from them with the `removenotes` command.
+The parameters for these commands are `PERSON_INDEX`, `NOTE_INDEX` and `NOTE_CONTENT`. These parameters are explained in detail in the section below.
 
-You can view notes by one of two ways: by using the `viewnotes` command, or by clicking on the `Notes` button in the person's information window.
-
-Format: `addnote PERSON_INDEX NOTE_CONTENT`, `removenote PERSON_INDEX NOTE_INDEX` and `viewnotes PERSON_INDEX`
-
-<box type="warning">
-
-Always make sure the indices provided are valid and within the bounds of the list. Invalid indices will result in an error.
-
-</box>
-
-<panel header=":fa-solid-book: **Command Parameter / Syntax Tables**" type="secondary" expanded no-close>
+<br>
+<panel header=":fa-solid-book: **Notes Command Parameters**" type="secondary" expanded no-close>
 The fields you enter should follow the following format:
 
 | Parameter     | Description                                                                                                 |
@@ -378,64 +372,192 @@ The fields you enter should follow the following format:
 </panel>
 
 <br>
-
-<box type="info" icon=":fa-solid-magnifying-glass:">
-To manage notes for a person in a list, use the following commands:
-
-| Action                                  | Command                                           | Description                                             |
-|-----------------------------------------|---------------------------------------------------|---------------------------------------------------------|
-| Add a note to a person                  | `addnote 1 This is a sample note for the person.` | Adds a note to the person at index 1.                   |
-| Remove a specific note from a person    | `removenote 1 2`                                  | Removes the 2nd note from the person at index 1.        |
-| View all notes of a person              | `viewnotes 1`                                     | Displays all notes of the person at index 1.            |
-
-To add a note, use the `addnote` command followed by the position number and the note text. To remove a note, use the `removenote` command followed by the position number and the note index. To view all notes, use the `viewnotes` command followed by the position number. Closing the notes window can be done via the "Close" button or by pressing ESC.
+<box type="warning">
+Always make sure the indices provided are valid and within the bounds of the list. Invalid indices will result in an error.
 </box>
 
-## Birthday Notifications
+### Add a note to contact: `addnote`
+You can add notes to a person with the `addnote` command.
 
-###  Receive upcoming birthday notifications
+Format: `addnote PERSON_INDEX NOTE_CONTENT`
 
-Receives a pop-up notification for each contact in CampusConnect whose birthday is within a day.
+<box type="info" icon=":fa-solid-magnifying-glass:">
+Below are some examples on how to use the commands:
 
-Upon launching the application, if any of your contacts’ birthday in CampusConnect is coming within a day, you should see the following pop-up notification: <br>
+- `addnote 1 This is a sample note for the person.`: Adds a note to the contact at index 1.
+- `addnote 2 This is another sample note.`: Adds a note to the contact at index 2.
+
+</box>
+
+
+### Remove a note from contact: `removenote`
+You can remove notes from a person with the `removenote` command.
+
+Format: `removenote PERSON_INDEX NOTE_INDEX`
+
+<box type="info" icon=":fa-solid-magnifying-glass:">
+Below are some examples on how to use the commands:
+
+- `removenote 1 2`: Removes the second note from the contact at index 1.
+- `removenote 1 1`: Removes the first note from the contact at index 1.
+
+</box>
+
+### View notes of a contact: `viewnotes`
+<div style="display:flex; justify-content:space-around; align-items:center;">
+  <img src="images/notes/window_with_notes.png" alt="Window with Notes" style="height:400px; margin:10px;">
+  <img src="images/notes/noteswindow2.png" alt="Window with Notes" style="height:400px; margin:10px;">
+</div>
+
+You can view notes by one of two ways: by using the `viewnotes` command, or by clicking on the `Notes` button in the person's information window. The notes window can be closed by either clicking the `Close` button or by pressing the `ESC` key, making it convenient for both CLI and GUI users to use the notes feature.
+
+Format: `viewnotes PERSON_INDEX`
+<box type="info" icon=":fa-solid-magnifying-glass:">
+Below are some examples on how to use the commands:
+
+- `viewnotes 1`: Shows all notes for the contact at index 1.
+- `viewnotes 2`: Shows all notes for the contact at index 2.
+
+</box>
+
+## Notifications
+
+For our forgetful users, CampusConnect provides a useful Notification System!
+Upon opening the app, the notification system will prompt you about any upcoming notable events.
+
+At the moment, only birthday notifications are supported.
+More notification types will be supported in future releases of CampusConnect.
+
+###  Birthday notifications
+
+To ensure that you never forget to wish happy birthday to your friends, CampusConnect has an in-built birthday notification system.
+Every time you open CampusConnect, a pop-up notification will appear for contacts whose birthdays are within one day.
+
+<box type="info">
+
+Here is what a sample birthday notification will look like when you open your CampusConnect app.
 
 ![birthdayNotification](images/birthdayNotification.png)
 
-The notification will contain the names of the birthday individuals saved in CampusConnect.
-
-###  Opt out notification [Coming soon]
-
-Opts you out from receiving birthday related notifications, such as turning off actual birthday notification feature.
-
-Format: `optout NOTIFICATION_DESCRIPTION`
-
-- `NOTIFICATION_DESCRIPTION` Mandatory field to enter which only includes the following and are not case-sensitive:
-    - `Notify Birthdays`
-    - `All`
-
-Examples:
-- `optout notify birthdays`
-- `optout Notify Birthdays`
-- `optout NOTIFY BIRTHDAYS`
-    - Requests to opt out from receiving actual birthday notifications in the future.
-- `optout all`
-    - Requests to turn off all kinds of notifications CampusConnect will send.
-
-Upon request to opt out notification, you should see the following pop-up message: <br>
-
-![optOutNotification](images/optOutNotification.png)
-
-Select `OK` to opt out notifications or `Cancel` to cancel the request.
-
-Below shows some examples of ___invalid usage___ of the command and the response that CampusConnect will provide.
-
-Invalid Input Example | Application Output
----|---
-**optout notifications** | Invalid `NOTIFICATION_DESCRIPTION` (refer to aforementioned for the list of `NOTIFICATION_DESCRIPTION` to enter).
-**optout** | `NOTIFICATION_DESCRIPTION` cannot be empty.
+</box>
 
 
 ## Payments
+
+CampusConnect allows you to keep track of payments between you and your contacts!
+Each contact has a **balance**, which is the amount of money that you owe them (or that they owe you).
+This balance is positive if they owe you money, and negative if you owe them money.
+
+Every time you record a payment to or from a contact, their balance will be updated accordingly so that you can settle your debts easily.
+Instead of displaying positive or negative balances, **balances are reflected directly in the contact list** with easily-understandable human-readable explanations, like so:
+
+![Payment Image](images/ContactArrowPayment.png)
+
+<box type="warning" id="payment-tracking-limit">
+
+That said, CampusConnect's Payments feature should be only used for **casual transactions among friends**, and is not for commercial or business use.
+
+We enforce this with a **strict payment tracking limit** of a maximum of **$10,000** owed to or from each contact.
+If you attempt to record a payment that would cause a contact's balance to exceed this limit, you will see an error message stating that the payment cannot be recorded for this reason.
+</box>
+
+
+### Money Amount Format
+
+As part of our payments feature, CampusConnect reads in money amounts from the user.
+
+You should note that the money amount format is **strictly enforced**.
+This is to ensure that the money amounts are entered correctly, and to prevent any errors that may arise from incorrect money formats.
+
+An accepted money amount format follows these **three rules**:
+1. It **must be a positive number**.
+2. It **must be in dollars and cents, or just dollars**.
+3. It **must have at most 2 decimal places** (we do not support precisions lower than cents).
+
+Additionally, remember that CampusConnect enforces a [strict payment tracking limit](#payment-tracking-limit).
+
+<box theme="primary" icon=":fa-solid-lightbulb:">
+
+We also provide some **convenience features** for you to enter money amounts more easily, for cases where you may be copying and pasting money amounts from other sources.
+These convenience features are as follows:
+- You may enter money amounts with a **dollar sign** (`$`) prefix.
+- You may enter money amounts with **trailing zeroes**.
+
+</box>
+
+
+<box theme="info" icon=":fa-solid-magnifying-glass:">
+
+**Each format rule in action:**
+
+- Rule 1: `10` is a valid money amount, but `-10` is not.
+- Rule 2: `10.05`, `10.5`, `10`, `0.5`, `0.05` are all valid money amounts, but `.50` is not.
+- Rule 3: `10.55` is a valid money amount, but `10.555` is not.
+
+**Convenience features in action:**
+- `$10` is a valid money amount, and is equivalent to `10`.
+- `010` is a valid money amount, and is equivalent to `10`.
+- `00000000005.55` is also a valid money amount, and is equivalent to `5.55`.
+
+</box>
+
+Now that you understand how to enter money when using our app, you can proceed to learn how to record payments in CampusConnect!
+
+### Pay a contact money: `pay`
+
+Records a payment from you to a contact. The amount **the contact owes you** increases by that amount after this transaction.
+
+Format: `pay PERSON_INDEX AMOUNT`
+
+- `PERSON_INDEX` is the index of the contact in the contact list.
+- `AMOUNT` is the amount of money you pay the contact, written in valid [money format](#money-amount-format).
+
+<box theme="info" icon=":fa-solid-magnifying-glass:">
+
+**Examples:**
+
+Suppose you have a contact at index `1` that owes you `$10`. Then:
+
+- `pay 1 10` records a payment of `$10` from you to the contact at index `1`.
+- `pay 1 $0.5` records a payment of `$0.50` from you to the contact at index `1`.
+
+At the end of both commands, **the contact owes you `$20.50`**.
+
+- `pay 1 -3` does NOT record any payment. Recall that money amounts must follow CampusConnect's [money format](#money-amount-format), which does not accept negative amounts.
+
+</box>
+
+If you're looking to record a payment from a contact to you, read ahead on how you can use the [owe](#owe-a-contact-money-owe) command instead!
+
+### Owe a contact money: `owe`
+
+Records a payment from a contact to you. The amount **you owe the contact** increases by that amount after this transaction.
+
+Format: `owe PERSON_INDEX AMOUNT`
+
+- `PERSON_INDEX` is the index of the contact in the contact list.
+- `AMOUNT` is the amount of money you owe the contact, written in valid [money amount format](#money-amount-format).
+
+<box theme="info" icon=":fa-solid-magnifying-glass:">
+
+**Examples:**
+
+Suppose you have a contact at index `1` that owes you `$10`. Then:
+
+- `owe 1 9` records a payment of `$9` from the contact at index `1` to you.
+
+At the end of the command, **the contact owes you `$1`**.
+
+- `owe 1 $2.5` records a payment of `$2.50` from the contact at index `1` to you.
+
+At the end of both commands, **you owe the contact `$1.50`**.
+
+- `owe 1 $50000` does NOT record any payment. Recall that CampusConnect enforces a [strict payment tracking limit](#payment-tracking-limit).
+
+</box>
+
+---
+
 ## Find Contacts
 
 Another feature of CampusConnect is the ability to search for contacts based on a variety of criteria. This is useful for quickly finding contacts whose details you may only partially remember, or for finding contacts who match a certain criteria.
