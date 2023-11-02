@@ -16,15 +16,15 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.department.Department;
 import seedu.address.model.employee.Address;
 import seedu.address.model.employee.Email;
 import seedu.address.model.employee.Employee;
 import seedu.address.model.employee.Leave;
-import seedu.address.model.employee.Name;
 import seedu.address.model.employee.Phone;
 import seedu.address.model.employee.Role;
 import seedu.address.model.employee.Salary;
+import seedu.address.model.name.DepartmentName;
+import seedu.address.model.name.EmployeeName;
 
 /**
  * Parses input arguments and creates a new AddCommand object
@@ -49,19 +49,20 @@ public class AddCommandParser implements Parser<AddCommand> {
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
                 PREFIX_ADDRESS, PREFIX_SALARY, PREFIX_LEAVE, PREFIX_ROLE);
-        Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
+        EmployeeName name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
         Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
         Salary salary = ParserUtil.parseSalary(argMultimap.getValue(PREFIX_SALARY).get());
         Leave leave = ParserUtil.parseLeave(argMultimap.getValue(PREFIX_LEAVE).get());
         Role role = ParserUtil.parseRole(argMultimap.getValue(PREFIX_ROLE).get());
-        Set<Name> supervisorNameList = ParserUtil.parseSupervisors(
+        Set<EmployeeName> supervisorNameList = ParserUtil.parseSupervisors(
                 argMultimap.getAllValues(PREFIX_MANAGER));
-        Set<Department> departmentList = ParserUtil.parseDepartments(argMultimap.getAllValues(PREFIX_DEPARTMENT));
+        Set<DepartmentName> departmentNameList = ParserUtil.parseDepartments(
+                argMultimap.getAllValues(PREFIX_DEPARTMENT));
 
         Employee employee = new Employee(name, phone, email, address, salary, leave, role,
-                supervisorNameList, departmentList);
+                supervisorNameList, departmentNameList);
 
         return new AddCommand(employee);
     }

@@ -11,6 +11,7 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.ManageHr;
 import seedu.address.model.ReadOnlyManageHr;
+import seedu.address.model.department.Department;
 import seedu.address.model.employee.Employee;
 
 /**
@@ -20,15 +21,19 @@ import seedu.address.model.employee.Employee;
 class JsonSerializableManageHr {
 
     public static final String MESSAGE_DUPLICATE_EMPLOYEE = "Employees list contains duplicate employee(s).";
+    public static final String MESSAGE_DUPLICATE_DEPARTMENT = "Department list contains duplicate department(s).";
 
     private final List<JsonAdaptedEmployee> employees = new ArrayList<>();
+    private final List<JsonAdaptedDepartment> departments = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonSerializableManageHr} with the given employees.
      */
     @JsonCreator
-    public JsonSerializableManageHr(@JsonProperty("employees") List<JsonAdaptedEmployee> employees) {
+    public JsonSerializableManageHr(@JsonProperty("employees") List<JsonAdaptedEmployee> employees,
+                                    @JsonProperty("departments") List<JsonAdaptedDepartment> departments) {
         this.employees.addAll(employees);
+        this.departments.addAll(departments);
     }
 
     /**
@@ -38,6 +43,8 @@ class JsonSerializableManageHr {
      */
     public JsonSerializableManageHr(ReadOnlyManageHr source) {
         employees.addAll(source.getEmployeeList().stream().map(JsonAdaptedEmployee::new).collect(Collectors.toList()));
+        departments.addAll(source.getDepartmentList().stream().map(
+                JsonAdaptedDepartment::new).collect(Collectors.toList()));
     }
 
     /**
@@ -46,15 +53,22 @@ class JsonSerializableManageHr {
      * @throws IllegalValueException if there were any data constraints violated.
      */
     public ManageHr toModelType() throws IllegalValueException {
-        ManageHr manageHr = new ManageHr();
+        ManageHr manageHR = new ManageHr();
+        for (JsonAdaptedDepartment jsonAdaptedDepartment : departments) {
+            Department department = jsonAdaptedDepartment.toModelType();
+            if (manageHR.hasDepartment(department)) {
+                throw new IllegalValueException(MESSAGE_DUPLICATE_DEPARTMENT);
+            }
+            manageHR.addDepartment(department);
+        }
         for (JsonAdaptedEmployee jsonAdaptedEmployee : employees) {
             Employee employee = jsonAdaptedEmployee.toModelType();
-            if (manageHr.hasEmployee(employee)) {
+            if (manageHR.hasEmployee(employee)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_EMPLOYEE);
             }
-            manageHr.addEmployee(employee);
+            manageHR.addEmployee(employee);
         }
-        return manageHr;
+        return manageHR;
     }
 
 }

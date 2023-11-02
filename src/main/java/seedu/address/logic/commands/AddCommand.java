@@ -16,6 +16,7 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.employee.Employee;
+import seedu.address.model.name.DepartmentName;
 
 /**
  * Adds an employee to the ManageHR.
@@ -53,6 +54,7 @@ public class AddCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "New employee added: %1$s";
     public static final String MESSAGE_DUPLICATE_EMPLOYEE = "This employee already exists in the ManageHR app";
+    public static final String MESSAGE_UNDEFINED_DEPARTMENT = "The department(s) currently do not exist in ManageHR.";
 
     private final Employee toAdd;
 
@@ -72,6 +74,11 @@ public class AddCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_EMPLOYEE);
         }
 
+        for (DepartmentName departmentName : toAdd.getDepartments()) {
+            if (!model.hasDepartmentWithName(departmentName)) {
+                throw new CommandException(MESSAGE_UNDEFINED_DEPARTMENT);
+            }
+        }
         model.addEmployee(toAdd);
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
     }

@@ -1,4 +1,4 @@
-package seedu.address.model.employee;
+package seedu.address.model.name;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
@@ -7,7 +7,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  * Represents an Employee's name in the ManageHR app.
  * Guarantees: immutable; is valid as declared in {@link #isValidName(String)}
  */
-public class Name {
+public class EmployeeName {
 
     public static final String MESSAGE_CONSTRAINTS =
             "Names should only contain alphanumeric characters and spaces, and it should not be blank";
@@ -16,30 +16,26 @@ public class Name {
      * The first character of the address must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
-    public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
+    private static String validationRegex = "[\\p{Alnum}][\\p{Alnum} ]*";
 
     public final String fullName;
-
     /**
      * Constructs a {@code Name}.
      *
      * @param name A valid name.
      */
-    public Name(String name) {
+    public EmployeeName(String name) {
         requireNonNull(name);
         checkArgument(isValidName(name), MESSAGE_CONSTRAINTS);
-        fullName = name;
+        this.fullName = name;
     }
 
     /**
      * Returns true if a given string is a valid name.
      */
     public static boolean isValidName(String test) {
-        return test.matches(VALIDATION_REGEX);
+        return test.matches(validationRegex);
     }
-
-
-    @Override
     public String toString() {
         return fullName;
     }
@@ -51,11 +47,11 @@ public class Name {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof Name)) {
+        if (!(other instanceof EmployeeName)) {
             return false;
         }
 
-        Name otherName = (Name) other;
+        EmployeeName otherName = (EmployeeName) other;
         return fullName.equals(otherName.fullName);
     }
 
@@ -63,5 +59,4 @@ public class Name {
     public int hashCode() {
         return fullName.hashCode();
     }
-
 }

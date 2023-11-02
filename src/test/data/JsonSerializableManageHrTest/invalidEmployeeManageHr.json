@@ -1,12 +1,23 @@
 {
-  "employees": [ {
-    "name": "Hans Muster",
-    "phone": "9482424",
-    "email": "invalid@email!3e",
-    "address": "4th street",
-    "salary" : "3000",
-    "leave" : "14",
-    "role" : "manager",
-    "supervisors" : []
-  } ]
+  "employees": [
+    {
+      "name": "Another Dude",
+      "phone": "98213945",
+      "email": "invalid@email!3e",
+      "address": "1 Neither Nor St",
+      "salary": "1",
+      "leave": "14",
+      "role": "subordinate",
+      "supervisors": [],
+      "departments": [
+        "CEO"
+      ]
+    }
+  ],
+  "departments": [
+    {
+      "name": "CEO",
+      "employees": []
+    }
+  ]
 }

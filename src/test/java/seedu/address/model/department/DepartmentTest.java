@@ -4,11 +4,13 @@ import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.model.name.DepartmentName;
+
 public class DepartmentTest {
 
     @Test
     public void constructor_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new Department(null));
+        assertThrows(NullPointerException.class, () -> new Department(new DepartmentName(null)));
     }
 
     @Test
@@ -16,11 +18,4 @@ public class DepartmentTest {
         String invalidDepartmentName = "";
         assertThrows(IllegalArgumentException.class, () -> new Department(invalidDepartmentName));
     }
-
-    @Test
-    public void isValidDepartmentName() {
-        // null department name
-        assertThrows(NullPointerException.class, () -> Department.isValidDepartmentName(null));
-    }
-
 }

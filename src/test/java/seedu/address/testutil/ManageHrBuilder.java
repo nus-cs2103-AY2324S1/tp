@@ -1,6 +1,7 @@
 package seedu.address.testutil;
 
 import seedu.address.model.ManageHr;
+import seedu.address.model.department.Department;
 import seedu.address.model.employee.Employee;
 
 /**
@@ -28,6 +29,13 @@ public class ManageHrBuilder {
         return this;
     }
 
+    /**
+     * Adds a new {@code Employee} to the {@code ManageHr} that we are building.
+     */
+    public ManageHrBuilder withDepartment(Department department) {
+        manageHr.addDepartment(department);
+        return this;
+    }
     public ManageHr build() {
         return manageHr;
     }

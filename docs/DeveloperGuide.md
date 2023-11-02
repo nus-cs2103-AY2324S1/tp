@@ -184,7 +184,7 @@ The following sequence diagram shows how the different components of ManageHR in
 
 <img src="images/ManageHR/ListCommandSequenceDiagram.png" width="700" />
 
-The above sequence diagram omits details on the internal implementations within each directory in order to improve 
+The above sequence diagram omits details on the internal implementations within each directory in order to improve
 overall readability of the diagram.
 
 ### Help command
@@ -421,7 +421,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
         Use case resumes at step 2.
 
-#### Use case: UC05 - Get help with ManageHR's features 
+#### Use case: UC05 - Get help with ManageHR's features
 
 **MSS**
 
@@ -448,7 +448,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2. ManageHR closes.
 
    Use case ends.
- 
+
 #### Use case: UC07 - Filtering employees by department
 
 **MSS**
@@ -462,8 +462,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 2a. Invalid department entered.
 
-  * 2a1. ManageHR shows an error message. 
-  
+  * 2a1. ManageHR shows an error message.
+
     Use case ends.
 
 ### Non-Functional Requirements
@@ -529,7 +529,7 @@ testers are expected to do more *exploratory* testing.
 1. Filter by `department`
 
    1. Prerequisites: Employees need to have department tags
-   
+
    1. Test case: `filter d/R&D`<br>
       Expected: Only employees with `R&D` department tag are shown.
 
@@ -542,7 +542,7 @@ testers are expected to do more *exploratory* testing.
 
    1. Test case: `filter s/4000`<br>
       Expected: Employees with salary less than or equal to 4000 are shown.
-   
+
    2. Test case: `filter s/alsjl`<br>
       Expected: Incorrect parameter. Not an integer. No employee is shown. Error details shown in the status message.
 
