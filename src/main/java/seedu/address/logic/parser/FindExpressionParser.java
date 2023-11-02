@@ -12,6 +12,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SECONDARY_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TELEGRAM;
+import static seedu.address.logic.parser.FindFilterStringTokenizer.VALID_CONDITION;
 
 import java.util.List;
 import java.util.function.Predicate;
@@ -150,10 +151,7 @@ public class FindExpressionParser {
             return node;
         } else {
             Token token = consume(Token.Type.CONDITION);
-            // check if text contains a slash and is a valid condition
-            if (!token.text.contains("/") || token.text.startsWith("/") || token.text.endsWith("/")) {
-                throw new ParseException("Invalid condition: " + token.text);
-            }
+
             // split by slash but include slash in substrings
             String[] parts = token.text.split("(?<=/)");
             FindSupportedField field = FindSupportedField.createFromPrefix(parts[0].trim().toLowerCase());

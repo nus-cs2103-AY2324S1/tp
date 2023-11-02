@@ -11,7 +11,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
  */
 public class FindFilterStringTokenizer {
 
-    private static final Pattern VALID_CONDITION = Pattern
+    public static final Pattern VALID_CONDITION = Pattern
             .compile("^[a-zA-Z0-9]+/(?:[a-zA-Z0-9,@.\\-_#$]+|\"[a-zA-Z0-9,@.\\-_#$()/!&| ]+\")");
     private final String filterString;
     private int pos = 0;
