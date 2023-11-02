@@ -68,7 +68,7 @@ public class AddMeetingCommand extends Command {
                 throw new CommandException(MESSAGE_ATTENDEE_NOT_FOUND);
             }
         }
-        model.setViewedMeetingIndex(null);
+
         model.addMeeting(toAdd);
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
     }

@@ -227,10 +227,9 @@ Once the indexes of the `Person` and `Meeting` objects to view (if any) are stor
    - Storing the `Index` fixes this issue as the `Person` and `Meeting` objects are only forwarded to the Ui after the execution of a command.
 4. As a continuation to point 3, this leads to a new issue with commands that can modify the display list length/order such as `listc`, `editc`, `findc`, `deletec`, `addc` and their meeting variants.
    - Since the stored `Index` may now reference a different item, or even point out-of-bounds in the case of the display list being shortened, this implementation may potentially lead to unpredictable results for both view commands.
-   - For the case of `listc`, `listm`, `editc` and `editm`, this is judged to not be an issue as the view commands still obey their definition of displaying the item at a specified list index.
+   - For the case of `addc`, `addm`, `listc`, `listm`, `editc` and `editm`, this is judged to not be an issue as the view commands still obey their definition of displaying the item at a specified list index.
      - For both edit commands, it is also more important that they can display dynamic updates.
    - For the case of `deletec`, `deletem`, `findc` and `findm`, the stored `Index` is set to null to prevent potential out-of-bounds error.
-   - For the case of `addc` and `addm`, as this issue only occurs in cases where the newly created Person/Meeting is listed above the currently viewed instances, the stored `Index` is also set to null for consistency.
 
 
 ### Find meeting feature

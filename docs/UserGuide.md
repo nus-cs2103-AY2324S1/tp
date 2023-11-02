@@ -109,7 +109,7 @@ Format: `addc n/NAME p/PHONE_NUMBER e/EMAIL lc/LAST_CONTACTED_TIME [s/STATUS] [r
 * `LAST_CONTACTED_TIME` must contain both date and time and adhere to the `DD.MM.YYYY HHMM` format.
   -  eg. 1st October 2023, 10:00am will be written as `01.10.2023 1000`.
 * STATUS, if included, must be one of `NIL, Prospective, Active, Inactive, Claimant, Renewal` or blank.
-* This command clears the contact that is currently displayed via the `viewc` command.
+* This command may change the contact that is currently displayed via the `viewc` command, as detailed in the description for `viewc`.
 
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
@@ -177,8 +177,8 @@ Format: `viewc INDEX`
 * The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​
 * Displays contact Name, Phone, Email, Last Contacted Time, Status, Remarks and Tags.
-* As this command displays by `Index`, the displayed contact may change when the specified `INDEX` refers to a different person due to a change in list order through `editc` and `listc`. This is intentional.
-* The displayed contact is cleared when the `addc`, `deletec` and `findc` commands are used.
+* As this command displays by `Index`, the displayed contact may change when the specified `INDEX` refers to a different person due to a change in list order through `addc`, `editc` and `listc`. This is intentional.
+* The displayed contact is cleared when the `deletec` and `findc` commands are used.
 
 Examples:
 * `viewc 2` Displays detailed information related to the 2nd contact on the list.
@@ -228,7 +228,7 @@ Format: `addm m/TITLE a/LOCATION s/START e/END [t/TAG]…​`
 * `TITLE`, `LOCATION`, `START` and `END` are compulsory fields. `TAG` is optional.
 * `START` and `END` must contain both date and time and adhere to the `DD.MM.YYYY HHMM` format.
   -  eg. 1st October 2023, 10:00am will be written as `01.10.2023 1000`.
-* This command clears the Meeting that is currently displayed via the `viewm` command.
+* This command may change the Meeting that is currently displayed via the `viewm` command, as detailed in the description for `viewm`.
 
 Examples:
 * `addm m/Lunch a/Cafeteria s/20.09.2023 1200 e/20.09.2023 1300`
@@ -287,8 +287,8 @@ Format: `viewm INDEX`
 * The index refers to the index number shown in the displayed meeting list.
 * The index **must be a positive integer** 1, 2, 3, …​
 * Displays meeting Title, Location, Start/End, Attendees and Tags.
-* As this command displays by `Index`, the displayed meeting may change when the specified `INDEX` refers to a different meeting due to a change in list order through `editm` and `listm`. This is intentional.
-* The displayed meeting is cleared when the `addm`, `deletem` and `findm` commands are used.
+* As this command displays by `Index`, the displayed meeting may change when the specified `INDEX` refers to a different meeting due to a change in list order through `addm`, `editm` and `listm`. This is intentional.
+* The displayed meeting is cleared when the `deletem` and `findm` commands are used.
 
 Examples:
 * `viewm 2` Displays detailed information related to the 2nd meeting on the list, including current attendees.
