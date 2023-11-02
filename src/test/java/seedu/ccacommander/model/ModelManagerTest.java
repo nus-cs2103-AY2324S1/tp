@@ -230,7 +230,6 @@ public class ModelManagerTest {
         assertTrue(modelManager.hasEnrolment(BENSON_BOXING));
         assertFalse(modelManager.hasEnrolment(ALICE_AURORA));
     }
-  
     @Test
     public void deleteEnrolment() {
         Enrolment enrolment = new EnrolmentBuilder().build();

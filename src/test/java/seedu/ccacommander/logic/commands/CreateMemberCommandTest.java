@@ -179,10 +179,6 @@ public class CreateMemberCommandTest {
         public boolean hasEnrolment(Enrolment enrolment) {
             throw new AssertionError("This method should not be called.");
         }
-        @Override
-        public void setEnrolment(Enrolment enrolment, Enrolment editedEnrolment) {
-            throw new AssertionError("This method should not be called.");
-        }
 
         @Override
         public void deleteEnrolment(Enrolment target) {
