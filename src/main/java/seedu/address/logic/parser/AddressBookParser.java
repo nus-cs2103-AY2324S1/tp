@@ -33,6 +33,25 @@ public class AddressBookParser {
     private static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
     private static final Logger logger = LogsCenter.getLogger(AddressBookParser.class);
 
+    //NOTE DOES NOT WORK FOR TAG
+    private static enum PersonField {
+        NAME("name"),
+        PHONE("phone"),
+        EMAIL("email"),
+        ADDRESS("address"),
+        LEAD("lead"),
+        TELEGRAM_HANDLE("telegramhandle"),
+        PROFESSION("profession"),
+        INCOME("income"),
+        DETAILS("details");
+
+        public final String label;
+
+        private PersonField(String label) {
+            this.label = label;
+        }
+    }
+
     /**
      * Parses user input into command for execution.
      *
@@ -88,11 +107,14 @@ public class AddressBookParser {
 
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
-
         default:
+            for (PersonField personField : PersonField.values()) {
+                if (commandWord.equals(personField.label)) {
+                    return new EditCommandMacroParser(commandWord).parse(arguments);
+                }
+            }
             logger.finer("This user input caused a ParseException: " + userInput);
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }
     }
-
 }
