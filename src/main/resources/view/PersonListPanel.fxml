@@ -8,11 +8,7 @@
   <TableView fx:id="table" VBox.vgrow="ALWAYS">
     <columns>
       <TableColumn fx:id="indexCol" text="ID"/>
-      <TableColumn fx:id="nameCol" text="Name"/>
-      <TableColumn fx:id="emailCol" text="Email"/>
-      <TableColumn fx:id="phoneCol" text="Mobile"/>
-      <TableColumn fx:id="addressCol" text="Address"/>
-      <TableColumn fx:id="tagsCol" text="Tags"/>
+      <TableColumn fx:id="contactCol" text="Contact"/>
       <TableColumn fx:id="notesCol" text="Notes"/>
       <TableColumn fx:id="eventsCol" text="Events"/>
     </columns>
