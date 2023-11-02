@@ -109,6 +109,7 @@ Format: `addc n/NAME p/PHONE_NUMBER e/EMAIL lc/LAST_CONTACTED_TIME [s/STATUS] [r
 * `LAST_CONTACTED_TIME` must contain both date and time and adhere to the `DD.MM.YYYY HHMM` format.
   -  eg. 1st October 2023, 10:00am will be written as `01.10.2023 1000`.
 * STATUS, if included, must be one of `NIL, Prospective, Active, Inactive, Claimant, Renewal` or blank.
+* This command clears the contact that is currently displayed via the `viewc` command.
 
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
@@ -122,9 +123,11 @@ You can put any number of tags (including 0) on a contact.
 
 ### Listing all persons : `listc`
 
-Shows a list of all contacts in OutBook. Contacts are sorted by LAST_CONTACTED_TIME by default.
+Shows a list of all contacts in OutBook. Contacts are sorted by `LAST_CONTACTED_TIME` by default.
 
 Format: `listc`
+
+* This command may change the contact that is currently displayed via the `viewc` command, as detailed in the description for `viewc`.
 
 
 ### Deleting a person : `deletec`
@@ -136,6 +139,7 @@ Format: `deletec INDEX`
 * Deletes the contact at the specified `INDEX`.
 * The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​
+* This command clears the contact that is currently displayed via the `viewc` command.
 
 Examples:
 * `listc` followed by `delete 2` deletes the 2nd person in the results of the `listc` command.
@@ -152,8 +156,8 @@ Format: `editc INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [l/LAST_CONTACTED_TIME]
 * All fields are optional, but at least one must be provided.
 * Existing values will be updated to the input values.
 * When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person’s tags by typing `t/` without
-    specifying any tags after it.
+* You can remove all the person’s tags by typing `t/` without specifying any tags after it.
+* This command may change the contact that is currently displayed via the `viewc` command, as detailed in the description for `viewc`.
 
 Examples:
 *  `editc 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
@@ -173,8 +177,8 @@ Format: `viewc INDEX`
 * The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​
 * Displays contact Name, Phone, Email, Last Contacted Time, Status, Remarks and Tags.
-* The displayed contact is reset when the `deletec` and `findc` commands are used.
-* The displayed contact may change when `editc` is used in a way that modifies the order of the displayed person list, such as by editing the `LAST_CONTACTED_DATE`. This is intentional as the `editc` command is meant to display information based on the contact list index.
+* As this command displays by `Index`, the displayed contact may change when the specified `INDEX` refers to a different person due to a change in list order through `editc` and `listc`. This is intentional.
+* The displayed contact is cleared when the `addc`, `deletec` and `findc` commands are used.
 
 Examples:
 * `viewc 2` Displays detailed information related to the 2nd contact on the list.
@@ -199,6 +203,7 @@ Format: `findc [n/KEYWORDS] [p/KEYWORDS] [e/KEYWORDS] [lc/DATETIME] [s/KEYWORDS]
   - e.g. `John Doe` will return `John Lee`, `James Doe`.
 * If multiple fields are provided, only Persons matching at least one keyword in each field will be returned (i.e. `AND` search).
   - e.g. `n/John Doe s/active` will return `Name: John Lee, Status: Active` but not `Name: James Doe, Status: Claimant`.
+* This command clears the contact that is currently displayed via the `viewc` command.
 
 Examples:
 * `findc n/alice` returns `Alice` and `alice tan`
@@ -220,8 +225,10 @@ Meetings are sorted by start time given.
 
 Format: `addm m/TITLE a/LOCATION s/START e/END [t/TAG]…​`
 
+* `TITLE`, `LOCATION`, `START` and `END` are compulsory fields. `TAG` is optional.
 * `START` and `END` must contain both date and time and adhere to the `DD.MM.YYYY HHMM` format.
   -  eg. 1st October 2023, 10:00am will be written as `01.10.2023 1000`.
+* This command clears the Meeting that is currently displayed via the `viewm` command.
 
 Examples:
 * `addm m/Lunch a/Cafeteria s/20.09.2023 1200 e/20.09.2023 1300`
@@ -229,9 +236,11 @@ Examples:
 
 ### Listing all meetings : `listm`
 
-Shows a list of all meetings in OutBook. Meetings are sorted by START by default.
+Shows a list of all meetings in OutBook. Meetings are sorted by `START` by default.
 
 Format: `listm`
+
+* This command may change the Meeting that is currently displayed via the `viewm` command, as detailed in the description for `viewm`.
 
 
 ### Deleting a meeting : `deletem`
@@ -243,6 +252,7 @@ Format: `deletem INDEX`
 * Deletes the meeting at the specified `INDEX`.
 * The index refers to the index number shown in the displayed meeting list.
 * The index **must be a positive integer** 1, 2, 3, …​
+* This command clears the Meeting that is currently displayed via the `viewm` command.
 
 Examples:
 * `listm` followed by `deletem 2` deletes the 2nd meeting in the results of the `listm` command.
@@ -259,8 +269,8 @@ Format: `editm INDEX [m/TITLE] [a/LOCATION] [s/START] [e/END] [t/TAG]…​`
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * When editing tags, the existing tags of the meeting will be removed i.e adding of tags is not cumulative.
-* You can remove all the meeting’s tags by typing `t/` without
-  specifying any tags after it.
+* You can remove all the meeting’s tags by typing `t/` without specifying any tags after it.
+* This command may change the Meeting that is currently displayed via the `viewm` command, as detailed in the description for `viewm`.
 
 Examples:
 *  `editm 1 a/Hawker Centre s/15.09.2023 1500` Edits the location and start of the 1st meeting to be `Hawker Centre` and `15.09.2023 1500` respectively.
@@ -277,8 +287,8 @@ Format: `viewm INDEX`
 * The index refers to the index number shown in the displayed meeting list.
 * The index **must be a positive integer** 1, 2, 3, …​
 * Displays meeting Title, Location, Start/End, Attendees and Tags.
-* The displayed meeting is reset when the `deletem` and `findm` commands are used.
-* The displayed meeting may change when `editm` is used in a way that modifies the order of the displayed meeting list, such as by editing the `START`. This is intentional as the `editm` command is meant to display information based on the meeting list index.
+* As this command displays by `Index`, the displayed meeting may change when the specified `INDEX` refers to a different meeting due to a change in list order through `editm` and `listm`. This is intentional.
+* The displayed meeting is cleared when the `addm`, `deletem` and `findm` commands are used.
 
 Examples:
 * `viewm 2` Displays detailed information related to the 2nd meeting on the list, including current attendees.
@@ -301,6 +311,7 @@ Format: `findm [m/KEYWORDS] [a/KEYWORDS] [t/KEYWORDS] [n/ATTENDEE_NAME] [s/START
   e.g. `m/Shop Meet` will return `Meeting: Shop at mall`, `Meeting: Meet client`.
 * If multiple fields are provided, only Meetings matching at least one keyword in each field will be returned (i.e. `AND` search).
     e.g. `m/Shop Meet a/Mall` will return `Meeting: Shop at mall, Location: Mall` but not `Meeting: Meet client, Location: Park`.
+* This command clears the Meeting that is currently displayed via the `viewm` command.
 
 Examples:
 * `findm m/project` returns `project` and `Project work`.
