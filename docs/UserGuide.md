@@ -145,7 +145,7 @@ Format: `new-appt pic/IC dic/IC time/yyyy-MM-dd HH:mm`
 **:information_source: Take Note:**<br>
 
 - All fields are Required.
-- EMAIL must follow the specified format (ie. `yyyy-MM-dd HH:mm`).
+- TIME must follow the specified format (ie. `yyyy-MM-dd HH:mm:ss`).
 - PATIENT must contain the valid IC of a Patient in the Database.
 - DOCTOR must contain the valid IC of a Doctor in the Database.
 
@@ -175,13 +175,15 @@ Examples:
 
 ### Finding a Appointment : `find-appt`
 
-Locates an existing appointment with involved Doctor or Patient.
+Finds all appointments that involve a specific patient/doctor.
 
 Format: `find-appt NRIC`
 
 <div markdown="block" class="alert alert-info">
 **:information_source: Take Note:**<br>
 
+- All fields are Required.
+- NRIC must contain the valid NRIC of a Patient or Doctor in the Database.
 - Either Doctor NRIC or Patient NRIC can be used in the search
 - It is recommended to use `list` to restore the view of all data after a `find` command.
 
@@ -230,16 +232,17 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 * When searching names, only full words will be matched e.g. `Han` will not match `Hans`
 * When searching names, Persons matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
-* Other supported attributes like NRIC, Gender and Blood Type will only handle one query `KEYWORD`, anything afterward is discarded.
+* Other supported attributes like NRIC, Gender and Blood Type will only handle one query `KEYWORD`, anything afterward
+  is discarded.
 * Below we have supported attributes and their example `KEYWORD`.
 * It is recommended to use `list` to restore the view of all data after a `find` command
 
   | Attribute | Example keywords |
-  |-----------|-----------------|
+    |-----------|-----------------|
   | NRIC      | T1125957G       |
   | Gender    | M       |
-   | Blood Type | Blood Type A+   |
-     | Name | Travis Kelce
+  | Blood Type | Blood Type A+   |
+  | Name | Travis Kelce
 
 Examples:
 

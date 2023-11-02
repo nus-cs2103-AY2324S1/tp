@@ -68,7 +68,20 @@ public class DoctorBuilder {
         tags = new HashSet<>(doctorToCopy.getTags());
         appointments = new HashSet<>(doctorToCopy.getAppointments());
     }
-
+    /**
+     * Initializes the PersonBuilder with an nric.
+     */
+    public DoctorBuilder(Ic nric) {
+        name = new Name(DEFAULT_NAME);
+        phone = new Phone(DEFAULT_PHONE);
+        email = new Email(DEFAULT_EMAIL);
+        address = new Address(DEFAULT_ADDRESS);
+        remark = new Remark(DEFAULT_REMARK);
+        gender = new Gender(DEFAULT_GENDER);
+        ic = nric;
+        tags = new HashSet<>();
+        appointments = new HashSet<>();
+    }
     /**
      * Sets the {@code Name} of the {@code Person} that we are building.
      */
