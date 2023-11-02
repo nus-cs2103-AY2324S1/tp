@@ -82,8 +82,7 @@ public class CommandBoxHistory {
         commandIndex++;
         if (commandIndex == commandList.size()) {
             return "";
-        }
-        else {
+        } else {
             return commandList.get(commandIndex);
         }
     }
@@ -99,8 +98,7 @@ public class CommandBoxHistory {
         commandIndex--;
         if (commandIndex == commandList.size()) {
             return "";
-        }
-        else {
+        } else {
             return commandList.get(commandIndex);
         }
     }
@@ -115,8 +113,7 @@ public class CommandBoxHistory {
         }
         if (commandIndex == commandList.size()) {
             return "";
-        }
-        else {
+        } else {
             return commandList.get(commandIndex);
         }
     }
