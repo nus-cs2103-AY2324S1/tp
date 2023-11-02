@@ -40,6 +40,7 @@ public class CommandResult {
         this.exportTransactions = false;
         this.exportStaff = false;
     }
+
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */

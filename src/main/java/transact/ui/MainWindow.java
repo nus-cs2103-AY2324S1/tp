@@ -255,7 +255,6 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
-
     public CardListPanel getCardListPanel() {
         return cardListPanel;
     }

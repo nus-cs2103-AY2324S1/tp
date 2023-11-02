@@ -26,6 +26,7 @@ public class LogicManager implements Logic {
     public static final String FILE_OPS_ERROR_FORMAT = "Could not save data due to the following error: %s";
 
     public static final String FILE_OPS_PERMISSION_ERROR_FORMAT = "Could not save data to file %s due to insufficient permissions to write to the file or the folder.";
+
     private final Logger logger = LogsCenter.getLogger(LogicManager.class);
 
     private final Model model;
@@ -53,6 +54,7 @@ public class LogicManager implements Logic {
         if (commandResult.isExportTransactions()) {
             handleTransactionsExport();
         }
+
         if (commandResult.isExportStaff()) {
             handleStaffExport();
         }
@@ -69,6 +71,11 @@ public class LogicManager implements Logic {
         return commandResult;
     }
 
+    /**
+     * Handles commandResult of ExportTransactionsCommand by exporting transaction book to specified exportFilePath
+     *
+     * @throws CommandException
+     */
     @Override
     public void handleTransactionsExport() throws CommandException {
         try {
