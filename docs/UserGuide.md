@@ -427,6 +427,115 @@ Invalid Input Example | Application Output
 
 
 ## Payments
+
+CampusConnect allows you to keep track of payments between you and your friends! Each contact has a **balance**, which is the amount of money that you owe them (or that they owe you). This balance is positive if they owe you money, and negative if you owe them money.
+
+Every time you record a payment to or from a contact, their balance will be updated accordingly so that you can settle your debts easily. Instead of displaying positive or negative balances, **balances are reflected directly in the contact list** with easily-understandable human-readable explanations, like so:
+
+![Payment Image](images/ContactArrowPayment.png)
+
+<box type="warning" id="payment-tracking-limit">
+
+That said, CampusConnect's Payments feature should be only used for **casual transactions among friends**, and is not for commercial or business use.
+
+We enforce this with a **strict payment tracking limit** of a maximum of **$10,000** owed to or from each contact. If you attempt to record a payment that would cause a contact's balance to exceed this limit, you will see an error message stating that the payment cannot be recorded for this reason.
+</box>
+
+
+### Money Amount Format
+
+As part of our payments feature, CampusConnect reads in money amounts from the user.
+
+You should note that the money amount format is **strictly enforced**. This is to ensure that the money amounts are entered correctly, and to prevent any errors that may arise from incorrect money formats.
+
+An accepted money amount format follows these **three rules**:
+1. It **must be a positive number**.
+2. It **must be in dollars and cents, or just dollars**.
+3. It **must have at most 2 decimal places** (we do not support precisions lower than cents).
+
+Additionally, remember that CampusConnect enforces a [strict payment tracking limit](#payment-tracking-limit).
+
+<box theme="primary" icon=":fa-solid-lightbulb:">
+
+We also provide some **convenience features** for you to enter money amounts more easily, for cases where you may be copying and pasting money amounts from other sources. These convenience features are as follows:
+- You may enter money amounts with a **dollar sign** (`$`) prefix.
+- You may enter money amounts with **trailing zeroes**.
+
+</box>
+
+
+<box theme="info" icon=":fa-solid-magnifying-glass:">
+
+**Each format rule in action:**
+
+- Rule 1: `10` is a valid money amount, but `-10` is not.
+- Rule 2: `10.05`, `10.5`, `10`, `0.5`, `0.05` are all valid money amounts, but `.50` is not.
+- Rule 3: `10.55` is a valid money amount, but `10.555` is not.
+
+**Convenience features in action:**
+- `$10` is a valid money amount, and is equivalent to `10`.
+- `010` is a valid money amount, and is equivalent to `10`.
+- `00000000005.55` is also a valid money amount, and is equivalent to `5.55`.
+
+</box>
+
+Now that you understand how to enter money when using our app, you can proceed to learn how to record payments in CampusConnect!
+
+### Pay a contact money: `pay`
+
+Records a payment from you to a contact. The amount **the contact owes you** increases by that amount after this transaction.
+
+Format: `pay INDEX AMOUNT`
+
+- `INDEX` is the index of the contact in the contact list.
+- `AMOUNT` is the amount of money you pay the contact, written in valid [money format](#money-amount-format).
+
+<box theme="info" icon=":fa-solid-magnifying-glass:">
+
+**Examples:**
+
+Suppose you have a contact at index `1` with a balance of `$10`. Then:
+
+- `pay 1 10` records a payment of `$10` from you to the contact at index `1`.
+- `pay 1 $0.5` records a payment of `$0.50` from you to the contact at index `1`.
+
+At the end of both commands, the contact at index `1` will have a balance of `$20.50`.
+
+- `pay 1 -3` does NOT record any payment. Recall that money amounts must follow CampusConnect's [money format](#money-amount-format), which does not accept negative amounts.
+
+</box>
+
+If you're looking to record a payment from a contact to you, read ahead on how you can use the [owe](#owe-a-contact-money-owe) command instead!
+
+### Owe a contact money: `owe`
+
+Records a payment from a contact to you. The amount **you owe the contact** increases by that amount after this transaction.
+
+Format: `owe INDEX AMOUNT`
+
+- `INDEX` is the index of the contact in the contact list.
+- `AMOUNT` is the amount of money you owe the contact, written in valid [money amount format](#money-amount-format).
+
+<box theme="info" icon=":fa-solid-magnifying-glass:">
+
+**Examples:**
+
+Suppose you have a contact at index `1` with a balance of `$10`. Then:
+
+- `owe 1 9` records a payment of `$10` from the contact at index `1` to you.
+
+At the end of the command, you will see that **the contact owes you `$1`**.
+
+- `owe 1 $2.5` records a payment of `$2.50` from the contact at index `1` to you.
+
+At the end of both commands, you will see that **you owe the contact `$1.50`**.
+
+- `owe 1 $50000` does NOT record any payment. Recall that CampusConnect enforces a [strict payment tracking limit](#payment-tracking-limit).
+
+</box>
+
+---
+
 ## Find Contacts
 
 Another feature of CampusConnect is the ability to search for contacts based on a variety of criteria. This is useful for quickly finding contacts whose details you may only partially remember, or for finding contacts who match a certain criteria.
