@@ -9,8 +9,8 @@ import static seedu.classmanager.commons.util.AppUtil.checkArgument;
  */
 public class StudentNumber {
 
-    public static final String MESSAGE_CONSTRAINTS = "Student Number can take any value starting with capital 'A'," +
-            "followed by numbers, and ending with a single alphabet.";
+    public static final String MESSAGE_CONSTRAINTS = "Student Number can take any value starting with capital 'A',"
+            + "followed by numbers, and ending with a single alphabet.";
 
     /*
      * The first character of the student number needs to be "A".
