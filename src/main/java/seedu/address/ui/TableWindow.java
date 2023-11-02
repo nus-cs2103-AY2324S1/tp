@@ -22,6 +22,7 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.tableresults.EnrolDateTableCommandResult;
 import seedu.address.logic.commands.tableresults.GenderTableCommandResult;
 import seedu.address.logic.commands.tableresults.SecLevelTableCommandResult;
 import seedu.address.logic.commands.tableresults.SubjectTableCommandResult;
@@ -60,9 +61,12 @@ public class TableWindow extends UiPart<Stage> {
         } else if (commandResult instanceof SecLevelTableCommandResult) {
             SecLevelTableCommandResult secLevelTableCommandResult = (SecLevelTableCommandResult) commandResult;
             return createSecLevelTable(secLevelTableCommandResult);
-        } else {
+        } else if (commandResult instanceof SubjectTableCommandResult) {
             SubjectTableCommandResult subjectTableCommandResult = (SubjectTableCommandResult) commandResult;
             return createSubjectTable(subjectTableCommandResult);
+        } else {
+            EnrolDateTableCommandResult enrolDateTableCommandResult = (EnrolDateTableCommandResult) commandResult;
+            return createEnrolDateTable(enrolDateTableCommandResult);
         }
     }
 
@@ -161,6 +165,60 @@ public class TableWindow extends UiPart<Stage> {
         tableToCreate.getItems().add(commandResult);
 
         tableToCreate.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+        return tableToCreate;
+    }
+
+    /**
+     * Create a table with EnrolDateTableCommandResult instance containing counts for each month
+     * @param commandResult EnrolDateTableCommandResult instance containing column titles and counts mapping.
+     * @return a TableView instance generated with given column titles and counts from argument passed in.
+     */
+    private static TableView<EnrolDateTableCommandResult> createEnrolDateTable(EnrolDateTableCommandResult
+                                                                                       commandResult) {
+        TableView<EnrolDateTableCommandResult> tableToCreate = new TableView<>();
+
+        TableColumn<EnrolDateTableCommandResult, Integer> janColumn = new TableColumn<>("Jan");
+        janColumn.setCellValueFactory(new PropertyValueFactory<>("janCount"));
+        TableColumn<EnrolDateTableCommandResult, Integer> febColumn = new TableColumn<>("Feb");
+        febColumn.setCellValueFactory(new PropertyValueFactory<>("febCount"));
+        TableColumn<EnrolDateTableCommandResult, Integer> marColumn = new TableColumn<>("Mar");
+        marColumn.setCellValueFactory(new PropertyValueFactory<>("marCount"));
+        TableColumn<EnrolDateTableCommandResult, Integer> aprColumn = new TableColumn<>("Apr");
+        aprColumn.setCellValueFactory(new PropertyValueFactory<>("aprCount"));
+        TableColumn<EnrolDateTableCommandResult, Integer> mayColumn = new TableColumn<>("May");
+        mayColumn.setCellValueFactory(new PropertyValueFactory<>("mayCount"));
+        TableColumn<EnrolDateTableCommandResult, Integer> junColumn = new TableColumn<>("Jun");
+        junColumn.setCellValueFactory(new PropertyValueFactory<>("junCount"));
+        TableColumn<EnrolDateTableCommandResult, Integer> julColumn = new TableColumn<>("Jul");
+        julColumn.setCellValueFactory(new PropertyValueFactory<>("julCount"));
+        TableColumn<EnrolDateTableCommandResult, Integer> augColumn = new TableColumn<>("Aug");
+        augColumn.setCellValueFactory(new PropertyValueFactory<>("augCount"));
+        TableColumn<EnrolDateTableCommandResult, Integer> sepColumn = new TableColumn<>("Sep");
+        sepColumn.setCellValueFactory(new PropertyValueFactory<>("sepCount"));
+        TableColumn<EnrolDateTableCommandResult, Integer> octColumn = new TableColumn<>("Oct");
+        octColumn.setCellValueFactory(new PropertyValueFactory<>("octCount"));
+        TableColumn<EnrolDateTableCommandResult, Integer> novColumn = new TableColumn<>("Nov");
+        novColumn.setCellValueFactory(new PropertyValueFactory<>("novCount"));
+        TableColumn<EnrolDateTableCommandResult, Integer> decColumn = new TableColumn<>("Dec");
+        decColumn.setCellValueFactory(new PropertyValueFactory<>("decCount"));
+
+        tableToCreate.getColumns().add(janColumn);
+        tableToCreate.getColumns().add(febColumn);
+        tableToCreate.getColumns().add(marColumn);
+        tableToCreate.getColumns().add(aprColumn);
+        tableToCreate.getColumns().add(mayColumn);
+        tableToCreate.getColumns().add(junColumn);
+        tableToCreate.getColumns().add(julColumn);
+        tableToCreate.getColumns().add(augColumn);
+        tableToCreate.getColumns().add(sepColumn);
+        tableToCreate.getColumns().add(octColumn);
+        tableToCreate.getColumns().add(novColumn);
+        tableToCreate.getColumns().add(decColumn);
+
+        tableToCreate.getItems().add(commandResult);
+
+        tableToCreate.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+
         return tableToCreate;
     }
 

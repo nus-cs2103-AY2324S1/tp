@@ -41,6 +41,9 @@ public class EnrolDateTest {
         EnrolDate enrolDate2 = new EnrolDate("Oct 2023");
         EnrolDate enrolDate3 = new EnrolDate("Nov 2005");
 
+        // same object -> equal
+        assertEquals(enrolDate1, enrolDate1);
+
         //same values -> equal
         assertEquals(enrolDate1, enrolDate2);
 
@@ -52,5 +55,19 @@ public class EnrolDateTest {
 
         // different type -> return false
         assertFalse(enrolDate3.equals(0.5f));
+    }
+
+    @Test
+    public void hashCodeMethod() {
+        EnrolDate enrolDate1 = new EnrolDate("Oct 2023");
+        EnrolDate enrolDate2 = new EnrolDate("Oct 2023");
+        EnrolDate enrolDate3 = new EnrolDate("Nov 2005");
+
+        // same values -> return same hashcode
+        assertEquals(enrolDate1.hashCode(), enrolDate2.hashCode());
+
+        // different count values -> return different hashcode
+        assertNotEquals(enrolDate1.hashCode(), enrolDate3.hashCode());
+
     }
 }

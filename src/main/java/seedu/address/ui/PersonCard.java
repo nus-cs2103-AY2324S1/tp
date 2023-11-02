@@ -62,9 +62,9 @@ public class PersonCard extends UiPart<Region> {
         secLevel.setText("Sec-Level: " + student.getSecLevel().value);
         nearestMrtStation.setText("Nearest MRT Station: " + student.getNearestMrtStation().mrtStationName);
         student.getSubjects().stream()
-                .sorted(Comparator.comparing(subject -> subject.subjectName))
-                .forEach(subject -> subjects.getChildren().add(new Label(subject.subjectName
-                        + " (enrolled in: " + subject.enrolDate + ")")));
+                .sorted(Comparator.comparing(subject -> subject.getSubjectName()))
+                .forEach(subject -> subjects.getChildren().add(new Label(subject.getSubjectName()
+                        + " (enrolled in: " + subject.getEnrolDate() + ")")));
 
     }
 }

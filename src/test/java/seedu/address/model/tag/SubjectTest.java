@@ -45,4 +45,17 @@ public class SubjectTest {
         assertFalse(subject3.equals(0.5f));
     }
 
+    @Test
+    public void getSubjectNameMethod() {
+        Subject subject1 = new Subject("Chemistry");
+        assertEquals(subject1.getSubjectName(), "Chemistry");
+        assertFalse(subject1.getSubjectName().equals(" "));
+    }
+
+    @Test
+    public void getEnrolDateMethod() {
+        Subject subject = new Subject("Biology", new EnrolDate("Jul 2023"));
+        assertEquals(new EnrolDate("Jul 2023"), subject.getEnrolDate());
+
+    }
 }

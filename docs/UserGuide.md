@@ -233,12 +233,14 @@ Format: `table {prefix}`
 
 * FIELD_VALUE is not needed.
 * prefix is case-sensitive.
-* Exactly one of `g/`, `l/` or `s/` must be provided.
-
+* Exactly one of `g/`, `l/`, `s/` or `d/yyyy` must be provided.
+* For `d/yyyy`, `yyyy` represents year in 4 digits.
+* 
 Examples:
 * `table g/` will show a table categorized by student gender.
 * `table l/` will show a table categorized by student sec level.
 * `table s/` will show a table categorized by student subject.
+* `table d/2023` will show a table categorized by months in year 2023.
 
 ### Saving the data
 
