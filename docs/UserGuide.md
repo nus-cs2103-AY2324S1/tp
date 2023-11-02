@@ -3,10 +3,12 @@ layout: page
 title: User Guide
 ---
 
-FumbleLog is a **productivity desktop app for managing contacts and tracking events. It is optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI).
+FumbleLog is a **productivity desktop application** built to for **NUS Computing students** to help you manage contacts and track events. 
+It is designed to be an easy-to-use, one-stop platform for all your scheduling needs.
 
 In this user guide, you will learn the basics of our application and how you can use it to manage your tasks and interpersonal relationships better.
 
+# Table of Contents
 * Table of Contents
 {:toc}
 
@@ -47,6 +49,8 @@ In this user guide, you will learn the basics of our application and how you can
 **6. Learn more advanced commands.**
 - Refer to [Features](#features) below for more details of FumbleLog's commands.
 
+[Scroll back to Table of Contents](#table-of-contents)
+
 --------------------------------------------------------------------------------------------------------------------
 
 # Features
@@ -56,7 +60,7 @@ In this user guide, you will learn the basics of our application and how you can
 **:information_source: Notes about the command format:**<br>
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add_person n/John Doe`.
+  e.g. in `add_person n/NAME`, `NAME` is a parameter which can be used as `add_person n/John Doe`.
 
 * Items in square brackets are optional.<br>
   e.g `n/NAME [g/GROUP]` can be used as `n/John Doe g/friend` or as `n/John Doe`.
@@ -67,7 +71,7 @@ In this user guide, you will learn the basics of our application and how you can
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
+* Extraneous parameters for commands that do not take in parameters (such as `help`, `list_all`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
@@ -80,6 +84,7 @@ Shows a message explaining how to access the user guide for help.
 Format: `help`
 ![Helptab](images/Helptab.png)
 
+[Scroll back to Table of Contents](#table-of-contents)
 
 ## Commands for Persons
 
@@ -121,13 +126,16 @@ Expected output when a command succeeds:
 
 
 Expected output when the command fails
-* `Invalid command format! add: Adds a person to the FumbleLog. Parameters: n/NAME [p/PHONE] [e/EMAIL] [a/ADDRESS] [b/BIRTHDAY] [g/GROUP]…​`
+* `Invalid command format! add_person: Adds a person to the FumbleLog. Parameters: n/NAME [p/PHONE] [e/EMAIL] [a/ADDRESS] [b/BIRTHDAY] [g/GROUP]…​`
+
+[Scroll back to Table of Contents](#table-of-contents)
+
 
 ### Editing a person : `edit_person`
 
 Edits an existing person in the FumbleLog.
 
-Format: `edit PERSON_INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [b/BIRTHDAY] [r/REMARK] [g/GROUP]…​`
+Format: `edit_person PERSON_INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [b/BIRTHDAY] [r/REMARK] [g/GROUP]…​`
 
 * **At least one of the optional parameters must be provided.**
 * Existing values will be updated to the input values.
@@ -158,59 +166,9 @@ Expected output when a command succeeds:
 
 
 Expected output when the command fails:
-* `Invalid command format! edit: Edits the details of the person identified by the index number used in the displayed person list. Existing values will be overwritten by the input values. Parameters: INDEX (must be a positive integer) [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [b/BIRTHDAY] [g/GROUP]…​`
+* `Invalid command format! edit_person: Edits the details of the person identified by the index number used in the displayed person list. Existing values will be overwritten by the input values. Parameters: INDEX (must be a positive integer) [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [b/BIRTHDAY] [g/GROUP]…​`
 
-### Listing all persons and events: `list_all`
-
-Displays all persons and events stored in FumbleLog
-
-Format: `list_all`
-
-Expected output when a command succeeds:
-* Input: `list_all`
-* Output: `Listed all persons and events`
-* You should see a list of all persons and events under the persons and events column.
-
-### Listing all events: `list_events`
-
-Displays all events stored in FumbleLog
-
-Format: `list_events`
-
-Expected output when a command succeeds:
-* Input: `list_events`
-* Output: `Listed all events`
-* You should see a list of all events under the Events column.
-
-
-### Listing all persons : `list_persons`
-
-Displays all persons stored in FumbleLog.
-
-Format: `list_persons`
-
-Expected output when a command succeeds:
-* Input: `list_persons`
-* Output: `Listed all persons`
-* You should see a list of all persons under the Persons column.
-
-### Locating persons by name: `find`
-
-Finds persons whose names contain any of the given keywords.
-
-Format: `find KEYWORD [MORE_KEYWORDS]`
-
-* The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
-
-Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
+[Scroll back to Table of Contents](#table-of-contents)
 
 ### Deleting a person : `delete_person`
 
@@ -225,7 +183,7 @@ Format: `delete_person PERSON_INDEX`
 
 Examples:
 * `list_all` followed by `delete_person 2` deletes the 2nd person in the person list.
-* `find Betsy` followed by `delete_person 1` deletes the 1st person in the results of the `find` command. i.e Any person named `Betsy` at index `1` will be deleted.
+* `find_all Betsy` followed by `delete_person 1` deletes the 1st person in the results of the `find` command. i.e Any person named `Betsy` at index `1` will be deleted.
 
 Acceptable values for each parameter:
 * `PERSON_INDEX`: A positive integer
@@ -237,7 +195,46 @@ Expected output when a command succeeds:
 ![DeletePerson](images/Deleteperson.png)
 
 Expected output when the command fails:
-* `Invalid command format! delete: Deletes the person identified by the index number used in the displayed person list. Parameters: INDEX (must be a positive integer)Example: delete 1`
+* `Invalid command format! delete_person: Deletes the person identified by the index number used in the displayed person list. Parameters: INDEX (must be a positive integer)Example: delete 1`
+
+[Scroll back to Table of Contents](#table-of-contents)
+
+### Locating persons by name or group: `find_person`
+
+Find persons whose names or groups contain any of the given keywords.
+
+Format: `find_person KEYWORD [MORE_KEYWORDS]`
+
+* The search is case-insensitive. e.g `hans` will match `Hans`
+* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
+* Only full words will be matched e.g. `Han` will not match `Hans`
+* Persons matching at least one keyword will be returned (i.e. `OR` search).
+  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+* `find_person` searches the name of the `Person` and `Group` that they are assigned 
+to and will display them accordingly.
+
+Examples:
+* `find_person John` returns `john` and `John Doe`
+* `find_person friends` returns `Alex Yeoh` as he belongs to the `friends` group.
+<br>
+
+
+  ![result for 'find alex david'](images/findFriendsResult.png)
+
+[Scroll back to Table of Contents](#table-of-contents)
+
+### Listing all persons : `list_persons`
+
+Displays all persons stored in FumbleLog.
+
+Format: `list_persons`
+
+Expected output when a command succeeds:
+* Input: `list_persons`
+* Output: `Listed all persons`
+* You should see a list of all persons under the Persons column.
+
+[Scroll back to Table of Contents](#table-of-contents)
 
 ## Commands for Events
 
@@ -253,8 +250,9 @@ Format: `add_event m/EVENT_NAME d/DATE [s/START_TIME] [e/END_TIME] [n/PERSON_NAM
 - The given `DATE`, `START_TIME` and `END_TIME` cannot be a time in the past.
 - The given `START_TIME` must be before the given `END_TIME`.
 - If the meeting is added successfully, it will automatically be sorted by date and time with the earliest meeting at the top of the list.
-- All dates are to be in the format `yyyy-MM-dd`. i.e. 2023-10-05 for 5th Oct 2023
-- All time are to be in the format `HHmm`. i.e. 1400 for 2pm
+- All dates are to be in the format `yyyy-MM-dd`. i.e. 2023-10-05 for 5th Oct 2023.
+- All time are to be in the format `HHmm`. i.e. 1400 for 2pm.
+- If the given `START_TIME` and `END_TIME` are not given, the default values are `0000` and `2359` respectively.
 
 Example: 
 * `add_event m/FumbleLog meeting d/2023-10-05 s/1500 e/1700 n/Ken g/CS2103T g/CS2101`
@@ -283,6 +281,8 @@ Expected output when the command fails:
 * * `You cannot enter a time that is before the current time!` - When the given `DATE`, `START_TIME` and `END_TIME` is before the current time.
 * `You cannot enter an end time that is before the start time!` - When the given `START_TIME` is after the given `END_TIME`.
 
+[Scroll back to Table of Contents](#table-of-contents)
+
 ### Editing an event : `edit_event`
 
 Edits an existing event in FumbleLog.
@@ -290,13 +290,13 @@ Edits an existing event in FumbleLog.
 Format: `edit_event EVENT_INDEX [m/MEETING_DETAILS] [d/DATE] [s/START_TIME] [e/END_TIME] [n/PERSON_NAME]... [u/PERSON_NAME]... [g/GROUP]... [ug/GROUP]...`
 
 * **At least one of the optional parameters required.**
-* `START_TIME` must be coupled with `END_TIME`.
 * The input values will replace the existing values, except for `PERSON` AND `GROUP`.
 * `PERSON` and `GROUP` edits are cumulative and will add to the current list of persons and groups.
   Use the unassign commands, i.e. `u/PERSON`, if you would like to unassign any person or group.
 * If there are any changes to the meeting date and time, the meeting will be automatically sorted by date and time with the earliest meeting at the top of the list.
 * All dates are to be in the format `yyyy-MM-dd`. i.e. 2023-10-05 for 5th Oct 2023
-* All time are to be in the format `HHmm`. i.e. 1400 for 2pm
+* All time are to be in the format `HHmm`. i.e. 1400 for 2pm.
+* The given `DATE`, `START_TIME` and `END_TIME` cannot be a time in the past.
 
 Examples:
 * `edit_event 1 m/FumbleLog meeting d/2023-10-05 s/1500 e/1700`
@@ -320,7 +320,6 @@ Expected output when the command succeeds:
 
 ![Eventedit](images/Eventedit.png)
 
-
 Expected output when the command fails:
 * `Invalid command format!
   edit_event: Edits the details of the event identified by the index number used in the displayed event list.
@@ -329,6 +328,8 @@ Expected output when the command fails:
   Example: edit_event 1 m/FumbleLog Meeting d/2023-10-13 n/Ken g/Team2 `
 * `You cannot enter a time that is before the current time!` - When the given `DATE`, `START_TIME` and `END_TIME` is before the current time.
 * `You cannot enter an end time that is before the start time!` - When the given `START_TIME` is after the given `END_TIME`.
+
+[Scroll back to Table of Contents](#table-of-contents)
 
 ### Deleting an event : `delete_event`
 
@@ -354,17 +355,53 @@ Expected output when the command fails:
   Parameters: INDEX (must be a positive integer)
   Example: delete_event 1`
 
+[Scroll back to Table of Contents](#table-of-contents)
+
+### Locating events by name, group or person: `find_event`
+
+Find events whose names or groups contain any of the given keywords.
+
+Format: `find_event KEYWORD [MORE_KEYWORDS]`
+
+* The search is case-insensitive. e.g `meeting` will match `Meeting`
+* Only full words will be matched e.g. `Han` will not match `Hans`
+* Events matching at least one keyword will be returned (i.e. `OR` search).
+  e.g. `Meetings TP` will return `Meetings`, `TP deadline`
+* `find_event` searches the name of the `Event`, `Group` and `Person` that they are assigned
+  to and will display them accordingly.
+
+Examples:
+* `find_event meeting` returns `meeting` and `CS2103T meeting`
+* `find_event friends` returns `meeting` if it contains the `friends` group.
+  <br>
+
+[Scroll back to Table of Contents](#table-of-contents)
+
+### Listing all events: `list_events`
+
+Displays all events stored in FumbleLog
+
+Format: `list_events`
+
+Expected output when a command succeeds:
+* Input: `list_events`
+* Output: `Listed all events`
+* You should see a list of all events under the Events column.
+
+[Scroll back to Table of Contents](#table-of-contents)
+
+
 ## General commands
 
 ### Show all upcoming events and birthdays : `remind`
 
 Shows all events and birthdays that are happening in the next specified number of days.
 
-Format: `remind` [NUMBER_OF_DAYS]
+Format: `remind [NUMBER_OF_DAYS]` 
 
-* Shows all events and birthdays happening in the next [NUMBER_OF_DAYS] days.
-* If [NUMBER_OF_DAYS] is not specified, the default value is 7 days.
-* [NUMBER_OF_DAYS] **must be a positive integer** 1,2,3, ...
+* Shows all events and birthdays happening in the next `[NUMBER_OF_DAYS]` days.
+* If `[NUMBER_OF_DAYS]` is not specified, the default value is 7 days.
+* `[NUMBER_OF_DAYS]` **must be a positive integer** 1,2,3, ...
 
 Examples:
 * `remind` shows all events and birthdays happening in the next 7 days.
@@ -376,12 +413,45 @@ Expected output when the command succeeds:
 
 ![Remind](images/Remind.png)
 
-
 Expected output when the command fails:
 * `Invalid command format!
   remind: Reminds the user of the upcoming birthdays and events in the next n number of days. If no index is given, the default number of days is 7.
-  Parameters: INDEX (must be a positive integer)
-  Example: remind 1`
+  Parameters: INDEX (must be a positive integer)`
+  Example: `remind 1`
+
+[Scroll back to Table of Contents](#table-of-contents)
+
+### Finding persons and events: `find_all`
+
+Find persons and events whose names or groups contain any of the given keywords.
+
+Format: `find_all KEYWORD [MORE_KEYWORDS]`
+
+* The search is case-insensitive. e.g `hans` will match `Hans`
+* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
+* Only full words will be matched e.g. `Han` will not match `Hans`
+* Persons and events matching at least one keyword will be returned (i.e. `OR` search).
+  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+
+Examples:
+* `find_all John` returns `john` and `John Doe` in the persons list and `John's birthday` in the events list.
+* `find_all friends` returns `Alex Yeoh` as he belongs to the `friends` group in the persons list 
+and `CS2103T meeting` as it contains the `friends` group in the events list.
+
+[Scroll back to Table of Contents](#table-of-contents)
+
+### Listing all persons and events: `list_all`
+
+Displays all persons and events stored in FumbleLog
+
+Format: `list_all`
+
+Expected output when a command succeeds:
+* Input: `list_all`
+* Output: `Listed all persons and events`
+* You should see a list of all persons and events under the persons and events column.
+
+[Scroll back to Table of Contents](#table-of-contents)
 
 ### Clearing all entries : `clear`
 
@@ -394,6 +464,8 @@ Format: `clear`
 Exits the program.
 
 Format: `exit`
+
+[Scroll back to Table of Contents](#table-of-contents)
 
 # How we manage your data
 
@@ -413,6 +485,8 @@ If your changes to the data file makes its format invalid, FumbleLog will discar
 
 _Details coming soon ..._
 
+[Scroll back to Table of Contents](#table-of-contents)
+
 --------------------------------------------------------------------------------------------------------------------
 
 # FAQ
@@ -420,11 +494,15 @@ _Details coming soon ..._
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous FumbleLog home folder.
 
+[Scroll back to Table of Contents](#table-of-contents)
+
 --------------------------------------------------------------------------------------------------------------------
 
 # Known issues
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
+
+[Scroll back to Table of Contents](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -432,15 +510,14 @@ _Details coming soon ..._
 
 ### Commands for Persons
 
-| Action            | Format, Examples                                                                                                                                                                        |
-|-------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add Person**    | `add_person n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS r/REMARK [g/GROUP]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 g/friend g/colleague` |
-| **Edit Person**   | `edit_person PERSON_INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [r/REMARK] [g/GROUP]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                  |
-| **Delete Person** | `delete_person PERSON_INDEX`<br> e.g., `delete 3`                                                                                                                                       |
-| **List All**      | `list_all`                                                                                                                                                                              |
-| **List Persons**  | `list_persons`                                                                                                                                                                          |
-| **List Events**   | `list_events`                                                                                                                                                                           |
-| **Find Person**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                              |
+| Action            | Format, Examples                                                                                                                                                                                             |
+|-------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add Person**    | `add n/NAME [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [b/BIRTHDAY] [r/REMARK] [g/GROUP]…​` <br> e.g., `add_person n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 g/friend g/colleague` |
+| **Edit Person**   | `edit_person PERSON_INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [r/REMARK] [g/GROUP]…​`<br> e.g.,`edit_person 2 n/James Lee e/jameslee@example.com`                                                |
+| **Delete Person** | `delete_person PERSON_INDEX`<br> e.g., `delete_person 3`                                                                                                                                                     |
+| **Find Person**   | `find_person KEYWORD [MORE_KEYWORDS]`<br> e.g., `find_person James Jake`                                                                                                                                     |
+| **List Persons**  | `list_persons`                                                                                                                                                                                               |
+
 
 ### Commands for Events
 
@@ -449,11 +526,19 @@ _Details coming soon ..._
 | **Add Event**    | `add_event m/EVENT_NAME d/DATE [s/START_TIME] [e/END_TIME] [n/PERSON_NAME]... [g/GROUP]...`<br> e.g., `add_event m/FumbleLog meeting d/2023-10-05 s/1500 e/1700 n/Ken g/CS2103T g/CS2101`                                                           |
 | **Edit Event**   | `edit_event EVENT_INDEX [m/MEETING_DETAILS] [d/DATE] [s/START_TIME] [e/END_TIME] [n/PERSON_NAME]... [u/PERSON_NAME]... [g/GROUP]... [ug/GROUP]...`<br> e.g., `edit_event 1 m/tP week 3 meeting d/2023-10-05 s/1500 e/1700 n/Ken g/CS2103T g/CS2101` |
 | **Delete Event** | `delete_event EVENT_INDEX`<br> e.g., `delete_event 1`                                                                                                                                                                                               |
+| **Find Event**   | `find_event KEYWORD [MORE_KEYWORDS]`<br> e.g., `find_event meeting`                                                                                                                                                                                 |
+| **List Events**  | `list_events`                                                                                                                                                                                                                                       |
+
 
 ### General commands
 
-| Action    | Format, Examples |
-|-----------|------------------|
-| **Clear** | `clear`          |
-| **Exit**  | `exit`           |
-| **Help**  | `help`           |
+| Action       | Format, Examples                                             |
+|--------------|--------------------------------------------------------------|
+| **Remind**   | `remind [NUM_OF_DAYS]` <br> e.g.,`remind` or `remind 4`      |
+| **List All** | `list_all`                                                   |
+| **Find All** | `find_all KEYWORD [MORE_KEYWORDS]`<br> e.g., `find_all John` |
+| **Clear**    | `clear`                                                      |
+| **Exit**     | `exit`                                                       |
+| **Help**     | `help`                                                       |
+
+[Scroll back to Table of Contents](#table-of-contents)
