@@ -62,46 +62,59 @@ public class FilterCommandParser implements Parser<FilterCommand> {
                 if (remark != null) {
                     predicate.addPredicate(person -> person.getRemark().contains(remark));
                 }
+                if (predicate.isEmpty()) {
+                    throw new ParseException("You must specify at least one field to filter!"
+                            + getFilterPersonUsageInfo());
+                }
                 return new FilterPersonCommand(predicate);
             } catch (ParseException e) {
                 throw new ParseException("Invalid person format: " + e.getMessage() + ". "
                         + getFilterPersonUsageInfo());
             }
         } else if (state == State.SCHEDULE) {
-            MacroPredicate<Lesson> predicate = new MacroPredicate<>();
-            Name name = parseField("name", userInput, Name::of);
-            if (name != null) {
-                predicate.addPredicate(lesson -> lesson.getName().equals(name));
-            }
-            Subjects subjects = parseField("subject", userInput, Subjects::of);
+            try {
+                MacroPredicate<Lesson> predicate = new MacroPredicate<>();
+                Name name = parseField("name", userInput, Name::of);
+                if (name != null) {
+                    predicate.addPredicate(lesson -> lesson.getName().equals(name));
+                }
+                Subjects subjects = parseField("subject", userInput, Subjects::of);
 
-            if (subjects != null) {
-                predicate.addPredicate(lesson ->subjects.contains(lesson.getSubject()));
+                if (subjects != null) {
+                    predicate.addPredicate(lesson -> subjects.contains(lesson.getSubject()));
+                }
+                int numberNotNull = 0;
+                Day before = parseField("before", userInput, Day::of);
+                if (before != null) {
+                    numberNotNull++;
+                    predicate.addPredicate(lesson -> lesson.getDay().compareTo(before) < 0);
+                }
+                Day on = parseField("on", userInput, Day::of);
+                if (on != null) {
+                    numberNotNull++;
+                    predicate.addPredicate(lesson -> lesson.getDay().equals(on));
+                }
+                Day after = parseField("after", userInput, Day::of);
+                if (after != null) {
+                    numberNotNull++;
+                    predicate.addPredicate(lesson -> lesson.getDay().compareTo(after) > 0);
+                }
+                if (numberNotNull > 1) {
+                    throw new ParseException("You can only use one of -before, -on, -after!");
+                }
+                Remark remark = parseField("remark", userInput, Remark::of);
+                if (remark != null) {
+                    predicate.addPredicate(lesson -> lesson.getRemark().contains(remark));
+                }
+                if (predicate.isEmpty()) {
+                    throw new ParseException("You must specify at least one field to filter!"
+                            + getFilterScheduleUsageInfo());
+                }
+                return new FilterLessonCommand(predicate);
+            } catch (ParseException e) {
+                throw new ParseException("Invalid lesson format: " + e.getMessage() + ". "
+                        + getFilterScheduleUsageInfo());
             }
-            int numberNotNull = 0;
-            Day before = parseField("before", userInput, Day::of);
-            if (before != null) {
-                numberNotNull++;
-                predicate.addPredicate(lesson -> lesson.getDay().compareTo(before) < 0);
-            }
-            Day on = parseField("on", userInput, Day::of);
-            if (on != null) {
-                numberNotNull++;
-                predicate.addPredicate(lesson -> lesson.getDay().equals(on));
-            }
-            Day after = parseField("after", userInput, Day::of);
-            if (after != null) {
-                numberNotNull++;
-                predicate.addPredicate(lesson -> lesson.getDay().compareTo(after) > 0);
-            }
-            if (numberNotNull > 1) {
-                throw new ParseException("You can only use one of -before, -on, -after!");
-            }
-            Remark remark = parseField("remark", userInput, Remark::of);
-            if (remark != null) {
-                predicate.addPredicate(lesson -> lesson.getRemark().contains(remark));
-            }
-            return new FilterLessonCommand(predicate);
         } else if (state == State.TASK) {
             throw new ParseException("Filter cannot be used in task list!");
         } else {

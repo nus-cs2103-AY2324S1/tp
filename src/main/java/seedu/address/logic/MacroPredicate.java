@@ -20,4 +20,7 @@ public class MacroPredicate<T> implements Predicate<T> {
     public void addPredicate(Predicate<T> predicate) {
         predicates.add(predicate);
     }
+    public boolean isEmpty() {
+        return predicates.isEmpty();
+    }
 }
