@@ -1,7 +1,7 @@
 package seedu.flashlingo.logic.commands;
 
-import static seedu.flashlingo.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.flashlingo.logic.commands.SwitchCommand.MESSAGE_SUCCESS;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
@@ -13,9 +13,27 @@ public class SwitchCommandTest {
     private Model expectedModel = new ModelManager();
 
     @Test
-    public void execute_switchToDarkTheme_success() {
-        expectedModel.switchTheme();
-        CommandResult expectedCommandResult = new CommandResult(MESSAGE_SUCCESS + "dark theme!", false, false, false);
-        assertCommandSuccess(new SwitchCommand(), model, expectedCommandResult, expectedModel);
+    public void execute_switch_success() {
+        String expectedCommandResult = SwitchCommand.MESSAGE_SUCCESS + "dark theme!";
+        CommandTestUtil.assertCommandSuccess(new SwitchCommand(), model, expectedCommandResult, expectedModel);
+    }
+    @Test
+    public void equals() {
+        SwitchCommand switchFirstCommand = new SwitchCommand();
+        SwitchCommand switchSecondCommand = new SwitchCommand();
+
+
+        // same object -> returns true
+        assertTrue(switchFirstCommand.equals(switchFirstCommand));
+
+        // same values -> returns true
+        SwitchCommand switchFirstCommandCopy = new SwitchCommand();
+        assertTrue(switchFirstCommand.equals(switchFirstCommandCopy));
+
+        // different types -> returns false
+        assertFalse(switchFirstCommand.equals(1));
+
+        // null -> returns false
+        assertFalse(switchFirstCommand.equals(null));
     }
 }

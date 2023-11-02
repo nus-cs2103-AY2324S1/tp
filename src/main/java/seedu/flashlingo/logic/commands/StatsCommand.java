@@ -16,8 +16,7 @@ public class StatsCommand extends Command {
             + "Example: " + COMMAND_WORD + " ";
 
 
-    public static final String MESSAGE_SUCCESS = "Great work fellow learner! \nTotal number of flashcards: %d \n" +
-            "Total number of FlashCards remembered: %d\nOverall success rate: %f%%";
+    public static final String MESSAGE_SUCCESS = "Great work fellow learner! \nTotal number of flashcards: %d\n";
 
 
     /**
@@ -28,14 +27,8 @@ public class StatsCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        int numberOfFlashCards = model.getNumberOfFlashCards();
-        double numberOfRememberedWords = model.getNumberOfRememberedWords();
-        double successRate = 0;
-        if (!(numberOfRememberedWords < 0 || numberOfFlashCards <= 0)) {
-            successRate = (numberOfRememberedWords / numberOfFlashCards) * 100;
-        }
-        return new CommandResult(String.format(MESSAGE_SUCCESS, numberOfFlashCards,
-                (int) numberOfRememberedWords, successRate));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, model.getNumberOfFlashCards(),
+                model.getNumberOfRememberedWords()));
     }
 
     /**

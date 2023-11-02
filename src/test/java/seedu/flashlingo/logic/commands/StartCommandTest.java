@@ -1,4 +1,4 @@
-package flashlingo.logic.commands;
+package seedu.flashlingo.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -7,40 +7,35 @@ import static seedu.flashlingo.testutil.TypicalFlashCards.getTypicalFlashlingo;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.flashlingo.logic.commands.YesCommand;
 import seedu.flashlingo.logic.commands.exceptions.CommandException;
-import seedu.flashlingo.model.Flashlingo;
 import seedu.flashlingo.model.Model;
 import seedu.flashlingo.model.ModelManager;
 import seedu.flashlingo.model.UserPrefs;
 
 /**
- * Indicates user has memorized the word.
+ * Starts a new session of reviewing.
  */
-public class YesCommandTest {
-
+public class StartCommandTest {
     private Model model = new ModelManager(getTypicalFlashlingo(), new UserPrefs());
     @Test
-    public void execute_yes_success() {
-        assertThrows(CommandException.class, () -> new YesCommand().execute(model));
+    public void execute_start_success() {
+        assertThrows(CommandException.class, () -> new StartCommand().execute(model));
     }
-
     @Test
     public void equals() {
-        YesCommand yesFirstCommand = new YesCommand();
+        StartCommand startFirstCommand = new StartCommand();
 
         // same object -> returns true
-        assertTrue(yesFirstCommand.equals(yesFirstCommand));
+        assertTrue(startFirstCommand.equals(startFirstCommand));
 
         // same values -> returns true
-        YesCommand yesFirstCommandCopy = new YesCommand();
-        assertTrue(yesFirstCommand.equals(yesFirstCommandCopy));
+        StartCommand startFirstCommandCopy = new StartCommand();
+        assertTrue(startFirstCommand.equals(startFirstCommandCopy));
 
         // different types -> returns false
-        assertFalse(yesFirstCommand.equals(1));
+        assertFalse(startFirstCommand.equals(1));
 
         // null -> returns false
-        assertFalse(yesFirstCommand.equals(null));
-
+        assertFalse(startFirstCommand.equals(null));
     }
 }

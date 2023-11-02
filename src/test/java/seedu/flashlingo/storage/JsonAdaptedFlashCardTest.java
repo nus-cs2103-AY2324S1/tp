@@ -1,4 +1,5 @@
 package seedu.flashlingo.storage;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.flashlingo.storage.JsonAdaptedFlashCard.DATE_PATTERN;
 import static seedu.flashlingo.storage.JsonAdaptedFlashCard.INVALID_DATE_FORMAT_MESSAGE;
@@ -17,6 +18,7 @@ import seedu.flashlingo.commons.exceptions.IllegalValueException;
 import seedu.flashlingo.model.flashcard.ProficiencyLevel;
 import seedu.flashlingo.model.flashcard.words.OriginalWord;
 import seedu.flashlingo.model.flashcard.words.TranslatedWord;
+
 public class JsonAdaptedFlashCardTest {
     private static final String INVALID_ORIGINAL_WORD_LANGUAGE = "English! ";
     private static final String INVALID_TRANSLATED_WORD_LANGUAGE = "Fre1ch";

@@ -1,7 +1,6 @@
 package seedu.flashlingo.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.flashlingo.logic.Messages.MESSAGE_DUPLICATE_FLASHCARD;
 import static seedu.flashlingo.logic.parser.CliSyntax.PREFIX_ORIGINAL_WORD;
 import static seedu.flashlingo.logic.parser.CliSyntax.PREFIX_ORIGINAL_WORD_LANGUAGE;
 import static seedu.flashlingo.logic.parser.CliSyntax.PREFIX_TRANSLATED_WORD;
@@ -18,13 +17,13 @@ import seedu.flashlingo.model.flashcard.words.OriginalWord;
 import seedu.flashlingo.model.flashcard.words.TranslatedWord;
 
 /**
- * Adds a flash card to Flashlingo.
+ * Adds a flashcard to Flashlingo.
  */
 public class AddCommand extends Command {
     public static final String COMMAND_WORD = "add";
 
     // For help function
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a flash card to Flashlingo.\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a flashcard to Flashlingo.\n"
             + "Parameters: "
             + PREFIX_ORIGINAL_WORD + "ORIGINAL WORD "
             + PREFIX_ORIGINAL_WORD_LANGUAGE + "ORIGINAL WORD LANGUAGE "
@@ -37,7 +36,8 @@ public class AddCommand extends Command {
             + PREFIX_TRANSLATED_WORD_LANGUAGE + "Chinese";
 
 
-    public static final String MESSAGE_SUCCESS = "New flash card added: %s - %s!";
+    public static final String MESSAGE_SUCCESS = "New flashcard added: %s - %s";
+    public static final String MESSAGE_DUPLICATE_CARD = "This flashcard already exists";
 
     private static final ProficiencyLevel level = new ProficiencyLevel(1);
     private final FlashCard toAdd;
@@ -67,7 +67,7 @@ public class AddCommand extends Command {
         requireNonNull(model);
 
         if (model.hasFlashCard(toAdd)) {
-            throw new CommandException(MESSAGE_DUPLICATE_FLASHCARD);
+            throw new CommandException(MESSAGE_DUPLICATE_CARD);
         }
         model.addFlashCard(toAdd);
         return new CommandResult(String.format(MESSAGE_SUCCESS, this.original, this.translated));

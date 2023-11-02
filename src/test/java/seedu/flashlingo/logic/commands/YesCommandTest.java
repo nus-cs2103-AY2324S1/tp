@@ -1,51 +1,47 @@
 package seedu.flashlingo.logic.commands;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.fail;
-import static seedu.flashlingo.testutil.TypicalFlashCards.getTypicalFlashlingoWithOneFlashCard;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import seedu.flashlingo.logic.commands.exceptions.CommandException;
+import seedu.flashlingo.model.Flashlingo;
 import seedu.flashlingo.model.Model;
 import seedu.flashlingo.model.ModelManager;
 import seedu.flashlingo.model.UserPrefs;
-import seedu.flashlingo.model.flashcard.FlashCard;
-import seedu.flashlingo.model.flashcard.ProficiencyLevel;
+import seedu.flashlingo.testutil.Assert;
+import seedu.flashlingo.testutil.TypicalFlashCards;
 
+/**
+ * Indicates user has memorized the word.
+ */
 public class YesCommandTest {
-    private Model model = new ModelManager();
-    private Model expectedModel = new ModelManager();
-    @BeforeEach
-    public void setUp() {
-        model = new ModelManager(getTypicalFlashlingoWithOneFlashCard(), new UserPrefs());
-        expectedModel = new ModelManager(model.getFlashlingo(), new UserPrefs());
+
+    private Model model = new ModelManager(TypicalFlashCards.getTypicalFlashlingo(), new UserPrefs());
+    @Test
+    public void execute_yes_success() {
+
+        Model expectedModel = new ModelManager(new Flashlingo(model.getFlashlingo()), new UserPrefs());
+
+        Assert.assertThrows(CommandException.class, () -> new YesCommand().execute(model));
     }
     @Test
-    public void execute_getNextReviewWord_success() {
-        try {
-            FlashCard result = model.nextReviewWord();
-            assertNotNull(result);
-        } catch (Exception e) {
-            fail("An exception occurred: " + e.getMessage());
-        }
-    }
+    public void equals() {
+        YesCommand yesFirstCommand = new YesCommand();
 
-    @Test
-    public void execute_updateDate_failure() {
-        try {
-            FlashCard result = model.nextReviewWord();
-            ProficiencyLevel previousLevel = result.getProficiencyLevel();
+        // same object -> returns true
+        assertTrue(yesFirstCommand.equals(yesFirstCommand));
 
-            result.updateLevel(false);
+        // same values -> returns true
+        YesCommand yesFirstCommandCopy = new YesCommand();
+        assertTrue(yesFirstCommand.equals(yesFirstCommandCopy));
 
-            ProficiencyLevel currentLevel = result.getProficiencyLevel();
-            assertEquals(previousLevel.getLevel(), currentLevel.getLevel());
-        } catch (Exception e) {
-            fail("An exception occurred: " + e.getMessage());
-        }
+        // different types -> returns false
+        assertFalse(yesFirstCommand.equals(1));
+
+        // null -> returns false
+        assertFalse(yesFirstCommand.equals(null));
 
     }
-
 }

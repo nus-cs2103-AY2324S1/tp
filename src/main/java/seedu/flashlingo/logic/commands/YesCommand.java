@@ -18,7 +18,7 @@ public class YesCommand extends Command {
 
     // For help function
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Indicates user has successfully memorized the word.\n"
-        + "Example: " + COMMAND_WORD + " ";
+            + "Example: " + COMMAND_WORD + " ";
 
     public static final String MESSAGE_SUCCESS = "Great Job! You have indicated that you have memorized the word!";
     /**
@@ -31,7 +31,6 @@ public class YesCommand extends Command {
         requireNonNull(model);
         FlashCard response = model.nextReviewWord();
         response.updateLevel(true);
-        response.recallFlashCard();
         if (!model.hasNextRound()) {
             SessionManager.getInstance().setSession(false);
             model.updateFilteredFlashCardList(PREDICATE_SHOW_ALL_FLASHCARDS);
@@ -48,7 +47,7 @@ public class YesCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof AddCommand)) {
+        if (!(other instanceof YesCommand)) {
             return false;
         }
 
@@ -58,6 +57,6 @@ public class YesCommand extends Command {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-          .toString();
+                .toString();
     }
 }

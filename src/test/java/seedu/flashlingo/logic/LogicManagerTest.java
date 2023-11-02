@@ -3,8 +3,6 @@ package seedu.flashlingo.logic;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.flashlingo.logic.Messages.MESSAGE_INVALID_FLASHCARD_DISPLAYED_INDEX;
 import static seedu.flashlingo.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
-import static seedu.flashlingo.logic.commands.CommandTestUtil.TRANSLATION_DESC_AMY;
-import static seedu.flashlingo.logic.commands.CommandTestUtil.WORD_DESC_AMY;
 import static seedu.flashlingo.testutil.Assert.assertThrows;
 import static seedu.flashlingo.testutil.TypicalFlashCards.AMY;
 
@@ -18,6 +16,7 @@ import org.junit.jupiter.api.io.TempDir;
 
 import seedu.flashlingo.logic.commands.AddCommand;
 import seedu.flashlingo.logic.commands.CommandResult;
+import seedu.flashlingo.logic.commands.CommandTestUtil;
 import seedu.flashlingo.logic.commands.ListCommand;
 import seedu.flashlingo.logic.commands.exceptions.CommandException;
 import seedu.flashlingo.logic.parser.exceptions.ParseException;
@@ -47,7 +46,7 @@ public class LogicManagerTest {
                 new JsonFlashlingoStorage(temporaryFolder.resolve("flashlingo.json"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(temporaryFolder.resolve("userPrefs.json"));
         StorageManager storage = new StorageManager(flashlingoStorage, userPrefsStorage);
-        logic = new LogicManager(model, storage);
+        logic = (Logic) new LogicManager(model, storage);
     }
 
     @Test
@@ -93,7 +92,7 @@ public class LogicManagerTest {
      * @see #assertCommandFailure(String, Class, String, Model)
      */
     private void assertCommandSuccess(String inputCommand, String expectedMessage,
-            Model expectedModel) throws CommandException, ParseException {
+                                      Model expectedModel) throws CommandException, ParseException {
         CommandResult result = logic.execute(inputCommand);
         assertEquals(expectedMessage, result.getFeedbackToUser());
         assertEquals(expectedModel, model);
@@ -120,7 +119,7 @@ public class LogicManagerTest {
      * @see #assertCommandFailure(String, Class, String, Model)
      */
     private void assertCommandFailure(String inputCommand, Class<? extends Throwable> expectedException,
-            String expectedMessage) {
+                                      String expectedMessage) {
         Model expectedModel = new ModelManager(model.getFlashlingo(), new UserPrefs());
         assertCommandFailure(inputCommand, expectedException, expectedMessage, expectedModel);
     }
@@ -133,7 +132,7 @@ public class LogicManagerTest {
      * @see #assertCommandSuccess(String, String, Model)
      */
     private void assertCommandFailure(String inputCommand, Class<? extends Throwable> expectedException,
-            String expectedMessage, Model expectedModel) {
+                                      String expectedMessage, Model expectedModel) {
         assertThrows(expectedException, expectedMessage, () -> logic.execute(inputCommand));
         assertEquals(expectedModel, model);
     }
@@ -162,8 +161,8 @@ public class LogicManagerTest {
 
         logic = new LogicManager(model, storage);
 
-        // Triggers the saveAddressBook method by executing an add command
-        String addCommand = AddCommand.COMMAND_WORD + WORD_DESC_AMY + TRANSLATION_DESC_AMY;
+        String addCommand = AddCommand.COMMAND_WORD + CommandTestUtil.WORD_DESC_AMY
+                + CommandTestUtil.TRANSLATION_DESC_AMY;
         FlashCard expectedFlashCard = new FlashCardBuilder(AMY).build();
         ModelManager expectedModel = new ModelManager();
         expectedModel.addFlashCard(expectedFlashCard);

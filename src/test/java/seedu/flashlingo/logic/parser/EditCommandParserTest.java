@@ -1,18 +1,18 @@
 package seedu.flashlingo.logic.parser;
 
 import static seedu.flashlingo.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.flashlingo.logic.commands.CommandTestUtil.TRANSLATION_DESC_AMY;
-import static seedu.flashlingo.logic.commands.CommandTestUtil.TRANSLATION_DESC_BOB;
-import static seedu.flashlingo.logic.commands.CommandTestUtil.VALID_ORIGINAL_WORD_AMY;
-import static seedu.flashlingo.logic.commands.CommandTestUtil.WORD_DESC_AMY;
 import static seedu.flashlingo.logic.parser.CliSyntax.PREFIX_TRANSLATED_WORD;
 import static seedu.flashlingo.logic.parser.CommandParserTestUtil.assertParseFailure;
+import static seedu.flashlingo.testutil.TypicalFlashCards.TRANSLATION_DESC_AMY;
+import static seedu.flashlingo.testutil.TypicalFlashCards.TRANSLATION_DESC_BOB;
+import static seedu.flashlingo.testutil.TypicalFlashCards.WORD_DESC_AMY;
 import static seedu.flashlingo.testutil.TypicalIndexes.INDEX_FIRST_FLASHCARD;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.flashlingo.commons.core.index.Index;
 import seedu.flashlingo.logic.Messages;
+import seedu.flashlingo.logic.commands.CommandTestUtil;
 import seedu.flashlingo.logic.commands.EditCommand;
 
 public class EditCommandParserTest {
@@ -25,7 +25,7 @@ public class EditCommandParserTest {
     @Test
     public void parse_missingParts_failure() {
         // no index specified
-        assertParseFailure(parser, VALID_ORIGINAL_WORD_AMY, MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, CommandTestUtil.VALID_ORIGINAL_WORD_AMY, MESSAGE_INVALID_FORMAT);
 
         // no index and no field specified
         assertParseFailure(parser, "", MESSAGE_INVALID_FORMAT);
