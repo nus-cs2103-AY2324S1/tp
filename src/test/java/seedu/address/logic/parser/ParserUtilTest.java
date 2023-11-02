@@ -6,6 +6,7 @@ import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
@@ -13,6 +14,7 @@ import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.event.EventDescription;
 import seedu.address.model.event.EventPeriod;
@@ -62,6 +64,41 @@ public class ParserUtilTest {
 
         // Leading and trailing whitespaces
         assertEquals(INDEX_FIRST_PERSON, ParserUtil.parseIndex("  1  "));
+    }
+
+    @Test
+    public void parseDualIndex_invalidInput_throwsParseException() throws Exception {
+        assertThrows(ParseException.class, () -> ParserUtil.parseDualIndexes("10 a"));
+    }
+
+    @Test
+    public void parseDualIndex_negativeValueInput_throwsParseException() throws Exception {
+        assertThrows(ParseException.class, MESSAGE_INVALID_INDEX, ()
+                -> ParserUtil.parseDualIndexes("-1 1"));
+    }
+
+    @Test
+    public void parseDualIndexes_validInput_success() throws Exception {
+        ArrayList<Index> expected = new ArrayList<>();
+        Index expectedFirstItem = Index.fromOneBased(1);
+        Index expectedSecondItem = Index.fromOneBased(2);
+        expected.add(expectedFirstItem);
+        expected.add(expectedSecondItem);
+
+        ArrayList<Index> actual = ParserUtil.parseDualIndexes("1 2");
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void parseDualIndexes_validInput_success2() throws Exception {
+        ArrayList<Index> expected = new ArrayList<>();
+        Index expectedFirstItem = Index.fromOneBased(1);
+        Index expectedSecondItem = Index.fromOneBased(4);
+        expected.add(expectedFirstItem);
+        expected.add(expectedSecondItem);
+
+        ArrayList<Index> actual = ParserUtil.parseDualIndexes("1 4  ");
+        assertEquals(expected, actual);
     }
 
     @Test
