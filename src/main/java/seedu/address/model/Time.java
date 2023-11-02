@@ -155,7 +155,9 @@ public class Time implements Comparable<Time> {
             List<LocalDateTime> currentFreeTime = new ArrayList<>();
             currentFreeTime.add(prevEnd);
             currentFreeTime.add(currentInterviewStartTime);
-            res.add(currentFreeTime);
+            if (!prevEnd.equals(currentInterviewStartTime)) {
+                res.add(currentFreeTime);
+            }
             prevEnd = currentInterviewEndTime;
         }
 
