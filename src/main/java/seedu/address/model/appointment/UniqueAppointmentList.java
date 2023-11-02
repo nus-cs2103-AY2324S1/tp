@@ -103,6 +103,20 @@ public class UniqueAppointmentList implements Iterable<Appointment> {
     }
 
     /**
+     * Replaces the appointments patients {@code target} to {@code editedPerson}
+     */
+    public void setAppointments(Person target, Person editedPerson) {
+        requireAllNonNull(target, editedPerson);
+        for (int i = 0; i < internalList.size(); ++i) {
+            if (internalList.get(i).getPerson().equals(target)) {
+                Appointment editedAppointment = new Appointment(editedPerson, internalList.get(i).getAppointmentTime(),
+                        internalList.get(i).getAppointmentDescription(), internalList.get(i).getPriorityTag());
+                internalList.set(i, editedAppointment);
+            }
+        }
+    }
+
+    /**
      * Replaces the current list with a sorted list based on attribute in isAscending order
      */
     public void sort(boolean isAscending, String attribute) {
