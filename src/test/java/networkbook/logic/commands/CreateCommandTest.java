@@ -24,6 +24,7 @@ import networkbook.model.Model;
 import networkbook.model.NetworkBook;
 import networkbook.model.ReadOnlyNetworkBook;
 import networkbook.model.ReadOnlyUserPrefs;
+import networkbook.model.person.Email;
 import networkbook.model.person.Link;
 import networkbook.model.person.Person;
 import networkbook.testutil.PersonBuilder;
@@ -188,6 +189,16 @@ public class CreateCommandTest {
 
         @Override
         public Link openLink(Index personIndex, Index linkIndex) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean isValidEmailIndex(Index personIndex, Index emailIndex) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Email openEmail(Index personIndex, Index emailIndex) {
             throw new AssertionError("This method should not be called.");
         }
     }

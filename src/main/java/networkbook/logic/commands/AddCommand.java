@@ -37,10 +37,10 @@ public class AddCommand extends Command {
             + "Parameters: [LIST INDEX OF CONTACT]"
             + "[" + CliSyntax.PREFIX_PHONE + " PHONE] "
             + "[" + CliSyntax.PREFIX_EMAIL + " EMAIL] "
-            + "[" + CliSyntax.PREFIX_LINK + "LINK] "
+            + "[" + CliSyntax.PREFIX_LINK + " LINK] "
             + "[" + CliSyntax.PREFIX_GRADUATION + " GRADUATION DATE] "
-            + "[" + CliSyntax.PREFIX_COURSE + "COURSE OF STUDY] "
-            + "[" + CliSyntax.PREFIX_SPECIALISATION + "SPECIALISATION] "
+            + "[" + CliSyntax.PREFIX_COURSE + " COURSE OF STUDY] "
+            + "[" + CliSyntax.PREFIX_SPECIALISATION + " SPECIALISATION] "
             + "[" + CliSyntax.PREFIX_TAG + " TAG] "
             + "[" + CliSyntax.PREFIX_PRIORITY + " PRIORITY]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
@@ -59,11 +59,13 @@ public class AddCommand extends Command {
 
     /**
      * Creates an AddCommand to add information about the contact at {@code Index}
+     * This command is data-changing, so parent constructor is called with true.
      *
      * @param index of the contact to add information about
      * @param addPersonDescriptor details to add to the contact
      */
     public AddCommand(Index index, AddPersonDescriptor addPersonDescriptor) {
+        super(true);
         requireNonNull(index);
         requireNonNull(addPersonDescriptor);
 
@@ -82,7 +84,8 @@ public class AddCommand extends Command {
         Person personAfterAddingInfo = addInfoToPerson(personToAddInfo, addPersonDescriptor);
         model.setItem(personToAddInfo, personAfterAddingInfo);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_ADD_INFO_SUCCESS, Messages.format(personAfterAddingInfo)));
+        return new CommandResult(
+                String.format(MESSAGE_ADD_INFO_SUCCESS, Messages.format(personAfterAddingInfo)));
     }
 
     /**
