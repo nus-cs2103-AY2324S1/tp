@@ -498,7 +498,7 @@ public class TypeParsingUtil {
         Matcher m = p.matcher(input);
         if (m.find()) {
             String flagValue = m.group(1).trim();
-            if (m.find()) {
+            if (input.indexOf("-" + flag) != input.lastIndexOf("-" + flag)) {
                 throw new RepeatedFlagException("Flag " + flag + " is repeated");
             }
             if (flagValue.contains(" -")) {

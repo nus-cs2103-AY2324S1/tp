@@ -50,4 +50,8 @@ public class Remark extends ListEntryField {
         return new Remark(value);
     }
 
+    public boolean contains(Remark keyword) {
+        return value.contains(keyword.value);
+    }
+
 }
