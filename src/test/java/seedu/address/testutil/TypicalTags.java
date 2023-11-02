@@ -13,6 +13,7 @@ import seedu.address.model.tag.Tag;
 public class TypicalTags {
     public static final String TEST_TAG_STRING = "owesMoney";
     public static final String NO_MATCHING_TAG_STRING = "NoMatchingTag";
+    public static final String INVALID_TAG_STRING = "@";
     public static final Tag TEST_TAG = new Tag(TEST_TAG_STRING);
     public static final Tag NO_MATCHING_TAG = new Tag(NO_MATCHING_TAG_STRING);
 
