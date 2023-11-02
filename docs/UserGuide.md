@@ -76,6 +76,8 @@ hospital management tasks done faster than the other apps in the industry.
 
         - [Rescheduling an appointment: `reschedule`](#rescheduling-an-appointment-reschedule)
 
+        - [Triaging an appointment: `triage`](#triaging-an-appointment-triage)
+
         - [Cancelling an appointment: `cancel`](#cancelling-an-appointment-cancel)
 
         - [Displaying all appointments: `appointments`](#displaying-all-appointments-appointments)
@@ -446,6 +448,23 @@ _2 May 2023_, from _9am_ to _11am_.
 
 - You must edit _at least one_ detail when using the command.
 
+### Triaging an appointment: `triage`
+
+This command changes the priority of an existing appointment. It will change the appointment at the specified
+`INDEX` shown in the appointments list.
+
+:clipboard: **Format**: `triage INDEX priority=PRIORITY`
+
+:paperclip: **Example**: `triage 1 priority=high`
+
+This example command will change the priority of the appointment with index 1 in the appointments list (i.e. the first appointment) to _high_.
+
+:pencil2: **Notes:**
+
+- The index provided must be a _positive integer_ and a _valid index_.
+
+- An appointment priority can only be `high`, `medium`, or `low`.
+
 ### Cancelling an appointment: `cancel`
 
 This command cancels an existing appointment. It will cancel the appointment at the specified
@@ -579,6 +598,7 @@ Return to the [Table of Contents](#table-of-contents)
 | [**Finding patients by illness**](#finding-patients-by-illness-find-illness)                                 | `find-illness ILLNESS`<br> e.g., `find-illness fever flu`                                                                                                                                                                                                              |
 | [**Scheduling a new appointment**](#scheduling-a-new-appointment-schedule)                                   | `schedule patient=PATIENT start=START end=END description=DESCRIPTION priority=PRIORITY` <br> e.g., `schedule patient=Alex Yeoh start=2023/10/20 12:00 end=2023/10/20 13:00 description=Follow up on Chest X-Ray priority=high`                                        |
 | [**Rescheduling an appointment**](#rescheduling-an-appointment-reschedule)                                   | `reschedule INDEX start=START end=END`<br> e.g., `reschedule 1 start=2023/05/02 09:00 end=2023/05/02 11:00`                                                                                                                                                            |
+| [**Triaging an appointment**](#triaging-an-appointment-triage)                                               | `triage INDEX priority=PRIORITY`<br> e.g., `triage 1 priority=high`                                                                                                                                                                                                    |
 | [**Cancelling an appointment**](#cancelling-an-appointment-cancel)                                           | `cancel INDEX`<br> e.g., `cancel 1`                                                                                                                                                                                                                                    |
 | [**Displaying all appointments**](#displaying-all-appointments-appointments)                                 | `appointments`                                                                                                                                                                                                                                                         |
 | [**Finding appointments by patient name**](#finding-appointments-by-patient-name-find-appointment)           | `find-appointment PATIENT`<br> e.g., `find-appointment alex david`                                                                                                                                                                                                     |
