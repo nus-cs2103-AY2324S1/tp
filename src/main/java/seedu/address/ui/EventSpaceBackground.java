@@ -80,7 +80,7 @@ public class EventSpaceBackground extends UiPart<Region> {
                 .map(time -> {
                     return time.minusMinutes(time.getMinute());
                 })
-                .orElse(calendarStartTime);
+                .orElse(DEFAULT_CALENDAR_START_TIME);
         LocalTime newEndTime = calendar.getLatestEventEndTimeInCurrentWeek()
                 .map(time -> {
                     if (time.getMinute() == 0 || time.getHour() == MAXIMUM_DISPLAY_HOUR) {
@@ -88,7 +88,7 @@ public class EventSpaceBackground extends UiPart<Region> {
                     }
                     return time.plusMinutes(NUMBER_OF_MINUTES_IN_AN_HOUR - time.getMinute());
                 })
-                .orElse(calendarEndTime);
+                .orElse(DEFAULT_CALENDAR_END_TIME);
 
         calendarStartTime = newStartTime.isBefore(DEFAULT_CALENDAR_START_TIME)
                 ? newStartTime : DEFAULT_CALENDAR_START_TIME;

@@ -13,6 +13,6 @@ public class SwitchListCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) {
-        return new CommandResult(MESSAGE_SWITCH_ACKNOWLEDGEMENT, false, false, true);
+        return new CommandResult(MESSAGE_SWITCH_ACKNOWLEDGEMENT, false, false, false, true);
     }
 }

@@ -22,7 +22,7 @@ import seedu.address.testutil.EventBuilder;
 import seedu.address.testutil.EventPeriodBuilder;
 
 public class CalendarTest {
-    private final Calendar calendar = new Calendar();
+    private final UniMateCalendar calendar = new UniMateCalendar();
 
     @Test
     public void constructor() {
@@ -31,7 +31,7 @@ public class CalendarTest {
 
     @Test
     public void isEmptyValid_emptyCalendar_returnsTrue() {
-        Calendar emptyCalendar = new Calendar();
+        UniMateCalendar emptyCalendar = new UniMateCalendar();
         assertTrue(emptyCalendar.isEmpty());
     }
 
@@ -44,14 +44,14 @@ public class CalendarTest {
 
     @Test
     public void isClearValid_emptyCalendar_returnsEmptyCalendar() {
-        Calendar emptyCalendar = new Calendar();
+        UniMateCalendar emptyCalendar = new UniMateCalendar();
         emptyCalendar.clear();
         assertTrue(emptyCalendar.isEmpty());
     }
 
     @Test
     public void isClearValid_nonEmptyCalendar_returnsEmptyCalendar() {
-        Calendar oneEventCalendar = new Calendar();
+        UniMateCalendar oneEventCalendar = new UniMateCalendar();
         oneEventCalendar.addEvent(new EventBuilder().build());
         assertFalse(oneEventCalendar.isEmpty());
 
@@ -74,7 +74,7 @@ public class CalendarTest {
 
     @Test
     public void deleteEvent_validEvent_successful() {
-        Calendar oneEventCalendar = new Calendar();
+        UniMateCalendar oneEventCalendar = new UniMateCalendar();
         oneEventCalendar.addEvent(new EventBuilder().build());
         LocalDateTime expectedDateTime = LocalDateTime.parse(DEFAULT_START_TIME_STRING, DATE_TIME_STRING_FORMATTER);
         oneEventCalendar.deleteEventAt(expectedDateTime);
@@ -88,7 +88,7 @@ public class CalendarTest {
 
     @Test
     public void findEventAt_validEvent_successful() {
-        Calendar oneEventCalendar = new Calendar();
+        UniMateCalendar oneEventCalendar = new UniMateCalendar();
         Event sample = new EventBuilder().build();
         oneEventCalendar.addEvent(sample);
         LocalDateTime expectedDateTime = LocalDateTime.parse(DEFAULT_START_TIME_STRING, DATE_TIME_STRING_FORMATTER);
@@ -107,7 +107,7 @@ public class CalendarTest {
 
     @Test
     public void getEventsInRange_oneEvent_successful() {
-        Calendar oneEventCalendar = new Calendar();
+        UniMateCalendar oneEventCalendar = new UniMateCalendar();
         Event sample = new EventBuilder().build();
         oneEventCalendar.addEvent(sample);
         EventPeriodBuilder builder = new EventPeriodBuilder();
@@ -122,13 +122,13 @@ public class CalendarTest {
 
     @Test
     public void hasEvents_noEvent_false() {
-        Calendar noEventCalendar = new Calendar();
+        UniMateCalendar noEventCalendar = new UniMateCalendar();
         assertFalse(noEventCalendar.hasEvents());
     }
 
     @Test
     public void deleteEventsInRange_twoEvents_successful() {
-        Calendar eventCalendar = new Calendar();
+        UniMateCalendar eventCalendar = new UniMateCalendar();
         eventCalendar.addEvent(WORKSHOP);
         eventCalendar.addEvent(CONFERENCE);
         eventCalendar.addEvent(TRAINING);
@@ -160,7 +160,7 @@ public class CalendarTest {
     @Test
     public void isEqualsValid_equalCalendarDeclaredObject_returnTrue() {
         calendar.clear();
-        Object equalCalendar = new Calendar();
+        Object equalCalendar = new UniMateCalendar();
         assertTrue(calendar.equals(equalCalendar));
     }
 
@@ -168,14 +168,14 @@ public class CalendarTest {
     public void isEqualsValid_notEqualCalendarDeclaredObject_returnFalse() {
         calendar.clear();
         calendar.addEvent(new EventBuilder().build());
-        Object nonEqualCalendar = new Calendar();
+        Object nonEqualCalendar = new UniMateCalendar();
         assertFalse(calendar.equals(nonEqualCalendar));
     }
 
     @Test
     public void isEqualsValid_equalCalendarDeclaredCalendar_returnTrue() {
         calendar.clear();
-        Calendar equalCalendar = new Calendar();
+        UniMateCalendar equalCalendar = new UniMateCalendar();
         assertTrue(calendar.equals(equalCalendar));
     }
 
@@ -183,7 +183,7 @@ public class CalendarTest {
     public void isEqualsValid_notEqualCalendarDeclaredCalendar_returnFalse() {
         calendar.clear();
         calendar.addEvent(new EventBuilder().build());
-        Calendar nonEqualCalendar = new Calendar();
+        UniMateCalendar nonEqualCalendar = new UniMateCalendar();
         assertFalse(calendar.equals(nonEqualCalendar));
     }
 

@@ -30,7 +30,10 @@ public class LogicManager implements Logic {
 
     public static final String FILE_OPS_PERMISSION_ERROR_FORMAT =
             "Could not save data to file %s due to insufficient permissions to write to the file or the folder.";
-
+    public static final String FILE_NOT_FOUND_EXCEPTION_MESSAGE = "File was moved/modified";
+    public static final String FILE_PARSE_EXCEPTION_MESSAGE = "Data in the file could not be parsed.";
+    public static final String FEATURE_NOT_IMPLEMENTED_YET = "Feature coming soon...";
+    private static final String TIMEZONE_STRING = "Asia/Singapore";
     private final Logger logger = LogsCenter.getLogger(LogicManager.class);
 
     private final Model model;
@@ -95,6 +98,11 @@ public class LogicManager implements Logic {
     @Override
     public ObservableList<Event> getCurrentWeekEventList() {
         return model.getCurrentWeekEventList();
+    }
+
+    @Override
+    public ReadOnlyCalendar getComparisonCalendar() {
+        return model.getComparisonCalendar();
     }
 
     @Override

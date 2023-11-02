@@ -15,8 +15,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
 import seedu.address.commons.exceptions.DataLoadingException;
-import seedu.address.model.calendar.Calendar;
 import seedu.address.model.calendar.ReadOnlyCalendar;
+import seedu.address.model.calendar.UniMateCalendar;
 
 public class JsonCalendarStorageTest {
     private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "JsonCalendarStorageTest");
@@ -62,25 +62,25 @@ public class JsonCalendarStorageTest {
     @Test
     public void readAndSaveCalendar_allInOrder_success() throws Exception {
         Path filePath = testFolder.resolve("TempCalendar.json");
-        Calendar original = getTypicalCalendar();
+        UniMateCalendar original = getTypicalCalendar();
         JsonCalendarStorage jsonCalendarStorage = new JsonCalendarStorage(filePath);
 
         // Save in new file and read back
         jsonCalendarStorage.saveCalendar(original, filePath);
         ReadOnlyCalendar readBack = jsonCalendarStorage.readCalendar(filePath).get();
-        assertEquals(original, new Calendar(readBack));
+        assertEquals(original, new UniMateCalendar(readBack));
 
         // Modify data, overwrite exiting file, and read back
         original.addEvent(TRAINING);
         jsonCalendarStorage.saveCalendar(original, filePath);
         readBack = jsonCalendarStorage.readCalendar(filePath).get();
-        assertEquals(original, new Calendar(readBack));
+        assertEquals(original, new UniMateCalendar(readBack));
 
         // Save and read without specifying file path
         original.addEvent(REVIEW);
         jsonCalendarStorage.saveCalendar(original); // file path not specified
         readBack = jsonCalendarStorage.readCalendar().get(); // file path not specified
-        assertEquals(original, new Calendar(readBack));
+        assertEquals(original, new UniMateCalendar(readBack));
 
     }
 
@@ -103,6 +103,6 @@ public class JsonCalendarStorageTest {
 
     @Test
     public void saveCalendar_nullFilePath_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> saveCalendar(new Calendar(), null));
+        assertThrows(NullPointerException.class, () -> saveCalendar(new UniMateCalendar(), null));
     }
 }

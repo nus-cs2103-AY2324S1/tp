@@ -1,6 +1,6 @@
 package seedu.address.testutil;
 
-import seedu.address.model.calendar.Calendar;
+import seedu.address.model.calendar.UniMateCalendar;
 import seedu.address.model.event.Event;
 
 /**
@@ -11,13 +11,13 @@ import seedu.address.model.event.Event;
  */
 public class CalendarBuilder {
 
-    private Calendar calendar;
+    private UniMateCalendar calendar;
 
     public CalendarBuilder() {
-        calendar = new Calendar();
+        calendar = new UniMateCalendar();
     }
 
-    public CalendarBuilder(Calendar calendar) {
+    public CalendarBuilder(UniMateCalendar calendar) {
         this.calendar = calendar;
     }
 
@@ -29,7 +29,7 @@ public class CalendarBuilder {
         return this;
     }
 
-    public Calendar build() {
+    public UniMateCalendar build() {
         return calendar;
     }
 }
