@@ -326,12 +326,12 @@ Adds a contact to a meeting as an attendee.
 
 Format: `addmc MEETING_INDEX CONTACT_INDEX`
 
-* Adds the contact you specified with `CONTACT_INDEX` to a meeting specified with `MEETING_INDEX`.
-* `MEETING_INDEX` refers to the index number shown in the displayed meeting list.
-* `CONTACT_INDEX` refers to the index number shown in the displayed contact list.
-* The indexes **must be positive integers** 1, 2, 3, …​
-* Both `MEETING_INDEX` & `CONTACT_INDEX` must refer to the index of an existing meeting and contact respectively.
-* Contact name will be listed in the detailed description of meetings when `viewm` is used.
+- Adds the contact you specified with `CONTACT_INDEX` to a meeting specified with `MEETING_INDEX`.
+- `MEETING_INDEX` refers to the index number shown in the displayed meeting list.
+- `CONTACT_INDEX` refers to the index number shown in the displayed contact list.
+- The indexes **must be positive integers** 1, 2, 3, …​
+- Both `MEETING_INDEX` & `CONTACT_INDEX` must refer to the index of an existing meeting and contact respectively.
+- Contact name will be listed in the detailed description of meetings when `viewm` is used.
 
 Examples:
 - `addmc 3 1` adds the 1st contact as an attendee to the 3rd meeting in OutBook.
