@@ -204,7 +204,7 @@ Examples:
 * `findc n/alice` returns `Alice` and `alice tan`
 * `findc p/51` returns `95163890` and `40351`
 * `findc e/_@GMAIL` returns `alice_@gmail.com`
-* `findc p/9 s/inactive claimant t/friend` returns persons with a `9` in their phone number, whose status is either `inactive` or `claimant`, and has a `friend` tag
+* `findc p/9 s/inactive claimant t/friends` returns persons with a `9` in their phone number, whose status is either `inactive` or `claimant`, and has a `friends` tag
   ![result for 'findContact'](images/findContactResult.png)
 
 
@@ -303,14 +303,14 @@ Format: `findm [m/KEYWORDS] [a/KEYWORDS] [t/KEYWORDS] [n/ATTENDEE_NAME] [s/START
     e.g. `m/Shop Meet a/Mall` will return `Meeting: Shop at mall, Location: Mall` but not `Meeting: Meet client, Location: Park`.
 
 Examples:
-* `findm m/project` returns `project` and `Project work`
-* `findm m/zoom meeting` returns `Zoom session`, `Zoom meeting`, `Meeting advisor`
-* `findm s/09.09.2023 0000 e/09.10.2023 0000` returns all meetings between 09.09.2023 0000 and 09.10.2023 0000<br>
-* `findm m/Meeting s/09.09.2023 0000 e/09.10.2023 0000` returns `Zoom meeting`, `Meeting advisor`, if these meetings start after 09.09.2023 0000 and end before 09.10.2023 0000
+* `findm m/project` returns `project` and `Project work`.
+* `findm m/zoom meeting` returns `Zoom session`, `Zoom meeting`, `Meeting advisor`.
+* `findm s/09.09.2023 0000 e/09.10.2023 0000` returns all meetings between 09.09.2023 0000 and 09.10.2023 0000.
+* `findm m/Meeting s/18.10.2023 0000 e/18.10.2023 2359 n/John` returns `Meeting with friends`, as it starts after 18.10.2023 0000 and ends before 18.10.2023 2359, and is attended by John.
 
 <div style="page-break-after: always;"></div>
 
-![result for 'findAlexMeeting'](images/findAlexMeetingResult.png)
+![result for 'findAlexMeeting'](images/findJohnMeetingResult.png)
 
 <div style="page-break-after: always;"></div>
 
