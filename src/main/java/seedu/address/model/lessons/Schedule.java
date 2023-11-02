@@ -64,7 +64,6 @@ public class Schedule implements Iterable<Lesson> {
      */
     public boolean contains(Lesson toCheck) {
         requireNonNull(toCheck);
-        System.out.println(internalSchedule);
         return internalSchedule.stream().anyMatch(toCheck::equals);
     }
 
