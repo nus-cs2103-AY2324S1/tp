@@ -296,11 +296,11 @@ Refer to [properties of contact](#properties-of-contact) on the accepted formats
 
 ###  Update contact's photo: `updatephoto`
 
-After adding a new contact, there is a default photo coming with it. With `updatephoto` command, CampusConnect gives you the freedom to choose how each contact looks like in the address book.
+Besides the ability to edit a contact's information, CampusConnect also provides you with the freedom to customise how it looks in your address book.
 
 This feature involves the command: `updatephoto`, which updates the photo of an existing contact.
 
-Format: `updatephoto PERSON_INDEX path/NEW_PHOTO_PATH`
+Format: `updatephoto PERSON_INDEX [path/NEW_PHOTO_PATH]`
 
 <box type="info" icon=":fa-solid-magnifying-glass:">
 
@@ -312,7 +312,7 @@ Below are some examples on how to use the command:
 
 <box type="warning">
 
-* You should provide a positive integer that must not exceed the number of contacts currently listed in CampusConnect for `PERSON_INDEX`.
+* You should provide a positive integer that is smaller than or equal to the number of contacts currently displayed in CampusConnect for `PERSON_INDEX`. 
 * You are required to input the absolute path to the photo for this command. If you use an invalid path, a default photo will be chosen for your specified contact.
 </box>
 
