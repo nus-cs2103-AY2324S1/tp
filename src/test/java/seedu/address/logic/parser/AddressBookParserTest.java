@@ -44,14 +44,6 @@ public class AddressBookParserTest {
 
     private final AddressBookParser parser = new AddressBookParser();
 
-    //    @Test
-    //    public void parseCommand_add() throws Exception {
-    //        Person person = new PersonBuilder().build();
-    //        AddCommand command = (AddCommand) parser.parseCommand(PersonUtil.getAddCommand(person));
-    //        assertEquals(new AddCommand(person), command);
-    //    }
-
-    // TODO: add parseCommand_addMember
     @Test
     public void parseCommand_addApplicant() throws Exception {
         Applicant applicant = new ApplicantBuilder().build();
@@ -110,15 +102,6 @@ public class AddressBookParserTest {
         assertTrue(parser.parseCommand(ExitCommand.COMMAND_WORD) instanceof ExitCommand);
         assertTrue(parser.parseCommand(ExitCommand.COMMAND_WORD + " 3") instanceof ExitCommand);
     }
-
-    // TODO: adapt for findMember and findApplicant
-    //    @Test
-    //    public void parseCommand_find() throws Exception {
-    //        List<String> keywords = Arrays.asList("foo", "bar", "baz");
-    //        FindCommand command = (FindCommand) parser.parseCommand(
-    //                FindCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
-    //        assertEquals(new FindCommand(new NameContainsKeywordsPredicate(keywords)), command);
-    //    }
 
     @Test
     public void parseCommand_findApplicant() throws Exception {
