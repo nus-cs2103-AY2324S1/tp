@@ -329,7 +329,7 @@ After the previous step, we notice a peculiar regression — we went from di
 ### Update `RemarkCommand` and `RemarkCommandParser`
 
 In this last step, we modify `RemarkCommand#execute()` to change the `Remark` of a `Person`. Since all fields in a `Person` are immutable, we create a new instance of a `Person` with the values that we want and
-save it with `Model#setPerson()`.
+save it with `Model#setDate()`.
 
 **`RemarkCommand.java`:**
 
@@ -351,7 +351,7 @@ save it with `Model#setPerson()`.
                 dateToEdit.getName(), dateToEdit.getAge(), dateToEdit.getGender(),
                 dateToEdit.getHeight(), remark, dateToEdit.getTags());
 
-        model.setPerson(dateToEdit, editedDate);
+        model.setDate(dateToEdit, editedDate);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
 
         return new CommandResult(generateSuccessMessage(editedDate));

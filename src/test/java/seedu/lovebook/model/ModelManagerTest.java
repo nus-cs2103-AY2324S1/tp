@@ -74,18 +74,18 @@ public class ModelManagerTest {
 
     @Test
     public void hasPerson_nullPerson_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> modelManager.hasPerson(null));
+        assertThrows(NullPointerException.class, () -> modelManager.hasDate(null));
     }
 
     @Test
     public void hasPerson_personNotInLoveBook_returnsFalse() {
-        assertFalse(modelManager.hasPerson(ALICE));
+        assertFalse(modelManager.hasDate(ALICE));
     }
 
     @Test
     public void hasPerson_personInLoveBook_returnsTrue() {
-        modelManager.addPerson(ALICE);
-        assertTrue(modelManager.hasPerson(ALICE));
+        modelManager.addDate(ALICE);
+        assertTrue(modelManager.hasDate(ALICE));
     }
 
     @Test
@@ -102,8 +102,8 @@ public class ModelManagerTest {
 
     @Test
     public void executeRandomPerson() {
-        modelManager.addPerson(ALICE);
-        modelManager.getRandomPerson();
+        modelManager.addDate(ALICE);
+        modelManager.getRandomDate();
         assertTrue(modelManager.getFilteredPersonList().equals(Arrays.asList(ALICE)));
     }
 

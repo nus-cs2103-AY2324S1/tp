@@ -49,7 +49,7 @@ deactivate LoveBookParser
 LogicManager -> DeleteCommand : execute()
 activate DeleteCommand
 
-DeleteCommand -> Model : deletePerson(1)
+DeleteCommand -> Model : deleteDate(1)
 activate Model
 
 Model --> DeleteCommand

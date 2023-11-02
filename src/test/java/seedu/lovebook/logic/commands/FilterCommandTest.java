@@ -88,7 +88,6 @@ public class FilterCommandTest {
     public void execute_filterByHeight_noPersonsFound() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
         ArrayList<MetricContainsKeywordPredicate> predicateList = preparePredicate("190", PREFIX_HEIGHT);
-        System.out.println("predicateList: " + predicateList);
         FilterCommand command = new FilterCommand(predicateList);
         expectedModel.updateFilteredPersonList(new PredicatesUtil(predicateList));
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -98,7 +97,6 @@ public class FilterCommandTest {
     public void execute_filterByAge_noPersonsFound() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
         ArrayList<MetricContainsKeywordPredicate> predicateList = preparePredicate("100", PREFIX_AGE);
-        System.out.println("predicateList: " + predicateList);
         FilterCommand command = new FilterCommand(predicateList);
         expectedModel.updateFilteredPersonList((person) -> {
             for (MetricContainsKeywordPredicate predicate : predicates) {
@@ -115,7 +113,6 @@ public class FilterCommandTest {
     public void execute_filterByHeight_personsFound() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 1);
         ArrayList<MetricContainsKeywordPredicate> predicateList = preparePredicate("245", PREFIX_HEIGHT);
-        System.out.println("predicateList: " + predicateList);
         FilterCommand command = new FilterCommand(predicateList);
         expectedModel.updateFilteredPersonList((person) -> {
             for (MetricContainsKeywordPredicate predicate : predicates) {
@@ -133,7 +130,6 @@ public class FilterCommandTest {
     public void execute_filterByAge_personsFound() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 1);
         ArrayList<MetricContainsKeywordPredicate> predicateList = preparePredicate("22", PREFIX_AGE);
-        System.out.println("predicateList: " + predicateList);
         FilterCommand command = new FilterCommand(predicateList);
         expectedModel.updateFilteredPersonList(new PredicatesUtil(predicateList));
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -143,7 +139,6 @@ public class FilterCommandTest {
     public void execute_filterByGender_personsFound() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 3);
         ArrayList<MetricContainsKeywordPredicate> predicateList = preparePredicate("F", PREFIX_GENDER);
-        System.out.println("predicateList: " + predicateList);
         FilterCommand command = new FilterCommand(predicateList);
         expectedModel.updateFilteredPersonList(new PredicatesUtil(predicateList));
 

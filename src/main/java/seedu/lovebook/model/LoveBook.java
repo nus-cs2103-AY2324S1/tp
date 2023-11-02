@@ -61,7 +61,7 @@ public class LoveBook implements ReadOnlyLoveBook {
     /**
      * Returns true if a date with the same identity as {@code date} exists in the lovebook book.
      */
-    public boolean hasPerson(Date date) {
+    public boolean hasDate(Date date) {
         requireNonNull(date);
         return dates.contains(date);
     }
@@ -70,7 +70,7 @@ public class LoveBook implements ReadOnlyLoveBook {
      * Adds a date to the lovebook book.
      * The date must not already exist in the lovebook book.
      */
-    public void addPerson(Date p) {
+    public void addDate(Date p) {
         dates.add(p);
     }
 
@@ -79,9 +79,9 @@ public class LoveBook implements ReadOnlyLoveBook {
      * {@code target} must exist in the lovebook book.
      * The date identity of {@code editedDate} must not be the same as another existing date in the lovebook book.
      */
-    public void setPerson(Date target, Date editedDate) {
+    public void setDate(Date target, Date editedDate) {
         requireNonNull(editedDate);
-        dates.setPerson(target, editedDate);
+        dates.setDate(target, editedDate);
     }
 
     /**

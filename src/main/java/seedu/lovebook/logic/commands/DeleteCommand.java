@@ -41,7 +41,7 @@ public class DeleteCommand extends Command {
         }
 
         Date dateToDelete = lastShownList.get(targetIndex.getZeroBased());
-        model.deletePerson(dateToDelete);
+        model.deleteDate(dateToDelete);
         return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(dateToDelete)));
     }
 

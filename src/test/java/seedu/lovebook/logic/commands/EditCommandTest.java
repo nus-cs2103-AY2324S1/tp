@@ -38,7 +38,6 @@ public class EditCommandTest {
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
         Date editedDate = new PersonBuilder().build();
-        System.out.println(editedDate);
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(editedDate).build();
         EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON, descriptor);
 
@@ -46,7 +45,7 @@ public class EditCommandTest {
 
         Model expectedModel = new ModelManager(new LoveBook(model.getLoveBook()), new UserPrefs(),
                 model.getDatePrefs());
-        expectedModel.setPerson(model.getFilteredPersonList().get(0), editedDate);
+        expectedModel.setDate(model.getFilteredPersonList().get(0), editedDate);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
@@ -55,7 +54,6 @@ public class EditCommandTest {
     public void execute_someFieldsSpecifiedUnfilteredList_success() {
         Index indexLastPerson = Index.fromOneBased(model.getFilteredPersonList().size());
         Date lastDate = model.getFilteredPersonList().get(indexLastPerson.getZeroBased());
-        System.out.println(lastDate);
 
         PersonBuilder personInList = new PersonBuilder(lastDate);
         Date editedDate = personInList.withName(VALID_NAME_BOB).withAge(VALID_AGE_BOB).build();
@@ -68,7 +66,7 @@ public class EditCommandTest {
 
         Model expectedModel = new ModelManager(new LoveBook(model.getLoveBook()), new UserPrefs(),
                 model.getDatePrefs());
-        expectedModel.setPerson(lastDate, editedDate);
+        expectedModel.setDate(lastDate, editedDate);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
@@ -99,7 +97,7 @@ public class EditCommandTest {
 
         Model expectedModel = new ModelManager(new LoveBook(model.getLoveBook()), new UserPrefs(),
                 model.getDatePrefs());
-        expectedModel.setPerson(model.getFilteredPersonList().get(0), editedDate);
+        expectedModel.setDate(model.getFilteredPersonList().get(0), editedDate);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }

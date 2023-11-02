@@ -55,26 +55,26 @@ public class LoveBookTest {
 
     @Test
     public void hasPerson_nullPerson_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> loveBook.hasPerson(null));
+        assertThrows(NullPointerException.class, () -> loveBook.hasDate(null));
     }
 
     @Test
     public void hasPerson_personNotInLoveBook_returnsFalse() {
-        assertFalse(loveBook.hasPerson(ALICE));
+        assertFalse(loveBook.hasDate(ALICE));
     }
 
     @Test
     public void hasPerson_personInLoveBook_returnsTrue() {
-        loveBook.addPerson(ALICE);
-        assertTrue(loveBook.hasPerson(ALICE));
+        loveBook.addDate(ALICE);
+        assertTrue(loveBook.hasDate(ALICE));
     }
 
     @Test
     public void hasPerson_personWithSameIdentityFieldsInLoveBook_returnsTrue() {
-        loveBook.addPerson(ALICE);
+        loveBook.addDate(ALICE);
         Date editedAlice = new PersonBuilder(ALICE).withHeight(VALID_HEIGHT_BOB)
                 .build();
-        assertTrue(loveBook.hasPerson(editedAlice));
+        assertTrue(loveBook.hasDate(editedAlice));
     }
 
     @Test

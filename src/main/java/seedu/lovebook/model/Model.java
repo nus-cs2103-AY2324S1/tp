@@ -56,26 +56,26 @@ public interface Model {
     /**
      * Returns true if a date with the same identity as {@code date} exists in the lovebook book.
      */
-    boolean hasPerson(Date date);
+    boolean hasDate(Date date);
 
     /**
      * Deletes the given date.
      * The date must exist in the lovebook book.
      */
-    void deletePerson(Date target);
+    void deleteDate(Date target);
 
     /**
      * Adds the given date.
      * {@code date} must not already exist in the lovebook book.
      */
-    void addPerson(Date date);
+    void addDate(Date date);
 
     /**
      * Replaces the given date {@code target} with {@code editedDate}.
      * {@code target} must exist in the lovebook book.
      * The date identity of {@code editedDate} must not be the same as another existing date in the lovebook book.
      */
-    void setPerson(Date target, Date editedDate);
+    void setDate(Date target, Date editedDate);
 
     /** Returns an unmodifiable view of the filtered date list */
     ObservableList<Date> getFilteredPersonList();
@@ -83,7 +83,7 @@ public interface Model {
     /**
      * Returns a random date from the date list.
      */
-    public void getRandomPerson();
+    public void getRandomDate();
 
     /**
      * Updates the filter of the filtered date list to filter by the given {@code predicate}.

@@ -85,7 +85,7 @@ public class SetPrefCommandTest {
         }
 
         @Override
-        public void addPerson(Date date) {
+        public void addDate(Date date) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -100,17 +100,17 @@ public class SetPrefCommandTest {
         }
 
         @Override
-        public boolean hasPerson(Date date) {
+        public boolean hasDate(Date date) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void deletePerson(Date target) {
+        public void deleteDate(Date target) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void setPerson(Date target, Date editedDate) {
+        public void setDate(Date target, Date editedDate) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -120,7 +120,7 @@ public class SetPrefCommandTest {
         }
 
         @Override
-        public void getRandomPerson() {
+        public void getRandomDate() {
             throw new AssertionError("This method should not be called.");
         }
 

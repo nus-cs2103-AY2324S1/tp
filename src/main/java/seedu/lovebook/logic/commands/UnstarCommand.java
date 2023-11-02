@@ -49,7 +49,7 @@ public class UnstarCommand extends Command {
         Date starredDate = new Date(dateToStar.getName(), dateToStar.getAge(), dateToStar.getGender(),
                 dateToStar.getHeight(), dateToStar.getIncome(),
                 dateToStar.getHoroscope(), star, dateToStar.getAvatar());
-        model.setPerson(dateToStar, starredDate);
+        model.setDate(dateToStar, starredDate);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(String.format(MESSAGE_STAR_PERSON_SUCCESS, Messages.format(dateToStar)));
     }

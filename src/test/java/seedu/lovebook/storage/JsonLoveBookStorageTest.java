@@ -72,14 +72,14 @@ public class JsonLoveBookStorageTest {
         assertEquals(original, new LoveBook(readBack));
 
         // Modify data, overwrite exiting file, and read back
-        original.addPerson(HOON);
+        original.addDate(HOON);
         original.removePerson(ALICE);
         jsonLoveBookStorage.saveLoveBook(original, filePath);
         readBack = jsonLoveBookStorage.readLoveBook(filePath).get();
         assertEquals(original, new LoveBook(readBack));
 
         // Save and read without specifying file path
-        original.addPerson(IDA);
+        original.addDate(IDA);
         jsonLoveBookStorage.saveLoveBook(original); // file path not specified
         readBack = jsonLoveBookStorage.readLoveBook().get(); // file path not specified
         assertEquals(original, new LoveBook(readBack));

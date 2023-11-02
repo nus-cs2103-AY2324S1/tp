@@ -83,11 +83,11 @@ public class EditCommand extends Command {
         Date dateToEdit = lastShownList.get(index.getZeroBased());
         Date editedDate = createEditedPerson(dateToEdit, editPersonDescriptor);
 
-        if (!dateToEdit.isSamePerson(editedDate) && model.hasPerson(editedDate)) {
+        if (!dateToEdit.isSamePerson(editedDate) && model.hasDate(editedDate)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
-        model.setPerson(dateToEdit, editedDate);
+        model.setDate(dateToEdit, editedDate);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedDate)));
     }

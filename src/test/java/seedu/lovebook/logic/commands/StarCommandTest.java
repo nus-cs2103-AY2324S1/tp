@@ -42,7 +42,7 @@ public class StarCommandTest {
         Star star = new Star("true");
         Date starredDate = new Date(dateToStar.getName(), dateToStar.getAge(), dateToStar.getGender(),
                 dateToStar.getHeight(), dateToStar.getIncome(), dateToStar.getHoroscope(), star);
-        expectedModel.setPerson(dateToStar, starredDate);
+        expectedModel.setDate(dateToStar, starredDate);
         assertCommandSuccess(starCommand, model, expectedMessage, expectedModel);
     }
 
@@ -68,7 +68,7 @@ public class StarCommandTest {
         Star star = new Star("true");
         Date starredDate = new Date(dateToStar.getName(), dateToStar.getAge(), dateToStar.getGender(),
                 dateToStar.getHeight(), dateToStar.getIncome(), dateToStar.getHoroscope(), star);
-        expectedModel.setPerson(dateToStar, starredDate);
+        expectedModel.setDate(dateToStar, starredDate);
 
         assertCommandSuccess(starCommand, model, expectedMessage, expectedModel);
     }

@@ -54,7 +54,7 @@ public class UniqueDateList implements Iterable<Date> {
      * {@code target} must exist in the list.
      * The date identity of {@code editedDate} must not be the same as another existing date in the list.
      */
-    public void setPerson(Date target, Date editedDate) {
+    public void setDate(Date target, Date editedDate) {
         requireAllNonNull(target, editedDate);
 
         int index = internalList.indexOf(target);
