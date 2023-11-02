@@ -121,6 +121,12 @@ public class CalendarTest {
     }
 
     @Test
+    public void hasEvents_noEvent_false() {
+        Calendar noEventCalendar = new Calendar();
+        assertFalse(noEventCalendar.hasEvents());
+    }
+
+    @Test
     public void deleteEventsInRange_twoEvents_successful() {
         UniMateCalendar eventCalendar = new UniMateCalendar();
         eventCalendar.addEvent(WORKSHOP);

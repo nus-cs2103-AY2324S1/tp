@@ -55,7 +55,7 @@ public class JsonCalendarStorageTest {
     }
 
     @Test
-    public void readAddressBook_invalidAndValidEventCalendar_throwDataLoadingException() {
+    public void readCalendar_invalidAndValidEventCalendar_throwDataLoadingException() {
         assertThrows(DataLoadingException.class, () -> readCalendar("invalidAndValidEventCalendar.json"));
     }
 
@@ -102,7 +102,7 @@ public class JsonCalendarStorageTest {
     }
 
     @Test
-    public void saveAddressBook_nullFilePath_throwsNullPointerException() {
+    public void saveCalendar_nullFilePath_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> saveCalendar(new UniMateCalendar(), null));
     }
 }

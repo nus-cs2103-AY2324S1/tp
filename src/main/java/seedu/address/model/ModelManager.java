@@ -21,6 +21,9 @@ import seedu.address.model.event.Event;
 import seedu.address.model.event.EventPeriod;
 import seedu.address.model.event.exceptions.EventNotFoundException;
 import seedu.address.model.person.Person;
+import seedu.address.model.task.ReadOnlyTaskManager;
+import seedu.address.model.task.Task;
+import seedu.address.model.task.TaskManager;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -30,6 +33,7 @@ public class ModelManager implements Model {
 
     private final AddressBook addressBook;
     private final UniMateCalendar calendar;
+    private final TaskManager taskManager;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
     private ReadOnlyCalendar comparisonCalendar;
@@ -37,20 +41,22 @@ public class ModelManager implements Model {
     /**
      * Initializes a ModelManager with the given addressBook, calendar and userPrefs.
      */
-    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyCalendar calendar, ReadOnlyUserPrefs userPrefs) {
+    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyCalendar calendar, ReadOnlyTaskManager taskManager,
+                        ReadOnlyUserPrefs userPrefs) {
         requireAllNonNull(addressBook, userPrefs);
 
         logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
 
         this.addressBook = new AddressBook(addressBook);
         this.calendar = new UniMateCalendar(calendar);
+        this.taskManager = new TaskManager(taskManager);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
         comparisonCalendar = new UniMateCalendar();
     }
 
     public ModelManager() {
-        this(new AddressBook(), new UniMateCalendar(), new UserPrefs());
+        this(new AddressBook(), new UniMateCalendar(), new TaskManager(), new UserPrefs());
     }
 
     //=========== UserPrefs ==================================================================================
@@ -99,6 +105,17 @@ public class ModelManager implements Model {
         userPrefs.setCalendarFilePath(calendarFilePath);
     }
 
+    @Override
+    public Path getTaskManagerFilePath() {
+        return userPrefs.getTaskManagerFilePath();
+    }
+
+    @Override
+    public void setTaskManagerFilePath(Path taskManagerFilePath) {
+        requireNonNull(taskManagerFilePath);
+        userPrefs.setTaskManagerFilePath(taskManagerFilePath);
+    }
+
 
     //=========== AddressBook ================================================================================
 
@@ -136,7 +153,7 @@ public class ModelManager implements Model {
         addressBook.setPerson(target, editedPerson);
     }
 
-    //=========== Sorted Person List Accessors =============================================================
+    //=========== Sorted Person List Accessors ===============================================================
     @Override
     public void sortPersonList(Comparator<Person> personComparator) {
         addressBook.sortPersons(personComparator);
@@ -225,7 +242,34 @@ public class ModelManager implements Model {
         this.comparisonCalendar = comparisonCalendar;
     }
 
+    //=========== TaskManager ================================================================================
 
+    @Override
+    public TaskManager getTaskManager() {
+        return taskManager;
+    }
+
+    @Override
+    public void addTask(Task task) {
+        requireNonNull(task);
+
+        taskManager.addTask(task);
+    }
+
+    @Override
+    public Task deleteTask(int index) {
+        return taskManager.deleteTask(index);
+    }
+
+    @Override
+    public ObservableList<Task> getTaskList() {
+        return taskManager.getTaskList();
+    }
+
+    @Override
+    public void sortTasksBy(String comparatorType) {
+        taskManager.sortTasksBy(comparatorType);
+    }
 
     //=========== Filtered Person List Accessors =============================================================
 
@@ -258,6 +302,7 @@ public class ModelManager implements Model {
         ModelManager otherModelManager = (ModelManager) other;
         return addressBook.equals(otherModelManager.addressBook)
                 && calendar.equals(otherModelManager.calendar)
+                && taskManager.equals(otherModelManager.taskManager)
                 && userPrefs.equals(otherModelManager.userPrefs)
                 && filteredPersons.equals(otherModelManager.filteredPersons);
     }

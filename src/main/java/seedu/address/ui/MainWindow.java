@@ -4,6 +4,7 @@ import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Scene;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
@@ -12,10 +13,12 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.Person;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -24,17 +27,18 @@ import seedu.address.logic.parser.exceptions.ParseException;
 public class MainWindow extends UiPart<Stage> {
 
     private static final String FXML = "MainWindow.fxml";
-    private static final String VALID_IMPORT_FILE_TYPE = ".ics Files";
-    private static final String VALID_IMPORT_FILE_EXTENSION = "*.ics";
-    private static final String USER_CALENDAR_IMPORT_FILE_CHOOSER_TITLE = "Open .ics File";
+    private static final int BOTTOM_LIST_MODES = 2;
+    private static final int POPUP_LIST_HEIGHT = 500;
+    private static final int POPUP_LIST_WIDTH = 555;
 
     private final Logger logger = LogsCenter.getLogger(getClass());
 
     private Stage primaryStage;
     private Logic logic;
+    private int bottomListIndicator;
 
     // Independent Ui parts residing in this Ui container
-    private EventListPanel eventListPanel;
+    private BottomListPanel bottomListPanel;
     private PersonListPanel personListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
@@ -46,7 +50,7 @@ public class MainWindow extends UiPart<Stage> {
     private MenuItem helpMenuItem;
 
     @FXML
-    private StackPane eventListPanelPlaceholder;
+    private StackPane bottomListPanelPlaceholder;
 
     @FXML
     private StackPane personListPanelPlaceholder;
@@ -59,6 +63,10 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane calendarPlaceholder;
+
+    private EventListPanel eventListPanel;
+
+    private TaskListPanel taskListPanel;
 
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
@@ -76,6 +84,7 @@ public class MainWindow extends UiPart<Stage> {
         setAccelerators();
 
         helpWindow = new HelpWindow();
+        bottomListIndicator = 0;
     }
 
     public Stage getPrimaryStage() {
@@ -121,7 +130,10 @@ public class MainWindow extends UiPart<Stage> {
      */
     void fillInnerParts() {
         eventListPanel = new EventListPanel(logic.getEventList());
-        eventListPanelPlaceholder.getChildren().add(eventListPanel.getRoot());
+        taskListPanel = new TaskListPanel(logic.getTaskList());
+
+        bottomListPanel = eventListPanel;
+        bottomListPanelPlaceholder.getChildren().add(bottomListPanel.getRoot());
 
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
@@ -182,6 +194,31 @@ public class MainWindow extends UiPart<Stage> {
         CalendarContainer.displayComparisonCalendar(logic.getComparisonCalendar());
     }
 
+    /**
+     * Switches the bottom list between the available lists.
+     */
+    @FXML
+    private void handleSwitchBottomList() {
+        if (bottomListIndicator == 0) {
+            switchToTaskList();
+        } else {
+            switchToEventList();
+        }
+        bottomListIndicator = (bottomListIndicator + 1) % BOTTOM_LIST_MODES;
+    }
+
+    private void handleViewEventList(Index index) {
+        Person person = logic.getFilteredPersonList().get(index.getZeroBased());
+        Stage eventListStage = new Stage();
+        eventListStage.setResizable(false);
+        eventListStage.setTitle(person.getName().toString() + "'s Event List");
+        eventListStage.setMinHeight(POPUP_LIST_HEIGHT);
+        eventListStage.setMinWidth(POPUP_LIST_WIDTH);
+        EventListContainer root = new EventListContainer(person.getEventList());
+        eventListStage.setScene(new Scene(root.getRoot()));
+        eventListStage.show();
+    }
+
     public PersonListPanel getPersonListPanel() {
         return personListPanel;
     }
@@ -205,6 +242,14 @@ public class MainWindow extends UiPart<Stage> {
                 handleExit();
             }
 
+            if (commandResult.isSwitchBottomList()) {
+                handleSwitchBottomList();
+            }
+
+            if (commandResult.isViewEvents()) {
+                handleViewEventList(commandResult.getEventViewIndex());
+            }
+
             if (commandResult.isShowCalendarComparison()) {
                 handleComparison();
             }
@@ -215,5 +260,21 @@ public class MainWindow extends UiPart<Stage> {
             resultDisplay.setFeedbackToUser(e.getMessage());
             throw e;
         }
+    }
+
+    /**
+     * Switches the Bottom List Panel to display the task list instead.
+     */
+    public void switchToTaskList() {
+        bottomListPanel = taskListPanel;
+        bottomListPanelPlaceholder.getChildren().setAll(bottomListPanel.getRoot());
+    }
+
+    /**
+     * Switches the Bottom List Panel to display the event list instead.
+     */
+    public void switchToEventList() {
+        bottomListPanel = eventListPanel;
+        bottomListPanelPlaceholder.getChildren().setAll(bottomListPanel.getRoot());
     }
 }

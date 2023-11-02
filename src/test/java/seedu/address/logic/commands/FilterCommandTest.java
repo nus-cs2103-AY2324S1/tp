@@ -13,6 +13,7 @@ import static seedu.address.testutil.TypicalPersons.ELLE;
 import static seedu.address.testutil.TypicalPersons.FIONA;
 import static seedu.address.testutil.TypicalPersons.GEORGE;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalTasks.getTypicalTaskManager;
 
 import java.util.Arrays;
 
@@ -28,8 +29,10 @@ import seedu.address.testutil.PersonFilterBuilder;
  */
 class FilterCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), getTypicalCalendar(), new UserPrefs());
-    private Model expectedModel = new ModelManager(getTypicalAddressBook(), getTypicalCalendar(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalAddressBook(), getTypicalCalendar(), getTypicalTaskManager(),
+            new UserPrefs());
+    private Model expectedModel = new ModelManager(getTypicalAddressBook(), getTypicalCalendar(),
+            getTypicalTaskManager(), new UserPrefs());
 
     @Test
     public void execute_oneField_multiplePersonsDisplayed() {

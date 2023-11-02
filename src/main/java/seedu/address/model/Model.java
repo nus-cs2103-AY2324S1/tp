@@ -14,6 +14,8 @@ import seedu.address.model.event.Event;
 import seedu.address.model.event.EventPeriod;
 import seedu.address.model.event.exceptions.EventNotFoundException;
 import seedu.address.model.person.Person;
+import seedu.address.model.task.Task;
+import seedu.address.model.task.TaskManager;
 
 /**
  * The API of the Model component.
@@ -75,11 +77,23 @@ public interface Model {
      */
     void setCalendar(ReadOnlyCalendar calendar);
 
-    /** Returns the Calendar */
+    /**
+     * Returns the Calendar
+     */
     ReadOnlyCalendar getCalendar();
 
     /** Return the underlying UniMateCalendar for the user */
     UniMateCalendar getUnderlyingCalendar();
+
+    /**
+     * Sets the user prefs' task manager file path.
+     */
+    void setTaskManagerFilePath(Path taskManagerFilePath);
+
+    /**
+     * Returns the user prefs' task manager file path.
+     */
+    Path getTaskManagerFilePath();
 
     /**
      * Returns true if a person with the same identity as {@code person} exists in the address book.
@@ -168,11 +182,37 @@ public interface Model {
     /** Returns a view of the event list */
     ObservableList<Event> getEventList();
 
+    /** Returns a view of the task list */
+    ObservableList<Task> getTaskList();
+
     /** Returns a view of the event list for the current week */
     ObservableList<Event> getCurrentWeekEventList();
 
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();
+
+    /**
+     * Adds a task to the TaskManager.
+     * @param task the task to be added.
+     */
+    void addTask(Task task);
+
+    /**
+     * Deletes a task from the TaskManager.
+     * @param index the displayed index of the task to delete
+     * @return the deleted task
+     */
+    Task deleteTask(int index);
+
+    /**
+     * Returns the TaskManager.
+     */
+    TaskManager getTaskManager();
+
+    /**
+     * Sorts the task list by the preset comparator type listed.
+     */
+    void sortTasksBy(String comparatorType);
 
     /**
      * Updates the filter of the filtered person list to filter by the given {@code predicate}.

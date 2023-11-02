@@ -7,6 +7,7 @@ import java.util.stream.Stream;
 import seedu.address.logic.parser.Prefix;
 import seedu.address.model.event.Event;
 import seedu.address.model.person.Person;
+import seedu.address.model.task.Task;
 
 /**
  * Container for user visible messages.
@@ -64,6 +65,20 @@ public class Messages {
         builder.append(event.getDescription())
                 .append("; ")
                 .append(event.getEventPeriod());
+        return builder.toString();
+    }
+
+    /**
+     * Formats a task for display to the user.
+     *
+     * @param task task to be displayed
+     * @return String of appropriate format.
+     */
+    public static String format(Task task) {
+        final StringBuilder builder = new StringBuilder();
+        builder.append(task.getDescriptionString())
+                .append("\nDeadline: ")
+                .append(task.getDeadlineString());
         return builder.toString();
     }
 }

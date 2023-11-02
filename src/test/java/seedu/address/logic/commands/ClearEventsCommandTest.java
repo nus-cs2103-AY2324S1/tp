@@ -27,6 +27,8 @@ import seedu.address.model.event.Event;
 import seedu.address.model.event.EventPeriod;
 import seedu.address.model.event.exceptions.EventNotFoundException;
 import seedu.address.model.person.Person;
+import seedu.address.model.task.Task;
+import seedu.address.model.task.TaskManager;
 import seedu.address.testutil.EventBuilder;
 import seedu.address.testutil.EventPeriodBuilder;
 
@@ -154,6 +156,16 @@ class ClearEventsCommandTest {
         }
 
         @Override
+        public Path getTaskManagerFilePath() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setTaskManagerFilePath(Path addressBookFilePath) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void addPerson(Person person) {
             throw new AssertionError("This method should not be called.");
         }
@@ -249,7 +261,32 @@ class ClearEventsCommandTest {
         }
 
         @Override
+        public ObservableList<Task> getTaskList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public ObservableList<Person> getFilteredPersonList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addTask(Task task) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Task deleteTask(int index) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public TaskManager getTaskManager() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void sortTasksBy(String comparatorType) {
             throw new AssertionError("This method should not be called.");
         }
 

@@ -2,14 +2,17 @@ package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.calendar.ReadOnlyCalendar;
 import seedu.address.model.calendar.UniMateCalendar;
+import seedu.address.model.event.Event;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -82,6 +85,13 @@ public class Person {
     }
 
     /**
+     * Returns a view of the events belonging to this person
+     */
+    public ObservableList<Event> getEventList() {
+        return calendar.getEventList();
+    }
+
+    /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
@@ -100,6 +110,27 @@ public class Person {
 
         return otherPerson != null
                 && otherPerson.getName().equals(getName());
+    }
+
+    /**
+     * Adds an event to the calendar of this Person.
+     */
+    public void addEvent(Event toAdd) {
+        calendar.addEvent(toAdd);
+    }
+
+    /**
+     * Deletes an event at the specified time from the calendar of this person.
+     */
+    public void deleteEvent(LocalDateTime targetTime) {
+        calendar.deleteEventAt(targetTime);
+    }
+
+    /**
+     * Looks for an event at the specified time and returns it.
+     */
+    public Event findEvent(LocalDateTime targetTime) {
+        return calendar.findEventAt(targetTime).get();
     }
 
     /**

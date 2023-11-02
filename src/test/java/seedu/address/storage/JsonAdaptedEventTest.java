@@ -10,12 +10,11 @@ import org.junit.jupiter.api.Test;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.event.EventDescription;
 import seedu.address.model.event.EventPeriod;
-import seedu.address.testutil.EventPeriodBuilder;
 
 public class JsonAdaptedEventTest {
     private static final String INVALID_DESCRIPTION = "";
-    private static final String INVALID_EVENT_PERIOD = "2010-10-10 10:00-2010-10-10 12:00";
-    private static final String INVALID_EVENT_PERIOD_DATE = "2010-10-10 12:00 - 2010-10-10 10:00";
+    private static final String INVALID_EVENT_PERIOD = "2010-10-10 12:00 - 2010-10-10 10:00";
+    private static final String INVALID_EVENT_PERIOD_SYNTAX = "2010-10-10 10:00-2010-10-10 12:00";
 
     private static final String VALID_DESCRIPTION = CONFERENCE.getDescription().getDescription();
     private static final String VALID_EVENT_PERIOD = CONFERENCE.getEventPeriod().getFormattedPeriod();
@@ -42,9 +41,9 @@ public class JsonAdaptedEventTest {
     }
 
     @Test
-    public void toModelType_invalidEventPeriod_throwsIllegalValueException() {
+    public void toModelType_invalidEventPeriodSyntax_throwsIllegalValueException() {
         JsonAdaptedEvent event =
-                new JsonAdaptedEvent(VALID_DESCRIPTION, INVALID_EVENT_PERIOD);
+                new JsonAdaptedEvent(VALID_DESCRIPTION, INVALID_EVENT_PERIOD_SYNTAX);
         String expectedMessage = EventPeriod.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, event::toModelType);
     }
@@ -58,8 +57,7 @@ public class JsonAdaptedEventTest {
 
     @Test
     public void toModelType_isInvalidEventPeriod_throwsIllegalValueException() {
-        EventPeriodBuilder eventPeriodBuilder = new EventPeriodBuilder();
-        JsonAdaptedEvent event = new JsonAdaptedEvent(VALID_DESCRIPTION, INVALID_EVENT_PERIOD_DATE);
+        JsonAdaptedEvent event = new JsonAdaptedEvent(VALID_DESCRIPTION, INVALID_EVENT_PERIOD);
         String expectedMessage = EventPeriod.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, event::toModelType);
     }

@@ -12,6 +12,7 @@ import static seedu.address.testutil.TypicalEvents.TEST_EVENT_A;
 import static seedu.address.testutil.TypicalEvents.TEST_EVENT_B;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BENSON;
+import static seedu.address.testutil.TypicalTasks.ASSIGNMENT;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -25,9 +26,11 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.calendar.UniMateCalendar;
 import seedu.address.model.event.exceptions.EventNotFoundException;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.task.TaskManager;
 import seedu.address.testutil.AddressBookBuilder;
 import seedu.address.testutil.CalendarBuilder;
 import seedu.address.testutil.EventPeriodBuilder;
+import seedu.address.testutil.TaskManagerBuilder;
 
 public class ModelManagerTest {
 
@@ -89,10 +92,22 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void setCalendarFilePath_validPath_setsAddressBookFilePath() {
+    public void setCalendarFilePath_validPath_setsCalendarFilePath() {
         Path path = Paths.get("calendar/file/path");
         modelManager.setCalendarFilePath(path);
         assertEquals(path, modelManager.getCalendarFilePath());
+    }
+
+    @Test
+    public void setTaskManagerFilePath_nullPath_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.setTaskManagerFilePath(null));
+    }
+
+    @Test
+    public void setTaskManagerFilePath_validPath_setsTaskManagerFilePath() {
+        Path path = Paths.get("task/manager/file/path");
+        modelManager.setTaskManagerFilePath(path);
+        assertEquals(path, modelManager.getTaskManagerFilePath());
     }
 
     @Test
@@ -170,11 +185,13 @@ public class ModelManagerTest {
         AddressBook differentAddressBook = new AddressBook();
         UniMateCalendar calendar = new CalendarBuilder().withEvent(TEST_EVENT_A).withEvent(TEST_EVENT_B).build();
         UniMateCalendar differentCalendar = new UniMateCalendar();
+        TaskManager taskManager = new TaskManagerBuilder().withTask(ASSIGNMENT).build();
+        TaskManager differentTaskManager = new TaskManager();
         UserPrefs userPrefs = new UserPrefs();
 
         // same values -> returns true
-        modelManager = new ModelManager(addressBook, calendar, userPrefs);
-        ModelManager modelManagerCopy = new ModelManager(addressBook, calendar, userPrefs);
+        modelManager = new ModelManager(addressBook, calendar, taskManager, userPrefs);
+        ModelManager modelManagerCopy = new ModelManager(addressBook, calendar, taskManager, userPrefs);
         assertTrue(modelManager.equals(modelManagerCopy));
 
         // same object -> returns true
@@ -186,19 +203,23 @@ public class ModelManagerTest {
         // different types -> returns false
         assertFalse(modelManager.equals(5));
 
-        // different addressBook, same calendar -> returns false
-        assertFalse(modelManager.equals(new ModelManager(differentAddressBook, calendar, userPrefs)));
+        // different addressBook, same calendar, same taskManager -> returns false
+        assertFalse(modelManager.equals(new ModelManager(differentAddressBook, calendar, taskManager, userPrefs)));
 
-        // same addressBook, different calendar -> returns false
-        assertFalse(modelManager.equals(new ModelManager(addressBook, differentCalendar, userPrefs)));
+        // same addressBook, different calendar, same taskManager -> returns false
+        assertFalse(modelManager.equals(new ModelManager(addressBook, differentCalendar, taskManager, userPrefs)));
 
-        // different addressBook, different calendar -> returns false
-        assertFalse(modelManager.equals(new ModelManager(differentAddressBook, differentCalendar, userPrefs)));
+        // same addressBook, same calendar, different taskManager -> returns false
+        assertFalse(modelManager.equals(new ModelManager(addressBook, calendar, differentTaskManager, userPrefs)));
+
+        // different addressBook, different calendar, different taskManager -> returns false
+        assertFalse(modelManager.equals(new ModelManager(differentAddressBook, differentCalendar,
+                differentTaskManager, userPrefs)));
 
         // different filteredList -> returns false
         String[] keywords = ALICE.getName().fullName.split("\\s+");
         modelManager.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
-        assertFalse(modelManager.equals(new ModelManager(addressBook, calendar, userPrefs)));
+        assertFalse(modelManager.equals(new ModelManager(addressBook, calendar, taskManager, userPrefs)));
 
         // resets modelManager to initial state for upcoming tests
         modelManager.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
@@ -206,6 +227,6 @@ public class ModelManagerTest {
         // different userPrefs -> returns false
         UserPrefs differentUserPrefs = new UserPrefs();
         differentUserPrefs.setAddressBookFilePath(Paths.get("differentFilePath"));
-        assertFalse(modelManager.equals(new ModelManager(addressBook, calendar, differentUserPrefs)));
+        assertFalse(modelManager.equals(new ModelManager(addressBook, calendar, taskManager, differentUserPrefs)));
     }
 }

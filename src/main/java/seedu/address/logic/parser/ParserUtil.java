@@ -3,6 +3,8 @@ package seedu.address.logic.parser;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
@@ -27,6 +29,8 @@ import seedu.address.model.tag.Tag;
 public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+    public static final DateTimeFormatter DATE_TIME_STRING_FORMATTER = DateTimeFormatter.ofPattern(
+            "yyyy-MM-dd HH:mm");
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -180,7 +184,7 @@ public class ParserUtil {
      * @param startDate start date string in 'yyyy-MM-dd HH:mm' format.
      * @param endDate end date string in 'yyyy-MM-dd HH:mm' format.
      * @return EventPeriod object describing the time period between startDate and endDate.
-     * @throws ParseException if the startDate or endDate strings are in inproper format.
+     * @throws ParseException if the startDate or endDate strings are in improper format.
      */
     public static EventPeriod parseEventPeriod(String startDate, String endDate) throws ParseException {
         requireAllNonNull(startDate, endDate);
@@ -190,5 +194,18 @@ public class ParserUtil {
             throw new ParseException(EventPeriod.MESSAGE_CONSTRAINTS);
         }
         return new EventPeriod(trimmedStartDate, trimmedEndDate);
+    }
+
+    /**
+     * Parses given DateTime String into a LocalDateTime object.
+     *
+     * @param dateTime a date time string in 'yyyy-MM-dd HH:mm' format.
+     * @return LocalDateTime object describing the time and date.
+     * @throws ParseException if the string is not in the stated format.
+     */
+    public static LocalDateTime parseDateTime(String dateTime) throws ParseException {
+        requireNonNull(dateTime);
+        String trimmedDateTime = dateTime.trim();
+        return LocalDateTime.parse(trimmedDateTime, DATE_TIME_STRING_FORMATTER);
     }
 }

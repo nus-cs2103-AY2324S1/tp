@@ -18,6 +18,8 @@ import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.calendar.ReadOnlyCalendar;
 import seedu.address.model.event.Event;
 import seedu.address.model.person.Person;
+import seedu.address.model.task.ReadOnlyTaskManager;
+import seedu.address.model.task.Task;
 import seedu.address.storage.Storage;
 
 /**
@@ -58,6 +60,7 @@ public class LogicManager implements Logic {
         try {
             storage.saveAddressBook(model.getAddressBook());
             storage.saveCalendar(model.getCalendar());
+            storage.saveTaskManager(model.getTaskManager());
         } catch (AccessDeniedException e) {
             throw new CommandException(String.format(FILE_OPS_PERMISSION_ERROR_FORMAT, e.getMessage()), e);
         } catch (IOException ioe) {
@@ -78,8 +81,18 @@ public class LogicManager implements Logic {
     }
 
     @Override
+    public ReadOnlyTaskManager getTaskManager() {
+        return model.getTaskManager();
+    }
+
+    @Override
     public ObservableList<Event> getEventList() {
         return model.getEventList();
+    }
+
+    @Override
+    public ObservableList<Task> getTaskList() {
+        return model.getTaskList();
     }
 
     @Override

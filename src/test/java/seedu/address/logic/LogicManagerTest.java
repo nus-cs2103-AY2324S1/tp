@@ -32,8 +32,10 @@ import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.calendar.UniMateCalendar;
 import seedu.address.model.person.Person;
+import seedu.address.model.task.TaskManager;
 import seedu.address.storage.JsonAddressBookStorage;
 import seedu.address.storage.JsonCalendarStorage;
+import seedu.address.storage.JsonTaskManagerStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
 import seedu.address.storage.StorageManager;
 import seedu.address.testutil.PersonBuilder;
@@ -53,8 +55,11 @@ public class LogicManagerTest {
         JsonAddressBookStorage addressBookStorage =
                 new JsonAddressBookStorage(temporaryFolder.resolve("addressBook.json"));
         JsonCalendarStorage calendarStorage = new JsonCalendarStorage(temporaryFolder.resolve("calendar.json"));
+        JsonTaskManagerStorage taskManagerStorage = new JsonTaskManagerStorage(
+                temporaryFolder.resolve("taskManager.json"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(temporaryFolder.resolve("userPrefs.json"));
-        StorageManager storage = new StorageManager(addressBookStorage, calendarStorage, userPrefsStorage);
+        StorageManager storage = new StorageManager(addressBookStorage, calendarStorage, taskManagerStorage,
+                userPrefsStorage);
         logic = new LogicManager(model, storage);
     }
 
@@ -76,12 +81,23 @@ public class LogicManagerTest {
     }
 
     @Test
+    public void getTaskList() {
+        assertEquals(logic.getTaskList(), FXCollections.observableArrayList());
+    }
+
+    @Test
     public void getAddressBook() {
         assertEquals(logic.getAddressBook(), new AddressBook());
     }
+
     @Test
     public void getCalendar() {
         assertEquals(logic.getCalendar(), new UniMateCalendar());
+    }
+
+    @Test
+    public void getTaskManager() {
+        assertEquals(logic.getTaskManager(), new TaskManager());
     }
 
     @Test
@@ -152,7 +168,8 @@ public class LogicManagerTest {
      */
     private void assertCommandFailure(String inputCommand, Class<? extends Throwable> expectedException,
             String expectedMessage) {
-        Model expectedModel = new ModelManager(model.getAddressBook(), model.getCalendar(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getAddressBook(), model.getCalendar(), model.getTaskManager(),
+                new UserPrefs());
         assertCommandFailure(inputCommand, expectedException, expectedMessage, expectedModel);
     }
 
@@ -190,9 +207,12 @@ public class LogicManagerTest {
 
         JsonCalendarStorage calendarStorage =
                 new JsonCalendarStorage(temporaryFolder.resolve("ExceptionCalendar.json"));
+        JsonTaskManagerStorage taskManagerStorage =
+                new JsonTaskManagerStorage(temporaryFolder.resolve("taskManager.json"));
         JsonUserPrefsStorage userPrefsStorage =
                 new JsonUserPrefsStorage(temporaryFolder.resolve("ExceptionUserPrefs.json"));
-        StorageManager storage = new StorageManager(addressBookStorage, calendarStorage, userPrefsStorage);
+        StorageManager storage = new StorageManager(addressBookStorage, calendarStorage, taskManagerStorage,
+                userPrefsStorage);
 
         logic = new LogicManager(model, storage);
 

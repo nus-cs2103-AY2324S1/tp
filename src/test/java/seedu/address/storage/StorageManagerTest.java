@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static seedu.address.testutil.TypicalEvents.getTypicalCalendar;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalTasks.getTypicalTaskManager;
 
 import java.nio.file.Path;
 
@@ -17,6 +18,8 @@ import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.calendar.ReadOnlyCalendar;
 import seedu.address.model.calendar.UniMateCalendar;
+import seedu.address.model.task.ReadOnlyTaskManager;
+import seedu.address.model.task.TaskManager;
 
 public class StorageManagerTest {
 
@@ -29,8 +32,9 @@ public class StorageManagerTest {
     public void setUp() {
         JsonAddressBookStorage addressBookStorage = new JsonAddressBookStorage(getTempFilePath("ab"));
         JsonCalendarStorage calendarStorage = new JsonCalendarStorage(getTempFilePath("calendar"));
+        JsonTaskManagerStorage taskManagerStorage = new JsonTaskManagerStorage(getTempFilePath("taskmanager"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(getTempFilePath("prefs"));
-        storageManager = new StorageManager(addressBookStorage, calendarStorage, userPrefsStorage);
+        storageManager = new StorageManager(addressBookStorage, calendarStorage, taskManagerStorage, userPrefsStorage);
     }
 
     private Path getTempFilePath(String fileName) {
@@ -78,6 +82,19 @@ public class StorageManagerTest {
     }
 
     @Test
+    public void taskManagerReadSave() throws Exception {
+        /*
+         * Note: This is an integration test that verifies the StorageManager is properly wired to the
+         * {@link JsonTaskManagerStorage} class.
+         * More extensive testing of UserPref saving/reading is done in {@link JsonTaskManagerStorage} class.
+         */
+        TaskManager original = getTypicalTaskManager();
+        storageManager.saveTaskManager(original);
+        ReadOnlyTaskManager retrieved = storageManager.readTaskManager().get();
+        assertEquals(original, new TaskManager(retrieved));
+    }
+
+    @Test
     public void getUserPrefsFilePath() {
         assertNotNull(storageManager.getUserPrefsFilePath());
     }
@@ -90,6 +107,11 @@ public class StorageManagerTest {
     @Test
     public void getCalendarFilePath() {
         assertNotNull(storageManager.getCalendarFilePath());
+    }
+
+    @Test
+    public void getTaskManagerFilePath() {
+        assertNotNull(storageManager.getTaskManagerFilePath());
     }
 
 }
