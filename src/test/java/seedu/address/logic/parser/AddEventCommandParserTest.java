@@ -8,8 +8,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUP;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_START_TIME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_UNASSIGN_GROUPS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_UNASSIGN_PERSONS;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
@@ -19,7 +17,6 @@ import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.AddEventCommand;
 import seedu.address.model.event.EventDate;
 import seedu.address.model.event.EventName;
@@ -37,7 +34,8 @@ public class AddEventCommandParserTest {
                 AddEventCommand.MESSAGE_USAGE));
 
         // no date specified
-        assertParseFailure(parser, " " + PREFIX_EVENT_NAME + "FumbleLog Meeting", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+        assertParseFailure(parser, " " + PREFIX_EVENT_NAME + "FumbleLog Meeting",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 AddEventCommand.MESSAGE_USAGE));
 
         // no name and no date specified
@@ -68,7 +66,8 @@ public class AddEventCommandParserTest {
         EventTime eventEndTime = EventTime.NULL_EVENT_TIME;
         Set<Name> nameList = new HashSet<>();
         Set<Group> groupList = new HashSet<>();
-        Meeting meeting = new Meeting(eventName, eventDate, Optional.of(eventStartTime), Optional.of(eventEndTime), nameList, groupList);
+        Meeting meeting = new Meeting(eventName, eventDate, Optional.of(eventStartTime),
+                Optional.of(eventEndTime), nameList, groupList);
         AddEventCommand expectedAddEventCommand = new AddEventCommand(meeting);
         assertParseSuccess(parser, userInput, expectedAddEventCommand);
     }
@@ -88,7 +87,8 @@ public class AddEventCommandParserTest {
         nameList.add(new Name("Yuheng"));
         Set<Group> groupList = new HashSet<>();
         groupList.add(new Group("Team2"));
-        Meeting meeting = new Meeting(eventName, eventDate, Optional.of(eventStartTime), Optional.of(eventEndTime), nameList, groupList);
+        Meeting meeting = new Meeting(eventName, eventDate, Optional.of(eventStartTime),
+                Optional.of(eventEndTime), nameList, groupList);
         AddEventCommand expectedAddEventCommand = new AddEventCommand(meeting);
         assertParseSuccess(parser, userInput, expectedAddEventCommand);
     }
