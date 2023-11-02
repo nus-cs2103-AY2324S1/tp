@@ -54,7 +54,7 @@ public class EditContactEventCommand extends Command {
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
-    public static final String MESSAGE_MUST_HAVE_BOTH_START_AND_END = "This person already exists in the address book.";
+    public static final String INVALID_EVENT_INDEX = "Invalid Event Index Provided";
     private final Index personIndex;
     private final Index eventIndex;
     private final EditEventDescriptor editEventDescriptor;
@@ -99,7 +99,8 @@ public class EditContactEventCommand extends Command {
      * {@code eventIndex} with {@code editEventDescriptor}.
      */
     private static Person createPersonsEditedEvent(Index eventIndex,
-                                                   Person personToEdit, EditEventDescriptor editEventDescriptor) {
+                                                   Person personToEdit, EditEventDescriptor editEventDescriptor)
+            throws CommandException {
         assert personToEdit != null;
 
         Name updatedName = personToEdit.getName();
@@ -126,9 +127,14 @@ public class EditContactEventCommand extends Command {
      * @return                      The updated event list.
      */
     public static List<Event> updateEventList(Calendar calendar, Index eventIndex,
-                                             EditEventDescriptor editEventDescriptor) {
+                                             EditEventDescriptor editEventDescriptor) throws CommandException {
         List<Event> eventList = calendar.getEventManager().asEventList();
-        Event updateEvent = eventList.get(eventIndex.getZeroBased());
+        Event updateEvent;
+        try {
+            updateEvent = eventList.get(eventIndex.getZeroBased());
+        } catch (Exception e) {
+            throw new CommandException(INVALID_EVENT_INDEX);
+        }
         EventPeriod updatePeriod = updateEvent.getEventPeriod();
         LocalDateTime newStartDateTime = editEventDescriptor.getStart().orElse(updatePeriod.getStart());
         LocalDateTime newEndDateTime = editEventDescriptor.getEnd().orElse(updatePeriod.getEnd());
