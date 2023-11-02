@@ -1,10 +1,13 @@
 package seedu.flashlingo.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.flashlingo.model.Model.PREDICATE_SHOW_ALL_FLASHCARDS;
 
 import seedu.flashlingo.commons.util.ToStringBuilder;
 import seedu.flashlingo.logic.commands.exceptions.CommandException;
 import seedu.flashlingo.model.Model;
+import seedu.flashlingo.model.flashcard.FlashCard;
+import seedu.flashlingo.session.SessionManager;
 
 /**
  * Indicates user has not yet memorized the word.
@@ -28,9 +31,15 @@ public class NoCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        model.rememberWord(false);
-        String response = model.nextReviewWord();
-        return new CommandResult(MESSAGE_SUCCESS + "\n" + response);
+        FlashCard response = model.nextReviewWord();
+        response.updateLevel(false);
+        if (!model.hasNextRound()) {
+            SessionManager.getInstance().setSession(false);
+            model.updateFilteredFlashCardList(PREDICATE_SHOW_ALL_FLASHCARDS);
+            return new CommandResult(MESSAGE_SUCCESS + "\n" + "\nYou have no more words to review!");
+        }
+        model.nextReviewWord();
+        return new CommandResult(MESSAGE_SUCCESS + "\n" + "\nThe next word is: ");
     }
     @Override
     public boolean equals(Object other) {

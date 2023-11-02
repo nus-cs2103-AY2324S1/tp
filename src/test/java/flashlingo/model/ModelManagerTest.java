@@ -10,6 +10,7 @@ import static seedu.flashlingo.model.Model.PREDICATE_SHOW_ALL_FLASHCARDS;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.Arrays;
 
 import org.junit.jupiter.api.Test;
@@ -19,6 +20,7 @@ import seedu.flashlingo.commons.core.GuiSettings;
 import seedu.flashlingo.model.Flashlingo;
 import seedu.flashlingo.model.ModelManager;
 import seedu.flashlingo.model.UserPrefs;
+import seedu.flashlingo.model.flashcard.FlashCard;
 import seedu.flashlingo.model.flashcard.WordContainsKeywordsPredicate;
 
 public class ModelManagerTest {
@@ -93,6 +95,17 @@ public class ModelManagerTest {
     @Test
     public void getFilteredFlashCardList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredFlashCardList().remove(0));
+    }
+
+    @Test
+    public void addFlashCards_nullFlashCard_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.addFlashCards(null));
+    }
+
+    @Test
+    public void addFlashCards_success() {
+        modelManager.addFlashCards(new ArrayList<FlashCard>(Arrays.asList(WORD, ALICE)));
+        assertTrue(modelManager.hasFlashCard(WORD));
     }
 
     @Test
