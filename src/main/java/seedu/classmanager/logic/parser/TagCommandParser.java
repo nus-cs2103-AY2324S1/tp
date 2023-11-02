@@ -54,6 +54,7 @@ public class TagCommandParser implements Parser<TagCommand> {
                 TagCommand.MESSAGE_TAG_FAILED + TagCommand.MESSAGE_USAGE));
         }
 
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_WILDCARD);
         String action = argMultimap.getValue(PREFIX_WILDCARD).orElse("");
 
         switch (action) {
@@ -61,8 +62,10 @@ public class TagCommandParser implements Parser<TagCommand> {
             return new AddTagCommand(studentNumber, this.tags);
         case TagCommand.DELETE_TAGS:
             return new DeleteTagCommand(studentNumber, this.tags);
-        default:
+        case TagCommand.DEFAULT:
             return new TagCommand(studentNumber, this.tags);
+        default:
+            throw new ParseException(TagCommand.MESSAGE_INVALID_ACTION_IDENTIFIER);
         }
     }
 
