@@ -431,9 +431,12 @@ Invalid Input Example | Application Output
 
 ## Payments
 
-CampusConnect allows you to keep track of payments between you and your friends! Each contact has a **balance**, which is the amount of money that you owe them (or that they owe you). This balance is positive if they owe you money, and negative if you owe them money.
+CampusConnect allows you to keep track of payments between you and your contacts!
+Each contact has a **balance**, which is the amount of money that you owe them (or that they owe you).
+This balance is positive if they owe you money, and negative if you owe them money.
 
-Every time you record a payment to or from a contact, their balance will be updated accordingly so that you can settle your debts easily. Instead of displaying positive or negative balances, **balances are reflected directly in the contact list** with easily-understandable human-readable explanations, like so:
+Every time you record a payment to or from a contact, their balance will be updated accordingly so that you can settle your debts easily.
+Instead of displaying positive or negative balances, **balances are reflected directly in the contact list** with easily-understandable human-readable explanations, like so:
 
 ![Payment Image](images/ContactArrowPayment.png)
 
@@ -441,7 +444,8 @@ Every time you record a payment to or from a contact, their balance will be upda
 
 That said, CampusConnect's Payments feature should be only used for **casual transactions among friends**, and is not for commercial or business use.
 
-We enforce this with a **strict payment tracking limit** of a maximum of **$10,000** owed to or from each contact. If you attempt to record a payment that would cause a contact's balance to exceed this limit, you will see an error message stating that the payment cannot be recorded for this reason.
+We enforce this with a **strict payment tracking limit** of a maximum of **$10,000** owed to or from each contact.
+If you attempt to record a payment that would cause a contact's balance to exceed this limit, you will see an error message stating that the payment cannot be recorded for this reason.
 </box>
 
 
@@ -449,7 +453,8 @@ We enforce this with a **strict payment tracking limit** of a maximum of **$10,0
 
 As part of our payments feature, CampusConnect reads in money amounts from the user.
 
-You should note that the money amount format is **strictly enforced**. This is to ensure that the money amounts are entered correctly, and to prevent any errors that may arise from incorrect money formats.
+You should note that the money amount format is **strictly enforced**.
+This is to ensure that the money amounts are entered correctly, and to prevent any errors that may arise from incorrect money formats.
 
 An accepted money amount format follows these **three rules**:
 1. It **must be a positive number**.
@@ -460,7 +465,8 @@ Additionally, remember that CampusConnect enforces a [strict payment tracking li
 
 <box theme="primary" icon=":fa-solid-lightbulb:">
 
-We also provide some **convenience features** for you to enter money amounts more easily, for cases where you may be copying and pasting money amounts from other sources. These convenience features are as follows:
+We also provide some **convenience features** for you to enter money amounts more easily, for cases where you may be copying and pasting money amounts from other sources.
+These convenience features are as follows:
 - You may enter money amounts with a **dollar sign** (`$`) prefix.
 - You may enter money amounts with **trailing zeroes**.
 
@@ -488,21 +494,21 @@ Now that you understand how to enter money when using our app, you can proceed t
 
 Records a payment from you to a contact. The amount **the contact owes you** increases by that amount after this transaction.
 
-Format: `pay INDEX AMOUNT`
+Format: `pay PERSON_INDEX AMOUNT`
 
-- `INDEX` is the index of the contact in the contact list.
+- `PERSON_INDEX` is the index of the contact in the contact list.
 - `AMOUNT` is the amount of money you pay the contact, written in valid [money format](#money-amount-format).
 
 <box theme="info" icon=":fa-solid-magnifying-glass:">
 
 **Examples:**
 
-Suppose you have a contact at index `1` with a balance of `$10`. Then:
+Suppose you have a contact at index `1` that owes you `$10`. Then:
 
 - `pay 1 10` records a payment of `$10` from you to the contact at index `1`.
 - `pay 1 $0.5` records a payment of `$0.50` from you to the contact at index `1`.
 
-At the end of both commands, the contact at index `1` will have a balance of `$20.50`.
+At the end of both commands, **the contact owes you `$20.50`**.
 
 - `pay 1 -3` does NOT record any payment. Recall that money amounts must follow CampusConnect's [money format](#money-amount-format), which does not accept negative amounts.
 
@@ -514,24 +520,24 @@ If you're looking to record a payment from a contact to you, read ahead on how y
 
 Records a payment from a contact to you. The amount **you owe the contact** increases by that amount after this transaction.
 
-Format: `owe INDEX AMOUNT`
+Format: `owe PERSON_INDEX AMOUNT`
 
-- `INDEX` is the index of the contact in the contact list.
+- `PERSON_INDEX` is the index of the contact in the contact list.
 - `AMOUNT` is the amount of money you owe the contact, written in valid [money amount format](#money-amount-format).
 
 <box theme="info" icon=":fa-solid-magnifying-glass:">
 
 **Examples:**
 
-Suppose you have a contact at index `1` with a balance of `$10`. Then:
+Suppose you have a contact at index `1` that owes you `$10`. Then:
 
-- `owe 1 9` records a payment of `$10` from the contact at index `1` to you.
+- `owe 1 9` records a payment of `$9` from the contact at index `1` to you.
 
-At the end of the command, you will see that **the contact owes you `$1`**.
+At the end of the command, **the contact owes you `$1`**.
 
 - `owe 1 $2.5` records a payment of `$2.50` from the contact at index `1` to you.
 
-At the end of both commands, you will see that **you owe the contact `$1.50`**.
+At the end of both commands, **you owe the contact `$1.50`**.
 
 - `owe 1 $50000` does NOT record any payment. Recall that CampusConnect enforces a [strict payment tracking limit](#payment-tracking-limit).
 
