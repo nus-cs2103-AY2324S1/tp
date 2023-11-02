@@ -24,6 +24,7 @@ public class FindBandCommand extends Command {
         + "Parameters: BAND NAME\n"
         + "Example: " + COMMAND_WORD + " BlackPink";
 
+    public static final String MESSAGE_SUCCESS = "There are %1$d musicians in the band %2$s";
     private final Predicate<Band> predicate;
 
     public FindBandCommand(Predicate<Band> predicate) {
@@ -44,7 +45,9 @@ public class FindBandCommand extends Command {
         }
 
         return new CommandResult(
-            String.format(Messages.MESSAGE_MUSICIANS_LISTED_OVERVIEW, model.getFilteredMusicianList().size()));
+            String.format(MESSAGE_SUCCESS, model.getFilteredMusicianList().size(),
+                    model.getFilteredBandList().get(0).getName())
+        );
     }
 
     @Override

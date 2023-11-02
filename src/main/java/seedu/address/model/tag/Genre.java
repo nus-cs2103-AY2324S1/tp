@@ -12,7 +12,8 @@ import java.util.LinkedHashSet;
  */
 public class Genre extends Tag {
 
-    public static final String MESSAGE_CONSTRAINTS = "Genre tags names should be a valid genre name";
+    public static final String MESSAGE_CONSTRAINTS = "Genre tags names should be a valid genre name.\n"
+            + "For a list of valid genres, please use the command 'tags'";
     public static final HashSet<String> VALID_GENRES = new LinkedHashSet<>(Arrays.asList(
             "blues", "classical", "country", "electronic", "folk", "hiphop", "jazz",
             "latin", "metal", "pop", "rock", "soul", "other"
