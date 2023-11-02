@@ -85,6 +85,10 @@ public interface Model {
      */
     boolean hasEvent(Event event);
 
+    /**
+     * Deletes the given event.
+     * The event must exist in CcaCommander.
+     */
     void deleteEvent(Event target);
 
     /**
@@ -106,10 +110,22 @@ public interface Model {
     boolean hasEnrolment(Enrolment enrolment);
 
     /**
+     * Deletes the given enrolment.
+     * The enrolment must exist in CcaCommander.
+     */
+    void deleteEnrolment(Enrolment target);
+
+    /**
      * Creates the given event.
      * {@code enrolment} must not already exist in CcaCommander.
      */
     void createEnrolment(Enrolment enrolment);
+
+    /**
+     * Replaces the given member {@code target} with {@code editedEnrolment}.
+     * {@code target} must exist in CcaCommander.
+     */
+    void setEnrolment(Enrolment target, Enrolment editedEnrolment);
 
     /** Returns an unmodifiable view of the filtered member list */
     ObservableList<Member> getFilteredMemberList();
