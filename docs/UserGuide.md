@@ -284,7 +284,7 @@ List the band members of a selected band. From `My Bands` panel, find the comple
 ![findb_after.png](images%2Fband-features%2Ffindb_after.png)
 
 **Upon failure:**
-If you input a non-existent band name, an error message `Band does not exist!` will be displayed. Please modify accordingly and enter the command again.
+If you input an invalid band name, an error message `Band does not exist!` will be displayed. Please input a valid band name and enter the command again.
 
 ## Clear data: `clear`
 
