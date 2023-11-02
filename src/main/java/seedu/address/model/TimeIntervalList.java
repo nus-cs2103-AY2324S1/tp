@@ -29,6 +29,7 @@ public class TimeIntervalList implements Iterable<TimeInterval> {
     }
 
     public void addTime(ArrayList<TimeInterval> timeIntervals) throws CommandException{
+        boolean timeAdded = false;
         StringBuilder errorCompilation = new StringBuilder();
         errorCompilation.append("There is a clash in these timings:\n");
         for (TimeInterval interval : timeIntervals) {
@@ -36,11 +37,13 @@ public class TimeIntervalList implements Iterable<TimeInterval> {
                 errorCompilation.append(interval + "\n");
             } else {
                 internalList.add(interval);
+                timeAdded = true;
             }
         }
-
-        errorCompilation.append("The other times have been added\n");
-        if (errorCompilation.length() > 67) {
+        if (timeAdded) {
+            errorCompilation.append("The other times have been added\n");
+        }
+        if ((timeAdded && errorCompilation.length() > 67) || (!timeAdded && errorCompilation.length() > 35)) {
             throw new CommandException(errorCompilation.toString());
         }
     }
@@ -52,6 +55,7 @@ public class TimeIntervalList implements Iterable<TimeInterval> {
     }
 
     public void deleteTime(ArrayList<TimeInterval> timeIntervals) throws CommandException {
+        boolean timeDeleted = false;
         StringBuilder errorCompilation = new StringBuilder();
         errorCompilation.append("These times are not in the list:\n");
         for (TimeInterval time : timeIntervals) {
@@ -59,11 +63,15 @@ public class TimeIntervalList implements Iterable<TimeInterval> {
                 errorCompilation.append(time + "\n");
             } else {
                 internalList.remove(time);
+                timeDeleted = true;
             }
         }
-        errorCompilation.append("The other times have been deleted\n");
-
-        if (errorCompilation.length() > 67) {
+        System.out.println(errorCompilation.length());
+        if (timeDeleted) {
+            errorCompilation.append("The other times have been deleted\n");
+        }
+        System.out.println(errorCompilation.length());
+        if ((timeDeleted && errorCompilation.length() > 87) || (!timeDeleted && errorCompilation.length() > 53)) {
             throw new CommandException(errorCompilation.toString());
         }
     }
@@ -92,10 +100,7 @@ public class TimeIntervalList implements Iterable<TimeInterval> {
      */
     public boolean isTimeIntervalOverlap(TimeInterval interval) {
         for (TimeInterval time : internalList) {
-            int startComparison = time.compareStart(interval);
-            int endComparison = time.compareEnd(interval);
-            boolean noClash = ((startComparison < 0 && endComparison < 0)|| (startComparison > 0 && endComparison > 0));
-            if ((startComparison == 0 && endComparison == 0) || !noClash) {
+            if (interval.isClash(time)) {
                 return true;
             }
         }

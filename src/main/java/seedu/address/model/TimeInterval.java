@@ -137,6 +137,12 @@ public class TimeInterval {
         return start.compareTo(end) <= -1;
     }
 
+    public boolean isClash(TimeInterval otherTime) {
+        boolean isBefore = this.start.compareTo(otherTime.start) < 0 && this.end.compareTo(otherTime.end) < 0 && this.end.compareTo(otherTime.start) <= 0;
+        boolean isAfter = this.start.compareTo(otherTime.start) > 0 && this.end.compareTo(otherTime.end) > 0 && this.start.compareTo(otherTime.end) >= 0;
+        return !(isBefore || isAfter);
+    }
+
     public int compareStart(TimeInterval otherTime) {
         return this.start.compareTo(otherTime.start);
     }
