@@ -6,6 +6,7 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.card.Card;
+import seedu.address.model.goal.Goal;
 
 /**
  * The API of the Model component.
@@ -84,4 +85,11 @@ public interface Model {
      * Replaces Deck data with the data in {@code deck}.
      */
     public void setDeck(ReadOnlyDeck deck);
+
+    /**
+     * Sets new target for goal.
+     */
+    public void setGoal(int target);
+
+    Goal getGoal();
 }

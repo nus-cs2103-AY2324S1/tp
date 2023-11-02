@@ -12,6 +12,7 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.card.Card;
+import seedu.address.model.goal.Goal;
 
 /**
  * Represents the in-memory model of the Deck data.
@@ -22,6 +23,7 @@ public class ModelManager implements Model {
     private final Deck deck;
     private final UserPrefs userPrefs;
     private final FilteredList<Card> filteredCards;
+    private final Goal goal;
 
     /**
      * Initializes a ModelManager with the given Deck and userPrefs.
@@ -34,6 +36,7 @@ public class ModelManager implements Model {
         this.deck = new Deck(deck);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredCards = new FilteredList<>(this.deck.getCardList());
+        this.goal = new Goal(this.deck);
     }
 
     public ModelManager() {
@@ -142,6 +145,18 @@ public class ModelManager implements Model {
         return deck.equals(otherModelManager.deck)
                 && userPrefs.equals(otherModelManager.userPrefs)
                 && filteredCards.equals(otherModelManager.filteredCards);
+    }
+
+    //=========== Goal ==================================================================================
+
+    @Override
+    public void setGoal(int target) {
+        this.goal.setTarget(target);
+    }
+
+    @Override
+    public Goal getGoal() {
+        return goal;
     }
 
 }

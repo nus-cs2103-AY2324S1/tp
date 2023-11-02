@@ -52,6 +52,7 @@ public class SolveCommand extends Command {
         cardToSolve.incrementSolveCount();
         //sets to show the update on the Ui
         model.setCard(cardToSolve, cardToSolve);
+        model.getGoal().solvedCard();
 
         return new CommandResult(String.format(Messages.MESSAGE_CARDS_SOLVE_VIEW,
                         Messages.formatSolve(cardToSolve, targetIndex)));
