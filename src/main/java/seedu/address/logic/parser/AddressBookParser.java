@@ -34,7 +34,7 @@ public class AddressBookParser {
     /**
      * Used for initial separation of command word and args.
      */
-    public static final String MESSAGE_NON_ASCII = "Only printable ASCII characters are not allowed.";
+    public static final String MESSAGE_NON_ASCII = "Only printable ASCII characters are allowed.";
     private static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
     private static final Pattern PRINTABLE_ASCII_STRING = Pattern.compile("^[ -~]*$");
     private static final Logger logger = LogsCenter.getLogger(AddressBookParser.class);
