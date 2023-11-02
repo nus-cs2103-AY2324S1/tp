@@ -1,15 +1,16 @@
 package seedu.address.model.person;
 
-import org.junit.jupiter.api.Test;
-import seedu.address.testutil.PersonBuilder;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import org.junit.jupiter.api.Test;
+
+import seedu.address.testutil.PersonBuilder;
 
 public class SubjectContainsKeywordsPredicateTest {
 
@@ -18,14 +19,17 @@ public class SubjectContainsKeywordsPredicateTest {
         List<String> firstPredicateKeywordList = Collections.singletonList("first");
         List<String> secondPredicateKeywordList = Arrays.asList("first", "second");
 
-        SubjectContainsKeywordsPredicate firstPredicate = new SubjectContainsKeywordsPredicate(firstPredicateKeywordList);
-        SubjectContainsKeywordsPredicate secondPredicate = new SubjectContainsKeywordsPredicate(secondPredicateKeywordList);
+        SubjectContainsKeywordsPredicate firstPredicate =
+                new SubjectContainsKeywordsPredicate(firstPredicateKeywordList);
+        SubjectContainsKeywordsPredicate secondPredicate =
+                new SubjectContainsKeywordsPredicate(secondPredicateKeywordList);
 
         // same object -> returns true
         assertTrue(firstPredicate.equals(firstPredicate));
 
         // same values -> returns true
-        SubjectContainsKeywordsPredicate firstPredicateCopy = new SubjectContainsKeywordsPredicate(firstPredicateKeywordList);
+        SubjectContainsKeywordsPredicate firstPredicateCopy =
+                new SubjectContainsKeywordsPredicate(firstPredicateKeywordList);
         assertTrue(firstPredicate.equals(firstPredicateCopy));
 
         // different types -> returns false
@@ -45,7 +49,8 @@ public class SubjectContainsKeywordsPredicateTest {
         assertTrue(subject.test(new PersonBuilder().withSubject("Maths").build()));
 
         // One keyword
-        SubjectContainsKeywordsPredicate predicate = new SubjectContainsKeywordsPredicate(Collections.singletonList("Maths"));
+        SubjectContainsKeywordsPredicate predicate = new SubjectContainsKeywordsPredicate(
+                Collections.singletonList("Maths"));
         assertTrue(predicate.test(new PersonBuilder().withSubject("Maths Chemistry").build()));
 
         // Multiple keywords

@@ -20,11 +20,7 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.NameSubjectPredicate;
-import seedu.address.model.person.Subject;
 import seedu.address.model.person.SubjectContainsKeywordsPredicate;
-import seedu.address.model.person.SubjectContainsKeywordsPredicateTest;
-
-import javax.naming.NamingEnumeration;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code FindCommand}.
@@ -99,11 +95,11 @@ public class FindCommandTest {
     }
 
     private NameSubjectPredicate prepareNameSubject(String nameInput, String subjectInput) {
-        NameContainsKeywordsPredicate predicate
-                = new NameContainsKeywordsPredicate(Arrays.asList(nameInput.split("\\s+")));
+        NameContainsKeywordsPredicate predicate =
+                new NameContainsKeywordsPredicate(Arrays.asList(nameInput.split("\\s+")));
 
-        SubjectContainsKeywordsPredicate subject
-                = new SubjectContainsKeywordsPredicate(Arrays.asList(subjectInput.split("\\s+")));
+        SubjectContainsKeywordsPredicate subject =
+                new SubjectContainsKeywordsPredicate(Arrays.asList(subjectInput.split("\\s+")));
         return new NameSubjectPredicate(predicate, subject);
     }
 }
