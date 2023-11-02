@@ -111,10 +111,9 @@ public class EditInterviewCommand extends Command {
                 .getStartTime().orElse(interviewToEdit.getInterviewStartTime());
         LocalDateTime updatedEndTime = editInterviewDescriptor
                 .getEndTime().orElse(interviewToEdit.getInterviewEndTime());
-        boolean updatedDoneStatus = editInterviewDescriptor.hasBeenDone().orElse(interviewToEdit.isDone());
 
         return new Interview(interviewToEdit.getInterviewApplicant(),
-                updatedJobRole, updatedStartTime, updatedEndTime, updatedDoneStatus);
+                updatedJobRole, updatedStartTime, updatedEndTime);
     }
 
     @Override
@@ -149,7 +148,6 @@ public class EditInterviewCommand extends Command {
         private String jobRole;
         private LocalDateTime startTime;
         private LocalDateTime endTime;
-        private boolean isDone;
 
         public EditInterviewDescriptor() {}
 
@@ -161,7 +159,6 @@ public class EditInterviewCommand extends Command {
             setJobRole(toCopy.jobRole);
             setStartTime(toCopy.startTime);
             setEndTime(toCopy.endTime);
-            setDoneStatus(toCopy.isDone);
         }
 
         /**
@@ -195,14 +192,6 @@ public class EditInterviewCommand extends Command {
             return Optional.ofNullable(endTime);
         }
 
-        public void setDoneStatus(boolean isDone) {
-            this.isDone = isDone;
-        }
-
-        public Optional<Boolean> hasBeenDone() {
-            return Optional.of(isDone);
-        }
-
         @Override
         public boolean equals(Object other) {
             if (other == this) {
@@ -217,8 +206,7 @@ public class EditInterviewCommand extends Command {
             EditInterviewDescriptor otherEditInterviewDescriptor = (EditInterviewDescriptor) other;
             return Objects.equals(jobRole, otherEditInterviewDescriptor.jobRole)
                     && Objects.equals(startTime, otherEditInterviewDescriptor.startTime)
-                    && Objects.equals(endTime, otherEditInterviewDescriptor.endTime)
-                    && Objects.equals(isDone, otherEditInterviewDescriptor.isDone);
+                    && Objects.equals(endTime, otherEditInterviewDescriptor.endTime);
         }
 
         @Override
@@ -227,7 +215,6 @@ public class EditInterviewCommand extends Command {
                     .add("role", jobRole)
                     .add("startTime", startTime)
                     .add("endTime", endTime)
-                    .add("isDone", isDone)
                     .toString();
         }
     }
