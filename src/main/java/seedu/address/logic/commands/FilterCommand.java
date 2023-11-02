@@ -23,6 +23,7 @@ public class FilterCommand extends Command {
     public FilterCommand(ContainsDepartmentPredicate predicate) {
         this.predicate = predicate;
     }
+
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
