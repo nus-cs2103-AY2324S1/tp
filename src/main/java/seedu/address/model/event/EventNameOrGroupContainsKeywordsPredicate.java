@@ -30,7 +30,7 @@ public class EventNameOrGroupContainsKeywordsPredicate implements Predicate<Even
 
     @Override
     public boolean test(Event event) {
-        //assert personList != null;
+        assert personList != null;
 
         return this.keywords.stream()
                 .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(event.getName().toString(), keyword)

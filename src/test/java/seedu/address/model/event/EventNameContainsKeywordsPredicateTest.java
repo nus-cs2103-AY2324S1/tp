@@ -11,6 +11,7 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
+import javafx.collections.FXCollections;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.testutil.MeetingBuilder;
 
@@ -59,18 +60,22 @@ public class EventNameContainsKeywordsPredicateTest {
         // One keyword
         EventNameOrGroupContainsKeywordsPredicate predicate =
                 new EventNameOrGroupContainsKeywordsPredicate(Collections.singletonList("Birthday"));
+        predicate.setPersonList(FXCollections.observableArrayList());
         assertTrue(predicate.test(testEvent));
 
         // Multiple keywords
         predicate = new EventNameOrGroupContainsKeywordsPredicate(Arrays.asList("Birthday", "Party"));
+        predicate.setPersonList(FXCollections.observableArrayList());
         assertTrue(predicate.test(testEvent));
 
         // Only one matching keyword
         predicate = new EventNameOrGroupContainsKeywordsPredicate(Arrays.asList("Party", "Event"));
+        predicate.setPersonList(FXCollections.observableArrayList());
         assertTrue(predicate.test(testEvent));
 
         // Mixed-case keywords
         predicate = new EventNameOrGroupContainsKeywordsPredicate(Arrays.asList("bIRthDaY", "pArTY"));
+        predicate.setPersonList(FXCollections.observableArrayList());
         assertTrue(predicate.test(testEvent));
     }
 
@@ -91,15 +96,18 @@ public class EventNameContainsKeywordsPredicateTest {
         // Zero keywords
         EventNameOrGroupContainsKeywordsPredicate predicate =
                 new EventNameOrGroupContainsKeywordsPredicate(Collections.emptyList());
+        predicate.setPersonList(FXCollections.observableArrayList());
         assertFalse(predicate.test(testEvent));
 
         // Non-matching keyword
         predicate = new EventNameOrGroupContainsKeywordsPredicate(Arrays.asList("Carol"));
+        predicate.setPersonList(FXCollections.observableArrayList());
         assertFalse(predicate.test(testEvent));
 
         // Keywords match date, start time and end time, but does not match name
         predicate = new EventNameOrGroupContainsKeywordsPredicate(
                 Arrays.asList(LocalDate.now().plusDays(1).toString(), "1300", "1400"));
+        predicate.setPersonList(FXCollections.observableArrayList());
         assertFalse(predicate.test(testEvent));
     }
 
