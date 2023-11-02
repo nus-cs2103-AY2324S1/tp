@@ -146,7 +146,7 @@ public class AddressBookParser {
             return new AddTaskCommandParser().parse("addtask " + arguments);
         case DeleteTaskCommand.COMMAND_WORD:
             if (!model.getState().equals(SCHEDULE)) {
-                throw new ParseException("Please add tasks in the schedule list.");
+                throw new ParseException("Please delete tasks in the schedule list.");
             }
             return new DeleteTaskCommandParser().parse(userInput);
         case NavigateCommand.COMMAND_WORD:
