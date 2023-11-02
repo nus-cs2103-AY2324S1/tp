@@ -146,9 +146,6 @@ public class ModelManager implements Model {
         return versionedNetworkBook.openLink(personIndex, linkIndex);
     }
 
-<<<<<<< HEAD
-    //=========== Displayed Person List Accessors =============================================================
-=======
     @Override
     public boolean isValidEmailIndex(Index personIndex, Index linkIndex) {
         requireAllNonNull(personIndex, linkIndex);
@@ -160,10 +157,7 @@ public class ModelManager implements Model {
         requireAllNonNull(personIndex, emailIndex);
         return versionedNetworkBook.openEmail(personIndex, emailIndex);
     }
-
-    //=========== Filtered Person List Accessors =============================================================
->>>>>>> master
-
+    //=========== Displayed Person List Accessors =============================================================
     @Override
     public void updateDisplayedPersonList(Predicate<Person> predicate, Comparator<Person> comparator) {
         if (predicate != null) {
