@@ -185,6 +185,11 @@ Format: `exit`
 
 ## Calendar System
 
+The Calendar System enables users to visually see the events that the 
+user has in store for the current week. Additionally, the user is also
+able to compare and isolate common pockets of free time with any of their contacts 
+to plan activities together.
+
 ### Adding an event
 
 Adds an event to the user's calendar.
@@ -210,6 +215,51 @@ Format `deleteEvent d/DATE s/START_TIME`
 
 Example:
 `deleteEvent d/12/12/2012 s/2200`
+
+### Comparing calendars with AddressBook Contacts
+
+There are two ways for the user to compare calendars with their AddressBook Contacts. 
+Namely, the user can either isolate contacts of interest with their respective index,
+or compare calendars with a group of contacts using their tags.
+
+The resulting pop-up calendar will pop up with the time periods where all parties
+are not available greyed out. The pop-up has to be closed in order for the user to access
+the main application again.
+
+## 1. Comparison by index
+
+Format `compareCalendars <INDEX1> <INDEX2> ...`
+
+* Compare calendar with the contacts at the respective `<INDEX>`
+* `<INDEX>` must be a positive non-zero integer that is smaller than the size of the AddressBook
+* If the `<INDEX>` number provided is invalid, an error will be returned
+
+Example:
+`compareCalendars 1 3 5`
+
+## 2. Comparison by tag
+
+Format `compareGroupCalendars <TAG1> <TAG2> ...`
+
+* Compare calendar with the contacts with the specified `<TAG>`s
+* If all the `<TAG>`s provided are invalid, the resulting pop-up will just display the user's calendar
+
+Example:
+`compareGroupCalendars school friends`
+
+### Import *.ics files (Coming Soon)
+
+User can import *.ics files, which will automatically be integrated into
+their UniMate calendars.
+
+Format: `import <FILE_PATH>`
+
+### View other weeks of Calendar (Coming Soon)
+
+User can view other weeks of their calendar schedule beyond just the
+current week.
+
+Format: `viewWeek <DATE>`
 
 ### Viewing all events (Coming Soon)
 
