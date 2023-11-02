@@ -9,13 +9,18 @@ package swe.context.model.contact;
  * {@link #isValid(String)}.
  */
 public class Phone {
+    /*
+     * Requires starting with at least 3 of digits.
+     */
+    public static final String REGEX_VALID = "^\\d{3,}.*$";
+
     public final String value;
 
     /**
      * Returns true if a given string is a valid phone number.
      */
     public static boolean isValid(String value) {
-        return value.matches("\\d{3,}");
+        return value.matches(Phone.REGEX_VALID);
     }
 
     /**
@@ -43,7 +48,7 @@ public class Phone {
         if (!(other instanceof Phone)) {
             return false;
         }
-        Phone otherPhone = (Phone)other;
+        Phone otherPhone = (Phone) other;
 
         return this.value.equals(otherPhone.value);
     }

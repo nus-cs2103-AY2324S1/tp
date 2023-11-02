@@ -1,5 +1,6 @@
 package swe.context.testutil;
 
+import static swe.context.logic.parser.CliSyntax.PREFIX_ALTERNATE;
 import static swe.context.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static swe.context.logic.parser.CliSyntax.PREFIX_NAME;
 import static swe.context.logic.parser.CliSyntax.PREFIX_NOTE;
@@ -11,6 +12,7 @@ import java.util.Set;
 import swe.context.logic.commands.AddCommand;
 import swe.context.logic.commands.Command;
 import swe.context.logic.commands.EditCommand.EditContactDescriptor;
+import swe.context.model.alternate.AlternateContact;
 import swe.context.model.contact.Contact;
 import swe.context.model.tag.Tag;
 
@@ -35,7 +37,10 @@ public class CommandUtil {
         sb.append(PREFIX_EMAIL + contact.getEmail().value + " ");
         sb.append(PREFIX_NOTE + contact.getNote().value + " ");
         contact.getTags().stream().forEach(
-            s -> sb.append(PREFIX_TAG + s.value + " ")
+                s -> sb.append(PREFIX_TAG + s.value + " ")
+        );
+        contact.getAlternates().stream().forEach(
+                s -> sb.append(PREFIX_ALTERNATE + s.value + " ")
         );
         return sb.toString();
     }
@@ -52,9 +57,17 @@ public class CommandUtil {
         if (descriptor.getTags().isPresent()) {
             Set<Tag> tags = descriptor.getTags().get();
             if (tags.isEmpty()) {
-                sb.append(PREFIX_TAG);
+                sb.append(PREFIX_TAG).append(" ");
             } else {
                 tags.forEach(s -> sb.append(PREFIX_TAG).append(s.value).append(" "));
+            }
+        }
+        if (descriptor.getAlternateContacts().isPresent()) {
+            Set<AlternateContact> alternateContacts = descriptor.getAlternateContacts().get();
+            if (alternateContacts.isEmpty()) {
+                sb.append(PREFIX_ALTERNATE);
+            } else {
+                alternateContacts.forEach(s -> sb.append(PREFIX_ALTERNATE).append(s.value).append(" "));
             }
         }
         return sb.toString();

@@ -10,6 +10,7 @@ import swe.context.commons.core.index.Index;
 import swe.context.commons.util.StringUtil;
 import swe.context.logic.Messages;
 import swe.context.logic.parser.exceptions.ParseException;
+import swe.context.model.alternate.AlternateContact;
 import swe.context.model.contact.Email;
 import swe.context.model.contact.Name;
 import swe.context.model.contact.Note;
@@ -21,8 +22,6 @@ import swe.context.model.tag.Tag;
  */
 public class ParserUtil {
 
-    public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
-
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
      * trimmed.
@@ -31,7 +30,7 @@ public class ParserUtil {
     public static Index parseIndex(String oneBasedIndex) throws ParseException {
         String trimmedIndex = oneBasedIndex.trim();
         if (!StringUtil.isNonZeroUnsignedInteger(trimmedIndex)) {
-            throw new ParseException(MESSAGE_INVALID_INDEX);
+            throw new ParseException(Messages.INVALID_PARSER_INDEX);
         }
         return Index.fromOneBased(Integer.parseInt(trimmedIndex));
     }
@@ -46,7 +45,7 @@ public class ParserUtil {
         requireNonNull(name);
         String trimmedName = name.trim();
         if (!Name.isValid(trimmedName)) {
-            throw new ParseException(Messages.NAME_CONSTRAINTS);
+            throw new ParseException(Messages.NAME_INVALID);
         }
         return new Name(trimmedName);
     }
@@ -61,7 +60,7 @@ public class ParserUtil {
         requireNonNull(phone);
         String trimmedPhone = phone.trim();
         if (!Phone.isValid(trimmedPhone)) {
-            throw new ParseException(Messages.PHONE_CONSTRAINTS);
+            throw new ParseException(Messages.PHONE_INVALID);
         }
         return new Phone(trimmedPhone);
     }
@@ -115,6 +114,25 @@ public class ParserUtil {
     }
 
     /**
+     * Attempts to parse the specified string as a {@link AlternateContact}.
+     *
+     * Trims the specified string as part of parsing.
+     *
+     * @throws ParseException if the specified string is not a valid alternate contact.
+     */
+    public static AlternateContact parseAlternate(String alternateContact) throws ParseException {
+        String trimmed = alternateContact.trim();
+
+        if (!AlternateContact.isValid(trimmed)) {
+            throw new ParseException(
+                    Messages.alternateContactInvalid(trimmed)
+            );
+        }
+
+        return new AlternateContact(trimmed);
+    }
+
+    /**
      * Attempts to parse the specified strings as {@link Tag}s.
      *
      * @param tagNames Tag names.
@@ -127,5 +145,19 @@ public class ParserUtil {
             );
         }
         return tags;
+    }
+
+    /**
+     * Attempts to parse the specified strings as {@link AlternateContact}s.
+     *
+     * @param alternateContactNames AlternateContact names.
+     */
+    public static Set<AlternateContact> parseAlternates(Collection<String> alternateContactNames)
+            throws ParseException {
+        Set<AlternateContact> alternateContacts = new HashSet<>();
+        for (String alternateContactName : alternateContactNames) {
+            alternateContacts.add(parseAlternate(alternateContactName));
+        }
+        return alternateContacts;
     }
 }

@@ -2,17 +2,7 @@ package swe.context.logic.parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static swe.context.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 import static swe.context.testutil.Assert.assertThrows;
-import static swe.context.testutil.TestData.WHITESPACE;
-import static swe.context.testutil.TestData.IndexContact.FIRST_CONTACT;
-import static swe.context.testutil.TestData.Invalid.EMAIL;
-import static swe.context.testutil.TestData.Invalid.NAME;
-import static swe.context.testutil.TestData.Invalid.PHONE;
-import static swe.context.testutil.TestData.Valid.EMAIL_AMY;
-import static swe.context.testutil.TestData.Valid.NAME_AMY;
-import static swe.context.testutil.TestData.Valid.NOTE_BOB;
-import static swe.context.testutil.TestData.Valid.PHONE_AMY;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -21,15 +11,15 @@ import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
+import swe.context.logic.Messages;
 import swe.context.logic.parser.exceptions.ParseException;
+import swe.context.model.alternate.AlternateContact;
 import swe.context.model.contact.Email;
 import swe.context.model.contact.Name;
 import swe.context.model.contact.Note;
 import swe.context.model.contact.Phone;
 import swe.context.model.tag.Tag;
 import swe.context.testutil.TestData;
-
-
 
 public class ParserUtilTest {
 
@@ -40,17 +30,17 @@ public class ParserUtilTest {
 
     @Test
     public void parseIndex_outOfRangeInput_throwsParseException() {
-        assertThrows(ParseException.class, MESSAGE_INVALID_INDEX, ()
+        assertThrows(ParseException.class, Messages.INVALID_PARSER_INDEX, ()
             -> ParserUtil.parseIndex(Long.toString(Integer.MAX_VALUE + 1)));
     }
 
     @Test
     public void parseIndex_validInput_success() throws Exception {
         // No whitespaces
-        assertEquals(FIRST_CONTACT, ParserUtil.parseIndex("1"));
+        assertEquals(TestData.IndexContact.FIRST_CONTACT, ParserUtil.parseIndex("1"));
 
         // Leading and trailing whitespaces
-        assertEquals(FIRST_CONTACT, ParserUtil.parseIndex("  1  "));
+        assertEquals(TestData.IndexContact.FIRST_CONTACT, ParserUtil.parseIndex("  1  "));
     }
 
     @Test
@@ -60,19 +50,19 @@ public class ParserUtilTest {
 
     @Test
     public void parseName_invalidValue_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseName(NAME));
+        assertThrows(ParseException.class, () -> ParserUtil.parseName(TestData.Invalid.NAME));
     }
 
     @Test
     public void parseName_validValueWithoutWhitespace_returnsName() throws Exception {
-        Name expectedName = new Name(NAME_AMY);
-        assertEquals(expectedName, ParserUtil.parseName(NAME_AMY));
+        Name expectedName = new Name(TestData.Valid.NAME_AMY);
+        assertEquals(expectedName, ParserUtil.parseName(TestData.Valid.NAME_AMY));
     }
 
     @Test
     public void parseName_validValueWithWhitespace_returnsTrimmedName() throws Exception {
-        String nameWithWhitespace = WHITESPACE + NAME_AMY + WHITESPACE;
-        Name expectedName = new Name(NAME_AMY);
+        String nameWithWhitespace = TestData.WHITESPACE + TestData.Valid.NAME_AMY + TestData.WHITESPACE;
+        Name expectedName = new Name(TestData.Valid.NAME_AMY);
         assertEquals(expectedName, ParserUtil.parseName(nameWithWhitespace));
     }
 
@@ -83,19 +73,19 @@ public class ParserUtilTest {
 
     @Test
     public void parsePhone_invalidValue_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parsePhone(PHONE));
+        assertThrows(ParseException.class, () -> ParserUtil.parsePhone(TestData.Invalid.PHONE));
     }
 
     @Test
     public void parsePhone_validValueWithoutWhitespace_returnsPhone() throws Exception {
-        Phone expectedPhone = new Phone(PHONE_AMY);
-        assertEquals(expectedPhone, ParserUtil.parsePhone(PHONE_AMY));
+        Phone expectedPhone = new Phone(TestData.Valid.PHONE_AMY);
+        assertEquals(expectedPhone, ParserUtil.parsePhone(TestData.Valid.PHONE_AMY));
     }
 
     @Test
     public void parsePhone_validValueWithWhitespace_returnsTrimmedPhone() throws Exception {
-        String phoneWithWhitespace = WHITESPACE + PHONE_AMY + WHITESPACE;
-        Phone expectedPhone = new Phone(PHONE_AMY);
+        String phoneWithWhitespace = TestData.WHITESPACE + TestData.Valid.PHONE_AMY + TestData.WHITESPACE;
+        Phone expectedPhone = new Phone(TestData.Valid.PHONE_AMY);
         assertEquals(expectedPhone, ParserUtil.parsePhone(phoneWithWhitespace));
     }
 
@@ -106,19 +96,19 @@ public class ParserUtilTest {
 
     @Test
     public void parseEmail_invalidValue_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseEmail(EMAIL));
+        assertThrows(ParseException.class, () -> ParserUtil.parseEmail(TestData.Invalid.EMAIL));
     }
 
     @Test
     public void parseEmail_validValueWithoutWhitespace_returnsEmail() throws Exception {
-        Email expectedEmail = new Email(EMAIL_AMY);
-        assertEquals(expectedEmail, ParserUtil.parseEmail(EMAIL_AMY));
+        Email expectedEmail = new Email(TestData.Valid.EMAIL_AMY);
+        assertEquals(expectedEmail, ParserUtil.parseEmail(TestData.Valid.EMAIL_AMY));
     }
 
     @Test
     public void parseEmail_validValueWithWhitespace_returnsTrimmedEmail() throws Exception {
-        String emailWithWhitespace = WHITESPACE + EMAIL_AMY + WHITESPACE;
-        Email expectedEmail = new Email(EMAIL_AMY);
+        String emailWithWhitespace = TestData.WHITESPACE + TestData.Valid.EMAIL_AMY + TestData.WHITESPACE;
+        Email expectedEmail = new Email(TestData.Valid.EMAIL_AMY);
         assertEquals(expectedEmail, ParserUtil.parseEmail(emailWithWhitespace));
     }
 
@@ -129,14 +119,14 @@ public class ParserUtilTest {
 
     @Test
     public void parseNote_validValueWithoutWhitespace_returnsNote() throws Exception {
-        Note expectedAddress = new Note(NOTE_BOB);
-        assertEquals(expectedAddress, ParserUtil.parseNote(NOTE_BOB));
+        Note expectedAddress = new Note(TestData.Valid.NOTE_BOB);
+        assertEquals(expectedAddress, ParserUtil.parseNote(TestData.Valid.NOTE_BOB));
     }
 
     @Test
     public void parseNote_validValueWithWhitespace_returnsTrimmedNote() throws Exception {
-        String addressWithWhitespace = WHITESPACE + NOTE_BOB + WHITESPACE;
-        Note expectedAddress = new Note(NOTE_BOB);
+        String addressWithWhitespace = TestData.WHITESPACE + TestData.Valid.NOTE_BOB + TestData.WHITESPACE;
+        Note expectedAddress = new Note(TestData.Valid.NOTE_BOB);
         assertEquals(expectedAddress, ParserUtil.parseNote(addressWithWhitespace));
     }
 
@@ -160,7 +150,7 @@ public class ParserUtilTest {
 
     @Test
     public void parseTag_validValueWithWhitespace_returnsTrimmedTag() throws Exception {
-        String tagWithWhitespace = WHITESPACE + TestData.Valid.Tag.ALPHANUMERIC + WHITESPACE;
+        String tagWithWhitespace = TestData.WHITESPACE + TestData.Valid.Tag.ALPHANUMERIC + TestData.WHITESPACE;
         Tag expectedTag = new Tag(TestData.Valid.Tag.ALPHANUMERIC);
         assertEquals(expectedTag, ParserUtil.parseTag(tagWithWhitespace));
     }
@@ -200,5 +190,61 @@ public class ParserUtilTest {
         );
 
         assertEquals(expectedTagSet, actualTagSet);
+    }
+
+    @Test
+    public void parseAlternate_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseAlternate(null));
+    }
+
+    @Test
+    public void parseAlternate_validValueWithoutUnderscore_returnsAlternateContact() throws Exception {
+        assertEquals(new AlternateContact(TestData.Valid.AlternateContact.ALPHANUMERIC),
+                ParserUtil.parseAlternate(TestData.Valid.AlternateContact.ALPHANUMERIC));
+    }
+
+    @Test
+    public void parseAlternate_validValueWithUnderscore_returnsAlternateContact() throws Exception {
+        assertEquals(new AlternateContact(TestData.Valid.AlternateContact.ALPHANUMERIC_UNDERSCORE),
+                ParserUtil.parseAlternate(TestData.Valid.AlternateContact.ALPHANUMERIC_UNDERSCORE));
+    }
+
+    @Test
+    public void parseAlternates_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseAlternates(null));
+    }
+
+    @Test
+    public void parseAlternates_collectionWithInvalidAlternateContacts_throwsParseException() {
+        assertThrows(
+                ParseException.class,
+                () -> {
+                    ParserUtil.parseTags(
+                            Arrays.asList(TestData.Valid.AlternateContact.ALPHANUMERIC,
+                                    TestData.Invalid.AlternateContact.MISSING_SYMBOL)
+                    );
+                }
+        );
+    }
+
+    @Test
+    public void parseAlternates_emptyCollection_returnsEmptySet() throws Exception {
+        assertTrue(ParserUtil.parseAlternates(Collections.emptyList()).isEmpty());
+    }
+
+    @Test
+    public void parseAlternates_collectionWithValidAlternateContacts_returnsAlternateContactSet() throws Exception {
+        Set<AlternateContact> actualAlternateContactSet = ParserUtil.parseAlternates(
+                Arrays.asList(TestData.Valid.AlternateContact.ALPHANUMERIC,
+                        TestData.Valid.AlternateContact.ALPHANUMERIC_UNDERSCORE)
+        );
+        Set<AlternateContact> expectedAlternateContactSet = new HashSet<AlternateContact>(
+                Arrays.asList(
+                        new AlternateContact(TestData.Valid.AlternateContact.ALPHANUMERIC),
+                        new AlternateContact(TestData.Valid.AlternateContact.ALPHANUMERIC_UNDERSCORE)
+                )
+        );
+
+        assertEquals(expectedAlternateContactSet, actualAlternateContactSet);
     }
 }

@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static swe.context.testutil.Assert.assertThrows;
 import static swe.context.testutil.TestData.IndexContact.FIRST_CONTACT;
+import static swe.context.testutil.TestData.IndexContact.SECOND_CONTACT;
 
 import java.util.Arrays;
 import java.util.List;
@@ -18,15 +19,18 @@ import swe.context.logic.commands.DeleteCommand;
 import swe.context.logic.commands.EditCommand;
 import swe.context.logic.commands.EditCommand.EditContactDescriptor;
 import swe.context.logic.commands.ExitCommand;
+import swe.context.logic.commands.FilterCommand;
 import swe.context.logic.commands.FindCommand;
 import swe.context.logic.commands.HelpCommand;
 import swe.context.logic.commands.ListCommand;
 import swe.context.logic.parser.exceptions.ParseException;
 import swe.context.model.contact.Contact;
+import swe.context.model.contact.ContainsTagPredicate;
 import swe.context.model.contact.NameContainsKeywordsPredicate;
 import swe.context.testutil.CommandUtil;
 import swe.context.testutil.ContactBuilder;
 import swe.context.testutil.EditContactDescriptorBuilder;
+
 
 public class InputParserTest {
 
@@ -47,7 +51,24 @@ public class InputParserTest {
     public void parseCommand_delete() throws Exception {
         DeleteCommand command = (DeleteCommand) InputParser.parseCommand(
                 DeleteCommand.COMMAND_WORD + " " + FIRST_CONTACT.getOneBased());
-        assertEquals(new DeleteCommand(FIRST_CONTACT), command);
+        assertEquals(new DeleteCommand(List.of(FIRST_CONTACT)), command);
+    }
+
+    @Test
+    public void parseCommand_deleteMassDelete() throws Exception {
+        DeleteCommand command = (DeleteCommand) InputParser.parseCommand(
+                DeleteCommand.COMMAND_WORD + " " + FIRST_CONTACT.getOneBased()
+                + " " + SECOND_CONTACT.getOneBased());
+        assertEquals(new DeleteCommand(List.of(FIRST_CONTACT, SECOND_CONTACT)), command);
+    }
+
+    @Test
+    public void parseCommand_deleteDuplicateIndices() throws Exception {
+        DeleteCommand command = (DeleteCommand) InputParser.parseCommand(
+                DeleteCommand.COMMAND_WORD + " " + FIRST_CONTACT.getOneBased()
+                + " " + FIRST_CONTACT.getOneBased()
+                + " " + FIRST_CONTACT.getOneBased());
+        assertEquals(new DeleteCommand(List.of(FIRST_CONTACT)), command);
     }
 
     @Test
@@ -63,6 +84,14 @@ public class InputParserTest {
     public void parseCommand_exit() throws Exception {
         assertTrue(InputParser.parseCommand(ExitCommand.COMMAND_WORD) instanceof ExitCommand);
         assertTrue(InputParser.parseCommand(ExitCommand.COMMAND_WORD + " 3") instanceof ExitCommand);
+    }
+
+    @Test
+    public void parseCommand_filter() throws Exception {
+        String keyword = "foobar";
+        FilterCommand command = (FilterCommand) InputParser.parseCommand(
+                FilterCommand.COMMAND_WORD + " " + keyword);
+        assertEquals(new FilterCommand(new ContainsTagPredicate(keyword)), command);
     }
 
     @Test

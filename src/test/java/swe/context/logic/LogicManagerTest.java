@@ -2,10 +2,6 @@ package swe.context.logic;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static swe.context.testutil.Assert.assertThrows;
-import static swe.context.testutil.TestData.Valid.EMAIL_DESC_AMY;
-import static swe.context.testutil.TestData.Valid.NAME_DESC_AMY;
-import static swe.context.testutil.TestData.Valid.NOTE_DESC_AMY;
-import static swe.context.testutil.TestData.Valid.PHONE_DESC_AMY;
 
 import java.io.IOException;
 import java.nio.file.AccessDeniedException;
@@ -30,8 +26,6 @@ import swe.context.storage.JsonSettingsStorage;
 import swe.context.storage.StorageManager;
 import swe.context.testutil.ContactBuilder;
 import swe.context.testutil.TestData;
-
-
 
 public class LogicManagerTest {
     private static final IOException DUMMY_IO_EXCEPTION = new IOException("dummy IO exception");
@@ -61,7 +55,7 @@ public class LogicManagerTest {
     @Test
     public void execute_commandExecutionError_throwsCommandException() {
         String deleteCommand = "delete 9";
-        assertCommandException(deleteCommand, Messages.INVALID_CONTACT_DISPLAYED_INDEX);
+        assertCommandException(deleteCommand, Messages.INVALID_DELETE_INDEX);
     }
 
     @Test
@@ -72,14 +66,14 @@ public class LogicManagerTest {
 
     @Test
     public void execute_storageThrowsIoException_throwsCommandException() {
-        assertCommandFailureForExceptionFromStorage(DUMMY_IO_EXCEPTION, String.format(
-                Messages.FILE_OPS_ERROR_FORMAT, DUMMY_IO_EXCEPTION.getMessage()));
+        assertCommandFailureForExceptionFromStorage(DUMMY_IO_EXCEPTION,
+                Messages.fileOpsErrorFormat(DUMMY_IO_EXCEPTION.getMessage()));
     }
 
     @Test
     public void execute_storageThrowsAdException_throwsCommandException() {
-        assertCommandFailureForExceptionFromStorage(DUMMY_AD_EXCEPTION, String.format(
-                Messages.FILE_OPS_PERMISSION_ERROR_FORMAT, DUMMY_AD_EXCEPTION.getMessage()));
+        assertCommandFailureForExceptionFromStorage(DUMMY_AD_EXCEPTION,
+                Messages.fileOpsPermissionErrorFormat(DUMMY_AD_EXCEPTION.getMessage()));
     }
 
     @Test
@@ -165,9 +159,10 @@ public class LogicManagerTest {
         logic = new LogicManager(model, storage);
 
         // Triggers the saveContacts method by executing an add command
-        String addCommand = AddCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY
-                + EMAIL_DESC_AMY + NOTE_DESC_AMY;
-        Contact expectedContact = new ContactBuilder(TestData.Valid.Contact.AMY).withTags().build();
+        String addCommand = AddCommand.COMMAND_WORD + TestData.Valid.NAME_DESC_AMY + TestData.Valid.PHONE_DESC_AMY
+                + TestData.Valid.EMAIL_DESC_AMY + TestData.Valid.NOTE_DESC_AMY;
+        Contact expectedContact =
+                new ContactBuilder(TestData.Valid.Contact.AMY).withTags().withAlternateContacts().build();
         ModelManager expectedModel = new ModelManager();
         expectedModel.addContact(expectedContact);
         assertCommandFailure(addCommand, CommandException.class, expectedMessage, expectedModel);

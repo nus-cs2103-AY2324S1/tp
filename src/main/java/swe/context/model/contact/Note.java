@@ -27,7 +27,7 @@ public class Note {
         if (!(other instanceof Note)) {
             return false;
         }
-        Note otherNote = (Note)other;
+        Note otherNote = (Note) other;
 
         return this.value.equals(otherNote.value);
     }

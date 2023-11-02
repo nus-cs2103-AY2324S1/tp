@@ -48,7 +48,7 @@ public final class Tag {
         if (!(other instanceof Tag)) {
             return false;
         }
-        Tag otherTag = (Tag)other;
+        Tag otherTag = (Tag) other;
 
         return this.value.equals(otherTag.value);
     }
