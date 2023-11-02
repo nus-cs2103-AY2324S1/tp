@@ -2,7 +2,7 @@ package seedu.application.logic.commands;
 
 import static seedu.application.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.application.logic.commands.CommandTestUtil.showJobAtIndex;
-import static seedu.application.testutil.TypicalIndexes.INDEX_FIRST_JOB;
+import static seedu.application.testutil.TypicalIndexes.INDEX_FIRST;
 import static seedu.application.testutil.TypicalJobs.getTypicalApplicationBook;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -34,7 +34,7 @@ public class ListCommandTest {
 
     @Test
     public void execute_listIsFiltered_showsEverything() {
-        showJobAtIndex(model, INDEX_FIRST_JOB);
+        showJobAtIndex(model, INDEX_FIRST);
         String expectedMessage = String.format(ListCommand.MESSAGE_SUCCESS, 7);
         assertCommandSuccess(new ListCommand(), model, expectedMessage, expectedModel);
     }

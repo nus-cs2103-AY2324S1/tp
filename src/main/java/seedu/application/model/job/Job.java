@@ -121,8 +121,8 @@ public class Job {
      * Deletes an interview in the list of interviews for a job.
      * The interview must exist for the job.
      */
-    public void deleteInterview(Index index) {
-        interviews.remove(index.getZeroBased());
+    public void deleteInterview(Interview interview) {
+        interviews.remove(interview);
     }
 
     /**

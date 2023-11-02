@@ -7,6 +7,7 @@ import javafx.collections.ObservableList;
 import seedu.application.commons.core.GuiSettings;
 import seedu.application.model.job.FieldComparator;
 import seedu.application.model.job.Job;
+import seedu.application.model.job.interview.Interview;
 
 /**
  * The API of the Model component.
@@ -67,6 +68,12 @@ public interface Model {
      * The job must exist in the application book.
      */
     void deleteJob(Job target);
+
+    /**
+     * Deletes the given interview.
+     * The interview must exist in the application book.
+     */
+    void deleteInterview(Job job, Interview interview);
 
     /**
      * Adds the given job.

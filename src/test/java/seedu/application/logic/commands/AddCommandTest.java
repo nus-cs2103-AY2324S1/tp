@@ -22,6 +22,7 @@ import seedu.application.model.ReadOnlyApplicationBook;
 import seedu.application.model.ReadOnlyUserPrefs;
 import seedu.application.model.job.FieldComparator;
 import seedu.application.model.job.Job;
+import seedu.application.model.job.interview.Interview;
 import seedu.application.testutil.JobBuilder;
 
 public class AddCommandTest {
@@ -76,7 +77,7 @@ public class AddCommandTest {
         assertNotEquals(addChefCommand, addCleanerCommand);
 
         // null -> returns false
-        assertNotEquals(null, addCleanerCommand);
+        assertNotEquals(addCleanerCommand, null);
     }
 
     @Test
@@ -142,6 +143,10 @@ public class AddCommandTest {
 
         @Override
         public void deleteJob(Job target) {
+            throw new AssertionError("This method should not be called.");
+        }
+        @Override
+        public void deleteInterview(Job job, Interview interview) {
             throw new AssertionError("This method should not be called.");
         }
 

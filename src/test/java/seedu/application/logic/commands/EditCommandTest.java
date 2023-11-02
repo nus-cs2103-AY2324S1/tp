@@ -11,8 +11,8 @@ import static seedu.application.logic.commands.CommandTestUtil.VALID_ROLE_CLEANE
 import static seedu.application.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.application.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.application.logic.commands.CommandTestUtil.showJobAtIndex;
-import static seedu.application.testutil.TypicalIndexes.INDEX_FIRST_JOB;
-import static seedu.application.testutil.TypicalIndexes.INDEX_SECOND_JOB;
+import static seedu.application.testutil.TypicalIndexes.INDEX_FIRST;
+import static seedu.application.testutil.TypicalIndexes.INDEX_SECOND;
 import static seedu.application.testutil.TypicalJobs.getTypicalApplicationBook;
 
 import org.junit.jupiter.api.Test;
@@ -39,7 +39,7 @@ public class EditCommandTest {
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
         Job editedJob = new JobBuilder().build();
         EditJobDescriptor descriptor = new EditJobDescriptorBuilder(editedJob).build();
-        EditCommand editCommand = new EditCommand(INDEX_FIRST_JOB, descriptor);
+        EditCommand editCommand = new EditCommand(INDEX_FIRST, descriptor);
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_JOB_SUCCESS, Messages.format(editedJob));
 
@@ -91,8 +91,8 @@ public class EditCommandTest {
 
     @Test
     public void execute_noFieldSpecifiedUnfilteredList_success() {
-        EditCommand editCommand = new EditCommand(INDEX_FIRST_JOB, new EditJobDescriptor());
-        Job editedJob = model.getFilteredJobList().get(INDEX_FIRST_JOB.getZeroBased());
+        EditCommand editCommand = new EditCommand(INDEX_FIRST, new EditJobDescriptor());
+        Job editedJob = model.getFilteredJobList().get(INDEX_FIRST.getZeroBased());
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_JOB_SUCCESS, Messages.format(editedJob));
 
@@ -103,11 +103,11 @@ public class EditCommandTest {
 
     @Test
     public void execute_filteredList_success() {
-        showJobAtIndex(model, INDEX_FIRST_JOB);
+        showJobAtIndex(model, INDEX_FIRST);
 
-        Job jobInFilteredList = model.getFilteredJobList().get(INDEX_FIRST_JOB.getZeroBased());
+        Job jobInFilteredList = model.getFilteredJobList().get(INDEX_FIRST.getZeroBased());
         Job editedJob = new JobBuilder(jobInFilteredList).withRole(VALID_ROLE_CLEANER).build();
-        EditCommand editCommand = new EditCommand(INDEX_FIRST_JOB,
+        EditCommand editCommand = new EditCommand(INDEX_FIRST,
             new EditJobDescriptorBuilder().withRole(VALID_ROLE_CLEANER).build());
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_JOB_SUCCESS, Messages.format(editedJob));
@@ -120,20 +120,20 @@ public class EditCommandTest {
 
     @Test
     public void execute_duplicateJobUnfilteredList_failure() {
-        Job firstJob = model.getFilteredJobList().get(INDEX_FIRST_JOB.getZeroBased());
+        Job firstJob = model.getFilteredJobList().get(INDEX_FIRST.getZeroBased());
         EditJobDescriptor descriptor = new EditJobDescriptorBuilder(firstJob).build();
-        EditCommand editCommand = new EditCommand(INDEX_SECOND_JOB, descriptor);
+        EditCommand editCommand = new EditCommand(INDEX_SECOND, descriptor);
 
         assertCommandFailure(editCommand, model, EditCommand.MESSAGE_DUPLICATE_JOB);
     }
 
     @Test
     public void execute_duplicateJobFilteredList_failure() {
-        showJobAtIndex(model, INDEX_FIRST_JOB);
+        showJobAtIndex(model, INDEX_FIRST);
 
         // edit job in filtered list into a duplicate in application book
-        Job jobInList = model.getApplicationBook().getJobList().get(INDEX_SECOND_JOB.getZeroBased());
-        EditCommand editCommand = new EditCommand(INDEX_FIRST_JOB,
+        Job jobInList = model.getApplicationBook().getJobList().get(INDEX_SECOND.getZeroBased());
+        EditCommand editCommand = new EditCommand(INDEX_FIRST,
             new EditJobDescriptorBuilder(jobInList).build());
 
         assertCommandFailure(editCommand, model, EditCommand.MESSAGE_DUPLICATE_JOB);
@@ -154,8 +154,8 @@ public class EditCommandTest {
      */
     @Test
     public void execute_invalidJobIndexFilteredList_failure() {
-        showJobAtIndex(model, INDEX_FIRST_JOB);
-        Index outOfBoundIndex = INDEX_SECOND_JOB;
+        showJobAtIndex(model, INDEX_FIRST);
+        Index outOfBoundIndex = INDEX_SECOND;
         // ensures that outOfBoundIndex is still in bounds of application book list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getApplicationBook().getJobList().size());
 
@@ -167,11 +167,11 @@ public class EditCommandTest {
 
     @Test
     public void equals() {
-        final EditCommand standardCommand = new EditCommand(INDEX_FIRST_JOB, DESC_CHEF);
+        final EditCommand standardCommand = new EditCommand(INDEX_FIRST, DESC_CHEF);
 
         // same values -> returns true
         EditJobDescriptor copyDescriptor = new EditJobDescriptor(DESC_CHEF);
-        EditCommand commandWithSameValues = new EditCommand(INDEX_FIRST_JOB, copyDescriptor);
+        EditCommand commandWithSameValues = new EditCommand(INDEX_FIRST, copyDescriptor);
         assertEquals(standardCommand, commandWithSameValues);
 
         // same object -> returns true
@@ -184,10 +184,10 @@ public class EditCommandTest {
         assertNotEquals(standardCommand, new ClearCommand());
 
         // different index -> returns false
-        assertNotEquals(standardCommand, new EditCommand(INDEX_SECOND_JOB, DESC_CHEF));
+        assertNotEquals(standardCommand, new EditCommand(INDEX_SECOND, DESC_CHEF));
 
         // different descriptor -> returns false
-        assertNotEquals(standardCommand, new EditCommand(INDEX_FIRST_JOB, DESC_CLEANER));
+        assertNotEquals(standardCommand, new EditCommand(INDEX_FIRST, DESC_CLEANER));
     }
 
     @Test
