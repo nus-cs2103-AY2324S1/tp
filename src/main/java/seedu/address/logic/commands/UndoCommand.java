@@ -37,7 +37,7 @@ public class UndoCommand extends Command {
             throw new CommandException(MESSAGE_NO_COMMAND_TO_UNDO_ERROR);
         } else {
             model.undoHistory();
-            return new CommandResult(MESSAGE_UNDO_COMMAND_SUCCESS, false, false, false);
+            return new CommandResult(MESSAGE_UNDO_COMMAND_SUCCESS, false, false, false, false);
         }
     }
 

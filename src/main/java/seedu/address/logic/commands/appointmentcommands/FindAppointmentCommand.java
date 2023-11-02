@@ -11,25 +11,25 @@ import seedu.address.model.appointment.appointmentfilters.FindPatientFilter;
 
 
 /**
- * The FindPatientAppointmentCommand is used to find patient appointments by their names.
+ * The FindAppointmentCommand is used to find patient appointments by their names.
  * This command allows listing all appointments belonging to patients whose names
  * match the provided keywords. The keywords are case-insensitive and may contain
  * only part of the patient's name to retrieve their appointments. Multiple names
  * are allowed.
  **/
-public class FindPatientAppointmentCommand extends Command {
+public class FindAppointmentCommand extends Command {
 
-    public static final String COMMAND_WORD = "appointment-find";
+    public static final String COMMAND_WORD = "find-appointment";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Lists all appointments belonging to the patients"
-            + " whose names are provided. The keywords are case-insensitive and may just contain part of the patient's"
+            + " whose names are provided.\nThe keywords are case-insensitive and may just contain part of the patient's"
             + "name to retrieve their appointments. Multiple names are allowed. \n"
-            + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
-            + "Example: " + COMMAND_WORD + " JOHN david leo";
+            + "Parameters: PATIENT\n"
+            + "Example: " + COMMAND_WORD + " alex david";
 
     private final FindPatientFilter predicate;
 
-    public FindPatientAppointmentCommand(FindPatientFilter predicate) {
+    public FindAppointmentCommand(FindPatientFilter predicate) {
         this.predicate = predicate;
     }
 

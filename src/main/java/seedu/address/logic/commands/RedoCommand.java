@@ -45,7 +45,7 @@ public class RedoCommand extends Command {
             throw new CommandException(MESSAGE_NO_COMMAND_TO_REDO_ERROR);
         } else {
             model.redoHistory();
-            return new CommandResult(MESSAGE_REDO_COMMAND_SUCCESS, false, false, false);
+            return new CommandResult(MESSAGE_REDO_COMMAND_SUCCESS, false, false, false, false);
         }
     }
 

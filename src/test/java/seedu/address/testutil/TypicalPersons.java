@@ -1,5 +1,11 @@
 package seedu.address.testutil;
 
+import static seedu.address.logic.commands.CommandTestUtil.TYPICAL_ILLNESS_1;
+import static seedu.address.logic.commands.CommandTestUtil.TYPICAL_ILLNESS_2;
+import static seedu.address.logic.commands.CommandTestUtil.TYPICAL_ILLNESS_3;
+import static seedu.address.logic.commands.CommandTestUtil.TYPICAL_ILLNESS_4;
+import static seedu.address.logic.commands.CommandTestUtil.TYPICAL_ILLNESS_5;
+import static seedu.address.logic.commands.CommandTestUtil.TYPICAL_ILLNESS_6;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_BIRTHDATE_AMY;
@@ -32,18 +38,6 @@ public class TypicalPersons {
             .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")
             .withPhone("94351253").withBirthdate("1999/01/12")
             .withTags("friends").build();
-
-    public static final Person ALICE_WITH_CANCER = new PersonBuilder().withName("Alice Pauline")
-            .withGender("FEMALE")
-            .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")
-            .withPhone("94351253").withBirthdate("1999/01/12")
-            .withTags("friends").build();
-
-    public static final Person ALICE_WITHOUT_FRIENDS = new PersonBuilder().withName("Alice Pauline")
-            .withGender("FEMALE")
-            .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")
-            .withPhone("94351253").withBirthdate("1999/01/12")
-            .withTags("friends").build();
     public static final Person BENSON = new PersonBuilder().withName("Benson Meier")
             .withGender("MALE")
             .withAddress("311, Clementi Ave 2, #02-25")
@@ -52,7 +46,7 @@ public class TypicalPersons {
             .withTags("owesMoney", "friends").build();
     public static final Person CARL = new PersonBuilder().withName("Carl Kurz").withGender("MALE")
             .withPhone("95352563").withEmail("heinz@example.com").withBirthdate("1987/01/02")
-            .withAddress("wall street").build();
+            .withAddress("wall street").withTags("malaria").build();
     public static final Person DANIEL = new PersonBuilder().withName("Daniel Meier").withGender("MALE")
             .withPhone("87652533").withEmail("cornelia@example.com").withBirthdate("2003/03/28")
             .withAddress("10th street").withTags("friends").build();
@@ -100,5 +94,20 @@ public class TypicalPersons {
 
     public static List<Person> getTypicalPersons() {
         return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));
+    }
+
+    public static AddressBook getTypicalAddressBookWithIllness() {
+        AddressBook ab = new AddressBook();
+        String[] nameArray = {"ALICE", "BENSON", "CARL", "DANIEL", "ELLE", "FIONA", "GEORGE"};
+        String[] illnessArray = {TYPICAL_ILLNESS_1, TYPICAL_ILLNESS_2, TYPICAL_ILLNESS_3, TYPICAL_ILLNESS_4,
+            TYPICAL_ILLNESS_5, TYPICAL_ILLNESS_6};
+        int counter = 0;
+        for (int i = 0; i < 6; i++) {
+            PersonBuilder pb = new PersonBuilder();
+            Person tempPerson = pb.withName(nameArray[counter]).withTags(illnessArray[counter]).build();
+            ab.addPerson(tempPerson);
+            counter++;
+        }
+        return ab;
     }
 }

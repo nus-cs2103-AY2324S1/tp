@@ -18,6 +18,7 @@ import seedu.address.model.appointment.Appointment;
 import seedu.address.model.appointment.AppointmentDescription;
 import seedu.address.model.appointment.AppointmentTime;
 import seedu.address.model.person.Person;
+import seedu.address.model.tag.PriorityTag;
 
 /**
  * Reschedules an existing appointment
@@ -29,7 +30,7 @@ public class RescheduleCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Reschedules the appointment identified "
             + "by the index number used in the displayed appointment list.\n"
             + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: INDEX (index must be a positive integer) "
+            + "Parameters: INDEX "
             + PREFIX_APPOINTMENT_START + "START "
             + PREFIX_APPOINTMENT_END + "END\n"
             + "Example: " + COMMAND_WORD + " 1 "
@@ -37,8 +38,6 @@ public class RescheduleCommand extends Command {
             + PREFIX_APPOINTMENT_END + "2023/05/02 11:00 ";
 
     public static final String MESSAGE_SUCCESS = "Patient appointment rescheduled: %1$s";
-    public static final String MESSAGE_NO_APPOINTMENT_FOUND = "No such appointment exists in the records";
-    public static final String MESSAGE_DUPLICATE_APPOINTMENT = "This appointment already exists in the records";
 
     private final Index index;
 
@@ -83,7 +82,7 @@ public class RescheduleCommand extends Command {
 
         model.setAppointment(appointmentToReschedule, rescheduledAppointment);
         return new CommandResult(
-                String.format(MESSAGE_SUCCESS, Messages.format(rescheduledAppointment)), false, false, true);
+                String.format(MESSAGE_SUCCESS, Messages.format(rescheduledAppointment)), false, false, false, true);
     }
 
     private static Appointment createRescheduledAppointment(Appointment appointmentToReschedule,
@@ -92,7 +91,9 @@ public class RescheduleCommand extends Command {
 
         Person patient = appointmentToReschedule.getPerson();
         AppointmentDescription description = appointmentToReschedule.getAppointmentDescription();
-        return new Appointment(patient, newTime, description);
+        PriorityTag priorityTag = appointmentToReschedule.getPriorityTag();
+
+        return new Appointment(patient, newTime, description, priorityTag);
     }
     @Override
     public boolean equals(Object other) {

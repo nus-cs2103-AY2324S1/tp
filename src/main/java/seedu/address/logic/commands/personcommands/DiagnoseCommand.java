@@ -29,14 +29,14 @@ public class DiagnoseCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Diagnoses illnesses of the patient identified "
             + "by the index number used in the displayed person list. "
             + "Existing values will not be overwritten by the input values.\n"
-            + "Parameters: INDEX (index must be a positive integer) "
-            + "[" + PREFIX_ILLNESSES + "ILLNESSES] (input multiple illnesses with a comma between each illness)...\n"
+            + "You can input multiple illnesses with a comma between each illness.\n"
+            + "Parameters: INDEX "
+            + PREFIX_ILLNESSES + "ILLNESSES\n"
             + "Example: " + COMMAND_WORD
             + " 1 "
             + PREFIX_ILLNESSES + "Fever, Headache";
 
-    public static final String MESSAGE_DIAGNOSE_PERSON_SUCCESS = "Diagnosed Patient: %1$s";
-    public static final String MESSAGE_NOT_DIAGNOSED = "At least one field to edit must be provided.";
+    public static final String MESSAGE_DIAGNOSE_PERSON_SUCCESS = "Diagnosed patient %1$s: %2$s\n";
     public static final String MESSAGE_ALREADY_DIAGNOSED = "The following illnesses have already "
             + "been diagnosed before: ";
     private final Index targetIndex;
@@ -70,23 +70,26 @@ public class DiagnoseCommand extends Command {
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
 
         String duplicateIllnesses = getDuplicateIllnesses(personToDiagnose, illnesses);
+        String addedIllnesses = getAddedIllnesses(personToDiagnose, illnesses);
 
-        StringBuilder feedbackToUser = new StringBuilder(String.format(MESSAGE_DIAGNOSE_PERSON_SUCCESS,
-                Messages.format(diagnosedPerson)));
+        StringBuilder feedbackToUser = new StringBuilder();
+        if (!addedIllnesses.isEmpty()) {
+            feedbackToUser.append(String.format(MESSAGE_DIAGNOSE_PERSON_SUCCESS,
+                    diagnosedPerson.getName(), addedIllnesses));
+        }
         if (!duplicateIllnesses.isEmpty()) {
-            feedbackToUser.append("\n");
             feedbackToUser.append(MESSAGE_ALREADY_DIAGNOSED);
             feedbackToUser.append(duplicateIllnesses);
         }
-        return new CommandResult(feedbackToUser.toString(),
-                false, false, true);
+
+        return new CommandResult(feedbackToUser.toString(), false, false, false, true);
     }
 
     /**
      * Creates and returns a {@code Person} with the details of {@code personToEdit}
      * edited with {@code illnesses}.
      */
-    private static Person createDiagnosedPerson(Person personToEdit, Set<Tag> illnesses) throws CommandException {
+    private static Person createDiagnosedPerson(Person personToEdit, Set<Tag> illnesses) {
         assert personToEdit != null;
 
         Set<Tag> updatedTags = new HashSet<>();
@@ -97,7 +100,21 @@ public class DiagnoseCommand extends Command {
                 personToEdit.getPhone(), personToEdit.getEmail(), personToEdit.getAddress(), updatedTags);
     }
 
-    private static String getDuplicateIllnesses(Person personToEdit, Set<Tag> illnesses) throws CommandException {
+    private static String getAddedIllnesses(Person personToEdit, Set<Tag> illnesses) {
+        assert personToEdit != null;
+
+        StringBuilder addedTags = new StringBuilder();
+
+        for (Tag tag: illnesses) {
+            if (!personToEdit.getTags().contains(tag)) {
+                addedTags.append(tag);
+            }
+        }
+
+        return addedTags.toString();
+    }
+
+    private static String getDuplicateIllnesses(Person personToEdit, Set<Tag> illnesses) {
         assert personToEdit != null;
 
         StringBuilder duplicateTags = new StringBuilder();

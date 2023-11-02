@@ -103,15 +103,14 @@ public class UniqueAppointmentList implements Iterable<Appointment> {
     }
 
     /**
-     * Replaces the current list with a sorted list based on delivery status in ascending order.
+     * Replaces the current list with a sorted list based on attribute in isAscending order
      */
-    public void sort() {
-        internalList.sort(new Comparator<Appointment>() {
-            @Override
-            public int compare(Appointment appointment1, Appointment appointment2) {
-                return appointment1.compareTo(appointment2);
-            }
-        });
+    public void sort(boolean isAscending, String attribute) {
+        if (attribute.equals("time")) {
+            sortByDateAndTime(isAscending);
+        } else if (attribute.equals("priority")) {
+            sortByPriority(isAscending);
+        }
     }
 
     /**
@@ -166,5 +165,29 @@ public class UniqueAppointmentList implements Iterable<Appointment> {
             }
         }
         return true;
+    }
+    /**
+     * Sorts Appointment List by date in order of {@code isAscending}
+     * @param isAscending
+     */
+    private void sortByDateAndTime(boolean isAscending) {
+        if (isAscending) {
+            internalList.sort(Comparator.naturalOrder());
+        } else {
+            internalList.sort((appointment1, appointment2) -> -appointment1.compareTo(appointment2));
+        }
+    }
+    /**
+     * Sorts Appointment List by priority in order of {@code isAscending}
+     * @param isAscending
+     */
+    public void sortByPriority(boolean isAscending) {
+        if (isAscending) {
+            internalList.sort(
+                    Comparator.comparing(Appointment::getPriorityTag));
+        } else {
+            internalList.sort((appointment1, appointment2) ->
+                    -appointment1.getPriorityTag().compareTo(appointment2.getPriorityTag()));
+        }
     }
 }

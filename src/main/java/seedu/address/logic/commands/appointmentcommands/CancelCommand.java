@@ -20,7 +20,7 @@ public class CancelCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Cancel the appointment with the corresponding appointment id.\n"
-            + "Parameters: INDEX (index must be a positive integer)\n"
+            + "Parameters: INDEX\n"
             + "Example: " + COMMAND_WORD + " 3";
 
     public static final String MESSAGE_CANCEL_APPOINTMENT_SUCCESS = "Cancelled Appointment: %1$s";
@@ -43,7 +43,7 @@ public class CancelCommand extends Command {
         Appointment appointmentToCancel = lastShownList.get(targetIndex.getZeroBased());
         model.deleteAppointment(appointmentToCancel);
         return new CommandResult(String.format(MESSAGE_CANCEL_APPOINTMENT_SUCCESS,
-                Messages.format(appointmentToCancel)), false, false, true);
+                Messages.format(appointmentToCancel)), false, false, false, true);
     }
 
     @Override

@@ -57,18 +57,20 @@ public class UndoCommandTest {
 
     private static final String SAMPLE_SCHEDULE_COMMAND = "schedule patient=John Doe "
             + "start=2023/10/20 12:00 end=2023/10/20 13:00 "
-            + "description=Follow up on Chest X-Ray ";
+            + "description=Follow up on Chest X-Ray "
+            + "priority=high";
 
     private static final String SAMPLE_SCHEDULE_ANCIENT_APPOINTMENT_COMMAND = "schedule patient=John Doe "
             + "start=1800/10/20 12:00 end=1800/10/20 13:00 "
-            + "description=Injuries from getting stoned ";
+            + "description=Injuries from getting stoned "
+            + "priority=medium";
 
     private static final String SAMPLE_TODAY_COMMAND = "today";
 
     private static final String SAMPLE_UPCOMING_COMMAND = "today";
-    private static final String SAMPLE_FIND_PATIENT_APPOINTMENT_COMMAND = "appointment-find john";
+    private static final String SAMPLE_FIND_PATIENT_APPOINTMENT_COMMAND = "find-appointment john";
 
-    private static final String SAMPLE_SORT_COMMAND = "sort";
+    private static final String SAMPLE_SORT_COMMAND = "sort asc by=time";
 
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~MISC COMMANDS~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     private static final String SAMPLE_UNDO_COMMAND = "undo";
@@ -306,8 +308,8 @@ public class UndoCommandTest {
     }
 
     /**
-     * Test undo functionality with list command.
-     * List command cannot be undone
+     * Test undo functionality with Patients command.
+     * Patients command cannot be undone
      */
     @Test
     public void execute_undoListCommand_success() throws CommandException, ParseException {
@@ -377,7 +379,7 @@ public class UndoCommandTest {
 
     /**
      * Test undo functionality with find patient appointment command.
-     * Find patient appointment command cannot be undone
+     * Find appointment command cannot be undone
      */
     @Test
     public void execute_undoAppointmentFindCommand_success() throws CommandException, ParseException {

@@ -28,15 +28,15 @@ public class UndiagnoseCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Undiagnoses illnesses of the patient identified "
             + "by the index number used in the displayed person list. \n"
-            + "Parameters: INDEX (index must be a positive integer) "
-            + "[" + PREFIX_ILLNESSES + "ILLNESSES] (input multiple illnesses with a comma between each illness)...\n"
+            + "You can input multiple illnesses with a comma between each illness.\n"
+            + "Parameters: INDEX "
+            + PREFIX_ILLNESSES + "ILLNESSES\n"
             + "Example: " + COMMAND_WORD
             + " 1 "
             + PREFIX_ILLNESSES + "Fever, Headache";
 
-    public static final String MESSAGE_UNDIAGNOSE_PERSON_SUCCESS = "Undiagnosed Patient: %1$s";
-    public static final String MESSAGE_NOT_DIAGNOSED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_ILLNESS_NOT_THERE = "The following illnesses were not diagnosed before";
+    public static final String MESSAGE_UNDIAGNOSE_PERSON_SUCCESS = "Undiagnosed patient %1$s: %2$s\n";
+    public static final String MESSAGE_ILLNESS_NOT_THERE = "The following illnesses were not diagnosed before: ";
     private final Index targetIndex;
     private final Set<Tag> illnesses;
 
@@ -68,16 +68,19 @@ public class UndiagnoseCommand extends Command {
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
 
         String illnessesNotOriginallyThere = getIllnessesNotOriginallyThere(personToUndiagnose, illnesses);
-        StringBuilder feedbackToUser = new StringBuilder(String.format(MESSAGE_UNDIAGNOSE_PERSON_SUCCESS,
-                Messages.format(undiagnosedPerson)));
+        String illnessesOriginallyThere = getIllnessesOriginallyThere(personToUndiagnose, illnesses);
 
+        StringBuilder feedbackToUser = new StringBuilder();
+        if (!illnessesOriginallyThere.isEmpty()) {
+            feedbackToUser.append(String.format(MESSAGE_UNDIAGNOSE_PERSON_SUCCESS,
+                    undiagnosedPerson.getName(), illnessesOriginallyThere));
+        }
         if (!illnessesNotOriginallyThere.isEmpty()) {
-            feedbackToUser.append("\n");
             feedbackToUser.append(MESSAGE_ILLNESS_NOT_THERE);
             feedbackToUser.append(illnessesNotOriginallyThere);
         }
-        return new CommandResult(feedbackToUser.toString(),
-                false, false, true);
+
+        return new CommandResult(feedbackToUser.toString(), false, false, false, true);
     }
 
     /**
@@ -95,8 +98,21 @@ public class UndiagnoseCommand extends Command {
                 personToEdit.getPhone(), personToEdit.getEmail(), personToEdit.getAddress(), updatedTags);
     }
 
-    private static String getIllnessesNotOriginallyThere(Person personToEdit,
-                                                         Set<Tag> illnesses) throws CommandException {
+    private static String getIllnessesOriginallyThere(Person personToEdit, Set<Tag> illnesses) {
+        assert personToEdit != null;
+
+        StringBuilder tagsOriginallyInside = new StringBuilder();
+
+        for (Tag tag: illnesses) {
+            if (personToEdit.getTags().contains(tag)) {
+                tagsOriginallyInside.append(tag);
+            }
+        }
+
+        return tagsOriginallyInside.toString();
+    }
+
+    private static String getIllnessesNotOriginallyThere(Person personToEdit, Set<Tag> illnesses) {
         assert personToEdit != null;
 
         StringBuilder tagsNotOriginallyInside = new StringBuilder();
@@ -109,6 +125,7 @@ public class UndiagnoseCommand extends Command {
 
         return tagsNotOriginallyInside.toString();
     }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {

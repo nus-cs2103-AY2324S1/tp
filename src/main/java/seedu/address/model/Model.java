@@ -151,7 +151,7 @@ public interface Model {
     void updateFilteredAppointmentList(Predicate<Appointment> predicate);
 
     /**
-     * Sorts appointments in ascending order.
+     * Sorts appointments in {@code isAscending} order of {@code attribute}.
      */
-    void sortAppointmentList();
+    void sortAppointmentList(boolean isAscending, String attribute);
 }
