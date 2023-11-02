@@ -121,9 +121,9 @@ public class AddressBook implements ReadOnlyAddressBook {
     /**
      * Returns true if the musician already exists in the band.
      */
-    public boolean hasMusicianInBand(int bandIndex, Musician musician) {
+    public boolean hasMusicianInBand(Band band, Musician musician) {
         requireNonNull(musician);
-        return bands.hasMusician(bandIndex, musician);
+        return bands.hasMusician(band, musician);
     }
 
     /**
@@ -141,6 +141,15 @@ public class AddressBook implements ReadOnlyAddressBook {
         requireNonNull(bandIndex);
         requireNonNull(musician);
         bands.addMusician(bandIndex, musician);
+    }
+
+    /**
+     * Removes a musician from a band.
+     */
+    public void removeMusicianFromBand(Band band, Musician musician) {
+        requireNonNull(band);
+        requireNonNull(musician);
+        bands.removeMusician(band, musician);
     }
 
     /**

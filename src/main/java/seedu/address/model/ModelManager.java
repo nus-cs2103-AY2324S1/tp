@@ -144,7 +144,7 @@ public class ModelManager implements Model {
     public boolean hasMusicianInBand(int bandIndex, int musicianIndex) {
         requireNonNull(bandIndex);
         requireNonNull(musicianIndex);
-        return addressBook.hasMusicianInBand(bandIndex, filteredMusicians.get(musicianIndex));
+        return addressBook.hasMusicianInBand(filteredBands.get(bandIndex), filteredMusicians.get(musicianIndex));
     }
 
     @Override
@@ -152,6 +152,11 @@ public class ModelManager implements Model {
         requireNonNull(bandIndex);
         requireNonNull(musicianIndex);
         addressBook.addMusicianToBand(bandIndex, filteredMusicians.get(musicianIndex));
+    }
+
+    @Override
+    public void removeMusicianFromBand(int bandIndex, int musicianIndex) {
+        addressBook.removeMusicianFromBand(filteredBands.get(bandIndex), filteredMusicians.get(musicianIndex));
     }
 
     @Override
