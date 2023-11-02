@@ -67,6 +67,13 @@ public class FilterCommandParserTest {
     }
 
     @Test
+    public void parseCourse_blank_throwsParseException() {
+        // slightly different to the above example
+        assertParseFailure(parser, "filter /by course /with",
+                FilterCommandParser.MISSING_FIELD);
+    }
+
+    @Test
     public void parseCourse_noArgs_throwsParseException() {
         assertParseFailure(parser, "filter /by course /with /taken false",
                 FilterCommandParser.MISSING_FIELD);
