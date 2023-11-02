@@ -133,16 +133,6 @@ public class OrganizeData {
         return columnValueMapping;
     }
 
-    public static Map<String, Integer> byMonth(Model model) {
-        Map<String, Integer> columnValueMapping = new HashMap<>();
-
-        ObservableList<Student> studentList = model.getFilteredPersonList();
-
-        studentList.stream().forEach(student -> student.putSubjectsByMonth(columnValueMapping));
-
-        return columnValueMapping;
-    }
-
     /**
      * Maps Month with the number of students
      * @param model instance of Model subclass, e.g. ModelManager instance
