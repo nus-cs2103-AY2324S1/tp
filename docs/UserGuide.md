@@ -263,15 +263,16 @@ When the command fails:
 
 Finds specified teaching assistants from the address book using search parameters.
 
-![remove TA](images/findTA.png)
+![find TA](images/findTA.png)
 
 Format: `find PREFIX KEYWORD [MORE_KEYWORDS]`
 
 - We can search by name, course or free time, using the prefixes `n/`, `c/` or `d/ from/ to/` respectively.
 - The search is case-insensitive. e.g `alex` will match `Alex`, `cs1231s` will match `CS1231S`.
-- We can apply multiple search filters to narrow down the search results.
+- We can apply multiple search filters to narrow down the search results, through including multiple filters in 
+one command.
 - Teaching assistants matching all the search parameters will be returned.
-- The search filters are applied to the original list of TAs, not the current view of TAs. 
+- The search filters are applied to the original list of TAs, not the current view of TAs.
 
 Examples:
 
