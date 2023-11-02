@@ -24,6 +24,9 @@ import seedu.address.logic.parser.exceptions.ParseException;
 public class MainWindow extends UiPart<Stage> {
 
     private static final String FXML = "MainWindow.fxml";
+    private static final String VALID_IMPORT_FILE_TYPE = ".ics Files";
+    private static final String VALID_IMPORT_FILE_EXTENSION = "*.ics";
+    private static final String USER_CALENDAR_IMPORT_FILE_CHOOSER_TITLE = "Open .ics File";
 
     private final Logger logger = LogsCenter.getLogger(getClass());
 
@@ -177,11 +180,6 @@ public class MainWindow extends UiPart<Stage> {
 
     private void handleComparison() {
         CalendarContainer.displayComparisonCalendar(logic.getComparisonCalendar());
-    }
-
-    @FXML
-    private void handleComingSoon() {
-
     }
 
     public PersonListPanel getPersonListPanel() {

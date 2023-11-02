@@ -30,7 +30,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.calendar.Calendar;
+import seedu.address.model.calendar.UniMateCalendar;
 import seedu.address.model.person.Person;
 import seedu.address.storage.JsonAddressBookStorage;
 import seedu.address.storage.JsonCalendarStorage;
@@ -81,7 +81,7 @@ public class LogicManagerTest {
     }
     @Test
     public void getCalendar() {
-        assertEquals(logic.getCalendar(), new Calendar());
+        assertEquals(logic.getCalendar(), new UniMateCalendar());
     }
 
     @Test

@@ -22,7 +22,7 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.model.calendar.Calendar;
+import seedu.address.model.calendar.UniMateCalendar;
 import seedu.address.model.event.exceptions.EventNotFoundException;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.testutil.AddressBookBuilder;
@@ -168,8 +168,8 @@ public class ModelManagerTest {
     public void equals() {
         AddressBook addressBook = new AddressBookBuilder().withPerson(ALICE).withPerson(BENSON).build();
         AddressBook differentAddressBook = new AddressBook();
-        Calendar calendar = new CalendarBuilder().withEvent(TEST_EVENT_A).withEvent(TEST_EVENT_B).build();
-        Calendar differentCalendar = new Calendar();
+        UniMateCalendar calendar = new CalendarBuilder().withEvent(TEST_EVENT_A).withEvent(TEST_EVENT_B).build();
+        UniMateCalendar differentCalendar = new UniMateCalendar();
         UserPrefs userPrefs = new UserPrefs();
 
         // same values -> returns true

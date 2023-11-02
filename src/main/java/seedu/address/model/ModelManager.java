@@ -15,8 +15,8 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.model.calendar.Calendar;
 import seedu.address.model.calendar.ReadOnlyCalendar;
+import seedu.address.model.calendar.UniMateCalendar;
 import seedu.address.model.event.Event;
 import seedu.address.model.event.EventPeriod;
 import seedu.address.model.event.exceptions.EventNotFoundException;
@@ -29,7 +29,7 @@ public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
     private final AddressBook addressBook;
-    private final Calendar calendar;
+    private final UniMateCalendar calendar;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
     private ReadOnlyCalendar comparisonCalendar;
@@ -43,14 +43,14 @@ public class ModelManager implements Model {
         logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
 
         this.addressBook = new AddressBook(addressBook);
-        this.calendar = new Calendar(calendar);
+        this.calendar = new UniMateCalendar(calendar);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
-        comparisonCalendar = new Calendar();
+        comparisonCalendar = new UniMateCalendar();
     }
 
     public ModelManager() {
-        this(new AddressBook(), new Calendar(), new UserPrefs());
+        this(new AddressBook(), new UniMateCalendar(), new UserPrefs());
     }
 
     //=========== UserPrefs ==================================================================================
@@ -151,6 +151,11 @@ public class ModelManager implements Model {
 
     @Override
     public ReadOnlyCalendar getCalendar() {
+        return calendar;
+    }
+
+    @Override
+    public UniMateCalendar getUnderlyingCalendar() {
         return calendar;
     }
 

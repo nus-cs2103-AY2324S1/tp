@@ -9,6 +9,7 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.calendar.ReadOnlyCalendar;
+import seedu.address.model.calendar.UniMateCalendar;
 import seedu.address.model.event.Event;
 import seedu.address.model.event.EventPeriod;
 import seedu.address.model.event.exceptions.EventNotFoundException;
@@ -76,6 +77,9 @@ public interface Model {
 
     /** Returns the Calendar */
     ReadOnlyCalendar getCalendar();
+
+    /** Return the underlying UniMateCalendar for the user */
+    UniMateCalendar getUnderlyingCalendar();
 
     /**
      * Returns true if a person with the same identity as {@code person} exists in the address book.

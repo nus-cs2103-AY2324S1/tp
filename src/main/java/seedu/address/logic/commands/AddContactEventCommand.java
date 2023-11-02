@@ -14,7 +14,7 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.calendar.Calendar;
+import seedu.address.model.calendar.UniMateCalendar;
 import seedu.address.model.event.Event;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
@@ -70,7 +70,7 @@ public class AddContactEventCommand extends Command {
 
         //Obtain the calendar of the person and tries to add an event to the person's calendar
         Person personToEdit = lastShownList.get(index.getZeroBased());
-        Calendar calendar = personToEdit.getCalendar();
+        UniMateCalendar calendar = personToEdit.getCalendar();
         if (!calendar.canAddEvent(event)) {
             throw new CommandException(MESSAGE_EVENT_CONFLICT);
         }
@@ -86,7 +86,7 @@ public class AddContactEventCommand extends Command {
      * Creates and returns a {@code Person} with the new Calendar {@code calendar}
      * edited with {@code event}.
      */
-    private static Person createEditedPerson(Person personToEdit, Calendar calendar) {
+    private static Person createEditedPerson(Person personToEdit, UniMateCalendar calendar) {
         assert personToEdit != null;
 
         Name updatedName = personToEdit.getName();

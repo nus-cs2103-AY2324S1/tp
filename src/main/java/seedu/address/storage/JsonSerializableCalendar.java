@@ -9,8 +9,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.calendar.Calendar;
 import seedu.address.model.calendar.ReadOnlyCalendar;
+import seedu.address.model.calendar.UniMateCalendar;
 import seedu.address.model.event.Event;
 
 /**
@@ -45,8 +45,8 @@ class JsonSerializableCalendar {
      *
      * @throws IllegalValueException if there were any data constraints violated.
      */
-    public Calendar toModelType() throws IllegalValueException {
-        Calendar calendar = new Calendar();
+    public UniMateCalendar toModelType() throws IllegalValueException {
+        UniMateCalendar calendar = new UniMateCalendar();
         for (JsonAdaptedEvent jsonAdaptedEvent : events) {
             Event event = jsonAdaptedEvent.toModelType();
             if (calendar.contains(event)) {

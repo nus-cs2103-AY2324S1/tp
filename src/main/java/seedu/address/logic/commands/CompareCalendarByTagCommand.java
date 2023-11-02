@@ -7,6 +7,7 @@ import java.util.List;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.calendar.ReadOnlyCalendar;
+import seedu.address.model.calendar.UniMateCalendar;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
 
@@ -14,7 +15,7 @@ import seedu.address.model.tag.Tag;
  * Command to compare calendars of user with people in the calendar with some collection of tags.
  */
 public class CompareCalendarByTagCommand extends Command {
-    public static final String COMMAND_WORD = "compareTag";
+    public static final String COMMAND_WORD = "compareGroupCalendars";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": compare calendars within people with specified tags. "
             + "Parameters: "
             + "ONE/MULTIPLE VALID TAGS \n"
@@ -36,7 +37,7 @@ public class CompareCalendarByTagCommand extends Command {
 
         ReadOnlyCalendar comparisonCalendar = lastShownList.stream().filter(person -> {
             return tagList.stream().anyMatch(person::hasTag);
-        }).map(Person::getReadOnlyCalendar).reduce(model.getCalendar(), ReadOnlyCalendar::combineCalendar);
+        }).map(Person::getCalendar).reduce(model.getUnderlyingCalendar(), UniMateCalendar::combineCalendar);
 
         model.setComparisonCalendar(comparisonCalendar);
 

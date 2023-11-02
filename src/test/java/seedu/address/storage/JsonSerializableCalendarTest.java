@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.JsonUtil;
-import seedu.address.model.calendar.Calendar;
+import seedu.address.model.calendar.UniMateCalendar;
 import seedu.address.testutil.TypicalEvents;
 
 public class JsonSerializableCalendarTest {
@@ -24,8 +24,8 @@ public class JsonSerializableCalendarTest {
     public void toModelType_typicalEventsFile_success() throws Exception {
         JsonSerializableCalendar dataFromFile = JsonUtil.readJsonFile(TYPICAL_EVENTS_FILE,
                 JsonSerializableCalendar.class).get();
-        Calendar calendarFromFile = dataFromFile.toModelType();
-        Calendar typicalEventsCalendar = TypicalEvents.getTypicalCalendar();
+        UniMateCalendar calendarFromFile = dataFromFile.toModelType();
+        UniMateCalendar typicalEventsCalendar = TypicalEvents.getTypicalCalendar();
         assertEquals(calendarFromFile, typicalEventsCalendar);
     }
 
