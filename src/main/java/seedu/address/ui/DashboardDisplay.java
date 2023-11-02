@@ -14,7 +14,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 import seedu.address.model.Dashboard;
 import seedu.address.model.person.lead.LeadType;
-import seedu.address.model.reminder.Reminder;
+import seedu.address.model.reminder.DateReminders;
 
 /**
  * The Dashboard Display.
@@ -38,9 +38,8 @@ public class DashboardDisplay extends UiPart<Region> {
     private CategoryAxis xAxis;
     @FXML
     private NumberAxis yAxis;
-
     @FXML
-    private ListView<Reminder> reminderListView;
+    private ListView<DateReminders> dateRemindersListView;
 
     /**
      * Creates a {@code DashboardDisplay} using data from the given {@code dashboard}.
@@ -90,20 +89,20 @@ public class DashboardDisplay extends UiPart<Region> {
         yAxis.setAutoRanging(false);
         yAxis.setUpperBound(maxY);
 
-        reminderListView.setItems(dashboard.getReminderList());
-        reminderListView.setCellFactory(listView -> new DashboardDisplay.ReminderListViewCell());
+        dateRemindersListView.setItems(dashboard.getDateReminders());
+        dateRemindersListView.setCellFactory(listView -> new DashboardDisplay.ReminderListViewCell());
     }
 
-    static class ReminderListViewCell extends ListCell<Reminder> {
+    static class ReminderListViewCell extends ListCell<DateReminders> {
         @Override
-        protected void updateItem(Reminder reminder, boolean empty) {
-            super.updateItem(reminder, empty);
+        protected void updateItem(DateReminders dateReminders, boolean empty) {
+            super.updateItem(dateReminders, empty);
 
-            if (empty || reminder == null) {
+            if (empty || dateReminders == null) {
                 setGraphic(null);
                 setText(null);
             } else {
-                setGraphic(new ReminderCard(reminder).getRoot());
+                setGraphic(new ReminderDateCard(dateReminders.getDate(), dateReminders.getReminderList()).getRoot());
             }
         }
     }

@@ -2,11 +2,18 @@ package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.TreeSet;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.interaction.Interaction;
+import seedu.address.model.reminder.DateReminders;
 import seedu.address.model.reminder.Reminder;
 
 /**
@@ -35,6 +42,7 @@ public class Dashboard {
     private int totalColdLeads;
 
     private ObservableList<Reminder> reminderList;
+    private HashMap<LocalDate, ArrayList<Reminder>> dateToReminderMap = new HashMap<>();
 
     /**
      * Constructs a {@code Dashboard} with the given {@code Model}.
@@ -153,6 +161,25 @@ public class Dashboard {
         return reminderList;
     }
 
+    private ObservableList<Reminder> getDateSpecificReminder(LocalDate date) {
+        updateDashboardIfDirty();
+        ObservableList<Reminder> reminderList = FXCollections.observableArrayList();
+        ArrayList<Reminder> retrievedReminders = dateToReminderMap.get(date);
+        if (retrievedReminders == null) {
+            return reminderList;
+        }
+        reminderList.addAll(retrievedReminders);
+        return reminderList;
+    }
+
+    public ObservableList<DateReminders> getDateReminders() {
+        updateDashboardIfDirty();
+        ObservableList<LocalDate> sortedKeys = FXCollections.observableArrayList(
+                new TreeSet<>(dateToReminderMap.keySet()));
+        return sortedKeys.stream().map(date -> new DateReminders(date, getDateSpecificReminder(date)))
+                .collect(Collectors.toCollection(FXCollections::observableArrayList));
+    }
+
     /**
      * Returns the updated dashboard and opens the dashboard for viewing.
      * The dashboard should always be closed after viewing as updating the dashboard may be expensive.
@@ -202,9 +229,11 @@ public class Dashboard {
         totalHotLeads = filteredPersonCount(Person::isHotLead);
         totalWarmLeads = filteredPersonCount(Person::isWarmLead);
         totalColdLeads = filteredPersonCount(Person::isColdLead);
+
         model.updateReminderList();
         model.updateFilteredReminderList(Reminder::isAfterNow);
         reminderList = model.getFilteredReminderList();
+        updateDateToReminderMap();
 
         /*
          Set dashboard to be clean below. Not written yet as there is no overarching mechanism to integrate
@@ -230,6 +259,17 @@ public class Dashboard {
         ObservableList<Person> personList = model.getAddressBook().getPersonList();
 
         return (int) personList.stream().filter(predicate).count();
+    }
+
+    private void updateDateToReminderMap() {
+        dateToReminderMap.clear();
+        this.reminderList.forEach(i -> addDateToReminderMap(i));
+    }
+
+    private void addDateToReminderMap(Reminder reminder) {
+        LocalDate reminderDate = reminder.getFollowUpDate();
+        dateToReminderMap.computeIfAbsent(reminderDate, k -> new ArrayList<>());
+        dateToReminderMap.get(reminderDate).add(reminder);
     }
 
     /**

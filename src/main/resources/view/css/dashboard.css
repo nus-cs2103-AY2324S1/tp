@@ -67,7 +67,6 @@
 
 .reminder-list {
     -fx-padding: 10px;
-    -fx-spacing: 16px;
 }
 
 .reminder-label {
@@ -81,8 +80,15 @@
     -fx-background-radius: 8px;
 }
 
+.list-cell #reminderDateCardPane {
+    -fx-padding: 0px;
+    -fx-spacing: 0px;
+    -fx-background-radius: 8px;
+    -fx-background-color: red;
+}
+
 .list-cell {
-    -fx-padding: 10 20 10 0 ;
+    -fx-padding: 10 20 10 0;
     -fx-background-color: transparent, -fx-background ;
     -fx-background-insets: 0px, 2px ;
 }
