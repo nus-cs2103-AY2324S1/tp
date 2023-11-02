@@ -6,9 +6,17 @@
 
 # HealthSync User Guide
 
-HealthSync is a **desktop app for managing patient details, optimised for use via a Command Line Interface** (CLI)
-while still having the benefits of a Graphical User Interface (GUI). If you can type fast, HealthSync can help you
-organise and manage patient details faster than traditional GUI apps.
+HealthSync is a **powerful desktop application designed specifically for clinic assistants in small private clinics.** It offers a unique combination of a Command Line Interface (CLI) and a Graphical User Interface (GUI) to efficiently manage and organize patient details. If you're a fast typist, HealthSync can streamline your workflow and help you handle patient information more effectively than traditional GUI apps.
+
+## Why HealthSync?  
+
+1. **Tailored for Front Desk Workers**: HealthSync is built with the needs of front desk workers in mind. It provides a user-friendly interface that simplifies patient management tasks, allowing you to focus on providing excellent service to patients.
+
+2. **Fast and Efficient**: With HealthSync's CLI, you can quickly navigate through commands and perform actions without the need to rely solely on a mouse. This saves you valuable time and makes patient data management faster and more efficient.
+
+3. **Comprehensive Patient Details**: HealthSync enables you to store and access comprehensive patient details, including personal information, medical history, appointments, and more. All the essential information you need is organized in one centralized location.
+
+4. **Intuitive GUI Experience**: HealthSync's GUI complements the CLI by providing a visual representation of patient data. The GUI is intuitive and user-friendly, making it easy to view and update patient information with just a few keys.
 
 <!-- * Table of Contents -->
 <page-nav-print />
