@@ -61,6 +61,25 @@ What are you waiting for? Let's get started using **InterviewHub** by following 
 
 # How to use this user guide
 
+To quickly find the information you need, refer to the [Table of Contents](#table-of-contents) located at the beginning of this guide. 
+It lists all the chapters and sections, allowing you to jump directly to the relevant content.
+
+Next, to get you started, we've included a [Quick Start](#quick-start) section in this user guide to ensure that you have no trouble setting up **InterviewHub**.
+
+To get a better understanding of what you see, you can head over to [GUI Summary](#gui-summary) for a quick overview of the User-Interface.
+
+Along the way if you encounter unfamiliar terms, our [Glossary](#glossary) provides definitions and explanations for product-specific terminology. Refer to it whenever needed.
+
+Before we begin, the table below describes some of the symbols and syntax you may see throughout our guide:
+
+| Symbol                                    | Meaning                                                                                          |
+|-------------------------------------------|--------------------------------------------------------------------------------------------------|
+| :warning: **Warning**                     | Important information that must be understood as the action may leads to unexpected consequences |
+| :information_source: **Note**             | Important information that you should pay attention to                                           |
+| :bulb: **Tip**                            | Helpful information to improve your experience                                                   |
+| `Highlighted text block`                  | Commands or parameters relevant to the application                                               |
+| [Hyperlinks](#how-to-use-this-user-guide) | When clicked, you will be led to a designated section within this document or an external link   |
+
 --------------------------------------------------------------------------------------------------------------------
 
 # Quick Start
@@ -91,6 +110,8 @@ For each applicant and each interview, we see the following details:
 | Address   | Rating     |
  | Email     |            |
 
+[Back to the Table of Contents](#table-of-contents)
+
 --------------------------------------------------------------------------------------------------------------------
 # Features
 
@@ -110,6 +131,8 @@ For each applicant and each interview, we see the following details:
 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit`, `nuke` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
+
+[Back to the Table of Contents](#table-of-contents)
 
 ## General Features
 
@@ -136,6 +159,8 @@ Format: `clear`
 ### Saving the data
 
 InterviewHub data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+
+[Back to the Table of Contents](#table-of-contents)
 
 ## Applicant Management Features
 
@@ -205,6 +230,8 @@ Examples:
 Shows a list of all applicants in the address book onto the GUI.
 
 Format: `list-a`
+
+[Back to the Table of Contents](#table-of-contents)
 
 ## Interview Management Features
 
@@ -313,6 +340,8 @@ Shows a list of all interviews in the address book onto the GUI.
 
 Format: `list-i`
 
+[Back to the Table of Contents](#table-of-contents)
+
 ### Listing all free time for the given day : `list-freetime`
 
 ### Listing all interviews for today : `list-i-today`
@@ -353,6 +382,8 @@ InterviewHub data are saved automatically as a JSON file `[JAR file location]/da
 If your changes to the data file makes its format invalid, InterviewHub will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.
 </div>
 
+[Back to the Table of Contents](#table-of-contents)
+
 --------------------------------------------------------------------------------------------------------------------
 
 # Frequently Asked Questions
@@ -360,11 +391,15 @@ If your changes to the data file makes its format invalid, InterviewHub will dis
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous InterviewHub home folder.
 
+[Back to the Table of Contents](#table-of-contents)
+
 --------------------------------------------------------------------------------------------------------------------
 
 # Known issues
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
+
+[Back to the Table of Contents](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -406,8 +441,12 @@ If your changes to the data file makes its format invalid, InterviewHub will dis
 | **Sort interview by rating**     | `sort-rate`                                                                                                                           |
 | **Sort interview by start time** | `sort-time`                                                                                                                           |
 
+[Back to the Table of Contents](#table-of-contents)
+
 --------------------------------------------------------------------------------------------------------------------
 
 # Glossary
 
 TBD
+
+[Back to the Table of Contents](#table-of-contents)
