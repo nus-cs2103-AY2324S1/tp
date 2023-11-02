@@ -233,7 +233,7 @@ Format: `findMember KEYWORD [MORE_KEYWORDS]`
 * More than 1 `KEYWORD` can be provided to find more members.
 * The `KEYWORD` must match minimally one of the words in the name of the member to be found, where capitalisation does not matter.
 
-* Examples:
+Examples:
 * `findMember alice` displays the member(s) whose name(s) contain 'alice'
 * `findMember alice bob charlie` displays the member(s) whose name(s) contain 'alice', 'bob' and/or 'charlie'.
 
@@ -246,7 +246,7 @@ Format: `findEvent KEYWORD [MORE_KEYWORDS]`
 * More than 1 `KEYWORD` can be provided to find more events.
 * The `KEYWORD` must match minimally one of the words in the name of the event to be found, where capitalisation does not matter.
 
-* Examples:
+Examples:
 * `findEvent party` displays the event(s) which name(s) contain 'party'
 * `findEvent party marathon gaming` displays the event(s) which name(s) contain 'party', 'marathon' and/or 'gaming'.
 
