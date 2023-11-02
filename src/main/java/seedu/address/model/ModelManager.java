@@ -171,16 +171,16 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void addTimeToPerson(Name toAddPerson, ArrayList<TimeInterval> toAddTime) throws CommandException {
+    public String addTimeToPerson(Name toAddPerson, ArrayList<TimeInterval> toAddTime) throws CommandException {
         requireNonNull(toAddPerson);
         Person person = addressBook.getPerson(toAddPerson.fullName);
         try {
-            person.addFreeTime(toAddTime);
-        } catch (CommandException e) {
+            String msg = person.addFreeTime(toAddTime);
             forceUpdateList();
+            return msg;
+        } catch (CommandException e) {
             throw new CommandException(e.getMessage());
         }
-        forceUpdateList();
     }
 
     /**
@@ -197,7 +197,6 @@ public class ModelManager implements Model {
         try {
             person.deleteFreeTime(toDeleteTime);
         } catch (CommandException e) {
-            forceUpdateList();
             throw new CommandException(e.getMessage());
         }
         forceUpdateList();
@@ -242,15 +241,16 @@ public class ModelManager implements Model {
         return addressBook.getGroup(groupName);
     }
 
-    public void addTimeToGroup(Group toAdd, ArrayList<TimeInterval> toAddTime) throws CommandException {
+    public String addTimeToGroup(Group toAdd, ArrayList<TimeInterval> toAddTime) throws CommandException {
         requireNonNull(toAdd);
         Group groupToAdd = addressBook.getGroup(toAdd.getGroupName());
         try {
-            groupToAdd.addTime(toAddTime);
+            String status = groupToAdd.addTime(toAddTime);
+            forceUpdateList();
+            return status;
         } catch (CommandException e) {
             throw new CommandException(e.getMessage());
         }
-        forceUpdateList();
     }
 
     /**

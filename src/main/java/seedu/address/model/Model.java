@@ -101,7 +101,7 @@ public interface Model {
      */
     Pair<Person, Group> ungroupPerson(String personName, String groupName) throws CommandException;
 
-    void addTimeToPerson(Name toAddPerson, ArrayList<TimeInterval> toAddTime) throws CommandException;
+    String addTimeToPerson(Name toAddPerson, ArrayList<TimeInterval> toAddTime) throws CommandException;
     TimeIntervalList getTimeFromPerson(Name personName) throws CommandException;
     void deleteTimeFromPerson(Name personName, ArrayList<TimeInterval> toDeleteTime) throws CommandException;
 
@@ -131,7 +131,7 @@ public interface Model {
 
     Group addGroupRemark(String groupName, GroupRemark groupRemark) throws CommandException;
 
-    void addTimeToGroup(Group toAdd, ArrayList<TimeInterval> toAddTime) throws CommandException;
+    String addTimeToGroup(Group toAdd, ArrayList<TimeInterval> toAddTime) throws CommandException;
 
     void deleteTimeFromGroup(Group group, ArrayList<TimeInterval> toDeleteTime) throws CommandException;
 

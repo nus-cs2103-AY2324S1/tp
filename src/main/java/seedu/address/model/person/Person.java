@@ -47,7 +47,7 @@ public class Person {
      * Every field must be present and not null.
      */
     public Person(Name name, Phone phone, Email email, GroupList personGroups, TimeIntervalList timeIntervalList) {
-        requireAllNonNull(name, phone, email, personGroups);
+        requireAllNonNull(name, phone, email, personGroups, timeIntervalList);
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -212,8 +212,8 @@ public class Person {
         this.timeIntervalList.addTime(toAddFreeTime);
     }
 
-    public void addFreeTime(ArrayList<TimeInterval> toAddFreeTime) throws CommandException {
-        this.timeIntervalList.addTime(toAddFreeTime);
+    public String addFreeTime(ArrayList<TimeInterval> toAddFreeTime) throws CommandException {
+        return this.timeIntervalList.addTime(toAddFreeTime);
     }
 
     public void deleteFreeTime(ArrayList<TimeInterval> toAddFreeTime) throws CommandException {
