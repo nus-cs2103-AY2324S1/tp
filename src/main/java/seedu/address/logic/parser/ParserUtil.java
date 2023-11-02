@@ -3,12 +3,9 @@ package seedu.address.logic.parser;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-<<<<<<< HEAD
-import java.util.ArrayList;
-=======
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
->>>>>>> master
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
@@ -33,9 +30,9 @@ public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
     public static final String NUMBER_INDEX_INVALID_INDEX = "Number of arguments provided is invalid.";
-    private static final String SPLIT_SPACE_DELIMITER = " ";
     public static final DateTimeFormatter DATE_TIME_STRING_FORMATTER = DateTimeFormatter.ofPattern(
             "yyyy-MM-dd HH:mm");
+    private static final String SPLIT_SPACE_DELIMITER = " ";
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
      * trimmed.

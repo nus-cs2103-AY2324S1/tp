@@ -21,11 +21,13 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.event.EventDescription;
 import seedu.address.model.person.Person;
+import seedu.address.model.task.TaskManager;
 import seedu.address.testutil.PersonBuilder;
 
 public class EditContactEventCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), getTypicalCalendar(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalAddressBook(), getTypicalCalendar(), new TaskManager(),
+            new UserPrefs());
 
     @Test
     public void execute_someFieldsSpecifiedUnfilteredList_success() {
@@ -42,7 +44,7 @@ public class EditContactEventCommandTest {
                 Messages.format(editedPerson));
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()),
-                model.getCalendar(), new UserPrefs());
+                model.getCalendar(), model.getTaskManager(), new UserPrefs());
         expectedModel.setPerson(model.getFilteredPersonList().get(0), editedPerson);
 
         assertTrue(true);
@@ -65,7 +67,7 @@ public class EditContactEventCommandTest {
                 Messages.format(editedPerson));
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()),
-                model.getCalendar(), new UserPrefs());
+                model.getCalendar(), model.getTaskManager(), new UserPrefs());
         expectedModel.setPerson(model.getFilteredPersonList().get(0), editedPerson);
 
         assertTrue(true);
