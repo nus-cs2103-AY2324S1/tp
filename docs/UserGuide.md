@@ -43,11 +43,13 @@ will be the least of your worries.
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-    * `list` : Lists all students with their `NAME`.
+    * `list students` : Lists all students with their `NAME`.
 
-    * `add n/Leah p/98765432 e/leah@example.com a/Evergreen street, block 123, #01-01` : Adds a student named `Leah` to the application.
+    * In list `STUDENTS`:     
 
-    * `show 3` : Shows the details of the person with the index 3 in TutorMate.
+      * `add -name Leah` : Adds a student named `Leah` to the application.
+
+      * `show 3` : Shows the details of the person with the index 3 in TutorMate.
 
     * `exit` : Exits the app.
 
@@ -62,7 +64,7 @@ will be the least of your worries.
 **Notes about the command format:**<br>
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/Leah`.
+  e.g. in `add -name NAME`, `NAME` is a parameter which can be used as `add -name Leah`.
 
 * Items in square brackets are optional.<br>
   e.g `list [KEYWORDs]` can be used as `list` or as `list SUBJECT`.
@@ -88,34 +90,56 @@ Shows a message explaining how to access the help page.
 Format: `help`
 
 
-### Adding a student: `add`
+### Adding a student: `addPerson`
 
 Adds a student to the contact list in application.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
+Format: `addPerson -name NAME [-phone PHONE_NUMBER] [-email EMAIL] [-address ADDRESS] 
+[-subject SUBJECT] [-tag TAG] [-remark REMARK]`
+
+
 
 <box type="tip" seamless>
 
-**Tip:** A student can have any number of tags (including 0)
+**Tips:** 
+- A student can have any number of tags (including 0)
+- If the user is currently in list `STUDENTS`, the command can be shortened to `add`
 </box>
 
 Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+* `addPerson -name John -phone 91234567`
+* `addPerson -name John -phone 91234567 -email test@gmail.com -address 10 Kent Ridge Drive -subject MATHEMATICS`
+* In list `STUDENTS`:
+  * `add -name John -phone 91234567`
+  * `add -name John -phone 91234567 -email test@gmail.com -address 10 Kent Ridge Drive -subject MATHEMATICS`
+
 
 
 ### Listing all students : `list`
 
-Lists all the students saved in the application, with optional specified information through comma-separated keywords.
+The list command has different behaviours depending on the keywords given.
+Lists all the students, lessons and tasks saved in the application, with optional specified information through space-separated keywords.
 
-Format: `list [KEYWORDs]`
+To show the `SCHEDULE` list:
+* Format: `list schedule`
+* By default, `list` will also show the `SCHEDULE` list and list all the lessons with their `NAME`.
 
-* By default, without any keywords the app lists all the students with their `NAME`.
-* The `[KEYWORDs]` allows for a list of comma-separated information.
+
+To show the `STUDENTS` list:
+* Format: `list students [KEYWORDs]`
+  * displays all the students with their `NAME`.
+  * The `[KEYWORDs]` allows for a list of valid space-separated information of the student to be displayed.
+
+To show the `TASKS` list:
+* Format: `list tasks`
+  * * displays all the tasks with their `DESCRIPTION`.
 
 Examples:
-* `list` displays all the students with their `NAME`.
-* `list SUBJECT` displays all the students with their `NAME` and a list of subjects for each student.
+* `list` displays the `SCHEDULE` list with all the lessons.
+* `list schedule` displays all the lessons with their `NAME`.
+* `list students` displays all the students with their `NAME`.
+* `list students subjects` displays all the students with their `NAME` and a list of subjects for each student.
+* `list tasks` displays all the tasks with their `DESCRIPTION`.
 
 Acceptable value for the parameter: Any valid property of a student, such as:
 * SUBJECT
@@ -204,12 +228,14 @@ The show command has different behaviours depending on the current list:
 1. In `STUDENTS` list:
    - Shows the details of the specified student from the contact list in the application.
 2. In `SCHEDULE` list:
-   - Shows the details of the specified lesson from the lesson list in the application
+   - Shows the details of the specified lesson from the lesson list in the application.
+3. In `TASKS` list:
+   - Shows the details of the specified task from the full task list in the application.
 
 Format: `show INDEX`
 
-* Shows the details of the student/lesson at the specified `INDEX`.
-* The index refers to the index number shown in the displayed student/lesson list.
+* Shows the details of the student/lesson/task at the specified `INDEX`.
+* The index refers to the index number shown in the displayed student/lesson/task list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
@@ -218,6 +244,8 @@ Examples:
    * `find Betsy` followed by `show 1` shows the details of the 1st student in the results of the `find` command.
 2. In `SCHEDULE` list:
    *  `list SCHEDULE` followed by `show 2` shows the details of the 2nd lesson in the schedule list.
+3. In `TASKS` list:
+    *  `list TASKS` followed by `show 2` shows the details of the 2nd task in the full task list.
 
 Example Success Output:
 ```
@@ -232,17 +260,28 @@ The person index provided is invalid
 
 ### Deleting a student : `delete`
 
-Deletes the specified student from the contact list in the application.
+The delete command has different behaviours depending on the current list:
+
+1. In `STUDENTS` list:
+    - Deletes the specified student from the contact list in the application.
+2. In `SCHEDULE` list:
+    - Deletes the specified lesson from the lesson list in the application. 
+3. In `TASKS` list:
+    - the `delete` command is disabled. Adding and Deleting of Tasks can only be done in the `SCHEDULE` list via the `addTask` and `deleteTask` command.
 
 Format: `delete INDEX`
 
-* Deletes the student at the specified `INDEX`.
+* Deletes the student/lesson at the specified `INDEX`.
 * The index refers to the index number shown in the displayed student list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd student in the contact list.
-* `find Betsy` followed by `delete 1` deletes the 1st student in the results of the `find` command.
+* `list students` followed by :
+  * `delete 2` deletes the 2nd student in the contact list.
+  * `find Betsy` followed by `delete 1` deletes the 1st student in the results of the `find` command.
+
+* `list schedule` followed by :
+* `delete 2` deletes the 2nd lesson in the schedule list.
 
 Success Output:
 ```
@@ -251,7 +290,7 @@ Student Leah has been deleted successfully!
 
 Failure Output:
 ```
-Invalid Index entered, please try deleting the contact again with the correct Index!
+Index out of bounds, expected 1 to 8 but got 10.
 ```
 
 ### Adding a task : `addTask`
@@ -346,9 +385,12 @@ If your changes to the data file makes its format invalid, TutorMate will discar
 
 Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
+**Add Person**    | `addPerson -name John -phone 91234567 -email test@gmail.com -address 10 Kent Ridge Drive -subject MATHEMATICS`
+**Add Task**    | `addTask -description Do CS2103T Preparation`
+**Delete Task** | `delete INDEX`<br> e.g., `delete 3`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
+**Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com` (To Be Changed)
 **Show**   | `show INDEX`
-**List**   | `list [KEYWORDs]`
+**List**   | `list`, `list schedule`, `list students [KEYWORDs]`, `list tasks`
 **Help**   | `help`
+
