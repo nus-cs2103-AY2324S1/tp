@@ -16,11 +16,16 @@ import java.io.FileWriter;
  * Class with methods to handle report storage
  */
 public class ReportStorage {
-    private static final String REPORT_FOLDER = "reports";
+    public static final String REPORT_FOLDER = "reports";
 
     private ReportStorage() {}
 
     public static void saveReport(Report report) throws CommandException {
+        //Check if report is valid
+        if (report == null) {
+            throw new CommandException(Messages.MESSAGE_REPORT_SAVE_ERROR);
+        }
+
         // Generate report as txt file using file writer
         String reportString = report.toString();
         String fileName = LocalDate.now() + "_" + report.employee.getName().fullName +  ".txt";
