@@ -133,9 +133,6 @@ The `Model` component,
 
 <img src="images/BetterModelClassDiagram.png" width="600" />
 
-</div>
-
-
 ### Storage component
 
 **API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
@@ -221,7 +218,40 @@ for empty/null inputs in the Person object by checking if the optional field is 
   * Cons:
     * Inconveniences the user as they have to remember a new command to add a person with optional fields.
 
+### Flow of Program Execution
+
+The way the user interacts with the program is illustrated as follows.
+
+![FlowOfProgram](images/CommandFlowActivityDiagram.png)
+
+The following is a (partial) explanation of the flow of events: 
+1. The user makes their command by issuing a command in the CommandBox.
+2. The command is parsed by the Parser and the corresponding Command object is created.
+3. The Command object is executed.
+4. The Command is executed and returns a CommandResult.
+5. The CommandResult is passed to the UI component to be displayed to the user.
+
+More details are captured in the diagram above.
+
+If the command involves the changing of Models, the Models are updated accordingly at stage 3 during the execution process.
+Changes to the models will also be reflected in Storage in the backend.
+These model changes will also be reflected in the Ui (e.g when a Person or an Event is changed).
+
+The errors during process and execution are also handled accordingly by displaying an error message to the user.
+
+The object diagram below illustrates a possible state of the Models after some commands have been executed. 
+
+![Model state](images/AddEventObjectDiagram.png)
+
+Assume that the user just added a `Meeting` which is a subtype of `Event`. They supplied the meeting with a name, a start date and a start time. The user also added some previous events and persons as shown in the diagram.
+
+This shows how the Models are stored for use in the program.
+
+
+
+
 ### Ability to track events
+
 
 This subsection details of how the `Event` class is implemented.
 
