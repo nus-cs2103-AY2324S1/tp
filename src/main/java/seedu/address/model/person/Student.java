@@ -90,6 +90,13 @@ public class Student {
     }
 
     /**
+     * Returns the int value of sec level
+     */
+    public int getSecLevelValue() {
+        return this.secLevel.getValue();
+    }
+
+    /**
      * Returns true if both persons have the same name.
      * This defines a weaker notion of equality between two persons.
      */
