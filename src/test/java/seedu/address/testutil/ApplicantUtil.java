@@ -29,7 +29,6 @@ public class ApplicantUtil {
         return sb.toString();
     }
 
-    // TODO: Implement the following method after EditApplicantCommand is implemented.
     /**
      * Returns the part of command string for the given {@code EditApplicantDescriptor}'s details.
      */
