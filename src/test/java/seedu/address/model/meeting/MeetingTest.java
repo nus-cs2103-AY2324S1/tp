@@ -84,7 +84,8 @@ public class MeetingTest {
     public void toStringMethod() {
         String expected = Meeting.class.getCanonicalName() + "{title=" + MEETING1.getTitle() + ", location="
                 + MEETING1.getLocation() + ", start=" + MEETING1.getStart() + ", end=" + MEETING1.getEnd()
-                + ", attendees=" + MEETING1.getAttendees() + ", tags=" + MEETING1.getTags() + "}";
+                + ", attendees=" + MEETING1.getAttendees() + ", tags=" + MEETING1.getTags() + ", status="
+                + MEETING1.getStatus() + "}";
         assertEquals(expected, MEETING1.toString());
     }
 }

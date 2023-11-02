@@ -12,36 +12,40 @@ My contributions to the project are listed below.
 
 - **New Feature**: Remove contact from meeting command
   - Added command and parser
-  - Thorough testing
 
+- **New Feature**: Mark meeting command
+  - Added command and parser
+  - Updates last contacted time for contacts
 
 - **Code contributed**: [RepoSense link](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=jason-raiin&breakdown=true)
 
 - **Project management**:
-
-  - to be added soon
+  - Contributed issues
+  - Reviewed PRs
 
 - **Enhancements to existing features**:
-
-  - Add Tag to meetings: logic and UI
+  - Add Tags field to meetings
   - Convert Tag to factory class with no duplicates
+  - Added Status field to meetings
 
 - **Documentation**:
 
   - User Guide
-    - Remove meeting contact command
+    - `rmmc` command
+    - `mark` command
     - Minor edits
 
   - Developer Guide
+    - `rmmc` command
+    - `mark` command
     - User profile
     - Value proposition
     - User stories
     - Use cases
 
 - **Community**:
-
   - to be added soon
 
 - **Tools**:
-
   - Added util method `parseIndexes`
+  - Improved methods for `typicalMeetings` and `typicalAddressBook`

@@ -6,9 +6,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showMeetingAtIndex;
+import static seedu.address.testutil.TypicalAddressBook.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_MEETING;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_MEETING;
-import static seedu.address.testutil.TypicalMeetings.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
 
@@ -28,21 +28,21 @@ public class ViewMeetingCommandTest {
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
-        Meeting meetingToView = model.getFilteredMeetingList().get(INDEX_FIRST_MEETING.getZeroBased());
-        ViewMeetingCommand viewMeetingCommand = new ViewMeetingCommand(INDEX_FIRST_MEETING);
+        Meeting meetingToView = model.getFilteredMeetingList().get(INDEX_SECOND_MEETING.getZeroBased());
+        ViewMeetingCommand viewMeetingCommand = new ViewMeetingCommand(INDEX_SECOND_MEETING);
 
         String expectedMessage = String.format(Messages.MESSAGE_MEETING_VIEWED_OVERVIEW, meetingToView.getTitle());
-        String expectedDisplayString = "Title: CS2103T meeting\n"
+        String expectedDisplayString = "Title: CS2101 meeting\n"
                 + "Location: Zoom call url\n"
-                + "Start: 20 September 2023, 1000\n"
-                + "End: 20 September 2023, 1200\n"
-                + "Attendees: [\n1: Alice Pauline \n2: Benson Meier \n3: Carl Kurz \n4: Daniel Meier"
-                + " \n5: Elle Meyer \n6: Fiona Kunz \n7: George Best \n8: Hoon Meier]\n";
+                + "Start: 20 November 2023, 1000\n"
+                + "End: 20 November 2023, 1200\n"
+                + "Attendees: [\n1: Daniel Meier \n2: Elle Meyer "
+                + "\n3: Fiona Kunz \n4: George Best]\n";
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
 
         assertCommandSuccess(viewMeetingCommand, model, expectedMessage, expectedModel);
-        assertEquals(meetingToView.toDisplayString(), expectedDisplayString);
+        assertEquals(expectedDisplayString, meetingToView.toDisplayString());
     }
 
     @Test
@@ -65,8 +65,7 @@ public class ViewMeetingCommandTest {
                 + "Location: Zoom call url\n"
                 + "Start: 20 September 2023, 1000\n"
                 + "End: 20 September 2023, 1200\n"
-                + "Attendees: [\n1: Alice Pauline \n2: Benson Meier \n3: Carl Kurz \n4: Daniel Meier \n5: Elle Meyer"
-                + " \n6: Fiona Kunz \n7: George Best \n8: Hoon Meier]\n";
+                + "Attendees: []\n";
 
         // Model displaying filtered list should not change
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());

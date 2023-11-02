@@ -13,6 +13,7 @@ import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.meeting.Attendee;
 import seedu.address.model.meeting.Location;
 import seedu.address.model.meeting.Meeting;
+import seedu.address.model.meeting.MeetingStatus;
 import seedu.address.model.meeting.Title;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -54,11 +55,11 @@ public class SampleDataUtil {
             new Meeting(new Title("Test Meeting 1"), new Location("Room 1"),
                     LocalDateTime.parse("02.10.2023 1000", FORMAT),
                     LocalDateTime.parse("03.10.2023 1000", FORMAT),
-                    getAttendeeSet("Alex Yeoh"), getTagSet("work")),
+                    getAttendeeSet("Alex Yeoh"), getTagSet("work"), new MeetingStatus(false)),
             new Meeting(new Title("Test Meeting 2"), new Location("Room 2"),
                     LocalDateTime.parse("02.10.2023 1000", FORMAT),
                     LocalDateTime.parse("02.10.2023 1000", FORMAT),
-                    getAttendeeSet(), getTagSet()),
+                    getAttendeeSet(), getTagSet(), new MeetingStatus(false)),
         };
     }
 
