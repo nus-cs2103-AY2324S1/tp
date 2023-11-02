@@ -11,7 +11,7 @@ public class TagHyperlink extends FieldHyperlink {
     public TagHyperlink(String labelText, Runnable action) {
         super(labelText, action);
         this.setText(labelText);
-        this.getStyleClass().add("external");
+        this.getStyleClass().add("tag");
         this.getStyleClass().add("cell_field");
         this.getStyleClass().add("cell_small_label");
         this.setOnAction(e -> action.run());
