@@ -32,6 +32,7 @@
       <FlowPane fx:id="address" styleClass="info-flow-pane"/>
       <FlowPane fx:id="email" styleClass="info-flow-pane"/>
       <FlowPane fx:id="birthday" styleClass="info-flow-pane"/>
+      <FlowPane fx:id="remark" styleClass="info-flow-pane"/>
     </VBox>
   </GridPane>
 </HBox>
