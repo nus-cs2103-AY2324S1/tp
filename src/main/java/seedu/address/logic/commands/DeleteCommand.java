@@ -28,8 +28,8 @@ public class DeleteCommand extends Command {
 
     public static final String MESSAGE_USAGE_FOR_NAME = COMMAND_WORD
             + ": Deletes the employee identified by the name used in the displayed employee list.\n"
-            + "Parameters: n/NAME (must be present)\n"
-            + "Example: " + COMMAND_WORD + " n/John";
+            + "Parameters: /n NAME (must be present)\n"
+            + "Example: " + COMMAND_WORD + " /n John";
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Employee: %1$s";
 
     private final Index targetIndex;
