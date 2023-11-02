@@ -2,8 +2,10 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
@@ -16,6 +18,7 @@ import seedu.address.model.person.fields.Name;
 import seedu.address.model.person.fields.Phone;
 import seedu.address.model.person.fields.Telegram;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.task.Task;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -156,5 +159,32 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    /**
+     * Parses a {@code String tag} into a {@code Tag}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code tag} is invalid.
+     */
+    public static Task parseTask(String task) throws ParseException {
+        requireNonNull(task);
+        String trimmedTask = task.trim();
+        return new Task(trimmedTask);
+    }
+
+    /**
+     * Parses a {@code String telegram} into an {@code Telegram}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code telegram} is invalid.
+     */
+    public static List<Task> parseTasks(Collection<String> tasks) throws ParseException {
+        requireNonNull(tasks);
+        final List<Task> taskList = new ArrayList<>();
+        for (String taskName : tasks) {
+            taskList.add(parseTask(taskName));
+        }
+        return taskList;
     }
 }
