@@ -34,4 +34,11 @@ public class FilterCommandParserTest {
         expectedFilterCommand = new FilterCommand(new ContainsDepartmentPredicate(VALID_DEPARTMENT_LOGISTIC));
         assertParseSuccess(parser, userInput, expectedFilterCommand);
     }
+
+    @Test
+    public void parse_moreThanOneArg_throwsParseException() {
+        String userInput = DEPARTMENT_DESC_INVESTMENT + DEPARTMENT_DESC_LOGISTIC;
+        assertParseFailure(parser, userInput, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                FilterCommand.MESSAGE_USAGE));
+    }
 }
