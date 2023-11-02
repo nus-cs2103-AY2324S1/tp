@@ -156,7 +156,7 @@ public class ModelManager implements Model {
 
     @Override
     public Person findPersonByIndex(int index) {
-        List<Person> personList = this.addressBook.getPersonList();
+        List<Person> personList = getFilteredPersonList();
         if (index < 0 || index >= personList.size()) {
             return null;
         }

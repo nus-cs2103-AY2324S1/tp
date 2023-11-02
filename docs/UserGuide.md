@@ -95,7 +95,21 @@ Adds a contact to the contact list.
 Format: `add contact -n NAME -p PHONE_NUMBER -a ADDRESS -e EMAIL [-t TAGNAME...]`
 
 Examples:
-* `add contact -n Aaron -p 12345678 -a Baker Street 12 -e aaron123@gmail.com -t Frontend`
+* `add contact -n Aaron -p 12345678 -a Baker Street 12 -e aaron123@gmail.com`
+
+### Listing all persons : `list contact`
+
+Shows a list of all contacts in the contact list if tags not specified. 
+Otherwise, shows a list of contacts which contains one of the specified tags. 
+
+Format: `list contact -t TAGNAME...`
+
+* Lists all contacts if no tags passed. 
+* If tags argument passed, lists only contacts that contain one of the tags.
+
+Examples:
+* `list contact` to show all contacts.
+* `list contact -t recruiter` to show all contacts which have a recruiter tag.
 
 ### Deleting a contact : `delete contact`
 

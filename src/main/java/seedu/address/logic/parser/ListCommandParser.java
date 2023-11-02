@@ -18,7 +18,7 @@ public class ListCommandParser implements Parser<ListCommand> {
         String args = SecondaryCommandSelector.getArguments(secondaryCommandWord, userInput);
         switch (secondaryCommandWord) {
         case ListPersonCommand.SECONDARY_COMMAND_WORD:
-            return new ListPersonCommand();
+            return new ListPersonCommandParser().parse(args);
         case ListNoteCommand.SECONDARY_COMMAND_WORD:
             return new ListNoteCommand();
         case ListEventCommand.SECONDARY_COMMAND_WORD:
