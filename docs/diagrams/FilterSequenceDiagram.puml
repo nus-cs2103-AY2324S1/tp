@@ -1,0 +1,35 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":FilterCommand" as FilterCommand LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant "model:Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("filter Friend")
+
+create FilterCommand
+LogicManager -> FilterCommand :
+activate FilterCommand
+FilterCommand --> LogicManager
+deactivate FilterCommand
+
+
+LogicManager -> FilterCommand : execute(model)
+activate FilterCommand
+
+
+FilterCommand -> Model : setContactsFilter(predicate)
+activate Model
+Model --> FilterCommand
+deactivate Model
+
+FilterCommand --> LogicManager
+deactivate FilterCommand
+
+@enduml

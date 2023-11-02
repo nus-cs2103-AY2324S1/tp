@@ -24,7 +24,7 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 ## **Design**
 
 <div markdown="span" class="alert alert-primary">
-    :bulb: **Tip:** The `.puml` files used to create diagrams in this document are in the `docs/diagrams` folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
+:bulb: **Tip:** The `.puml` files used to create diagrams in this document are in the `docs/diagrams` folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
 </div>
 
 ### Architecture
@@ -75,7 +75,7 @@ The **API** of this component is specified in [`Ui.java`](https://github.com/AY2
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `ContactListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
-The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2324S1-CS2103-W14-3/tp/tree/master/src/main/java/swe/context/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
+The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2324S1-CS2103-W14-3/tp/tree/master/src/main/java/swe/context/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2324S1-CS2103-W14-3/tp/tree/master/src/main/resources/view/MainWindow.fxml)
 
 The `UI` component,
 
@@ -96,10 +96,9 @@ The sequence diagram below illustrates the interactions within the `Logic` compo
 
 ![Interactions Inside the Logic Component for the `delete 1` Command](images/DeleteSequenceDiagram.png)
 
-
 How the `Logic` component works:
 
-1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
+1. When `Logic` is called upon to execute a command, it is passed to an `InputParser` object which in turn creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
 1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`.
 1. The command can communicate with the `Model` when it is executed (e.g. to delete a contact).
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
@@ -109,7 +108,7 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 <img src="images/ParserClasses.png" width="600"/>
 
 How the parsing works:
-* When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
+* When called upon to parse a user command, the `InputParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `InputParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
@@ -133,7 +132,7 @@ The `Model` component,
 
 The `Storage` component,
 * can save both address book data and user preference data in JSON format, and read them back into corresponding objects.
-* inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
+* inherits from both `ContactsStorage` and `SettingsStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
 ### Common classes
@@ -160,12 +159,20 @@ The following activity diagram summarises what happens when a user executes a ne
 
 ![AddActivityDiagram](images/AddActivityDiagram.png)
 
+### Filter feature
+
+The following sequence diagram shows how the add command works:
+
+![FilterSequenceDiagram](images/FilterSequenceDiagram.png)
+
+It filters contacts by calling `Model#setContactsFilter` with a `ContainsTagPredicate predicate` as argument, which sets the `predicate`
+on the list of contacts in the `ModelManager`.
 
 ### Maintaining sorting while supporting filtering
 
 The contact list is automatically kept in a constantly sorted state by leveraging `SortedList` from the JavaFX Collections library. Since the class works with `ObservableList`s, which the Model's `Contacts` also utilises, we are able to leverage this class more easily.
 
-The Model obtains an unsorted, unmodifiable list from `Contacts` and wraps it in a `SortedList`. We specify an `AlphabeticalComparator` to define our own alphabetical sorting order, which takes casing into account. This facilitates the intended propagation of changes from the nested list to the sorted list.
+The Model obtains an unsorted, unmodifiable list from `Contacts` and wraps it in a `SortedList`. We specify an `AlphabeticalComparator` to define our own alphabetical sorting order, which takes capitalization into account. This facilitates the intended propagation of changes from the nested list to the sorted list.
 
 For operability with the find feature, this sorted list is further wrapped in a `FilteredList` to limit the scope of what the user sees as needed. A dummy filter `Predicate` which allows all contacts to pass is used as the default filter. It is this filtered list that the model stores in a field.
 
@@ -198,9 +205,11 @@ The following activity diagram summarises what happens when a user executes an e
 ### Product scope
 
 **Target user profile**: NUS SoC students, who:
-- can type fast and prefer typing
-- are reasonably comfortable with command-line inputs
-- wish to label contacts by category (e.g. classmates from certain courses, professors)
+
+- Can type fast and prefer typing
+- Are reasonably comfortable with command-line inputs
+- Wish to label contacts by category (e.g. professors, classmates from certain courses)
+- Have many different ways to reach their contacts (e.g. local/overseas phone number, Telegram, Discord etc.)
 
 **Value proposition**: Manage contacts quickly via text commands, with useful features relevant to SoC students.
 
@@ -363,7 +372,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 Given below are instructions to test the app manually.
 
 <div markdown="span" class="alert alert-info">
-    :information_source: **Note:** These instructions only provide a starting point for testers to work on;
+:information_source: **Note:** These instructions only provide a starting point for testers to work on;
 testers are expected to do more *exploratory* testing.
 </div>
 
@@ -414,3 +423,7 @@ testers are expected to do more *exploratory* testing.
    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
 1. _{ more test cases …​ }_
+
+## **Appendix: Planned enhancements**
+
+//TODO this is for countering known feature flaws to help grading, after the feature freeze. We can only list `4 members x 2 = 8` enhancements here
