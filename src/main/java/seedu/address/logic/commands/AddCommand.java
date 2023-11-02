@@ -32,7 +32,7 @@ public class AddCommand extends Command {
             + PREFIX_PHONE + "98765432 "
             + PREFIX_EMAIL + "fyq@example.com "
             + PREFIX_ID + " A1234567M "
-            + PREFIX_TAG + "CS2103T G2";
+            + PREFIX_TAG + "G2";
 
     public static final String MESSAGE_SUCCESS = "New person added: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";

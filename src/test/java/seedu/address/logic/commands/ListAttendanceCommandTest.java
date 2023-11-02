@@ -5,13 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.ListAttendanceCommand.MESSAGE_NO_STUDENTS;
 import static seedu.address.logic.commands.ListAttendanceCommand.MESSAGE_SUCCESS;
-import static seedu.address.testutil.TypicalPersons.ALICE;
-import static seedu.address.testutil.TypicalPersons.BENSON;
-import static seedu.address.testutil.TypicalPersons.CARL;
 import static seedu.address.testutil.TypicalPersons.DANIEL;
-import static seedu.address.testutil.TypicalPersons.ELLE;
-import static seedu.address.testutil.TypicalPersons.FIONA;
-import static seedu.address.testutil.TypicalPersons.GEORGE;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBookManager;
 
 import java.util.Optional;
@@ -77,15 +71,13 @@ public class ListAttendanceCommandTest {
     }
     @Test
     public void execute_listAttendanceWithTag_success() {
-        ALICE.addAttendance(new Attendance(new Week(2), false, "Sick"));
-
         Optional<Tag> tag = Optional.of(new Tag("G02"));
-        Week week = new Week(2);
+        Week week = new Week(0);
         ListAttendanceCommand command = new ListAttendanceCommand(tag, week,
                 new ContainsTagPredicate(tag), new AbsentFromTutorialPredicate(week, tag));
 
         String expectedSummary = String.format(Messages.MESSAGE_ATTENDANCE_SUMMARY_WITH_TAG, 0, 1, week.getWeekNumber(),
-                tag.get().getTagName());
+                expectedModel.getAddressBook().getCourseCode(), tag.get().getTagName());
 
         expectedModel.addFilter(new ContainsTagPredicate(tag));
         expectedModel.addFilter(new AbsentFromTutorialPredicate(week, tag));
@@ -97,28 +89,22 @@ public class ListAttendanceCommandTest {
     @Test
     public void execute_listWithNoStudentsWithTag_success() {
         Optional<Tag> tag = Optional.of(new Tag("TAG1"));
-        Week week = new Week(2);
+        Week week = new Week(0);
         ListAttendanceCommand command = new ListAttendanceCommand(tag, week,
                 new ContainsTagPredicate(tag), new AbsentFromTutorialPredicate(week, tag));
 
         expectedModel.addFilter(new ContainsTagPredicate(tag));
         CommandResult expectedCommandResult = new CommandResult(
-                String.format(MESSAGE_NO_STUDENTS, tag.get().getTagName()));
+                String.format(MESSAGE_NO_STUDENTS, expectedModel.getAddressBook().getCourseCode(),
+                        tag.get().getTagName()));
 
         assertCommandSuccess(command, model, expectedCommandResult, expectedModel);
     }
 
     @Test
     public void execute_listWithIncompleteAttendance_success() {
-        ALICE.addAttendance(new Attendance(new Week(3), true, null));
-        BENSON.addAttendance(new Attendance(new Week(3), true, null));
-        CARL.addAttendance(new Attendance(new Week(3), true, null));
-        ELLE.addAttendance(new Attendance(new Week(3), true, null));
-        FIONA.addAttendance(new Attendance(new Week(3), true, null));
-        GEORGE.addAttendance(new Attendance(new Week(3), true, null));
-
         Optional<Tag> tag = Optional.empty();
-        Week week = new Week(3);
+        Week week = new Week(0);
         ListAttendanceCommand command = new ListAttendanceCommand(tag, week,
                 new ContainsTagPredicate(tag), new AbsentFromTutorialPredicate(week, tag));
 
@@ -132,21 +118,15 @@ public class ListAttendanceCommandTest {
 
     @Test
     public void execute_listAttendanceNoTag_success() {
-        ALICE.addAttendance(new Attendance(new Week(1), true, null));
-        BENSON.addAttendance(new Attendance(new Week(1), true, null));
-        CARL.addAttendance(new Attendance(new Week(1), true, null));
-        DANIEL.addAttendance(new Attendance(new Week(1), false, "Late"));
-        ELLE.addAttendance(new Attendance(new Week(1), true, null));
-        FIONA.addAttendance(new Attendance(new Week(1), true, null));
-        GEORGE.addAttendance(new Attendance(new Week(1), true, null));
-
         Optional<Tag> tag = Optional.empty();
-        Week week = new Week(1);
+        DANIEL.addAttendance(new Attendance(new Week(0), true, null));
+        Week week = new Week(0);
         ListAttendanceCommand command = new ListAttendanceCommand(tag, week,
                 new ContainsTagPredicate(tag), new AbsentFromTutorialPredicate(week, tag));
 
         int total = expectedModel.getFilteredPersonList().size();
-        String expectedSummary = String.format(Messages.MESSAGE_ATTENDANCE_SUMMARY_NO_TAG, total - 1, total, 1);
+        String expectedSummary = String.format(Messages.MESSAGE_ATTENDANCE_SUMMARY_NO_TAG, total - 1, total, 0,
+                expectedModel.getAddressBook().getCourseCode());
 
         expectedModel.addFilter(new AbsentFromTutorialPredicate(week, tag));
         CommandResult expectedCommandResult = new CommandResult(expectedSummary + MESSAGE_SUCCESS);

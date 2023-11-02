@@ -6,6 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TUTORIALGROUP;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
@@ -25,15 +26,19 @@ public class DeleteCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the student identified by the index number used in the displayed person list,\n"
-            + " all students identified by the tutorial group ID entered or all students.\n"
+            + " all students in the course  identified by the tutorial group ID entered "
+            + "or all students in the course.\n"
             + "Parameters: INDEX (must be a positive integer) || "
             + "all [" + PREFIX_TUTORIALGROUP + "TUTORIAL_GROUP_ID]\n"
             + "Examples: " + COMMAND_WORD + " 1, " + COMMAND_WORD + " all, "
             + COMMAND_WORD + " all " + PREFIX_TUTORIALGROUP + "G01";
 
-    public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
-    public static final String MESSAGE_DELETE_TAGGED_SUCCESS = "Deleted all contacts from Tutorial Group %1$s";
-    public static final String MESSAGE_DELETE_NO_TAG_SUCCESS = "Deleted all contacts";
+    public static final String MESSAGE_NO_STUDENTS = "No students to delete from %1$s!";
+    public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted student: %1$s";
+    public static final String MESSAGE_DELETE_TAGGED_SUCCESS = "Deleted all students from %1$s Tutorial Group %2$s!\n"
+            + "Deleted student(s):\n%3$s";
+    public static final String MESSAGE_DELETE_NO_TAG_SUCCESS = "Deleted all students from %1$s!\n"
+            + "Deleted student(s):\n%2$s";
 
     private final Index targetIndex;
     private final Optional<Tag> tag;
@@ -61,7 +66,9 @@ public class DeleteCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+
         List<Person> lastShownList = model.getFilteredPersonList();
+        String courseCode = model.getAddressBook().getCourseCode();
 
         if (!(targetIndex == null)) {
             if (targetIndex.getZeroBased() >= lastShownList.size()) {
@@ -73,6 +80,8 @@ public class DeleteCommand extends Command {
             return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(personToDelete)));
         }
 
+        model.clearFilters();
+
         if (tag.isPresent()) {
             model.addFilter(tagPredicate);
         }
@@ -80,15 +89,24 @@ public class DeleteCommand extends Command {
         List<Person> toDeleteList = model.getFilteredPersonList();
         List<Person> copyDeleteList = new ArrayList<>(toDeleteList);
 
+        if (toDeleteList.isEmpty()) {
+            String toDeleteListDesc = tag.isPresent()
+                    ? String.format("%s Tutorial Group %s", courseCode, tag.get().getTagName()) : courseCode;
+            model.clearFilters();
+            return new CommandResult(String.format(MESSAGE_NO_STUDENTS, toDeleteListDesc));
+        }
+
         for (Person p : copyDeleteList) {
             model.deletePerson(p);
         }
+        String nameList = copyDeleteList.stream().map(person -> Messages.format(person))
+                .collect(Collectors.joining(",\n"));
 
         model.clearFilters();
-
         return tag.isPresent()
-                ? new CommandResult(String.format(MESSAGE_DELETE_TAGGED_SUCCESS, tag.get().getTagName()))
-                : new CommandResult(String.format(MESSAGE_DELETE_NO_TAG_SUCCESS));
+                ? new CommandResult(String.format(MESSAGE_DELETE_TAGGED_SUCCESS,
+                        courseCode, tag.get().getTagName(), nameList))
+                : new CommandResult(String.format(MESSAGE_DELETE_NO_TAG_SUCCESS, courseCode, nameList));
     }
 
     @Override

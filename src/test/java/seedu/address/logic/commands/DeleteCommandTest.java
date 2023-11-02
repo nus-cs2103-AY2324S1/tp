@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
+import static seedu.address.logic.commands.DeleteCommand.MESSAGE_NO_STUDENTS;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBookManager;
@@ -13,6 +14,7 @@ import static seedu.address.testutil.TypicalPersons.getTypicalAddressBookManager
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
@@ -54,13 +56,30 @@ public class DeleteCommandTest {
         ContainsTagPredicate pred = new ContainsTagPredicate(tag);
         DeleteCommand deleteCommand = new DeleteCommand(tag, pred);
 
-        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_NO_TAG_SUCCESS);
         ModelManager expectedModel = new ModelManager(model.getAddressBookManager(), new UserPrefs());
         List<Person> personsToDelete = new ArrayList<>(expectedModel.getFilteredPersonList());
-
         for (Person p : personsToDelete) {
             expectedModel.deletePerson(p);
         }
+        String expectedNameList = personsToDelete.stream().map(person -> Messages.format(person))
+                .collect(Collectors.joining(",\n"));
+
+        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_NO_TAG_SUCCESS,
+                expectedModel.getAddressBook().getCourseCode(), expectedNameList);
+
+        assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_allWithTagWithNoStudents_showsNoStudentsMessage() {
+        Optional<Tag> tag = Optional.of(new Tag("UNUSEDTAG"));
+        ContainsTagPredicate pred = new ContainsTagPredicate(tag);
+        DeleteCommand deleteCommand = new DeleteCommand(tag, pred);
+
+        ModelManager expectedModel = new ModelManager(model.getAddressBookManager(), new UserPrefs());
+
+        String expectedMessage = String.format(MESSAGE_NO_STUDENTS, String.format("%s Tutorial Group %s",
+                expectedModel.getAddressBook().getCourseCode(), tag.get().getTagName()));
 
         assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
     }

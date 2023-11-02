@@ -32,7 +32,7 @@ public class ListAttendanceCommand extends ListCommand {
     public static final String MESSAGE_SUCCESS = "Listed all absent students:";
     public static final String MESSAGE_INCOMPLETE_ATTENDANCE = "Unable to show summary: "
             + "Attendance records are incomplete for week %d.";
-    public static final String MESSAGE_NO_STUDENTS = "There are no students in tutorial group %s!";
+    public static final String MESSAGE_NO_STUDENTS = "There are no students in %s Tutorial Group %s!";
 
     private final Week week;
     private final AbsentFromTutorialPredicate absencePredicate;
@@ -59,15 +59,15 @@ public class ListAttendanceCommand extends ListCommand {
      * Returns string containing summary of attendance.
      *
      * @param isWithTag If there is a tag entered
-     * @param numberOfPresentees Number of students who were present
-     * @param numberOfStudents Number of students in total or in tutorial group
+     * @param numOfPresentees Number of students who were present
+     * @param numOfStudents Number of students in total or in tutorial group
      */
-    public String getAttendanceSummary(boolean isWithTag, int numberOfPresentees, int numberOfStudents) {
+    public String getAttendanceSummary(boolean isWithTag, int numOfPresentees, int numOfStudents, String courseCode) {
         return isWithTag
-                ? String.format(Messages.MESSAGE_ATTENDANCE_SUMMARY_WITH_TAG, numberOfPresentees, numberOfStudents,
-                        week.getWeekNumber(), tag.get().getTagName())
-                : String.format(Messages.MESSAGE_ATTENDANCE_SUMMARY_NO_TAG, numberOfPresentees, numberOfStudents,
-                        week.getWeekNumber());
+                ? String.format(Messages.MESSAGE_ATTENDANCE_SUMMARY_WITH_TAG, numOfPresentees, numOfStudents,
+                        week.getWeekNumber(), courseCode, tag.get().getTagName())
+                : String.format(Messages.MESSAGE_ATTENDANCE_SUMMARY_NO_TAG, numOfPresentees, numOfStudents,
+                        week.getWeekNumber(), courseCode);
     }
 
     public ArrayList<Person> getUnmarkedPersons(List<Person> personList) {
@@ -100,8 +100,10 @@ public class ListAttendanceCommand extends ListCommand {
     public CommandResult execute(Model model) {
         requireNonNull(model);
 
+        model.clearFilters();
         boolean isWithTag = false;
         int numberOfStudents = model.getFilteredPersonList().size();
+        String courseCode = model.getAddressBook().getCourseCode();
 
         if (tag.isPresent()) {
             model.addFilter(tutorialPredicate);
@@ -109,7 +111,7 @@ public class ListAttendanceCommand extends ListCommand {
             numberOfStudents = model.getFilteredPersonList().size();
 
             if (numberOfStudents == 0) {
-                return new CommandResult(String.format(MESSAGE_NO_STUDENTS, tag.get().getTagName()));
+                return new CommandResult(String.format(MESSAGE_NO_STUDENTS, courseCode, tag.get().getTagName()));
             }
         }
 
@@ -125,7 +127,7 @@ public class ListAttendanceCommand extends ListCommand {
 
         int numberOfAbsentees = model.getFilteredPersonList().size();
         int numberOfPresentees = numberOfStudents - numberOfAbsentees;
-        String attendanceSummary = getAttendanceSummary(isWithTag, numberOfPresentees, numberOfStudents);
+        String attendanceSummary = getAttendanceSummary(isWithTag, numberOfPresentees, numberOfStudents, courseCode);
 
         return new CommandResult(attendanceSummary + MESSAGE_SUCCESS);
     }

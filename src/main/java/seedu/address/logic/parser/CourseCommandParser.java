@@ -2,7 +2,7 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_COURSETUTORIAL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_COURSE;
 
 import java.util.stream.Stream;
 
@@ -23,7 +23,7 @@ public class CourseCommandParser implements Parser<CourseCommand> {
     public CourseCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_COURSETUTORIAL);
+                ArgumentTokenizer.tokenize(args, PREFIX_COURSE);
 
         CourseOperation operation;
 
@@ -37,14 +37,14 @@ public class CourseCommandParser implements Parser<CourseCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, CourseCommand.MESSAGE_USAGE), pe);
         }
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_COURSETUTORIAL)
-                || argMultimap.getValue(PREFIX_COURSETUTORIAL).isEmpty()) {
+        if (!arePrefixesPresent(argMultimap, PREFIX_COURSE)
+                || argMultimap.getValue(PREFIX_COURSE).isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, CourseCommand.MESSAGE_USAGE));
         }
 
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_COURSETUTORIAL);
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_COURSE);
 
-        return new CourseCommand(operation, argMultimap.getValue(PREFIX_COURSETUTORIAL).get());
+        return new CourseCommand(operation, argMultimap.getValue(PREFIX_COURSE).get());
     }
 
     /**

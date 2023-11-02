@@ -63,9 +63,8 @@ public class PersonTest {
      */
     @Test
     public void getAttendanceForCurrentWeek_noAttendance_emptyOptional() {
-        Person emptyAlice = new PersonBuilder(ALICE).build();
-        Optional<Attendance> result = emptyAlice.getAttendanceForSpecifiedWeek(new Week(1));
-        System.out.println(result);
+        Person emptyBob = new PersonBuilder(BOB).build();
+        Optional<Attendance> result = emptyBob.getAttendanceForSpecifiedWeek(new Week(1));
         assertFalse(result.isPresent());
     }
 
@@ -137,14 +136,14 @@ public class PersonTest {
         List<Attendance> attendanceRecords2 = new ArrayList<>();
         attendanceRecords2.add(attendance2);
 
-        Person emptyAlice = new PersonBuilder(ALICE).build();
-        emptyAlice.mergeAttendanceRecords(attendanceRecords1, attendanceRecords2, emptyAlice);
+        Person emptyBob = new PersonBuilder(BOB).build();
+        emptyBob.mergeAttendanceRecords(attendanceRecords1, attendanceRecords2, emptyBob);
 
         List<Attendance> expectedRecords = new ArrayList<>();
         expectedRecords.add(attendance1);
         expectedRecords.add(attendance2);
 
-        assertEquals(expectedRecords, emptyAlice.getAttendanceRecords());
+        assertEquals(expectedRecords, emptyBob.getAttendanceRecords());
     }
 
     @Test
@@ -159,13 +158,13 @@ public class PersonTest {
         List<Attendance> attendanceRecords2 = new ArrayList<>();
         attendanceRecords2.add(attendance2);
 
-        Person emptyAlice = new PersonBuilder(ALICE).build();
-        emptyAlice.mergeAttendanceRecords(attendanceRecords1, attendanceRecords2, emptyAlice);
+        Person emptyAmy = new PersonBuilder().build();
+        emptyAmy.mergeAttendanceRecords(attendanceRecords1, attendanceRecords2, emptyAmy);
 
         List<Attendance> expectedRecords = new ArrayList<>();
         expectedRecords.add(attendance1);
 
-        assertEquals(expectedRecords, emptyAlice.getAttendanceRecords());
+        assertEquals(expectedRecords, emptyAmy.getAttendanceRecords());
     }
 
     @Test
