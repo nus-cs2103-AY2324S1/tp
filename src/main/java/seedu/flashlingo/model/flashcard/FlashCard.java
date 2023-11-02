@@ -17,7 +17,8 @@ public class FlashCard {
     private final TranslatedWord translatedWord;
     private Date whenToReview; // Date the flashcard was needs to be reviewed
     private ProficiencyLevel currentLevel; // How many times successfully remembered
-    private boolean isRemembered;//if successfully remembers word
+
+    private boolean isRemembered; //if successfully remembers word
 
     /**
      * Constructor for Flashcard
