@@ -106,8 +106,7 @@ public class UndiagnoseCommandTest {
 
     @Test
     public void execute_validIndexTwoIllnessesFilteredList_success() {
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(), model.getUserHistoryManager());
-
+        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         showPersonAtIndex(model, INDEX_THIRD_PERSON);
         Person personToUndiagnose = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
 
@@ -123,7 +122,6 @@ public class UndiagnoseCommandTest {
 
         //It should be editing the third person
         expectedModel.setPerson(expectedModel.getFilteredPersonList().get(2), undiagnosedPerson);
-
         assertCommandSuccess(undiagnoseCommand, model, expectedMessage, expectedModel);
     }
 

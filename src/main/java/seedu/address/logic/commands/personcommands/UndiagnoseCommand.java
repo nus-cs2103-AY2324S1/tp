@@ -87,7 +87,7 @@ public class UndiagnoseCommand extends Command {
      * Creates and returns a {@code Person} with the details of {@code personToEdit}
      * edited with {@code illnesses}.
      */
-    private static Person createUndiagnosedPerson(Person personToEdit, Set<Tag> illnesses) throws CommandException {
+    private static Person createUndiagnosedPerson(Person personToEdit, Set<Tag> illnesses) {
         assert personToEdit != null;
 
         Set<Tag> updatedTags = new HashSet<>();

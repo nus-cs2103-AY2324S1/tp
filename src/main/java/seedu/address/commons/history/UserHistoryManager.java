@@ -27,8 +27,8 @@ public class UserHistoryManager {
      */
     @SuppressWarnings("unchecked")
     public UserHistoryManager(UserHistoryManager userHistory) {
-        undoHistory = (Stack<Pair<List<Person>, List<Appointment>>>) userHistory.undoHistory.clone();
-        redoHistory = (Stack<Pair<List<Person>, List<Appointment>>>) userHistory.redoHistory.clone();
+        this.undoHistory = (Stack<Pair<List<Person>, List<Appointment>>>) userHistory.undoHistory.clone();
+        this.redoHistory = (Stack<Pair<List<Person>, List<Appointment>>>) userHistory.redoHistory.clone();
     }
 
     /**
