@@ -196,8 +196,7 @@ The following sequence diagram provides a visual representation of the pie chart
     - Cons: Demands a more complex implementation.
 
 **Aspect: Indication of room pie chart failures:**
-
-- **Choice:** Show pie chart 
+- **Choice:** Show pie chart
     - Pros: Visually noticeable to users as they can see if there is no change to the pie chart when there should be or the pie chart is not shown at all.
     - Cons: Users may somehow not notice that the pie chart is not changing.
 
@@ -251,7 +250,7 @@ The following sequence diagram provides a visual representation of the prefix au
 
 ### Room Tags
 #### Implementation
-Tag is a required field when inputting the add command. 
+Tag is a required field when inputting the add command.
 This tags the booking with the type of room that the guest has requested.
 Tag takes in an enum class RoomTypes.
 
@@ -334,7 +333,6 @@ The following sequence diagram provides a visual representation of the flag/unfl
 ## **Appendix: Requirements**
 
 ### Product scope
-
 **Target User profile**
 
 * Hotel employees, especially those in administrative and management roles.
