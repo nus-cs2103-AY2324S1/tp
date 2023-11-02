@@ -270,7 +270,7 @@ public class PersonCardTest {
         Consumer<String> callback = (str) -> callbackCommand.set(str);
         Person person = new PersonBuilder().withName("Bob").withEmails(List.of(VALID_EMAIL_BOB)).build();
         PersonCard personCard = new PersonCard(person, 1, callback);
-        FlowPane emailsPane = personCard.getLinks();
+        FlowPane emailsPane = personCard.getEmails();
         Hyperlink link = (Hyperlink) emailsPane.getChildren().get(0);
         link.fire();
         assertEquals(expectedCommand, callbackCommand.get());
