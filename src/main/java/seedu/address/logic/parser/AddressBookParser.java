@@ -108,10 +108,8 @@ public class AddressBookParser {
 
         case AddPersonCommand.COMMAND_WORD:
             return new AddPersonCommandParser().parse(userInput);
-
         case EditPersonCommand.COMMAND_WORD:
             return new EditPersonCommandParser().parse(userInput);
-
         case DeletePersonCommand.COMMAND_WORD:
             return new DeletePersonCommandParser().parse(arguments);
         case DeleteLessonCommand.COMMAND_WORD:

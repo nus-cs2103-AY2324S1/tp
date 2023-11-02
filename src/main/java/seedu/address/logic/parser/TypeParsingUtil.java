@@ -516,15 +516,31 @@ public class TypeParsingUtil {
     }
     public static String getValueImmediatelyAfterCommandName(String commandWord,
                                                              String errorFieldName,
-                                                             String input) throws ParseException {
-        Pattern p = Pattern.compile(commandWord + "\\s+([\\w ]+)");
+                                                             String input,
+                                                             boolean isOptional) throws ParseException {
+        Pattern p = Pattern.compile(commandWord + "\\s+([\\w]+)");
+        Pattern debugNegativeNumber = Pattern.compile(commandWord + "\\s+(-\\d+)");
+        Matcher debugNegativeNumberMatcher = debugNegativeNumber.matcher(input);
+        if (debugNegativeNumberMatcher.find()) {
+            throw new InvalidInputException("Negative number is not allowed for " + errorFieldName + ".");
+        }
         Matcher m = p.matcher(input);
         if (m.find()) {
             return m.group(1).trim();
         } else {
+            if (isOptional) {
+                return null;
+            }
             throw new FlagNotFoundException(errorFieldName + " not found");
         }
     }
+
+    public static String getValueImmediatelyAfterCommandName(String commandWord,
+                                                             String errorFieldName,
+                                                             String input) throws ParseException {
+        return getValueImmediatelyAfterCommandName(commandWord, errorFieldName, input, false);
+    }
+
     public static String getNumberImmediatelyAfterCommandName(String commandWord,
                                                              String errorFieldName,
                                                              String input, boolean isOptional) throws ParseException {

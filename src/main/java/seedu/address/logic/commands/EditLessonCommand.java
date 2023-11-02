@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.parser.EditLessonCommandParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.lessons.Lesson;
 
@@ -28,6 +29,7 @@ public class EditLessonCommand extends AbstractEditCommand<Lesson> {
         hasClashWith = model::hasLessonClashWith;
         deleteMethod = model::deleteLesson;
         addMethod = model::addLesson;
+        getClashingEntry = model::getLessonClashWith;
         showMethod = model::showLesson;
     }
 
@@ -40,5 +42,20 @@ public class EditLessonCommand extends AbstractEditCommand<Lesson> {
             throw new CommandException(e.getMessage());
         }
         edited.setSubjectIfNotDefault(editDescriptor.getSubject());
+    }
+
+    @Override
+    String editableFieldsInfo() {
+        return "name, start, end, subject, day, remark";
+    }
+
+    @Override
+    String className() {
+        return "lesson";
+    }
+
+    @Override
+    public String getUsageInfo() {
+        return EditLessonCommandParser.getUsageInfo();
     }
 }

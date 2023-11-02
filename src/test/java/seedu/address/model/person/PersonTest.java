@@ -13,6 +13,7 @@ import static seedu.address.testutil.TypicalPersons.BOB;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.Messages;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.testutil.PersonBuilder;
 
@@ -86,9 +87,7 @@ public class PersonTest {
 
     @Test
     public void toStringMethod() {
-        String expected = Person.class.getCanonicalName() + "{name=" + ALICE.getName() + ", phone=" + ALICE.getPhone()
-                + ", email=" + ALICE.getEmail() + ", address=" + ALICE.getAddress() + ", subjects="
-                + ALICE.getSubjects() + ", tags=" + ALICE.getTags() + ", remark=" + ALICE.getRemark() + "}";
+        String expected = Messages.format(ALICE);
         assertEquals(expected, ALICE.toString());
     }
 }

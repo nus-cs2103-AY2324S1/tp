@@ -19,9 +19,9 @@ public class DeletePersonCommand extends Command {
     public static final String COMMAND_WORD = "deletePerson";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the person identified by the index number used in the displayed person list.\n"
+            + ": Deletes the entry identified by the index number used in the displayed list.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
-            + "Example: " + COMMAND_WORD + " 1";
+            + "Example: delete 1";
 
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
 
@@ -41,7 +41,11 @@ public class DeletePersonCommand extends Command {
         List<Person> lastShownList = model.getFilteredPersonList();
 
         if (targetIndex < 1 || targetIndex > lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            String errMessage = lastShownList.isEmpty()
+                    ? "The index provided is invalid as the person list is empty."
+                    : "Index out of bounds, expected 1 to " + lastShownList.size()
+                    + " but got " + targetIndex + ".";
+            throw new CommandException(errMessage);
         }
 
         Person personToDelete = lastShownList.get(targetIndex - 1);

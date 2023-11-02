@@ -151,7 +151,8 @@ public class Lesson extends ListEntry<Lesson> {
 
     public void setEnd(Time end) {
         if (start != Time.DEFAULT_TIME && end.isBefore(start)) {
-            throw new IllegalArgumentException("End time cannot be before start time");
+            throw new IllegalArgumentException("End time: " + end.toString()
+                    + " cannot be before start time: " + start.toString() + ".");
         }
         this.end = end;
     }
@@ -172,7 +173,8 @@ public class Lesson extends ListEntry<Lesson> {
             end = this.end;
         }
         if (start != Time.DEFAULT_TIME && end != Time.DEFAULT_TIME && start.isAfter(end)) {
-            throw new ParseException("End time cannot be before start time");
+            throw new ParseException("End time: " + end.toString()
+                    + " cannot be before start time: " + start.toString() + ".");
         }
         this.start = start;
         this.end = end;
@@ -280,6 +282,9 @@ public class Lesson extends ListEntry<Lesson> {
         if (otherLesson == this) {
             return true;
         }
+        if (this.name.equals(otherLesson.getName())) {
+            return true;
+        }
         if (this.day == Day.DEFAULT_DAY || otherLesson.getDay() == Day.DEFAULT_DAY) {
             return false;
         }
@@ -299,11 +304,14 @@ public class Lesson extends ListEntry<Lesson> {
     }
     @Override
     public String toString() {
-        // TODO: Add number of tasks to complete
-        String subjectStr = subject == null
+        String startEndStr = start != Time.DEFAULT_TIME && end != Time.DEFAULT_TIME
+                             ? " from " + start + " to " + end
+                             : "";
+        String subjectStr = subject == Subject.DEFAULT_SUBJECT
                              ? ""
                              : " for " + subject;
-        return "Lesson from " + start + " to " + end + subjectStr;
+        // TODO: Add number of tasks to complete
+        return "Lesson " + name + startEndStr + subjectStr;
     }
 
     /**

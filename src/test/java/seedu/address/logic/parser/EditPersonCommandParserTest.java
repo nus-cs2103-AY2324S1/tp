@@ -23,7 +23,8 @@ public class EditPersonCommandParserTest {
         }
     }
     @Test
-    void badCases() {
-        assertThrows(ParseException.class, () -> p.parse("edit -name yiwen"));
+    void badCases() throws ParseException {
+        p.parse(EditPersonCommand.COMMAND_WORD + " -name yiwen");
+        assertThrows(ParseException.class, () -> p.parse(EditPersonCommand.COMMAND_WORD + " index -name yiwen"));
     }
 }

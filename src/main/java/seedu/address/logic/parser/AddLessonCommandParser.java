@@ -19,7 +19,7 @@ public class AddLessonCommandParser implements Parser<AddLessonCommand> {
 
     @Override
     public AddLessonCommand parse(String args) throws ParseException {
-        return new AddLessonCommand(parseLesson(args));
+        return new AddLessonCommand(parseLesson(args, false));
     }
 
     /**
@@ -28,14 +28,31 @@ public class AddLessonCommandParser implements Parser<AddLessonCommand> {
      * @return a lesson object
      * @throws ParseException if the user input is of wrong format or the lesson clashes with existing lessons
      */
-    public static Lesson parseLesson(String args) throws ParseException {
-        Lesson lesson = Lesson.getDefaultLesson();
-        lesson.setNameIfNotDefault(parseField("name", args, Name::of));
-        lesson.setSubjectIfNotDefault(parseField("subject", args, Subject::of));
-        lesson.setDayIfNotDefault(parseField("day", args, Day::of));
-        lesson.setStartIfNotDefault(parseField("start", args, Time::of));
-        lesson.setEndIfNotDefault(parseField("end", args, Time::of));
-        return lesson;
-        //lesson.setTaskListIfNotDefault(parseField("task", args, TaskList::of));
+    public static Lesson parseLesson(String args, boolean nameIsOptional) throws ParseException {
+        try {
+            Lesson lesson = Lesson.getDefaultLesson();
+            lesson.setNameIfNotDefault(parseField("name", args, Name::of, nameIsOptional));
+            lesson.setSubjectIfNotDefault(parseField("subject", args, Subject::of));
+            lesson.setDayIfNotDefault(parseField("day", args, Day::of));
+            Time start = parseField("start", args, Time::of);
+            if (start == null) {
+                start = Time.DEFAULT_TIME;
+            }
+            Time end = parseField("end", args, Time::of);
+            if (end == null) {
+                end = Time.DEFAULT_TIME;
+            }
+            lesson.updateStartAndEnd(start, end);
+            return lesson;
+        } catch (ParseException e) {
+            throw new ParseException("Invalid lesson input: " + e.getMessage() + ". "
+                    + getUsageInfo());
+        }
+    }
+    private static String getUsageInfo() {
+        return "\nUsage: addLesson -name [NAME] (any number of -[subject|day|start|end|remark] [value]). "
+                + "\n For example, addLesson -name John -subject Math -day Monday -start 14:30 -end 16:30"
+                + "\n If you are currently displaying lesson list, you could use 'add' inplace of 'addLesson'. "
+                + "\n Note you must provide a 'name' not already in the schedule and 'start' must be before 'end'.";
     }
 }

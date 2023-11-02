@@ -24,7 +24,7 @@ public class AddPersonCommandParser implements Parser<AddPersonCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public AddPersonCommand parse(String args) throws ParseException {
-        return new AddPersonCommand(parsePerson(args));
+        return new AddPersonCommand(parsePerson(args, false));
     }
 
     /**
@@ -33,15 +33,26 @@ public class AddPersonCommandParser implements Parser<AddPersonCommand> {
      * @return the person parsed
      * @throws ParseException if the user input does not conform the expected format or of wrong value
      */
-    public static Person parsePerson(String args) throws ParseException {
-        Person person = Person.getDefaultPerson();
-        person.setNameIfNotDefault(parseField("name", args, Name::of));
-        person.setPhoneIfNotDefault(parseField("phone", args, Phone::of));
-        person.setEmailIfNotDefault(parseField("email", args, Email::of));
-        person.setAddressIfNotDefault(parseField("address", args, Address::of));
-        person.setSubjectsIfNotDefault(parseField("subject", args, Subjects::of));
-        person.setTagsIfNotDefault(parseField("tag", args, Tags::of));
-        person.setRemarkIfNotDefault(parseField("remark", args, Remark::of));
-        return person;
+    public static Person parsePerson(String args, boolean nameIsOptional) throws ParseException {
+        try {
+            Person person = Person.getDefaultPerson();
+            person.setNameIfNotDefault(parseField("name", args, Name::of, nameIsOptional));
+            person.setPhoneIfNotDefault(parseField("phone", args, Phone::of));
+            person.setEmailIfNotDefault(parseField("email", args, Email::of));
+            person.setAddressIfNotDefault(parseField("address", args, Address::of));
+            person.setSubjectsIfNotDefault(parseField("subject", args, Subjects::of));
+            person.setTagsIfNotDefault(parseField("tag", args, Tags::of));
+            person.setRemarkIfNotDefault(parseField("remark", args, Remark::of));
+            return person;
+        } catch (ParseException e) {
+            throw new ParseException("Invalid person format: " + e.getMessage() + ". "
+                    + getUsageInfo());
+        }
+    }
+    private static String getUsageInfo() {
+        return "\nUsage: addPerson -name [NAME] (any number of -[phone|email|address|subject|tag|remark] [value]). "
+                + "\nFor example, addPerson -name John -phone 91234567"
+                + "\nIf you are currently displaying person list, you could use 'add' inplace of 'addPerson'. "
+                + "\nNote you must provide a 'name' not already in the address book.";
     }
 }

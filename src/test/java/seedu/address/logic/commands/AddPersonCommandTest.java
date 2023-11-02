@@ -263,6 +263,11 @@ public class AddPersonCommandTest {
         }
 
         @Override
+        public Person getPersonClashWith(Person person) {
+            return null;
+        }
+
+        @Override
         public Set<Person> getPersonsFulfill(Predicate<Person> predicate) {
             return null;
         }
