@@ -12,7 +12,6 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_T09;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BOB;
-import static seedu.address.testutil.TypicalPersons.FIONA;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -159,13 +158,13 @@ public class PersonTest {
         List<Attendance> attendanceRecords2 = new ArrayList<>();
         attendanceRecords2.add(attendance2);
 
-        Person emptyFiona = new PersonBuilder(FIONA).build();
-        emptyFiona.mergeAttendanceRecords(attendanceRecords1, attendanceRecords2, emptyFiona);
+        Person emptyAmy = new PersonBuilder().build();
+        emptyAmy.mergeAttendanceRecords(attendanceRecords1, attendanceRecords2, emptyAmy);
 
         List<Attendance> expectedRecords = new ArrayList<>();
         expectedRecords.add(attendance1);
 
-        assertEquals(expectedRecords, emptyFiona.getAttendanceRecords());
+        assertEquals(expectedRecords, emptyAmy.getAttendanceRecords());
     }
 
     @Test

@@ -22,7 +22,7 @@ public class PersonBuilder {
     public static final String DEFAULT_NAME = "Amy Bee";
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
-    public static final String DEFAULT_ID = "A1234567E";
+    public static final String DEFAULT_ID = "A1234567A";
 
     private Name name;
     private Phone phone;
@@ -99,7 +99,7 @@ public class PersonBuilder {
      * Adds an attendance record to the {@code Person} that we are building.
      */
     public PersonBuilder withAttendance(Attendance attendance) {
-        this.build().addAttendance(attendance);
+        this.attendanceList.add(attendance);
         return this;
     }
 
