@@ -135,28 +135,125 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String tag} into a {@code Tag}.
-     * Leading and trailing whitespaces will be trimmed.
+     * Parses a string to create a {@code Tag} object after processing the input string.
+     * The input string is trimmed and converted to uppercase. If the tag name is a valid
+     * patient tag name, it is prefixed with "priority: " before being used to create the tag.
      *
-     * @throws ParseException if the given {@code tag} is invalid.
+     * @param tag The string to be parsed into a Tag object.
+     * @return A Tag object representing the input string.
+     * @throws NullPointerException if the tag parameter is null.
      */
-    public static Tag parseTag(String tag) throws ParseException {
+    public static Tag parseTag(String tag) {
         requireNonNull(tag);
-        String trimmedTag = tag.trim();
-        if (!Tag.isValidTagName(trimmedTag)) {
-            throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
+        String trimmedTag = tag.trim().toUpperCase();
+        if (Tag.isValidPatientTagName(trimmedTag)) {
+            trimmedTag = "priority: " + trimmedTag;
         }
         return new Tag(trimmedTag);
     }
 
     /**
-     * Parses {@code Collection<String> tags} into a {@code Set<Tag>}.
+     * Parses a collection of strings to create a set of {@code Tag} objects.
+     * Each string in the collection is processed to create a Tag. If a duplicate tag is found,
+     * a ParseException is thrown.
+     *
+     * @param tags The collection of strings to be parsed into Tag objects.
+     * @return A set of Tag objects.
+     * @throws ParseException if a duplicate tag is detected.
+     * @throws NullPointerException if the tags parameter is null.
      */
     public static Set<Tag> parseTags(Collection<String> tags) throws ParseException {
         requireNonNull(tags);
         final Set<Tag> tagSet = new HashSet<>();
         for (String tagName : tags) {
-            tagSet.add(parseTag(tagName));
+            Tag toAdd = parseTag(tagName);
+            if (tagSet.contains(toAdd)) {
+                throw new ParseException(Tag.DUPLICATE_TAG);
+            }
+            tagSet.add(toAdd);
+        }
+        return tagSet;
+    }
+
+    /**
+     * Parses a string to create a {@code Tag} object representing a patient tag.
+     * The tag name is validated to be a valid patient tag name, prefixed with "priority: ".
+     * If the tag name is not valid, a ParseException is thrown.
+     *
+     * @param tag The string to be parsed into a patient Tag object.
+     * @return A Tag object representing the patient tag.
+     * @throws ParseException if the tag name is not a valid patient tag name.
+     * @throws NullPointerException if the tag parameter is null.
+     */
+    public static Tag parsePatientTag(String tag) throws ParseException {
+        requireNonNull(tag);
+        String trimmedTag = tag.trim().toUpperCase();
+        if (!Tag.isValidPatientTagName(trimmedTag)) {
+            throw new ParseException(Tag.INVALID_PATIENT_TAG);
+        }
+        return new Tag("priority: " + trimmedTag);
+    }
+
+    /**
+     * Parses a collection of strings to create a set of {@code Tag} objects representing patient tags.
+     * If more than one tag is provided, a ParseException is thrown since patients should only have one tag.
+     * Each tag is validated to be a proper patient tag.
+     *
+     * @param tags The collection of strings to be parsed into patient Tag objects.
+     * @return A set of Tag objects representing the patient tags.
+     * @throws ParseException if the collection contains more than one tag or if the tag is not valid.
+     * @throws NullPointerException if the tags parameter is null.
+     */
+    public static Set<Tag> parsePatientTags(Collection<String> tags) throws ParseException {
+        requireNonNull(tags);
+        final Set<Tag> tagSet = new HashSet<>();
+        if (tags.size() > 1) {
+            throw new ParseException(Tag.EXTRA_PATIENT_TAG);
+        }
+        for (String tagName : tags) {
+            tagSet.add(parsePatientTag(tagName));
+        }
+        return tagSet;
+    }
+
+    /**
+     * Parses a string to create a {@code Tag} object representing a doctor tag.
+     * The tag name is validated to be a valid doctor tag name. If the tag name is not valid,
+     * a ParseException is thrown.
+     *
+     * @param tag The string to be parsed into a doctor Tag object.
+     * @return A Tag object representing the doctor tag.
+     * @throws ParseException if the tag name is not a valid doctor tag name.
+     * @throws NullPointerException if the tag parameter is null.
+     */
+    public static Tag parseDoctorTag(String tag) throws ParseException {
+        requireNonNull(tag);
+        String trimmedTag = tag.trim().toUpperCase();
+        if (!Tag.isValidDoctorTagName(trimmedTag)) {
+            throw new ParseException(Tag.INVALID_DOCTOR_TAG);
+        }
+        return new Tag(trimmedTag);
+    }
+
+    /**
+     * Parses a collection of strings to create a set of {@code Tag} objects representing doctor tags.
+     * Duplicate tags are not allowed, and if found, a ParseException is thrown.
+     * Each tag is validated to be a proper doctor tag.
+     *
+     * @param tags The collection of strings to be parsed into doctor Tag objects.
+     * @return A set of Tag objects representing the doctor tags.
+     * @throws ParseException if a duplicate tag is detected or if the tag is not valid.
+     * @throws NullPointerException if the tags parameter is null.
+     */
+    public static Set<Tag> parseDoctorTags(Collection<String> tags) throws ParseException {
+        requireNonNull(tags);
+        final Set<Tag> tagSet = new HashSet<>();
+        for (String tagName : tags) {
+            Tag toAdd = parseDoctorTag(tagName);
+            if (tagSet.contains(toAdd)) {
+                throw new ParseException(Tag.DUPLICATE_TAG);
+            }
+            tagSet.add(toAdd);
         }
         return tagSet;
     }

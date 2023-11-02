@@ -19,8 +19,8 @@ import static seedu.address.logic.commands.CommandTestUtil.INVALID_CONDITION_DES
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_EMERGENCY_CONTACT_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_PATIENT_TAG_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.NRIC_DESC_AMY;
@@ -29,8 +29,8 @@ import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_NON_EMPTY;
 import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
-import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
-import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
+import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_LOW;
+import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_MEDIUM;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_BLOODTYPE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_CONDITION_BOB;
@@ -40,8 +40,6 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_GENDER_MALE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NRIC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_BLOODTYPE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CONDITION;
@@ -51,6 +49,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_GENDER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalPatient.AMY;
@@ -67,7 +66,6 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Patient;
 import seedu.address.model.person.Phone;
-import seedu.address.model.tag.Tag;
 import seedu.address.testutil.PatientBuilder;
 
 public class AddPatientCommandParserTest {
@@ -75,30 +73,20 @@ public class AddPatientCommandParserTest {
 
     @Test
     public void parse_allFieldsPresent_success() {
-        Patient expectedPatient = new PatientBuilder(BOB).withTags(VALID_TAG_FRIEND).build();
+        Patient expectedPatient = new PatientBuilder(BOB).build();
 
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
                         + ADDRESS_DESC_BOB + GENDER_DESC_MALE + NRIC_DESC_BOB + CONDITION_DESC_BOB
-                        + BLOODTYPE_DESC_BOB + EMERGENCY_CONTACT_DESC_BOB + TAG_DESC_FRIEND,
+                        + BLOODTYPE_DESC_BOB + EMERGENCY_CONTACT_DESC_BOB + TAG_DESC_MEDIUM,
                 new AddPatientCommand(expectedPatient));
-
-
-        // multiple tags - all accepted
-        Patient expectedPatientMultipleTags = new PatientBuilder(BOB).withTags(VALID_TAG_FRIEND, VALID_TAG_HUSBAND)
-                .build();
-        assertParseSuccess(parser,
-                NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                        + GENDER_DESC_MALE + NRIC_DESC_BOB + CONDITION_DESC_BOB + BLOODTYPE_DESC_BOB
-                        + EMERGENCY_CONTACT_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
-                new AddPatientCommand(expectedPatientMultipleTags));
     }
 
     @Test
     public void parse_repeatedNonTagValue_failure() {
         String validExpectedPatientString = NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
                 + GENDER_DESC_MALE + NRIC_DESC_BOB + CONDITION_DESC_BOB + BLOODTYPE_DESC_BOB
-                + EMERGENCY_CONTACT_DESC_BOB + TAG_DESC_FRIEND;
+                + EMERGENCY_CONTACT_DESC_BOB + TAG_DESC_LOW;
 
         // multiple names
         assertParseFailure(parser, NAME_DESC_AMY + validExpectedPatientString,
@@ -128,13 +116,17 @@ public class AddPatientCommandParserTest {
         assertParseFailure(parser, EMERGENCY_CONTACT_DESC_AMY + validExpectedPatientString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_EMERGENCY_CONTACT));
 
+        //multiple tags
+        assertParseFailure(parser, TAG_DESC_MEDIUM + validExpectedPatientString,
+                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_TAG));
+
         // multiple fields repeated
         assertParseFailure(parser,
                 validExpectedPatientString + PHONE_DESC_AMY + EMAIL_DESC_AMY + NAME_DESC_AMY + ADDRESS_DESC_AMY
-                        + CONDITION_DESC_AMY + BLOODTYPE_DESC_AMY + EMERGENCY_CONTACT_DESC_AMY
+                        + TAG_DESC_LOW + CONDITION_DESC_AMY + BLOODTYPE_DESC_AMY + EMERGENCY_CONTACT_DESC_AMY
                         + validExpectedPatientString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_NAME, PREFIX_NRIC, PREFIX_GENDER,
-                        PREFIX_ADDRESS, PREFIX_EMAIL, PREFIX_PHONE, PREFIX_CONDITION, PREFIX_BLOODTYPE,
+                        PREFIX_ADDRESS, PREFIX_TAG, PREFIX_EMAIL, PREFIX_PHONE, PREFIX_CONDITION, PREFIX_BLOODTYPE,
                         PREFIX_CONDITION, PREFIX_EMERGENCY_CONTACT));
 
         // invalid value followed by valid value
@@ -167,6 +159,10 @@ public class AddPatientCommandParserTest {
         assertParseFailure(parser, INVALID_EMERGENCY_CONTACT_DESC + validExpectedPatientString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_EMERGENCY_CONTACT));
 
+        //invalid tag
+        assertParseFailure(parser, INVALID_PATIENT_TAG_DESC + validExpectedPatientString,
+                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_TAG));
+
         // valid value followed by invalid value
 
         // invalid name
@@ -196,6 +192,10 @@ public class AddPatientCommandParserTest {
         // invalid emergencyContact
         assertParseFailure(parser, validExpectedPatientString + INVALID_EMERGENCY_CONTACT_DESC,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_EMERGENCY_CONTACT));
+
+        // invalid tag
+        assertParseFailure(parser, validExpectedPatientString + INVALID_PATIENT_TAG_DESC,
+                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_TAG));
     }
 
     @Test
@@ -272,43 +272,38 @@ public class AddPatientCommandParserTest {
         // invalid name
         assertParseFailure(parser, INVALID_NAME_DESC + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
                 + NRIC_DESC_BOB + GENDER_DESC_MALE + CONDITION_DESC_BOB + BLOODTYPE_DESC_BOB
-                + EMERGENCY_CONTACT_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, Name.MESSAGE_CONSTRAINTS);
+                + EMERGENCY_CONTACT_DESC_BOB + TAG_DESC_LOW, Name.MESSAGE_CONSTRAINTS);
 
         // invalid phone
         assertParseFailure(parser, NAME_DESC_BOB + INVALID_PHONE_DESC + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
                 + NRIC_DESC_BOB + GENDER_DESC_MALE + CONDITION_DESC_BOB + BLOODTYPE_DESC_BOB
-                + EMERGENCY_CONTACT_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, Phone.MESSAGE_CONSTRAINTS);
+                + EMERGENCY_CONTACT_DESC_BOB + TAG_DESC_LOW, Phone.MESSAGE_CONSTRAINTS);
 
         // invalid email
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + INVALID_EMAIL_DESC + ADDRESS_DESC_BOB
                 + NRIC_DESC_BOB + GENDER_DESC_MALE + CONDITION_DESC_BOB + BLOODTYPE_DESC_BOB
-                + EMERGENCY_CONTACT_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, Email.MESSAGE_CONSTRAINTS);
+                + EMERGENCY_CONTACT_DESC_BOB + TAG_DESC_LOW, Email.MESSAGE_CONSTRAINTS);
 
         // invalid address
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + INVALID_ADDRESS_DESC
                 + NRIC_DESC_BOB + GENDER_DESC_MALE + CONDITION_DESC_BOB + BLOODTYPE_DESC_BOB
-                + EMERGENCY_CONTACT_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, Address.MESSAGE_CONSTRAINTS);
-
-        // invalid tag
-        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                + NRIC_DESC_BOB + GENDER_DESC_MALE + CONDITION_DESC_BOB + BLOODTYPE_DESC_BOB
-                + EMERGENCY_CONTACT_DESC_BOB + INVALID_TAG_DESC + VALID_TAG_FRIEND, Tag.MESSAGE_CONSTRAINTS);
+                + EMERGENCY_CONTACT_DESC_BOB + TAG_DESC_LOW, Address.MESSAGE_CONSTRAINTS);
 
         // invalid condition
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
                 + NRIC_DESC_BOB + GENDER_DESC_MALE + INVALID_CONDITION_DESC + BLOODTYPE_DESC_BOB
-                + EMERGENCY_CONTACT_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, Condition.MESSAGE_CONSTRAINTS);
+                + EMERGENCY_CONTACT_DESC_BOB + TAG_DESC_LOW, Condition.MESSAGE_CONSTRAINTS);
 
 
         // invalid bloodType
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
                 + NRIC_DESC_BOB + GENDER_DESC_MALE + CONDITION_DESC_BOB + INVALID_BLOODTYPE_DESC
-                + EMERGENCY_CONTACT_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, BloodType.MESSAGE_CONSTRAINTS);
+                + EMERGENCY_CONTACT_DESC_BOB + TAG_DESC_LOW, BloodType.MESSAGE_CONSTRAINTS);
 
         // invalid emergencyContact
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
                 + NRIC_DESC_BOB + GENDER_DESC_MALE + CONDITION_DESC_BOB + BLOODTYPE_DESC_BOB
-                + INVALID_EMERGENCY_CONTACT_DESC + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, Phone.MESSAGE_CONSTRAINTS);
+                + INVALID_EMERGENCY_CONTACT_DESC + TAG_DESC_LOW, Phone.MESSAGE_CONSTRAINTS);
 
         // two invalid values, only first invalid value reported
         assertParseFailure(parser, INVALID_NAME_DESC + PHONE_DESC_BOB + EMAIL_DESC_BOB
@@ -318,7 +313,7 @@ public class AddPatientCommandParserTest {
 
         // non-empty preamble
         assertParseFailure(parser, PREAMBLE_NON_EMPTY + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                        + ADDRESS_DESC_BOB + NRIC_DESC_BOB + GENDER_DESC_MALE + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
+                        + ADDRESS_DESC_BOB + NRIC_DESC_BOB + GENDER_DESC_MALE + TAG_DESC_LOW,
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddPatientCommand.MESSAGE_USAGE));
     }
 }

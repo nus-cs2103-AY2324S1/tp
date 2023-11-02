@@ -20,8 +20,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_REMARK_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_REMARK_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_MEDIUM;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -38,17 +37,18 @@ public class TypicalPatient {
     public static final Patient ALICE = new PatientBuilder().withName("Alice Pauline")
             .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")
             .withPhone("94351253").withRemark("She likes aardvarks.").withGender("F").withIc("T0131267K")
-            .withTags("friends").withCondition("NA").withBloodType("O+").withEmergencyContact("90234567").build();
+            .withTags("priority: HIGH").withCondition("NA").withBloodType("O+")
+            .withEmergencyContact("90234567").build();
     public static final Patient BENSON = new PatientBuilder().withName("Benson Meier")
             .withAddress("311, Clementi Ave 2, #02-25").withRemark("He can't take beer!")
             .withEmail("johnd@example.com").withPhone("98765432").withGender("M").withIc("T0131268K")
-            .withTags("owesMoney", "friends").withCondition("Type 1 Diabetes").withBloodType("O-")
+            .withTags("priority: LOW").withCondition("Type 1 Diabetes").withBloodType("O-")
             .withEmergencyContact("92234567").build();
     public static final Patient CARL = new PatientBuilder().withName("Carl Kurz").withPhone("95352563")
             .withEmail("heinz@example.com").withAddress("wall street").withGender("M").withIc("T0131269K")
             .withCondition("Type 2 Diabetes").withBloodType("AB+").withEmergencyContact("91334567").build();
     public static final Patient DANIEL = new PatientBuilder().withName("Daniel Meier").withPhone("87652533")
-            .withEmail("cornelia@example.com").withAddress("10th street").withTags("friends")
+            .withEmail("cornelia@example.com").withAddress("10th street").withTags("priority: MEDIUM")
             .withGender("M").withIc("T0131260K").withCondition("Kidney Failure").withBloodType("A+")
             .withEmergencyContact("91234567").build();
     public static final Patient ELLE = new PatientBuilder().withName("Elle Meyer").withPhone("9482224")
@@ -74,12 +74,12 @@ public class TypicalPatient {
             .withEmergencyContact(VALID_EMERGENCY_CONTACT_AMY).withEmail(VALID_EMAIL_AMY)
             .withAddress(VALID_ADDRESS_AMY).withIc(VALID_NRIC_AMY).withGender(VALID_GENDER_FEMALE)
             .withRemark(VALID_REMARK_AMY).withCondition(VALID_CONDITION_AMY).withBloodType(VALID_BLOODTYPE_AMY)
-            .withTags(VALID_TAG_FRIEND).build();
+            .withTags(VALID_TAG_MEDIUM).build();
     public static final Patient BOB = new PatientBuilder().withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
             .withEmergencyContact(VALID_EMERGENCY_CONTACT_BOB).withEmail(VALID_EMAIL_BOB)
             .withAddress(VALID_ADDRESS_BOB).withIc(VALID_NRIC_BOB).withGender(VALID_GENDER_MALE)
             .withRemark(VALID_REMARK_BOB).withCondition(VALID_CONDITION_BOB).withBloodType(VALID_BLOODTYPE_BOB)
-            .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
+            .withTags(VALID_TAG_MEDIUM).build();
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
 

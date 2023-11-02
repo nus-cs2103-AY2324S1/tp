@@ -76,7 +76,7 @@ public class JsonAdaptedPatient extends JsonAdaptedPerson {
         final Ic modelIc = checkIc();
         final List<Tag> personTags = new ArrayList<>();
         for (JsonAdaptedTag tag : this.getTags()) {
-            personTags.add(tag.toModelType());
+            personTags.add(tag.toModelPatientType());
         }
         final Set<Tag> modelTags = new HashSet<>(personTags);
         final Condition modelCondition = checkCondition();

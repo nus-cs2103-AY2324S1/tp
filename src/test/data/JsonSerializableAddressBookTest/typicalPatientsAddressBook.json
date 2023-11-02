@@ -10,7 +10,7 @@
       "gender": "F",
       "ic": "T0131267K",
       "tags": [
-        "friends"
+        "priority: HIGH"
       ],
       "condition": "NA",
       "bloodType": "O+",
@@ -25,8 +25,7 @@
       "gender": "M",
       "ic": "T0131268K",
       "tags": [
-        "owesMoney",
-        "friends"
+        "priority: LOW"
       ],
       "condition": "Type 1 Diabetes",
       "bloodType": "O-",
@@ -54,7 +53,7 @@
       "gender": "M",
       "ic": "T0131260K",
       "tags": [
-        "friends"
+        "priority: MEDIUM"
       ],
       "condition": "Kidney Failure",
       "bloodType": "A+",
