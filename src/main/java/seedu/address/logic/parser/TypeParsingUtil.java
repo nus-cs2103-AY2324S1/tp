@@ -539,6 +539,7 @@ public class TypeParsingUtil {
                                                              String errorFieldName,
                                                              String input) throws ParseException {
         return getValueImmediatelyAfterCommandName(commandWord, errorFieldName, input, false);
+    }
 
     public static String getNumberImmediatelyAfterCommandName(String commandWord,
                                                              String errorFieldName,
