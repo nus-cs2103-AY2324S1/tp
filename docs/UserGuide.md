@@ -564,6 +564,7 @@ Format: `reset`, followed by `reset confirm`
 
    * User is prompted to enter `reset confirm` to confirm and execute the deletion of all data entries.
 ![Reset](images/screenshots/ResetConfirm.png)
+   * In the case where the user wishes to cancel the reset, he/she just has to proceed and type any other command in the command box.
 
 </div>
 
