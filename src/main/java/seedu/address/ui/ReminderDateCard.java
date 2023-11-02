@@ -47,6 +47,7 @@ public class ReminderDateCard extends UiPart<Region> {
 
         reminderListView.setItems(dateSpecificReminders);
         reminderListView.setCellFactory(listView -> new ReminderDateCard.ReminderCardListViewCell());
+        reminderListView.setPrefHeight(100 * dateSpecificReminders.size());
     }
 
     static class ReminderCardListViewCell extends ListCell<Reminder> {
