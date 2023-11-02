@@ -20,8 +20,6 @@ public class TaskDetailPanel extends UiPart<Region> {
 
     @FXML
     private Label desc;
-    @FXML
-    private Label isDone;
 
 
     /**
@@ -40,11 +38,6 @@ public class TaskDetailPanel extends UiPart<Region> {
      */
     public void setTaskDetails(Task task) {
         desc.setText(task.getDescription());
-        if (task.isDone()) {
-            isDone.setText("✅");
-        } else {
-            isDone.setText("❌");
-        }
     }
 
 }

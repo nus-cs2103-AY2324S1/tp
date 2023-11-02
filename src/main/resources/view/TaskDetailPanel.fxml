@@ -29,16 +29,6 @@
                         <Label fx:id="desc" style="-fx-background-color: transparent; -fx-text-fill: white;" text="\$desc" wrapText="true" HBox.hgrow="ALWAYS" />
                             </children>
                         </HBox>
-                  <HBox prefHeight="100.0" prefWidth="200.0">
-                     <children>
-                        <Label text="Is Done?" style="-fx-background-color: transparent; -fx-text-fill: white;">
-                           <HBox.margin>
-                              <Insets right="5.0" />
-                           </HBox.margin>
-                        </Label>
-                        <Label fx:id="isDone" text="\\$value" style="-fx-background-color: transparent; -fx-text-fill: white;"/>
-                     </children>
-                  </HBox>
                     </children>
                 </VBox>
             </children>
