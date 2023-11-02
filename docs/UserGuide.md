@@ -1,3 +1,112 @@
+**Example(s):**
+- `find g/CS2103T`
+  This returns the members and remarks of the existing "CS2103T" group in your contact list.
+
+
+**Potential error(s):**
+- Incorrect format (e.g., no prefix):
+
+
+- The group you are trying to find does not exist in your contact list:
+
+
+
+
+### Listing a group `listgroup`
+You can list all the groups in your contact list.
+
+
+**Format:** `listgroup`
+
+
+**Acceptable values:**
+No additional parameters.
+
+
+**Example(s):**
+- `listgroup`
+  This lists all the groups in your contact list.
+
+
+**Potential error(s):**
+- Extra inputs detected.
+
+
+### Grouping a Person `group`
+You can add an existing contact to an existing group.
+
+
+**Format:** `group n/NAME g/GROUP_NAME`
+
+
+**Acceptable values:**
+- `NAME` must be alphanumeric and cannot be blank.
+- `NAME` must be an existing contact in your contact list.
+- `GROUP_NAME` must be alphanumeric and cannot be blank.
+- `GROUP_NAME` must be an existing group in your contact list.
+- `NAME` must not be a member of `GROUP_NAME`.
+
+
+**Example(s):**
+- `group n/Alex Yeoh g/CS2103T`
+  This adds your contact "Alex Yeoh" into the group "CS2103T".
+
+
+**Potential error(s):**
+- Incorrect format (e.g., no prefix):
+
+
+- The contact you are trying to add is already a member of the group: `NAME is already in this group: GROUP_NAME`.
+
+
+### Ungrouping a Person `ungroup`
+You can remove a person from a group.
+
+
+**Format:** `ungroup n/NAME g/GROUP_NAME`
+
+
+**Acceptable values:**
+- `NAME` must be alphanumeric and cannot be blank.
+- `NAME` must be an existing contact in your contact list.
+- `GROUP_NAME` must be alphanumeric and cannot be blank.
+- `GROUP_NAME` must be an existing group in your contact list.
+- `NAME` must be a member of `GROUP_NAME`.
+
+
+**Example(s):**
+- `ungroup n/Alex Yeoh g/CS2103T`
+  This removes your contact "Alex Yeoh" from the group "CS2103T".
+
+
+**Potential error(s):**
+- Incorrect format (e.g., no prefix):
+
+
+- The contact you are trying to remove is not a member of the group: `Bernice Yu is not in this group: CS2103T`.
+
+
+## Commands to Manage Time
+
+
+### Adding Time to a Contact `addtime`
+You can add time slots when your contacts are available.
+
+
+**Format:** `addtime n/NAME t/FREE_TIME`
+- Provide the full name of the contact using the `n/` prefix.
+- Provide the time slot of the contact using the `t/` prefix.
+- Time slot is with respect to the weekly schedule.
+
+
+**Acceptable values:**
+- `NAME` must be alphanumeric.
+- `FREE_TIME` must be a time slot within a weekly schedule.
+
+
+**Example(s):**
+- `addtime n/Alex Yeoh  t/mon 1400 - mon 1600`
+
 This adds a time slot when Alex Yeoh is available to your contact list.
 Insert Image
 Free time added to: Alex Yeoh
