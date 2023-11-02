@@ -56,7 +56,7 @@ public class Deduction extends Payment {
     /**
      * Returns true if a given reason is a valid reason for deductions.
      */
-    public boolean isValidReason(Reason test) {
+    public static boolean isValidReason(Reason test) {
         return REASONS_FOR_DEDUCTIONS.contains(test);
     }
 

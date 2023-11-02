@@ -209,17 +209,56 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code reason} is invalid.
      */
-    public static Reason parseReason(String reason) throws ParseException {
+    public static Reason parseDeductionReason(String reason) throws ParseException {
         requireNonNull(reason);
         String trimmedReason = reason.trim();
+        Reason inputReason = null;
 
         for (Reason r : Reason.values()) {
             String expected = String.join(" ", r.toString().split("_"));
             if (FuzzySearch.tokenSetRatio(trimmedReason.toLowerCase(), expected.toLowerCase()) > 50) {
-                return r;
+                inputReason = r;
             }
         }
-        throw new ParseException(Reason.MESSAGE_CONSTRAINTS);
+
+        if (inputReason == null) {
+            throw new ParseException(Reason.MESSAGE_CONSTRAINTS);
+        }
+
+        if (!Deduction.isValidReason(inputReason)) {
+            throw new ParseException(Deduction.MESSAGE_CONSTRAINTS_INVALID_REASON);
+        }
+
+        return inputReason;
+    }
+
+    /**
+     * Parses a {@code String reason} into an {@code Reason}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code reason} is invalid.
+     */
+    public static Reason parseBenefitReason(String reason) throws ParseException {
+        requireNonNull(reason);
+        String trimmedReason = reason.trim();
+        Reason inputReason = null;
+
+        for (Reason r : Reason.values()) {
+            String expected = String.join(" ", r.toString().split("_"));
+            if (FuzzySearch.tokenSetRatio(trimmedReason.toLowerCase(), expected.toLowerCase()) > 50) {
+                inputReason = r;
+            }
+        }
+
+        if (inputReason == null) {
+            throw new ParseException(Reason.MESSAGE_CONSTRAINTS);
+        }
+
+        if (!Benefit.isValidReason(inputReason)) {
+            throw new ParseException(Benefit.MESSAGE_CONSTRAINTS_INVALID_REASON);
+        }
+
+        return inputReason;
     }
 
     /**

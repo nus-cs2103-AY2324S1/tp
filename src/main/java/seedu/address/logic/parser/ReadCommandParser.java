@@ -16,7 +16,7 @@ public class ReadCommandParser implements Parser<ReadCommand> {
 
     private static final String p_field_name = "phone";
     private static final String e_field_name = "email";
-    private static final String j_field_name = "join date";
+    private static final String jd_field_name = "join date";
     private static final String a_field_name = "address";
     private static final String s_field_name = "salary";
     private static final String l_field_name = "annual leave";
@@ -66,8 +66,8 @@ public class ReadCommandParser implements Parser<ReadCommand> {
             return b_field_name;
         case "l":
             return l_field_name;
-        case "j":
-            return j_field_name;
+        case "jd":
+            return jd_field_name;
         case "s":
             return s_field_name;
         default:
