@@ -120,7 +120,7 @@ public class Person {
      * if modification is attempted.
      */
     public boolean getPaid() {
-        return paid;
+        return this.paid;
     }
 
     public void setPaid() {
@@ -156,7 +156,8 @@ public class Person {
         }
 
         return otherPerson != null
-                && otherPerson.getName().equals(getName());
+                && otherPerson.getName().equals(getName())
+                && otherPerson.getPhone().equals(getPhone());
     }
 
     /**

@@ -139,6 +139,13 @@ public class ModelManagerTest {
     }
 
     @Test
+    public void canMarkPersonPaid_canGetPersonPaid_returnsTrue() {
+        modelManager.addPerson(ALICE);
+        modelManager.markPersonPaid(ALICE);
+        assertTrue(modelManager.getPersonPaid(ALICE));
+    }
+
+    @Test
     public void equals() {
         AddressBook addressBook = new AddressBookBuilder().withPerson(ALICE).withPerson(BENSON).build();
         AddressBook differentAddressBook = new AddressBook();

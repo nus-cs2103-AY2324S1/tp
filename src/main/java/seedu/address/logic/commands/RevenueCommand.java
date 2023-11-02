@@ -13,7 +13,8 @@ import seedu.address.model.person.Person;
 public class RevenueCommand extends Command {
 
     public static final String COMMAND_WORD = "rev";
-    public static final String MESSAGE_SUCCESS = "Sucessfully calculated!!" + "\nTotal monthly revenue: $";
+
+    public static final String MESSAGE_SUCCESS = "Successfully calculated" + "\nTotal monthly revenue: $";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Calculates total revenue "
             + "earned from all tutees in a month.\n " + "Example: " + COMMAND_WORD;
