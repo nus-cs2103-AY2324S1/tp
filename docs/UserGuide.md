@@ -74,7 +74,7 @@ PDF Users will always see these panels expanded, but users of the web version of
     </div>
     <div>
         <box type="warning">
-**Warnings / Error Cases** for features will be shown in a **yellow box** with this **exclamation mark icon** :fa-solid-exclamation: . These clarify cases which will are expected to display errors to users, or explain enhancements that will be implemented in future releases of CampusConnect.
+**Warnings / Error Cases** for features will be shown in a **yellow box** with this **exclamation mark icon** :fa-solid-exclamation: . These clarify cases which are expected to display errors to users, or explain enhancements that will be implemented in future releases of CampusConnect.
 
 All planned enhancements will also be listed in the [Planned Enhancements / Known Issues](#planned-enhancements-known-issues) section near the end of the guide.
         </box>
@@ -120,6 +120,9 @@ All planned enhancements will also be listed in the [Planned Enhancements / Know
      - [List all contacts: `list`](#list-all-contacts-list)
      - [Delete contact: `delete`](#delete-contact-delete)
    - [Notes](#notes)
+     - [Add a note to contact: `addnote`](#add-a-note-to-contact--addnote)
+     - [Remove a note from contact: `removenote`](#remove-a-note-from-contact--removenote)
+     - [View notes of a contact: `viewnotes`](#view-notes-of-a-contact--viewnotes)
    - [Notifications](#notifications)
      - [Birthday notifications](#birthday-notifications)
    - [Payments](#payments)
@@ -145,7 +148,7 @@ All planned enhancements will also be listed in the [Planned Enhancements / Know
 
 4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar CampusConnect.jar` command to run the application.<br>
    CampusConnect will appear shortly, as shown in the image below. Note how CampusConnect contains some sample data.<br>
-   ![Ui](images/Ui.png)
+   ![Ui](images/Final_Ui.png)
 
 5. You can now start typing some command into the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
 
@@ -186,7 +189,7 @@ All planned enhancements will also be listed in the [Planned Enhancements / Know
   e.g. If the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable. However, if the command specifies `PERSON_INDEX n/NAME`, `n/NAME PERSON_INDEX` is **not acceptable.**
 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
-  e.g. if the command specifies `help 123`, it will be interpreted as `help`.
+  e.g. If the command specifies `help 123`, it will be interpreted as `help`.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </box>
@@ -262,7 +265,7 @@ Refer to [properties of contact](#properties-of-contact) on the accepted formats
 <box type="warning">
 
 * You should provide a positive integer that is smaller than or equal to the number of contacts currently displayed in CampusConnect for `PERSON_INDEX`.
-* You should provide at least one of the parameters, i.e. alternative information for the command to work.
+* You should provide at least one of the parameters, i.e., `[tg/TELEGRAM]`, `[e2/SECONDARY_EMAIL]`, `[li/LINKEDIN]`, or `[b/BIRTHDAY]` for the command to work.
 
 </box>
 
@@ -289,8 +292,8 @@ Refer to [properties of contact](#properties-of-contact) on the accepted formats
 
 * You should provide a positive integer that is smaller than or equal to the number of contacts currently displayed in CampusConnect for `PERSON_INDEX`. 
 * You should provide at least one of the parameters under [properties of contact](#properties-of-contact) for the command to work.
-* You should not edit any empty alternative information i.e. `TELEGRAM`, `SECONDARY_EMAIL`, `LINKEDIN`, `BIRTHDAY` of your contact using this command. Refer to [add alternative information to contact](#add-alternative-information-to-contact) to add these information.
-* You should not input 'NAME' with a name ___(case sensitive)___ that already exists in CampusConnect.
+* You should not edit any empty alternative information i.e. **telegram, secondary email, linkedin, birthday** of your contact using this command. Refer to [add alternative information to contact](#add-alternative-information-to-contact) to add these information.
+* You should not input `NAME` with a name ___(case sensitive)___ that already exists in CampusConnect.
 
 </box>
 
@@ -320,6 +323,8 @@ Below are some examples on how to use the command:
 
 After using CampusConnect's [find contact](#find-contacts) feature that filters the contacts you are looking for, you may want to have an overview of all your contacts again! Thus, CampusConnect allows you to list all your contacts.
 
+This feature involves the command: `list`, which lists all of your saved contacts.
+
 Format: `list`
 
 <box type="info" icon=":fa-solid-magnifying-glass:">
@@ -337,6 +342,8 @@ Here is what CampusConnect looks like after you execute the `list` command.
 ###  Delete contact: `delete`
 
 In the event that you will like to organize your contact list by removing contacts that you no longer need, CampusConnect supports you in deleting your contacts to reduce the clutter you are experiencing.
+
+This feature involves the command: `delete`, which deletes a specified contact.
 
 Format: `delete PERSON_INDEX`
 
@@ -365,15 +372,13 @@ The notes feature allows you to add and remove notes for a person, and provides 
 The parameters for these commands are `PERSON_INDEX`, `NOTE_INDEX` and `NOTE_CONTENT`. These parameters are explained in detail in the section below.
 
 <br>
+
 <panel header=":fa-solid-book: **Notes Command Parameters**" type="secondary" expanded no-close>
+
 The fields you enter should follow the following format:
-
-| Parameter     | Description                                                                                                 |
-|---------------|-------------------------------------------------------------------------------------------------------------|
-| `PERSON_INDEX`| The position of the person in the list you want to add a note to. This should be a positive integer, and should be within the bounds of the list. |
-| `NOTE_INDEX`  | The position of the note in the person's list of notes you want to remove. This should be a positive integer, and should be within the bounds of the list. |
-| `NOTE_CONTENT`| The content of the note you want to add. It has to be non-empty, and can contain any character.              |
-
+- `PERSON_INDEX`: The position of the person in the list you want to add a note to. This should be a positive integer, and should be within the bounds of the list.
+- `NOTE_INDEX`: The position of the note in the person's list of notes you want to modify. This should be a positive integer, and should be within the bounds of the list.
+- `NOTE_CONTENT`: The content of the note you want to add. It has to be non-empty, and can contain any printable ASCII character.
 </panel>
 
 <br>
@@ -700,15 +705,18 @@ Note that the last example is **not equivalent** to `n/do && t/friend || t/colle
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous CampusConnect home folder.
+**Q**: Why can't I type in characters that aren't printable ASCII characters?
+**A**: Currently, we only support printable ASCII characters. We plan to support Unicode characters in the future for greater internationalization support.
 
 --------------------------------------------------------------------------------------------------------------------
 
 # Planned Enhancements / Known Issues
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
-2. **When executing `addalt` command**, if you input other prefixes that are not accepted by the command format, the error message shown does not prompt you to remove those prefixes and adhere strictly to the command format. We will be working on this in the future to improve the specificity of error messages.
-3. **When executing `edit` command**, if you try to edit a specified contact to have the same [properties](#properties-of-contact) of another saved contact **(besides `NAME` with the same casing)** in your contact list, CampusConnect allows you to do so. We plan to enhance the `edit` command such that it takes into account what makes a contact unique in your contact list.
-4. **When executing commands with `PERSON_INDEX`**, if you did not input an appropriate index, the error message shown is generic; CampusConnect informs you the format of the command you should adhere too instead of prompting you to input a positive index. We will be working on this in the future to improve the specificity of error messages.
+2. **When executing `add`/`edit` command**, if you try to add/edit a new/existing contact with the same [properties](#properties-of-contact) of another saved contact **(Note: 2 names are considered the same if both of them have the same casing and whitespaces)** in your contact list, CampusConnect allows you to do so. We plan to enhance the `add`/`edit` command such that it **takes into account what makes a contact unique in your contact list.**
+3. **When executing `addalt` command**, if you input other prefixes that are not accepted by the command format, the error message shown does not prompt you to remove those prefixes and adhere strictly to the command format. We will be working on this in the future to **improve the specificity of error messages.**
+4. **When executing commands with `PERSON_INDEX`**, if you did not input an appropriate index, the error message shown is generic; CampusConnect informs you the format of the command you should adhere to instead of prompting you to input a positive index. We will be working on this in the future to **improve the specificity of error messages.**
+5. **When executing `updatephoto` command**, if the `PERSON_INDEX` contains characters besides `0-9`, CampusConnect will be unresponsive as we assume that you will input a valid integer for `PERSON_INDEX`. Moreover, successful execution of the same `updatephoto` command with the same image will still result in `Photo updated` even though the photo is not updated. In addition, you can input multiple valid paths and the command will update your contact profile with the last image. We will be working on **handling more errors and improving the specificity of messages in the future.**
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -719,9 +727,15 @@ Action        | Format, Examples
 **add**       | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/John Doe p/98765432 e/johndoe@gmail.com a/John street, block 123, #01-01`
 **addalt**    | `addalt PERSON_INDEX [tg/TELEGRAM] [e2/SECONDARY_EMAIL] [li/LINKEDIN]` <br> e.g., `addalt 1 tg/@johndoe_123 e2/johndoe@hotmail.com li/john-doe-b9a38128a b/31/10`
 **edit** | `edit PERSON_INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG] [tg/TELEGRAM] [e2/SECONDARY_EMAIL] [li/LINKEDIN] [b/BIRTHDAY]` <br> e.g., `edit 1 tg/@johndoe e2/johndoe@gmail.com`
+**updatephoto** | `updatephoto INDEX path/NEW_PHOTO_PATH` <br> e.g., `updatephoto 1 path/C:/photos/new_johndoe.jpg`
 **delete** | `delete PERSON_INDEX` <br> e.g., `delete 1`
 **list** | `list` <br> e.g., `list`
-**find**      | `find FIELD/KEYWORD [FIELD/KEYWORD]`
+**addnote** | `addnote PERSON_INDEX NOTE_CONTENT` <br> e.g., `addnote 1 This is a sample note for the person.`
+**removenote** | `removenote PERSON_INDEX NOTE_INDEX` <br> e.g., `removenote 1 2`
+**viewnotes** | `viewnotes PERSON_INDEX` <br> e.g., `viewnotes 1`
+**pay** | `pay PERSON_INDEX AMOUNT` <br> e.g., `pay 1 10`
+**owe** | `owe PERSON_INDEX AMOUNT` <br> e.g., `owe 1 9`
+**find**      | `find FIND_EXPRESSION` <br> e.g., `find n/do`
 
 
 <style>
