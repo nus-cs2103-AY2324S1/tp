@@ -56,7 +56,9 @@ public class LogicManager implements Logic {
         Command command = addressBookParser.parseCommand(commandText);
         commandResult = command.execute(model);
 
+
         try {
+            System.out.println("in try");
             storage.saveAddressBook(model.getAddressBook());
             storage.saveEventBook(model.getEventBook());
         } catch (AccessDeniedException e) {

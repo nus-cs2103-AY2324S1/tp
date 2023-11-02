@@ -71,7 +71,8 @@ public class PersonCard extends UiPart<Region> {
 
     private void setTagLabel(Set<Tag> tagsSet) {
         List<String> tagCategories = new ArrayList<>();
-        for (Tag tag : UniqueTagList.internalList) {
+        UniqueTagList uniqueTagList = new UniqueTagList();
+        for (Tag tag : uniqueTagList.asUnmodifiableObservableList()) {
             if (!tagCategories.contains(tag.tagCategory)) {
                 tagCategories.add(tag.tagCategory);
             }

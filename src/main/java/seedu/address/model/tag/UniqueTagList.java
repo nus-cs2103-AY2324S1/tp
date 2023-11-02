@@ -21,7 +21,7 @@ import seedu.address.model.tag.exceptions.TagNotFoundException;
  */
 public class UniqueTagList implements Iterable<Tag> {
 
-    public static final ObservableList<Tag> internalList = FXCollections.observableArrayList();
+    private static final ObservableList<Tag> internalList = FXCollections.observableArrayList();
     private final ObservableList<Tag> internalUnmodifiableList =
             FXCollections.unmodifiableObservableList(internalList);
 
@@ -61,6 +61,7 @@ public class UniqueTagList implements Iterable<Tag> {
         Optional<Tag> foundTag = internalList.stream()
                 .filter(tag -> tag.tagName.equals(tagName) && tag.tagCategory.contains(tagCategory))
                 .findFirst();
+
         if (foundTag.isPresent()) {
             long occurrence = internalList.stream()
                     .filter(tag -> tag.tagName.equals(tagName) && tag.tagCategory.contains(tagCategory))

@@ -17,6 +17,7 @@ import java.util.List;
 
 import seedu.address.model.AddressBook;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.ScoreList;
 
 /**
  * A utility class containing a list of {@code Person} objects to be used in tests.
@@ -27,12 +28,15 @@ public class TypicalPersons {
             .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")
             .withPhone("94351253")
             .withTags("friends")
+            .withStatus("interviewed")
             .build();
     public static final Person BENSON = new PersonBuilder().withName("Benson Meier")
             .withAddress("311, Clementi Ave 2, #02-25")
             .withEmail("johnd@example.com").withPhone("98765432")
-            .withTags("owesMoney", "friends")
-            .withRemark("Benson the builder").build();
+            .withTags("role developer")
+            .withRemark("Benson the builder")
+            .withScoreList(new ScoreList())
+            .build();
     public static final Person CARL = new PersonBuilder().withName("Carl Kurz").withPhone("95352563")
             .withEmail("heinz@example.com").withAddress("wall street")
             .build();
@@ -79,5 +83,9 @@ public class TypicalPersons {
 
     public static Person getTypicalTagPerson() {
         return BENSON;
+    }
+
+    public static Person getTypicalStatusPerson() {
+        return ALICE;
     }
 }
