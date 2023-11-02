@@ -41,7 +41,8 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         this.userHistory = new UserHistoryManager();
-        userHistory.initialiseHistory(new Pair<>(addressBook.getPersonList(), addressBook.getAppointmentList()));
+        userHistory.initialiseHistory(new Pair<>(new ArrayList<>(this.addressBook.getPersonList()),
+                        new ArrayList<>(this.addressBook.getAppointmentList())));
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
         filteredAppointments = new FilteredList<>(this.addressBook.getAppointmentList());
     }
@@ -238,14 +239,14 @@ public class ModelManager implements Model {
     @Override
     public void undoHistory() {
         this.userHistory.undo();
-        addressBook.setPersons(this.userHistory.getUndoHistory().peek().getKey());
-        addressBook.setAppointments(this.userHistory.getUndoHistory().peek().getValue());
+        this.addressBook.setPersons(this.userHistory.getUndoHistory().peek().getKey());
+        this.addressBook.setAppointments(this.userHistory.getUndoHistory().peek().getValue());
     }
 
     @Override
     public void redoHistory() {
-        addressBook.setPersons(this.userHistory.getRedoHistory().peek().getKey());
-        addressBook.setAppointments(this.userHistory.getRedoHistory().peek().getValue());
+        this.addressBook.setPersons(this.userHistory.getRedoHistory().peek().getKey());
+        this.addressBook.setAppointments(this.userHistory.getRedoHistory().peek().getValue());
         this.userHistory.redo();
     }
     @Override

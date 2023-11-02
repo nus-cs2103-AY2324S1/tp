@@ -103,7 +103,6 @@ public class UndoCommandTest {
     @Test
     public void execute_undoPatientCommand_success() throws CommandException, ParseException {
         String expectedMessage = UndoCommand.MESSAGE_UNDO_COMMAND_SUCCESS;
-
         logic.execute(SAMPLE_ADD_COMMAND_1);
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(), model.getUserHistoryManager());
