@@ -3,6 +3,7 @@ package seedu.address.logic.parser;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_COURSE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DAY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FROM;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
@@ -13,9 +14,11 @@ import java.util.Arrays;
 import java.util.Set;
 import java.util.function.Predicate;
 
+import seedu.address.logic.commands.EditFreeTimeCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.availability.FreeTime;
+import seedu.address.model.availability.TimeInterval;
 import seedu.address.model.course.Course;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.predicates.AvailableTimePredicate;
@@ -38,8 +41,10 @@ public class FindCommandParser implements Parser<FindCommand> {
         String trimmedArgs = args.trim();
         requireNonNull(args);
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_COURSE, PREFIX_TAG, PREFIX_FROM, PREFIX_TO);
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_COURSE, PREFIX_TAG, PREFIX_FROM, PREFIX_TO);
+                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_COURSE, PREFIX_TAG,
+                        PREFIX_DAY, PREFIX_FROM, PREFIX_TO);
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_COURSE, PREFIX_TAG,
+                        PREFIX_DAY, PREFIX_FROM, PREFIX_TO);
         if (trimmedArgs.isEmpty()) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
@@ -57,11 +62,24 @@ public class FindCommandParser implements Parser<FindCommand> {
             Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
             predicates.add(new TagPredicate(new ArrayList<>(tagList)));
         }
-        if (argMultimap.getValue(PREFIX_FROM).isPresent() && argMultimap.getValue(PREFIX_TO).isPresent()) {
-            FreeTime freeTime = ParserUtil.parseFreeTime(argMultimap.getValue(PREFIX_FROM).orElse(null),
-                    argMultimap.getValue((PREFIX_TO)).orElse(null));
-            // since TimeInterval is same for all days for now, we just use the first day
-            predicates.add(new AvailableTimePredicate(freeTime.getDay(0)));
+        if (argMultimap.getValue(PREFIX_DAY).isPresent()
+                && argMultimap.getValue(PREFIX_FROM).isPresent()
+                    && argMultimap.getValue(PREFIX_TO).isPresent()) {
+            try {
+                Integer dayOfWeek = Integer.parseInt(argMultimap.getValue(PREFIX_DAY).orElse(null));
+                if (dayOfWeek < 1 || dayOfWeek > 5) {
+                    throw new ParseException(EditFreeTimeCommand.MESSAGE_INVALID_DAY);
+                }
+                FreeTime freeTime = ParserUtil.parseFreeTime(argMultimap.getValue(PREFIX_FROM).orElse(null),
+                        argMultimap.getValue((PREFIX_TO)).orElse(null));
+                TimeInterval interval = ParserUtil.parseTimeInterval(argMultimap.getValue(PREFIX_FROM).orElse(null),
+                        argMultimap.getValue((PREFIX_TO)).orElse(null));
+                // since TimeInterval is same for all days for now, we just use the first day
+                predicates.add(new AvailableTimePredicate(dayOfWeek, interval));
+            } catch (NumberFormatException exception) {
+                throw new ParseException(
+                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+            }
         }
         if (predicates.size() == 0) {
             throw new ParseException(

@@ -8,15 +8,30 @@ import seedu.address.model.person.Person;
  * Tests that a {@code Person}'s {@code FreeTime} is within the FreeTime that is given.
  */
 public class AvailableTimePredicate implements FindCommandPredicate {
+    private static final String[] DAY_OF_WEEK = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday"};
     private final TimeInterval interval;
+    private final Integer day;
 
-    public AvailableTimePredicate(TimeInterval interval) {
+    /**
+     * Constructs a new AvailableTimePredicate with the specified day and time interval.
+     *
+     * @param day The day for which the predicate applies.
+     * @param interval The time interval during which the predicate is valid.
+     */
+    public AvailableTimePredicate(Integer day, TimeInterval interval) {
         this.interval = interval;
+        this.day = day;
     }
 
+    /**
+     * Generates a filter string representing the day and free time interval.
+     *
+     * @return A formatted string describing the day of the week and the free time interval.
+     */
     @Override
     public String toFilterString() {
-        return "free time: [" + interval.toString() + "]";
+        return "\nday: " + AvailableTimePredicate.DAY_OF_WEEK[day - 1]
+                + "\nfree time: [" + interval.toString() + "]";
     }
 
     @Override
@@ -24,13 +39,12 @@ public class AvailableTimePredicate implements FindCommandPredicate {
         if (person.getFreeTime() == null) {
             return false;
         }
-        return person.getFreeTime().getIntervals().stream()
-                .anyMatch(personInterval -> {
-                    if (personInterval != null) {
-                        return personInterval.isInBetween(interval);
-                    }
-                    return false;
-                });
+
+        TimeInterval timeInterval = person.getFreeTime().getIntervals().get(day - 1);
+        if (timeInterval != null) {
+            return timeInterval.isInBetween(interval);
+        }
+        return false;
     }
 
     @Override
@@ -50,6 +64,9 @@ public class AvailableTimePredicate implements FindCommandPredicate {
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this).add("free time", interval).toString();
+        return new ToStringBuilder(this)
+                .add("day", day)
+                .add("free time", interval)
+                .toString();
     }
 }
