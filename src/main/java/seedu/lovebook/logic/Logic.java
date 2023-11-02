@@ -34,7 +34,7 @@ public interface Logic {
     ObservableList<Date> getFilteredPersonList();
 
     /**
-     * Returns the user prefs' lovebook book file path.
+     * Returns the user prefs' LoveBook file path.
      */
     Path getLoveBookFilePath();
 

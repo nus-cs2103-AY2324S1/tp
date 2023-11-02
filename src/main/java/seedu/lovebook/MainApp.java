@@ -71,9 +71,9 @@ public class MainApp extends Application {
     }
 
     /**
-     * Returns a {@code ModelManager} with the data from {@code storage}'s lovebook book and {@code userPrefs}. <br>
-     * The data from the sample lovebook book will be used instead if {@code storage}'s lovebook book is not found,
-     * or an empty lovebook book will be used instead if errors occur when reading {@code storage}'s lovebook book.
+     * Returns a {@code ModelManager} with the data from {@code storage}'s LoveBook and {@code userPrefs}. <br>
+     * The data from the sample LoveBook will be used instead if {@code storage}'s LoveBook is not found,
+     * or an empty LoveBook will be used instead if errors occur when reading {@code storage}'s LoveBook.
      */
     private Model initModelManager(Storage storage, ReadOnlyUserPrefs userPrefs) {
         logger.info("Using data file : " + storage.getLoveBookFilePath());
@@ -197,7 +197,7 @@ public class MainApp extends Application {
 
     @Override
     public void stop() {
-        logger.info("============================ [ Stopping Height Book ] =============================");
+        logger.info("============================ [ Stopping LoveBook ] =============================");
         try {
             storage.saveUserPrefs(model.getUserPrefs());
             storage.saveDatePrefs(model.getDatePrefs());

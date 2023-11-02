@@ -15,13 +15,13 @@ import seedu.lovebook.model.Model;
 import seedu.lovebook.model.date.Date;
 
 /**
- * Adds a date to the lovebook book.
+ * Adds a Date to the LoveBook.
  */
 public class AddCommand extends Command {
 
     public static final String COMMAND_WORD = "add";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a date to the LoveBook. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a Date to the LoveBook. "
             + "Parameters: "
             + PREFIX_NAME + "NAME "
             + PREFIX_AGE + "AGE "
@@ -37,8 +37,8 @@ public class AddCommand extends Command {
             + PREFIX_INCOME + "3000 "
             + PREFIX_HOROSCOPE + "Libra";
 
-    public static final String MESSAGE_SUCCESS = "New date added: %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This date already exists in the love book";
+    public static final String MESSAGE_SUCCESS = "New Date added: %1$s";
+    public static final String MESSAGE_DUPLICATE_PERSON = "This Date already exists in the LoveBook";
 
     private final Date toAdd;
 

@@ -3,7 +3,7 @@ package seedu.lovebook.model.date.horoscope;
 import static java.util.Objects.requireNonNull;
 
 /**
- * Represents the date's horoscope in the lovebook book.
+ * Represents the date's horoscope in the LoveBook.
  */
 public class Horoscope implements Comparable<Horoscope> {
     public static final String MESSAGE_CONSTRAINTS = "Horoscope should only contain valid horoscope signs.\n"
