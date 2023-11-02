@@ -17,7 +17,7 @@ public class FlashCard {
     private final TranslatedWord translatedWord;
     private Date whenToReview; // Date the flashcard was needs to be reviewed
     private ProficiencyLevel currentLevel; // How many times successfully remembered
-    private boolean isRemembered; //if successfully remembers word
+    private boolean isRemembered;//if successfully remembers word
 
     /**
      * Constructor for Flashcard
@@ -93,8 +93,8 @@ public class FlashCard {
         }
 
         return otherFlashCard != null
-            && otherFlashCard.getOriginalWord().equals(getOriginalWord())
-            && otherFlashCard.getTranslatedWord().equals(getTranslatedWord());
+                && otherFlashCard.getOriginalWord().equals(getOriginalWord())
+                && otherFlashCard.getTranslatedWord().equals(getTranslatedWord());
     }
 
     /**
@@ -164,7 +164,7 @@ public class FlashCard {
     @Override
     public String toString() {
         String sb = originalWord + " | " + originalWord.getLanguage() + " | " + translatedWord + " | "
-            + originalWord.getLanguage() + " | " + whenToReview.toString() + " | " + currentLevel + "\n";
+                + originalWord.getLanguage() + " | " + whenToReview.toString() + " | " + currentLevel + "\n";
         return sb;
     }
 
@@ -185,6 +185,6 @@ public class FlashCard {
 
         FlashCard otherFlashCard = (FlashCard) other;
         return originalWord.equals(otherFlashCard.originalWord)
-            && translatedWord.equals(otherFlashCard.translatedWord);
+                && translatedWord.equals(otherFlashCard.translatedWord);
     }
 }
