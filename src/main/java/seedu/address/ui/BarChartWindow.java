@@ -45,7 +45,7 @@ public class BarChartWindow extends UiPart<Stage> {
     private BarChart<String, Number> barChart;
 
     /**
-     * Constructor for creating LineChartWindow instance.
+     * Constructor for creating BarChartWindow instance.
      * @param commandResult BarChart command result instance containing column titles and values.
      */
     public BarChartWindow(CommandResult commandResult) {
@@ -56,8 +56,10 @@ public class BarChartWindow extends UiPart<Stage> {
     }
 
     /**
-     * Creates a bar chart with table command result instance containing
+     * Creates a bar chart with bar chart command result instance containing
      * given column titles and values.
+     * @param commandResult BarChart command result instance containing column titles and values.
+     * @return a bar chart instance.
      */
     public static BarChart<String, Number> createBarChart(CommandResult commandResult) {
         if (commandResult instanceof GenderBarChartCommandResult) {
@@ -77,9 +79,9 @@ public class BarChartWindow extends UiPart<Stage> {
     }
 
     /**
-     * Create a table with GenderTableCommandResult instance containing counts for each gender.
-     * @param commandResult GenderTableCommandResult containing column titles and counts mapping.
-     * @return a TableView instance generated with given column titles and counts from argument passed in.
+     * Create a bar chart with GenderBarChartCommandResult instance containing counts for each gender.
+     * @param commandResult GenderBarChartCommandResult containing column titles and counts mapping.
+     * @return a BarChart instance generated with given column titles and counts from argument passed in.
      */
     private static BarChart<String, Number> createGenderBarChart(GenderBarChartCommandResult commandResult) {
         CategoryAxis xAxis = new CategoryAxis();
@@ -104,9 +106,9 @@ public class BarChartWindow extends UiPart<Stage> {
     }
 
     /**
-     * Create a table with SecLevelTableCommandResult instance containing counts for each sec level.
-     * @param commandResult SecLevelTableCommand instance containing column titles and counts mapping.
-     * @return a TableView instance generated with given column titles and counts from argument passed in.
+     * Create a bar chart with SecLevelBarChartCommandResult instance containing counts for each sec level.
+     * @param commandResult SecLevelBarChartCommandResult instance containing column titles and counts mapping.
+     * @return a BarChart instance generated with given column titles and counts from argument passed in.
      */
     private static BarChart<String, Number> createSecLevelBarChart(SecLevelBarChartCommandResult commandResult) {
 
@@ -134,9 +136,9 @@ public class BarChartWindow extends UiPart<Stage> {
     }
 
     /**
-     * Create a table with SubjectTableCommandResult instance containing counts for each subject
-     * @param commandResult SubjectTableCommandResult instance containing column titles and counts mapping.
-     * @return a TableView instance generated with given column titles and counts from argument passed in.
+     * Create a bar chart with SubjectBarChartCommandResult instance containing counts for each subject
+     * @param commandResult SubjectBarChartCommandResult instance containing column titles and counts mapping.
+     * @return a BarChart instance generated with given column titles and counts from argument passed in.
      */
     private static BarChart<String, Number> createSubjectBarChart(SubjectBarChartCommandResult commandResult) {
         CategoryAxis xAxis = new CategoryAxis();
@@ -171,7 +173,7 @@ public class BarChartWindow extends UiPart<Stage> {
     }
 
     /**
-     * Create a table with EnrolDateBarChartCommandResult instance containing counts for each subject
+     * Set up the root control, scene and css for the bar chart window.
      * @param commandResult EnrolDateBarChartCommandResult instance containing column titles and counts mapping.
      * @return a BarChartView instance generated with given column titles and counts from argument passed in.
      */
@@ -217,7 +219,7 @@ public class BarChartWindow extends UiPart<Stage> {
         root.setCenter(barChart);
 
         Scene scene = new Scene(root, 500, 300);
-        scene.getStylesheets().add("resources/view/LineChartWindow.css");
+        scene.getStylesheets().add("resources/view/BarChartWindow.css");
         super.getRoot().setScene(scene);
     }
 
@@ -231,14 +233,14 @@ public class BarChartWindow extends UiPart<Stage> {
     }
 
     /**
-     * Returns true if the help window is currently being shown.
+     * Returns true if the bar chart window is currently being shown.
      */
     public boolean isShowing() {
         return getRoot().isShowing();
     }
 
     /**
-     * Focuses on the table window.
+     * Focuses on the bar chart window.
      */
     public void focus() {
         getRoot().requestFocus();

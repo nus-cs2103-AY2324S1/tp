@@ -105,7 +105,7 @@ public class TableCommand extends Command {
     /**
      * Generate EnrolDateTableCommandResult instance.
      * @param model instance of model subclass, e.g. ModelManager instance.
-     * @return
+     * @return an EnrolDateTableCommandResult instance.
      */
     private EnrolDateTableCommandResult executeEnrolDate(Model model) {
         return new EnrolDateTableCommandResult(OrganizeData.byEnrolDate(model, year));

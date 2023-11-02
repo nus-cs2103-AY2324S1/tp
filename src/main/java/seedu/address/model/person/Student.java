@@ -7,6 +7,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Locale;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
@@ -107,6 +108,11 @@ public class Student {
 
         return otherStudent != null
                 && otherStudent.getName().equals(getName());
+    }
+
+
+    public void putSubjectsByMonth(Map<String, Integer> map) {
+        getSubjects().forEach(subject -> subject.putToMapByMonth(map));
     }
 
     /**

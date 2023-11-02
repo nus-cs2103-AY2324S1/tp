@@ -15,6 +15,7 @@ import seedu.address.model.person.StudentIsGenderPredicate;
 import seedu.address.model.person.StudentIsSecLevelPredicate;
 import seedu.address.model.person.StudentTakesSubjectPredicate;
 import seedu.address.model.tag.Subject;
+import seedu.address.ui.TrendWindow;
 
 /**
  * Class for organizing data by different attributes.
@@ -28,7 +29,7 @@ public class OrganizeData {
     public static Map<String, Integer> byGender(Model model) {
         Map<String, Integer> columnValueMapping = new HashMap<>();
 
-        String[] titles = new String[]{"Male", "Female"};
+        String[] titles = new String[]{Gender.MALE, Gender.FEMALE};
 
         ObservableList<Student> studentList = model.getFilteredPersonList();
 
@@ -128,6 +129,16 @@ public class OrganizeData {
         for (int i = 0; i < titles.length; i++) {
             columnValueMapping.put(titles[i], values[i]);
         }
+
+        return columnValueMapping;
+    }
+
+    public static Map<String, Integer> byMonth(Model model) {
+        Map<String, Integer> columnValueMapping = new HashMap<>();
+
+        ObservableList<Student> studentList = model.getFilteredPersonList();
+
+        studentList.stream().forEach(student -> student.putSubjectsByMonth(columnValueMapping));
 
         return columnValueMapping;
     }

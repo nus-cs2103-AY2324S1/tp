@@ -103,6 +103,7 @@ public class SecLevelTableCommandResult extends CommandResult {
                 .add("showHelp", isShowHelp())
                 .add("showTable", isShowTable())
                 .add("showBarChart", isShowBarChart())
+                .add("showTrend", isShowTrend())
                 .add("exit", isExit())
                 .toString();
     }

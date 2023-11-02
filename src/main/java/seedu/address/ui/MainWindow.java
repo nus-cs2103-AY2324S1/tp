@@ -172,6 +172,18 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
+    /**
+     * Opens the trend window or focuses on it if it's already opened.
+     * @param trendWindow a TrendWindow instance.
+     */
+    public void handleTrend(TrendWindow trendWindow) {
+        if (!trendWindow.isShowing()) {
+            trendWindow.show();
+        } else {
+            trendWindow.focus();
+        }
+    }
+
     void show() {
         primaryStage.show();
     }
@@ -215,6 +227,11 @@ public class MainWindow extends UiPart<Stage> {
             if (commandResult.isShowBarChart()) {
                 BarChartWindow barChartWindow = new BarChartWindow(commandResult);
                 handleBarChart(barChartWindow);
+            }
+
+            if (commandResult.isShowTrend()) {
+                TrendWindow trendWindow = new TrendWindow(commandResult);
+                handleTrend(trendWindow);
             }
 
             if (commandResult.isExit()) {
