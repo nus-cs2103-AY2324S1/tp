@@ -52,13 +52,30 @@ online dating journey.
 
 # 2 [Features](#2-features)
 
+**Notes about the command format:**<br>
+
+* Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
+  e.g. in `edit INDEX METRIC/NEW_ARG`, `INDEX`, `NEW_ARG` and `METRIC` are parameters which can be used as 
+`edit 2 income/3000`.
+
+* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) 
+will be ignored.<br> e.g. if the command specifies `help 123`, it will be interpreted as `help`.
+
+* If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
+
+
+
 ### [List all dates: `list`](#list-all-dates-list)
+
+Shows a list of all dates in the lovebook.
 
 Format: `list`
 
 Expected output: `Lists all dates and their associated details`
 
 ### [Deletion of dates: `delete`](#deletion-of-dates-delete)
+
+Deletes the specified date from the lovebook.
 
 Format: `delete INDEX`
 
@@ -72,7 +89,11 @@ Expected output: `Deletes the date at the specified INDEX.`
 Output if error : `The index you have provided is out of bounds of your current list of dates`
 
 ### [Creation of new date: `add`](#creation-of-new-date-add)
+
+Adds a date to the lovebook.
+
 Format: `add name/NAME age/AGE gender/GENDER height/HEIGHT horoscope/HOROSCOPE income/INCOME`
+
 Parameter constraints:
 - Name should be a non non-empty string.
 - Age should be a positive integer.
@@ -90,6 +111,9 @@ height/HEIGHT income/INCOME horoscope/HOROSCOPE Example: add name/John Doe age/2
 horoscope/Libra`
 
 ### [Edit existing dates: `edit`](#edit-existing-dates-edit)
+
+Edits a date in the specified index in the lovebook.
+
 Format: `edit INDEX METRIC/NEW ARG`
 
 Parameter constraints:
@@ -106,6 +130,9 @@ Example:
 Expected Output: `Edited Date: Cleon Tan; Age: 12; Gender: M; Height: 123; Income: 3000; Horoscope: CANCER`
 
 ### [Random Date Generator: `random`](#random-date-generator-random)
+
+Filters out a random date.
+
 Format: `random`
 
 Expected Output: `A random date entry is printed`
@@ -113,38 +140,48 @@ Expected Output: `A random date entry is printed`
 Output if error: ```No dates in list!```
 
 ### [Filter by Metric: `filter`](#filter-by-metric-filter)
-Format: `filter METRIC/ ARG`
+
+Filters the dates in the lovebook by a specific metric.
+
+Format: `filter METRIC/ARG`
 
 Parameter constraints:
 - Filter must be from list of metrics
 - Metric is limited to `gender, age, horoscope, name, income, height` only
 
 Example:
-- `filter name/ Cleon`
-- `filter gender/ M`
-- `filter gender/ M name/ Cleon`
+- `filter name/Cleon`
+- `filter gender/M`
+- `filter gender/M name/Cleon`
 
 Expected Output: `Lists the dates with the metric specified`
 
 Output if error: ```No dates found!```
 
 ### [Sorting list of dates by Metric: `sort`](#sorting-list-of-dates-by-metric-sort)
-Format: `sort METRIC/`
+
+Sorts the dates in the lovebook by a specific metric.
+
+Format: `sort METRIC/ORDER`
 
 Parameter constraints:
 - Sort must be from list of metrics
 - Metric is limited to `age, horoscope, name, income, height` only
+- ORDER must take on either the value of 'increasing', or 'decreasing'
 
 Example:
-- `sort name/`
-- `sort horoscope/`
-- `filter income/ height/`
+- `sort name/increasing`
+- `sort horoscope/decreasing`
+- `filter income/ height/increasing`
 
 Expected Output: `Lists the dates in the order specified`
 
 Output if error: ```No dates found!```
 
 ### [Getting a recommended date: `match`](#getting-a-recommended-date-match)
+
+Filters out the most compatible date based on the set preferences.
+
 Format: `match`
 
 Expected Output: `List the most compatible date`
@@ -152,12 +189,17 @@ Expected Output: `List the most compatible date`
 Output if error: `No dates found!`
 
 ### [Setting the matching algorithm: `setPreference`](#setting-the-matching-algorithm-setPreference)
-Format: `setPreference gender/M age/-3 height/-20 income/2000`
+
+Sets the user's preferences for the matching algorithm. 
+
+Format: `setPreference gender/GENDER age/AGE height/HEIGHT income/INCOME`
+
+Example: `setPreference gender/M age/22 height/180 income/2000`
 
 Expected output: `Preferences have been updated!`
 
 Output if error:
-`Please follow the required format to add a new date (setPreference /gender M /age -3 height/ -20 income/ 2000)`
+`Please follow the required format to add a new date (setPreference gender/M age/22 height/180 income/2000)`
 
 ### [Star a date: `star`](#star-a-date-star)
 Format: `star INDEX`
@@ -196,19 +238,19 @@ your data. In the event of a power outage, all your data will be safe.
 
 # 4 [Summary](#4-summary)
 
-| Action                 | Format                                         | Examples                                 |
-|------------------------|------------------------------------------------|-------------------------------------------|
-| Listing current dates  | `list`                                         | `list`                                    |
-| Deletion of dates      | `delete INDEX`                                | `delete 2`                               |
+| Action                 | Format                                                                               | Examples                                                            |
+|------------------------|--------------------------------------------------------------------------------------|---------------------------------------------------------------------|
+| Listing current dates  | `list`                                                                               | `list`                                                              |
+| Deletion of dates      | `delete INDEX`                                                                       | `delete 2`                                                          |
 | Creation of new date   | `add name/NAME age/AGE gender/GENDER height/HEIGHT horoscope/HOROSCOPE income/INCOME` | `add name/John age/25 gender/M height/175 horoscope/Aries income/5000` |
-| Edit existing dates    | `edit INDEX METRIC/NEW ARG`                   | `edit 3 name/Cleon`                      |
-| Random Date Generator  | `random`                                       | `random`                                  |
-| Filter by Metric       | `filter METRIC/ARG`                           | `filter name/Cleon`                      |
-| Sorting list of dates  | `sort METRIC/`                                 | `sort name/`                              |
-| Getting a recommended date | `match`                                      | `match`                                   |
-| Setting the matching algorithm | `setPreference gender/M age/-3 height/-20 income/2000` | `setPreference gender/M age/-3 height/-20 income/2000` |
- | Star a date            | `star INDEX`                                   | `star 1`                                  |
- | Unstar a date          | `unstar INDEX`                                 | `unstar 1`                                |
+| Edit existing dates    | `edit INDEX METRIC/NEW ARG`                                                          | `edit 3 name/Cleon`                                                 |
+| Random Date Generator  | `random`                                                                             | `random`                                                            |
+| Filter by Metric       | `filter METRIC/ARG`                                                                  | `filter name/Cleon`                                                 |
+| Sorting list of dates  | `sort METRIC/ORDER`                                                                  | `sort name/increasing`                                              |
+| Getting a recommended date | `match`                                                                              | `match`                                                             |
+| Setting the matching algorithm | `setPreference gender/GENDER age/AGE height/HEIGHT income/INCOME`                                | `setPreference gender/M age/22 height/180 income/2000`                 |
+ | Star a date            | `star INDEX`                                                                         | `star 1`                                                            |
+ | Unstar a date          | `unstar INDEX`                                                                       | `unstar 1`                                                          |
 --------------------------------------------------------------------------------------------------------------------
 
 # 5 [Glossary](#5-glossary)
