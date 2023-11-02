@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import java.nio.file.Path;
 import java.util.Set;
 import java.util.function.Predicate;
+
 import org.junit.jupiter.api.Test;
 
 import javafx.collections.FXCollections;
@@ -188,10 +189,10 @@ public class ListAllCommandTest {
 
 
     private class ModelStubAcceptingPersonsAndEvents extends ModelStub {
-        public ObservableList<Event> eventList = FXCollections.observableArrayList();
-        public ObservableList<Person> personList = FXCollections.observableArrayList();
-        public final FilteredList<Event> filteredEventList = new FilteredList<>(eventList);
-        public final FilteredList<Person> filteredPersonList = new FilteredList<>(personList);
+        private ObservableList<Event> eventList = FXCollections.observableArrayList();
+        private ObservableList<Person> personList = FXCollections.observableArrayList();
+        private final FilteredList<Event> filteredEventList = new FilteredList<>(eventList);
+        private final FilteredList<Person> filteredPersonList = new FilteredList<>(personList);
 
         public ModelStubAcceptingPersonsAndEvents() {
             try {

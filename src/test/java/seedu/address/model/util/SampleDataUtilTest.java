@@ -6,7 +6,12 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.model.util.SampleDataUtil.getGroupSet;
 import static seedu.address.model.util.SampleDataUtil.getNameSet;
 
+import java.util.Arrays;
+import java.util.Optional;
+import java.util.Set;
+
 import org.junit.jupiter.api.Test;
+
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.event.Event;
 import seedu.address.model.event.EventDate;
@@ -20,11 +25,6 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
-
-
-import java.util.Arrays;
-import java.util.Optional;
-import java.util.Set;
 
 public class SampleDataUtilTest {
 

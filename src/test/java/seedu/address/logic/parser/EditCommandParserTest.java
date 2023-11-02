@@ -202,9 +202,9 @@ public class EditCommandParserTest {
     @Test
     public void parse_resetGroups_success() {
         Index targetIndex = INDEX_THIRD_PERSON;
-        String userInput = targetIndex.getOneBased() + GROUP_EMPTY;
+        String userInput = targetIndex.getOneBased() + GROUP_DESC_FRIEND;
 
-        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withGroups().build();
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withGroups("friend").build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);
