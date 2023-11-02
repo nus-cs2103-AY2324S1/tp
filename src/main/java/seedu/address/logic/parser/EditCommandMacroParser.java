@@ -60,7 +60,7 @@ public class EditCommandMacroParser implements Parser<EditCommand> {
         case "lead":
             editPersonDescriptor.setLead(ParserUtil.parseLead(argString));
             break;
-        case "telegram":
+        case "telegramhandle":
             editPersonDescriptor.setTelegram(ParserUtil.parseTelegram(argString));
             break;
         case "profession":
