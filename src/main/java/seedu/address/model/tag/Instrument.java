@@ -4,6 +4,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 
 /**
  * Represents an Instrument Tag in the address book.
@@ -11,9 +12,12 @@ import java.util.HashSet;
  */
 public class Instrument extends Tag {
 
-    public static final String MESSAGE_CONSTRAINTS = "Instrument tags names should be a valid instrument name";
-    public static final HashSet<String> VALID_INSTRUMENTS = new HashSet<String>(Arrays.asList(
-            "piano", "guitar", "bass", "violin", "saxophone", "trumpet", "drums"
+    public static final String MESSAGE_CONSTRAINTS = "Instrument tags names should be a valid instrument name.\n"
+            + "For a list of valid instruments, please use the command 'tags'";
+
+    public static final HashSet<String> VALID_INSTRUMENTS = new LinkedHashSet<>(Arrays.asList(
+            "bass", "cello", "clarinet", "drums", "flute", "guitar", "piano", "saxophone",
+            "trumpet", "violin", "voice", "other"
     ));
 
     /**
