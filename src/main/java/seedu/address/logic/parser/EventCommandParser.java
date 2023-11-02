@@ -1,13 +1,19 @@
 package seedu.address.logic.parser;
 
+import static seedu.address.logic.Messages.MESSAGE_INCORRECT_DATE_FORMAT;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_DATES;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ENDTIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STARTTIME;
 
+import java.time.DateTimeException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.stream.Stream;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.commands.AddGCommand;
 import seedu.address.logic.commands.EventCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.event.Event;
@@ -24,13 +30,38 @@ public class EventCommandParser implements Parser<EventCommand> {
     public EventCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_DESCRIPTION,
                 PREFIX_STARTTIME, PREFIX_ENDTIME);
+
+        if (!arePrefixesPresent(argMultimap, PREFIX_DESCRIPTION, PREFIX_STARTTIME, PREFIX_ENDTIME)) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EventCommand.MESSAGE_USAGE));
+        }
+        LocalDateTime startTime;
+        LocalDateTime endTime;
+
         String description = argMultimap.getValue(PREFIX_DESCRIPTION).get();
-        LocalDateTime startTime = LocalDateTime.parse(argMultimap.getValue(PREFIX_STARTTIME).get(),
-                DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
-        LocalDateTime endTime = LocalDateTime.parse(argMultimap.getValue(PREFIX_ENDTIME).get(),
-                DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
-        Index index = ParserUtil.parseIndex(argMultimap.getPreamble());
+        try {
+            startTime = LocalDateTime.parse(argMultimap.getValue(PREFIX_STARTTIME).get(),
+                    DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+            endTime = LocalDateTime.parse(argMultimap.getValue(PREFIX_ENDTIME).get(),
+                    DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+        } catch (DateTimeException e) {
+            throw new ParseException(MESSAGE_INCORRECT_DATE_FORMAT);
+        }
+
+        if (!(endTime.isAfter(startTime))) {
+            throw new ParseException(MESSAGE_INVALID_DATES);
+        }
+        Index index;
+        try {
+            index = ParserUtil.parseIndex(argMultimap.getPreamble());
+        } catch (ParseException pe) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddGCommand.MESSAGE_USAGE), pe);
+        }
+        index = ParserUtil.parseIndex(argMultimap.getPreamble());
         Event event = new Event(index, description, startTime, endTime);
         return new EventCommand(event);
+    }
+
+    private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
+        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
 }
