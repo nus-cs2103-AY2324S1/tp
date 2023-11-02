@@ -189,7 +189,7 @@ Format: `exit`
 
 Adds an event to the user's calendar.
 
-Format: `addEvent d/DESCRIPTION ts/START_DATE_TIME ts/END_DATE_TIME`
+Format: `addEvent d/DESCRIPTION ts/START_DATE_TIME te/END_DATE_TIME`
 
 * Adds the event starting from `START_DATE_TIME` and ending at `END_DATE_TIME`
 * `START_DATE_TIME` and `END_DATE_TIME` must be in `yyyy-MM-dd HH:mm` format
@@ -219,9 +219,21 @@ Format: `viewEvents`
 
 ## Miscellaneous
 
+### Edit Contact Calendar Event
+
+Edits the details of an event in a contact's calendar
+
+Format: `editContactEvent PERSON_INDEX EVENT_INDEX [d/DESCRIPTION] [ts/NEW_START_DATE_TIME][te/NEW_END_DATE_TIME]`
+
+Edits `EVENT_INDEX` event of the `PERSON_INDEX` person in the address book with the given fields.
+
+Example: `editContactEvent 1 1 d/Nap`, `editContactEvent 2 3 ts/2023-10-10 10:00 te/2023-10-12 15:00`
+
+* Note that all edited fields are optional, but there must be at least 1 edited field.
+
 ### Force saving all contacts and events
 
-Forces a save of all current contacts and events iin the program.
+Forces a save of all current contacts and events in the program.
 
 Format: `save`
 
