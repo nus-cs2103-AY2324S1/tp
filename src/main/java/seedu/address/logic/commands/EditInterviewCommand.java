@@ -36,8 +36,8 @@ public class EditInterviewCommand extends Command {
             + PREFIX_END_TIME + "END TIME" + "\n"
             + "Example: " + COMMAND_WORD + " 3 "
             + PREFIX_JOB_ROLE + "Junior Software Engineer "
-            + PREFIX_START_TIME + "03-11-2024 1600 "
-            + PREFIX_END_TIME + "03-11-2024 1800";
+            + PREFIX_START_TIME + "03-11-2024 1500 "
+            + PREFIX_END_TIME + "03-11-2024 1600";
 
     public static final String MESSAGE_EDIT_INTERVIEW_SUCCESS = "Edited Interview: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
