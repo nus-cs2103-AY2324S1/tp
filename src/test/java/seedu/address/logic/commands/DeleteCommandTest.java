@@ -84,17 +84,7 @@ public class DeleteCommandTest {
         assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
 
-    @Test
-    public void isViewEvents_validViewEventsIndicator_success() {
-        CommandResult.ViewEventsIndicator viewEventsIndicator = new CommandResult.ViewEventsIndicator(1);
-        assertTrue(viewEventsIndicator.isViewEvents());
-    }
 
-    @Test
-    public void getIndex_validViewEventsIndicator_success() {
-        CommandResult.ViewEventsIndicator viewEventsIndicator = new CommandResult.ViewEventsIndicator(1);
-        assertEquals(viewEventsIndicator.getIndex(), Index.fromOneBased(1));
-    }
 
     @Test
     public void equals() {

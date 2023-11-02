@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
+import seedu.address.commons.core.index.Index;
 
 public class CommandResultTest {
     @Test
@@ -56,6 +57,30 @@ public class CommandResultTest {
 
         // different switchBottomList value -> returns different hashCode
         assertNotEquals(commandResult.hashCode(), new CommandResult("feedback", false, false, true).hashCode());
+    }
+
+    @Test
+    public void indicatorViewEvents_validViewEventsIndicator_success() {
+        CommandResult.ViewEventsIndicator viewEventsIndicator = new CommandResult.ViewEventsIndicator(1);
+        assertTrue(viewEventsIndicator.isViewEvents());
+    }
+
+    @Test
+    public void indicatorGetIndex_validViewEventsIndicator_success() {
+        CommandResult.ViewEventsIndicator viewEventsIndicator = new CommandResult.ViewEventsIndicator(1);
+        assertEquals(viewEventsIndicator.getIndex(), Index.fromOneBased(1));
+    }
+
+    @Test
+    public void isViewEvents_validViewEventsIndicator_success() {
+        CommandResult commandResult = new CommandResult("feedback", Index.fromOneBased(1));
+        assertTrue(commandResult.isViewEvents());
+    }
+
+    @Test
+    public void getIndex_validViewEventsIndicator_success() {
+        CommandResult commandResult = new CommandResult("feedback", Index.fromOneBased(1));
+        assertEquals(commandResult.getEventViewIndex(), Index.fromOneBased(1));
     }
 
     @Test
