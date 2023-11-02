@@ -11,6 +11,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Remark;
 import seedu.address.model.util.SampleDataUtil;
 
 /**
@@ -23,12 +24,13 @@ public class PersonBuilder {
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
     public static final String DEFAULT_BIRTHDAY = "2001-12-12";
-
+    public static final String DEFAULT_REMARK = "She likes korean food";
     private Name name;
     private Phone phone;
     private Email email;
     private Address address;
     private Birthday birthday;
+    private Remark remark;
     private Set<Group> groups;
 
     /**
@@ -40,6 +42,7 @@ public class PersonBuilder {
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
         birthday = new Birthday(DEFAULT_BIRTHDAY);
+        remark = new Remark(DEFAULT_REMARK);
         groups = new HashSet<>();
     }
 
@@ -52,6 +55,7 @@ public class PersonBuilder {
         email = personToCopy.getEmail();
         address = personToCopy.getAddress();
         birthday = personToCopy.getBirthday();
+        remark = personToCopy.getRemark();
         groups = new HashSet<>(personToCopy.getGroups());
     }
 
@@ -104,12 +108,20 @@ public class PersonBuilder {
     }
 
     /**
+     * Sets the {@code Remark} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withRemark(String remark) {
+        this.remark = new Remark(remark);
+        return this;
+    }
+
+    /**
      * Builds a person with the given fields.
      * @return
      */
     public Person build() {
         return new Person(name, Optional.of(phone), Optional.of(email), Optional.of(address), Optional.of(birthday),
-                groups);
+                Optional.of(remark), groups);
     }
 
 }

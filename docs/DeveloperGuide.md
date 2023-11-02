@@ -184,7 +184,7 @@ To add a person, the user must specify the name of the person using the `n/` pre
 Except for the name, all the fields given to the `add` command are optional.
 </box>
 
-The flow for the `add` command is described by the following sequence diagram:
+The flow for the `add_person` command is described by the following sequence diagram:
 
 <img src="images/AddPersonSequenceDiagram.png" alt="AddPersonSequenceDiagram" width=600 />
 
@@ -200,15 +200,15 @@ The flow for the `add` command is described by the following sequence diagram:
 The original implementation of AB3's `Person` class is refactored to have the capacity of storing optional fields. This is done by using the `java.util.Optional<T>` class to represent the optional attributes of the `Person` object.
 Furthermore, we have added additional fields into the `Person` class to allow users to store more information about the person, such as their birthday.
 
-As the original `add` command already exists in AB3, this feature can be implemented by enhancing the `add` command.
+As the original `add_person` command already exists in AB3, this feature can be implemented by enhancing the `add` command.
 
 Furthermore, we accounted for empty/null inputs in the optional fields by generating a NULL_INSTANCE for the optional fields when the user does not specify the optional fields. This design decision allowed us to easily check
 for empty/null inputs in the Person object by checking if the optional field is not equal to the NULL_INSTANCE, instead of doing null pointer and empty string checks.
 
-* **Alternative 1 (current choice):** Enhance the existing `add` command.
+* **Alternative 1 (current choice):** Enhance the existing `add_person` command.
   * Pros: 
     * Easier to implement.
-    * Reuses the logic for the `add` command.
+    * Reuses the logic for the `add_person` command.
   * Cons:
     * Have to account for empty/null inputs in the optional fields when saving the data and testing it
     * Have to account for empty/null inputs in the optional fields when displaying the data
@@ -390,7 +390,7 @@ The flow for the `remind` command is described by the following sequence diagram
 
 ![RemindSequenceDiagram](images/RemindSequenceDiagram.png)
 
-
+    
 #### Feature details
 1. The `remind` command can accept an optional parameter `days` which specifies the number of days to search for birthdays and events. If `days` is not specified, the default value of 7 days will be used.
 2. The application will validate the argument `days` to ensure that it is a positive integer. If it is not, an error message will be shown to the user and prompts the user for a corrected input.
@@ -447,24 +447,21 @@ other important events.
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​            | I want to …​                                 | So that I can…​                                                        |
-|----------|--------------------|----------------------------------------------|------------------------------------------------------------------------|
-| `* * *`  | university student | see usage instructions                       | refer to instructions when I forget how to use the App                 |
-| `* * *`  | university student | add a new person                             | keep my address book up to date                                        |
-| `* * *`  | university student | include optional fields when adding contacts | include comprehensive and personalized information for each contact    |
-| `* * *`  | university student | delete a person                              | remove contacts that I no longer need                                  |
-| `* * *`  | university student | find a person by name                        | locate details of persons without having to go through the entire list |
-| `* * *`  | university student | edit a person details                        | reflect any contact changes accordingly                                |   
-| `* * *`  | university student | create an event                              | schedule and keep track of important commitments                       |   
-| `* * *`  | university student | view all upcoming events                     | stay informed about my scheduled commitments                           |
-| `* * *`  | university student | edit an event                                | modify event details like the date, time, or location                  |
-| `* * *`  | university student | delete an event                              | remove events that are canceled or no longer relevant                  |
-| `* * *`  | university student | access a separate event column in the GUI    | simultaneously view contact details and event details                  |
-| `* *`    | university student | be reminded on events                        | so that i can remember upcoming social activities                      |
-| `* *`    | university student | set recurring events                         | automate scheduling for repetitive commitments                         |
-| `* *`    | university student | customise short form commands                | perform commands more efficiently                                      |
-| `* *`    | university student | assign contacts to groups                    | i can easily identify who is involved in specific events               |
-| `* *`    | university student | pin contacts or groups                       | access and communicate with frequently contacted groups                |
+| Priority | As a …​            | I want to …​                                               | So that I can…​                                                        |
+|----------|--------------------|------------------------------------------------------------|------------------------------------------------------------------------|
+| `* * *`  | university student | see usage instructions                                     | refer to instructions when I forget how to use the App                 |
+| `* * *`  | university student | add a new person                                           | keep my address book up to date                                        |
+| `* * *`  | university student | include optional fields when adding contacts               | include comprehensive and personalized information for each contact    |
+| `* * *`  | university student | delete a person                                            | remove contacts that I no longer need                                  |
+| `* * *`  | university student | find a person by name                                      | locate details of persons without having to go through the entire list |
+| `* * *`  | university student | edit a person details                                      | reflect any contact changes accordingly                                |   
+| `* * *`  | university student | create an event                                            | schedule and keep track of important commitments                       |
+| `* * *`  | university student | edit an event                                              | modify event details like the date, time, or location                  |
+| `* * *`  | university student | delete an event                                            | remove events that are canceled or no longer relevant                  |
+| `* * *`  | university student | view all upcoming events on a separate event column in the GUI | simultaneously view contact details and event details                  |
+| `* *`    | university student | be reminded on events and birthdays                        | so that i can remember upcoming social activities                      |
+| `* *`    | university student | assign contacts to groups                                  | i can easily identify who is involved in specific events               |
+
 
 
 ### Use cases
@@ -652,15 +649,16 @@ assigned to the the event.
 **Use case: UC08 - Show reminders for events/birthdays happening soon**
 
 **MSS**
-1. User request a reminder for events/birthdays happening soon
-2. FumbleLog displays a list of events/birthdays happening soon
+1. User requests a reminder for events/birthdays happening soon using the 'remind' command.
+2. FumbleLog displays a list of events/birthdays happening in the next 7 days by default.
 
    Use case ends.
 
 **Extensions**
 
-* 1a. User can specify the range of time to search
-    * 1a1. FumbleLog shows the list of events/birthdays happening within the specified range of time
+* 1a.  User can specify the number of days to look ahead for events and birthdays after the 'remind' command.
+    * 1a1.   If the specified range is valid (e.g., a positive integer), FumbleLog shows the list of events/birthdays happening within the specified range of time (n days).
+    * 1a2.   If the specified range is invalid (e.g., a negative integer), FumbleLog shows an error message.
 
    Use case ends.
 
@@ -833,7 +831,7 @@ testers are expected to do more *exploratory* testing.
 
 1. Deleting a person while all persons are being shown
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+   1. Prerequisites: List all persons using the `list_all` or `list_persons` command. Multiple persons in the list.
 
    1. Test case: `delete 1`<br>
       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.

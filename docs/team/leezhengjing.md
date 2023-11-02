@@ -18,9 +18,9 @@ title: Lee Zheng Jing's Project Portfolio Page
 * **Documentation**:
     * User Guide:
         * Added documentation for the features:
-            * `add`
+            * `add_person`
         * Did cosmetic tweaks to existing documentation of features:
-            * `add`
+            * `add_person`
     * Developer Guide:
         * *{To be added}*
 

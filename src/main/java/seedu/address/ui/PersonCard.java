@@ -41,6 +41,8 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private FlowPane birthday;
     @FXML
+    private FlowPane remark;
+    @FXML
     private FlowPane groups;
 
     /**
@@ -62,6 +64,9 @@ public class PersonCard extends UiPart<Region> {
         }
         if (!person.getBirthday().toString().isEmpty()) {
             birthday.getChildren().add(new Label(person.getBirthday().toString()));
+        }
+        if (!person.getRemark().toString().isEmpty()) {
+            remark.getChildren().add(new Label(person.getRemark().toString()));
         }
         person.getGroups().stream()
                 .sorted(Comparator.comparing(group -> group.groupName))

@@ -17,18 +17,28 @@ public class RemindCommand extends Command {
 
     public static final String COMMAND_WORD = "remind";
 
+
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Reminds the user of the upcoming birthdays and events in the next n number of days. "
             + "If no index is given, the default number of days is 7.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
+
+
     public static final String MESSAGE_REMIND_SUCCESS =
             "Showing all birthdays and events happening in the next %1$s days:";
 
+    private static final int DEFAULT_DAYS = 7;
+
+
     private final BirthdayWithinDaysPredicate birthdayPredicate;
+
     private final EventWithinDaysPredicate eventPredicate;
+
     private final int days;
+
+
 
     /**
      * Creates a RemindCommand to remind the user of the upcoming birthdays and events in the next n number of days.
@@ -37,7 +47,11 @@ public class RemindCommand extends Command {
                          EventWithinDaysPredicate eventPredicate, int days) {
         this.birthdayPredicate = birthdayPredicate;
         this.eventPredicate = eventPredicate;
-        this.days = days;
+        if (days == 7) {
+            this.days = DEFAULT_DAYS;
+        } else {
+            this.days = days;
+        }
     }
 
     @Override
@@ -65,8 +79,8 @@ public class RemindCommand extends Command {
         }
 
         RemindCommand otherRemindCommand = (RemindCommand) other;
-        return birthdayPredicate == otherRemindCommand.birthdayPredicate
-                && eventPredicate == otherRemindCommand.eventPredicate
+        return birthdayPredicate.equals(otherRemindCommand.birthdayPredicate)
+                && eventPredicate.equals(otherRemindCommand.eventPredicate)
                 && days == otherRemindCommand.days;
     }
 

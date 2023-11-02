@@ -18,6 +18,7 @@ import seedu.address.model.person.Birthday;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Remark;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -98,6 +99,21 @@ public class ParserUtil {
             throw new ParseException(Birthday.MESSAGE_CONSTRAINTS);
         }
         return Birthday.of(trimmedBirthday);
+    }
+
+    /**
+     * Parses a {@code String remark} into an {@code Remark}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if a given {@code remark} is invalid.
+     */
+    public static Remark parseRemark(String remark) throws ParseException {
+        requireNonNull(remark);
+        String trimmedRemark = remark.trim();
+        if (!Remark.isValidRemark(trimmedRemark)) {
+            throw new ParseException(Remark.MESSAGE_CONSTRAINTS);
+        }
+        return Remark.of(trimmedRemark);
     }
 
     /**
@@ -203,7 +219,7 @@ public class ParserUtil {
         String trimmedDays = days.trim();
 
         if (trimmedDays.isEmpty() || days == null) {
-            return 7;
+            return Integer.parseInt("7");
         }
 
         if (!StringUtil.isNonZeroUnsignedInteger(trimmedDays)) {

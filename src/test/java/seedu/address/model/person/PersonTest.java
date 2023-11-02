@@ -26,6 +26,10 @@ public class PersonTest {
 
     @Test
     public void isSamePerson() {
+        // only have name
+        Person personWithName = new Person(new Name("Alice Bob"));
+        assertEquals(personWithName, new Person(new Name("Alice Bob")));
+
         // same object -> returns true
         assertTrue(ALICE.isSamePerson(ALICE));
 
@@ -94,7 +98,15 @@ public class PersonTest {
     public void toStringMethod() {
         String expected = Person.class.getCanonicalName() + "{name=" + ALICE.getName() + ", phone=" + ALICE.getPhone()
                 + ", email=" + ALICE.getEmail() + ", address=" + ALICE.getAddress()
-                + ", birthday=" + ALICE.getBirthday() + ", groups=" + ALICE.getGroups() + "}";
+                + ", birthday=" + ALICE.getBirthday() + ", remark=" + ALICE.getRemark()
+                + ", groups=" + ALICE.getGroups() + "}";
         assertEquals(expected, ALICE.toString());
     }
+
+    @Test
+    public void hashCodeMethod() {
+        Person aliceCopy = new PersonBuilder(ALICE).build();
+        assertEquals(ALICE.hashCode(), aliceCopy.hashCode());
+    }
+
 }

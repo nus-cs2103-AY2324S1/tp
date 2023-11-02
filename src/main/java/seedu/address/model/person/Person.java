@@ -24,6 +24,7 @@ public class Person {
     // Data fields
     private final Optional<Address> address;
     private final Optional<Birthday> birthday;
+    private final Optional<Remark> remark;
     private final Set<Group> groups = new HashSet<>();
 
     /**
@@ -36,6 +37,7 @@ public class Person {
         this.email = Optional.empty();
         this.address = Optional.empty();
         this.birthday = Optional.empty();
+        this.remark = Optional.empty();
     }
 
     /**
@@ -45,16 +47,18 @@ public class Person {
      * @param email
      * @param address
      * @param birthday
+     * @param remark
      * @param groups
      */
     public Person(Name name, Optional<Phone> phone, Optional<Email> email, Optional<Address> address,
-                  Optional<Birthday> birthday, Set<Group> groups) {
+                  Optional<Birthday> birthday, Optional<Remark> remark, Set<Group> groups) {
         requireAllNonNull(name, phone, email, address, birthday, groups);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.birthday = birthday;
+        this.remark = remark;
         this.groups.addAll(groups);
     }
 
@@ -75,7 +79,11 @@ public class Person {
     }
 
     public Birthday getBirthday() {
-        return birthday.get();
+        return birthday.orElse(null);
+    }
+
+    public Remark getRemark() {
+        return remark.orElse(null);
     }
 
     /**
@@ -118,13 +126,14 @@ public class Person {
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
                 && birthday.equals(otherPerson.birthday)
+                && remark.equals(otherPerson.remark)
                 && groups.equals(otherPerson.groups);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, birthday, groups);
+        return Objects.hash(name, phone, email, address, birthday, remark, groups);
     }
 
     @Override
@@ -135,6 +144,7 @@ public class Person {
                 .add("email", this.getEmail())
                 .add("address", this.getAddress())
                 .add("birthday", this.getBirthday())
+                .add("remark", this.getRemark())
                 .add("groups", groups)
                 .toString();
     }
@@ -166,6 +176,12 @@ public class Person {
         return getBirthday() != Birthday.NULL_BIRTHDAY;
     }
     /**
+     * Returns true if the person has a remark.
+     */
+    public boolean hasRemark() {
+        return getRemark() != Remark.NULL_REMARK;
+    }
+    /**
      * Returns true if the person has groups.
      */
     public boolean hasGroups() {
@@ -177,9 +193,6 @@ public class Person {
      */
     public boolean hasBirthdayWithinDays(int days) {
         Birthday birthday = getBirthday();
-        if (birthday == null) {
-            return false;
-        }
         return birthday.isWithinDays(days);
     }
 
