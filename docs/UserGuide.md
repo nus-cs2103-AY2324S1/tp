@@ -18,7 +18,7 @@ organise and manage patient details faster than traditional GUI apps.
 
 ## [Quick start](#quick-start)
 
-1. Ensure you have Java `11` or above installed in your Computer.
+1. Ensure you have [Java](#java) `11` or above installed in your Computer.
 
 2. Download the latest `healthsync.jar` from [here](https://github.com/AY2324S1-CS2103T-T14-3/tp/releases).
 
@@ -59,52 +59,11 @@ organise and manage patient details faster than traditional GUI apps.
 ## [Features](#features)
 
 <box type="info" seamless>
-
-**Notes about the command format:**<br>
-
-* Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
-
-* The word `or` indicates that at least one of the fields has to be supplied by the user.
-  The output `or` will return the above field that was supplied by the user.
-* `[field]` are optional tags that can be added after a command.
-
-* `[field] …` indicate that multiple fields can be supplied by the user.
-
-* `[field] …` can be in any order.
-
-* Parameters can be in any order.<br>
-  e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
-
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`)
-  will be ignored.<br>
-  e.g. if the command specifies `help 123`, it will be interpreted as `help`.
-
-* If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines
-  as space characters surrounding line-breaks may be omitted when copied over to the application.
+    Confused by unfamiliar terms? There is a <a href="#glossary">Glossary</a> section below!<br>
+    We will also be highlighting more technical terms throughout this User Guide, so do check out
+    the Glossary if you are confused.<br>
+    <a href="#glossary" class="badge bg-primary">Check it out here.</a>
 </box>
-
-### Common Shared Fields
-
-
-The 2 identifying parameters of a patient are given below:
-
-| Tag   | Representative Value         | Example Usage  | General Form in Commands |
-|-------|------------------------------|----------------|--------------------------|
-| `n/`  | Name                         | `n/Alex`       | `n/NAME`                 |
-| `id/` | Identification Number (NRIC) | `id/S2345678A` | `id/IC_NUMBER`           |
-
-1 or more identifying parameters must be specified in each command, unless stated otherwise.
-
-`[field]` are common fields that can be specified behind commands. The common fields are:
-
-| Tag    | Representative Value | Example Usage               | General Form in Commands | Remarks                                                             |
-|--------|----------------------|-----------------------------|--------------------------|---------------------------------------------------------------------|
-| `p/`   | Phone Number         | `p/91234567`                | `p/PHONE_NUMBER`         |                                                                     |
-| `e/`   | Email Address        | `e/example@a.com`           | `e/EMAIL`                |                                                                     |
-| `a/`   | Address              | `a/Location, Here Rd`       | `a/ADDRESS`              |                                                                     |
-| `m/`   | Medical History      | `m/Asthmatic`               | `m/MEDICAL_HISTORY`      | Can have multiple of this field, including zero i.e. Optional field |
-| `ap/`  | Appointment          | `ap/01-01-2023 11:00 12:00` | `ap/APPT `               | Optional field                                                      |
 
 >:exclamation: To enhance the User Guide's clarity, command outputs have been simplified and are now presented with added information indicated by an ellipsis (...).
 
@@ -127,7 +86,6 @@ Format: `list`
 >:bulb: Use `ls` as a shortcut for `list`
 
 ![result for 'list'](images/listResult.jpg)
-
 
 ### Adding a Patient: `add`
 
@@ -409,18 +367,183 @@ The app will attempt to recover your work upon restart.
    the application before running the application again.
 
 --------------------------------------------------------------------------------------------------------------------
+
 ## Glossary
 
-| Term                          | Definition                                                                                                                                                                                                                   |
-|-------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| CLI Application               |  Stands for Command Line Interface, which is an application where the user mainly input commands using the keyboard to interact with the application.                                                                        |
-| GUI  Application              | Stands for Graphical User Interface, which is  an application where the user interacts with graphical components such as icons and buttons to interact with the application.                                                 |
-| Patient List View             | The main component of the application where the list of all added patients are displayed.                                                                                                                                    |
-| Output Box                    | Located below the Patient List View is the output box where the output after executing a command is displayed                                                                                                                |
-| Command Box                   | Located below the Output Box is the Command Box where users will type and enter the command to be executed.                                                                                                                  |
-| Logger Tab                    | A special display box in the right of HealthSync that is used to store the result of the relevant log commands                                                                                                               |
-| Size of Command History Stack | The current number of undo-able commands that is remembered by HealthSync. Executing an undo command reduces this number depending on number of undos exectued. Executing an un-doable command increases this number by one. |  
-| JSON                          | Stands for JavaScrip Object Notation, which is a file format commonly used to store and transmit data. The data in HealthSync is stored using this format.                                                                   |  
+### Command Format
+
+Refers to the standardized way you have to type in your instructions to HealthSync.
+Currently, there are 2 main types of Command Formats.
+
+ * [Fielded](#fields) commands, which require you to add additional information behind the instruction.
+ * Field-less commands, which do not need you to specify any more information to function.
+
+Fielded Command Formats will generally look like this:
+```
+<KEYWORD> <words/numbers> identity [field]
+```
+
+ * `<KEYWORD>` is the word used to tell HealthSync what to do.
+   * Example: to tell HealthSync to add a patient, you would use `add` as the keyword.
+
+ * `<words/numbers>` are special values specific to the instruction type. These are generally
+   given after the keyword.
+
+ * `identity` represents compulsory identifying fields that need to be included with for that instruction type.
+   * `or` can be specified between 2 identifying fields. This means that you may exclude one of the fields
+     for that instruction type. 
+   * See [Fields](#fields) to understand how identifying fields are specified.
+
+ * `field` refer to the information fields that can be specified in each command.
+   * Example: for `add`, you would specify additional information like phone number and address.
+   * See [Fields](#fields) to understand how each entry is specified.
+
+ * Square brackets `[...]` indicate that the field is optional to include.
+
+ * `[field] ...` indicate that multiple different field types can be provided.
+
+ * `identity` and `field` can generally be specified in any order.
+   * Example: if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
+
+Field-less Command Formats will generally look like this:
+```
+<KEYWORD>
+```
+
+ * For field-less commands, only the `<KEYWORD>` will be read by HealthSync, and the rest of the data you give it
+   will be ignored. 
+   * Example: if `help 123` was typed in, HealthSync will interpret it as `help`.
+
+### Fields
+
+Fields are the entries you have to input the patient's information for. These would
+include names, phone numbers, appointment times, etc. Fields can be classified into
+2 groups:
+* Identifying fields, to let you know who the patient is. These are unique to the patient entry.
+* Information fields, which gives you other information on the patient.
+
+The 2 identifying fields of a patient are given below:
+
+| Tag   | Representative Value  | Example Usage  | General Form in Commands |
+|-------|-----------------------|----------------|--------------------------|
+| `n/`  | Name                  | `n/Alex`       | `n/NAME`                 |
+| `id/` | Identification Number | `id/S2345678A` | `id/IC_NUMBER`           |
+
+1 or more identifying fields must be specified in each command, unless stated otherwise.
+
+In addition to the identifying fields, information fields can be specified behind commands.
+The information fields are given below:
+
+| Tag    | Representative Value | Example Usage              | General Form in Commands | Remarks                         |
+|--------|----------------------|----------------------------|--------------------------|---------------------------------|
+| `p/`   | Phone Number         | `p/91234567`               | `p/PHONE_NUMBER`         |                                 |
+| `e/`   | Email Address        | `e/example@a.com`          | `e/EMAIL`                |                                 |
+| `a/`   | Address              | `a/Location, Here Rd`      | `a/ADDRESS`              |                                 |
+| `m/`   | Medical History      | `m/Asthmatic`              | `m/MEDICAL_HISTORY`      | Can have multiple of this field |
+| `ap/`  | Appointment          | `ap/11-2-2023 11:00 12:00` | `ap/APPT `               |                                 |
+
+Unless stated otherwise, these fields are optional.
+
+#### Name
+
+The standard unique identifier for your patient. Each patient should have a unique alphanumeric name assigned to them.
+
+#### NRIC
+
+The ID-based unique identifier for your patient. Each patient should have a unique alphanumeric ID assigned to them.
+
+There is no verification system in place for NRIC. This allows you to use your custom identifier for your patients, if
+you wish.
+
+#### Phone Number
+
+A phone number to contact your patients with. Each patient should be assigned to 1 phone number.
+
+Phone numbers must be numeric, and it must be at least 3 digits long. It does not have to be unique.
+
+#### Email Address
+
+An email address to contact your patients with. Each patient should be assigned to 1 email address, which
+doesn't need to be unique.
+
+Emails should be in the format `local-part@domainname`.
+ * `local-part` is alphanumeric, and may also contain these symbols: `+``_``.``-`
+ * `domainname` should be the site that the email leads to, such as `gmail.com`.
+ * These must be separated by an `@` symbol.
+
+#### Address
+
+The address to contact your patients. Each patient should be assigned to 1 address that they live in,
+and it does not have to be unique.
+
+Addresses do not have a strict format to adhere to.
+
+#### Medical History
+
+The medical history of your patients. These are optional fields to assign to patients, and every
+patient can have more than 1 medical history.
+
+Individually, medical histories do not have a strict format to adhere to. However, every medical
+history a patient has should be unique from one another.
+
+#### Appointment
+
+The appointment slot assigned to your patients. A patient may have no appointment assigned to them.
+Currently, only 1 appointment may be assigned to a patient at a time.
+
+Appointments should be given in this sequence: `Date, Start Time, End Time`. For example,
+`1-Aug-2023, 11:00 13:00` is a valid appointment denoting an appointment on 1st August 2023, from 11am
+to 1pm.
+ * The month and day of the appointment should always be included.
+ * Day can be given as a 1 to 2-digit number. It will only be accepted if the day can exist in that month or year.
+ * Month can be given as a 1 to 2-digit number or a 3-letter word. Example: `Jun` and `6` both represent June.
+ * The year is optional. If not included, HealthSync assumes it to be this year.
+ * The date should be hyphenated.
+ * The time should be given in 24-hour clock format, with 00:00 as 12am.
+ * Colons are optional when time is given with hours and minutes. If no colons are given, you need to pad the hour with
+   a zero when necessary. Example: `1200` for 12 noon, `0900` for 9am.
+ * You may exclude minutes if you wish. Example: `15` will be interpreted as 3pm.
+ * Date and the 2 Times needs to be separated by a comma or a space.
+
+Some examples of valid Appointment formats are listed here:
+```
+1-Nov 8 10
+1-11-2023 10 12
+03-03-23 0800 1400
+4-Sep, 1800, 2000
+```
+
+### CLI
+Command Line Interface. Refers to computer programs which require you to type to interact with it.
+
+### GUI
+Graphical User Interface. Refers to computer programs with a visual window you can interact with directly.
+
+### Patient List View
+The main part of HealthSync where the list of all your patients are displayed.
+
+### Output Box
+A small box right below the Patient List View where HealthSync will provide any feedback it has on the instructions
+it has performed.
+
+### Command Box
+The area where you type your instructions for HealthSync to perform.
+
+### Logger Tab
+A 'sticky-note'-like area on the right of the Patient List View.
+
+### Command History Stack
+The group of instructions HealthSync remembers performing. This group allows HealthSync to undo the
+instructions and return your list to an older state.
+
+### Java
+A piece of software that our program builds on. In order to use HealthSync, your computer must be running at least
+version 11 of Java. [Get it here.](https://www.oracle.com/sg/java/technologies/javase/jdk11-archive-downloads.html)
+
+### JSON
+JavaScript Object Notation. This is the file format used by HealthSync to save and store information.
+
+--------------------------------------------------------------------------------------------------------------------
 
 ## Command summary
 
@@ -438,4 +561,3 @@ The app will attempt to recover your work upon restart.
 | **Clear Log**  | `cl`     | `clog`                                                                                                                                         |
 | **Undo**       | `u`      | `undo`                                                                                                                                         |
 | **Exit**       | `e`      | `exit`                                                                                                                                         |
-
