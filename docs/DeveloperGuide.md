@@ -169,9 +169,10 @@ Given below is an example usage scenario and how the add mechanism behaves at ea
 
 Step 1. The user enters the `add` command with relevant details for the new fosterer. The `AddCommandParser` is invoked to parse the user's input.
 
-Step 2. The `AddCommandParser` processes the user's input, verifies the presence of mandatory fields, and ensures that there is no conflicting data. If any of these checks fail, the system will generate a specific error message indicating which field is invalid. For example, if the email format is incorrect, the system will report that the email input is invalid. The error message will be displayed to the user, providing clear feedback about the issue and the specific constraints that are not met.
+Step 2. The `AddCommandParser` processes the user's input and verifies the presence of mandatory fields inputted in the correct format. If this check fails, the system will generate a specific error message indicating which field format is invalid. For example, if the email format is incorrect, the system will report that the email input is invalid. The error message will be displayed to the user, providing clear feedback about the issue and the specific constraints that are not met.
 
-Step 3. If all input is valid, the new person is created using the `Person` class. The person's details, including their name, phone, email, address, housing, availability, animal name, animal type, and tags, are recorded.
+Step 3. If all mandatory fields are present with the valid format, the new person is created using the `Person` class. The person's details, including their name, phone, email, address, housing, availability, animal name, animal type, and tags, are recorded, and the Person class also ensures that there is no conflicting data. 
+If this check fails, the system will generate a specific error message indicating which field is invalid, and how can it be resolved.
 
 Step 4. The `Person` is then passed to the new `AddCommand` created, which adds the person to the address book, ensuring that it is not a duplicate of an existing entry. This check is performed in the `execute` method of the `AddCommand`.
 
@@ -186,13 +187,17 @@ The add feature ensures that user input is correctly parsed and validated, and i
 
 **Aspect: Handling duplicate persons:**
 
-* **Alternative 1 (current choice):** Checks for duplicates based on the person's name.
+* **Alternative 1 (current choice):** Checks for duplicates based on the person's name, which is case-sensitive.
     * Pros: Easy to implement, and is simple and effective.
-    * Cons: May not catch duplicates with different names but similar attributes.
+    * Cons: May not catch duplicates with different names but similar attributes or similar names in different letter case.
 
 * **Alternative 2:** Implement a more comprehensive duplicate check considering multiple attributes.
     * Pros: Provides better duplicate detection by comparing multiple attributes.
     * Cons: May be more complex to implement.
+
+* **Alternative 3:** Implement a more effective duplicate check considering the presence of multiple spaces between different words of the same name, and case-sensitivity of names.
+    * Pros: Provides better duplicate detection by identifying fosterers with the same name, but inputted in different formats.
+    * Cons: May be more complex to implement and such cases might be less likely to happen.
 
 **Aspect: How add executes:**
 
@@ -378,12 +383,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | foster manager | update each foster family’s and animal’s details                                                                | keep track of fosterer's most up-to-date information, including updated information of the animal fostered       |
 | `* * *`  | foster manager | search for a specific animal / fosterer’s detail  instead of browsing through the entire list                   | be more productive when conducting the allocation of animals, keeping in contact with the fosterers, etc.        |
 | `* * *`  | foster manager | to be aware of the address of the fosterer                                                                      | conduct checks on the fosterer to ensure the animal is well taken care of                                        |
-| `* * *`  |  foster manager | retrieve the information about the foster family                                                                | provide the necessary information to the Nparks authorities for audit                                            |
-| `* * *`  | foster manager  | sort the list of fosterers alphabetically                                                                       | have a neater, and more organised view of all the fosterers                                                      |
-| `* * * ` | foster manager               | know the distribution of the different housing types among fosterers                                            | allocate the animals to foster homes that are able to accommodate them                                           |
-| `* * *`  | foster manager               | obtain statistics about the currently available fosterers                                                       | better estimate the number of animals I can rescue                                                               |
-| `* * `   |  foster manager  | have the fosterer’s important information collated neatly                                                       | get all the information I need with one glance                                                                   |
-| `* * `   | foster manager               | have an easily accessible (and visible) help button on the top left that leads to a very informative user guide | get help when I am unsure of what command to use                                                                 |
+| `* * *`  | foster manager | retrieve the information about the foster family                                                                | provide the necessary information to the Nparks authorities for audit                                            |
+| `* * *`  | foster manager | sort the list of fosterers alphabetically                                                                       | have a neater, and more organised view of all the fosterers                                                      |
+| `* * * ` | foster manager | know the distribution of the different housing types among fosterers                                            | allocate the animals to foster homes that are able to accommodate them                                           |
+| `* * *`  | foster manager | obtain statistics about the currently available fosterers                                                       | better estimate the number of animals I can rescue                                                               |
+| `* * `   | foster manager | have the fosterer’s important information collated neatly                                                       | get all the information I need with one glance                                                                   |
+| `* * `   | foster manager | have an easily accessible (and visible) help button on the top left that leads to a very informative user guide | get help when I am unsure of what command to use                                                                 |
+| `* * `   | foster manager | undo my previous command                                                                                        | quickly resolve errors caused by an erroneous command                                                            |
 
 
 *{More to be added}*
@@ -495,9 +501,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case resumes from step 3.
 
 
-**Use case: UC5 - Sort list of Fosterers**
-
-**Preconditions**: At least two fosterers have been added.
+**Use case: UC5 - Sort List Of Fosterers**
 
 **MSS**
 
@@ -510,7 +514,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 1a. System detects an error in the entered command.
     * 1a1. System indicates the error.
-    * 1a2. Foster Manager <u>requests for command 'help' (UC5)</u>.
+    * 1a2. Foster Manager <u>requests for command 'help' (UC7)</u>.
     * 1a3. Foster Manager enters new command.
 
       Steps 1a1 - 1a3 are repeated until the command entered is correct.
@@ -544,45 +548,49 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   
     Use case resumes from step 3.
 
-**Use case: UC7 - Request For Command Help**
+**Use case: UC7 - Undo Previous Command**
 
 **MSS**
 
-1. Foster Manager requests for information about a command from the System.
-2. System displays the command information.
+1. Foster Manager requests to undo the previous command.
+2. System undoes the previous command.
 
    Use case ends.
 
 **Extensions**
 
-* 1a. System cannot find the command requested by Foster Manager.
-    * 1a1. System indicates an error that the command does not exist.
-    * 1a2. The system then lists the commands that is available to the Foster Manager.
-    * 1a3. Foster Manager enters new command.
+* 1a. No more undo history is found.
+    * 1a1. System indicates error.
 
-      Steps 1a1 to 1a3 are repeated until the command information requested for exists.
-  
-      Use case resumes at step 2.
+      Use case ends.
 
-**Use case: UC8 - Reset System**
+**Use case: UC8 - Request For Command Help**
+
+**MSS**
+
+1. Foster Manager requests for help.
+2. System displays the help page link.
+
+   Use case ends.
+
+**Use case: UC9 - Reset System**
 
 **MSS**
 
 1. Foster Manager requests to reset the System.
-2. System warns Foster Manager that this is irreversible.
-3. System requests for confirmation.
-4. Foster Manager confirms.
+2. System requests for confirmation.
+3. Foster Manager confirms.
 
    Use case ends.
 
 **Extensions**
 
-* 3a. Foster Manager chooses to cancel the reset.
+* 2a. Foster Manager chooses to cancel the reset.
 
     Use case ends.
 
 
-**Use case: UC9 - Exit**
+**Use case: UC10 - Exit**
 
 **MSS**
 
