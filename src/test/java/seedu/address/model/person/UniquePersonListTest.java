@@ -9,7 +9,6 @@ import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BOB;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -22,7 +21,6 @@ import seedu.address.model.interval.Interval;
 import seedu.address.model.interval.IntervalBegin;
 import seedu.address.model.interval.IntervalDay;
 import seedu.address.model.interval.IntervalEnd;
-import seedu.address.model.interval.TimeSlot;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
 import seedu.address.testutil.PersonBuilder;
