@@ -57,7 +57,9 @@ public class Messages {
      */
     public static String format(Band band) {
         final StringBuilder builder = new StringBuilder();
-        builder.append(band.getName());
+        builder.append(band.getName())
+                .append("; Genres: ");
+        band.getGenres().forEach(builder::append);
         return builder.toString();
     }
 
