@@ -38,7 +38,7 @@ public class Interview {
     }
 
     /**
-     * Constructs an instance of the Interview class when the add-i
+     * Constructs an instance of the Interview class when add-i
      * command is executed.
      *
      * @author Tan Kerway
