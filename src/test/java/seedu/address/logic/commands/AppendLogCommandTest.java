@@ -15,6 +15,7 @@ import org.junit.jupiter.api.Test;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.LogBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -226,6 +227,17 @@ public class AppendLogCommandTest {
         }
     }
 
+    private class ModelStubAppendingPersonsFound extends ModelStubLoggingPersonAdded {
+        @Override
+        public ObservableList<Person> getFoundPersonsList() {
+            List<Person> persons = new ArrayList<>();
+            persons.add(new PersonBuilder().withName("Benson").build());
+            persons.add(new PersonBuilder().withName("Carl").build());
+            persons.add(new PersonBuilder().withName("Alice").build());
+            return FXCollections.observableArrayList(persons);
+        }
+    }
+
     @Test
     public void execute_resultsAppendedToEmptyLogBook_success() throws Exception {
 
@@ -262,12 +274,35 @@ public class AppendLogCommandTest {
     }
 
     @Test
+    public void execute_duplicatePersonsFound_appendSkipsDuplicate() throws Exception {
+
+        ModelStubAppendingPersonsFound model = new ModelStubAppendingPersonsFound();
+        Person existingPerson1 = new PersonBuilder().withName("Alice").build();
+        Person existingPerson2 = new PersonBuilder().withName("Benson").build();
+        Person personToAppend = new PersonBuilder().withName("Carl").build();
+
+        model.addPerson(existingPerson1);
+        model.addPerson(existingPerson2);
+
+        AppendLogCommand appendLogCommand = new AppendLogCommand();
+
+        CommandResult commandResult = appendLogCommand.execute(model);
+
+        assertEquals(AppendLogCommand.MESSAGE_SUCCESS, commandResult.getFeedbackToUser());
+
+        assertEquals(model.getLogBook().getPersonList().size(), 3);
+        assertEquals(model.getLogBook().getPersonList().get(0), existingPerson1);
+        assertEquals(model.getLogBook().getPersonList().get(1), existingPerson2);
+        assertEquals(model.getLogBook().getPersonList().get(2), personToAppend);
+    }
+
+    @Test
     public void execute_noPersonsFound_appendNotExecuted() {
 
         ModelStubNoPersonsFound model = new ModelStubNoPersonsFound();
         AppendLogCommand appendLogCommand = new AppendLogCommand();
 
-        assertThrows(AssertionError.class, () -> appendLogCommand.execute(model));
+        assertThrows(CommandException.class, () -> appendLogCommand.execute(model));
 
         assertEquals(0, model.getLogBook().getPersonList().size());
     }

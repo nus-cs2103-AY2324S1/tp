@@ -22,7 +22,9 @@ public class AppendLogCommand extends UndoableCommand {
             + "Example 1: " + COMMAND_WORD + "\n"
             + "Example 2: " + COMMAND_WORD_ALIAS;
 
-    public static final String MESSAGE_SUCCESS = "Results of the FindCommand have been appended to the logger tab.";
+    public static final String MESSAGE_SUCCESS = "The last filtered values have been added onto the logger tab.";
+
+    public static final String MESSAGE_FAILURE = "Cannot log an empty list.";
 
     public static final String MESSAGE_UNDO_ALOG_SUCCESS = "Undoing the appending to log.";
 
@@ -39,13 +41,18 @@ public class AppendLogCommand extends UndoableCommand {
     public CommandResult execute(Model model) throws CommandException {
 
         // Ensure that there are results from the most recent FindCommand
-        assert !model.getFoundPersonsList().isEmpty();
+        if (model.getFoundPersonsList().isEmpty()) {
+            throw new CommandException(MESSAGE_FAILURE);
+        }
 
         // Store a copy of the current logBook before updating it
         logBookBeforeAppend = new LogBook(model.getLogBook());
         model.addToHistory(this);
 
         for (Person person : model.getFoundPersonsList()) {
+            if (model.getLogBook().hasPerson(person)) {
+                continue;
+            }
             model.getLogBook().addPerson(person);
         }
         return new CommandResult(MESSAGE_SUCCESS);

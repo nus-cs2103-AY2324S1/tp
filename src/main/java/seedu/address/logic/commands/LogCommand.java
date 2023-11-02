@@ -21,7 +21,9 @@ public class LogCommand extends UndoableCommand {
             + "Example 1: " + COMMAND_WORD + "\n"
             + "Example 2: " + COMMAND_WORD_ALIAS;
 
-    public static final String MESSAGE_SUCCESS = "Results of the FindCommand have been saved to the logger tab.";
+    public static final String MESSAGE_SUCCESS = "The last filtered values have overridden the logger tab.";
+
+    public static final String MESSAGE_FAILURE = "Cannot log an empty list.";
 
     public static final String MESSAGE_UNDO_LOG_SUCCESS = "Undoing the logging.";
 
@@ -37,14 +39,16 @@ public class LogCommand extends UndoableCommand {
     @Override
     public CommandResult execute(Model model) throws CommandException {
 
+        // Ensure that there are results from the most recent FindCommand
+        if (model.getFoundPersonsList().isEmpty()) {
+            throw new CommandException(MESSAGE_FAILURE);
+        }
+
         // Store a copy of the current logBook before updating it
         logBookBeforeUpdate = new LogBook(model.getLogBook());
         model.addToHistory(this);
 
         model.getLogBook().setPersons(model.getFoundPersonsList());
-
-        // Ensure that there are results from the most recent FindCommand
-        assert !model.getFoundPersonsList().isEmpty();
 
         return new CommandResult(MESSAGE_SUCCESS);
 

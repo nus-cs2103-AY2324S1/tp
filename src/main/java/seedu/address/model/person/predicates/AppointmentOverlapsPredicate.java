@@ -14,6 +14,9 @@ import seedu.address.model.person.Person;
  * Tests that a {@code Person}'s {@code Appointment} overlaps with the query Appointment.
  */
 public class AppointmentOverlapsPredicate implements Predicate<Person> {
+
+    public static final AppointmentOverlapsPredicate PREDICATE_TODAY =
+            new AppointmentOverlapsPredicate(Appointment.TODAY);
     private final Appointment query;
 
     /**
