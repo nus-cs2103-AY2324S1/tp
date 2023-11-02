@@ -19,6 +19,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -86,6 +87,8 @@ public class MainWindow extends UiPart<Stage> {
     private boolean isShowingTree;
 
     private double originalResultDisplayHeight;
+
+    private static final String SHOWING_HELP_MESSAGE = HelpCommand.SHOWING_HELP_MESSAGE;
 
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
@@ -323,6 +326,8 @@ public class MainWindow extends UiPart<Stage> {
         } else {
             helpWindow.focus();
         }
+
+        resultDisplay.setFeedbackToUser(SHOWING_HELP_MESSAGE);
 
         expandResultDisplay();
     }
