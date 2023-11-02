@@ -304,14 +304,17 @@ public class Lesson extends ListEntry<Lesson> {
     }
     @Override
     public String toString() {
-        String startEndStr = start != Time.DEFAULT_TIME && end != Time.DEFAULT_TIME
+        String startEndStr = !(start == Time.DEFAULT_TIME && end == Time.DEFAULT_TIME)
                              ? " from " + start + " to " + end
                              : "";
+        String dayStr = day == Day.DEFAULT_DAY
+                        ? ""
+                        : " on " + day;
         String subjectStr = subject == Subject.DEFAULT_SUBJECT
                              ? ""
                              : " for " + subject;
         // TODO: Add number of tasks to complete
-        return "Lesson " + name + startEndStr + subjectStr;
+        return "Lesson " + name + startEndStr + dayStr + subjectStr;
     }
 
     /**
