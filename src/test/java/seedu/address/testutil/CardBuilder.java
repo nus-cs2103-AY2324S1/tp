@@ -17,11 +17,13 @@ public class CardBuilder {
     public static final PracticeDate DEFAULT_NEXT_PRACTICE_DATE =
             new PracticeDate(LocalDateTime.MIN); // highest priority
     public static final List<Tag> DEFAULT_TAGS = new ArrayList<>();
+    public static final Hint DEFAULT_HINT = new Hint.EmptyHint();
 
     private Question question;
     private Answer answer;
     private PracticeDate nextPracticeDate;
     private List<Tag> tags;
+    private Hint hint;
 
     /**
      * Creates a {@code CardBuilder} with the default details.
@@ -31,6 +33,7 @@ public class CardBuilder {
         answer = new Answer(DEFAULT_ANSWER);
         nextPracticeDate = DEFAULT_NEXT_PRACTICE_DATE;
         tags = DEFAULT_TAGS;
+        hint = DEFAULT_HINT;
     }
 
     /**
@@ -41,6 +44,7 @@ public class CardBuilder {
         answer = cardToCopy.getAnswer();
         nextPracticeDate = cardToCopy.getNextPracticeDate();
         tags = cardToCopy.getTags();
+        hint = cardToCopy.getHint();
     }
 
     /**
@@ -84,14 +88,29 @@ public class CardBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code Hint} of the {@code Card} that we are building.
+     */
+    public CardBuilder withHint(String hint) {
+        this.hint = new Hint(hint);
+        return this;
+    }
+
+    /**
+     * Sets the {@code Hint} of the {@code Card} that we are building.
+     */
+    public CardBuilder withHint(Hint hint) {
+        this.hint = hint;
+        return this;
+    }
+
     public Card build() {
         Difficulty difficulty = Difficulty.NEW;
         PracticeDate lastPracticeDate = null;
         SolveCount solveCount = new SolveCount();
-        Hint emptyHint = new Hint.EmptyHint();
         return new Card(question, answer, difficulty,
                 tags, nextPracticeDate, lastPracticeDate,
-                solveCount, emptyHint);
+                solveCount, hint);
     }
 
 }

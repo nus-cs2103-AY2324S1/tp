@@ -69,7 +69,7 @@ public class EditCommandParser implements Parser<EditCommand> {
 
         // Throw exception if no details are changed
         if (!editCardDescriptor.isAnyFieldEdited()) {
-            throw new ParseException(EditCommand.MESSAGE_NOT_EDITED + "\n:"
+            throw new ParseException(EditCommand.MESSAGE_NOT_EDITED + "\n"
                     + EditCommand.MESSAGE_USAGE
             );
         }

@@ -57,6 +57,7 @@ public class EditCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+
         List<Card> lastShownList = model.getFilteredCardList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
@@ -80,7 +81,8 @@ public class EditCommand extends Command {
      * edited with {@code editCardDescriptor}.
      */
     private static Card createEditedCard(Card cardToEdit, EditCardDescriptor editCardDescriptor) {
-        assert cardToEdit != null;
+        assert(cardToEdit != null);
+        assert(editCardDescriptor != null);
 
         Question updatedQuestion = editCardDescriptor.getQuestion().orElse(cardToEdit.getQuestion());
         Answer updatedAnswer = editCardDescriptor.getAnswer().orElse(cardToEdit.getAnswer());
@@ -138,6 +140,8 @@ public class EditCommand extends Command {
          * A defensive copy of {@code tags} is used internally.
          */
         public EditCardDescriptor(EditCardDescriptor toCopy) {
+            requireNonNull(toCopy);
+
             setQuestion(toCopy.question);
             setAnswer(toCopy.answer);
             setTags(toCopy.tags);
@@ -153,6 +157,7 @@ public class EditCommand extends Command {
 
         // Question
         public void setQuestion(Question question) {
+            assert(question != null);
             this.question = question;
         }
 
@@ -162,6 +167,7 @@ public class EditCommand extends Command {
 
         // Answer
         public void setAnswer(Answer answer) {
+            assert(answer != null);
             this.answer = answer;
         }
 
@@ -171,6 +177,7 @@ public class EditCommand extends Command {
 
         // Tags
         public void setTags(List<Tag> tags) {
+            assert(tags != null);
             this.tags = tags;
         }
 
@@ -179,11 +186,13 @@ public class EditCommand extends Command {
         }
 
         // Hint
+        public void setHint(Hint hint) {
+            assert(hint != null);
+            this.hint = hint;
+        }
+
         public Optional<Hint> getHint() {
             return Optional.ofNullable(hint);
-        }
-        public void setHint(Hint hint) {
-            this.hint = hint;
         }
 
         @Override

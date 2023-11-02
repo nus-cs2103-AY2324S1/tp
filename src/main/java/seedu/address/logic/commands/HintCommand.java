@@ -23,7 +23,7 @@ public class HintCommand extends Command {
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_SOLVE_CARD_SUCCESS = "%1$s";
+    public static final String MESSAGE_HINT_CARD_SUCCESS = "%1$s";
 
     /** Specific {@code Index} in Deck to display hint for */
     private final Index targetIndex;
@@ -34,8 +34,8 @@ public class HintCommand extends Command {
      * @param targetIndex The index of the target to card.
      */
     public HintCommand(Index targetIndex) {
+        requireNonNull(targetIndex);
         this.targetIndex = targetIndex;
-
     }
 
     @Override

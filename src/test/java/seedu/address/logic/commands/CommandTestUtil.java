@@ -1,20 +1,21 @@
 package seedu.address.logic.commands;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.testutil.Assert.assertThrows;
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Deck;
 import seedu.address.model.Model;
 import seedu.address.model.card.Card;
+import seedu.address.model.card.Hint;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.EditCardDescriptorBuilder;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.testutil.Assert.assertThrows;
 
 /**
  * Contains helper methods for testing commands.
@@ -33,6 +34,7 @@ public class CommandTestUtil {
 
     public static final String VALID_SINGULAR_TAG_CS2100 = "CS2100";
 
+    public static final String VALID_HINT_CS2100 = "Base 2";
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
@@ -42,9 +44,9 @@ public class CommandTestUtil {
 
     static {
         DESC_CS2100 = new EditCardDescriptorBuilder().withQuestion(VALID_QUESTION_CS2100)
-                .withAnswer(VALID_ANSWER_CS2100).withTags(VALID_TAG_CS2100).build();
+                .withAnswer(VALID_ANSWER_CS2100).withTags(VALID_TAG_CS2100).withHint(VALID_HINT_CS2100).build();
         DESC_CS1101S = new EditCardDescriptorBuilder().withQuestion(VALID_QUESTION_CS1101S)
-                .withAnswer(VALID_ANSWER_CS1101S).withTags(VALID_TAG_CS1101S).build();
+                .withAnswer(VALID_ANSWER_CS1101S).withTags(VALID_TAG_CS1101S).withHint(new Hint.EmptyHint()).build();
     }
 
     /**
