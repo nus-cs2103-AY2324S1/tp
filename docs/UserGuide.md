@@ -360,15 +360,13 @@ The notes feature allows you to add and remove notes for a person, and provides 
 The parameters for these commands are `PERSON_INDEX`, `NOTE_INDEX` and `NOTE_CONTENT`. These parameters are explained in detail in the section below.
 
 <br>
+
 <panel header=":fa-solid-book: **Notes Command Parameters**" type="secondary" expanded no-close>
+
 The fields you enter should follow the following format:
-
-| Parameter     | Description                                                                                                 |
-|---------------|-------------------------------------------------------------------------------------------------------------|
-| `PERSON_INDEX`| The position of the person in the list you want to add a note to. This should be a positive integer, and should be within the bounds of the list. |
-| `NOTE_INDEX`  | The position of the note in the person's list of notes you want to remove. This should be a positive integer, and should be within the bounds of the list. |
-| `NOTE_CONTENT`| The content of the note you want to add. It has to be non-empty, and can contain any character.              |
-
+- `PERSON_INDEX`: The position of the person in the list you want to add a note to. This should be a positive integer, and should be within the bounds of the list.
+- `NOTE_INDEX`: The position of the note in the person's list of notes you want to modify. This should be a positive integer, and should be within the bounds of the list.
+- `NOTE_CONTENT`: The content of the note you want to add. It has to be non-empty, and can contain any printable ASCII character.
 </panel>
 
 <br>
