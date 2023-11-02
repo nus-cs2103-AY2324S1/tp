@@ -43,7 +43,7 @@ public class GithubCommand extends Command {
         try {
             Desktop.getDesktop().browse(new URI(githubUrl));
         } catch (IOException | URISyntaxException e) {
-            System.out.println(e.getMessage());
+            throw new CommandException(e.getMessage());
         }
 
         return new CommandResult(MESSAGE_SUCCESS);

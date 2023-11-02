@@ -22,6 +22,10 @@ public class Messages {
                 "Multiple values specified for the following single-valued field(s): ";
 
 
+    public static final String MESSAGE_INCORRECT_DATE_FORMAT =
+            "Date is not in correct format! \nRequired format: yyyy-MM-dd HH:mm";
+    public static final String MESSAGE_INVALID_DATES = "End time must be after start time!";
+
     /**
      * Returns an error message indicating the duplicate prefixes.
      */
