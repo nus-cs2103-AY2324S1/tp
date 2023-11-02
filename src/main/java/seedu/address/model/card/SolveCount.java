@@ -6,6 +6,13 @@ package seedu.address.model.card;
 public class SolveCount {
     private Integer solveCount = 0;
 
+    public SolveCount(Integer solveCount) {
+        this.solveCount = solveCount;
+    }
+    public SolveCount() {
+        this.solveCount = 0;
+    }
+
     public Integer getSolveCount() {
         return solveCount;
     }

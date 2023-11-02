@@ -11,6 +11,20 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+<<<<<<< HEAD
+=======
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.card.Answer;
+import seedu.address.model.card.Card;
+import seedu.address.model.card.PracticeDate;
+import seedu.address.model.card.Question;
+import seedu.address.model.card.SolveCount;
+import seedu.address.model.tag.Tag;
+
+>>>>>>> master
 /**
  * Jackson-friendly version of {@link Card}.
  */
@@ -25,6 +39,7 @@ class JsonAdaptedCard {
     private final String difficulty;
     private final String nextPracticeDate;
     private final String lastPracticeDate;
+    private final String solveCount;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
 
     /**
@@ -35,6 +50,7 @@ class JsonAdaptedCard {
             @JsonProperty("answer") String answer,
             @JsonProperty("difficulty") String difficulty,
             @JsonProperty("tags") List<JsonAdaptedTag> tags,
+            @JsonProperty("solveCount") String solveCount,
             @JsonProperty("next-practice-date") String nextPracticeDate,
             @JsonProperty("last-practice-date") String lastPracticeDate) {
         this.question = question;
@@ -45,6 +61,7 @@ class JsonAdaptedCard {
         }
         this.nextPracticeDate = nextPracticeDate;
         this.lastPracticeDate = lastPracticeDate;
+        this.solveCount = solveCount;
     }
 
     /**
@@ -54,6 +71,7 @@ class JsonAdaptedCard {
         question = source.getQuestion().question;
         answer = source.getAnswer().answer;
         difficulty = source.getDifficulty();
+        solveCount = source.getSolveCount().toString();
         nextPracticeDate = source.getNextPracticeDate().practiceDate.toString();
         lastPracticeDate = source.getLastPracticeDate().practiceDate.toString();
         tags.addAll(source.getTags().stream()
@@ -124,8 +142,14 @@ class JsonAdaptedCard {
         final PracticeDate modelLastPracticeDate = lastPracticeDate != null
                 ? new PracticeDate(LocalDateTime.parse(lastPracticeDate))
                 : null;
+<<<<<<< HEAD
 
         return new Card(modelQuestion, modelAnswer, modalDifficulty, modalCardTags,
                 modelNextPracticeDate, modelLastPracticeDate);
+=======
+        final SolveCount modelsolveCount = new SolveCount(Integer.parseInt(solveCount));
+        return new Card(modelQuestion, modelAnswer, difficulty, cardTags, modelNextPracticeDate,
+                modelLastPracticeDate, modelsolveCount);
+>>>>>>> master
     }
 }

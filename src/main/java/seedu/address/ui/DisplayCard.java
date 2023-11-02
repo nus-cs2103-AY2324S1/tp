@@ -39,6 +39,9 @@ public class DisplayCard extends UiPart<Region> {
     @FXML
     private Label dueDate;
 
+    @FXML
+    private Label solveCount;
+
     /**
      * Creates a {@code DisplayCard} with the given {@code card} and index to display.
      */
@@ -53,6 +56,7 @@ public class DisplayCard extends UiPart<Region> {
         card.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        solveCount.setText("Solved: " + card.getSolveCount().toString());
     }
 
     private void setTextWithMarkdown(TextFlow textFlowControl, String content) {
