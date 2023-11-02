@@ -5,10 +5,9 @@ import static java.util.Objects.requireNonNull;
 import java.io.FileWriter;
 import java.io.IOException;
 
+import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Person;
-
 
 
 /**
@@ -31,54 +30,12 @@ public class ExportCommand extends Command {
      */
     public ExportCommand() {}
 
-    /**
-     * Uses escape quotations to specify a string as a string
-     * @param str
-     * @return
-     */
-    public String treatAsString(String str) {
-        return "\"" + str + "\"";
-    }
-
-    /**
-     * Appends the persons to a StringBuilder
-     * @param model the model in use
-     * @return returns the StringBuilder containing all the data of Persons
-     */
-    public StringBuilder appendPersons(Model model) {
-        StringBuilder sb = new StringBuilder("Name,Phone,Email,Address,Tags,LinkedIn,Github,Remark,Status\n");
-
-        for (Person p : model.getAddressBook().getPersonList()) {
-            String name = treatAsString(p.getName().toString());
-            String phone = treatAsString(p.getPhone().toString());
-            String email = treatAsString(p.getEmail().toString());
-            String address = treatAsString(p.getAddress().toString());
-            String tags = treatAsString(p.getTags().toString());
-            String linkedIn = treatAsString(p.getLinkedIn().toString());
-            String github = treatAsString(p.getGithub().toString());
-            String remark = treatAsString(p.getRemark().toString());
-            String status = treatAsString(p.getStatus().toString());
-
-            sb.append(name)
-                    .append(",").append(phone)
-                    .append(",").append(email)
-                    .append(",").append(address)
-                    .append(",").append(tags)
-                    .append(",").append(linkedIn)
-                    .append(",").append(github)
-                    .append(",").append(remark)
-                    .append(",").append(status)
-                    .append("\n");
-        }
-        return sb;
-    }
-
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
         try (FileWriter writer = new FileWriter(defaulltPath)) {
-            writer.append(appendPersons(model));
+            writer.append(StringUtil.appendPersons(model));
             return new CommandResult(MESSAGE_SUCCESS);
         } catch (IOException e) {
             throw new CommandException("Error exporting data: " + e.getMessage());

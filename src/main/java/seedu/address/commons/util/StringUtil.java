@@ -7,6 +7,9 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.Arrays;
 
+import seedu.address.model.Model;
+import seedu.address.model.person.Person;
+
 /**
  * Helper functions for handling strings.
  */
@@ -80,5 +83,47 @@ public class StringUtil {
         } catch (NumberFormatException nfe) {
             return false;
         }
+    }
+
+    /**
+     * Uses escape quotations to specify a string as a string
+     * @param str
+     * @return
+     */
+    public static String treatAsString(String str) {
+        return "\"" + str + "\"";
+    }
+
+    /**
+     * Appends the persons to a StringBuilder
+     * @param model the model in use
+     * @return returns the StringBuilder containing all the data of Persons
+     */
+    public static StringBuilder appendPersons(Model model) {
+        StringBuilder sb = new StringBuilder("Name,Phone,Email,Address,Tags,LinkedIn,Github,Remark,Status\n");
+
+        for (Person p : model.getAddressBook().getPersonList()) {
+            String name = treatAsString(p.getName().toString());
+            String phone = treatAsString(p.getPhone().toString());
+            String email = treatAsString(p.getEmail().toString());
+            String address = treatAsString(p.getAddress().toString());
+            String tags = treatAsString(p.getTags().toString());
+            String linkedIn = treatAsString(p.getLinkedIn().toString());
+            String github = treatAsString(p.getGithub().toString());
+            String remark = treatAsString(p.getRemark().toString());
+            String status = treatAsString(p.getStatus().toString());
+
+            sb.append(name)
+                    .append(",").append(phone)
+                    .append(",").append(email)
+                    .append(",").append(address)
+                    .append(",").append(tags)
+                    .append(",").append(linkedIn)
+                    .append(",").append(github)
+                    .append(",").append(remark)
+                    .append(",").append(status)
+                    .append("\n");
+        }
+        return sb;
     }
 }
