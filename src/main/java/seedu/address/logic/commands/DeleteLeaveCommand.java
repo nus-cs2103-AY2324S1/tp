@@ -29,7 +29,7 @@ public class DeleteLeaveCommand extends Command {
             + "OR     "
             + PREFIX_ADD_ANNUAL_LEAVE_FROM + " DATE "
             + PREFIX_ADD_ANNUAL_LEAVE_TO + " DATE \n"
-            + "Example: " + COMMAND_WORD + " "
+            + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_ADD_ANNUAL_LEAVE_ON + " 01/01/2023     "
             + "OR     "
             + PREFIX_ADD_ANNUAL_LEAVE_FROM + " 01/01/2023 "
