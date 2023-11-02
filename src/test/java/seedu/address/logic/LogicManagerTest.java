@@ -165,7 +165,8 @@ public class LogicManagerTest {
     }
 
     @Test
-    public void execute_undoCommandWithNullModel_success() throws CommandException, ParseException, DataLoadingException, IOException {
+    public void execute_undoCommandWithNullModel_success() throws CommandException, ParseException,
+            DataLoadingException, IOException {
         String undoCommand = "undo";
         CommandResult undoResult = logic.execute(undoCommand);
 
