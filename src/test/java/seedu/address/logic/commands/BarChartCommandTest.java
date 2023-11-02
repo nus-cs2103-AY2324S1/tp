@@ -9,6 +9,7 @@ import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.commands.barchartresults.EnrolDateBarChartCommandResult;
 import seedu.address.logic.commands.barchartresults.GenderBarChartCommandResult;
 import seedu.address.logic.commands.barchartresults.SecLevelBarChartCommandResult;
 import seedu.address.logic.commands.barchartresults.SubjectBarChartCommandResult;
@@ -26,12 +27,18 @@ public class BarChartCommandTest {
         Command command1 = new BarChartCommand("g/");
         Command command2 = new BarChartCommand("g/");
         Command command3 = new BarChartCommand("s/");
+        Command command4 = new BarChartCommand("d/", 2023);
+        Command command5 = new BarChartCommand("d/", 2023);
+        Command command6 = new BarChartCommand("d/Z", 2022);
 
         // same args -> return true
         assertEquals(command1, command2);
+        assertEquals(command4, command5);
 
         // different args -> return false
         assertNotEquals(command1, command3);
+        assertNotEquals(command2, command4);
+        assertNotEquals(command4, command6);
 
         // null -> return false
         assertNotEquals(command1, null);
@@ -51,9 +58,11 @@ public class BarChartCommandTest {
         Command command1 = new BarChartCommand("g/");
         Command command2 = new BarChartCommand("l/");
         Command command3 = new BarChartCommand("s/");
+        Command command4 = new BarChartCommand("d/", 2023);
 
         assertTrue(command1.execute(model) instanceof GenderBarChartCommandResult);
         assertTrue(command2.execute(model) instanceof SecLevelBarChartCommandResult);
         assertTrue(command3.execute(model) instanceof SubjectBarChartCommandResult);
+        assertTrue(command4.execute(model) instanceof EnrolDateBarChartCommandResult);
     }
 }

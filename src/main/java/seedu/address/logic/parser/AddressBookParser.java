@@ -95,7 +95,7 @@ public class AddressBookParser {
             return new TableCommandParser().parse(arguments);
 
         case BarChartCommand.COMMAND_WORD:
-            return new BarChartCommand(arguments);
+            return new BarChartCommandParser().parse(arguments);
 
         case SortCommand.COMMAND_WORD:
             return new SortCommandParser().parse(arguments);

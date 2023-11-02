@@ -235,7 +235,7 @@ Format: `table {prefix}`
 * prefix is case-sensitive.
 * Exactly one of `g/`, `l/`, `s/` or `d/yyyy` must be provided.
 * For `d/yyyy`, `yyyy` represents year in 4 digits.
-* 
+
 Examples:
 * `table g/` will show a table categorized by student gender.
 * `table l/` will show a table categorized by student sec level.
@@ -250,11 +250,14 @@ Format: `bar {prefix}`
 * FIELD_VALUE is not needed.
 * prefix is case-sensitive.
 * Exactly one of `g/`, `l/`, or `s/` must be provided.
+* For `d/yyyy`, `yyyy` represents year in 4 digits.
+
 
 Examples:
 * `bar g/` will show a bar chart categorized by student gender.
 * `bar l/` will show a bar chart categorized by student sec level.
 * `bar s/` will show a bar chart categorized by student subject.
+* `bar d/2023` will show a bar chart categorized by months in year 2023.
 
 
 ### Export visual representation : `export`
@@ -317,5 +320,5 @@ Action     | Format, Examples
 **Sort**   | `sort in/ [DESCRIPTION]` <br> e.g., `sort in/ ASC`
 **Clear**  | `clear`
 **Show Table** | `table prefix/`<br> or `table d/YEAR` <br>
-**Show Bar Chart** | `bar prefix/`
+**Show Bar Chart** | `bar prefix/`<br> or `bar d/YEAR` <br>
 **Help**   | `help`
