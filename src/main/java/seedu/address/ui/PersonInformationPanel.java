@@ -1,6 +1,8 @@
 package seedu.address.ui;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
 import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
@@ -84,7 +86,7 @@ public class PersonInformationPanel extends UiPart<Region> {
                 label.getStyleClass().add("label4");
             } else if (tagCategories.indexOf(tag.tagCategory) == 3) {
                 label.getStyleClass().add("label5");
-            } else if (tagCategories.indexOf(tag.tagCategory) == 4){
+            } else if (tagCategories.indexOf(tag.tagCategory) == 4) {
                 label.getStyleClass().add("label6");
             } else {
                 label.getStyleClass().add("label1");

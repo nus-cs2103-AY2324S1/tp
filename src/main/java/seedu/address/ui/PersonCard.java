@@ -3,6 +3,7 @@ package seedu.address.ui;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
@@ -86,7 +87,7 @@ public class PersonCard extends UiPart<Region> {
                 label.getStyleClass().add("label4");
             } else if (tagCategories.indexOf(tag.tagCategory) == 3) {
                 label.getStyleClass().add("label5");
-            } else if (tagCategories.indexOf(tag.tagCategory) == 4){
+            } else if (tagCategories.indexOf(tag.tagCategory) == 4) {
                 label.getStyleClass().add("label6");
             } else {
                 label.getStyleClass().add("label1");
