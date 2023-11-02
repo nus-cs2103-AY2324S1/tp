@@ -150,6 +150,11 @@ public class ModelManager implements Model {
         return selectedPerson;
     }
 
+    @Override
+    public void setSelectedPerson(Person person) {
+        selectedPerson.setValue(person);
+    }
+
     //=========== Reminder List Accessors =============================================================
     @Override
     public UniqueReminderList getReminderList() {
@@ -162,6 +167,14 @@ public class ModelManager implements Model {
             return;
         }
         reminderScheduler.start();
+    }
+
+    @Override
+    public void stopReminderScheduler() {
+        if (reminderScheduler == null) {
+            return;
+        }
+        reminderScheduler.shutdown();
     }
 
     @Override

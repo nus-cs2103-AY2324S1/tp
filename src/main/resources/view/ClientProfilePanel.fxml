@@ -14,7 +14,10 @@
         <Insets top="15" right="15" bottom="15" left="15" />
     </padding>
 
-    <Label id="name" fx:id="name" text="\$name" />
+    <HBox alignment="BASELINE_LEFT" spacing="8">
+        <Label id="name" fx:id="name" text="\$name" />
+        <Label fx:id="lead" styleClass="lead" />
+    </HBox>
 
     <VBox spacing="16">
         <FlowPane fx:id="tags" />
@@ -53,7 +56,10 @@
         </VBox>
 
         <VBox spacing="4">
-            <Label text="Past Interactions" />
+            <HBox>
+                <Label text="Past Interactions" />
+                <Label fx:id="interactionsCount" />
+            </HBox>
             <ListView fx:id="interactionsList" styleClass="interactions" />
         </VBox>
     </VBox>

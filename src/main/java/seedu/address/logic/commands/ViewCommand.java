@@ -46,7 +46,7 @@ public class ViewCommand extends Command {
 
         Person personToView = lastShownList.get(index.getZeroBased());
 
-        model.getSelectedPerson().setValue(personToView);
+        model.setSelectedPerson(personToView);
         return new CommandResult(String.format(MESSAGE_VIEW_CLIENT_SUCCESS, Messages.format(personToView)));
     }
 

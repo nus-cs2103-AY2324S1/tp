@@ -15,41 +15,7 @@ Choose a topic from the table of contents below to find out how to manage your c
 
 # Table of Contents
 * Table of Contents
-  - [Welcome to Connectify!](#welcome-to-connectify)
-- [Welcome to Connectify!](#welcome-to-connectify)
-- [Table of Contents](#table-of-contents)
-- [Quick start](#quick-start)
-  - [Reading the examples in this user guide](#reading-the-examples-in-this-user-guide)
-  - [Features](#features)
-    - [Quick notes about the command format](#quick-notes-about-the-command-format)
-- [Features](#features-1)
-    - [Viewing help: ***help***](#viewing-help-help)
-  - [Adding](#adding)
-    - [Adding a client profile: ***create***](#adding-a-client-profile-create)
-      - [Format](#format)
-      - [Example](#example)
-      - [Adding a client interaction: ***interaction***](#adding-a-client-interaction-interaction)
-      - [Format](#format-1)
-      - [Examples](#examples)
-  - [Viewing](#viewing)
-    - [Viewing the dashboard: ***dashboard***](#viewing-the-dashboard-dashboard)
-      - [Format](#format-2)
-    - [Viewing the list of clients: ***list***](#viewing-the-list-of-clients-list)
-    - [Finding a client by name: ***find***](#finding-a-client-by-name-find)
-    - [Viewing the full details of a client: ***view***](#viewing-the-full-details-of-a-client-view)
-  - [Editing](#editing)
-    - [Editing a client profile: ***edit***](#editing-a-client-profile-edit)
-  - [Deleting](#deleting)
-    - [Deleting a client profile: ***delete***](#deleting-a-client-profile-delete)
-- [FAQ \[coming soon\]](#faq-coming-soon)
-- [Known issues \[coming soon\]](#known-issues-coming-soon)
-  - [Command summary](#command-summary)
-    - [Add](#add)
-    - [View](#view)
-    - [Edit](#edit)
-    - [Delete](#delete)
-    - [Exit](#exit)
-- [Command summary](#command-summary-1)
+{:toc}
 
 
 --------------------------------------------------------------------------------------------------------------------
@@ -101,7 +67,7 @@ Choose a topic from the table of contents below to find out how to manage your c
 [↑ Back to Table of Contents](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
-## Reading the examples in this user guide
+# Reading the examples in this user guide
 
 The examples in this guide are formatted with the following conventions:
 * **Command** - The command to be typed into the command box.
@@ -113,20 +79,16 @@ The examples in this guide are formatted with the following conventions:
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Features
-### Quick notes about the command format
+# Features
+
+## Quick notes about the command format
 - Everything related to the command is case-sensitive unless otherwise stated.
 - Words in `UPPER_CASE` are the parameters to be supplied by the user. <br/> E.g., in `n/NAME`, `NAME` is a parameter which can be used as `n/John Doe`.
 - Parameters that are optional are indicated with square brackets `[OPTIONAL]`. <br/> E.g., in `[tg/TELEGRAM]`, `TELEGRAM` is an optional parameter which can be used as `tg/@john_doe` or omitted.
 - Parameters specified in the command can be written in any order. <br/> E.g., `n/John Doe tg/@john_doe` is equivalent to `tg/@john_doe n/John Doe`.
 - Optional parameters with `...` after the square bracket can be repeated any number of times, including zero. <br/> E.g., in `[tag/TAG]...`, multiple tags can be supplied as `tag/important tag/urgent` or omitted.
 
-[↑ Back to table of contents](#table-of-contents)
-
---------------------------------------------------------------------------------------------------------------------
-# Features
-
-### Viewing help: ***help***
+## Viewing help: ***help***
 
 Shows a message explaining how to access the user guide.
 
@@ -144,13 +106,13 @@ Shows a message explaining how to access the user guide.
 Your job as a salesperson starts with adding a client profile to Connectify. This is a one-time process for each client that has been made simple for you.
 Use the ***create*** command to add a client profile.
 
-#### Format
+**Format**
 ```text
 create n/NAME p/PHONE e/EMAIL a/ADDRESS [t/TAG]... [tg/TELEGRAM]
 [pf/PROFESSION] [i/INCOME] [d/DETAILS]
 ```
 
-#### Example
+**Example**
 ```text
 create n/Bernice Yu p/99272758 e/berniceyu@example.com
 a/Blk 30 Lorong 3 Serangoon Gardens, #07-18 t/colleagues
@@ -167,22 +129,24 @@ t/friends tg/@yuyubern pf/Graphic Designer i/60000
 
 You should directly see the client profile added to the list of clients in the application window. After adding a client profile, you can now perform various operations on the client profile as specified in the next few sections!
 
-#### Adding a client interaction: ***interaction***
+### Adding a client interaction: ***interaction***
 
 After adding a client profile, you can now log your interactions with the client.  Use the ***interaction*** command to add an interaction to a client profile.
 
-#### Format
+**Format**
 ```text
 interaction INDEX o/OUTCOME [DETAILS]
 ```
-where INDEX refers to the index of the client profile in the displayed list of clients.
+Where `INDEX` refers to the index of the client profile in the displayed list of clients.
 
-#### Examples
+Note that at least one of the `OUTCOME` or `DETAILS` parameters must be provided.
+
+**Examples**
 ```
-interaction 1 o/Meeting with client d/Client is interested in our products
+interaction 1 o/INTERESTED Meeting with client
 ```
 ```
-interaction 1 o/Meeting with client
+interaction 1 Meeting with client
 ```
 
 You should directly see the interaction added to the client profile in the application window.
@@ -193,6 +157,10 @@ You should directly see the interaction added to the client profile in the appli
 
 ## Viewing
 
+Connectify has 2 main views: the dashboard and the list of clients.
+
+The dashboard is a summarized view of all your client interactions and upcoming events. It is useful for you to quickly catch up on your progress and what's coming up.
+
 Sometimes, you may want to view the details of a client profile or the interactions you have had with a client to quickly catch up on the client's profile before contacting them.
 Or, you might just want to view the list of clients you have added to Connectify.
 
@@ -202,7 +170,7 @@ This section contains multiple commands that allow you to view various details o
 
 Use the ***dashboard*** command to view a summarized information of all your clients and their interactions with you in a single place.
 
-#### Format
+**Format**
 ````text
 dashboard
 ````
@@ -219,6 +187,11 @@ list
 ```
 
 You should then see the list of clients in the application window.
+
+<div markdown="span" class="alert alert-primary">
+:bulb: **Tip:**
+You can quickly switch between the dashboard and the list of clients using the `dashboard` and `list` commands.
+</div>
 
 ### Finding a client by name: ***find***
 
@@ -257,6 +230,10 @@ view INDEX
 ```
 where INDEX refers to the index of the client profile in the displayed list of clients.
 
+[↑ Back to Table of Contents](#table-of-contents)
+
+--------------------------------------------------------------------------------------------------------------------
+
 ## Editing
 
 ### Editing a client profile: ***edit***
@@ -277,11 +254,19 @@ Example
 2. `edit 2 e/berniceyu@gmail.com p/123456789`
 3. `edit 3 t/buddies t/relatives`
 
-![Clients before editing](images/ExampleEditBefore.png)
-*Initial state of 4 contacts.*
+<figure>
+    <img src="images/ExampleEditBefore.png" alt="Clients before editing">
+    <figcaption align="center">
+        <em>Initial state of 4 contacts.</em>
+    </figcaption>
+</figure>
 
-![Clients after editing](images/ExampleEditAfter.png)
-*Result of running commands (1) to (3).*
+<figure>
+    <img src="images/ExampleEditAfter.png" alt="Clients after editing">
+    <figcaption align="center">
+        <em>Result of running commands (1) to (3).</em>
+    </figcaption>
+</figure>
 
 [↑ Back to Table of Contents](#table-of-contents)
 
@@ -315,32 +300,19 @@ delete 1
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Command summary
-### Add
-* Add a client profile: ***create***
-* Add a client interaction: ***interaction***
-
-### View
-* View the dashboard: ***dashboard***
-* View the list of clients: ***list***
-* Find a client by name: ***find***
-* View the full details of a client: ***view***
-
-### Edit
-* Edit a client profile: ***edit***
-
-### Delete
-* Delete a client profile: ***delete***
-
-### Exit
-* Exit the application: ***exit***
-
 # Command summary
 
-| Action     | Format                                                                                                            | Example                                                                                                                                                              |
-|------------|-------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Help       | `help`                                                                                                            | `help`                                                                                                                                                               |
-| Add Client | `create n/NAME p/PHONE e/EMAIL a/ADDRESS [t/TAG] [tg/TELEGRAM] [pf/PROFESSION] [i/INCOME] [d/DETAILS]`            | `create n/Bernice Yu p/99272758 e/berniceyu@example.com a/Blk 30 Lorong 3 Serangoon Gardens, #07-18 t/colleagues t/friends tg/@yuyubern pf/Graphic Designer i/60000` |
-| Edit Client| `edit INDEX [n/NAME] [e/EMAIL] [a/ADDRESS] [t/TAG] [l/LEAD] [tg/TELEGRAM] [pf/PROFESSION] [i/INCOME] [d/DETAILS]` |                                                                                                                                                                      |
+| Action              | Format                                                                                                            | Example                                                                                                                                                              |
+|---------------------|-------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Help                | `help`                                                                                                            | `help`                                                                                                                                                               |
+| Add Client          | `create n/NAME p/PHONE e/EMAIL a/ADDRESS [t/TAG] [tg/TELEGRAM] [pf/PROFESSION] [i/INCOME] [d/DETAILS]`            | `create n/Bernice Yu p/99272758 e/berniceyu@example.com a/Blk 30 Lorong 3 Serangoon Gardens, #07-18 t/colleagues t/friends tg/@yuyubern pf/Graphic Designer i/60000` |
+| Add Interaction     | `interaction INDEX o/OUTCOME [DETAILS]`                                                                           | `interaction 1 o/INTERESTED d/Client is interested in our products`                                                                                                  |
+| View Dashboard      | `dashboard`                                                                                                       | `dashboard`                                                                                                                                                          |                                                                                                                                                        |
+| View Client List    | `list`                                                                                                            | `list`                                                                                                                                                               |
+| Find Client         | `find NAME`                                                                                                       | `find Chemmy`                                                                                                                                                        |
+| View Client Details | `view INDEX`                                                                                                      | `view 1`                                                                                                                                                             |
+| Edit Client         | `edit INDEX [n/NAME] [e/EMAIL] [a/ADDRESS] [t/TAG] [l/LEAD] [tg/TELEGRAM] [pf/PROFESSION] [i/INCOME] [d/DETAILS]` | `edit 2 e/berniceyu@gmail.com p/123456789`                                                                                                                           |
+| Delete Client       | `delete INDEX`                                                                                                    | `delete 1`                                                                                                                                                           |
+| Exit                | `exit`                                                                                                            | `exit`                                                                                                                                                               |
 
 [↑ Back to Table of Contents](#table-of-contents)

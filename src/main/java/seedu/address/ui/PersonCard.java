@@ -56,7 +56,15 @@ public class PersonCard extends UiPart<Region> {
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
         if (person.getLead() != null) {
             Label leadLabel = new Label(person.getLead().toString());
-            leadLabel.setId(person.getLead().toString().toLowerCase() + "-lead");
+
+            if (person.isHotLead()) {
+                leadLabel.getStyleClass().add("hot-lead");
+            } else if (person.isWarmLead()) {
+                leadLabel.getStyleClass().add("warm-lead");
+            } else if (person.isColdLead()) {
+                leadLabel.getStyleClass().add("cold-lead");
+            }
+
             lead.getChildren().add(leadLabel);
         }
     }
