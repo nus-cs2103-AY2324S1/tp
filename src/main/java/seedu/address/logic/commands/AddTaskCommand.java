@@ -57,7 +57,8 @@ public class AddTaskCommand extends Command {
         try {
             if (model.hasTaskClashWith(task, lessonIndex)) {
                 String taskIndex = model.getTaskClashWith(task, lessonIndex).toString();
-                throw new CommandException("Existing task with same task description with index " + taskIndex + "!" + getUsageInfo());
+                throw new CommandException("Existing task with same task description with index "
+                        + taskIndex + "!" + getUsageInfo());
             }
         } catch (IndexOutOfBoundsException e) {
             throw new CommandException("No lesson with index " + this.index.getOneBased() + "!!" + getUsageInfo());
