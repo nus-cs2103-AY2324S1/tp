@@ -42,7 +42,11 @@ public class ClientProfilePanel extends UiPart<Region> {
     @FXML
     private FlowPane tags;
     @FXML
+    private Label lead;
+    @FXML
     private ListView<Interaction> interactionsList;
+    @FXML
+    private Label interactionsCount;
 
     /**
      * Creates a {@code ClientProfilePanel} with the given {@code Person}.
@@ -57,6 +61,15 @@ public class ClientProfilePanel extends UiPart<Region> {
         client.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+
+        lead.setText(client.getLead().toString());
+        if (client.isHotLead()) {
+            lead.getStyleClass().add("hot-lead");
+        } else if (client.isWarmLead()) {
+            lead.getStyleClass().add("warm-lead");
+        } else if (client.isColdLead()) {
+            lead.getStyleClass().add("cold-lead");
+        }
 
         // optional fields
         TelegramHandle t = client.getTelegram();
@@ -78,6 +91,7 @@ public class ClientProfilePanel extends UiPart<Region> {
         ObservableList<Interaction> interactions = FXCollections.observableArrayList(client.getInteractions());
         interactionsList.setItems(interactions);
         interactionsList.setCellFactory(listView -> new InteractionListViewCell());
+        interactionsCount.setText(String.format(" (%d)", interactions.size()));
     }
 
     static class InteractionListViewCell extends ListCell<Interaction> {

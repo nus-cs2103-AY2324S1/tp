@@ -18,6 +18,8 @@ public class InteractionEntry extends UiPart<Region> {
     private Label note;
     @FXML
     private Label outcome;
+    @FXML
+    private Label date;
 
     /**
      * Creates a {@code InteractionEntry} with the given {@code Interaction}.
@@ -27,5 +29,6 @@ public class InteractionEntry extends UiPart<Region> {
         this.interaction = interaction;
         note.setText(interaction.getInteractionNote());
         outcome.setText(interaction.getOutcome().toString());
+        date.setText(interaction.getDate().toString());
     }
 }
