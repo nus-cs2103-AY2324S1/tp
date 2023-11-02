@@ -11,7 +11,6 @@ import static seedu.ccacommander.logic.commands.CommandTestUtil.VALID_TAG_AURORA
 import static seedu.ccacommander.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.ccacommander.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.ccacommander.logic.commands.CommandTestUtil.showEventAtIndex;
-import static seedu.ccacommander.model.ModelManager.editEnrolmentsWithEventName;
 import static seedu.ccacommander.testutil.TypicalCcaCommander.getTypicalCcaCommander;
 import static seedu.ccacommander.testutil.TypicalIndexes.INDEX_FIRST_EVENT;
 import static seedu.ccacommander.testutil.TypicalIndexes.INDEX_SECOND_EVENT;
@@ -56,7 +55,7 @@ public class EditEventCommandTest {
 
         // If event's name is edited, the corresponding enrolment objects are edited also
         if (!prevName.equals(newName)) {
-            editEnrolmentsWithEventName(prevName, newName, expectedModel);
+            expectedModel.editEnrolmentsWithEventName(prevName, newName);
         }
 
         assertCommandSuccess(editEventCommand, model, expectedMessage, expectedModel);
@@ -86,7 +85,7 @@ public class EditEventCommandTest {
         Name newName = editedEvent.getName();
 
         if (!prevName.equals(newName)) {
-            editEnrolmentsWithEventName(prevName, newName, expectedModel);
+            expectedModel.editEnrolmentsWithEventName(prevName, newName);
         }
         expectedModel.commit(commitMessage);
 
@@ -130,7 +129,7 @@ public class EditEventCommandTest {
         Name newName = editedEvent.getName();
 
         if (!prevName.equals(newName)) {
-            editEnrolmentsWithEventName(prevName, newName, expectedModel);
+            expectedModel.editEnrolmentsWithEventName(prevName, newName);
         }
         assertCommandSuccess(editEventCommand, model, expectedMessage, expectedModel);
     }

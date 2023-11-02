@@ -8,7 +8,6 @@ import static seedu.ccacommander.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.ccacommander.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.ccacommander.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.ccacommander.model.Model.PREDICATE_SHOW_ALL_MEMBERS;
-import static seedu.ccacommander.model.ModelManager.editEnrolmentsWithMemberName;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -92,7 +91,7 @@ public class EditMemberCommand extends Command {
         Name newName = editedMember.getName();
         // If member's name is edited, the corresponding enrolment objects are edited also
         if (!prevName.equals(newName)) {
-            editEnrolmentsWithMemberName(prevName, newName, model);
+            model.editEnrolmentsWithMemberName(prevName, newName);
         }
 
         model.setMember(memberToEdit, editedMember);

@@ -196,17 +196,17 @@ public class ModelManager implements Model {
      *  to match the {@param newName} of the event
      * @param prevName
      * @param newName
-     * @param model
      */
-    public static void editEnrolmentsWithEventName(Name prevName, Name newName, Model model) {
-        model.updateFilteredEnrolmentList(PREDICATE_SHOW_ALL_ENROLMENTS);
+    @Override
+    public void editEnrolmentsWithEventName(Name prevName, Name newName) {
+        updateFilteredEnrolmentList(PREDICATE_SHOW_ALL_ENROLMENTS);
         // get the enrolments list then loop through to edit matching enrolments
-        List<Enrolment> enrolmentList = model.getFilteredEnrolmentList();
+        List<Enrolment> enrolmentList = getFilteredEnrolmentList();
         for (Enrolment enrolment: enrolmentList) {
             if (enrolment.getEventName().equals(prevName)) {
                 Enrolment editedEnrolment = new Enrolment(enrolment.getMemberName(), newName,
                         enrolment.getHours(), enrolment.getRemark());
-                model.setEnrolment(enrolment, editedEnrolment);
+                setEnrolment(enrolment, editedEnrolment);
             }
         }
     }
@@ -217,17 +217,17 @@ public class ModelManager implements Model {
      *  to match the {@param newName} of the member
      * @param prevName
      * @param newName
-     * @param model
      */
-    public static void editEnrolmentsWithMemberName(Name prevName, Name newName, Model model) {
-        model.updateFilteredEnrolmentList(PREDICATE_SHOW_ALL_ENROLMENTS);
+    @Override
+    public void editEnrolmentsWithMemberName(Name prevName, Name newName) {
+        updateFilteredEnrolmentList(PREDICATE_SHOW_ALL_ENROLMENTS);
         // get the enrolments list then loop through to edit matching enrolments
-        List<Enrolment> enrolmentList = model.getFilteredEnrolmentList();
+        List<Enrolment> enrolmentList = getFilteredEnrolmentList();
         for (Enrolment enrolment: enrolmentList) {
             if (enrolment.getMemberName().equals(prevName)) {
                 Enrolment editedEnrolment = new Enrolment(newName, enrolment.getEventName(),
                         enrolment.getHours(), enrolment.getRemark());
-                model.setEnrolment(enrolment, editedEnrolment);
+                setEnrolment(enrolment, editedEnrolment);
             }
         }
     }

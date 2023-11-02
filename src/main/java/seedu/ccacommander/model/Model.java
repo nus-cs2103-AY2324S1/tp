@@ -8,6 +8,7 @@ import seedu.ccacommander.commons.core.GuiSettings;
 import seedu.ccacommander.model.enrolment.Enrolment;
 import seedu.ccacommander.model.event.Event;
 import seedu.ccacommander.model.member.Member;
+import seedu.ccacommander.model.shared.Name;
 
 /**
  * The API of the Model component.
@@ -120,6 +121,25 @@ public interface Model {
      * {@code enrolment} must not already exist in CcaCommander.
      */
     void createEnrolment(Enrolment enrolment);
+
+    /**
+     *  Edit the Enrolments from the enrolment list which
+     *  contain an event that have the same name as {@param prevName}
+     *  to match the {@param newName} of the event
+     * @param prevName
+     * @param newName
+     */
+    void editEnrolmentsWithEventName(Name prevName, Name newName);
+
+    /**
+     *  Edit the Enrolments from the enrolment list which
+     *  contain a Member that have the same name as {@param prevName}
+     *  to match the {@param newName} of the member
+     * @param prevName
+     * @param newName
+     */
+    void editEnrolmentsWithMemberName(Name prevName, Name newName);
+
 
     /**
      * Replaces the given member {@code target} with {@code editedEnrolment}.

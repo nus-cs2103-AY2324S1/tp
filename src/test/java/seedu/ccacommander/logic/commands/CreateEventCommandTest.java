@@ -26,6 +26,7 @@ import seedu.ccacommander.model.VersionCaptures;
 import seedu.ccacommander.model.enrolment.Enrolment;
 import seedu.ccacommander.model.event.Event;
 import seedu.ccacommander.model.member.Member;
+import seedu.ccacommander.model.shared.Name;
 import seedu.ccacommander.testutil.EventBuilder;
 
 public class CreateEventCommandTest {
@@ -156,6 +157,7 @@ public class CreateEventCommandTest {
         public void createEvent(Event event) {
             throw new AssertionError("This method should not be called.");
         }
+
         @Override
         public boolean hasEvent(Event event) {
             throw new AssertionError("This method should not be called.");
@@ -175,6 +177,17 @@ public class CreateEventCommandTest {
         public void createEnrolment(Enrolment enrolment) {
             throw new AssertionError("This method should not be called.");
         }
+
+
+        @Override
+        public void editEnrolmentsWithEventName(Name prevName, Name newName) {
+            throw new AssertionError("This method should not be called.");
+        }
+        @Override
+        public void editEnrolmentsWithMemberName(Name prevName, Name newName) {
+            throw new AssertionError("This method should not be called.");
+        }
+
         @Override
         public boolean hasEnrolment(Enrolment enrolment) {
             throw new AssertionError("This method should not be called.");

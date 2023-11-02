@@ -6,7 +6,6 @@ import static seedu.ccacommander.logic.parser.CliSyntax.PREFIX_LOCATION;
 import static seedu.ccacommander.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.ccacommander.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.ccacommander.model.Model.PREDICATE_SHOW_ALL_EVENTS;
-import static seedu.ccacommander.model.ModelManager.editEnrolmentsWithEventName;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -87,7 +86,7 @@ public class EditEventCommand extends Command {
         Name newName = editedEvent.getName();
 
         if (!prevName.equals(newName)) {
-            editEnrolmentsWithEventName(prevName, newName, model);
+            model.editEnrolmentsWithEventName(prevName, newName);
         }
 
         model.setEvent(eventToEdit, editedEvent);

@@ -12,7 +12,6 @@ import static seedu.ccacommander.logic.commands.CommandTestUtil.VALID_TAG_HUSBAN
 import static seedu.ccacommander.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.ccacommander.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.ccacommander.logic.commands.CommandTestUtil.showMemberAtIndex;
-import static seedu.ccacommander.model.ModelManager.editEnrolmentsWithMemberName;
 import static seedu.ccacommander.testutil.TypicalCcaCommander.getTypicalCcaCommander;
 import static seedu.ccacommander.testutil.TypicalIndexes.INDEX_FIRST_MEMBER;
 import static seedu.ccacommander.testutil.TypicalIndexes.INDEX_SECOND_MEMBER;
@@ -56,7 +55,7 @@ public class EditMemberCommandTest {
         Name newName = editedMember.getName();
 
         if (!prevName.equals(newName)) {
-            editEnrolmentsWithMemberName(prevName, newName, expectedModel);
+            expectedModel.editEnrolmentsWithMemberName(prevName, newName);
         }
 
         expectedModel.commit(commitMessage);
@@ -87,7 +86,7 @@ public class EditMemberCommandTest {
         Name newName = editedMember.getName();
 
         if (!prevName.equals(newName)) {
-            editEnrolmentsWithMemberName(prevName, newName, expectedModel);
+            expectedModel.editEnrolmentsWithMemberName(prevName, newName);
         }
 
         expectedModel.commit(commitMessage);
@@ -131,7 +130,7 @@ public class EditMemberCommandTest {
         Name newName = editedMember.getName();
 
         if (!prevName.equals(newName)) {
-            editEnrolmentsWithMemberName(prevName, newName, expectedModel);
+            expectedModel.editEnrolmentsWithMemberName(prevName, newName);
         }
 
         assertCommandSuccess(editMemberCommand, model, expectedMessage, expectedModel);
