@@ -612,5 +612,7 @@ If your changes to the data file makes its format invalid, Managease will discar
 | **[View Next Month](#view-the-calendar-of-upcoming-month-nm)**         | `nm`                                                                                                                                                                                                                           |
 | **[Help](#viewing-help-help)**                                         | `help`                                                                                                                                                                                                                         |
 | **[Exit](#exiting-the-program-exit)**                                  | `exit`                                                                                                                                                                                                                         |
+
+
 * Go back to [Features](#features)
   
