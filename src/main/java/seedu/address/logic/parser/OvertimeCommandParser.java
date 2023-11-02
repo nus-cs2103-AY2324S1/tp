@@ -43,11 +43,11 @@ public class OvertimeCommandParser implements Parser<OvertimeCommand> {
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_ID, PREFIX_OPERATION, PREFIX_AMOUNT);
 
         String operation = argMultimap.getValue(PREFIX_OPERATION).get();
-        boolean increment = parseOperation(operation);
+        boolean isIncrement = parseOperation(operation);
 
-        OvertimeHours overtimeHoursToChange = ParserUtil.parseOvertimeHours(argMultimap.getValue(PREFIX_AMOUNT).get());
+        OvertimeHours changeInOvertimeHours = ParserUtil.parseOvertimeHours(argMultimap.getValue(PREFIX_AMOUNT).get());
 
-        return new OvertimeCommand(id, overtimeHoursToChange, increment);
+        return new OvertimeCommand(id, changeInOvertimeHours, isIncrement);
     }
 
     /**

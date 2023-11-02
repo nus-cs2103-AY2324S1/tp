@@ -36,16 +36,16 @@ public class OvertimeCommand extends Command {
     public static final String MESSAGE_OPERATION_USAGE = "Operation must be either inc or dec";
     public static final String MESSAGE_INVALID_AMOUNT = "Amount must be a positive integer";
     private final Id targetId;
-    private final OvertimeHours overtimeHoursToChange;
-    private final boolean increment;
+    private final OvertimeHours changeInOvertimeHours;
+    private final boolean isIncrement;
 
     /**
      * Creates an OvertimeCommand to update the overtime hours of the specified {@code Employee}
      */
-    public OvertimeCommand(Id targetId, OvertimeHours overtimeHoursToChange, boolean increment) {
+    public OvertimeCommand(Id targetId, OvertimeHours changeInOvertimeHours, boolean isIncrement) {
         this.targetId = targetId;
-        this.overtimeHoursToChange = overtimeHoursToChange;
-        this.increment = increment;
+        this.changeInOvertimeHours = changeInOvertimeHours;
+        this.isIncrement = isIncrement;
     }
 
     @Override
@@ -59,12 +59,12 @@ public class OvertimeCommand extends Command {
         if (employeeToUpdate != null) {
             Employee updatedEmployee = updateEmployeeOvertime(employeeToUpdate);
             model.setEmployee(employeeToUpdate, updatedEmployee);
-            if (increment) {
+            if (isIncrement) {
                 return new CommandResult(String.format(MESSAGE_OVERTIME_INCREASE_SUCCESS,
-                        Messages.formatOvertimeHours(updatedEmployee), overtimeHoursToChange));
+                        Messages.formatOvertimeHours(updatedEmployee), changeInOvertimeHours));
             } else {
                 return new CommandResult(String.format(MESSAGE_OVERTIME_DECREASE_SUCCESS,
-                        Messages.formatOvertimeHours(updatedEmployee), overtimeHoursToChange));
+                        Messages.formatOvertimeHours(updatedEmployee), changeInOvertimeHours));
             }
         }
         throw new CommandException(Messages.MESSAGE_INVALID_COMMAND_FORMAT);
@@ -80,10 +80,10 @@ public class OvertimeCommand extends Command {
 
     private OvertimeHours updateOvertimeHours(OvertimeHours overtimeHours) throws CommandException {
         int updatedHours;
-        if (increment) {
-            updatedHours = overtimeHours.value + overtimeHoursToChange.value;
+        if (isIncrement) {
+            updatedHours = overtimeHours.value + changeInOvertimeHours.value;
         } else {
-            updatedHours = overtimeHours.value - overtimeHoursToChange.value;
+            updatedHours = overtimeHours.value - changeInOvertimeHours.value;
         }
         if (!OvertimeHours.isValidOvertimeHours(updatedHours)) {
             throw new CommandException(OvertimeHours.MESSAGE_CONSTRAINTS);
@@ -104,16 +104,16 @@ public class OvertimeCommand extends Command {
 
         OvertimeCommand otherOvertimeCommand = (OvertimeCommand) other;
         return targetId.equals(otherOvertimeCommand.targetId)
-                && overtimeHoursToChange.equals(otherOvertimeCommand.overtimeHoursToChange)
-                && increment == otherOvertimeCommand.increment;
+                && changeInOvertimeHours.equals(otherOvertimeCommand.changeInOvertimeHours)
+                && isIncrement == otherOvertimeCommand.isIncrement;
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
                 .add("targetId", targetId)
-                .add("overtimeHoursToChange", overtimeHoursToChange)
-                .add("increment", increment)
+                .add("changeInOvertimeHours", changeInOvertimeHours)
+                .add("increment", isIncrement)
                 .toString();
     }
 }
