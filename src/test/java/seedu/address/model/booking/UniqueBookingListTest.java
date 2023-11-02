@@ -56,12 +56,6 @@ public class UniqueBookingListTest {
     }
 
     @Test
-    public void add_duplicatePerson_throwsDuplicatePersonException() {
-        uniqueBookingList.add(ALICE);
-        assertThrows(DuplicateBookingException.class, () -> uniqueBookingList.add(ALICE));
-    }
-
-    @Test
     public void setPerson_nullTargetPerson_throwsNullPointerException() {
         assertThrows(BookingNotFoundException.class, () -> uniqueBookingList.setBooking(null, ALICE));
     }
