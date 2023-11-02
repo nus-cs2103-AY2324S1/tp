@@ -254,7 +254,7 @@ public class ModelManager implements Model {
         personToLessonMap.updateReverse(target, editedLesson);
     }
 
-    //=========== Filtered Lesson List Accessors =============================================================
+    //=========== Filtered schedule list Accessors =============================================================
 
     /**
      * Returns an unmodifiable view of the list of {@code Lesson} backed by the internal list of

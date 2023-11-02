@@ -150,7 +150,7 @@ public interface Model {
     void showLesson(Lesson lessonToShow);
     ObservableList<Lesson> getFilteredScheduleList();
     /**
-     * Updates the filter of the filtered lesson list to filter by the given {@code predicate}.
+     * Updates the filter of the filtered schedule list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredScheduleList(Predicate<Lesson> predicate);

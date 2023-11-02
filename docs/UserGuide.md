@@ -204,12 +204,12 @@ The show command has different behaviours depending on the current list:
 1. In `STUDENTS` list:
    - Shows the details of the specified student from the contact list in the application.
 2. In `SCHEDULE` list:
-   - Shows the details of the specified lesson from the lesson list in the application
+   - Shows the details of the specified lesson from the schedule list in the application
 
 Format: `show INDEX`
 
 * Shows the details of the student/lesson at the specified `INDEX`.
-* The index refers to the index number shown in the displayed student/lesson list.
+* The index refers to the index number shown in the displayed student/schedule list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
@@ -260,7 +260,7 @@ Adds a task to the specified lesson.
 Format: `addTask INDEX [-description TASKDESCRIPTION]`
 
 * Adds the task to the lesson at specified `INDEX`.
-* The index refers to the index number shown in the displayed lesson list.
+* The index refers to the index number shown in the displayed schedule list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
