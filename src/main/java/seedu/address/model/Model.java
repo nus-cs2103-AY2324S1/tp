@@ -5,6 +5,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.employee.Employee;
 
 /**
@@ -74,7 +75,7 @@ public interface Model {
      * {@code target} must exist in ManageHR.
      * The employee identity of {@code editedEmployee} must not be the same as another existing employee in ManageHR.
      */
-    void setEmployee(Employee target, Employee editedEmployee);
+    void setEmployee(Employee target, Employee editedEmployee) throws CommandException;
 
     /** Returns an unmodifiable view of the filtered employee list */
     ObservableList<Employee> getFilteredEmployeeList();

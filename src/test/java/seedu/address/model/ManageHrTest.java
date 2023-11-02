@@ -5,8 +5,11 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DEPARTMENT_LOGISTIC;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ROLE_BOB;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalEmployees.ALICE;
+import static seedu.address.testutil.TypicalEmployees.BENSON;
 import static seedu.address.testutil.TypicalEmployees.getTypicalManageHr;
 
 import java.util.Arrays;
@@ -18,8 +21,10 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.employee.Employee;
 import seedu.address.model.employee.exceptions.DuplicateEmployeeException;
+import seedu.address.model.employee.exceptions.SubordinatePresentException;
 import seedu.address.testutil.EmployeeBuilder;
 
 public class ManageHrTest {
@@ -53,6 +58,20 @@ public class ManageHrTest {
         ManageHrStub newData = new ManageHrStub(newPeople);
 
         assertThrows(DuplicateEmployeeException.class, () -> manageHr.resetData(newData));
+    }
+
+    @Test
+    public void setEmployee_employeeWithSubordinatesChangesName_throwsSubordinatePresentException() {
+        ManageHr typicalManageHr = getTypicalManageHr();
+        Employee editedBenson = new EmployeeBuilder(BENSON).withName(VALID_NAME_BOB).build();
+        assertThrows(SubordinatePresentException.class, () -> typicalManageHr.setEmployee(BENSON, editedBenson));
+    }
+
+    @Test
+    public void setEmployee_employeeWithSubordinatesChangesRole_throwsCommandException() {
+        ManageHr typicalManageHr = getTypicalManageHr();
+        Employee editedBenson = new EmployeeBuilder(BENSON).withRole(VALID_ROLE_BOB).build();
+        assertThrows(CommandException.class, () -> typicalManageHr.setEmployee(BENSON, editedBenson));
     }
 
     @Test
