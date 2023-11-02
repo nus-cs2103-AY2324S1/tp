@@ -24,7 +24,10 @@
             </HBox>
             <Label fx:id="date" styleClass="cell_small_label" text="\$date" />
             <Label fx:id="timeDuration" styleClass="cell_small_label" text="\$timeDuration" />
-            <FlowPane fx:id="names" />
+            <FlowPane fx:id="names">
+            <VBox.margin>
+               <Insets bottom="3.0" top="3.0" />
+            </VBox.margin></FlowPane>
             <FlowPane fx:id="groups" />
         </VBox>
       <rowConstraints>

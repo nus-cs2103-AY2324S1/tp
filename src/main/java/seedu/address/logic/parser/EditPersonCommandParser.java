@@ -8,9 +8,9 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUP;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_UNASSIGN_GROUPS;
 
 import java.util.Collection;
-import java.util.Collections;
 import java.util.Optional;
 import java.util.Set;
 
@@ -34,7 +34,7 @@ public class EditPersonCommandParser implements Parser<EditPersonCommand> {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
-                        PREFIX_ADDRESS, PREFIX_BIRTHDAY, PREFIX_GROUP);
+                        PREFIX_ADDRESS, PREFIX_BIRTHDAY, PREFIX_GROUP, PREFIX_UNASSIGN_GROUPS);
 
         Index index;
 
@@ -65,7 +65,11 @@ public class EditPersonCommandParser implements Parser<EditPersonCommand> {
         if (argMultimap.getValue(PREFIX_BIRTHDAY).isPresent()) {
             editPersonDescriptor.setBirthday(ParserUtil.parseBirthday(argMultimap.getValue(PREFIX_BIRTHDAY).get()));
         }
+
         parseGroupsForEdit(argMultimap.getAllValues(PREFIX_GROUP)).ifPresent(editPersonDescriptor::setGroups);
+
+        parseGroupsForEdit(argMultimap.getAllValues(PREFIX_UNASSIGN_GROUPS))
+                .ifPresent(editPersonDescriptor::setUnassignGroups);
 
         if (!editPersonDescriptor.isAnyFieldEdited()) {
             throw new ParseException(EditPersonCommand.MESSAGE_NOT_EDITED);
@@ -85,8 +89,8 @@ public class EditPersonCommandParser implements Parser<EditPersonCommand> {
         if (groups.isEmpty()) {
             return Optional.empty();
         }
-        Collection<String> groupSet = groups.size() == 1 && groups.contains("") ? Collections.emptySet() : groups;
-        return Optional.of(ParserUtil.parseGroups(groupSet));
+
+        return Optional.of(ParserUtil.parseGroups(groups));
     }
 
 }
