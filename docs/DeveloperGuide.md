@@ -392,6 +392,79 @@ Sequence Diagram for FindExpressionParser showing how a sample input is parsed u
   * **Pros**: Smoother user experience.
   * **Cons**: User might not realize they made a mistake.
 
+### Update photo feature
+#### Implementation
+##### Commmand logic
+The `UpdatePhotoCommand` feature allows users to update photo of a specific contact. This functionality is essential for forgetful users who want to store photos of contacts to remember them easier.
+
+Two key classes are involved in this implementation:
+- `UpdatePhotoCommand`: Handles the logic for updating photo.
+- `Avatar`: Represents the photo of a contact.
+
+Photos are stored as an `Avatar` within the Person model.
+
+The `Avatar` class contains a `String` representing the path to the chosen photo.
+
+When a user inputs a command to update photo of a contact, the `UpdatePhotoCommandParser` parses the user input and creates a new `UpdatePhotoCommand` object. This object is then executed, which results in the update of the contact's photo.
+
+
+The process can be summarized in the following logic flow:
+<puml src="diagrams\updatephoto-command/UpdatePhotoCommandSequenceDiagram.puml" />
+
+1. Parse user input to create a `UpdatePhotoCommand` object.
+2. Execute the `UpdatePhotoCommand`, which involves:
+    - Retrieving the list of all persons.
+    - Validating the provided index.
+    - Creating an exact copy of the person at the provided index, except for the `Avatar`.
+    - Replacing the specified person with their copy.
+3. Return a `CommandResult` indicating the outcome.
+
+Key methods in this implementation include:
+- `UpdatePhotoCommand(int index, String path)`: Constructor to initialize the command.
+- `execute(Model model)`: Updates the photo as well as the model.
+
+### \[Proposed\] Undo/redo feature
+
+#### Proposed Implementation
+
+The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
+
+* `VersionedAddressBook#commit()` — Saves the current address book state in its history.
+* `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
+* `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
+
+These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
+
+Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
+
+Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
+
+<puml src="diagrams/UndoRedoState0.puml" alt="UndoRedoState0" />
+
+Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
+
+<puml src="diagrams/UndoRedoState1.puml" alt="UndoRedoState1" />
+
+Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
+
+<puml src="diagrams/UndoRedoState2.puml" alt="UndoRedoState2" />
+
+<box type="info" seamless>
+
+**Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
+
+</box>
+
+Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
+
+<puml src="diagrams/UndoRedoState3.puml" alt="UndoRedoState3" />
+
+
+<box type="info" seamless>
+
+**Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
+than attempting to perform the undo.
+
 ### Payments feature
 
 #### Implementation
@@ -555,51 +628,36 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is `CampusConnect` and the **Actor** is a `NUS student who stays in campus`, unless specified otherwise)
 
-**Use case: UC1- Opt out notifications**
 
-**MSS**
-1. User requests to opt out from receiving notifications.
-2. System requests for confirmation.
-3. User confirms.
-4. System opts out the user from receiving notifications. <br>
-Use case ends.
-
-**Extensions**
-   * 1a. System detects an error in data entered.
-     * 1a1. System shows the correct format for request.
-     * 1a2. User enters a new opt out request. <br>
-     Steps 1a1-1a2 are repeated until the data entered are correct. <br>
-     Use case resumes from step 4. <br>
-
-**Use case: UC2 - Add new contact**
+**Use case: UC1 - Add new contact**
 
 **MSS**
 1. User enters information of the new contact to be added.
-2. System shows a list of all contacts. <br>
+2. System adds the new contact into its system. <br>
    Use case ends.
 
 **Extensions**
 * 1a. System detects an error in the entered data.
     * 1a1. System shows an error message.
     * 1a2. User enters a new add request. <br>
-      Steps 1a1- 1a2 are repeated until the data entered are correct.<br>
+      Steps 1a1- 1a2 are repeated until the data entered is correct.<br>
       Use case resumes from step 2. <br>
 
-**Use case: UC3 - List all contacts**
+**Use case: UC2 - List all contacts**
 
 **MSS**
 1. User requests list all contacts.
-2. System adds the new contact into its system. <br>
+2. System shows a list of all contacts. <br>
 Use case ends.
 
 **Extensions**
 * 1a. System shows an empty contact list. <br>
   Use case ends. <br>
 
-**Use case: UC4 - Add alternative information to existing contact**
+**Use case: UC3 - Add alternative information to existing contact**
 
 **MSS**
-1. User <ins>lists all contacts (UC3).</ins>
+1. User <ins>lists all contacts (UC2).</ins>
 2. User enters an index with alternative information to be added for an existing contact in the system.
 3. System adds the alternative information to the specified contact inside its system. <br>
    Use case ends.
@@ -610,16 +668,16 @@ Use case ends.
 * 2a. System detects an error in the entered data.
     * 2a1. System shows an error message.
     * 2a2. User enters a new addalt request. <br>
-      Steps 2a1- 2a2 are repeated until the data entered are correct.<br>
+      Steps 2a1- 2a2 are repeated until the data entered is correct.<br>
       Use case resumes from step 3.
 * 3a. System detects that the field of the specified contact is non-empty.
   * 3a1. System shows an error message and prompts users to use edit command. <br>
     Use case ends. <br>
 
-**Use case: UC5 - Edit information of existing contact**
+**Use case: UC4 - Edit information of existing contact**
 
 **MSS**
-1. User <ins>lists all contacts (UC3).</ins>
+1. User <ins>lists all contacts (UC2).</ins>
 2. User enters an index and information to be edited for an existing contact in the system.
 3. System edits the information of the specified contact inside its system. <br>
    Use case ends.
@@ -630,16 +688,16 @@ Use case ends.
 * 2a. System detects an error in the entered data.
     * 2a1. System shows an error message.
     * 2a2. User enters a new edit request. <br>
-      Steps 2a1- 2a2 are repeated until the data entered are correct.<br>
+      Steps 2a1- 2a2 are repeated until the data entered is correct.<br>
       Use case resumes from step 3.
 * 3a. System detects that the additional fields of the specified contact is empty.
     * 3a1. System shows an error message and prompts users to use addalt command. <br>
       Use case ends. <br>
 
-**Use case: UC6 - Delete contact**
+**Use case: UC5 - Delete contact**
 
 **MSS**
-1. User <ins>lists all contacts (UC3).</ins>
+1. User <ins>lists all contacts (UC2).</ins>
 2. User enters an index to delete a contact from the system.
 3. System deletes contact inside its system. <br>
 Use case ends.
@@ -650,30 +708,94 @@ Use case ends.
 * 2a. System detects an invalid index entered.
   * 2a1. System shows an error message.
   * 2a2. User enters a new delete request. <br>
-  Steps 2a1- 2a2 are repeated until the data entered are correct.<br>
+  Steps 2a1- 2a2 are repeated until the data entered is correct.<br>
   Use case resumes from step 3. <br>
 
-**Use Case UC7: Add emergency contact**
+
+**Use Case UC6 - Add note**
 
 **MSS**
-1. User <ins>lists all contacts (UC3).</ins>
-2. User adds a contact to the emergency contact list.
-3. System adds the contact into the emergency contact list. <br>
+1. User <ins>lists all contacts (UC2).</ins>
+2. User enters an index of the specified contact alongside the note to be added.
+3. System adds the note to the contact.<br>
 Use case ends.
 
 **Extensions**
-* 1a. System detects that the tag given to the contact is invalid.
-  * 1a1. System shows the valid tags for input.
-  * 1a2. User enters a new add emergency contact request. <br>
-  Steps 1a1- 1a2 are repeated until the data entered are correct. <br>
-  Use case resumes from step 3.
-* 1b. System detects an invalid index entered.
-  * 1b1. System shows an error message.
-  * 1b2. User enters a new delete request. <br>
-  Steps 1b1- 1b2 are repeated until the data entered are correct. <br>
+* 2a. System detects an invalid index entered.
+  * 2a1. System shows an error message.
+  * 2a2. User enters a new add note request.<br>
+  Steps 2a1- 2a2 are repeated until the data entered is correct. <br>
   Use case resumes from step 3.
 
+**Use Case UC7 - Remove note**
 
+**MSS**
+1. User <ins>lists all contacts (UC2).</ins>
+2. User enters an index of the specified contact alongside the index of the note to be removed.
+3. System removes the note from the contact.<br>
+Use case ends.
+
+**Extensions**
+* 2a. System detects an invalid contact or note index entered.
+  * 2a1. System shows an error message.
+  * 2a2. User enters a new remove note request.<br>
+  Steps 2a1- 2a2 are repeated until the data entered is correct. <br>
+  Use case resumes from step 3.
+
+**Use Case UC8 - Record payment**
+
+**MSS**
+1. User <ins>lists all contacts (UC2).</ins>
+2. User enters an index of the specified contact alongside the amount of money paid/owed to that contact.
+3. System records money paid/owed to the contact.
+4. System displays the contact with an indication of the money owed.<br>
+Use case ends.
+
+**Extensions**
+* 2a. System detects an invalid index entered.
+  * 2a1. System shows an error message.
+  * 2a2. User enters a new payment request.<br>
+  Steps 2a1- 2a2 are repeated until the data entered is correct. <br>
+  Use case resumes from step 3.
+* 2b. System detects an invalid payment amount entered.
+  * 2b1. System shows an error message.
+  * 2b2. User enters a new payment request.<br>
+  Steps 2b1- 2b2 are repeated until the data entered is correct. <br>
+  Use case resumes from step 3.
+
+**Use Case UC9 - Search for contact**
+
+**MSS**
+1. User enters a search criteria to find a contact.
+2. System displays all contacts that match the criteria.<br>
+Use case ends.
+
+**Extensions**
+* 1a. System detects an invalid search criteria.
+  * 1a1. System shows an error message.
+  * 1a2. User enters a new search request.<br>
+  Steps 1a1 - 1a2 are repeated until the data entered is correct.<br>
+  Use case resumes from step 2.
+
+**Use Case UC10 - Update contact photo**
+
+**MSS**
+1. User <ins>lists all contacts (UC2).</ins>
+2. User enters an index of the specified contact alongside the file path of the new contact photo.
+3. System updates the contact's photo to the specified image.<br>
+Use case ends.
+
+**Extensions**
+* 2a. System detects an invalid index entered.
+  * 2a1. System shows an error message.
+  * 2a2. User enters a new update photo request.<br>
+  Steps 2a1- 2a2 are repeated until the data entered is correct. <br>
+  Use case resumes from step 3.
+* 2b. System detects an invalid file path entered.
+  * 2b1. System shows an error message.
+  * 2b2. User enters a new update photo request.<br>
+  Steps 2b1- 2b2 are repeated until the data entered is correct. <br>
+  Use case resumes from step 3.
 
 ### Non-Functional Requirements
 
@@ -707,6 +829,7 @@ Use case ends.
 | tg/    | Telegram handle of contact     | `tg/@johndoe`                    |
 | e2/    | Secondary email of contact     | `e2/johndoe@hotmail.com`         |
 | b/     | Birthday of contact            | `b/23/10`                        |
+| path/  | Path to the photo of contact   | `path/D:/images/john-doe.png`    |
 
 --------------------------------------------------------------------------------------------------------------------
 
