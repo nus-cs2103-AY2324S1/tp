@@ -5,6 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.util.concurrent.atomic.AtomicBoolean;
+
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -16,15 +18,18 @@ import org.testfx.framework.junit5.ApplicationTest;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import networkbook.MainApp;
+import networkbook.logic.commands.CommandResult;
 import networkbook.logic.commands.CreateCommand;
 import networkbook.logic.commands.FindCommand;
 import networkbook.logic.commands.RedoCommand;
 import networkbook.logic.commands.UndoCommand;
 import networkbook.logic.commands.edit.EditCommand;
+import networkbook.ui.CommandBox.CommandExecutor;
 
 @ExtendWith(ApplicationExtension.class)
 public class CommandBoxTest {
     private static final String WHITESPACE = " ";
+    private static final CommandResult DUMMY_COMMAND_RESULT = new CommandResult("");
 
     @BeforeAll
     public static void setupForHeadlessTesting() {
@@ -115,5 +120,28 @@ public class CommandBoxTest {
         assertFalse(textField.getStyleClass().contains(CommandBox.ERROR_STYLE_CLASS));
         robot.write(UndoCommand.COMMAND_WORD).press(KeyCode.ENTER).release(KeyCode.ENTER);
         assertFalse(textField.getStyleClass().contains(CommandBox.ERROR_STYLE_CLASS));
+    }
+
+    @Test
+    public void submitCommand_onRun_changeText(FxRobot robot) {
+        String previousText = "help 1";
+        TextField textField = robot.lookup("#commandTextField").query();
+        assertNotNull(textField);
+        CommandExecutor commandExecutor = str -> DUMMY_COMMAND_RESULT;
+        CommandBox commandBox = new CommandBox(commandExecutor);
+        commandBox.submitCommand("open 1");
+        assertFalse(textField.getText().contains(previousText));
+    }
+
+    @Test
+    public void submitCommand_onRun_executeCommand() {
+        AtomicBoolean hasExecuted = new AtomicBoolean(false);
+        CommandExecutor commandExecutor = str -> {
+            hasExecuted.set(true);
+            return DUMMY_COMMAND_RESULT;
+        };
+        CommandBox commandBox = new CommandBox(commandExecutor);
+        commandBox.submitCommand("open 1");
+        assertTrue(hasExecuted.get());
     }
 }
