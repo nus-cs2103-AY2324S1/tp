@@ -36,8 +36,6 @@ public class DeleteMemberCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         List<Member> lastShownList = model.getFilteredMemberList();
-        List<Enrolment> enrolmentsList = model.getFilteredEnrolmentList();
-        List<Enrolment> enrolmentsToBeDeletedList = new ArrayList<>();
 
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_MEMBER_DISPLAYED_INDEX);
