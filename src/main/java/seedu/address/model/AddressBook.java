@@ -173,7 +173,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public Group getGroup(Group group) throws CommandException {
         // group list get that group object with same name
-        return groups.getGroup(group.getGroupName());
+        return groups.getGroup(group);
     }
 
     /**

@@ -6,98 +6,104 @@ import org.junit.jupiter.api.Test;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.ParserUtil;
-import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.*;
 import seedu.address.model.group.Group;
 import seedu.address.model.group.GroupRemark;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.GroupBuilder;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.function.Predicate;
 
 import static java.util.Objects.requireNonNull;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.logic.commands.CommandTestUtil.*;
 import static seedu.address.testutil.Assert.assertThrows;
 
-public class DeletePersonTimeCommandTest {
-
-    Person validPerson = new PersonBuilder().build();
+public class DeleteGroupTimeCommandTest {
+    Group validGroup = new GroupBuilder().withTimeIntervalList(VALID_TIME_MON, VALID_TIME_TUE).build();
 
     @Test
-    public void constructor_nullPerson_throwsNullPointerException() {
+    public void constructor_nullGroup_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new DeletePersonTimeCommand(null, null));
     }
 
     @Test
-    public void execute_personTimeIntervalDeletionSuccess() throws Exception {
-        ModelStubWithPerson modelStub = new ModelStubWithPerson(validPerson);
+    public void execute_groupTimeIntervalDeletionSuccess() throws Exception {
+        ModelStubWithGroup modelStub = new ModelStubWithGroup(validGroup);
 
-
-        // Person has time interval to be deleted
+        // Group has time interval to be deleted
         ArrayList<TimeInterval> validTimeInterval = new ArrayList<>();
         validTimeInterval.add(ParserUtil.parseEachInterval(VALID_TIME_MON));
-        CommandResult commandResult = new DeletePersonTimeCommand(validPerson.getName(), validTimeInterval).execute(modelStub);
 
-        assertEquals(String.format(DeleteTimeCommand.MESSAGE_DELETE_TIME_SUCCESS, validPerson.getName()),
+        // checks model has the time
+        assertEquals(true, modelStub.hasTime(ParserUtil.parseEachInterval(VALID_TIME_MON)));
+
+        CommandResult commandResult = new DeleteGroupTimeCommand(validGroup, validTimeInterval).execute(modelStub);
+
+        // Success message
+        assertEquals(String.format(DeleteTimeCommand.MESSAGE_DELETE_TIME_SUCCESS, validGroup.getGroupName()),
                 commandResult.getFeedbackToUser());
+
         // Time interval has been deleted
         assertEquals(false, modelStub.hasTime(ParserUtil.parseEachInterval(VALID_TIME_MON)));
     }
 
     @Test
-    public void execute_personSingleTimeIntervalDeletionFail() throws Exception {
-        ModelStubWithPerson modelStub = new ModelStubWithPerson(validPerson);
+    public void execute_groupSingleTimeIntervalDeletionFail() throws Exception {
+        ModelStubWithGroup modelStub = new ModelStubWithGroup(validGroup);
         // Person does not have the time interval
         ArrayList<TimeInterval> invalidTimeInterval = new ArrayList<>();
-        invalidTimeInterval.add(ParserUtil.parseEachInterval(VALID_TIME_TUE));
-        DeletePersonTimeCommand failedCommand = new DeletePersonTimeCommand(validPerson.getName(), invalidTimeInterval);
+        invalidTimeInterval.add(ParserUtil.parseEachInterval(VALID_TIME_WED));
+        DeleteGroupTimeCommand failedCommand = new DeleteGroupTimeCommand(validGroup, invalidTimeInterval);
 
-        assertThrows(CommandException.class, "These times are not in the list:\n" + "TUE 1300 - TUE 1400 \n",
+        assertThrows(CommandException.class, "These times are not in the list:\n" + "WED 1300 - WED 1400 \n",
                 () -> failedCommand.execute(modelStub));
 
-        // Time interval has not been deleted
+        // Time intervals has not been deleted
         assertEquals(true, modelStub.hasTime(ParserUtil.parseEachInterval(VALID_TIME_MON)));
+        assertEquals(true, modelStub.hasTime(ParserUtil.parseEachInterval(VALID_TIME_TUE)));
     }
 
     @Test
-    public void execute_personMultipleTimeIntervalDeletionFail() throws Exception {
-        ModelStubWithPerson modelStub = new ModelStubWithPerson(validPerson);
-        // Person does not have the time interval
+    public void execute_groupMultipleTimeIntervalDeletionFail() throws Exception {
+        ModelStubWithGroup modelStub = new ModelStubWithGroup(validGroup);
+        // Group does not have the time interval
         ArrayList<TimeInterval> invalidTimeInterval = new ArrayList<>();
         invalidTimeInterval.add(ParserUtil.parseEachInterval(VALID_TIME_MON));
-        invalidTimeInterval.add(ParserUtil.parseEachInterval(VALID_TIME_TUE));
-        DeletePersonTimeCommand failedCommand = new DeletePersonTimeCommand(validPerson.getName(), invalidTimeInterval);
+        invalidTimeInterval.add(ParserUtil.parseEachInterval(VALID_TIME_WED));
+        DeleteGroupTimeCommand failedCommand = new DeleteGroupTimeCommand(validGroup, invalidTimeInterval);
 
-        assertThrows(CommandException.class, "These times are not in the list:\n" + "TUE 1300 - TUE 1400 \n"
-                + "The other times have been deleted\n",
+        assertThrows(CommandException.class, "These times are not in the list:\n" + "WED 1300 - WED 1400 \n"
+                        + "The other times have been deleted\n",
                 () -> failedCommand.execute(modelStub));
 
         // Time interval has been deleted
         assertEquals(false, modelStub.hasTime(ParserUtil.parseEachInterval(VALID_TIME_MON)));
         // Time interval which was not there is stil not there
-        assertEquals(false, modelStub.hasTime(ParserUtil.parseEachInterval(VALID_TIME_TUE)));
+        assertEquals(false, modelStub.hasTime(ParserUtil.parseEachInterval(VALID_TIME_WED)));
     }
 
     @Test
-    public void execute_personMultipleTimeIntervalDeletionPass() throws Exception {
-        ModelStubPersonWithMultipleTimings modelStub = new ModelStubPersonWithMultipleTimings(validPerson);
+    public void execute_groupMultipleTimeIntervalDeletionPass() throws Exception {
+        ModelStubGroupWithMultipleTimings modelStub = new ModelStubGroupWithMultipleTimings(validGroup);
         // Person has all the time intervals
         ArrayList<TimeInterval> validTimeInterval = new ArrayList<>();
         validTimeInterval.add(ParserUtil.parseEachInterval(VALID_TIME_MON));
         validTimeInterval.add(ParserUtil.parseEachInterval(VALID_TIME_TUE));
-        DeletePersonTimeCommand failedCommand = new DeletePersonTimeCommand(validPerson.getName(), validTimeInterval);
+        DeleteGroupTimeCommand failedCommand = new DeleteGroupTimeCommand(validGroup, validTimeInterval);
 
-        assertEquals(String.format(DeleteTimeCommand.MESSAGE_DELETE_TIME_SUCCESS, validPerson.getName()),
+        assertEquals(String.format(DeleteTimeCommand.MESSAGE_DELETE_TIME_SUCCESS, validGroup.getGroupName()),
                 failedCommand.execute(modelStub).getFeedbackToUser());
 
         // Time interval has been deleted
         assertEquals(false, modelStub.hasTime(ParserUtil.parseEachInterval(VALID_TIME_MON)));
         // Time interval has been deleted
         assertEquals(false, modelStub.hasTime(ParserUtil.parseEachInterval(VALID_TIME_TUE)));
+        // Time interval has not been deleted
+        assertEquals(true, modelStub.hasTime(ParserUtil.parseEachInterval(VALID_TIME_WED)));
     }
 
     /**
@@ -253,32 +259,31 @@ public class DeletePersonTimeCommandTest {
     /**
      * A Model stub that contains a single person and a time interval.
      */
-    private class ModelStubWithPerson extends ModelStub {
-        private final Person person;
+    private class ModelStubWithGroup extends ModelStub {
+        private final Group group;
 
-        ModelStubWithPerson(Person person) throws ParseException {
-            requireNonNull(person);
-            this.person = person;
-            this.person.addFreeTime(ParserUtil.parseEachInterval(VALID_TIME_MON));
+        ModelStubWithGroup(Group group) throws Exception {
+            requireNonNull(group);
+            this.group = group;
         }
 
-        public boolean hasPerson(Name person) {
-            requireNonNull(person);
-            return this.person.getName().equals(person);
+        public boolean hasGroup(Group group) {
+            requireNonNull(group);
+            return this.group.equals(group);
         }
 
         public boolean hasTime(TimeInterval timeInterval) {
             requireNonNull(timeInterval);
-            return this.person.hasFreeTime(timeInterval);
+            return this.group.hasTime(timeInterval);
         }
 
         @Override
-        public void deleteTimeFromPerson(Name personName,
+        public void deleteTimeFromGroup(Group group,
                                          ArrayList<TimeInterval> toDeleteTime) throws CommandException {
-            requireNonNull(personName);
-            Person person = this.person;
+            requireNonNull(group);
+            Group groupInModel = this.group;
             try {
-                person.deleteFreeTime(toDeleteTime);
+                groupInModel.deleteTime(toDeleteTime);
             } catch (CommandException e) {
                 throw new CommandException(e.getMessage());
             }
@@ -288,37 +293,35 @@ public class DeletePersonTimeCommandTest {
     /**
      * A Model stub that always accept the person being added.
      */
-    private class ModelStubPersonWithMultipleTimings extends ModelStub {
-        private final Person person;
+    private class ModelStubGroupWithMultipleTimings extends ModelStub {
+        private final Group group;
 
-        ModelStubPersonWithMultipleTimings(Person person) throws ParseException {
-            requireNonNull(person);
-            this.person = person;
-            this.person.addFreeTime(ParserUtil.parseEachInterval(VALID_TIME_MON));
-            this.person.addFreeTime(ParserUtil.parseEachInterval(VALID_TIME_TUE));
+        ModelStubGroupWithMultipleTimings(Group group) throws Exception {
+            requireNonNull(group);
+            this.group = group;
+            this.group.addTime(ParserUtil.parseEachInterval(VALID_TIME_WED));
         }
 
-        public boolean hasPerson(Name person) {
-            requireNonNull(person);
-            return this.person.getName().equals(person);
+        public boolean hasGroup(Group group) {
+            requireNonNull(group);
+            return this.group.equals(group);
         }
 
         public boolean hasTime(TimeInterval timeInterval) {
             requireNonNull(timeInterval);
-            return this.person.hasFreeTime(timeInterval);
+            return this.group.hasTime(timeInterval);
         }
 
         @Override
-        public void deleteTimeFromPerson(Name personName,
-                                         ArrayList<TimeInterval> toDeleteTime) throws CommandException {
-            requireNonNull(personName);
-            Person person = this.person;
+        public void deleteTimeFromGroup(Group group,
+                                        ArrayList<TimeInterval> toDeleteTime) throws CommandException {
+            requireNonNull(group);
+            Group groupInModel = this.group;
             try {
-                person.deleteFreeTime(toDeleteTime);
+                groupInModel.deleteTime(toDeleteTime);
             } catch (CommandException e) {
                 throw new CommandException(e.getMessage());
             }
         }
     }
-
 }

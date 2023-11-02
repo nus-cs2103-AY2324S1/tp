@@ -54,7 +54,7 @@ public class Group {
     }
 
     /**
-     * Name field must be present and not null.
+     * Name field and listOfGroupMates must be present and not null.
      */
     public Group(String groupName, GroupRemark groupRemark, List<Person> listOfGroupMates) {
         requireNonNull(groupName);
@@ -64,12 +64,29 @@ public class Group {
         this.listOfGroupMates.addAll(listOfGroupMates);
     }
 
+    /**
+     * Name field, listOfGroupMates and timeIntervalList must be present and not null.
+     */
+    public Group(String groupName, GroupRemark groupRemark, List<Person> listOfGroupMates, TimeIntervalList timeIntervalList) {
+        requireNonNull(groupName);
+        requireNonNull(listOfGroupMates);
+        requireNonNull(timeIntervalList);
+        this.groupName = groupName;
+        this.groupRemark = groupRemark;
+        this.timeIntervalList.addAll(timeIntervalList);
+        this.listOfGroupMates.addAll(listOfGroupMates);
+    }
+
     public String getGroupName() {
         return groupName;
     }
 
     public ObservableList<Person> getGroupMates() {
         return listOfGroupMates;
+    }
+
+    public TimeIntervalList getTimeIntervalList() {
+        return timeIntervalList;
     }
     /**
      * Converts the internal list to streams.
@@ -211,8 +228,30 @@ public class Group {
         return freeTime;
     }
 
+    /**
+     * Adds a single time interval to the group
+     * @param toAddTime time interval to add
+     */
+    public void addTime(TimeInterval toAddTime) throws CommandException {
+        this.timeIntervalList.addTime(toAddTime);
+    }
+
+    /**
+     * Adds a list of free time to the group
+     * @param toAddTime List of time intervals to add
+     * @throws CommandException When there is a clash in timings within the list
+     */
     public void addTime(ArrayList<TimeInterval> toAddTime) throws CommandException {
         this.timeIntervalList.addTime(toAddTime);
+    }
+
+    /**
+     * Checks if the group has the time interval
+     * @param timeInterval time interval to check
+     * @return result of check
+     */
+    public boolean hasTime(TimeInterval timeInterval) {
+        return this.timeIntervalList.hasTime(timeInterval);
     }
 
     public TimeIntervalList getTime() {

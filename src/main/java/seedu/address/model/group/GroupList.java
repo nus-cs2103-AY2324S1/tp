@@ -103,6 +103,21 @@ public class GroupList implements Iterable<Group> {
     }
 
     /**
+     * Returns a group with the {@code groupName} from the GroupList.
+     * @param groupToGet Group to look for
+     * @return The group with the group name
+     * @throws CommandException If GroupList does not contain a group with the name
+     */
+    public Group getGroup(Group groupToGet) throws CommandException {
+        for (Group group : this.internalList) {
+            if (group.nameEquals(groupToGet.getGroupName())) {
+                return group;
+            }
+        }
+        throw new CommandException(Messages.MESSAGE_NO_GROUP_WITH_NAME_FOUND);
+    }
+
+    /**
      * Converts the internal list to streams.
      *
      * @return Internal list into streams.

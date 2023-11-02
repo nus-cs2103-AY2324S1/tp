@@ -51,6 +51,7 @@ public class CommandTestUtil {
 
     public static final String VALID_TIME_MON = "mon 1300 - mon 1400";
     public static final String VALID_TIME_TUE = "tue 1300 - tue 1400";
+    public static final String VALID_TIME_WED = "wed 1300 - wed 1400";
     public static final String VALID_TIME_MON_CAPS = "MON 1300 - mOn 1400";
     public static final String INVALID_TIME_MON = "mond 1300 - monday 1400";
     public static final String INVALID_TIME_MON_2 = "mon 11pm - mon 2500";

@@ -29,16 +29,16 @@ public class DeleteTimeCommandParser implements Parser<DeleteTimeCommand>{
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_GROUPTAG, PREFIX_FREETIME);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_FREETIME) || !argMultimap.getPreamble().isEmpty()) {
+        if (!arePrefixesPresent(argMultimap, PREFIX_FREETIME)|| !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteTimeCommand.MESSAGE_USAGE));
         }
+
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_GROUPTAG);
         ArrayList<TimeInterval> timeInterval = ParserUtil.parseInterval(argMultimap.getAllValues(PREFIX_FREETIME));
         if ((arePrefixesPresent(argMultimap, PREFIX_NAME) && arePrefixesPresent(argMultimap, PREFIX_GROUPTAG))) {
             throw new ParseException(String.format(DeleteCommand.MESSAGE_TWO_PARAMETERS, DeleteTimeCommand.MESSAGE_USAGE));
         }
         if (arePrefixesPresent(argMultimap, PREFIX_NAME)) {
-            System.out.println("gas");
             Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
             return new DeletePersonTimeCommand(name, timeInterval);
         }
