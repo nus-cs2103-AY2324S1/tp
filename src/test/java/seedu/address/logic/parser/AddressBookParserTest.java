@@ -7,12 +7,14 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FROM;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ON;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TO;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIds.ID_FIRST_EMPLOYEE;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_EMPLOYEE;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -89,29 +91,6 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommand_addLeave() throws Exception {
-        AddLeaveCommand command = (AddLeaveCommand) parser.parseCommand(
-                AddLeaveCommand.COMMAND_WORD + " " + PREFIX_ID + "EID1234-5678 "
-                        + PREFIX_FROM + "2023-10-30 " + PREFIX_TO + "2023-11-01");
-        assertEquals(
-                new AddLeaveCommand(new Id("EID1234-5678"),
-                        LocalDate.parse("2023-10-30", ISO_LOCAL_DATE),
-                        LocalDate.parse("2023-11-01", ISO_LOCAL_DATE)),
-                command
-        );
-    }
-
-    @Test
-    public void parseCommand_listLeave() throws Exception {
-        ListLeaveCommand command = (ListLeaveCommand) parser.parseCommand(
-                ListLeaveCommand.COMMAND_WORD + " on/ " + "2023-11-01");
-        assertEquals(
-                new ListLeaveCommand(LocalDate.parse("2023-11-01", ISO_LOCAL_DATE)),
-                command
-        );
-    }
-
-    @Test
     public void parseCommand_help() throws Exception {
         assertTrue(parser.parseCommand(HelpCommand.COMMAND_WORD) instanceof HelpCommand);
         assertTrue(parser.parseCommand(HelpCommand.COMMAND_WORD + " 3") instanceof HelpCommand);
@@ -133,8 +112,8 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_addLeave() throws Exception {
         AddLeaveCommand command = (AddLeaveCommand) parser.parseCommand(
-                AddLeaveCommand.COMMAND_WORD + " id/ " + "EID1234-5678"
-                + " from/ " + "2023-10-12" + " to/ " + "2023-10-15");
+                    AddLeaveCommand.COMMAND_WORD + " " + PREFIX_ID + "EID1234-5678 "
+                + PREFIX_FROM + "2023-10-12 " + PREFIX_TO + "2023-10-15");
         Id id = new Id("EID1234-5678");
         LocalDate startDate = LocalDate.parse("2023-10-12", DateTimeFormatter.ISO_LOCAL_DATE);
         LocalDate endDate = LocalDate.parse("2023-10-15", DateTimeFormatter.ISO_LOCAL_DATE);
@@ -144,12 +123,22 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_deleteLeave() throws Exception {
         DeleteLeaveCommand command = (DeleteLeaveCommand) parser.parseCommand(
-                DeleteLeaveCommand.COMMAND_WORD + " id/ " + "EID1234-5678"
-                        + " from/ " + "2023-10-12" + " to/ " + "2023-10-15");
+                DeleteLeaveCommand.COMMAND_WORD + " " + PREFIX_ID + "EID1234-5678 "
+                        + PREFIX_FROM + "2023-10-12 " + PREFIX_TO + "2023-10-15");
         Id id = new Id("EID1234-5678");
         LocalDate startDate = LocalDate.parse("2023-10-12", DateTimeFormatter.ISO_LOCAL_DATE);
         LocalDate endDate = LocalDate.parse("2023-10-15", DateTimeFormatter.ISO_LOCAL_DATE);
         assertEquals(new DeleteLeaveCommand(id, startDate, endDate), command);
+    }
+
+    @Test
+    public void parseCommand_listLeave() throws Exception {
+        ListLeaveCommand command = (ListLeaveCommand) parser.parseCommand(
+                ListLeaveCommand.COMMAND_WORD + " " + PREFIX_ON + "2023-11-01");
+        assertEquals(
+                new ListLeaveCommand(LocalDate.parse("2023-11-01", ISO_LOCAL_DATE)),
+                command
+        );
     }
 
     @Test
