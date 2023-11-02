@@ -103,6 +103,17 @@ public class ModelManager implements Model {
         userPrefs.setCalendarFilePath(calendarFilePath);
     }
 
+    @Override
+    public Path getTaskManagerFilePath() {
+        return userPrefs.getTaskManagerFilePath();
+    }
+
+    @Override
+    public void setTaskManagerFilePath(Path taskManagerFilePath) {
+        requireNonNull(taskManagerFilePath);
+        userPrefs.setTaskManagerFilePath(taskManagerFilePath);
+    }
+
 
     //=========== AddressBook ================================================================================
 

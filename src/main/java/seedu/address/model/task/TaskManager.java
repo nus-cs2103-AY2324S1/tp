@@ -60,6 +60,14 @@ public class TaskManager implements ReadOnlyTaskManager {
     }
 
     /**
+     * Returns true if a person with the same identity as {@code person} exists in the address book.
+     */
+    public boolean hasTask(Task task) {
+        requireNonNull(task);
+        return tasks.contains(task);
+    }
+
+    /**
      * Adds a task into the taskManager.
      */
     public void addTask(Task task) {
