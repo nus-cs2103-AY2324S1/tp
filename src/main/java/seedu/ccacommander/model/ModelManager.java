@@ -197,6 +197,7 @@ public class ModelManager implements Model {
         versionedCcaCommander.setEnrolment(target, editedEnrolment);
     }
 
+
     @Override
     public void commit(String commitMessage) {
         versionedCcaCommander.commit(commitMessage);

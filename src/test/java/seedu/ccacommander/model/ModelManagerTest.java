@@ -7,6 +7,8 @@ import static seedu.ccacommander.model.Model.PREDICATE_SHOW_ALL_EVENTS;
 import static seedu.ccacommander.model.Model.PREDICATE_SHOW_ALL_MEMBERS;
 import static seedu.ccacommander.model.ModelManager.findEnrolmentFromList;
 import static seedu.ccacommander.testutil.Assert.assertThrows;
+import static seedu.ccacommander.testutil.TypicalEnrolments.ALICE_AURORA;
+import static seedu.ccacommander.testutil.TypicalEnrolments.BENSON_BOXING;
 import static seedu.ccacommander.testutil.TypicalEvents.AURORA_BOREALIS;
 import static seedu.ccacommander.testutil.TypicalEvents.BOXING_DAY;
 import static seedu.ccacommander.testutil.TypicalMembers.ALICE;
@@ -203,6 +205,31 @@ public class ModelManagerTest {
         assertFalse(modelManager.hasEvent(AURORA_BOREALIS));
     }
 
+    @Test
+    public void hasEnrolment_nullEnrolment_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.hasEnrolment(null));
+    }
+
+    @Test
+    public void hasEnrolment_enrolmentNotInCcaCommander_returnsFalse() {
+        assertFalse(modelManager.hasEnrolment(ALICE_AURORA));
+    }
+
+    @Test
+    public void hasEnrolment_enrolmentInCcaCommander_returnsTrue() {
+        modelManager.createEnrolment(ALICE_AURORA);
+        assertTrue(modelManager.hasEnrolment(ALICE_AURORA));
+    }
+
+    @Test
+    public void updateEnrolments() {
+        modelManager.createEnrolment(ALICE_AURORA);
+
+        modelManager.setEnrolment(ALICE_AURORA, BENSON_BOXING);
+
+        assertTrue(modelManager.hasEnrolment(BENSON_BOXING));
+        assertFalse(modelManager.hasEnrolment(ALICE_AURORA));
+    }
     @Test
     public void deleteEnrolment() {
         Enrolment enrolment = new EnrolmentBuilder().build();
