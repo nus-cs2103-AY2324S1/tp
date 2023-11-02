@@ -44,11 +44,20 @@ public class ContactCard extends UiPart<Region> {
         super(FXML);
         this.contact = contact;
 
-        id.setText(displayedIndex + ". ");
+        id.setText("#" + displayedIndex);
         name.setText(contact.getName().value);
         phone.setText(contact.getPhone().value);
         email.setText(contact.getEmail().value);
-        note.setText(contact.getNote().value);
+
+        String note = contact.getNote().value;
+        if (note != "") {
+            this.note.setVisible(true);
+            this.note.setManaged(true);
+            this.note.setText(contact.getNote().value);
+        } else {
+            this.note.setVisible(false);
+            this.note.setManaged(false);
+        }
 
         contact.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.value))
