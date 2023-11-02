@@ -11,6 +11,7 @@ import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.person.Applicant;
 import seedu.address.model.person.Member;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.task.Task;
 
 /**
  * API of the Logic component
@@ -47,6 +48,7 @@ public interface Logic {
      * Returns an unmodifiable view of the filtered list of tags
      */
     ObservableList<Tag> getFilteredTagList();
+    ObservableList<Task> getFilteredTaskList();
 
     /**
      * Returns the user prefs' address book file path.
