@@ -35,10 +35,11 @@ public class GuiSettings implements Serializable {
     /**
      * Constructs a {@code GuiSettings} with the specified height, width and position.
      */
-    public GuiSettings(double windowWidth, double windowHeight, int xPosition, int yPosition) {
+    public GuiSettings(double windowWidth, double windowHeight, int xPosition, int yPosition, String stylesheet) {
         this.windowWidth = windowWidth;
         this.windowHeight = windowHeight;
         windowCoordinates = new Point(xPosition, yPosition);
+        this.stylesheet = stylesheet;
     }
 
     public double getWindowWidth() {
@@ -76,7 +77,7 @@ public class GuiSettings implements Serializable {
 
     @Override
     public int hashCode() {
-        return Objects.hash(windowWidth, windowHeight, windowCoordinates);
+        return Objects.hash(windowWidth, windowHeight, windowCoordinates, stylesheet);
     }
 
     @Override
@@ -85,6 +86,7 @@ public class GuiSettings implements Serializable {
                 .add("windowWidth", windowWidth)
                 .add("windowHeight", windowHeight)
                 .add("windowCoordinates", windowCoordinates)
+                .add("stylesheet", stylesheet)
                 .toString();
     }
 }

@@ -23,6 +23,7 @@ import seedu.ccacommander.model.exceptions.RedoStateException;
 import seedu.ccacommander.model.exceptions.UndoStateException;
 import seedu.ccacommander.model.member.MemberNameContainsKeywordsPredicate;
 import seedu.ccacommander.testutil.CcaCommanderBuilder;
+import seedu.ccacommander.ui.Stylesheet;
 
 public class ModelManagerTest {
 
@@ -45,7 +46,7 @@ public class ModelManagerTest {
     public void setUserPrefs_validUserPrefs_copiesUserPrefs() {
         UserPrefs userPrefs = new UserPrefs();
         userPrefs.setCcaCommanderFilePath(Paths.get("ccacommander/book/file/path"));
-        userPrefs.setGuiSettings(new GuiSettings(1, 2, 3, 4));
+        userPrefs.setGuiSettings(new GuiSettings(1, 2, 3, 4, Stylesheet.DARK.toString()));
         modelManager.setUserPrefs(userPrefs);
         assertEquals(userPrefs, modelManager.getUserPrefs());
 
@@ -62,7 +63,7 @@ public class ModelManagerTest {
 
     @Test
     public void setGuiSettings_validGuiSettings_setsGuiSettings() {
-        GuiSettings guiSettings = new GuiSettings(1, 2, 3, 4);
+        GuiSettings guiSettings = new GuiSettings(1, 2, 3, 4, Stylesheet.LIGHT.toString());
         modelManager.setGuiSettings(guiSettings);
         assertEquals(guiSettings, modelManager.getGuiSettings());
     }
