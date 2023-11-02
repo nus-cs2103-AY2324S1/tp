@@ -23,6 +23,8 @@ import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.calendar.Calendar;
 import seedu.address.model.calendar.ReadOnlyCalendar;
+import seedu.address.model.task.ReadOnlyTaskManager;
+import seedu.address.model.task.TaskManager;
 import seedu.address.model.util.SampleCalendarUtil;
 import seedu.address.model.util.SampleDataUtil;
 import seedu.address.storage.AddressBookStorage;
@@ -112,7 +114,9 @@ public class MainApp extends Application {
             calendarInitialData = new Calendar();
         }
 
-        return new ModelManager(addressBookInitialData, calendarInitialData, userPrefs);
+        ReadOnlyTaskManager taskManager = new TaskManager();
+
+        return new ModelManager(addressBookInitialData, calendarInitialData, taskManager, userPrefs);
     }
 
     private void initLogging(Config config) {

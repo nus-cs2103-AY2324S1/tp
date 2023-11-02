@@ -6,6 +6,7 @@ import static seedu.address.testutil.TypicalEvents.getTypicalCalendar;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalPersons.getTypicalUnsortedAddressBook;
+import static seedu.address.testutil.TypicalTasks.getTypicalTaskManager;
 
 import java.util.ArrayList;
 
@@ -32,10 +33,14 @@ public class SortCommandTest {
 
     @BeforeEach
     public void setUp() {
-        model = new ModelManager(getTypicalAddressBook(), getTypicalCalendar(), new UserPrefs());
-        expectedModel = new ModelManager(model.getAddressBook(), getTypicalCalendar(), new UserPrefs());
-        unsortedModel = new ModelManager(getTypicalUnsortedAddressBook(), getTypicalCalendar(), new UserPrefs());
-        expectedSortedModel = new ModelManager(model.getAddressBook(), getTypicalCalendar(), new UserPrefs());
+        model = new ModelManager(getTypicalAddressBook(), getTypicalCalendar(), getTypicalTaskManager(),
+                new UserPrefs());
+        expectedModel = new ModelManager(model.getAddressBook(), getTypicalCalendar(), getTypicalTaskManager(),
+                new UserPrefs());
+        unsortedModel = new ModelManager(getTypicalUnsortedAddressBook(), getTypicalCalendar(), getTypicalTaskManager(),
+                new UserPrefs());
+        expectedSortedModel = new ModelManager(model.getAddressBook(), getTypicalCalendar(), getTypicalTaskManager(),
+                new UserPrefs());
         sortComparatorArrayList = new ArrayList<>();
         nameComparatorStub = new NameComparatorStub(true, false, 1);
         sortComparatorArrayList.add(nameComparatorStub);

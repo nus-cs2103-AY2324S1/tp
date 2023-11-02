@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT_DESCRIPTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT_END_DATE_TIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT_START_DATE_TIME;
@@ -52,8 +53,7 @@ public class AddContactEventCommand extends Command {
      * @param event event to be added to the person
      */
     public AddContactEventCommand(Index index, Event event) {
-        requireNonNull(index);
-        requireNonNull(event);
+        requireAllNonNull(index, event);
 
         this.index = index;
         this.event = event;
