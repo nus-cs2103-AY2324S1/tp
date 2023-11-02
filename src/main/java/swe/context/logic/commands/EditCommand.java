@@ -30,27 +30,30 @@ import swe.context.model.contact.Note;
 import swe.context.model.contact.Phone;
 import swe.context.model.tag.Tag;
 
+
+
 /**
  * Edits an existing {@link Contact}.
  */
 public class EditCommand extends Command {
-
     public static final String COMMAND_WORD = "edit";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Edits the details of the contact identified "
-            + "by the index number used in the displayed contact list. "
-            + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: INDEX (must be a positive integer) "
-            + "[" + PREFIX_NAME + "NAME] "
-            + "[" + PREFIX_PHONE + "PHONE] "
-            + "[" + PREFIX_EMAIL + "EMAIL] "
-            + "[" + PREFIX_NOTE + "NOTE] "
-            + "[" + PREFIX_TAG + "TAG]... "
-            + "[" + PREFIX_ALTERNATE + "ALTERNATE CONTACT]...\n"
-            + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_PHONE + "91234567 "
-            + PREFIX_EMAIL + "johndoe@example.com";
+    public static final String MESSAGE_USAGE = String.format(
+        "%s: Edits a contact. At least one optional parameter required."
+                + "%nParameters: INDEX [%sNAME] [%sPHONE_NUMBER] [%sEMAIL]"
+                + " [%sNOTE] [%sTAG]... [%sALTERNATE_CONTACT]..."
+                + "%nExample: %s 3 %sMember of NUS S/U %s",
+        EditCommand.COMMAND_WORD,
+        PREFIX_NAME,
+        PREFIX_PHONE,
+        PREFIX_EMAIL,
+        PREFIX_NOTE,
+        PREFIX_TAG,
+        PREFIX_ALTERNATE,
+        EditCommand.COMMAND_WORD,
+        PREFIX_NOTE,
+        PREFIX_TAG
+    );
 
     private final Index index;
     private final EditContactDescriptor editContactDescriptor;
