@@ -4,6 +4,9 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.logging.Logger;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -100,6 +103,7 @@ public class ImportWindow extends UiPart<Stage> {
         String filePath = "data/deck.json";
 
         try (FileWriter writer = new FileWriter(filePath)) {
+            verifyImportData(contentToWrite);
             writer.write(contentToWrite);
             writer.close();
             stage.close();
@@ -117,6 +121,15 @@ public class ImportWindow extends UiPart<Stage> {
      */
 
     private boolean verifyImportData(String inputData) {
-        return true;
+        ObjectMapper objectMapper = new ObjectMapper();
+
+        try {
+            // Parse the JSON string
+            JsonNode jsonNode = objectMapper.readTree(inputData);
+            return jsonNode.get("cards").isArray() && jsonNode.has("cards");
+
+        } catch (Exception e) {
+            return false;
+        }
     }
 }

@@ -108,11 +108,11 @@ public class ExportWindow extends UiPart<Stage> {
     @FXML
     private void autoReadDeckFileAndDisplayContent(String filePath) {
         // Specify the path to the data/deck.json file
-
+        boolean verify = verifyFilePath(filePath);
         File selectedFile = new File(filePath);
         if (selectedFile.exists()) {
             // Check if the selected file is data/deck.json
-            if (selectedFile.getName().equals("deck.json")) {
+            if (selectedFile.getName().equals("deck.json") && verify) {
                 try (BufferedReader reader = new BufferedReader(new FileReader(selectedFile))) {
                     StringBuilder content = new StringBuilder();
                     String line;
@@ -130,5 +130,16 @@ public class ExportWindow extends UiPart<Stage> {
         } else {
             exportMessage.setText("The data/deck.json file does not exist.");
         }
+    }
+
+    /**
+     * Checks if file path for deck.json works
+     * @param filePath
+     * @return boolean if filepath is present
+     */
+
+    public static boolean verifyFilePath(String filePath) {
+        File selectedFile = new File(filePath);
+        return selectedFile.exists() && selectedFile.getName().equals("deck.json");
     }
 }

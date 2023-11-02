@@ -4,7 +4,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 
 /**
- * Export class that 
+ * Export class that handles the export functionality
  */
 public class ExportCommand extends Command {
     public static final String COMMAND_WORD = "export";
