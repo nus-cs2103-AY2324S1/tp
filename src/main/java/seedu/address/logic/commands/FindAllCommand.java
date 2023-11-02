@@ -39,6 +39,7 @@ public class FindAllCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
+        model.updateFilteredEventList(Model.PREDICATE_SHOW_ALL_EVENTS);
         model.updateFilteredEventList(eventPredicate);
         model.updateFilteredPersonList(personPredicate);
         return new CommandResult(

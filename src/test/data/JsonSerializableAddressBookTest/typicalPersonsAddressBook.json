@@ -13,7 +13,7 @@
     "email" : "johnd@example.com",
     "address" : "311, Clementi Ave 2, #02-25",
     "birthday": "1998-01-02",
-    "groups" : [ "owesMoney", "friends" ]
+    "groups" : [ "owesMoney", "friends", "teammates" ]
   }, {
     "name" : "Carl Kurz",
     "phone" : "95352563",
@@ -34,7 +34,7 @@
     "email" : "werner@example.com",
     "address" : "michegan ave",
     "birthday": "1998-01-05",
-    "groups" : [ ]
+    "groups" : [ "teammates" ]
   }, {
     "name" : "Fiona Kunz",
     "phone" : "9482427",
