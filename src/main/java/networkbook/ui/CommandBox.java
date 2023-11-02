@@ -3,6 +3,7 @@ package networkbook.ui;
 import static networkbook.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.ArrayList;
+
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
