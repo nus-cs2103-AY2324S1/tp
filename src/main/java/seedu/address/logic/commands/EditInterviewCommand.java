@@ -46,6 +46,7 @@ public class EditInterviewCommand extends Command {
             + "the time must be between 0900 to 1700,\n"
             + "and the start time and end time must be on the same day!";
     public static final String MESSAGE_TIME_CLASH = "This interview clashes with another interview!";
+    public static final String MESSAGE_INTERVIEW_DONE = "You cannot edit an interview that is done!";
 
     private final Index index;
     private final EditInterviewDescriptor editInterviewDescriptor;
@@ -73,6 +74,10 @@ public class EditInterviewCommand extends Command {
 
         Interview interviewToEdit = lastShownList.get(index.getZeroBased());
         Interview editedInterview = createEditedInterview(interviewToEdit, editInterviewDescriptor);
+
+        if (interviewToEdit.isDone()) {
+            throw new CommandException(MESSAGE_INTERVIEW_DONE);
+        }
 
         if (!interviewToEdit.isSameInterview(editedInterview) && model.hasInterview(editedInterview)) {
             throw new CommandException(MESSAGE_DUPLICATE_INTERVIEW);
@@ -106,10 +111,9 @@ public class EditInterviewCommand extends Command {
                 .getStartTime().orElse(interviewToEdit.getInterviewStartTime());
         LocalDateTime updatedEndTime = editInterviewDescriptor
                 .getEndTime().orElse(interviewToEdit.getInterviewEndTime());
-        boolean updatedDoneStatus = editInterviewDescriptor.hasBeenDone().orElse(interviewToEdit.isDone());
 
         return new Interview(interviewToEdit.getInterviewApplicant(),
-                updatedJobRole, updatedStartTime, updatedEndTime, updatedDoneStatus);
+                updatedJobRole, updatedStartTime, updatedEndTime);
     }
 
     @Override
@@ -144,7 +148,6 @@ public class EditInterviewCommand extends Command {
         private String jobRole;
         private LocalDateTime startTime;
         private LocalDateTime endTime;
-        private boolean isDone;
 
         public EditInterviewDescriptor() {}
 
@@ -156,14 +159,13 @@ public class EditInterviewCommand extends Command {
             setJobRole(toCopy.jobRole);
             setStartTime(toCopy.startTime);
             setEndTime(toCopy.endTime);
-            setDoneStatus(toCopy.isDone);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(jobRole, startTime, endTime, isDone);
+            return CollectionUtil.isAnyNonNull(jobRole, startTime, endTime);
         }
 
         public void setJobRole(String role) {
@@ -190,14 +192,6 @@ public class EditInterviewCommand extends Command {
             return Optional.ofNullable(endTime);
         }
 
-        public void setDoneStatus(boolean isDone) {
-            this.isDone = isDone;
-        }
-
-        public Optional<Boolean> hasBeenDone() {
-            return Optional.of(isDone);
-        }
-
         @Override
         public boolean equals(Object other) {
             if (other == this) {
@@ -212,8 +206,7 @@ public class EditInterviewCommand extends Command {
             EditInterviewDescriptor otherEditInterviewDescriptor = (EditInterviewDescriptor) other;
             return Objects.equals(jobRole, otherEditInterviewDescriptor.jobRole)
                     && Objects.equals(startTime, otherEditInterviewDescriptor.startTime)
-                    && Objects.equals(endTime, otherEditInterviewDescriptor.endTime)
-                    && Objects.equals(isDone, otherEditInterviewDescriptor.isDone);
+                    && Objects.equals(endTime, otherEditInterviewDescriptor.endTime);
         }
 
         @Override
@@ -222,7 +215,6 @@ public class EditInterviewCommand extends Command {
                     .add("role", jobRole)
                     .add("startTime", startTime)
                     .add("endTime", endTime)
-                    .add("isDone", isDone)
                     .toString();
         }
     }
