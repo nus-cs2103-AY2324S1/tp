@@ -17,6 +17,7 @@ import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.PractiseCommand;
+import seedu.address.logic.commands.RandomCommand;
 import seedu.address.logic.commands.SetDifficultyCommand;
 import seedu.address.logic.commands.SolveCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -81,6 +82,8 @@ public class DeckParser {
 
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
+        case RandomCommand.COMMAND_WORD:
+            return new RandomCommand();
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);

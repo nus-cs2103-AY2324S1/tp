@@ -5,7 +5,10 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.commons.core.index.Index;
+import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.card.Card;
+import seedu.address.model.exceptions.RandomIndexNotInitialisedException;
 
 /**
  * The API of the Model component.
@@ -49,6 +52,10 @@ public interface Model {
      */
     ReadOnlyDeck getDeck();
 
+    /**
+     * Returns the Deck size
+     */
+    int getDeckSize();
 
     /**
      * Returns true if a Card with the same identity as {@code person} exists in the Deck.
@@ -86,4 +93,13 @@ public interface Model {
      */
     public void setDeck(ReadOnlyDeck deck);
 
+    /**
+     * Saves a random index based on the current filtered deck list.
+     */
+    void setRandomIndex(Index randomIndex);
+
+    /**
+     * Retrieves the saved random index based on the current filtered deck list.
+     */
+    Index getRandomIndex() throws RandomIndexNotInitialisedException;
 }

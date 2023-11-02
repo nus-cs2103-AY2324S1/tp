@@ -11,7 +11,7 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.card.Card;
-
+import seedu.address.model.exceptions.RandomIndexNotInitialisedException;
 
 
 /**
@@ -52,10 +52,21 @@ public class SetDifficultyCommand extends Command {
         int deckSize = lastShownList.size();
         String newDifficulty = this.difficulty.toLowerCase();
 
-        if (targetIndex.getZeroBased() >= deckSize) {
+        Index actualIndex;
+        if (targetIndex.equals(Index.RANDOM)) {
+            try {
+                actualIndex = model.getRandomIndex();
+            } catch (RandomIndexNotInitialisedException e) {
+                throw new CommandException(Messages.MESSAGE_RANDOM_INDEX_NOT_INITIALISED);
+            }
+        } else {
+            actualIndex = targetIndex;
+        }
+
+        if (actualIndex.getZeroBased() >= deckSize) {
             throw new CommandException(Messages.MESSAGE_INVALID_CARD_DISPLAYED_INDEX);
         }
-        Card cardToSetDifficulty = lastShownList.get(targetIndex.getZeroBased());
+        Card cardToSetDifficulty = lastShownList.get(actualIndex.getZeroBased());
 
         if (Objects.equals(newDifficulty, "easy")) {
             cardToSetDifficulty.setDifficulty(newDifficulty);
@@ -63,7 +74,7 @@ public class SetDifficultyCommand extends Command {
             model.getDeck().sort();
             return new CommandResult(
                     String.format(Messages.MESSAGE_CARDS_SET_DIFFICULTY_VIEW_EASY,
-                            Messages.formatSetDifficulty(cardToSetDifficulty, targetIndex)));
+                            Messages.formatSetDifficulty(cardToSetDifficulty, actualIndex)));
         }
 
         if (Objects.equals(newDifficulty, "medium")) {
@@ -72,7 +83,7 @@ public class SetDifficultyCommand extends Command {
             model.getDeck().sort();
             return new CommandResult(
                     String.format(Messages.MESSAGE_CARDS_SET_DIFFICULTY_VIEW_MEDIUM,
-                            Messages.formatSetDifficulty(cardToSetDifficulty, targetIndex)));
+                            Messages.formatSetDifficulty(cardToSetDifficulty, actualIndex)));
         }
 
         if (Objects.equals(newDifficulty, "hard")) {
@@ -81,7 +92,7 @@ public class SetDifficultyCommand extends Command {
             model.getDeck().sort();
             return new CommandResult(
                     String.format(Messages.MESSAGE_CARDS_SET_DIFFICULTY_VIEW_HARD,
-                            Messages.formatSetDifficulty(cardToSetDifficulty, targetIndex)));
+                            Messages.formatSetDifficulty(cardToSetDifficulty, actualIndex)));
         } else {
             throw new CommandException(newDifficulty + Messages.MESSAGE_CARDS_SET_DIFFICULTY_VIEW_INVALID);
         }

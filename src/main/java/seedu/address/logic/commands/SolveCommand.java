@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 
 import java.util.List;
+import java.util.Random;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
@@ -10,6 +11,7 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.card.Card;
+import seedu.address.model.exceptions.RandomIndexNotInitialisedException;
 
 /**
  * Practises a question using it's displayed index from the address book.
@@ -35,7 +37,6 @@ public class SolveCommand extends Command {
      */
     public SolveCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
-
     }
 
     @Override
@@ -45,17 +46,28 @@ public class SolveCommand extends Command {
         List<Card> lastShownList = model.getFilteredCardList();
         int deckSize = lastShownList.size();
 
-        if (targetIndex.getZeroBased() >= deckSize) {
+        Index actualIndex;
+        if (targetIndex.equals(Index.RANDOM)) {
+            try {
+                actualIndex = model.getRandomIndex();
+            } catch (RandomIndexNotInitialisedException e) {
+                throw new CommandException(Messages.MESSAGE_RANDOM_INDEX_NOT_INITIALISED);
+            }
+        } else {
+            actualIndex = targetIndex;
+        }
+
+        if (actualIndex.getZeroBased() >= deckSize) {
             throw new CommandException(Messages.MESSAGE_INVALID_CARD_DISPLAYED_INDEX);
         }
-        Card cardToSolve = lastShownList.get(targetIndex.getZeroBased());
+        Card cardToSolve = lastShownList.get(actualIndex.getZeroBased());
         cardToSolve.incrementSolveCount();
         //sets to show the update on the Ui
         model.setCard(cardToSolve, cardToSolve);
 
         return new CommandResult(
                 String.format(Messages.MESSAGE_CARDS_SOLVE_VIEW,
-                        Messages.formatSolve(cardToSolve, targetIndex)));
+                        Messages.formatSolve(cardToSolve, actualIndex)));
 
     }
 
