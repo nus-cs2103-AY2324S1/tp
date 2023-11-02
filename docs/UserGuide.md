@@ -241,7 +241,7 @@ Here is a list of the error messages you may encounter, when the command is ente
 
 | Error Message                                                                              | Reason                                                |
 |--------------------------------------------------------------------------------------------|-------------------------------------------------------|
-| `Invalid command format!`                                                                  | One or more of the tags n/, p/, e/ is missing.        |
+| `Invalid command format!`                                                                  | One or more of the tags `n/`, `p/`, `e/` is missing.  |
 | `Names should only contain alphanumeric characters and spaces, and it should not be blank` | Tutor name input was either invalid or blank.         |
 | `Phone numbers should only contain numbers, and it should be at least 3 digits long`       | Tutor phone number input was either invalid or blank. |
 | `Emails should be of the format local-part@domain and adhere to the following constraints` | Tutor email input was either invalid or blank.        |
@@ -527,18 +527,18 @@ Tada! The schedule has now been updated to 8am.
 
 Here is a list of the error messages you may encounter, when the command is entered incorrectly:
 
-| Error Message                                                                                                      | Reason                                                                                      |
-|--------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------|
-| `Invalid command format!`                                                                                          | Invalid or missing SCHEDULE_INDEX                                                           |
-| `The schedule index provided is invalid`                                                                           | SCHEDULE_INDEX entered is not in the range of number of schedules                           |
-| `EndTime should only contain a valid date and time in the format "yyyy-MM-ddTHH:mm", and it should not be blank`   | The end time entered is not in the correct datetime format                                  |
-| `StartTime should only contain a valid date and time in the format "yyyy-MM-ddTHH:mm", and it should not be blank` | The start time entered is not in the correct datetime format                                |
-| `Multiple values specified for the following single-valued field(s): st/`                                          | More than 1 `st/` was given in the command                                                  |
-| `Multiple values specified for the following single-valued field(s): et/`                                          | More than 1 `et/` was given in the command                                                  |
-| `This schedule already exists in the address book`                                                                 | There is a schedule for the same tutor with the same start and end time in the address book |
-| `This tutor has a clashing schedule in the address book`                                                           | There is a schedule for the same tutor with overlapping times in the address book           |
-| `At least one field to edit must be provided.`                                                                     | There is no `st/` or `et/` tag provided to edit a field                                     |
-| `Schedules start time should be before its end time.`                                                              | The start time provided is before the end time                                              |
+| Error Message                                                                                                      | Reason                                                                                       |
+|--------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------|
+| `Invalid command format!`                                                                                          | Invalid or missing SCHEDULE_INDEX.                                                           |
+| `The schedule index provided is invalid`                                                                           | SCHEDULE_INDEX entered is not in the range of number of schedules.                           |
+| `EndTime should only contain a valid date and time in the format "yyyy-MM-ddTHH:mm", and it should not be blank`   | The end time entered is not in the correct datetime format.                                  |
+| `StartTime should only contain a valid date and time in the format "yyyy-MM-ddTHH:mm", and it should not be blank` | The start time entered is not in the correct datetime format.                                |
+| `Multiple values specified for the following single-valued field(s): st/`                                          | More than 1 `st/` was given in the command.                                                  |
+| `Multiple values specified for the following single-valued field(s): et/`                                          | More than 1 `et/` was given in the command.                                                  |
+| `This schedule already exists in the address book`                                                                 | There is a schedule for the same tutor with the same start and end time in the address book. |
+| `This tutor has a clashing schedule in the address book`                                                           | There is a schedule for the same tutor with overlapping times in the address book.           |
+| `At least one field to edit must be provided.`                                                                     | There is no `st/` or `et/` tag provided to edit a field.                                     |
+| `Schedules start time should be before its end time.`                                                              | The start time provided is before the end time.                                              |
 
 
 You can also refer to [input information](#input-examples) for details about valid inputs.
@@ -827,9 +827,9 @@ Woah look at that! The schedules are now being displayed in a calendar form.
 
 This command might seem complicated, but it is easy to use with only 1 possible error:
 
-| Error Message             | Reason                  |
-|---------------------------|-------------------------|
-| `Invalid command format!` | Invalid or missing DATE |
+| Error Message             | Reason                   |
+|---------------------------|--------------------------|
+| `Invalid command format!` | Invalid or missing DATE. |
 
 <div markdown="block" class="alert alert-warning">
 
