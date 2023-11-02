@@ -245,21 +245,34 @@ This is to allow the `Event` class to be extended to other types of events in th
 
 ### Implementation
 
-- The ability to assign persons to an event is facilitated by `ModelManager`.
-- Each event stores a list of persons assigned to it. The person(s) are represented by their `Name` stored in FumbleLog. This is because the `Name` is the only unique identifier for a person.
-- When a person is assigned to an event, the person's `Name` is added to the event's list of assigned persons. When a person is unassigned from an event, the person's `Name` is removed from the event's list of assigned persons. When a person's `Name` is modified, the change is also reflected in the event(s) that they are previously assigned to.
-- Users can assign multiple names to an event by using multiple `n/` identifiers following with the `Name` specified. The `ModelManager` will perform checks on whether the names supplied are valid, i.e the `Name` currently exists in FumbleLog.
-- When editing the event, specifying `n/` with a `Name` will append this new name to the current list rather than replace the previous names. This is to facilitate the user to assign more persons without accidentally deleting the previous persons assigned. To un-assign a person, the user must manually specify `u/` with the `Name` to un-assign the person from the event.
+- The ability to assign a `Person` to an `Event` is facilitated by `ModelManager`.
+- Each `Event` stores a list of person assigned to it. 
+The person(s) are represented by their `Name` stored in FumbleLog. 
+This is because the `Name` is the only unique identifier for a person.
+- When a person is assigned to an event, the person's `Name` is added to the `Event`'s list 
+of assigned persons. 
+  - When a `Person` is unassigned from an `Event`, the person's `Name` is 
+removed from the `Event`'s list of assigned persons. 
+  - When a person's `Name` is modified, the change is also reflected in the event(s) 
+  that they are previously assigned to.
+- Users can assign multiple names to an event by using multiple `n/` identifiers following 
+with the `Name` specified. The `ModelManager` will perform checks on whether the names supplied are valid, 
+i.e the `Name` currently exists in FumbleLog.
+- When editing the event, specifying `n/` with a `Name` will append this new name to the current list rather than replace the previous names. 
+This is to facilitate the user to assign more persons without accidentally deleting the previous persons assigned. 
+  - To un-assign a `Person`, the user must manually specify `u/` with the `Name` to un-assign the `Person` from the `Event`.
 
 ### Ability to assign `Group` to an `Event`
 
 #### Implementation
 
-- The ability to assign groups to an event is facilitated by `ModelManager`.
-- Each event stores a list of groups assigned to it. That is, when a group is assigned to an event, a `Group`object is stored a `Set` of `Group`. When un-assigned, the corresponding groups are then removed from the `Set`.
+- The ability to assign a `Group` to an `Event` is facilitated by `ModelManager`.
+- Each `Event` stores a list of `Groups` assigned to it. 
+  - That is, when a `Group` is assigned to an `Event`, a `Group`object is stored a `Set` of `Group`. 
+  - When un-assigned, the corresponding groups are then removed from the `Set`.
 - To make it easier for the users to assign groups, this action is done through the `AddEventCommand` and `EditEventCommand`, with the `g/` prefix.
-- To un-assign a group, the user must manually specify `ug/` with the `Group` to un-assign the group from the event.
-- With the group name, person(s) with that specific group in their group list is displayed with the event.
+- To un-assign a `Group`, the user must manually specify `ug/` with the `Group` to un-assign it from the `Event`.
+- With the `Group` name, person(s) with that specific `Group` in their `Group` list is displayed with the `Event`.
 - After a `Group` has been assigned to an `Event`, all `Person` in that `Group` will be displayed with the `Event` on FumbleLog.
 
 A successful `EditEventCommand` that assigns groups should look like this:
@@ -495,44 +508,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is `FumbleLog`, the **Person** is the `user` and the **Actors** are `Computing student`, unless specified otherwise)
+For all use cases below, unless specified otherwise:
+- the **System** is `FumbleLog`
+- the **Person** is the `user`
+- the **Actors** are `Computing student`
 
-**Use case: UC01 - Delete a person**
-
-**MSS**
-
-1.  User requests to list persons
-2.  FumbleLog shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  FumbleLog deletes the person
-
-    Use case ends.
-
-**Extensions**
-
-* 2a. The list is empty.
-
-  Use case ends.
-
-* 3a. The given index is invalid.
-
-    * 3a1. FumbleLog shows an error message.
-
-      Use case resumes at step 2.
-
-* 3b. The person is assigned to an event.
-
-    * 3b1. The event is updated to remove the person from the event.
-
-      Use case resumes at step 4.
-
-* 4a. The person is the last member of a group and that group is assigned to an event.
-
-    * 4a1. The group is deleted from the event.
-
-      Use case exits.
-
-**Use case: UC02 - Add a person**
+**Use case: UC01 - Add a person**
 
 **MSS**
 1. User requests to add persons
@@ -553,7 +534,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-**Use case: UC03 - Edit a person**
+**Use case: UC02 - Edit a person**
 
 **MSS**
 1. User requests to list persons
@@ -581,11 +562,51 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 5.
 
-* User removes a group from the person
+* 4b. User removes a group(s) from the person and that group(s) is assigned to an event.
 
     * 4b1. FumbleLog removes the person from the corresponding group in all events.
 
       Use case resumes at step 5.
+
+* 4c. User adds a group(s) to the person and that group(s) is assigned to an event.
+    * 4b1. FumbleLog adds the person to the corresponding group(s) in all events.
+
+      Use case resumes at step 5.
+
+**Use case: UC03 - Delete a person**
+
+**MSS**
+
+1.  User requests to list persons
+2.  FumbleLog shows a list of persons
+3.  User requests to delete a specific person in the list
+4.  FumbleLog deletes the person
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given index is invalid.
+
+    * 3a1. FumbleLog shows an error message.
+
+      Use case resumes at step 2.
+
+* 3b. The person is assigned to an event.
+
+    * 3b1. The person is removed from the event.
+
+      Use case resumes at step 4.
+
+* 4a. The person is the last member of a group and that group is assigned to an event.
+
+    * 4a1. The group is removed from the event.
+
+      Use case exits.
 
 **Use case: UC04 - Add an event**
 
@@ -601,6 +622,21 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 2a. User supplies invalid parameters
 
     * 2a1. FumbleLog shows an error message
+
+      Use case resumes at step 2.
+* 2b. User supplies a date that is before the current date
+
+    * 2b1. FumbleLog shows an error message
+
+      Use case resumes at step 2.
+* 2c. User supplies a start time that is after the end time
+
+    * 2c1. FumbleLog shows an error message
+
+      Use case resumes at step 2.
+* 2d. User supplies a start time that is before the current time
+
+    * 2d1. FumbleLog shows an error message
 
       Use case resumes at step 2.
 
@@ -623,12 +659,31 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 2a1. FumbleLog shows an error message.
 
       Use case resumes at step 2.
+* 2b. User supplies an invalid parameter
+   * 2b1. FumbleLog shows an error message.
+
+      Use case resumes at step 2.
+* 2c. User supplies a date that is before the current date
+
+    * 2c1. FumbleLog shows an error message
+
+      Use case resumes at step 2.
+* 2d. User supplies a start time that is after the end time
+
+    * 2d1. FumbleLog shows an error message
+
+      Use case resumes at step 2.
+* 2e. User supplies a start time that is before the current time
+
+    * 2e1. FumbleLog shows an error message
+
+      Use case resumes at step 2.
 * 3a. User enters a group and certain members of the group is already 
-assigned to the the event.
+assigned to the event individually.
 
     * 3a1. For each Event, duplicate members will be removed from the 
     individual Persons list.
-        
+
       Use case ends
 
 **Use case: UC06 - Delete an event**
@@ -654,10 +709,75 @@ assigned to the the event.
 
       Use case resumes at step 2.
 
- 
-**Use case: UC07 - Filter persons by group**
+**Use case: UC07 - Assigning a person to an event**
 
-1. User requests to filter persons by specifying a group
+**MSS**
+1. User requests to show a list of events
+2. FumbleLog shows list of events
+3. User requests to assign a person(s) to a specific event in the list
+4. FumbleLog assigns the person(s) to the event
+5. FumbleLog displays the all person(s) with that group under the event
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. The list is empty
+
+  Use case ends.
+
+* 3a. User tries to assign a person to an invalid event
+    * 3a1. FumbleLog shows an error message
+
+      Use case resumes at step 3.
+* 3b. User tries to assign an invalid person to an event.
+    * 3b1. FumbleLog shows an error message.
+
+      Use case ends.
+* 4a. User tries to assign a person to an event that already has the person assigned
+
+  Use case ends.
+
+**Use case: UC08 - Assigning a group to an event**
+
+**MSS**
+1. User requests to show a list of events
+2. FumbleLog shows list of events
+3. User requests to assign a group(s) to a specific event in the list
+4. FumbleLog assigns the group(s) to the event
+5. FumbleLog displays the all person(s) with that group under the event
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. The list is empty
+
+  Use case ends.
+
+* 3a. User tries to assign a group to an invalid event
+    * 3a1. FumbleLog shows an error message
+
+      Use case resumes at step 3.
+
+* 3b. User tries to assign an invalid group to an event.
+    * 3b1. FumbleLog shows an error message.
+
+      Use case ends.
+
+* 4a. User tries to assign a group to an event that already has the group assigned
+
+  Use case ends.
+
+* 5a. A person is displayed as an individual and is a member to the group.
+
+    * 5a1. FumbleLog removes the person from the individual list.
+
+      Use case ends.
+ 
+**Use case: UC09 - Find persons by group**
+
+1. User requests to find persons by specifying a group
 2. FumbleLog shows the list of persons that belong in the specified group
 
    Use case ends.
@@ -674,8 +794,7 @@ assigned to the the event.
 
   Use case ends.
 
-
-**Use case: UC08 - Show reminders for events/birthdays happening soon**
+**Use case: UC10 - Show reminders for events/birthdays happening soon**
 
 **MSS**
 1. User request a reminder for events/birthdays happening soon
@@ -693,119 +812,6 @@ assigned to the the event.
 * 2a. The list is empty
 
   Use case ends.
-
-
-**Use case: UC09 - Customise short form commands**
-
-**MSS**
-1. User request to define a command in a custom format
-2. FumbleLog stores the newly defined command
-3. The defined short form command can now be used
-
-   Use case ends.
-
-**Extensions**
-
-* 1a. The short-form command is conflicting with something else
-    * 1a1. FumbleLog shows an error message
-
-      Use case ends.
-
-* 3a. User uses a short-form command that is not defined
-    * 3a1. FumbleLog shows an error message
- 
-      Use case ends.
-
-**Use case: UC10 - Assigning a group to an event**
-
-**MSS**
-1. User requests to show a list of events
-2. FumbleLog shows list of events
-3. User requests to assign a group to a specific event in the list
-4. FumbleLog assigns all persons in the group to the event
-
-   Use case ends.
-
-**Extensions**
-
-* 1a. The list is empty
-
-  Use case ends.
-
-* 3a. User tries to assign a group to an invalid event
-    * 3a1. FumbleLog shows an error message
- 
-      Use case resumes at step 3.
-
-* 3b. User tries to assign an invalid group to an event
-    * 3b1. FumbleLog shows an error message
-
-      Use case ends.
-* 4a. User assigns a group to an event where 
-
-**Use case: UC11 - Marking an event as recurring**
-
-**MSS**
-1. User requests to show a list of events
-2. FumbleLog shows list of events
-3. User requests to mark an event as recurring
-4. User specifies how often the event occurs
-5. FumbleLog sets the event as a recurring event
-
-   Use case ends.
-
-**Extensions**
-
-* 1a. The list is empty
-
-  Use case ends.
-
-* 3a. User tries to mark an invalid event as recurring
-    * 3a1. FumbleLog shows an error message
-
-      Use case resumes at step 3.
-
-* 3b. User tries to mark an event as recurring when it has already been marked as a recurring event
-    * 3b1. FumbleLog shows an error message
-
-      Use case ends.
-
-**Use case: UC12 - Pin a person**
-
-**MSS**
-
-1. User requests to show a list of persons
-2. FumbleLog shows a list of persons
-3. User requests to pin a person from the list
-4. FumbleLog pins the person
-
-   Use case ends.
-
-**Extensions**
-
-* 1a. The list is empty
-
-  Use case ends.
-
-* 3a. User requests to pin an invalid person
-  * 3a1. FumbeLog shows an error message
-
-  Use case resumes at step 3.
-
-**Use case: UC13 - Display events in Calendar**
-
-1. User requests to show events in a calendar form
-2. FumbleLog shows all the events in a calendar
-
-   Use case ends.
-
-**Extensions**
-
-* 1a. The list is empty
-  * 1a1. FumbleLog shows an empty calendar
-
-    Use case ends.
-
   
 ### Non-Functional Requirements
 
