@@ -213,13 +213,8 @@ Format: `find [n/NAME]…​ [fp/FINANCIAL_PLAN]…​ [t/TAG]…​`
 
 Examples:
 * `find n/John` returns `john` and `John Doe`
-<<<<<<< HEAD
-* `find n/bob n/john` returns `Bob`, `John Doe`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
-=======
-* `find n/alex n/david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findJohnCharlieResult.png)
->>>>>>> 010d7724b6e86f039caff12ce3ad3d50ac7c08fd
+* `find n/john n/charlie` returns `Charlie`, `john doe`<br>
+  ![result for 'find john charlie'](images/findJohnCharlieResult.png)
 
 ### Gathering emails of matching persons : `gather`
 
@@ -236,7 +231,7 @@ Examples:
 * `gather fp/Financial Plan A`
 
 Successful Output:
-`lowjunyu@gmail.com johndoe@gmail.com`
+`davidmiller@gmail.com bob@example.com`
 
 ![result for`gather fp/Financial Plan A'](images/gatherUi.png)
 
