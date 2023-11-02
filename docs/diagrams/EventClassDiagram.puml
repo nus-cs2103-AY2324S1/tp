@@ -1,0 +1,24 @@
+@startuml
+!include ./style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor MODEL_COLOR
+skinparam classBackgroundColor MODEL_COLOR
+
+Class EventList
+Class "{abstract}\nEvent" as Event
+Class Meeting extends Event
+Class EventType
+Class EventName
+Class EventDate
+Class EventTime
+Class Person
+Class Group
+
+EventList *--> "*" Event
+Event *--> "1" EventName
+Event *--> "1" EventType
+Event *--> "1..2" EventDate
+Event *--> "0..2" EventTime
+Event *--> "*" Person
+Event *--> "*" Group
+@enduml

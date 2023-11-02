@@ -116,19 +116,22 @@ How the parsing works:
 ### Model component
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
 
-<img src="images/ModelClassDiagram.png" width="450" />
+<img src="images/ModelClassDiagram.png" width="600" />
 
 
 The `Model` component,
 
 * stores the address book data i.e., all `Person`(which are contained in a `UniquePersonList` object) and `Event` objects (which are contained in a `EventList` object).
 * stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* stores the currently 'selected' `Event` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Event>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
+* stores a `Logger` object that is used to log messages of the application's behaviour.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Group` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Group` object per unique group, instead of each `Group` needing their own `Group` objects.<br>
+[//]: # (Not necessary to mention this alternative model, as it is not used in the current implementation)
+[//]: # (<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative &#40;arguably, a more OOP&#41; model is given below. It has a `Group` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Group` object per unique group, instead of each `Group` needing their own `Group` objects.<br>)
 
-<img src="images/BetterModelClassDiagram.png" width="450" />
+<img src="images/BetterModelClassDiagram.png" width="600" />
 
 </div>
 
@@ -158,11 +161,11 @@ This section describes some noteworthy details on how certain features are imple
 
 #### Implementation details
 
-The 'add' feature involves creating a new "Person" object with optional fields and adding it to FumbleLog. 
+The `add` feature involves creating a new `Person` object with optional fields and adding it to FumbleLog. 
 
 This is done using `AddCommand` which implements the `Command` interface. The `AddCommand` is then executed by `LogicManager` which calls `ModelManager` to add the person to the address book.
 
-As a result, the existing 'Person' class in AB3's implementation is enhanced to have the capacity of storing optional fields.
+As a result, the existing `Person` class in AB3's implementation is enhanced to have the capacity of storing optional fields.
 Below is a class diagram of the enhanced 'Person' class:
 
 <img src="images/PersonClassDiagram.png" alt="PersonClassDiagram" width=500 />
@@ -218,29 +221,63 @@ for empty/null inputs in the Person object by checking if the optional field is 
   * Cons:
     * Inconveniences the user as they have to remember a new command to add a person with optional fields.
 
-### Ability to assign persons to an event
+### Ability to track events
 
-The ability to assign persons to an event is facilitated by `ModelManager`.
-
-Each event stores a list of persons assigned to it. The person(s) are represented by their `Name` stored in FumbleLog. This is because the `Name` is the only unique identifier for a person.
-
-When a person is assigned to an event, the person's `Name` is added to the event's list of assigned persons. When a person is unassigned from an event, the person's `Name` is removed from the event's list of assigned persons. When a person's `Name` is modified, the change is also reflected in the event(s) that they are previously assigned to.
-
-Users can assign multiple names to an event by using multiple `n/` identifiers following with the `Name` specified. The `ModelManager` will perform checks on whether the names supplied are valid, i.e the `Name` currently exists in FumbleLog.
-
-When editing the event, specifying `n/` with a `Name` will append this new name to the current list rather than replace the previous names. This is to facilitate the user to assign more persons without accidentally deleting the previous persons assigned. To un-assign a person, the user must manually specify `u/` with the `Name` to un-assign the person from the event.
-
-### Ability to assign groups to an event
+This subsection details of how the `Event` class is implemented.
 
 #### Implementation
 
-The ability to assign groups to an event is facilitated by `ModelManager`.
+For this feature, the `Event` class is implemented to store the event's name, date,
+start time, end time, persons involved and groups involved.
 
-Each event stores a list of groups assigned to it. The groups(s) are represented by their name and that acts as their id. 
+<img src="images/EventClassDiagram.png" alt="EventClassDiagram" width=600 />
 
-When a group is assigned to an event, the group's name is stored into the event's list of groups. When un-assigned, the corresponding groups are then removed from the group list.
+#### Design considerations:
 
-With the group name, person(s) with that specific group in their group list is displayed with the event.
+- Events stores a list of `Name` and a list of `Group` that are involved in the event. 
+This is to facilitate the ability to track persons and groups involved in the event.
+The `Name` class is used to represent the name of the person involved in the event, as names are unique in the `UniquePersonList
+- To make handling `Event` objects easier, the `Meeting` class is created to represent meetings as a subtype of `Event`. 
+This is to allow the `Event` class to be extended to other types of events in the future.
+- To track events, we implement an `EventList` to store all events to be displayed in FumbleLog.
+
+### Ability to assign `Person` to an `Event`
+
+### Implementation
+
+- The ability to assign a `Person` to an `Event` is facilitated by `ModelManager`.
+- Each `Event` stores a list of person assigned to it. 
+The person(s) are represented by their `Name` stored in FumbleLog. 
+This is because the `Name` is the only unique identifier for a person.
+- When a person is assigned to an event, the person's `Name` is added to the `Event`'s list 
+of assigned persons. 
+  - When a `Person` is unassigned from an `Event`, the person's `Name` is 
+removed from the `Event`'s list of assigned persons. 
+  - When a person's `Name` is modified, the change is also reflected in the event(s) 
+  that they are previously assigned to.
+- Users can assign multiple names to an event by using multiple `n/` identifiers following 
+with the `Name` specified. The `ModelManager` will perform checks on whether the names supplied are valid, 
+i.e the `Name` currently exists in FumbleLog.
+- When editing the event, specifying `n/` with a `Name` will append this new name to the current list rather than replace the previous names. 
+This is to facilitate the user to assign more persons without accidentally deleting the previous persons assigned. 
+  - To un-assign a `Person`, the user must manually specify `u/` with the `Name` to un-assign the `Person` from the `Event`.
+
+### Ability to assign `Group` to an `Event`
+
+#### Implementation
+
+- The ability to assign a `Group` to an `Event` is facilitated by `ModelManager`.
+- Each `Event` stores a list of `Groups` assigned to it. 
+  - That is, when a `Group` is assigned to an `Event`, a `Group`object is stored a `Set` of `Group`. 
+  - When un-assigned, the corresponding groups are then removed from the `Set`.
+- To make it easier for the users to assign groups, this action is done through the `AddEventCommand` and `EditEventCommand`, with the `g/` prefix.
+- To un-assign a `Group`, the user must manually specify `ug/` with the `Group` to un-assign it from the `Event`.
+- With the `Group` name, person(s) with that specific `Group` in their `Group` list is displayed with the `Event`.
+- After a `Group` has been assigned to an `Event`, all `Person` in that `Group` will be displayed with the `Event` on FumbleLog.
+
+A successful `EditEventCommand` that assigns groups should look like this:
+
+<img src="images/AssignGroupsSequenceDiagram.png" alt="AssignGroup" width=600 />
 
 #### Design considerations
 
@@ -285,6 +322,47 @@ even though the person's name does not fit the keyword(s).
         - User can find exact person or group.
     - Cons:
         - Adding constraint the original command by requiring syntax, which may cause convenience.
+
+### Remind feature
+
+The `remind` command in our application displays a birthdays and events that will happen within a specified number of days.
+
+#### Implementation
+
+The `remind` feature involves checking the current filtered list of persons and events and filtering out persons with birthdays and events with starting date
+that are within the specified number of days. This is done using `BirthdayWithinDaysPredicate` and `EventWithinDaysPredicate` which implements the `Predicate<T>` interface. These predicates are passed
+to `Model#updateFilteredPersonList(Predicate<Person> predicate)` and `Model#updateFilteredEventList(Predicate<Event> predicate)` respectively.
+
+As a result, the `ObservableList<Person>` and `ObservableList<Event>` are updated with the filtered lists of persons and events respectively.
+The `UI` component is notified of these new changes to the lists and updates the UI accordingly, which will show the updated persons and events.
+
+The `remind` command is implemented this way as it reuses the logic for the `find` command where it utilises the `Model` component to update the current list of persons based on the given predicate.
+Instead of filtering out persons based on names, the `BirthdayWithinDaysPredicate` filters out persons based on their birthdays and the `EventWithinDaysPredicate` filters out events based on their starting dates.
+
+The flow for the `remind` command is described by the following sequence diagram:
+
+![RemindSequenceDiagram](images/RemindSequenceDiagram.png)
+
+
+#### Feature details
+1. The `remind` command can accept an optional parameter `days` which specifies the number of days to search for birthdays and events. If `days` is not specified, the default value of 7 days will be used.
+2. The application will validate the argument `days` to ensure that it is a positive integer. If it is not, an error message will be shown to the user and prompts the user for a corrected input.
+3. If it is a valid input, a `BirthdayWithinDaysPredicate` and `EventWithinDaysPredicate` will be created and a `Remind` command will be created with the predicates.
+4. The `Remind` command will then be executed and the `UI` will be updated with the filtered lists of persons and events.
+
+#### General design considerations
+
+- **Alternative 1 (Current choice): Updating list with predicate.**
+    - Pros:
+        - Reuses the logic for the `find` command.
+        - The `UI` component is notified of the changes to the list and updates the UI accordingly.
+    - Cons:
+        - The `Model` component is tightly coupled with the `UI` component.
+- **Alternative 2: Checking current list for birthdays and events, and adding to new list.**
+    - Pros:
+        - Easier to implement.
+    - Cons:
+        - Performance overhead. New addressbook objects needs to be created.
 
 ### \[Proposed\] Undo/redo feature
 
@@ -370,7 +448,6 @@ _{more aspects and alternatives to be added}_
 
 _{Explain here how the data archiving feature will be implemented}_
 
-### Remind feature
 
 The `remind` command in our application displays a birthdays and events that will happen within a specified number of days.
 
@@ -466,44 +543,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is `FumbleLog`, the **Person** is the `user` and the **Actors** are `Computing student`, unless specified otherwise)
+For all use cases below, unless specified otherwise:
+- the **System** is `FumbleLog`
+- the **Person** is the `user`
+- the **Actors** are `Computing student`
 
-**Use case: UC01 - Delete a person**
-
-**MSS**
-
-1.  User requests to list persons
-2.  FumbleLog shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  FumbleLog deletes the person
-
-    Use case ends.
-
-**Extensions**
-
-* 2a. The list is empty.
-
-  Use case ends.
-
-* 3a. The given index is invalid.
-
-    * 3a1. FumbleLog shows an error message.
-
-      Use case resumes at step 2.
-
-* 3b. The person is assigned to an event.
-
-    * 3b1. The event is updated to remove the person from the event.
-
-      Use case resumes at step 4.
-
-* 4a. The person is the last member of a group and that group is assigned to an event.
-
-    * 4a1. The group is deleted from the event.
-
-      Use case exits.
-
-**Use case: UC02 - Add a person**
+**Use case: UC01 - Add a person**
 
 **MSS**
 1. User requests to add persons
@@ -524,7 +569,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-**Use case: UC03 - Edit a person**
+**Use case: UC02 - Edit a person**
 
 **MSS**
 1. User requests to list persons
@@ -552,11 +597,51 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 5.
 
-* User removes a group from the person
+* 4b. User removes a group(s) from the person and that group(s) is assigned to an event.
 
     * 4b1. FumbleLog removes the person from the corresponding group in all events.
 
       Use case resumes at step 5.
+
+* 4c. User adds a group(s) to the person and that group(s) is assigned to an event.
+    * 4b1. FumbleLog adds the person to the corresponding group(s) in all events.
+
+      Use case resumes at step 5.
+
+**Use case: UC03 - Delete a person**
+
+**MSS**
+
+1.  User requests to list persons
+2.  FumbleLog shows a list of persons
+3.  User requests to delete a specific person in the list
+4.  FumbleLog deletes the person
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given index is invalid.
+
+    * 3a1. FumbleLog shows an error message.
+
+      Use case resumes at step 2.
+
+* 3b. The person is assigned to an event.
+
+    * 3b1. The person is removed from the event.
+
+      Use case resumes at step 4.
+
+* 4a. The person is the last member of a group and that group is assigned to an event.
+
+    * 4a1. The group is removed from the event.
+
+      Use case exits.
 
 **Use case: UC04 - Add an event**
 
@@ -572,6 +657,21 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 2a. User supplies invalid parameters
 
     * 2a1. FumbleLog shows an error message
+
+      Use case resumes at step 2.
+* 2b. User supplies a date that is before the current date
+
+    * 2b1. FumbleLog shows an error message
+
+      Use case resumes at step 2.
+* 2c. User supplies a start time that is after the end time
+
+    * 2c1. FumbleLog shows an error message
+
+      Use case resumes at step 2.
+* 2d. User supplies a start time that is before the current time
+
+    * 2d1. FumbleLog shows an error message
 
       Use case resumes at step 2.
 
@@ -594,12 +694,31 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 2a1. FumbleLog shows an error message.
 
       Use case resumes at step 2.
+* 2b. User supplies an invalid parameter
+   * 2b1. FumbleLog shows an error message.
+
+      Use case resumes at step 2.
+* 2c. User supplies a date that is before the current date
+
+    * 2c1. FumbleLog shows an error message
+
+      Use case resumes at step 2.
+* 2d. User supplies a start time that is after the end time
+
+    * 2d1. FumbleLog shows an error message
+
+      Use case resumes at step 2.
+* 2e. User supplies a start time that is before the current time
+
+    * 2e1. FumbleLog shows an error message
+
+      Use case resumes at step 2.
 * 3a. User enters a group and certain members of the group is already 
-assigned to the the event.
+assigned to the event individually.
 
     * 3a1. For each Event, duplicate members will be removed from the 
     individual Persons list.
-        
+
       Use case ends
 
 **Use case: UC06 - Delete an event**
@@ -625,28 +744,120 @@ assigned to the the event.
 
       Use case resumes at step 2.
 
- 
-**Use case: UC07 - Filter persons by group**
+**Use case: UC07 - Assigning a person to an event**
 
-1. User requests to filter persons by specifying a group
-2. FumbleLog shows the list of persons that belong in the specified group
+**MSS**
+1. User requests to show a list of events
+2. FumbleLog shows list of events
+3. User requests to assign a person(s) to a specific event in the list
+4. FumbleLog assigns the person(s) to the event
+5. FumbleLog displays the all person(s) with that group under the event
 
    Use case ends.
 
 **Extensions**
 
-* 1a. The group does not exist
+* 1a. The list is empty
 
-    * 1a1. FumbleLog shows an error message
+  Use case ends.
 
-    Use case resumes at step 1.
+* 3a. User tries to assign a person to an invalid event
+    * 3a1. FumbleLog shows an error message
 
-* 2a. The list is empty
+      Use case resumes at step 3.
+* 3b. User tries to assign an invalid person to an event.
+    * 3b1. FumbleLog shows an error message.
+
+      Use case ends.
+* 4a. User tries to assign a person to an event that already has the person assigned
+
+  Use case ends.
+
+**Use case: UC08 - Assigning a group to an event**
+
+**MSS**
+1. User requests to show a list of events
+2. FumbleLog shows list of events
+3. User requests to assign a group(s) to a specific event in the list
+4. FumbleLog assigns the group(s) to the event
+5. FumbleLog displays the all person(s) with that group under the event
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. The list is empty
+
+  Use case ends.
+
+* 3a. User tries to assign a group to an invalid event
+    * 3a1. FumbleLog shows an error message
+
+      Use case resumes at step 3.
+
+* 3b. User tries to assign an invalid group to an event.
+    * 3b1. FumbleLog shows an error message.
+
+      Use case ends.
+
+* 4a. User tries to assign a group to an event that already has the group assigned
+
+  Use case ends.
+
+* 5a. A person is displayed as an individual and is a member to the group.
+
+    * 5a1. FumbleLog removes the person from the individual list.
+
+      Use case ends.
+ 
+**Use case: UC09 - Find persons**
+1. User requests to list all the persons.
+2. FumbleLog shows a list of persons
+3. User requests to find persons by specifying a group or name
+4. FumbleLog shows the list of persons that belong in the specified group
+
+   Use case ends.
+
+**Extensions**
+
+* 3a. The group does not exist
+
+    * 3a1. FumbleLog shows an empty list.
+
+    Use case resumes at step 3.
+
+* 3b. The person does not exist
+
+    * 3b1. FumbleLog shows an empty list. 
+
+    Use case resumes at step 3.
+
+* 4a. The list is empty
+
+  Use case ends.
+
+**Use case: UC10 - Find events**
+1. User requests to list all the events.
+2. FumbleLog shows a list of events
+3. User requests to find events by specifying a group or event name
+4. FumbleLog shows the list of events that belong in the specified group
+
+   Use case ends.
+
+**Extensions**
+
+* 3a. The group does not exist
+    * 3a1. FumbleLog shows an empty list.
+
+    Use case resumes at step 3.
+* 3b. The event does not exist
+    * 3b1. FumbleLog shows an empty list. 
+* 4a. The list is empty
 
   Use case ends.
 
 
-**Use case: UC08 - Show reminders for events/birthdays happening soon**
+**Use case: UC11 - Show reminders for events/birthdays happening soon**
 
 **MSS**
 1. User requests a reminder for events/birthdays happening soon using the 'remind' command.
@@ -665,119 +876,6 @@ assigned to the the event.
 * 2a. The list is empty
 
   Use case ends.
-
-
-**Use case: UC09 - Customise short form commands**
-
-**MSS**
-1. User request to define a command in a custom format
-2. FumbleLog stores the newly defined command
-3. The defined short form command can now be used
-
-   Use case ends.
-
-**Extensions**
-
-* 1a. The short-form command is conflicting with something else
-    * 1a1. FumbleLog shows an error message
-
-      Use case ends.
-
-* 3a. User uses a short-form command that is not defined
-    * 3a1. FumbleLog shows an error message
- 
-      Use case ends.
-
-**Use case: UC10 - Assigning a group to an event**
-
-**MSS**
-1. User requests to show a list of events
-2. FumbleLog shows list of events
-3. User requests to assign a group to a specific event in the list
-4. FumbleLog assigns all persons in the group to the event
-
-   Use case ends.
-
-**Extensions**
-
-* 1a. The list is empty
-
-  Use case ends.
-
-* 3a. User tries to assign a group to an invalid event
-    * 3a1. FumbleLog shows an error message
- 
-      Use case resumes at step 3.
-
-* 3b. User tries to assign an invalid group to an event
-    * 3b1. FumbleLog shows an error message
-
-      Use case ends.
-* 4a. User assigns a group to an event where 
-
-**Use case: UC11 - Marking an event as recurring**
-
-**MSS**
-1. User requests to show a list of events
-2. FumbleLog shows list of events
-3. User requests to mark an event as recurring
-4. User specifies how often the event occurs
-5. FumbleLog sets the event as a recurring event
-
-   Use case ends.
-
-**Extensions**
-
-* 1a. The list is empty
-
-  Use case ends.
-
-* 3a. User tries to mark an invalid event as recurring
-    * 3a1. FumbleLog shows an error message
-
-      Use case resumes at step 3.
-
-* 3b. User tries to mark an event as recurring when it has already been marked as a recurring event
-    * 3b1. FumbleLog shows an error message
-
-      Use case ends.
-
-**Use case: UC12 - Pin a person**
-
-**MSS**
-
-1. User requests to show a list of persons
-2. FumbleLog shows a list of persons
-3. User requests to pin a person from the list
-4. FumbleLog pins the person
-
-   Use case ends.
-
-**Extensions**
-
-* 1a. The list is empty
-
-  Use case ends.
-
-* 3a. User requests to pin an invalid person
-  * 3a1. FumbeLog shows an error message
-
-  Use case resumes at step 3.
-
-**Use case: UC13 - Display events in Calendar**
-
-1. User requests to show events in a calendar form
-2. FumbleLog shows all the events in a calendar
-
-   Use case ends.
-
-**Extensions**
-
-* 1a. The list is empty
-  * 1a1. FumbleLog shows an empty calendar
-
-    Use case ends.
-
   
 ### Non-Functional Requirements
 

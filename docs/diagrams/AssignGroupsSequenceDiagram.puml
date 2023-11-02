@@ -1,0 +1,58 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box EditEventCommand LOGIC_COLOR_T1
+participant ":EditEventCommand" as EditEventCommand LOGIC_COLOR
+participant "m:Meeting" as Meeting REMIND_COMMAND_PARSER_COLOR
+participant "comd:CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant "model:Model" as Model MODEL_COLOR
+end box
+
+box AddressBook
+participant "ab:AddressBook" as AddressBook ADDRESS_BOOK_PARSER_COLOR
+end box
+
+[-> EditEventCommand : execute(model)
+activate EditEventCommand
+
+EditEventCommand -> EditEventCommand : createEditedMeeting(...)
+activate EditEventCommand
+
+EditEventCommand -> EditEventCommand : handleEditAssignGroups(...)
+
+create Meeting
+EditEventCommand -[ADDRESS_BOOK_PARSER_COLOR]> Meeting
+activate Meeting
+
+Meeting --> EditEventCommand
+deactivate EditEventCommand
+deactivate Meeting
+
+EditEventCommand -> Model : setEvent(m)
+activate Model
+
+Model --> AddressBook : setEvent(m)
+activate AddressBook
+
+AddressBook --> AddressBook : removePersonsInGroups(m)
+activate AddressBook
+deactivate AddressBook
+AddressBook --> Model
+deactivate AddressBook
+
+Model --> EditEventCommand
+deactivate Model
+deactivate Meeting
+
+create CommandResult
+EditEventCommand -[LOGIC_COLOR]> CommandResult
+activate CommandResult
+
+CommandResult --> EditEventCommand
+[<--EditEventCommand : comd
+deactivate EditEventCommand
+@enduml
