@@ -14,7 +14,6 @@ import networkbook.logic.commands.delete.DeletePhoneAction;
 import networkbook.logic.commands.delete.DeletePriorityAction;
 import networkbook.logic.commands.delete.DeleteSpecialisationAction;
 import networkbook.logic.commands.delete.DeleteTagAction;
-import networkbook.logic.parser.exceptions.ParseException;
 import networkbook.testutil.TypicalIndexes;
 
 /**
@@ -51,9 +50,6 @@ public class DeleteCommandParserTest {
     private static final DeleteTagAction DELETE_FIRST_TAG_ACTION = new DeleteTagAction(INDEX_ONE);
     private static final DeleteGraduationAction DELETE_GRADUATION_ACTION = new DeleteGraduationAction();
     private static final DeletePriorityAction DELETE_PRIORITY_ACTION = new DeletePriorityAction();
-
-
-
 
     public String generateUserInput(String... parts) {
         StringBuilder sb = new StringBuilder();
@@ -204,7 +200,7 @@ public class DeleteCommandParserTest {
     }
 
     @Test
-    public void parse_deleteWithRedundantValue_throwsParseException() throws ParseException {
+    public void parse_deleteWithRedundantValue_throwsParseException() {
         CommandParserTestUtil.assertParseFailure(parser,
                 generateUserInput(ONE, PRIORITY, RANDOM),
                 String.format(Messages.MESSAGE_VALUE_CANNOT_BE_PRESENT, PRIORITY));
@@ -220,7 +216,7 @@ public class DeleteCommandParserTest {
     }
 
     @Test
-    public void parse_deleteSingleValuedField_success() throws ParseException {
+    public void parse_deleteSingleValuedField_success() {
         DeleteFieldCommand expectedGraduationCommand = new DeleteFieldCommand(INDEX_ONE, DELETE_GRADUATION_ACTION);
         CommandParserTestUtil.assertParseSuccess(parser,
                 generateUserInput(ONE, GRADUATION),
@@ -233,41 +229,43 @@ public class DeleteCommandParserTest {
     }
 
     @Test
-    public void parse_deleteMultiValuedField_success() throws ParseException {
+    public void parse_deleteMultiValuedField_success() {
 
         DeleteFieldCommand expectedEmailCommand = new DeleteFieldCommand(INDEX_ONE, DELETE_FIRST_EMAIL_ACTION);
         CommandParserTestUtil.assertParseSuccess(parser,
-                generateUserInput(ONE, EMAIL, INDEX, ONE),
+                generateUserInput(ONE, EMAIL, INDEX, ONE), // "delete 1 /email /index 1"
                 expectedEmailCommand);
 
         DeleteFieldCommand expectedLinkCommand = new DeleteFieldCommand(INDEX_ONE, DELETE_FIRST_LINK_ACTION);
         CommandParserTestUtil.assertParseSuccess(parser,
-                generateUserInput(ONE, INDEX, ONE, LINK),
+                generateUserInput(ONE, INDEX, ONE, LINK), // "delete 1 /index 1 /link"
                 expectedLinkCommand);
 
         DeleteFieldCommand expectedPhoneCommand = new DeleteFieldCommand(INDEX_TWO, DELETE_FIRST_PHONE_ACTION);
         CommandParserTestUtil.assertParseSuccess(parser,
-                generateUserInput(TWO, PHONE, INDEX, ONE),
+                generateUserInput(TWO, PHONE, INDEX, ONE), // "delete 2 /phone /index 1"
                 expectedPhoneCommand);
 
         DeleteFieldCommand expectedCourseCommand = new DeleteFieldCommand(INDEX_TWO, DELETE_FIRST_COURSE_ACTION);
         CommandParserTestUtil.assertParseSuccess(parser,
-                generateUserInput(TWO, INDEX, ONE, COURSE),
+                generateUserInput(TWO, INDEX, ONE, COURSE), // "delete 2 /index 1 /course"
                 expectedCourseCommand);
+
+        // delete multivalued field without /index prefix will default to 1
 
         DeleteFieldCommand expectedSpecCommand = new DeleteFieldCommand(INDEX_ONE, DELETE_FIRST_SPECIALISATION_ACTION);
         CommandParserTestUtil.assertParseSuccess(parser,
-                generateUserInput(ONE, SPECIALISATION),
+                generateUserInput(ONE, SPECIALISATION), // "delete 1 /spec"
                 expectedSpecCommand);
 
         DeleteFieldCommand expectedTagCommand = new DeleteFieldCommand(INDEX_ONE, DELETE_FIRST_TAG_ACTION);
         CommandParserTestUtil.assertParseSuccess(parser,
-                generateUserInput(ONE, TAG),
+                generateUserInput(ONE, TAG), // "delete 1 /tag"
                 expectedTagCommand);
     }
 
     @Test
-    public void parse_deleteValidInputWithWhiteSpaces_success() throws ParseException {
+    public void parse_deleteValidInputWithWhiteSpaces_success() {
         DeleteFieldCommand expectedEmailCommand = new DeleteFieldCommand(INDEX_ONE, DELETE_FIRST_EMAIL_ACTION);
         CommandParserTestUtil.assertParseSuccess(parser,
                 generateUserInput(ONE, LONG_WHITESPACE, EMAIL, INDEX, ONE),

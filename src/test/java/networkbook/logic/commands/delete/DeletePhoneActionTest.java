@@ -9,6 +9,7 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 
 import networkbook.commons.core.index.Index;
+import networkbook.logic.Messages;
 import networkbook.logic.commands.exceptions.CommandException;
 import networkbook.model.person.Person;
 import networkbook.model.person.Phone;
@@ -66,12 +67,16 @@ public class DeletePhoneActionTest {
                 JACK.getTags(),
                 JACK.getPriority().get()));
         assertThrows(CommandException.class, () -> deleteFirstAction.delete(descriptorWithoutPhone,
-                TypicalIndexes.INDEX_FIRST_PERSON));
+                TypicalIndexes.INDEX_THIRD_PERSON),
+                String.format(Messages.MESSAGE_INVALID_MULTIVALUED_FIELD_ENTRY_INDEX,
+                        TypicalIndexes.INDEX_THIRD_PERSON.getOneBased(), "a phone", firstIndex.getOneBased()));
 
         DeletePhoneAction deleteTenthAction = new DeletePhoneAction(tenthIndex);
         DeletePersonDescriptor descriptorWithTwoPhones = new DeletePersonDescriptor(JACK);
         assertThrows(CommandException.class, () -> deleteTenthAction.delete(descriptorWithTwoPhones,
-                TypicalIndexes.INDEX_FIRST_PERSON));
+                TypicalIndexes.INDEX_FIRST_PERSON),
+                String.format(Messages.MESSAGE_INVALID_MULTIVALUED_FIELD_ENTRY_INDEX,
+                        TypicalIndexes.INDEX_FIRST_PERSON.getOneBased(), "a phone", tenthIndex.getOneBased()));
     }
 
     @Test

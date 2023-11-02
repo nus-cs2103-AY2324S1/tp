@@ -9,6 +9,7 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 
 import networkbook.commons.core.index.Index;
+import networkbook.logic.Messages;
 import networkbook.logic.commands.exceptions.CommandException;
 import networkbook.model.person.Email;
 import networkbook.model.person.Person;
@@ -66,12 +67,16 @@ public class DeleteEmailActionTest {
                 JACK.getTags(),
                 JACK.getPriority().get()));
         assertThrows(CommandException.class, () -> deleteFirstAction.delete(descriptorWithoutEmail,
-                TypicalIndexes.INDEX_FIRST_PERSON));
+                TypicalIndexes.INDEX_SECOND_PERSON),
+                String.format(Messages.MESSAGE_INVALID_MULTIVALUED_FIELD_ENTRY_INDEX,
+                        TypicalIndexes.INDEX_SECOND_PERSON.getOneBased(), "an email", firstIndex.getOneBased()));
 
         DeleteEmailAction deleteTenthAction = new DeleteEmailAction(tenthIndex);
         DeletePersonDescriptor descriptorWithTwoEmails = new DeletePersonDescriptor(JACK);
         assertThrows(CommandException.class, () -> deleteTenthAction.delete(descriptorWithTwoEmails,
-                TypicalIndexes.INDEX_FIRST_PERSON));
+                TypicalIndexes.INDEX_THIRD_PERSON),
+                String.format(Messages.MESSAGE_INVALID_MULTIVALUED_FIELD_ENTRY_INDEX,
+                        TypicalIndexes.INDEX_THIRD_PERSON.getOneBased(), "an email", tenthIndex.getOneBased()));
     }
 
     @Test

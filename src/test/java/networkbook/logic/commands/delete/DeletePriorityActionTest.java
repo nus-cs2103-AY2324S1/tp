@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import org.junit.jupiter.api.Test;
 
 import networkbook.commons.core.index.Index;
+import networkbook.logic.Messages;
 import networkbook.logic.commands.exceptions.CommandException;
 import networkbook.model.person.Person;
 import networkbook.testutil.TypicalIndexes;
@@ -47,7 +48,9 @@ public class DeletePriorityActionTest {
                 JACK.getTags(),
                 null));
         assertThrows(CommandException.class, () ->
-                action.delete(descriptorWithoutPriority, TypicalIndexes.INDEX_FIRST_PERSON));
+                action.delete(descriptorWithoutPriority, TypicalIndexes.INDEX_FIRST_PERSON),
+                String.format(Messages.MESSAGE_DELETE_EMPTY_SINGLE_VALUED_FIELD,
+                        TypicalIndexes.INDEX_FIRST_PERSON.getOneBased(), "a priority"));
     }
 
     @Test

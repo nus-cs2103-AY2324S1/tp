@@ -1,14 +1,15 @@
 package networkbook.logic.commands.edit;
 
-import static networkbook.testutil.Assert.assertThrows;
 import static networkbook.testutil.Assert.assertThrowsAssertionError;
 import static networkbook.testutil.TypicalPersons.JACK;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
+import networkbook.logic.Messages;
 import networkbook.logic.commands.exceptions.CommandException;
 import networkbook.model.person.Person;
 import networkbook.model.person.Tag;
@@ -72,6 +73,9 @@ public class EditTagActionTest {
     public void edit_invalidEditAction_throwsCommandException() {
         EditPersonDescriptor actualDescriptor = new EditPersonDescriptor(JACK);
         assertThrows(CommandException.class, () -> SAMPLE_INVALID_EDIT_TAG_ACTION.edit(actualDescriptor,
-                TypicalIndexes.INDEX_FIRST_PERSON));
+                TypicalIndexes.INDEX_THIRD_PERSON),
+                String.format(Messages.MESSAGE_INVALID_MULTIVALUED_FIELD_ENTRY_INDEX,
+                        TypicalIndexes.INDEX_THIRD_PERSON.getOneBased(), "a tag",
+                        EditCommandUtil.INVALID_INDEX.getOneBased()));
     }
 }
