@@ -43,7 +43,7 @@ JobApplicationsBook Pro (JABPro) is a **desktop app for hiring managers of compa
 
     * `add linkedin 1 alexyeoh`: Adds LinkedIn account to candidate's existing contact information
 
-    * `github Alex Yeoh`: Redirects the user to the Github account of the candidate
+    * `github Alex Yeoh`: Redirects the user to the Github account of the candidate [provided github has been added previously]
 
 Refer to the [Features](#features) below for details of each command.
 
@@ -431,6 +431,9 @@ _Details coming soon ..._
  **List**                 | `list s/ATTRIBUTE` <br> e.g. `list s/name`    `hello`                                                                                                                 
  **Export**               | `export`                                                                                                                                                       
  **Help**                 | `help`
+ **Event**                | `event INDEX d/DESCRIPTION bt/START_TIME et/END_TIME`
+ **Schedule**             | `schedule`
+
 
 
 

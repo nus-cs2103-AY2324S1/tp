@@ -21,6 +21,10 @@ public class Messages {
     public static final String MESSAGE_ILLEGAL_TAG_SCORE = "Tag has not been attached to person! "
             + "Tag before attaching a score";
 
+    public static final String MESSAGE_INCORRECT_DATE_FORMAT =
+            "Date is not in correct format! \nRequired format: yyyy-MM-dd HH:mm";
+    public static final String MESSAGE_INVALID_DATES = "End time must be after start time!";
+
     /**
      * Returns an error message indicating the duplicate prefixes.
      */
