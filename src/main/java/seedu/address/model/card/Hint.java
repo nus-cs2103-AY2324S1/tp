@@ -8,7 +8,10 @@ public class Hint {
     public static final String MESSAGE_CONSTRAINTS =
             "Hints should only contain alphanumeric characters and some special characters" +
                     ", and it should not be blank";
+
+    // All special characters and spaces are allowed alongside alphanumeric characters
     public static final String VALIDATION_REGEX = "^[a-zA-Z0-9!@#$%^&*(),./?\"';:{}\\[\\]\\-=_+\\s]+$";
+
     /** Hint to be displayed to user when prompted */
     public final String hint;
 
@@ -79,7 +82,7 @@ public class Hint {
 
         @Override
         public String toString() {
-            return "Empty Hint";
+            return super.toString();
         }
     }
 }
