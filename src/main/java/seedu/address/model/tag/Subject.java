@@ -112,10 +112,6 @@ public class Subject {
         return subject != Subjects.INVALID;
     }
 
-    public void putToMapByMonth(Map<String, Integer> map) {
-
-    }
-
     /**
      * Getter method for subjectName
      * @return a string representation of subject name
