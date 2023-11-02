@@ -114,7 +114,7 @@ public class MemberTest {
                 + "Phone: " + ALAN_MEMBER.getPhone() + "\n"
                 + "Email: " + ALAN_MEMBER.getEmail() + "\n"
                 + "Telegram: " + ALAN_MEMBER.getTelegram() + "\n"
-                + "Tags: " + ALAN_MEMBER.getTags().stream().map(Tag::toString).collect(Collectors.joining(", "))
+                + "Tags: " + ALAN_MEMBER.getTags().stream().map(Tag::toString).collect(Collectors.joining(", ")) + "\n"
                 + "Tasks: " + ALAN_MEMBER.getTasks().stream().map(Task::toString).collect(Collectors.joining(", "));
         assertEquals(expected, ALAN_MEMBER.detailsToCopy());
     }
