@@ -6,7 +6,7 @@ import static seedu.application.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.application.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.application.logic.parser.CliSyntax.*;
 import static seedu.application.testutil.Assert.assertThrows;
-import static seedu.application.testutil.TypicalIndexes.INDEX_FIRST_JOB;
+import static seedu.application.testutil.TypicalIndexes.INDEX_FIRST;
 
 import java.util.Arrays;
 import java.util.List;
@@ -45,8 +45,8 @@ public class ApplicationBookParserTest {
     @Test
     public void parseCommand_delete() throws Exception {
         DeleteCommand command = (DeleteCommand) parser.parseCommand(
-            DeleteCommand.COMMAND_WORD + " " + INDEX_FIRST_JOB.getOneBased());
-        assertEquals(new DeleteCommand(INDEX_FIRST_JOB), command);
+            DeleteCommand.COMMAND_WORD + " " + INDEX_FIRST.getOneBased());
+        assertEquals(new DeleteCommand(INDEX_FIRST), command);
     }
 
     @Test
@@ -54,8 +54,8 @@ public class ApplicationBookParserTest {
         Job job = new JobBuilder().build();
         EditJobDescriptor descriptor = new EditJobDescriptorBuilder(job).build();
         EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
-            + INDEX_FIRST_JOB.getOneBased() + " " + JobUtil.getEditJobDescriptorDetails(descriptor));
-        assertEquals(new EditCommand(INDEX_FIRST_JOB, descriptor), command);
+            + INDEX_FIRST.getOneBased() + " " + JobUtil.getEditJobDescriptorDetails(descriptor));
+        assertEquals(new EditCommand(INDEX_FIRST, descriptor), command);
     }
 
     @Test

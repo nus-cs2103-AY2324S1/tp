@@ -12,9 +12,9 @@ import static seedu.application.logic.commands.CommandTestUtil.VALID_ROLE_CHEF;
 import static seedu.application.logic.parser.CliSyntax.PREFIX_COMPANY;
 import static seedu.application.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.application.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.application.testutil.TypicalIndexes.INDEX_FIRST_JOB;
-import static seedu.application.testutil.TypicalIndexes.INDEX_SECOND_JOB;
-import static seedu.application.testutil.TypicalIndexes.INDEX_THIRD_JOB;
+import static seedu.application.testutil.TypicalIndexes.INDEX_FIRST;
+import static seedu.application.testutil.TypicalIndexes.INDEX_SECOND;
+import static seedu.application.testutil.TypicalIndexes.INDEX_THIRD;
 
 import org.junit.jupiter.api.Test;
 
@@ -75,7 +75,7 @@ public class EditCommandParserTest {
 
     @Test
     public void parse_allFieldsSpecified_success() {
-        Index targetIndex = INDEX_SECOND_JOB;
+        Index targetIndex = INDEX_SECOND;
         String userInput = targetIndex.getOneBased() + COMPANY_DESC_CLEANER + ROLE_DESC_CHEF;
 
         EditJobDescriptor descriptor = new EditJobDescriptorBuilder().withRole(VALID_ROLE_CHEF)
@@ -88,7 +88,7 @@ public class EditCommandParserTest {
     // To be implemented once more fields are added
     @Test
     public void parse_someFieldsSpecified_success() {
-        Index targetIndex = INDEX_FIRST_JOB;
+        Index targetIndex = INDEX_FIRST;
         String userInput = targetIndex.getOneBased() + COMPANY_DESC_CLEANER + ROLE_DESC_CHEF;
 
         EditJobDescriptor descriptor = new EditJobDescriptorBuilder().withCompany(VALID_COMPANY_CLEANER)
@@ -101,7 +101,7 @@ public class EditCommandParserTest {
     @Test
     public void parse_oneFieldSpecified_success() {
         // role
-        Index targetIndex = INDEX_THIRD_JOB;
+        Index targetIndex = INDEX_THIRD;
         String userInput = targetIndex.getOneBased() + ROLE_DESC_CHEF;
         EditJobDescriptor descriptor = new EditJobDescriptorBuilder().withRole(VALID_ROLE_CHEF).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
@@ -121,7 +121,7 @@ public class EditCommandParserTest {
         // AddCommandParserTest#parse_repeatedNonTagValue_failure()
 
         // valid followed by invalid
-        Index targetIndex = INDEX_THIRD_JOB;
+        Index targetIndex = INDEX_THIRD;
         String userInput = targetIndex.getOneBased() + INVALID_COMPANY_DESC + COMPANY_DESC_CLEANER;
 
         assertParseFailure(parser, userInput, Messages.getErrorMessageForDuplicatePrefixes(PREFIX_COMPANY));

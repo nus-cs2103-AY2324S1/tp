@@ -13,6 +13,7 @@ import seedu.application.commons.core.LogsCenter;
 import seedu.application.commons.util.CollectionUtil;
 import seedu.application.model.job.FieldComparator;
 import seedu.application.model.job.Job;
+import seedu.application.model.job.interview.Interview;
 
 /**
  * Represents the in-memory model of the application book data.
@@ -97,6 +98,11 @@ public class ModelManager implements Model {
     @Override
     public void deleteJob(Job target) {
         applicationBook.removeJob(target);
+    }
+
+    @Override
+    public void deleteInterview(Job job, Interview interview) {
+        job.deleteInterview(interview);
     }
 
     @Override

@@ -19,7 +19,7 @@ public class InterviewAddCommand extends InterviewCommand {
     public static final String COMMAND_WORD = "add";
 
     public static final String MESSAGE_USAGE = InterviewCommand.COMMAND_WORD
-        + COMMAND_WORD + ": Adds an interview to the job. "
+        + " " + COMMAND_WORD + ": Adds an interview to the job. "
         + "Parameters: INDEX (must be a positive integer)\n"
         + PREFIX_INTERVIEW_TYPE + "INTERVIEW TYPE "
         + PREFIX_INTERVIEW_DATETIME + "INTERVIEW DATE AND TIME "

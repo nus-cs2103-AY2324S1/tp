@@ -12,6 +12,7 @@ import seedu.application.logic.Messages;
 import seedu.application.logic.commands.exceptions.CommandException;
 import seedu.application.model.Model;
 import seedu.application.model.job.Job;
+import seedu.application.model.job.interview.Interview;
 
 /**
  * Deletes an interview of a job in the application book.
@@ -63,8 +64,8 @@ public class InterviewDeleteCommand extends InterviewCommand {
         if (interviewIndex.getZeroBased() >= jobToDeleteInterview.interviewLength()) {
             throw new CommandException(Messages.MESSAGE_INVALID_INTERVIEW);
         }
-
-        jobToDeleteInterview.deleteInterview(interviewIndex);
+        Interview interviewToDelete = jobToDeleteInterview.getInterview(interviewIndex);
+        model.deleteInterview(jobToDeleteInterview, interviewToDelete);
         model.updateFilteredJobList(Model.PREDICATE_SHOW_ALL_JOBS);
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(jobToDeleteInterview)),
                 false, false, jobIndex);
@@ -100,8 +101,8 @@ public class InterviewDeleteCommand extends InterviewCommand {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("Job index", jobIndex)
-                .add("Interview index", interviewIndex)
+                .add("jobIndex", jobIndex)
+                .add("interviewIndex", interviewIndex)
                 .toString();
     }
 
