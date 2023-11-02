@@ -74,13 +74,7 @@ public class AddressBookManager implements ReadOnlyAddressBookManager {
     }
 
     public AddressBook getActiveAddressBook() {
-        if (this.currentAddressBook != null) {
-            return this.currentAddressBook;
-        }
-
-        return addressBooks.containsKey(activeCourseCode.get())
-                ? (AddressBook) addressBooks.get(activeCourseCode.get())
-                : new AddressBook(activeCourseCode.get());
+        return (AddressBook) addressBooks.get(getActiveCourseCode());
     }
 
     public void setAddressBook(ReadOnlyAddressBook addressBook) {
@@ -90,6 +84,8 @@ public class AddressBookManager implements ReadOnlyAddressBookManager {
         addAddressBook(addressBook);
         activeCourseCode.set(addressBook.getCourseCode());
         setActiveAddressBook(activeCourseCode.get());
+
+        internalCourseList.setAll(addressBooks.keySet());
     }
 
     public void setActiveAddressBook(String courseCode) {
@@ -120,6 +116,11 @@ public class AddressBookManager implements ReadOnlyAddressBookManager {
         requireAllNonNull(addressBook);
         internalCourseList.add(addressBook.getCourseCode());
         this.addressBooks.put(addressBook.getCourseCode(), addressBook);
+
+        if (Objects.equals(getActiveCourseCode(), null)) {
+            activeCourseCode.set(addressBook.getCourseCode());
+            setActiveAddressBook(getActiveCourseCode());
+        }
     }
 
     /**
@@ -130,6 +131,13 @@ public class AddressBookManager implements ReadOnlyAddressBookManager {
         requireNonNull(courseCode);
         internalCourseList.remove(courseCode.toUpperCase());
         this.addressBooks.remove(courseCode.toUpperCase());
+
+        if (internalCourseList.isEmpty()) {
+            activeCourseCode.set(null);
+            this.currentAddressBook = null;
+        } else if (courseCode.equals(getActiveCourseCode())) {
+            setActiveAddressBook(internalCourseList.get(0));
+        }
     }
 
     public ObservableList<String> getCourseList() {
@@ -166,7 +174,7 @@ public class AddressBookManager implements ReadOnlyAddressBookManager {
 
         AddressBookManager otherModelManager = (AddressBookManager) other;
         return addressBooks.equals(otherModelManager.addressBooks)
-                && currentAddressBook.equals(otherModelManager.currentAddressBook);
+                && Objects.equals(currentAddressBook, otherModelManager.currentAddressBook);
     }
 
     @Override

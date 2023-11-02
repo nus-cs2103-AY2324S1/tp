@@ -154,6 +154,7 @@ public class ModelManager implements Model {
     @Override
     public void deleteAddressBook(String courseCode) {
         addressBookManager.removeAddressBook(courseCode);
+        updateFilteredPersonList();
     }
 
     @Override
@@ -172,6 +173,11 @@ public class ModelManager implements Model {
         return addressBookManager.getCourseList();
     }
 
+    // TODO: Add @Override
+    public String getActiveCourseCode() {
+        return addressBookManager.getActiveCourseCode();
+    }
+
     @Override
     public ObservableStringValue getObservableCourseCode() {
         return addressBookManager.getObservableCourseCode();
@@ -179,6 +185,11 @@ public class ModelManager implements Model {
 
     //=========== Filtered Person List Accessors =============================================================
     private void updateFilteredPersonList() {
+        if (getActiveCourseCode() == null) {
+            uniquePersonList.setPersons(new UniquePersonList());
+            return;
+        }
+
         uniquePersonList.setPersons(getAddressBook().getPersonList());
     }
 
