@@ -32,6 +32,7 @@ public class MainWindow extends UiPart<Stage> {
     private HelpWindow helpWindow;
     private ExportWindow exportWindow;
     private ImportWindow importWindow;
+    private GoalBox goalBox;
     @FXML
     private StackPane commandBoxPlaceholder;
 
@@ -46,6 +47,9 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane statusbarPlaceholder;
+
+    @FXML
+    private StackPane goalBoxPlaceholder;
 
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
@@ -63,6 +67,8 @@ public class MainWindow extends UiPart<Stage> {
         helpWindow = new HelpWindow();
         exportWindow = new ExportWindow();
         importWindow = new ImportWindow(primaryStage);
+
+        this.goalBox = new GoalBox(logic.getGoal());
     }
 
     public Stage getPrimaryStage() {
@@ -85,6 +91,8 @@ public class MainWindow extends UiPart<Stage> {
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+
+        goalBoxPlaceholder.getChildren().add(goalBox.getRoot());
     }
 
     /**
