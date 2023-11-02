@@ -8,9 +8,12 @@ CheckMate is a **desktop app for streamlining the process of room bookings for h
 ## Table of Contents
 
 * Table of Contents
-  {:toc}
+{:toc}
 
 --------------------------------------------------------------------------------------------------------------------
+<details>
+<summary><strong>Quick start</strong></summary>
+<div markdown="1">
 
 ## Quick start
 
@@ -39,14 +42,19 @@ CheckMate is a **desktop app for streamlining the process of room bookings for h
 
     * `exit` : Exits CheckMate and closes the application.
 
-1. Refer to the [Features](#features) below for details of each command.
+6. Refer to the [Features](#features) below for details of each command.
 
+</div>
+</details>
 --------------------------------------------------------------------------------------------------------------------
+<details>
+<summary><strong>Formats</strong></summary>
+<div markdown="1">
 
 ## Input Formats
 
 <div markdown="block" class="alert alert-info">
-
+<details>
 ### Command Format
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
@@ -73,7 +81,12 @@ CheckMate is a **desktop app for streamlining the process of room bookings for h
 * `e/EMAIL`: `EMAIL` can be any String as long as it contains `@` inside the String.
 * `rm/REMARK`: `REMARK` can be any String less than or equal to 50 characters in length.
 
+</div>
+</details>
 --------------------------------------------------------------------------------------------------------------------
+<details>
+<summary><strong>Commands</strong></summary>
+<div markdown="1">
 
 ## Commands
 
@@ -192,6 +205,8 @@ Example:
 
 * `add` followed by `space` and `tab` results in `add r/1`.
 
+</div>
+</details>
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
