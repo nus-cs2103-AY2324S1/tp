@@ -30,8 +30,8 @@ public class Messages {
 
     public static final String MESSAGE_CARDS_PRACTISE_VIEW = "%1$s";
 
-    public static final String MESSAGE_RANDOM_INDEX_NOT_INITIALISED = "Random index cannot be used because " +
-            "you need to use the random command first.";
+    public static final String MESSAGE_RANDOM_INDEX_NOT_INITIALISED = "Random index cannot be used because "
+            + "you need to use the random command first.";
 
     /**
      * Returns an error message indicating the duplicate prefixes.
