@@ -32,15 +32,13 @@ public class RemoveMusicianFromBandCommandTest {
     @Test
     public void constructor_nullMusician_throwsNullPointerException() {
         Index bandIndex = Index.fromOneBased(1);
-        assertThrows(NullPointerException.class,
-            () -> new RemoveMusicianFromBandCommand(bandIndex, null));
+        assertThrows(NullPointerException.class, () -> new RemoveMusicianFromBandCommand(bandIndex, null));
     }
 
     @Test
     public void constructor_nullBand_throwsNullPointerException() {
         Index musicianIndex = Index.fromOneBased(1);
-        assertThrows(NullPointerException.class,
-            () -> new RemoveMusicianFromBandCommand(null, musicianIndex));
+        assertThrows(NullPointerException.class, () -> new RemoveMusicianFromBandCommand(null, musicianIndex));
     }
 
     @Test
