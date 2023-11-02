@@ -68,7 +68,7 @@ Choose a topic from the table of contents below to find out how to manage your c
 [↑ Back to Table of Contents](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
-## Reading the examples in this user guide
+# Reading the examples in this user guide
 
 The examples in this guide are formatted with the following conventions:
 * **Command** - The command to be typed into the command box.
@@ -80,20 +80,16 @@ The examples in this guide are formatted with the following conventions:
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Features
-### Quick notes about the command format
+# Features
+
+## Quick notes about the command format
 - Everything related to the command is case-sensitive unless otherwise stated.
 - Words in `UPPER_CASE` are the parameters to be supplied by the user. <br/> E.g., in `n/NAME`, `NAME` is a parameter which can be used as `n/John Doe`.
 - Parameters that are optional are indicated with square brackets `[OPTIONAL]`. <br/> E.g., in `[tg/TELEGRAM]`, `TELEGRAM` is an optional parameter which can be used as `tg/@john_doe` or omitted.
 - Parameters specified in the command can be written in any order. <br/> E.g., `n/John Doe tg/@john_doe` is equivalent to `tg/@john_doe n/John Doe`.
 - Optional parameters with `...` after the square bracket can be repeated any number of times, including zero. <br/> E.g., in `[tag/TAG]...`, multiple tags can be supplied as `tag/important tag/urgent` or omitted.
 
-[↑ Back to table of contents](#table-of-contents)
-
---------------------------------------------------------------------------------------------------------------------
-# Features
-
-### Viewing help: ***help***
+## Viewing help: ***help***
 
 Shows a message explaining how to access the user guide.
 
@@ -111,13 +107,13 @@ Shows a message explaining how to access the user guide.
 Your job as a salesperson starts with adding a client profile to Connectify. This is a one-time process for each client that has been made simple for you.
 Use the ***create*** command to add a client profile.
 
-#### Format
+**Format**
 ```text
 create n/NAME p/PHONE e/EMAIL a/ADDRESS [t/TAG]... [tg/TELEGRAM]
 [pf/PROFESSION] [i/INCOME] [d/DETAILS]
 ```
 
-#### Example
+**Example**
 ```text
 create n/Bernice Yu p/99272758 e/berniceyu@example.com
 a/Blk 30 Lorong 3 Serangoon Gardens, #07-18 t/colleagues
@@ -134,22 +130,19 @@ t/friends tg/@yuyubern pf/Graphic Designer i/60000
 
 You should directly see the client profile added to the list of clients in the application window. After adding a client profile, you can now perform various operations on the client profile as specified in the next few sections!
 
-#### Adding a client interaction: ***interaction***
+### Adding a client interaction: ***interaction***
 
 After adding a client profile, you can now log your interactions with the client.  Use the ***interaction*** command to add an interaction to a client profile.
 
-#### Format
+**Format**
 ```text
 interaction INDEX o/OUTCOME [DETAILS]
 ```
 where INDEX refers to the index of the client profile in the displayed list of clients.
 
-#### Examples
+**Examples**
 ```
-interaction 1 o/Meeting with client d/Client is interested in our products
-```
-```
-interaction 1 o/Meeting with client
+interaction 1 o/INTERESTED d/Client is interested in our products
 ```
 
 You should directly see the interaction added to the client profile in the application window.
@@ -169,7 +162,7 @@ This section contains multiple commands that allow you to view various details o
 
 Use the ***dashboard*** command to view a summarized information of all your clients and their interactions with you in a single place.
 
-#### Format
+**Format**
 ````text
 dashboard
 ````
@@ -224,6 +217,10 @@ view INDEX
 ```
 where INDEX refers to the index of the client profile in the displayed list of clients.
 
+[↑ Back to Table of Contents](#table-of-contents)
+
+--------------------------------------------------------------------------------------------------------------------
+
 ## Editing
 
 ### Editing a client profile: ***edit***
@@ -244,11 +241,19 @@ Example
 2. `edit 2 e/berniceyu@gmail.com p/123456789`
 3. `edit 3 t/buddies t/relatives`
 
-![Clients before editing](images/ExampleEditBefore.png)
-*Initial state of 4 contacts.*
+<figure>
+    <img src="images/ExampleEditBefore.png" alt="Clients before editing">
+    <figcaption align="center">
+        <em>Initial state of 4 contacts.</em>
+    </figcaption>
+</figure>
 
-![Clients after editing](images/ExampleEditAfter.png)
-*Result of running commands (1) to (3).*
+<figure>
+    <img src="images/ExampleEditAfter.png" alt="Clients after editing">
+    <figcaption align="center">
+        <em>Result of running commands (1) to (3).</em>
+    </figcaption>
+</figure>
 
 [↑ Back to Table of Contents](#table-of-contents)
 
@@ -282,32 +287,19 @@ delete 1
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Command summary
-### Add
-* Add a client profile: ***create***
-* Add a client interaction: ***interaction***
-
-### View
-* View the dashboard: ***dashboard***
-* View the list of clients: ***list***
-* Find a client by name: ***find***
-* View the full details of a client: ***view***
-
-### Edit
-* Edit a client profile: ***edit***
-
-### Delete
-* Delete a client profile: ***delete***
-
-### Exit
-* Exit the application: ***exit***
-
 # Command summary
 
-| Action     | Format                                                                                                            | Example                                                                                                                                                              |
-|------------|-------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Help       | `help`                                                                                                            | `help`                                                                                                                                                               |
-| Add Client | `create n/NAME p/PHONE e/EMAIL a/ADDRESS [t/TAG] [tg/TELEGRAM] [pf/PROFESSION] [i/INCOME] [d/DETAILS]`            | `create n/Bernice Yu p/99272758 e/berniceyu@example.com a/Blk 30 Lorong 3 Serangoon Gardens, #07-18 t/colleagues t/friends tg/@yuyubern pf/Graphic Designer i/60000` |
-| Edit Client| `edit INDEX [n/NAME] [e/EMAIL] [a/ADDRESS] [t/TAG] [l/LEAD] [tg/TELEGRAM] [pf/PROFESSION] [i/INCOME] [d/DETAILS]` |                                                                                                                                                                      |
+| Action              | Format                                                                                                            | Example                                                                                                                                                              |
+|---------------------|-------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Help                | `help`                                                                                                            | `help`                                                                                                                                                               |
+| Add Client          | `create n/NAME p/PHONE e/EMAIL a/ADDRESS [t/TAG] [tg/TELEGRAM] [pf/PROFESSION] [i/INCOME] [d/DETAILS]`            | `create n/Bernice Yu p/99272758 e/berniceyu@example.com a/Blk 30 Lorong 3 Serangoon Gardens, #07-18 t/colleagues t/friends tg/@yuyubern pf/Graphic Designer i/60000` |
+| Add Interaction     | `interaction INDEX o/OUTCOME [DETAILS]`                                                                           | `interaction 1 o/INTERESTED d/Client is interested in our products`                                                                                                  |
+| View Dashboard      | `dashboard`                                                                                                       | `dashboard`                                                                                                                                                          |                                                                                                                                                        |
+| View Client List    | `list`                                                                                                            | `list`                                                                                                                                                               |
+| Find Client         | `find NAME`                                                                                                       | `find Chemmy`                                                                                                                                                        |
+| View Client Details | `view INDEX`                                                                                                      | `view 1`                                                                                                                                                             |
+| Edit Client         | `edit INDEX [n/NAME] [e/EMAIL] [a/ADDRESS] [t/TAG] [l/LEAD] [tg/TELEGRAM] [pf/PROFESSION] [i/INCOME] [d/DETAILS]` | `edit 2 e/berniceyu@gmail.com p/123456789`                                                                                                                           |
+| Delete Client       | `delete INDEX`                                                                                                    | `delete 1`                                                                                                                                                           |
+| Exit                | `exit`                                                                                                            | `exit`                                                                                                                                                               |
 
 [↑ Back to Table of Contents](#table-of-contents)
