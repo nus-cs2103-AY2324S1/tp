@@ -22,11 +22,9 @@ public class YesCommandTest {
     private Model model = new ModelManager(getTypicalFlashlingo(), new UserPrefs());
     @Test
     public void execute_yes_success() {
-
-        Model expectedModel = new ModelManager(new Flashlingo(model.getFlashlingo()), new UserPrefs());
-
         assertThrows(CommandException.class, () -> new YesCommand().execute(model));
     }
+
     @Test
     public void equals() {
         YesCommand yesFirstCommand = new YesCommand();

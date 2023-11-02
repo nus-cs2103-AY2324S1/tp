@@ -33,6 +33,7 @@ public class NoCommand extends Command {
         requireNonNull(model);
         FlashCard response = model.nextReviewWord();
         response.updateLevel(false);
+        response.forgetFlashCard();
         if (!model.hasNextRound()) {
             SessionManager.getInstance().setSession(false);
             model.updateFilteredFlashCardList(PREDICATE_SHOW_ALL_FLASHCARDS);
