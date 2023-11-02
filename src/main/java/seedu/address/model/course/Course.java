@@ -7,8 +7,6 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
-import seedu.address.commons.util.ToStringBuilder;
-
 /**
  * Represents a course that the user is managing
  */
@@ -98,9 +96,6 @@ public class Course {
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this)
-                .add("name", name)
-                .add("lessons", lessons)
-                .toString();
+        return "Name:" + name + "\nLessons:" + lessons;
     }
 }

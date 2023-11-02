@@ -43,13 +43,13 @@ public class Messages {
                 .append(person.getEmail())
                 .append("; Telegram: ")
                 .append(person.getTelegram())
-                .append("; Free Time: ")
+                .append("; \nFree Time: ")
                 .append(person.getFreeTime())
-                .append("; Tags: ");
+                .append("Tags: ");
         person.getTags().forEach(builder::append);
-        builder.append("; Courses: ");
+        builder.append("; \nCourses:\n");
         person.getCourses().forEach(builder::append);
-        builder.append("; Work Hour: ")
+        builder.append("; \nWork Hour: ")
                 .append(person.getHour());
 
         return builder.toString();

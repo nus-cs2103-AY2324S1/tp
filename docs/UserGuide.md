@@ -110,6 +110,18 @@ When the command fails:
   and optionally end with an alphabet.`
 - Valid course code, but course not found: `Course not found.`
 
+### Reset the default course : `clearteach`
+
+Resets the default course in the address book.
+
+![clearteach command](images/clearteachCommand.png)
+
+Example: `clearteach`
+
+When the command succeeds:
+
+```Default course has been cleared.```
+
 ### Adding a Teaching Assistant: `add`
 
 Adds a new teaching assistant to the address book.
