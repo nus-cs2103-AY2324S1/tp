@@ -22,10 +22,10 @@ Given below are my contributions to the project.
   * What it does: For advanced user who wish to stylised their flashcard or are visual learners, having ways to differentiate
   words by having different style can greatly enhance their learning process.
   * Justification: It serves as a good supplementary function to enhance to current revision process for user.
-  * Highlights: Based on the syntax entered by the user, the corresponding styling will be reflected on 
+  * Highlights: Based on the syntax entered by the user, the corresponding styling will be reflected on
   the display card and the result view
   * Credits: Winson8222
-  
+
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=winson8222&breakdown=true)
 
 * **Project management**:
@@ -42,7 +42,7 @@ Given below are my contributions to the project.
 * **Documentation**:
   * User Guide:
     * Added documentations for the features `edit` and `add`.
-    * Added documentations for markdown support, including screenshots of the expected 
+    * Added documentations for markdown support, including screenshots of the expected
     output based on MarkDown syntax added in the command
 
 * **Community**:

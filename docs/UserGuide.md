@@ -41,7 +41,7 @@ Here are some benefits of adopting lesSON in your studying experience:
 2. Download the latest jar file from [here](https://github.com/AY2324S1-CS2103T-W17-4/tp/releases/tag/v1.3(trial)).
 3. Move the jar file installed to a working folder you would store all of your flashcards
 4. Launch lesson by doing the following:
-   1. In the terminal or command prompt, use the `cd` command to navigate to the working folder. 
+   1. In the terminal or command prompt, use the `cd` command to navigate to the working folder.
    [Not sure how to use cd?](https://www.ibm.com/docs/en/aix/7.2?topic=directories-changing-another-directory-cd-command)
    2. Run lesSON using `java -jar lesSON.jar`
 
@@ -72,9 +72,9 @@ Here is a quick overview of the user interface to get you oriented with where th
 
 ![gui_overview](./images/UserGuide/1.3_gui_overview.png)
 
-* Command Line Box - lesSON is optimised for typing commands. Type your commands in the command box 
+* Command Line Box - lesSON is optimised for typing commands. Type your commands in the command box
 to create and change flashcards!
-* Result Box - after inputting a command, the result will show up here. Any errors produced will also appear here, for 
+* Result Box - after inputting a command, the result will show up here. Any errors produced will also appear here, for
 instance in the event of a wrongfully formatted command.
 * Deck List - shows the list of flashcards
 
@@ -86,7 +86,7 @@ This tutorial explains how to add, edit, tag, and practise your flashcards. Feel
 For advanced users, feel free to look at the [feature list](#feature-list) instead.
 
 1. Firstly, let's add a card. type: <br>`add q/ what does + mean in boolean algebra? a/ it means OR.`
-2. Next, let's capitalise our previous input! Assuming the card is at index `1`, input: <br>`edit 1 q/ What does + mean in boolean 
+2. Next, let's capitalise our previous input! Assuming the card is at index `1`, input: <br>`edit 1 q/ What does + mean in boolean
 algebra? a/ It means OR.`
 3. Next, let's tag it under the module CS1231S by inputting: <br>`edit 1 t/CS1231S`
 4. Feel free to add a few more cards by following steps 1 to 3!
@@ -96,9 +96,9 @@ algebra? a/ It means OR.`
 `set d/easy`
 `set d/medium`
 `set d/hard`
-8. The card will automatically be reinserted into deck. This is based on how difficult you found the card. Due to our 
+8. The card will automatically be reinserted into deck. This is based on how difficult you found the card. Due to our
 spaced repetition system, as you practise, the more difficult cards will surface more at the top.
-9. Note that the `practise`, `solve`, and `set` commands support indexes, but it is recommended to use them without 
+9. Note that the `practise`, `solve`, and `set` commands support indexes, but it is recommended to use them without
 indexes, as in this tutorial, to always operate on the most difficult card.
 
 --------------------------------------------------------------------------------------------------------------------
@@ -109,7 +109,7 @@ indexes, as in this tutorial, to always operate on the most difficult card.
 
 Adds a flashcard to the deck for the user.
 
-**Format:** 
+**Format:**
 
 `add q/question a/answer [t/TAG]`
 
@@ -140,7 +140,7 @@ _A flashcard with a question, answer and tag field._
        add: Adds a card to the deck. Parameters: q/QUESTION a/ANSWER
       ```
 #### Usage
-1. User Input: `add q/ opcode for R format instructions a/ 000000 t/ CS2100 t/ MIPS` 
+1. User Input: `add q/ opcode for R format instructions a/ 000000 t/ CS2100 t/ MIPS`
 
 2. Successful Output
 
@@ -150,7 +150,7 @@ _A flashcard with a question, answer and tag field._
 ### Deleting a Flashcard : `delete`
 Deletes a flashcard in the deck
 
-**Format:** 
+**Format:**
 
 `delete INDEX`
 
@@ -384,5 +384,5 @@ edit 1 q/ How many bits can a <u>Half Adder</u> add up
 # Frequently Asked Questions
 
 ### I can't run lesSON! What should I do?
-Please check that you have correctly installed lesSON by following the instructions [here](#installation). For further 
+Please check that you have correctly installed lesSON by following the instructions [here](#installation). For further
 queries, feel free to contact us!
