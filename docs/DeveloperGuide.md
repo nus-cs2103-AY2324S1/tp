@@ -178,7 +178,7 @@ which is called after every command except `find` command is returned. The reaso
 the pie chart is generated using the filteredList returned after every command, and since `find` generates a filteredList
 based on the user's input, we do not want to update the pie chart with only the Bookings that fit the user's input.
 
-The following sequence diagram provides a visual representation of the piec chart being updated after each command result is returned:
+The following sequence diagram provides a visual representation of the pie chart being updated after each command result is returned:
 
 ![](images/PieChartSequenceDiagram.png)
 
@@ -194,10 +194,9 @@ The following sequence diagram provides a visual representation of the piec char
     - Pros: Reduces chances of regressions occuring when more complex commands are added as updating the pie chart only relies on any changes to the Bookings list.
     - Cons: Demands a more complex implementation.
 
-**Aspect: Indication of prefix autocomplete failures:**
-
-- **Choice:** Show pie chart (will add more soon)
-    - Pros: Visually noticeable to users as they can see if there is no change to the pie chart when there should be.
+**Aspect: Indication of room pie chart failures:**
+- **Choice:** Show pie chart
+    - Pros: Visually noticeable to users as they can see if there is no change to the pie chart when there should be or the pie chart is not shown at all.
     - Cons: Users may somehow not notice that the pie chart is not changing.
 
 ### Prefix Autocomplete
@@ -212,7 +211,7 @@ The primary functions of the class include:
 
 `PrefixCompletion` is used in the `CommandBox` class. When the user presses the `TAB` key, the `handleTabPressed` method is invoked, which runs the `PrefixCompletion` to auto-complete the user's current input.
 
-Given below is an example usage senario and how the prefix completion mechanism behaves at each step.
+Given below is an example usage scenario and how the prefix completion mechanism behaves at each step.
 
 1. The user starts typing a command in the command box.
 2. Upon pressing the `TAB` key, the current text in the command box is passed to the `PrefixCompletion#getNextCompletion` method.
@@ -231,8 +230,8 @@ The following sequence diagram provides a visual representation of the prefix au
 - **Choice:** Uses a predefined list of prefixes and examples for each command.
     - Pros: Simplified implementation. Easy to maintain and update.
     - Cons:
-      - Limited to predefined prefixes and commands.
-      - Subject to manual change when prefix changes.
+      -Limited to predefined prefixes and commands.
+      -Subject to manual change when prefix changes.
 
 - **Alternative:** Dynamically generate example suggestions based on user's history or frequently used parameter.
     - Pros: Offers more personalized and relevant suggestions.
@@ -279,8 +278,8 @@ The following sequence diagram provides a visual representation of the prefix au
 - **Choice:** Utilize the RoomType enumeration within the Room class.
     - Pros: Ensures clear and centralized room type definitions, simplifying updates and maintenance.
     - Cons:
-        - The static nature of enumeration can limit flexibility, making it harder to adapt to dynamic changes.
-        - The direct association between room numbers and types might not easily support modifications in room categorization.
+        -The static nature of enumeration can limit flexibility, making it harder to adapt to dynamic changes.
+        -The direct association between room numbers and types might not easily support modifications in room categorization.
 
 - **Alternative:** Implement a separate RoomType class with dynamic properties.
     - Pros: Adds the ability to handle dynamic changes and offers potential for future scalability.
@@ -291,19 +290,87 @@ The following sequence diagram provides a visual representation of the prefix au
 - **Choice:** Create RoomTypeTag objects from the names of RoomType enumeration constants.
     - Pros: This direct conversion guarantees that the data model aligns seamlessly with the UI's visual elements.
     - Cons:
-        - Utilizes the RoomTypeTag class, which may have been initially intended for a broader tagging purpose.
-        - Could lead to unnecessary complexity if the RoomTypeTag class functionality significantly overlaps with the RoomType enumeration.
+        -Utilizes the RoomTypeTag class, which may have been initially intended for a broader tagging purpose.
+        -Could lead to unnecessary complexity if the RoomTypeTag class functionality significantly overlaps with the RoomType enumeration.
 
 - **Alternative:** Design a specialized UI component dedicated to room types.
     - Pros: Enables custom behavior and appearance specific to room type representation.
     - Cons: Requires additional development work and may result in code redundancy if not carefully integrated with the existing UI components.
+
+### JSON Injection Parser
+
+#### Implementation
+
+The JSON Injection Parser is facilitated by the `JsonInjectionParser` class. It is simply the first parser to be used when parsing through the user input, meant to prevent the user
+from inputting possible JSON commands that may be executed when dealing with storing or retrieving memory from the JSON file.
+
+The primary functions of the class include:
+
+- `parse(String args) throws ParseException` - Parses through the user input to check if the input contains any escape characters or characters that could be used to form a JSON command,
+and throws a ParseException if the input does contain any of the banned characters.
+
+The following sequence diagram provides a visual representation of the JsonInjectionParser.parse() method being used after a command is passed to Logic.
+
+![](images/JsonInjectionParserSequenceDiagram.png)
+
+#### Design Considerations:
+
+**Aspect: Execution of parse():**
+
+- **Choice:** Prevent the user from inputting any characters that may constitute a JSON command.
+    - Pros: Simple to implement.
+    - Cons: This may cause inconvenience to the user.
+
+- **Alternative:** Sanitise the input, ie: remove the banned characters from the input and execute the command.
+    - Pros: Less inconvenience to the user.
+    - Cons:
+        -More complex implementation.
+        -Due to the input having some characters removed, the command may either may no sense at all, or in successful execution the details of the command may not make sense to the user at all.
+
+### Flag and Unflag Command
+
+#### Implementation
+
+The flag and unflag commands are facilitated by the `FlagCommand` class and the `UnflagCommand` class respectively.
+The flag command essentially allows the user to `flag` a booking, which keeps the booking at the top of the `Current Bookings` list,
+and has an image of a red flag in the pane to indicate that it is flagged. The unflag command then does the opposite by removing the 
+flagged booking from the top of the list and places it back in the list according to increasing room number, and it also removes the 
+image of the red flag from the pane. The behaviour of these commands are very similar to the flag feature in Microsoft Outlook.
+
+The primary functions of the class include:
+
+- `execute(Model model)` - executes the flag and unflag commands.
+
+Given below is an example usage scenario and how the flag command behaves at each step.
+
+1. The user wants to keep a certain booking at the top of the `Current Bookings` list to edit some details at a later time as they are currently pre-occupied with other tasks.
+2. The user then types in `flag` followed by a space and the index number of the target booking in the `Current Bookings` list.
+3. The booking is then put at the top of the `Current Bookings` list, and has an image of a red flag.
+4. Once the user is done with their other tasks and have edited the flagged booking, they can then
+   type in `unflag` followed by a space and the index number of the target booking in the `Current Bookings` list.
+5. The booking is then put back in order according to its room number in the `Current Bookings` list, and the image of the red flag is removed.
+
+The following sequence diagram provides a visual representation of the flag/unflag commands:
+
+![](images/FlagAndUnflagCommandsSequenceDiagram.png)
+
+#### Design Considerations:
+
+**Aspect: Implementation of flags within Booking objects:**
+
+- **Choice:** Uses a private boolean primitive within Booking objects to indicate whether a Booking is flagged.
+    - Pros: Simplified implementation. The default setting of the boolean flag is `false` when a new Booking object is instantiated.
+    - Cons: Does not use OOP, which means that if any developer wants to make any changes to the `flag`, they will have to change it directly inside the Booking class.
+
+- **Alternative:** Create a flag class and use composition such that a Booking 'has-a' flag.
+    - Pros: Uses OOP and abstraction, meaning that if a developer wants to make changes to the flag class in the future, it is simple.
+    - Cons: Demands a more complex implementation, and if not coded defensively, the flag object may be modified.
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Requirements**
 
 ### Product scope
-
 **Target User profile**
 
 * Hotel employees, especially those in administrative and management roles.
