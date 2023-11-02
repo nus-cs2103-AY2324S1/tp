@@ -163,6 +163,13 @@ public class AddressBook implements ReadOnlyAddressBook {
         appointments.sort(isAscending, attribute);
     }
 
+    /**
+     * Sorts patient list.
+     */
+    public void sortPatientList(boolean isAscending, String attribute) {
+        persons.sort(isAscending, attribute);
+    }
+
 
     //// util methods
 

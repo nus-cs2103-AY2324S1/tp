@@ -154,4 +154,8 @@ public interface Model {
      * Sorts appointments in {@code isAscending} order of {@code attribute}.
      */
     void sortAppointmentList(boolean isAscending, String attribute);
+    /**
+     * Sorts patients in {@code isAscending} order of {@code attribute}.
+     */
+    void sortPatientList(boolean isAscending, String attribute);
 }

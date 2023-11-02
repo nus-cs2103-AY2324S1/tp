@@ -252,4 +252,8 @@ public class ModelManager implements Model {
     public void sortAppointmentList(boolean isAscending, String attribute) {
         addressBook.sortAppointmentList(isAscending, attribute);
     }
+    @Override
+    public void sortPatientList(boolean isAscending, String attribute) {
+        addressBook.sortPatientList(isAscending, attribute);
+    }
 }

@@ -1,6 +1,7 @@
 package seedu.address.model.person;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -10,12 +11,13 @@ import java.time.format.DateTimeParseException;
  * Represents a Person's birthdate in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidBirthdate(String)}
  */
-public class Birthdate {
+public class Birthdate implements Comparable<Birthdate> {
     public static final String MESSAGE_CONSTRAINTS = "Birthdates should be of the form YYYY/MM/DD";
 
     public static final DateTimeFormatter FORMAT = DateTimeFormatter.ofPattern("yyyy/MM/dd");
 
     public final String value;
+    public final LocalDate birthdate;
 
     /**
      * Constructs an {@code Birthdate}.
@@ -24,7 +26,9 @@ public class Birthdate {
      */
     public Birthdate(String birthdate) {
         requireNonNull(birthdate);
-        value = birthdate;
+        checkArgument(isValidBirthdate(birthdate), MESSAGE_CONSTRAINTS);
+        this.value = birthdate;
+        this.birthdate = LocalDate.parse(birthdate, FORMAT);
     }
 
     /**
@@ -41,7 +45,7 @@ public class Birthdate {
 
     @Override
     public String toString() {
-        return value;
+        return value.toString();
     }
 
     @Override
@@ -54,5 +58,10 @@ public class Birthdate {
     @Override
     public int hashCode() {
         return value.hashCode();
+    }
+
+    @Override
+    public int compareTo(Birthdate birthdate) {
+        return this.birthdate.compareTo(birthdate.birthdate);
     }
 }

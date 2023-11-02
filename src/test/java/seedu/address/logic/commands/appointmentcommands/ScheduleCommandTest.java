@@ -203,6 +203,11 @@ public class ScheduleCommandTest {
         public void sortAppointmentList(boolean isAscending, String attribute) {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public void sortPatientList(boolean isAscending, String attribute) {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     /**
