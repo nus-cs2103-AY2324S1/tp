@@ -79,22 +79,6 @@ public class AddContactEventCommand extends Command {
                 personToEdit.getName(), Messages.format(event)));
     }
 
-    /**
-     * Creates and returns a {@code Person} with the new Calendar {@code calendar}
-     * edited with {@code event}.
-     */
-    private static Person createEditedPerson(Person personToEdit, Calendar calendar) {
-        assert personToEdit != null;
-
-        Name updatedName = personToEdit.getName();
-        Phone updatedPhone = personToEdit.getPhone();
-        Email updatedEmail = personToEdit.getEmail();
-        Address updatedAddress = personToEdit.getAddress();
-        Set<Tag> updatedTags = personToEdit.getTags();
-
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, calendar);
-    }
-
     @Override
     public boolean equals(Object other) {
         if (other == this) {
