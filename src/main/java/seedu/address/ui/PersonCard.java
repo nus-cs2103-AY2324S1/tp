@@ -63,6 +63,7 @@ public class PersonCard extends UiPart<Region> {
         subject.setText(person.getSubject().value);
         lesson.setText(person.getLesson().toString());
         payRate.setText("rate: " + person.getPayRate().toString() + "/h");
+
         if (person.getPaid()) {
             paid.setText("paid");
         } else {
