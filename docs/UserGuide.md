@@ -21,13 +21,15 @@ title: User Guide
 
 # Introduction
 
-InterviewHub (IH) is a **desktop app for engineering manager to schedule job interviews and manage applicants**.
+Tired of sending out offers to the best candidates, just to receive a disappointing reply that they have already accepted another offer that was sent out before yours?
 
-It is optimized for use via a **Command Line Interface** (CLI) while still having the benefits of a **Graphical User Interface (GUI)**.
+**InterviewHub**  is a desktop app for engineering manager to schedule job interviews and manage applicants.
+By optimizing recruitment workflows, we enable faster decision-making, helping you secure top talent before your competitors.
 
-If you can type fast, IH can get your Interview management tasks done faster than traditional GUI apps.
+It is optimized for use via a **Command Line Interface** (CLI) while still having the benefits of a **Graphical User Interface** (GUI).
+If you can type fast, **InterviewHub** can get your Interview management tasks done faster than traditional GUI apps.
 
-Let's get started by following the [Quick Start](#quick-start) section!
+What are you waiting for? Let's get started using **InterviewHub** by following the [Quick Start](#quick-start) section!
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -100,7 +102,10 @@ Examples:
 
 Adds an interview to the address book.
 
-Format: `add-i app/APPLICANT_ID jr/JOB_ROLE time/INTERVIEW_DATETIME`
+Format: `add-i app/APPLICANT_ID jr/JOB_ROLE start/START_DATE_AND_TIME end/END_DATE_AND_TIME`
+
+:information_source: JOB_ROLE allows empty strings to be entered to handle situations where the applicant is applying
+to the company in general.
 
 * List of accepted date formats:
   * Day and time: 
@@ -137,15 +142,16 @@ Format: `add-i app/APPLICANT_ID jr/JOB_ROLE time/INTERVIEW_DATETIME`
     * `16/05 3.15pm`
     * `16/05 3pm`
 
-* Other features:
+* Expected outputs:
   * When the user enters the date properly: `added <interview description> at <time>`
+  * When the applicant index provided is invalid: `The applicant index provided is invalid`
   * When the user does not input a valid date: `“Please specify a valid date!”`
   * When the user inputs a valid date without a time: `"Please enter an interview time!"`
   * When the user enters a valid date in the past: `<todo>`
   * When there is an interview clash: `“Oops! You have an <insert interview object> scheduled at <from date & by date>`
 
 Examples:
-* `add-i app/18 jr/software engineer time/2023-10-24 18:00`
+* `add-i app/3 jr/software engineer start/11-12-2023 1400 end/11-12-2023 1500`
 
 ## Listing all applicants : `list-a`
 
@@ -166,7 +172,7 @@ Edits an existing applicant in the address book.
 Format: `edit-a APPLICANT_INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]`
 
 * Edits the person at the specified `APPLICANT_INDEX`. The index refers to the index number shown in the displayed applicant list.
-* The index **must be a positive integer** 1, 2, 3, …​
+* The index **must be a positive integer** 1, 2, 3, …​ The upper limit of valid integers is the number of applicants currently displayed in the applicant list
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 
@@ -178,10 +184,10 @@ Examples:
 
 Edit an existing interview in the address book.
 
-Format: `edit-i INTERVIEW_INDEX [app/APPLICANT_ID] [jr/JOB_TITLE] [time/INTERVIEW_DATETIME]`
+Format: `edit-i INTERVIEW_INDEX [app/APPLICANT_ID] [jr/JOB_TITLE] [start/START_DATE_AND_TIME] [end/END_DATE_AND_TIME]`
 
 * Edits the interview at the specified `INTERVIEW_INDEX`. The index refers to the index number shown in the displayed interview list.
-* The index **must be a positive integer** 1, 2, 3, …​
+* The index **must be a positive integer** 1, 2, 3, …​ The upper limit of valid integers is the number of interviews currently displayed in the interview list
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 
@@ -197,7 +203,7 @@ Format: `delete-a INDEX`
 
 * Deletes the applicant at the specified `INDEX`.
 * The index refers to the index number shown in the displayed applicant list.
-* The index **must be a positive integer** 1, 2, 3, …​
+* The index **must be a positive integer** 1, 2, 3, …​ The upper limit of valid integers is the number of applicants currently displayed in the applicant list
 
 Examples:
 * `delete-a 1` deletes the 1st applicant in the address book.
@@ -210,7 +216,7 @@ Format: `delete-i INDEX`
 
 * Deletes the interview at the specified `INDEX`.
 * The index refers to the index number shown in the displayed interview list.
-* The index **must be a positive integer** 1, 2, 3, …​
+* The index **must be a positive integer** 1, 2, 3, …​ The upper limit of valid integers is the number of interviews currently displayed in the interview list
 
 Examples:
 * `delete-i 1` deletes the 1st interview in the address book.
@@ -263,7 +269,7 @@ Format: `rate INDEX RATING`
 
 * Rates the interview at the specified `INDEX`.
 * The index refers to the index number shown in the displayed interview list.
-* The index **must be a positive integer** 1, 2, 3, …​
+* The index **must be a positive integer** 1, 2, 3, …​ The upper limit of valid integers is the number of interviews currently displayed in the interview list
 * The `RATING` must be a non-negative one decimal place number between 0.0 to 5.0 inclusive.
 
 Examples:
