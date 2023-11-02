@@ -24,7 +24,6 @@ import seedu.ccacommander.logic.Messages;
 import seedu.ccacommander.logic.commands.exceptions.CommandException;
 import seedu.ccacommander.model.Model;
 import seedu.ccacommander.model.enrolment.Enrolment;
-import seedu.ccacommander.model.enrolment.EnrolmentContainsMemberPredicate;
 import seedu.ccacommander.model.member.Address;
 import seedu.ccacommander.model.member.Email;
 import seedu.ccacommander.model.member.Gender;
@@ -94,14 +93,16 @@ public class EditMemberCommand extends Command {
         Name newName = editedMember.getName();
         // If member's name is edited, the corresponding enrolment objects are edited also
         if (!prevName.equals(newName)) {
-            // update filtered enrolment list to contain only the enrolments that has member of previous name
-            model.updateFilteredEnrolmentList(new EnrolmentContainsMemberPredicate(prevName));
-            List<Enrolment> enrolmentsToEditList = model.getFilteredEnrolmentList();
+            // update filtered enrolment list to show all the enrolments
             model.updateFilteredEnrolmentList(PREDICATE_SHOW_ALL_ENROLMENTS);
-            for (Enrolment enrolment: enrolmentsToEditList) {
-                Enrolment editedEnrolment = new Enrolment(newName, enrolment.getEventName(),
-                        enrolment.getHours(), enrolment.getRemark());
-                model.setEnrolment(enrolment, editedEnrolment);
+            // get the enrolments list then loop through to edit matching enrolments
+            List<Enrolment> enrolmentList = model.getFilteredEnrolmentList();
+            for (Enrolment enrolment: enrolmentList) {
+                if (enrolment.getMemberName().equals(prevName)) {
+                    Enrolment editedEnrolment = new Enrolment(newName, enrolment.getEventName(),
+                            enrolment.getHours(), enrolment.getRemark());
+                    model.setEnrolment(enrolment, editedEnrolment);
+                }
             }
         }
 

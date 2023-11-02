@@ -22,7 +22,6 @@ import seedu.ccacommander.logic.Messages;
 import seedu.ccacommander.logic.commands.exceptions.CommandException;
 import seedu.ccacommander.model.Model;
 import seedu.ccacommander.model.enrolment.Enrolment;
-import seedu.ccacommander.model.enrolment.EnrolmentContainsEventPredicate;
 import seedu.ccacommander.model.event.Event;
 import seedu.ccacommander.model.event.EventDate;
 import seedu.ccacommander.model.event.Location;
@@ -89,15 +88,16 @@ public class EditEventCommand extends Command {
         Name newName = editedEvent.getName();
 
         if (!prevName.equals(newName)) {
-            // update filtered enrolment list to contain only the enrolments that has event of previous name
-            model.updateFilteredEnrolmentList(new EnrolmentContainsEventPredicate(prevName));
-            List<Enrolment> enrolmentsToEditList = model.getFilteredEnrolmentList();
+            // update filtered enrolment list to show all the enrolments
             model.updateFilteredEnrolmentList(PREDICATE_SHOW_ALL_ENROLMENTS);
-            for (Enrolment enrolment: enrolmentsToEditList) {
-                Enrolment editedEnrolment = new Enrolment(enrolment.getMemberName(), newName,
-                        enrolment.getHours(), enrolment.getRemark());
-
-                model.setEnrolment(enrolment, editedEnrolment);
+            // get the enrolments list then loop through to edit matching enrolments
+            List<Enrolment> enrolmentList = model.getFilteredEnrolmentList();
+            for (Enrolment enrolment: enrolmentList) {
+                if (enrolment.getEventName().equals(prevName)) {
+                    Enrolment editedEnrolment = new Enrolment(enrolment.getMemberName(), newName,
+                            enrolment.getHours(), enrolment.getRemark());
+                    model.setEnrolment(enrolment, editedEnrolment);
+                }
             }
         }
 

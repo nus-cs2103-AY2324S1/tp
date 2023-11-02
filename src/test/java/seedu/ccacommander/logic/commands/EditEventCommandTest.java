@@ -11,6 +11,7 @@ import static seedu.ccacommander.logic.commands.CommandTestUtil.VALID_TAG_AURORA
 import static seedu.ccacommander.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.ccacommander.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.ccacommander.logic.commands.CommandTestUtil.showEventAtIndex;
+import static seedu.ccacommander.model.Model.PREDICATE_SHOW_ALL_ENROLMENTS;
 import static seedu.ccacommander.testutil.TypicalCcaCommander.getTypicalCcaCommander;
 import static seedu.ccacommander.testutil.TypicalIndexes.INDEX_FIRST_EVENT;
 import static seedu.ccacommander.testutil.TypicalIndexes.INDEX_SECOND_EVENT;
@@ -27,7 +28,6 @@ import seedu.ccacommander.model.Model;
 import seedu.ccacommander.model.ModelManager;
 import seedu.ccacommander.model.UserPrefs;
 import seedu.ccacommander.model.enrolment.Enrolment;
-import seedu.ccacommander.model.enrolment.EnrolmentContainsEventPredicate;
 import seedu.ccacommander.model.event.Event;
 import seedu.ccacommander.model.shared.Name;
 import seedu.ccacommander.testutil.EditEventDescriptorBuilder;
@@ -59,20 +59,18 @@ public class EditEventCommandTest {
 
         // If event's name is edited, the corresponding enrolment objects are edited also
         if (!prevName.equals(newName)) {
-            // update filtered enrolment list to contain only the enrolments that has event of previous name
-            expectedModel.updateFilteredEnrolmentList(new EnrolmentContainsEventPredicate(prevName));
-
-            List<Enrolment> enrolmentsToEditList = expectedModel.getFilteredEnrolmentList();
-            expectedModel.updateFilteredEnrolmentList(Model.PREDICATE_SHOW_ALL_ENROLMENTS);
-
-            if (!enrolmentsToEditList.isEmpty()) {
-                for (Enrolment enrolment : enrolmentsToEditList) {
+            // update filtered enrolment list to contain only the enrolments that has member of previous name
+            expectedModel.updateFilteredEnrolmentList(PREDICATE_SHOW_ALL_ENROLMENTS);
+            List<Enrolment> enrolmentList = expectedModel.getFilteredEnrolmentList();
+            for (Enrolment enrolment : enrolmentList) {
+                if (enrolment.getEventName().equals(prevName)) {
                     Enrolment editedEnrolment = new Enrolment(enrolment.getMemberName(), newName,
                             enrolment.getHours(), enrolment.getRemark());
                     expectedModel.setEnrolment(enrolment, editedEnrolment);
                 }
             }
         }
+
         assertCommandSuccess(editEventCommand, model, expectedMessage, expectedModel);
     }
 
@@ -100,16 +98,16 @@ public class EditEventCommandTest {
         Name newName = editedEvent.getName();
 
         if (!prevName.equals(newName)) {
-            // update filtered enrolment list to contain only the enrolments that has event of previous name
-            expectedModel.updateFilteredEnrolmentList(new EnrolmentContainsEventPredicate(prevName));
-            List<Enrolment> enrolmentsToEditList = expectedModel.getFilteredEnrolmentList();
-            expectedModel.updateFilteredEnrolmentList(Model.PREDICATE_SHOW_ALL_ENROLMENTS);
-            for (Enrolment enrolment : enrolmentsToEditList) {
-                Enrolment editedEnrolment = new Enrolment(enrolment.getMemberName(), newName,
+            // update filtered enrolment list to contain only the enrolments that has member of previous name
+            expectedModel.updateFilteredEnrolmentList(PREDICATE_SHOW_ALL_ENROLMENTS);
+            List<Enrolment> enrolmentList = expectedModel.getFilteredEnrolmentList();
+            for (Enrolment enrolment : enrolmentList) {
+                if (enrolment.getEventName().equals(prevName)) {
+                    Enrolment editedEnrolment = new Enrolment(enrolment.getMemberName(), newName,
                             enrolment.getHours(), enrolment.getRemark());
-                expectedModel.setEnrolment(enrolment, editedEnrolment);
+                    expectedModel.setEnrolment(enrolment, editedEnrolment);
+                }
             }
-
         }
         expectedModel.commit(commitMessage);
 
@@ -153,16 +151,16 @@ public class EditEventCommandTest {
         Name newName = editedEvent.getName();
 
         if (!prevName.equals(newName)) {
-            // update filtered enrolment list to contain only the enrolments that has event of previous name
-            expectedModel.updateFilteredEnrolmentList(new EnrolmentContainsEventPredicate(prevName));
-            List<Enrolment> enrolmentsToEditList = expectedModel.getFilteredEnrolmentList();
-            expectedModel.updateFilteredEnrolmentList(Model.PREDICATE_SHOW_ALL_ENROLMENTS);
-            for (Enrolment enrolment : enrolmentsToEditList) {
-                Enrolment editedEnrolment = new Enrolment(enrolment.getMemberName(), newName,
-                        enrolment.getHours(), enrolment.getRemark());
-                expectedModel.setEnrolment(enrolment, editedEnrolment);
+            // update filtered enrolment list to contain all enrolments
+            expectedModel.updateFilteredEnrolmentList(PREDICATE_SHOW_ALL_ENROLMENTS);
+            List<Enrolment> enrolmentList = expectedModel.getFilteredEnrolmentList();
+            for (Enrolment enrolment : enrolmentList) {
+                if (enrolment.getEventName().equals(prevName)) {
+                    Enrolment editedEnrolment = new Enrolment(enrolment.getMemberName(), newName,
+                            enrolment.getHours(), enrolment.getRemark());
+                    expectedModel.setEnrolment(enrolment, editedEnrolment);
+                }
             }
-
         }
         assertCommandSuccess(editEventCommand, model, expectedMessage, expectedModel);
     }
