@@ -203,14 +203,15 @@ e.g. `find Bee John` will match the names `Amy Bee` and `John Doe`.
 
 ### Filtering by tag: `filter`
 
-Search and display contacts with tag matching the given keywords (case-insensitive).
+Shows contacts with a tag that fully matches the specified tag (case-insensitive).
 
 **Format:**
-`filter KEYWORDS`
+`filter TAG`
 
-**Example:**
+**Examples:**
 
 - `filter NUS`
+- `filter CS2103 course`
 
 ### Viewing help: `help`
 
