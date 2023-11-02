@@ -107,4 +107,8 @@ public class Name extends ListEntryField {
         }
     }
 
+    public boolean contains(Name name) {
+        return fullName.contains(name.fullName);
+    }
+
 }
