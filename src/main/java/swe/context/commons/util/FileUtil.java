@@ -1,10 +1,13 @@
 package swe.context.commons.util;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.InvalidPathException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+
+import swe.context.annotation.Nullable;
 
 
 
@@ -27,11 +30,11 @@ public class FileUtil {
      * Will create the parent folders/file if they do not exist yet.
      */
     public static void writeToFile(Path path, String content) throws IOException {
-        // File file = path.toFile();
-        // @Nullable File parentFolder = file.getParentFile();
-        // if (parentFolder != null) {
-        //     parentFolder.mkdirs();
-        // }
+        File file = path.toFile();
+        @Nullable File parentFolder = file.getParentFile();
+        if (parentFolder != null) {
+            parentFolder.mkdirs();
+        }
 
         Files.write(path, content.getBytes(CHARSET));
     }
