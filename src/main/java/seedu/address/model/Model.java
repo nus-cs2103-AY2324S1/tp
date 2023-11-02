@@ -8,6 +8,7 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.index.Index;
 import seedu.address.model.card.Card;
 import seedu.address.model.exceptions.RandomIndexNotInitialisedException;
+import seedu.address.model.goal.Goal;
 
 /**
  * The API of the Model component.
@@ -106,4 +107,11 @@ public interface Model {
      * Reset the random index so that the random index is not preserved over things like filtering, searching, etc.
      */
     void resetRandomIndex();
+
+    /**
+     * Sets new target for goal.
+     */
+    public void setGoal(int target);
+
+    Goal getGoal();
 }

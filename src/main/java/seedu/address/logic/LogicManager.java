@@ -16,6 +16,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyDeck;
 import seedu.address.model.card.Card;
+import seedu.address.model.goal.Goal;
 import seedu.address.storage.Storage;
 
 /**
@@ -88,4 +89,7 @@ public class LogicManager implements Logic {
         model.setGuiSettings(guiSettings);
     }
 
+    public Goal getGoal() {
+        return model.getGoal();
+    }
 }

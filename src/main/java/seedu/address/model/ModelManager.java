@@ -14,6 +14,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.index.Index;
 import seedu.address.model.card.Card;
 import seedu.address.model.exceptions.RandomIndexNotInitialisedException;
+import seedu.address.model.goal.Goal;
 
 /**
  * Represents the in-memory model of the Deck data.
@@ -24,6 +25,7 @@ public class ModelManager implements Model {
     private final Deck deck;
     private final UserPrefs userPrefs;
     private final FilteredList<Card> filteredCards;
+    private final Goal goal;
 
     private Index randomIndex;
 
@@ -38,6 +40,7 @@ public class ModelManager implements Model {
         this.deck = new Deck(deck);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredCards = new FilteredList<>(this.deck.getCardList());
+        this.goal = new Goal(this.deck);
     }
 
     public ModelManager() {
@@ -173,4 +176,16 @@ public class ModelManager implements Model {
     public void resetRandomIndex() {
         this.randomIndex = null;
     }
+    //=========== Goal ==================================================================================
+
+    @Override
+    public void setGoal(int target) {
+        this.goal.setTarget(target);
+    }
+
+    @Override
+    public Goal getGoal() {
+        return goal;
+    }
+
 }
