@@ -221,10 +221,10 @@ Example Command: `log` (after entering a FindCommand)
 ![result for 'log'](images/logResult.jpg)
 
 Expected outputs when the command succeeds:
-* `Results of the FindCommand have been saved to the logger tab.`
+* `The last filtered values have overridden the logger tab.`
 
 Expected output when the command fails:
-* `There are no FindCommand results. There is nothing to be saved to the logger tab.`
+* `Cannot log an empty list.`
 
 >:bulb: `log` overwrites the data currently in the logger tab, so you do not need to perform clearing prior
 
@@ -248,10 +248,10 @@ Example Command: `alog` (after entering a FindCommand)
 ![result for 'alog'](images/alogResult.jpg)
 
 Expected outputs when the command succeeds:
-* `Results of the FindCommand have been appended to the logger tab.`
+* `The last filtered values have been added onto the logger tab.`
 
 Expected output when the command fails:
-* `There are no FindCommand results. There is nothing to be saved to the logger tab.`
+* `Cannot log an empty list.`
 
 >:bulb: `alog` does not overwrite the data and instead adds on to it, so you do not have to keep performing `log` to save more data
 
