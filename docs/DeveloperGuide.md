@@ -389,24 +389,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-**Use case: UC05 - View all notes**
-
-**MSS**
-
-1.  User requests to view all notes.
-2.  KeepInTouch shows all notes.
-
-    Use case ends.
-
-**Extensions**
-
-* 2a. There are no notes exists.
-
-    * 2a1. KeepInTouch shows a message indicating the non-existent notes.
-
-      Use case ends.
-
-**Use case: UC06 - Add a note to a contact**
+**Use case: UC05 - Add a note to a contact**
 
 **MSS**
 
@@ -429,7 +412,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 1.
 
-**Use case: UC07 - Delete a note from a contact**
+**Use case: UC06 - Delete a note from a contact**
 
 **MSS**
 
@@ -458,7 +441,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-**Use case: UC08 - Add an event**
+**Use case: UC07 - Add an event**
 
 **MSS**
 
@@ -475,7 +458,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 1.
 
-**Use case: UC09 - Delete an event**
+**Use case: UC08 - Delete an event**
 
 **MSS**
 
@@ -498,7 +481,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-**Use case: UC10 - Get help on commands**
+**Use case: UC09 - Get help on commands**
 
 **MSS**
 
@@ -531,7 +514,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-**Use case: UC11 - Adding tags to a contact**
+**Use case: UC10 - Adding tags to a contact**
 
 **MSS**
 
@@ -559,7 +542,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-**Use case: UC12 - Delete tags from a contact**
+**Use case: UC11 - Delete tags from a contact**
 
 **MSS**
 
@@ -587,7 +570,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-**Use case: UC13 - Exit the program**
+**Use case: UC12 - Exit the program**
 
 **MSS**
 

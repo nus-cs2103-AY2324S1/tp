@@ -17,7 +17,6 @@ import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.ListEventCommand;
-import seedu.address.logic.commands.ListNoteCommand;
 import seedu.address.logic.commands.ListPersonCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.CliSyntax;
@@ -110,10 +109,9 @@ public class Messages {
             return FindCommand.MESSAGE_USAGE;
 
         case ListCommand.COMMAND_WORD:
-            return String.format("%s \n\n %s \n\n %s",
-                ListEventCommand.MESSAGE_USAGE,
-                ListNoteCommand.MESSAGE_USAGE,
-                ListPersonCommand.MESSAGE_USAGE);
+            return String.format("%s \n\n %s",
+                ListPersonCommand.MESSAGE_USAGE,
+                ListEventCommand.MESSAGE_USAGE);
 
         default:
             throw new CommandException("Unexpected input");
