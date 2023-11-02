@@ -21,10 +21,10 @@ public class ClassDetails {
 
     public static final String MESSAGE_CONSTRAINTS = "Class number can take any values, and it should not be blank";
     public static final String MESSAGE_INVALID_GRADE = "Grade should be between 0 and 100";
-    public static final String MESSAGE_INVALID_ASSIGNMENT_NUMBER = "Assignment number should "
-            + "be between 1 and %s";
-    public static final String MESSAGE_INVALID_TUTORIAL_INDEX = "Tutorial index should "
-            + "be between 1 and %s";
+    public static final String MESSAGE_INVALID_ASSIGNMENT_NUMBER = "Assignment index should an integer "
+            + "between 1 and %s";
+    public static final String MESSAGE_INVALID_TUTORIAL_INDEX = "Tutorial index should an integer "
+            + "between 1 and %s";
     public static final String MESSAGE_UNEQUAL_LENGTH = "The number of tutorial sessions and "
             + "attendance records should be equal.";
 
@@ -87,9 +87,8 @@ public class ClassDetails {
      */
     public void markPresent(Index tutNum) throws CommandException {
         requireNonNull(tutNum);
-        if (tutNum.getOneBased() > tutorialCount || tutNum.getOneBased() <= 0) {
-            throw new CommandException(
-                    String.format(MESSAGE_INVALID_TUTORIAL_INDEX, tutorialCount));
+        if (tutNum.getOneBased() > tutorialCount) {
+            throw new CommandException(getMessageInvalidTutorialIndex());
         }
         updateAssignmentAndTutorialCount();
         this.attendanceTracker.markPresent(tutNum);
@@ -100,9 +99,8 @@ public class ClassDetails {
      */
     public void markAbsent(Index tutNum) throws CommandException {
         requireNonNull(tutNum);
-        if (tutNum.getOneBased() > tutorialCount || tutNum.getOneBased() <= 0) {
-            throw new CommandException(
-                    String.format(MESSAGE_INVALID_TUTORIAL_INDEX, tutorialCount));
+        if (tutNum.getOneBased() > tutorialCount) {
+            throw new CommandException(getMessageInvalidTutorialIndex());
         }
         updateAssignmentAndTutorialCount();
         this.attendanceTracker.markAbsent(tutNum);
@@ -166,21 +164,20 @@ public class ClassDetails {
     }
 
     /**
-     * Sets the grade of the student for a particular assignment number.
-     * @param assignmentNumber the assignment number
+     * Sets the grade of the student for a particular assignment index.
+     * @param assignmentIndex the assignment index
      * @param grade the grade to be set
-     * @throws CommandException if the assignment number or grade is invalid
+     * @throws CommandException if the assignment index or grade is invalid
      */
-    public void setGrade(int assignmentNumber, int grade) throws CommandException {
-        if (assignmentNumber > assignmentCount || assignmentNumber <= 0) {
-            throw new CommandException(
-                    String.format(MESSAGE_INVALID_ASSIGNMENT_NUMBER, assignmentCount));
+    public void setGrade(Index assignmentIndex, int grade) throws CommandException {
+        if (assignmentIndex.getOneBased() > assignmentCount) {
+            throw new CommandException(getMessageInvalidAssignmentIndex());
         }
         if (grade < 0 || grade > 100) {
             throw new CommandException(MESSAGE_INVALID_GRADE);
         }
         updateAssignmentAndTutorialCount();
-        assignmentTracker.editMarks(Index.fromOneBased(assignmentNumber), grade);
+        assignmentTracker.editMarks(assignmentIndex, grade);
     }
 
     /**
@@ -194,13 +191,12 @@ public class ClassDetails {
     /**
      * Records the class participation of the student for a particular tutorial session.
      */
-    public void recordClassParticipation(int sessionNumber, boolean participated) throws CommandException {
-        if (sessionNumber > tutorialCount || sessionNumber <= 0) {
-            throw new CommandException(
-                    String.format(MESSAGE_INVALID_TUTORIAL_INDEX, tutorialCount));
+    public void recordClassParticipation(Index tutorialIndex, boolean participated) throws CommandException {
+        if (tutorialIndex.getOneBased() > tutorialCount) {
+            throw new CommandException(getMessageInvalidTutorialIndex());
         }
         updateAssignmentAndTutorialCount();
-        classParticipationTracker.markParticipation(Index.fromOneBased(sessionNumber), participated);
+        classParticipationTracker.markParticipation(tutorialIndex, participated);
     }
 
     /**
@@ -227,6 +223,20 @@ public class ClassDetails {
                 attendanceTracker.getJson(),
                 assignmentTracker.getJson(),
                 classParticipationTracker.getJson());
+    }
+
+    /**
+     * Returns the message for invalid assignment index.
+     */
+    public static String getMessageInvalidAssignmentIndex() {
+        return String.format(MESSAGE_INVALID_ASSIGNMENT_NUMBER, assignmentCount);
+    }
+
+    /**
+     * Returns the message for invalid tutorial index.
+     */
+    public static String getMessageInvalidTutorialIndex() {
+        return String.format(MESSAGE_INVALID_TUTORIAL_INDEX, tutorialCount);
     }
 
     @Override

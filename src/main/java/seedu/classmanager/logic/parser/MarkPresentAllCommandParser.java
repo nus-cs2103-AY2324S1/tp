@@ -7,6 +7,7 @@ import static seedu.classmanager.logic.parser.CliSyntax.PREFIX_TUTORIAL_INDEX;
 import seedu.classmanager.commons.core.index.Index;
 import seedu.classmanager.logic.commands.MarkPresentAllCommand;
 import seedu.classmanager.logic.parser.exceptions.ParseException;
+import seedu.classmanager.model.student.ClassDetails;
 
 /**
  * Parses input arguments and creates a new MarkPresentAllCommand object
@@ -30,7 +31,12 @@ public class MarkPresentAllCommandParser implements Parser<MarkPresentAllCommand
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_TUTORIAL_INDEX);
 
-        Index index = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_TUTORIAL_INDEX).get());
+        Index index;
+        try {
+            index = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_TUTORIAL_INDEX).get());
+        } catch (ParseException e) {
+            throw new ParseException(ClassDetails.getMessageInvalidTutorialIndex());
+        }
 
         return new MarkPresentAllCommand(index);
     }

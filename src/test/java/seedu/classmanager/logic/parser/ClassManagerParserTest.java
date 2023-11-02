@@ -8,8 +8,8 @@ import static seedu.classmanager.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.classmanager.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.classmanager.logic.commands.CommandTestUtil.INVALID_STUDENT_NUMBER;
 import static seedu.classmanager.logic.commands.CommandTestUtil.STUDENT_NUMBER_DESC_AMY;
-import static seedu.classmanager.logic.commands.CommandTestUtil.TEST_TUTORIAL;
-import static seedu.classmanager.logic.commands.CommandTestUtil.TEST_TUTORIAL_DESC;
+import static seedu.classmanager.logic.commands.CommandTestUtil.TEST_FIRST_TUTORIAL;
+import static seedu.classmanager.logic.commands.CommandTestUtil.TEST_FIRST_TUTORIAL_DESC;
 import static seedu.classmanager.logic.commands.CommandTestUtil.VALID_STUDENT_NUMBER_AMY;
 import static seedu.classmanager.logic.parser.CliSyntax.PREFIX_ASSIGNMENT_COUNT;
 import static seedu.classmanager.logic.parser.CliSyntax.PREFIX_COMMENT;
@@ -107,16 +107,17 @@ public class ClassManagerParserTest {
     public void parseCommand_markPresent() throws Exception {
         Student student = new StudentBuilder().build();
         MarkPresentCommand command = (MarkPresentCommand) parser.parseCommand(MarkPresentCommand.COMMAND_WORD
-                        + " " + PREFIX_STUDENT_NUMBER + student.getStudentNumber() + TEST_TUTORIAL_DESC,
+                        + " " + PREFIX_STUDENT_NUMBER + student.getStudentNumber() + TEST_FIRST_TUTORIAL_DESC,
                 true);
-        assertEquals(new MarkPresentCommand(Index.fromOneBased(TEST_TUTORIAL), student.getStudentNumber()), command);
+        assertEquals(new MarkPresentCommand(Index.fromOneBased(TEST_FIRST_TUTORIAL),
+                student.getStudentNumber()), command);
     }
 
     @Test
     public void parseCommand_markPresentAll() throws Exception {
         MarkPresentAllCommand command = (MarkPresentAllCommand) parser
-                .parseCommand(MarkPresentAllCommand.COMMAND_WORD + TEST_TUTORIAL_DESC, true);
-        assertEquals(new MarkPresentAllCommand(Index.fromOneBased(TEST_TUTORIAL)), command);
+                .parseCommand(MarkPresentAllCommand.COMMAND_WORD + TEST_FIRST_TUTORIAL_DESC, true);
+        assertEquals(new MarkPresentAllCommand(Index.fromOneBased(TEST_FIRST_TUTORIAL)), command);
     }
 
     @Test
@@ -124,9 +125,10 @@ public class ClassManagerParserTest {
         Student student = new StudentBuilder().build();
         MarkAbsentCommand command = (MarkAbsentCommand) parser
                 .parseCommand(MarkAbsentCommand.COMMAND_WORD + " "
-                        + PREFIX_STUDENT_NUMBER + student.getStudentNumber() + TEST_TUTORIAL_DESC,
+                        + PREFIX_STUDENT_NUMBER + student.getStudentNumber() + TEST_FIRST_TUTORIAL_DESC,
                 true);
-        assertEquals(new MarkAbsentCommand(Index.fromOneBased(TEST_TUTORIAL), student.getStudentNumber()), command);
+        assertEquals(new MarkAbsentCommand(Index.fromOneBased(TEST_FIRST_TUTORIAL),
+                student.getStudentNumber()), command);
     }
 
     @Test
@@ -158,7 +160,7 @@ public class ClassManagerParserTest {
                 + STUDENT_NUMBER_DESC_AMY + SetGradeCommandParserTest.VALID_ASSIGNMENT_DESC
                 + SetGradeCommandParserTest.VALID_GRADE_DESC, true);
         assertEquals(new SetGradeCommand(new StudentNumber(VALID_STUDENT_NUMBER_AMY),
-                Integer.parseInt(SetGradeCommandParserTest.VALID_ASSIGNMENT),
+                Index.fromOneBased(Integer.parseInt(SetGradeCommandParserTest.VALID_ASSIGNMENT)),
                 Integer.parseInt(SetGradeCommandParserTest.VALID_GRADE)), command);
     }
 
@@ -169,7 +171,7 @@ public class ClassManagerParserTest {
                 + STUDENT_NUMBER_DESC_AMY + RecordClassParticipationCommandParserTest.VALID_TUT_DESC
                 + RecordClassParticipationCommandParserTest.VALID_PARTICIPATION_DESC, true);
         assertEquals(new RecordClassParticipationCommand(new StudentNumber(VALID_STUDENT_NUMBER_AMY),
-                Integer.parseInt(RecordClassParticipationCommandParserTest.VALID_TUT),
+                Index.fromOneBased(Integer.parseInt(RecordClassParticipationCommandParserTest.VALID_TUT)),
                 true), command);
     }
 

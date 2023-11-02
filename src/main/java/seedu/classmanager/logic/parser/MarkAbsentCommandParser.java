@@ -8,6 +8,7 @@ import static seedu.classmanager.logic.parser.CliSyntax.PREFIX_TUTORIAL_INDEX;
 import seedu.classmanager.commons.core.index.Index;
 import seedu.classmanager.logic.commands.MarkAbsentCommand;
 import seedu.classmanager.logic.parser.exceptions.ParseException;
+import seedu.classmanager.model.student.ClassDetails;
 import seedu.classmanager.model.student.StudentNumber;
 
 /**
@@ -32,7 +33,13 @@ public class MarkAbsentCommandParser implements Parser<MarkAbsentCommand> {
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_TUTORIAL_INDEX, PREFIX_STUDENT_NUMBER);
 
-        Index index = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_TUTORIAL_INDEX).get());
+        Index index;
+        try {
+            index = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_TUTORIAL_INDEX).get());
+        } catch (ParseException e) {
+            throw new ParseException(ClassDetails.getMessageInvalidTutorialIndex());
+        }
+
         StudentNumber studentNumber = ParserUtil.parseStudentNumber(argMultimap.getValue(PREFIX_STUDENT_NUMBER).get());
 
         return new MarkAbsentCommand(index, studentNumber);

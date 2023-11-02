@@ -59,13 +59,13 @@ public class LogicManagerTest {
     private Logic logic;
     private final int tutorialCount = 13;
     private final int assignmentCount = 4;
-    private final String fileName = "classmanager";
+    private final String fileName = "logicmanagertest";
     private final String loadCommand = "load f/" + fileName;
 
     @BeforeEach
     public void setUp() {
         JsonClassManagerStorage classManagerStorage =
-                new JsonClassManagerStorage(temporaryFolder.resolve("classmanager.json"));
+                new JsonClassManagerStorage(temporaryFolder.resolve("logicmanagertest.json"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(temporaryFolder.resolve("userPrefs.json"));
         StorageManager storage = new StorageManager(classManagerStorage, userPrefsStorage);
         model.setConfigured(true);

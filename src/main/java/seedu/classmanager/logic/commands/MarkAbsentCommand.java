@@ -55,13 +55,8 @@ public class MarkAbsentCommand extends Command {
         Student studentToMark = model.getStudent(targetStudentNumber);
         Student markedStudent = studentToMark.copy();
 
-        try {
-            markedStudent.markAbsent(this.index);
-            model.setStudent(studentToMark, markedStudent);
-        } catch (CommandException e) {
-            throw new CommandException(e.getMessage());
-        }
-
+        markedStudent.markAbsent(this.index);
+        model.setStudent(studentToMark, markedStudent);
         model.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
         model.setSelectedStudent(markedStudent);
         model.commitClassManager();
