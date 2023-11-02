@@ -85,7 +85,7 @@ public class ArgumentMultimap {
     }
 
     /**
-     * Returns true if additional prefixes other than the given prefixes in the
+     * Returns true if additional prefixes other than the given prefixes are present in the
      * {@code String} args.
      */
     public static boolean areAdditionalPrefixesPresent(String args, Prefix... prefixes) {
