@@ -7,21 +7,21 @@ skinparam classBackgroundColor MODEL_COLOR
 AddressBook *-right-> "1" UniquePersonList
 AddressBook *-left-> "1" EventList
 
-UniquePersonList --> Person
-EventList --> Event
+UniquePersonList --> "*" Person
+EventList --> "*" Event
 
 Person --> "*" Group
 
-Person *-right-> Name
-Person *--> Phone
-Person *--> Email
-Person *--> Address
-Person *--> Birthday
+Person *-right-> "1" Name
+Person *--> "1" Phone
+Person *--> "1" Email
+Person *--> "1" Address
+Person *--> "1" Birthday
 
-Event *-left-> EventName
-Event *--> EventType
-Event *--> EventDate
-Event *--> EventTime
+Event *-left-> "1" EventName
+Event *--> "1" EventType
+Event *--> "1..2" EventDate
+Event *--> "0..2" EventTime
 Event *--> "*" Group
 Event *-> "*" Person
 @enduml

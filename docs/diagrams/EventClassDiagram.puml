@@ -17,7 +17,7 @@ Class Group
 EventList *--> "*" Event
 Event *--> "1" EventName
 Event *--> "1" EventType
-Event *--> "1" EventDate
+Event *--> "1..2" EventDate
 Event *--> "0..2" EventTime
 Event *--> "*" Person
 Event *--> "*" Group

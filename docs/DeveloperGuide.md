@@ -241,20 +241,17 @@ The `Name` class is used to represent the name of the person involved in the eve
 This is to allow the `Event` class to be extended to other types of events in the future.
 - To track events, we implement an `EventList` to store all events to be displayed in FumbleLog.
 
-### Ability to assign persons to an event
+### Ability to assign `Person` to an `Event`
 
-The ability to assign persons to an event is facilitated by `ModelManager`.
+### Implementation
 
-Each event stores a list of persons assigned to it. The person(s) are represented by their `Name` stored in FumbleLog. This is because the `Name` is the only unique identifier for a person.
+- The ability to assign persons to an event is facilitated by `ModelManager`.
+- Each event stores a list of persons assigned to it. The person(s) are represented by their `Name` stored in FumbleLog. This is because the `Name` is the only unique identifier for a person.
+- When a person is assigned to an event, the person's `Name` is added to the event's list of assigned persons. When a person is unassigned from an event, the person's `Name` is removed from the event's list of assigned persons. When a person's `Name` is modified, the change is also reflected in the event(s) that they are previously assigned to.
+- Users can assign multiple names to an event by using multiple `n/` identifiers following with the `Name` specified. The `ModelManager` will perform checks on whether the names supplied are valid, i.e the `Name` currently exists in FumbleLog.
+- When editing the event, specifying `n/` with a `Name` will append this new name to the current list rather than replace the previous names. This is to facilitate the user to assign more persons without accidentally deleting the previous persons assigned. To un-assign a person, the user must manually specify `u/` with the `Name` to un-assign the person from the event.
 
-When a person is assigned to an event, the person's `Name` is added to the event's list of assigned persons. When a person is unassigned from an event, the person's `Name` is removed from the event's list of assigned persons. When a person's `Name` is modified, the change is also reflected in the event(s) that they are previously assigned to.
-
-Users can assign multiple names to an event by using multiple `n/` identifiers following with the `Name` specified. The `ModelManager` will perform checks on whether the names supplied are valid, i.e the `Name` currently exists in FumbleLog.
-
-When editing the event, specifying `n/` with a `Name` will append this new name to the current list rather than replace the previous names. This is to facilitate the user to assign more persons without accidentally deleting the previous persons assigned. To un-assign a person, the user must manually specify `u/` with the `Name` to un-assign the person from the event.
-
-
-### Ability to assign `groups` to an `event`
+### Ability to assign `Group` to an `Event`
 
 #### Implementation
 
@@ -263,8 +260,11 @@ When editing the event, specifying `n/` with a `Name` will append this new name 
 - To make it easier for the users to assign groups, this action is done through the `AddEventCommand` and `EditEventCommand`, with the `g/` prefix.
 - To un-assign a group, the user must manually specify `ug/` with the `Group` to un-assign the group from the event.
 - With the group name, person(s) with that specific group in their group list is displayed with the event.
+- After a `Group` has been assigned to an `Event`, all `Person` in that `Group` will be displayed with the `Event` on FumbleLog.
 
 A successful `EditEventCommand` that assigns groups should look like this:
+
+<img src="images/AssignGroupsSequenceDiagram.png" alt="AssignGroup" width=600 />
 
 #### Design considerations
 

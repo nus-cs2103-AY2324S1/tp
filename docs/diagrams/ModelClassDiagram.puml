@@ -49,16 +49,16 @@ AddressBook --> "1" EventList
 UniquePersonList --> "~* all" Person
 EventList --> "~* all" Event
 Event <|-- Meeting
-Person --> Name
+Person --> "1" Name
 Person --> "0..1" Phone
 Person --> "0..1" Email
 Person --> "0..1" Address
 Person --> "*" Group
 Person --> "0..1" Birthday
 Event --> "1" EventName
-Event --> "1" EventDate
+Event --> "1..2" EventDate
 Event --> "1" EventType
-Event --> "0..1" EventTime
+Event --> "0..2" EventTime
 Event --> "*" Group
 Event --> "*" Person
 
