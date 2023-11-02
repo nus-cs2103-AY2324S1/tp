@@ -98,14 +98,14 @@ The **GUI** is split up into 4 main sections.
 
 <box type="warning" seamless>
 **Caution:**
-Configuring Class Manager to change resets the class details (grades, attendance and class participation details) of all students. It is recommended to configure Class Manager before adding students."
+Configuring Class Manager resets the class details (grades, attendance and class participation details) of all students. This cannot be undone. It is recommended to configure Class Manager before adding students."
 </box>
 
 Before you begin using Class Manager, it is recommended that you configure the number of tutorials and assignments that your module has. This can be done using the `config` command, and allows Class Manager to automatically generate the correct number of class details fields for each student. Class Manager can be configured at any time, but do take note of the warning above regarding loss of student data. If Class Manager is configured after adding students, each student will have the correct number of tutorials and assignments, but their class details data will be reset.
 
 Format: `config #t/TUTORIAL_COUNT #a/ASSIGNMENT_COUNT`
 
-* TUTORIAL_COUNT and ASSIGNMENT_COUNT must be integers between 1 to 99.
+* TUTORIAL_COUNT and ASSIGNMENT_COUNT must be integers between 0 to 99 inclusive.
 * Inputting the same TUTORIAL_COUNT or ASSIGNMENT_COUNT as the previous configuration will also reset the class details of all students.
 
 Examples:

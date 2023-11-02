@@ -1,6 +1,9 @@
 package seedu.classmanager.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static seedu.classmanager.storage.JsonAdaptedClassDetailsTest.VALID_ASSIGNMENT_TRACKER;
+import static seedu.classmanager.storage.JsonAdaptedClassDetailsTest.VALID_ATTENDANCE_TRACKER;
+import static seedu.classmanager.storage.JsonAdaptedClassDetailsTest.VALID_CLASS_PARTICIPATION_TRACKER;
 import static seedu.classmanager.storage.JsonAdaptedStudent.MISSING_FIELD_MESSAGE_FORMAT;
 import static seedu.classmanager.testutil.Assert.assertThrows;
 import static seedu.classmanager.testutil.TypicalStudents.BENSON;
@@ -28,7 +31,6 @@ public class JsonAdaptedStudentTest {
             new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_TAG = "#friend";
-    private static final Integer INVALID_COMMENT = 2;
 
     private static final String VALID_NAME = BENSON.getName().toString();
     private static final String VALID_PHONE = BENSON.getPhone().toString();
@@ -36,7 +38,7 @@ public class JsonAdaptedStudentTest {
     private static final String VALID_STUDENT_NUMBER = BENSON.getStudentNumber().toString();
     private static final String VALID_COMMENT = BENSON.getComment().toString();
     private static final JsonAdaptedClassDetails VALID_CLASS_DETAILS = new JsonAdaptedClassDetails(
-            BENSON.getClassDetails().toString(), new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
+            BENSON.getClassDetails().toString(), VALID_ATTENDANCE_TRACKER, VALID_ASSIGNMENT_TRACKER, VALID_CLASS_PARTICIPATION_TRACKER);
     private static final List<JsonAdaptedTag> VALID_TAGS = BENSON.getTags().stream()
             .map(JsonAdaptedTag::new)
             .collect(Collectors.toList());
@@ -149,5 +151,4 @@ public class JsonAdaptedStudentTest {
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Comment.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, student::toModelType);
     }
-
 }

@@ -7,7 +7,7 @@
     "classDetails" : {
       "classNumber" : "T11",
       "attendanceTracker" : [ false, false, false, false, false, false, false, false, false, false, false, false, false ],
-      "assignmentTracker" : [ 0, 0, 0, 0 ],
+      "assignmentTracker" : [ 0, 0, 0, 0, 0, 0 ],
       "classParticipationTracker" : [ false, false, false, false, false, false, false, false, false, false, false, false, false ]
     },
     "tags" : [ "owesMoney", "friends" ],

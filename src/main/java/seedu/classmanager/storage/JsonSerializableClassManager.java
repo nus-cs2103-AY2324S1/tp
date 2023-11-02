@@ -47,9 +47,6 @@ class JsonSerializableClassManager {
      */
     public ClassManager toModelType() throws IllegalValueException {
         ClassManager classManager = new ClassManager();
-        int newTutorialCount;
-        int newAssignmentCount;
-
         for (JsonAdaptedStudent jsonAdaptedStudent : students) {
             Student student = jsonAdaptedStudent.toModelType();
             if (classManager.hasStudent(student)) {

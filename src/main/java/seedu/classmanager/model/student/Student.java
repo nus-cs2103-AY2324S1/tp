@@ -38,9 +38,9 @@ public class Student {
     public Student(StudentNumber studentNumber) {
         requireAllNonNull(studentNumber);
         this.name = null;
-        this.studentNumber = studentNumber;
         this.phone = null;
         this.email = null;
+        this.studentNumber = studentNumber;
         this.classDetails = null;
         this.comment = null;
     }
@@ -150,7 +150,6 @@ public class Student {
         this.classDetails.setGrade(assignmentIndex, grade);
     }
 
-
     /**
      * Returns true if both students have the same identity and data fields.
      * This defines a stronger notion of equality between two students.
@@ -189,5 +188,4 @@ public class Student {
                 .add("comment", comment)
                 .toString();
     }
-
 }

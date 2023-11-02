@@ -131,7 +131,7 @@ public class ClassManagerParserTest {
     @Test
     public void parseCommand_markAbsentAll() throws Exception {
         MarkAbsentAllCommand command = (MarkAbsentAllCommand) parser
-                .parseCommand(MarkAbsentAllCommand.COMMAND_WORD + TEST_FIRST_TUTORIAL_DESC, true);
+                .parseCommand(MarkAbsentAllCommand.COMMAND_WORD + TEST_FIRST_TUTORIAL_DESC);
         assertEquals(new MarkAbsentAllCommand(Index.fromOneBased(TEST_FIRST_TUTORIAL)), command);
     }
 

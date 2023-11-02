@@ -5,6 +5,7 @@ import static seedu.classmanager.storage.JsonAdaptedStudent.MISSING_FIELD_MESSAG
 import static seedu.classmanager.testutil.Assert.assertThrows;
 import static seedu.classmanager.testutil.TypicalStudents.BENSON;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -21,12 +22,17 @@ public class JsonAdaptedClassDetailsTest {
     private static final String INVALID_CLASS_NUMBER = "11";
 
     private static final String VALID_CLASS_NUMBER = BENSON.getClassDetails().toString();
-    private static final List<Boolean> VALID_ATTENDANCE_TRACKER = Arrays.asList(false, true, true);
-    private static final List<Integer> VALID_ASSIGNMENT_TRACKER = Arrays.asList(0, 100, 75, 25);
-    private static final List<Boolean> VALID_CLASS_PARTICIPATION_TRACKER = Arrays.asList(false, true, false);
+    static Boolean[] tutorialArray = new Boolean[ClassDetails.tutorialCount];
+    static Integer[] assignmentArray = new Integer[ClassDetails.assignmentCount];
+    Arrays.fill(tutorialArray, Boolean.FALSE);
+    public static final List<Boolean> VALID_ATTENDANCE_TRACKER = Arrays.asList(tutorialArray);
+    public static final List<Integer> VALID_ASSIGNMENT_TRACKER = Arrays.asList(assignmentArray);
+    public static final List<Boolean> VALID_CLASS_PARTICIPATION_TRACKER = Arrays.asList(tutorialArray);
 
     @Test
     public void toModelType_validClassDetails_returnsClassDetails() throws Exception {
+        System.out.println(Arrays.toString(tutorialArray));
+        System.out.println(Arrays.toString(assignmentArray));
         JsonAdaptedClassDetails classDetails = new JsonAdaptedClassDetails(VALID_CLASS_NUMBER,
                 VALID_ATTENDANCE_TRACKER,
                 VALID_ASSIGNMENT_TRACKER,
@@ -62,10 +68,12 @@ public class JsonAdaptedClassDetailsTest {
 
     @Test
     public void toModelType_invalidAssignmentTracker_throwsIllegalValueException() {
+        List<Integer> invalidAssignmentTracker = new ArrayList<Integer>(VALID_ASSIGNMENT_TRACKER);
+        invalidAssignmentTracker.set(0, -1);
         JsonAdaptedClassDetails classDetails =
                 new JsonAdaptedClassDetails(VALID_CLASS_NUMBER,
                         VALID_ATTENDANCE_TRACKER,
-                        Arrays.asList(0, -100, 900),
+                        invalidAssignmentTracker,
                         VALID_CLASS_PARTICIPATION_TRACKER);
         String expectedMessage = Assignment.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, classDetails::toModelType);

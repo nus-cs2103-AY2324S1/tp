@@ -28,8 +28,8 @@ public class MarkAbsentAllCommandTest {
     private final CommandHistory commandHistory = new CommandHistory();
 
     @Test
-    public void execute_success() throws IllegalValueException, CommandException {
-        Index i = Index.fromOneBased(ClassDetails.DEFAULT_COUNT);
+    public void execute_success() throws CommandException {
+        Index i = Index.fromOneBased(ClassDetails.DEFAULT_TUTORIAL_COUNT);
         Student selectedStudent = TypicalStudents.getTypicalStudents().get(0);
         model.setSelectedStudent(selectedStudent);
         MarkAbsentAllCommand markAbsentAllCommand = new MarkAbsentAllCommand(i);
@@ -50,13 +50,13 @@ public class MarkAbsentAllCommandTest {
 
     @Test
     public void execute_invalidTutorialIndex_throwsCommandException() {
-        Index i = Index.fromZeroBased(ClassDetails.DEFAULT_COUNT + 1);
+        Index i = Index.fromZeroBased(ClassDetails.DEFAULT_TUTORIAL_COUNT + 1);
 
         MarkAbsentAllCommand markAbsentAllCommand = new MarkAbsentAllCommand(i);
 
         assertCommandFailure(
                 markAbsentAllCommand, model,
-                String.format(ClassDetails.MESSAGE_INVALID_TUTORIAL_INDEX, ClassDetails.DEFAULT_COUNT),
+                String.format(ClassDetails.MESSAGE_INVALID_TUTORIAL_INDEX, ClassDetails.DEFAULT_TUTORIAL_COUNT),
                 commandHistory);
     }
 
