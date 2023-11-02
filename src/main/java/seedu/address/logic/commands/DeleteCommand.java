@@ -1,15 +1,15 @@
 package seedu.address.logic.commands;
 
+import static java.util.Objects.requireNonNull;
+
+import java.util.List;
+
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.card.Card;
-
-import java.util.List;
-
-import static java.util.Objects.requireNonNull;
 
 /**
  * Deletes a Card identified using it's displayed index from the Deck.
@@ -28,6 +28,9 @@ public class DeleteCommand extends Command {
     /** Specific {@code Index} in Deck to delete from */
     private final Index targetIndex;
 
+    /**
+     * Constructs a DeleteCommand object with a specified {@code targetIndex} to delete at
+     */
     public DeleteCommand(Index targetIndex) {
         requireNonNull(targetIndex);
         this.targetIndex = targetIndex;

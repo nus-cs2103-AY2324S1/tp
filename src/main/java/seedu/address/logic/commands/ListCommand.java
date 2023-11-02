@@ -1,16 +1,16 @@
 package seedu.address.logic.commands;
 
-import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.model.Model;
-import seedu.address.model.card.Card;
-
-import java.util.List;
-import java.util.function.Predicate;
-
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_QUESTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_CARDS;
+
+import java.util.List;
+import java.util.function.Predicate;
+
+import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.Model;
+import seedu.address.model.card.Card;
 
 /**
  * Lists all Cards in the Deck to the user.
@@ -21,8 +21,8 @@ public class ListCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Lists Card from Deck. "
             + "Parameters: \n"
-            + "and/or " + PREFIX_QUESTION + "WORD(s) questions start with (Cannot be left blank. Markdown syntax" +
-            " should be included.)\n"
+            + "and/or " + PREFIX_QUESTION + "WORD(s) questions start with (Cannot be left blank. Markdown syntax"
+            + " should be included.)\n"
             + "and/or " + PREFIX_TAG + "Tag (Cannot be left blank. Multiple tags can be included.)";
 
     public static final String MESSAGE_SUCCESS = "Listed all cards";

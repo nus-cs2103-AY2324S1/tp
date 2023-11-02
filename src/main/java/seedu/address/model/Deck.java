@@ -1,13 +1,13 @@
 package seedu.address.model;
 
+import static java.util.Objects.requireNonNull;
+
+import java.util.List;
+
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.card.Card;
 import seedu.address.model.card.UniqueCardList;
-
-import java.util.List;
-
-import static java.util.Objects.requireNonNull;
 
 /**
  * Wraps all data at the Deck level

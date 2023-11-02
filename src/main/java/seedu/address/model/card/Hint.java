@@ -3,11 +3,14 @@ package seedu.address.model.card;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+/**
+ * Represents a possible hint to a question of a Card.
+ */
 public class Hint {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Hints should only contain alphanumeric characters and some special characters" +
-                    ", and it should not be blank";
+            "Hints should only contain alphanumeric characters and some special characters"
+                    + ", and it should not be blank";
 
     // All special characters and spaces are allowed alongside alphanumeric characters
     public static final String VALIDATION_REGEX = "^[a-zA-Z0-9!@#$%^&*(),./?\"';:{}\\[\\]\\-=_+\\s]+$";

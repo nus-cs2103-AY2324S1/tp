@@ -1,11 +1,11 @@
 package seedu.address.logic.parser;
 
+import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DIFFICULTY;
+
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.SolveCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-
-import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DIFFICULTY;
 
 /**
  * Parses input arguments and creates a new SolveCommand object

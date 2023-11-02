@@ -1,12 +1,18 @@
 package seedu.address.model.util;
 
-import seedu.address.model.Deck;
-import seedu.address.model.card.*;
-import seedu.address.model.tag.Tag;
-
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
+
+import seedu.address.model.Deck;
+import seedu.address.model.card.Answer;
+import seedu.address.model.card.Card;
+import seedu.address.model.card.Difficulty;
+import seedu.address.model.card.Hint;
+import seedu.address.model.card.PracticeDate;
+import seedu.address.model.card.Question;
+import seedu.address.model.card.SolveCount;
+import seedu.address.model.tag.Tag;
 
 /**
  * Contains utility methods for populating {@code Deck} with sample data.

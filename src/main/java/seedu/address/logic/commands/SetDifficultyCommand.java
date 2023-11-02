@@ -1,5 +1,9 @@
 package seedu.address.logic.commands;
 
+import static java.util.Objects.requireNonNull;
+
+import java.util.List;
+
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
@@ -7,10 +11,6 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.card.Card;
 import seedu.address.model.card.Difficulty;
-
-import java.util.List;
-
-import static java.util.Objects.requireNonNull;
 
 /**
  * Set the difficulty of a Card using its displayed index from the Deck.
@@ -57,11 +57,11 @@ public class SetDifficultyCommand extends Command {
 
         switch (difficulty) {
         case EASY: return updatePracticeDate(model,
-                difficulty,cardToSetDifficulty, Messages.MESSAGE_CARDS_SET_DIFFICULTY_VIEW_EASY);
+                difficulty, cardToSetDifficulty, Messages.MESSAGE_CARDS_SET_DIFFICULTY_VIEW_EASY);
         case MEDIUM: return updatePracticeDate(model,
-                difficulty,cardToSetDifficulty, Messages.MESSAGE_CARDS_SET_DIFFICULTY_VIEW_MEDIUM);
+                difficulty, cardToSetDifficulty, Messages.MESSAGE_CARDS_SET_DIFFICULTY_VIEW_MEDIUM);
         case HARD: return updatePracticeDate(model,
-                difficulty,cardToSetDifficulty, Messages.MESSAGE_CARDS_SET_DIFFICULTY_VIEW_HARD);
+                difficulty, cardToSetDifficulty, Messages.MESSAGE_CARDS_SET_DIFFICULTY_VIEW_HARD);
         default:
             throw new CommandException(difficulty + Messages.MESSAGE_CARDS_SET_DIFFICULTY_VIEW_INVALID);
         }

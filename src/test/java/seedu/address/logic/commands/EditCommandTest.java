@@ -1,6 +1,22 @@
 package seedu.address.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.DESC_CS1101S;
+import static seedu.address.logic.commands.CommandTestUtil.DESC_CS2100;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_HINT_CS2100;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_QUESTION_CS2100;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_CS2100;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalCards.getTypicalDeck;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_CARD;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_CARD;
+
 import org.junit.jupiter.api.Test;
+
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.EditCommand.EditCardDescriptor;
@@ -11,13 +27,6 @@ import seedu.address.model.UserPrefs;
 import seedu.address.model.card.Card;
 import seedu.address.testutil.CardBuilder;
 import seedu.address.testutil.EditCardDescriptorBuilder;
-
-import static org.junit.jupiter.api.Assertions.*;
-import static seedu.address.logic.commands.CommandTestUtil.*;
-import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalCards.getTypicalDeck;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_CARD;
-import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_CARD;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for EditCommand.
@@ -43,8 +52,8 @@ public class EditCommandTest {
         Index validIndex = INDEX_FIRST_CARD;
         EditCardDescriptor validEditCardDescriptor = DESC_CS2100;
 
-        assertThrows(NullPointerException.class,
-                () -> new EditCommand(validIndex, validEditCardDescriptor).execute(null));
+        assertThrows(NullPointerException.class, () -> new EditCommand(validIndex,
+                validEditCardDescriptor).execute(null));
     }
 
     @Test
@@ -67,8 +76,8 @@ public class EditCommandTest {
         Card lastCard = model.getFilteredCardList().get(indexLastCard.getZeroBased());
 
         CardBuilder cardInList = new CardBuilder(lastCard);
-        Card editedCard = cardInList.
-                withQuestion(VALID_QUESTION_CS2100)
+        Card editedCard = cardInList
+                .withQuestion(VALID_QUESTION_CS2100)
                 .withAnswer(lastCard.getAnswer().answer)
                 .withTags(VALID_TAG_CS2100)
                 .withHint(VALID_HINT_CS2100)

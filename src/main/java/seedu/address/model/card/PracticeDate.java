@@ -1,14 +1,14 @@
 package seedu.address.model.card;
 
+import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.AppUtil.checkArgument;
+
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.Month;
 import java.time.format.DateTimeParseException;
 import java.time.format.TextStyle;
 import java.util.Locale;
-
-import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
  * Represents a Card's PractiseDate in lesSON.

@@ -1,16 +1,16 @@
 package seedu.address.model.card;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import seedu.address.model.card.exceptions.CardNotFoundException;
-import seedu.address.model.card.exceptions.DuplicateCardException;
+import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 
-import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import seedu.address.model.card.exceptions.CardNotFoundException;
+import seedu.address.model.card.exceptions.DuplicateCardException;
 
 /**
  * A list of cards that enforces uniqueness between its elements and does not

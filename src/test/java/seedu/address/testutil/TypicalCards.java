@@ -1,13 +1,13 @@
 package seedu.address.testutil;
 
-import seedu.address.model.Deck;
-import seedu.address.model.card.Card;
-import seedu.address.model.card.PracticeDate;
-
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import seedu.address.model.Deck;
+import seedu.address.model.card.Card;
+import seedu.address.model.card.PracticeDate;
 
 /**
  * A utility class containing a list of {@code Card} objects to be used in tests.

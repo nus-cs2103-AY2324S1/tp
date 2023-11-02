@@ -1,12 +1,12 @@
 package seedu.address.logic;
 
-import seedu.address.commons.core.index.Index;
-import seedu.address.logic.parser.Prefix;
-import seedu.address.model.card.Card;
-
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+
+import seedu.address.commons.core.index.Index;
+import seedu.address.logic.parser.Prefix;
+import seedu.address.model.card.Card;
 
 /**
  * Container for user visible messages.

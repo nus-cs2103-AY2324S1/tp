@@ -1,19 +1,28 @@
 package seedu.address.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.DESC_CS1101S;
+import static seedu.address.logic.commands.CommandTestUtil.DESC_CS2100;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ANSWER_CS1101S;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ANSWER_CS2100;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_HINT_CS2100;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_QUESTION_CS1101S;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_CS1101S;
+import static seedu.address.testutil.Assert.assertThrows;
+
+import java.util.Collections;
+import java.util.List;
+
 import org.junit.jupiter.api.Test;
+
 import seedu.address.logic.commands.EditCommand.EditCardDescriptor;
 import seedu.address.model.card.Answer;
 import seedu.address.model.card.Hint;
 import seedu.address.model.card.Question;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.EditCardDescriptorBuilder;
-
-import java.util.Collections;
-import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
-import static seedu.address.logic.commands.CommandTestUtil.*;
-import static seedu.address.testutil.Assert.assertThrows;
 
 public class EditCardDescriptorTest {
 
@@ -23,13 +32,13 @@ public class EditCardDescriptorTest {
     }
 
     @Test
-    public void isAnyFieldEdited_noFieldChange_False() {
+    public void isAnyFieldEdited_noFieldChange_false() {
         EditCardDescriptor editCardDescriptor = new EditCardDescriptorBuilder().build();
         assertFalse(editCardDescriptor.isAnyFieldEdited());
     }
 
     @Test
-    public void isAnyFieldEdited_singleFieldChange_True() {
+    public void isAnyFieldEdited_singleFieldChange_true() {
         EditCardDescriptor editCardDescriptor = new EditCardDescriptorBuilder().withQuestion("new question").build();
         assertTrue(editCardDescriptor.isAnyFieldEdited());
 
@@ -77,7 +86,7 @@ public class EditCardDescriptorTest {
 
     @Test
     public void setTags_validAnswer_successful() {
-        List<Tag> validTags= VALID_TAG_CS1101S;
+        List<Tag> validTags = VALID_TAG_CS1101S;
         EditCardDescriptor editCardDescriptor = new EditCardDescriptorBuilder().build();
         editCardDescriptor.setTags(validTags);
         assertEquals(validTags, editCardDescriptor.getTags().get());

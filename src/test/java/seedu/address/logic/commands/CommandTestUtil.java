@@ -1,5 +1,13 @@
 package seedu.address.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.testutil.Assert.assertThrows;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Deck;
@@ -8,14 +16,6 @@ import seedu.address.model.card.Card;
 import seedu.address.model.card.Hint;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.EditCardDescriptorBuilder;
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.testutil.Assert.assertThrows;
 
 /**
  * Contains helper methods for testing commands.

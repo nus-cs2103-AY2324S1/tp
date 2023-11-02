@@ -1,20 +1,29 @@
 package seedu.address.logic.commands;
 
+import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ANSWER;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_HINT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_QUESTION;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+
+import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
+
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.card.*;
+import seedu.address.model.card.Answer;
+import seedu.address.model.card.Card;
+import seedu.address.model.card.Difficulty;
+import seedu.address.model.card.Hint;
+import seedu.address.model.card.PracticeDate;
+import seedu.address.model.card.Question;
+import seedu.address.model.card.SolveCount;
 import seedu.address.model.tag.Tag;
-
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
-
-import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.*;
 
 /**
  * Edits the details of an existing Card in the Deck.
@@ -72,7 +81,7 @@ public class EditCommand extends Command {
         }
 
         model.setCard(cardToEdit, editedCard);
-//        model.updateFilteredCardList(PREDICATE_SHOW_ALL_CARDS);
+        // model.updateFilteredCardList(PREDICATE_SHOW_ALL_CARDS);
         return new CommandResult(String.format(MESSAGE_EDIT_CARD_SUCCESS, Messages.format(editedCard)));
     }
 

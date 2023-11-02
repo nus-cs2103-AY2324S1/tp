@@ -1,18 +1,21 @@
 package seedu.address.logic.commands;
 
-import org.junit.jupiter.api.Test;
-import seedu.address.model.Model;
-import seedu.address.model.ModelManager;
-import seedu.address.model.UserPrefs;
-import seedu.address.model.card.Card;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_CARDS;
+import static seedu.address.testutil.TypicalCards.getTypicalDeck;
 
 import java.util.List;
 import java.util.function.Predicate;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_CARDS;
-import static seedu.address.testutil.TypicalCards.getTypicalDeck;
+import org.junit.jupiter.api.Test;
+
+import seedu.address.model.Model;
+import seedu.address.model.ModelManager;
+import seedu.address.model.UserPrefs;
+import seedu.address.model.card.Card;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for ListCommand.

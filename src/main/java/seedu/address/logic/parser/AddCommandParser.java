@@ -1,16 +1,25 @@
 package seedu.address.logic.parser;
 
-import seedu.address.logic.commands.AddCommand;
-import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.card.*;
-import seedu.address.model.tag.Tag;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ANSWER;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_HINT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_QUESTION;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Stream;
 
-import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.*;
+import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.card.Answer;
+import seedu.address.model.card.Card;
+import seedu.address.model.card.Difficulty;
+import seedu.address.model.card.Hint;
+import seedu.address.model.card.PracticeDate;
+import seedu.address.model.card.Question;
+import seedu.address.model.card.SolveCount;
+import seedu.address.model.tag.Tag;
 
 /**
  * Parses input arguments and creates a new AddCommand object
