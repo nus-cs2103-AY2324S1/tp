@@ -3,8 +3,20 @@
   title: "User Guide"
   pageNav: 3
 ---
+<style>
+img
+{
+    display:block;
+    float:none;
+    margin-left:auto;
+    margin-right:auto;
+}
+</style>
 
 # Staff-Snap User Guide
+
+<!-- * Table of Contents -->
+<page-nav-print />
 
 ## Table of Contents
 
@@ -71,13 +83,14 @@ While **Staff-Snap** has a simple and intuitive [Graphical User Interface (GUI)]
    * `delete 1` : Deletes the 1st applicant shown in the current list.
    * `clear` : Clears all applicants from the list.
    * `exit` : Exits the application.
+
 9. Refer to the [Features](#TODO) below for details of each command.
 
 <box type="tip" header="**For macOS users**" seamless>
 
 If you are unfamiliar with the command terminal, you can right-click the `staffsnap.jar` file and select **Open With > JavaLauncher.app** to launch the application. If you are shown the warning below, click Open to continue launching Staff-Snap.<br>
 
-<pic src="images/user-guide/mac_os_warning.png" height="446" width="372" alt="mac_os_warning" />
+<img src="images/user-guide/mac_os_warning.png" alt="mac_os_warning">
 
 </box>
 
@@ -156,6 +169,9 @@ This section introduces the symbols and notations used throughout this guide. We
 
 ### Applicant Management
 
+<br>
+
+<a name="applicant-management-param"></a>
 #### Command Parameters
 
 notation table for NAME, EMAIL, POSITION, PHONE, STATUS, INDEX
@@ -416,9 +432,10 @@ Imports applicants from a [csv](#TODO) file.
 Format: `import f/FILENAME`
 * The csv file must be placed in the home folder of Staff-Snap.
 * The csv file must have the following headers: `name`, `phone`, `email`, `position` in that order, as shown below.<br>
-![csv_header](images/user-guide/csv_header.png)<br>
+  
+<img src="images/user-guide/csv_header.png" alt="mac_os_warning">
 
-* The fields of the columns must satisfy the requirements for `NAME`, `PHONE`, `EMAIL`, and `POSITION` respectively.
+* The fields of the columns must satisfy the constraints for `NAME`, `PHONE`, `EMAIL`, and `POSITION` respectively.
 * A sample csv file can be found [here](demo.csv).
 
 Examples:
