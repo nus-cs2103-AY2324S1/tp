@@ -20,8 +20,8 @@ public class DeleteLinkAction implements DeleteFieldAction {
      * @param descriptor
      */
     @Override
-    public void delete(DeletePersonDescriptor descriptor) throws CommandException {
-        descriptor.deleteLink(index);
+    public void delete(DeletePersonDescriptor descriptor, Index indexOfPerson) throws CommandException {
+        descriptor.deleteLink(index, indexOfPerson);
     }
 
     @Override

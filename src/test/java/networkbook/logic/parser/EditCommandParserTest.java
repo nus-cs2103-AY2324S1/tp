@@ -5,6 +5,7 @@ import static networkbook.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
 import org.junit.jupiter.api.Test;
 
+import networkbook.commons.core.index.Index;
 import networkbook.logic.Messages;
 import networkbook.logic.commands.CommandTestUtil;
 import networkbook.logic.commands.edit.EditCommand;
@@ -74,29 +75,47 @@ public class EditCommandParserTest {
         assertParseFailure(PARSER,
                 "1" + CommandTestUtil.VALID_PHONE_DESC + CommandTestUtil.VALID_INDEX_DESC
                         + CommandTestUtil.VALID_INDEX_DESC,
-                String.format(Messages.MESSAGE_INDEX_MUST_BE_PRESENT, CliSyntax.PREFIX_PHONE));
+                Messages.MESSAGE_DUPLICATE_SINGLE_VALUED_FIELDS + CliSyntax.PREFIX_INDEX);
     }
 
     @Test
-    public void parse_listItemFieldWithoutIndexSpecified_failure() {
-        assertParseFailure(PARSER,
+    public void parse_listItemFieldWithoutIndexSpecified_success() {
+        EditCommand expectedEditPhoneCommand = new EditCommand(TypicalIndexes.INDEX_FIRST_PERSON,
+                new EditPhoneAction(Index.fromOneBased(1), new Phone("123456")));
+        assertParseSuccess(PARSER,
                 "1" + CommandTestUtil.VALID_PHONE_DESC,
-                String.format(Messages.MESSAGE_INDEX_MUST_BE_PRESENT, CliSyntax.PREFIX_PHONE));
-        assertParseFailure(PARSER,
+                expectedEditPhoneCommand);
+
+        EditCommand expectedEditEmailCommand = new EditCommand(TypicalIndexes.INDEX_FIRST_PERSON,
+                new EditEmailAction(Index.fromOneBased(1), new Email("quack@gmail.com")));
+        assertParseSuccess(PARSER,
                 "1" + CommandTestUtil.VALID_EMAIL_DESC,
-                String.format(Messages.MESSAGE_INDEX_MUST_BE_PRESENT, CliSyntax.PREFIX_EMAIL));
-        assertParseFailure(PARSER,
+                expectedEditEmailCommand);
+
+        EditCommand expectedEditLinkCommand = new EditCommand(TypicalIndexes.INDEX_FIRST_PERSON,
+                new EditLinkAction(Index.fromOneBased(1), new Link("www.google.com")));
+        assertParseSuccess(PARSER,
                 "1" + CommandTestUtil.VALID_LINK_DESC,
-                String.format(Messages.MESSAGE_INDEX_MUST_BE_PRESENT, CliSyntax.PREFIX_LINK));
-        assertParseFailure(PARSER,
+                expectedEditLinkCommand);
+
+        EditCommand expectedEditCourseCommand = new EditCommand(TypicalIndexes.INDEX_FIRST_PERSON,
+                new EditCourseAction(Index.fromOneBased(1), new Course("CS2103T")));
+        assertParseSuccess(PARSER,
                 "1" + CommandTestUtil.VALID_COURSE_DESC,
-                String.format(Messages.MESSAGE_INDEX_MUST_BE_PRESENT, CliSyntax.PREFIX_COURSE));
-        assertParseFailure(PARSER,
+                expectedEditCourseCommand);
+
+        EditCommand expectedEditSpecCommand = new EditCommand(TypicalIndexes.INDEX_FIRST_PERSON,
+                new EditSpecialisationAction(Index.fromOneBased(1),
+                        new Specialisation("Software Eng")));
+        assertParseSuccess(PARSER,
                 "1" + CommandTestUtil.VALID_SPECIALISATION_DESC,
-                String.format(Messages.MESSAGE_INDEX_MUST_BE_PRESENT, CliSyntax.PREFIX_SPECIALISATION));
-        assertParseFailure(PARSER,
+                expectedEditSpecCommand);
+
+        EditCommand expectedEditTagCommand = new EditCommand(TypicalIndexes.INDEX_FIRST_PERSON,
+                new EditTagAction(Index.fromOneBased(1), new Tag("talk")));
+        assertParseSuccess(PARSER,
                 "1" + CommandTestUtil.VALID_TAG_DESC,
-                String.format(Messages.MESSAGE_INDEX_MUST_BE_PRESENT, CliSyntax.PREFIX_TAG));
+                expectedEditTagCommand);
     }
 
     @Test

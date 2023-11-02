@@ -33,8 +33,8 @@ import networkbook.testutil.TypicalPersons;
  * Contains integration tests (interaction with the Model) and unit tests for EditCommand.
  */
 public class EditCommandTest {
-    private static final EditAction VALID_EDIT_ACTION =
-            editPersonDescriptor -> editPersonDescriptor.setName(new Name("test"));
+    private static final EditAction VALID_EDIT_ACTION = (editPersonDescriptor, index) ->
+            editPersonDescriptor.setName(new Name("test"));
     private final Model model = new ModelManager(TypicalPersons.getTypicalNetworkBook(), new UserPrefs());
 
     @Test
@@ -56,7 +56,7 @@ public class EditCommandTest {
     public void execute_changeNameToAnExistingContact_commandFailure() {
         Index lastIndex = Index.fromOneBased(model.getFilteredPersonList().size());
         Person duplicateInModel = model.getFilteredPersonList().get(0);
-        EditCommand editCommand = new EditCommand(lastIndex, editPersonDescriptor
+        EditCommand editCommand = new EditCommand(lastIndex, (editPersonDescriptor, index)
                 -> editPersonDescriptor.setName(duplicateInModel.getName()));
         assertCommandFailure(editCommand, model, EditCommand.MESSAGE_DUPLICATE_PERSON);
     }
@@ -78,8 +78,8 @@ public class EditCommandTest {
                 originalPerson.getTags(),
                 originalPerson.getPriority().orElse(null)
         );
-        EditCommand editCommand = new EditCommand(TypicalIndexes.INDEX_FIRST_PERSON,
-                editPersonDescriptor -> editPersonDescriptor.setName(EditCommandUtil.VALID_NAME));
+        EditCommand editCommand = new EditCommand(TypicalIndexes.INDEX_FIRST_PERSON, (editPersonDescriptor, index) ->
+                        editPersonDescriptor.setName(EditCommandUtil.VALID_NAME));
 
         String expectedMessage =
                 String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson));
@@ -109,9 +109,9 @@ public class EditCommandTest {
                 originalPerson.getTags(),
                 originalPerson.getPriority().orElse(null)
         );
-        EditCommand editCommand = new EditCommand(TypicalIndexes.INDEX_FIRST_PERSON,
-                editPersonDescriptor -> editPersonDescriptor.setPhone(
-                        EditCommandUtil.VALID_INDEX, EditCommandUtil.VALID_PHONE));
+        EditCommand editCommand = new EditCommand(TypicalIndexes.INDEX_FIRST_PERSON, (editPersonDescriptor, index) ->
+                editPersonDescriptor.setPhone(
+                        EditCommandUtil.VALID_INDEX, EditCommandUtil.VALID_PHONE, TypicalIndexes.INDEX_FIRST_PERSON));
 
         String expectedMessage =
                 String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson));
@@ -124,10 +124,12 @@ public class EditCommandTest {
 
     @Test
     public void execute_validPhoneAndInvalidIndex_throwsCommandException() {
-        EditCommand editCommand = new EditCommand(TypicalIndexes.INDEX_FIRST_PERSON,
-                editPersonDescriptor -> editPersonDescriptor.setPhone(
-                        EditCommandUtil.INVALID_INDEX, EditCommandUtil.VALID_PHONE));
-        String expectedMessage = EditPersonDescriptor.MESSAGE_INVALID_PHONE_INDEX;
+        EditCommand editCommand = new EditCommand(TypicalIndexes.INDEX_FIRST_PERSON, (editPersonDescriptor, index) ->
+                editPersonDescriptor.setPhone(
+                        EditCommandUtil.INVALID_INDEX, EditCommandUtil.VALID_PHONE, TypicalIndexes.INDEX_FIRST_PERSON));
+        String expectedMessage = String.format(Messages.MESSAGE_INVALID_MULTIVALUED_FIELD_ENTRY_INDEX,
+                TypicalIndexes.INDEX_FIRST_PERSON.getOneBased(), "a phone",
+                EditCommandUtil.INVALID_INDEX.getOneBased());
         assertCommandFailure(editCommand, model, expectedMessage);
     }
 
@@ -150,9 +152,9 @@ public class EditCommandTest {
                 originalPerson.getTags(),
                 originalPerson.getPriority().orElse(null)
         );
-        EditCommand editCommand = new EditCommand(TypicalIndexes.INDEX_FIRST_PERSON,
-                editPersonDescriptor -> editPersonDescriptor.setEmail(
-                        EditCommandUtil.VALID_INDEX, EditCommandUtil.VALID_EMAIL));
+        EditCommand editCommand = new EditCommand(TypicalIndexes.INDEX_FIRST_PERSON, (editPersonDescriptor, index) ->
+                editPersonDescriptor.setEmail(EditCommandUtil.VALID_INDEX, EditCommandUtil.VALID_EMAIL,
+                        TypicalIndexes.INDEX_FIRST_PERSON));
 
         String expectedMessage =
                 String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson));
@@ -165,10 +167,12 @@ public class EditCommandTest {
 
     @Test
     public void execute_validEmailAndInvalidIndex_throwsCommandException() {
-        EditCommand editCommand = new EditCommand(TypicalIndexes.INDEX_FIRST_PERSON,
-                editPersonDescriptor -> editPersonDescriptor.setEmail(
-                        EditCommandUtil.INVALID_INDEX, EditCommandUtil.VALID_EMAIL));
-        String expectedMessage = EditPersonDescriptor.MESSAGE_INVALID_EMAIL_INDEX;
+        EditCommand editCommand = new EditCommand(TypicalIndexes.INDEX_FIRST_PERSON, (editPersonDescriptor, index) ->
+                editPersonDescriptor.setEmail(EditCommandUtil.INVALID_INDEX, EditCommandUtil.VALID_EMAIL,
+                        TypicalIndexes.INDEX_FIRST_PERSON));
+        String expectedMessage = String.format(Messages.MESSAGE_INVALID_MULTIVALUED_FIELD_ENTRY_INDEX,
+                TypicalIndexes.INDEX_FIRST_PERSON.getOneBased(), "an email",
+                EditCommandUtil.INVALID_INDEX.getOneBased());
         assertCommandFailure(editCommand, model, expectedMessage);
     }
 
@@ -191,9 +195,9 @@ public class EditCommandTest {
                 originalPerson.getTags(),
                 originalPerson.getPriority().orElse(null)
         );
-        EditCommand editCommand = new EditCommand(TypicalIndexes.INDEX_FIRST_PERSON,
-                editPersonDescriptor -> editPersonDescriptor.setLink(
-                        EditCommandUtil.VALID_INDEX, EditCommandUtil.VALID_LINK));
+        EditCommand editCommand = new EditCommand(TypicalIndexes.INDEX_FIRST_PERSON, (editPersonDescriptor, index) ->
+                editPersonDescriptor.setLink(EditCommandUtil.VALID_INDEX, EditCommandUtil.VALID_LINK,
+                        TypicalIndexes.INDEX_FIRST_PERSON));
 
         String expectedMessage =
                 String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson));
@@ -206,10 +210,12 @@ public class EditCommandTest {
 
     @Test
     public void execute_validLinkAndInvalidIndex_throwsCommandException() {
-        EditCommand editCommand = new EditCommand(TypicalIndexes.INDEX_FIRST_PERSON,
-                editPersonDescriptor -> editPersonDescriptor.setLink(
-                        EditCommandUtil.INVALID_INDEX, EditCommandUtil.VALID_LINK));
-        String expectedMessage = EditPersonDescriptor.MESSAGE_INVALID_LINK_INDEX;
+        EditCommand editCommand = new EditCommand(TypicalIndexes.INDEX_FIRST_PERSON, (editPersonDescriptor, index) ->
+                editPersonDescriptor.setLink(EditCommandUtil.INVALID_INDEX, EditCommandUtil.VALID_LINK,
+                        TypicalIndexes.INDEX_FIRST_PERSON));
+        String expectedMessage = String.format(Messages.MESSAGE_INVALID_MULTIVALUED_FIELD_ENTRY_INDEX,
+                TypicalIndexes.INDEX_FIRST_PERSON.getOneBased(), "a link",
+                EditCommandUtil.INVALID_INDEX.getOneBased());
         assertCommandFailure(editCommand, model, expectedMessage);
     }
 
@@ -230,8 +236,8 @@ public class EditCommandTest {
                 originalPerson.getTags(),
                 originalPerson.getPriority().orElse(null)
         );
-        EditCommand editCommand = new EditCommand(TypicalIndexes.INDEX_FIRST_PERSON,
-                editPersonDescriptor -> editPersonDescriptor.setGraduation(EditCommandUtil.VALID_GRADUATION));
+        EditCommand editCommand = new EditCommand(TypicalIndexes.INDEX_FIRST_PERSON, (editPersonDescriptor, index) ->
+                editPersonDescriptor.setGraduation(EditCommandUtil.VALID_GRADUATION));
 
         String expectedMessage =
                 String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson));
@@ -261,9 +267,9 @@ public class EditCommandTest {
                 originalPerson.getTags(),
                 originalPerson.getPriority().orElse(null)
         );
-        EditCommand editCommand = new EditCommand(TypicalIndexes.INDEX_FIRST_PERSON,
-                editPersonDescriptor -> editPersonDescriptor.setCourse(
-                        EditCommandUtil.VALID_INDEX, EditCommandUtil.VALID_COURSE));
+        EditCommand editCommand = new EditCommand(TypicalIndexes.INDEX_FIRST_PERSON, (editPersonDescriptor, index) ->
+                editPersonDescriptor.setCourse(EditCommandUtil.VALID_INDEX, EditCommandUtil.VALID_COURSE,
+                        TypicalIndexes.INDEX_FIRST_PERSON));
 
         String expectedMessage =
                 String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson));
@@ -276,10 +282,12 @@ public class EditCommandTest {
 
     @Test
     public void execute_validCourseAndInvalidIndex_throwsCommandException() {
-        EditCommand editCommand = new EditCommand(TypicalIndexes.INDEX_FIRST_PERSON,
-                editPersonDescriptor -> editPersonDescriptor.setCourse(
-                        EditCommandUtil.INVALID_INDEX, EditCommandUtil.VALID_COURSE));
-        String expectedMessage = EditPersonDescriptor.MESSAGE_INVALID_COURSE_INDEX;
+        EditCommand editCommand = new EditCommand(TypicalIndexes.INDEX_FIRST_PERSON, (editPersonDescriptor, index) ->
+                editPersonDescriptor.setCourse(EditCommandUtil.INVALID_INDEX, EditCommandUtil.VALID_COURSE,
+                        TypicalIndexes.INDEX_FIRST_PERSON));
+        String expectedMessage = String.format(Messages.MESSAGE_INVALID_MULTIVALUED_FIELD_ENTRY_INDEX,
+                TypicalIndexes.INDEX_FIRST_PERSON.getOneBased(), "a course",
+                EditCommandUtil.INVALID_INDEX.getOneBased());
         assertCommandFailure(editCommand, model, expectedMessage);
     }
 
@@ -302,9 +310,9 @@ public class EditCommandTest {
                 originalPerson.getTags(),
                 originalPerson.getPriority().orElse(null)
         );
-        EditCommand editCommand = new EditCommand(TypicalIndexes.INDEX_FIRST_PERSON,
-                editPersonDescriptor -> editPersonDescriptor.setSpecialisation(
-                        EditCommandUtil.VALID_INDEX, EditCommandUtil.VALID_SPECIALISATION));
+        EditCommand editCommand = new EditCommand(TypicalIndexes.INDEX_FIRST_PERSON, (editPersonDescriptor, index) ->
+                editPersonDescriptor.setSpecialisation(EditCommandUtil.VALID_INDEX,
+                        EditCommandUtil.VALID_SPECIALISATION, TypicalIndexes.INDEX_FIRST_PERSON));
 
         String expectedMessage =
                 String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson));
@@ -317,10 +325,12 @@ public class EditCommandTest {
 
     @Test
     public void execute_validSpecialisationAndInvalidIndex_throwsCommandException() {
-        EditCommand editCommand = new EditCommand(TypicalIndexes.INDEX_FIRST_PERSON,
-                editPersonDescriptor -> editPersonDescriptor.setSpecialisation(
-                        EditCommandUtil.INVALID_INDEX, EditCommandUtil.VALID_SPECIALISATION));
-        String expectedMessage = EditPersonDescriptor.MESSAGE_INVALID_SPECIALISATION_INDEX;
+        EditCommand editCommand = new EditCommand(TypicalIndexes.INDEX_FIRST_PERSON, (editPersonDescriptor, index) ->
+                editPersonDescriptor.setSpecialisation(EditCommandUtil.INVALID_INDEX,
+                        EditCommandUtil.VALID_SPECIALISATION, TypicalIndexes.INDEX_FIRST_PERSON));
+        String expectedMessage = String.format(Messages.MESSAGE_INVALID_MULTIVALUED_FIELD_ENTRY_INDEX,
+                TypicalIndexes.INDEX_FIRST_PERSON.getOneBased(), "a specialisation",
+                EditCommandUtil.INVALID_INDEX.getOneBased());
         assertCommandFailure(editCommand, model, expectedMessage);
     }
 
@@ -343,9 +353,9 @@ public class EditCommandTest {
                 newTagList,
                 originalPerson.getPriority().orElse(null)
         );
-        EditCommand editCommand = new EditCommand(TypicalIndexes.INDEX_FIRST_PERSON,
-                editPersonDescriptor -> editPersonDescriptor.setTag(
-                        EditCommandUtil.VALID_INDEX, EditCommandUtil.VALID_TAG));
+        EditCommand editCommand = new EditCommand(TypicalIndexes.INDEX_FIRST_PERSON, (editPersonDescriptor, index) ->
+                editPersonDescriptor.setTag(EditCommandUtil.VALID_INDEX, EditCommandUtil.VALID_TAG,
+                        TypicalIndexes.INDEX_FIRST_PERSON));
 
         String expectedMessage =
                 String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson));
@@ -358,10 +368,12 @@ public class EditCommandTest {
 
     @Test
     public void execute_validTagAndInvalidIndex_throwsCommandException() {
-        EditCommand editCommand = new EditCommand(TypicalIndexes.INDEX_FIRST_PERSON,
-                editPersonDescriptor -> editPersonDescriptor.setTag(
-                        EditCommandUtil.INVALID_INDEX, EditCommandUtil.VALID_TAG));
-        String expectedMessage = EditPersonDescriptor.MESSAGE_INVALID_TAG_INDEX;
+        EditCommand editCommand = new EditCommand(TypicalIndexes.INDEX_FIRST_PERSON, (editPersonDescriptor, index) ->
+                editPersonDescriptor.setTag(EditCommandUtil.INVALID_INDEX, EditCommandUtil.VALID_TAG,
+                        TypicalIndexes.INDEX_FIRST_PERSON));
+        String expectedMessage = String.format(Messages.MESSAGE_INVALID_MULTIVALUED_FIELD_ENTRY_INDEX,
+                TypicalIndexes.INDEX_FIRST_PERSON.getOneBased(), "a tag",
+                EditCommandUtil.INVALID_INDEX.getOneBased());
         assertCommandFailure(editCommand, model, expectedMessage);
     }
 
@@ -382,8 +394,8 @@ public class EditCommandTest {
                 originalPerson.getTags(),
                 EditCommandUtil.VALID_PRIORITY
         );
-        EditCommand editCommand = new EditCommand(TypicalIndexes.INDEX_FIRST_PERSON,
-                editPersonDescriptor -> editPersonDescriptor.setPriority(EditCommandUtil.VALID_PRIORITY));
+        EditCommand editCommand = new EditCommand(TypicalIndexes.INDEX_FIRST_PERSON, (editPersonDescriptor, index) ->
+                editPersonDescriptor.setPriority(EditCommandUtil.VALID_PRIORITY));
 
         String expectedMessage =
                 String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson));
@@ -396,10 +408,11 @@ public class EditCommandTest {
 
     @Test
     public void equals() {
-        EditAction editAction = editPersonDescriptor -> {};
+        EditAction editAction = (editPersonDescriptor, index) -> {};
         EditCommand standardCommand = new EditCommand(TypicalIndexes.INDEX_FIRST_PERSON, editAction);
         EditCommand sameCommand = new EditCommand(TypicalIndexes.INDEX_FIRST_PERSON, editAction);
-        EditCommand differentCommand = new EditCommand(TypicalIndexes.INDEX_FIRST_PERSON, editPersonDescriptor -> {});
+        EditCommand differentCommand = new EditCommand(
+                TypicalIndexes.INDEX_FIRST_PERSON, (editPersonDescriptor, index) -> {});
         EditCommand differentIndexCommand = new EditCommand(TypicalIndexes.INDEX_SECOND_PERSON, editAction);
 
         // same reference
@@ -423,7 +436,7 @@ public class EditCommandTest {
 
     @Test
     public void toStringMethod() {
-        EditAction editAction = editPersonDescriptor -> {};
+        EditAction editAction = (editPersonDescriptor, index) -> {};
         EditCommand command = new EditCommand(TypicalIndexes.INDEX_FIRST_PERSON, editAction);
         String expectedString = command.getClass().getCanonicalName()
                 + "{index=" + TypicalIndexes.INDEX_FIRST_PERSON

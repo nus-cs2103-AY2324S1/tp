@@ -13,6 +13,7 @@ import networkbook.logic.commands.exceptions.CommandException;
 import networkbook.model.person.Person;
 import networkbook.model.person.Specialisation;
 import networkbook.model.util.UniqueList;
+import networkbook.testutil.TypicalIndexes;
 
 public class EditSpecialisationActionTest {
     private static final EditSpecialisationAction SAMPLE_VALID_EDIT_SPECIALISATION_ACTION =
@@ -43,13 +44,14 @@ public class EditSpecialisationActionTest {
 
     @Test
     public void edit_null_throwsAssertionError() {
-        assertThrowsAssertionError(() -> SAMPLE_VALID_EDIT_SPECIALISATION_ACTION.edit(null));
+        assertThrowsAssertionError(() -> SAMPLE_VALID_EDIT_SPECIALISATION_ACTION.edit(null,
+                TypicalIndexes.INDEX_FIRST_PERSON));
     }
 
     @Test
     public void edit_validEditAction_success() throws CommandException {
         EditPersonDescriptor actualDescriptor = new EditPersonDescriptor(JACK);
-        SAMPLE_VALID_EDIT_SPECIALISATION_ACTION.edit(actualDescriptor);
+        SAMPLE_VALID_EDIT_SPECIALISATION_ACTION.edit(actualDescriptor, TypicalIndexes.INDEX_FIRST_PERSON);
 
         UniqueList<Specialisation> newSpecialisationList = JACK.getSpecialisations();
         newSpecialisationList.setItem(EditCommandUtil.VALID_INDEX.getZeroBased(),
@@ -74,6 +76,6 @@ public class EditSpecialisationActionTest {
     public void edit_invalidEditAction_throwsCommandException() {
         EditPersonDescriptor actualDescriptor = new EditPersonDescriptor(JACK);
         assertThrows(CommandException.class, ()
-                -> SAMPLE_INVALID_EDIT_SPECIALISATION_ACTION.edit(actualDescriptor));
+                -> SAMPLE_INVALID_EDIT_SPECIALISATION_ACTION.edit(actualDescriptor, TypicalIndexes.INDEX_FIRST_PERSON));
     }
 }

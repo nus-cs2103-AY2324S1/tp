@@ -177,17 +177,14 @@ public class DeleteCommandParserTest {
     @Test
     public void parse_deleteMultiValuedFieldInvalidIndex_throwsParseException() {
         CommandParserTestUtil.assertParseFailure(parser,
-                generateUserInput(ONE, TAG),
-                String.format(Messages.MESSAGE_INDEX_MUST_BE_PRESENT, TAG));
-        CommandParserTestUtil.assertParseFailure(parser,
                 generateUserInput(ONE, SPECIALISATION, INDEX, ONE, INDEX, TWO),
-                String.format(Messages.MESSAGE_INDEX_MUST_BE_PRESENT, SPECIALISATION));
+                Messages.MESSAGE_DUPLICATE_SINGLE_VALUED_FIELDS + CliSyntax.PREFIX_INDEX);
         CommandParserTestUtil.assertParseFailure(parser,
                 generateUserInput(ONE, LINK, INDEX, ONE, INDEX, ONE),
-                String.format(Messages.MESSAGE_INDEX_MUST_BE_PRESENT, LINK));
+                Messages.MESSAGE_DUPLICATE_SINGLE_VALUED_FIELDS + CliSyntax.PREFIX_INDEX);
         CommandParserTestUtil.assertParseFailure(parser,
                 generateUserInput(ONE, COURSE, INDEX, INDEX),
-                String.format(Messages.MESSAGE_INDEX_MUST_BE_PRESENT, COURSE));
+                Messages.MESSAGE_DUPLICATE_SINGLE_VALUED_FIELDS + CliSyntax.PREFIX_INDEX);
     }
 
     @Test
@@ -237,6 +234,7 @@ public class DeleteCommandParserTest {
 
     @Test
     public void parse_deleteMultiValuedField_success() throws ParseException {
+
         DeleteFieldCommand expectedEmailCommand = new DeleteFieldCommand(INDEX_ONE, DELETE_FIRST_EMAIL_ACTION);
         CommandParserTestUtil.assertParseSuccess(parser,
                 generateUserInput(ONE, EMAIL, INDEX, ONE),
@@ -259,12 +257,12 @@ public class DeleteCommandParserTest {
 
         DeleteFieldCommand expectedSpecCommand = new DeleteFieldCommand(INDEX_ONE, DELETE_FIRST_SPECIALISATION_ACTION);
         CommandParserTestUtil.assertParseSuccess(parser,
-                generateUserInput(ONE, SPECIALISATION, INDEX, ONE),
+                generateUserInput(ONE, SPECIALISATION),
                 expectedSpecCommand);
 
         DeleteFieldCommand expectedTagCommand = new DeleteFieldCommand(INDEX_ONE, DELETE_FIRST_TAG_ACTION);
         CommandParserTestUtil.assertParseSuccess(parser,
-                generateUserInput(ONE, INDEX, ONE, TAG),
+                generateUserInput(ONE, TAG),
                 expectedTagCommand);
     }
 

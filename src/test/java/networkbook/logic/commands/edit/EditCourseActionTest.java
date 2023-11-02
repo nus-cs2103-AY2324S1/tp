@@ -13,6 +13,7 @@ import networkbook.logic.commands.exceptions.CommandException;
 import networkbook.model.person.Course;
 import networkbook.model.person.Person;
 import networkbook.model.util.UniqueList;
+import networkbook.testutil.TypicalIndexes;
 
 public class EditCourseActionTest {
     private static final EditCourseAction SAMPLE_VALID_EDIT_COURSE_ACTION =
@@ -41,13 +42,14 @@ public class EditCourseActionTest {
 
     @Test
     public void edit_null_throwsAssertionError() {
-        assertThrowsAssertionError(() -> SAMPLE_VALID_EDIT_COURSE_ACTION.edit(null));
+        assertThrowsAssertionError(() -> SAMPLE_VALID_EDIT_COURSE_ACTION.edit(null,
+                TypicalIndexes.INDEX_FIRST_PERSON));
     }
 
     @Test
     public void edit_validEditAction_success() throws CommandException {
         EditPersonDescriptor actualDescriptor = new EditPersonDescriptor(JACK);
-        SAMPLE_VALID_EDIT_COURSE_ACTION.edit(actualDescriptor);
+        SAMPLE_VALID_EDIT_COURSE_ACTION.edit(actualDescriptor, TypicalIndexes.INDEX_FIRST_PERSON);
 
         UniqueList<Course> newCourseList = JACK.getCourses();
         newCourseList.setItem(EditCommandUtil.VALID_INDEX.getZeroBased(), EditCommandUtil.VALID_COURSE);
@@ -70,6 +72,7 @@ public class EditCourseActionTest {
     @Test
     public void edit_invalidEditAction_throwsCommandException() {
         EditPersonDescriptor actualDescriptor = new EditPersonDescriptor(JACK);
-        assertThrows(CommandException.class, () -> SAMPLE_INVALID_EDIT_COURSE_ACTION.edit(actualDescriptor));
+        assertThrows(CommandException.class, () -> SAMPLE_INVALID_EDIT_COURSE_ACTION.edit(actualDescriptor,
+                TypicalIndexes.INDEX_FIRST_PERSON));
     }
 }

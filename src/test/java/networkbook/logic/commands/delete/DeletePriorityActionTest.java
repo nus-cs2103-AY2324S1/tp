@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 import networkbook.commons.core.index.Index;
 import networkbook.logic.commands.exceptions.CommandException;
 import networkbook.model.person.Person;
+import networkbook.testutil.TypicalIndexes;
 import networkbook.testutil.TypicalPersons;
 
 public class DeletePriorityActionTest {
@@ -28,12 +29,12 @@ public class DeletePriorityActionTest {
     public void delete_deletePriority_success() throws CommandException {
         DeletePersonDescriptor descriptor = new DeletePersonDescriptor(JACK);
         DeletePriorityAction action = new DeletePriorityAction();
-        action.delete(descriptor);
+        action.delete(descriptor, TypicalIndexes.INDEX_FIRST_PERSON);
         assertEquals(jackWithoutPriority, descriptor);
     }
 
     @Test
-    public void delete_deletePriorityOfPersonWithoutPriority_success() throws CommandException {
+    public void delete_deletePriorityOfPersonWithoutPriority_commandException() throws CommandException {
         DeletePriorityAction action = new DeletePriorityAction();
         DeletePersonDescriptor descriptorWithoutPriority = new DeletePersonDescriptor(new Person(
                 JACK.getName(),
@@ -45,14 +46,15 @@ public class DeletePriorityActionTest {
                 JACK.getSpecialisations(),
                 JACK.getTags(),
                 null));
-        action.delete(descriptorWithoutPriority);
-        assertEquals(jackWithoutPriority, descriptorWithoutPriority);
+        assertThrows(CommandException.class, () ->
+                action.delete(descriptorWithoutPriority, TypicalIndexes.INDEX_FIRST_PERSON));
     }
 
     @Test
     public void delete_deleteNull_nullPointerException() {
         DeletePriorityAction deleteFirstAction = new DeletePriorityAction();
-        assertThrows(NullPointerException.class, () -> deleteFirstAction.delete(null));
+        assertThrows(NullPointerException.class, () -> deleteFirstAction.delete(null,
+                TypicalIndexes.INDEX_FIRST_PERSON));
     }
 
     @Test

@@ -21,8 +21,8 @@ public class DeleteSpecialisationAction implements DeleteFieldAction {
      * @param descriptor
      */
     @Override
-    public void delete(DeletePersonDescriptor descriptor) throws CommandException {
-        descriptor.deleteSpecialisation(index);
+    public void delete(DeletePersonDescriptor descriptor, Index indexOfPerson) throws CommandException {
+        descriptor.deleteSpecialisation(index, indexOfPerson);
     }
 
     @Override

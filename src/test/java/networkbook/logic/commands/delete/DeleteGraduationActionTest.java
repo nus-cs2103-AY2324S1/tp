@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 import networkbook.commons.core.index.Index;
 import networkbook.logic.commands.exceptions.CommandException;
 import networkbook.model.person.Person;
+import networkbook.testutil.TypicalIndexes;
 import networkbook.testutil.TypicalPersons;
 
 public class DeleteGraduationActionTest {
@@ -28,12 +29,12 @@ public class DeleteGraduationActionTest {
     public void delete_deleteGraduation_success() throws CommandException {
         DeletePersonDescriptor descriptor = new DeletePersonDescriptor(JACK);
         DeleteGraduationAction action = new DeleteGraduationAction();
-        action.delete(descriptor);
+        action.delete(descriptor, TypicalIndexes.INDEX_FIRST_PERSON);
         assertEquals(jackWithoutGraduation, descriptor);
     }
 
     @Test
-    public void delete_deleteGraduationOfPersonWithoutGraduation_success() throws CommandException {
+    public void delete_deleteGraduationOfPersonWithoutGraduation_commandException() throws CommandException {
         DeleteGraduationAction action = new DeleteGraduationAction();
         DeletePersonDescriptor descriptorWithoutGraduation = new DeletePersonDescriptor(new Person(
                 JACK.getName(),
@@ -45,14 +46,15 @@ public class DeleteGraduationActionTest {
                 JACK.getSpecialisations(),
                 JACK.getTags(),
                 JACK.getPriority().get()));
-        action.delete(descriptorWithoutGraduation);
-        assertEquals(jackWithoutGraduation, descriptorWithoutGraduation);
+        assertThrows(CommandException.class, () ->
+                action.delete(descriptorWithoutGraduation, TypicalIndexes.INDEX_FIRST_PERSON));
     }
 
     @Test
     public void delete_deleteNull_nullPointerException() {
         DeleteGraduationAction deleteFirstAction = new DeleteGraduationAction();
-        assertThrows(NullPointerException.class, () -> deleteFirstAction.delete(null));
+        assertThrows(NullPointerException.class, () -> deleteFirstAction.delete(null,
+                TypicalIndexes.INDEX_FIRST_PERSON));
     }
 
     @Test

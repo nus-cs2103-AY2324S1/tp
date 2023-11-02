@@ -13,6 +13,7 @@ import networkbook.logic.commands.exceptions.CommandException;
 import networkbook.model.person.Person;
 import networkbook.model.person.Tag;
 import networkbook.model.util.UniqueList;
+import networkbook.testutil.TypicalIndexes;
 import networkbook.testutil.TypicalPersons;
 
 public class DeleteTagActionTest {
@@ -45,9 +46,9 @@ public class DeleteTagActionTest {
     public void delete_deleteTagValidIndex_success() throws CommandException {
         DeletePersonDescriptor descriptor = new DeletePersonDescriptor(JACK);
         DeleteTagAction action = new DeleteTagAction(firstIndex);
-        action.delete(descriptor);
+        action.delete(descriptor, TypicalIndexes.INDEX_FIRST_PERSON);
         assertEquals(descriptor, jackWithoutFirstTag);
-        action.delete(descriptor);
+        action.delete(descriptor, TypicalIndexes.INDEX_FIRST_PERSON);
         assertEquals(descriptor, jackWithoutAnyTag);
     }
 
@@ -64,17 +65,20 @@ public class DeleteTagActionTest {
                 JACK.getSpecialisations(),
                 new UniqueList<Tag>(),
                 JACK.getPriority().get()));
-        assertThrows(CommandException.class, () -> deleteFirstAction.delete(descriptorWithoutTag));
+        assertThrows(CommandException.class, () -> deleteFirstAction.delete(descriptorWithoutTag,
+                TypicalIndexes.INDEX_FIRST_PERSON));
 
         DeleteTagAction deleteTenthAction = new DeleteTagAction(tenthIndex);
         DeletePersonDescriptor descriptorWithTwoTags = new DeletePersonDescriptor(JACK);
-        assertThrows(CommandException.class, () -> deleteTenthAction.delete(descriptorWithTwoTags));
+        assertThrows(CommandException.class, () -> deleteTenthAction.delete(descriptorWithTwoTags,
+                TypicalIndexes.INDEX_FIRST_PERSON));
     }
 
     @Test
     public void delete_deleteNull_nullPointerException() {
         DeleteTagAction deleteFirstAction = new DeleteTagAction(firstIndex);
-        assertThrows(NullPointerException.class, () -> deleteFirstAction.delete(null));
+        assertThrows(NullPointerException.class, () -> deleteFirstAction.delete(null,
+                TypicalIndexes.INDEX_FIRST_PERSON));
     }
 
     @Test

@@ -79,7 +79,7 @@ public class EditCommandParser implements Parser<EditCommand> {
                 CliSyntax.PREFIX_PRIORITY
         );
 
-        argMultimap.verifyIfPresentThenOnlyOne(new Prefix[] {
+        argMultimap.verifyIfPresentThenAtMostOne(new Prefix[] {
             CliSyntax.PREFIX_PHONE,
             CliSyntax.PREFIX_EMAIL,
             CliSyntax.PREFIX_LINK,
@@ -126,19 +126,19 @@ public class EditCommandParser implements Parser<EditCommand> {
 
     private static EditAction generatePhoneAction(ArgumentMultimap argMultimap) throws ParseException {
         Phone phone = ParserUtil.parsePhone(argMultimap.getValue(CliSyntax.PREFIX_PHONE).get());
-        Index index = ParserUtil.parseIndex(argMultimap.getValue(CliSyntax.PREFIX_INDEX).get());
+        Index index = ParserUtil.parseIndex(argMultimap.getValue(CliSyntax.PREFIX_INDEX).orElse("1"));
         return new EditPhoneAction(index, phone);
     }
 
     private static EditAction generateEmailAction(ArgumentMultimap argMultimap) throws ParseException {
         Email email = ParserUtil.parseEmail(argMultimap.getValue(CliSyntax.PREFIX_EMAIL).get());
-        Index index = ParserUtil.parseIndex(argMultimap.getValue(CliSyntax.PREFIX_INDEX).get());
+        Index index = ParserUtil.parseIndex(argMultimap.getValue(CliSyntax.PREFIX_INDEX).orElse("1"));
         return new EditEmailAction(index, email);
     }
 
     private static EditAction generateLinkAction(ArgumentMultimap argMultimap) throws ParseException {
         Link link = ParserUtil.parseLink(argMultimap.getValue(CliSyntax.PREFIX_LINK).get());
-        Index index = ParserUtil.parseIndex(argMultimap.getValue(CliSyntax.PREFIX_INDEX).get());
+        Index index = ParserUtil.parseIndex(argMultimap.getValue(CliSyntax.PREFIX_INDEX).orElse("1"));
         return new EditLinkAction(index, link);
     }
 
@@ -149,20 +149,20 @@ public class EditCommandParser implements Parser<EditCommand> {
 
     private static EditAction generateCourseAction(ArgumentMultimap argMultimap) throws ParseException {
         Course course = ParserUtil.parseCourseWithPrefixes(argMultimap.getValue(CliSyntax.PREFIX_COURSE).get());
-        Index index = ParserUtil.parseIndex(argMultimap.getValue(CliSyntax.PREFIX_INDEX).get());
+        Index index = ParserUtil.parseIndex(argMultimap.getValue(CliSyntax.PREFIX_INDEX).orElse("1"));
         return new EditCourseAction(index, course);
     }
 
     private static EditAction generateSpecialisationAction(ArgumentMultimap argMultimap) throws ParseException {
         Specialisation specialisation =
                 ParserUtil.parseSpecialisation(argMultimap.getValue(CliSyntax.PREFIX_SPECIALISATION).get());
-        Index index = ParserUtil.parseIndex(argMultimap.getValue(CliSyntax.PREFIX_INDEX).get());
+        Index index = ParserUtil.parseIndex(argMultimap.getValue(CliSyntax.PREFIX_INDEX).orElse("1"));
         return new EditSpecialisationAction(index, specialisation);
     }
 
     private static EditAction generateTagAction(ArgumentMultimap argMultimap) throws ParseException {
         Tag tag = ParserUtil.parseTag(argMultimap.getValue(CliSyntax.PREFIX_TAG).get());
-        Index index = ParserUtil.parseIndex(argMultimap.getValue(CliSyntax.PREFIX_INDEX).get());
+        Index index = ParserUtil.parseIndex(argMultimap.getValue(CliSyntax.PREFIX_INDEX).orElse("1"));
         return new EditTagAction(index, tag);
     }
 

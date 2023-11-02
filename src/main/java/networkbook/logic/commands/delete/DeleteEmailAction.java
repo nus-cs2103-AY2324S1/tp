@@ -20,8 +20,8 @@ public class DeleteEmailAction implements DeleteFieldAction {
      * @param descriptor
      */
     @Override
-    public void delete(DeletePersonDescriptor descriptor) throws CommandException {
-        descriptor.deleteEmail(index);
+    public void delete(DeletePersonDescriptor descriptor, Index indexOfPerson) throws CommandException {
+        descriptor.deleteEmail(index, indexOfPerson);
     }
 
     @Override

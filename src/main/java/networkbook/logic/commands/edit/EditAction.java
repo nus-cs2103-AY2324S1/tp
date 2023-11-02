@@ -1,5 +1,6 @@
 package networkbook.logic.commands.edit;
 
+import networkbook.commons.core.index.Index;
 import networkbook.logic.commands.exceptions.CommandException;
 
 /**
@@ -9,5 +10,5 @@ public interface EditAction {
     /**
      * Mutates the {@code editPersonDescriptor}, which is then used by `EditCommand` to edit the person the model.
      */
-    void edit(EditPersonDescriptor editPersonDescriptor) throws CommandException;
+    void edit(EditPersonDescriptor editPersonDescriptor, Index indexOfPerson) throws CommandException;
 }

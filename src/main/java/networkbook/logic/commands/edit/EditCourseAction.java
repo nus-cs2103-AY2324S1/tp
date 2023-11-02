@@ -23,9 +23,9 @@ public class EditCourseAction implements EditAction {
     }
 
     @Override
-    public void edit(EditPersonDescriptor editPersonDescriptor) throws CommandException {
+    public void edit(EditPersonDescriptor editPersonDescriptor, Index indexOfPerson) throws CommandException {
         assert editPersonDescriptor != null : "editPersonDescriptor should not be null";
-        editPersonDescriptor.setCourse(index, course);
+        editPersonDescriptor.setCourse(index, course, indexOfPerson);
     }
 
     @Override

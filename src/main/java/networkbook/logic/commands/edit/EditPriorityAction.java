@@ -1,5 +1,6 @@
 package networkbook.logic.commands.edit;
 
+import networkbook.commons.core.index.Index;
 import networkbook.commons.util.ToStringBuilder;
 import networkbook.model.person.Priority;
 
@@ -18,7 +19,7 @@ public class EditPriorityAction implements EditAction {
     }
 
     @Override
-    public void edit(EditPersonDescriptor editPersonDescriptor) {
+    public void edit(EditPersonDescriptor editPersonDescriptor, Index indexOfPerson) {
         assert editPersonDescriptor != null : "editPersonDescriptor should not be null";
         editPersonDescriptor.setPriority(priority);
     }

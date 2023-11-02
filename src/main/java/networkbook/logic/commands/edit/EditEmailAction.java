@@ -23,9 +23,9 @@ public class EditEmailAction implements EditAction {
     }
 
     @Override
-    public void edit(EditPersonDescriptor editPersonDescriptor) throws CommandException {
+    public void edit(EditPersonDescriptor editPersonDescriptor, Index indexOfPerson) throws CommandException {
         assert editPersonDescriptor != null : "editPersonDescriptor should not be null";
-        editPersonDescriptor.setEmail(index, email);
+        editPersonDescriptor.setEmail(index, email, indexOfPerson);
     }
 
     @Override

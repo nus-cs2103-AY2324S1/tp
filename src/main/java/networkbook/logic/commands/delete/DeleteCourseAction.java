@@ -20,8 +20,8 @@ public class DeleteCourseAction implements DeleteFieldAction {
      * @param descriptor
      */
     @Override
-    public void delete(DeletePersonDescriptor descriptor) throws CommandException {
-        descriptor.deleteCourse(index);
+    public void delete(DeletePersonDescriptor descriptor, Index indexOfPerson) throws CommandException {
+        descriptor.deleteCourse(index, indexOfPerson);
     }
 
     @Override

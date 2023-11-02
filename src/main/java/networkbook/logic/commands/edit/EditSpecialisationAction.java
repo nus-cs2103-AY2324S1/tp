@@ -23,9 +23,9 @@ public class EditSpecialisationAction implements EditAction {
     }
 
     @Override
-    public void edit(EditPersonDescriptor editPersonDescriptor) throws CommandException {
+    public void edit(EditPersonDescriptor editPersonDescriptor, Index indexOfPerson) throws CommandException {
         assert editPersonDescriptor != null : "editPersonDescriptor should not be null";
-        editPersonDescriptor.setSpecialisation(index, specialisation);
+        editPersonDescriptor.setSpecialisation(index, specialisation, indexOfPerson);
     }
 
     @Override
