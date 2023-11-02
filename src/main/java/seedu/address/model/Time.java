@@ -17,11 +17,8 @@ import seedu.address.model.interview.UniqueInterviewList;
  * @author Tan Kerway
  */
 public class Time implements Comparable<Time> {
-    /*
-     * Class-level Time constants
-     */
-    private static final LocalTime WORK_START = LocalTime.of(9, 0);
-    private static final LocalTime WORK_END = LocalTime.of(17, 0);
+    public static final LocalTime WORK_START = LocalTime.of(9, 0);
+    public static final LocalTime WORK_END = LocalTime.of(17, 0);
 
     /*
      * Instance-level Time fields
@@ -39,42 +36,13 @@ public class Time implements Comparable<Time> {
     }
 
     /**
-     * Lists out all interviews that have a start time of today
-     *
-     * @author Tan Kerway
-     * @param interviews the list of interviews that the user has
-     * @return a list of interviews whose start time is today, as given by LocalDateTime.now()
-     */
-    public static List<Interview> listInterviewsToday(UniqueInterviewList interviews) {
-        return listInterviewsOnGivenDay(LocalDateTime.now(), interviews);
-    }
-
-    /**
-     * Compiles a list of interviews that the user has on a given day
-     *
-     * @author Tan Kerway
-     * @return a list of interviews whose start time is the given day, as given by LocalDateTime.now()
-     */
-    public static List<Interview> listInterviewsOnGivenDay(LocalDateTime day, UniqueInterviewList interviews) {
-        List<Interview> res = new ArrayList<>();
-        // loop over all the interviews, and add those that have today as the start time
-        for (Interview interview : interviews) {
-            LocalDateTime currentInterviewStartDate = interview.getInterviewStartTime();
-            if (isSameDay(day, currentInterviewStartDate)) {
-                res.add(interview); // add the current interview if its start date is today
-            }
-        }
-        return res;
-    }
-
-    /**
      * Checks whether two LocalDateTimes are the same.
      *
      * @author Tan Kerway
      *
      */
-    public static boolean isSameDay(LocalDateTime date1, LocalDateTime date2) {
-        return date1.toLocalDate().equals(date2.toLocalDate());
+    public boolean isSameDay(Time otherTime) {
+        return this.time.toLocalDate().equals(otherTime.getDate());
     }
 
     /**
@@ -82,93 +50,8 @@ public class Time implements Comparable<Time> {
      *
      * @author Tan Kerway
      */
-    public static boolean isToday(LocalDateTime day) {
-        return isSameDay(LocalDateTime.now(), day);
-    }
-
-    /**
-     * Compiles a list of free times that the user has. Each element is a 2-element list where the
-     * first element is the start of the free time block, and the second element is the end of the
-     * free time block. Only places interviews that are within a 9-5 workday. Assumes that the given
-     * interview list has no clashes. Also assumes that the start time of any scheduled interviews are less
-     * than or equals to their corresponding end time.
-     *
-     * @author Tan Kerway
-     * @param day the day that the user inputs
-     * @param interviewList the list of interviews that the user has
-     * @return a list of free time blocks that the user has on a given day
-     */
-    public static List<List<LocalDateTime>> listPocketsOfTimeOnGivenDay(
-            LocalDateTime day,
-            UniqueInterviewList interviewList) {
-        // filter the interviews that fall on the given day, and sort in ascending
-        // chronological order
-        List<Interview> interviewsOnGivenDay =
-                listInterviewsOnGivenDay(day, interviewList);
-        UniqueInterviewList temp = new UniqueInterviewList();
-        temp.setInterviews(interviewsOnGivenDay);
-        List<Interview> interviewsOnGivenDaySorted = sortInterviewsInChronologicalAscendingOrder(temp);
-        List<List<LocalDateTime>> res = new ArrayList<>();
-        LocalDateTime startOfWorkDay = LocalDateTime.of(
-                day.getYear(),
-                day.getMonthValue(),
-                day.getDayOfMonth(),
-                9,
-                0);
-        LocalDateTime endOfWorkDay = LocalDateTime.of(
-                day.getYear(),
-                day.getMonthValue(),
-                day.getDayOfMonth(),
-                17,
-                0);
-        // track the previous end time of the interview
-        LocalDateTime prevEnd = startOfWorkDay.plusDays(0);
-
-        // find free time in 24h window
-        for (Interview interview : interviewsOnGivenDaySorted) {
-            // get the start time and end time
-            LocalDateTime currentInterviewStartTime = interview.getInterviewStartTime();
-            LocalDateTime currentInterviewEndTime = interview.getInterviewEndTime();
-            // case 1: the workday is completely overlapped by the interview
-            if (currentInterviewStartTime.isBefore(startOfWorkDay)
-                    && currentInterviewEndTime.isAfter(endOfWorkDay)) {
-                prevEnd = currentInterviewEndTime.plusDays(0);
-                break;
-            }
-            // case 2: the workday is outside and before the workday
-            if (currentInterviewEndTime.isBefore(startOfWorkDay)) {
-                continue;
-            }
-            // case 3: the workday is outside and after the workday
-            if (currentInterviewStartTime.isAfter(endOfWorkDay)) {
-                break;
-            }
-            // case 4: the interview's start point is before the start of workday
-            // and the interview's end point is after the start of the workday
-            if (currentInterviewStartTime.isBefore(startOfWorkDay)
-                    && currentInterviewEndTime.isAfter(startOfWorkDay)) {
-                prevEnd = currentInterviewEndTime.plusDays(0);
-                continue;
-            }
-            // get the current block of free time by taking the end of the last interval
-            // and the start of the current interval
-            List<LocalDateTime> currentFreeTime = new ArrayList<>();
-            currentFreeTime.add(prevEnd);
-            currentFreeTime.add(currentInterviewStartTime);
-            if (!prevEnd.equals(currentInterviewStartTime)) {
-                res.add(currentFreeTime);
-            }
-            prevEnd = currentInterviewEndTime;
-        }
-
-        // add stray free time, if any
-        if (prevEnd.isBefore(endOfWorkDay)) {
-            List<LocalDateTime> strayFreeTime = new ArrayList<>();
-            strayFreeTime.add(prevEnd);
-            strayFreeTime.add(endOfWorkDay);
-            res.add(strayFreeTime);
-        }
-        return res;
+    public boolean isToday() {
+        return isSameDay(new Time(LocalDateTime.now()));
     }
 
     /**

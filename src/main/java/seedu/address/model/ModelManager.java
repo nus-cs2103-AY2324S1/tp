@@ -5,11 +5,13 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
 import java.util.Comparator;
+import java.util.List;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
+import javafx.util.Pair;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.applicant.Applicant;
@@ -163,6 +165,17 @@ public class ModelManager implements Model {
         Applicant applicantToUpdate = target.getInterviewApplicant();
         addressBook.setApplicant(applicantToUpdate, applicantToUpdate.getApplicantWithoutInterview());
         addressBook.removeInterview(target);
+    }
+
+    /**
+     * Lists the pockets of time on a given day.
+     *
+     * @author Tan Kerway
+     * @param day the day to list pockets of time on
+     * @return a list of pockets of time available on the given day
+     */
+    public List<Pair<Time, Time>> listPocketsOfTimeOnGivenDay(Time day) {
+        return addressBook.listPocketsOfTimeOnGivenDay(day);
     }
 
     //=========== Filtered Applicant and Interview List Accessors =================================================

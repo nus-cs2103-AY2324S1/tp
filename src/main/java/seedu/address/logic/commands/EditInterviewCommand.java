@@ -7,7 +7,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_START_TIME;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_APPLICANTS;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_INTERVIEWS;
 
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -18,6 +17,7 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.Time;
 import seedu.address.model.interview.Interview;
 
 /**
@@ -107,9 +107,9 @@ public class EditInterviewCommand extends Command {
         assert interviewToEdit != null;
 
         String updatedJobRole = editInterviewDescriptor.getJobRole().orElse(interviewToEdit.getJobRole());
-        LocalDateTime updatedStartTime = editInterviewDescriptor
+        Time updatedStartTime = editInterviewDescriptor
                 .getStartTime().orElse(interviewToEdit.getInterviewStartTime());
-        LocalDateTime updatedEndTime = editInterviewDescriptor
+        Time updatedEndTime = editInterviewDescriptor
                 .getEndTime().orElse(interviewToEdit.getInterviewEndTime());
 
         return new Interview(interviewToEdit.getInterviewApplicant(),
@@ -146,8 +146,9 @@ public class EditInterviewCommand extends Command {
      */
     public static class EditInterviewDescriptor {
         private String jobRole;
-        private LocalDateTime startTime;
-        private LocalDateTime endTime;
+        private Time startTime;
+        private Time endTime;
+        private boolean isDone;
 
         public EditInterviewDescriptor() {}
 
@@ -176,19 +177,19 @@ public class EditInterviewCommand extends Command {
             return Optional.ofNullable(jobRole);
         }
 
-        public void setStartTime(LocalDateTime startTime) {
+        public void setStartTime(Time startTime) {
             this.startTime = startTime;
         }
 
-        public Optional<LocalDateTime> getStartTime() {
+        public Optional<Time> getStartTime() {
             return Optional.ofNullable(startTime);
         }
 
-        public void setEndTime(LocalDateTime endTime) {
+        public void setEndTime(Time endTime) {
             this.endTime = endTime;
         }
 
-        public Optional<LocalDateTime> getEndTime() {
+        public Optional<Time> getEndTime() {
             return Optional.ofNullable(endTime);
         }
 

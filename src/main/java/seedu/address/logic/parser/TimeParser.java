@@ -7,6 +7,8 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 
+import seedu.address.model.Time;
+
 /**
  * This class encapsulates the methods that are part of the TimeParser API.
  *
@@ -85,7 +87,7 @@ public class TimeParser {
      * @return datetime object that represents the string
      * @throws seedu.address.logic.parser.exceptions.ParseException when the time String is not valid
      */
-    public static LocalDateTime parseDate(String time, boolean dateOnly)
+    public static Time parseDate(String time, boolean dateOnly)
             throws seedu.address.logic.parser.exceptions.ParseException {
         String[][] formatList = dateOnly ? DATE_ONLY_FORMATS : DATE_FORMATS;
         for (int currentFormatID = 0; currentFormatID < formatList.length; currentFormatID++) {
@@ -99,7 +101,7 @@ public class TimeParser {
                             .toInstant()
                             .atZone(ZoneId.systemDefault())
                             .toLocalDateTime();
-                    return addMissingDateFields(temp, currentFormatID, dateOnly);
+                    return new Time(addMissingDateFields(temp, currentFormatID, dateOnly));
                 } catch (ParseException ignored) {
                     String s = "";
                 }
