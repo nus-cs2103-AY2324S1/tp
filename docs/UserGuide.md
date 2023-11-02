@@ -270,7 +270,7 @@ Expected output when the command fails:
 
 >:bulb: `log` overwrites the data currently in the logger tab, so you do not need to perform clearing prior
 
-### Adding a new `find` command result to the log: `alog`
+### Adding a New `find` Command Result to the Log: `alog`
 
 Appends the new results of the most recent find command to the current data in the logger tab, which can be viewed at all times.
 
@@ -356,7 +356,7 @@ Format: `exit`
 HealthSync data are saved in the hard disk automatically after any command that changes the data is executed.
 There is no need to save manually.
 
-### Editing the data file
+### Editing the Data File
 
 HealthSync data are saved automatically as a JSON file `[JAR file location]/data/healthsync.json`.
 Advanced users are welcome to update data directly by editing that data file.
@@ -366,7 +366,7 @@ Advanced users are welcome to update data directly by editing that data file.
 >If your changes to the data file makes its format invalid, HealthSync will discard all data and start with an empty
 >data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.
 
-### Archiving data files `[coming in v5.0]`
+### Archiving Data Files `[coming in v5.0]`
 
 
 ## [FAQ](#faq)
