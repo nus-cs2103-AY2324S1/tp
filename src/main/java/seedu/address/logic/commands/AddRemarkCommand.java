@@ -38,7 +38,7 @@ public class AddRemarkCommand extends Command {
     private final Remark remark;
 
     /**
-     * Creates an AddRemarkCommand to add the specified {@code Employee}
+     * Creates an AddRemarkCommand to add to the specified {@code Employee}
      */
     public AddRemarkCommand(Id targetId, Remark remark) {
         this.targetId = targetId;
@@ -73,7 +73,7 @@ public class AddRemarkCommand extends Command {
      * @param currentList The RemarkList to add to.
      * @param remark The Remark to be added.
      * @return RemarkList with added Remark.
-     * @throws CommandException If the user input does not conform the expected format
+     * @throws CommandException If the remark already exists.
      */
     private RemarkList addRemarkToList(RemarkList currentList, Remark remark) throws CommandException {
         if (currentList.contains(remark)) {

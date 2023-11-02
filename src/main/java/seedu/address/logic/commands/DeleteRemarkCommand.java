@@ -54,7 +54,7 @@ public class DeleteRemarkCommand extends Command {
         for (Employee employee : lastShownList) {
             if (employee.getId().equals(targetId)) {
                 RemarkList remarkListToUpdate = employee.getRemarkList();
-                RemarkList updatedList = deleteRemarkToList(remarkListToUpdate, remark);
+                RemarkList updatedList = deleteRemarkFromList(remarkListToUpdate, remark);
 
                 Employee employeeWithRemark = new Employee(employee.getName(), employee.getPosition(), employee.getId(),
                         employee.getPhone(), employee.getEmail(), employee.getSalary(), employee.getDepartments(),
@@ -75,7 +75,7 @@ public class DeleteRemarkCommand extends Command {
      * @return RemarkList without deleted Remark.
      * @throws CommandException If the user input does not conform the expected format
      */
-    private RemarkList deleteRemarkToList(RemarkList currentList, Remark remark) throws CommandException {
+    private RemarkList deleteRemarkFromList(RemarkList currentList, Remark remark) throws CommandException {
         if (!currentList.contains(remark)) {
             throw new CommandException(MESSAGE_NONEXISTENT_REMARK);
         } else {

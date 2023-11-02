@@ -17,8 +17,8 @@ import seedu.address.model.remark.Remark;
  */
 public class AddRemarkCommandParser implements Parser<AddRemarkCommand> {
     /**
-     * Parses the given {@code String} of arguments in the context of the AddLeaveCommand
-     * and returns a AddLeaveCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the AddRemarkCommand
+     * and returns a AddRemarkCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
     public AddRemarkCommand parse(String args) throws ParseException {
@@ -29,6 +29,8 @@ public class AddRemarkCommandParser implements Parser<AddRemarkCommand> {
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddRemarkCommand.MESSAGE_USAGE));
         }
+
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_ID, PREFIX_REMARK);
 
         Id id;
         Remark remark;

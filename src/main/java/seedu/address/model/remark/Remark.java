@@ -56,10 +56,6 @@ public class Remark {
      * @return True if the remark is non-empty.
      */
     public static boolean isValidRemark(String test) {
-        if (!test.isBlank()) {
-            return true;
-        } else {
-            return false;
-        }
+        return !test.isBlank();
     }
 }

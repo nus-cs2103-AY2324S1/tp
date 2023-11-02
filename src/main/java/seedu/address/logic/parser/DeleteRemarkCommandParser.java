@@ -17,8 +17,8 @@ import seedu.address.model.remark.Remark;
  */
 public class DeleteRemarkCommandParser implements Parser<DeleteRemarkCommand> {
     /**
-     * Parses the given {@code String} of arguments in the context of the DeleteLeaveCommand
-     * and returns a DeleteLeaveCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the DeleteRemarkCommand
+     * and returns a DeleteRemarkCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
     public DeleteRemarkCommand parse(String args) throws ParseException {
