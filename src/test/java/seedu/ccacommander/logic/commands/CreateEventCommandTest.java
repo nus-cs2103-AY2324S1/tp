@@ -178,7 +178,6 @@ public class CreateEventCommandTest {
             throw new AssertionError("This method should not be called.");
         }
 
-
         @Override
         public void editEnrolmentsWithEventName(Name prevName, Name newName) {
             throw new AssertionError("This method should not be called.");
