@@ -3,12 +3,13 @@
 ## FumbleLog
 ![Ui](docs/images/Ui.png) 
 
-**FumbleLog is a desktop application for managing your contact details.** While it has a GUI, most of the user interactions happen using a CLI (Command Line Interface).
+FumbleLog is a **productivity desktop application** built to for **NUS Computing students** to help you manage contacts and track events.
+It is designed to be an easy-to-use, one-stop platform for all your scheduling needs.
 
 * If you are interested in using FumbleLog, head over to the [_Quick Start_ section of the **User Guide**](docs/UserGuide.md#quick-start).
 * If you are interested about developing FumbleLog, the [**Developer Guide**](docs/DeveloperGuide.md) is a good place to start.
 
-* The project simulates an ongoing software project for a desktop application (called _FumbleLog_) used for managing contact details.
+The project simulates an ongoing software project for a desktop application (called _FumbleLog_) used for managing contact details.
   * It is **written in OOP fashion**. It provides a **reasonably well-written** code base **bigger** (around 6 KLoC) than what students usually write in beginner-level SE modules, without being overwhelmingly big.
   * It comes with a **reasonable level of user and developer documentation**.
 

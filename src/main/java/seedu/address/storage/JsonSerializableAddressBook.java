@@ -25,8 +25,6 @@ class JsonSerializableAddressBook {
     private final List<JsonAdaptedPerson> persons = new ArrayList<>();
     private final List<JsonAdaptedEvent> events = new ArrayList<>();
 
-    private final List<JsonAdaptedGroup> groups = new ArrayList<>();
-
     /**
      * Constructs a {@code JsonSerializableAddressBook} with the given persons and meetings.
      * Extracted from the database
