@@ -8,6 +8,7 @@ import seedu.ccacommander.commons.core.GuiSettings;
 import seedu.ccacommander.model.enrolment.Enrolment;
 import seedu.ccacommander.model.event.Event;
 import seedu.ccacommander.model.member.Member;
+import seedu.ccacommander.model.shared.Name;
 
 /**
  * The API of the Model component.
@@ -114,6 +115,16 @@ public interface Model {
      * The enrolment must exist in CcaCommander.
      */
     void deleteEnrolment(Enrolment target);
+
+    /**
+     * Deletes all enrolments with matching eventName.
+     */
+    void deleteEnrolmentsWithEventName(Name eventName);
+
+    /**
+     * Deletes all enrolments with matching memberName
+     */
+    void deleteEnrolmentsWithMemberName(Name memberName);
 
     /**
      * Creates the given event.
