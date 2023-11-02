@@ -37,7 +37,7 @@ public class CommandBoxHistoryTest {
 
     @Test
     public void emptyList() {
-        commandBoxHistory = new CommandBoxHistory(new ArrayList<>());
+        commandBoxHistory = new CommandBoxHistory();
         assertCurrentSuccess("");
         assertPreviousFailure();
         assertNextFailure();
