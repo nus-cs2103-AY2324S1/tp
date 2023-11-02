@@ -46,6 +46,7 @@ public class EditInterviewCommand extends Command {
             + "the time must be between 0900 to 1700,\n"
             + "and the start time and end time must be on the same day!";
     public static final String MESSAGE_TIME_CLASH = "This interview clashes with another interview!";
+    public static final String MESSAGE_INTERVIEW_DONE = "You cannot edit an interview that is done!";
 
     private final Index index;
     private final EditInterviewDescriptor editInterviewDescriptor;
@@ -73,6 +74,10 @@ public class EditInterviewCommand extends Command {
 
         Interview interviewToEdit = lastShownList.get(index.getZeroBased());
         Interview editedInterview = createEditedInterview(interviewToEdit, editInterviewDescriptor);
+
+        if (interviewToEdit.isDone()) {
+            throw new CommandException(MESSAGE_INTERVIEW_DONE);
+        }
 
         if (!interviewToEdit.isSameInterview(editedInterview) && model.hasInterview(editedInterview)) {
             throw new CommandException(MESSAGE_DUPLICATE_INTERVIEW);
@@ -163,7 +168,7 @@ public class EditInterviewCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(jobRole, startTime, endTime, isDone);
+            return CollectionUtil.isAnyNonNull(jobRole, startTime, endTime);
         }
 
         public void setJobRole(String role) {
