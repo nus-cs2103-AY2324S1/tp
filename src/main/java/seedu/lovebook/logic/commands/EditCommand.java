@@ -29,14 +29,14 @@ import seedu.lovebook.model.date.Name;
 import seedu.lovebook.model.date.horoscope.Horoscope;
 
 /**
- * Edits the details of an existing date in the LoveBook.
+ * Edits the details of an existing Date in the LoveBook.
  */
 public class EditCommand extends Command {
 
     public static final String COMMAND_WORD = "edit";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the date identified "
-            + "by the index number used in the displayed date list. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the Date identified "
+            + "by the index number used in the displayed Date list. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_NAME + "NAME] "
@@ -54,7 +54,7 @@ public class EditCommand extends Command {
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Date: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This date already exists in the LoveBook.";
+    public static final String MESSAGE_DUPLICATE_PERSON = "This Date already exists in the LoveBook.";
 
     private final Index index;
     private final EditPersonDescriptor editPersonDescriptor;

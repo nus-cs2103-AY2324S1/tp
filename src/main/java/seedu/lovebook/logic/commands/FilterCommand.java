@@ -12,18 +12,18 @@ import seedu.lovebook.model.date.MetricContainsKeywordPredicate;
 
 
 /**
- * Filter based on a specific metric and list the dates whose metric contains the keyword.
- * Keyword matching is case insensitive.
+ * Filter based on a specific metric and list the Dates whose metric contains the keyword.
+ * Keyword matching is case-insensitive.
  *
  */
 public class FilterCommand extends Command {
 
     public static final String COMMAND_WORD = "filter";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all dates whose specified metric contain any of "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all Dates whose specified metric contain any of "
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
             + "Parameters: /METRIC KEYWORD (METRIC in the form of initial alphabet) \n"
-            + "Example: " + COMMAND_WORD + PREFIX_NAME + " Bob (AKA find dates whose name that match Bob";
+            + "Example: " + COMMAND_WORD + PREFIX_NAME + " Bob (AKA find Dates whose name that match Bob";
     private final ArrayList<MetricContainsKeywordPredicate> predicateList;
 
 

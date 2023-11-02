@@ -442,7 +442,10 @@ It should automatically back up LoveBook data daily to prevent data loss.
 
 ## **Appendix: Instructions for manual testing**
 
-Given below are instructions to test the app manually.
+Given below are instructions to test the app manually. 
+You are recommended to start with an empty LoveBook and follow the instructions sequentially 
+in order for the example commands provided to be relevant. 
+You can refer to the user guide for more details on the features.
 
 <box type="info" seamless>
 
@@ -451,44 +454,115 @@ testers are expected to do more *exploratory* testing.
 
 </box>
 
-### Launch and shutdown
+### Launch
 
-1. Initial launch
+1. Initial Launch
+   * Download the jar file and copy it into an empty folder.
+   * Double-click the jar file.
+   * Expected: The program runs and shows the GUI. Note that the window size may not be optimum.
 
-   1. Download the jar file and copy into an empty folder
+### Viewing Help
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+1. Opening the Help window
+   * Type the following help command into the text field.<br>
+     `help`
+   * Press enter.
+   * Expected: The GUI shows a popup with a message and a link to the User Guide.
+
+### Adding Dates
+
+1. Adding an Date
+   * Type the following add command into the text field.<br>
+     `add name/Cleon age/22 gender/F height/176 horoscope/Taurus income/3000`
+   * Press enter.
+   * Expected: The GUI shows the added Date in the LoveBook.
+
+### Best Match Dates
+
+1. Getting the best match using your Date Preferences
+   * Type the following best match command into the text field.<br>
+     `bestMatch`
+   * Press enter.
+   * Expected: The GUI shows the best-matched Date in the LoveBook.
+
+### Clearing Dates in LoveBook
+
+1. Clearing all Dates
+   * Type the following clear command into the text field.<br>
+     `clear`
+   * Press enter.
+   * Expected: The GUI shows no Dates in the LoveBook.
+
+### Deleting Dates
+
+1. Delete a Date by index
+   * Type the following delete command into the text field.<br>
+     `delete 1`
+   * Press enter.
+   * Expected: The date the specified Index is removed from LoveBook in the GUI.
+
+### Editing Dates
+
+1. Editing a Date by index
+   * Type the following edit elderly command into the text field.<br>
+     `edit 3 horoscope/Cancer name/Cleon`
+   * Press enter.
+   * Expected: The GUI shows the new fields for the Date at the specified index. (Sequence doesn't matter)
+
+### Finding Dates
+
+1. Finding Dates by name
+   * Type the following find command into the text field.<br>
+     `find John`
+   * Press enter.
+   * Expected: The Date with name in the find command.
+
+1. Finding Dates by multiple names
+   * Type the following find command into the text field.<br>
+     `find John Cleon`
+   * Press enter.
+   * Expected: The Dates with names in the find command.
+
+1. Listing all Dates
+   * Type the following list command into the text field.<br>
+     `list`
+   * Press enter.
+   * Expected: The GUI shows all Dates in LoveBook.
+
+### Filtering Dates
+
+1. Filtering Dates by metric (e.g. name, age, height, income, horoscope)
+   * Type the following filter command into the text field.<br>
+     `filter age/John`
+   * Press enter.
+   * Expected: The GUI shows the Dates with age in the filter command.
+
+### Finding a Random Date
+
+1. Finding a Random Date
+   * Type the following random command into the text field.<br>
+     `random`
+   * Press enter.
+   * Expected: The GUI shows a random Date in LoveBook.
+
+### Exit
+
+1. Exiting the app
+   * Use the `exit` command or click the 'X' button in the top right corner.<br>
+   * Expected: The app closes.
+
+### Saving
 
 1. Saving window preferences
+   * Resize the window to an optimum size, preferably full screen. Close the window.
+   * Re-launch the app by double-clicking the jar file.
+   * Expected: The most recent window size and location is retained.
+   * Note: The window looks best under 1920 x 1080 resolution, 125% scale.
 
-   1. Resize the window to an optimum size. Move the window to a different location. Close the window.
+1. Saving data
+   * Launch the app by double-clicking the jar file.
+   * Execute an add command to add a `Date` in the database.
+   * Close the app.
+   * Expected: A `data` folder is created under the current repository where the jar file is located.
 
-   1. Re-launch the app by double-clicking the jar file.<br>
-       Expected: The most recent window size and location is retained.
-
-1. _{ more test cases …​ }_
-
-### Deleting a date
-
-1. Deleting a date while all dates are being shown
-
-   1. Prerequisites: List all dates using the `list` command. Multiple dates in the list.
-
-   1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
-
-   1. Test case: `delete 0`<br>
-      Expected: No date is deleted. Error details shown in the status message. Status bar remains the same.
-
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
-
-1. _{ more test cases …​ }_
-
-### Saving data
-
-1. Dealing with missing/corrupted data files
-
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
-
-1. _{ more test cases …​ }_
+------------------------------------------------------------
