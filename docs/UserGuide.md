@@ -165,7 +165,7 @@ Format: `find-appt IC`
 **:information_source: Take Note:**<br>
 
 - All fields are Required.
-- PATIENT or DOCTOR must contain the valid IC of a Patient in the Database.
+- IC must contain the valid IC of a Patient or Doctor in the Database.
 
 </div>
 
