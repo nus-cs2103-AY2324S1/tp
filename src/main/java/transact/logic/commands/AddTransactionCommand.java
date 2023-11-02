@@ -33,13 +33,13 @@ public class AddTransactionCommand extends Command {
             + PREFIX_DESCRIPTION + "DESCRIPTION "
             + PREFIX_AMOUNT + "AMOUNT "
             + PREFIX_DATE + "DATE "
-            + PREFIX_STAFF + "STAFF \n"
+            + PREFIX_STAFF + "STAFF_ID\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_TYPE + "E "
             + PREFIX_DESCRIPTION + "Monthly Salary "
             + PREFIX_AMOUNT + "1000 "
             + PREFIX_DATE + "10/11/23 "
-            + PREFIX_STAFF + "John";
+            + PREFIX_STAFF + "1";
 
     public static final String MESSAGE_SUCCESS = "New transaction added: %1$s";
     public static final String MESSAGE_DUPLICATE_TRANSACTION = "This transaction already exists in the transaction book.";
