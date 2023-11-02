@@ -17,7 +17,7 @@ public class CommandBox extends UiPart<Region> {
     public static final String ERROR_STYLE_CLASS = "error";
     private static final String FXML = "CommandBox.fxml";
 
-    private static final CommandHistory HISTORY = new CommandHistory();
+    private static final CommandHistory history = new CommandHistory();
 
     private final CommandExecutor commandExecutor;
 
@@ -35,13 +35,13 @@ public class CommandBox extends UiPart<Region> {
         commandTextField.setOnKeyPressed(e -> {
             switch (e.getCode()) {
             case UP:
-                commandTextField.setText(HISTORY.getPreviousCommand());
+                commandTextField.setText(history.getPreviousCommand());
                 break;
             case DOWN:
-                commandTextField.setText(HISTORY.getNextCommand());
+                commandTextField.setText(history.getNextCommand());
                 break;
             case ENTER:
-                HISTORY.resetCurrentCommandIndex();
+                history.resetCurrentCommandIndex();
                 break;
             default:
                 break;
@@ -64,7 +64,7 @@ public class CommandBox extends UiPart<Region> {
             commandTextField.setText("");
 
             // Only add to history if the command was successfully executed
-            HISTORY.addCommand(commandText);
+            history.addCommand(commandText);
         } catch (CommandException | ParseException e) {
             setStyleToIndicateCommandFailure();
         }
