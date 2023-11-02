@@ -40,11 +40,11 @@ public class AddTaskCommand extends Command {
             Lesson lesson = model.getCurrentlyDisplayedLesson();
             if (lesson == null) {
                 throw new CommandException("Please use show lesson Index before"
-                        + " adding task when no lesson is displayed!");
+                        + " adding task when no lesson is displayed!" + getUsageInfo());
             }
             if (lesson.hasSameTask(task)) {
                 throw new CommandException("Existing task with same task description with index "
-                        + lesson.getTaskClashWith(task) + "!");
+                        + lesson.getTaskClashWith(task) + "!" + getUsageInfo());
             }
             Lesson editedLesson = lesson.clone();
             editedLesson.addToTaskList(task);
@@ -57,10 +57,11 @@ public class AddTaskCommand extends Command {
         try {
             if (model.hasTaskClashWith(task, lessonIndex)) {
                 String taskIndex = model.getTaskClashWith(task, lessonIndex).toString();
-                throw new CommandException("Existing task with same task description with index " + taskIndex + "!");
+                throw new CommandException("Existing task with same task description with index "
+                        + taskIndex + "!" + getUsageInfo());
             }
         } catch (IndexOutOfBoundsException e) {
-            throw new CommandException("No lesson with index " + this.index.getOneBased() + "!!");
+            throw new CommandException("No lesson with index " + this.index.getOneBased() + "!!" + getUsageInfo());
         }
         model.addTask(task, lessonIndex);
         model.resetAllShowFields();
@@ -68,5 +69,11 @@ public class AddTaskCommand extends Command {
         return new CommandResult(String.format("New task added to lesson with index "
                 + index.getOneBased() + ": " + task.toString()));
     }
-
+    private static String getUsageInfo() {
+        return "\n Usage: addTask/task + [lesson index] [description]. "
+                + "You could omit the lesson index when adding task to showing lesson."
+                + "\nExample1: " + COMMAND_WORD + " 1 do homework"
+                + "\nExample2 (a lesson is shown): " + COMMAND_WORD + " do homework"
+                + "Please note that there cannot be two tasks with the same description in any lesson.";
+    }
 }

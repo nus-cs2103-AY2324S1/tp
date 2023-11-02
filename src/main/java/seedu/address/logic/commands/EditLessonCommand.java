@@ -50,8 +50,8 @@ public class EditLessonCommand extends AbstractEditCommand<Lesson> {
     }
 
     @Override
-    String className() {
-        return "lesson";
+    String listName() {
+        return "schedule";
     }
 
     @Override

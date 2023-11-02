@@ -50,9 +50,10 @@ public class AddPersonCommandParser implements Parser<AddPersonCommand> {
         }
     }
     private static String getUsageInfo() {
-        return "\nUsage: addPerson -name [NAME] (any number of -[phone|email|address|subject|tag|remark] [value]). "
+        return "\nUsage: addPerson -name [NAME] (any number of unique "
+                + "-[phone|email|address|subject|tag|remark] [value]). "
                 + "\nFor example, addPerson -name John -phone 91234567"
-                + "\nIf you are currently displaying person list, you could use 'add' inplace of 'addPerson'. "
+                + "\nIf you are currently displaying student list, you could use 'add' inplace of 'addPerson'. "
                 + "\nNote you must provide a 'name' not already in the address book.";
     }
 }

@@ -43,7 +43,7 @@ public class ScheduleList implements ReadOnlySchedule {
     //// list overwrite operations
 
     /**
-     * Replaces the contents of the lesson list with {@code lessons}.
+     * Replaces the contents of the schedule list with {@code lessons}.
      * {@code lessons} must not contain duplicate lessons.
      */
     public void setLessons(List<Lesson> lessons) {

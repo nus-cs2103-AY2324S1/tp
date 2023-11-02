@@ -36,25 +36,60 @@ public class LinkCommandParser implements Parser<LinkCommand> {
         switch (state) {
         case STUDENT:
             if (model.getCurrentlyDisplayedPerson() == null) {
-                throw new ParseException("No student is shown");
+                throw new ParseException("No student is shown" + getStatefulUsageInfoPerson());
             }
-            studentName = model.getCurrentlyDisplayedPerson().getName();
-            lessonName = ParserUtil.parseName(arguments);
-            return new LinkCommand(lessonName, studentName);
+            try {
+                studentName = model.getCurrentlyDisplayedPerson().getName();
+                lessonName = ParserUtil.parseName(arguments);
+                return new LinkCommand(lessonName, studentName);
+            } catch (ParseException e) {
+                throw new ParseException(e.getMessage() + "\n" + getStatefulUsageInfoPerson());
+            }
         case SCHEDULE:
             if (model.getCurrentlyDisplayedLesson() == null) {
-                throw new ParseException("No lesson is shown");
+                throw new ParseException("No lesson is shown" + getStatefulUsageInfoLesson());
             }
-            studentName = ParserUtil.parseName(arguments);
-            lessonName = model.getCurrentlyDisplayedLesson().getName();
-            return new LinkCommand(lessonName, studentName);
+            try {
+                studentName = ParserUtil.parseName(arguments);
+                lessonName = model.getCurrentlyDisplayedLesson().getName();
+                return new LinkCommand(lessonName, studentName);
+            } catch (ParseException e) {
+                throw new ParseException(e.getMessage() + "\n" + getStatefulUsageInfoLesson());
+            }
         default:
-            throw new ParseException("Link command is not available in this state" + state.toString());
+            throw new ParseException("Link command is not available in this state"
+                    + state.toString() + "\n" + getStatefulUsageInfoPerson() + "\n" + getStatefulUsageInfoLesson());
         }
     }
     private LinkCommand staticParse(String args) throws ParseException {
-        Name studentName = parseField("student", args, Name::of, false);
-        Name lessonName = parseField("lesson", args, Name::of, false);
-        return new LinkCommand(lessonName, studentName);
+        try {
+            Name studentName = parseField("student", args, Name::of, false);
+            Name lessonName = parseField("lesson", args, Name::of, false);
+            return new LinkCommand(lessonName, studentName);
+        } catch (ParseException e) {
+            throw new ParseException(e.getMessage() + "\n" + getStaticUsageInfo());
+        }
+
+    }
+    public String getStaticUsageInfo() {
+        return "Link command usage: link "
+                + "-student [STUDENT_NAME]"
+                + "-lesson [LESSON_NAME]"
+                + "\nExample: " + LinkCommand.COMMAND_WORD + " "
+                + "-student Alice Pauline -lesson CS2103T lab1";
+    }
+    public String getStatefulUsageInfoPerson() {
+        return "LinkTo command usage: linkTo "
+                + "[STUDENT_NAME]"
+                + "\nExample: linkto "
+                + "Alice Pauline"
+                + "\nNote: This command is only available when a lesson is shown";
+    }
+    public String getStatefulUsageInfoLesson() {
+        return "LinkTo command usage: linkTo "
+                + "[LESSON_NAME]"
+                + "\nExample: linkto "
+                + "CS2103T lab1"
+                + "\nNote: This command is only available when a student is shown";
     }
 }

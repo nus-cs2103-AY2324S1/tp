@@ -15,7 +15,7 @@ public class DeleteLessonCommand extends Command {
     public static final String COMMAND_WORD = "deletelesson";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the lesson identified by the index number used in the displayed lesson list.\n"
+            + ": Deletes the lesson identified by the index number used in the displayed schedule list.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
@@ -34,7 +34,7 @@ public class DeleteLessonCommand extends Command {
 
         if (targetIndex < 1 || targetIndex > lastShownList.size()) {
             String errMessage = lastShownList.isEmpty()
-                    ? "The index provided is invalid as the lesson list is empty."
+                    ? "The index provided is invalid as the schedule list is empty."
                     : "Index out of bounds, expected 1 to " + lastShownList.size()
                     + " but got " + targetIndex + ".";
             throw new CommandException(errMessage);

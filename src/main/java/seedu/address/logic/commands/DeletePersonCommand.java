@@ -42,7 +42,7 @@ public class DeletePersonCommand extends Command {
 
         if (targetIndex < 1 || targetIndex > lastShownList.size()) {
             String errMessage = lastShownList.isEmpty()
-                    ? "The index provided is invalid as the person list is empty."
+                    ? "The index provided is invalid as the student list is empty."
                     : "Index out of bounds, expected 1 to " + lastShownList.size()
                     + " but got " + targetIndex + ".";
             throw new CommandException(errMessage);

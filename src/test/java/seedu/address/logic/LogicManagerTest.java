@@ -67,7 +67,7 @@ public class LogicManagerTest {
     @Test
     public void execute_commandExecutionError_throwsCommandException() {
         String deleteCommand = "deletePerson 9";
-        assertCommandException(deleteCommand, "The index provided is invalid as the person list is empty.");
+        assertCommandException(deleteCommand, "The index provided is invalid as the student list is empty.");
     }
 
     @Test

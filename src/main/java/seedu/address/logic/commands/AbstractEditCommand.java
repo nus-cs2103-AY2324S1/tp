@@ -111,7 +111,7 @@ public abstract class AbstractEditCommand<T extends ListEntry<? extends T>> exte
                     original = list.get(index - 1);
                 } catch (IndexOutOfBoundsException e) {
                     String errMessage = list.isEmpty()
-                                        ? "The index provided is invalid as the " + className() + " list is empty."
+                                        ? "The index provided is invalid as the " + listName() + " list is empty."
                                         : "Index out of bounds, expected 1 to " + list.size()
                             + " but got " + index + ".";
                     throw new CommandException(errMessage);
@@ -155,6 +155,6 @@ public abstract class AbstractEditCommand<T extends ListEntry<? extends T>> exte
         addMethod.accept(edited);
     }
     abstract String editableFieldsInfo();
-    abstract String className();
+    abstract String listName();
     public abstract String getUsageInfo();
 }
