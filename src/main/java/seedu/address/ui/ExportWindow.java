@@ -13,14 +13,13 @@ import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
 import javafx.stage.Stage;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.storage.Storage;
 
 /**
  * Controller for a help page
  */
 public class ExportWindow extends UiPart<Stage> {
 
-    private static String EXPORTDATA = "No Data";
+    private static String exportData = "No Data";
     private static final Logger logger = LogsCenter.getLogger(ExportWindow.class);
     private static final String FXML = "ExportWindow.fxml";
 
@@ -100,7 +99,7 @@ public class ExportWindow extends UiPart<Stage> {
     private void copyUrl() {
         final Clipboard clipboard = Clipboard.getSystemClipboard();
         final ClipboardContent url = new ClipboardContent();
-        url.putString(EXPORTDATA);
+        url.putString(exportData);
         clipboard.setContent(url);
     }
 
@@ -120,7 +119,7 @@ public class ExportWindow extends UiPart<Stage> {
                         content.append(line).append("\n");
                     }
                     exportMessage.setText(content.toString());
-                    EXPORTDATA = content.toString();
+                    exportData = content.toString();
                 } catch (IOException e) {
                     exportMessage.setText("Error reading the file: " + e.getMessage());
                 }

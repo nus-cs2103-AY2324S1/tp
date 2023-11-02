@@ -1,30 +1,21 @@
 package seedu.address.ui;
 
-import java.io.*;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
-import seedu.address.logic.commands.Command;
-import seedu.address.logic.commands.CommandResult;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
-import javafx.scene.input.Clipboard;
-import javafx.scene.input.ClipboardContent;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
-import seedu.address.MainApp;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.logic.commands.ExitCommand;
-import seedu.address.logic.parser.DeckParser;
-import seedu.address.storage.Storage;
-
 /**
  * Controller for a help page
  */
 public class ImportWindow extends UiPart<Stage> {
 
-    private static String WarningData = "Warning! Importing data will close app for best experience";
+    private static String warningData = "Warning! Importing data will close app for best experience";
     private static final Logger logger = LogsCenter.getLogger(ImportWindow.class);
     private static final String FXML = "ImportWindow.fxml";
 
@@ -32,7 +23,7 @@ public class ImportWindow extends UiPart<Stage> {
     private Button importButton;
 
     @FXML
-    private Label WarningMessage;
+    private Label warningMessage;
 
     @FXML
     private TextArea inputTextArea;
@@ -47,7 +38,7 @@ public class ImportWindow extends UiPart<Stage> {
      */
     public ImportWindow(Stage root, Stage primaryStage) {
         super(FXML, root);
-        WarningMessage.setText(WarningData);
+        warningMessage.setText(warningData);
         this.stage = root;
         this.primaryStage = primaryStage;
     }
