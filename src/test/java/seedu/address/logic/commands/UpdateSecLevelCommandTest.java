@@ -49,7 +49,7 @@ public class UpdateSecLevelCommandTest {
         model.getFilteredPersonList().stream().forEach(student -> {
             for (Student originalStudent : nonSec4Students) {
                 if (student.getName().equals(originalStudent.getName())) {
-                    assertEquals(originalStudent.getSecLevel().getValue() + 1, student.getSecLevel().getValue());
+                    assertEquals(originalStudent.getSecLevelValue() + 1, student.getSecLevelValue());
                 }
             }
         });
@@ -74,7 +74,7 @@ public class UpdateSecLevelCommandTest {
         model.getFilteredPersonList().stream().forEach(student -> {
             for (Student originalStudent : nonSec4Students) {
                 if (student.getName().equals(originalStudent.getName())) {
-                    assertEquals(originalStudent.getSecLevel().getValue() + 1, student.getSecLevel().getValue());
+                    assertEquals(originalStudent.getSecLevelValue() + 1, student.getSecLevelValue());
                 }
             }
         });
