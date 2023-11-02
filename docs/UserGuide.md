@@ -258,9 +258,9 @@ Example:
 
 Deletes an event from a contact's calendar.
 
-Format `deleteContactEvent INDEX ts/START_DATE_TIME`
+Format `deleteContactEvent INDEX ts/DATE_TIME`
 
-* Deletes an event that contains the `START_DATE_TIME` from the contact
+* Deletes an event that contains the `DATE_TIME` from the contact
 
 Example:
 * `deleteContactEvent 1 ts/2024-01-01 09:00`
@@ -382,6 +382,8 @@ Action     | Format, Examples
 **Help** | `help`
 **addEvent** | `addEvent d/DESCRIPTION ts/START_DATE_TIME te/END_DATE_TIME` <br> e.g., `addEvent d/Cry about deadlines ts/2023-01-01 00:01 te/2023-12-31 23:59`
 **deleteEvent** | `deleteEvent DATE_TIME` <br> e.g., `deleteEvent 2023-02-03 12:00`
+**addContactEvent** | `addContactEvent INDEX d/DESCRIPTION ts/START_DATE_TIME te/END_DATE_TIME` <br> e.g., `addContactEvent 1 d/Cry about deadlines ts/2023-01-01 00:01 te/2023-12-31 23:59`
+**deleteContactEvent** | `deleteContactEvent INDEX ts/DATE_TIME` <br> e.g., `deleteContactEvent 1 ts/2023-02-03 12:00`
 **clearEvents** | `clearEvent ts/START_DATE_TIME te/END_DATE_TIME` <br> e.g., `clearEvent ts/2023-02-03 12:00 te/2023-02-03 14:00`
 **addTask** | `addTask d/DESCRIPTION [te/DEADLINE]` <br> e.g. `addTask d/Go for a run te/2023-02-14 19:00`
 **deleteTask** | `deleteTask INDEX`
