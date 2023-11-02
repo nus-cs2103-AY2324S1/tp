@@ -3,6 +3,7 @@ package seedu.flashlingo.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.fail;
+import static seedu.flashlingo.testutil.TypicalFlashCards.getTypicalFlashlingo;
 import static seedu.flashlingo.testutil.TypicalFlashCards.getTypicalFlashlingoWithOneFlashCard;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -19,7 +20,7 @@ public class YesCommandTest {
     private Model expectedModel = new ModelManager();
     @BeforeEach
     public void setUp() {
-        model = new ModelManager(getTypicalFlashlingoWithOneFlashCard(), new UserPrefs());
+        model = new ModelManager(getTypicalFlashlingo(), new UserPrefs());
         expectedModel = new ModelManager(model.getFlashlingo(), new UserPrefs());
     }
     @Test
