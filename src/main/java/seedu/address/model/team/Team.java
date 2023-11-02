@@ -1,6 +1,7 @@
 package seedu.address.model.team;
 
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
@@ -102,6 +103,24 @@ public class Team {
                 .add("Team Leader", leaderIdentityCode)
                 .add("Developer List", developerIdentityCodes)
                 .toString();
+    }
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Team team = (Team) o;
+        return Objects.equals(leaderIdentityCode, team.leaderIdentityCode)
+                && Objects.equals(teamName, team.teamName)
+                && Objects.equals(developerIdentityCodes, team.developerIdentityCodes);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(leaderIdentityCode, teamName, developerIdentityCodes);
     }
 }
 

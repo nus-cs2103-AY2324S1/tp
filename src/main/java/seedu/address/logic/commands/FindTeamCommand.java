@@ -30,7 +30,8 @@ public class FindTeamCommand extends Command {
         requireNonNull(model);
         model.updateFilteredTeamList(predicate);
         return new CommandResult(
-                String.format(Messages.MESSAGE_TEAMS_LISTED_OVERVIEW, model.getFilteredTeamList().size()));
+                String.format(Messages.MESSAGE_TEAMS_LISTED_OVERVIEW, model.getFilteredTeamList().size()),
+                false, false, true, false, false);
     }
 
     @Override

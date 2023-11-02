@@ -36,13 +36,15 @@ public class FindTeamLeaderCommand extends Command {
         List<Team> filteredTeams = model.getFilteredTeamList();
 
         if (filteredTeams.isEmpty()) {
-            return new CommandResult(String.format(Messages.MESSAGE_TEAM_NOT_FOUND, predicate));
+            return new CommandResult(String.format(Messages.MESSAGE_TEAM_NOT_FOUND, predicate),
+                    false, false, true, false, false);
         }
         //assume there is only one team leader in the team
         Team foundTeam = filteredTeams.get(0);
         return new CommandResult(String.format(Messages.MESSAGE_TEAM_LEADER_IDENTITY_CODE_RETRIEVED,
                 foundTeam.getTeamName(),
-                foundTeam.getTeamLeaderIdentityCode()));
+                foundTeam.getTeamLeaderIdentityCode()),
+                false, false, true, false, false);
     }
 
     @Override

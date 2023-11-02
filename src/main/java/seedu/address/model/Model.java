@@ -127,6 +127,14 @@ public interface Model {
     Name getNameByIdentityCode(IdentityCode developerID);
 
     /**
+     * Gets person by identity code.
+     *
+     * @param id the person id
+     * @return the name by identity code
+     */
+    Person getPersonByIdentityCode(IdentityCode id);
+
+    /**
      * returns true if the team does not exist.
      */
     boolean invalidAddToTeam(String teamToAddTo);

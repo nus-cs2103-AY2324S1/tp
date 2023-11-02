@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+
+<VBox prefWidth="200.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <StackPane VBox.vgrow="ALWAYS">
+         <children>
+            <VBox StackPane.alignment="TOP_CENTER">
+               <children>
+                  <ScrollPane fitToHeight="true" fitToWidth="true" VBox.vgrow="ALWAYS">
+                     <content>
+                        <VBox>
+                           <children>
+                              <ListView fx:id="developerListView" VBox.vgrow="ALWAYS" />
+                           </children>
+                        </VBox>
+                     </content>
+                  </ScrollPane>
+               </children>
+               <StackPane.margin>
+                  <Insets top="140.0" />
+               </StackPane.margin>
+            </VBox>
+            <Line endX="75.0" startX="75.0" startY="25.0" StackPane.alignment="TOP_CENTER" />
+            <Line endY="15.0" StackPane.alignment="TOP_CENTER">
+               <StackPane.margin>
+                  <Insets top="125.0" />
+               </StackPane.margin>
+            </Line>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ffeeb9" height="100.0" stroke="#edbb47" strokeType="INSIDE" strokeWidth="3.0" width="190.0" StackPane.alignment="TOP_CENTER">
+               <StackPane.margin>
+                  <Insets top="25.0" />
+               </StackPane.margin>
+            </Rectangle>
+            <Label fx:id="teamName" prefHeight="40.0" prefWidth="180.0" style="-fx-text-fill: #008df8; -fx-font-weight: bold;" text="teamName" textFill="#008df8" underline="true" StackPane.alignment="TOP_CENTER">
+               <StackPane.margin>
+                  <Insets top="30.0" />
+               </StackPane.margin>
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </Label>
+            <Label fx:id="teamLeader" prefHeight="40.0" prefWidth="180.0" text="teamLeader" StackPane.alignment="TOP_CENTER">
+               <StackPane.margin>
+                  <Insets top="75.0" />
+               </StackPane.margin>
+               <font>
+                  <Font size="11.0" />
+               </font>
+            </Label>
+            <Line endX="100.0" startX="-100.0" strokeWidth="2.0" StackPane.alignment="TOP_CENTER" />
+         </children>
+      </StackPane>
+   </children>
+</VBox>

@@ -2,8 +2,7 @@ package seedu.address.model.team;
 
 import java.util.List;
 import java.util.function.Predicate;
-
-import seedu.address.commons.util.StringUtil;
+import java.util.regex.Pattern;
 
 /**
  * Tests that a {@code Team}'s name matches any of the keywords given.
@@ -18,7 +17,12 @@ public class TeamContainsKeywordsPredicate implements Predicate<Team> {
     @Override
     public boolean test(Team team) {
         return keywords.stream()
-                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(team.getTeamName(), keyword));
+                .anyMatch(keyword -> containsWordIgnoreCase(team.getTeamName(), keyword));
+    }
+
+    private static boolean containsWordIgnoreCase(String source, String query) {
+        String pattern = "\\b" + Pattern.quote(query) + "\\b"; // \b denotes a word boundary
+        return Pattern.compile(pattern, Pattern.CASE_INSENSITIVE).matcher(source).find();
     }
 
     @Override
