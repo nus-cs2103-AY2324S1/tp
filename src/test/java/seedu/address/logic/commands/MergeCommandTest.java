@@ -3,12 +3,12 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
+import static seedu.address.testutil.TypicalPersons.AMY;
+import static seedu.address.testutil.TypicalPersons.BOB;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBookManager;
 
 import org.junit.jupiter.api.Test;
@@ -30,8 +30,8 @@ public class MergeCommandTest {
 
     @Test
     public void execute_mergeTwoPeopleWithNoTags_success() {
-        Person primaryStudent = new PersonBuilder().withName(VALID_NAME_AMY).build();
-        Person secondaryStudent = new PersonBuilder().withName(VALID_NAME_BOB).build();
+        Person primaryStudent = new PersonBuilder(AMY).withTags().build();
+        Person secondaryStudent = new PersonBuilder(BOB).withTags().build();
         Person mergedStudent = primaryStudent.mergePersons(secondaryStudent);
 
         CommandResult expectedResult = new CommandResult(String.format(MergeCommand.MESSAGE_MERGE_PERSON_SUCCESS,
