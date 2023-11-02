@@ -164,7 +164,6 @@ public class LogicManagerTest {
 
         logic = (Logic) new LogicManager(model, storage);
 
-        // Triggers the saveAddressBook method by executing an add command
         String addCommand = AddCommand.COMMAND_WORD + WORD_DESC_AMY + TRANSLATION_DESC_AMY;
         FlashCard expectedFlashCard = new FlashCardBuilder(AMY).build();
         ModelManager expectedModel = new ModelManager();

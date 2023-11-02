@@ -109,7 +109,7 @@ public class TypicalFlashCards {
     private TypicalFlashCards() {} // prevents instantiation
 
     /**
-     * Returns an {@code AddressBook} with all the typical persons.
+     * Returns an {@code FlashLingo} with all the typical persons.
      */
     public static Flashlingo getTypicalFlashlingo() {
         Flashlingo flashlingo = new Flashlingo();
