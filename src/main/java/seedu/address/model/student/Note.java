@@ -9,8 +9,8 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Note {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Note should be 200 characters or less";
-    public static final String VALIDATION_REGEX = ".{0,200}";
+            "Note should be 500 characters or less";
+    public static final String VALIDATION_REGEX = ".{0,500}";
     public final String value;
 
     /**
