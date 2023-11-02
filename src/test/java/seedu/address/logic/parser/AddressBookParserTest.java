@@ -130,17 +130,14 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_allAsciiInputAllowed() {
         AddressBookParser parser = new AddressBookParser();
-        for (char c = '!'; c <= '~'; c++) {
-            String input = String.valueOf(c);
-            try {
-                parser.parseCommand(input);
-            } catch (Exception e) {
-                if (e.getMessage() == AddressBookParser.MESSAGE_NON_ASCII) {
-                    fail("Ascii input should be allowed");
-                }
+        String input = "0123456789abcdefghijklmnopqrstuvwxyz"
+            + "ABCDEFGHIJKLMNOPQRSTUVWXYZ!\"#$%&\\\'()*+,-./:;<=>?@[\\\\]^_{|} ~";
+        try {
+            parser.parseCommand(input);
+        } catch (Exception e) {
+            if (e.getMessage() == AddressBookParser.MESSAGE_NON_ASCII) {
+                fail("Ascii input should be allowed");
             }
         }
     }
-
-
 }
