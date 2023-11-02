@@ -2,11 +2,10 @@
 !include ../style.puml
 skinparam ArrowFontStyle plain
 
-title Store viewed Items to Model
+title Store Viewed Items to Model
 
 box Logic LOGIC_COLOR_T1
 Participant ":LogicManager" as logic LOGIC_COLOR
-Participant ":AddressBookParser" as abp LOGIC_COLOR
 Participant "command:ViewContactCommand" as vcc LOGIC_COLOR
 end box
 
@@ -16,7 +15,7 @@ end box
 
 [->logic : execute
 activate logic
-ref over logic, abp, vcc: View Contact Command Sequence
+ref over logic, vcc: Create ViewContactCommand
 logic -> vcc ++: execute(model)
 vcc -> model ++: setViewedPersonIndex(targetIndex)
 model --> vcc --:

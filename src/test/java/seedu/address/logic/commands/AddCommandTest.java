@@ -172,6 +172,16 @@ public class AddCommandTest {
         }
 
         @Override
+        public void updateAttendee(String targetAttendee, String editedAttendee) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void deleteAttendee(String targetAttendee) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void setMeeting(Meeting target, Meeting editedMeeting) {
             throw new AssertionError("This method should not be called.");
         }
