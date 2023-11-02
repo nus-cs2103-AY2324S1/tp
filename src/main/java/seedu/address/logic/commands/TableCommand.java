@@ -28,7 +28,8 @@ public class TableCommand extends Command {
             + "[" + PREFIX_SEC_LEVEL + "] "
             + "[" + PREFIX_SUBJECT + "]"
             + "[" + PREFIX_ENROL_DATE + "{year}" + "]...\n"
-            + "Example: " + COMMAND_WORD + " " + PREFIX_GENDER;
+            + "Example: " + COMMAND_WORD + " " + PREFIX_GENDER + "\n"
+            + "Example: " + COMMAND_WORD + " " + PREFIX_ENROL_DATE + "2023";
 
     public static final String MESSAGE_INCORRECT_COMMAND = "To view a table, please do one of the following:\n"
                                                         + COMMAND_WORD + " " + PREFIX_GENDER + " or\n"
