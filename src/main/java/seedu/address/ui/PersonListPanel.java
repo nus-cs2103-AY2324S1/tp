@@ -67,7 +67,7 @@ public class PersonListPanel extends UiPart<Region> {
 
     class TableTagsCell extends TableCell<Person, Void> {
         ObservableList<Person> personList;
-        
+
         public TableTagsCell(ObservableList<Person> personList) {
             this.personList = personList;
         }
@@ -91,7 +91,7 @@ public class PersonListPanel extends UiPart<Region> {
 
     class TableNotesCell extends TableCell<Person, Void> {
         ObservableList<Person> personList;
-        
+
         public TableNotesCell(ObservableList<Person> personList) {
             this.personList = personList;
         }
@@ -114,7 +114,7 @@ public class PersonListPanel extends UiPart<Region> {
 
     class TableEventsCell extends TableCell<Person, Void> {
         ObservableList<Person> personList;
-        
+
         public TableEventsCell(ObservableList<Person> personList) {
             this.personList = personList;
         }
