@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -41,6 +42,22 @@ public class ModelManager implements Model {
         this.userPrefs = new UserPrefs(userPrefs);
         this.userHistory = new UserHistoryManager();
         userHistory.initialiseHistory(new Pair<>(addressBook.getPersonList(), addressBook.getAppointmentList()));
+        filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        filteredAppointments = new FilteredList<>(this.addressBook.getAppointmentList());
+    }
+
+    /**
+     * Initializes a ModelManager with the given addressBook, userPrefs, and userHistory
+     */
+    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs, UserHistoryManager userHistory) {
+        requireAllNonNull(addressBook, userPrefs, userHistory);
+
+        logger.fine("Initializing with address book: " + addressBook + " and user prefs" + userPrefs
+                + " with their command history");
+
+        this.addressBook = new AddressBook(addressBook);
+        this.userPrefs = new UserPrefs(userPrefs);
+        this.userHistory = new UserHistoryManager(userHistory);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
         filteredAppointments = new FilteredList<>(this.addressBook.getAppointmentList());
     }
@@ -203,12 +220,19 @@ public class ModelManager implements Model {
         return addressBook.equals(otherModelManager.addressBook)
                 && userPrefs.equals(otherModelManager.userPrefs)
                 && filteredPersons.equals(otherModelManager.filteredPersons)
-                && filteredAppointments.equals(otherModelManager.filteredAppointments);
+                && filteredAppointments.equals(otherModelManager.filteredAppointments)
+                && userHistory.equals(otherModelManager.userHistory);
     }
 
     @Override
     public UserHistoryManager getUserHistoryManager() {
         return this.userHistory;
+    }
+
+    @Override
+    public void updateUserHistory() {
+        this.userHistory.addHistory(new Pair<>(new ArrayList<>(this.addressBook.getPersonList()),
+                new ArrayList<>(this.addressBook.getAppointmentList())));
     }
 
     @Override

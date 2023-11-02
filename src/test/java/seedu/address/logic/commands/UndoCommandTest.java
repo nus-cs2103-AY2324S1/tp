@@ -2,26 +2,30 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 
 import java.nio.file.Path;
+import java.util.Set;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
-import seedu.address.commons.history.UserHistoryManager;
 import seedu.address.logic.Logic;
 import seedu.address.logic.LogicManager;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
+import seedu.address.model.UserPrefs;
 import seedu.address.model.appointment.Appointment;
 import seedu.address.model.person.Person;
+import seedu.address.model.tag.Tag;
 import seedu.address.storage.JsonAddressBookStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
+import seedu.address.storage.Storage;
 import seedu.address.storage.StorageManager;
 
 public class UndoCommandTest {
@@ -69,31 +73,27 @@ public class UndoCommandTest {
     private static final String SAMPLE_SORT_COMMAND = "sort asc by=time";
 
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~MISC COMMANDS~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    private static final String SAMPLE_HELP_COMMAND = "help";
     private static final String SAMPLE_UNDO_COMMAND = "undo";
     private static final String SAMPLE_REDO_COMMAND = "redo";
 
     @TempDir
-    public Path testFolder;
-    private StorageManager storageManager;
+    public Path temporaryFolder;
+    private Storage storage;
     private Model model = new ModelManager();
     private Logic logic;
-    private UserHistoryManager historyManager;
-
+    private Command undoCommand = new UndoCommand();
 
     /**
      * Initializes a dummy ModelManager instance before each test.
      */
     @BeforeEach
-    public void setUpDummyModelManager() {
-        JsonAddressBookStorage addressBookStorage = new JsonAddressBookStorage(getTempFilePath("ab"));
-        JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(getTempFilePath("prefs"));
-        storageManager = new StorageManager(addressBookStorage, userPrefsStorage);
-        logic = new LogicManager(model, storageManager);
-    }
-
-    private Path getTempFilePath(String fileName) {
-        return testFolder.resolve(fileName);
+    public void setUp() {
+        JsonAddressBookStorage addressBookStorage =
+                new JsonAddressBookStorage(temporaryFolder.resolve("addressBook.json"));
+        JsonUserPrefsStorage userPrefsStorage =
+                new JsonUserPrefsStorage(temporaryFolder.resolve("userPrefs.json"));
+        storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        logic = new LogicManager(model, storage);
     }
 
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~General Testing of UndoCommand~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -101,78 +101,166 @@ public class UndoCommandTest {
      * Test basic undo functionality
      */
     @Test
-    public void testUndo() throws CommandException, ParseException {
-        CommandResult commandResult1 = logic.execute(SAMPLE_ADD_COMMAND_1);
-        int sizeBefore = model.getAddressBook().getPersonList().size();
-        model.undoHistory();
-        int sizeAfter = model.getAddressBook().getPersonList().size();
+    public void execute_undoPatientCommand_success() throws CommandException, ParseException {
+        String expectedMessage = UndoCommand.MESSAGE_UNDO_COMMAND_SUCCESS;
 
-        //asserts that the size of patient list before undo is not equal to the size after undo is executed.
-        assertNotEquals(sizeBefore, sizeAfter);
+        logic.execute(SAMPLE_ADD_COMMAND_1);
+
+        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(), model.getUserHistoryManager());
+        expectedModel.undoHistory();
+
+        assertCommandSuccess(undoCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_undoAppointmentCommand_success() throws CommandException, ParseException {
+        logic.execute(SAMPLE_ADD_COMMAND_1);
+
+        String expectedMessage = UndoCommand.MESSAGE_UNDO_COMMAND_SUCCESS;
+
+        logic.execute(SAMPLE_SCHEDULE_COMMAND);
+
+        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(), model.getUserHistoryManager());
+        expectedModel.undoHistory();
+
+        assertCommandSuccess(undoCommand, model, expectedMessage, expectedModel);
     }
 
     /**
      * Test undo after running multiple commands
      */
     @Test
-    public void testConsecutiveCommandFollowedByUndo() throws CommandException, ParseException {
-        CommandResult commandResult1 = logic.execute(SAMPLE_ADD_COMMAND_1);
-        CommandResult commandResult2 = logic.execute(SAMPLE_ADD_COMMAND_2);
-        int sizeBefore = model.getAddressBook().getPersonList().size();
-        CommandResult undoCommand1 = new UndoCommand().execute(model);
-        int sizeAfter = model.getAddressBook().getPersonList().size();
+    public void execute_undoAfterMultipleCommands_success() throws CommandException, ParseException {
+        logic.execute(SAMPLE_ADD_COMMAND_1);
+        logic.execute(SAMPLE_ADD_COMMAND_2);
+        logic.execute(SAMPLE_SCHEDULE_COMMAND);
 
-        assertEquals(sizeBefore, sizeAfter + 1);
+        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(), model.getUserHistoryManager());
+        expectedModel.undoHistory();
+
+        String expectedMessage = UndoCommand.MESSAGE_UNDO_COMMAND_SUCCESS;
+
+        assertCommandSuccess(undoCommand, model, expectedMessage, expectedModel);
     }
 
     /**
      * Test multiple undo after running multiple commands
      */
     @Test
-    public void testConsecutiveCommandFollowedByConsecutiveUndo() throws CommandException, ParseException {
-        CommandResult commandResult1 = logic.execute(SAMPLE_ADD_COMMAND_1);
-        CommandResult commandResult2 = logic.execute(SAMPLE_ADD_COMMAND_2);
-        int sizeBefore = model.getAddressBook().getPersonList().size();
-        CommandResult undoCommand1 = new UndoCommand().execute(model);
-        CommandResult undoCommand2 = new UndoCommand().execute(model);
-        int sizeAfter = model.getAddressBook().getPersonList().size();
+    public void execute_multipleUndosAfterMultipleCommands_success() throws CommandException, ParseException {
+        logic.execute(SAMPLE_ADD_COMMAND_1);
+        logic.execute(SAMPLE_ADD_COMMAND_2);
+        logic.execute(SAMPLE_SCHEDULE_COMMAND);
 
-        assertEquals(sizeBefore, sizeAfter + 2);
+        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(), model.getUserHistoryManager());
+        expectedModel.undoHistory();
+
+        String expectedMessage = UndoCommand.MESSAGE_UNDO_COMMAND_SUCCESS;
+
+        assertCommandSuccess(undoCommand, model, expectedMessage, expectedModel);
+
+        expectedModel.undoHistory();
+        assertCommandSuccess(undoCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_undoAfterNoCommand_throwsCommandException() {
+        assertCommandFailure(undoCommand, model, UndoCommand.MESSAGE_NO_COMMAND_TO_UNDO_ERROR);
     }
 
     /**
      * Test multiple undo after running a single command
      */
     @Test
-    public void testSingleCommandFollowedByConsecutiveUndo() throws CommandException, ParseException {
-        CommandResult commandResult1 = logic.execute(SAMPLE_ADD_COMMAND_1);
-        try {
-            CommandResult undoCommand1 = new UndoCommand().execute(model);
-            CommandResult undoCommand2 = new UndoCommand().execute(model);
-        } catch (CommandException e) {
-            assertEquals(model.getUserHistoryManager().getUndoHistorySize(), 1);
-        }
+    public void execute_multipleUndosAfterOneCommand_throwsCommandException() throws CommandException, ParseException {
+        logic.execute(SAMPLE_ADD_COMMAND_2);
+        logic.execute(SAMPLE_UNDO_COMMAND);
+
+        assertCommandFailure(undoCommand, model, UndoCommand.MESSAGE_NO_COMMAND_TO_UNDO_ERROR);
+    }
+
+    @Test
+    public void execute_undoAfterRedoCommand_success() throws CommandException, ParseException {
+        logic.execute(SAMPLE_ADD_COMMAND_1);
+        logic.execute(SAMPLE_UNDO_COMMAND);
+        logic.execute(SAMPLE_REDO_COMMAND);
+
+        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(), model.getUserHistoryManager());
+        expectedModel.undoHistory();
+
+        String expectedMessage = UndoCommand.MESSAGE_UNDO_COMMAND_SUCCESS;
+
+        assertCommandSuccess(undoCommand, model, expectedMessage, expectedModel);
     }
 
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Integration Testing of UndoCommand with patient commands~~~~~~~~~~~~~~~~~~~~~~~~~
+    /**
+     * Checks if a person is in the person list or not.
+     *
+     * @param model Model to be checked.
+     * @param name Name to be checked.
+     * @return true if the person list of model contains the name of the person we want to check, false otherwise.
+     */
+    public boolean containsPerson(Model model, String name) {
+        boolean containsSamplePatient = false;
+
+        for (Person patient : model.getAddressBook().getPersonList()) {
+            if (patient.getName().toString().equals(name)) {
+                containsSamplePatient = true;
+            }
+        }
+
+        return containsSamplePatient;
+    }
+
+    /**
+     * Checks if a person with a phone number is in the person list or not.
+     *
+     * @param model Model to be checked.
+     * @param name Name to be checked.
+     * @param phoneNumber Phone number belongs to that person.
+     * @return true if the person list of model contains the name with correct phone number, false otherwise.
+     */
+    public boolean containsPersonWithPhoneNumber(Model model, String name, String phoneNumber) {
+        for (Person person : model.getAddressBook().getPersonList()) {
+            if (person.getName().toString().equals(name)
+                    && person.getPhone().toString().equals(phoneNumber)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * Checks if a person with specified illnesses is in the person list or not.
+     *
+     * @param model Model to be checked.
+     * @param name Name to be checked.
+     * @param illnesses Illnesses belong to that person.
+     * @return true if the person list of model contains the name with correct illnesses, false otherwise.
+     */
+    public boolean containsPersonWithIllnesses(Model model, String name, Set<Tag> illnesses) {
+        for (Person person : model.getAddressBook().getPersonList()) {
+            if (person.getName().toString().equals(name)
+                    && person.getTags().equals(illnesses)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     /**
      * Test undo functionality with add command.
      * Add command can be undone
      */
     @Test
-    public void testAddCommandFollowedByUndo() throws CommandException, ParseException {
-        CommandResult commandResult1 = logic.execute(SAMPLE_ADD_COMMAND_1);
+    public void execute_undoAddCommand_success() throws CommandException, ParseException {
+        logic.execute(SAMPLE_ADD_COMMAND_1);
         model.undoHistory();
 
-        boolean containsSamplePatient = false;
-
-        for (Person patient : model.getAddressBook().getPersonList()) {
-            if (patient.getName().toString().equals("John Doe")) {
-                containsSamplePatient = true;
-            }
-        }
-
-        assertFalse(containsSamplePatient);
+        assertFalse(containsPerson(model, "John Doe"));
     }
 
 
@@ -181,20 +269,12 @@ public class UndoCommandTest {
      * Delete command can be undone
      */
     @Test
-    public void testDeleteCommandFollowedByUndo() throws CommandException, ParseException {
-        CommandResult commandResult1 = logic.execute(SAMPLE_ADD_COMMAND_1);
-        CommandResult commandResult2 = logic.execute(SAMPLE_DELETE_COMMAND);
+    public void execute_undoDeleteCommand_success() throws CommandException, ParseException {
+        logic.execute(SAMPLE_ADD_COMMAND_1);
+        logic.execute(SAMPLE_DELETE_COMMAND);
         model.undoHistory();
 
-        boolean containsSamplePatient = false;
-
-        for (Person patient : model.getAddressBook().getPersonList()) {
-            if (patient.getName().toString().equals("John Doe")) {
-                containsSamplePatient = true;
-            }
-        }
-
-        assertTrue(containsSamplePatient);
+        assertTrue(containsPerson(model, "John Doe"));
     }
 
     /**
@@ -202,21 +282,12 @@ public class UndoCommandTest {
      * Edit command can be undone
      */
     @Test
-    public void testEditCommandFollowedByUndo() throws CommandException, ParseException {
-        CommandResult commandResult1 = logic.execute(SAMPLE_ADD_COMMAND_1);
-        CommandResult commandResult2 = logic.execute(SAMPLE_EDIT_COMMAND);
+    public void execute_undoEditCommand_success() throws CommandException, ParseException {
+        logic.execute(SAMPLE_ADD_COMMAND_1);
+        logic.execute(SAMPLE_EDIT_COMMAND);
         model.undoHistory();
 
-        boolean isPhoneEdited = true;
-
-        for (Person person : model.getAddressBook().getPersonList()) {
-            if (person.getName().toString().equals("John Doe")
-                    && person.getPhone().toString().equals("98765432")) {
-                isPhoneEdited = false;
-            }
-        }
-
-        assertFalse(isPhoneEdited);
+        assertTrue(containsPersonWithPhoneNumber(model, "John Doe", "98765432"));
     }
 
     /**
@@ -224,16 +295,16 @@ public class UndoCommandTest {
      * Find command cannot be undone
      */
     @Test
-    public void testFindCommandFollowedByUndo() throws CommandException, ParseException {
-        CommandResult commandResult1 = logic.execute(SAMPLE_ADD_COMMAND_1);
-        CommandResult commandResult2 = logic.execute(SAMPLE_FIND_COMMAND);
+    public void execute_undoFindCommand_success() throws CommandException, ParseException {
+        logic.execute(SAMPLE_ADD_COMMAND_1);
 
-        int sizeBeforeUndo = model.getFilteredPersonList().size();
-        model.undoHistory();
-        int sizeAfterUndo = model.getFilteredPersonList().size();
+        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(), model.getUserHistoryManager());
+        expectedModel.undoHistory();
 
-        //add command is undone instead of find command
-        assertEquals(sizeBeforeUndo, sizeAfterUndo + 1);
+        logic.execute(SAMPLE_FIND_COMMAND);
+
+        String expectedMessage = UndoCommand.MESSAGE_UNDO_COMMAND_SUCCESS;
+        assertCommandSuccess(undoCommand, model, expectedMessage, expectedModel);
     }
 
     /**
@@ -241,16 +312,16 @@ public class UndoCommandTest {
      * Patients command cannot be undone
      */
     @Test
-    public void testPatientsCommandFollowedByUndo() throws CommandException, ParseException {
-        CommandResult commandResult1 = logic.execute(SAMPLE_ADD_COMMAND_1);
-        CommandResult commandResult2 = logic.execute(SAMPLE_LIST_COMMAND);
+    public void execute_undoListCommand_success() throws CommandException, ParseException {
+        logic.execute(SAMPLE_ADD_COMMAND_1);
 
-        int sizeBeforeUndo = model.getFilteredPersonList().size();
-        model.undoHistory();
-        int sizeAfterUndo = model.getFilteredPersonList().size();
+        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(), model.getUserHistoryManager());
+        expectedModel.undoHistory();
 
-        //add command is undone instead of list command
-        assertEquals(sizeBeforeUndo, sizeAfterUndo + 1);
+        logic.execute(SAMPLE_LIST_COMMAND);
+
+        String expectedMessage = UndoCommand.MESSAGE_UNDO_COMMAND_SUCCESS;
+        assertCommandSuccess(undoCommand, model, expectedMessage, expectedModel);
     }
 
     /**
@@ -258,22 +329,13 @@ public class UndoCommandTest {
      * Diagnose command can be undone
      */
     @Test
-    public void testDiagnoseCommandFollowedByUndo() throws CommandException, ParseException {
+    public void execute_undoDiagnoseCommand_success() throws CommandException, ParseException {
         logic.execute(SAMPLE_ADD_COMMAND_1);
-        Model typicalModel = new ModelManager(model.getAddressBook(), model.getUserPrefs());
-
-        assertTrue(typicalModel.getAddressBook().equals(
-                model.getAddressBook()));
-
+        Set<Tag> tags = model.getAddressBook().getPersonList().get(0).getTags();
         logic.execute(SAMPLE_DIAGNOSE_COMMAND);
-
-        assertFalse(typicalModel.getAddressBook().equals(
-                model.getAddressBook()));
-
         model.undoHistory();
 
-        assertTrue(typicalModel.getAddressBook().equals(
-                model.getAddressBook()));
+        assertTrue(containsPersonWithIllnesses(model, "John Doe", tags));
     }
 
     /**
@@ -281,22 +343,13 @@ public class UndoCommandTest {
      * Undiagnose command can be undone
      */
     @Test
-    public void testUndiagnoseCommandFollowedByUndo() throws CommandException, ParseException {
+    public void execute_undoUndiagnoseCommand_success() throws CommandException, ParseException {
         logic.execute(SAMPLE_ADD_COMMAND_1);
-        Model typicalModel = new ModelManager(model.getAddressBook(), model.getUserPrefs());
-
-        assertTrue(typicalModel.getAddressBook().equals(
-                model.getAddressBook()));
-
+        Set<Tag> tags = model.getAddressBook().getPersonList().get(0).getTags();
         logic.execute(SAMPLE_UNDIAGNOSE_COMMAND);
-
-        assertFalse(typicalModel.getAddressBook().equals(
-                model.getAddressBook()));
-
         model.undoHistory();
 
-        assertTrue(typicalModel.getAddressBook().equals(
-                model.getAddressBook()));
+        assertTrue(containsPersonWithIllnesses(model, "John Doe", tags));
     }
 
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Integration Testing of UndoCommand with appointment commands~~~~~~~~~~~~~~~~~~~~~
@@ -305,14 +358,10 @@ public class UndoCommandTest {
      * Appointments command cannot be undone
      */
     @Test
-    public void testAppointmentsCommandFollowedByUndo() throws CommandException, ParseException {
-        CommandResult commandResult1 = logic.execute(SAMPLE_APPOINTMENTS_COMMAND);
+    public void execute_undoAppointmentsCommand_throwsCommandException() throws CommandException, ParseException {
+        logic.execute(SAMPLE_APPOINTMENTS_COMMAND);
 
-        try {
-            CommandResult undoCommand = new UndoCommand().execute(model);
-        } catch (CommandException e) {
-            assertEquals(model.getUserHistoryManager().getUndoHistorySize(), 1);
-        }
+        assertCommandFailure(undoCommand, model, UndoCommand.MESSAGE_NO_COMMAND_TO_UNDO_ERROR);
     }
 
     /**
@@ -320,14 +369,12 @@ public class UndoCommandTest {
      * Cancel command can be undone
      */
     @Test
-    public void testCancelCommandFollowedByUndo() throws CommandException, ParseException {
-        CommandResult commandResult1 = logic.execute(SAMPLE_ADD_COMMAND_1);
-        CommandResult commandResult2 = logic.execute(SAMPLE_SCHEDULE_COMMAND);
-        CommandResult commandResult3 = logic.execute(SAMPLE_CANCEL_COMMAND);
+    public void execute_undoCancelCommand_success() throws CommandException, ParseException {
+        logic.execute(SAMPLE_ADD_COMMAND_1);
+        logic.execute(SAMPLE_SCHEDULE_COMMAND);
+        logic.execute(SAMPLE_CANCEL_COMMAND);
 
-        model.undoHistory();
-
-        assertEquals(1, model.getAddressBook().getAppointmentList().size());
+        assertTrue(model.getAddressBook().getAppointmentList().isEmpty());
     }
 
     /**
@@ -335,15 +382,17 @@ public class UndoCommandTest {
      * Find appointment command cannot be undone
      */
     @Test
-    public void testFindAppointmentCommandFollowedByUndo() throws CommandException, ParseException {
-        CommandResult commandResult1 = logic.execute(SAMPLE_ADD_COMMAND_1);
-        CommandResult commandResult2 = logic.execute(SAMPLE_SCHEDULE_COMMAND);
-        CommandResult commandResult3 = logic.execute(SAMPLE_FIND_PATIENT_APPOINTMENT_COMMAND);
+    public void execute_undoAppointmentFindCommand_success() throws CommandException, ParseException {
+        logic.execute(SAMPLE_ADD_COMMAND_1);
+        logic.execute(SAMPLE_SCHEDULE_COMMAND);
 
-        model.undoHistory();
+        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(), model.getUserHistoryManager());
+        expectedModel.undoHistory();
 
-        //schedule command is undone instead of appointment find command
-        assertEquals(0, model.getAddressBook().getAppointmentList().size());
+        logic.execute(SAMPLE_FIND_PATIENT_APPOINTMENT_COMMAND);
+
+        String expectedMessage = UndoCommand.MESSAGE_UNDO_COMMAND_SUCCESS;
+        assertCommandSuccess(undoCommand, model, expectedMessage, expectedModel);
     }
 
     /**
@@ -351,11 +400,11 @@ public class UndoCommandTest {
      * Reschedule command can be undone
      */
     @Test
-    public void testRescheduleCommandFollowedByUndo() throws CommandException, ParseException {
-        CommandResult commandResult1 = logic.execute(SAMPLE_ADD_COMMAND_1);
-        CommandResult commandResult2 = logic.execute(SAMPLE_SCHEDULE_COMMAND);
+    public void execute_undoRescheduleCommand_success() throws CommandException, ParseException {
+        logic.execute(SAMPLE_ADD_COMMAND_1);
+        logic.execute(SAMPLE_SCHEDULE_COMMAND);
         Appointment appointmentBefore = model.getAddressBook().getAppointmentList().get(0);
-        CommandResult commandResult3 = logic.execute(SAMPLE_RESCHEDULE_COMMAND);
+        logic.execute(SAMPLE_RESCHEDULE_COMMAND);
 
         model.undoHistory();
 
@@ -369,13 +418,13 @@ public class UndoCommandTest {
      * Schedule command can be undone
      */
     @Test
-    public void testScheduleCommandFollowedByUndo() throws CommandException, ParseException {
-        CommandResult commandResult1 = logic.execute(SAMPLE_ADD_COMMAND_1);
-        CommandResult commandResult2 = logic.execute(SAMPLE_SCHEDULE_COMMAND);
+    public void execute_undoScheduleCommand_success() throws CommandException, ParseException {
+        logic.execute(SAMPLE_ADD_COMMAND_1);
+        logic.execute(SAMPLE_SCHEDULE_COMMAND);
 
         model.undoHistory();
 
-        assertEquals(0, model.getAddressBook().getAppointmentList().size());
+        assertTrue(model.getAddressBook().getAppointmentList().isEmpty());
     }
 
     /**
@@ -383,14 +432,10 @@ public class UndoCommandTest {
      * Today command cannot be undone
      */
     @Test
-    public void testTodayCommandFollowedByUndo() throws CommandException, ParseException {
-        CommandResult commandResult1 = logic.execute(SAMPLE_TODAY_COMMAND);
+    public void execute_undoTodayCommand_throwsCommandException() throws CommandException, ParseException {
+        logic.execute(SAMPLE_TODAY_COMMAND);
 
-        try {
-            CommandResult undoCommand = new UndoCommand().execute(model);
-        } catch (CommandException e) {
-            assertEquals(model.getUserHistoryManager().getUndoHistorySize(), 1);
-        }
+        assertCommandFailure(undoCommand, model, UndoCommand.MESSAGE_NO_COMMAND_TO_UNDO_ERROR);
     }
 
     /**
@@ -398,14 +443,10 @@ public class UndoCommandTest {
      * Upcoming command cannot be undone
      */
     @Test
-    public void testUpcomingCommandFollowedByUndo() throws CommandException, ParseException {
-        CommandResult commandResult1 = logic.execute(SAMPLE_UPCOMING_COMMAND);
+    public void execute_undoUpcomingCommand_throwsCommandException() throws CommandException, ParseException {
+        logic.execute(SAMPLE_UPCOMING_COMMAND);
 
-        try {
-            CommandResult undoCommand = new UndoCommand().execute(model);
-        } catch (CommandException e) {
-            assertEquals(model.getUserHistoryManager().getUndoHistorySize(), 1);
-        }
+        assertCommandFailure(undoCommand, model, UndoCommand.MESSAGE_NO_COMMAND_TO_UNDO_ERROR);
     }
 
     /**
@@ -413,23 +454,15 @@ public class UndoCommandTest {
      * Sort command can be undone
      */
     @Test
-    public void testSortCommandFollowedByUndo() throws CommandException, ParseException {
+    public void execute_undoSortCommand_success() throws CommandException, ParseException {
         logic.execute(SAMPLE_ADD_COMMAND_1);
         logic.execute(SAMPLE_SCHEDULE_COMMAND);
         logic.execute(SAMPLE_SCHEDULE_ANCIENT_APPOINTMENT_COMMAND);
-        Model typicalModel = new ModelManager(model.getAddressBook(), model.getUserPrefs());
-
-        assertTrue(typicalModel.getAddressBook().equals(
-                model.getAddressBook()));
+        Model expectedModel = new ModelManager(model.getAddressBook(), model.getUserPrefs());
 
         logic.execute(SAMPLE_SORT_COMMAND);
-
-        assertFalse(typicalModel.getAddressBook().equals(
-                model.getAddressBook()));
-
         model.undoHistory();
 
-        assertTrue(typicalModel.getAddressBook().equals(
-                model.getAddressBook()));
+        assertEquals(expectedModel.getAddressBook(), model.getAddressBook());
     }
 }

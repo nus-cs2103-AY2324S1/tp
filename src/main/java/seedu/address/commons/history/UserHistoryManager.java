@@ -23,6 +23,15 @@ public class UserHistoryManager {
     }
 
     /**
+     * Initializes a new UserHistoryManager with predeclared undo and redo histories.
+     */
+    @SuppressWarnings("unchecked")
+    public UserHistoryManager(UserHistoryManager userHistory) {
+        undoHistory = (Stack<Pair<List<Person>, List<Appointment>>>) userHistory.undoHistory.clone();
+        redoHistory = (Stack<Pair<List<Person>, List<Appointment>>>) userHistory.redoHistory.clone();
+    }
+
+    /**
      * Initializes the undo history with the given pair.
      *
      * @param pair The pair of lists to be added to the undo history.
@@ -108,5 +117,16 @@ public class UserHistoryManager {
      */
     public boolean canRedo() {
         return !redoHistory.isEmpty();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (!(obj instanceof UserHistoryManager)) {
+            return false;
+        }
+
+        UserHistoryManager otherUserHistory = (UserHistoryManager) obj;
+        return this.undoHistory.equals(otherUserHistory.undoHistory)
+                && this.redoHistory.equals(otherUserHistory.redoHistory);
     }
 }

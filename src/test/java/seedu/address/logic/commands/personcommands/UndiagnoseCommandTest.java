@@ -51,7 +51,7 @@ public class UndiagnoseCommandTest {
         String expectedMessage = String.format(UndiagnoseCommand.MESSAGE_UNDIAGNOSE_PERSON_SUCCESS,
                 undiagnosedPerson.getName(), getIllnessesOriginallyThere(personToUndiagnose, tagToRemove));
 
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(), model.getUserHistoryManager());
         expectedModel.setPerson(expectedModel.getFilteredPersonList().get(0), undiagnosedPerson);
 
         assertCommandSuccess(undiagnoseCommand, model, expectedMessage, expectedModel);
@@ -71,7 +71,7 @@ public class UndiagnoseCommandTest {
         String expectedMessage = String.format(UndiagnoseCommand.MESSAGE_UNDIAGNOSE_PERSON_SUCCESS,
                 undiagnosedPerson.getName(), getIllnessesOriginallyThere(personToUndiagnose, existingTags));
 
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(), model.getUserHistoryManager());
         expectedModel.setPerson(expectedModel.getFilteredPersonList().get(1), undiagnosedPerson);
 
         assertCommandSuccess(undiagnoseCommand, model, expectedMessage, expectedModel);
@@ -79,7 +79,7 @@ public class UndiagnoseCommandTest {
 
     @Test
     public void execute_validIndexOneIllnessFilteredList_success() {
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(), model.getUserHistoryManager());
 
         showPersonAtIndex(model, INDEX_SECOND_PERSON);
         Person personToUndiagnose = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
@@ -106,7 +106,7 @@ public class UndiagnoseCommandTest {
 
     @Test
     public void execute_validIndexTwoIllnessesFilteredList_success() {
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(), model.getUserHistoryManager());
 
         showPersonAtIndex(model, INDEX_THIRD_PERSON);
         Person personToUndiagnose = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
@@ -118,7 +118,6 @@ public class UndiagnoseCommandTest {
         Person undiagnosedPerson = new PersonBuilder(personToUndiagnose).withTags(newTagsString).build();
 
         UndiagnoseCommand undiagnoseCommand = new UndiagnoseCommand(INDEX_FIRST_PERSON, existingTags);
-        System.out.println(existingTags);
         String expectedMessage = String.format(UndiagnoseCommand.MESSAGE_UNDIAGNOSE_PERSON_SUCCESS,
                 undiagnosedPerson.getName(), getIllnessesOriginallyThere(personToUndiagnose, existingTags));
 

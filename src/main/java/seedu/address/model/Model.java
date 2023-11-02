@@ -127,6 +127,11 @@ public interface Model {
     UserHistoryManager getUserHistoryManager();
 
     /**
+     * Updates user history.
+     */
+    void updateUserHistory();
+
+    /**
      * Undo the history.
      */
     void undoHistory();

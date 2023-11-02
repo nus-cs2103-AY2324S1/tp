@@ -39,7 +39,7 @@ public class RescheduleCommandTest {
         String expectedMessage = String.format(RescheduleCommand.MESSAGE_SUCCESS,
                 Messages.format(rescheduledAppointment));
 
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(), model.getUserHistoryManager());
         expectedModel.setAppointment(expectedModel.getFilteredAppointmentList().get(0), rescheduledAppointment);
 
         assertCommandSuccess(rescheduleCommand, model, expectedMessage, expectedModel);
@@ -70,7 +70,7 @@ public class RescheduleCommandTest {
 
     @Test
     public void execute_validIndexValidTimeFilteredList_success() {
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(), model.getUserHistoryManager());
         showAppointmentAtIndex(model, INDEX_SECOND_APPOINTMENT);
         Appointment newAppointment = NOCLASHAPPOINTMENT;
         AppointmentTime newAppointmentTime = new AppointmentTimeBuilder(newAppointment).build();
