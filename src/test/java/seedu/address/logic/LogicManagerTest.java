@@ -34,6 +34,7 @@ import seedu.address.model.calendar.Calendar;
 import seedu.address.model.person.Person;
 import seedu.address.storage.JsonAddressBookStorage;
 import seedu.address.storage.JsonCalendarStorage;
+import seedu.address.storage.JsonTaskManagerStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
 import seedu.address.storage.StorageManager;
 import seedu.address.testutil.PersonBuilder;
@@ -53,8 +54,11 @@ public class LogicManagerTest {
         JsonAddressBookStorage addressBookStorage =
                 new JsonAddressBookStorage(temporaryFolder.resolve("addressBook.json"));
         JsonCalendarStorage calendarStorage = new JsonCalendarStorage(temporaryFolder.resolve("calendar.json"));
+        JsonTaskManagerStorage taskManagerStorage = new JsonTaskManagerStorage(
+                temporaryFolder.resolve("taskManager.json"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(temporaryFolder.resolve("userPrefs.json"));
-        StorageManager storage = new StorageManager(addressBookStorage, calendarStorage, userPrefsStorage);
+        StorageManager storage = new StorageManager(addressBookStorage, calendarStorage, taskManagerStorage,
+                userPrefsStorage);
         logic = new LogicManager(model, storage);
     }
 
@@ -191,9 +195,12 @@ public class LogicManagerTest {
 
         JsonCalendarStorage calendarStorage =
                 new JsonCalendarStorage(temporaryFolder.resolve("ExceptionCalendar.json"));
+        JsonTaskManagerStorage taskManagerStorage =
+                new JsonTaskManagerStorage(temporaryFolder.resolve("taskManager.json"));
         JsonUserPrefsStorage userPrefsStorage =
                 new JsonUserPrefsStorage(temporaryFolder.resolve("ExceptionUserPrefs.json"));
-        StorageManager storage = new StorageManager(addressBookStorage, calendarStorage, userPrefsStorage);
+        StorageManager storage = new StorageManager(addressBookStorage, calendarStorage, taskManagerStorage,
+                userPrefsStorage);
 
         logic = new LogicManager(model, storage);
 

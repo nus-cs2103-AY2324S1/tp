@@ -92,10 +92,22 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void setCalendarFilePath_validPath_setsAddressBookFilePath() {
+    public void setCalendarFilePath_validPath_setsCalendarFilePath() {
         Path path = Paths.get("calendar/file/path");
         modelManager.setCalendarFilePath(path);
         assertEquals(path, modelManager.getCalendarFilePath());
+    }
+
+    @Test
+    public void setTaskManagerFilePath_nullPath_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.setTaskManagerFilePath(null));
+    }
+
+    @Test
+    public void setTaskManagerFilePath_validPath_setsTaskManagerFilePath() {
+        Path path = Paths.get("task/manager/file/path");
+        modelManager.setTaskManagerFilePath(path);
+        assertEquals(path, modelManager.getTaskManagerFilePath());
     }
 
     @Test
