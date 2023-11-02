@@ -623,23 +623,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is `CampusConnect` and the **Actor** is a `NUS student who stays in campus`, unless specified otherwise)
 
-**Use case: UC1- Opt out notifications**
 
-**MSS**
-1. User requests to opt out from receiving notifications.
-2. System requests for confirmation.
-3. User confirms.
-4. System opts out the user from receiving notifications. <br>
-Use case ends.
-
-**Extensions**
-   * 1a. System detects an error in data entered.
-     * 1a1. System shows the correct format for request.
-     * 1a2. User enters a new opt out request. <br>
-     Steps 1a1-1a2 are repeated until the data entered are correct. <br>
-     Use case resumes from step 4. <br>
-
-**Use case: UC2 - Add new contact**
+**Use case: UC1 - Add new contact**
 
 **MSS**
 1. User enters information of the new contact to be added.
@@ -650,10 +635,10 @@ Use case ends.
 * 1a. System detects an error in the entered data.
     * 1a1. System shows an error message.
     * 1a2. User enters a new add request. <br>
-      Steps 1a1- 1a2 are repeated until the data entered are correct.<br>
+      Steps 1a1- 1a2 are repeated until the data entered is correct.<br>
       Use case resumes from step 2. <br>
 
-**Use case: UC3 - List all contacts**
+**Use case: UC2 - List all contacts**
 
 **MSS**
 1. User requests list all contacts.
@@ -664,10 +649,10 @@ Use case ends.
 * 1a. System shows an empty contact list. <br>
   Use case ends. <br>
 
-**Use case: UC4 - Add alternative information to existing contact**
+**Use case: UC3 - Add alternative information to existing contact**
 
 **MSS**
-1. User <ins>lists all contacts (UC3).</ins>
+1. User <ins>lists all contacts (UC2).</ins>
 2. User enters an index with alternative information to be added for an existing contact in the system.
 3. System adds the alternative information to the specified contact inside its system. <br>
    Use case ends.
@@ -678,16 +663,16 @@ Use case ends.
 * 2a. System detects an error in the entered data.
     * 2a1. System shows an error message.
     * 2a2. User enters a new addalt request. <br>
-      Steps 2a1- 2a2 are repeated until the data entered are correct.<br>
+      Steps 2a1- 2a2 are repeated until the data entered is correct.<br>
       Use case resumes from step 3.
 * 3a. System detects that the field of the specified contact is non-empty.
   * 3a1. System shows an error message and prompts users to use edit command. <br>
     Use case ends. <br>
 
-**Use case: UC5 - Edit information of existing contact**
+**Use case: UC4 - Edit information of existing contact**
 
 **MSS**
-1. User <ins>lists all contacts (UC3).</ins>
+1. User <ins>lists all contacts (UC2).</ins>
 2. User enters an index and information to be edited for an existing contact in the system.
 3. System edits the information of the specified contact inside its system. <br>
    Use case ends.
@@ -698,16 +683,16 @@ Use case ends.
 * 2a. System detects an error in the entered data.
     * 2a1. System shows an error message.
     * 2a2. User enters a new edit request. <br>
-      Steps 2a1- 2a2 are repeated until the data entered are correct.<br>
+      Steps 2a1- 2a2 are repeated until the data entered is correct.<br>
       Use case resumes from step 3.
 * 3a. System detects that the additional fields of the specified contact is empty.
     * 3a1. System shows an error message and prompts users to use addalt command. <br>
       Use case ends. <br>
 
-**Use case: UC6 - Delete contact**
+**Use case: UC5 - Delete contact**
 
 **MSS**
-1. User <ins>lists all contacts (UC3).</ins>
+1. User <ins>lists all contacts (UC2).</ins>
 2. User enters an index to delete a contact from the system.
 3. System deletes contact inside its system. <br>
 Use case ends.
@@ -718,29 +703,59 @@ Use case ends.
 * 2a. System detects an invalid index entered.
   * 2a1. System shows an error message.
   * 2a2. User enters a new delete request. <br>
-  Steps 2a1- 2a2 are repeated until the data entered are correct.<br>
+  Steps 2a1- 2a2 are repeated until the data entered is correct.<br>
   Use case resumes from step 3. <br>
 
-**Use Case UC7: Add emergency contact**
+**Use Case UC6 - Add note**
 
 **MSS**
-1. User <ins>lists all contacts (UC3).</ins>
-2. User adds a contact to the emergency contact list.
-3. System adds the contact into the emergency contact list. <br>
+1. User <ins>lists all contacts (UC2).</ins>
+2. User enters an index to add a note associated with a contact
+3. System adds the note to the contact.<br>
 Use case ends.
 
 **Extensions**
-* 1a. System detects that the tag given to the contact is invalid.
-  * 1a1. System shows the valid tags for input.
-  * 1a2. User enters a new add emergency contact request. <br>
-  Steps 1a1- 1a2 are repeated until the data entered are correct. <br>
-  Use case resumes from step 3.
-* 1b. System detects an invalid index entered.
-  * 1b1. System shows an error message.
-  * 1b2. User enters a new delete request. <br>
-  Steps 1b1- 1b2 are repeated until the data entered are correct. <br>
+* 2a. System detects an invalid index entered.
+  * 2a1. System shows an error message.
+  * 2a2. User tries to add a note to a contact again.<br>
+  Steps 2a1- 2a2 are repeated until the data entered is correct. <br>
   Use case resumes from step 3.
 
+
+**Use Case UC7 - Record payment**
+
+**MSS**
+1. User <ins>lists all contacts (UC2).</ins>
+2. User enters an index to record an amount of money paid to a contact.
+3. System records money paid to the contact.
+4. System displays the contact with an indication of the money owed.<br>
+Use case ends.
+
+**Extensions**
+* 2a. System detects an invalid index entered.
+  * 2a1. System shows an error message.
+  * 2a2. User tries to record a payment to a contact again.<br>
+  Steps 2a1- 2a2 are repeated until the data entered is correct. <br>
+  Use case resumes from step 3.
+* 2b. System detects an invalid payment amount entered.
+  * 2b1. System shows an error message.
+  * 2b2. User tries to record a payment to a contact again.<br>
+  Steps 2b1- 2b2 are repeated until the data entered is correct. <br>
+  Use case resumes from step 3.
+
+**Use Case UC8 - Search for contact**
+
+**MSS**
+1. User enters a search criteria to find a contact.
+2. System displays all contacts that match the criteria.<br>
+Use case ends.
+
+**Extensions**
+* 1a. System detects an invalid search criteria.
+  * 1a1. System shows an error message.
+  * 1a2. User tries to enter a search criteria to find a contact.<br>
+  Steps 1a1 - 1a2 are repeated until the data entered is correct.<br>
+  Use case resumes from step 2.
 
 
 ### Non-Functional Requirements
