@@ -195,6 +195,16 @@ public class CreateMemberCommandTest {
         }
 
         @Override
+        public void deleteEnrolmentsWithEventName(Name eventName) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void deleteEnrolmentsWithMemberName(Name memberName) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void setEnrolment(Enrolment enrolment, Enrolment editedEnrolment) {
             throw new AssertionError("This method should not be called.");
         }

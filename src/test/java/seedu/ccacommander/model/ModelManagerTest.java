@@ -34,6 +34,7 @@ import seedu.ccacommander.testutil.EnrolmentBuilder;
 import seedu.ccacommander.testutil.TypicalEnrolments;
 import seedu.ccacommander.testutil.TypicalEvents;
 import seedu.ccacommander.testutil.TypicalMembers;
+import seedu.ccacommander.ui.Stylesheet;
 
 public class ModelManagerTest {
 
@@ -56,7 +57,7 @@ public class ModelManagerTest {
     public void setUserPrefs_validUserPrefs_copiesUserPrefs() {
         UserPrefs userPrefs = new UserPrefs();
         userPrefs.setCcaCommanderFilePath(Paths.get("ccacommander/book/file/path"));
-        userPrefs.setGuiSettings(new GuiSettings(1, 2, 3, 4));
+        userPrefs.setGuiSettings(new GuiSettings(1, 2, 3, 4, Stylesheet.DARK.toString()));
         modelManager.setUserPrefs(userPrefs);
         assertEquals(userPrefs, modelManager.getUserPrefs());
 
@@ -73,7 +74,7 @@ public class ModelManagerTest {
 
     @Test
     public void setGuiSettings_validGuiSettings_setsGuiSettings() {
-        GuiSettings guiSettings = new GuiSettings(1, 2, 3, 4);
+        GuiSettings guiSettings = new GuiSettings(1, 2, 3, 4, Stylesheet.LIGHT.toString());
         modelManager.setGuiSettings(guiSettings);
         assertEquals(guiSettings, modelManager.getGuiSettings());
     }

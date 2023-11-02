@@ -117,6 +117,16 @@ public interface Model {
     void deleteEnrolment(Enrolment target);
 
     /**
+     * Deletes all enrolments with matching eventName.
+     */
+    void deleteEnrolmentsWithEventName(Name eventName);
+
+    /**
+     * Deletes all enrolments with matching memberName
+     */
+    void deleteEnrolmentsWithMemberName(Name memberName);
+
+    /**
      * Creates the given event.
      * {@code enrolment} must not already exist in CcaCommander.
      */

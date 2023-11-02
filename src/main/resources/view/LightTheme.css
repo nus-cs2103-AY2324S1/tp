@@ -1,5 +1,5 @@
 .background {
-    -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-background-color: #EDDFC9;
     background-color: #383838; /* Used in the default.html file */
 }
 
@@ -49,16 +49,16 @@
 /* stack-pane is the command-text-field + button, right now if set to black , button will blend in
    but the rim outside the command-text-field will still be beige color */
 .stack-pane {
-     -fx-background-color: derive(#1d1d1d, 20%);
+     -fx-background-color: #EDDFC9;
 }
 /* command text-box */
 .command-text-region {
     -fx-font-size: 13pt;
-    -fx-text-fill: white;
+    -fx-text-fill: black;
     -fx-font-family: "Nunito";
-    -fx-background-color: derive(#1d1d1d, 40%);
+    -fx-background-color: derive(#FFFAE4, 30%);
     -fx-background-radius: 5 5 5 5;
-    -fx-effect: dropshadow(three-pass-box, #823ecf, 19, 0, 0, 0);
+    -fx-effect: innershadow(three-pass-box, #1d1d1d, 10, 0, 0, 0);
     -fx-border-radius: 5;
     -fx-border-width: 1;
 }
@@ -67,38 +67,26 @@
     -fx-background-insets: 0;
     -fx-border-color: #383838 #383838 #383838 #383838;
     -fx-border-insets: 0;
-
 }
 
 /* result display box below the command text box*/
-.text-area {
-    -fx-focus-color: transparent;
-    -fx-border-style: none;
-    -fx-border-radius: 0.0px;
-    -fx-background-color: derive(#1d1d1d, 30%);
-}
-
-.text-area:focused .content {
-    -fx-background-color: black;
-}
-
 .result-display {
+    -fx-background-color: #F0EFE7;
     -fx-font-family: "Nunito";
     -fx-font-weight: lighter;
     -fx-font-size: 12pt;
-    -fx-text-fill: white;
-    -fx-border-width: 0;
+    -fx-text-fill: black;
     -fx-effect: innershadow(three-pass-box, derive(#3b3b3b, -10%) , 4, 0, 0, 0);
 }
 
 #resultDisplay .content {
-    -fx-background-color: derive(#1d1d1d, 30%);
+    -fx-background-color: transparent, #F0EFE7, transparent, #F0EFE7;
     -fx-background-radius: 0;
 }
 
 /* pane-with-border is used in VBox containing member-list + members title and the VBox containing event-list + events title */
 .pane-with-border {
-     -fx-background-color: derive(#1d1d1d, 20%);
+     -fx-background-color: #EDDFC9;
      -fx-border-color: derive(#1d1d1d, 10%);
      -fx-border-top-width: 1px;
 }
@@ -114,9 +102,9 @@
     -fx-font-size: 14pt;
     -fx-font-family: "Poppins";
     -fx-font-weight: 700;
-    -fx-text-fill: black;
+    -fx-text-fill: white;
     -fx-padding: 5px 10px;
-    -fx-background-color: linear-gradient(from 0% 0% to 100% 100%, #fdfcfb, #e2d1c3);
+    -fx-background-color: linear-gradient(from 25% 25% to 100% 100%, derive(#1d1d1d, 20%), derive(#1d1d1d, 70%));
     -fx-background-radius: 5px;
     -fx-effect: innershadow(three-pass-box, derive(#3b3b3b, -10%) , 4, 0, 0, 0);
 }
@@ -125,7 +113,7 @@
 .list-view {
     -fx-background-insets: 0;
     -fx-padding: 0;
-    -fx-background-color: derive(#1d1d1d, 30%);
+    -fx-background-color: derive(#EDDFC9, 20%);
     -fx-effect: innershadow(three-pass-box, derive(#3b3b3b, -10%) , 4, 0, 0, 0);
 }
 
@@ -134,28 +122,27 @@
     -fx-label-padding: 0 0 0 0;
     -fx-graphic-text-gap : 0;
     -fx-padding: 0 0 0 0;
-    -fx-text-fill: white;
 }
 
 .list-cell:filled:even {
-    -fx-background-color: linear-gradient(from 0% 0% to 100% 100%, #5b3c80, #010314);
-    -fx-text-fill: white;
+    -fx-background-color: linear-gradient(from 0% 0% to 100% 100%, #fdfcfb, #e2d1c3);
+    -fx-text-fill: #010504;
     -fx-effect: innershadow(three-pass-box, derive(#3b3b3b, -10%) , 4, 0, 0, 0);
 }
 
 .list-cell:filled:odd {
-    -fx-background-color: linear-gradient(from 25% 25% to 100% 100%, derive(#1d1d1d, 10%), derive(#1d1d1d, 70%));
-    -fx-text-fill: black;
+    -fx-background-color: linear-gradient(from 0% 0% to 100% 100%, #ECECEC, #44355B);
+    -fx-text-fill: white;
     -fx-effect: innershadow(three-pass-box, derive(#3b3b3b, -10%) , 4, 0, 0, 0);
 }
 
 /* when the cell is selected */
 .list-cell:filled:selected {
-    -fx-effect: dropshadow(three-pass-box, #1F51FF, 20, 0, 0, 0);
+    -fx-border-color: #9434F4;
 }
 
 .list-cell .label {
-    -fx-text-fill: white; /* black */
+    -fx-text-fill: #010504; /* black */
 }
 
 .cell_big_label {
@@ -276,7 +263,7 @@
 
 /* scroll-bar (used in event, member lists, result display) */
 .scroll-bar {
-    -fx-background-color: derive(#1d1d1d, 30%);
+    -fx-background-color: #EDDFC9
 }
 
 .scroll-bar .thumb {

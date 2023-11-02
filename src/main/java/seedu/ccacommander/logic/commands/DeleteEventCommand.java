@@ -10,6 +10,7 @@ import seedu.ccacommander.logic.Messages;
 import seedu.ccacommander.logic.commands.exceptions.CommandException;
 import seedu.ccacommander.model.Model;
 import seedu.ccacommander.model.event.Event;
+import seedu.ccacommander.model.shared.Name;
 
 /**
  * Deletes an event identified using its displayed index from CcaCommander.
@@ -34,12 +35,16 @@ public class DeleteEventCommand extends Command {
         requireNonNull(model);
         List<Event> lastShownList = model.getFilteredEventList();
 
+
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_EVENT_DISPLAYED_INDEX);
         }
 
         Event eventToDelete = lastShownList.get(targetIndex.getZeroBased());
+        Name eventToDeleteName = eventToDelete.getName();
+
         model.deleteEvent(eventToDelete);
+        model.deleteEnrolmentsWithEventName(eventToDeleteName);
         model.commit(String.format(MESSAGE_COMMIT, eventToDelete.getName()));
         return new CommandResult(String.format(MESSAGE_DELETE_EVENT_SUCCESS, Messages.format(eventToDelete)));
     }

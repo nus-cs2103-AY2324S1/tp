@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.ccacommander.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
@@ -152,6 +153,35 @@ public class ModelManager implements Model {
         versionedCcaCommander.removeEnrolment(target);
     }
 
+    @Override
+    public void deleteEnrolmentsWithEventName(Name eventName) {
+        List<Enrolment> enrolmentsToBeDeletedList = new ArrayList<>();
+        for (Enrolment enrolment: this.filteredEnrolments) {
+            if (enrolment.getEventName().equals(eventName)) {
+                // The enrolments cannot directly be deleted as it will affect the iteration of enrolments here.
+                enrolmentsToBeDeletedList.add(enrolment);
+            }
+        }
+
+        for (Enrolment enrolment: enrolmentsToBeDeletedList) {
+            this.deleteEnrolment(enrolment);
+        }
+    }
+
+    @Override
+    public void deleteEnrolmentsWithMemberName(Name memberName) {
+        List<Enrolment> enrolmentsToBeDeletedList = new ArrayList<>();
+        for (Enrolment enrolment: this.filteredEnrolments) {
+            if (enrolment.getMemberName().equals(memberName)) {
+                // The enrolments cannot directly be deleted as it will affect the iteration of enrolments here.
+                enrolmentsToBeDeletedList.add(enrolment);
+            }
+        }
+
+        for (Enrolment enrolment: enrolmentsToBeDeletedList) {
+            this.deleteEnrolment(enrolment);
+        }
+    }
     @Override
     public void createEnrolment(Enrolment enrolment) {
         versionedCcaCommander.createEnrolment(enrolment);
