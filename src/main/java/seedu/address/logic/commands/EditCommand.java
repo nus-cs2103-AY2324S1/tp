@@ -2,7 +2,6 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
 
@@ -37,7 +36,6 @@ public class EditCommand extends Command {
             + "by the index number used in the displayed student list. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
-            + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_ADDRESS + "ADDRESS]\n"
             + "Example: " + COMMAND_WORD + " 1 "
@@ -45,7 +43,6 @@ public class EditCommand extends Command {
 
     public static final String MESSAGE_EDIT_STUDENT_SUCCESS = "Edited Student: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_STUDENT = "This student already exists in the address book.";
 
     private final Index index;
     private final EditStudentDescriptor editStudentDescriptor;
@@ -74,9 +71,6 @@ public class EditCommand extends Command {
         Student studentToEdit = lastShownList.get(index.getZeroBased());
         Student editedStudent = createEditedStudent(studentToEdit, editStudentDescriptor);
 
-        if (!studentToEdit.isSameStudent(editedStudent) && model.hasStudent(editedStudent)) {
-            throw new CommandException(MESSAGE_DUPLICATE_STUDENT);
-        }
 
         model.setStudent(studentToEdit, editedStudent);
         model.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
@@ -89,7 +83,7 @@ public class EditCommand extends Command {
      */
     private static Student createEditedStudent(Student studentToEdit, EditStudentDescriptor editStudentDescriptor) {
         assert studentToEdit != null;
-        Name updatedName = editStudentDescriptor.getName().orElse(studentToEdit.getName());
+        Name updatedName = studentToEdit.getName();
         Phone updatedPhone = editStudentDescriptor.getPhone().orElse(studentToEdit.getPhone());
         Address updatedAddress = editStudentDescriptor.getAddress().orElse(studentToEdit.getAddress());
         Set<RiskLevel> updatedTags = editStudentDescriptor.getTags().orElse(studentToEdit.getTags());
@@ -127,7 +121,7 @@ public class EditCommand extends Command {
      * corresponding field value of the student.
      */
     public static class EditStudentDescriptor {
-        private Name name;
+
         private Phone phone;
         private Address address;
         private Set<RiskLevel> riskLevel;
@@ -139,7 +133,6 @@ public class EditCommand extends Command {
          * A defensive copy of {@code tags} is used internally.
          */
         public EditStudentDescriptor(EditStudentDescriptor toCopy) {
-            setName(toCopy.name);
             setPhone(toCopy.phone);
             setAddress(toCopy.address);
             setTags(toCopy.riskLevel);
@@ -149,15 +142,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, address, riskLevel);
-        }
-
-        public void setName(Name name) {
-            this.name = name;
-        }
-
-        public Optional<Name> getName() {
-            return Optional.ofNullable(name);
+            return CollectionUtil.isAnyNonNull(phone, address, riskLevel);
         }
 
         public void setPhone(Phone phone) {
@@ -205,8 +190,7 @@ public class EditCommand extends Command {
             }
 
             EditStudentDescriptor otherEditStudentDescriptor = (EditStudentDescriptor) other;
-            return Objects.equals(name, otherEditStudentDescriptor.name)
-                    && Objects.equals(phone, otherEditStudentDescriptor.phone)
+            return Objects.equals(phone, otherEditStudentDescriptor.phone)
                     && Objects.equals(address, otherEditStudentDescriptor.address)
                     && Objects.equals(riskLevel, otherEditStudentDescriptor.riskLevel);
         }
@@ -214,7 +198,6 @@ public class EditCommand extends Command {
         @Override
         public String toString() {
             return new ToStringBuilder(this)
-                    .add("name", name)
                     .add("phone", phone)
                     .add("address", address)
                     .add("risk level", riskLevel)

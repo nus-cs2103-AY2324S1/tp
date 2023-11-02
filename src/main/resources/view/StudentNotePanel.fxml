@@ -7,7 +7,7 @@
 <VBox fx:id="columnContainer" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
     <Label fx:id="columnTitle" text="Notes" styleClass="column_title"/>
     <VBox  VBox.vgrow="ALWAYS" styleClass="noteBox">
-        <Label fx:id="studentName" text="" styleClass="cell_big_label"/>
+        <Label fx:id="studentName" text="" styleClass="cell_big_label" wrapText="true"/>
         <Label fx:id="notesPara" text="" styleClass="cell_small_label" wrapText="true"/>
     </VBox>
 </VBox>
