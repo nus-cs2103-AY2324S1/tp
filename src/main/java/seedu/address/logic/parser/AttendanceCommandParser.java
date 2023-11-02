@@ -44,14 +44,11 @@ public class AttendanceCommandParser implements Parser<AttendanceCommand> {
 
             } else {
                 throw new ParseException(
-                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, AttendanceCommand.MESSAGE_USAGE_FOR_NAME));
+                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, AttendanceCommand.MESSAGE_USAGE));
             }
 
         }
 
-
-
     }
-
 
 }
