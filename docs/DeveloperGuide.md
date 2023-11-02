@@ -270,11 +270,11 @@ object as a parameter. The 'Index' object is used to identify the `Date` object 
 starred. The `StarCommand` class then returns a `CommandResult` object that contains the starred `Date` object
 
 The _Acitvity_ diagram summarises what happens after the user enters a star command.
-![Star Activity.png](..%2F..%2F..%2FStar%20Activity.png)
+<puml src="diagrams/StarActivity.puml" width="450" />
 
 The _Sequence_ Diagram below shows how the components interact with each other for the scenario where the user issues
 the command `star 1`
-![Star Sequence.png](..%2F..%2F..%2FStar%20Sequence.png)
+<puml src="diagrams/StarSequence.puml" width="450" />
 
 ### Unstar dates
 
@@ -283,11 +283,11 @@ object as a parameter. The 'Index' object is used to identify the `Date` object 
 unstarred. The `UnstarCommand` class then returns a `CommandResult` object that contains the unstarred `Date` object
 
 The _Activity_ diagram summarises what happens after the user enters a star command.
-![Unstar Activity.png](..%2F..%2F..%2FUnstar%20Activity.png)
+<puml src="diagrams/UnstarActivity.puml" width="450" />
 
 The _Sequence_ Diagram below shows how the components interact with each other for the scenario where the user issues
 the command `star 1`
-![Unstar Sequence.png](..%2F..%2F..%2FUnstar%20Sequence.png)
+<puml src="diagrams/UnstarSequence.puml" width="450" />
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
