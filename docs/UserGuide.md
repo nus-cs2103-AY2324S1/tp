@@ -154,7 +154,7 @@ Format: `tag STUDENT_INDEX r/RISK_LEVEL`
 2. Risk Level
    - Must be `high`, `medium`, or `low`
 
-Examples:
+Example:
 * `tag 2 r/high`
 
 #### 2.2.6 Editing Student details: `edit`
@@ -214,7 +214,7 @@ Format: `cancel APPOINTMENT_INDEX`
    - Must be an integer starting from 1
    - Must be found in the appointments list
 
-Examples:
+Example:
 * `cancel 2`
 
 #### 2.3.3 Filtering Appointments by Date: `filter`
@@ -227,7 +227,7 @@ Format: `filter DATE`
 1. Date
    - Must be in the following format: `yyyy-mm-dd`
 
-Examples:
+Example:
 * `filter 2023-10-16`
 
 ### 2.4 Others
@@ -291,19 +291,20 @@ _Details coming soon ..._
 
 ## 5. Command summary
 
-| Action                                                                                     | Format, Examples                                                                                                                                                |
-|--------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| [Help](#211-viewing-help-help)                                                             | `help`                                                                                                                                                          |
-| [Add Student](#221-adding-a-student-add)                                                   | `add n/STUDENT_NAME c/CONTACT_NUMBER a/HOME_ADDRESS [r/RISK_LEVEL]` <br> e.g., `add n/John c/81349705 a/Yishun Street 56 Blk 21 #05-07 r/medium`                |
-| [Delete Student](#222-deleting-a-student-delete)                                           | `delete STUDENT_INDEX`<br> e.g., `delete 3`                                                                                                                     |
-| [Add Student Note](#223-adding-notes-for-a-student-note)                                   | `note STUDENT_INDEX note/NOTE` <br> e.g., `note 1 note/Likes dogs`                                                                                              |
-| [Find Students](#224-finding-students-by-name-find)                                        | `find STUDENT_NAME` <br> e.g., `find John`                                                                                                                      |
-| [Assign Risk Level to Student](#225-assigning-risk-level-to-student-tag)                   | `tag STUDENT_INDEX r/RISK_LEVEL`<br> e.g.,`tag 4 r/high`                                                                                                        |
-| [Schedule Appointment](#231-scheduling-an-appointment-schedule)                            | `schedule n/STUDENT_NAME date/DATE from/START_TIME to/END_TIME d/DESCRIPTION`<br> e.g., `schedule n/Jon date/2023-12-30 from/16:30 to/17:30 d/monthly check-up` |
-| [Cancel Appointment](#232-cancelling-an-appointment-cancel)                                | `cancel APPOINTMENT_INDEX`<br> e.g., `cancel 3`                                                                                                                 |
-| [Filter Appointments](#233-filtering-appointments-by-date-filter)                          | `filter DATE` <br> e.g., `filter 2023-10-16`                                                                                                                    |
+| Action                                                                                    | Format, Examples                                                                                                                                                |
+|-------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| [Help](#211-viewing-help-help)                                                            | `help`                                                                                                                                                          |
+| [Add Student](#221-adding-a-student-add)                                                  | `add n/STUDENT_NAME c/CONTACT_NUMBER a/HOME_ADDRESS [r/RISK_LEVEL]` <br> e.g., `add n/John c/81349705 a/Yishun Street 56 Blk 21 #05-07 r/medium`                |
+| [Delete Student](#222-deleting-a-student-delete)                                          | `delete STUDENT_INDEX`<br> e.g., `delete 3`                                                                                                                     |
+| [Add Student Note](#223-adding-notes-for-a-student-note)                                  | `note STUDENT_INDEX note/NOTE` <br> e.g., `note 1 note/Likes dogs`                                                                                              |
+| [Find Students](#224-finding-students-by-name-find)                                       | `find STUDENT_NAME` <br> e.g., `find John`                                                                                                                      |
+| [Assign Risk Level to Student](#225-assigning-risk-level-to-student-tag)                  | `tag STUDENT_INDEX r/RISK_LEVEL`<br> e.g.,`tag 4 r/high`                                                                                                        |
+| [Edit Student details](#226-editing-student-details-edit)                                 | `edit STUDENT_INDEX c/CONTACT_NUMBER A/HOME_ADDRESS`<br> e.g.,`edit 1 c/91234567`                                                                               |
+| [Schedule Appointment](#231-scheduling-an-appointment-schedule)                           | `schedule n/STUDENT_NAME date/DATE from/START_TIME to/END_TIME d/DESCRIPTION`<br> e.g., `schedule n/Jon date/2023-12-30 from/16:30 to/17:30 d/monthly check-up` |
+| [Cancel Appointment](#232-cancelling-an-appointment-cancel)                               | `cancel APPOINTMENT_INDEX`<br> e.g., `cancel 3`                                                                                                                 |
+| [Filter Appointments](#233-filtering-appointments-by-date-filter)                         | `filter DATE` <br> e.g., `filter 2023-10-16`                                                                                                                    |
 | [View all Students and/or Appointments](#241-viewing-all-students-andor-appointments-view) | `view g/CATEGORY` <br> e.g., `view g/all`                                                                                                                       |
-| [Exit](#242-exiting-the-program-exit)                                                      | `exit`                                                                                                                                                          |
-| [Delete all data](#243-clearing-storage-clear)                                             | `clear`                                                                                                                                                         |
+| [Exit](#242-exiting-the-program-exit)                                                     | `exit`                                                                                                                                                          |
+| [Delete all data](#243-clearing-storage-clear)                                            | `clear`                                                                                                                                                         |
 
 
