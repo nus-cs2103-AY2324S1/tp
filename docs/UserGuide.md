@@ -656,7 +656,7 @@ Tada! The schedule list has now been updated to show schedules from tutor that c
 
 ![find schedule command](images/find-schedules/find-s-syntax.png)
 
-Learn more about the [search behavior](#search-behaviour) and supercharge your search now!
+Learn more about the [search behaviour](#search-behaviour) and supercharge your search now!
 
 **Errors you might encounter**
 
