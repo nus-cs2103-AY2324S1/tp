@@ -166,7 +166,6 @@ Format `edit STUDENT_INDEX c/CONTACT_NUMBER A/HOME_ADDRESS`
 **Parameters**:
 1. Student Index
    - Must be an integer starting from 1
-   - Must
    - be found in the students list
 2. Contact Number
    - Numbers only, must be 8 characters long
