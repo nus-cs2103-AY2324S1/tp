@@ -64,7 +64,7 @@ public class TypicalPersons {
     } // prevents instantiation
 
     public static List<Person> getTypicalPersons() {
-        return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE, HOON));
+        return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE, HOON, BOB));
     }
 
     /**
@@ -81,7 +81,7 @@ public class TypicalPersons {
     }
 
     public static String[] getTypicalAttendeesAll() {
-        List<Person> typicalPersons = getTypicalPersons();
+        List<Person> typicalPersons = TypicalPersons.getTypicalPersons();
         String[] typicalAttendees = typicalPersons.stream().map(Person::getName).map(Name::toString)
                 .collect(Collectors.toList()).toArray(String[]::new);
         return typicalAttendees;

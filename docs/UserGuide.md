@@ -207,6 +207,12 @@ Examples:
 * `findc p/9 s/inactive claimant t/friends` returns persons with a `9` in their phone number, whose status is either `inactive` or `claimant`, and has a `friends` tag
   ![result for 'findContact'](images/findContactResult.png)
 
+- `findc n/alice` returns `Alice` and `alice tan`
+- `findc p/51` returns `95163890` and `40351`
+- `findc e/_@GMAIL` returns `alice_@gmail.com`
+- `findc p/9 s/inactive claimant t/friend` returns persons with a `9` in their phone number, whose status is either `inactive` or `claimant`, and has a `friend` tag
+  ![result for 'findContact'](images/findContactResult.png)
+
 <div style="page-break-after: always;"></div>
 
 
