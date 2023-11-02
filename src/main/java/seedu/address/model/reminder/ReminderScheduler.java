@@ -77,4 +77,13 @@ public class ReminderScheduler extends Thread {
             }
         }
     }
+
+    /**
+     * Shuts down the ReminderScheduler thread.
+     */
+    public void shutdown() {
+        isRunning = false;
+        this.interrupt();
+    }
+
 }
