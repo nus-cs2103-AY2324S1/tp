@@ -77,6 +77,16 @@ public class Person {
     }
 
     /**
+     * Checks whether the person contains a certain tag.
+     *
+     * @param tag the tag to be checked.
+     * @return A boolean representing contains or doesn't contain the tag.
+     */
+    public boolean containsTag(Tag tag) {
+        return tags.contains(tag);
+    }
+
+    /**
      * Returns an immutable notes, which throws
      * {@code UnsupportedOperationException}
      * if modification is attempted.
