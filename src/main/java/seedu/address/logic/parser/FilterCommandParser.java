@@ -63,8 +63,7 @@ public class FilterCommandParser implements Parser<FilterCommand> {
                     predicate.addPredicate(person -> person.getRemark().contains(remark));
                 }
                 if (predicate.isEmpty()) {
-                    throw new ParseException("You must specify at least one field to filter!"
-                            + getFilterPersonUsageInfo());
+                    throw new ParseException("You must specify at least one field to filter!");
                 }
                 return new FilterPersonCommand(predicate);
             } catch (ParseException e) {
@@ -107,8 +106,7 @@ public class FilterCommandParser implements Parser<FilterCommand> {
                     predicate.addPredicate(lesson -> lesson.getRemark().contains(remark));
                 }
                 if (predicate.isEmpty()) {
-                    throw new ParseException("You must specify at least one field to filter!"
-                            + getFilterScheduleUsageInfo());
+                    throw new ParseException("You must specify at least one field to filter!");
                 }
                 return new FilterLessonCommand(predicate);
             } catch (ParseException e) {
