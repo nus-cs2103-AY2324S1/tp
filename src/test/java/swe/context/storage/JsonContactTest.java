@@ -62,7 +62,7 @@ public class JsonContactTest {
                 VALID_TAGS,
                 VALID_ALTERNATECONTACTS
         );
-        String expectedMessage = String.format(Messages.FIELD_MISSING, Name.class.getSimpleName());
+        String expectedMessage = Messages.fieldMissing(Name.class.getSimpleName());;
         assertThrows(IllegalValueException.class, expectedMessage, contact::toModelType);
     }
 
@@ -91,7 +91,7 @@ public class JsonContactTest {
                 VALID_TAGS,
                 VALID_ALTERNATECONTACTS
         );
-        String expectedMessage = String.format(Messages.FIELD_MISSING, Phone.class.getSimpleName());
+        String expectedMessage = Messages.fieldMissing(Phone.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, contact::toModelType);
     }
 
@@ -120,7 +120,7 @@ public class JsonContactTest {
                 VALID_TAGS,
                 VALID_ALTERNATECONTACTS
         );
-        String expectedMessage = String.format(Messages.FIELD_MISSING, Email.class.getSimpleName());
+        String expectedMessage = Messages.fieldMissing(Email.class.getSimpleName());;
         assertThrows(IllegalValueException.class, expectedMessage, contact::toModelType);
     }
 
@@ -134,7 +134,7 @@ public class JsonContactTest {
                 VALID_TAGS,
                 VALID_ALTERNATECONTACTS
         );
-        String expectedMessage = String.format(Messages.FIELD_MISSING, Note.class.getSimpleName());
+        String expectedMessage = Messages.fieldMissing(Note.class.getSimpleName());;
         assertThrows(IllegalValueException.class, expectedMessage, contact::toModelType);
     }
 

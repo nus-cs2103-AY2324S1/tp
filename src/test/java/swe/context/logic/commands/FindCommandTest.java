@@ -53,7 +53,7 @@ public class FindCommandTest {
 
     @Test
     public void execute_zeroKeywords_noContactFound() {
-        String expectedMessage = String.format(Messages.CONTACTS_LISTED_OVERVIEW, 0);
+        String expectedMessage = Messages.contactsListedOverview( 0);
         NameContainsKeywordsPredicate predicate = preparePredicate(" ");
         FindCommand command = new FindCommand(predicate);
         expectedModel.setContactsFilter(predicate);
@@ -63,7 +63,7 @@ public class FindCommandTest {
 
     @Test
     public void execute_multipleKeywords_multipleContactsFound() {
-        String expectedMessage = String.format(Messages.CONTACTS_LISTED_OVERVIEW, 3);
+        String expectedMessage = Messages.contactsListedOverview(3);
         NameContainsKeywordsPredicate predicate = preparePredicate("Kurz Elle Kunz");
         FindCommand command = new FindCommand(predicate);
         expectedModel.setContactsFilter(predicate);

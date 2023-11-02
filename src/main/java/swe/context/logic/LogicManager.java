@@ -63,19 +63,11 @@ public class LogicManager implements Logic {
             storage.saveContacts(model.getContacts());
         } catch (AccessDeniedException e) {
             throw new CommandException(
-                String.format(
-                    Messages.FILE_OPS_PERMISSION_ERROR_FORMAT,
-                    e.getMessage()
-                ),
-                e
+                Messages.fileOpsPermissionErrorFormat(e.getMessage()), e
             );
         } catch (IOException e) {
             throw new CommandException(
-                String.format(
-                    Messages.FILE_OPS_ERROR_FORMAT,
-                    e.getMessage()
-                ),
-                e
+                Messages.fileOpsErrorFormat(e.getMessage()), e
             );
         }
 
