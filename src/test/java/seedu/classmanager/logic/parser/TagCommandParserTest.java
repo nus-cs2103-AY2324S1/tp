@@ -8,6 +8,9 @@ import static seedu.classmanager.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND
 import static seedu.classmanager.logic.commands.CommandTestUtil.VALID_STUDENT_NUMBER_AMY;
 import static seedu.classmanager.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.classmanager.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.classmanager.logic.parser.CliSyntax.PREFIX_ASSIGNMENT_COUNT;
+import static seedu.classmanager.logic.parser.CliSyntax.PREFIX_CLASS_NUMBER;
+import static seedu.classmanager.logic.parser.CliSyntax.PREFIX_COMMENT;
 import static seedu.classmanager.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.classmanager.logic.parser.CliSyntax.PREFIX_WILDCARD;
 import static seedu.classmanager.logic.parser.CommandParserTestUtil.assertParseFailure;
@@ -122,5 +125,26 @@ public class TagCommandParserTest {
             new StudentNumber(VALID_STUDENT_NUMBER_AMY), new HashSet<>());
 
         assertParseSuccess(parser, userInput, expectedCommand);
+    }
+
+    @Test
+    public void parse_nonEmptyPreamble_failure() {
+        assertParseFailure(parser, " test" + STUDENT_NUMBER_DESC_AMY + TAG_DESC_FRIEND,
+                MESSAGE_INVALID_FORMAT);
+    }
+
+    @Test
+    public void parse_additionalPrefix_failure() {
+        assertParseFailure(parser, STUDENT_NUMBER_DESC_AMY + TAG_DESC_FRIEND
+                + " " + PREFIX_ASSIGNMENT_COUNT + "1", MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, STUDENT_NUMBER_DESC_AMY + " " + PREFIX_ASSIGNMENT_COUNT + "1"
+                + TAG_DESC_FRIEND, MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, " " + PREFIX_ASSIGNMENT_COUNT + "1" + STUDENT_NUMBER_DESC_AMY
+                + TAG_DESC_FRIEND, MESSAGE_INVALID_FORMAT);
+
+        assertParseFailure(parser, STUDENT_NUMBER_DESC_AMY + " " + PREFIX_COMMENT + "test"
+                + TAG_DESC_FRIEND, MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, STUDENT_NUMBER_DESC_AMY + " " + PREFIX_CLASS_NUMBER + "t11"
+                + TAG_DESC_FRIEND, MESSAGE_INVALID_FORMAT);
     }
 }

@@ -2,6 +2,7 @@ package seedu.classmanager.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.classmanager.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.classmanager.logic.parser.ArgumentMultimap.areAdditionalPrefixesPresent;
 import static seedu.classmanager.logic.parser.CliSyntax.PREFIX_ASSIGNMENT;
 import static seedu.classmanager.logic.parser.CliSyntax.PREFIX_GRADE;
 import static seedu.classmanager.logic.parser.CliSyntax.PREFIX_STUDENT_NUMBER;
@@ -28,7 +29,8 @@ public class SetGradeCommandParser implements Parser<SetGradeCommand> {
                PREFIX_ASSIGNMENT, PREFIX_GRADE);
 
         if (!argMultimap.arePrefixesPresent(PREFIX_STUDENT_NUMBER, PREFIX_ASSIGNMENT, PREFIX_GRADE)
-                || !argMultimap.getPreamble().isEmpty()) {
+                || !argMultimap.getPreamble().isEmpty()
+                || areAdditionalPrefixesPresent(args, PREFIX_STUDENT_NUMBER, PREFIX_ASSIGNMENT, PREFIX_GRADE)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SetGradeCommand.MESSAGE_USAGE));
         }
 
