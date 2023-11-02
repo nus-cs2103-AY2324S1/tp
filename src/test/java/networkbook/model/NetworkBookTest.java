@@ -17,6 +17,7 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import networkbook.commons.core.index.Index;
 import networkbook.model.person.Person;
 import networkbook.testutil.PersonBuilder;
 import networkbook.testutil.TypicalPersons;
@@ -94,6 +95,68 @@ public class NetworkBookTest {
     @Test
     public void isSame_anotherEmptyNetworkBook_returnFalse() {
         assertFalse(new NetworkBook().isSame(new NetworkBook()));
+    }
+
+    @Test
+    public void isValidLinkIndex_validIndices_returnsTrue() {
+        assertTrue(TypicalPersons.getTypicalNetworkBook().isValidLinkIndex(
+                Index.fromOneBased(1), Index.fromOneBased(1)));
+    }
+
+    @Test
+    public void isValidLinkIndex_invalidLinkIndex_returnsFalse() {
+        assertFalse(TypicalPersons.getTypicalNetworkBook().isValidLinkIndex(
+                Index.fromOneBased(1), Index.fromOneBased(10)));
+    }
+
+    @Test
+    public void isValidLinkIndex_invalidPersonIndex_throwsAssertionError() {
+        assertThrowsAssertionError(() -> TypicalPersons.getTypicalNetworkBook().isValidEmailIndex(
+                Index.fromOneBased(10), Index.fromOneBased(1)));
+    }
+
+    @Test
+    public void openLink_validIndices_linkOpened() throws Exception {
+        TypicalPersons.getTypicalNetworkBook().openLink(Index.fromOneBased(1), Index.fromOneBased(1));
+    }
+
+    @Test
+    public void openLink_invalidIndices_throwsAssertionError() {
+        assertThrowsAssertionError(() -> TypicalPersons.getTypicalNetworkBook()
+                .openLink(Index.fromOneBased(10), Index.fromOneBased(1)));
+        assertThrowsAssertionError(() -> TypicalPersons.getTypicalNetworkBook()
+                .openLink(Index.fromOneBased(1), Index.fromOneBased(10)));
+    }
+
+    @Test
+    public void isValidEmailIndex_validIndices_returnsTrue() {
+        assertTrue(TypicalPersons.getTypicalNetworkBook().isValidEmailIndex(
+                Index.fromOneBased(1), Index.fromOneBased(1)));
+    }
+
+    @Test
+    public void isValidEmailIndex_invalidPersonIndex_throwsAssertionError() {
+        assertThrowsAssertionError(() -> TypicalPersons.getTypicalNetworkBook()
+                .isValidEmailIndex(Index.fromOneBased(10), Index.fromOneBased(1)));
+    }
+
+    @Test
+    public void isValidEmailIndex_invalidEmailIndex_returnsFalse() {
+        assertFalse(TypicalPersons.getTypicalNetworkBook()
+                .isValidEmailIndex(Index.fromOneBased(1), Index.fromOneBased(10)));
+    }
+
+    @Test
+    public void openEmail_validIndices_emailOpened() throws Exception {
+        TypicalPersons.getTypicalNetworkBook().openEmail(Index.fromOneBased(1), Index.fromOneBased(1));
+    }
+
+    @Test
+    public void openEmail_invalidIndices_throwsAssertionError() throws Exception {
+        assertThrowsAssertionError(() -> TypicalPersons.getTypicalNetworkBook()
+                .openEmail(Index.fromOneBased(10), Index.fromOneBased(1)));
+        assertThrowsAssertionError(() -> TypicalPersons.getTypicalNetworkBook()
+                .openEmail(Index.fromOneBased(1), Index.fromOneBased(10)));
     }
 
     @Test

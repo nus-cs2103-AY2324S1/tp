@@ -18,6 +18,7 @@ import networkbook.commons.core.index.Index;
 import networkbook.logic.commands.RedoCommand;
 import networkbook.logic.commands.UndoCommand;
 import networkbook.logic.commands.exceptions.CommandException;
+import networkbook.model.person.Email;
 import networkbook.model.person.Link;
 import networkbook.model.person.Person;
 
@@ -148,6 +149,18 @@ public class ModelManager implements Model {
     @Override
     public Link openLink(Index personIndex, Index linkIndex) throws IOException {
         return versionedNetworkBook.openLink(personIndex, linkIndex);
+    }
+
+    @Override
+    public boolean isValidEmailIndex(Index personIndex, Index linkIndex) {
+        requireAllNonNull(personIndex, linkIndex);
+        return versionedNetworkBook.isValidEmailIndex(personIndex, linkIndex);
+    }
+
+    @Override
+    public Email openEmail(Index personIndex, Index emailIndex) throws IOException {
+        requireAllNonNull(personIndex, emailIndex);
+        return versionedNetworkBook.openEmail(personIndex, emailIndex);
     }
 
     //=========== Filtered Person List Accessors =============================================================

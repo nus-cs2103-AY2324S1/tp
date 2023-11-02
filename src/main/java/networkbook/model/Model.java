@@ -9,6 +9,7 @@ import javafx.collections.ObservableList;
 import networkbook.commons.core.GuiSettings;
 import networkbook.commons.core.index.Index;
 import networkbook.logic.commands.exceptions.CommandException;
+import networkbook.model.person.Email;
 import networkbook.model.person.Link;
 import networkbook.model.person.Person;
 
@@ -100,8 +101,21 @@ public interface Model {
     /**
      * Opens the link at index {@code linkIndex} in the link list of the person
      * at index {@code personIndex}.
+     * @return The link that has been opened.
      */
     Link openLink(Index personIndex, Index linkIndex) throws IOException;
+
+    /**
+     * Checks if the indices for an email of a contact are valid.
+     */
+    boolean isValidEmailIndex(Index personIndex, Index linkIndex);
+
+    /**
+     * Opens email at index {@code emailIndex} in the email list of the person
+     * at index {@code personIndex}.
+     * @return The email that has been opened.
+     */
+    Email openEmail(Index personIndex, Index linkIndex) throws IOException;
 
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();
