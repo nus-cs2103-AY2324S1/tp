@@ -19,7 +19,6 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.NameContainsKeywordPredicate;
 import seedu.address.model.person.Student;
-import seedu.address.model.person.Visual;
 import seedu.address.testutil.AddressBookBuilder;
 
 
