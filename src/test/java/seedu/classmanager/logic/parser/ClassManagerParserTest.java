@@ -9,9 +9,11 @@ import static seedu.classmanager.logic.commands.CommandTestUtil.STUDENT_NUMBER_D
 import static seedu.classmanager.logic.commands.CommandTestUtil.TEST_FIRST_TUTORIAL;
 import static seedu.classmanager.logic.commands.CommandTestUtil.TEST_FIRST_TUTORIAL_DESC;
 import static seedu.classmanager.logic.commands.CommandTestUtil.VALID_STUDENT_NUMBER_AMY;
+import static seedu.classmanager.logic.parser.CliSyntax.PREFIX_ASSIGNMENT_COUNT;
 import static seedu.classmanager.logic.parser.CliSyntax.PREFIX_COMMENT;
 import static seedu.classmanager.logic.parser.CliSyntax.PREFIX_FILE;
 import static seedu.classmanager.logic.parser.CliSyntax.PREFIX_STUDENT_NUMBER;
+import static seedu.classmanager.logic.parser.CliSyntax.PREFIX_TUTORIAL_COUNT;
 import static seedu.classmanager.testutil.Assert.assertThrows;
 
 import java.nio.file.Path;
@@ -23,6 +25,7 @@ import seedu.classmanager.commons.core.index.Index;
 import seedu.classmanager.logic.commands.AddCommand;
 import seedu.classmanager.logic.commands.ClearCommand;
 import seedu.classmanager.logic.commands.CommentCommand;
+import seedu.classmanager.logic.commands.ConfigCommand;
 import seedu.classmanager.logic.commands.DeleteCommand;
 import seedu.classmanager.logic.commands.EditCommand;
 import seedu.classmanager.logic.commands.EditCommand.EditStudentDescriptor;
@@ -185,6 +188,13 @@ public class ClassManagerParserTest {
                 LoadCommand.COMMAND_WORD + " " + PREFIX_FILE + "export-v1");
         Path path = Paths.get("data", "export-v1.json");
         assertEquals(new LoadCommand("export-v1", path), command);
+    }
+
+    @Test
+    public void parseCommand_config() throws Exception {
+        ConfigCommand command = (ConfigCommand) parser.parseCommand(
+                ConfigCommand.COMMAND_WORD + " " + PREFIX_TUTORIAL_COUNT + "23 " + PREFIX_ASSIGNMENT_COUNT + "3");
+        assertEquals(new ConfigCommand(23, 3), command);
     }
 
     @Test

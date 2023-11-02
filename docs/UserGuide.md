@@ -50,8 +50,8 @@ management tasks done faster than traditional GUI apps.
 
 The **GUI** is split up into 4 main sections.
 
-1. **Command Box** - (_Located at the top_) This is where you can type in commands to execute.
-2. **Result Display** - (_Located below command box_) This is where the results of the commands will be displayed.
+1. **Command Box** - (_Located at the top with the text "Enter command here..."_) This is where you can type in commands to execute.
+2. **Result Display** - (_Located below command box_) This is where the results of the commands and any errors will be displayed.
 3. **Student List** - (_Located on the bottom left_) This is where the list of students will be displayed.
 4. **Student Details** - (_Located on the bottom right_) This is where the details of the selected student will be displayed.
 
@@ -96,22 +96,27 @@ The **GUI** is split up into 4 main sections.
 
 ### Configuring Class Manager : `config`
 
-Before you can begin using Class Manager, you must configure the number of tutorials and assignments that your module has.
+<box type="warning" seamless>
+**Caution:**
+Configuring Class Manager to change resets the class details (grades, attendance and class participation details) of all students. It is recommended to configure Class Manager before adding students."
+</box>
+
+Before you begin using Class Manager, it is recommended that you configure the number of tutorials and assignments that your module has. This can be done using the `config` command, and allows Class Manager to automatically generate the correct number of class details fields for each student. Class Manager can be configured at any time, but do take note of the warning above regarding loss of student data. If Class Manager is configured after adding students, each student will have the correct number of tutorials and assignments, but their class details data will be reset.
 
 Format: `config #t/TUTORIAL_COUNT #a/ASSIGNMENT_COUNT`
 
 * TUTORIAL_COUNT and ASSIGNMENT_COUNT must be integers between 1 to 99.
+* Inputting the same TUTORIAL_COUNT or ASSIGNMENT_COUNT as the previous configuration will also reset the class details of all students.
 
 Examples:
 * `config #t/13 #a/1`
 * `config #a/4 #t/26`
 
-
 ---
 
 ### Viewing help : `help`
 
-Shows a message explaining how to access the help page.
+Opens the help window that shows a summary of all commands and its parameters, with a `Copy URL` button that provides access to this help page.
 
 <img alt="help message" src="images/helpMessage.png" width="600">
 
@@ -122,7 +127,7 @@ Format: `help`
 
 ### Adding a student : `add`
 
-Adds a student to the class manager.
+Adds a student to Class Manager.
 
 Format: `add n/NAME p/PHONE e/EMAIL s/STUDENT_NUMBER c/CLASS_NUMBER [t/TAG]…​`
 
@@ -145,7 +150,7 @@ Examples:
 ---
 ### Listing all student details : `list`
 
-Shows a list of all students in the class manager.
+Shows a list of all students in Class Manager.
 
 Format: `list`
 
@@ -153,7 +158,7 @@ Format: `list`
 
 ### Editing a student : `edit`
 
-Edits an existing student in the class manager.
+Edits an existing student in Class Manager.
 
 Format: `edit STUDENT_NUMBER [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [s/NEW_STUDENT_NUMBER] [c/CLASS_NUMBER]`
 
@@ -161,7 +166,7 @@ Format: `edit STUDENT_NUMBER [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [s/NEW_STUDENT_
 * The STUDENT_NUMBER must be valid and exist.
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* The NEW_STUDENT_NUMBER must be valid and unique (does not exist in the class manager).
+* The NEW_STUDENT_NUMBER must be valid and unique (does not exist in Class Manager).
 
 Examples:
 *  `edit A0245234A p/91234567 e/johndoe@example.com` Edits the phone number and email address of the student with `STUDENT_NUMBER` A0245234A to be `91234567` and `johndoe@example.com` respectively.
@@ -171,7 +176,7 @@ Examples:
 
 ### Tagging a student : `tag`
 
-Tags the existing student in the class manager.
+Tags the existing student in Class Manager.
 
 Format: `tag s/STUDENT_NUMBER [/add] [/delete] t/[TAG]…​`
 
@@ -237,7 +242,7 @@ Examples:
 
 ### Marking tutorial attendance for a student as present : `present`
 
-Marking tutorial attendance for an existing student as present in the class manager.
+Marking tutorial attendance for an existing student as present in Class Manager.
 
 Format: `present s/STUDENT_NUMBER tut/TUTORIAL_INDEX`
 
@@ -251,7 +256,7 @@ Examples:
 
 ### Marking tutorial attendance for all students displayed as present : `present-all`
 
-Marking tutorial attendance for all students in current list displayed as present in the class manager.
+Marking tutorial attendance for all students in current list displayed as present in Class Manager.
 
 Format: `present-all tut/TUTORIAL_INDEX`
 
@@ -264,7 +269,7 @@ Examples:
 
 ### Marking tutorial attendance for a student as absent : `absent`
 
-Marking tutorial attendance for an existing student as absent in the class manager.
+Marking tutorial attendance for an existing student as absent in Class Manager.
 
 Format: `absent s/STUDENT_NUMBER tut/TUTORIAL_INDEX`
 
@@ -278,7 +283,7 @@ Examples:
 
 ### Setting assignment grade for a student : `grade`
 
-Setting an assignment grade for an existing student in the class manager.
+Setting an assignment grade for an existing student in Class Manager.
 
 Format: `grade s/STUDENT_NUMBER a/ASSIGNMENT_INDEX g/GRADE`
 
@@ -293,7 +298,7 @@ Examples:
 
 ### Record class participation for a student : `class-part`
 
-Recording the class participation level for an existing student in the class manager.
+Recording the class participation level for an existing student in Class Manager.
 
 Format: `class-part s/STUDENT_NUMBER tut/TUTORIAL_INDEX part/PARTICIPATION_LEVEL`
 
@@ -317,7 +322,7 @@ View the class details of a student that will be displayed on the right side of 
 Format: `view s/STUDENT_NUMBER`
 
 * The STUDENT_NUMBER must be valid e.g `T*`.
-* The STUDENT_NUMBER must belong to a student in the class manager.
+* The STUDENT_NUMBER must belong to a student in Class Manager.
 
 Example:
 
@@ -329,7 +334,7 @@ Example:
 
 ### Selecting students randomly: `random`
 
-Select a specific number of students from all students displayed in the class manager.
+Select a specific number of students from all students displayed in Class Manager.
 
 Format: `random NUMBER_OF_STUDENTS`
 
@@ -531,8 +536,9 @@ Format: `theme`
 
 * **cd**: Change directory command in terminal/command line. cd takes the name of the folder you want to navigate to as an argument. The full command is cd `your-directory`.
 * **Student Number**: Matriculation number of NUS student. It must begin with capital A, followed by any number of alphanumeric characters. It must not be blank.
-* **Email**: Any valid email address, such as NUS email address (eXXXXXXX@u.nus.edu).
+* **Email**: Any valid electronic mail address, such as NUS email address (eXXXXXXX@u.nus.edu).
 * **CLI**: Command Line Interface.
 * **GUI**: Graphical User Interface.
 * **JSON**: JavaScript Object Notation, a lightweight data-interchange format.
 * **JAR**: Java Archive, a package file format typically used to aggregate many Java class files and associated metadata and resources (text, images, etc.) into one file to distribute application software or libraries on the Java platform.
+* **Class details**: The grades, attendance and class participation details of a student in Class Manager.
