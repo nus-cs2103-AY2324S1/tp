@@ -13,7 +13,3 @@ While it has a Graphical User Interface, most of its user interactions happen vi
 
 - If you are interested in using ConText, please check out the [**User Guide**](./UserGuide.html).
 - If you are interested about developing ConText, the [**Developer Guide**](./DeveloperGuide.html) is a good place to start.
-
-**Acknowledgements**
-
-- Libraries used: [JavaFX](https://openjfx.io/), [Jackson](https://github.com/FasterXML/jackson), [JUnit5](https://github.com/junit-team/junit5)
