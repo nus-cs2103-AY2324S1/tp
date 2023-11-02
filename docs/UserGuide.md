@@ -493,11 +493,11 @@ Examples:
 
 <div markdown="span" class="alert alert-warning">:exclamation: <b>Caution:</b><br/>
 
-*  All statistic commands are calculated based on the currently displayed list.
+*  All statistic commands are calculated based on the currently displayed list.<br/>
 
-If you enter `find avail` before `stats avail`, the resulting statistic will show that 100% of listed fosterers are available. Hence, please ensure that the current list of fosterers is the desired list you want your statistics to be calculated from.
+If you enter `find avail` before `stats avail`, the resulting statistic will show that 100% of listed fosterers are available. Hence, please ensure that the current list of fosterers is the desired list you want your statistics to be calculated from.<br/>
 
-* Percentages may not add up to 100.00%. 
+* Percentages may not add up to 100.00%.<br/> 
 
 For example, there are 3 available fosterers: 1 is able to foster a dog, 1 is able to foster a cat, and 1 is unknown. The calculated percentages will be all be 33.33%, adding up to 99.99%. It can be assumed that each group takes up 1/3 out of 100.00%.
 </div>
@@ -558,8 +558,10 @@ Format: `reset` and `reset confirm`
 
 **:information_source: Notes about the command:**<br>
 
-*  Upon entering `reset`, a confirmation message would be shown for the user to verify if he/she really wants to clear all the data entries. 
+*  Upon entering `reset`, a confirmation message would be shown for the user to verify if he/she really wants to clear all the data entries.
+![Reset](images/screenshots/Reset.png)
    * User is prompted to enter `reset confirm` to confirm and execute the deletion of all data entries.
+![Reset](images/screenshots/ResetConfirm.png)
 
 </div>
 
