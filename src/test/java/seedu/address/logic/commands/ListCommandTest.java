@@ -5,6 +5,7 @@ import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static seedu.address.testutil.TypicalEvents.getTypicalCalendar;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalTasks.getTypicalTaskManager;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -23,8 +24,10 @@ public class ListCommandTest {
 
     @BeforeEach
     public void setUp() {
-        model = new ModelManager(getTypicalAddressBook(), getTypicalCalendar(), new UserPrefs());
-        expectedModel = new ModelManager(model.getAddressBook(), model.getCalendar(), new UserPrefs());
+        model = new ModelManager(getTypicalAddressBook(), getTypicalCalendar(), getTypicalTaskManager(),
+                new UserPrefs());
+        expectedModel = new ModelManager(model.getAddressBook(), model.getCalendar(), getTypicalTaskManager(),
+                new UserPrefs());
     }
 
     @Test

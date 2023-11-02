@@ -5,10 +5,12 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT_DESCRIPTION;
+import static seedu.address.logic.parser.ParserUtil.DATE_TIME_STRING_FORMATTER;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_EVENT;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -20,8 +22,13 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.AddContactEventCommand;
 import seedu.address.logic.commands.AddEventCommand;
+import seedu.address.logic.commands.AddTaskCommand;
 import seedu.address.logic.commands.ClearCommand;
+import seedu.address.logic.commands.ClearEventsCommand;
 import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.logic.commands.DeleteContactEventCommand;
+import seedu.address.logic.commands.DeleteEventCommand;
+import seedu.address.logic.commands.DeleteTaskCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.EditContactEventCommand;
@@ -30,13 +37,18 @@ import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.SortCommand;
+import seedu.address.logic.commands.SortTasksCommand;
+import seedu.address.logic.commands.SwitchListCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.event.Event;
+import seedu.address.model.event.EventPeriod;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
+import seedu.address.model.task.Task;
 import seedu.address.testutil.EditEventDescriptorBuilder;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.EventBuilder;
+import seedu.address.testutil.EventPeriodBuilder;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
 
@@ -168,6 +180,85 @@ public class UniMateParserTest {
                 + INDEX_FIRST_PERSON.getOneBased() + " " + validArg);
 
         assertEquals(command, new AddContactEventCommand(INDEX_FIRST_PERSON, eventBuilder.build()));
+    }
+
+    @Test
+    public void parserCommand_deleteContactEvent() throws Exception {
+        String targetDateTime = "2023-10-10 10:00";
+        LocalDateTime localDateTime = LocalDateTime.parse(targetDateTime, DATE_TIME_STRING_FORMATTER);
+        String validArg = "ts/" + targetDateTime;
+        DeleteContactEventCommand command =
+                (DeleteContactEventCommand) parser.parseCommand(DeleteContactEventCommand.COMMAND_WORD + " "
+                        + INDEX_FIRST_PERSON.getOneBased() + " " + validArg);
+
+        assertEquals(command, new DeleteContactEventCommand(INDEX_FIRST_PERSON, localDateTime));
+    }
+
+    @Test
+    public void parserCommand_deleteEvent() throws Exception {
+        String targetDateTime = "2023-10-10 10:00";
+        String validArg = " " + targetDateTime;
+        DeleteEventCommand deleteEventCommand =
+                new DeleteEventCommand(LocalDateTime.parse("2023-10-10 10:00", DATE_TIME_STRING_FORMATTER));
+
+        assertEquals(deleteEventCommand,
+                (DeleteEventCommand) parser.parseCommand(DeleteEventCommand.COMMAND_WORD + validArg));
+    }
+
+    @Test
+    public void parserCommand_clearEvents() throws Exception {
+        String startDateTime = "2023-10-10 10:00";
+        String endDateTime = "2023-10-10 12:00";
+        String validArg = " ts/" + startDateTime
+                + " te/" + endDateTime
+                + " c/CONFIRMED";
+
+        EventPeriod period = new EventPeriodBuilder().changeStartAndEnd(startDateTime, endDateTime).build();
+
+        ClearEventsCommand clearEventsCommand =
+                new ClearEventsCommand(period, true);
+
+        assertEquals(clearEventsCommand,
+                (ClearEventsCommand) parser.parseCommand(ClearEventsCommand.COMMAND_WORD + validArg));
+    }
+
+    @Test
+    public void parserCommand_addTask() throws Exception {
+        String description = "A";
+        String validArg = " d/" + description;
+
+        AddTaskCommand addTaskCommand = new AddTaskCommand(new Task(description, null));
+
+        assertEquals(addTaskCommand,
+                (AddTaskCommand) parser.parseCommand(AddTaskCommand.COMMAND_WORD + validArg));
+    }
+
+    @Test
+    public void parserCommand_switchList() throws Exception {
+        String validArg = " 1231231";
+
+        SwitchListCommand switchListCommand = new SwitchListCommand();
+
+        assertTrue(parser.parseCommand(SwitchListCommand.COMMAND_WORD + validArg)
+                instanceof SwitchListCommand);
+    }
+
+    @Test
+    public void parserCommand_sortTasks() throws Exception {
+        String comparatorType = "Description";
+        String validArg = " " + comparatorType;
+
+        SortTasksCommand sortTasksCommand = new SortTasksCommand(comparatorType);
+
+        assertEquals(sortTasksCommand,
+                (SortTasksCommand) parser.parseCommand(SortTasksCommand.COMMAND_WORD + validArg));
+    }
+
+    @Test
+    public void parseCommand_deleteTask() throws Exception {
+        DeleteTaskCommand command = (DeleteTaskCommand) parser.parseCommand(
+                DeleteTaskCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
+        assertEquals(new DeleteTaskCommand(INDEX_FIRST_PERSON), command);
     }
 
     @Test
