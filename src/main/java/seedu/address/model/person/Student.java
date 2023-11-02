@@ -111,10 +111,6 @@ public class Student {
     }
 
 
-    public void putSubjectsByMonth(Map<String, Integer> map) {
-        getSubjects().forEach(subject -> subject.putToMapByMonth(map));
-    }
-
     /**
      * Returns true if both persons have the same identity and data fields.
      * This defines a stronger notion of equality between two persons.
