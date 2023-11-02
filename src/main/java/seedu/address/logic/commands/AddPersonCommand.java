@@ -22,7 +22,7 @@ import seedu.address.model.state.State;
  */
 public class AddPersonCommand extends Command {
 
-    public static final String COMMAND_WORD = "addPerson";
+    public static final String COMMAND_WORD = "addperson";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a person to the address book. "
             + "Parameters: "

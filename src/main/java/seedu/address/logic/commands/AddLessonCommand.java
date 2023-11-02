@@ -11,7 +11,7 @@ import seedu.address.model.state.State;
  * Adds a lesson to the schedule.
  */
 public class AddLessonCommand extends Command {
-    public static final String COMMAND_WORD = "addLesson";
+    public static final String COMMAND_WORD = "addlesson";
     private Lesson lesson;
     /**
      * Creates an AddLessonCommand to add the specified {@code Lesson}

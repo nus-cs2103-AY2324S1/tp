@@ -17,7 +17,7 @@ import seedu.address.model.person.Person;
  */
 public class EditPersonCommand extends AbstractEditCommand<Person> {
 
-    public static final String COMMAND_WORD = "editPerson";
+    public static final String COMMAND_WORD = "editperson";
     //todo, update, or refractor how help command is implemented
     // that being say, good design that allow user to use without learning is better than any help command
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the person identified "

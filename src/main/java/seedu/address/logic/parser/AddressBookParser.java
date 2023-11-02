@@ -59,14 +59,14 @@ public class AddressBookParser {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
         }
 
-        String commandWord = matcher.group("commandWord");
+        String commandWord = matcher.group("commandWord").toLowerCase();
         switch (commandWord) {
         case "delete":
             if (model.getState().equals(SCHEDULE)) {
-                commandWord = "deleteLesson";
+                commandWord = "deletelesson";
                 break;
             } else if (model.getState().equals(STUDENT)) {
-                commandWord = "deletePerson";
+                commandWord = "deleteperson";
                 break;
             } else if (model.getState().equals(TASK)) {
                 throw new ParseException("Please delete tasks in the schedule list.");
@@ -74,10 +74,10 @@ public class AddressBookParser {
             break;
         case "add":
             if (model.getState().equals(SCHEDULE)) {
-                commandWord = "addLesson";
+                commandWord = "addlesson";
                 break;
             } else if (model.getState().equals(STUDENT)) {
-                commandWord = "addPerson";
+                commandWord = "addperson";
                 break;
             } else if (model.getState().equals(TASK)) {
                 throw new ParseException("Please add tasks in the schedule list.");
@@ -86,10 +86,10 @@ public class AddressBookParser {
 
         case "edit":
             if (model.getState().equals(SCHEDULE)) {
-                commandWord = "editLesson";
+                commandWord = "editlesson";
                 break;
             } else if (model.getState().equals(STUDENT)) {
-                commandWord = "editPerson";
+                commandWord = "editperson";
                 break;
             } else if (model.getState().equals(TASK)) {
                 throw new ParseException("Editing tasks is not supported.");
@@ -143,7 +143,7 @@ public class AddressBookParser {
             if (!model.getState().equals(SCHEDULE)) {
                 throw new ParseException("Please add tasks in the schedule list.");
             }
-            return new AddTaskCommandParser().parse("addTask " + arguments);
+            return new AddTaskCommandParser().parse("addtask " + arguments);
         case DeleteTaskCommand.COMMAND_WORD:
             if (!model.getState().equals(SCHEDULE)) {
                 throw new ParseException("Please add tasks in the schedule list.");
