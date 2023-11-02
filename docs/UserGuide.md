@@ -157,6 +157,10 @@ You should directly see the interaction added to the client profile in the appli
 
 ## Viewing
 
+Connectify has 2 main views: the dashboard and the list of clients.
+
+The dashboard is a summarized view of all your client interactions and upcoming events. It is useful for you to quickly catch up on your progress and what's coming up.
+
 Sometimes, you may want to view the details of a client profile or the interactions you have had with a client to quickly catch up on the client's profile before contacting them.
 Or, you might just want to view the list of clients you have added to Connectify.
 
@@ -183,6 +187,9 @@ list
 ```
 
 You should then see the list of clients in the application window.
+
+> [!NOTE]
+> You can quickly switch between the dashboard and the list of clients by using the `dashboard` and `list` commands.
 
 ### Finding a client by name: ***find***
 
