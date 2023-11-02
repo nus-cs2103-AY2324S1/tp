@@ -76,4 +76,7 @@ public class Subjects extends ListEntryField {
     public boolean containAll(Subjects other) {
         return subjects.containsAll(other.subjects);
     }
+    public boolean contains(Subject subject) {
+        return subjects.contains(subject);
+    }
 }

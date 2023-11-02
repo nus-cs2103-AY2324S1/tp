@@ -73,9 +73,10 @@ public class FilterCommandParser implements Parser<FilterCommand> {
             if (name != null) {
                 predicate.addPredicate(lesson -> lesson.getName().equals(name));
             }
-            Subjects subject = parseField("subject", userInput, Subjects::of);
-            if (subject != null) {
-                predicate.addPredicate(lesson -> lesson.getSubject().equals(subject));
+            Subjects subjects = parseField("subject", userInput, Subjects::of);
+
+            if (subjects != null) {
+                predicate.addPredicate(lesson ->subjects.contains(lesson.getSubject()));
             }
             int numberNotNull = 0;
             Day before = parseField("before", userInput, Day::of);
