@@ -134,6 +134,9 @@ public class ManageHrParser {
         case HelpCommand.COMMAND_WORD:
             return new Pair<String, String>(HelpCommand.MESSAGE_USAGE, HelpCommand.MESSAGE_EXAMPLE);
 
+        case FilterCommand.COMMAND_WORD:
+            return new Pair<String, String>(FilterCommand.MESSAGE_USAGE, FilterCommand.MESSAGE_EXAMPLE);
+
         default:
             logger.finer("This user input caused a ParseException: " + userInput);
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
