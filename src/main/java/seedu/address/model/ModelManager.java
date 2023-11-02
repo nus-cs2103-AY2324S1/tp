@@ -165,6 +165,14 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void stopReminderScheduler() {
+        if (reminderScheduler == null) {
+            return;
+        }
+        reminderScheduler.shutdown();
+    }
+
+    @Override
     public boolean equals(Object other) {
         if (other == this) {
             return true;

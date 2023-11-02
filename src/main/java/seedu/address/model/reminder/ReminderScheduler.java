@@ -19,6 +19,7 @@ public class ReminderScheduler extends Thread {
 
     private final Model model;
     private final Object mutex;
+    private final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
 
     private Logger logger = LogsCenter.getLogger(ReminderScheduler.class);
 
@@ -51,7 +52,6 @@ public class ReminderScheduler extends Thread {
         long initialDelay = ChronoUnit.MILLIS.between(now, nextMidnight);
 
         // Start the scheduler to wake up the ReminderScheduler occasionally
-        ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
         scheduler.scheduleAtFixedRate(() -> {
             synchronized (mutex) {
                 mutex.notifyAll();
@@ -72,9 +72,19 @@ public class ReminderScheduler extends Thread {
                     model.getReminderList().updateReminders();
                 } catch (InterruptedException e) {
                     logger.info("ReminderScheduler thread interrupted");
-
+                    break;
                 }
             }
         }
     }
+
+    /**
+     * Shuts down the ReminderScheduler thread.
+     */
+    public void shutdown() {
+        isRunning = false;
+        scheduler.shutdownNow();
+        this.interrupt();
+    }
+
 }

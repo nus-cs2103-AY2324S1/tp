@@ -70,6 +70,11 @@ public interface Model {
     void startReminderScheduler();
 
     /**
+     * Stop the reminder scheduler
+     */
+    void stopReminderScheduler();
+
+    /**
      * Returns true if a person with the same identity as {@code person} exists in the address book.
      */
     boolean hasPerson(Person person);
