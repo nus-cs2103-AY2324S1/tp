@@ -10,6 +10,7 @@ public class NextOfKinName extends Name {
      *
      * @param nextOfKinName A valid next-of-kin name.
      */
+    public static final String MESSAGE_CONSTRAINTS = "Next of Kin's " + Name.MESSAGE_CONSTRAINTS;
     public NextOfKinName(String nextOfKinName) {
         super(nextOfKinName);
     }
