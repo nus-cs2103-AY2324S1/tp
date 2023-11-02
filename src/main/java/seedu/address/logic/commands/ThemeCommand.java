@@ -30,7 +30,7 @@ public class ThemeCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Model model, CommandHistory commandHistory) throws CommandException {
+    public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         model.setTheme(theme);
         return new CommandResult(String.format(MESSAGE_SUCCESS, theme.toString()));

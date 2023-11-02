@@ -15,8 +15,6 @@ import seedu.address.model.UserPrefs;
 public class AddShortcutCommandTest {
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-
-    private CommandHistory commandHistory = new CommandHistory();
     @Test
     public void constructor_nullParameters_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new AddShortcutCommand(null, null));
@@ -32,8 +30,9 @@ public class AddShortcutCommandTest {
         ModelManager expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         expectedModel.getShortcutSettings().registerShortcut(new ShortcutAlias("del"),
                 new CommandWord(DeleteCommand.COMMAND_WORD));
+        expectedModel.commitAddressBook();
 
-        assertCommandSuccess(addShortcutCommand, model, expectedMessage, expectedModel, commandHistory);
+        assertCommandSuccess(addShortcutCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
@@ -52,9 +51,10 @@ public class AddShortcutCommandTest {
         ModelManager expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         expectedModel.getShortcutSettings().registerShortcut(new ShortcutAlias("del"),
                 new CommandWord(ListCommand.COMMAND_WORD));
+        expectedModel.commitAddressBook();
 
         assertCommandSuccess(addShortcutCommand, modelWithExistingMapping,
-                expectedMessage, expectedModel, commandHistory);
+                expectedMessage, expectedModel);
     }
 
     @Test
@@ -71,9 +71,10 @@ public class AddShortcutCommandTest {
         ModelManager expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         expectedModel.getShortcutSettings().registerShortcut(new ShortcutAlias("del"),
                 new CommandWord(DeleteCommand.COMMAND_WORD));
+        expectedModel.commitAddressBook();
 
         assertCommandSuccess(addShortcutCommand, modelWithExistingMapping,
-                expectedMessage, expectedModel, commandHistory);
+                expectedMessage, expectedModel);
     }
 
     @Test

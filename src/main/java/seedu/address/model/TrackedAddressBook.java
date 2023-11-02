@@ -3,6 +3,7 @@ package seedu.address.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import seedu.address.commons.core.ShortcutSettings;
 /**
  * {@code AddressBook} that keeps track of its own history.
  * @author {damithc}-reused
@@ -17,11 +18,11 @@ public class TrackedAddressBook extends AddressBook {
      * Contructor
      * @param initialState ReadOnlyAddressBook that new Command produces
      */
-    public TrackedAddressBook(ReadOnlyAddressBook initialState) {
-        super(initialState);
+    public TrackedAddressBook(ReadOnlyAddressBook initialState, ShortcutSettings shortcutSettings) {
+        super(initialState, shortcutSettings);
 
         addressBookStateList = new ArrayList<>();
-        addressBookStateList.add(new AddressBook(initialState));
+        addressBookStateList.add(new AddressBook(initialState, shortcutSettings.getCopy()));
         currentStatePointer = 0;
     }
 
@@ -31,7 +32,9 @@ public class TrackedAddressBook extends AddressBook {
      */
     public void commit() {
         removeStatesAfterCurrentPointer();
-        addressBookStateList.add(new AddressBook(this));
+
+        ShortcutSettings shortcutSettingsCopy = getShortcutSettings().getCopy();
+        addressBookStateList.add(new AddressBook(this, shortcutSettingsCopy));
         currentStatePointer++;
     }
 
@@ -47,7 +50,12 @@ public class TrackedAddressBook extends AddressBook {
             throw new NoUndoableStateException();
         }
         currentStatePointer--;
-        resetData(addressBookStateList.get(currentStatePointer));
+        ShortcutSettings previousShortcutSettings = addressBookStateList.get(currentStatePointer)
+                .getShortcutSettings();
+        this.getShortcutSettings().setShortcutSettings(previousShortcutSettings);
+        //updating the real pointer. Problem : might be reassigning to wrong
+        resetData(addressBookStateList.get(currentStatePointer), getShortcutSettings());
+        //updating tracked copies
     }
 
     /**
@@ -58,7 +66,10 @@ public class TrackedAddressBook extends AddressBook {
             throw new NoRedoableStateException();
         }
         currentStatePointer++;
-        resetData(addressBookStateList.get(currentStatePointer));
+        ShortcutSettings previousShortcutSettings = addressBookStateList.get(currentStatePointer)
+                        .getShortcutSettings();
+        this.getShortcutSettings().setShortcutSettings(previousShortcutSettings);
+        resetData(addressBookStateList.get(currentStatePointer), getShortcutSettings());
     }
 
     /**
