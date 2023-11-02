@@ -14,12 +14,9 @@ import static seedu.address.testutil.TypicalPersons.CARL;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.time.LocalDate;
-import java.util.logging.Logger;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.commons.core.LogsCenter;
-import seedu.address.logic.LogicManager;
 import seedu.address.logic.commands.CompleteCommand.CompleteDescriptor;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
@@ -65,7 +62,7 @@ class CompleteCommandTest {
     public void execute_noMatchingDate_failure() {
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         CompleteDescriptor completeDescriptor = new CompleteDescriptor();
-        completeDescriptor.setDate(LocalDate.of(2023, 02,10)); //no matching appointment date
+        completeDescriptor.setDate(LocalDate.of(2023, 02, 10)); //no matching appointment date
         CompleteCommand completeCommand = new CompleteCommand(completeDescriptor);
 
         assertCommandFailure(completeCommand, expectedModel, MESSAGE_DATE_NO_APPOINTMENT);
@@ -75,7 +72,7 @@ class CompleteCommandTest {
     public void execute_personNoAppointment_failure() {
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         CompleteDescriptor completeDescriptor = new CompleteDescriptor();
-        completeDescriptor.setIndex(INDEX_FIRST_PERSON); //person has no appointment 
+        completeDescriptor.setIndex(INDEX_FIRST_PERSON); //person has no appointment
         CompleteCommand completeCommand = new CompleteCommand(completeDescriptor);
 
         assertCommandFailure(completeCommand, expectedModel, MESSAGE_PERSON_NO_APPOINTMENT);
