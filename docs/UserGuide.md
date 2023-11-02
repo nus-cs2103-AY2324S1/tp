@@ -339,7 +339,7 @@ Examples:
 
 ---
 
-### View a student's class details: `view`
+### View a student's class details : `view`
 
 View the class details of a student that will be displayed on the right side of the application.
 
@@ -356,7 +356,7 @@ Example:
 
 ---
 
-### Selecting students randomly: `random`
+### Selecting students randomly : `random`
 
 Select a specific number of students from all students displayed in Class Manager.
 
@@ -433,7 +433,7 @@ Displayed result if there are no more commands to redo: `No more commands to red
 
 ---
 
-### Viewing command history `history`
+### Viewing command history : `history`
 
 Shows a list of all previously entered inputs in the result display box, with the most recent inputs at the top of the list.
 
@@ -476,7 +476,7 @@ If your changes to the data file make its format invalid, Class Manager 2023 wil
 </box>
 
 ---
-### Loading the data file: `load`
+### Loading the data file : `load`
 
 Load student information from an existing JSON file. Copy the JSON file to be loaded into the data folder. The data in the JSON file will be loaded into the app. The file also becomes the new default save file.
 
@@ -491,7 +491,7 @@ Example:
 
 ---
 
-### Toggling color themes: `theme`
+### Toggling color themes : `theme`
 
 Toggles between light and dark color themes.
 
