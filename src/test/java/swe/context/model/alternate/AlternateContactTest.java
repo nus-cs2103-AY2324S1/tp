@@ -24,7 +24,12 @@ public class AlternateContactTest {
     }
 
     @Test
-    public void isValidName_whitespace_false() {
-        assertFalse(AlternateContact.isValid(TestData.Invalid.AlternateContact.WHITESPACE));
+    public void isValidName_noWhitespace_false() {
+        assertFalse(AlternateContact.isValid(TestData.Invalid.AlternateContact.NO_WHITESPACE));
+    }
+
+    @Test
+    public void isValidName_whitespaceInName_false() {
+        assertFalse(AlternateContact.isValid(TestData.Invalid.AlternateContact.WHITESPACE_IN_NAME));
     }
 }

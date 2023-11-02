@@ -5,6 +5,7 @@ import static java.util.Objects.requireNonNull;
 import swe.context.commons.util.ToStringBuilder;
 import swe.context.logic.Messages;
 import swe.context.model.Model;
+import swe.context.model.contact.Contact;
 import swe.context.model.contact.ContainsTagPredicate;
 
 /**
@@ -31,7 +32,7 @@ public class FilterCommand extends Command {
         requireNonNull(model);
         model.setContactsFilter(predicate);
         return new CommandResult(
-                String.format(Messages.CONTACTS_LISTED_OVERVIEW, model.getFilteredContactList().size()));
+                Messages.contactsListedOverview(model.getFilteredContactList().size()));
     }
 
     @Override

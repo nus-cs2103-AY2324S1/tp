@@ -37,7 +37,7 @@ public class AddCommandTest {
 
         CommandResult commandResult = new AddCommand(validContact).execute(modelStub);
 
-        assertEquals(String.format(Messages.ADD_COMMAND_SUCCESS, Contact.format(validContact)),
+        assertEquals(Messages.addCommandSuccess(Contact.format(validContact)),
                 commandResult.getFeedbackToUser());
         assertEquals(Arrays.asList(validContact), modelStub.contactsAdded);
     }
