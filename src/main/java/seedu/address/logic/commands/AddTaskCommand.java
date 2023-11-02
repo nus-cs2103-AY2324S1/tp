@@ -60,7 +60,7 @@ public class AddTaskCommand extends Command {
                 throw new CommandException("Existing task with same task description with index " + taskIndex + "!");
             }
         } catch (IndexOutOfBoundsException e) {
-            throw new CommandException("Lesson index out of bounds!");
+            throw new CommandException("No lesson with index " + this.index.getOneBased() + "!!");
         }
         model.addTask(task, lessonIndex);
         model.resetAllShowFields();
