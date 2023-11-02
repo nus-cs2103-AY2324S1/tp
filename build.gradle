@@ -65,7 +65,6 @@ application {
 
 clean {
     delete './data/'
-    delete './config.json'
     delete './settings.json'
     delete fileTree('./') { include '*.log.*' }
 }
