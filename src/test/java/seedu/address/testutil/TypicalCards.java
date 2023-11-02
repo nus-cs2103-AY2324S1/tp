@@ -38,12 +38,23 @@ public class TypicalCards {
      * Returns an {@code Deck} with all the typical card.
      */
     public static Deck getTypicalDeck() {
-        Deck ab = new Deck();
+        Deck deck = new Deck();
         for (Card card : getTypicalCards()) {
-            ab.addCard(card);
+            deck.addCard(card);
         }
-        return ab;
+        return deck;
     }
+
+    /**
+     * Returns an empty {@code Deck}.
+     */
+    public static Deck getEmptyDeck() {
+        return new Deck();
+    }
+
+    /**
+     * Returns a list of typical {@code Cards}.
+     */
     public static List<Card> getTypicalCards() {
         return new ArrayList<>(Arrays.asList(CS2100, CS1101S, CS1231S, HIGH, LOW));
     }

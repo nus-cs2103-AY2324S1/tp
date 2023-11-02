@@ -84,5 +84,4 @@ public class UserPrefs implements ReadOnlyUserPrefs {
         stringBuilder.append("\nLocal data file location : ").append(deckFilePath);
         return stringBuilder.toString();
     }
-
 }

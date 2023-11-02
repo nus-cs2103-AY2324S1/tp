@@ -65,4 +65,12 @@ public class StringUtil {
             return false;
         }
     }
+
+    /**
+     * Returns true if {@code s} is equal to "r".
+     */
+    public static boolean isR(String s) {
+        requireNonNull(s);
+        return s.equals("r");
+    }
 }

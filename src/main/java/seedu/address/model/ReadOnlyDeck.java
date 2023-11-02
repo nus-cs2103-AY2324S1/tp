@@ -13,6 +13,4 @@ public interface ReadOnlyDeck {
      */
     ObservableList<Card> getCardList();
     void sort();
-
-
 }

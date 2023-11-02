@@ -45,7 +45,6 @@ public class StorageManager implements Storage {
         userPrefsStorage.saveUserPrefs(userPrefs);
     }
 
-
     // ================ Deck methods ==============================
 
     @Override
@@ -74,5 +73,4 @@ public class StorageManager implements Storage {
         logger.fine("Attempting to write to data file: " + filePath);
         deckStorage.saveDeck(deck, filePath);
     }
-
 }

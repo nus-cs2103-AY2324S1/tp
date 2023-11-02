@@ -5,10 +5,12 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_CS1101S;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_CS2100;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ANSWER_CS2100;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_HINT_CS2100;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_QUESTION_CS2100;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_CS2100;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalCards.getTypicalDeck;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_CARD;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_CARD;
@@ -26,7 +28,6 @@ import seedu.address.model.card.Card;
 import seedu.address.testutil.CardBuilder;
 import seedu.address.testutil.EditCardDescriptorBuilder;
 
-
 /**
  * Contains integration tests (interaction with the Model) and unit tests for EditCommand.
  */
@@ -35,7 +36,28 @@ public class EditCommandTest {
     private Model model = new ModelManager(getTypicalDeck(), new UserPrefs());
 
     @Test
-    public void execute_allFieldsSpecifiedUnfilteredList_success() {
+    public void constructor_nullIndex_throwsNullPointerException() {
+        EditCardDescriptor validEditCardDescriptor = new EditCardDescriptorBuilder().build();
+        assertThrows(NullPointerException.class, () -> new EditCommand(null, validEditCardDescriptor));
+    }
+
+    @Test
+    public void constructor_nullEditCardDescriptor_throwsNullPointerException() {
+        Index validIndex = INDEX_FIRST_CARD;
+        assertThrows(NullPointerException.class, () -> new EditCommand(validIndex, null));
+    }
+
+    @Test
+    public void execute_invalidModel_throwsNullPointerException() {
+        Index validIndex = INDEX_FIRST_CARD;
+        EditCardDescriptor validEditCardDescriptor = DESC_CS2100;
+
+        assertThrows(NullPointerException.class, () -> new EditCommand(validIndex,
+                validEditCardDescriptor).execute(null));
+    }
+
+    @Test
+    public void execute_allFieldsSpecified_success() {
         Card editedCard = new CardBuilder().build();
         EditCardDescriptor descriptor = new EditCardDescriptorBuilder(editedCard).build();
         EditCommand editCommand = new EditCommand(INDEX_FIRST_CARD, descriptor);
@@ -49,16 +71,24 @@ public class EditCommandTest {
     }
 
     @Test
-    public void execute_someFieldsSpecifiedUnfilteredList_success() {
+    public void execute_someFieldsSpecified_success() {
         Index indexLastCard = Index.fromOneBased(model.getFilteredCardList().size());
         Card lastCard = model.getFilteredCardList().get(indexLastCard.getZeroBased());
 
         CardBuilder cardInList = new CardBuilder(lastCard);
-        Card editedCard = cardInList.withQuestion(VALID_QUESTION_CS2100)
-                .withAnswer(VALID_ANSWER_CS2100).build();
+        Card editedCard = cardInList
+                .withQuestion(VALID_QUESTION_CS2100)
+                .withAnswer(lastCard.getAnswer().answer)
+                .withTags(VALID_TAG_CS2100)
+                .withHint(VALID_HINT_CS2100)
+                .build();
 
-        EditCardDescriptor descriptor = new EditCardDescriptorBuilder().withQuestion(VALID_QUESTION_CS2100)
-                .withAnswer(VALID_ANSWER_CS2100).build();
+        EditCardDescriptor descriptor = new EditCardDescriptorBuilder()
+                .withQuestion(VALID_QUESTION_CS2100)
+                .withAnswer(lastCard.getAnswer().answer)
+                .withTags(VALID_TAG_CS2100)
+                .withHint(VALID_HINT_CS2100)
+                .build();
         EditCommand editCommand = new EditCommand(indexLastCard, descriptor);
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_CARD_SUCCESS, Messages.format(editedCard));
@@ -70,19 +100,7 @@ public class EditCommandTest {
     }
 
     @Test
-    public void execute_noFieldSpecifiedUnfilteredList_success() {
-        EditCommand editCommand = new EditCommand(INDEX_FIRST_CARD, new EditCardDescriptor());
-        Card editedCard = model.getFilteredCardList().get(INDEX_FIRST_CARD.getZeroBased());
-
-        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_CARD_SUCCESS, Messages.format(editedCard));
-
-        Model expectedModel = new ModelManager(new Deck(model.getDeck()), new UserPrefs());
-
-        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
-    }
-
-    @Test
-    public void execute_duplicateCardUnfilteredList_failure() {
+    public void execute_duplicateCard_failure() {
         Card firstCard = model.getFilteredCardList().get(INDEX_FIRST_CARD.getZeroBased());
         EditCardDescriptor descriptor = new EditCardDescriptorBuilder(firstCard).build();
         EditCommand editCommand = new EditCommand(INDEX_SECOND_CARD, descriptor);
@@ -91,9 +109,9 @@ public class EditCommandTest {
     }
 
     @Test
-    public void execute_invalidCardIndexUnfilteredList_failure() {
+    public void execute_invalidCardIndex_failure() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredCardList().size() + 1);
-        EditCardDescriptor descriptor = new EditCardDescriptorBuilder().withQuestion(VALID_QUESTION_CS2100).build();
+        EditCardDescriptor descriptor = DESC_CS2100;
         EditCommand editCommand = new EditCommand(outOfBoundIndex, descriptor);
 
         assertCommandFailure(editCommand, model, Messages.MESSAGE_INVALID_CARD_DISPLAYED_INDEX);
@@ -127,11 +145,12 @@ public class EditCommandTest {
     @Test
     public void toStringMethod() {
         Index index = Index.fromOneBased(1);
-        EditCardDescriptor editCardDescriptor = new EditCardDescriptor();
+        EditCardDescriptor editCardDescriptor = DESC_CS2100;
         EditCommand editCommand = new EditCommand(index, editCardDescriptor);
-        String expected = EditCommand.class.getCanonicalName() + "{index=" + index + ", editCardDescriptor="
+        String expected = EditCommand.class.getCanonicalName()
+                + "{index=" + index
+                + ", editCardDescriptor="
                 + editCardDescriptor + "}";
         assertEquals(expected, editCommand.toString());
     }
-
 }

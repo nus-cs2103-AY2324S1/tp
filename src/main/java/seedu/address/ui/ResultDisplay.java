@@ -10,6 +10,7 @@ import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
+
 /**
  * A UI for the status bar that is displayed at the header of the application.
  */
@@ -108,5 +109,4 @@ public class ResultDisplay extends UiPart<Region> {
 
         textFlowControl.getChildren().add(textSegment);
     }
-
 }

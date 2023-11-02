@@ -461,6 +461,17 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
    Use case ends.
 
+**Extension:**
+
+- 2a. lesSON detects that the given tags are invalid
+    - 2a1. lesSON displays a error message, use case resumes at step 1.
+- 2b. lesSON detects that the necessary tags are missing
+    - 2b1. lesSON displays a error message, use case resumes at step 1.
+- 2c. lesSON detects any input after tags is blank
+    - 2c1. lesSON displays a error message, use case resumes at step 1.
+- 2d. lesSON detects that the given tags are in the wrong sequence
+    - 2a1. lesSON displays a error message, use case resumes at step 1.
+
 **Use case: UC02 deleting a card**
 
 **MSS:**
@@ -471,16 +482,27 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
    Use case ends.
 
+**Extension:**
 
-**Use case: UC03 viewing a card**
+- 2a. lesSON detects that the given index is invalid
+  - 2a1. lesSON displays a error message, use case resumes at step 1.
+
+
+
+**Use case: UC03 filtering the card deck**
 
 **MSS:**
 
 1. User displays all cards (UC04).
-2. User inputs command to view a card, along with the index of the card.
-3. lesSON displays the selected card.
+2. User inputs command to filter the cards, including the tags to filter the deck.
+3. lesSON displays the cards that fulfill the condition using the tags.
 
-   Use case ends.
+    Use case ends.
+
+**Extension:**
+
+- 2a. lesSON detects the given tags are invalid
+    - 2a1. lesSON displays a error message, use case resumes at step 1.
 
 
 **Use case: UC04 displaying all cards**
@@ -490,7 +512,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1. User inputs command to view all cards.
 2. lesSON displays all cards.
 
-   Use case ends.
+    Use case ends.
+
 
 
 **Use case: UC05 editing a card**
@@ -501,10 +524,65 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2. User inputs command to edit a card, along with the necessary details.
 3. lesSON displays a success message.
 
+    Use case ends.
+
+**Extension:**
+
+- 2a. lesSON detects that the given tags are invalid
+    - 2a1. lesSON displays a error message, use case resumes at step 1.
+- 2b. lesSON detects that the given index is invalid
+    - 2a1. lesSON displays a error message, use case resumes at step 1.
+
+**Use case: UC06 practise a card**
+
+**MSS:**
+
+1. User displays all cards (UC04).
+2. User inputs command to practise a card with its index.
+3. lesSON displays the question of the specified card.
+
    Use case ends.
 
+**Extension:**
 
-*{More to be added}*
+- 2a. lesSON detects that the given index is invalid
+    - 2a1. lesSON displays a error message, use case resumes at step 1.
+
+**Use case: UC07 solve a card**
+
+**MSS:**
+
+1. User displays all cards (UC04).
+2. User inputs command to solve a card with its index.
+3. lesSON displays the question and the answer of the specified card.
+
+   Use case ends.
+
+**Extension:**
+
+- 2a. lesSON detects that the given index is invalid
+    - 2a1. lesSON displays a error message, use case resumes at step 1.
+
+**Use case: UC08 set difficulty for a card**
+
+**MSS:**
+
+1. User displays all cards (UC04).
+2. User inputs command to set a difficulty of a card, by specifying its index and the difficulty.
+3. lesSON displays the question and the answer of the specified card.
+
+   Use case ends.
+
+**Extension:**
+
+- 2a. lesSON detects that the given index is invalid
+    - 2a1. lesSON displays a error message, use case resumes at step 1.
+- 2b. lesSON detects that any of the given tag is invalid
+    - 2a1. lesSON displays a error message, use case resumes at step 1.
+- 2c. lesSON detects that the given difficulty is invalid
+    - 2a1. lesSON displays a error message, use case resumes at step 1.
+
+
 
 ### Non-Functional Requirements
 
@@ -514,7 +592,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 4.  User must be educated and willing to use flashcards to learn the content
 5.  Display box should be able to show the user's full input
 
-*{More to be added}*
 
 ### Glossary
 

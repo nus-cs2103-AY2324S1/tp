@@ -16,7 +16,6 @@ public class Messages {
     public static final String MESSAGE_UNKNOWN_COMMAND = "Unknown command";
     public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format! \n%1$s";
     public static final String MESSAGE_INVALID_CARD_DISPLAYED_INDEX = "The card index provided is invalid";
-    public static final String MESSAGE_CARDS_LISTED_OVERVIEW = "%1$d cards listed!";
     public static final String MESSAGE_CARDS_SET_DIFFICULTY_VIEW_EASY = "%1$s";
     public static final String MESSAGE_CARDS_SET_DIFFICULTY_VIEW_MEDIUM = "%1$s";
     public static final String MESSAGE_CARDS_SET_DIFFICULTY_VIEW_HARD = "%1$s";
@@ -24,11 +23,16 @@ public class Messages {
             + "level! Please enter easy, medium or hard!";
 
     public static final String MESSAGE_CARDS_SOLVE_VIEW = "%1$s";
+    public static final String MESSAGE_CARDS_HINT_VIEW = "%1$s";
+
 
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
 
     public static final String MESSAGE_CARDS_PRACTISE_VIEW = "%1$s";
+
+    public static final String MESSAGE_RANDOM_INDEX_NOT_INITIALISED = "Random index cannot be used because "
+            + "you need to use the random command first.";
 
     /**
      * Returns an error message indicating the duplicate prefixes.
@@ -43,19 +47,19 @@ public class Messages {
     }
 
     /**
-     * Formats the {@code card} for display to the user.
+     * Formats the {@code card} to display to the user.
      */
     public static String format(Card card) {
         final StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("Question: ")
                 .append(card.getQuestion())
-                    .append("; Answer: ")
-                     .append(card.getAnswer());
+                .append("; Answer: ")
+                .append(card.getAnswer());
         return stringBuilder.toString();
     }
 
     /**
-     * Formats the {@code card} for display to the user its newly set difficulty.
+     * Formats the {@code card} to display its newly set difficulty to the user .
      */
     public static String formatSetDifficulty(Card card, Index index) {
         final StringBuilder stringBuilder = new StringBuilder();
@@ -68,7 +72,7 @@ public class Messages {
     }
 
     /**
-     * Formats the {@code card} for display to the user as an Answer.
+     * Formats the {@code card} to display its Question and Answer to the user.
      */
     public static String formatSolve(Card card, Index index) {
         final StringBuilder stringBuilder = new StringBuilder();
@@ -83,11 +87,11 @@ public class Messages {
     }
 
     /**
-     * Formats the {@code card} for display to the user as an Answer.
+     * Formats the {@code card} to display its Question to the user.
      */
     public static String formatPractise(Card card, Index index) {
         final StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("Practising question ")
+        stringBuilder.append("Practising Question ")
                 .append(index.getOneBased())
                 .append(" : ")
                 .append(card.getQuestion());
@@ -95,13 +99,14 @@ public class Messages {
     }
 
     /**
-     * Formats the {@code card} for display to the user as a Question.
+     * Formats the {@code card} to display its Hint to the user.
      */
-    public static String formatQuestion(Card card) {
+    public static String formatHint(Card card, Index index) {
         final StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("Question: ")
-                .append(card.getQuestion());
+        stringBuilder.append("Hint for Question ")
+                .append(index.getOneBased())
+                .append(": ")
+                .append(card.getHint());
         return stringBuilder.toString();
     }
-
 }
