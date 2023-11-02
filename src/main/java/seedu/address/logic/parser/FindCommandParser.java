@@ -5,7 +5,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
 
 import java.util.List;
-
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
@@ -24,6 +23,7 @@ public class FindCommandParser implements Parser<FindCommand> {
      */
     public FindCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_SUBJECT);
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_SUBJECT);
 
         if (!argMultimap.getPreamble().isEmpty() && argMultimap.getValue(PREFIX_NAME).isPresent()) {
             throw new ParseException(
@@ -32,6 +32,14 @@ public class FindCommandParser implements Parser<FindCommand> {
         if (!argMultimap.getPreamble().isEmpty() && argMultimap.getValue(PREFIX_SUBJECT).isPresent()) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+        }
+
+        if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
+            ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
+        }
+
+        if (argMultimap.getValue(PREFIX_SUBJECT).isPresent()) {
+            ParserUtil.parseSubject(argMultimap.getValue(PREFIX_SUBJECT).get());
         }
 
         List<String> nameKeywords = argMultimap.getAllValues(PREFIX_NAME);

@@ -18,7 +18,7 @@ public class SubjectContainsKeywordsPredicate implements Predicate<Person> {
 
     @Override
     public boolean test(Person person) {
-        return keywords.size() == 0 || keywords.stream()
+        return keywords.isEmpty() || keywords.stream()
                 .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(person.getSubject().value, keyword));
     }
 

@@ -1,6 +1,8 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
@@ -11,16 +13,19 @@ import seedu.address.model.person.SubjectContainsKeywordsPredicate;
 
 /**
  * Finds and lists all persons in address book whose name contains any of the argument keywords.
- * Keyword matching is case insensitive.
+ * Keyword matching is case-insensitive.
  */
 public class FindCommand extends Command {
 
     public static final String COMMAND_WORD = "find";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose names contain any of "
-            + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
-            + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
-            + "Example: " + COMMAND_WORD + " alice bob charlie";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Find persons with names or subjects "
+            + "matching the specified keywords (case-insensitive).\n"
+            + "Parameters: " + PREFIX_NAME + "[NAME_KEYWORD] " + PREFIX_SUBJECT + "[SUBJECT_KEYWORD]\n"
+            + "Examples: \n"
+            + "1. " + COMMAND_WORD + " " + PREFIX_NAME + "Alice " + PREFIX_SUBJECT + "Maths \n"
+            + "2. " + COMMAND_WORD + " " + PREFIX_NAME + "Alice \n"
+            + "3. " + COMMAND_WORD + " " + PREFIX_SUBJECT + "Maths";
 
     private final NameContainsKeywordsPredicate predicate;
     private final SubjectContainsKeywordsPredicate subject;
