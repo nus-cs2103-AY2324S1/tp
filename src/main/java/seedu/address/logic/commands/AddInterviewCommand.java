@@ -7,13 +7,13 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_END_TIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_JOB_ROLE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_START_TIME;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.Time;
 import seedu.address.model.applicant.Applicant;
 import seedu.address.model.interview.Interview;
 
@@ -35,8 +35,8 @@ public class AddInterviewCommand extends Command {
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_APPLICANT + "18 "
             + PREFIX_JOB_ROLE + "Junior Software Engineer "
-            + PREFIX_START_TIME + "03-11-2024 1600 "
-            + PREFIX_END_TIME + "03-11-2024 1800";
+            + PREFIX_START_TIME + "03-11-2024 1500 "
+            + PREFIX_END_TIME + "03-11-2024 1600";
 
     public static final String MESSAGE_SUCCESS = "New interview added: %1$s";
     public static final String MESSAGE_DUPLICATE_INTERVIEW = "Error: This is a duplicate interview";
@@ -50,14 +50,14 @@ public class AddInterviewCommand extends Command {
 
     private final Index applicantIndex;
     private final String jobRole;
-    private final LocalDateTime startTime;
-    private final LocalDateTime endTime;
+    private final Time startTime;
+    private final Time endTime;
 
     /**
      * Creates an AddInterviewCommand to add the specified {@code Interview}
      */
     public AddInterviewCommand(Index applicantIndex, String jobRole,
-                               LocalDateTime startTime, LocalDateTime endTime) {
+                               Time startTime, Time endTime) {
         requireAllNonNull(applicantIndex, jobRole, startTime, endTime);
 
         this.applicantIndex = applicantIndex;

@@ -36,9 +36,9 @@ public class RateCommandTest {
         Interview ratedInterview = new Interview(
                 interviewToRate.getInterviewApplicant(),
                 interviewToRate.getJobRole(),
+                testRating,
                 interviewToRate.getInterviewStartTime(),
                 interviewToRate.getInterviewEndTime(),
-                testRating,
                 interviewToRate.isDone());
         expectedModel.setInterview(interviewToRate, ratedInterview);
 

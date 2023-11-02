@@ -1,9 +1,8 @@
 package seedu.address.testutil;
 
-import java.time.LocalDateTime;
-
 import seedu.address.logic.parser.TimeParser;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.Time;
 import seedu.address.model.applicant.Applicant;
 import seedu.address.model.interview.Interview;
 import seedu.address.model.interview.Rating;
@@ -23,8 +22,8 @@ public class InterviewBuilder {
     private Applicant applicant;
     private String jobRole;
     private Rating rating;
-    private LocalDateTime startTime;
-    private LocalDateTime endTime;
+    private Time startTime;
+    private Time endTime;
     private boolean isDone;
 
     /**
@@ -100,7 +99,7 @@ public class InterviewBuilder {
     }
 
     public Interview build() {
-        return new Interview(applicant, jobRole, startTime, endTime, rating, isDone);
+        return new Interview(applicant, jobRole, rating, startTime, endTime, isDone);
     }
 
 }

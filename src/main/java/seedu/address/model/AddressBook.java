@@ -2,10 +2,13 @@ package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
 
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
 import javafx.collections.ObservableList;
+import javafx.util.Pair;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.applicant.Applicant;
 import seedu.address.model.applicant.UniqueApplicantList;
@@ -178,6 +181,82 @@ public class AddressBook implements ReadOnlyAddressBook {
         requireNonNull(comparator);
 
         interviews.sort(comparator);
+    }
+
+    /**
+     * Lists the pockets of time on a given day.
+     *
+     * @author Tan Kerway
+     * @param day the day to list pockets of time on
+     * @return a list of pockets of time available on the given day
+     */
+    List<Pair<Time, Time>> listPocketsOfTimeOnGivenDay(Time day) {
+        Time startOfWorkDay = new Time(LocalDateTime.of(
+                day.getDate().getYear(),
+                day.getDate().getMonth(),
+                day.getDate().getDayOfMonth(),
+                Time.WORK_START.getHour(),
+                0
+                ));
+        Time endOfWorkDay = new Time(LocalDateTime.of(
+                day.getDate().getYear(),
+                day.getDate().getMonth(),
+                day.getDate().getDayOfMonth(),
+                Time.WORK_END.getHour(),
+                0
+        ));
+        System.out.println(startOfWorkDay.getDateAndTime());
+        System.out.println(endOfWorkDay.getDateAndTime());
+        // get the list of interviews on the given day
+        List<Interview> temp = new ArrayList<>();
+        for (Interview value : interviews) {
+            temp.add(value);
+        }
+
+        // sort the interviews in ascending order of start time
+        temp.sort(Comparator.comparing(Interview::getInterviewStartTime));
+        // track the previous end time, initialized to the start of the workday
+        Time prevEnd = startOfWorkDay;
+        List<Pair<Time, Time>> res = new ArrayList<>();
+        // loop over the sorted interviews list
+        for (Interview interview : temp) {
+            // get the start and end time of the current interview
+            Time currentInterviewStart = interview.getInterviewStartTime();
+            Time currentInterviewEnd = interview.getInterviewEndTime();
+            // case 1: the workday is completely overlapped by the interview
+            if (currentInterviewStart.isBefore(startOfWorkDay)
+                    && currentInterviewEnd.isAfter(endOfWorkDay)) {
+                prevEnd = currentInterviewEnd;
+                break;
+            }
+            // case 2: the workday is outside and before the workday
+            if (currentInterviewEnd.isBefore(startOfWorkDay)) {
+                continue;
+            }
+            // case 3: the workday is outside and after the workday
+            if (currentInterviewStart.isAfter(endOfWorkDay)) {
+                break;
+            }
+            // case 4: the interview's start point is before the start of workday
+            // and the interview's end point is after the start of the workday
+            if (currentInterviewStart.isBefore(startOfWorkDay)
+                    && currentInterviewEnd.isAfter(startOfWorkDay)) {
+                prevEnd = currentInterviewEnd;
+                continue;
+            }
+            // get the current block of free time by taking the end of the last interval
+            // and the start of the current interval
+            if (!prevEnd.equals(currentInterviewStart)) {
+                res.add(new Pair<>(prevEnd, currentInterviewStart));
+            }
+            prevEnd = currentInterviewEnd;
+        }
+
+        // add stray free time, if any
+        if (prevEnd.isBefore(endOfWorkDay)) {
+            res.add(new Pair<>(prevEnd, endOfWorkDay));
+        }
+        return res;
     }
 
     //// util methods

@@ -8,7 +8,6 @@ import java.util.logging.Logger;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.parser.AddressBookParser;
 import seedu.address.model.Model;
-import seedu.address.model.Time;
 import seedu.address.model.interview.Interview;
 
 /**
@@ -24,7 +23,7 @@ public class ListInterviewsTodayCommand extends Command {
     public static final String MESSAGE_SUCCESS = "Listed all interviews today";
     private static final Logger logger = LogsCenter.getLogger(AddressBookParser.class);
     private static final Predicate<Interview> PREDICATE_SHOW_INTERVIEWS_TODAY =
-            interview -> Time.isToday(interview.getInterviewStartTime());
+            interview -> interview.getInterviewStartTime().isToday();
 
 
     /**
