@@ -100,7 +100,10 @@ Examples:
 
 Adds an interview to the address book.
 
-Format: `add-i app/APPLICANT_ID jr/JOB_ROLE time/INTERVIEW_DATETIME`
+Format: `add-i app/APPLICANT_ID jr/JOB_ROLE start/START_DATE_AND_TIME end/END_DATE_AND_TIME`
+
+:information_source: JOB_ROLE allows empty strings to be entered to handle situations where the applicant is applying
+to the company in general.
 
 * List of accepted date formats:
   * Day and time: 
@@ -137,15 +140,16 @@ Format: `add-i app/APPLICANT_ID jr/JOB_ROLE time/INTERVIEW_DATETIME`
     * `16/05 3.15pm`
     * `16/05 3pm`
 
-* Other features:
+* Expected outputs:
   * When the user enters the date properly: `added <interview description> at <time>`
+  * When the applicant index provided is invalid: `The applicant index provided is invalid`
   * When the user does not input a valid date: `“Please specify a valid date!”`
   * When the user inputs a valid date without a time: `"Please enter an interview time!"`
   * When the user enters a valid date in the past: `<todo>`
   * When there is an interview clash: `“Oops! You have an <insert interview object> scheduled at <from date & by date>`
 
 Examples:
-* `add-i app/18 jr/software engineer time/2023-10-24 18:00`
+* `add-i app/3 jr/software engineer start/11-12-2023 1400 end/11-12-2023 1500`
 
 ## Listing all applicants : `list-a`
 
