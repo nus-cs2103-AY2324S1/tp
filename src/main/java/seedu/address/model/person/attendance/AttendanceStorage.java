@@ -114,6 +114,14 @@ public class AttendanceStorage {
     }
 
     /**
+     * Returns the attendanceType of the employee on the current date.
+     */
+    public AttendanceType getTodayAttendance() {
+        LocalDate currentDate = LocalDate.now();
+        return getType(currentDate);
+    }
+
+    /**
      * Gets the number of attendances for the given type.
      *
      * @param type type of attendance to count

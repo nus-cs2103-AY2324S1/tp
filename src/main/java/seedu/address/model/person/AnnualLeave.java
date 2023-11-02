@@ -308,6 +308,10 @@ public class AnnualLeave {
         this.leaveList = list;
     }
 
+    /**
+     * Return the total number of days of leave taken from the joinDate to current Date.
+     * @return the total number of days of leave taken from the joinDate to current Date
+     */
     public int getTotalLeaveTaken() {
         LocalDate currentDate = LocalDate.now();
         int numOfDays = 0;
