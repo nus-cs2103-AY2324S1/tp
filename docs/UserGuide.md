@@ -59,7 +59,7 @@ e.g. in `add n/NAME`, you should specify a `NAME` such as `add n/John Doe`.
 e.g in `n/NAME [o/NOTE]`, you could specify `n/John Doe o/Good at SE.`, or just `n/John Doe`.
 
 - Parameters with `…`​ after them can be specified multiple times.<br />
-e.g. in `[t/TAG]…​`, which is optional but can also be specified multiple times, you could specify ` ` (none specified), `t/NUS`, `t/NUS t/CS2103 course` etc.
+e.g. in `[t/TAG]…​`, which is optional but can also be specified multiple times, you could specify ` ` (none specified), `t/NUS`, `t/NUS t/CS2103 course` etc.
 
 - Parameters can be specified in any order.<br />
 e.g. in `n/NAME p/PHONE_NUMBER`, the order `p/PHONE_NUMBER n/NAME` also works.
