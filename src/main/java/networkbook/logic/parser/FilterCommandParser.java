@@ -42,8 +42,12 @@ public class FilterCommandParser implements Parser<FilterCommand> {
                         CliSyntax.PREFIX_FILTER_ARGS
                 );
 
-        if (!ArgumentMultimap.arePrefixesPresent(argMultimap,
-                CliSyntax.PREFIX_FILTER_FIELD, CliSyntax.PREFIX_FILTER_ARGS)) {
+        if (!ArgumentMultimap.arePrefixesPresent(argMultimap, CliSyntax.PREFIX_FILTER_FIELD)
+                || !ArgumentMultimap.arePrefixesPresent(argMultimap, CliSyntax.PREFIX_FILTER_ARGS)) {
+            if (!ArgumentMultimap.arePrefixesPresent(argMultimap, CliSyntax.PREFIX_FILTER_FIELD)
+                    && !ArgumentMultimap.arePrefixesPresent(argMultimap, CliSyntax.PREFIX_FILTER_ARGS)) {
+                throw new ParseException(FilterCommand.MESSAGE_USAGE);
+            }
             throw new ParseException(MISSING_FIELD);
         }
 

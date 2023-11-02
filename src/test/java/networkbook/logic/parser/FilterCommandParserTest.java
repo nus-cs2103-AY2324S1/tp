@@ -26,12 +26,18 @@ public class FilterCommandParserTest {
     @Test
     public void parse_emptyArg_throwsParseException() {
         assertParseFailure(parser, "    ",
+                String.format(FilterCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void parse_noWithFields_throwsParseException() {
+        assertParseFailure(parser, "filter /by a",
                 String.format(FilterCommandParser.MISSING_FIELD));
     }
 
     @Test
-    public void parse_noFields_throwsParseException() {
-        assertParseFailure(parser, "filter /by ",
+    public void parse_noByFields_throwsParseException() {
+        assertParseFailure(parser, "filter /with a",
                 String.format(FilterCommandParser.MISSING_FIELD));
     }
 
