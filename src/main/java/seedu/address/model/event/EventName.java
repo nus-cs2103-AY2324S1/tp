@@ -41,4 +41,19 @@ public class EventName {
     public static boolean isValidEventName(String str) {
         return !str.isEmpty();
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof EventName)) {
+            return false;
+        }
+
+        EventName otherName = (EventName) other;
+        return name.equals(otherName.name);
+    }
 }
