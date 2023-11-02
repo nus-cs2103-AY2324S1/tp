@@ -127,8 +127,18 @@ Will update soon...
 ### Show Graph
 
 * Display all users in a tree diagram:
-  - Command: `show linkTree`
-  - Example: `show tree [team id]`
+  - Command: `tree`
+  - Example: `tree` (and an example result is shown below)
+  ![TreeResultExample](images/UG_images/TreeResultExample.png)
+
+
+* Hide the tree
+  - Command: `tree`
+  - Note: just type `tree` **again** and the tree display will be hidden.
+
+
+**Example usage**: when you are at the main window, type `tree` to show the tree graph
+and type `tree` again when you want to hide the tree and go back to the main window.
 
 --------------------------------------------------------------------------------------------------------------------
 
