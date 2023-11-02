@@ -10,8 +10,6 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 
 
-
-
 /**
  * Sorts all persons in the list by lexicographical order barring capitalisation.
  */

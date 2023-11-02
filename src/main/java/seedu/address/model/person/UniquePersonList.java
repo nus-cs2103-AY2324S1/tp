@@ -118,12 +118,16 @@ public class UniquePersonList implements Iterable<Person> {
     /**
      * Clears all appointments of {@code Person} in {@code persons} that match the given {@code LocalDate date}.
      */
-    public void clearAppointments(LocalDate date) {
+    public boolean clearAppointments(LocalDate date) {
+        boolean isCleared = false;
         for (Person person: internalList) {
             if (person.isSameAppointmentDate(date)) {
                 setPerson(person, person.clearAppointment());
+                isCleared = true;
             }
         }
+
+        return isCleared;
     }
 
     /**

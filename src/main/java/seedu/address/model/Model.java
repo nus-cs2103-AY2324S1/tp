@@ -106,5 +106,5 @@ public interface Model {
      */
     String gatherEmails(GatherEmailPrompt prompt);
 
-    void clearAppointments(LocalDate date);
+    boolean clearAppointments(LocalDate date);
 }
