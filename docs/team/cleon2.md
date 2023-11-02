@@ -14,15 +14,31 @@ journey.
 
 Given below are my contributions to the project.
 
-* **New Feature**:
-    * What it does:
-    * Justification:
-    * Highlights:
-    * Credits:
+* **Star Command**:
+    * What it does: Enables the starring of a date
+    * Justification: To make it easier to identify a date who you like
+    * Highlights: Created new classes and fields to implement the feature
 
-* **New Feature**:
 
-* **Code contributed**: [RepoSense link]()
+* **Unstar Command**:
+  * What it does: Enables the unstarring of a date
+  * Justification: To unstar dates that we no longer like
+  * Highlights: Created new classes and fields to implement the feature
+
+* **Income field**:
+  * What it does: Added income field for each date
+  * Justification: Income is an important factor as well in dating.
+  * Highlights: Created new classes and fields to implement the feature
+
+* **Unit test cases**:
+  * What it does: Added unit test cases for other commands that outside of those I have implemented, including 
+  setPreferences
+  * Justification: Unit tests are essential to prevent bugs
+  * Highlights: Created new classes and fields to implement the feature
+
+
+
+* **Code contributed**: [RepoSense link](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=cleon2&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByAuthors&breakdown=true&checkedFileTypes=docs~functional-code~test-code&since=2023-09-22)
 
 * **Project management**:
 

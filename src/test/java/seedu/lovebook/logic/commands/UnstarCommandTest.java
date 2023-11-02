@@ -77,7 +77,7 @@ public class UnstarCommandTest {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
 
         Index outOfBoundIndex = INDEX_SECOND_PERSON;
-        // ensures that outOfBoundIndex is still in bounds of lovebook book list
+        // ensures that outOfBoundIndex is still in bounds of LoveBook list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getLoveBook().getPersonList().size());
 
         UnstarCommand unstarCommand = new UnstarCommand(outOfBoundIndex);

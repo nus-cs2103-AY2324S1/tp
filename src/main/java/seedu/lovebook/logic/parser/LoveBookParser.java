@@ -10,6 +10,7 @@ import java.util.regex.Pattern;
 import seedu.lovebook.commons.core.LogsCenter;
 import seedu.lovebook.logic.commands.AddCommand;
 import seedu.lovebook.logic.commands.BestMatchCommand;
+import seedu.lovebook.logic.commands.BlindDateCommand;
 import seedu.lovebook.logic.commands.ClearCommand;
 import seedu.lovebook.logic.commands.Command;
 import seedu.lovebook.logic.commands.DeleteCommand;
@@ -19,9 +20,8 @@ import seedu.lovebook.logic.commands.FilterCommand;
 import seedu.lovebook.logic.commands.FindCommand;
 import seedu.lovebook.logic.commands.HelpCommand;
 import seedu.lovebook.logic.commands.ListCommand;
-import seedu.lovebook.logic.commands.ListPrefsCommand;
-import seedu.lovebook.logic.commands.RandomCommand;
 import seedu.lovebook.logic.commands.SetPrefCommand;
+import seedu.lovebook.logic.commands.ShowPrefCommand;
 import seedu.lovebook.logic.commands.SortCommand;
 import seedu.lovebook.logic.commands.StarCommand;
 import seedu.lovebook.logic.commands.UnstarCommand;
@@ -90,11 +90,12 @@ public class LoveBookParser {
         case FilterCommand.COMMAND_WORD:
             return new FilterCommandParser().parse(arguments);
 
-        case RandomCommand.COMMAND_WORD:
-            return new RandomCommand();
+        case BlindDateCommand.COMMAND_WORD:
+            System.out.println("Random command called");
+            return new BlindDateCommand();
 
-        case ListPrefsCommand.COMMAND_WORD:
-            return new ListPrefsCommand();
+        case ShowPrefCommand.COMMAND_WORD:
+            return new ShowPrefCommand();
 
         case StarCommand.COMMAND_WORD:
             return new StarCommandParser().parse(arguments);
