@@ -8,7 +8,7 @@ title: User Guide
 1. [Introduction](#introduction)
 2. [Quick Start](#quick-start)
 3. [Key Information](#key-information)
-   1. [User Interface](#user-interface) 
+   1. [User Interface](#user-interface)
    2. [Structure of a job application](#structure-of-a-job-application)
    3. [Valid statuses](#valid-statuses)
    4. [Valid job types](#valid-job-types)
@@ -24,8 +24,8 @@ title: User Guide
    6. [Editing an application: `edit`](#editing-an-application--edit)
    7. [Finding an application: `find`](#finding-an-application--find)
    8. [Sorting the applications: `sort`](#sorting-all-applications--sort)
-   9. [Interview Add Command](#adding-an-interview--interview-add) 
-   10. [Interview Delete Command](#deleting-an-application--delete) 
+   9. [Interview Add Command](#adding-an-interview--interview-add)
+   10. [Interview Delete Command](#deleting-an-application--delete)
    11. [Interview Edit Command](#editing-an-interview--interview-edit)
    12. [Clear Command](#clearing-all-applications--clear)
    13. [Exit Command](#exiting-the-programme--exit)
@@ -163,8 +163,8 @@ The following are valid interview types:
   ignored.<br>
     * e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
-* The same prefix cannot be used multiple times in the same command. 
-  * e.g. `add r/Cleaner c/Google c/Microsoft` is an invalid input. 
+* The same prefix cannot be used multiple times in the same command.
+  * e.g. `add r/Cleaner c/Google c/Microsoft` is an invalid input.
 
 
 * `INDEX` refers to the index number of the chosen application in the displayed application list and must be a _positive
