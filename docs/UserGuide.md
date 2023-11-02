@@ -157,7 +157,7 @@ Expected output upon success:<br>
 ![FindSuccess](images/FindSuccess.png)
 
 Expected output upon failure:
-* No field given:
+* No field or invalid arguments given:
 ```
 Invalid command format!  
 find: Finds all persons whose names contain any of the specified fields (case-insensitive for values) and displays them as a list with index numbers.  
@@ -165,8 +165,8 @@ Parameters: [n/NAME] [l/LICENCE PLATE] [n/NAME] [i/NRIC] [p/CONTACT NUMBER] [l/L
 At least one parameter must be present.  
 Example: find n/Alice Rodriguez
 ```
-* Field flag given but no value:<br>
-`Error: No value detected for the following field(s): `
+* Field prefix given but no value e.g. `n/ c/` :<br>
+`Error: No value detected for the following field(s): n/ c/`
 
 
 ### Deleting a client : `delete`
