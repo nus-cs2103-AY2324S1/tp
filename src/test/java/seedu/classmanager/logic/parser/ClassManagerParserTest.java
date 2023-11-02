@@ -35,6 +35,7 @@ import seedu.classmanager.logic.commands.HistoryCommand;
 import seedu.classmanager.logic.commands.ListCommand;
 import seedu.classmanager.logic.commands.LoadCommand;
 import seedu.classmanager.logic.commands.LookupCommand;
+import seedu.classmanager.logic.commands.MarkAbsentAllCommand;
 import seedu.classmanager.logic.commands.MarkAbsentCommand;
 import seedu.classmanager.logic.commands.MarkPresentAllCommand;
 import seedu.classmanager.logic.commands.MarkPresentCommand;
@@ -125,6 +126,13 @@ public class ClassManagerParserTest {
                         + PREFIX_STUDENT_NUMBER + student.getStudentNumber() + TEST_FIRST_TUTORIAL_DESC);
         assertEquals(new MarkAbsentCommand(Index.fromOneBased(TEST_FIRST_TUTORIAL),
                 student.getStudentNumber()), command);
+    }
+
+    @Test
+    public void parseCommand_markAbsentAll() throws Exception {
+        MarkAbsentAllCommand command = (MarkAbsentAllCommand) parser
+                .parseCommand(MarkAbsentAllCommand.COMMAND_WORD + TEST_FIRST_TUTORIAL_DESC, true);
+        assertEquals(new MarkAbsentAllCommand(Index.fromOneBased(TEST_FIRST_TUTORIAL)), command);
     }
 
     @Test
