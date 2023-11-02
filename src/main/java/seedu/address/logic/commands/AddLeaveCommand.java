@@ -81,6 +81,10 @@ public class AddLeaveCommand extends Command {
         }
         if (endDate == null) {
             if (employeeToAddLeave.getAnnualLeave().isValidAddLeave(startDate, startDate)) {
+                if (startDate.equals(LocalDate.now())
+                        && employeeToAddLeave.getAttendanceStorage().getTodayAttendance() != null) {
+                    employeeToAddLeave.getAttendanceStorage().markPresent(LocalDate.now());
+                }
                 employeeToAddLeave.getAnnualLeave().addLeave(startDate);
             } else {
                 throw new CommandException(AnnualLeave.MESSAGE_LEAVE_CONSTRAINTS);
@@ -90,6 +94,10 @@ public class AddLeaveCommand extends Command {
                 throw new CommandException(AnnualLeave.MESSAGE_INVALID_LEAVE);
             }
             if (employeeToAddLeave.getAnnualLeave().isValidAddLeave(startDate, endDate)) {
+                if (!startDate.isBefore(LocalDate.now()) && !endDate.isAfter(LocalDate.now())
+                        && employeeToAddLeave.getAttendanceStorage().getTodayAttendance() != null) {
+                    employeeToAddLeave.getAttendanceStorage().markPresent(LocalDate.now());
+                }
                 employeeToAddLeave.getAnnualLeave().addLeave(startDate, endDate);
             } else {
                 throw new CommandException(AnnualLeave.MESSAGE_LEAVE_CONSTRAINTS);
