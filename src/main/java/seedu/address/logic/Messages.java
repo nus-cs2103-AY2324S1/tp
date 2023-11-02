@@ -56,6 +56,19 @@ public class Messages {
     }
 
     /**
+     * Formats the OvertimeHours of {@code employee} for display to the user.
+     */
+    public static String formatOvertimeHours(Employee employee) {
+        final StringBuilder builder = new StringBuilder();
+        builder.append(employee.getName())
+                .append("; Position: ")
+                .append(employee.getPosition())
+                .append("; Id: ")
+                .append(employee.getId());
+        return builder.toString();
+    }
+
+    /**
      * Formats the Leaves of {@code employee} for display to the user.
      */
     public static String formatLeaves(Employee employee) {

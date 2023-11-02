@@ -12,7 +12,7 @@ public class OvertimeHours implements Comparable<OvertimeHours> {
     public final int value;
 
     /**
-     * Constructs a {@code OvertimeSalary}.
+     * Constructs a {@code OvertimeHours}.
      */
     public OvertimeHours(int hours) {
         value = hours;
@@ -24,7 +24,7 @@ public class OvertimeHours implements Comparable<OvertimeHours> {
 
     @Override
     public String toString() {
-        return value + " overtime hours";
+        return value + " hours";
     }
 
     @Override

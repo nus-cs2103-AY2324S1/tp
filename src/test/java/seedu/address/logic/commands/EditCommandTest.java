@@ -71,7 +71,8 @@ public class EditCommandTest {
                 .withPosition(VALID_POSITION_BOB)
                 .withPhone(VALID_PHONE_BOB)
                 .withDepartments(VALID_DEPARTMENT_IT)
-                .withSalary(VALID_SALARY_BOB).build();
+                .withSalary(VALID_SALARY_BOB)
+                .build();
         EditCommand editCommand = new EditCommand(indexLastEmployee, descriptor);
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_EMPLOYEE_SUCCESS,
