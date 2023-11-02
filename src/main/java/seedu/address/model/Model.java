@@ -101,4 +101,9 @@ public interface Model {
      * Retrieves the saved random index based on the current filtered deck list.
      */
     Index getRandomIndex() throws RandomIndexNotInitialisedException;
+
+    /**
+     * Reset the random index so that the random index is not preserved over things like filtering, searching, etc.
+     */
+    void resetRandomIndex();
 }

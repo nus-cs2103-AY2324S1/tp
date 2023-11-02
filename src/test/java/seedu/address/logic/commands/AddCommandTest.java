@@ -181,6 +181,11 @@ public class AddCommandTest {
         public Index getRandomIndex() {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public void resetRandomIndex() {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     /**

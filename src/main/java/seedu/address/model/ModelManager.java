@@ -168,4 +168,9 @@ public class ModelManager implements Model {
         }
         return this.randomIndex;
     }
+
+    @Override
+    public void resetRandomIndex() {
+        this.randomIndex = null;
+    }
 }

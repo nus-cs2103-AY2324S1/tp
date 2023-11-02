@@ -134,4 +134,11 @@ public class ModelManagerTest {
             fail();
         }
     }
+
+    @Test
+    public void resetRandomIndex() {
+        modelManager.setRandomIndex(Index.fromOneBased(1));
+        modelManager.resetRandomIndex();
+        assertEquals(modelManager, new ModelManager());
+    }
 }

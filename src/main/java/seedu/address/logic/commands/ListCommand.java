@@ -37,6 +37,7 @@ public class ListCommand extends Command {
         requireNonNull(model);
         Predicate<Card> predicate = predicates.stream().reduce((card -> true), (Predicate::and));
         model.updateFilteredCardList(predicate);
+        model.resetRandomIndex();
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }
