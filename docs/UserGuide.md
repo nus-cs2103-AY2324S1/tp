@@ -113,7 +113,8 @@ Examples:
 
 ![add success](images/addSuccess.png)
 
-* `add n/Alex Yeoh pos/Software Engineer id/EID2023-1234 p/98561234 e/alexyeoh2@example.com s/$9,500 d/IT` is invalid because `name` and `id` already exists in the records.
+* `add n/Charlotte Oliveiro pos/Software Engineer id/EID2023-1234 p/98561234 e/alexyeoh2@example.com s/$9,500 d/IT` is
+  invalid because `id` already exists in the records.
 
 ![add failure](images/addFailure.png)
 
