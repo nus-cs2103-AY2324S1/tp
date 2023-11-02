@@ -39,7 +39,7 @@ public class PaidCommand extends Command {
         }
 
         Person personToMarkPaid = lastShownList.get(targetIndex.getZeroBased());
-      
+        
         model.purgeAddressBook();
         model.markPersonPaid(personToMarkPaid);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
