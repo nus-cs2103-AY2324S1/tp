@@ -111,7 +111,7 @@ public class EditCommandTest {
                 firstTranslatedWord.getWord(), firstTranslatedWord.getLanguage()
         });
 
-        CommandTestUtil.assertCommandFailure(editCommand, model, Messages.MESSAGE_DUPLICATE_FLASHCARD);
+        CommandTestUtil.assertCommandFailure(editCommand, model, EditCommand.MESSAGE_DUPLICATE_FLASHCARD);
     }
 
     @Test
@@ -126,7 +126,7 @@ public class EditCommandTest {
                 new String[]{originalWord.getWord(), originalWord.getLanguage(),
                         translatedWord.getWord(), translatedWord.getLanguage()});
 
-        CommandTestUtil.assertCommandFailure(editCommand, model, Messages.MESSAGE_DUPLICATE_FLASHCARD);
+        CommandTestUtil.assertCommandFailure(editCommand, model, EditCommand.MESSAGE_DUPLICATE_FLASHCARD);
     }
 
     @Test
