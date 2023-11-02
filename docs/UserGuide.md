@@ -287,3 +287,4 @@ Action     | Format, Examples
 **addEvent** | `addEvent d/DESCRIPTION ts/START_DATE_TIME te/END_DATE_TIME` <br> e.g., `addEvent d/Cry about deadlines ts/2023-01-01 00:01 te/2023-12-31 23:59`
 **deleteEvent** | `deleteEvent d/DATE s/START_TIME` <br> e.g., `deleteEvent d/12/12/2012 s/2200`
 **viewEvents** | `viewEvents`
+**editContactEvent** | `editContactEvent PERSON_INDEX EVENT_INDEX [d/DESCRIPTION] [ts/NEW_START_DATE_TIME][te/NEW_END_DATE_TIME]`
