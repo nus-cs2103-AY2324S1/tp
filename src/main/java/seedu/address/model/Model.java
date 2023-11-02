@@ -5,7 +5,9 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.commons.core.index.Index;
 import seedu.address.model.card.Card;
+import seedu.address.model.exceptions.RandomIndexNotInitialisedException;
 import seedu.address.model.goal.Goal;
 
 /**
@@ -51,6 +53,11 @@ public interface Model {
     ReadOnlyDeck getDeck();
 
     /**
+     * Returns the Deck size
+     */
+    int getDeckSize();
+
+    /**
      * Returns true if a Card with the same identity as {@code person} exists in the Deck.
      */
     boolean hasCard(Card card);
@@ -85,6 +92,21 @@ public interface Model {
      * Replaces Deck data with the data in {@code deck}.
      */
     public void setDeck(ReadOnlyDeck deck);
+
+    /**
+     * Saves a random index based on the current filtered deck list.
+     */
+    void setRandomIndex(Index randomIndex);
+
+    /**
+     * Retrieves the saved random index based on the current filtered deck list.
+     */
+    Index getRandomIndex() throws RandomIndexNotInitialisedException;
+
+    /**
+     * Reset the random index so that the random index is not preserved over things like filtering, searching, etc.
+     */
+    void resetRandomIndex();
 
     /**
      * Sets new target for goal.

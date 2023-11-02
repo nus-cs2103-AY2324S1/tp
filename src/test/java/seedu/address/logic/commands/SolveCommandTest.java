@@ -141,4 +141,28 @@ public class SolveCommandTest {
         // different Card -> returns false
         assertFalse(solveCommand.equals(otherSolveCommand));
     }
+
+    @Test
+    public void execute_withValidRandomIndex_success() {
+        // to make it is valid, make sure random index has been set in model.
+        Model modelToUse = new ModelManager(model.getDeck(), new UserPrefs());
+        modelToUse.setRandomIndex(Index.fromOneBased(1));
+
+        SolveCommand solveCommand = new SolveCommand(Index.RANDOM);
+
+        String expectedMessage = String.format(SolveCommand.MESSAGE_SOLVE_CARD_SUCCESS,
+                Messages.formatSolve(modelToUse.getFilteredCardList().get(0), INDEX_FIRST_CARD));
+
+        Model expectedModel = new ModelManager(new Deck(modelToUse.getDeck()), new UserPrefs());
+
+        assertCommandSuccess(solveCommand, modelToUse, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_withInvalidRandomIndex_failure() {
+        // attempt to run solve without running random first (i.e. random index not set)
+        SolveCommand solveCommand = new SolveCommand(Index.RANDOM);
+
+        assertCommandFailure(solveCommand, model, Messages.MESSAGE_RANDOM_INDEX_NOT_INITIALISED);
+    }
 }

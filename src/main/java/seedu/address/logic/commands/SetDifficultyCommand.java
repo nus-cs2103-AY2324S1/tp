@@ -11,6 +11,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.card.Card;
 import seedu.address.model.card.Difficulty;
+import seedu.address.model.exceptions.RandomIndexNotInitialisedException;
 
 /**
  * Set the difficulty of a Card using its displayed index from the Deck.
@@ -50,24 +51,37 @@ public class SetDifficultyCommand extends Command {
 
         List<Card> lastShownList = model.getFilteredCardList();
 
-        if (targetIndex.getZeroBased() >= lastShownList.size()) {
+        Index actualIndex;
+
+        if (targetIndex.equals(Index.RANDOM)) {
+            try {
+                actualIndex = model.getRandomIndex();
+            } catch (RandomIndexNotInitialisedException e) {
+                throw new CommandException(Messages.MESSAGE_RANDOM_INDEX_NOT_INITIALISED);
+            }
+        } else {
+            actualIndex = targetIndex;
+        }
+
+        if (actualIndex.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_CARD_DISPLAYED_INDEX);
         }
-        Card cardToSetDifficulty = lastShownList.get(targetIndex.getZeroBased());
+        Card cardToSetDifficulty = lastShownList.get(actualIndex.getZeroBased());
 
         switch (difficulty) {
         case EASY: return updatePracticeDate(model,
-                difficulty, cardToSetDifficulty, Messages.MESSAGE_CARDS_SET_DIFFICULTY_VIEW_EASY);
+                difficulty, cardToSetDifficulty, Messages.MESSAGE_CARDS_SET_DIFFICULTY_VIEW_EASY, actualIndex);
         case MEDIUM: return updatePracticeDate(model,
-                difficulty, cardToSetDifficulty, Messages.MESSAGE_CARDS_SET_DIFFICULTY_VIEW_MEDIUM);
+                difficulty, cardToSetDifficulty, Messages.MESSAGE_CARDS_SET_DIFFICULTY_VIEW_MEDIUM, actualIndex);
         case HARD: return updatePracticeDate(model,
-                difficulty, cardToSetDifficulty, Messages.MESSAGE_CARDS_SET_DIFFICULTY_VIEW_HARD);
+                difficulty, cardToSetDifficulty, Messages.MESSAGE_CARDS_SET_DIFFICULTY_VIEW_HARD, actualIndex);
         default:
             throw new CommandException(difficulty + Messages.MESSAGE_CARDS_SET_DIFFICULTY_VIEW_INVALID);
         }
     }
 
-    private CommandResult updatePracticeDate(Model model, Difficulty difficulty, Card card, String message) {
+    private CommandResult updatePracticeDate(Model model, Difficulty difficulty,
+                                             Card card, String message, Index targetIndex) {
         assert(model != null);
         assert(difficulty != null);
         assert(!message.isEmpty());

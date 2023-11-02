@@ -19,6 +19,7 @@ import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.HintCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.PractiseCommand;
+import seedu.address.logic.commands.RandomCommand;
 import seedu.address.logic.commands.SetDifficultyCommand;
 import seedu.address.logic.commands.SolveCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -86,6 +87,8 @@ public class DeckParser {
             return new ClearCommand();
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
+        case RandomCommand.COMMAND_WORD:
+            return new RandomCommand();
 
         case HintCommand.COMMAND_WORD:
             return new HintCommandParser().parse(arguments);

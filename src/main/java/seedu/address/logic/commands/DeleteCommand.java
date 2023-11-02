@@ -48,6 +48,7 @@ public class DeleteCommand extends Command {
 
         Card cardToDelete = lastShownList.get(targetIndex.getZeroBased());
         model.deleteCard(cardToDelete);
+        model.resetRandomIndex();
 
         return new CommandResult(String.format(MESSAGE_DELETE_CARD_SUCCESS, Messages.format(cardToDelete)));
     }

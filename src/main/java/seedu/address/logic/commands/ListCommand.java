@@ -48,6 +48,7 @@ public class ListCommand extends Command {
         Predicate<Card> predicate = predicates.stream().reduce(PREDICATE_SHOW_ALL_CARDS, Predicate::and);
 
         model.updateFilteredCardList(predicate);
+        model.resetRandomIndex();
         return new CommandResult(MESSAGE_SUCCESS);
     }
 
