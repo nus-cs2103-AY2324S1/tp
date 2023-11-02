@@ -23,5 +23,4 @@ class DeleteTaskCommandParserTest {
         assertParseFailure(parser, "a",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteTaskCommand.MESSAGE_USAGE));
     }
-
 }
