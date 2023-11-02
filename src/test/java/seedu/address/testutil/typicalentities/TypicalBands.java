@@ -1,5 +1,7 @@
 package seedu.address.testutil.typicalentities;
 
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_ACE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOOM;
 import static seedu.address.testutil.typicalentities.TypicalMusicians.ALICE;
 import static seedu.address.testutil.typicalentities.TypicalMusicians.BOB;
 import static seedu.address.testutil.typicalentities.TypicalMusicians.CARL;
@@ -21,10 +23,10 @@ public class TypicalBands {
 
     // Bands without Musicians
 
-    public static final Band ACE = new BandBuilder().withName("Ace Jazz")
+    public static final Band ACE = new BandBuilder().withName(VALID_NAME_ACE)
         .withGenres("jazz").build();
 
-    public static final Band BOOM = new BandBuilder().withName("Boom Rock")
+    public static final Band BOOM = new BandBuilder().withName(VALID_NAME_BOOM)
         .withGenres("rock").build();
 
     // Bands with Musicians

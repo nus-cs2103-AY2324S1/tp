@@ -1,6 +1,7 @@
 package seedu.address.logic.commands.band;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_GENRE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
 import seedu.address.commons.util.ToStringBuilder;
@@ -21,7 +22,8 @@ public class AddBandCommand extends Command {
             + "Parameters: "
             + PREFIX_NAME + "NAME\n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_NAME + "My garage band";
+            + PREFIX_NAME + "My garage band "
+            + PREFIX_GENRE + "rock";
 
     public static final String MESSAGE_SUCCESS = "New band added: %1$s";
     public static final String MESSAGE_DUPLICATE_BAND = "This band already exists in the address book";

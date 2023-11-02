@@ -60,8 +60,21 @@ public class Messages {
      */
     public static String format(Band band) {
         final StringBuilder builder = new StringBuilder();
-        builder.append(band.getName()).append("; Genres: ");
+        builder.append(band.getName())
+                .append("; Genres: ");
         band.getGenres().forEach(builder::append);
+        return builder.toString();
+    }
+
+    /**
+     * Formats the {@code band} for display to the user.
+     */
+    public static String format(Band band, Musician musician) {
+        final StringBuilder builder = new StringBuilder();
+        builder.append("Band Name: ")
+                .append(band.getName())
+                .append("; Musician Name: ")
+                .append(musician.getName());
         return builder.toString();
     }
 

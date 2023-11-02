@@ -42,7 +42,7 @@ public class UniqueBandList implements Iterable<Band> {
 
     /**
      * Adds a band to the list.
-     * The musician must not already exist in the list.
+     * The band must not already exist in the list.
      */
     public void add(Band toAdd) {
         requireNonNull(toAdd);
