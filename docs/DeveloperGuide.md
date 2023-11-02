@@ -61,7 +61,7 @@ The _Sequence Diagram_ below shows how the components interact with each other f
 Each of the four main components (also shown in the diagram above),
 
 - defines its _API_ in an `interface` with the same name as the Component.
-- implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point.
+- implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point).
 
 For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
 
@@ -104,9 +104,9 @@ The sequence diagram below illustrates the interactions within the `Logic` compo
 How the `Logic` component works:
 
 1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
-1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`.
-1. The command can communicate with the `Model` when it is executed (e.g. to delete a person).
-1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
+2. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`.
+3. The command can communicate with the `Model` when it is executed (e.g. to delete a person).
+4. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
 
@@ -158,27 +158,62 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Edit Contacts/Meetings feature
+
+Both the edit contact command `editc` and edit meeting command `editm` are implemented quite similarly due to the similarities between the `Person` and `Meeting` classes.
+
+This section shall therefore only go in deep detail for the implementation of the `editm` command. However, the `editc` equivalent of certain commands used by `editm` will be detailed, such that the implementation of `editc` can be fully derived.
+
+The class diagrams for both edit commands differ from the other commands in that an additional `EditMeetingDescriptor` or `EditPersonDescriptor` class is used to create the commands. The diagram for `editm` is as seen below.
+
+![EditMeetingClassDiagram](images/edit/EditMeetingClassDiagram.png)
+
+To start off, both `editc` and `editm` take in an index as their first argument, which refers to a `Person` in the displayed person list, or a `Meeting` in the displayed meeting list respectively.
+
+Next, both commands take in a variable number of optional arguments based on the arguments used by the `addc` and `addm` commands. This allows the user to input only the fields they wish to edit in the chosen `Person` or `Meeting` object, as opposed to having to type in every field.
+
+Using `editm 3 m/Friend meetup a/Mall` as an example, when input by the user, an instance of an `EditMeetingCommand` (`EditCommand` in the case of `editc` with its respective `Person` fields as arguments) is created as shown in the following Sequence Diagram.
+
+![CreateEditMeetingCommandSequenceDiagram](images/edit/CreateEditMeetingCommand-Create_EditMeetingCommand.png)
+
+As seen above, before the `EditMeetingCommandParser` creates the `EditMeetingCommand` object, it first creates an instance of an `EditMeetingDescriptor` (`EditPersonDescriptor` in the case of `editc`). This descriptor stores the new information of the fields to be edited based on the user input. From our example, it would store the `Title: Friend meetup` and `Location: Mall`.
+
+Once the instance of `EditMeetingCommand` is created, it is executed by the `LogicManager`. During execution, the current `Meeting` object referenced by the input index (3 in our example) is obtained from the meeting list returned by `getFilteredMeetingList`.
+
+Next, a new instance of `Meeting` is created using the fields from the `EditMeetingDescriptor`. Any fields not present in the descriptor us obtained from the old `Meeting` object from the previous step, as these fields do not need to be edited. From our example, the `START`, `END`, `TAG` and `ATTENDEE_LIST` will be obtained from the current `Meeting` instance as the Descriptor only contains the `TITLE` and `LOCATION` fields.
+
+Finally, the old `Meeting` object is replaced with the new instance, and the `ModelManager` is updated. These steps are denoted in the Sequence Diagram below.
+
+![EditMeetingSequenceDiagram](images/edit/EditMeetingSequenceDiagram-Execute_EditMeetingCommand.png)
+
+#### Design Considerations and Rationale
+
+1. `editm` allows the user to edit every field of `Meeting` apart from the attendee list.
+   - The commands `addmc` and `rmmc` are used to modify the attendee list of a meeting instead.
+   - This retains the identity of the edit commands as commands that modify field information, as opposed to `addmc` and `rmmc` which can be seen as commands that link multiple objects together.
+
 ### View Contacts/Meetings feature
 
 #### Implementation
 
-Both the view contact command `viewc` and the view meeting command `viewm` are implemented in the exact same way due to the similarities between the `Person` and `Meeting` classes.
+Just like the Edit commands, the view contact command `viewc` and the view meeting command `viewm` are implemented in the exact same way due to the similarities between the `Person` and `Meeting` classes.
 
-As such, this section shall only detail the implementation of the `viewc` command. However the implementation of `viewm` can be derived by replacing some `Person` related functions/classes/objects with its `Meeting` counterpart.
+As such, this section shall only detail the implementation of the `viewc` command. However, the implementation of `viewm` can be derived by replacing some `Person` related functions/classes/objects with its `Meeting` counterpart.
 
-`viewc` and `viewm` both take in an index as their only argument. This refers to the `Person` or `Meeting` index respectively as displayed on either the Contact list or Meeting list.
+`viewc` and `viewm` both take in an index as their only argument, which refers to a `Person` in the displayed person list, or a `Meeting` in the displayed meeting list respectively.
 
-When `viewc 2` is used, an instance of a `ViewContactCommand` (`ViewMeetingCommand` in the case of `viewm`) is created as shown in the following Sequence Diagram. This step does not differ from the way other commands have been shown to be created. The argument for our example would just be `2`, which would be stored as the `targetIndex` field of the `ViewContactCommand` object.
+Using `viewc 2` as an example, when input by the user, an instance of a `ViewContactCommand` (`ViewMeetingCommand` in the case of `viewm`) is created as shown in the following Sequence Diagram. This step does not differ from the way other commands have been shown to be created. The argument for our example would just be `2`, which would be stored as the `targetIndex` field of the `ViewContactCommand` object.
 
-![ViewContactCommandSequenceDiagram](images/tracing/ViewContactCommandSequenceDiagram-ViewContactCommandSequence.png)
+![CreateViewContactCommandSequenceDiagram](images/view/CreateViewContactCommand-Create_ViewContactCommand.png)
 
-Once the instance of `ViewContactCommand` is created, it is executed. During execution, the command stores the contents of its `targetIndex` field in the `ModelManager` using its `setViewedPersonIndex` method as shown in the next Sequence Diagram. For `ViewMeetingCommand` it would use the `setViewedMeetingIndex` method instead.
+Once the instance of `ViewContactCommand` is created, it is executed by the `LogicManager`. During execution, the command stores the contents of its `targetIndex` field in the `ModelManager` using its `setViewedPersonIndex` method as shown in the next Sequence Diagram. For `ViewMeetingCommand` it would use the `setViewedMeetingIndex` method instead.
 
-![StoreViewedItemsToModelDiagram](images/tracing/ViewCommandsSequenceDiagram-StoreViewedItemsToModel.png)
+![StoreViewedItemsToModelDiagram](images/view/ViewCommandsSequenceDiagram-StoreViewedItemsToModel.png)
 
 Once the indexes of the `Person` and `Meeting` objects to view (if any) are stored in `ModelManager`, their corresponding `Person` and `Meeting` objects (in this case the 2nd `Person` as displayed on the list) are obtained by the `MainWindow` as a `Pair` through the `getViewedItems` method of the `LogicManager` class. As such, both objects can then be forwarded to the `InfoDisplayPanel` using `setViewedModel`, which then displays detailed information of both objects. This process is denoted in the final Sequence Diagram below.
 
-![ForwardViewedPersonMeetingtoUiDiagram](images/tracing/UiViewItemsSequenceDiagram-ForwardViewedPerson&MeetingToUi.png)
+![ForwardViewedPersonMeetingtoUiDiagram](images/view/UiViewItemsSequenceDiagram-ForwardViewedPerson&MeetingToUi.png)
+
 #### Design Considerations and Rationale
 
 1. Passing viewed `Person` and `Meeting` from Model to Ui through Logic:
@@ -346,31 +381,31 @@ _{more aspects and alternatives to be added}_
 
 ### Keeping track of last meeting with contact
 
-Keeping track of the user's last meeting with their contact is facilitated by the addition of a `LastContactedTime` object to `Person`.  
-Thus, each instance of `Person` will contain an immutable `LastContactedTime` object that stores the user's last meeting with that contact.  
+Keeping track of the user's last meeting with their contact is facilitated by the addition of a `LastContactedTime` object to `Person`.
+Thus, each instance of `Person` will contain an immutable `LastContactedTime` object that stores the user's last meeting with that contact.
 The following steps shows how `LastContactedTime` is implemented and utilized in the application.
 
 Step 1. The user inputs the `addc` command into the `CommandBox` input field, with the added field `l/[LAST_CONTACTED_TIME]`.
 
-The following diagram summarizes steps 2 to 6:  
+The following diagram summarizes steps 2 to 6:
 <img src="images/LastContactedTime1.png" width="1000" />
 
-Step 2. Entering a correct command with the `Enter` key then calls `execute` on `LogicManager`.  
-Step 3. `LogicManager` then calls `AddressBookParser#parseCommand(commandText)` on the `commandText` String, which recognizes that it is an `addc` command.  
-Step 4. `AddressBookParser` then calls `AddCommandParser#parse()` on the command arguments.  
-Step 5. `AddCommandParser` then calls `ParserUtil#parseContactTime()` which parses the last contacted time and returns a `LocalDateTime` object called `lastContactedTime`.  
+Step 2. Entering a correct command with the `Enter` key then calls `execute` on `LogicManager`.
+Step 3. `LogicManager` then calls `AddressBookParser#parseCommand(commandText)` on the `commandText` String, which recognizes that it is an `addc` command.
+Step 4. `AddressBookParser` then calls `AddCommandParser#parse()` on the command arguments.
+Step 5. `AddCommandParser` then calls `ParserUtil#parseContactTime()` which parses the last contacted time and returns a `LocalDateTime` object called `lastContactedTime`.
 Step 6. The `lastContactedTime` object is then passed to the `Person` constructor, which creates a new `Person` that calls the `LastContactedTime` constructor with it.
 
 The following diagram summarizes steps 7 and 8:
 <img src="images/LastContactedTime2.png" width="1000" />
 
-Step 7. The completed `Person` is passed to an `AddCommand` constructor which return a new `AddCommand` that can be executed.  
-Step 8. `LogicManager` then executes the `AddCommand` on the application model.  
-Step 9. Futher execution is carried out, which like before adds the `Person` object to the list of `Person`s in the `Model`, and updates the `Storage` with this new `Person`.
+Step 7. The completed `Person` is passed to an `AddCommand` constructor which return a new `AddCommand` that can be executed.
+Step 8. `LogicManager` then executes the `AddCommand` on the application model.
+Step 9. Further execution is carried out, which like before adds the `Person` object to the list of `Person`s in the `Model`, and updates the `Storage` with this new `Person`.
 
 #### Design Consideration: Updating last meeting with contact
 
-Solution:  
+Solution:
 This is facilitated by the addition of the `MarkDoneCommand`. When a meeting is marked as done, the attendees of the meeting will be updated with their LastContactedTime field updated to the end time of the meeting.
 
 ---
@@ -402,7 +437,7 @@ This is facilitated by the addition of the `MarkDoneCommand`. When a meeting is 
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                   | I want to …​                    | So that I can…​                       |
+| Priority | As a …​                                | I want to …​                 | So that I can…​                    |
 | -------- | ----------------------------------------- | ------------------------------- | ------------------------------------- |
 | `[EPIC]` | agent who has meetings                    | have a meeting schedule         | keep track of them                    |
 | `* * *`  | agent                                     | create new meetings             |                                       |
@@ -479,8 +514,6 @@ _{More to be added}_
 2.  OutBook shows a list of meetings.
 3.  User requests to view details of a specific meeting.
 4.  OutBook shows the details of the meeting.
-4.  User requests to remove a specific contact from the meeting.
-5.  OutBook removes the contact from the meeting.
 5.  User requests to remove a specific contact from the meeting.
 6.  OutBook removes the contact from the meeting.
 
@@ -593,16 +626,16 @@ testers are expected to do more *exploratory* testing.
 
    1. Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   2. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
-1. Saving window preferences
+2. Saving window preferences
 
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-   1. Re-launch the app by double-clicking the jar file.<br>
+   2. Re-launch the app by double-clicking the jar file.<br>
       Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
+3. _{ more test cases …​ }_
 
 ### Deleting a person
 
@@ -610,16 +643,16 @@ testers are expected to do more *exploratory* testing.
 
    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
-   1. Test case: `delete 1`<br>
+   2. Test case: `delete 1`<br>
       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 
-   1. Test case: `delete 0`<br>
+   3. Test case: `delete 0`<br>
       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+   4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
+2. _{ more test cases …​ }_
 
 ### Saving data
 
@@ -627,4 +660,4 @@ testers are expected to do more *exploratory* testing.
 
    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
-1. _{ more test cases …​ }_
+2. _{ more test cases …​ }_
