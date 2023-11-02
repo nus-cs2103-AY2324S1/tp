@@ -267,12 +267,12 @@ Generates a report with details on leaves and overtime for an employee.
 
 Format: `report EMPLOYEE_ID`
 
-* Generates a report for the employee with the specified `EMPLOYEE_ID`.
+* Generates and downloads a report for the employee with the specified `EMPLOYEE_ID`.
 * The employee id refers to each employee's unique employee id.
 * The employee id **must follow the EID format** (EID[4 digits]-[4 digits])
 
 Examples:
-* `report EID1234-5678` generates a report for the employee with employee id EID1234-5678 in the employee list.
+* `report EID1234-5678` generates and downloads a report for the employee with employee id EID1234-5678 in the employee list.
 
 ![report success](images/reportSuccess.jpg)
 
