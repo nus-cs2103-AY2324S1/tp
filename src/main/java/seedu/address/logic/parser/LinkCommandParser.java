@@ -36,7 +36,7 @@ public class LinkCommandParser implements Parser<LinkCommand> {
         switch (state) {
         case STUDENT:
             if (model.getCurrentlyDisplayedPerson() == null) {
-                throw new ParseException("No student is shown");
+                throw new ParseException("No student is shown" + getStatefulUsageInfoPerson());
             }
             try {
                 studentName = model.getCurrentlyDisplayedPerson().getName();
@@ -47,7 +47,7 @@ public class LinkCommandParser implements Parser<LinkCommand> {
             }
         case SCHEDULE:
             if (model.getCurrentlyDisplayedLesson() == null) {
-                throw new ParseException("No lesson is shown");
+                throw new ParseException("No lesson is shown" + getStatefulUsageInfoLesson());
             }
             try {
                 studentName = ParserUtil.parseName(arguments);
@@ -57,7 +57,8 @@ public class LinkCommandParser implements Parser<LinkCommand> {
                 throw new ParseException(e.getMessage() + "\n" + getStatefulUsageInfoLesson());
             }
         default:
-            throw new ParseException("Link command is not available in this state" + state.toString());
+            throw new ParseException("Link command is not available in this state"
+                    + state.toString() + "\n" + getStatefulUsageInfoPerson() + "\n" + getStatefulUsageInfoLesson());
         }
     }
     private LinkCommand staticParse(String args) throws ParseException {
@@ -71,7 +72,7 @@ public class LinkCommandParser implements Parser<LinkCommand> {
 
     }
     public String getStaticUsageInfo() {
-        return "LinkTo command usage: linkTo "
+        return "Link command usage: link "
                 + "-student [STUDENT_NAME]"
                 + "-lesson [LESSON_NAME]"
                 + "\nExample: " + LinkCommand.COMMAND_WORD + " "
@@ -80,14 +81,14 @@ public class LinkCommandParser implements Parser<LinkCommand> {
     public String getStatefulUsageInfoPerson() {
         return "LinkTo command usage: linkTo "
                 + "[STUDENT_NAME]"
-                + "\nExample: " + LinkCommand.COMMAND_WORD + " "
+                + "\nExample: linkto "
                 + "Alice Pauline"
                 + "\nNote: This command is only available when a lesson is shown";
     }
     public String getStatefulUsageInfoLesson() {
         return "LinkTo command usage: linkTo "
                 + "[LESSON_NAME]"
-                + "\nExample: " + LinkCommand.COMMAND_WORD + " "
+                + "\nExample: linkto "
                 + "CS2103T lab1"
                 + "\nNote: This command is only available when a student is shown";
     }
