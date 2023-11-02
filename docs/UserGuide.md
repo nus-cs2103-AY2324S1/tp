@@ -75,8 +75,11 @@ The **GUI** is split up into 4 main sections.
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME c/CLASS_NUMBER`, `c/CLASS_NUMBER n/NAME` is also acceptable.
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
+* Extraneous parameters for commands that **do not** take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
+
+* Extraneous parameters for commands that **do** take in parameters will be considered as invalid.
+  e.g. if the command specifies `delete 123 s/A0249112A` or `delete s/A0249112A c/t11`, it will be considered as invalid. <br>
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </box>
@@ -157,6 +160,12 @@ Format: `list`
 Edits an existing student in the class manager.
 
 Format: `edit STUDENT_NUMBER [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [s/NEW_STUDENT_NUMBER] [c/CLASS_NUMBER]`
+
+<box type="warning" seamless>
+
+**Caution:**
+The student number entered __without__ the `s/` prefix will be the **old** student number.
+</box>
 
 * Edits the student with the student number `STUDENT_NUMBER`.
 * The STUDENT_NUMBER must be valid and exist.
