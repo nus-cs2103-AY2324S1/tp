@@ -259,6 +259,23 @@ Examples:
 * `bar s/` will show a bar chart categorized by student subject.
 * `bar d/2023` will show a bar chart categorized by months in year 2023.
 
+Below is the chart generated after entering `bar l/`.
+
+  ![result for 'bar l/'](images/ug_images/barResult.png)
+
+### Showing line chart
+Showing a line chart describing number of students enrolled in each month in a specific year.
+
+Format: `trend y/{year}`
+* {year} is a 4 digit number representing year
+* {} is not required
+
+Examples:
+* `trend y/2023` will show a line chart describing number of students enrolled
+in each month in year 2023.
+
+Below is the chart generated after typing `trend y/2023`
+   ![result for 'trend y/2023'](images/ug_images/trendResult.png)
 
 ### Export visual representation : `export`
 
@@ -321,4 +338,5 @@ Action     | Format, Examples
 **Clear**  | `clear`
 **Show Table** | `table prefix/`<br> or `table d/YEAR` <br>
 **Show Bar Chart** | `bar prefix/`<br> or `bar d/YEAR` <br>
+**Show Line Chart** | `trend y/{year}`
 **Help**   | `help`
