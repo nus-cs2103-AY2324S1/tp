@@ -15,7 +15,7 @@ organise and manage patient details faster than traditional GUI apps.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Quick start
+## [Quick start](#quick-start)
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
@@ -48,7 +48,7 @@ organise and manage patient details faster than traditional GUI apps.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Features
+## [Features](#features)
 
 <box type="info" seamless>
 
@@ -317,15 +317,40 @@ _Details coming soon ..._
 
 --------------------------------------------------------------------------------------------------------------------
 
-## FAQ
+## [FAQ](#faq)
+
+**Q**: What operating systems does HealthSync support?<br>
+**A**: HealthSync is a cross-platform application and supports Windows, macOS, and Linux. Simply follow the
+[installation guide](#quick-start) and download the jar file to use the application.
+
+**Q**: What are the advantages of using a CLI interface in HealthSync over traditional GUI apps?<br>
+**A**: HealthSync's CLI interface offers faster data entry and navigation for users who are comfortable with typing.
+It streamlines tasks and provides a more efficient way to manage patient details.
+
+**Q**: Can multiple users access Healthysync simultaneously, and how do I set up user accounts?<br>
+**A**: HealthSync is currently an application for a single user. Hence, it cannot be accessed simultaneously
+by different users.
+
+**Q**: How do I import patient data from external sources into HealthSync?<br>
+**A**: Datafile storing current patient data will be stored in `data/addressbook.json` by default under the same folder.
+You may import patient data and store into that file. However, do adhere to the data format present in the current file.
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains
        the data of your previous HealthSync home folder.
 
+**Q**: Can I use HealthSync offline, or does it require an internet connection?<br>
+**A**: HealthSync is designed to work offline, ensuring you can access and update patient data even when you don't have
+an internet connection.
+
+**Q**: What happens if there is a system crash or power outage while I'm using HealthSync?<br>
+**A**: HealthSync includes auto-save functionality to minimize data loss in case of unexpected events.
+The app will attempt to recover your work upon restart.
+
+
 --------------------------------------------------------------------------------------------------------------------
 
-## Known issues
+## [Known issues](#known-issues)
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only
    the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by
@@ -333,7 +358,7 @@ _Details coming soon ..._
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Command summary
+## [Command summary](#command-summary)
 
 | Action     | Shortcut | Format, Examples                                                                                                           |
 |------------|----------|----------------------------------------------------------------------------------------------------------------------------|
