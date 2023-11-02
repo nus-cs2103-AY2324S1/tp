@@ -268,6 +268,19 @@ Example
     </figcaption>
 </figure>
 
+#### Shorthand
+
+Alternatively, if you want to edit such the individual fields,
+a shorthand we have created is to use the field commands.
+
+For example, when we wish to change the lead field specifically
+
+Format: `lead INDEX hot`
+
+Or when we wish to change the email field
+
+Format: `email INDEX hot`
+
 [↑ Back to Table of Contents](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
