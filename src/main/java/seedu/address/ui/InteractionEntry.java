@@ -46,9 +46,8 @@ public class InteractionEntry extends UiPart<Region> {
         case FOLLOWUP_REQUIRED:
             outcome.getStyleClass().add("followup-required");
             break;
-        case UNKNOWN:
+        default:
             outcome.getStyleClass().add("unknown");
-            break;
         }
 
         System.out.println(outcome.getStyleClass());
