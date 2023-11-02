@@ -45,11 +45,33 @@ public class ExportCommandTest {
     }
 
     @Test
-    public void equals_objectsAreEqual_returnsTrue() {
+    public void equals_barObjectsAreEqual_returnsTrue() {
         Visual visual = new Visual("Bar");
         ExportCommand command1 = new ExportCommand(visual);
         ExportCommand command2 = new ExportCommand(visual);
         assertEquals(command1, command2);
+    }
+
+    @Test
+    public void equals_barObjectsAreSame_returnsTrue() {
+        Visual visual = new Visual("Bar");
+        ExportCommand command1 = new ExportCommand(visual);
+        assertEquals(command1, command1);
+    }
+
+    @Test
+    public void equals_tableObjectsAreEqual_returnsTrue() {
+        Visual visual = new Visual("Table");
+        ExportCommand command1 = new ExportCommand(visual);
+        ExportCommand command2 = new ExportCommand(visual);
+        assertEquals(command1, command2);
+    }
+
+    @Test
+    public void equals_tableObjectsAreSame_returnsTrue() {
+        Visual visual = new Visual("Table");
+        ExportCommand command1 = new ExportCommand(visual);
+        assertEquals(command1, command1);
     }
 
     @Test
