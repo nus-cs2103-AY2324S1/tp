@@ -9,7 +9,6 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.collections.transformation.SortedList;
 import seedu.address.model.task.exceptions.DuplicateTaskException;
 import seedu.address.model.task.exceptions.TaskNotFoundException;
 
@@ -83,7 +82,7 @@ public class TaskList implements Iterable<Task> {
      * Sorts tasks in the list according to the current sorting order setting of the list.
      */
     public void sortTasks(Comparator<Task> sortingOrder) {
-        internalList.setAll(new SortedList<Task>(internalList, sortingOrder));
+        internalList.sort(sortingOrder);
     }
 
 

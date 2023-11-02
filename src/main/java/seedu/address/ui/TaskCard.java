@@ -31,6 +31,6 @@ public class TaskCard extends UiPart<Region> {
         this.task = task;
         id.setText(displayedIndex + ". ");
         description.setText(task.getDescriptionString());
-        deadline.setText("Deadline. " + task.getDeadlineString());
+        deadline.setText("Deadline: " + task.getDeadlineString());
     }
 }
