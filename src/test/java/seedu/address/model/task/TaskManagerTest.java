@@ -28,7 +28,7 @@ class TaskManagerTest {
     @Test
     public void addTask_emptyTaskList_success() {
         taskManager.addTask(ASSIGNMENT);
-        assertTrue(taskManager.getTaskList().contains(ASSIGNMENT));
+        assertTrue(taskManager.hasTask(ASSIGNMENT));
     }
 
     @Test

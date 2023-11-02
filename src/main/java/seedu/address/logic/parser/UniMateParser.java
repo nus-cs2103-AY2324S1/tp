@@ -28,6 +28,7 @@ import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.SortCommand;
 import seedu.address.logic.commands.SortTasksCommand;
 import seedu.address.logic.commands.SwitchListCommand;
+import seedu.address.logic.commands.ViewContactEventsCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -120,6 +121,9 @@ public class UniMateParser {
 
         case DeleteTaskCommand.COMMAND_WORD:
             return new DeleteTaskCommandParser().parse(arguments);
+
+        case ViewContactEventsCommand.COMMAND_WORD:
+            return new ViewContactEventsCommandParser().parse(arguments);
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);

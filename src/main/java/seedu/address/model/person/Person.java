@@ -2,6 +2,7 @@ package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
@@ -104,6 +105,27 @@ public class Person {
 
         return otherPerson != null
                 && otherPerson.getName().equals(getName());
+    }
+
+    /**
+     * Adds an event to the calendar of this Person.
+     */
+    public void addEvent(Event toAdd) {
+        calendar.addEvent(toAdd);
+    }
+
+    /**
+     * Deletes an event at the specified time from the calendar of this person.
+     */
+    public void deleteEvent(LocalDateTime targetTime) {
+        calendar.deleteEventAt(targetTime);
+    }
+
+    /**
+     * Looks for an event at the specified time and returns it.
+     */
+    public Event findEvent(LocalDateTime targetTime) {
+        return calendar.findEventAt(targetTime).get();
     }
 
     /**

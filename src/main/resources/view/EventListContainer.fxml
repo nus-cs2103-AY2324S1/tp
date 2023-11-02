@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="555.0" minWidth="555.0" prefHeight="555.0" prefWidth="555.0" styleClass="pane-without-border" stylesheets="@DarkTheme.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <StackPane fx:id="eventListPlaceholder" prefHeight="518.0" prefWidth="555.0" styleClass="pane-without-border" stylesheets="@DarkTheme.css" VBox.vgrow="ALWAYS" />
+   </children>
+</VBox>

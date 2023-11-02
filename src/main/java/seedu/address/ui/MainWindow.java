@@ -4,6 +4,7 @@ import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Scene;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
@@ -12,10 +13,12 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.Person;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -25,6 +28,8 @@ public class MainWindow extends UiPart<Stage> {
 
     private static final String FXML = "MainWindow.fxml";
     private static final int BOTTOM_LIST_MODES = 2;
+    private static final int POPUP_LIST_HEIGHT = 500;
+    private static final int POPUP_LIST_WIDTH = 555;
 
     private final Logger logger = LogsCenter.getLogger(getClass());
 
@@ -204,6 +209,18 @@ public class MainWindow extends UiPart<Stage> {
         bottomListIndicator = (bottomListIndicator + 1) % BOTTOM_LIST_MODES;
     }
 
+    private void handleViewEventList(Index index) {
+        Person person = logic.getFilteredPersonList().get(index.getZeroBased());
+        Stage eventListStage = new Stage();
+        eventListStage.setResizable(false);
+        eventListStage.setTitle(person.getName().toString() + "'s Event List");
+        eventListStage.setMinHeight(POPUP_LIST_HEIGHT);
+        eventListStage.setMinWidth(POPUP_LIST_WIDTH);
+        EventListContainer root = new EventListContainer(person.getEventList());
+        eventListStage.setScene(new Scene(root.getRoot()));
+        eventListStage.show();
+    }
+
     public PersonListPanel getPersonListPanel() {
         return personListPanel;
     }
@@ -229,6 +246,10 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.isSwitchBottomList()) {
                 handleSwitchBottomList();
+            }
+
+            if (commandResult.isViewEvents()) {
+                handleViewEventList(commandResult.getEventViewIndex());
             }
 
             return commandResult;
