@@ -4,68 +4,11 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.shape.*?>
 
-<VBox minWidth="50" HBox.hgrow="NEVER" xmlns="http://javafx.com/javafx/17.0.2-ea"
+<VBox fx:id="columnContainer" minWidth="50" HBox.hgrow="NEVER" xmlns="http://javafx.com/javafx/17.0.2-ea"
       xmlns:fx="http://javafx.com/fxml/1">
     <StackPane>
         <Rectangle arcHeight="5.0" arcWidth="5.0" fill="salmon" height="30" width="50" stroke="rosybrown" strokeType="INSIDE"/>
         <Label fx:id="startTimeLabel" styleClass="cell_small_label" text="\$startTime"
                StackPane.alignment="BOTTOM_LEFT" />
-    </StackPane>
-
-    <StackPane minHeight="30" prefHeight="30" VBox.vgrow="NEVER">
-        <HBox>
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="antiquewhite" height="30" width="25" stroke="#dbc3ae" strokeType="INSIDE" />
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="bisque" height="30" width="25" stroke="#dbc3ae" strokeType="INSIDE" />
-        </HBox>
-        <Line fill="gainsboro" opacity="0.5" stroke="#86826a" strokeWidth="2" endY="30"/>
-    </StackPane>
-
-    <StackPane minHeight="30" prefHeight="30" VBox.vgrow="NEVER">
-        <HBox>
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="antiquewhite" height="30" width="25" stroke="#dbc3ae" strokeType="INSIDE" />
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="bisque" height="30" width="25" stroke="#dbc3ae" strokeType="INSIDE" />
-        </HBox>
-        <Line fill="gainsboro" opacity="0.5" stroke="#86826a" strokeWidth="2" endY="30"/>
-    </StackPane>
-
-    <StackPane minHeight="30" prefHeight="30" VBox.vgrow="NEVER">
-        <HBox>
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="antiquewhite" height="30" width="25" stroke="#dbc3ae" strokeType="INSIDE" />
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="bisque" height="30" width="25" stroke="#dbc3ae" strokeType="INSIDE" />
-        </HBox>
-        <Line fill="gainsboro" opacity="0.5" stroke="#86826a" strokeWidth="2" endY="30"/>
-    </StackPane>
-
-    <StackPane minHeight="30" prefHeight="30" VBox.vgrow="NEVER">
-        <HBox>
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="antiquewhite" height="30" width="25" stroke="#dbc3ae" strokeType="INSIDE" />
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="bisque" height="30" width="25" stroke="#dbc3ae" strokeType="INSIDE" />
-        </HBox>
-        <Line fill="gainsboro" opacity="0.5" stroke="#86826a" strokeWidth="2" endY="30"/>
-    </StackPane>
-
-    <StackPane minHeight="30" prefHeight="30" VBox.vgrow="NEVER">
-        <HBox>
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="antiquewhite" height="30" width="25" stroke="#dbc3ae" strokeType="INSIDE" />
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="bisque" height="30" width="25" stroke="#dbc3ae" strokeType="INSIDE" />
-        </HBox>
-        <Line fill="gainsboro" opacity="0.5" stroke="#86826a" strokeWidth="2" endY="30"/>
-    </StackPane>
-
-    <StackPane minHeight="30" prefHeight="30" VBox.vgrow="NEVER">
-        <HBox>
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="antiquewhite" height="30" width="25" stroke="#dbc3ae" strokeType="INSIDE" />
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="bisque" height="30" width="25" stroke="#dbc3ae" strokeType="INSIDE" />
-        </HBox>
-        <Line fill="gainsboro" opacity="0.5" stroke="#86826a" strokeWidth="2" endY="30"/>
-    </StackPane>
-
-    <StackPane minHeight="30" prefHeight="30" VBox.vgrow="NEVER">
-        <HBox>
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="antiquewhite" height="30" width="25" stroke="#dbc3ae"
-                       strokeType="INSIDE" />
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="bisque" height="30" width="25" stroke="#dbc3ae" strokeType="INSIDE" />
-        </HBox>
-        <Line fill="gainsboro" opacity="0.5" stroke="#86826a" strokeWidth="2" endY="30"/>
     </StackPane>
 </VBox>

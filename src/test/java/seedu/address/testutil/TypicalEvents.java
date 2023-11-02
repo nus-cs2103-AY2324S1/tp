@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import seedu.address.model.calendar.Calendar;
+import seedu.address.model.calendar.UniMateCalendar;
 import seedu.address.model.event.Event;
 
 /**
@@ -55,8 +55,8 @@ public class TypicalEvents {
     /**
      * Returns an {@code Calendar} with all the typical events.
      */
-    public static Calendar getTypicalCalendar() {
-        Calendar calendar = new Calendar();
+    public static UniMateCalendar getTypicalCalendar() {
+        UniMateCalendar calendar = new UniMateCalendar();
         for (Event event : getTypicalEvents()) {
             calendar.addEvent(event);
         }

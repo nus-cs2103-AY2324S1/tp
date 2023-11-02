@@ -26,6 +26,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.calendar.ReadOnlyCalendar;
+import seedu.address.model.calendar.UniMateCalendar;
 import seedu.address.model.event.Event;
 import seedu.address.model.event.EventPeriod;
 import seedu.address.model.event.exceptions.EventNotFoundException;
@@ -173,6 +174,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public UniMateCalendar getUnderlyingCalendar() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public ObservableList<Event> getCurrentWeekEventList() {
             throw new AssertionError("This method should not be called.");
         }
@@ -219,6 +225,16 @@ public class AddCommandTest {
 
         @Override
         public void deleteEventsInRange(EventPeriod range) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ReadOnlyCalendar getComparisonCalendar() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setComparisonCalendar(ReadOnlyCalendar eventList) {
             throw new AssertionError("This method should not be called.");
         }
 
