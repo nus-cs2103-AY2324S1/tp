@@ -75,7 +75,11 @@ class AddTaskCommandTest {
     }
 
     @Test
-    void testToString() {
+    void toStringMethod() {
+        Task toAdd = new TaskBuilder().build();
+        AddTaskCommand addTaskCommand = new AddTaskCommand(toAdd);
+        String expected = AddTaskCommand.class.getCanonicalName() + "{taskToAdd=" + toAdd + "}";
+        assertEquals(expected, addTaskCommand.toString());
     }
 
     /**

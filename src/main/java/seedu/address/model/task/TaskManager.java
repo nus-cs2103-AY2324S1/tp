@@ -28,6 +28,7 @@ public class TaskManager implements ReadOnlyTaskManager {
      */
     public TaskManager(ReadOnlyTaskManager toBeCopied) {
         this();
+        requireNonNull(toBeCopied);
         resetData(toBeCopied);
     }
 
@@ -61,6 +62,7 @@ public class TaskManager implements ReadOnlyTaskManager {
     public void addTask(Task task) {
         requireNonNull(task);
         tasks.add(task);
+        sort();
     }
 
     public Task deleteTask(int index) {
