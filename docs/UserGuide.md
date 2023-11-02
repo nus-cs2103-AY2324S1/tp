@@ -358,13 +358,10 @@ The parameters for these commands are `PERSON_INDEX`, `NOTE_INDEX` and `NOTE_CON
 
 <br>
 <panel header=":fa-solid-book: **Command Parameter / Syntax Tables**" type="secondary" expanded no-close>
-The fields you enter should follow the following format:
-| Parameter     | Description                                                                                                 |
-|---------------|-------------------------------------------------------------------------------------------------------------|
-| `PERSON_INDEX`| The position of the person in the list you want to add a note to. This should be a positive integer, and should be within the bounds of the list. |
-| `NOTE_INDEX`  | The position of the note in the person's list of notes you want to remove. This should be a positive integer, and should be within the bounds of the list. |
-| `NOTE_CONTENT`| The content of the note you want to add. It has to be non-empty, and can contain any character.              |
 
+- `PERSON_INDEX`: The position of the person in the list you want to add a note to. This should be a positive integer, and should be within the bounds of the list.
+- `NOTE_INDEX`: The position of the note in the person's list of notes you want to modify. This should be a positive integer, and should be within the bounds of the list.
+- `NOTE_CONTENT`: The content of the note you want to add. It has to be non-empty, and can contain any printable ASCII character.
 </panel>
 
 <br>
