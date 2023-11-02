@@ -178,7 +178,7 @@ public class LogicManagerTest {
                 + GENDER_DESC_AMY + HEIGHT_DESC_AMY + INCOME_DESC_AMY + HOROSCOPE_DESC_AMY;
         Date expectedDate = new PersonBuilder(AMY).build();
         ModelManager expectedModel = new ModelManager();
-        expectedModel.addPerson(expectedDate);
+        expectedModel.addDate(expectedDate);
         assertCommandFailure(addCommand, CommandException.class, expectedMessage, expectedModel);
     }
 }

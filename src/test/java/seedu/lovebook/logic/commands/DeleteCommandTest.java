@@ -37,7 +37,7 @@ public class DeleteCommandTest {
                 Messages.format(dateToDelete));
 
         ModelManager expectedModel = new ModelManager(model.getLoveBook(), new UserPrefs(), model.getDatePrefs());
-        expectedModel.deletePerson(dateToDelete);
+        expectedModel.deleteDate(dateToDelete);
 
         assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
     }
@@ -61,7 +61,7 @@ public class DeleteCommandTest {
                 Messages.format(dateToDelete));
 
         Model expectedModel = new ModelManager(model.getLoveBook(), new UserPrefs(), model.getDatePrefs());
-        expectedModel.deletePerson(dateToDelete);
+        expectedModel.deleteDate(dateToDelete);
         showNoPerson(expectedModel);
 
         assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);

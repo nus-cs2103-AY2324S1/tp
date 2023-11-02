@@ -70,7 +70,6 @@ public class SortCommand extends Command {
             } else if (prefix.equals(PREFIX_HOROSCOPE)) {
                 c = Comparator.comparing(Date::getHoroscope).reversed();
             } else {
-                System.out.println("THROWING");
                 throw new CommandException(MESSAGE_INVALID_PREFIX);
             }
         } else {

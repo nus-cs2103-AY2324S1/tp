@@ -77,7 +77,7 @@ public class TypicalPersons {
     public static LoveBook getTypicalLoveBook() {
         LoveBook ab = new LoveBook();
         for (Date date : getTypicalPersons()) {
-            ab.addPerson(date);
+            ab.addDate(date);
         }
         return ab;
     }

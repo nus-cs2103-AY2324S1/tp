@@ -89,7 +89,6 @@ public class MainApp extends Application {
                         + " populated with a sample LoveBook.");
             }
             initialData = loveBookOptional.orElseGet(SampleDataUtil::getSampleLoveBook);
-            System.out.println(initialData);
         } catch (DataLoadingException e) {
             logger.warning("Data file at " + storage.getLoveBookFilePath() + " could not be loaded."
                     + " Will be starting with an empty LoveBook.");
@@ -104,7 +103,6 @@ public class MainApp extends Application {
             }
             initialDatePrefs = datePrefsOptional.orElseGet(SampleDatePrefUtil::getSamplePreferences);
         } catch (DataLoadingException e) {
-            System.out.println(e);
             logger.warning("Data file at " + storage.getDatePrefsFilePath() + " could not be loaded."
                     + " Will be starting with empty preferences.");
             initialDatePrefs = new DatePrefs();
