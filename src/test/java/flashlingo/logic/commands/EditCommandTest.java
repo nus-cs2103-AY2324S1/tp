@@ -199,7 +199,7 @@ public class EditCommandTest {
                 new String[]{copyOriginalWord.getWord(), copyOriginalWord.getLanguage(),
                         copyTranslatedWord.getWord(), copyTranslatedWord.getLanguage()});
 
-//        assertTrue(standardCommand.equals(commandWithSameValues));
+        // assertTrue(standardCommand.equals(commandWithSameValues));
 
         // same object -> returns true
         assertTrue(standardCommand.equals(standardCommand));
