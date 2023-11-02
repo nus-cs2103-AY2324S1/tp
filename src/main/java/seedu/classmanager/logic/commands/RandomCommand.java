@@ -19,9 +19,9 @@ public class RandomCommand extends Command {
     public static final String MESSAGE_RANDOM_SUCCESS = "The following students are selected.\n";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Selects a specific number of students randomly.\n"
             + "Parameters: NUM_OF_STUDENT\n"
-            + "Example: " + COMMAND_WORD + " 2";
-    public static final String MESSAGE_INVALID_NUM_OF_STUDENT = "Number of student to be selected must be more than 0 "
-        + "and cannot be more than current number of student displayed";
+            + "Example: " + COMMAND_WORD + " 1";
+    public static final String MESSAGE_INVALID_NUM_OF_STUDENT = "Number of student to be selected must be an integer "
+            + "larger than 0 and smaller than or equal to current number of student displayed";
     private final Integer numOfStudent;
 
     /**
