@@ -3,6 +3,7 @@ package seedu.address.logic.parser;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
+import static seedu.address.logic.parser.ParserUtil.parseVisual;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
@@ -22,6 +23,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.SortIn;
+import seedu.address.model.person.Visual;
 import seedu.address.model.tag.EnrolDate;
 import seedu.address.model.tag.Subject;
 
@@ -33,6 +35,7 @@ public class ParserUtilTest {
     private static final String INVALID_TAG = "#friend";
     private static final String INVALID_DATE = "06 2023";
     private static final String INVALID_SORT_IN = "INVALID";
+    private static final String INVALID_VISUAL = "INVALID";
 
 
     private static final String VALID_NAME = "Rachel Walker";
@@ -45,6 +48,7 @@ public class ParserUtilTest {
     private static final String VALID_ENROL_DATE_2 = "Dec 2021";
     private static final String VALID_SORT_IN_ASC = "ASC";
     private static final String VALID_SORT_IN_DESC = "ASC";
+    private static final String VALID_VISUAL = "BAR";
 
     private static final String WHITESPACE = " \t\r\n";
 
@@ -333,6 +337,41 @@ public class ParserUtilTest {
     public void parseSortIn_invalidValue_throwsParseException() {
         assertThrows(ParseException.class, () -> ParserUtil.parseSortIn(INVALID_SORT_IN));
     }
+
+    @Test
+    public void parseVisual_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseVisual(INVALID_VISUAL));
+    }
+
+    @Test
+    public void parseVisual_validValue_returnsVisual() throws Exception {
+        Visual expectedVisual = new Visual(VALID_VISUAL);
+        assertEquals(expectedVisual, parseVisual(VALID_VISUAL));
+    }
+
+    @Test
+    public void parseVisual_nullValue_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> parseVisual(null));
+    }
+
+    @Test
+    public void parseVisual_validValueWithWhitespace_returnsVisual() throws Exception {
+        Visual expectedVisual = new Visual(VALID_VISUAL);
+        assertEquals(expectedVisual, parseVisual("   " + VALID_VISUAL + "   "));
+    }
+
+    @Test
+    public void parseVisual_validValueWithLeadingWhitespace_returnsVisual() throws Exception {
+        Visual expectedVisual = new Visual(VALID_VISUAL);
+        assertEquals(expectedVisual, parseVisual("   " + VALID_VISUAL));
+    }
+
+    @Test
+    public void parseVisual_validValueWithTrailingWhitespace_returnsVisual() throws Exception {
+        Visual expectedVisual = new Visual(VALID_VISUAL);
+        assertEquals(expectedVisual, parseVisual(VALID_VISUAL + "   "));
+    }
+
 
     @Test
     public void parseValidIndexPreamble() throws Exception {

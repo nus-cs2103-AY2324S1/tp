@@ -26,7 +26,7 @@ public class SortCommand extends Command {
 
 
     /**
-     * Creates an SortCommand to sort the students {@code Student}
+     * Creates an SortCommand to sort the students {@code SortIn}
      */
     public SortCommand(SortIn sortIn) {
         requireNonNull(sortIn);

@@ -27,6 +27,7 @@ import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.SortIn;
 import seedu.address.model.person.Student;
+import seedu.address.model.person.Visual;
 import seedu.address.testutil.PersonBuilder;
 
 public class AddCommandTest {
@@ -165,6 +166,11 @@ public class AddCommandTest {
         @Override
         public void updateSortedPersonList(SortIn sequence) {
             throw new AssertionError("You shall not sort.");
+        }
+
+        @Override
+        public void export(Visual visual) throws Exception {
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override

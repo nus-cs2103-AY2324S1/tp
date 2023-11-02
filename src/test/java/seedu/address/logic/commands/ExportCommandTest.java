@@ -2,6 +2,9 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -13,39 +16,104 @@ import org.junit.jupiter.api.Test;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
+import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.SortIn;
 import seedu.address.model.person.Student;
 import seedu.address.model.person.Visual;
 
-public class SortCommandTest {
+public class ExportCommandTest {
 
     @Test
-    public void execute_personAcceptedByModel_sortSuccessful() throws Exception {
+    public void execute_visualAcceptedByModel_exportSuccessful() throws Exception {
         ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
-        SortIn validSortIn = new SortIn("ASC");
+        Visual validVisual = new Visual("TABLE");
 
-        CommandResult commandResult = new SortCommand(validSortIn).execute(modelStub);
+        CommandResult commandResult = new ExportCommand(validVisual).execute(modelStub);
 
-        assertEquals(String.format(SortCommand.MESSAGE_SUCCESS), commandResult.getFeedbackToUser());
+        assertEquals(String.format(ExportCommand.MESSAGE_SUCCESS), commandResult.getFeedbackToUser());
+    }
+
+    @Test
+    public void execute_emptyTable_exportFailed() {
+        ModelManager model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        Visual validVisual = new Visual("TABLE");
+
+        ExportCommand exportCommand = new ExportCommand(validVisual);
+
+        assertThrows(CommandException.class, () -> exportCommand.execute(model));
     }
 
     @Test
     public void toStringMethod() {
-        String sequence = "ASC";
-        SortIn validSortIn = new SortIn(sequence);
-
-        SortCommand sortCommand = new SortCommand(validSortIn);
-        String expected = SortCommand.class.getCanonicalName() + "{sortIn=" + sequence + "}";
+        String visual = "TABLE";
+        Visual validVisual = new Visual(visual);
+        ExportCommand sortCommand = new ExportCommand(validVisual);
+        String expected = ExportCommand.class.getCanonicalName() + "{visual=" + visual + "}";
         assertEquals(expected, sortCommand.toString());
     }
 
+    @Test
+    public void equals_barObjectsAreEqual_returnsTrue() {
+        Visual visual = new Visual("Bar");
+        ExportCommand command1 = new ExportCommand(visual);
+        ExportCommand command2 = new ExportCommand(visual);
+        assertEquals(command1, command2);
+    }
+
+    @Test
+    public void equals_barObjectsAreSame_returnsTrue() {
+        Visual visual = new Visual("Bar");
+        ExportCommand command1 = new ExportCommand(visual);
+        assertEquals(command1, command1);
+    }
+
+    @Test
+    public void equals_tableObjectsAreEqual_returnsTrue() {
+        Visual visual = new Visual("Table");
+        ExportCommand command1 = new ExportCommand(visual);
+        ExportCommand command2 = new ExportCommand(visual);
+        assertEquals(command1, command2);
+    }
+
+    @Test
+    public void equals_tableObjectsAreSame_returnsTrue() {
+        Visual visual = new Visual("Table");
+        ExportCommand command1 = new ExportCommand(visual);
+        assertEquals(command1, command1);
+    }
+
+    @Test
+    public void equals_objectsAreNotEqual_returnsFalse() {
+        Visual visual1 = new Visual("Bar");
+        Visual visual2 = new Visual("Table");
+        ExportCommand command1 = new ExportCommand(visual1);
+        ExportCommand command2 = new ExportCommand(visual2);
+        assertNotEquals(command1, command2);
+    }
+
+    @Test
+    public void equals_objectComparedWithNull_returnsFalse() {
+        Visual visual = new Visual("Bar");
+        ExportCommand command = new ExportCommand(visual);
+        assertNotEquals(command, null);
+    }
+
+    @Test
+    public void equals_objectComparedWithDifferentClass_returnsFalse() {
+        Visual visual = new Visual("Bar");
+        ExportCommand command = new ExportCommand(visual);
+        assertNotEquals(command, "This is a string");
+    }
+
     /**
-     * A default model stub that have all of the methods failing.
+     * A default model stub that have all the methods failing.
      */
     private class ModelStub implements Model {
         @Override
@@ -120,7 +188,7 @@ public class SortCommandTest {
 
         @Override
         public void updateSortedPersonList(SortIn sortIn) {
-
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override

@@ -10,6 +10,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.SortIn;
 import seedu.address.model.person.Student;
+import seedu.address.model.person.Visual;
 
 /**
  * The API of the Model component.
@@ -103,6 +104,8 @@ public interface Model {
     void updateFilteredPersonList(Predicate<Student> predicate);
 
     void updateSortedPersonList(SortIn sortIn);
+
+    void export(Visual visual) throws Exception;
 
     /**
      * Get the student object from filtered student list by name if exists, return

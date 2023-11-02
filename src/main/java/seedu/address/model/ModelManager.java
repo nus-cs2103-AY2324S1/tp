@@ -1,5 +1,6 @@
 package seedu.address.model;
 
+import static java.util.Objects.isNull;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
@@ -16,16 +17,22 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.SortIn;
 import seedu.address.model.person.Student;
+import seedu.address.model.person.Visual;
+import seedu.address.ui.BarChartWindow;
+import seedu.address.ui.TableWindow;
 
 /**
  * Represents the in-memory model of the address book data.
  */
 public class ModelManager implements Model {
+    protected static BarChartWindow barChartWindow = null;
+    protected static TableWindow tableWindow = null;
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private FilteredList<Student> filteredStudents;
+
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -142,6 +149,28 @@ public class ModelManager implements Model {
         addressBook.sort(sequence);
     }
 
+    public static void getTable(TableWindow table) {
+        requireNonNull(table);
+        tableWindow = table;
+    }
+
+    public static void getBarChart(BarChartWindow barChart) {
+        requireNonNull(barChart);
+        barChartWindow = barChart;
+    }
+
+    @Override
+    public void export(Visual visual) throws Exception {
+        requireNonNull(visual);
+        if (visual.toString().equals("TABLE") && !isNull(tableWindow)) {
+            tableWindow.exportAsPng();
+        } else if (visual.toString().equals("BAR") && !isNull(barChartWindow)) {
+            barChartWindow.exportAsPng();
+        } else {
+            throw new Exception();
+        }
+    }
+
     @Override
     public Optional<Student> getStudentFromFilteredPersonListByName(Name name) {
         Optional<Student> targetStudent = Optional.ofNullable(null);
@@ -179,5 +208,7 @@ public class ModelManager implements Model {
                 && userPrefs.equals(otherModelManager.userPrefs)
                 && filteredStudents.equals(otherModelManager.filteredStudents);
     }
+
+
 
 }
