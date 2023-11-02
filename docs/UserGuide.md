@@ -14,15 +14,15 @@ Tuition connect is a desktop app that helps tutors keep track of their tutees an
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-1. Download the latest `TuitionConnect.jar` from [here](https://github.com/AY2324S1-CS2103T-F10-4/tp/releases).
+2. Download the latest `TuitionConnect.jar` from [here](https://github.com/AY2324S1-CS2103T-F10-4/tp/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your TuitionConnect.
+3. Copy the file to the folder you want to use as the _home folder_ for your TuitionConnect.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar TuitionConnect.jar` command to run the application.<br>
+4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar TuitionConnect.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
    * `list` : Lists all tutees.
@@ -31,7 +31,7 @@ Tuition connect is a desktop app that helps tutors keep track of their tutees an
 
    * `delete 3` : Deletes the 3rd tutee shown in the current list.
 
-1. Refer to the [Features](#features) below for details of each command.
+6. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -39,7 +39,7 @@ Tuition connect is a desktop app that helps tutors keep track of their tutees an
 
 ### Adding a person : `add`
 
-**Description**: Adds a tutee into the list
+**Description**: Adds a tutee into the list.
 
 **Format**: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS sb/SUBJECT d/DAY b/BEGIN e/END`
 
@@ -69,20 +69,23 @@ Tuition connect is a desktop app that helps tutors keep track of their tutees an
 * `add n/John Doe p/98765432 e/johnny@example.com a/John street, block 123, #01-01 sb/Primary 4 Math d/wed b/1500 e/1600 pr/20`
 * `add n/Betsy Crowe p/92939402 e/betsycrowe@example.com a/Newgate Prison p/1234567 s/Secondary 3 Physics d/mon b/1900 e/1930 pr/35`
 
+
 ### View the list : `list`
 
 **Description** : Shows the current list of tutees in your list.
 
 Format: `list`
 
+
 ### View the list of tutees specified by day : `list [DAY]`
 
-**Description** : Shows the current list of tutees filtered by the specified dat.
+**Description** : Shows the current list of tutees filtered by the specified day.
 
 Format: `list [DAY]`
 
 **Expected Input**:
 * **Day (Optional field)**: String with restrictions in characters, non-case sensitive (Mon/Tue/Wed/Thu/Fri/Sat/Sun).
+
 
 ### Editing a tutee : `edit`
 
@@ -120,6 +123,7 @@ To edit the phone number of your tutee and day of tutoring:
 To edit name and address of your tutee:
 *  `edit n/Betsy Crower a/Betsy street, block 110, #03-02`
 
+
 ### Deleting a person : `delete`
 
 **Description** Deletes the specific tutee from the list.
@@ -137,6 +141,7 @@ To edit name and address of your tutee:
 Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the list.
 
+
 ### Marking a person as paid : `paid`
 
 **Description** Mark the specific tutee as paid in the list.
@@ -152,7 +157,25 @@ Examples:
 **Expected Output when the command fails**: Invalid command format! paidExample: paid 1
 
 Examples:
-* `list` followed by `paid 2` marks the 2nd person in the list.
+* `list` followed by `paid 1` marks the first person as paid in the list.
+
+### Marking a person as unpaid : `unpaid`
+
+**Description** Mark the specific tutee as not paid in the list.
+
+**Format**: `unpaid INDEX`
+
+**Expected Input**:
+
+* **Index (Compulsory Field)**: Numbers between 1 to the number of people inside the list.
+
+**Expected Output when the command succeeds**: MARK PERSON UNPAID SUCCESS, Paid: false
+
+**Expected Output when the command fails**: Invalid command format! paidExample: unpaid 1
+
+Examples:
+* `list` followed by `unpaid 2` marks the 2nd person as not paid in the list.
+
 
 ### Show all the unpaid persons : `list unpaid`
 
@@ -160,10 +183,16 @@ Examples:
 
 Format: `list unpaid`
 
+### Mark all persons as unpaid : `unpaidAll`
+
+**Description** : Mark all the persons as not paid.
+
+Format: `unpaidAll`
+=======
 
 ### Finding Free Time : `freeTime`
 
-**Description**: Finds a list of free time in your schedule
+**Description**: Finds a list of free time in your schedule.
 
 **Format**: `freeTime d/DAY dur/DURATION b/BEGIN end/END`
 
@@ -182,20 +211,44 @@ Format: `list unpaid`
 * **Invalid Begin**: Begin has a format of HHMM
 * **Invalid End**: End has a format of HHMM
 
+
+### Undo previous command : `undo`
+
+**Description**: Undo the previous command that modifies the data of tutees.
+
+**Format**: `undo`
+
+**Expected Output when the command succeeds**: Successfully undo previous command
+
+**Expected Output when the command fails**: Nothing to undo!
+
+### Redo previous command : `redo`
+
+**Description**: Reverses previously undone commands, restoring the data to a state after an undo operation.
+
+**Format**: `redo`
+
+**Expected Output when the command succeeds**: Successfully redo previous command
+
+**Expected Output when the command fails**: Nothing to redo!
+
+**Format**: `freeTime d/DAY dur/DURATION b/BEGIN end/END`
+
+
 ### Calculating Monthly Revenue: `rev`
 
 **Description**: Displays the total revenue monthly calculated from all tutees
 
 **Format**: `rev`
 
-**Expected Output**: Sucessfully calculated!! Total monthly revenue: *$monthlyrevenue*
-
+**Expected Output**: Successfully calculated!! Total monthly revenue: *$monthlyrevenue*
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
 
-To be added soon
+**Q**: How do I transfer my existing data to another machine?<br>
+**A**: Overwrite the empty `tuitionconnect.json` file in the machine by deleting it and replacing it with the `tuitionconnect.json` that contains the data
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -213,8 +266,12 @@ To be added soon
 | **delete**      | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                                |
 | **edit**        | `edit INDEX n/NAME p/PHONE_NUMBER a/ADDRESS s/SUBJECTS d/DAY b/BEGIN e/END pr/PAYRATE`<br> e.g.,`edit p/91234567 d/Sun`                                                                            |
 | **list**        | `list`                                                                                                                                                                                             |
+| **list by day** | `list DAY` <br> e.g., `list Monday`                                                                                                                                                                |
 | **paid**        | `paid INDEX`<br> e.g., `paid 1`                                                                                                                                                                    |
+| **unpaid**      | `unpaid INDEX`<br> e.g., `unpaid 1`                                                                                                                                                                |
 | **list unpaid** | `list unpaid`                                                                                                                                                                                      |
+| **unpaidAll**   | `unpaidAll`                                                                                                                                                                                        |
 | **freeTime**    | `d/DAY dur/DURATION b/BEGIN end/END`                                                                                                                                                               |
+| **undo**        | `undo`                                                                                                                                                                                             |
+| **redo**        | `redo`                                                                                                                                                                                             |
 | **rev**         | `rev`                                                                                                                                                                                              |
-
