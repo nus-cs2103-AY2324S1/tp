@@ -59,13 +59,15 @@ public class DeleteContactEventCommand extends Command {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
 
-        if (index.getZeroBased() >= lastShownList.size()) {
+        //Obtain the calendar of the person and tries to delete an event from the person's calendar
+        Person personToEdit;
+        try {
+            personToEdit = lastShownList.get(index.getZeroBased());
+        } catch (IndexOutOfBoundsException e) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
-
-        //Obtain the calendar of the person and tries to delete an event from the person's calendar
-        Person personToEdit = lastShownList.get(index.getZeroBased());
         Calendar calendar = personToEdit.getCalendar();
+
         Event toDelete;
         try {
             toDelete = calendar.findEventAt(eventTime).orElseThrow();
