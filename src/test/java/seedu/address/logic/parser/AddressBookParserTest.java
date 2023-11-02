@@ -2,6 +2,7 @@ package seedu.address.logic.parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -119,4 +120,24 @@ public class AddressBookParserTest {
         assertTrue(parser.parseCommand("owe 1 2.50") instanceof OweCommand);
     }
 
+    @Test
+    public void parseCommand_nonAsciiInput_throwsParseException() {
+        String nonAsciiInput = "add José";
+        assertThrows(ParseException.class,
+            AddressBookParser.MESSAGE_NON_ASCII, () -> parser.parseCommand(nonAsciiInput));
+    }
+
+    @Test
+    public void parseCommand_allAsciiInputAllowed() {
+        AddressBookParser parser = new AddressBookParser();
+        String input = "0123456789abcdefghijklmnopqrstuvwxyz"
+            + "ABCDEFGHIJKLMNOPQRSTUVWXYZ!\"#$%&\\\'()*+,-./:;<=>?@[\\\\]^_{|} ~";
+        try {
+            parser.parseCommand(input);
+        } catch (Exception e) {
+            if (e.getMessage() == AddressBookParser.MESSAGE_NON_ASCII) {
+                fail("Ascii input should be allowed");
+            }
+        }
+    }
 }
