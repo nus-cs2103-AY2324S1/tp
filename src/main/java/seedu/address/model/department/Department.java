@@ -4,29 +4,29 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents a Tag in the address book.
+ * Represents a Department in the address book.
  * Guarantees: immutable; name is valid as declared in {@link #isValidDepartmentName(String)}
  */
 public class Department {
 
-    public static final String MESSAGE_CONSTRAINTS = "Tags names should be alphanumeric";
+    public static final String MESSAGE_CONSTRAINTS = "Department names should be alphanumeric";
     public static final String VALIDATION_REGEX = "\\p{Alnum}+";
 
     public final String departmentName;
 
     /**
-     * Constructs a {@code Tag}.
+     * Constructs a {@code Remark}.
      *
-     * @param tagName A valid tag name.
+     * @param departmentName A valid department name.
      */
-    public Department(String tagName) {
-        requireNonNull(tagName);
-        checkArgument(isValidDepartmentName(tagName), MESSAGE_CONSTRAINTS);
-        this.departmentName = tagName;
+    public Department(String departmentName) {
+        requireNonNull(departmentName);
+        checkArgument(isValidDepartmentName(departmentName), MESSAGE_CONSTRAINTS);
+        this.departmentName = departmentName;
     }
 
     /**
-     * Returns true if a given string is a valid tag name.
+     * Returns true if a given string is a valid department name.
      */
     public static boolean isValidDepartmentName(String test) {
         return test.matches(VALIDATION_REGEX);

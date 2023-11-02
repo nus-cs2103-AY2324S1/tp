@@ -54,7 +54,7 @@ public class ResetCommand extends Command {
                 Employee employeeWithDefaultOvertime = new Employee(employee.getName(), employee.getPosition(),
                         employee.getId(), employee.getPhone(), employee.getEmail(), employee.getSalary(),
                         employee.getDepartments(), new OvertimeHours(Employee.DEFAULT_OVERTIME_HOURS),
-                        employee.getLeaveList());
+                        employee.getLeaveList(), employee.getRemarkList());
                 model.setEmployee(employee, employeeWithDefaultOvertime);
             }
             break;
@@ -64,7 +64,8 @@ public class ResetCommand extends Command {
                 model.updateFilteredEmployeeList(PREDICATE_SHOW_ALL_EMPLOYEES);
                 Employee employeeWithDefaultLeaveList = new Employee(employee.getName(), employee.getPosition(),
                         employee.getId(), employee.getPhone(), employee.getEmail(), employee.getSalary(),
-                        employee.getDepartments(), employee.getOvertimeHours(), new LeaveList());
+                        employee.getDepartments(), employee.getOvertimeHours(), new LeaveList(),
+                        employee.getRemarkList());
                 model.setEmployee(employee, employeeWithDefaultLeaveList);
             }
             break;

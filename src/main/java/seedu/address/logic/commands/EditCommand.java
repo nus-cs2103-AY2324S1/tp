@@ -112,7 +112,8 @@ public class EditCommand extends Command {
                 .orElse(employeeToEdit.getDepartments());
 
         return new Employee(updatedName, updatedPosition, updatedId, updatedPhone, updatedEmail,
-                updatedSalary, updatedDepartments, employeeToEdit.getOvertimeHours(), employeeToEdit.getLeaveList());
+                updatedSalary, updatedDepartments, employeeToEdit.getOvertimeHours(),
+                employeeToEdit.getLeaveList(), employeeToEdit.getRemarkList());
     }
 
     @Override

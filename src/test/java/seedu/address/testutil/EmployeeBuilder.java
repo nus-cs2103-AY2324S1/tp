@@ -15,6 +15,8 @@ import seedu.address.model.employee.OvertimeHours;
 import seedu.address.model.employee.Phone;
 import seedu.address.model.employee.Position;
 import seedu.address.model.employee.Salary;
+import seedu.address.model.remark.Remark;
+import seedu.address.model.remark.RemarkList;
 import seedu.address.model.util.SampleDataUtil;
 
 /**
@@ -39,6 +41,7 @@ public class EmployeeBuilder {
     private Set<Department> departments;
     private OvertimeHours overtimeHours;
     private LeaveList leaveList;
+    private RemarkList remarkList;
 
     /**
      * Creates a {@code EmployeeBuilder} with the default details.
@@ -53,6 +56,7 @@ public class EmployeeBuilder {
         departments = new HashSet<>();
         overtimeHours = new OvertimeHours(DEFAULT_OVERTIME_HOURS);
         leaveList = new LeaveList();
+        remarkList = new RemarkList();
     }
 
     /**
@@ -68,6 +72,7 @@ public class EmployeeBuilder {
         departments = new HashSet<>(employeeToCopy.getDepartments());
         overtimeHours = employeeToCopy.getOvertimeHours();
         leaveList = employeeToCopy.getLeaveList();
+        remarkList = employeeToCopy.getRemarkList();
     }
 
     /**
@@ -144,7 +149,19 @@ public class EmployeeBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code RemarkList} of the {@code employee} that we are building.
+     */
+    public EmployeeBuilder withRemarkList(ArrayList<Remark> remarks) {
+        this.remarkList = new RemarkList(remarks);
+        return this;
+    }
+
+    /**
+     * Builds the {@code employee}.
+     */
     public Employee build() {
-        return new Employee(name, position, id, phone, email, salary, departments, overtimeHours, leaveList);
+        return new Employee(name, position, id, phone, email, salary, departments, overtimeHours,
+                leaveList, remarkList);
     }
 }

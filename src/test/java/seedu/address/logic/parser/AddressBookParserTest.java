@@ -12,6 +12,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NEW;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_OLD;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ON;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_OPERATION;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TO;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIds.ID_FIRST_EMPLOYEE;
@@ -27,9 +28,11 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.AddLeaveCommand;
+import seedu.address.logic.commands.AddRemarkCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.DeleteLeaveCommand;
+import seedu.address.logic.commands.DeleteRemarkCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditEmployeeDescriptor;
 import seedu.address.logic.commands.EditLeaveCommand;
@@ -46,6 +49,7 @@ import seedu.address.model.employee.Employee;
 import seedu.address.model.employee.EmployeeContainsKeywordsPredicate;
 import seedu.address.model.employee.Id;
 import seedu.address.model.employee.OvertimeHours;
+import seedu.address.model.remark.Remark;
 import seedu.address.testutil.EditEmployeeDescriptorBuilder;
 import seedu.address.testutil.EmployeeBuilder;
 import seedu.address.testutil.EmployeeUtil;
@@ -172,6 +176,22 @@ public class AddressBookParserTest {
                 OvertimeCommand.COMMAND_WORD + " " + PREFIX_ID + ID_FIRST_EMPLOYEE + " " + PREFIX_OPERATION
                         + "inc " + PREFIX_AMOUNT + "2");
         assertEquals(new OvertimeCommand(ID_FIRST_EMPLOYEE, new OvertimeHours(2), true), command);
+    }
+
+    @Test
+    public void parseCommand_addRemark() throws Exception {
+        String userInput = AddRemarkCommand.COMMAND_WORD + " " + PREFIX_ID + ID_FIRST_EMPLOYEE + " " + PREFIX_REMARK
+                + "fast worker";
+        AddRemarkCommand command = (AddRemarkCommand) parser.parseCommand(userInput);
+        assertEquals(new AddRemarkCommand(ID_FIRST_EMPLOYEE, new Remark("fast worker")), command);
+    }
+
+    @Test
+    public void parseCommand_deleteRemark() throws Exception {
+        String userInput = DeleteRemarkCommand.COMMAND_WORD + " " + PREFIX_ID + ID_FIRST_EMPLOYEE + " " + PREFIX_REMARK
+                + "fast worker";
+        DeleteRemarkCommand command = (DeleteRemarkCommand) parser.parseCommand(userInput);
+        assertEquals(new DeleteRemarkCommand(ID_FIRST_EMPLOYEE, new Remark("fast worker")), command);
     }
 
     @Test

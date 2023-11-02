@@ -20,10 +20,10 @@ public class Messages {
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
     public static final String MESSAGE_REPORT_STRING =
-                "Name: %1$s\nOvertime hours: %2$s\nOvertime pay: $%3$s\nNumber of leaves: %4$s";
-
+                "Name: %1$s\nOvertime hours: %2$s\nOvertime pay: $%3$s\nNumber of leaves: %4$s\nRemarks:\n%5$s";
     public static final String MESSAGE_INVALID_DATE = "Invalid date! Dates should be valid and in yyyy-MM-dd format.";
     public static final String MESSAGE_EMPLOYEES_ON_LEAVE_OVERVIEW = "%1$d employees are on leave!";
+    public static final String MESSAGE_REPORT_SAVE_ERROR = "Error saving report to file";
 
 
     /**
@@ -84,6 +84,21 @@ public class Messages {
                 .append(employee.getId())
                 .append("; \nLeaves taken: \n")
                 .append(employee.getLeaveList().toString());
+        return builder.toString();
+    }
+
+    /**
+     * Formats the Remarks of {@code employee} for display to the user.
+     */
+    public static String formatRemarks(Employee employee) {
+        final StringBuilder builder = new StringBuilder();
+        builder.append(employee.getName())
+                .append("; Position: ")
+                .append(employee.getPosition())
+                .append("; Id: ")
+                .append(employee.getId())
+                .append("; \nRemarks: \n")
+                .append(employee.getRemarkList().toString());
         return builder.toString();
     }
 
