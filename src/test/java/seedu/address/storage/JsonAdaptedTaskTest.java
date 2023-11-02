@@ -12,11 +12,12 @@ import seedu.address.model.task.Deadline;
 import seedu.address.model.task.TaskDescription;
 
 public class JsonAdaptedTaskTest {
+
+    public static final String MISSING_FIELD_MESSAGE_FORMAT = "Task's %s field is missing!";
     private static final String INVALID_DESCRIPTION = "";
     private static final String VALID_DESCRIPTION = ASSIGNMENT.getDescriptionString();
     private static final String VALID_DEADLINE = ASSIGNMENT.getDeadlineString();
 
-    public static final String MISSING_FIELD_MESSAGE_FORMAT = "Task's %s field is missing!";
 
     @Test
     public void toModelType_validTaskDeadline_returnsEvent() throws Exception {
