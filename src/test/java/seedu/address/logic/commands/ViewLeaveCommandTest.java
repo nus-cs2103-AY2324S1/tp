@@ -47,10 +47,13 @@ class ViewLeaveCommandTest {
         List<String> nameList = viewLeaveCommand.getNameList(model.getFilteredPersonList());
         String nameListInString = viewLeaveCommand.nameListToString(nameList);
 
-        String expectedMessage = String.format(viewLeaveCommand.MESSAGE_SUCCESS, formattedDate, nameListInString);
+        String expectedMessage = String.format(ViewLeaveCommand.MESSAGE_SUCCESS, formattedDate, nameListInString);
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
 
         assertCommandSuccess(viewLeaveCommand, model, expectedMessage, expectedModel);
+
+        DeleteLeaveCommand deleteLeaveCommand = new DeleteLeaveCommand(INDEX_FIRST_PERSON, validDate);
+        deleteLeaveCommand.execute(model);
     }
 }
