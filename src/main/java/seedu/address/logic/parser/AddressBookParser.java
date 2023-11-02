@@ -22,6 +22,7 @@ import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.SearchCommand;
 import seedu.address.logic.commands.SortCommand;
 import seedu.address.logic.commands.TableCommand;
+import seedu.address.logic.commands.TrendCommand;
 import seedu.address.logic.commands.UpdateSecLevelCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -103,6 +104,9 @@ public class AddressBookParser {
 
         case UpdateSecLevelCommand.UNDO_COMMAND_WORD:
             return new UpdateSecLevelCommand(true);
+
+        case TrendCommand.COMMAND_WORD:
+            return new TrendCommand();
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);

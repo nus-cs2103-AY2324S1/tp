@@ -60,6 +60,14 @@ public class CommandResult {
         return false;
     }
 
+    /**
+     * Check if this CommandResult instance is meant for showing trend window.
+     * @return true if this is a TrendCommandResult instance, false otherwise.
+     */
+    public boolean isShowTrend() {
+        return false;
+    }
+
     public boolean isExit() {
         return exit;
     }
