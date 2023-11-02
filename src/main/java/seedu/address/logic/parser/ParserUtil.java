@@ -219,7 +219,7 @@ public class ParserUtil {
         String trimmedDays = days.trim();
 
         if (trimmedDays.isEmpty() || days == null) {
-            return 7;
+            return Integer.parseInt("7");
         }
 
         if (!StringUtil.isNonZeroUnsignedInteger(trimmedDays)) {

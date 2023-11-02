@@ -1,10 +1,13 @@
 package seedu.address.model.person;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
+
+import seedu.address.logic.parser.exceptions.ParseException;
 
 public class PhoneTest {
 
@@ -56,5 +59,21 @@ public class PhoneTest {
 
         // different values -> returns false
         assertFalse(phone.equals(new Phone("995")));
+    }
+
+    @Test
+    public void hashcode() {
+        Phone phone = new Phone("999");
+        assertTrue(phone.hashCode() == new Phone("999").hashCode());
+    }
+
+    @Test
+    public void of_invalidPhone_throwsParseException() throws ParseException {
+        // invalid phone
+        assertThrows(ParseException.class, () -> Phone.of("test"));
+
+        // blank phone
+        assertEquals(Phone.of(" "), Phone.NULL_PHONE);
+
     }
 }

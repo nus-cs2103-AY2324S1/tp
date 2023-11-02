@@ -22,7 +22,10 @@ import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListPersonsCommand;
+import seedu.address.logic.commands.RemindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.BirthdayWithinDaysPredicate;
+import seedu.address.model.person.EventWithinDaysPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
@@ -55,7 +58,7 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_edit() throws Exception {
-        Person person = new PersonBuilder().build();
+        Person person = new PersonBuilder().withGroups("friends").build();
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(person).build();
         EditPersonCommand command = (EditPersonCommand) parser.parseCommand(EditPersonCommand.COMMAND_WORD + " "
                 + INDEX_FIRST_PERSON.getOneBased() + " " + PersonUtil.getEditPersonDescriptorDetails(descriptor));
@@ -97,5 +100,20 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_unknownCommand_throwsParseException() {
         assertThrows(ParseException.class, MESSAGE_UNKNOWN_COMMAND, () -> parser.parseCommand("unknownCommand"));
+    }
+
+    @Test
+    public void parseCommand_remind() throws Exception {
+        RemindCommand command = (RemindCommand) parser.parseCommand(
+                RemindCommand.COMMAND_WORD + " " + 1);
+        BirthdayWithinDaysPredicate birthdayPredicate = new BirthdayWithinDaysPredicate(1);
+        EventWithinDaysPredicate eventPredicate = new EventWithinDaysPredicate(1);
+        assertEquals(new RemindCommand(birthdayPredicate, eventPredicate, 1), command);
+
+        RemindCommand defaultCommand = (RemindCommand) parser.parseCommand(
+                RemindCommand.COMMAND_WORD + " ");
+        BirthdayWithinDaysPredicate birthdayPredicateDefault = new BirthdayWithinDaysPredicate(7);
+        EventWithinDaysPredicate eventPredicateDefault = new EventWithinDaysPredicate(7);
+        assertEquals(new RemindCommand(birthdayPredicateDefault, eventPredicateDefault, 7), defaultCommand);
     }
 }

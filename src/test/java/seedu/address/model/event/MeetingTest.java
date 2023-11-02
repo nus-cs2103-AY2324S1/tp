@@ -2,12 +2,14 @@ package seedu.address.model.event;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.TypicalEvents.MEETING_WITHOUT_TIME;
 import static seedu.address.testutil.TypicalEvents.TP_MEETING;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.testutil.MeetingBuilder;
 
 public class MeetingTest {
@@ -58,4 +60,22 @@ public class MeetingTest {
         assertTrue(TP_MEETING.hasEndTime());
         assertFalse(MEETING_WITHOUT_TIME.hasEndTime());
     }
+
+    @Test
+    public void equalsTest() throws ParseException {
+        Meeting expected = new MeetingBuilder(TP_MEETING).withEventDate("2020-10-10").build();
+        Meeting actual = new MeetingBuilder(TP_MEETING).withEventDate("2020-10-10").build();
+
+        assertEquals(expected, actual);
+    }
+    @Test
+    public void equalsWrongType() {
+        assertNotEquals(1, TP_MEETING);
+    }
+
+    @Test
+    public void isSameMeetingWrongType() {
+        assertFalse(TP_MEETING.isSameEvent(null));
+    }
+
 }

@@ -449,6 +449,44 @@ _{more aspects and alternatives to be added}_
 _{Explain here how the data archiving feature will be implemented}_
 
 
+The `remind` command in our application displays a birthdays and events that will happen within a specified number of days.
+
+#### Implementation
+
+The `remind` feature involves checking the current filtered list of persons and events and filtering out persons with birthdays and events with starting date 
+that are within the specified number of days. This is done using `BirthdayWithinDaysPredicate` and `EventWithinDaysPredicate` which implements the `Predicate<T>` interface. These predicates are passed 
+to `Model#updateFilteredPersonList(Predicate<Person> predicate)` and `Model#updateFilteredEventList(Predicate<Event> predicate)` respectively.
+
+As a result, the `ObservableList<Person>` and `ObservableList<Event>` are updated with the filtered lists of persons and events respectively. 
+The `UI` component is notified of these new changes to the lists and updates the UI accordingly, which will show the updated persons and events.
+
+The `remind` command is implemented this way as it reuses the logic for the `find` command where it utilises the `Model` component to update the current list of persons based on the given predicate.
+Instead of filtering out persons based on names, the `BirthdayWithinDaysPredicate` filters out persons based on their birthdays and the `EventWithinDaysPredicate` filters out events based on their starting dates.
+
+The flow for the `remind` command is described by the following sequence diagram:
+
+![RemindSequenceDiagram](images/RemindSequenceDiagram.png)
+
+    
+#### Feature details
+1. The `remind` command can accept an optional parameter `days` which specifies the number of days to search for birthdays and events. If `days` is not specified, the default value of 7 days will be used.
+2. The application will validate the argument `days` to ensure that it is a positive integer. If it is not, an error message will be shown to the user and prompts the user for a corrected input.
+3. If it is a valid input, a `BirthdayWithinDaysPredicate` and `EventWithinDaysPredicate` will be created and a `Remind` command will be created with the predicates.
+4. The `Remind` command will then be executed and the `UI` will be updated with the filtered lists of persons and events.
+
+#### General design considerations
+
+- **Alternative 1 (Current choice): Updating list with predicate.**
+    - Pros: 
+      - Reuses the logic for the `find` command.
+      - The `UI` component is notified of the changes to the list and updates the UI accordingly.
+    - Cons: 
+      - The `Model` component is tightly coupled with the `UI` component.
+- **Alternative 2: Checking current list for birthdays and events, and adding to new list.**
+  - Pros: 
+    - Easier to implement.
+  - Cons: 
+    - Performance overhead. New addressbook objects needs to be created.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -486,24 +524,21 @@ other important events.
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​            | I want to …​                                 | So that I can…​                                                        |
-|----------|--------------------|----------------------------------------------|------------------------------------------------------------------------|
-| `* * *`  | university student | see usage instructions                       | refer to instructions when I forget how to use the App                 |
-| `* * *`  | university student | add a new person                             | keep my address book up to date                                        |
-| `* * *`  | university student | include optional fields when adding contacts | include comprehensive and personalized information for each contact    |
-| `* * *`  | university student | delete a person                              | remove contacts that I no longer need                                  |
-| `* * *`  | university student | find a person by name                        | locate details of persons without having to go through the entire list |
-| `* * *`  | university student | edit a person details                        | reflect any contact changes accordingly                                |   
-| `* * *`  | university student | create an event                              | schedule and keep track of important commitments                       |   
-| `* * *`  | university student | view all upcoming events                     | stay informed about my scheduled commitments                           |
-| `* * *`  | university student | edit an event                                | modify event details like the date, time, or location                  |
-| `* * *`  | university student | delete an event                              | remove events that are canceled or no longer relevant                  |
-| `* * *`  | university student | access a separate event column in the GUI    | simultaneously view contact details and event details                  |
-| `* *`    | university student | be reminded on events                        | so that i can remember upcoming social activities                      |
-| `* *`    | university student | set recurring events                         | automate scheduling for repetitive commitments                         |
-| `* *`    | university student | customise short form commands                | perform commands more efficiently                                      |
-| `* *`    | university student | assign contacts to groups                    | i can easily identify who is involved in specific events               |
-| `* *`    | university student | pin contacts or groups                       | access and communicate with frequently contacted groups                |
+| Priority | As a …​            | I want to …​                                               | So that I can…​                                                        |
+|----------|--------------------|------------------------------------------------------------|------------------------------------------------------------------------|
+| `* * *`  | university student | see usage instructions                                     | refer to instructions when I forget how to use the App                 |
+| `* * *`  | university student | add a new person                                           | keep my address book up to date                                        |
+| `* * *`  | university student | include optional fields when adding contacts               | include comprehensive and personalized information for each contact    |
+| `* * *`  | university student | delete a person                                            | remove contacts that I no longer need                                  |
+| `* * *`  | university student | find a person by name                                      | locate details of persons without having to go through the entire list |
+| `* * *`  | university student | edit a person details                                      | reflect any contact changes accordingly                                |   
+| `* * *`  | university student | create an event                                            | schedule and keep track of important commitments                       |
+| `* * *`  | university student | edit an event                                              | modify event details like the date, time, or location                  |
+| `* * *`  | university student | delete an event                                            | remove events that are canceled or no longer relevant                  |
+| `* * *`  | university student | view all upcoming events on a separate event column in the GUI | simultaneously view contact details and event details                  |
+| `* *`    | university student | be reminded on events and birthdays                        | so that i can remember upcoming social activities                      |
+| `* *`    | university student | assign contacts to groups                                  | i can easily identify who is involved in specific events               |
+
 
 
 ### Use cases
@@ -825,15 +860,16 @@ assigned to the event individually.
 **Use case: UC11 - Show reminders for events/birthdays happening soon**
 
 **MSS**
-1. User request a reminder for events/birthdays happening soon
-2. FumbleLog displays a list of events/birthdays happening soon
+1. User requests a reminder for events/birthdays happening soon using the 'remind' command.
+2. FumbleLog displays a list of events/birthdays happening in the next 7 days by default.
 
    Use case ends.
 
 **Extensions**
 
-* 1a. User can specify the range of time to search
-    * 1a1. FumbleLog shows the list of events/birthdays happening within the specified range of time
+* 1a.  User can specify the number of days to look ahead for events and birthdays after the 'remind' command.
+    * 1a1.   If the specified range is valid (e.g., a positive integer), FumbleLog shows the list of events/birthdays happening within the specified range of time (n days).
+    * 1a2.   If the specified range is invalid (e.g., a negative integer), FumbleLog shows an error message.
 
    Use case ends.
 

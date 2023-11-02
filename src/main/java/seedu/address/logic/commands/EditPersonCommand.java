@@ -96,6 +96,8 @@ public class EditPersonCommand extends Command {
 
         model.setPerson(personToEdit, editedPerson);
         model.updateAssignedPersons(personToEdit, editedPerson);
+
+
         Set<Group> emptyGroups = model.getEmptyGroups(personToEdit);
 
         if (!emptyGroups.isEmpty()) {
@@ -113,7 +115,9 @@ public class EditPersonCommand extends Command {
      * Creates and returns a {@code Person} with the details of {@code personToEdit}
      * edited with {@code editPersonDescriptor}.
      */
-    private static Person createEditedPerson(Person personToEdit, EditPersonDescriptor editPersonDescriptor) {
+    private static Person createEditedPerson(Person personToEdit,
+                                             EditPersonDescriptor editPersonDescriptor) throws CommandException {
+
         assert personToEdit != null;
 
         Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
@@ -121,8 +125,31 @@ public class EditPersonCommand extends Command {
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         Birthday updatedBirthday = editPersonDescriptor.getBirthday().orElse(personToEdit.getBirthday());
+
+        Set<Group> updatedGroups = new HashSet<>();
+
+        if (editPersonDescriptor.getGroups().isPresent()) {
+            updatedGroups.addAll(personToEdit.getGroups());
+            updatedGroups.addAll(editPersonDescriptor.getGroups().get());
+        } else {
+            updatedGroups.addAll(personToEdit.getGroups());
+        }
+
+        if (editPersonDescriptor.getUnassignGroups().isPresent()) {
+            if (personToEdit.getGroups().containsAll(editPersonDescriptor.getUnassignGroups().get())) {
+                updatedGroups.removeAll(editPersonDescriptor.getUnassignGroups().get());
+            } else {
+                Set<Group> invalidGroups =
+                        getInvalidGroups(personToEdit, editPersonDescriptor.getUnassignGroups().get());
+
+                throw new CommandException(String.format(Messages.MESSAGE_INVALID_UNASSIGN_GROUP,
+                        listInvalidGroups(invalidGroups)));
+            }
+            updatedGroups.removeAll(editPersonDescriptor.getUnassignGroups().get());
+        }
+
         Remark updatedRemark = editPersonDescriptor.getRemark().orElse(personToEdit.getRemark());
-        Set<Group> updatedGroups = editPersonDescriptor.getGroups().orElse(personToEdit.getGroups());
+
 
         Optional<Phone> phone = Optional.ofNullable(updatedPhone);
         Optional<Email> email = Optional.ofNullable(updatedEmail);
@@ -130,6 +157,28 @@ public class EditPersonCommand extends Command {
         Optional<Birthday> birthday = Optional.ofNullable(updatedBirthday);
         Optional<Remark> remark = Optional.ofNullable(updatedRemark);
         return new Person(updatedName, phone, email, address, birthday, remark, updatedGroups);
+    }
+
+    private static Set<Group> getInvalidGroups(Person personToEdit, Set<Group> groups) {
+        Set<Group> invalidGroups = new HashSet<>();
+        for (Group group : groups) {
+            if (!personToEdit.getGroups().contains(group)) {
+                invalidGroups.add(group);
+            }
+        }
+
+        return invalidGroups;
+    }
+
+    private static String listInvalidGroups(Set<Group> invalidGroups) {
+        StringBuilder builder = new StringBuilder();
+        for (Group group : invalidGroups) {
+            builder.append(group.toString());
+            builder.append(", ");
+        }
+
+        builder.delete(builder.length() - 2, builder.length()); //removes the last comma
+        return builder.toString();
     }
 
     @Override
@@ -169,6 +218,8 @@ public class EditPersonCommand extends Command {
         private Remark remark;
         private Set<Group> groups;
 
+        private Set<Group> unassignGroups;
+
         public EditPersonDescriptor() {}
 
         /**
@@ -183,13 +234,14 @@ public class EditPersonCommand extends Command {
             setBirthday(toCopy.birthday);
             setRemark(toCopy.remark);
             setGroups(toCopy.groups);
+            setUnassignGroups(toCopy.unassignGroups);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, birthday, groups);
+            return CollectionUtil.isAnyNonNull(name, phone, email, address, birthday, groups, unassignGroups);
         }
 
         public void setName(Name name) {
@@ -248,12 +300,29 @@ public class EditPersonCommand extends Command {
         }
 
         /**
+         * Sets {@code groups} to this object's {@code unassignGroups}.
+         */
+        public void setUnassignGroups(Set<Group> groups) {
+            this.unassignGroups = groups != null ? new HashSet<>(groups) : null;
+        }
+
+        /**
          * Returns an unmodifiable group set, which throws {@code UnsupportedOperationException}
          * if modification is attempted.
          * Returns {@code Optional#empty()} if {@code groups} is null.
          */
         public Optional<Set<Group>> getGroups() {
             return (groups != null) ? Optional.of(Collections.unmodifiableSet(groups)) : Optional.empty();
+        }
+
+        /**
+         * Returns an unmodifiable group set, which throws {@code UnsupportedOperationException}
+         * if modification is attempted.
+         * Returns {@code Optional#empty()} if {@code groups} is null.
+         */
+        public Optional<Set<Group>> getUnassignGroups() {
+            return (unassignGroups != null) ? Optional.of(unassignGroups)
+                    : Optional.empty();
         }
 
         @Override
@@ -289,5 +358,7 @@ public class EditPersonCommand extends Command {
                     .add("groups", groups)
                     .toString();
         }
+
+
     }
 }
