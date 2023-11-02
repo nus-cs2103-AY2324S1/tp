@@ -35,8 +35,8 @@ public class AddInterviewCommand extends Command {
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_APPLICANT + "18 "
             + PREFIX_JOB_ROLE + "Junior Software Engineer "
-            + PREFIX_START_TIME + "03-11-2024 1600 "
-            + PREFIX_END_TIME + "03-11-2024 1800";
+            + PREFIX_START_TIME + "03-11-2024 1500 "
+            + PREFIX_END_TIME + "03-11-2024 1600";
 
     public static final String MESSAGE_SUCCESS = "New interview added: %1$s";
     public static final String MESSAGE_DUPLICATE_INTERVIEW = "Error: This is a duplicate interview";
