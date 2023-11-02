@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.model.util.SerializeUtil.deserialize;
 
-import java.util.HashSet;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
@@ -200,8 +200,8 @@ public class TaskList extends ListEntryField implements Iterable<Task> {
      * Returns the set of tasks in this tasklist.
      * @return
      */
-    public Set<Task> getTaskSetClone() {
-        HashSet<Task> tasksClone = new HashSet<>();
+    public ArrayList<Task> getTaskListClone() {
+        ArrayList<Task> tasksClone = new ArrayList<>();
         for (Task task : internalTaskList) {
             tasksClone.add(task.clone());
         }
