@@ -117,34 +117,34 @@ public class CommandBoxHistoryTest {
     }
 
     /**
-     * Asserts that {@code commandBoxHistory#hasNext()} returns true and the return value
-     * of {@code commandBoxHistory#next()} equals to {@code element}.
+     * Asserts that {@code commandBoxHistory#hasNext()} returns true
+     * and the return value of {@code commandBoxHistory#next()} equals {@code command}.
      */
-    private void assertNextSuccess(String element) {
+    private void assertNextSuccess(String command) {
         assertTrue(commandBoxHistory.hasNext());
-        assertEquals(element, commandBoxHistory.next());
+        assertEquals(command, commandBoxHistory.next());
     }
 
     /**
-     * Asserts that {@code commandBoxHistory#hasPrevious()} returns true and the return value
-     * of {@code commandBoxHistory#previous()} equals to {@code element}.
+     * Asserts that {@code commandBoxHistory#hasPrevious()} returns true
+     * and the return value of {@code commandBoxHistory#previous()} equals {@code command}.
      */
-    private void assertPreviousSuccess(String element) {
+    private void assertPreviousSuccess(String command) {
         assertTrue(commandBoxHistory.hasPrevious());
-        assertEquals(element, commandBoxHistory.previous());
+        assertEquals(command, commandBoxHistory.previous());
     }
 
     /**
-     * Asserts that {@code commandBoxHistory#hasCurrent()} returns true and the return value
-     * of {@code commandBoxHistory#current()} equals to {@code element}.
+     * Asserts that {@code commandBoxHistory#hasCurrent()} returns true
+     * and the return value of {@code commandBoxHistory#current()} equals {@code command}.
      */
-    private void assertCurrentSuccess(String element) {
+    private void assertCurrentSuccess(String command) {
         assertTrue(commandBoxHistory.hasCurrent());
-        assertEquals(element, commandBoxHistory.current());
+        assertEquals(command, commandBoxHistory.current()); 
     }
 
     /**
-     * Asserts that {@code commandBoxHistory#hasNext()} returns false and the following
+     * Asserts that {@code commandBoxHistory#hasNext()} returns false and the
      * {@code commandBoxHistory#next()} call throws {@code NoSuchElementException}.
      */
     private void assertNextFailure() {
@@ -158,7 +158,7 @@ public class CommandBoxHistoryTest {
     }
 
     /**
-     * Asserts that {@code commandBoxHistory#hasPrevious()} returns false and the following
+     * Asserts that {@code commandBoxHistory#hasPrevious()} returns false and the
      * {@code commandBoxHistory#previous()} call throws {@code NoSuchElementException}.
      */
     private void assertPreviousFailure() {
@@ -172,7 +172,7 @@ public class CommandBoxHistoryTest {
     }
 
     /**
-     * Asserts that {@code commandBoxHistory#hasCurrent()} returns false and the following
+     * Asserts that {@code commandBoxHistory#hasCurrent()} returns false and the
      * {@code commandBoxHistory#current()} call throws {@code NoSuchElementException}.
      */
     private void assertCurrentFailure() {
