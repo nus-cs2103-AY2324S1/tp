@@ -43,7 +43,7 @@
                   <padding>
                     <Insets bottom="10" left="10" right="10" top="10" />
                   </padding>
-                     <Label alignment="CENTER_LEFT" maxWidth="1.7976931348623157E308" prefHeight="74.0" prefWidth="634.0" styleClass="label-header" text="   Hi Sarah :)" />
+                     <Label alignment="CENTER_LEFT" maxWidth="1.7976931348623157E308" prefHeight="74.0" prefWidth="634.0" styleClass="label-header" text="  Welcome to HealthSync :)" />
                      <HBox prefHeight="376.0" prefWidth="200.0" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
                         <children>
                             <StackPane fx:id="personListPanelPlaceholder" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="367.0" prefWidth="643.0" HBox.hgrow="ALWAYS" />
