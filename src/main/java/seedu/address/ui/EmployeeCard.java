@@ -58,6 +58,19 @@ public class EmployeeCard extends UiPart<Region> {
     public EmployeeCard(Employee employee, int displayedIndex) {
         super(FXML);
         this.employee = employee;
+
+        cardPane.setPadding(new Insets(3));
+        // alternate cardPane colour
+        if (displayedIndex % 2 == 0) {
+            cardPane.setStyle("-fx-background-color: #6b77b5; -fx-border-width: 1px; " +
+                    "-fx-background-radius: 10px; -fx-border-color: transparent; -fx-border-radius: 10px; " +
+                    "-fx-border-insets: 5px; -fx-background-insets: 5px");
+        } else {
+            cardPane.setStyle("-fx-background-color: #576CBC; -fx-border-width: 1px; " +
+                    "-fx-background-radius: 10px; -fx-border-color: transparent; -fx-border-radius: 10px; " +
+                    "-fx-border-insets: 5px; -fx-background-insets: 5px");
+        }
+
         id.setText(displayedIndex + ". ");
         name.setText(employee.getName().fullName);
         position.setText(employee.getPosition().value);
@@ -72,10 +85,10 @@ public class EmployeeCard extends UiPart<Region> {
                 .forEach(department -> departments.getChildren().add(new Label(department.departmentName)));
         if (employee.isOnLeaveToday()) {
             isOnLeave.setText("On Leave");
-            isOnLeave.setStyle("-fx-background-color: #b33940; -fx-text-fill: #ffffff; -fx-background-radius: 2;");
+            isOnLeave.setStyle("-fx-background-color: #b33940; -fx-text-fill: #ffffff; -fx-background-radius: 2; -fx-padding: 1 3 1 3;");
         } else {
             isOnLeave.setText("Present");
-            isOnLeave.setStyle("-fx-background-color: #62a662; -fx-text-fill: #ffffff; -fx-background-radius: 2;");
+            isOnLeave.setStyle("-fx-background-color: #62a662; -fx-text-fill: #ffffff; -fx-background-radius: 2; -fx-padding: 1 3 1 3;");
         }
     }
 }
