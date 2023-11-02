@@ -41,15 +41,11 @@ public class UnPaidCommand extends Command {
         Person personToMarkUnPaid = lastShownList.get(targetIndex.getZeroBased());
 
         model.purgeAddressBook();
-
         model.markPersonUnPaid(personToMarkUnPaid);
-
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-      
         model.commitAddressBook();
 
         return new CommandResult(String.format(MESSAGE_MARK_PERSON_UNPAID_SUCCESS, (personToMarkUnPaid.getPaid())));
-
     }
 
     @Override
