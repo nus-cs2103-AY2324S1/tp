@@ -188,8 +188,9 @@ list
 
 You should then see the list of clients in the application window.
 
-> [!NOTE]
-> You can quickly switch between the dashboard and the list of clients by using the `dashboard` and `list` commands.
+> 💡 Tip
+> 
+> You can quickly switch between the dashboard and the list of clients using the `dashboard` and `list` commands.
 
 ### Finding a client by name: ***find***
 
