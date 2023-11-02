@@ -14,6 +14,7 @@ In this user guide, you will find instructions on how to install Connectify and 
 Choose a topic from the table of contents below to find out how to manage your clients using Connectify!
 
 # Table of Contents
+* Table of Contents
 {:toc}
 
 
