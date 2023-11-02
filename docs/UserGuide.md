@@ -41,7 +41,6 @@ Let's get started by following the [Quick Start](#quick-start) section!
 
 4. Double-click the file to start the app. The Graphical User Interface(GUI) should appear in a few seconds.
 
-
 5. To get a better understanding of what you see. Please refer to the [GUI Summary](#gui-summary) for more details.
 
 --------------------------------------------------------------------------------------------------------------------
@@ -69,7 +68,7 @@ For each applicant and each interview, we see the following details:
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
 * Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+  e.g. `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
   e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
@@ -187,8 +186,8 @@ Format: `edit-i INTERVIEW_INDEX [app/APPLICANT_ID] [jr/JOB_TITLE] [time/INTERVIE
 * Existing values will be updated to the input values.
 
 Examples:
-*  `edit-i 1 jr/software-engineer` Edits the job title of the 1st interview to be `software engineer`.
-*  `edit-i 2 jr/data-analyst` Edits the job title of the 2nd interview to be `develop software`.
+*  `edit-i 1 jr/software-engineer` Edits the job title of the 1st interview to be `software-engineer`.
+*  `edit-i 2 jr/data-analyst` Edits the job title of the 2nd interview to be `data-analyst`.
 
 ## Deleting an applicant : `delete-a`
 
@@ -209,43 +208,21 @@ Deletes the specified interview from the address book.
 
 Format: `delete-i INDEX`
 
-* Deletes the inteview at the specified `INDEX`.
+* Deletes the interview at the specified `INDEX`.
 * The index refers to the index number shown in the displayed interview list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `delete-i 1` deletes the 1st inteview in the address book.
+* `delete-i 1` deletes the 1st interview in the address book.
 
-## Clearing all applicants : `clear-a`
+## Finding applicants: `find-a`
 
-Clears all applicants from the address book.
-
-Format: `clear-a`
-
-## Clearing all jobs : `clear-i`
-
-Clears all interviews from the address book.
-
-Format: `clear-i`
-
-* Clearing all interview will also clear all applicants.
-
-## Clearing all data : `nuke`
-
-Clears all data from the address book.
-
-Format: `nuke`
-
-* All applicants and interviews will be cleared completely from the address book.
-
-## Finding applicants (and their index in address book) by name: `find-a`
-
-Finds applicants whose names contain any of the given keywords.
+Finds applicants whose attributes contain any of the given keywords.
 
 Format: ``find-a [n/KEYWORDS [MORE_KEYWORDS]...] [p/NUMBER]
 [e/KEYWORDS [MORE_KEYWORDS]...] [a/KEYWORDS [MORE_KEYWORDS]...] [t/KEYWORDS [MORE_KEYWORDS]...]``
 
-* The search is case-insensitive. e.g `hans` will match `Hans`
+* The search is case-insensitive. e.g. `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 * At least one of the optional fields must be provided
 * Any of the fields (name, phone, email, address, tags) can be searched
@@ -262,13 +239,13 @@ Examples:
 `Serangoon Gardens Street`, `Ang Mo Kio`<br>
   ![result for 'find-a p/874 a/serangoon ang'](images/findPhoneAddress.png)
 
-## Finding interview (and their index in address book) by job title: `find-i`
+## Finding interview by job title: `find-i`
 
 Find interviews which jobs title contain any of the given keywords.
 
 Format: `find-i KEYWORD [MORE_KEYWORDS]`
 
-* The search is case-insensitive. e.g `ANALYST` will match `analyst`
+* The search is case-insensitive. e.g. `ANALYST` will match `analyst`
 * The order of the keywords does not matter. e.g. `Software Engineer` will match `Engineer Software`
 * Only the job title is searched.
 * Only full words will be matched e.g. `Analyst` will not match `Analysts`
@@ -278,11 +255,37 @@ Format: `find-i KEYWORD [MORE_KEYWORDS]`
 Examples:
 * `find-i software data` returns `Software-Engineer` and `Data-Analyst`.
 
+## Rating an interview: `rate`
+
+Rate the specified interview in the address book.
+
+Format: `rate INDEX RATING`
+
+* Rates the interview at the specified `INDEX`.
+* The index refers to the index number shown in the displayed interview list.
+* The index **must be a positive integer** 1, 2, 3, …​
+* The `RATING` must be a non-negative one decimal place number between 0.0 to 5.0 inclusive.
+
+Examples:
+* `rate 1 3.0` rates the first interview with a rating of 3.0.
+
+## Sorting interviews by rating: `sort-rate`
+
+Sort the interview list by rating in descending order (highest to the lowest rating).
+
+Format: `sort-rate`
+
 ## Exiting the program : `exit`
 
 Exits the program.
 
 Format: `exit`
+
+## Clearing all applicants and interviews : `clear`
+
+Clears all applicants and interviews from the address book.
+
+Format: `clear`
 
 ## Saving the data
 
@@ -295,10 +298,6 @@ InterviewHub data are saved automatically as a JSON file `[JAR file location]/da
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If your changes to the data file makes its format invalid, InterviewHub will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.
 </div>
-
-## Archiving data files `[coming in v2.0]`
-
-_Details coming soon ..._
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -319,33 +318,39 @@ _Details coming soon ..._
 
 ## General Command
 
-| Action                                  | Format, Examples                                                                                                                                          |
-|-----------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Clear all applicants and interviews** | `nuke`                                                                                                                                                    |
-| **Help**                                | `help`                                                                                                                                                    |
-| **Exit**                                | `exit`                                                                                                                                                    |
+| Action                                  | Format, Examples |
+|-----------------------------------------|------------------|
+| **Clear all applicants and interviews** | `clear`          |
+| **Help**                                | `help`           |
+| **Exit**                                | `exit`           |
 
 ## Applicant Management Command
 
 | Action                   | Format, Examples                                                                                                                                                                                                 |
 |--------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Add applicant**        | `add-a n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`                                            |
-| **Clear all applicants** | `clear-a`                                                                                                                                                                                                        |
-| **Delete applicant**     | `delete-a INDEX`<br> e.g., `delete-a 3`                                                                                                                                                                          |
+| **Delete applicant**     | `delete-a APPLICANT_INDEX`<br> e.g., `delete-a 3`                                                                                                                                                                |
 | **Edit applicant**       | `edit-a APPLICANT_INDEX [n/NAME] [t/INTERVIEW_DATETIME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]`<br> e.g.,`edit-a 2 n/John Doe`                                                                                   |
 | **Find applicant**       | `find-a [n/KEYWORDS [MORE_KEYWORDS]...] [p/NUMBER] [e/KEYWORDS [MORE_KEYWORDS]...] [a/KEYWORDS [MORE_KEYWORDS]...] [t/KEYWORDS [MORE_KEYWORDS]...]` <br> e.g., `find-a n/John Bob p/98765432 e/John@example.com` |
 | **List applicants**      | `list-a`                                                                                                                                                                                                         |
 
 ## Interview Management Command
 
-| Action                    | Format, Examples                                                                                                                      |
-|---------------------------|---------------------------------------------------------------------------------------------------------------------------------------|
-| **Add interview**         | `add-i app/APPLICANT_INDEX jr/JOB_TITLE time/INTERVIEW_DATETIME` <br> e.g., `add-i app/18 jr/software engineer time/2022-12-12 18:00` |
-| **Clear all interviews**  | `clear-i`                                                                                                                             |
-| **Delete interview**      | `delete-i INDEX`<br> e.g., `delete-i 3`                                                                                               |
-| **Edit interview**        | `edit-i INTERVIEW_INDEX [app/APPLICANT_INDEX] [jr/JOB_TITLE] [time/INTERVIEW_DATETIME]`<br> e.g.,`edit-i 2 jr/software-engineer`      |
-| **Find interview by job** | `find-i KEYWORD [MORE_KEYWORDS]`<br> e.g., `find-i software-engineer`                                                                 |
-| **List interview**        | `list-i`                                                                                                                              |
+| Action                        | Format, Examples                                                                                                                      |
+|-------------------------------|---------------------------------------------------------------------------------------------------------------------------------------|
+| **Add interview**             | `add-i app/APPLICANT_INDEX jr/JOB_TITLE time/INTERVIEW_DATETIME` <br> e.g., `add-i app/18 jr/software engineer time/2022-12-12 18:00` |
+| **Delete interview**          | `delete-i INTERVIEW_INDEX`<br> e.g., `delete-i 3`                                                                                     |
+| **Edit interview**            | `edit-i INTERVIEW_INDEX [app/APPLICANT_INDEX] [jr/JOB_TITLE] [time/INTERVIEW_DATETIME]`<br> e.g.,`edit-i 2 jr/software-engineer`      |
+| **Find interview by job**     | `find-i KEYWORD [MORE_KEYWORDS]`<br> e.g., `find-i software-engineer`                                                                 |
+| **List interview**            | `list-i`                                                                                                                              |
+| **List free time**            | `list-freetime INTERVIEW_DATETIME` <br> e.g, `list-freetime 12-12-2024`                                                               |
+| **List interview for today**  | `list-i-today`                                                                                                                        |
+| **Mark interview as done**    | `mark INTERVIEW_INDEX` <br> e.g., `mark 3`                                                                                            |
+| **Rate interview**            | `rate INTERVIEW_INDEX RATING` <br> e.g., `rate 1 3.0`                                                                                 |
+| **Show completed interview**  | `show-done`                                                                                                                           |
+| **Show incomplete interview** | `show-undone`                                                                                                                         |
+| **Sort interview by rating**  | `sort-rate`                                                                                                                           |
+| **Sort interview by time**    | `sort-time`                                                                                                                           |
 
 --------------------------------------------------------------------------------------------------------------------
 
