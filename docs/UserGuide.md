@@ -24,7 +24,7 @@ This project is based on the AddressBook-Level3 project created by the [SE-EDU i
 
 1. Ensure you have Java 11 or above installed in your Computer.
 
-2. Download the latest clubmemberscontact.jar from [here](https://github.com/se-edu/addressbook-level3/releases).
+2. Download the latest ClubMembersContact.jar from [here](https://github.com/AY2324S1-CS2103T-W15-3/tp/releases).
 
 3. Locate your jar file in your computer and double click on it to run the application. Alternatively, you can run the
    jar file from the command line using the java -jar clubmemberscontact.jar command.
