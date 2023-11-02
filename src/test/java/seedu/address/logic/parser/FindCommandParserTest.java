@@ -90,8 +90,8 @@ public class FindCommandParserTest {
         assertTrue(parser.parse(" t/friends") instanceof FindCommand);
 
         // optional arg
-        assertDoesNotThrow(() -> parser.parse(" e2/a@a.com"));
-        assertTrue(parser.parse(" e2/a@a.com") instanceof FindCommand);
+        assertDoesNotThrow(() -> parser.parse(" e2/\"a@a.com\""));
+        assertTrue(parser.parse(" e2/\" a@a.com\"") instanceof FindCommand);
     }
 
     @Test
