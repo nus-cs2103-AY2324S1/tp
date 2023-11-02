@@ -95,6 +95,7 @@ public class MainWindow extends UiPart<Stage> {
 
         // Set dependencies
         this.primaryStage = primaryStage;
+        this.primaryStage.setTitle("LinkTree App");
         this.logic = logic;
 
         // Configure the UI
