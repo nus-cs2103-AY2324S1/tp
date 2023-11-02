@@ -1,4 +1,4 @@
-g---
+---
 layout: page
 title: Developer Guide
 ---
@@ -184,7 +184,7 @@ To add a person, the user must specify the name of the person using the `n/` pre
 Except for the name, all the fields given to the `add` command are optional.
 </box>
 
-The flow for the `add` command is described by the following sequence diagram:
+The flow for the `add_person` command is described by the following sequence diagram:
 
 <img src="images/AddPersonSequenceDiagram.png" alt="AddPersonSequenceDiagram" width=600 />
 
@@ -200,15 +200,15 @@ The flow for the `add` command is described by the following sequence diagram:
 The original implementation of AB3's `Person` class is refactored to have the capacity of storing optional fields. This is done by using the `java.util.Optional<T>` class to represent the optional attributes of the `Person` object.
 Furthermore, we have added additional fields into the `Person` class to allow users to store more information about the person, such as their birthday.
 
-As the original `add` command already exists in AB3, this feature can be implemented by enhancing the `add` command.
+As the original `add_person` command already exists in AB3, this feature can be implemented by enhancing the `add` command.
 
 Furthermore, we accounted for empty/null inputs in the optional fields by generating a NULL_INSTANCE for the optional fields when the user does not specify the optional fields. This design decision allowed us to easily check
 for empty/null inputs in the Person object by checking if the optional field is not equal to the NULL_INSTANCE, instead of doing null pointer and empty string checks.
 
-* **Alternative 1 (current choice):** Enhance the existing `add` command.
+* **Alternative 1 (current choice):** Enhance the existing `add_person` command.
   * Pros: 
     * Easier to implement.
-    * Reuses the logic for the `add` command.
+    * Reuses the logic for the `add_person` command.
   * Cons:
     * Have to account for empty/null inputs in the optional fields when saving the data and testing it
     * Have to account for empty/null inputs in the optional fields when displaying the data
@@ -831,7 +831,7 @@ testers are expected to do more *exploratory* testing.
 
 1. Deleting a person while all persons are being shown
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+   1. Prerequisites: List all persons using the `list_all` or `list_persons` command. Multiple persons in the list.
 
    1. Test case: `delete 1`<br>
       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
