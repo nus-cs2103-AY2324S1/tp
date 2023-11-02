@@ -2,6 +2,7 @@ package seedu.ccacommander.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import seedu.ccacommander.commons.core.index.Index;
@@ -9,7 +10,9 @@ import seedu.ccacommander.commons.util.ToStringBuilder;
 import seedu.ccacommander.logic.Messages;
 import seedu.ccacommander.logic.commands.exceptions.CommandException;
 import seedu.ccacommander.model.Model;
+import seedu.ccacommander.model.enrolment.Enrolment;
 import seedu.ccacommander.model.member.Member;
+import seedu.ccacommander.model.shared.Name;
 
 /**
  * Deletes a member identified using its displayed index from CcaCommander.
@@ -33,12 +36,26 @@ public class DeleteMemberCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         List<Member> lastShownList = model.getFilteredMemberList();
+        List<Enrolment> enrolmentsList = model.getFilteredEnrolmentList();
+        List<Enrolment> enrolmentsToBeDeletedList = new ArrayList<>();
 
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_MEMBER_DISPLAYED_INDEX);
         }
 
         Member memberToDelete = lastShownList.get(targetIndex.getZeroBased());
+        Name memberToDeleteName = memberToDelete.getName();
+
+        for (Enrolment enrolment: enrolmentsList) {
+            if (enrolment.getMemberName().equals(memberToDeleteName)) {
+                enrolmentsToBeDeletedList.add(enrolment);
+            }
+        }
+
+        for (Enrolment enrolment: enrolmentsToBeDeletedList) {
+            model.deleteEnrolment(enrolment);
+        }
+
         model.deleteMember(memberToDelete);
         model.commit(String.format(MESSAGE_COMMIT, memberToDelete.getName()));
         return new CommandResult(String.format(MESSAGE_DELETE_MEMBER_SUCCESS, Messages.format(memberToDelete)));
