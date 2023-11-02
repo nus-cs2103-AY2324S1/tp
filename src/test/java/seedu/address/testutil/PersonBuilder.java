@@ -9,6 +9,7 @@ import seedu.address.model.person.BankAccount;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.JoinDate;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.Payroll;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Salary;
@@ -30,8 +31,8 @@ public class PersonBuilder {
     public static final String DEFAULT_ANNUALLEAVE = "14";
     public static final ArrayList<String> DEFAULT_ATTENDANCE_STORAGE = new ArrayList<>(
         Arrays.asList("27/10/2023//late"));
-    public static final ArrayList<String> DEFAULT_PAYROLL_STORAGE = new ArrayList<>(
-    );
+    public static final ArrayList<Payroll> DEFAULT_PAYROLL_STORAGE = new ArrayList<>(
+        Arrays.asList(new Payroll(new Salary(DEFAULT_SALARY))));
 
     private Name name;
     private Phone phone;
@@ -57,7 +58,7 @@ public class PersonBuilder {
         salary = new Salary(DEFAULT_SALARY);
         annualLeave = new AnnualLeave(DEFAULT_ANNUALLEAVE);
         attendanceStorage = new AttendanceStorage(DEFAULT_ATTENDANCE_STORAGE);
-        payrollStorage = new PayrollStorage();
+        payrollStorage = new PayrollStorage(DEFAULT_PAYROLL_STORAGE);
     }
 
     /**
@@ -73,7 +74,7 @@ public class PersonBuilder {
         salary = personToCopy.getSalary();
         annualLeave = personToCopy.getAnnualLeave();
         attendanceStorage = personToCopy.getAttendanceStorage();
-
+        payrollStorage = personToCopy.getPayrollStorage();
     }
 
     /**
@@ -148,8 +149,9 @@ public class PersonBuilder {
         return this;
     }
 
-    public PersonBuilder withPayrollStorage(ArrayList<String> payrollStorage) {
+    public PersonBuilder withPayrollStorage(ArrayList<Payroll> payrollStorage) {
         this.payrollStorage = new PayrollStorage(payrollStorage);
+        return this;
     }
 
     public Person build() {

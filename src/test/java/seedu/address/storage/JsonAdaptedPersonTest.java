@@ -6,6 +6,7 @@ import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.BENSON;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import org.junit.jupiter.api.Test;
 
@@ -38,7 +39,9 @@ public class JsonAdaptedPersonTest {
     private static final String VALID_SALARY = BENSON.getSalary().toString();
     private static final String VALID_ANNUALLEAVE = BENSON.getAnnualLeave().toString();
     private static final ArrayList<String> VALID_ATTENDANCE_STORAGE = BENSON.getAttendanceStorage().getValue();
-    private static final ArrayList<String> VALID_PAYROLL_STORAGE = BENSON.getPayrollStorage().getValue();
+    private static final ArrayList<JsonAdaptedPayroll> VALID_PAYROLL_STORAGE =
+            new ArrayList<>(Arrays.asList(
+                    new JsonAdaptedPayroll(BENSON.getPayrollStorage().getLatestPayroll())));
 
     @Test
     public void toModelType_validPersonDetails_returnsPerson() throws Exception {
