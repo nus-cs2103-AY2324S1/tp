@@ -154,7 +154,7 @@ Expected outputs when the command fails:
 * `Patient already exists in HealthSync.`
 * `Invalid command format! ...`
 
-### Editing a patient's details: `edit`
+### Editing a Patient's Details: `edit`
 
 Edits an existing patient's details in HealthSync.
 
@@ -181,13 +181,13 @@ Expected outputs when the command succeeds:
 Expected outputs when command fails:
 * `INVALID name and/or NRIC! ...`
 
-### Deleting a person or field: `delete`
+### Deleting a Patient or Field: `delete`
 
 Deletes the specified patient or an optional fields of the patient from HealthSync.
 
 * Deletes the patient or an optional field of the patient with the specified `n/NAME or id/IC_NUMBER`.
 * The name or IC must be valid.
-* To delete a specified field only instead of the entire person, we indicate the field after the identification.
+* To delete a specified field only instead of the entire patient, we indicate the field after the identification.
 * If multiple people has the same name, HealthSync will display a list of people with that name together with their IC number.
 
 Format: `delete n/NAME or id/IC_NUMBER [field]`
@@ -228,7 +228,7 @@ Searches the patient list for all patients matching the name or IC Number and re
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`.
 * Only the name or IC number is searched.
 * Only full words will be matched e.g. `Han` will not match `Hans`.
-* For the name, only persons matching at least one keyword will be returned (i.e. `OR` search).
+* For the name, only patients matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`.
   
 Format: `find n/NAME or id/IC_NUMBER`
@@ -297,7 +297,7 @@ Expected output when the command fails:
 
 >:bulb: `alog` does not overwrite the data and instead adds on to it, so you do not have to keep performing `log` to save more data
 
-### Clearing data from the log: `clog`
+### Clearing Data from the Log: `clog`
 
 Clears all current data in the logger tab.
 
@@ -342,7 +342,7 @@ Expected outputs when command fails:
 * `Undo step count cannot be a negative number or zero.`
 
 
-### Exiting the program: `exit`
+### Exiting HealthSync: `exit`
 
 
 Exits HealthSync.
