@@ -222,6 +222,17 @@ public class AppendLogCommandTest {
         }
     }
 
+    private class ModelStubAppendingPersonsFound extends ModelStubLoggingPersonAdded {
+        @Override
+        public ObservableList<Person> getFoundPersonsList() {
+            List<Person> persons = new ArrayList<>();
+            persons.add(new PersonBuilder().withName("Benson").build());
+            persons.add(new PersonBuilder().withName("Carl").build());
+            persons.add(new PersonBuilder().withName("Alice").build());
+            return FXCollections.observableArrayList(persons);
+        }
+    }
+
     @Test
     public void execute_resultsAppendedToEmptyLogBook_success() throws Exception {
 
@@ -255,6 +266,29 @@ public class AppendLogCommandTest {
 
         assertEquals(model.getLogBook().getPersonList().size(), 2);
         assertEquals(model.getLogBook().getPersonList().get(1), personToAppend);
+    }
+
+    @Test
+    public void execute_duplicatePersonsFound_appendSkipsDuplicate() throws Exception {
+
+        ModelStubAppendingPersonsFound model = new ModelStubAppendingPersonsFound();
+        Person existingPerson1 = new PersonBuilder().withName("Alice").build();
+        Person existingPerson2 = new PersonBuilder().withName("Benson").build();
+        Person personToAppend = new PersonBuilder().withName("Carl").build();
+
+        model.addPerson(existingPerson1);
+        model.addPerson(existingPerson2);
+
+        AppendLogCommand appendLogCommand = new AppendLogCommand();
+
+        CommandResult commandResult = appendLogCommand.execute(model);
+
+        assertEquals(AppendLogCommand.MESSAGE_SUCCESS, commandResult.getFeedbackToUser());
+
+        assertEquals(model.getLogBook().getPersonList().size(), 3);
+        assertEquals(model.getLogBook().getPersonList().get(0), existingPerson1);
+        assertEquals(model.getLogBook().getPersonList().get(1), existingPerson2);
+        assertEquals(model.getLogBook().getPersonList().get(2), personToAppend);
     }
 
     @Test
