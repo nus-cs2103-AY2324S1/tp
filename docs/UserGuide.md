@@ -220,21 +220,44 @@ separated by a spacing between 2 keywords.
 0 members listed!
 ```
 
-### View Member(s)
+### View Members/Applicants
 
-Generates a list of all existing member(s) in the members list.
+Generates a list of all existing member(s)/applicant(s). An example of where you might want to use this command is if
+you want to go back to viewing all members after a search with `findMember`.
 
 #### Usage:
+
+##### Viewing all members:
 
 `viewMembers`
 
 `viewm`
 
-#### Expected Outcome:
+##### Viewing all applicants:
 
-```
-Listed all members
-```
+`viewApplicants`
+
+`viewa`
+
+[//]: # (#### Expected Outcome:)
+
+[//]: # ()
+
+[//]: # (##### Members:)
+
+[//]: # (```)
+
+[//]: # (Listed all members)
+
+[//]: # (```)
+
+[//]: # (##### Applicants:)
+
+[//]: # (```)
+
+[//]: # (Listed all applicants)
+
+[//]: # (```)
 
 ### Delete Applicant
 
@@ -350,20 +373,50 @@ be separated by a spacing between 2 keywords.
 0 applicants listed!
 ```
 
-### View Applicant(s)
+### Copy Member/Applicant
 
-Generates a list of all existing applicant(s) in the applicants list.
+Copies the details of the member/applicant at the specified index to the clipboard.
 
 #### Usage:
 
-`viewApplicants`
+##### Copying member:
 
-`viewa`
+`copyMember {index}`
+
+`cpm {index}`
+
+##### Copying applicant:
+
+`copyApplicant {index}`
+
+`cpa {index}`
+
+#### Acceptable values for parameters:
+
+- `index`: Only numbers are allowed, starting from 1
+
+#### Example of usage:
+
+`copyMember 1`
+
+`cpm 1`
 
 #### Expected Outcome:
 
 ```
-Listed all applicants
+Copied details of member to clipboard:
+Name: Alex Yeoh
+Phone: 87438807
+Email: alexyeoh@example.com
+Telegram: @alexyeoh
+Tags: [Friend]
+Tasks: [Finish Proposal]
+```
+
+#### If index is out of range:
+
+```
+The member index provided is invalid
 ```
 
 --------------------------------------------------------------------------------------------------------------------
