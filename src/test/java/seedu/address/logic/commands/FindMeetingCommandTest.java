@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_MEETINGS_LISTED_OVERVIEW;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.testutil.TypicalAddressBook.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalMeetings.MEETING1;
 import static seedu.address.testutil.TypicalMeetings.MEETING2;
 import static seedu.address.testutil.TypicalMeetings.MEETING3;
@@ -27,17 +28,16 @@ import seedu.address.model.meeting.LocationContainsKeywordsPredicate;
 import seedu.address.model.meeting.MeetingTagContainsKeywordsPredicate;
 import seedu.address.model.meeting.MeetingTimeContainsPredicate;
 import seedu.address.model.meeting.TitleContainsKeywordsPredicate;
-import seedu.address.testutil.TypicalMeetings;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code FindMeetingCommand}.
  */
 public class FindMeetingCommandTest {
-    private Model model = new ModelManager(TypicalMeetings.getTypicalAddressBook(), new UserPrefs());
-    private Model expectedModel = new ModelManager(TypicalMeetings.getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
     private LocalDateTime start = LocalDateTime.of(LocalDate.of(0001, 01, 01), LocalTime.of(00, 00));
-    private LocalDateTime startOn30 = LocalDateTime.of(LocalDate.of(2023, 9, 30), LocalTime.of(10, 00));
-    private LocalDateTime endOn30 = LocalDateTime.of(LocalDate.of(2023, 9, 30), LocalTime.of(12, 00));
+    private LocalDateTime startOn30 = LocalDateTime.of(LocalDate.of(2023, 11, 30), LocalTime.of(10, 00));
+    private LocalDateTime endOn30 = LocalDateTime.of(LocalDate.of(2023, 11, 30), LocalTime.of(12, 00));
     private LocalDateTime start2 = LocalDateTime.of(LocalDate.of(0001, 01, 02), LocalTime.of(00, 00));
     private LocalDateTime end = LocalDateTime.of(LocalDate.of(9999, 12, 31), LocalTime.of(23, 59));
     @Test
@@ -135,29 +135,16 @@ public class FindMeetingCommandTest {
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(MEETING2, MEETING3, MEETING4), model.getFilteredMeetingList());
     }
-
-    @Test
-    public void execute_multipleTitleMultipleLocationAndAttendeeKeywords_twoMeetingFound() {
-        String expectedMessage = String.format(MESSAGE_MEETINGS_LISTED_OVERVIEW, 2);
-        GeneralMeetingPredicate predicate =
-                preparePredicate(new String[]{"ABCDE CS2101", "Zoom com", "Hoon", ""},
-                        start, end);
-        FindMeetingCommand command = new FindMeetingCommand(predicate);
-        expectedModel.updateFilteredMeetingList(predicate);
-        assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(MEETING3, MEETING4), model.getFilteredMeetingList());
-    }
-
     @Test
     public void execute_multipleTitleMultipleLocationAndMultipleAttendeeKeywords_twoMeetingFound() {
-        String expectedMessage = String.format(MESSAGE_MEETINGS_LISTED_OVERVIEW, 3);
+        String expectedMessage = String.format(MESSAGE_MEETINGS_LISTED_OVERVIEW, 2);
         GeneralMeetingPredicate predicate =
                 preparePredicate(new String[]{"ABCDE CS2101", "Zoom com", "Alice Benson", ""},
                         start, end);
         FindMeetingCommand command = new FindMeetingCommand(predicate);
         expectedModel.updateFilteredMeetingList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(MEETING2, MEETING3, MEETING4), model.getFilteredMeetingList());
+        assertEquals(Arrays.asList(MEETING3, MEETING4), model.getFilteredMeetingList());
     }
 
     @Test
@@ -188,7 +175,7 @@ public class FindMeetingCommandTest {
     public void execute_titleLocationAttendeeTagTimeKeywords_oneMeetingFound() {
         String expectedMessage = String.format(MESSAGE_MEETINGS_LISTED_OVERVIEW, 1);
         GeneralMeetingPredicate predicate =
-                preparePredicate(new String[]{"ABCDE CS2101", "Zoom com", "Alice Benson", "work important"},
+                preparePredicate(new String[]{"ABCDE CS2101", "Zoom com", "", "work important"},
                         startOn30, endOn30);
         FindMeetingCommand command = new FindMeetingCommand(predicate);
         expectedModel.updateFilteredMeetingList(predicate);

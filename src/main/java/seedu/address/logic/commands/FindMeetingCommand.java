@@ -34,7 +34,7 @@ public class FindMeetingCommand extends Command {
      * @param predicate The predicate that will be used by the FindMeetingCommand object.
      */
     public FindMeetingCommand(GeneralMeetingPredicate predicate) {
-        assert predicate != null;
+        requireNonNull(predicate);
         this.predicate = predicate;
     }
 

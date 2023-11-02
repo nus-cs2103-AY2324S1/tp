@@ -5,14 +5,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.testutil.TypicalAddressBook.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_MEETING;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_OUT_OF_BOUNDS;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_MEETING;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
-
-import java.util.Arrays;
 
 import org.junit.jupiter.api.Test;
 
@@ -23,8 +21,6 @@ import seedu.address.model.UserPrefs;
 import seedu.address.model.meeting.Meeting;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.MeetingBuilder;
-import seedu.address.testutil.TypicalMeetings;
-import seedu.address.testutil.TypicalPersons;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for
@@ -36,7 +32,6 @@ public class AddMeetingContactCommandTest {
 
     @Test
     public void execute_valid_success() {
-        model.addMeeting(TypicalMeetings.MEETING2);
         AddMeetingContactCommand addmcCommand = new AddMeetingContactCommand(INDEX_FIRST_MEETING,
                 INDEX_FIRST_PERSON);
 
@@ -53,7 +48,7 @@ public class AddMeetingContactCommandTest {
         assertEquals(expectedMessage, message);
 
         Meeting updatedMeeting = model.getFilteredMeetingList().get(INDEX_FIRST_MEETING.getZeroBased());
-        String[] expectedAttendees = Arrays.copyOfRange(TypicalPersons.getTypicalAttendees(), 0, 7);
+        String[] expectedAttendees = new String[] { personToAdd.getName().fullName };
         Meeting expectedMeeting = new MeetingBuilder(meeting)
                 .withAttendees(expectedAttendees)
                 .build();
@@ -64,7 +59,7 @@ public class AddMeetingContactCommandTest {
 
     @Test
     public void execute_invalidMeetingIndex_throwsCommandException() {
-        AddMeetingContactCommand addmcCommand = new AddMeetingContactCommand(INDEX_SECOND_MEETING,
+        AddMeetingContactCommand addmcCommand = new AddMeetingContactCommand(INDEX_OUT_OF_BOUNDS,
                 INDEX_FIRST_PERSON);
 
         // throws error for invalid meeting index
@@ -73,7 +68,6 @@ public class AddMeetingContactCommandTest {
 
     @Test
     public void execute_invalidContactIndex_throwsCommandException() {
-        model.addMeeting(TypicalMeetings.MEETING1);
         AddMeetingContactCommand addmcCommand = new AddMeetingContactCommand(INDEX_FIRST_MEETING,
                 INDEX_OUT_OF_BOUNDS);
 
@@ -83,9 +77,11 @@ public class AddMeetingContactCommandTest {
 
     @Test
     public void execute_duplicateAttendee_throwsCommandException() {
-        model.addMeeting(TypicalMeetings.MEETING1);
         AddMeetingContactCommand addmcCommand = new AddMeetingContactCommand(INDEX_FIRST_MEETING,
                 INDEX_FIRST_PERSON);
+
+        // does not throw the first time
+        assertDoesNotThrow(() -> addmcCommand.execute(model));
 
         // throws error for duplicate attendee
         assertThrows(CommandException.class, () -> addmcCommand.execute(model));

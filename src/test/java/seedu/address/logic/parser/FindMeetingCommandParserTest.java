@@ -80,11 +80,6 @@ public class FindMeetingCommandParserTest {
 
     @Test
     public void parse_inValidArgsTime_throwsParseException() {
-        LocalDateTime start = LocalDateTime.parse("20.09.2023 1000", FORMAT);
-        LocalDateTime end = LocalDateTime.parse("20.09.2023 1200", FORMAT);
-        FindMeetingCommand expectedFindMeetingCommand =
-                new FindMeetingCommand(preparePredicate(new String[]{"", "", "", ""},
-                        end, start));
         assertParseFailure(parser, " e/20.09.2023 1000 s/20.09.2023 1200",
                 String.format(MeetingTime.MESSAGE_CONSTRAINTS));
     }

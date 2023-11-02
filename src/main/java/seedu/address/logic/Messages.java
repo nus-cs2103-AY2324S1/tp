@@ -71,6 +71,8 @@ public class Messages {
                 .append(meeting.getEnd())
                 .append("; Attendees: ");
         meeting.getAttendees().forEach(builder::append);
+        builder.append("; Completed: ")
+                .append(meeting.getStatus());
         return builder.toString();
     }
 

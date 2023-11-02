@@ -67,6 +67,21 @@ public class UniquePersonList implements Iterable<Person> {
     }
 
     /**
+     * Returns the person with the given name
+     * or throws {@code IndexOutOfBoundsException} if it does not exist.
+     */
+    public Person getPerson(String fullName) {
+        Name name = new Name(fullName);
+        List<Person> filteredList = internalList.filtered(person -> person.getName().equals(name));
+
+        if (filteredList.size() == 0) {
+            throw new PersonNotFoundException();
+        }
+
+        return filteredList.get(0);
+    }
+
+    /**
      * Replaces the person {@code target} in the list with {@code editedPerson}.
      * {@code target} must exist in the list.
      * The person identity of {@code editedPerson} must not be the same as another existing person in the list.

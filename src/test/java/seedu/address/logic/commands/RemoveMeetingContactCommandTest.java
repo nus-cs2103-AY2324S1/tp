@@ -5,12 +5,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.testutil.TypicalAddressBook.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_MEETING;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_OUT_OF_BOUNDS;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_MEETING;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.util.Arrays;
 
@@ -23,7 +23,6 @@ import seedu.address.model.UserPrefs;
 import seedu.address.model.meeting.Attendee;
 import seedu.address.model.meeting.Meeting;
 import seedu.address.testutil.MeetingBuilder;
-import seedu.address.testutil.TypicalMeetings;
 import seedu.address.testutil.TypicalPersons;
 
 /**
@@ -36,11 +35,10 @@ public class RemoveMeetingContactCommandTest {
 
     @Test
     public void execute_valid_success() {
-        model.addMeeting(TypicalMeetings.MEETING1);
-        RemoveMeetingContactCommand rmmcCommand = new RemoveMeetingContactCommand(INDEX_FIRST_MEETING,
+        RemoveMeetingContactCommand rmmcCommand = new RemoveMeetingContactCommand(INDEX_SECOND_MEETING,
                 INDEX_FIRST_PERSON);
 
-        Meeting meeting = model.getFilteredMeetingList().get(INDEX_FIRST_MEETING.getZeroBased());
+        Meeting meeting = model.getFilteredMeetingList().get(INDEX_SECOND_MEETING.getZeroBased());
         Attendee attendeeToRemove = meeting.getAttendee(INDEX_FIRST_PERSON);
 
         // No errors thrown
@@ -52,8 +50,8 @@ public class RemoveMeetingContactCommandTest {
         // Output message is correct
         assertEquals(expectedMessage, message);
 
-        Meeting updatedMeeting = model.getFilteredMeetingList().get(INDEX_FIRST_MEETING.getZeroBased());
-        String[] expectedAttendees = Arrays.copyOfRange(TypicalPersons.getTypicalAttendees(), 1, 8);
+        Meeting updatedMeeting = model.getFilteredMeetingList().get(INDEX_SECOND_MEETING.getZeroBased());
+        String[] expectedAttendees = Arrays.copyOfRange(TypicalPersons.getTypicalAttendeesSubset1(), 1, 4);
         Meeting expectedMeeting = new MeetingBuilder(meeting)
             .withAttendees(expectedAttendees)
             .build();
@@ -64,7 +62,7 @@ public class RemoveMeetingContactCommandTest {
 
     @Test
     public void execute_invalidMeetingIndex_throwsCommandException() {
-        RemoveMeetingContactCommand rmmcCommand = new RemoveMeetingContactCommand(INDEX_SECOND_MEETING,
+        RemoveMeetingContactCommand rmmcCommand = new RemoveMeetingContactCommand(INDEX_OUT_OF_BOUNDS,
                 INDEX_FIRST_PERSON);
 
         // throws error for invalid meeting index
@@ -73,7 +71,6 @@ public class RemoveMeetingContactCommandTest {
 
     @Test
     public void execute_invalidAttendeeIndex_throwsCommandException() {
-        model.addMeeting(TypicalMeetings.MEETING1);
         RemoveMeetingContactCommand rmmcCommand = new RemoveMeetingContactCommand(INDEX_FIRST_MEETING,
                 INDEX_OUT_OF_BOUNDS);
 

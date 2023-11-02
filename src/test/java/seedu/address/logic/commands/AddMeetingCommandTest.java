@@ -133,6 +133,11 @@ public class AddMeetingCommandTest {
         }
 
         @Override
+        public Person getPerson(String name) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void setAddressBook(ReadOnlyAddressBook newData) {
             throw new AssertionError("This method should not be called.");
         }
@@ -149,7 +154,7 @@ public class AddMeetingCommandTest {
 
         @Override
         public boolean hasMeeting(Meeting meeting) {
-            return false;
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override
@@ -189,7 +194,7 @@ public class AddMeetingCommandTest {
 
         @Override
         public ObservableList<Meeting> getFilteredMeetingList() {
-            return null;
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override
@@ -204,7 +209,7 @@ public class AddMeetingCommandTest {
 
         @Override
         public boolean hasName(String attendeeName) {
-            return false;
+            throw new AssertionError("This method should not be called.");
         }
 
 

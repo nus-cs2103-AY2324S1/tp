@@ -231,7 +231,6 @@ Once the indexes of the `Person` and `Meeting` objects to view (if any) are stor
      - For both edit commands, it is also more important that they can display dynamic updates.
    - For the case of `deletec`, `deletem`, `findc` and `findm`, the stored `Index` is set to null to prevent potential out-of-bounds error.
 
-
 ### Find meeting feature
 
 #### Behaviour and Implementation
@@ -259,7 +258,6 @@ Step 2. The `FindMeetingCommand` will be immediately executed and will call `set
 
 The following diagrams show the entire sequence flow for `LogicManager#execute()` for FindMeetingCommand.
 ![FindMeetingSequence2](images/FindMeetingSequence2.png)
-
 
 #### Design Considerations and Rationale
 
@@ -289,15 +287,14 @@ The following sequence diagram shows how the add attendee operation works:
 A Person object can be obtained from a Meeting's list of attendees by searching through `UniquePersonList`
 for a `Person` with a name matching `attendeeName`.
 
-
 ### Remove attendee feature
+
 User can specify an Attendee to remove from a specified Meeting by specifying its index in the list of Attendees.
 This is the main motivation behind using a LinkedHashSet for the implementation of the Attendee Set.
 
 The following sequence diagram shows how the remove attendee operation works:
 
 ![RemoveAttendeeSequenceDiagram](images/RemoveAttendeeSequenceDiagram.png)
-
 
 ### \[Proposed\] Undo/redo feature
 
@@ -460,6 +457,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | agent                                     | add contacts to meetings        |                                       |
 | `* * *`  | agent                                     | remove contacts from meetings   |                                       |
 | `* * *`  | agent                                     | view contacts in meetings       |                                       |
+| `* *`    | agent                                     | mark meetings as complete       | know which meetings are still pending |
 | `*`      | agent who wants to meet clients regularly | know the last contacted date    | when to touch base with a client      |
 
 _{More to be added}_
@@ -517,6 +515,8 @@ _{More to be added}_
 4.  OutBook shows the details of the meeting.
 5.  User requests to remove a specific contact from the meeting.
 6.  OutBook removes the contact from the meeting.
+7.  User requests to remove a specific contact from the meeting.
+8.  OutBook removes the contact from the meeting.
 
     Use case ends.
 

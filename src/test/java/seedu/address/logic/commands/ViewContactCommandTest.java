@@ -6,9 +6,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
+import static seedu.address.testutil.TypicalAddressBook.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
 
@@ -34,7 +34,7 @@ public class ViewContactCommandTest {
         String expectedMessage = String.format(Messages.MESSAGE_PERSON_VIEWED_OVERVIEW, personToView.getName());
         String expectedDisplayString = String.format(
                 "Name: %s\nPhone: %s\nEmail: %s\nLast Meeting: %s\nStatus: %s\nRemark: %s",
-                "Alice Pauline", "94351253", "alice@example.com", "20 October 2023, 1100", "NIL", "");
+                "Bob Choo", "22222222", "bob@example.com", "20 September 2023, 1200", "prospective", "");
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
 
@@ -60,7 +60,7 @@ public class ViewContactCommandTest {
         String expectedMessage = String.format(Messages.MESSAGE_PERSON_VIEWED_OVERVIEW, personToView.getName());
         String expectedDisplayString = String.format(
                 "Name: %s\nPhone: %s\nEmail: %s\nLast Meeting: %s\nStatus: %s\nRemark: %s",
-                "Alice Pauline", "94351253", "alice@example.com", "20 October 2023, 1100", "NIL", "");
+                "Bob Choo", "22222222", "bob@example.com", "20 September 2023, 1200", "prospective", "");
 
         // Model displaying filtered list should not change
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());

@@ -12,9 +12,9 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_TITLE_MEETING1;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showMeetingAtIndex;
+import static seedu.address.testutil.TypicalAddressBook.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_MEETING;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_MEETING;
-import static seedu.address.testutil.TypicalMeetings.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
 
@@ -43,16 +43,16 @@ public class EditMeetingCommandTest {
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
         // Attendees field do not get edited by this command.
-        Meeting editedMeeting = new MeetingBuilder().withAttendees(TypicalPersons.getTypicalAttendees()).build();
+        Meeting editedMeeting = new MeetingBuilder().withAttendees(TypicalPersons.getTypicalAttendeesSubset1()).build();
 
         EditMeetingDescriptor descriptor = new EditMeetingDescriptorBuilder(editedMeeting).build();
-        EditMeetingCommand editMeetingCommand = new EditMeetingCommand(INDEX_FIRST_MEETING, descriptor);
+        EditMeetingCommand editMeetingCommand = new EditMeetingCommand(INDEX_SECOND_MEETING, descriptor);
 
         String expectedMessage = String.format(EditMeetingCommand.MESSAGE_EDIT_MEETING_SUCCESS,
                 Messages.format(editedMeeting));
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-        expectedModel.setMeeting(model.getFilteredMeetingList().get(0), editedMeeting);
+        expectedModel.setMeeting(model.getFilteredMeetingList().get(1), editedMeeting);
 
         assertCommandSuccess(editMeetingCommand, model, expectedMessage, expectedModel);
     }

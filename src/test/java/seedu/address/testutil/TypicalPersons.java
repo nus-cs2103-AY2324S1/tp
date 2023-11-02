@@ -63,26 +63,35 @@ public class TypicalPersons {
     private TypicalPersons() {
     } // prevents instantiation
 
+    public static List<Person> getTypicalPersons() {
+        return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE, HOON, BOB));
+    }
+
     /**
-     * Returns an {@code AddressBook} with all the typical persons and meetings.
+     * Returns an {@code AddressBook} with all the typical persons only.
      */
-    public static AddressBook getTypicalAddressBook() {
+    public static AddressBook getTypicalPersonsAddressBook() {
         AddressBook ab = new AddressBook();
-        for (Person person : getTypicalPersons()) {
+
+        for (Person person : TypicalPersons.getTypicalPersons()) {
             ab.addPerson(person);
         }
 
         return ab;
     }
 
-    public static List<Person> getTypicalPersons() {
-        return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE, HOON));
+    public static String[] getTypicalAttendeesAll() {
+        List<Person> typicalPersons = TypicalPersons.getTypicalPersons();
+        String[] typicalAttendees = typicalPersons.stream().map(Person::getName).map(Name::toString)
+                .collect(Collectors.toList()).toArray(String[]::new);
+        return typicalAttendees;
     }
 
-    public static String[] getTypicalAttendees() {
-        List<Person> typicalPersons = getTypicalPersons();
-        String[] typicalAttendees = typicalPersons.stream().map(Person::getName).map(Name::toString)
-                .collect(Collectors.toList()).toArray(new String[0]);
-        return typicalAttendees;
+    public static String[] getTypicalAttendeesSubset1() {
+        return Arrays.copyOfRange(getTypicalAttendeesAll(), 3, 7);
+    }
+
+    public static String[] getTypicalAttendeesSubset2() {
+        return Arrays.copyOfRange(getTypicalAttendeesAll(), 1, 4);
     }
 }

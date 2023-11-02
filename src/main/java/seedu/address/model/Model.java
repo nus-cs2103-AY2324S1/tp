@@ -91,6 +91,12 @@ public interface Model {
     void addMeeting(Meeting meeting);
 
     /**
+     * Returns the person with the given name.
+     * A person with the given name must exist in the address book.
+     */
+    Person getPerson(String name);
+
+    /**
      * Replaces the given person {@code target} with {@code editedPerson}.
      * {@code target} must exist in the address book.
      * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
