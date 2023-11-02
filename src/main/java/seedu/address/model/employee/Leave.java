@@ -12,9 +12,8 @@ import java.time.format.DateTimeParseException;
  * Guarantees: immutable; is valid as declared in {@link #isValidLeaveDate(String)}
  */
 public class Leave {
-
     public static final String MESSAGE_CONSTRAINTS = "Leave dates have to be of format yyyy-MM-dd!"
-            + "Please ensure that the date is valid!";
+            + " Please ensure that the date is valid!";
 
     public static final DateTimeFormatter VALID_DATE_FORMAT = ISO_LOCAL_DATE;
 
@@ -82,5 +81,4 @@ public class Leave {
     public int hashCode() {
         return leaveDate.hashCode();
     }
-
 }

@@ -9,12 +9,14 @@ import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
+import seedu.address.logic.commands.OvertimeCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.department.Department;
 import seedu.address.model.employee.Email;
 import seedu.address.model.employee.Id;
 import seedu.address.model.employee.Leave;
 import seedu.address.model.employee.Name;
+import seedu.address.model.employee.OvertimeHours;
 import seedu.address.model.employee.Phone;
 import seedu.address.model.employee.Position;
 import seedu.address.model.employee.Salary;
@@ -173,5 +175,29 @@ public class ParserUtil {
             throw new ParseException(Leave.MESSAGE_CONSTRAINTS);
         }
         return LocalDate.parse(leaveDate, Leave.VALID_DATE_FORMAT);
+    }
+
+    /**
+     * Parses a {@code String hours} into an {@code OvertimeHours}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code hours} is invalid.
+     */
+    public static OvertimeHours parseOvertimeHours(String hours) throws ParseException {
+        requireNonNull(hours);
+        String trimmedHours = hours.trim();
+        int overtimeHours;
+        try {
+            overtimeHours = Integer.parseInt(trimmedHours);
+        } catch (NumberFormatException e) {
+            throw new ParseException(OvertimeCommand.MESSAGE_INVALID_AMOUNT);
+        }
+        if (overtimeHours <= 0) {
+            throw new ParseException(OvertimeCommand.MESSAGE_INVALID_AMOUNT);
+        }
+        if (!OvertimeHours.isValidOvertimeHours(overtimeHours)) {
+            throw new ParseException(OvertimeHours.MESSAGE_CONSTRAINTS);
+        }
+        return new OvertimeHours(overtimeHours);
     }
 }

@@ -41,8 +41,10 @@ HouR is a **desktop app for managing employee records, optimized for use via a C
 
    * `addleave id/EID1234-5678 from/2023-12-26 to/2023-12-28`: Adds leave dates from 29 to 31 October 2023 inclusive for employee with id EID1234-5678
 
-   * `deleteleave id/EID1234-5678 from/2023-12-26 to/2023-12-28`: Deletes all leave dates of an employee with id EID1234-5678 that fall between 29 and 31 October 2023 inclusive 
-
+   * `deleteleave id/EID1234-5678 from/2023-12-26 to/2023-12-28`: Deletes all leave dates of an employee with id EID1234-5678 that fall between 29 and 31 October 2023 inclusive
+   
+   * `overtime id/EID1234-5678 o/inc a/10`: Increases the overtime hours of employee with id EID1234-5678 to 10 hours.
+   
    * `report EID1234-5678`: Generates a report with details on leaves and overtime for employee with id EID1234-5678.
 
    * `clear` : Deletes all employees.
@@ -64,6 +66,7 @@ HouR is a **desktop app for managing employee records, optimized for use via a C
 - Sort employees by attribute: `sort`
 - Add leave dates for an employee: `addleave`
 - Delete leave dates of an employee: `deleteleave`
+- Update overtime hours of an employee: `overtime`
 - Get details on employee performance: `report`
 - Clear all employees: `clear`
 - Exit the program: `exit`
@@ -238,6 +241,25 @@ Examples:
 
 ![deleteleave failure](images/deleteLeaveFailure.png)
 
+### Updating overtime hours of an employee : `overtime`
+
+Updates the overtime hours of an employee.
+
+Format: `overtime id/EMPLOYEE_ID o/OPERATION a/AMOUNT`
+
+* Updates the overtime hours of the employee with the specified `EMPLOYEE_ID` **in EID format** (EID[4 digits]-[4 digits]).
+* The operation can be either `inc` or `dec` to increase or decrease the overtime hours respectively.
+* The amount is the number of hours to increase or decrease the overtime hours by.
+* The amount must be a positive integer, i.e. greater than 0.
+
+Examples:
+* `overtime id/EID1234-5678 o/inc a/10` increases the overtime hours of employee with id EID1234-5678 by 10 hours.
+
+![overtime success](images/overtimeSuccess.png)
+
+* `overtime id/EID1234-5678 o/dec a/20` is invalid because it will result in negative overtime hours.
+
+![overtime failure](images/overtimeFailure.png)
 
 ### Generating a report : `report`
 
@@ -316,5 +338,6 @@ _Details coming soon ..._
 | **Sort**        | `sort f/FIELD in/ORDER`                                                                                                                                                                      |
 | **AddLeave**    | `addleave id/EMPLOYEE_ID from/START_DATE to/END_DATE` <br/> e.g., `addleave id/EID1234-5678 from/2023-12-26 to/2023-12-28`                                                                   |
 | **DeleteLeave** | `deleteleave id/EMPLOYEE_ID from/START_DATE to/END_DATE` <br/> e.g., `deleteleave id/EID1234-5678 from/2023-12-26 to/2023-12-28`                                                             |
+| **Overtime**    | `overtime id/EMPLOYEE_ID o/OPERATION a/AMOUNT` <br/> e.g., `overtime id/EID1234-5678 o/inc a/10`                                                                                             |
 | **Help**        | `help`                                                                                                                                                                                       |
 | **Exit**        | `exit`                                                                                                                                                                                       |
