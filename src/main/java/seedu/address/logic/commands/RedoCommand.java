@@ -13,6 +13,9 @@ import seedu.address.model.Model;
 public class RedoCommand extends Command {
 
     public static final String COMMAND_WORD = "redo";
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + ": Restores the effect of the most recent undone command.\n"
+            + "No parameters are required.";
     public static final String MESSAGE_SUCCESS = "Last undo has been redone!";
     public static final String MESSAGE_FAILURE = "No commands to redo!";
 
