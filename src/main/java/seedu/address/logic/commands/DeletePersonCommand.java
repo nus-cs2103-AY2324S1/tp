@@ -16,7 +16,7 @@ import seedu.address.model.person.Person;
  */
 public class DeletePersonCommand extends Command {
 
-    public static final String COMMAND_WORD = "deletePerson";
+    public static final String COMMAND_WORD = "deleteperson";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the entry identified by the index number used in the displayed list.\n"

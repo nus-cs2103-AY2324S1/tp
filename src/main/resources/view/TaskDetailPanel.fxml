@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<ScrollPane fitToHeight="true" fitToWidth="true" style="-fx-background: #231F31; -fx-background-radius: 10; -fx-border-width: 0; -fx-background-color: transparent;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<ScrollPane fitToHeight="true" fitToWidth="true" style="-fx-background: #231F31; -fx-background-radius: 10; -fx-border-width: 0; -fx-background-color: transparent;" xmlns="http://javafx.com/javafx/17.0.7" xmlns:fx="http://javafx.com/fxml/1">
     <content>
         <AnchorPane prefHeight="340.0" prefWidth="340.0" style="-fx-background-color: #322D46; -fx-background-radius: 10;">
             <children>
@@ -29,16 +29,6 @@
                         <Label fx:id="desc" style="-fx-background-color: transparent; -fx-text-fill: white;" text="\$desc" wrapText="true" HBox.hgrow="ALWAYS" />
                             </children>
                         </HBox>
-                  <HBox prefHeight="100.0" prefWidth="200.0">
-                     <children>
-                        <Label text="Is Done?" style="-fx-background-color: transparent; -fx-text-fill: white;">
-                           <HBox.margin>
-                              <Insets right="5.0" />
-                           </HBox.margin>
-                        </Label>
-                        <Label fx:id="isDone" text="\\$value" style="-fx-background-color: transparent; -fx-text-fill: white;"/>
-                     </children>
-                  </HBox>
                     </children>
                 </VBox>
             </children>

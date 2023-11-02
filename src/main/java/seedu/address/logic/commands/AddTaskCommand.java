@@ -12,7 +12,7 @@ import seedu.address.model.lessons.Task;
  * Adds a task to a lesson in the schedule.
  */
 public class AddTaskCommand extends Command {
-    public static final String COMMAND_WORD = "addTask";
+    public static final String COMMAND_WORD = "addtask";
     private Task task;
     private Index index;
     /**
