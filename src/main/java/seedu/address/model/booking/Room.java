@@ -39,25 +39,24 @@ public class Room {
         STUDIO,
         DELUXE,
         SUITES,
-        PRESIDENTIAL_SUITE,
-        VIP;
+        PRESIDENTIAL_SUITE;
 
         private static final Map<Integer, RoomType> ROOM_MAP = new HashMap<>();
 
-        static {
-            for (int i = 1; i <= 100; i++) {
+        static { // The room types are organised by their room numbers.
+            for (int i = 1; i <= 100; i++) { //Rooms 1-100 are normal rooms.
                 ROOM_MAP.put(i, NORMAL);
             }
-            for (int i = 101; i <= 200; i++) {
+            for (int i = 101; i <= 200; i++) { //Rooms 101 to 200 are studio rooms.
                 ROOM_MAP.put(i, STUDIO);
             }
-            for (int i = 201; i <= 300; i++) {
+            for (int i = 201; i <= 300; i++) { //Rooms 201 to 300 are deluxe rooms.
                 ROOM_MAP.put(i, DELUXE);
             }
-            for (int i = 301; i <= 400; i++) {
+            for (int i = 301; i <= 400; i++) { //Rooms 301 to 400 are suites.
                 ROOM_MAP.put(i, SUITES);
             }
-            for (int i = 401; i <= 500; i++) {
+            for (int i = 401; i <= 500; i++) { //Rooms 401 to 500 are presidential suites.
                 ROOM_MAP.put(i, PRESIDENTIAL_SUITE);
             }
         }
