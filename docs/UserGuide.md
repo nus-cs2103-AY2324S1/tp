@@ -205,7 +205,7 @@ Format: `find [n/NAME]…​ [fp/FINANCIAL_PLAN]…​ [t/TAG]…​`
 Examples:
 * `find n/John` returns `john` and `John Doe`
 * `find n/alex n/david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
+  ![result for 'find alex david'](images/findJohnCharlieResult.png)
 
 ### Gathering emails of matching persons: `gather`
 
