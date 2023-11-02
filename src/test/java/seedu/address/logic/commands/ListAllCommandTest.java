@@ -29,7 +29,7 @@ public class ListAllCommandTest {
     public void modelStubWorksAsIntended() {
         ModelStubAcceptingPersonsAndEvents modelStub = new ModelStubAcceptingPersonsAndEvents();
 
-        assertEquals(1, modelStub.getEventList().size());
+        assertEquals(1, modelStub.getFilteredEventList().size());
         assertEquals(1, modelStub.getPersonList().size());
     }
 
@@ -42,7 +42,7 @@ public class ListAllCommandTest {
 
         assertEquals(ListAllCommand.MESSAGE_SUCCESS, commandResult.getFeedbackToUser());
 
-        assertEquals(2, modelStub.getEventList().size());
+        assertEquals(2, modelStub.getFilteredEventList().size());
         assertEquals(2, modelStub.getPersonList().size());
     }
 
@@ -116,7 +116,12 @@ public class ListAllCommandTest {
         }
 
         @Override
-        public ObservableList<Event> getEventList() {
+        public ObservableList<Person> getFullPersonList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<Event> getFilteredEventList() {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -137,11 +142,6 @@ public class ListAllCommandTest {
 
         @Override
         public void updateFilteredEventList(Predicate<Event> predicate) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void updateFilteredEventListOnly(Predicate<Event> predicate) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -212,8 +212,7 @@ public class ListAllCommandTest {
         }
 
         @Override
-        public FilteredList<Event> getEventList() {
-
+        public FilteredList<Event> getFilteredEventList() {
             return filteredEventList;
         }
 

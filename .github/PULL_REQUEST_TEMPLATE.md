@@ -1,11 +1,3 @@
----
-name: Pull Request Template
-about: Default template for all pull requests
-title: ''
-labels: ''
-assignees: ''
----
-
 ## Description
 
 <!-- Briefly describe the purpose of this pull request. -->

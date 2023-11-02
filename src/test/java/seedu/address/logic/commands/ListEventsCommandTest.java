@@ -28,7 +28,7 @@ public class ListEventsCommandTest {
     public void modelStubWorksAsIntended() {
         ModelStubAcceptingEvent modelStub = new ModelStubAcceptingEvent();
 
-        assertEquals(1, modelStub.getEventList().size());
+        assertEquals(1, modelStub.getFilteredEventList().size());
     }
 
     @Test
@@ -40,7 +40,7 @@ public class ListEventsCommandTest {
 
         assertEquals(ListEventsCommand.MESSAGE_SUCCESS, commandResult.getFeedbackToUser());
 
-        assertEquals(2, modelStub.getEventList().size());
+        assertEquals(2, modelStub.getFilteredEventList().size());
     }
 
     private class ModelStub implements Model {
@@ -111,7 +111,12 @@ public class ListEventsCommandTest {
         }
 
         @Override
-        public ObservableList<Event> getEventList() {
+        public ObservableList<Person> getFullPersonList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<Event> getFilteredEventList() {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -132,11 +137,6 @@ public class ListEventsCommandTest {
 
         @Override
         public void updateFilteredEventList(Predicate<Event> predicate) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void updateFilteredEventListOnly(Predicate<Event> predicate) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -194,15 +194,14 @@ public class ListEventsCommandTest {
                 throw new AssertionError("reset failed");
             }
         }
+
         @Override
-        public void updateFilteredEventListOnly(Predicate<Event> predicate) {
+        public void updateFilteredEventList(Predicate<Event> predicate) {
             filteredEventList.setPredicate(predicate);
         }
 
-
         @Override
-        public FilteredList<Event> getEventList() {
-
+        public FilteredList<Event> getFilteredEventList() {
             return filteredEventList;
         }
 

@@ -1,11 +1,11 @@
 ---
-name: User Story Template
-about: Template for User Stories
+name: User stories Template
+about: Template for User stories
 title: ''
 labels: ''
 assignees: ''
-
 ---
+
 ## User stories
 - [Insert user stories here]
 

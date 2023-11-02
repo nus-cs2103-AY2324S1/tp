@@ -20,7 +20,9 @@ public class Messages {
 
     /** Message for person */
     public static final String MESSAGE_INVALID_PERSON_DISPLAYED_INDEX = "The person index provided is invalid";
+    public static final String MESSAGE_PERSONS_AND_EVENTS_LISTED_OVERVIEW = "%d persons and %d events listed!";
     public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d persons listed!";
+    public static final String MESSAGE_EVENTS_LISTED_OVERVIEW = "%1$d events listed!";
     public static final String MESSAGE_PERSONS_AND_EVENTS_SHOWN_OVERVIEW =
             "Showing all birthdays and events happening in the next %1$s days:";
     public static final String MESSAGE_DUPLICATE_FIELDS =

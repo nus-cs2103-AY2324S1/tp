@@ -77,7 +77,7 @@ public class EditEventCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        List<Event> lastShownList = model.getEventList();
+        List<Event> lastShownList = model.getFilteredEventList();
 
 
         if (index.getZeroBased() >= lastShownList.size()) {

@@ -86,8 +86,11 @@ public interface Model {
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();
 
+    /** Returns an unmodifiable view of the full person list */
+    ObservableList<Person> getFullPersonList();
+
     /** Returns a view of the event list */
-    ObservableList<Event> getEventList();
+    ObservableList<Event> getFilteredEventList();
 
     /**
      * Replaces the given person {@code target} with {@code editedPerson} in the address book
@@ -113,8 +116,6 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredEventList(Predicate<Event> predicate);
-
-    void updateFilteredEventListOnly(Predicate<Event> predicate);
 
     /**
      * Adds an event to the list of events.

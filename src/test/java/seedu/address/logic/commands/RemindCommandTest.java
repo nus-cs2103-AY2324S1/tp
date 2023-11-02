@@ -73,7 +73,7 @@ class RemindCommandTest {
         expectedModel.updateFilteredEventList(eventPredicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Collections.emptyList(), model.getFilteredPersonList());
-        assertEquals(Collections.emptyList(), model.getEventList());
+        assertEquals(Collections.emptyList(), model.getFilteredEventList());
     }
 
     @Test
@@ -86,7 +86,7 @@ class RemindCommandTest {
         expectedModel.updateFilteredEventList(eventWithinDaysPredicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(JOHN), model.getFilteredPersonList());
-        assertEquals(Arrays.asList(MEETING_3_DAYS_AFTER_TODAY), model.getEventList());
+        assertEquals(Arrays.asList(MEETING_3_DAYS_AFTER_TODAY), model.getFilteredEventList());
     }
 
     @Test
@@ -100,7 +100,7 @@ class RemindCommandTest {
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(JOHN, JANE), model.getFilteredPersonList());
         assertEquals(Arrays.asList(MEETING_3_DAYS_AFTER_TODAY,
-                MEETING_6_DAYS_AFTER_TODAY), model.getEventList());
+                MEETING_6_DAYS_AFTER_TODAY), model.getFilteredEventList());
     }
 
     @Test
