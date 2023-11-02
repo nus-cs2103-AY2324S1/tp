@@ -6,7 +6,6 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import java.util.Set;
 
 import seedu.address.model.Model;
-import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -25,6 +24,7 @@ public class ListPersonCommand extends ListCommand {
      * Creates an AddPersonCommand to add the specified {@code Person}
      */
     public ListPersonCommand(Set<Tag> tags) {
+        requireNonNull(tags);
         this.tags = tags;
     }
 
