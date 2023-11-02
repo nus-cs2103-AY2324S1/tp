@@ -15,7 +15,7 @@ import seedu.address.model.tag.Tag;
  * Represents the score list of a person.
  */
 public class ScoreList {
-    private static final String MESSAGE_CONSTRAINTS = "Score tag should start with Interview or Technical Assessment";
+    private static final String MESSAGE_CONSTRAINTS = "Score tag should start assessment";
     private static final String MESSAGE_MISSING_TAG = "Tag does not exist in score list";
     private final HashMap<String, Score> scoreList;
 
@@ -90,7 +90,7 @@ public class ScoreList {
         Set<String> tags = scoreList.keySet();
 
         for (String tag : tags) {
-            result.add(new Tag(tag));
+            result.add(new Tag(tag, "assessment"));
         }
         return result;
     }
@@ -101,11 +101,7 @@ public class ScoreList {
      * @return true if a given tag is a valid score tag
      */
     public static boolean isValidScoreTag(Tag tag) {
-        String trimmedTag = tag.tagName.trim().toLowerCase();
-        if (trimmedTag.contains("interview") || trimmedTag.startsWith("Technical Assessment")) {
-            return true;
-        }
-        return false;
+        return tag.tagCategory.toLowerCase().contains("assessment");
     }
 
     /**

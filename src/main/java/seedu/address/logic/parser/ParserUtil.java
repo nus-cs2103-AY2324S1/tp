@@ -25,6 +25,7 @@ import seedu.address.model.person.ScoreList;
 import seedu.address.model.person.Status;
 import seedu.address.model.person.StatusTypes;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.tag.UniqueTagList;
 
 
 /**
@@ -141,13 +142,15 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code tag} is invalid.
      */
-    public static Tag parseTag(String tag) throws ParseException {
-        requireNonNull(tag);
-        String trimmedTag = tag.trim();
+    public static Tag parseTag(String tagName, String tagCategory) throws ParseException {
+        requireNonNull(tagName);
+        requireNonNull(tagCategory);
+        UniqueTagList uniqueTagList = new UniqueTagList();
+        String trimmedTag = tagName.trim();
         if (!Tag.isValidTagName(trimmedTag)) {
             throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
         }
-        return new Tag(trimmedTag);
+        return uniqueTagList.getTag(trimmedTag, tagCategory);
     }
 
     /**
@@ -156,10 +159,46 @@ public class ParserUtil {
     public static Set<Tag> parseTags(Collection<String> tags) throws ParseException {
         requireNonNull(tags);
         final Set<Tag> tagSet = new HashSet<>();
-        for (String tagName : tags) {
-            tagSet.add(parseTag(tagName));
+        String[] tagNameCategoryPairs = parseTagCategories(tags);
+
+        if (tagNameCategoryPairs.length == 1 && tagNameCategoryPairs[0].isBlank()) {
+            return tagSet;
+        }
+
+        for (String tagNameCategory : tagNameCategoryPairs) {
+            if (tagNameCategory.split("\\s+").length > 1) {
+                String[] nameCategory = tagNameCategory.split("\\s+");
+                // category specified
+                String tagName = nameCategory[1];
+                String tagCategory = nameCategory[0];
+                tagSet.add(parseTag(tagName, tagCategory));
+            } else {
+                // category not specified
+                tagSet.add(parseTag(tagNameCategory, ""));
+            }
         }
         return tagSet;
+    }
+
+    /**
+     * Parses a collection of tag strings into an array of tag categories.
+     *
+     * @param tags A collection of tag strings to be parsed.
+     * @return An array of tag categories extracted from the provided collection of tag strings.
+     */
+    public static String[] parseTagCategories(Collection<String> tags) throws ParseException {
+        requireNonNull(tags);
+        String listTags = tags.toString();
+        String cleanedList = listTags.replaceAll("[\\[\\]]", "");
+        String[] tagParams = cleanedList.split(",");
+        for (String tag : tagParams) {
+            if (tag.split("\\s+").length > 1) {
+                if (!Tag.isValidTagName(tag.split("\\s+")[1])) {
+                    throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
+                }
+            }
+        }
+        return tagParams;
     }
 
     /**
@@ -278,8 +317,8 @@ public class ParserUtil {
         if (tagScorePairArr.length != 2) {
             throw new ParseException("Invalid score, score must be non-negative integer.");
         }
-        Tag tag = parseTag(tagScorePairArr[0]);
-        if (!ScoreList.isValidScoreTag(tag)) {
+        Tag tag = parseTag(tagScorePairArr[0], "");
+]        if (!ScoreList.isValidScoreTag(tag)) {
             throw new ParseException("Invalid score tag, tag must contain interview or ta.");
         }
         Score score = parseScore(tagScorePairArr[1]);

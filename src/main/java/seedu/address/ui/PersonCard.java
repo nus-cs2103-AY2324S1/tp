@@ -1,5 +1,9 @@
 package seedu.address.ui;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
@@ -7,6 +11,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.tag.UniqueTagList;
 
 /**
  * An UI component that displays information of a {@code Person}.
@@ -61,10 +66,34 @@ public class PersonCard extends UiPart<Region> {
         email.setText(person.getEmail().value);
         linkedIn.setText(person.getLinkedIn().value);
         github.setText(person.getGithub().value);
-        for (Tag tag : person.getTags()) {
-            Label label = new Label(tag.tagName);
-            tags.getChildren().add(label);
+        setTagLabel(person.getTags());
+    }
+
+    private void setTagLabel(Set<Tag> tagsSet) {
+        List<String> tagCategories = new ArrayList<>();
+        UniqueTagList uniqueTagList = new UniqueTagList();
+        for (Tag tag : uniqueTagList.asUnmodifiableObservableList()) {
+            if (!tagCategories.contains(tag.tagCategory)) {
+                tagCategories.add(tag.tagCategory);
+            }
         }
 
+        for (Tag tag : tagsSet) {
+            Label label = new Label(tag.tagName);
+            if (tagCategories.indexOf(tag.tagCategory) == 0) {
+                label.getStyleClass().add("label2");
+            } else if (tagCategories.indexOf(tag.tagCategory) == 1) {
+                label.getStyleClass().add("label3");
+            } else if (tagCategories.indexOf(tag.tagCategory) == 2) {
+                label.getStyleClass().add("label4");
+            } else if (tagCategories.indexOf(tag.tagCategory) == 3) {
+                label.getStyleClass().add("label5");
+            } else if (tagCategories.indexOf(tag.tagCategory) == 4) {
+                label.getStyleClass().add("label6");
+            } else {
+                label.getStyleClass().add("label1");
+            }
+            tags.getChildren().add(label);
+        }
     }
 }

@@ -180,6 +180,16 @@ public class EditCommand extends Command {
         return oldScoreList;
 
     }
+    private boolean containsIllegalTagScore(Person person) throws CommandException {
+        Set<Tag> currentTags = person.getTags();
+        List<Tag> tagsWithScore = person.getScoreList().getTagsWithScore();
+        for (Tag tag : tagsWithScore) {
+            if (!currentTags.contains(tag)) {
+                throw new CommandException(Messages.MESSAGE_ILLEGAL_TAG_SCORE);
+            }
+        }
+        return false;
+    }
 
     @Override
     public boolean equals(Object other) {

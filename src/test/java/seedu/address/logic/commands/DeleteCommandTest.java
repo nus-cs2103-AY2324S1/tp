@@ -10,7 +10,7 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalPersons.getTypicalTagPerson;
-import static seedu.address.testutil.TypicalTags.TEST_TAG_STRING;
+import static seedu.address.testutil.TypicalTags.TEST_TAG_NAME_STRING;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -53,7 +53,7 @@ public class DeleteCommandTest {
     public void execute_validTagsUnfilteredList_success() {
         Person personToDelete = getTypicalTagPerson();
 
-        TagContainsKeywordsPredicate tagPredicate = new TagContainsKeywordsPredicate(List.of(TEST_TAG_STRING));
+        TagContainsKeywordsPredicate tagPredicate = new TagContainsKeywordsPredicate(List.of(TEST_TAG_NAME_STRING));
         List<Predicate<Person>> predicateList = new ArrayList<>() {{
                 add(tagPredicate);
             }};
