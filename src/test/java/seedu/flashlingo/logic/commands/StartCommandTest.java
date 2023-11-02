@@ -1,5 +1,6 @@
 package seedu.flashlingo.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.flashlingo.testutil.Assert.assertThrows;
@@ -37,5 +38,12 @@ public class StartCommandTest {
 
         // null -> returns false
         assertFalse(startFirstCommand.equals(null));
+    }
+
+    @Test
+    public void toStringMethod() {
+        StartCommand startCommand = new StartCommand();
+        String expected = StartCommand.class.getCanonicalName() + "{start=}";
+        assertEquals(expected, startCommand.toString());
     }
 }
