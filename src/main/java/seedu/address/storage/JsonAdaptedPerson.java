@@ -104,12 +104,10 @@ class JsonAdaptedPerson {
             if (!Tag.isValidTagName(tagName)) {
                 throw new IllegalValueException(Tag.MESSAGE_CONSTRAINTS);
             }
-            System.out.println("1" + tagName);
-            System.out.println("2" + tagCategory);
+
             personTags.add(new Tag(tagName, tagCategory));
         }
         if (name == null) {
-            System.out.println("here name");
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
         }
         if (!Name.isValidName(name)) {

@@ -65,7 +65,6 @@ public class SampleDataUtil {
                 .map(x -> {
                     String[] tagNameCategory = x.split("\\s+");
                     if (tagNameCategory.length > 1) {
-                        System.out.println("here");
                         String tagName = tagNameCategory[1];
                         String tagCategory = tagNameCategory[0];
                         return new Tag(tagName, tagCategory);

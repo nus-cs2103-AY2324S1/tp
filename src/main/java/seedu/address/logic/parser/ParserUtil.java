@@ -146,7 +146,6 @@ public class ParserUtil {
         requireNonNull(tagCategory);
         UniqueTagList uniqueTagList = new UniqueTagList();
         String trimmedTag = tagName.trim();
-        System.out.println("parse tag trimmed: " + trimmedTag);
         if (!Tag.isValidTagName(trimmedTag)) {
             throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
         }
@@ -157,18 +156,15 @@ public class ParserUtil {
      * Parses {@code Collection<String> tags} into a {@code Set<Tag>}.
      */
     public static Set<Tag> parseTags(Collection<String> tags) throws ParseException {
-        System.out.println(tags);
         requireNonNull(tags);
         final Set<Tag> tagSet = new HashSet<>();
         String[] tagNameCategoryPairs = parseTagCategories(tags);
 
-        if (tagNameCategoryPairs.length == 1 && tagNameCategoryPairs[0].isBlank()) {
-            System.out.println("here");
+        if (tagNameCategoryPairs.length == 1 && tagNameCategoryPairs[0].isBlank()) {;
             return tagSet;
         }
 
         for (String tagNameCategory : tagNameCategoryPairs) {
-            System.out.println("parse tags tag name : " + tagNameCategory);
             if (tagNameCategory.split("\\s+").length > 1) {
                 String[] nameCategory = tagNameCategory.split("\\s+");
                 // category specified
@@ -177,7 +173,6 @@ public class ParserUtil {
                 tagSet.add(parseTag(tagName, tagCategory));
             } else {
                 // category not specified
-                System.out.println("cat not specified");
                 tagSet.add(parseTag(tagNameCategory, ""));
             }
         }

@@ -88,14 +88,12 @@ public class EditCommandParser implements Parser<EditCommand> {
      * {@code Set<Tag>} containing zero tags.
      */
     private Optional<Set<Tag>> parseTagsForEdit(Collection<String> tags) throws ParseException {
-        System.out.println("parse tags for edit:" + tags);
         assert tags != null;
 
         if (tags.isEmpty()) {
             return Optional.empty();
         }
         Collection<String> tagSet = tags.size() == 1 && tags.contains("") ? Collections.emptySet() : tags;
-        System.out.println(tagSet);
         return Optional.of(ParserUtil.parseTags(tagSet));
     }
 

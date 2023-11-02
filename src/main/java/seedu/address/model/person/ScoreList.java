@@ -101,7 +101,6 @@ public class ScoreList {
      * @return true if a given tag is a valid score tag
      */
     public static boolean isValidScoreTag(Tag tag) {
-        System.out.println("tag category: " + tag.tagCategory);
         return tag.tagCategory.toLowerCase().contains("assessment");
     }
 

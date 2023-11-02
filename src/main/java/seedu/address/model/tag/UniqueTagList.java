@@ -70,7 +70,6 @@ public class UniqueTagList implements Iterable<Tag> {
                 throw new ParseException("Multiple tags exists with the same name! "
                         + "Specify the category of the tag when adding it to a person e.g. edit 1 t/experience 3");
             }
-            System.out.println(foundTag.get());
             return foundTag.get();
         } else if (!tagCategory.isEmpty()) {
             Tag newTag = new Tag(tagName, tagCategory);
