@@ -157,7 +157,24 @@ Examples:
 **Expected Output when the command fails**: Invalid command format! paidExample: paid 1
 
 Examples:
-* `list` followed by `paid 2` marks the 2nd person in the list.
+* `list` followed by `paid 1` marks the first person as paid in the list.
+
+### Marking a person as unpaid : `unpaid`
+
+**Description** Mark the specific tutee as not paid in the list.
+
+**Format**: `unpaid INDEX`
+
+**Expected Input**:
+
+* **Index (Compulsory Field)**: Numbers between 1 to the number of people inside the list.
+
+**Expected Output when the command succeeds**: MARK PERSON UNPAID SUCCESS, Paid: false
+
+**Expected Output when the command fails**: Invalid command format! paidExample: unpaid 1
+
+Examples:
+* `list` followed by `unpaid 2` marks the 2nd person as not paid in the list.
 
 
 ### Show all the unpaid persons : `list unpaid`
@@ -166,6 +183,12 @@ Examples:
 
 Format: `list unpaid`
 
+### Mark all persons as unpaid : `unpaidAll`
+
+**Description** : Mark all the persons as not paid.
+
+Format: `unpaidAll`
+=======
 
 ### Finding Free Time : `freeTime`
 
@@ -220,8 +243,6 @@ Format: `list unpaid`
 
 **Expected Output**: Successfully calculated!! Total monthly revenue: *$monthlyrevenue*
 
-
->>>>>>> master
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
@@ -247,7 +268,9 @@ To be added soon
 | **list**        | `list`                                                                                                                                                                                             |
 | **list by day** | `list DAY` <br> e.g., `list Monday`                                                                                                                                                                |
 | **paid**        | `paid INDEX`<br> e.g., `paid 1`                                                                                                                                                                    |
+| **unpaid**      | `unpaid INDEX`<br> e.g., `unpaid 1`                                                                                                                                                                |
 | **list unpaid** | `list unpaid`                                                                                                                                                                                      |
+| **unpaidAll**   | `unpaidAll`                                                                                                                                                                                        |
 | **freeTime**    | `d/DAY dur/DURATION b/BEGIN end/END`                                                                                                                                                               |
 | **undo**        | `undo`                                                                                                                                                                                             |
 | **redo**        | `redo`                                                                                                                                                                                             |

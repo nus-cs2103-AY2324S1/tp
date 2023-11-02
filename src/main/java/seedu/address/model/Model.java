@@ -72,7 +72,7 @@ public interface Model {
 
     void markPersonUnPaid(Person target);
 
-    void getPersonPaid(Person target);
+    boolean getPersonPaid(Person target);
 
 
     /**

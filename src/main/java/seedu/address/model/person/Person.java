@@ -120,7 +120,7 @@ public class Person {
      * if modification is attempted.
      */
     public boolean getPaid() {
-        return paid;
+        return this.paid;
     }
 
     public void setPaid() {
