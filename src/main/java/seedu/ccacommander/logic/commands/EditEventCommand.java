@@ -5,8 +5,8 @@ import static seedu.ccacommander.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.ccacommander.logic.parser.CliSyntax.PREFIX_LOCATION;
 import static seedu.ccacommander.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.ccacommander.logic.parser.CliSyntax.PREFIX_TAG;
-import static seedu.ccacommander.model.Model.PREDICATE_SHOW_ALL_ENROLMENTS;
 import static seedu.ccacommander.model.Model.PREDICATE_SHOW_ALL_EVENTS;
+import static seedu.ccacommander.model.ModelManager.editEnrolmentsWithEventName;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -21,7 +21,6 @@ import seedu.ccacommander.commons.util.ToStringBuilder;
 import seedu.ccacommander.logic.Messages;
 import seedu.ccacommander.logic.commands.exceptions.CommandException;
 import seedu.ccacommander.model.Model;
-import seedu.ccacommander.model.enrolment.Enrolment;
 import seedu.ccacommander.model.event.Event;
 import seedu.ccacommander.model.event.EventDate;
 import seedu.ccacommander.model.event.Location;
@@ -88,17 +87,7 @@ public class EditEventCommand extends Command {
         Name newName = editedEvent.getName();
 
         if (!prevName.equals(newName)) {
-            // update filtered enrolment list to show all the enrolments
-            model.updateFilteredEnrolmentList(PREDICATE_SHOW_ALL_ENROLMENTS);
-            // get the enrolments list then loop through to edit matching enrolments
-            List<Enrolment> enrolmentList = model.getFilteredEnrolmentList();
-            for (Enrolment enrolment: enrolmentList) {
-                if (enrolment.getEventName().equals(prevName)) {
-                    Enrolment editedEnrolment = new Enrolment(enrolment.getMemberName(), newName,
-                            enrolment.getHours(), enrolment.getRemark());
-                    model.setEnrolment(enrolment, editedEnrolment);
-                }
-            }
+            editEnrolmentsWithEventName(prevName, newName, model);
         }
 
         model.setEvent(eventToEdit, editedEvent);

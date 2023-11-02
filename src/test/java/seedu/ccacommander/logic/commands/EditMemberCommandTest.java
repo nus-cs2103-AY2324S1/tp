@@ -12,12 +12,10 @@ import static seedu.ccacommander.logic.commands.CommandTestUtil.VALID_TAG_HUSBAN
 import static seedu.ccacommander.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.ccacommander.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.ccacommander.logic.commands.CommandTestUtil.showMemberAtIndex;
-import static seedu.ccacommander.model.Model.PREDICATE_SHOW_ALL_ENROLMENTS;
+import static seedu.ccacommander.model.ModelManager.editEnrolmentsWithMemberName;
 import static seedu.ccacommander.testutil.TypicalCcaCommander.getTypicalCcaCommander;
 import static seedu.ccacommander.testutil.TypicalIndexes.INDEX_FIRST_MEMBER;
 import static seedu.ccacommander.testutil.TypicalIndexes.INDEX_SECOND_MEMBER;
-
-import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
@@ -28,7 +26,6 @@ import seedu.ccacommander.model.CcaCommander;
 import seedu.ccacommander.model.Model;
 import seedu.ccacommander.model.ModelManager;
 import seedu.ccacommander.model.UserPrefs;
-import seedu.ccacommander.model.enrolment.Enrolment;
 import seedu.ccacommander.model.member.Member;
 import seedu.ccacommander.model.shared.Name;
 import seedu.ccacommander.testutil.EditMemberDescriptorBuilder;
@@ -59,19 +56,8 @@ public class EditMemberCommandTest {
         Name newName = editedMember.getName();
 
         if (!prevName.equals(newName)) {
-            // update filtered enrolment list to contain only the enrolments that has member of previous name
-            expectedModel.updateFilteredEnrolmentList(PREDICATE_SHOW_ALL_ENROLMENTS);
-            List<Enrolment> enrolmentList = expectedModel.getFilteredEnrolmentList();
-            for (Enrolment enrolment : enrolmentList) {
-                if (enrolment.getMemberName().equals(prevName)) {
-                    Enrolment editedEnrolment = new Enrolment(newName, enrolment.getEventName(),
-                            enrolment.getHours(), enrolment.getRemark());
-                    expectedModel.setEnrolment(enrolment, editedEnrolment);
-                }
-            }
+            editEnrolmentsWithMemberName(prevName, newName, expectedModel);
         }
-
-
 
         expectedModel.commit(commitMessage);
         assertCommandSuccess(editMemberCommand, model, expectedMessage, expectedModel);
@@ -101,16 +87,7 @@ public class EditMemberCommandTest {
         Name newName = editedMember.getName();
 
         if (!prevName.equals(newName)) {
-            // update filtered enrolment list to contain only the enrolments that has member of previous name
-            expectedModel.updateFilteredEnrolmentList(PREDICATE_SHOW_ALL_ENROLMENTS);
-            List<Enrolment> enrolmentList = expectedModel.getFilteredEnrolmentList();
-            for (Enrolment enrolment : enrolmentList) {
-                if (enrolment.getMemberName().equals(prevName)) {
-                    Enrolment editedEnrolment = new Enrolment(newName, enrolment.getEventName(),
-                            enrolment.getHours(), enrolment.getRemark());
-                    expectedModel.setEnrolment(enrolment, editedEnrolment);
-                }
-            }
+            editEnrolmentsWithMemberName(prevName, newName, expectedModel);
         }
 
         expectedModel.commit(commitMessage);
@@ -154,16 +131,7 @@ public class EditMemberCommandTest {
         Name newName = editedMember.getName();
 
         if (!prevName.equals(newName)) {
-            // update filtered enrolment list to contain only the enrolments that has member of previous name
-            expectedModel.updateFilteredEnrolmentList(PREDICATE_SHOW_ALL_ENROLMENTS);
-            List<Enrolment> enrolmentList = expectedModel.getFilteredEnrolmentList();
-            for (Enrolment enrolment : enrolmentList) {
-                if (enrolment.getMemberName().equals(prevName)) {
-                    Enrolment editedEnrolment = new Enrolment(newName, enrolment.getEventName(),
-                            enrolment.getHours(), enrolment.getRemark());
-                    expectedModel.setEnrolment(enrolment, editedEnrolment);
-                }
-            }
+            editEnrolmentsWithMemberName(prevName, newName, expectedModel);
         }
 
         assertCommandSuccess(editMemberCommand, model, expectedMessage, expectedModel);

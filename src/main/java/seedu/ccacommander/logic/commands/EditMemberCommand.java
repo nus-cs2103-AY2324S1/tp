@@ -7,8 +7,8 @@ import static seedu.ccacommander.logic.parser.CliSyntax.PREFIX_GENDER;
 import static seedu.ccacommander.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.ccacommander.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.ccacommander.logic.parser.CliSyntax.PREFIX_TAG;
-import static seedu.ccacommander.model.Model.PREDICATE_SHOW_ALL_ENROLMENTS;
 import static seedu.ccacommander.model.Model.PREDICATE_SHOW_ALL_MEMBERS;
+import static seedu.ccacommander.model.ModelManager.editEnrolmentsWithMemberName;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -23,7 +23,6 @@ import seedu.ccacommander.commons.util.ToStringBuilder;
 import seedu.ccacommander.logic.Messages;
 import seedu.ccacommander.logic.commands.exceptions.CommandException;
 import seedu.ccacommander.model.Model;
-import seedu.ccacommander.model.enrolment.Enrolment;
 import seedu.ccacommander.model.member.Address;
 import seedu.ccacommander.model.member.Email;
 import seedu.ccacommander.model.member.Gender;
@@ -93,17 +92,7 @@ public class EditMemberCommand extends Command {
         Name newName = editedMember.getName();
         // If member's name is edited, the corresponding enrolment objects are edited also
         if (!prevName.equals(newName)) {
-            // update filtered enrolment list to show all the enrolments
-            model.updateFilteredEnrolmentList(PREDICATE_SHOW_ALL_ENROLMENTS);
-            // get the enrolments list then loop through to edit matching enrolments
-            List<Enrolment> enrolmentList = model.getFilteredEnrolmentList();
-            for (Enrolment enrolment: enrolmentList) {
-                if (enrolment.getMemberName().equals(prevName)) {
-                    Enrolment editedEnrolment = new Enrolment(newName, enrolment.getEventName(),
-                            enrolment.getHours(), enrolment.getRemark());
-                    model.setEnrolment(enrolment, editedEnrolment);
-                }
-            }
+            editEnrolmentsWithMemberName(prevName, newName, model);
         }
 
         model.setMember(memberToEdit, editedMember);
