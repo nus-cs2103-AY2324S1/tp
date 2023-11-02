@@ -21,7 +21,7 @@ public class EditPersonCommand extends AbstractEditCommand<Person> {
     //todo, update, or refractor how help command is implemented
     // that being say, good design that allow user to use without learning is better than any help command
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the person identified "
-            + "by the index number used in the displayed person list. "
+            + "by the index number used in the displayed student list. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_NAME + "NAME] "
@@ -78,7 +78,7 @@ public class EditPersonCommand extends AbstractEditCommand<Person> {
     }
 
     @Override
-    String className() {
+    String listName() {
         return "student";
     }
 
