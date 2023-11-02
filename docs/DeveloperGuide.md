@@ -291,7 +291,9 @@ the `report` command will call `ReportCommandParser#parse()`, which in turn call
 which then calls `UniqueEmployeeList#getEmployee()`.
 This will return the employee with the given employee ID.
 
-Finally, the `ReportCommand` object will call `ReportCommand#execute()` which will generate a report for the employee.
+Then, the `ReportCommand` object will call `ReportCommand#execute()` which will generate a report for the employee.
+This report will be displayed in the GUI. This also calls the `storage` component to save the report in the hard disk.
+
 
 #### Design considerations:
 
