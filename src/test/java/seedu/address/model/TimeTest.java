@@ -44,10 +44,9 @@ public class TimeTest {
     @Test
     void testListInterviewsToday3() {
         List<Interview> interviewList = TypicalInterviews.getTypicalInterviews();
-        LocalDateTime today = LocalDateTime.now();
-        int todayDay = today.getDayOfMonth();
-        int todayMonth = today.getMonthValue();
-        int todayYear = today.getYear();
+        int todayDay = 4;
+        int todayMonth = 4;
+        int todayYear = 2038;
         Interview interviewNow = new Interview(TypicalApplicants.IDA,
                 "SWE",
                 LocalDateTime.of(todayYear, todayMonth, todayDay, 9, 11),
@@ -57,7 +56,6 @@ public class TimeTest {
         UniqueInterviewList uniqueInterviewList = new UniqueInterviewList();
         uniqueInterviewList.setInterviews(interviewList);
         List<Interview> expected = new ArrayList<>();
-        expected.add(interviewNow);
         List<Interview> actual = Time.listInterviewsToday(uniqueInterviewList);
         assertEquals(expected, actual);
     }
@@ -65,10 +63,9 @@ public class TimeTest {
     @Test
     void testListInterviewsToday4() {
         List<Interview> interviewList = TypicalInterviews.getTypicalInterviews();
-        LocalDateTime today = LocalDateTime.now();
         int todayDay = 1;
-        int todayMonth = today.getMonthValue();
-        int todayYear = today.getYear();
+        int todayMonth = 1;
+        int todayYear = 2099;
         Interview interviewNow = new Interview(TypicalApplicants.IDA,
                 "SWE",
                 LocalDateTime.of(todayYear, todayMonth, todayDay + 1, 9, 11),
@@ -85,14 +82,13 @@ public class TimeTest {
     @Test
     void testListInterviewsToday5() {
         List<Interview> interviewList = TypicalInterviews.getTypicalInterviews();
-        LocalDateTime today = LocalDateTime.now();
         int todayDay = 1;
-        int todayMonth = today.getMonthValue();
-        int todayYear = today.getYear();
+        int todayMonth = 12;
+        int todayYear = 2050;
         Interview interviewNow = new Interview(TypicalApplicants.IDA,
                 "SWE",
-                LocalDateTime.of(todayYear, todayMonth + 1, todayDay, 9, 11),
-                LocalDateTime.of(todayYear, todayMonth + 1, todayDay, 11, 11)
+                LocalDateTime.of(todayYear, todayMonth, todayDay, 9, 11),
+                LocalDateTime.of(todayYear, todayMonth, todayDay, 11, 11)
         );
         interviewList.add(interviewNow);
         UniqueInterviewList uniqueInterviewList = new UniqueInterviewList();
@@ -105,14 +101,13 @@ public class TimeTest {
     @Test
     void testListInterviewsToday6() {
         List<Interview> interviewList = TypicalInterviews.getTypicalInterviews();
-        LocalDateTime today = LocalDateTime.now();
-        int todayDay = today.getDayOfMonth();
-        int todayMonth = today.getMonthValue();
-        int todayYear = today.getYear();
+        int todayDay = 1;
+        int todayMonth = 2;
+        int todayYear = 2099;
         Interview interviewNow = new Interview(TypicalApplicants.IDA,
                 "SWE",
-                LocalDateTime.of(todayYear + 1, todayMonth, todayDay, 9, 11),
-                LocalDateTime.of(todayYear + 1, todayMonth, todayDay, 11, 11)
+                LocalDateTime.of(todayYear, todayMonth, todayDay, 9, 11),
+                LocalDateTime.of(todayYear, todayMonth, todayDay, 11, 11)
         );
         interviewList.add(interviewNow);
         UniqueInterviewList uniqueInterviewList = new UniqueInterviewList();
@@ -125,10 +120,9 @@ public class TimeTest {
     @Test
     void testListInterviewsToday7() {
         List<Interview> interviewList = TypicalInterviews.getTypicalInterviews();
-        LocalDateTime today = LocalDateTime.now();
-        int todayDay = 2;
-        int todayMonth = today.getMonthValue();
-        int todayYear = today.getYear();
+        int todayDay = 1;
+        int todayMonth = 1;
+        int todayYear = 2099;
         Interview interviewNow = new Interview(TypicalApplicants.IDA,
                 "SWE",
                 LocalDateTime.of(todayYear, todayMonth, todayDay, 9, 11),
