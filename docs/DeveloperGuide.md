@@ -409,7 +409,7 @@ When a user inputs a command to update photo of a contact, the `UpdatePhotoComma
 
 
 The process can be summarized in the following logic flow:
-<puml src="diagrams\updatephoto-command/UpdatePhotoCommandSequenceDiagram.puml" />
+<puml src="diagrams/updatephoto-command/UpdatePhotoCommandSequenceDiagram.puml" />
 
 1. Parse user input to create a `UpdatePhotoCommand` object.
 2. Execute the `UpdatePhotoCommand`, which involves:
