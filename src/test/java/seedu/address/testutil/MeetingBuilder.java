@@ -10,6 +10,7 @@ import java.util.Set;
 import seedu.address.model.meeting.Attendee;
 import seedu.address.model.meeting.Location;
 import seedu.address.model.meeting.Meeting;
+import seedu.address.model.meeting.MeetingStatus;
 import seedu.address.model.meeting.Title;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
@@ -23,12 +24,15 @@ public class MeetingBuilder {
     public static final String DEFAULT_LOCATION = "Room 1";
     public static final LocalDateTime DEFAULT_START = LocalDateTime.parse("02.10.2023 1000", FORMAT);
     public static final LocalDateTime DEFAULT_END = LocalDateTime.parse("03.10.2023 1000", FORMAT);
+    public static final Boolean DEFAULT_STATUS = false;
+
     private Title title;
     private Location location;
     private LocalDateTime start;
     private LocalDateTime end;
     private Set<Attendee> attendees;
     private Set<Tag> tags;
+    private MeetingStatus status;
 
     /**
      * Creates a {@code MeetingBuilder} with the default details.
@@ -40,6 +44,7 @@ public class MeetingBuilder {
         end = DEFAULT_END;
         attendees = new LinkedHashSet<>();
         tags = new HashSet<>();
+        status = new MeetingStatus(DEFAULT_STATUS);
     }
 
     /**
@@ -52,6 +57,7 @@ public class MeetingBuilder {
         end = meetingToCopy.getEnd();
         attendees = new LinkedHashSet<>(meetingToCopy.getAttendees());
         tags = new HashSet<>(meetingToCopy.getTags());
+        status = meetingToCopy.getStatus();
     }
 
     /**
@@ -87,7 +93,7 @@ public class MeetingBuilder {
     }
 
     /**
-     * Sets the {@code start} of the {@code Meeting} that we are building.
+     * Sets the {@code end} of the {@code Meeting} that we are building.
      */
     public MeetingBuilder withEnd(String end) {
         this.end = LocalDateTime.parse(end, FORMAT);
@@ -95,14 +101,22 @@ public class MeetingBuilder {
     }
 
     /**
-     * Sets the {@code Phone} of the {@code Person} that we are building.
+     * Sets the {@code Location} of the {@code Meeting} that we are building.
      */
     public MeetingBuilder withLocation(String location) {
         this.location = new Location(location);
         return this;
     }
 
+    /**
+     * Sets the {@code Status} of the {@code Meeting} that we are building.
+     */
+    public MeetingBuilder withStatus(Boolean status) {
+        this.status = new MeetingStatus(status);
+        return this;
+    }
+
     public Meeting build() {
-        return new Meeting(title, location, start, end, attendees, tags);
+        return new Meeting(title, location, start, end, attendees, tags, status);
     }
 }

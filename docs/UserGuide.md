@@ -9,16 +9,15 @@ This guide is to help you explore and learn about what are its features and how 
 Outbook has 2 lists which are used to track contacts and meetings respectively. These list can be filtered to show the specific data you need.
 It is able to add, edit and delete any contacts and meetings you want. As well as add custom remarks and tags for your specific needs.
 
-
-
 <div style="page-break-after: always;"></div>
 
 # Table of Content
 
-* Table of Contents
-{:toc}
+- Table of Contents
+  {:toc}
 
---------------------------------------------------------------------------------------------------------------------
+---
+
 <div style="page-break-after: always;"></div>
 
 # Quick start
@@ -36,20 +35,21 @@ It is able to add, edit and delete any contacts and meetings you want. As well a
 5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-   * `listc` : Lists all contacts.
+   - `listc` : Lists all contacts.
 
-   * `addc n/John Doe p/98765432 e/johnd@example.com l/10.10.2023 1000 o/NUS` : Adds a contact named `John Doe` to OutBook.
+   - `addc n/John Doe p/98765432 e/johnd@example.com lc/10.10.2023 1000 o/NUS` : Adds a contact named `John Doe` to OutBook.
 
-   * `deletec 3` : Deletes the 3rd contact shown in the contact list.
+   - `deletec 3` : Deletes the 3rd contact shown in the contact list.
 
-   * `deletem 1` : Deletes the 1st meeting shown in the meeting list.
+   - `deletem 1` : Deletes the 1st meeting shown in the meeting list.
 
-   * `clear` : Deletes all contacts and meetings.
+   - `clear` : Deletes all contacts and meetings.
 
-   * `exit` : Exits the app.
+   - `exit` : Exits the app.
+
 6. Refer to the [Features](#features) below for details of each command.
 
---------------------------------------------------------------------------------------------------------------------
+---
 
 <div style="page-break-after: always;"></div>
 
@@ -62,19 +62,19 @@ It is able to add, edit and delete any contacts and meetings you want. As well a
 * Words in `UPPER_CASE` are the parameters to be supplied by you.<br>
   e.g. in `addc n/NAME`, `NAME` is a parameter which can be used as `addc n/John Doe`.
 
-* Items in square brackets are optional.<br>
+- Items in square brackets are optional.<br>
   e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 
-* Items with `…`​ after them can be used multiple times including zero times.<br>
+- Items with `…`​ after them can be used multiple times including zero times.<br>
   e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
 
-* You can place parameters in any order.<br>
+- You can place parameters in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
 * Any extraneous parameters you place for commands that do not take in parameters (such as `help`, `listc`, `exit` and `clear`) will be ignored.<br>
   e.g. if you type `help 123`, it will be interpreted as `help`.
 
-* If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
+- If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </div>
 
 ### Viewing help : `help`
@@ -102,9 +102,9 @@ Format: `addc n/NAME p/PHONE_NUMBER e/EMAIL lc/LAST_CONTACTED_TIME [s/STATUS] [r
   2. The local-part may not start or end with any special characters.
   3. The domain name is made up of domain labels separated by periods.
      The domain name must:
-      - end with a domain label at least 2 characters long
-      - have each domain label start and end with alphanumeric characters
-      - have each domain label consist of alphanumeric characters, separated only by hyphen
+     - end with a domain label at least 2 characters long
+     - have each domain label start and end with alphanumeric characters
+     - have each domain label consist of alphanumeric characters, separated only by hyphen
 
 * `LAST_CONTACTED_TIME` must contain both date and time and adhere to the `DD.MM.YYYY HHMM` format.
   -  eg. 1st October 2023, 10:00am will be written as `01.10.2023 1000`.
@@ -115,8 +115,8 @@ Format: `addc n/NAME p/PHONE_NUMBER e/EMAIL lc/LAST_CONTACTED_TIME [s/STATUS] [r
 You can put any number of tags (including 0) on a contact.
 </div>
 
-* `addc n/John Doe p/98765432 e/johnd@example.com lc/01.10.2023 1000`
-* `addc n/Betsy Crowe t/friend e/betsycrowe@example.com p/1234567 lc/01.01.2023 0100 t/Professor`
+- `addc n/John Doe p/98765432 e/johnd@example.com lc/01.10.2023 1000`
+- `addc n/Betsy Crowe t/friend e/betsycrowe@example.com p/1234567 lc/01.01.2023 0100 t/Professor`
 
 <br/><br/>
 
@@ -126,34 +126,33 @@ Shows a list of all contacts in OutBook. Contacts are sorted by LAST_CONTACTED_T
 
 Format: `listc`
 
-
 ### Deleting a person : `deletec`
 
 Deletes a contact from OutBook.
 
 Format: `deletec INDEX`
 
-* Deletes the contact at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
+- Deletes the contact at the specified `INDEX`.
+- The index refers to the index number shown in the displayed person list.
+- The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `listc` followed by `delete 2` deletes the 2nd person in the results of the `listc` command.
-* `findc Betsy` followed by `delete 1` deletes the 1st person in the results of the `findc` command.
 
+- `listc` followed by `delete 2` deletes the 2nd person in the results of the `listc` command.
+- `findc Betsy` followed by `delete 1` deletes the 1st person in the results of the `findc` command.
 
 ### Editing a contact : `editc`
 
 Edits an existing contact in OutBook.
 
-Format: `editc INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [l/LAST_CONTACTED_TIME] [s/STATUS] [r/REMARK] [t/TAG]…​`
+Format: `editc INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [lc/LAST_CONTACTED_TIME] [s/STATUS] [r/REMARK] [t/TAG]…​`
 
-* Edits the contact at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
-* All fields are optional, but at least one must be provided.
-* Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person’s tags by typing `t/` without
-    specifying any tags after it.
+- Edits the contact at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+- All fields are optional, but at least one must be provided.
+- Existing values will be updated to the input values.
+- When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
+- You can remove all the person’s tags by typing `t/` without
+  specifying any tags after it.
 
 Examples:
 *  `editc 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
@@ -162,6 +161,8 @@ Examples:
 
 <div style="page-break-after: always;"></div>
 
+- `editc 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
+- `editc 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
 ### Viewing detailed contact information : `viewc`
 
@@ -178,7 +179,6 @@ Format: `viewc INDEX`
 
 Examples:
 * `viewc 2` Displays detailed information related to the 2nd contact on the list.
-
 
 <br/><br/><br/><br/>
 
@@ -207,7 +207,6 @@ Examples:
 * `findc p/9 s/inactive claimant t/friends` returns persons with a `9` in their phone number, whose status is either `inactive` or `claimant`, and has a `friends` tag
   ![result for 'findContact'](images/findContactResult.png)
 
-
 <div style="page-break-after: always;"></div>
 
 
@@ -224,8 +223,9 @@ Format: `addm m/TITLE a/LOCATION s/START e/END [t/TAG]…​`
   -  eg. 1st October 2023, 10:00am will be written as `01.10.2023 1000`.
 
 Examples:
-* `addm m/Lunch a/Cafeteria s/20.09.2023 1200 e/20.09.2023 1300`
-* `addm m/CS2103T meeting a/Zoom call url s/20.09.2023 1000 e/20.09.2023 1200`
+
+- `addm m/Lunch a/Cafeteria s/20.09.2023 1200 e/20.09.2023 1300`
+- `addm m/CS2103T meeting a/Zoom call url s/20.09.2023 1000 e/20.09.2023 1200`
 
 ### Listing all meetings : `listm`
 
@@ -233,21 +233,20 @@ Shows a list of all meetings in OutBook. Meetings are sorted by START by default
 
 Format: `listm`
 
-
 ### Deleting a meeting : `deletem`
 
 Deletes a meeting from OutBook.
 
 Format: `deletem INDEX`
 
-* Deletes the meeting at the specified `INDEX`.
-* The index refers to the index number shown in the displayed meeting list.
-* The index **must be a positive integer** 1, 2, 3, …​
+- Deletes the meeting at the specified `INDEX`.
+- The index refers to the index number shown in the displayed meeting list.
+- The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `listm` followed by `deletem 2` deletes the 2nd meeting in the results of the `listm` command.
-* `findm m/Project` followed by `deletem 1` deletes the 1st meeting in the results of the `findm` command.
 
+- `listm` followed by `deletem 2` deletes the 2nd meeting in the results of the `listm` command.
+- `findm m/Project` followed by `deletem 1` deletes the 1st meeting in the results of the `findm` command.
 
 ### Editing a meeting : `editm`
 
@@ -255,17 +254,17 @@ Edits an existing meeting in OutBook.
 
 Format: `editm INDEX [m/TITLE] [a/LOCATION] [s/START] [e/END] [t/TAG]…​`
 
-* Edits the meeting at the specified `INDEX`. The index refers to the index number shown in the displayed meeting list. The index **must be a positive integer** 1, 2, 3, …​
-* At least one of the optional fields must be provided.
-* Existing values will be updated to the input values.
-* When editing tags, the existing tags of the meeting will be removed i.e adding of tags is not cumulative.
-* You can remove all the meeting’s tags by typing `t/` without
+- Edits the meeting at the specified `INDEX`. The index refers to the index number shown in the displayed meeting list. The index **must be a positive integer** 1, 2, 3, …​
+- At least one of the optional fields must be provided.
+- Existing values will be updated to the input values.
+- When editing tags, the existing tags of the meeting will be removed i.e adding of tags is not cumulative.
+- You can remove all the meeting’s tags by typing `t/` without
   specifying any tags after it.
 
 Examples:
-*  `editm 1 a/Hawker Centre s/15.09.2023 1500` Edits the location and start of the 1st meeting to be `Hawker Centre` and `15.09.2023 1500` respectively.
-*  `editm 2 m/Zoom meeting t/` Edits the title of the 2nd meeting to be `Zoom meeting` and clears all existing tags.
 
+- `editm 1 a/Hawker Centre s/15.09.2023 1500` Edits the location and start of the 1st meeting to be `Hawker Centre` and `15.09.2023 1500` respectively.
+- `editm 2 m/Zoom meeting t/` Edits the title of the 2nd meeting to be `Zoom meeting` and clears all existing tags.
 
 ### Viewing detailed meeting information : `viewm`
 
@@ -328,7 +327,8 @@ Format: `addmc MEETING_INDEX CONTACT_INDEX`
 * Contact name will be listed in the detailed description of meetings when `viewm` is used.
 
 Examples:
-* `addmc 3 1` adds the 1st contact as an attendee to the 3rd meeting in OutBook.
+
+- `addmc 3 1` adds the 1st contact as an attendee to the 3rd meeting in OutBook.
 
 ### Remove contact from meeting: `rmmc`
 
@@ -336,16 +336,29 @@ Removes a contact from a meeting.
 
 Format: `rmmc MEETING_INDEX ATTENDEE_INDEX`
 
-* Removes a contact at the specified `ATTENDEE_INDEX` to the meeting at the specified `MEETING_INDEX`.
-* `MEETING_INDEX` refers to the index number shown in the displayed meeting list.
-* `ATTENDEE_INDEX` refers to the index number of the attendee as shown in `viewm`.
-* The indexes **must be positive integers** 1, 2, 3, …​
-* Both `MEETING_INDEX` & `ATTENDEE_INDEX` must refer to the index of an existing meeting or attendee.
+- Removes a contact at the specified `ATTENDEE_INDEX` to the meeting at the specified `MEETING_INDEX`.
+- `MEETING_INDEX` refers to the index number shown in the displayed meeting list.
+- `ATTENDEE_INDEX` refers to the index number of the attendee as shown in `viewm`.
+- The indexes **must be positive integers** 1, 2, 3, …​
+- Both `MEETING_INDEX` & `ATTENDEE_INDEX` must refer to the index of an existing meeting or attendee.
 
 Examples:
-* `rmmc 3 2` removes the 2nd attendee from the 3rd meeting in OutBook.
 
-<br/><br/><br/><br/>
+- `rmmc 3 2` removes the 2nd attendee from the 3rd meeting in OutBook.
+
+### Marking a meeting as complete : `mark`
+
+Marks a meeting in OutBook as complete. All attendees of the meeting will have their LC (last contacted) field updated to the end time of the meeting.
+
+Format: `mark INDEX`
+
+- Marks the meeting at the specified `INDEX` as complete.
+- The index refers to the index number shown in the displayed meeting list.
+- The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+
+- `listm` followed by `mark 2` marks the 2nd meeting in the results of the `listm` command.
 
 ### Clearing all entries : `clear`
 
@@ -371,8 +384,8 @@ OutBook data are saved automatically as a JSON file `[JAR file location]/data/ou
 If your changes to the data file makes its format invalid, OutBook will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.
 </div>
 
+---
 
---------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
 
 ## FAQ
@@ -380,20 +393,21 @@ If your changes to the data file makes its format invalid, OutBook will discard 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous OutBook home folder.
 
---------------------------------------------------------------------------------------------------------------------
+---
 
 ## Known issues
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 
---------------------------------------------------------------------------------------------------------------------
+---
+
 <div style="page-break-after: always;"></div>
 
 ## Command summary
 
 | Action                          | Format, Examples                                                                                                                                                                           |
 |---------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add contact**                 | `addc n/NAME p/PHONE_NUMBER e/EMAIL lc/LAST_CONTACTED_TIME [r/REMARK] [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com l/09.09.2023 0000 o/NUS t/friend t/colleague` |
+| **Add contact**                 | `addc n/NAME p/PHONE_NUMBER e/EMAIL lc/LAST_CONTACTED_TIME [r/REMARK] [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com lc/09.09.2023 0000 o/NUS t/friend t/colleague` |
 | **Add contact to meeting**      | `addmc MEETING_INDEX CONTACT_INDEX` <br> e.g., `addmc 2 1`                                                                                                                                 |
 | **Add meeting**                 | `addm m/TITLE a/LOCATION s/START e/END [t/TAG]…​` <br> e.g., `addm m/Lunch a/Cafeteria s/20.09.2023 1200 e/20.09.2023 1300`                                                                |
 | **Clear**                       | `clear`                                                                                                                                                                                    |

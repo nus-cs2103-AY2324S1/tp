@@ -24,17 +24,19 @@ public class Meeting {
     private final MeetingTime meetingTime;
     private final Set<Attendee> attendees;
     private final Set<Tag> tags;
+    private final MeetingStatus status;
 
     /**
      * Every field must be present and not null.
      */
     public Meeting(Title title, Location location, LocalDateTime start, LocalDateTime end, Set<Attendee> attendees,
-            Set<Tag> tags) {
+            Set<Tag> tags, MeetingStatus status) {
         this.title = title;
         this.location = location;
         this.meetingTime = new MeetingTime(start, end);
         this.attendees = new LinkedHashSet<>(attendees);
         this.tags = new HashSet<>(tags);
+        this.status = status;
     }
 
     public Title getTitle() {
@@ -55,6 +57,10 @@ public class Meeting {
 
     public MeetingTime getMeetingTime() {
         return meetingTime;
+    }
+
+    public MeetingStatus getStatus() {
+        return status;
     }
 
     public boolean withinSpecifiedTime(LocalDateTime start, LocalDateTime end) {
@@ -135,7 +141,7 @@ public class Meeting {
         Meeting otherMeeting = (Meeting) other;
         return title.equals(otherMeeting.title) && location.equals(otherMeeting.location)
                 && meetingTime.equals(otherMeeting.meetingTime) && attendees.equals(otherMeeting.attendees)
-                && tags.equals(otherMeeting.tags);
+                && tags.equals(otherMeeting.tags) && status.equals(otherMeeting.status);
     }
 
     @Override
@@ -148,7 +154,7 @@ public class Meeting {
     public String toString() {
         return new ToStringBuilder(this).add("title", title).add("location", location)
                 .add("start", meetingTime.getStart()).add("end", meetingTime.getEnd()).add("attendees", attendees)
-                .add("tags", tags).toString();
+                .add("tags", tags).add("status", status).toString();
     }
 
     /**

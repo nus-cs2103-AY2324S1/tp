@@ -20,6 +20,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.meeting.Attendee;
 import seedu.address.model.meeting.Location;
 import seedu.address.model.meeting.Meeting;
+import seedu.address.model.meeting.MeetingStatus;
 import seedu.address.model.meeting.MeetingTime;
 import seedu.address.model.meeting.Title;
 import seedu.address.model.tag.Tag;
@@ -56,8 +57,9 @@ public class AddMeetingCommandParser implements Parser<AddMeetingCommand> {
         }
         Set<Attendee> attendeeList = ParserUtil.parseAttendees(argMultimap.getAllValues(PREFIX_NAME));
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
+        MeetingStatus status = new MeetingStatus(false);
 
-        Meeting meeting = new Meeting(title, location, start, end, attendeeList, tagList);
+        Meeting meeting = new Meeting(title, location, start, end, attendeeList, tagList, status);
 
         return new AddMeetingCommand(meeting);
     }
