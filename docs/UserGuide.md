@@ -32,7 +32,7 @@ to help you streamline your accounting
 
 3. Copy the file to the folder you want to use as the _home folder_ for Tran$act.
 
-4. Double click `transact.jar` to start the app. A GUI similar to the below should appear in a few seconds.
+4. Double click `transact.jar` to start the app. The GUI below should appear in a few seconds.
    ![Ui](images/Ui.png)
 
 > **❗If the above does not work, try this method:**
@@ -299,7 +299,7 @@ Tran$act's data is saved in the hard disk automatically after any command that c
 Tran$act's GUI is simple and gives you access to all of its features with just one click.
 
 This should be what you see when you open Tran$act for the first time:
-![Ui](images/Transact_UI.png)
+![Ui](images/Ui.png)
 
 The upper menu bar contains two tabs:
 

@@ -53,8 +53,6 @@ public class OverviewPanel extends UiPart<Region> {
     /**
      * Creates a {@code OverviewPanel} with the given
      * {@code transactionList}.
-     *
-     * @param transactionList
      */
     public OverviewPanel(ObservableList<Transaction> transactionList) {
         super(FXML);
