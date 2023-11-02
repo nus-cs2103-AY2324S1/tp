@@ -113,30 +113,12 @@ public class ViewEventCommandTest {
      * as specified by the given {@code eventIndex} in the {@code model}'s displayed event list.
      */
     private Event showMembersInEventAtIndex(Model model, Index targetIndex) {
-        List<Member> lastShownMemberList = model.getFilteredMemberList();
         List<Event> lastShownEventList = model.getFilteredEventList();
-        List<Enrolment> enrolmentList = model.getFilteredEnrolmentList();
-
         Event event = lastShownEventList.get(targetIndex.getZeroBased());
         Name eventName = event.getName();
 
-        // loop through enrolment list, check if each enrolment.getEventName() = event.getName()
-        // then add enrolment.getName() to
-        // Collection<Name> memberNames
-        Collection<Name> namesCollection = new HashSet<>();
-        for (Enrolment enrolment: enrolmentList) {
-            if (enrolment.getEventName().equals(eventName)) {
-                Name memName = enrolment.getMemberName();
-                namesCollection.add(memName);
-                for (Member member: lastShownMemberList) {
-                    if (member.getName().equals(memName)) {
-                        member.setHours(enrolment.getHours());
-                        member.setRemark(enrolment.getRemark());
-                    }
-                }
-            }
+        model.updateMemberHoursAndRemark(eventName);
 
-        }
         return event;
     }
 

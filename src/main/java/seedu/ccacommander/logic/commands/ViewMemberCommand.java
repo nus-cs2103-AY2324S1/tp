@@ -4,15 +4,12 @@ import static java.util.Objects.requireNonNull;
 import static seedu.ccacommander.logic.Messages.MESSAGE_INVALID_MEMBER_DISPLAYED_INDEX;
 
 import java.util.Collection;
-import java.util.HashSet;
 import java.util.List;
 
 import seedu.ccacommander.commons.core.index.Index;
 import seedu.ccacommander.logic.Messages;
 import seedu.ccacommander.logic.commands.exceptions.CommandException;
 import seedu.ccacommander.model.Model;
-import seedu.ccacommander.model.enrolment.Enrolment;
-import seedu.ccacommander.model.event.Event;
 import seedu.ccacommander.model.event.EventInNameCollectionPredicate;
 import seedu.ccacommander.model.member.Member;
 import seedu.ccacommander.model.member.SameMemberPredicate;
@@ -45,8 +42,6 @@ public class ViewMemberCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         List<Member> lastShownMemberList = model.getFilteredMemberList();
-        List<Event> lastShownEventList = model.getFilteredEventList();
-        List<Enrolment> enrolmentList = model.getFilteredEnrolmentList();
         if (targetIndex.getOneBased() > lastShownMemberList.size()) {
             throw new CommandException(MESSAGE_INVALID_MEMBER_DISPLAYED_INDEX);
         }
@@ -55,23 +50,7 @@ public class ViewMemberCommand extends Command {
         Member member = lastShownMemberList.get(targetIndex.getZeroBased());
         Name memberName = member.getName();
 
-        // View all events of member
-        // loop through enrolment list, check if each enrolment.getMemberName() = member.getName()
-        // then add enrolment.event.getName() to
-        // Collection<Name> eventNames
-        Collection<Name> eventNamesCollection = new HashSet<>();
-        for (Enrolment enrolment: enrolmentList) {
-            if (enrolment.getMemberName().equals(memberName)) {
-                Name eventName = enrolment.getEventName();
-                eventNamesCollection.add(eventName);
-                for (Event event: lastShownEventList) {
-                    if (event.getName().equals(eventName)) {
-                        event.setHours(enrolment.getHours());
-                        event.setRemark(enrolment.getRemark());
-                    }
-                }
-            }
-        }
+        Collection<Name> eventNamesCollection = model.updateEventHoursAndRemark(memberName);
 
         MemberListPanel.setIsViewEventCommand(false);
         EventListPanel.setIsViewMemberCommand(true);

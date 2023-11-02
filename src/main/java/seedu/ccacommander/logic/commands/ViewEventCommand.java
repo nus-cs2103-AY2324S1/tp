@@ -44,9 +44,8 @@ public class ViewEventCommand extends Command {
     }
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        List<Member> lastShownMemberList = model.getFilteredMemberList();
         List<Event> lastShownEventList = model.getFilteredEventList();
-        List<Enrolment> enrolmentList = model.getFilteredEnrolmentList();
+
         if (targetIndex.getOneBased() > lastShownEventList.size()) {
             throw new CommandException(MESSAGE_INVALID_EVENT_DISPLAYED_INDEX);
         }
@@ -56,27 +55,11 @@ public class ViewEventCommand extends Command {
         Name eventName = event.getName();
 
 
-        // loop through enrolment list, check if each enrolment.getEventName() = event.getName()
-        // then add enrolment.getName() to
-        // Collection<Name> memberNames
-        Collection<Name> namesCollection = new HashSet<>();
-        for (Enrolment enrolment: enrolmentList) {
-            if (enrolment.getEventName().equals(eventName)) {
-                Name memName = enrolment.getMemberName();
-                namesCollection.add(memName);
-                for (Member member: lastShownMemberList) {
-                    if (member.getName().equals(memName)) {
-                        member.setHours(enrolment.getHours());
-                        member.setRemark(enrolment.getRemark());
-                    }
-                }
-            }
-
-        }
+        Collection<Name> memberNameCollection = model.updateEventHoursAndRemark(eventName);
 
         MemberListPanel.setIsViewEventCommand(true);
         EventListPanel.setIsViewMemberCommand(false);
-        model.updateFilteredMemberList(new MemberInNameCollectionPredicate(namesCollection));
+        model.updateFilteredMemberList(new MemberInNameCollectionPredicate(memberNameCollection));
         model.updateFilteredEventList(new SameEventPredicate(event));
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(event)));
     }

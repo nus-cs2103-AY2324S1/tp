@@ -104,27 +104,11 @@ public class ViewMemberCommandTest {
     }
     private Member showEventsOfMemberAtIndex(Model model, Index targetIndex) {
         List<Member> lastShownMemberList = model.getFilteredMemberList();
-        List<Event> lastShownEventList = model.getFilteredEventList();
-        List<Enrolment> enrolmentList = model.getFilteredEnrolmentList();
 
         Member member = lastShownMemberList.get(targetIndex.getZeroBased());
         Name memberName = member.getName();
 
-
-        Collection<Name> namesCollection = new HashSet<>();
-        for (Enrolment enrolment: enrolmentList) {
-            if (enrolment.getMemberName().equals(memberName)) {
-                Name eventName = enrolment.getEventName();
-                namesCollection.add(eventName);
-                for (Event event: lastShownEventList) {
-                    if (event.getName().equals(eventName)) {
-                        event.setHours(enrolment.getHours());
-                        event.setRemark(enrolment.getRemark());
-                    }
-                }
-            }
-
-        }
+        model.updateMemberHoursAndRemark(memberName);
         return member;
     }
 }

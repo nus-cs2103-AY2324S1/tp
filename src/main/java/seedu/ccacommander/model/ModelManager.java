@@ -4,6 +4,9 @@ import static java.util.Objects.requireNonNull;
 import static seedu.ccacommander.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.List;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -14,6 +17,7 @@ import seedu.ccacommander.commons.core.LogsCenter;
 import seedu.ccacommander.model.enrolment.Enrolment;
 import seedu.ccacommander.model.event.Event;
 import seedu.ccacommander.model.member.Member;
+import seedu.ccacommander.model.shared.Name;
 
 /**
  * Represents the in-memory model of the CcaCommander data.
@@ -217,6 +221,53 @@ public class ModelManager implements Model {
     public void updateFilteredEnrolmentList(Predicate<Enrolment> predicate) {
         requireNonNull(predicate);
         filteredEnrolments.setPredicate(predicate);
+    }
+
+    @Override
+    public Collection<Name> updateMemberHoursAndRemark(Name eventName) {
+        List<Member> lastShownMemberList = getFilteredMemberList();
+
+        updateFilteredEnrolmentList(PREDICATE_SHOW_ALL_ENROLMENTS);
+        List<Enrolment> enrolmentList = getFilteredEnrolmentList();
+        Collection<Name> memberNameCollection = new HashSet<>();
+        for (Enrolment enrolment: enrolmentList) {
+            if (enrolment.getEventName().equals(eventName)) {
+                Name memName = enrolment.getMemberName();
+                memberNameCollection.add(memName);
+                for (Member member: lastShownMemberList) {
+                    if (member.getName().equals(memName)) {
+                        member.setHours(enrolment.getHours());
+                        member.setRemark(enrolment.getRemark());
+                    }
+                }
+            }
+        }
+        return memberNameCollection;
+    }
+    @Override
+    public Collection<Name> updateEventHoursAndRemark(Name memberName) {
+        // View all events of member
+        // loop through enrolment list, check if each enrolment.getMemberName() = member.getName()
+        // then add enrolment.event.getName() to
+        // Collection<Name> eventNames
+        List<Event> lastShownEventList = getFilteredEventList();
+
+        updateFilteredEnrolmentList(PREDICATE_SHOW_ALL_ENROLMENTS);
+        List<Enrolment> enrolmentList = getFilteredEnrolmentList();
+        Collection<Name> eventNameCollection = new HashSet<>();
+        for (Enrolment enrolment: enrolmentList) {
+            if (enrolment.getMemberName().equals(memberName)) {
+                Name eventName = enrolment.getEventName();
+                eventNameCollection.add(eventName);
+                for (Event event: lastShownEventList) {
+                    if (event.getName().equals(eventName)) {
+                        event.setHours(enrolment.getHours());
+                        event.setRemark(enrolment.getRemark());
+                    }
+                }
+            }
+        }
+        return eventNameCollection;
     }
 
     @Override
