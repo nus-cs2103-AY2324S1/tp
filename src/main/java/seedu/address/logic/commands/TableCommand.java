@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ENROL_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GENDER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SEC_LEVEL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
@@ -8,6 +9,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.OrganizeData;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.commands.tableresults.EnrolDateTableCommandResult;
 import seedu.address.logic.commands.tableresults.GenderTableCommandResult;
 import seedu.address.logic.commands.tableresults.SecLevelTableCommandResult;
 import seedu.address.logic.commands.tableresults.SubjectTableCommandResult;
@@ -24,23 +26,37 @@ public class TableCommand extends Command {
             + "by the attributes. \n"
             + "[" + PREFIX_GENDER + "] "
             + "[" + PREFIX_SEC_LEVEL + "] "
-            + "[" + PREFIX_SUBJECT + "]...\n"
-            + "Example: " + COMMAND_WORD + PREFIX_GENDER;
+            + "[" + PREFIX_SUBJECT + "]"
+            + "[" + PREFIX_ENROL_DATE + "{year}" + "]...\n"
+            + "Example: " + COMMAND_WORD + " " + PREFIX_GENDER + "\n"
+            + "Example: " + COMMAND_WORD + " " + PREFIX_ENROL_DATE + "2023";
 
     public static final String MESSAGE_INCORRECT_COMMAND = "To view a table, please do one of the following:\n"
                                                         + COMMAND_WORD + " " + PREFIX_GENDER + " or\n"
                                                         + COMMAND_WORD + " " + PREFIX_SEC_LEVEL + " or\n"
-                                                        + COMMAND_WORD + " " + PREFIX_SUBJECT;
+                                                        + COMMAND_WORD + " " + PREFIX_SUBJECT + " or\n"
+                                                        + COMMAND_WORD + " " + PREFIX_ENROL_DATE + "{year}\n";
     private final String args;
+    private final int year;
 
     /**
      * Constructor for TableCommand.
      * @param args represents the category for table, eg: s/, l/, g/
      */
     public TableCommand(String args) {
-        this.args = args.trim();
+        this(args, 0);
+
     }
 
+    /**
+     * Constructor for TableCommand for user input d/yyyy
+     * @param args represents the category for table, d/
+     * @param year represents the year in integer
+     */
+    public TableCommand(String args, int year) {
+        this.args = args.trim();
+        this.year = year;
+    }
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
@@ -51,6 +67,8 @@ public class TableCommand extends Command {
             return executeSecLevel(model);
         case "s/":
             return executeSubject(model);
+        case "d/":
+            return executeEnrolDate(model);
         default:
             throw new CommandException(MESSAGE_INCORRECT_COMMAND);
 
@@ -84,6 +102,14 @@ public class TableCommand extends Command {
         return new SubjectTableCommandResult(OrganizeData.bySubject(model));
     }
 
+    /**
+     * Generate EnrolDateTableCommandResult instance.
+     * @param model instance of model subclass, e.g. ModelManager instance.
+     * @return
+     */
+    private EnrolDateTableCommandResult executeEnrolDate(Model model) {
+        return new EnrolDateTableCommandResult(OrganizeData.byEnrolDate(model, year));
+    }
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -96,7 +122,7 @@ public class TableCommand extends Command {
         }
 
         TableCommand otherCommand = (TableCommand) other;
-        return otherCommand.args.equals(this.args);
+        return otherCommand.args.equals(this.args) && otherCommand.year == this.year;
     }
 
     @Override

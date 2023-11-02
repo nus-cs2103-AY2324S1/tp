@@ -5,6 +5,9 @@ import java.util.Map;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+import java.time.YearMonth;
+
+
 /**
  * Represents a Subject in the address book.
  * Guarantees: immutable; name is valid as declared in {@link #isValidSubjectName(String)}
@@ -51,8 +54,8 @@ public class Subject {
             + HIST + ", "
             + "and " + SOC + ".";
 
-    public final String subjectName;
-    public final EnrolDate enrolDate;
+    private final String subjectName;
+    private final EnrolDate enrolDate;
 
     /**
      * Constructs a {@code Subject}.
@@ -111,6 +114,30 @@ public class Subject {
 
     public void putToMapByMonth(Map<String, Integer> map) {
 
+    }
+
+    /**
+     * Getter method for subjectName
+     * @return a string representation of subject name
+     */
+    public String getSubjectName() {
+        return this.subjectName;
+    }
+
+    /**
+     * Getter method of enrolDate
+     * @return enrolDate instance of this subject
+     */
+    public EnrolDate getEnrolDate() {
+        return this.enrolDate;
+    }
+
+    /**
+     * Getter method for enroldate's yearmonth
+     * @return YearMonth instance of EnrolDate
+     */
+    public YearMonth getYearMonth() {
+        return this.enrolDate.getEnrolDate();
     }
 
     @Override
