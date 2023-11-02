@@ -21,7 +21,7 @@ public class LogCommand extends UndoableCommand {
             + "Example 1: " + COMMAND_WORD + "\n"
             + "Example 2: " + COMMAND_WORD_ALIAS;
 
-    public static final String MESSAGE_SUCCESS = "The last filtered values have overwritten the logger tab.";
+    public static final String MESSAGE_SUCCESS = "The last filtered values have overridden the logger tab.";
 
     public static final String MESSAGE_FAILURE = "Cannot log an empty list.";
 
