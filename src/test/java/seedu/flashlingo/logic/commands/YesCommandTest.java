@@ -2,14 +2,18 @@ package seedu.flashlingo.logic.commands;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
 import seedu.flashlingo.model.Model;
 import seedu.flashlingo.model.ModelManager;
 import seedu.flashlingo.model.UserPrefs;
 import seedu.flashlingo.model.flashcard.FlashCard;
 import seedu.flashlingo.model.flashcard.ProficiencyLevel;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static seedu.flashlingo.testutil.TypicalFlashCards.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.fail;
+
+import static seedu.flashlingo.testutil.TypicalFlashCards.getTypicalFlashlingoWithOneFlashCard;
 
 public class YesCommandTest {
     private Model model = new ModelManager();
@@ -20,7 +24,7 @@ public class YesCommandTest {
         expectedModel = new ModelManager(model.getFlashlingo(), new UserPrefs());
     }
     @Test
-    public void execute_yes_getNextReviewWord_success() {
+    public void execute_getNextReviewWord_success() {
         try {
             FlashCard result = model.nextReviewWord();
             assertNotNull(result);
@@ -30,7 +34,7 @@ public class YesCommandTest {
     }
 
     @Test
-    public void execute_yes_updateDate_failure() {
+    public void execute_updateDate_failure() {
         try {
             FlashCard result = model.nextReviewWord();
             ProficiencyLevel previousLevel = result.getProficiencyLevel();
