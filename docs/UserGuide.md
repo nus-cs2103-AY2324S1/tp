@@ -192,7 +192,7 @@ Expected output when a command succeeds:
 * Input: `delete_person 1`
 * Output: `Deleted Person: Roy Balakrishnan; Phone: 92624417; Email: royb@example.com; Address: Blk 45 Aljunied Street 85, #11-31; groups: [colleagues]`
 
-![DeletePerson](images/Deleteperson.png)
+![DeletePerson](images/DeletePerson.png)
 
 Expected output when the command fails:
 * `Invalid command format! delete_person: Deletes the person identified by the index number used in the displayed person list. Parameters: INDEX (must be a positive integer)Example: delete 1`
