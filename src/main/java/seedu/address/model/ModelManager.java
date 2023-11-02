@@ -98,6 +98,12 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public boolean hasDuplicateInfo(Musician musician) {
+        requireNonNull(musician);
+        return addressBook.hasDuplicateInfo(musician);
+    }
+
+    @Override
     public void deleteMusician(Musician target) {
         addressBook.removeMusician(target);
         setToDefaultGui();

@@ -75,6 +75,11 @@ public class AddressBook implements ReadOnlyAddressBook {
         return musicians.contains(musician);
     }
 
+    public boolean hasDuplicateInfo(Musician musician) {
+        requireNonNull(musician);
+        return musicians.hasDuplicateInfo(musician);
+    }
+
     /**
      * Adds a musician to the address book.
      * The musician must not already exist in the address book.

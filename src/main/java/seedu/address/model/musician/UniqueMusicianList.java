@@ -39,6 +39,14 @@ public class UniqueMusicianList implements Iterable<Musician> {
     }
 
     /**
+     * Returns true if the list contains an musician with the same phone or email as the given argument.
+     */
+    public boolean hasDuplicateInfo(Musician toCheck) {
+        requireNonNull(toCheck);
+        return internalList.stream().anyMatch(toCheck::hasSameInfo);
+    }
+
+    /**
      * Adds a musician to the list.
      * The musician must not already exist in the list.
      */
