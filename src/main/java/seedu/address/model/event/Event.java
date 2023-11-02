@@ -110,17 +110,16 @@ public class Event {
      * @return The information in string
      */
     public String getUiText() {
-        String result = this.getName() + " ( Starts at: " + this.start;
+        String result = this.getName() + "\nStarts at: " + this.start;
         if (!this.end.toString().isEmpty()) {
-            result += ", Ends at: " + this.end;
+            result += "\nEnds at: " + this.end;
         }
         if (!this.location.toString().isEmpty()) {
-            result += ", Location: " + this.location;
+            result += "\nLocation: " + this.location;
         }
         if (!this.information.toString().isEmpty()) {
-            result += ", Information: " + this.information;
+            result += "\nInformation: " + this.information;
         }
-        result += " )";
         return result;
     }
 

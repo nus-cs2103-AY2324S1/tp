@@ -29,14 +29,15 @@ public class SampleDataUtil {
 
         ArrayList<Event> sampleEvents1 = new ArrayList<Event>();
         sampleEvents1.add(new Event("Sample event",
-                LocalDateTime.now().format(DateTimeFormatter.ofPattern("HH:mm:ss")),
-                LocalDateTime.now().plusHours(1).format(DateTimeFormatter.ofPattern("HH:mm:ss")),
+                LocalDateTime.now().format(DateTimeFormatter.ofPattern("YYYY-MM-dd HH:mm:ss")),
+                LocalDateTime.now().plusHours(1).format(DateTimeFormatter.ofPattern("YYYY-MM-dd HH:mm:ss")),
                 "Some Location",
                 "Some Information"));
+
         ArrayList<Event> sampleEvents2 = new ArrayList<Event>();
         sampleEvents2.add(new Event("Another sample event",
-                LocalDateTime.now().plusHours(2).format(DateTimeFormatter.ofPattern("HH:mm:ss")),
-                LocalDateTime.now().plusHours(3).format(DateTimeFormatter.ofPattern("HH:mm:ss")),
+                LocalDateTime.now().plusHours(2).format(DateTimeFormatter.ofPattern("YYYY-MM-dd HH:mm:ss")),
+                LocalDateTime.now().plusHours(3).format(DateTimeFormatter.ofPattern("YYYY-MM-dd HH:mm:ss")),
                 "Some Location",
                 "Some Information"));
 
