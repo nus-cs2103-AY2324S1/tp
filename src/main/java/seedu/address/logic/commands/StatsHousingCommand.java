@@ -15,10 +15,10 @@ import seedu.address.model.person.Person;
 public class StatsHousingCommand extends StatsCommand {
     public static final String COMMAND_WORD = "housing";
     public static final String MESSAGE_HOUSING_SUCCESS = "Out of %1$d listed,\n"
-            + "- %2$d live in HDB (%3$.1f%%)\n"
-            + "- %4$d live in Condo (%5$.1f%%)\n"
-            + "- %6$d live in Landed (%7$.1f%%)\n"
-            + "- %8$d unknown (%9$.1f%%)";
+            + "- %2$d live in HDB (%3$.2f%%)\n"
+            + "- %4$d live in Condo (%5$.2f%%)\n"
+            + "- %6$d live in Landed (%7$.2f%%)\n"
+            + "- %8$d unknown (%9$.2f%%)";
 
     /**
      * Returns the number of fosterers who stay in HDB.
@@ -67,10 +67,10 @@ public class StatsHousingCommand extends StatsCommand {
         int landedCount = getLandedCount(lastShownList);
         int unknownCount = total - hdbCount - condoCount - landedCount;
 
-        float hdbPercent = calculatePercentage(hdbCount, total);
-        float condoPercent = calculatePercentage(condoCount, total);
-        float landedPercent = calculatePercentage(landedCount, total);
-        float unknownPercent = calculatePercentage(unknownCount, total);
+        double hdbPercent = calculatePercentage(hdbCount, total);
+        double condoPercent = calculatePercentage(condoCount, total);
+        double landedPercent = calculatePercentage(landedCount, total);
+        double unknownPercent = 100.0 - hdbPercent - condoPercent - landedPercent;
 
         String result = String.format(MESSAGE_HOUSING_SUCCESS, total, hdbCount, hdbPercent,
                 condoCount, condoPercent, landedCount, landedPercent, unknownCount, unknownPercent);

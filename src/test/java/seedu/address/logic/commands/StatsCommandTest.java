@@ -14,9 +14,9 @@ public class StatsCommandTest {
         });
 
         assertEquals(0.0, StatsCommand.calculatePercentage(0, 10));
-        assertEquals(3 / (float) 10 * 100, StatsCommand.calculatePercentage(3, 10));
-        assertEquals(10 / (float) 3 * 100, StatsCommand.calculatePercentage(10, 3));
-        assertEquals(-9 / (float) 10 * 100, StatsCommand.calculatePercentage(-9, 10));
-        assertEquals(-9 / (float) -10 * 100, StatsCommand.calculatePercentage(-9, -10));
+        assertEquals(3 / (double) 10 * 100, StatsCommand.calculatePercentage(3, 10));
+        assertEquals(10 / (double) 3 * 100, StatsCommand.calculatePercentage(10, 3));
+        assertEquals(-9 / (double) 10 * 100, StatsCommand.calculatePercentage(-9, 10));
+        assertEquals(-9 / (double) -10 * 100, StatsCommand.calculatePercentage(-9, -10));
     }
 }

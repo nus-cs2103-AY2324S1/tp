@@ -16,12 +16,12 @@ import seedu.address.model.person.Person;
  */
 public class StatsAvailCommand extends StatsCommand {
     public static final String COMMAND_WORD = "avail";
-    public static final String MESSAGE_AVAIL_SUMMARY = "%1$d out of %2$d listed are available (%3$.1f%%)!";
+    public static final String MESSAGE_AVAIL_SUMMARY = "%1$d out of %2$d listed are available (%3$.2f%%)!";
 
     public static final String MESSAGE_AVAIL_DETAILS = "Out of those available, \n"
-            + "- %1$d can foster dogs (%2$.1f%%)\n"
-            + "- %3$d can foster cats (%4$.1f%%)\n"
-            + "- %5$d unknown (%6$.1f%%)";
+            + "- %1$d can foster dogs (%2$.2f%%)\n"
+            + "- %3$d can foster cats (%4$.2f%%)\n"
+            + "- %5$d unknown (%6$.2f%%)";
 
     /**
      * Returns a list of available fosterers.
@@ -67,7 +67,7 @@ public class StatsAvailCommand extends StatsCommand {
 
         List<Person> availableFosterers = getAvailableFosterers(lastShownList);
         int availableCount = availableFosterers.size();
-        float availPercent = calculatePercentage(availableCount, total);
+        double availPercent = calculatePercentage(availableCount, total);
         String resultSummary = String.format(MESSAGE_AVAIL_SUMMARY, availableCount, total, availPercent);
 
         if (availableCount == 0) {
@@ -78,9 +78,9 @@ public class StatsAvailCommand extends StatsCommand {
         int canFosterCatsCount = getAbleCatCount(availableFosterers);
         int unknownCount = availableCount - canFosterDogsCount - canFosterCatsCount;
 
-        float canFosterDogsPercent = calculatePercentage(canFosterDogsCount, availableCount);
-        float canFosterCatsPercent = calculatePercentage(canFosterCatsCount, availableCount);
-        float unknownPercent = calculatePercentage(unknownCount, availableCount);
+        double canFosterDogsPercent = calculatePercentage(canFosterDogsCount, availableCount);
+        double canFosterCatsPercent = calculatePercentage(canFosterCatsCount, availableCount);
+        double unknownPercent = 100.0 - canFosterCatsPercent - canFosterDogsPercent;
 
         String resultDetails = String.format(MESSAGE_AVAIL_DETAILS, canFosterDogsCount, canFosterDogsPercent,
                 canFosterCatsCount, canFosterCatsPercent, unknownCount, unknownPercent);
