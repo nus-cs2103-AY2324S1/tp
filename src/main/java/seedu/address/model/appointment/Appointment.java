@@ -14,11 +14,10 @@ import seedu.address.model.person.Ic;
  * Doctor and patient ic should not be the same.
  */
 public class Appointment {
-    public static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+    public static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
     private Ic doctorIc;
     private Ic patientIc;
     private LocalDateTime appointmentTime;
-    private String status = "scheduled";
 
     /**
      * Constructs a new appointment with the specified doctor, patient, and appointment time.
@@ -52,7 +51,6 @@ public class Appointment {
         this.doctorIc = doctorIc;
         this.patientIc = patientIc;
         this.appointmentTime = appointmentTime;
-        this.status = status;
     }
 
     public LocalDateTime getAppointmentTime() {
@@ -67,10 +65,6 @@ public class Appointment {
         return patientIc;
     }
 
-    public String getStatus() {
-        return status;
-    }
-
     public void setAppointmentTime(LocalDateTime appointmentTime) {
         this.appointmentTime = appointmentTime;
     }
@@ -81,10 +75,6 @@ public class Appointment {
 
     public void changePatient(Ic newPatientIc) {
         this.patientIc = newPatientIc;
-    }
-
-    public void changeStatus(String newStatus) {
-        this.status = newStatus;
     }
 
     @Override
@@ -101,13 +91,12 @@ public class Appointment {
         Appointment otherAppointment = (Appointment) other;
         return this.doctorIc.equals(otherAppointment.doctorIc)
                 && this.patientIc.equals(otherAppointment.patientIc)
-                && this.appointmentTime.equals(otherAppointment.appointmentTime)
-                && this.status.equals(otherAppointment.status);
+                && this.appointmentTime.equals(otherAppointment.appointmentTime);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(doctorIc, patientIc, appointmentTime, status);
+        return Objects.hash(doctorIc, patientIc, appointmentTime);
     }
 
     @Override

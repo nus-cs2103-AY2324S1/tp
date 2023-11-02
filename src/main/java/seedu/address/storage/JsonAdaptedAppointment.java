@@ -24,7 +24,6 @@ class JsonAdaptedAppointment {
     private final String doctorIc;
     private final String patientIc;
     private final String appointmentTime;
-    private final String status;
 
     /**
      * Constructs a {@code JsonAdaptedTag} with the given {@code tagName}.
@@ -32,12 +31,10 @@ class JsonAdaptedAppointment {
     @JsonCreator
     public JsonAdaptedAppointment(@JsonProperty("doctorIc") String doctorIc,
                                   @JsonProperty("patientIc") String patientIc,
-                                  @JsonProperty("appointmentTime") String appointmentTime,
-                                  @JsonProperty("status") String status) {
+                                  @JsonProperty("appointmentTime") String appointmentTime) {
         this.doctorIc = doctorIc;
         this.patientIc = patientIc;
         this.appointmentTime = appointmentTime;
-        this.status = status;
     }
 
     /**
@@ -47,14 +44,6 @@ class JsonAdaptedAppointment {
         doctorIc = source.getDoctor().value;
         patientIc = source.getPatient().value;
         appointmentTime = source.getAppointmentTime().format(formatter);
-        status = source.getStatus();
-    }
-
-    public String checkStatus() throws IllegalValueException {
-        if (status == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "Status"));
-        }
-        return status;
     }
 
     public LocalDateTime checkAppointmentTime() throws IllegalValueException {
@@ -101,8 +90,7 @@ class JsonAdaptedAppointment {
         final Ic modelDoctor = checkIc(doctorIc);
         final Ic modelPatient = checkIc(patientIc);
         final LocalDateTime modelAppointmentTime = checkAppointmentTime();
-        final String modelStatus = checkStatus();
-        return new Appointment(modelDoctor, modelPatient, modelAppointmentTime, modelStatus);
+        return new Appointment(modelDoctor, modelPatient, modelAppointmentTime);
     }
 }
 

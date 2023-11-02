@@ -103,14 +103,6 @@ public class AppointmentTest {
     }
 
     @Test
-    public void testChangeStatus() {
-        String newStatus = "Completed";
-        Appointment newAppointment = new Appointment(new Ic(VALID_NRIC_DEREK), new Ic(VALID_NRIC_AMY), VALID_DATE_1);
-        newAppointment.changeStatus(newStatus);
-        assertEquals(newAppointment.getStatus(), newStatus);
-    }
-
-    @Test
     public void equals() {
         Appointment newAppointment = new Appointment(new Ic(VALID_NRIC_DEREK), new Ic(VALID_NRIC_AMY), VALID_DATE_1);
 

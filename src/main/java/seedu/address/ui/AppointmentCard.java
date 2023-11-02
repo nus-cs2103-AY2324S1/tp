@@ -1,5 +1,7 @@
 package seedu.address.ui;
 
+import java.time.format.DateTimeFormatter;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
@@ -12,6 +14,7 @@ import seedu.address.model.appointment.Appointment;
 public class AppointmentCard extends UiPart<Region> {
 
     private static final String FXML = "AppointmentListCard.fxml";
+    public static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -42,6 +45,6 @@ public class AppointmentCard extends UiPart<Region> {
         id.setText("APPOINTMENT " + displayedIndex);
         patientIc.setText("Patient IC: " + this.appointment.getPatient().toString());
         doctorIc.setText("Doctor IC: " + this.appointment.getDoctor().toString());
-        appointmentTime.setText("Time of appointment: " + this.appointment.getAppointmentTime().toString());
+        appointmentTime.setText("Time of appointment: " + this.appointment.getAppointmentTime().format(FORMATTER));
     }
 }
