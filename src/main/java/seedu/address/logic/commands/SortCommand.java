@@ -10,8 +10,6 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 
 
-
-
 /**
  * Sorts all persons in the list by lexicographical order barring capitalisation.
  */
@@ -22,7 +20,7 @@ public class SortCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Sorts the current list based currently available "
             + "sort functions.\n"
             + "Currently available sorting variations: \n"
-            + "-name (lexicographical name sort)\n -appointment (earliest timing first)\n"
+            + "-name (lexicographical name sort)\n-appointment (earliest timing first)\n"
             + "Parameters: sort [variation]...\n"
             + "Example: sort name";
 

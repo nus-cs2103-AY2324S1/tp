@@ -170,9 +170,13 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void clearAppointments(LocalDate date) {
-        addressBook.clearAppointments(date);
-        setAppointmentList();
+    public boolean clearAppointments(LocalDate date) {
+        boolean isCleared = addressBook.clearAppointments(date);
+        if (isCleared) {
+            setAppointmentList();
+        }
+
+        return isCleared;
     }
 
     @Override
