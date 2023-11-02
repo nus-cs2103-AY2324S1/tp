@@ -17,8 +17,10 @@ import seedu.classmanager.model.student.Student;
  */
 public class MarkAbsentAllCommand extends Command {
     public static final String COMMAND_WORD = "absent-all";
-    public static final String MESSAGE_MARK_SUCCESS = "Successfully mark attendance as absent.";
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Marks all the students displayed as absent.\n"
+    public static final String MESSAGE_MARK_SUCCESS = "Successfully marked the attendance of all displayed students "
+            + "as absent.";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Marks the attendance of all displayed students as "
+            + "absent.\n"
             + "Parameters: "
             + PREFIX_TUTORIAL_INDEX + "TUTORIAL INDEX\n"
             + "Example: " + COMMAND_WORD + " "

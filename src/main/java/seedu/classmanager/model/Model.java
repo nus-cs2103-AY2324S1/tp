@@ -66,16 +66,6 @@ public interface Model {
     void setClassManagerFilePath(Path classManagerFilePath);
 
     /**
-     * Returns true if the user has configured the module information.
-     */
-    boolean getConfigured();
-
-    /**
-     * User has configured the module information.
-     */
-    void setConfigured(boolean isConfigured);
-
-    /**
      * Replaces Class Manager data with the data in {@code classManager}.
      */
     void setClassManager(ReadOnlyClassManager classManager);

@@ -57,7 +57,7 @@ public class SetGradeCommandParserTest {
 
     @Test
     public void parse_invalidValue_failure() {
-        ClassDetails.setAssignmentCount(10);
+        ClassDetails.setAssignmentCount(6);
         assertParseFailure(parser, INVALID_STUDENT_NUMBER_DESC + VALID_ASSIGNMENT_DESC + VALID_GRADE_DESC,
                 StudentNumber.MESSAGE_CONSTRAINTS); // invalid student number
 

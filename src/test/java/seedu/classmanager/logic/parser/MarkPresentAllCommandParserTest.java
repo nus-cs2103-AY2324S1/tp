@@ -44,7 +44,7 @@ public class MarkPresentAllCommandParserTest {
 
     @Test
     public void parse_invalidTutorialIndex_throwsParseException() {
-        ClassDetails.setTutorialCount(ClassDetails.DEFAULT_COUNT);
+        ClassDetails.setTutorialCount(ClassDetails.getTutorialCount());
 
         // index not a number
         assertParseFailure(parser, " " + PREFIX_TUTORIAL_INDEX + " test",

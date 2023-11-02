@@ -64,8 +64,6 @@ public class MarkAbsentCommandParserTest {
 
     @Test
     public void parse_invalidTutorialIndex_throwsParseException() {
-        ClassDetails.setTutorialCount(ClassDetails.DEFAULT_COUNT);
-
         // index not a number
         assertParseFailure(parser, STUDENT_NUMBER_DESC_BOB + " " + TEST_FIRST_TUTORIAL_DESC + " test",
                 ClassDetails.getMessageInvalidTutorialIndex());

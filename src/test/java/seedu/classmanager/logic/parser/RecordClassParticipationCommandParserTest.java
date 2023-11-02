@@ -57,7 +57,7 @@ public class RecordClassParticipationCommandParserTest {
 
     @Test
     public void parse_invalidValue_failure() {
-        ClassDetails.setTutorialCount(10);
+        ClassDetails.setTutorialCount(13);
         assertParseFailure(parser, INVALID_STUDENT_NUMBER_DESC + VALID_TUT_DESC + VALID_PARTICIPATION_DESC,
                 StudentNumber.MESSAGE_CONSTRAINTS); // invalid student number
 

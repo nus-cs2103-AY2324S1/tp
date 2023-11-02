@@ -27,12 +27,18 @@ public class ClassDetails {
             + "between 1 and %s";
     public static final String MESSAGE_UNEQUAL_LENGTH = "The number of tutorial sessions and "
             + "attendance records should be equal.";
+    public static final String MESSAGE_RECONFIGURE = " Please reconfigure Class Manager before "
+            + "loading your file or edit your file.";
+    public static final String MESSAGE_TUTORIAL_COUNT_MISMATCH = "The number of configured tutorial sessions does not"
+            + " match the number of tutorial sessions in the save file." + MESSAGE_RECONFIGURE;
+    public static final String MESSAGE_ASSIGNMENT_COUNT_MISMATCH = "The number of configured assignments does not"
+            + " match the number of assignments in the save file." + MESSAGE_RECONFIGURE;
 
     // The class number should start with "T".
     public static final String VALIDATION_REGEX = "T.*";
-    public static final int DEFAULT_COUNT = 10;
-    private static int tutorialCount = DEFAULT_COUNT;
-    private static int assignmentCount = DEFAULT_COUNT;
+
+    private static int tutorialCount = 13;
+    private static int assignmentCount = 6;
 
     public final String classNumber;
     public final AttendanceTracker attendanceTracker;
@@ -109,7 +115,6 @@ public class ClassDetails {
     public String getClassNumber() {
         return this.classNumber;
     }
-
     /**
      * Returns true if a given string is a valid class number.
      */
@@ -123,6 +128,14 @@ public class ClassDetails {
 
     public static void setAssignmentCount(int assignmentCount) {
         ClassDetails.assignmentCount = assignmentCount;
+    }
+
+    public static int getTutorialCount() {
+        return tutorialCount;
+    }
+
+    public static int getAssignmentCount() {
+        return assignmentCount;
     }
 
     /**
