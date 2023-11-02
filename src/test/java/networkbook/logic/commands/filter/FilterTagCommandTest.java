@@ -73,7 +73,7 @@ public class FilterTagCommandTest {
         String expectedMessage = String.format(FilterTagCommand.MESSAGE_SUCCESS, "")
                 + String.format(FilterCommand.MESSAGE_PERSONS_FOUND_OVERVIEW, 0);
 
-        expectedModel.updateFilteredPersonList(pred);
+        expectedModel.updateDisplayedPersonList(pred, null);
 
         CommandTestUtil.assertCommandSuccess(command, model, expectedMessage, expectedModel);
     }
@@ -94,7 +94,7 @@ public class FilterTagCommandTest {
         String expectedMessage = String.format(FilterTagCommand.MESSAGE_SUCCESS, "\"C\"")
                 + String.format(FilterCommand.MESSAGE_PERSONS_FOUND_OVERVIEW, 0);
 
-        expectedModel.updateFilteredPersonList(pred);
+        expectedModel.updateDisplayedPersonList(pred, null);
 
         CommandTestUtil.assertCommandSuccess(command, model, expectedMessage, expectedModel);
     }
@@ -114,7 +114,7 @@ public class FilterTagCommandTest {
         String expectedMessage = String.format(FilterTagCommand.MESSAGE_SUCCESS, "\"A\"")
                 + String.format(FilterCommand.MESSAGE_PERSONS_FOUND_OVERVIEW, 1);
 
-        expectedModel.updateFilteredPersonList(pred);
+        expectedModel.updateDisplayedPersonList(pred, null);
 
         CommandTestUtil.assertCommandSuccess(command, model, expectedMessage, expectedModel);
     }
@@ -134,7 +134,7 @@ public class FilterTagCommandTest {
         String expectedMessage = String.format(FilterTagCommand.MESSAGE_SUCCESS, "\"A\"")
                 + String.format(FilterCommand.MESSAGE_PERSONS_FOUND_OVERVIEW, 1);
 
-        expectedModel.updateFilteredPersonList(pred);
+        expectedModel.updateDisplayedPersonList(pred, null);
 
         CommandTestUtil.assertCommandSuccess(command, model, expectedMessage, expectedModel);
     }
@@ -154,7 +154,7 @@ public class FilterTagCommandTest {
         String expectedMessage = String.format(FilterTagCommand.MESSAGE_SUCCESS, "\"a\"")
                 + String.format(FilterCommand.MESSAGE_PERSONS_FOUND_OVERVIEW, 1);
 
-        expectedModel.updateFilteredPersonList(pred);
+        expectedModel.updateDisplayedPersonList(pred, null);
 
         CommandTestUtil.assertCommandSuccess(command, model, expectedMessage, expectedModel);
     }
