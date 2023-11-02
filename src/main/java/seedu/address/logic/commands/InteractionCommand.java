@@ -66,7 +66,7 @@ public class InteractionCommand extends Command {
         model.getReminderList().setReminderListDirty();
 
         // move focus to the edited person
-        model.getSelectedPerson().setValue(editedPerson);
+        model.setSelectedPerson(editedPerson);
 
         return new CommandResult(String.format(MESSAGE_INTERACTION_SUCCESS, editedPerson));
     }

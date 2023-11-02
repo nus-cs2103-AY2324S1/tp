@@ -104,7 +104,7 @@ public class EditCommand extends Command {
         model.getReminderList().setReminderListDirty();
 
         // move focus to the edited person
-        model.getSelectedPerson().setValue(editedPerson);
+        model.setSelectedPerson(editedPerson);
 
         return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)));
     }
