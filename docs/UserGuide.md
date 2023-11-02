@@ -83,6 +83,38 @@ Format: `list [DAY]`
 **Expected Input**:
 * **Day (Optional field)**: String with restrictions in characters, non-case sensitive (Mon/Tue/Wed/Thu/Fri/Sat/Sun).
 
+### Finding a tutee : `find`
+
+**Description** : Find tutees in the current list.
+
+**Format**: `find n/NAME sb/SUBJECT`
+
+**Expected input:**
+
+**Both are optional but must have at least one of the two:**
+
+* **Name (Optional field)**: String composed of character between A-Z and a-z
+* **Subject (Optional field)**: String without restriction in characters
+
+**Expected Output when the command succeeds:** X tutees listed!
+
+**Expected Output when the command fails:**
+* **Invalid Prefix other than n/ and sb/**:
+
+  Invalid command format!
+  find: Find persons with names or subjects matching the specified keywords (case-insensitive).
+  Parameters: n/NAME sb/SUBJECT
+
+
+  Examples:
+1. find n/Alice sb/Maths
+2. find n/Alice
+3. find sb/Maths
+
+* **No input after prefix name n/**: Names should only contain alphanumeric characters and spaces, 
+and it should not be blank 
+* **No input after prefix subject sb/**: Subject can take any values, and it should not be blank.
+
 ### Editing a tutee : `edit`
 
 **Description** : Edit a tutee in the current list.
