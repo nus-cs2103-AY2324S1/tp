@@ -14,7 +14,7 @@ public class ClearCommand extends Command {
 
     public static final String COMMAND_WORD = "reset";
     public static final String MESSAGE_SUCCESS = "Address book has been cleared!";
-    public static final String MESSAGE_USAGE = "This command will erase the entire Address Book\n"
+    public static final String MESSAGE_USAGE = "This command will erase the entire Address Book.\n"
             + "Are you sure you want to do this? "
             + "If you are sure, Enter 'reset confirm'";
 
@@ -39,7 +39,7 @@ public class ClearCommand extends Command {
         if (Objects.equals(this.confirmation, "confirm")) {
             requireNonNull(model);
             model.setAddressBook(new AddressBook());
-            return new CommandResult(MESSAGE_SUCCESS);
+            return new CommandResult(MESSAGE_SUCCESS, CommandType.CLEAR);
         } else {
             return new CommandResult(MESSAGE_USAGE);
         }
