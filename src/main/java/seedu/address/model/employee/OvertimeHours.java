@@ -6,8 +6,8 @@ package seedu.address.model.employee;
  */
 public class OvertimeHours implements Comparable<OvertimeHours> {
 
-    public static final String MESSAGE_CONSTRAINTS = "Number of overtime hours left"
-            + " should not exceed above 72 or below 0";
+    public static final String MESSAGE_CONSTRAINTS = "Number of overtime hours"
+            + " should not be above 72 or below 0";
 
     public final int value;
 
