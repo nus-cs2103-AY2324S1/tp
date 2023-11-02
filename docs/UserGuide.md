@@ -150,10 +150,10 @@ Before delete         |  After delete
 Edits the word and its translation at the given index.
 * Edits a wild flashcard.
 
-Format: `edit <INDEX> w/<WORD> t/<TRANSLATION>`
+Format: `edit <INDEX> [w/<WORD>] [t/<TRANSLATION>] [wl/<WORD_LANGUAGE>] [tl/<TRANSLATION_LANGUAGE>]`
 
 Examples:
-* `edit 1 w/こんにちわ t/Hello` edits the word and its translation at index 1
+* `edit 1 w/こんにちわ t/Hello` edits the translation at index 1
 
 Output:
 
@@ -163,6 +163,12 @@ Before edit         |  After edit
 
 **Note**
 * Users are not allowed to edit a flash card to an existing flash card
+* `<INDEX>` is the index of each flashcard in the `list`
+* Users change at **LEAST** one certain parameter by using certain prefix 
+  * Word: `w/WORD`
+  * Word Language: `wl/WORD_LANGUAGE`
+  * Translation: `t/TRANSLATION`
+  * Translation Language: `tl/TRANSLATION_LANGUAGE`
 > The error message: <br>
 > `This flashcard already exists in Flashlingo`
 
