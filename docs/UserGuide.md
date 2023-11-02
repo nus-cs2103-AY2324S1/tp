@@ -11,7 +11,7 @@ CheckMate is a **desktop app for streamlining the process of room bookings for h
 {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
-<details>
+<details open>
 <summary><strong>Quick start</strong></summary>
 <div markdown="1">
 
@@ -25,7 +25,7 @@ CheckMate is a **desktop app for streamlining the process of room bookings for h
 
 4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar checkmate.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![Ui](images/Ui.png) <- Replace this ANNABEL
+   ![Ui](images/UI.png)
 
 5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
@@ -47,14 +47,13 @@ CheckMate is a **desktop app for streamlining the process of room bookings for h
 </div>
 </details>
 --------------------------------------------------------------------------------------------------------------------
-<details>
+<details open>
 <summary><strong>Formats</strong></summary>
 <div markdown="1">
 
 ## Input Formats
 
 <div markdown="block" class="alert alert-info">
-<details>
 ### Command Format
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
@@ -84,7 +83,7 @@ CheckMate is a **desktop app for streamlining the process of room bookings for h
 </div>
 </details>
 --------------------------------------------------------------------------------------------------------------------
-<details>
+<details open>
 <summary><strong>Commands</strong></summary>
 <div markdown="1">
 
