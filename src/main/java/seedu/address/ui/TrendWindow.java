@@ -12,6 +12,7 @@ import javafx.stage.Stage;
 
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.trendresults.TrendCommandResult;
 
 import java.util.Arrays;
 import java.util.logging.Logger;
@@ -21,22 +22,10 @@ import java.util.logging.Logger;
  */
 public class TrendWindow extends UiPart<Stage> {
     public static final String FXML = "TrendWindow.fxml";
-    public static final String JAN = "JAN";
-    public static final String FEB = "FEB";
-    public static final String MAR = "MAR";
-    public static final String APR = "APR";
-    public static final String MAY = "MAY";
-    public static final String JUN = "JUN";
-    public static final String JUL = "JUL";
-    public static final String AUG = "AUG";
-    public static final String SEP = "SEP";
-    public static final String OCT = "OCT";
-    public static final String NOV = "NOV";
-    public static final String DEC = "DEC";
     private static final Logger logger = LogsCenter.getLogger(TrendWindow.class);
     private static final String[] months = new String[]{
-            "JAN", "FEB", "MAR", "APR", "MAY", "JUN",
-            "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"
+            "Jan", "Feb", "Mar", "Apr", "May", "Jun",
+            "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
     };
     private static final int NUMBER_OF_MONTHS = 12;
     private static final String X_AXIS_LABEL = "Month";
@@ -52,7 +41,11 @@ public class TrendWindow extends UiPart<Stage> {
      */
     public TrendWindow(CommandResult commandResult) {
         super(FXML, new Stage());
-        lineChart = createLineChart(commandResult);
+
+        assert commandResult instanceof TrendCommandResult;
+
+        TrendCommandResult trendCommandResult = (TrendCommandResult) commandResult;
+        lineChart = createLineChart(trendCommandResult);
         initialize();
     }
 
@@ -61,7 +54,7 @@ public class TrendWindow extends UiPart<Stage> {
      * @param commandResult TrendCommandResult instance.
      * @return a TrendCommandResult instance.
      */
-    public static LineChart<String, Number> createLineChart(CommandResult commandResult) {
+    public static LineChart<String, Number> createLineChart(TrendCommandResult commandResult) {
         CategoryAxis xAxis = new CategoryAxis();
         xAxis.setCategories(FXCollections.<String>observableArrayList(Arrays.asList(months)));
         xAxis.setLabel(X_AXIS_LABEL);
@@ -73,10 +66,19 @@ public class TrendWindow extends UiPart<Stage> {
         lineChart.setTitle("Trend");
 
         XYChart.Series<String, Number> series = new XYChart.Series<>();
-        for (int i = 0; i < NUMBER_OF_MONTHS; i++) {
-            series.getData().add(new XYChart.Data<>(months[i], commandResult.getEnrolmentCountOnMonth(i)));
-//            series.getData().add(new XYChart.Data<>(months[i], 0));
-        }
+
+        series.getData().add(new XYChart.Data<>(months[0], commandResult.getJanCount()));
+        series.getData().add(new XYChart.Data<>(months[1], commandResult.getFebCount()));
+        series.getData().add(new XYChart.Data<>(months[2], commandResult.getMarCount()));
+        series.getData().add(new XYChart.Data<>(months[3], commandResult.getAprCount()));
+        series.getData().add(new XYChart.Data<>(months[4], commandResult.getMayCount()));
+        series.getData().add(new XYChart.Data<>(months[5], commandResult.getJunCount()));
+        series.getData().add(new XYChart.Data<>(months[6], commandResult.getJulCount()));
+        series.getData().add(new XYChart.Data<>(months[7], commandResult.getAugCount()));
+        series.getData().add(new XYChart.Data<>(months[8], commandResult.getSepCount()));
+        series.getData().add(new XYChart.Data<>(months[9], commandResult.getOctCount()));
+        series.getData().add(new XYChart.Data<>(months[10], commandResult.getNovCount()));
+        series.getData().add(new XYChart.Data<>(months[11], commandResult.getDecCount()));
 
         lineChart.getData().add(series);
 

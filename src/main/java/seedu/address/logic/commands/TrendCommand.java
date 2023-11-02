@@ -4,10 +4,9 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_YEAR;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.logic.OrganizeData;
 import seedu.address.logic.commands.trendresults.TrendCommandResult;
 import seedu.address.model.Model;
-
-import java.time.Year;
 
 /**
  * Generates a (Number of Students) ~ (Time) graph for trend analyzing.
@@ -25,20 +24,20 @@ public class TrendCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "Trend displayed!";
 
-    private final Year year;
+    private final int year;
 
     /**
-     * Constructs a {@code TrendCommand} instance using Year.
-     * @param year The year such that the data during this year is to be analyzed.
+     * Constructs a {@code TrendCommand}.
+     * @param args The year such that the data during this year is to be analyzed.
      */
-    public TrendCommand(Year year) {
-        this.year = year;
+    public TrendCommand(String args) {
+        this.year = Integer.parseInt(args.trim());
     }
 
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        return new TrendCommandResult();
+        return new TrendCommandResult(OrganizeData.byEnrolDate(model, this.year));
     }
 
     @Override
@@ -53,7 +52,7 @@ public class TrendCommand extends Command {
 
         TrendCommand otherTrendCommand = (TrendCommand) other;
 
-        return this.year.equals(otherTrendCommand.year);
+        return this.year == (otherTrendCommand.year);
     }
 
     @Override
