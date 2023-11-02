@@ -56,7 +56,7 @@ These are symbols we will be using to highlight certain information to you.
 
 --------------------------------------------------------------------------------------------------------------------
 ## User Interface (UI)
-There are mainly two different screens that you may face when using Foster Family. 
+These are the two different screens you will be interacting with in Foster Family. 
 
 ### The Main Window 
 ![Ui](images/Ui.png)
@@ -133,8 +133,8 @@ If you press Esc key, the exit is cancelled and you can continue working on the 
 The example above is the result of pressing the Esc key after you are warned.
 
 
-To learn more about **adding a new fosterer through the profile page**, refer to a section [Adding a fosterer through the profile page: add](#adding-a-fosterer-through-the-profile-page-add). <br/>
-To learn more about **editing a fosterer through the profile page**, refer to a section about [Editing a fosterer's detail through the profile page: edit](#editing-a-fosterers-detail-through-the-profile-page-edit). 
+To learn more about **adding a new fosterer through the profile page**, refer to the section [Adding a fosterer through the profile page: add](#adding-a-fosterer-through-the-profile-page-add). <br/>
+To learn more about **editing a fosterer through the profile page**, refer to the section [Editing a fosterer's detail through the profile page: edit](#editing-a-fosterers-detail-through-the-profile-page-edit). 
 
 
 ## Features
@@ -240,8 +240,7 @@ Format: `add`
 
 **:information_source: Notes about the command:**<br>
 
-*  Valid cases of a fosterer entry in the section [Adding a fosterer through the main window: add](#adding-a-fosterer-through-the-main-window-add) are still applied in this alternative way to add a fosterer.
-
+*  The restrictions imposed on what makes a valid fosterer, as explained in the section [Adding a fosterer through the main window: add](#adding-a-fosterer-through-the-main-window-add), still applies in this alternative way of adding a fosterer.
 </div>
 
 ![Profile](images/screenshots/ProfilePage.png)
@@ -539,14 +538,14 @@ Undoes the previous command, given that the previous command successfully execut
 
 Format: `undo`
 
+![Undo](images/screenshots/Undo.png)
+
 <div markdown="block" class="alert alert-info">
 
 **:information_source: Notes about the command:**<br>
 
 *  The `undo` command can only be executed **once** at a time, and it will undo the last successful command. When the `undo` command is executed consecutively more than once, an error message will be shown:
 ![Undo](images/screenshots/UndoError.png)
-   * Provided that the previous command was a successful `add`, `delete`, or `edit`, the `undo` command will be executed successfully.
-![Undo](images/screenshots/Undo.png)
 
 </div>
 
@@ -554,7 +553,7 @@ Format: `undo`
 
 Clears all entries from the address book.
 
-Format: `reset` and `reset confirm`
+Format: `reset`, followed by `reset confirm`
 
 <div markdown="block" class="alert alert-info">
 
@@ -574,9 +573,9 @@ Exits the program.
 
 Format: `exit`
 
-<div markdown="block" class="alert alert-primary">
+<div markdown="block" class="alert alert-info">
 
-**:bulb: Tip:**<br>
+**:information_source: Notes about the command:**<br>
 
 * On the profile page, entering <code>exit</code> leads you out of the page back to the main window. 
 * On the profile page, attempting to <code>exit</code> without saving changes with <code>save</code> prompts a warning message (refer to [User Interface: The Profile Page: Exiting the profile page](#exiting-the-profile-page)). 

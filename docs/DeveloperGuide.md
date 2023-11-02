@@ -169,9 +169,11 @@ Given below is an example usage scenario and how the add mechanism behaves at ea
 
 Step 1. The user enters the `add` command with relevant details for the new fosterer. The `AddCommandParser` is invoked to parse the user's input.
 
-Step 2. The `AddCommandParser` processes the user's input and verifies the presence of mandatory fields inputted in the correct format. If this check fails, the system will generate a specific error message indicating which field format is invalid. For example, if the email format is incorrect, the system will report that the email input is invalid. The error message will be displayed to the user, providing clear feedback about the issue and the specific constraints that are not met.
+Step 2. The `AddCommandParser` processes the user's input and verifies the presence of mandatory fields inputted in the correct format.<br/>
+If this check fails, the system will generate a specific error message indicating which field format is invalid.<br/>
+For example, if the email format is incorrect, the system will report that the email input is invalid. The error message will be displayed to the user, providing clear feedback about the issue and the specific constraints that are not met.
 
-Step 3. If all mandatory fields are present with the valid format, the new person is created using the `Person` class. The person's details, including their name, phone, email, address, housing, availability, animal name, animal type, and tags, are recorded, and the Person class also ensures that there is no conflicting data. 
+Step 3. If all mandatory fields are present with the valid format, the new person is created using the `Person` class. The person's details, including their name, phone, email, address, housing, availability, animal name, animal type, and tags, are recorded, and the Person class also ensures that there is no conflicting data.<br/>
 If this check fails, the system will generate a specific error message indicating which field is invalid, and how can it be resolved.
 
 Step 4. The `Person` is then passed to the new `AddCommand` created, which adds the person to the address book, ensuring that it is not a duplicate of an existing entry. This check is performed in the `execute` method of the `AddCommand`.
