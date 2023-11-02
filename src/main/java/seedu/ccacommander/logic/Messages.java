@@ -49,7 +49,7 @@ public class Messages {
                 .append(" | Address: ")
                 .append(member.getAddress())
                 .append(" | Tags: ");
-        member.getTags().forEach(builder::append);
+        member.getTags().forEach(tag -> builder.append(tag).append(" "));
         return builder.toString();
     }
 

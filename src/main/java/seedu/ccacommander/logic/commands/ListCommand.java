@@ -25,8 +25,8 @@ public class ListCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
 
-        MemberListPanel.setIsViewEventCommand(false);
-        EventListPanel.setIsViewMemberCommand(false);
+        MemberListPanel.setDisplayMemberHoursAndRemark(false);
+        EventListPanel.setDisplayEventHoursAndRemark(false);
 
         model.updateFilteredMemberList(PREDICATE_SHOW_ALL_MEMBERS);
         model.updateFilteredEventList(PREDICATE_SHOW_ALL_EVENTS);

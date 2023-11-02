@@ -48,7 +48,7 @@ public class EventCard extends UiPart<Region> {
     /**
      * Creates a {@code EventCode} with the given {@code Event} and index to display.
      */
-    public EventCard(Event event, int displayedIndex, boolean isViewMemberCommand) {
+    public EventCard(Event event, int displayedIndex, boolean displayEventHoursAndRemark) {
         super(FXML);
         this.event = event;
         id.setText(displayedIndex + ". ");
@@ -60,10 +60,8 @@ public class EventCard extends UiPart<Region> {
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
         eventHours.setText("Hours: " + event.getHours().toString());
         eventRemark.setText("Remark: " + event.getRemark());
-        if (!isViewMemberCommand) {
+        if (!displayEventHoursAndRemark) {
             eventHours.setVisible(false);
-        }
-        if (!isViewMemberCommand) {
             eventRemark.setVisible(false);
         }
     }

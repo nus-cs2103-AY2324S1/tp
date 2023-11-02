@@ -4,17 +4,14 @@ import static java.util.Objects.requireNonNull;
 import static seedu.ccacommander.logic.Messages.MESSAGE_INVALID_EVENT_DISPLAYED_INDEX;
 
 import java.util.Collection;
-import java.util.HashSet;
 import java.util.List;
 
 import seedu.ccacommander.commons.core.index.Index;
 import seedu.ccacommander.logic.Messages;
 import seedu.ccacommander.logic.commands.exceptions.CommandException;
 import seedu.ccacommander.model.Model;
-import seedu.ccacommander.model.enrolment.Enrolment;
 import seedu.ccacommander.model.event.Event;
 import seedu.ccacommander.model.event.SameEventPredicate;
-import seedu.ccacommander.model.member.Member;
 import seedu.ccacommander.model.member.MemberInNameCollectionPredicate;
 import seedu.ccacommander.model.shared.Name;
 import seedu.ccacommander.ui.EventListPanel;
@@ -57,8 +54,8 @@ public class ViewEventCommand extends Command {
 
         Collection<Name> memberNameCollection = model.updateEventHoursAndRemark(eventName);
 
-        MemberListPanel.setIsViewEventCommand(true);
-        EventListPanel.setIsViewMemberCommand(false);
+        MemberListPanel.setDisplayMemberHoursAndRemark(true);
+        EventListPanel.setDisplayEventHoursAndRemark(false);
         model.updateFilteredMemberList(new MemberInNameCollectionPredicate(memberNameCollection));
         model.updateFilteredEventList(new SameEventPredicate(event));
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(event)));

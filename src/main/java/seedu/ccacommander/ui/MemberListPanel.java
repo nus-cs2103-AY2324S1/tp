@@ -14,7 +14,7 @@ import seedu.ccacommander.model.member.Member;
  * Panel containing the list of members.
  */
 public class MemberListPanel extends UiPart<Region> {
-    private static boolean isViewEventCommand = false;
+    private static boolean displayMemberHoursAndRemark = false;
     private static final String FXML = "MemberListPanel.fxml";
     private final Logger logger = LogsCenter.getLogger(MemberListPanel.class);
 
@@ -30,8 +30,8 @@ public class MemberListPanel extends UiPart<Region> {
         memberListView.setCellFactory(listView -> new MemberListViewCell());
     }
 
-    public static void setIsViewEventCommand(boolean isViewEventCommand) {
-        MemberListPanel.isViewEventCommand = isViewEventCommand;
+    public static void setDisplayMemberHoursAndRemark(boolean displayMemberHoursAndRemark) {
+        MemberListPanel.displayMemberHoursAndRemark = displayMemberHoursAndRemark;
     }
 
     /**
@@ -46,7 +46,7 @@ public class MemberListPanel extends UiPart<Region> {
                 setGraphic(null);
                 setText(null);
             } else {
-                setGraphic(new MemberCard(member, getIndex() + 1, isViewEventCommand).getRoot());
+                setGraphic(new MemberCard(member, getIndex() + 1, displayMemberHoursAndRemark).getRoot());
             }
         }
     }

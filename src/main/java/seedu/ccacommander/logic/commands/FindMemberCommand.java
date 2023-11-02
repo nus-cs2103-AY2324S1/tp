@@ -32,9 +32,9 @@ public class FindMemberCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.updateFilteredMemberList(predicate);
-        model.updateFilteredEventList(Model.PREDICATE_SHOW_ALL_EVENTS);
-        MemberListPanel.setIsViewEventCommand(false);
-        EventListPanel.setIsViewMemberCommand(false);
+
+        MemberListPanel.setDisplayMemberHoursAndRemark(false);
+        EventListPanel.setDisplayEventHoursAndRemark(false);
         return new CommandResult(
                 String.format(Messages.MESSAGE_MEMBERS_LISTED_OVERVIEW, model.getFilteredMemberList().size()));
     }

@@ -52,8 +52,8 @@ public class ViewMemberCommand extends Command {
 
         Collection<Name> eventNamesCollection = model.updateEventHoursAndRemark(memberName);
 
-        MemberListPanel.setIsViewEventCommand(false);
-        EventListPanel.setIsViewMemberCommand(true);
+        MemberListPanel.setDisplayMemberHoursAndRemark(false);
+        EventListPanel.setDisplayEventHoursAndRemark(true);
         model.updateFilteredMemberList(new SameMemberPredicate(member));
         model.updateFilteredEventList(new EventInNameCollectionPredicate(eventNamesCollection));
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(member)));

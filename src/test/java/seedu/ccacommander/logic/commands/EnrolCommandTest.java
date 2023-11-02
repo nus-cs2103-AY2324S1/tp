@@ -18,6 +18,7 @@ import static seedu.ccacommander.testutil.TypicalMembers.ALICE;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
@@ -37,6 +38,7 @@ import seedu.ccacommander.model.event.Event;
 import seedu.ccacommander.model.event.UniqueEventList;
 import seedu.ccacommander.model.member.Member;
 import seedu.ccacommander.model.member.UniqueMemberList;
+import seedu.ccacommander.model.shared.Name;
 import seedu.ccacommander.testutil.EnrolmentBuilder;
 
 public class EnrolCommandTest {
@@ -228,6 +230,16 @@ public class EnrolCommandTest {
         }
 
         @Override
+        public Collection<Name> updateMemberHoursAndRemark(Name eventName) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Collection<Name> updateEventHoursAndRemark(Name memberName) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void commit(String commitMessage) {
             throw new AssertionError("This method should not be called.");
         }
@@ -334,6 +346,7 @@ public class EnrolCommandTest {
         public ReadOnlyCcaCommander getCcaCommander() {
             return new CcaCommander();
         }
+
     }
 
 }

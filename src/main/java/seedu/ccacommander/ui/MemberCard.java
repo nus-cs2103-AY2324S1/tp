@@ -10,7 +10,7 @@ import javafx.scene.layout.Region;
 import seedu.ccacommander.model.member.Member;
 
 /**
- * An UI component that displays information of a {@code Member}.
+ * A UI component that displays information of a {@code Member}.
  */
 public class MemberCard extends UiPart<Region> {
 
@@ -50,7 +50,7 @@ public class MemberCard extends UiPart<Region> {
     /**
      * Creates a {@code MemberCode} with the given {@code Member} and index to display.
      */
-    public MemberCard(Member member, int displayedIndex, boolean isViewEventCommand) {
+    public MemberCard(Member member, int displayedIndex, boolean displayMemberHoursAndRemark) {
         super(FXML);
         this.member = member;
         id.setText(displayedIndex + ". ");
@@ -61,10 +61,8 @@ public class MemberCard extends UiPart<Region> {
         email.setText(member.getEmail().value);
         memberHours.setText("Hours: " + member.getHours().toString());
         memberRemark.setText("Remark: " + member.getRemark());
-        if (!isViewEventCommand) {
+        if (!displayMemberHoursAndRemark) {
             memberHours.setVisible(false);
-        }
-        if (!isViewEventCommand) {
             memberRemark.setVisible(false);
         }
 

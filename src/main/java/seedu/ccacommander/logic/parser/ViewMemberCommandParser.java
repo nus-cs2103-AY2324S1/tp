@@ -12,8 +12,8 @@ import seedu.ccacommander.logic.parser.exceptions.ParseException;
  */
 public class ViewMemberCommandParser implements Parser<ViewMemberCommand> {
     /**
-     * Parses the given {@code String} of arguments in the context of the ViewEventCommand
-     * and returns a ViewEventCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the ViewMemberCommand
+     * and returns a ViewMemberCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
     public ViewMemberCommand parse(String args) throws ParseException {

@@ -71,6 +71,7 @@ public class EnrolmentBuilder {
         this.remark = new Remark(remark);
         return this;
     }
+
     public Enrolment build() {
         return new Enrolment(memberName, eventName, hours, remark);
     }
