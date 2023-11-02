@@ -11,8 +11,8 @@ package swe.context.logic;
  */
 public final class Messages {
     // Generic commands
-    public static final String DUPLICATE_FIELDS
-    = "Multiple values specified for the following single-valued parameters(s): ";
+    public static final String DUPLICATE_FIELDS =
+            "Multiple values specified for the following single-valued parameters(s): ";
     public static final String COMMAND_DUPLICATE_CONTACT =
             "There is an existing contact with the same name.";
     private static final String UNFORMATTED_COMMAND_INVALID_FORMAT = "Invalid command format.%n%s";
@@ -30,8 +30,8 @@ public final class Messages {
     public static final String COMMAND_HELP_SUCCESS = "Opened help window.";
     public static final String COMMAND_EXIT_SUCCESS = "Exiting app...";
 
-    public static final String INVALID_DELETE_INDEX
-            = "One or more of the contact indices provided are invalid.";
+    public static final String INVALID_DELETE_INDEX =
+            "One or more of the contact indices provided are invalid.";
     public static final String INVALID_EDIT_INDEX = "The contact index provided is invalid.";
 
     // Validation messages for command parameter constraints
