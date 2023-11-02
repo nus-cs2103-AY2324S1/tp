@@ -54,6 +54,18 @@ Display all your stored contacts.
 
 ---
 
+### Filtering Contacts by Tag: `filter`
+
+Search and display contacts with tag matching the given keyword (case-insensitive).
+
+**Format:**
+`filter [KEYWORD]`
+
+**Example:**
+`filter Friend`
+
+---
+
 ### Deleting Contacts: `delete`
 
 Removes one or more contacts based on their indices. The indices refer to the index numbers shown in the displayed contact list.
