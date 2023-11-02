@@ -127,7 +127,7 @@ public class InputParserTest {
     public void parseCommand_unknownCommand_throwsParseException() {
         assertThrows(
             ParseException.class,
-            Messages.COMMAND_UNKNOWN,
+            Messages.commandUnknown(HelpCommand.MESSAGE_USAGE),
             () -> InputParser.parseCommand("unknownCommand")
         );
     }

@@ -11,15 +11,15 @@ package swe.context.logic;
  */
 public final class Messages {
     // Generic commands
-    public static final String COMMAND_UNKNOWN = "Unknown command.";
     public static final String DUPLICATE_FIELDS
-            = "Multiple values specified for the following single-valued parameters(s): ";
+    = "Multiple values specified for the following single-valued parameters(s): ";
     public static final String COMMAND_DUPLICATE_CONTACT = "There is an existing contact with the same name.";
-    private static final String UNFORMATTED_COMMAND_INVALID_FORMAT = "Invalid command format.\n%s";
+    private static final String UNFORMATTED_COMMAND_INVALID_FORMAT = "Invalid command format.%n%s";
+    private static final String UNFORMATTED_COMMAND_UNKNOWN = "Unknown command.%n%s";
     private static final String UNFORMATTED_CONTACTS_LISTED_OVERVIEW = "%d contacts listed.";
-    private static final String UNFORMATTED_ADD_COMMAND_SUCCESS = "New contact added: %1$s";
-    private static final String UNFORMATTED_DELETE_COMMAND_SUCCESS = "Deleted contact(s): \n%1$s";
-    private static final String UNFORMATTED_EDIT_COMMAND_SUCCESS = "Edited contact: %1$s";
+    private static final String UNFORMATTED_ADD_COMMAND_SUCCESS = "New contact added: %s";
+    private static final String UNFORMATTED_DELETE_COMMAND_SUCCESS = "Deleted contact(s):%n%s";
+    private static final String UNFORMATTED_EDIT_COMMAND_SUCCESS = "Edited contact: %s";
 
     // Specific commands
     public static final String COMMAND_EDIT_NO_PARAM = "At least one optional parameter to edit must be provided.";
@@ -65,6 +65,17 @@ public final class Messages {
     public static String commandInvalidFormat(String helpText) {
         return String.format(
             Messages.UNFORMATTED_COMMAND_INVALID_FORMAT,
+            helpText
+        );
+    }
+
+    /**
+     * Returns a formatted message about the command being unknown, with the
+     * specified help text.
+     */
+    public static String commandUnknown(String helpText) {
+        return String.format(
+            Messages.UNFORMATTED_COMMAND_UNKNOWN,
             helpText
         );
     }
