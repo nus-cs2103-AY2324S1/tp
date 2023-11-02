@@ -34,7 +34,7 @@ public class CourseCommand extends Command {
     private final String courseCode;
 
     /**
-     * Creates an FilterCommand to add, delete or clear the filter based on {@code FilterOperation}
+     * Creates an CourseCommand to create, delete or switch the address book based on {@code CourseOperation}
      * and {@code Optional<String> course} and {@code Optional<String> tutorial}
      */
     public CourseCommand(CourseOperation operation, String courseCode) {
