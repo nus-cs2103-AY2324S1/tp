@@ -497,6 +497,18 @@ Take note that UI tests have to be run on the `JavaFX` thread, so UI tests have 
 
 --------------------------------------------------------------------------------------------------------------------
 
+## Planned Enhancements / Known Issues
+
+1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
+2. **When executing `add`/`edit` command**, if you try to add/edit a new/existing contact with the same [properties](#properties-of-contact) of another saved contact **(Note: 2 names are considered the same if both of them have the same casing and whitespaces)** in your contact list, CampusConnect allows you to do so. We plan to enhance the `add`/`edit` command such that it **takes into account what makes a contact unique in your contact list.**
+3. **When executing `addalt` command**, if you input other prefixes that are not accepted by the command format, the error message shown does not prompt you to remove those prefixes and adhere strictly to the command format. We will be working on this in the future to **improve the specificity of error messages.**
+4. **When executing commands with `PERSON_INDEX`**, if you did not input an appropriate index, the error message shown is generic; CampusConnect informs you the format of the command you should adhere to instead of prompting you to input a positive index. We will be working on this in the future to **improve the specificity of error messages.**
+5. **When executing `updatephoto` command**, if the `PERSON_INDEX` contains characters besides `0-9`, CampusConnect will be unresponsive as we assume that you will input a valid integer for `PERSON_INDEX`. Moreover, successful execution of the same `updatephoto` command with the same image will still result in `Photo updated` even though the photo is not updated. In addition, you can input multiple valid paths and the command will update your contact profile with the last image. We will be working on **handling more errors and improving the specificity of messages in the future.**
+6. **When executing all commands**, CampusConnect only accepts printable ASCII characters. We plan to support Unicode characters in the future for greater internationalization support, since users could have contacts with names including diacritics or non-alphabetic characters (e.g. Chinese characters).
+7. **When executing the `find` command**, if you input a `FIND_EXPRESSION` that is not accepted by the command format, the error message shows fairly general error messages. We will be working on this in the future to **improve the specificity of error messages.**
+8. **When executing the `find` command**, it is impossible to search for keywords that include the double-quote character (`"`) under any circumstance. We will be working on this in the future to **support searching for the double-quote character**, which could appear in fields such as notes.
+9. **When executing the `find` command**, the behavior of the `bal` field is not intuitive, especially for users who do not read the User Guide in-depth. We will be working on this in the future to **improve the ergonomics of `bal` field**, by implementing `>` and `<` operators so users can search for balance amounts below or above the keywords.
+
 ## **Appendix: Requirements**
 
 ### Product scope
@@ -750,3 +762,4 @@ testers are expected to do more *exploratory* testing.
    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
 1. _{ more test cases …​ }_
+
