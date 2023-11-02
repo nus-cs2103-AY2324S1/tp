@@ -16,7 +16,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import seedu.address.model.booking.Booking;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.booking.RoomTypeTag;
 
 /**
  * A UI component that displays information of a {@code Person}.
@@ -70,8 +70,8 @@ public class BookingCard extends UiPart<Region> {
             Image flag = new Image("images/Flag.png");
             flagImage.setImage(flag);
         }
-        Tag tag = booking.getTags();
-        Label tagLabel = new Label(tag.tagName);
+        RoomTypeTag tag = booking.getTags();
+        Label tagLabel = new Label(tag.roomTypeTagName);
         tagLabel.setStyle("-fx-font-weight: bold; -fx-font-size: 14; -fx-background-color: #64a4db;"
                  + " -fx-background-radius: 15; -fx-padding: 5px;");
         tags.getChildren().add(tagLabel);

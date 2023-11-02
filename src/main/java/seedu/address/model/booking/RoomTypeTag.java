@@ -1,30 +1,28 @@
-package seedu.address.model.tag;
+package seedu.address.model.booking;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
-import seedu.address.model.booking.Room;
-
 /**
- * Represents a Tag in the address book.
- * Guarantees: immutable; name is valid as declared in {@link #isValidTagName(String)}
+ * Represents a RoomType in the address book.
+ * Guarantees: immutable; name is valid as declared in {@link #isValidRoomTypeTagName(String)}
  */
-public class Tag {
+public class RoomTypeTag {
 
-    public static final String MESSAGE_CONSTRAINTS = "Tags names should be alphanumeric";
+    public static final String MESSAGE_CONSTRAINTS = "Room type names should be alphanumeric";
     public static final String VALIDATION_REGEX = "\\p{Alnum}+";
 
-    public final String tagName;
+    public final String roomTypeTagName;
 
     /**
      * Constructs a {@code Tag}.
      *
-     * @param tagName A valid tag name.
+     * @param roomTypeName A valid tag name.
      */
-    public Tag(String tagName) {
-        requireNonNull(tagName);
-        checkArgument(isValidTagName(tagName), MESSAGE_CONSTRAINTS);
-        this.tagName = tagName;
+    public RoomTypeTag(String roomTypeName) {
+        requireNonNull(roomTypeName);
+        checkArgument(isValidRoomTypeTagName(roomTypeName), MESSAGE_CONSTRAINTS);
+        this.roomTypeTagName = roomTypeName;
     }
 
     /**
@@ -33,7 +31,7 @@ public class Tag {
      * @param test The string to test for validity as a tag name.
      * @return True if the string is a valid tag name, false otherwise.
      */
-    public static boolean isValidTagName(String test) {
+    public static boolean isValidRoomTypeTagName(String test) {
         if (test.matches(VALIDATION_REGEX)) {
             return true;
         }
@@ -60,31 +58,31 @@ public class Tag {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof Tag)) {
+        if (!(other instanceof RoomTypeTag)) {
             return false;
         }
 
-        Tag otherTag = (Tag) other;
-        return tagName.equals(otherTag.tagName);
+        RoomTypeTag otherTag = (RoomTypeTag) other;
+        return roomTypeTagName.equals(otherTag.roomTypeTagName);
     }
 
     /**
-     * Returns a hash code value for this tag.
+     * Returns a hash code value for this room type.
      *
-     * @return A hash code value for this tag.
+     * @return A hash code value for this room type.
      */
     @Override
     public int hashCode() {
-        return tagName.hashCode();
+        return roomTypeTagName.hashCode();
     }
 
     /**
-     * Returns a string representation of this tag.
+     * Returns a string representation of this room type.
      *
-     * @return A string representation of this tag, enclosed in square brackets.
+     * @return A string representation of this room type, enclosed in square brackets.
      */
     public String toString() {
-        return '[' + tagName + ']';
+        return '[' + roomTypeTagName + ']';
     }
 
 }

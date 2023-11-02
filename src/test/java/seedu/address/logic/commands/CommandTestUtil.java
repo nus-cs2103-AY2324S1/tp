@@ -55,7 +55,7 @@ public class CommandTestUtil {
     public static final String REMARK_DESC_AMY = " " + PREFIX_REMARK + VALID_REMARK_AMY;
     public static final String REMARK_DESC_BOB = " " + PREFIX_REMARK + VALID_REMARK_BOB;
 
-    public static final String INVALID_ROOM_DESC = " " + PREFIX_ROOM + "911"; // 'a' not allowed in room numbers
+    public static final String INVALID_ROOM_DESC = " " + PREFIX_ROOM + "911"; // out of valid room range
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
