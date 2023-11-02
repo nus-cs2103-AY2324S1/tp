@@ -16,24 +16,26 @@ CheckMate is a **desktop app for streamlining the process of room bookings for h
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-1. Download the latest `checkmate.jar` from [here](https://github.com/se-edu/addressbook-level3/releases).
+2. Download the latest `checkmate.jar` from [here](https://github.com/AY2324S1-CS2103T-F10-1/tp/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+3. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
+4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar checkmate.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![Ui](images/Ui.png)
+   ![Ui](images/Ui.png) <- Replace this ANNABEL
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
     * `list` : Lists all bookings.
 
-    * `add r/1 d/2023-01-01 to 2023-01-02 n/Aikenot Dueet p/995 e/aikenotduet@gmail.com` : Adds a booking for the room number `1` to the Bookings Book.
+    * `add r/1 d/2023-11-03 08:00 to 2023-11-04 11:00 n/Aikenot Dueet p/98765432 e/aikenotduet@gmail.com` : Adds a booking for the room number `1` to the Bookings Book.
 
     * `delete 3` : Deletes the 3rd booking shown in the current list.
 
     * `clear` : Deletes all booking.
+
+    * `undo` : Undoes the most recent command 
 
     * `exit` : Exits CheckMate and closes the application.
 
@@ -51,15 +53,12 @@ CheckMate is a **desktop app for streamlining the process of room bookings for h
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
 * Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
-
-* Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
+  e.g `n/NAME [rm/REMARK]` can be used as `n/John Doe rm/Extra Pillows` or as `n/John Doe`.
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `r/ROOM d/BOOKING_PERIOD`, `d/BOOKING_PERIOD r/ROOM` is also acceptable.
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
+* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit`, `undo` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
@@ -68,12 +67,11 @@ CheckMate is a **desktop app for streamlining the process of room bookings for h
 ### Parameter Format
 
 * `r/ROOM`: `ROOM` can be any integer from 1 to 500 inclusive.
-* `d/BOOKING_PERIOD`: `BOOKING_PERIOD` is in the format `YYYY-MM-dd to YYYY-M-dd`.
+* `d/BOOKING_PERIOD`: `BOOKING_PERIOD` is in the format `YYYY-MM-dd HH:mm to YYYY-M-dd HH:mm`.
 * `n/NAME`: `NAME` can be any String.
 * `p/PHONE_NUMBER`: `PHONE_NUMBER` can be any integer.
 * `e/EMAIL`: `EMAIL` can be any String as long as it contains `@` inside the String.
 * `rm/REMARK`: `REMARK` can be any String less than or equal to 50 characters in length.
-* `t/TAG`: `TAG` can be any String.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -91,15 +89,15 @@ Format: `help`
 
 Adds a booking to the bookings book.
 
-Format: `add r/ROOM d/BOOKING_PERIOD n/NAME p/PHONE_NUMBER e/EMAIL rm/REMARK [t/TAG]…​`
+Format: `add r/ROOM d/BOOKING_PERIOD n/NAME p/PHONE_NUMBER e/EMAIL rm/REMARK`
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A booking can have any number of tags (including 0)
+<div markdown="span" class="alert alert-primary">:bulb: **Note:**
+The room number is used to assign the room type
 </div>
 
 Examples:
-* `add r/1 d/2023-01-01 to 2023-01-02 n/John Doe p/98765432 e/johnd@example.com`
-* `add r/2 d/2023-02-01 to 2023-02-02 n/Betsy Crowe p/99990000 e/betsycrowe@example.com`
+* `add r/1 d/2023-01-01 08:00 to 2023-01-02 12:00 n/John Doe p/98765432 e/johnd@example.com`
+* `add r/256 d/2023-02-01 15:00 to 2023-02-02 23:59 n/Betsy Crowe p/99990000 e/betsycrowe@example.com`
 
 ### Listing all bookings : `list`
 
@@ -111,19 +109,15 @@ Format: `list`
 
 Edits an existing booking in the bookings book.
 
-Format: `edit INDEX [r/ROOM] [d/BOOKING_PERIOD] [n/NAME] [p/PHONE] [e/EMAIL] [rm/REMARK] [t/TAG]…​`
+Format: `edit INDEX [r/ROOM] [d/BOOKING_PERIOD] [n/NAME] [p/PHONE] [e/EMAIL]`
 
 * Edits the booking at the specified `INDEX`. The index refers to the index number shown in the displayed booking list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* When editing tags, the existing tags of the booking will be removed i.e adding of tags is not cumulative.
-* You can remove all the booking’s tags by typing `t/` without
-  specifying any tags after it.
+* The Room number is used to map to the Room type; there is no way to directly edit the room type without changing the Room number.
 
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email bookingPeriod of the 1st booking to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd booking to be `Betsy Crower` and clears all existing tags.
-
 
 ### Locating bookings by name or room: `find`
 
@@ -147,16 +141,24 @@ Examples:
 
 Deletes the specified booking from the bookings book.
 
-Format: `delete INDEX`
+Format: `delete INDEX ...`
 
 * Deletes the booking at the specified `INDEX`.
 * The index refers to the index number shown in the displayed booking list.
-* The index **must be a positive integer** 1, 2, 3, …​
+* The index **must be a positive integer** 1, 2, 3, …
+* Multiple entries can be deleted at once by including their list index i.e. `delete 1 2 3 ...`
 
 Examples:
 * `list` followed by `delete 2` deletes the 2nd booking in the bookingPeriod book.
 * `find Betsy` followed by `delete 1` deletes the 1st booking in the results of the `find` command.
 
+### Undo a deletion : `undo`
+
+Reverts the most recent deletion. 
+
+Format: `undo`
+
+* Adds the most recently deleted booking back to the system.
 
 ### Clearing all entries : `clear`
 
@@ -209,9 +211,10 @@ Example:
 
 Action | Format, Examples
 --------|------------------
-**Add** | `add r/ROOM d/BOOKING_PERIOD n/NAME p/PHONE_NUMBER e/EMAIL rm/REMARK [t/TAG]…​` <br> e.g., `add r/1 d/2023-01-01 to 2023-01-02 n/James Ho p/22224444 e/jamesho@example.com rm/Extra Towels t/friend t/colleague`
+**Add** | `add r/ROOM d/BOOKING_PERIOD n/NAME p/PHONE_NUMBER e/EMAIL rm/REMARK` <br> e.g., `add r/1 d/2023-01-01 to 2023-01-02 n/James Ho p/22224444 e/jamesho@example.com rm/Extra Towels`
 **Clear** | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
+**Undo** | `undo`
 **Edit** | `edit INDEX [r/ROOM] [d/BOOKING _PERIOD] [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [rm/REMARK] [t/TAG]…​`<br> e.g.,`edit 2 r/2 d/2023-01-01 to 2023-01-02 n/James Lee e/jameslee@example.com`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find 1`
 **List** | `list`
