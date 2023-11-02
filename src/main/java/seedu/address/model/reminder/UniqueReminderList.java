@@ -2,10 +2,7 @@ package seedu.address.model.reminder;
 
 import static java.util.Objects.requireNonNull;
 
-import java.time.LocalDate;
 import java.util.Iterator;
-import java.util.List;
-import java.util.stream.Collectors;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -74,25 +71,6 @@ public class UniqueReminderList implements Iterable<Reminder> {
             return -1;
         }
         return internalList.stream().mapToLong(Reminder::getDueTime).min().getAsLong();
-    }
-
-    /**
-     * Returns the list of reminders associated with a specific date.
-     *
-     * @param date The date that which is used to retrieve the list of reminders.
-     * @return the list of reminders mapped from the given date.
-     */
-    public ObservableList<Reminder> getRemindersAfterDate(LocalDate date) {
-        ObservableList<Reminder> reminderList = FXCollections.observableArrayList();
-        List<Reminder> retrievedReminders = internalList.stream()
-                .filter(a -> a.isAfter(date))
-                .collect(Collectors.toList());
-
-        if (retrievedReminders == null) {
-            return reminderList;
-        }
-        reminderList.addAll(retrievedReminders);
-        return reminderList;
     }
 
     /**

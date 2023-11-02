@@ -203,6 +203,7 @@ public class Dashboard {
         totalWarmLeads = filteredPersonCount(Person::isWarmLead);
         totalColdLeads = filteredPersonCount(Person::isColdLead);
         model.updateReminderList();
+        model.updateFilteredReminderList(Reminder::isAfterNow);
         reminderList = model.getFilteredReminderList();
 
         /*

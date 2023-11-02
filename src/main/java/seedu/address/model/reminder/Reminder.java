@@ -32,8 +32,11 @@ public final class Reminder implements Comparable<LocalDate> {
         return followUpDate;
     }
 
-    public Boolean isAfter(LocalDate date) {
+    public boolean isAfter(LocalDate date) {
         return followUpDate.isAfter(date);
+    }
+    public boolean isAfterNow() {
+        return followUpDate.isAfter(LocalDate.now());
     }
 
     public long getDueTime() {

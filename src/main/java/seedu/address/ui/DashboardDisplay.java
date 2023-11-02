@@ -13,8 +13,6 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 import seedu.address.model.Dashboard;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.interaction.Interaction;
 import seedu.address.model.person.lead.LeadType;
 import seedu.address.model.reminder.Reminder;
 
