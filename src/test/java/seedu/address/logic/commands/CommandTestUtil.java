@@ -14,6 +14,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_SALARY;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -48,7 +49,8 @@ public class CommandTestUtil {
     public static final int VALID_OVERTIME_HOURS_AMY = 0;
     public static final int VALID_OVERTIME_HOURS_BOB = 72;
     public static final ArrayList<Leave> VALID_LEAVELIST_AMY = new ArrayList<>();
-    public static final ArrayList<Leave> VALID_LEAVELIST_BOB = new ArrayList<>(List.of(new Leave(LocalDate.now())));
+    public static final ArrayList<Leave> VALID_LEAVELIST_BOB = new ArrayList<>(
+            List.of(new Leave(LocalDate.parse("2023-11-01", DateTimeFormatter.ISO_LOCAL_DATE))));
     public static final ArrayList<Leave> VALID_LEAVELIST_CARL = new ArrayList<>(List.of(new Leave(
             LocalDate.of(2023, 12, 12)))
     );
@@ -62,8 +64,8 @@ public class CommandTestUtil {
     public static final String PHONE_DESC_BOB = " " + PREFIX_PHONE + VALID_PHONE_BOB;
     public static final String EMAIL_DESC_AMY = " " + PREFIX_EMAIL + VALID_EMAIL_AMY;
     public static final String EMAIL_DESC_BOB = " " + PREFIX_EMAIL + VALID_EMAIL_BOB;
-    public static final String DEPARTMENT_DESC_FRIEND = " " + PREFIX_DEPARTMENT + VALID_DEPARTMENT_FINANCE;
-    public static final String DEPARTMENT_DESC_HUSBAND = " " + PREFIX_DEPARTMENT + VALID_DEPARTMENT_IT;
+    public static final String DEPARTMENT_DESC_FINANCE = " " + PREFIX_DEPARTMENT + VALID_DEPARTMENT_FINANCE;
+    public static final String DEPARTMENT_DESC_IT = " " + PREFIX_DEPARTMENT + VALID_DEPARTMENT_IT;
     public static final String SALARY_DESC_AMY = " " + PREFIX_SALARY + VALID_SALARY_AMY;
     public static final String SALARY_DESC_BOB = " " + PREFIX_SALARY + VALID_SALARY_BOB;
     public static final String AMOUNT_DESC_BOB = " " + PREFIX_AMOUNT + VALID_OVERTIME_HOURS_BOB;
