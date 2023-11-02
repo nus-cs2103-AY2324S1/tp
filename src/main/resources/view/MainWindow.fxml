@@ -56,7 +56,7 @@
               <Label styleClass="label-header" text="Members" />
               <HBox>
                 <StackPane fx:id="memberListPanelPlaceholder" HBox.hgrow="ALWAYS" />
-                <VBox alignment="CENTER" HBox.hgrow="NEVER">
+                <VBox styleClass="highlight" alignment="CENTER" HBox.hgrow="NEVER">
                   <Label styleClass="label-header" text="Tasks" />
                   <StackPane fx:id="taskListPanelPlaceholder">
                   </StackPane>
