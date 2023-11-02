@@ -69,11 +69,11 @@ public class SetDifficultyCommandTest {
 
         SetDifficultyCommand setDifficultyCommand = new SetDifficultyCommand(Index.RANDOM, "easy");
 
-        String expectedMessage = "Set Difficulty for Question 1 (Difficulty level: easy)";
+        String expectedMessage = "Set Difficulty for Question 1 (Difficulty level: EASY)";
 
         Model expectedModel = new ModelManager(new Deck(modelToUse.getDeck()), new UserPrefs());
-        expectedModel.getDeck().getCardList().get(0).setDifficulty("easy");
-        expectedModel.getDeck().getCardList().get(0).setNewPracticeDateWith("easy");
+        expectedModel.getDeck().getCardList().get(0).setDifficulty(Difficulty.EASY);
+        expectedModel.getDeck().getCardList().get(0).setNewPracticeDateWith(Difficulty.EASY);
         expectedModel.getDeck().sort();
         assertCommandSuccess(setDifficultyCommand, modelToUse, expectedMessage, expectedModel);
     }

@@ -56,11 +56,11 @@ public class SolveCommand extends Command {
             actualIndex = targetIndex;
         }
 
-        if (targetIndex.getZeroBased() >= lastShownList.size()) {
+        if (actualIndex.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_CARD_DISPLAYED_INDEX);
         }
 
-        Card cardToSolve = lastShownList.get(targetIndex.getZeroBased());
+        Card cardToSolve = lastShownList.get(actualIndex.getZeroBased());
 
         cardToSolve.incrementSolveCount();
         //sets to show the update on the Ui
@@ -68,7 +68,7 @@ public class SolveCommand extends Command {
         model.getGoal().solvedCard();
 
         return new CommandResult(String.format(Messages.MESSAGE_CARDS_SOLVE_VIEW,
-                        Messages.formatSolve(cardToSolve, targetIndex)));
+                        Messages.formatSolve(cardToSolve, actualIndex)));
     }
 
     @Override

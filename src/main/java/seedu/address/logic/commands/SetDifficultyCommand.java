@@ -52,7 +52,7 @@ public class SetDifficultyCommand extends Command {
         List<Card> lastShownList = model.getFilteredCardList();
 
         Index actualIndex;
-      
+
         if (targetIndex.equals(Index.RANDOM)) {
             try {
                 actualIndex = model.getRandomIndex();
@@ -63,24 +63,25 @@ public class SetDifficultyCommand extends Command {
             actualIndex = targetIndex;
         }
 
-        if (targetIndex.getZeroBased() >= lastShownList.size()) {
+        if (actualIndex.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_CARD_DISPLAYED_INDEX);
         }
         Card cardToSetDifficulty = lastShownList.get(actualIndex.getZeroBased());
 
         switch (difficulty) {
         case EASY: return updatePracticeDate(model,
-                difficulty, cardToSetDifficulty, Messages.MESSAGE_CARDS_SET_DIFFICULTY_VIEW_EASY);
+                difficulty, cardToSetDifficulty, Messages.MESSAGE_CARDS_SET_DIFFICULTY_VIEW_EASY, actualIndex);
         case MEDIUM: return updatePracticeDate(model,
-                difficulty, cardToSetDifficulty, Messages.MESSAGE_CARDS_SET_DIFFICULTY_VIEW_MEDIUM);
+                difficulty, cardToSetDifficulty, Messages.MESSAGE_CARDS_SET_DIFFICULTY_VIEW_MEDIUM, actualIndex);
         case HARD: return updatePracticeDate(model,
-                difficulty, cardToSetDifficulty, Messages.MESSAGE_CARDS_SET_DIFFICULTY_VIEW_HARD);
+                difficulty, cardToSetDifficulty, Messages.MESSAGE_CARDS_SET_DIFFICULTY_VIEW_HARD, actualIndex);
         default:
             throw new CommandException(difficulty + Messages.MESSAGE_CARDS_SET_DIFFICULTY_VIEW_INVALID);
         }
     }
 
-    private CommandResult updatePracticeDate(Model model, Difficulty difficulty, Card card, String message) {
+    private CommandResult updatePracticeDate(Model model, Difficulty difficulty,
+                                             Card card, String message, Index targetIndex) {
         assert(model != null);
         assert(difficulty != null);
         assert(!message.isEmpty());

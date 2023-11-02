@@ -510,7 +510,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS:**
 
 1. User inputs command to view all cards.
-2. lesSON displays all cards. 
+2. lesSON displays all cards.
 
     Use case ends.
 
@@ -528,7 +528,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extension:**
 
-- 2a. lesSON detects that the given tags are invalid 
+- 2a. lesSON detects that the given tags are invalid
     - 2a1. lesSON displays a error message, use case resumes at step 1.
 - 2b. lesSON detects that the given index is invalid
     - 2a1. lesSON displays a error message, use case resumes at step 1.
@@ -583,8 +583,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     - 2a1. lesSON displays a error message, use case resumes at step 1.
 
 
-
-    
 
 ### Non-Functional Requirements
 
