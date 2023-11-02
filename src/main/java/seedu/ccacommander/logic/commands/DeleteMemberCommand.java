@@ -2,7 +2,6 @@ package seedu.ccacommander.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import seedu.ccacommander.commons.core.index.Index;
@@ -10,7 +9,6 @@ import seedu.ccacommander.commons.util.ToStringBuilder;
 import seedu.ccacommander.logic.Messages;
 import seedu.ccacommander.logic.commands.exceptions.CommandException;
 import seedu.ccacommander.model.Model;
-import seedu.ccacommander.model.enrolment.Enrolment;
 import seedu.ccacommander.model.member.Member;
 import seedu.ccacommander.model.shared.Name;
 
