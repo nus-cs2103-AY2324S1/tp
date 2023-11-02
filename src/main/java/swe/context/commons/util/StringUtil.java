@@ -11,6 +11,8 @@ import java.util.Arrays;
  * Helper functions for handling strings.
  */
 public class StringUtil {
+    public static final String MESSAGE_KEYWORD_EMPTY = "Keyword cannot be empty.";
+    public static final String MESSAGE_KEYWORD_MULTI_WORD = "Keyword should be a single word.";
 
     /**
      * Returns true if the {@code sentence} contains the {@code word}.
@@ -28,8 +30,8 @@ public class StringUtil {
         requireNonNull(word);
 
         String preppedWord = word.trim();
-        checkArgument(!preppedWord.isEmpty(), "Keyword cannot be empty.");
-        checkArgument(preppedWord.split("\\s+").length == 1, "Keyword should be a single word.");
+        checkArgument(!preppedWord.isEmpty(), StringUtil.MESSAGE_KEYWORD_EMPTY);
+        checkArgument(preppedWord.split("\\s+").length == 1, StringUtil.MESSAGE_KEYWORD_MULTI_WORD);
 
         String preppedSentence = sentence;
         String[] wordsInPreppedSentence = preppedSentence.split("\\s+");
