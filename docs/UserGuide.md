@@ -129,7 +129,7 @@ Format: `add n/NAME p/PHONE e/EMAIL s/STUDENT_NUMBER c/CLASS_NUMBER [t/TAG]â€¦â€
 
 * **ALL** the fields must be provided.
 * The NAME field is case-sensitive.
-* STUDENT NUMBER needs to be unique
+* STUDENT NUMBER needs to be unique, and must not be blank.
 * The class details of a student will be automatically populated to be 0 for all fields during the creation of a student.
 * Comment for a student can only be added after the student is instantiated.
 
@@ -194,14 +194,16 @@ Adds a comment to an existing student in Class Manager.
 
 Format: `comment s/STUDENT_NUMBER c/COMMENT`
 
-* The STUDENT NUMBER must be valid and exist.
+* The STUDENT_NUMBER must be valid and exist.
 * The COMMENT must be a valid string.
 * Comment can only be performed after the student is created.
 * Edit commands will not impact the comment tagged to the student.
+* Comment can be deleted by using an empty string as the comment.
 
 Examples:
 * `comment s/A0249112A c/This student is very hardworking.`
 * `comment s/A0249112A c/This student is very hardworking and smart.`
+* `comment s/A0249112A c/` (_This deletes the comment_)
 
 ---
 

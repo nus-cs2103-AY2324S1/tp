@@ -9,13 +9,13 @@ import static seedu.classmanager.commons.util.AppUtil.checkArgument;
  */
 public class StudentNumber {
 
-    public static final String MESSAGE_CONSTRAINTS = "Student Number can take any value starting with captial 'A', "
-            + "and it should not be blank";
+    public static final String MESSAGE_CONSTRAINTS = "Student Number can take any value starting with capital 'A',"
+            + "followed by numbers, and ending with a single alphabet.";
 
     /*
      * The first character of the student number needs to be "A".
      */
-    public static final String VALIDATION_REGEX = "A.*";
+    public static final String VALIDATION_REGEX = "^A\\d+[A-Za-z]$";
 
     public final String value;
 
