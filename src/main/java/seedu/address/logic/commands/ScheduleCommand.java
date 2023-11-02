@@ -21,6 +21,6 @@ public class ScheduleCommand extends Command {
     public CommandResult execute(Model model) {
         model.sortEventList(Comparator.comparing(Event::getStart_time));
         model.updateFilteredEventList(Model.PREDICATE_SHOW_ALL_EVENTS);
-        return new CommandResult(SHOWING_HELP_MESSAGE, false, false, false, true);
+        return new CommandResult(SHOWING_HELP_MESSAGE, false, false, false, true, false);
     }
 }

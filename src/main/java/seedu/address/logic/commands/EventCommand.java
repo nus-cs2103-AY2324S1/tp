@@ -37,6 +37,6 @@ public class EventCommand extends Command {
         Event event1 = new Event(person, event.getDescription(), event.getStart_time(), event.getEnd_time());
         model.addEvent(event1);
         return new CommandResult(String.format(MESSAGE_SUCCESS, event1),
-                false, false, false, false);
+                false, false, false, false, false);
     }
 }

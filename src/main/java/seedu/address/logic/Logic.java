@@ -13,6 +13,7 @@ import seedu.address.model.ReadOnlyEventBook;
 import seedu.address.model.event.Event;
 import seedu.address.model.person.Person;
 import seedu.address.model.statistics.ReadOnlySummaryStatistic;
+import seedu.address.model.tag.Tag;
 
 /**
  * API of the Logic component
@@ -44,6 +45,9 @@ public interface Logic {
 
     /** Returns an unmodifiable view of the filtered list of persons */
     ObservableList<Person> getFilteredPersonList();
+
+    ObservableList<Tag> getFilteredTagsList();
+
     ObservableList<Event> getFilteredEventList();
 
 
