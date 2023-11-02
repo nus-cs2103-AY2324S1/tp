@@ -11,7 +11,7 @@ import seedu.address.model.Model;
  */
 public class UndoCommand extends Command {
     public static final String COMMAND_WORD = "undo";
-    public static final String MESSAGE_SUCCESS = "Undo Successful!";
+    public static final String MESSAGE_SUCCESS = "Successfully undo previous command";
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
