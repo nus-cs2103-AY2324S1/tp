@@ -112,9 +112,9 @@ Examples:
 * `add w/雪 t/snow` saves the translation of **雪** as **snow**
 * `add w/雪 wl/Chinese t/snow tl/English` saves the translation of the **Chinese** word **雪** as an **English** word **snow**
 
-Words without language          |  ![img.png](images/WordWithoutLanguage.png)  
-:-------------------------:|:-------------------------:
-**Words with language**| ![img.png](images/WordWithLanguage.png)
+| Words without language  | ![img.png](images/WordWithoutLanguage.png) |
+|:-----------------------:|:------------------------------------------:|
+| **Words with language** |  ![img.png](images/WordWithLanguage.png)   |
 
 **Note**
 * Users are not allowed to add two **exact** same flash cards
@@ -141,9 +141,9 @@ Examples:
 
 Output:
 
-Before delete         |  ![img.png](images/BeforeDelete.png)
-:-------------------------:|:-------------------------:
-**After delete** | ![img.png](images/AfterDelete.png)
+|  Before delete   | ![img.png](images/BeforeDelete.png) |
+|:----------------:|:-----------------------------------:|
+| **After delete** | ![img.png](images/AfterDelete.png)  |
 
 ### Editing a flash card : `edit`
 
@@ -157,9 +157,9 @@ Examples:
 
 Output:
 
-|  Before edit   |            ![img.png](images/BeforeEdit.png)            |
-|:--------------:|:--------------------------------:|
-| **After edit** | ![img.png](images/AfterEdit.png) |
+|  Before edit   |![img.png](images/BeforeEdit.png)  |
+|:--------------:|:---------------------------------:|
+| **After edit** | ![img.png](images/AfterEdit.png)  |
 
 **Note**
 * Users are not allowed to edit a flash card to an existing flash card
@@ -317,9 +317,9 @@ Format: `switch`
 
 Output:  
 
-|  light theme   |             ![img.png](images/LightTheme.png)           |
-|:--------------:|:--------------------------------:|
-| **dark theme** | ![img.png](images/DarkTheme.png) |
+|  light theme   | ![img.png](images/LightTheme.png) |
+|:--------------:|:---------------------------------:|
+| **dark theme** | ![img.png](images/DarkTheme.png)  |
 
 ### Exiting the program : `exit`
 
