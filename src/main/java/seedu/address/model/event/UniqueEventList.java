@@ -164,7 +164,7 @@ public class UniqueEventList implements Iterable<Event> {
         LocalDateTime newEventStartTime = newEvent.getStartTime();
         LocalDateTime newEventEndTime = newEvent.getEndTime();
 
-        assert newEventStartTime != null: "Start time should not be null";
+        assert newEventStartTime != null : "Start time should not be null";
 
         if (newEventEndTime == null) {
             newEventEndTime = newEventStartTime;
@@ -174,7 +174,7 @@ public class UniqueEventList implements Iterable<Event> {
             LocalDateTime startTime = e.getStartTime();
             LocalDateTime endTime = e.getEndTime();
 
-            assert startTime != null: "Start time should not be null";
+            assert startTime != null : "Start time should not be null";
 
             if (endTime == null) {
                 endTime = startTime;
