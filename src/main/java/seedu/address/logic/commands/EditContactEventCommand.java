@@ -41,7 +41,8 @@ public class EditContactEventCommand extends Command {
     public static final String COMMAND_WORD = "editContactEvent";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the identified person's calendar "
-            + "by the index number used in the displayed person list. "
+            + "by the index number used in the displayed person list "
+            + "and by the index number used in the displayed event list of the person. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_EVENT_DESCRIPTION + "DESCRIPTION] "
