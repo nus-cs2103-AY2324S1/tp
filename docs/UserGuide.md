@@ -74,7 +74,7 @@ PDF Users will always see these panels expanded, but users of the web version of
     </div>
     <div>
         <box type="warning">
-**Warnings / Error Cases** for features will be shown in a **yellow box** with this **exclamation mark icon** :fa-solid-exclamation: . These clarify cases which will are expected to display errors to users, or explain enhancements that will be implemented in future releases of CampusConnect.
+**Warnings / Error Cases** for features will be shown in a **yellow box** with this **exclamation mark icon** :fa-solid-exclamation: . These clarify cases which are expected to display errors to users, or explain enhancements that will be implemented in future releases of CampusConnect.
 
 All planned enhancements will also be listed in the [Planned Enhancements / Known Issues](#planned-enhancements-known-issues) section near the end of the guide.
         </box>
