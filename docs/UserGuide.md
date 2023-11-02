@@ -123,6 +123,9 @@ All planned enhancements will also be listed in the [Planned Enhancements / Know
    - [Notifications](#notifications)
      - [Birthday notifications](#birthday-notifications)
    - [Payments](#payments)
+     - [Money Amount Format](#money-amount-format)
+     - [Pay a contact money: `pay`](#pay-a-contact-money-pay)
+     - [Owe a contact money: `owe`](#owe-a-contact-money-owe)
    - [Find Contacts](#find-contacts)
      - [Basic Filtering](#basic-filtering)
      - [Advanced Filtering](#advanced-filtering)
@@ -141,13 +144,14 @@ All planned enhancements will also be listed in the [Planned Enhancements / Know
 3. Copy the file to the folder you want to use as the _home folder_ for the application.
 
 4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar CampusConnect.jar` command to run the application.<br>
-   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+   CampusConnect will appear shortly, as shown in the image below. Note how CampusConnect contains some sample data.<br>
    ![Ui](images/Ui.png)
 
-5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
-   Some example commands you can try:
+5. You can now start typing some command into the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
 
-   * `list` : Lists all contacts.
+   To get you familiarised with our application, here are some example commands you can try:
+
+   * `list` : Lists all of your contacts in CampusConnect.
 
    * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to CampusConnect.
 
@@ -170,16 +174,16 @@ All planned enhancements will also be listed in the [Planned Enhancements / Know
 **Notes about the command format:**<br>
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
+  e.g. In `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
-* Items in square brackets are optional, ___with `addalt` as an exception. (Refer to [Add alternative information to contact](#add-alternative-information-to-contact) under Features)___<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+* Parameters in square brackets are optional, **with `addalt` and `edit` as an exception. (Refer to [Add alternative information to contact](#add-alternative-information-to-contact) and [Edit contact information](#edit-contact-information) under Features)**<br>
+  e.g In `n/NAME [t/TAG]`, `[t/TAG]` is an optional parameter which can be used as `n/John Doe t/friend` or as `n/John Doe`.
 
-* Items with `…`​ after them can be used multiple times including zero times.<br>
+* Parameters with `…`​ after them can be used multiple times including zero times.<br>
   e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
 
-* Parameters can be in any order.<br>
-  e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
+* Parameters can be in any order, **except for `PERSON_INDEX` and `NOTE_INDEX`.**<br>
+  e.g. If the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable. However, if the command specifies `PERSON_INDEX n/NAME`, `n/NAME PERSON_INDEX` is **not acceptable.**
 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
@@ -189,91 +193,105 @@ All planned enhancements will also be listed in the [Planned Enhancements / Know
 
 ## Manage Contacts
 
+### Properties of contact
+
+Before you proceed to use the manage contact features of CampusConnect, take a quick read of the table below that provides a summary of the accepted formats for each respective parameters.
+
+<panel header=":fa-solid-book: **Command Parameter Table**" type="secondary" expanded no-close>
+
+| Parameter                   | Format                                                                                                                                         | Example                        |
+|-----------------------------|------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------|
+| `NAME`                      | Use `a-z`, `A-Z`, `0-9` and whitespaces only                                                                                                   | John Doe                       |
+| `PHONE_NUMBER`              | Use `0-9` only and should be 3 digits long                                                                                                     | 98765432                       |
+| `EMAIL` / `SECONDARY_EMAIL` | Have the format of `local-part@domain`                                                                                                         | johndoe@gmail.com              |
+| `ADDRESS`                   | Use any characters                                                                                                                             | John street, block 123, #01-01 |
+| `TAG`                       | Use `a-z`, `A-Z` and `0-9` only. Alternatively, use `RA` or `SOS` which are predefined tags that indicate your contact as an emergency contact | friend                         |
+| `TELEGRAM`                  | Start with the `@` symbol, no whitespace with a minimum length of 5 characters. Use `a-z`, `0-9` and `_` only                                  | @john_doe123                   |
+| `LINKEDIN`                  | Use `a-z`, `A-Z`, `0-9`, `_` and `-` only                                                                                                      | john-doe-b9a38128a             |
+| `BIRTHDAY`                  | Have the format of `DD/MM`                                                                                                                     | 31/10                          |
+
+</panel>
+
+
 ### Add contact: `add`
 
-Add a new contact with basic details like name, phone number, email, and address.
+CampusConnect allows you to add contacts of the people you have met on campus. It helps you to store their contact information so that you can keep track of your contacts all in one place.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]`
-<box type="info">
+This feature involves the command: `add`, which adds basic information of your contact.
 
-All the fields must be provided except `TAG`. The fields you enter should follow the following format:
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...`
 
-| Field          | Format                                                                                                                  | Example                         |
-|----------------|-------------------------------------------------------------------------------------------------------------------------|---------------------------------|
-| `NAME`         | Use `a-z`, `A-Z`, `0-9` and whitespaces only                                                                            | John Doe                        |
-| `PHONE_NUMBER` | Use `0-9` only and should be 3 digits long                                                                              | 98765432                        |
-| `EMAIL`        | Have the format of `local-part@domain`                                                                                  | johndoe@gmail.com               |
-| `ADDRESS`      | Use any characters                                                                                                      | John street, block 123, #01-01  |
-| `TAG`          | Use `a-z`, `A-Z` and `0-9` only. Alternatively, use `RA` or `SOS` which are predefined emergency tags for your contact  | friend                          |
-</box>
+<box type="info" icon=":fa-solid-magnifying-glass:">
 
-<box type="info">
+Below are some examples on how to use the command:
 
-Certain tags such as `RA` and `SOS` are tags to indicate important contacts such as emergency contacts. They are displayed first, and with a red background to indicate their importance. 
-</box>
+ * `add n/John Doe p/98765432 e/johndoe@gmail.com a/John street, block 123, #01-01`: Adds a contact named "John Doe" with the phone "98765432", email "johndoe@gmail.com" and address "John street, block 123, #01-01".                                 
+ * `add n/Betsy Crowe e/betsycrowe@example.com a/Newgate Prison p/98765431 t/friend`: Adds a contact named "Betsy Crowe" with the email "betsycrowe@example.com", address "Newgate Prison", phone "98765431", and a tag "friend".                     
+ * `add n/Jane Doe p/98765433 e/janed@example.com a/Jane street, block 123, #01-01 t/floorball t/suitemate`: Adds a contact named "Jane Doe" with the phone "98765433", email "janed@example.com", address "Jane street, block 123, #01-01" and two tags "floorball" and "suitemate". 
 
-Examples
-* `add n/John Doe p/98765432 e/johndoe@gmail.com a/John street, block 123, #01-01 t/friend`
-    * Adds a contact named "John Doe" with the phone number "98765432", email "johndoe@gmail.com", address "John street, block 123, #01-01", and a tag "friend"
-* `add n/Betsy Crowe e/betsycrowe@example.com a/Newgate Prison p/1234567 t/friend t/colleague`
-    * Adds a contact named "Betsy Crowe" with the email "betsycrowe@example.com", address "Newgate Prison", phone "1234567", and two tags "friend" and "colleague"
-
-
-###  Add alternative information to contact: `addalt`
-
-Adds alternative contact information to an existing contact.
-
-Format: `addalt INDEX [tg/TELEGRAM] [e2/SECONDARY_EMAIL] [li/LINKEDIN] [b/BIRTHDAY]`
-
-<box type="info">
-At least one of the optional fields must be provided. The fields you enter should follow the following format:
-
-| Field             | Format                                                                                                        | Example               |
-|-------------------|---------------------------------------------------------------------------------------------------------------|-----------------------|
-| `TELEGRAM`        | Start with the `@` symbol, no whitespace with a minimum length of 5 characters. Use `a-z`, `0-9` and `_` only | @johndoe              |
-| `SECONDARY_EMAIL` | Have the format of `local-part@domain`                                                                        | johndoe@hotmail.com   |
-| `LINKEDIN`        | Use `a-z`, `A-Z`, `0-9`, `_` and `-` only                                                                     | john-doe-b9a38128a    |
-| `BIRTHDAY`        | Have the format of `DD/MM`                                                                                    | 31/10                 |
+Refer to [properties of contact](#properties-of-contact) on the accepted formats for the respective parameters.
 
 </box>
-
-Examples:
-* `addalt 1 tg/@johndoe e2/johndoe@hotmail.com`
-    * Adds John Doe's telegram "@johndoe" and secondary email "johndoe@hotmail.com"
-* `addalt 1 li/john-doe-b9a38128a`
-    * Adds John Doe's linkedin "john-doe-b9a38128a"
-
-###  Edit contact information: `edit`
-
-Edits contact information of an existing contact.
-
-Format: `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG] [tg/TELEGRAM] [e2/SECONDARY_EMAIL] [li/LINKEDIN] [b/BIRTHDAY]`
-
-<box type="info">
-At least one of the optional fields must be provided. The fields you enter should follow the following format:
-
-| Field             | Format                                                                                                                 | Example                        |
-|-------------------|------------------------------------------------------------------------------------------------------------------------|--------------------------------|
-| `NAME`            | Use `a-z`, `A-Z`, `0-9` and whitespaces only                                                                           | John Doe                       |
-| `PHONE_NUMBER`    | Use `0-9` only and should be 3 digits long                                                                             | 98765432                       |
-| `EMAIL`           | Have the format of `local-part@domain`                                                                                 | johndoe@gmail.com              |
-| `ADDRESS`         | Use any characters                                                                                                     | John street, block 123, #01-01 |
-| `TAG`             | Use `a-z`, `A-Z` and `0-9` only. Alternatively, use `RA` or `SOS` which are predefined emergency tags for your contact | friend                         |
-| `TELEGRAM`        | Start with the `@` symbol, no whitespace with a minimum length of 5 characters. Use `a-z`, `0-9` and `_` only          | @johndoe                       |
-| `SECONDARY_EMAIL` | Have the format of `local-part@domain`                                                                                 | johndoe@hotmail.com            |
-| `LINKEDIN`        | Use `a-z`, `A-Z`, `0-9`, `_` and `-` only                                                                              | john-doe-b9a38128a             |
-| `BIRTHDAY`        | Have the format of `DD/MM`                                                                                             | 31/10                          |
-</box>
-
-Examples:
-* `edit 1 tg/@johndoe e2/johndoe@hotmail.com`
-    * Edits the first person in your contact list with existing telegram to "@johndoe" and existing secondary email to "johndoe@hotmail.com"
-* `edit 2 n/John Doe p/98765432 e/johndoe@gmail.com a/John street, block 123, #01-01 t/friend`
-    * Edits the second person in your contact list with existing name to "John Doe", existing phone number to "98765432", existing email to "johndoe@gmail.com", existing address to "John street, block 123, #01-01", and a existing tag to "friend"
 
 <box type="warning">
 
-You are not allowed to edit any alternative contact information, i.e. `TELEGRAM`, `SECONDARY_EMAIL`, `LINKEDIN`, `BIRTHDAY` if any of these fields are empty. You will receive an error message that directs you to use [**`addalt`**](#add-alternative-information-to-contact) command.
+If you are adding a new contact with a name ___(case sensitive)___ that is already saved in CampusConnect, you will not be able to add the new contact.
+
+</box>
+
+###  Add alternative information to contact: `addalt`
+
+Besides adding basic information for your contacts, CampusConnect supports the addition of alternative information of your existing contacts in CampusConnect. It helps you to store more contact information so that you can stay better connected to them.
+
+This feature involves the command: `addalt`, which adds alternative information of your contact.
+
+Format: `addalt PERSON_INDEX [tg/TELEGRAM] [e2/SECONDARY_EMAIL] [li/LINKEDIN] [b/BIRTHDAY]`
+
+<box type="info" icon=":fa-solid-magnifying-glass:">
+
+Below are some examples on how to use the command:
+
+* `addalt 1 tg/@johndoe_123 e2/johndoe@hotmail.com li/john-doe-b9a38128a b/31/10`: Adds telegram "@johndoe_123", secondary email "johndoe@hotmail.com", linkedin "john-doe-b9a38128a" and birthday "31/10" for contact at index 1 of your contact list.
+* `addalt 2 e2/besty@hotmail.com tg/@betsycrowe li/besty-crowe-b7a15138b b/24/07`: Adds secondary email "besty@hotmail.com", telegram "@bestycrowe", linkedin "besty-crowe-b7a15138b" and birthday "24/07" for contact at index 2 of your contact list.
+* `addalt 3 tg/janedoe_123`: Adds telegram "@janedoe_123" for contact at index 3 of your contact list.                           
+
+Refer to [properties of contact](#properties-of-contact) on the accepted formats for the respective parameters.
+
+</box>
+
+<box type="warning">
+
+* You should provide a positive integer that is smaller than or equal to the number of contacts currently displayed in CampusConnect for `PERSON_INDEX`.
+* You should provide at least one of the parameters, i.e. alternative information for the command to work.
+
+</box>
+
+###  Edit contact information: `edit`
+
+If the details of your contacts have changed, CampusConnect enables you to edit your contacts with the latest updated information so that you can still continue to keep in touch with them! Moreover, if you have made a mistake earlier while adding your contact information, CampusConnect empowers you to correct your mistakes through the `edit` command!
+
+This feature involves the command: `edit`, which edits existing information saved to your contact.
+
+Format: `edit PERSON_INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG] [tg/TELEGRAM] [e2/SECONDARY_EMAIL] [li/LINKEDIN] [b/BIRTHDAY]`
+
+<box type="info" icon=":fa-solid-magnifying-glass:">
+
+Below are some examples on how to use the command:
+
+* `edit 1 tg/@johndoe e2/johndoe@gmail.com`: Edits telegram to "@johndoe" and secondary email to "johndoe@gmail.com" for contact at index 1 of your contact list.   
+* `edit 2 n/Betsy e/betsy@example.com a/Newgate Heavan p/98765411 t/bestfriend`: Edits name to "Besty", email to "besty@example.com", address to "Newgate Heavan", phone to "98765411" and tag to "bestfriend" for contact at index 2 of your contact list.  
+
+Refer to [properties of contact](#properties-of-contact) on the accepted formats for the respective parameters.
+
+</box>
+
+<box type="warning">
+
+* You should provide a positive integer that is smaller than or equal to the number of contacts currently displayed in CampusConnect for `PERSON_INDEX`. 
+* You should provide at least one of the parameters under [properties of contact](#properties-of-contact) for the command to work.
+* You should not edit any empty alternative information i.e. `TELEGRAM`, `SECONDARY_EMAIL`, `LINKEDIN`, `BIRTHDAY` of your contact using this command. Refer to [add alternative information to contact](#add-alternative-information-to-contact) to add these information.
+* You should not input 'NAME' with a name ___(case sensitive)___ that already exists in CampusConnect.
+
 </box>
 
 ###  Update contact's photo: `updatephoto`
@@ -300,21 +318,41 @@ Below are some examples on how to use the command:
 
 ###  List all contacts: `list`
 
-Shows a list of all contacts.
+After using CampusConnect's [find contact](#find-contacts) feature that filters the contacts you are looking for, you may want to have an overview of all your contacts again! Thus, CampusConnect allows you to list all your contacts.
 
 Format: `list`
 
+<box type="info" icon=":fa-solid-magnifying-glass:">
+
+Below is an example on how to use the command:
+
+* `list`: Lists all your saved contacts in CampusConnect.
+
+</box>
+
+Here is what CampusConnect looks like after you execute the `list` command.
+
+![list_command](images/list_command.png)
+
 ###  Delete contact: `delete`
 
-Deletes an existing contact from the address book.
+In the event that you will like to organize your contact list by removing contacts that you no longer need, CampusConnect supports you in deleting your contacts to reduce the clutter you are experiencing.
 
-Format: `delete INDEX`
+Format: `delete PERSON_INDEX`
 
-Examples:
-* `delete 1`
-  * Deletes the 1st person from the list
-* `delete 2`
-  * Deletes the 2nd person from the list
+<box type="info" icon=":fa-solid-magnifying-glass:">
+
+Below are some examples on how to use the command:
+* `delete 1`: Deletes contact at index 1 of your contact list.
+* `delete 2`: Deletes contact at index 2 of your contact list.
+
+</box>
+
+<box type="warning">
+
+You should provide a positive integer that is smaller than or equal to the number of contacts currently displayed in CampusConnect for `PERSON_INDEX`.
+
+</box>
 
 ## Notes
 
@@ -322,21 +360,12 @@ Examples:
   <img src="images/notes/noteswindow2.png" alt="Window with Notes" style="height:400px; margin:10px;">
 </div>
 
-Allows you to add notes to a person and remove notes from a person.
+The notes feature allows you to add and remove notes for a person, and provides a convenient pop-up window to view all notes for a person. You can add notes to a person with the `addnote` command, remove notes with the `removenote` command, and view notes by using either the `viewnotes` command or by clicking the `Notes` button in the person's information window.
 
-You can add notes to a person with the `addnote` command, remove notes from them with the `removenotes` command.
+The parameters for these commands are `PERSON_INDEX`, `NOTE_INDEX` and `NOTE_CONTENT`. These parameters are explained in detail in the section below.
 
-You can view notes by one of two ways: by using the `viewnotes` command, or by clicking on the `Notes` button in the person's information window.
-
-Format: `addnote PERSON_INDEX NOTE_CONTENT`, `removenote PERSON_INDEX NOTE_INDEX` and `viewnotes PERSON_INDEX`
-
-<box type="warning">
-
-Always make sure the indices provided are valid and within the bounds of the list. Invalid indices will result in an error.
-
-</box>
-
-<panel header=":fa-solid-book: **Command Parameter / Syntax Tables**" type="secondary" expanded no-close>
+<br>
+<panel header=":fa-solid-book: **Notes Command Parameters**" type="secondary" expanded no-close>
 The fields you enter should follow the following format:
 
 | Parameter     | Description                                                                                                 |
@@ -348,64 +377,192 @@ The fields you enter should follow the following format:
 </panel>
 
 <br>
-
-<box type="info" icon=":fa-solid-magnifying-glass:">
-To manage notes for a person in a list, use the following commands:
-
-| Action                                  | Command                                           | Description                                             |
-|-----------------------------------------|---------------------------------------------------|---------------------------------------------------------|
-| Add a note to a person                  | `addnote 1 This is a sample note for the person.` | Adds a note to the person at index 1.                   |
-| Remove a specific note from a person    | `removenote 1 2`                                  | Removes the 2nd note from the person at index 1.        |
-| View all notes of a person              | `viewnotes 1`                                     | Displays all notes of the person at index 1.            |
-
-To add a note, use the `addnote` command followed by the position number and the note text. To remove a note, use the `removenote` command followed by the position number and the note index. To view all notes, use the `viewnotes` command followed by the position number. Closing the notes window can be done via the "Close" button or by pressing ESC.
+<box type="warning">
+Always make sure the indices provided are valid and within the bounds of the list. Invalid indices will result in an error.
 </box>
 
-## Birthday Notifications
+### Add a note to contact: `addnote`
+You can add notes to a person with the `addnote` command.
 
-###  Receive upcoming birthday notifications
+Format: `addnote PERSON_INDEX NOTE_CONTENT`
 
-Receives a pop-up notification for each contact in CampusConnect whose birthday is within a day.
+<box type="info" icon=":fa-solid-magnifying-glass:">
+Below are some examples on how to use the commands:
 
-Upon launching the application, if any of your contacts’ birthday in CampusConnect is coming within a day, you should see the following pop-up notification: <br>
+- `addnote 1 This is a sample note for the person.`: Adds a note to the contact at index 1.
+- `addnote 2 This is another sample note.`: Adds a note to the contact at index 2.
+
+</box>
+
+
+### Remove a note from contact: `removenote`
+You can remove notes from a person with the `removenote` command.
+
+Format: `removenote PERSON_INDEX NOTE_INDEX`
+
+<box type="info" icon=":fa-solid-magnifying-glass:">
+Below are some examples on how to use the commands:
+
+- `removenote 1 2`: Removes the second note from the contact at index 1.
+- `removenote 1 1`: Removes the first note from the contact at index 1.
+
+</box>
+
+### View notes of a contact: `viewnotes`
+<div style="display:flex; justify-content:space-around; align-items:center;">
+  <img src="images/notes/window_with_notes.png" alt="Window with Notes" style="height:400px; margin:10px;">
+  <img src="images/notes/noteswindow2.png" alt="Window with Notes" style="height:400px; margin:10px;">
+</div>
+
+You can view notes by one of two ways: by using the `viewnotes` command, or by clicking on the `Notes` button in the person's information window. The notes window can be closed by either clicking the `Close` button or by pressing the `ESC` key, making it convenient for both CLI and GUI users to use the notes feature.
+
+Format: `viewnotes PERSON_INDEX`
+<box type="info" icon=":fa-solid-magnifying-glass:">
+Below are some examples on how to use the commands:
+
+- `viewnotes 1`: Shows all notes for the contact at index 1.
+- `viewnotes 2`: Shows all notes for the contact at index 2.
+
+</box>
+
+## Notifications
+
+For our forgetful users, CampusConnect provides a useful Notification System!
+Upon opening the app, the notification system will prompt you about any upcoming notable events.
+
+At the moment, only birthday notifications are supported.
+More notification types will be supported in future releases of CampusConnect.
+
+###  Birthday notifications
+
+To ensure that you never forget to wish happy birthday to your friends, CampusConnect has an in-built birthday notification system.
+Every time you open CampusConnect, a pop-up notification will appear for contacts whose birthdays are within one day.
+
+<box type="info">
+
+Here is what a sample birthday notification will look like when you open your CampusConnect app.
 
 ![birthdayNotification](images/birthdayNotification.png)
 
-The notification will contain the names of the birthday individuals saved in CampusConnect.
-
-###  Opt out notification [Coming soon]
-
-Opts you out from receiving birthday related notifications, such as turning off actual birthday notification feature.
-
-Format: `optout NOTIFICATION_DESCRIPTION`
-
-- `NOTIFICATION_DESCRIPTION` Mandatory field to enter which only includes the following and are not case-sensitive:
-    - `Notify Birthdays`
-    - `All`
-
-Examples:
-- `optout notify birthdays`
-- `optout Notify Birthdays`
-- `optout NOTIFY BIRTHDAYS`
-    - Requests to opt out from receiving actual birthday notifications in the future.
-- `optout all`
-    - Requests to turn off all kinds of notifications CampusConnect will send.
-
-Upon request to opt out notification, you should see the following pop-up message: <br>
-
-![optOutNotification](images/optOutNotification.png)
-
-Select `OK` to opt out notifications or `Cancel` to cancel the request.
-
-Below shows some examples of ___invalid usage___ of the command and the response that CampusConnect will provide.
-
-Invalid Input Example | Application Output
----|---
-**optout notifications** | Invalid `NOTIFICATION_DESCRIPTION` (refer to aforementioned for the list of `NOTIFICATION_DESCRIPTION` to enter).
-**optout** | `NOTIFICATION_DESCRIPTION` cannot be empty.
+</box>
 
 
 ## Payments
+
+CampusConnect allows you to keep track of payments between you and your contacts!
+Each contact has a **balance**, which is the amount of money that you owe them (or that they owe you).
+This balance is positive if they owe you money, and negative if you owe them money.
+
+Every time you record a payment to or from a contact, their balance will be updated accordingly so that you can settle your debts easily.
+Instead of displaying positive or negative balances, **balances are reflected directly in the contact list** with easily-understandable human-readable explanations, like so:
+
+![Payment Image](images/ContactArrowPayment.png)
+
+<box type="warning" id="payment-tracking-limit">
+
+That said, CampusConnect's Payments feature should be only used for **casual transactions among friends**, and is not for commercial or business use.
+
+We enforce this with a **strict payment tracking limit** of a maximum of **$10,000** owed to or from each contact.
+If you attempt to record a payment that would cause a contact's balance to exceed this limit, you will see an error message stating that the payment cannot be recorded for this reason.
+</box>
+
+
+### Money Amount Format
+
+As part of our payments feature, CampusConnect reads in money amounts from the user.
+
+You should note that the money amount format is **strictly enforced**.
+This is to ensure that the money amounts are entered correctly, and to prevent any errors that may arise from incorrect money formats.
+
+An accepted money amount format follows these **three rules**:
+1. It **must be a positive number**.
+2. It **must be in dollars and cents, or just dollars**.
+3. It **must have at most 2 decimal places** (we do not support precisions lower than cents).
+
+Additionally, remember that CampusConnect enforces a [strict payment tracking limit](#payment-tracking-limit).
+
+<box theme="primary" icon=":fa-solid-lightbulb:">
+
+We also provide some **convenience features** for you to enter money amounts more easily, for cases where you may be copying and pasting money amounts from other sources.
+These convenience features are as follows:
+- You may enter money amounts with a **dollar sign** (`$`) prefix.
+- You may enter money amounts with **trailing zeroes**.
+
+</box>
+
+
+<box theme="info" icon=":fa-solid-magnifying-glass:">
+
+**Each format rule in action:**
+
+- Rule 1: `10` is a valid money amount, but `-10` is not.
+- Rule 2: `10.05`, `10.5`, `10`, `0.5`, `0.05` are all valid money amounts, but `.50` is not.
+- Rule 3: `10.55` is a valid money amount, but `10.555` is not.
+
+**Convenience features in action:**
+- `$10` is a valid money amount, and is equivalent to `10`.
+- `010` is a valid money amount, and is equivalent to `10`.
+- `00000000005.55` is also a valid money amount, and is equivalent to `5.55`.
+
+</box>
+
+Now that you understand how to enter money when using our app, you can proceed to learn how to record payments in CampusConnect!
+
+### Pay a contact money: `pay`
+
+Records a payment from you to a contact. The amount **the contact owes you** increases by that amount after this transaction.
+
+Format: `pay PERSON_INDEX AMOUNT`
+
+- `PERSON_INDEX` is the index of the contact in the contact list.
+- `AMOUNT` is the amount of money you pay the contact, written in valid [money format](#money-amount-format).
+
+<box theme="info" icon=":fa-solid-magnifying-glass:">
+
+**Examples:**
+
+Suppose you have a contact at index `1` that owes you `$10`. Then:
+
+- `pay 1 10` records a payment of `$10` from you to the contact at index `1`.
+- `pay 1 $0.5` records a payment of `$0.50` from you to the contact at index `1`.
+
+At the end of both commands, **the contact owes you `$20.50`**.
+
+- `pay 1 -3` does NOT record any payment. Recall that money amounts must follow CampusConnect's [money format](#money-amount-format), which does not accept negative amounts.
+
+</box>
+
+If you're looking to record a payment from a contact to you, read ahead on how you can use the [owe](#owe-a-contact-money-owe) command instead!
+
+### Owe a contact money: `owe`
+
+Records a payment from a contact to you. The amount **you owe the contact** increases by that amount after this transaction.
+
+Format: `owe PERSON_INDEX AMOUNT`
+
+- `PERSON_INDEX` is the index of the contact in the contact list.
+- `AMOUNT` is the amount of money you owe the contact, written in valid [money amount format](#money-amount-format).
+
+<box theme="info" icon=":fa-solid-magnifying-glass:">
+
+**Examples:**
+
+Suppose you have a contact at index `1` that owes you `$10`. Then:
+
+- `owe 1 9` records a payment of `$9` from the contact at index `1` to you.
+
+At the end of the command, **the contact owes you `$1`**.
+
+- `owe 1 $2.5` records a payment of `$2.50` from the contact at index `1` to you.
+
+At the end of both commands, **you owe the contact `$1.50`**.
+
+- `owe 1 $50000` does NOT record any payment. Recall that CampusConnect enforces a [strict payment tracking limit](#payment-tracking-limit).
+
+</box>
+
+---
+
 ## Find Contacts
 
 Another feature of CampusConnect is the ability to search for contacts based on a variety of criteria. This is useful for quickly finding contacts whose details you may only partially remember, or for finding contacts who match a certain criteria.
@@ -549,6 +706,9 @@ Note that the last example is **not equivalent** to `n/do && t/friend || t/colle
 # Planned Enhancements / Known Issues
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
+2. **When executing `addalt` command**, if you input other prefixes that are not accepted by the command format, the error message shown does not prompt you to remove those prefixes and adhere strictly to the command format. We will be working on this in the future to improve the specificity of error messages.
+3. **When executing `edit` command**, if you try to edit a specified contact to have the same [properties](#properties-of-contact) of another saved contact **(besides `NAME` with the same casing)** in your contact list, CampusConnect allows you to do so. We plan to enhance the `edit` command such that it takes into account what makes a contact unique in your contact list.
+4. **When executing commands with `PERSON_INDEX`**, if you did not input an appropriate index, the error message shown is generic; CampusConnect informs you the format of the command you should adhere too instead of prompting you to input a positive index. We will be working on this in the future to improve the specificity of error messages.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -556,9 +716,12 @@ Note that the last example is **not equivalent** to `n/do && t/friend || t/colle
 
 Action        | Format, Examples
 --------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add**       | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-**Addalt**    | `addalt INDEX [tg/TELEGRAM] [e2/SECONDARY_EMAIL] [li/LINKEDIN]` <br> e.g., `addalt 1 tg/johndoe_telegram e2/johndoe2@example.com`
-**Find**      | `find FIELD/KEYWORD [FIELD/KEYWORD]`
+**add**       | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/John Doe p/98765432 e/johndoe@gmail.com a/John street, block 123, #01-01`
+**addalt**    | `addalt PERSON_INDEX [tg/TELEGRAM] [e2/SECONDARY_EMAIL] [li/LINKEDIN]` <br> e.g., `addalt 1 tg/@johndoe_123 e2/johndoe@hotmail.com li/john-doe-b9a38128a b/31/10`
+**edit** | `edit PERSON_INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG] [tg/TELEGRAM] [e2/SECONDARY_EMAIL] [li/LINKEDIN] [b/BIRTHDAY]` <br> e.g., `edit 1 tg/@johndoe e2/johndoe@gmail.com`
+**delete** | `delete PERSON_INDEX` <br> e.g., `delete 1`
+**list** | `list` <br> e.g., `list`
+**find**      | `find FIELD/KEYWORD [FIELD/KEYWORD]`
 
 
 <style>
