@@ -2,7 +2,6 @@ package seedu.ccacommander.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import seedu.ccacommander.commons.core.index.Index;
@@ -10,7 +9,6 @@ import seedu.ccacommander.commons.util.ToStringBuilder;
 import seedu.ccacommander.logic.Messages;
 import seedu.ccacommander.logic.commands.exceptions.CommandException;
 import seedu.ccacommander.model.Model;
-import seedu.ccacommander.model.enrolment.Enrolment;
 import seedu.ccacommander.model.event.Event;
 import seedu.ccacommander.model.shared.Name;
 
@@ -36,8 +34,6 @@ public class DeleteEventCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         List<Event> lastShownList = model.getFilteredEventList();
-        List<Enrolment> enrolmentsList = model.getFilteredEnrolmentList();
-        List<Enrolment> enrolmentsToBeDeletedList = new ArrayList<>();
 
 
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
@@ -47,18 +43,8 @@ public class DeleteEventCommand extends Command {
         Event eventToDelete = lastShownList.get(targetIndex.getZeroBased());
         Name eventToDeleteName = eventToDelete.getName();
 
-
-        for (Enrolment enrolment: enrolmentsList) {
-            if (enrolment.getEventName().equals(eventToDeleteName)) {
-                enrolmentsToBeDeletedList.add(enrolment);
-            }
-        }
-
-        for (Enrolment enrolment: enrolmentsToBeDeletedList) {
-            model.deleteEnrolment(enrolment);
-        }
-
         model.deleteEvent(eventToDelete);
+        model.deleteEnrolmentsWithEventName(eventToDeleteName);
         model.commit(String.format(MESSAGE_COMMIT, eventToDelete.getName()));
         return new CommandResult(String.format(MESSAGE_DELETE_EVENT_SUCCESS, Messages.format(eventToDelete)));
     }

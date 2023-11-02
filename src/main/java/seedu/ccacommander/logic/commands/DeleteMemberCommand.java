@@ -46,17 +46,8 @@ public class DeleteMemberCommand extends Command {
         Member memberToDelete = lastShownList.get(targetIndex.getZeroBased());
         Name memberToDeleteName = memberToDelete.getName();
 
-        for (Enrolment enrolment: enrolmentsList) {
-            if (enrolment.getMemberName().equals(memberToDeleteName)) {
-                enrolmentsToBeDeletedList.add(enrolment);
-            }
-        }
-
-        for (Enrolment enrolment: enrolmentsToBeDeletedList) {
-            model.deleteEnrolment(enrolment);
-        }
-
         model.deleteMember(memberToDelete);
+        model.deleteEnrolmentsWithMemberName(memberToDeleteName);
         model.commit(String.format(MESSAGE_COMMIT, memberToDelete.getName()));
         return new CommandResult(String.format(MESSAGE_DELETE_MEMBER_SUCCESS, Messages.format(memberToDelete)));
     }
