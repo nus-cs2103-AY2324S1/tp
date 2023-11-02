@@ -23,6 +23,7 @@ import seedu.classmanager.logic.commands.HistoryCommand;
 import seedu.classmanager.logic.commands.ListCommand;
 import seedu.classmanager.logic.commands.LoadCommand;
 import seedu.classmanager.logic.commands.LookupCommand;
+import seedu.classmanager.logic.commands.MarkAbsentAllCommand;
 import seedu.classmanager.logic.commands.MarkAbsentCommand;
 import seedu.classmanager.logic.commands.MarkPresentAllCommand;
 import seedu.classmanager.logic.commands.MarkPresentCommand;
@@ -139,6 +140,9 @@ public class ClassManagerParser {
 
         case MarkAbsentCommand.COMMAND_WORD:
             return new MarkAbsentCommandParser().parse(arguments);
+
+        case MarkAbsentAllCommand.COMMAND_WORD:
+            return new MarkAbsentAllCommandParser().parse(arguments);
 
         case RandomCommand.COMMAND_WORD:
             return new RandomCommandParser().parse(arguments);
