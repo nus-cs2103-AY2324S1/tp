@@ -107,11 +107,11 @@ public class AddressBook implements ReadOnlyAddressBook {
         persons.setPerson(target, editedPerson);
     }
 
-    public void setPaid(Person target){
+    public void setPaid(Person target) {
         target.setPaid();
     }
 
-    public boolean getPaid(Person target){
+    public boolean getPaid(Person target) {
         return target.getPaid();
     }
 
