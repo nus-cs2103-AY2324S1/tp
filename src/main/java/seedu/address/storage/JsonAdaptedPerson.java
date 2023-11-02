@@ -22,8 +22,6 @@ import seedu.address.model.person.Remark;
 import seedu.address.model.person.Status;
 import seedu.address.model.tag.Tag;
 
-import static seedu.address.commons.util.AppUtil.checkArgument;
-
 /**
  * Jackson-friendly version of {@link Person}.
  */

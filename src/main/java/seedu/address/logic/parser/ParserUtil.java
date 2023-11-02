@@ -3,7 +3,11 @@ package seedu.address.logic.parser;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -191,7 +195,6 @@ public class ParserUtil {
         String listTags = tags.toString();
         String cleanedList = listTags.replaceAll("[\\[\\]]", "");
         String[] tagParams = cleanedList.split(",");
-        System.out.println("parse tag cats:"+ Arrays.toString(tagParams));
         return tagParams;
     }
 

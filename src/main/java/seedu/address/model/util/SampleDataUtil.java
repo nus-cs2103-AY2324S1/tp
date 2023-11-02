@@ -41,8 +41,8 @@ public class SampleDataUtil {
         return new Tag[] {
             new Tag("intern", "employment"),
             new Tag("developer", "role"),
-                new Tag("marketing", "dept"),
-                new Tag("software", "dept")
+            new Tag("marketing", "dept"),
+            new Tag("software", "dept")
         };
     }
 
