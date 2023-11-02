@@ -45,6 +45,9 @@ public class MemberCard extends UiPart<Region> {
 
     /**
      * Creates a {@code MemberCard} with the given {@code Member} and index to display.
+     *
+     * @param member         The member to display.
+     * @param displayedIndex The index to display.
      */
     public MemberCard(Member member, int displayedIndex) {
         super(FXML);
@@ -55,8 +58,8 @@ public class MemberCard extends UiPart<Region> {
         email.setText(member.getEmail().value);
         telegram.setText(member.getTelegram().value);
         member.getTags().stream()
-                .sorted(Comparator.comparing(tag -> tag.tagName))
-                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+            .sorted(Comparator.comparing(tag -> tag.tagName))
+            .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
         int numTasks = member.getTasks().size();
         tasks.setText((numTasks == 0 ? "No" : numTasks) + " task" + (numTasks == 1 ? "" : "s") + " assigned.");
     }

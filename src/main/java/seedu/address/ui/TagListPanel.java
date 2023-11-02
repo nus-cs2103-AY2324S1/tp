@@ -23,6 +23,8 @@ public class TagListPanel extends UiPart<Region> {
 
     /**
      * Creates a {@code TagListPanel} with the given {@code ObservableList}.
+     *
+     * @param tagList The list of tags to be displayed.
      */
     public TagListPanel(ObservableList<Tag> tagList) {
         super(FXML);

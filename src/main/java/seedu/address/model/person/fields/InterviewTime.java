@@ -12,8 +12,8 @@ import java.time.format.DateTimeFormatter;
 public class InterviewTime {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Interview time should be in the format of DD/MM/YYYY HHmm. To cancel the interview, enter "
-                    + "'Interview time has not been set'(case sensitive)";
+        "Interview time should be in the format of DD/MM/YYYY HHmm. To cancel the interview, enter "
+            + "'Interview time has not been set'(case sensitive)";
 
     public static final String VALIDATION_REGEX = "^\\d{2}/\\d{2}/\\d{4} \\d{4}$";
 
@@ -31,6 +31,9 @@ public class InterviewTime {
 
     /**
      * Returns true if a given string is a valid interview time.
+     *
+     * @param test The string to test.
+     * @return True if the string is a valid interview time, false otherwise.
      */
     public static boolean isValidTime(String test) {
         return test == null || test.matches(VALIDATION_REGEX);

@@ -22,6 +22,8 @@ public class ApplicantListPanel extends UiPart<Region> {
 
     /**
      * Creates a {@code ApplicantListPanel} with the given {@code ObservableList}.
+     *
+     * @param applicantList The list of applicants to display.
      */
     public ApplicantListPanel(ObservableList<Applicant> applicantList) {
         super(FXML);

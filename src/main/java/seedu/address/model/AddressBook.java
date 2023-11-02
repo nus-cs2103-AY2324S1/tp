@@ -37,11 +37,16 @@ public class AddressBook implements ReadOnlyAddressBook {
         applicants = new UniquePersonList<>();
     }
 
+    /**
+     * Default constructor.
+     */
     public AddressBook() {
     }
 
     /**
      * Creates an AddressBook using the Persons in the {@code toBeCopied}
+     *
+     * @param toBeCopied The ReadOnlyAddressBook to copy from.
      */
     public AddressBook(ReadOnlyAddressBook toBeCopied) {
         this();
@@ -68,6 +73,8 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     /**
      * Resets the existing data of this {@code AddressBook} with {@code newData}.
+     *
+     * @param newData The new data.
      */
     public void resetData(ReadOnlyAddressBook newData) {
         requireNonNull(newData);
@@ -80,6 +87,9 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     /**
      * Returns true if a member with the same identity as {@code member} exists in the address book.
+     *
+     * @param member The member to check.
+     * @return True if the member exists, false otherwise.
      */
     public boolean hasMember(Member member) {
         requireNonNull(member);
@@ -89,6 +99,8 @@ public class AddressBook implements ReadOnlyAddressBook {
     /**
      * Adds a member to the address book.
      * The member must not already exist in the address book.
+     *
+     * @param m The member to add.
      */
     public void addMember(Member m) {
         members.add(m);
@@ -98,6 +110,9 @@ public class AddressBook implements ReadOnlyAddressBook {
      * Replaces the given member {@code target} in the list with {@code editedMember}.
      * {@code target} must exist in the address book.
      * The member identity of {@code editedMember} must not be the same as another existing member in the address book.
+     *
+     * @param target       The member to replace.
+     * @param editedMember The member to replace with.
      */
     public void setMember(Member target, Member editedMember) {
         requireNonNull(editedMember);
@@ -107,6 +122,8 @@ public class AddressBook implements ReadOnlyAddressBook {
     /**
      * Removes {@code key} from this {@code AddressBook}.
      * {@code key} must exist in the address book.
+     *
+     * @param key The key of the member to remove.
      */
     public void removeMember(Member key) {
         members.remove(key);
@@ -116,6 +133,9 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     /**
      * Returns true if an applicant with the same identity as {@code applicant} exists in the address book.
+     *
+     * @param applicant The applicant to check.
+     * @return True if the applicant exists, false otherwise.
      */
     public boolean hasApplicant(Applicant applicant) {
         requireNonNull(applicant);
@@ -125,6 +145,8 @@ public class AddressBook implements ReadOnlyAddressBook {
     /**
      * Adds an applicant to the address book.
      * The applicant must not already exist in the address book.
+     *
+     * @param a The applicant to add.
      */
     public void addApplicant(Applicant a) {
         applicants.add(a);
@@ -135,6 +157,9 @@ public class AddressBook implements ReadOnlyAddressBook {
      * {@code target} must exist in the address book.
      * The applicant identity of {@code editedApplicant} must not be the same as another existing applicant in the
      * address book.
+     *
+     * @param target          The applicant to replace.
+     * @param editedApplicant The applicant to replace with.
      */
     public void setApplicant(Applicant target, Applicant editedApplicant) {
         requireNonNull(editedApplicant);
@@ -144,6 +169,8 @@ public class AddressBook implements ReadOnlyAddressBook {
     /**
      * Removes {@code key} from this {@code AddressBook}.
      * {@code key} must exist in the address book.
+     *
+     * @param key The key of the applicant to remove.
      */
     public void removeApplicant(Applicant key) {
         applicants.remove(key);
@@ -154,9 +181,9 @@ public class AddressBook implements ReadOnlyAddressBook {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("members", members)
-                .add("applicants", applicants)
-                .toString();
+            .add("members", members)
+            .add("applicants", applicants)
+            .toString();
     }
 
     @Override
@@ -200,7 +227,7 @@ public class AddressBook implements ReadOnlyAddressBook {
 
         AddressBook otherAddressBook = (AddressBook) other;
         return members.equals(otherAddressBook.members)
-                && applicants.equals(otherAddressBook.applicants);
+            && applicants.equals(otherAddressBook.applicants);
     }
 
     @Override

@@ -24,9 +24,9 @@ public class AddMemberTaskCommand extends Command {
     public static final String COMMAND_ALIAS = "addt";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a task to the specified member "
-            + "by the index number used in the displayed member list. \n"
-            + "Parameters: INDEX (must be a positive integer) "
-            + PREFIX_TASK + " {taskName} ";
+        + "by the index number used in the displayed member list. \n"
+        + "Parameters: INDEX (must be a positive integer) "
+        + PREFIX_TASK + " {taskName} ";
 
     public static final String MESSAGE_ADD_TODO_SUCCESS = "Task added to member %1$s";
 
@@ -35,14 +35,17 @@ public class AddMemberTaskCommand extends Command {
 
 
     /**
-     * Creates an AddMemberCommand to add the specified {@code Member}
+     * Creates an AddMemberTaskCommand to add the specified {@code Member}
+     *
+     * @param index                   The index of the member to add the task to.
+     * @param addMemberTaskDescriptor The AddMemberTaskDescriptor containing the task to be added.
      */
     public AddMemberTaskCommand(Index index, AddMemberTaskDescriptor addMemberTaskDescriptor) {
         requireNonNull(addMemberTaskDescriptor);
         requireNonNull(index);
 
         this.index = index;
-        this.addMemberTaskDescriptor = addMemberTaskDescriptor;
+        this.addMemberTaskDescriptor = new AddMemberTaskDescriptor(addMemberTaskDescriptor);
     }
 
     @Override
@@ -75,7 +78,7 @@ public class AddMemberTaskCommand extends Command {
         }
 
         return new Member(member.getName(), member.getPhone(), member.getEmail(),
-                member.getTelegram(), member.getTags(), updatedTasks);
+            member.getTelegram(), member.getTags(), updatedTasks);
 
     }
 
@@ -85,12 +88,17 @@ public class AddMemberTaskCommand extends Command {
     public static class AddMemberTaskDescriptor {
         private List<Task> tasks;
 
+        /**
+         * Default constructor.
+         */
         public AddMemberTaskDescriptor() {
         }
 
         /**
          * Copy constructor.
          * A defensive copy of {@code tags} is used internally.
+         *
+         * @param toCopy The AddMemberTaskDescriptor to copy from.
          */
         public AddMemberTaskDescriptor(AddMemberTaskDescriptor toCopy) {
             setTasks(toCopy.tasks);
@@ -107,8 +115,8 @@ public class AddMemberTaskCommand extends Command {
         @Override
         public String toString() {
             return new ToStringBuilder(this)
-                    .add("tasks", tasks)
-                    .toString();
+                .add("tasks", tasks)
+                .toString();
         }
     }
 }

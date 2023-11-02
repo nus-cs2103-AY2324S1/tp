@@ -24,7 +24,10 @@ public class Task {
     }
 
     /**
-     * Returns true if a given string is a valid tag name.
+     * Returns true if a given string is a valid task name.
+     *
+     * @param test The string to test.
+     * @return True if the string is a valid task name, false otherwise.
      */
     public static boolean isValidTaskName(String test) {
         return test.matches(VALIDATION_REGEX);

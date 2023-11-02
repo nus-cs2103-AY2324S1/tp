@@ -22,6 +22,8 @@ public class TaskListPanel extends UiPart<Region> {
 
     /**
      * Creates a {@code TaskListPanel} with the given {@code ObservableList}.
+     *
+     * @param taskList The list of tasks to be displayed.
      */
     public TaskListPanel(ObservableList<Task> taskList) {
         super(FXML);

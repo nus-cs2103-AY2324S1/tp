@@ -36,6 +36,9 @@ public class ApplicantCard extends UiPart<Region> {
 
     /**
      * Creates a {@code ApplicantCard} with the given {@code Applicant} and index to display.
+     *
+     * @param applicant      The applicant to display.
+     * @param displayedIndex The index to display.
      */
     public ApplicantCard(Applicant applicant, int displayedIndex) {
         super(FXML);

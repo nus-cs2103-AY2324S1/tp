@@ -20,14 +20,19 @@ public class DeleteApplicantCommand extends Command {
     public static final String COMMAND_ALIAS = "dela";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the applicant identified by the index number used in the displayed applicant list.\n"
-            + "Parameters: INDEX (must be a positive integer)\n"
-            + "Example: " + COMMAND_WORD + " 1";
+        + ": Deletes the applicant identified by the index number used in the displayed applicant list.\n"
+        + "Parameters: INDEX (must be a positive integer)\n"
+        + "Example: " + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_DELETE_APPLICANT_SUCCESS = "Deleted applicant: %1$s";
 
     private final Index applicantIndex;
 
+    /**
+     * Creates a DeleteApplicantCommand to delete the specified {@code Applicant}
+     *
+     * @param applicantIndex The index of the applicant to delete.
+     */
     public DeleteApplicantCommand(Index applicantIndex) {
         this.applicantIndex = applicantIndex;
     }
@@ -64,7 +69,7 @@ public class DeleteApplicantCommand extends Command {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("applicantIndex", applicantIndex)
-                .toString();
+            .add("applicantIndex", applicantIndex)
+            .toString();
     }
 }

@@ -13,6 +13,11 @@ import seedu.address.commons.util.ToStringBuilder;
 public class MemberContainsKeywordsPredicate implements Predicate<Member> {
     private final List<String> keywords;
 
+    /**
+     * Constructs a {@code MemberContainsKeywordsPredicate} with the specified keywords.
+     *
+     * @param keywords The keywords to test.
+     */
     public MemberContainsKeywordsPredicate(List<String> keywords) {
         this.keywords = keywords;
     }
@@ -20,12 +25,12 @@ public class MemberContainsKeywordsPredicate implements Predicate<Member> {
     @Override
     public boolean test(Member member) {
         return keywords.stream()
-                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(member.getName().fullName, keyword)
-                        || StringUtil.containsWordIgnoreCase(member.getPhone().value, keyword)
-                        || StringUtil.containsWordIgnoreCase(member.getEmail().value, keyword)
-                        || StringUtil.containsWordIgnoreCase(member.getTelegram().toString(), keyword)
-                        || member.getTags().stream()
-                                .anyMatch(tag -> StringUtil.containsWordIgnoreCase(tag.tagName, keyword)));
+            .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(member.getName().fullName, keyword)
+                || StringUtil.containsWordIgnoreCase(member.getPhone().value, keyword)
+                || StringUtil.containsWordIgnoreCase(member.getEmail().value, keyword)
+                || StringUtil.containsWordIgnoreCase(member.getTelegram().toString(), keyword)
+                || member.getTags().stream()
+                .anyMatch(tag -> StringUtil.containsWordIgnoreCase(tag.tagName, keyword)));
     }
 
     @Override
