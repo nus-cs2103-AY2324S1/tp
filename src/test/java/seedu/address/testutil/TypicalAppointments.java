@@ -57,7 +57,7 @@ public class TypicalAppointments {
             .withPriorityTag("low")
             .build();
 
-    public static final Appointment ANCIENT_APPOINTMENT = new AppointmentBuilder()
+    public static final Appointment ANCIENTAPPOINTMENT = new AppointmentBuilder()
             .withPatient(HOON).withAppointmentTime("1800/04/18 15:00", "2023/04/18 17:30")
             .withDescription("Stoned").withPriorityTag("medium").build();
 

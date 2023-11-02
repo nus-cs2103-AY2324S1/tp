@@ -22,7 +22,7 @@ import seedu.address.model.appointment.AppointmentTime;
 import seedu.address.testutil.AppointmentTimeBuilder;
 
 public class RescheduleCommandTest {
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private final Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
     public void execute_validIndexValidTimeUnfilteredList_success() {
