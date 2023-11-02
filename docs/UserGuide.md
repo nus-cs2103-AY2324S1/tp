@@ -263,7 +263,7 @@ It streamlines tasks and provides a more efficient way to manage patient details
 **A**: HealthSync is currently an application for a single user. Hence, it cannot be accessed simultaneously
 by different users.
 
-**Q**: How do I import patient data from external sources into Healthysync?<br>
+**Q**: How do I import patient data from external sources into HealthSync?<br>
 **A**: Datafile storing current patient data will be stored in `data/addressbook.json` by default under the same folder.
 You may import patient data and store into that file. However, do adhere to the data format present in the current file.
 
