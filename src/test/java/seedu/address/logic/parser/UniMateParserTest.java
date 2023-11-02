@@ -24,6 +24,7 @@ import seedu.address.logic.commands.ClearEventsCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.DeleteContactEventCommand;
 import seedu.address.logic.commands.DeleteEventCommand;
+import seedu.address.logic.commands.DeleteTaskCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.ExitCommand;
@@ -220,6 +221,13 @@ public class UniMateParserTest {
 
         assertEquals(sortTasksCommand,
                 (SortTasksCommand) parser.parseCommand(SortTasksCommand.COMMAND_WORD + validArg));
+    }
+
+    @Test
+    public void parseCommand_deleteTask() throws Exception {
+        DeleteTaskCommand command = (DeleteTaskCommand) parser.parseCommand(
+                DeleteTaskCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
+        assertEquals(new DeleteTaskCommand(INDEX_FIRST_PERSON), command);
     }
 
     @Test
