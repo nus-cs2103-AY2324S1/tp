@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT_DESCRIPTION;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_EVENT;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
@@ -89,12 +90,10 @@ public class UniMateParserTest {
 
     @Test
     public void parseCommand_editContactEvent2() throws Exception {
-        Person person = new PersonBuilder().withCalendar().build();
-        EditContactEventCommand.EditEventDescriptor descriptor = new EditContactEventCommand.EditEventDescriptor();
         EditContactEventCommand command = (EditContactEventCommand)
                 parser.parseCommand(EditContactEventCommand.COMMAND_WORD + " "
-                        + INDEX_FIRST_PERSON.getOneBased() + " " + INDEX_FIRST_EVENT.getOneBased()
-                        + " d/Sleep");
+                        + INDEX_FIRST_PERSON.getOneBased() + " " + INDEX_FIRST_EVENT.getOneBased() + " "
+                        + PREFIX_EVENT_DESCRIPTION + " sleep");
         assertTrue(command instanceof EditContactEventCommand);
     }
 
