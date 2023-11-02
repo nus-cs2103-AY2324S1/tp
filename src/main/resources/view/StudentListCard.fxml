@@ -34,7 +34,6 @@
         <FlowPane fx:id="tags" />
         <Label fx:id="phone" styleClass="cell_small_label" text="\$phone" wrapText="true"/>
         <Label fx:id="address" styleClass="cell_small_label" text="\$address" wrapText="true"/>
-        <Label fx:id="note" styleClass="cell_small_label" text="\$note" wrapText="true"/>
       </VBox>
 <!--      <Button text="Click Me" onAction="#handleButtonClick" styleClass="note_button"/>-->
     </HBox>

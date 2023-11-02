@@ -40,8 +40,7 @@ public class StudentCard extends UiPart<Region> {
     private Label address;
     @FXML
     private FlowPane tags;
-    @FXML
-    private Label note;
+
 
     /**
      * Creates a {@code StudentCode} with the given {@code Student} and index to display.
@@ -61,14 +60,11 @@ public class StudentCard extends UiPart<Region> {
             tagLabel.getStyleClass().add(getTagStyleClass(tag.riskLevel));
             tags.getChildren().add(tagLabel);
         });
-
-        note.setText(student.getNote().value);
     }
 
     @FXML
     private void displayNote(MouseEvent event) {
         if (event.getButton() == MouseButton.PRIMARY && event.getClickCount() == 2) {
-            System.out.println("Button clicked");
             showNote.execute(index);
         }
     }

@@ -110,9 +110,16 @@ Format: `note STUDENT_INDEX note/NOTE`
 2. Note
    - Must be 200 characters or less, can be empty
 
-#### 2.2.4 Editing a Student: `edit`
+#### 2.2.4 Viewing Student Notes:
 
-#### 2.2.5 Viewing all Students: `view`
+No commands needed. Double-click on the student card under the "Students" column for the notes of the student
+you intend to view. The notes for the specified student will be shown under the "Notes" column. The "Notes" column
+will inform you if no notes are available for the student chosen.
+
+
+#### 2.2.5 Editing a Student: `edit`
+
+#### 2.2.6 Viewing all Students: `view`
 
 Shows a list of all available students or appointments, depending on specified input.
 
@@ -125,7 +132,7 @@ Format: `view g/CATEGORY`
 Examples:
 * `view g/students`
 
-#### 2.2.6 Finding Students by Name: `find`
+#### 2.2.7 Finding Students by Name: `find`
 
 Find students and their related appointments based on their name. Can choose to find student based on their first name, last name or full name
 If the name does not match entirely, the student will not be shown. Refer to the examples below for a better understanding
@@ -142,7 +149,7 @@ Student Name: Roy Lee
 * "find Le" does not work
 * "find Roy L" does not work
 
-#### 2.2.7 Assigning risk status to student: `tag`
+#### 2.2.8 Assigning risk status to student: `tag`
 
 Tags a student to a specific risk level.
 
@@ -173,6 +180,7 @@ Format: `schedule n/NAME_OF_STUDENT date/DATE from/START_TIME to/END_TIME d/DESC
 **Parameters**:
 1. Name
     - Alphabetical characters only
+    - The name must exist within the student list
 2. Date
     - Must be in the following format: `yyyy-MM-dd`
 3. Start/End Time
