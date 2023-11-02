@@ -335,7 +335,7 @@ The proposed commandHistory mechanism is facilitated by `CommandHistory`. It con
 * `CommandHistory#addCommand()` — Add the command into the history.
 * `CommandHistory#isLastCommandEqualCommand()` — Returns if the command is equal to the last command added into the `commandHistoryList`.
 * `CommandHistory#resetPointer()` — Resets the pointer to be start from the most recent command again.
-* `CommandHistory#isLastCommand()` — Returns if `currentCommandPointer` is at the last command 
+* `CommandHistory#isLastCommand()` — Returns if `currentCommandPointer` is at the last command.
 
 
 Given below is an example usage scenario and how the commandHistory behaves at each step.
