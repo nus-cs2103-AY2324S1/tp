@@ -69,6 +69,6 @@ public class ListEventCommand extends ListCommand {
                     : -1) * (sortAscending ? -1 : 1);
         });
         result += StringUtil.eventListToString(eventList);
-        return new CommandResult(result);
+        return new CommandResult(result, false, true);
     }
 }
