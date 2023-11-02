@@ -94,7 +94,7 @@ public class AddLeaveCommand extends Command {
                 throw new CommandException(AnnualLeave.MESSAGE_INVALID_LEAVE);
             }
             if (employeeToAddLeave.getAnnualLeave().isValidAddLeave(startDate, endDate)) {
-                if (!startDate.isBefore(LocalDate.now()) && !endDate.isAfter(LocalDate.now())
+                if (!LocalDate.now().isBefore(startDate) && !LocalDate.now().isAfter(endDate)
                         && employeeToAddLeave.getAttendanceStorage().getTodayAttendance() != null) {
                     employeeToAddLeave.getAttendanceStorage().markPresent(LocalDate.now());
                 }
