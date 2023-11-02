@@ -15,7 +15,8 @@ import networkbook.model.person.filter.CourseIsStillBeingTakenPredicate;
  * Parses input arguments and creates a new FilterCommand object.
  */
 public class FilterCommandParser implements Parser<FilterCommand> {
-    private static final String CMD_STRING_FORMAT = FilterCommand.COMMAND_WORD + " " + CliSyntax.PREFIX_FILTER_FIELD + " %s";
+    private static final String CMD_STRING_FORMAT = FilterCommand.COMMAND_WORD + " "
+                + CliSyntax.PREFIX_FILTER_FIELD + " %s";
 
     /**
      * Parses the given string of arguments
