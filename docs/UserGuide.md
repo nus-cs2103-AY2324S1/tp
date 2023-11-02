@@ -19,7 +19,6 @@ If you can type fast, KeepInTouch can get your contact management tasks done fas
   * [Deleting a contact: `delete contact`](#deleting-a-contact--delete-contact)
   * [Adding tags: `add tag`](#adding-tags--add-tag)
   * [Deleting tags: `delete tag`](#deleting-tags--delete-tag)
-  * [Listing notes: `list notes`](#listing-notes--list-notes)
   * [Adding a note: `add note`](#adding-notes-to-a-contact--add-note)
   * [Deleting a note: `delete note`](#deleting-a-note--delete-note)
   * [Listing events: `list events`](#listing-events--list-events)
@@ -146,11 +145,6 @@ Examples:
 * `delete tag -id 1 -t Frontend` deletes a tag with tag name "Frontend" from the first contact in the contact list.
 * `add tag -id 1 -t Frontend -t Java` deletes two tags with tag name "Frontend" and "Java" from the first contact in the contact list.
 
-### Listing notes : `list notes`
-
-Shows a list of all notes from all contacts in the contact list.
-
-Format: `list notes`
 ### Adding notes to a contact : `add note`
 
 Adds a note to a contact from the contact list.
@@ -264,7 +258,6 @@ Action             | Format, Examples
 **Delete Contact** | `delete contact CONTACT_ID`<br> e.g., `delete contact 1`
 **Add Tag**        | `add tag -id CONTACT_ID -t TAGNAME...` <br> eg., `add tag -id 1 -t Frontend`
 **Delete Tag**        | `delete tag -id CONTACT_ID -t TAGNAME...` <br> eg., `delete tag -id 1 -t Frontend`
-**List Notes**     | `list notes`
 **Add Note**       | `add note -id CONTACT_ID -t NOTE_TITLE -c NOTE_CONTENT` <br> e.g., `add note -id 2 -tit Open Position -con Applications for SWE full-time positions will open soon`
 **Delete Note**    | `delete note -id CONTACT_ID -t NOTE_TITLE`<br> e.g., `delete note -id 2 -t Meeting Topics`
 **List Events**    | `list events [-descending] [-st filter_start_time] [-et filter_end_time]`<br> e.g., `list events -descending -st 2023-11-01 -et 2023-11-02`
