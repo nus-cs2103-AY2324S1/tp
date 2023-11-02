@@ -186,7 +186,7 @@ Finds specified teaching assistants from the address book using search parameter
 
 Format: `find PREFIX KEYWORD [MORE_KEYWORDS]`
 
-- We can search by name, course or free time, using the prefixes `n/`, `c/` or `from/ to/` respectively.
+- We can search by name, course or free time, using the prefixes `n/`, `c/` or `d/ from/ to/` respectively.
 - The search is case-insensitive. e.g `alex` will match `Alex`, `cs1231s` will match `CS1231S`.
 - We can apply multiple search filters to narrow down the search results.
 - Teaching assistants matching all the search parameters will be returned.
@@ -195,9 +195,9 @@ Examples:
 
 - `find n/Alex` returns all teaching assistants with names containing `alex` (e.g. `Alex`, `Alexis`).
 - `find c/cs1231s` returns all teaching assistants that are teaching `cs1231s`.
-- `find from/10:00 to/12:00` returns all teaching assistants that are free from `10:00` to `12:00`.
+- `find d/1 from/10:00 to/12:00` returns all teaching assistants that are free on `Monday` from `10:00` to `12:00`.
 - `find n/Alex c/cs1231s` returns all teaching assistants with names containing `alex` and are teaching `cs1231s`.
-- `find c/cs2103t from/10:00 to/12:00` returns all teaching assistants that are teaching `cs2103t` and are free from `10:00` to `12:00`.
+- `find c/cs2103t d/1 from/10:00 to/12:00` returns all teaching assistants that are teaching `cs2103t` and are free on `Monday` from `10:00` to `12:00`.
 
 When the command succeeds:
 
@@ -233,6 +233,8 @@ Snowman; Phone: 83172153; Email: snowman@example.com; Course of study: Computer 
 <<<<<<< Updated upstream
 ### Updating Hours for All TAs in View: `hour`
 
+Updates the hour field to all TAs in the current list.
+
 ![update Hour](images/updateHour.png)
 
 Format: `hour HOUR`
@@ -245,7 +247,7 @@ Format: `hour HOUR`
 Examples:
 
 - `hour 4` will add 4 hours to all TAs in the address book if you are at the default view of all TAs.
-- `find c/ CS1231S` then `hour 4` will add 4 hours to all `CS1231S` TAs and other TAs will not be affected.
+- `find c/CS1231S` then `hour 4` will add 4 hours to all `CS1231S` TAs and other TAs will not be affected.
 
 When the command succeeds:
 
@@ -259,6 +261,34 @@ When the command fails:
 
 =======
 >>>>>>> Stashed changes
+
+### Updating Hours for All TAs in View: `editft`
+
+Edits the free time for a specified day for a TA with a specified index.
+
+![update Hour](images/updateHour.png)
+
+Format: `editft INDEX d/DAY from/FROM to/TO`
+
+- This command update ths time interval for the TA at the specified `INDEX` for weekday `DAY`.
+- Weekday `DAY` should be between 1 and 5, inclusive, and `FROM` and `TO` should be in "HH:SS" format and `FROM` time should be before `TO` time.
+
+Examples:
+
+- `editft 1 d/2 from/13:00 to/15:00` will update the free time of the TA with index 1 by setting his Tuesday free time to be 13:00 to 15:00.
+
+When the command succeeds:
+
+```
+Edited Teaching Assistant: [Details of TA specified]
+```
+
+When the command fails:
+
+- Incorrect format (missing prefix or parameter, or `DAY` out of range, or invalid `FROM` or `TO` format): `Invalid command format!`
+- Index out of range: `The person index provided is invalid`
+
+
 
 ### Clearing all entries : `clear`
 
