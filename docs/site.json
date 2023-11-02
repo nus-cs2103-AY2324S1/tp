@@ -22,9 +22,9 @@
       "glob": ["**/index.md", "**/*.md"]
     }
   ],
+  "headingIndexingLevel": 4,
   "deploy": {
     "message": "Site Update."
   },
-  "timeZone": "Asia/Singapore",
-  "headingIndexingLevel": 4
+  "timeZone": "Asia/Singapore"
 }
