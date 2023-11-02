@@ -23,7 +23,7 @@ public class TypicalStudents {
     public static final Student ALICE = new StudentBuilder().withName("Alice Pauline")
             .withAddress("123, Jurong West Ave 6, #08-111").withPhone("94351253")
             .withTags("high").withNote("course: computer science").build();
-    public static final Student BENSON = new StudentBuilder().withName("Benson Meier")
+    public static final Student BENNY = new StudentBuilder().withName("Benny Dover")
             .withAddress("311, Clementi Ave 2, #02-25")
             .withPhone("98765432")
             .withTags("medium").withNote("Likes dogs").build();
@@ -60,6 +60,6 @@ public class TypicalStudents {
     private TypicalStudents() {} // prevents instantiation
 
     public static List<Student> getTypicalStudents() {
-        return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));
+        return new ArrayList<>(Arrays.asList(ALICE, BENNY, CARL, DANIEL, ELLE, FIONA, GEORGE));
     }
 }
