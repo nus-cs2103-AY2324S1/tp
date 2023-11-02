@@ -342,13 +342,16 @@
     -fx-vgap: 3;
 }
 
-#tags .label {
-    -fx-text-fill: white;
+.hyperlink:visited {
+    -fx-background-color: inherit;
+}
+
+#tags .cell_field.hyperlink {
     -fx-background-color: #3e7b91;
-    -fx-padding: 1 3 1 3;
-    -fx-border-radius: 2;
-    -fx-background-radius: 2;
-    -fx-font-size: 12px;
+}
+
+#tags .cell_field.hyperlink:hover {
+    -fx-background-color: #5d9db5;
 }
 
 .hyperlink_list {
@@ -356,11 +359,19 @@
     -fx-vgap: 3;
 }
 
-.cell_field.hyperlink, .cell_field.hyperlink:visited {
+.cell_field.hyperlink {
+    -fx-background-color: #a48355;
+}
+
+.cell_field.hyperlink:hover {
+    -fx-background-color: #c09964;
+}
+
+.cell_field.hyperlink.external {
     -fx-background-color: #6093b5;
 }
 
-.cell_field.hyperlink:hover, .cell_field.hyperlink:visited:hover {
+.cell_field.hyperlink.external:hover {
     -fx-background-color: #80b5d8;
 }
 
