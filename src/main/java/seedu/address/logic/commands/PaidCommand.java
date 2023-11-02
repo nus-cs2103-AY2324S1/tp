@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.List;
 
@@ -38,7 +39,11 @@ public class PaidCommand extends Command {
         }
 
         Person personToMarkPaid = lastShownList.get(targetIndex.getZeroBased());
+
         model.markPersonPaid(personToMarkPaid);
+
+        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+
         return new CommandResult(String.format(MESSAGE_MARK_PERSON_PAID_SUCCESS, personToMarkPaid.getPaid()));
 
     }

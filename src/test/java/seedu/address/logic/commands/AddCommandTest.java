@@ -189,7 +189,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public void getPersonPaid(Person target) {
+        public boolean getPersonPaid(Person target) {
             throw new AssertionError("This method should not be called.");
         }
 

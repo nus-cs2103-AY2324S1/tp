@@ -112,7 +112,7 @@ public class ModelManager implements Model {
 
     @Override
     public void markPersonPaid(Person target) {
-        target.setPaid();
+        addressBook.setPaid(target);
     }
 
     @Override
@@ -121,8 +121,8 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void getPersonPaid(Person target) {
-        target.getPaid();
+    public boolean getPersonPaid(Person target) {
+        return addressBook.getPaid(target);
     }
 
     @Override
