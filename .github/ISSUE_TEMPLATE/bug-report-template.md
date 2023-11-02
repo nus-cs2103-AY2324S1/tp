@@ -1,11 +1,3 @@
----
-name: Bug Report Template
-about: Template for Bug Reports
-title: ''
-labels: ''
-assignees: ''
-
----
 ## Details
 <!-- Enter bug details here -->
 
