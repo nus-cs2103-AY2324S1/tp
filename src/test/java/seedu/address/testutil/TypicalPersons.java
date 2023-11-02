@@ -17,7 +17,9 @@ import java.util.List;
 
 import seedu.address.model.AddressBook;
 import seedu.address.model.AddressBookManager;
+import seedu.address.model.person.Attendance;
 import seedu.address.model.person.Person;
+import seedu.address.model.week.Week;
 
 /**
  * A utility class containing a list of {@code Person} objects to be used in tests.
@@ -37,7 +39,8 @@ public class TypicalPersons {
     public static final Person ELLE = new PersonBuilder().withName("Elle Meyer").withPhone("9482224")
             .withId("A1234567L").withEmail("werner@example.com").build();
     public static final Person FIONA = new PersonBuilder().withName("Fiona Kunz").withPhone("9482427")
-            .withId("A1234567Q").withEmail("lydia@example.com").build();
+            .withId("A1234567Q").withEmail("lydia@example.com")
+            .withAttendance(new Attendance(new Week(1), true, null)).build();
     public static final Person GEORGE = new PersonBuilder().withName("George Best").withPhone("9482442")
             .withId("A1234567C").withEmail("anna@example.com").build();
 
