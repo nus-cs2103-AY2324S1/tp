@@ -157,6 +157,7 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+//@@author lihongguang00
 ### Adding Events
 
 #### Implementation
@@ -219,6 +220,7 @@ is a timing conflict will be reflected in the UI status bar.
 
 {more aspects and alternatives to be added}
 
+//@@author Fallman2
 ### Deleting Events
 
 #### Implementation
@@ -280,6 +282,7 @@ only `Person` objects that match the filter.
 
 Step 4. The number of people displayed is returned as a `CommandResult`.
 
+//@@author nicrandomlee
 ### Contact Sorting
 
 #### Implementation
@@ -306,6 +309,7 @@ Given below is an example of how the sort function works at each step. We will s
 * The design of the `sort` command is dependent on the structure of the `AddressBookStorage` object. Should the structure
   of how the AddressBook objects are stored change, a new implementation will be required for the command.
 
+//@@author junhonglow
 ### TaskList Feature (Work in Progress)
 
 #### Implementation
@@ -345,7 +349,7 @@ The `addTask` method in the model is called, adding the task to the tasklist, an
 ##### Delete Task (To be added)
 
 ##### Edit Task (To be added)
-
+//@@author
 
 ### \[Proposed\] Undo/redo feature
 
@@ -471,7 +475,7 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Value proposition**: manage contacts faster than a typical mouse/GUI driven app
 
-
+//@author lihongguang00
 | Priority | As a …                                                              | I want to …                                                                  | So that I can…                                                                          |
 | -------- | ------------------------------------------------------------------- | ---------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- |
 | `* * *`  | NUS student                                                         | search for the contacts of other students within my university               | contact them for group projects                                                         |
@@ -516,7 +520,7 @@ _{Explain here how the data archiving feature will be implemented}_
 | `*`      | user with a tendency to open many applications at once              | have the application time out and exit                                       | ensure my computer would not be cluttered by too many applications                      |
 
 _{More to be added}_
-
+//@@author nicrandomlee
 ### Use cases
 
 
@@ -602,7 +606,7 @@ Use case ends.
 
       Use case ends.
 
-
+//@author Fallman2
 **Use case: UC4 Clear All Entries**
 
 
@@ -669,7 +673,7 @@ Use case ends.
    Use case ends.
 
 
-
+//@@author junhonglow
 **Use case: UC8 View events**
 
 
@@ -762,7 +766,7 @@ Use case ends.
 
     Use case ends.
 
-
+//@author Fallman2
 **Use case: UC12 Filter by fields.**
 
 
@@ -783,7 +787,7 @@ Use case ends.
     * UniMate displays a message that 0 people have been displayed.
       Use case ends.
 
-
+//@author nicrandomlee
 **Use case: UC13 Sort by fields.**
 
 **MSS**
@@ -797,6 +801,7 @@ Use case ends.
 
 - 1a. User uses the wrong delimiter or makes a spelling mistake, or provides incorrect number of arguments
     - UniMate displays a message to show a helper message outlining the correct syntax and available sort options
+//@author
 
 ### Non-Functional Requirements
 
