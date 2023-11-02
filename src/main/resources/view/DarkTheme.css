@@ -132,6 +132,10 @@
     -fx-text-fill: #010504;
 }
 
+.ec-label-container {
+    -fx-text-fill: #010504;
+}
+
 .stack-pane {
      -fx-background-color: derive(#2E4374, 20%);
 }
