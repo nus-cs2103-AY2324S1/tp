@@ -28,14 +28,12 @@
                <VBox prefHeight="300.0" prefWidth="400.0">
                   <children>
                      <Label fx:id="warningMessage" />
-      
                           <!-- Add a StackPane to contain the Rectangle and TextArea -->
                           <StackPane />
                            <!-- Define a Rectangle to serve as the background -->
 
                            <!-- Add a TextArea for user input -->
                            <TextArea fx:id="inputTextArea" promptText="Enter your text here" />
-      
                           <Button fx:id="importButton" mnemonicParsing="false" onAction="#importData" text="Import Data" />
                   </children>
                </VBox>
