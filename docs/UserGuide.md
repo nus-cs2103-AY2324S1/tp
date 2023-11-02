@@ -110,25 +110,29 @@ hen deleting an existing employee from ManageHR, you will need to account for th
 
 ### Viewing help : `help`
 
-Shows a message explaining how to access the user guide.
+Shows the help window for a specific command. Help window shows the syntactic use of the command, as well as an example of how the command is to be used.
 
-Format: `help`
+If no command is provided, a general help pane is displayed, with a link to the user guide.
+
+Format: `help <command>`
 
 Example:
 - `help`
+- `help add`
 
 Acceptable values for each parameter:
 
-| Paramters | Accepted input |
-| --- | --- |
-| nil | - |
+| Paramters | Accepted input                                           |
+|-----------|----------------------------------------------------------|
+| command   | A command word present in ManageHR. Alternatively empty. |
 
 Expected outputs:
 
-| Outcome | Output |
-| --- | --- |
-| command success | Refer to the user guide: https://ay2324s1-cs2103-t16-1.github.io/tp/UserGuide.html |
-| command fail | Command input error. Please check your command input. |
+| Outcome                               | Output                                                                                                                                                                           |
+|---------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Command Success, no specified command | A window is displayed, with `Refer to the user guide: https://ay2324s1-cs2103-t16-1.github.io/tp/UserGuide.html` A copy button is available to copy this URL into the clipboard. |
+| Command Success, specified command    | A window is displayed, with  `<command name>: Usage, Syntax to use, Example: Example of command.`. A copy button is also available to copy the example usage.                    |
+| Command Failure                       | Command input error. Please check your command input.                                                                                                                            |
 
 ![help message](images/helpMessage.png)
 
@@ -246,6 +250,9 @@ Fail:
 
 Constraints:
 * [Manager-subordinate relationship](#deleting-an-existing-employee-with-manager-subordinate-relationships)
+
+### Fitering Employees : `filter`
+Filters current employee list by constraints given. Displays all filtered employees at-a-glance.
 
 ### Exiting the program : `exit`
 
