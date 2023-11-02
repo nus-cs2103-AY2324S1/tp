@@ -64,12 +64,7 @@ class JsonSerializableAddressBook {
 
             person.getGroups().toStream().forEach(group -> {
                 try {
-                    if (addressBook.hasGroup(group)) {
-                        addressBook.getGroup(group).addPerson(person);
-                    } else {
-                        addressBook.addGroup(group);
-                        group.addPerson(person);
-                    }
+                    addressBook.getGroup(group).addPerson(person);
                 } catch (CommandException e) {
                     throw new RuntimeException(e);
                 }

@@ -18,7 +18,7 @@ public class JsonAdaptedTime {
     private final String end;
 
     /**
-     * Constructs a {@code JsonAdaptedTime} with the given person details.
+     * Constructs a {@code JsonAdaptedTime} with the given time details.
      */
     @JsonCreator
     public JsonAdaptedTime(@JsonProperty("start") String start, @JsonProperty("end") String end) {
@@ -27,7 +27,7 @@ public class JsonAdaptedTime {
     }
 
     /**
-     * Converts a given {@code Person} into this class for Jackson use.
+     * Converts a given {@code TimeInterval} into this class for Jackson use.
      */
     public JsonAdaptedTime(TimeInterval source) {
         this.start = source.getStart().toString();
@@ -35,7 +35,7 @@ public class JsonAdaptedTime {
     }
 
     /**
-     * Converts this Jackson-friendly adapted person object into the model's {@code Person} object.
+     * Converts this Jackson-friendly adapted person object into the model's {@code TimeInterval} object.
      *
      * @throws IllegalValueException if there were any data constraints violated in the adapted person.
      */

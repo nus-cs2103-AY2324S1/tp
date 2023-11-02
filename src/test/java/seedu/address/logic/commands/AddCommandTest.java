@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 
+import java.lang.reflect.Array;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -19,12 +20,8 @@ import javafx.util.Pair;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.AddressBook;
-import seedu.address.model.TimeInterval;
+import seedu.address.model.*;
 import seedu.address.model.group.Group;
-import seedu.address.model.Model;
-import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.group.GroupRemark;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
@@ -139,11 +136,6 @@ public class AddCommandTest {
         }
 
         @Override
-        public boolean[] usedFields(Person person) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
         public boolean hasPerson(Person person) {
             throw new AssertionError("This method should not be called.");
         }
@@ -155,11 +147,6 @@ public class AddCommandTest {
 
         @Override
         public Person deletePerson(String personName) throws CommandException {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void setPerson(Person target, Person editedPerson) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -204,7 +191,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public void addFreeTimeToPerson(Name toAddPerson, ArrayList<TimeInterval> toAddFreeTime) throws CommandException {
+        public void addTimeToPerson(Name toAddPerson, ArrayList<TimeInterval> toAddFreeTime) throws CommandException {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -213,6 +200,35 @@ public class AddCommandTest {
             throw new AssertionError("This method should not be called.");
         }
 
+        @Override
+        public TimeIntervalList getTimeFromPerson(Name personName) throws CommandException {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void deleteTimeFromPerson(Name personName, ArrayList<TimeInterval> listOfTimesToDelete) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Group findGroup(String groupName) throws CommandException {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addTimeToGroup(Group toAdd, ArrayList<TimeInterval> toAddTime) throws CommandException {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void deleteTimeFromGroup(Group group,
+                                        ArrayList<TimeInterval> toDeleteTime) throws CommandException {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        public TimeIntervalList getTimeFromGroup(Group group) throws CommandException {
+            throw new AssertionError("This method should not be called.");
+        }
 
     }
 
@@ -232,11 +248,6 @@ public class AddCommandTest {
             requireNonNull(person);
             return this.person.isSamePerson(person);
         }
-
-        @Override
-        public boolean[] usedFields(Person toAdd) {
-            return new boolean[]{true, true, true};
-        }
     }
 
     /**
@@ -255,11 +266,6 @@ public class AddCommandTest {
         public void addPerson(Person person) {
             requireNonNull(person);
             personsAdded.add(person);
-        }
-
-        @Override
-        public boolean[] usedFields(Person toAdd) {
-            return new boolean[]{false, false, false, false};
         }
 
         @Override

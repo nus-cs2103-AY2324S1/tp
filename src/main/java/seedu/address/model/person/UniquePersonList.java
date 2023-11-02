@@ -42,15 +42,6 @@ public class UniquePersonList implements Iterable<Person> {
             || internalList.stream().anyMatch(toCheck::isSamePhone);
     }
 
-    public boolean[] usedFields(Person toCheck) {
-        boolean[] fields = new boolean[4];
-        fields[1] = internalList.stream().anyMatch(toCheck::isSameName);
-        fields[2] = internalList.stream().anyMatch(toCheck::isSamePhone);
-        fields[3] = internalList.stream().anyMatch(toCheck::isSameEmail);
-        fields[0] = fields[1] && fields[2] && fields[3];
-        return fields;
-    }
-
     /**
      * Adds a person to the list.
      * The person must not already exist in the list.
@@ -61,27 +52,6 @@ public class UniquePersonList implements Iterable<Person> {
             throw new DuplicatePersonException();
         }
         internalList.add(toAdd);
-    }
-
-    /**
-     * Replaces the person {@code target} in the list with {@code editedPerson}.
-     * {@code target} must exist in the list.
-     * The person identity of {@code editedPerson} must not be the same as another existing person in the list.
-     */
-    public void setPerson(Person target, Person editedPerson) {
-        requireAllNonNull(target, editedPerson);
-
-        int index = internalList.indexOf(target);
-        if (index == -1) {
-            throw new PersonNotFoundException();
-        }
-
-        if (!target.isSamePerson(editedPerson)
-            && contains(editedPerson)) {
-            throw new DuplicatePersonException();
-        }
-
-        internalList.set(index, editedPerson);
     }
 
     /**
@@ -99,6 +69,27 @@ public class UniquePersonList implements Iterable<Person> {
     public void setPersons(UniquePersonList replacement) {
         requireNonNull(replacement);
         internalList.setAll(replacement.internalList);
+    }
+
+    /**
+     * Replaces the person {@code target} in the list with {@code editedPerson}.
+     * {@code target} must exist in the list.
+     * The person identity of {@code editedPerson} must not be the same as another existing person in the list.
+     */
+    public void setPerson(Person target, Person editedPerson) {
+        requireAllNonNull(target, editedPerson);
+
+        int index = internalList.indexOf(target);
+        if (index == -1) {
+            throw new PersonNotFoundException();
+        }
+
+        if (!target.isSamePerson(editedPerson)
+                && contains(editedPerson)) {
+            throw new DuplicatePersonException();
+        }
+
+        internalList.set(index, editedPerson);
     }
 
     /**

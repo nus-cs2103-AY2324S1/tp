@@ -28,6 +28,13 @@ public class FindCommandParser implements Parser<FindCommand> {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_GROUPTAG);
 
+        //duplicate parameters
+        try {
+            argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_GROUPTAG);
+        } catch (ParseException e) {
+            throw new ParseException(String.format(FindCommand.MESSAGE_TWO_PARAMETERS, FindCommand.MESSAGE_USAGE));
+        }
+
         // check if either n/ or g/ are present
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME)
                 || !argMultimap.getPreamble().isEmpty()) {

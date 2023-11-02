@@ -19,8 +19,8 @@ public class AddTimeCommandParser implements Parser<AddTimeCommand> {
     @Override
     public AddTimeCommand parse(String userInput) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(userInput, PREFIX_NAME, PREFIX_FREETIME, PREFIX_ENDINTERVAL);
-        //find a way to separate error msg when ";" is missing
+                ArgumentTokenizer.tokenize(userInput, PREFIX_NAME, PREFIX_FREETIME);
+
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_FREETIME)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddTimeCommand.MESSAGE_USAGE));
@@ -28,9 +28,7 @@ public class AddTimeCommandParser implements Parser<AddTimeCommand> {
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME);
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
-        TimeInterval firstInterval = ParserUtil.parseEachInterval(argMultimap.getValue(PREFIX_FREETIME).get());
-        ArrayList<TimeInterval> timeInterval = ParserUtil.parseInterval(argMultimap.getAllValues(PREFIX_ENDINTERVAL));
-        timeInterval.add(0, firstInterval);
+        ArrayList<TimeInterval> timeInterval = ParserUtil.parseInterval(argMultimap.getAllValues(PREFIX_FREETIME));
 
         if (TimeInterval.isTimeIntervalOverlap(timeInterval)) {
             throw new ParseException(TimeInterval.MESSAGE_CONSTRAINTS_OVERLAP);

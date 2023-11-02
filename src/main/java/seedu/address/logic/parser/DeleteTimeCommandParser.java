@@ -4,7 +4,6 @@ import seedu.address.logic.commands.*;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.TimeInterval;
 import seedu.address.model.group.Group;
-import seedu.address.model.group.GroupList;
 import seedu.address.model.person.Name;
 
 import java.util.ArrayList;
@@ -16,15 +15,14 @@ import static seedu.address.logic.parser.CliSyntax.*;
 public class DeleteTimeCommandParser implements Parser<DeleteTimeCommand>{
 
     /**
-     * Parses the given {@code String} of arguments in the context of the DeleteCommand
-     * and returns a DeleteCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the DeleteTimeCommand
+     * and returns a DeleteTimeCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
     public DeleteTimeCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_GROUPTAG, PREFIX_FREETIME, PREFIX_ENDINTERVAL);
+                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_GROUPTAG, PREFIX_FREETIME);
 
-        //find a way to separate error msg when ";" is missing
         if (!arePrefixesPresent(argMultimap, PREFIX_FREETIME)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteTimeCommand.MESSAGE_USAGE));
@@ -36,9 +34,7 @@ public class DeleteTimeCommandParser implements Parser<DeleteTimeCommand>{
             throw new ParseException(String.format(DeleteCommand.MESSAGE_TWO_PARAMETERS, DeleteCommand.MESSAGE_USAGE));
         }
 
-        TimeInterval firstInterval = ParserUtil.parseEachInterval(argMultimap.getValue(PREFIX_FREETIME).get());
-        ArrayList<TimeInterval> timeInterval = ParserUtil.parseInterval(argMultimap.getAllValues(PREFIX_ENDINTERVAL));
-        timeInterval.add(0, firstInterval);
+        ArrayList<TimeInterval> timeInterval = ParserUtil.parseInterval(argMultimap.getAllValues(PREFIX_FREETIME));
 
         if ((arePrefixesPresent(argMultimap, PREFIX_NAME) && arePrefixesPresent(argMultimap, PREFIX_GROUPTAG))
                 || !argMultimap.getPreamble().isEmpty()) {
