@@ -6,9 +6,19 @@
 
 # HealthSync User Guide
 
-HealthSync is a **desktop app for managing patient details, optimised for use via a Command Line Interface** (CLI)
-while still having the benefits of a Graphical User Interface (GUI). If you can type fast, HealthSync can help you
-organise and manage patient details faster than traditional GUI apps.
+> "HealthSync will be your patient’s best friend, the frontdesk’s right hand, and time’s biggest foe." - Yi Chee, Developer, HealthSync
+
+HealthSync is a **powerful desktop application designed specifically for clinic assistants in small private clinics.** It offers a unique combination of a Command Line Interface (CLI) and a Graphical User Interface (GUI) to efficiently manage and organize patient details. If you're a fast typist, HealthSync can streamline your workflow and help you handle patient information more effectively than traditional GUI apps.
+
+## Why HealthSync?  
+
+1. **Tailored for Front Desk Workers**: HealthSync is built with the needs of front desk workers in mind. It provides a user-friendly interface that simplifies patient management tasks, allowing you to focus on providing excellent service to patients.
+
+2. **Fast and Efficient**: With HealthSync's CLI, you can quickly navigate through commands and perform actions without the need to rely solely on a mouse. This saves you valuable time and makes patient data management faster and more efficient.
+
+3. **Comprehensive Patient Details**: HealthSync enables you to store and access comprehensive patient details, including personal information, medical history, appointments, and more. All the essential information you need is organized in one centralized location.
+
+4. **Intuitive GUI Experience**: HealthSync's GUI complements the CLI by providing a visual representation of patient data. The GUI is intuitive and user-friendly, making it easy to view and update patient information with just a few keys.
 
 
 <!-- * Table of Contents -->
@@ -44,7 +54,7 @@ organise and manage patient details faster than traditional GUI apps.
 
    * `list` : Lists all patients.
 
-   * `add n/John Doe id/S8943782H p/98114839 e/john@example/com a/Kent Ridge Avenue 21 ` : Adds a patient named `John Doe` with the relevant field details to HealthSync.
+   * `add n/John Doe id/S8765432A p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 ap/17-10-2023 11:00 13:00 m/hypochondriac` : Adds a patient named `John Doe` with the relevant field details to HealthSync.
 
    * `delete n/Alex Yeoh` : Deletes Alex Yeoh's details from the current list.
 
@@ -285,7 +295,13 @@ Format:
 
 >:bulb: Use `u` as a shortcut for `undo`
 
+
 >:bulb: Simply entering `undo` will undo the last command
+
+
+Fields that can be deleted:
+* Appointment: Include `ap/` behind delete command
+* Medical History: Include `m/` behind delete command. Can delete specific Medical History. e.g `m/diabetes`
 
 Example commands:
 *  `undo 2`
@@ -293,6 +309,7 @@ Example commands:
 ![result for 'undo'](images/undoResult.jpg)
 
 Expected outputs when the command succeeds:
+
 * `Undoing 2 command(s): ...`
 
 Expected outputs when command fails:
