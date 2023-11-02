@@ -9,7 +9,6 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Duration;
-import seedu.address.model.FreeTime;
 import seedu.address.model.TimeIntervalList;
 import seedu.address.model.TimeInterval;
 import seedu.address.model.person.Person;
@@ -20,9 +19,8 @@ import java.util.stream.Stream;
  * Class representing a group
  */
 public class Group {
-    public static final String MESSAGE_CONSTRAINTS = "Group names should be alphanumeric and must not be black";
+    public static final String MESSAGE_CONSTRAINTS = "Group names should be alphanumeric and must not be blank";
     public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
-
     private final ObservableList<Person> listOfGroupMates = FXCollections.observableArrayList();
     private final String groupName;
     private GroupRemark groupRemark;
