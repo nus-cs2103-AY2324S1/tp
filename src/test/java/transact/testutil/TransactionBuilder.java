@@ -19,7 +19,7 @@ public class TransactionBuilder {
     public static final String DEFAULT_TYPE = "Expense";
     public static final String DEFAULT_DESC = "Shibas";
     public static final float DEFAULT_AMOUNT = 10.34f;
-    public static final String DEFAULT_DATE = "11/11/2023";
+    public static final String DEFAULT_DATE = "11/11/23";
     public static final Person DEFAULT_PERSON = ALICE;
 
     private TransactionId id;

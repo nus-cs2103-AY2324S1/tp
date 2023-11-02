@@ -41,7 +41,7 @@ public class EditTransactionCommand extends Command {
             + "[" + PREFIX_DESCRIPTION + "DESCRIPTION] "
             + "[" + PREFIX_AMOUNT + "AMOUNT] "
             + "[" + PREFIX_DATE + "DATE] "
-            + "[" + PREFIX_STAFF + "STAFF]...\n"
+            + "[" + PREFIX_STAFF + "STAFF_ID]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_TYPE + "E "
             + PREFIX_AMOUNT + "10000";

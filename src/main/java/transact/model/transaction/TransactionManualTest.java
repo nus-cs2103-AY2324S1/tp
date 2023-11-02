@@ -41,7 +41,7 @@ public class TransactionManualTest {
         System.out.print("Enter Amount: ");
         double amountInput = Double.parseDouble(scanner.nextLine());
 
-        System.out.print("Enter Date (dd/mm/yyyy): ");
+        System.out.print("Enter Date (dd/MM/yy): ");
         String dateInput = scanner.nextLine();
 
         // Create a Transaction ID

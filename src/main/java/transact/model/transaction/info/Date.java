@@ -5,26 +5,25 @@ import static java.util.Objects.requireNonNull;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
-
 /**
  * Represents a date in the system.
  * Date should be in a valid format.
  */
 public class Date {
-    public static final String VALIDATION_REGEX = "\\d{2}/\\d{2}/\\d{4}"; // Date format (dd/mm/yyyy)
-    public static final String MESSAGE_CONSTRAINTS = "Date must be in the format dd/mm/yyyy";
+    public static final String VALIDATION_REGEX = "\\d{2}/\\d{2}/\\d{2}"; // Date format (dd/MM/yy)
+    public static final String MESSAGE_CONSTRAINTS = "Date must be in the format dd/MM/yy";
     private final java.util.Date date;
-    private final SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+    private final SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yy");
 
     /**
      * Constructs a {@code Date}.
      *
      * @param dateString
-     *            A string representation of a date in the format dd/mm/yyyy.
+     *            A string representation of a date in the format dd/MM/yy.
      */
     public Date(String dateString) {
+        requireNonNull(dateString);
         try {
-            requireNonNull(dateString);
             if (!isValidDate(dateString)) {
                 throw new IllegalArgumentException(MESSAGE_CONSTRAINTS);
             }
