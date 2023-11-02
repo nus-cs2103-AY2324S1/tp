@@ -62,7 +62,7 @@ HouR is a **desktop app for managing employee records, optimized for use via a C
    
    * `find Alex Manager`: Lists all employees with the keywords `Alex` or `Manager`.
 
-   * `delete EID2024-1234` : Deletes the employee with employee id EID1234-5678 shown in the list.
+   * `delete EID1234-5678` : Deletes the employee with employee id EID1234-5678 shown in the list.
 
    * `sort f/salary in/asc`: Sorts the employees by their salaries in ascending order.
 
@@ -115,7 +115,7 @@ HouR is a **desktop app for managing employee records, optimized for use via a C
 
 <div markdown="block" class="alert alert-info">
 
-**information_source: Notes about the command format**<br>
+**:information_source: Notes about the command format**<br>
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
@@ -154,7 +154,7 @@ Examples:
 
 ![add success](images/addSuccess.png)
 
-* `add n/Charlotte Oliveiro pos/Software Engineer id/EID2023-1234 p/98561234 e/alexyeoh2@example.com s/$9,500 d/IT` is
+* `add n/Charlotte Oliveiro pos/Software Engineer id/EID2023-1234 p/98561234 e/alexyeoh2@example.com s/9500 d/IT` is
   invalid because `id` already exists in the records.
 
 ![add failure](images/addFailure.png)
@@ -174,7 +174,7 @@ Examples:
 
 ![delete success](images/deleteSuccess.png)
 
-* `delete EID000-0000` is invalid because the id does not exist.
+* `delete EID0000-0000` is invalid because the id does not exist.
 
 ![delete failure](images/deleteFailure.png)
 
@@ -218,7 +218,7 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
 Examples:
-`find Alex` returns `Alex Yeoh`
+`find Bernice` returns `Bernice Yu`
 
 * ![find success](images/findSuccess.png)
 
