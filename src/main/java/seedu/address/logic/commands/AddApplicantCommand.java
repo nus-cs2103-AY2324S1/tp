@@ -19,12 +19,12 @@ public class AddApplicantCommand extends Command {
     public static final String COMMAND_ALIAS = "adda";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an applicant to the applicant list. "
-            + "\nParameters: "
-            + PREFIX_NAME + " {applicantName} "
-            + PREFIX_PHONE + " {phoneNumber} "
-            + "\nExample: " + COMMAND_WORD + " "
-            + PREFIX_NAME + " John Doe "
-            + PREFIX_PHONE + " 98765432";
+        + "\nParameters: "
+        + PREFIX_NAME + " {applicantName} "
+        + PREFIX_PHONE + " {phoneNumber} "
+        + "\nExample: " + COMMAND_WORD + " "
+        + PREFIX_NAME + " John Doe "
+        + PREFIX_PHONE + " 98765432";
 
     public static final String MESSAGE_SUCCESS = "New applicant added: %1$s";
 
@@ -34,6 +34,8 @@ public class AddApplicantCommand extends Command {
 
     /**
      * Creates an AddApplicantCommand to add the specified {@code Applicant}
+     *
+     * @param applicant The applicant to add.
      */
     public AddApplicantCommand(Applicant applicant) {
         requireNonNull(applicant);
@@ -69,7 +71,7 @@ public class AddApplicantCommand extends Command {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("toAdd", toAdd)
-                .toString();
+            .add("toAdd", toAdd)
+            .toString();
     }
 }

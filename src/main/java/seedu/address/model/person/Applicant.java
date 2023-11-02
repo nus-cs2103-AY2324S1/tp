@@ -20,13 +20,25 @@ public class Applicant extends Person {
     /**
      * Every field must be present and not null.
      *
+     * @param name          The name of the applicant.
+     * @param phone         The phone number of the applicant.
+     * @param interviewTime The interview time of the applicant.
+     */
+    public Applicant(Name name, Phone phone, InterviewTime interviewTime) {
+        this(name, phone);
+        this.interviewTime = interviewTime;
+    }
+
+    /**
+     * Every field must be present and not null.
+     *
      * @param name  The name of the applicant.
      * @param phone The phone number of the applicant.
      */
     public Applicant(Name name, Phone phone) {
         super(name);
         this.phone = phone;
-        this.interviewTime = new InterviewTime("Interview time has not been set");
+        this.interviewTime = new InterviewTime("cancel");
     }
 
     /**
@@ -47,7 +59,7 @@ public class Applicant extends Person {
         Applicant otherApplicant = (Applicant) other;
         // applicants are considered the same if they have the same name or phone
         return getName().equals(otherApplicant.getName())
-                || this.phone.equals(otherApplicant.phone);
+            || this.phone.equals(otherApplicant.phone);
     }
 
     public Phone getPhone() {
@@ -56,10 +68,6 @@ public class Applicant extends Person {
 
     public InterviewTime getInterviewTime() {
         return interviewTime;
-    }
-
-    public void addInterviewTime(InterviewTime interviewTime) {
-        this.interviewTime = interviewTime;
     }
 
     /**
@@ -79,8 +87,8 @@ public class Applicant extends Person {
 
         Applicant otherApplicant = (Applicant) other;
         return getName().equals(otherApplicant.getName())
-                && this.phone.equals(otherApplicant.phone)
-                && this.interviewTime.equals(otherApplicant.interviewTime);
+            && this.phone.equals(otherApplicant.phone)
+            && this.interviewTime.equals(otherApplicant.interviewTime);
     }
 
     @Override
@@ -92,16 +100,16 @@ public class Applicant extends Person {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("name", getName())
-                .add("phone", phone)
-                .add("interview time", interviewTime)
-                .toString();
+            .add("name", getName())
+            .add("phone", phone)
+            .add("interview time", interviewTime)
+            .toString();
     }
 
     @Override
     public String detailsToCopy() {
         return "Name: " + getName() + "\n"
-                + "Phone: " + getPhone() + "\n"
-                + "Interview Time: " + interviewTime;
+            + "Phone: " + getPhone() + "\n"
+            + "Interview Time: " + interviewTime;
     }
 }

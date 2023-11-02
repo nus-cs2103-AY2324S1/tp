@@ -3,20 +3,20 @@ package seedu.address.model.task;
 import static java.util.Objects.requireNonNull;
 
 /**
- * Represents a Tag in the address book.
+ * Represents a Task in the address book.
  * Guarantees: immutable; name is valid as declared in {@link #isValidTaskName(String)}
  */
 public class Task {
 
-    public static final String MESSAGE_CONSTRAINTS = "Tags names should be alphanumeric";
-    public static final String VALIDATION_REGEX = "\\p{Alnum}+";
+    public static final String MESSAGE_CONSTRAINTS = "Task names should be alphanumeric";
+    public static final String VALIDATION_REGEX = "^[\\w\\s]+$";
 
     public final String taskName;
 
     /**
-     * Constructs a {@code Tag}.
+     * Constructs a {@code Task}.
      *
-     * @param taskName A valid tag name.
+     * @param taskName A valid task name.
      */
     public Task(String taskName) {
         requireNonNull(taskName);
@@ -24,7 +24,10 @@ public class Task {
     }
 
     /**
-     * Returns true if a given string is a valid tag name.
+     * Returns true if a given string is a valid task name.
+     *
+     * @param test The string to test.
+     * @return True if the string is a valid task name, false otherwise.
      */
     public static boolean isValidTaskName(String test) {
         return test.matches(VALIDATION_REGEX);
@@ -41,8 +44,8 @@ public class Task {
             return false;
         }
 
-        Task otherTag = (Task) other;
-        return taskName.equals(otherTag.taskName);
+        Task otherTask = (Task) other;
+        return taskName.equals(otherTask.taskName);
     }
 
     @Override
