@@ -43,6 +43,8 @@ public class ClientProfilePanel extends UiPart<Region> {
     private FlowPane tags;
     @FXML
     private ListView<Interaction> interactionsList;
+    @FXML
+    private Label interactionsCount;
 
     /**
      * Creates a {@code ClientProfilePanel} with the given {@code Person}.
@@ -78,6 +80,7 @@ public class ClientProfilePanel extends UiPart<Region> {
         ObservableList<Interaction> interactions = FXCollections.observableArrayList(client.getInteractions());
         interactionsList.setItems(interactions);
         interactionsList.setCellFactory(listView -> new InteractionListViewCell());
+        interactionsCount.setText(String.format(" (%d)", interactions.size()));
     }
 
     static class InteractionListViewCell extends ListCell<Interaction> {

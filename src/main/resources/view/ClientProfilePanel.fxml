@@ -53,7 +53,10 @@
         </VBox>
 
         <VBox spacing="4">
-            <Label text="Past Interactions" />
+            <HBox>
+                <Label text="Past Interactions" />
+                <Label fx:id="interactionsCount" />
+            </HBox>
             <ListView fx:id="interactionsList" styleClass="interactions" />
         </VBox>
     </VBox>
