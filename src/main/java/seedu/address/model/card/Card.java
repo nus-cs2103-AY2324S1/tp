@@ -25,7 +25,7 @@ public class Card implements Comparable<Card> {
     private PracticeDate lastPracticeDate; // last date card was practiced, can be null.
     private PracticeDate nextPracticeDate; // next date card should be practiced.
     private List<Tag> tags = new ArrayList<>();
-    private SolveCount solveCount = new SolveCount();
+    private SolveCount solveCount;
 
     /**
      * Every field must be present and not null.
@@ -45,6 +45,28 @@ public class Card implements Comparable<Card> {
             this.lastPracticeDate = lastPracticeDate;
         }
         this.nextPracticeDate = nextPracticeDate;
+        this.solveCount = new SolveCount();
+    }
+
+    /**
+     * Every field must be present, and taking in if solveCount is provided
+     */
+    public Card(Question question, Answer answer, String difficulty, List<Tag> tags,
+                PracticeDate nextPracticeDate, PracticeDate lastPracticeDate, SolveCount solveCount) {
+        requireAllNonNull(question, answer, difficulty, tags, nextPracticeDate);
+        this.question = question;
+        this.answer = answer;
+        assert(this.question != null);
+        assert(this.answer != null);
+        this.difficulty = difficulty;
+        this.tags.addAll(tags);
+        if (lastPracticeDate == null) {
+            this.lastPracticeDate = nextPracticeDate;
+        } else {
+            this.lastPracticeDate = lastPracticeDate;
+        }
+        this.nextPracticeDate = nextPracticeDate;
+        this.solveCount = solveCount;
     }
 
     public void setDifficulty(String difficulty) {
