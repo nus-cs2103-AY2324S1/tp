@@ -269,7 +269,7 @@ Given below is an example usage senario and how the prefix completion mechanism 
 
 The following sequence diagram provides a visual representation of the prefix autocomplete operation within the `CommandBox`:
 
-![](images/PrefixCompletionSequenceDiagram.png)
+![](images/RoomType.png)
 
 #### Design Considerations:
 
