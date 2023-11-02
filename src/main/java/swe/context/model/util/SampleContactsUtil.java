@@ -26,7 +26,7 @@ public class SampleContactsUtil {
                 new Phone("87438807"),
                 new Email("e0705018@u.nus.edu"),
                 new Note("CS2103 tutorial mate."),
-                getTagSet("NUS", "CS2013 course"),
+                getTagSet("NUS", "CS2103 course"),
                 getAlternateContactSet("Telegram: amy_bee")
             ),
             new Contact(
@@ -42,7 +42,7 @@ public class SampleContactsUtil {
                 new Phone("83210283"),
                 new Email("coliveiro@comp.nus.edu.sg"),
                 new Note("CS2103 Prof."),
-                getTagSet("NUS", "CS2013 course", "prof"),
+                getTagSet("NUS", "CS2103 course", "prof"),
                 getAlternateContactSet()
             ),
             new Contact(
