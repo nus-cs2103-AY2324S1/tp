@@ -24,10 +24,12 @@ public class DeleteFieldCommand extends Command {
 
     /**
      * Constructor that creates a new DeleteFieldCommand instance.
+     * This command is data-changing, so parent constructor is called with true.
      * @param indexOfPerson
      * @param action
      */
     public DeleteFieldCommand(Index indexOfPerson, DeleteFieldAction action) {
+        super(true);
         requireAllNonNull(indexOfPerson, action);
         this.indexOfPerson = indexOfPerson;
         this.action = action;

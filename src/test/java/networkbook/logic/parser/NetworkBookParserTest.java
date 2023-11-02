@@ -21,8 +21,10 @@ import networkbook.logic.commands.ExitCommand;
 import networkbook.logic.commands.FindCommand;
 import networkbook.logic.commands.HelpCommand;
 import networkbook.logic.commands.ListCommand;
+import networkbook.logic.commands.OpenEmailCommand;
 import networkbook.logic.commands.OpenLinkCommand;
 import networkbook.logic.commands.RedoCommand;
+import networkbook.logic.commands.SaveCommand;
 import networkbook.logic.commands.SortCommand;
 import networkbook.logic.commands.UndoCommand;
 import networkbook.logic.commands.delete.DeletePersonCommand;
@@ -134,9 +136,24 @@ public class NetworkBookParserTest {
     }
 
     @Test
+    public void parseCommand_openEmail() throws Exception {
+        String userInput = OpenEmailCommand.COMMAND_WORD + " 1 " + CliSyntax.PREFIX_INDEX + " 1 ";
+        Command actualCommand = parser.parseCommand(userInput);
+        Command expectedCommand = new OpenEmailCommand(Index.fromOneBased(1), Index.fromOneBased(1));
+        assertEquals(expectedCommand, actualCommand);
+    }
+
+    @Test
     public void parseCommand_help() throws Exception {
         assertTrue(parser.parseCommand(HelpCommand.COMMAND_WORD) instanceof HelpCommand);
         assertTrue(parser.parseCommand(HelpCommand.COMMAND_WORD + " 3") instanceof HelpCommand);
+    }
+
+    @Test
+    public void parseCommand_save() throws Exception {
+        SaveCommand expectedCommand = new SaveCommand();
+        assertEquals(expectedCommand, parser.parseCommand(SaveCommand.COMMAND_WORD));
+        assertEquals(expectedCommand, parser.parseCommand(SaveCommand.COMMAND_WORD + " 3"));
     }
 
     @Test
