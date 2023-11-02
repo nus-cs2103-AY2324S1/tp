@@ -17,6 +17,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.calendar.Calendar;
 import seedu.address.model.event.Event;
+import seedu.address.model.event.exceptions.ConflictingEventException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -70,16 +71,13 @@ public class AddContactEventCommand extends Command {
 
         //Obtain the calendar of the person and tries to add an event to the person's calendar
         Person personToEdit = lastShownList.get(index.getZeroBased());
-        Calendar calendar = personToEdit.getCalendar();
-        if (!calendar.canAddEvent(event)) {
+        try {
+            personToEdit.addEvent(event);
+        } catch (ConflictingEventException e) {
             throw new CommandException(MESSAGE_EVENT_CONFLICT);
         }
-        calendar.addEvent(event);
-        Person editedPerson = createEditedPerson(personToEdit, calendar);
-        model.setPerson(personToEdit, editedPerson);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(String.format(MESSAGE_ADD_EVENT_TO_PERSON_SUCCESS,
-                editedPerson.getName(), Messages.format(event)));
+                personToEdit.getName(), Messages.format(event)));
     }
 
     /**

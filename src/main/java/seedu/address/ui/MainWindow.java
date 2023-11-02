@@ -212,7 +212,7 @@ public class MainWindow extends UiPart<Stage> {
     private void handleViewEventList(Index index) {
         Person person = logic.getFilteredPersonList().get(index.getZeroBased());
         Stage eventListStage = new Stage();
-        eventListStage.setResizable(true);
+        eventListStage.setResizable(false);
         eventListStage.setTitle(person.getName().toString() + "'s Event List");
         eventListStage.setMinHeight(POPUP_LIST_HEIGHT);
         eventListStage.setMinWidth(POPUP_LIST_WIDTH);
@@ -246,6 +246,10 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.isSwitchBottomList()) {
                 handleSwitchBottomList();
+            }
+
+            if (commandResult.isViewEvents()) {
+                handleViewEventList(commandResult.getEventViewIndex());
             }
 
             return commandResult;

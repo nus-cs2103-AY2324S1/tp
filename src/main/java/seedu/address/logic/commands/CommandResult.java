@@ -11,7 +11,7 @@ import seedu.address.commons.util.ToStringBuilder;
  * Represents the result of a command execution.
  */
 public class CommandResult {
-    private static final int INVALID_INDEX = -1;
+    private static final int INVALID_INDEX = -2;
 
     private final String feedbackToUser;
 
@@ -24,7 +24,7 @@ public class CommandResult {
     /** The application should show the task list in the bottom list slot. */
     private final boolean switchBottomList;
 
-    private final Index eventViewIndex;
+    private final viewEventsIndicator eventViewIndex;
 
     /**
      * Constructs a {@code CommandResult} with the specified fields.
@@ -34,7 +34,7 @@ public class CommandResult {
         this.showHelp = showHelp;
         this.exit = exit;
         this.switchBottomList = switchBottomList;
-        this.eventViewIndex = Index.fromOneBased(INVALID_INDEX);
+        this.eventViewIndex = new viewEventsIndicator(INVALID_INDEX);
     }
 
     /**
@@ -54,7 +54,7 @@ public class CommandResult {
         this.showHelp = false;
         this.exit = false;
         this.switchBottomList = false;
-        this.eventViewIndex = eventViewIndex;
+        this.eventViewIndex = new viewEventsIndicator(eventViewIndex.getOneBased());
     }
 
     public String getFeedbackToUser() {
@@ -71,6 +71,14 @@ public class CommandResult {
 
     public boolean isSwitchBottomList() {
         return switchBottomList;
+    }
+
+    public Index getEventViewIndex() {
+        return eventViewIndex.getIndex();
+    }
+
+    public boolean isViewEvents() {
+        return eventViewIndex.isViewEvents();
     }
 
     @Override
@@ -104,6 +112,39 @@ public class CommandResult {
                 .add("exit", exit)
                 .add("switchBottomList", switchBottomList)
                 .toString();
+    }
+
+    /**
+     * An indicator class to indicate if an event list is being viewed.
+     */
+    private static class viewEventsIndicator {
+        private static final int MINIMUM_INDEX = 1;
+        private final Index index;
+        private final boolean isViewEvents;
+
+        /**
+         * Constructs a valid indicator if the index is above 1 and an invalid one otherwise.
+         */
+        private viewEventsIndicator(int index) {
+            if (index >= MINIMUM_INDEX) {
+                this.index = Index.fromOneBased(index);
+                isViewEvents = true;
+            } else {
+                this.index = Index.fromOneBased(MINIMUM_INDEX);
+                isViewEvents = false;
+            }
+        }
+
+        /**
+         * Checks if the result requires events to be viewed.
+         */
+        private boolean isViewEvents() {
+            return isViewEvents;
+        }
+
+        private Index getIndex() {
+            return index;
+        }
     }
 
 }
