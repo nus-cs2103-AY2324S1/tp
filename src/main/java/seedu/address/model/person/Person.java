@@ -8,8 +8,8 @@ import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.model.calendar.UniMateCalendar;
 import seedu.address.model.calendar.ReadOnlyCalendar;
+import seedu.address.model.calendar.UniMateCalendar;
 import seedu.address.model.tag.Tag;
 
 /**

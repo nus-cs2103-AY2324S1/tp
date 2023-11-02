@@ -1,7 +1,7 @@
 package seedu.address.model.util;
 
-import seedu.address.model.calendar.UniMateCalendar;
 import seedu.address.model.calendar.ReadOnlyCalendar;
+import seedu.address.model.calendar.UniMateCalendar;
 import seedu.address.model.event.Event;
 import seedu.address.model.event.EventDescription;
 import seedu.address.model.event.EventPeriod;

@@ -191,8 +191,13 @@ public class UniMateCalendar implements ReadOnlyCalendar {
         return false;
     }
 
-    @Override
-    public ReadOnlyCalendar combineCalendar(ReadOnlyCalendar other) {
+    /**
+     * Combine this calendar with another calendar, disregarding conflicts in events.
+     *
+     * @param other other calendar to be combined.
+     * @return new calendar with events from both calendars.
+     */
+    public UniMateCalendar combineCalendar(UniMateCalendar other) {
         requireNonNull(other);
 
         UniMateCalendar combinedCalendar = new UniMateCalendar();

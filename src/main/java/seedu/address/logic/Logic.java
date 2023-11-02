@@ -1,6 +1,5 @@
 package seedu.address.logic;
 
-import java.io.File;
 import java.nio.file.Path;
 
 import javafx.collections.ObservableList;
@@ -25,14 +24,6 @@ public interface Logic {
      * @throws ParseException If an error occurs during parsing.
      */
     CommandResult execute(String commandText) throws CommandException, ParseException;
-
-    /**
-     * Handle importing of a calendar file.
-     *
-     * @param calendarFile calendar file to be imported.
-     * @return the result of ths import task execution.
-     */
-    CommandResult importUserCalendar(File calendarFile);
 
     /**
      * Returns the AddressBook.

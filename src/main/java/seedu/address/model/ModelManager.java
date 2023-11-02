@@ -15,8 +15,8 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.model.calendar.UniMateCalendar;
 import seedu.address.model.calendar.ReadOnlyCalendar;
+import seedu.address.model.calendar.UniMateCalendar;
 import seedu.address.model.event.Event;
 import seedu.address.model.event.EventPeriod;
 import seedu.address.model.event.exceptions.EventNotFoundException;
@@ -151,6 +151,11 @@ public class ModelManager implements Model {
 
     @Override
     public ReadOnlyCalendar getCalendar() {
+        return calendar;
+    }
+
+    @Override
+    public UniMateCalendar getUnderlyingCalendar() {
         return calendar;
     }
 

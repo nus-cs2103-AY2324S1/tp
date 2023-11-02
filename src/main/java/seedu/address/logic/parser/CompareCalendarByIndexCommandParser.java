@@ -21,9 +21,6 @@ public class CompareCalendarByIndexCommandParser implements Parser<CompareCalend
         try {
             String personIndexString = userInput.trim();
             String[] personIndexArray = personIndexString.split(splitRegex);
-            if (personIndexArray.length == 0) {
-                throw new RuntimeParseException();
-            }
             List<Index> indexList = Arrays.stream(personIndexArray)
                     .map(ParserUtil::parseIndexSafe)
                     .collect(Collectors.toList());
