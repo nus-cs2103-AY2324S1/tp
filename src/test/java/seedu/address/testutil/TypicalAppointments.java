@@ -17,7 +17,7 @@ public class TypicalAppointments {
     public static final Appointment ALICE_SECOND_APPOINTMENT = new AppointmentBuilder().withName("Alice Pauline")
             .withDate("2023-11-16").withStartTime("14:00").withEndTime("15:00")
             .withDescription("Second Session").build();
-    public static final Appointment BERNICE_APPOINTMENT = new AppointmentBuilder().withName("Benson Yu")
+    public static final Appointment BENNY_APPOINTMENT = new AppointmentBuilder().withName("Benny Dover")
             .withDate("2023-11-16").withStartTime("16:00").withEndTime("17:00")
             .withDescription("First Session").build();
     public static final Appointment JOHN_APPOINTMENT = new AppointmentBuilder().withName("John Tan")
@@ -40,6 +40,6 @@ public class TypicalAppointments {
 
 
     public static List<Appointment> getTypicalAppointments() {
-        return new ArrayList<>(Arrays.asList(ALICE_APPOINTMENT, ALICE_SECOND_APPOINTMENT, BERNICE_APPOINTMENT));
+        return new ArrayList<>(Arrays.asList(ALICE_APPOINTMENT, ALICE_SECOND_APPOINTMENT, BENNY_APPOINTMENT));
     }
 }

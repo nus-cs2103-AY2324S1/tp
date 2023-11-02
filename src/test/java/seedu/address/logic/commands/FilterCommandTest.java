@@ -7,7 +7,7 @@ import static seedu.address.logic.Messages.MESSAGE_APPOINTMENTS_LISTED_OVERVIEW;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalAppointments.ALICE_APPOINTMENT;
 import static seedu.address.testutil.TypicalAppointments.ALICE_SECOND_APPOINTMENT;
-import static seedu.address.testutil.TypicalAppointments.BERNICE_APPOINTMENT;
+import static seedu.address.testutil.TypicalAppointments.BENNY_APPOINTMENT;
 import static seedu.address.testutil.TypicalWellNus.getTypicalWellNus;
 
 import java.util.Arrays;
@@ -74,7 +74,7 @@ public class FilterCommandTest {
         expectedModel.updateFilteredAppointmentList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(expectedModel.getFilteredAppointmentList(), Arrays.asList(ALICE_SECOND_APPOINTMENT,
-                BERNICE_APPOINTMENT));
+                BENNY_APPOINTMENT));
     }
 
     @Test

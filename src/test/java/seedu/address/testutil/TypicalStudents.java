@@ -23,7 +23,7 @@ public class TypicalStudents {
     public static final Student ALICE = new StudentBuilder().withName("Alice Pauline")
             .withAddress("123, Jurong West Ave 6, #08-111").withPhone("94351253")
             .withTags("high").withNote("course: computer science").build();
-    public static final Student BENSON = new StudentBuilder().withName("Benson Meier")
+    public static final Student BENNY = new StudentBuilder().withName("Benny Dover")
             .withAddress("311, Clementi Ave 2, #02-25")
             .withPhone("98765432")
             .withTags("medium").withNote("Likes dogs").build();
@@ -44,17 +44,22 @@ public class TypicalStudents {
     public static final Student IDA = new StudentBuilder().withName("Ida Mueller").withPhone("84821310")
             .withAddress("chicago ave").build();
 
+    // To be used in conjunction with default appointment builder to test in ScheduleCommandTest
+    public static final Student JON_ANG = new StudentBuilder().withName("Jon Ang").withPhone("97980852")
+            .withAddress("Blk 349 Woodlands Ave 3").build();
+
     // Manually added - Student's details found in {@code CommandTestUtil}
     public static final Student AMY = new StudentBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
             .withAddress(VALID_ADDRESS_AMY).withTags(VALID_RISK_LEVEL_HIGH).build();
     public static final Student BOB = new StudentBuilder().withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
             .withAddress(VALID_ADDRESS_BOB).withTags(VALID_RISK_LEVEL_LOW).build();
 
+
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
 
     private TypicalStudents() {} // prevents instantiation
 
     public static List<Student> getTypicalStudents() {
-        return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));
+        return new ArrayList<>(Arrays.asList(ALICE, BENNY, CARL, DANIEL, ELLE, FIONA, GEORGE));
     }
 }

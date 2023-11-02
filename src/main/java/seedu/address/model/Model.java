@@ -84,6 +84,8 @@ public interface Model {
 
     boolean hasOverlapsWithAppointments(Appointment appointment);
 
+    boolean hasNoStudentForAppointment(Appointment appointment);
+
     void addAppointment(Appointment appointment);
 
     /**
