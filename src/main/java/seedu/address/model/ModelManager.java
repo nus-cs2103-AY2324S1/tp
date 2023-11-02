@@ -5,6 +5,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 import java.util.function.Predicate;
@@ -20,6 +21,7 @@ import seedu.address.model.event.Meeting;
 import seedu.address.model.group.Group;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.PersonNameOrGroupContainsKeywordsPredicate;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -177,6 +179,11 @@ public class ModelManager implements Model {
     @Override
     public ObservableList<Person> getFilteredPersonList() {
         return this.filteredPersons;
+    }
+
+    @Override
+    public ObservableList<Person> getFullPersonList() {
+        return this.addressBook.getPersonList();
     }
 
     /**
