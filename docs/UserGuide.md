@@ -149,8 +149,8 @@ Format: `list attendance w/WEEKNUMBER [tg/TUTORIALGROUPID]`
 * `TUTORIALGROUPID` is optional.
 
 Examples:
-* `list attendance w/1` Shows a summary of attendance records of all students for Week 1.
-* `list attendance w/3 tg/G01` Shows a summary of attendance records of the students in the tutorial group G01 for Week 3.
+* `list attendance w/1` Shows a list of absentees and a summary of attendance records of all students in the course for Week 1.
+* `list attendance w/3 tg/G01` Shows a list of absentees and a summary of attendance records of the students in the tutorial group G01 in the course for Week 3.
 
 ### Searching for student's contact via keyword : `find`
 
@@ -249,12 +249,13 @@ Deletes all students from current address book or the specified tutorial group i
 
 Format: `delete all [tg/TUTORIALGROUPID]`
 
-* Deletes all students in the current course or the students from the specified tutorial group in the current course.
+* If tutorial group is specified, deletes all students corresponding to the specified tutorial group in the course.
+* If tutorial group is not specified, deletes all students in the course.
 * `TUTORIALGROUPID` is optional.
 
 Examples:
-* `delete all` deletes all students from the current course.
-* `delete all tg/G02` deletes all students from tutorial group G02 in the current course.
+* `delete all` deletes all students from the course.
+* `delete all tg/G02` deletes all students from tutorial group G02 in the course.
 
 ### Merging two students : `merge`
 
