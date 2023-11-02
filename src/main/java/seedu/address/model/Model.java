@@ -82,6 +82,16 @@ public interface Model {
     ReadOnlyCalendar getCalendar();
 
     /**
+     * Sets the user prefs' task manager file path.
+     */
+    void setTaskManagerFilePath(Path taskManagerFilePath);
+
+    /**
+     * Returns the user prefs' task manager file path.
+     */
+    Path getTaskManagerFilePath();
+
+    /**
      * Returns true if a person with the same identity as {@code person} exists in the address book.
      */
     boolean hasPerson(Person person);
