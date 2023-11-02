@@ -142,7 +142,7 @@ public class MarkCommand extends Command {
         if (indexes.size() == 1) {
             Person employeeToMark = fullList.get(indexes.get(0) - 1);
             Person markedEmployee = markEmployee(employeeToMark);
-            if (markedEmployee.getWorkingStatusToday() == AttendanceType.ON_LEAVE) {
+            if (markedEmployee.getWorkingStatusToday().equals(AttendanceType.ON_LEAVE)) {
                 throw new CommandException(MESSAGE_PERSON_ON_LEAVE);
             }
 

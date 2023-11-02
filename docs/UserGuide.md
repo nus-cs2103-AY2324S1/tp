@@ -96,9 +96,9 @@ Refer to [Command Summary](#command-summary) below for a summary of all commands
 ### Parameter formats
 * All parameters provided must be in the correct format.<br>
 
-  | Prefix | Parameter      | Format                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 | Example                     |
-      |--------|----------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------|
-  | `/n`   | `NAME`         | non-empty and non-blank alphanumeric string                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            | `/n jibtaf`                 |
+| Prefix | Parameter      | Format                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 | Example                     |
+|--------|----------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------|
+| `/n`   | `NAME`         | non-empty and non-blank alphanumeric string                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            | `/n jibtaf`                 |
   | `/p`   | `PHONE`        | string containing at least 3 integers                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  | `/p 98988989`               |
   | `/e`   | `EMAIL`        | local-part@domain<br/>1. The local-part should only contain alphanumeric characters and `+`, `_`, `.`, `-`. It may not start or end with any special characters.<br/>2. This is followed by a '@' and then a domain name. The domain name is made up of domain labels separated by periods.<br/>The domain name must:<br/>    - end with a domain label at least 2 characters long<br/>    - have each domain label start and end with alphanumeric characters<br/>    - have each domain label consist of alphanumeric characters, separated only by hyphens, if any. | `/e john_doe@u.nus.edu`     |
   | `/a`   | `ADDRESS`      | non-empty and non-blank alphanumeric string                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            | `/a PGPR, Singapore 118420` |
@@ -443,7 +443,7 @@ Output:
   ![result for unknown benefit reason](images/unknownBenefitReason.png)
 
 
-### Calculating payroll of an employee: `payroll`
+### Calculating an employee's payroll : `payroll`
 
 **What it does**
 
@@ -464,8 +464,13 @@ Examples:
 
 Output:
 * ManaGease should display the payroll of the employee specified by the `INDEX` or `NAME`, if the input is valid.
-* If the index is not within the numbers in the list, the app should display `Please enter a valid index number`.
-* If the command is incorrect, the app should display `Please use the following format to read information : read INDEX INFORMATION`.
+  ![result for generating payslip](images/payrollSuccess.png)
+* If the index is not within the numbers in the list, the app should display `The employee index provided is invalid`.
+  ![result for incorrect index](images/incorrectPayrollIndex.png)
+* If there are more than one employee with the same name in the command, the app will display `x employees found! Refer to their indexes for payroll calculation` and will list down those employees for the user to view. The user should then use their index numbers to calculate the payroll.
+  ![result for same name](images/payrollWithSameName.png)
+* If the command is incorrect, the app should display `Invalid command format!`.
+  ![result for incorrect payroll command](images/incorrectPayrollCommand.png)
 
 
 ### Generating payslips for an employee: `payslip`
@@ -503,6 +508,57 @@ Output:
   ![result for incorrect payslip command](images/incorrectPayslipCommand.png)
 * If the date provided is not in the correct format, the app should display the following message.
   ![result for incorrect payslip date format](images/incorrectDateFormat.png)
+
+### Marking employee's attendance : `mark`
+
+**What it does**
+
+Marks the indicated employee as “Absent”, “Late”, or “Present”.
+
+**Command Format**
+
+`mark INDEX /at Attendance_Type` or `mark /n NAME /at Attendance_Type`
+
+* The attendance type can only be: `ABSENT`, `LATE`, or `PRESENT`.
+* It is not case-insensitive. e.g. you can either enter ABSENT or absent.
+
+Examples:
+
+* `mark n/John /at Absent` marks John as absent.
+* `mark 1 /at Present` marks the first employee in the current list to be present.
+
+Output:
+* If the index is not within the numbers in the list, the app should display `The employee index provided is invalid.`
+  ![result for incorrect mark index](images/incorrectMarkIndex.png)
+* If the command is incorrect, the app should display `Invalid command format!`
+  ![result for incorrect command](images/incorrectMarkCommand.png)
+* If the ATTENDANCE_TYPE is not within the valid list, the app should display `Invalid attendance type, only Absent, Late and Present are allowed.`
+  ![result for incorrect attendance type](images/incorrectAttendanceType.png)
+* If the command is successful, the app should display `Successfully marked NAME as ATTENDANCE TYPE`. The addressbook’s display of the employee’s attendance status should also be updated accordingly.
+  ![result for marking an employee to be absent](images/markSuccess.png)
+
+### View employees’s attendance report : `attendance`
+
+**What it does**
+
+View employee’s attendance report.
+
+**Command Format**
+
+`attendance INDEX` or `attendance /n NAME`
+
+Examples:
+
+* `attendance /n John` views John’s attendance report for the year up till today.
+* `attendance 1` views the first employee’s attendance report in the current list.
+
+Output:
+* If the index is not within the numbers in the list, the app should display `The employee index provided is invalid.`
+  ![result for incorrect attendance index](images/incorrectAttendanceIndex.png)
+* If the command is incorrect, the app should display `Invalid command format!`
+  ![result for incorrect command](images/incorrectAttendanceCommand.png)
+* If the command is successful, the app should display the attendance. The address book’s display of the employee’s attendance status.
+  ![result for attendance report](images/attendanceSuccess.png)
 
 
 ### Listing all employees: `list`
@@ -591,27 +647,29 @@ If your changes to the data file makes its format invalid, Managease will discar
 
 ## Command summary
 
-| Action                                                                 | Format and Examples                                                                                                                                                                                                         |
-|------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **[Add](#adding-a-employee-add)**                                      | `add /n NAME /e EMAIL /p PHONE /a ADDRESS /b BANK_ACCOUNT /jd JOIN_DATE /s SALARY /l ANNUAL_LEAVE`<br /> e.g., `add /n Jane Smith /e jane@email.com /p 12345678 /a 123 Main St /b 123456789/jd 12/09/2023 /s 1000.00 /l 10` |
-| **[Clear](#clearing-all-entries-clear)**                               | `clear`                                                                                                                                                                                                                     |
-| **[Delete](#deleting-a-employee-delete)**                              | `delete INDEX`<br /> e.g., `delete 3`                                                                                                                                                                                       |
-| **[Edit](#editing-a-employee-edit)**                                   | `edit INDEX [/n NAME] [/e EMAIL] [/p PHONE] [/a ADDRESS] [/b BANK_ACCOUNT] [/jd JOIN_DATE] [/s SALARY] [/l ANNUAL_LEAVE]`<br /> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                            |
-| **[Read](#reading-a-employees-information-read)**                      | `read INDEX PREFIX`<br /> e.g., `read 3 /n`                                                                                                                                                                                 |
-| **[List](#listing-all-employees-list)**                                | `list`                                                                                                                                                                                                                      |
-| **[Find](#locating-employees-by-name-find)**                           | `find KEYWORD [MORE_KEYWORDS]`<br /> e.g., `find alex`                                                                                                                                                                      |
+| Action                                                            | Format and Examples                                                                                                                                                                                                         |
+|-------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **[Add](#adding-a-employee-add)**                                 | `add /n NAME /e EMAIL /p PHONE /a ADDRESS /b BANK_ACCOUNT /jd JOIN_DATE /s SALARY /l ANNUAL_LEAVE`<br /> e.g., `add /n Jane Smith /e jane@email.com /p 12345678 /a 123 Main St /b 123456789/jd 12/09/2023 /s 1000.00 /l 10` |
+| **[Clear](#clearing-all-entries-clear)**                          | `clear`                                                                                                                                                                                                                     |
+| **[Delete](#deleting-a-employee-delete)**                         | `delete INDEX`<br /> e.g., `delete 3`                                                                                                                                                                                       |
+| **[Edit](#editing-a-employee-edit)**                              | `edit INDEX [/n NAME] [/e EMAIL] [/p PHONE] [/a ADDRESS] [/b BANK_ACCOUNT] [/jd JOIN_DATE] [/s SALARY] [/l ANNUAL_LEAVE]`<br /> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                            |
+| **[Read](#reading-a-employees-information-read)**                 | `read INDEX PREFIX`<br /> e.g., `read 3 /n`                                                                                                                                                                                 |
+| **[List](#listing-all-employees-list)**                           | `list`                                                                                                                                                                                                                      |
+| **[Find](#locating-employees-by-name-find)**                      | `find KEYWORD [MORE_KEYWORDS]`<br /> e.g., `find alex`                                                                                                                                                                      |
 | **[Deduct](#adding-a-deduction-to-the-payroll-of-an-employee-deduct)** | `deduct INDEX /v VALUE /r REASON` or `deduct /n NAME /v VALUE /r REASON`<br /> e.g., `deduct 3 /v 200.00 /r cpf`                                                                                                            |
 | **[Benefit](#adding-a-benefit-to-the-payroll-of-an-employee-benefit)** | `benefit INDEX /v VALUE /r REASON` or `benefit /n NAME /v VALUE /r REASON`<br /> e.g., `benefit 3 /v 1000.00 /r bonus`                                                                                                      |
-| **[Payroll](#calculating-payroll-of-an-employee-payroll)**             | `payroll INDEX` or `payroll /n NAME`<br /> e.g., `payroll 3`                                                                                                                                                                |
-| **[Payslip](#generating-payslips-for-an-employee-payslip)**            | `payslip INDEX [/t DD/MM/YYYY]` or `payslip /n NAME [/t DD/MM/YYYY]`<br /> e.g., `payslip 3`                                                                                                                                |
-| **[Add Leave](#adding-leave-to-an-employee-addleave)**                 | `addleave INDEX /on DATE` or `addleave INDEX /from DATE /to DATE`<br /> e.g., `addleave 3 /from 12/12/2024 /to 14/12/2024`                                                                                                  |
-| **[Delete Leave](#deleting-leave-from-an-employee-deleteleave)**       | `deleteleave INDEX /on DATE` or `deleteleave INDEX /from DATE /to DATE`<br /> e.g., `deleteleave 3 /from 12/12/2024 /to 14/12/2024`                                                                                         |
-| **[View Leave](#view-employee-who-is-on-leave-viewleave)**             | `viewleave /on DATE`<br /> e.g., `viewleave /on 12/12/2024`                                                                                                                                                                 |
-| **[View Previous Month](#view-the-calendar-of-previous-month-pm)**     | `pm`                                                                                                                                                                                                                        |
-| **[View Current Month](#view-the-calendar-of-current-month-cm)**       | `cm`                                                                                                                                                                                                                        |
-| **[View Next Month](#view-the-calendar-of-upcoming-month-nm)**         | `nm`                                                                                                                                                                                                                        |
-| **[Help](#viewing-help-help)**                                         | `help`                                                                                                                                                                                                                      |
-| **[Exit](#exiting-the-program-exit)**                                  | `exit`                                                                                                                                                                                                                      |
+| **[Payroll](#calculating-payroll-of-an-employee-payroll)**        | `payroll INDEX` or `payroll /n NAME`<br /> e.g., `payroll 3`                                                                                                                                                                |
+| **[Payslip](#generating-payslips-for-an-employee-payslip)**       | `payslip INDEX [/t DD/MM/YYYY]` or `payslip /n NAME [/t DD/MM/YYYY]`<br /> e.g., `payslip 3`                                                                                                                                |
+| **[Add Leave](#adding-leave-to-an-employee-addleave)**            | `addleave INDEX /on DATE` or `addleave INDEX /from DATE /to DATE`<br /> e.g., `addleave 3 /from 12/12/2024 /to 14/12/2024`                                                                                                  |
+| **[Delete Leave](#deleting-leave-from-an-employee-deleteleave)**  | `deleteleave INDEX /on DATE` or `deleteleave INDEX /from DATE /to DATE`<br /> e.g., `deleteleave 3 /from 12/12/2024 /to 14/12/2024`                                                                                         |
+| **[View Leave](#view-employee-who-is-on-leave-viewleave)**        | `viewleave /on DATE`<br /> e.g., `viewleave /on 12/12/2024`                                                                                                                                                                 |
+| **[View Previous Month](#view-the-calendar-of-previous-month-pm)** | `pm`                                                                                                                                                                                                                        |
+| **[View Current Month](#view-the-calendar-of-current-month-cm)**  | `cm`                                                                                                                                                                                                                        |
+| **[View Next Month](#view-the-calendar-of-upcoming-month-nm)**    | `nm`                                                                                                                                                                                                                        |
+| **[Mark](#mark-the-attendance-type-of-an-enployee)**              | `mark INDEX /at ATTENDANCE_TYPE` or `mark /n NAME /at ATTENDANCE_TYPE`<br /> e.g, `mark 3 /at present`                                                                                                                      |
+| **[Attendance](#view-the-attendance-list-of-an-enployee)**        | `attendance INDEX` or `attendance /n NAME`<br /> e.g, `attendance 3`                                                                                                                                                        |
+| **[Help](#viewing-help-help)**                                    | `help`                                                                                                                                                                                                                      |
+| **[Exit](#exiting-the-program-exit)**                             | `exit`                                                                                                                                                                                                                      |
 
 
 * Go back to [Features](#features)

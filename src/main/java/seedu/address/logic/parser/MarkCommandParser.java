@@ -46,33 +46,33 @@ public class MarkCommandParser implements Parser<MarkCommand> {
         Index index;
 
         try {
-            index = ParserUtil.parseIndex(argMultimap.getPreamble());
             AttendanceType attendanceType =
                     ParserUtil.parseAttendanceType(argMultimap.getValue(PREFIX_ATTENDANCE_TYPE).get());
+            index = ParserUtil.parseIndex(argMultimap.getPreamble());
             return new MarkCommand(index, attendanceType);
         } catch (ParseException e) {
-            if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
-                String name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()).toString();
-                String[] nameKeywords = name.split("\\s+");
-                AttendanceType attendanceType =
-                        ParserUtil.parseAttendanceType(argMultimap.getValue(PREFIX_ATTENDANCE_TYPE).get());
-
-                return new MarkCommand(
-                        new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords)),
-                        attendanceType
-                );
-
-
+            if (e.getMessage().equals(AttendanceType.MESSAGE_CONSTRAINTS)) {
+                throw new ParseException(AttendanceType.MESSAGE_CONSTRAINTS);
             } else {
-                throw new ParseException(
-                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, MarkCommand.MESSAGE_USAGE_FOR_NAME));
+                if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
+                    String name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()).toString();
+                    String[] nameKeywords = name.split("\\s+");
+                    AttendanceType attendanceType =
+                            ParserUtil.parseAttendanceType(argMultimap.getValue(PREFIX_ATTENDANCE_TYPE).get());
+
+                    return new MarkCommand(
+                            new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords)),
+                            attendanceType
+                    );
+
+
+                } else {
+                    throw new ParseException(
+                            String.format(MESSAGE_INVALID_COMMAND_FORMAT, MarkCommand.MESSAGE_USAGE_FOR_NAME));
+                }
+
             }
-
         }
-
-
-
     }
-
 
 }
