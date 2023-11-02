@@ -781,12 +781,12 @@ Deletes a schedule from TutorConnect.
 
 Imagine the schedule assigned to **Bernice Yu** on **15 September 9am to 11am** has been cancelled, and you want to remove the schedule.
 
-No worries! Let the delete schedule command help you to remove the specific schedule from the tutor list.
+No worries! Let the delete schedule command help you!
 
 **Follow these steps**
 
 1. Type `list-s` and press enter to get the index number of the schedule to be deleted.
-2. Let's say the schedule to be deleted is in position 1 of the tutor list.
+2. Let's say the schedule to be deleted is in position 1 of the schedule list.
 3. Type `delete-s 1` and press enter.
 
 **What you can expect to see**
@@ -805,10 +805,10 @@ Well done! You have deleted the schedule assigned to **Bernice Yu**.
 
 Here is a list of the error messages you may encounter, when the command is entered incorrectly:
 
-| Error Message                          | Reason                                                       |
-|----------------------------------------|--------------------------------------------------------------|
-| `Invalid command format!`              | Invalid or missing `SCHEDULE_INDEX`.                           |
-| `The person index provided is invalid` | `SCHEDULE_INDEX` entered is not in the range of number of tutors. |
+| Error Message                            | Reason                                                       |
+|------------------------------------------|--------------------------------------------------------------|
+| `Invalid command format!`                | Invalid or missing `SCHEDULE_INDEX`.                           |
+| `The schedule index provided is invalid` | `SCHEDULE_INDEX` entered is not in the range of number of tutors. |
 
 You can also refer to [input information](#input-examples) for details about valid inputs.
 
