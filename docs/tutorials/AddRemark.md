@@ -8,7 +8,7 @@
 
 Let's walk you through the implementation of a new command — `remark`.
 
-This command allows users of the LoveBook application to add optional remarks to people in their height book and edit it if required. The command should have the following format:
+This command allows users of the LoveBook application to add optional remarks to people in their love book and edit it if required. The command should have the following format:
 
 `remark INDEX r/REMARK` (e.g., `remark 2 r/Likes baseball`)
 
@@ -247,7 +247,7 @@ Without getting too deep into `fxml`, let’s go on a 5 minute adventure to get 
 
 Simply add the following to [`seedu.lovebook.ui.DateCard`](https://github.com/se-edu/LoveBook-level3/commit/850b78879582f38accb05dd20c245963c65ea599#diff-639834f1e05afe2276a86372adf0fe5f69314642c2d93cfa543d614ce5a76688).
 
-**`PersonCard.java`:**
+**`DateListCard.java`:**
 
 ```java
 @FXML
@@ -271,7 +271,7 @@ That’s it! Fire up the application again and you should see something like thi
 
 ## Modify `Person` to support a `Remark` field
 
-Since `PersonCard` displays data from a `Person`, we need to update `Person` to get our `Remark` displayed!
+Since `DateListCard` displays data from a `Person`, we need to update `Person` to get our `Remark` displayed!
 
 ### Modify `Person`
 
@@ -292,13 +292,13 @@ Refer to [this commit](https://github.com/se-edu/LoveBook-level3/commit/ce998c37
 
 ## Updating Storage
 
-LoveBook stores data by serializing `JsonAdaptedPerson` into `json` with the help of an external library — Jackson. Let’s update `JsonAdaptedPerson` to work with our new `Person`!
+LoveBook stores data by serializing `JsonAdaptedDate` into `json` with the help of an external library — Jackson. Let’s update `JsonAdaptedDate` to work with our new `Person`!
 
 While the changes to code may be minimal, the test data will have to be updated as well.
 
 <box type="warning" seamless>
 
-You must delete LoveBook’s storage file located at `/data/LoveBook.json` before running it! Not doing so will cause LoveBook to default to an empty height book!
+You must delete LoveBook’s storage file located at `/data/LoveBook.json` before running it! Not doing so will cause LoveBook to default to an empty love book!
 
 </box>
 
@@ -311,10 +311,10 @@ Now that we have finalized the `Person` class and its dependencies, we can now b
 
 Just add [this one line of code!](https://github.com/se-edu/LoveBook-level3/commit/5b98fee11b6b3f5749b6b943c4f3bd3aa049b692)
 
-**`PersonCard.java`:**
+**`DateListCard.java`:**
 
 ```java
-public PersonCard(Person date, int displayedIndex) {
+public DateListCard(Person date, int displayedIndex) {
     //...
     remark.setText(date.getRemark().value);
 }

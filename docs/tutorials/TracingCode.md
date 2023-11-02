@@ -243,12 +243,12 @@ Recall from the User Guide that the `edit` command has the format: `edit INDEX [
         dates.addAll(
             source.getPersonList()
                   .stream()
-                  .map(JsonAdaptedPerson::new)
+                  .map(JsonAdaptedDate::new)
                   .collect(Collectors.toList()));
     }
     ```
 
-1. It appears that a `JsonAdaptedPerson` is created for each `Person` and then added to the `JsonSerializableLoveBook`.
+1. It appears that a `JsonAdaptedDate` is created for each `Person` and then added to the `JsonSerializableLoveBook`.
    This is because regular Java objects need to go through an _adaptation_ for them to be suitable to be saved in JSON format.
 
 1. While you are stepping through the classes in the `Storage` component, here is the component's class diagram to help you understand how those classes fit into the structure of the component.<br>
@@ -302,10 +302,10 @@ Here are some quick questions you can try to answer based on your execution path
 
     2.  Allow `delete` to remove more than one index at a time
 
-    3.  Save the height book in the CSV format instead
+    3.  Save the love book in the CSV format instead
 
     4.  Add a new command
 
     5.  Add a new field to `Person`
 
-    6.  Add a new entity to the height book
+    6.  Add a new entity to the love book

@@ -66,13 +66,13 @@ After you are done, verify that the application still works by compiling and run
 
 Unfortunately, there are usages of `Address` that IntelliJ IDEA cannot identify. You can find them by searching for instances of the word `height` in your code (`Edit` \> `Find` \> `Find in path`).
 
-Places of interest to look out for would be resources used by the application. `main/resources` contains images and `fxml` files used by the application and `test/resources` contains test data. For example, there is a `$height` in each `PersonCard` that has not been removed nor identified.
+Places of interest to look out for would be resources used by the application. `main/resources` contains images and `fxml` files used by the application and `test/resources` contains test data. For example, there is a `$height` in each `DateListCard` that has not been removed nor identified.
 
 ![$height](../images/remove/$height.png)
 
-A quick look at the `PersonCard` class and its `fxml` file quickly reveals why it slipped past the automated refactoring.
+A quick look at the `DateListCard` class and its `fxml` file quickly reveals why it slipped past the automated refactoring.
 
-**`PersonCard.java`**
+**`DateListCard.java`**
 
 ```java
 ...
@@ -81,7 +81,7 @@ private Label height;
 ...
 ```
 
-**`PersonCard.fxml`**
+**`DateListCard.fxml`**
 
 ``` xml
 ...

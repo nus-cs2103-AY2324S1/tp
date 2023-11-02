@@ -7,18 +7,24 @@ skinparam classBackgroundColor MODEL_COLOR
 Package Model as ModelPackage <<Rectangle>>{
 Class "<<interface>>\nReadOnlyLoveBook" as ReadOnlyLoveBook
 Class "<<interface>>\nReadOnlyUserPrefs" as ReadOnlyUserPrefs
+Class "<<interface>>\nReadOnlyDatePrefs" as ReadOnlyDatePrefs
 Class "<<interface>>\nModel" as Model
+
 Class LoveBook
 Class ModelManager
 Class UserPrefs
+Class DatePrefs
 
-Class UniquePersonList
-Class Person
-Class Address
+Class UniqueDateList
+Class Date
+Class Horoscope
 Class Gender
 Class Name
 Class Age
-Class Tag
+Class Height
+Class Income
+Class Avatar
+Class Star
 
 Class I #FFFFFF
 }
@@ -28,27 +34,36 @@ HiddenOutside ..> Model
 
 LoveBook .up.|> ReadOnlyLoveBook
 
-ModelManager .up.|> Model
 Model .right.> ReadOnlyUserPrefs
 Model .left.> ReadOnlyLoveBook
-ModelManager -left-> "1" LoveBook
+Model .down.> ReadOnlyDatePrefs
+ModelManager .up.|> Model
+
+ModelManager -left-> "1" DatePrefs
 ModelManager -right-> "1" UserPrefs
+ModelManager -down-> "1" LoveBook
 UserPrefs .up.|> ReadOnlyUserPrefs
+DatePrefs .up.|> ReadOnlyDatePrefs
 
-LoveBook *--> "1" UniquePersonList
-UniquePersonList --> "~* all" Person
-Person *--> Name
-Person *--> Age
-Person *--> Gender
-Person *--> Address
-Person *--> "*" Tag
+LoveBook *--> "1" UniqueDateList
+UniqueDateList --> "~* all" Date
+Date *--> Name
+Date *--> Age
+Date *--> Gender
+Date *--> Income
+Date *--> Height
+Date *--> Horoscope
+Date *--> Star
+Date *--> Avatar
 
-Person -[hidden]up--> I
-UniquePersonList -[hidden]right-> I
+Date -[hidden]up--> I
+UniqueDateList -[hidden]right-> I
 
 Name -[hidden]right-> Age
-Age -[hidden]right-> Address
-Address -[hidden]right-> Gender
+Age -[hidden]right-> Gender
+Gender -[hidden]right-> Income
+Income -[hidden]right-> Height
+Height -[hidden]right-> Horoscope
 
-ModelManager --> "~* filtered" Person
+ModelManager --> "~* filtered" Date
 @enduml

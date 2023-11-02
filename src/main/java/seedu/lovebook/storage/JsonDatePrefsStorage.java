@@ -17,12 +17,12 @@ import seedu.lovebook.model.ReadOnlyDatePrefs;
 /**
  * A class to access DatePrefs data stored as a json file on the hard disk.
  */
-public class JsonLoveBookDatePrefs implements DatePrefsStorage {
-    private static final Logger logger = LogsCenter.getLogger(JsonLoveBookDatePrefs.class);
+public class JsonDatePrefsStorage implements DatePrefsStorage {
+    private static final Logger logger = LogsCenter.getLogger(JsonDatePrefsStorage.class);
 
     private Path filePath;
 
-    public JsonLoveBookDatePrefs(Path filePath) {
+    public JsonDatePrefsStorage(Path filePath) {
         this.filePath = filePath;
     }
 

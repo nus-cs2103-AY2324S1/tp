@@ -71,7 +71,7 @@ The **API** of this component is specified in [`Ui.java`](https://github.com/AY2
 
 <puml src="diagrams/UiClassDiagram.puml" alt="Structure of the UI Component"/>
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `DateListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2324S1-CS2103T-F10-2/tp/blob/master/src/main/java/seedu/lovebook/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/LoveBook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
 
@@ -122,9 +122,10 @@ How the parsing works:
 
 The `Model` component,
 
-* stores the LoveBook data i.e., all `Date` objects (which are contained in a `UniquePersonList` object).
+* stores the LoveBook data i.e., all `Date` objects (which are contained in a `UniqueDateList` object).
 * stores the currently 'selected' `Date` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Date>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
-* stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
+* stores a `UserPrefs` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPrefs` objects.
+* stores a `DatePrefs` object that represents the user’s preferences for dates. This is exposed to the outside as a `ReadOnlyDatePrefs` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
 <box type="info" seamless>
@@ -143,18 +144,9 @@ The `Model` component,
 <puml src="diagrams/StorageClassDiagram.puml" width="550" />
 
 The `Storage` component,
-* can save both LoveBook data and user preference data in JSON format, and read them back into corresponding objects.
-* inherits from both `LoveBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
+* can save both LoveBook data, Date preferences data and user preference data in JSON format, and read them back into corresponding objects.
+* inherits from both `LoveBookStorage`, `UserPrefsStorage` and `DatePrefsStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
-
-### Preferences component
-
-The `Preferences` component,
-- can save the user's preferences in the dates they are looking for (gender, height, income, age).
-- stores these entries collected in a `Preferences.json` file.
-- can be changed using the `setP` command (also called `setPreferences` command).
-- It extends the `Storage` component and inherits from `LoveBookStorage` and `UserPrefStorage` and `DatePrefStorage`.
-- It is show on typing on command `showP`.
 
 ### Common classes
 
@@ -165,15 +157,27 @@ Classes used by multiple components are in the `seedu.LoveBook.commons` package.
 ## **Implementation**
 This section aims to describe the implementation details of the features in LoveBook.
 
-There are 5 main features in that you came up with for LoveBook. 
-1. Set preferences
-2. Get most compatible match
-3. Get random date
-4. Filter dates
-5. Sort dates
-6. Get best match
-7. Star dates
-8. Unstar dates
+There are 12 main features in that you came up with for LoveBook.
+1. Add Dates
+2. Delete Dates
+3. Edit Dates
+4. List Dates
+5. Set preferences
+6. Get most compatible match
+7. Get random date 
+8. Filter dates 
+9. Sort dates 
+10. Get best match 
+11. Star dates 
+12. Unstar dates
+
+### Add Dates
+
+### Delete Dates
+
+### Edit Dates
+
+## List Dates
 
 ### Filter dates
 
@@ -241,35 +245,33 @@ unstarred. The `UnstarCommand` class then returns a `CommandResult` object that 
 
 **Target user profile**:
 * active online dater
-* has a need to manage a significant number of dates
+* has a need to manage a number of dates
 * prefer desktop apps over other types
 * can find, filter and organize their dates for better compatibility
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
 **Value proposition**:
-LoveBook simplifies the process of storing information of dates and assessing compatibility between user and his/ her dates by taking into account the user’s preferences and profile, thereby enhancing the efficiency and effectiveness of finding the perfect match.
+LoveBook simplifies the process of storing information of dates and assessing compatibility between user and his/her dates by taking into account the user’s preferences and profile, thereby enhancing the efficiency and effectiveness of finding the perfect match.
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-|  As a …​ | I want to …​                        | So that I can…​                                                                             |
-|----------|-------------------------------------|---------------------------------------------------------------------------------------------|
-| new user     | be greeted with a welcome message when i launch the app | so that I feel welcome                                                                      |
-| new user     | see a brief introduction message of the app and its capabilities and instructions         | so that I know how to get started.                                                          |
-| new user     | be able to key in my height in my profile                          | so that the algorithm can recommend me a suitable date based on our height compatibility    |
-| new user     | be able to key in my horoscope in my profile           | so that the algorithm can recommend me a suitable date based on our horoscope compatibility |
-| new user     | be able to key in my own income in my profile      | so that the algorithm can recommend me a suitable date based on our income compatibility    |
-| new user     | to be able to key in my own gender in my own profile | so that the algorithm can match me to the appropriate gender                                |
-| serial dater | be able to pull up a list of my previous dates         | so that I can keep track of who I have dated in the past                                    |
-| serial dater | be able to delete dates from my list                   | so that my dating list is only limited to those who I am still interested in                |
-| serial dater | to be able create a new date entry with his/her gender, name, income, height, horoscope and hobbies                   | so that I can keep my list growing                                                          |
-| serial dater | to be able to edit the details of my date             | so that I can keep my dates details up to date                                              |
-| serial dater | to be able to be recommended a complete random date            | so that I can have an exciting surprise date that day                                       |
-| serial dater | to be able to filter my past dates based on a particular metric             | so that I can find dates that I am interested in amidst my long and ever growing list       |
-| serial dater | to be able to be recommended the most compatible date for me            | so that I optimize my chance of finding my one true love                                    |
-| serial dater | to be able to set my dating preferences            | so that the algorithm can recommend me a suitable match                                     |
+|  As a …​ | I want to …​                                                                                    | So that I can…​                                                                             |
+|-------|-------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------|
+| new user | be greeted with a welcome message when i launch the app                                         | so that I feel welcome                                                                      |
+| new user | be able to key in my height in my preferences                                                   | so that the algorithm can recommend me a suitable date based on our height compatibility    |
+| new user | be able to key in my horoscope in my preferences                                                | so that the algorithm can recommend me a suitable date based on our horoscope compatibility |
+| new user | be able to key in my own income in my preferences                                               | so that the algorithm can recommend me a suitable date based on our income compatibility    |
+| new user | to be able to key in my own gender in my preferences                                            | so that the algorithm can match me to the appropriate gender                                |
+| dater | be able to pull up a list of my previous dates                                                  | so that I can keep track of who I have dated in the past                                    |
+| dater | be able to delete dates from my list                                                            | so that my dating list is only limited to those who I am still interested in                |
+| dater | to be able create a new date entry with his/her gender, name, income, height, horoscope and age | so that I can keep my list growing                                                          |
+| dater | to be able to edit the details of my date                                                       | so that I can keep my dates details up to date                                              |
+| dater | to be able to be recommended a complete random date                                             | so that I can have an exciting surprise date that day                                       |
+| dater | to be able to filter my past dates based on a particular metric                                 | so that I can find dates that I am interested in amidst my long and ever growing list       |
+| dater | to be able to be recommended the most compatible date for me                                    | so that I optimize my chance of finding my one true love                                    |
 *{More to be added}*
 
 ### Use cases

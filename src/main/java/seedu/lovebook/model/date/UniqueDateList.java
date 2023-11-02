@@ -15,7 +15,7 @@ import seedu.lovebook.model.date.exceptions.PersonNotFoundException;
  * A list of dates that enforces uniqueness between its elements and does not allow nulls.
  * A date is considered unique by comparing using {@code Date#isSamePerson(Date)}. As such, adding and updating of
  * dates uses Date#isSamePerson(Date) for equality so as to ensure that the date being added or updated is
- * unique in terms of identity in the UniquePersonList. However, the removal of a date uses Date#equals(Object) so
+ * unique in terms of identity in the UniqueDateList. However, the removal of a date uses Date#equals(Object) so
  * as to ensure that the date with exactly the same fields will be removed.
  *
  * Supports a minimal set of list operations.
@@ -23,7 +23,7 @@ import seedu.lovebook.model.date.exceptions.PersonNotFoundException;
  * @see Date#isSamePerson(Date)
  */
 
-public class UniquePersonList implements Iterable<Date> {
+public class UniqueDateList implements Iterable<Date> {
 
     private final ObservableList<Date> internalList = FXCollections.observableArrayList();
     private final ObservableList<Date> internalUnmodifiableList =
@@ -79,7 +79,7 @@ public class UniquePersonList implements Iterable<Date> {
         }
     }
 
-    public void setPersons(UniquePersonList replacement) {
+    public void setPersons(UniqueDateList replacement) {
         requireNonNull(replacement);
         internalList.setAll(replacement.internalList);
     }
@@ -116,12 +116,12 @@ public class UniquePersonList implements Iterable<Date> {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof UniquePersonList)) {
+        if (!(other instanceof UniqueDateList)) {
             return false;
         }
 
-        UniquePersonList otherUniquePersonList = (UniquePersonList) other;
-        return internalList.equals(otherUniquePersonList.internalList);
+        UniqueDateList otherUniqueDateList = (UniqueDateList) other;
+        return internalList.equals(otherUniqueDateList.internalList);
     }
 
     @Override

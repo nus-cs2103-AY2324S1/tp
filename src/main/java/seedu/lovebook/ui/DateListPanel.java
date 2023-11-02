@@ -13,17 +13,17 @@ import seedu.lovebook.model.date.Date;
 /**
  * Panel containing the list of dates.
  */
-public class PersonListPanel extends UiPart<Region> {
-    private static final String FXML = "PersonListPanel.fxml";
-    private final Logger logger = LogsCenter.getLogger(PersonListPanel.class);
+public class DateListPanel extends UiPart<Region> {
+    private static final String FXML = "DateListPanel.fxml";
+    private final Logger logger = LogsCenter.getLogger(DateListPanel.class);
 
     @FXML
     private ListView<Date> personListView;
 
     /**
-     * Creates a {@code PersonListPanel} with the given {@code ObservableList}.
+     * Creates a {@code DateListPanel} with the given {@code ObservableList}.
      */
-    public PersonListPanel(ObservableList<Date> dateList) {
+    public DateListPanel(ObservableList<Date> dateList) {
         super(FXML);
         personListView.setItems(dateList);
         personListView.setCellFactory(listView -> new PersonListViewCell());
