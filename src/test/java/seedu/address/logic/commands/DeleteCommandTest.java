@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
+import static seedu.address.logic.commands.DeleteCommand.MESSAGE_NO_STUDENTS;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBookManager;
@@ -65,6 +66,20 @@ public class DeleteCommandTest {
 
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_NO_TAG_SUCCESS,
                 expectedModel.getAddressBook().getCourseCode(), expectedNameList);
+
+        assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_allWithTagWithNoStudents_showsNoStudentsMessage() {
+        Optional<Tag> tag = Optional.of(new Tag("UNUSEDTAG"));
+        ContainsTagPredicate pred = new ContainsTagPredicate(tag);
+        DeleteCommand deleteCommand = new DeleteCommand(tag, pred);
+
+        ModelManager expectedModel = new ModelManager(model.getAddressBookManager(), new UserPrefs());
+
+        String expectedMessage = String.format(MESSAGE_NO_STUDENTS, String.format("%s Tutorial Group %s",
+                expectedModel.getAddressBook().getCourseCode(), tag.get().getTagName()));
 
         assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
     }
