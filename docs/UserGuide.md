@@ -19,9 +19,6 @@ teams.
 LinkTree is the top contact solution for software professionals. Using our unique tag-based system and tree structure,
 you can access contacts by roles and responsibilities instantly.
 
-* Table of Contents
-{:toc}
-
 <page-nav-print />
 
 --------------------------------------------------------------------------------------------------------------------
