@@ -262,6 +262,22 @@ Redoes a command that the user has undone previously.
 
 Format: `redo`
 
+### Recall previous commands
+
+CCA Leaders can quickly recall previous commands and edit it slightly, allowing users to mark attendance for a group of members quickly.
+
+CCACommander stores almost all (see the info card below to see what commands are stored) commands entered by the user. Users can use the <kbd>↑</kbd> to <kbd>↓</kbd> key to navigate through the commands entered upon selecting the command box.
+
+Example:
+1. A CCA Leader has just marked attendance for the first member in the member list using the `editEnrolment m/1 e/1 r/Present` command.
+2. The CCA Leader can then use <kbd>↑</kbd> to get `editEnrolment m/1 e/1 r/Present` 
+3. The CCA Leader can edit the member index to get `editEnrolment m/2 e/1 r/Present` to mark the second member as present.
+
+<div markdown="block" class="alert alert-info">:information_source: CCACommander will not store 2 of the same commands if they were entered twice in a row. Likewise, "commands" containing exclusively of blank spaces will not be stored as well. 
+
+Upon entering the <kbd>⌫ Backspace</kbd> or the <kbd>↵ Enter</kbd> key, users will have to re-navigate from the most recent command as it was treated as an edit or entry of command.
+</div>
+
 ### Saving the data
 
 CCACommander data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
