@@ -235,8 +235,8 @@ public class Group {
      * @param toAddTime List of time intervals to add
      * @throws CommandException When there is a clash in timings within the list
      */
-    public void addTime(ArrayList<TimeInterval> toAddTime) throws CommandException {
-        this.timeIntervalList.addTime(toAddTime);
+    public String addTime(ArrayList<TimeInterval> toAddTime) throws CommandException {
+        return this.timeIntervalList.addTime(toAddTime);
     }
 
     /**

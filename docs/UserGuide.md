@@ -1,3 +1,114 @@
+- Invalid format (e.g., no prefix):
+
+
+- The contact you are trying to delete does not exist in your contact list: `Please provide the person's full name as in the existing contact list`.
+
+
+### Finding contacts `find`
+You can find all the persons from the contact list with the matching keyword.
+
+
+**Format:** `find n/KEYWORDS_IN_NAME`
+
+
+**Acceptable values:**
+- `KEYWORDS_IN_NAME` must be alphanumeric, and it is not case sensitive.
+
+
+**Example(s):**
+- `find n/alice alex john`
+  Returns all the contacts with names of Alice, Alex, and John.
+
+
+**Potential error(s):**
+- Invalid format (e.g., no prefix):
+
+
+
+
+### Listing contacts `list`
+You can list all the contacts in your contact list.
+
+
+**Format:** `list`
+
+
+**Acceptable values:**
+No additional parameters.
+
+
+**Example(s):**
+- `List`
+  Lists all the people in the group.
+
+
+**Potential error(s):**
+- Extra inputs detected.
+
+
+## Commands to Manage Groups
+
+
+### Adding a group `new`
+You can create a group in your contact list.
+
+
+**Format:** `new g/GROUP_NAME`
+
+
+**Acceptable values:**
+- `GROUP_NAME` must be alphanumeric and cannot be blank.
+- `GROUP_NAME` must not be an existing group in your contact list.
+
+
+**Example(s):**
+- `new g/CS2103T tp` creates a new group named "CS2103T tp".
+
+
+**Potential error(s):**
+- Incorrect format (e.g., no prefix):
+
+
+- The group you are trying to add already exists in your contact list: `This group already exists in the contact list`.
+
+
+### Deleting a group `delete`
+You can delete a group in your contact list.
+
+
+**Format:** `delete n/GROUP_NAME`
+
+
+**Acceptable values:**
+- `GROUP_NAME` must be alphanumeric and cannot be blank.
+- `GROUP_NAME` must be an existing group in your contact list.
+
+
+**Example(s):**
+- `delete g/CS1203T`
+  This deletes the group "CS2103T" from your contact list, given "CS2103T" is an existing group in your contact list.
+
+
+**Potential error(s):**
+- Incorrect format (e.g., no prefix):
+
+
+- The group you are trying to delete does not exist in your contact list:
+
+
+
+
+### Finding a group `find`
+You can find a group in your contact list. This allows you to view the group's members and remarks.
+
+
+**Format:** `find g/GROUP_NAME`
+
+
+**Acceptable values:**
+- `GROUP_NAME` must be alphanumeric and cannot be blank.
+- `GROUP_NAME` must be an existing group in the contact list.
+
 **Example(s):**
 - `find g/CS2103T`
   This returns the members and remarks of the existing "CS2103T" group in your contact list.

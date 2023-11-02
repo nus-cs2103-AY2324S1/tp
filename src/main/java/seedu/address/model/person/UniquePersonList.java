@@ -37,10 +37,20 @@ public class UniquePersonList implements Iterable<Person> {
      */
     public boolean contains(Person toCheck) {
         requireNonNull(toCheck);
-        return internalList.stream().anyMatch(toCheck::isSameName)
-            || internalList.stream().anyMatch(toCheck::isSameEmail)
-            || internalList.stream().anyMatch(toCheck::isSamePhone);
+        return internalList.stream().anyMatch(toCheck::isSamePerson);
     }
+
+    public boolean containsEmail(Person toCheck) {
+        requireNonNull(toCheck);
+        return internalList.stream().anyMatch(toCheck::isSameEmail);
+    }
+    public boolean containsPhoneNumber(Person toCheck) {
+        requireNonNull(toCheck);
+        return internalList.stream().anyMatch(toCheck::isSamePhone);
+    }
+
+
+
 
     /**
      * Adds a person to the list.
