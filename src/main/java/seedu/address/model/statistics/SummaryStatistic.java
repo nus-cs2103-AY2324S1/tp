@@ -165,14 +165,20 @@ public class SummaryStatistic implements ReadOnlySummaryStatistic {
         }
         Stream<Person> filteredStreamWithScoreValue = personData.stream()
                 .filter(personInList -> personInList.getTags().contains(tag))
-                .filter(personInList -> personInList.getScoreForTag(tag).compareTo(person.getScoreForTag(tag)) <= 0);
+                .filter(personInList -> personInList.getScoreForTag(tag).compareTo(person.getScoreForTag(tag)) < 0);
         List<Person> filteredListWithScoreValue = filteredStreamWithScoreValue.collect(Collectors.toList());
         double percentile = 0;
+
+        int sameScoreIndividuals = personData.stream()
+                .filter(personInList -> personInList.getTags().contains(tag))
+                .filter(personInList -> personInList.getScoreForTag(tag).compareTo(person.getScoreForTag(tag)) == 0)
+                .collect(Collectors.toList()).size();
+        int trueListSize = filteredList.size() - sameScoreIndividuals;
         if (filteredListWithScoreValue.size() <= 0) {
             logger.warning("No people in the list, percentile will be left as default of 0");
             return percentile;
         }
-        percentile = Math.ceil((double) filteredListWithScoreValue.size() / filteredList.size() * 100);
+        percentile = Math.ceil((double) filteredListWithScoreValue.size() / trueListSize * 100);
         return percentile;
     }
     /**

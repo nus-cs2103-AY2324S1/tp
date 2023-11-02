@@ -6,6 +6,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import seedu.address.model.tag.Tag;
@@ -20,6 +21,10 @@ public class ScoreList {
 
     public ScoreList() {
         scoreList = new HashMap<String, Score>();
+    }
+
+    public ScoreList(HashMap<String, Score> scoreList) {
+        this.scoreList = scoreList;
     }
 
     // TODO: have a TAG parser that checks if its a interview-related tag
@@ -44,6 +49,33 @@ public class ScoreList {
     public Score getScore(Tag tag) {
         checkArgument(scoreList.containsKey(tag.tagName), MESSAGE_MISSING_TAG);
         return scoreList.get(tag.tagName);
+    }
+
+    /**
+     * Removes the score associated with the tag. Does nothing if the tag does not exist.
+     * @param tag tag
+     */
+    public void removeScore(Tag tag) {
+        if (hasTag(tag)) {
+            scoreList.remove(tag.tagName);
+        }
+    }
+
+    public HashMap<String, Score> getScoreList() {
+        HashMap<String, Score> copy = new HashMap<>();
+        for (Map.Entry<String, Score> entry : scoreList.entrySet()) {
+            copy.put(entry.getKey(), entry.getValue());
+        }
+        return copy;
+    }
+
+    /**
+     * Returns true if the score list contains the tag.
+     * @param tag tag
+     * @return true if the score list contains the tag
+     */
+    public boolean hasTag(Tag tag) {
+        return scoreList.containsKey(tag.tagName);
     }
 
     /**
