@@ -1,7 +1,6 @@
 package seedu.address.model.person;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
@@ -34,6 +33,14 @@ public class VisualTest {
         assertTrue(Visual.isValidVisual("bar"));
         assertTrue(Visual.isValidVisual("table"));
     }
+
+    @Test
+    public void hashCodeCheck() {
+        Visual visual1 = new Visual("TABLE");
+        Visual visual2 = new Visual("TABLE");
+        assertEquals(visual1.hashCode(), visual2.hashCode());
+    }
+
     @Test
     public void equals() {
         Visual visual = new Visual("BAR");
