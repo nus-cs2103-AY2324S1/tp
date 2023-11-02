@@ -381,5 +381,12 @@ Action     | Format, Examples
 **List** | `list`
 **Help** | `help`
 **addEvent** | `addEvent d/DESCRIPTION ts/START_DATE_TIME te/END_DATE_TIME` <br> e.g., `addEvent d/Cry about deadlines ts/2023-01-01 00:01 te/2023-12-31 23:59`
-**deleteEvent** | `deleteEvent d/DATE s/START_TIME` <br> e.g., `deleteEvent d/12/12/2012 s/2200`
-**viewEvents** | `viewEvents`
+**deleteEvent** | `deleteEvent DATE_TIME` <br> e.g., `deleteEvent 2023-02-03 12:00`
+**clearEvents** | `clearEvent ts/START_DATE_TIME te/END_DATE_TIME` <br> e.g., `clearEvent ts/2023-02-03 12:00 te/2023-02-03 14:00`
+**addTask** | `addTask d/DESCRIPTION [te/DEADLINE]` <br> e.g. `addTask d/Go for a run te/2023-02-14 19:00`
+**deleteTask** | `deleteTask INDEX`
+**sortTasks** | `sortTasks PARAMETER` <br> e.g. `sortTasks DESCRIPTION` <br> e.g. `sortTasks DEADLINE`
+**switchList** | `switchList`
+**viewContactEvents** | `viewContactEvents INDEX`
+
+
