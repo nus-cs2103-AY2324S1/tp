@@ -58,74 +58,62 @@ public class AddressBookParser {
         switch (commandWord) {
 
         case AddCommand.COMMAND_WORD:
-            return new AddCommandParser().parse(arguments);
-
+            //Fallthrough
         case AddCommand.COMMAND_WORD_ALIAS:
             return new AddCommandParser().parse(arguments);
 
         case EditCommand.COMMAND_WORD:
-            return new EditCommandParser().parse(arguments);
-
+            //Fallthrough
         case EditCommand.COMMAND_WORD_ALIAS:
             return new EditCommandParser().parse(arguments);
 
         case DeleteCommand.COMMAND_WORD:
-            return new DeleteCommandParser().parse(arguments);
-
+            //Fallthrough
         case DeleteCommand.COMMAND_WORD_ALIAS:
             return new DeleteCommandParser().parse(arguments);
 
         case UndoCommand.COMMAND_WORD:
-            return new UndoCommandParser().parse(arguments);
-
+            //Fallthrough
         case UndoCommand.COMMAND_WORD_ALIAS:
             return new UndoCommandParser().parse(arguments);
 
         case ClearCommand.COMMAND_WORD:
-            return new ClearCommand();
-
+            //Fallthrough
         case ClearCommand.COMMAND_WORD_ALIAS:
             return new ClearCommand();
 
         case FindCommand.COMMAND_WORD:
-            return new FindCommandParser().parse(arguments);
-
+            //Fallthrough
         case FindCommand.COMMAND_WORD_ALIAS:
             return new FindCommandParser().parse(arguments);
 
         case ListCommand.COMMAND_WORD:
-            return new ListCommand();
-
+            //Fallthrough
         case ListCommand.COMMAND_WORD_ALIAS:
             return new ListCommand();
 
         case ExitCommand.COMMAND_WORD:
-            return new ExitCommand();
-
+            //Fallthrough
         case ExitCommand.COMMAND_WORD_ALIAS:
             return new ExitCommand();
 
         case HelpCommand.COMMAND_WORD:
-            return new HelpCommand();
-
+            //Fallthrough
         case HelpCommand.COMMAND_WORD_ALIAS:
             return new HelpCommand();
 
         case LogCommand.COMMAND_WORD:
-            return new LogCommand();
-
+            //Fallthrough
         case LogCommand.COMMAND_WORD_ALIAS:
             return new LogCommand();
 
         case AppendLogCommand.COMMAND_WORD:
-            return new AppendLogCommand();
-
+            //Fallthrough
         case AppendLogCommand.COMMAND_WORD_ALIAS:
             return new AppendLogCommand();
 
         case ClearLogCommand.COMMAND_WORD:
-            return new ClearLogCommand();
-
+            //Fallthrough
         case ClearLogCommand.COMMAND_WORD_ALIAS:
             return new ClearLogCommand();
 
