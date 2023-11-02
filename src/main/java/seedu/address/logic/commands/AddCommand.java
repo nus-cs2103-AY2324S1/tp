@@ -25,7 +25,7 @@ public class AddCommand extends UndoableCommand {
     public static final String COMMAND_WORD_ALIAS = "a";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + " or " + COMMAND_WORD_ALIAS
-            + ": Adds a Patient to the patient list. "
+            + ": Adds a Patient to the Patient list. "
             + "Parameters: "
             + PREFIX_NAME + "NAME "
             + PREFIX_NRIC + "NRIC "
