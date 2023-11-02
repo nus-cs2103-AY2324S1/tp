@@ -12,7 +12,6 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.classmanager.commons.core.GuiSettings;
 import seedu.classmanager.commons.core.LogsCenter;
-import seedu.classmanager.model.student.ClassDetails;
 import seedu.classmanager.model.student.Student;
 import seedu.classmanager.model.student.StudentNumber;
 
