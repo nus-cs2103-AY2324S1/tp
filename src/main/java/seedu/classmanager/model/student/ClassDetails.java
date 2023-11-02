@@ -30,9 +30,10 @@ public class ClassDetails {
 
     // The class number should start with "T".
     public static final String VALIDATION_REGEX = "T.*";
-    public static final int DEFAULT_COUNT = 10;
-    private static int tutorialCount = DEFAULT_COUNT;
-    private static int assignmentCount = DEFAULT_COUNT;
+    public static final int DEFAULT_TUTORIAL_COUNT = 13;
+    public static final int DEFAULT_ASSIGNMENT_COUNT = 3;
+    private static int tutorialCount = DEFAULT_TUTORIAL_COUNT;
+    private static int assignmentCount = DEFAULT_ASSIGNMENT_COUNT;
 
     public final String classNumber;
     public final AttendanceTracker attendanceTracker;

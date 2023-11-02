@@ -18,7 +18,9 @@ public class ConfigCommand extends Command {
 
     public static final String COMMAND_WORD = "config";
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Configures Class Manager with the module information.\n"
+            + ": Configures Class Manager with the module information. WARNING: Configuring Class Manager resets "
+            + "the grades, attendance and class participation details of all students.\n"
+            + "The default Class Manager is configured with 13 tutorials and 3 assignments.\n"
             + "Parameters: "
             + PREFIX_TUTORIAL_COUNT + "TUTORIAL_COUNT "
             + PREFIX_ASSIGNMENT_COUNT + "ASSIGNMENT_COUNT\n"
@@ -57,7 +59,6 @@ public class ConfigCommand extends Command {
             requireNonNull(model);
             ClassDetails.setTutorialCount(tutorialCount);
             ClassDetails.setAssignmentCount(assignmentCount);
-            model.setConfigured(true);
             model.setAssignmentCount(assignmentCount);
             model.setTutorialCount(tutorialCount);
             return new CommandResult(String.format(MESSAGE_CONFIG_SUCCESS, tutorialCount, assignmentCount));

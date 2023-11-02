@@ -16,16 +16,16 @@ import seedu.classmanager.commons.core.LogsCenter;
 public class HelpWindow extends UiPart<Stage> {
 
     public static final String USERGUIDE_URL = "https://ay2324s1-cs2103t-t11-1.github.io/tp/UserGuide.html";
-    public static final String COMMAND_TABLE = "Useful Commands\n"
+    public static final String COMMAND_TABLE = "Useful Commands:\n"
             + "Configure Class Manager - config #t/TUTORIAL_COUNT #a/ASSIGNMENT_COUNT\n"
             + "Open help window - help\n\n"
-            + "Core Commands without Parameters\n"
+            + "Core Commands without Parameters:\n"
             + "Clear student list - clear\n"
             + "Exit Class Manager - exit\n"
             + "View command history - history\n"
             + "List all students - list\n"
             + "Toggle theme - theme\n\n"
-            + "Core Commands with Parameters\n"
+            + "Core Commands with Parameters:\n"
             + "Add - add s/STUDENT_NUMBER n/NAME p/PHONE_NUMBER e/EMAIL c/CLASS_NUMBER [t/TAG]…\n"
             + "Comment - comment s/STUDENT_NUMBER c/COMMENT\n"
             + "Delete - delete s/STUDENT_NUMBER\n"

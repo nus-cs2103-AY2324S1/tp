@@ -100,8 +100,7 @@ Before you can begin using Class Manager, you must configure the number of tutor
 
 Format: `config #t/TUTORIAL_COUNT #a/ASSIGNMENT_COUNT`
 
-* The information cannot be updated once configured.
-* TUTORIAL_COUNT and ASSIGNMENT_COUNT must be valid non-negative integers.
+* TUTORIAL_COUNT and ASSIGNMENT_COUNT must be integers between 1 to 99.
 
 Examples:
 * `config #t/13 #a/1`

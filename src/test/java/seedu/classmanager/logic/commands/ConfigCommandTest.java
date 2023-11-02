@@ -29,16 +29,16 @@ public class ConfigCommandTest {
 
     @Test
     public void configure_validArg_success() throws CommandException {
-        int tutorialCount = 3;
-        int assignmentCount = 2;
+        int tutorialCount = 26;
+        int assignmentCount = 5;
         ConfigCommand configCommand = new ConfigCommand(tutorialCount, assignmentCount);
 
-        Path notConfiguredUserPrefsPath = Paths.get(
-                "src", "test", "data", "JsonUserPrefsStorageTest", "NotConfiguredUserPref.json");
-        Model model = new ModelManager(getTypicalClassManager(), getUserPrefs(notConfiguredUserPrefsPath));
+        Path userPrefsPath = Paths.get(
+                "src", "test", "data", "JsonUserPrefsStorageTest", "TypicalUserPref.json");
+        Model model = new ModelManager(getTypicalClassManager(), getUserPrefs(userPrefsPath));
 
         Path validUserPrefsPath = Paths.get(
-                "src", "test", "data", "JsonUserPrefsStorageTest", "TypicalUserPref.json");
+                "src", "test", "data", "JsonUserPrefsStorageTest", "AfterConfiguredUserPref.json");
         Model expectedModel = new ModelManager(getTypicalClassManager(), getUserPrefs(validUserPrefsPath));
 
         CommandResult expectedCommandResult = new CommandResult(

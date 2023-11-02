@@ -56,7 +56,7 @@ public class LogicManager implements Logic {
 
         CommandResult commandResult;
         try {
-            command = classManagerParser.parseCommand(commandText, model.getConfigured());
+            command = classManagerParser.parseCommand(commandText);
             commandResult = command.execute(model, history);
         } finally {
             history.add(commandText);
