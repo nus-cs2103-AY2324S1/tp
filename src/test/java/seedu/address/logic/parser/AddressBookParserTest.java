@@ -4,9 +4,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ADD_ANNUAL_LEAVE_ON;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -15,6 +18,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.ClearCommand;
+import seedu.address.logic.commands.CurrentMonthCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditEmployeeDescriptor;
@@ -22,8 +26,11 @@ import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.NextMonthCommand;
 import seedu.address.logic.commands.PayslipCommand;
+import seedu.address.logic.commands.PreviousMonthCommand;
 import seedu.address.logic.commands.ReadCommand;
+import seedu.address.logic.commands.ViewLeaveCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
@@ -99,9 +106,39 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_payslip() throws Exception {
+        LocalDate currentDate = LocalDate.now();
         PayslipCommand command = (PayslipCommand) parser.parseCommand(
             PayslipCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
         assertEquals(new PayslipCommand(INDEX_FIRST_PERSON), command);
+    }
+
+    @Test
+    public void parseCommand_viewLeave() throws Exception {
+        LocalDate currentDate = LocalDate.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        String formattedDate = currentDate.format(formatter);
+
+        ViewLeaveCommand command = (ViewLeaveCommand) parser.parseCommand(
+                ViewLeaveCommand.COMMAND_WORD + " " + PREFIX_ADD_ANNUAL_LEAVE_ON + " " + formattedDate);
+        assertEquals(new ViewLeaveCommand(currentDate), command);
+    }
+
+    @Test
+    public void parseCommand_nextMonth() throws Exception {
+        assertTrue(parser.parseCommand(NextMonthCommand.COMMAND_WORD) instanceof NextMonthCommand);
+        assertTrue(parser.parseCommand(NextMonthCommand.COMMAND_WORD + " 3") instanceof NextMonthCommand);
+    }
+
+    @Test
+    public void parseCommand_previousMonth() throws Exception {
+        assertTrue(parser.parseCommand(PreviousMonthCommand.COMMAND_WORD) instanceof PreviousMonthCommand);
+        assertTrue(parser.parseCommand(PreviousMonthCommand.COMMAND_WORD + " 3") instanceof PreviousMonthCommand);
+    }
+
+    @Test
+    public void parseCommand_currentMonth() throws Exception {
+        assertTrue(parser.parseCommand(CurrentMonthCommand.COMMAND_WORD) instanceof CurrentMonthCommand);
+        assertTrue(parser.parseCommand(CurrentMonthCommand.COMMAND_WORD + " 3") instanceof CurrentMonthCommand);
     }
 
     @Test
