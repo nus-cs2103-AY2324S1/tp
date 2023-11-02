@@ -169,6 +169,25 @@ Examples:
   <br>
   ![result for 'delete John Doe'](images/ug_images/deletedResult.png)
 
+### update sec level : `uplevel`, `undolevel`
+
+- `uplevel` : update the sec levels for all students and remove all sec level 4 students.
+  - `undolevel` : restore the student records before the last update.
+  Format: `uplevel`, `undolevel`
+
+* Command is case-sensitive
+* No prefix is required, only the command.
+Examples: `uplevel`, `undolevel`
+
+  <br>
+  ![before entering 'uplevel'](images/ug_images/beforeUpdate.png)
+
+  <br>
+  ![after entering 'uplevel'](images/ug_images/afterUpdate.png)
+
+  <br>
+  ![after entering 'undolevel'](images/ug_images/undoUpdate.png)
+
 ### Filtering data : `filter`
 
 Shows the list of students data that fulfills all given conditions.
