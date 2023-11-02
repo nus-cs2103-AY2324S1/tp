@@ -99,7 +99,7 @@ The format for `ALTERNATE_CONTACT` is `TYPE: USERNAME`, roughly looking like `So
 **Examples:**
 
 - `add n/John Doe p/98765432 e/john.doe@email.com`
-- `add n/John Doe p/98765432 e/john.doe@email.com o/Good at SE. t/NUS t/CS2103 course a/Telegram: JohnDoe`
+- `add n/John Doe p/98765432 e/john.doe@email.com o/Likes SE. t/NUS t/CS2103 course a/Telegram: JohnDoe`
 
 ### Editing a contact: `edit`
 
