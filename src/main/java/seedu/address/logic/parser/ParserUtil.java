@@ -23,6 +23,7 @@ import seedu.address.model.employee.OvertimeHours;
 import seedu.address.model.employee.Phone;
 import seedu.address.model.employee.Position;
 import seedu.address.model.employee.Salary;
+import seedu.address.model.remark.Remark;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser
@@ -219,5 +220,15 @@ public class ParserUtil {
             throw new ParseException(OvertimeHours.MESSAGE_CONSTRAINTS);
         }
         return new OvertimeHours(overtimeHours);
+    }
+
+    /**
+     * Parses a {@code String remark} into a {@code Remark}.
+     * Leading and trailing whitespaces will be trimmed.
+     */
+    public static Remark parseRemark(String remark) {
+        requireNonNull(remark);
+        String trimmedRemark = remark.trim();
+        return new Remark(trimmedRemark);
     }
 }

@@ -72,7 +72,7 @@ public class DeleteLeaveCommand extends Command {
 
                 Employee employeeWithLeave = new Employee(employee.getName(), employee.getPosition(), employee.getId(),
                         employee.getPhone(), employee.getEmail(), employee.getSalary(), employee.getDepartments(),
-                        employee.getOvertimeHours(), updatedList);
+                        employee.getOvertimeHours(), updatedList, employee.getRemarkList());
 
                 model.setEmployee(employee, employeeWithLeave);
                 return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.formatLeaves(employeeWithLeave)));

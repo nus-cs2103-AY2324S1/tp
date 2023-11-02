@@ -70,7 +70,7 @@ public class EditLeaveCommand extends Command {
 
                 Employee editedEmployee = new Employee(employee.getName(), employee.getPosition(), employee.getId(),
                         employee.getPhone(), employee.getEmail(), employee.getSalary(), employee.getDepartments(),
-                        employee.getOvertimeHours(), updatedList);
+                        employee.getOvertimeHours(), updatedList, employee.getRemarkList());
 
                 model.setEmployee(employee, editedEmployee);
                 return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.formatLeaves(editedEmployee)));
