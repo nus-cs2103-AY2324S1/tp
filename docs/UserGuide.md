@@ -260,7 +260,7 @@ _Details coming soon ..._
 It streamlines tasks and provides a more efficient way to manage patient details.
 
 **Q**: Can multiple users access Healthysync simultaneously, and how do I set up user accounts?<br>
-**A**: Healthysync is currently an application for a single user. Hence, it cannot be accessed simultaneously
+**A**: HealthSync is currently an application for a single user. Hence, it cannot be accessed simultaneously
 by different users.
 
 **Q**: How do I import patient data from external sources into Healthysync?<br>
