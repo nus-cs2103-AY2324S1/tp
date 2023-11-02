@@ -23,7 +23,7 @@ class StylesheetTest {
     public void testConstructStyleSheet() {
         assertEquals(Stylesheet.LIGHT, constructStylesheet("LightTheme.css"));
         assertEquals(Stylesheet.DARK, constructStylesheet("DarkTheme.css"));
-        assertEquals(Stylesheet.DEFAULT_STYLESHEET, constructStylesheet("DarkTheme.css"));
+        assertEquals(Stylesheet.DEFAULT_STYLESHEET, constructStylesheet("LightTheme.css"));
         assertEquals(Stylesheet.DEFAULT_STYLESHEET, constructStylesheet("INVALID_INPUT"));
     }
 }

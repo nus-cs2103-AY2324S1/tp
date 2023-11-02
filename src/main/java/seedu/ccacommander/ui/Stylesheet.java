@@ -10,7 +10,7 @@ public enum Stylesheet {
 
     public static final String SUCCESS_MESSAGE = "Stylesheet switched to: %1$s.";
 
-    public static final Stylesheet DEFAULT_STYLESHEET = DARK;
+    public static final Stylesheet DEFAULT_STYLESHEET = LIGHT;
 
     private static final String DIRECTORY = "/view/";
     private final String path;
