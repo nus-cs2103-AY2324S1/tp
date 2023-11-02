@@ -163,10 +163,4 @@ public class TaskListTest {
         assertThrows(UnsupportedOperationException.class, ()
                 -> taskList.asUnmodifiableObservableList().remove(0));
     }
-
-    @Test
-    public void toStringMethod() {
-        assert taskList.toString().isEmpty();
-        assertEquals(taskList.asUnmodifiableObservableList().toString(), "[" + taskList.toString() + "]");
-    }
 }

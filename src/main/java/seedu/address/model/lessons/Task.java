@@ -1,6 +1,7 @@
 package seedu.address.model.lessons;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.AppUtil.checkArgument;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Objects;
@@ -17,6 +18,9 @@ import seedu.address.model.ListEntryField;
 public class Task extends ListEntryField {
 
     public static final String MESSAGE_CONSTRAINTS = "Tasks can take any values, and it should not be blank";
+    public static final String DECODED_CONSTRAINTS = "Incorrect task encoding! The encoded task should have a \"+\" "
+            + "or \"-\" at the beginning of the string,";
+    public static final Task DEFAULT_TASK = new Task("Sample Task");
 
     /*
      * The first character of the task description must not be a whitespace,
@@ -139,18 +143,35 @@ public class Task extends ListEntryField {
      * Parses a string task.
      * The first character will be either + or -.
      * If it is +, the task is done. if it is -, the task is undone.
+     *
+     * Defaults to undone if not present.
+     *
      * @param task
-     * @return
+     * @return Task
+     * @throws ParseException if the string doesn't contain a + or - at the start.
      */
     public static Task of(String task) throws ParseException {
         // parse the task
+        checkArgument(isValidEncodedTask(task));
         String description = task.substring(1);
         if (task.charAt(0) == '+') {
             // task done
             return new Task(description, true);
-        } else {
+        } else if (task.charAt(0) == '-') {
             return new Task(description, false);
+        } else {
+            throw new ParseException(DECODED_CONSTRAINTS);
         }
+    }
+
+    /**
+     * Tests if a encoded string is valid.
+     * @param test The test string
+     * @return
+     */
+    public static boolean isValidEncodedTask(String test) {
+        // first character must be + or -
+        return (test.charAt(0) == '+' || test.charAt(0) == '-') && isValidTask(test.substring(1));
     }
 
     /**
@@ -169,7 +190,7 @@ public class Task extends ListEntryField {
         }
 
         Task otherTask = (Task) other;
-        return description.equals(otherTask.description);
+        return description.equals(otherTask.description) && isDone == otherTask.isDone;
 
     }
 
@@ -187,7 +208,7 @@ public class Task extends ListEntryField {
      */
     @Override
     public String toString() {
-        return this.isDone ? "+" : "-" + this.description;
+        return (this.isDone ? "+" : "-") + this.description;
     }
 
     /**

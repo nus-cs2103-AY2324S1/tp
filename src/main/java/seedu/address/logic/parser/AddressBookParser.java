@@ -143,7 +143,7 @@ public class AddressBookParser {
             if (!model.getState().equals(SCHEDULE)) {
                 throw new ParseException("Please add tasks in the schedule list.");
             }
-            return new AddTaskCommandParser().parse(userInput);
+            return new AddTaskCommandParser().parse("addTask " + arguments);
         case DeleteTaskCommand.COMMAND_WORD:
             if (!model.getState().equals(SCHEDULE)) {
                 throw new ParseException("Please add tasks in the schedule list.");
