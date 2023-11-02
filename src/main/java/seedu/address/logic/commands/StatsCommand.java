@@ -21,9 +21,9 @@ public abstract class StatsCommand extends Command {
     /**
      * Calculates the percentage of a numerator and denominator.
      */
-    protected static float calculatePercentage(int num, int denom) {
+    protected static double calculatePercentage(int num, int denom) {
         assert(denom != 0);
-        return num / (float) denom * 100;
+        return num / (double) denom * 100;
     }
 
     @Override
