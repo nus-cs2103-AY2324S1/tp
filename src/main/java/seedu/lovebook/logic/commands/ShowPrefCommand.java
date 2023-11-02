@@ -10,7 +10,7 @@ import seedu.lovebook.model.Model;
 /**
  * Lists all date preferences to the user.
  */
-public class ListPrefsCommand extends Command {
+public class ShowPrefCommand extends Command {
     public static final String COMMAND_WORD = "showP";
 
     public static final String MESSAGE_SUCCESS = "Here are your preferences: ";

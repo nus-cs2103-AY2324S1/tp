@@ -12,14 +12,14 @@ import seedu.lovebook.model.Model;
 import seedu.lovebook.model.date.Date;
 
 /**
- * Deletes a date identified using it's displayed index from the lovebook book.
+ * Deletes a date identified using it's displayed index from the LoveBook.
  */
 public class DeleteCommand extends Command {
 
     public static final String COMMAND_WORD = "delete";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the date identified by the index number used in the displayed date list.\n"
+            + ": Deletes the Date identified by the index number used in the displayed Date list.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 

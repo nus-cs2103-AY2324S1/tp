@@ -19,7 +19,7 @@ import seedu.lovebook.model.date.Date;
 import seedu.lovebook.model.date.RandomPredicate;
 
 /**
- * Represents the in-memory model of the lovebook book data.
+ * Represents the in-memory model of the LoveBook data.
  */
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
@@ -36,7 +36,7 @@ public class ModelManager implements Model {
     public ModelManager(ReadOnlyLoveBook loveBook, ReadOnlyUserPrefs userPrefs, ReadOnlyDatePrefs datePrefs) {
         requireAllNonNull(loveBook, userPrefs, datePrefs);
 
-        logger.fine("Initializing with lovebook book: " + loveBook + " and user prefs " + userPrefs
+        logger.fine("Initializing with LoveBook: " + loveBook + " and user prefs " + userPrefs
                 + " and date prefs " + datePrefs);
 
         this.loveBook = new LoveBook(loveBook);

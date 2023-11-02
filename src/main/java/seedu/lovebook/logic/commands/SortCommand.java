@@ -18,11 +18,11 @@ import seedu.lovebook.model.Model;
 import seedu.lovebook.model.date.Date;
 
 /**
- * Sorts all dates in lovebook book alphabetically or numerically.
+ * Sorts all dates in LoveBook alphabetically or numerically.
  */
 public class SortCommand extends Command {
     public static final String COMMAND_WORD = "sort";
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Sorts all dates in lovebook book alphabetically "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Sorts all dates in LoveBook alphabetically "
             + "or numerically.\n"
             + "Parameters: name/ OR age  OR height/ OR income/ OR horoscope/ AND increasing OR decreasing" + "\n"
             + "Example: " + COMMAND_WORD + PREFIX_NAME + "increasing";

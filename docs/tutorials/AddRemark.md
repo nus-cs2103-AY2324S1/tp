@@ -31,7 +31,7 @@ package seedu.lovebook.logic.commands;
 import seedu.lovebook.model.Model;
 
 /**
- * Changes the remark of an existing date in the lovebook book.
+ * Changes the remark of an existing date in the LoveBook.
  */
 public class RemarkCommand extends Command {
 
