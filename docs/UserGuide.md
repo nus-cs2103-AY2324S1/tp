@@ -92,7 +92,7 @@ Duplicate tags are only counted once.
 
 <div markdown="span" class="alert alert-info">
 :information_source: **About the alternate contact format:**
-The format for `ALTERNATE_CONTACT` is `TYPE: USERNAME`, roughly looking like `SocialMedia: Username`.
+The format for `ALTERNATE_CONTACT` is `TYPE: USERNAME`, roughly looking like `SocialMedia: Username`. Ensure to include a space between the colon and the Username.
 </div>
 
 **Examples:**
@@ -184,7 +184,7 @@ Shows contacts whose names have a word that fully matches any of the specified k
 `find KEYWORD...`
 
 - The search is case-insensitive.\
-e.g Keyword `john` will match the name `John`.
+e.g. Keyword `john` will match the name `John`.
 
 - The order of the keywords does not matter.\
 e.g. Keywords `Amy John` will show the same contacts as keywords `John Amy`.
@@ -202,7 +202,7 @@ e.g. `find Bee John` will match the names `Amy Bee` and `John Doe`.
 
 ### Filtering by tag: `filter`
 
-Search and display contacts with tag matching the given keywords (case-insensitive).
+Searches and displays contacts with tag matching the given keywords (case-insensitive).
 
 **Format:**
 `filter [KEYWORDS]`
@@ -218,7 +218,7 @@ Opens a subwindow with a convenient link to the user guide.
 **Format:**
 `help`
 
-Alternatively, you can press <kbd>F1</kbd> or click Help → Help in the top toolbar.
+Alternatively, you can enter `help`, press <kbd>F1</kbd> or click Help → Help in the top toolbar.
 
 ### Exiting the app: `exit`
 
