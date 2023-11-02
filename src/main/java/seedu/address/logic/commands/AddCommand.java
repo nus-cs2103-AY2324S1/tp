@@ -32,7 +32,9 @@ public class AddCommand extends Command {
         + PREFIX_GROUPTAG + "CS2103T";
 
     public static final String MESSAGE_SUCCESS = "New person added: %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
+    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the contact list";
+    public static final String MESSAGE_DUPLICATE_EMAIL = "This email already exists to other person";
+    public static final String MESSAGE_DUPLICATE_PHONE = "This phone already exists to other person";
 
     private final Person toAdd;
 
@@ -50,6 +52,14 @@ public class AddCommand extends Command {
 
         if (model.hasPerson(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+        }
+
+        if (model.hasEmail(toAdd)) {
+            throw new CommandException(MESSAGE_DUPLICATE_EMAIL);
+        }
+
+        if (model.hasPhone(toAdd)) {
+            throw new CommandException(MESSAGE_DUPLICATE_PHONE);
         }
 
         model.addPerson(toAdd);

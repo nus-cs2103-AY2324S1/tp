@@ -114,8 +114,14 @@ public class Person {
      * This defines a weaker notion of equality between two persons.
      */
     public boolean isSamePerson(Person otherPerson) {
-        return isSameName(otherPerson) && isSamePhone(otherPerson)
-            && isSameEmail(otherPerson);
+        return isSameName(otherPerson);
+    }
+
+    public boolean isSameGroups(Person otherPerson) {
+        if (otherPerson == this) {
+            return true;
+        }
+        return otherPerson != null && otherPerson.getGroups().equals(this.getGroups());
     }
 
     /**

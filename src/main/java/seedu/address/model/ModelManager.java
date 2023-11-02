@@ -318,6 +318,16 @@ public class ModelManager implements Model {
         filteredGroups.setPredicate(predicate);
     }
 
+    @Override
+    public boolean hasEmail(Person toAdd) {
+        return addressBook.hasEmail(toAdd);
+    }
+
+    @Override
+    public boolean hasPhone(Person toAdd) {
+        return addressBook.hasPhone(toAdd);
+    }
+
     private void forceUpdateList() {
         updateFilteredPersonList(user -> false);
         updateFilteredPersonList(user -> true);

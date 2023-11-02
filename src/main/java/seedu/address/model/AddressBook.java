@@ -223,4 +223,13 @@ public class AddressBook implements ReadOnlyAddressBook {
     public int hashCode() {
         return persons.hashCode();
     }
+
+    public boolean hasEmail(Person toAdd) {
+        return persons.containsEmail(toAdd);
+    }
+
+
+    public boolean hasPhone(Person toAdd) {
+        return persons.containsPhoneNumber(toAdd);
+    }
 }

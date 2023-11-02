@@ -157,4 +157,9 @@ public interface Model {
 
     void updateFilteredGroupList(Predicate<Group> predicate);
 
+    boolean hasEmail(Person toAdd);
+
+    boolean hasPhone(Person toAdd);
+
+
 }
