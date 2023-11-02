@@ -26,7 +26,7 @@ public class RandomCommandParser implements Parser<RandomCommand> {
                     RandomCommand.MESSAGE_USAGE));
         }
 
-        Integer numOfStudent;
+        int numOfStudent;
         try {
             numOfStudent = Integer.parseInt(argMultimap.getPreamble());
         } catch (NumberFormatException e) {
