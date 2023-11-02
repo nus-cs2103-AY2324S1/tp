@@ -91,6 +91,15 @@ public class EditPersonDescriptorBuilder {
         return this;
     }
 
+    /**
+     * Parses the {@code unassignGroups} into a {@code Set<Group>} and set it to the {@code EditPersonDescriptor}
+     */
+    public EditPersonDescriptorBuilder withUnassignGroups(String...groups) {
+        Set<Group> groupSet = Stream.of(groups).map(Group::new).collect(Collectors.toSet());
+        descriptor.setUnassignGroups(groupSet);
+        return this;
+    }
+
     public EditPersonDescriptor build() {
         return descriptor;
     }
