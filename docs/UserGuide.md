@@ -125,7 +125,7 @@ Let's say you did not save your changes and entered <code>exit</code>.
 <br/>
 ![Exit command not saved warning](images/screenshots/ExitCommandNotSavedWarning.png)
 <br/>
-If you press Enter again, your changes are discarded and you are led back to the main view.
+If you press Enter again, your changes are discarded and you are led back to the main window.
 If you press Esc key, the exit is cancelled and you can continue working on the profile page.
 <br/>
 ![Exit command not saved cancel](images/screenshots/ExitCommandNotSavedCancel.png)
@@ -133,7 +133,7 @@ If you press Esc key, the exit is cancelled and you can continue working on the 
 The example above is the result of pressing the Esc key after you are warned.
 
 
-To learn more about **adding a new fosterer from profile page**, refer to a section [Adding a fosterer through the main window: add](#adding-a-fosterer-through-the-profile-page-add). <br/>
+To learn more about **adding a new fosterer from profile page**, refer to a section [Adding a fosterer through the profile page: add](#adding-a-fosterer-through-the-profile-page-add). <br/>
 To learn more about **editing a fosterer in profile page**, refer to a section about [Editing a fosterer's detail through the profile page: edit](#editing-a-fosterers-detail-through-the-profile-page-edit). 
 
 
@@ -177,16 +177,17 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS housing/HOUSING_TYPE availa
 
 Parameters:
 
-| Parameter | About                                                                                                                                                                                                                                                                        | Example                                                     |
-|-----------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------|
-| `NAME`     | Name of the fosterer                                                                                                                                                                                                                                                         | `Alice Tan`, `Harry Yeo`                                    |
-| `PHONE_NUMBER`          | Phone number of the fosterer                                                                                                                                                                                                                                                 | `93456778`, `89067547`                                      |
-| `EMAIL`           | Email of the fosterer                                                                                                                                                                                                                                                        | `thomas718@gmail.com`, `kate@yahoo.com.sg`                  |
-| `ADDRESS`          | Address of the fosterer                                                                                                                                                                                                                                                      | `Orchard road, Blk 8, #13-04`                               |
-| `HOUSING_TYPE`           | - Housing type of the fosterer<br/> - Case-sensitive<br/> - Can be HDB / Condo / Landed / nil                                                                                                                                                                                | `HDB`, `Condo`, `Landed`, `nil`                             |
-| `AVAILABILITY`           | - Availability of the fosterer<br/> - Case-sensitive<br/> - Can be Available / NotAvailable / nil                                                                                                                                                                            | `NotAvailable`, `Available`, `nil`                          |
-| `ANIMAL_NAME`           | - If `availability/NotAvailable`: Name of the animal fostered<br/> - If `availability/Available`: nil<br/> - If `availability/nil`: nil                                                                                                                                      | `Fluffball`, `nil`                                          |
-|  `TYPE_OF_ANIMAL`          | - Type of animal which the fosterer is currently fostering, or prefer to foster<br/> - Case-sensitive<br/> - If `availability/NotAvailable`: current.Dog / current.Cat / nil<br/> - If `availability/Available`: able.Dog / able.Cat / nil<br/> - If `availability/nil`: nil | `current.Dog`, `current.Cat`, `able.Dog`, `able.Cat`, `nil` |
+| Parameter        | About                                                                                                                                                                                                                                                                       | Example                                                     |
+|------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------|
+| `NAME`           | Name of the fosterer                                                                                                                                                                                                                                                        | `Alice Tan`, `Harry Yeo`                                    |
+| `PHONE_NUMBER`   | Phone number of the fosterer                                                                                                                                                                                                                                                | `93456778`, `89067547`                                      |
+| `EMAIL`          | Email of the fosterer                                                                                                                                                                                                                                                       | `thomas718@gmail.com`, `kate@yahoo.com.sg`                  |
+| `ADDRESS`        | Address of the fosterer                                                                                                                                                                                                                                                     | `Orchard road, Blk 8, #13-04`                               |
+| `HOUSING_TYPE`   | - Housing type of the fosterer<br/> - Case-sensitive<br/> - Can be HDB / Condo / Landed / nil                                                                                                                                                                               | `HDB`, `Condo`, `Landed`, `nil`                             |
+| `AVAILABILITY`   | - Availability of the fosterer<br/> - Case-sensitive<br/> - Can be Available / NotAvailable / nil                                                                                                                                                                           | `NotAvailable`, `Available`, `nil`                          |
+| `ANIMAL_NAME`    | - If `availability/NotAvailable`: Name of the animal fostered<br/> - If `availability/Available`: nil<br/> - If `availability/nil`: nil                                                                                                                                     | `Fluffball`, `nil`                                          |
+| `TYPE_OF_ANIMAL` | - Type of animal which the fosterer is currently fostering, or prefer to foster<br/> - Case-sensitive<br/> - If `availability/NotAvailable`: current.Dog / current.Cat / nil<br/> - If `availability/Available`: able.Dog / able.Cat / nil<br/> - If `availability/nil`: nil | `current.Dog`, `current.Cat`, `able.Dog`, `able.Cat`, `nil` |
+| `TAG`            | Tag to be associated with the fosterer                                                                                                                                                                                                                                      | `experienced`, `urgent`                                     |
 
 <div markdown="block" class="alert alert-primary">
 
@@ -213,7 +214,7 @@ Valid cases:
 <div markdown="span" class="alert alert-warning">
   :exclamation: <b>Important:</b> <br/>
 
-Duplicate fosterers cannot be added; this is detected by the fosterer's name.</br>
+Duplicate fosterers cannot be added; this is detected by the fosterer's name.<br/>
 e.g. <code>"Anne Tay"</code> is the same person as <code>"anne tay"</code> and <code>"anne  (multiple spaces)  tay"</code>.
 </div> 
 
@@ -237,15 +238,15 @@ Format: `add`
 
 <div markdown="block" class="alert alert-info">
 
-**:information_source: Notes about the command format:**<br>
+**:information_source: Notes about the command:**<br>
 
-*  Valid cases of a fosterer entry in the section [Adding a fosterer through the main window](#adding-a-fosterer-through-the-main-window-add) are still applied in this alternative way to add a fosterer.
+*  Valid cases of a fosterer entry in the section [Adding a fosterer through the main window: add](#adding-a-fosterer-through-the-main-window-add) are still applied in this alternative way to add a fosterer.
 
 </div>
 
 ![Profile](images/screenshots/ProfilePage.png)
 
-To learn more about profile page, please refer to the section [User Interface: the Profile View](#the-profile-view).  
+To learn more about profile page, please refer to the section [User Interface: The Profile Page](#the-profile-page).  
 
 ### Listing fosterers: `list` (Alias: `find`)
 
@@ -367,6 +368,7 @@ Parameters:
 | `AVAILABILITY`   | - Updated availability of the fosterer<br/> - Case-sensitive<br/> - Can be Available / NotAvailable / nil                                                                                                                                                                           | `NotAvailable`, `Available`, `nil`                          |
 | `ANIMAL_NAME`    | - If `availability/NotAvailable`: Updated name of animal fostered<br/> - If `availability/Available`: nil<br/> - If `availability/nil`: nil                                                                                                                                         | `Fluffball`, `nil`                                          |
 | `TYPE_OF_ANIMAL` | - Updated type of animal which the fosterer is currently fostering, or prefer to foster<br/> - Case-sensitive<br/> - If `availability/NotAvailable`: current.Dog / current.Cat / nil<br/> - If `availability/Available`: able.Dog / able.Cat / nil<br/> - If `availability/nil`: nil | `current.Dog`, `current.Cat`, `able.Dog`, `able.Cat`, `nil` |
+| `TAG`            | Tag to be associated with the fosterer                                                                                                                                                                                                                                      | `experienced`, `urgent`                                     |
 
 <div markdown="block" class="alert alert-primary">
 
@@ -412,7 +414,7 @@ Parameters:
 
 <div markdown="block" class="alert alert-info">
 
-**:information_source: Notes about the command format:**<br>
+**:information_source: Notes about the command:**<br>
 
 *  The UI generates a profile page where details of the fosterer are shown.
 *  Aside from the details added by the add command, here is the list of fields the profile page shows:
@@ -433,7 +435,7 @@ Before you type the save command, make sure there is no accidental overwrite wit
 
 ![Example profile 1](images/screenshots/EditExample.png)
 
-To learn more about profile page, please refer to the section [User Interface: the Profile View](#the-profile-view). 
+To learn more about profile page, please refer to the section [User Interface: The Profile Page](#the-profile-page). 
 
 ### Deleting a fosterer : `delete`
 
@@ -531,11 +533,26 @@ Examples:
 
 ![Stats](images/screenshots/StatsHousing.png)
 
-### Clearing all entries : `reset`
+### Undoing the previous command : `undo`
+
+Undoes the previous command, given that the previous command successfully executed is either `add`, `delete`, or `edit`.
+
+Format: `undo`
+
+### Clearing all entries : `reset`, followed by `reset confirm`
 
 Clears all entries from the address book.
 
-Format: `reset`
+Format: `reset` and `reset confirm`
+
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Notes about the command:**<br>
+
+*  Upon entering `reset`, a confirmation message would be shown for the user to verify if he/she really wants to clear all the data entries. 
+   * User is prompted to enter `reset confirm` to confirm and execute the deletion of all data entries.
+
+</div>
 
 ### Exiting the program : `exit`
 
@@ -547,14 +564,14 @@ Format: `exit`
 
 **:bulb: Tip:**<br>
 
-* On the profile view, entering <code>exit</code> leads you out of the page back to the list view. 
-* On the profile view, attempting to <code>exit</code> without saving changes with <code>save</code> prompts a warning message (refer to [User Interface: The Profile View: Exiting the profile page](#exiting-the-profile-page)). 
+* On the profile page, entering <code>exit</code> leads you out of the page back to the main window. 
+* On the profile page, attempting to <code>exit</code> without saving changes with <code>save</code> prompts a warning message (refer to [User Interface: The Profile Page: Exiting the profile page](#exiting-the-profile-page)). 
 </div>
 
 
 ### Saving data
 
-In the main view, Foster Family data is saved in the hard disk automatically after any command that changes the data, so no manual saving is needed. However, edits made in the profile page has to be saved via the `save` command. Else, changes will be discarded once you exit out of the fosterer's profile page.
+In the main window, Foster Family data is saved in the hard disk automatically after any command that changes the data, so no manual saving is needed. However, edits made in the profile page has to be saved via the `save` command. Else, changes will be discarded once you exit out of the fosterer's profile page.
 
 ### Editing data file
 
@@ -580,19 +597,21 @@ If your changes to the data file makes its format invalid, Foster Family will di
 
 ## Command summary
 
-| Action                                 | Format                                                                                                                                                                    | Examples                                                                                                                                                                |
-|----------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Help**                               | `help`                                                                                                                                                                    | -                                                                                                                                                                       |
-| **Add** from main window               | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS housing/HOUSING_TYPE availability/AVAILABILITY animal/ANIMAL_NAME animalType/TYPE_OF_ANIMAL [t/TAG]…`                        | `add n/Jerry Tan p/98765412 e/jerry123@example.com a/Baker street, block 5, #27-01 housing/HDB availability/NotAvailable animal/Dexter animalType/current.Cat t/Urgent` |
-| **Add** from profile page              | `add`                                                                                                                                                                     | -                                                                                                                                                                       |
-| **List**  or **Find**                  | `list`, `find`                                                                                                                                                            | `list`, `find`,  `list available`, `find available`                                                                                                                     |
-| **View Profile**                       | `view INDEX`                                                                                                                                                              | `view 1`                                                                                                                                                                |
-| **Save updated field descriptions**    | `save`                                                                                                                                                                    | -                                                                                                                                                                       |
-| **Edit** from main window              | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [housing/HOUSING_TYPE] [availability/AVAILABILITY] [animal/ANIMAL_NAME] [animalType/TYPE_OF_ANIMAL] [t/TAG…]` | `edit 2 n/James Lee e/jameslee@example.com`                                                                                                                             |
-| **Edit** from profile page             | `edit INDEX`                                                                                                                                                              | `edit 1`                                                                                                                                                                |
-| **Delete**                             | `delete INDEX [INDEX...]`                                                                                                                                                 | `delete 1 2 3`                                                                                                                                                          |
-| **Sort**                               | `sort`                                                                                                                                                                    | -                                                                                                                                                                       |
-| **View Available Fosterer Statistics** | `stats avail`                                                                                                                                                             | -                                                                                                                                                                       |
-| **View Current Fosterer Statistics**   | `stats current`                                                                                                                                                           | -                                                                                                                                                                       |
-| **View Housing Statistics**            | `stats housing`                                                                                                                                                           | -                                                                                                                                                                       |
-| **Reset**                              | `reset`                                                                                                                                                                   | -                                                                                                                                                                       |
+| Action                                                                                            | Format                                                                                                                                                                    | Examples                                                                                                                                                                |
+|---------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| [**Help**](#viewing-help-for-commands--help)                                                      | `help`                                                                                                                                                                    | -                                                                                                                                                                       |
+| [**Add** from main window](#adding-a-fosterer-through-the-main-window--add)                       | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS housing/HOUSING_TYPE availability/AVAILABILITY animal/ANIMAL_NAME animalType/TYPE_OF_ANIMAL [t/TAG]…`                        | `add n/Jerry Tan p/98765412 e/jerry123@example.com a/Baker street, block 5, #27-01 housing/HDB availability/NotAvailable animal/Dexter animalType/current.Cat t/Urgent` |
+| [**Add** from profile page](#adding-a-fosterer-through-the-profile-page--add)                     | `add`                                                                                                                                                                     | -                                                                                                                                                                       |
+| [**List**  or **Find**](#listing-fosterers--list-alias-find)                                      | `list`, `find`                                                                                                                                                            | `list`, `find`,  `list available`, `find available`                                                                                                                     |
+| [**View Profile**](#viewing-a-fosterers-detail--view)                                             | `view INDEX`                                                                                                                                                              | `view 1`                                                                                                                                                                |
+| [**Save updated fosterer details**](#saving-changes-in-a-fosterers-details--save)                 | `save`                                                                                                                                                                    | -                                                                                                                                                                       |
+| [**Edit** from main window](#editing-a-fosterers-detail-through-the-main-window--edit)            | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [housing/HOUSING_TYPE] [availability/AVAILABILITY] [animal/ANIMAL_NAME] [animalType/TYPE_OF_ANIMAL] [t/TAG…]` | `edit 2 n/James Lee e/jameslee@example.com`                                                                                                                             |
+| [**Edit** from profile page](#editing-a-fosterers-detail-through-the-profile-page--edit)          | `edit INDEX`                                                                                                                                                              | `edit 1`                                                                                                                                                                |
+| [**Delete**](#deleting-a-fosterer--delete)                                                        | `delete INDEX [INDEX...]`                                                                                                                                                 | `delete 1 2 3`                                                                                                                                                          |
+| [**Sort**](#sorting-fosterers--sort)                                                              | `sort`                                                                                                                                                                    | -                                                                                                                                                                       |
+| [**View Available Fosterer Statistics**](#viewing-statistics-of-available-fosterers--stats-avail) | `stats avail`                                                                                                                                                             | -                                                                                                                                                                       |
+| [**View Current Fosterer Statistics**](#viewing-statistics-of-current-fosterers--stats-current)   | `stats current`                                                                                                                                                           | -                                                                                                                                                                       |
+| [**View Housing Statistics**](#viewing-housing-statistics--stats-housing)                         | `stats housing`                                                                                                                                                           | -                                                                                                                                                                       |
+| [**Undo**](#undoing-the-previous-command--undo)                                                   | `undo`                                                                                                                                                                    | -                                                                                                                                                                       |
+| [**Reset**](#clearing-all-entries--reset-followed-by-reset-confirm)                               | `reset`, followed by `reset confirm`                                                                                                                                      | -                                                                                                                                                                       |
+| [**Exit** from application / profile page](#exiting-the-program--exit)                            | `exit`                                                                                                                                                                    | -                                                                                                                                                                       |
