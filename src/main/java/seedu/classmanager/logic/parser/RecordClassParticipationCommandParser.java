@@ -4,10 +4,12 @@ import static java.util.Objects.requireNonNull;
 import static seedu.classmanager.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.classmanager.logic.parser.CliSyntax.PREFIX_PARTICIPATION;
 import static seedu.classmanager.logic.parser.CliSyntax.PREFIX_STUDENT_NUMBER;
-import static seedu.classmanager.logic.parser.CliSyntax.PREFIX_TUTORIAL_SESSION;
+import static seedu.classmanager.logic.parser.CliSyntax.PREFIX_TUTORIAL_INDEX;
 
+import seedu.classmanager.commons.core.index.Index;
 import seedu.classmanager.logic.commands.RecordClassParticipationCommand;
 import seedu.classmanager.logic.parser.exceptions.ParseException;
+import seedu.classmanager.model.student.ClassDetails;
 import seedu.classmanager.model.student.StudentNumber;
 
 /**
@@ -23,24 +25,23 @@ public class RecordClassParticipationCommandParser implements Parser<RecordClass
     public RecordClassParticipationCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_STUDENT_NUMBER,
-               PREFIX_TUTORIAL_SESSION, PREFIX_PARTICIPATION);
+                PREFIX_TUTORIAL_INDEX, PREFIX_PARTICIPATION);
 
-        if (!argMultimap.arePrefixesPresent(PREFIX_STUDENT_NUMBER, PREFIX_TUTORIAL_SESSION, PREFIX_PARTICIPATION)
+        if (!argMultimap.arePrefixesPresent(PREFIX_STUDENT_NUMBER, PREFIX_TUTORIAL_INDEX, PREFIX_PARTICIPATION)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, RecordClassParticipationCommand.MESSAGE_USAGE));
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_STUDENT_NUMBER,
-                PREFIX_TUTORIAL_SESSION, PREFIX_PARTICIPATION);
+                PREFIX_TUTORIAL_INDEX, PREFIX_PARTICIPATION);
         StudentNumber studentNumber = ParserUtil.parseStudentNumber(
                 argMultimap.getValue(PREFIX_STUDENT_NUMBER).get());
-        int sessionNumber;
+        Index tutorialIndex;
         try {
-            sessionNumber = Integer.parseInt(argMultimap.getValue(PREFIX_TUTORIAL_SESSION).get());
-        } catch (NumberFormatException e) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, RecordClassParticipationCommand.MESSAGE_USAGE));
+            tutorialIndex = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_TUTORIAL_INDEX).get());
+        } catch (ParseException e) {
+            throw new ParseException(ClassDetails.getMessageInvalidTutorialIndex());
         }
 
         String participation = argMultimap.getValue(PREFIX_PARTICIPATION).get();
@@ -50,7 +51,7 @@ public class RecordClassParticipationCommandParser implements Parser<RecordClass
                     RecordClassParticipationCommand.MESSAGE_USAGE));
         }
         boolean hasParticipated = Boolean.parseBoolean(participation);
-        return new RecordClassParticipationCommand(studentNumber, sessionNumber, hasParticipated);
+        return new RecordClassParticipationCommand(studentNumber, tutorialIndex, hasParticipated);
     }
 
 }

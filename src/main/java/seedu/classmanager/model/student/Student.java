@@ -137,17 +137,17 @@ public class Student {
     }
 
     /**
-     * Marks student as having participated in the specific tutorial.
+     * Marks the student as having participated in the specific tutorial.
      */
-    public void markClassParticipation(int sessionNumber, boolean hasParticipated) throws CommandException {
-        this.classDetails.recordClassParticipation(sessionNumber, hasParticipated);
+    public void markClassParticipation(Index tutorialIndex, boolean hasParticipated) throws CommandException {
+        this.classDetails.recordClassParticipation(tutorialIndex, hasParticipated);
     }
 
     /**
-     * Marks student as having participated in the specific tutorial.
+     * Marks the student as having participated in the specific tutorial.
      */
-    public void setGrade(int assignmentNumber, int grade) throws CommandException {
-        this.classDetails.setGrade(assignmentNumber, grade);
+    public void setGrade(Index assignmentIndex, int grade) throws CommandException {
+        this.classDetails.setGrade(assignmentIndex, grade);
     }
 
 

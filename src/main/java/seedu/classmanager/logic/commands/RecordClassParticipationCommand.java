@@ -3,9 +3,10 @@ package seedu.classmanager.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.classmanager.logic.parser.CliSyntax.PREFIX_PARTICIPATION;
 import static seedu.classmanager.logic.parser.CliSyntax.PREFIX_STUDENT_NUMBER;
-import static seedu.classmanager.logic.parser.CliSyntax.PREFIX_TUTORIAL_SESSION;
+import static seedu.classmanager.logic.parser.CliSyntax.PREFIX_TUTORIAL_INDEX;
 import static seedu.classmanager.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
 
+import seedu.classmanager.commons.core.index.Index;
 import seedu.classmanager.commons.util.ToStringBuilder;
 import seedu.classmanager.logic.CommandHistory;
 import seedu.classmanager.logic.Messages;
@@ -25,25 +26,25 @@ public class RecordClassParticipationCommand extends Command {
             + ": Records the class participation of a student in a specific tutorial session.\n"
             + "Parameters: "
             + PREFIX_STUDENT_NUMBER + "STUDENT_NUMBER "
-            + PREFIX_TUTORIAL_SESSION + "TUTORIAL_SESSION "
+            + PREFIX_TUTORIAL_INDEX + "TUTORIAL_SESSION "
             + PREFIX_PARTICIPATION + "PARTICIPATION\n"
             + "Example: "
             + COMMAND_WORD + " " + PREFIX_STUDENT_NUMBER + "A0123456X "
-            + PREFIX_TUTORIAL_SESSION + "1 " + PREFIX_PARTICIPATION + "true";
+            + PREFIX_TUTORIAL_INDEX + "1 " + PREFIX_PARTICIPATION + "true";
 
     public static final String MESSAGE_SUCCESS = "Recorded participation for Student: %1$s\n"
             + "Here are the details:\n";
 
     private final StudentNumber studentNumber;
-    private final int sessionNumber;
+    private final Index tutorialIndex;
     private final boolean hasParticipated;
 
     /**
      * Creates an RecordPartCommand to record the specified {@code Student}'s participation
      */
-    public RecordClassParticipationCommand(StudentNumber studentNumber, int sessionNumber, boolean hasParticipated) {
+    public RecordClassParticipationCommand(StudentNumber studentNumber, Index tutorialIndex, boolean hasParticipated) {
         this.studentNumber = studentNumber;
-        this.sessionNumber = sessionNumber;
+        this.tutorialIndex = tutorialIndex;
         this.hasParticipated = hasParticipated;
     }
 
@@ -58,7 +59,7 @@ public class RecordClassParticipationCommand extends Command {
 
         Student studentToMark = model.getStudent(studentNumber);
         Student markedStudent = studentToMark.copy();
-        markedStudent.markClassParticipation(this.sessionNumber, this.hasParticipated);
+        markedStudent.markClassParticipation(this.tutorialIndex, this.hasParticipated);
         model.setStudent(studentToMark, markedStudent);
         model.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
         model.setSelectedStudent(markedStudent);
@@ -81,7 +82,7 @@ public class RecordClassParticipationCommand extends Command {
 
         RecordClassParticipationCommand otherSetGradeCommand = (RecordClassParticipationCommand) other;
         return studentNumber.equals(otherSetGradeCommand.studentNumber)
-                && sessionNumber == otherSetGradeCommand.sessionNumber
+                && tutorialIndex.equals(otherSetGradeCommand.tutorialIndex)
                 && hasParticipated == otherSetGradeCommand.hasParticipated;
     }
 
@@ -89,7 +90,7 @@ public class RecordClassParticipationCommand extends Command {
     public String toString() {
         return new ToStringBuilder(this)
                 .add("studentNumber", studentNumber)
-                .add("sessionNumber", sessionNumber)
+                .add("tutorialIndex", tutorialIndex)
                 .add("hasParticipated", hasParticipated)
                 .toString();
     }

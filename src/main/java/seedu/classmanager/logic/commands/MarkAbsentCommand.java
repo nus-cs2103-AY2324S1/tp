@@ -3,6 +3,7 @@ package seedu.classmanager.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.classmanager.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.classmanager.logic.parser.CliSyntax.PREFIX_STUDENT_NUMBER;
+import static seedu.classmanager.logic.parser.CliSyntax.PREFIX_TUTORIAL_INDEX;
 import static seedu.classmanager.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
 
 import seedu.classmanager.commons.core.index.Index;
@@ -17,13 +18,15 @@ import seedu.classmanager.model.student.StudentNumber;
  * Marks a student's attendance.
  */
 public class MarkAbsentCommand extends Command {
-    public static final String COMMAND_WORD = "mark-abs";
+    public static final String COMMAND_WORD = "absent";
     public static final String MESSAGE_MARK_SUCCESS = "Successfully mark the student as absent.";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Marks a student as absent.\n"
-            + "Parameters: INDEX "
-            + PREFIX_STUDENT_NUMBER + "STUDENT NUMBER\n"
-            + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_STUDENT_NUMBER + "A0245234A";
+            + "Parameters: "
+            + PREFIX_STUDENT_NUMBER + "STUDENT NUMBER "
+            + PREFIX_TUTORIAL_INDEX + "TUTORIAL INDEX\n"
+            + "Example: " + COMMAND_WORD + " "
+            + PREFIX_STUDENT_NUMBER + "A0245234A "
+            + PREFIX_TUTORIAL_INDEX + "1";
     private final Index index;
     private final StudentNumber targetStudentNumber;
 
@@ -52,13 +55,8 @@ public class MarkAbsentCommand extends Command {
         Student studentToMark = model.getStudent(targetStudentNumber);
         Student markedStudent = studentToMark.copy();
 
-        try {
-            markedStudent.markAbsent(this.index);
-            model.setStudent(studentToMark, markedStudent);
-        } catch (CommandException e) {
-            throw new CommandException(e.getMessage());
-        }
-
+        markedStudent.markAbsent(this.index);
+        model.setStudent(studentToMark, markedStudent);
         model.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
         model.setSelectedStudent(markedStudent);
         model.commitClassManager();

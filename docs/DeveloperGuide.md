@@ -332,11 +332,11 @@ The `load` command is facilitated by `LoadCommand` and `LoadCommandParser`. `Loa
 4. The file name is then check to ensure that it is valid. If the file name is missing, null or contains a forward slash, a ParseException would be thrown.
 5. The `LoadCommandParser` then creates the `LoadCommand` based on the processed input.
 
-### Mark present feature
+### Present feature
 
 #### About this feature
 
-The mark present feature allows users to mark a specific student to be present in a specific tutorial in the app.
+The present feature allows users to mark a specific student to be present in a specific tutorial in the app.
 
 This feature builds upon the current design of Student and ClassDetails.
 
