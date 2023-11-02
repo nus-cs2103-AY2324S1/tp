@@ -66,7 +66,7 @@ public class InterviewDeleteCommand extends InterviewCommand {
 
         jobToDeleteInterview.deleteInterview(interviewIndex);
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(jobToDeleteInterview)),
-                false, false, jobIndex);
+                false, false, jobIndex.getZeroBased());
     }
 
     /**

@@ -185,9 +185,9 @@ public class MainWindow extends UiPart<Stage> {
             }
 
             // updates UI whenever an interview is added, deleted or edited
-            Index interviewIndex = commandResult.isInterview();
-            if (!interviewIndex.equals(Index.fromZeroBased(0))) {
-                Job job = logic.getFilteredJobList().get(interviewIndex.getZeroBased());
+            int interviewIndex = commandResult.isInterview();
+            if (interviewIndex >= 0) {
+                Job job = logic.getFilteredJobList().get(interviewIndex);
                 jobDetailsPanel = new JobDetailsPanel(job);
                 jobDetailsPanelPlaceholder.getChildren().clear();
                 jobDetailsPanelPlaceholder.getChildren().add(jobDetailsPanel.getRoot());
