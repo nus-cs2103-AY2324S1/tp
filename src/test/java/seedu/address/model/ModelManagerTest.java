@@ -1,8 +1,6 @@
 package seedu.address.model;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalCards.CS1101S;
 import static seedu.address.testutil.TypicalCards.CS2100;
@@ -13,6 +11,8 @@ import java.nio.file.Paths;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.commons.core.index.Index;
+import seedu.address.model.exceptions.RandomIndexNotInitialisedException;
 import seedu.address.testutil.DeckBuilder;
 
 public class ModelManagerTest {
@@ -112,5 +112,23 @@ public class ModelManagerTest {
 
         // different addressBook -> returns false
         assertFalse(modelManager.equals(new ModelManager(diffDeck, userPrefs)));
+    }
+
+    @Test
+    public void getRandomIndex_nullRandomIndex_throwsException() {
+        assertThrows(RandomIndexNotInitialisedException.class, () -> modelManager.getRandomIndex());
+    }
+
+    @Test
+    public void getRandomIndex_validRandomIndex_correctIndexObtained() {
+        Index newIndex = Index.fromOneBased(22);
+        modelManager.setRandomIndex(newIndex);
+        try {
+            Index obtainedIndex = modelManager.getRandomIndex();
+            assertEquals(obtainedIndex, newIndex);
+        } catch (RandomIndexNotInitialisedException e) {
+            // should not reach here
+            fail();
+        }
     }
 }

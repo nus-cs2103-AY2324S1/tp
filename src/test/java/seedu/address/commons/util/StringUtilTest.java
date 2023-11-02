@@ -1,7 +1,6 @@
 package seedu.address.commons.util;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.io.FileNotFoundException;
@@ -138,6 +137,13 @@ public class StringUtilTest {
     @Test
     public void getDetails_nullGiven_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> StringUtil.getDetails(null));
+    }
+
+    @Test
+    public void isR() {
+        assertTrue(StringUtil.isR("r"));
+        assertFalse(StringUtil.isR("rubbish"));
+        assertFalse(StringUtil.isR("   r       "));
     }
 
 }
