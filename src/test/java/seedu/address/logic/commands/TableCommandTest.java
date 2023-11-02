@@ -28,13 +28,17 @@ public class TableCommandTest {
         Command command2 = new TableCommand("g/");
         Command command3 = new TableCommand("s/");
         Command command4 = new TableCommand("d/", 2023);
+        Command command5 = new TableCommand("d/", 2023);
+        Command command6 = new TableCommand("d/Z", 2022);
 
         // same args -> return true
         assertEquals(command1, command2);
+        assertEquals(command4, command5);
 
         // different args -> return false
         assertNotEquals(command1, command3);
         assertNotEquals(command2, command4);
+        assertNotEquals(command4, command6);
 
         // null -> return false
         assertNotEquals(command1, null);

@@ -122,7 +122,7 @@ public class TableCommand extends Command {
         }
 
         TableCommand otherCommand = (TableCommand) other;
-        return otherCommand.args.equals(this.args);
+        return otherCommand.args.equals(this.args) && otherCommand.year == this.year;
     }
 
     @Override
