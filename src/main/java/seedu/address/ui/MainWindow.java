@@ -31,7 +31,7 @@ public class MainWindow extends UiPart<Stage> {
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
     private ExportWindow exportWindow;
-
+    private ImportWindow importWindow;
     @FXML
     private StackPane commandBoxPlaceholder;
 
@@ -62,6 +62,7 @@ public class MainWindow extends UiPart<Stage> {
 
         helpWindow = new HelpWindow();
         exportWindow = new ExportWindow();
+        importWindow = new ImportWindow(primaryStage);
     }
 
     public Stage getPrimaryStage() {
@@ -110,11 +111,28 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
+    /**
+     * Opens the export window or focuses on it if it's already opened.
+     */
+
     public void handleExport() {
         if (!exportWindow.isShowing()) {
             exportWindow.show();
         } else {
             exportWindow.focus();
+        }
+    }
+
+    /**
+     * Opens the import window or focuses on it if its already opened
+     */
+
+
+    public void handleImport() {
+        if (!importWindow.isShowing()) {
+            importWindow.show();
+        } else {
+            importWindow.focus();
         }
     }
     void show() {
