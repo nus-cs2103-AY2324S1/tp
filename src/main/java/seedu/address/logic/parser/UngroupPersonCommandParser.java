@@ -35,6 +35,8 @@ public class UngroupPersonCommandParser implements Parser<UngroupPersonCommand> 
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, UngroupPersonCommand.MESSAGE_USAGE));
         }
 
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_GROUPTAG);
+
         String personName = argMultimap.getValue(PREFIX_NAME).get();
         String groupName = argMultimap.getValue(PREFIX_GROUPTAG).get();
 

@@ -166,6 +166,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public void updateFilteredGroupList(Predicate<Group> predicate) {
+            //
+        }
+
+        @Override
         public void addGroup(Group g) {
             throw new AssertionError("This method should not be called.");
         }
