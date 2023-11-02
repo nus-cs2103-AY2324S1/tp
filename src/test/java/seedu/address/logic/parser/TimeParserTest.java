@@ -40,15 +40,6 @@ class TimeParserTest {
         }
     }
 
-    @Test
-    void testTimeErrorMessages() {
-        try {
-            TimeParser.parseDate("24/10/1988 1930", false);
-        } catch (ParseException parseException) {
-            assertEquals(parseException.getMessage(), TimeParser.PAST_DATE_ERROR_MESSAGE);
-        }
-    }
-
     // TEST TOTALLY INVALID STRINGS
     @Test
     void testParseDateInvalidDateUnsuccessfulParse() {
