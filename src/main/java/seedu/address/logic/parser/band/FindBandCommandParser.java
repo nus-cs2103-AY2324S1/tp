@@ -1,10 +1,12 @@
-package seedu.address.logic.parser;
+package seedu.address.logic.parser.band;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import java.util.function.Predicate;
 
 import seedu.address.logic.commands.band.FindBandCommand;
+import seedu.address.logic.parser.Parser;
+import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.band.Band;
 import seedu.address.model.band.BandName;
