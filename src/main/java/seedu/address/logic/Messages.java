@@ -37,7 +37,6 @@ public class Messages {
 
         Set<String> duplicateFields =
                 Stream.of(duplicatePrefixes).map(Prefix::toString).collect(Collectors.toSet());
-//        System.out.println(MESSAGE_DUPLICATE_FIELDS + String.join(" ", duplicateFields));
         return MESSAGE_DUPLICATE_FIELDS + String.join(" ", duplicateFields);
     }
 

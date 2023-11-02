@@ -79,10 +79,6 @@ public class Group {
         return groupName;
     }
 
-    public ObservableList<Person> getGroupMates() {
-        return listOfGroupMates;
-    }
-
     public TimeIntervalList getTimeIntervalList() {
         return timeIntervalList;
     }
