@@ -30,6 +30,7 @@ public class EditLeaveCommandParser implements Parser<EditLeaveCommand> {
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditLeaveCommand.MESSAGE_USAGE));
         }
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_ID, PREFIX_OLD, PREFIX_NEW);
 
         Id id;
         LocalDate oldDate;
