@@ -222,7 +222,63 @@ Output:
 
 * If the `DATE` has already been added to the employee, the app should display `There isn’t any information on this employee’s specified PREFIX`.
 
-### Adding a deduction to the payroll of an employee : `deduct`
+
+### View employee who is on leave: `viewleave`
+
+**What it does**
+
+This feature allows users to view employee who is on leave on a specific date.
+
+**Command Format**
+
+`viewleave /on DATE`
+
+* Views employee who is on leave on a specific DATE, must be a single date.
+  
+* The Date must be in dd/MM/yyyy format.
+
+Examples:
+* `viewleave /on 01/01/2024` view employee who is on leave on 01/01/2024.
+
+Output:
+
+* If the command is incorrect, the app should display an error message indicating the command format is invalid followed by the command usage message.
+
+* If the `DATE` provided is not in the correct format, the app should display an error message indicating the date format is invalid and provide guidance on the correct date format.
+
+* If the command executes successfully, the app should display the employee who is on leave on the specific date.
+
+### View the calendar of upcoming month: `nm`
+
+**What it does**
+
+This feature allows users to view the calendar of the upcoming month on the app.
+
+**Command Format**
+
+`nm`
+
+### View the calendar of previous month: `pm`
+
+**What it does**
+
+This feature allows users to view the calendar of the previous month on the app.
+
+**Command Format**
+
+`pm`
+
+### View the calendar of current month: `cm`
+
+**What it does**
+
+This feature allows users to view the calendar of the current month on the app.
+
+**Command Format**
+
+`cm`
+
+### Adding a deduction to the payroll of an employee: `deduct`
 
 **What it does**
 
@@ -346,6 +402,7 @@ Shows a list of all employees in the workplace.
 Clears all entries from the address book.
 
 **Command format:**
+
 `clear`
 
 ### Locating employees by name: `find`
