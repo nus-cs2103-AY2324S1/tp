@@ -185,19 +185,21 @@ public class DeleteCommand extends UndoableCommand {
         }
 
         if (deletePersonDescriptor.shouldDeleteMedicalHistory()) {
-            Set<MedicalHistory> medicalHistoriesToDelete = deletePersonDescriptor.getMedicalHistories();
-            Set<MedicalHistory> medicalHistoriesToKeep = new HashSet<>();
             if (updatedMedicalHistories.isEmpty()) {
                 throw new CommandException(MESSAGE_NO_MEDICAL_HISTORY_TO_DELETE);
-            } else if (medicalHistoriesToDelete == null || medicalHistoriesToDelete.isEmpty()) {
-                updatedMedicalHistories = new HashSet<>();
+            }
+
+            Set<MedicalHistory> medicalHistoriesToDelete = deletePersonDescriptor.getMedicalHistories();
+            Set<MedicalHistory> medicalHistoriesToKeep = new HashSet<>(updatedMedicalHistories);
+
+            if (medicalHistoriesToDelete.isEmpty()) {
+                updatedMedicalHistories = medicalHistoriesToDelete;
             } else {
-                if (!updatedMedicalHistories.containsAll(medicalHistoriesToDelete)) {
-                    throw new CommandException(MESSAGE_INVALID_MEDICAL_HISTORY);
-                }
-                for (MedicalHistory medicalHistory : updatedMedicalHistories) {
-                    if (!medicalHistoriesToDelete.contains(medicalHistory)) {
-                        medicalHistoriesToKeep.add(medicalHistory);
+                for (MedicalHistory medicalHistory : medicalHistoriesToDelete) {
+                    if (updatedMedicalHistories.contains(medicalHistory)) {
+                        medicalHistoriesToKeep.remove(medicalHistory);
+                    } else {
+                        throw new CommandException(MESSAGE_INVALID_MEDICAL_HISTORY);
                     }
                 }
                 updatedMedicalHistories = medicalHistoriesToKeep;

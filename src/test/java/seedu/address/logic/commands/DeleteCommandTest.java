@@ -107,7 +107,7 @@ public class DeleteCommandTest {
 
         DeletePersonDescriptor descriptor = new DeletePersonDescriptor();
         descriptor.setDeleteMedicalHistory();
-        descriptor.setMedicalHistory(null);
+        descriptor.setMedicalHistory(new HashSet<>());
 
         DeleteCommand deleteCommand = new DeleteCommand(firstPerson.getNric(), null, descriptor);
         deleteCommand.execute(model);
