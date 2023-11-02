@@ -9,9 +9,14 @@ import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.PieChart;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListCell;
+import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 import seedu.address.model.Dashboard;
+import seedu.address.model.person.Person;
+import seedu.address.model.person.interaction.Interaction;
 import seedu.address.model.person.lead.LeadType;
+import seedu.address.model.reminder.Reminder;
 
 /**
  * The Dashboard Display.
@@ -35,6 +40,9 @@ public class DashboardDisplay extends UiPart<Region> {
     private CategoryAxis xAxis;
     @FXML
     private NumberAxis yAxis;
+
+    @FXML
+    private ListView<Reminder> reminderListView;
 
     /**
      * Creates a {@code DashboardDisplay} using data from the given {@code dashboard}.
@@ -83,5 +91,22 @@ public class DashboardDisplay extends UiPart<Region> {
         yAxis.setTickUnit(1);
         yAxis.setAutoRanging(false);
         yAxis.setUpperBound(maxY);
+
+        reminderListView.setItems(dashboard.getReminderList());
+        reminderListView.setCellFactory(listView -> new DashboardDisplay.ReminderListViewCell());
+    }
+
+    static class ReminderListViewCell extends ListCell<Reminder> {
+        @Override
+        protected void updateItem(Reminder reminder, boolean empty) {
+            super.updateItem(reminder, empty);
+
+            if (empty || reminder == null) {
+                setGraphic(null);
+                setText(null);
+            } else {
+                setGraphic(new ReminderCard(reminder).getRoot());
+            }
+        }
     }
 }

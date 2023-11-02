@@ -172,6 +172,11 @@ public class ModelManager implements Model {
         reminderScheduler.start();
     }
 
+    @Override
+    public void updateReminderList() {
+        this.reminderList.updateReminders();
+    }
+
     //=========== Filtered Reminder List Accessors =======================================================
 
     /**

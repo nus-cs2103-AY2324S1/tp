@@ -109,9 +109,9 @@ public interface Model {
     SimpleObjectProperty<Person> getSelectedPerson();
 
     /**
-     * Sets the currently selected person.
+     * Updates the reminder list
      */
-    void setSelectedPerson(Person person);
+    void updateReminderList();
 
     /** Returns an unmodifiable view of the filtered reminder list */
     ObservableList<Reminder> getFilteredReminderList();

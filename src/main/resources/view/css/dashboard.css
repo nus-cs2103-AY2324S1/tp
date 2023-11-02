@@ -64,3 +64,49 @@
 #closed {
     -fx-text-fill: #BBBBBB;
 }
+
+.reminder-list {
+    -fx-padding: 10px;
+    -fx-spacing: 16px;
+}
+
+.reminder-label {
+    -fx-padding: 20 0 0 0;
+    -fx-spacing: 16px;
+    -fx-font-size: 28px;
+}
+
+.list-cell #reminderCardPane {
+    -fx-background-color: #555555;
+    -fx-background-radius: 8px;
+}
+
+.list-cell {
+    -fx-padding: 10 20 10 0 ;
+    -fx-background-color: transparent, -fx-background ;
+    -fx-background-insets: 0px, 2px ;
+}
+
+.list-cell:empty {
+    -fx-padding: 2px ;
+    -fx-background-color: transparent ;
+    -fx-background-insets: 0 ;
+}
+
+.list-cell:filled:even {
+    -fx-background-color: transparent;
+}
+
+.list-cell:filled:odd {
+    -fx-background-color: transparent;
+}
+
+.list-cell:filled:selected {
+    -fx-background-color: transparent;
+}
+
+.cell_big_label {
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-font-size: 20px;
+    -fx-text-fill: #010504;
+}

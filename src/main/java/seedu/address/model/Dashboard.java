@@ -7,6 +7,7 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.interaction.Interaction;
+import seedu.address.model.reminder.Reminder;
 
 /**
  * Represents the dashboard of the address book.
@@ -32,6 +33,8 @@ public class Dashboard {
     private int totalHotLeads;
     private int totalWarmLeads;
     private int totalColdLeads;
+
+    private ObservableList<Reminder> reminderList;
 
     /**
      * Constructs a {@code Dashboard} with the given {@code Model}.
@@ -145,6 +148,11 @@ public class Dashboard {
         return totalClosedClients;
     }
 
+    public ObservableList<Reminder> getReminderList() {
+        updateDashboardIfDirty();
+        return reminderList;
+    }
+
     /**
      * Returns the updated dashboard and opens the dashboard for viewing.
      * The dashboard should always be closed after viewing as updating the dashboard may be expensive.
@@ -194,6 +202,8 @@ public class Dashboard {
         totalHotLeads = filteredPersonCount(Person::isHotLead);
         totalWarmLeads = filteredPersonCount(Person::isWarmLead);
         totalColdLeads = filteredPersonCount(Person::isColdLead);
+        model.updateReminderList();
+        reminderList = model.getFilteredReminderList();
 
         /*
          Set dashboard to be clean below. Not written yet as there is no overarching mechanism to integrate

@@ -9,9 +9,10 @@
 <?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.text.Text?>
 
+<?import javafx.scene.control.ListView?>
 <HBox xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml/1" stylesheets="@css/dashboard.css">
     <VBox styleClass="stats">
-        <HBox spacing="8">
+        <HBox spacing="8" alignment="CENTER">
             <VBox styleClass="stats-card">
                 <Label text="Clients" styleClass="stats-title"/>
                 <Text styleClass="subtitle">uncontacted / contacting / closed</Text>
@@ -35,15 +36,20 @@
             <Label text="Interaction Outcomes" styleClass="chart-title"/>
             <PieChart fx:id="pieChart" legendVisible="false"/>
         </VBox>
-
-        <BarChart fx:id="barChart" legendVisible="false" horizontalGridLinesVisible="false"
-                  verticalGridLinesVisible="false">
-            <xAxis>
-                <CategoryAxis fx:id="xAxis" side="BOTTOM"/>
-            </xAxis>
-            <yAxis>
-                <NumberAxis fx:id="yAxis" side="LEFT"/>
-            </yAxis>
-        </BarChart>
+        <VBox alignment="CENTER">
+            <BarChart fx:id="barChart" legendVisible="false" horizontalGridLinesVisible="false"
+                      verticalGridLinesVisible="false">
+                <xAxis>
+                    <CategoryAxis fx:id="xAxis" side="BOTTOM"/>
+                </xAxis>
+                <yAxis>
+                    <NumberAxis fx:id="yAxis" side="LEFT"/>
+                </yAxis>
+            </BarChart>
+        </VBox>
+    </VBox>
+    <VBox minWidth="340" prefWidth="340" HBox.hgrow="ALWAYS" styleClass="reminder-list">
+        <Label text="Reminders" styleClass="reminder-label"/>
+        <ListView fx:id="reminderListView" VBox.vgrow="ALWAYS"/>
     </VBox>
 </HBox>
