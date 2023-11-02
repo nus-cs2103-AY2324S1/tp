@@ -39,8 +39,6 @@ public class AttendanceCommandParser implements Parser<AttendanceCommand> {
             if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
                 String name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()).toString();
                 String[] nameKeywords = name.split("\\s+");
-                AttendanceType attendanceType =
-                        ParserUtil.parseAttendanceType(argMultimap.getValue(PREFIX_ATTENDANCE_TYPE).get());
 
                 return new AttendanceCommand(
                         new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords))
