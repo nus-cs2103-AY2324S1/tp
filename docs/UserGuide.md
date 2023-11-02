@@ -21,13 +21,15 @@ title: User Guide
 
 # Introduction
 
-InterviewHub (IH) is a **desktop app for engineering manager to schedule job interviews and manage applicants**.
+Tired of sending out offers to the best candidates, just to receive a disappointing reply that they have already accepted another offer that was sent out before your's?
 
-It is optimized for use via a **Command Line Interface** (CLI) while still having the benefits of a **Graphical User Interface (GUI)**.
+**InterviewHub**  is a desktop app for engineering manager to schedule job interviews and manage applicants.
+By optimizing recruitment workflows, we enable faster decision-making, helping you secure top talent before your competitors.
 
-If you can type fast, IH can get your Interview management tasks done faster than traditional GUI apps.
+It is optimized for use via a **Command Line Interface** (CLI) while still having the benefits of a **Graphical User Interface** (GUI).
+If you can type fast, **InterviewHub** can get your Interview management tasks done faster than traditional GUI apps.
 
-Let's get started by following the [Quick Start](#quick-start) section!
+What are you waiting for? Let's get started using **InterviewHub** by following the [Quick Start](#quick-start) section!
 
 --------------------------------------------------------------------------------------------------------------------
 
