@@ -5,7 +5,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.nio.file.Path;
+import java.util.List;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
@@ -38,8 +40,8 @@ public class AddMusicianToBandCommandTest {
     }
     @Test
     public void constructor_nullBand_throwsNullPointerException() {
-        Index musicianIndex = Index.fromOneBased(1);
-        assertThrows(NullPointerException.class, () -> new AddMusicianToBandCommand(null, musicianIndex));
+        List<Index> musicianIndices = List.of(Index.fromOneBased(1));
+        assertThrows(NullPointerException.class, () -> new AddMusicianToBandCommand(null, musicianIndices));
     }
     @Test
     public void constructor_nullBandAndMusician_throwsNullPointerException() {
@@ -55,15 +57,49 @@ public class AddMusicianToBandCommandTest {
         CommandResult addCommandResult = new AddCommand(validMusician).execute(modelBandStub);
         CommandResult addBandCommandResult = new AddBandCommand(validBand).execute(modelBandStub);
         Index bandIndex = Index.fromOneBased(1);
-        Index musicianIndex = Index.fromOneBased(1);
-        CommandResult commandResult = new AddMusicianToBandCommand(bandIndex, musicianIndex).execute(modelBandStub);
+        List<Index> musicianIndices = List.of(Index.fromOneBased(1));
+        CommandResult commandResult = new AddMusicianToBandCommand(bandIndex, musicianIndices).execute(modelBandStub);
 
-        assertEquals(String.format(AddMusicianToBandCommand.MESSAGE_SUCCESS,
-                        Messages.format(modelBandStub.bandsAdded.get(bandIndex),
-                                modelBandStub.musiciansAdded.get(musicianIndex))),
-                commandResult.getFeedbackToUser());
+        String expectedSuccessMessage = String.format(
+                AddMusicianToBandCommand.MESSAGE_SUCCESS,
+                Messages.format(modelBandStub.bandsAdded.get(bandIndex),
+                        musicianIndices.stream().map(modelBandStub.musiciansAdded::get).collect(Collectors.toList()))
+        );
+        assertEquals(expectedSuccessMessage, commandResult.getFeedbackToUser());
         assertEquals(validBand, modelBandStub.bandsAdded.get(bandIndex));
         assertEquals(validBand.getMusicians(), modelBandStub.bandsAdded.get(bandIndex).getMusicians());
+    }
+    @Test
+    public void execute_bandIndexOutOfBounds_throwsInvalidBandIndex() throws Exception {
+        AddMusicianToBandCommandTest.ModelStubAcceptingMusicianAddedToBand modelBandStub =
+                new AddMusicianToBandCommandTest.ModelStubAcceptingMusicianAddedToBand();
+
+        Musician validMusician = new MusicianBuilder().build();
+        Band validBand = new BandBuilder().build();
+        // add musician to model
+        CommandResult addCommandResult = new AddCommand(validMusician).execute(modelBandStub);
+        // add band to model
+        CommandResult addBandCommandResult = new AddBandCommand(validBand).execute(modelBandStub);
+        Index invalidBandIndex = Index.fromOneBased(2);
+        Index musicianIndex = Index.fromOneBased(1);
+        assertThrows(CommandException.class, Messages.MESSAGE_INVALID_BAND_DISPLAYED_INDEX, () ->
+                new AddMusicianToBandCommand(invalidBandIndex, musicianIndex).execute(modelBandStub));
+    }
+    @Test
+    public void execute_musicianIndexOutOfBounds_throwsInvalidBandIndex() throws Exception {
+        AddMusicianToBandCommandTest.ModelStubAcceptingMusicianAddedToBand modelBandStub =
+                new AddMusicianToBandCommandTest.ModelStubAcceptingMusicianAddedToBand();
+
+        Musician validMusician = new MusicianBuilder().build();
+        Band validBand = new BandBuilder().build();
+        // add musician to model
+        CommandResult addCommandResult = new AddCommand(validMusician).execute(modelBandStub);
+        // add band to model
+        CommandResult addBandCommandResult = new AddBandCommand(validBand).execute(modelBandStub);
+        Index bandIndex = Index.fromOneBased(1);
+        Index invalidMusicianIndex = Index.fromOneBased(2);
+        assertThrows(CommandException.class, Messages.MESSAGE_INVALID_MUSICIAN_DISPLAYED_INDEX, () ->
+                new AddMusicianToBandCommand(bandIndex, invalidMusicianIndex).execute(modelBandStub));
     }
     @Test
     public void execute_duplicateMusicianAddedtoBand_throwsCommandException() throws Exception {
@@ -72,16 +108,18 @@ public class AddMusicianToBandCommandTest {
 
         Musician validMusician = new MusicianBuilder().build();
         Band validBand = new BandBuilder().build();
+        // add musician to model
         CommandResult addCommandResult = new AddCommand(validMusician).execute(modelBandStub);
+        // add band to model
         CommandResult addBandCommandResult = new AddBandCommand(validBand).execute(modelBandStub);
         Index bandIndex = Index.fromOneBased(1);
-        Index musicianIndex = Index.fromOneBased(1);
+        List<Index> musicianIndices = List.of(Index.fromOneBased(1));
         CommandResult firstAddMusiciancommandResult =
-                new AddMusicianToBandCommand(bandIndex, musicianIndex).execute(modelBandStub);
+                new AddMusicianToBandCommand(bandIndex, musicianIndices).execute(modelBandStub);
 
         assertThrows(CommandException.class,
                 AddMusicianToBandCommand.MESSAGE_DUPLICATE_MUSICIAN, () ->
-                        new AddMusicianToBandCommand(bandIndex, musicianIndex).execute(modelBandStub));
+                        new AddMusicianToBandCommand(bandIndex, musicianIndices).execute(modelBandStub));
     }
     /**
      * A default model stub that have all of the methods failing.
@@ -250,6 +288,9 @@ public class AddMusicianToBandCommandTest {
         }
         @Override
         public void updateFilteredBandList(Predicate<Band> predicate) {
+        }
+        @Override
+        public void updateFilteredBandMusicianList(Predicate<Band> predicate) {
         }
         @Override
         public ObservableList<Musician> getFilteredMusicianList() {

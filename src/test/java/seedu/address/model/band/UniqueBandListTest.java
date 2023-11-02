@@ -31,6 +31,7 @@ public class UniqueBandListTest {
 
     private final UniqueBandList uniqueBandList = new UniqueBandList();
 
+
     @Test
     public void contains_nullBand_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> uniqueBandList.contains(null));
@@ -189,8 +190,8 @@ public class UniqueBandListTest {
     @Test
     public void addMusician_musicianAdded_bandGetsUpdated() {
         uniqueBandList.add(ACE);
-        uniqueBandList.addMusician(0, ALICE);
-        assertTrue(ACE.hasMusician(ALICE));
+        uniqueBandList.addMusician(0, ELLE);
+        assertTrue(uniqueBandList.hasMusician(0, ELLE));
     }
 
     @Test
