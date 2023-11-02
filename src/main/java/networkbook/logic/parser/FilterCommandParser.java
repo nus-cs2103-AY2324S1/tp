@@ -11,11 +11,13 @@ import networkbook.logic.commands.filter.FilterCommand;
 import networkbook.logic.commands.filter.FilterCourseCommand;
 import networkbook.logic.commands.filter.FilterGradCommand;
 import networkbook.logic.commands.filter.FilterSpecCommand;
+import networkbook.logic.commands.filter.FilterTagCommand;
 import networkbook.logic.parser.exceptions.ParseException;
 import networkbook.model.person.filter.CourseContainsKeyTermsPredicate;
 import networkbook.model.person.filter.CourseIsStillBeingTakenPredicate;
 import networkbook.model.person.filter.GradEqualsOneOfPredicate;
 import networkbook.model.person.filter.SpecContainsKeyTermsPredicate;
+import networkbook.model.person.filter.TagsContainKeyTermsPredicate;
 
 /**
  * Parses input arguments and creates a new FilterCommand object.
@@ -59,6 +61,8 @@ public class FilterCommandParser implements Parser<FilterCommand> {
             return parseCourse(compArgs);
         case FilterGradCommand.FIELD_NAME:
             return parseGrad(compArgs);
+        case FilterTagCommand.FIELD_NAME:
+            return parseTag(compArgs);
         default:
             break;
         }
@@ -121,6 +125,19 @@ public class FilterCommandParser implements Parser<FilterCommand> {
         String[] predicateTerms = fieldString.get().trim().split("\\s+");
 
         return new FilterSpecCommand(new SpecContainsKeyTermsPredicate(List.of(predicateTerms)));
+    }
+
+    /**
+     * Parses the text and create a FilterTagCommand object.
+     *
+     * @param tag
+     * @return A FilterTagCommand
+     */
+    public FilterCommand parseTag(String tag) {
+        Optional<String> fieldString = Optional.ofNullable(tag);
+        String[] predicateTerms = fieldString.get().trim().split("\\s+");
+
+        return new FilterTagCommand(new TagsContainKeyTermsPredicate(List.of(predicateTerms)));
     }
 
     /**

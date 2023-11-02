@@ -14,7 +14,6 @@ import networkbook.model.ModelManager;
 import networkbook.model.NetworkBook;
 import networkbook.model.UserPrefs;
 import networkbook.model.person.Person;
-import networkbook.model.person.filter.SpecContainsKeyTermsPredicate;
 import networkbook.model.person.filter.TagsContainKeyTermsPredicate;
 import networkbook.testutil.PersonBuilder;
 

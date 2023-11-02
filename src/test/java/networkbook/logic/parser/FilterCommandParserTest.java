@@ -14,6 +14,7 @@ import networkbook.logic.commands.filter.FilterCommand;
 import networkbook.logic.commands.filter.FilterCourseCommand;
 import networkbook.logic.commands.filter.FilterGradCommand;
 import networkbook.logic.commands.filter.FilterSpecCommand;
+import networkbook.logic.commands.filter.FilterTagCommand;
 import networkbook.model.person.filter.CourseContainsKeyTermsPredicate;
 import networkbook.model.person.filter.CourseIsStillBeingTakenPredicate;
 import networkbook.model.person.filter.GradEqualsOneOfPredicate;
@@ -51,10 +52,12 @@ public class FilterCommandParserTest {
         FilterCommand courseCommand = parser.parse("filter /by course /with a");
         FilterCommand specCommand = parser.parse("filter /by spec /with a");
         FilterCommand gradCommand = parser.parse("filter /by grad /with 2000");
+        FilterCommand tagCommand = parser.parse("filter /by tag /with a b c");
 
         assertTrue(courseCommand instanceof FilterCourseCommand);
         assertTrue(specCommand instanceof FilterSpecCommand);
         assertTrue(gradCommand instanceof FilterGradCommand);
+        assertTrue(tagCommand instanceof FilterTagCommand);
     }
 
     @Test
