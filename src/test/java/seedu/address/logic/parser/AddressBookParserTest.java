@@ -110,7 +110,7 @@ public class AddressBookParserTest {
         assertTrue(parser.parseCommand(ExitCommand.COMMAND_WORD) instanceof ExitCommand);
         assertTrue(parser.parseCommand(ExitCommand.COMMAND_WORD + " 3") instanceof ExitCommand);
     }
-    
+
     @Test
     public void parseCommand_findApplicant() throws Exception {
         List<String> keywords = Arrays.asList("hello", "world", "wassup");
