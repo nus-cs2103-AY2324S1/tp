@@ -26,7 +26,7 @@ import seedu.lovebook.model.UserPrefs;
 import seedu.lovebook.model.util.SampleDataUtil;
 import seedu.lovebook.model.util.SampleDatePrefUtil;
 import seedu.lovebook.storage.DatePrefsStorage;
-import seedu.lovebook.storage.JsonLoveBookDatePrefs;
+import seedu.lovebook.storage.JsonDatePrefsStorage;
 import seedu.lovebook.storage.JsonLoveBookStorage;
 import seedu.lovebook.storage.JsonUserPrefsStorage;
 import seedu.lovebook.storage.LoveBookStorage;
@@ -63,7 +63,7 @@ public class MainApp extends Application {
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         UserPrefs userPrefs = initPrefs(userPrefsStorage);
         LoveBookStorage loveBookStorage = new JsonLoveBookStorage(userPrefs.getLoveBookFilePath());
-        DatePrefsStorage datePrefsStorage = new JsonLoveBookDatePrefs(userPrefs.getDatePrefsFilePath());
+        DatePrefsStorage datePrefsStorage = new JsonDatePrefsStorage(userPrefs.getDatePrefsFilePath());
         storage = new StorageManager(loveBookStorage, userPrefsStorage, datePrefsStorage);
         model = initModelManager(storage, userPrefs);
         logic = new LogicManager(model, storage);

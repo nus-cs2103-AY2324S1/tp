@@ -7,7 +7,7 @@ import java.util.List;
 import javafx.collections.ObservableList;
 import seedu.lovebook.commons.util.ToStringBuilder;
 import seedu.lovebook.model.date.Date;
-import seedu.lovebook.model.date.UniquePersonList;
+import seedu.lovebook.model.date.UniqueDateList;
 
 /**
  * Wraps all data at the lovebook-book level
@@ -15,7 +15,7 @@ import seedu.lovebook.model.date.UniquePersonList;
  */
 public class LoveBook implements ReadOnlyLoveBook {
 
-    private final UniquePersonList dates;
+    private final UniqueDateList dates;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -25,7 +25,7 @@ public class LoveBook implements ReadOnlyLoveBook {
      *   among constructors.
      */
     {
-        dates = new UniquePersonList();
+        dates = new UniqueDateList();
     }
 
     public LoveBook() {}

@@ -20,9 +20,9 @@ Given below are my contributions to the project.
   * Highlights: Age can take any value between 18 and 150.
 
 * **New Feature**:
-    * What it does: Added gender field for each date's gender
-    * Justification: Gender is an important factor as well in dating.
-    * Highlights: Gender can either be male or female. Gender icon is displayed when dates are displayed.
+  * What it does: Added gender field for each date's gender
+  * Justification: Gender is an important factor as well in dating.
+  * Highlights: Gender can either be male or female. Gender icon is displayed when dates are displayed.
    
 
 * **New Feature**:
@@ -31,14 +31,14 @@ Given below are my contributions to the project.
   * Highlights: Created a new classes and interfaces to store user preferences in a JSON file.
 
 * **New Feature**:
-* What it does: Added an avatar for each date added by the user
-* Justification: To make a more visual association with the date.
-* Highlights: Avatar is randomly generated based on the user's gender.
+  * What it does: Added an avatar for each date added by the user
+  * Justification: To make a more visual association with the date.
+  * Highlights: Avatar is randomly generated based on the user's gender.
 
 * **New Feature**:
-* What it does: Added the ability to store the user's preferences.
-* Justification: To make the user's preferences persistent so that it can be used by our matchmaking algorithm.
-* Highlights: Created a new classes and interfaces to store user preferences in a JSON file.
+  * What it does: Added the ability to store the user's preferences.
+  * Justification: To make the user's preferences persistent so that it can be used by our matchmaking algorithm.
+  * Highlights: Created a new classes and interfaces to store user preferences in a JSON file.
 
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=shishir&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code&since=2023-09-22&tabOpen=false)
 
@@ -53,11 +53,10 @@ Given below are my contributions to the project.
 
 * **Documentation**:
     * User Guide:
-    * - Updated documentation for add, edit, delete dates.
+      - Updated documentation for add, edit, delete dates.
       - Added a command summary table for the documentation.
       - Added introduction section, table of contents to the documentation.
-    * Developer Guide:
+  * Developer Guide:
 
 * **Community**:
 * Reviewed PRs and gave constructive feedback to my teammates (PRs [#131](https://github.com/AY2324S1-CS2103T-F10-2/tp/pull/131#discussion_r1375368044), [#119](https://github.com/AY2324S1-CS2103T-F10-2/tp/pull/119#pullrequestreview-1699225385))
-* 
