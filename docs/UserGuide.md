@@ -84,7 +84,7 @@ Format: `help`
 
 ### Adding a new contact: `add`
 
-Creates a new contact with the specified name and course code.
+Creates a new contact in the course with the specified name and details.
 
 ![add contact](images/addContact.png)
 
@@ -243,7 +243,7 @@ Examples:
 
 ### Deleting multiple students : `delete all`
 
-Deletes all students from current address book or the specified tutorial group in the current address book.
+Deletes all students from the course or all students from the specified tutorial group in the course.
 
 ![delete all](images/deleteAll.png)
 
