@@ -52,7 +52,7 @@ public class DeleteCommand extends UndoableCommand {
             "Patient does not have any medical histories to delete";
 
     public static final String MESSAGE_INVALID_MEDICAL_HISTORY =
-            "Patient does not have the medical histories speicifed.\n"
+            "Patient does not have the medical histories specified.\n"
             + "Please check the medical histories of the patient through finding the patient first.";
 
     public static final String MESSAGE_UNDO_DELETE_PERSON_SUCCESS = "Undoing the deletion of Patient:  %1$s";
