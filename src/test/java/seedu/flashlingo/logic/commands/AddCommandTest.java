@@ -18,4 +18,12 @@ public class AddCommandTest {
         assertThrows(NullPointerException.class, () -> new AddCommand(original, null));
         assertThrows(NullPointerException.class, () -> new AddCommand(null, null));
     }
+
+    @Test
+    public void constructor_normalFlashCard_success() {
+        // Check that the constructor does not throw any exceptions when a normal FlashCard is provided.
+        OriginalWord original = new OriginalWord("hello", "English");
+        TranslatedWord translation = new TranslatedWord("你好", "Mandarin");
+        new AddCommand(original, translation);
+    }
 }

@@ -13,8 +13,6 @@ import seedu.flashlingo.commons.core.index.Index;
 import seedu.flashlingo.logic.commands.EditCommand;
 import seedu.flashlingo.logic.parser.exceptions.ParseException;
 
-
-
 /**
  * Parses input arguments and creates a new EditCommand object
  */

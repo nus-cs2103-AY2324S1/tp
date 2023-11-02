@@ -15,6 +15,9 @@ public class ReviewCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "Listed all flashcards you need to review";
 
+    /**
+     * The predicate used to filter the flashcard which is overdue.
+     */
     private final WordOverduePredicate predicate;
 
     public ReviewCommand() {

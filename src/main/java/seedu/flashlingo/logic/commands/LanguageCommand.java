@@ -19,6 +19,9 @@ public class LanguageCommand extends Command {
             + "Parameters: LANGUAGE\n"
             + "Example: " + COMMAND_WORD + " English";
 
+    /**
+     * The predicate used to filter the flashcard list with specified language.
+     */
     private final WordLanguagePredicate predicate;
 
     public LanguageCommand(WordLanguagePredicate predicate) {
@@ -29,8 +32,7 @@ public class LanguageCommand extends Command {
         requireNonNull(model);
         model.updateFilteredFlashCardList(predicate);
         return new CommandResult(
-                String.format(Messages.MESSAGE_FLASHCARDS_LISTED_OVERVIEW + "\n"
-                                + model.getFilteredFlashCardList(),
+                String.format(Messages.MESSAGE_FLASHCARDS_LISTED_OVERVIEW + "\n",
                         model.getFilteredFlashCardList().size()));
     }
 
