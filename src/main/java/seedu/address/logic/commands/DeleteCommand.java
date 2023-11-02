@@ -30,6 +30,7 @@ public class DeleteCommand extends Command {
 
     private final Index[] targetIndices;
 
+
     /**
      * Constructs a {@code DeleteCommand} to delete bookings at the specified indices.
      *
@@ -69,8 +70,9 @@ public class DeleteCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_BOOKING_DISPLAYED_INDEX);
         }
 
-        for (int i = 0; i < targetIndices.length; i++) {
-            Booking deletedBooking = deleteList.get(i);
+        model.addToDeletedBookings(deleteList); // Add the deleted bookings to the tracking list
+
+        for (Booking deletedBooking : deleteList) {
             model.deleteBooking(deletedBooking);
             deletedBookings.append(Messages.format(deletedBooking)).append(", ");
         }
