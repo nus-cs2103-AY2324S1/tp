@@ -188,8 +188,10 @@ list
 
 You should then see the list of clients in the application window.
 
-> [!NOTE]
-> You can quickly switch between the dashboard and the list of clients by using the `dashboard` and `list` commands.
+<div markdown="span" class="alert alert-primary">
+:bulb: **Tip:**
+You can quickly switch between the dashboard and the list of clients using the `dashboard` and `list` commands.
+</div>
 
 ### Finding a client by name: ***find***
 
