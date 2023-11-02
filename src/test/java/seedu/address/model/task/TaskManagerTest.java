@@ -40,7 +40,7 @@ class TaskManagerTest {
     @Test
     public void deleteTask_taskFound_success() {
         taskManager.addTask(ASSIGNMENT);
-        assertEquals(ASSIGNMENT, taskManager.deleteTask(1));
+        assertEquals(ASSIGNMENT, taskManager.deleteTask(0));
     }
 
     @Test
@@ -51,8 +51,8 @@ class TaskManagerTest {
         taskManager.sortTasksBy("Deadline");
         taskManager.sortTasksBy("Description");
 
-        assertTrue(taskManager.deleteTask(1).equals(MEAL));
-        assertTrue(taskManager.deleteTask(1).equals(ASSIGNMENT));
+        assertTrue(taskManager.deleteTask(0).equals(MEAL));
+        assertTrue(taskManager.deleteTask(0).equals(ASSIGNMENT));
     }
 
     @Test
@@ -63,8 +63,8 @@ class TaskManagerTest {
         taskManager.sortTasksBy("Description");
         taskManager.sortTasksBy("Deadline");
 
-        assertTrue(taskManager.deleteTask(1).equals(ASSIGNMENT));
-        assertTrue(taskManager.deleteTask(1).equals(MEAL));
+        assertTrue(taskManager.deleteTask(0).equals(ASSIGNMENT));
+        assertTrue(taskManager.deleteTask(0).equals(MEAL));
     }
 
     @Test
