@@ -259,11 +259,11 @@ _Details coming soon ..._
 **A**: HealthSync's CLI interface offers faster data entry and navigation for users who are comfortable with typing.
 It streamlines tasks and provides a more efficient way to manage patient details.
 
-**Q**: Can multiple users access Healthysync simultaneously, and how do I set up user accounts?<br>
-**A**: Healthysync is currently an application for a single user. Hence, it cannot be accessed simultaneously
+**Q**: Can multiple users access HealthSync simultaneously, and how do I set up user accounts?<br>
+**A**: HealthSync is currently an application for a single user. Hence, it cannot be accessed simultaneously
 by different users.
 
-**Q**: How do I import patient data from external sources into Healthysync?<br>
+**Q**: How do I import patient data from external sources into HealthSync?<br>
 **A**: Datafile storing current patient data will be stored in `data/addressbook.json` by default under the same folder.
 You may import patient data and store into that file. However, do adhere to the data format present in the current file.
 
