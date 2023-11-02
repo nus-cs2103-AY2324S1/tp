@@ -1,5 +1,7 @@
 package networkbook.ui;
 
+import static networkbook.commons.util.CollectionUtil.requireAllNonNull;
+
 import java.util.ArrayList;
 
 import javafx.collections.ObservableList;
@@ -135,6 +137,16 @@ public class CommandBox extends UiPart<Region> {
         }
 
         styleClass.add(ERROR_STYLE_CLASS);
+    }
+
+    /**
+     * Inputs the given command string into the command box and executes it.
+     * @param commandText String command to execute.
+     */
+    protected void submitCommand(String commandText) {
+        requireAllNonNull(commandText);
+        commandTextField.setText(commandText);
+        handleCommandEntered();
     }
 
     /**

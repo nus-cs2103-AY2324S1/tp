@@ -27,6 +27,9 @@ public class FilterCommandParser implements Parser<FilterCommand> {
             + " be empty!";
     public static final String UNKNOWN_FIELD = "Can only filter by spec, course, tag, or grad year!";
 
+    private static final String CMD_STRING_FORMAT = FilterCommand.COMMAND_WORD + " "
+                + CliSyntax.PREFIX_FILTER_FIELD + " %s";
+
     /**
      * Parses the given string of arguments
      *
@@ -120,6 +123,15 @@ public class FilterCommandParser implements Parser<FilterCommand> {
                 new CourseContainsKeyTermsPredicate(List.of(predicateTerms)),
                 new CourseIsStillBeingTakenPredicate(LocalDate.now()),
                 Boolean.parseBoolean(booleanToCheck.orElse("false")));
+    }
+
+    /**
+     * Generates filter command string from given parameters.
+     * @param fieldName Field to insert in command.
+     * @return Command string.
+     */
+    public static String generateCommandString(String fieldName) {
+        return String.format(CMD_STRING_FORMAT, fieldName);
     }
 
     /**

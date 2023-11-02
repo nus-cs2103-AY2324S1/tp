@@ -1,5 +1,7 @@
 package networkbook.ui;
 
+import static networkbook.commons.util.CollectionUtil.requireAllNonNull;
+
 import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
@@ -46,6 +48,7 @@ public class MainWindow extends UiPart<Stage> {
     private PersonListPanel personListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+    private CommandBox commandBox;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -126,7 +129,7 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        personListPanel = new PersonListPanel(logic.getFilteredPersonList());
+        personListPanel = new PersonListPanel(logic.getFilteredPersonList(), cmd -> submitCommand(cmd));
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
@@ -135,7 +138,7 @@ public class MainWindow extends UiPart<Stage> {
         StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getNetworkBookFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
-        CommandBox commandBox = new CommandBox(this::executeCommand);
+        commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
         setCommandBoxShortcutsWhenUnfocused(commandBox);
     }
@@ -189,6 +192,15 @@ public class MainWindow extends UiPart<Stage> {
         } else {
             helpWindow.focus();
         }
+    }
+
+    /**
+     * Inputs the given command string into the command box and executes it.
+     * @param commandText String command to execute.
+     */
+    private void submitCommand(String commandText) {
+        requireAllNonNull(commandText);
+        commandBox.submitCommand(commandText);
     }
 
     void show() {
