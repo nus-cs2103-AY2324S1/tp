@@ -72,7 +72,7 @@ Shows a message explaning how to access the help page.
 
 Format: `help`
 
-## Contact Management
+## Address Book Management
 
 ### Adding a person: `add`
 
@@ -190,7 +190,18 @@ user has in store for the current week. Additionally, the user is also
 able to compare and isolate common pockets of free time with any of their contacts 
 to plan activities together.
 
-### Adding an event
+### Date Time Format
+
+When inputting a date and time into a command, the following format is used: 
+
+* `yyyy-MM-dd HH:mm` where
+    * `yyyy` represents the year,
+    * `MM` represents the month,
+    * `dd` represents the day,
+    * `HH` represents the hours and
+    * `mm` represents the minutes.
+
+### Adding an event: `addEvent`
 
 Adds an event to the user's calendar.
 
@@ -202,19 +213,61 @@ Format: `addEvent d/DESCRIPTION ts/START_DATE_TIME ts/END_DATE_TIME`
 Example:
 * `addEvent Cry about deadlines d/12/12/2012 s/2200 e/2359`
 
-### Deleting an event (Coming Soon)
+### Deleting an event: `deleteEvent`
 
 Deletes an event from the user's calendar.
 
-Format `deleteEvent d/DATE s/START_TIME`
+Format `deleteEvent DATE_TIME_DURING_EVENT`
 
-* Deletes an event starting from `START_TIME` on `DATE`
-* If there is no event starting at `START_TIME`, an error will be returned
-* `START_TIME` must be in 24 hour notation
-* `DATE` must be in the format `DD/MM/YYYY`
+* Deletes an event at the specified date and time.
+* An event is considered to be at that date and time if the date time lies between the start time (inclusive) and the
+end time (exclusive).
+* If there is no event during `DATE_TIME_DURING_EVENT`, an error will be thrown.
 
 Example:
-`deleteEvent d/12/12/2012 s/2200`
+`deleteEvent 2023-11-01 12:00`
+
+### Deleting multiple events: `clearEvents`
+
+Clears all events within a specified time range.
+
+Format: `clearEvents ts/START_DATE_TIME te/END_DATE_TIME c/CONFIRMATION`
+
+* Deletes all events from the specified start date and time to the specified end date and time.
+* An event is considered to be within the time range if overlaps with the time range for any period of time.
+* When the `CONFIRMATION` is absent, the command shows all events within the time range but does not delete them. The
+same command is then shown with the confirmation included that can be copied and pasted to execute the command.
+* If there is no `START_DATE_TIME` or `END_DATE_TIME`, an error will be thrown.
+
+### Viewing all events
+
+Events can be viewed from the calendar that appears on the right.
+
+Additionally, a list of all events are displayed by default at the bottom. This list at the bottom can be switched to a
+task list with the `switchList` command. More information can be found under `Viewing all Tasks`.
+
+### Adding an event to a contact
+
+Adds an event to a contact's calendar at the specified index.
+
+Format: `addContactEvent INDEX d/DESCRIPTION ts/START_DATE_TIME ts/END_DATE_TIME`
+
+* Adds the event starting from `START_DATE_TIME` and ending at `END_DATE_TIME`
+* `START_DATE_TIME` and `END_DATE_TIME` must be in `yyyy-MM-dd HH:mm` format
+
+Example:
+* `addContactEvent 1 d/Team Meeting ts/2024-01-01 09:00 te/2024-01-01 11:00`
+
+### Deleting an event from a contact
+
+Deletes an event from a contact's calendar at the specified index.
+
+Format `deleteContactEvent INDEX ts/DATE_TIME`
+
+* Deletes an event that contains the `DATE_TIME` from the contact
+
+Example:
+* `deleteContactEvent 1 ts/2024-01-01 09:00`
 
 ### Comparing calendars with AddressBook Contacts
 
@@ -228,21 +281,21 @@ the main application again.
 
 ## 1. Comparison by index
 
-Format `compareCalendars <INDEX1> <INDEX2> ...`
+Format `compareCalendars INDEX1 INDEX2 ...`
 
-* Compare calendar with the contacts at the respective `<INDEX>`
-* `<INDEX>` must be a positive non-zero integer that is smaller than the size of the AddressBook
-* If the `<INDEX>` number provided is invalid, an error will be returned
+* Compare calendar with the contacts at the respective `INDEX`
+* `INDEX` must be a positive non-zero integer that is smaller than the size of the AddressBook
+* If the `INDEX` number provided is invalid, an error will be returned
 
 Example:
 `compareCalendars 1 3 5`
 
 ## 2. Comparison by tag
 
-Format `compareGroupCalendars <TAG1> <TAG2> ...`
+Format `compareGroupCalendars TAG1 TAG2 ...`
 
-* Compare calendar with the contacts with the specified `<TAG>`s
-* If all the `<TAG>`s provided are invalid, the resulting pop-up will just display the user's calendar
+* Compare calendar with the contacts with the specified `TAG`s
+* If all the `TAG`s provided are invalid, the resulting pop-up will just display the user's calendar
 
 Example:
 `compareGroupCalendars school friends`
@@ -252,20 +305,71 @@ Example:
 User can import *.ics files, which will automatically be integrated into
 their UniMate calendars.
 
-Format: `import <FILE_PATH>`
+Format: `import FILE_PATH`
 
 ### View other weeks of Calendar (Coming Soon)
 
 User can view other weeks of their calendar schedule beyond just the
 current week.
 
-Format: `viewWeek <DATE>`
+Format: `viewWeek DATE`
 
-### Viewing all events (Coming Soon)
+### Viewing another person's events: `viewContactEvents`
 
-Opens a view of all events currently stored in the calendar.
+Creates a pop-up that displays a list of all events of a calendar belonging to a person in the Addressbook.
 
-Format: `viewEvents`
+Format: `viewContactEvents INDEX`
+
+* Views the event list of the person at `INDEX` as displayed.
+
+## Task Management System
+
+Tasks consist of a `DESCRIPTION` and a `DEADLINE`. 
+
+### Viewing tasks: `switchList`
+
+Switches the bottom list between the event list and the task list.
+
+Format: `switchList`
+
+* All input after `switchList` will be ignored.
+* The bottom list displays the event list by default.
+
+### Adding tasks: `addTask`
+
+Adds a task to the Task Manager.
+
+Format: `addTask d/DESCRIPTION [te/DEADLINE]`
+
+* `DESCRIPTION` cannot be empty.
+* `DEADLINE` must be in the same format given above for date and time.
+* `DEADLINE` can also be omitted to create a task with no specified deadline
+
+Examples: 
+* `addTask d/Go for a run te/2023-02-14 19:00`
+* `addTask d/Hydrate regularly!`
+
+### Deleting tasks: `deleteTask`
+
+Deletes a task from the Task Manager according to the index of the task displayed in the task list.
+
+Format: `deleteTask INDEX`
+        
+* Throws an error if there is no `INDEX` present or if it exceeds the length of the task list.
+
+### Sorting tasks: `sortTask`
+
+Changes the way tasks in the Task Manager are displayed in the task list.
+
+Format: `sortTasks PARAMETER`
+
+* `PARAMETER` can only be `DESCRIPTION` or `DEADLINE`.
+
+Examples:
+* `sortTasks DESCRIPTION` sorts tasks by their `DESCRIPTION` alphabetically.
+* `sortTasks DEADLINE` sorts tasks by their `DEADLINE`. Tasks with deadlines are prioritised above tasks with no 
+deadline.
+
 
 ## Miscellaneous
 
@@ -279,11 +383,14 @@ Format: `save`
 
 ### Saving the data
 
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+All data is saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 ### Editing the data file
 
-AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+AddressBook data is saved automatically as a JSON file `[JAR file location]/data/addressbook.json`.
+Calendar data is saved automatically as a JSON file `[JAR file location]/data/calendar.json`.
+Task-list data is saved automatically as a JSON file `[JAR file location]/data/taskmanager.json`.
+Advanced users are welcome to update data directly by editing the data files.
 
 <box type="warning" seamless>
 
@@ -323,5 +430,12 @@ Action     | Format, Examples
 **List** | `list`
 **Help** | `help`
 **addEvent** | `addEvent d/DESCRIPTION ts/START_DATE_TIME te/END_DATE_TIME` <br> e.g., `addEvent d/Cry about deadlines ts/2023-01-01 00:01 te/2023-12-31 23:59`
-**deleteEvent** | `deleteEvent d/DATE s/START_TIME` <br> e.g., `deleteEvent d/12/12/2012 s/2200`
-**viewEvents** | `viewEvents`
+**deleteEvent** | `deleteEvent DATE_TIME` <br> e.g., `deleteEvent 2023-02-03 12:00`
+**addContactEvent** | `addContactEvent INDEX d/DESCRIPTION ts/START_DATE_TIME te/END_DATE_TIME` <br> e.g., `addContactEvent 1 d/Cry about deadlines ts/2023-01-01 00:01 te/2023-12-31 23:59`
+**deleteContactEvent** | `deleteContactEvent INDEX ts/DATE_TIME` <br> e.g., `deleteContactEvent 1 ts/2023-02-03 12:00`
+**clearEvents** | `clearEvent ts/START_DATE_TIME te/END_DATE_TIME` <br> e.g., `clearEvent ts/2023-02-03 12:00 te/2023-02-03 14:00`
+**addTask** | `addTask d/DESCRIPTION [te/DEADLINE]` <br> e.g. `addTask d/Go for a run te/2023-02-14 19:00`
+**deleteTask** | `deleteTask INDEX`
+**sortTasks** | `sortTasks PARAMETER` <br> e.g. `sortTasks DESCRIPTION` <br> e.g. `sortTasks DEADLINE`
+**switchList** | `switchList`
+**viewContactEvents** | `viewContactEvents INDEX`
