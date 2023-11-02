@@ -87,7 +87,7 @@ public class StorageManager implements Storage {
     // ================ Calendar methods =================================
     @Override
     public Path getCalendarFilePath() {
-        return addressBookStorage.getAddressBookFilePath();
+        return calendarStorage.getCalendarFilePath();
     }
 
     @Override
