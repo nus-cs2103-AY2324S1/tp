@@ -193,7 +193,7 @@ Cleared staff list
 
 Format: `cleartransaction`
 
-Cleared transaction list
+Removes all entries in the transaction list
 ### Edit: `edit`
 
 Format: `edit <ID> [ty/<TYPE>] [d/<DESCRIPTION>] [amt/<AMOUNT>] [on/<DATE>] [s/<STAFF>]...`
