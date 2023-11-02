@@ -90,7 +90,7 @@ public class EditCommand extends Command {
         Difficulty difficulty = Difficulty.NEW;
 
         return new Card(updatedQuestion, updatedAnswer, difficulty, updatedTags,
-                cardToEdit.getNextPracticeDate(), cardToEdit.getLastPracticeDate());
+                cardToEdit.getNextPracticeDate(), cardToEdit.getLastPracticeDate(), cardToEdit.getSolveCount());
     }
 
     @Override

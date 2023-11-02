@@ -1,23 +1,20 @@
 package seedu.address.logic.commands;
 
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalCards.getTypicalDeck;
-
 import org.junit.jupiter.api.Test;
-
 import seedu.address.commons.core.index.Index;
 import seedu.address.model.Deck;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.card.Difficulty;
 
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.testutil.TypicalCards.getTypicalDeck;
 
 
 public class SetDifficultyCommandTest {
 
-
-
-    private Model model = new ModelManager(getTypicalDeck(), new UserPrefs());
+    private final Model model = new ModelManager(getTypicalDeck(), new UserPrefs());
 
     @Test
     public void execute_setLowestPriority_success() {
@@ -27,8 +24,8 @@ public class SetDifficultyCommandTest {
 
 
         Model expectedModel = new ModelManager(new Deck(model.getDeck()), new UserPrefs());
-        expectedModel.getDeck().getCardList().get(0).setDifficulty("easy");
-        expectedModel.getDeck().getCardList().get(0).setNewPracticeDateWith("easy");
+        expectedModel.getDeck().getCardList().get(0).setDifficulty(Difficulty.EASY);
+        expectedModel.getDeck().getCardList().get(0).setNewPracticeDateWith(Difficulty.EASY);
         expectedModel.getDeck().sort();
 
         assertCommandSuccess(setDifficultyCommand, model, expectedMessage, expectedModel);
@@ -40,10 +37,9 @@ public class SetDifficultyCommandTest {
 
         String expectedMessage = "Set Difficulty for Question 1 (Difficulty level: medium)";
 
-
         Model expectedModel = new ModelManager(new Deck(model.getDeck()), new UserPrefs());
-        expectedModel.getDeck().getCardList().get(0).setDifficulty("medium");
-        expectedModel.getDeck().getCardList().get(0).setNewPracticeDateWith("medium");
+        expectedModel.getDeck().getCardList().get(0).setDifficulty(Difficulty.MEDIUM);
+        expectedModel.getDeck().getCardList().get(0).setNewPracticeDateWith(Difficulty.MEDIUM);
         expectedModel.getDeck().sort();
 
         assertCommandSuccess(setDifficultyCommand, model, expectedMessage, expectedModel);
@@ -55,10 +51,9 @@ public class SetDifficultyCommandTest {
 
         String expectedMessage = "Set Difficulty for Question 1 (Difficulty level: hard)";
 
-
         Model expectedModel = new ModelManager(new Deck(model.getDeck()), new UserPrefs());
-        expectedModel.getDeck().getCardList().get(0).setDifficulty("hard");
-        expectedModel.getDeck().getCardList().get(0).setNewPracticeDateWith("hard");
+        expectedModel.getDeck().getCardList().get(0).setDifficulty(Difficulty.HARD);
+        expectedModel.getDeck().getCardList().get(0).setNewPracticeDateWith(Difficulty.HARD);
         expectedModel.getDeck().sort();
 
         assertCommandSuccess(setDifficultyCommand, model, expectedMessage, expectedModel);

@@ -42,8 +42,9 @@ public class AddCommandParser implements Parser<AddCommand> {
         PracticeDate practiceDate = new PracticeDate(LocalDateTime.now());
         List<Tag> tags = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
         Difficulty difficulty = Difficulty.NEW;
+        SolveCount solveCount = new SolveCount();
 
-        Card card = new Card(question, answer, difficulty, tags, practiceDate, null);
+        Card card = new Card(question, answer, difficulty, tags, practiceDate, null, solveCount);
 
         return new AddCommand(card);
     }

@@ -24,7 +24,7 @@ public class Card implements Comparable<Card> {
     private PracticeDate lastPracticeDate; // last date card was practiced, can be null.
     private PracticeDate nextPracticeDate; // next date card should be practiced.
     private final List<Tag> tags = new ArrayList<>();
-    private SolveCount solveCount;
+    private final SolveCount solveCount;
 
     /**
      * Every field must be present, and taking in if solveCount is provided
