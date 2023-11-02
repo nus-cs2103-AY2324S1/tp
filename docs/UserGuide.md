@@ -314,8 +314,59 @@ _Details coming soon ..._
 
 ## FAQ
 
+### Launching HouR
+
+**Q**: How can I launch HouR if clicking on the JAR file does not work?<br>
+**A**: There are two possible methods to launch HouR.
+
+**Method 1**: For users familiar with the Command Prompt
+1. Open the Command Prompt
+2. Navigate to the directory where the JAR file is located using `cd [JAR file location]`
+3. Type `java -jar hour.jar` and press Enter 
+4. HouR should launch
+
+**Method 2**: For users that wish to create a script to launch HouR (Recommended)
+1. Create a new text file 
+2. Copy and paste the following into the text file: `java -jar [JAR file location]/hour.jar` 
+3. Save the text file as `hour.bat` (Windows) or `hour.sh` (MacOS/Linux)
+4. Change the admin settings of the script to allow it to run as program:
+   * Windows: Right-click on the script and select **Properties**. Under **General**, check the box that says `Allow this file to run as a program`. 
+   * MacOS/Linux: Open the Terminal and navigate to the directory where the script is located. Type `chmod +x [script name]` and press Enter.<br> 
+     Note: (`chmod +x` changes permissions of the script to allow it to be executed)
+5. Double-click on the script to launch HouR 
+6. HouR should launch
+
+If you have any further issues, please raise an issue on our [Github page](https://github.com/AY2324S1-CS2103T-W12-1/tp/issues). We will attend to you as soon as we can.
+
+### Checking Java Version
+
+**Q**: How can I check my Java version?<br>
+**A**: Open a Command Prompt and type `java -version`. If you do not have Java installed, you can install Java 11 using the Oracle guide [here](https://www.oracle.com/java/technologies/downloads/#java11). Alternatively, you can install the OpenJDK version.
+
+For Mac users, you may wish to follow the instructions listed [here](https://nus-cs2103-ay2324s1.github.io/website/admin/programmingLanguages.html).
+
+### Loading Data from Another Computer
+
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous HouR home folder.
+**A**: Install HouR in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous HouR home folder.
+
+**Q**: How can I load data from one computer into HouR installed on another computer?<br>
+**A**: This can be done by following the three steps below.
+1. Delete the `hour.json` file (stored at `[hour.jar file location]/data/hour.json`) from the computer that you wish to use HouR on.
+2. Copy over the `hour.json` file from the computer which you no longer wish to use HouR on.
+3. Boot up HouR to check whether your employee information is properly loaded into the new computer
+
+### Using HouR
+
+**Q**: What are the available commands?<br>
+**A**: Refer to the Command Summary for the list of available commands. Alternatively, from the main application window, you can type `help` to view the list of available commands.
+
+**Q**: Do I need an internet connection to use HouR?<br>
+**A**: All of HouR’s functionality can be used offline! No internet connection is required.
+
+**Q**: How do I save my data?<br>
+**A**: Data is saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+
 
 --------------------------------------------------------------------------------------------------------------------
 
