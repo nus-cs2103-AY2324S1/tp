@@ -4,6 +4,8 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -18,10 +20,12 @@ import seedu.address.model.booking.Booking;
  */
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
+    private static final int UNDO_LIMIT = 5; // Set the limit for undo operations
 
     private final BookingsBook bookingsBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Booking> filteredBookings;
+    private List<List<Booking>> deletedBookings = new ArrayList<>();
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -168,4 +172,24 @@ public class ModelManager implements Model {
                 && filteredBookings.equals(otherModelManager.filteredBookings);
     }
 
+    @Override
+    public void addToDeletedBookings(List<Booking> deleteList) {
+        if (deletedBookings.size() >= UNDO_LIMIT) {
+            deletedBookings.remove(0); // Remove the oldest entry if the limit is reached
+        }
+        deletedBookings.add(deleteList);
+    }
+
+    @Override
+    public List<Booking> undoDeletion() {
+        if (!deletedBookings.isEmpty()) {
+            List<Booking> lastDeletion = deletedBookings.remove(deletedBookings.size() - 1);
+            for (Booking booking : lastDeletion) {
+                addBooking(booking); // Add deleted bookings back to the system
+            }
+            return lastDeletion;
+        } else {
+            return new ArrayList<>(); // Throw exception if there are no deletions to undo
+        }
+    }
 }
