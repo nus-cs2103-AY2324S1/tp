@@ -38,7 +38,7 @@ public class AddContactEventCommand extends Command {
             + PREFIX_EVENT_DESCRIPTION + "DESCRIPTION "
             + PREFIX_EVENT_START_DATE_TIME + "START DATE AND TIME "
             + PREFIX_EVENT_END_DATE_TIME + "END DATE AND TIME...\n"
-            + "Example: " + COMMAND_WORD + " "
+            + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_EVENT_DESCRIPTION + "Nap "
             + PREFIX_EVENT_START_DATE_TIME + "2024-01-01 12:00 "
             + PREFIX_EVENT_END_DATE_TIME + "2024-01-01 18:00";

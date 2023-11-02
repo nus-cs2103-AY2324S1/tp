@@ -34,7 +34,7 @@ public class DeleteContactEventCommand extends Command {
             + "identified by the index number used in the displayed person list.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + "ANY TIME WITHIN EVENT DURATION \n"
-            + "Example: " + COMMAND_WORD + " "
+            + "Example: " + COMMAND_WORD + " 1 "
             + "2024-01-01 12:00 ";
 
     public static final String MESSAGE_DELETE_EVENT_FROM_PERSON_SUCCESS = "Event deleted from %s: %2$s";
