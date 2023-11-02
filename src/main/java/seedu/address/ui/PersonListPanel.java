@@ -2,16 +2,13 @@ package seedu.address.ui;
 
 import java.util.logging.Logger;
 
-import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Region;
 import javafx.scene.paint.Color;
 import seedu.address.commons.core.LogsCenter;
@@ -28,11 +25,7 @@ public class PersonListPanel extends UiPart<Region> {
 
     @FXML private TableView<Person> table;
     @FXML private TableColumn<Person, Void> indexCol;
-    @FXML private TableColumn<Person, String> nameCol;
-    @FXML private TableColumn<Person, String> emailCol;
-    @FXML private TableColumn<Person, String> phoneCol;
-    @FXML private TableColumn<Person, String> addressCol;
-    @FXML private TableColumn<Person, Void> tagsCol;
+    @FXML private TableColumn<Person, Void> contactCol;
     @FXML private TableColumn<Person, Void> notesCol;
     @FXML private TableColumn<Person, Void> eventsCol;
 
@@ -46,24 +39,23 @@ public class PersonListPanel extends UiPart<Region> {
         indexCol.setCellFactory(col -> new TableIndexCell());
         indexCol.setPrefWidth(50);
 
-        nameCol.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getName().fullName));
-        emailCol.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getEmail().value));
+        contactCol.setCellFactory(col -> new TableContactsCell(personList));
 
-        phoneCol.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getPhone().value));
-        phoneCol.setPrefWidth(100);
-
-        addressCol.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getAddress().value));
-        tagsCol.setCellFactory(col -> new TableTagsCell(personList));
         notesCol.setCellFactory(col -> new TableNotesCell(personList));
+        notesCol.minWidthProperty().bind(
+            table.widthProperty().multiply(0.5));
+
         eventsCol.setCellFactory(col -> new TableEventsCell(personList));
+        eventsCol.minWidthProperty().bind(
+            table.widthProperty().multiply(0.3));
 
         table.setItems(personList);
     }
 
-    class TableTagsCell extends TableCell<Person, Void> {
+    class TableContactsCell extends TableCell<Person, Void> {
         private ObservableList<Person> personList;
 
-        public TableTagsCell(ObservableList<Person> personList) {
+        public TableContactsCell(ObservableList<Person> personList) {
             this.personList = personList;
         }
 
@@ -73,13 +65,7 @@ public class PersonListPanel extends UiPart<Region> {
             if (isEmpty() || index < 0) {
                 setGraphic(null);
             } else {
-                FlowPane tagFlowPane = new FlowPane();
-                tagFlowPane.setVgap(8);
-                tagFlowPane.setHgap(10);
-                tagFlowPane.setPrefWrapLength(200);
-                personList.get(index).getTags().stream()
-                    .forEach(tag -> tagFlowPane.getChildren().add(new Label(tag.tagName)));
-                setGraphic(tagFlowPane);
+                setGraphic(new ContactCard(personList.get(index)).getRoot());
             }
         }
     }
@@ -101,7 +87,6 @@ public class PersonListPanel extends UiPart<Region> {
                 notes.setItems(personList.get(index).getNotes());
                 notes.setCellFactory(cell -> new NoteCell());
                 notes.setPrefHeight(120);
-                notes.setPrefWidth(300);
                 setGraphic(notes);
             }
         }
@@ -168,5 +153,4 @@ public class PersonListPanel extends UiPart<Region> {
             }
         }
     }
-
 }

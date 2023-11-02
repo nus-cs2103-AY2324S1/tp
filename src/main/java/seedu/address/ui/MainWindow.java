@@ -36,6 +36,7 @@ public class MainWindow extends UiPart<Stage> {
     private PersonListPanel personListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+    private EventListWindow eventListWindow;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -69,6 +70,8 @@ public class MainWindow extends UiPart<Stage> {
         setAccelerators();
 
         helpWindow = new HelpWindow();
+
+        eventListWindow = new EventListWindow();
 
         iNSTANCE = this;
     }
@@ -141,6 +144,18 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
+     * Opens the event list window or focuses on it if it's already opened.
+     */
+    @FXML
+    public void handleEventList() {
+        if (!eventListWindow.isShowing()) {
+            eventListWindow.show(logic.getFilteredEventList());
+        } else {
+            eventListWindow.focus();
+        }
+    }
+
+    /**
      * Opens the help window or focuses on it if it's already opened.
      */
     @FXML
@@ -148,7 +163,7 @@ public class MainWindow extends UiPart<Stage> {
         if (!helpWindow.isShowing()) {
             helpWindow.show();
         } else {
-            helpWindow.focus();
+            eventListWindow.focus();
         }
     }
 
@@ -182,6 +197,10 @@ public class MainWindow extends UiPart<Stage> {
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
+
+            if (commandResult.isListEvent()) {
+                handleEventList();
+            }
 
             if (commandResult.isExit()) {
                 handleExit();
