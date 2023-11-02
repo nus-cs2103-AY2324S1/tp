@@ -48,8 +48,8 @@
             </BarChart>
         </VBox>
     </VBox>
-    <VBox minWidth="340" prefWidth="340" HBox.hgrow="ALWAYS" styleClass="reminder-list">
+    <VBox minWidth="100" prefWidth="100" HBox.hgrow="ALWAYS" styleClass="reminder-list">
         <Label text="Reminders" styleClass="reminder-label"/>
-        <ListView fx:id="dateRemindersListView" VBox.vgrow="ALWAYS"/>
+        <ListView id="reminderDateListView" fx:id="dateRemindersListView" VBox.vgrow="ALWAYS"/>
     </VBox>
 </HBox>
