@@ -62,23 +62,35 @@ public class AddAppointmentCommand extends Command {
 
         Patient chosenPatient = findPatient(model);
         Doctor chosenDoctor = findDoctor(model);
-        if (chosenPatient == null) {
-            throw new CommandException(MESSAGE_INVALID_PATIENT);
-        }
-        if (chosenDoctor == null) {
-            throw new CommandException(MESSAGE_INVALID_DOCTOR);
-        }
+        checkPatientAndDoctor(chosenPatient, chosenDoctor);
+        checkValidAppointment(chosenPatient, chosenDoctor, toAdd);
+        chosenPatient.addAppointment(toAdd);
+        chosenDoctor.addAppointment(toAdd);
+        model.addAppointment(toAdd);
+        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
+    }
 
+    private void checkValidAppointment(Patient chosenPatient, Doctor chosenDoctor, Appointment toAdd)
+            throws CommandException {
         if (chosenPatient.hasAppointmentAt(toAdd.getAppointmentTime())) {
             throw new CommandException(MESSAGE_DUPLICATE_APPOINTMENT_PATIENT);
         }
         if (chosenDoctor.hasAppointmentAt(toAdd.getAppointmentTime())) {
             throw new CommandException(MESSAGE_DUPLICATE_APPOINTMENT_DOCTOR);
         }
+    }
 
-        chosenPatient.addAppointment(toAdd);
-        chosenDoctor.addAppointment(toAdd);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
+    private void checkPatientAndDoctor(Patient chosenPatient, Doctor chosenDoctor) throws CommandException {
+        if (chosenPatient == null) {
+            throw new CommandException(MESSAGE_INVALID_PATIENT);
+        }
+        if (chosenDoctor == null) {
+            throw new CommandException(MESSAGE_INVALID_DOCTOR);
+        }
+        // check that patient and doctor are not the same person
+        if (chosenPatient.isSamePerson(chosenDoctor)) {
+            throw new CommandException(MESSAGE_SAME_DOCTOR_AND_PATIENT);
+        }
     }
 
     private Patient findPatient(Model model) {

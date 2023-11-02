@@ -3,7 +3,6 @@ package seedu.address.model.person;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.Iterator;
 import java.util.List;
 
 import javafx.collections.FXCollections;
@@ -22,15 +21,21 @@ import seedu.address.model.person.exceptions.PersonNotFoundException;
  *
  * @see Person#isSamePerson(Person)
  */
-public class UniquePatientList implements Iterable<Patient> {
+public class UniquePatientList extends UniqueObjectList<Patient> {
 
     protected final ObservableList<Patient> internalList = FXCollections.observableArrayList();
     protected final ObservableList<Patient> internalUnmodifiableList =
             FXCollections.unmodifiableObservableList(internalList);
 
+    public void setPersons(UniquePatientList replacement) {
+        requireNonNull(replacement);
+        internalList.setAll(replacement.internalList);
+    }
+
     /**
      * Returns true if the list contains an equivalent person as the given argument.
      */
+    @Override
     public boolean contains(Patient toCheck) {
         requireNonNull(toCheck);
         return internalList.stream().anyMatch(toCheck::isSamePerson);
@@ -40,6 +45,7 @@ public class UniquePatientList implements Iterable<Patient> {
      * Adds a person to the list.
      * The person must not already exist in the list.
      */
+    @Override
     public void add(Patient toAdd) {
         requireNonNull(toAdd);
         if (contains(toAdd)) {
@@ -49,29 +55,31 @@ public class UniquePatientList implements Iterable<Patient> {
     }
 
     /**
-     * Replaces the patient {@code target} in the list with {@code editedPerson}.
+     * Replaces the person {@code target} in the list with {@code editedPerson}.
      * {@code target} must exist in the list.
      * The person identity of {@code editedPerson} must not be the same as another existing person in the list.
      */
-    public void setPatient(Patient target, Patient editedPerson) {
-        requireAllNonNull(target, editedPerson);
+    @Override
+    public void setObject(Patient target, Patient editedPatient) {
+        requireAllNonNull(target, editedPatient);
 
         int index = internalList.indexOf(target);
         if (index == -1) {
             throw new PersonNotFoundException();
         }
 
-        if (!target.isSamePerson(editedPerson) && contains(editedPerson)) {
+        if (!target.isSamePerson(editedPatient) && contains(editedPatient)) {
             throw new DuplicatePersonException();
         }
 
-        internalList.set(index, editedPerson);
+        internalList.set(index, editedPatient);
     }
 
     /**
      * Removes the equivalent person from the list.
      * The person must exist in the list.
      */
+    @Override
     public void remove(Patient toRemove) {
         requireNonNull(toRemove);
         if (!internalList.remove(toRemove)) {
@@ -79,79 +87,33 @@ public class UniquePatientList implements Iterable<Patient> {
         }
     }
 
-    public void setPatients(UniquePatientList replacement) {
-        requireNonNull(replacement);
-        internalList.setAll(replacement.internalList);
-    }
-
     /**
      * Replaces the contents of this list with {@code persons}.
      * {@code persons} must not contain duplicate persons.
      */
-    public void setPatients(List<Patient> persons) {
-        requireAllNonNull(persons);
-        if (!personsAreUnique(persons)) {
+    @Override
+    public void setObjects(List<Patient> patients) {
+        requireAllNonNull(patients);
+        if (!objectsAreUnique(patients)) {
             throw new DuplicatePersonException();
         }
 
-        internalList.setAll(persons);
+        internalList.setAll(patients);
     }
 
-    /**
-     * Returns the backing list as an unmodifiable {@code ObservableList}.
-     */
+    @Override
     public ObservableList<Patient> asUnmodifiableObservableList() {
         return internalUnmodifiableList;
-    }
-
-    @Override
-    public Iterator<Patient> iterator() {
-        return internalList.iterator();
-    }
-
-    @Override
-    public boolean equals(Object other) {
-        if (other == this) {
-            return true;
-        }
-
-        // instanceof handles nulls
-        if (!(other instanceof UniquePatientList)) {
-            return false;
-        }
-
-        UniquePatientList otherUniquePatientList = (UniquePatientList) other;
-
-        if (this.internalList.size() != otherUniquePatientList.internalList.size()) {
-            return false;
-        }
-
-        // Compare individual patients in the lists
-        for (int i = 0; i < this.internalList.size(); i++) {
-            if (!this.internalList.get(i).equals(otherUniquePatientList.internalList.get(i))) {
-                return false;
-            }
-        }
-        return true;
-    }
-
-    @Override
-    public int hashCode() {
-        return internalList.hashCode();
-    }
-
-    @Override
-    public String toString() {
-        return internalList.toString();
     }
 
     /**
      * Returns true if {@code persons} contains only unique persons.
      */
-    protected boolean personsAreUnique(List<Patient> persons) {
-        for (int i = 0; i < persons.size() - 1; i++) {
-            for (int j = i + 1; j < persons.size(); j++) {
-                if (persons.get(i).isSamePerson(persons.get(j))) {
+    @Override
+    protected boolean objectsAreUnique(List<Patient> patients) {
+        for (int i = 0; i < patients.size() - 1; i++) {
+            for (int j = i + 1; j < patients.size(); j++) {
+                if (patients.get(i).isSamePerson(patients.get(j))) {
                     return false;
                 }
             }

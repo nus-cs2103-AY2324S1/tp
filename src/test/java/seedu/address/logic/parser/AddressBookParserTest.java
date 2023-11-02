@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.AddPatientCommand;
 import seedu.address.logic.commands.ClearCommand;
+import seedu.address.logic.commands.DeleteAppointmentCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
@@ -20,11 +21,9 @@ import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Patient;
-import seedu.address.model.person.Person;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PatientBuilder;
 import seedu.address.testutil.PatientUtil;
-import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
 
 public class AddressBookParserTest {
@@ -52,8 +51,15 @@ public class AddressBookParserTest {
     }
 
     @Test
+    public void parseCommand_deleteAppointment() throws Exception {
+        DeleteAppointmentCommand command = (DeleteAppointmentCommand) parser.parseCommand(
+                DeleteAppointmentCommand.COMMAND_WORD + " 1");
+        assertEquals(new DeleteAppointmentCommand(1), command);
+    }
+
+    @Test
     public void parseCommand_edit() throws Exception {
-        Person person = new PersonBuilder().build();
+        Patient person = new PatientBuilder().build();
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(person).build();
         EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
                 + person.getIc() + " " + PersonUtil.getEditPersonDescriptorDetails(descriptor));
@@ -87,6 +93,14 @@ public class AddressBookParserTest {
         String[] keywords = {"M"};
         FindCommand command = (FindCommand) parser.parseCommand(
                 FindCommand.COMMAND_WORD + " M");
+        assertEquals(new FindCommand(KeywordParser.parseInput(keywords)), command);
+    }
+
+    @Test
+    public void parseCommand_findBloodType() throws Exception {
+        String[] keywords = {"Blood", "Type", "A+"};
+        FindCommand command = (FindCommand) parser.parseCommand(
+                FindCommand.COMMAND_WORD + " Blood Type A+");
         assertEquals(new FindCommand(KeywordParser.parseInput(keywords)), command);
     }
 

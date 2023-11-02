@@ -15,6 +15,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.appointment.Appointment;
 import seedu.address.model.person.Doctor;
 import seedu.address.model.person.Patient;
 import seedu.address.model.person.Person;
@@ -31,6 +32,7 @@ public class ModelManager implements Model {
     private final UserPrefs userPrefs;
     private final FilteredList<Doctor> filteredDoctors;
     private final FilteredList<Patient> filteredPatients;
+    private final FilteredList<Appointment> filteredAppointments;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -45,6 +47,7 @@ public class ModelManager implements Model {
         this.redoList = new ArrayList<>();
         filteredDoctors = new FilteredList<>(this.addressBook.getDoctorList());
         filteredPatients = new FilteredList<>(this.addressBook.getPatientList());
+        filteredAppointments = new FilteredList<>(this.addressBook.getAppointmentList());
     }
 
     public ModelManager() {
@@ -163,6 +166,20 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void addAppointment(Appointment appointment) {
+        updateBackup();
+        addressBook.addAppointment(appointment);
+        updateFilteredAppointmentList(PREDICATE_SHOW_ALL_APPOINTMENTS);
+    }
+
+    @Override
+    public void deleteAppointment(Appointment appointment) {
+        updateBackup();
+        addressBook.removeAppointment(appointment);
+        updateFilteredAppointmentList(PREDICATE_SHOW_ALL_APPOINTMENTS);
+    }
+
+    @Override
     public void setPerson(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
         if (target instanceof Patient && editedPerson instanceof Patient) {
@@ -172,6 +189,12 @@ public class ModelManager implements Model {
             updateBackup();
             addressBook.setDoctor((Doctor) target, (Doctor) editedPerson);
         }
+    }
+
+    @Override
+    public void setAppointment(Appointment target, Appointment editedAppointment) {
+        updateBackup();
+        addressBook.setAppointment(target, editedAppointment);
     }
 
     /**
@@ -202,10 +225,20 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public ObservableList<Appointment> getFilteredAppointmentList() {
+        return filteredAppointments;
+    }
+
+    @Override
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
         filteredPatients.setPredicate(predicate);
         filteredDoctors.setPredicate(predicate);
+    }
+    @Override
+    public void updateFilteredAppointmentList(Predicate<Appointment> predicate) {
+        requireNonNull(predicate);
+        filteredAppointments.setPredicate(predicate);
     }
 
     @Override

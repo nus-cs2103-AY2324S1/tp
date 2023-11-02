@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.PatientBuilder;
 
 public class IcContainsKeywordsPredicateTest {
 
@@ -39,18 +39,18 @@ public class IcContainsKeywordsPredicateTest {
     public void test_icContainsKeywords_returnsTrue() {
         // Test with a person having matching IC
         IcContainsKeywordsPredicate icPredicate = new IcContainsKeywordsPredicate("T1234567G");
-        assertTrue(icPredicate.test(new PersonBuilder().withIc("T1234567G").build()));
+        assertTrue(icPredicate.test(new PatientBuilder().withIc("T1234567G").build()));
     }
 
     @Test
     public void test_icDoesNotContainKeywords_returnsFalse() {
         // Zero keywords
         IcContainsKeywordsPredicate predicate = new IcContainsKeywordsPredicate(" ");
-        assertFalse(predicate.test(new PersonBuilder().withIc("T1234567Q").build()));
+        assertFalse(predicate.test(new PatientBuilder().withIc("T1234567Q").build()));
 
         // Non-matching keyword
         predicate = new IcContainsKeywordsPredicate("S0001004Q");
-        assertFalse(predicate.test(new PersonBuilder().withIc("T1123876Q").build()));
+        assertFalse(predicate.test(new PatientBuilder().withIc("T1123876Q").build()));
     }
 
     @Test

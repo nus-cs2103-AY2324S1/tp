@@ -140,10 +140,4 @@ public class PersonBuilder {
         this.ic = new Ic(ic);
         return this;
     }
-
-
-    public Person build() {
-        return new Person(name, phone, email, address, remark, gender, ic, appointments, tags);
-    }
-
 }

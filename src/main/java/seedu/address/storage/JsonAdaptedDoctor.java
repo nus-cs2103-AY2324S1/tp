@@ -1,13 +1,25 @@
 package seedu.address.storage;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.appointment.Appointment;
+import seedu.address.model.person.Address;
 import seedu.address.model.person.Doctor;
-import seedu.address.model.person.Person;
+import seedu.address.model.person.Email;
+import seedu.address.model.person.Gender;
+import seedu.address.model.person.Ic;
+import seedu.address.model.person.Name;
+import seedu.address.model.person.Phone;
+import seedu.address.model.person.Remark;
+import seedu.address.model.tag.Tag;
+
 
 
 /**
@@ -30,7 +42,7 @@ public class JsonAdaptedDoctor extends JsonAdaptedPerson {
     }
 
     /**
-     * Converts a given {@code Person} into this class for Jackson use.
+     * Converts a given {@code Doctor} into this class for Jackson use.
      */
     public JsonAdaptedDoctor(Doctor source) {
         super(source);
@@ -42,10 +54,24 @@ public class JsonAdaptedDoctor extends JsonAdaptedPerson {
      * @throws IllegalValueException if there were any data constraints violated in the adapted person.
      */
     public Doctor toModelType() throws IllegalValueException {
-        Person p = super.toModelType();
-
-        Doctor modelDoctor = new Doctor(p.getName(), p.getPhone(), p.getEmail(), p.getAddress(), p.getRemark(),
-                p.getGender(), p.getIc(), p.getAppointments(), p.getTags());
-        return modelDoctor;
+        final Name modelName = checkName();
+        final Phone modelPhone = checkPhone();
+        final Email modelEmail = checkEmail();
+        final Address modelAddress = checkAddress();
+        final Remark modelRemark = checkRemark();
+        final Gender modelGender = checkGender();
+        final Ic modelIc = checkIc();
+        final List<Tag> personTags = new ArrayList<>();
+        for (JsonAdaptedTag tag : this.getTags()) {
+            personTags.add(tag.toModelType());
+        }
+        final Set<Tag> modelTags = new HashSet<>(personTags);
+        final List<Appointment> personAppointments = new ArrayList<>();
+        for (JsonAdaptedAppointment appointment : this.getAppointments()) {
+            personAppointments.add(appointment.toModelType());
+        }
+        final Set<Appointment> modelAppointments = new HashSet<>(personAppointments);
+        return new Doctor(modelName, modelPhone, modelEmail, modelAddress, modelRemark, modelGender, modelIc,
+                modelAppointments, modelTags);
     }
 }

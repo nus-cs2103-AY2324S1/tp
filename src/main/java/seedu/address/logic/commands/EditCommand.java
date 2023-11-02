@@ -21,8 +21,10 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
@@ -47,7 +49,6 @@ import seedu.address.model.tag.Tag;
  * Edits the details of an existing person in the address book.
  */
 public class EditCommand extends Command {
-
     public static final String COMMAND_WORD = "edit";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the person identified "
@@ -68,15 +69,13 @@ public class EditCommand extends Command {
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com"
             + PREFIX_REMARK + "remarks";
-
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
     public static final String MESSAGE_DOESNT_EXIST = "This person hasn't been saved";
-
+    private static final Logger logger = LogsCenter.getLogger(EditCommand.class.getName());
     private final Ic nric;
     private final EditPersonDescriptor editPersonDescriptor;
-    private String personRole;
 
     /**
      * @param nric                 of the person in the filtered person list to edit
@@ -94,51 +93,58 @@ public class EditCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         // combine doctor list and patient list
+        Person personToEdit = getPersonToEdit(model);
+        Person editedPerson = getEditedPerson(model, personToEdit);
+
+        model.setPerson(personToEdit, editedPerson);
+        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        logger.info("Successfully edited person");
+        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)));
+    }
+
+    private Person getPersonToEdit(Model model) throws CommandException {
         List<Person> lastShownList = new ArrayList<>();
         lastShownList.addAll(model.getFilteredDoctorList());
         lastShownList.addAll(model.getFilteredPatientList());
-
         List<Person> personToEditList = lastShownList.stream()
                 .filter(x -> x.getIc().equals(nric))
                 .collect(Collectors.toList());
-
         if (personToEditList.size() == 0) {
+            logger.warning("Could not edit - person isn't in adressbook");
             throw new CommandException(MESSAGE_DOESNT_EXIST);
         }
-
         //developer assumption - can't have 2 people with same IC
         assert personToEditList.size() < 2;
-
         Person personToEdit = personToEditList.get(0);
-        Person editedPerson;
+        return personToEdit;
+    }
 
+    private Person getEditedPerson(Model model, Person personToEdit) throws CommandException {
+        Person editedPerson;
         if (personToEdit instanceof Patient) {
-            personRole = "patient";
             editedPerson = createEditedPatient((Patient) personToEdit, editPersonDescriptor);
         } else {
-            assert personToEdit instanceof Doctor;
+            assert personToEdit.isDoctor();
             if (editPersonDescriptor.getCondition().isPresent() || editPersonDescriptor.getBloodType().isPresent()) {
+                logger.warning("Error thrown - tried to edit condition / bloodtype of doctor");
                 throw new CommandException("Doctors cannot have Condition or BloodType fields.");
             }
-            personRole = "doctor";
-            editedPerson = createEditedDoctor(personToEdit, editPersonDescriptor);
+            editedPerson = createEditedDoctor((Doctor) personToEdit, editPersonDescriptor);
         }
-
         if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
+            logger.warning("Edited Person and orignal person are the same");
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
-        model.setPerson(personToEdit, editedPerson);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)));
+        return editedPerson;
     }
 
     /**
      * Creates and returns a {@code Person} with the details of {@code personToEdit}
      * edited with {@code editPersonDescriptor}.
      */
-
-    private static Doctor createEditedDoctor(Person personToEdit, EditPersonDescriptor editPersonDescriptor) {
-        assert personToEdit != null;
+    private static Doctor createEditedDoctor(Doctor personToEdit, EditPersonDescriptor editPersonDescriptor) {
+        requireNonNull(personToEdit);
+        requireNonNull(personToEdit);
 
         Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
@@ -151,13 +157,16 @@ public class EditCommand extends Command {
         Set<Appointment> updatedAppointments =
                 editPersonDescriptor.getAppointments().orElse(personToEdit.getAppointments());
 
+        logger.fine("Successfully created Edited Doctor");
         return new Doctor(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedRemarks,
                 updatedGender, updatedIc, updatedAppointments, updatedTags);
     }
 
 
     private static Patient createEditedPatient(Patient personToEdit, EditPersonDescriptor editPersonDescriptor) {
-        assert personToEdit != null;
+        requireNonNull(personToEdit);
+        requireNonNull(personToEdit);
+
         Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
         Phone updatedEmergencyContact =
@@ -172,6 +181,7 @@ public class EditCommand extends Command {
                 editPersonDescriptor.getAppointments().orElse(personToEdit.getAppointments());
         BloodType updatedBloodType = editPersonDescriptor.getBloodType().orElse(personToEdit.getBloodType());
         Condition updatedCondition = editPersonDescriptor.getCondition().orElse(personToEdit.getCondition());
+        logger.fine("Successfully created Edited Patient");
         return new Patient(updatedName, updatedPhone, updatedEmergencyContact, updatedEmail, updatedAddress,
                 updatedRemarks, updatedGender, updatedIc, updatedCondition, updatedBloodType, updatedAppointments,
                 updatedTags);
