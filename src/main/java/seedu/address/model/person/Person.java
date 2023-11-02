@@ -4,6 +4,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
@@ -85,8 +86,7 @@ public class Person {
     }
 
     /**
-     * Returns true if both persons have the same name.
-     * This defines a weaker notion of equality between two persons.
+     * Returns true if both persons have the same id.
      */
     public boolean isSamePerson(Person otherPerson) {
         if (otherPerson == this) {
@@ -94,7 +94,7 @@ public class Person {
         }
 
         return otherPerson != null
-                && otherPerson.getName().equals(getName());
+                && otherPerson.name.equals(this.name);
     }
 
     public void addAttendance(Attendance attendance) {
@@ -103,7 +103,7 @@ public class Person {
 
     /**
      * Returns a string representation of the number of tutorials that the person attended and missed.
-     * @return number of tutorials attanded, total tutorials, number of tutorials missed
+     * @return number of tutorials attended, total tutorials, number of tutorials missed
      */
     public String getTalliedAttendance() {
         int tutorialsAttended = 0;
@@ -120,6 +120,45 @@ public class Person {
         }
         return "Attendance : " + tutorialsAttended + " / " + totalTutorials + " ("
                 + (totalTutorials - tutorialsAttended) + " tutorials missed)";
+    }
+
+    /**
+     * Add two sets of AttendanceRecords to a specified person.
+     * @param thisAttendanceRecords First set of Attendance Records to add
+     * @param otherAttendanceRecords Second set of Attendance Records to add
+     * @param newPerson Person to add the Attendance Records to
+     */
+    public void mergeAttendanceRecords(List<Attendance> thisAttendanceRecords, List<Attendance> otherAttendanceRecords,
+                                       Person newPerson) {
+        HashMap<Integer, Attendance> weekAttendanceHashMap = new HashMap<>();
+        for (Attendance a : thisAttendanceRecords) {
+            weekAttendanceHashMap.put(a.getWeek().getWeekNumber(), a);
+            newPerson.addAttendance(a);
+        }
+        for (Attendance a : otherAttendanceRecords) {
+            if (!weekAttendanceHashMap.containsKey(a.getWeek().getWeekNumber())) {
+                weekAttendanceHashMap.put(a.getWeek().getWeekNumber(), a);
+                newPerson.addAttendance(a);
+            }
+        }
+    }
+
+    /**
+     * Create a new Person based on the information of this person and another person.
+     * @param otherPerson The other set of information to use
+     * @return A new person that contains the information of this person and otherPerson
+     */
+    public Person mergePersons(Person otherPerson) {
+        Name name = this.name != null ? this.name : otherPerson.name;
+        Phone phone = this.phone != null ? this.phone : otherPerson.phone;
+        Email email = this.email != null ? this.email : otherPerson.email;
+        ID id = this.id != null ? this.id : otherPerson.id;
+        Set<Tag> tags = new HashSet<>();
+        tags.addAll(this.tags);
+        tags.addAll(otherPerson.tags);
+        Person newPerson = new Person(name, phone, email, id, tags);
+        newPerson.mergeAttendanceRecords(this.attendanceRecords, otherPerson.attendanceRecords, newPerson);
+        return newPerson;
     }
 
     /**

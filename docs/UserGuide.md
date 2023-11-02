@@ -256,6 +256,22 @@ Examples:
 * `delete all` deletes all students from the current course.
 * `delete all tg/G02` deletes all students from tutorial group G02 in the current course.
 
+### Merging two students : `merge`
+
+Merges two students in the current address book. 
+
+![merge](images/mergeCommand.png)
+
+Format: `merge [PRIMARY_INDEX] [SECONDARY_INDEX]`
+
+* Information of the primary student is retained.
+* If any information fields of the primary student are empty, they are filled with information of the secondary student.
+* The merged student contains tags of both students.
+
+Examples:
+* `merge 1 2` merges the information of the first two displayed students.
+
+
 ### Clearing all entries : `clear`
 
 Clears all entries from the TAvigator.
@@ -315,3 +331,4 @@ _Details coming soon ..._
 | **List**   | `list attendance w/WEEKNUMBER [tg/TUTORIALGROUPID]` `list students`                                                                                                         |                                                           |
 | **Help**   | `help`                                                                                                                                                                      |
 | **Mark**   | `mark n/STUDENT_NAME[, STUDENT_NAME]… \                                                                                                                                     | id/STUDENT_ID[, STUDENT_ID]… a/ATTENDANCE w/WEEKNUMBER [r/REASON_OF_ABSENCE]`<br/> e.g., `mark id/A0123456E, A0123457E a/1 w/1` `mark id/A0123456E, A0123457E a/1 w/1` |
+| **merge**  | `merge [PRIMARY_INDEX] [SECONDARY_INDEX]`                                                                                                                                   |

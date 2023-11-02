@@ -55,6 +55,10 @@ public class Attendance {
         return week;
     }
 
+    public boolean isSameWeek(Attendance a) {
+        return this.week.equals(a.week);
+    }
+
     /**
      * Returns the attendance status.
      *
