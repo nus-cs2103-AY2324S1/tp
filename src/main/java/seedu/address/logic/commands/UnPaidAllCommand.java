@@ -22,9 +22,13 @@ public class UnPaidAllCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
+
+        model.purgeAddressBook();
         for (Person person : lastShownList) {
             model.markPersonUnPaid(person);
         }
+        model.commitAddressBook();
+
         return new CommandResult(MESSAGE_MARK_ALL_PERSON_UNPAID_SUCCESS);
     }
 
