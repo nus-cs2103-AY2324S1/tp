@@ -10,6 +10,7 @@ import static seedu.address.testutil.TypicalPersons.ALICE;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Stack;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
@@ -84,6 +85,21 @@ public class AddCommandTest {
         assertEquals(expected, addCommand.toString());
     }
 
+    @Test
+    public void execute_undo_successful() throws Exception {
+        AddCommand addCommand = new AddCommand(ALICE);
+        ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
+
+        addCommand.execute(modelStub);
+        assertTrue(modelStub.hasPerson(ALICE));
+
+        CommandResult undoResult = addCommand.undo(modelStub);
+        assertEquals(String.format(AddCommand.MESSAGE_UNDO_ADD_SUCCESS, Messages.format(ALICE)),
+                undoResult.getFeedbackToUser());
+
+        assertFalse(modelStub.hasPerson(ALICE));
+    }
+
     /**
      * A default model stub that have all of the methods failing.
      */
@@ -154,7 +170,32 @@ public class AddCommandTest {
         }
 
         @Override
+        public ObservableList<Person> getLoggedFilteredPersonList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void updateFilteredPersonList(Predicate<Person> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addToHistory(UndoableCommand command) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean isCommandHistoryEmpty() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public UndoableCommand popCommandFromHistory() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public int getCommandHistorySize() {
             throw new AssertionError("This method should not be called.");
         }
     }
@@ -182,6 +223,7 @@ public class AddCommandTest {
      */
     private class ModelStubAcceptingPersonAdded extends ModelStub {
         final ArrayList<Person> personsAdded = new ArrayList<>();
+        private Stack<UndoableCommand> commandHistory = new Stack<>();
 
         @Override
         public boolean hasPerson(Person person) {
@@ -199,6 +241,16 @@ public class AddCommandTest {
         public ReadOnlyAddressBook getAddressBook() {
             return new AddressBook();
         }
-    }
 
+        @Override
+        public void addToHistory(UndoableCommand undoableCommand) {
+            this.commandHistory.push(undoableCommand);
+        }
+
+        @Override
+        public void deletePerson(Person person) {
+            requireNonNull(person);
+            personsAdded.remove(person);
+        }
+    }
 }

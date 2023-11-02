@@ -60,7 +60,7 @@ public class PersonCard extends UiPart<Region> {
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
         person.getAppointment().ifPresentOrElse((appt) ->
-                appointment.setText(appt.value), () -> appointment.setText("No appointment found."));
+                appointment.setText(appt.toString()), () -> appointment.setText("No appointment found."));
         person.getMedicalHistories().stream()
                 .sorted(Comparator.comparing(medicalHistory -> medicalHistory.value))
                 .forEach(medicalHistory -> medicalHistories.getChildren().add(new Label(medicalHistory.value)));

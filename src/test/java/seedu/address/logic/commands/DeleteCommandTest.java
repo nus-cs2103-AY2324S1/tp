@@ -71,7 +71,7 @@ public class DeleteCommandTest {
         Name invalidName = new Name("Does Not Exist");
         DeleteCommand command = new DeleteCommand(null, invalidName, new DeletePersonDescriptor());
 
-        assertThrows(CommandException.class, Messages.MESSAGE_INVALID_NAME, () -> command.execute(model));
+        assertThrows(CommandException.class, DeleteCommand.MESSAGE_PERSON_NOT_FOUND, () -> command.execute(model));
     }
 
     @Test
@@ -79,7 +79,7 @@ public class DeleteCommandTest {
         Nric invalidNric = new Nric("S000000X");
         DeleteCommand command = new DeleteCommand(invalidNric, null, new DeletePersonDescriptor());
 
-        assertThrows(CommandException.class, Messages.MESSAGE_INVALID_NRIC, () -> command.execute(model));
+        assertThrows(CommandException.class, DeleteCommand.MESSAGE_PERSON_NOT_FOUND, () -> command.execute(model));
     }
 
     @Test
@@ -87,32 +87,26 @@ public class DeleteCommandTest {
         Person firstPerson = model.getFilteredPersonList().get(0);
 
         DeletePersonDescriptor descriptor = new DeletePersonDescriptor();
-        descriptor.setAppointment();
+        descriptor.setDeleteAppointment();
+        descriptor.setDeleteMedicalHistory();
 
         DeleteCommand command = new DeleteCommand(firstPerson.getNric(), null, descriptor);
         command.execute(model);
 
         Person editedPerson = model.getFilteredPersonList().get(0);
         assertTrue(editedPerson.getAppointment().isEmpty());
+        assertTrue(editedPerson.getMedicalHistories().isEmpty());
     }
 
     @Test
     public void deletePersonDescriptor_setterMethods() {
         DeletePersonDescriptor descriptor = new DeletePersonDescriptor();
 
-        descriptor.setAppointment();
-        descriptor.setAddress();
-        descriptor.setEmail();
-        descriptor.setMedicalHistory();
-        descriptor.setPhone();
-        descriptor.setTags();
+        descriptor.setDeleteAppointment();
+        descriptor.setDeleteMedicalHistory();
 
-        assertTrue(descriptor.getAppointment());
-        assertTrue(descriptor.getAddress());
-        assertTrue(descriptor.getEmail());
-        assertTrue(descriptor.getMedicalHistory());
-        assertTrue(descriptor.getPhone());
-        assertTrue(descriptor.getTags());
+        assertTrue(descriptor.shouldDeleteAppointment());
+        assertTrue(descriptor.shouldDeleteMedicalHistory());
     }
 
     @Test
@@ -122,7 +116,7 @@ public class DeleteCommandTest {
 
         assertTrue(descriptor.isAllFalse());
 
-        descriptor.setAppointment();
+        descriptor.setDeleteAppointment();
 
         assertFalse(descriptor.isAllFalse());
     }
@@ -172,7 +166,7 @@ public class DeleteCommandTest {
 
         // different person -> returns false
         DeletePersonDescriptor descriptorDifferent = new DeletePersonDescriptor();
-        descriptorDifferent.setAddress();
+        descriptorDifferent.setDeleteAppointment();
         assertFalse(descriptor.equals(descriptorDifferent));
     }
 
@@ -184,4 +178,43 @@ public class DeleteCommandTest {
                 + "deletePersonDescriptor=" + defaultDescriptor + "}";
         assertEquals(expected, deleteCommand.toString());
     }
+
+    @Test
+    public void undoDeletePerson_success() throws CommandException {
+        Person personToDelete = new PersonBuilder().withName("Amy Bee").build();
+        model.addPerson(personToDelete);
+
+        DeleteCommand deletePersonCommand = new DeleteCommand(null, personToDelete.getName(), defaultDescriptor);
+        deletePersonCommand.execute(model);
+
+        // Undo the deletion of the person
+        CommandResult undoResult = deletePersonCommand.undo(model);
+
+        assertTrue(model.hasPerson(personToDelete));
+        assertEquals(String.format(DeleteCommand.MESSAGE_UNDO_DELETE_PERSON_SUCCESS,
+                Messages.format(personToDelete)), undoResult.getFeedbackToUser());
+    }
+
+    @Test
+    public void undoDeleteFields() throws CommandException {
+        Person firstPerson = model.getFilteredPersonList().get(0);
+
+        DeletePersonDescriptor descriptor = new DeletePersonDescriptor();
+        descriptor.setDeleteAppointment();
+
+        DeleteCommand deleteFieldsCommand = new DeleteCommand(firstPerson.getNric(), null, descriptor);
+        deleteFieldsCommand.execute(model);
+
+        Person editedPerson = model.getFilteredPersonList().get(0);
+        assertTrue(editedPerson.getAppointment().isEmpty());
+
+        CommandResult undoResult = deleteFieldsCommand.undo(model);
+
+        Person unDonePerson = model.getFilteredPersonList().get(0);
+        assertFalse(unDonePerson.getAppointment().isEmpty());
+
+        assertEquals(String.format(DeleteCommand.MESSAGE_UNDO_DELETE_FIELD_SUCCESS,
+                Messages.format(editedPerson)), undoResult.getFeedbackToUser());
+    }
 }
+

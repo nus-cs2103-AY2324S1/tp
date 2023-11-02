@@ -161,6 +161,26 @@ Expected outputs when the command succeeds:
 Expected outputs when command fails:
 * `Unable to edit the patient: Patient identification does not exist.`
 
+### Undoing a command: `undo`
+
+Undoes an undo-able command within the address book.
+
+* An undo-able command include an edit command, add commmand or delete command
+* The command allows you to undo the last command or to undo a specific number of previous commands
+
+Format:
+* `undo` or `undo [number]`
+
+Example commands:
+*  `undo`
+*  `undo 2`
+
+Expected outputs when the command succeeds:
+* `The last command has been undone`
+* `The last 2 commands have been undone`
+
+Expected outputs when command fails:
+* `There is no valid command to be undone`
 
 ### Locating persons by name or NRIC: `find`
 
@@ -287,12 +307,12 @@ _Details coming soon ..._
 
 ## Command summary
 
-| Action     | Format, Examples                                                                                                           |
-|------------|----------------------------------------------------------------------------------------------------------------------------|
-| **Add**    | `add n/NAME id/IC_NUMBER [field] ...` <br> e.g., `add n/James Ho id/SXXXX123D p/91234567 a/A Estate, Clementi Rd, 1234665` |
-| **Clear**  | `clear`                                                                                                                    |
-| **Delete** | `delete n/NAME [field]` *or* `delete id/IC_NUMBER [field]`<br> e.g., `delete n/John Doe e/`                                |
-| **Edit**   | `edit n/NAME [field]` *or* `edit id/IC_NUMBER [field] ... `<br> e.g.,`edit n/James Lee e/jameslee@example.com`             |
-| **Find**   | `find n/NAME [field]` *or* `find id/IC_NUMBER [field]`<br> e.g., `find n/James Jake` *or* `find id/S872D`                  |
-| **List**   | `list`                                                                                                                     |
-| **Help**   | `help`                                                                                                                     |
+| Action     | Shortcut | Format, Examples                                                                                                           |
+|------------|----------|----------------------------------------------------------------------------------------------------------------------------|
+| **Add**    | `a`      | `add n/NAME id/IC_NUMBER [field] ...` <br> e.g., `add n/James Ho id/SXXXX123D p/91234567 a/A Estate, Clementi Rd, 1234665` |
+| **Clear**  | `c`      | `clear`                                                                                                                    |
+| **Delete** | `d`      | `delete n/NAME [field]` *or* `delete id/IC_NUMBER [field]`<br> e.g., `delete n/John Doe e/`                                |
+| **Edit**   | `e`      | `edit n/NAME [field]` *or* `edit id/IC_NUMBER [field] ... `<br> e.g.,`edit n/James Lee e/jameslee@example.com`             |
+| **Find**   | `f`      | `find n/NAME [field]` *or* `find id/IC_NUMBER [field]`<br> e.g., `find n/James Jake` *or* `find id/S872D`                  |
+| **List**   | `li`      | `list`                                                                                                                     |
+| **Help**   | `h`      | `help`                                                                                                                     |
