@@ -39,6 +39,7 @@ public class MainWindow extends UiPart<Stage> {
     private Stage primaryStage;
     private Logic logic;
     private Model model;
+    private String prevCommand = "";
 
     // Independent Ui parts residing in this Ui container
     private PersonListPanel personListPanel;
@@ -49,6 +50,7 @@ public class MainWindow extends UiPart<Stage> {
     private TaskDetailPanel taskDetailPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+    private CommandBox commandBox;
 
     @FXML
     private AnchorPane showPersonPanelPlaceholder;
@@ -97,9 +99,6 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private SplitPane contentSplitPane;
-
-    CommandBox commandBox;
-    String prevcmd = "";
 
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
@@ -154,7 +153,7 @@ public class MainWindow extends UiPart<Stage> {
          */
         getRoot().addEventFilter(KeyEvent.KEY_PRESSED, event -> {
             if (event.getCode() == KeyCode.UP) {
-                commandBox.changeText(prevcmd);
+                commandBox.changeText(prevCommand);
             }
             if (event.getTarget() instanceof TextInputControl && keyCombination.match(event)) {
                 menuItem.getOnAction().handle(new ActionEvent());
@@ -251,7 +250,7 @@ public class MainWindow extends UiPart<Stage> {
      */
     private CommandResult executeCommand(String commandText) throws CommandException, ParseException {
         try {
-            prevcmd = commandText;
+            prevCommand = commandText;
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
