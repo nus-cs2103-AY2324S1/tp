@@ -4,7 +4,7 @@ import java.util.Set;
 import java.util.function.Predicate;
 
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.model.department.Department;
+import seedu.address.model.name.DepartmentName;
 
 /**
  * Tests that an {@code Employee}'s {@code Name} matches the keyword given.

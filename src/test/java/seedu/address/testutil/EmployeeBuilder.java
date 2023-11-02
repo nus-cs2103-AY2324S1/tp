@@ -3,15 +3,15 @@ package seedu.address.testutil;
 import java.util.HashSet;
 import java.util.Set;
 
-import seedu.address.model.department.Department;
 import seedu.address.model.employee.Address;
 import seedu.address.model.employee.Email;
 import seedu.address.model.employee.Employee;
 import seedu.address.model.employee.Leave;
-import seedu.address.model.employee.Name;
 import seedu.address.model.employee.Phone;
 import seedu.address.model.employee.Role;
 import seedu.address.model.employee.Salary;
+import seedu.address.model.name.DepartmentName;
+import seedu.address.model.name.EmployeeName;
 import seedu.address.model.util.SampleDataUtil;
 
 /**
@@ -26,21 +26,21 @@ public class EmployeeBuilder {
     public static final String DEFAULT_SALARY = "1234";
     public static final String DEFAULT_LEAVE = "14";
     private static final String DEFAULT_ROLE = "manager";
-    private Name name;
+    private EmployeeName name;
     private Phone phone;
     private Email email;
     private Address address;
     private Salary salary;
     private Leave leave;
     private Role role;
-    private Set<Name> supervisors;
-    private Set<Department> departments;
+    private Set<EmployeeName> supervisors;
+    private Set<DepartmentName> departments;
 
     /**
      * Creates a {@code EmployeeBuilder} with the default details.
      */
     public EmployeeBuilder() {
-        name = new Name(DEFAULT_NAME);
+        name = new EmployeeName(DEFAULT_NAME);
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
@@ -70,7 +70,7 @@ public class EmployeeBuilder {
      * Sets the {@code Name} of the {@code Employee} that we are building.
      */
     public EmployeeBuilder withName(String name) {
-        this.name = new Name(name);
+        this.name = new EmployeeName(name);
         return this;
     }
 
@@ -79,7 +79,7 @@ public class EmployeeBuilder {
      * {@code Employee} that we are building.
      */
     public EmployeeBuilder withDepartments(String ... departments) {
-        this.departments = SampleDataUtil.getDepartmentSet(departments);
+        this.departments = SampleDataUtil.getDepartmentNameSet(departments);
         return this;
     }
 
@@ -88,7 +88,7 @@ public class EmployeeBuilder {
      * {@code Employee} that we are building.
      */
     public EmployeeBuilder withSupervisors(String ... supervisorName) {
-        this.supervisors = SampleDataUtil.getSupervisorNameSet(supervisorName);
+        this.supervisors = SampleDataUtil.getEmployeeNameSet(supervisorName);
         return this;
     }
 

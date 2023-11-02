@@ -12,6 +12,7 @@ import seedu.address.model.employee.exceptions.DuplicateEmployeeException;
 import seedu.address.model.employee.exceptions.EmployeeNotFoundException;
 import seedu.address.model.employee.exceptions.SubordinatePresentException;
 import seedu.address.model.employee.exceptions.SupervisorNotFoundException;
+import seedu.address.model.name.EmployeeName;
 
 /**
  * A list of employees that enforces uniqueness between its elements and does not allow nulls.
@@ -38,6 +39,13 @@ public class UniqueEmployeeList implements Iterable<Employee> {
         return internalList.stream().anyMatch(toCheck::isSameEmployee);
     }
 
+    /**
+     * Returns true if the list contains an employee with the same identity as the given argument.
+     */
+    public boolean contains(EmployeeName toCheck) {
+        requireNonNull(toCheck);
+        return internalList.stream().anyMatch(employee -> employee.hasSameEmployeeName(toCheck));
+    }
     /**
      * Returns true if all the managers of the given argument is within the list.
      */
@@ -108,18 +116,19 @@ public class UniqueEmployeeList implements Iterable<Employee> {
         if (!target.isSameEmployee(editedEmployee) && contains(editedEmployee)) {
             throw new DuplicateEmployeeException();
         }
-        if (!containsManager(editedEmployee)) {
-            throw new SupervisorNotFoundException();
-        }
-        if (hasSubordinates(target)) {
+        if (!target.isSameEmployee(editedEmployee) && hasSubordinates(target)) {
             throw new SubordinatePresentException();
         }
         if (target.isSupervisorOf(editedEmployee)) {
             throw new SupervisorNotFoundException();
         }
+        if (!containsManager(editedEmployee)) {
+            throw new SupervisorNotFoundException();
+        }
 
         internalList.set(index, editedEmployee);
     }
+
 
     /**
      * Removes the equivalent employee from the list.

@@ -13,16 +13,17 @@ import seedu.address.model.employee.ContainsDepartmentPredicate;
  */
 public class FilterCommand extends Command {
     public static final String COMMAND_WORD = "filter";
-
+    public static final String MESSAGE_EXAMPLE = COMMAND_WORD + " R&D";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all employees whose departments contain any of "
             + "the specified keyword (case-sensitive) and displays them as a list with index numbers.\n"
             + "Parameters: KEYWORD\n"
-            + "Example: " + COMMAND_WORD + " R&D";
+            + "Example: " + MESSAGE_EXAMPLE;
     private final ContainsDepartmentPredicate predicate;
 
     public FilterCommand(ContainsDepartmentPredicate predicate) {
         this.predicate = predicate;
     }
+
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);

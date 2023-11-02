@@ -56,8 +56,8 @@ public class ProfileDetails extends UiPart<Region> {
             salary.setText(employee.getSalary().value);
             departments.getChildren().clear();
             employee.getDepartments().stream()
-                .sorted(Comparator.comparing(department -> department.departmentName))
-                .forEach(department -> departments.getChildren().add(new Label(department.departmentName)));
+                .sorted(Comparator.comparing(department -> department.fullName))
+                .forEach(department -> departments.getChildren().add(new Label(department.fullName)));
             this.getRoot().setVisible(true);
         }
     }

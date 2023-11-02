@@ -27,7 +27,8 @@ public class FilterCommandTest {
     @Test
     public void execute_noEmployeesFound() {
         String expectedMessage = String.format(MESSAGE_EMPLOYEES_LISTED_OVERVIEW, 0);
-        ContainsDepartmentPredicate predicate = new ContainsDepartmentPredicate(" ");
+        ContainsDepartmentPredicate predicate = new ContainsDepartmentPredicate();
+        predicate.setDepartment("A");
         FilterCommand command = new FilterCommand(predicate);
         expectedModel.updateFilteredEmployeeList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -37,14 +38,16 @@ public class FilterCommandTest {
     @Test
     public void execute_multipleEmployeesFound() {
         String expectedMessage = String.format(MESSAGE_EMPLOYEES_LISTED_OVERVIEW, 3);
-        ContainsDepartmentPredicate predicate = new ContainsDepartmentPredicate("investment");
+        ContainsDepartmentPredicate predicate = new ContainsDepartmentPredicate();
+        predicate.setDepartment("investment");
         FilterCommand command = new FilterCommand(predicate);
         expectedModel.updateFilteredEmployeeList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(ALICE, BENSON, DANIEL), model.getFilteredEmployeeList());
 
         expectedMessage = String.format(MESSAGE_EMPLOYEES_LISTED_OVERVIEW, 1);
-        predicate = new ContainsDepartmentPredicate("logistics");
+        predicate = new ContainsDepartmentPredicate();
+        predicate.setDepartment("logistics");
         command = new FilterCommand(predicate);
         expectedModel.updateFilteredEmployeeList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -53,8 +56,10 @@ public class FilterCommandTest {
 
     @Test
     public void equals() {
-        ContainsDepartmentPredicate firstPredicate = new ContainsDepartmentPredicate("first");
-        ContainsDepartmentPredicate secondPredicate = new ContainsDepartmentPredicate("second");
+        ContainsDepartmentPredicate firstPredicate = new ContainsDepartmentPredicate();
+        firstPredicate.setDepartment("first");
+        ContainsDepartmentPredicate secondPredicate = new ContainsDepartmentPredicate();
+        secondPredicate.setDepartment("second");
 
         FilterCommand filterFirstCommand = new FilterCommand(firstPredicate);
         FilterCommand filterSecondCommand = new FilterCommand(secondPredicate);
@@ -78,9 +83,11 @@ public class FilterCommandTest {
 
     @Test
     public void toStringMethod() {
-        ContainsDepartmentPredicate predicate = new ContainsDepartmentPredicate("keyword");
-        FilterCommand findCommand = new FilterCommand(predicate);
-        String expected = FilterCommand.class.getCanonicalName() + "{predicate=" + predicate + "}";
-        assertEquals(expected, findCommand.toString());
+        ContainsDepartmentPredicate predicate = new ContainsDepartmentPredicate();
+        predicate.setDepartment("keyword");
+        FilterCommand filterCommand = new FilterCommand(predicate);
+        String expected = FilterCommand.class.getCanonicalName() + "{predicate="
+                + predicate + "}";
+        assertEquals(expected, filterCommand.toString());
     }
 }

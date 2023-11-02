@@ -16,6 +16,7 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.employee.Employee;
+import seedu.address.model.name.DepartmentName;
 
 /**
  * Adds an employee to the ManageHR.
@@ -24,18 +25,7 @@ public class AddCommand extends Command {
 
     public static final String COMMAND_WORD = "add";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an employee to the ManageHR app. "
-            + "Parameters: "
-            + PREFIX_NAME + "NAME "
-            + PREFIX_PHONE + "PHONE "
-            + PREFIX_EMAIL + "EMAIL "
-            + PREFIX_ADDRESS + "ADDRESS "
-            + PREFIX_SALARY + "SALARY "
-            + PREFIX_LEAVE + "LEAVE "
-            + PREFIX_ROLE + "ROLE "
-            + "[" + PREFIX_MANAGER + "MANAGER]...\n"
-            + "[" + PREFIX_DEPARTMENT + "DEPARTMENT]...\n"
-            + "Example: " + COMMAND_WORD + " "
+    public static final String MESSAGE_EXAMPLE = COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
             + PREFIX_PHONE + "98765432 "
             + PREFIX_EMAIL + "johnd@example.com "
@@ -48,8 +38,23 @@ public class AddCommand extends Command {
             + PREFIX_DEPARTMENT + "investment "
             + PREFIX_DEPARTMENT + "logistics";
 
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an employee to the ManageHR app. "
+            + "Parameters: "
+            + PREFIX_NAME + "NAME "
+            + PREFIX_PHONE + "PHONE "
+            + PREFIX_EMAIL + "EMAIL "
+            + PREFIX_ADDRESS + "ADDRESS "
+            + PREFIX_SALARY + "SALARY "
+            + PREFIX_LEAVE + "LEAVE "
+            + PREFIX_ROLE + "ROLE "
+            + "[" + PREFIX_MANAGER + "MANAGER]...\n"
+            + "[" + PREFIX_DEPARTMENT + "DEPARTMENT]...\n"
+            + "Example: " + MESSAGE_EXAMPLE + " ";
+
+
     public static final String MESSAGE_SUCCESS = "New employee added: %1$s";
     public static final String MESSAGE_DUPLICATE_EMPLOYEE = "This employee already exists in the ManageHR app";
+    public static final String MESSAGE_UNDEFINED_DEPARTMENT = "The department(s) currently do not exist in ManageHR.";
 
     private final Employee toAdd;
 
@@ -69,6 +74,11 @@ public class AddCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_EMPLOYEE);
         }
 
+        for (DepartmentName departmentName : toAdd.getDepartments()) {
+            if (!model.hasDepartmentWithName(departmentName)) {
+                throw new CommandException(MESSAGE_UNDEFINED_DEPARTMENT);
+            }
+        }
         model.addEmployee(toAdd);
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
     }

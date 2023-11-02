@@ -14,9 +14,9 @@ import java.util.Set;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.EditCommand.EditEmployeeDescriptor;
-import seedu.address.model.department.Department;
 import seedu.address.model.employee.Employee;
-import seedu.address.model.employee.Name;
+import seedu.address.model.name.DepartmentName;
+import seedu.address.model.name.EmployeeName;
 
 /**
  * A utility class for Employee.
@@ -46,7 +46,7 @@ public class EmployeeUtil {
                 x -> sb.append(PREFIX_MANAGER + x.toString() + " ")
         );
         employee.getDepartments().stream().forEach(
-            s -> sb.append(PREFIX_DEPARTMENT + s.departmentName + " ")
+            s -> sb.append(PREFIX_DEPARTMENT + s.fullName + " ")
         );
         return sb.toString();
     }
@@ -64,7 +64,7 @@ public class EmployeeUtil {
         descriptor.getLeave().ifPresent(leave -> sb.append(PREFIX_LEAVE).append(leave.value).append(" "));
         descriptor.getRole().ifPresent(role -> sb.append(PREFIX_ROLE).append(role).append(" "));
         if (descriptor.getSupervisors().isPresent()) {
-            Set<Name> supervisors = descriptor.getSupervisors().get();
+            Set<EmployeeName> supervisors = descriptor.getSupervisors().get();
             if (supervisors.isEmpty()) {
                 sb.append(PREFIX_MANAGER);
             } else {
@@ -72,11 +72,11 @@ public class EmployeeUtil {
             }
         }
         if (descriptor.getDepartments().isPresent()) {
-            Set<Department> departments = descriptor.getDepartments().get();
+            Set<DepartmentName> departments = descriptor.getDepartments().get();
             if (departments.isEmpty()) {
                 sb.append(PREFIX_DEPARTMENT);
             } else {
-                departments.forEach(s -> sb.append(PREFIX_DEPARTMENT).append(s.departmentName).append(" "));
+                departments.forEach(s -> sb.append(PREFIX_DEPARTMENT).append(s.fullName).append(" "));
             }
         }
         return sb.toString();

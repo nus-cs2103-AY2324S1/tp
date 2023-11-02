@@ -7,30 +7,32 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.name.EmployeeName;
 
 /**
- * Jackson-friendly version of {@link EmployeeName}.
+ * Jackson-friendly version of {@link EmployeeName}, in a single string format.
  */
-class JsonAdaptedSupervisor {
-
-    private final String managerName;
+public class JsonAdaptedEmployeeName {
+    private final String name;
 
     /**
-     * Constructs a {@code JsonAdaptedSupervisor} with the given {@code managerName}.
+     * Constructs a {@code JsonAdaptedDepartment} with the given {@code name}.
      */
     @JsonCreator
-    public JsonAdaptedSupervisor(String managerName) {
-        this.managerName = managerName;
+    public JsonAdaptedEmployeeName(String name) {
+        this.name = name;
     }
 
     /**
      * Converts a given {@code Name} into this class for Jackson use.
      */
-    public JsonAdaptedSupervisor(EmployeeName source) {
-        managerName = source.fullName;
+    public JsonAdaptedEmployeeName(EmployeeName name) {
+        this.name = name.fullName;
     }
 
+    /**
+     * Converts a given {@code Department} into this class for Jackson use.
+     */
     @JsonValue
-    public String getManagerName() {
-        return managerName;
+    public String getDepartmentName() {
+        return this.name;
     }
 
     /**
@@ -39,10 +41,10 @@ class JsonAdaptedSupervisor {
      * @throws IllegalValueException if there were any data constraints violated in the adapted department.
      */
     public EmployeeName toModelType() throws IllegalValueException {
-        if (!EmployeeName.isValidName(managerName)) {
+        if (!EmployeeName.isValidName(this.name)) {
             throw new IllegalValueException(EmployeeName.MESSAGE_CONSTRAINTS);
         }
-        return new EmployeeName(managerName);
+        return new EmployeeName(this.name);
     }
 
 }

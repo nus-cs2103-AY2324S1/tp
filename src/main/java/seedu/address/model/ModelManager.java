@@ -11,14 +11,17 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.department.Department;
 import seedu.address.model.employee.Employee;
+import seedu.address.model.name.DepartmentName;
+import seedu.address.model.name.EmployeeName;
 
 /**
  * Represents the in-memory model of the ManageHR data.
  */
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
-
     private final ManageHr manageHr;
     private final UserPrefs userPrefs;
     private final FilteredList<Employee> filteredPeople;
@@ -94,6 +97,12 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public boolean hasEmployeeWithName(EmployeeName name) {
+        requireNonNull(name);
+        return manageHr.hasEmployeeWithName(name);
+    }
+
+    @Override
     public void deleteEmployee(Employee target) {
         manageHr.removeEmployee(target);
     }
@@ -105,12 +114,40 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void setEmployee(Employee target, Employee editedEmployee) {
+    public void setEmployee(Employee target, Employee editedEmployee) throws CommandException {
         requireAllNonNull(target, editedEmployee);
 
         manageHr.setEmployee(target, editedEmployee);
     }
 
+    @Override
+    public boolean hasDepartment(Department department) {
+        requireNonNull(department);
+        return manageHr.hasDepartment(department);
+    }
+
+    @Override
+    public boolean hasDepartmentWithName(DepartmentName name) {
+        requireNonNull(name);
+        return manageHr.hasDepartmentWithName(name);
+    }
+
+    @Override
+    public void deleteDepartment(Department target) {
+        manageHr.removeDepartment(target);
+    }
+
+    @Override
+    public void addDepartment(Department department) {
+        manageHr.addDepartment(department);
+    }
+
+    @Override
+    public void setDepartment(Department target, Department editedDepartment) {
+        requireAllNonNull(target, editedDepartment);
+
+        manageHr.setDepartment(target, editedDepartment);
+    }
     //=========== Filtered Employee List Accessors =============================================================
 
     /**

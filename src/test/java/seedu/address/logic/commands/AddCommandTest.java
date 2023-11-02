@@ -22,7 +22,10 @@ import seedu.address.model.ManageHr;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyManageHr;
 import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.department.Department;
 import seedu.address.model.employee.Employee;
+import seedu.address.model.name.DepartmentName;
+import seedu.address.model.name.EmployeeName;
 import seedu.address.testutil.EmployeeBuilder;
 
 public class AddCommandTest {
@@ -125,6 +128,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public void addDepartment(Department department) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void setManageHr(ReadOnlyManageHr newData) {
             throw new AssertionError("This method should not be called.");
         }
@@ -140,6 +148,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public boolean hasEmployeeWithName(EmployeeName name) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void deleteEmployee(Employee target) {
             throw new AssertionError("This method should not be called.");
         }
@@ -151,6 +164,26 @@ public class AddCommandTest {
 
         @Override
         public ObservableList<Employee> getFilteredEmployeeList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasDepartment(Department department) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasDepartmentWithName(DepartmentName name) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void deleteDepartment(Department target) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setDepartment(Department target, Department editedDepartment) {
             throw new AssertionError("This method should not be called.");
         }
 

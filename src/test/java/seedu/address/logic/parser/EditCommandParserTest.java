@@ -49,13 +49,13 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditEmployeeDescriptor;
-import seedu.address.model.department.Department;
 import seedu.address.model.employee.Address;
 import seedu.address.model.employee.Email;
 import seedu.address.model.employee.Leave;
-import seedu.address.model.employee.Name;
 import seedu.address.model.employee.Phone;
 import seedu.address.model.employee.Salary;
+import seedu.address.model.name.DepartmentName;
+import seedu.address.model.name.EmployeeName;
 import seedu.address.testutil.EditEmployeeDescriptorBuilder;
 
 public class EditCommandParserTest {
@@ -96,13 +96,14 @@ public class EditCommandParserTest {
 
     @Test
     public void parse_invalidValue_failure() {
-        assertParseFailure(parser, "1" + INVALID_NAME_DESC, Name.MESSAGE_CONSTRAINTS); // invalid name
+        assertParseFailure(parser, "1" + INVALID_NAME_DESC, EmployeeName.MESSAGE_CONSTRAINTS); // invalid name
         assertParseFailure(parser, "1" + INVALID_PHONE_DESC, Phone.MESSAGE_CONSTRAINTS); // invalid phone
         assertParseFailure(parser, "1" + INVALID_EMAIL_DESC, Email.MESSAGE_CONSTRAINTS); // invalid email
         assertParseFailure(parser, "1" + INVALID_ADDRESS_DESC, Address.MESSAGE_CONSTRAINTS); // invalid address
         assertParseFailure(parser, "1" + INVALID_SALARY_DESC, Salary.MESSAGE_CONSTRAINTS); // invalid salary
         assertParseFailure(parser, "1" + INVALID_LEAVE_DESC, Leave.MESSAGE_CONSTRAINTS); // invalid leave
-        assertParseFailure(parser, "1" + INVALID_DEPARTMENT_DESC, Department.MESSAGE_CONSTRAINTS); // invalid department
+        assertParseFailure(parser, "1" + INVALID_DEPARTMENT_DESC,
+                DepartmentName.MESSAGE_CONSTRAINTS); // invalid department
 
         // invalid phone followed by valid email
         assertParseFailure(parser, "1" + INVALID_PHONE_DESC + EMAIL_DESC_AMY, Phone.MESSAGE_CONSTRAINTS);
@@ -110,16 +111,16 @@ public class EditCommandParserTest {
         // while parsing {@code PREFIX_DEPARTMENT} alone will reset the departments of the {@code Employee}
         // being edited, parsing it together with a valid department results in error
         assertParseFailure(parser, "1" + DEPARTMENT_DESC_INVESTMENT + DEPARTMENT_DESC_LOGISTIC
-                + DEPARTMENT_EMPTY, Department.MESSAGE_CONSTRAINTS);
+                + DEPARTMENT_EMPTY, DepartmentName.MESSAGE_CONSTRAINTS);
         assertParseFailure(parser, "1" + DEPARTMENT_DESC_INVESTMENT
-                + DEPARTMENT_EMPTY + DEPARTMENT_DESC_LOGISTIC, Department.MESSAGE_CONSTRAINTS);
+                + DEPARTMENT_EMPTY + DEPARTMENT_DESC_LOGISTIC, DepartmentName.MESSAGE_CONSTRAINTS);
         assertParseFailure(parser, "1" + DEPARTMENT_EMPTY + DEPARTMENT_DESC_INVESTMENT
-                + DEPARTMENT_DESC_LOGISTIC, Department.MESSAGE_CONSTRAINTS);
+                + DEPARTMENT_DESC_LOGISTIC, DepartmentName.MESSAGE_CONSTRAINTS);
 
         // multiple invalid values, but only the first invalid value is captured
         assertParseFailure(parser, "1" + INVALID_NAME_DESC + INVALID_EMAIL_DESC + VALID_ADDRESS_AMY
                 + VALID_PHONE_AMY + VALID_SALARY_AMY + VALID_LEAVE_AMY,
-                Name.MESSAGE_CONSTRAINTS);
+                EmployeeName.MESSAGE_CONSTRAINTS);
     }
 
     @Test
@@ -127,7 +128,6 @@ public class EditCommandParserTest {
         Index targetIndex = INDEX_SECOND_EMPLOYEE;
         String userInput = targetIndex.getOneBased() + PHONE_DESC_BOB + DEPARTMENT_DESC_LOGISTIC + SALARY_DESC_BOB
                 + EMAIL_DESC_AMY + ADDRESS_DESC_AMY + NAME_DESC_AMY + LEAVE_DESC_AMY + DEPARTMENT_DESC_INVESTMENT;
-
         EditCommand.EditEmployeeDescriptor descriptor = new EditEmployeeDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
                 .withDepartments(VALID_DEPARTMENT_LOGISTIC, VALID_DEPARTMENT_INVESTMENT)

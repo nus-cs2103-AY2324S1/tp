@@ -8,7 +8,8 @@ import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.model.department.Department;
+import seedu.address.model.name.DepartmentName;
+import seedu.address.model.name.EmployeeName;
 
 /**
  * Represents an Employee in the ManageHR app.
@@ -17,7 +18,7 @@ import seedu.address.model.department.Department;
 public class Employee {
 
     // Identity fields
-    private final Name name;
+    private final EmployeeName name;
     private final Phone phone;
     private final Email email;
 
@@ -26,14 +27,14 @@ public class Employee {
     private final Salary salary;
     private final Leave leave;
     private final Role role;
-    private final Set<Name> supervisors = new HashSet<>();
-    private final Set<Department> departments = new HashSet<>();
+    private final Set<EmployeeName> supervisors = new HashSet<>();
+    private final Set<DepartmentName> departments = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Employee(Name name, Phone phone, Email email, Address address, Salary salary, Leave leave,
-                    Role role, Set<Name> supervisors, Set<Department> departments) {
+    public Employee(EmployeeName name, Phone phone, Email email, Address address, Salary salary, Leave leave,
+                    Role role, Set<EmployeeName> supervisors, Set<DepartmentName> departments) {
         requireAllNonNull(name, phone, email, address, salary, leave, departments);
         this.name = name;
         this.phone = phone;
@@ -46,7 +47,7 @@ public class Employee {
         this.departments.addAll(departments);
     }
 
-    public Name getName() {
+    public EmployeeName getName() {
         return name;
     }
 
@@ -78,7 +79,7 @@ public class Employee {
      * Returns an immutable department set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
-    public Set<Department> getDepartments() {
+    public Set<DepartmentName> getDepartments() {
         return Collections.unmodifiableSet(departments);
     }
 
@@ -86,7 +87,7 @@ public class Employee {
      * Returns an immutable name set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
-    public Set<Name> getSupervisors() {
+    public Set<EmployeeName> getSupervisors() {
         return Collections.unmodifiableSet(supervisors);
     }
 
@@ -114,7 +115,7 @@ public class Employee {
      * @return {@code true} if the provided 'otherEmployee' is not null and has the same name
      *         as this employee, {@code false} otherwise.
      */
-    public boolean hasSameEmployeeName(Name otherEmployee) {
+    public boolean hasSameEmployeeName(EmployeeName otherEmployee) {
         return otherEmployee != null
                 && otherEmployee.equals(getName());
     }
@@ -136,6 +137,16 @@ public class Employee {
      */
     public boolean isSupervisorOf(Employee subordinate) {
         return subordinate.getSupervisors().stream().anyMatch(x -> x.equals(this.getName()));
+    }
+
+    /**
+     * Checks if this employee has the same role as the given employee.
+     *
+     * @param employee The employee to compare roles with.
+     * @return true if this employee has the same role as the given employee, false otherwise.
+     */
+    public boolean hasSameRole(Employee employee) {
+        return role.equals(employee.getRole());
     }
 
     /**

@@ -25,15 +25,15 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.department.Department;
 import seedu.address.model.employee.Address;
 import seedu.address.model.employee.Email;
 import seedu.address.model.employee.Employee;
 import seedu.address.model.employee.Leave;
-import seedu.address.model.employee.Name;
 import seedu.address.model.employee.Phone;
 import seedu.address.model.employee.Role;
 import seedu.address.model.employee.Salary;
+import seedu.address.model.name.DepartmentName;
+import seedu.address.model.name.EmployeeName;
 
 /**
  * Edits the details of an existing employee in the ManageHR app.
@@ -41,7 +41,9 @@ import seedu.address.model.employee.Salary;
 public class EditCommand extends Command {
 
     public static final String COMMAND_WORD = "edit";
-
+    public static final String MESSAGE_EXAMPLE = COMMAND_WORD + " 1 "
+            + PREFIX_PHONE + "91234567 "
+            + PREFIX_EMAIL + "johndoe@example.com";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the employee identified "
             + "by the index number used in the displayed employee list. "
             + "Existing values will be overwritten by the input values.\n"
@@ -55,13 +57,12 @@ public class EditCommand extends Command {
             + "[" + PREFIX_ROLE + "ROLE] "
             + "[" + PREFIX_MANAGER + "MANAGER]...\n"
             + "[" + PREFIX_DEPARTMENT + "DEPARTMENT]...\n"
-            + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_PHONE + "91234567 "
-            + PREFIX_EMAIL + "johndoe@example.com";
+            + "Example: " + MESSAGE_EXAMPLE;
 
     public static final String MESSAGE_EDIT_EMPLOYEE_SUCCESS = "Edited Employee: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_EMPLOYEE = "This employee already exists in the ManageHR app.";
+    public static final String MESSAGE_UNDEFINED_DEPARTMENT = "The department(s) currently do not exist in ManageHR.";
 
     private final Index index;
     private final EditEmployeeDescriptor editEmployeeDescriptor;
@@ -94,6 +95,12 @@ public class EditCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_EMPLOYEE);
         }
 
+        for (DepartmentName departmentName : editedEmployee.getDepartments()) {
+            if (!model.hasDepartmentWithName(departmentName)) {
+                throw new CommandException(MESSAGE_UNDEFINED_DEPARTMENT);
+            }
+        }
+
         model.setEmployee(employeeToEdit, editedEmployee);
         model.updateFilteredEmployeeList(PREDICATE_SHOW_ALL_EMPLOYEES);
         return new CommandResult(String.format(MESSAGE_EDIT_EMPLOYEE_SUCCESS, Messages.format(editedEmployee)));
@@ -107,16 +114,16 @@ public class EditCommand extends Command {
                                                  EditEmployeeDescriptor editEmployeeDescriptor) {
         assert employeeToEdit != null;
 
-        Name updatedName = editEmployeeDescriptor.getName().orElse(employeeToEdit.getName());
+        EmployeeName updatedName = editEmployeeDescriptor.getName().orElse(employeeToEdit.getName());
         Phone updatedPhone = editEmployeeDescriptor.getPhone().orElse(employeeToEdit.getPhone());
         Email updatedEmail = editEmployeeDescriptor.getEmail().orElse(employeeToEdit.getEmail());
         Address updatedAddress = editEmployeeDescriptor.getAddress().orElse(employeeToEdit.getAddress());
         Salary updatedSalary = editEmployeeDescriptor.getSalary().orElse(employeeToEdit.getSalary());
         Leave updatedLeave = editEmployeeDescriptor.getLeave().orElse(employeeToEdit.getLeave());
         Role updatedRole = editEmployeeDescriptor.getRole().orElse(employeeToEdit.getRole());
-        Set<Name> updatedSupervisors = editEmployeeDescriptor
+        Set<EmployeeName> updatedSupervisors = editEmployeeDescriptor
                 .getSupervisors().orElse(employeeToEdit.getSupervisors());
-        Set<Department> updatedDepartments = editEmployeeDescriptor
+        Set<DepartmentName> updatedDepartments = editEmployeeDescriptor
                 .getDepartments().orElse(employeeToEdit.getDepartments());
 
         return new Employee(updatedName, updatedPhone, updatedEmail, updatedAddress,
@@ -152,15 +159,15 @@ public class EditCommand extends Command {
      * corresponding field value of the employee.
      */
     public static class EditEmployeeDescriptor {
-        private Name name;
+        private EmployeeName name;
         private Phone phone;
         private Email email;
         private Address address;
         private Salary salary;
         private Leave leave;
         private Role role;
-        private Set<Name> supervisors;
-        private Set<Department> departments;
+        private Set<EmployeeName> supervisors;
+        private Set<DepartmentName> departments;
 
         public EditEmployeeDescriptor() {}
 
@@ -188,11 +195,11 @@ public class EditCommand extends Command {
                     leave, role, supervisors, departments);
         }
 
-        public void setName(Name name) {
+        public void setName(EmployeeName name) {
             this.name = name;
         }
 
-        public Optional<Name> getName() {
+        public Optional<EmployeeName> getName() {
             return Optional.ofNullable(name);
         }
 
@@ -248,7 +255,7 @@ public class EditCommand extends Command {
          * Sets {@code supervisors} to this object's {@code supervisors}.
          * A defensive copy of {@code supervisors} is used internally.
          */
-        public void setSupervisors(Set<Name> supervisors) {
+        public void setSupervisors(Set<EmployeeName> supervisors) {
             this.supervisors = (supervisors != null) ? new HashSet<>(supervisors) : null;
         }
 
@@ -257,7 +264,7 @@ public class EditCommand extends Command {
          * if modification is attempted.
          * Returns {@code Optional#empty()} if {@code supervisors} is null.
          */
-        public Optional<Set<Name>> getSupervisors() {
+        public Optional<Set<EmployeeName>> getSupervisors() {
             return (supervisors != null)
                     ? Optional.of(Collections.unmodifiableSet(supervisors)) : Optional.empty();
         }
@@ -266,7 +273,7 @@ public class EditCommand extends Command {
          * Sets {@code departments} to this object's {@code departments}.
          * A defensive copy of {@code departments} is used internally.
          */
-        public void setDepartments(Set<Department> departments) {
+        public void setDepartments(Set<DepartmentName> departments) {
             this.departments = (departments != null) ? new HashSet<>(departments) : null;
         }
 
@@ -275,7 +282,7 @@ public class EditCommand extends Command {
          * if modification is attempted.
          * Returns {@code Optional#empty()} if {@code departments} is null.
          */
-        public Optional<Set<Department>> getDepartments() {
+        public Optional<Set<DepartmentName>> getDepartments() {
             return (departments != null) ? Optional.of(Collections.unmodifiableSet(departments)) : Optional.empty();
         }
 

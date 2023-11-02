@@ -29,7 +29,7 @@
     "leave" : "14",
     "role" : "subordinate",
     "supervisors" : ["Benson Meier"],
-    "departments" : [ ]
+    "departments" : []
   }, {
     "name" : "Daniel Meier",
     "phone" : "87652533",
@@ -49,7 +49,7 @@
     "leave" : "0",
     "role" : "manager",
     "supervisors" : [],
-    "departments" : [ ]
+    "departments" : []
   }, {
     "name" : "Fiona Kunz",
     "phone" : "9482427",
@@ -70,5 +70,15 @@
     "role" : "subordinate",
     "supervisors" : [],
     "departments" : [ ]
-  } ]
+  } ],
+  "departments": [
+    {
+      "name": "logistics",
+      "employees": ["Benson Meier"]
+    },
+    {
+      "name": "investment",
+      "employees": ["Alice Pauline", "Benson Meier", "Daniel Meier"]
+    }
+  ]
 }

@@ -1,6 +1,7 @@
 package seedu.address.model;
 
 import javafx.collections.ObservableList;
+import seedu.address.model.department.Department;
 import seedu.address.model.employee.Employee;
 
 /**
@@ -13,5 +14,5 @@ public interface ReadOnlyManageHr {
      * This list will not contain any duplicate employees.
      */
     ObservableList<Employee> getEmployeeList();
-
+    ObservableList<Department> getDepartmentList();
 }
