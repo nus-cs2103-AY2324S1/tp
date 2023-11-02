@@ -75,4 +75,20 @@ public class RemoveMusicianFromBandCommand extends Command {
 
         return lastShownMusicianList.get(musicianTargetIndex.getZeroBased());
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof RemoveMusicianFromBandCommand)) {
+            return false;
+        }
+
+        RemoveMusicianFromBandCommand otherRemoveMusicianFromBandCommand = (RemoveMusicianFromBandCommand) other;
+        return bandTargetIndex.equals(otherRemoveMusicianFromBandCommand.bandTargetIndex)
+                && musicianTargetIndex.equals(otherRemoveMusicianFromBandCommand.musicianTargetIndex);
+    }
 }

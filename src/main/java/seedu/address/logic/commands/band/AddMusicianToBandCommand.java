@@ -88,4 +88,19 @@ public class AddMusicianToBandCommand extends Command {
         model.updateFilteredBandMusicianList(new BandNameContainsKeywordsPredicate(band.getName().toString()));
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(band, verifiedMusicians)));
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof AddMusicianToBandCommand)) {
+            return false;
+        }
+
+        AddMusicianToBandCommand otherAddMusicianToBandCommand = (AddMusicianToBandCommand) other;
+        return musiciansToAdd.equals(otherAddMusicianToBandCommand.musiciansToAdd)
+                && bandToAddInto.equals(otherAddMusicianToBandCommand.bandToAddInto);
+    }
 }
