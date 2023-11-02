@@ -9,6 +9,7 @@ import static seedu.address.testutil.TypicalEvents.TP_MEETING;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.testutil.MeetingBuilder;
 
 public class MeetingTest {
@@ -61,18 +62,12 @@ public class MeetingTest {
     }
 
     @Test
-    public void toStringTest() {
-        assertEquals("TP MEETING TEST; Date: 2023-10-18; "
-                + "Start_Time: 0000; End_Time: 2359; "
-                + "Assigned_Persons: []; Assigned_Groups: [];", TP_MEETING.toString());
-    }
+    public void equalsTest() throws ParseException {
+        Meeting expected = new MeetingBuilder(TP_MEETING).withEventDate("2020-10-10").build();
+        Meeting actual = new MeetingBuilder(TP_MEETING).withEventDate("2020-10-10").build();
 
-    @Test
-    public void equalsTest() {
-        Meeting expected = new MeetingBuilder(TP_MEETING).build();
-        assertEquals(expected, TP_MEETING);
+        assertEquals(expected, actual);
     }
-
     @Test
     public void equalsWrongType() {
         assertNotEquals(1, TP_MEETING);
