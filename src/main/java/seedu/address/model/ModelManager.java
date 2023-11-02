@@ -144,6 +144,21 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void updateAttendee(String targetAttendee, String editedAttendee) {
+        requireAllNonNull(targetAttendee);
+        requireAllNonNull(editedAttendee);
+
+        addressBook.updateAttendee(targetAttendee, editedAttendee);
+    }
+
+    @Override
+    public void deleteAttendee(String targetAttendee) {
+        requireAllNonNull(targetAttendee);
+
+        addressBook.deleteAttendee(targetAttendee);
+    }
+
+    @Override
     public void setMeeting(Meeting target, Meeting editedMeeting) {
         requireAllNonNull(target, editedMeeting);
 

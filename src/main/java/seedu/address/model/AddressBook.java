@@ -121,6 +121,28 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Updates the given attendee {@code targetAttendee} with {@code editedAttendee} for all meetings.
+     * @param targetAttendee The Attendee name to be replaced from all meetings.
+     * @param editedAttendee The Attendee name to replace the {@code targetAttendee}.
+     */
+    public void updateAttendee(String targetAttendee, String editedAttendee) {
+        requireNonNull(targetAttendee);
+        requireNonNull(editedAttendee);
+
+        meetings.updateAttendee(targetAttendee, editedAttendee);
+    }
+
+    /**
+     * Deletes the given attendee {@code targetAttendee} from all meetings.
+     * @param targetAttendee The attendee name to be deleted.
+     */
+    public void deleteAttendee(String targetAttendee) {
+        requireNonNull(targetAttendee);
+
+        meetings.deleteAttendee(targetAttendee);
+    }
+
+    /**
      * Replaces the given meeting {@code meeting} in the list with {@code editedMeeting}.
      * {@code target} must exist in the address book.
      * The meeting identity of {@code editedMeeting} must be different than an existing meeting in the address book.
@@ -186,5 +208,6 @@ public class AddressBook implements ReadOnlyAddressBook {
     public int hashCode() {
         return Objects.hash(persons, meetings);
     }
+
 
 }

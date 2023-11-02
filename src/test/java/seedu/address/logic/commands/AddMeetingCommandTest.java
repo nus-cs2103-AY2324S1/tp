@@ -129,7 +129,7 @@ public class AddMeetingCommandTest {
 
         @Override
         public void addMeeting(Meeting meeting) {
-
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override
@@ -159,7 +159,7 @@ public class AddMeetingCommandTest {
 
         @Override
         public void deleteMeeting(Meeting target) {
-
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override
@@ -168,8 +168,18 @@ public class AddMeetingCommandTest {
         }
 
         @Override
-        public void setMeeting(Meeting target, Meeting editedMeeting) {
+        public void updateAttendee(String targetAttendee, String editedAttendee) {
+            throw new AssertionError("This method should not be called.");
+        }
 
+        @Override
+        public void deleteAttendee(String targetAttendee) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setMeeting(Meeting target, Meeting editedMeeting) {
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override
@@ -189,7 +199,7 @@ public class AddMeetingCommandTest {
 
         @Override
         public void updateFilteredMeetingList(Predicate<Meeting> predicate) {
-
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override
@@ -200,11 +210,13 @@ public class AddMeetingCommandTest {
 
         @Override
         public void setViewedPersonIndex(Index person) {
-
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void setViewedMeetingIndex(Index meeting) {}
+        public void setViewedMeetingIndex(Index meeting) {
+            throw new AssertionError("This method should not be called.");
+        }
 
         @Override
         public Pair<Person, Meeting> getViewedItems() {

@@ -98,6 +98,19 @@ public interface Model {
     void setPerson(Person target, Person editedPerson);
 
     /**
+     * Updates the given attendee {@code targetAttendee} with {@code editedAttendee} for all meetings.
+     * @param targetAttendee The Attendee name to be replaced from all meetings.
+     * @param editedAttendee The Attendee name to replace the {@code targetAttendee}.
+     */
+    void updateAttendee(String targetAttendee, String editedAttendee);
+
+    /**
+     * Deletes the given attendee {@code targetAttendee} from all meetings.
+     * @param targetAttendee The attendee name to be deleted.
+     */
+    void deleteAttendee(String targetAttendee);
+
+    /**
      * Replaces the given meeting {@code target} with {@code editedMeeting}.
      * {@code target} must exist in the address book.
      * The meeting identity of {@code editedMeeting} must be different than an existing meeting in the address book.
@@ -138,4 +151,6 @@ public interface Model {
      * Get current viewed person and meeting as a pair based on both view commands.
      */
     Pair<Person, Meeting> getViewedItems();
+
+
 }

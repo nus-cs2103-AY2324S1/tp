@@ -24,8 +24,10 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.meeting.Meeting;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
+import seedu.address.testutil.MeetingBuilder;
 import seedu.address.testutil.PersonBuilder;
 
 /**
@@ -34,6 +36,29 @@ import seedu.address.testutil.PersonBuilder;
 public class EditCommandTest {
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+
+
+    @Test
+    public void updateAttendees() {
+        Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Person editedPerson = new PersonBuilder(firstPerson).withName("James").build();
+
+        EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON,
+                new EditPersonDescriptorBuilder(editedPerson).build());
+
+        Meeting editedMeeting = new MeetingBuilder().withAttendees(firstPerson.getName().fullName).build();
+        model.addMeeting(editedMeeting);
+
+        Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        Meeting editedMeetingTester = new MeetingBuilder().withAttendees(firstPerson.getName().fullName).build();
+        expectedModel.addMeeting(editedMeetingTester);
+        expectedModel.setPerson(firstPerson, editedPerson);
+        expectedModel.updateAttendee(firstPerson.getName().fullName, "James");
+
+        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson));
+
+        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
+    }
 
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
@@ -170,6 +195,8 @@ public class EditCommandTest {
         // different descriptor -> returns false
         assertFalse(standardCommand.equals(new EditCommand(INDEX_FIRST_PERSON, DESC_BOB)));
     }
+
+
 
     @Test
     public void toStringMethod() {
