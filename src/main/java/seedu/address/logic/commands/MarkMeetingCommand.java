@@ -2,6 +2,8 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import java.time.LocalDateTime;
+import java.util.Iterator;
 import java.util.List;
 
 import seedu.address.commons.core.index.Index;
@@ -9,8 +11,10 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.meeting.Attendee;
 import seedu.address.model.meeting.Meeting;
 import seedu.address.model.meeting.MeetingStatus;
+import seedu.address.model.person.Person;
 
 /**
  * Marks a meeting as complete.
@@ -46,11 +50,19 @@ public class MarkMeetingCommand extends Command {
         Meeting updatedMeeting = markMeeting(meetingToMark);
         model.setMeeting(meetingToMark, updatedMeeting);
 
+        Iterator<Attendee> attendeeIterator = meetingToMark.getAttendees().iterator();
+        while (attendeeIterator.hasNext()) {
+            Attendee attendee = attendeeIterator.next();
+            Person person = model.getPerson(attendee.getAttendeeName());
+            Person updatedPerson = updateLastContactedTime(person, meetingToMark.getEnd());
+            model.setPerson(person, updatedPerson);
+        }
+
         return new CommandResult(String.format(MESSAGE_MARK_MEETING_SUCCESS, Messages.format(updatedMeeting)));
     }
 
-    static Meeting markMeeting(Meeting meeting) throws CommandException{
-        if(meeting.getStatus().isComplete) {
+    static Meeting markMeeting(Meeting meeting) throws CommandException {
+        if (meeting.getStatus().isComplete) {
             throw new CommandException(MESSAGE_MEETING_ALREADY_COMPLETE);
         }
 
@@ -58,6 +70,17 @@ public class MarkMeetingCommand extends Command {
                 meeting.getEnd(), meeting.getAttendees(), meeting.getTags(), new MeetingStatus(true));
 
         return markedMeeting;
+    }
+
+    static Person updateLastContactedTime(Person person, LocalDateTime lastContactedTime) {
+        if (lastContactedTime.isBefore(person.getLastContactedTime())) {
+            return person;
+        }
+
+        Person updatedPerson = new Person(person.getName(), person.getPhone(), person.getEmail(), lastContactedTime,
+                person.getStatus(), person.getRemark(), person.getTags());
+
+        return updatedPerson;
     }
 
     @Override
