@@ -17,10 +17,10 @@ import seedu.address.model.person.Person;
 public class StatsCurrentCommand extends StatsCommand {
     public static final String COMMAND_WORD = "current";
     public static final String MESSAGE_CURRENT_SUMMARY = "%1$d out of %2$d listed are "
-            + "currently fostering (%3$.1f%%)!";
+            + "currently fostering (%3$.2f%%)!";
 
-    public static final String MESSAGE_CURRENT_DETAILS = "- %1$d fostering dogs (%2$.1f%%)\n"
-            + "- %3$d fostering cats (%4$.1f%%)";
+    public static final String MESSAGE_CURRENT_DETAILS = "- %1$d fostering dogs (%2$.2f%%)\n"
+            + "- %3$d fostering cats (%4$.2f%%)";
 
     /**
      * Returns a list of fosterers who are currently fostering.
@@ -72,7 +72,7 @@ public class StatsCurrentCommand extends StatsCommand {
 
         List<Person> currentFosterers = getCurrentFosterers(lastShownList);
         int currentCount = currentFosterers.size();
-        float currentPercent = calculatePercentage(currentCount, total);
+        double currentPercent = calculatePercentage(currentCount, total);
         String resultSummary = String.format(MESSAGE_CURRENT_SUMMARY, currentCount, total, currentPercent);
 
         if (currentCount == 0) {
@@ -82,8 +82,8 @@ public class StatsCurrentCommand extends StatsCommand {
         int fosteringDogsCount = getCurrentDogCount(currentFosterers);
         int fosteringCatsCount = getCurrentCatCount(currentFosterers);
 
-        float fosteringDogsPercent = calculatePercentage(fosteringDogsCount, currentCount);
-        float fosteringCatsPercent = calculatePercentage(fosteringCatsCount, currentCount);
+        double fosteringDogsPercent = calculatePercentage(fosteringDogsCount, currentCount);
+        double fosteringCatsPercent = 100.0 - fosteringDogsPercent;
 
         String resultDetails = String.format(MESSAGE_CURRENT_DETAILS, fosteringDogsCount,
                 fosteringDogsPercent, fosteringCatsCount, fosteringCatsPercent);
