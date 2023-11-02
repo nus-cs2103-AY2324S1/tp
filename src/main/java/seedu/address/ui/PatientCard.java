@@ -81,7 +81,7 @@ public class PatientCard extends UiPart<Region> {
                     appointmentLabel.setWrapText(true); // Enable text wrapping
                     appointmentLabel.setPrefWidth(250); // Set the maximum width for text wrapping (adjust as needed)
                     appointments.getChildren().add(appointmentLabel);
-                 });
+                });
         condition.setText("Condition: " + person.getCondition().value);
         bloodType.setText("Blood Type: " + person.getBloodType().value);
         emergencyContact.setText("Emergency Contact: " + person.getEmergencyContact().value);
