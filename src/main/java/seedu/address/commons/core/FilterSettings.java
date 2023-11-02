@@ -52,17 +52,7 @@ public class FilterSettings implements Serializable {
 
     @Override
     public boolean equals(Object other) {
-        if (other == this) {
-            return true;
-        }
-
-        // instanceof handles nulls
-        if (!(other instanceof FilterSettings)) {
-            return false;
-        }
-
-        FilterSettings otherFilterSettings = (FilterSettings) other;
-        return filters.equals(otherFilterSettings.filters);
+        return other instanceof FilterSettings;
     }
 
     @Override
