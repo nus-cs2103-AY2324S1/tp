@@ -17,6 +17,7 @@ If you can type fast, KeepInTouch can get your contact management tasks done fas
   * [Listing contacts: `list contact`](#listing-contacts--list-contact)
   * [Adding a contact: `add contact`](#adding-a-contact--add-contact)
   * [Deleting a contact: `delete contact`](#deleting-a-contact--delete-contact)
+  * [Finding a contact: `find`](#finding-a-contact--find)
   * [Adding tags: `add tag`](#adding-tags--add-tag)
   * [Deleting tags: `delete tag`](#deleting-tags--delete-tag)
   * [Adding a note: `add note`](#adding-notes-to-a-contact--add-note)
@@ -112,6 +113,16 @@ Format: `delete contact CONTACT_ID`
 
 Examples:
 * `delete contact 1` deletes the first contact in the contact list.
+
+### Finding a contact : `find`
+
+Finds a contact by their name by matching keywords with the contact's name. Keywords are **case sensitive**.
+
+Format: `find KEYWORD [OTHER_KEYWORDS...]`
+
+Examples:
+* `find Alex`
+
 ### Adding tags : `add tag`
 
 Adds one or more tags to a contact.
@@ -185,11 +196,9 @@ Examples
 
 ### Adding events : `add event`
 
-Adds an event to a contact.
+Adds an event to a contact. The added event should not have clashes in timing with other existing events in the contact list.
 
 Format: `add event -id CONTACT_ID -en EVENT_NAME -st START_TIME [-et END_TIME] [-loc LOCATION] [-info INFORMATION]`
-
-The event should not have clashes in timing with other existing events in the contact list.
 
 Date-Time Format:
  - You can use one of the following formats for `START_TIME` and `END_TIME`:
@@ -256,6 +265,7 @@ Action             | Format, Examples
 **List Contact**   | `list contact [-t TAGNAME...]` <br> e.g., `list contact -t Recruiter`
 **Add Contact**    | `add contact -n NAME -p PHONE_NUMBER -a ADDRESS -e EMAIL [-t TAGNAME...]` <br> e.g., `add contact -n Aaron -p 12345678 -a Baker Street 12 -e aaron123@gmail.com -t Frontend`
 **Delete Contact** | `delete contact CONTACT_ID`<br> e.g., `delete contact 1`
+**Find Contact**   | `find KEYWORD [OTHER_KEYWORDS...]`<br> e.g., `find Alex`
 **Add Tag**        | `add tag -id CONTACT_ID -t TAGNAME...` <br> eg., `add tag -id 1 -t Frontend`
 **Delete Tag**        | `delete tag -id CONTACT_ID -t TAGNAME...` <br> eg., `delete tag -id 1 -t Frontend`
 **Add Note**       | `add note -id CONTACT_ID -t NOTE_TITLE -c NOTE_CONTENT` <br> e.g., `add note -id 2 -tit Open Position -con Applications for SWE full-time positions will open soon`
