@@ -34,6 +34,7 @@ JobApplicationsBook Pro (JABPro) is a **desktop app for hiring managers of compa
     * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`: adds an applicant with the specified contact details
 
     * `remark 1 r/Great attitude, hardworking`: edits the remark of the 1st person on the list to have a remark `Great attitude, hardworking`
+    * `view 1`: shows the complete details of the 1st person on the list.
 
     * `search n/John`: Searches for applicants whose names contain the keyword `John`
 
@@ -43,7 +44,7 @@ JobApplicationsBook Pro (JABPro) is a **desktop app for hiring managers of compa
 
     * `add linkedin 1 alexyeoh`: Adds LinkedIn account to candidate's existing contact information
 
-    * `github Alex Yeoh`: Redirects the user to the Github account of the candidate
+    * `github Alex Yeoh`: Redirects the user to the Github account of the candidate [provided github has been added previously]
 
 Refer to the [Features](#features) below for details of each command.
 
@@ -70,7 +71,7 @@ Refer to the [Features](#features) below for details of each command.
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
+* Extraneous parameters for commands that do not take in parameters (such as `help`, `listT`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
@@ -110,6 +111,9 @@ Examples:
 * `create t/role developer`
 * `create t/dept software t/dept marketing`
 
+An example of the `create` command in action:
+[Create](images/create.png)
+
 ### Adding a person: `add`
 
 Adds a person to the address book.
@@ -146,23 +150,34 @@ Format: `remark INDEX r/REMARK`
 * Edits the remark for the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * The previous remark is not saved, and instead is replaced by the inputted remark. The command does not add to the existing remark.
 * You can empty out a remark by inputting an empty string.
+* You can get the remark previously inputted by using the **REMARK** keyword. It will be replaced with the previous remark. The keyword **REMARK** is case-sensitive. This means that `remark 1 r/**remark**` will just replace the remark with the word `**remark**`.
 
 Examples:
 *  `remark 1 r/Great attitude, hardworking` Edits the remark of the 1st person on the list to have a remark `Great attitude, hardworking`.
+*  `remark 1 r/**REMARK** furthermore he is great at teamwork` Edits the remark of the 1st person to have a remark `Great attitude, hardworking furthermore he is great at teamwork`.
 *  `remark 1 r/` Empties the remark of the 1st person.
+
+An example of the `remark` command in action:
+[Remark](images/remark.png)
+An example of the `remark` command in action with the **REMARK** keyword:
+[Enhanced Remark](images/enhancedremark.png)
 
 ### Viewing a person's details: `view`
 
-Creates a complete view for details of a person in the address book.
+Creates a complete view for details of a candidate in the second main panel and summary statistics of a candidate in the third main panel. 
 
 Format: `view INDEX`
 
 * Shows the complete details of the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * The index used will be the same as the index used in the `list` command.
 * Compatible with search and other features that change the order and content of the list.
+* Refer to the [Summary Statistics](#summary-statistics) section for more details on the summary statistics.
 
 Examples:
 * `view 1` Shows the complete details of the 1st person on the list.
+
+An example of the `view` command in action:
+[View](images/view.png)
 
 <box type="tip" seamless>
 
@@ -203,7 +218,9 @@ Examples:
 
 Shows a list of all persons in the address book.
 
-Format: `list so/ATTRIBUTE`
+Format: 
+`list` or
+`list so/ATTRIBUTE`
 
 * `so/ATTRIBUTE` is completely **optional**, on default will NOT be sorted.
 * As of v1.2, the attributes that are supported are `name` and `email`.
@@ -214,7 +231,19 @@ lowercase letters as distinct. This may result in names being sorted as A B C a 
 
 Examples:
 * `list` Shows a list of all persons.
-* `list s/name` Show a list of all persons, sorted by name in ascending order.
+* `list s/name` Shows a list of all persons, sorted by name in ascending order.
+
+### Listing all tags: `listT`
+
+Shows a list of all tags in the address book.
+
+Format: `listT`
+
+* The `listT` command does not require any additional parameters or arguments.
+* Tags listed by the `listT` command are unique and do not repeat.
+
+**Example:**
+* `listT` Shows a list of all tags.
 
 ### Editing a person : `edit`
 
@@ -242,12 +271,66 @@ Notes on editing the tags of the specified person:
   * If you have multiple tags in different categories with the same name, you must specify the category when you want to
     tag the specified candidate with one of these tags.
 
+
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 *  `edit 2 t/Interview sc/Interview 80` Edits the tag of the 2nd person to have a tag `Interview` with a score of 80.
 * `edit 1 t/role swe`
 * `edit 1 t/swe`
+
+An example of the `edit` command in action for editing `tag` and `score`:
+[Edit](images/editscore.png)
+
+<box type="tip" seamless>
+
+**Note:** Editing the tags of a person or adding a score to a tag will trigger a refresh of the summary statistics table.  
+
+To find out more about the summary statistics table, refer to the [Summary Statistics](#summary-statistics) section.
+
+</box>
+
+
+### Filter job applicants by statistics: `filter`
+
+Filters and display job applicants using statistical metrics and values.
+
+Format: 
+`filter t/TAGNAME met/METRIC val/VALUE` or `filter t/TAGNAME met/METRIC`
+
+* Filters and displays job applicants whose **value** is **greater than or equal** to the specified value for the specified statistic metric.
+* The `TAGNAME` must be a name of a tag that has been created using the `create` command with the `assessment` category.
+* The `METRIC` must be a name of a metric that is either `score`, `percentile`, `mean`, `median`.
+* The `VALUE` must be a non-negative integer.
+* For `METRIC` that is `mean` or `median`, the `VALUE` is optional. Specifying a `VALUE` here will be ignored accordingly.
+* This does not edit, update or in any way change the data of the job applicants. It only filters and displays the job applicants.
+* Filter does not trigger view, that is your view panels represent the previous candidate you viewed before filtering.
+* To get back the **original list with all the candidates**, simply type `list` again.
+
+Examples:
+* `filter t/Interview met/score val/80` filters and displays job applicants whose score tied to `interview` tag  is greater than or equal to 80.
+* `filter t/Interview met/percentile val/80` filters and displays job applicants whose percentile tied to `interview` tag  is greater than or equal to 80.
+* `filter t/Interview met/mean` filters and displays job applicants whose score tied to `interview` tag is greater than or equal to the mean score for `interview` tag.
+* `filter t/Interview met/median` filters and displays job applicants whose score tied to `interview` tag is greater than or equal to the median score for `interview` tag.
+
+An example of the `filter` command in action:
+[Filter](images/filter.png)
+
+
+A more complete example guide on how to use filter effectively from the default address book:  
+1. `create t/assessment interview` creates a tag `interview` under the `assessment` category.
+** Take note, only edit if the index exists, adapt this guide accordingly **
+2. `edit 1 t/interview sc/interview 80` edits the tag of the 1st person to have a tag `interview` with a score of 80.
+3. `edit 2 t/interview sc/interview 90` edits the tag of the 2nd person to have a tag `interview` with a score of 90.
+4. `edit 3 t/interview sc/interview 70` edits the tag of the 3rd person to have a tag `interview` with a score of 70.
+5. `filter t/interview met/percentile val/80` filters and displays job applicants whose score tied to `interview` tag  is greater than or equal to 80.
+6. `filter t/interview met/median` filters and displays job applicants whose score tied to `interview` tag is greater than or equal to the median score for `interview` tag.
+
+In essence, this allows you to find job applicants whose performance rating is above a certain percentile, score or mean/median score for that tag.  
+Ideally, this feature can then be used to find the best candidates easily without manual comparison
+
+
+
 
 ### Search job applicants by category: `search`
 
@@ -381,6 +464,44 @@ Exits the program.
 
 Format: `exit`
 
+### Summary Statistics
+
+Summary Statistics is a table generated by JABPro that displays the following information about a candidate:
+* Tags that are categorised under the `assessment` category and **have a score**
+* The **score** of the candidate for the tag
+* The **mean** score of candidates with that tag
+* The **median** score of candidates with that tag
+* The **minimum** score of candidates with that tag
+* The **maximum** score of candidates with that tag
+* The **percentile** of the candidate for that tag
+
+Understanding how to use these summary statistics meaningfully:
+* You should ensure that you have sufficient candidates with a score for the tag you are interested in, before using the summary statistics to make comparisons.  
+  * This is due to the fact that these summary statistics rely on concepts such as mean, median and percentile, which are statistical concepts that require a sufficient sample size to be meaningful.
+  * For example, if you have only assigned 5 out of 100 candidates, the summary statistics will not be representative of the actual mean, median and percentile for that tag.
+  * In this case, you should assign more candidates with a score for that tag, before using the summary statistics to make comparisons.
+  * If you have assigned a sufficient number of candidates with a score for that tag, you can use the summary statistics to make comparisons. For example, you want to check if a candidate's score for a tag is more than or equal to half of all the candidates who have a score for that tag, you can use the median to make this comparison.
+  * A sufficient number could be deemed as any number that is more than 30, but this is not a hard and fast rule. You should use your own discretion to determine if the number of candidates with a score for that tag is sufficient.
+
+* Use mostly `median` and `percentile` to make your judgements
+  * `median` to find candidates who are the better performing half
+  * `percentile` as where this candidate stands among all other candidates (treat it like a ranking system, the higher the percentile, the better the candidate is performing) 
+  * `percentile` 100.0 would represent the best performing candidate for that tag and `percentile` 0.0 would represent the worst performing candidate for that tag
+
+** Advanced users **
+* Understand that `percentile` has limited functionality in certain context. Suppose you have 6 candidates with the scores `{80, 90, 100, 100, 100, 100}`
+  * Median would be 90 in this case and percentile would be 50.0 for the candidate with a score of 90, however the upper half of the candidates are all 100.0 percentile
+  * This comes as a consequence of the implementation where given you have the same score, you should have the same percentile / ranking
+  * This is one of the root reasons why your sample size should be sufficiently large before using the summary statistics to make comparisons, this reduces the chances of having candidates with the same score
+
+In-depth explanation of the statistics:
+**mean** is calculated by using the formula `sum of all scores with that tag/ number of candidates with that tag`
+**median** is calculated by using the formula `middle score of all scores with that tag`
+**minimum** is calculated by using the formula `lowest score of all scores with that tag`
+**maximum** is calculated by using the formula `highest score of all scores with that tag`
+**percentile** is calculated by using the formula `number of candidates with a score strictly lower than the candidate/ total number of candidates with that tag`
+
+
 ### Saving the data
 
 AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
@@ -418,19 +539,23 @@ _Details coming soon ..._
  Action                   | Format, Examples                                                                                                                                               
 --------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------
  **Create**               | `create t/CATEGORY NAME…​` <br> e.g. `create t/dept software`
- **Add**                  | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/[CATEGORY] TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague` 
+ **Add**                  | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/[CATEGORY] TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/developer t/intern` 
  **Remark**               | `remark r/REMARK` <br> e.g., `remark 1 r/Great attitude, hardworking`                                                                                          
  **View**                 | `view INDEX` <br> e.g., `view 1`                                                                                                                               
  **Add Github/LinkedIn**  | `addL INDEX u/USERNAME` or `addG INDEX u/USERNAME` e.g., `addL 1 u/alex-yeoh`, `addG 2 u/bernicesanders123`                                                    
  **Open Github/LinkedIn** | `linkedin INDEX` or `github INDEX` e.g., `linkedin 1`, `github 2`                                                                                              
  **Clear**                | `clear`                                                                                                                                                        
- **Delete**               | `delete INDEX`<br> e.g., `delete 3`                                                                                                                            
+ **Delete**               | `delete INDEX` or `delete (t/TAG [MORE TAGS] st/STATUS)` <br> e.g., `delete 3`, `delete t/intern st/rejected`                                                                                                                           
  **Set**                  | `set INDEX STATUS`<br> e.g., `set 2 Interviewed`                                                                                                               
  **Edit**                 | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/[CATEGORY] TAGNAME]... [sc/TAGNAME SCORE]​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com t\MarketingInterview sc\MarketingInterview 50`                                   
- **Search**               | `search (n/KEYWORD [MORE KEYWORDS] / st/KEYWORD [MORE KEYWORDS] / t/KEYWORD [MORE KEYWORDS])` <br> e.g., `search n/alex`
- **List**                 | `list s/ATTRIBUTE` <br> e.g. `list s/name`    `hello`                                                                                                                 
+ **Search**               | `search (n/NAME [MORE NAME] / st/STATUS [MORE STATUS] / t/TAGS [MORE TAGS])` <br> e.g., `search n/alex`
+ **List**                 | `list so/ATTRIBUTE` <br> e.g. `list so/name`
+ **ListT**                | `listT`
  **Export**               | `export`                                                                                                                                                       
  **Help**                 | `help`
+ **Event**                | `event INDEX d/DESCRIPTION bt/START_TIME et/END_TIME`
+ **Schedule**             | `schedule`
+
 
 
 

@@ -21,6 +21,8 @@ public interface Model {
     /** {@code Predicate} that always evaluate to true */
     Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
 
+    Predicate<Tag> PREDICATE_SHOW_ALL_TAGS = unused -> true;
+
     Predicate<Event> PREDICATE_SHOW_ALL_EVENTS = unused -> true;
 
     /**
@@ -103,6 +105,7 @@ public interface Model {
 
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();
+    ObservableList<Tag> getFilteredTagList();
     ObservableList<Event> getFilteredEventList();
 
     /**
@@ -117,6 +120,8 @@ public interface Model {
      */
     void updateFilteredPersonList(List<Predicate<Person>> predicatesList);
 
+    void updateFilteredTagList(Predicate<Tag> predicate);
+
     void updateFilteredEventList(Predicate<Event> predicate);
 
     void updateFilteredEventList(List<Predicate<Event>> predicateList);
@@ -129,6 +134,7 @@ public interface Model {
     void sortPersonList(Comparator<Person> comparator);
 
     void sortEventList(Comparator<Event> comparator);
+
 
     /**
      * Returns the Index of the last view command called.

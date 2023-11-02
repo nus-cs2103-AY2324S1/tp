@@ -104,6 +104,7 @@ public class ScoreList {
         return tag.tagCategory.toLowerCase().contains("assessment");
     }
 
+
     /**
      * Returns true if the score list is empty.
      * @return true if the score list is empty

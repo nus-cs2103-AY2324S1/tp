@@ -31,6 +31,7 @@ public class ModelManager implements Model {
     private final EventBook eventBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
+    private final FilteredList<Tag> filteredTags;
     private final FilteredList<Event> filteredEvents;
 
     private Index lastViewedPersonIndex;
@@ -48,6 +49,7 @@ public class ModelManager implements Model {
         this.eventBook = new EventBook(eventBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        filteredTags = new FilteredList<>(this.addressBook.getTagList());
         filteredEvents = new FilteredList<>(this.eventBook.getEventList());
         summaryStatistic = new SummaryStatistic(this.addressBook.getPersonList());
     }
@@ -200,6 +202,15 @@ public class ModelManager implements Model {
                 .reduce(Predicate::and)
                 .orElse(person -> true);
         filteredPersons.setPredicate(combinedPredicate);
+    }
+
+    @Override
+    public ObservableList<Tag> getFilteredTagList() {
+        return filteredTags;
+    }
+    @Override
+    public void updateFilteredTagList(Predicate<Tag> predicate) {
+        filteredTags.setPredicate(predicate);
     }
 
     @Override
