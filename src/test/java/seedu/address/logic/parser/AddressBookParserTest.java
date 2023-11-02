@@ -23,6 +23,7 @@ import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.AddLeaveCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.logic.commands.DeleteLeaveCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditEmployeeDescriptor;
 import seedu.address.logic.commands.ExitCommand;
@@ -127,6 +128,28 @@ public class AddressBookParserTest {
         SortCommand command = (SortCommand) parser.parseCommand(
                 SortCommand.COMMAND_WORD + " f/ " + "salary" + " in/ " + "asc");
         assertEquals(new SortCommand("salary", "asc"), command);
+    }
+
+    @Test
+    public void parseCommand_addLeave() throws Exception {
+        AddLeaveCommand command = (AddLeaveCommand) parser.parseCommand(
+                AddLeaveCommand.COMMAND_WORD + " id/ " + "EID1234-5678"
+                + " from/ " + "2023-10-12" + " to/ " + "2023-10-15");
+        Id id = new Id("EID1234-5678");
+        LocalDate startDate = LocalDate.parse("2023-10-12", DateTimeFormatter.ISO_LOCAL_DATE);
+        LocalDate endDate = LocalDate.parse("2023-10-15", DateTimeFormatter.ISO_LOCAL_DATE);
+        assertEquals(new AddLeaveCommand(id, startDate, endDate), command);
+    }
+
+    @Test
+    public void parseCommand_deleteLeave() throws Exception {
+        DeleteLeaveCommand command = (DeleteLeaveCommand) parser.parseCommand(
+                DeleteLeaveCommand.COMMAND_WORD + " id/ " + "EID1234-5678"
+                        + " from/ " + "2023-10-12" + " to/ " + "2023-10-15");
+        Id id = new Id("EID1234-5678");
+        LocalDate startDate = LocalDate.parse("2023-10-12", DateTimeFormatter.ISO_LOCAL_DATE);
+        LocalDate endDate = LocalDate.parse("2023-10-15", DateTimeFormatter.ISO_LOCAL_DATE);
+        assertEquals(new DeleteLeaveCommand(id, startDate, endDate), command);
     }
 
     @Test
