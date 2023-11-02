@@ -1,14 +1,20 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.*;
 
 import seedu.address.commons.util.CustomSet;
 import seedu.address.logic.commands.FilterCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.department.Department;
-import seedu.address.model.employee.*;
+import seedu.address.model.employee.Address;
+import seedu.address.model.employee.Email;
+import seedu.address.model.employee.Leave;
+import seedu.address.model.employee.Phone;
+import seedu.address.model.employee.Role;
+import seedu.address.model.employee.Salary;
+import seedu.address.model.employee.ContainsDepartmentPredicate;
+import seedu.address.model.name.DepartmentName;
+import seedu.address.model.name.EmployeeName;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -32,7 +38,7 @@ public class FilterCommandParser implements Parser<FilterCommand> {
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
                         PREFIX_ADDRESS, PREFIX_SALARY, PREFIX_LEAVE, PREFIX_ROLE, PREFIX_MANAGER, PREFIX_DEPARTMENT);
 
-        Set<Name> nameSet = parseNamesForFilter(argMultimap.getAllValues(PREFIX_NAME));
+        Set<EmployeeName> nameSet = parseNamesForFilter(argMultimap.getAllValues(PREFIX_NAME));
         Set<Phone> phoneSet = parsePhonesForFilter(argMultimap.getAllValues(PREFIX_PHONE));
         Set<Email> emailSet = parseEmailsForFilter(argMultimap.getAllValues(PREFIX_EMAIL));
         Set<Address> addressSet = parseAddressesForFilter(argMultimap.getAllValues(PREFIX_ADDRESS));
@@ -40,18 +46,18 @@ public class FilterCommandParser implements Parser<FilterCommand> {
         Set<Leave> leaveSet = parseLeavesForFilter(argMultimap.getAllValues(PREFIX_LEAVE));
         Set<Role> roleSet = parseRolesForFilter(argMultimap.getAllValues(PREFIX_ROLE));
 
-        Set<Name> supervisorNameSet = parseSupervisorsForFilter(argMultimap.getAllValues(PREFIX_MANAGER));
-        Set<Department> departmentSet = parseDepartmentsForFilter(argMultimap.getAllValues(PREFIX_DEPARTMENT));
+        Set<EmployeeName> supervisorNameSet = parseSupervisorsForFilter(argMultimap.getAllValues(PREFIX_MANAGER));
+        Set<DepartmentName> departmentSet = parseDepartmentsForFilter(argMultimap.getAllValues(PREFIX_DEPARTMENT));
 
         return new FilterCommand(new ContainsDepartmentPredicate(nameSet, phoneSet, emailSet, addressSet,
                 salarySet, leaveSet, roleSet, supervisorNameSet, departmentSet));
     }
 
-    private Set<Name> parseNamesForFilter(Collection<String> nameSet) throws ParseException {
+    private Set<EmployeeName> parseNamesForFilter(Collection<String> nameSet) throws ParseException {
         assert nameSet != null;
         Collection<String> names = nameSet.size() == 1 && nameSet.contains("")
                 ? Collections.emptySet() : nameSet;
-        Set<Name> parsedNameSet = new CustomSet<>();
+        Set<EmployeeName> parsedNameSet = new CustomSet<>();
         for (String name : names) {
             parsedNameSet.add(ParserUtil.parseName(name));
         }
@@ -124,23 +130,23 @@ public class FilterCommandParser implements Parser<FilterCommand> {
         return parsedRoleSet;
     }
 
-    private Set<Name> parseSupervisorsForFilter(Collection<String> supervisors)
+    private Set<EmployeeName> parseSupervisorsForFilter(Collection<String> supervisors)
             throws ParseException {
         assert supervisors != null;
 
         Collection<String> supervisorNameSet = supervisors.size() == 1 && supervisors.contains("")
                 ? Collections.emptySet() : supervisors;
-        CustomSet<Name> parsedSupervisorNameSet = new CustomSet<>();
+        CustomSet<EmployeeName> parsedSupervisorNameSet = new CustomSet<>();
         parsedSupervisorNameSet.addAll(ParserUtil.parseSupervisors(supervisorNameSet));
         return parsedSupervisorNameSet;
     }
 
-    private Set<Department> parseDepartmentsForFilter(Collection<String> departments) throws ParseException {
+    private Set<DepartmentName> parseDepartmentsForFilter(Collection<String> departments) throws ParseException {
         assert departments != null;
 
         Collection<String> departmentSet = departments.size() == 1 && departments.contains("")
                 ? Collections.emptySet() : departments;
-        CustomSet<Department> parsedDepartmentSet = new CustomSet<>();
+        CustomSet<DepartmentName> parsedDepartmentSet = new CustomSet<>();
         parsedDepartmentSet.addAll(ParserUtil.parseDepartments(departmentSet));
         return parsedDepartmentSet;
     }

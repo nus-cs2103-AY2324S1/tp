@@ -5,26 +5,28 @@ import java.util.function.Predicate;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.name.DepartmentName;
+import seedu.address.model.name.EmployeeName;
 
 /**
  * Tests that an {@code Employee}'s {@code Name} matches the keyword given.
  */
 public class ContainsDepartmentPredicate implements Predicate<Employee> {
 
-    private final Set<Name> nameSet;
+    private final Set<EmployeeName> nameSet;
     private final Set<Phone> phoneSet;
     private final Set<Email> emailSet;
     private final Set<Address> addressSet;
     private final Set<Salary> salarySet;
     private final Set<Leave> leaveSet;
     private final Set<Role> roleSet;
-    private final Set<Name> supervisorNameSet;
-    private final Set<Department> departmentSet;
+    private final Set<EmployeeName> supervisorNameSet;
+    private final Set<DepartmentName> departmentSet;
 
 
-    public ContainsDepartmentPredicate(Set<Name> nameSet, Set<Phone> phoneSet, Set<Email> emailSet,
+    public ContainsDepartmentPredicate(Set<EmployeeName> nameSet, Set<Phone> phoneSet, Set<Email> emailSet,
                                        Set<Address> addressSet, Set<Salary> salarySet, Set<Leave> leaveSet,
-                                       Set<Role> roleSet, Set<Name> supervisorNameSet, Set<Department> departmentSet) {
+                                       Set<Role> roleSet, Set<EmployeeName> supervisorNameSet,
+                                       Set<DepartmentName> departmentSet) {
         this.nameSet = nameSet;
         this.phoneSet = phoneSet;
         this.emailSet = emailSet;
