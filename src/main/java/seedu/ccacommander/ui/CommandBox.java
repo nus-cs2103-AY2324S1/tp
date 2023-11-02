@@ -13,7 +13,7 @@ import seedu.ccacommander.model.CommandHistory;
  * The UI component that is responsible for receiving user command inputs.
  */
 public class CommandBox extends UiPart<Region> {
-
+    // error style class in extensions.css
     public static final String ERROR_STYLE_CLASS = "error";
     private static final String FXML = "CommandBox.fxml";
     private static final CommandHistory COMMAND_HISTORY = new CommandHistory();
