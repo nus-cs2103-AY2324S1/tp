@@ -1,10 +1,7 @@
 package seedu.address.ui;
 
-import java.util.Comparator;
-import java.util.Set;
 import java.util.logging.Logger;
 
-import javafx.beans.binding.Bindings;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -17,12 +14,10 @@ import javafx.scene.control.TableView;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Region;
 import javafx.scene.paint.Color;
-import javafx.scene.text.Text;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.event.Event;
 import seedu.address.model.note.Note;
 import seedu.address.model.person.Person;
-import seedu.address.model.tag.Tag;
 
 /**
  * Panel containing the list of persons.
@@ -31,15 +26,15 @@ public class PersonListPanel extends UiPart<Region> {
     private static final String FXML = "PersonListPanel.fxml";
     private final Logger logger = LogsCenter.getLogger(PersonListPanel.class);
 
-    @FXML TableView<Person> table;
-    @FXML TableColumn<Person, Void> indexCol;
-    @FXML TableColumn<Person, String> nameCol;
-    @FXML TableColumn<Person, String> emailCol;
-    @FXML TableColumn<Person, String> phoneCol;
-    @FXML TableColumn<Person, String> addressCol;
-    @FXML TableColumn<Person, Void> tagsCol;
-    @FXML TableColumn<Person, Void> notesCol;
-    @FXML TableColumn<Person, Void> eventsCol;
+    @FXML private TableView<Person> table;
+    @FXML private TableColumn<Person, Void> indexCol;
+    @FXML private TableColumn<Person, String> nameCol;
+    @FXML private TableColumn<Person, String> emailCol;
+    @FXML private TableColumn<Person, String> phoneCol;
+    @FXML private TableColumn<Person, String> addressCol;
+    @FXML private TableColumn<Person, Void> tagsCol;
+    @FXML private TableColumn<Person, Void> notesCol;
+    @FXML private TableColumn<Person, Void> eventsCol;
 
 
     /**
@@ -66,7 +61,7 @@ public class PersonListPanel extends UiPart<Region> {
     }
 
     class TableTagsCell extends TableCell<Person, Void> {
-        ObservableList<Person> personList;
+        private ObservableList<Person> personList;
 
         public TableTagsCell(ObservableList<Person> personList) {
             this.personList = personList;
@@ -90,7 +85,7 @@ public class PersonListPanel extends UiPart<Region> {
     }
 
     class TableNotesCell extends TableCell<Person, Void> {
-        ObservableList<Person> personList;
+        private ObservableList<Person> personList;
 
         public TableNotesCell(ObservableList<Person> personList) {
             this.personList = personList;
@@ -113,7 +108,7 @@ public class PersonListPanel extends UiPart<Region> {
     }
 
     class TableEventsCell extends TableCell<Person, Void> {
-        ObservableList<Person> personList;
+        private ObservableList<Person> personList;
 
         public TableEventsCell(ObservableList<Person> personList) {
             this.personList = personList;
