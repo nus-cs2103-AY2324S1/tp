@@ -140,6 +140,16 @@ public class Employee {
     }
 
     /**
+     * Checks if this employee has the same role as the given employee.
+     *
+     * @param employee The employee to compare roles with.
+     * @return true if this employee has the same role as the given employee, false otherwise.
+     */
+    public boolean hasSameRole(Employee employee) {
+        return role.equals(employee.getRole());
+    }
+
+    /**
      * Returns true if both employees have the same identity and data fields.
      * This defines a stronger notion of equality between two employees.
      */
