@@ -55,8 +55,12 @@ import seedu.address.model.tag.Tag;
  */
 public class FindExpressionParser {
 
-    private List<Token> tokens;
+    private final List<Token> tokens;
     private int pos = 0;
+
+    public FindExpressionParser(List<Token> tokens) {
+        this.tokens = tokens;
+    }
 
     /**
      * Parses a list of tokens into an expression tree, and returns
@@ -65,11 +69,10 @@ public class FindExpressionParser {
      * @param tokens The list of tokens to be parsed.
      * @return The predicate representing the tokens when parsed into an expression tree.
      */
-    public Predicate<Person> parseToPredicate(List<Token> tokens) throws ParseException {
-        if (tokens.isEmpty()) {
+    public Predicate<Person> parseToPredicate() throws ParseException {
+        if (this.tokens.isEmpty()) {
             throw new ParseException("Expression is empty!");
         }
-        this.tokens = tokens;
         ExprNode completedAst = expression();
         if (!isAtEnd()) {
             throw new ParseException("Find command received an invalid filter string!");

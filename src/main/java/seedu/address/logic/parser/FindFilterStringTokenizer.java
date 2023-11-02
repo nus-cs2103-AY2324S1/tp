@@ -27,7 +27,7 @@ public class FindFilterStringTokenizer {
      *
      * @return a list of tokens representing the filter string components
      */
-    List<Token> tokenize() throws ParseException {
+    public List<Token> tokenize() throws ParseException {
         List<Token> tokens = new ArrayList<>();
 
         while (pos < filterString.length()) {
