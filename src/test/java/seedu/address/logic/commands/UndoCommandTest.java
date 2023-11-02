@@ -34,7 +34,7 @@ public class UndoCommandTest {
     }
 
     @Test
-    public void execute_undoCommand_nullModel_success() {
+    public void execute_undoCommandNullModel_success() {
         UndoCommand undoCommand = new UndoCommand();
 
         // Set the model to null
