@@ -9,16 +9,16 @@ import networkbook.commons.util.ToStringBuilder;
 import networkbook.model.person.Person;
 
 /**
- * Tests that at least one of a Person's specialisations contains one of the given key terms.
+ * Tests that at least one of a Person's tags contains one of the given key terms.
  */
-public class SpecContainsKeyTermsPredicate implements Predicate<Person> {
+public class TagsContainKeyTermsPredicate implements Predicate<Person> {
     private final List<String> keyTerms;
 
     /**
-     * Creates a predicate that returns true for any Person object that has at least one specialisation that
+     * Creates a predicate that returns true for any Person object that has at least one tag that
      * partially matches any of the key terms given.
      */
-    public SpecContainsKeyTermsPredicate(List<String> keyTerms) {
+    public TagsContainKeyTermsPredicate(List<String> keyTerms) {
         assert keyTerms != null : "List should not be null";
         CollectionUtil.requireAllNonNull(keyTerms);
         this.keyTerms = keyTerms;
@@ -28,8 +28,8 @@ public class SpecContainsKeyTermsPredicate implements Predicate<Person> {
     public boolean test(Person person) {
         assert person != null : "Person should not be null";
         return keyTerms.stream()
-                .anyMatch(keyTerm -> person.getSpecialisations().stream()
-                        .anyMatch(spec -> StringUtil.containsTermIgnoreCase(spec.getSpecialisation(), keyTerm)));
+                .anyMatch(keyTerm -> person.getTags().stream()
+                        .anyMatch(tag -> StringUtil.containsTermIgnoreCase(tag.getValue(), keyTerm)));
     }
 
     @Override
@@ -38,13 +38,12 @@ public class SpecContainsKeyTermsPredicate implements Predicate<Person> {
             return true;
         }
 
-        // instanceof handles nulls
-        if (!(other instanceof SpecContainsKeyTermsPredicate)) {
+        if (!(other instanceof TagsContainKeyTermsPredicate)) {
             return false;
         }
 
-        SpecContainsKeyTermsPredicate otherSpecContainsKeyTermsPredicate = (SpecContainsKeyTermsPredicate) other;
-        return keyTerms.equals(otherSpecContainsKeyTermsPredicate.keyTerms);
+        TagsContainKeyTermsPredicate otherPredicate = (TagsContainKeyTermsPredicate) other;
+        return keyTerms.equals(otherPredicate.keyTerms);
     }
 
     @Override
