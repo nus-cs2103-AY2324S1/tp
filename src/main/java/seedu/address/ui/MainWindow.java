@@ -18,6 +18,8 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.ScoreList;
+
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -30,6 +32,7 @@ public class MainWindow extends UiPart<Stage> {
     private final Logger logger = LogsCenter.getLogger(getClass());
 
     private Stage primaryStage;
+
     private Logic logic;
 
     // Independent Ui parts residing in this Ui container
@@ -41,6 +44,8 @@ public class MainWindow extends UiPart<Stage> {
     private EventWindow eventWindow;
 
     private PersonInformationPanel personInformationPanel;
+
+    private SummaryStatisticScreen summaryStatisticScreen;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -58,6 +63,9 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane personInformationPanelPlaceholder;
+
+    @FXML
+    private StackPane summaryStatisticScreenPlaceholder;
 
     @FXML
     private StackPane statusbarPlaceholder;
@@ -199,7 +207,25 @@ public class MainWindow extends UiPart<Stage> {
 
         personInformationPanel = new PersonInformationPanel(personToView);
         personInformationPanelPlaceholder.getChildren().add(personInformationPanel.getRoot());
+
+        ScoreList scoreList = personToView.getScoreList();
+        if (scoreList.isEmpty()) {
+            logger.info("No score list detected");
+            summaryStatisticScreenPlaceholder.getChildren().clear();
+            return;
+        }
+
+        logger.info("Score list detected");
+
+
+        Person personToView2 = logic.getFilteredPersonList().get(index.getZeroBased());
+
+
+        summaryStatisticScreen = new SummaryStatisticScreen(logic.getSummaryStatistic(), personToView2);
+        summaryStatisticScreenPlaceholder.getChildren().add(summaryStatisticScreen.getRoot());
     }
+
+
 
     public PersonListPanel getPersonListPanel() {
         return personListPanel;
@@ -221,7 +247,6 @@ public class MainWindow extends UiPart<Stage> {
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
 
 
-
             if (commandResult.isShowHelp()) {
                 handleHelp();
             }
@@ -231,6 +256,7 @@ public class MainWindow extends UiPart<Stage> {
             }
 
             if (commandResult.isView()) {
+                logger.fine("View command detected");
                 handleView();
             }
 

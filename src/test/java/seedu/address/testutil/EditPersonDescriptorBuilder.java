@@ -10,7 +10,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
-import seedu.address.model.person.Score;
+import seedu.address.model.person.ScoreList;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -20,8 +20,13 @@ public class EditPersonDescriptorBuilder {
 
     private EditPersonDescriptor descriptor;
 
+    /**
+     * Creates a {@code EditPersonDescriptorBuilder} with a empty score list.
+     */
     public EditPersonDescriptorBuilder() {
         descriptor = new EditPersonDescriptor();
+        // Each descriptor builder must have a default score list
+        descriptor.setScoreList(new ScoreList());
     }
 
     public EditPersonDescriptorBuilder(EditPersonDescriptor descriptor) {
@@ -38,7 +43,7 @@ public class EditPersonDescriptorBuilder {
         descriptor.setEmail(person.getEmail());
         descriptor.setAddress(person.getAddress());
         descriptor.setTags(person.getTags());
-        descriptor.setScore(person.getScore());
+        descriptor.setScoreList(person.getScoreList());
     }
 
     /**
@@ -76,8 +81,8 @@ public class EditPersonDescriptorBuilder {
     /**
      * Sets the {@code Score} of the {@code EditPersonDescriptor} that we are building.
      */
-    public EditPersonDescriptorBuilder withScore(int score) {
-        descriptor.setScore(new Score(score));
+    public EditPersonDescriptorBuilder withScoreList(ScoreList scoreList) {
+        descriptor.setScoreList(scoreList);
         return this;
     }
 
@@ -86,7 +91,7 @@ public class EditPersonDescriptorBuilder {
      * that we are building.
      */
     public EditPersonDescriptorBuilder withTags(String... tags) {
-        Set<Tag> tagSet = Stream.of(tags).map(Tag::new).collect(Collectors.toSet());
+        Set<Tag> tagSet = Stream.of(tags).map(tag -> new Tag(tag, "uncategorised")).collect(Collectors.toSet());
         descriptor.setTags(tagSet);
         return this;
     }

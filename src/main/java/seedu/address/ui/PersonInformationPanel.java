@@ -1,5 +1,8 @@
 package seedu.address.ui;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
 import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
@@ -11,6 +14,8 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Status;
 import seedu.address.model.person.StatusTypes;
+import seedu.address.model.tag.Tag;
+import seedu.address.model.tag.UniqueTagList;
 
 /**
  * An UI component that displays information of a {@code Person}
@@ -56,15 +61,40 @@ public class PersonInformationPanel extends UiPart<Region> {
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
         remark.setText(person.getRemark().value);
-        person.getTags().stream()
-                .sorted(java.util.Comparator.comparing(tag -> tag.tagName))
-                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        setTagLabel(person.getTags());
         linkedIn.setText(person.getLinkedIn().value);
         github.setText(person.getGithub().value);
         setResultButton(person.getStatus(), status);
         setButton(person.getStatus());
     }
 
+    private void setTagLabel(Set<Tag> tagsSet) {
+        List<String> tagCategories = new ArrayList<>();
+        UniqueTagList uniqueTagList = new UniqueTagList();
+        for (Tag tag : uniqueTagList.asUnmodifiableObservableList()) {
+            if (!tagCategories.contains(tag.tagCategory)) {
+                tagCategories.add(tag.tagCategory);
+            }
+        }
+
+        for (Tag tag : tagsSet) {
+            Label label = new Label(tag.tagName);
+            if (tagCategories.indexOf(tag.tagCategory) == 0) {
+                label.getStyleClass().add("label2");
+            } else if (tagCategories.indexOf(tag.tagCategory) == 1) {
+                label.getStyleClass().add("label3");
+            } else if (tagCategories.indexOf(tag.tagCategory) == 2) {
+                label.getStyleClass().add("label4");
+            } else if (tagCategories.indexOf(tag.tagCategory) == 3) {
+                label.getStyleClass().add("label5");
+            } else if (tagCategories.indexOf(tag.tagCategory) == 4) {
+                label.getStyleClass().add("label6");
+            } else {
+                label.getStyleClass().add("label1");
+            }
+            tags.getChildren().add(label);
+        }
+    }
 
     private static void setResultButton(Status status, ToggleButton statusButton) {
         StatusTypes statusType = status.getStatusType();

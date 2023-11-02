@@ -19,6 +19,7 @@ import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyEventBook;
 import seedu.address.model.event.Event;
 import seedu.address.model.person.Person;
+import seedu.address.model.statistics.ReadOnlySummaryStatistic;
 import seedu.address.storage.Storage;
 
 /**
@@ -54,7 +55,9 @@ public class LogicManager implements Logic {
         Command command = addressBookParser.parseCommand(commandText);
         commandResult = command.execute(model);
 
+
         try {
+            System.out.println("in try");
             storage.saveAddressBook(model.getAddressBook());
             storage.saveEventBook(model.getEventBook());
         } catch (AccessDeniedException e) {
@@ -74,6 +77,11 @@ public class LogicManager implements Logic {
     @Override
     public ReadOnlyEventBook getEventBook() {
         return model.getEventBook();
+    }
+
+    @Override
+    public ReadOnlySummaryStatistic getSummaryStatistic() {
+        return model.getSummaryStatistic();
     }
 
     @Override
