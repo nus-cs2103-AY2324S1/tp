@@ -381,7 +381,7 @@ This command is relatively straight forward to use and has only 1 possible error
 |---------------------------|---------------------------------|
 | `Invalid command format!` | No search keyword was provided. |
 
-<div markdown="block" class="alert alert-info">
+<div markdown="block" id="search-behaviour" class="alert alert-info">
 
 **:information_source: Search behaviour**<br>
 
@@ -644,7 +644,7 @@ The find schedule function is here for that!
 
 **What you can expect to see**
 
-Tada! The schedule list has now been updated to show schedules from tutor that contains the name "Bernice" [<sup>3</sup>](#note3).
+Tada! The schedule list has now been updated to show schedules from tutor that contains the name "Bernice".
 
 ![find schedule tutor](images/find-schedules/find-s.png)
 
@@ -656,6 +656,7 @@ Tada! The schedule list has now been updated to show schedules from tutor that c
 
 ![find schedule command](images/find-schedules/find-s-syntax.png)
 
+Learn more about the [search behavior](#search-behaviour) and supercharge your search now!
 
 **Errors you might encounter**
 
@@ -1085,15 +1086,6 @@ The domain name must:
 * `T` is a **separator** indicating the start of the time portion.
 * `HH` represents the **hour** in **24-hour format** with a leading zero (e.g., 09 for 9 AM, 21 for 9 PM).
 * `mm` represents the **minutes** with a leading zero (e.g., 05).
-
-**<sup id="note3">3</sup> `find-t` and `find-s` search behaviour**
-* Search is case-insensitive. (E.g. `hans` will match `Hans`)
-* The order of the keywords does not matter. (E.g. `Hans Bo` will match `Bo Hans`)
-* Only the tutor name is searched.
-* Only full words will be matched. (E.g. `Han` will not match `Hans`)
-* Tutors matching at least one keyword will be returned. (E.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`)
-
-
 
 [Back To Top](#table-of-contents)
 
