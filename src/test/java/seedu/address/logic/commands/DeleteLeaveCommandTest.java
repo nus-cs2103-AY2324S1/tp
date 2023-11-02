@@ -70,7 +70,8 @@ class DeleteLeaveCommandTest {
         LocalDate leaveDate = BOB.getLeaveList().getLeave(0).leaveDate.plusDays(2);
 
         DeleteLeaveCommand firstCommand = new DeleteLeaveCommand(BOB.getId(), leaveDate, leaveDate);
-        DeleteLeaveCommand secondCommand = new DeleteLeaveCommand(BOB.getId(), leaveDate, leaveDate.plusDays(2));
+        DeleteLeaveCommand secondCommand = new DeleteLeaveCommand(BOB.getId(), leaveDate,
+                leaveDate.plusDays(2));
 
         // same object -> returns true
         assertTrue(firstCommand.equals(firstCommand));
@@ -80,15 +81,12 @@ class DeleteLeaveCommandTest {
         assertTrue(firstCommand.equals(copyCommand));
 
         // different types -> returns false
-        boolean result1 = firstCommand.equals(1);
         assertFalse(firstCommand.equals(1));
 
         // null -> returns false
-        boolean result2 = firstCommand.equals(null);
         assertFalse(firstCommand.equals(null));
 
         // different employee -> returns false
-        boolean result3 = firstCommand.equals(secondCommand);
         assertFalse(firstCommand.equals(secondCommand));
 
     }

@@ -1,8 +1,8 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.commands.CommandTestUtil.DEPARTMENT_DESC_FRIEND;
-import static seedu.address.logic.commands.CommandTestUtil.DEPARTMENT_DESC_HUSBAND;
+import static seedu.address.logic.commands.CommandTestUtil.DEPARTMENT_DESC_FINANCE;
+import static seedu.address.logic.commands.CommandTestUtil.DEPARTMENT_DESC_IT;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_DEPARTMENT_DESC;
@@ -87,11 +87,11 @@ public class EditCommandParserTest {
 
         // while parsing {@code PREFIX_DEPARTMENT} will reset the departments of the {@code Employee} being edited,
         // parsing it together with a valid department results in error
-        assertParseFailure(parser, "1" + DEPARTMENT_DESC_FRIEND + DEPARTMENT_DESC_HUSBAND + DEPARTMENT_EMPTY,
+        assertParseFailure(parser, "1" + DEPARTMENT_DESC_IT + DEPARTMENT_DESC_FINANCE + DEPARTMENT_EMPTY,
                 Department.MESSAGE_CONSTRAINTS);
-        assertParseFailure(parser, "1" + DEPARTMENT_DESC_FRIEND + DEPARTMENT_EMPTY + DEPARTMENT_DESC_HUSBAND,
+        assertParseFailure(parser, "1" + DEPARTMENT_DESC_FINANCE + DEPARTMENT_EMPTY + DEPARTMENT_DESC_IT,
                 Department.MESSAGE_CONSTRAINTS);
-        assertParseFailure(parser, "1" + DEPARTMENT_EMPTY + DEPARTMENT_DESC_FRIEND + DEPARTMENT_DESC_HUSBAND,
+        assertParseFailure(parser, "1" + DEPARTMENT_EMPTY + DEPARTMENT_DESC_IT + DEPARTMENT_DESC_FINANCE,
                 Department.MESSAGE_CONSTRAINTS);
 
         // multiple invalid values, but only the first invalid value is captured
@@ -102,8 +102,8 @@ public class EditCommandParserTest {
     @Test
     public void parse_allFieldsSpecified_success() {
         Index targetIndex = INDEX_SECOND_EMPLOYEE;
-        String userInput = targetIndex.getOneBased() + PHONE_DESC_BOB + DEPARTMENT_DESC_HUSBAND
-                + EMAIL_DESC_AMY + NAME_DESC_AMY + DEPARTMENT_DESC_FRIEND;
+        String userInput = targetIndex.getOneBased() + PHONE_DESC_BOB + DEPARTMENT_DESC_IT
+                + EMAIL_DESC_AMY + NAME_DESC_AMY + DEPARTMENT_DESC_FINANCE;
 
         EditEmployeeDescriptor descriptor = new EditEmployeeDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_AMY)
@@ -147,7 +147,7 @@ public class EditCommandParserTest {
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // departments
-        userInput = targetIndex.getOneBased() + DEPARTMENT_DESC_FRIEND;
+        userInput = targetIndex.getOneBased() + DEPARTMENT_DESC_FINANCE;
         descriptor = new EditEmployeeDescriptorBuilder().withDepartments(VALID_DEPARTMENT_FINANCE).build();
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
@@ -171,8 +171,8 @@ public class EditCommandParserTest {
 
         // mulltiple valid fields repeated
         userInput = targetIndex.getOneBased() + PHONE_DESC_AMY + EMAIL_DESC_AMY
-                + DEPARTMENT_DESC_FRIEND + PHONE_DESC_AMY + EMAIL_DESC_AMY + DEPARTMENT_DESC_FRIEND
-                + PHONE_DESC_BOB + EMAIL_DESC_BOB + DEPARTMENT_DESC_HUSBAND;
+                + DEPARTMENT_DESC_FINANCE + PHONE_DESC_AMY + EMAIL_DESC_AMY + DEPARTMENT_DESC_FINANCE
+                + PHONE_DESC_BOB + EMAIL_DESC_BOB + DEPARTMENT_DESC_IT;
 
         assertParseFailure(parser, userInput,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PHONE, PREFIX_EMAIL));
