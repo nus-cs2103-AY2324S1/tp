@@ -72,11 +72,6 @@ class JsonSerializableAddressBook {
             }
             addressBook.addPerson(person);
         }
-//        for (Map<String, String> tagData : tagList) {
-//            String tagCategory = tagData.get("tagCategory");
-//            String tagName = tagData.get("tagName");
-//            addressBook.addTag(new Tag(tagName, tagCategory));
-//        }
         for (Map<String, String> tagData : tagList) {
             String tagCategory = tagData.get("tagCategory");
             String tagName = tagData.get("tagName");

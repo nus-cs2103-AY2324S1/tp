@@ -191,17 +191,19 @@ public class ParserUtil {
      */
     public static String[] parseTagCategories(Collection<String> tags) throws ParseException {
         requireNonNull(tags);
-        System.out.println("parse tag cat here");
         String listTags = tags.toString();
         String cleanedList = listTags.replaceAll("[\\[\\]]", "");
         String[] tagParams = cleanedList.split(",");
         for (String tag : tagParams) {
-            if (!Tag.isValidTagName(tag)) {
-                throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
+            if (tag.split("\\s+").length > 1) {
+                if (!Tag.isValidTagName(tag.split("\\s+")[1])) {
+                    throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
+                }
             }
         }
         return tagParams;
     }
+
 
     /**
      * Parses {@code Collection<String> search status parameters} into a {@code List<String> of status}.
