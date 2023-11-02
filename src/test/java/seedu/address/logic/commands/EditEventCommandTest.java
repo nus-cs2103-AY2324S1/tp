@@ -32,7 +32,7 @@ import seedu.address.testutil.MeetingBuilder;
 
 public class EditEventCommandTest {
 
-    private final Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
     public void constructor_nullEvent_throwsNullPointerException() {
@@ -156,6 +156,8 @@ public class EditEventCommandTest {
 
     @Test
     public void execute_unassignNames_success() throws Exception {
+        Model targetModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+
         Event editedEvent = new MeetingBuilder()
                 .withEventDate("2050-10-10")
                 .withEventStartTime("1400")
@@ -171,11 +173,12 @@ public class EditEventCommandTest {
         descriptor.setUnassignPersons(new HashSet<>(Set.of(new Name("Alice Pauline"))));
         EditEventCommand editEventCommand = new EditEventCommand(INDEX_TYPICAL_PERSON_EVENT, descriptor);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-        expectedModel.setEvent(model.getEventList().get(INDEX_TYPICAL_PERSON_EVENT.getZeroBased()), expectedEvent);
+        Model expectedModel = new ModelManager(new AddressBook(targetModel.getAddressBook()), new UserPrefs());
+        expectedModel
+                .setEvent(targetModel.getEventList().get(INDEX_TYPICAL_PERSON_EVENT.getZeroBased()), expectedEvent);
 
-        CommandResult result = editEventCommand.execute(model);
-        assertEquals(expectedModel, model);
+        editEventCommand.execute(targetModel);
+        assertEquals(expectedModel, targetModel);
     }
 
     @Test
