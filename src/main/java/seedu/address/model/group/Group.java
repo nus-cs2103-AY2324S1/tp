@@ -20,6 +20,7 @@ import java.util.stream.Stream;
  */
 public class Group {
     public static final String MESSAGE_CONSTRAINTS = "Group names should be alphanumeric and must not be blank";
+    public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
     private final ObservableList<Person> listOfGroupMates = FXCollections.observableArrayList();
     private final String groupName;
     private GroupRemark groupRemark;
@@ -51,7 +52,7 @@ public class Group {
     }
 
     /**
-     * Name field must be present and not null.
+     * Name field and listOfGroupMates must be present and not null.
      */
     public Group(String groupName, GroupRemark groupRemark, List<Person> listOfGroupMates) {
         requireNonNull(groupName);
@@ -61,10 +62,26 @@ public class Group {
         this.listOfGroupMates.addAll(listOfGroupMates);
     }
 
+    /**
+     * Name field, listOfGroupMates and timeIntervalList must be present and not null.
+     */
+    public Group(String groupName, GroupRemark groupRemark, List<Person> listOfGroupMates, TimeIntervalList timeIntervalList) {
+        requireNonNull(groupName);
+        requireNonNull(listOfGroupMates);
+        requireNonNull(timeIntervalList);
+        this.groupName = groupName;
+        this.groupRemark = groupRemark;
+        this.timeIntervalList.addAll(timeIntervalList);
+        this.listOfGroupMates.addAll(listOfGroupMates);
+    }
+
     public String getGroupName() {
         return groupName;
     }
 
+    public TimeIntervalList getTimeIntervalList() {
+        return timeIntervalList;
+    }
     /**
      * Converts the internal list to streams.
      *
@@ -80,12 +97,6 @@ public class Group {
      */
     public boolean isSameGroup(Group otherGroup) {
         return this.equals(otherGroup);
-//        if (otherGroup == this) {
-//            return true;
-//        }
-//
-//        return otherGroup != null
-//            && this.equals(otherGroup);
     }
 
     /**
@@ -107,7 +118,8 @@ public class Group {
     //For now no constraints
     public static boolean isValidGroup(String name) {
         requireNonNull(name);
-        return !name.isBlank();
+
+        return !name.isBlank() && name.matches(VALIDATION_REGEX);
     }
 
     /**
@@ -144,30 +156,8 @@ public class Group {
         listOfGroupMates.add(personToAdd);
     }
 
-    @Override
-    public String toString() {
-        return new ToStringBuilder(this)
-            .add("Group name", groupName)
-            .toString();
-    }
-
     public ObservableList<Person> getListOfGroupMates() {
         return this.listOfGroupMates;
-    }
-
-    @Override
-    public boolean equals(Object group) {
-        if (group == this) {
-            return true;
-        }
-
-        // instanceof handles nulls
-        if (!(group instanceof Group)) {
-            return false;
-        }
-
-        Group otherGroup = (Group) group;
-        return this.groupName.equals(otherGroup.getGroupName());
     }
 
     public GroupRemark getGroupRemark() {
@@ -232,8 +222,30 @@ public class Group {
         return freeTime;
     }
 
+    /**
+     * Adds a single time interval to the group
+     * @param toAddTime time interval to add
+     */
+    public void addTime(TimeInterval toAddTime) throws CommandException {
+        this.timeIntervalList.addTime(toAddTime);
+    }
+
+    /**
+     * Adds a list of free time to the group
+     * @param toAddTime List of time intervals to add
+     * @throws CommandException When there is a clash in timings within the list
+     */
     public void addTime(ArrayList<TimeInterval> toAddTime) throws CommandException {
         this.timeIntervalList.addTime(toAddTime);
+    }
+
+    /**
+     * Checks if the group has the time interval
+     * @param timeInterval time interval to check
+     * @return result of check
+     */
+    public boolean hasTime(TimeInterval timeInterval) {
+        return this.timeIntervalList.hasTime(timeInterval);
     }
 
     public TimeIntervalList getTime() {
@@ -242,6 +254,25 @@ public class Group {
 
     public void deleteTime(ArrayList<TimeInterval> toDeleteTime) throws CommandException { this.timeIntervalList.deleteTime(toDeleteTime);}
 
+    @Override
+    public boolean equals(Object group) {
+        if (group == this) {
+            return true;
+        }
 
+        // instanceof handles nulls
+        if (!(group instanceof Group)) {
+            return false;
+        }
 
+        Group otherGroup = (Group) group;
+        return this.groupName.equals(otherGroup.getGroupName());
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .add("Group name", groupName)
+                .toString();
+    }
 }

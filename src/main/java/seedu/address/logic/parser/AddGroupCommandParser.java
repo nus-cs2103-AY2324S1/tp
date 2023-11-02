@@ -12,7 +12,7 @@ import seedu.address.model.group.Group;
 /**
  * Parses input arguments and creates a new newCommand object
  */
-public class AddGroupParser implements Parser<AddGroupCommand> {
+public class AddGroupCommandParser implements Parser<AddGroupCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the CreateGroupCommand
@@ -28,8 +28,8 @@ public class AddGroupParser implements Parser<AddGroupCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddGroupCommand.MESSAGE_USAGE));
         }
 
-        String groupName = ParserUtil.parseGroupName(argMultimap.getValue(PREFIX_GROUPTAG).get());
-        Group group = new Group(groupName);
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_GROUPTAG);
+        Group group = ParserUtil.parseGroup(argMultimap.getValue(PREFIX_GROUPTAG).get());
 
         return new AddGroupCommand(group);
     }
