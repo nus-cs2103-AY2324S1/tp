@@ -1,11 +1,15 @@
 package seedu.address.model.task;
 
-import org.junit.jupiter.api.Test;
-import seedu.address.model.task.exceptions.DuplicateTaskException;
-
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalTasks.ASSIGNMENT;
 import static seedu.address.testutil.TypicalTasks.HYDRATION;
+
+import org.junit.jupiter.api.Test;
+
+import seedu.address.model.task.exceptions.DuplicateTaskException;
 
 class TaskManagerTest {
     private final TaskManager taskManager = new TaskManager();

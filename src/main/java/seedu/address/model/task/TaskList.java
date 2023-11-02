@@ -53,6 +53,9 @@ public class TaskList implements Iterable<Task> {
         }
     }
 
+    /**
+     * Removes a task at specified index from the list and returns the removed task.
+     */
     public Task remove(int index) {
         requireNonNull(index);
 

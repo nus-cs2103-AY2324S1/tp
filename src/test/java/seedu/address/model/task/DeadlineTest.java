@@ -12,6 +12,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 import org.junit.jupiter.api.Test;
+
 import seedu.address.model.event.exceptions.InvalidDeadlineException;
 
 class DeadlineTest {

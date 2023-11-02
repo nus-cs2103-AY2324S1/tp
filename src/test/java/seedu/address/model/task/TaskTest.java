@@ -1,16 +1,16 @@
 package seedu.address.model.task;
 
-import org.junit.jupiter.api.Test;
-
-import java.time.LocalDateTime;
-import java.util.Comparator;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.model.task.Task.DATE_TIME_STRING_FORMATTER;
 import static seedu.address.testutil.Assert.assertThrows;
+
+import java.time.LocalDateTime;
+import java.util.Comparator;
+
+import org.junit.jupiter.api.Test;
 
 class TaskTest {
     private static final String VALID_DESCRIPTION_STRING = "Eat Nuts";

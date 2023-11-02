@@ -8,7 +8,6 @@ import java.time.format.DateTimeFormatter;
 import java.util.Comparator;
 
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.model.event.exceptions.InvalidDescriptionException;
 
 /**
  * Represents a task in the task list.

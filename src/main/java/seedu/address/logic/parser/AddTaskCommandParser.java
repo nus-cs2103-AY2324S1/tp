@@ -13,7 +13,6 @@ import java.time.format.DateTimeParseException;
 
 import seedu.address.logic.commands.AddTaskCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.event.exceptions.InvalidDescriptionException;
 import seedu.address.model.task.Task;
 
 /**
