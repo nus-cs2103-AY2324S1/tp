@@ -7,6 +7,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.OrganizeData;
+import seedu.address.logic.commands.barchartresults.EnrolDateBarChartCommandResult;
 import seedu.address.logic.commands.barchartresults.GenderBarChartCommandResult;
 import seedu.address.logic.commands.barchartresults.SecLevelBarChartCommandResult;
 import seedu.address.logic.commands.barchartresults.SubjectBarChartCommandResult;
@@ -32,6 +33,7 @@ public class BarChartCommand extends Command {
             + COMMAND_WORD + " " + PREFIX_SEC_LEVEL + " or\n"
             + COMMAND_WORD + " " + PREFIX_SUBJECT;
     private final String args;
+    private final int year;
 
     /**
      * Constructor for BarChartCommand.
@@ -39,6 +41,16 @@ public class BarChartCommand extends Command {
      */
     public BarChartCommand(String args) {
         this.args = args.trim();
+        this.year = 0;
+    }
+
+    /**
+     * Constructor for BarChartCommand with year.
+     * @param args represents the category for table, eg: d/2023
+     */
+    public BarChartCommand(String args, int year) {
+        this.args = args.trim();
+        this.year = year;
     }
 
     @Override
@@ -51,36 +63,47 @@ public class BarChartCommand extends Command {
             return executeSecLevel(model);
         case "s/":
             return executeSubject(model);
+        case "d/":
+            return executeEnrolDate(model);
         default:
             throw new CommandException(MESSAGE_INCORRECT_COMMAND);
         }
     }
 
     /**
-     * Generate GenderTableCommandResult instance.
+     * Generate GenderBarChartCommandResult instance.
      * @param model instance of Model subclass, e.g. ModelManager instance
-     * @return GenderTableCommandResult instance containing the column titles and values.
+     * @return GenderBarChartCommandResult instance containing the column titles and values.
      */
     private GenderBarChartCommandResult executeGender(Model model) {
         return new GenderBarChartCommandResult(OrganizeData.byGender(model));
     }
 
     /**
-     * Generate SecLevelTableCommandResult instance
+     * Generate SecLevelBarChartCommandResult instance
      * @param model instance of Model subclass, e.g. ModelManager instance
-     * @return SecLevelTableCommandResult instance containing column titles and values.
+     * @return SecLevelBarChartCommandResult instance containing column titles and values.
      */
     private SecLevelBarChartCommandResult executeSecLevel(Model model) {
         return new SecLevelBarChartCommandResult(OrganizeData.bySecLevel(model));
     }
 
     /**
-     * Generate SubjectTableCommandResult instance.
+     * Generate SubjectBarChartCommandResult instance.
      * @param model instance of Model subclass, e.g. ModelManager instance.
-     * @return SubjectTableCommandResult instance containing column titles and values.
+     * @return SubjectBarChartCommandResult instance containing column titles and values.
      */
     private SubjectBarChartCommandResult executeSubject(Model model) {
         return new SubjectBarChartCommandResult(OrganizeData.bySubject(model));
+    }
+
+    /**
+     * Generate EnrolDateBarChartCommandResult instance.
+     * @param model instance of Model subclass, e.g. ModelManager instance.
+     * @return EnrolDateBarChartCommandResult instance containing column titles and values.
+     */
+    private EnrolDateBarChartCommandResult executeEnrolDate(Model model) {
+        return new EnrolDateBarChartCommandResult(OrganizeData.byEnrolDate(model, year));
     }
 
     @Override

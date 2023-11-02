@@ -27,6 +27,7 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.barchartresults.EnrolDateBarChartCommandResult;
 import seedu.address.logic.commands.barchartresults.GenderBarChartCommandResult;
 import seedu.address.logic.commands.barchartresults.SecLevelBarChartCommandResult;
 import seedu.address.logic.commands.barchartresults.SubjectBarChartCommandResult;
@@ -45,7 +46,7 @@ public class BarChartWindow extends UiPart<Stage> {
 
     /**
      * Constructor for creating LineChartWindow instance.
-     * @param commandResult Table command result instance containing column titles and values.
+     * @param commandResult BarChart command result instance containing column titles and values.
      */
     public BarChartWindow(CommandResult commandResult) {
         super(FXML, new Stage());
@@ -55,7 +56,7 @@ public class BarChartWindow extends UiPart<Stage> {
     }
 
     /**
-     * Creates a table with table command result instance containing
+     * Creates a bar chart with table command result instance containing
      * given column titles and values.
      */
     public static BarChart<String, Number> createBarChart(CommandResult commandResult) {
@@ -65,9 +66,13 @@ public class BarChartWindow extends UiPart<Stage> {
         } else if (commandResult instanceof SecLevelBarChartCommandResult) {
             SecLevelBarChartCommandResult secLevelBarChartCommandResult = (SecLevelBarChartCommandResult) commandResult;
             return createSecLevelBarChart(secLevelBarChartCommandResult);
-        } else {
+        } else if (commandResult instanceof SubjectBarChartCommandResult) {
             SubjectBarChartCommandResult subjectBarChartCommandResult = (SubjectBarChartCommandResult) commandResult;
             return createSubjectBarChart(subjectBarChartCommandResult);
+        } else {
+            EnrolDateBarChartCommandResult enrolDateBarChartCommandResult
+                    = (EnrolDateBarChartCommandResult) commandResult;
+            return createEnrolDateBarChart(enrolDateBarChartCommandResult);
         }
     }
 
@@ -166,6 +171,45 @@ public class BarChartWindow extends UiPart<Stage> {
     }
 
     /**
+     * Create a table with EnrolDateBarChartCommandResult instance containing counts for each subject
+     * @param commandResult EnrolDateBarChartCommandResult instance containing column titles and counts mapping.
+     * @return a BarChartView instance generated with given column titles and counts from argument passed in.
+     */
+    private static BarChart<String, Number> createEnrolDateBarChart(EnrolDateBarChartCommandResult commandResult) {
+        CategoryAxis xAxis = new CategoryAxis();
+
+        xAxis.setCategories(FXCollections.<String>observableArrayList(Arrays.asList(
+                "Jan", "Feb", "Mar", "Apr", "May",
+                "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec")));
+        xAxis.setLabel("Month");
+
+        NumberAxis yAxis = new NumberAxis();
+        yAxis.setLabel("Number of Students");
+
+        BarChart<String, Number> barChart = new BarChart<>(xAxis, yAxis);
+        barChart.setTitle("Bar Chart for student enrolment in different month");
+
+        XYChart.Series<String, Number> series = new XYChart.Series<>();
+        series.getData().add(new XYChart.Data<>("Jan", commandResult.getJanCount()));
+        series.getData().add(new XYChart.Data<>("Feb", commandResult.getFebCount()));
+        series.getData().add(new XYChart.Data<>("Mar", commandResult.getMarCount()));
+        series.getData().add(new XYChart.Data<>("Apr", commandResult.getAprCount()));
+        series.getData().add(new XYChart.Data<>("May", commandResult.getMayCount()));
+        series.getData().add(new XYChart.Data<>("Jun", commandResult.getJunCount()));
+        series.getData().add(new XYChart.Data<>("Jul", commandResult.getJulCount()));
+        series.getData().add(new XYChart.Data<>("Aug", commandResult.getAugCount()));
+        series.getData().add(new XYChart.Data<>("Sep", commandResult.getSepCount()));
+        series.getData().add(new XYChart.Data<>("Oct", commandResult.getOctCount()));
+        series.getData().add(new XYChart.Data<>("Nov", commandResult.getNovCount()));
+        series.getData().add(new XYChart.Data<>("Dec", commandResult.getDecCount()));
+
+        barChart.getData().add(series);
+
+        return barChart;
+
+    }
+
+    /**
      * Set up the root control, scene and css for the table window.
      */
     public void initialize() {
@@ -178,7 +222,7 @@ public class BarChartWindow extends UiPart<Stage> {
     }
 
     /**
-     * Shows the table window.
+     * Shows the bar chart window.
      */
     public void show() {
         logger.fine("Showing bar chart in another window.");
