@@ -362,6 +362,7 @@ The parameters for these commands are `PERSON_INDEX`, `NOTE_INDEX` and `NOTE_CON
 <br>
 
 <panel header=":fa-solid-book: **Notes Command Parameters**" type="secondary" expanded no-close>
+
 The fields you enter should follow the following format:
 - `PERSON_INDEX`: The position of the person in the list you want to add a note to. This should be a positive integer, and should be within the bounds of the list.
 - `NOTE_INDEX`: The position of the note in the person's list of notes you want to modify. This should be a positive integer, and should be within the bounds of the list.
