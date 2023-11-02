@@ -115,7 +115,7 @@ public class ListAttendanceCommand extends ListCommand {
             }
         }
 
-        ArrayList<Person> unmarkedPersons = getUnmarkedPersons(model.getAddressBook().getPersonList());
+        ArrayList<Person> unmarkedPersons = getUnmarkedPersons(model.getFilteredPersonList());
         if (!unmarkedPersons.isEmpty()) {
             String nameList = unmarkedPersons.stream().map(person -> person.getName().toString())
                     .collect(Collectors.joining(", "));
@@ -124,7 +124,6 @@ public class ListAttendanceCommand extends ListCommand {
         }
 
         model.addFilter(absencePredicate);
-        System.out.println(model.getFilteredPersonList().toString());
 
         int numberOfAbsentees = model.getFilteredPersonList().size();
         int numberOfPresentees = numberOfStudents - numberOfAbsentees;

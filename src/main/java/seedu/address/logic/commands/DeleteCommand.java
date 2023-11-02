@@ -95,12 +95,10 @@ public class DeleteCommand extends Command {
             return new CommandResult(String.format(MESSAGE_NO_STUDENTS, toDeleteListDesc));
         }
 
-        ArrayList<Person> deletedPersons = new ArrayList<>();
         for (Person p : copyDeleteList) {
-            deletedPersons.add(p);
             model.deletePerson(p);
         }
-        String nameList = deletedPersons.stream().map(person -> Messages.format(person))
+        String nameList = copyDeleteList.stream().map(person -> Messages.format(person))
                 .collect(Collectors.joining(",\n"));
 
         model.clearFilters();

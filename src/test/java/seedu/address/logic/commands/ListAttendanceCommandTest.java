@@ -85,7 +85,7 @@ public class ListAttendanceCommandTest {
                 new ContainsTagPredicate(tag), new AbsentFromTutorialPredicate(week, tag));
 
         String expectedSummary = String.format(Messages.MESSAGE_ATTENDANCE_SUMMARY_WITH_TAG, 0, 1, week.getWeekNumber(),
-                tag.get().getTagName());
+                expectedModel.getAddressBook().getCourseCode(), tag.get().getTagName());
 
         expectedModel.addFilter(new ContainsTagPredicate(tag));
         expectedModel.addFilter(new AbsentFromTutorialPredicate(week, tag));
@@ -103,7 +103,8 @@ public class ListAttendanceCommandTest {
 
         expectedModel.addFilter(new ContainsTagPredicate(tag));
         CommandResult expectedCommandResult = new CommandResult(
-                String.format(MESSAGE_NO_STUDENTS, tag.get().getTagName()));
+                String.format(MESSAGE_NO_STUDENTS, expectedModel.getAddressBook().getCourseCode(),
+                        tag.get().getTagName()));
 
         assertCommandSuccess(command, model, expectedCommandResult, expectedModel);
     }
@@ -146,7 +147,8 @@ public class ListAttendanceCommandTest {
                 new ContainsTagPredicate(tag), new AbsentFromTutorialPredicate(week, tag));
 
         int total = expectedModel.getFilteredPersonList().size();
-        String expectedSummary = String.format(Messages.MESSAGE_ATTENDANCE_SUMMARY_NO_TAG, total - 1, total, 1);
+        String expectedSummary = String.format(Messages.MESSAGE_ATTENDANCE_SUMMARY_NO_TAG, total - 1, total, 1,
+                expectedModel.getAddressBook().getCourseCode());
 
         expectedModel.addFilter(new AbsentFromTutorialPredicate(week, tag));
         CommandResult expectedCommandResult = new CommandResult(expectedSummary + MESSAGE_SUCCESS);
