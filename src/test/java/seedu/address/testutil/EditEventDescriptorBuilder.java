@@ -1,15 +1,14 @@
 package seedu.address.testutil;
 
-import seedu.address.logic.commands.EditCommand;
-import seedu.address.logic.commands.EditContactEventCommand;
-import seedu.address.model.calendar.Calendar;
-import seedu.address.model.event.Event;
-import seedu.address.model.event.EventDescription;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
-
 import java.time.format.DateTimeFormatter;
 
+import seedu.address.logic.commands.EditContactEventCommand;
+import seedu.address.model.event.Event;
+import seedu.address.model.event.EventDescription;
+
+/**
+ * A builder class for creating an EditContactEventCommand.EditEventDescriptor object.
+ */
 public class EditEventDescriptorBuilder {
 
     private EditContactEventCommand.EditEventDescriptor descriptor;
@@ -18,6 +17,9 @@ public class EditEventDescriptorBuilder {
         descriptor = new EditContactEventCommand.EditEventDescriptor();
     }
 
+    /**
+     * Constructs a new EditEventDescriptorBuilder with a given EditEventDescriptor.
+     */
     public EditEventDescriptorBuilder(EditContactEventCommand.EditEventDescriptor descriptor) {
         this.descriptor = new EditContactEventCommand.EditEventDescriptor(descriptor);
     }
@@ -57,6 +59,11 @@ public class EditEventDescriptorBuilder {
         return this;
     }
 
+    /**
+     * Builds and returns the EditContactEventCommand.EditEventDescriptor object.
+     *
+     * @return The EditContactEventCommand.EditEventDescriptor object.
+     */
     public EditContactEventCommand.EditEventDescriptor build() {
         return descriptor;
     }
