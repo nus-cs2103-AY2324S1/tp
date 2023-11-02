@@ -4,6 +4,7 @@ import java.util.function.Predicate;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.department.Department;
+import seedu.address.model.name.Name;
 
 /**
  * Tests that an {@code Employee}'s {@code Name} matches the keyword given.
@@ -17,7 +18,7 @@ public class ContainsDepartmentPredicate implements Predicate<Employee> {
 
     @Override
     public boolean test(Employee employee) {
-        return employee.getDepartments().contains(new Department(keyword));
+        return employee.getDepartments().contains(new Name(keyword));
     }
 
     @Override

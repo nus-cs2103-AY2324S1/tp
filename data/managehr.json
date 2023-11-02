@@ -8,6 +8,16 @@
     "leave" : "14",
     "role" : "subordinate",
     "supervisors" : [ ],
+    "departments" : [ ]
+  }, {
+    "name" : "Another Dude",
+    "phone" : "98213945",
+    "email" : "dude@idk.com",
+    "address" : "1 Neither Nor St",
+    "salary" : "1",
+    "leave" : "14",
+    "role" : "subordinate",
+    "supervisors" : [ ],
     "departments" : [ "CEO" ]
   } ],
   "departments" : [ {
