@@ -20,7 +20,7 @@ public class FindCommand extends Command {
     public static final String MESSAGE_USAGE = String.format(
         "%s: Finds contacts by name. Case insensitive. Requires full word match."
                 + "%nParameters: KEYWORD..."
-                + "%nExample: %s alex Ben CHARLOTTE",
+                + "%nExample: %s amy Ben CHARLOTTE",
         FindCommand.COMMAND_WORD,
         FindCommand.COMMAND_WORD
     );
