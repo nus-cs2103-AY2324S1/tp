@@ -230,6 +230,10 @@ Notes on editing the tags of the specified person:
 * When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
 * You can remove all the person’s tags by typing `t/` without
   specifying any tags after it.
+* The `sc/TAG SCORE` field is only applicable for the `edit` command, and not for the `add` command.
+* The `sc/TAG SCORE` field can only be used if the `t/TAG` field is used before it or the `TAG` already exist
+* The `SCORE` in `sc/TAG SCORE` is non-negative, that is `SCORE` must be more than or equal to 0 
+* To clear a tag's score, just re-tag it with the same tag name, but without using the `sc/TAG SCORE` field
 * Consequently, similar rules for `add` apply to the `edit` command involving tags:
   * If you would like to tag a user with a tag that has not been categorised yet using the `create` command, 
     you can specify the category that you would like it to be categorised to in the `edit` command. e.g. `edit 1 t/role swe`
@@ -241,6 +245,7 @@ Notes on editing the tags of the specified person:
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+*  `edit 2 t/Interview sc/Interview 80` Edits the tag of the 2nd person to have a tag `Interview` with a score of 80.
 * `edit 1 t/role swe`
 * `edit 1 t/swe`
 
@@ -421,7 +426,7 @@ _Details coming soon ..._
  **Clear**                | `clear`                                                                                                                                                        
  **Delete**               | `delete INDEX`<br> e.g., `delete 3`                                                                                                                            
  **Set**                  | `set INDEX STATUS`<br> e.g., `set 2 Interviewed`                                                                                                               
- **Edit**                 | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/[CATEGORY] TAGNAME]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                    
+ **Edit**                 | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/[CATEGORY] TAGNAME]... [sc/TAGNAME SCORE]​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com t\MarketingInterview sc\MarketingInterview 50`                                   
  **Search**               | `search (n/KEYWORD [MORE KEYWORDS] / st/KEYWORD [MORE KEYWORDS] / t/KEYWORD [MORE KEYWORDS])` <br> e.g., `search n/alex`
  **List**                 | `list s/ATTRIBUTE` <br> e.g. `list s/name`    `hello`                                                                                                                 
  **Export**               | `export`                                                                                                                                                       

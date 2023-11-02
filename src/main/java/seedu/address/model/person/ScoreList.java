@@ -6,6 +6,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import seedu.address.model.tag.Tag;
@@ -14,12 +15,16 @@ import seedu.address.model.tag.Tag;
  * Represents the score list of a person.
  */
 public class ScoreList {
-    private static final String MESSAGE_CONSTRAINTS = "Score tag should start with Interview or Technical Assessment";
+    private static final String MESSAGE_CONSTRAINTS = "Score tag should start assessment";
     private static final String MESSAGE_MISSING_TAG = "Tag does not exist in score list";
-    private final HashMap<Tag, Score> scoreList;
+    private final HashMap<String, Score> scoreList;
 
     public ScoreList() {
-        scoreList = new HashMap<Tag, Score>();
+        scoreList = new HashMap<String, Score>();
+    }
+
+    public ScoreList(HashMap<String, Score> scoreList) {
+        this.scoreList = scoreList;
     }
 
     // TODO: have a TAG parser that checks if its a interview-related tag
@@ -33,7 +38,7 @@ public class ScoreList {
         requireAllNonNull(tag, score);
         checkArgument(isValidScoreTag(tag), MESSAGE_CONSTRAINTS);
         checkArgument(Score.isValidScore(score), Score.MESSAGE_CONSTRAINTS);
-        scoreList.put(tag, score);
+        scoreList.put(tag.tagName, score);
     }
 
     /**
@@ -42,8 +47,35 @@ public class ScoreList {
      * @return score associated with the tag
      */
     public Score getScore(Tag tag) {
-        checkArgument(scoreList.containsKey(tag), MESSAGE_MISSING_TAG);
-        return scoreList.get(tag);
+        checkArgument(scoreList.containsKey(tag.tagName), MESSAGE_MISSING_TAG);
+        return scoreList.get(tag.tagName);
+    }
+
+    /**
+     * Removes the score associated with the tag. Does nothing if the tag does not exist.
+     * @param tag tag
+     */
+    public void removeScore(Tag tag) {
+        if (hasTag(tag)) {
+            scoreList.remove(tag.tagName);
+        }
+    }
+
+    public HashMap<String, Score> getScoreList() {
+        HashMap<String, Score> copy = new HashMap<>();
+        for (Map.Entry<String, Score> entry : scoreList.entrySet()) {
+            copy.put(entry.getKey(), entry.getValue());
+        }
+        return copy;
+    }
+
+    /**
+     * Returns true if the score list contains the tag.
+     * @param tag tag
+     * @return true if the score list contains the tag
+     */
+    public boolean hasTag(Tag tag) {
+        return scoreList.containsKey(tag.tagName);
     }
 
     /**
@@ -55,10 +87,10 @@ public class ScoreList {
         if (scoreList.isEmpty()) {
             return result;
         }
-        Set<Tag> tags = scoreList.keySet();
+        Set<String> tags = scoreList.keySet();
 
-        for (Tag tag : tags) {
-            result.add(tag);
+        for (String tag : tags) {
+            result.add(new Tag(tag, "assessment"));
         }
         return result;
     }
@@ -69,8 +101,8 @@ public class ScoreList {
      * @return true if a given tag is a valid score tag
      */
     public static boolean isValidScoreTag(Tag tag) {
-        return tag.tagCategory.toLowerCase().contains("interview")
-                || tag.tagCategory.toLowerCase().contains("technical assessment");
+        System.out.println("tag category: " + tag.tagCategory);
+        return tag.tagCategory.toLowerCase().contains("assessment");
     }
 
     /**

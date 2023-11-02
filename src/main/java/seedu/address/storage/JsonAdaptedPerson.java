@@ -19,6 +19,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Remark;
+import seedu.address.model.person.ScoreList;
 import seedu.address.model.person.Status;
 import seedu.address.model.tag.Tag;
 
@@ -34,6 +35,7 @@ class JsonAdaptedPerson {
     private final String email;
     private final String address;
     private final List<Map<String, String>> tags = new ArrayList<>();
+    private final JsonAdaptedScoreList scoreList;
     private final String linkedIn;
     private final String github;
 
@@ -48,9 +50,11 @@ class JsonAdaptedPerson {
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("address") String address,
-            @JsonProperty("tags") List<Map<String, String>> tags, @JsonProperty("linkedIn") String linkedIn,
-                             @JsonProperty("github") String github,
-                             @JsonProperty("remark") String remark, @JsonProperty("status") String status) {
+            @JsonProperty("tags") List<Map<String, String>> tags,
+            @JsonProperty("scoreList") JsonAdaptedScoreList scoreList,
+            @JsonProperty("linkedIn") String linkedIn,
+            @JsonProperty("github") String github,
+            @JsonProperty("remark") String remark, @JsonProperty("status") String status) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -62,6 +66,7 @@ class JsonAdaptedPerson {
         this.github = github;
         this.remark = remark;
         this.status = status;
+        this.scoreList = scoreList;
     }
 
     /**
@@ -79,6 +84,7 @@ class JsonAdaptedPerson {
             map.put("tagName", tag.tagName);
             this.tags.add(map);
         }
+        scoreList = new JsonAdaptedScoreList(source.getScoreList());
         linkedIn = source.getLinkedIn().value;
         github = source.getGithub().value;
         remark = source.getRemark().value;
@@ -92,8 +98,6 @@ class JsonAdaptedPerson {
      */
     public Person toModelType() throws IllegalValueException {
         final List<Tag> personTags = new ArrayList<>();
-        System.out.println(tags);
-
         for (Map<String, String> tagData : tags) {
             String tagCategory = tagData.get("tagCategory");
             String tagName = tagData.get("tagName");
@@ -153,6 +157,8 @@ class JsonAdaptedPerson {
         if (status != null) {
             p.setStatus(new Status(status));
         }
+        ScoreList modelScoreList = (scoreList != null) ? scoreList.toModelType() : new ScoreList();
+        p.setScoreList(modelScoreList);
         return p;
     }
 }

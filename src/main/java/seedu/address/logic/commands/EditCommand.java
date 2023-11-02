@@ -87,15 +87,39 @@ public class EditCommand extends Command {
         Person personToEdit = lastShownList.get(index.getZeroBased());
         Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
 
+        containsIllegalTagScore(editedPerson);
+
         if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
-
+        updateScoreList(personToEdit, editedPerson);
         model.setPerson(personToEdit, editedPerson);
         model.setLastViewedPersonIndex(index);
         model.loadSummaryStatistics();
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)), true);
+    }
+
+    private void updateScoreList(Person personToEdit, Person editedPerson) {
+        // If the tags are the same, then the score list can be updated through setting editedPerson
+        if (personToEdit.getTags().equals(editedPerson.getTags())) {
+            return;
+        }
+        // If there are no more tags, we should clean the score-list
+        ScoreList newScoreList = editedPerson.getScoreList();
+        Set<Tag> newTags = editedPerson.getTags();
+        if (newTags.isEmpty()) {
+            editedPerson.setScoreList(new ScoreList());
+            return;
+        }
+
+        // If there is a difference in tags, delete all those that are not in current updated tags
+        for (Tag tag : newScoreList.getTagsWithScore()) {
+            if (!newTags.contains(tag)) {
+                newScoreList.removeScore(tag);
+            }
+        }
+        editedPerson.setScoreList(newScoreList);
     }
 
     /**
@@ -131,16 +155,27 @@ public class EditCommand extends Command {
     private static ScoreList createEditedScoreList(
             ScoreList oldScoreList,
             Optional<ScoreList> editPersonDescriptorScoreList) {
-        ScoreList updatedScoreList = editPersonDescriptorScoreList.orElse(oldScoreList);
-        if (updatedScoreList.equals(oldScoreList)) {
+        Optional<ScoreList> editedScoreList = editPersonDescriptorScoreList.filter(scoreList -> !scoreList.isEmpty());
+        if (!editedScoreList.isPresent()) {
             return oldScoreList;
         }
+        ScoreList updatedScoreList = editPersonDescriptorScoreList.get();
         // The score list that is updated, only contains the update pair, which is 1 pair of tag score entry
         Tag newTag = updatedScoreList.getTagsWithScore().get(0);
         Score newScore = updatedScoreList.getScore(newTag);
         oldScoreList.updateScoreList(newTag, newScore);
         return oldScoreList;
 
+    }
+    private boolean containsIllegalTagScore(Person person) throws CommandException {
+        Set<Tag> currentTags = person.getTags();
+        List<Tag> tagsWithScore = person.getScoreList().getTagsWithScore();
+        for (Tag tag : tagsWithScore) {
+            if (!currentTags.contains(tag)) {
+                throw new CommandException(Messages.MESSAGE_ILLEGAL_TAG_SCORE);
+            }
+        }
+        return false;
     }
 
     @Override
@@ -239,7 +274,7 @@ public class EditCommand extends Command {
         }
 
         public Optional<ScoreList> getScoreList() {
-            return Optional.ofNullable(scoreList);
+            return this.scoreList == null ? Optional.empty() : Optional.ofNullable(scoreList);
         }
 
         /**

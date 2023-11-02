@@ -6,8 +6,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static seedu.address.testutil.TypicalTags.TEST_TAG_NAME_STRING;
 import static seedu.address.testutil.TypicalTags.INVALID_TAG_STRING;
+import static seedu.address.testutil.TypicalTags.TEST_TAG_NAME_STRING;
 
 import java.util.ArrayList;
 import java.util.List;
