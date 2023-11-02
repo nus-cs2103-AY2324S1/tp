@@ -84,21 +84,58 @@ Shows a message explaning how to access the help page.
 
 Format: `help`
 
+### Creating tags: `create`
+
+Creates a tag and categorises it to the specified category.
+You can customize these categories as per your needs and tags will be 
+color coded by the different categories. 
+
+The only restriction is you can only define up to 5 different categories.
+
+Format: `create t/CATEGORY TAGNAME…​`
+
+* CATEGORY is a MANDATORY field.
+
+<box type="tip" seamless>
+
+**Tip:** 
+* You can create multiple tags at once!
+* Use this command for frequently used tags for better efficiency in tagging candidates!
+</box>
+
+**Note:** The tags created using this command can be used to tag candidates using the `add` or `edit` command. Tagging
+candidates without previously categorising the tags would still work but the tags would be *uncategorised*.
+
+Examples:
+* `create t/role developer`
+* `create t/dept software t/dept marketing`
 
 ### Adding a person: `add`
 
 Adds a person to the address book.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/[CATEGORY] TAGNAME]…​`
+
+**Notes on adding tags:**
+* If you would like to tag a user with a tag that has not been categorised yet using the `create` command,
+you can specify the category that you would like it to be categorised to in the `add` command. e.g. `...t/role swe`
+* If you are using a tag that has not been categorised yet and you did not specify its category in the `add` command,
+the tag would still be saved but it would be "uncategorised" by default.
+* If you have multiple tags in different categories with the same name, you must specify the category when you want to 
+add one of these tags to the candidate you are adding.
 
 <box type="tip" seamless>
 
-**Tip:** A person can have any number of tags (including 0)!
+**Tip:** 
+* A person can have any number of tags (including 0)!
 </box>
+ 
 
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/developer t/software` (note: *developer* and *software* tags have been categorised by the previous `create` command)
+* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/dept finance`
+* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/uncategorisedtag`
 
 ### Adding a remark to a person: `remark`
 
@@ -183,18 +220,29 @@ Examples:
 
 Edits an existing person in the address book.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
+Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/[CATEGORY] TAGNAME]…​`
 
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
+
+Notes on editing the tags of the specified person:
 * When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
 * You can remove all the person’s tags by typing `t/` without
   specifying any tags after it.
+* Consequently, similar rules for `add` apply to the `edit` command involving tags:
+  * If you would like to tag a user with a tag that has not been categorised yet using the `create` command, 
+    you can specify the category that you would like it to be categorised to in the `edit` command. e.g. `edit 1 t/role swe`
+  * If you are using a tag that has not been categorised yet and you did not specify its category in the `add` command,
+    the tag would still be saved but it would be "uncategorised" by default.
+  * If you have multiple tags in different categories with the same name, you must specify the category when you want to
+    tag the specified candidate with one of these tags.
 
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+* `edit 1 t/role swe`
+* `edit 1 t/swe`
 
 ### Search job applicants by category: `search`
 
@@ -342,8 +390,6 @@ AddressBook data are saved automatically as a JSON file `[JAR file location]/dat
 If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.
 </box>
 
-### Archiving data files `[coming in v2.0]`
-
 _Details coming soon ..._
 
 --------------------------------------------------------------------------------------------------------------------
@@ -366,7 +412,8 @@ _Details coming soon ..._
 
  Action                   | Format, Examples                                                                                                                                               
 --------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------
- **Add**                  | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague` 
+ **Create**               | `create t/CATEGORY NAME…​` <br> e.g. `create t/dept software`
+ **Add**                  | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/[CATEGORY] TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague` 
  **Remark**               | `remark r/REMARK` <br> e.g., `remark 1 r/Great attitude, hardworking`                                                                                          
  **View**                 | `view INDEX` <br> e.g., `view 1`                                                                                                                               
  **Add Github/LinkedIn**  | `addL INDEX u/USERNAME` or `addG INDEX u/USERNAME` e.g., `addL 1 u/alex-yeoh`, `addG 2 u/bernicesanders123`                                                    
@@ -374,11 +421,11 @@ _Details coming soon ..._
  **Clear**                | `clear`                                                                                                                                                        
  **Delete**               | `delete INDEX`<br> e.g., `delete 3`                                                                                                                            
  **Set**                  | `set INDEX STATUS`<br> e.g., `set 2 Interviewed`                                                                                                               
- **Edit**                 | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                    
+ **Edit**                 | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/[CATEGORY] TAGNAME]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                    
  **Search**               | `search (n/KEYWORD [MORE KEYWORDS] / st/KEYWORD [MORE KEYWORDS] / t/KEYWORD [MORE KEYWORDS])` <br> e.g., `search n/alex`
  **List**                 | `list s/ATTRIBUTE` <br> e.g. `list s/name`    `hello`                                                                                                                 
  **Export**               | `export`                                                                                                                                                       
- **Help**                 | `help`                                                                                                                                                         
+ **Help**                 | `help`
 
 
 
