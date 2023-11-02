@@ -72,7 +72,7 @@ Shows a message explaning how to access the help page.
 
 Format: `help`
 
-## Contact Management
+## Address Book Management
 
 ### Adding a person: `add`
 
@@ -185,7 +185,18 @@ Format: `exit`
 
 ## Calendar System
 
-### Adding an event
+### Date Time Format
+
+When inputting a date and time into a command, the following format is used: 
+
+* `yyyy-MM-dd HH:mm` where
+    * `yyyy` represents the year,
+    * `MM` represents the month,
+    * `dd` represents the day,
+    * `HH` represents the hours and
+    * `mm` represents the minutes.
+
+### Adding an event: `addEvent`
 
 Adds an event to the user's calendar.
 
@@ -197,25 +208,96 @@ Format: `addEvent d/DESCRIPTION ts/START_DATE_TIME ts/END_DATE_TIME`
 Example:
 * `addEvent Cry about deadlines d/12/12/2012 s/2200 e/2359`
 
-### Deleting an event (Coming Soon)
+### Deleting an event: `deleteEvent`
 
 Deletes an event from the user's calendar.
 
-Format `deleteEvent d/DATE s/START_TIME`
+Format `deleteEvent DATE_TIME_DURING_EVENT`
 
-* Deletes an event starting from `START_TIME` on `DATE`
-* If there is no event starting at `START_TIME`, an error will be returned
-* `START_TIME` must be in 24 hour notation
-* `DATE` must be in the format `DD/MM/YYYY`
+* Deletes an event at the specified date and time.
+* An event is considered to be at that date and time if the date time lies between the start time (inclusive) and the
+end time (exclusive).
+* If there is no event during `DATE_TIME_DURING_EVENT`, an error will be thrown.
 
 Example:
-`deleteEvent d/12/12/2012 s/2200`
+`deleteEvent 2023-11-01 12:00`
 
-### Viewing all events (Coming Soon)
+### Deleting multiple events: `clearEvents`
 
-Opens a view of all events currently stored in the calendar.
+Clears all events within a specified time range.
 
-Format: `viewEvents`
+Format: `clearEvents ts/START_DATE_TIME te/END_DATE_TIME c/CONFIRMATION`
+
+* Deletes all events from the specified start date and time to the specified end date and time.
+* An event is considered to be within the time range if overlaps with the time range for any period of time.
+* When the `CONFIRMATION` is absent, the command shows all events within the time range but does not delete them. The
+same command is then shown with the confirmation included that can be copied and pasted to execute the command.
+* If there is no `START_DATE_TIME` or `END_DATE_TIME`, an error will be thrown.
+
+
+### Viewing all events
+
+Events can be viewed from the calendar that appears on the right.
+
+Additionally, a list of all events are displayed by default at the bottom. This list at the bottom can be switched to a
+task list with the `switchList` command. More information can be found under `Viewing all Tasks`.
+
+### Viewing another person's events: `viewContactEvents`
+
+Creates a pop-up that displays a list of all events of a calendar belonging to a person in the Addressbook.
+
+Format: `viewContactEvents INDEX`
+
+* Views the event list of the person at `INDEX` as displayed.
+
+## Task Management System
+
+Tasks consist of a `DESCRIPTION` and a `DEADLINE`. 
+
+### Viewing tasks: `switchList`
+
+Switches the bottom list between the event list and the task list.
+
+Format: `switchList`
+
+* All input after `switchList` will be ignored.
+* The bottom list displays the event list by default.
+
+### Adding tasks: `addTask`
+
+Adds a task to the Task Manager.
+
+Format: `addTask d/DESCRIPTION [te/DEADLINE]`
+
+* `DESCRIPTION` cannot be empty.
+* `DEADLINE` must be in the same format given above for date and time.
+* `DEADLINE` can also be omitted to create a task with no specified deadline
+
+Examples: 
+* `addTask d/Go for a run te/2023-02-14 19:00`
+* `addTask d/Hydrate regularly!`
+
+### Deleting tasks: `deleteTask`
+
+Deletes a task from the Task Manager according to the index of the task displayed in the task list.
+
+Format: `deleteTask INDEX`
+        
+* Throws an error if there is no `INDEX` present or if it exceeds the length of the task list.
+
+### Sorting tasks: `sortTask`
+
+Changes the way tasks in the Task Manager are displayed in the task list.
+
+Format: `sortTasks PARAMETER`
+
+* `PARAMETER` can only be `DESCRIPTION` or `DEADLINE`.
+
+Examples:
+* `sortTasks DESCRIPTION` sorts tasks by their `DESCRIPTION` alphabetically.
+* `sortTasks DEADLINE` sorts tasks by their `DEADLINE`. Tasks with deadlines are prioritised above tasks with no 
+deadline.
+
 
 ## Miscellaneous
 
