@@ -140,7 +140,7 @@ public class CommandBoxHistoryTest {
      */
     private void assertCurrentSuccess(String command) {
         assertTrue(commandBoxHistory.hasCurrent());
-        assertEquals(command, commandBoxHistory.current()); 
+        assertEquals(command, commandBoxHistory.current());
     }
 
     /**
