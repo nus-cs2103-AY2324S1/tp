@@ -24,6 +24,8 @@ public class ListLeaveCommandParser implements Parser<ListLeaveCommand> {
         requireNonNull(args);
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_ON);
 
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_ON);
+
         if (!arePrefixesPresent(argMultimap, PREFIX_ON) || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListLeaveCommand.MESSAGE_USAGE));
         }
