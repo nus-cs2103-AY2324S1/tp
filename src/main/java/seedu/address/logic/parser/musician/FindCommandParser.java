@@ -9,6 +9,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import java.util.HashSet;
 import java.util.List;
 import java.util.function.Predicate;
+import java.util.stream.Stream;
 
 import seedu.address.logic.commands.musician.FindCommand;
 import seedu.address.logic.parser.ArgumentMultimap;
@@ -44,6 +45,15 @@ public class FindCommandParser implements Parser<FindCommand> {
         List<String> tags = argMultimap.getAllValues(PREFIX_TAG);
         List<String> instruments = argMultimap.getAllValues(PREFIX_INSTRUMENT);
         List<String> genres = argMultimap.getAllValues(PREFIX_GENRE);
+
+        if (Stream.of(names, tags, instruments, genres).anyMatch(l -> l.stream().anyMatch(String::isEmpty))) {
+            throw new ParseException(FindCommand.MESSAGE_EMPTY_KEYWORD);
+        }
+
+        if (Stream.of(names, tags, instruments, genres)
+                .anyMatch(l -> l.stream().anyMatch(s -> s.split("\\s+").length > 1))) {
+            throw new ParseException(FindCommand.MESSAGE_MORE_THAN_ONE_WORD);
+        }
 
         HashSet<Predicate<Musician>> predicates = new HashSet<>();
         if (!names.isEmpty()) {

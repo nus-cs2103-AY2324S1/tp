@@ -34,6 +34,11 @@ public class FindCommand extends Command {
             + "[" + PREFIX_GENRE + "GENRE]...\n"
             + "Example: " + COMMAND_WORD + " n/Alice i/piano";
 
+    public static final String MESSAGE_EMPTY_KEYWORD = "The argument(s) provided must not be empty.";
+
+    public static final String MESSAGE_MORE_THAN_ONE_WORD =
+            "The argument(s) provided must not contain more than one word.";
+
     private final HashSet<Predicate<Musician>> predicates;
 
     /**
