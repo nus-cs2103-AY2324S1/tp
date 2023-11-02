@@ -28,7 +28,26 @@ public class InteractionEntry extends UiPart<Region> {
         super(FXML);
         this.interaction = interaction;
         note.setText(interaction.getInteractionNote());
-        outcome.setText(interaction.getOutcome().toString());
         date.setText(interaction.getDate().toString());
+
+        Interaction.Outcome interactionOutcome = interaction.getOutcome();
+        outcome.setText(interactionOutcome.toString());
+
+        switch (interactionOutcome) {
+        case CLOSED:
+            outcome.getStyleClass().add("closed");
+            break;
+        case INTERESTED:
+            outcome.getStyleClass().add("interested");
+            break;
+        case NOT_INTERESTED:
+            outcome.getStyleClass().add("not-interested");
+            break;
+        case FOLLOWUP_REQUIRED:
+            outcome.getStyleClass().add("followup-required");
+            break;
+        default:
+            outcome.getStyleClass().add("unknown");
+        }
     }
 }
