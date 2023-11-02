@@ -30,8 +30,9 @@ public class MainWindow extends UiPart<Stage> {
     private CardListPanel cardListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+    private ExportWindow exportWindow;
+    private ImportWindow importWindow;
     private GoalBox goalBox;
-
     @FXML
     private StackPane commandBoxPlaceholder;
 
@@ -64,6 +65,8 @@ public class MainWindow extends UiPart<Stage> {
         setWindowDefaultSize(logic.getGuiSettings());
 
         helpWindow = new HelpWindow();
+        exportWindow = new ExportWindow();
+        importWindow = new ImportWindow(primaryStage);
 
         this.goalBox = new GoalBox(logic.getGoal());
     }
@@ -116,6 +119,30 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
+    /**
+     * Opens the export window or focuses on it if it's already opened.
+     */
+
+    public void handleExport() {
+        if (!exportWindow.isShowing()) {
+            exportWindow.show();
+        } else {
+            exportWindow.focus();
+        }
+    }
+
+    /**
+     * Opens the import window or focuses on it if its already opened
+     */
+
+
+    public void handleImport() {
+        if (!importWindow.isShowing()) {
+            importWindow.show();
+        } else {
+            importWindow.focus();
+        }
+    }
     void show() {
         primaryStage.show();
     }

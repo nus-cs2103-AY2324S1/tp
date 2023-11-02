@@ -42,6 +42,7 @@ public class DeckParser {
      * @throws ParseException if the user input does not conform the expected format
      */
     public Command parseCommand(String userInput) throws ParseException {
+        System.out.println("userInput" + userInput);
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
         if (!matcher.matches()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
@@ -83,7 +84,6 @@ public class DeckParser {
 
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
-
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
 
@@ -92,7 +92,6 @@ public class DeckParser {
 
         case GoalCommand.COMMAND_WORD:
             return new GoalCommandParser().parse(arguments);
-
         default:
             logger.finer("This user input caused a ParseException: " + userInput);
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
