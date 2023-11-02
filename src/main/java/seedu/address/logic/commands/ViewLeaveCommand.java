@@ -24,8 +24,8 @@ public class ViewLeaveCommand extends Command {
     public static final String COMMAND_WORD = "viewleave";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": View employee who is on leave on specific date.\n"
-            + "Parameters: DATE (must be a valid date)\n"
-            + "Example: " + COMMAND_WORD + " 01/01/2023";
+            + "Parameters: /on DATE (must be a valid date)\n"
+            + "Example: " + COMMAND_WORD + " /on 01/01/2023";
 
     public static final String MESSAGE_SUCCESS = "Employee who is on leave on %1$s:\n%2$s";
     private final LocalDate dateToView;
@@ -46,7 +46,7 @@ public class ViewLeaveCommand extends Command {
 
         List<String> nameList = getNameList(model.getFilteredPersonList());
 
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         String formattedDate = dateToView.format(formatter);
 
         if (nameList.isEmpty()) {
@@ -112,5 +112,20 @@ public class ViewLeaveCommand extends Command {
         }
 
         return builder.toString();
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof ViewLeaveCommand)) {
+            return false;
+        }
+
+        ViewLeaveCommand otherViewLeaveCommand = (ViewLeaveCommand) other;
+        return dateToView.equals(otherViewLeaveCommand.dateToView);
     }
 }

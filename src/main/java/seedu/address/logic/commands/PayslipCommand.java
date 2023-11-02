@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_PERSONS_LISTED_OVERVIEW_PAYSLIP;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -38,6 +39,9 @@ public class PayslipCommand extends Command {
     public static final String WRONG_DATE_FORMAT_ERROR = "The date format is wrong.\n"
         + "Please use the format of dd/mm/yyyy.\n"
         + "Example: 06/10/2023";
+
+    public static final String NO_CORRESPONDING_PAYROLL_ERROR = "There is no payroll for the specified month.\n"
+        + "Please make sure the time you entered is correct.\n";
 
     public static final String MESSAGE_PAYSLIP_SUCCESS = "Payslip generated for Employee: %1$s";
 
@@ -117,16 +121,7 @@ public class PayslipCommand extends Command {
         }
 
         Person personToGenerate = lastShownList.get(index.getZeroBased());
-        try {
-            if (monthYear != null) {
-                PaySlipGenerator.generateReportWithMonth(personToGenerate, monthYear);
-            } else {
-                PaySlipGenerator.generateReport(personToGenerate);
-            }
-        } catch (Exception e) {
-            PaySlipGenerator.removeWrongFile(personToGenerate);
-            throw new CommandException(EMPTY_PAYROLL_ERROR);
-        }
+        executeWithExceptionHandling(personToGenerate);
         model.updateFilteredPersonList(person -> person.equals(personToGenerate));
         return new CommandResult(String.format(MESSAGE_PAYSLIP_SUCCESS, personToGenerate.getName().toString()));
     }
@@ -147,22 +142,34 @@ public class PayslipCommand extends Command {
 
         if (indexes.size() == 1) {
             Person personToGenerate = lastShownList.get(indexes.get(0) - 1);
-            try {
-                if (monthYear != null) {
-                    PaySlipGenerator.generateReportWithMonth(personToGenerate, monthYear);
-                } else {
-                    PaySlipGenerator.generateReport(personToGenerate);
-                }
-            } catch (Exception e) {
-                PaySlipGenerator.removeWrongFile(personToGenerate);
-                throw new CommandException(EMPTY_PAYROLL_ERROR);
-            }
+            executeWithExceptionHandling(personToGenerate);
             model.updateFilteredPersonList(this.name);
             return new CommandResult(String.format(MESSAGE_PAYSLIP_SUCCESS, personToGenerate.getName().toString()));
         }
 
         model.updateFilteredPersonList(this.name);
         return new CommandResult(String.format(MESSAGE_PERSONS_LISTED_OVERVIEW_PAYSLIP, lastShownList.size()), indexes);
+    }
+
+    /**
+     * Executes the command with exception handling.
+     * @param personToGenerate {@code Person} which the command should operate on.
+     * @throws CommandException If an error occurs during command execution.
+     */
+    private void executeWithExceptionHandling(Person personToGenerate) throws CommandException {
+        try {
+            if (monthYear != null) {
+                PaySlipGenerator.generateReportWithMonth(personToGenerate, monthYear);
+            } else {
+                PaySlipGenerator.generateReport(personToGenerate);
+            }
+        } catch (NullPointerException e) {
+            PaySlipGenerator.removeWrongFile(personToGenerate);
+            throw new CommandException(NO_CORRESPONDING_PAYROLL_ERROR);
+        } catch (IOException ioe) {
+            PaySlipGenerator.removeWrongFile(personToGenerate);
+            throw new CommandException(EMPTY_PAYROLL_ERROR);
+        }
     }
 
     @Override

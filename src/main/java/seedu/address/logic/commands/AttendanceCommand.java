@@ -30,8 +30,8 @@ public class AttendanceCommand extends Command {
 
     public static final String MESSAGE_USAGE_FOR_NAME = COMMAND_WORD
             + ": Reports the employee's attendance identified by the name used in the displayed employee list.\n"
-            + "Parameters: n/ NAME (must be present)\n"
-            + "Example: " + COMMAND_WORD + " n/ John";
+            + "Parameters: /n NAME (must be present)\n"
+            + "Example: " + COMMAND_WORD + " /n John";
     public static final String MESSAGE_REPORT_ATTENDANCE = "%1$s's attendance:\n"
             + "\tDays on leave: %2$s\n"
             + "\tDays absent: %3$s\n"
