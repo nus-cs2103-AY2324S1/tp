@@ -107,10 +107,10 @@ Format: `list`
 
 Modify and/or updates existing policy information in the database.
 
-Format: `edit INDEX [l/LICENCEPLATE] [pn/POLICY NUMBER] [pi/POLICY ISSUE
-DATE] [pe/POLICY EXPIRY DATE]…​`
+Format: `edit INDEX [n/NAME] [i/NRIC] [p/CONTACT NUMBER] [e/EMAIL] [t/TAG] [c/COMPANY] [l/LICENCE PLATE]
+ [pn/POLICY NUMBER] [pi/POLICY ISSUE DATE] [pe/POLICY EXPIRY DATE]`
 
-* Edits the person policy details at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+* Edits the client policy details at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * **At least one** of the optional fields must be provided.
 * Existing values will be updated to the input values.
 
@@ -120,17 +120,29 @@ Examples:
 *  `edit 2 pn/AB12345J pe/31-12-2024` updates the policy at the INDEX number 2 with the new policy number and expiration date.
 
 Acceptable values for each parameter:
-* `l/LICENCEPLATE`: Alphanumeric, _up to_ 9 characters.
+* `n/NAME`: Alphabets.
+* `i/NRIC`: Alphanumeric, _exactly_ 4 characters.
+* `p/CONTACT NUMBER`: Numeric, _exactly_ 8 characters.
+* `e/EMAIL`: Alphanumeric /and special characters, no white spaces allowed, standard email format.
+* `t/TAG`: Alphabets, no white spaces allowed.
+* `c/COMPANY`: Alphabets and/or special characters, white spaces allowed.
+* `l/LICENCE PLATE`: Alphanumeric, _up to_ 9 characters.
 * `pn/POLICY NUMBER`: Alphanumeric, _exactly_ 8 characters.
 * `pi/POLICY ISSUE DATE` and `pe/POLICY EXPIRY DATE`: Date in the format dd-mm-yyyy.
 
-Expected output upon success: [coming soon]
+Expected output upon success: <br>
+![EditSuccess](images/EditSuccess.png)
 
 Expected output upon failure:
-* Policy number does not exist: `Error: Policy number not found.`
-* Field specified for update is not valid or empty: `Error: Invalid field for updating.`
-* New value format is incorrect or not allowed for the specified field: `Error: Invalid new value format.`
-* Any of the mandatory fields are missing: `Error: Please provide all required fields.`
+* Invalid command format:<br>
+```
+Invalid command format! 
+edit: Edits the details of the person identified by the index number used in the displayed person list. Existing values will be overwritten by the input values.
+Parameters: INDEX (must be a positive integer) [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]...
+[i/NRIC] [l/LICENCE_PLATE] [c/COMPANY] [pn/POLICY_NUMBER] [pi/POLICY_ISSUE_DATE] [pe/POLICY_EXPIRY_DATE] Example: edit 1 p/91234567 e/johndoe@example.com
+```
+* No specified `INDEX` or negative `INDEX` or no field provided:<br>
+`At least one field to edit must be provided. `
 
 
 ### Locating clients by fields : `find`
