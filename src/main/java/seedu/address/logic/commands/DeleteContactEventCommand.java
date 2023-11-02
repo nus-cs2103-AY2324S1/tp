@@ -2,26 +2,18 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT_START_DATE_TIME;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.calendar.Calendar;
 import seedu.address.model.event.Event;
-import seedu.address.model.event.exceptions.EventNotFoundException;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
-import seedu.address.model.tag.Tag;
 
 /**
  * Delete an event from the calendar of an existing person in the address book.
@@ -33,9 +25,9 @@ public class DeleteContactEventCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Deletes an event from the calendar of the person "
             + "identified by the index number used in the displayed person list.\n"
             + "Parameters: INDEX (must be a positive integer) "
-            + "ANY TIME WITHIN EVENT DURATION \n"
-            + "Example: " + COMMAND_WORD + " "
-            + "2024-01-01 12:00 ";
+            + PREFIX_EVENT_START_DATE_TIME + "ANY TIME WITHIN EVENT DURATION \n"
+            + "Example: " + COMMAND_WORD + " 1 "
+            + PREFIX_EVENT_START_DATE_TIME + "2024-01-01 12:00 ";
 
     public static final String MESSAGE_DELETE_EVENT_FROM_PERSON_SUCCESS = "Event deleted from %s: %2$s";
     public static final String MESSAGE_NO_EVENT = "There is no valid existing event at this timing.";
@@ -66,37 +58,17 @@ public class DeleteContactEventCommand extends Command {
         } catch (IndexOutOfBoundsException e) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
-        Calendar calendar = personToEdit.getCalendar();
 
         Event toDelete;
+
         try {
-            toDelete = calendar.findEventAt(eventTime).orElseThrow();
-            calendar.deleteEventAt(eventTime);
-        } catch (EventNotFoundException e) {
+            toDelete = personToEdit.findEvent(eventTime);
+            personToEdit.deleteEvent(eventTime);
+        } catch (Exception e) {
             throw new CommandException(MESSAGE_NO_EVENT);
         }
-
-        Person editedPerson = createEditedPerson(personToEdit, calendar);
-        model.setPerson(personToEdit, editedPerson);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(String.format(MESSAGE_DELETE_EVENT_FROM_PERSON_SUCCESS,
-                editedPerson.getName(), Messages.format(toDelete)));
-    }
-
-    /**
-     * Creates and returns a {@code Person} with the new Calendar {@code calendar}
-     * edited with {@code event}.
-     */
-    private static Person createEditedPerson(Person personToEdit, Calendar calendar) {
-        assert personToEdit != null;
-
-        Name updatedName = personToEdit.getName();
-        Phone updatedPhone = personToEdit.getPhone();
-        Email updatedEmail = personToEdit.getEmail();
-        Address updatedAddress = personToEdit.getAddress();
-        Set<Tag> updatedTags = personToEdit.getTags();
-
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, calendar);
+                personToEdit.getName(), Messages.format(toDelete)));
     }
 
     @Override
