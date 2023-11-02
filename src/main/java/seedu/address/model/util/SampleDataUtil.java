@@ -89,8 +89,9 @@ public class SampleDataUtil {
     public static Lesson[] getSampleLessons() {
         try {
             TaskList taskList = new TaskList();
-            List<Task> tasks = Arrays.asList(new Task("first"), new Task("second"),
-                    new Task("third long words test sentrence bomvasnv haha loanfafsszzzz sss"));
+            List<Task> tasks = Arrays.asList(new Task("Revise CS2103T Materials"),
+                    new Task("Watch CS2103T Lecture"),
+                    new Task("Prepare CS2103T Slides"));
             taskList.setTasks(tasks);
             return new Lesson[] {
                 new Lesson("lesson1", "12:30", "14:30", "20", "Mathematics", taskList),
