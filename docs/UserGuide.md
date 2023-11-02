@@ -58,11 +58,11 @@ These are symbols we will be using to highlight certain information to you.
 ## User Interface
 There are mainly two different screens that you may face using Foster Family. 
 
-### The Main View 
+### The Main Window 
 ![Ui](images/Ui.png)
 This is the main view that welcomes you when you first open up Foster Family.
 
-### The Profile View 
+### The Profile Page 
 ![Profile](images/screenshots/ProfilePage.png)
 This is the profile view that you can use to add a fosterer or edit an already existing fosterer. 
 
@@ -87,11 +87,11 @@ In the example above, entering <code>name</code>, or others that are partially n
 
 ![Profile navigate field](images/screenshots/NavigatingFields.png)
 
-After you finish editing, pressing <code>enter</code> key brings your cursor back to the command box with your new changes intact. <br>
-If you want to revert back to the original value of the field while editing on the textbox, press <code>escape</code> key to cancel the changes and bring your cursor back to the command box. 
+After you finish editing, pressing the Enter key brings your cursor back to the command box with your new changes intact. <br>
+If you want to revert back to the original value of the field while editing on the textbox, press the Esc key to cancel the changes and bring your cursor back to the command box. 
 
 ![Cursor back to commandbox](images/screenshots/CursorBackToCommandbox.png)
-In the example above, after changing name from 'Meie' to 'Mei' an <code>enter</code> key was pressed. 
+In the example above, after changing name from 'Meie' to 'Mei' the Enter key was pressed. 
 
 The same process can be applied to other fields.
 
@@ -101,14 +101,14 @@ Entering <code>save</code> saves the changes you made into the storage.
 Let's say after changing the name, you want to save your changes.
 ![Cursor back to commandbox](images/screenshots/SaveCommandBefore.png)
 <br/>
-Key in <code>save</code> and press enter to save the changes. 
+Key in <code>save</code> and press Enter to save the changes. 
 <br/>
 ![Save command after](images/screenshots/SaveCommandAfter.png)
 <br/>
 This saves the changes you made and updates the details of a fosterer or adds a new fosterer with the details (depending on the command used to open the UI). 
 
 #### Exiting the profile page
-Entering <code>exit</code> closes the profile page and leads you back to the main view.
+Entering <code>exit</code> closes the profile page and leads you back to the main window.
 Attempting to exit without saving your changes will give you a warning message, advising you to save your changes. 
 
 **1. Changes are saved** <br/>
@@ -116,7 +116,7 @@ Let's say you saved your changes already.
 <br/>
 ![Exit command saved before](images/screenshots/ExitCommandSavedBefore.png)
 <br/>
-Type in <code>exit</code> and press enter to close the profile page.
+Type in <code>exit</code> and press Enter to close the profile page.
 <br/>
 ![Exit command saved after](images/screenshots/ExitCommandSavedAfter.png) 
 
@@ -125,12 +125,12 @@ Let's say you did not save your changes and entered <code>exit</code>.
 <br/>
 ![Exit command not saved warning](images/screenshots/ExitCommandNotSavedWarning.png)
 <br/>
-If you press <code>Enter</code> again, your changes are discarded and you are led back to the main view.
-If you press <code>escape</code> key, the exit is cancelled and you can continue working on the profile page.
+If you press Enter again, your changes are discarded and you are led back to the main view.
+If you press Esc key, the exit is cancelled and you can continue working on the profile page.
 <br/>
 ![Exit command not saved cancel](images/screenshots/ExitCommandNotSavedCancel.png)
 <br/>
-The example above is the result of pressing <code>escape</code> key after you are warned.
+The example above is the result of pressing the Esc key after you are warned.
 
 
 To learn more about **adding a new fosterer from profile page**, refer to a section [Adding a fosterer through the main window: add](#adding-a-fosterer-through-the-profile-page-add). <br/>
@@ -326,8 +326,8 @@ To learn more about profile page, please refer to the section [User Interface: t
 1. Enter a fosterer’s profile page with `view INDEX`.
 2. Type in the name of the field you want to edit onto the command box, for example `name`. This will make the textbox visible next to the `name` field and automatically set the text cursor to the textbox.
 3. Edit the original value - if it exists - to a new value, for example `John`.
-4. Press enter to return the text cursor back to the command box.
-5. Type in `save` command and enter to save the changes of the fosterer. 
+4. Press Enter to return the text cursor back to the command box.
+5. Type in `save` command and Enter to save the changes of the fosterer. 
 
 Example:
 * `list` followed by `view 2`
