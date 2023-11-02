@@ -45,7 +45,7 @@ public class Birthdate implements Comparable<Birthdate> {
 
     @Override
     public String toString() {
-        return value.toString();
+        return value;
     }
 
     @Override
