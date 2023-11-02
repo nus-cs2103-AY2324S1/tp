@@ -239,7 +239,7 @@ public class AddGroupCommandTest {
     /**
      * A Model stub that contains a single person.
      */
-    private class ModelStubWithGroup extends AddGroupCommandTest.ModelStub {
+    private class ModelStubWithGroup extends ModelStub {
         private final Group group;
 
         ModelStubWithGroup(Group group) {
