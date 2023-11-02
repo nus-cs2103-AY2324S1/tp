@@ -46,6 +46,10 @@ public class EnrolDate {
         }
     }
 
+    public YearMonth getEnrolDate() {
+        return this.enrolDate;
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {

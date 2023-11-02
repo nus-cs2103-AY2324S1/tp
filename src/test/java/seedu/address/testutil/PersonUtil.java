@@ -41,7 +41,7 @@ public class PersonUtil {
         sb.append(PREFIX_SEC_LEVEL + student.getSecLevel().value + " ");
         sb.append(PREFIX_NEAREST_MRT_STATION + student.getNearestMrtStation().mrtStationName + " ");
         student.getSubjects().stream().forEach(
-            s -> sb.append(PREFIX_SUBJECT + s.subjectName + " ")
+            s -> sb.append(PREFIX_SUBJECT + s.getSubjectName() + " ")
         );
         return sb.toString();
     }
@@ -65,7 +65,7 @@ public class PersonUtil {
             if (subjects.isEmpty()) {
                 sb.append(PREFIX_SUBJECT);
             } else {
-                subjects.forEach(s -> sb.append(PREFIX_SUBJECT).append(s.subjectName).append(" "));
+                subjects.forEach(s -> sb.append(PREFIX_SUBJECT).append(s.getSubjectName()).append(" "));
             }
         }
         return sb.toString();

@@ -1,7 +1,9 @@
 package seedu.address.logic;
 
+import java.time.YearMonth;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 import java.util.stream.Stream;
 
 import javafx.collections.ObservableList;
@@ -12,6 +14,7 @@ import seedu.address.model.person.Student;
 import seedu.address.model.person.StudentIsGenderPredicate;
 import seedu.address.model.person.StudentIsSecLevelPredicate;
 import seedu.address.model.person.StudentTakesSubjectPredicate;
+import seedu.address.model.tag.EnrolDate;
 import seedu.address.model.tag.Subject;
 
 /**
@@ -127,6 +130,37 @@ public class OrganizeData {
             columnValueMapping.put(titles[i], values[i]);
         }
 
+        return columnValueMapping;
+    }
+
+    public static Map<String, Integer> byEnrolDate(Model model, int year) {
+        Student[] students = model.getFilteredPersonList().toArray(new Student[0]);
+        Map<String, Integer> columnValueMapping = new HashMap<>();
+        String[] titles = new String[] {"Jan", "Feb", "Mar", "Apr", "May",
+                "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};
+        int[] counts = new int[13];
+
+        for (Student student : students) {
+            Set<Subject> subjects = student.getSubjects();
+            int earliestMonthValue = 13;
+            int earliestYearValue = Integer.MAX_VALUE;
+            for (Subject subject : subjects) {
+                YearMonth yearMonth = subject.getYearMonth();
+                int monthValue = yearMonth.getMonthValue();
+                int yearValue = yearMonth.getYear();
+                if (yearValue <= earliestYearValue && monthValue <= earliestMonthValue) {
+                    earliestMonthValue = monthValue;
+                    earliestYearValue = yearValue;
+                }
+            }
+            if (earliestYearValue == year) {
+                counts[earliestMonthValue]++;
+            }
+        }
+
+        for (int i = 1; i < counts.length; i++) {
+            columnValueMapping.put(titles[i - 1], counts[i]);
+        }
         return columnValueMapping;
     }
 
