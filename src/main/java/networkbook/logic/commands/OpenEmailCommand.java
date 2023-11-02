@@ -39,6 +39,7 @@ public class OpenEmailCommand extends Command {
      * @param emailIndex The index of the email in the email list of the person.
      */
     public OpenEmailCommand(Index personIndex, Index emailIndex) {
+        super(false);
         requireAllNonNull(personIndex, emailIndex);
         this.personIndex = personIndex;
         this.emailIndex = emailIndex;
