@@ -22,6 +22,7 @@ import seedu.address.logic.commands.DeleteContactEventCommand;
 import seedu.address.logic.commands.DeleteEventCommand;
 import seedu.address.logic.commands.DeleteTaskCommand;
 import seedu.address.logic.commands.EditCommand;
+import seedu.address.logic.commands.EditContactEventCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FilterCommand;
 import seedu.address.logic.commands.FindCommand;
@@ -108,6 +109,9 @@ public class UniMateParser {
 
         case AddContactEventCommand.COMMAND_WORD:
             return new AddContactEventCommandParser().parse(arguments);
+
+        case EditContactEventCommand.COMMAND_WORD:
+            return new EditContactEventCommandParser().parse(arguments);
 
         case DeleteContactEventCommand.COMMAND_WORD:
             return new DeleteContactEventCommandParser().parse(arguments);
