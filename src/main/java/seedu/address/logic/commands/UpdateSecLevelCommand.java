@@ -62,7 +62,7 @@ public class UpdateSecLevelCommand extends Command {
             // record the students before performing the update for undo purpose.
             beforeLastUpdateStudents = students;
             for (Student student : students) {
-                if (student.getSecLevel().getValue() > 3) {
+                if (student.getSecLevelValue() > 3) {
                     model.deletePerson(student);
                 } else {
                     Student updatedStudent = createUpdatedSecStudent(student);
@@ -77,8 +77,8 @@ public class UpdateSecLevelCommand extends Command {
 
     private Student createUpdatedSecStudent(Student studentToUpdate) {
         assert studentToUpdate != null;
-        assert studentToUpdate.getSecLevel().getValue() <= 3;
-        assert studentToUpdate.getSecLevel().getValue() >= 1;
+        assert studentToUpdate.getSecLevelValue() <= 3;
+        assert studentToUpdate.getSecLevelValue() >= 1;
 
         Name updatedName = studentToUpdate.getName();
         Phone updatedPhone = studentToUpdate.getPhone();
