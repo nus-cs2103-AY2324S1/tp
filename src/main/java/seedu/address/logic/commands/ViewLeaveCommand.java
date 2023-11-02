@@ -46,7 +46,7 @@ public class ViewLeaveCommand extends Command {
 
         List<String> nameList = getNameList(model.getFilteredPersonList());
 
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         String formattedDate = dateToView.format(formatter);
 
         if (nameList.isEmpty()) {
@@ -112,5 +112,20 @@ public class ViewLeaveCommand extends Command {
         }
 
         return builder.toString();
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof ViewLeaveCommand)) {
+            return false;
+        }
+
+        ViewLeaveCommand otherViewLeaveCommand = (ViewLeaveCommand) other;
+        return dateToView.equals(otherViewLeaveCommand.dateToView);
     }
 }
