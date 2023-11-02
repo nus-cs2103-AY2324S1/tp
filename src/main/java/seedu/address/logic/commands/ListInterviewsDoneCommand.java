@@ -7,22 +7,22 @@ import java.util.logging.Logger;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.parser.AddressBookParser;
 import seedu.address.model.Model;
-import seedu.address.model.interview.InterviewNotDonePredicate;
+import seedu.address.model.interview.InterviewIsDonePredicate;
 
 /**
- * Lists all undone interviews in the address book to the user.
+ * Lists all done interviews in the address book to the user.
  */
-public class ShowUndoneCommand extends Command {
-    public static final String COMMAND_WORD = "show-undone";
+public class ListInterviewsDoneCommand extends Command {
+    public static final String COMMAND_WORD = "list-i-done";
 
-    public static final String MESSAGE_SUCCESS = "Showing undone interviews.\nUse list-i to show all interviews.";
+    public static final String MESSAGE_SUCCESS = "Showing done interviews.\nUse list-i to show all interviews.";
     private static final Logger logger = LogsCenter.getLogger(AddressBookParser.class);
 
     @Override
     public CommandResult execute(Model model) {
-        logger.fine("Executing listing undone interviews");
+        logger.fine("Executing listing done interviews");
         requireNonNull(model);
-        model.updateFilteredInterviewList(new InterviewNotDonePredicate());
+        model.updateFilteredInterviewList(new InterviewIsDonePredicate());
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }
