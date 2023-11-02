@@ -5,13 +5,44 @@ title: User Guide
 
 ManaGease is a **desktop app for managing full time staff in any workplace, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, ManaGease can get your contact management tasks done faster than traditional apps.
 
+---
+<!-- TOC -->
+  * [Quick Start](#quick-start)
+  * [Features](#features)
+    * [Parameter formats](#parameter-formats)
+    * [Viewing help: `help`](#viewing-help-help)
+    * [Adding a employee: `add`](#adding-a-employee-add)
+    * [Editing a employee: `edit`](#editing-a-employee-edit)
+    * [Deleting a employee: `delete`](#deleting-a-employee-delete)
+    * [Reading a employee's information: `read`](#reading-a-employees-information-read)
+    * [Adding leave to an employee: `addleave`](#adding-leave-to-an-employee-addleave)
+    * [Deleting leave from an employee: `deleteleave`](#deleting-leave-from-an-employee-deleteleave)
+    * [View employee who is on leave: `viewleave`](#view-employee-who-is-on-leave-viewleave)
+    * [View the calendar of upcoming month: `nm`](#view-the-calendar-of-upcoming-month-nm)
+    * [View the calendar of previous month: `pm`](#view-the-calendar-of-previous-month-pm)
+    * [View the calendar of current month: `cm`](#view-the-calendar-of-current-month-cm)
+    * [Adding a deduction to the payroll of an employee: `deduct`](#adding-a-deduction-to-the-payroll-of-an-employee-deduct)
+    * [Adding a benefit to the payroll of an employee: `benefit`](#adding-a-benefit-to-the-payroll-of-an-employee-benefit)
+    * [Calculating payroll of an employee: `payroll`](#calculating-payroll-of-an-employee-payroll)
+    * [Generating payslips for an employee: `payslip`](#generating-payslips-for-an-employee-payslip)
+    * [Listing all employees: `list`](#listing-all-employees-list)
+    * [Clearing all entries: `clear`](#clearing-all-entries-clear)
+    * [Locating employees by name: `find`](#locating-employees-by-name-find)
+    * [Exiting the program: `exit`](#exiting-the-program-exit)
+    * [Saving the data](#saving-the-data)
+    * [Editing the data file](#editing-the-data-file)
+  * [FAQ](#faq)
+  * [Known issues](#known-issues)
+  * [Command summary](#command-summary)
+<!-- TOC -->
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Quick Start
 
 1. Ensure you have Java `11` or above installed in your Computer. 
 2. Download the latest `ManaGease.jar` from [here](https://github.com/AY2324S1-CS2103T-W12-2/tp/releases)
-3. Copy the file to the folder you want to use as the _home folder_ for your ManaGease. 
+3. Copy the file to the folder you want to use as the **home folder** for your ManaGease. 
 4. Open a command terminal, `cd` into the folder you put the jar file in(i.e. `cd DIRECTORY_PATH`), and enter the `java -jar ManaGease.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
@@ -32,7 +63,7 @@ ManaGease is a **desktop app for managing full time staff in any workplace, opti
 
    * `exit` : Exits the app.
 
-Refer to the [Features](#features) below for details of each command.
+Refer to [Command Summary](#command-summary) below for a summary of all commands, and the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -79,7 +110,7 @@ Refer to the [Features](#features) below for details of each command.
 
 ----------------------------------------------------------------------------------------------------------------------------
 
-### Viewing help : `help`
+### Viewing help: `help`
 **What it does:**
 
 Shows a message explaining how to access the help page.
@@ -94,7 +125,7 @@ Output:
   ![result for help command](images/helpSuccess.png)
 
 
-### Adding a person: `add`
+### Adding a employee: `add`
 
 **What it does**
 
@@ -106,7 +137,7 @@ add /n NAME /e EMAIL /p PHONE /a ADDRESS /b BANK_ACCOUNT /jd JOIN_DATE /s SALARY
 ```
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A person must have all parameters shown in the command format.
+A employee must have all parameters shown in the command format.
 </div>
 
 Example:
@@ -124,25 +155,25 @@ Output:
 ![failed result for adding employee](images/addFailed.png)
 
 
-### Editing a person : `edit`
+### Editing a employee: `edit`
 
 **What it does**
 
-Edits an existing person in the address book.
+Edits an existing employee in the address book.
 
 **Command Format:**
 
 `edit INDEX [/n NAME] [/e EMAIL] [/p PHONE] [/a ADDRESS] [/b BANK_ACCOUNT] [/jd JOIN_DATE] [/s SALARY] [/l ANNUAL_LEAVE] `
 
-* Edits the person at the specified `INDEX`.
-* The `INDEX` refers to the index number shown in the displayed person list.
+* Edits the employee at the specified `INDEX`.
+* The `INDEX` refers to the index number shown in the displayed employee list.
 * The `INDEX` **must be a positive integer**, and **must be within the range of the list**.
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 
 Examples:
-*  `edit 1 /p 91234567 /e johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 /n Betsy Crower ` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+*  `edit 1 /p 91234567 /e johndoe@example.com` Edits the phone number and email address of the 1st employee to be `91234567` and `johndoe@example.com` respectively.
+*  `edit 2 /n Betsy Crower ` Edits the name of the 2nd employee to be `Betsy Crower` and clears all existing tags.
 
 Output:
 * ManaGease should display the information of the updated employee. 
@@ -152,7 +183,7 @@ Output:
 ![result for editing employee](images/editSuccess.png)
 
 
-### Deleting a person : `delete`
+### Deleting a employee: `delete`
 
 **What it does**
 
@@ -163,8 +194,8 @@ This feature allows users to delete an employee based on index or name.
 `delete INDEX` or `delete /n NAME`
 
 
-* Deletes the person at the specified `INDEX` or with the name `NAME`.
-* The `INDEX` refers to the index number shown in the displayed person list.
+* Deletes the employee at the specified `INDEX` or with the name `NAME`.
+* The `INDEX` refers to the index number shown in the displayed employee list.
 * The `INDEX` **must be a positive integer**, and **must be within the range of the list**.
 * The `NAME` must be in the correct [format](#parameter-formats).
 
@@ -181,7 +212,7 @@ Output:
 ![result for deleting employee](images/deleteSuccess.png)
 
 
-### Reading a person's information : `read`
+### Reading a employee's information: `read`
 
 **What it does**
 
@@ -191,12 +222,12 @@ This feature allows users to view specific information about an employee.
 
 `read INDEX PREFIX`
 
-* Reads the person's information specified by the `PREFIX` at the specified `INDEX`.
-* The `INDEX` refers to the index number shown in the displayed person list.
+* Reads the employee's information specified by the `PREFIX` at the specified `INDEX`.
+* The `INDEX` refers to the index number shown in the displayed employee list.
 * The `INDEX` **must be a positive integer**, and **must be within the range of the list**.
 
 Examples:
-* `read 3 /e` reads the email of the third person in the most recently displayed list.
+* `read 3 /e` reads the email of the third employee in the most recently displayed list.
 
 Output:
 
@@ -211,7 +242,7 @@ Output:
 
 
 
-### Adding leave to an employee : `addleave`
+### Adding leave to an employee: `addleave`
 
 **What it does**
 
@@ -222,33 +253,33 @@ This feature allows users to add leave(s) to an employee.
 `addleave INDEX /on DATE` or `addleave INDEX /from DATE /to DATE`
 
 * Adds leave to the employee specified by the `INDEX`, can be a single day of leave or multiple days of leave.
-* The `INDEX` refers to the index number shown in the displayed person list.
+* The `INDEX` refers to the index number shown in the displayed employee list.
 * The `INDEX` **must be a positive integer**, and **must be within the range of the list**.
 * The `DATE` must be in `dd/MM/yyyy` format.
 * For adding in multiple days of leave, the second `DATE` must be after the first `DATE`.
 
 Examples:
-* `addleave 3 /on 01/01/2024` adds a single day of leave of `01/01/2024` to the third person in the most recently displayed list.
-* `addleave 3 /from 01/01/2024 /to 04/01/2024` adds in multiple days of leave to the third person in the most recently displayed list from `01/01/2024` to `04/01/2024`, inclusive.
+* `addleave 3 /on 01/01/2024` adds a single day of leave of `01/01/2024` to the third employee in the most recently displayed list.
+* `addleave 3 /from 01/01/2024 /to 04/01/2024` adds in multiple days of leave to the third employee in the most recently displayed list from `01/01/2024` to `04/01/2024`, inclusive.
 
 Output:
 
 * If the index is not within the numbers in the list, or the format of the command is incorrect, the app should display the following error message.
-  ![result for incorrect addleave command](images/addLeaveInvalidIndexAndCommand.png)
+  <br>![result for incorrect addleave command](images/addLeaveInvalidIndexAndCommand.png)
 
 * If the `DATE` provided is not in the correct format, the app should display the following error message.
-  ![result for incorrect date format for addleave command](images/addLeaveInvalidDateFormat.png)
+  <br>![result for incorrect date format for addleave command](images/addLeaveInvalidDateFormat.png)
 
 * If the `DATE` has already been added to the employee, the app should display the following error message.
-  ![result for invalid leave for addleave command](images/addleaveInvalidLeave.png)
+  <br>![result for invalid leave for addleave command](images/addleaveInvalidLeave.png)
 
 * If the second `DATE` is before the first `DATE` when adding in multiple days of leave, the app should display the following error message.
-  ![result for invalid leave range for addleave command](images/addLeaveStartEndDateError.png)
+  <br>![result for invalid leave range for addleave command](images/addLeaveStartEndDateError.png)
 
 * Otherwise, if there are no errors, the app should display the following success message that the leave(s) has been added and display the number of leave left for the current year and the following year.
-  ![result for successful addleave command](images/addLeaveSuccessMsg.png)
+  <br>![result for successful addleave command](images/addLeaveSuccessMsg.png)
 
-### Deleting leave from an employee : `deleteleave`
+### Deleting leave from an employee: `deleteleave`
 
 **What it does**
 
@@ -259,14 +290,14 @@ This feature allows users to delete leave(s) from an employee.
 `deleteleave INDEX /on DATE` or `deleteleave INDEX /from DATE /to DATE`
 
 * Deletes leave from the employee specified by the `INDEX`, can be a single day of leave or multiple days of leave.
-* The `INDEX` refers to the index number shown in the displayed person list.
+* The `INDEX` refers to the index number shown in the displayed employee list.
 * The `INDEX` **must be a positive integer**, and **must be within the range of the list**.
 * The `DATE` must be in `dd/MM/yyyy` format.
 * For deleting multiple days of leave, the second `DATE` must be after the first `DATE`.
 
 Examples:
-* `deleteleave 3 /on 01/01/2024` deletes a single day of leave of `01/01/2024` from the third person in the most recently displayed list.
-* `deleteleave 3 /from 01/01/2024 /to 04/01/2024` deletes multiple days of leave from the third person in the most recently displayed list from `01/01/2024` to `04/01/2024`, inclusive.
+* `deleteleave 3 /on 01/01/2024` deletes a single day of leave of `01/01/2024` from the third employee in the most recently displayed list.
+* `deleteleave 3 /from 01/01/2024 /to 04/01/2024` deletes multiple days of leave from the third employee in the most recently displayed list from `01/01/2024` to `04/01/2024`, inclusive.
 
 Output:
 
@@ -353,7 +384,7 @@ This feature allows users to add a deduction to the payroll of an employee.
 `deduct INDEX /v VALUE /r REASON` or `deduct /n NAME /v VALUE /r REASON`
 
 * Adds a deduction with given `VALUE` and `REASON` to the employee specified by the `INDEX` or `NAME`.
-* The `INDEX` refers to the index number shown in the displayed person list.
+* The `INDEX` refers to the index number shown in the displayed employee list.
 * The `INDEX` **must be a positive integer**, and **must be within the range of the list**.
 * The `VALUE` must be a **positive number**, and **must be in the [format](#parameter-formats) of 2 decimal places**.
 * The `REASON` must be a **non-empty and non-blank string**. It must take one of the three values: `absence`, `cpf` or `no pay`, which stands for `Absence from work`, `Employee CPF deduction` and `No pay leave` respectively.
@@ -377,7 +408,7 @@ Output:
 ![result for unknown deduction reason](images/unknownDeductionReason.png)
 
 
-### Adding a benefit to the payroll of an employee : `benefit`
+### Adding a benefit to the payroll of an employee: `benefit`
 
 **What it does**
 
@@ -388,7 +419,7 @@ This feature allows users to add a benefit to the payroll of an employee.
 `benefit INDEX /v VALUE /r REASON` or `benefit /n NAME /v VALUE /r REASON`
 
 * Adds a benefit with given `VALUE` and `REASON` to the employee specified by the `INDEX` or `NAME`.
-* The `INDEX` refers to the index number shown in the displayed person list.
+* The `INDEX` refers to the index number shown in the displayed employee list.
 * The `INDEX` **must be a positive integer**, and **must be within the range of the list**.
 * The `VALUE` must be a **positive number**, and **must be in the [format](#parameter-formats) of 2 decimal places**.
 * The `REASON` must be a **non-empty and non-blank string**. It must take one of the two values: `bonus` or `transport`, which stands for `Annual bonus` and `Transport allowance` respectively.
@@ -412,7 +443,7 @@ Output:
   ![result for unknown benefit reason](images/unknownBenefitReason.png)
 
 
-### Calculating payroll of an employee : `payroll`
+### Calculating payroll of an employee: `payroll`
 
 **What it does**
 
@@ -423,7 +454,7 @@ This feature allows users to calculate the payroll of an employee.
 `payroll INDEX` or `payroll /n NAME`
 
 * Calculates the payroll of the employee specified by the `INDEX` or `NAME`.
-* The index refers to the index number shown in the displayed person list.
+* The index refers to the index number shown in the displayed employee list.
 * The index **must be a positive integer**.
 
 Examples:
@@ -437,7 +468,7 @@ Output:
 * If the command is incorrect, the app should display `Please use the following format to read information : read INDEX INFORMATION`.
 
 
-### Generating payslips for an employee : `payslip`
+### Generating payslips for an employee: `payslip`
 
 **What it does**
 
@@ -449,7 +480,7 @@ This feature allows users to generate payslips for an employee.
 
 * Generates a payslip for the employee specified by the `INDEX` or `NAME`.
 * If the optional `/t DD/MM/YYYY` is provided, the payslip will be generated for the month specified by the date.
-* The `INDEX` refers to the index number shown in the displayed person list.
+* The `INDEX` refers to the index number shown in the displayed employee list.
 * The `INDEX` **must be a positive integer**, and **must be within the range of the list**.
 * The `NAME` must be in the correct [format](#parameter-formats).
 * The optional date must be in the correct [format](#parameter-formats).
@@ -465,7 +496,7 @@ Output:
 * ManaGease should display a success message saying that the payslip has been generated successfully, if the input is valid.
   ![result for generating payslip](images/payslipSuccess.png)
 * A payslip report in PDF format will be generated in the `payslips` folder in the ManaGease home directory.
-  ![location of payslip](images/payslipLocation.png)
+  <br>![location of payslip](images/payslipLocation.png)
   ![payslip content](images/payslipContent.png)
 * If the index is not within the numbers in the list, the app should display `The employee index provided is invalid`.
 * If the command is incorrect, the app should display the following message.
@@ -474,7 +505,7 @@ Output:
   ![result for incorrect payslip date format](images/incorrectDateFormat.png)
 
 
-### Listing all persons : `list`
+### Listing all employees: `list`
 
 **What it does**
 
@@ -489,7 +520,7 @@ Output:
 * ManaGease should display a list of all employees in the workplace.
   ![result for listing all employees](images/listSuccess.png)
 
-### Clearing all entries : `clear`
+### Clearing all entries: `clear`
 
 **What it does**
 
@@ -513,7 +544,7 @@ Finds employees whose names contain any of the given keywords.
 * The order of the keywords does not matter. e.g. `Yeoh Alex` will match `Alex Yeoh`
 * Only the name is searched.
 * Only full words will be matched e.g. `Ale` will not match `Alex`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
+* Employees matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
 Example:
@@ -521,7 +552,7 @@ Example:
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
 
-### Exiting the program : `exit` 
+### Exiting the program: `exit`
 
 **What it does**
 
@@ -537,15 +568,11 @@ AddressBook data are saved in the hard disk automatically after any command that
 
 ### Editing the data file
 
-ManaGease data are saved automatically as a JSON file `[JAR file location]/data/managease.json`. Advanced users are welcome to update data directly by editing that data file.
+ManaGease data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If your changes to the data file makes its format invalid, Managease will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.
 </div>
-
-### Archiving data files `[coming in v2.0]`
-
-_Details coming soon ..._
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -564,20 +591,26 @@ _Details coming soon ..._
 
 ## Command summary
 
-| Action           | Format, Examples                                                                                                                                                                                                               |
-|------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**          | `add /n NAME /e EMAIL /p PHONE /a ADDRESS /b BANK_ACCOUNT /jd JOIN_DATE /s SALARY /l ANNUAL_LEAVE`     <br> e.g., `add /n Jane Smith /e jane@email.com /p 12345678 /a 123 Main St /b 123456789/jd 12/09/2023 /s 1000.00 /l 10` |
-| **Clear**        | `clear`                                                                                                                                                                                                                        |
-| **Delete**       | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                                                            |
-| **Edit**         | `edit INDEX [/n NAME] [/e EMAIL] [/p PHONE] [/a ADDRESS] [/b BANK_ACCOUNT] [/jd JOIN_DATE] [/s SALARY] [/l ANNUAL_LEAVE]`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                                 |
-| **Read**         | `read INDEX PREFIX`<br> e.g., `read 3 /n`                                                                                                                                                                                      |
-| **List**         | `list`                                                                                                                                                                                                                         |
-| **Find**         | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find alex`                                                                                                                                                                           |
-| **Deduct**       | `deduct INDEX /v VALUE /r REASON` or `deduct /n NAME /v VALUE /r REASON`<br> e.g., `deduct 3 /v 200.00 /r cpf`                                                                                                                 |
-| **Benefit**      | `benefit INDEX /v VALUE /r REASON` or `benefit /n NAME /v VALUE /r REASON`<br> e.g., `benefit 3 /v 1000.00 /r bonus`                                                                                                           |
-| **Payroll**      | `payroll INDEX` or `payroll /n NAME`<br> e.g., `payroll 3`                                                                                                                                                                     |
-| **Payslip**      | `payslip INDEX [/t DD/MM/YYYY]` or `payslip /n NAME [/t DD/MM/YYYY]`<br> e.g., `payslip 3`                                                                                                                                     |
-| **Add Leave**    | `addleave INDEX /on DATE` or `addleave INDEX /from DATE /to DATE`<br> e.g., `addleave 3 /from 12/12/2024 /to 14/12/2024`                                                                                                       |
-| **Delete Leave** | `deleteleave INDEX /on DATE` or `deleteleave INDEX /from DATE /to DATE`<br> e.g., `deleteleave 3 /from 12/12/2024 /to 14/12/2024`                                                                                              |
-| **View Leave**   | `viewleave /on DATE`<br> e.g., `viewleave /on 12/12/2024`                                                                                                                                                        |
-| **Help**         | `help`                                                                                                                                                                                                                         |
+| Action                                                                 | Format and Examples                                                                                                                                                                                                            |
+|------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **[Add](#adding-a-employee-add)**                                      | `add /n NAME /e EMAIL /p PHONE /a ADDRESS /b BANK_ACCOUNT /jd JOIN_DATE /s SALARY /l ANNUAL_LEAVE`     <br> e.g., `add /n Jane Smith /e jane@email.com /p 12345678 /a 123 Main St /b 123456789/jd 12/09/2023 /s 1000.00 /l 10` |
+| **[Clear](#clearing-all-entries-clear)**                               | `clear`                                                                                                                                                                                                                        |
+| **[Delete](#deleting-a-employee-delete)**                              | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                                                            |
+| **[Edit](#editing-a-employee-edit)**                                   | `edit INDEX [/n NAME] [/e EMAIL] [/p PHONE] [/a ADDRESS] [/b BANK_ACCOUNT] [/jd JOIN_DATE] [/s SALARY] [/l ANNUAL_LEAVE]`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                                 |
+| **[Read](#reading-a-employees-information-read)**                      | `read INDEX PREFIX`<br> e.g., `read 3 /n`                                                                                                                                                                                      |
+| **[List](#listing-all-employees-list)**                                | `list`                                                                                                                                                                                                                         |
+| **[Find](#locating-employees-by-name-find)**                           | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find alex`                                                                                                                                                                           |
+| **[Deduct](#adding-a-deduction-to-the-payroll-of-an-employee-deduct)** | `deduct INDEX /v VALUE /r REASON` or `deduct /n NAME /v VALUE /r REASON`<br> e.g., `deduct 3 /v 200.00 /r cpf`                                                                                                                 |
+| **[Benefit](#adding-a-benefit-to-the-payroll-of-an-employee-benefit)** | `benefit INDEX /v VALUE /r REASON` or `benefit /n NAME /v VALUE /r REASON`<br> e.g., `benefit 3 /v 1000.00 /r bonus`                                                                                                           |
+| **[Payroll](#calculating-payroll-of-an-employee-payroll)**             | `payroll INDEX` or `payroll /n NAME`<br> e.g., `payroll 3`                                                                                                                                                                     |
+| **[Payslip](#generating-payslips-for-an-employee-payslip)**            | `payslip INDEX [/t DD/MM/YYYY]` or `payslip /n NAME [/t DD/MM/YYYY]`<br> e.g., `payslip 3`                                                                                                                                     |
+| **[Add Leave](#adding-leave-to-an-employee-addleave)**                 | `addleave INDEX /on DATE` or `addleave INDEX /from DATE /to DATE`<br> e.g., `addleave 3 /from 12/12/2024 /to 14/12/2024`                                                                                                       |
+| **[Delete Leave](#deleting-leave-from-an-employee-deleteleave)**       | `deleteleave INDEX /on DATE` or `deleteleave INDEX /from DATE /to DATE`<br> e.g., `deleteleave 3 /from 12/12/2024 /to 14/12/2024`                                                                                              |
+| **[View Leave](#view-employee-who-is-on-leave-viewleave)**             | `viewleave /on DATE`<br> e.g., `viewleave /on 12/12/2024`                                                                                                                                                                      |
+| **[View Previous Month](#view-the-calendar-of-previous-month-pm)**     | `pm`                                                                                                                                                                                                                           |
+| **[View Current Month](#view-the-calendar-of-current-month-cm)**       | `cm`                                                                                                                                                                                                                           |
+| **[View Next Month](#view-the-calendar-of-upcoming-month-nm)**         | `nm`                                                                                                                                                                                                                           |
+| **[Help](#viewing-help-help)**                                         | `help`                                                                                                                                                                                                                         |
+| **[Exit](#exiting-the-program-exit)**                                  | `exit`                                                                                                                                                                                                                         |
+* Go back to [Features](#features)
+  
