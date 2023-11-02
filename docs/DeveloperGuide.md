@@ -741,7 +741,7 @@ Use case ends.
 
 **MSS**
 1. User <ins>lists all contacts (UC2).</ins>
-2. User enters an index of the specified contact alongside with the amount of money paid/owed to that contact.
+2. User enters an index of the specified contact alongside the amount of money paid/owed to that contact.
 3. System records money paid/owed to the contact.
 4. System displays the contact with an indication of the money owed.<br>
 Use case ends.
