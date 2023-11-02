@@ -38,7 +38,7 @@ public class DeleteFieldCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Person> lastShownList = model.getFilteredPersonList();
+        List<Person> lastShownList = model.getDisplayedPersonList();
 
         if (this.indexOfPerson.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
@@ -50,7 +50,7 @@ public class DeleteFieldCommand extends Command {
         Person personWithFieldDeleted = descriptor.toPerson();
 
         model.setItem(personToDeleteField, personWithFieldDeleted);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        model.updateDisplayedPersonList(PREDICATE_SHOW_ALL_PERSONS, null);
         return new CommandResult(String.format(MESSAGE_DELETE_PERSON_FIELD_SUCCESS,
                 Messages.format(personWithFieldDeleted)));
     }
