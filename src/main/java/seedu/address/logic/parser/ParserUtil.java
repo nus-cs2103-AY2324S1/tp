@@ -318,8 +318,9 @@ public class ParserUtil {
             throw new ParseException("Invalid score, score must be non-negative integer.");
         }
         Tag tag = parseTag(tagScorePairArr[0], "");
-]        if (!ScoreList.isValidScoreTag(tag)) {
-            throw new ParseException("Invalid score tag, tag must contain interview or ta.");
+        if (!ScoreList.isValidScoreTag(tag)) {
+            throw new ParseException("Invalid score tag, tag must a tag of the category assessment (made using "
+                    + "the create command.");
         }
         Score score = parseScore(tagScorePairArr[1]);
         return new Pair<>(tag, score);

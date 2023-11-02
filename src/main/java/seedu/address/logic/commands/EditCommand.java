@@ -116,7 +116,6 @@ public class EditCommand extends Command {
 
         // If there is a difference in tags, delete all those that are not in current updated tags
         for (Tag tag : newScoreList.getTagsWithScore()) {
-            System.out.println(tag);
             if (!newTags.contains(tag)) {
                 newScoreList.removeScore(tag);
             }
@@ -126,7 +125,7 @@ public class EditCommand extends Command {
 
     private boolean containsIllegalTagScore(Person person) throws CommandException {
         Set<Tag> currentTags = person.getTags();
-        List<Tag> tagsWithScore =  person.getScoreList().getTagsWithScore();
+        List<Tag> tagsWithScore = person.getScoreList().getTagsWithScore();
         for (Tag tag : tagsWithScore) {
             if (!currentTags.contains(tag)) {
                 throw new CommandException(Messages.MESSAGE_ILLEGAL_TAG_SCORE);
@@ -179,16 +178,6 @@ public class EditCommand extends Command {
         oldScoreList.updateScoreList(newTag, newScore);
         return oldScoreList;
 
-    }
-    private boolean containsIllegalTagScore(Person person) throws CommandException {
-        Set<Tag> currentTags = person.getTags();
-        List<Tag> tagsWithScore = person.getScoreList().getTagsWithScore();
-        for (Tag tag : tagsWithScore) {
-            if (!currentTags.contains(tag)) {
-                throw new CommandException(Messages.MESSAGE_ILLEGAL_TAG_SCORE);
-            }
-        }
-        return false;
     }
 
     @Override

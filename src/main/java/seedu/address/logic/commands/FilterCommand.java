@@ -1,5 +1,9 @@
 package seedu.address.logic.commands;
 
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+
+import java.util.List;
+
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -7,10 +11,6 @@ import seedu.address.model.person.Person;
 import seedu.address.model.statistics.StatisticMetric;
 import seedu.address.model.statistics.SummaryStatistic;
 import seedu.address.model.tag.Tag;
-
-import java.util.List;
-
-import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 /**
  * Filters the list of users by the given metric and value.
@@ -22,10 +22,10 @@ public class FilterCommand extends Command {
             + "score, mean, median, percentile";
     public static final String MESSAGE_INVALID_VALUE = "Invalid value provided. Needs to be a non negative integer "
             + "that is more than or equal to 0";
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Filters the list of users whose value is greater " +
-            "or equal to the value provided for the given metric and tag. \n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Filters the list of users whose value is greater "
+            + "or equal to the value provided for the given metric and tag. \n"
             + "Parameters: "
-            + "t/TAG  (Tag must be a non-empty name), "
+            + "t/TAG  (Tag must be a non-empty name of type assessment), "
             + "met/METRIC  (Metric must be one of: score, mean, median, percentile), "
             + "val/VALUE (Value must be a non-negative integer, OPTIONAL for mean and median \n"
             + "Example: " + COMMAND_WORD + " " + "t/Interview met/SCORE val/50"
@@ -73,6 +73,11 @@ public class FilterCommand extends Command {
         return false;
     }
 
+    /**
+     * Returns the success message for the filter command.
+     * @param numberOfPeople number of people in the filtered list
+     * @return success message for the filter command
+     */
     public String successMessage(int numberOfPeople) {
         String message = String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, numberOfPeople)
                 + "\n"

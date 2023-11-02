@@ -1,5 +1,8 @@
 package seedu.address.model.statistics;
 
+/**
+ * Represents the different metrics that can be used to calculate the statistics.
+ */
 public enum StatisticMetric {
 
     SCORE("SCORE"),

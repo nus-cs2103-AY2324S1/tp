@@ -14,6 +14,7 @@ import seedu.address.model.person.Score;
 import seedu.address.model.person.ScoreList;
 import seedu.address.model.statistics.StatisticMetric;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.tag.UniqueTagList;
 
 
 /**
@@ -30,23 +31,24 @@ public class FilterCommandParser implements Parser<FilterCommand> {
      */
     public FilterCommand parse(String args) throws ParseException {
         requireNonNull(args);
+        UniqueTagList uniqueTagList = new UniqueTagList();
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_TAG, PREFIX_METRIC, PREFIX_VALUE);
 
 
         if (!(argMultimap.getValue(PREFIX_TAG).isPresent() && argMultimap.getValue(PREFIX_METRIC).isPresent())) {
-            throw new ParseException(String.format(FilterCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format("Incomplete parameter inputs. t/TAG and met/SCORE are compulsory"
+                    + "fields. \n" + FilterCommand.MESSAGE_USAGE));
         }
-
-        if (!(Tag.isValidTagName(argMultimap.getValue(PREFIX_TAG).orElse(""))
-                && ScoreList.isValidScoreTag(new Tag(argMultimap.getValue(PREFIX_TAG).get())))) {
+        String tagName = argMultimap.getValue(PREFIX_TAG).orElse("");
+        if (!(Tag.isValidTagName(tagName)
+                && ScoreList.isValidScoreTag(uniqueTagList.getTag(tagName, "assessment")))) {
             throw new ParseException(String.format(FilterCommand.MESSAGE_INVALID_TAG));
         }
 
         if (!StatisticMetric.isValidMetric(argMultimap.getValue(PREFIX_METRIC).orElse(""))) {
             throw new ParseException(String.format(FilterCommand.MESSAGE_INVALID_METRIC));
         }
-
-        Tag tag = new Tag(argMultimap.getValue(PREFIX_TAG).get());
+        Tag tag = new Tag(argMultimap.getValue(PREFIX_TAG).get(), "assessment");
         StatisticMetric metric = StatisticMetric.valueOf(argMultimap.getValue(PREFIX_METRIC).get().toUpperCase());
 
         if (!StatisticMetric.isScoreRelevant(argMultimap.getValue(PREFIX_METRIC).orElse(""))) {
@@ -54,7 +56,8 @@ public class FilterCommandParser implements Parser<FilterCommand> {
         }
 
         if (!argMultimap.getValue(PREFIX_VALUE).isPresent()) {
-            throw new ParseException(String.format(FilterCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format("val/VALUE is missing, it is compulsory. \n"
+                    + FilterCommand.MESSAGE_USAGE));
         }
 
         try {
