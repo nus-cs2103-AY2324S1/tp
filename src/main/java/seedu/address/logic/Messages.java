@@ -1,11 +1,16 @@
 package seedu.address.logic;
 
+import java.time.format.DateTimeFormatter;
+import java.util.Formatter;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import javafx.collections.ObservableList;
 import seedu.address.logic.parser.Prefix;
+import seedu.address.model.calendar.Calendar;
 import seedu.address.model.event.Event;
+import seedu.address.model.event.EventDescription;
 import seedu.address.model.person.Person;
 import seedu.address.model.task.Task;
 
@@ -51,6 +56,29 @@ public class Messages {
                 .append(person.getAddress())
                 .append("; Tags: ");
         person.getTags().forEach(builder::append);
+        return builder.toString();
+    }
+
+    /**
+     * Formats the {@code person} for display to the user.
+     */
+    public static String formatCalendar(Person person) {
+        final StringBuilder builder = new StringBuilder();
+        ObservableList<Event> eventList = person.getCalendar().getEventList();
+        builder.append(person.getName());
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        for (int i = 0; i < eventList.size(); i++) {
+            Event event = eventList.get(i);
+            String eventDescription = event.getDescription().getDescription();
+            String startTime = formatter.format(event.getEventPeriod().getStart());
+            String endTime = formatter.format(event.getEventPeriod().getEnd());
+            builder.append(";\n")
+                    .append(eventDescription)
+                    .append(" ")
+                    .append(startTime)
+                    .append(" ")
+                    .append(endTime);
+        }
         return builder.toString();
     }
 

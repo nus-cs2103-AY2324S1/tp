@@ -53,12 +53,14 @@ public class EditContactEventCommandTest {
         indexArrayList.add(INDEX_FIRST_EVENT);
         EditContactEventCommand editContactEventCommand = new EditContactEventCommand(indexArrayList, descriptor);
 
-        String expectedMessage = String.format(EditContactEventCommand.MESSAGE_EDIT_PERSON_SUCCESS,
-                Messages.format(editedPerson));
-
         EventDescription newDescription = new EventDescription("Nap");
         EventPeriod newEventPeriod = new EventPeriod(startTime, endTime);
         Event newEvent = new Event(newDescription, newEventPeriod);
+
+        Event editEvent = new Event(expectedEventDescription, newEventPeriod);
+        editedPerson.getCalendar().getEventList().set(0, editEvent);
+        String expectedMessage = String.format(EditContactEventCommand.MESSAGE_EDIT_PERSON_SUCCESS,
+                Messages.formatCalendar(editedPerson));
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()),
                 model.getCalendar(), model.getTaskManager(), new UserPrefs());
