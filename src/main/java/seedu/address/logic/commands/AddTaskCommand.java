@@ -36,7 +36,6 @@ public class AddTaskCommand extends Command {
             throw new CommandException("Lesson index out of bounds!");
         }
         model.addTask(task, lessonIndex);
-        model.updateFullTaskList();
         model.resetAllShowFields();
         return new CommandResult(String.format("New task added to lesson with index "
                 + index.getOneBased() + ": " + task.toString()));
