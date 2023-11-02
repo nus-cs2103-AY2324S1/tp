@@ -55,7 +55,6 @@ public class EditContactEventCommandTest {
 
         EventDescription newDescription = new EventDescription("Nap");
         EventPeriod newEventPeriod = new EventPeriod(startTime, endTime);
-        Event newEvent = new Event(newDescription, newEventPeriod);
 
         Event editEvent = new Event(expectedEventDescription, newEventPeriod);
         editedPerson.getCalendar().getEventList().set(0, editEvent);
@@ -64,8 +63,6 @@ public class EditContactEventCommandTest {
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()),
                 model.getCalendar(), model.getTaskManager(), new UserPrefs());
-        model.getAddressBook().getPersonList().get(INDEX_FIRST_PERSON.getOneBased()).getCalendar()
-                .getEventList().add(newEvent);
         expectedModel.setPerson(model.getFilteredPersonList().get(0), editedPerson);
 
         assertCommandSuccess(editContactEventCommand, model, expectedMessage, expectedModel);
