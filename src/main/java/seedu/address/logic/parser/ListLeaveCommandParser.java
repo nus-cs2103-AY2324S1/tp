@@ -28,12 +28,14 @@ public class ListLeaveCommandParser implements Parser<ListLeaveCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListLeaveCommand.MESSAGE_USAGE));
         }
 
-        if (argMultimap.getValue(PREFIX_ON).isEmpty()) {
+        String dateToParse = argMultimap.getValue(PREFIX_ON).get();
+
+        if (dateToParse.isEmpty()) {
             throw new ParseException(ListLeaveCommand.MISSING_DATE);
         }
 
         LocalDate focusedDate;
-        focusedDate = ParserUtil.parseDate(argMultimap.getValue(PREFIX_ON).get());
+        focusedDate = ParserUtil.parseDate(dateToParse);
         return new ListLeaveCommand(focusedDate);
     }
 
