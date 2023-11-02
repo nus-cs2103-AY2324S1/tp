@@ -9,7 +9,6 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Duration;
-import seedu.address.model.FreeTime;
 import seedu.address.model.TimeIntervalList;
 import seedu.address.model.TimeInterval;
 import seedu.address.model.person.Person;
@@ -20,7 +19,7 @@ import java.util.stream.Stream;
  * Class representing a group
  */
 public class Group {
-    public static final String MESSAGE_CONSTRAINTS = "Group names should be alphanumeric and must not be black";
+    public static final String MESSAGE_CONSTRAINTS = "Group names should be alphanumeric and must not be blank";
     private final ObservableList<Person> listOfGroupMates = FXCollections.observableArrayList();
     private final String groupName;
     private GroupRemark groupRemark;
@@ -66,9 +65,6 @@ public class Group {
         return groupName;
     }
 
-    public ObservableList<Person> getGroupMates() {
-        return listOfGroupMates;
-    }
     /**
      * Converts the internal list to streams.
      *
@@ -155,11 +151,6 @@ public class Group {
             .toString();
     }
 
-    //need remove
-    public void printGrpMates() {
-        this.listOfGroupMates.forEach(x -> System.out.println(x.getName()));
-    }
-
     public ObservableList<Person> getListOfGroupMates() {
         return this.listOfGroupMates;
     }
@@ -179,10 +170,6 @@ public class Group {
         return this.groupName.equals(otherGroup.getGroupName());
     }
 
-//    public Stream<Person> grpMatesStream() {
-//        return listOfGroupMates.stream();
-//    }
-//
     public GroupRemark getGroupRemark() {
         return this.groupRemark;
     }
