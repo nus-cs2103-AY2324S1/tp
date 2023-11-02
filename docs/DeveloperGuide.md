@@ -628,7 +628,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 1. User enters information of the new contact to be added.
-2. System shows a list of all contacts. <br>
+2. System adds the new contact into its system. <br>
    Use case ends.
 
 **Extensions**
@@ -642,7 +642,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 1. User requests list all contacts.
-2. System adds the new contact into its system. <br>
+2. System shows a list of all contacts. <br>
 Use case ends.
 
 **Extensions**
