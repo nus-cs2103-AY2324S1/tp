@@ -16,15 +16,15 @@ public abstract class FilterCommand extends Command {
     public static final String COMMAND_WORD = "filter";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Filters all persons by a specified field (course, specialisation, or grad year)"
+            + ": Filters all persons by a specified field (course, tag, specialisation, or grad year)"
             + " and returns a list of contacts that contain the specified keywords.\n"
-            + "Course and grad year can be additionally filtered to exclude contacts"
-            + " who have finished the course or graduated.\n"
+            + "Course can be additionally filtered to exclude contacts"
+            + " who have finished the course.\n"
             + "Parameters: "
             + CliSyntax.PREFIX_FILTER_FIELD + " FIELD "
             + CliSyntax.PREFIX_FILTER_ARGS + " ARGS "
             + "[" + CliSyntax.PREFIX_FILTER_FIN + " true/false (false by default)]\n"
-            + "Example: " + COMMAND_WORD + " /with a b c /taken false";
+            + "Example: " + COMMAND_WORD + " /by course /with a b c /taken false";
 
     public static final String MESSAGE_EXCL_FIN = "\n(excluding contacts who have finished taking)";
     public static final String MESSAGE_PERSONS_FOUND_OVERVIEW = "\n(%1$s contacts found)";

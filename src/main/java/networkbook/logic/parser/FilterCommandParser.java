@@ -25,7 +25,7 @@ import networkbook.model.person.filter.TagsContainKeyTermsPredicate;
 public class FilterCommandParser implements Parser<FilterCommand> {
     public static final String MISSING_FIELD = "Filter command must have a /by and /with field, and both fields cannot"
             + " be empty!";
-    public static final String UNKNOWN_FIELD = "Can only filter by spec, course, or grad year!";
+    public static final String UNKNOWN_FIELD = "Can only filter by spec, course, tag, or grad year!";
 
     /**
      * Parses the given string of arguments
