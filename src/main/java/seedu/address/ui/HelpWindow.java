@@ -20,6 +20,7 @@ public class HelpWindow extends UiPart<Stage> {
 
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
     private static final String FXML = "HelpWindow.fxml";
+    private static String toCopy = USERGUIDE_URL;
 
     @FXML
     private Button copyButton;
@@ -43,6 +44,43 @@ public class HelpWindow extends UiPart<Stage> {
     public HelpWindow() {
         this(new Stage());
     }
+
+    /**
+     * Sets the text on the help window.
+     * @param helpText Text to display.
+     */
+    public void setHelpText(String helpText) {
+        helpMessage.setText(helpText);
+    }
+
+    /**
+     * Resets the text on the help window.
+     */
+    public void resetHelpText() {
+        helpMessage.setText(HELP_MESSAGE);
+    }
+
+    /**
+     * Set button to copy the example.
+     */
+    public void setHelpCopy(String exampleCmd) {
+        // set the button to "Copy Help"
+        // Set the button's contents to the example.
+        copyButton.setText("Copy Example");
+        toCopy = exampleCmd;
+    }
+
+    /**
+     * Reset button to copy the User Guide URL.
+     */
+    public void resetHelpCopy() {
+        // set the button to "Copy Help"
+        // Set the button's contents to the example.
+        copyButton.setText("Copy User Guide URL");
+        toCopy = USERGUIDE_URL;
+
+    }
+
 
     /**
      * Shows the help window.
@@ -96,7 +134,7 @@ public class HelpWindow extends UiPart<Stage> {
     private void copyUrl() {
         final Clipboard clipboard = Clipboard.getSystemClipboard();
         final ClipboardContent url = new ClipboardContent();
-        url.putString(USERGUIDE_URL);
+        url.putString(toCopy);
         clipboard.setContent(url);
     }
 }

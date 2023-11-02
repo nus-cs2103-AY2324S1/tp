@@ -24,18 +24,7 @@ public class AddCommand extends Command {
 
     public static final String COMMAND_WORD = "add";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an employee to the ManageHR app. "
-            + "Parameters: "
-            + PREFIX_NAME + "NAME "
-            + PREFIX_PHONE + "PHONE "
-            + PREFIX_EMAIL + "EMAIL "
-            + PREFIX_ADDRESS + "ADDRESS "
-            + PREFIX_SALARY + "SALARY "
-            + PREFIX_LEAVE + "LEAVE "
-            + PREFIX_ROLE + "ROLE "
-            + "[" + PREFIX_MANAGER + "MANAGER]...\n"
-            + "[" + PREFIX_DEPARTMENT + "DEPARTMENT]...\n"
-            + "Example: " + COMMAND_WORD + " "
+    public static final String MESSAGE_EXAMPLE = COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
             + PREFIX_PHONE + "98765432 "
             + PREFIX_EMAIL + "johnd@example.com "
@@ -47,6 +36,20 @@ public class AddCommand extends Command {
             + PREFIX_MANAGER + "Tom "
             + PREFIX_DEPARTMENT + "investment "
             + PREFIX_DEPARTMENT + "logistics";
+
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an employee to the ManageHR app. "
+            + "Parameters: "
+            + PREFIX_NAME + "NAME "
+            + PREFIX_PHONE + "PHONE "
+            + PREFIX_EMAIL + "EMAIL "
+            + PREFIX_ADDRESS + "ADDRESS "
+            + PREFIX_SALARY + "SALARY "
+            + PREFIX_LEAVE + "LEAVE "
+            + PREFIX_ROLE + "ROLE "
+            + "[" + PREFIX_MANAGER + "MANAGER]...\n"
+            + "[" + PREFIX_DEPARTMENT + "DEPARTMENT]...\n"
+            + "Example: " + MESSAGE_EXAMPLE + " ";
+
 
     public static final String MESSAGE_SUCCESS = "New employee added: %1$s";
     public static final String MESSAGE_DUPLICATE_EMPLOYEE = "This employee already exists in the ManageHR app";
