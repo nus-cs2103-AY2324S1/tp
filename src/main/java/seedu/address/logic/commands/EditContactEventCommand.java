@@ -21,7 +21,7 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.calendar.Calendar;
+import seedu.address.model.calendar.UniMateCalendar;
 import seedu.address.model.event.Event;
 import seedu.address.model.event.EventDescription;
 import seedu.address.model.event.EventPeriod;
@@ -110,9 +110,9 @@ public class EditContactEventCommand extends Command {
         Email updatedEmail = personToEdit.getEmail();
         Address updatedAddress = personToEdit.getAddress();
         Set<Tag> updatedTags = personToEdit.getTags();
-        Calendar calendar = personToEdit.getCalendar();
+        UniMateCalendar calendar = personToEdit.getCalendar();
         List<Event> eventList = updateEventList(calendar, eventIndex, editEventDescriptor);
-        Calendar updatedCalendar = new Calendar();
+        UniMateCalendar updatedCalendar = new UniMateCalendar();
         for (Event e: eventList) {
             updatedCalendar.addEvent(e);
         }
@@ -126,7 +126,7 @@ public class EditContactEventCommand extends Command {
      *
      * @return The updated event list.
      */
-    public static List<Event> updateEventList(Calendar calendar, Index eventIndex,
+    public static List<Event> updateEventList(UniMateCalendar calendar, Index eventIndex,
                                              EditEventDescriptor editEventDescriptor) throws CommandException {
         ObservableList<Event> eventList = calendar.getEventManager().asUnmodifiableObservableList();
         Event updateEvent;
@@ -171,7 +171,7 @@ public class EditContactEventCommand extends Command {
      * corresponding field value of the calendar of the person.
      */
     public static class EditEventDescriptor {
-        private Calendar calendar;
+        private UniMateCalendar calendar;
         private Event event;
         private EventDescription eventDescription;
         private EventPeriod eventPeriod;

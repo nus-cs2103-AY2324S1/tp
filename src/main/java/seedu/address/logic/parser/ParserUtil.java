@@ -71,7 +71,9 @@ public class ParserUtil {
         arrayList.add(Index.fromOneBased(Integer.parseInt(trimmedIndex1)));
         arrayList.add(Index.fromOneBased(Integer.parseInt(trimmedIndex2)));
         return arrayList;
+    }
 
+    /**
      * Wrapped version of parseIndex that throws a RuntimeException instead.
      *
      * @param oneBasedIndex index integer to be converted into Index object.
