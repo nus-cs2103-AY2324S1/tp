@@ -15,7 +15,7 @@ import seedu.address.storage.ReportStorage;
 
 /**
  * Reports the performance metrics (overtime hours, overtime pay, number of leaves) of an employee in the address book.
- * Downloads the report as a PDF file.
+ * Downloads the report as a text file.
  */
 public class ReportCommand extends Command {
 
