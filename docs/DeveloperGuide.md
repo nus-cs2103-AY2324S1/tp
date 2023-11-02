@@ -710,7 +710,7 @@ Use case ends.
 
 **MSS**
 1. User <ins>lists all contacts (UC2).</ins>
-2. User enters an index to add a note associated with a contact
+2. User enters an index of the specified contact alongside the note to be added.
 3. System adds the note to the contact.<br>
 Use case ends.
 
@@ -727,19 +727,19 @@ Use case ends.
 **MSS**
 1. User <ins>lists all contacts (UC2).</ins>
 2. User enters an index of the specified contact alongside with the amount of money paid/owed to that contact.
-3. System records money paid to the contact.
+3. System records money paid/owed to the contact.
 4. System displays the contact with an indication of the money owed.<br>
 Use case ends.
 
 **Extensions**
 * 2a. System detects an invalid index entered.
   * 2a1. System shows an error message.
-  * 2a2. User tries to record a payment to a contact again.<br>
+  * 2a2. User enters a new payment request.<br>
   Steps 2a1- 2a2 are repeated until the data entered is correct. <br>
   Use case resumes from step 3.
 * 2b. System detects an invalid payment amount entered.
   * 2b1. System shows an error message.
-  * 2b2. User tries to record a payment to a contact again.<br>
+  * 2b2. User enters a new payment request.<br>
   Steps 2b1- 2b2 are repeated until the data entered is correct. <br>
   Use case resumes from step 3.
 
@@ -753,7 +753,7 @@ Use case ends.
 **Extensions**
 * 1a. System detects an invalid search criteria.
   * 1a1. System shows an error message.
-  * 1a2. User tries to enter a search criteria to find a contact.<br>
+  * 1a2. User enters a new search request.<br>
   Steps 1a1 - 1a2 are repeated until the data entered is correct.<br>
   Use case resumes from step 2.
 
