@@ -1,6 +1,7 @@
 package seedu.address.logic;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
@@ -24,10 +25,12 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
+import seedu.address.commons.exceptions.DataLoadingException;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.CommandType;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.commands.ViewExitCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -50,6 +53,7 @@ public class LogicManagerTest {
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
     private Logic logic;
+    private Model backupModel;
 
     @BeforeEach
     public void setUp() {
@@ -58,6 +62,7 @@ public class LogicManagerTest {
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(temporaryFolder.resolve("userPrefs.json"));
         StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
         logic = new LogicManager(model, storage);
+        backupModel = new ModelManager(model.getAddressBook(), new UserPrefs());
     }
 
     @Test
@@ -71,6 +76,7 @@ public class LogicManagerTest {
         String deleteCommand = "delete 9";
         assertCommandException(deleteCommand, MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
+
 
     @Test
     public void execute_validCommand_success() throws Exception {
@@ -91,14 +97,16 @@ public class LogicManagerTest {
     }
 
     @Test
-    public void execute_getIsViewCommandMethod_success() throws CommandException, ParseException {
+    public void execute_getIsViewCommandMethod_success() throws CommandException, ParseException, DataLoadingException,
+            IOException {
         String viewCommand = "view 1";
         CommandResult parsedCommand = logic.execute(viewCommand);
         assertTrue(logic.getIsViewCommand());
     }
 
     @Test
-    public void execute_getIsViewExitCommandMethod_success() throws CommandException, ParseException {
+    public void execute_getIsViewExitCommandMethod_success() throws CommandException, ParseException,
+            DataLoadingException, IOException {
         String viewCommand = "view 1";
         String viewExitCommand = "exit";
         CommandResult parsedViewCommand = logic.execute(viewCommand);
@@ -128,8 +136,38 @@ public class LogicManagerTest {
         assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredPersonList().remove(0));
     }
 
+    @Test
+    public void execute_undoCommand_success() throws CommandException, ParseException, DataLoadingException,
+            IOException {
+        String deleteCommand = "delete 1";
+        logic.execute(deleteCommand);
+
+        String undoCommand = "undo";
+        CommandResult undoResult = logic.execute(undoCommand);
+
+        assertEquals(undoResult.getFeedbackToUser(), UndoCommand.MESSAGE_SUCCESS);
+        assertEquals(model, backupModel);
+    }
+
+    @Test
+    public void execute_nonUndoCommand_success() throws CommandException, ParseException, DataLoadingException,
+            IOException {
+        // Execute a command that modifies the model
+        String deleteCommand = "delete 1";
+        logic.execute(deleteCommand);
+
+        String nonUndoCommand = "list";
+        CommandResult nonUndoResult = logic.execute(nonUndoCommand);
+        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        assertNotEquals(nonUndoResult.getFeedbackToUser(), UndoCommand.MESSAGE_SUCCESS);
+        assertEquals(model.getAddressBook(), expectedModel.getAddressBook());
+    }
+
+
+
+
     private void assertAddressBookCommandSuccess(String inputCommand, String expectedMessage,
-            Model expectedModel) throws CommandException, ParseException {
+            Model expectedModel) throws CommandException, ParseException, DataLoadingException, IOException {
         CommandResult result = logic.execute(inputCommand);
         assertEquals(expectedMessage, result.getFeedbackToUser());
         assertEquals(expectedModel, model);
@@ -143,7 +181,8 @@ public class LogicManagerTest {
      * - the internal model manager state is the same as that in {@code expectedModel} <br>
      */
     private void assertViewModeCommandSuccess(String inputCommand, String expectedMessage,
-                                                 Model expectedModel) throws CommandException, ParseException {
+                                                 Model expectedModel) throws CommandException, ParseException,
+            DataLoadingException, IOException {
         String viewCommand = "view 1";
         CommandResult viewCommandResult = logic.execute(viewCommand);
         CommandResult result = logic.executeInView(
@@ -163,7 +202,7 @@ public class LogicManagerTest {
      * @see #assertCommandFailure(String, Class, String, Model)
      */
     private void assertCommandSuccess(String inputCommand, String expectedMessage,
-            Model expectedModel) throws CommandException, ParseException {
+            Model expectedModel) throws CommandException, ParseException, DataLoadingException, IOException {
         CommandResult result = logic.execute(inputCommand);
         assertEquals(expectedMessage, result.getFeedbackToUser());
         assertEquals(expectedModel, model);
@@ -214,7 +253,7 @@ public class LogicManagerTest {
      * @see #assertViewModeCommandFailure(String, Class, String, Model)
      */
     private void assertViewModeParseException(String inputCommand, String expectedMessage)
-            throws CommandException, ParseException {
+            throws CommandException, ParseException, DataLoadingException, IOException {
         String viewCommand = "view 1";
         CommandResult viewCommandResult = logic.execute(viewCommand);
         assertViewModeCommandFailure(inputCommand, ParseException.class, expectedMessage);

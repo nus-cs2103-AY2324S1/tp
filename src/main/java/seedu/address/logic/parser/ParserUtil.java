@@ -206,4 +206,8 @@ public class ParserUtil {
         }
         return new Housing(trimmedHousing);
     }
+
+    public static String parseSimpleString(String confirmation) throws ParseException {
+        return confirmation.trim();
+    }
 }
