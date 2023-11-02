@@ -77,13 +77,13 @@ Adds a new contact.
 **Format:**
 `add n/NAME p/PHONE_NUMBER e/EMAIL [o/NOTE] [t/TAG]... [a/ALTERNATE_CONTACT]...`
 
-<div markdown="span" class="alert alert-primary">
-:bulb: **About tags:**
+<div markdown="span" class="alert alert-info">
+:information_source: **About tags:**
 Duplicate tags are only counted once.
 </div>
 
-<div markdown="span" class="alert alert-primary">
-:bulb: **About the alternate contact format:**
+<div markdown="span" class="alert alert-info">
+:information_source: **About the alternate contact format:**
 The format for `ALTERNATE_CONTACT` is `TYPE: USERNAME`, roughly looking like `SocialMedia: Username`.
 </div>
 
@@ -99,14 +99,14 @@ Edits an existing contact at the specified `INDEX`.
 **Format:**
 `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [o/NOTE] [t/TAG]... [a/ALTERNATE_CONTACT]...`
 
-<div markdown="span" class="alert alert-primary">
-:bulb: **About index numbers:**
+<div markdown="span" class="alert alert-info">
+:information_source: **About index numbers:**
 `INDEX` refers to the index number currently shown in the displayed contact list (#1, #2, #3 etc.).
 Indices must be a positive integer to be valid (1, 2, 3 etc.), and must exist in the displayed contact list.
 </div>
 
-<div markdown="span" class="alert alert-primary">
-:bulb: **About tags/the alternate contact format:**
+<div markdown="span" class="alert alert-info">
+:information_source: **About tags/the alternate contact format:**
 Please refer to the [above](#adding-a-contact-add).
 </div>
 
@@ -132,8 +132,8 @@ Deletes the contact(s) at the specified `INDEX` or indices.
 **Format:**
 `delete INDEX...`
 
-<div markdown="span" class="alert alert-primary">
-:bulb: **About index numbers:**
+<div markdown="span" class="alert alert-info">
+:information_source: **About index numbers:**
 Please refer to the [above](#editing-a-contact-edit).
 </div>
 
