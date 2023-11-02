@@ -2,6 +2,7 @@ package seedu.classmanager.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.classmanager.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.classmanager.logic.parser.ArgumentMultimap.areAdditionalPrefixesPresent;
 import static seedu.classmanager.logic.parser.CliSyntax.PREFIX_STUDENT_NUMBER;
 import static seedu.classmanager.logic.parser.CliSyntax.PREFIX_TUTORIAL_INDEX;
 
@@ -27,7 +28,8 @@ public class MarkPresentCommandParser implements Parser<MarkPresentCommand> {
                 PREFIX_STUDENT_NUMBER);
 
         if (!argMultimap.arePrefixesPresent(PREFIX_TUTORIAL_INDEX, PREFIX_STUDENT_NUMBER)
-                || !argMultimap.getPreamble().isEmpty()) {
+                || !argMultimap.getPreamble().isEmpty()
+                || areAdditionalPrefixesPresent(args, PREFIX_TUTORIAL_INDEX, PREFIX_STUDENT_NUMBER)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, MarkPresentCommand.MESSAGE_USAGE));
         }
 

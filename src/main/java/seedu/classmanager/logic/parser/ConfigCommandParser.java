@@ -2,6 +2,7 @@ package seedu.classmanager.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.classmanager.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.classmanager.logic.parser.ArgumentMultimap.areAdditionalPrefixesPresent;
 import static seedu.classmanager.logic.parser.CliSyntax.PREFIX_ASSIGNMENT_COUNT;
 import static seedu.classmanager.logic.parser.CliSyntax.PREFIX_TUTORIAL_COUNT;
 
@@ -25,7 +26,8 @@ public class ConfigCommandParser implements Parser<ConfigCommand> {
         requireNonNull(args);
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_TUTORIAL_COUNT, PREFIX_ASSIGNMENT_COUNT);
         if (!argMultimap.arePrefixesPresent(PREFIX_TUTORIAL_COUNT, PREFIX_ASSIGNMENT_COUNT)
-                || !argMultimap.getPreamble().isEmpty()) {
+                || !argMultimap.getPreamble().isEmpty()
+                || areAdditionalPrefixesPresent(args, PREFIX_TUTORIAL_COUNT, PREFIX_ASSIGNMENT_COUNT)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ConfigCommand.MESSAGE_USAGE));
         }
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_TUTORIAL_COUNT, PREFIX_ASSIGNMENT_COUNT);

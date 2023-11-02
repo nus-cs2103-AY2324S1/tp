@@ -2,6 +2,7 @@ package seedu.classmanager.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.classmanager.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.classmanager.logic.parser.ArgumentMultimap.areAdditionalPrefixesPresent;
 import static seedu.classmanager.logic.parser.CliSyntax.PREFIX_STUDENT_NUMBER;
 import static seedu.classmanager.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.classmanager.logic.parser.CliSyntax.PREFIX_WILDCARD;
@@ -37,7 +38,9 @@ public class TagCommandParser implements Parser<TagCommand> {
                 PREFIX_TAG, PREFIX_WILDCARD, PREFIX_STUDENT_NUMBER);
 
         String number = argMultimap.getValue(PREFIX_STUDENT_NUMBER).orElse("");
-        if (!StudentNumber.isValidStudentNumber(number)) {
+        if (!StudentNumber.isValidStudentNumber(number)
+                || !argMultimap.getPreamble().isEmpty()
+                || areAdditionalPrefixesPresent(args, PREFIX_TAG, PREFIX_WILDCARD, PREFIX_STUDENT_NUMBER)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     TagCommand.MESSAGE_TAG_FAILED + TagCommand.MESSAGE_USAGE));
         }

@@ -38,9 +38,10 @@ management tasks done faster than traditional GUI apps.
    * `exit` : Exits the app.
 
 6. To begin using Class Manager, configure Class Manager with your module information using the `config` command. For example: 
-   * `config #t/13 #a/1` configures Class Manager to have 13 tutorials and 1 assignment.
+   * `config #t/10 #a/1` configures Class Manager to have 10 tutorials and 1 assignment.
 
-7. That's it! You can now explore Class Manager! Refer to the [Commands](#commands) below for details of each command.
+7. That's it! You can now explore Class Manager! Refer to the [Commands](#commands) below for details of each command. <br>
+   You can also refer to the [Command Summary](#command-summary-in-alphabetical-order).
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -75,8 +76,12 @@ The **GUI** is split up into 4 main sections.
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME c/CLASS_NUMBER`, `c/CLASS_NUMBER n/NAME` is also acceptable.
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
+* Extraneous parameters for commands that **do not** take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
+
+* Extraneous parameters for commands that **do** take in parameters will be considered as invalid. <br>
+  e.g. if the command specifies `delete 123 s/A0249112A` or `delete s/A0249112A c/t11`, it will be considered as invalid. <br>
+  Please **<u>refrain</u>** from using prefixes as input under another prefix.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </box>
@@ -114,7 +119,7 @@ Examples:
 
 Shows a message explaining how to access the help page.
 
-<img alt="help message" src="images/helpMessage.png" width="600">
+<img alt="help message" src="images/helpMessage.png" width="900">
 
 Format: `help`
 
@@ -157,6 +162,12 @@ Format: `list`
 Edits an existing student in the class manager.
 
 Format: `edit STUDENT_NUMBER [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [s/NEW_STUDENT_NUMBER] [c/CLASS_NUMBER]`
+
+<box type="warning" seamless>
+
+**Caution:**
+The student number entered __without__ the `s/` prefix will be the **old** student number.
+</box>
 
 * Edits the student with the student number `STUDENT_NUMBER`.
 * The STUDENT_NUMBER must be valid and exist.
@@ -474,8 +485,6 @@ Example:
 
 <img alt="load_outcome" src="images/load-outcome.png" width="750"> <br><br>
 
-<img alt="sample_contents" src="images/sample-contents.png" width="750"> <br><br>
-
 ---
 
 ### Toggling color themes: `theme`
@@ -484,10 +493,10 @@ Toggles between light and dark color themes.
 
 Format: `theme`
 ##### Dark theme
-<img alt="theme_dark" src="images/theme-dark.png" width="600" > <br><br>
+<img alt="theme_dark" src="images/theme-dark.png" width="700" > <br><br>
 
 ##### Light theme
-<img alt="theme_light" src="images/theme-light.png" width="600" >
+<img alt="theme_light" src="images/theme-light.png" width="700" >
 
 ---
 
@@ -509,38 +518,38 @@ Format: `theme`
 ## Command summary (in alphabetical order)
 
 ### Useful commands
-| Action                      | Format, Examples                                                            |
-|-----------------------------|-----------------------------------------------------------------------------|
-| **Configure Class Manager** | `config #t/TUTORIAL_COUNT #a/ASSIGNMENT_COUNT`<br> e.g. `config #t/10 #a/3` |
-| **Open help window**        | `help`                                                                      |
+| Action                                                           | Format, Examples                                                            |
+|------------------------------------------------------------------|-----------------------------------------------------------------------------|
+| [**Configure Class Manager**](#configuring-class-manager-config) | `config #t/TUTORIAL_COUNT #a/ASSIGNMENT_COUNT`<br> e.g. `config #t/10 #a/3` |
+| [**Open help window**](#viewing-help-help)                       | `help`                                                                      |
 
 ### Core commands without parameters
-| Action                   | Format, Examples |
-|--------------------------|------------------|
-| **Clear student list**   | `clear`          |
-| **Exit Class Manager**   | `exit`           |
-| **View command history** | `history`        |
-| **List all students**    | `list`           |
-| **Toggle theme**         | `theme`          |
+| Action                                                       | Format, Examples |
+|--------------------------------------------------------------|------------------|
+| [**Clear student list**](#clearing-all-entries-clear)        | `clear`          |
+| [**Exit Class Manager**](#exiting-the-application-exit)      | `exit`           |
+| [**View command history**](#viewing-command-history-history) | `history`        |
+| [**List all students**](#listing-all-student-details-list)   | `list`           |
+| [**Toggle theme**](#toggling-color-themes-theme)             | `theme`          |
 
 ### Core commands with parameters
-| Action                         | Format, Examples                                                                                                                                                    |
-|--------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**                        | `add n/NAME p/PHONE_NUMBER e/EMAIL c/CLASS_NUMBER s/STUDENT_NUMBER [t/TAG]…​` <br> e.g `add n/James Ho p/22224444 e/jamesho@example.com s/A0245234A c/T11 t/friend` |
-| **Comment**                    | `comment s/STUDENT_NUMBER c/COMMENT` <br> e.g. `comment s/A0249112A c/This student is very hardworking.`                                                            |
-| **Delete**                     | `delete s/STUDENT_NUMBER`<br> e.g. `delete s/A0249112A`                                                                                                             |
-| **Edit**                       | `edit STUDENT_NUMBER [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [s/NEW_STUDENT_NUMBER] [c/CLASS_NUMBER]`<br> e.g.`edit A0245234A n/John Bob p/98761234 e/johnd@exp.com`    |
-| **Lookup**                     | `lookup [c/CLASS_NUMBER] [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [s/STUDENT_NUMBER] [t/TAG]` <br> e.g. `lookup c/T11`                                                   |
-| **Load**                       | `load f/FILE_NAME`<br> e.g. `load f/sample`                                                                                                                         |
-| **Present**                    | `present s/STUDENT_NUMBER tut/TUTORIAL_INDEX` <br> e.g. `present s/A0245234A tut/1`                                                                                 |
-| **Absent**                     | `absent s/STUDENT_NUMBER tut/TUTORIAL_INDEX` <br> e.g. `absent s/A0245234A tut/1`                                                                                   |
-| **Present All**                | `present-all tut/TUTORIAL_INDEX` <br> e.g. `present-all tut/1`                                                                                                      |
-| **Absent All**                 | `absent-all tut/TUTORIAL_INDEX` <br> e.g. `absent-all tut/1`                                                                                                        |
-| **Random**                     | `random NUM_OF_STUDENTS` <br> e.g. `random 2`                                                                                                                       |
-| **Record Class participation** | `class-part s/STUDENT_NUMBER tut/TUTORIAL_INDEX part/PARTICIPATION_LEVEL` <br> e.g. `class-part s/A0245234A tut/1 part/true`                                        |
-| **Set Grade**                  | `grade s/STUDENT_NUMBER a/ASSIGNMENT_INDEX g/GRADE` <br> e.g. `grade s/A0245234A a/1 g/100`                                                                         |
-| **Tag**                        | `tag s/STUDENT_NUMBER [/add] [/delete] t/[TAG]…​` <br> e.g. `tag s/A0123456N t/smart t/shy`                                                                         |
-| **View**                       | `view s/STUDENT_NUMBER` <br> e.g. `view s/A0245234A`                                                                                                                |
+| Action                                                                                            | Format, Examples                                                                                                                                                    |
+|---------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| [**Add**](#adding-a-student-add)                                                                  | `add n/NAME p/PHONE_NUMBER e/EMAIL c/CLASS_NUMBER s/STUDENT_NUMBER [t/TAG]…​` <br> e.g `add n/James Ho p/22224444 e/jamesho@example.com s/A0245234A c/T11 t/friend` |
+| [**Comment**](#adding-comment-to-a-student-comment)                                               | `comment s/STUDENT_NUMBER c/COMMENT` <br> e.g. `comment s/A0249112A c/This student is very hardworking.`                                                            |
+| [**Delete**](#deleting-a-student-delete)                                                          | `delete s/STUDENT_NUMBER`<br> e.g. `delete s/A0249112A`                                                                                                             |
+| [**Edit**](#editing-a-student-edit)                                                               | `edit STUDENT_NUMBER [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [s/NEW_STUDENT_NUMBER] [c/CLASS_NUMBER]`<br> e.g.`edit A0245234A n/John Bob p/98761234 e/johnd@exp.com`    |
+| [**Lookup**](#lookup-students-lookup)                                                             | `lookup [c/CLASS_NUMBER] [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [s/STUDENT_NUMBER] [t/TAG]` <br> e.g. `lookup c/T11`                                                   |
+| [**Load**](#loading-the-data-file-load)                                                           | `load f/FILE_NAME`<br> e.g. `load f/sample`                                                                                                                         |
+| [**Present**](#marking-tutorial-attendance-for-a-student-as-present-present)                      | `present s/STUDENT_NUMBER tut/TUTORIAL_INDEX` <br> e.g. `present s/A0245234A tut/1`                                                                                 |
+| [**Absent**](#marking-tutorial-attendance-for-a-student-as-absent-absent)                         | `absent s/STUDENT_NUMBER tut/TUTORIAL_INDEX` <br> e.g. `absent s/A0245234A tut/1`                                                                                   |
+| [**Present All**](#marking-tutorial-attendance-for-all-students-displayed-as-present-present-all) | `present-all tut/TUTORIAL_INDEX` <br> e.g. `present-all tut/1`                                                                                                      |
+| [**Absent All**](#marking-tutorial-attendance-for-all-students-displayed-as-absent-absent-all)    | `absent-all tut/TUTORIAL_INDEX` <br> e.g. `absent-all tut/1`                                                                                                        |
+| [**Random**](#selecting-students-randomly-random)                                                 | `random NUM_OF_STUDENTS` <br> e.g. `random 2`                                                                                                                       |
+| [**Record Class Participation**](#record-class-participation-for-a-student-class-part)            | `class-part s/STUDENT_NUMBER tut/TUTORIAL_INDEX part/PARTICIPATION_LEVEL` <br> e.g. `class-part s/A0245234A tut/1 part/true`                                        |
+| [**Set Assignment Grade**](#setting-assignment-grade-for-a-student-grade)                         | `grade s/STUDENT_NUMBER a/ASSIGNMENT_INDEX g/GRADE` <br> e.g. `grade s/A0245234A a/1 g/100`                                                                         |
+| [**Tag**](#tagging-a-student-tag)                                                                 | `tag s/STUDENT_NUMBER [/add] [/delete] t/[TAG]…​` <br> e.g. `tag s/A0123456N t/smart t/shy`                                                                         |
+| [**View**](#view-a-student-s-class-details-view)                                                  | `view s/STUDENT_NUMBER` <br> e.g. `view s/A0245234A`                                                                                                                |
 
 --------------------------------------------------------------------------------------------------------------------
 
