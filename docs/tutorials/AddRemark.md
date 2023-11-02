@@ -8,7 +8,7 @@
 
 Let's walk you through the implementation of a new command — `remark`.
 
-This command allows users of the LoveBook application to add optional remarks to people in their height book and edit it if required. The command should have the following format:
+This command allows users of the LoveBook application to add optional remarks to people in their love book and edit it if required. The command should have the following format:
 
 `remark INDEX r/REMARK` (e.g., `remark 2 r/Likes baseball`)
 
@@ -298,7 +298,7 @@ While the changes to code may be minimal, the test data will have to be updated 
 
 <box type="warning" seamless>
 
-You must delete LoveBook’s storage file located at `/data/LoveBook.json` before running it! Not doing so will cause LoveBook to default to an empty height book!
+You must delete LoveBook’s storage file located at `/data/LoveBook.json` before running it! Not doing so will cause LoveBook to default to an empty love book!
 
 </box>
 

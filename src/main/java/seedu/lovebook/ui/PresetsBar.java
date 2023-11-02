@@ -56,7 +56,7 @@ public class PresetsBar extends UiPart<Region> {
     }
 
     /**
-     * Handles the Filter button pressed event.
+     * Handles the Set Preferences button pressed event.
      */
     @FXML
     public void handleSetPref() {
@@ -65,7 +65,7 @@ public class PresetsBar extends UiPart<Region> {
     }
 
     /**
-     * Handles the Filter button pressed event.
+     * Handles the Show Preferences button pressed event.
      */
     @FXML
     public void handleShowPref() {

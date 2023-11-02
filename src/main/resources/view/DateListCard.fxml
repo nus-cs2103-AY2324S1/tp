@@ -48,7 +48,7 @@
         </VBox>
       <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1">
          <children>
-            <ImageView fx:id="avatarImage" fitHeight="79.0" fitWidth="84.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="avatarImage" fitHeight="70" fitWidth="70" pickOnBounds="true" preserveRatio="true">
                <cursor>
                   <Cursor fx:constant="DEFAULT" />
                </cursor>
