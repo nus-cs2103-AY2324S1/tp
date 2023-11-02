@@ -1,6 +1,5 @@
 package seedu.application.logic.commands;
 
-import seedu.application.commons.core.index.Index;
 import seedu.application.model.Model;
 
 /**
@@ -17,6 +16,6 @@ public class HelpCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) {
-        return new CommandResult(SHOWING_HELP_MESSAGE, true, false, Index.fromZeroBased(0));
+        return new CommandResult(SHOWING_HELP_MESSAGE, true, false, -1);
     }
 }

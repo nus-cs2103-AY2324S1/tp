@@ -1,6 +1,5 @@
 package seedu.application.logic.commands;
 
-import seedu.application.commons.core.index.Index;
 import seedu.application.model.Model;
 
 /**
@@ -14,7 +13,7 @@ public class ExitCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) {
-        return new CommandResult(MESSAGE_EXIT_ACKNOWLEDGEMENT, false, true, Index.fromZeroBased(0));
+        return new CommandResult(MESSAGE_EXIT_ACKNOWLEDGEMENT, false, true, -1);
     }
 
 }
