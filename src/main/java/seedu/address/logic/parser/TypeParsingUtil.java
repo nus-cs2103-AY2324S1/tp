@@ -118,7 +118,8 @@ public class TypeParsingUtil {
             int day = TypeParsingUtil.parseNum(dayM.group(1), 1, findMaxDay(now.getYear(), now.getMonthValue()));
             return LocalDate.of(now.getYear(), now.getMonth(), day);
         } else {
-            throw new InvalidInputException(input + " is not a valid date");
+            throw new InvalidInputException(input
+                    + " is not a valid date, please use yyyy/mm/dd or mm/dd or dd");
         }
     }
 
