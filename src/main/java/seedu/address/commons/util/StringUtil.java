@@ -1,10 +1,10 @@
 package seedu.address.commons.util;
 
-import seedu.address.model.Model;
-import seedu.address.model.person.Person;
-
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
+
+import seedu.address.model.Model;
+import seedu.address.model.person.Person;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
