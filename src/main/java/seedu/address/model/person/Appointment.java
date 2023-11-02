@@ -26,6 +26,9 @@ import seedu.address.model.person.exceptions.BadAppointmentFormatException;
  */
 public class Appointment {
 
+    public static final Appointment TODAY =
+            new Appointment(LocalDate.now(), LocalTime.of(0, 0), LocalTime.of(23, 59));
+
     public static final String MESSAGE_CONSTRAINTS = "Appointment should be in the format "
             + "\"<Date> <Start Time> <End Time>\" and adhere to the following constraints:\n"
             + "1. Appointment should not be left blank. Remove this field if no Appointment is needed.\n"

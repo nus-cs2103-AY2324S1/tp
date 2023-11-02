@@ -2,6 +2,7 @@ package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.address.model.person.predicates.AppointmentOverlapsPredicate.PREDICATE_TODAY;
 
 import java.nio.file.Path;
 import java.util.Stack;
@@ -43,7 +44,8 @@ public class ModelManager implements Model {
         this.logBook = new LogBook();
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
-        loggedFilteredPersons = new FilteredList<>(this.logBook.getPersonList());
+        loggedFilteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        loggedFilteredPersons.setPredicate(PREDICATE_TODAY);
     }
 
     public ModelManager() {
