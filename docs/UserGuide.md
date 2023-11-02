@@ -276,6 +276,7 @@ a shorthand we have created is to use the field commands.
 For example, when we wish to change the lead field specifically
 
 Format: `lead INDEX hot`
+Example: lead 1 hot
 
 Or when we wish to change the email field
 
