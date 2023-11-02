@@ -194,23 +194,46 @@ Expected output when a command succeeds:
 * Output: `Listed all persons`
 * You should see a list of all persons under the Persons column.
 
-### Locating persons by name: `find`
+### Locating persons by name or group: `find_person`
 
-Finds persons whose names contain any of the given keywords.
+Find persons whose names or groups contain any of the given keywords.
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
 * The search is case-insensitive. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
 * Only full words will be matched e.g. `Han` will not match `Hans`
 * Persons matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+* `find_person` searches the name of the `Person` and `Group` that they are assigned 
+to and will display them accordingly.
 
 Examples:
 * `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
+* `find friends` returns `Alex Yeoh` as he belongs to the `friends` group.
+<br>
+
+
+  ![result for 'find alex david'](images/findFriendsResult.png)
+
+
+### Locating events by name, group or person: `find_event`
+
+Find events whose names or groups contain any of the given keywords.
+
+Format: `find KEYWORD [MORE_KEYWORDS]`
+
+* The search is case-insensitive. e.g `meeting` will match `Meeting`
+* Only full words will be matched e.g. `Han` will not match `Hans`
+* Events matching at least one keyword will be returned (i.e. `OR` search).
+  e.g. `Meetings TP` will return `Meetings`, `TP deadline`
+* `find_event` searches the name of the `Event`, `Group` and `Person` that they are assigned
+to and will display them accordingly.
+
+Examples:
+* `find meeting` returns `meeting` and `CS2103T meeting`
+* `find friends` returns `meeting` if it contains the `friends` group.
+  <br>
 
 ### Deleting a person : `delete_person`
 
@@ -253,8 +276,9 @@ Format: `add_event m/EVENT_NAME d/DATE [s/START_TIME] [e/END_TIME] [n/PERSON_NAM
 - The given `DATE`, `START_TIME` and `END_TIME` cannot be a time in the past.
 - The given `START_TIME` must be before the given `END_TIME`.
 - If the meeting is added successfully, it will automatically be sorted by date and time with the earliest meeting at the top of the list.
-- All dates are to be in the format `yyyy-MM-dd`. i.e. 2023-10-05 for 5th Oct 2023
-- All time are to be in the format `HHmm`. i.e. 1400 for 2pm
+- All dates are to be in the format `yyyy-MM-dd`. i.e. 2023-10-05 for 5th Oct 2023.
+- All time are to be in the format `HHmm`. i.e. 1400 for 2pm.
+- If the given `START_TIME` and `END_TIME` are not given, the default values are `0000` and `2359` respectively.
 
 Example: 
 * `add_event m/FumbleLog meeting d/2023-10-05 s/1500 e/1700 n/Ken g/CS2103T g/CS2101`
@@ -290,13 +314,13 @@ Edits an existing event in FumbleLog.
 Format: `edit_event EVENT_INDEX [m/MEETING_DETAILS] [d/DATE] [s/START_TIME] [e/END_TIME] [n/PERSON_NAME]... [u/PERSON_NAME]... [g/GROUP]... [ug/GROUP]...`
 
 * **At least one of the optional parameters required.**
-* `START_TIME` must be coupled with `END_TIME`.
 * The input values will replace the existing values, except for `PERSON` AND `GROUP`.
 * `PERSON` and `GROUP` edits are cumulative and will add to the current list of persons and groups.
   Use the unassign commands, i.e. `u/PERSON`, if you would like to unassign any person or group.
 * If there are any changes to the meeting date and time, the meeting will be automatically sorted by date and time with the earliest meeting at the top of the list.
 * All dates are to be in the format `yyyy-MM-dd`. i.e. 2023-10-05 for 5th Oct 2023
-* All time are to be in the format `HHmm`. i.e. 1400 for 2pm
+* All time are to be in the format `HHmm`. i.e. 1400 for 2pm.
+* The given `DATE`, `START_TIME` and `END_TIME` cannot be a time in the past.
 
 Examples:
 * `edit_event 1 m/FumbleLog meeting d/2023-10-05 s/1500 e/1700`
@@ -360,11 +384,11 @@ Expected output when the command fails:
 
 Shows all events and birthdays that are happening in the next specified number of days.
 
-Format: `remind` [NUMBER_OF_DAYS]
+Format: `remind [NUMBER_OF_DAYS]` 
 
-* Shows all events and birthdays happening in the next [NUMBER_OF_DAYS] days.
-* If [NUMBER_OF_DAYS] is not specified, the default value is 7 days.
-* [NUMBER_OF_DAYS] **must be a positive integer** 1,2,3, ...
+* Shows all events and birthdays happening in the next `[NUMBER_OF_DAYS]` days.
+* If `[NUMBER_OF_DAYS]` is not specified, the default value is 7 days.
+* `[NUMBER_OF_DAYS]` **must be a positive integer** 1,2,3, ...
 
 Examples:
 * `remind` shows all events and birthdays happening in the next 7 days.
@@ -437,10 +461,8 @@ _Details coming soon ..._
 | **Add Person**    | `add_person n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS r/REMARK [g/GROUP]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 g/friend g/colleague` |
 | **Edit Person**   | `edit_person PERSON_INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [r/REMARK] [g/GROUP]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                  |
 | **Delete Person** | `delete_person PERSON_INDEX`<br> e.g., `delete 3`                                                                                                                                       |
-| **List All**      | `list_all`                                                                                                                                                                              |
 | **List Persons**  | `list_persons`                                                                                                                                                                          |
-| **List Events**   | `list_events`                                                                                                                                                                           |
-| **Find Person**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                              |
+| **Find Person**   | `find_person KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                       |
 
 ### Commands for Events
 
@@ -449,11 +471,14 @@ _Details coming soon ..._
 | **Add Event**    | `add_event m/EVENT_NAME d/DATE [s/START_TIME] [e/END_TIME] [n/PERSON_NAME]... [g/GROUP]...`<br> e.g., `add_event m/FumbleLog meeting d/2023-10-05 s/1500 e/1700 n/Ken g/CS2103T g/CS2101`                                                           |
 | **Edit Event**   | `edit_event EVENT_INDEX [m/MEETING_DETAILS] [d/DATE] [s/START_TIME] [e/END_TIME] [n/PERSON_NAME]... [u/PERSON_NAME]... [g/GROUP]... [ug/GROUP]...`<br> e.g., `edit_event 1 m/tP week 3 meeting d/2023-10-05 s/1500 e/1700 n/Ken g/CS2103T g/CS2101` |
 | **Delete Event** | `delete_event EVENT_INDEX`<br> e.g., `delete_event 1`                                                                                                                                                                                               |
+| **List Events**   | `list_events`                                                                                                                                                                           |
+| **Find Event**    | `find_event KEYWORD [MORE_KEYWORDS]`<br> e.g., `find meeting`                                                                                                                           |
 
 ### General commands
 
-| Action    | Format, Examples |
-|-----------|------------------|
-| **Clear** | `clear`          |
-| **Exit**  | `exit`           |
-| **Help**  | `help`           |
+| Action       | Format, Examples |
+|--------------|------------------|
+| **List All** | `list_all`       |
+| **Clear**    | `clear`          |
+| **Exit**     | `exit`           |
+| **Help**     | `help`           |
