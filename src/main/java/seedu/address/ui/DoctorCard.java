@@ -69,8 +69,12 @@ public class DoctorCard extends UiPart<Region> {
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
         doctor.getAppointments().stream()
                 .sorted(Comparator.comparing(Appointment::getAppointmentTime))
-                .forEach(appointment -> appointments.getChildren()
-                        .add(new Label("Appointment with Patient: " + appointment.getPatient() + " at "
-                                + appointment.getAppointmentTime().format(Appointment.FORMATTER))));
+                .forEach(appointment -> {
+                    Label appointmentLabel = new Label("Appointment with Patient: " + appointment.getPatient() + " at "
+                            + appointment.getAppointmentTime().format(Appointment.FORMATTER));
+                    appointmentLabel.setWrapText(true); // Enable text wrapping
+                    appointmentLabel.setPrefWidth(250); // Set the maximum width for text wrapping (adjust as needed)
+                    appointments.getChildren().add(appointmentLabel);
+                });
     }
 }
