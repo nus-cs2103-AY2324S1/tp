@@ -69,7 +69,7 @@ public class Messages {
     }
 
     /**
-     * Formats a task for displayy to the user.
+     * Formats a task for display to the user.
      *
      * @param task task to be displayed
      * @return String of appropriate format.

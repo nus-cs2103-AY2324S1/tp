@@ -2,11 +2,9 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT_DESCRIPTION;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT_END_DATE_TIME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT_START_DATE_TIME;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Set;
 
@@ -17,6 +15,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.calendar.Calendar;
 import seedu.address.model.event.Event;
+import seedu.address.model.event.exceptions.EventNotFoundException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -25,38 +24,34 @@ import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
 
 /**
- * Adds an event to the calendar of an existing person in the address book.
+ * Delete an event from the calendar of an existing person in the address book.
  */
-public class AddContactEventCommand extends Command {
+public class DeleteContactEventCommand extends Command {
 
-    public static final String COMMAND_WORD = "addContactEvent";
+    public static final String COMMAND_WORD = "deleteContactEvent";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an event to the calendar of the person "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Deletes an event from the calendar of the person "
             + "identified by the index number used in the displayed person list.\n"
             + "Parameters: INDEX (must be a positive integer) "
-            + PREFIX_EVENT_DESCRIPTION + "DESCRIPTION "
-            + PREFIX_EVENT_START_DATE_TIME + "START DATE AND TIME "
-            + PREFIX_EVENT_END_DATE_TIME + "END DATE AND TIME...\n"
+            + "ANY TIME WITHIN EVENT DURATION \n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_EVENT_DESCRIPTION + "Nap "
-            + PREFIX_EVENT_START_DATE_TIME + "2024-01-01 12:00 "
-            + PREFIX_EVENT_END_DATE_TIME + "2024-01-01 18:00";
+            + "2024-01-01 12:00 ";
 
-    public static final String MESSAGE_ADD_EVENT_TO_PERSON_SUCCESS = "New event added to %s: %2$s";
-    public static final String MESSAGE_EVENT_CONFLICT = "This event is conflicting with another event";
+    public static final String MESSAGE_DELETE_EVENT_FROM_PERSON_SUCCESS = "Event deleted from %s: %2$s";
+    public static final String MESSAGE_NO_EVENT = "There is no valid existing event at this timing.";
 
     private final Index index;
-    private final Event event;
+    private final LocalDateTime eventTime;
 
     /**
-     * @param index of the person in the filtered person list to add an event to
-     * @param event event to be added to the person
+     * @param index of the person in the filtered person list to delete an event from.
+     * @param eventTime time of the event to delete.
      */
-    public AddContactEventCommand(Index index, Event event) {
-        requireAllNonNull(index, event);
+    public DeleteContactEventCommand(Index index, LocalDateTime eventTime) {
+        requireAllNonNull(index, eventTime);
 
         this.index = index;
-        this.event = event;
+        this.eventTime = eventTime;
     }
 
     @Override
@@ -64,22 +59,28 @@ public class AddContactEventCommand extends Command {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
 
-        if (index.getZeroBased() >= lastShownList.size()) {
+        //Obtain the calendar of the person and tries to delete an event from the person's calendar
+        Person personToEdit;
+        try {
+            personToEdit = lastShownList.get(index.getZeroBased());
+        } catch (IndexOutOfBoundsException e) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
-
-        //Obtain the calendar of the person and tries to add an event to the person's calendar
-        Person personToEdit = lastShownList.get(index.getZeroBased());
         Calendar calendar = personToEdit.getCalendar();
-        if (!calendar.canAddEvent(event)) {
-            throw new CommandException(MESSAGE_EVENT_CONFLICT);
+
+        Event toDelete;
+        try {
+            toDelete = calendar.findEventAt(eventTime).orElseThrow();
+            calendar.deleteEventAt(eventTime);
+        } catch (EventNotFoundException e) {
+            throw new CommandException(MESSAGE_NO_EVENT);
         }
-        calendar.addEvent(event);
+
         Person editedPerson = createEditedPerson(personToEdit, calendar);
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_ADD_EVENT_TO_PERSON_SUCCESS,
-                editedPerson.getName(), Messages.format(event)));
+        return new CommandResult(String.format(MESSAGE_DELETE_EVENT_FROM_PERSON_SUCCESS,
+                editedPerson.getName(), Messages.format(toDelete)));
     }
 
     /**
@@ -105,20 +106,20 @@ public class AddContactEventCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof AddContactEventCommand)) {
+        if (!(other instanceof DeleteContactEventCommand)) {
             return false;
         }
 
-        AddContactEventCommand otherAddContactEventCommand = (AddContactEventCommand) other;
-        return index.equals(otherAddContactEventCommand.index)
-                && event.equals(otherAddContactEventCommand.event);
+        DeleteContactEventCommand otherDeleteContactEventCommand = (DeleteContactEventCommand) other;
+        return index.equals(otherDeleteContactEventCommand.index)
+                && eventTime.equals(otherDeleteContactEventCommand.eventTime);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
                 .add("index", index)
-                .add("event", event)
+                .add("eventTime", eventTime)
                 .toString();
     }
 }
