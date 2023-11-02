@@ -32,30 +32,29 @@ public class InterviewAddCommand extends InterviewCommand {
     public static final String MESSAGE_SUCCESS = "New interview added: %1$s";
     public static final String MESSAGE_DUPLICATE_JOB = "This interview already exists in the application";
 
-    private final Index index;
+    private final Index jobIndex;
     private final Interview toAdd;
 
     /**
      * Creates an AddCommand to add the specified {@code Job}
      */
-    public InterviewAddCommand(Index targetIndex, Interview interview) {
-        CollectionUtil.requireAllNonNull(targetIndex, interview);
-        this.index = targetIndex;
+    public InterviewAddCommand(Index jobIndex, Interview interview) {
+        CollectionUtil.requireAllNonNull(jobIndex, interview);
+        this.jobIndex = jobIndex;
         toAdd = interview;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        Job jobToAddInterview = getJob(model, index);
+        Job jobToAddInterview = getJob(model, jobIndex);
 
         if (jobToAddInterview.hasInterview(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_JOB);
         }
 
         jobToAddInterview.addInterview(toAdd);
-        model.updateFilteredJobList(Model.PREDICATE_SHOW_ALL_JOBS);
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)), false,
-                false, index);
+                false, jobIndex.getZeroBased());
     }
 
     @Override

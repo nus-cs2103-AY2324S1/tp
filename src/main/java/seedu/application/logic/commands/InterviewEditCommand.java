@@ -89,7 +89,8 @@ public class InterviewEditCommand extends InterviewCommand {
         }
 
         jobToEditInterview.setInterview(interviewToEdit, editedInterview);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(editedInterview)));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(editedInterview)),
+                false, false, jobIndex.getZeroBased());
     }
     /**
      * Creates and returns a {@code Interview} with the details of {@code interviewToEdit}

@@ -4,7 +4,6 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.Objects;
 
-import seedu.application.commons.core.index.Index;
 import seedu.application.commons.util.ToStringBuilder;
 
 /**
@@ -19,12 +18,12 @@ public class CommandResult {
 
     /** The application should exit. */
     private final boolean exit;
-    private final Index interview;
+    private final int interview;
 
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
-    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, Index interview) {
+    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, int interview) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
         this.exit = exit;
@@ -36,7 +35,7 @@ public class CommandResult {
      * and other fields set to their default value.
      */
     public CommandResult(String feedbackToUser) {
-        this(feedbackToUser, false, false, Index.fromZeroBased(0));
+        this(feedbackToUser, false, false, -1);
     }
 
     public String getFeedbackToUser() {
@@ -51,7 +50,7 @@ public class CommandResult {
         return exit;
     }
 
-    public Index isInterview() {
+    public int interviewIndex() {
         return interview;
     }
 
@@ -69,12 +68,13 @@ public class CommandResult {
         CommandResult otherCommandResult = (CommandResult) other;
         return feedbackToUser.equals(otherCommandResult.feedbackToUser)
                 && showHelp == otherCommandResult.showHelp
-                && exit == otherCommandResult.exit;
+                && exit == otherCommandResult.exit
+                && interview == otherCommandResult.interview;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(feedbackToUser, showHelp, exit);
+        return Objects.hash(feedbackToUser, showHelp, exit, interview);
     }
 
     @Override

@@ -49,6 +49,7 @@ public class JobListPanel extends UiPart<Region> {
             if (empty || job == null) {
                 setGraphic(null);
                 setText(null);
+                setStyle("-fx-background-color: white;");
             } else {
                 setGraphic(new JobCard(job, getIndex() + 1).getRoot());
             }
