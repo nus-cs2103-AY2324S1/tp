@@ -185,8 +185,8 @@ The following are valid interview types:
 | **Find**             | `find [KEYWORDS] [c/COMPANY] [r/ROLE] [d/DEADLINE] [s/STATUS] [i/INDUSTRY] [t/JOB_TYPE]` |
 | **Sort**             | `sort FIELD_SPECIFIER`                                                                   |
 | **Interview add**    | `interview add INDEX t/TYPE d/DATETIME a/ADDRESS`                                        |
-| **Interview delete** |                                                                                          |
-| **Interview edit**   |                                                                                          |
+| **Interview delete** | `interview delete INTERVIEWINDEX from/JOBINDEX`                                          |
+| **Interview edit**   | `interview edit INTERVIEWINDEX from/JOBINDEX`                                            |
 | **Help**             | `help`                                                                                   |
 | **Clear**            | `clear`                                                                                  |
 | **Exit**             | `exit`                                                                                   |
@@ -328,9 +328,33 @@ Adds an interview to the specified application from the list.
 
 ### Deleting an interview: `interview delete`
 
+Deletes an interview to the specified application from the list.
+
+**Format:** `interview delete INTERVIEWINDEX t/from JOBINDEX`
+
+**Examples:**
+
+* `interview delete 1 from/2`
+  Deletes the 1st technical interview from the 2nd job application in the list.
+
+**UI mockup:**
+
 ---
 
 ### Editing an interview: `interview edit`
+
+Edits an interview to the specified application from the list.
+
+**Format:** `interview edit INTERVIEWINDEX t/from JOBINDEX [t/TYPE] [d/DATETIME] [a/ADDRESS]`
+
+**Examples:**
+
+* `interview edit 2 from/4 t/GROUP`
+  Edits the interview type to a group interview for the 2nd technical interview from the 4th job application in the list.
+* `interview edit 4 from/8 a/NTU`
+  Edits the address 4th technical interview from the 8th job application in the list.
+
+**UI mockup:**
 
 ---
 
