@@ -100,7 +100,7 @@ Example:
 
 Delete an addressbook.
 
-Format: `course create coursetg/COURSECODE`
+Format: `course delete coursetg/COURSECODE`
 
 * Deletes the addressbook with course code `COURSECODE`
 * `COURSECODE` should be a string made up of alphabetical characters and numbers, with no special characters.
@@ -126,7 +126,7 @@ Example:
 
 ### Editing an addressbook: `course edit`
 
-Edits the active addressbook.
+Edits the active addressbook course code.
 
 Format: `course edit coursetg/COURSECODE`
 
