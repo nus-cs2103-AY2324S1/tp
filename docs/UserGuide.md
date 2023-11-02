@@ -721,7 +721,7 @@ Here is a list of the error messages you may encounter, when the command is ente
 
 | Error Message                                             | Reason                                                             |
 |-----------------------------------------------------------|--------------------------------------------------------------------|
-| `Invalid command format!`                                 | Invalid or missing SCHEDULE_INDEX.                                 |
+| `Invalid command format!`                                 | Invalid or missing SCHEDULE_INDEX or missing schedule status.      |
 | `The schedule index provided is invalid`                  | SCHEDULE_INDEX entered is not in the range of number of schedules. |
 | `Status has to be either MISSED (m/0) or COMPLETED (m/1)` | Schedule status entered is not 0 or 1.                             |
 
