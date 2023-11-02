@@ -96,197 +96,199 @@ public class DeleteFieldCommandTest {
     @Test
     public void execute_validCommand_success() {
         Model originalModel = new ModelManager(new NetworkBook(model.getNetworkBook()), new UserPrefs());
-        originalModel.setItem(model.getDisplayedPersonList().get(0), TypicalPersons.JACK);
+        originalModel.setItem(originalModel.getDisplayedPersonList().get(0),
+                TypicalPersons.ADAM);
 
-        Name jackName = TypicalPersons.JACK.getName();
-        UniqueList<Phone> jackPhones = TypicalPersons.JACK.getPhones();
-        UniqueList<Email> jackEmails = TypicalPersons.JACK.getEmails();
-        UniqueList<Link> jackLinks = TypicalPersons.JACK.getLinks();
-        UniqueList<Course> jackCourses = TypicalPersons.JACK.getCourses();
-        UniqueList<Specialisation> jackSpecialisations = TypicalPersons.JACK.getSpecialisations();
-        UniqueList<Tag> jackTags = TypicalPersons.JACK.getTags();
-        Graduation jackGraduation = TypicalPersons.JACK.getGraduation().get();
-        Priority jackPriority = TypicalPersons.JACK.getPriority().get();
+        Name adamName = TypicalPersons.ADAM.getName();
+        UniqueList<Phone> adamPhones = TypicalPersons.ADAM.getPhones();
+        UniqueList<Email> adamEmails = TypicalPersons.ADAM.getEmails();
+        UniqueList<Link> adamLinks = TypicalPersons.ADAM.getLinks();
+        UniqueList<Course> adamCourses = TypicalPersons.ADAM.getCourses();
+        UniqueList<Specialisation> adamSpecialisations = TypicalPersons.ADAM.getSpecialisations();
+        UniqueList<Tag> adamTags = TypicalPersons.ADAM.getTags();
+        Graduation adamGraduation = TypicalPersons.ADAM.getGraduation().get();
+        Priority adamPriority = TypicalPersons.ADAM.getPriority().get();
 
-        UniqueList<Phone> jackPhonesWithoutFirst = TypicalPersons.JACK.getPhones();
-        UniqueList<Email> jackEmailsWithoutFirst = TypicalPersons.JACK.getEmails();
-        UniqueList<Link> jackLinksWithoutFirst = TypicalPersons.JACK.getLinks();
-        UniqueList<Course> jackCoursesWithoutFirst = TypicalPersons.JACK.getCourses();
-        UniqueList<Specialisation> jackSpecialisationsWithoutFirst = TypicalPersons.JACK.getSpecialisations();
-        UniqueList<Tag> jackTagsWithoutFirst = TypicalPersons.JACK.getTags();
+        UniqueList<Phone> adamPhonesWithoutFirst = TypicalPersons.ADAM.getPhones();
+        UniqueList<Email> adamEmailsWithoutFirst = TypicalPersons.ADAM.getEmails();
+        UniqueList<Link> adamLinksWithoutFirst = TypicalPersons.ADAM.getLinks();
+        UniqueList<Course> adamCoursesWithoutFirst = TypicalPersons.ADAM.getCourses();
+        UniqueList<Specialisation> adamSpecialisationsWithoutFirst = TypicalPersons.ADAM.getSpecialisations();
+        UniqueList<Tag> adamTagsWithoutFirst = TypicalPersons.ADAM.getTags();
 
-        jackPhonesWithoutFirst.removeAtIndex(0);
-        jackEmailsWithoutFirst.removeAtIndex(0);
-        jackLinksWithoutFirst.removeAtIndex(0);
-        jackCoursesWithoutFirst.removeAtIndex(0);
-        jackSpecialisationsWithoutFirst.removeAtIndex(0);
-        jackTagsWithoutFirst.removeAtIndex(0);
+        adamPhonesWithoutFirst.removeAtIndex(0);
+        adamEmailsWithoutFirst.removeAtIndex(0);
+        adamLinksWithoutFirst.removeAtIndex(0);
+        adamCoursesWithoutFirst.removeAtIndex(0);
+        adamSpecialisationsWithoutFirst.removeAtIndex(0);
+        adamTagsWithoutFirst.removeAtIndex(0);
 
-        Person jackWithoutFirstPhone = new Person(
-                jackName,
-                jackPhonesWithoutFirst,
-                jackEmails,
-                jackLinks,
-                jackGraduation,
-                jackCourses,
-                jackSpecialisations,
-                jackTags,
-                jackPriority
+        Person adamWithoutFirstPhone = new Person(
+                adamName,
+                adamPhonesWithoutFirst,
+                adamEmails,
+                adamLinks,
+                adamGraduation,
+                adamCourses,
+                adamSpecialisations,
+                adamTags,
+                adamPriority
         );
 
-        Person jackWithoutFirstEmail = new Person(
-                jackName,
-                jackPhones,
-                jackEmailsWithoutFirst,
-                jackLinks,
-                jackGraduation,
-                jackCourses,
-                jackSpecialisations,
-                jackTags,
-                jackPriority
+        Person adamWithoutFirstEmail = new Person(
+                adamName,
+                adamPhones,
+                adamEmailsWithoutFirst,
+                adamLinks,
+                adamGraduation,
+                adamCourses,
+                adamSpecialisations,
+                adamTags,
+                adamPriority
         );
 
-        Person jackWithoutFirstLink = new Person(
-                jackName,
-                jackPhones,
-                jackEmails,
-                jackLinksWithoutFirst,
-                jackGraduation,
-                jackCourses,
-                jackSpecialisations,
-                jackTags,
-                jackPriority
+        Person adamWithoutFirstLink = new Person(
+                adamName,
+                adamPhones,
+                adamEmails,
+                adamLinksWithoutFirst,
+                adamGraduation,
+                adamCourses,
+                adamSpecialisations,
+                adamTags,
+                adamPriority
         );
 
-        Person jackWithoutFirstCourse = new Person(
-                jackName,
-                jackPhones,
-                jackEmails,
-                jackLinks,
-                jackGraduation,
-                jackCoursesWithoutFirst,
-                jackSpecialisations,
-                jackTags,
-                jackPriority
+        Person adamWithoutFirstCourse = new Person(
+                adamName,
+                adamPhones,
+                adamEmails,
+                adamLinks,
+                adamGraduation,
+                adamCoursesWithoutFirst,
+                adamSpecialisations,
+                adamTags,
+                adamPriority
         );
 
-        Person jackWithoutFirstSpec = new Person(
-                jackName,
-                jackPhones,
-                jackEmails,
-                jackLinks,
-                jackGraduation,
-                jackCourses,
-                jackSpecialisationsWithoutFirst,
-                jackTags,
-                jackPriority
+        Person adamWithoutFirstSpec = new Person(
+                adamName,
+                adamPhones,
+                adamEmails,
+                adamLinks,
+                adamGraduation,
+                adamCourses,
+                adamSpecialisationsWithoutFirst,
+                adamTags,
+                adamPriority
         );
 
-        Person jackWithoutFirstTag = new Person(
-                jackName,
-                jackPhones,
-                jackEmails,
-                jackLinks,
-                jackGraduation,
-                jackCourses,
-                jackSpecialisations,
-                jackTagsWithoutFirst,
-                jackPriority
+        Person adamWithoutFirstTag = new Person(
+                adamName,
+                adamPhones,
+                adamEmails,
+                adamLinks,
+                adamGraduation,
+                adamCourses,
+                adamSpecialisations,
+                adamTagsWithoutFirst,
+                adamPriority
         );
 
-        Person jackWithoutGraduation = new Person(
-                jackName,
-                jackPhones,
-                jackEmails,
-                jackLinks,
+        Person adamWithoutGraduation = new Person(
+                adamName,
+                adamPhones,
+                adamEmails,
+                adamLinks,
                 null,
-                jackCourses,
-                jackSpecialisations,
-                jackTags,
-                jackPriority
+                adamCourses,
+                adamSpecialisations,
+                adamTags,
+                adamPriority
         );
 
-        Person jackWithoutPriority = new Person(
-                jackName,
-                jackPhones,
-                jackEmails,
-                jackLinks,
-                jackGraduation,
-                jackCourses,
-                jackSpecialisations,
-                jackTags,
+        Person adamWithoutPriority = new Person(
+                adamName,
+                adamPhones,
+                adamEmails,
+                adamLinks,
+                adamGraduation,
+                adamCourses,
+                adamSpecialisations,
+                adamTags,
                 null
         );
 
         DeleteFieldCommand deletePhoneCommand = new DeleteFieldCommand(INDEX_ONE, DELETE_FIRST_PHONE_ACTION);
         Model expectedModelAfterDeletingPhone =
                 new ModelManager(new NetworkBook(model.getNetworkBook()), new UserPrefs());
-        expectedModelAfterDeletingPhone.setItem(model.getDisplayedPersonList().get(0), jackWithoutFirstPhone);
+        expectedModelAfterDeletingPhone.setItem(expectedModelAfterDeletingPhone.getDisplayedPersonList().get(0),
+                                                adamWithoutFirstPhone);
         assertCommandSuccess(deletePhoneCommand, originalModel,
-                String.format(MESSAGE_DELETE_PERSON_FIELD_SUCCESS, Messages.format(jackWithoutFirstPhone)),
+                String.format(MESSAGE_DELETE_PERSON_FIELD_SUCCESS, Messages.format(adamWithoutFirstPhone)),
                 expectedModelAfterDeletingPhone);
 
-        originalModel.setItem(originalModel.getDisplayedPersonList().get(0), TypicalPersons.JACK);
+        originalModel.setItem(originalModel.getDisplayedPersonList().get(0), TypicalPersons.ADAM);
         DeleteFieldCommand deleteEmailCommand = new DeleteFieldCommand(INDEX_ONE, DELETE_FIRST_EMAIL_ACTION);
         Model expectedModelAfterDeletingEmail =
                 new ModelManager(new NetworkBook(model.getNetworkBook()), new UserPrefs());
-        expectedModelAfterDeletingEmail.setItem(model.getDisplayedPersonList().get(0), jackWithoutFirstEmail);
+        expectedModelAfterDeletingEmail.setItem(model.getDisplayedPersonList().get(0), adamWithoutFirstEmail);
         assertCommandSuccess(deleteEmailCommand, originalModel,
-                String.format(MESSAGE_DELETE_PERSON_FIELD_SUCCESS, Messages.format(jackWithoutFirstEmail)),
+                String.format(MESSAGE_DELETE_PERSON_FIELD_SUCCESS, Messages.format(adamWithoutFirstEmail)),
                 expectedModelAfterDeletingEmail);
 
-        originalModel.setItem(originalModel.getDisplayedPersonList().get(0), TypicalPersons.JACK);
+        originalModel.setItem(originalModel.getDisplayedPersonList().get(0), TypicalPersons.ADAM);
         DeleteFieldCommand deleteLinkCommand = new DeleteFieldCommand(INDEX_ONE, DELETE_FIRST_LINK_ACTION);
         Model expectedModelAfterDeletingLink =
                 new ModelManager(new NetworkBook(model.getNetworkBook()), new UserPrefs());
-        expectedModelAfterDeletingLink.setItem(model.getDisplayedPersonList().get(0), jackWithoutFirstLink);
+        expectedModelAfterDeletingLink.setItem(model.getDisplayedPersonList().get(0), adamWithoutFirstLink);
         assertCommandSuccess(deleteLinkCommand, originalModel,
-                String.format(MESSAGE_DELETE_PERSON_FIELD_SUCCESS, Messages.format(jackWithoutFirstLink)),
+                String.format(MESSAGE_DELETE_PERSON_FIELD_SUCCESS, Messages.format(adamWithoutFirstLink)),
                 expectedModelAfterDeletingLink);
 
-        originalModel.setItem(originalModel.getDisplayedPersonList().get(0), TypicalPersons.JACK);
+        originalModel.setItem(originalModel.getDisplayedPersonList().get(0), TypicalPersons.ADAM);
         DeleteFieldCommand deleteCourseCommand = new DeleteFieldCommand(INDEX_ONE, DELETE_FIRST_COURSE_ACTION);
         Model expectedModelAfterDeletingCourse =
                 new ModelManager(new NetworkBook(model.getNetworkBook()), new UserPrefs());
-        expectedModelAfterDeletingCourse.setItem(model.getDisplayedPersonList().get(0), jackWithoutFirstCourse);
+        expectedModelAfterDeletingCourse.setItem(model.getDisplayedPersonList().get(0), adamWithoutFirstCourse);
         assertCommandSuccess(deleteCourseCommand, originalModel,
-                String.format(MESSAGE_DELETE_PERSON_FIELD_SUCCESS, Messages.format(jackWithoutFirstCourse)),
+                String.format(MESSAGE_DELETE_PERSON_FIELD_SUCCESS, Messages.format(adamWithoutFirstCourse)),
                 expectedModelAfterDeletingCourse);
 
-        originalModel.setItem(originalModel.getDisplayedPersonList().get(0), TypicalPersons.JACK);
+        originalModel.setItem(originalModel.getDisplayedPersonList().get(0), TypicalPersons.ADAM);
         DeleteFieldCommand deleteSpecCommand = new DeleteFieldCommand(INDEX_ONE, DELETE_FIRST_SPEC_ACTION);
         Model expectedModelAfterDeletingSpec =
                 new ModelManager(new NetworkBook(model.getNetworkBook()), new UserPrefs());
-        expectedModelAfterDeletingSpec.setItem(model.getDisplayedPersonList().get(0), jackWithoutFirstSpec);
+        expectedModelAfterDeletingSpec.setItem(model.getDisplayedPersonList().get(0), adamWithoutFirstSpec);
         assertCommandSuccess(deleteSpecCommand, originalModel,
-                String.format(MESSAGE_DELETE_PERSON_FIELD_SUCCESS, Messages.format(jackWithoutFirstSpec)),
+                String.format(MESSAGE_DELETE_PERSON_FIELD_SUCCESS, Messages.format(adamWithoutFirstSpec)),
                 expectedModelAfterDeletingSpec);
 
-        originalModel.setItem(originalModel.getDisplayedPersonList().get(0), TypicalPersons.JACK);
+        originalModel.setItem(originalModel.getDisplayedPersonList().get(0), TypicalPersons.ADAM);
         DeleteFieldCommand deleteTagCommand = new DeleteFieldCommand(INDEX_ONE, DELETE_FIRST_TAG_ACTION);
         Model expectedModelAfterDeletingTag =
                 new ModelManager(new NetworkBook(model.getNetworkBook()), new UserPrefs());
-        expectedModelAfterDeletingTag.setItem(model.getDisplayedPersonList().get(0), jackWithoutFirstTag);
+        expectedModelAfterDeletingTag.setItem(model.getDisplayedPersonList().get(0), adamWithoutFirstTag);
         assertCommandSuccess(deleteTagCommand, originalModel,
-                String.format(MESSAGE_DELETE_PERSON_FIELD_SUCCESS, Messages.format(jackWithoutFirstTag)),
+                String.format(MESSAGE_DELETE_PERSON_FIELD_SUCCESS, Messages.format(adamWithoutFirstTag)),
                 expectedModelAfterDeletingTag);
 
-        originalModel.setItem(originalModel.getDisplayedPersonList().get(0), TypicalPersons.JACK);
+        originalModel.setItem(originalModel.getDisplayedPersonList().get(0), TypicalPersons.ADAM);
         DeleteFieldCommand deleteGraduationCommand = new DeleteFieldCommand(INDEX_ONE, DELETE_GRADUATION_ACTION);
         Model expectedModelAfterDeletingGraduation =
                 new ModelManager(new NetworkBook(model.getNetworkBook()), new UserPrefs());
-        expectedModelAfterDeletingGraduation.setItem(model.getDisplayedPersonList().get(0), jackWithoutGraduation);
+        expectedModelAfterDeletingGraduation.setItem(model.getDisplayedPersonList().get(0), adamWithoutGraduation);
         assertCommandSuccess(deleteGraduationCommand, originalModel,
-                String.format(MESSAGE_DELETE_PERSON_FIELD_SUCCESS, Messages.format(jackWithoutGraduation)),
+                String.format(MESSAGE_DELETE_PERSON_FIELD_SUCCESS, Messages.format(adamWithoutGraduation)),
                 expectedModelAfterDeletingGraduation);
 
-        originalModel.setItem(originalModel.getDisplayedPersonList().get(0), TypicalPersons.JACK);
+        originalModel.setItem(originalModel.getDisplayedPersonList().get(0), TypicalPersons.ADAM);
         DeleteFieldCommand deletePriorityCommand = new DeleteFieldCommand(INDEX_ONE, DELETE_PRIORITY_ACTION);
         Model expectedModelAfterDeletingPriority =
                 new ModelManager(new NetworkBook(model.getNetworkBook()), new UserPrefs());
-        expectedModelAfterDeletingPriority.setItem(model.getDisplayedPersonList().get(0), jackWithoutPriority);
+        expectedModelAfterDeletingPriority.setItem(model.getDisplayedPersonList().get(0), adamWithoutPriority);
         assertCommandSuccess(deletePriorityCommand, originalModel,
-                String.format(MESSAGE_DELETE_PERSON_FIELD_SUCCESS, Messages.format(jackWithoutPriority)),
+                String.format(MESSAGE_DELETE_PERSON_FIELD_SUCCESS, Messages.format(adamWithoutPriority)),
                 expectedModelAfterDeletingPriority);
     }
 }

@@ -1,5 +1,6 @@
 package networkbook.model;
 
+import static networkbook.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -9,6 +10,7 @@ import java.util.ArrayList;
 
 import org.junit.jupiter.api.Test;
 
+import networkbook.model.person.PersonSortComparator;
 import networkbook.testutil.TypicalPersons;
 
 public class VersionedNetworkBookTest {
@@ -45,6 +47,11 @@ public class VersionedNetworkBookTest {
         expected.addPerson(TypicalPersons.ALICE);
         assertEquals(expected, versionedNetworkBook.getNetworkBookStateList().get(1));
         assertEquals(1, versionedNetworkBook.getCurrentStatePointer());
+        versionedNetworkBook.setFilterPredicate(PREDICATE_SHOW_ALL_PERSONS);
+        versionedNetworkBook.commit();
+        assertEquals(2, versionedNetworkBook.getCurrentStatePointer());
+        assertEquals(versionedNetworkBook.getNetworkBookStateList().get(1),
+                    versionedNetworkBook.getNetworkBookStateList().get(2));
     }
 
     @Test

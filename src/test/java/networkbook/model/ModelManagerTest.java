@@ -18,6 +18,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import networkbook.commons.core.GuiSettings;
 import networkbook.logic.commands.exceptions.CommandException;
+import networkbook.model.person.NameContainsKeyTermsPredicate;
 import networkbook.model.person.NameContainsKeywordsPredicate;
 import networkbook.model.person.Person;
 import networkbook.model.person.PersonSortComparator;
@@ -188,7 +189,31 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void updateSortedPersonList_descendingNameSort_correctlySorted() {
+    public void updateDisplayedPersonList_filterBySingleKeyword_correctlyFiltered() {
+        Model model = new ModelManager(TypicalPersons.getTypicalNetworkBook(), new UserPrefs());
+        model.updateDisplayedPersonList(new NameContainsKeyTermsPredicate(List.of("Ku")), null);
+        List<Person> expectedPersons = List.of(TypicalPersons.CARL, TypicalPersons.FIONA);
+        ObservableList<Person> expectedList = FXCollections.observableList(expectedPersons);
+        assertEquals(
+                expectedList,
+                model.getDisplayedPersonList()
+        );
+    }
+
+    @Test
+    public void updateDisplayedPersonList_filterByMultipleKeywords_correctlyFiltered() {
+        Model model = new ModelManager(TypicalPersons.getTypicalNetworkBook(), new UserPrefs());
+        model.updateDisplayedPersonList(new NameContainsKeyTermsPredicate(List.of("Alice", "Benson")), null);
+        List<Person> expectedPersons = List.of(TypicalPersons.ALICE, TypicalPersons.BENSON);
+        ObservableList<Person> expectedList = FXCollections.observableList(expectedPersons);
+        assertEquals(
+                expectedList,
+                model.getDisplayedPersonList()
+        );
+    }
+
+    @Test
+    public void updateDisplayedPersonList_descendingNameSort_correctlySorted() {
         PersonSortComparator comparator = new PersonSortComparator(SortField.NAME, SortOrder.DESCENDING);
         Model model = new ModelManager(TypicalPersons.getTypicalNetworkBook(), new UserPrefs());
         model.updateDisplayedPersonList(null, comparator);

@@ -16,6 +16,7 @@ import networkbook.commons.util.ToStringBuilder;
 import networkbook.model.person.Email;
 import networkbook.model.person.Link;
 import networkbook.model.person.Person;
+import networkbook.model.person.PersonSortComparator;
 import networkbook.model.util.UniqueList;
 
 /**
@@ -33,7 +34,9 @@ public class NetworkBook implements ReadOnlyNetworkBook {
     public NetworkBook() {
         persons = new UniqueList<>();
         filteredPersons = new FilteredList<>(persons.asUnmodifiableObservableList());
-        displayedPersons = new SortedList<>(filteredPersons, null);
+        displayedPersons = new SortedList<>(filteredPersons,
+                new PersonSortComparator(PersonSortComparator.SortField.NAME,
+                                        PersonSortComparator.SortOrder.ASCENDING));
     }
 
     /**

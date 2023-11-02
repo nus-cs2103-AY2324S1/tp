@@ -105,15 +105,11 @@ public class OpenEmailCommandTest {
             throw new IOException();
         }
 
-        public ObservableList<Person> getFilteredPersonList() {
+        public ObservableList<Person> getDisplayedPersonList() {
             return TypicalPersons.getTypicalNetworkBook().getPersonList();
         }
 
-        public void updateFilteredPersonList(Predicate<Person> predicate) {
-            throw new UnsupportedOperationException();
-        }
-
-        public void updateSortedPersonList(Comparator<Person> comparator) {
+        public void updateDisplayedPersonList(Predicate<Person> predicate, Comparator<Person> comparator) {
             throw new UnsupportedOperationException();
         }
     };

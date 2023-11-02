@@ -160,10 +160,10 @@ public class ModelManager implements Model {
     //=========== Displayed Person List Accessors =============================================================
     @Override
     public void updateDisplayedPersonList(Predicate<Person> predicate, Comparator<Person> comparator) {
+        assert (predicate == null || comparator == null);
         if (predicate != null) {
             versionedNetworkBook.setFilterPredicate(predicate);
-        }
-        if (comparator != null) {
+        } else if (comparator != null) {
             versionedNetworkBook.setSortComparator(comparator);
         }
         versionedNetworkBook.commit();
