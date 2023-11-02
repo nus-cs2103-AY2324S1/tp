@@ -6,8 +6,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_OPERATION;
 
 import java.util.List;
-import java.util.Objects;
 
+import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -37,15 +37,15 @@ public class OvertimeCommand extends Command {
     public static final String MESSAGE_INVALID_AMOUNT = "Amount must be a positive integer";
     private final Id targetId;
     private final OvertimeHours overtimeHoursToChange;
-    private final String operation;
+    private final boolean increment;
 
     /**
      * Creates an OvertimeCommand to update the overtime hours of the specified {@code Employee}
      */
-    public OvertimeCommand(Id targetId, OvertimeHours overtimeHoursToChange, String operation) {
+    public OvertimeCommand(Id targetId, OvertimeHours overtimeHoursToChange, boolean increment) {
         this.targetId = targetId;
         this.overtimeHoursToChange = overtimeHoursToChange;
-        this.operation = operation;
+        this.increment = increment;
     }
 
     @Override
@@ -59,11 +59,11 @@ public class OvertimeCommand extends Command {
         if (employeeToUpdate != null) {
             Employee updatedEmployee = updateEmployeeOvertime(employeeToUpdate);
             model.setEmployee(employeeToUpdate, updatedEmployee);
-            if (Objects.equals(operation, "dec")) {
-                return new CommandResult(String.format(MESSAGE_OVERTIME_DECREASE_SUCCESS,
-                        Messages.formatOvertimeHours(updatedEmployee), overtimeHoursToChange));
-            } else if (Objects.equals(operation, "inc")) {
+            if (increment) {
                 return new CommandResult(String.format(MESSAGE_OVERTIME_INCREASE_SUCCESS,
+                        Messages.formatOvertimeHours(updatedEmployee), overtimeHoursToChange));
+            } else {
+                return new CommandResult(String.format(MESSAGE_OVERTIME_DECREASE_SUCCESS,
                         Messages.formatOvertimeHours(updatedEmployee), overtimeHoursToChange));
             }
         }
@@ -79,15 +79,41 @@ public class OvertimeCommand extends Command {
     }
 
     private OvertimeHours updateOvertimeHours(OvertimeHours overtimeHours) throws CommandException {
-        int updatedHours = 0;
-        if (Objects.equals(operation, "inc")) {
+        int updatedHours;
+        if (increment) {
             updatedHours = overtimeHours.value + overtimeHoursToChange.value;
-        } else if (Objects.equals(operation, "dec")) {
+        } else {
             updatedHours = overtimeHours.value - overtimeHoursToChange.value;
         }
         if (!OvertimeHours.isValidOvertimeHours(updatedHours)) {
             throw new CommandException(OvertimeHours.MESSAGE_CONSTRAINTS);
         }
         return new OvertimeHours(updatedHours);
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof OvertimeCommand)) {
+            return false;
+        }
+
+        OvertimeCommand otherOvertimeCommand = (OvertimeCommand) other;
+        return targetId.equals(otherOvertimeCommand.targetId)
+                && overtimeHoursToChange.equals(otherOvertimeCommand.overtimeHoursToChange)
+                && increment == otherOvertimeCommand.increment;
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .add("targetId", targetId)
+                .add("overtimeHoursToChange", overtimeHoursToChange)
+                .add("increment", increment)
+                .toString();
     }
 }

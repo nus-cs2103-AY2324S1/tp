@@ -87,22 +87,22 @@ class OvertimeCommandParserTest {
 
         // invalid prefix
         assertParseFailure(parser, ID_DESC_BOB + OPERATION_DESC_BOB + "am/5",
-                OvertimeCommand.MESSAGE_INVALID_AMOUNT);
-
+                MESSAGE_INVALID_FORMAT);
+        System.out.println(ID_DESC_BOB + OPERATION_DESC_BOB + PREFIX_AMOUNT + "five");
         // invalid amount (random string)
-        assertParseFailure(parser, ID_DESC_BOB + OPERATION_DESC_BOB + PREFIX_AMOUNT + "five",
+        assertParseFailure(parser, ID_DESC_BOB + OPERATION_DESC_BOB + " " + PREFIX_AMOUNT + "five",
                 OvertimeCommand.MESSAGE_INVALID_AMOUNT);
 
         // invalid amount (negative)
-        assertParseFailure(parser, ID_DESC_BOB + OPERATION_DESC_BOB + PREFIX_AMOUNT + "-5",
+        assertParseFailure(parser, ID_DESC_BOB + OPERATION_DESC_BOB + " " + PREFIX_AMOUNT + "-5",
                 OvertimeCommand.MESSAGE_INVALID_AMOUNT);
 
         // invalid amount (exceeds 72)
-        assertParseFailure(parser, ID_DESC_BOB + OPERATION_DESC_BOB + PREFIX_AMOUNT + "73",
+        assertParseFailure(parser, ID_DESC_BOB + OPERATION_DESC_BOB + " " + PREFIX_AMOUNT + "73",
                 OvertimeHours.MESSAGE_CONSTRAINTS);
 
         // invalid amount (0)
-        assertParseFailure(parser, ID_DESC_BOB + OPERATION_DESC_BOB + PREFIX_AMOUNT + "0",
+        assertParseFailure(parser, ID_DESC_BOB + OPERATION_DESC_BOB + " " + PREFIX_AMOUNT + "0",
                 OvertimeCommand.MESSAGE_INVALID_AMOUNT);
     }
 
@@ -110,7 +110,7 @@ class OvertimeCommandParserTest {
     public void parse_success() {
         // valid id, valid operation, valid amount
         OvertimeCommand expectedCommand = new OvertimeCommand(new Id(VALID_ID_BOB),
-                new OvertimeHours(VALID_OVERTIME_HOURS_BOB), "inc");
+                new OvertimeHours(VALID_OVERTIME_HOURS_BOB), false);
         String userInput = ID_DESC_BOB + OPERATION_DESC_BOB + AMOUNT_DESC_BOB;
 
         assertParseSuccess(parser, userInput, expectedCommand);

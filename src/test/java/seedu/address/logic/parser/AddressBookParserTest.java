@@ -115,7 +115,7 @@ public class AddressBookParserTest {
         OvertimeCommand command = (OvertimeCommand) parser.parseCommand(
                 OvertimeCommand.COMMAND_WORD + " " + PREFIX_ID + ID_FIRST_EMPLOYEE + " " + PREFIX_OPERATION
                         + "inc " + PREFIX_AMOUNT + "2");
-        assertEquals(new OvertimeCommand(ID_FIRST_EMPLOYEE, new OvertimeHours(2), "inc"), command);
+        assertEquals(new OvertimeCommand(ID_FIRST_EMPLOYEE, new OvertimeHours(2), true), command);
     }
 
     @Test

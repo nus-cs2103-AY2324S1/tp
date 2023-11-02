@@ -31,7 +31,6 @@ import seedu.address.testutil.EditEmployeeDescriptorBuilder;
  * Contains helper methods for testing commands.
  */
 public class CommandTestUtil {
-
     public static final String VALID_NAME_AMY = "Amy Bee";
     public static final String VALID_NAME_BOB = "Bob Choo";
     public static final String VALID_POSITION_AMY = "Manager";
@@ -46,7 +45,6 @@ public class CommandTestUtil {
     public static final String VALID_DEPARTMENT_IT = "IT";
     public static final String VALID_SALARY_AMY = "7000";
     public static final String VALID_SALARY_BOB = "5000";
-    public static final String VALID_OVERTIME_AMOUNT = "5";
     public static final int VALID_OVERTIME_HOURS_AMY = 0;
     public static final int VALID_OVERTIME_HOURS_BOB = 72;
     public static final ArrayList<Leave> VALID_LEAVELIST_AMY = new ArrayList<>();
@@ -63,13 +61,11 @@ public class CommandTestUtil {
     public static final String EMAIL_DESC_BOB = " " + PREFIX_EMAIL + VALID_EMAIL_BOB;
     public static final String DEPARTMENT_DESC_FRIEND = " " + PREFIX_DEPARTMENT + VALID_DEPARTMENT_FINANCE;
     public static final String DEPARTMENT_DESC_HUSBAND = " " + PREFIX_DEPARTMENT + VALID_DEPARTMENT_IT;
-
     public static final String SALARY_DESC_AMY = " " + PREFIX_SALARY + VALID_SALARY_AMY;
     public static final String SALARY_DESC_BOB = " " + PREFIX_SALARY + VALID_SALARY_BOB;
     public static final String AMOUNT_DESC_BOB = " " + PREFIX_AMOUNT + VALID_OVERTIME_HOURS_BOB;
     public static final String OPERATION_DESC_AMY = " " + PREFIX_OPERATION + "inc";
     public static final String OPERATION_DESC_BOB = " " + PREFIX_OPERATION + "dec";
-
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_POSITION_DESC = " " + PREFIX_POSITION; // empty string not allowed for positions
     public static final String INVALID_ID_DESC = " " + PREFIX_ID + "ID1234-5678";
@@ -78,9 +74,7 @@ public class CommandTestUtil {
     public static final String INVALID_DEPARTMENT_DESC = " "
             + PREFIX_DEPARTMENT + "Finance*"; // '*' not allowed in departments
     public static final String INVALID_SALARY_DESC = " " + PREFIX_SALARY + "10,000"; // missing '$' symbol
-    public static final String INVALID_OVERTIME_AMOUNT = " " + PREFIX_AMOUNT + "73"; // overtime hours exceed 72
     public static final String INVALID_OPERATION = " " + PREFIX_OPERATION + "incs"; // invalid operation
-
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
 

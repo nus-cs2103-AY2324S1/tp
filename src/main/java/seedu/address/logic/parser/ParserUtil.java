@@ -186,12 +186,17 @@ public class ParserUtil {
     public static OvertimeHours parseOvertimeHours(String hours) throws ParseException {
         requireNonNull(hours);
         String trimmedHours = hours.trim();
-        int overtimeHours = Integer.parseInt(trimmedHours);
+        int overtimeHours;
+        try {
+            overtimeHours = Integer.parseInt(trimmedHours);
+        } catch (NumberFormatException e) {
+            throw new ParseException(OvertimeCommand.MESSAGE_INVALID_AMOUNT);
+        }
+        if (overtimeHours <= 0) {
+            throw new ParseException(OvertimeCommand.MESSAGE_INVALID_AMOUNT);
+        }
         if (!OvertimeHours.isValidOvertimeHours(overtimeHours)) {
             throw new ParseException(OvertimeHours.MESSAGE_CONSTRAINTS);
-        }
-        if (overtimeHours == 0) {
-            throw new ParseException(OvertimeCommand.MESSAGE_INVALID_AMOUNT);
         }
         return new OvertimeHours(overtimeHours);
     }
