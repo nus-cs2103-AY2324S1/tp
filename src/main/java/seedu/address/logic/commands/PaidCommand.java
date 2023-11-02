@@ -39,10 +39,14 @@ public class PaidCommand extends Command {
         }
 
         Person personToMarkPaid = lastShownList.get(targetIndex.getZeroBased());
-
+      
+        model.purgeAddressBook();
+      
         model.markPersonPaid(personToMarkPaid);
 
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+     
+        model.commitAddressBook();
 
         return new CommandResult(String.format(MESSAGE_MARK_PERSON_PAID_SUCCESS, personToMarkPaid.getPaid()));
 

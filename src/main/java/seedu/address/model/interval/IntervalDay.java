@@ -1,14 +1,15 @@
-package seedu.address.model.person;
+package seedu.address.model.interval;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import java.time.DayOfWeek;
 
 /**
- * Represents the day when the Tutee has tuition every week.
+ * Represents the day in the interval
  * Guarantees: immutable; is valid as declared in {@link #isValidDay(String)}
  */
-public class Day {
+public class IntervalDay {
     public static final String MESSAGE_CONSTRAINTS =
             "Days should be written using their full names or their first three letters, and it should not be blank";
 
@@ -23,8 +24,9 @@ public class Day {
      *
      * @param day A valid day.
      */
-    public Day(String day) {
+    public IntervalDay(String day) {
         requireNonNull(day);
+        checkArgument(isValidDay(day), MESSAGE_CONSTRAINTS);
         value = parse(day);
         stringValue = parseDay(day);
     }
@@ -104,7 +106,7 @@ public class Day {
             result = "Sun";
             break;
         default:
-
+            throw new IllegalArgumentException(MESSAGE_CONSTRAINTS);
         }
         return result;
     }
@@ -121,8 +123,8 @@ public class Day {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof Day // instanceof handles nulls
-                && value.equals(((Day) other).value)); // state check
+                || (other instanceof seedu.address.model.interval.IntervalDay // instanceof handles nulls
+                && value.equals(((seedu.address.model.interval.IntervalDay) other).value)); // state check
     }
 
     @Override

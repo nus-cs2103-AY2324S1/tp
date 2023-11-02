@@ -42,6 +42,10 @@ public class Lesson {
         return begin.getTime().compareTo(end.getTime()) < 0;
     }
 
+    public String getTimeSlot() {
+        return begin.toString() + " - " + end.toString();
+    }
+
     @Override
     public String toString() {
         return day.toString() + ", " + begin.toString() + " - " + end.toString();

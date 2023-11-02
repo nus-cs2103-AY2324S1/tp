@@ -6,6 +6,7 @@ import java.util.List;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.interval.Interval;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
 
@@ -75,6 +76,16 @@ public class AddressBook implements ReadOnlyAddressBook {
     public boolean hasDate(Person person) {
         requireNonNull(person);
         return persons.checkSameDate(person);
+    }
+
+    /**
+     * Finds the list of timings which have the same day as the Interval from the address book
+     * @param interval
+     * @return list of timings
+     */
+    public List<String> findInterval(Interval interval) {
+        requireNonNull(interval);
+        return persons.findInterval(interval);
     }
 
     /**
