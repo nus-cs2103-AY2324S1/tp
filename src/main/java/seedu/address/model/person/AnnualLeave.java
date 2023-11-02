@@ -309,7 +309,14 @@ public class AnnualLeave {
     }
 
     public int getTotalLeaveTaken() {
-        return this.leaveList.size();
+        LocalDate currentDate = LocalDate.now();
+        int numOfDays = 0;
+        for (LocalDate date: this.leaveList) {
+            if (!date.isAfter(currentDate)) {
+                numOfDays += 1;
+            }
+        }
+        return numOfDays;
     }
 
 }
