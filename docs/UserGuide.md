@@ -278,19 +278,24 @@ You are not allowed to edit any alternative contact information, i.e. `TELEGRAM`
 
 ###  Update contact's photo: `updatephoto`
 
-Updates the photo of an existing contact.
+After adding a new contact, there is a default photo coming with it. With `updatephoto` command, CampusConnect gives you the freedom to choose how each contact looks like in the address book.
 
-Format: `updatephoto INDEX path/NEW_PHOTO_PATH`
+This feature involves the command: `updatephoto`, which updates the photo of an existing contact.
 
-Examples:
-* `updatephoto 1 path/C:/photos/new_johndoe.jpg`
-  * Updates the photo for the 1st person with a new image from the specified path.
-* `updatephoto 2 path/D:/images/new_betsycrowe.png`
-  * Updates the photo for the 2nd person with a new image from the specified path.
+Format: `updatephoto PERSON_INDEX path/NEW_PHOTO_PATH`
+
+<box type="info" icon=":fa-solid-magnifying-glass:">
+
+Below are some examples on how to use the command:
+* `updatephoto 1 path/C:/photos/new_johndoe.jpg`: Updates the photo for the first person in the address book with a new image from the specified path.
+* `updatephoto 2 path/D:/images/new_betsycrowe.png`: Updates the photo for the second person in the address book with a new image from the specified path.
+
+</box>  
 
 <box type="warning">
 
-You are required to input the absolute path to the photo for this command. If you use an invalid path, a default photo will be chosen for your specified contact.
+* You should provide a positive integer that must not exceed the number of contacts currently listed in CampusConnect for `PERSON_INDEX`.
+* You are required to input the absolute path to the photo for this command. If you use an invalid path, a default photo will be chosen for your specified contact.
 </box>
 
 ###  List all contacts: `list`
