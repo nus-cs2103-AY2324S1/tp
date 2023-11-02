@@ -204,3 +204,4 @@ To be added soon
 | **list**        | `list`                                                                                                                                                                                             |
 | **paid**        | `paid INDEX`<br> e.g., `paid 1`                                                                                                                                                                    |
 | **list unpaid** | `list unpaid`                                                                                                                                                                                      |
+| **freeTime**    | `d/DAY dur/DURATION b/BEGIN end/END s/SUBJECT d/DAY b/BEGIN e/END`                                                                                                                                 |
