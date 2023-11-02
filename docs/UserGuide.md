@@ -320,7 +320,7 @@ Examples:
 
 ![listleave success](images/listLeaveSuccess.png)
 
-* `listleave on/2023-12-28` displays an empty list because there are no employees that are on leave on 28 December 2023.
+* `listleave on/2023-12-29` displays an empty list because there are no employees that are on leave on 29 December 2023.
 
 ![listleave empty](images/listLeaveEmpty.png)
 
@@ -398,7 +398,7 @@ Examples:
 
 ![report success](images/reportSuccess.jpg)
 
-* `report EID000-0000` is invalid because the id does not exist.
+* `report EID0000-0000` is invalid because the id does not exist.
 
 ![report failure](images/reportFailure.jpg)
 
