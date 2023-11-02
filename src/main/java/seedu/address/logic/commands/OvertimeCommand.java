@@ -33,8 +33,8 @@ public class OvertimeCommand extends Command {
 
     public static final String MESSAGE_OVERTIME_INCREASE_SUCCESS = "Overtime hours of employee %1$s increased by %2$s";
     public static final String MESSAGE_OVERTIME_DECREASE_SUCCESS = "Overtime hours of employee %1$s decreased by %2$s";
-    public static final String MESSAGE_MISSING_OPERATION_AMOUNT = "Operation and amount must be specified";
     public static final String MESSAGE_OPERATION_USAGE = "Operation must be either inc or dec";
+    public static final String MESSAGE_INVALID_AMOUNT = "Amount must be a positive integer";
     private final Id targetId;
     private final OvertimeHours overtimeHoursToChange;
     private final String operation;

@@ -42,10 +42,6 @@ public class OvertimeCommandParser implements Parser<OvertimeCommand> {
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_ID, PREFIX_OPERATION, PREFIX_AMOUNT);
 
-        if (argMultimap.getValue(PREFIX_OPERATION).isEmpty() || argMultimap.getValue(PREFIX_AMOUNT).isEmpty()) {
-            throw new ParseException(OvertimeCommand.MESSAGE_MISSING_OPERATION_AMOUNT);
-        }
-
         String operation = argMultimap.getValue(PREFIX_OPERATION).get();
         if (!isOperationValid(operation)) {
             throw new ParseException(OvertimeCommand.MESSAGE_OPERATION_USAGE);

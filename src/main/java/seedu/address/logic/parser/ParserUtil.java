@@ -9,6 +9,7 @@ import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
+import seedu.address.logic.commands.OvertimeCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.department.Department;
 import seedu.address.model.employee.Email;
@@ -188,6 +189,9 @@ public class ParserUtil {
         int overtimeHours = Integer.parseInt(trimmedHours);
         if (!OvertimeHours.isValidOvertimeHours(overtimeHours)) {
             throw new ParseException(OvertimeHours.MESSAGE_CONSTRAINTS);
+        }
+        if (overtimeHours == 0) {
+            throw new ParseException(OvertimeCommand.MESSAGE_INVALID_AMOUNT);
         }
         return new OvertimeHours(overtimeHours);
     }
