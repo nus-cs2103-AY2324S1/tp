@@ -22,6 +22,10 @@ public class Messages {
     public static final String MESSAGE_REPORT_STRING =
                 "Name: %1$s\nOvertime hours: %2$s\nOvertime pay: $%3$s\nNumber of leaves: %4$s";
 
+    public static final String MESSAGE_INVALID_DATE = "Invalid date! Dates should be valid and in yyyy-MM-dd format.";
+    public static final String MESSAGE_EMPLOYEES_ON_LEAVE_OVERVIEW = "%1$d employees are on leave!";
+
+
     /**
      * Returns an error message indicating the duplicate prefixes.
      */
@@ -52,6 +56,19 @@ public class Messages {
                 .append(employee.getSalary())
                 .append("; Departments: ");
         employee.getDepartments().forEach(builder::append);
+        return builder.toString();
+    }
+
+    /**
+     * Formats the OvertimeHours of {@code employee} for display to the user.
+     */
+    public static String formatOvertimeHours(Employee employee) {
+        final StringBuilder builder = new StringBuilder();
+        builder.append(employee.getName())
+                .append("; Position: ")
+                .append(employee.getPosition())
+                .append("; Id: ")
+                .append(employee.getId());
         return builder.toString();
     }
 

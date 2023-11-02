@@ -1,9 +1,18 @@
 package seedu.address.logic.parser;
 
+import static java.time.format.DateTimeFormatter.ISO_LOCAL_DATE;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_AMOUNT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_FROM;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NEW;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_OLD;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ON;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_OPERATION;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TO;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIds.ID_FIRST_EMPLOYEE;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_EMPLOYEE;
@@ -23,16 +32,20 @@ import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.DeleteLeaveCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditEmployeeDescriptor;
+import seedu.address.logic.commands.EditLeaveCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.ListLeaveCommand;
+import seedu.address.logic.commands.OvertimeCommand;
 import seedu.address.logic.commands.ResetCommand;
 import seedu.address.logic.commands.SortCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.employee.Employee;
 import seedu.address.model.employee.EmployeeContainsKeywordsPredicate;
 import seedu.address.model.employee.Id;
+import seedu.address.model.employee.OvertimeHours;
 import seedu.address.testutil.EditEmployeeDescriptorBuilder;
 import seedu.address.testutil.EmployeeBuilder;
 import seedu.address.testutil.EmployeeUtil;
@@ -106,8 +119,8 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_addLeave() throws Exception {
         AddLeaveCommand command = (AddLeaveCommand) parser.parseCommand(
-                AddLeaveCommand.COMMAND_WORD + " id/ " + "EID1234-5678"
-                + " from/ " + "2023-10-12" + " to/ " + "2023-10-15");
+                    AddLeaveCommand.COMMAND_WORD + " " + PREFIX_ID + "EID1234-5678 "
+                + PREFIX_FROM + "2023-10-12 " + PREFIX_TO + "2023-10-15");
         Id id = new Id("EID1234-5678");
         LocalDate startDate = LocalDate.parse("2023-10-12", DateTimeFormatter.ISO_LOCAL_DATE);
         LocalDate endDate = LocalDate.parse("2023-10-15", DateTimeFormatter.ISO_LOCAL_DATE);
@@ -117,8 +130,8 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_deleteLeave() throws Exception {
         DeleteLeaveCommand command = (DeleteLeaveCommand) parser.parseCommand(
-                DeleteLeaveCommand.COMMAND_WORD + " id/ " + "EID1234-5678"
-                        + " from/ " + "2023-10-12" + " to/ " + "2023-10-15");
+                DeleteLeaveCommand.COMMAND_WORD + " " + PREFIX_ID + "EID1234-5678 "
+                        + PREFIX_FROM + "2023-10-12 " + PREFIX_TO + "2023-10-15");
         Id id = new Id("EID1234-5678");
         LocalDate startDate = LocalDate.parse("2023-10-12", DateTimeFormatter.ISO_LOCAL_DATE);
         LocalDate endDate = LocalDate.parse("2023-10-15", DateTimeFormatter.ISO_LOCAL_DATE);
@@ -126,10 +139,39 @@ public class AddressBookParserTest {
     }
 
     @Test
+    public void parseCommand_editLeave() throws Exception {
+        EditLeaveCommand command = (EditLeaveCommand) parser.parseCommand(
+                EditLeaveCommand.COMMAND_WORD + " " + PREFIX_ID + "EID1234-5678 "
+                        + PREFIX_OLD + "2023-10-12 " + PREFIX_NEW + "2023-10-15");
+        Id id = new Id("EID1234-5678");
+        LocalDate oldDate = LocalDate.parse("2023-10-12", DateTimeFormatter.ISO_LOCAL_DATE);
+        LocalDate newDate = LocalDate.parse("2023-10-15", DateTimeFormatter.ISO_LOCAL_DATE);
+        assertEquals(new EditLeaveCommand(id, oldDate, newDate), command);
+    }
+
+    @Test
+    public void parseCommand_listLeave() throws Exception {
+        ListLeaveCommand command = (ListLeaveCommand) parser.parseCommand(
+                ListLeaveCommand.COMMAND_WORD + " " + PREFIX_ON + "2023-11-01");
+        assertEquals(
+                new ListLeaveCommand(LocalDate.parse("2023-11-01", ISO_LOCAL_DATE)),
+                command
+        );
+    }
+
+    @Test
     public void parseCommand_reset() throws Exception {
         ResetCommand command = (ResetCommand) parser.parseCommand(
                 ResetCommand.COMMAND_WORD + " f/ " + "overtime");
         assertEquals(new ResetCommand("overtime"), command);
+    }
+
+    @Test
+    public void parseCommand_overtime() throws Exception {
+        OvertimeCommand command = (OvertimeCommand) parser.parseCommand(
+                OvertimeCommand.COMMAND_WORD + " " + PREFIX_ID + ID_FIRST_EMPLOYEE + " " + PREFIX_OPERATION
+                        + "inc " + PREFIX_AMOUNT + "2");
+        assertEquals(new OvertimeCommand(ID_FIRST_EMPLOYEE, new OvertimeHours(2), true), command);
     }
 
     @Test

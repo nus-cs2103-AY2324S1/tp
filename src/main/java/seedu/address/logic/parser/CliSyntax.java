@@ -18,5 +18,9 @@ public class CliSyntax {
     public static final Prefix PREFIX_FROM = new Prefix("from/");
     public static final Prefix PREFIX_TO = new Prefix("to/");
     public static final Prefix PREFIX_REMARK = new Prefix("r/");
-
+    public static final Prefix PREFIX_OLD = new Prefix("old/");
+    public static final Prefix PREFIX_NEW = new Prefix("new/");
+    public static final Prefix PREFIX_ON = new Prefix("on/");
+    public static final Prefix PREFIX_OPERATION = new Prefix("o/");
+    public static final Prefix PREFIX_AMOUNT = new Prefix("a/");
 }

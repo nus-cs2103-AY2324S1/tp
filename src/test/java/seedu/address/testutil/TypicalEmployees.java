@@ -8,6 +8,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_ID_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ID_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_LEAVELIST_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_LEAVELIST_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_LEAVELIST_CARL;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_OVERTIME_HOURS_AMY;
@@ -63,7 +64,7 @@ public class TypicalEmployees {
                 .withEmail("heinz@example.com")
                 .withSalary("5800")
                 .withOvertimeHours(DEFAULT_OVERTIME_HOURS)
-                .withLeaveList(DEFAULT_LEAVELIST)
+                .withLeaveList(VALID_LEAVELIST_CARL)
                 .withRemarkList(DEFAULT_REMARKLIST).build();
     public static final Employee DANIEL = new EmployeeBuilder().withName("Daniel Meier")
                 .withPosition("Tester")
@@ -99,7 +100,7 @@ public class TypicalEmployees {
                 .withPhone("94824242")
                 .withEmail("anna@example.com")
                 .withSalary("1000")
-                .withOvertimeHours(DEFAULT_OVERTIME_HOURS)
+                .withOvertimeHours(VALID_OVERTIME_HOURS_BOB)
                 .withLeaveList(DEFAULT_LEAVELIST)
                 .withRemarkList(DEFAULT_REMARKLIST).build();
 

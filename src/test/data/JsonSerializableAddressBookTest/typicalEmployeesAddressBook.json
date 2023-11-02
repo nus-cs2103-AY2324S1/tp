@@ -34,7 +34,7 @@
       "salary": "5800",
       "departments": [],
       "overtime": 0,
-      "leaveList": [ ],
+      "leaveList": [ "2023-12-12" ],
       "remarkList": [ ]
     },
     {
@@ -81,7 +81,7 @@
       "email": "anna@example.com",
       "salary": "1000",
       "departments": [],
-      "overtime": 0,
+      "overtime": 72,
       "leaveList": [ ],
       "remarkList": [ ]
     }

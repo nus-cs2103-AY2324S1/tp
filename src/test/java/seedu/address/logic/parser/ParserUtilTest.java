@@ -1,11 +1,13 @@
 package seedu.address.logic.parser;
 
+import static java.time.format.DateTimeFormatter.ISO_LOCAL_DATE;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_EMPLOYEE;
 
+import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
@@ -24,12 +26,15 @@ public class ParserUtilTest {
     private static final String INVALID_PHONE = "+651234";
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_DEPARTMENT = "#friend";
+    private static final String INVALID_DATE_FORMAT = "31-12-2023";
+    private static final String INVALID_DATE = "2023-02-31";
 
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_PHONE = "91234567";
     private static final String VALID_EMAIL = "rachel@example.com";
     private static final String VALID_DEPARTMENT_1 = "friend";
     private static final String VALID_DEPARTMENT_2 = "neighbour";
+    private static final String VALID_DATE = "2023-12-31";
 
     private static final String WHITESPACE = " \t\r\n";
 
@@ -169,5 +174,61 @@ public class ParserUtilTest {
             Arrays.asList(new Department(VALID_DEPARTMENT_1), new Department(VALID_DEPARTMENT_2)));
 
         assertEquals(expectedDepartmentSet, actualDepartmentSet);
+    }
+
+    @Test
+    public void parseDate_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseDate((String) null));
+    }
+
+    @Test
+    public void parseDate_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseDate(INVALID_DATE));
+    }
+
+    @Test
+    public void parseDate_invalidFormat_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseDate(INVALID_DATE_FORMAT));
+    }
+
+    @Test
+    public void parseDate_validValueWithoutWhitespace_returnsLocalDate() throws Exception {
+        LocalDate expectedDate = LocalDate.parse(VALID_DATE, ISO_LOCAL_DATE);
+        assertEquals(expectedDate, ParserUtil.parseDate(VALID_DATE));
+    }
+
+    @Test
+    public void parseDate_validValueWithWhitespace_returnsTrimmedDate() throws Exception {
+        String dateWithWhitespace = WHITESPACE + VALID_DATE + WHITESPACE;
+        LocalDate expectedDate = LocalDate.parse(dateWithWhitespace.trim(), ISO_LOCAL_DATE);
+        assertEquals(expectedDate, ParserUtil.parseDate(dateWithWhitespace));
+    }
+
+    @Test
+    public void parseLeaveDate_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseLeaveDate((String) null));
+    }
+
+    @Test
+    public void parseLeaveDate_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseLeaveDate(INVALID_DATE));
+    }
+
+    @Test
+    public void parseLeaveDate_invalidFormat_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseLeaveDate(INVALID_DATE_FORMAT));
+    }
+
+    @Test
+    public void parseLeaveDate_validValueWithoutWhitespace_returnsLocalDate() throws Exception {
+        LocalDate expectedDate = LocalDate.parse(VALID_DATE, ISO_LOCAL_DATE);
+        assertEquals(expectedDate, ParserUtil.parseLeaveDate(VALID_DATE));
+    }
+
+    @Test
+    public void parseLeaveDate_validValueWithWhitespace_returnsTrimmedDate() throws Exception {
+        String dateWithWhitespace = WHITESPACE + VALID_DATE + WHITESPACE;
+        LocalDate expectedDate = LocalDate.parse(dateWithWhitespace.trim(), ISO_LOCAL_DATE);
+        assertEquals(expectedDate, ParserUtil.parseLeaveDate(dateWithWhitespace));
     }
 }
