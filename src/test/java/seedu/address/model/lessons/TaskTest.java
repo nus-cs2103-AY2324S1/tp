@@ -85,8 +85,14 @@ public class TaskTest {
 
     @Test
     public void toStringMethod() {
-        String expected = (TASK_1.isDone() ? "+" : "-") + TASK_1.getDescription();
+        String expected = TASK_1.getDescription();
         assertEquals(expected, TASK_1.toString());
+    }
+
+    @Test
+    public void serializeMethod() {
+        String expected = "-" + TASK_1.getDescription();
+        assertEquals(expected, TASK_1.serialize());
     }
 
     @Test

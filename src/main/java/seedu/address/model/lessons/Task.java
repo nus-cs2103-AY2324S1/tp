@@ -200,6 +200,13 @@ public class Task extends ListEntryField {
         return Objects.hash(description);
     }
 
+    /**
+     * Serializes the task into a string for storage.
+     * @return serialized string
+     */
+    public String serialize() {
+        return (this.isDone ? "+" : "-") + this.description;
+    }
 
     /**
      * Returns the String representation of the task.
@@ -208,7 +215,7 @@ public class Task extends ListEntryField {
      */
     @Override
     public String toString() {
-        return (this.isDone ? "+" : "-") + this.description;
+        return this.description;
     }
 
     /**
