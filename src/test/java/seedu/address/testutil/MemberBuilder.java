@@ -95,6 +95,9 @@ public class MemberBuilder {
         return this;
     }
 
+    /**
+     * Parses the {@code tasks} into a {@code List<Task>} and set it to the {@code Member} that we are building.
+     */
     public MemberBuilder withTask(String... taskName) {
         for (String i : taskName) {
             this.tasks.add(new Task(i));
