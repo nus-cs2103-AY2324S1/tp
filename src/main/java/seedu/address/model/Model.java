@@ -183,6 +183,11 @@ public interface Model {
     TaskManager getTaskManager();
 
     /**
+     * Sorts the task list by the preset comparator type listed.
+     */
+    void sortTasksBy(String comparatorType);
+
+    /**
      * Updates the filter of the filtered person list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */

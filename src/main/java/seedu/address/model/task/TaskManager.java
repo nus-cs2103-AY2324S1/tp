@@ -6,11 +6,14 @@ import java.util.Comparator;
 import java.util.List;
 
 import javafx.collections.ObservableList;
+import seedu.address.model.task.exceptions.InvalidSortingOrderException;
 
 /**
  * Represents a task manager that stores and manages tasks
  */
 public class TaskManager implements ReadOnlyTaskManager {
+    private static final String COMPARATOR_TYPE_DESCRIPTION = "Description";
+    private static final String COMPARATOR_TYPE_DEADLINE = "Deadline";
 
     private final TaskList tasks;
     private Comparator<Task> sortingOrder;
@@ -74,6 +77,7 @@ public class TaskManager implements ReadOnlyTaskManager {
      */
     public void setSortDeadline() {
         sortingOrder = new Task.TaskDeadlineComparator();
+        sort();
     }
 
     /**
@@ -81,6 +85,27 @@ public class TaskManager implements ReadOnlyTaskManager {
      */
     public void setSortDescription() {
         sortingOrder = new Task.TaskDescriptorComparator();
+        sort();
+    }
+
+    /**
+     * Returns the sorting order.
+     */
+    public Comparator<Task> getSortingOrder() {
+        return sortingOrder;
+    }
+
+    /**
+     * Sets the sorting order of the task list to the specified comparator type.
+     */
+    public void sortTasksBy(String comparatorType) {
+        if (comparatorType.equalsIgnoreCase(COMPARATOR_TYPE_DESCRIPTION)) {
+            setSortDescription();
+        } else if (comparatorType.equalsIgnoreCase(COMPARATOR_TYPE_DEADLINE)) {
+            setSortDeadline();;
+        } else {
+            throw new InvalidSortingOrderException();
+        }
     }
 
     /**
