@@ -13,7 +13,7 @@ import seedu.address.model.employee.Id;
 import seedu.address.model.remark.Remark;
 
 /**
- * Parses input arguments and creates a new AddRemarkCommand object
+ * Parses input arguments and creates a new AddRemarkCommand object.
  */
 public class AddRemarkCommandParser implements Parser<AddRemarkCommand> {
     /**
