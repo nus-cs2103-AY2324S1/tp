@@ -3,7 +3,11 @@ package seedu.address.logic.parser;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ANIMAL_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ANIMAL_TYPE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_AVAILABILITY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_HOUSING;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
@@ -32,7 +36,18 @@ public class EditCommandParser implements CommandParser<EditCommand> {
     public EditCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG);
+                ArgumentTokenizer.tokenize(
+                        args,
+                        PREFIX_NAME,
+                        PREFIX_PHONE,
+                        PREFIX_EMAIL,
+                        PREFIX_ADDRESS,
+                        PREFIX_HOUSING,
+                        PREFIX_AVAILABILITY,
+                        PREFIX_ANIMAL_NAME,
+                        PREFIX_ANIMAL_TYPE,
+                        PREFIX_TAG
+                );
 
         Index index;
 
@@ -58,10 +73,25 @@ public class EditCommandParser implements CommandParser<EditCommand> {
         if (argMultimap.getValue(PREFIX_ADDRESS).isPresent()) {
             editPersonDescriptor.setAddress(ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get()));
         }
+        if (argMultimap.getValue(PREFIX_HOUSING).isPresent()) {
+            editPersonDescriptor.setHousing(ParserUtil.parseHousing(argMultimap.getValue(PREFIX_HOUSING).get()));
+        }
+        if (argMultimap.getValue(PREFIX_AVAILABILITY).isPresent()) {
+            editPersonDescriptor.setAvailability(ParserUtil.parseAvailability(
+                    argMultimap.getValue(PREFIX_AVAILABILITY).get())
+            );
+        }
+        if (argMultimap.getValue(PREFIX_ANIMAL_NAME).isPresent()) {
+            editPersonDescriptor.setAnimalName(ParserUtil.parseName(argMultimap.getValue(PREFIX_ANIMAL_NAME).get()));
+        }
+        if (argMultimap.getValue(PREFIX_ANIMAL_TYPE).isPresent()) {
+            editPersonDescriptor.setAnimalType(argMultimap.getValue(PREFIX_ANIMAL_TYPE).get());
+        }
+
         parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editPersonDescriptor::setTags);
 
         if (!editPersonDescriptor.isAnyFieldEdited()) {
-            throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
+            return new EditCommand(index);
         }
 
         return new EditCommand(index, editPersonDescriptor);

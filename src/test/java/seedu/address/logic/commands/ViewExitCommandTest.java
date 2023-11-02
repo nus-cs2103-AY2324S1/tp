@@ -1,7 +1,7 @@
 package seedu.address.logic.commands;
 
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.logic.commands.ViewExitCommand.MESSAGE_EXIT_ACKNOWLEDGEMENT;
+import static seedu.address.logic.commands.ViewExitCommand.MESSAGE_CONFIRM_EXIT_WITHOUT_DETAILS;
 
 import org.junit.jupiter.api.Test;
 
@@ -13,14 +13,14 @@ public class ViewExitCommandTest {
     private Model expectedModel = new ModelManager();
 
     @Test
-    public void execute_viewExit_success() {
-        CommandResult expectedCommandResult = new CommandResult(MESSAGE_EXIT_ACKNOWLEDGEMENT,
-                false,
-                false,
-                false,
+    public void execute_viewExit_detailsNotFilled() {
+        CommandResult expectedCommandResult = new CommandResult(
+                MESSAGE_CONFIRM_EXIT_WITHOUT_DETAILS,
                 null,
-                true
+                null,
+                CommandType.VIEW_EXIT,
+                false
         );
-        assertCommandSuccess(new ViewExitCommand(), model, expectedCommandResult, expectedModel);
+        assertCommandSuccess(new ViewExitCommand(null), model, expectedCommandResult, expectedModel);
     }
 }

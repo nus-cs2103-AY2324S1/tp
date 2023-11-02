@@ -1,12 +1,14 @@
 package seedu.address.logic;
 
+import java.io.IOException;
 import java.nio.file.Path;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.commons.core.index.Index;
+import seedu.address.commons.exceptions.DataLoadingException;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.parser.Parser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.person.Person;
@@ -22,7 +24,8 @@ public interface Logic {
      * @throws CommandException If an error occurs during command execution.
      * @throws ParseException If an error occurs during parsing.
      */
-    CommandResult execute(String commandText) throws CommandException, ParseException;
+    CommandResult execute(String commandText) throws CommandException, ParseException, IOException,
+            DataLoadingException;
 
     /**
      * Returns the AddressBook.
@@ -53,5 +56,6 @@ public interface Logic {
 
     boolean getIsViewExitCommand();
 
-    void setParser(Parser parser);
+    CommandResult executeInView(String commandText, Person person, Index targetIndex)
+            throws CommandException, ParseException;
 }
