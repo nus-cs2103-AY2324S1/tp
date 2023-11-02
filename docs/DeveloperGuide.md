@@ -133,7 +133,7 @@ How the `Logic` component works:
 
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
 
-<puml src="diagrams/ParserClasses.puml" width="600"/>
+<puml src="diagrams/ParserClasses.puml" width="600" />
 
 How the parsing works:
 
@@ -164,16 +164,6 @@ The `Model` component,
   a `ReadOnlyDatePrefs` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they
   should make sense on their own without depending on other components)
-
-<box type="info" seamless>
-
-**Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `LoveBook`,
-which `Date` references. This allows `LoveBook` to only require one `Tag` object per unique tag, instead of each `Date`
-needing their own `Tag` objects.<br>
-
-<puml src="diagrams/BetterModelClassDiagram.puml" width="450" />
-
-</box>
 
 ### Storage component
 
@@ -240,7 +230,7 @@ The filter feature is implemented using the `FilterCommand` class. The `FilterCo
 object as a parameter. The `Predicate` object is used to filter the `Date` objects in the `Model` component.
 The `FilterCommand` class then returns a `CommandResult` object that contains the filtered `Date` objects.
 
-The _Acitvity_ diagram summarises what happens after the user enters a filter command.
+The _Activity_ diagram summarises what happens after the user enters a filter command.
 
 <puml src="diagrams/FilterActivity.puml" width="450" />
 
@@ -255,7 +245,7 @@ The sort feature is implemented using the `SortCommand` class. The `SortCommand`
 object as a parameter. The `Comparator` object is used to sort the `Date` objects in the `Model` component.
 The `SortCommand` class then returns a `CommandResult` object that contains the sorted `Date` objects.
 
-The _Acitvity_ diagram summarises what happens after the user enters a sort command.
+The _Activity_ diagram summarises what happens after the user enters a sort command.
 
 <puml src="diagrams/SortActivity.puml" width="450" />
 
@@ -269,7 +259,6 @@ the command `sort name/ increasing`
 The random date feature is implemented using the 'RandomCommand' class. The 'RandomCommand' class calls a
 getRandomPerson() method from the model class. Within the getRandomPerson method, a 'Predicate' object is created and
 used to filter the 'Date' objects in the 'Model component'. The 'RandomCommand' class then returns a 'CommandResult'
->>>>>>> d633719ca471e881f8bd71df785ae62bc53e6e7d
 object that contains the random 'Date' object.
 
 ### Get best match
@@ -278,6 +267,18 @@ The best match feature is implemented using the `BestMatchCommand` class. The `B
 through the list of Dates, and calls `GetScore` to get the score of the date based on height, age, horoscope and
 income. Each metric will be scored upon 10, and when it deviates from the user's preferences, the score is reduced.
 The maximum score is 40.
+
+### Set preferences
+
+The set preferences feature is implemented using the `SetPrefCommand` class. The `SetPrefCommand` class takes in a
+`DatePref` object as a parameter. The `DatePref` object is used to set the `DatePref` object in the `Model` component.
+The `SetPrefCommand` class then returns a `CommandResult` object that contains the `DatePref` object.
+
+The _Activity_ diagram summarises what happens after the user enters a set preferences command.
+<puml src="diagrams/SetPrefActivity.puml" width="550" />
+
+The _Sequence_ Diagram below shows how the components interact with each other for the scenario where the user issues
+<puml src="diagrams/SetPrefSequence.puml" width="550" />
 
 ### Star dates
 
