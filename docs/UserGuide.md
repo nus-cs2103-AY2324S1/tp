@@ -10,40 +10,49 @@ lesSON is a **desktop application** aimed to help NUS Computer Science undergrad
 their memory work for school content.<br>
 Here are some benefits of adopting lesSON in your studying experience:
 - Create and Edit flashcards about key concepts taught in your courses
-- Take advantage of our implemented **Spaced Repetition** to maximise your memorisation
-- Categorise your flashcards based on their courses or topics
-
-On top of these functionalities, we believe that making flashcards must be efficient. Therefore, lesSON is optimized for
-use via a **Command Line Interface (CLI)** while still having the benefits of a **Graphical User Interface (GUI)**.
-If you type fast, lesSON can get your flashcards done faster than current GUI apps in the industry.
+- Take advantage of inbuilt **Spaced Repetition** to improve memory retention
+- Tag your flashcards based on their courses or topics to stay organised
+- Customise your flashcards using our markdown feature
 
 --------------------------------------------------------------------------------------------------------------------
 
 # Table of Contents
-1. [Quick start](#quick-start)
-2. [Glossary](#glossary)
-3. [Feature list](#feature-list)
+1. [Installation](#installation)
+2. [Quick start](#quick-start)
+3. [Glossary](#glossary)
+4. [User Interface Overview](#user-interface-overview)
+5. [Tutorial](#tutorial)
+6. [Feature list](#feature-list)
    - [Adding a FlashCard](#adding-a-flashcard-add)
    - [Deleting a Flashcard](#deleting-a-flashcard--delete)
    - [View All Flashcards](#view-all-flashcards--list)
    - [Editing a Specific Flashcard](#editing-a-specific-flashcard--edit)
-   - [Practise Flashcards](#practise-flashcards-practise)
-   - [Solve Flashcards](#practise-flashcards-solve)
-   - [Setting Difficulty for Flashcards](#setting-difficulty-of-flashcards-set)
-4. [Markdown Syntax](#markdown-syntax)
-5. [FAQ](#faq)
+   - [Practise Flashcards](#practise-flashcards--practise)
+   - [Solve Flashcards](#solving-flashcards--solve)
+   - [Setting Difficulty for Flashcards](#setting-difficulty-of-flashcards--set)
+7. [Markdown Syntax](#markdown-syntax)
+8. [FAQ](#frequently-asked-questions)
 
 --------------------------------------------------------------------------------------------------------------------
 
-# Quick start
+# Installation
 
-1. Make sure that you have **Java 11 or above** installed on your computer.
+1. Make sure that you have [Java 11 or above](https://www.java.com/en/download/) installed on your computer.
 2. Download the latest jar file from [here](https://github.com/AY2324S1-CS2103T-W17-4/tp/releases/tag/v1.3(trial)).
 3. Move the jar file installed to a working folder you would store all of your flashcards
-4. Launch lesSON.
-5. Better understand the GUI using this [guide](#table-of-contents).
-6. For new users, we recommend reading this [New User Guide](#table-of-contents).
-7. For advanced users, view all feature details in our [feature list](#feature-list).
+4. Launch lesson by doing the following:
+   1. In the terminal or command prompt, use the `cd` command to navigate to the working folder. 
+   [Not sure how to use cd?](https://www.ibm.com/docs/en/aix/7.2?topic=directories-changing-another-directory-cd-command)
+   2. Run lesSON using `java -jar lesSON.jar`
+
+--------------------------------------------------------------------------------------------------------------------
+
+# Quick Start
+
+1. To understand the terms we use in this guide better, check out [our glossary](#glossary).
+2. Better understand the GUI using [this guide](#user-interface-overview).
+3. For new users, we recommend reading [this tutorial](#tutorial).
+4. For advanced users, view all feature details in the [feature list](#feature-list).
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -56,9 +65,48 @@ If you type fast, lesSON can get your flashcards done faster than current GUI ap
 `Index` - The relative position of a flashcard within the deck.
 
 --------------------------------------------------------------------------------------------------------------------
+
+# User Interface Overview
+
+Here is a quick overview of the user interface to get you oriented with where things are.
+
+![gui_overview](./images/UserGuide/1.3_gui_overview.png)
+
+* Command Line Box - lesSON is optimised for typing commands. Type your commands in the command box 
+to create and change flashcards!
+* Result Box - after inputting a command, the result will show up here. Any errors produced will also appear here, for 
+instance in the event of a wrongfully formatted command.
+* Deck List - shows the list of flashcards
+
+--------------------------------------------------------------------------------------------------------------------
+
+# Tutorial
+
+This tutorial explains how to add, edit, tag, and practise your flashcards. Feel free to follow along with lesSON open!
+For advanced users, feel free to look at the [feature list](#feature-list) instead.
+
+1. Firstly, let's add a card. type: <br>`add q/ what does + mean in boolean algebra? a/ it means OR.`
+2. Next, let's capitalise our previous input! Assuming the card is at index `1`, input: <br>`edit 1 q/ What does + mean in boolean 
+algebra? a/ It means OR.`
+3. Next, let's tag it under the module CS1231S by inputting: <br>`edit 1 t/CS1231S`
+4. Feel free to add a few more cards by following steps 1 to 3!
+5. Next, to practise the first card, do: <br> `practise`
+6. Try to recall the answer, and when you are ready to reveal the answer, do: <br> `solve`
+7. How hard was the answer to recall? set the difficulty by doing one of these: <br>
+`set d/easy`
+`set d/medium`
+`set d/hard`
+8. The card will automatically be reinserted into deck. This is based on how difficult you found the card. Due to our 
+spaced repetition system, as you practise, the more difficult cards will surface more at the top.
+9. Note that the `practise`, `solve`, and `set` commands support indexes, but it is recommended to use them without 
+indexes, as in this tutorial, to always operate on the most difficult card.
+
+--------------------------------------------------------------------------------------------------------------------
+
 # Feature list
 
 ### Adding a Flashcard `add`
+
 Adds a flashcard to the deck for the user.
 
 **Format:** 
@@ -271,7 +319,7 @@ Format: set INDEX DIFFICULTY
 2. Index cannot exceed size of the deck
 3. Difficulty must be either ‘easy’, ‘medium’, ‘hard’
 
-#### Examples:
+#### Example:
 ```
 set 1
 ```
@@ -292,6 +340,8 @@ set 10 d/ easy
 2. Successful Output
    ![result of set command](./images/UserGuide/1.3_set_ans.png)
 
+--------------------------------------------------------------------------------------------------------------------
+
 # MarkDown Syntax
 
 For user who wish to incorporate styling in lesSON, there are 3 font styles currently supported:
@@ -302,10 +352,37 @@ For user who wish to incorporate styling in lesSON, there are 3 font styles curr
 ### Bold
 To bold a line of text, wrap text with `**`
 
+#### Example:
+```
+edit 1 q/ How many bits can a **Half Adder** add up
+```
+#### Expected Result:
+![usage of bold syntax](./images/UserGuide/1.3_bold.png)
+
 ### Italic
 To italicise a line of text, wrap text with `*`
+
+#### Example:
+```
+edit 1 q/ How many bits can a *Half Adder* add up
+```
+#### Expected Result:
+![usage of bold syntax](./images/UserGuide/1.3_italic.png)
 
 ### Underline
 To underline a line of text, insert `<u>` at the beginning of the text,
 and end with `</u>` at the end of the underlined text.
 
+#### Example:
+```
+edit 1 q/ How many bits can a <u>Half Adder</u> add up
+```
+#### Expected Result:
+![usage of bold syntax](./images/UserGuide/1.3_underline.png)
+--------------------------------------------------------------------------------------------------------------------
+
+# Frequently Asked Questions
+
+### I can't run lesSON! What should I do?
+Please check that you have correctly installed lesSON by following the instructions [here](#installation). For further 
+queries, feel free to contact us!
