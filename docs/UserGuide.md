@@ -113,7 +113,7 @@ Below is a quick overview of the various components of our interface.
 
 | Component        | Description                                                                                | 
 |------------------|--------------------------------------------------------------------------------------------|
-| Command Box      | You will enter your [commands](#glossary) along with its [parameters](#glossary) here.     |
+| Command Box      | You will enter your [commands](#glossary) along with its input here.                       |
 | Menu Bar         | Contains dropdown menu options for the application.                                        |
 | Result Display   | Displays the results of your commands.<br/>Any error messages will also be displayed here. | 
 | Tutor Details    | Contains information related to the tutor like name, phone number etc.                     |
@@ -146,7 +146,7 @@ Click on any of these below to jump to the respective sections of the guide!
 
 When you first launch TutorConnect, you will be greeted with an empty screen with no tutors. It's time to start adding your tutors to TutorConnect.
 
-### Adding Your First Tutor
+### Adding your first tutor
 
 ![add-t](images/tutorial/add-t.png)
 
@@ -239,12 +239,16 @@ Amazing! Tutor John Doe has now been added to the bottom of the displayed list.
 
 Here is a list of the error messages you may encounter, when the command is entered incorrectly:
 
-| Error Message                                                                              | Reason                                                |
-|--------------------------------------------------------------------------------------------|-------------------------------------------------------|
-| `Invalid command format!`                                                                  | One or more of the tags n/, p/, e/ is missing.        |
-| `Names should only contain alphanumeric characters and spaces, and it should not be blank` | Tutor name input was either invalid or blank.         |
-| `Phone numbers should only contain numbers, and it should be at least 3 digits long`       | Tutor phone number input was either invalid or blank. |
-| `Emails should be of the format local-part@domain and adhere to the following constraints` | Tutor email input was either invalid or blank.        |
+| Error Message                                                                              | Reason                                                                    |
+|--------------------------------------------------------------------------------------------|---------------------------------------------------------------------------|
+| `Invalid command format!`                                                                  | One or more of the tags `n/`, `p/`, `e/` is missing.                      |
+| `Names should only contain alphanumeric characters and spaces, and it should not be blank` | Tutor name input was either invalid or blank.                             |
+| `Phone numbers should only contain numbers, and it should be at least 3 digits long`       | Tutor phone number input was either invalid or blank.                     |
+| `Emails should be of the format local-part@domain and adhere to the following constraints` | Tutor email input was <br/>either invalid or blank[<sup>1</sup>](#note1). |
+| `Multiple values specified for the following single-valued field(s): n/`                   | More than 1 `n/` was given in the command.                                |
+| `Multiple values specified for the following single-valued field(s): p/`                   | More than 1 `p/` was given in the command.                                |
+| `Multiple values specified for the following single-valued field(s): e/`                   | More than 1 `e/` was given in the command.                                |
+| `This tutor already exists in the address book`                                            | There is a tutor with the same name in the address book.                  |
 
 Refer to [input information](#input-examples) for details about valid inputs.
 
@@ -287,18 +291,18 @@ Viola! His phone number has now been updated to **87654321**.
 
 Here is a list of the error messages you may encounter, when the command is entered incorrectly:
 
-| Error Message                                                                              | Reason                                                       |
-|--------------------------------------------------------------------------------------------|--------------------------------------------------------------|
-| `Invalid command format!`                                                                  | Invalid or missing TUTOR_INDEX.                              |
-| `The person index provided is invalid`                                                     | TUTOR_INDEX entered is not in the range of number of tutors. |
-| `Names should only contain alphanumeric characters and spaces, and it should not be blank` | Tutor name input was either invalid or blank.                |
-| `Phone numbers should only contain numbers, and it should be at least 3 digits long`       | Tutor phone number input was either invalid or blank.        |
-| `Emails should be of the format local-part@domain and adhere to the following constraints` | Tutor email input was either invalid or blank.               |
-| `Multiple values specified for the following single-valued field(s): n/`                   | More than 1 `n/` was given in the command.                   |
-| `Multiple values specified for the following single-valued field(s): p/`                   | More than 1 `p/` was given in the command.                   |
-| `Multiple values specified for the following single-valued field(s): e/`                   | More than 1 `e/` was given in the command.                   |
-| `This tutor already exists in the address book`                                            | There is a tutor with the same name in the address book.     |
-| `At least one field to edit must be provided`                                              | There is no `n/`, `p/` or `e/` tag provided to edit a field. |
+| Error Message                                                                              | Reason                                                               |
+|--------------------------------------------------------------------------------------------|----------------------------------------------------------------------|
+| `Invalid command format!`                                                                  | Invalid or missing TUTOR_INDEX.                                      |
+| `The person index provided is invalid`                                                     | TUTOR_INDEX entered is not in the range of number of tutors.         |
+| `Names should only contain alphanumeric characters and spaces, and it should not be blank` | Tutor name input was either invalid or blank.                        |
+| `Phone numbers should only contain numbers, and it should be at least 3 digits long`       | Tutor phone number input was either invalid or blank.                |
+| `Emails should be of the format local-part@domain and adhere to the following constraints` | Tutor email input was either invalid or blank[<sup>1</sup>](#note1). |
+| `Multiple values specified for the following single-valued field(s): n/`                   | More than 1 `n/` was given in the command.                           |
+| `Multiple values specified for the following single-valued field(s): p/`                   | More than 1 `p/` was given in the command.                           |
+| `Multiple values specified for the following single-valued field(s): e/`                   | More than 1 `e/` was given in the command.                           |
+| `This tutor already exists in the address book`                                            | There is a tutor with the same name in the address book.             |
+| `At least one field to edit must be provided`                                              | There is no `n/`, `p/` or `e/` tag provided to edit a field.         |
 
 You can also refer to [input information](#input-examples) for details about valid inputs.
 
@@ -527,18 +531,18 @@ Tada! The schedule has now been updated to 8am.
 
 Here is a list of the error messages you may encounter, when the command is entered incorrectly:
 
-| Error Message                                                                                                      | Reason                                                                                      |
-|--------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------|
-| `Invalid command format!`                                                                                          | Invalid or missing SCHEDULE_INDEX                                                           |
-| `The schedule index provided is invalid`                                                                           | SCHEDULE_INDEX entered is not in the range of number of schedules                           |
-| `EndTime should only contain a valid date and time in the format "yyyy-MM-ddTHH:mm", and it should not be blank`   | The end time entered is not in the correct datetime format                                  |
-| `StartTime should only contain a valid date and time in the format "yyyy-MM-ddTHH:mm", and it should not be blank` | The start time entered is not in the correct datetime format                                |
-| `Multiple values specified for the following single-valued field(s): st/`                                          | More than 1 `st/` was given in the command                                                  |
-| `Multiple values specified for the following single-valued field(s): et/`                                          | More than 1 `et/` was given in the command                                                  |
-| `This schedule already exists in the address book`                                                                 | There is a schedule for the same tutor with the same start and end time in the address book |
-| `This tutor has a clashing schedule in the address book`                                                           | There is a schedule for the same tutor with overlapping times in the address book           |
-| `At least one field to edit must be provided.`                                                                     | There is no `st/` or `et/` tag provided to edit a field                                     |
-| `Schedules start time should be before its end time.`                                                              | The start time provided is before the end time                                              |
+| Error Message                                                                                                      | Reason                                                                                       |
+|--------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------|
+| `Invalid command format!`                                                                                          | Invalid or missing SCHEDULE_INDEX.                                                           |
+| `The schedule index provided is invalid`                                                                           | SCHEDULE_INDEX entered is not in the range of number of schedules.                           |
+| `EndTime should only contain a valid date and time in the format "yyyy-MM-ddTHH:mm", and it should not be blank`   | The end time entered is not in the correct datetime format[<sup>2</sup>](#note2).            |
+| `StartTime should only contain a valid date and time in the format "yyyy-MM-ddTHH:mm", and it should not be blank` | The start time entered is not in the correct datetime format[<sup>2</sup>](#note2).          |
+| `Multiple values specified for the following single-valued field(s): st/`                                          | More than 1 `st/` was given in the command.                                                  |
+| `Multiple values specified for the following single-valued field(s): et/`                                          | More than 1 `et/` was given in the command.                                                  |
+| `This schedule already exists in the address book`                                                                 | There is a schedule for the same tutor with the same start and end time in the address book. |
+| `This tutor has a clashing schedule in the address book`                                                           | There is a schedule for the same tutor with overlapping times in the address book.           |
+| `At least one field to edit must be provided`                                                                      | There is no `st/` or `et/` tag provided to edit a field.                                     |
+| `Schedules start time must be before its end time and both should be on the same day`                              | The provided start time is either before the end time or they are not on the same day.       |
 
 
 You can also refer to [input information](#input-examples) for details about valid inputs.
@@ -827,9 +831,9 @@ Woah look at that! The schedules are now being displayed in a calendar form.
 
 This command might seem complicated, but it is easy to use with only 1 possible error:
 
-| Error Message             | Reason                  |
-|---------------------------|-------------------------|
-| `Invalid command format!` | Invalid or missing DATE |
+| Error Message             | Reason                   |
+|---------------------------|--------------------------|
+| `Invalid command format!` | Invalid or missing DATE. |
 
 <div markdown="block" class="alert alert-warning">
 
@@ -1010,7 +1014,6 @@ Here are some descriptions of the words you might come across in the User Guide:
 
 | Term                       | Definition                                                                                                                                                                                                                                                 |
 |----------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Parameter                  | Parameters are like fields in a form you are required to fill up. They include details you provide to execute a command. <br> For example, in the command `add-t n/NAME p/PHONE NUMBER e/EMAIL`, `n/NAME`, `p/PHONE NUMBER`, and `e/EMAIL` are parameters. |
 | Command                    | A command is an instruction given to the application to perform a specific action. For example, `list-t` is a command to list all tutors in the address book.                                                                                              |
 | GUI                        | GUI is a user interface that allows users to interact with the application using graphical elements like text fields, buttons, and menus.                                                                                                                  |
 | <span id="cli">CLI</span>  | CLI is a text-based user interface that allows users to interact with the application by typing commands.                                                                                                                                                  |
@@ -1032,7 +1035,7 @@ Here are some descriptions of the words you might come across in the User Guide:
 ### Input Information
 Here are some inputs you might come across in the User Guide:
 
-| Parameter           | Description                                       | Limitations                                                                                  |
+| Input               | Description                                       | Limitations                                                                                  |
 |---------------------|---------------------------------------------------|----------------------------------------------------------------------------------------------|
 | `n/NAME`            | Refers to the name of the tutor.                  | Only contain alphanumeric characters and spaces, and <br/>should <br/>not be blank.          |
 | `p/PHONE NUMBER`    | Refers to the phone number of the tutor.          | Only contain numbers, and should be at least 3 <br/>digits long.                             |
