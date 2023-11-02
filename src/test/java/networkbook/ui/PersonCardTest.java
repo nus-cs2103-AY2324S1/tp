@@ -86,6 +86,7 @@ public class PersonCardTest {
 
     @Test
     public void constructor_hasValidGraduation_showsValidGraduation() {
+        // EP: Has graduation
         Person person = new PersonBuilder().withName("Bob").withGraduation(VALID_GRADUATION_BOB).build();
         PersonCard personCard = new PersonCard(person, 1, DUMMY_MAIN_CALLBACK);
         FlowPane graduationPane = personCard.getGraduation();
@@ -94,6 +95,7 @@ public class PersonCardTest {
 
     @Test
     public void constructor_noGraduation_showsBlank() {
+        // EP: No graduation
         Person person = new PersonBuilder().withName("Bob").withoutOptionalFields().build();
         PersonCard personCard = new PersonCard(person, 1, DUMMY_MAIN_CALLBACK);
         FlowPane graduationPane = personCard.getGraduation();
@@ -102,6 +104,7 @@ public class PersonCardTest {
 
     @Test
     public void constructor_hasValidCourses_showsValidCourses() {
+        // EP: Has courses
         Person person = new PersonBuilder().withName("Bob")
                 .withCourses(List.of(VALID_COURSE_BOB, VALID_COURSE_AMY)).build();
         PersonCard personCard = new PersonCard(person, 1, DUMMY_MAIN_CALLBACK);
@@ -112,6 +115,7 @@ public class PersonCardTest {
 
     @Test
     public void constructor_noCourses_showsBlank() {
+        // EP: No courses
         Person person = new PersonBuilder().withName("Bob").withoutOptionalFields().build();
         PersonCard personCard = new PersonCard(person, 1, DUMMY_MAIN_CALLBACK);
         FlowPane coursesPane = personCard.getCourses();
@@ -120,6 +124,7 @@ public class PersonCardTest {
 
     @Test
     public void constructor_hasValidPhones_showsValidPhones() {
+        // EP: Has phones
         Person person = new PersonBuilder().withName("Bob")
                 .withPhones(List.of(VALID_PHONE_BOB, VALID_PHONE_AMY)).build();
         PersonCard personCard = new PersonCard(person, 1, DUMMY_MAIN_CALLBACK);
@@ -130,6 +135,7 @@ public class PersonCardTest {
 
     @Test
     public void constructor_noPhones_showsBlank() {
+        // EP: No phones
         Person person = new PersonBuilder().withName("Bob").withoutOptionalFields().build();
         PersonCard personCard = new PersonCard(person, 1, DUMMY_MAIN_CALLBACK);
         FlowPane phonesPane = personCard.getPhones();
@@ -138,6 +144,7 @@ public class PersonCardTest {
 
     @Test
     public void constructor_hasValidEmails_showsValidEmails() {
+        // EP: Has emails
         Person person = new PersonBuilder().withName("Bob")
                 .withEmails(List.of(VALID_EMAIL_BOB, VALID_EMAIL_AMY)).build();
         PersonCard personCard = new PersonCard(person, 1, DUMMY_MAIN_CALLBACK);
@@ -148,6 +155,7 @@ public class PersonCardTest {
 
     @Test
     public void constructor_noEmails_showsBlank() {
+        // EP: No emails
         Person person = new PersonBuilder().withName("Bob").withoutOptionalFields().build();
         PersonCard personCard = new PersonCard(person, 1, DUMMY_MAIN_CALLBACK);
         FlowPane emailsPane = personCard.getEmails();
@@ -156,6 +164,7 @@ public class PersonCardTest {
 
     @Test
     public void constructor_hasValidLinks_showsValidLinks() {
+        // EP: Has links
         Person person = new PersonBuilder().withName("Bob")
                 .withLinks(List.of(VALID_LINK_BOB, VALID_LINK_AMY)).build();
         PersonCard personCard = new PersonCard(person, 1, DUMMY_MAIN_CALLBACK);
@@ -166,6 +175,7 @@ public class PersonCardTest {
 
     @Test
     public void constructor_noLinks_showsBlank() {
+        // EP: No links
         Person person = new PersonBuilder().withName("Bob").withoutOptionalFields().build();
         PersonCard personCard = new PersonCard(person, 1, DUMMY_MAIN_CALLBACK);
         FlowPane linksPane = personCard.getLinks();
@@ -174,6 +184,7 @@ public class PersonCardTest {
 
     @Test
     public void constructor_hasValidSpecialisations_showsValidSpecialisations() {
+        // EP: Has specialisations
         Person person = new PersonBuilder().withName("Bob")
                 .withSpecialisations(List.of(VALID_SPECIALISATION_BOB, VALID_SPECIALISATION_AMY)).build();
         PersonCard personCard = new PersonCard(person, 1, DUMMY_MAIN_CALLBACK);
@@ -184,6 +195,7 @@ public class PersonCardTest {
 
     @Test
     public void constructor_noSpecialisations_showsBlank() {
+        // EP: No specialisations
         Person person = new PersonBuilder().withName("Bob").withoutOptionalFields().build();
         PersonCard personCard = new PersonCard(person, 1, DUMMY_MAIN_CALLBACK);
         FlowPane specsPane = personCard.getSpecialisations();
@@ -192,6 +204,7 @@ public class PersonCardTest {
 
     @Test
     public void constructor_hasHighPriority_showsHighPriority() {
+        // EP: Has high priority
         Person person = new PersonBuilder().withName("Bob").withPriority("high").build();
         PersonCard personCard = new PersonCard(person, 1, DUMMY_MAIN_CALLBACK);
         FlowPane priorityPane = personCard.getPriority();
@@ -203,6 +216,7 @@ public class PersonCardTest {
     }
     @Test
     public void constructor_hasMediumPriority_showsMediumPriority() {
+        // EP: Has medium priority
         Person person = new PersonBuilder().withName("Bob").withPriority("medium").build();
         PersonCard personCard = new PersonCard(person, 1, DUMMY_MAIN_CALLBACK);
         FlowPane priorityPane = personCard.getPriority();
@@ -215,6 +229,7 @@ public class PersonCardTest {
 
     @Test
     public void constructor_hasLowPriority_showsLowPriority() {
+        // EP: Has low priority
         Person person = new PersonBuilder().withName("Bob").withPriority("low").build();
         PersonCard personCard = new PersonCard(person, 1, DUMMY_MAIN_CALLBACK);
         FlowPane priorityPane = personCard.getPriority();
@@ -227,6 +242,7 @@ public class PersonCardTest {
 
     @Test
     public void constructor_noPriority_showsBlank() {
+        // EP: Has no priority
         Person person = new PersonBuilder().withName("Bob").build();
         PersonCard personCard = new PersonCard(person, 1, DUMMY_MAIN_CALLBACK);
         FlowPane priorityPane = personCard.getPriority();
