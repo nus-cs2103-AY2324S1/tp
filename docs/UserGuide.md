@@ -76,7 +76,7 @@ solution to manage your student details, including attendance records and assign
 
 ### Viewing help : `help`
 
-Shows a message explaning how to access the help page.
+Shows a message explaining how to access the help page.
 
 ![help message](images/helpMessage.png)
 
@@ -261,7 +261,7 @@ Merges two students in the current address book.
 
 ![merge](images/mergeCommand.png)
 
-Format: `merge [PRIMARY_INDEX] [SECONDARY_INDEX]`
+Format: `merge PRIMARY_INDEX SECONDARY_INDEX`
 
 * Information of the primary student is retained.
 * If any information fields of the primary student are empty, they are filled with information of the secondary student.
@@ -276,7 +276,7 @@ Displays the detailed attendance record of the specified student.
 
 ![view](images/viewCommand.png)
 
-Format: `merge [PRIMARY_INDEX] [SECONDARY_INDEX]`
+Format: `view INDEX`
 
 * If the student has no attendance records, it will return a message indicating that the student has no attendance records.
 * If the student has attendance records, the attendance record will be shown week by week with the reason being provided for absences.
@@ -338,9 +338,10 @@ _Details coming soon ..._
 | **Delete** | `delete all [tg/TUTORIALGROUPID]` `delete INDEX` <br> e.g., `delete all tg/G10` `delete 3`                                                                                  |
 | **Edit**   | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [id/STUDENT_ID] [t/COURSECODE TUTORIALGROUPID]...`<br> e.g., `edit 1 n/Tan Liyan` `edit 2 p/92345678 t/`                           |
 | **Exit**   | `exit`                                                                                                                                                                      |
-| **Filter** | `filter [add/delete/clear] [coursetg/COURSECODE] [tg/TUTORIALGROUPID]`                                                                                                      |
-| **Find**   | `find n/STUDENT_NAME [STUDENT_NAME]… \                                                                                                                                      | id/STUDENT_ID [STUDENT_ID]…`<br> e.g., `find n/Anthony Yiqiao`                                                                                                          |
-| **List**   | `list attendance w/WEEKNUMBER [tg/TUTORIALGROUPID]` `list students`                                                                                                         |                                                           |
+| **Filter** | `filter [add/delete/clear] [coursetg/COURSECODE] [tg/TUTORIALGROUPID]`<br/> e.g., `filter add coursetg/CS2103T tg/G08`                                                      |
+| **Find**   | `find n/STUDENT_NAME [STUDENT_NAME]… \| id/STUDENT_ID [STUDENT_ID]…` <br/> e.g., `find n/Anthony Yiqiao`                                                                    | id/STUDENT_ID [STUDENT_ID]…`<br> e.g., `find n/Anthony Yiqiao`                                                                                                          |
+| **List**   | `list attendance w/WEEKNUMBER [tg/TUTORIALGROUPID]`<br/> e.g., `list students`                                                                                              |                                                           |
 | **Help**   | `help`                                                                                                                                                                      |
-| **Mark**   | `mark n/STUDENT_NAME[, STUDENT_NAME]… \                                                                                                                                     | id/STUDENT_ID[, STUDENT_ID]… a/ATTENDANCE w/WEEKNUMBER [r/REASON_OF_ABSENCE]`<br/> e.g., `mark id/A0123456E, A0123457E a/1 w/1` `mark id/A0123456E, A0123457E a/1 w/1` |
-| **merge**  | `merge [PRIMARY_INDEX] [SECONDARY_INDEX]`                                                                                                                                   |
+| **Mark**   | `mark n/STUDENT_NAME[, STUDENT_NAME]… \| id/STUDENT_ID[, STUDENT_ID]… a/ATTENDANCE w/WEEKNUMBER [r/REASON_OF_ABSENCE]` <br/> e.g., `mark n/Zong Jin, Fu Yiqiao a/1 w/1`                                         | id/STUDENT_ID[, STUDENT_ID]… a/ATTENDANCE w/WEEKNUMBER [r/REASON_OF_ABSENCE]`<br/> e.g., `mark id/A0123456E, A0123457E a/1 w/1` `mark id/A0123456E, A0123457E a/1 w/1` |
+| **Merge**  | `merge [PRIMARY_INDEX] [SECONDARY_INDEX]` <br/> e.g., `merge 1 2`                                                                                                           |
+| **View**   | `view INDEX` <br/> e.g., `view 1`                                                                                                                                           |
