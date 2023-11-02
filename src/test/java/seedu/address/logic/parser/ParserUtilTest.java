@@ -29,7 +29,7 @@ public class ParserUtilTest {
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_ID = "E12345678";
     private static final String INVALID_TAG = "#friend";
-    private static final String INVALID_FILTER_OPERATION = "update";
+    private static final String INVALID_COURSE_OPERATION = "update";
     private static final String INVALID_WEEK = "25";
     private static final String INVALID_WEEK_UNPARSEABLE = ":";
 
@@ -42,6 +42,7 @@ public class ParserUtilTest {
     private static final String VALID_CREATE_OPERATION = "create";
     private static final String VALID_DELETE_OPERATION = "delete";
     private static final String VALID_SWITCH_OPERATION = "switch";
+    private static final String VALID_EDIT_OPERATION = "edit";
     private static final String VALID_WEEK = "2";
 
     private static final String WHITESPACE = " \t\r\n";
@@ -229,33 +230,37 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseFilterOperation_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseFilterOperation((String) null));
+    public void parseCourseOperation_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseCourseOperation((String) null));
     }
 
     @Test
-    public void parseFilterOperation_invalidValue_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseFilterOperation(INVALID_FILTER_OPERATION));
+    public void parseCourseOperation_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseCourseOperation(INVALID_COURSE_OPERATION));
     }
 
 
     @Test
-    public void parseFilterOperation_validValueWithputWhiteSpace_returnsFilterOperation() throws Exception {
-        assertEquals(CourseOperation.CREATE, ParserUtil.parseFilterOperation(VALID_CREATE_OPERATION));
-        assertEquals(CourseOperation.DELETE, ParserUtil.parseFilterOperation(VALID_DELETE_OPERATION));
-        assertEquals(CourseOperation.SWITCH, ParserUtil.parseFilterOperation(VALID_SWITCH_OPERATION));
+    public void parseCourseOperation_validValueWithputWhiteSpace_returnsCourseOperation() throws Exception {
+        assertEquals(CourseOperation.CREATE, ParserUtil.parseCourseOperation(VALID_CREATE_OPERATION));
+        assertEquals(CourseOperation.DELETE, ParserUtil.parseCourseOperation(VALID_DELETE_OPERATION));
+        assertEquals(CourseOperation.SWITCH, ParserUtil.parseCourseOperation(VALID_SWITCH_OPERATION));
+        assertEquals(CourseOperation.EDIT, ParserUtil.parseCourseOperation(VALID_EDIT_OPERATION));
     }
 
     @Test
-    public void parseFilterOperation_validValueWithWhiteSpace_returnsFilterOperation() throws Exception {
-        String addOperationWithWhitespace = WHITESPACE + VALID_CREATE_OPERATION + WHITESPACE;
-        assertEquals(CourseOperation.CREATE, ParserUtil.parseFilterOperation(addOperationWithWhitespace));
+    public void parseCourseOperation_validValueWithWhiteSpace_returnsCourseOperation() throws Exception {
+        String createOperationWithWhitespace = WHITESPACE + VALID_CREATE_OPERATION + WHITESPACE;
+        assertEquals(CourseOperation.CREATE, ParserUtil.parseCourseOperation(createOperationWithWhitespace));
 
         String deleteOperationWithWhitespace = WHITESPACE + VALID_DELETE_OPERATION + WHITESPACE;
-        assertEquals(CourseOperation.DELETE, ParserUtil.parseFilterOperation(deleteOperationWithWhitespace));
+        assertEquals(CourseOperation.DELETE, ParserUtil.parseCourseOperation(deleteOperationWithWhitespace));
 
-        String clearOperationWithWhitespace = WHITESPACE + VALID_SWITCH_OPERATION + WHITESPACE;
-        assertEquals(CourseOperation.SWITCH, ParserUtil.parseFilterOperation(clearOperationWithWhitespace));
+        String switchOperationWithWhitespace = WHITESPACE + VALID_SWITCH_OPERATION + WHITESPACE;
+        assertEquals(CourseOperation.SWITCH, ParserUtil.parseCourseOperation(switchOperationWithWhitespace));
+
+        String editOperationWithWhitespace = WHITESPACE + VALID_EDIT_OPERATION + WHITESPACE;
+        assertEquals(CourseOperation.EDIT, ParserUtil.parseCourseOperation(editOperationWithWhitespace));
     }
 }
 

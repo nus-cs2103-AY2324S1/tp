@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_G01;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
+import static seedu.address.testutil.TypicalPersons.BOB;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.util.Arrays;
@@ -84,6 +85,37 @@ public class AddressBookTest {
     public void toStringMethod() {
         String expected = AddressBook.class.getCanonicalName() + "{persons=" + addressBook.getPersonList() + "}";
         assertEquals(expected, addressBook.toString());
+    }
+
+    @Test
+    public void equals() {
+        AddressBook firstAddressBook = new AddressBook("CS2101");
+        AddressBook secondAddressBook = new AddressBook("CS2103T");
+        AddressBook thirdAddressBook = new AddressBook("CS2101");
+
+        firstAddressBook.addPerson(ALICE);
+        secondAddressBook.addPerson(ALICE);
+        thirdAddressBook.addPerson(BOB);
+
+        // same object -> returns true
+        assertTrue(firstAddressBook.equals(firstAddressBook));
+
+        // same values -> returns true
+        AddressBook firstAddressBookCopy = new AddressBook("CS2101");
+        firstAddressBookCopy.addPerson(ALICE);
+        assertTrue(firstAddressBook.equals(firstAddressBookCopy));
+
+        // different types -> returns false
+        assertFalse(firstAddressBook.equals(1));
+
+        // null -> returns false
+        assertFalse(firstAddressBook.equals(null));
+
+        // different course code -> returns false
+        assertFalse(firstAddressBook.equals(secondAddressBook));
+
+        // different persons -> returns false
+        assertFalse(firstAddressBook.equals(thirdAddressBook));
     }
 
     /**

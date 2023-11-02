@@ -25,6 +25,7 @@ import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.MarkAttendanceCommand;
+import seedu.address.logic.commands.MergeCommand;
 import seedu.address.logic.commands.ViewCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Person;
@@ -115,6 +116,12 @@ public class AddressBookParserTest {
                 CourseCommand.COMMAND_WORD + " delete coursetg/CS2103T") instanceof CourseCommand);
         assertTrue(parser.parseCommand(
                 CourseCommand.COMMAND_WORD + " switch coursetg/CS2103T") instanceof CourseCommand);
+    }
+
+    @Test
+    public void parseCommand_merge() throws Exception {
+        assertTrue(parser.parseCommand(
+                MergeCommand.COMMAND_WORD + " 1 2") instanceof MergeCommand);
     }
 
     @Test
