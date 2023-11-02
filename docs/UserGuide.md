@@ -261,7 +261,7 @@ Examples:
 
 Below is the chart generated after entering `bar l/`.
 
-  ![result for 'sort in/ ASC'](images/ug_images/barResult.png)
+  ![result for 'bar l/'](images/ug_images/barResult.png)
 
 ### Showing line chart
 Showing a line chart describing number of students enrolled in each month in a specific year.
@@ -275,7 +275,7 @@ Examples:
 in each month in year 2023.
 
 Below is the chart generated after typing `trend y/2023`
-   ![result for 'sort in/ ASC'](images/ug_images/trendResult.png)
+   ![result for 'trend y/2023'](images/ug_images/trendResult.png)
 
 ### Export visual representation : `export`
 
