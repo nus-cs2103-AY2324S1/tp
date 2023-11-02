@@ -5,17 +5,23 @@ skinparam arrowColor MODEL_COLOR
 skinparam classBackgroundColor MODEL_COLOR
 
 AddressBook *-right-> "1" UniquePersonList
-AddressBook *-right-> "1" UniqueGroupList
-UniqueGroupList -[hidden]down- UniquePersonList
-UniqueGroupList -[hidden]down- UniquePersonList
+AddressBook *-left-> "1" EventList
 
-UniqueGroupList -right-> "*" Group
-UniquePersonList -right-> Person
+UniquePersonList --> Person
+EventList --> Event
 
-Person -up-> "*" Group
+Person --> "*" Group
 
-Person *--> Name
+Person *-right-> Name
 Person *--> Phone
 Person *--> Email
 Person *--> Address
+Person *--> Birthday
+
+Event *-left-> EventName
+Event *--> EventType
+Event *--> EventDate
+Event *--> EventTime
+Event *--> "*" Group
+Event *-> "*" Person
 @enduml

@@ -19,6 +19,7 @@ Class Email
 Class Name
 Class Phone
 Class Group
+Class Birthday
 
 Class EventList
 Class "{abstract}\nEvent" as Event
@@ -43,20 +44,23 @@ ModelManager -left-> "1" AddressBook
 ModelManager -right-> "1" UserPrefs
 UserPrefs .up.|> ReadOnlyUserPrefs
 
-AddressBook *--> "1" UniquePersonList
-AddressBook *--> "1" EventList
+AddressBook --> "1" UniquePersonList
+AddressBook --> "1" EventList
 UniquePersonList --> "~* all" Person
 EventList --> "~* all" Event
 Event <|-- Meeting
-Person *--> Name
-Person *--> "0..1" Phone
-Person *--> "0..1" Email
-Person *--> "0..1" Address
-Person *--> "*" Group
-Event *--> EventName
-Event *--> EventDate
-Event *--> EventType
-Event *--> "0..1" EventTime
+Person --> Name
+Person --> "0..1" Phone
+Person --> "0..1" Email
+Person --> "0..1" Address
+Person --> "*" Group
+Person --> "0..1" Birthday
+Event --> "1" EventName
+Event --> "1" EventDate
+Event --> "1" EventType
+Event --> "0..1" EventTime
+Event --> "*" Group
+Event --> "*" Person
 
 Person -[hidden]up--> I
 UniquePersonList -[hidden]right-> I

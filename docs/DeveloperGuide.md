@@ -116,19 +116,22 @@ How the parsing works:
 ### Model component
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
 
-<img src="images/ModelClassDiagram.png" width="450" />
+<img src="images/ModelClassDiagram.png" width="600" />
 
 
 The `Model` component,
 
 * stores the address book data i.e., all `Person`(which are contained in a `UniquePersonList` object) and `Event` objects (which are contained in a `EventList` object).
 * stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* stores the currently 'selected' `Event` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Event>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
+* stores a `Logger` object that is used to log messages of the application's behaviour.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Group` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Group` object per unique group, instead of each `Group` needing their own `Group` objects.<br>
+[//]: # (Not necessary to mention this alternative model, as it is not used in the current implementation)
+[//]: # (<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative &#40;arguably, a more OOP&#41; model is given below. It has a `Group` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Group` object per unique group, instead of each `Group` needing their own `Group` objects.<br>)
 
-<img src="images/BetterModelClassDiagram.png" width="450" />
+<img src="images/BetterModelClassDiagram.png" width="600" />
 
 </div>
 
@@ -158,11 +161,11 @@ This section describes some noteworthy details on how certain features are imple
 
 #### Implementation details
 
-The 'add' feature involves creating a new "Person" object with optional fields and adding it to FumbleLog. 
+The `add` feature involves creating a new `Person` object with optional fields and adding it to FumbleLog. 
 
 This is done using `AddCommand` which implements the `Command` interface. The `AddCommand` is then executed by `LogicManager` which calls `ModelManager` to add the person to the address book.
 
-As a result, the existing 'Person' class in AB3's implementation is enhanced to have the capacity of storing optional fields.
+As a result, the existing `Person` class in AB3's implementation is enhanced to have the capacity of storing optional fields.
 Below is a class diagram of the enhanced 'Person' class:
 
 <img src="images/PersonClassDiagram.png" alt="PersonClassDiagram" width=500 />
@@ -218,6 +221,26 @@ for empty/null inputs in the Person object by checking if the optional field is 
   * Cons:
     * Inconveniences the user as they have to remember a new command to add a person with optional fields.
 
+### Ability to track events
+
+This subsection details of how the `Event` class is implemented.
+
+#### Implementation
+
+For this feature, the `Event` class is implemented to store the event's name, date,
+start time, end time, persons involved and groups involved.
+
+<img src="images/EventClassDiagram.png" alt="EventClassDiagram" width=600 />
+
+#### Design considerations:
+
+- Events stores a list of `Name` and a list of `Group` that are involved in the event. 
+This is to facilitate the ability to track persons and groups involved in the event.
+The `Name` class is used to represent the name of the person involved in the event, as names are unique in the `UniquePersonList
+- To make handling `Event` objects easier, the `Meeting` class is created to represent meetings as a subtype of `Event`. 
+This is to allow the `Event` class to be extended to other types of events in the future.
+- To track events, we implement an `EventList` to store all events to be displayed in FumbleLog.
+
 ### Ability to assign persons to an event
 
 The ability to assign persons to an event is facilitated by `ModelManager`.
@@ -230,17 +253,18 @@ Users can assign multiple names to an event by using multiple `n/` identifiers f
 
 When editing the event, specifying `n/` with a `Name` will append this new name to the current list rather than replace the previous names. This is to facilitate the user to assign more persons without accidentally deleting the previous persons assigned. To un-assign a person, the user must manually specify `u/` with the `Name` to un-assign the person from the event.
 
-### Ability to assign groups to an event
+
+### Ability to assign `groups` to an `event`
 
 #### Implementation
 
-The ability to assign groups to an event is facilitated by `ModelManager`.
+- The ability to assign groups to an event is facilitated by `ModelManager`.
+- Each event stores a list of groups assigned to it. That is, when a group is assigned to an event, a `Group`object is stored a `Set` of `Group`. When un-assigned, the corresponding groups are then removed from the `Set`.
+- To make it easier for the users to assign groups, this action is done through the `AddEventCommand` and `EditEventCommand`, with the `g/` prefix.
+- To un-assign a group, the user must manually specify `ug/` with the `Group` to un-assign the group from the event.
+- With the group name, person(s) with that specific group in their group list is displayed with the event.
 
-Each event stores a list of groups assigned to it. The groups(s) are represented by their name and that acts as their id. 
-
-When a group is assigned to an event, the group's name is stored into the event's list of groups. When un-assigned, the corresponding groups are then removed from the group list.
-
-With the group name, person(s) with that specific group in their group list is displayed with the event.
+A successful `EditEventCommand` that assigns groups should look like this:
 
 #### Design considerations
 
@@ -285,6 +309,47 @@ even though the person's name does not fit the keyword(s).
         - User can find exact person or group.
     - Cons:
         - Adding constraint the original command by requiring syntax, which may cause convenience.
+
+### Remind feature
+
+The `remind` command in our application displays a birthdays and events that will happen within a specified number of days.
+
+#### Implementation
+
+The `remind` feature involves checking the current filtered list of persons and events and filtering out persons with birthdays and events with starting date
+that are within the specified number of days. This is done using `BirthdayWithinDaysPredicate` and `EventWithinDaysPredicate` which implements the `Predicate<T>` interface. These predicates are passed
+to `Model#updateFilteredPersonList(Predicate<Person> predicate)` and `Model#updateFilteredEventList(Predicate<Event> predicate)` respectively.
+
+As a result, the `ObservableList<Person>` and `ObservableList<Event>` are updated with the filtered lists of persons and events respectively.
+The `UI` component is notified of these new changes to the lists and updates the UI accordingly, which will show the updated persons and events.
+
+The `remind` command is implemented this way as it reuses the logic for the `find` command where it utilises the `Model` component to update the current list of persons based on the given predicate.
+Instead of filtering out persons based on names, the `BirthdayWithinDaysPredicate` filters out persons based on their birthdays and the `EventWithinDaysPredicate` filters out events based on their starting dates.
+
+The flow for the `remind` command is described by the following sequence diagram:
+
+![RemindSequenceDiagram](images/RemindSequenceDiagram.png)
+
+
+#### Feature details
+1. The `remind` command can accept an optional parameter `days` which specifies the number of days to search for birthdays and events. If `days` is not specified, the default value of 7 days will be used.
+2. The application will validate the argument `days` to ensure that it is a positive integer. If it is not, an error message will be shown to the user and prompts the user for a corrected input.
+3. If it is a valid input, a `BirthdayWithinDaysPredicate` and `EventWithinDaysPredicate` will be created and a `Remind` command will be created with the predicates.
+4. The `Remind` command will then be executed and the `UI` will be updated with the filtered lists of persons and events.
+
+#### General design considerations
+
+- **Alternative 1 (Current choice): Updating list with predicate.**
+    - Pros:
+        - Reuses the logic for the `find` command.
+        - The `UI` component is notified of the changes to the list and updates the UI accordingly.
+    - Cons:
+        - The `Model` component is tightly coupled with the `UI` component.
+- **Alternative 2: Checking current list for birthdays and events, and adding to new list.**
+    - Pros:
+        - Easier to implement.
+    - Cons:
+        - Performance overhead. New addressbook objects needs to be created.
 
 ### \[Proposed\] Undo/redo feature
 
@@ -370,46 +435,7 @@ _{more aspects and alternatives to be added}_
 
 _{Explain here how the data archiving feature will be implemented}_
 
-### Remind feature
 
-The `remind` command in our application displays a birthdays and events that will happen within a specified number of days.
-
-#### Implementation
-
-The `remind` feature involves checking the current filtered list of persons and events and filtering out persons with birthdays and events with starting date 
-that are within the specified number of days. This is done using `BirthdayWithinDaysPredicate` and `EventWithinDaysPredicate` which implements the `Predicate<T>` interface. These predicates are passed 
-to `Model#updateFilteredPersonList(Predicate<Person> predicate)` and `Model#updateFilteredEventList(Predicate<Event> predicate)` respectively.
-
-As a result, the `ObservableList<Person>` and `ObservableList<Event>` are updated with the filtered lists of persons and events respectively. 
-The `UI` component is notified of these new changes to the lists and updates the UI accordingly, which will show the updated persons and events.
-
-The `remind` command is implemented this way as it reuses the logic for the `find` command where it utilises the `Model` component to update the current list of persons based on the given predicate.
-Instead of filtering out persons based on names, the `BirthdayWithinDaysPredicate` filters out persons based on their birthdays and the `EventWithinDaysPredicate` filters out events based on their starting dates.
-
-The flow for the `remind` command is described by the following sequence diagram:
-
-![RemindSequenceDiagram](images/RemindSequenceDiagram.png)
-
-
-#### Feature details
-1. The `remind` command can accept an optional parameter `days` which specifies the number of days to search for birthdays and events. If `days` is not specified, the default value of 7 days will be used.
-2. The application will validate the argument `days` to ensure that it is a positive integer. If it is not, an error message will be shown to the user and prompts the user for a corrected input.
-3. If it is a valid input, a `BirthdayWithinDaysPredicate` and `EventWithinDaysPredicate` will be created and a `Remind` command will be created with the predicates.
-4. The `Remind` command will then be executed and the `UI` will be updated with the filtered lists of persons and events.
-
-#### General design considerations
-
-- **Alternative 1 (Current choice): Updating list with predicate.**
-    - Pros: 
-      - Reuses the logic for the `find` command.
-      - The `UI` component is notified of the changes to the list and updates the UI accordingly.
-    - Cons: 
-      - The `Model` component is tightly coupled with the `UI` component.
-- **Alternative 2: Checking current list for birthdays and events, and adding to new list.**
-  - Pros: 
-    - Easier to implement.
-  - Cons: 
-    - Performance overhead. New addressbook objects needs to be created.
 
 --------------------------------------------------------------------------------------------------------------------
 
