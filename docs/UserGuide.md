@@ -563,13 +563,14 @@ Note that the last example is **not equivalent** to `n/do && t/friend || t/colle
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous CampusConnect home folder.
+**Q**: Why can't I type in characters that aren't printable ASCII characters?
+**A**: Currently, we only support printable ASCII characters. We plan to support Unicode characters in the future for greater internationalization support.
 
 --------------------------------------------------------------------------------------------------------------------
 
 # Planned Enhancements / Known Issues
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
-2. The current version of the application enforces **strict ASCII character validation** on user input as a security measure to reduce potential attack vectors. While this approach enhances the application's security posture, it inadvertently limits the ability to accommodate non-English names or inputs in non-ASCII characters, potentially alienating a diverse user base. Recognizing this limitation, there is a planned enhancement to selectively expand support for specific non-ASCII character sets in future releases. This expansion aims to strike a delicate balance between maintaining security and increasing inclusivity, allowing users to input data in their native languages. Until this enhancement is implemented, users are advised to romanize their input as a temporary workaround.
 
 --------------------------------------------------------------------------------------------------------------------
 
