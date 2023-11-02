@@ -6,9 +6,9 @@ labels: ''
 assignees: ''
 
 ---
-### User stories
+## User stories
 - [Insert user stories here]
 
-### Details
+## Details
 - [Insert details here]
   - Format: [insert format if necessary]
