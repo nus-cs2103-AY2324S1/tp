@@ -19,11 +19,10 @@ import seedu.flashlingo.model.flashcard.FlashCard;
  */
 public class EditCommand extends Command {
     public static final String COMMAND_WORD = "edit";
-    public static final String MESSAGE_EDIT_FLASHCARD_SUCCESS = "Edited Flashcard: %1$s";
-    public static final String MESSAGE_DUPLICATE_FLASHCARD = "This flashcard already exists in Flashlingo";
+    public static final String MESSAGE_EDIT_FLASHCARD_SUCCESS = "Edited flash card: %1$s";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the flashcard identified "
-          + "by the index number used in the displayed flashcard list. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the flash card identified "
+          + "by the index number used in the displayed flash cards list. "
           + "Existing values will be overwritten by the input values.\n"
           + "Parameters: INDEX (must be a positive integer) "
           + "[" + PREFIX_ORIGINAL_WORD + "ORIGINAL WORD] "
@@ -35,8 +34,8 @@ public class EditCommand extends Command {
     private final Index index;
     private final String[] changes;
     /**
-     * @param index of the flashcard in the list to edit
-     * @param changes details to edit the flashcard with
+     * @param index of the flash card in the list to edit
+     * @param changes details to edit the flash card with
      */
     public EditCommand(Index index, String[] changes) {
         requireNonNull(index);

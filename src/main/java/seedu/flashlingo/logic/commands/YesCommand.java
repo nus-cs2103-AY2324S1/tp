@@ -48,7 +48,7 @@ public class YesCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof YesCommand)) {
+        if (!(other instanceof AddCommand)) {
             return false;
         }
 

@@ -39,7 +39,7 @@ public class RevealCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof RevealCommand)) {
+        if (!(other instanceof AddCommand)) {
             return false;
         }
 
