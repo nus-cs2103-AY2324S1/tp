@@ -190,12 +190,20 @@ e.g. Keyword `John` will not match the names `Johnny` or `Jo`.
 e.g. `find Bee John` will match the names `Amy Bee` and `John Doe`.
 
 **Examples:**
+
 - `find John`
 - `find alex Bernice CHARLOTTE`
 
 ### Filtering by tag: `filter`
 
-//TODO
+Search and display contacts with tag matching the given keywords (case-insensitive).
+
+**Format:**
+`filter [KEYWORDS]`
+
+**Example:**
+
+- `filter Friend`
 
 ### Viewing help: `help`
 

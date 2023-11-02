@@ -159,6 +159,14 @@ The following activity diagram summarises what happens when a user executes a ne
 
 ![AddActivityDiagram](images/AddActivityDiagram.png)
 
+### Filter feature
+
+The following sequence diagram shows how the add command works:
+
+![FilterSequenceDiagram](images/FilterSequenceDiagram.png)
+
+It filters contacts by calling `Model#setContactsFilter` with a `ContainsTagPredicate predicate` as argument, which sets the `predicate` 
+on the list of contacts in the `ModelManager`. 
 
 ### Maintaining sorting while supporting filtering
 
