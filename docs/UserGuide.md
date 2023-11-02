@@ -5,7 +5,7 @@ title: User Guide
 
 MediLink Contacts(MLC) is a **desktop app for managing patients and doctors details, optimized for use via a Command
 Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, MLC
-can get your patients management tasks done faster than traditional GUI apps.
+cang get your patients management tasks done faster than traditional GUI apps.
 
 ### Table of Contents
 
@@ -145,7 +145,7 @@ Format: `new-appt pic/IC dic/IC time/yyyy-MM-dd HH:mm:ss`
 **:information_source: Take Note:**<br>
 
 - All fields are Required.
-- EMAIL must follow the specified format (ie. `yyyy-MM-dd HH:mm:ss`).
+- TIME must follow the specified format (ie. `yyyy-MM-dd HH:mm:ss`).
 - PATIENT must contain the valid IC of a Patient in the Database.
 - DOCTOR must contain the valid IC of a Doctor in the Database.
 
@@ -175,13 +175,15 @@ Examples:
 
 ### Finding a Appointment : `find-appt`
 
-Locates an existing appointment with involved Doctor or Patient.
+Finds all appointments that involve a specific patient/doctor.
 
 Format: `find-appt NRIC`
 
 <div markdown="block" class="alert alert-info">
 **:information_source: Take Note:**<br>
 
+- All fields are Required.
+- NRIC must contain the valid NRIC of a Patient or Doctor in the Database.
 - Either Doctor NRIC or Patient NRIC can be used in the search
 - It is recommended to use `list` to restore the view of all data after a `find` command.
 

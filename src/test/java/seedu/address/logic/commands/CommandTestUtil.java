@@ -132,22 +132,22 @@ public class CommandTestUtil {
         DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
                 .withBloodType(VALID_BLOODTYPE_AMY).withCondition(VALID_CONDITION_AMY)
-                .withGender(VALID_GENDER_FEMALE).withIc(VALID_NRIC_AMY)
+                .withGender(VALID_GENDER_FEMALE)
                 .withTags(VALID_TAG_FRIEND).withBloodType(VALID_BLOODTYPE_AMY)
                 .build();
 
         DESC_BOB = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
-                .withGender(VALID_GENDER_MALE).withIc(VALID_NRIC_BOB)
+                .withGender(VALID_GENDER_MALE)
                 .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
 
         DESC_CHERYL = new EditPersonDescriptorBuilder().withName(VALID_NAME_CHERYL)
                 .withPhone(VALID_PHONE_CHERYL).withEmail(VALID_EMAIL_CHERYL).withAddress(VALID_ADDRESS_CHERYL)
-                .withGender(VALID_GENDER_FEMALE).withIc(VALID_NRIC_CHERYL).build();
+                .withGender(VALID_GENDER_FEMALE).build();
 
         DESC_DEREK = new EditPersonDescriptorBuilder().withName(VALID_NAME_DEREK)
                 .withPhone(VALID_PHONE_DEREK).withEmail(VALID_EMAIL_DEREK).withAddress(VALID_ADDRESS_DEREK)
-                .withGender(VALID_GENDER_MALE).withIc(VALID_NRIC_DEREK).build();
+                .withGender(VALID_GENDER_MALE).build();
     }
 
     /**

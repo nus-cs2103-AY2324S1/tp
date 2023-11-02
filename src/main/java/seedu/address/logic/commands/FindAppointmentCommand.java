@@ -27,7 +27,7 @@ public class FindAppointmentCommand extends Command {
     private final Predicate<Appointment> predicate;
     /**
      * Finds and lists all persons in address book whose attributes match the predicate.
-     *  Keyword matching is case insensitive.
+     *  Keyword matching is case-insensitive.
      */
     public FindAppointmentCommand(Predicate<Appointment> predicate) {
         requireNonNull(predicate);
