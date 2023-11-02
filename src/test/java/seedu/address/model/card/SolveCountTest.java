@@ -1,9 +1,9 @@
 package seedu.address.model.card;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 public class SolveCountTest {
     @Test
@@ -18,8 +18,23 @@ public class SolveCountTest {
 
     @Test
     public void equalsMethod() {
-        SolveCount count = new SolveCount();
-        assertTrue(count.getSolveCount().equals(0));
-        assertTrue(count.equals(0));
+        SolveCount solveCount = new SolveCount();
+        SolveCount otherSolveCount = new SolveCount();
+
+        // same object -> returns true
+        assertTrue(solveCount.equals(solveCount));
+
+        // null -> returns false
+        assertFalse(solveCount.equals(null));
+
+        // integer object -> returns true
+        assertTrue(solveCount.equals(0));
+
+        // other objects -> false
+        assertFalse(solveCount.equals("other object"));
+
+        // different values -> returns false
+        otherSolveCount.incrementSolveCount();
+        assertFalse(solveCount.equals(otherSolveCount));
     }
 }
