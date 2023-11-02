@@ -556,7 +556,7 @@ Output:
 * If the index is not within the numbers in the list, the app should display `The employee index provided is invalid.`
 * If the command is incorrect, the app should display `Invalid command format!`
   <br>![result for incorrect command](images/incorrectAttendanceCommand.png)
-* If the command is successful, the app should display the attendance. The address book’s display of the employee’s attendance status.
+* If the command is successful, the app should display the attendance. The address book’s display of the employee’s attendance status should also be updated accordingly.
   <br>![result for attendance report](images/attendanceSuccess.png)
 
 
