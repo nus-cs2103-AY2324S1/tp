@@ -1,6 +1,7 @@
 package seedu.application.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.application.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.application.logic.parser.CliSyntax.PREFIX_JOB_SOURCE;
 
 import java.util.List;
@@ -19,8 +20,9 @@ public class InterviewDeleteCommand extends InterviewCommand {
 
     public static final String COMMAND_WORD = "delete";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Deletes an interview from the job\n"
-            + "Parameters: INDEX (of interview) and\n INDEX (of job application)\n"
+    public static final String MESSAGE_USAGE = InterviewCommand.COMMAND_WORD + " "
+            + COMMAND_WORD + ": Deletes an interview from the job. \n"
+            + "Parameters: INDEX (of interview) and INDEX (of job)\n"
             + "Example: 1 " + PREFIX_JOB_SOURCE + "2\n"
             + "deletes 1st interview from 2nd job";
 
@@ -36,8 +38,7 @@ public class InterviewDeleteCommand extends InterviewCommand {
      * @param interviewIndex The index of the interview to be deleted.
      */
     public InterviewDeleteCommand(Index jobIndex, Index interviewIndex) {
-        requireNonNull(jobIndex);
-        requireNonNull(interviewIndex);
+        requireAllNonNull(jobIndex, interviewIndex);
         this.jobIndex = jobIndex;
         this.interviewIndex = interviewIndex;
     }
