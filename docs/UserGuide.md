@@ -93,6 +93,10 @@ Examples:
 
 #### 2.2.2 Deleting a Student: `delete`
 
+<div markdown="span" class="alert alert-info">:information_source: **Note:**
+Deleting a Student also cancels all appointments associated to that Student !
+</div>
+
 Deletes an existing student.
 
 Format: `delete STUDENT_INDEX`
@@ -103,6 +107,10 @@ Format: `delete STUDENT_INDEX`
    - Must be found in the students list
 
 #### 2.2.3 Adding notes for a Student: `note`
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:**
+Double clicking on the Student card displays the Student notes under the Notes section !
+</div>
 
 Adds a note to an existing student, overwrites any existing note.
 
@@ -115,20 +123,7 @@ Format: `note STUDENT_INDEX note/NOTE`
 2. Note
    - Maximum of 500 characters
 
-#### 2.2.4 Viewing all Students: `view`
-
-Shows a list of all available students or appointments, depending on specified input.
-
-Format: `view g/CATEGORY`
-
-**Parameters**:
-1. Category
-    - Must be 'students', 'appointments' or 'all'
-
-Examples:
-* `view g/students`
-
-#### 2.2.5 Finding Students by Name: `find`
+#### 2.2.4 Finding Students by Name: `find`
 
 Find students and their related appointments based on their name. Can choose to find student based on their first name, last name or full name.
 If the name does not match entirely, the student will not be shown. Refer to the examples below for a better understanding
@@ -145,7 +140,7 @@ Student Name: Roy Lee
 * "find Le" does not work
 * "find Roy L" does not work
 
-#### 2.2.6 Assigning risk level to Student: `tag`
+#### 2.2.5 Assigning risk level to Student: `tag`
 
 Tags a student to a specific risk level.
 
@@ -168,6 +163,10 @@ Appointments will be automatically sorted by Date and Time in ascending order.
 </div>
 
 #### 2.3.1 Scheduling an Appointment: `schedule`
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:**
+The Student must exist before an Appointment can be scheduled for the Student !
+</div>
 
 Schedules a new appointment for a student.
 
@@ -202,20 +201,7 @@ Format: `cancel APPOINTMENT_INDEX`
 Examples:
 * `cancel 2`
 
-#### 2.3.3 Viewing all Appointments: `view`
-
-Shows a list of all available students or appointments, depending on specified input.
-
-Format: `view g/CATEGORY`
-
-**Parameters**:
-1. Category
-   - Must be 'students', 'appointments' or 'all'
-
-Examples:
-* `view g/appointments`
-
-#### 2.3.4 Filtering Appointments by Date: `filter`
+#### 2.3.3 Filtering Appointments by Date: `filter`
 
 Filters appointments based on given date. 
 
@@ -230,9 +216,9 @@ Examples:
 
 ### 2.4 Others
 
-#### 2.4.1 Viewing all Students and Appointments: `view`
+#### 2.4.1 Viewing all Students and/or Appointments: `view`
 
-Shows a list of all available students or appointments, depending on specified input.
+Shows a list of all available Students and/or Appointments, depending on specified input.
 
 Format: `view g/CATEGORY`
 
@@ -242,6 +228,8 @@ Format: `view g/CATEGORY`
 
 Examples:
 * `view g/all`
+* `view g/appointments`
+* `view g/students`
 
 #### 2.4.2 Exiting the program: `exit`
 
