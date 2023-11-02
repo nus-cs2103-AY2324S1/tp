@@ -11,7 +11,8 @@ import java.util.HashSet;
  */
 public class Instrument extends Tag {
 
-    public static final String MESSAGE_CONSTRAINTS = "Instrument tags names should be a valid instrument name";
+    public static final String MESSAGE_CONSTRAINTS = "Instrument tags names should be a valid instrument name.\n"
+            + "For a list of valid instruments, please use the command 'tags'";
     public static final HashSet<String> VALID_INSTRUMENTS = new HashSet<String>(Arrays.asList(
             "piano", "guitar", "bass", "violin", "saxophone", "trumpet", "drums"
     ));

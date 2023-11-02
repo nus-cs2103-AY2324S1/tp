@@ -3,7 +3,6 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.Messages.MESSAGE_MUSICIANS_LISTED_OVERVIEW;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.typicalentities.TypicalAddressBook.getOneBandAddressBook;
@@ -39,7 +38,7 @@ class FindBandCommandTest {
     private Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
     @Test
     void execute_validBandNameNoMusician_success() {
-        String expectedMessage = String.format(MESSAGE_MUSICIANS_LISTED_OVERVIEW, 0);
+        String expectedMessage = String.format(FindBandCommand.MESSAGE_SUCCESS, 0, "Ace Jazz");
         BandNameContainsKeywordsPredicate predicate = new BandNameContainsKeywordsPredicate("ACE JAZZ");
         expectedModel.updateFilteredBandMusicianList(predicate);
 
@@ -51,7 +50,7 @@ class FindBandCommandTest {
 
     @Test
     void execute_validBandNameHasMusician_success() {
-        String expectedMessage = String.format(MESSAGE_MUSICIANS_LISTED_OVERVIEW, 2);
+        String expectedMessage = String.format(FindBandCommand.MESSAGE_SUCCESS, 2, "Dragon Metal");
         BandNameContainsKeywordsPredicate predicate = new BandNameContainsKeywordsPredicate("dragon metal");
         expectedModel.updateFilteredBandMusicianList(predicate);
 
