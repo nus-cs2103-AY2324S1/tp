@@ -302,6 +302,13 @@ This feature involves the command: `updatephoto`, which updates the photo of an 
 
 Format: `updatephoto PERSON_INDEX [path/NEW_PHOTO_PATH]`
 
+You can get the path to the photo by using the following steps: 
+  * Right click on the photo that you want to use.
+  * Choose the option: Copy as path (on Windows) or Copy "name_of_file" as Pathname (on MacOS).
+  * After pasting the copied path in CampusConnect, remember to remove the double quotation marks!
+
+  ![photo_path](images/photopath.png)
+
 <box type="info" icon=":fa-solid-magnifying-glass:">
 
 Below are some examples on how to use the command:
@@ -313,12 +320,7 @@ Below are some examples on how to use the command:
 <box type="warning">
 
 * You should provide a positive integer that is smaller than or equal to the number of contacts currently displayed in CampusConnect for `PERSON_INDEX`. 
-* You can get the path to the photo by using the following steps: 
-  * Right click on the photo that you want to use.
-  * Choose the option: Copy as path (on Windows) or Copy "name_of_file" as Pathname (on MacOS).
-  * After pasting the copied path in CampusConnect, remember to remove the double quotation marks!
 
-  ![photo_path](images/photopath.png)
 </box>
 
 ###  List all contacts: `list`
