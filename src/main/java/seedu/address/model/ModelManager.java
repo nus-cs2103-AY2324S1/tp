@@ -142,12 +142,6 @@ public class ModelManager implements Model {
         manageHr.addDepartment(department);
     }
 
-    @Override
-    public void setDepartment(Department target, Department editedDepartment) {
-        requireAllNonNull(target, editedDepartment);
-
-        manageHr.setDepartment(target, editedDepartment);
-    }
     //=========== Filtered Employee List Accessors =============================================================
 
     /**

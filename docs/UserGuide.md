@@ -71,8 +71,8 @@ Table of Contents
 
 ### Overview
 
-Our application includes a powerful manager-subordinate feature that enables users to define and manage hierarchical 
-relationships within their organization. This feature is designed to streamline the management of employees between 
+Our application includes a powerful manager-subordinate feature that enables users to define and manage hierarchical
+relationships within their organization. This feature is designed to streamline the management of employees between
 supervisors and subordinates.
 
 ### Constraints
@@ -154,7 +154,7 @@ Acceptable values for each parameter:
 | `ADDRESS` | Alphanumerics and ascii characters i.e. #, -                 |
 | `SALARY` | Numerals                                                     |
 | `LEAVE` | Numerals                                                     |
-| `ROLE` | `manager` or `subordinate` (Case-insensitive)                | 
+| `ROLE` | `manager` or `subordinate` (Case-insensitive)                |
 | `DEPARTMENT` | Alphabets and ascii characters i.e. &, -                     |
 
 Expected outputs:
@@ -246,7 +246,7 @@ Fail:
 
 Constraints:
 * [Manager-subordinate relationship](#deleting-an-existing-employee-with-manager-subordinate-relationships)
-  
+
 ### Exiting the program : `exit`
 
 Exits the application.

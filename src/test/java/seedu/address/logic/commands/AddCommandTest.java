@@ -183,11 +183,6 @@ public class AddCommandTest {
         }
 
         @Override
-        public void setDepartment(Department target, Department editedDepartment) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
         public void updateFilteredEmployeeList(Predicate<Employee> predicate) {
             throw new AssertionError("This method should not be called.");
         }

@@ -59,10 +59,24 @@ public class UniqueDepartmentList implements Iterable<Department> {
     }
 
     /**
-     * Replaces the department {@code target} in the list with {@code editeddepartment}.
+     * Removes the equivalent department from the list.
+     * The department must exist in the list.
+     */
+    public void remove(Department toRemove) {
+        requireNonNull(toRemove);
+        if (!internalList.remove(toRemove)) {
+            throw new DepartmentNotFoundException();
+        }
+    }
+
+    /**
+     * Replaces the department {@code target} in the list with {@code editedDepartment}.
      * {@code target} must exist in the list.
-     * The department identity of {@code editedDepartment} must not be the same as another
+     * The employee identity of {@code editedDepartment} must not be the same as another
      * existing department in the list.
+     *
+     * @param target The original employee to be updated.
+     * @param editedDepartment The updated employee.
      */
     public void setDepartment(Department target, Department editedDepartment) {
         requireAllNonNull(target, editedDepartment);
@@ -75,19 +89,7 @@ public class UniqueDepartmentList implements Iterable<Department> {
         if (!target.isSameDepartment(editedDepartment) && contains(editedDepartment)) {
             throw new DuplicateDepartmentException();
         }
-
         internalList.set(index, editedDepartment);
-    }
-
-    /**
-     * Removes the equivalent department from the list.
-     * The department must exist in the list.
-     */
-    public void remove(Department toRemove) {
-        requireNonNull(toRemove);
-        if (!internalList.remove(toRemove)) {
-            throw new DepartmentNotFoundException();
-        }
     }
 
     public void setDepartments(UniqueDepartmentList replacement) {

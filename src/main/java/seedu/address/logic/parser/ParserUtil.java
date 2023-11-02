@@ -9,6 +9,7 @@ import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
+import seedu.address.logic.commands.DepartmentCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.employee.Address;
 import seedu.address.model.employee.Email;
@@ -25,7 +26,7 @@ import seedu.address.model.name.EmployeeName;
 public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
-
+    public static final String MESSAGE_UNDEFINED_ACTION_TYPE = "Only add/delete actions are allowed in this context";
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
      * trimmed.
@@ -196,5 +197,20 @@ public class ParserUtil {
             departmentSet.add(parseDepartment(departmentName));
         }
         return departmentSet;
+    }
+
+    /**
+     * Parses {@code Collection<String> departments} into a {@code Set<Department>}.
+     */
+    public static DepartmentCommand.Type parseAction(String action) throws ParseException {
+        requireNonNull(action);
+        switch (action) {
+        case "add":
+            return DepartmentCommand.Type.ADD;
+        case "delete":
+            return DepartmentCommand.Type.DELETE;
+        default:
+            throw new ParseException(MESSAGE_UNDEFINED_ACTION_TYPE);
+        }
     }
 }
