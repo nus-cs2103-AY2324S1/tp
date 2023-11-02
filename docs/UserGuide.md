@@ -379,7 +379,7 @@ Advanced users are welcome to update data directly by editing that data file.
 **A**: HealthSync's CLI interface offers faster data entry and navigation for users who are comfortable with typing.
 It streamlines tasks and provides a more efficient way to manage patient details.
 
-**Q**: Can multiple users access Healthysync simultaneously, and how do I set up user accounts?<br>
+**Q**: Can multiple users access HealthSync simultaneously, and how do I set up user accounts?<br>
 **A**: HealthSync is currently an application for a single user. Hence, it cannot be accessed simultaneously
 by different users.
 
