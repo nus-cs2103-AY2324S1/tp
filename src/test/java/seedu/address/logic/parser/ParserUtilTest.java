@@ -340,7 +340,7 @@ public class ParserUtilTest {
 
     @Test
     public void parseVisual_invalidValue_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseSortIn(INVALID_VISUAL));
+        assertThrows(ParseException.class, () -> ParserUtil.parseVisual(INVALID_VISUAL));
     }
 
     @Test
@@ -371,6 +371,7 @@ public class ParserUtilTest {
         Visual expectedVisual = new Visual(VALID_VISUAL);
         assertEquals(expectedVisual, parseVisual(VALID_VISUAL + "   "));
     }
+
 
     @Test
     public void parseValidIndexPreamble() throws Exception {
