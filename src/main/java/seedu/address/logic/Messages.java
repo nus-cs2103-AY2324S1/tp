@@ -38,7 +38,8 @@ public class Messages {
     public static final String MESSAGE_NOT_IN_RANGE =
             "Error: The value has to be between %1$d and %2$d (both inclusive)";
     public static final String MESSAGE_INVALID_TWO_FIELD = "Error: Please contain only either "
-            + "one field of %1$s or %1$s.";
+            + "one field of %1$s or %2$s.";
+    public static final String MESSAGE_EMPTY_FIELDS = "Error: No value detected for the following field(s): %1$s";
 
     /**
      * Returns an error message indicating the duplicate prefixes.
