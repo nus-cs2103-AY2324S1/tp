@@ -160,7 +160,7 @@ public class ParserUtil {
         final Set<Tag> tagSet = new HashSet<>();
         String[] tagNameCategoryPairs = parseTagCategories(tags);
 
-        if (tagNameCategoryPairs.length == 1 && tagNameCategoryPairs[0].isBlank()) {;
+        if (tagNameCategoryPairs.length == 1 && tagNameCategoryPairs[0].isBlank()) {
             return tagSet;
         }
 
