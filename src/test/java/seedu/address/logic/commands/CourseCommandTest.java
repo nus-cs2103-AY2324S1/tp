@@ -35,7 +35,7 @@ public class CourseCommandTest {
         CourseCommand courseCommand = new CourseCommand(CourseOperation.CREATE, "CS2103T");
         model.addAddressBook(new AddressBook("CS2103T"));
 
-        String expectedMessage = String.format(CourseCommand.MESSAGE_CREATE_DUPLICATE_FAILURE, "CS2103T");
+        String expectedMessage = String.format(CourseCommand.MESSAGE_DUPLICATE_ADDRESS_BOOK_FAILURE, "CS2103T");
 
         assertCommandFailure(courseCommand, model, expectedMessage);
     }
@@ -100,6 +100,16 @@ public class CourseCommandTest {
         expectedModel.setAddressBook(new AddressBook("CS2103T", expectedModel.getAddressBook()));
 
         assertCommandSuccess(courseCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_editOperationInvalid_throwsCommandException() {
+        CourseCommand courseCommand = new CourseCommand(CourseOperation.EDIT, "CS2103T");
+        model.addAddressBook(new AddressBook("CS2103T"));
+
+        String expectedMessage = String.format(CourseCommand.MESSAGE_DUPLICATE_ADDRESS_BOOK_FAILURE, "CS2103T");
+
+        assertCommandFailure(courseCommand, model, expectedMessage);
     }
 
     @Test

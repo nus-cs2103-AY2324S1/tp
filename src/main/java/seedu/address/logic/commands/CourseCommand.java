@@ -28,7 +28,7 @@ public class CourseCommand extends Command {
     public static final String MESSAGE_EDIT_SUCCESS = "Edited address book course code to %1$s.";
 
     public static final String MESSAGE_INVALID_OPERATION_FAILURE = "Invalid course operation";
-    public static final String MESSAGE_CREATE_DUPLICATE_FAILURE = "%1$s address book exists";
+    public static final String MESSAGE_DUPLICATE_ADDRESS_BOOK_FAILURE = "%1$s address book exists";
     public static final String MESSAGE_NO_EXIST_FAILURE = "%1$s address book does not exist";
     public static final String MESSAGE_NO_ADDRESS_BOOK_FAILURE = "No address book selected";
 
@@ -49,7 +49,7 @@ public class CourseCommand extends Command {
 
     private CommandResult addAddressBookHelper(Model model) throws CommandException {
         if (model.hasAddressBook(courseCode)) {
-            throw new CommandException(String.format(MESSAGE_CREATE_DUPLICATE_FAILURE, courseCode));
+            throw new CommandException(String.format(MESSAGE_DUPLICATE_ADDRESS_BOOK_FAILURE, courseCode));
         }
 
         model.addAddressBook(new AddressBook(courseCode));
@@ -71,12 +71,17 @@ public class CourseCommand extends Command {
         }
 
         model.setActiveAddressBook(courseCode);
+        model.clearFilters();
         return new CommandResult(String.format(MESSAGE_SWITCH_SUCCESS, courseCode));
     }
 
     private CommandResult editAddressBookHelper(Model model) throws CommandException {
         if (model.getAddressBook() == null) {
             throw new CommandException(String.format(MESSAGE_NO_ADDRESS_BOOK_FAILURE));
+        }
+
+        if (model.hasAddressBook(courseCode)) {
+            throw new CommandException(String.format(MESSAGE_DUPLICATE_ADDRESS_BOOK_FAILURE, courseCode));
         }
 
         model.setAddressBook(new AddressBook(courseCode, model.getAddressBook()));
