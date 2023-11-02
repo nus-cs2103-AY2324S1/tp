@@ -18,7 +18,7 @@ public class DeleteAppointmentCommandParserTest {
 
     @Test
     public void parseInvalidArgs_throwsParseException() {
-        assertParseFailure(parser, "a",  String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+        assertParseFailure(parser, "a", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 DeleteAppointmentCommand.MESSAGE_USAGE));
     }
 }
