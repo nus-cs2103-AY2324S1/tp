@@ -41,9 +41,7 @@ public class ModelManager implements Model {
         this.uniquePersonList = new UniquePersonList();
         this.filteredPersons = new FilteredList<>(uniquePersonList.asUnmodifiableObservableList());
 
-        if (getAddressBook() != null) {
-            updateFilteredPersonList();
-        }
+        updateFilteredPersonList();
     }
 
     public ModelManager() {
@@ -185,7 +183,7 @@ public class ModelManager implements Model {
 
     //=========== Filtered Person List Accessors =============================================================
     private void updateFilteredPersonList() {
-        if (getActiveCourseCode() == null) {
+        if (getActiveCourseCode() == null || getActiveAddressBook() == null) {
             uniquePersonList.setPersons(new UniquePersonList());
             return;
         }

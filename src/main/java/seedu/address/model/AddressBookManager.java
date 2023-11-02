@@ -82,10 +82,9 @@ public class AddressBookManager implements ReadOnlyAddressBookManager {
 
         removeAddressBook(activeCourseCode.get());
         addAddressBook(addressBook);
+        internalCourseList.setAll(addressBooks.keySet());
         activeCourseCode.set(addressBook.getCourseCode());
         setActiveAddressBook(activeCourseCode.get());
-
-        internalCourseList.setAll(addressBooks.keySet());
     }
 
     public void setActiveAddressBook(String courseCode) {
