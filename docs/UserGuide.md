@@ -28,7 +28,7 @@ organise and manage patient details faster than traditional GUI apps.
 
 
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![Ui](images/UI_v1.2.1.jpg)
+   ![Ui](images/UI_v1.3.jpg)
 
 5. Type the command in the command box and press Enter to execute it.
    e.g. typing **`help`** and pressing Enter will open the help window.<br>
@@ -36,7 +36,7 @@ organise and manage patient details faster than traditional GUI apps.
 
    * `list` : Lists all patients.
 
-   * `add n/John Doe id/S8943782H p/98114839` : Adds a patient named `John Doe` with the relevant field details to HealthSync.
+   * `add n/John Doe id/S8765432A p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 ap/17-10-2023 11:00 13:00 m/hypochondriac` : Adds a patient named `John Doe` with the relevant field details to HealthSync.
 
    * `delete n/Alex Yeoh` : Deletes Alex Yeoh's details from the current list.
 
@@ -262,28 +262,30 @@ Deletes the specified person or the fields for the person from HealthSync.
 * Deletes the person with the specified `n/NAME or id/IC_NUMBER`.
 * The name or ic number must be a valid input.
 * To delete a specified field only instead of the entire person, we indicate the field behind of the identification.
-* If multiple people has the same name, HealthSync will display a list of people with that name together with their IC number.
 
 Format: `delete n/NAME or id/IC_NUMBER [field]`
+
+Fields that can be deleted:
+* Appointment: Include `ap/` behind delete command
+* Medical History: Include `m/` behind delete command. Can delete specific Medical History. e.g `m/diabetes`
 
 Example commands:
 * `delete id/S9987362H` deletes all the details of the person with the specified IC number from HealthSync.
 * `delete n/John Doe` deletes all the details of John Doe from HealthSync.
-* `delete n/John Doe p/` deletes John Doe phone number from his profile.
+* `delete n/John Doe m/` deletes all Medical Histories of John Doe from HealthSync.
 
 Expected outputs when the command succeeds:
- * `Patient n/NAME or id/IC_NUMBER has been removed from the database`
- * `The [field] of Patient n/NAME or id/IC_NUMBER has been removed from the database`
+ * `Deleted Patient:`  
+ `Name: Alex Yeoh; NRIC: T0123456F; Phone: 87438807; Email: alexyeoh@example.com; Address: Blk 30 Geylang Street 29, #06-40 Appointment: 08-Aug-2023, 10:00 to 12:00; Medical Histories: [pneumonia][HIV][high blood pressure][AIDS][tachycardia][diabetes]; Tags: [friends]`  
 
-Expected output when the command fails:
- * `Error code’s message (i.e. Invalid NRIC/ Invalid Field(s) / Database Error) `
+ * `Deleted Patient's field:`  
+ `Name: Bernice Yu; NRIC: S0123452F; Phone: 99272758; Email: berniceyu@example.com; Address: Blk 30 Lorong 3 Serangoon Gardens #07-18; Appointment: null; Medical Histories: [Diabetes]; Tags: [colleagues][friends]`
 
-<!--
-Original format, can consider using
-list followed by delete 2 deletes the 2nd person in the address book.
-find Betsy followed by delete 1 deletes the 1st person in the results of the find command.
--->
-
+Expected outputs when the command fails:
+ * `The given combination of Name and NRIC does not match any patient in the patients list. `
+ * `Patient does not have an appointment to delete.`
+ * `Patient does not have any medical histories to delete.`
+ * `Patient does not have the medical histories specified.`
 
 ### Delete all patients: `clear`
 
@@ -339,7 +341,7 @@ _Details coming soon ..._
 |------------|----------|----------------------------------------------------------------------------------------------------------------------------|
 | **Add**    | `a`      | `add n/NAME id/IC_NUMBER [field] ...` <br> e.g., `add n/James Ho id/SXXXX123D p/91234567 a/A Estate, Clementi Rd, 1234665` |
 | **Clear**  | `c`      | `clear`                                                                                                                    |
-| **Delete** | `d`      | `delete n/NAME [field]` *or* `delete id/IC_NUMBER [field]`<br> e.g., `delete n/John Doe e/`                                |
+| **Delete** | `d`      | `delete n/NAME [field]` *or* `delete id/IC_NUMBER [field]`<br> e.g., `delete n/John Doe ap/`                                |
 | **Edit**   | `e`      | `edit n/NAME [field]` *or* `edit id/IC_NUMBER [field] ... `<br> e.g.,`edit n/James Lee e/jameslee@example.com`             |
 | **Find**   | `f`      | `find n/NAME [field]` *or* `find id/IC_NUMBER [field]`<br> e.g., `find n/James Jake` *or* `find id/S872D`                  |
 | **List**   | `li`      | `list`                                                                                                                     |
