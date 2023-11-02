@@ -9,7 +9,6 @@ import java.util.Optional;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
@@ -22,7 +21,7 @@ import seedu.address.model.tag.exceptions.TagNotFoundException;
  */
 public class UniqueTagList implements Iterable<Tag> {
 
-    public static final ObservableList<Tag> internalList = FXCollections.observableArrayList();
+    private static final ObservableList<Tag> internalList = FXCollections.observableArrayList();
     private final ObservableList<Tag> internalUnmodifiableList =
             FXCollections.unmodifiableObservableList(internalList);
 
@@ -67,7 +66,8 @@ public class UniqueTagList implements Iterable<Tag> {
                     .filter(tag -> tag.tagName.equals(tagName) && tag.tagCategory.contains(tagCategory))
                     .count();
             if (occurrence > 1) {
-                throw new ParseException("Multiple tags exists with the same name! Specify the category of the tag when adding it to a person e.g. edit 1 t/experience 3");
+                throw new ParseException("Multiple tags exists with the same name! "
+                        + "Specify the category of the tag when adding it to a person e.g. edit 1 t/experience 3");
             }
             return foundTag.get();
         } else if (!tagCategory.isEmpty()) {

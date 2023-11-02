@@ -62,7 +62,18 @@ public class SampleDataUtil {
      */
     public static Set<Tag> getTagSet(String... strings) {
         return Arrays.stream(strings)
-                .map(x -> new Tag(x.split("\\s+")[1], x.split("\\s+")[0]))
+                .map(x -> {
+                    String[] tagNameCategory = x.split("\\s+");
+                    if (tagNameCategory.length > 1) {
+                        System.out.println("here");
+                        String tagName = tagNameCategory[1];
+                        String tagCategory = tagNameCategory[0];
+                        return new Tag(tagName, tagCategory);
+                    } else {
+                        return new Tag(x, "uncategorised");
+                    }
+
+                })
                 .collect(Collectors.toSet());
     }
 

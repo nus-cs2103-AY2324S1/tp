@@ -22,6 +22,8 @@ import seedu.address.model.person.Remark;
 import seedu.address.model.person.Status;
 import seedu.address.model.tag.Tag;
 
+import static seedu.address.commons.util.AppUtil.checkArgument;
+
 /**
  * Jackson-friendly version of {@link Person}.
  */
@@ -92,12 +94,20 @@ class JsonAdaptedPerson {
      */
     public Person toModelType() throws IllegalValueException {
         final List<Tag> personTags = new ArrayList<>();
+        System.out.println(tags);
+
         for (Map<String, String> tagData : tags) {
             String tagCategory = tagData.get("tagCategory");
             String tagName = tagData.get("tagName");
+            if (!Tag.isValidTagName(tagName)) {
+                throw new IllegalValueException(Tag.MESSAGE_CONSTRAINTS);
+            }
+            System.out.println("1" + tagName);
+            System.out.println("2" + tagCategory);
             personTags.add(new Tag(tagName, tagCategory));
         }
         if (name == null) {
+            System.out.println("here name");
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
         }
         if (!Name.isValidName(name)) {

@@ -5,8 +5,9 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.address.testutil.TypicalTags.TEST_TAG_CATEGORY_STRING;
+import static seedu.address.testutil.TypicalTags.TEST_TAG_NAME_STRING;
 import static seedu.address.testutil.TypicalTags.TEST_TAG_SET;
-import static seedu.address.testutil.TypicalTags.TEST_TAG_STRING;
 
 import org.junit.jupiter.api.Test;
 
@@ -37,7 +38,7 @@ public class DeleteCommandParserTest {
     // Delete by tags tests
     @Test
     public void parse_validTags_returnsDeleteCommand() {
-        String userInput = " " + PREFIX_TAG + TEST_TAG_STRING;
+        String userInput = " " + PREFIX_TAG + TEST_TAG_CATEGORY_STRING + " " + TEST_TAG_NAME_STRING;
         DeleteCommand expectedCommand = new DeleteCommand(TEST_TAG_SET);
         assertParseSuccess(parser, userInput, expectedCommand);
     }

@@ -52,10 +52,16 @@ public class LogicManager implements Logic {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
 
         CommandResult commandResult;
+        System.out.println("before parse command");
+        System.out.println(commandText);
         Command command = addressBookParser.parseCommand(commandText);
+        System.out.println("before command execute");
         commandResult = command.execute(model);
+        System.out.println("after command execute");
+
 
         try {
+            System.out.println("in try");
             storage.saveAddressBook(model.getAddressBook());
             storage.saveEventBook(model.getEventBook());
         } catch (AccessDeniedException e) {
