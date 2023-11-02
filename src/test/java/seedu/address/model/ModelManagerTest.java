@@ -19,6 +19,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.NameContainsKeywordPredicate;
 import seedu.address.model.person.Student;
+import seedu.address.model.person.Visual;
 import seedu.address.testutil.AddressBookBuilder;
 
 
@@ -62,6 +63,21 @@ public class ModelManagerTest {
     @Test
     public void setUserPrefs_nullUserPrefs_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> modelManager.setUserPrefs(null));
+    }
+
+    @Test
+    public void getNullTable_throwsException() {
+        assertThrows(NullPointerException.class, () -> ModelManager.getTable(null));
+    }
+
+    @Test
+    public void getNullBarChart_throwsException() {
+        assertThrows(NullPointerException.class, () -> ModelManager.getBarChart(null));
+    }
+
+    @Test
+    public void exportWithNullVisual_throwsException() {
+        assertThrows(NullPointerException.class, () -> modelManager.export(null));
     }
 
     @Test
