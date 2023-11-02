@@ -15,7 +15,7 @@ organise and manage patient details faster than traditional GUI apps.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Quick start
+## [Quick start](#quick-start)
 
 1. Ensure you have [Java](#java) `11` or above installed in your Computer.
 
@@ -28,7 +28,8 @@ organise and manage patient details faster than traditional GUI apps.
 
 
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![Ui](images/UI_v1.2.1.jpg)
+
+   ![Ui](images/Ui_v1.3.1.jpg)
 
 5. Type the command in the command box and press Enter to execute it.
    e.g. typing **`help`** and pressing Enter will open the help window.<br>
@@ -49,7 +50,7 @@ organise and manage patient details faster than traditional GUI apps.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Features
+## [Features](#features)
 
 <box type="info" seamless>
     Confused by unfamiliar terms? There is a <a href="#glossary">Glossary</a> section below!<br>
@@ -57,7 +58,6 @@ organise and manage patient details faster than traditional GUI apps.
     the Glossary if you are confused.<br>
     <a href="#glossary" class="badge bg-primary">Check it out here.</a>
 </box>
-
 
 ### Auto Save
 
@@ -78,12 +78,15 @@ Format: `help`
 
 Adds a patient into the program, with the given patient information.
 
-* A patient's name and IC are required when creating a new entry into the program.
+* A patient's name and IC Number are required when creating a new patient entry.
 
 Format: `add n/NAME id/IC_NUMBER [field] ...`
 
 Example commands:
  * `add n/Aaron Tan Jun Jie id/S8943782H p/98114839 e/example@mailhere a/Serangoon HDB 123`
+
+
+![result for 'add n/Aaron Tan Jun Jie id/S8943782H p/98114839 e/example@mailhere a/Serangoon HDB 123'](images/addResult.jpg)
 
 Expected outputs when the command succeeds:
  * `Patient Aaron Tan Jun Jie has been added with the fields: id/S8943782H
@@ -93,6 +96,10 @@ Expected outputs when the command fails:
  * `Unable to add the patient to the database: Patient already exists.`
  * `Unable to add the patient to the database: IC required.`
 
+Tips:
+* Use the shortcut `a` for faster data entry
+* Double-check patient data to prevent unnecessary errors later on
+
 
 ### Listing all persons: `list`
 
@@ -101,12 +108,15 @@ Shows a list of all persons in the address book.
 Format: `list`
 
 
+![result for 'list'](images/listResult.jpg)
+
+
 ### Editing a patient's details: `edit`
 
 Edits an existing patient's details in the address book.
 
  * Edits the person with the specified name or id.
- * If an invalid name or id is passed, an error message will be logged.
+ * If an invalid name or IC Number is passed, an error message will be logged.
  * At least one of the optional fields must be provided.
  * Existing fields will be updated to the input values.
  * If the fields do not exist, the corresponding field with details will be added.
@@ -114,19 +124,27 @@ Edits an existing patient's details in the address book.
 Format: `edit n/NAME or id/IC_NUMBER [field] ...`
 
 Example commands:
- * `edit n/John Doe p/91234567 e/johndoe@example.com`
+ * `edit n/Alex Yeoh p/91234567 e/alexyeoh@example.com`
+
+
+![result for 'edit n/Alex Yeoh p/91234567 e/alexyeoh@example.com'](images/editResult.jpg)
 
 Expected outputs when the command succeeds:
-* `Patient John Doe has been updated with the fields:  p/91234567 e/johndoe@example.com`
+* `Patient Alex Yeoh has been updated with the fields: p/91234567 e/alexyeoh@example.com`
 
 Expected outputs when command fails:
 * `Unable to edit the patient: Patient identification does not exist.`
+
+Tips:
+* Use the shortcut `e` for faster data editing
+* Update multiple fields in a single edit command to save time
+
 
 ### Undoing a command: `undo`
 
 Undoes an undo-able command within the address book.
 
-* An undo-able command include an edit command, add commmand or delete command
+* An undo-able command includes an edit command, add commmand or delete command
 * The command allows you to undo the last command or to undo a specific number of previous commands
 
 Format:
@@ -136,6 +154,9 @@ Example commands:
 *  `undo`
 *  `undo 2`
 
+
+![result for 'undo'](images/undoResult.jpg)
+
 Expected outputs when the command succeeds:
 * `The last command has been undone`
 * `The last 2 commands have been undone`
@@ -143,9 +164,14 @@ Expected outputs when the command succeeds:
 Expected outputs when command fails:
 * `There is no valid command to be undone`
 
-### Locating persons by name or NRIC: `find`
+Tips:
+* Use the shortcut `u` for faster command undoing
+* Undo multiple commands at once to save time
 
-Searches the patient list for all patients matching the name or NRIC and returns their related information.
+
+### Locating persons by name or IC Number: `find`
+
+Searches the patient list for all patients matching the name or IC Number and returns their related information.
 
  * The search is case-insensitive. e.g `hans` will match `Hans`.
  * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`.
@@ -158,10 +184,10 @@ Format: `find n/NAME` *or* `id/IC_NUMBER`
 
 Example commands:
 * `find n/John` returns `john` and `John Doe`
-* `find id/S872D` returns `Alex Yeoh`, with IC number `S872D` <br>
+* `find id/T0123456F` returns `Alex Yeoh`, with IC number `T0123456F` <br>
 
 
-  ![result for 'find id/S872D'](images/findidS872DResult.png)
+![result for 'find id/T0123456F'](images/findidT0123456FResult.jpg)
 
 Expected outputs when the command succeeds:
  * `Patient n/NAME or id/IC_NUMBER: [field] …`
@@ -169,8 +195,11 @@ Expected outputs when the command succeeds:
 Expected output when the command fails:
  * `Unable to find the patient. Check if the patient’s information is correct.`
 
+Tips:
+* Use the shortcut `f` for faster patient-finding
 
-### Preserving a `find` command result: `save`
+
+### Preserving a `find` command result: `log`
 
 Logs the result of the find command to the logger tab, which can be viewed at all times.
 
@@ -179,13 +208,72 @@ Logs the result of the find command to the logger tab, which can be viewed at al
 * The result will be saved in the same order and format.
 * Saving a new result clears the current saved result from the logger tab and replaces it.
 
-Format: `save`
+Format: `log`
+
+Example Command: `log` (after entering a FindCommand)
+
+
+![result for 'log'](images/logResult.jpg)
 
 Expected outputs when the command succeeds:
-* `Results have been saved to the logger tab.`
+* `Results of the FindCommand have been saved to the logger tab.`
 
 Expected output when the command fails:
-* `Unable to save to the logger tab. Check if a find command was entered prior.`
+* `There are no FindCommand results. There is nothing to be saved to the logger tab.`
+
+Tips:
+* Use the shortcut `lo` for faster patient-logging
+* Use `log` command to save data you want to continue referring to
+* `log` overwrites the data currently in the logger tab, so you do not need to perform clearing prior
+
+
+### Adding a new `find` command result to the log: `alog`
+
+Appends the new results of the most recent find command to the current data in the logger tab, which can be viewed at all times.
+
+* Adding to the logger tab only works for results of the `find` command.
+* The previously-saved result will remain the same.
+* The entire new result will be saved below the previously-saved result.
+* The result will be saved in the same order and format.
+
+Format: `alog`
+
+Example Command: `alog` (after entering a FindCommand)
+
+
+![result for 'alog'](images/alogResult.jpg)
+
+Expected outputs when the command succeeds:
+* `Results of the FindCommand have been appended to the logger tab.`
+
+Expected output when the command fails:
+* `There are no FindCommand results. There is nothing to be saved to the logger tab.`
+
+
+Tips:
+* Use the shortcut `al` for faster log-appending
+* Use `alog` command to save data you want to continue referring to, on top of some others
+* `alog` does not overwrite the data and instead adds on to it, so you do not have to keep performing `log` to save more data
+
+
+### Clearing data from the log: `clog`
+
+Clears all current data in the logger tab.
+
+Format: `clog`
+
+Example Command: `clog`
+
+
+![result for 'clog'](images/clogResult.jpg)
+
+Expected output:
+* `Logger tab has been cleared!`
+
+
+Tips:
+* Use the shortcut `cl` for faster log-clearing
+* Use `clog` command if you do not need the data in the current logger tab anymore
 
 
 ### Deleting a person or field: `delete`
@@ -193,7 +281,7 @@ Expected output when the command fails:
 Deletes the specified person or the fields for the person from HealthSync.
 
 * Deletes the person with the specified `n/NAME or id/IC_NUMBER`.
-* The name or ic number must be a valid input.
+* The name or IC number must be a valid input.
 * To delete a specified field only instead of the entire person, we indicate the field behind of the identification.
 * If multiple people has the same name, HealthSync will display a list of people with that name together with their IC number.
 
@@ -201,8 +289,11 @@ Format: `delete n/NAME or id/IC_NUMBER [field]`
 
 Example commands:
 * `delete id/S9987362H` deletes all the details of the person with the specified IC number from HealthSync.
-* `delete n/John Doe` deletes all the details of John Doe from HealthSync.
-* `delete n/John Doe p/` deletes John Doe phone number from his profile.
+* `delete n/Alex Yeoh` deletes all the details of Alex Yeoh from HealthSync.
+* `delete n/Alex Yeoh p/` deletes Alex Yeoh's phone number from his profile.
+
+
+![result for 'delete n/Alex Yeoh'](images/deleteResult.jpg)
 
 Expected outputs when the command succeeds:
  * `Patient n/NAME or id/IC_NUMBER has been removed from the database`
@@ -210,6 +301,11 @@ Expected outputs when the command succeeds:
 
 Expected output when the command fails:
  * `Error code’s message (i.e. Invalid NRIC/ Invalid Field(s) / Database Error) `
+
+Tips:
+* Use the shortcut `d` for faster patient-deleting
+* Specify the medical history to be deleted using m/ if it's only the medical history data that is to be deleted
+
 
 <!--
 Original format, can consider using
@@ -223,6 +319,9 @@ find Betsy followed by delete 1 deletes the 1st person in the results of the fin
 Deletes all patients from the program.
 
 Format: `clear`
+
+
+![result for 'clear'](images/clearResult.jpg)
 
 
 ### Exiting the program: `exit`
@@ -244,21 +343,42 @@ If your changes to the data file makes its format invalid, HealthSync will disca
 data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.
 </box>
 
-### Archiving data files `[coming in v2.0]`
-
-_Details coming soon ..._
-
 --------------------------------------------------------------------------------------------------------------------
 
-## FAQ
+## [FAQ](#faq)
+
+**Q**: What operating systems does HealthSync support?<br>
+**A**: HealthSync is a cross-platform application and supports Windows, macOS, and Linux. Simply follow the
+[installation guide](#quick-start) and download the jar file to use the application.
+
+**Q**: What are the advantages of using a CLI interface in HealthSync over traditional GUI apps?<br>
+**A**: HealthSync's CLI interface offers faster data entry and navigation for users who are comfortable with typing.
+It streamlines tasks and provides a more efficient way to manage patient details.
+
+**Q**: Can multiple users access Healthysync simultaneously, and how do I set up user accounts?<br>
+**A**: HealthSync is currently an application for a single user. Hence, it cannot be accessed simultaneously
+by different users.
+
+**Q**: How do I import patient data from external sources into HealthSync?<br>
+**A**: Datafile storing current patient data will be stored in `data/addressbook.json` by default under the same folder.
+You may import patient data and store into that file. However, do adhere to the data format present in the current file.
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains
        the data of your previous HealthSync home folder.
 
+**Q**: Can I use HealthSync offline, or does it require an internet connection?<br>
+**A**: HealthSync is designed to work offline, ensuring you can access and update patient data even when you don't have
+an internet connection.
+
+**Q**: What happens if there is a system crash or power outage while I'm using HealthSync?<br>
+**A**: HealthSync includes auto-save functionality to minimize data loss in case of unexpected events.
+The app will attempt to recover your work upon restart.
+
+
 --------------------------------------------------------------------------------------------------------------------
 
-## Known issues
+## [Known issues](#known-issues)
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only
    the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by
@@ -443,14 +563,18 @@ JavaScript Object Notation. This is the file format used by HealthSync to save a
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Command summary
+## [Command summary](#command-summary)
 
-| Action     | Shortcut | Format, Examples                                                                                                           |
-|------------|----------|----------------------------------------------------------------------------------------------------------------------------|
-| **Add**    | `a`      | `add n/NAME id/IC_NUMBER [field] ...` <br> e.g., `add n/James Ho id/SXXXX123D p/91234567 a/A Estate, Clementi Rd, 1234665` |
-| **Clear**  | `c`      | `clear`                                                                                                                    |
-| **Delete** | `d`      | `delete n/NAME [field]` *or* `delete id/IC_NUMBER [field]`<br> e.g., `delete n/John Doe e/`                                |
-| **Edit**   | `e`      | `edit n/NAME [field]` *or* `edit id/IC_NUMBER [field] ... `<br> e.g.,`edit n/James Lee e/jameslee@example.com`             |
-| **Find**   | `f`      | `find n/NAME [field]` *or* `find id/IC_NUMBER [field]`<br> e.g., `find n/James Jake` *or* `find id/S872D`                  |
-| **List**   | `li`      | `list`                                                                                                                     |
-| **Help**   | `h`      | `help`                                                                                                                     |
+| Action         | Shortcut | Format, Examples                                                                                                           |
+|----------------|----------|----------------------------------------------------------------------------------------------------------------------------|
+| **Add**        | `a`      | `add n/NAME id/IC_NUMBER [field] ...` <br> e.g., `add n/James Ho id/SXXXX123D p/91234567 a/A Estate, Clementi Rd, 1234665` |
+| **Clear**      | `c`      | `clear`                                                                                                                    |
+| **Delete**     | `d`      | `delete n/NAME [field]` *or* `delete id/IC_NUMBER [field]`<br> e.g., `delete n/John Doe e/`                                |
+| **Edit**       | `e`      | `edit n/NAME [field]` *or* `edit id/IC_NUMBER [field] ... `<br> e.g.,`edit n/James Lee e/jameslee@example.com`             |
+| **Find**       | `f`      | `find n/NAME [field]` *or* `find id/IC_NUMBER [field]`<br> e.g., `find n/James Jake` *or* `find id/S872D`                  |
+| **Help**       | `h`      | `help`                                                                                                                     |
+| **List**       | `li`     | `list`                                                                                                                     |
+| **Log**        | `lo`     | `log`                                                                                                                      |
+| **Append Log** | `al`     | `alog`                                                                                                                     |
+| **Clear Log**  | `cl`     | `clog`                                                                                                                     |
+| **Exit**       | `ex`     | `exit`                                                                                                                     |

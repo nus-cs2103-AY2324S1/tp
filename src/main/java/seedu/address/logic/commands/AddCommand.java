@@ -42,7 +42,7 @@ public class AddCommand extends UndoableCommand {
             + PREFIX_ADDRESS + "311, Clementi Ave 2, #02-25 "
             + PREFIX_APPOINTMENT + "17-10-2023 11:00 13:00 "
             + PREFIX_MEDICAL + "hypochondriac "
-            + PREFIX_MEDICAL + "on Medicine XYZ "
+            + PREFIX_MEDICAL + "on Medicine XYZ \n"
             + "Example 2: " + COMMAND_WORD_ALIAS + " "
             + PREFIX_NAME + "Alex Yeoh "
             + PREFIX_NRIC + "S6742632F "
