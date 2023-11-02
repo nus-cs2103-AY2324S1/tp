@@ -468,23 +468,18 @@ View employee’s attendance report.
 
 `attendance INDEX` or `attendance /n NAME`
 
-* The attendance type can only be: `ABSENT`, `LATE`, or `PRESENT`.
-* It is not case-insensitive. e.g. you can either enter ABSENT or absent.
-
 Examples:
 
-* `mark n/John /at Absent` marks John as absent.
-* `mark 1 /at Present` marks the first employee in the current list to be present.
+* `attendance /n John` views John’s attendance report for the year up till today.
+* `attendance 1` views the first employee’s attendance report in the current list.
 
 Output:
 * If the index is not within the numbers in the list, the app should display `The employee index provided is invalid.`
-  ![result for incorrect mark index](images/incorrectMarkIndex.png)
+  ![result for incorrect attendance index](images/incorrectAttendanceIndex.png)
 * If the command is incorrect, the app should display `Invalid command format!`
-  ![result for incorrect command](images/incorrectMarkCommand.png)
-* If the ATTENDANCE_TYPE is not within the valid list, the app should display `Invalid attendance type, only Absent, Late and Present are allowed.`
-  ![result for incorrect attendance type](images/incorrectAttendanceType.png)
-* If the command is successful, the app should display `Successfully marked NAME as ATTENDANCE TYPE`. The addressbook’s display of the employee’s attendance status should also be updated accordingly.
-  ![result for marking an employee to be absent](images/markSuccess.png)
+  ![result for incorrect command](images/incorrectAttendanceCommand.png)
+* If the command is successful, the app should display the attendance. The address book’s display of the employee’s attendance status.
+  ![result for attendance report](images/attendanceSuccess.png)
 
 
 ### Listing all persons : `list`
