@@ -160,7 +160,7 @@ Deletes all contacts!
 
 <div markdown="span" class="alert alert-warning">
 :exclamation: **Caution:**
-This command will immediately delete all your contacts. **Use with caution!**
+This command will immediately delete all your contacts. **Use with care!**
 </div>
 
 ### Listing all contacts: `list`
