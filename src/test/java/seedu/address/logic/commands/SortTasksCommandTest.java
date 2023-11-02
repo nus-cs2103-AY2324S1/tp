@@ -18,11 +18,11 @@ import seedu.address.model.task.Task;
 
 
 class SortTasksCommandTest {
+    private static final String COMPARATOR_TYPE_DESCRIPTION = "Description";
+    private static final String COMPARATOR_TYPE_DEADLINE = "Deadline";
+    private static final String COMPARATOR_TYPE_INVALID = "Invalid";
     private Model model = new ModelManager(getTypicalAddressBook(), getTypicalCalendar(), getTypicalTaskManager(),
             new UserPrefs());
-    private final static String COMPARATOR_TYPE_DESCRIPTION = "Description";
-    private final static String COMPARATOR_TYPE_DEADLINE = "Deadline";
-    private final static String COMPARATOR_TYPE_INVALID = "Invalid";
 
     @Test
     public void equals() {
@@ -44,14 +44,14 @@ class SortTasksCommandTest {
 
     @Test
     public void execute_nullInput_throwsNullPointerException() {
-        assertThrows(NullPointerException.class,
-                () -> new SortTasksCommand(COMPARATOR_TYPE_DESCRIPTION).execute(null));
+        assertThrows(NullPointerException.class, () ->
+                new SortTasksCommand(COMPARATOR_TYPE_DESCRIPTION).execute(null));
     }
 
     @Test
     public void execute_invalidType_throwsCommandException() {
-        assertThrows(CommandException.class,
-                () -> new SortTasksCommand(COMPARATOR_TYPE_INVALID).execute(model));
+        assertThrows(CommandException.class, () ->
+                new SortTasksCommand(COMPARATOR_TYPE_INVALID).execute(model));
     }
 
     @Test

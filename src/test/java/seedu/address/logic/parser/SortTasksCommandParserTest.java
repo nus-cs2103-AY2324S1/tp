@@ -1,15 +1,15 @@
 package seedu.address.logic.parser;
 
-
-import org.junit.jupiter.api.Test;
-import seedu.address.logic.commands.SortTasksCommand;
-
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
+import org.junit.jupiter.api.Test;
+
+import seedu.address.logic.commands.SortTasksCommand;
+
 class SortTasksCommandParserTest {
-    private final static String COMPARATOR_TYPE_DESCRIPTION = "Description";
+    private static final String COMPARATOR_TYPE_DESCRIPTION = "Description";
     private SortTasksCommandParser parser = new SortTasksCommandParser();
 
     @Test
@@ -25,5 +25,4 @@ class SortTasksCommandParserTest {
 
         assertParseSuccess(parser, " \n \t Description", expectedSortTasksCommand);
     }
-
 }
