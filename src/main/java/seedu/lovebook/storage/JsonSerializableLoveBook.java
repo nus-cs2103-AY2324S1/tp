@@ -49,10 +49,10 @@ class JsonSerializableLoveBook {
         LoveBook loveBook = new LoveBook();
         for (JsonAdaptedDate jsonAdaptedDate : dates) {
             Date date = jsonAdaptedDate.toModelType();
-            if (loveBook.hasPerson(date)) {
+            if (loveBook.hasDate(date)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
             }
-            loveBook.addPerson(date);
+            loveBook.addDate(date);
         }
         return loveBook;
     }

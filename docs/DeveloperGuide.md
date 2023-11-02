@@ -13,8 +13,10 @@
 
 ## **Acknowledgements**
 
-_{ list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the
-original source as well }_
+- Code reused from here to disable click feature of `ListView`:
+  https://stackoverflow.com/questions/20621752/javafx-make-listview-not-selectable-via-mouse
+- Result Display FXML code inspired from here:
+  https://github.com/AY1920S2-CS2103T-F09-3/main
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -205,26 +207,37 @@ There are 12 main features in that you came up with for LoveBook.
 12. Unstar dates
 
 ### Add Dates
+The add dates feature is implemented using the `AddCommand` class. The `AddCommand` class takes in a `Date` object as a parameter. The `Date` object is used to add the `Date` object to the `Model` component. The `AddCommand` class then returns a `CommandResult` object that contains the added `Date` object.
+The Activity Diagram below summarises what happens after the user enters an add command.
+
+<puml src="diagrams/AddActivityDiagram.puml" width="450" />
 
 ### Delete Dates
+The delete dates feature is implemented using the `DeleteCommand` class. The `DeleteCommand` class takes in a an 'Index' object as a parameter. The 'Index' object is used to identify the `Date` object in the `Model` component to be deleted. The `DeleteCommand` class then returns a `CommandResult` object that contains the deleted `Date` object
+
 
 ### Edit Dates
+The edit dates feature is implemented using the `EditCommand` class. The `EditCommand` class takes in a an 'Index' object as a parameter. The 'Index' object is used to identify the `Date` object in the `Model` component to be edited. The `EditCommand` class then returns a `CommandResult` object that contains the edited `Date` object
+The Sequence Diagram below shows how the components interact with each other for the scenario where the user issues the command `edit 1 name/Cleon`
+
+<puml src="diagrams/EditSequenceDiagram.puml" width="450" />
 
 ## List Dates
+The list dates feature is implemented using the `ListCommand` class. The `ListCommand` class takes in a `Predicate` object as a parameter. The `Predicate` object is used to filter the `Date` objects in the `Model` component. The `ListCommand` class then returns a `CommandResult` object that contains the filtered `Date` objects.
 
 ### Filter dates
-
 The filter feature is implemented using the `FilterCommand` class. The `FilterCommand` class takes in a `Predicate`
 object as a parameter. The `Predicate` object is used to filter the `Date` objects in the `Model` component.
 The `FilterCommand` class then returns a `CommandResult` object that contains the filtered `Date` objects.
 
 The _Activity_ diagram summarises what happens after the user enters a filter command.
 
-![Filter Activity.png](..%2F..%2F..%2FFilter%20Activity.png)
+<puml src="diagrams/FilterActivity.puml" width="450" />
 
 The _Sequence_ Diagram below shows how the components interact with each other for the scenario where the user issues
 the command `filter name/ John`
-![Filter Sequence.png](..%2F..%2F..%2FFilter%20Sequence.png)
+
+<puml src="diagrams/FilterSequence.puml" width="450" />
 
 ### Sort dates
 
@@ -233,11 +246,13 @@ object as a parameter. The `Comparator` object is used to sort the `Date` object
 The `SortCommand` class then returns a `CommandResult` object that contains the sorted `Date` objects.
 
 The _Activity_ diagram summarises what happens after the user enters a sort command.
-![SortActivity.png](..%2F..%2F..%2FSortActivity.png)
+
+<puml src="diagrams/SortActivity.puml" width="450" />
 
 The _Sequence_ Diagram below shows how the components interact with each other for the scenario where the user issues
 the command `sort name/ increasing`
-![Sort Sequence.png](..%2F..%2F..%2FSort%20Sequence.png)
+
+<puml src="diagrams/SortSequence.puml" width="450" />
 
 ### Get random Date
 
@@ -272,11 +287,13 @@ object as a parameter. The 'Index' object is used to identify the `Date` object 
 starred. The `StarCommand` class then returns a `CommandResult` object that contains the starred `Date` object
 
 The _Activity_ diagram summarises what happens after the user enters a star command.
-![Star Activity.png](..%2F..%2F..%2FStar%20Activity.png)
+
+<puml src="diagrams/StarActivity.puml" width="450" />
 
 The _Sequence_ Diagram below shows how the components interact with each other for the scenario where the user issues
 the command `star 1`
-![Star Sequence.png](..%2F..%2F..%2FStar%20Sequence.png)
+
+<puml src="diagrams/StarSequence.puml" width="450" />
 
 ### Unstar dates
 
@@ -285,11 +302,15 @@ object as a parameter. The 'Index' object is used to identify the `Date` object 
 unstarred. The `UnstarCommand` class then returns a `CommandResult` object that contains the unstarred `Date` object
 
 The _Activity_ diagram summarises what happens after the user enters a star command.
-![Unstar Activity.png](..%2F..%2F..%2FUnstar%20Activity.png)
+
+<puml src="diagrams/UnstarActivity.puml" width="450" />
 
 The _Sequence_ Diagram below shows how the components interact with each other for the scenario where the user issues
-the command `star 1`
-![Unstar Sequence.png](..%2F..%2F..%2FUnstar%20Sequence.png)
+the command `unstar 1`
+
+<puml src="diagrams/UnstarSequence.puml" width="450" />
+
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**

@@ -42,7 +42,7 @@ public class UnstarCommandTest {
         Star star = new Star("true");
         Date starredDate = new Date(dateToUnstar.getName(), dateToUnstar.getAge(), dateToUnstar.getGender(),
                 dateToUnstar.getHeight(), dateToUnstar.getIncome(), dateToUnstar.getHoroscope(), star);
-        model.setPerson(dateToUnstar, starredDate);
+        model.setDate(dateToUnstar, starredDate);
         UnstarCommand unstarCommand = new UnstarCommand(INDEX_FIRST_PERSON);
         assertCommandSuccess(unstarCommand, model, expectedMessage, expectedModel);
     }
@@ -67,7 +67,7 @@ public class UnstarCommandTest {
         Star star = new Star("true");
         Date unstarredDate = new Date(dateToUnstar.getName(), dateToUnstar.getAge(), dateToUnstar.getGender(),
                 dateToUnstar.getHeight(), dateToUnstar.getIncome(), dateToUnstar.getHoroscope(), star);
-        model.setPerson(dateToUnstar, unstarredDate);
+        model.setDate(dateToUnstar, unstarredDate);
         UnstarCommand unstarCommand = new UnstarCommand(INDEX_FIRST_PERSON);
         assertCommandSuccess(unstarCommand, model, expectedMessage, expectedModel);
     }

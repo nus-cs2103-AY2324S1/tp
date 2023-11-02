@@ -15,7 +15,7 @@ public class SampleDataUtil {
     public static ReadOnlyLoveBook getSampleLoveBook() {
         LoveBook sampleAb = new LoveBook();
         for (Date sampleDate : getSamplePersons()) {
-            sampleAb.addPerson(sampleDate);
+            sampleAb.addDate(sampleDate);
         }
         return sampleAb;
     }

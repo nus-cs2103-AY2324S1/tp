@@ -59,23 +59,23 @@ public class UniqueDateListTest {
 
     @Test
     public void setPerson_nullTargetPerson_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> uniqueDateList.setPerson(null, ALICE));
+        assertThrows(NullPointerException.class, () -> uniqueDateList.setDate(null, ALICE));
     }
 
     @Test
     public void setPerson_nullEditedPerson_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> uniqueDateList.setPerson(ALICE, null));
+        assertThrows(NullPointerException.class, () -> uniqueDateList.setDate(ALICE, null));
     }
 
     @Test
     public void setPerson_targetPersonNotInList_throwsPersonNotFoundException() {
-        assertThrows(PersonNotFoundException.class, () -> uniqueDateList.setPerson(ALICE, ALICE));
+        assertThrows(PersonNotFoundException.class, () -> uniqueDateList.setDate(ALICE, ALICE));
     }
 
     @Test
     public void setPerson_editedPersonIsSamePerson_success() {
         uniqueDateList.add(ALICE);
-        uniqueDateList.setPerson(ALICE, ALICE);
+        uniqueDateList.setDate(ALICE, ALICE);
         UniqueDateList expectedUniqueDateList = new UniqueDateList();
         expectedUniqueDateList.add(ALICE);
         assertEquals(expectedUniqueDateList, uniqueDateList);
@@ -86,7 +86,7 @@ public class UniqueDateListTest {
         uniqueDateList.add(ALICE);
         Date editedAlice = new PersonBuilder(ALICE).withHeight(VALID_HEIGHT_BOB)
                 .build();
-        uniqueDateList.setPerson(ALICE, editedAlice);
+        uniqueDateList.setDate(ALICE, editedAlice);
         UniqueDateList expectedUniqueDateList = new UniqueDateList();
         expectedUniqueDateList.add(editedAlice);
         assertEquals(expectedUniqueDateList, uniqueDateList);
@@ -95,7 +95,7 @@ public class UniqueDateListTest {
     @Test
     public void setPerson_editedPersonHasDifferentIdentity_success() {
         uniqueDateList.add(ALICE);
-        uniqueDateList.setPerson(ALICE, BOB);
+        uniqueDateList.setDate(ALICE, BOB);
         UniqueDateList expectedUniqueDateList = new UniqueDateList();
         expectedUniqueDateList.add(BOB);
         assertEquals(expectedUniqueDateList, uniqueDateList);
@@ -105,7 +105,7 @@ public class UniqueDateListTest {
     public void setPerson_editedPersonHasNonUniqueIdentity_throwsDuplicatePersonException() {
         uniqueDateList.add(ALICE);
         uniqueDateList.add(BOB);
-        assertThrows(DuplicatePersonException.class, () -> uniqueDateList.setPerson(ALICE, BOB));
+        assertThrows(DuplicatePersonException.class, () -> uniqueDateList.setDate(ALICE, BOB));
     }
 
     @Test

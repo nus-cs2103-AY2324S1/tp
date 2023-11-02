@@ -98,27 +98,27 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public boolean hasPerson(Date date) {
+    public boolean hasDate(Date date) {
         requireNonNull(date);
-        return loveBook.hasPerson(date);
+        return loveBook.hasDate(date);
     }
 
     @Override
-    public void deletePerson(Date target) {
+    public void deleteDate(Date target) {
         loveBook.removePerson(target);
     }
 
     @Override
-    public void addPerson(Date date) {
-        loveBook.addPerson(date);
+    public void addDate(Date date) {
+        loveBook.addDate(date);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
     @Override
-    public void setPerson(Date target, Date editedDate) {
+    public void setDate(Date target, Date editedDate) {
         requireAllNonNull(target, editedDate);
 
-        loveBook.setPerson(target, editedDate);
+        loveBook.setDate(target, editedDate);
     }
 
     //=========== Filtered Date List Accessors =============================================================
@@ -135,7 +135,7 @@ public class ModelManager implements Model {
     /**
      * Returns a random date from the date list.
      */
-    public void getRandomPerson() {
+    public void getRandomDate() {
         Random randomGenerator = new Random();
         int randomIndex = randomGenerator.nextInt(loveBook.getPersonList().size());
         Date person = loveBook.getPersonList().get(randomIndex);

@@ -32,7 +32,7 @@ public class AddCommandIntegrationTest {
         Date validDate = new PersonBuilder().build();
 
         Model expectedModel = new ModelManager(model.getLoveBook(), new UserPrefs(), model.getDatePrefs());
-        expectedModel.addPerson(validDate);
+        expectedModel.addDate(validDate);
 
         assertCommandSuccess(new AddCommand(validDate), model,
                 String.format(AddCommand.MESSAGE_SUCCESS, Messages.format(validDate)),

@@ -122,7 +122,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public void addPerson(Date date) {
+        public void addDate(Date date) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -137,17 +137,17 @@ public class AddCommandTest {
         }
 
         @Override
-        public boolean hasPerson(Date date) {
+        public boolean hasDate(Date date) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void deletePerson(Date target) {
+        public void deleteDate(Date target) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void setPerson(Date target, Date editedDate) {
+        public void setDate(Date target, Date editedDate) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -157,7 +157,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public void getRandomPerson() {
+        public void getRandomDate() {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -214,7 +214,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public boolean hasPerson(Date date) {
+        public boolean hasDate(Date date) {
             requireNonNull(date);
             return this.date.isSamePerson(date);
         }
@@ -227,13 +227,13 @@ public class AddCommandTest {
         final ArrayList<Date> datesAdded = new ArrayList<>();
 
         @Override
-        public boolean hasPerson(Date date) {
+        public boolean hasDate(Date date) {
             requireNonNull(date);
             return datesAdded.stream().anyMatch(date::isSamePerson);
         }
 
         @Override
-        public void addPerson(Date date) {
+        public void addDate(Date date) {
             requireNonNull(date);
             datesAdded.add(date);
         }

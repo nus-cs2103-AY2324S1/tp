@@ -197,17 +197,17 @@ Recall from the User Guide that the `edit` command has the format: `edit INDEX [
        ...
        Person dateToEdit = lastShownList.get(index.getZeroBased());
        Person editedDate = createEditedPerson(dateToEdit, editPersonDescriptor);
-       if (!dateToEdit.isSamePerson(editedDate) && model.hasPerson(editedDate)) {
+       if (!dateToEdit.isSamePerson(editedDate) && model.hasDate(editedDate)) {
            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
        }
-       model.setPerson(dateToEdit, editedDate);
+       model.setDate(dateToEdit, editedDate);
        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedDate));
    }
    ```
 
 1. As suspected, `command#execute()` does indeed make changes to the `model` object. Specifically,
-   * it uses the `setPerson()` method (defined in the interface `Model` and implemented in `ModelManager` as per the usual pattern) to update the date data.
+   * it uses the `setDate()` method (defined in the interface `Model` and implemented in `ModelManager` as per the usual pattern) to update the date data.
    * it uses the `updateFilteredPersonList` method to ask the `Model` to populate the 'filtered list' with _all_ dates.<br>
      FYI, The 'filtered list' is the list of dates resulting from the most recent operation that will be shown to the user immediately after. For the `edit` command, we populate it with all the dates so that the user can see the edited date along with all other dates. If this was a `find` command, we would be setting that list to contain the search results instead.<br>
      To provide some context, given below is the class diagram of the `Model` component. See if you can figure out where the 'filtered list' of dates is being tracked.

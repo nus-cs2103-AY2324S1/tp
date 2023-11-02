@@ -24,7 +24,7 @@ public class LoveBookBuilder {
      * Adds a new {@code Date} to the {@code LoveBook} that we are building.
      */
     public LoveBookBuilder withPerson(Date date) {
-        loveBook.addPerson(date);
+        loveBook.addDate(date);
         return this;
     }
 
