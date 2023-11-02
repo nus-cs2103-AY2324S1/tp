@@ -2,8 +2,8 @@ package seedu.address.model.lessons;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.ArrayList;
 import java.util.Objects;
-import java.util.Set;
 
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.ListEntry;
@@ -228,8 +228,8 @@ public class Lesson extends ListEntry<Lesson> {
      * Returns the list of tasks as a set.
      * @return
      */
-    public Set<Task> getTasksSet() {
-        return taskList.getTaskSetClone();
+    public ArrayList<Task> getTaskListClone() {
+        return taskList.getTaskListClone();
     }
 
     public Name getName() {
