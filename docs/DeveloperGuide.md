@@ -447,20 +447,20 @@ other important events.
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​            | I want to …​                                                   | So that I can…​                                                        |
-|----------|--------------------|----------------------------------------------------------------|------------------------------------------------------------------------|
-| `* * *`  | university student | see usage instructions                                         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | university student | add a new person                                               | keep my address book up to date                                        |
-| `* * *`  | university student | include optional fields when adding contacts                   | include comprehensive and personalized information for each contact    |
-| `* * *`  | university student | delete a person                                                | remove contacts that I no longer need                                  |
-| `* * *`  | university student | find a person by name                                          | locate details of persons without having to go through the entire list |
-| `* * *`  | university student | edit a person details                                          | reflect any contact changes accordingly                                |   
-| `* * *`  | university student | create an event                                                | schedule and keep track of important commitments                       |
-| `* * *`  | university student | edit an event                                                  | modify event details like the date, time, or location                  |
-| `* * *`  | university student | delete an event                                                | remove events that are canceled or no longer relevant                  |
+| Priority | As a …​            | I want to …​                                               | So that I can…​                                                        |
+|----------|--------------------|------------------------------------------------------------|------------------------------------------------------------------------|
+| `* * *`  | university student | see usage instructions                                     | refer to instructions when I forget how to use the App                 |
+| `* * *`  | university student | add a new person                                           | keep my address book up to date                                        |
+| `* * *`  | university student | include optional fields when adding contacts               | include comprehensive and personalized information for each contact    |
+| `* * *`  | university student | delete a person                                            | remove contacts that I no longer need                                  |
+| `* * *`  | university student | find a person by name                                      | locate details of persons without having to go through the entire list |
+| `* * *`  | university student | edit a person details                                      | reflect any contact changes accordingly                                |   
+| `* * *`  | university student | create an event                                            | schedule and keep track of important commitments                       |
+| `* * *`  | university student | edit an event                                              | modify event details like the date, time, or location                  |
+| `* * *`  | university student | delete an event                                            | remove events that are canceled or no longer relevant                  |
 | `* * *`  | university student | view all upcoming events on a separate event column in the GUI | simultaneously view contact details and event details                  |
-| `* *`    | university student | be reminded on events and birthdays                            | so that i can remember upcoming social activities                      |
-| `* *`    | university student | assign contacts to groups                                      | i can easily identify who is involved in specific events               |
+| `* *`    | university student | be reminded on events and birthdays                        | so that i can remember upcoming social activities                      |
+| `* *`    | university student | assign contacts to groups                                  | i can easily identify who is involved in specific events               |
 
 
 
