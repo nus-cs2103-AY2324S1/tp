@@ -289,10 +289,10 @@ to the company in general.
   * When the applicant index provided is invalid: `The applicant index provided is invalid`
   * When the user does not input a valid date: `“Please specify a valid date!”`
   * When the user inputs a valid date without a time: `"Please enter an interview time!"`
-  * When the user enters a valid date in the past: `<todo>`
+  * When the user enters a valid date in the past: `Input date cannot be in the past!`
   * When there is an interview clash: `“Oops! You have an <insert interview object> scheduled at <from date & by date>`
 
-Examples:
+Example:
 * `add-i app/3 jr/software engineer start/11-12-2023 1400 end/11-12-2023 1500`
 
 ### Deleting an interview : `delete-i`
@@ -349,7 +349,49 @@ Format: `list-i`
 
 ### Listing all free time for the given day : `list-freetime`
 
+Lists all the freetime for the given day
+
+Format: `list-freetime DATE`
+
+* Displays a list of all the blocks of free time the user has in
+  the given day, within the 9am to 5pm window of that day
+* If there is no free time, there will be no blocks of 
+free time that will be displayed
+  * This indicates that the entire day is not free
+* If there are no interviews on that day, the block of free time
+listed will be: `from: 09:00 to: 17:00`
+  * This indicates that the entire day is free
+* If the `DATE` not valid at all, this error message will
+be shown:`Please specify a valid date!`
+* If the `DATE` is valid but in the past, this error message will
+be shown:`Input date cannot be in the past!`
+
+Examples:
+* `list-freetime 12/12/2099`
+* `list-freetime 12-12-2099`
+
+Accepted time formats (to replace `DATE` with):
+* `dd/mm/yyyy`
+* `dd-mm-yyyy`
+
 ### Listing all interviews for today : `list-i-today`
+
+Displays all the interviews that the user has on the day the 
+command is executed
+
+Format: `list-i-today`
+
+* Lists all interviews that have a start date that falls on the 
+day on which the user executed the command
+  * For example, if the user executed this command on 12/12/2023, 
+the app will display all the interviews that the user has scheduled
+on 12/12/2023
+* If there are no interviews scheduled on the day on which the command
+was executed, the app will not display any interviews 
+* Upon successful execution of the command, this message will be 
+shown: `Listed all interviews today`
+
+Example: `list-i-today`
 
 ### Marking an interview : `mark`
 
@@ -357,7 +399,7 @@ Mark the specified interview in the address book.
 
 Format: `mark INDEX`
 
-* Marks the interview at the specified `INDEX' as done.
+* Marks the interview at the specified `INDEX` as done.
 * The index refers to the index number shown in the displayed interview list.
 * The index **must be a positive integer** 1, 2, 3, …​ The upper limit of
 valid integers is the number of interviews currently displayed in the interview
@@ -402,6 +444,13 @@ Sort the interview list by rating in descending order (highest to the lowest rat
 Format: `sort-rate`
 
 ### Sorting interviews by start-time : `sort-time`
+
+Sort the interview list by interview start time
+in chronologically ascending order (interviews with earlier start times
+will be shown first)
+
+Format: `sort-time`
+
 
 ### Editing the data file
 
