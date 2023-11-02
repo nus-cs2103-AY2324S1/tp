@@ -226,7 +226,7 @@ Example:
 
 Format: `help`
 
-Displaying user guide
+Opens your browser to show the user guide.
 
 ### Exiting the program : `exit`
 
