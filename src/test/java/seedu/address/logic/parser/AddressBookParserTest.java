@@ -119,4 +119,11 @@ public class AddressBookParserTest {
         assertTrue(parser.parseCommand("owe 1 2.50") instanceof OweCommand);
     }
 
+    @Test
+    public void parseCommand_nonAsciiInput_throwsParseException() {
+        String nonAsciiInput = "add José";
+        assertThrows(ParseException.class,
+            AddressBookParser.MESSAGE_NON_ASCII, () -> parser.parseCommand(nonAsciiInput));
+    }
+
 }
