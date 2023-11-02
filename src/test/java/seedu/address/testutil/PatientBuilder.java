@@ -63,6 +63,23 @@ public class PatientBuilder {
         tags = new HashSet<>();
         appointments = new HashSet<>();
     }
+    /**
+     * Initializes the PatientBuilder with an nric,
+     */
+    public PatientBuilder(Ic nric) {
+        name = new Name(DEFAULT_NAME);
+        phone = new Phone(DEFAULT_PHONE);
+        emergencyContact = new Phone(DEFAULT_EMERGENCY_CONTACT);
+        email = new Email(DEFAULT_EMAIL);
+        address = new Address(DEFAULT_ADDRESS);
+        remark = new Remark(DEFAULT_REMARK);
+        gender = new Gender(DEFAULT_GENDER);
+        ic = nric;
+        condition = new Condition(DEFAULT_CONDITION);
+        bloodType = new BloodType(DEFAULT_BLOODTYPE);
+        tags = new HashSet<>();
+        appointments = new HashSet<>();
+    }
 
     /**
      * Initializes the PatientBuilder with the data of {@code patientToCopy}.
