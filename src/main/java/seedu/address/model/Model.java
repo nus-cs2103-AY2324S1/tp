@@ -6,6 +6,7 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.appointment.Appointment;
 import seedu.address.model.person.Doctor;
 import seedu.address.model.person.Patient;
 import seedu.address.model.person.Person;
@@ -19,6 +20,8 @@ public interface Model {
      */
     Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
     Predicate<Doctor> PREDICATE_SHOW_ALL_DOCTORS = unused -> true;
+
+    Predicate<Appointment> PREDICATE_SHOW_ALL_APPOINTMENTS = unused -> true;
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -84,6 +87,10 @@ public interface Model {
      */
     void setPerson(Person target, Person editedPerson);
 
+    void addAppointment(Appointment appointment);
+
+    void setAppointment(Appointment target, Appointment editedAppointment);
+
     /**
      * Returns an unmodifiable view of the filtered person list
      */
@@ -99,6 +106,8 @@ public interface Model {
      */
     ObservableList<Doctor> getFilteredDoctorList();
 
+    ObservableList<Appointment> getFilteredAppointmentList();
+
     /**
      * Updates the filter of the filtered person list to filter by the given {@code predicate}.
      *
@@ -109,4 +118,6 @@ public interface Model {
     void undo() throws CommandException;
 
     void redo() throws CommandException;
+
+    void updateFilteredAppointmentList(Predicate<Appointment> predicate);
 }

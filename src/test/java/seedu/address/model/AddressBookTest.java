@@ -18,6 +18,7 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.model.appointment.Appointment;
 import seedu.address.model.person.Doctor;
 import seedu.address.model.person.Patient;
 import seedu.address.model.person.Person;
@@ -88,7 +89,8 @@ public class AddressBookTest {
     @Test
     public void toStringMethod() {
         String expected = AddressBook.class.getCanonicalName() + "{patients=" + addressBook.getPatientList()
-                + ", doctors=" + addressBook.getDoctorList() + "}";
+                + ", doctors=" + addressBook.getDoctorList() + ", appointments="
+                + addressBook.getAppointmentList() + "}";
         assertEquals(expected, addressBook.toString());
     }
 
@@ -98,6 +100,7 @@ public class AddressBookTest {
     private static class AddressBookStub implements ReadOnlyAddressBook {
         private final ObservableList<Patient> patients = FXCollections.observableArrayList(); // I think this is wrong
         private final ObservableList<Doctor> doctors = FXCollections.observableArrayList();
+        private final ObservableList<Appointment> appointments = FXCollections.observableArrayList();
 
         AddressBookStub(Collection<Person> persons) {
             for (Person p : persons) {
@@ -121,6 +124,11 @@ public class AddressBookTest {
         @Override
         public ObservableList<Patient> getPatientList() {
             return patients;
+        }
+
+        @Override
+        public ObservableList<Appointment> getAppointmentList() {
+            return appointments;
         }
     }
 
