@@ -15,5 +15,5 @@ public class CliSyntax {
     public static final Prefix PREFIX_LEAVE = new Prefix("l/");
     public static final Prefix PREFIX_ROLE = new Prefix("r/");
     public static final Prefix PREFIX_MANAGER = new Prefix("m/");
-
+    public static final Prefix PREFIX_TYPE = new Prefix("t/");
 }

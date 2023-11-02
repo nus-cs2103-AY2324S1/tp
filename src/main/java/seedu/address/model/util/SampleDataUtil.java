@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 
 import seedu.address.model.ManageHr;
 import seedu.address.model.ReadOnlyManageHr;
+import seedu.address.model.department.Department;
 import seedu.address.model.employee.Address;
 import seedu.address.model.employee.Email;
 import seedu.address.model.employee.Employee;
@@ -46,8 +47,22 @@ public class SampleDataUtil {
         };
     }
 
+    public static Department[] getSampleDepartments() {
+        return new Department[] {
+            new Department("investment"),
+            new Department("R&D"),
+            new Department("logistics"),
+            new Department("Production"),
+            new Department("Sales"),
+            new Department("Not-confirmed")
+        };
+    }
+
     public static ReadOnlyManageHr getSampleManageHr() {
         ManageHr sampleAb = new ManageHr();
+        for (Department sampleDepartment : getSampleDepartments()) {
+            sampleAb.addDepartment(sampleDepartment);
+        }
         for (Employee sampleEmployee : getSampleEmployees()) {
             sampleAb.addEmployee(sampleEmployee);
         }
