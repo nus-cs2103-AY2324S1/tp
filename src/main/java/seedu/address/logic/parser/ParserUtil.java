@@ -189,11 +189,17 @@ public class ParserUtil {
      * @param tags A collection of tag strings to be parsed.
      * @return An array of tag categories extracted from the provided collection of tag strings.
      */
-    public static String[] parseTagCategories(Collection<String> tags) {
+    public static String[] parseTagCategories(Collection<String> tags) throws ParseException {
         requireNonNull(tags);
+        System.out.println("parse tag cat here");
         String listTags = tags.toString();
         String cleanedList = listTags.replaceAll("[\\[\\]]", "");
         String[] tagParams = cleanedList.split(",");
+        for (String tag : tagParams) {
+            if (!Tag.isValidTagName(tag)) {
+                throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
+            }
+        }
         return tagParams;
     }
 
