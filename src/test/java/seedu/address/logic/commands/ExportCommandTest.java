@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -25,7 +26,7 @@ import seedu.address.model.person.Visual;
 public class ExportCommandTest {
 
     @Test
-    public void execute_personAcceptedByModel_sortSuccessful() throws Exception {
+    public void execute_visualAcceptedByModel_exportSuccessful() throws Exception {
         ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
         Visual validVisual = new Visual("TABLE");
 
@@ -41,6 +42,37 @@ public class ExportCommandTest {
         ExportCommand sortCommand = new ExportCommand(validVisual);
         String expected = ExportCommand.class.getCanonicalName() + "{visual=" + visual + "}";
         assertEquals(expected, sortCommand.toString());
+    }
+
+    @Test
+    public void equals_objectsAreEqual_returnsTrue() {
+        Visual visual = new Visual("Bar");
+        ExportCommand command1 = new ExportCommand(visual);
+        ExportCommand command2 = new ExportCommand(visual);
+        assertEquals(command1, command2);
+    }
+
+    @Test
+    public void equals_objectsAreNotEqual_returnsFalse() {
+        Visual visual1 = new Visual("Bar");
+        Visual visual2 = new Visual("Table");
+        ExportCommand command1 = new ExportCommand(visual1);
+        ExportCommand command2 = new ExportCommand(visual2);
+        assertNotEquals(command1, command2);
+    }
+
+    @Test
+    public void equals_objectComparedWithNull_returnsFalse() {
+        Visual visual = new Visual("Bar");
+        ExportCommand command = new ExportCommand(visual);
+        assertNotEquals(command, null);
+    }
+
+    @Test
+    public void equals_objectComparedWithDifferentClass_returnsFalse() {
+        Visual visual = new Visual("Bar");
+        ExportCommand command = new ExportCommand(visual);
+        assertNotEquals(command, "This is a string");
     }
 
     /**

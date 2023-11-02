@@ -24,7 +24,6 @@ import seedu.address.testutil.AddressBookBuilder;
 public class ModelManagerTest {
 
     private ModelManager modelManager = new ModelManager();
-
     @Test
     public void constructor() {
         assertEquals(new UserPrefs(), modelManager.getUserPrefs());
@@ -41,6 +40,21 @@ public class ModelManagerTest {
 
         assertEquals(lastStudent, model.getStudentFromFilteredPersonListByIndex(indexLastPerson).get());
         assertEquals(lastStudent, model.getStudentFromFilteredPersonListByName(nameLastPerson).get());
+    }
+
+    @Test
+    public void testGetTableWithNullArgument() {
+        assertThrows(NullPointerException.class, () -> ModelManager.getTable(null));
+    }
+
+    @Test
+    public void testGetBarWithNullArgument() {
+        assertThrows(NullPointerException.class, () -> ModelManager.getBarChart(null));
+    }
+
+    @Test
+    public void testExportWithNullVisual() {
+        assertThrows(NullPointerException.class, () -> modelManager.export(null));
     }
 
     @Test

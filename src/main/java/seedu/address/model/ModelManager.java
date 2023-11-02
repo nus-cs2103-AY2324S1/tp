@@ -11,12 +11,9 @@ import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
-import javafx.scene.chart.BarChart;
-import javafx.scene.control.TableView;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.CommandResult;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.SortIn;
 import seedu.address.model.person.Student;
@@ -150,14 +147,6 @@ public class ModelManager implements Model {
     public void updateSortedPersonList(SortIn sequence) {
         requireNonNull(sequence);
         addressBook.sort(sequence);
-    }
-
-    public static void updateTable(TableView<? extends CommandResult> table) {
-        requireNonNull(table);
-    }
-
-    public static void updateBarChart(BarChart<String, Number> barChart) {
-        requireNonNull(barChart);
     }
 
     public static void getTable(TableWindow table) {
