@@ -38,6 +38,7 @@ import seedu.ccacommander.model.event.Event;
 import seedu.ccacommander.model.event.UniqueEventList;
 import seedu.ccacommander.model.member.Member;
 import seedu.ccacommander.model.member.UniqueMemberList;
+import seedu.ccacommander.model.shared.Name;
 import seedu.ccacommander.testutil.EnrolmentBuilder;
 
 public class EnrolCommandTest {
@@ -148,17 +149,17 @@ public class EnrolCommandTest {
         }
 
         @Override
-        public void createMember(Member member) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
         public void setCcaCommander(ReadOnlyCcaCommander newData) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public ReadOnlyCcaCommander getCcaCommander() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void createMember(Member member) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -204,6 +205,35 @@ public class EnrolCommandTest {
         public boolean hasEnrolment(Enrolment enrolment) {
             throw new AssertionError("This method should not be called.");
         }
+        @Override
+        public void editEnrolmentsWithEventName(Name prevName, Name newName) {
+            throw new AssertionError("This method should not be called.");
+        }
+        @Override
+        public void editEnrolmentsWithMemberName(Name prevName, Name newName) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void deleteEnrolment(Enrolment target) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void deleteEnrolmentsWithEventName(Name eventName) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void deleteEnrolmentsWithMemberName(Name memberName) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setEnrolment(Enrolment enrolment, Enrolment editedEnrolment) {
+            throw new AssertionError("This method should not be called.");
+        }
+
         @Override
         public ObservableList<Member> getFilteredMemberList() {
             throw new AssertionError("This method should not be called.");

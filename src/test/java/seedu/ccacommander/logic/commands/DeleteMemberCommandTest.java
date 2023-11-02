@@ -7,6 +7,7 @@ import static seedu.ccacommander.logic.commands.CommandTestUtil.assertCommandFai
 import static seedu.ccacommander.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.ccacommander.logic.commands.CommandTestUtil.showMemberAtIndex;
 import static seedu.ccacommander.testutil.TypicalCcaCommander.getTypicalCcaCommander;
+import static seedu.ccacommander.testutil.TypicalIndexes.INDEX_FIRST_ENROLMENT;
 import static seedu.ccacommander.testutil.TypicalIndexes.INDEX_FIRST_MEMBER;
 import static seedu.ccacommander.testutil.TypicalIndexes.INDEX_SECOND_MEMBER;
 
@@ -17,6 +18,7 @@ import seedu.ccacommander.logic.Messages;
 import seedu.ccacommander.model.Model;
 import seedu.ccacommander.model.ModelManager;
 import seedu.ccacommander.model.UserPrefs;
+import seedu.ccacommander.model.enrolment.Enrolment;
 import seedu.ccacommander.model.member.Member;
 
 /**
@@ -30,6 +32,7 @@ public class DeleteMemberCommandTest {
     @Test
     public void execute_validIndexUnfilteredList_success() {
         Member memberToDelete = model.getFilteredMemberList().get(INDEX_FIRST_MEMBER.getZeroBased());
+        Enrolment enrolmentToDelete = model.getFilteredEnrolmentList().get(INDEX_FIRST_ENROLMENT.getZeroBased());
         DeleteMemberCommand deleteMemberCommand = new DeleteMemberCommand(INDEX_FIRST_MEMBER);
 
         String commitMessage = String.format(DeleteMemberCommand.MESSAGE_COMMIT, memberToDelete.getName());
@@ -38,6 +41,7 @@ public class DeleteMemberCommandTest {
 
         ModelManager expectedModel = new ModelManager(model.getCcaCommander(), new UserPrefs());
         expectedModel.deleteMember(memberToDelete);
+        expectedModel.deleteEnrolment(enrolmentToDelete);
         expectedModel.commit(commitMessage);
 
         assertCommandSuccess(deleteMemberCommand, model, expectedMessage, expectedModel);
@@ -56,6 +60,7 @@ public class DeleteMemberCommandTest {
         showMemberAtIndex(model, INDEX_FIRST_MEMBER);
 
         Member memberToDelete = model.getFilteredMemberList().get(INDEX_FIRST_MEMBER.getZeroBased());
+        Enrolment enrolmentToDelete = model.getFilteredEnrolmentList().get(INDEX_FIRST_ENROLMENT.getZeroBased());
         DeleteMemberCommand deleteMemberCommand = new DeleteMemberCommand(INDEX_FIRST_MEMBER);
 
         String commitMessage = String.format(DeleteMemberCommand.MESSAGE_COMMIT, memberToDelete.getName());
@@ -63,6 +68,7 @@ public class DeleteMemberCommandTest {
                 Messages.format(memberToDelete));
 
         Model expectedModel = new ModelManager(model.getCcaCommander(), new UserPrefs());
+        expectedModel.deleteEnrolment(enrolmentToDelete);
         expectedModel.deleteMember(memberToDelete);
         expectedModel.commit(commitMessage);
         showNoMember(expectedModel);

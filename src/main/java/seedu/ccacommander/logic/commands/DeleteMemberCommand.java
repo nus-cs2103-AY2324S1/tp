@@ -10,6 +10,7 @@ import seedu.ccacommander.logic.Messages;
 import seedu.ccacommander.logic.commands.exceptions.CommandException;
 import seedu.ccacommander.model.Model;
 import seedu.ccacommander.model.member.Member;
+import seedu.ccacommander.model.shared.Name;
 
 /**
  * Deletes a member identified using its displayed index from CcaCommander.
@@ -39,7 +40,10 @@ public class DeleteMemberCommand extends Command {
         }
 
         Member memberToDelete = lastShownList.get(targetIndex.getZeroBased());
+        Name memberToDeleteName = memberToDelete.getName();
+
         model.deleteMember(memberToDelete);
+        model.deleteEnrolmentsWithMemberName(memberToDeleteName);
         model.commit(String.format(MESSAGE_COMMIT, memberToDelete.getName()));
         return new CommandResult(String.format(MESSAGE_DELETE_MEMBER_SUCCESS, Messages.format(memberToDelete)));
     }

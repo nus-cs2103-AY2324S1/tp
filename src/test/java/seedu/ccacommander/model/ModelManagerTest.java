@@ -5,7 +5,10 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.ccacommander.model.Model.PREDICATE_SHOW_ALL_EVENTS;
 import static seedu.ccacommander.model.Model.PREDICATE_SHOW_ALL_MEMBERS;
+import static seedu.ccacommander.model.ModelManager.findEnrolmentFromList;
 import static seedu.ccacommander.testutil.Assert.assertThrows;
+import static seedu.ccacommander.testutil.TypicalEnrolments.ALICE_AURORA;
+import static seedu.ccacommander.testutil.TypicalEnrolments.BENSON_BOXING;
 import static seedu.ccacommander.testutil.TypicalEvents.AURORA_BOREALIS;
 import static seedu.ccacommander.testutil.TypicalEvents.BOXING_DAY;
 import static seedu.ccacommander.testutil.TypicalMembers.ALICE;
@@ -13,16 +16,25 @@ import static seedu.ccacommander.testutil.TypicalMembers.BENSON;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.ccacommander.commons.core.GuiSettings;
+import seedu.ccacommander.model.enrolment.Enrolment;
+import seedu.ccacommander.model.enrolment.exceptions.EnrolmentNotFoundException;
 import seedu.ccacommander.model.event.EventNameContainsKeywordsPredicate;
 import seedu.ccacommander.model.exceptions.RedoStateException;
 import seedu.ccacommander.model.exceptions.UndoStateException;
 import seedu.ccacommander.model.member.MemberNameContainsKeywordsPredicate;
 import seedu.ccacommander.testutil.CcaCommanderBuilder;
+import seedu.ccacommander.testutil.EnrolmentBuilder;
+import seedu.ccacommander.testutil.TypicalEnrolments;
+import seedu.ccacommander.testutil.TypicalEvents;
+import seedu.ccacommander.testutil.TypicalMembers;
+import seedu.ccacommander.ui.Stylesheet;
 
 public class ModelManagerTest {
 
@@ -45,7 +57,7 @@ public class ModelManagerTest {
     public void setUserPrefs_validUserPrefs_copiesUserPrefs() {
         UserPrefs userPrefs = new UserPrefs();
         userPrefs.setCcaCommanderFilePath(Paths.get("ccacommander/book/file/path"));
-        userPrefs.setGuiSettings(new GuiSettings(1, 2, 3, 4));
+        userPrefs.setGuiSettings(new GuiSettings(1, 2, 3, 4, Stylesheet.DARK.toString()));
         modelManager.setUserPrefs(userPrefs);
         assertEquals(userPrefs, modelManager.getUserPrefs());
 
@@ -62,7 +74,7 @@ public class ModelManagerTest {
 
     @Test
     public void setGuiSettings_validGuiSettings_setsGuiSettings() {
-        GuiSettings guiSettings = new GuiSettings(1, 2, 3, 4);
+        GuiSettings guiSettings = new GuiSettings(1, 2, 3, 4, Stylesheet.LIGHT.toString());
         modelManager.setGuiSettings(guiSettings);
         assertEquals(guiSettings, modelManager.getGuiSettings());
     }
@@ -192,6 +204,72 @@ public class ModelManagerTest {
 
         assertTrue(modelManager.hasEvent(BOXING_DAY));
         assertFalse(modelManager.hasEvent(AURORA_BOREALIS));
+    }
+
+    @Test
+    public void hasEnrolment_nullEnrolment_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.hasEnrolment(null));
+    }
+
+    @Test
+    public void hasEnrolment_enrolmentNotInCcaCommander_returnsFalse() {
+        assertFalse(modelManager.hasEnrolment(ALICE_AURORA));
+    }
+
+    @Test
+    public void hasEnrolment_enrolmentInCcaCommander_returnsTrue() {
+        modelManager.createEnrolment(ALICE_AURORA);
+        assertTrue(modelManager.hasEnrolment(ALICE_AURORA));
+    }
+
+    @Test
+    public void updateEnrolments() {
+        modelManager.createEnrolment(ALICE_AURORA);
+
+        modelManager.setEnrolment(ALICE_AURORA, BENSON_BOXING);
+
+        assertTrue(modelManager.hasEnrolment(BENSON_BOXING));
+        assertFalse(modelManager.hasEnrolment(ALICE_AURORA));
+    }
+    @Test
+    public void deleteEnrolment() {
+        Enrolment enrolment = new EnrolmentBuilder().build();
+        modelManager.createEnrolment(enrolment);
+        modelManager.deleteEnrolment(enrolment);
+        assertFalse(modelManager.hasEvent(AURORA_BOREALIS));
+    }
+
+    @Test
+    public void findEnrolmentFromList_success() {
+        List<Enrolment> enrolmentList = new ArrayList<>();
+
+        Enrolment enrolmentToFindOne = TypicalEnrolments.ALICE_AURORA;
+        Enrolment enrolmentToFindTwo = TypicalEnrolments.GEORGE_GRAVITY_DISCOVERY_DAY;
+
+        enrolmentList.add(enrolmentToFindOne);
+        enrolmentList.add(enrolmentToFindTwo);
+
+        assertEquals(enrolmentToFindOne, findEnrolmentFromList(enrolmentList,
+                TypicalMembers.ALICE.getName(), TypicalEvents.AURORA_BOREALIS.getName()));
+        assertEquals(enrolmentToFindTwo, findEnrolmentFromList(enrolmentList,
+                TypicalMembers.GEORGE.getName(), TypicalEvents.GRAVITY_DISCOVERY_DAY.getName()));
+    }
+
+    @Test
+    public void findEnrolmentFromList_fail() {
+        List<Enrolment> enrolmentList = new ArrayList<>();
+
+        Enrolment enrolmentToFindOne = TypicalEnrolments.ALICE_AURORA;
+        Enrolment enrolmentToFindTwo = TypicalEnrolments.GEORGE_GRAVITY_DISCOVERY_DAY;
+
+        enrolmentList.add(enrolmentToFindOne);
+        enrolmentList.add(enrolmentToFindTwo);
+
+        try {
+            findEnrolmentFromList(enrolmentList, TypicalMembers.CARL.getName(), TypicalEvents.BOXING_DAY.getName());
+        } catch (EnrolmentNotFoundException ee) {
+            assertEquals("Enrolment cannot be found", ee.getMessage());
+        }
     }
 
     @Test
