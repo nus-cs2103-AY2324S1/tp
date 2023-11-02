@@ -45,9 +45,9 @@ public class ContainsDepartmentPredicate implements Predicate<Employee> {
                 && salarySet.contains(employee.getSalary())
                 && leaveSet.contains(employee.getLeave())
                 && roleSet.contains(employee.getRole())
-                && ((employee.getSupervisors().isEmpty() && supervisorNameSet.isEmpty())
+                && (supervisorNameSet.isEmpty()
                 || employee.getSupervisors().stream().anyMatch(supervisorNameSet::contains))
-                && ((employee.getSupervisors().isEmpty() && supervisorNameSet.isEmpty())
+                && (departmentSet.isEmpty()
                 || employee.getDepartments().stream().anyMatch(departmentSet::contains));
     }
 

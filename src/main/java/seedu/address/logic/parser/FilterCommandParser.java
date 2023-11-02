@@ -32,26 +32,16 @@ public class FilterCommandParser implements Parser<FilterCommand> {
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
                         PREFIX_ADDRESS, PREFIX_SALARY, PREFIX_LEAVE, PREFIX_ROLE, PREFIX_MANAGER, PREFIX_DEPARTMENT);
 
-        Set<Name> nameSet;
-        Set<Phone> phoneSet;
-        Set<Email> emailSet;
-        Set<Address> addressSet;
-        Set<Salary> salarySet;
-        Set<Leave> leaveSet;
-        Set<Role> roleSet;
-        Set<Name> supervisorNameSet;
-        Set<Department> departmentSet;
+        Set<Name> nameSet = parseNamesForFilter(argMultimap.getAllValues(PREFIX_NAME));
+        Set<Phone> phoneSet = parsePhonesForFilter(argMultimap.getAllValues(PREFIX_PHONE));
+        Set<Email> emailSet = parseEmailsForFilter(argMultimap.getAllValues(PREFIX_EMAIL));
+        Set<Address> addressSet = parseAddressesForFilter(argMultimap.getAllValues(PREFIX_ADDRESS));
+        Set<Salary> salarySet = parseSalariesForFilter(argMultimap.getAllValues(PREFIX_SALARY));
+        Set<Leave> leaveSet = parseLeavesForFilter(argMultimap.getAllValues(PREFIX_LEAVE));
+        Set<Role> roleSet = parseRolesForFilter(argMultimap.getAllValues(PREFIX_ROLE));
 
-        nameSet = parseNamesForFilter(argMultimap.getAllValues(PREFIX_NAME));
-        phoneSet = parsePhonesForFilter(argMultimap.getAllValues(PREFIX_PHONE));
-        emailSet = parseEmailsForFilter(argMultimap.getAllValues(PREFIX_EMAIL));
-        addressSet = parseAddressesForFilter(argMultimap.getAllValues(PREFIX_ADDRESS));
-        salarySet = parseSalariesForFilter(argMultimap.getAllValues(PREFIX_SALARY));
-        leaveSet = parseLeavesForFilter(argMultimap.getAllValues(PREFIX_LEAVE));
-        roleSet = parseRolesForFilter(argMultimap.getAllValues(PREFIX_ROLE));
-
-        supervisorNameSet = parseSupervisorsForFilter(argMultimap.getAllValues(PREFIX_MANAGER));
-        departmentSet = parseDepartmentsForFilter(argMultimap.getAllValues(PREFIX_DEPARTMENT));
+        Set<Name> supervisorNameSet = parseSupervisorsForFilter(argMultimap.getAllValues(PREFIX_MANAGER));
+        Set<Department> departmentSet = parseDepartmentsForFilter(argMultimap.getAllValues(PREFIX_DEPARTMENT));
 
         return new FilterCommand(new ContainsDepartmentPredicate(nameSet, phoneSet, emailSet, addressSet,
                 salarySet, leaveSet, roleSet, supervisorNameSet, departmentSet));
