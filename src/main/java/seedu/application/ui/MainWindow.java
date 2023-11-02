@@ -12,6 +12,7 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import seedu.application.commons.core.GuiSettings;
 import seedu.application.commons.core.LogsCenter;
+import seedu.application.commons.core.index.Index;
 import seedu.application.logic.Logic;
 import seedu.application.logic.commands.CommandResult;
 import seedu.application.logic.commands.exceptions.CommandException;
@@ -35,7 +36,7 @@ public class MainWindow extends UiPart<Stage> {
     private JobListPanel jobListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
-    private InterviewListPanel interviewListPanel;
+    private JobDetailsPanel jobDetailsPanel;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -45,8 +46,6 @@ public class MainWindow extends UiPart<Stage> {
     private StackPane jobListPanelPlaceholder;
     @FXML
     private StackPane jobDetailsPanelPlaceholder;
-    @FXML
-    private StackPane interviewListPanelPlaceholder;
     @FXML
     private StackPane resultDisplayPlaceholder;
     @FXML
@@ -183,6 +182,15 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.isExit()) {
                 handleExit();
+            }
+
+            // updates UI whenever an interview is added, deleted or edited
+            Index interviewIndex = commandResult.isInterview();
+            if (!interviewIndex.equals(Index.fromZeroBased(0))) {
+                Job job = logic.getFilteredJobList().get(interviewIndex.getZeroBased());
+                jobDetailsPanel = new JobDetailsPanel(job);
+                jobDetailsPanelPlaceholder.getChildren().clear();
+                jobDetailsPanelPlaceholder.getChildren().add(jobDetailsPanel.getRoot());
             }
 
             return commandResult;

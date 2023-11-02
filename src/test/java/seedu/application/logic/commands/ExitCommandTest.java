@@ -5,6 +5,7 @@ import static seedu.application.logic.commands.ExitCommand.MESSAGE_EXIT_ACKNOWLE
 
 import org.junit.jupiter.api.Test;
 
+import seedu.application.commons.core.index.Index;
 import seedu.application.model.Model;
 import seedu.application.model.ModelManager;
 
@@ -14,7 +15,8 @@ public class ExitCommandTest {
 
     @Test
     public void execute_exit_success() {
-        CommandResult expectedCommandResult = new CommandResult(MESSAGE_EXIT_ACKNOWLEDGEMENT, false, true);
+        CommandResult expectedCommandResult = new CommandResult(MESSAGE_EXIT_ACKNOWLEDGEMENT, false,
+                true, Index.fromZeroBased(0));
         assertCommandSuccess(new ExitCommand(), model, expectedCommandResult, expectedModel);
     }
 }
