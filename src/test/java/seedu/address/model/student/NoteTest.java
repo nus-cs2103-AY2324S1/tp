@@ -14,34 +14,36 @@ public class NoteTest {
     }
 
     @Test
-    public void constructor_invalidAddress_throwsIllegalArgumentException() {
-        String invalidNote = "ijdoasfsjfjsfisfjdijfjfdijfdpsjifpjfdiasfdjfdjfpdjfidsajidsjipfsjifdsjcjp"
-                + "dmaspacmdspcmdmcpsdmcdppsdpsdadspoadjaspdasopksapascjaspcjfsapjcspjdasjcaspjdsjapcjsapsajcpsajfas"
-                + "ijciasjfpasjfaciasjdajadasdasaasdasd";
+    public void constructor_invalidNote_throwsIllegalArgumentException() {
+        String invalidNote = "abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxy"
+                + "zabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopq"
+                + "rstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghi"
+                + "jklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyza"
+                + "bcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrs"
+                + "tuvwxyzabcdefghijklmnopqrstuvwxyzabcdefa";
         assertThrows(IllegalArgumentException.class, () -> new Note(invalidNote));
     }
 
     @Test
     public void isValidNote() {
-
-        String twoHundredCharNote = "ijdoasfsjfjsfisfjdijfjfdijfdpsjifpjfdiasfdjfdjfpdjfidsajidsjipfsjifdsjcjpdmaspa"
-                + "cmdspcmdmcpsdmcdppsdpsdadspoadjaspdasopksapascjaspcjfsapjcspjdasjcaspjdsjapcjsapsajcpsajfasijcia"
-                + "sjfpasjfaciasjdajadasdasa";
-        String moreThanTwoHundredCharNote = "ijdoasfsjfjsfisfjdijfjfdijfdpsjifpjfdiasfdjfdjfpdjfidsajidsjipfsjifdsjcjp"
-                + "dmaspacmdspcmdmcpsdmcdppsdpsdadspoadjaspdasopksapascjaspcjfsapjcspjdasjcaspjdsjapcjsapsajcpsajfas"
-                + "ijciasjfpasjfaciasjdajadasdasaasdasd";
+        String fiveHundredCharNote = "abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxy"
+                + "zabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopq"
+                + "rstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghi"
+                + "jklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyza"
+                + "bcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrs"
+                + "tuvwxyzabcdefghijklmnopqrstuvwxyzabcdef";
 
         // null note
         assertThrows(NullPointerException.class, () -> Note.isValidNote(null));
 
         // invalid notes
-        assertFalse(Note.isValidNote(moreThanTwoHundredCharNote)); // more than 200 characters
+        assertFalse(Note.isValidNote(fiveHundredCharNote + "a")); // more than 500 characters
 
         // valid note numbers
         assertTrue(Note.isValidNote("")); // empty string
         assertTrue(Note.isValidNote("Likes dogs."));
         assertTrue(Note.isValidNote("a")); // 1 character
-        assertTrue(Note.isValidNote(twoHundredCharNote)); // exactly 200 characters
+        assertTrue(Note.isValidNote(fiveHundredCharNote)); // exactly 500 characters
     }
 
     @Test
