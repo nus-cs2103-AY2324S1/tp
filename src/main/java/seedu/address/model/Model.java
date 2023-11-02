@@ -203,6 +203,9 @@ public interface Model {
     /** Returns a view of the full task list */
     ObservableList<Task> getFullTaskList();
 
+    /** Updates the full task list */
+    void updateFullTaskList();
+
     public void resetAllShowFields();
     default void setTask(Task target, Task editedTask) {
     }

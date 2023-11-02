@@ -256,6 +256,10 @@ public class AddPersonCommandTest {
         public ObservableList<Task> getFullTaskList() {
             throw new AssertionError("This method should not be called.");
         }
+        @Override
+        public void updateFullTaskList() {
+            throw new AssertionError("This method should not be called.");
+        };
 
         @Override
         public Boolean hasPersonClashWith(Person person) {
