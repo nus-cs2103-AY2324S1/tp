@@ -24,7 +24,7 @@ public class CommandResult {
     /** The application should show the task list in the bottom list slot. */
     private final boolean switchBottomList;
 
-    private final viewEventsIndicator eventViewIndex;
+    private final ViewEventsIndicator eventViewIndex;
 
     /**
      * Constructs a {@code CommandResult} with the specified fields.
@@ -34,7 +34,7 @@ public class CommandResult {
         this.showHelp = showHelp;
         this.exit = exit;
         this.switchBottomList = switchBottomList;
-        this.eventViewIndex = new viewEventsIndicator(INVALID_INDEX);
+        this.eventViewIndex = new ViewEventsIndicator(INVALID_INDEX);
     }
 
     /**
@@ -54,7 +54,7 @@ public class CommandResult {
         this.showHelp = false;
         this.exit = false;
         this.switchBottomList = false;
-        this.eventViewIndex = new viewEventsIndicator(eventViewIndex.getOneBased());
+        this.eventViewIndex = new ViewEventsIndicator(eventViewIndex.getOneBased());
     }
 
     public String getFeedbackToUser() {
@@ -117,7 +117,7 @@ public class CommandResult {
     /**
      * An indicator class to indicate if an event list is being viewed.
      */
-    private static class viewEventsIndicator {
+    private static class ViewEventsIndicator {
         private static final int MINIMUM_INDEX = 1;
         private final Index index;
         private final boolean isViewEvents;
@@ -125,7 +125,7 @@ public class CommandResult {
         /**
          * Constructs a valid indicator if the index is above 1 and an invalid one otherwise.
          */
-        private viewEventsIndicator(int index) {
+        private ViewEventsIndicator(int index) {
             if (index >= MINIMUM_INDEX) {
                 this.index = Index.fromOneBased(index);
                 isViewEvents = true;

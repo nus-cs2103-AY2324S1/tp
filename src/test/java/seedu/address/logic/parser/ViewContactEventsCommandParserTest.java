@@ -1,14 +1,14 @@
 package seedu.address.logic.parser;
 
-
-import org.junit.jupiter.api.Test;
-import seedu.address.logic.commands.ViewContactEventsCommand;
-
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.ViewContactEventsCommand.MESSAGE_USAGE;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+
+import org.junit.jupiter.api.Test;
+
+import seedu.address.logic.commands.ViewContactEventsCommand;
 
 class ViewContactEventsCommandParserTest {
     private ViewContactEventsCommandParser parser = new ViewContactEventsCommandParser();
@@ -23,5 +23,4 @@ class ViewContactEventsCommandParserTest {
         assertParseFailure(parser, "a", String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE));
         assertParseFailure(parser, "-1", String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE));
     }
-
 }

@@ -9,7 +9,7 @@ import seedu.address.model.event.Event;
 /**
  * A pop-up window that shows an event list of a specific person in the addressbook.
  */
-public class EventListContainer extends  UiPart<Region> {
+public class EventListContainer extends UiPart<Region> {
     private static final String FXML = "EventListContainer.fxml";
 
     @FXML
@@ -17,6 +17,9 @@ public class EventListContainer extends  UiPart<Region> {
 
     private final EventListPanel eventListPanel;
 
+    /**
+     * Constructs an EventListContainer with the given event list
+     */
     public EventListContainer(ObservableList<Event> eventList) {
         super(FXML);
         this.eventListPanel = new EventListPanel(eventList);

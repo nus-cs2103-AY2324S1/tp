@@ -22,7 +22,7 @@ public class ViewContactEventsCommandParser implements Parser<ViewContactEventsC
             return new ViewContactEventsCommand(index);
         } catch (ParseException pe) {
             throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT,ViewContactEventsCommand.MESSAGE_USAGE));
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewContactEventsCommand.MESSAGE_USAGE));
         }
     }
 }
