@@ -1,16 +1,17 @@
 package seedu.address.ui;
 
-import java.util.logging.Logger;
-
 import javafx.fxml.FXML;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import javafx.scene.control.TextField;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+
+import java.util.logging.Logger;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -30,12 +31,8 @@ public class MainWindow extends UiPart<Stage> {
     private LoggedPersonListPanel loggedPersonListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
-
     @FXML
     private StackPane commandBoxPlaceholder;
-
-    // @FXML
-    // private MenuItem helpMenuItem;
 
     @FXML
     private StackPane personListPanelPlaceholder;
@@ -48,6 +45,8 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane statusbarPlaceholder;
+
+    private CommandBox commandBox;
 
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
@@ -63,6 +62,7 @@ public class MainWindow extends UiPart<Stage> {
         setWindowDefaultSize(logic.getGuiSettings());
 
         helpWindow = new HelpWindow();
+
     }
 
     public Stage getPrimaryStage() {
@@ -85,8 +85,12 @@ public class MainWindow extends UiPart<Stage> {
         StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
-        CommandBox commandBox = new CommandBox(this::executeCommand);
+        commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+    }
+
+    public TextField getTextField() {
+        return commandBox.getTextField();
     }
 
     /**
