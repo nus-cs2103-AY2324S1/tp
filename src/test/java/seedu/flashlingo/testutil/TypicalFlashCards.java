@@ -5,6 +5,7 @@ import static seedu.flashlingo.logic.commands.CommandTestUtil.VALID_ORIGINAL_WOR
 import static seedu.flashlingo.logic.commands.CommandTestUtil.VALID_TRANSLATION_AMY;
 import static seedu.flashlingo.logic.commands.CommandTestUtil.VALID_TRANSLATION_BOB;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -79,6 +80,27 @@ public class TypicalFlashCards {
         return fl;
     }
 
+    /**
+     * Returns an {@code Flashlingo} with one the typical flashcards.
+     */
+    public static Flashlingo getTypicalFlashlingoWithOneFlashCard() {
+        Flashlingo fl = new Flashlingo();
+        fl.addFlashCard(WORD);
+        return fl;
+    }
+
+    /**
+     * Returns an {@code Flashlingo} with one overdue flashcard.
+     */
+    public static Flashlingo getTypicalFlashlingoWithOneOverdueFlashCard() {
+        Flashlingo fl = new Flashlingo();
+        LocalDate currentDate = LocalDate.now();
+        LocalDate date100YearsLater = currentDate.plusYears(100);
+        FlashCard overdueFlashCard = new FlashCardBuilder().withOriginalWord("你好", "Chinese")
+                .withTranslatedWord("hi", "English").withLevel(2)
+                .withWhenToReview(date100YearsLater.toString()).build();
+        return fl;
+    }
     public static List<FlashCard> getTypicalFlashCards() {
         return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));
     }
