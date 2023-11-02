@@ -55,8 +55,8 @@ public interface Model {
     /**
      * Returns the Deck size
      */
-    int getDeckSize();
-
+    int getDeckSize()
+  
     /**
      * Returns true if a Card with the same identity as {@code person} exists in the Deck.
      */

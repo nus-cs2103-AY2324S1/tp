@@ -58,5 +58,4 @@ class JsonSerializableDeck {
 
         return deck;
     }
-
 }

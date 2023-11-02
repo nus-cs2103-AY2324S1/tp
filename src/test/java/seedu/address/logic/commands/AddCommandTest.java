@@ -2,8 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalCards.CS2100;
 
@@ -49,10 +48,18 @@ public class AddCommandTest {
     }
 
     @Test
+    public void execute_invalidModel_throwsNullPointerException() {
+        Card validCard = new CardBuilder().build();
+
+        assertThrows(NullPointerException.class, () -> new AddCommand(validCard).execute(null));
+    }
+
+    @Test
     public void execute_duplicateCard_throwsCommandException() {
         Card validCard = new CardBuilder().build();
         AddCommand addCommand = new AddCommand(validCard);
         ModelStub modelStub = new ModelStubWithCard(validCard);
+
         assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_CARD, () -> addCommand.execute(modelStub));
     }
 
@@ -64,27 +71,27 @@ public class AddCommandTest {
         AddCommand addcs1101sCommand = new AddCommand(cs1101s);
 
         // same object -> returns true
-        assertTrue(addcs2100Command.equals(addcs2100Command));
+        assertEquals(addcs2100Command, addcs2100Command);
+
+        // different types -> returns false
+        assertNotEquals(1, addcs2100Command);
+
+        // null -> returns false
+        assertNotEquals(null, addcs2100Command);
 
         // same values -> returns true
         AddCommand addcs2100CommandCopy = new AddCommand(cs2100);
-        assertTrue(addcs2100Command.equals(addcs2100CommandCopy));
-
-        // different types -> returns false
-        assertFalse(addcs2100Command.equals(1));
-
-        // null -> returns false
-        assertFalse(addcs2100Command.equals(null));
+        assertEquals(addcs2100Command, addcs2100CommandCopy);
 
         // different Card -> returns false
-        assertFalse(addcs2100Command.equals(addcs1101sCommand));
+        assertNotEquals(addcs2100Command, addcs1101sCommand);
 
         // different Tags -> return false
         Card cs2100WithTag = new CardBuilder().withQuestion("What colour is the sky")
                 .withTags(new ArrayList<>(Collections.singleton(new Tag("Tag1"))))
                 .build();
         AddCommand addcs2100CommandWithTag = new AddCommand(cs2100WithTag);
-        assertFalse(addcs2100Command.equals(addcs2100CommandWithTag));
+        assertNotEquals(addcs2100Command, addcs2100CommandWithTag);
     }
 
     @Test
@@ -240,5 +247,4 @@ public class AddCommandTest {
             return new Deck();
         }
     }
-
 }

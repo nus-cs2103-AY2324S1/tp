@@ -28,5 +28,4 @@ public interface Storage extends DeckStorage, UserPrefsStorage {
 
     @Override
     void saveDeck(ReadOnlyDeck addressBook) throws IOException;
-
 }

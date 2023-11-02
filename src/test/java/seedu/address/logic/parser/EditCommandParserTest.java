@@ -2,11 +2,13 @@ package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ANSWER_CS1101S;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_HINT_CS2100;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_QUESTION_CS1101S;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_QUESTION_CS2100;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_SINGULAR_TAG_CS2100;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_CS2100;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ANSWER;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_HINT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_QUESTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
@@ -36,7 +38,7 @@ public class EditCommandParserTest {
 
         // no field specified
         assertParseFailure(parser, "1",
-                EditCommand.MESSAGE_NOT_EDITED + "\n:" + EditCommand.MESSAGE_USAGE);
+                EditCommand.MESSAGE_NOT_EDITED + "\n" + EditCommand.MESSAGE_USAGE);
 
         // no index and no field specified
         assertParseFailure(parser, "", MESSAGE_INVALID_FORMAT);
@@ -62,9 +64,10 @@ public class EditCommandParserTest {
         // With tag
         Index targetIndex = INDEX_SECOND_CARD;
         String userInput = targetIndex.getOneBased() + " " + PREFIX_QUESTION + VALID_QUESTION_CS2100
-                + " " + PREFIX_ANSWER + VALID_ANSWER_CS1101S + " " + PREFIX_TAG + VALID_SINGULAR_TAG_CS2100;
+                + " " + PREFIX_ANSWER + VALID_ANSWER_CS1101S + " " + PREFIX_TAG + VALID_SINGULAR_TAG_CS2100
+                + " " + PREFIX_HINT + VALID_HINT_CS2100;
         EditCommand.EditCardDescriptor descriptor = new EditCardDescriptorBuilder().withQuestion(VALID_QUESTION_CS2100)
-                .withAnswer(VALID_ANSWER_CS1101S).withTags(VALID_TAG_CS2100).build();
+                .withAnswer(VALID_ANSWER_CS1101S).withTags(VALID_TAG_CS2100).withHint(VALID_HINT_CS2100).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
     }

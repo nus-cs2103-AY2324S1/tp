@@ -3,6 +3,7 @@ package seedu.address.logic.parser;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ANSWER;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_HINT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_QUESTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
@@ -14,6 +15,9 @@ import java.util.Optional;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.card.Answer;
+import seedu.address.model.card.Hint;
+import seedu.address.model.card.Question;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -28,8 +32,9 @@ public class EditCommandParser implements Parser<EditCommand> {
      */
     public EditCommand parse(String args) throws ParseException {
         requireNonNull(args);
+
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_QUESTION, PREFIX_ANSWER, PREFIX_TAG);
+                ArgumentTokenizer.tokenize(args, PREFIX_QUESTION, PREFIX_ANSWER, PREFIX_TAG, PREFIX_HINT);
 
         Index index;
 
@@ -39,21 +44,35 @@ public class EditCommandParser implements Parser<EditCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE), pe);
         }
 
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_QUESTION, PREFIX_ANSWER);
+        // Only one Question and Answer allowed for each Card
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_QUESTION, PREFIX_ANSWER, PREFIX_HINT);
 
         EditCommand.EditCardDescriptor editCardDescriptor = new EditCommand.EditCardDescriptor();
 
+        // Question
         if (argMultimap.getValue(PREFIX_QUESTION).isPresent()) {
-            editCardDescriptor.setQuestion(ParserUtil.parseQuestion(argMultimap.getValue(PREFIX_QUESTION).get()));
+            Question newQuestion = ParserUtil.parseQuestion(argMultimap.getValue(PREFIX_QUESTION).get());
+            editCardDescriptor.setQuestion(newQuestion);
         }
+
+        // Answer
         if (argMultimap.getValue(PREFIX_ANSWER).isPresent()) {
-            editCardDescriptor.setAnswer(ParserUtil.parseAnswer(argMultimap.getValue(PREFIX_ANSWER).get()));
+            Answer newAnswer = ParserUtil.parseAnswer(argMultimap.getValue(PREFIX_ANSWER).get());
+            editCardDescriptor.setAnswer(newAnswer);
         }
+
+        // Tags
         parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editCardDescriptor::setTags);
 
+        // Hint
+        if (argMultimap.getValue(PREFIX_HINT).isPresent()) {
+            Hint newHint = ParserUtil.parseHint(argMultimap.getValue(PREFIX_HINT).get());
+            editCardDescriptor.setHint(newHint);
+        }
 
+        // Throw exception if no details are changed
         if (!editCardDescriptor.isAnyFieldEdited()) {
-            throw new ParseException(EditCommand.MESSAGE_NOT_EDITED + "\n:"
+            throw new ParseException(EditCommand.MESSAGE_NOT_EDITED + "\n"
                     + EditCommand.MESSAGE_USAGE
             );
         }
@@ -75,5 +94,4 @@ public class EditCommandParser implements Parser<EditCommand> {
         Collection<String> tagSet = tags.size() == 1 && tags.contains("") ? Collections.emptyList() : tags;
         return Optional.of(ParserUtil.parseTags(tagSet));
     }
-
 }
