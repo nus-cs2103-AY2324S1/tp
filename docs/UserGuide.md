@@ -70,30 +70,50 @@ Shows a message explaning how to access the help page.
 Format: `help`
 
 
-### Adding a client: `add`
+### Adding a client : `add`
 
 Adds a client to the database.
 
-Format: `add n/NAME i/NRIC p/CONTACT NUMBER l/LICENCE PLATE…​`
+Format: `add n/NAME i/NRIC p/CONTACT NUMBER e/EMAIL a/ADDRESS t/TAG l/LICENCE PLATE [c/COMPANY
+ pn/POLICY NUMBER pi/POLICY ISSUE DATE pe/POLICY EXPIRY DATE]`
 
 * Add a client's details in the database.
-* **All** fields must be present when using this command.
+* **All** client details must be present when using this command.
+* If adding a client’s policy, **all** policy details must be present when using this command.
 
 Examples:
-* `add n/Mary i/627A p/91234567 l/SLU5237J` creates a client whose name is `Mary`, NRIC last four digits is `627A`, contact number is `91234567`, licence plate is `SLU5237J` in the database.
+* `add n/Irfan Ibrahim i/752X p/92492021 e/irfan@example.com a/Blk 47 Tampines Street 20,#17-35 t/classmates l/SBP8888T` adds a client Irfan without a policy.
+* `add n/Bob Anderson i/578A p/54783402 e/bobanderson@gmail.com a/Blk 233 Serangoon Avenue 3, #05-12 t/teacher l/SGP1208J c/DEF Insurance pn/263J pi/20-09-2023 pe/19-09-2024` adds a client Bob with the policy he buys.
 
 Acceptable values for each parameter:
-* `n/NAME`: Alphabets
-* `i/NRIC`: Alphanumeric, _exactly_ 4 characters
-* `p/CONTACT NUMBER`: Numeric, _exactly_ 8 characters
-* `l/LICENCE PLATE`: Alphanumeric, _up to_ 9 characters
+* `n/NAME`: Alphabets.
+* `i/NRIC`: Alphanumeric, _exactly_ 4 characters.
+* `p/CONTACT NUMBER`: Numeric, _exactly_ 8 characters.
+* `e/EMAIL`: Alphanumeric and/or special characters, no white spaces allowed, standard email format.
+* `t/TAG`: Alphabets, no white spaces allowed.
+* `c/COMPANY`: Alphabets and/or special characters, white spaces allowed.
+* `l/LICENCE PLATE`: Alphanumeric, _up to_ 9 characters.
+* `pn/POLICY NUMBER`: Alphanumeric, _exactly_ 8 characters.
+* `pi/POLICY ISSUE DATE` and `pe/POLICY EXPIRY DATE`: Date in the format dd-mm-yyyy.
 
-Expected output upon success: [coming soon]
+Expected output upon success: <br>
+![AddSuccess](images/AddSuccess.png)
 
 Expected output upon failure:
-* Any one of the fields missing: `Error: Please provide all required fields (pn, new, field)`
-* Fields specified for add are not valid or empty: `Error: Invalid field for adding.`
-* Format of added value is incorrect or not allowed for the specified field: `Error: Invalid value format.`
+* Missing any of the compulsory fields:<br>
+```
+Invalid command format! 
+Error: Some of the required fields are missing. 
+Please include the following: - NRIC(i/) - License Plate(l/) 
+```
+* Incomplete policy details:<br>
+```
+Invalid command format! 
+Please include either all or none of the policy variables. 
+You are missing the following: - Policy Expiry Date(pe/)
+```
+* Adding a client with an existing policy number:<br>
+` Error: The policy number is already in use`
 
 
 ### Listing all clients : `list`
@@ -107,7 +127,7 @@ Format: `list`
 
 Modify and/or updates existing policy information in the database.
 
-Format: `edit INDEX [n/NAME] [i/NRIC] [p/CONTACT NUMBER] [e/EMAIL] [t/TAG] [c/COMPANY] [l/LICENCE PLATE]
+Format: `edit INDEX [n/NAME] [i/NRIC] [p/CONTACT NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG] [c/COMPANY] [l/LICENCE PLATE]
  [pn/POLICY NUMBER] [pi/POLICY ISSUE DATE] [pe/POLICY EXPIRY DATE]`
 
 * Edits the client policy details at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
@@ -123,10 +143,11 @@ Acceptable values for each parameter:
 * `n/NAME`: Alphabets.
 * `i/NRIC`: Alphanumeric, _exactly_ 4 characters.
 * `p/CONTACT NUMBER`: Numeric, _exactly_ 8 characters.
-* `e/EMAIL`: Alphanumeric /and special characters, no white spaces allowed, standard email format.
+* `e/EMAIL`: Alphanumeric and/or special characters, no white spaces allowed, standard email format.
+* `a/ADDRESS`: Alphabets and/or special characters, white spaces allowed.
 * `t/TAG`: Alphabets, no white spaces allowed.
-* `c/COMPANY`: Alphabets and/or special characters, white spaces allowed.
 * `l/LICENCE PLATE`: Alphanumeric, _up to_ 9 characters.
+* `c/COMPANY`: Alphabets and/or special characters, white spaces allowed.
 * `pn/POLICY NUMBER`: Alphanumeric, _exactly_ 8 characters.
 * `pi/POLICY ISSUE DATE` and `pe/POLICY EXPIRY DATE`: Date in the format dd-mm-yyyy.
 
@@ -287,6 +308,45 @@ Example: remark 1 r/ Likes to swim.
 ```
 
 
+### Batch delete clients: `batchdelete`
+
+Batch delete clients with the specific condition.
+
+Format: `batchdelete [c/COMPANY] [dm/DELETE MONTH]`
+
+* Batch delete specific clients in the database.
+* **Only one** of the optional fields must be provided.
+
+Examples:
+* `batchdelete 07-2020 ` batch delete clients whose policy expiry date is in July 2020.
+* `batchdelete c/DEF Insurance` batch delete clients who buy policy from the company DEF Insurance.
+
+Acceptable values for each parameter:
+* `c/COMPANY`: Alphabets and/or special characters, white spaces allowed.
+* `dm/DELETE MONTH`: Month in the format mm-yyyy.
+
+Expected output upon success: <br>
+![BatchDeleteSuccess](images/BatchDeleteSuccess.png)
+
+Expected output upon failure:
+* No field provided:<br>
+```
+Invalid command format! 
+batchdelete: batch delete people whose policy: 
+(i) expiry date is in the corresponding month and year OR 
+(ii) belongs to a company.
+(i) Parameter: dm/MM-yyyy
+Example: batchdelete dm/11-2022
+(ii) Parameter: c/COMPANY NAME
+Example: batchdelete c/Allianz 
+```
+* Both fields exist:<br>
+` Error: Please contain only either one field of dm/ or c/. `
+* Incorrect format for delete month:<br>
+`delete month should be in the format MM-yyyy`
+
+
+
 ### Clearing all entries : `clear`
 
 Clears all entries from the database.
@@ -336,15 +396,16 @@ _Details coming soon ..._
 
 ## Command summary
 
-| Action     | Format, Examples                                                                                                                                                                                  |
-|------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**    | `add n/NAME i/NRIC p/CONTACT NUMBER l/LICENCE PLATE…​` <br> e.g., `add n/Mary i/627A p/73052859 l/SLU5237J`                                                                                       |
-| **Clear**  | `clear`                                                                                                                                                                                           |
-| **Delete** | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                               |
-| **Edit**   | `edit INDEX [l/LICENCEPLATE] [pn/POLICY NUMBER] [pi/POLICY ISSUE DATE] [pe/POLICY EXPIRY DATE]…​`<br> e.g.,`edit 2 pn/AB12345J pe/31-12-2024`                                                     |
-| **Find**   | `find [n/NAME] [i/NRIC] [p/CONTACT NUMBER] [l/LICENCE PLATE] [e/EMAIL] [t/TAG] [c/COMPANY] [pn/POLICY NUMBER] [pi/POLICY ISSUE DATE] [pe/POLICY EXPIRY DATE]`<br> e.g. `find n/John /pn AB12345J` |
-| **List**   | `list`                                                                                                                                                                                            |
-| **Help**   | `help`                                                                                                                                                                                            |
-| **Sort**   | `sort`                                                                                                                                                                                            |
-| **Remind** | `remind NUMBER_OF_DAYS`<br> e.g. `remind 30`                                                                                                                                                      | 
-| **Remark** | `remark INDEX r/[REMARK]`<br> e.g. `remark 1 r/Likes to swim`                                                                                                                                     | 
+| Action          | Format, Examples                                                                                                                                                                                                                                                                       |
+|-----------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**         | `add n/NAME i/NRIC p/CONTACT NUMBER e/EMAIL a/ADDRESS t/TAG l/LICENCE PLATE [c/COMPANY pn/POLICY NUMBER pi/POLICY ISSUE DATE pe/POLICY EXPIRY DATE]` <br> e.g., `add n/Irfan Ibrahim i/752X p/92492021 e/irfan@example.com a/Blk 47 Tampines Street 20,#17-35 t/classmates l/SBP8888T` |
+| **Clear**       | `clear`                                                                                                                                                                                                                                                                                |
+| **Delete**      | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                                                                                                                    |
+| **Edit**        | `edit INDEX [l/LICENCEPLATE] [pn/POLICY NUMBER] [pi/POLICY ISSUE DATE] [pe/POLICY EXPIRY DATE]…​`<br> e.g.,`edit 2 pn/AB12345J pe/31-12-2024`                                                                                                                                          |
+| **Find**        | `find [n/NAME] [i/NRIC] [p/CONTACT NUMBER] [l/LICENCE PLATE] [e/EMAIL] [t/TAG] [c/COMPANY] [pn/POLICY NUMBER] [pi/POLICY ISSUE DATE] [pe/POLICY EXPIRY DATE]`<br> e.g. `find n/John /pn AB12345J`                                                                                      |
+| **List**        | `list`                                                                                                                                                                                                                                                                                 |
+| **Help**        | `help`                                                                                                                                                                                                                                                                                 |
+| **Sort**        | `sort`                                                                                                                                                                                                                                                                                 |
+| **Remind**      | `remind NUMBER_OF_DAYS`<br> e.g. `remind 30`                                                                                                                                                                                                                                           | 
+| **Remark**      | `remark INDEX r/[REMARK]`<br> e.g. `remark 1 r/Likes to swim`                                                                                                                                                                                                                          |
+ | **BatchDelete** | `batchdelete [c/COMPANY] [dm/DELETE MONTH]` <br> e.g. `batchdelete c/DEF Insurance`                                                                                                                                                                                                    |
