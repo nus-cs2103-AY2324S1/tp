@@ -32,7 +32,8 @@ public class ProfileDetails extends UiPart<Region> {
     private FlowPane listView;
     @FXML
     private Label leave;
-
+    @FXML
+    private FlowPane listSupervisors;
 
     /**
      * Creates a {@code EmployeeCode} with the given {@code Employee} and index to display.
@@ -59,10 +60,14 @@ public class ProfileDetails extends UiPart<Region> {
             email.setText(employee.getEmail().value);
             salary.setText(employee.getSalary().value);
             listView.getChildren().clear();
+            listSupervisors.getChildren().clear();
             leave.setText(employee.getLeave().value);
             employee.getDepartments().stream()
                 .sorted(Comparator.comparing(department -> department.fullName))
                 .forEach(department -> listView.getChildren().add(new Label(department.fullName)));
+            employee.getSupervisors().stream()
+                    .sorted(Comparator.comparing(supervisor -> supervisor.fullName))
+                    .forEach(supervisor -> listSupervisors.getChildren().add(new Label(supervisor.fullName)));
             this.getRoot().setVisible(true);
         }
     }
