@@ -196,26 +196,24 @@ Examples:
 The find command has different behaviours depending on the current list:
 
 1. In `STUDENTS` list:
-    - Finds students whose names contain any of the given keywords.
+    - Finds students whose names are made up of the given search keyword.
 2. In `SCHEDULE` list:
-    - Finds lessons whose names contain the given keywords.
+    - Finds lessons whose names are made up of the given search keyword.
 
-Format: `find KEYWORD [MORE_KEYWORDS]`
+Format: `find KEYWORD`
 
 1. In `STUDENTS` list:
    * The search is case-insensitive. e.g `hans` will match `Hans`
-   * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
    * Only the name is searched.
-   * Only full words will be matched e.g. `Han` will not match `Hans`
-   * Persons matching at least one keyword will be returned (i.e. `OR` search).
-     e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+   * Persons matching part of the keyword will be returned (i.e. `OR` search).
+     e.g. `Hans` will return `Hanso Gruber`, `Hansel`
+   * Keyword specified has to be the first part of the name
+     e.g. `Hans` will return `Hanso Gruber` but not `Lee Hans`
 2. In `SCHEDULE` list:
     * The search is case-insensitive. e.g `lesson` will match `Lesson`
-    * The order of the keywords does not matter. e.g. `Lesson Chemistry` will match `Chemistry Lesson`
     * Only the name is searched.
-    * Only full words will be matched e.g. `Physics` will match `Phy`
     * Lessons matching at least one keyword will be returned (i.e. `OR` search).
-      e.g. `Lesson Chemistry` will return `Lesson Physics`, `Chemistry at Punggol`
+      e.g. `Lesson Chem` will return `Lesson Chemistry`, `Lesson Chem at Bishan`
 
 Example Success Output:
 ```
@@ -330,7 +328,7 @@ Deletes the specified task from the shown lesson in the application.
 
 Format: `deleteTask INDEX`
 
-* Deletes the task at the specified `INDEX` of the task list in lesson.
+* Deletes the task at the specified `INDEX` of the task list in shown lesson.
 * The index refers to the index number shown in the displayed student list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
