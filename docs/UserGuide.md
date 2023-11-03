@@ -337,7 +337,7 @@ _Details coming soon ..._
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Flashlingo home folder.
 
-**Q**: How can I import my data to the app?<br> 
+**Q**: How can I import my data to the app?<br>
 **A**: Save your words and translations in the format specified above in an Excel file. Move the file to the same folder with `flashlingo.jar`.
 Then, use the `load` command to import the data.
 

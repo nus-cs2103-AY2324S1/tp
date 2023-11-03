@@ -36,4 +36,5 @@ public class StartCommandTest {
         assertFalse(startFirstCommand.equals(1));
         assertFalse(startFirstCommand.equals(null));
     }
+
 }
