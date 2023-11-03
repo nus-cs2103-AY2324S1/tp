@@ -1,7 +1,8 @@
 package seedu.flashlingo.testutil;
 
-import java.time.Instant;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 
 import seedu.flashlingo.model.flashcard.FlashCard;
 import seedu.flashlingo.model.flashcard.ProficiencyLevel;
@@ -12,65 +13,68 @@ import seedu.flashlingo.model.flashcard.words.TranslatedWord;
  * A utility class to help with building FlashCard objects.
  */
 public class FlashCardBuilder {
-    public static final String DEFAULT_ORIGINAL_WORD = "Hello";
-    public static final String DEFAULT_TRANSLATED_WORD = "你好";
-    public static final String DEFAULT_ORIGINAL_WORD_LANGUAGE = "English";
-    public static final String DEFAULT_TRANSLATED_WORD_LANGUAGE = "Mandarin";
-    public static final int DEFAULT_LEVEL = 1;
-    public static final String DEFAULT_WHEN_TO_REVIEW = "2023-01-01T00:00:00Z";
+
+    public static final String ORIGINAL_WORD = "伟大的";
+    public static final String TRANSLATED_WORD = "great";
+    public static final Date WHEN_TO_REVIEW = new GregorianCalendar(2023, Calendar.DECEMBER, 17).getTime();
+    public static final int LEVEL = 1;
 
     private OriginalWord originalWord;
     private TranslatedWord translatedWord;
-    private Date whenToReview;
-    private ProficiencyLevel level;
+    private Date whenToReview; // Date the flashcard was needs to be reviewed
+    private ProficiencyLevel level; // How many times successfully remembered
+
+    private boolean isUpdated;
+    private ProficiencyLevel originalLevel; // For undo function
+
 
     /**
-     * Creates a {@code FlashCardBuilder} with the default details.
+     * Creates a {@code FlashcardBuilder} with the default details.
      */
     public FlashCardBuilder() {
-        originalWord = new OriginalWord(DEFAULT_ORIGINAL_WORD, DEFAULT_ORIGINAL_WORD_LANGUAGE);
-        translatedWord = new TranslatedWord(DEFAULT_TRANSLATED_WORD, DEFAULT_TRANSLATED_WORD_LANGUAGE);
-        whenToReview = Date.from(Instant.parse(DEFAULT_WHEN_TO_REVIEW));
-        level = new ProficiencyLevel(DEFAULT_LEVEL);
+        this.originalWord = new OriginalWord(ORIGINAL_WORD, "");
+        this.translatedWord = new TranslatedWord(TRANSLATED_WORD, "");
+        this.whenToReview = WHEN_TO_REVIEW;
+        this.level = new ProficiencyLevel(LEVEL);
     }
 
     /**
      * Initializes the FlashCardBuilder with the data of {@code flashCardToCopy}.
      */
     public FlashCardBuilder(FlashCard flashCardToCopy) {
-        originalWord = flashCardToCopy.getOriginalWord();
-        translatedWord = flashCardToCopy.getTranslatedWord();
-        whenToReview = flashCardToCopy.getWhenToReview();
-        level = flashCardToCopy.getProficiencyLevel();
+        this.originalWord = flashCardToCopy.getOriginalWord();
+        this.translatedWord = flashCardToCopy.getTranslatedWord();
+        this.whenToReview = flashCardToCopy.getWhenToReview();
+        this.level = flashCardToCopy.getProficiencyLevel();
+
     }
 
     /**
      * Sets the {@code OriginalWord} of the {@code FlashCard} that we are building.
      */
-    public FlashCardBuilder withOriginalWord(String word, String language) {
-        this.originalWord = new OriginalWord(word, language);
+    public FlashCardBuilder withOriginalWord(String originalWord, String language) {
+        this.originalWord = new OriginalWord(originalWord, language);
         return this;
     }
 
     /**
      * Sets the {@code TranslatedWord} of the {@code FlashCard} that we are building.
      */
-    public FlashCardBuilder withTranslatedWord(String word, String language) {
-        this.translatedWord = new TranslatedWord(word, language);
+    public FlashCardBuilder withTranslatedWord(String translatedWord, String language) {
+        this.translatedWord = new TranslatedWord(translatedWord, "");
         return this;
     }
 
     /**
-     * Sets the {@code WhenToReview} of the {@code FlashCard} that we are building.
+     * Sets the review {@code Date} of the {@code FlashCard} that we are building.
      */
-    public FlashCardBuilder withWhenToReview(String date) {
-        this.whenToReview = Date.from(Instant.parse(DEFAULT_WHEN_TO_REVIEW));
-        System.out.println(whenToReview);
+    public FlashCardBuilder withWhenToReview(Date whenToReview) {
+        this.whenToReview = whenToReview;
         return this;
     }
 
     /**
-     * Sets the {@code Level} of the {@code FlashCard} that we are building.
+     * Sets the {@code ProficiencyLevel} of the {@code FlashCard} that we are building.
      */
     public FlashCardBuilder withLevel(int level) {
         this.level = new ProficiencyLevel(level);
@@ -80,4 +84,5 @@ public class FlashCardBuilder {
     public FlashCard build() {
         return new FlashCard(originalWord, translatedWord, whenToReview, level);
     }
+
 }
