@@ -40,21 +40,8 @@ Flashlingo is a **desktop app for learning words by flash cards, optimized for u
 2. The image below shows the result of typing in a command. A log message will be displayed below the command box to give information about the outcome of the command.
    <img width="729" alt="Screenshot 2023-10-27 at 3 11 50 PM" src="https://github.com/itsNatTan/tp/assets/64185574/48b74efc-2a39-48d5-b0aa-70f165484c5e">
 
-    * `delete index` : Deletes a words and its related information at the given index.
-    * `edit index w/WORD t/TRANSALTION` : Edits the word and its translation at the given index.
-    * `find KEYWORD` : Finds words whose original word or translation contains the given keyword.
-    * `start` : Starts today’s flash card session.
-    * `end` :  Ends the current flash card review session.
-    * `reveal` : Shows the other side of the flash card.
-    * `yes` :  Indicates user has memorized the word.
-    * `no` :  Indicates user has forgotten the word.
-    * `stats` : Displays learning statistics for current user.
-    * `language` : Filters the list with specified language.
-    * `review` : Returns a list of words that the user should revise today.
-    * `switch` : Switches between light/dark color theme.
-    * `exit` : Terminates the program.
+3. Refer to the [Commands](#commands) below for details of each command.
 
-2. Refer to the [Commands](#commands) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -349,13 +336,10 @@ _Details coming soon ..._
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Flashlingo home folder.
-... (to be completed)
 
---------------------------------------------------------------------------------------------------------------------
-
-## Known issues
-
-1. ... (to be completed)
+**Q**: How can I import my data to the app?<br> 
+**A**: Save your words and translations in the format specified above in an Excel file. Move the file to the same folder with `flashlingo.jar`.
+Then, use the `load` command to import the data.
 
 --------------------------------------------------------------------------------------------------------------------
 
