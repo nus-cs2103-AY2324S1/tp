@@ -6,7 +6,6 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.person.lead.Lead;
-import seedu.address.model.person.lead.LeadType;
 import seedu.address.model.reminder.Reminder;
 
 /**
