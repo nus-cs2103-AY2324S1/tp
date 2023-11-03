@@ -332,6 +332,8 @@ Example usage:
 
 ![filter](images/filter/filterSuccess.PNG)
 
+[Table of Contents](#table-of-contents)
+
 ### <u>Category 4 - Undo/redo</u>
 
 #### Undo last change to NetworkBook: `undo`
