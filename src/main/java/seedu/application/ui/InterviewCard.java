@@ -34,8 +34,12 @@ public class InterviewCard extends UiPart<Region> {
         super(FXML);
         this.interview = interview;
         String type = interview.getInterviewType().toString();
-        title.setText(index + ". " + type + " Interview");
+        title.setText(index + ". " + capitalize(type) + " Interview");
         dateTime.setText(interview.getInterviewDateTime().toString());
         address.setText(interview.getInterviewAddress().toString());
+    }
+
+    public String capitalize(String string) {
+        return string.substring(0, 1).toUpperCase() + string.substring(1).toLowerCase();
     }
 }
