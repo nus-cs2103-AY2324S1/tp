@@ -212,7 +212,7 @@ Format: `find KEYWORD`
 2. In `SCHEDULE` list:
     * The search is case-insensitive. e.g `lesson` will match `Lesson`
     * Only the name is searched.
-    * Lessons matching at least one keyword will be returned (i.e. `OR` search).
+    * Lessons matching part of the keyword will be returned (i.e. `OR` search).
       e.g. `Lesson Chem` will return `Lesson Chemistry`, `Lesson Chem at Bishan`
 
 Example Success Output:
