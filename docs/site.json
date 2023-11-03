@@ -22,6 +22,7 @@
       "glob": ["**/index.md", "**/*.md"]
     }
   ],
+  "headingIndexingLevel": 4,
   "deploy": {
     "message": "Site Update."
   },
