@@ -1,5 +1,5 @@
 @startuml
-!include Style.puml
+!include style.puml
 skinparam ArrowFontStyle plain
 
 box Logic LOGIC_COLOR_T1
@@ -49,7 +49,7 @@ deactivate LoveBookParser
 LogicManager -> UnstarCommand : execute()
 activate UnstarCommand
 
-UnstarCommand -> Model : setPerson(dateToStar, starredDate)
+UnstarCommand -> Model : setDate(dateToStar, starredDate)
 activate Model
 
 
