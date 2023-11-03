@@ -186,18 +186,16 @@ Failure Output:
 
 Edits an existing student in the application.
 
-Format: `edit INDEX [-name NAME] [-phone PHONE_NUMBER] [-email EMAIL] [-address ADDRESS] [-tag TAG]…​`
+Format: `edit INDEX [-name NAME] [-phone PHONE_NUMBER] [-email EMAIL] [-address ADDRESS] [-tag TAG]`
 
 * Edits the student at the specified `INDEX`. The index refers to the index number shown in the displayed student list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* When editing tags, the existing tags of the student will be removed i.e adding of tags is not cumulative.
-* You can remove all the student’s tags by typing `t/` without
-    specifying any tags after it.
+* When editing tags, the existing tags of the student will be removed i.e. adding of tags is not cumulative.
 
 Examples:
 *  `edit 1 -phone 91234567 -email johndoe@example.com` Edits the phone number and email address of the 1st student to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 -name Betsy Crower -tag` Edits the name of the 2nd student to be `Betsy Crower` and clears all existing tags.
+*  `edit 2 -name Betsy Crower -tag Secondary` Edits the name of the 2nd student to be `Betsy Crower` and sets the tag to `Secondary`.
 
 ### Locating students by name: `find`
 
