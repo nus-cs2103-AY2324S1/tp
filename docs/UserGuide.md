@@ -397,6 +397,8 @@ Example:
 <a name="sort"></a>
 #### Sorting applicants by descriptors: `sort`
 
+Sorts the applicant list based on the descriptor provided.
+
 Format: `sort d/DESCRIPTOR [dsc/]`
 * `DESCRIPTOR` must be either `name` or `phone` or `email` or `position` or `score` or `status`.
 * `dsc/` flag indicates to sort the applicant list in descending order.
