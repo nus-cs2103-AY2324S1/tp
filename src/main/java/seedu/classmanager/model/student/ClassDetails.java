@@ -123,10 +123,12 @@ public class ClassDetails {
     }
 
     public static void setTutorialCount(int tutorialCount) {
+        assert tutorialCount >= 0;
         ClassDetails.tutorialCount = tutorialCount;
     }
 
     public static void setAssignmentCount(int assignmentCount) {
+        assert assignmentCount >= 0;
         ClassDetails.assignmentCount = assignmentCount;
     }
 
@@ -242,6 +244,10 @@ public class ClassDetails {
      * Returns the message for invalid assignment index.
      */
     public static String getMessageInvalidAssignmentIndex() {
+        assert assignmentCount >= 0;
+        if (assignmentCount == 0) {
+            return "There are no assignments configured.";
+        }
         return String.format(MESSAGE_INVALID_ASSIGNMENT_NUMBER, assignmentCount);
     }
 
@@ -249,6 +255,10 @@ public class ClassDetails {
      * Returns the message for invalid tutorial index.
      */
     public static String getMessageInvalidTutorialIndex() {
+        assert tutorialCount >= 0;
+        if (tutorialCount == 0) {
+            return "There are no tutorials configured.";
+        }
         return String.format(MESSAGE_INVALID_TUTORIAL_INDEX, tutorialCount);
     }
 

@@ -65,6 +65,7 @@ public class ConfigCommand extends Command {
             ClassDetails.setAssignmentCount(assignmentCount);
             model.setTutorialCount(tutorialCount);
             model.setAssignmentCount(assignmentCount);
+            // This will display the class details of the first student before the configuration is done
             model.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
             List<Student> allStudentList = model.getFilteredStudentList();
             for (Student student : allStudentList) {
@@ -72,6 +73,10 @@ public class ConfigCommand extends Command {
                 Student editedStudent = new Student(student.getName(), student.getPhone(), student.getEmail(),
                         student.getStudentNumber(), newClassDetails, student.getTags(), student.getComment());
                 model.setStudent(student, editedStudent);
+            }
+            // This will display the class details of the first student after the configuration is done
+            if (!allStudentList.isEmpty()) {
+                model.setSelectedStudent(allStudentList.get(0));
             }
             return new CommandResult(String.format(MESSAGE_CONFIG_SUCCESS, tutorialCount, assignmentCount));
         } catch (Exception e) {

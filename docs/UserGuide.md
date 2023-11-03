@@ -19,11 +19,11 @@ management tasks done faster than traditional GUI apps.
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-2. Download the latest `Class.Manager.2023.jar` from [here](https://github.com/AY2324S1-CS2103T-T11-1/tp/releases).
+2. Download the latest `class-manager-2023.jar` from [here](https://github.com/AY2324S1-CS2103T-T11-1/tp/releases).
 
 3. Copy the file to the folder you want to use as the _home folder_ for your ClassManager.
 
-4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar Class.Manager.2023.jar` command to run the application.
+4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar class-manager-2023.jar` command to run the application.
    Note the app contains some sample data.<br>
 
 5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
