@@ -255,7 +255,7 @@ Expected outputs:
 | Outcome | Output                            |
 | --- |-----------------------------------|
 | **Success** | X employees listed!    |
-| **Fail** | Invalid command format!| 
+| **Fail** | Invalid command format!|
 
 ![filterCommandExample](images/filterCommandExample.png)
 
