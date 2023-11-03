@@ -19,7 +19,7 @@ import seedu.address.model.task.Task;
  */
 public class DeleteMemberTaskCommand extends Command {
 
-    public static final String COMMAND_WORD = "deleteTask";
+    public static final String COMMAND_WORD = "deletetask";
     public static final String COMMAND_ALIAS = "delt";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Deletes a specified task from the specified member "
@@ -31,8 +31,12 @@ public class DeleteMemberTaskCommand extends Command {
     public static final String MESSAGE_DELETE_TASK_SUCCESS = "Task %1$s deleted from member %2$s";
     private final Index memberIndex;
     private final Index taskIndex;
+
     /**
      * Creates an DeleteMemberTaskCommand to delete the specified {@code Task}
+     *
+     * @param memberIndex The index of the member to delete the task from.
+     * @param taskIndex   The index of the task to delete.
      */
     public DeleteMemberTaskCommand(Index memberIndex, Index taskIndex) {
         requireNonNull(memberIndex);

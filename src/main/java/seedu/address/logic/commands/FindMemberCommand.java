@@ -14,13 +14,13 @@ import seedu.address.model.person.MemberContainsKeywordsPredicate;
  */
 public class FindMemberCommand extends Command {
 
-    public static final String COMMAND_WORD = "findMember";
+    public static final String COMMAND_WORD = "findmember";
     public static final String COMMAND_ALIAS = "findm";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all members whose information contain any of "
-        + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
-        + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
-        + "Example: " + COMMAND_WORD + " alice 91119111 design";
+            + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
+            + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
+            + "Example: " + COMMAND_WORD + " alice 91119111 design";
 
     private final MemberContainsKeywordsPredicate predicate;
 
@@ -38,7 +38,7 @@ public class FindMemberCommand extends Command {
         requireNonNull(model);
         model.updateFilteredMemberList(predicate);
         return new CommandResult(
-            String.format(Messages.MESSAGE_MEMBERS_LISTED_OVERVIEW, model.getFilteredMemberList().size()));
+                String.format(Messages.MESSAGE_MEMBERS_LISTED_OVERVIEW, model.getFilteredMemberList().size()));
     }
 
     @Override
@@ -59,7 +59,7 @@ public class FindMemberCommand extends Command {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-            .add("predicate", predicate)
-            .toString();
+                .add("predicate", predicate)
+                .toString();
     }
 }
