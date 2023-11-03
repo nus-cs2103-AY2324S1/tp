@@ -213,7 +213,7 @@ The Activity Diagram below summarises what happens after the user enters an add 
 
 ### Delete Dates
 The delete dates feature is implemented using the `DeleteCommand` class. The `DeleteCommand` class takes in a an 'Index' object as a parameter. The 'Index' object is used to identify the `Date` object in the `Model` component to be deleted. The `DeleteCommand` class then returns a `CommandResult` object that contains the deleted `Date` object
-
+ 
 
 ### Edit Dates
 The edit dates feature is implemented using the `EditCommand` class. The `EditCommand` class takes in a an 'Index' object as a parameter. The 'Index' object is used to identify the `Date` object in the `Model` component to be edited. The `EditCommand` class then returns a `CommandResult` object that contains the edited `Date` object
@@ -253,7 +253,7 @@ the command `sort name/ increasing`
 
 <puml src="diagrams/SortSequence.puml" width="450" />
 
-### Get random Date
+### Get Blind Date
 
 The random date feature is implemented using the 'RandomCommand' class. The 'RandomCommand' class calls a
 getRandomPerson() method from the model class. Within the getRandomPerson method, a 'Predicate' object is created and
@@ -637,13 +637,13 @@ testers are expected to do more *exploratory* testing.
     * Press enter.
     * Expected: The GUI shows the Dates with age in the filter command.
 
-### Finding a Random Date
+### Finding a Blind Date
 
-1. Finding a Random Date
+1. Finding a Blind Date
     * Type the following random command into the text field.<br>
-      `random`
+      `blindDate`
     * Press enter.
-    * Expected: The GUI shows a random Date in LoveBook.
+    * Expected: The GUI shows a blind date in LoveBook.
 
 ### Exit
 
