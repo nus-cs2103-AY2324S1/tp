@@ -200,6 +200,8 @@ Adds an event to a contact. The added event should not have clashes in timing wi
 
 Format: `add event -id CONTACT_ID -en EVENT_NAME -st START_TIME [-et END_TIME] [-loc LOCATION] [-info INFORMATION]`
 
+(If start time is exactly equals to end time, the end time for the event will not be displayed when outputting the event to text-based UI)
+
 Date-Time Format:
  - You can use one of the following formats for `START_TIME` and `END_TIME`:
     - Both date and time: `yyyy-MM-dd HH:mm[:ss]`

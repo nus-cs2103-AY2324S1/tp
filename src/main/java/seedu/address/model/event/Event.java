@@ -111,7 +111,7 @@ public class Event {
      */
     public String getUiText() {
         String result = this.getName() + "\nStarts at: " + this.start;
-        if (!this.end.toString().isEmpty()) {
+        if (!this.end.equals(this.start)) {
             result += "\nEnds at: " + this.end;
         }
         if (!this.location.toString().isEmpty()) {
