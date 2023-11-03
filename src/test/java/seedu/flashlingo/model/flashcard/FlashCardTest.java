@@ -1,6 +1,7 @@
 package seedu.flashlingo.model.flashcard;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Date;
 
@@ -30,6 +31,17 @@ class FlashCardTest {
                 new ProficiencyLevel(1));
 
         assertEquals(fc.getTranslatedWord(), translatedWord);
+    }
+
+    @Test
+    void getRememberannce() {
+        FlashCard fc = new FlashCard(new OriginalWord("Hello", "eng"),
+                new TranslatedWord("Ni Hao", "chi"),
+                new Date(),
+                new ProficiencyLevel(1),
+                true);
+
+        assertTrue(fc.isRecalled());
     }
 
     @Test

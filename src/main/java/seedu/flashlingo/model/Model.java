@@ -110,13 +110,21 @@ public interface Model {
      */
     void updateFilteredFlashCardList(Predicate<FlashCard> predicate);
 
+
     void setReviewWord(Predicate<FlashCard> predicate, FlashCard flashCard);
 
+    /**
+     * Evaluates and returns the number of FlashCards
+     * @return Number of FlashCards
+     */
     int getNumberOfFlashCards();
 
+    /**
+     * Evaluated the number of FlashCards remebered in this session
+     * @return Number of FlashCardsRemembered
+     */
     int getNumberOfRememberedWords();
 
-    void incrementRememberedWords();
 
     FlashCard nextReviewWord() throws CommandException;
     void rememberWord(boolean isUpdated);

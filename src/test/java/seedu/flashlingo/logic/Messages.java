@@ -18,15 +18,12 @@ public class Messages {
     public static final String MESSAGE_INVALID_FLASHCARD_DISPLAYED_INDEX = "The flashcard index provided is invalid";
     public static final String MESSAGE_FLASHCARDS_LISTED_OVERVIEW = "%1$d flashcards listed!";
     public static final String MESSAGE_DUPLICATE_FIELDS =
-                "Multiple values specified for the following single-valued field(s): ";
-    public static final String MESSAGE_DUPLICATE_FLASHCARD = "This flash card already exists in Flashlingo!";
+            "Multiple values specified for the following single-valued field(s): ";
+    public static final String MESSAGE_DUPLICATE_FLASHCARD = "Duplicated Flashcards found!";
 
     public static final String MESSAGE_IN_REVIEW_SESSION = "Sorry, currently you are in a review session. Your command "
-        + "is not supported.\nPlease end the review session first.";
+            + "is not supported.\nPlease end the review session first.";
     public static final String MESSAGE_NOT_IN_REVIEW_SESSION = "You are not in a review session.";
-    public static final String MESSAGE_OPEN_FILE_FAIL = "File not found or accessible.";
-    public static final String MESSAGE_READ_FILE_FAIL = "File cannot be read due to invalid content or format.";
-
     /**
      * Returns an error message indicating the duplicate prefixes.
      */
