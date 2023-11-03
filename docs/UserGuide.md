@@ -88,10 +88,9 @@ When adding a contact, if there is already another contact with the same name, y
 
 Example usage:
 
-* `create /name Jiale`
 * `create /name Jiale /phone 12345678 /grad AY2526-S2`
-
-![create command](images/create/create.png)
+    ![create command](images/create/create.png)
+* `create /name Jiale`
 
 [Table of Contents](#table-of-contents)
 
@@ -131,6 +130,7 @@ and `.` (period) must be present after `@` (at sign)).
 Example usage:
 
 * `add 1 /phone 91234567`
+    ![add phone](images/add-remark/add-phone.png)
 * `add 3 /email nknguyentdn@gmail.com`
 * `add 1 /link https://nknguyenhc.github.io/`
 * `add 3 /grad AY2223-S1`
@@ -138,8 +138,6 @@ Example usage:
 * `add 3 /spec Robotics & AI`
 * `add 1 /priority high`
 * `add 1 /tag data analyst`
-
-![add phone](images/add-remark/add-phone.png)
 
 [Table of Contents](#table-of-contents)
 
@@ -184,6 +182,8 @@ and `.` (period) must be present after `@` (at sign)).
 
 Example usage:
 
+* `edit 3 /priority low`
+    ![update success](images/edit/edit.png)
 * `edit 1 /name nkn`
 * `edit 2 /phone 10938472 /index 1`
 * `edit 3 /email nkn@gmail.com /index 3`
@@ -191,10 +191,7 @@ Example usage:
 * `edit 3 /grad AY2324-S1`
 * `edit 2 /course CS2101 /index 2`
 * `edit 1 /spec algorithms /index 3`
-* `edit 3 /priority high`
 * `edit 1 /tag working in Meta /index 2`
-
-![update success](images/edit/edit.png)
 
 [Table of Contents](#table-of-contents)
 
@@ -212,10 +209,9 @@ Parameters:
 
 Example usage:
 
+* `delete 6`
+    ![delete](images/delete/delete.png)
 * `delete 1`
-* `delete 16`
-
-![delete](images/delete/delete.png)
 
 [Table of Contents](#table-of-contents)
 
@@ -266,10 +262,9 @@ Parameters:
 
 Example usage:
 
-* `find Jack`
+* `find Dav`
+    ![search](images/find/find.png)
 * `find Kai Jie`
-
-![search](images/find/search-success.png)
 
 [Table of Contents](#table-of-contents)
 
@@ -299,11 +294,10 @@ Parameters
 
 Example usage:
 
-* `sort /by grad /order asc`
-* `sort /by name /order descending`
+* `sort /by grad /order desc`
+    ![sort](images/sort/sort.png)
+* `sort /by name /order ascending`
 * `sort /by name`
-
-![sort](images/sort/sort.png)
 
 [Table of Contents](#table-of-contents)
 
@@ -342,13 +336,12 @@ out contacts who have finished the course.
 
 Example usage:
 
+* `filter /by tag /with friend colleague`
+    ![filter](images/filter/filter.png)
 * `filter /by course /with computer /taken true`
 * `filter /by course /with robotics`
-* `filter /by tag /with friend colleague`
 * `filter /by spec /with Industry AI`
 * `filter /by grad /with 2022 2023 2024 2025`
-
-![filter](images/filter/filterSuccess.PNG)
 
 [Table of Contents](#table-of-contents)
 
@@ -397,10 +390,10 @@ Parameters:
 
 Example usage:
 
+* `open 3 /index 2`
+    ![open link success](images/open/open-link.png)
+    **Note:** The web browser used will be your computer's default web browser.
 * `open 1`
-* `open 1 /index 2`
-
-![open link success](images/open/open-link.png)
 
 [Table of Contents](#table-of-contents)
 
@@ -418,9 +411,9 @@ Parameters:
 Example usage:
 
 * `email 1`
+    ![open email success](images/open/open-email.png)
+    **Note:** The email app used will be your computer's default email app.
 * `email 1 /index 2`
-
-![open email success](images/open/open-email.png)
 
 [Table of Contents](#table-of-contents)
 
