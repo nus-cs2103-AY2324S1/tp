@@ -8,6 +8,7 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.UngroupPersonCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
@@ -20,7 +21,7 @@ import seedu.address.model.person.exceptions.PersonNotFoundException;
  * so as to ensure that the person being added or updated is unique in terms of fields in the UniquePersonList.
  * However, the removal of a person uses Person#equals(Object) so
  * as to ensure that the person with exactly the same fields will be removed.
- *
+ * <p>
  * Supports a minimal set of list operations.
  *
  * @see Person#isSamePerson(Person)
@@ -29,7 +30,7 @@ public class UniquePersonList implements Iterable<Person> {
 
     private final ObservableList<Person> internalList = FXCollections.observableArrayList();
     private final ObservableList<Person> internalUnmodifiableList =
-            FXCollections.unmodifiableObservableList(internalList);
+        FXCollections.unmodifiableObservableList(internalList);
 
     /**
      * Returns true if the list contains an equivalent person as the given argument.
@@ -37,17 +38,8 @@ public class UniquePersonList implements Iterable<Person> {
     public boolean contains(Person toCheck) {
         requireNonNull(toCheck);
         return internalList.stream().anyMatch(toCheck::isSameName)
-                || internalList.stream().anyMatch(toCheck::isSameEmail)
-                || internalList.stream().anyMatch(toCheck::isSamePhone);
-    }
-
-    public boolean[] usedFields(Person toCheck) {
-        boolean[] fields = new boolean[4];
-        fields[1] = internalList.stream().anyMatch(toCheck::isSameName);
-        fields[2] = internalList.stream().anyMatch(toCheck::isSamePhone);
-        fields[3] = internalList.stream().anyMatch(toCheck::isSameEmail);
-        fields[0] = fields[1] && fields[2] && fields[3];
-        return fields;
+            || internalList.stream().anyMatch(toCheck::isSameEmail)
+            || internalList.stream().anyMatch(toCheck::isSamePhone);
     }
 
     /**
@@ -60,6 +52,23 @@ public class UniquePersonList implements Iterable<Person> {
             throw new DuplicatePersonException();
         }
         internalList.add(toAdd);
+    }
+
+    /**
+     * Removes the equivalent person from the list.
+     * The person must exist in the list.
+     */
+    public void remove(Person toRemove) {
+        requireNonNull(toRemove);
+        boolean isRemoved = internalList.remove(toRemove);
+        if (!isRemoved) {
+            throw new PersonNotFoundException();
+        }
+    }
+
+    public void setPersons(UniquePersonList replacement) {
+        requireNonNull(replacement);
+        internalList.setAll(replacement.internalList);
     }
 
     /**
@@ -76,27 +85,11 @@ public class UniquePersonList implements Iterable<Person> {
         }
 
         if (!target.isSamePerson(editedPerson)
-        && contains(editedPerson)) {
+                && contains(editedPerson)) {
             throw new DuplicatePersonException();
         }
 
         internalList.set(index, editedPerson);
-    }
-
-    /**
-     * Removes the equivalent person from the list.
-     * The person must exist in the list.
-     */
-    public void remove(Person toRemove) {
-        requireNonNull(toRemove);
-        if (!internalList.remove(toRemove)) {
-            throw new PersonNotFoundException();
-        }
-    }
-
-    public void setPersons(UniquePersonList replacement) {
-        requireNonNull(replacement);
-        internalList.setAll(replacement.internalList);
     }
 
     /**
@@ -164,11 +157,11 @@ public class UniquePersonList implements Iterable<Person> {
     }
 
     public Person getPerson(String personName) throws CommandException {
-       for (Person person: this.internalList) {
-           if (person.nameEquals(personName)) {
-              return person;
-           }
-       }
-       throw new CommandException(UngroupPersonCommand.MESSAGE_NO_PERSON_WITH_NAME_FOUND);
+        for (Person person : this.internalList) {
+            if (person.nameEquals(personName)) {
+                return person;
+            }
+        }
+        throw new CommandException(Messages.MESSAGE_NO_PERSON_WITH_NAME_FOUND);
     }
 }

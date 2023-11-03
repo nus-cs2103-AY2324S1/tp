@@ -16,6 +16,6 @@ public interface ReadOnlyAddressBook {
      */
     ObservableList<Person> getPersonList();
 
-	ObservableList<Group> getGroupList();
+    ObservableList<Group> getGroupList();
 
 }

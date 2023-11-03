@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -14,6 +15,8 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.group.Group;
+import seedu.address.model.group.GroupRemark;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 
 /**
@@ -91,22 +94,7 @@ public class ModelManager implements Model {
         return addressBook;
     }
 
-    @Override
-    public boolean hasPerson(Person person) {
-        requireNonNull(person);
-        return addressBook.hasPerson(person);
-    }
-
-    @Override
-    public boolean[] usedFields(Person person) {
-        requireNonNull(person);
-        return addressBook.usedFields(person);
-    }
-
-    @Override
-    public void deletePerson(Person target) {
-        addressBook.removePerson(target);
-    }
+    //=========== Person functions ===========================================================================
 
     @Override
     public void addPerson(Person person) {
@@ -115,19 +103,113 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void setPerson(Person target, Person editedPerson) {
-        requireAllNonNull(target, editedPerson);
+    public Person deletePerson(String personName) throws CommandException {
+        Person person = addressBook.getPerson(personName);
+        addressBook.removePerson(person);
+        return person;
+    }
 
-        addressBook.setPerson(target, editedPerson);
+    @Override
+    public boolean hasPerson(Person person) {
+        requireNonNull(person);
+        return addressBook.hasPerson(person);
+    }
+
+    @Override
+    public boolean hasPerson(Name personName) {
+        requireNonNull(personName);
+        return addressBook.hasPerson(personName);
     }
 
     /**
-     * Returns true if a group with the same identity as {@code group} exists in the address book.
+     * Assign person to group
+     *
+     * @param person person to be grouped
+     * @param group  group in consideration
+     * @throws CommandException if person has already been assigned to group
      */
-    public boolean hasGroup(Group group) {
-        requireNonNull(group);
-        return addressBook.hasGroup(group);
+    private void assignGroup(Person person, Group group) throws CommandException {
+        group.addPerson(person);
+        person.addGroup(group);
     }
+
+    /**
+     * Unassign person to group
+     *
+     * @param person person to be grouped
+     * @param group  group in consideration
+     * @throws CommandException if person has already been assigned to group
+     */
+    private void unassignGroup(Person person, Group group) throws CommandException {
+        group.removePerson(person);
+        person.removeGroup(group);
+    }
+
+    @Override
+    public Pair<Person, Group> groupPerson(String personName, String groupName) throws CommandException {
+        // both throw exception if not exists exact match
+        Person person = addressBook.getPerson(personName);
+        Group group = addressBook.getGroup(groupName);
+        this.assignGroup(person, group);
+        forceUpdateList();
+        Pair<Person, Group> output = new Pair<>(person, group);
+        return output;
+    }
+
+    @Override
+    public Pair<Person, Group> ungroupPerson(String personName, String groupName) throws CommandException {
+        Person person = addressBook.getPerson(personName);
+        Group group = addressBook.getGroup(groupName);
+        person.removeGroup(group);
+        group.removePerson(person);
+        this.unassignGroup(person, group);
+        //does not show
+//        System.out.println("hi");
+        forceUpdateList();
+        Pair<Person, Group> output = new Pair<>(person, group);
+        return output;
+    }
+
+    @Override
+    public void addTimeToPerson(Name toAddPerson, ArrayList<TimeInterval> toAddTime) throws CommandException {
+        requireNonNull(toAddPerson);
+        Person person = addressBook.getPerson(toAddPerson.fullName);
+        try {
+            person.addFreeTime(toAddTime);
+        } catch (CommandException e) {
+            forceUpdateList();
+            throw new CommandException(e.getMessage());
+        }
+        forceUpdateList();
+    }
+
+    /**
+     * Deletes free time from person
+     * @param personName Person to delete time from
+     * @param toDeleteTime Time to be deleted
+     * @throws CommandException if time does not exist
+     */
+    @Override
+    public void deleteTimeFromPerson(Name personName,
+                                     ArrayList<TimeInterval> toDeleteTime) throws CommandException {
+        requireNonNull(personName);
+        Person person = addressBook.getPerson(personName.fullName);
+        try {
+            person.deleteFreeTime(toDeleteTime);
+        } catch (CommandException e) {
+            forceUpdateList();
+            throw new CommandException(e.getMessage());
+        }
+        forceUpdateList();
+    }
+
+    public TimeIntervalList getTimeFromPerson(Name personName) throws CommandException {
+        requireNonNull(personName);
+        Person person = addressBook.getPerson(personName.toString());
+        return person.getTime();
+    }
+
+    //=========== Group functions ============================================================================
 
     /**
      * Adds a group to the address book.
@@ -138,12 +220,71 @@ public class ModelManager implements Model {
     }
 
     /**
-     * Removes {@code key} from this {@code AddressBook}.
-     * {@code key} must exist in the address book.
+     * Removes {@code group} from this {@code AddressBook}.
+     * {@code group} must exist in the address book.
      */
-    public void removeGroup(Group group) {
+    public Group deleteGroup(String groupName) throws CommandException {
+        Group group = addressBook.getGroup(groupName);
         addressBook.removeGroup(group);
+        forceUpdateList();
+        return group;
     }
+
+    /**
+     * Returns true if a group with the same identity as {@code group} exists in the address book.
+     */
+    public boolean hasGroup(Group group) {
+        requireNonNull(group);
+        return addressBook.hasGroup(group);
+    }
+
+    public Group findGroup(String groupName) throws CommandException {
+        return addressBook.getGroup(groupName);
+    }
+
+    public void addTimeToGroup(Group toAdd, ArrayList<TimeInterval> toAddTime) throws CommandException {
+        requireNonNull(toAdd);
+        Group groupToAdd = addressBook.getGroup(toAdd.getGroupName());
+        try {
+            groupToAdd.addTime(toAddTime);
+        } catch (CommandException e) {
+            throw new CommandException(e.getMessage());
+        }
+        forceUpdateList();
+    }
+
+    /**
+     * Deletes meeting time from group
+     * @param group Group to delete time from
+     * @param toDeleteTime Time to be deleted
+     * @throws CommandException if time does not exist
+     */
+    @Override
+    public void deleteTimeFromGroup(Group group,
+                                    ArrayList<TimeInterval> toDeleteTime) throws CommandException {
+        requireNonNull(group);
+        Group groupToDeleteTime = addressBook.getGroup(group.getGroupName());
+        try {
+            groupToDeleteTime.deleteTime(toDeleteTime);
+        } catch (CommandException e) {
+            forceUpdateList();
+            throw new CommandException(e.getMessage());
+        }
+        forceUpdateList();
+    }
+
+    public Group addGroupRemark(String groupName, GroupRemark groupRemark) throws CommandException {
+        Group group = addressBook.getGroup(groupName);
+        group.setGroupRemark(groupRemark);
+        return group;
+    }
+
+    public TimeIntervalList getTimeFromGroup(Group group) throws CommandException {
+        requireNonNull(group);
+        Group toAdd = addressBook.getGroup(group.getGroupName());
+        return toAdd.getTime();
+    }
+
 
     //=========== Filtered Person List Accessors =============================================================
 
@@ -163,9 +304,7 @@ public class ModelManager implements Model {
     @Override
     public ObservableList<Group> getFilteredGroupList() {
         return filteredGroups;
-    };
-
-
+    }
 
     @Override
     public void updateFilteredPersonList(Predicate<Person> predicate) {
@@ -173,73 +312,17 @@ public class ModelManager implements Model {
         filteredPersons.setPredicate(predicate);
     }
 
+    @Override
     public void updateFilteredGroupList(Predicate<Group> predicate) {
         requireNonNull(predicate);
         filteredGroups.setPredicate(predicate);
     }
 
-    // in GroupPersonCommand call model.groupPerson(person, group) note that these are simply strings!
-    // groupPerson(person, group)
-    // calls addressbook.groupPerson(person, group)
-    // addressbook -> personlist grouplist
-    // method in addressbook referencing method in personList groupList (oop) set person to group and group to person
-    // get
-    // get
-    // person.setgroup(group)
-    // person already in group throw exception also
-    // group.setperson(person)
-    // group already contain person
-    // exactPersonExist exactGroupExist
-    // better to retrieve both person and group object first then set else error prone
-    // for loop all things once name exact match for person / group
-    // this methods throws command exception, yes it works
-    @Override
-    public Pair<Person, Group> groupPerson(String personName, String groupName) throws CommandException {
-        // both throw exception if not exists exact match
-        Person person =addressBook.getPerson(personName);
-        Group group = addressBook.getGroup(groupName);
-        this.assignGroup(person, group);
-        forceUpdateList();
-        Pair<Person, Group> output = new Pair<>(person, group);
-        return output;
-    }
-
-    /**
-     * Assign person to group
-     * @param person person to be grouped
-     * @param group group in consideration
-     * @throws CommandException if person has already been assigned to group
-     */
-    private void assignGroup(Person person, Group group) throws CommandException {
-       group.addPerson(person);
-       person.addGroup(group);
-    }
-
-    @Override
-    public Pair<Person, Group> ungroupPerson(String personName, String groupName) throws CommandException {
-        // both throw exception if not exists exact match
-        Person person = addressBook.getPerson(personName);
-        Group group = addressBook.getGroup(groupName);
-        this.unassignGroup(person, group);
-        forceUpdateList();
-        Pair<Person, Group> output = new Pair<>(person, group);
-        return output;
-    }
-
-    /**
-     * Assign person to group
-     * @param person person to be grouped
-     * @param group group in consideration
-     * @throws CommandException if person has already been assigned to group
-     */
-    private void unassignGroup(Person person, Group group) throws CommandException {
-        group.removePerson(person);
-        person.removeGroup(group);
-    }
-
     private void forceUpdateList() {
         updateFilteredPersonList(user -> false);
         updateFilteredPersonList(user -> true);
+        updateFilteredGroupList(group -> false);
+        updateFilteredGroupList(group -> true);
     }
 
     @Override
@@ -255,8 +338,8 @@ public class ModelManager implements Model {
 
         ModelManager otherModelManager = (ModelManager) other;
         return addressBook.equals(otherModelManager.addressBook)
-                && userPrefs.equals(otherModelManager.userPrefs)
-                && filteredPersons.equals(otherModelManager.filteredPersons);
+            && userPrefs.equals(otherModelManager.userPrefs)
+            && filteredPersons.equals(otherModelManager.filteredPersons);
     }
 
 }

@@ -15,14 +15,14 @@ import java.util.function.Predicate;
 import org.junit.jupiter.api.Test;
 
 import javafx.collections.ObservableList;
+import javafx.util.Pair;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.AddressBook;
+import seedu.address.model.*;
 import seedu.address.model.group.Group;
-import seedu.address.model.Model;
-import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.group.GroupRemark;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
 
@@ -140,12 +140,12 @@ public class AddCommandTest {
         }
 
         @Override
-        public void deletePerson(Person target) {
+        public boolean hasPerson(Name personName) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void setPerson(Person target, Person editedPerson) {
+        public Person deletePerson(String personName) throws CommandException {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -155,25 +155,84 @@ public class AddCommandTest {
         }
 
         @Override
+        public ObservableList<Group> getFilteredGroupList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void updateFilteredPersonList(Predicate<Person> predicate) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void removeGroup(Group key) {
-
+        public void updateFilteredGroupList(Predicate<Group> predicate) {
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public void addGroup(Group g) {
+            throw new AssertionError("This method should not be called.");
+        }
 
+        @Override
+        public Group deleteGroup(String groupName) throws CommandException {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Pair<Person, Group> groupPerson(String personName, String groupName) throws CommandException {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Pair<Person, Group> ungroupPerson(String personName, String groupName) throws CommandException {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Group addGroupRemark(String groupName, GroupRemark groupRemark) throws CommandException {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addTimeToPerson(Name toAddPerson, ArrayList<TimeInterval> toAddFreeTime) throws CommandException {
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public boolean hasGroup(Group group) {
-            return false;
+            throw new AssertionError("This method should not be called.");
         }
 
+        @Override
+        public TimeIntervalList getTimeFromPerson(Name personName) throws CommandException {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void deleteTimeFromPerson(Name personName, ArrayList<TimeInterval> listOfTimesToDelete) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Group findGroup(String groupName) throws CommandException {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addTimeToGroup(Group toAdd, ArrayList<TimeInterval> toAddTime) throws CommandException {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void deleteTimeFromGroup(Group group,
+                                        ArrayList<TimeInterval> toDeleteTime) throws CommandException {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        public TimeIntervalList getTimeFromGroup(Group group) throws CommandException {
+            throw new AssertionError("This method should not be called.");
+        }
 
     }
 

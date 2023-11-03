@@ -48,35 +48,53 @@ public class AddressBookParser {
         case AddCommand.COMMAND_WORD:
             return new AddCommandParser().parse(arguments);
 
-        case CreateGroupCommand.COMMAND_WORD:
-            return new CreateGroupParser().parse(arguments);
+        case AddTimeCommand.COMMAND_WORD:
+            return new AddTimeCommandParser().parse(arguments);
+
+        case DeleteTimeCommand.COMMAND_WORD:
+            return new DeleteTimeCommandParser().parse(arguments);
+
+        case AddGroupCommand.COMMAND_WORD:
+            return new AddGroupCommandParser().parse(arguments);
 
         case GroupPersonCommand.COMMAND_WORD:
-             return new GroupPersonParser().parse(arguments);
+             return new GroupPersonCommandParser().parse(arguments);
 
         case UngroupPersonCommand.COMMAND_WORD:
             return new UngroupPersonCommandParser().parse(arguments);
 
-        case EditCommand.COMMAND_WORD:
-            return new EditCommandParser().parse(arguments);
-
         case DeleteCommand.COMMAND_WORD:
             return new DeleteCommandParser().parse(arguments);
 
+        case GroupRemarkCommand.COMMAND_WORD:
+            return new GroupRemarkCommandParser().parse(arguments);
+
+        case ListTimeCommand.COMMAND_WORD:
+            return new ListTimeCommandParser().parse(arguments);
+
         case ClearCommand.COMMAND_WORD:
-            return new ClearCommand();
+            return new ClearCommandParser().parse(arguments);
 
         case FindCommand.COMMAND_WORD:
             return new FindCommandParser().parse(arguments);
 
+        case AddGroupMeetingTimeCommand.COMMAND_WORD:
+            return new AddGroupMeetingTimeCommandParser().parse(arguments);
+
         case ListCommand.COMMAND_WORD:
-            return new ListCommand();
+            return new ListCommandParser().parse(arguments);
+
+        case ListGroupCommand.COMMAND_WORD:
+            return new ListGroupCommandParser().parse(arguments);
+
+        case FindFreeTimeCommand.COMMAND_WORD:
+            return new FindFreeTimeCommandParser().parse(arguments);
 
         case ExitCommand.COMMAND_WORD:
-            return new ExitCommand();
+            return new ExitCommandParser().parse(arguments);
 
         case HelpCommand.COMMAND_WORD:
-            return new HelpCommand();
+            return new HelpCommandParser().parse(arguments);
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);

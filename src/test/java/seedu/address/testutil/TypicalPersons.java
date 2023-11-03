@@ -4,18 +4,20 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_GROUP_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_GROUP_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import seedu.address.model.AddressBook;
+import seedu.address.model.group.GroupList;
 import seedu.address.model.person.Person;
 
 /**
@@ -50,9 +52,11 @@ public class TypicalPersons {
 
     // Manually added - Person's details found in {@code CommandTestUtil}
     public static final Person AMY = new PersonBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
-            .withEmail(VALID_EMAIL_AMY).withGroupList("CS2103T").build();
+            .withEmail(VALID_EMAIL_AMY).withGroupList(VALID_GROUP_AMY).build();
+    public static final Person AMYWITHOUTGROUP = new PersonBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
+            .withEmail(VALID_EMAIL_AMY).withGroupList().build();
     public static final Person BOB = new PersonBuilder().withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
-            .withEmail(VALID_EMAIL_BOB).withGroupList("CS2103T").build();
+            .withEmail(VALID_EMAIL_BOB).withGroupList(VALID_GROUP_BOB).build();
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
 

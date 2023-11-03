@@ -1,41 +1,56 @@
 package seedu.address.storage;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonValue;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.TimeIntervalList;
 import seedu.address.model.group.Group;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.group.GroupRemark;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
- * Jackson-friendly version of {@link Tag}.
+ * Jackson-friendly version of {@link Group}.
  */
 class JsonAdaptedGroup {
 
     private final String groupName;
+    private final String groupRemark;
+    private final List<JsonAdaptedTime> meetingTimeList = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedGroup} with the given {@code groupName}.
      */
     @JsonCreator
-    public JsonAdaptedGroup(String groupName) {
+    public JsonAdaptedGroup(@JsonProperty("name") String groupName, @JsonProperty("groupRemark") String groupRemark,
+                            @JsonProperty("meetingTimeList") List<JsonAdaptedTime> meetingTimeList) {
         this.groupName = groupName;
+        this.groupRemark = groupRemark;
+
+        if (meetingTimeList != null) {
+            this.meetingTimeList.addAll(meetingTimeList);
+        }
     }
 
     /**
-     * Converts a given {@code Tag} into this class for Jackson use.
+     * Converts a given {@code Group} into this class for Jackson use.
      */
     public JsonAdaptedGroup(Group source) {
         groupName = source.getGroupName();
-    }
+        groupRemark = source.getGroupRemark().value;
 
-    @JsonValue
-    public String getTagName() {
-        return groupName;
+        if (meetingTimeList != null) {
+            meetingTimeList.addAll(source.getTime().toStream()
+                    .map(JsonAdaptedTime::new)
+                    .collect(Collectors.toList()));
+        }
     }
 
     /**
-     * Converts this Jackson-friendly adapted tag object into the model's {@code Tag} object.
+     * Converts this Jackson-friendly adapted tag object into the model's {@code JsonAdaptedGroup} object.
      *
      * @throws IllegalValueException if there were any data constraints violated in the adapted tag.
      */
@@ -43,7 +58,12 @@ class JsonAdaptedGroup {
         if (!Group.isValidGroup(groupName)) {
             throw new IllegalValueException("illegal value");
         }
-        return new Group(groupName);
+        TimeIntervalList modelTimeIntervalListList = new TimeIntervalList();
+        for (JsonAdaptedTime freeTime : meetingTimeList) {
+            modelTimeIntervalListList.addTime(freeTime.toModelType());
+        }
+
+        return new Group(groupName, new GroupRemark(groupRemark), modelTimeIntervalListList);
     }
 
 }

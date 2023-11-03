@@ -12,7 +12,6 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.group.Group;
 import seedu.address.model.person.Person;
 
 /**
@@ -22,15 +21,18 @@ import seedu.address.model.person.Person;
 class JsonSerializableAddressBook {
 
     public static final String MESSAGE_DUPLICATE_PERSON = "Persons list contains duplicate person(s).";
+    public static final String MESSAGE_DUPLICATE_GROUP = "Group list contains duplicate group(s).";
 
     private final List<JsonAdaptedPerson> persons = new ArrayList<>();
+    private final List<JsonAdaptedGroup> groups = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonSerializableAddressBook} with the given persons.
      */
     @JsonCreator
-    public JsonSerializableAddressBook(@JsonProperty("persons") List<JsonAdaptedPerson> persons) {
+    public JsonSerializableAddressBook(@JsonProperty("persons") List<JsonAdaptedPerson> persons, @JsonProperty("groups") List<JsonAdaptedGroup> groups) {
         this.persons.addAll(persons);
+        this.groups.addAll(groups);
     }
 
     /**
@@ -40,6 +42,7 @@ class JsonSerializableAddressBook {
      */
     public JsonSerializableAddressBook(ReadOnlyAddressBook source) {
         persons.addAll(source.getPersonList().stream().map(JsonAdaptedPerson::new).collect(Collectors.toList()));
+        groups.addAll(source.getGroupList().stream().map(JsonAdaptedGroup::new).collect(Collectors.toList()));
     }
 
     /**
@@ -49,6 +52,9 @@ class JsonSerializableAddressBook {
      */
     public AddressBook toModelType() throws IllegalValueException {
         AddressBook addressBook = new AddressBook();
+        for (JsonAdaptedGroup jsonAdaptedGroup : groups) {
+            addressBook.addGroup(jsonAdaptedGroup.toModelType());
+        }
         for (JsonAdaptedPerson jsonAdaptedPerson : persons) {
             Person person = jsonAdaptedPerson.toModelType();
             if (addressBook.hasPerson(person)) {
@@ -58,14 +64,8 @@ class JsonSerializableAddressBook {
 
             person.getGroups().toStream().forEach(group -> {
                 try {
-                    if (addressBook.hasGroup(group)) {
-                        group.addPerson(person);
-                    } else {
-                        addressBook.addGroup(group);
-                        group.addPerson(person);
-                    }
+                    addressBook.getGroup(group).addPerson(person);
                 } catch (CommandException e) {
-                    System.out.println("error");
                     throw new RuntimeException(e);
                 }
             });

@@ -6,6 +6,7 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.parser.Prefix;
 import seedu.address.model.group.Group;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 
 /**
@@ -19,6 +20,14 @@ public class Messages {
     public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d persons listed!";
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
+    public static final String MESSAGE_NO_PERSON_WITH_NAME_FOUND = "No person with such name found.\n"
+            + "Please provide the person's full name as in the existing contactlist.";
+    public static final java.lang.String MESSAGE_DUPLICATE_PERSON_IN_GROUP =
+            "Error, invalid input entered, unable to put the person into group";
+    public static final String MESSAGE_NO_GROUP_WITH_NAME_FOUND = "No group with such name found.\n"
+            + "Please provide the group's full name as in the existing contactlist.";
+
+
 
     /**
      * Returns an error message indicating the duplicate prefixes.
@@ -28,7 +37,6 @@ public class Messages {
 
         Set<String> duplicateFields =
                 Stream.of(duplicatePrefixes).map(Prefix::toString).collect(Collectors.toSet());
-
         return MESSAGE_DUPLICATE_FIELDS + String.join(" ", duplicateFields);
     }
 
@@ -55,5 +63,14 @@ public class Messages {
         builder.append(group.getGroupName());
         return builder.toString();
     }
+
+    /**
+     * Formats the {@code name} for display to the user.
+     */
+    public static String format(Name personName) {
+        //add print function
+        return personName.fullName;
+    }
+
 
 }

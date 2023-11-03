@@ -9,6 +9,8 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.group.Group;
 import seedu.address.model.group.GroupList;
+import seedu.address.model.group.exceptions.GroupNotFoundException;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
 
@@ -26,7 +28,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      * between constructors. See https://docs.oracle.com/javase/tutorial/java/javaOO/initial.html
      *
      * Note that non-static init blocks are not recommended to use. There are other ways to avoid duplication
-     *   among constructors.
+     * among constructors.
      */
     {
         persons = new UniquePersonList();
@@ -75,14 +77,6 @@ public class AddressBook implements ReadOnlyAddressBook {
     //// person-level operations
 
     /**
-     * Returns the list of fields of {@code person} that exists in the address book.
-     */
-    public boolean[] usedFields(Person person) {
-        requireNonNull(person);
-        return persons.usedFields(person);
-    }
-
-    /**
      * Returns true if a person with the same identity as {@code person} exists in the address book.
      */
     public boolean hasPerson(Person person) {
@@ -91,11 +85,45 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Returns true if a person with the same name exists in the addressbook.
+     * @param personName Name of the person.
+     * @return Returns true if a person with the same name exists in the addressbook.
+     */
+     public boolean hasPerson(Name personName) {
+        requireNonNull(personName);
+        for (Person person : persons) {
+            if (person.getName().equals(personName)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
      * Adds a person to the address book.
      * The person must not already exist in the address book.
      */
     public void addPerson(Person p) {
         persons.add(p);
+    }
+
+    /**
+     * Removes {@code key} from this {@code AddressBook}.
+     * {@code key} must exist in the address book.
+     */
+    public void removePerson(Person key) {
+        persons.remove(key);
+    }
+
+    public void addPersonToGroup(Person person, Group group) {
+        requireNonNull(person);
+        requireNonNull(group);
+        GroupList groups = person.getGroups();
+    }
+
+    public Person getPerson(String personName) throws CommandException {
+        // person list get that person object with same name
+        return persons.getPerson(personName);
     }
 
     /**
@@ -109,20 +137,43 @@ public class AddressBook implements ReadOnlyAddressBook {
         persons.setPerson(target, editedPerson);
     }
 
-    /**
-     * Removes {@code key} from this {@code AddressBook}.
-     * {@code key} must exist in the address book.
-     */
-    public void removePerson(Person key) {
-        persons.remove(key);
-    }
-
     //// group-level operations
 
-    public void addPersonToGroup(Person person, Group group) {
-        requireNonNull(person);
-        requireNonNull(group);
-        GroupList groups = person.getGroups();
+    /**
+     * Adds a group to the address book.
+     * The group must not already exist in the address book.
+     */
+    public void addGroup(Group g) {
+        groups.add(g);
+    }
+
+    /**
+     * Removes {@code group} from this {@code AddressBook}.
+     * {@code group} must exist in the address book.
+     */
+    public void removeGroup(Group g) {
+        groups.remove(g);
+    }
+
+    /**
+     * Returns a group with {@code groupName} from this {@code AddressBook}.
+     * @param groupName Name of group to search
+     * @return The group
+     * @throws CommandException If group is not in address book
+     */
+    public Group getGroup(String groupName) throws CommandException {
+        // group list get that group object with same name
+        return groups.getGroup(groupName);
+    }
+    /**
+     * Returns a {@code group} from this {@code AddressBook}.
+     * @param group Group to search for
+     * @return The group
+     * @throws CommandException If group is not in address book
+     */
+    public Group getGroup(Group group) throws CommandException {
+        // group list get that group object with same name
+        return groups.getGroup(group);
     }
 
     /**
@@ -133,43 +184,13 @@ public class AddressBook implements ReadOnlyAddressBook {
         return groups.contains(group);
     }
 
-    /**
-     * Adds a group to the address book.
-     * The group must not already exist in the address book.
-     */
-    public void addGroup(Group g) {
-        groups.add(g);
-    }
-
-//    public void addGroup(Group g, Person toAdd) throws CommandException {
-//        groups.add(g, toAdd);
-//    }
-
-    /**
-     * Removes {@code key} from this {@code AddressBook}.
-     * {@code key} must exist in the address book.
-     */
-    public void removeGroup(Group g) {
-        groups.remove(g);
-    }
-
     //// util methods
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("persons", persons)
-                .toString();
-    }
-
-    public Person getPerson(String personName) throws CommandException {
-        // person list get that person object with same name
-       return persons.getPerson(personName);
-    }
-
-    public Group getGroup(String groupName) throws CommandException {
-        // group list get that group object with same name
-        return groups.getGroup(groupName);
+            .add("persons", persons)
+            .toString();
     }
 
 
@@ -182,6 +203,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     public ObservableList<Group> getGroupList() {
         return groups.asUnmodifiableObservableList();
     }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
