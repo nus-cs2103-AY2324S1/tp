@@ -220,7 +220,7 @@ Opens a subwindow with a convenient link to the user guide.
 **Format:**
 `help`
 
-Alternatively, you can enter `help`, press <kbd>F1</kbd> or click Help → Help in the top toolbar.
+Alternatively, you can press <kbd>F1</kbd> or click Help → Help in the top toolbar.
 
 ### Exiting the app: `exit`
 

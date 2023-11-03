@@ -349,6 +349,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * **UI (User Interface)**: The space where interactions between humans and the software occur. The goal of this interaction is to allow effective operation and control of the machine from the human end.
 
+* **GUI (Graphical User Interface)**: A type of user interface that allows users to interact with electronic devices through graphical elements such as images, buttons, icons, and windows instead of text-based command lines. 
+
 * **Logic**: In the context of software, it refers to the set of rules and algorithms that process and respond to user inputs.
 
 * **Model**: The part of the application that manages data and application logic.
