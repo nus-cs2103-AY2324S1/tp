@@ -5,7 +5,9 @@ import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.lead.Lead;
 
 /**
  * Represents a Reminder
@@ -30,12 +32,22 @@ public final class Reminder implements Comparable<LocalDate> {
         return followUpDate;
     }
 
-    public Boolean isAfter(LocalDate date) {
+    public boolean isAfter(LocalDate date) {
         return followUpDate.isAfter(date);
+    }
+    public boolean isAfterNow() {
+        return followUpDate.isAfter(LocalDate.now());
     }
 
     public long getDueTime() {
         return ChronoUnit.MILLIS.between(LocalDateTime.now(), followUpDate.atStartOfDay());
+    }
+    public Name getName() {
+        return person.getName();
+    }
+
+    public Lead getLead() {
+        return person.getLead();
     }
 
     /**

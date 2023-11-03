@@ -35,7 +35,7 @@ public class SampleDataUtil {
                         .withDetails(new Details("Looking for automated solutions for project management"))
                         .withLead(new Lead("COLD")).addInteraction(new Interaction(
                                 "setting next meeting", Interaction.Outcome.valueOf("INTERESTED"),
-                                LocalDate.of(2023, 7, 12)
+                                LocalDate.of(2023, 11, 12)
                         )).build(),
                 new Person.PersonBuilder(new Name("Bernice Yu"), new Phone("99272758"),
                         new Email("berniceyu@example.com"), new Address("Blk 30 Lorong 3 Serangoon Gardens, #07-18"),
@@ -53,7 +53,7 @@ public class SampleDataUtil {
                                 LocalDate.of(2022, 1, 11)
                         )).addInteraction(new Interaction(
                                 "bought", Interaction.Outcome.valueOf("CLOSED"),
-                                LocalDate.of(2022, 7, 14))
+                                LocalDate.of(2023, 12, 15))
                         ).build(),
                 new Person.PersonBuilder(new Name("David Li"), new Phone("91031282"),
                         new Email("lidavid@example.com"), new Address("Blk 436 Serangoon Gardens Street 26, #16-43"),
@@ -75,7 +75,7 @@ public class SampleDataUtil {
                         .withLead(new Lead("WARM"))
                         .addInteraction(new Interaction(
                                 "Still exploring", Interaction.Outcome.valueOf("FOLLOWUP_REQUIRED"),
-                                LocalDate.of(2023, 8, 22)
+                                LocalDate.of(2023, 11, 22)
                         )).build()
         };
     }
