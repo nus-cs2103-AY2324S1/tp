@@ -5,20 +5,22 @@ title: User Guide
 
 ## Product Overview
 
-**Land the dream internship or job opportunity you've always wanted by networking more effectively using our application!**
+**Land the dream internship or job opportunity you've always wanted by networking more effectively using _NetworkBook!_**
 
 NetworkBook is a desktop contact book application built for NUS Computing students and professionals to manage information about the people they network with more efficiently than ever before.
 
 Here's an overview of how NetworkBook can help you manage your network of contacts better than existing alternatives:
-- You can search for and sort contacts by multiple networking-relevant fields (e.g. priority, courses taken/taking, specialization(s) taken/intending to take, graduation year)
-- You can access this application offline, with a static online page that contains user manual and download link
-- You can record only the information you find relevant on our application (e.g. you can assign one contact only their email and specialisation, and another contact nothing but their course)
 
-On top of these advantages, we believe that contact management must be efficient. Therefore, NetworkBook is optimised for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). If you type fast, NetworkBook can get your contact managing done faster than existing alternatives performing a similar role.
+* You can search for and sort contacts by multiple networking-relevant fields (e.g. priority, courses taken/taking, specialization(s) taken/intending to take, graduation year)
+* You can access this application offline, with a static online page that contains user manual and download link
+* You can record only the information you find relevant on our application (e.g. you can assign one contact only their email and specialisation, and another contact nothing but their course)
+
+On top of these advantages, we believe that contact management must be efficient. Therefore, NetworkBook is optimised for use via a Command Line Interface while still having the benefits of a Graphical User Interface. If you type fast, NetworkBook can get your contact managing done faster than existing alternatives performing a similar role.
 
 If you are new here, visit our [getting started guide](#getting-started) to start getting connected on NetworkBook!
 
 ## Table of Contents
+
 * TOC
 {:toc}
 
@@ -32,13 +34,14 @@ Additionally, if you are a new user, this user guide provides a quick start guid
 ### What's new in NetworkBook 1.3
 
 NetworkBook 1.3 includes several new features and improvements for ease of use.
+
 * Filter command for more control with finding contacts
 * Edit command to edit contacts' details
 * Error messages are now more specific to give useful information
 * NetworkBook is able to connect with other apps and open links and emails
 * Keyboard shortcuts added for easy access to common commands
 * Undo/redo command to fix mistakes
-* Refinement of GUI to make it more aesthetically pleasing
+* Refinement of user interface to be more clean and usable
 
 ## Getting Started
 
@@ -77,16 +80,17 @@ You can use the create command to create a new contact. When creating a contact,
 Format: `create /name [name] /phone [phone] /email [email] /link [link] /grad [semester of graduation] /course [course] /spec [specialisation] /priority [high/medium/low] /tag [tag]`
 
 Parameters:
+
 * `[name]`  is the name of the contact you wish to add.
 * `[options]` are the non-mandatory fields you can associate with the contact at the point of creation. The fields can also be added using the add command.
 
 When adding a contact, if there is already another contact with the same name, you would be informed that another contact with the same name already exists (not case sensitive)
 
 Example usage:
-* `create /name Jiale`
-* `create /name Jiale /phone 12345678 /grad AY2526-S2`
 
-![create command](images/create/create.png)
+* `create /name Jiale /phone 12345678 /grad AY2526-S2`
+    ![create command](images/create/create.png)
+* `create /name Jiale`
 
 [Table of Contents](#table-of-contents)
 
@@ -94,7 +98,8 @@ Example usage:
 
 You can add a contact detail to an existing contact. No new contact will be created.
 
-Format: 
+Format:
+
 * Add phone: `add [index] /phone [phone]`
 * Add email: `add [index] /email [email]`
 * Add link: `add [index] /link [link]`
@@ -105,9 +110,10 @@ Format:
 * Add tag: `add [index] /tag [tag name]`
 
 Parameters:
+
 * `[index]` is the index of the contact in the list.
 * `[phone]` is a valid phone number (should be all numeric characters).
-* `[email]` is a valid email (`@` (at sign) must be present, 
+* `[email]` is a valid email (`@` (at sign) must be present,
 and `.` (period) must be present after `@` (at sign)).
 * `[link]` is a valid URL linking to a contact’s social media page.
 * `[grad]` is a valid graduation date, in the format `AYxxxx-Sy`.
@@ -122,7 +128,9 @@ and `.` (period) must be present after `@` (at sign)).
 * `[tag name]` is the name of the tag to associate the contact with
 
 Example usage:
+
 * `add 1 /phone 91234567`
+    ![add phone](images/add-remark/add-phone.png)
 * `add 3 /email nknguyentdn@gmail.com`
 * `add 1 /link https://nknguyenhc.github.io/`
 * `add 3 /grad AY2223-S1`
@@ -130,8 +138,6 @@ Example usage:
 * `add 3 /spec Robotics & AI`
 * `add 1 /priority high`
 * `add 1 /tag data analyst`
-
-![add phone](images/add-remark/add-phone.png)
 
 [Table of Contents](#table-of-contents)
 
@@ -142,6 +148,7 @@ Example usage:
 You can edit contact details of existing contacts in your book.
 
 Format:
+
 * Edit name: `edit [index of contact] /name [name]`
 * Edit phone: `edit [index of contact] /phone [phone] /index [index of phone]`
 * Edit email: `edit [index of contact] /email [email] /index [index of email]`
@@ -153,6 +160,7 @@ Format:
 * Edit tag: `edit [index of contact] /tag [tag name]`
 
 Parameters:
+
 * `[index of contact]` is the index of the contact in the list.
 * `[phone]` is a valid phone number (should be all numeric characters).
 * `[index of phone]` is the index of the phone number in the phone list of the contact.
@@ -173,6 +181,9 @@ and `.` (period) must be present after `@` (at sign)).
 * `[index of tag]` is the index of the tag in the tag list of the contact.
 
 Example usage:
+
+* `edit 3 /priority low`
+    ![update success](images/edit/edit.png)
 * `edit 1 /name nkn`
 * `edit 2 /phone 10938472 /index 1`
 * `edit 3 /email nkn@gmail.com /index 3`
@@ -180,14 +191,11 @@ Example usage:
 * `edit 3 /grad AY2324-S1`
 * `edit 2 /course CS2101 /index 2`
 * `edit 1 /spec algorithms /index 3`
-* `edit 3 /priority high`
 * `edit 1 /tag working in Meta /index 2`
-
-![update success](images/edit/edit.png)
 
 [Table of Contents](#table-of-contents)
 
-#### Delete a contact: `delete [index]` 
+#### Delete a contact: `delete [index]`
 
 You can remove a contact from your NetworkBook using the `delete` command, 
 
@@ -201,27 +209,26 @@ Parameters:
 
 Example usage:
 
+* `delete 6`
+    ![delete](images/delete/delete.png)
 * `delete 1`
-* `delete 16`
-
-![delete](images/delete/delete.png)
 
 [Table of Contents](#table-of-contents)
 
-#### Delete some details: `delete [index of contact] [options]` 
+#### Delete some details: `delete [index of contact] [options]`
 
 You can also remove some information about a contact that you previously recorded.
 
 Format:
 
-- Delete phone: `delete [index of contact] /phone /index [index of phone]`
-- Delete email: `delete [index of contact] /email /index [index of email]`
-- Delete link: `delete [index of contact] /link /index [index of link]`
-- Delete graduation semester: `delete [index of contact] /grad`
-- Delete course: `delete [index of contact] /course /index [index of course]`
-- Delete specialisation: `delete [index of contact] /spec /index [index of specialisation]`
-- Delete priority: `delete [index of contact] /priority`
-- Delete tag: `delete [index of contact] /tag /index [index of tag]`
+* Delete phone: `delete [index of contact] /phone /index [index of phone]`
+* Delete email: `delete [index of contact] /email /index [index of email]`
+* Delete link: `delete [index of contact] /link /index [index of link]`
+* Delete graduation semester: `delete [index of contact] /grad`
+* Delete course: `delete [index of contact] /course /index [index of course]`
+* Delete specialisation: `delete [index of contact] /spec /index [index of specialisation]`
+* Delete priority: `delete [index of contact] /priority`
+* Delete tag: `delete [index of contact] /tag /index [index of tag]`
 
 Parameters:
 
@@ -250,13 +257,14 @@ You can use the `find` command to search for contacts by their name if you wish 
 Format: `find [name]`
 
 Parameters:
+
 * `[name]` is a term found in the names of the contacts you wish to find.
 
 Example usage:
-* `find Jack`
-* `find Kai Jie`
 
-![search](images/find/search-success.png)
+* `find Dav`
+    ![search](images/find/find.png)
+* `find Kai Jie`
 
 [Table of Contents](#table-of-contents)
 
@@ -271,6 +279,7 @@ Parameters
 * `[field]` is the information to sort by.
 
     List of options:
+
     * `name` - Sort alphabetically by contact name
     * `grad` - Sort chronologically by graduation year
     * `priority` - Sort by priority
@@ -279,16 +288,16 @@ Parameters
 * `[order]` (optional) is the order to sort in. If not specified, defaults to ascending.
 
     List of options:
+
     * `asc`/`ascending` - Sort in ascending order
     * `desc`/`descending` - Sort in descending order
 
 Example usage:
 
-* `sort /by grad /order asc`
-* `sort /by name /order descending`
+* `sort /by grad /order desc`
+    ![sort](images/sort/sort.png)
+* `sort /by name /order ascending`
 * `sort /by name`
-
-![sort](images/sort/sort.png)
 
 [Table of Contents](#table-of-contents)
 
@@ -305,6 +314,7 @@ Parameters
 * `[field]` is the information to filter by
 
     List of options:
+
     * `course` - Filter to contacts whose courses contain one
     one of the terms
     * `tag` - Filter to contacts whose tags contain one
@@ -320,18 +330,18 @@ specified above.
 out contacts who have finished the course.
 
     List of options:
+
     * `true` - Remove contacts that have finished taking the course.
     * `false` - (default). Include contacts who have finished taking the course.
 
 Example usage:
 
+* `filter /by tag /with friend colleague`
+    ![filter](images/filter/filter.png)
 * `filter /by course /with computer /taken true`
 * `filter /by course /with robotics`
-* `filter /by tag /with friend colleague`
 * `filter /by spec /with Industry AI`
 * `filter /by grad /with 2022 2023 2024 2025`
-
-![filter](images/filter/filterSuccess.PNG)
 
 [Table of Contents](#table-of-contents)
 
@@ -346,6 +356,7 @@ Format: `undo`
 Parameters: N/A
 
 Example usage:
+
 * `undo`
 
 [Table of Contents](#table-of-contents)
@@ -379,10 +390,10 @@ Parameters:
 
 Example usage:
 
+* `open 3 /index 2`
+    ![open link success](images/open/open-link.png)
+    **Note:** The web browser used will be your computer's default web browser.
 * `open 1`
-* `open 1 /index 2`
-
-![open link success](images/open/open-link.png)
 
 [Table of Contents](#table-of-contents)
 
@@ -400,9 +411,9 @@ Parameters:
 Example usage:
 
 * `email 1`
+    ![open email success](images/open/open-email.png)
+    **Note:** The email app used will be your computer's default email app.
 * `email 1 /index 2`
-
-![open email success](images/open/open-email.png)
 
 [Table of Contents](#table-of-contents)
 
@@ -412,15 +423,11 @@ Example usage:
 
 When typing in the command box and the command box is empty, you can use the following shortcuts to auto-fill the first word of some commands:
 
-`ctrl-F`: auto-fill with `find`
-
-`ctrl-N`: auto-fill with `create`
-
-`ctrl-G`: auto-fill with `edit`
-
-`ctrl-U`: auto-fill with `undo`
-
-`ctrl-R`: auto-fill with `redo`
+* `ctrl-F`: auto-fill with `find`
+* `ctrl-N`: auto-fill with `create`
+* `ctrl-G`: auto-fill with `edit`
+* `ctrl-U`: auto-fill with `undo`
+* `ctrl-R`: auto-fill with `redo`
 
 [Table of Contents](#table-of-contents)
 
@@ -428,23 +435,21 @@ When typing in the command box and the command box is empty, you can use the fol
 
 When typing in the command box, you can use the arrow keys to fill the command box with a previous executed command.
 
-`Up arrow key`: navigate back to the previous command in the history, if any
-
-`	Down arrow key`: navigate forth to the next command in the history, if any
+* `Up arrow key`: navigate back to the previous command in the history, if any.
+* `Down arrow key`: navigate forth to the next command in the history, if any.
 
 [Table of Contents](#table-of-contents)
 
 #### Undo/redo last change: `ctrl-Z/Y`
 
-When not typing in the command box, you can use the following shortcuts to quickly execute an `undo` or `redo` command. 
+When not typing in the command box, you can use the following shortcuts to quickly execute an `undo` or `redo` command.
 
-`ctrl-Z`: undo last change to NetworkBook
-
-`ctrl-Y`: redo last change undone
+* `ctrl-Z`: undo last change to NetworkBook
+* `ctrl-Y`: redo last change undone
 
 Note that this only works when the command box is not active. If you are typing in the command box, these shortcuts will be used to undo or redo changes made to the command text.
 
- [Table of Contents](#table-of-contents)
+[Table of Contents](#table-of-contents)
 
 #### Other useful shortcuts: `ctrl-S/W`
 
@@ -452,13 +457,13 @@ You can use `ctrl-S` to save the contact details in the data file. Although data
 
 You can also use `ctrl-W` to quickly exit the program.
 
- [Table of Contents](#table-of-contents)
+[Table of Contents](#table-of-contents)
 
 ### <u>Category 6 - Mouse interaction</u>
 
 While NetworkBook is optimised for use with keyboards and text commands, it also has buttons you can click to do certain tasks if you prefer. These buttons function the same as the equivalent commands, so you can use your preferred method.
 
-#### Filter (equivalent to [`filter` command](#filter-contacts-list))
+#### Filter (equivalent to [`filter` command](#filter-contacts-list-filter-by-field-with-term))
 
 You can click on a contact's tag, course, graduation, or specialisation to view all contacts with the same tag/course/graduation/specialisation.
 
@@ -476,41 +481,41 @@ You can click on a contact's email address to email them.
 
 | Command    | Prefixes                                                                                                                                                                                                                       | Format and examples                                                                                                                                                                                                                                                                                                                                                                                                                               | What it does                                                 |
 |------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------| ------------------------------------------------------------ |
-| **create** | `/name` <br> `[/phone]` <br/> `[/email] `<br/> `[/link]` <br/>  `[/course]` <br/> `[/spec]` <br/>`[/grad]` <br/> `[/priority]` <br/> `[/tag]`                                                                                  | `create /name [name] [/optional fields]` <br><br> e.g., `create /name Oreki` <br> `create /name Ness /phone +6598765432 /grad AY2526-S2`                                                                                                                                                                                                                                                                                                          | Creates a new contact in NetworkBook. <br><br> If optional fields are provided, their values will be added to the contact. |
-| **add**    | `[/phone]`  <br>`[/email]` <br> `[/link]` <br> `[/course]` <br> `[/spec]` <br> `[/grad]` <br>`[/priority]` <br> `[/tag]`                                                                                                       | `add [index] /phone [phone]` <br>`add [index] /email [email]`<br/>`add [index] /link [link]`<br/>`add [index] /course [course]`<br/>`add [index] /spec [specialisation]`<br/>`add [index] /grad [semester of graduation]`<br>`add [index] /priority [priority]`<br>`add [index] /tag [tag]`<br><br> e.g., `add 2 /email test@example.com` <br/>`add 1 /link https://nknguyenhc.github.io/`<br/>`add 1 /grad AY2223-S1` <br>`add 1 /priority high` | Adds information to a contact.                               |
-| **edit**   | Single-valued fields: <br>`[/name]` <br/> `[/grad]` <br/>`[/priority]`<br><br>Multi-valued fields which support `[/index]`: <br> `[/phone]`  <br/>`[/email]` <br/> `[/link]` <br/> `[/course]` <br/> `[/spec]`  <br/> `[/tag]` | Single-valued fields: <br> `edit [index of contact] /field [new value]` <br/><br/> e.g., `edit 1 /name Nguyen` <br/> `edit 1 /grad AY2627-S1` <br><br> Multi-valued fields: <br> `edit [index of contact] /field [new value] /index [index of old value]`<br/> <br/>e.g., `edit 1 /email aaa@gmail.com /index 1` <br> `edit 1 /course CS2109S /index 1`                                                                                           | Edits information about a contact.                           |
-| **delete** | N/A                                                                                                                                                                                                                            | `delete [index]`<br/><br>e.g., `delete 1`                                                                                                                                                                                                                                                                                                                                                                                                         | Deletes a contact from NetworkBook.                          |
-| **delete** | Single-valued fields:  <br/> `[/grad]` <br/>`[/priority]`<br/><br/>Multi-valued fields which support `[/index]`: <br/> `[/phone]`  <br/>`[/email]` <br/> `[/link]` <br/> `[/course]` <br/> `[/spec]`  <br/> `[/tag]`           | Single-valued fields: <br/> `delete [index of contact] /field`<br><br>e.g. `delete 1 /priority`<br><br>Multi-valued fields: <br/>`delete [index of contact] /field` (default to index 1) <br>`delete [index of contact] /field /index [index of entry to delete]`<br><br>e.g. `delete 2 /spec`<br>`delete 3 /email /index 2`                                                                                                                      | Deletes some details of a contact.                           |
-| **find**   | N/A                                                                                                                                                                                                                            | `find [name]` <br/><br> e.g., `find Ness`                                                                                                                                                                                                                                                                                                                                                                                                         | Searches for contacts by name.                               |
-| **sort**   | `/by` <br> `[/order]`                                                                                                                                                                                                          | `sort /by [field] /order [order]`<br/><br>e.g., `sort /by priority /order desc`                                                                                                                                                                                                                                                                                                                                                                   | Sorts contacts by a field.                                   |
-| **filter** | `/by` <br> `/with` <br> `[/taken]`                                                                                                                                                                                             | `filter /by [field] /with [term]` <br/><br>e.g. `filter /by course /with abc` <br>`filter /by tag /with banker` <br><br> For course: <br> `filter /by course /with [term] [/taken true/false]` <br>e.g. `filter /by course /with abg /taken false`                                                                                                                                                                                                |                                                              |
-| **undo**   | N/A                                                                                                                                                                                                                            | `undo`                                                                                                                                                                                                                                                                                                                                                                                                                                            | Undoes the last change to the NetworkBook's full list of contacts and/or list of displayed contacts. |
-| **redo**   | N/A                                                                                                                                                                                                                            | `redo`                                                                                                                                                                                                                                                                                                                                                                                                                                            | Redoes the last change to the NetworkBook's full list of contacts and/or list of displayed contacts. |
-| **open** | `[/index]` | `open [index] /index [link index]` <br/> e.g., `open 1` <br/> e.g., `open 1 /index 2` | Open a contact's link in the default browser. |
-| **email** | `[/index]` | `email [index] /index [email index]` <br/> e.g., `email 1` <br/> e.g., `email 1 /index 2` | Open default mailbox to compose a new email to a contact's email address. |
+| [**create**](#create-new-contact-create-name-name-options)                         | `/name` <br> `[/phone]` <br/> `[/email] `<br/> `[/link]` <br/>  `[/course]` <br/> `[/spec]` <br/>`[/grad]` <br/> `[/priority]` <br/> `[/tag]`                                                                                  | `create /name [name] [/optional fields]` <br><br> e.g., `create /name Oreki` <br> `create /name Ness /phone +6598765432 /grad AY2526-S2`                                                                                                                                                                                                                                                                                                          | Creates a new contact in NetworkBook. <br><br> If optional fields are provided, their values will be added to the contact. |
+| [**add**](#add-details-to-contact-add-index-phone)                                 | `[/phone]`  <br>`[/email]` <br> `[/link]` <br> `[/course]` <br> `[/spec]` <br> `[/grad]` <br>`[/priority]` <br> `[/tag]`                                                                                                       | `add [index] /phone [phone]` <br>`add [index] /email [email]`<br/>`add [index] /link [link]`<br/>`add [index] /course [course]`<br/>`add [index] /spec [specialisation]`<br/>`add [index] /grad [semester of graduation]`<br>`add [index] /priority [priority]`<br>`add [index] /tag [tag]`<br><br> e.g., `add 2 /email test@example.com` <br/>`add 1 /link https://nknguyenhc.github.io/`<br/>`add 1 /grad AY2223-S1` <br>`add 1 /priority high` | Adds information to a contact.                               |
+| [**edit**](#edit-contact-detail--edit-index-options)                               | Single-valued fields: <br>`[/name]` <br/> `[/grad]` <br/>`[/priority]`<br><br>Multi-valued fields which support `[/index]`: <br> `[/phone]`  <br/>`[/email]` <br/> `[/link]` <br/> `[/course]` <br/> `[/spec]`  <br/> `[/tag]` | Single-valued fields: <br> `edit [index of contact] /field [new value]` <br/><br/> e.g., `edit 1 /name Nguyen` <br/> `edit 1 /grad AY2627-S1` <br><br> Multi-valued fields: <br> `edit [index of contact] /field [new value] /index [index of old value]`<br/> <br/>e.g., `edit 1 /email aaa@gmail.com /index 1` <br> `edit 1 /course CS2109S /index 1`                                                                                           | Edits information about a contact.                           |
+| [**delete**](#delete-a-contact-delete-index)                                       | N/A                                                                                                                                                                                                                            | `delete [index]`<br/><br>e.g., `delete 1`                                                                                                                                                                                                                                                                                                                                                                                                         | Deletes a contact from NetworkBook.                          |
+| [**delete**](#delete-some-details-delete-index-of-contact-options)                 | Single-valued fields:  <br/> `[/grad]` <br/>`[/priority]`<br/><br/>Multi-valued fields which support `[/index]`: <br/> `[/phone]`  <br/>`[/email]` <br/> `[/link]` <br/> `[/course]` <br/> `[/spec]`  <br/> `[/tag]`           | Single-valued fields: <br/> `delete [index of contact] /field`<br><br>e.g. `delete 1 /priority`<br><br>Multi-valued fields: <br/>`delete [index of contact] /field` (default to index 1) <br>`delete [index of contact] /field /index [index of entry to delete]`<br><br>e.g. `delete 2 /spec`<br>`delete 3 /email /index 2`                                                                                                                      | Deletes some details of a contact.                           |
+| [**find**](#find-a-contact-find-name)                                              | N/A                                                                                                                                                                                                                            | `find [name]` <br/><br> e.g., `find Ness`                                                                                                                                                                                                                                                                                                                                                                                                         | Searches for contacts by name.                               |
+| [**sort**](#sort-contacts-list-sort-by-field-name-order-ascdesc)                   | `/by` <br> `[/order]`                                                                                                                                                                                                          | `sort /by [field] /order [order]`<br/><br>e.g., `sort /by priority /order desc`                                                                                                                                                                                                                                                                                                                                                                   | Sorts contacts by a field.                                   |
+| [**filter**](#filter-contacts-list-filter-by-field-with-term)                      | `/by` <br> `/with` <br> `[/taken]`                                                                                                                                                                                             | `filter /by [field] /with [term]` <br/><br>e.g. `filter /by course /with abc` <br>`filter /by tag /with banker` <br><br> For course: <br> `filter /by course /with [term] [/taken true/false]` <br>e.g. `filter /by course /with abg /taken false`                                                                                                                                                                                                |                                                              |
+| [**undo**](#undo-last-change-to-networkbook-undo)                                  | N/A                                                                                                                                                                                                                            | `undo`                                                                                                                                                                                                                                                                                                                                                                                                                                            | Undoes the last change to the NetworkBook's full list of contacts and/or list of displayed contacts. |
+| [**redo**](#redo-last-undone-change-redo)                                          | N/A                                                                                                                                                                                                                            | `redo`                                                                                                                                                                                                                                                                                                                                                                                                                                            | Redoes the last change to the NetworkBook's full list of contacts and/or list of displayed contacts. |
+| [**open**](#open-a-contacts-link-open-index-index-link-index)                      | `[/index]` | `open [index] /index [link index]` <br/> e.g., `open 1` <br/> e.g., `open 1 /index 2` | Open a contact's link in the default browser. |
+| [**email**](#send-email-to-a-contacts-email-address-email-index-index-email-index) | `[/index]` | `email [index] /index [email index]` <br/> e.g., `email 1` <br/> e.g., `email 1 /index 2` | Open default mailbox to compose a new email to a contact's email address. |
 
 [Table of Contents](#table-of-contents)
 
 ## FAQ
 
-#### Launching NetworkBook 
+### Launching NetworkBook
 
 **Q:** How can I launch NetworkBook if the clicking on the JAR file does not work on my Windows computer? <br>
 **A:** If you are familiar with the command prompt, you can follow the steps below:
 
 1. Open command prompt on your computer
-2. Navigate to the directory where the JAR file is located using `cd [JAR file location]`
-3. Type `java -jar networkbook.jar` and press enter
-4. NetworkBook should launch
+1. Navigate to the directory where the JAR file is located using `cd [JAR file location]`
+1. Type `java -jar networkbook.jar` and press enter
+1. NetworkBook should launch
 
 If you have any further issues, please raise an issue on our [GitHub page](https://github.com/AY2324S1-CS2103T-T08-2/tp). We will attend to you as soon as we can.
 
-#### Checking Java version
+### Checking Java version
 
 **Q:** How can I check my Java version? <br>
 **A:** Open command prompt (Windows) or terminal (MacOS or Linux) on your computer, and type `java -version` . If you do not have Java installed, you can download it [here](https://www.oracle.com/java/technologies/downloads/#java11).
 
-#### Loading data from another device
+### Loading data from another device
 
 **Q:** How can I load my contacts stored in NetworkBook used in another device? <br>
 **A:** Locate the data file stored at `[JAR file location]/data/networkbook.json`. Copy over the data file to the corresponding location on your current device. After that, launch NetworkBook to check whether your contact details have been loaded properly.
