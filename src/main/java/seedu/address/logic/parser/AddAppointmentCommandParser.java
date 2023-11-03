@@ -4,15 +4,13 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_APPOINTMENT_TIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DOCTOR_IC;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PATIENT_IC;
-import static seedu.address.model.appointment.Appointment.FORMATTER;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeParseException;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.AddAppointmentCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.appointment.Appointment;
+import seedu.address.model.appointment.AppointmentTime;
 import seedu.address.model.person.Ic;
 
 /**
@@ -40,12 +38,8 @@ public class AddAppointmentCommandParser implements Parser<AddAppointmentCommand
 
         Ic patientIc = ParserUtil.parseIc(argMultimap.getValue(PREFIX_PATIENT_IC).get());
         Ic doctorIc = ParserUtil.parseIc(argMultimap.getValue(PREFIX_DOCTOR_IC).get());
-        LocalDateTime dateTime;
-        try {
-            dateTime = LocalDateTime.parse(argMultimap.getValue(PREFIX_APPOINTMENT_TIME).get(), FORMATTER);
-        } catch (DateTimeParseException e) {
-            throw new ParseException(e.getMessage());
-        }
+        AppointmentTime dateTime = ParserUtil.parseAppointmentTime(argMultimap.getValue(PREFIX_APPOINTMENT_TIME).get());
+
         Appointment appointment = new Appointment(doctorIc, patientIc, dateTime);
         return new AddAppointmentCommand(appointment);
     }

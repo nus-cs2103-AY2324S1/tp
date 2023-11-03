@@ -155,10 +155,10 @@ public class ModelManager implements Model {
 
     @Override
     public void addPerson(Person person) {
-        if (person instanceof Patient) {
+        if (person.isPatient()) {
             updateBackup();
             addressBook.addPatient((Patient) person);
-        } else if (person instanceof Doctor) {
+        } else if (person.isDoctor()) {
             updateBackup();
             addressBook.addDoctor((Doctor) person);
         }

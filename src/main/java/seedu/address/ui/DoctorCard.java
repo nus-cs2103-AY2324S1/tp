@@ -71,7 +71,7 @@ public class DoctorCard extends UiPart<Region> {
                 .sorted(Comparator.comparing(Appointment::getAppointmentTime))
                 .forEach(appointment -> {
                     Label appointmentLabel = new Label("Appointment with Patient: " + appointment.getPatient() + " at "
-                            + appointment.getAppointmentTime().format(Appointment.FORMATTER));
+                            + appointment.getAppointmentTime().toString());
                     appointmentLabel.setWrapText(true); // Enable text wrapping
                     appointmentLabel.setPrefWidth(250); // Set the maximum width for text wrapping (adjust as needed)
                     appointments.getChildren().add(appointmentLabel);

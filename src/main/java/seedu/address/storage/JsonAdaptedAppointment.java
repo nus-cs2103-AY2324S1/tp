@@ -1,14 +1,11 @@
 package seedu.address.storage;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
-
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.appointment.Appointment;
+import seedu.address.model.appointment.AppointmentTime;
 import seedu.address.model.person.Ic;
 
 /**
@@ -17,10 +14,8 @@ import seedu.address.model.person.Ic;
 class JsonAdaptedAppointment {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Appointment's %s field is missing!";
-    public static final String INVALID_FIELD_MESSAGE_FORMAT = "Appointment's %s field is invalid!";
     public static final String DUPLICATE_PATIENT_AND_DOCTOR_IC =
             "Appointment's doctor IC and patients IC are the same!";
-    private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
     private final String doctorIc;
     private final String patientIc;
     private final String appointmentTime;
@@ -46,7 +41,7 @@ class JsonAdaptedAppointment {
     public JsonAdaptedAppointment(Appointment source) {
         doctorIc = source.getDoctor().value;
         patientIc = source.getPatient().value;
-        appointmentTime = source.getAppointmentTime().format(formatter);
+        appointmentTime = source.getAppointmentTime().toString();
         status = source.getStatus();
     }
 
@@ -57,19 +52,15 @@ class JsonAdaptedAppointment {
         return status;
     }
 
-    public LocalDateTime checkAppointmentTime() throws IllegalValueException {
+    public AppointmentTime checkAppointmentTime() throws IllegalValueException {
         if (appointmentTime == null) {
             throw new IllegalValueException(
-                    String.format(MISSING_FIELD_MESSAGE_FORMAT, LocalDateTime.class.getSimpleName()));
+                    String.format(MISSING_FIELD_MESSAGE_FORMAT, AppointmentTime.class.getSimpleName()));
         }
-        LocalDateTime result;
-        try {
-            result = LocalDateTime.parse(appointmentTime, formatter);
-        } catch (DateTimeParseException e) {
-            throw new IllegalValueException(String.format(INVALID_FIELD_MESSAGE_FORMAT,
-                    LocalDateTime.class.getSimpleName()));
+        if (!AppointmentTime.isValidAppointmentTime(appointmentTime)) {
+            throw new IllegalValueException(AppointmentTime.MESSAGE_CONSTRAINTS);
         }
-        return result;
+        return new AppointmentTime(appointmentTime);
     }
 
     /**
@@ -100,7 +91,7 @@ class JsonAdaptedAppointment {
         }
         final Ic modelDoctor = checkIc(doctorIc);
         final Ic modelPatient = checkIc(patientIc);
-        final LocalDateTime modelAppointmentTime = checkAppointmentTime();
+        final AppointmentTime modelAppointmentTime = checkAppointmentTime();
         final String modelStatus = checkStatus();
         return new Appointment(modelDoctor, modelPatient, modelAppointmentTime, modelStatus);
     }

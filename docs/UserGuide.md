@@ -5,12 +5,12 @@ title: User Guide
 
 MediLink Contacts(MLC) is a **desktop app for managing patients and doctors details, optimized for use via a Command
 Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, MLC
-cang get your patients management tasks done faster than traditional GUI apps.
+can get your patients management tasks done faster than traditional GUI apps.
 
 ### Table of Contents
 
 * Table of Contents
-  {:toc}
+{:toc}
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -18,11 +18,11 @@ cang get your patients management tasks done faster than traditional GUI apps.
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-1. Download the latest `mediLink.jar` from [here](https://github.com/AY2324S1-CS2103T-T09-3/tp/releases).
+1. Download the latest `MediLink.jar` from [here](https://github.com/AY2324S1-CS2103T-T09-3/tp/releases).
 
 1. Copy the file to the folder you want to use as the _home folder_ for your MLC.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar medilink.jar` command
+1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar Medilink.jar` command
    to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
@@ -139,14 +139,14 @@ Format: `add-patient n/NAME ic/IC g/GENDER p/PHONE_NUMBER ec/EMERGENCY_CONTACT e
 
 Examples:
 
-* `add-patient n/John Doe ic/S9851386G g/M p/98765432 ec/90123456 e/johnd@example.com a/John street, block 123, #01-01 d/T0123456H c/pneumothorax b/O+`
-* `add-patient n/Betsy Crowe ic/S9851586G g/F p/98765433 e/betsycrowe@example.com a/#104-C, Wakanda St 42 t/High Priority pt/T0123556H`
+* `add-patient n/John Doe ic/S9851386G g/M p/98765432 ec/90123456 e/johnd@example.com a/John street, block 123, #01-01  c/pneumothorax b/O+`
+* `add-patient n/Betsy Crowe ic/S9851586G g/F p/98765433 ec/98765432 e/betsycrowe@example.com a/#104-C, Wakanda St 42 t/High Priority c/Flu b/O-`
 
 ### Creating an Appointment : `new-appt`
 
 Creates a new appointment for patients.
 
-Format: `new-appt pic/IC dic/IC time/yyyy-MM-dd HH:mm:ss`
+Format: `new-appt pic/IC dic/IC time/yyyy-MM-dd HH:mm`
 
 <div markdown="block" class="alert alert-info">
 **:information_source: Take Note:**<br>
@@ -160,7 +160,7 @@ Format: `new-appt pic/IC dic/IC time/yyyy-MM-dd HH:mm:ss`
 
 Examples:
 
-* `new-appt pic/T0123456H dic/S9851586G time/2023-10-30T13:00:00`
+* `new-appt pic/T0123456H dic/S9851586G time/2023-10-30 13:00`
 
 ### Deleting an Appointment : `delete-appt`
 
@@ -239,16 +239,17 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 * When searching names, only full words will be matched e.g. `Han` will not match `Hans`
 * When searching names, Persons matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
-* Other supported attributes like NRIC, Gender and Blood Type will only handle one query `KEYWORD`, anything afterward is discarded.
+* Other supported attributes like NRIC, Gender and Blood Type will only handle one query `KEYWORD`, anything afterward
+  is discarded.
 * Below we have supported attributes and their example `KEYWORD`.
 * It is recommended to use `list` to restore the view of all data after a `find` command
 
   | Attribute | Example keywords |
-  |-----------|-----------------|
+        |-----------|-----------------|
   | NRIC      | T1125957G       |
   | Gender    | M       |
-   | Blood Type | Blood Type A+   |
-     | Name | Travis Kelce
+  | Blood Type | Blood Type A+   |
+  | Name | Travis Kelce
 
 Examples:
 
@@ -284,7 +285,7 @@ Undoes the effect of the last command.
 
 Format: `undo`
 
-* Can only do upto 5 undos at any one time.
+* Can only do up to 5 undos at any one time.
 
 ### Redo last action : `redo`
 
@@ -292,7 +293,7 @@ Repeats the previous command; an `undo` for an `undo` command.
 
 Format: `redo`
 
-* Can only do upto 5 redos at any one time.
+* Can only do up to 5 redos at any one time.
 
 ### Adding / Deleting remarks : `remark`
 

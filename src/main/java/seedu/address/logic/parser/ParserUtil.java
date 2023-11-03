@@ -9,6 +9,7 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.appointment.AppointmentTime;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.BloodType;
 import seedu.address.model.person.Condition;
@@ -297,5 +298,18 @@ public class ParserUtil {
         requireNonNull(remark);
         String trimmedRemark = remark.trim();
         return new Remark(trimmedRemark);
+    }
+
+    /**
+     * Parses {@code String appointmentTime} into a {@code Appointment}.
+     * Leading and trailing whitespaces will be trimmed.
+     */
+    public static AppointmentTime parseAppointmentTime(String appointmentTime) throws ParseException {
+        requireNonNull(appointmentTime);
+        String trimmedAppointmentTime = appointmentTime.trim();
+        if (!AppointmentTime.isValidAppointmentTime(trimmedAppointmentTime)) {
+            throw new ParseException(AppointmentTime.MESSAGE_CONSTRAINTS);
+        }
+        return new AppointmentTime(trimmedAppointmentTime);
     }
 }

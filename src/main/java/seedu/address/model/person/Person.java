@@ -3,7 +3,6 @@ package seedu.address.model.person;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
@@ -11,6 +10,7 @@ import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.appointment.Appointment;
+import seedu.address.model.appointment.AppointmentTime;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -111,7 +111,7 @@ public abstract class Person {
      * @param dateTime the time of appointment to be checked.
      * @return true is this person has an appointment at the specified time.
      */
-    public boolean hasAppointmentAt(LocalDateTime dateTime) {
+    public boolean hasAppointmentAt(AppointmentTime dateTime) {
         requireNonNull(dateTime);
         // check from set of appointments
         for (Appointment a : appointments) {
