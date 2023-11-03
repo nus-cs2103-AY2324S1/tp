@@ -22,9 +22,12 @@ CheckMate is a **desktop app for streamlining the process of room bookings for h
 
 4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar checkmate.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![Ui](images/Ui.png) <- Replace this ANNABEL
+   ![LandingGUI](images/LandingGUI.png)
 
-5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+5. Clicking on a booking will allow you to see its details.
+   ![ClickBooking.png](images%2FClickBooking.png)
+
+6. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
     * `list` : Lists all bookings.
@@ -90,10 +93,13 @@ Format: `help`
 Adds a booking to the bookings book.
 
 Format: `add r/ROOM d/BOOKING_PERIOD n/NAME p/PHONE_NUMBER e/EMAIL rm/REMARK`
+![AddCommand.png](images%2FAddCommand.png)
 
 <div markdown="span" class="alert alert-primary">:bulb: **Note:**
-The room number is used to assign the room type
+The room number is used to assign the room type.
 </div>
+
+* Image above shows result of command `add r/1 d/2023-01-01 08:00 to 2023-01-02 12:00 n/John Doe p/98765432 e/johnd@example.com`
 
 Examples:
 * `add r/1 d/2023-01-01 08:00 to 2023-01-02 12:00 n/John Doe p/98765432 e/johnd@example.com`
@@ -105,12 +111,19 @@ Shows a list of all bookings in the bookings book.
 
 Format: `list`
 
+![ListCommand.png](images%2FListCommand.png)
+
+* Example image above shows result of command `list`
+
 ### Editing a booking : `edit`
 
 Edits an existing booking in the bookings book.
 
 Format: `edit INDEX [r/ROOM] [d/BOOKING_PERIOD] [n/NAME] [p/PHONE] [e/EMAIL]`
 
+![EditCommand.png](images%2FEditCommand.png)
+
+* Example image above shows result of command `edit 1 p/91234567 e/johndoe@example.com`
 * Edits the booking at the specified `INDEX`. The index refers to the index number shown in the displayed booking list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
@@ -125,6 +138,9 @@ Finds bookings whose bookings contain the room, name, or both.
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
+![FindCommand.png](images%2FFindCommand.png)
+
+* Example image above shows result of command `find 1`
 * The search is case-insensitive. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 * Only the name and room is searched.
@@ -143,6 +159,9 @@ Deletes the specified booking from the bookings book.
 
 Format: `delete INDEX ...`
 
+![DeleteCommand.png](images%2FDeleteCommand.png)
+
+* Example image above shows result of command `delete 2`
 * Deletes the booking at the specified `INDEX`.
 * The index refers to the index number shown in the displayed booking list.
 * The index **must be a positive integer** 1, 2, 3, …
@@ -158,7 +177,38 @@ Reverts the most recent deletion.
 
 Format: `undo`
 
+![UndoCommand.png](images%2FUndoCommand.png)
+
+* Example image above shows the result of command `undo`
 * Adds the most recently deleted booking back to the system.
+
+### Flagging an entry: `flag`
+
+Flags a booking that requires attention.
+
+Format: `flag INDEX`
+
+![FlagCommand.png](images%2FFlagCommand.png)
+
+* Example image above shows the result of command `flag 3`
+* Flagged booking will move to the top portion of the list.
+* The index refers to the index number shown in the displayed booking list.
+* Index must be a positive integer.
+* Only one entry can be flagged at a time.
+
+### Unflagging an entry: `unflag`
+
+Unflags a booking that no longer requires attentiobn.
+
+Format `unflag INDEX`
+
+* Example image above shows the result of command `unflag 1`
+* Unflagged booking will move to the bottom portion of the list.
+* The index refers to the index number shown in the displayed booking list.
+* Index must be a positive integer.
+* Only one entry can be unflagged at a time.
+
+![UnflagCommand.png](images%2FUnflagCommand.png)
 
 ### Clearing all entries : `clear`
 
@@ -166,11 +216,17 @@ Clears all entries from the bookingPeriod book.
 
 Format: `clear`
 
+![ClearCommand.png](images%2FClearCommand.png)
+
+* Example image above shows the result of command `clear`
+
 ### Exiting the program : `exit`
 
 Exits the program.
 
 Format: `exit`
+
+* The window will close automatically on command `exit`
 
 ### Saving the data
 
@@ -209,14 +265,14 @@ Example:
 
 ## Commands Summary
 
-Action | Format, Examples
---------|------------------
-**Add** | `add r/ROOM d/BOOKING_PERIOD n/NAME p/PHONE_NUMBER e/EMAIL rm/REMARK` <br> e.g., `add r/1 d/2023-01-01 to 2023-01-02 n/James Ho p/22224444 e/jamesho@example.com rm/Extra Towels`
-**Clear** | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Undo** | `undo`
-**Edit** | `edit INDEX [r/ROOM] [d/BOOKING _PERIOD] [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [rm/REMARK] [t/TAG]…​`<br> e.g.,`edit 2 r/2 d/2023-01-01 to 2023-01-02 n/James Lee e/jameslee@example.com`
-**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find 1`
-**List** | `list`
-**Help** | `help`
-**Exit** | `exit`
+| Action     | Format, Examples                                                                                                                                                                        |
+|------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**    | `add r/ROOM d/BOOKING_PERIOD n/NAME p/PHONE_NUMBER e/EMAIL rm/REMARK` <br> e.g., `add r/1 d/2023-01-01 to 2023-01-02 n/James Ho p/22224444 e/jamesho@example.com rm/Extra Towels`       |
+| **Clear**  | `clear`                                                                                                                                                                                 |
+| **Delete** | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                     |
+| **Undo**   | `undo`                                                                                                                                                                                  |
+| **Edit**   | `edit INDEX [r/ROOM] [d/BOOKING _PERIOD] [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [rm/REMARK] [t/TAG]…​`<br> e.g.,`edit 2 r/2 d/2023-01-01 to 2023-01-02 n/James Lee e/jameslee@example.com` |
+| **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find 1`                                                                                                                                       |
+| **List**   | `list`                                                                                                                                                                                  |
+| **Help**   | `help`                                                                                                                                                                                  |
+| **Exit**   | `exit`                                                                                                                                                                                  |
