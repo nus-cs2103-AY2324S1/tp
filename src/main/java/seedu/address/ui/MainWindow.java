@@ -33,7 +33,9 @@ public class MainWindow extends UiPart<Stage> {
 
     // Independent Ui parts residing in this Ui container
     private EmployeeListPanel employeeListPanel;
+    private DepartmentListPanel departmentListPanel;
     private ProfileDetails profileDetails;
+    private DepartmentDetails departmentDetails;
     private Sidebar sidebar;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
@@ -45,13 +47,13 @@ public class MainWindow extends UiPart<Stage> {
     private MenuItem helpMenuItem;
 
     @FXML
-    private StackPane profileDetailsPlaceholder;
+    private StackPane detailsPlaceholder;
 
     @FXML
     private StackPane sidebarPlaceholder;
 
     @FXML
-    private StackPane employeeListPanelPlaceholder;
+    private StackPane listPanelPlaceholder;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
@@ -119,14 +121,19 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        sidebar = new Sidebar();
-        sidebarPlaceholder.getChildren().add(sidebar.getRoot());
-
         profileDetails = new ProfileDetails();
-        profileDetailsPlaceholder.getChildren().add(profileDetails.getRoot());
+        detailsPlaceholder.getChildren().add(profileDetails.getRoot());
+
+        departmentDetails = new DepartmentDetails();
 
         employeeListPanel = new EmployeeListPanel(logic.getFilteredEmployeeList(), profileDetails);
-        employeeListPanelPlaceholder.getChildren().add(employeeListPanel.getRoot());
+        listPanelPlaceholder.getChildren().add(employeeListPanel.getRoot());
+
+        departmentListPanel = new DepartmentListPanel(logic.getDepartmentList(), departmentDetails);
+
+        sidebar = new Sidebar(listPanelPlaceholder, employeeListPanel, departmentListPanel,
+                detailsPlaceholder, profileDetails, departmentDetails);
+        sidebarPlaceholder.getChildren().add(sidebar.getRoot());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());

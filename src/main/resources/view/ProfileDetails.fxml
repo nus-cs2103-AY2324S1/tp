@@ -6,7 +6,6 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.RowConstraints?>
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.FlowPane?>
@@ -38,7 +37,7 @@
             </ImageView>
             <VBox spacing="15" alignment="CENTER_LEFT">
                 <Label fx:id="name" text="" styleClass="cell_big_label"/>
-                <FlowPane fx:id="departments"/>
+                <FlowPane fx:id="listView"/>
             </VBox>
         </HBox>
 

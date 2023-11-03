@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.control.Separator?>
+
+<HBox id="departmentDetails" fx:id="departmentDetails" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+    <GridPane VBox.vgrow="ALWAYS" vgap="15">
+        <columnConstraints>
+            <ColumnConstraints hgrow="ALWAYS" />
+        </columnConstraints>
+        <rowConstraints>
+            <RowConstraints vgrow="NEVER"/>
+        </rowConstraints>
+
+        <!-- Row 0 -->
+        <HBox spacing="40" alignment="TOP_LEFT" GridPane.rowIndex="0">
+            <ImageView HBox.hgrow="NEVER">
+                <image>
+                    <Image url="@/images/phonebook_icon.png"/>
+                </image>
+                <fitWidth>60</fitWidth>
+                <fitHeight>60</fitHeight>
+            </ImageView>
+            <VBox spacing="15" alignment="CENTER_LEFT">
+                <Label fx:id="name" text="" styleClass="cell_big_label"/>
+                <FlowPane fx:id="listView"/>
+            </VBox>
+        </HBox>
+    </GridPane>
+</HBox>

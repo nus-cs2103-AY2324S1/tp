@@ -47,14 +47,14 @@
             <!-- Upper container -->
             <HBox VBox.vgrow="ALWAYS">
               <!-- Scrollable List -->
-              <VBox fx:id="employeeList" styleClass="pane-with-border" minWidth="320" prefWidth="320" VBox.vgrow="ALWAYS">
+              <VBox fx:id="variableList" styleClass="pane-with-border" minWidth="320" prefWidth="320" VBox.vgrow="ALWAYS">
                 <padding>
                   <Insets top="10" right="10" bottom="10" left="10"/>
                 </padding>
-                <StackPane fx:id="employeeListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
+                <StackPane fx:id="listPanelPlaceholder" VBox.vgrow="ALWAYS"/>
               </VBox>
               <!-- Selected Profile -->
-              <StackPane fx:id="profileDetailsPlaceholder" styleClass="pane-with-border" VBox.vgrow="ALWAYS" HBox.hgrow="ALWAYS">
+              <StackPane fx:id="detailsPlaceholder" styleClass="pane-with-border" VBox.vgrow="ALWAYS" HBox.hgrow="ALWAYS">
                 <padding>
                   <Insets top="40" right="30" bottom="40" left="30" />
                 </padding>

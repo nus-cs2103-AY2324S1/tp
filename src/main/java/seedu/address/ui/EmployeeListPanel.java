@@ -41,7 +41,8 @@ public class EmployeeListPanel extends UiPart<Region> {
         employeeListView.setOnMouseClicked(event -> {
             if (event.getClickCount() == 2) {
                 selectionEmployeeList.clearSelection();
-                this.profileDetails.updateDetails(null);
+                Employee nullEmployee = null;
+                this.profileDetails.updateDetails(nullEmployee);
             }
         });
     }
