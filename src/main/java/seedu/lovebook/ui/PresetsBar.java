@@ -51,7 +51,7 @@ public class PresetsBar extends UiPart<Region> {
      */
     @FXML
     public void handleEditD() {
-        commandBox.setCommandTextField("edit INDEX age/AGE gender/GENDER "
+        commandBox.setCommandTextField("edit INDEX name/NAME age/AGE gender/GENDER "
                 + "height/HEIGHT income/INCOME horoscope/HOROSCOPE");
     }
 
