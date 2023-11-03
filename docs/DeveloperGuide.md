@@ -289,8 +289,26 @@ Assume that the user just added a `Meeting` which is a subtype of `Event`. They 
 
 This shows how the Models are stored for use in the program.
 
+### Ability to delete persons
 
+This section explains the implementation of the Delete Task feature via the `delete_person` command. The `DeletePersonCommand` causes the specified `Task` identified using the `Index` to be deleted from the Unique Person List in the application. There is one compulsory field which is the Index of the Task to delete.
 
+Below is the sequence diagram outlining the execution of `DeletePersonCommand`.
+
+![DeletePersonCommand Sequence Diagram](images/DeletePersonSequenceDiagram.png)
+
+Step 1:
+The `LogicManager` invokes `DeletePersonCommand::execute`, which in turn calls `Model::deletePerson`.
+
+Step 2:
+The `Model` will invoke `removePerson` in `AddressBook`, which in turn calls `remove` in `UniquePersonList` to remove it from the list.
+
+Step 3:
+The `DeletePersonCommand` then continues its execution as defined by [this](#parser-commands) sequence diagram.
+
+### Design Considerations:
+**Aspect: How we execute the DeletePersonCommand:**
+Similar to the `AddPersonCommand`, the main considerations for this command is related to the way that the model is stored.
 
 ### Ability to track events
 

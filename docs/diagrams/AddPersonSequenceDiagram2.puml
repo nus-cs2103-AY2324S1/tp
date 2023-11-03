@@ -15,13 +15,13 @@ participant ":UniquePersonList" as UniquePersonList MODEL_COLOR_T3
 [-> AddPersonCommand : execute()
 activate AddPersonCommand
 
-AddPersonCommand -> Model : addPerson(...)
+AddPersonCommand -> Model : addPerson(person)
 activate Model
 
-Model -> AddressBook : addPerson(...)
+Model -> AddressBook : addPerson(person)
 activate AddressBook
 
-AddressBook -> UniquePersonList : add(...)
+AddressBook -> UniquePersonList : add(person)
 activate UniquePersonList
 
 UniquePersonList ---> AddressBook
