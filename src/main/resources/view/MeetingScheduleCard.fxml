@@ -27,9 +27,8 @@
           </minWidth>
         </Label>
         <Label fx:id="title" styleClass="cell_big_label" text="\$first" wrapText="true" />
-      </HBox>
-      <HBox alignment="CENTER_RIGHT" spacing="5">
-        <Label fx:id="status" />
+        <Region HBox.hgrow="ALWAYS"/>
+        <Label fx:id="status" styleClass="cell_status_label" />
       </HBox>
       <FlowPane fx:id="tags" />
       <HBox alignment="CENTER_LEFT" spacing="5">
