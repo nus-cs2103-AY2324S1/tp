@@ -31,6 +31,8 @@ public class ProfileDetails extends UiPart<Region> {
     @FXML
     private FlowPane listView;
     @FXML
+    private FlowPane roleLarge;
+    @FXML
     private Label leave;
     @FXML
     private FlowPane listSupervisors;
@@ -60,6 +62,7 @@ public class ProfileDetails extends UiPart<Region> {
             email.setText(employee.getEmail().value);
             salary.setText(employee.getSalary().value);
             listView.getChildren().clear();
+            roleLarge.getChildren().clear();
             listSupervisors.getChildren().clear();
             leave.setText(employee.getLeave().value);
             employee.getDepartments().stream()
@@ -68,6 +71,7 @@ public class ProfileDetails extends UiPart<Region> {
             employee.getSupervisors().stream()
                     .sorted(Comparator.comparing(supervisor -> supervisor.fullName))
                     .forEach(supervisor -> listSupervisors.getChildren().add(new Label(supervisor.fullName)));
+            roleLarge.getChildren().add(new Label(employee.getRole().toString()));
             this.getRoot().setVisible(true);
         }
     }

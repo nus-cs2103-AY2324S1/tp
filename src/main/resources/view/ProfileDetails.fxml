@@ -43,6 +43,7 @@
             </ImageView>
             <VBox spacing="15" alignment="CENTER_LEFT">
                 <Label fx:id="name" text="" styleClass="cell_big_label"/>
+                <FlowPane fx:id="roleLarge" />
                 <FlowPane fx:id="listView"/>
             </VBox>
         </HBox>

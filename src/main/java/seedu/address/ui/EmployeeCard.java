@@ -34,6 +34,8 @@ public class EmployeeCard extends UiPart<Region> {
     private Label id;
     @FXML
     private FlowPane departments;
+    @FXML
+    private FlowPane role;
 
     /**
      * Creates a {@code EmployeeCode} with the given {@code Employee} and index to display.
@@ -46,5 +48,6 @@ public class EmployeeCard extends UiPart<Region> {
         employee.getDepartments().stream()
                 .sorted(Comparator.comparing(department -> department.fullName))
                 .forEach(department -> departments.getChildren().add(new Label(department.fullName)));
+        role.getChildren().add(new Label(employee.getRole().toString()));
     }
 }
