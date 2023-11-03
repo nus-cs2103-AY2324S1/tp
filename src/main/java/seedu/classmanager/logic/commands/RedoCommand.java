@@ -1,3 +1,6 @@
+//@@author Cikguseven-reused
+//Reused from AddressBook-Level 4 (https://github.com/se-edu/addressbook-level4)
+// with minor modifications
 package seedu.classmanager.logic.commands;
 
 import static java.util.Objects.requireNonNull;
@@ -19,8 +22,8 @@ public class RedoCommand extends Command {
     /**
      * Executes a redo command and reverts to the previously undone Class Manager.
      * @param model {@code Model} which the command should operate on.
-     * @param history
-     * @return CommandResult
+     * @param history {@code CommandHistory} which the command should operate on.
+     * @return CommandResult that indicates a successful redo.
      * @throws CommandException if there is no more commands to redo.
      */
     @Override
@@ -36,3 +39,4 @@ public class RedoCommand extends Command {
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }
+//@@author
