@@ -15,6 +15,7 @@ title: Developer Guide
 
 ## **Setting up, getting started**
 
+
 Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 --------------------------------------------------------------------------------------------------------------------
@@ -158,15 +159,6 @@ The following shows the activity diagram from when a user executes the `add-t` c
 
 <div markdown="block" class="alert alert-info">
 
-**:information_source: Input Limitations**<br>
-* Input format must adhere to the follow limitations:
-  * `NAME`: Only contain alphanumeric characters and spaces, and should not be blank
-  * `PHONE NUMBER`: Only contain numbers, and should be at least 3 digits long
-  * `EMAIL`: Of the format local-part@domain
-* Tutor to be added must be unique and not already exist in the addressbook.
-
-</div>
-
 #### Implementation
 
 Step 1. The user launches the application for the first time.
@@ -195,10 +187,9 @@ The `add-t` command was designed this way to ensure consistency with the previou
     * Cons: Increases code complexity to handle blank fields.
 * **Alternative 2 (current choice):** Disallow optional fields when adding tutor (user must enter name, phone 
   number and email).
-    * Pros:
+    * Pros: Easier to implement, and less error prone.
     * Cons: Users must have every field filled before they can add a tutor.
-    * 
-=======
+
 ### Edit tutor feature 
 
  The “Edit Tutor” feature allows users to edit an existing tutor in the address book given a tutor index. 
