@@ -30,7 +30,8 @@ public class DepartmentCommand extends Command {
             + "\nParameters: "
             + "[" + PREFIX_TYPE + "TYPE(add/delete)] "
             + "[" + PREFIX_NAME + "NAME]\n"
-            + "Example: " + MESSAGE_EXAMPLE + " ";
+            + "\n"
+            + "Example: \n" + MESSAGE_EXAMPLE + " ";
 
     public static final String MESSAGE_ADDED_SUCCESS = "New Department added: %1$s";
     public static final String MESSAGE_DELETE_SUCCESS = "Department deleted: %1$s";

@@ -14,7 +14,8 @@ public class ClearCommand extends Command {
     public static final String MESSAGE_SUCCESS = "ManageHR app has been cleared!";
     public static final String MESSAGE_EXAMPLE = COMMAND_WORD;
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Clears ManageHR Storage.\n"
-            + "Example: " + MESSAGE_EXAMPLE;
+            + "\n"
+            + "Example: \n" + MESSAGE_EXAMPLE;
 
 
     @Override
