@@ -109,20 +109,6 @@ public class AppointmentTest {
         newAppointment.setAppointmentTime(new AppointmentTime(VALID_DATE_2));
         assertEquals(newAppointment.getAppointmentTime(), new AppointmentTime(VALID_DATE_2));
     }
-
-    @Test
-<<<<<<< HEAD
-    public void testChangeStatus() {
-        String newStatus = "Completed";
-        Appointment newAppointment = new Appointment(new Ic(VALID_NRIC_DEREK), new Ic(VALID_NRIC_AMY),
-                new AppointmentTime(VALID_DATE_1));
-        newAppointment.changeStatus(newStatus);
-        assertEquals(newAppointment.getStatus(), newStatus);
-    }
-
-    @Test
-=======
->>>>>>> branch-Minor-Changes
     public void equals() {
         Appointment newAppointment = new Appointment(new Ic(VALID_NRIC_DEREK), new Ic(VALID_NRIC_AMY),
                 new AppointmentTime(VALID_DATE_1));

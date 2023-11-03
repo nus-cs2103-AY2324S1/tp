@@ -18,12 +18,7 @@ public class AppointmentBuilder {
     public static final AppointmentTime DEFAULT_APPT_TIME = new AppointmentTime(VALID_DATE_1);
     private Ic doctorIc;
     private Ic patientIc;
-<<<<<<< HEAD
     private AppointmentTime appointmentTime;
-    private String status;
-=======
-    private LocalDateTime appointmentTime;
->>>>>>> branch-Minor-Changes
 
     /**
      * Constructor for the PersonBuilder class that initialises
