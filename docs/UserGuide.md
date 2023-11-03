@@ -419,11 +419,11 @@ While NetworkBook is optimised for use with keyboards and text commands, it also
 
 You can click on a contact's tag, course, graduation, or specialisation to view all contacts with the same tag/course/graduation/specialisation.
 
-#### Open link (equivalent to [`open` command](#))
+#### Open link (equivalent to [`open` command](#open-a-contacts-link-open-index-index-link-index))
 
 You can click on a contact's link to open the link in your web browser.
 
-#### Email contact (equivalent to [`email` command](#))
+#### Email contact (equivalent to [`email` command](#send-email-to-a-contacts-email-address-email-index-index-email-index))
 
 You can click on a contact's email address to email them.
 
