@@ -1,3 +1,4 @@
+//@@author itsNatTan
 package seedu.flashlingo.ui;
 
 import javafx.fxml.FXML;
@@ -50,9 +51,7 @@ public class FlashcardBoxNoButton extends UiPart<Region> {
     public FlashcardBoxNoButton(FlashCard fc, int displayedIndex) {
         super(FXML);
         this.flashCard = fc;
-        //@@author itsNatTan
         assert(!SessionManager.getInstance().isReviewSession());
-        //@@author itsNatTan
         id.setText(displayedIndex + ") ");
         original.setText(fc.getOriginalWord().toString() + ": ");
         translation.setText("");
