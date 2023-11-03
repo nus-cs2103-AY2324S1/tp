@@ -9,7 +9,6 @@ import java.util.stream.Stream;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.DeleteGroupCommand;
 import seedu.address.logic.commands.DeletePersonCommand;
-import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -33,7 +32,7 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_GROUPTAG)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    FindCommand.MESSAGE_USAGE));
+                    DeleteCommand.MESSAGE_USAGE));
         }
 
         // if n/ and g/ present
