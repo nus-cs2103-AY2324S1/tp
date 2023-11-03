@@ -272,7 +272,7 @@ Format: `help`
 
 ### Exit: `exit`
 
-Closes CCACommander.
+Closes CCACommander and its display window.
 
 Format: `exit`
 
