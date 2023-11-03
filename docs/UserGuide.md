@@ -206,16 +206,12 @@ Format: `find KEYWORD`
    * The search is case-insensitive. e.g `hans` will match `Hans`
    * Only the name is searched.
    * Persons matching part of the keyword will be returned (i.e. `OR` search).
-     e.g. `Hans` will return `Hanso Gruber`, `Hansel`
-   * Keyword specified has to be the first part of the name
-     e.g. `Hans` will return `Hanso Gruber` but not `Lee Hans`
+     e.g. `Hans` will return `Hanso Gruber`, `Lee Hansel`
 2. In `SCHEDULE` list:
     * The search is case-insensitive. e.g `lesson` will match `Lesson`
     * Only the name is searched.
     * Lessons matching part of the keyword will be returned (i.e. `OR` search).
-      e.g. `Lesson Chem` will return `Lesson Chemistry`, `Lesson Chem at Bishan`
-    * Keyword specified has to be the first part of the name
-        e.g. `Blk 12` will return `Blk 123 Bedok Chemistry` but not `Bishan Blk 12`
+      e.g. `Lesson Chem` will return `Lesson Chemistry`, `Bishan Lesson Chem`
 
 Example Success Output:
 ```
