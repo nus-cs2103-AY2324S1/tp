@@ -11,7 +11,7 @@ import networkbook.model.person.Course;
  * Checks that a course is still being taken by the given date.
  *
  * Assumption: No start date -> Course is still being taken.
- * Otherwise returns true when the given date is between the
+ * Otherwise returns true when the given date is between the start and end date.
  */
 public class CourseIsStillBeingTakenPredicate implements Predicate<Course> {
     private final LocalDate dateOfFinish;

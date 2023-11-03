@@ -27,7 +27,7 @@ public class PersonSortComparator implements Comparator<Person> {
     };
 
     public static final String MESSAGE_CONSTRAINTS_FIELD = "Field should be one of the following: "
-            + "name, grad, course, spec, priority, none.";
+            + "name, grad, priority, none.";
     public static final String MESSAGE_CONSTRAINTS_ORDER = "Order should be one of the following: asc, desc.";
     public static final String MESSAGE_CONSTRAINTS = MESSAGE_CONSTRAINTS_FIELD + "\n" + MESSAGE_CONSTRAINTS_ORDER;
 
