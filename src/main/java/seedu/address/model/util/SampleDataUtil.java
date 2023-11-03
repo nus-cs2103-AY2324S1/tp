@@ -1,6 +1,5 @@
 package seedu.address.model.util;
 
-import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
@@ -9,6 +8,7 @@ import java.util.stream.Collectors;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.appointment.Appointment;
+import seedu.address.model.appointment.AppointmentTime;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.BloodType;
 import seedu.address.model.person.Condition;
@@ -30,11 +30,11 @@ public class SampleDataUtil {
     public static final Remark EMPTY_REMARK = new Remark("");
     public static final Set<Appointment> EMPTY_APPOINTMENTS = new HashSet<>();
     public static final Appointment APPOINTMENT_1 = new Appointment(new Ic("S8811111Z"),
-            new Ic("S1111111Z"), LocalDateTime.parse("2023-10-31T14:00"));
+            new Ic("S1111111Z"), new AppointmentTime("2023-10-31 14:00"));
     public static final Appointment APPOINTMENT_2 = new Appointment(new Ic("S8811112Z"),
-            new Ic("S1111111Z"), LocalDateTime.parse("2023-10-31T15:00"));
+            new Ic("S1111111Z"), new AppointmentTime("2023-10-31 15:00"));
     public static final Appointment APPOINTMENT_3 = new Appointment(new Ic("S8811112Z"),
-            new Ic("S1111112Z"), LocalDateTime.parse("2023-10-31T16:00"));
+            new Ic("S1111112Z"), new AppointmentTime("2023-10-31 16:00"));
 
     // persons should not be used anymore
     public static Patient[] getSamplePatients() {
@@ -62,7 +62,7 @@ public class SampleDataUtil {
             new Patient(new Name("Irfan Ibrahim"), new Phone("92492021"), new Phone("87438807"),
                     new Email("irfan@example.com"), new Address("Blk 47 Tampines Street 20, #17-35"), EMPTY_REMARK,
                     new Gender("M"), new Ic("S1111115Z"), new Condition("Unknown"), new BloodType("O+"),
-                    EMPTY_APPOINTMENTS, getTagSet("classmates")),
+                    EMPTY_APPOINTMENTS, getTagSet("priority: Low")),
             new Patient(new Name("Roy Balakrishnan"), new Phone("92624417"), new Phone("87438807"),
                     new Email("royb@example.com"), new Address("Blk 45 Aljunied Street 85, #11-31"), EMPTY_REMARK,
                     new Gender("M"), new Ic("S1111116Z"), new Condition("Unknown"), new BloodType("O+"),
@@ -82,13 +82,21 @@ public class SampleDataUtil {
         };
     }
 
+    public static Appointment[] getSampleAppointments() {
+        return new Appointment[] {APPOINTMENT_1, APPOINTMENT_2, APPOINTMENT_3};
+    }
+
     public static ReadOnlyAddressBook getSampleAddressBook() {
         AddressBook sampleAb = new AddressBook();
         for (Patient samplePatient : getSamplePatients()) {
             sampleAb.addPatient(samplePatient);
         }
+
         for (Doctor sampleDoctor : getSampleDoctors()) {
             sampleAb.addDoctor(sampleDoctor);
+        }
+        for (Appointment sampleAppointment : getSampleAppointments()) {
+            sampleAb.addAppointment(sampleAppointment);
         }
         return sampleAb;
     }
