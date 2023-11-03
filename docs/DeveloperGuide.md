@@ -1,7 +1,7 @@
 ---
-  layout: default.md
-    title: "Developer Guide"
-    pageNav: 3
+layout: default.md
+title: "Developer Guide"
+pageNav: 3
 ---
 
 # LoveBook Developer Guide
@@ -552,12 +552,8 @@ You are recommended to start with an empty LoveBook and follow the instructions 
 in order for the example commands provided to be relevant.
 You can refer to the user guide for more details on the features.
 
-<box type="info" seamless>
-
 **Note:** These instructions only provide a starting point for testers to work on;
 testers are expected to do more *exploratory* testing.
-
-</box>
 
 ### Launch
 
