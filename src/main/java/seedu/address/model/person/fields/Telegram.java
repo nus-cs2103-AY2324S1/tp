@@ -28,6 +28,9 @@ public class Telegram {
 
     /**
      * Returns if a given string is a valid telegram handle.
+     *
+     * @param test The string to test.
+     * @return True if the string is a valid telegram handle, false otherwise.
      */
     public static boolean isValidHandle(String test) {
         return test.matches(TELE_REGEX);

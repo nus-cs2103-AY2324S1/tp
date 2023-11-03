@@ -30,15 +30,15 @@ public class EditApplicantCommand extends Command {
     public static final String COMMAND_ALIAS = "edita";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the applicant identified "
-            + "by the index number used in the displayed applicant list. "
-            + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: INDEX (must be a positive integer) "
-            + PREFIX_NAME + " {applicantName} "
-            + PREFIX_PHONE + " {phoneNumber} "
-            + PREFIX_INTERVIEW + "{interviewTime}\n"
-            + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_NAME + " Johnny Doe "
-            + PREFIX_PHONE + " 91234567";
+        + "by the index number used in the displayed applicant list. "
+        + "Existing values will be overwritten by the input values.\n"
+        + "Parameters: INDEX (must be a positive integer) "
+        + PREFIX_NAME + " {applicantName} "
+        + PREFIX_PHONE + " {phoneNumber} "
+        + PREFIX_INTERVIEW + "{interviewTime}\n"
+        + "Example: " + COMMAND_WORD + " 1 "
+        + PREFIX_NAME + " Johnny Doe "
+        + PREFIX_PHONE + " 91234567";
 
     public static final String MESSAGE_EDIT_APPLICANT_SUCCESS = "Edited applicant: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
@@ -85,18 +85,15 @@ public class EditApplicantCommand extends Command {
      * edited with {@code editApplicantDescriptor}.
      */
     private static Applicant createEditedApplicant(Applicant applicantToEdit,
-            EditApplicantDescriptor editApplicantDescriptor) {
+        EditApplicantDescriptor editApplicantDescriptor) {
         assert applicantToEdit != null;
 
         Name updatedName = editApplicantDescriptor.getName().orElse(applicantToEdit.getName());
         Phone updatedPhone = editApplicantDescriptor.getPhone().orElse(applicantToEdit.getPhone());
         InterviewTime updatedInterviewTime = editApplicantDescriptor.getInterviewTime()
-                .orElse(applicantToEdit.getInterviewTime());
+            .orElse(applicantToEdit.getInterviewTime());
 
-        Applicant newApplicant = new Applicant(updatedName, updatedPhone);
-        newApplicant.addInterviewTime(updatedInterviewTime);
-
-        return newApplicant;
+        return new Applicant(updatedName, updatedPhone, updatedInterviewTime);
     }
 
     @Override
@@ -112,15 +109,15 @@ public class EditApplicantCommand extends Command {
 
         EditApplicantCommand otherEditApplicantCommand = (EditApplicantCommand) other;
         return index.equals(otherEditApplicantCommand.index)
-                && editApplicantDescriptor.equals(otherEditApplicantCommand.editApplicantDescriptor);
+            && editApplicantDescriptor.equals(otherEditApplicantCommand.editApplicantDescriptor);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("index", index)
-                .add("editApplicantDescriptor", editApplicantDescriptor)
-                .toString();
+            .add("index", index)
+            .add("editApplicantDescriptor", editApplicantDescriptor)
+            .toString();
     }
 
     /**
@@ -132,12 +129,17 @@ public class EditApplicantCommand extends Command {
         private Phone phone;
         private InterviewTime interviewTime;
 
+        /**
+         * Default constructor.
+         */
         public EditApplicantDescriptor() {
         }
 
         /**
          * Copy constructor.
          * A defensive copy of {@code tags} is used internally.
+         *
+         * @param toCopy The {@code EditApplicantDescriptor} to copy.
          */
         public EditApplicantDescriptor(EditApplicantDescriptor toCopy) {
             setName(toCopy.name);
@@ -189,17 +191,17 @@ public class EditApplicantCommand extends Command {
 
             EditApplicantDescriptor otherEditApplicantDescriptor = (EditApplicantDescriptor) other;
             return Objects.equals(name, otherEditApplicantDescriptor.name)
-                    && Objects.equals(phone, otherEditApplicantDescriptor.phone)
-                    && Objects.equals(interviewTime, otherEditApplicantDescriptor.interviewTime);
+                && Objects.equals(phone, otherEditApplicantDescriptor.phone)
+                && Objects.equals(interviewTime, otherEditApplicantDescriptor.interviewTime);
         }
 
         @Override
         public String toString() {
             return new ToStringBuilder(this)
-                    .add("name", name)
-                    .add("phone", phone)
-                    .add("interview time", interviewTime)
-                    .toString();
+                .add("name", name)
+                .add("phone", phone)
+                .add("interview time", interviewTime)
+                .toString();
         }
     }
 }

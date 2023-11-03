@@ -25,10 +25,10 @@ public class JsonAdaptedApplicant {
      */
     @JsonCreator
     public JsonAdaptedApplicant(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
-                                @JsonProperty("interviewTime") String interviewTime) {
+        @JsonProperty("interviewTime") String interviewTime) {
         this.name = name;
         this.phone = phone;
-        this.interviewTime = interviewTime;
+        this.interviewTime = interviewTime == null ? "cancel" : interviewTime;
     }
 
     /**
@@ -37,11 +37,7 @@ public class JsonAdaptedApplicant {
     public JsonAdaptedApplicant(Applicant source) {
         name = source.getName().fullName;
         phone = source.getPhone().value;
-        if (source.getInterviewTime().getTime() == null) {
-            interviewTime = "Interview time has not been set";
-        } else {
-            interviewTime = source.getInterviewTime().getTime();
-        }
+        interviewTime = source.getInterviewTime().getTime() == null ? "cancel" : source.getInterviewTime().getTime();
     }
 
     /**
@@ -65,23 +61,14 @@ public class JsonAdaptedApplicant {
             throw new IllegalValueException(Phone.MESSAGE_CONSTRAINTS);
         }
 
-        if (interviewTime == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
-                    InterviewTime.class.getSimpleName()));
-        }
-
         if (!InterviewTime.isValidTime(interviewTime)) {
             throw new IllegalValueException(InterviewTime.MESSAGE_CONSTRAINTS);
         }
 
         final Phone modelPhone = new Phone(phone);
 
-        final Applicant applicant = new Applicant(modelName, modelPhone);
+        final InterviewTime interviewTime = new InterviewTime(this.interviewTime);
 
-        if (this.interviewTime != null) {
-            final InterviewTime time = new InterviewTime(interviewTime);
-            applicant.addInterviewTime(time);
-        }
-        return applicant;
+        return new Applicant(modelName, modelPhone, interviewTime);
     }
 }

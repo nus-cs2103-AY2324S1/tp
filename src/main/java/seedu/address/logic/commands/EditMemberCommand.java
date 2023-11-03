@@ -37,17 +37,17 @@ public class EditMemberCommand extends Command {
     public static final String COMMAND_ALIAS = "editm";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the member identified "
-            + "by the index number used in the displayed member list. "
-            + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: INDEX (must be a positive integer) "
-            + PREFIX_NAME + " {memberName} "
-            + PREFIX_PHONE + " {phoneNumber} "
-            + PREFIX_EMAIL + " {email} "
-            + PREFIX_TELEGRAM + " {telegramHandle} "
-            + "[" + PREFIX_TAG + "TAG]...\n"
-            + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_PHONE + " 91234567 "
-            + PREFIX_EMAIL + " johndoe@example.com";
+        + "by the index number used in the displayed member list. "
+        + "Existing values will be overwritten by the input values.\n"
+        + "Parameters: INDEX (must be a positive integer) "
+        + PREFIX_NAME + " {memberName} "
+        + PREFIX_PHONE + " {phoneNumber} "
+        + PREFIX_EMAIL + " {email} "
+        + PREFIX_TELEGRAM + " {telegramHandle} "
+        + "[" + PREFIX_TAG + "TAG]...\n"
+        + "Example: " + COMMAND_WORD + " 1 "
+        + PREFIX_PHONE + " 91234567 "
+        + PREFIX_EMAIL + " johndoe@example.com";
 
     public static final String MESSAGE_EDIT_MEMBER_SUCCESS = "Edited member: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
@@ -118,15 +118,15 @@ public class EditMemberCommand extends Command {
 
         EditMemberCommand otherEditMemberCommand = (EditMemberCommand) other;
         return index.equals(otherEditMemberCommand.index)
-                && editMemberDescriptor.equals(otherEditMemberCommand.editMemberDescriptor);
+            && editMemberDescriptor.equals(otherEditMemberCommand.editMemberDescriptor);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("index", index)
-                .add("editMemberDescriptor", editMemberDescriptor)
-                .toString();
+            .add("index", index)
+            .add("editMemberDescriptor", editMemberDescriptor)
+            .toString();
     }
 
     /**
@@ -140,12 +140,17 @@ public class EditMemberCommand extends Command {
         private Telegram telegram;
         private Set<Tag> tags;
 
+        /**
+         * Default constructor.
+         */
         public EditMemberDescriptor() {
         }
 
         /**
          * Copy constructor.
          * A defensive copy of {@code tags} is used internally.
+         *
+         * @param toCopy The {@code EditMemberDescriptor} to copy.
          */
         public EditMemberDescriptor(EditMemberDescriptor toCopy) {
             setName(toCopy.name);
@@ -224,21 +229,21 @@ public class EditMemberCommand extends Command {
 
             EditMemberDescriptor otherEditMemberDescriptor = (EditMemberDescriptor) other;
             return Objects.equals(name, otherEditMemberDescriptor.name)
-                    && Objects.equals(phone, otherEditMemberDescriptor.phone)
-                    && Objects.equals(email, otherEditMemberDescriptor.email)
-                    && Objects.equals(telegram, otherEditMemberDescriptor.telegram)
-                    && Objects.equals(tags, otherEditMemberDescriptor.tags);
+                && Objects.equals(phone, otherEditMemberDescriptor.phone)
+                && Objects.equals(email, otherEditMemberDescriptor.email)
+                && Objects.equals(telegram, otherEditMemberDescriptor.telegram)
+                && Objects.equals(tags, otherEditMemberDescriptor.tags);
         }
 
         @Override
         public String toString() {
             return new ToStringBuilder(this)
-                    .add("name", name)
-                    .add("phone", phone)
-                    .add("email", email)
-                    .add("telegram", telegram)
-                    .add("tags", tags)
-                    .toString();
+                .add("name", name)
+                .add("phone", phone)
+                .add("email", email)
+                .add("telegram", telegram)
+                .add("tags", tags)
+                .toString();
         }
     }
 }

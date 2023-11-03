@@ -20,14 +20,19 @@ public class DeleteMemberCommand extends Command {
     public static final String COMMAND_ALIAS = "delm";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the member identified by the index number used in the displayed member list.\n"
-            + "Parameters: INDEX (must be a positive integer)\n"
-            + "Example: " + COMMAND_WORD + " 1";
+        + ": Deletes the member identified by the index number used in the displayed member list.\n"
+        + "Parameters: INDEX (must be a positive integer)\n"
+        + "Example: " + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_DELETE_MEMBER_SUCCESS = "Deleted member: %1$s";
 
     private final Index memberIndex;
 
+    /**
+     * Creates a DeleteMemberCommand to delete the specified {@code Member}
+     *
+     * @param memberIndex The index of the member to delete.
+     */
     public DeleteMemberCommand(Index memberIndex) {
         this.memberIndex = memberIndex;
     }
@@ -64,7 +69,7 @@ public class DeleteMemberCommand extends Command {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("memberIndex", memberIndex)
-                .toString();
+            .add("memberIndex", memberIndex)
+            .toString();
     }
 }

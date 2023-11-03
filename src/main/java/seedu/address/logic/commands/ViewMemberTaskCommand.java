@@ -19,8 +19,8 @@ public class ViewMemberTaskCommand extends Command {
     public static final String COMMAND_ALIAS = "viewt";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Views all tasks assigned to the specified member "
-            + "by the index number used in the displayed member list. \n"
-            + "Parameters: INDEX (must be a positive integer) ";
+        + "by the index number used in the displayed member list. \n"
+        + "Parameters: INDEX (must be a positive integer) ";
 
     public static final String MESSAGE_ADD_TODO_SUCCESS = "Task output for member %1$s";
 
@@ -29,6 +29,8 @@ public class ViewMemberTaskCommand extends Command {
 
     /**
      * Creates an AddMemberCommand to add the specified {@code Member}
+     *
+     * @param index The index of the member to view.
      */
     public ViewMemberTaskCommand(Index index) {
         requireNonNull(index);

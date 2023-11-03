@@ -22,26 +22,26 @@ import seedu.address.model.task.Task;
  */
 public class SampleDataUtil {
     public static Member[] getSampleMembers() {
-        return new Member[]{
+        return new Member[] {
             new Member(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
-                    new Telegram("@alexyeoh"),
-                    getTagSet("friends"),
-                    getTaskList("finish_proposal")),
+                new Telegram("@alexyeoh"),
+                getTagSet("friends"),
+                getTaskList("Finish Proposal")),
             new Member(new Name("Bernice Yu"), new Phone("99272758"), new Email("berniceyu@example.com"),
-                    new Telegram("@berniceyu"),
-                    getTagSet("colleagues", "friends")),
+                new Telegram("@berniceyu"),
+                getTagSet("colleagues", "friends")),
             new Member(new Name("Charlotte Oliveiro"), new Phone("93210283"), new Email("charlotte@example.com"),
-                    new Telegram("@charlotteoliveiro"),
-                    getTagSet("neighbours")),
+                new Telegram("@charlotteoliveiro"),
+                getTagSet("neighbours")),
             new Member(new Name("David Li"), new Phone("91031282"), new Email("lidavid@example.com"),
-                    new Telegram("@davidli"),
-                    getTagSet("family")),
+                new Telegram("@davidli"),
+                getTagSet("family")),
             new Member(new Name("Irfan Ibrahim"), new Phone("92492021"), new Email("irfan@example.com"),
-                    new Telegram("@irfanibrahim"),
-                    getTagSet("classmates")),
+                new Telegram("@irfanibrahim"),
+                getTagSet("classmates")),
             new Member(new Name("Roy Balakrishnan"), new Phone("92624417"), new Email("royb@example.com"),
-                    new Telegram("@roybalakrishnan"),
-                    getTagSet("colleagues"))
+                new Telegram("@roybalakrishnan"),
+                getTagSet("colleagues"))
         };
     }
 
@@ -73,8 +73,8 @@ public class SampleDataUtil {
      */
     public static Set<Tag> getTagSet(String... strings) {
         return Arrays.stream(strings)
-                .map(Tag::new)
-                .collect(Collectors.toSet());
+            .map(Tag::new)
+            .collect(Collectors.toSet());
     }
 
     /**
@@ -82,7 +82,7 @@ public class SampleDataUtil {
      */
     public static List<Task> getTaskList(String... strings) {
         return Arrays.stream(strings)
-                .map(Task::new)
-                .collect(Collectors.toList());
+            .map(Task::new)
+            .collect(Collectors.toList());
     }
 }

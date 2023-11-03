@@ -63,29 +63,39 @@ public interface Model {
 
     /**
      * Returns true if a member with the same identity as {@code member} exists in the address book.
+     *
+     * @param member The member to check.
      */
     boolean hasMember(Member member);
 
     /**
      * Returns true if an applicant with the same identity as {@code applicant} exists in the address book.
+     *
+     * @param applicant The applicant to check.
      */
     boolean hasApplicant(Applicant applicant);
 
     /**
      * Deletes the given applicant.
      * The applicant must exist in the address book.
+     *
+     * @param target The applicant to delete.
      */
     void deleteApplicant(Applicant target);
 
     /**
      * Adds the given member.
      * {@code member} must not already exist in the address book.
+     *
+     * @param toAdd The member to add.
      */
     void addMember(Member toAdd);
 
     /**
      * Adds the given applicant.
      * {@code applicant} must not already exist in the address book.
+     *
+     * @param toAdd The applicant to add.
      */
     void addApplicant(Applicant toAdd);
 
@@ -94,6 +104,9 @@ public interface Model {
      * {@code target} must exist in the address book.
      * The member identity of {@code editedMember} must not be the same as another existing member in the
      * address book.
+     *
+     * @param target       The member to replace.
+     * @param editedMember The member to replace with.
      */
     void setMember(Member target, Member editedMember);
 
@@ -102,6 +115,9 @@ public interface Model {
      * {@code target} must exist in the address book.
      * The applicant identity of {@code editedApplicant} must not be the same as another existing applicant in the
      * address book.
+     *
+     * @param target          The applicant to replace.
+     * @param editedApplicant The applicant to replace with.
      */
     void setApplicant(Applicant target, Applicant editedApplicant);
 
@@ -119,24 +135,31 @@ public interface Model {
      * Returns an unmodifiable view of the filtered tag list
      */
     ObservableList<Tag> getFilteredTagList();
+
     ObservableList<Task> getFilteredTaskList();
 
     void setTaskListForMember(Member member);
 
     /**
      * Updates the filter of the filtered member list to filter by the given {@code predicate}.
+     *
+     * @param predicate The predicate to filter by.
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredMemberList(Predicate<? super Member> predicate);
 
     /**
      * Updates the filter of the filtered applicant list to filter by the given {@code predicate}.
+     *
+     * @param predicate The predicate to filter by.
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredApplicantList(Predicate<? super Applicant> predicate);
 
     /**
      * Updates the filter of the filtered tag list to filter by the given {@code predicate}.
+     *
+     * @param predicate The predicate to filter by.
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredTagList(Predicate<? super Tag> predicate);
@@ -144,6 +167,8 @@ public interface Model {
     /**
      * Deletes the member person.
      * The member must exist in the address book.
+     *
+     * @param toDelete The member to delete.
      */
     void deleteMember(Member toDelete);
 }

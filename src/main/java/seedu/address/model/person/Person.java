@@ -14,7 +14,9 @@ public abstract class Person {
     private final Name name;
 
     /**
-     * Every field must be present and not null.
+     * Name must be present and not null.
+     *
+     * @param name The name of the person.
      */
     public Person(Name name) {
         requireAllNonNull(name);
