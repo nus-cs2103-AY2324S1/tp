@@ -198,7 +198,7 @@ The find command has different behaviours depending on the current list:
 1. In `STUDENTS` list:
     - Finds students whose names contain any of the given keywords.
 2. In `SCHEDULE` list:
-    - TBC
+    - Finds lessons whose names contain the given keywords.
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
@@ -210,16 +210,23 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
    * Persons matching at least one keyword will be returned (i.e. `OR` search).
      e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 2. In `SCHEDULE` list:
-    * TBC
+    * The search is case-insensitive. e.g `lesson` will match `Lesson`
+    * The order of the keywords does not matter. e.g. `Lesson Chemistry` will match `Chemistry Lesson`
+    * Only the name is searched.
+    * Only full words will be matched e.g. `Physics` will match `Phy`
+    * Lessons matching at least one keyword will be returned (i.e. `OR` search).
+      e.g. `Lesson Chemistry` will return `Lesson Physics`, `Chemistry at Punggol`
 
 Example Success Output:
 ```
 1 persons listed!
+2 lessons listed!
 ```
 
 Failure Output:
 ```
 0 persons listed!
+0 lessons listed!
 ```
 
 ### Showing a student's details : `show`
