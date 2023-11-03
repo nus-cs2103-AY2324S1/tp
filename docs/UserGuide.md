@@ -418,7 +418,7 @@ Examples:
 
 <a name="filter"></a>
 
-### Filtering applicants by fields: `filter`
+#### Filtering applicants by fields: `filter`
 
 Filters the applicant list based on fields given by the user.
 
