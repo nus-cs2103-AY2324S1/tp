@@ -28,23 +28,9 @@ public class TagTest {
 
     @Test
     public void getTagName() {
-        String validTagName = "CS2103T T02";
+        String validTagName = "T02";
         Tag tag = new Tag(validTagName);
         assertEquals(validTagName, tag.getTagName());
-    }
-
-    @Test
-    public void getCourseCode() {
-        String validTagName = "CS2103T T02";
-        Tag tag = new Tag(validTagName);
-        assertEquals("CS2103T", tag.getCourseCode());
-    }
-
-    @Test
-    public void getTutorialGroup() {
-        String validTagName = "CS2103T T02";
-        Tag tag = new Tag(validTagName);
-        assertEquals("T02", tag.getTutorialGroup());
     }
 
     @Test

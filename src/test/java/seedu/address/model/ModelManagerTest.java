@@ -118,7 +118,8 @@ public class ModelManagerTest {
     public void equals() {
         AddressBook addressBook = new AddressBookBuilder("Test Course Code")
                 .withPerson(ALICE).withPerson(BENSON).build();
-        AddressBookManager addressBookManager = new AddressBookManagerBuilder().withAddressBook(addressBook).build();
+        AddressBookManager addressBookManager = new AddressBookManagerBuilder().withAddressBook(addressBook)
+                .setActiveAddressBook(addressBook.getCourseCode()).build();
         AddressBookManager differentAddressBookManager = new AddressBookManager();
         UserPrefs userPrefs = new UserPrefs();
 

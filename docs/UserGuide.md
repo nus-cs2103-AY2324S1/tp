@@ -82,6 +82,62 @@ Shows a message explaining how to access the help page.
 
 Format: `help`
 
+### Creating an addressbook: `course create`
+
+Creates a new addressbook.
+
+Format: `course create course/COURSECODE`
+
+* Creates a new addressbook with course code `COURSECODE`
+* `COURSECODE` should be a string made up of alphabetical characters and numbers, with no special characters.
+* `COURSECODE` must be specified.
+* `COURSECODE` address book must not exist.
+
+Example:
+* `course create course/CS2103T` creates a new addressbook with course code CS2103T.
+
+### Deleting an addressbook: `course delete`
+
+Delete an addressbook.
+
+Format: `course delete course/COURSECODE`
+
+* Deletes the addressbook with course code `COURSECODE`
+* `COURSECODE` should be a string made up of alphabetical characters and numbers, with no special characters.
+* `COURSECODE` must be specified.
+* `COURSECODE` address book must exist.
+
+Example:
+* `course delete course/CS2103T` deletes the addressbook with course code CS2103T.
+
+### Switching an addressbook: `course switch`
+
+Switches the active addressbook.
+
+Format: `course switch course/COURSECODE`
+
+* Switches to the addressbook with course code `COURSECODE`
+* `COURSECODE` should be a string made up of alphabetical characters and numbers, with no special characters.
+* `COURSECODE` must be specified.
+* `COURSECODE` address book must exist.
+
+Example:
+* `course switch course/CS2103T` switches to the addressbook with course code CS2103T.
+
+### Editing an addressbook: `course edit`
+
+Edits the active addressbook course code.
+
+Format: `course edit course/COURSECODE`
+
+* Changes the course code of active addressbook to `COURSECODE`
+* `COURSECODE` should be a string made up of alphabetical characters and numbers, with no special characters.
+* `COURSECODE` must be specified.
+* `COURSECODE` address book must not exist.
+
+Example:
+* `course edit course/CS2103T` changes the active addressbook's course code to CS2103T.
+
 ### Adding a new contact: `add`
 
 Creates a new contact in the course with the specified name and details.
@@ -176,54 +232,6 @@ Shows a list of students.
 Format: `list students`
 *  Shows a list of all students in the course.
 
-### Adding a filter: `filter add`
-
-Shows a list of students from a specified tutorial group
-
-![add filter](images/addFilter.png)
-
-Format: `filter add coursetg/COURSECODE [tg/TUTORIALGROUPID]`
-
-* Filters students that are in the tutorial group specified by `TUTORIALGROUPID` or course specified by `COURSECODE`
-* `COURSECODE` should be a string made up of alphabetical characters and numbers, with no special characters.
-* `TUTORIALGROUPID` should be a string made up of alphabetical characters and numbers, with no special characters.
-* `TUTORIALGROUPID` must correspond to an existing tutorial group.
-* `COURSECODE` must correspond to an existing course.
-* `COURSECODE` must be specified.
-* `TUTORIALGROUPID` is optional.
-
-Examples:
-* `filter add coursetg/CS2103T tg/G08` returns a list of students from tutorial group G08 for course CS2103T.
-* `filter add coursetg/CS2103T` returns a list of students in the course CS2103T.
-
-### Removing filters: `filter remove`
-
-Removes specified applied filter
-
-Format: `filter remove coursetg/COURSECODE [tg/TUTORIALGROUPID]`
-
-* Remove the tutorial group filter specified by `TUTORIALGROUPID` or course filter specified by `COURSECODE`
-* `COURSECODE` should be a string made up of alphabetical characters and numbers, with no special characters.
-* `COURSECODE` must correspond to an existing course.
-* `TUTORIALGROUPID` should be a string made up of alphabetical characters and numbers, with no special characters.
-* `TUTORIALGROUPID` must correspond to an existing tutorial group.
-* `COURSECODE` must be specified.
-* `TUTORIALGROUPID` is optional.
-
-Examples:
-* `filter remove coursetg/CS2103T tg/G08` returns a list of students containing those from tutorial group G08 for course CS2103T.
-* `filter remove coursetg/CS2103T` returns a list of students containing those in the course CS2103T.
-
-### Removing all filters: `filter clear`
-
-Removes all applied filters
-
-![filter clear](images/filterClear.png)
-
-Format: `filter clear`
-
-Examples:
-* `filter clear` returns the list of all students
 
 ### Deleting a student : `delete`
 
@@ -340,7 +348,7 @@ _Details coming soon ..._
 | **Delete** | `delete all [tg/TUTORIALGROUPID]` `delete INDEX` <br> e.g., `delete all tg/G10` `delete 3`                                                                                                                    |
 | **Edit**   | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [id/STUDENT_ID] [t/TUTORIALGROUPID]...`<br> e.g., `edit 1 n/Tan Liyan` `edit 2 p/92345678 t/`                                                                        |
 | **Exit**   | `exit`                                                                                                                                                                                                        |
-| **Filter** | `filter add/delete/clear [coursetg/COURSECODE] [tg/TUTORIALGROUPID]`<br/> e.g., `filter add coursetg/CS2103T tg/G08`                                                                                          |
+| **Course** | `course [create/delete/switch/clear] course/COURSECODE`<br/> e.g., `course create course/CS2103T`                                                                                          |
 | **Find**   | `find n/STUDENT_NAME [STUDENT_NAME]… / id/STUDENT_ID [STUDENT_ID]…` <br/> e.g., `find n/Anthony Yiqiao`                                                                                                       |                                                                                                   
 | **List**   | `list attendance w/WEEKNUMBER [tg/TUTORIALGROUPID]`<br/> e.g., `list students`                                                                                                                                |                                                          
 | **Help**   | `help`                                                                                                                                                                                                        |

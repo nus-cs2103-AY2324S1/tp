@@ -94,7 +94,7 @@ public class Person {
         }
 
         return otherPerson != null
-                && otherPerson.name.equals(this.name);
+                && otherPerson.id.equals(this.id);
     }
 
     public void addAttendance(Attendance attendance) {

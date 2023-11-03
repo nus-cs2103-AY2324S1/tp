@@ -45,8 +45,8 @@ public class AddressBook implements ReadOnlyAddressBook {
         requireNonNull(courseCode);
         requireNonNull(toBeCopied);
 
-        this.courseCode = courseCode.toUpperCase();
         resetData(toBeCopied);
+        this.courseCode = courseCode.toUpperCase();
     }
 
     /**
