@@ -24,7 +24,13 @@ public class DeleteMemberTaskCommandParser implements Parser<DeleteMemberTaskCom
 
         try {
             memberIndex = ParserUtil.parseIndex(argMultimap.getPreamble());
+
+            if (argMultimap.getValue(PREFIX_TASK).isEmpty()) {
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                        DeleteMemberTaskCommand.MESSAGE_USAGE));
+            }
             taskIndex = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_TASK).get());
+
         } catch (ParseException pe) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     DeleteMemberTaskCommand.MESSAGE_USAGE), pe);

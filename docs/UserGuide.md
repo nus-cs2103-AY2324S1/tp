@@ -43,6 +43,10 @@ This project is based on the AddressBook-Level3 project created by the [SE-EDU i
     4. `findm John Doe` : Only member John Doe will be listed under the members list
     5. `findm Alicia Johndoe@xyz.com` : Both members Alicia and John Doe will be listed under the members list
     6. `delm 2` : Member John Doe will be deleted from the members list
+    7. `viewm` : All members will be listed under the members list
+    8. `addt 1 /task Finish_Proposal` : Assigns "Finish_Proposal" task to member Alicia
+    9. `delt 1 /task 1` : Deletes "Finish_Proposal" task from member Alicia
+    10. `viewt 1` : All tasks assigned to member Alicia will be listed
 
 6. Refer to the [Features](#features) below for details of each command.
 
