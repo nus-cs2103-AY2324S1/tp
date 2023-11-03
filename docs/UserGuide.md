@@ -282,7 +282,7 @@ Format: `filter [n/Name] [e/Email] [p/Position] [hp/Phone] [s/Status] [lts/Score
 * Only applicants matching all fields will be returned. (i.e. AND search).
 * for `[n/Name]` field, only applicants whose name contains the full substring will be returned, e.g. `n/Ivan Chew` will **NOT** return `Ivan Lee`.
 * `[n/Name]` `[e/Email]` `[p/Position]` fields are case-insensitive, e.g. `n/JOHN` will return `john`.
-* `[lts/Score]` `[gts/Score]` fields include equality in filters, e.g. `gts/7` will return all applicants with a greater than or equal to `7`.
+* `[lts/Score]` `[gts/Score]` fields do **NOT** include equality in filters, e.g. `gts/7` will return all applicants strictly greater than `7`.
 
 Examples:
 * `filter n/Ivan` filters the applicant list to applicants whose name contains `ivan`.
