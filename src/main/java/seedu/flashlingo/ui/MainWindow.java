@@ -149,6 +149,7 @@ public class MainWindow extends UiPart<Stage> {
      * Attempts to open the UserGuide in the default browser.
      * Upon failure, pop up a HelpWindow with the URL shown, or focuses on it if it is already open
      */
+    //@@author itsNatTan
     @FXML
     public void handleHelp() {
         if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) {
@@ -169,7 +170,7 @@ public class MainWindow extends UiPart<Stage> {
             }
         }
     }
-
+    //@@author
     void show() {
         primaryStage.show();
     }
