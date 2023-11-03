@@ -41,6 +41,7 @@ public class AddCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "New musician added: %1$s";
     public static final String MESSAGE_DUPLICATE_MUSICIAN = "This musician already exists in your contact list";
+    public static final String MESSAGE_DUPLICATE_INFO = "Phone number or email already exists in your contact list!";
 
     private final Musician toAdd;
 
@@ -58,6 +59,10 @@ public class AddCommand extends Command {
 
         if (model.hasMusician(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_MUSICIAN);
+        }
+
+        if (model.hasDuplicateInfo(toAdd)) {
+            throw new CommandException(MESSAGE_DUPLICATE_INFO);
         }
 
         model.addMusician(toAdd);

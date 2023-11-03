@@ -92,7 +92,6 @@ public class AddBandCommandTest {
         public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
             throw new AssertionError("This method should not be called.");
         }
-
         @Override
         public ReadOnlyUserPrefs getUserPrefs() {
             throw new AssertionError("This method should not be called.");
@@ -120,6 +119,10 @@ public class AddBandCommandTest {
 
         @Override
         public void addMusician(Musician musician) {
+            throw new AssertionError("This method should not be called.");
+        }
+        @Override
+        public boolean hasDuplicateInfo(Musician musician) {
             throw new AssertionError("This method should not be called.");
         }
 

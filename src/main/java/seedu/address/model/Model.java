@@ -60,6 +60,11 @@ public interface Model {
     boolean hasMusician(Musician musician);
 
     /**
+     * Returns true if a musician with the same phone or email as {@code musician} exists in the address book.
+     */
+    boolean hasDuplicateInfo(Musician musician);
+
+    /**
      * Deletes the given musician.
      * The musician must exist in the address book.
      */

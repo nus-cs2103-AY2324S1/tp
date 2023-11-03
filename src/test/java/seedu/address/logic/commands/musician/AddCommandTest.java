@@ -125,7 +125,10 @@ public class AddCommandTest {
         public void addMusician(Musician musician) {
             throw new AssertionError("This method should not be called.");
         }
-
+        @Override
+        public boolean hasDuplicateInfo(Musician musician) {
+            throw new AssertionError("This method should not be called.");
+        }
         @Override
         public void setAddressBook(ReadOnlyAddressBook newData) {
             throw new AssertionError("This method should not be called.");
@@ -246,6 +249,12 @@ public class AddCommandTest {
         public void addMusician(Musician musician) {
             requireNonNull(musician);
             musiciansAdded.add(musician);
+        }
+
+        @Override
+        public boolean hasDuplicateInfo(Musician musician) {
+            requireNonNull(musician);
+            return musiciansAdded.stream().anyMatch(musician::hasSameInfo);
         }
 
         @Override

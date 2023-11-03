@@ -83,6 +83,19 @@ public class Musician {
     }
 
     /**
+     * Returns true if both persons have the same phone number or email.
+     */
+    public boolean hasSameInfo(Musician otherMusician) {
+        if (otherMusician == this) {
+            return true;
+        }
+
+        return otherMusician != null
+                && (otherMusician.getPhone().equals(getPhone())
+                    || otherMusician.getEmail().equals(getEmail()));
+    }
+
+    /**
      * Returns true if both persons have the same identity and data fields.
      * This defines a stronger notion of equality between two persons.
      */

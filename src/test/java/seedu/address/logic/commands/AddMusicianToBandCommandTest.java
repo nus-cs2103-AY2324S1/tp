@@ -183,7 +183,10 @@ public class AddMusicianToBandCommandTest {
         public void addMusician(Musician musician) {
             throw new AssertionError("This method should not be called.");
         }
-
+        @Override
+        public boolean hasDuplicateInfo(Musician musician) {
+            throw new AssertionError("This method should not be called.");
+        }
         @Override
         public void setAddressBook(ReadOnlyAddressBook newData) {
             throw new AssertionError("This method should not be called.");
@@ -310,6 +313,11 @@ public class AddMusicianToBandCommandTest {
         public boolean hasMusician(Musician musician) {
             requireNonNull(musician);
             return musiciansAdded.contains(musician);
+        }
+        @Override
+        public boolean hasDuplicateInfo(Musician musician) {
+            requireNonNull(musician);
+            return musiciansAdded.hasDuplicateInfo(musician);
         }
         @Override
         public ObservableList<Band> getFilteredBandList() {
