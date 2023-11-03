@@ -12,6 +12,9 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.appointment.Appointment;
+import seedu.address.model.person.Doctor;
+import seedu.address.model.person.Ic;
+import seedu.address.model.person.Patient;
 
 /**
  * Deletes a person identified using it's displayed index from the address book.
@@ -29,6 +32,7 @@ public class DeleteAppointmentCommand extends Command {
     private static final Logger logger = LogsCenter.getLogger(DeleteAppointmentCommand.class);
 
     private final int targetIndex;
+    private Appointment toDelete;
 
     public DeleteAppointmentCommand(int targetIndex) {
         this.targetIndex = targetIndex;
@@ -40,17 +44,43 @@ public class DeleteAppointmentCommand extends Command {
         List<Appointment> lastShownList = new ArrayList<>();
         lastShownList.addAll(model.getFilteredAppointmentList());
         try {
-            Appointment target = lastShownList.get(targetIndex - 1);
-            model.deleteAppointment(target);
+            this.toDelete = lastShownList.get(targetIndex - 1);
+            Patient targetPatient = findPatient(model, toDelete);
+            Doctor targetDoctor = findDoctor(model, toDelete);
+            targetPatient.deleteAppointment(toDelete);
+            targetDoctor.deleteAppointment(toDelete);
+            model.deleteAppointment(toDelete);
             List<Appointment> updatedList = new ArrayList<>();
             updatedList.addAll(model.getFilteredAppointmentList());
             assert updatedList.size() < lastShownList.size();
             logger.info("Successfully deleted appointment");
-            return new CommandResult(String.format(MESSAGE_DELETE_APPOINTMENT_SUCCESS, Messages.format(target)));
+            return new CommandResult(String.format(MESSAGE_DELETE_APPOINTMENT_SUCCESS, Messages.format(toDelete)));
         } catch (IndexOutOfBoundsException e) {
             logger.warning("Appointment does not exist");
             throw new CommandException(Messages.MESSAGE_APPOINTMENT_NOT_FOUND);
         }
+    }
+
+    private Patient findPatient(Model model, Appointment toDelete) {
+        Ic patientIc = toDelete.getPatient();
+        List<Patient> patients = model.getFilteredPatientList();
+        for (Patient p : patients) {
+            if (p.hasIc(patientIc)) {
+                return p;
+            }
+        }
+        return null;
+    }
+
+    private Doctor findDoctor(Model model, Appointment toDelete) {
+        Ic doctorIc = toDelete.getDoctor();
+        List<Doctor> doctors = model.getFilteredDoctorList();
+        for (Doctor d : doctors) {
+            if (d.hasIc(doctorIc)) {
+                return d;
+            }
+        }
+        return null;
     }
 
     @Override

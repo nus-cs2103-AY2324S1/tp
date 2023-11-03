@@ -132,6 +132,15 @@ public abstract class Person {
     }
 
     /**
+     * Removes the given {@Code appointment} to this person's set of appointments.
+     *
+     * @param appointment the appointment to be added.
+     */
+    public void deleteAppointment(Appointment appointment) {
+        this.appointments.remove(appointment);
+    }
+
+    /**
      * Retrieves the list of patients stored in this medical facility.
      *
      * @return An ArrayList containing the patients currently registered in the facility.
