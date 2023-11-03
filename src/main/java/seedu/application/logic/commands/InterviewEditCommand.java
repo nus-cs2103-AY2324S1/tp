@@ -84,7 +84,8 @@ public class InterviewEditCommand extends InterviewCommand {
         Interview interviewToEdit = jobToEditInterview.getInterview(interviewIndex);
         Interview editedInterview = createEditedInterview(interviewToEdit, editInterviewDescriptor);
 
-        if (!interviewToEdit.isSameInterview(editedInterview) && jobToEditInterview.hasInterview(editedInterview)) {
+        if (!interviewToEdit.isSameInterview(editedInterview)
+                && jobToEditInterview.hasInterview(editedInterview)) {
             throw new CommandException(MESSAGE_DUPLICATE_INTERVIEW);
         }
 
