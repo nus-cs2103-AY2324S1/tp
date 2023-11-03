@@ -329,7 +329,7 @@ Expected output upon success: <br>
 ![BatchDeleteSuccess](images/BatchDeleteSuccess.png)
 
 Expected output upon failure:
-*No field provided:<br>
+* No field provided:<br>
 ```
 Invalid command format! 
 batchdelete: batch delete people whose policy: 
