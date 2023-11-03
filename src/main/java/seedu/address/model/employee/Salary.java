@@ -32,6 +32,16 @@ public class Salary {
         return test.matches(VALIDATION_REGEX);
     }
 
+    /**
+     * Compares this Salary to another Salary to check if it is greater than or equal to the other Salary.
+     *
+     * @param salary The Salary to compare to.
+     * @return {@code true} if this Salary is greater than or equal to the other Salary, {@code false} otherwise.
+     */
+    public boolean isMoreThanEqual(Salary salary) {
+        return Integer.parseInt(value) >= Integer.parseInt(salary.value);
+    }
+
     @Override
     public String toString() {
         return value;

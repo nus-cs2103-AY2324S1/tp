@@ -110,25 +110,29 @@ hen deleting an existing employee from ManageHR, you will need to account for th
 
 ### Viewing help : `help`
 
-Shows a message explaining how to access the user guide.
+Shows the help window for a specific command. Help window shows the syntactic use of the command, as well as an example of how the command is to be used.
 
-Format: `help`
+If no command is provided, a general help pane is displayed, with a link to the user guide.
+
+Format: `help <command>`
 
 Example:
 - `help`
+- `help add`
 
 Acceptable values for each parameter:
 
-| Paramters | Accepted input |
-| --- | --- |
-| nil | - |
+| Paramters | Accepted input                                           |
+|-----------|----------------------------------------------------------|
+| command   | A command word present in ManageHR. Alternatively empty. |
 
 Expected outputs:
 
-| Outcome | Output |
-| --- | --- |
-| command success | Refer to the user guide: https://ay2324s1-cs2103-t16-1.github.io/tp/UserGuide.html |
-| command fail | Command input error. Please check your command input. |
+| Outcome                               | Output                                                                                                                                                                           |
+|---------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Command Success, no specified command | A window is displayed, with `Refer to the user guide: https://ay2324s1-cs2103-t16-1.github.io/tp/UserGuide.html` A copy button is available to copy this URL into the clipboard. |
+| Command Success, specified command    | A window is displayed, with  `<command name>: Usage, Syntax to use, Example: Example of command.`. A copy button is also available to copy the example usage.                    |
+| Command Failure                       | Command input error. Please check your command input.                                                                                                                            |
 
 ![help message](images/helpMessage.png)
 
@@ -175,9 +179,9 @@ Format: `list`
 
 Acceptable values for each parameter:
 
-| Parameters | Accepted input |
-| --- | --- |
-| nil | - |
+| Parameters  | Accepted input |
+|-------------|----------------|
+| nil         | -              |
 
 Succeed:
 
@@ -223,6 +227,38 @@ Examples:
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
+### Filtering employees: `filter`
+
+Filters employees by prefix parameters.
+
+Format: `filter [n/NAME] [e/EMAIL] [a/ADDRESS] [s/SALARY] [l/LEAVE] [r/ROLE] [m/MANAGERNAME] [d/DEPARTMENT]`
+
+* The filter is case-sensetive. eg. `R&D` will not match `r&d`
+* At least one of the optional fields must be provided.
+
+Examples:
+* `filter d/R&D` returns employees with the `R&D` department
+* `filter s/4000` returns employees with salary equal to or less than 4000
+
+| Parameters | Accepted input | Remarks                                                                         |
+| --- |-------------------------------------|---------------------------------------------------------------------------------|
+| `NAME` | Alphabets                           | Full name is needed (case-sensitive)                                            |
+| `EMAIL` | Email with the pattern x@x.com where ‘x’ are alphanumerics ||
+| `ADDRESS` | Alphanumerics and ascii characters i.e. #, - ||
+| `SALARY` | Numerals                            | Returns employees with salary less than or equals to the given salary parameter |
+| `LEAVE` | Numerals                            ||
+| `ROLE` | `manager` or `subordinate` (Case-insensitive) | `m/MANAGER` shows subordinates of `MANAGER`                                     |
+| `DEPARTMENT` | Alphabets and ascii characters i.e. &, - | Able to filter by multiple `d/` parameters                                      |
+
+Expected outputs:
+
+| Outcome | Output                            |
+| --- |-----------------------------------|
+| **Success** | X employees listed!    |
+| **Fail** | Invalid command format!| 
+
+![filterCommandExample](images/filterCommandExample.png)
+
 ### Deleting an employee : `delete`
 
 Deletes the specified employee from the address book.
@@ -246,6 +282,9 @@ Fail:
 
 Constraints:
 * [Manager-subordinate relationship](#deleting-an-existing-employee-with-manager-subordinate-relationships)
+
+### Fitering Employees : `filter`
+Filters current employee list by constraints given. Displays all filtered employees at-a-glance.
 
 ### Exiting the program : `exit`
 
@@ -292,12 +331,16 @@ Now, your data should be successfully transferred to the new computer.
 
 ## Command summary
 
-Action | Format, Examples                                                                                                                                                                                                                                |
---------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS s/SALARY l/LEAVE r/ROLE d/DEPARTMENT… m/MANAGER NAME…` <br> e.g., `add n/Johnny p/91242712 e/johnnysins@gmail.com a/Johnny street, block 69, #05-05 s/5300 l/14 r/subordinate d/ R&D m/ Alex Yeoh` |
-**Exit** | `exit`                                                                                                                                                                                                                                          |
-**Delete** | `delete INDEX`<br> e.g., `delete 4`                                                                                                                                                                                                             |
-**Edit** | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [s/SALARY] [l/LEAVE] [r/ROLE] [m/MANAGER NAME]… [d/DEPARTMENT]…`<br> e.g.,`edit 1 p/91234567 e/johnsimmons@gmail.com`                                                                      |
-**List** | `list`                                                                                                                                                                                                                                          |
-**Help** | `help`                                                                                                                                                                                                                                          |
-**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find alex david`                                                                                                                                                                                      |
+| Action         | Format, Examples                                                                                                                                                                                                                                |
+|----------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**        | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS s/SALARY l/LEAVE r/ROLE d/DEPARTMENT… m/MANAGER NAME…` <br> e.g., `add n/Johnny p/91242712 e/johnnysins@gmail.com a/Johnny street, block 69, #05-05 s/5300 l/14 r/subordinate d/ R&D m/ Alex Yeoh` |
+| **Clear**      | `clear`                                                                                                                                                                                                                                         |
+| **Delete**     | `delete INDEX`<br> e.g., `delete 4`                                                                                                                                                                                                             |
+| **Department** | `delete t/(add/delete> n/DEPARTMENT_NAME` <br> e.g., `department t/add n/Engineering`                                                                                                                                                           |
+| **Edit**       | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [s/SALARY] [l/LEAVE] [r/ROLE] [m/MANAGER NAME]… [d/DEPARTMENT]…`<br> e.g.,`edit 1 p/91234567 e/johnsimmons@gmail.com`                                                                      |
+| **Exit**       | `exit`                                                                                                                                                                                                                                          |
+| **Filter**     | `filter [n/NAME] [e/EMAIL] [a/ADDRESS] [s/SALARY] [l/LEAVE] [r/ROLE] [m/MANAGERNAME] [d/DEPARTMENT]` <br> e.g., `filter d/R&D s/10000`                                                                                                                                                                       |
+| **Find**       | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find alex david`                                                                                                                                                                                      |
+| **Help**       | `help` or `help [command]` <br> e.g., `help add`                                                                                                                                                                                                |
+| **List**       | `list`                                                                                                                                                                                                                                          |
+
