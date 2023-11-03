@@ -13,6 +13,7 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.person.Person;
+import seedu.address.model.reminder.Reminder;
 import seedu.address.model.reminder.ReminderScheduler;
 import seedu.address.model.reminder.UniqueReminderList;
 
@@ -25,6 +26,7 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
+    private final FilteredList<Reminder> filteredReminders;
     private final SimpleObjectProperty<Person> selectedPerson = new SimpleObjectProperty<>();
     private final UniqueReminderList reminderList;
     private final Dashboard dashboard = new Dashboard(this);
@@ -44,6 +46,7 @@ public class ModelManager implements Model {
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
         this.reminderList = new UniqueReminderList(this);
         this.reminderList.updateReminders();
+        this.filteredReminders = new FilteredList<>(this.reminderList.asUnmodifiableObservableList());
         this.reminderScheduler = new ReminderScheduler(this, reminderMutex);
     }
 
@@ -167,6 +170,28 @@ public class ModelManager implements Model {
             return;
         }
         reminderScheduler.start();
+    }
+
+    @Override
+    public void updateReminderList() {
+        this.reminderList.updateReminders();
+    }
+
+    //=========== Filtered Reminder List Accessors =======================================================
+
+    /**
+     * Returns an unmodifiable view of the list of {@code Reminder} backed by the internal list of
+     * {@code versionedAddressBook}
+     */
+    @Override
+    public ObservableList<Reminder> getFilteredReminderList() {
+        return filteredReminders;
+    }
+
+    @Override
+    public void updateFilteredReminderList(Predicate<Reminder> predicate) {
+        requireNonNull(predicate);
+        filteredReminders.setPredicate(predicate);
     }
 
     @Override

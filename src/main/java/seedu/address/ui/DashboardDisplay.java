@@ -9,9 +9,12 @@ import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.PieChart;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListCell;
+import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 import seedu.address.model.Dashboard;
 import seedu.address.model.person.lead.LeadType;
+import seedu.address.model.reminder.DateReminders;
 
 /**
  * The Dashboard Display.
@@ -35,6 +38,8 @@ public class DashboardDisplay extends UiPart<Region> {
     private CategoryAxis xAxis;
     @FXML
     private NumberAxis yAxis;
+    @FXML
+    private ListView<DateReminders> dateRemindersListView;
 
     /**
      * Creates a {@code DashboardDisplay} using data from the given {@code dashboard}.
@@ -83,5 +88,22 @@ public class DashboardDisplay extends UiPart<Region> {
         yAxis.setTickUnit(1);
         yAxis.setAutoRanging(false);
         yAxis.setUpperBound(maxY);
+
+        dateRemindersListView.setItems(dashboard.getDateReminders());
+        dateRemindersListView.setCellFactory(listView -> new DashboardDisplay.ReminderListViewCell());
+    }
+
+    static class ReminderListViewCell extends ListCell<DateReminders> {
+        @Override
+        protected void updateItem(DateReminders dateReminders, boolean empty) {
+            super.updateItem(dateReminders, empty);
+
+            if (empty || dateReminders == null) {
+                setGraphic(null);
+                setText(null);
+            } else {
+                setGraphic(new ReminderDateCard(dateReminders.getDate(), dateReminders.getReminderList()).getRoot());
+            }
+        }
     }
 }
