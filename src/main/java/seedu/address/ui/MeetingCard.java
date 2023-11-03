@@ -74,7 +74,7 @@ public class MeetingCard extends UiPart<Region> {
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
         if (meeting.getStatus().isComplete) {
-            status.setText("[COMPLETE]");
+            status.setText("COMPLETE");
         } else {
             status.setText("");
         }
