@@ -80,6 +80,8 @@ Refer to [Command Summary](#command-summary) below for a summary of all commands
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `edit INDEX /n NAME`, `INDEX` and `NAME` are parameters which can be used as `edit 3 /n John Doe`.
 
+* Commands, prefixes and most parameters are to be entered in lower case. You can only enter capitalized letters for parameters of `NAME`, `EMAIL` and `ADDRESS`.<br>
+
 * Items in square brackets are optional.<br>
   e.g. `/n NAME [/t TAG]` can be used as `/n John Doe /t friend` or as `/n John Doe`.
 
