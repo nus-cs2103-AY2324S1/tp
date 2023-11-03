@@ -36,7 +36,7 @@ public class LinkCommandParser implements Parser<LinkCommand> {
         switch (state) {
         case STUDENT:
             if (model.getCurrentlyDisplayedPerson() == null) {
-                throw new ParseException("No student is shown" + getStatefulUsageInfoPerson());
+                throw new ParseException("No student is shown" + "\n" + getStatefulUsageInfoPerson());
             }
             try {
                 studentName = model.getCurrentlyDisplayedPerson().getName();
@@ -47,7 +47,7 @@ public class LinkCommandParser implements Parser<LinkCommand> {
             }
         case SCHEDULE:
             if (model.getCurrentlyDisplayedLesson() == null) {
-                throw new ParseException("No lesson is shown" + getStatefulUsageInfoLesson());
+                throw new ParseException("No lesson is shown" + "\n" + getStatefulUsageInfoLesson());
             }
             try {
                 studentName = ParserUtil.parseName(arguments);
