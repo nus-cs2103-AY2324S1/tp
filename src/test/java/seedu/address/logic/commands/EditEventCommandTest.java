@@ -338,4 +338,16 @@ public class EditEventCommandTest {
         EditEventDescriptor descriptorEdited = new EditEventDescriptorBuilder(editedEvent1).build();
         assertTrue(descriptorEdited.isAnyFieldEdited());
     }
+
+    @Test
+    public void equalEditEventDescriptorTest() {
+        EditEventDescriptor descriptor1 = new EditEventDescriptor();
+        assertTrue(descriptor1.equals(descriptor1));
+    }
+
+    @Test
+    public void equalEditEventDescriptorNullTest() {
+        EditEventDescriptor descriptor1 = new EditEventDescriptor();
+        assertFalse(descriptor1.equals(null));
+    }
 }

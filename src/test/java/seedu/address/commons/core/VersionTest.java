@@ -132,4 +132,36 @@ public class VersionTest {
             int major, int minor, int patch, boolean isEarlyAccess) {
         assertEquals(new Version(major, minor, patch, isEarlyAccess), Version.fromString(versionString));
     }
+
+    @Test
+    public void equalsMethod() {
+        Version version = new Version(1, 2, 3, true);
+        assertTrue(version.equals(version));
+    }
+
+    @Test
+    public void equalsMethodNull() {
+        Version version = new Version(1, 2, 3, true);
+        assertTrue(!version.equals(null));
+    }
+
+    @Test
+    public void hashCodeMethod() {
+        Version version = new Version(1, 2, 3, true);
+        assertTrue(version.hashCode() == version.hashCode());
+    }
+
+    @Test
+    public void toStringMethod() {
+        Version version = new Version(1, 2, 3, true);
+        String expected = "V1.2.3ea";
+        assertEquals(expected, version.toString());
+    }
+
+    @Test
+    public void compareToMethod() {
+        Version version = new Version(1, 2, 3, false);
+        Version version2 = new Version(1, 2, 3, true);
+        assertTrue(version.compareTo(version2) == 1);
+    }
 }

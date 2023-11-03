@@ -26,9 +26,9 @@ import seedu.address.model.event.EventTime;
 import seedu.address.model.group.Group;
 import seedu.address.model.person.Name;
 
-public class EditMeetingCommandParserTest {
+public class EditEventCommandParserTest {
 
-    private final EditMeetingCommandParser parser = new EditMeetingCommandParser();
+    private final EditEventCommandParser parser = new EditEventCommandParser();
 
     @Test
     public void parse_missingParts_failure() {
