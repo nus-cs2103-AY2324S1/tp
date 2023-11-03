@@ -156,17 +156,23 @@ Examples:
 * `list tasks` displays all the tasks with their `DESCRIPTION`.
 
 
-
-
 Success Output:
 * For the command `list` or `list schedule`:
 `Showing list SCHEDULE`
-* 
+![Success for list SCHEDULE](images/list/list_schedule_positive.png)
 * For the command `list students` (including extra keywords):
 `Showing list STUDENT`
+![Success for list STUDENTS](images/list/list_student_positive.png)
+* For the command `list tasks`
+  `Showing list TASK`
+![Success for list STUDENTS](images/list/list_tasks_positive.png)
+
+Notes
+* If there are no entries, e.g. there are no students added yet or there are no tasks added yet, an empty list is displayed.
+![Empty list](images/list/list_tasks_empty.png)
+
 
 Failure Output:
-* When there are no students saved in the app: `There are no students saved currently.`
 * When there are invalid keywords specified as a parameter: 
 ```Invalid command format!
   list: Displays the specified list, which can be a STUDENTS list, SCHEDULE list or TASKS list. Default command without specified list displays the schedule list. When specifying STUDENTS list,optional parameters can be used to specify what student details to display
