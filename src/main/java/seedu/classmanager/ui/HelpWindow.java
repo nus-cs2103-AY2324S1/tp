@@ -27,7 +27,7 @@ public class HelpWindow extends UiPart<Stage> {
             + "Toggle theme - theme\n\n"
             + "Core Commands with Parameters:\n"
             + "Add - add s/STUDENT_NUMBER n/NAME p/PHONE_NUMBER e/EMAIL c/CLASS_NUMBER [t/TAG]…\n"
-            + "Comment - comment s/STUDENT_NUMBER c/COMMENT\n"
+            + "Comment - comment s/STUDENT_NUMBER cm/COMMENT\n"
             + "Delete - delete s/STUDENT_NUMBER\n"
             + "Edit - edit STUDENT_NUMBER [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [s/NEW_STUDENT_NUMBER] "
             + "[c/CLASS_NUMBER]\n"
