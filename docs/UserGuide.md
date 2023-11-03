@@ -339,11 +339,11 @@ Adds an interview to the specified application from the list.
 
 ### Deleting an interview: `interview delete`
 
-Deletes an interview to the specified application from the list.
+Deletes an interview of the specified application from the list.
 
 **Format:** `interview delete INTERVIEW_INDEX from/JOB_INDEX`
 
-* Edits the interview at the specified `INTERVIEW_INDEX` of the application at the specified `JOB_INDEX`.
+* Deletes the interview at the specified `INTERVIEW_INDEX` of the application at the specified `JOB_INDEX`.
 
 **Examples:**
 
@@ -356,7 +356,7 @@ Deletes an interview to the specified application from the list.
 
 ### Editing an interview: `interview edit`
 
-Edits an interview to the specified application from the list.
+Edits an interview of the specified application from the list.
 
 **Format:** `interview edit INTERVIEW_INDEX from/JOB_INDEX [t/TYPE] [d/DATETIME] [a/ADDRESS]`
 
@@ -366,7 +366,7 @@ Edits an interview to the specified application from the list.
 **Examples:**
 
 * `interview edit 2 from/4 t/GROUP`
-  Edits the interview type to a group interview for the 2nd interview from the 4th job application in the list.
+  Edits the interview type for the 2nd interview from the 4th job application in the list.
 * `interview edit 4 from/8 a/NTU`
   Edits the address for the 4th interview from the 8th job application in the list.
 
@@ -399,3 +399,4 @@ the data of your previous AddressBook home folder.
 --------------------------------------------------------------------------------------------------------------------
 
 ## Glossary
+1. Prefix - An affix that placed before the field to indicate the type of field.
