@@ -98,6 +98,7 @@ View all musicians and bands in their separate panels.
 
 
 ## Features for managing musicians
+
 ### Add musician: `add`
 
 Adds one musician to the contact book. 
@@ -119,7 +120,7 @@ New musician added: John Doe; Phone: 98765432; Email: johnd@example.com; Tags: [
 
 **Upon failure:**
 
-If you input a musician which is already in your contact book (ie. have the same phone number or email as an existing contact). You will be shown an error message like below. Please re-enter the correct information.
+If you input a musician which is already in your contact book (i.e. a musician with either the same name, the same phone number, or the same email as an existing contact). You will be shown an error message like below. Please re-enter the correct information.
 ```
 This musician already exists in your contact list
 ```
@@ -153,6 +154,42 @@ The musician index provided is invalid
 Please verify that the index is correct and try again.
 
 ### Edit musician: `edit`
+
+Edits an existing musician in the contact book referenced by the index.
+
+Name, phone number, email, tag, instrument, genre about the musician can all be included for edit.
+
+**Format:** `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [t/TAG]... [i/INSTRUMENT]... [g/GENRE]...`
+
+**Examples:**
+* `edit 1 p/98765430 g/pop`
+* `edit 2 e/pianistbetsy@edited.com i/violin t/available`
+
+**Things to Note**
+* At least one of the optional field to edit must be provided.
+* The `INDEX` refer to the index number shown in the currently displayed `My Musicians` list. The index **must be a positive integer** 1, 2, 3, …​
+* When editing tags/instruments/genres, the existing tags/instruments/genres of the musician will be removed i.e adding of tags/instruments/genres is not cumulative.
+* You can remove all tags/instruments/genres of the musician by inputting an empty tag/instrument/genre field, e.g. `edit 1 t/ i/ g/`.
+
+**Upon success:**
+A success message like below will be displayed.
+
+```
+Edited Musician: John Doe; Phone: 98765430; Email: johnd@example.com; Tags: [bestman]; Instruments: [violin]; Genres: [pop]
+```
+
+**Upon failure:**
+1. If you provide no argument for the musician to be edited, e.g. `edit 1`, you will see an error message like below:
+    ```
+    At least one field to edit must be provided.
+    ```
+2. If you provide invalid arguments for name, phone number, and email, you will be shown the corresponding error message with the correct format to follow. Please re-enter the correct information.
+3. If you have provided at least one optional field to edit in the correct format yet the index provided is out of range, you will see the error message below:
+    ```
+    The musician index provided is invalid
+    ```
+    Please verify that the index is correct and try again.
+
 
 ### Tag musician
 [combine tag i and g]
