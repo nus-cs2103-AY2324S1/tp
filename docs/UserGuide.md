@@ -10,22 +10,22 @@ online dating journey.
 
 - [Quick Start](#1-quick-start)
 - [Features](#2-features)
-   - [Creation of new date: `add`](#creation-of-new-date)
-   - [Getting a recommended date: `bestMatch`](#getting-a-best-match)
-   - [Blind Date Generator: `blindDate`](#blind-date-generator)
-   - [Clear all dates: `clear`](#clear-all-dates)
-   - [Deletion of dates: `delete`](#deletion-of-dates-delete)
-   - [Edit existing dates: `edit`](#edit-existing-date)
-   - [Exit the program: `exit`](#exit-the-program)
-   - [Filter by Metric: `filter`](#filter-by-metric-filter)
-   - [Find a date: `find`](#find-a-date)
-   - [Help: `help`](#help)
-   - [Listing current dates : `list`](#list-all-dates)
-   - [Setting the matching algorithm: `setP`](#setting-the-date-pref)
-   - [Show Date Preferences: `showP`](#show-date-preferences)
-   - [Sorting list of dates by Metric: `sort`](#sorting-date-list)
-   - [Star a date: `star`](#star-a-date)
-   - [Unstar a date: `unstar`](#unstar-a-date)
+    - [Creation of new date: `add`](#creation-of-new-date)
+    - [Getting a recommended date: `bestMatch`](#getting-a-best-match)
+    - [Blind Date Generator: `blindDate`](#blind-date-generator)
+    - [Clear all dates: `clear`](#clear-all-dates)
+    - [Deletion of dates: `delete`](#deletion-of-dates-delete)
+    - [Edit existing dates: `edit`](#edit-existing-date)
+    - [Exit the program: `exit`](#exit-the-program)
+    - [Filter by Metric: `filter`](#filter-by-metric-filter)
+    - [Find a date: `find`](#find-a-date)
+    - [Help: `help`](#help)
+    - [Listing current dates : `list`](#list-all-dates)
+    - [Setting the matching algorithm: `setP`](#setting-the-date-pref)
+    - [Show Date Preferences: `showP`](#show-date-preferences)
+    - [Sorting list of dates by Metric: `sort`](#sorting-date-list)
+    - [Star a date: `star`](#star-a-date)
+    - [Unstar a date: `unstar`](#unstar-a-date)
 - [FAQ](#3-faq)
 - [Summary](#4-summary)
 - [Glossary](#5-glossary)
@@ -38,7 +38,8 @@ online dating journey.
 
 2. Download the latest `LoveBook.jar` from [here](https://github.com/AY2324S1-CS2103T-F10-2/tp).
 
-3. Double-click the file to start the app. The window that appears will be similar to the below should appear in a few seconds. Note how
+3. Double-click the file to start the app. The window that appears will be similar to the below should appear in a few
+   seconds. Note how
    the app contains some sample information.<br>
    ![Ui](images/Ui.png)
    *Figure 1: A view of LoveBook at startup*
@@ -60,13 +61,14 @@ online dating journey.
 **Notes about the command format:**<br>
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  e.g. in `edit INDEX METRIC/NEW_ARG`, `INDEX`, `NEW_ARG` and `METRIC` are parameters which can be used as 
-`edit 2 income/3000`.
+  e.g. in `edit INDEX METRIC/NEW_ARG`, `INDEX`, `NEW_ARG` and `METRIC` are parameters which can be used as
+  `edit 2 income/3000`.
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) 
-will be ignored.<br> e.g. if the command specifies `help 123`, it will be interpreted as `help`.
+* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`)
+  will be ignored.<br> e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
-* If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
+* If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines
+  as space characters surrounding line-breaks may be omitted when copied over to the application.
 
 <div markdown="span" class="alert alert-info">:information_source: **Parameter Constraints:**
 
@@ -78,7 +80,6 @@ will be ignored.<br> e.g. if the command specifies `help 123`, it will be interp
 * `height` should be a positive integer in cm between 100cm and 250cm (inclusive).
 
 </div>
-
 
 ### [Creation of new date: `add`](#creation-of-new-date)
 
@@ -137,6 +138,7 @@ Deletes the specified date from the LoveBook.
 Format: `delete INDEX`
 
 Parameter constraints:
+
 - The index must be a positive integer, and be within the range of the recorded dates.
 
 Example: `delete 1`
@@ -152,12 +154,14 @@ Edits a date in the specified index in the LoveBook.
 Format: `edit INDEX METRIC/NEW ARG`
 
 Parameter constraints:
+
 - The index must be a positive integer, and be within the range of the recorded dates
 - Metric is limited to `gender, age, horoscope, name, height, income` only
 - New argument replaces the existing argument for that metric
 - User can edit up to n number of metrics in one command line, where n refers to the number of metrics available
 
 Example:
+
 - `edit 3 name/Cleon` (editing 1 metric)
 - `edit 3 name/Cleon horoscope/Cancer` (editing 2 metrics)
 - `edit 3 horoscope/Cancer name/Cleon` (sequence doesn't matter)
@@ -183,6 +187,7 @@ Format: `filter METRIC/ARG`
 * Metric is limited to `gender, age, horoscope, name, income, height` only
 
 Example:
+
 - `filter name/Cleon`
 - `filter gender/M`
 - `filter gender/M name/Cleon`
@@ -198,10 +203,12 @@ Finds a date in the LoveBook by a specific name(s)
 Format: `find NAME [MORE_NAMES]`
 
 Parameter constraints:
+
 - Name should be a non non-empty string.
 - More names can be added to the command line, and the search will be conducted for all names provided
 
 Example:
+
 - `find Cleon`
 - `find Cleon John`
 
@@ -247,11 +254,13 @@ Sorts the dates in the LoveBook by a specific metric.
 Format: `sort METRIC/ORDER`
 
 Parameter constraints:
+
 - Sort must be from list of metrics
 - Metric is limited to `age, horoscope, name, income, height` only
 - ORDER must take on either the value of 'increasing', or 'decreasing'
 
 Example:
+
 - `sort name/increasing`
 - `sort horoscope/decreasing`
 - `filter income/ height/increasing`
@@ -320,19 +329,20 @@ your data. In the event of a power outage, all your data will be safe.
 
 # 4 [Summary](#4-summary)
 
-| Action                 | Format                                                                                | Examples                                                               |
-|------------------------|---------------------------------------------------------------------------------------|------------------------------------------------------------------------|
-| Listing current dates  | `list`                                                                                | `list`                                                                 |
-| Deletion of dates      | `delete INDEX`                                                                        | `delete 2`                                                             |
-| Creation of new date   | `add name/NAME age/AGE gender/GENDER height/HEIGHT horoscope/HOROSCOPE income/INCOME` | `add name/John age/25 gender/M height/175 horoscope/Aries income/5000` |
-| Edit existing dates    | `edit INDEX METRIC/NEW ARG`                                                           | `edit 3 name/Cleon`                                                    |
-| Random Date Generator  | `random`                                                                              | `random`                                                               |
-| Filter by Metric       | `filter METRIC/ARG`                                                                   | `filter name/Cleon`                                                    |
-| Sorting list of dates  | `sort METRIC/ORDER`                                                                   | `sort name/increasing`                                                 |
-| Getting a recommended date | `match`                                                                               | `match`                                                                |
+| Action                         | Format                                                                                | Examples                                                               |
+|--------------------------------|---------------------------------------------------------------------------------------|------------------------------------------------------------------------|
+| Listing current dates          | `list`                                                                                | `list`                                                                 |
+| Deletion of dates              | `delete INDEX`                                                                        | `delete 2`                                                             |
+| Creation of new date           | `add name/NAME age/AGE gender/GENDER height/HEIGHT horoscope/HOROSCOPE income/INCOME` | `add name/John age/25 gender/M height/175 horoscope/Aries income/5000` |
+| Edit existing dates            | `edit INDEX METRIC/NEW ARG`                                                           | `edit 3 name/Cleon`                                                    |
+| Random Date Generator          | `random`                                                                              | `random`                                                               |
+| Filter by Metric               | `filter METRIC/ARG`                                                                   | `filter name/Cleon`                                                    |
+| Sorting list of dates          | `sort METRIC/ORDER`                                                                   | `sort name/increasing`                                                 |
+| Getting a recommended date     | `match`                                                                               | `match`                                                                |
 | Setting the matching algorithm | `setP gender/GENDER age/AGE height/HEIGHT income/INCOME`                              | `setP gender/M age/22 height/180 income/2000`                          |
- | Star a date            | `star INDEX`                                                                          | `star 1`                                                               |
- | Unstar a date          | `unstar INDEX`                                                                        | `unstar 1`                                                             |
+| Star a date                    | `star INDEX`                                                                          | `star 1`                                                               |
+| Unstar a date                  | `unstar INDEX`                                                                        | `unstar 1`                                                             |
+
 --------------------------------------------------------------------------------------------------------------------
 
 # 5 [Glossary](#5-glossary)
