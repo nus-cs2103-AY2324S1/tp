@@ -26,7 +26,7 @@ public class AddGroupMeetingTimeCommand extends Command {
     public static final String MESSAGE_NO_GROUP_WITH_NAME_FOUND = "No group with such name found.\n"
             + "Please provide the group's full name as in the existing contact list.";
 
-    public static final String MESSAGE_SUCCESS = "Free time added to: %1$s";
+    public static final String MESSAGE_SUCCESS = "Free time status for: %1$s \n";
 
     private final Group toAdd;
     private final ArrayList<TimeInterval> toAddFreeTime;
@@ -46,13 +46,14 @@ public class AddGroupMeetingTimeCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+        String status;
         if (model.hasGroup(toAdd)) {
-            model.addTimeToGroup(toAdd, toAddFreeTime);
+            status = model.addTimeToGroup(toAdd, toAddFreeTime);
         } else {
             throw new CommandException(MESSAGE_NO_GROUP_WITH_NAME_FOUND);
         }
 
-        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
+        return new CommandResult(String.format(MESSAGE_SUCCESS + status, Messages.format(toAdd)));
     }
 
     @Override

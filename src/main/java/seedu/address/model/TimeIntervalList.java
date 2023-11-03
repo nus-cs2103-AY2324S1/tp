@@ -28,24 +28,27 @@ public class TimeIntervalList implements Iterable<TimeInterval> {
         return internalList.stream();
     }
 
-    public void addTime(ArrayList<TimeInterval> timeIntervals) throws CommandException{
+    public String addTime(ArrayList<TimeInterval> timeIntervals) throws CommandException{
         boolean timeAdded = false;
         StringBuilder errorCompilation = new StringBuilder();
-        errorCompilation.append("There is a clash in these timings:\n");
+        errorCompilation.append("There is a clash in these input timings with your existing timing:\n");
         for (TimeInterval interval : timeIntervals) {
             if (isTimeIntervalOverlap(interval)) {
                 errorCompilation.append(interval + "\n");
             } else {
-                internalList.add(interval);
+                if (!timeAdded) {
+                    errorCompilation.append("The other times have been added:\n");
+                }
                 timeAdded = true;
+                internalList.add(interval);
+                errorCompilation.append(interval.toString());
             }
         }
-        if (timeAdded) {
-            errorCompilation.append("The other times have been added\n");
-        }
+
         if ((timeAdded && errorCompilation.length() > 67) || (!timeAdded && errorCompilation.length() > 35)) {
-            throw new CommandException(errorCompilation.toString());
+            return errorCompilation.toString();
         }
+        throw new CommandException("Something went wrong at addtime in timeintervallist class");
     }
 
     public void addAll(TimeIntervalList timeIntervalList) {

@@ -17,7 +17,7 @@ public class TimeInterval {
     public static final String MESSAGE_CONSTRAINTS_LOGIC = "Your end time cannot be before your start time ";
 
     public static final String MESSAGE_CONSTRAINTS_OVERLAP = "No overlap is allowed in your interval. \n "
-            + PREFIX_FREETIME + "Eg. mon 1200 - mon 1600" + PREFIX_FREETIME  + "mon 1400 - mon 1800 is not allowed. " +
+            + PREFIX_FREETIME + "mon 1200 - mon 1600 " + PREFIX_FREETIME  + "mon 1400 - mon 1800 is not allowed. " +
             "Write it as mon 1200 - mon 1800";
 
 
