@@ -65,15 +65,13 @@ will be the least of your worries.
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `add -name NAME`, `NAME` is a parameter which can be used as `add -name Leah`.
+  In this case, "Leah" is substituted for `NAME`.
 
 * Items in square brackets are optional.<br>
   e.g `list [KEYWORDs]` can be used as `list` or as `list STUDENTS`.
 
-* Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
-
 * Parameters can be in any order.<br>
-  e.g. if the command specifies `-name NAME -phone/PHONE_NUMBER`, `-phone/PHONE_NUMBER -name/NAME` is also acceptable.
+  e.g. if the command specifies `-name NAME -phone PHONE_NUMBER`, `-phone PHONE_NUMBER -name NAME` is also acceptable.
 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
@@ -119,7 +117,7 @@ Examples:
 
 
 
-### Listing all students : `list`
+### Listing upcoming lessons / tasks / students : `list`
 
 The list command has different behaviours depending on the keywords given.
 Lists all the students, lessons and tasks saved in the application, with optional specified information through space-separated keywords.
@@ -128,24 +126,16 @@ The list names are case-insensitive: eg. `STUDENTS`, `students`, `stuDEnts` are 
 To show the `SCHEDULE` list:
 * Format: `list schedule`
 * By default, `list` will also show the `SCHEDULE` list and list all the lessons with their lesson name.
-
-
-To show the `STUDENTS` list:
-* Format: `list students [KEYWORDs]`
-  * displays all the students with their `NAME`.
-  * The `[KEYWORDs]` allows for a list of valid space-separated information of the student to be displayed.
+* This is also the default view when you first open the application.
 
 To show the `TASKS` list:
 * Format: `list tasks`
   * * displays all the tasks with their `DESCRIPTION`.
 
-Examples:
-* `list` displays the `SCHEDULE` list with all the lessons.
-* `list schedule` displays all the lessons with their `NAME`.
-* `list students` displays all the students with their `NAME` (including previously specified fields).
-* `list students subjects` displays all the students with their `NAME` and a list of subjects for each student.
-* `list students subjects email` displays all the students with their `NAME`, a list of subjects for each student and their email.
-* `list tasks` displays all the tasks with their `DESCRIPTION`.
+To show the `STUDENTS` list:
+* Format: `list students [KEYWORDs]`
+    * displays all the students with their `NAME`.
+    * The `[KEYWORDs]` allows for a list of valid space-separated information of the student to be displayed.
 
 Acceptable values for the keywords:
 * `PHONE`
@@ -157,16 +147,32 @@ Acceptable values for the keywords:
 * `NONE` (resets to only showing student names)
 * `ALL` (shows all student detail fields)
 
+Examples:
+* `list` displays the `SCHEDULE` list with all the lessons.
+* `list schedule` displays all the lessons with their `NAME`.
+* `list students` displays all the students with their `NAME` (including previously specified fields).
+* `list students subjects` displays all the students with their `NAME` and a list of subjects for each student.
+* `list students subjects email` displays all the students with their `NAME`, a list of subjects for each student and their email.
+* `list tasks` displays all the tasks with their `DESCRIPTION`.
+
 
 Success Output:
 * For the command `list` or `list schedule`:
 `Showing list SCHEDULE`
-* 
+![Success for list SCHEDULE](images/list/list_schedule_positive.png)
 * For the command `list students` (including extra keywords):
 `Showing list STUDENT`
+![Success for list STUDENTS](images/list/list_student_positive.png)
+* For the command `list tasks`
+  `Showing list TASK`
+![Success for list STUDENTS](images/list/list_tasks_positive.png)
+
+Notes
+* If there are no entries, e.g. there are no students added yet or there are no tasks added yet, an empty list is displayed.
+![Empty list](images/list/list_tasks_empty.png)
+
 
 Failure Output:
-* When there are no students saved in the app: `There are no students saved currently.`
 * When there are invalid keywords specified as a parameter: 
 ```Invalid command format!
   list: Displays the specified list, which can be a STUDENTS list, SCHEDULE list or TASKS list. Default command without specified list displays the schedule list. When specifying STUDENTS list,optional parameters can be used to specify what student details to display
@@ -180,18 +186,16 @@ Failure Output:
 
 Edits an existing student in the application.
 
-Format: `edit INDEX [-name NAME] [-phone PHONE_NUMBER] [-email EMAIL] [-address ADDRESS] [-tag TAG]…​`
+Format: `edit INDEX [-name NAME] [-phone PHONE_NUMBER] [-email EMAIL] [-address ADDRESS] [-tag TAG]`
 
 * Edits the student at the specified `INDEX`. The index refers to the index number shown in the displayed student list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* When editing tags, the existing tags of the student will be removed i.e adding of tags is not cumulative.
-* You can remove all the student’s tags by typing `t/` without
-    specifying any tags after it.
+* When editing tags, the existing tags of the student will be removed i.e. adding of tags is not cumulative.
 
 Examples:
 *  `edit 1 -phone 91234567 -email johndoe@example.com` Edits the phone number and email address of the 1st student to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 -name Betsy Crower -tag` Edits the name of the 2nd student to be `Betsy Crower` and clears all existing tags.
+*  `edit 2 -name Betsy Crower -tag Secondary` Edits the name of the 2nd student to be `Betsy Crower` and sets the tag to `Secondary`.
 
 ### Locating students by name: `find`
 
