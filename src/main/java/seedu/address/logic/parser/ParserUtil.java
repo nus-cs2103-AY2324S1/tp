@@ -159,7 +159,9 @@ public class ParserUtil {
     public static Set<Tag> parseTags(Collection<String> tags) throws ParseException {
         requireNonNull(tags);
         final Set<Tag> tagSet = new HashSet<>();
-        String[] tagNameCategoryPairs = parseTagCategories(tags);
+        String listTags = tags.toString();
+        String cleanedList = listTags.replaceAll("[\\[\\]]", "");
+        String[] tagNameCategoryPairs = cleanedList.split(",");
 
         if (tagNameCategoryPairs.length == 1 && tagNameCategoryPairs[0].isBlank()) {
             return tagSet;
@@ -194,6 +196,10 @@ public class ParserUtil {
         for (String tag : tagParams) {
             if (tag.split("\\s+").length > 1) {
                 if (!Tag.isValidTagName(tag.split("\\s+")[1])) {
+                    throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
+                }
+            } else {
+                if (!Tag.isValidTagName(tag)) {
                     throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
                 }
             }
