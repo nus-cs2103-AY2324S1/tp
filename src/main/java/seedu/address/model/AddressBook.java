@@ -75,6 +75,9 @@ public class AddressBook implements ReadOnlyAddressBook {
         return musicians.contains(musician);
     }
 
+    /**
+     * Returns true if a musician with the same phone or email as {@code musician} exists in the address book.
+     */
     public boolean hasDuplicateInfo(Musician musician) {
         requireNonNull(musician);
         return musicians.hasDuplicateInfo(musician);
