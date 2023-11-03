@@ -7,6 +7,5 @@
       "y" : 100
     }
   },
-  "flashlingoFilePath" : "data/flashlingo.json",
-  "theme" : "Default"
+  "addressBookFilePath" : "addressbook.json"
 }

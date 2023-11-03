@@ -1,11 +1,8 @@
-//@@author itsNatTan
-package seedu.flashlingo.model.flashcard.word;
+package seedu.flashlingo.model.flashcard.words;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
-
-import seedu.flashlingo.model.flashcard.words.OriginalWord;
 
 class OriginalWordTest {
 

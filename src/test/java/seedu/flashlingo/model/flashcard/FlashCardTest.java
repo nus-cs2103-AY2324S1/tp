@@ -1,8 +1,6 @@
-//@@author itsNatTan
 package seedu.flashlingo.model.flashcard;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Date;
 
@@ -32,17 +30,6 @@ class FlashCardTest {
                 new ProficiencyLevel(1));
 
         assertEquals(fc.getTranslatedWord(), translatedWord);
-    }
-
-    @Test
-    void getRememberannce() {
-        FlashCard fc = new FlashCard(new OriginalWord("Hello", "eng"),
-                new TranslatedWord("Ni Hao", "chi"),
-                new Date(),
-                new ProficiencyLevel(1),
-                true);
-
-        assertTrue(fc.isRecalled());
     }
 
     @Test
@@ -84,19 +71,6 @@ class FlashCardTest {
                 new Date(),
                 new ProficiencyLevel(1));
         assert(fc1.isSameFlashCard(fc2));
-    }
-
-    @Test
-    void isSameFlashCardBySameWordDifferentTranslation() {
-        FlashCard fc1 = new FlashCard(new OriginalWord("Hello", "eng"),
-                new TranslatedWord("Ni Hao", "chi"),
-                new Date(),
-                new ProficiencyLevel(1));
-        FlashCard fc2 = new FlashCard(new OriginalWord("Hello", "eng"),
-                new TranslatedWord("你好", "chi"),
-                new Date(),
-                new ProficiencyLevel(1));
-        assert(!fc1.isSameFlashCard(fc2));
     }
 
     @Test
@@ -170,7 +144,7 @@ class FlashCardTest {
                 new ProficiencyLevel(1));
         fc1.updateLevel(true);
         assertEquals(fc1.getProficiencyLevel().getLevel(), 2);
-        assert(!fc1.isDeletedFromReview());
+        assert(!fc1.isToBeDeleted());
         assert(!fc1.getWhenToReview().equals(date));
     }
 
@@ -183,7 +157,7 @@ class FlashCardTest {
                 new ProficiencyLevel(2));
         fc1.updateLevel(false);
         assertEquals(fc1.getProficiencyLevel().getLevel(), 1);
-        assert(!fc1.isDeletedFromReview());
+        assert(!fc1.isToBeDeleted());
         assert(!fc1.getWhenToReview().equals(date));
     }
 
@@ -196,7 +170,7 @@ class FlashCardTest {
                 new ProficiencyLevel(1));
         fc1.updateLevel(false);
         assertEquals(fc1.getProficiencyLevel().getLevel(), 1);
-        assert(!fc1.isDeletedFromReview());
+        assert(!fc1.isToBeDeleted());
         assert(!fc1.getWhenToReview().equals(date));
     }
 
@@ -209,7 +183,7 @@ class FlashCardTest {
                 new ProficiencyLevel(5));
         fc1.updateLevel(true);
         assertEquals(fc1.getProficiencyLevel().getLevel(), 6);
-        assert(fc1.isDeletedFromReview());
+        assert(fc1.isToBeDeleted());
         assert(!fc1.getWhenToReview().equals(date));
     }
 }

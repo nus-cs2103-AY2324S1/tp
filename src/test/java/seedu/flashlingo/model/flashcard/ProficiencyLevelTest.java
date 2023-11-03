@@ -1,9 +1,10 @@
-//@@author itsNatTan
 package seedu.flashlingo.model.flashcard;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
+
+
 
 class ProficiencyLevelTest {
 
@@ -30,6 +31,12 @@ class ProficiencyLevelTest {
         ProficiencyLevel pl = new ProficiencyLevel(3);
         pl.downgradeLevel();
         assertEquals(pl.getLevel(), 2);
+    }
+
+    @Test
+    void toDelete() {
+        ProficiencyLevel pl1 = new ProficiencyLevel(5);
+        assert(pl1.toDelete());
     }
 
     @Test
