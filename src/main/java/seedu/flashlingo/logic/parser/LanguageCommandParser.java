@@ -6,7 +6,6 @@ import seedu.flashlingo.logic.commands.LanguageCommand;
 import seedu.flashlingo.logic.parser.exceptions.ParseException;
 import seedu.flashlingo.model.flashcard.WordLanguagePredicate;
 
-
 /**
  * Parses input arguments and creates a new LanguageCommand object
  */

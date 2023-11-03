@@ -21,6 +21,7 @@ public class AddCommandTest {
         assertThrows(NullPointerException.class, () -> new AddCommand(original, null));
         assertThrows(NullPointerException.class, () -> new AddCommand(null, null));
     }
+
     @Test
     public void toStringMethod() {
         FlashCard addedFlashCard = new FlashCardBuilder().build();
