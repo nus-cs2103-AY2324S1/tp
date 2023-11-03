@@ -19,6 +19,9 @@ public class FindCommand extends Command {
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
             + "Example: " + COMMAND_WORD + " shark";
 
+    /**
+     * The predicate used to filter the flashcard list with specified keywords.
+     */
     private final WordContainsKeywordsPredicate predicate;
 
     public FindCommand(WordContainsKeywordsPredicate predicate) {
@@ -30,7 +33,7 @@ public class FindCommand extends Command {
         model.updateFilteredFlashCardList(predicate);
         return new CommandResult(
                 String.format(Messages.MESSAGE_FLASHCARDS_LISTED_OVERVIEW,
-                  model.getFilteredFlashCardList().size()));
+                        model.getFilteredFlashCardList().size()));
     }
 
     @Override

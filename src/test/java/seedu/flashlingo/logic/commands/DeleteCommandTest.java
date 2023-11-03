@@ -3,9 +3,6 @@ package seedu.flashlingo.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.flashlingo.logic.commands.CommandTestUtil.assertCommandFailure;
-import static seedu.flashlingo.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.flashlingo.logic.commands.CommandTestUtil.showFlashCardAtIndex;
 import static seedu.flashlingo.testutil.TypicalFlashCards.getTypicalFlashlingo;
 import static seedu.flashlingo.testutil.TypicalIndexes.INDEX_FIRST_FLASHCARD;
 import static seedu.flashlingo.testutil.TypicalIndexes.INDEX_SECOND_FLASHCARD;
@@ -20,11 +17,9 @@ import seedu.flashlingo.model.UserPrefs;
 import seedu.flashlingo.model.flashcard.FlashCard;
 
 /**
- * Contains integration tests (interaction with the Model) and unit tests for
- * {@code DeleteCommand}.
+ * Deletes a flashcard identified using it's displayed index from Flashlingo.
  */
 public class DeleteCommandTest {
-
     private Model model = new ModelManager(getTypicalFlashlingo(), new UserPrefs());
 
     @Test
@@ -38,7 +33,7 @@ public class DeleteCommandTest {
         ModelManager expectedModel = new ModelManager(model.getFlashlingo(), new UserPrefs());
         expectedModel.deleteFlashCard(flashCardToDelete);
 
-        assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
+        CommandTestUtil.assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
@@ -46,29 +41,29 @@ public class DeleteCommandTest {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredFlashCardList().size() + 1);
         DeleteCommand deleteCommand = new DeleteCommand(outOfBoundIndex);
 
-        assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_FLASHCARD_DISPLAYED_INDEX);
+        CommandTestUtil.assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_FLASHCARD_DISPLAYED_INDEX);
     }
 
     @Test
     public void execute_validIndexFilteredList_success() {
-        showFlashCardAtIndex(model, INDEX_FIRST_FLASHCARD);
+        CommandTestUtil.showFlashCardAtIndex(model, INDEX_FIRST_FLASHCARD);
 
-        FlashCard flashcardToDelete = model.getFilteredFlashCardList().get(INDEX_FIRST_FLASHCARD.getZeroBased());
+        FlashCard flashCardToDelete = model.getFilteredFlashCardList().get(INDEX_FIRST_FLASHCARD.getZeroBased());
         DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_FLASHCARD);
 
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_FLASHCARD_SUCCESS,
-                Messages.format(flashcardToDelete));
+                Messages.format(flashCardToDelete));
 
         Model expectedModel = new ModelManager(model.getFlashlingo(), new UserPrefs());
-        expectedModel.deleteFlashCard(flashcardToDelete);
-        showNoPerson(expectedModel);
+        expectedModel.deleteFlashCard(flashCardToDelete);
+        showNoFlashCard(expectedModel);
 
-        assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
+        CommandTestUtil.assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
     public void execute_invalidIndexFilteredList_throwsCommandException() {
-        showFlashCardAtIndex(model, INDEX_FIRST_FLASHCARD);
+        CommandTestUtil.showFlashCardAtIndex(model, INDEX_FIRST_FLASHCARD);
 
         Index outOfBoundIndex = INDEX_SECOND_FLASHCARD;
         // ensures that outOfBoundIndex is still in bounds of address book list
@@ -76,7 +71,7 @@ public class DeleteCommandTest {
 
         DeleteCommand deleteCommand = new DeleteCommand(outOfBoundIndex);
 
-        assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_FLASHCARD_DISPLAYED_INDEX);
+        CommandTestUtil.assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_FLASHCARD_DISPLAYED_INDEX);
     }
 
     @Test
@@ -97,7 +92,7 @@ public class DeleteCommandTest {
         // null -> returns false
         assertFalse(deleteFirstCommand.equals(null));
 
-        // different person -> returns false
+        // different FlashCard -> returns false
         assertFalse(deleteFirstCommand.equals(deleteSecondCommand));
     }
 
@@ -112,7 +107,7 @@ public class DeleteCommandTest {
     /**
      * Updates {@code model}'s filtered list to show no one.
      */
-    private void showNoPerson(Model model) {
+    private void showNoFlashCard(Model model) {
         model.updateFilteredFlashCardList(p -> false);
 
         assertTrue(model.getFilteredFlashCardList().isEmpty());

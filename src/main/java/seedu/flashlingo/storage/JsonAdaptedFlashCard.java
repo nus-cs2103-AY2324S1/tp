@@ -111,5 +111,4 @@ public class JsonAdaptedFlashCard {
             new TranslatedWord(modelTranslatedWord, modelTranslatedWordLanguage),
           modelWhenToReview, new ProficiencyLevel(modelLevel));
     }
-    //TODO: error handling
 }
