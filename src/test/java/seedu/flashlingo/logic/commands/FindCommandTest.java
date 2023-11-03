@@ -5,9 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.flashlingo.logic.Messages.MESSAGE_FLASHCARDS_LISTED_OVERVIEW;
 import static seedu.flashlingo.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.flashlingo.testutil.TypicalFlashCards.CARL;
-import static seedu.flashlingo.testutil.TypicalFlashCards.ELLE;
-import static seedu.flashlingo.testutil.TypicalFlashCards.FIONA;
+import static seedu.flashlingo.testutil.TypicalFlashCards.BENSON;
+import static seedu.flashlingo.testutil.TypicalFlashCards.DANIEL;
 import static seedu.flashlingo.testutil.TypicalFlashCards.getTypicalFlashlingo;
 
 import java.util.Arrays;
@@ -21,10 +20,9 @@ import seedu.flashlingo.model.UserPrefs;
 import seedu.flashlingo.model.flashcard.WordContainsKeywordsPredicate;
 
 /**
- * Finds and lists all flashcards in flashlingo whose original words contains any of the argument keywords.
+ * Contains integration tests (interaction with the Model) for {@code FindCommand}.
  */
 public class FindCommandTest {
-
     private Model model = new ModelManager(getTypicalFlashlingo(), new UserPrefs());
     private Model expectedModel = new ModelManager(getTypicalFlashlingo(), new UserPrefs());
 
@@ -51,12 +49,12 @@ public class FindCommandTest {
         // null -> returns false
         assertFalse(findFirstCommand.equals(null));
 
-        // different FlashCard -> returns false
+        // different person -> returns false
         assertFalse(findFirstCommand.equals(findSecondCommand));
     }
 
     @Test
-    public void execute_zeroKeywords_noFlashCardFound() {
+    public void execute_zeroKeywords_noPersonFound() {
         String expectedMessage = String.format(MESSAGE_FLASHCARDS_LISTED_OVERVIEW, 0);
         WordContainsKeywordsPredicate predicate = preparePredicate(" ");
         FindCommand command = new FindCommand(predicate);
@@ -66,13 +64,13 @@ public class FindCommandTest {
     }
 
     @Test
-    public void execute_multipleKeywords_multipleFlashCardsFound() {
-        String expectedMessage = String.format(MESSAGE_FLASHCARDS_LISTED_OVERVIEW, 3);
-        WordContainsKeywordsPredicate predicate = preparePredicate("Kurz Elle Kunz");
+    public void execute_multipleKeywords_multiplePersonsFound() {
+        String expectedMessage = String.format(MESSAGE_FLASHCARDS_LISTED_OVERVIEW, 2);
+        WordContainsKeywordsPredicate predicate = preparePredicate("Meier");
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredFlashCardList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(CARL, ELLE, FIONA), model.getFilteredFlashCardList());
+        assertEquals(Arrays.asList(BENSON, DANIEL), model.getFilteredFlashCardList());
     }
 
     @Test
@@ -84,7 +82,7 @@ public class FindCommandTest {
     }
 
     /**
-     * Parses {@code userInput} into a {@code WordContainsKeywordsPredicate}.
+     * Parses {@code userInput} into a {@code NameContainsKeywordsPredicate}.
      */
     private WordContainsKeywordsPredicate preparePredicate(String userInput) {
         return new WordContainsKeywordsPredicate(Arrays.asList(userInput.split("\\s+")));

@@ -1,5 +1,7 @@
 package seedu.flashlingo.logic.commands;
 
+import static seedu.flashlingo.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.flashlingo.logic.commands.CommandTestUtil.showFlashCardAtIndex;
 import static seedu.flashlingo.testutil.TypicalFlashCards.getTypicalFlashlingo;
 import static seedu.flashlingo.testutil.TypicalIndexes.INDEX_FIRST_FLASHCARD;
 
@@ -11,9 +13,10 @@ import seedu.flashlingo.model.ModelManager;
 import seedu.flashlingo.model.UserPrefs;
 
 /**
- * Lists all flashcards in Flashlingo to the user.
+ * Contains integration tests (interaction with the Model) and unit tests for ListCommand.
  */
 public class ListCommandTest {
+
     private Model model;
     private Model expectedModel;
 
@@ -25,12 +28,12 @@ public class ListCommandTest {
 
     @Test
     public void execute_listIsNotFiltered_showsSameList() {
-        CommandTestUtil.assertCommandSuccess(new ListCommand(), model, ListCommand.MESSAGE_SUCCESS, expectedModel);
+        assertCommandSuccess(new ListCommand(), model, ListCommand.MESSAGE_SUCCESS, expectedModel);
     }
 
     @Test
     public void execute_listIsFiltered_showsEverything() {
-        CommandTestUtil.showFlashCardAtIndex(model, INDEX_FIRST_FLASHCARD);
-        CommandTestUtil.assertCommandSuccess(new ListCommand(), model, ListCommand.MESSAGE_SUCCESS, expectedModel);
+        showFlashCardAtIndex(model, INDEX_FIRST_FLASHCARD);
+        assertCommandSuccess(new ListCommand(), model, ListCommand.MESSAGE_SUCCESS, expectedModel);
     }
 }

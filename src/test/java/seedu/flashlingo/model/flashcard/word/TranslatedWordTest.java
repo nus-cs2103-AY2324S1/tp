@@ -1,3 +1,4 @@
+//@@author itsNatTan
 package seedu.flashlingo.model.flashcard.word;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

@@ -119,6 +119,13 @@ public class TypicalFlashCards {
         return flashlingo;
     }
 
+    public static Flashlingo getTypicalFlashlingoWithOneFlashCard() {
+        Flashlingo flashlingo = new Flashlingo();
+        flashlingo.addFlashCard(WORD);
+        return flashlingo;
+    }
+
+
     public static List<FlashCard> getTypicalFlashCards() {
         return new ArrayList<>(Arrays.asList(
                 ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));
