@@ -219,10 +219,8 @@ public class PersonCard extends UiPart<Region> {
     private void populateTags(UniqueList<Tag> tags, FlowPane pane) {
         tags.stream()
                 .forEach(tag -> pane.getChildren().add(new TagHyperlink(tag.getValue(), () -> {
-                    submitCommandCallback.accept("");
-                    //TODO
-                    // submitCommandCallback.accept(
-                            // FilterCommandParser.generateCommandString("tag", tag.getValue()));
+                    submitCommandCallback.accept(
+                            FilterCommandParser.generateCommandString("tag", tag.getValue()));
                 })));
     }
 
