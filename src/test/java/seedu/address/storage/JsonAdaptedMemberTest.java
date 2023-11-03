@@ -18,7 +18,7 @@ import seedu.address.model.person.fields.Phone;
 import seedu.address.model.person.fields.Telegram;
 
 public class JsonAdaptedMemberTest {
-    private static final String INVALID_NAME = "R@chel";
+    private static final String INVALID_NAME = "R#chel";
     private static final String INVALID_PHONE = "+651234";
     private static final String INVALID_TELEGRAM = " ";
     private static final String INVALID_EMAIL = "example.com";
@@ -34,6 +34,7 @@ public class JsonAdaptedMemberTest {
     private static final List<JsonAdaptedTask> VALID_TODO = BETTY_MEMBER.getTasks().stream()
             .map(JsonAdaptedTask::new)
             .collect(Collectors.toList());
+
     @Test
     public void toModelType_validMemberDetails_returnsMember() throws Exception {
         JsonAdaptedMember member = new JsonAdaptedMember(BETTY_MEMBER);
