@@ -12,7 +12,6 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.appointment.Appointment;
-import seedu.address.model.appointment.AppointmentIcPredicate;
 import seedu.address.model.person.Doctor;
 import seedu.address.model.person.Ic;
 import seedu.address.model.person.Patient;
