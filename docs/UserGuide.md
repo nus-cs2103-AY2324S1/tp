@@ -160,9 +160,7 @@ All planned enhancements will also be listed in the [Planned Enhancements / Know
 
    * `add n/Jane Doe p/98765433 e/janed@example.com a/Jane street, block 123, #01-01 t/floorball t/suitemate` : Adds a contact named `Jane Doe` to CampusConnect who is tagged with the `floorball` and `suitemate` tags.
 
-   * `optout notify birthdays` : Opts out from birthday notifications.
-
-   * `find name/Doe` : Finds all contacts who have "Doe" in their name.
+   * `find n/Doe` : Finds all contacts who have "Doe" in their name.
 
    * `exit` : Exits the app.
 
