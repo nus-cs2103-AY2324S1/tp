@@ -18,8 +18,12 @@ public class AppointmentBuilder {
     public static final AppointmentTime DEFAULT_APPT_TIME = new AppointmentTime(VALID_DATE_1);
     private Ic doctorIc;
     private Ic patientIc;
+<<<<<<< HEAD
     private AppointmentTime appointmentTime;
     private String status;
+=======
+    private LocalDateTime appointmentTime;
+>>>>>>> branch-Minor-Changes
 
     /**
      * Constructor for the PersonBuilder class that initialises
@@ -29,7 +33,6 @@ public class AppointmentBuilder {
         doctorIc = DEFAULT_DOCTOR_IC;
         patientIc = DEFAULT_PATIENT_IC;
         appointmentTime = DEFAULT_APPT_TIME;
-        status = "Scheduled";
     }
 
     /**
@@ -39,7 +42,6 @@ public class AppointmentBuilder {
         this.doctorIc = appointmentToCopy.getDoctor();
         this.patientIc = appointmentToCopy.getPatient();
         this.appointmentTime = appointmentToCopy.getAppointmentTime();
-        this.status = appointmentToCopy.getStatus();
     }
 
     /**
@@ -67,7 +69,7 @@ public class AppointmentBuilder {
     }
 
     public Appointment build() {
-        return new Appointment(doctorIc, patientIc, appointmentTime, status);
+        return new Appointment(doctorIc, patientIc, appointmentTime);
     }
 
 }

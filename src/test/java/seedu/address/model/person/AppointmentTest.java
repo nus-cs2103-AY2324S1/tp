@@ -111,6 +111,7 @@ public class AppointmentTest {
     }
 
     @Test
+<<<<<<< HEAD
     public void testChangeStatus() {
         String newStatus = "Completed";
         Appointment newAppointment = new Appointment(new Ic(VALID_NRIC_DEREK), new Ic(VALID_NRIC_AMY),
@@ -120,6 +121,8 @@ public class AppointmentTest {
     }
 
     @Test
+=======
+>>>>>>> branch-Minor-Changes
     public void equals() {
         Appointment newAppointment = new Appointment(new Ic(VALID_NRIC_DEREK), new Ic(VALID_NRIC_AMY),
                 new AppointmentTime(VALID_DATE_1));
