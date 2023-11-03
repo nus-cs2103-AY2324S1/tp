@@ -25,7 +25,7 @@ CheckMate is a **desktop app for streamlining the process of room bookings for h
 
 4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar checkmate.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![LandingGUI](images/LandingGUI.png)
+   ![LandingGUI](images/Ui.png)
 
 5. Clicking on a booking will allow you to see its details.
    ![ClickBooking.png](images%2FClickBooking.png)
