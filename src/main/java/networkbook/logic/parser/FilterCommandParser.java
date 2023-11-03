@@ -28,7 +28,7 @@ public class FilterCommandParser implements Parser<FilterCommand> {
     public static final String UNKNOWN_FIELD = "Can only filter by spec, course, tag, or grad year!";
 
     private static final String CMD_STRING_FORMAT = FilterCommand.COMMAND_WORD + " "
-                + CliSyntax.PREFIX_FILTER_FIELD + " %s";
+                + CliSyntax.PREFIX_FILTER_FIELD + " %s " + CliSyntax.PREFIX_FILTER_ARGS + " %s";
 
     /**
      * Parses the given string of arguments
@@ -128,10 +128,11 @@ public class FilterCommandParser implements Parser<FilterCommand> {
     /**
      * Generates filter command string from given parameters.
      * @param fieldName Field to insert in command.
+     * @param fieldValue Value to search for.
      * @return Command string.
      */
-    public static String generateCommandString(String fieldName) {
-        return String.format(CMD_STRING_FORMAT, fieldName);
+    public static String generateCommandString(String fieldName, String fieldValue) {
+        return String.format(CMD_STRING_FORMAT, fieldName, fieldValue);
     }
 
     /**

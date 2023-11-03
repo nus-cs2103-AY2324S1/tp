@@ -2,6 +2,7 @@ package networkbook.logic.commands.filter;
 
 import networkbook.commons.util.ToStringBuilder;
 import networkbook.logic.commands.CommandResult;
+import networkbook.logic.commands.FilterCommandResult;
 import networkbook.model.Model;
 import networkbook.model.person.filter.GradEqualsOneOfPredicate;
 
@@ -33,8 +34,9 @@ public class FilterGradCommand extends FilterCommand {
                 .reduce("", (acc, term) -> acc + " \"" + term + "\"")
                 .trim()
                 .replace(" ", ", "));
-        return new CommandResult(feedback
-                + String.format(MESSAGE_PERSONS_FOUND_OVERVIEW, model.getDisplayedPersonList().size()));
+        return new FilterCommandResult(feedback
+                + String.format(MESSAGE_PERSONS_FOUND_OVERVIEW, model.getDisplayedPersonList().size()),
+                FIELD_NAME);
     }
 
     @Override
