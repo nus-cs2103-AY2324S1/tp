@@ -2,7 +2,6 @@ package seedu.lovebook.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.lovebook.logic.parser.CliSyntax.PREFIX_AGE;
-import static seedu.lovebook.logic.parser.CliSyntax.PREFIX_GENDER;
 import static seedu.lovebook.logic.parser.CliSyntax.PREFIX_HEIGHT;
 import static seedu.lovebook.logic.parser.CliSyntax.PREFIX_HOROSCOPE;
 import static seedu.lovebook.logic.parser.CliSyntax.PREFIX_INCOME;
@@ -24,17 +23,14 @@ public class SetPrefCommandParser implements Parser<SetPrefCommand> {
     public SetPrefCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(
-                args, PREFIX_AGE, PREFIX_GENDER, PREFIX_HEIGHT, PREFIX_INCOME, PREFIX_HOROSCOPE);
+                args, PREFIX_AGE, PREFIX_HEIGHT, PREFIX_INCOME, PREFIX_HOROSCOPE);
         argMultimap.verifyNoDuplicatePrefixesFor(
-                PREFIX_AGE, PREFIX_GENDER, PREFIX_HEIGHT, PREFIX_INCOME, PREFIX_HOROSCOPE);
+                PREFIX_AGE, PREFIX_HEIGHT, PREFIX_INCOME, PREFIX_HOROSCOPE);
 
         SetPreferenceDescriptor setPrefDescriptor = new SetPreferenceDescriptor();
 
         if (argMultimap.getValue(PREFIX_AGE).isPresent()) {
             setPrefDescriptor.setAge(ParserUtil.parseAge(argMultimap.getValue(PREFIX_AGE).get()));
-        }
-        if (argMultimap.getValue(PREFIX_GENDER).isPresent()) {
-            setPrefDescriptor.setGender(ParserUtil.parseGender(argMultimap.getValue(PREFIX_GENDER).get()));
         }
         if (argMultimap.getValue(PREFIX_HEIGHT).isPresent()) {
             setPrefDescriptor.setHeight(ParserUtil.parseAddress(argMultimap.getValue(PREFIX_HEIGHT).get()));

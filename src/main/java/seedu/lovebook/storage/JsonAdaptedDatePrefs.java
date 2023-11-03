@@ -6,7 +6,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import seedu.lovebook.commons.exceptions.IllegalValueException;
 import seedu.lovebook.model.DatePrefs;
 import seedu.lovebook.model.date.Age;
-import seedu.lovebook.model.date.Gender;
 import seedu.lovebook.model.date.Height;
 import seedu.lovebook.model.date.Income;
 import seedu.lovebook.model.date.horoscope.Horoscope;
@@ -41,7 +40,6 @@ public class JsonAdaptedDatePrefs {
      */
     public JsonAdaptedDatePrefs(DatePrefs source) {
         age = source.getAge().value;
-        gender = source.getGender().value;
         height = source.getHeight().value;
         income = source.getIncome().value;
         horoscope = source.getHoroscope().value;
@@ -60,14 +58,6 @@ public class JsonAdaptedDatePrefs {
             throw new IllegalValueException(Age.MESSAGE_CONSTRAINTS);
         }
         final Age modelAge = new Age(age);
-
-        if (gender == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Gender.class.getSimpleName()));
-        }
-        if (!Gender.isValidGender(gender)) {
-            throw new IllegalValueException(Gender.MESSAGE_CONSTRAINTS);
-        }
-        final Gender modelGender = new Gender(gender);
 
         if (height == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Height.class.getSimpleName()));
@@ -94,7 +84,7 @@ public class JsonAdaptedDatePrefs {
         }
         final Horoscope modelHoroscope = new Horoscope(horoscope);
 
-        return new DatePrefs(modelAge, modelGender, modelHeight, modelIncome, modelHoroscope);
+        return new DatePrefs(modelAge, modelHeight, modelIncome, modelHoroscope);
     }
 
 }

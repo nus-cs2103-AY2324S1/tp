@@ -68,8 +68,6 @@ public class Messages {
         final StringBuilder builder = new StringBuilder();
         builder.append("Age: ")
                 .append(datePrefs.getAge())
-                .append("; Gender: ")
-                .append(datePrefs.getGender())
                 .append("; Height: ")
                 .append(datePrefs.getHeight())
                 .append("; Income: ")
@@ -86,8 +84,6 @@ public class Messages {
         final StringBuilder builder = new StringBuilder();
         builder.append("Age: ")
                 .append(descriptor.getAge().get())
-                .append("; Gender: ")
-                .append(descriptor.getGender().get())
                 .append("; Height: ")
                 .append(descriptor.getHeight().get())
                 .append("; Income: ")
