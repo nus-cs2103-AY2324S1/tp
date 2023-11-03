@@ -531,7 +531,13 @@ Staff-Snap applicant data are saved automatically as a [JSON](#glossary) file `[
 <a name="faq"></a>
 ## FAQ
 
-faq stuff
+**Q**: How do I transfer my data to another Computer? <br>
+**A**: There are 2 methods you can use to transfer your data.
+- Method 1: Clear the current data using the [`clear`](#clearing-all-applicant-entries-clear) command and import your data using the [`import`](#importing-from-csv-import) command.
+- Method 2: Copy the data file `[JAR file location]/data/applicantBook.json` to the other computer.
+
+**Q**: Is my data secure? <br> 
+**A**: Yes, your data is stored locally in your computer and is not accessible by anyone else.
 
 <br>
 
@@ -541,14 +547,19 @@ faq stuff
 <a name="glossary"></a>
 ## Glossary
 
-| Term                           | Definition                                                                                                                                     |
-|--------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------|
+| Term                           | Definition                                                                                                                          |
+|--------------------------------|-------------------------------------------------------------------------------------------------------------------------------------|
 | Parameter                      | Parameters are the details needed to perform a specific command. (e.g. When adding an applicant, a parameter can be the name of the applicant) |
-| Command                        | A Command is an instruction given by the user to perform a certain action.                                                                     |
-| Index                          | The position of a certain applicant in a list. The first applicant on a list in Staff-Snap will always have the index 1.                       |
-| User Interface (UI)            | An User Interface is the visual display of the application where users can interact with the application.                                      |
-| Graphical User Interface (GUI) | The GUI is the visual display of the application which users can interact with.                                                                |
-| Command Line Interface (CLI)   | The CLI is a text-based interface that allows users to type in commands to interact with the application.                                      |
-| Component                      | A component is part of the user interface.                                                                                                     |
-| Alphanumeric                   | Text that is consisting of or using both letters and numerals.                                                                                 |
-
+| Command                        | A Command is an instruction given by the user to perform a certain action.                                                          |
+| Index                          | The position of a certain applicant in a list. The first applicant on a list in Staff-Snap will always have the index 1.            |
+| User Interface (UI)            | An User Interface is the visual display of the application where users can interact with the application.                           |
+| Graphical User Interface (GUI) | The GUI is the visual display of the application which users can interact with.                                                     |
+| Command Line Interface (CLI)   | The CLI is a text-based interface that allows users to type in commands to interact with the application.                           |
+| Component                      | A component is part of the user interface.                                                                                          |
+| Alphanumeric                   | Text that is consisting of or using both letters and numerals.                                                                      |
+| JAR                            | A JAR file is a Java Archive file. It is a package file format typically used to aggregate many Java class files and associated metadata. |
+| Java                           | Java is a general-purpose, class-based, object-oriented programming language designed for having lesser implementation dependencies. |
+| Home folder                    | The main folder where you want to store all Staff-Snap related files.                                                               |
+| Small medium enterprise (SME)  | A small medium enterprise is a business that maintains revenues, assets, or number of employees below a certain threshold.          |
+| Comma-separated values (CSV)   | A CSV file is a comma-separated values file, which allows data to be saved in a tabular format.                                     |
+| Prefix                         | A prefix is a word, letter, or number placed before another.                                                                        |
