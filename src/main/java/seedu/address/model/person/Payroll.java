@@ -1,5 +1,7 @@
 package seedu.address.model.person;
 
+import static java.util.Objects.requireNonNull;
+
 import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -23,6 +25,7 @@ public class Payroll {
      *               E.g. basic salary, deductions and bonuses.
      */
     public Payroll(Salary salary) {
+        requireNonNull(salary);
         this.salary = salary;
         LocalDate localDate = LocalDate.now();
         this.startDate = localDate.withDayOfMonth(1);
@@ -40,6 +43,10 @@ public class Payroll {
      * @param paymentDate The payment date of the payroll.
      */
     public Payroll(Salary salary, String startDate, String endDate, String paymentDate) {
+        requireNonNull(salary);
+        requireNonNull(startDate);
+        requireNonNull(endDate);
+        requireNonNull(paymentDate);
         this.salary = salary;
         this.startDate = LocalDate.parse(startDate, DATE_TIME_FORMATTER);
         this.endDate = LocalDate.parse(endDate, DATE_TIME_FORMATTER);
@@ -213,8 +220,8 @@ public class Payroll {
             return false;
         }
 
-        Payroll otherDeduction = (Payroll) other;
-        return this.salary.equals(otherDeduction.salary) && this.startDate.equals(otherDeduction.startDate)
-                && this.endDate.equals(otherDeduction.endDate) && this.paymentDate.equals(otherDeduction.paymentDate);
+        Payroll otherPayroll = (Payroll) other;
+        return this.salary.equals(otherPayroll.salary) && this.startDate.equals(otherPayroll.startDate)
+                && this.endDate.equals(otherPayroll.endDate) && this.paymentDate.equals(otherPayroll.paymentDate);
     }
 }
