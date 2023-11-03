@@ -8,8 +8,6 @@ import networkbook.model.Model;
 /**
  * Filter contacts based on a specified set of criteria; valid fields to check are
  * course, specialisation, and grad year.
- *
- * TODO: Extend functionality to grad year and specialisation
  */
 public abstract class FilterCommand extends Command {
 

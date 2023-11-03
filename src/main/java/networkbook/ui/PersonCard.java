@@ -128,14 +128,14 @@ public class PersonCard extends UiPart<Region> {
         coursesHeader.setText(COURSE_HEADER);
         populateHyperlinkListChildren(person.getCourses(), courses, (course, index) -> {
             submitCommandCallback.accept(
-                    FilterCommandParser.generateCommandString(course.getValue()));
+                    FilterCommandParser.generateCommandString("course", course.getValue()));
         });
 
         // Specialisations
         specialisationsHeader.setText(SPECIALISATION_HEADER);
         populateHyperlinkListChildren(person.getSpecialisations(), specialisations, (spec, index) -> {
-            submitCommandCallback.accept("");
-            // TODO: Add filter by spec command once it is implemented
+            submitCommandCallback.accept(
+                    FilterCommandParser.generateCommandString("spec", spec.getValue()));
         });
 
         // Tags
@@ -220,7 +220,9 @@ public class PersonCard extends UiPart<Region> {
         tags.stream()
                 .forEach(tag -> pane.getChildren().add(new TagHyperlink(tag.getValue(), () -> {
                     submitCommandCallback.accept("");
-                    // TODO: Add filter by tag command once it is implemented
+                    //TODO
+                    // submitCommandCallback.accept(
+                            // FilterCommandParser.generateCommandString("tag", tag.getValue()));
                 })));
     }
 
@@ -232,8 +234,8 @@ public class PersonCard extends UiPart<Region> {
     private void populateGrad(Optional<Graduation> g, FlowPane pane) {
         g.ifPresentOrElse((Graduation grad) -> {
             pane.getChildren().add(new FieldHyperlink(grad.getFullString(), () -> {
-                submitCommandCallback.accept("");
-                // TODO: Add filter by grad command once it is implemented
+                submitCommandCallback.accept(
+                        FilterCommandParser.generateCommandString("grad", String.format("%d", grad.getGradYear())));
             }));
         }, () -> {
             pane.getChildren().add(new EmptyFieldLabel());
@@ -280,6 +282,10 @@ public class PersonCard extends UiPart<Region> {
 
     FlowPane getSpecialisations() {
         return specialisations;
+    }
+
+    FlowPane getTags() {
+        return tags;
     }
 
     Label getName() {
