@@ -2,7 +2,7 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_EMPLOYEE_DISPLAYED_ID;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ID_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
@@ -61,9 +61,8 @@ public class AddLeaveCommandTest {
         Id invalidId = new Id("EID5555-5555"); // no employee has this Id
 
         AddLeaveCommand command = new AddLeaveCommand(invalidId, startDate, endDate);
-        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddLeaveCommand.MESSAGE_USAGE);
 
-        assertCommandFailure(command, model, expectedMessage);
+        assertCommandFailure(command, model, MESSAGE_INVALID_EMPLOYEE_DISPLAYED_ID);
     }
 
     @Test
@@ -73,9 +72,8 @@ public class AddLeaveCommandTest {
         LocalDate endDate = LocalDate.of(2023, 11, 15);
         Id validId = new Id(VALID_ID_AMY);
         AddLeaveCommand command = new AddLeaveCommand(validId, startDate, endDate);
-        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddLeaveCommand.MESSAGE_USAGE);
 
-        assertCommandFailure(command, model, expectedMessage);
+        assertCommandFailure(command, model, MESSAGE_INVALID_EMPLOYEE_DISPLAYED_ID);
     }
 
     @Test

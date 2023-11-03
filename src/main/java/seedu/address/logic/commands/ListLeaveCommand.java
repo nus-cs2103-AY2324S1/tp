@@ -37,7 +37,8 @@ public class ListLeaveCommand extends Command {
         requireNonNull(model);
         model.updateFilteredEmployeeList(employee -> employee.isOnLeave(date));
         return new CommandResult(
-                String.format(Messages.MESSAGE_EMPLOYEES_ON_LEAVE_OVERVIEW, model.getFilteredEmployeeList().size()));
+                String.format(Messages.MESSAGE_EMPLOYEES_ON_LEAVE_OVERVIEW,
+                        model.getFilteredEmployeeList().size(), date));
     }
 
     @Override

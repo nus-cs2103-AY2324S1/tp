@@ -53,8 +53,8 @@ public class ListLeaveCommandTest {
 
     @Test
     public void execute_noEmployeeOnLeave_noEmployeeListed() {
-        String expectedMessage = String.format(MESSAGE_EMPLOYEES_ON_LEAVE_OVERVIEW, 0);
         LocalDate date = LocalDate.parse("2023-11-11", DateTimeFormatter.ISO_LOCAL_DATE);
+        String expectedMessage = String.format(MESSAGE_EMPLOYEES_ON_LEAVE_OVERVIEW, 0, date);
         ListLeaveCommand command = new ListLeaveCommand(date);
         expectedModel.updateFilteredEmployeeList(employee -> employee.isOnLeave(date));
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -63,8 +63,8 @@ public class ListLeaveCommandTest {
 
     @Test
     public void execute_employeeOnLeave_employeeListed() {
-        String expectedMessage = String.format(MESSAGE_EMPLOYEES_ON_LEAVE_OVERVIEW, 1);
         LocalDate date = LocalDate.parse("2023-11-01", DateTimeFormatter.ISO_LOCAL_DATE);
+        String expectedMessage = String.format(MESSAGE_EMPLOYEES_ON_LEAVE_OVERVIEW, 1, date);
         expectedModel.addEmployee(BOB);
         model.addEmployee(BOB);
         ListLeaveCommand command = new ListLeaveCommand(date);

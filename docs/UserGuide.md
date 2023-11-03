@@ -62,7 +62,7 @@ HouR is a **desktop app for managing employee records, optimized for use via a C
    
    * `find Alex Manager`: Lists all employees with the keywords `Alex` or `Manager`.
 
-   * `delete EID2024-1234` : Deletes the employee with employee id EID1234-5678 shown in the list.
+   * `delete EID1234-5678` : Deletes the employee with employee id EID1234-5678 shown in the list.
 
    * `sort f/salary in/asc`: Sorts the employees by their salaries in ascending order.
 
@@ -115,7 +115,7 @@ HouR is a **desktop app for managing employee records, optimized for use via a C
 
 <div markdown="block" class="alert alert-info">
 
-**information_source: Notes about the command format**<br>
+**:information_source: Notes about the command format**<br>
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
@@ -149,12 +149,12 @@ Adds an employee to the employee list.
 Format: `add n/NAME pos/POSITION id/EMPLOYEE_ID p/PHONE_NUMBER e/EMAIL s/SALARY [d/DEPARTMENT]...`
 
 Examples:
-* `add n/Jane Doe pos/Manager id/EID2023-7891 p/81234567 e/janedoe@test.com s/$5,000`
-* `add n/Alex Yeoh pos/Software Engineer id/EID2023-1234 p/87428807 e/alexyeoh@example.com s/$8,500 d/IT`
+* `add n/Jane Doe pos/Manager id/EID2023-7891 p/81234567 e/janedoe@test.com s/5000`
+* `add n/Alex Yeoh pos/Software Engineer id/EID2023-1234 p/87428807 e/alexyeoh@example.com s/8500 d/IT`
 
 ![add success](images/addSuccess.png)
 
-* `add n/Charlotte Oliveiro pos/Software Engineer id/EID2023-1234 p/98561234 e/alexyeoh2@example.com s/$9,500 d/IT` is
+* `add n/Charlotte Oliveiro pos/Software Engineer id/EID2023-1234 p/98561234 e/alexyeoh2@example.com s/9500 d/IT` is
   invalid because `id` already exists in the records.
 
 ![add failure](images/addFailure.png)
@@ -174,7 +174,7 @@ Examples:
 
 ![delete success](images/deleteSuccess.png)
 
-* `delete EID000-0000` is invalid because the id does not exist.
+* `delete EID0000-0000` is invalid because the id does not exist.
 
 ![delete failure](images/deleteFailure.png)
 
@@ -218,7 +218,7 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
 Examples:
-`find Alex` returns `Alex Yeoh`
+`find Bernice` returns `Bernice Yu`
 
 * ![find success](images/findSuccess.png)
 
@@ -246,7 +246,7 @@ Examples:
 
 Adds the dates between a specified period of time to the leaves taken by the specified employee.
 
-Format: `add  id/EMPLOYEE_ID from/START_DATE to/END_DATE`
+Format: `addleave id/EMPLOYEE_ID from/START_DATE to/END_DATE`
 
 * Add dates between `START_DATE` and `END_DATE` inclusive into the leaves taken by employee with id `EMPLOYEE_ID`.
 * `START_DATE` must not be after `END_DATE`.
@@ -320,7 +320,7 @@ Examples:
 
 ![listleave success](images/listLeaveSuccess.png)
 
-* `listleave on/2023-12-28` displays an empty list because there are no employees that are on leave on 28 December 2023.
+* `listleave on/2023-12-29` displays an empty list because there are no employees that are on leave on 29 December 2023.
 
 ![listleave empty](images/listLeaveEmpty.png)
 
@@ -339,6 +339,10 @@ Examples:
    employee with id EID1234-5678.
 
 ![addremark success](images/addremarkSuccess.png)
+
+* `addremark id/EID1234-5678 r/GOOD WORKER` is invalid because there is already a remark `good worker` for the employee.
+
+![addremark_failure](images/addremarkFailure.png)
 
 ### Deleting a remark of an employee : `deleteremark`
 
@@ -396,11 +400,11 @@ Format: `report EMPLOYEE_ID`
 Examples:
 * `report EID1234-5678` generates and downloads a report for the employee with employee id EID1234-5678.
 
-![report success](images/reportSuccess.jpg)
+![report success](images/reportSuccess.png)
 
-* `report EID000-0000` is invalid because the id does not exist.
+* `report EID0000-0000` is invalid because the id does not exist.
 
-![report failure](images/reportFailure.jpg)
+![report failure](images/reportFailure.png)
 
 ### Resetting fields : `reset`
 
@@ -413,15 +417,15 @@ Format: `reset f/FIELD`
 Examples:
 * `reset f/overtime` resets the overtime hours of all employees in the list to the default value 0.
 
-![reset success](images/resetOvertimeSuccess.jpg)
+![reset success](images/resetOvertimeSuccess.png)
 
 * `reset f/leaves` resets the number of leaves taken by all employees in the list to the default value 0.
 
-![reset success](images/resetLeavesSuccess.jpg)
+![reset success](images/resetLeavesSuccess.png)
 
 * `reset f/name` is an invalid field and cannot be reset.
 
-![reset failure](images/resetFailure.jpg)
+![reset failure](images/resetFailure.png)
 
 ### Clearing all entries : `clear`
 
