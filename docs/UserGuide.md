@@ -230,17 +230,19 @@ Should you input `find` without any keyword, you will see a message like below:
 ## Features for managing bands
 ### Create band: `addb`
 
-Creates a band with the specified band name.
+Creates a band with the specified band name and genres.
 
-**Format:** `addb n/BANDNAME`
+**Format:** `addb n/BANDNAME g/GENRE…​`
 
 Examples:
-* `addb n/My Garage Band`
+* `addb n/My Garage Band g/rock`
 
 **Upon success:**
 
 You will see a message indicating successful addition of the band like below:
-[insert image]
+```
+New band added: My Garage Band; Genres: [rock]
+```
 
 **Upon failure:**
 
@@ -249,6 +251,11 @@ existing band), you will see an error message showing the possible error. Please
 band or change the name of the existing band.
 [insert image]
 
+Should you try to add a band with empty genre tags, i.e., addb My Garage Band g/ , you will see a message like below: [insert image]
+```
+Genre tags names should be a valid genre name.
+For a list of valid genres, please use the command 'tags'
+```
 ### Add musician to band: `addm`
 
 Adds a musician to a specified band.
@@ -349,6 +356,42 @@ The band index provided is invalid
 
 Please verify that the index is correct and try again.
 
+### Edit a band: `editb`
+
+Edit the name and genre of a selected band.
+From the current `My Bands` panel, find the index of the band to be edited.
+
+**Format:** `editb INDEX n/NEWNAME g/GENRE...`
+
+**Examples:**
+* `editb 1 n/Ace`
+
+**Upon success:**
+* Before: From `list` state
+  ![editb_before.png](images%2Fband-features%2Feditb_before.png)
+* After: On the left, `My Musicians` panel will display all musicians. On the right, `My Bands` panel will display the updated band list.
+  ![editb_after.png](images%2Fband-features%2Feditb_after.png)
+You will see a message indicating successful editing of the first band in the band panel like below:
+
+```
+Edited Band: Ace; Genres: [jazz]
+```
+
+**Upon failure:**
+
+Should you input an index out of the range of the current `My Bands` list, you will see the error message below:
+
+```
+The band index provided is invalid
+```
+
+Please verify that the index is correct and try again.
+
+Should you try to tag a band with invalid genre tags, i.e., editb 1 g/poP , you will see a message like below:
+```
+Genre tags names should be a valid genre name.
+For a list of valid genres, please use the command 'tags'
+```
 ## Clear data: `clear`
 
 ## Exit app : `exit`
@@ -369,13 +412,17 @@ If you wish, please refer to the below section for a more succinct [command summ
 ## Command summary
 
 
-| Action             | Format, Examples                                                                                               |
-|--------------------|----------------------------------------------------------------------------------------------------------------|
+| Action             | Format, Examples                                                                                                      |
+|--------------------|-----------------------------------------------------------------------------------------------------------------------|
 | **Add**            | `add n/NAME p/PHONE_NUMBER e/EMAIL i/INSTRUMENT`<br> e.g., `add n/John Doe p/98928479 e/johndpiano@xmail.com i/Piano` |
-| **Remove**         | `remove INDEX`<br> e.g., `remove 1`                                                                            |
-| **Tag Instrument** | `tag instrument INDEX i/INSTRUMENT…​`<br> e.g.,`tag instrument 1 i/piano i/guitar`                             |
-| **Tag Genre**      | `tag genre INDEX g/GENRE…​`<br> e.g., `tag genre 1 g/rock g/pop`                                               |
-| **Find**           | `find KEYWORD`                                                                                                 |
+| **Remove**         | `remove INDEX`<br> e.g., `remove 1`                                                                                   |
+| **Tag Instrument** | `tag instrument INDEX i/INSTRUMENT…​`<br> e.g.,`tag instrument 1 i/piano i/guitar`                                    |
+| **Tag Genre**      | `tag genre INDEX g/GENRE…​`<br> e.g., `tag genre 1 g/rock g/pop`                                                      |
+| **Find**           | `find n/NAME p/PHONE_NUMBER e/EMAIL i/INSTRUMENT` <br> e.g., `find n/John i/Piano`                                    |
+| **Add Band**       | `addb n/BANDNAME g/GENRE…​`<br> e.g., `addb n/Ace Jazz g/jazz`                                                        |
+| **Delete Band**    | `deleteb INDEX` <br> e.g., `deleteb 1`                                                                                |
+| **Find Band**      | `findb BANDNAME`                                                                                                      |
+| **Edit Band**      | `editb INDEX n/NEWNAME g/GENRE…​` <br> e.g., `editb n/Ace g/jazz`                                                     |
 
 
 
