@@ -127,6 +127,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      * {@code key} must exist in the address book.
      */
     public void removePerson(Person key) {
+        key.getEvents().forEach(this.allEvents::remove);
         persons.remove(key);
     }
 

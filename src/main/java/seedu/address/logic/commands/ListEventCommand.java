@@ -38,8 +38,8 @@ public class ListEventCommand extends ListCommand {
      *     {@code false} in descending order.
      */
     public ListEventCommand(EventTime filterStartTime, EventTime filterEndTime, boolean sortAscending) {
-        this.filterStartTime = filterStartTime.getTime();
-        this.filterEndTime = filterEndTime.getTime();
+        this.filterStartTime = filterStartTime != null ? filterStartTime.getTime() : null;
+        this.filterEndTime = filterEndTime != null ? filterEndTime.getTime() : null;
         this.sortAscending = sortAscending;
     }
 

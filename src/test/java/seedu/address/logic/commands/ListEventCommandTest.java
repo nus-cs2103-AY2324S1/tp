@@ -33,8 +33,8 @@ public class ListEventCommandTest {
         model.findPersonByUserFriendlyId(ContactID.fromInt(1)).addEvent(VALID_EVENT_0);
         model.findPersonByUserFriendlyId(ContactID.fromInt(2)).addEvent(VALID_EVENT_1);
         model.findPersonByUserFriendlyId(ContactID.fromInt(2)).addEvent(VALID_EVENT_2);
-        assertCommandSuccess(() -> new ListEventCommand(EventTime.fromString(""),
-                EventTime.fromString(""), true).execute(model));
+        assertCommandSuccess(() -> new ListEventCommand(null,
+                null, true).execute(model));
     }
 
     @Test

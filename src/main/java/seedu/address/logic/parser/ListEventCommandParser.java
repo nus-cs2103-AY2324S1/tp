@@ -33,14 +33,19 @@ public class ListEventCommandParser implements Parser<ListEventCommand> {
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_START_TIME, PREFIX_END_TIME, PREFIX_SORT_DESCENDING);
 
-        EventTime filterStartTime = ParserUtil.parseEventTime(argMultimap.getValue(PREFIX_START_TIME)
-                .orElseGet(()->null));
-        EventTime filterEndTime = ParserUtil.parseEventTime(argMultimap.getValue(PREFIX_END_TIME).orElseGet(()->null));
+        EventTime filterStartTime = ParserUtil.arePrefixesPresent(argMultimap, PREFIX_START_TIME)
+                ? ParserUtil.parseEventTime(argMultimap.getValue(PREFIX_START_TIME).get())
+                : null;
+        EventTime filterEndTime = ParserUtil.arePrefixesPresent(argMultimap, PREFIX_END_TIME)
+                ? ParserUtil.parseEventTime(argMultimap.getValue(PREFIX_END_TIME).get())
+                : null;
 
         boolean useAscendingOrder = !ParserUtil.arePrefixesPresent(argMultimap, PREFIX_SORT_DESCENDING);
-
-        if (filterStartTime.isAfter(filterEndTime)) {
-            throw new ParseException(String.format(MESSAGE_START_TIME_AFTER_END_TIME, filterStartTime, filterEndTime));
+        if (filterStartTime != null) {
+            if (filterStartTime.isAfter(filterEndTime)) {
+                throw new ParseException(String.format(MESSAGE_START_TIME_AFTER_END_TIME,
+                        filterStartTime, filterEndTime));
+            }
         }
         return new ListEventCommand(filterStartTime, filterEndTime, useAscendingOrder);
     }
