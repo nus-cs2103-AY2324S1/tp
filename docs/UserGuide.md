@@ -231,7 +231,7 @@ Adds a job application to the list.
   Adds a company called Google, with the role Cleaner and status `TO_BE_SUBMITTED`.
 
 **UI mockup:**
-![AddCommand](images/user-guide/AddCommand.png)
+![](images/user-guide/AddCommand.png)
 
 ---
 
@@ -249,7 +249,7 @@ Deletes the specified application from the list.
   Deletes the 2nd application in the list.
 
 **UI mockup:**
-![DeleteCommand](images/user-guide/DeleteCommand.png)
+![](images/user-guide/DeleteCommand.png)
 
 ---
 
@@ -269,6 +269,8 @@ Edits an application in the list.
 * `edit 5 s/approved t/volunteer`
   Changes the status and job type of the 5th job application to `APPROVED` and volunteer respectively.
 
+**UI mockup:**
+![](images/user-guide/EditCommand.png)
 ---
 
 ### Finding an application : `find`
@@ -294,6 +296,8 @@ Finds all applications whose fields match the keywords provided.
 * `find Google AI`
   Finds all applications with _both_ "Google" and "AI" in any fields.
 
+**UI mockup:**
+![](images/user-guide/FindCommand.png)
 ---
 
 ### Sorting all applications : `sort`
@@ -314,6 +318,8 @@ Sorts the list based on the prefix provided.
 * `sort r/`
   Lists all applications sorted by role, in alphabetical order.
 
+**UI mockup:**
+![](images/user-guide/SortCommand.png)
 ---
 
 ### Adding an interview: `interview add`
@@ -328,7 +334,7 @@ Adds an interview to the specified application from the list.
   Adds a technical interview at Nov 12 2022 1200 at Home to the first application in the list.
 
 **UI mockup:**
-
+![](images/user-guide/IntAddCommand.png)
 ---
 
 ### Deleting an interview: `interview delete`
@@ -345,7 +351,7 @@ Deletes an interview to the specified application from the list.
   Deletes the 1st interview from the 2nd job application in the list.
 
 **UI mockup:**
-
+![](images/user-guide/IntDeleteCommand.png)
 ---
 
 ### Editing an interview: `interview edit`
@@ -365,7 +371,7 @@ Edits an interview to the specified application from the list.
   Edits the address for the 4th interview from the 8th job application in the list.
 
 **UI mockup:**
-
+![](images/user-guide/IntEditCommand.png)
 ---
 
 ### Clearing all applications: `clear`
