@@ -1,7 +1,6 @@
 ---
-  layout: default.md
-    title: "Developer Guide"
-    pageNav: 3
+layout: default.md
+title: "Developer Guide"
 ---
 
 # LoveBook Developer Guide
@@ -267,6 +266,8 @@ The best match feature is implemented using the `BestMatchCommand` class. The `B
 through the list of Dates, and calls `GetScore` to get the score of the date based on height, age, horoscope and
 income. Each metric will be scored upon 10, and when it deviates from the user's preferences, the score is reduced.
 The maximum score is 40.
+
+<puml src="diagrams/BestMatchSequence.puml" width="450" />
 
 ### Set preferences
 
@@ -550,12 +551,8 @@ You are recommended to start with an empty LoveBook and follow the instructions 
 in order for the example commands provided to be relevant.
 You can refer to the user guide for more details on the features.
 
-<box type="info" seamless>
-
 **Note:** These instructions only provide a starting point for testers to work on;
 testers are expected to do more *exploratory* testing.
-
-</box>
 
 ### Launch
 
