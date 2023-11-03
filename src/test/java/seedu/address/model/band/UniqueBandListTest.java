@@ -167,31 +167,31 @@ public class UniqueBandListTest {
     @Test
     public void hasMusician_nullMusician_throwsNullPointerException() {
         uniqueBandList.add(ACE);
-        assertThrows(NullPointerException.class, () -> uniqueBandList.hasMusician(0, null));
+        assertThrows(NullPointerException.class, () -> uniqueBandList.hasMusician(ACE, null));
     }
 
     @Test
     public void hasMusician_bandWithoutMusicians_returnsFalse() {
         uniqueBandList.add(ACE);
-        assertFalse(uniqueBandList.hasMusician(0, BOB));
+        assertFalse(uniqueBandList.hasMusician(ACE, BOB));
     }
 
     @Test
     public void hasMusician_musicianInBand_returnsTrue() {
         uniqueBandList.add(ELISE);
-        assertTrue(uniqueBandList.hasMusician(0, ELLE));
+        assertTrue(uniqueBandList.hasMusician(ELISE, ELLE));
     }
 
     @Test
     public void hasMusician_musicianNotInBand_returnsFalse() {
         uniqueBandList.add(ELISE);
-        assertFalse(uniqueBandList.hasMusician(0, BOB));
+        assertFalse(uniqueBandList.hasMusician(ELISE, BOB));
     }
     @Test
     public void addMusician_musicianAdded_bandGetsUpdated() {
         uniqueBandList.add(ACE);
         uniqueBandList.addMusician(0, ELLE);
-        assertTrue(uniqueBandList.hasMusician(0, ELLE));
+        assertTrue(uniqueBandList.hasMusician(ACE, ELLE));
     }
 
     @Test

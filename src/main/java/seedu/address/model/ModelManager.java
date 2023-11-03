@@ -100,28 +100,21 @@ public class ModelManager implements Model {
     @Override
     public void deleteMusician(Musician target) {
         addressBook.removeMusician(target);
-
-        updateFilteredMusicianList(PREDICATE_SHOW_ALL_MUSICIANS);
-        updateFilteredBandList(PREDICATE_SHOW_ALL_BANDS);
-
+        setToDefaultGui();
         updateMusicianInAllBands(target, null);
     }
 
     @Override
     public void addMusician(Musician musician) {
         addressBook.addMusician(musician);
-        updateFilteredMusicianList(PREDICATE_SHOW_ALL_MUSICIANS);
-        updateFilteredBandList(Model.PREDICATE_SHOW_ALL_BANDS);
+        setToDefaultGui();
     }
 
     @Override
     public void setMusician(Musician target, Musician editedMusician) {
         requireAllNonNull(target, editedMusician);
         addressBook.setMusician(target, editedMusician);
-
-        updateFilteredMusicianList(PREDICATE_SHOW_ALL_MUSICIANS);
-        updateFilteredBandList(PREDICATE_SHOW_ALL_BANDS);
-
+        setToDefaultGui();
         updateMusicianInAllBands(target, editedMusician);
     }
 
@@ -144,13 +137,14 @@ public class ModelManager implements Model {
     public void addBand(Band band) {
         requireAllNonNull(band);
         addressBook.addBand(band);
+        setToDefaultGui();
     }
 
     @Override
     public boolean hasMusicianInBand(int bandIndex, int musicianIndex) {
         requireNonNull(bandIndex);
         requireNonNull(musicianIndex);
-        return addressBook.hasMusicianInBand(bandIndex, filteredMusicians.get(musicianIndex));
+        return addressBook.hasMusicianInBand(filteredBands.get(bandIndex), filteredMusicians.get(musicianIndex));
     }
 
     @Override
@@ -161,8 +155,25 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void removeMusicianFromBand(int bandIndex, int musicianIndex) {
+        addressBook.removeMusicianFromBand(filteredBands.get(bandIndex), filteredMusicians.get(musicianIndex));
+    }
+
+    @Override
     public void deleteBand(Band target) {
         addressBook.removeBand(target);
+        setToDefaultGui();
+    }
+
+    @Override
+    public void setBand(Band target, Band editedBand) {
+        requireAllNonNull(target, editedBand);
+        addressBook.setBand(target, editedBand);
+
+        updateFilteredMusicianList(PREDICATE_SHOW_ALL_MUSICIANS);
+        updateFilteredBandList(PREDICATE_SHOW_ALL_BANDS);
+
+
     }
 
     //=========== Filtered Musician List Accessors =============================================================
@@ -200,9 +211,8 @@ public class ModelManager implements Model {
     }
 
     /**
-     * Returns an unmodifiable view of the list of {@code Band} backed by the internal list of
-     * {@code versionedAddressBook}. Returns an unmodifiable view of the list of {@code Musician}
-     * backed by the internal list of {@code versionedAddressBook}
+     * Updates the filtered band list to show only the band with the corresponding predicate and
+     * updates the filtered musician list to show only the members in the band.
      * If there is no band with the corresponding name, an error message will be displayed
      * And the panel will show initial state of listing all.
      */
@@ -218,6 +228,15 @@ public class ModelManager implements Model {
 
         Predicate<Musician> musicianPredicate = new MusicianInBandPredicate(filteredBands.get(0));
         filteredMusicians.setPredicate(musicianPredicate);
+    }
+
+    /**
+     * Update the filtered band list to show all bands and the filtered musician list to show all musicians.
+     * This is the default state of the GUI and the result of the list command.
+     */
+    private void setToDefaultGui() {
+        updateFilteredMusicianList(PREDICATE_SHOW_ALL_MUSICIANS);
+        updateFilteredBandList(PREDICATE_SHOW_ALL_BANDS);
     }
 
     @Override
@@ -238,3 +257,4 @@ public class ModelManager implements Model {
     }
 
 }
+

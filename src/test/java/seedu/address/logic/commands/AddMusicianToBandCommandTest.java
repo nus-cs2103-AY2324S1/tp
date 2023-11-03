@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
@@ -70,13 +71,70 @@ public class AddMusicianToBandCommandTest {
         assertEquals(validBand.getMusicians(), modelBandStub.bandsAdded.get(bandIndex).getMusicians());
     }
     @Test
+    public void execute_repeatedMusicianIndex_throwsRepeatedIndexException() throws Exception {
+        AddMusicianToBandCommandTest.ModelStubAcceptingMusicianAddedToBand modelBandStub =
+                new AddMusicianToBandCommandTest.ModelStubAcceptingMusicianAddedToBand();
+
+        Musician validMusician = new MusicianBuilder().build();
+        Band validBand = new BandBuilder().build();
+        // add musician to model
+        CommandResult addCommandResult = new AddCommand(validMusician).execute(modelBandStub);
+        // add band to model
+        CommandResult addBandCommandResult = new AddBandCommand(validBand).execute(modelBandStub);
+        Index bandIndex = Index.fromOneBased(1);
+        Index musicianIndex = Index.fromOneBased(1);
+        List<Index> repeatedMusicianIndexList = new ArrayList<>();
+        repeatedMusicianIndexList.add(musicianIndex);
+        repeatedMusicianIndexList.add(musicianIndex);
+        assertThrows(CommandException.class, AddMusicianToBandCommand.MESSAGE_MUSICIAN_INDEX_REPEATED, () ->
+                new AddMusicianToBandCommand(bandIndex, repeatedMusicianIndexList).execute(modelBandStub));
+    }
+    @Test
+    public void execute_bandIndexOutOfBounds_throwsInvalidBandIndex() throws Exception {
+        AddMusicianToBandCommandTest.ModelStubAcceptingMusicianAddedToBand modelBandStub =
+                new AddMusicianToBandCommandTest.ModelStubAcceptingMusicianAddedToBand();
+
+        Musician validMusician = new MusicianBuilder().build();
+        Band validBand = new BandBuilder().build();
+        // add musician to model
+        CommandResult addCommandResult = new AddCommand(validMusician).execute(modelBandStub);
+        // add band to model
+        CommandResult addBandCommandResult = new AddBandCommand(validBand).execute(modelBandStub);
+        Index invalidBandIndex = Index.fromOneBased(2);
+        Index musicianIndex = Index.fromOneBased(1);
+        List<Index> validMusicianIndexList = new ArrayList<>();
+        validMusicianIndexList.add(musicianIndex);
+        assertThrows(CommandException.class, Messages.MESSAGE_INVALID_BAND_DISPLAYED_INDEX, () ->
+                new AddMusicianToBandCommand(invalidBandIndex, validMusicianIndexList).execute(modelBandStub));
+    }
+    @Test
+    public void execute_musicianIndexOutOfBounds_throwsInvalidMusicianIndex() throws Exception {
+        AddMusicianToBandCommandTest.ModelStubAcceptingMusicianAddedToBand modelBandStub =
+                new AddMusicianToBandCommandTest.ModelStubAcceptingMusicianAddedToBand();
+
+        Musician validMusician = new MusicianBuilder().build();
+        Band validBand = new BandBuilder().build();
+        // add musician to model
+        CommandResult addCommandResult = new AddCommand(validMusician).execute(modelBandStub);
+        // add band to model
+        CommandResult addBandCommandResult = new AddBandCommand(validBand).execute(modelBandStub);
+        Index bandIndex = Index.fromOneBased(1);
+        Index invalidMusicianIndex = Index.fromOneBased(2);
+        List<Index> invalidMusicianIndexList = new ArrayList<>();
+        invalidMusicianIndexList.add(invalidMusicianIndex);
+        assertThrows(CommandException.class, Messages.MESSAGE_INVALID_MUSICIAN_DISPLAYED_INDEX, () ->
+                new AddMusicianToBandCommand(bandIndex, invalidMusicianIndexList).execute(modelBandStub));
+    }
+    @Test
     public void execute_duplicateMusicianAddedtoBand_throwsCommandException() throws Exception {
         AddMusicianToBandCommandTest.ModelStubAcceptingMusicianAddedToBand modelBandStub =
                 new AddMusicianToBandCommandTest.ModelStubAcceptingMusicianAddedToBand();
 
         Musician validMusician = new MusicianBuilder().build();
         Band validBand = new BandBuilder().build();
+        // add musician to model
         CommandResult addCommandResult = new AddCommand(validMusician).execute(modelBandStub);
+        // add band to model
         CommandResult addBandCommandResult = new AddBandCommand(validBand).execute(modelBandStub);
         Index bandIndex = Index.fromOneBased(1);
         List<Index> musicianIndices = List.of(Index.fromOneBased(1));
@@ -187,12 +245,22 @@ public class AddMusicianToBandCommandTest {
         }
 
         @Override
+        public void setBand(Band band, Band toSet) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public boolean hasMusicianInBand(int addInto, int toAdd) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public void addMusicianToBand(int addInto, int toAdd) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void removeMusicianFromBand(int bandIndex, int musicianIndex) {
             throw new AssertionError("This method should not be called.");
         }
 

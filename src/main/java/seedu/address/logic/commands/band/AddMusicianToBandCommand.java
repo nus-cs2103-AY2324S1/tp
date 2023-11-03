@@ -24,7 +24,7 @@ import seedu.address.model.musician.Musician;
 public class AddMusicianToBandCommand extends Command {
     public static final String COMMAND_WORD = "addm";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a musician to a band. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds one or more musicians to a band. "
             + "Parameters: "
             + PREFIX_BINDEX + "INDEX OF BAND "
             + PREFIX_MINDEX + "INDEX OF MUSICIAN\n"
@@ -32,8 +32,8 @@ public class AddMusicianToBandCommand extends Command {
             + PREFIX_BINDEX + "1 "
             + PREFIX_MINDEX + "1";
 
-    public static final String MESSAGE_SUCCESS = "New musician added to band: %1$s";
-    public static final String MESSAGE_DUPLICATE_MUSICIAN = "This musician already exists in the band";
+    public static final String MESSAGE_SUCCESS = "New musicians added to band: %1$s";
+    public static final String MESSAGE_DUPLICATE_MUSICIAN = "One or more of the musicians already exist in the band";
     public static final String MESSAGE_MUSICIAN_INDEX_REPEATED = "There are repeated musician indices in the command";
 
     private final Index bandToAddInto;
@@ -87,5 +87,20 @@ public class AddMusicianToBandCommand extends Command {
         // update the filtered musician list to show ONLY the members in the band
         model.updateFilteredBandMusicianList(new BandNameContainsKeywordsPredicate(band.getName().toString()));
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(band, verifiedMusicians)));
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof AddMusicianToBandCommand)) {
+            return false;
+        }
+
+        AddMusicianToBandCommand otherAddMusicianToBandCommand = (AddMusicianToBandCommand) other;
+        return musiciansToAdd.equals(otherAddMusicianToBandCommand.musiciansToAdd)
+                && bandToAddInto.equals(otherAddMusicianToBandCommand.bandToAddInto);
     }
 }

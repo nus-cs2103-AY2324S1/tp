@@ -18,7 +18,7 @@ public class Messages {
     public static final String MESSAGE_UNKNOWN_COMMAND = "Unknown command";
     public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format! \n%1$s";
     public static final String MESSAGE_INVALID_MUSICIAN_DISPLAYED_INDEX = "The musician index provided is invalid";
-    public static final String MESSAGE_MUSICIANS_LISTED_OVERVIEW = "%1$d persons listed!";
+    public static final String MESSAGE_MUSICIANS_LISTED_OVERVIEW = "%1$d musicians listed!";
     public static final String MESSAGE_UNKNOWN_BAND = "Band does not exist!";
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
@@ -46,9 +46,12 @@ public class Messages {
                 .append(musician.getPhone())
                 .append("; Email: ")
                 .append(musician.getEmail())
-                .append("; Address: ")
                 .append("; Tags: ");
         musician.getTags().forEach(builder::append);
+        builder.append("; Instruments: ");
+        musician.getInstruments().forEach(builder::append);
+        builder.append("; Genres: ");
+        musician.getGenres().forEach(builder::append);
         return builder.toString();
     }
 
@@ -57,7 +60,9 @@ public class Messages {
      */
     public static String format(Band band) {
         final StringBuilder builder = new StringBuilder();
-        builder.append(band.getName());
+        builder.append(band.getName())
+                .append("; Genres: ");
+        band.getGenres().forEach(builder::append);
         return builder.toString();
     }
 
@@ -78,9 +83,11 @@ public class Messages {
      */
     public static String format(Band band, List<Musician> musicians) {
         final StringBuilder builder = new StringBuilder();
-        builder.append("Band Name: ")
+        builder.append("\n")
+                .append("Band name: ")
                 .append(band.getName())
-                .append("; Musician Names: ")
+                .append("\n")
+                .append("Musician names: ")
                 .append(musicians.stream().map(Musician::getName)
                         .map(Name::toString).collect(Collectors.joining(", ")));
         return builder.toString();

@@ -1,4 +1,4 @@
-package seedu.address.logic.commands.musician;
+package seedu.address.logic.commands.general;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_BANDS;
@@ -16,7 +16,6 @@ public class ListCommand extends Command {
     public static final String COMMAND_WORD = "list";
 
     public static final String MESSAGE_SUCCESS = "Listed all musicians and all bands";
-
 
     @Override
     public CommandResult execute(Model model) {

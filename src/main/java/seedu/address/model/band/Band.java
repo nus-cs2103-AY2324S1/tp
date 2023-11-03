@@ -72,6 +72,22 @@ public class Band {
     }
 
     @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof Band)) {
+            return false;
+        }
+
+        Band otherBand = (Band) other;
+        return name.equals(otherBand.name)
+                && genres.equals(otherBand.genres)
+                && musicians.equals(otherBand.musicians);
+    }
+    @Override
     public String toString() {
         return new ToStringBuilder(this)
             .add("name", name)

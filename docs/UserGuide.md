@@ -33,6 +33,7 @@ For experienced users, if you need help in remembering a particular command, ple
   * [Features for bands](#features-for-managing-bands)
     * [Create band](#create-band--addb)
     * [Add musician to band](#add-musician-to-band--addm)
+    * [List band members](#list-all-members-in-band--findb)
   * [Clear data](#clear-data--clear)
   * [Exit app](#exit-app--exit)
   * [Save data](#save-data)
@@ -80,51 +81,72 @@ Please refer to the [Features](#features) below for details of each command.
 to be updated.
 
 ## Get help: `help`
+Access a link to our user guide.
+
+**Format:** `help`
+
+You will see a window like below, click `Copy URL`, paste the link in any web browser to view this user guide.
+
+![images/help/helpWindow.png](images/help/helpWindow.png)
 
 ## List all musicians and bands: `list`
+View all musicians and bands in their separate panels.
+
+**Format:** `list`
+
 
 ## Features for managing musicians
 ### Add musician: `add`
 
-Adds a musician to the contact book. Name, phone number, email, and instrument can be recorded.
+Adds one musician to the contact book. 
 
-**Format:** `add n/NAME p/PHONE_NUMBER e/EMAIL i/INSTRUMENT`
+Name, phone number, email, tag, instrument, genre about the musician can all be included.
+
+**Format:** `add n/NAME p/PHONE_NUMBER e/EMAIL [t/TAG]... [i/INSTRUMENT]... [g/GENRE]...`
 
 **Examples:**
-* `add n/John Doe p/98765432 e/johnd@example.com i/Violin`
-* `add n/Betsy Crowe e/pianistbetsy@smtp.com p/87988039 i/Piano`
+* `add n/John Doe p/98765432 e/johnd@example.com t/bestman i/violin g/classical`
+* `add n/Betsy Crowe e/pianistbetsy@smtp.com p/87988039 i/piano g/pop g/rock`
 
 **Upon success:**
+A success message like below will be displayed.
 
-You will see a message indicating successful addition of the musician like below:
-![img.png](images/addJohnDoe.png)
+```
+New musician added: John Doe; Phone: 98765432; Email: johnd@example.com; Tags: [bestman]; Instruments: [violin]; Genres: [classical]
+```
 
 **Upon failure:**
 
-Should you input a musician which is already in your contact book (ie. have the same phone number or email as an existing contact),
-you will see an error message showing the possible error. Please input a different phone/email for the current contact or modify the original contact's relevant details.
+If you input a musician which is already in your contact book (ie. have the same phone number or email as an existing contact). You will be shown an error message like below. Please re-enter the correct information.
+```
+This musician already exists in your contact list
+```
 
 ### Remove musician: `remove`
 
-Removes a musician contact from the address book.
+Removes a musician from your contact list.
+From the current `My Musicians` panel, find the index of the musician to be deleted.
 
-**Format:** `remove INDEX`
+**Format:** `delete INDEX`
 
 **Examples:**
-* `remove 1`
+* `delete 1`
 
 **Upon success:**
 
-You will see a message indicating successful removal of the musician contact like below:
+You will see a message indicating successful removal of the first musician contact in the musician panel like below:
 
-[insert image]
+```
+Deleted Musician: John Doe; Phone: 98765432; Email: johnd@example.com; Tags: [bestman]; Instruments: [violin]; Genres: [classical]
+```
 
 **Upon failure:**
 
-Should you input an index greater than the number of musicians in your address book (e.g. `remove 6` in an address book
-containing 5 musicians), or input a non-positive index (e.g. `remove 0` or `remove -1`), you will see a message like below.
+Should you input an index out of the range of the current `My Musicians` list, you will see the error message below:
 
-[insert image]
+```
+The musician index provided is invalid
+```
 
 Please verify that the index is correct and try again.
 
@@ -244,6 +266,25 @@ You will see a message indicating successful addition of the musician into the b
 Should you input an index that does not exist, you will see an error message showing the possible error. 
 Please input a different index as pointed out by the error message.
 [insert image]
+
+### List all members in band: `findb`
+List the band members of a selected band. From `My Bands` panel, find the complete band name of the band.
+
+[warning box]Run `list` before running this command!
+
+**Format:** `findb BANDNAME`
+
+**Examples:**
+* `findb theory X` 
+
+**Upon success:**
+* Before: From `list` state
+    ![findb_before.png](images%2Fband-features%2Ffindb_before.png)
+* After: On the left, `My Musicians` panel will display all musicians in the band. On the right, `My Bands` panel will display the band of interest.
+![findb_after.png](images%2Fband-features%2Ffindb_after.png)
+
+**Upon failure:**
+If you input an invalid band name, an error message `Band does not exist!` will be displayed. Please input a valid band name and enter the command again.
 
 ## Clear data: `clear`
 

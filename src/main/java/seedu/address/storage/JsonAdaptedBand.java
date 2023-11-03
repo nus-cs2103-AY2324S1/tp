@@ -25,21 +25,21 @@ public class JsonAdaptedBand {
 
     private final String name;
     private final List<JsonAdaptedMusician> musicians = new ArrayList<>();
-    private final List<JsonAdaptedTag> genres = new ArrayList<>();
+    private final List<JsonAdaptedGenre> genres = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedMusician} with the given band details.
      */
     @JsonCreator
-    public JsonAdaptedBand(@JsonProperty("name") String name, @JsonProperty("genres") HashSet genres,
+    public JsonAdaptedBand(@JsonProperty("name") String name, @JsonProperty("genres") List<JsonAdaptedGenre> genres,
                                @JsonProperty("musicians") List<JsonAdaptedMusician> musicians) {
         this.name = name;
         if (musicians != null) {
             this.musicians.addAll(musicians);
         }
-        // if (genres != null) {
-        //    this.genres.addAll(genres);
-        //}
+        if (genres != null) {
+            this.genres.addAll(genres);
+        }
     }
 
     /**
@@ -47,9 +47,9 @@ public class JsonAdaptedBand {
      */
     public JsonAdaptedBand(Band source) {
         name = source.getName().fullName;
-        //genres.addAll(source.getGenres().stream()
-        //.map(JsonAdaptedTag::new)
-        //.collect(Collectors.toList()));
+        genres.addAll(source.getGenres().stream()
+            .map(JsonAdaptedGenre::new)
+            .collect(Collectors.toList()));
         musicians.addAll(source.getMusicians().stream().map(JsonAdaptedMusician::new).collect(Collectors.toList()));
     }
 
@@ -59,11 +59,11 @@ public class JsonAdaptedBand {
      * @throws IllegalValueException if there were any data constraints violated in the adapted musician.
      */
     public Band toModelType() throws IllegalValueException {
-        // final List<Tag> bandGenres = new ArrayList<>();
+        final List<Tag> bandGenres = new ArrayList<>();
         final HashSet<Musician> bandMusicians = new HashSet<>();
-        // for (JsonAdaptedTag genre : genres) {
-        //    bandGenres.add(genre.toModelType());
-        // }
+        for (JsonAdaptedGenre genre : genres) {
+            bandGenres.add(genre.toModelType());
+        }
         for (JsonAdaptedMusician musician : musicians) {
             bandMusicians.add(musician.toModelType());
         }
@@ -76,7 +76,7 @@ public class JsonAdaptedBand {
         }
         final BandName modelName = new BandName(name);
 
-        final Set<Tag> modelGenres = new HashSet<>(); // bandGenres
+        final Set<Tag> modelGenres = new HashSet<>(bandGenres); // bandGenres
         return new Band(modelName, modelGenres, bandMusicians);
     }
 }

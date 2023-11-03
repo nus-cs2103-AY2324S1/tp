@@ -13,6 +13,7 @@ import seedu.address.model.band.exceptions.BandNotFoundException;
 import seedu.address.model.band.exceptions.DuplicateBandException;
 import seedu.address.model.musician.Musician;
 import seedu.address.model.musician.exceptions.DuplicateMusicianException;
+import seedu.address.model.musician.exceptions.MusicianNotFoundException;
 
 /**
  * A list of bands that enforces uniqueness between its elements and does not allow nulls.
@@ -41,7 +42,7 @@ public class UniqueBandList implements Iterable<Band> {
 
     /**
      * Adds a band to the list.
-     * The musician must not already exist in the list.
+     * The band must not already exist in the list.
      */
     public void add(Band toAdd) {
         requireNonNull(toAdd);
@@ -145,10 +146,10 @@ public class UniqueBandList implements Iterable<Band> {
     /**
      * Returns true if musician already exists in the band.
      */
-    public boolean hasMusician(int bandIndex, Musician musician) {
-        requireNonNull(bandIndex);
+    public boolean hasMusician(Band band, Musician musician) {
+        requireNonNull(band);
         requireNonNull(musician);
-        return internalList.get(bandIndex).hasMusician(musician);
+        return band.hasMusician(musician);
     }
     /**
      * Adds a musician to a band.
@@ -160,6 +161,18 @@ public class UniqueBandList implements Iterable<Band> {
             throw new DuplicateMusicianException();
         }
         internalList.get(bandIndex).getModifiableMusicianList().add(musician);
+    }
+
+    /**
+     * Removes a musician from a band.
+     */
+    public void removeMusician(Band band, Musician musician) {
+        requireNonNull(band);
+        requireNonNull(musician);
+        if (!band.getModifiableMusicianList().contains(musician)) {
+            throw new MusicianNotFoundException();
+        }
+        band.getModifiableMusicianList().remove(musician);
     }
 
     /**

@@ -1,9 +1,11 @@
 package seedu.address.logic.parser.band;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_GENRE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
 import java.util.HashSet;
+import java.util.Set;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.band.AddBandCommand;
@@ -15,6 +17,7 @@ import seedu.address.logic.parser.Prefix;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.band.Band;
 import seedu.address.model.band.BandName;
+import seedu.address.model.tag.Tag;
 
 
 /**
@@ -29,7 +32,7 @@ public class AddBandCommandParser implements Parser<AddBandCommand> {
     public AddBandCommand parse(String args) throws ParseException {
 
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME);
+                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_GENRE);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME)
                 || !argMultimap.getPreamble().isEmpty()) {
@@ -39,8 +42,9 @@ public class AddBandCommandParser implements Parser<AddBandCommand> {
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME);
         BandName name = ParserUtil.parseBandName(argMultimap.getValue(PREFIX_NAME).get());
 
+        Set<Tag> genreList = ParserUtil.parseGenres(argMultimap.getAllValues(PREFIX_GENRE));
         // tags and musicians to be implemented later on
-        Band band = new Band(name, new HashSet<>(), new HashSet<>());
+        Band band = new Band(name, genreList, new HashSet<>());
 
         return new AddBandCommand(band);
     }
