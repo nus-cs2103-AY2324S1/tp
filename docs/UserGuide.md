@@ -31,6 +31,7 @@ Here are some benefits of adopting lesSON in your studying experience:
    - [Hints for Flashcards](#hints-for-flashcards-hint)
    - [Solve Flashcards](#solving-flashcards-solve)
    - [Setting Difficulty for Flashcards](#setting-difficulty-of-flashcards-set)
+   - [Randomly Practise Flashcards](#randomly-practise-flashcards--random)
    - [Clear all Flashcards](#clear-all-flashcards-clear)
    - [Setting goals](#setting-goals-goal)
    - [Getting help](#getting-help-help)
@@ -381,6 +382,29 @@ set 10 d/ easy
 
 2. Successful Output
    ![result of set command](./images/UserGuide/1.3_set_ans.png)
+
+### Randomly Practise Flashcards: `random`
+Practise a single Flashcard in the deck. This command chooses a random flashcard, 
+as opposed to `practise` command which chooses the first (highest priority) flashcard.
+Use `r` index with `solve` and `set` for this random card.
+
+Format: `random`
+
+#### Acceptable values for each parameters:
+* There are no parameters.
+
+#### Examples:
+```
+random
+(showcases a random question)
+```
+#### Expected outputs:
+```
+random
+"Practising question 1 : <provided question>"
+```
+Note: since the output is random, the above can be any question.
+
 
 ### Clear all flashcards: `clear`
 Clears all flashcards found in the Deck. Deck is reset back to empty.
