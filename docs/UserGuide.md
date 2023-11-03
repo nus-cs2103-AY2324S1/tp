@@ -154,13 +154,8 @@ Format: `add-patient n/NAME ic/IC g/GENDER p/PHONE_NUMBER ec/EMERGENCY_CONTACT e
 
 Examples:
 
-<<<<<<< HEAD
-* `add-patient n/John Doe ic/S9851386G g/M p/98765432 ec/90123456 e/johnd@example.com a/John street, block 123, #01-01  c/pneumothorax b/O+`
-* `add-patient n/Betsy Crowe ic/S9851586G g/F p/98765433 ec/98765432 e/betsycrowe@example.com a/#104-C, Wakanda St 42 t/High Priority c/Flu b/O-`
-=======
 * `add-patient n/John Doe ic/S9851386G g/M p/98765432 ec/90123456 e/johnd@example.com a/John street, block 123, #01-01 c/pneumothorax b/O+ t/Low`
 * `add-patient n/Betsy Crowe ic/S9851586G g/F p/98765433 e/betsycrowe@example.com a/#104-C, Wakanda St 42 c/AIDS b/O+ t/High`
->>>>>>> branch-Minor-Changes
 
 ### Creating an Appointment : `new-appt`
 
