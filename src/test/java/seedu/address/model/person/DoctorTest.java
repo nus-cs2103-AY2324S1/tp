@@ -13,7 +13,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_NRIC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NRIC_CHERYL;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_CHERYL;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_SURGEON;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalDoctor.ALICE;
 import static seedu.address.testutil.TypicalDoctor.CHERYL;
@@ -86,7 +86,7 @@ public class DoctorTest {
         assertFalse(ALICE.equals(editedAlice));
 
         // different tags -> returns false
-        editedAlice = new DoctorBuilder(ALICE).withTags(VALID_TAG_HUSBAND).build();
+        editedAlice = new DoctorBuilder(ALICE).withTags(VALID_TAG_SURGEON).build();
         assertFalse(ALICE.equals(editedAlice));
     }
 

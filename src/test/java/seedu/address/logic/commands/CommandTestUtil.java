@@ -56,8 +56,11 @@ public class CommandTestUtil {
     public static final String VALID_ADDRESS_CHERYL = "123 Main Street, Anytown, USA";
     public static final String VALID_ADDRESS_DEREK = "456 Elm Avenue, Somewhereville, Canada";
 
-    public static final String VALID_TAG_HUSBAND = "husband";
-    public static final String VALID_TAG_FRIEND = "friend";
+    public static final String VALID_TAG_LOW = "priority: LOW";
+    public static final String VALID_TAG_MEDIUM = "priority: MEDIUM";
+    public static final String VALID_TAG_HIGH = "priority: HIGH";
+    public static final String VALID_TAG_CARDIOLOGIST = "CARDIOLOGIST";
+    public static final String VALID_TAG_SURGEON = "SURGEON";
     public static final String VALID_GENDER_MALE = "M";
     public static final String VALID_GENDER_FEMALE = "F";
     public static final String VALID_NRIC_AMY = "S8643226I";
@@ -109,19 +112,21 @@ public class CommandTestUtil {
     public static final String CONDITION_DESC_BOB = " " + PREFIX_CONDITION + VALID_CONDITION_BOB;
     public static final String BLOODTYPE_DESC_AMY = " " + PREFIX_BLOODTYPE + VALID_BLOODTYPE_AMY;
     public static final String BLOODTYPE_DESC_BOB = " " + PREFIX_BLOODTYPE + VALID_BLOODTYPE_BOB;
-    public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
-    public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
     public static final String APPOINTMENT_DOCTOR_NRIC_DESC_DEREK = " " + PREFIX_DOCTOR_IC + VALID_NRIC_DEREK;
 
     public static final String APPOINTMENT_DOCTOR_NRIC_DESC_CHERYL = " " + PREFIX_DOCTOR_IC + VALID_NRIC_CHERYL;
 
     public static final String APPOINTMENT_PATIENT_NRIC_DESC_BOB = " " + PREFIX_PATIENT_IC + VALID_NRIC_BOB;
     public static final String APPOINTMENT_PATIENT_NRIC_DESC_AMY = " " + PREFIX_PATIENT_IC + VALID_NRIC_AMY;
+    public static final String TAG_DESC_LOW = " " + PREFIX_TAG + "Low";
+    public static final String TAG_DESC_MEDIUM = " " + PREFIX_TAG + "Medium";
+    public static final String TAG_DESC_HIGH = " " + PREFIX_TAG + "High";
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
-    public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
+    public static final String INVALID_PATIENT_TAG_DESC = " " + PREFIX_TAG + "highest"; // not a priority level
+    public static final String INVALID_DOCTOR_TAG_DESC = " " + PREFIX_TAG + "nurse"; // not a valid specialisation
     public static final String INVALID_BLOODTYPE_DESC = " " + PREFIX_BLOODTYPE + "Z+";
     public static final String INVALID_CONDITION_DESC = " " + PREFIX_CONDITION + " ";
     public static final String INVALID_EMERGENCY_CONTACT_DESC = " " + PREFIX_EMERGENCY_CONTACT + "+6A";
@@ -145,13 +150,11 @@ public class CommandTestUtil {
                 .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
                 .withBloodType(VALID_BLOODTYPE_AMY).withCondition(VALID_CONDITION_AMY)
                 .withGender(VALID_GENDER_FEMALE)
-                .withTags(VALID_TAG_FRIEND).withBloodType(VALID_BLOODTYPE_AMY)
-                .build();
+                .withTags(VALID_TAG_LOW).withBloodType(VALID_BLOODTYPE_AMY).build();
 
         DESC_BOB = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
-                .withGender(VALID_GENDER_MALE)
-                .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
+                .withGender(VALID_GENDER_MALE).withTags(VALID_TAG_MEDIUM).build();
 
         DESC_CHERYL = new EditPersonDescriptorBuilder().withName(VALID_NAME_CHERYL)
                 .withPhone(VALID_PHONE_CHERYL).withEmail(VALID_EMAIL_CHERYL).withAddress(VALID_ADDRESS_CHERYL)

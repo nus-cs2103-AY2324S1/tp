@@ -26,7 +26,7 @@ public class JsonAdaptedDoctorTest {
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_GENDER = "G";
     private static final String INVALID_NRIC = "T33340K";
-    private static final String INVALID_TAG = "#friend";
+    private static final String INVALID_TAG = "nurse";
 
 
     private static final String VALID_NAME = BOYD.getName().toString();

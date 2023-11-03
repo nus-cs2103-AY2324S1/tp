@@ -125,12 +125,22 @@ public class EditCommand extends Command {
     private Person getEditedPerson(Model model, Person personToEdit) throws CommandException {
         Person editedPerson;
         if (personToEdit instanceof Patient) {
+            if (editPersonDescriptor.getTags().isPresent()
+                    && !editPersonDescriptor.isValidPatientTagList(editPersonDescriptor.getTags().get())) {
+                logger.warning("Invalid tag for patient");
+                throw new CommandException("Please enter a valid patient tag.");
+            }
             editedPerson = createEditedPatient((Patient) personToEdit, editPersonDescriptor);
         } else {
             assert personToEdit.isDoctor();
             if (editPersonDescriptor.getCondition().isPresent() || editPersonDescriptor.getBloodType().isPresent()) {
                 logger.warning("Error thrown - tried to edit condition / bloodtype of doctor");
                 throw new CommandException("Doctors cannot have Condition or BloodType fields.");
+            }
+            if (editPersonDescriptor.getTags().isPresent()
+                    && !editPersonDescriptor.isValidDoctorTagList(editPersonDescriptor.getTags().get())) {
+                logger.warning(editPersonDescriptor.getTags().toString());
+                throw new CommandException("Please enter valid Doctor tags.");
             }
             editedPerson = createEditedDoctor((Doctor) personToEdit, editPersonDescriptor);
         }
@@ -343,6 +353,38 @@ public class EditCommand extends Command {
             return Optional.ofNullable(bloodType);
         }
 
+        /**
+         * Ensures the set of tags contains only valid patient tags.
+         *
+         * @param tagSet The set of tags to be validated.
+         * @return true if the tag set is valid (contains zero or one valid patient tag), false otherwise.
+         */
+        public boolean isValidPatientTagList(Set<Tag> tagSet) {
+            if (tagSet.size() > 1) {
+                return false;
+            }
+            for (Tag tag : tagSet) {
+                if (!tag.isValidPatientTag()) {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        /**
+         * Ensures the set of tags contains only valid doctor tags.
+         *
+         * @param tagSet The set of tags to be validated.
+         * @return true if the tag set is valid (contains no duplicate doctor tags), false otherwise.
+         */
+        public boolean isValidDoctorTagList(Set<Tag> tagSet) {
+            for (Tag tag : tagSet) {
+                if (!tag.isValidDoctorTag()) {
+                    return false;
+                }
+            }
+            return true;
+        }
 
         /**
          * Sets {@code tags} to this object's {@code tags}.

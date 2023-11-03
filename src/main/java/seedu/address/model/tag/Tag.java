@@ -1,16 +1,18 @@
 package seedu.address.model.tag;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
  * Represents a Tag in the address book.
- * Guarantees: immutable; name is valid as declared in {@link #isValidTagName(String)}
+ * Guarantees: immutable; name is valid as declared in {@link #isValidPatientTagName(String)}
  */
 public class Tag {
 
-    public static final String MESSAGE_CONSTRAINTS = "Tags names should be alphanumeric";
-    public static final String VALIDATION_REGEX = "\\p{Alnum}+";
+    public static final String DUPLICATE_TAG = "Doctors should not have duplicate tags!";
+    public static final String EXTRA_PATIENT_TAG = "Each Patient should only have one priority tag!";
+    public static final String INVALID_PATIENT_TAG = "Patient tag should be a valid priority level: Low, Medium or"
+            + " High.";
+    public static final String INVALID_DOCTOR_TAG = "Doctor tag should be a valid specialisation.";
 
     public final String tagName;
 
@@ -21,15 +23,52 @@ public class Tag {
      */
     public Tag(String tagName) {
         requireNonNull(tagName);
-        checkArgument(isValidTagName(tagName), MESSAGE_CONSTRAINTS);
         this.tagName = tagName;
     }
 
     /**
-     * Returns true if a given string is a valid tag name.
+     * Returns true if a given string is a valid patient tag name.
      */
-    public static boolean isValidTagName(String test) {
-        return test.matches(VALIDATION_REGEX);
+    public static boolean isValidPatientTagName(String test) {
+        for (ValidPatientTags tag : ValidPatientTags.values()) {
+            if (tag.name().equals(test)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Returns true if a given string is a valid patient tag name.
+     */
+    public static boolean isValidFullPatientTagName(String test) {
+        for (ValidPatientTags tag : ValidPatientTags.values()) {
+            String fullTagName = "priority: " + tag;
+            if (fullTagName.equals(test)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Returns true if a given string is a valid doctor tag name.
+     */
+    public static boolean isValidDoctorTagName(String test) {
+        for (ValidDoctorTags tag : ValidDoctorTags.values()) {
+            if (tag.name().equals(test)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean isValidPatientTag() {
+        return isValidFullPatientTagName(tagName);
+    }
+
+    public boolean isValidDoctorTag() {
+        return isValidDoctorTagName(tagName);
     }
 
     @Override

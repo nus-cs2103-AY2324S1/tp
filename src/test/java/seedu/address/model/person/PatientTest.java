@@ -12,7 +12,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_GENDER_MALE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NRIC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_MEDIUM;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPatient.ALICE;
 import static seedu.address.testutil.TypicalPatient.BOB;
@@ -39,7 +39,7 @@ public class PatientTest {
 
         // same ic, all other attributes different -> returns true
         Patient editedAlice = new PatientBuilder(ALICE).withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
-                .withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND).withName(VALID_NAME_BOB)
+                .withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_MEDIUM).withName(VALID_NAME_BOB)
                 .withGender(VALID_GENDER_MALE).withCondition(VALID_CONDITION_BOB).withBloodType(VALID_BLOODTYPE_BOB)
                 .withEmergencyContact(VALID_EMERGENCY_CONTACT_BOB).build();
         assertTrue(ALICE.isSamePerson(editedAlice));
@@ -84,7 +84,7 @@ public class PatientTest {
         assertFalse(ALICE.equals(editedAlice));
 
         // different tags -> returns false
-        editedAlice = new PatientBuilder(ALICE).withTags(VALID_TAG_HUSBAND).build();
+        editedAlice = new PatientBuilder(ALICE).withTags(VALID_TAG_MEDIUM).build();
         assertFalse(ALICE.equals(editedAlice));
 
         // different emergency contact -> return false

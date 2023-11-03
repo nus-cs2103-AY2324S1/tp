@@ -63,7 +63,7 @@ public class JsonAdaptedDoctor extends JsonAdaptedPerson {
         final Ic modelIc = checkIc();
         final List<Tag> personTags = new ArrayList<>();
         for (JsonAdaptedTag tag : this.getTags()) {
-            personTags.add(tag.toModelType());
+            personTags.add(tag.toModelDoctorType());
         }
         final Set<Tag> modelTags = new HashSet<>(personTags);
         final List<Appointment> personAppointments = new ArrayList<>();
