@@ -218,9 +218,9 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
 Examples:
-`find Bernice` returns `Bernice Yu`
+* `find Bernice` returns `Bernice Yu`
 
-* ![find success](images/findSuccess.png)
+![find success](images/findSuccess.png)
 
 ### Sorting all employees : `sort`
 
