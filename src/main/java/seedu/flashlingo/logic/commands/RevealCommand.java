@@ -5,7 +5,6 @@ import static java.util.Objects.requireNonNull;
 import seedu.flashlingo.commons.util.ToStringBuilder;
 import seedu.flashlingo.logic.commands.exceptions.CommandException;
 import seedu.flashlingo.model.Model;
-import seedu.flashlingo.model.flashcard.FlashCard;
 
 /**
  * Indicates user has not yet memorized the word.
@@ -29,8 +28,7 @@ public class RevealCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        FlashCard currentCard = model.getFilteredFlashCardList().get(0);
-        return new CommandResult(MESSAGE_SUCCESS + currentCard.getTranslatedWord());
+        return new CommandResult(MESSAGE_SUCCESS + model.reveal());
     }
     @Override
     public boolean equals(Object other) {
