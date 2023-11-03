@@ -11,18 +11,51 @@ GUI created with JavaFX. It is written in Java.
 
 Given below are my contributions to the project.
 
+* **Card Display**: Displaying ui with updated card class [\#72]()
+  * What it does: Hide the answer from the card class from user view
+  * Justification: Prevents users from seeing the flashcard answers from the start
+  * Highlights: Answer field is in the card but not shown on the Ui
 
-* **New Feature**: Displaying ui with updated card class
-  * What it does: Description
-  * Justification: Why it is needed
-  * Highlights: Key things to note
-  * Credits: *{mention here if you reused any code/ideas from elsewhere or if a third-party library is heavily used in the feature so that a reader can make a more accurate judgement of how much effort went into the feature}*
+* **Help**: HelpCommand [\#130]()
+  * What it does: Pops up a window to show the user guide to be used for new users
+  * Justification: Ease of access to a user guide link
+  * Highlights: New window pop up that allows for automatic copying of link
+
+* **Clear**: ClearCommand
+  * What it does: Removes all cards in the deck, giving users an empty deck [\#124]()
+  * Justification: For advance users to clear the deck and add own cards
+  * Highlights: Ability to wipe lesSON with a clear command to allow ease of reset
+
+* **AddCommandParser**: Addition of more test cases for AddCommandParser [\#116]()
+  * What it does: Provides more code coverage for the AddCommandParser
+  * Justification: Allows for more validity checks with the Parser
+
+* **EditCommandParser**: Addition of more test cases for EditCommandParser [\#68]() [\#116]()
+  * What it does: Provides more code coverage for the EditCommandParser
+  * Justification: Allows for more validity checks with the Parser
+
+* **SolveCount Ui and Storage**: Display the solveCount field and stores it in the JSON file [\#128]()
+  * What it does: SolveCount can now be displayed in display card and Ui, stored locally as well
+  * Justification: Storing solve count in json file will allow ease of reference and statistics tracker
+  * Highlights: Solve counts keeps track of number of times a card is solved in history
+
+* **Export**: Export functionality
+  * What it does: Showcases the current deck of cards and allows users to copy them and send to their peers.
+  * Justification: Allows one to share the generated cards with their peers
+  * Highlights: Separate window pops up for export
+
+* **Import**: Import functionality
+  * What it does: Allows users to input the text that they have received from their peers
+  * Justification: Users will need to import the cards their peers shared with them in a fixed format
+  * Highlights: Separate window pops up for import, will close the app after importing for best Ui experience
 
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=gsgiansen&breakdown=true)
 
 * **Project management**:
   * Release 1.2
-  * e.g. Managed releases `v1.2` - `v1.5rc` (3 releases) on GitHub
+  * Release 1.3
+  * Release 1.3(final) for PE-D
+  * e.g. Managed releases `v1.2` - `v1.3` - `v1.3(final)`(3 releases) on GitHub
 
 * **Enhancements to existing features**:
   * Which enhancements were written by me (include PR number)
@@ -30,19 +63,19 @@ Given below are my contributions to the project.
   * e.g. Wrote additional tests for existing features to increase coverage from 88% to 92% (Pull requests [\#36](), [\#38]())
 
 * **Documentation**:
-  * Which documentation were written by me for which guide (include PR number)
   * User Guide:
-    * e.g. Added documentation for the features `delete` and `find` [\#72]()
-    * e.g. Did cosmetic tweaks to existing documentation of features `clear`, `exit`: [\#74]()
+    * Edit user guide to remove traces of AB3 and to reflect lesSON for v1.1 [\#44]()
+    * Add new screenshots of lesSON at the 1.3 stage [\#110]()
+    * Addition of codeCov badge into README [\#107]()
+    * 
   * Developer Guide:
-    * e.g. Added implementation details of the `delete` feature.
-
+    * Add search implementation for future developments [\#98]()
+    * 
 * **Community**:
   * Contributions to the community (include examples i.e. PR number / screenshots)
   * e.g. PRs reviewed (with non-trivial review comments): [\#12](), [\#32](), [\#19](), [\#42]()
   * e.g. Contributed to forum discussions (examples: [1](), [2](), [3](), [4]())
   * e.g. Reported bugs and suggestions for other teams in the class (examples: [1](), [2](), [3]())
-  * e.g. Some parts of the history feature I added was adopted by several other class mates ([1](), [2]())
 
 * **Tools**:
   * List of tools used (include examples i.e. PR number / screenshots)

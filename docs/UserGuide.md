@@ -196,6 +196,7 @@ _Deleting the card in th deck with an index of 2._
 Shows a list of all flashcards in the deck. A keyword may be specified to filter out the list.
 
 Format: `list (q/t)/ (prefix question starts with/ tag)`
+Note : Listing questions for markdown syntax should include their relevant markdown notation
 Examples:
 ```
 1. list
@@ -399,6 +400,17 @@ clear
 ```
 ### Setting goals: `goal`
 Set a goal for the current studying session.
+Initially, the goal is set to 0, and out of the number of cards due that day
+
+ie. If you have 5 cards due that day, it will be set to 0/5 initially
+
+Format: goal NUMBER
+
+#### Example:
+```
+goal 5
+```
+
 
 
 ### Getting help: `help`
