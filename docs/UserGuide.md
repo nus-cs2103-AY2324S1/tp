@@ -372,7 +372,7 @@ Example:
 | Parameter    | Description​                                                                                                                           | Examples​                                                |
 |--------------|----------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------|
 | `DESCRIPTOR` | The applicant descriptor to sort by.<br/> <br/> It should be either `name` or `phone` or `email` or `position` or `score` or `status`. | <ul><li>`name`</li><li>`score`</li></ul>                 |
-| `KEYWORD`    | The keyword to find in an applicant's name. <br/> <br/> It should be ???.                                                              | <ul><li>`Lee`</li><li>`Zhang Jordan`</li></ul>           |
+| `KEYWORD`    | The keyword to find in an applicant's name. <br/> <br/> It should be alphanumeric.                                                     | <ul><li>`Lee`</li><li>`Zhang Jordan`</li></ul>           |
 | `SCORE`      | The applicant's overall score. <br/> <br/> It should be a number between 0.0 and 10.0 inclusive, to 1 decimal place.                   | <ul><li>`0.0`</li><li>`8.3`</li></ul>                    |
 | `FILENAME`   | The file name of the csv file to import. <br/> <br/> It should end with the `.csv` suffix and should not be blank.                     | <ul><li>`demo.csv`</li><li>`applicantBook.csv`</li></ul> |
 
