@@ -3,10 +3,33 @@ layout: page
 title: User Guide
 ---
 
-Tuition connect is a desktop app that helps tutors keep track of their tutees and schedules. Command Line Interface (CLI). Users are able to add tutees and their relevant information to a personal list.
+TuitionConnect is a **desktop app for simplifying the process of administration and finance management for private tutors, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, you can maximise tracking tutee-specific details, teaching-schedule management, and finance management. 
 
-* Table of Contents
-  {:toc}
+<!-- TOC -->
+  * [Quick start](#quick-start)
+  * [Input Formats](#input-formats)
+    * [Command Format](#command-format)
+  * [Features](#features)
+    * [Viewing help : `help`](#viewing-help--help)
+    * [Adding a person : `add`](#adding-a-person--add)
+    * [View the list : `list`](#view-the-list--list)
+    * [View the list of tutees specified by day : `list [DAY]`](#view-the-list-of-tutees-specified-by-day--list-day)
+    * [Finding a tutee : `find`](#finding-a-tutee--find)
+    * [Editing a tutee : `edit`](#editing-a-tutee--edit)
+    * [Deleting a person : `delete`](#deleting-a-person--delete)
+    * [Marking a person as paid : `paid`](#marking-a-person-as-paid--paid)
+    * [Marking a person as unpaid : `unpaid`](#marking-a-person-as-unpaid--unpaid)
+    * [Show all the unpaid persons : `list unpaid`](#show-all-the-unpaid-persons--list-unpaid)
+    * [Mark all persons as unpaid : `unpaidAll`](#mark-all-persons-as-unpaid--unpaidall)
+    * [Finding Free Time : `freeTime`](#finding-free-time--freetime)
+    * [Undo previous command : `undo`](#undo-previous-command--undo)
+    * [Redo previous command : `redo`](#redo-previous-command--redo)
+    * [Calculating Monthly Revenue: `rev`](#calculating-monthly-revenue-rev)
+    * [Exiting the program : `exit`](#exiting-the-program--exit)
+  * [FAQ](#faq)
+  * [Known issues](#known-issues)
+  * [Command summary](#command-summary)
+<!-- TOC -->
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -19,7 +42,7 @@ Tuition connect is a desktop app that helps tutors keep track of their tutees an
 3. Copy the file to the folder you want to use as the _home folder_ for your TuitionConnect.
 
 4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar TuitionConnect.jar` command to run the application.<br>
-   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+   A GUI similar to the below should appear in a few seconds. The left list contains information about your tutees. The right list displays your teaching schedule for the next 7 days. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
 5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
@@ -34,8 +57,45 @@ Tuition connect is a desktop app that helps tutors keep track of their tutees an
 6. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
+<details open>
+<summary><strong>Formats</strong></summary>
+<div markdown="1">
+
+## Input Formats
+
+<div markdown="block" class="alert alert-info">
+
+### Command Format
+
+* Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
+  e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
+
+* Items in square brackets are optional.<br>
+  e.g `list [DAY]` can be used as `list` or as `list Mon`.
+
+* Parameters can be in any order.<br>
+  e.g. if the command specifies `n/NAME sb/SUBJECT`, `sb/SUBJECT n/NAME ` is also valid.
+
+* Extraneous parameters added after commands that do not take in parameters (such as `help`, `list`, `exit`, `undo`, `redo` and `clear`) will be ignored.<br>
+  e.g. if the command typed is `undo 123`, it will be interpreted as `undo`.
+</div>
+
+</div>
+</details>
+--------------------------------------------------------------------------------------------------------------------
+<details open>
+<summary><strong>Features</strong></summary>
+<div markdown="1">
 
 ## Features
+
+<div markdown="block" class="alert alert-info">
+
+### Viewing help : `help`
+
+Shows a message that helps redirects you to the user guide.
+
+**Format**: `help`
 
 ### Adding a person : `add`
 
@@ -45,7 +105,7 @@ Tuition connect is a desktop app that helps tutors keep track of their tutees an
 
 **Expected Input**:
 * **Name (Compulsory field)**: String composed of character between A-Z and a-z.
-* **Phone number (Compulsory field)**: 8 digit number.
+* **Phone number (Compulsory field)**: Any number.
 * **Address (Compulsory field)**: String without restriction in characters.
 * **Email (Compulsory field)** String with restrictions in characters (XXXXXXXX@emaildomain.com)
 * **Subject (Compulsory field)**: String without restriction in characters.
@@ -220,13 +280,13 @@ Format: `list unpaid`
 
 ### Mark all persons as unpaid : `unpaidAll`
 
-**Description** : Mark all the persons as not paid.
+**Description** : Mark all tutees in your list as not paid.
 
 Format: `unpaidAll`
 
 ### Finding Free Time : `freeTime`
 
-**Description**: Finds a list of free time in your schedule.
+**Description**: Finds a set of free time in your schedule.
 
 **Format**: `freeTime d/DAY dur/DURATION b/BEGIN end/END`
 
@@ -258,7 +318,7 @@ Format: `unpaidAll`
 
 ### Redo previous command : `redo`
 
-**Description**: Reverses previously undone commands, restoring the data to a state after an undo operation.
+**Description**: Reverses previously undone commands, restoring the data to a state before an undo operation.
 
 **Format**: `redo`
 
@@ -271,12 +331,24 @@ Format: `unpaidAll`
 
 ### Calculating Monthly Revenue: `rev`
 
-**Description**: Displays the total revenue monthly calculated from all tutees
+**Description**: Displays the total revenue monthly calculated from all tutees.
 
 **Format**: `rev`
 
 **Expected Output**: Successfully calculated!! Total monthly revenue: *$monthlyrevenue*
 
+### Exiting the program : `exit`
+
+Exits the program.
+
+Format: `exit`
+
+* The application window closes automatically after you type the command `exit`
+
+</div>
+
+</div>
+</details>
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
@@ -296,11 +368,12 @@ To be added soon
 
 | Action          | Format, Examples                                                                                                                                                                                   |
 |-----------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **help**        | `help`                                                                                                                                                                                             |
 | **add**         | `add n/NAME p/PHONE_NUMBER a/ADDRESS s/SUBJECT d/DAY b/BEGIN e/END pr/PAYRATE` <br> e.g., `add n/John Doe p/98765432 a/John street, block 123, #01-01 sb/Primary 4 Math d/wed b/1500 e/1600 pr/20` |
 | **delete**      | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                                |
 | **edit**        | `edit INDEX n/NAME p/PHONE_NUMBER a/ADDRESS s/SUBJECTS d/DAY b/BEGIN e/END pr/PAYRATE`<br> e.g.,`edit p/91234567 d/Sun`                                                                            |
 | **list**        | `list`                                                                                                                                                                                             |
-| **find**        | `find n/NAME sb/SUBJECT` <br> e.g., `find n/Alex sb/Math`, `find n/Alex`, `find sb/Maths`
+| **find**        | `find n/NAME sb/SUBJECT` <br> e.g., `find n/Alex sb/Math`, `find n/Alex`, `find sb/Maths`                                                                                                          |
 | **list by day** | `list DAY` <br> e.g., `list Monday`                                                                                                                                                                |
 | **paid**        | `paid INDEX`<br> e.g., `paid 1`                                                                                                                                                                    |
 | **unpaid**      | `unpaid INDEX`<br> e.g., `unpaid 1`                                                                                                                                                                |
@@ -310,3 +383,4 @@ To be added soon
 | **undo**        | `undo`                                                                                                                                                                                             |
 | **redo**        | `redo`                                                                                                                                                                                             |
 | **rev**         | `rev`                                                                                                                                                                                              |
+| **exit**        | `exit`                                                                                                                                                                                             |
