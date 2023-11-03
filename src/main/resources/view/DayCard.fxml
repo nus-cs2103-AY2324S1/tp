@@ -13,13 +13,7 @@
             <Insets top="10" right="10" bottom="0" left="15" />
         </padding>
         <Label fx:id="day" text="$day" prefWidth="60" style="-fx-padding: 25 0 0 0;" />
-
-        <VBox>
-            <HBox VBox.vgrow="ALWAYS">
-                <Label fx:id="dot" text="-  "/>
-                <Label fx:id="task" text="$task"/>
-            </HBox>
-        </VBox>
+        <ListView fx:id="eachDayTaskList"  VBox.vgrow="ALWAYS" HBox.hgrow="ALWAYS" />
     </HBox>
     <HBox prefHeight="15"  style="-fx-background-color: #D2B48C; "/>
 </VBox>

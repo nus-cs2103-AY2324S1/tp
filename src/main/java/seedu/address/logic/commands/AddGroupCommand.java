@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUPTAG;
 
+import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.group.Group;
@@ -11,7 +12,7 @@ import seedu.address.model.Model;
 /**
  * Adds a group to projectPRO
  */
-public class CreateGroupCommand extends Command {
+public class AddGroupCommand extends Command {
     public static final String COMMAND_WORD = "new";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a group to the address book. \n"
@@ -28,9 +29,24 @@ public class CreateGroupCommand extends Command {
     /**
      * Creates an newCommand to add the specified {@code Group}
      */
-    public CreateGroupCommand(Group group) {
+    public AddGroupCommand(Group group) {
         requireNonNull(group);
         toAdd = group;
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof AddGroupCommand)) {
+            return false;
+        }
+
+        AddGroupCommand otherAddCommand = (AddGroupCommand) other;
+        return toAdd.equals(otherAddCommand.toAdd);
     }
 
     @Override
@@ -44,4 +60,12 @@ public class CreateGroupCommand extends Command {
         model.addGroup(toAdd);
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
     }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .add("toAdd", toAdd)
+                .toString();
+    }
+
 }

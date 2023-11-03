@@ -2,13 +2,8 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUPREMARK;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUPTAG;
+import static seedu.address.logic.parser.CliSyntax.*;
 
-import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.logic.Messages;
-import seedu.address.logic.commands.CreateGroupCommand;
-import seedu.address.logic.commands.GroupPersonCommand;
 import seedu.address.logic.commands.GroupRemarkCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.group.GroupRemark;
@@ -32,6 +27,8 @@ public class GroupRemarkCommandParser implements Parser<GroupRemarkCommand> {
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, GroupRemarkCommand.MESSAGE_USAGE));
         }
+
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_GROUPTAG, PREFIX_GROUPREMARK);
 
         String groupName = argMultimap.getValue(PREFIX_GROUPTAG).get();
         String groupRemark = argMultimap.getValue(PREFIX_GROUPREMARK).orElse("");

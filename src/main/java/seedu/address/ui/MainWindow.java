@@ -117,7 +117,7 @@ public class MainWindow extends UiPart<Stage> {
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
-        calendar = new Calendar(); // need pass stuff here in the future
+        calendar = new Calendar(logic.getFilteredGroupList()); // need pass stuff here in the future
         dayListPanelPlaceholder.getChildren().add(calendar.getRoot());
 
         resultDisplay = new ResultDisplay();

@@ -47,7 +47,7 @@ public class Person {
      * Every field must be present and not null.
      */
     public Person(Name name, Phone phone, Email email, GroupList personGroups, TimeIntervalList timeIntervalList) {
-        requireAllNonNull(name, phone, email, personGroups);
+        requireAllNonNull(name, phone, email, personGroups, timeIntervalList);
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -114,8 +114,14 @@ public class Person {
      * This defines a weaker notion of equality between two persons.
      */
     public boolean isSamePerson(Person otherPerson) {
-        return isSameName(otherPerson) && isSamePhone(otherPerson)
-            && isSameEmail(otherPerson);
+        return isSameName(otherPerson);
+    }
+
+    public boolean isSameGroups(Person otherPerson) {
+        if (otherPerson == this) {
+            return true;
+        }
+        return otherPerson != null && otherPerson.getGroups().equals(this.getGroups());
     }
 
     /**
@@ -206,12 +212,16 @@ public class Person {
         this.timeIntervalList.addTime(toAddFreeTime);
     }
 
-    public void addFreeTime(ArrayList<TimeInterval> toAddFreeTime) throws CommandException {
-        this.timeIntervalList.addTime(toAddFreeTime);
+    public String addFreeTime(ArrayList<TimeInterval> toAddFreeTime) throws CommandException {
+        return this.timeIntervalList.addTime(toAddFreeTime);
     }
 
     public void deleteFreeTime(ArrayList<TimeInterval> toAddFreeTime) throws CommandException {
         this.timeIntervalList.deleteTime(toAddFreeTime);
+    }
+
+    public boolean hasFreeTime(TimeInterval freeTime) {
+        return this.timeIntervalList.hasTime(freeTime);
     }
 
     /**

@@ -1,277 +1,634 @@
 ---
-  layout: default.md
-  title: "User Guide"
-  pageNav: 3
+layout: default.md
+title: "User Guide"
+pageNav: 3
 ---
 
-# ProjectPRO User Guide
 
-Text-friendly project management tool that helps students schedule meetings with different groups while also keeping track of tasks and responsibilities of each member. Our app will track the schedule of each contact and tasks individuals have to do for their project.
 
-This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
 
-<!-- * Table of Contents -->
-<page-nav-print />
+# Welcome to ProjectPRO's User Guide
 
---------------------------------------------------------------------------------------------------------------------
 
-## Quick start
+## Introductions
 
-1. Ensure you have Java `11` or above installed in your Computer.
 
-2. Download the latest `ProjectPRO.jar` from [here](https://github.com/AY2324S1-CS2103T-T10-3/tp/releases).
+Achieve simplicity while optimizing efficiency.
 
-3. Copy the file to the folder you want to use as the _home folder_.
 
-4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar ProjectPRO.jar` command to run the application.<br>
-   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![Ui](images/Ui.png)
+ProjectPRO is a desktop application designed to help university students organize their projects. Here is how ProjectPRO can streamline your project management process.
 
-5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
-   Some example commands you can try:
 
-   * `list` : Lists all contacts.
+- Categorize your contacts into various project groups.
+- Track key information from your projects.
+- Find free time for your group meetings.
 
-   * `add n/John Doe p/98765432 e/johnd@example.com` : Adds a contact named `John Doe` to the contact list.
 
-   * `delete 3` : Deletes the 3rd contact shown in the current list.
+ProjectPRO is optimized for use via a Command Line Interface (CLI) while preserving the advantages of maintaining an attractive user interface. ProjectPRO utilizes simple and easy-to-remember commands to execute different tasks, enhancing our user's experience. For instance, adding a contact is executed with a simple `add` command, as listed in our Features Section. Unlock more time in your day, store your information the smart way.
 
-   * `clear` : Deletes all contacts.
 
-   * `exit` : Exits the app.
+**New here?** View our instructions for first-time users [here](link to first-time user).
 
-6. Refer to the [Features](#features) below for details of each command.
 
---------------------------------------------------------------------------------------------------------------------
+**Used ProjectPRO before?** Click [here](link to experienced user) to recall what features we have!
 
-## Features
 
-<box type="info" seamless>
+1. [Introductions](#introductions)
+2. [Table of Contents](#table-of-contents)
+3. [Using Our Guide](#using-our-guide)
+4. [Quick Start](#quick-start)
+5. [Glossary](#glossary)
+6. [Features](#features)
+7. [Commands to Manage Contacts](#commands-to-manage-contacts)
+- [Adding a Contact `add`](#adding-a-contact-add)
+- [Deleting a Contact `delete`](#deleting-a-contact-delete)
+- [Finding a Contact `find`](#finding-a-contact-find)
+- [Listing a Contact `list`](#listing-a-contact-list)
+8. [Commands to Manage Group](#commands-to-manage-group)
+- [Adding a Group `new`](#adding-a-group-new)
+- [Deleting a Group `delete`](#deleting-a-group-delete)
+- [Finding a Group `find`](#finding-a-group-find)
+- [Listing a Group `list`](#listing-a-group-list)
+- [Grouping a Person `group`](#grouping-a-person-group)
+- [Ungrouping a Person `ungroup`](#ungrouping-a-person-ungroup)
+9. [Commands to Manage Time](#commands-to-manage-time)
+- [Adding Time to a Contact `addtime`](#adding-time-to-a-contact-addtime)
+- [Removing Time from a Contact `deletetime`](#removing-time-from-a-contact-deletetime)
+- [Listing Time from a Contact `listtime`](#listing-time-from-a-contact-listtime)
+- [Add Meeting to Group `addmeeting`](#add-meeting-to-group-addmeeting)
+- [Remove Meeting Time from a Group `deletetime`](#remove-meeting-time-from-a-group-deletetime)
+- [Listing Meeting Time from a Group `listtime`](#listing-meeting-time-from-a-group-listtime)
+- [Finding Free Time of a Group `findfreetime`](#finding-free-time-of-a-group-findfreetime)
+10. [General Commands](#general-commands)
+- [Viewing Help `help`](#viewing-help-help)
+- [Clearing All Data `clear`](#clearing-all-data-clear)
+- [Exit ProjectPRO `exit`](#exit-projectpro-exit)
 
-**Notes about the command format:**<br>
 
-* Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
-* Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 
-* Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
+## Using Our Guide
 
-* Parameters can be in any order.<br>
-  e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
-  e.g. if the command specifies `help 123`, it will be interpreted as `help`.
+This guide explains how you can use ProjectPRO to add contacts and manage your groups of contacts effectively by using our commands.
 
-* If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
-</box>
 
-### Viewing help : `help`
+**First Time User**
 
-Shows a message explaining how to access the help page.
 
-![help message](images/helpMessage.png)
+We are happy to have you on board as a first-time user of ProjectPRO! To get started, visit our [Quick Start](quick-start-link) to set up ProjectPRO. Once it's done, you can dive into the Features section to explore the full range of commands and learn more about what ProjectPRO has to offer. Refer to **Image 1** to get acquainted with our user interface.
 
-Format: `help`
 
-### Adding a person: `add`
-Adds a person to the contact list.
+![Image 1: ProjectPRO's user interface](images/UG/Overview_of_GUI.png)
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL [g/GROUPNAME]​`
 
-<box type="tip" seamless>
+**Experienced User**
 
-**Tip:** A person can be added with or without a group
-</box>
 
-Acceptable values: phone number should be an 8 digit integer, while other parameters be strings.
+Welcome back to ProjectPRO. Simply head over to our Features section to gain insights into our commands. If you are looking for a quick reference, click [here](experienced-user-link) for our commands' summary table.
 
-Names should be unique, no two contacts should have the same name input.
 
-Expected output when succeeds: “Contact successfully added”
+## Quick Start
 
-Expected output when fails: “Error, invalid input entered”
 
-Examples:
-* `add n/Adam Lee p/81112222 e/adam@example.com g/cs2103 g/cs2101`
-* `add n/Brian p/98765432 e/brian@example.com`
+1. Ensure you have Java 11 or above installed on your computer. ![here](images/UG/QuickStart1.png)
+2. Simply go to your terminal and type `java -version`. ![here](images/UG/QUICKSTART2.png)
+3. Download the latest ProjectPRO.jar from ![here](images/UG/QuickStart3.png).
+- *Screenshot of the page and annotations where the file is downloaded from*
+4. Move the JAR file to a folder where you want to store your project details. For example, create a folder named ProjectPRO and place it on your desktop.
+5. For Mac Users:
+- *Separate guide for Mac users*
+6. For Windows Users:
+- *Separate guide for Windows users*
+7. Launch ProjectPRO.
+- For Mac users: Open a command terminal, `cd` into the folder you put the JAR file in, and use the `java -jar ProjectPRO.jar` command to run the application.
+- For Windows users: Double-click the ProjectPRO.jar file to launch the application.
+8. Start using ProjectPRO!
 
 
-### Listing all persons : `list`
+## Glossary
 
-Shows a list of all persons in the contact list.
 
-Format: `list`
+**Definitions**
 
-### Editing a person : `edit`
 
-Edits an existing person in the contact list.
+Written below are the definitions of the terminology used throughout the User Guide:
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [t/TAG]…​`
 
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
-* At least one of the optional fields must be provided.
-* Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person’s tags by typing `t/` without
-    specifying any tags after it.
+| Term         | Definition                                             |
+| ------------ | ------------------------------------------------------ |
+| Parameter    | Parameter indicates the type of information required for a particular command. |
+| Command      | A special word used together with parameters to execute a particular action. E.g., `find`. |
+| GUI          | Graphical User Interface, the visual display of ProjectPRO. |
 
-Examples:
-*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
-### Locating persons by name: `find`
+**Parameter Information**
 
-Finds persons whose names contain any of the given keywords.
 
-Format: `find KEYWORD [MORE_KEYWORDS]`
+Written below are some commonly used parameters, what they represent, and examples:
 
-* The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
-Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
+| Parameter    | Description                                     | Constraints                                     | Valid Examples       | Invalid Examples           |
+| ------------ | ----------------------------------------------- | ----------------------------------------------- | --------------------  | --------------------------- |
+| `n/`         | Contact name of the student                    | Alphanumeric characters (a to z, A to Z, 0 to 9) | John Doe, David Li 2 | Kishen s/o Kasinathan, ナルト, அசிங்கமான |
+| `p/`         | Phone number of the student                    | Positive integer with 3 or more digits          | 999, 98765432, 18003569377 | 1-800-356-9377, 0, -1, 98431234.5 |
+| `e/`         | Email of the student                           | Email prefix: Alphanumeric characters (a to z, A to Z, 0 to 9), @, Email Domain | example@gmail.com, example@moe.edu.sg | example@!.com, example@moed.edu.s |
+| `g/`         | Name of the group                               | Alphanumeric characters (a to z, A to Z, 0 to 9) | CS2103T, Group 3    | Group 3!, 1 |
+| `r/`         | Group remark                                    | N/A                                           | Zoom link: CS2101.zoom, 123!@#$#@ | N/A |
+| `t/`         | Time interval of student/group                   | 2 timings,
 
-### Deleting a person : `delete`
 
-Deletes the specified contact from the contact list. (This contact will also be removed from any existing groups.)
+## Commands to Manage Contacts
 
-Format: `delete NAME`
-* Deletes the contact with the specified NAME
-* NAME has to be unique (no existing contact with same name)
-* NAME has to be an exact match
 
-Examples:
-* `delete Gerald (cs2101)`
-* `delete jane`
+### Adding a contact `add`
+You can create a contact in your contact list.
 
-Acceptable values: `NAME should be a string.`
 
-Expected output when succeeds: `Contact successfully deleted`
+**Format:** `add n/NAME p/PHONE e/EMAIL g/GROUP_NAME`
 
-Expected output when fails: `Error, invalid input entered`
 
-### Add contacts to groups: `group`
+**Acceptable values:**
+- `NAME` must be alphanumeric and must not exist in the contact list.
+- `PHONE` must be a positive integer with at least 3 digits and must not exist in the contact list.
+- `EMAIL` must be alphanumeric with a @ domain and must not exist in the contact list.
+- `GROUP_NAME` must be alphanumeric and must exist in the contacts list. This is an optional parameter.
 
-Add a contact to a group.
 
-Format: `group n/NAME g/GROUPNAME`
+**Example(s):**
+- `add n/John Doe p/98765432 e/johnd@example.com g/CS2103T`
+  This creates a person in the contact list with a person named John Doe who is in group CS2103T.
+- `add n/John Doe p/98765432 e/johnd@example.com`
+  This creates a person in the contact list with a person named John Doe who is not in any group.
 
-* Add the contact with given `NAME` from the given `GROUPNAME`
-* If group or name does not exist, print error
 
-Acceptable values:
-* `NAME` and `GROUPNAME` are strings
+**Potential error(s):**
+- Incorrect format (e.g., no prefix):
 
-Example(s):
-* `group n/John g/cs2101 tut`
-* `group n/samantha tan g/saturday 9am yoga`
 
-Expected outputs when it succeeds: `John is now part of group cs2101.`
-Expected output when fails: `Error, invalid input entered`
+- The person you are trying to add already exists in your contact list: `This person already exists in your contact list`.
 
-### Remove contacts from groups: `ungroup`
 
-Removes a contact from a group.
+### Deleting a contact `delete`
+You can delete a person from the contact list.
 
-Format: `ungroup n/NAME g/GROUPNAME`
 
-* Deletes the contact with given `NAME` from the given `GROUPNAME`
-* If group or name does not exist, print error
+**Format:** `delete n/NAME`
 
-Acceptable values:
-* `NAME` and `GROUPNAME` are strings
 
-Example(s): 
-* `ungroup n/John g/cs2101 tut`
-* `ungroup n/samantha tan g/saturday 9am yoga`
+**Acceptable values:**
+- `NAME` must be alphanumeric.
 
-Expected outputs when it succeeds: `John has been removed from cs2101 tut.`
-Expected output when fails: `Error, invalid input entered`
 
-### Create a new group : `new`
+**Example(s):**
+- `delete n/Nicholas Lee`
+  Deletes Nicholas Lee from the address book.
 
-Creates a new group with group name provided.
 
-Format: `new g/GROUPNAME`
-* Creates a new group with group name provided. 
-* GROUPNAME has to be unique (not an existing group)
+**Potential error(s):**
+- Invalid format (e.g., no prefix):
 
-Expected output when succeeds: New group added: GROUPNAME<br>
 
-Expected output when fails: This group already exists in the contact list.<br>
+- The contact you are trying to delete does not exist in your contact list: `Please provide the person's full name as in the existing contact list`.
 
-Expected output when fails: Invalid command format
 
-Examples:
-* `new g/CS2103T` Creates a new group named CS2103T
-* `new g/CS2101_OP1` Creates a new group named CS2101_OP1
+### Finding contacts `find`
+You can find all the persons from the contact list with the matching keyword.
 
 
-### Clearing all entries : `clear`
+**Format:** `find n/KEYWORDS_IN_NAME`
 
+
+**Acceptable values:**
+- `KEYWORDS_IN_NAME` must be alphanumeric, and it is not case sensitive.
+
+
+**Example(s):**
+- `find n/alice alex john`
+  Returns all the contacts with names of Alice, Alex, and John.
+
+
+**Potential error(s):**
+- Invalid format (e.g., no prefix):
+
+
+
+
+### Listing contacts `list`
+You can list all the contacts in your contact list.
+
+
+**Format:** `list`
+
+
+**Acceptable values:**
+No additional parameters.
+
+
+**Example(s):**
+- `List`
+  Lists all the people in the group.
+
+
+**Potential error(s):**
+- Extra inputs detected.
+
+
+## Commands to Manage Groups
+
+
+### Adding a group `new`
+You can create a group in your contact list.
+
+
+**Format:** `new g/GROUP_NAME`
+
+
+**Acceptable values:**
+- `GROUP_NAME` must be alphanumeric and cannot be blank.
+- `GROUP_NAME` must not be an existing group in your contact list.
+
+
+**Example(s):**
+- `new g/CS2103T tp` creates a new group named "CS2103T tp".
+
+
+**Potential error(s):**
+- Incorrect format (e.g., no prefix):
+
+
+- The group you are trying to add already exists in your contact list: `This group already exists in the contact list`.
+
+
+### Deleting a group `delete`
+You can delete a group in your contact list.
+
+
+**Format:** `delete n/GROUP_NAME`
+
+
+**Acceptable values:**
+- `GROUP_NAME` must be alphanumeric and cannot be blank.
+- `GROUP_NAME` must be an existing group in your contact list.
+
+
+**Example(s):**
+- `delete g/CS1203T`
+  This deletes the group "CS2103T" from your contact list, given "CS2103T" is an existing group in your contact list.
+
+
+**Potential error(s):**
+- Incorrect format (e.g., no prefix):
+
+
+- The group you are trying to delete does not exist in your contact list:
+
+
+
+
+### Finding a group `find`
+You can find a group in your contact list. This allows you to view the group's members and remarks.
+
+
+**Format:** `find g/GROUP_NAME`
+
+
+**Acceptable values:**
+- `GROUP_NAME` must be alphanumeric and cannot be blank.
+- `GROUP_NAME` must be an existing group in the contact list.
+
+**Example(s):**
+- `find g/CS2103T`
+  This returns the members and remarks of the existing "CS2103T" group in your contact list.
+
+
+**Potential error(s):**
+- Incorrect format (e.g., no prefix):
+
+
+- The group you are trying to find does not exist in your contact list:
+
+
+
+
+### Listing a group `listgroup`
+You can list all the groups in your contact list.
+
+
+**Format:** `listgroup`
+
+
+**Acceptable values:**
+No additional parameters.
+
+
+**Example(s):**
+- `listgroup`
+  This lists all the groups in your contact list.
+
+
+**Potential error(s):**
+- Extra inputs detected.
+
+
+### Grouping a Person `group`
+You can add an existing contact to an existing group.
+
+
+**Format:** `group n/NAME g/GROUP_NAME`
+
+
+**Acceptable values:**
+- `NAME` must be alphanumeric and cannot be blank.
+- `NAME` must be an existing contact in your contact list.
+- `GROUP_NAME` must be alphanumeric and cannot be blank.
+- `GROUP_NAME` must be an existing group in your contact list.
+- `NAME` must not be a member of `GROUP_NAME`.
+
+
+**Example(s):**
+- `group n/Alex Yeoh g/CS2103T`
+  This adds your contact "Alex Yeoh" into the group "CS2103T".
+
+
+**Potential error(s):**
+- Incorrect format (e.g., no prefix):
+
+
+- The contact you are trying to add is already a member of the group: `NAME is already in this group: GROUP_NAME`.
+
+
+### Ungrouping a Person `ungroup`
+You can remove a person from a group.
+
+
+**Format:** `ungroup n/NAME g/GROUP_NAME`
+
+
+**Acceptable values:**
+- `NAME` must be alphanumeric and cannot be blank.
+- `NAME` must be an existing contact in your contact list.
+- `GROUP_NAME` must be alphanumeric and cannot be blank.
+- `GROUP_NAME` must be an existing group in your contact list.
+- `NAME` must be a member of `GROUP_NAME`.
+
+
+**Example(s):**
+- `ungroup n/Alex Yeoh g/CS2103T`
+  This removes your contact "Alex Yeoh" from the group "CS2103T".
+
+
+**Potential error(s):**
+- Incorrect format (e.g., no prefix):
+
+
+- The contact you are trying to remove is not a member of the group: `Bernice Yu is not in this group: CS2103T`.
+
+
+## Commands to Manage Time
+
+
+### Adding Time to a Contact `addtime`
+You can add time slots when your contacts are available.
+
+
+**Format:** `addtime n/NAME t/FREE_TIME`
+- Provide the full name of the contact using the `n/` prefix.
+- Provide the time slot of the contact using the `t/` prefix.
+- Time slot is with respect to the weekly schedule.
+
+
+**Acceptable values:**
+- `NAME` must be alphanumeric.
+- `FREE_TIME` must be a time slot within a weekly schedule.
+
+
+**Example(s):**
+- `addtime n/Alex Yeoh  t/mon 1400 - mon 1600`
+
+This adds a time slot when Alex Yeoh is available to your contact list.
+Insert Image
+Free time added to: Alex Yeoh
+
+
+**Potential error(s):**
+- Contact does not exist in the contact list.
+- The time slot you are trying to add is not valid.
+
+
+### Removing Time from a Contact `deletetime`
+You can remove available time slots of your contacts.
+
+
+**Format:** `deletetime n/NAME t/FREE_TIME`
+- Provide the full name of the contact using the `n/` prefix.
+- Provide the time slot of the contact using the `t/` prefix.
+- Time slot is with respect to the weekly schedule.
+
+
+**Acceptable values:**
+- `NAME` must be alphanumeric.
+- `FREE_TIME` must be a time slot within a weekly schedule.
+- `FREE_TIME` must be a time slot that has been added to the contact.
+
+
+**Example(s):**
+- `deletetime n/Alex Yeoh  t/mon 1400 - mon 1600`
+  This removes a time slot when Alex Yeoh is available from your contact list.
+  Insert Image
+  Deleted Time From: Alex Yeoh
+
+
+**Potential error(s):**
+- Contact does not exist in the contact list.
+- Time slot does not exist for the contact.
+- Invalid time slot format.
+
+
+### Listing Time from a Contact `listtime`
+You list all available time slots of your contacts.
+
+
+**Format:** `listtime n/NAME`
+- Provide the full name of the contact using the `n/` prefix.
+
+
+**Acceptable values:**
+- `NAME` must be alphanumeric.
+
+
+**Example(s):**
+- `listtime n/Alex Yeoh`
+  This lists all time slots when Alex Yeoh is available from your contact list.
+  Insert Image
+  Listed times of Person: Alex Yeoh
+  MON 1400 - MON 1600
+
+
+**Potential error(s):**
+- Contact does not exist in the contact list.
+
+
+### Add Meeting to a Group `addmeeting`
+You can add a meeting time slot for your group.
+
+
+**Format:** `addmeeting g/GROUP_NAME t/MEETING_TIME`
+- Provide the full name of the group using the `g/` prefix.
+- Provide the time slot of the meeting using the `t/` prefix.
+- Time slot is with respect to the weekly schedule.
+
+
+**Acceptable values:**
+- `GROUP_NAME` must be alphanumeric.
+- `MEETING_TIME` must be a time slot within a weekly schedule.
+
+
+**Example(s):**
+- `addmeeting g/CS2100  t/mon 1400 - mon 1600`
+  This adds a meeting for your group CS2100.
+  Insert Image
+  Free time added to: 2100
+
+
+**Potential error(s):**
+- Group does not exist in the contact list.
+- Invalid time slot format.
+
+
+### Remove Meeting Time from a Group `deletetime`
+You remove meeting time for your groups.
+
+
+**Format:** `deletetime g/GROUP_NAME t/MEETING_TIME`
+- Provide the full name of the group using the `g/` prefix.
+- Provide the time slot of the meeting using the `t/` prefix.
+- Time slot is with respect to the weekly schedule.
+
+
+**Acceptable values:**
+- `GROUP_NAME` must be alphanumeric.
+
+
+- Group must contain `MEETING_TIME`.
+- `MEETING_TIME` must be a time slot within a weekly schedule.
+
+
+**Example(s):**
+- `deletetime g/CS2100  t/mon 1400 - mon 1600`
+  This removes a time slot when Alex Yeoh is available from your contact list.
+  Insert Image
+  Deleted Time From: Alex Yeoh
+
+
+**Potential error(s):**
+- Group does not exist in the contact list.
+- Group does not contain meeting time.
+- Invalid time slot format.
+
+
+### Listing Meeting Time from a Group `listtime`
+You list meeting time for your groups.
+
+
+**Format:** `listtime g/GROUP_NAME`
+- Provide the full name of the group using the `g/` prefix.
+
+
+**Acceptable values:**
+- `GROUP_NAME` must be alphanumeric.
+
+
+**Example(s):**
+- `listtime g/CS2100`
+  This lists all meeting times of the CS2100 group.
+  Insert Image
+  Listed Time From: CS2100
+
+
+**Potential error(s):**
+- Group does not exist in the contact list.
+
+
+### Finding Free Time of a Group `findfreetime`
+You can find a meeting time slot for your group where everyone is available.
+
+
+**Format:** `findfreetime g/GROUP_NAME`
+- Provide the full name of the group using the `g/` prefix.
+
+
+**Acceptable values:**
+- `GROUP_NAME` must be alphanumeric.
+
+
+**Example(s):**
+- `findfreetime g/CS2100`
+  This finds a common meeting time for your CS2100 group.
+  Insert Image
+
+
+**Potential error(s):**
+- Group does not exist in the contact list.
+- Contacts in the group did not add their available time slots.
+
+
+## General Commands
+
+
+### Viewing Help: `help`
+You can view the link to our UserGuide.
+
+
+**Format:** `help`
+
+
+**Acceptable values:**
+No additional parameters.
+
+
+**Example(s):**
+- `help`
+
+
+**Potential error(s):**
+- Extra inputs detected.
+
+
+### Clearing All Data: `clear`
 Clears all entries from the contact list.
 
-Format: `clear`
 
-### Exiting the program : `exit`
+**Format:** `clear`
 
-Exits the program.
 
-Format: `exit`
+**Acceptable values:**
+No additional parameters.
 
-### Saving the data
 
-All data is saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+**Example(s):**
+- `clear`
 
-### Editing the data file
 
-All data is saved automatically as a JSON file. Advanced users are welcome to update data directly by editing that data file.
+**Potential error(s):**
+- Extra inputs detected.
 
-<box type="warning" seamless>
 
-**Caution:**
-If your changes to the data file makes its format invalid, ProjectPRO will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.
-</box>
+### Exit ProjectPRO: `exit`
+You can exit ProjectPRO.
 
-### Archiving data files `[coming in v2.0]`
 
-_Details coming soon ..._
+**Format:** `exit`
 
---------------------------------------------------------------------------------------------------------------------
 
-## FAQ
+**Acceptable values:**
+No additional parameters.
 
-**Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous ProjectPRO home folder.
 
---------------------------------------------------------------------------------------------------------------------
+**Example(s):**
+- `exit`
 
-## Known issues
 
-1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
+**Potential error(s):**
+- Extra inputs detected.
 
---------------------------------------------------------------------------------------------------------------------
-
-## Command summary
-
-Action     | Format, Examples
------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL [g/GROUPNAME]` <br> e.g., `add n/Adam Lee p/81112222 e/jamesho@example.com, g/cs2103`
-**Clear**  | `clear`
-**Delete** | `delete NAME`<br> e.g., `delete nicholas`
-**Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**Group**   | `group n/NAME g/GROUPNAME`<br> e.g., `group n/John g/cs2103 tut` 
-**Ungroup**   | `ungroup n/NAME g/GROUPNAME`<br> e.g., `ungroup n/John g/cs2103 tut` 
-**New**    | `new g/GROUPNAME`<br> e.g., `new g/cs2103`
-**List**   | `list`
-**Help**   | `help`

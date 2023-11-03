@@ -13,6 +13,9 @@ public class DeletePersonTimeCommand extends DeleteTimeCommand {
     private final ArrayList<TimeInterval> timeIntervalsToDelete;
     private final Name personName;
 
+    /**
+     * Creates a DeletePersonTimeCommand to Delete the specified {@code timeIntervalsToDelete}
+     */
     public DeletePersonTimeCommand(Name personName, ArrayList<TimeInterval> timeIntervalsToDelete) {
         requireNonNull(personName);
         requireNonNull(timeIntervalsToDelete);
@@ -29,6 +32,30 @@ public class DeletePersonTimeCommand extends DeleteTimeCommand {
             throw new CommandException("Person does not exists");
         }
         return new CommandResult(String.format(MESSAGE_DELETE_TIME_SUCCESS, personName.fullName));
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof DeletePersonTimeCommand)) {
+            return false;
+        }
+
+        DeletePersonTimeCommand otherDeletePersonTimeCommand = (DeletePersonTimeCommand) other;
+        if (timeIntervalsToDelete.size() != otherDeletePersonTimeCommand.timeIntervalsToDelete.size()) {
+            return false;
+        }
+        boolean isSameArray = true;
+        for (int i = 0; i < timeIntervalsToDelete.size(); i++) {
+            isSameArray = isSameArray && timeIntervalsToDelete.get(i).equals(
+                    otherDeletePersonTimeCommand.timeIntervalsToDelete.get(i));
+        }
+        return personName.equals(otherDeletePersonTimeCommand.personName)
+                && isSameArray;
     }
 
 }

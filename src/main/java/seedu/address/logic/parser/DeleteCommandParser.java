@@ -22,34 +22,42 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public DeleteCommand parse(String args) throws ParseException {
-        String trimmedArgs = args.trim();
-        if (trimmedArgs.isEmpty()) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
-        }
-
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_GROUPTAG);
 
+        //duplicate parameters
         try {
             argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_GROUPTAG);
         } catch (ParseException e) {
-            throw new ParseException(String.format(DeleteCommand.MESSAGE_TWO_PARAMETERS, DeleteCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    DeleteCommand.MESSAGE_TWO_PARAMETERS));
         }
 
-        // check if both n/ or g/ are present
-        if ((arePrefixesPresent(argMultimap, PREFIX_NAME) && arePrefixesPresent(argMultimap, PREFIX_GROUPTAG))
+        // check if either n/ or g/ are present
+        if (!arePrefixesPresent(argMultimap, PREFIX_NAME)
                 || !argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(DeleteCommand.MESSAGE_TWO_PARAMETERS, DeleteCommand.MESSAGE_USAGE));
-        } else if (arePrefixesPresent(argMultimap, PREFIX_NAME)) {
-            String personName = argMultimap.getValue(PREFIX_NAME).get();
-            return new DeletePersonCommand(personName);
-        } else if (arePrefixesPresent(argMultimap, PREFIX_GROUPTAG)) {
-            String groupName = argMultimap.getValue(PREFIX_GROUPTAG).get();
-            return new DeleteGroupCommand(groupName);
-        } else {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
+            if (!arePrefixesPresent(argMultimap, PREFIX_GROUPTAG)) {
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                        DeleteCommand.MESSAGE_USAGE));
+            }
         }
+
+        // if n/ is present
+        if (arePrefixesPresent(argMultimap, PREFIX_NAME)) {
+            // check if g/ is present
+            if (arePrefixesPresent(argMultimap, PREFIX_GROUPTAG)) { // g/ present
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                        DeleteCommand.MESSAGE_TWO_PARAMETERS));
+            } else {
+                String personName = argMultimap.getValue(PREFIX_NAME).get();
+                return new DeletePersonCommand(personName);
+            }
+        }
+
+        // n/ not present, g/ should be present
+        String groupName = argMultimap.getValue(PREFIX_GROUPTAG).get();
+        return new DeleteGroupCommand(groupName);
+
     }
 
     private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {

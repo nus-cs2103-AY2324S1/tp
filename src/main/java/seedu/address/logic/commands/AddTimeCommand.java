@@ -22,12 +22,12 @@ public class AddTimeCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds free time to an existing person. \n"
         + "Parameters: "
         + PREFIX_NAME + "NAME "
-        + PREFIX_FREETIME + "FREE TIME \n"
+        + PREFIX_FREETIME + "FREE_TIME \n"
         + "Example: " + COMMAND_WORD + " "
         + PREFIX_NAME + "Alex Yeoh "
-        + PREFIX_FREETIME + "mon 1200 - mon 1400 ;tue 1000 - wed 1600";
+        + PREFIX_FREETIME + "mon 1200 - mon 1400" + PREFIX_FREETIME +"tue 1000 - wed 1600";
 
-    public static final String MESSAGE_SUCCESS = "Free time added to: %1$s";
+    public static final String MESSAGE_SUCCESS = "Free time status for: %1$s \n";
 
 
     private final ArrayList<TimeInterval> toAddFreeTimes;
@@ -48,12 +48,13 @@ public class AddTimeCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+        String status;
         if (model.hasPerson(toAddPerson)) {
-            model.addTimeToPerson(toAddPerson, toAddFreeTimes);
+            status = model.addTimeToPerson(toAddPerson, toAddFreeTimes);
         } else {
             throw new CommandException("Person does not exists");
         }
 
-        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAddPerson)));
+        return new CommandResult(String.format(MESSAGE_SUCCESS + status, Messages.format(toAddPerson)));
     }
 }

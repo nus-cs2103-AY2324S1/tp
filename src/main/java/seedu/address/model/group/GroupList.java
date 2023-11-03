@@ -8,16 +8,11 @@ import java.util.List;
 import java.util.stream.Stream;
 
 import javafx.collections.FXCollections;
-import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import seedu.address.logic.Messages;
-import seedu.address.logic.commands.GroupPersonCommand;
-import seedu.address.logic.commands.UngroupPersonCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.group.exceptions.DuplicateGroupException;
 import seedu.address.model.group.exceptions.GroupNotFoundException;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.exceptions.DuplicatePersonException;
 
 /**
  * A list containing groups
@@ -55,13 +50,15 @@ public class GroupList implements Iterable<Group> {
     public void setGroups(List<Group> groups) {
         requireAllNonNull(groups);
         if (!groupsAreUnique(groups)) {
-            throw new DuplicatePersonException();
+            throw new DuplicateGroupException();
         }
 
         internalList.setAll(groups);
     }
 
-
+    /**
+     * Returns true if {@code groups} contains only unique persons.
+     */
     private boolean groupsAreUnique(List<Group> groups) {
         for (int i = 0; i < groups.size() - 1; i++) {
             for (int j = i + 1; j < groups.size(); j++) {
@@ -85,7 +82,35 @@ public class GroupList implements Iterable<Group> {
         }
     }
 
+    /**
+     * Returns a group with the {@code groupName} from the GroupList.
+     * @param groupName Name of group to look for
+     * @return The group with the group name
+     * @throws CommandException If GroupList does not contain a group with the name
+     */
+    public Group getGroup(String groupName) throws CommandException {
+        for (Group group : this.internalList) {
+            if (group.nameEquals(groupName)) {
+                return group;
+            }
+        }
+        throw new CommandException(Messages.MESSAGE_NO_GROUP_WITH_NAME_FOUND);
+    }
 
+    /**
+     * Returns a group with the {@code groupName} from the GroupList.
+     * @param groupToGet Group to look for
+     * @return The group with the group name
+     * @throws CommandException If GroupList does not contain a group with the name
+     */
+    public Group getGroup(Group groupToGet) throws CommandException {
+        for (Group group : this.internalList) {
+            if (group.nameEquals(groupToGet.getGroupName())) {
+                return group;
+            }
+        }
+        throw new CommandException(Messages.MESSAGE_NO_GROUP_WITH_NAME_FOUND);
+    }
 
     /**
      * Converts the internal list to streams.
@@ -119,16 +144,6 @@ public class GroupList implements Iterable<Group> {
         GroupList otherGroupList = (GroupList) other;
         return internalList.equals(otherGroupList.internalList);
     }
-
-    public Group getGroup(String groupName) throws CommandException {
-        for (Group group : this.internalList) {
-            if (group.nameEquals(groupName)) {
-                return group;
-            }
-        }
-        throw new CommandException(Messages.MESSAGE_NO_GROUP_WITH_NAME_FOUND);
-    }
-
 
     @Override
     public int hashCode() {

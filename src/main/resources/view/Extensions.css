@@ -8,6 +8,13 @@
     -fx-background: #D2B48C;
 }
 
+#eachDayTaskList .list-cell:empty{
+    /* Empty cells will not have alternating colours */
+     -fx-background: transparent;
+}
+
+
+
 .tag-selector {
     -fx-border-width: 1;
     -fx-border-color: white;
