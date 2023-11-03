@@ -28,7 +28,7 @@ For experienced users, if you need help in remembering a particular command, ple
     * [Add musician](#add-musician--add)
     * [Remove musician](#remove-musician--remove)
     * [Edit musician](#edit-musician--edit)
-    * [Tag musician](#tag-musician)
+    * [Show all valid instruments and genres](#show-all-valid-instruments-and-genres--tags)
     * [Find musicians](#find-musicians--find)
   * [Features for bands](#features-for-managing-bands)
     * [Create band](#create-band--addb)
@@ -98,6 +98,7 @@ View all musicians and bands in their separate panels.
 
 
 ## Features for managing musicians
+
 ### Add musician: `add`
 
 Adds one musician to the contact book. 
@@ -110,6 +111,10 @@ Name, phone number, email, tag, instrument, genre about the musician can all be 
 * `add n/John Doe p/98765432 e/johnd@example.com t/bestman i/violin g/classical`
 * `add n/Betsy Crowe e/pianistbetsy@smtp.com p/87988039 i/piano g/pop g/rock`
 
+**Things to Note**
+* To add the instruments and genres the musician specialises in using the `i/` and `g/` prefixes, you can only add the instruments and genres included in a pre-defined list of instruments and genres. Refer to the [tags](#show-all-valid-instruments-and-genres--tags) command for more information.
+
+
 **Upon success:**
 A success message like below will be displayed.
 
@@ -119,10 +124,11 @@ New musician added: John Doe; Phone: 98765432; Email: johnd@example.com; Tags: [
 
 **Upon failure:**
 
-If you input a musician which is already in your contact book (ie. have the same phone number or email as an existing contact). You will be shown an error message like below. Please re-enter the correct information.
+If you input a musician which is already in your contact book (i.e. a musician with either the same name, the same phone number, or the same email as an existing contact). You will be shown an error message like below. Please re-enter the correct information.
 ```
 This musician already exists in your contact list
 ```
+
 
 ### Delete musician: `delete`
 
@@ -152,80 +158,104 @@ The musician index provided is invalid
 
 Please verify that the index is correct and try again.
 
+
 ### Edit musician: `edit`
 
-### Tag musician
-[combine tag i and g]
-with instruments: `tag instrument`
+Edits an existing musician in the contact book referenced by the index.
 
-Tags a musician with one or more instruments he/she is proficient in.
+Name, phone number, email, tag, instrument, genre about the musician can all be included for edit.
 
-**Format:** `tag instrument INDEX i/INSTRUMENT…`
-
-**Constraints:**
-* `INDEX` must be a positive integer 1, 2, 3, …​
-* The instrument tag must be *non-empty*.
-* You have to supply *at least one instrument tag* to the musician you are tagging.
+**Format:** `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [t/TAG]... [i/INSTRUMENT]... [g/GENRE]...`
 
 **Examples:**
-* `tag instrument 1 i/Piano i/Violin`
-* `tag instrument 2 i/Drums`
+* `edit 1 p/98765430 g/pop`
+* `edit 2 e/pianistbetsy@edited.com i/violin t/available`
+
+**Things to Note**
+* At least one of the optional field to edit must be provided.
+* The `INDEX` refer to the index number shown in the currently displayed `My Musicians` list. The index **must be a positive integer** 1, 2, 3, …​
+* When editing tags/instruments/genres, the existing tags/instruments/genres of the musician will be removed i.e adding of tags/instruments/genres is not cumulative.
+* You can remove all tags/instruments/genres of the musician by inputting an empty tag/instrument/genre field, e.g. `edit 1 t/ i/ g/`.
+* You can only edit the instruments and genres of the musician using the ones included in a pre-defined list. Refer to the [tags](#show-all-valid-instruments-and-genres--tags) command for more information.
 
 **Upon success:**
+A success message like below will be displayed.
 
-You will see a message indicating successful addition of instruments like below:
-[insert image]
-
-**Upon failure:**
-
-Should you try to tag a musician with zero instrument tags or empty tags, i.e., `tag instrument 1 i/` or
-`tag instrument 1`, you will see a message like below:
-[insert image]
-
-Tag musician with genres: `tag genre`
-
-Tags a musician with one or more genres he/she is proficient in.
-
-**Format:** `tag genre INDEX g/GENRE…`
-
-**Constraints:**
-* `INDEX` must be a positive integer 1, 2, 3, …​
-* The genre tag must be *non-empty*.
-* You have to supply *at least one genre tag* to the musician you are tagging.
-
-**Examples:**
-* `tag genre 1 g/rock g/pop`
-* `tag genre 2 g/jazz`
-
-**Upon success:**
-
-You will see a message indicating successful addition of tags like below:
-[insert image]
+```
+Edited Musician: John Doe; Phone: 98765430; Email: johnd@example.com; Tags: [bestman]; Instruments: [violin]; Genres: [pop]
+```
 
 **Upon failure:**
+1. If you provide no argument for the musician to be edited, e.g. `edit 1`, you will see an error message like below:
+    ```
+    At least one field to edit must be provided.
+    ```
+2. If you provide invalid arguments for name, phone number, and email, you will be shown the corresponding error message with the correct format to follow. Please re-enter the correct information.
+3. If you have provided at least one optional field to edit in the correct format yet the index provided is out of range, you will see the error message below:
+    ```
+    The musician index provided is invalid
+    ```
+    Please verify that the index is correct and try again.
 
-Should you try to tag a musician with zero genre tags or empty tags, i.e., `tag genre 1 g/` or `tag genre 1`,
-you will see a message like below:
-[insert image]
+
+### Show all valid instruments and genres: `tags`
+
+View all valid instrument and genre tags for musicians and bands.
+
+The instrument and genre tags can be added/edited for a musician using the [add](#add-musician--add) and [edit](#edit-musician--edit) command with prefix `i/` and `g/` respectively.
+
+The genre tags can also be added/edited for a band using the [addb](#create-band--addb) and [editb](#edit-band--editb) command with prefix `g/`. Currently, band does not support instrument tags.
+
+**Format:** `tags`
+
+**Result:**
+You will see a list of valid instrument and genre tags in the message box like below:
+```
+Listed all valid instrument tags and genre tags below:
+Instrument tags: [bass, cello, clarinet, drums, flute, guitar, piano, saxophone, trumpet, violin, voice, other]
+Genre tags: [blues, classical, country, electronic, folk, hiphop, jazz, latin, metal, pop, rock, soul, other]
+```
+The `My Musicians` and `My Bands` panels will remain unchanged. 
+
 
 ### Find musicians: `find`
 
-Finds all musicians whose names contain any of the given keywords.
+Finds all musicians whose names, tags, instruments, AND genres contain ANY of the given keywords.
 
-**Format:** `find KEYWORD`
+**Format:** `find [n/NAME]... [t/TAG]... [i/INSTRUMENT]... [g/GENRE]...`
 
-Examples:
-* `find John` returns `john` and `John Doe`
+**Examples:**
+* `find n/John i/violin i/piano` finds all musicians whose names contain "John" AND instruments contain "violin" or "piano".
+* `find t/available t/friendly i/piano g/jazz` finds all musicians whose tags contain "available" or "friendly" AND instruments contain "piano" AND genres contain "jazz".
+
+**Things to Note**
+* At least one of the optional field to find must be provided.
+* The argument for each field must contain only one word. It cannot be empty and cannot contain multiple words separated by whitespaces.
+* The search is case-insensitive. e.g. `john` will match `John`
+* Only full words will be matched e.g. `guit` will NOT match `guitar`
 
 **Upon success:**
 
-You will see a list of musicians as follows:
-[insert image]
+The `My Musicians` panel will update to show all matching musicians, while the `My Bands` panel will list all bands.
+
+For example, when the input command is `find g/rock i/guitar i/piano`
+* Before: From `list` state
+![find_before.png](images%2Fmusician-features%2Flist_all.png)
+* After: On the left, `My Musicians` panel will display all musicians whose genres contain "rock" AND instruments contain "guitar" or "piano"
+![find_after.png](images%2Fmusician-features%2Ffind_after.png)
 
 **Upon failure:**
 
-Should you input `find` without any keyword, you will see a message like below:
-[insert image]
+1. If you provide no argument for the `find` command, you will see an error message indicating the command format is invalid with the correct format to follow.
+2. If you provide empty arguments for any of the fields, e.g. `find n/ i/`, you will see an error message below:
+    ```
+    The argument(s) provided must not be empty.
+    ```
+3. If you provide arguments of more than one word separated by whitespaces for any of the fields, e.g. `find n/John Doe` you will see the error message below:
+    ```
+    The argument(s) provided must not contain more than one word.
+    ```
+   
 
 ## Features for managing bands
 ### Create band: `addb`
@@ -260,29 +290,47 @@ For a list of valid genres, please use the command 'tags'
 
 Adds a musician to a specified band.
 
-**Format:** `addm b/BANDINDEX m/MUSICIANINDEX`
+**Format:** `addm b/BAND_INDEX m/MUSICIAN_INDEX...`
 
-**Constraints:**
+**Things to Note:**
 * `BANDINDEX` and `MUSICIANINDEX` must be positive integers 1, 2, 3, …​
+* Before adding any musicians to any band, you should first use the [list](#list-all-musicians-and-bands--list) command to list all musicians and bands.
+* You can only add musicians to a single band. Adding musicians to multiple bands is currently not supported.
 
 Examples:
-* `addm b/1 m/2` adds the second musician in the contact list to the first band in the list of bands.
+* `addm b/1 m/1 m/2 ` adds the first and second musicians in the `My Musicians` contact list to the first band in the `My Bands` list.
 
 **Upon success:**
 
-You will see a message indicating successful addition of the musician into the band like below:
-[insert image]
+You will see a message indicating successful addition of the musician into the band. The `My Bands` panel will update to show ONLY the band which the new musicians are added in. The `My Musicians` panel will update to show all the members of that band.
+
+For example, when the input command is `addm b/1 m/1 m/2`:
+
+* Before: From `list` state
+![addm_before.png](images%2Fband-features%2Flist_all.png)
+* After: On the right, `My Bands` panel will display the band "ACDC". On the left, `My Musicians` panel will display all musicians in that band.
+![addm_after.png](images%2Fband-features%2Faddm_after.png)
 
 **Upon failure:**
 
-Should you input an index that is out of range (e.g. musician index 4 when there are 3 musicians, or band index 2
-when there is 1 band), you will see an error message as shown below.
-[insert image]
-Please input a different index and try again.
+1. Should you input an index that is out of range (e.g. musician index 4 when there are 3 musicians, or band index 2
+when there is 1 band), you will see an error message below:
+    ```
+    The musician index provided is invalid
+    ```
+    or 
+    ```
+    The band index provided is invalid
+    ```
+2. If the musician(s) you are adding is/are already in the band, you will see an error message below:
+    ```
+    One or more of the musicians already exist in the band
+    ```
+3. If you input more than one field for the prefix `b/`, meaning you are trying to add musicians to multiple bands, e.g. `addm b/1 b/2 m/1`, you will see an error message below:
+    ```
+    You can only add musicians to one band at a time
+    ```
 
-In addition, if the musician already exists in the band, you will see an error message as shown below.
-[insert image]
-Please input a different musician and try again.
 
 ### Remove musician from band: `removem`
 
@@ -321,7 +369,7 @@ List the band members of a selected band. From `My Bands` panel, find the comple
 
 **Upon success:**
 * Before: From `list` state
-    ![findb_before.png](images%2Fband-features%2Ffindb_before.png)
+![findb_before.png](images%2Fband-features%2Ffindb_before.png)
 * After: On the left, `My Musicians` panel will display all musicians in the band. On the right, `My Bands` panel will display the band of interest.
 ![findb_after.png](images%2Fband-features%2Ffindb_after.png)
 
