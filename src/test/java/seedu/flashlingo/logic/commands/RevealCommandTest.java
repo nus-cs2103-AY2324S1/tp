@@ -1,8 +1,11 @@
 package seedu.flashlingo.logic.commands;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.flashlingo.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.flashlingo.testutil.TypicalFlashCards.*;
+import static seedu.flashlingo.testutil.TypicalFlashCards.getTypicalFlashlingo;
+import static seedu.flashlingo.testutil.TypicalFlashCards.getTypicalFlashlingoWithOneFlashCard;
 
 import org.junit.jupiter.api.Test;
 
@@ -21,8 +24,8 @@ public class RevealCommandTest {
     public void execute_reveal_successMessage() {
         Model expectedModel = new ModelManager(getTypicalFlashlingo(), new UserPrefs());
         FlashCard currentCard = model.getFilteredFlashCardList().get(0);
-        assertCommandSuccess(new RevealCommand(), model,
-          RevealCommand.MESSAGE_SUCCESS + currentCard.getTranslatedWord(), expectedModel);
+        assertCommandSuccess(new RevealCommand(), model, RevealCommand.MESSAGE_SUCCESS
+            + currentCard.getTranslatedWord(), expectedModel);
     }
 
     @Test
