@@ -220,22 +220,42 @@ The `My Musicians` and `My Bands` panels will remain unchanged.
 
 ### Find musicians: `find`
 
-Finds all musicians whose names contain any of the given keywords.
+Finds all musicians whose names, tags, instruments, AND genres contain ANY of the given keywords.
 
-**Format:** `find KEYWORD`
+**Format:** `find [n/NAME]... [t/TAG]... [i/INSTRUMENT]... [g/GENRE]...`
 
-Examples:
-* `find John` returns `john` and `John Doe`
+**Examples:**
+* `find n/John i/violin i/piano` finds all musicians whose names contain "John" AND instruments contain "violin" or "piano".
+* `find t/available t/friendly i/piano g/jazz` finds all musicians whose tags contain "available" or "friendly" AND instruments contain "piano" AND genres contain "jazz".
+
+**Things to Note**
+* At least one of the optional field to find must be provided.
+* The argument for each field must contain only one word. It cannot be empty and cannot contain multiple words separated by whitespaces.
+* The search is case-insensitive. e.g. `john` will match `John`
+* Only full words will be matched e.g. `guit` will NOT match `guitar`
 
 **Upon success:**
 
-You will see a list of musicians as follows:
-[insert image]
+The `My Musicians` panel will update to show all matching musicians, while the `My Bands` panel will list all bands.
+
+For example, when the input command is `find g/rock i/guitar i/piano`
+* Before: From `list` state
+![find_before.png](images%2Fmusician-features%2Ffind_before.png)
+* After: On the left, `My Musicians` panel will display all musicians whose genres contain "rock" AND instruments contain "guitar" or "piano"
+![find_after.png](images%2Fmusician-features%2Ffind_after.png)
 
 **Upon failure:**
 
-Should you input `find` without any keyword, you will see a message like below:
-[insert image]
+1. If you provide no argument for the `find` command, you will see an error message indicating the command format is invalid with the correct format to follow.
+2. If you provide empty arguments for any of the fields, e.g. `find n/ i/`, you will see an error message below:
+    ```
+    The argument(s) provided must not be empty.
+    ```
+3. If you provide arguments of more than one word separated by whitespaces for any of the fields, e.g. `find n/John Doe` you will see the error message below:
+    ```
+    The argument(s) provided must not contain more than one word.
+    ```
+   
 
 ## Features for managing bands
 ### Create band: `addb`
@@ -324,7 +344,7 @@ List the band members of a selected band. From `My Bands` panel, find the comple
 
 **Upon success:**
 * Before: From `list` state
-    ![findb_before.png](images%2Fband-features%2Ffindb_before.png)
+![findb_before.png](images%2Fband-features%2Ffindb_before.png)
 * After: On the left, `My Musicians` panel will display all musicians in the band. On the right, `My Bands` panel will display the band of interest.
 ![findb_after.png](images%2Fband-features%2Ffindb_after.png)
 
