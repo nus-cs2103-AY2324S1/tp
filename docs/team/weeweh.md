@@ -11,16 +11,12 @@ GUI created with JavaFX. It is written in Java.
 
 Given below are my contributions to the project.
 
-* **New Feature**: Feature
-  * What it does: Description
-  * Justification: Why it is needed
-  * Highlights: Key things to note
-  * Credits:
+* **New Feature**: Hint
+  * What it does: Displays a hint to a question of a Card
+  * Justification: Users might have trouble recalling the necessary information pertaining the question. They could include extra assistance to help them remember the answer in the future when practising the cards.
+  * Highlights: A hint is an optional field when adding a new flashcard so a placeholder EmptyHint is added to the newly added Card. The hint can be replace using the Edit feature which only allows for one hint to replace the placeholder EmptyHint.
 
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=weeweh&breakdown=true)
-
-* **Project management**:
-
 * **Enhancements to existing features**:
   * Which enhancements were written by me (include PR number)
   * Added `Tag` functionality to `Card`. Allowing users to categorise cards based on content (Pull requests )
@@ -30,6 +26,10 @@ Given below are my contributions to the project.
     * `Question` starting with specified prefix
     * Cards containing specified `Tag`(s)
     * or both in the same search
+  * Added ability to include hint in a newly added card when using the `AddCommand`
+  * Likewise, when editing a card with a new hint using the `EditCommand`
+  * Refactored the difficulty field of a `Card` from a String to an Enumeration, editing the methods involving the `setDifficultyCommand`
+  * Added extra unit tests for most of the Commands.
 
 * **Documentation**:
   * Which documentation were written by me for which guide (include PR number)
@@ -40,6 +40,10 @@ Given below are my contributions to the project.
     * Added Non-Functional Requirements
     * Refactored documentation to remove traces of AB3
     * Edit `list` feature to match its functionality to search for specific cards
+    * Added `hint` feature
+    * Added `help` feature
+    * Added `import` and `export` feature
+    * Added `goal` feature
   * Developer Guide:
     * Refactored documentation to remove traces of AB3
     * Added Table of Content and some visual tweaks
