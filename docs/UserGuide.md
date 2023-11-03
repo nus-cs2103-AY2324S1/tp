@@ -100,21 +100,9 @@ A doctor can have any number of tags (including 0). Duplicate tags, however, are
 - Phone Numbers and Emails have to be in a valid format.
 - PHONE_NUMBER must have exactly 8 digits.
 - EMAIL must contain email domain (eg. `@gmail.com`).
-<<<<<<< HEAD
 - PATIENT must contain the valid IC of a Patient in the Database.
 - Tags for doctors represent the specialisation(s) of the doctor. Only tags from the list below are supported 
 in our current version:
-=======
-- TAG must be a valid specialisation and one of the following:
-  1. Cardiologist
-  2. Orthopedic
-  3. Pediatrician
-  4. Dermatologist
-  5. Neurologist
-  6. General_Practitioner
-  7. Psychiatrist
-  8. Surgeon
->>>>>>> branch-Minor-Changes
 
   `CARDIOLOGIST, ORTHOPEDIC, PEDIATRICIAN, DERMATOLOGIST, NEUROLOGIST, GENERAL_PRACTITIONER, PSYCHIATRIST, SURGEON`
 - Tags are not case-sensitive (e.g. `t/SURGEON` and `t/surgeon` are both valid inputs).
