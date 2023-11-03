@@ -254,6 +254,20 @@ public class ClassDetailsTest {
     }
 
     @Test
+    public void getMessageInvalidAssignmentIndexZero() {
+        ClassDetails.setAssignmentCount(0);
+        assertEquals(ClassDetails.getMessageInvalidAssignmentIndex(), "There are no assignments configured.");
+        ClassDetails.setAssignmentCount(6);
+    }
+
+    @Test
+    public void getMessageInvalidTutorialIndexZero() {
+        ClassDetails.setTutorialCount(0);
+        assertEquals(ClassDetails.getMessageInvalidTutorialIndex(), "There are no tutorials configured.");
+        ClassDetails.setTutorialCount(13);
+    }
+
+    @Test
     public void equals() {
         ClassDetails classDetails = new ClassDetails("T11");
 
@@ -295,6 +309,16 @@ public class ClassDetailsTest {
             new AssignmentTracker(2),
             new ClassParticipationTracker(2))));
 
+        // different values -> returns false
+        assertFalse(classDetailsWithTrackers.equals(new ClassDetails("T12",
+                new AttendanceTracker(1),
+                new AssignmentTracker(2),
+                new ClassParticipationTracker(1))));
+
+        assertFalse(classDetailsWithTrackers.equals(new ClassDetails("T12",
+                new AttendanceTracker(1),
+                new AssignmentTracker(1),
+                new ClassParticipationTracker(2))));
     }
 
     @Test
