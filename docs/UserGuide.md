@@ -267,7 +267,6 @@ Example:
 <br>
 
 ---
-<br>
 
 <a name="interview-management-features"></a>
 ### Interview Management Features
@@ -396,37 +395,49 @@ Example:
 <br>
 
 <a name="sort"></a>
-#### Sorting applicants by descriptor: `sort`
+#### Sorting applicants by descriptors: `sort`
 
-Sorts the applicant list by using a particular descriptor as the sorting criteria.
+Sorts the applicant list based on the descriptor provided.
 
-Format: `sort d/DESCRIPTOR`
+Format: `sort d/DESCRIPTOR [dsc/]`
 * `DESCRIPTOR` must be either `name` or `phone` or `email` or `position` or `score` or `status`.
+* `dsc/` flag indicates to sort the applicant list in descending order.
 
-Example:
+Examples:
 * `sort d/name` sorts the applicant list by name in alphabetical order.
 * `sort d/phone` sorts the applicant list by phone numbers in ascending order.
 * `sort d/email` sorts the applicant list by email in alphabetical order.
-* `sort d/position` sorts the applicant list by positions in alphabetical order.
-* `sort d/score` sorts the applicant list by score in descending order.
-* `sort d/status` sorts the applicant list by status in alphabetical order.
+* `sort d/position dsc/` sorts the applicant list by positions in descending alphabetical order.
+* `sort d/score dsc/` sorts the applicant list by score in descending order.
+* `sort d/status` sorts the applicant list by status in the order _UNDECIDED_, _OFFERED_, _REJECTED_.
+
 
 <br>
 
 ---
+
 <br>
 
 <a name="filter"></a>
-#### Filtering applicants by descriptor criterion: `filter`
 
-Filters the applicant list by using a particular descriptor criterion.
+#### Filtering applicants by fields: `filter`
 
-Format: `filter ???`
-* blahblah
+Filters the applicant list based on fields given by the user.
 
-Example:
-* `filter n/iejdie` blahblah
-* `filter n/iejdie` blahblah
+Format: `filter [n/Name] [e/Email] [p/Position] [hp/Phone] [s/Status] [lts/Score] [gts/Score]`
+* All fields are optional, however at least one of the optional fields must be provided.
+* Any combination of multiple different fields is allowed.
+* Only one of each field can be provided.
+* Only applicants matching all fields will be returned. (i.e. AND search).
+* for `[n/Name]` field, only applicants whose name contains the full substring will be returned, e.g. `n/Ivan Chew` will **NOT** return `Ivan Lee`.
+* `[n/Name]` `[e/Email]` `[p/Position]` fields are case-insensitive, e.g. `n/JOHN` will return `john`.
+* `[lts/Score]` `[gts/Score]` fields do **NOT** include equality in filters, e.g. `gts/7` will return all applicants strictly greater than `7`.
+
+Examples:
+* `filter n/Ivan` filters the applicant list to applicants whose name contains `ivan`.
+* `filter n/Ivan p/Testing Engineer status/u` filters applicant list to applicants whose name contains `ivan` applying for the role of `testing engineer` and has a status of `Undecided`.
+* `filter gts/7` filters applicant list to applicants whose score is greater than or equal to 7.
+
 
 <br>
 
