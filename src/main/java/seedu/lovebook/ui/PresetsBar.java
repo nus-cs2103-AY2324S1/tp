@@ -60,7 +60,7 @@ public class PresetsBar extends UiPart<Region> {
      */
     @FXML
     public void handleSetPref() {
-        commandBox.setCommandTextField("setP age/AGE gender/GENDER "
+        commandBox.setCommandTextField("setP age/AGE "
                 + "height/HEIGHT income/INCOME horoscope/HOROSCOPE");
     }
 

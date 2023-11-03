@@ -2,7 +2,6 @@ package seedu.lovebook.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.lovebook.logic.parser.CliSyntax.PREFIX_AGE;
-import static seedu.lovebook.logic.parser.CliSyntax.PREFIX_GENDER;
 import static seedu.lovebook.logic.parser.CliSyntax.PREFIX_HEIGHT;
 import static seedu.lovebook.logic.parser.CliSyntax.PREFIX_HOROSCOPE;
 import static seedu.lovebook.logic.parser.CliSyntax.PREFIX_INCOME;
@@ -17,7 +16,6 @@ import seedu.lovebook.logic.commands.exceptions.CommandException;
 import seedu.lovebook.model.DatePrefs;
 import seedu.lovebook.model.Model;
 import seedu.lovebook.model.date.Age;
-import seedu.lovebook.model.date.Gender;
 import seedu.lovebook.model.date.Height;
 import seedu.lovebook.model.date.Income;
 import seedu.lovebook.model.date.horoscope.Horoscope;
@@ -35,13 +33,11 @@ public class SetPrefCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Sets Date Preference. "
             + "Parameters: "
             + PREFIX_AGE + "AGE "
-            + PREFIX_GENDER + "GENDER "
             + PREFIX_HEIGHT + "HEIGHT "
             + PREFIX_INCOME + "INCOME "
             + PREFIX_HOROSCOPE + "HOROSCOPE "
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_AGE + "21 "
-            + PREFIX_GENDER + "M "
             + PREFIX_HEIGHT + "23124 "
             + PREFIX_INCOME + "3000 "
             + PREFIX_HOROSCOPE + "Scorpio ";
@@ -84,12 +80,11 @@ public class SetPrefCommand extends Command {
         assert datePrefsToEdit != null;
 
         Age updatedAge = setPreferenceDescriptor.getAge().orElse(datePrefsToEdit.getAge());
-        Gender updatedGender = setPreferenceDescriptor.getGender().orElse(datePrefsToEdit.getGender());
         Height updatedHeight = setPreferenceDescriptor.getHeight().orElse(datePrefsToEdit.getHeight());
         Income updatedIncome = setPreferenceDescriptor.getIncome().orElse(datePrefsToEdit.getIncome());
         Horoscope updatedHoroscope = setPreferenceDescriptor.getHoroscope().orElse(datePrefsToEdit.getHoroscope());
 
-        return new DatePrefs(updatedAge, updatedGender, updatedHeight, updatedIncome, updatedHoroscope);
+        return new DatePrefs(updatedAge, updatedHeight, updatedIncome, updatedHoroscope);
     }
 
     @Override
@@ -105,7 +100,6 @@ public class SetPrefCommand extends Command {
      */
     public static class SetPreferenceDescriptor {
         private Age age;
-        private Gender gender;
         private Height height;
         private Income income;
         private Horoscope horoscope;
@@ -115,9 +109,8 @@ public class SetPrefCommand extends Command {
         /**
          * Constructor that accepts default values for each metric
          */
-        public SetPreferenceDescriptor(Age age, Gender gender, Height height, Income income, Horoscope horoscope) {
+        public SetPreferenceDescriptor(Age age, Height height, Income income, Horoscope horoscope) {
             setAge(age);
-            setGender(gender);
             setHeight(height);
             setIncome(income);
             setHoroscope(horoscope);
@@ -129,7 +122,6 @@ public class SetPrefCommand extends Command {
          */
         public SetPreferenceDescriptor(SetPreferenceDescriptor toCopy) {
             setAge(toCopy.age);
-            setGender(toCopy.gender);
             setHeight(toCopy.height);
             setIncome(toCopy.income);
             setHoroscope(toCopy.horoscope);
@@ -139,7 +131,7 @@ public class SetPrefCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(age, gender, height, income, horoscope);
+            return CollectionUtil.isAnyNonNull(age, height, income, horoscope);
         }
 
         public void setAge(Age age) {
@@ -148,14 +140,6 @@ public class SetPrefCommand extends Command {
 
         public Optional<Age> getAge() {
             return Optional.ofNullable(age);
-        }
-
-        public void setGender(Gender gender) {
-            this.gender = gender;
-        }
-
-        public Optional<Gender> getGender() {
-            return Optional.ofNullable(gender);
         }
 
         public void setHeight(Height height) {
@@ -195,7 +179,6 @@ public class SetPrefCommand extends Command {
 
             SetPreferenceDescriptor otherEditPreferenceDescriptor = (SetPreferenceDescriptor) other;
             return Objects.equals(age, otherEditPreferenceDescriptor.age)
-                    && Objects.equals(gender, otherEditPreferenceDescriptor.gender)
                     && Objects.equals(height, otherEditPreferenceDescriptor.height)
                     && Objects.equals(income, otherEditPreferenceDescriptor.income)
                     && Objects.equals(horoscope, otherEditPreferenceDescriptor.horoscope);
@@ -205,7 +188,6 @@ public class SetPrefCommand extends Command {
         public String toString() {
             return new ToStringBuilder(this)
                     .add("age", age)
-                    .add("gender", gender)
                     .add("height", height)
                     .add("income", income)
                     .add("horoscope", horoscope)

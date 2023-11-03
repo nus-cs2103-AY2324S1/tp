@@ -8,7 +8,6 @@ import java.util.Objects;
 
 import seedu.lovebook.commons.util.ToStringBuilder;
 import seedu.lovebook.model.date.Age;
-import seedu.lovebook.model.date.Gender;
 import seedu.lovebook.model.date.Height;
 import seedu.lovebook.model.date.Income;
 import seedu.lovebook.model.date.horoscope.Horoscope;
@@ -18,7 +17,6 @@ import seedu.lovebook.model.date.horoscope.Horoscope;
  */
 public class DatePrefs implements ReadOnlyDatePrefs {
     private Age age;
-    private Gender gender;
     private Height height;
     private Income income;
     private Horoscope horoscope;
@@ -28,7 +26,6 @@ public class DatePrefs implements ReadOnlyDatePrefs {
      */
     public DatePrefs() {
         this.age = new Age("21");
-        this.gender = new Gender("F");
         this.height = new Height("170");
         this.income = new Income("10000");
         this.horoscope = new Horoscope("ARIES");
@@ -37,9 +34,8 @@ public class DatePrefs implements ReadOnlyDatePrefs {
     /**
      * Creates a {@code DatePrefs} with the given values.
      */
-    public DatePrefs(Age age, Gender gender, Height height, Income income, Horoscope horoscope) {
+    public DatePrefs(Age age, Height height, Income income, Horoscope horoscope) {
         this.age = age;
-        this.gender = gender;
         this.height = height;
         this.income = income;
         this.horoscope = horoscope;
@@ -68,7 +64,6 @@ public class DatePrefs implements ReadOnlyDatePrefs {
      */
     public void setPreferences(DatePrefs prefs) {
         this.age = prefs.age;
-        this.gender = prefs.gender;
         this.height = prefs.height;
         this.income = prefs.income;
         this.horoscope = prefs.horoscope;
@@ -88,17 +83,12 @@ public class DatePrefs implements ReadOnlyDatePrefs {
         DatePrefs otherPrefs = (DatePrefs) other;
         return this.age == otherPrefs.age
                 && this.height == otherPrefs.height
-                && this.gender == otherPrefs.gender
                 && this.income == otherPrefs.income
                 && this.horoscope == otherPrefs.horoscope;
     }
 
     public Age getAge() {
         return age;
-    }
-
-    public Gender getGender() {
-        return gender;
     }
 
     public Height getHeight() {
@@ -115,14 +105,13 @@ public class DatePrefs implements ReadOnlyDatePrefs {
 
     @Override
     public int hashCode() {
-        return Objects.hash(this.age, this.gender, this.height, this.income, this.horoscope);
+        return Objects.hash(this.age, this.height, this.income, this.horoscope);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
                 .add("age", age)
-                .add("gender", gender)
                 .add("height", height)
                 .add("income", income)
                 .add("horoscope", horoscope)

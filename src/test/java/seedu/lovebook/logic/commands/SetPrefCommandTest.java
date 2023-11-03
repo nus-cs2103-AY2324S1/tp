@@ -19,7 +19,6 @@ import seedu.lovebook.model.ReadOnlyLoveBook;
 import seedu.lovebook.model.ReadOnlyUserPrefs;
 import seedu.lovebook.model.date.Age;
 import seedu.lovebook.model.date.Date;
-import seedu.lovebook.model.date.Gender;
 import seedu.lovebook.model.date.Height;
 import seedu.lovebook.model.date.Income;
 import seedu.lovebook.model.date.horoscope.Horoscope;
@@ -171,13 +170,12 @@ public class SetPrefCommandTest {
     private class ModelStubAcceptingPreferenceAdded extends SetPrefCommandTest.ModelStub {
 
         private Age defaultAge = new Age("23");
-        private Gender defaultGender = new Gender("F");
         private Height defaultHeight = new Height("168");
         private Income defaultIncome = new Income("3000");
         private final Horoscope defaultHoroscope = new Horoscope("Aquarius");
         @Override
         public DatePrefs getDatePrefs() {
-            return new DatePrefs(defaultAge, defaultGender, defaultHeight, defaultIncome, defaultHoroscope);
+            return new DatePrefs(defaultAge, defaultHeight, defaultIncome, defaultHoroscope);
         }
 
         @Override

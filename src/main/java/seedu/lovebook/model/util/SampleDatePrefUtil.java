@@ -2,7 +2,6 @@ package seedu.lovebook.model.util;
 
 import seedu.lovebook.model.DatePrefs;
 import seedu.lovebook.model.date.Age;
-import seedu.lovebook.model.date.Gender;
 import seedu.lovebook.model.date.Height;
 import seedu.lovebook.model.date.Income;
 import seedu.lovebook.model.date.horoscope.Horoscope;
@@ -15,8 +14,7 @@ public class SampleDatePrefUtil {
         Age age = new Age("20");
         Height height = new Height("180");
         Income income = new Income("10000");
-        Gender gender = new Gender("F");
         Horoscope horoscope = new Horoscope("Aries");
-        return new DatePrefs(age, gender, height, income, horoscope);
+        return new DatePrefs(age, height, income, horoscope);
     }
 }
