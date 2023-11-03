@@ -16,6 +16,7 @@ import seedu.flashlingo.logic.commands.exceptions.CommandException;
 import seedu.flashlingo.model.flashcard.FlashCard;
 import seedu.flashlingo.model.flashcard.NextReviewWordPredicate;
 import seedu.flashlingo.model.flashcard.WordOverduePredicate;
+import seedu.flashlingo.model.flashcard.words.TranslatedWord;
 import seedu.flashlingo.session.SessionManager;
 
 /**
@@ -27,7 +28,6 @@ public class ModelManager implements Model {
     private final Flashlingo flashlingo;
     private final UserPrefs userPrefs;
     private final FilteredList<FlashCard> filteredFlashCards;
-    //private final FilteredList<FlashCard> tempFlashCards;
 
     /**
      * Initializes a ModelManager with the given flashlingo and userPrefs.
@@ -162,12 +162,7 @@ public class ModelManager implements Model {
         return toBeReviewed;
     }
 
-    @Override
-    public void rememberWord(boolean isUpdated) {
-        FlashCard flashCard = getFilteredFlashCardList().get(0);
-        flashCard.updateLevel(isUpdated);
-    }
-    //=========== Filtered Person List Accessors =============================================================
+    //=========== Filtered Flashcard List Accessors =============================================================
 
     /**
      * Returns an unmodifiable view of the list of {@code FlashCard} backed by the internal list of
@@ -222,6 +217,12 @@ public class ModelManager implements Model {
         updateFilteredFlashCardList(new WordOverduePredicate());
         return getFilteredFlashCardList().size() != 0;
     }
+
+    @Override
+    public TranslatedWord reveal() {
+        return getFilteredFlashCardList().get(0).getTranslatedWord();
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {

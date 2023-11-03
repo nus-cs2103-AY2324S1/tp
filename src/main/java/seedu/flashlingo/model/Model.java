@@ -8,6 +8,7 @@ import javafx.collections.ObservableList;
 import seedu.flashlingo.commons.core.GuiSettings;
 import seedu.flashlingo.logic.commands.exceptions.CommandException;
 import seedu.flashlingo.model.flashcard.FlashCard;
+import seedu.flashlingo.model.flashcard.words.TranslatedWord;
 
 /**
  * The API of the Model component.
@@ -124,11 +125,9 @@ public interface Model {
      * @return Number of FlashCardsRemembered
      */
     int getNumberOfRememberedWords();
-
-
     FlashCard nextReviewWord() throws CommandException;
-    void rememberWord(boolean isUpdated);
     void startSession() throws CommandException;
     void endSession();
     boolean hasNextRound();
+    TranslatedWord reveal();
 }
