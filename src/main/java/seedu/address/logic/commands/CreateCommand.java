@@ -70,6 +70,10 @@ public class CreateCommand extends Command {
         }
 
         model.addPerson(toAdd);
+
+        // move focus to the newly created person
+        model.setSelectedPerson(toAdd);
+
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
     }
 
