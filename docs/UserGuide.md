@@ -340,7 +340,9 @@ Output:
 
 * If the command is incorrect, the app should display an error message indicating the command format is invalid followed by the command usage message.
 
-* If the `DATE` provided is not in the correct format, the app should display an error message indicating the date format is invalid and provide guidance on the correct date format.
+* If the `DATE` provided is not in the correct format, the app should display an error message indicating the date format is invalid and provide guidance on the correct date format.'
+
+* If there is no employee on leave on the specific date, the app should display an error message indicating there is no employee on leave on the specific date.
 
 * If the command executes successfully, the app should display the employee who is on leave on the specific date.
 
