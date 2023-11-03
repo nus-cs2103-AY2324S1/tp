@@ -17,11 +17,16 @@ import networkbook.commons.core.GuiSettings;
 import networkbook.commons.core.LogsCenter;
 import networkbook.logic.Logic;
 import networkbook.logic.commands.CommandResult;
+import networkbook.logic.commands.FilterCommandResult;
+import networkbook.logic.commands.ListCommandResult;
 import networkbook.logic.commands.RedoCommand;
 import networkbook.logic.commands.SaveCommand;
+import networkbook.logic.commands.SortCommandResult;
 import networkbook.logic.commands.UndoCommand;
 import networkbook.logic.commands.exceptions.CommandException;
 import networkbook.logic.parser.exceptions.ParseException;
+import networkbook.model.person.PersonSortComparator.SortField;
+import networkbook.model.person.PersonSortComparator.SortOrder;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -49,6 +54,7 @@ public class MainWindow extends UiPart<Stage> {
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
     private CommandBox commandBox;
+    private StatusBarFooter statusBarFooter;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -135,7 +141,7 @@ public class MainWindow extends UiPart<Stage> {
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
-        StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getNetworkBookFilePath());
+        statusBarFooter = new StatusBarFooter(logic.getNetworkBookFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
         commandBox = new CommandBox(this::executeCommand);
@@ -195,6 +201,23 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
+     * Updates sort info display.
+     * @param field Sort field to display.
+     * @param order Sort order to display.
+     */
+    public void handleSort(SortField field, SortOrder order) {
+        statusBarFooter.updateSortStatus(field, order);
+    }
+
+    /**
+     * Updates filter info display.
+     * @param field Filter field to display.
+     */
+    public void handleFilter(String field) {
+        statusBarFooter.updateFilterStatus(field);
+    }
+
+    /**
      * Inputs the given command string into the command box and executes it.
      * @param commandText String command to execute.
      */
@@ -240,6 +263,21 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.isExit()) {
                 handleExit();
+            }
+
+            if (commandResult instanceof SortCommandResult) {
+                SortCommandResult sortCommandResult = (SortCommandResult) commandResult;
+                handleSort(sortCommandResult.getSortField(), sortCommandResult.getSortOrder());
+            }
+
+            if (commandResult instanceof FilterCommandResult) {
+                FilterCommandResult filterCommandResult = (FilterCommandResult) commandResult;
+                handleFilter(filterCommandResult.getFilterField());
+            }
+
+            if (commandResult instanceof ListCommandResult) {
+                handleFilter("none");
+                handleSort(SortField.NONE, SortOrder.ASCENDING);
             }
 
             return commandResult;

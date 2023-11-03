@@ -40,8 +40,9 @@ public class SortCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.updateDisplayedPersonList(null, comparator);
-        return new CommandResult(
-                String.format(Messages.MESSAGE_PERSONS_SORTED_OVERVIEW, model.getDisplayedPersonList().size()));
+        return new SortCommandResult(
+                String.format(Messages.MESSAGE_PERSONS_SORTED_OVERVIEW, model.getDisplayedPersonList().size()),
+                comparator.getSortField(), comparator.getSortOrder());
     }
 
     @Override

@@ -119,6 +119,19 @@ public class PersonSortComparator implements Comparator<Person> {
         };
     }
 
+    /**
+     * Returns sort field.
+     */
+    public SortField getSortField() {
+        return field; // Can return directly as field is final
+    }
+
+    /**
+     * Returns sort order.
+     */
+    public SortOrder getSortOrder() {
+        return order; // Can return directly as field is final
+    }
 
     @Override
     public boolean equals(Object other) {
