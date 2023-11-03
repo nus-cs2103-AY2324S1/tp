@@ -31,16 +31,7 @@ public class AddApplicantCommandParser implements Parser<AddApplicantCommand> {
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE);
-
-        if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
-            throw new ParseException(Name.MESSAGE_CONSTRAINTS);
-        }
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
-
-        if (argMultimap.getValue(PREFIX_PHONE).isPresent()) {
-            throw new ParseException(Phone.MESSAGE_CONSTRAINTS);
-        }
-
         Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
 
         Applicant applicant = new Applicant(name, phone);
