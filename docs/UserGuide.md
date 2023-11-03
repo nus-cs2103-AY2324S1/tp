@@ -93,7 +93,7 @@ Duplicate tags are only counted once.
 
 <div markdown="span" class="alert alert-info">
 :information_source: **About the alternate contact format:**
-The format for `ALTERNATE_CONTACT` is `TYPE: USERNAME`, roughly looking like `SocialMedia: Username`.
+The format for `ALTERNATE_CONTACT` is `TYPE: USERNAME`, roughly looking like `SocialMedia: Username`. Ensure to include a space between the colon and the Username.
 </div>
 
 **Examples:**
@@ -185,7 +185,7 @@ Shows contacts whose names have a word that fully matches any of the specified k
 `find KEYWORD...`
 
 - The search is case-insensitive.\
-e.g Keyword `john` will match the name `John`.
+e.g. Keyword `john` will match the name `John`.
 
 - The order of the keywords does not matter.\
 e.g. Keywords `Amy John` will show the same contacts as keywords `John Amy`.
