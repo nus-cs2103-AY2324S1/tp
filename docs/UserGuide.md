@@ -232,7 +232,7 @@ Should you input `find` without any keyword, you will see a message like below:
 
 Creates a band with the specified band name and genres.
 
-**Format:** `addb n/BANDNAME g/GENRE…​`
+**Format:** `addb n/BANDNAME [g/GENRE…​]`
 
 Examples:
 * `addb n/My Garage Band g/rock`
