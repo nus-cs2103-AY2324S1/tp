@@ -291,7 +291,7 @@ Example usage:
 
 [Table of Contents](#table-of-contents)
 
-#### Filter contacts list
+#### Filter contacts list: `filter /by [field] /with [term]`
 
 You can use the `filter` command to filter your list of conatacts,
 temporarily removing contacts that don't contain certain keywords
@@ -331,6 +331,8 @@ Example usage:
 * `filter /by grad /with 2022 2023 2024 2025`
 
 ![filter](images/filter/filterSuccess.PNG)
+
+[Table of Contents](#table-of-contents)
 
 ### <u>Category 4 - Undo/redo</u>
 
