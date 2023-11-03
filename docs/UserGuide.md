@@ -33,8 +33,9 @@ Additionally, if you are a new user, this user guide provides a quick start guid
 
 NetworkBook 1.3 includes several new features and improvements for ease of use.
 * Filter command for more control with finding contacts
+* Edit command to edit contacts' details
 * Error messages are now more specific to give useful information
-* NetworkBook is able to connect with and open other apps
+* NetworkBook is able to connect with other apps and open links and emails
 * Keyboard shortcuts added for easy access to common commands
 * Undo/redo command to fix mistakes
 * Refinement of GUI to make it more aesthetically pleasing
@@ -69,7 +70,7 @@ NetworkBook 1.3 includes several new features and improvements for ease of use.
 
 ### <u>Category 1 - Add contact information</u>
 
-#### Create new contact: `create /name [name] [/optional fields]`
+#### Create new contact: `create /name [name] [options]`
 
 You can use the create command to create a new contact. When creating a contact, you must provide the name field, and it's optional to provide other fields which will be added to the new contact.
 
@@ -77,7 +78,7 @@ Format: `create /name [name] /phone [phone] /email [email] /link [link] /grad [s
 
 Parameters:
 * `[name]`  is the name of the contact you wish to add.
-* `[optional fields]` are the non-mandatory fields you can associate with the contact at the point of creation. The fields can also be added using the add command.
+* `[options]` are the non-mandatory fields you can associate with the contact at the point of creation. The fields can also be added using the add command.
 
 When adding a contact, if there is already another contact with the same name, you would be informed that another contact with the same name already exists (not case sensitive)
 
@@ -207,7 +208,7 @@ Example usage:
 
 [Table of Contents](#table-of-contents)
 
-#### Delete some details: `delete [index of contact] /field [options]` 
+#### Delete some details: `delete [index of contact] [options]` 
 
 You can also remove some information about a contact that you previously recorded.
 
@@ -259,7 +260,7 @@ Example usage:
 
 [Table of Contents](#table-of-contents)
 
-#### Sort contacts list: `sort /by /order`
+#### Sort contacts list: `sort /by [field name] /order [asc/desc]`
 
 You can use the `sort` command to sort your list of contacts.
 
@@ -363,7 +364,49 @@ Example usage:
 
 [Table of Contents](#table-of-contents)
 
-### <u>Category 5 - Keyboard shortcuts</u>
+### <u>Category 5 - Open other apps</u>
+
+#### Open a contact's link: `open [index] /index [link index]`
+
+Open a contact's link. This creates a new tab in your default browser window, directed towards the webpage.
+
+Format: `open [index] /index [link index]`
+
+Parameters:
+
+* `[index]` is the index of the contact in the list.
+* `[link index]` is the index of the link within the contact's link list. Note that this field is optional. When omitted, the link index is defaulted to 1.
+
+Example usage:
+
+* `open 1`
+* `open 1 /index 2`
+
+![open link success](images/open/open-link.png)
+
+[Table of Contents](#table-of-contents)
+
+#### Send email to a contact's email address: `email [index] /index [email index]`
+
+Open the default mailbox application to compose an email. The target recipient is the contact's email at `email index`.
+
+Format: `email [index] /index [email index]`
+
+Parameters:
+
+* `[index]` is the index of the contact in the list.
+* `[email index]` is the index of the email address within the contact's email list. Note that this field is optional. When omitted, the email index is defaulted to 1.
+
+Example usage:
+
+* `email 1`
+* `email 1 /index 2`
+
+![open email success](images/open/open-email.png)
+
+[Table of Contents](#table-of-contents)
+
+### <u>Category 6 - Keyboard shortcuts</u>
 
 #### Auto-fill command preamble: `ctrl-F/N/G/U/R`
 
@@ -425,6 +468,8 @@ You can also use `ctrl-W` to quickly exit the program.
 | **filter** | `/by` <br> `/with` <br> `[/taken]`                                                                                                                                                                                             | `filter /by [field] /with [term]` <br/><br>e.g. `filter /by course /with abc` <br>`filter /by tag /with banker` <br><br> For course: <br> `filter /by course /with [term] [/taken true/false]` <br>e.g. `filter /by course /with abg /taken false`                                                                                                                                                                                                |                                                              |
 | **undo**   | N/A                                                                                                                                                                                                                            | `undo`                                                                                                                                                                                                                                                                                                                                                                                                                                            | Undoes the last change to the NetworkBook's full list of contacts and/or list of displayed contacts. |
 | **redo**   | N/A                                                                                                                                                                                                                            | `redo`                                                                                                                                                                                                                                                                                                                                                                                                                                            | Redoes the last change to the NetworkBook's full list of contacts and/or list of displayed contacts. |
+| **open** | `[/index]` | `open [index] /index [link index]` <br/> e.g., `open 1` <br/> e.g., `open 1 /index 2` | Open a contact's link in the default browser. |
+| **email** | `[/index]` | `email [index] /index [email index]` <br/> e.g., `email 1` <br/> e.g., `email 1 /index 2` | Open default mailbox to compose a new email to a contact's email address. |
 
 [Table of Contents](#table-of-contents)
 
