@@ -53,7 +53,7 @@ ManaGease is a **desktop app for <ins>HR managers</ins> to manage full time staf
 
    * `list` : Lists all contacts.
 
-   * `add /n Jane Smith /e jane@email.com /p 12345678 /a 123 Main St /b 123456789 /jd 2023-09-12 /s 1000 /al 10`: Adds an employee named `John Doe` to ManaGease
+   * `add /n Jane Smith /e jane@email.com /p 12345678 /a 123 Main St /b 123456789 /jd 12/09/2023 /s 1000.00 /l 10`: Adds an employee named `John Doe` to ManaGease
 
    * `delete 3` : Deletes the 3rd employee shown in the current list.
    
@@ -81,7 +81,7 @@ Refer to [Command Summary](#command-summary) below for a summary of all commands
   e.g. in `edit INDEX /n NAME`, `INDEX` and `NAME` are parameters which can be used as `edit 3 /n John Doe`.
 
 * Items in square brackets are optional.<br>
-  e.g `/n NAME [/t TAG]` can be used as `/n John Doe /t friend` or as `/n John Doe`.
+  e.g. `/n NAME [/t TAG]` can be used as `/n John Doe /t friend` or as `/n John Doe`.
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
   e.g. `[/t TAG]…​` can be used as ` ` (i.e. 0 times), `/t friend`, `/t friend /t family` etc.
