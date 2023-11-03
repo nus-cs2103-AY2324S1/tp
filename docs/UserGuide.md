@@ -8,27 +8,27 @@ title: User Guide
 1. [Introduction](#introduction)
 2. [Quick Start](#quick-start)
 3. [Key Information](#key-information)
-   1. [User Interface](#user-interface)
-   2. [Structure of a job application](#structure-of-a-job-application)
-   3. [Valid statuses](#valid-statuses)
-   4. [Valid job types](#valid-job-types)
-   5. [Structure of an interview](#structure-of-an-interview)
-   6. [Valid interview types](#valid-interview-types)
-   7. [Command Format](#command-format)
+    1. [User Interface](#user-interface)
+    2. [Structure of a job application](#structure-of-a-job-application)
+    3. [Valid statuses](#valid-statuses)
+    4. [Valid job types](#valid-job-types)
+    5. [Structure of an interview](#structure-of-an-interview)
+    6. [Valid interview types](#valid-interview-types)
+    7. [Command Format](#command-format)
 4. [Features](#features)
-   1. [Command Summary](#command-summary)
-   2. [Asking for help: `help`](#asking-for-help--help)
-   3. [Listing all applications: `list`](#listing-all-applications--list)
-   4. [Adding an application: `add`](#adding-an-application--add)
-   5. [Deleting an application: `delete`](#deleting-an-application--delete)
-   6. [Editing an application: `edit`](#editing-an-application--edit)
-   7. [Finding an application: `find`](#finding-an-application--find)
-   8. [Sorting the applications: `sort`](#sorting-all-applications--sort)
-   9. [Adding an interview: `interview add`](#adding-an-interview--interview-add)
-   10. [Deleting an interview: `interview delete`](#deleting-an-application--delete)
-   11. [Editing an interview: `interview edit`](#editing-an-interview--interview-edit)
-   12. [Clearing all applications: `clear`](#clearing-all-applications--clear)
-   13. [Exiting the programme: `exit`](#exiting-the-programme--exit)
+    1. [Command Summary](#command-summary)
+    2. [Asking for help: `help`](#asking-for-help--help)
+    3. [Listing all applications: `list`](#listing-all-applications--list)
+    4. [Adding an application: `add`](#adding-an-application--add)
+    5. [Deleting an application: `delete`](#deleting-an-application--delete)
+    6. [Editing an application: `edit`](#editing-an-application--edit)
+    7. [Finding an application: `find`](#finding-an-application--find)
+    8. [Sorting the applications: `sort`](#sorting-all-applications--sort)
+    9. [Adding an interview: `interview add`](#adding-an-interview--interview-add)
+    10. [Deleting an interview: `interview delete`](#deleting-an-application--delete)
+    11. [Editing an interview: `interview edit`](#editing-an-interview--interview-edit)
+    12. [Clearing all applications: `clear`](#clearing-all-applications--clear)
+    13. [Exiting the programme: `exit`](#exiting-the-programme--exit)
 5. [FAQ](#faq)
 6. [Glossary](#glossary)
 
@@ -55,7 +55,8 @@ applications.
 5. A GUI similar to the below should appear in a few seconds. Note that the app contains some sample data.<br><br>
    ![Ui](images/Ui.png)
 
-6. Type the command in the command box and press Enter to execute it. For example, typing **`help`** and pressing Enter will
+6. Type the command in the command box and press Enter to execute it. For example, typing **`help`** and pressing Enter
+   will
    open the help window.<br>
    Some example commands you can try:
 
@@ -79,6 +80,8 @@ applications.
 <div markdown="block" class="alert alert-info">
 
 ### User interface
+
+![GUI](images/UiStructure.png)
 
 ### Structure of a job application
 
@@ -160,13 +163,14 @@ The following are valid interview types:
     * e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 * The same prefix cannot be used multiple times in the same command.
-  * e.g. `add r/Cleaner c/Google c/Microsoft` is an invalid input.
+    * e.g. `add r/Cleaner c/Google c/Microsoft` is an invalid input.
 
-* `INDEX` and `JOB_INDEX` refers to the index number of the chosen application in the displayed application list and must be a _positive
+* `INDEX` and `JOB_INDEX` refers to the index number of the chosen application in the displayed application list and
+  must be a _positive
   integer_ 1, 2, 3, …
 
 * `INTERVIEW_INDEX` refers to the index number of the chosen interview of an application and must be a _positive
-    integer_ 1, 2, 3, …
+  integer_ 1, 2, 3, …
 
 </div>
 
@@ -299,7 +303,7 @@ Sorts the list based on the prefix provided.
 **Format:** `sort PREFIX`
 
 * A single valid `PREFIX` must be provided. Refer to "[Structure of a job application](#structure-of-a-job-application)"
-for the list of valid prefixes.
+  for the list of valid prefixes.
 * For optional fields, applications with empty fields will be listed first.
 
 **Examples:**
