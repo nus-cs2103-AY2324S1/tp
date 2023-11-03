@@ -493,7 +493,7 @@ g
 
 ## FAQ
 
-#### Launching NetworkBook 
+### Launching NetworkBook
 
 **Q:** How can I launch NetworkBook if the clicking on the JAR file does not work on my Windows computer? <br>
 **A:** If you are familiar with the command prompt, you can follow the steps below:
@@ -505,12 +505,12 @@ g
 
 If you have any further issues, please raise an issue on our [GitHub page](https://github.com/AY2324S1-CS2103T-T08-2/tp). We will attend to you as soon as we can.
 
-#### Checking Java version
+### Checking Java version
 
 **Q:** How can I check my Java version? <br>
 **A:** Open command prompt (Windows) or terminal (MacOS or Linux) on your computer, and type `java -version` . If you do not have Java installed, you can download it [here](https://www.oracle.com/java/technologies/downloads/#java11).
 
-#### Loading data from another device
+### Loading data from another device
 
 **Q:** How can I load my contacts stored in NetworkBook used in another device? <br>
 **A:** Locate the data file stored at `[JAR file location]/data/networkbook.json`. Copy over the data file to the corresponding location on your current device. After that, launch NetworkBook to check whether your contact details have been loaded properly.
