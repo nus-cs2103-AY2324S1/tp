@@ -143,7 +143,7 @@ Acceptable values for each parameter:
 * `n/NAME`: Alphabets.
 * `i/NRIC`: Alphanumeric, _exactly_ 4 characters.
 * `p/CONTACT NUMBER`: Numeric, _exactly_ 8 characters.
-* `e/EMAIL`: Alphanumeric /and special characters, no white spaces allowed, standard email format.
+* `e/EMAIL`: Alphanumeric and/or special characters, no white spaces allowed, standard email format.
 * `a/ADDRESS`: Alphabets and/or special characters, white spaces allowed.
 * `t/TAG`: Alphabets, no white spaces allowed.
 * `l/LICENCE PLATE`: Alphanumeric, _up to_ 9 characters.
