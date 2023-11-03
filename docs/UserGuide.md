@@ -67,15 +67,15 @@ will be the least of your worries.
   e.g. in `add -name NAME`, `NAME` is a parameter which can be used as `add -name Leah`.
 
 * Items in square brackets are optional.<br>
-  e.g `list [KEYWORDs]` can be used as `list` or as `list SUBJECT`.
+  e.g `list [KEYWORDs]` can be used as `list` or as `list STUDENTS`.
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
   e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
 
 * Parameters can be in any order.<br>
-  e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
+  e.g. if the command specifies `-name NAME -phone/PHONE_NUMBER`, `-phone/PHONE_NUMBER -name/NAME` is also acceptable.
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
+* Extraneous parameters for commands that do not take in parameters (such as `help`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
@@ -105,14 +105,17 @@ Format: `addPerson -name NAME [-phone PHONE_NUMBER] [-email EMAIL] [-address ADD
 **Tips:** 
 - A student can have any number of unique tags (including 0)
 - If the user is currently in list `STUDENTS`, the command can be shortened to `add`
+- For flags that can take multiple values (eg. -subject, -tag), separate the values with commas
 </box>
 
 Examples:
 * `addPerson -name John -phone 91234567`
 * `addPerson -name John -phone 91234567 -email test@gmail.com -address 10 Kent Ridge Drive -subject MATHEMATICS`
+* `addPerson -name John -phone 91234567 -email test@gmail.com -address 10 Kent Ridge Drive -subject MATHEMATICS,PHYSICS -tag abc,cde,fgh`
 * In list `STUDENTS`:
   * `add -name John -phone 91234567`
   * `add -name John -phone 91234567 -email test@gmail.com -address 10 Kent Ridge Drive -subject MATHEMATICS`
+  * `add -name John -phone 91234567 -email test@gmail.com -address 10 Kent Ridge Drive -subject MATHEMATICS,PHYSICS -tag abc,cde,fgh`
 
 
 
@@ -120,10 +123,11 @@ Examples:
 
 The list command has different behaviours depending on the keywords given.
 Lists all the students, lessons and tasks saved in the application, with optional specified information through space-separated keywords.
+The list names are case-insensitive: eg. `STUDENTS`, `students`, `stuDEnts` are all valid.
 
 To show the `SCHEDULE` list:
 * Format: `list schedule`
-* By default, `list` will also show the `SCHEDULE` list and list all the lessons with their `NAME`.
+* By default, `list` will also show the `SCHEDULE` list and list all the lessons with their lesson name.
 
 
 To show the `STUDENTS` list:
@@ -138,47 +142,45 @@ To show the `TASKS` list:
 Examples:
 * `list` displays the `SCHEDULE` list with all the lessons.
 * `list schedule` displays all the lessons with their `NAME`.
-* `list students` displays all the students with their `NAME`.
+* `list students` displays all the students with their `NAME` (including previously specified fields).
 * `list students subjects` displays all the students with their `NAME` and a list of subjects for each student.
+* `list students subjects email` displays all the students with their `NAME`, a list of subjects for each student and their email.
 * `list tasks` displays all the tasks with their `DESCRIPTION`.
 
-Acceptable value for the parameter: Any valid property of a student, such as:
-* SUBJECT
-* PHONE NUMBER
+Acceptable values for the keywords:
+* `PHONE`
+* `EMAIL`
+* `ADDRESS`
+* `TAGS`
+* `SUBJECTS`
+* `REMARK`
+* `NONE` (resets to only showing student names)
+* `ALL` (shows all student detail fields)
 
 
 Success Output:
-* For the command `list`:
-```
-Here is the list of students:
-1. Leah
-2. John
-3. Adam
-```
-* For the command `list SUBJECT,PHONE NUMBER`:
-```
-Here is the list of students:
-1. Leah
-   Subjects: Chemistry, Math
-   Phone Number: 98765432
-2. John
-   Subjects: Math, Biology
-   Phone Number: 98125132
-3. Adam
-   Subjects: Physics
-   Phone Number: 98777732
-```
+* For the command `list` or `list schedule`:
+`Showing list SCHEDULE`
+* 
+* For the command `list students` (including extra keywords):
+`Showing list STUDENT`
 
 Failure Output:
 * When there are no students saved in the app: `There are no students saved currently.`
-* When there are invalid keywords specified as a parameter: `Sorry, please only specify valid keywords.`
-
+* When there are invalid keywords specified as a parameter: 
+```Invalid command format!
+  list: Displays the specified list, which can be a STUDENTS list, SCHEDULE list or TASKS list. Default command without specified list displays the schedule list. When specifying STUDENTS list,optional parameters can be used to specify what student details to display
+  Parameters: [LIST] [KEYWORDS]...
+  Example: list SCHEDULE
+  Example: list STUDENTS phone email
+  Example: list TASKS`
+```
 
 ### Editing a student : `edit`
 
 Edits an existing student in the application.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
+Format: `edit INDEX [-name NAME] [-phone PHONE_NUMBER] [-email EMAIL] [-address ADDRESS] [-tag TAG]…​`
 
 * Edits the student at the specified `INDEX`. The index refers to the index number shown in the displayed student list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
@@ -188,8 +190,8 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
     specifying any tags after it.
 
 Examples:
-*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st student to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd student to be `Betsy Crower` and clears all existing tags.
+*  `edit 1 -phone 91234567 -email johndoe@example.com` Edits the phone number and email address of the 1st student to be `91234567` and `johndoe@example.com` respectively.
+*  `edit 2 -name Betsy Crower -tag` Edits the name of the 2nd student to be `Betsy Crower` and clears all existing tags.
 
 ### Locating students by name: `find`
 
@@ -391,7 +393,7 @@ Action     | Format, Examples
 **Add Task**    | `addTask -description Do CS2103T Preparation`
 **Delete Task** | `delete INDEX`<br> e.g., `delete 3`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com` (To Be Changed)
+**Edit**   | `edit INDEX [-name NAME] [-phone PHONE_NUMBER] [-email EMAIL] [-address ADDRESS] [-tag TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com` (To Be Changed)
 **Show**   | `show INDEX`
 **List**   | `list`, `list schedule`, `list students [KEYWORDs]`, `list tasks`
 **Help**   | `help`
