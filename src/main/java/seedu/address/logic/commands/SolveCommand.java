@@ -63,7 +63,7 @@ public class SolveCommand extends Command {
         Card cardToSolve = lastShownList.get(actualIndex.getZeroBased());
 
         cardToSolve.incrementSolveCount();
-        //sets to show the update on the Ui
+        // sets to show the update on the Ui
         model.setCard(cardToSolve, cardToSolve);
         model.getGoal().solvedCard();
 

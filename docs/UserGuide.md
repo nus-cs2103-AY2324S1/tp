@@ -27,10 +27,16 @@ Here are some benefits of adopting lesSON in your studying experience:
    - [Deleting a Flashcard](#deleting-a-flashcard--delete)
    - [View All Flashcards](#view-all-flashcards--list)
    - [Editing a Specific Flashcard](#editing-a-specific-flashcard--edit)
-   - [Practise Flashcards](#practise-flashcards--practise)
-   - [Solve Flashcards](#solving-flashcards--solve)
-   - [Setting Difficulty for Flashcards](#setting-difficulty-of-flashcards--set)
-7. [Markdown Syntax](#markdown-syntax)
+   - [Practise Flashcards](#practise-flashcards-practise)
+   - [Hints for Flashcards](#hints-for-flashcards-hint)
+   - [Solve Flashcards](#solving-flashcards-solve)
+   - [Setting Difficulty for Flashcards](#setting-difficulty-of-flashcards-set)
+   - [Clear all Flashcards](#clear-all-flashcards-clear)
+   - [Setting goals](#setting-goals-goal)
+   - [Getting help](#getting-help-help)
+7. [Additional Features](#additional-features)
+   - [Markdown Syntax](#markdown-syntax)
+   - [Importing and Exporting Decks](#importing-and-exporting-decks)
 8. [FAQ](#frequently-asked-questions)
 
 --------------------------------------------------------------------------------------------------------------------
@@ -111,8 +117,7 @@ Adds a flashcard to the deck for the user.
 
 **Format:**
 
-`add q/question a/answer [t/TAG]`
-
+`add q/question a/answer [t/TAG] [h/HINT]`
 
 **Examples:**
 
@@ -124,10 +129,14 @@ _A flashcard with a question, answer and tag field._
 
 `add q/How do you convert from binary to 1s Complement? a/By inverting all the bits, i.e. 0 to 1 and vice versa t/CS2100 t/Number Systems`
 
+_A flashcard with a question, answer, tag and hint field._
+`add q/What are the 5 stages of MIPS? a/Fetch, Decode, Execute, Memory, Write Back t/CS2100 h/5 stages: IF, ID, EX, MEM, WB`
+
 #### To Note:
-1. No Empty Input after q/, a/ and t/.
-2. t/ is optional and not necessary.
-3. **Tip**: Tagging is not supported in v1.2 and earlier
+1. No Empty Input after `q/`, `a/`, `t/` and `h/`.
+2. `t/` and `h/` is optional and not necessary. 
+3. Tagging is not supported in v1.2 and earlier.
+4. Hint is not supported before v1.3.
 
 #### Expected outputs:
 
@@ -198,7 +207,10 @@ Examples:
 3. list t/ CS2100
    (list shows all flashcards with the CS2100 Tag)
 
-4. list q/ what t/ CS2100
+4. list t/ CS2100 t/ MIPS
+   (list shows all flashcards with both MIPS and CS2100 Tag)
+
+5. list q/ what t/ CS2100
    (list shows all flashcards with questions starting with 'What' and has the CS2100 Tag)
 ```
 
@@ -218,7 +230,7 @@ Examples:
 ### Editing a Specific Flashcard : `edit`
 Edits an existing Flashcard in the deck.
 
-Format: `edit INDEX (q/a)/ (question/answer)`
+Format: `edit INDEX (q/a/t/h)/ (question/answer/tag/hint)`
 
 Examples:
 ```
@@ -227,6 +239,12 @@ Examples:
 
 2. edit 1 a/ Red
    (changes the answer at index 1 to “Red”)
+
+3. edit 1 t/ Weather t/ Geogaphy
+   (changes the tag at index 1 to “Weather” and "Geography")
+
+4. edit 1 h/ Apple
+   (changes the hint at index 1 to “Apple")
 ```
 #### Expected output:
 ```
@@ -240,8 +258,7 @@ Examples:
 2. Successful Output
    ![result of edit command](./images/UserGuide/1.3_edit_ans.png)
 
-
-
+   
 ### Practise Flashcards: `practise`
 Practise a single Flashcard in the deck
 
@@ -271,6 +288,31 @@ practise 10
 
 2. Successful Output
    ![result of practise command](./images/UserGuide/1.3_prac_ans.png)
+
+### Hints for Flashcards: `hint`
+See the hint for a question at the given index
+
+Format: `hint INDEX`
+
+#### Examples:
+```
+hint 1
+```
+#### Expected outputs:
+```
+hint 1
+"Hint for Question 1: 5 stages: IF, ID, EX, MEM, WB "
+
+solve 2
+"Hint for Question 2: No hint was provided."
+
+solve 10
+"The card index provided is invalid"
+```
+
+#### Acceptable values for each parameters:
+1. Index must be positive integer
+2. Index cannot exceed size of the deck
 
 ### Solving Flashcards: `solve`
 Solves the question at the given index
@@ -340,9 +382,47 @@ set 10 d/ easy
 2. Successful Output
    ![result of set command](./images/UserGuide/1.3_set_ans.png)
 
---------------------------------------------------------------------------------------------------------------------
+### Clear all flashcards: `clear`
+Clears all flashcards found in the Deck. Deck is reset back to empty.
 
-# MarkDown Syntax
+Format: clear
+
+#### Example:
+```
+clear
+```
+
+#### Expected outputs:
+```
+clear
+"Deck has been cleared!"
+```
+### Setting goals: `goal`
+Set a goal for the current studying session.
+
+
+### Getting help: `help`
+Seek more details from a link provided leading to the User Guide.
+Users can also access this function by clicking on the **File** button located at the top
+left of the application, and then navigating to the **Help** tab.
+
+Format: help
+
+#### Example:
+```
+help
+```
+
+#### Expected outputs:
+```
+help
+(A window with the URL leading to the User Guide will pop out. 
+Users can copy the URL by simply clicking on the 'Copy URL' button.)
+```
+--------------------------------------------------------------------------------------------------------------------
+# Additional Features
+
+## MarkDown Syntax
 
 For user who wish to incorporate styling in lesSON, there are 3 font styles currently supported:
 1. Bold
@@ -379,6 +459,22 @@ edit 1 q/ How many bits can a <u>Half Adder</u> add up
 ```
 #### Expected Result:
 ![usage of bold syntax](./images/UserGuide/1.3_underline.png)
+
+# Importing and Exporting Decks
+Users can share their own Decks with others or download their Decks to their own.
+Both import and export features reside in the **File** menu.
+
+## Export
+Users can share their own Deck by clicking on the `Export` button. Their own Deck
+will be displayed as a JSON file which can be easily copied either through the `Copy Data`
+button provided or other means.
+
+## Import
+Users can enjoy the Decks of others by clicking on the `Import` button. A text field
+is displayed for users to paste in the JSON file containing the decks of others. The
+app will close upon clicking the `Import Data` button. Users will have to rerun the app
+to see their new decks.
+
 --------------------------------------------------------------------------------------------------------------------
 
 # Frequently Asked Questions
