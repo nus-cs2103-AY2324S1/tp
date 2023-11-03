@@ -121,6 +121,7 @@ A success message like below will be displayed.
 ```
 New musician added: John Doe; Phone: 98765432; Email: johnd@example.com; Tags: [bestman]; Instruments: [violin]; Genres: [classical]
 ```
+![add_after.png](images%2Fmusician-features%2Fadd_after.png)
 
 **Upon failure:**
 
@@ -128,7 +129,7 @@ If you input a musician which is already in your contact book (i.e. a musician w
 ```
 This musician already exists in your contact list
 ```
-
+![add_error.png](images%2Fmusician-features%2Fadd_error.png)
 
 ### Delete musician: `delete`
 
@@ -147,6 +148,7 @@ You will see a message indicating successful removal of the first musician conta
 ```
 Deleted Musician: John Doe; Phone: 98765432; Email: johnd@example.com; Tags: [bestman]; Instruments: [violin]; Genres: [classical]
 ```
+![delete_after.png](images%2Fmusician-features%2Fdelete_after.png)
 
 **Upon failure:**
 
@@ -155,6 +157,7 @@ Should you input an index out of the range of the current `My Musicians` list, y
 ```
 The musician index provided is invalid
 ```
+![delete_error.png](images%2Fmusician-features%2Fdelete_error.png)
 
 Please verify that the index is correct and try again.
 
@@ -184,17 +187,26 @@ A success message like below will be displayed.
 ```
 Edited Musician: John Doe; Phone: 98765430; Email: johnd@example.com; Tags: [bestman]; Instruments: [violin]; Genres: [pop]
 ```
+* Before: From `list` state, John Doe's genre is classical
+  ![edit_before.png](images%2Fmusician-features%2Fedit_before.png)
+
+
+* After: John Doe's genre is changed to pop
+  ![edit_after.png](images%2Fmusician-features%2Fedit_after.png)
+
 
 **Upon failure:**
 1. If you provide no argument for the musician to be edited, e.g. `edit 1`, you will see an error message like below:
     ```
     At least one field to edit must be provided.
     ```
+   ![edit_error1.png](images%2Fmusician-features%2Fedit_error1.png)
 2. If you provide invalid arguments for name, phone number, and email, you will be shown the corresponding error message with the correct format to follow. Please re-enter the correct information.
 3. If you have provided at least one optional field to edit in the correct format yet the index provided is out of range, you will see the error message below:
     ```
     The musician index provided is invalid
     ```
+   ![edit_error2.png](images%2Fmusician-features%2Fedit_error2.png)
     Please verify that the index is correct and try again.
 
 
@@ -217,6 +229,7 @@ Genre tags: [blues, classical, country, electronic, folk, hiphop, jazz, latin, m
 ```
 The `My Musicians` and `My Bands` panels will remain unchanged. 
 
+![tags.png](images%2Fmusician-features%2Ftags.png)
 
 ### Find musicians: `find`
 
