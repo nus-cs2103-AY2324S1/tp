@@ -69,13 +69,13 @@ The sections below give more details of each component.
 
 ### UI component
 
-The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
+The **API** of this component is specified in [`Ui.java`](https://github.com/AY2324S1-CS2103T-T11-4/tp/blob/master/src/main/java/seedu/flashlingo/ui/Ui.java)
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `FlashcardListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
-The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
+The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2324S1-CS2103T-T11-4/tp/blob/master/src/main/java/seedu/flashlingo/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2324S1-CS2103T-T11-4/tp/blob/master/src/main/resources/view/MainWindow.fxml)
 
 The `UI` component,
 
@@ -101,9 +101,9 @@ The sequence diagram below illustrates the interactions within the `Logic` compo
 
 How the `Logic` component works:
 
-1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
+1. When `Logic` is called upon to execute a command, it is passed to an `FlashlingoParser` object which in turn creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
 1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`.
-1. The command can communicate with the `Model` when it is executed (e.g. to delete a person).
+1. The command can communicate with the `Model` when it is executed (e.g. to delete a flash card).
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
@@ -111,43 +111,37 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 <img src="images/ParserClasses.png" width="600"/>
 
 How the parsing works:
-* When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
+* When called upon to parse a user command, the `FlashlingoParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `FlashlingoParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
-**API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+**API** : [`Model.java`](https://github.com/AY2324S1-CS2103T-T11-4/tp/blob/master/src/main/java/seedu/flashlingo/model/Model.java)
 
 <img src="images/ModelClassDiagram.png" width="450" />
 
 
 The `Model` component,
 
-* stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
-* stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* stores the Flashlingo data i.e., all `FlashCard` objects (which are contained in a `UniqueFlashCardList` object).
+* stores the currently 'selected' `FlashCard` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<FlashCard>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
-
-<img src="images/BetterModelClassDiagram.png" width="450" />
-
-</div>
 
 
 ### Storage component
 
-**API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/AY2324S1-CS2103T-T11-4/tp/blob/master/src/main/java/seedu/flashlingo/storage/Storage.java)
 
 <img src="images/StorageClassDiagram.png" width="550" />
 
 The `Storage` component,
-* can save both address book data and user preference data in JSON format, and read them back into corresponding objects.
-* inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
+* can save both Flashlingo data and user preference data in JSON format, and read them back into corresponding objects.
+* inherits from both `FlashlingoStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
 ### Common classes
 
-Classes used by multiple components are in the `seedu.addressbook.commons` package.
+Classes used by multiple components are in the `seedu.flashlingo.commons` package.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -398,8 +392,6 @@ and `Storage#saveFlashlingo(ReadOnlyFlashlingo)` are omitted:
 
 ![SwitchSequenceModel](images/SwitchSequenceDiagram.png)
 
-To be added: `Mainwindow#executeCommand`.
-
 #### Design Considerations
 
 **Aspect: How to update UI changes after command execution:**
@@ -493,17 +485,8 @@ Use case ends.
 1a1. Flashlingo adds the word and its translation as well as the language of both.\
 Use case ends.
 
-
 **System:** Flashlingo\
-**Use case:** UC3 – Delete a word\
-**Actor:** User\
-**MSS:**
-1.	User chooses to delete a word by keying in command
-2.	Flashlingo deletes the word and its translation.\
-Use case ends.
-
-**System:** Flashlingo\
-**Use case:** UC4 – Display list of flashcards\
+**Use case:** UC3 – Display list of flashcards\
 **Actor:** User\
 **MSS:**
 1.	User chooses to display list of flashcard.
@@ -511,15 +494,7 @@ Use case ends.
 Use case ends.
 
 **System:** Flashlingo\
-**Use case:** UC5 – Start today’s flashcard sequence\
-**Actor:** User\
-**MSS:**
-1.	User chooses to start.
-2.	Flashlingo displays the words user is going to study.\
-Use case ends.
-
-**System:** Flashlingo\
-**Use case:** UC6 – Display translation on the other side of flashcard\
+**Use case:** UC4 – Display translation on the other side of flashcard\
 **Actor:** User\
 **MSS:**
 1.	User chooses to flip the flashcard
@@ -527,7 +502,7 @@ Use case ends.
 Use case ends.
 
 **System:** Flashlingo\
-**Use case:** UC7 – Indicate user has remembered word\
+**Use case:** UC5 – Indicate user has remembered word\
 **Actor:** User\
 **MSS:**
 1.	User confirms remembrance of the word.
@@ -541,7 +516,7 @@ Use case ends.
 Use case resumes from step 3.
 
 **System:** Flashlingo\
-**Use case:** UC8 – Indicate user has forgotten word\
+**Use case:** UC6 – Indicate user has forgotten word\
 **Actor:** User\
 **MSS:**
 1.	User indicates they couldn’t remember word.
@@ -555,7 +530,7 @@ Use case ends.
 Use case resumes from step 3.
 
 **System:** Flashlingo\
-**Use case:** UC9 – Stop session\
+**Use case:** UC7 – Stop session\
 **Actor:** User\
 **MSS:**
 1.	User chooses to stop session.
@@ -563,27 +538,11 @@ Use case resumes from step 3.
 Use case ends.
 
 **System:** Flashlingo\
-**Use case:** UC10 – Exit the platform\
+**Use case:** UC8 – Exit the platform\
 **Actor:** User\
 **MSS:**
 1.	User chooses to exit
 2.	Flashlingo closes GUI and terminates.\
-Use case ends.
-
-**System:** Flashlingo\
-**Use case:** UC11 – Change data source\
-**Actor:** User\
-**MSS:**
-1.	User chooses to change data source by adding new file-path.
-2.	Flashlingo changes data source and displays success message.\
-Use case ends.
-
-**System:** Flashlingo\
-**Use case:** UC12 – Load data source\
-**Actor:** user\
-**MSS:**
-1.	User chooses to load a data source at input file-path.
-2.	Flashlingo loads data source and displays success or failure message.\
 Use case ends.
 
 ### Non-Functional Requirements
@@ -595,12 +554,12 @@ Use case ends.
 5.  **Quality** - Should be able to update learned words according to schedule and maintain the left ones when a learning session accidentally closes.
 6.  **Quality** - Should be able to provide the learner with a reasonable and personalized time schedule for language learning.
 7.  **Quality** - Should be able to handle any user input correctly without crashing.
-8.  **Capacity** - Should be able to hold up to 100 persons without a noticeable sluggishness(longer than 2 seconds) in performance for typical usage.
+8.  **Capacity** - Should be able to hold up to 100 people without a noticeable sluggishness(longer than 2 seconds) in performance for typical usage.
 
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
-* **Flashcard**: A virtual card with a word on one side and its translation on the other side
+* **Flash card**: A virtual card with a word on one side and its translation on the other side
 * **Word**: A word in the language you want to learn
 * **Translation**: The word in your native language that corresponds to the word you want to learn
 
@@ -629,30 +588,5 @@ testers are expected to do more *exploratory* testing.
 
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
-
-1. _{ more test cases …​ }_
-
-### Deleting a person
-
-1. Deleting a person while all persons are being shown
-
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
-
-   1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
-
-   1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
-
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
-
-1. _{ more test cases …​ }_
-
-### Saving data
-
-1. Dealing with missing/corrupted data files
-
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
 1. _{ more test cases …​ }_
