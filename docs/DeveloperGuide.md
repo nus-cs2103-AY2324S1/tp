@@ -4,7 +4,7 @@ title: Developer Guide
 ---
 
 ## Table of Contents
-  {:toc}
+{:toc}
 
 ---
 
@@ -69,13 +69,13 @@ The sections below give more details of each component.
 
 ### UI component
 
-The **API** of this component is specified in [`Ui.java`](https://github.com/AY2324S1-CS2103T-T11-4/tp/blob/master/src/main/java/seedu/flashlingo/ui/Ui.java)
+The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `FlashcardListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
-The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2324S1-CS2103T-T11-4/tp/blob/master/src/main/java/seedu/flashlingo/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2324S1-CS2103T-T11-4/tp/blob/master/src/main/resources/view/MainWindow.fxml)
+The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
 
 The `UI` component,
 
@@ -101,9 +101,9 @@ The sequence diagram below illustrates the interactions within the `Logic` compo
 
 How the `Logic` component works:
 
-1. When `Logic` is called upon to execute a command, it is passed to an `FlashlingoParser` object which in turn creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
+1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
 1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`.
-1. The command can communicate with the `Model` when it is executed (e.g. to delete a flash card).
+1. The command can communicate with the `Model` when it is executed (e.g. to delete a person).
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
@@ -111,37 +111,43 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 <img src="images/ParserClasses.png" width="600"/>
 
 How the parsing works:
-* When called upon to parse a user command, the `FlashlingoParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `FlashlingoParser` returns back as a `Command` object.
+* When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
-**API** : [`Model.java`](https://github.com/AY2324S1-CS2103T-T11-4/tp/blob/master/src/main/java/seedu/flashlingo/model/Model.java)
+**API** : [`Model.java`](docs/images/ModelClassDiagram.png)
 
 <img src="images/ModelClassDiagram.png" width="450" />
 
 
 The `Model` component,
 
-* stores the Flashlingo data i.e., all `FlashCard` objects (which are contained in a `UniqueFlashCardList` object).
-* stores the currently 'selected' `FlashCard` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<FlashCard>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
+* stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
+
+<img src="images/BetterModelClassDiagram.png" width="450" />
+
+</div>
 
 
 ### Storage component
 
-**API** : [`Storage.java`](https://github.com/AY2324S1-CS2103T-T11-4/tp/blob/master/src/main/java/seedu/flashlingo/storage/Storage.java)
+**API** : [`Storage.java`](docs/images/StorageClassDiagram.png)
 
 <img src="images/StorageClassDiagram.png" width="550" />
 
 The `Storage` component,
-* can save both Flashlingo data and user preference data in JSON format, and read them back into corresponding objects.
-* inherits from both `FlashlingoStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
+* can save both address book data and user preference data in JSON format, and read them back into corresponding objects.
+* inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
 ### Common classes
 
-Classes used by multiple components are in the `seedu.flashlingo.commons` package.
+Classes used by multiple components are in the `seedu.addressbook.commons` package.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -171,21 +177,21 @@ Similarly, the `No` button will invoke the no command.
 **Aspect: How to invoke the command:**
 
 * **Alternative 1 (current choice):** Pass MainWindow all the way into FlashcardBox. Use `executeCommand()` method to invoke the respective command
-    * Pros: 
-      * High level of maintainability. 
-      * Outcome will be the same as if it were to be typed into the CLI.
-      * Easy to change logic of the commands
-    * Cons: 
-      * Have to pass MainWindow through multiple classes
-      * Classes that do not need references to MainWindow are now forced to have them
+    * Pros:
+        * High level of maintainability.
+        * Outcome will be the same as if it were to be typed into the CLI.
+        * Easy to change logic of the commands
+    * Cons:
+        * Have to pass MainWindow through multiple classes
+        * Classes that do not need references to MainWindow are now forced to have them
 
 * **Alternative 2:** Individual button can perform the `Yes` and `No` command by itself, without executing through a Command
-    * Pros: 
-      * Don't have to keep reference to the MainWindow
-    * Cons: 
-      * Low level of maintainability. 
-      * Changes made have to be replicated in different places.
-      * May not behave the same way as a Command (eg. ResultDisplay does not show the log message)
+    * Pros:
+        * Don't have to keep reference to the MainWindow
+    * Cons:
+        * Low level of maintainability.
+        * Changes made have to be replicated in different places.
+        * May not behave the same way as a Command (eg. ResultDisplay does not show the log message)
 
 * **Alternative 3:** Remove the `Yes` and `No` buttons.
     * Pros:
@@ -216,25 +222,27 @@ The implementation of the "Start and End Review Session" feature involves the in
 
 In addition to that, `start` and `end` commands and their corresponding parsers are also implemented.
 
-Given below is an example usage scenario and how the start/end mechanism behaves at each step.  
+Given below is an example usage scenario and how the start/end mechanism behaves at each step.
 
 **Step 1:** The user launches the application for the first time. The `SessionManager` is not yet initialized.
 
 **Step 2:** The user executes the "start" command by interacting with the command line. This will make `FlashlingoParser` class to create its `SessionManager` instance.
 
-![SessionManagerClass](images/SessionManagerClass.png)  
-**Note**: The `SessionManager` class adheres to the **Singleton pattern**, guaranteeing that only one instance of the class 
-can exist. This architectural choice provides a single point of access for managing review sessions and 
+![SessionManagerClass](images/SessionManagerClass.png)
+<br>
+**Note**: The `SessionManager` class adheres to the **Singleton pattern**, guaranteeing that only one instance of the class
+can exist. This architectural choice provides a single point of access for managing review sessions and
 maintaining the state of whether the session is a review session or not. With the Singleton pattern in place, you can be
-confident that there is only one `SessionManager` instance, making it a centralized and controlled entity for session 
+confident that there is only one `SessionManager` instance, making it a centralized and controlled entity for session
 management within the application.
 
 **Step 3:** The user executes various commands within the action sequence, such as `yes` and `no`.
 
-**Step 4:** The user chooses to end the review session by using `end` command. This action will alternate the boolean value 
+**Step 4:** The user chooses to end the review session by using `end` command. This action will alternate the boolean value
 inside SessionManager class indicating current session is review session or not.
 
-![StartSequenceModel](images/StartSequenceDiagram.png)  
+![StartSequenceModel](images/StartSequenceDiagram.png)
+<br>
 **Recording Vocabulary Review:**
 - The `SessionManager` logs the vocabulary words and phrases reviewed and practiced during the language learning session.
 - This feature provides users with the ability to track their progress and revisit the words they've worked on.
@@ -269,33 +277,33 @@ inside SessionManager class indicating current session is review session or not.
 
 **Aspect: How start & end executes**
 * Alternative 1 (current choice): Creating another separate class to manage the logic.
-  * Pros: It better adheres to OOP principle and easier to maintain.
-  * Cons: It may potentially increase the complexity of codes.
+    * Pros: It better adheres to OOP principle and easier to maintain.
+    * Cons: It may potentially increase the complexity of codes.
 
 * Alternative 2: Introducing a boolean attribute inside `FlashlingoParser` class.
-  * Pros: Easy to implement.
-  * Cons: It doesn't conform to the principle of **Single Responsibility Principle**. 
+    * Pros: Easy to implement.
+    * Cons: It doesn't conform to the principle of **Single Responsibility Principle**.
 
 
 **Aspect: Preventing Commands Within a Review Session**
 
 * Alternative 1 (Current Choice): Restricting Users with a Subset of Commands
 
-   * Pros:
-   - Increased safety: A limited set of commands reduces the risk of unintended actions, making the review session safer for users.
+    * Pros:
+    - Increased safety: A limited set of commands reduces the risk of unintended actions, making the review session safer for users.
 
-   * Cons:
-      - Limited flexibility: Users may feel constrained if they need to perform specific actions that are not allowed within the review session.
-      - Potential user frustration: Restricting commands may lead to user frustration if they can't perform certain actions they expected to be available.
+    * Cons:
+        - Limited flexibility: Users may feel constrained if they need to perform specific actions that are not allowed within the review session.
+        - Potential user frustration: Restricting commands may lead to user frustration if they can't perform certain actions they expected to be available.
 
 * Alternative 2: Giving Users Full Flexibility to Execute All Commands
 
-   * Pros:
-     - Complete control: Users have the freedom to use any command, providing them with full flexibility and control over their learning experience.
-     - No perceived limitations: Users are less likely to encounter restrictions or frustrations, making the experience more intuitive.
+    * Pros:
+        - Complete control: Users have the freedom to use any command, providing them with full flexibility and control over their learning experience.
+        - No perceived limitations: Users are less likely to encounter restrictions or frustrations, making the experience more intuitive.
 
-  * Cons:
-     - More error-prone: Allowing all commands may lead to unexpected bugs during a review session.
+    * Cons:
+        - More error-prone: Allowing all commands may lead to unexpected bugs during a review session.
 
 ### Yes and No
 
@@ -322,7 +330,7 @@ The implementation of the "Yes" and "No" commands invoke the `rememberWord` and 
 
 - **rememberWord:** denotes whether the user has successfully memorized the word or not.
 
-The application recognizes a word as memorized if the user inputs either 'yes' or 'no.' 
+The application recognizes a word as memorized if the user inputs either 'yes' or 'no.'
 
 It's important to note that the 'yes' and 'no' commands are only functional once the review session has commenced.
 
@@ -354,7 +362,7 @@ The following activity diagram summarizes what happens when a user executes a `y
 #### **Usage Example**
 To use the YesCommand, simply type yes during a review session. For example:
 
-- `yes` 
+- `yes`
 - `no`
 
 #### **Design Considerations**
@@ -373,39 +381,43 @@ To use the YesCommand, simply type yes during a review session. For example:
 #### Implementation
 
 The preference for light and dark themes is stored in the `UserPrefs` class. The `UserPrefs` is initialized by interacting
-with `UserPrefsStorage` when the application is launched. Then `UI` component will obtain the preference from `Logic` 
-component and set the initial theme. After a `SwitchCommand` is executed by the `LogicManager`, `Model` component will 
+with `UserPrefsStorage` when the application is launched. Then `UI` component will obtain the preference from `Logic`
+component and set the initial theme. After a `SwitchCommand` is executed by the `LogicManager`, `Model` component will
 update the theme in  `UserPrefs`. Finally, `UI` component will update the theme accordingly.
 
-Step 1: Theme initialization.  
+Step 1: Theme initialization.
+<br>
 Similar to GUI settings, the theme is regarded as a component of user preference stored in `UserPrefs` and in Json
 file **preferences.json**.
 
-The initial theme setting works as follows: After constructing the `ModelManager` and `LogicManager` with the 
-loaded `UserPrefs`, `MainWindow` will obtain theme preference from `LogicManager` and set the initial theme. If no data 
+The initial theme setting works as follows: After constructing the `ModelManager` and `LogicManager` with the
+loaded `UserPrefs`, `MainWindow` will obtain theme preference from `LogicManager` and set the initial theme. If no data
 can be read from the preference file, the **Default** theme will be used by `Logic` and `Model` components, and set by
 `UI`.
 
-Step 2: Theme switching.  
+Step 2: Theme switching.
+<br>
 The following sequence diagram shows how the theme switching works. For the discussion purpose, parsing of the command
 and `Storage#saveFlashlingo(ReadOnlyFlashlingo)` are omitted:
 
 ![SwitchSequenceModel](images/SwitchSequenceDiagram.png)
 
+To be added: `Mainwindow#executeCommand`.
+
 #### Design Considerations
 
 **Aspect: How to update UI changes after command execution:**
 * Alternative 1 (current choice): Uses `Logic` component to update `Model` and `Storage`. Add a boolean field **switchTheme**
-in `CommandResult`, informing `UI` to update similarly to what we did in **help** and **exit** commands.
-    * Pros: Follows the separation of concerns principle. Each component is responsible for its own work and addresses 
-  separate concerns, achieving higher cohesion and lower coupling.
+  in `CommandResult`, informing `UI` to update similarly to what we did in **help** and **exit** commands.
+    * Pros: Follows the separation of concerns principle. Each component is responsible for its own work and addresses
+      separate concerns, achieving higher cohesion and lower coupling.
     * Cons: The abstraction and division for different components may be complicated and hard to understand. Additional
-  field needed in `CommandResult` class.
+      field needed in `CommandResult` class.
 
 * Alternative 2: Let `UI` component update the theme directly after receiving the command.
     * Pros: More direct implementation design.
     * Cons: Needs to include more information returned from the execution of command. A potential gap between current storage
-  and UI theme setting would occur since `UI` wouldn't rely on `Logic` component to update the theme.
+      and UI theme setting would occur since `UI` wouldn't rely on `Logic` component to update the theme.
 
 
 --------------------------------------------------------------------------------------------------------------------
@@ -478,37 +490,54 @@ Use case ends.
 **MSS:**
 1.	User chooses to add a word and its translation by keying in command.
 2.	Flashlingo adds the word and its translation.\
-Use case ends.
+      Use case ends.
 
 **Extensions:**\
 1a. User adds word and translation and specifies the language of the original word and translation.\
 1a1. Flashlingo adds the word and its translation as well as the language of both.\
 Use case ends.
 
+
 **System:** Flashlingo\
-**Use case:** UC3 – Display list of flashcards\
+**Use case:** UC3 – Delete a word\
+**Actor:** User\
+**MSS:**
+1.	User chooses to delete a word by keying in command
+2.	Flashlingo deletes the word and its translation.\
+      Use case ends.
+
+**System:** Flashlingo\
+**Use case:** UC4 – Display list of flashcards\
 **Actor:** User\
 **MSS:**
 1.	User chooses to display list of flashcard.
 2.	Flashlingo displays list of cards with words and corresponding translations.\
-Use case ends.
+      Use case ends.
 
 **System:** Flashlingo\
-**Use case:** UC4 – Display translation on the other side of flashcard\
+**Use case:** UC5 – Start today’s flashcard sequence\
+**Actor:** User\
+**MSS:**
+1.	User chooses to start.
+2.	Flashlingo displays the words user is going to study.\
+      Use case ends.
+
+**System:** Flashlingo\
+**Use case:** UC6 – Display translation on the other side of flashcard\
 **Actor:** User\
 **MSS:**
 1.	User chooses to flip the flashcard
 2.	Flashlingo shows meaning of the word.\
-Use case ends.
+      Use case ends.
 
 **System:** Flashlingo\
-**Use case:** UC5 – Indicate user has remembered word\
+**Use case:** UC7 – Indicate user has remembered word\
 **Actor:** User\
 **MSS:**
 1.	User confirms remembrance of the word.
 2. Flashlingo increments level of the flashcard.
 3. Flashlingo displays congratulatory message.\
-Use case ends.
+   Use case ends.
 
 **Extensions:**\
 2a. Flashlingo detects that level of flashcard exceeds threshold\
@@ -516,13 +545,13 @@ Use case ends.
 Use case resumes from step 3.
 
 **System:** Flashlingo\
-**Use case:** UC6 – Indicate user has forgotten word\
+**Use case:** UC8 – Indicate user has forgotten word\
 **Actor:** User\
 **MSS:**
 1.	User indicates they couldn’t remember word.
 2. Flashlingo decements level of flashcard.
 3. Flashlingo displays motivational message to keep up.\
-Use case ends.
+   Use case ends.
 
 **Extensions:**\
 2a. Flashlingo detects that level of flashcard is at base level of 1\
@@ -530,20 +559,36 @@ Use case ends.
 Use case resumes from step 3.
 
 **System:** Flashlingo\
-**Use case:** UC7 – Stop session\
+**Use case:** UC9 – Stop session\
 **Actor:** User\
 **MSS:**
 1.	User chooses to stop session.
 2.	Flashlingo stops and displays the completion message.\
-Use case ends.
+      Use case ends.
 
 **System:** Flashlingo\
-**Use case:** UC8 – Exit the platform\
+**Use case:** UC10 – Exit the platform\
 **Actor:** User\
 **MSS:**
 1.	User chooses to exit
 2.	Flashlingo closes GUI and terminates.\
-Use case ends.
+      Use case ends.
+
+**System:** Flashlingo\
+**Use case:** UC11 – Change data source\
+**Actor:** User\
+**MSS:**
+1.	User chooses to change data source by adding new file-path.
+2.	Flashlingo changes data source and displays success message.\
+      Use case ends.
+
+**System:** Flashlingo\
+**Use case:** UC12 – Load data source\
+**Actor:** user\
+**MSS:**
+1.	User chooses to load a data source at input file-path.
+2.	Flashlingo loads data source and displays success or failure message.\
+      Use case ends.
 
 ### Non-Functional Requirements
 
@@ -554,12 +599,12 @@ Use case ends.
 5.  **Quality** - Should be able to update learned words according to schedule and maintain the left ones when a learning session accidentally closes.
 6.  **Quality** - Should be able to provide the learner with a reasonable and personalized time schedule for language learning.
 7.  **Quality** - Should be able to handle any user input correctly without crashing.
-8.  **Capacity** - Should be able to hold up to 100 people without a noticeable sluggishness(longer than 2 seconds) in performance for typical usage.
+8.  **Capacity** - Should be able to hold up to 100 persons without a noticeable sluggishness(longer than 2 seconds) in performance for typical usage.
 
 ### Glossary
 
-* **Mainstream OS**: Windows, Linux, Unix, macOS
-* **Flash card**: A virtual card with a word on one side and its translation on the other side
+* **Mainstream OS**: Windows, Linux, Unix, OS-X
+* **Flashcard**: A virtual card with a word on one side and its translation on the other side
 * **Word**: A word in the language you want to learn
 * **Translation**: The word in your native language that corresponds to the word you want to learn
 
@@ -578,15 +623,40 @@ testers are expected to do more *exploratory* testing.
 
 1. Initial launch
 
-   1. Download the jar file and copy into an empty folder
+    1. Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+    1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
 1. Saving window preferences
 
-   1. Resize the window to an optimum size. Move the window to a different location. Close the window.
+    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-   1. Re-launch the app by double-clicking the jar file.<br>
+    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
 1. _{ more test cases …​ }_
+
+### Deleting a person
+
+1. Deleting a person while all persons are being shown
+
+    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+
+    1. Test case: `delete 1`<br>
+       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+
+    1. Test case: `delete 0`<br>
+       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+
+    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+       Expected: Similar to previous.
+
+1. _{ more test cases …​ }_
+
+### Saving data
+
+1. Dealing with missing/corrupted data files
+
+    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+
+1. _{ more test cases …​ }
