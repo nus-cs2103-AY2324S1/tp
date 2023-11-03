@@ -3,7 +3,7 @@ layout: page
 title: User Guide
 ---
 
-ManaGease is a **desktop app for managing full time staff in any workplace, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, ManaGease can get your contact management tasks done faster than traditional apps.
+ManaGease is a **desktop app for <ins>HR managers</ins> to manage full time staff in the workplace, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, ManaGease can get your contact management tasks done faster than traditional apps.
 
 ---
 <!-- TOC -->
