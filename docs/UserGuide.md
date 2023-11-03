@@ -214,6 +214,8 @@ Format: `find KEYWORD`
     * Only the name is searched.
     * Lessons matching part of the keyword will be returned (i.e. `OR` search).
       e.g. `Lesson Chem` will return `Lesson Chemistry`, `Lesson Chem at Bishan`
+    * Keyword specified has to be the first part of the name
+        e.g. `Blk 12` will return `Blk 123 Bedok Chemistry` but not `Bishan Blk 12`
 
 Example Success Output:
 ```
