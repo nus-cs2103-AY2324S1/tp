@@ -39,6 +39,9 @@ public class GithubCommand extends Command {
 
         Person personToEdit = lastShownList.get(index.getZeroBased());
         String username = personToEdit.getGithub().value;
+        if (username.isEmpty()) {
+            throw new CommandException("No Github account has been added for this candidate.");
+        }
         String githubUrl = "https://github.com/" + username;
         try {
             Desktop.getDesktop().browse(new URI(githubUrl));
