@@ -54,7 +54,7 @@ public interface Model {
     ReadOnlyBookingsBook getBookingsBook();
 
     /**
-     * Returns true if a person with the same identity as {@code person} exists in the address book.
+     * Returns true if a booking with the same identity as {@code booking} exists in the address book.
      */
     boolean hasBooking(Booking booking);
 

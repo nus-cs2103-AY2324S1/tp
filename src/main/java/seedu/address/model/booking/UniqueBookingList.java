@@ -20,7 +20,7 @@ import seedu.address.model.booking.exceptions.UniqueBookingListNotFoundException
  * <p>
  * Supports a minimal set of list operations.
  *
- * @see Booking#isSameBooking(Booking)
+ * @see Booking#isOverlapBooking(Booking)
  */
 public class UniqueBookingList implements Iterable<Booking> {
 
@@ -39,7 +39,7 @@ public class UniqueBookingList implements Iterable<Booking> {
         if (toCheck == null) {
             throw new BookingNotFoundException();
         }
-        return internalList.stream().anyMatch(toCheck::isSameBooking);
+        return internalList.stream().anyMatch(toCheck::isOverlapBooking);
     }
 
     /**
@@ -80,7 +80,7 @@ public class UniqueBookingList implements Iterable<Booking> {
             throw new BookingNotFoundException();
         }
 
-        if (!target.isSameBooking(editedBooking) && contains(editedBooking)) {
+        if (!target.isOverlapBooking(editedBooking) && contains(editedBooking)) {
             throw new DuplicateBookingException();
         }
 
@@ -214,7 +214,7 @@ public class UniqueBookingList implements Iterable<Booking> {
     private boolean bookingsAreUnique(List<Booking> bookings) {
         for (int i = 0; i < bookings.size() - 1; i++) {
             for (int j = i + 1; j < bookings.size(); j++) {
-                if (bookings.get(i).isSameBooking(bookings.get(j))) {
+                if (bookings.get(i).isOverlapBooking(bookings.get(j))) {
                     return false;
                 }
             }
