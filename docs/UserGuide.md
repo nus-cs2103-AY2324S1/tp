@@ -12,14 +12,14 @@ HouR is a **desktop app for managing employee records, optimized for use via a C
 - [Quick Start](#quick-start)
 - [Features](#features)
     - [Viewing Help](#viewing-help--help): `help`
-    - [Adding an employee](#adding-an-employee--add): `add`
+    - [Adding an employee](#adding-an-employee-add): `add`
     - [Deleting an employee](#deleting-an-employee--delete): `delete`
     - [Editing an employee](#editing-an-employee--edit): `edit`
     - [Listing all employees](#listing-all-employees--list): `list`
-    - [Locating employees](#locating-employees--find): `find`
+    - [Locating employees](#locating-employees-find): `find`
     - [Sorting employees](#sorting-all-employees--sort): `sort`
-    - [Adding a leave period](#adding-leave-date--s--for-an-employee--addleave): `addleave`
-    - [Deleting a leave period](#deleting-leave-date--s--of-an-employee--deleteleave): `deleteleave`
+    - [Adding a leave period](#adding-a-leave-period-of-an-employee-addleave): `addleave`
+    - [Deleting a leave period](#deleting-a-leave-period-of-an-employee-deleteleave): `deleteleave`
     - [Editing a leave date](#editing-a-leave-date-of-an-employee--editleave): `editleave`
     - [Listing employees on leave](#listing-the-employees-on-leave-on-a-specified-date--listleave) `listleave`
     - [Adding remarks](#adding-a-remark-for-an-employee--addremark): `addremark`
@@ -242,7 +242,7 @@ Examples:
 
 ![sort failure](images/sortFailure.png)
 
-### Adding leave date(s) for an employee : `addleave`
+### Adding a leave period of an employee: `addleave`
 
 Adds the dates between a specified period of time to the leaves taken by the specified employee.
 
@@ -255,13 +255,13 @@ Examples:
 * `addleave id/EID1234-5678 from/2023-12-26 to/2023-12-28` adds the dates 26, 27, and 28 December 2023 to the leaves taken
   by employee with id EID1234-5678.
 
-![addleave success](images/addLeaveSuccess.png)
+![addleave success](images/addleaveSuccess.png)
 
 * `addleave id/EID1234-5678 from/2023-12-31 to/2023-12-28` is invalid because the start date 2023-12-31 is after the end date 2023-12-28, which is impossible.
 
-![addleave failure](images/addLeaveFailure.png)
+![addleave failure](images/addleaveFailure.png)
 
-### Deleting leave date(s) of an employee : `deleteleave`
+### Deleting a leave period of an employee: `deleteleave`
 
 Deletes the specified leave dates of an employee.
 
@@ -276,15 +276,15 @@ Examples:
 * `deleteleave id/EID1234-5678 from/2023-12-26 to/2023-12-28` deletes all leave dates
   of employee with id EID1234-5678 that fall on 26, 27, and 28 December 2023.
 
-![deleteleave success](images/deleteLeaveSuccess.png)
+![deleteleave success](images/deleteleaveSuccess.png)
 
 * `deleteleave id/EID1234-5678 from/2023-12-31 to/2023-12-28` is invalid because the start date 2023-12-31 is after the end date 2023-12-28, which is impossible.
 
-![deleteleave failure](images/deleteLeaveFailure1.png)
+![deleteleave failure](images/deleteleaveFailure1.png)
 
 * `deleteleave id/EID1234-5678 from/2023-12-28 to/2023-12-28` is invalid because there is no existing leave on 28 December 2023.
 
-![deleteleave failure](images/deleteLeaveFailure2.png)
+![deleteleave failure](images/deleteleaveFailure2.png)
 
 ### Editing a leave date of an employee : `editleave`
 
@@ -299,15 +299,15 @@ Examples:
 * `editleave id/EID1234-5678 old/2023-12-26 new/2023-12-28` edits the leave on 26 December 2023 to 28 December 2023
   for employee with id EID1234-5678.
 
-![editleave success](images/editLeaveSuccess.png)
+![editleave success](images/editleaveSuccess.png)
 
 * `editleave id/EID1234-5678 old/2023-12-31 new/2023-12-28` is invalid because there is no existing leave on 31 December 2023.
 
-![editleave failure](images/editLeaveFailure1.png)
+![editleave failure](images/editleaveFailure1.png)
 
 * `editleave id/EID1234-5678 old/2023-12-31 new/2023-12-28` is invalid because there is an existing leave on 28 December 2023.
 
-![editleave failure](images/editLeaveFailure2.png)
+![editleave failure](images/editleaveFailure2.png)
 
 ### Listing the employees on leave on a specified date : `listleave`
 
@@ -318,11 +318,11 @@ Format: `listleave on/DATE`
 Examples:
 * `listleave on/2023-12-28` lists all the employees that are on leave on 28 December 2023.
 
-![listleave success](images/listLeaveSuccess.png)
+![listleave success](images/listleaveSuccess.png)
 
 * `listleave on/2023-12-29` displays an empty list because there are no employees that are on leave on 29 December 2023.
 
-![listleave empty](images/listLeaveEmpty.png)
+![listleave empty](images/listleaveEmpty.png)
 
 ### Adding a remark for an employee : `addremark`
 
