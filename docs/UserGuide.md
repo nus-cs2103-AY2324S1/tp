@@ -121,6 +121,7 @@ A success message like below will be displayed.
 ```
 New musician added: John Doe; Phone: 98765432; Email: johnd@example.com; Tags: [bestman]; Instruments: [violin]; Genres: [classical]
 ```
+![add_after.png](images%2Fmusician-features%2Fadd_after.png)
 
 **Upon failure:**
 
@@ -128,7 +129,7 @@ If you input a musician which is already in your contact book (i.e. a musician w
 ```
 This musician already exists in your contact list
 ```
-
+![add_error.png](images%2Fmusician-features%2Fadd_error.png)
 
 ### Delete musician: `delete`
 
@@ -147,6 +148,7 @@ You will see a message indicating successful removal of the first musician conta
 ```
 Deleted Musician: John Doe; Phone: 98765432; Email: johnd@example.com; Tags: [bestman]; Instruments: [violin]; Genres: [classical]
 ```
+![delete_after.png](images%2Fmusician-features%2Fdelete_after.png)
 
 **Upon failure:**
 
@@ -155,6 +157,7 @@ Should you input an index out of the range of the current `My Musicians` list, y
 ```
 The musician index provided is invalid
 ```
+![delete_error.png](images%2Fmusician-features%2Fdelete_error.png)
 
 Please verify that the index is correct and try again.
 
