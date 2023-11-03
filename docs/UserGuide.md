@@ -129,7 +129,6 @@ If you input a musician which is already in your contact book (i.e. a musician w
 ```
 This musician already exists in your contact list
 ```
-![add_error.png](images%2Fmusician-features%2Fadd_error.png)
 
 ### Delete musician: `delete`
 
@@ -157,7 +156,6 @@ Should you input an index out of the range of the current `My Musicians` list, y
 ```
 The musician index provided is invalid
 ```
-![delete_error.png](images%2Fmusician-features%2Fdelete_error.png)
 
 Please verify that the index is correct and try again.
 
@@ -200,13 +198,11 @@ Edited Musician: John Doe; Phone: 98765430; Email: johnd@example.com; Tags: [bes
     ```
     At least one field to edit must be provided.
     ```
-   ![edit_error1.png](images%2Fmusician-features%2Fedit_error1.png)
 2. If you provide invalid arguments for name, phone number, and email, you will be shown the corresponding error message with the correct format to follow. Please re-enter the correct information.
 3. If you have provided at least one optional field to edit in the correct format yet the index provided is out of range, you will see the error message below:
     ```
     The musician index provided is invalid
     ```
-   ![edit_error2.png](images%2Fmusician-features%2Fedit_error2.png)
     Please verify that the index is correct and try again.
 
 
