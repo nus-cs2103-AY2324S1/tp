@@ -154,21 +154,21 @@ public class Person {
      * Returns true if the person is a hot lead.
      */
     public boolean isHotLead() {
-        return this.lead.isHot();
+        return this.lead != null && this.lead.isHot();
     }
 
     /**
      * Returns true if the person is a warm lead.
      */
     public boolean isWarmLead() {
-        return this.lead.isWarm();
+        return this.lead != null && this.lead.isWarm();
     }
 
     /**
      * Returns true if the person is a cold lead.
      */
     public boolean isColdLead() {
-        return this.lead.isCold();
+        return this.lead != null && this.lead.isCold();
     }
 
     /**
