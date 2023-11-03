@@ -16,6 +16,7 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Profession;
 import seedu.address.model.person.TelegramHandle;
 import seedu.address.model.person.interaction.Interaction;
+import seedu.address.model.person.lead.Lead;
 
 /**
  * A UI component that displays the profile of a {@code Client}.
@@ -58,17 +59,21 @@ public class ClientProfilePanel extends UiPart<Region> {
         phone.setText(client.getPhone().value);
         address.setText(client.getAddress().value);
         email.setText(client.getEmail().value);
-        client.getTags().stream()
+        client.getTags()
+                .stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
 
-        lead.setText(client.getLead().toString());
-        if (client.isHotLead()) {
-            lead.getStyleClass().add("hot-lead");
-        } else if (client.isWarmLead()) {
-            lead.getStyleClass().add("warm-lead");
-        } else if (client.isColdLead()) {
-            lead.getStyleClass().add("cold-lead");
+        Lead clientLead = client.getLead();
+        if (clientLead != null) {
+            lead.setText(client.getLead().toString());
+            if (client.isHotLead()) {
+                lead.getStyleClass().add("hot-lead");
+            } else if (client.isWarmLead()) {
+                lead.getStyleClass().add("warm-lead");
+            } else if (client.isColdLead()) {
+                lead.getStyleClass().add("cold-lead");
+            }
         }
 
         // optional fields
