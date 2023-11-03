@@ -5,6 +5,8 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import seedu.address.model.person.lead.Lead;
+import seedu.address.model.person.lead.LeadType;
 import seedu.address.model.reminder.Reminder;
 
 /**
@@ -45,9 +47,20 @@ public class ReminderCard extends UiPart<Region> {
         this.reminder = reminder;
         name.setText(reminder.getName().fullName);
         followUpDate.setText(reminder.getFollowUpDate().toString());
-        if (reminder.getLead() != null) {
+
+        Lead reminderLead = reminder.getLead();
+
+        if (reminderLead != null) {
             Label leadLabel = new Label(reminder.getLead().toString());
-            leadLabel.setId(reminder.getLead().toString().toLowerCase() + "-lead");
+
+            if (reminderLead.isHot()) {
+                leadLabel.getStyleClass().add("hot-lead");
+            } else if (reminderLead.isWarm()) {
+                leadLabel.getStyleClass().add("warm-lead");
+            } else if (reminderLead.isCold()) {
+                leadLabel.getStyleClass().add("cold-lead");
+            }
+
             lead.getChildren().add(leadLabel);
         }
     }
