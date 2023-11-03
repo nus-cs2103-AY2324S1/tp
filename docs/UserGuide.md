@@ -10,17 +10,22 @@ online dating journey.
 
 - [Quick Start](#1-quick-start)
 - [Features](#2-features)
-   - [Listing current dates : `list`](#list-all-dates-list)
+   - [Creation of new date: `add`](#creation-of-new-date)
+   - [Getting a recommended date: `bestMatch`](#getting-a-best-match)
+   - [Blind Date Generator: `blindDate`](#blind-date-generator)
+   - [Clear all dates: `clear`](#clear-all-dates)
    - [Deletion of dates: `delete`](#deletion-of-dates-delete)
-   - [Creation of new date: `add`](#creation-of-new-date-add)
-   - [Edit existing dates: `edit`](#edit-existing-dates-edit)
-   - [Random Date Generator: `random`](#random-date-generator-random)
+   - [Edit existing dates: `edit`](#edit-existing-date)
+   - [Exit the program: `exit`](#exit-the-program)
    - [Filter by Metric: `filter`](#filter-by-metric-filter)
-   - [Sorting list of dates by Metric: `sort`](#sorting-list-of-dates-by-metric-sort)
-   - [Getting a recommended date: `match`](#getting-a-recommended-date-match)
-   - [Setting the matching algorithm: `setPreference`](#setting-the-matching-algorithm-setPreference)
-   - [Star a date: `star`](#star-a-date-star)
-   - [Unstar a date: `unstar`](#unstar-a-date-unstar)
+   - [Find a date: `find`](#find-a-date)
+   - [Help: `help`](#help)
+   - [Listing current dates : `list`](#list-all-dates)
+   - [Setting the matching algorithm: `setP`](#setting-the-date-pref)
+   - [Show Date Preferences: `showP`](#show-date-preferences)
+   - [Sorting list of dates by Metric: `sort`](#sorting-date-list)
+   - [Star a date: `star`](#star-a-date)
+   - [Unstar a date: `unstar`](#unstar-a-date)
 - [FAQ](#3-faq)
 - [Summary](#4-summary)
 - [Glossary](#5-glossary)
@@ -63,44 +68,23 @@ will be ignored.<br> e.g. if the command specifies `help 123`, it will be interp
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 
+<div markdown="span" class="alert alert-info">:information_source: **Parameter Constraints:**
+
+* `name` should be a non non-empty string.
+* `age` should be a positive integer between 18 and 150 (inclusive).
+* `gender` should be either M or F.
+* `horoscope` should be a valid zodiac sign.
+* `income` (per month) should be a positive integer in SGD.
+* `height` should be a positive integer in cm between 100cm and 250cm (inclusive).
+
+</div>
 
 
-### [List all dates: `list`](#list-all-dates-list)
+### [Creation of new date: `add`](#creation-of-new-date)
 
-Shows a list of all dates in the lovebook.
-
-Format: `list`
-
-Expected output: `Lists all dates and their associated details`
-
-### [Deletion of dates: `delete`](#deletion-of-dates-delete)
-
-Deletes the specified date from the lovebook.
-
-Format: `delete INDEX`
-
-Parameter constraints:
-- The index must be a positive integer, and be within the range of the recorded dates.
-
-Example: `delete 2`
-
-Expected output: `Deletes the date at the specified INDEX.`
-
-Output if error : `The index you have provided is out of bounds of your current list of dates`
-
-### [Creation of new date: `add`](#creation-of-new-date-add)
-
-Adds a date to the lovebook.
+Adds a date to the LoveBook.
 
 Format: `add name/NAME age/AGE gender/GENDER height/HEIGHT horoscope/HOROSCOPE income/INCOME`
-
-Parameter constraints:
-- Name should be a non non-empty string.
-- Age should be a positive integer.
-- Gender should be either M or F.
-- Horoscope should be a valid zodiac sign.
-- Income (per month) should be a positive integer in SGD.
-- Height should be a positive integer in cm.
 
 Example: `add name/Cleon age/22 gender/F height/176 horoscope/Taurus income/3000`
 
@@ -110,9 +94,60 @@ Output if error: `Invalid command format! add: Adds a date to the LoveBook. Para
 height/HEIGHT income/INCOME horoscope/HOROSCOPE Example: add name/John Doe age/21 gender/M height/23124 income/3000
 horoscope/Libra`
 
-### [Edit existing dates: `edit`](#edit-existing-dates-edit)
+### [Getting a recommended Date: `bestMatch`](#getting-a-best-match)
 
-Edits a date in the specified index in the lovebook.
+Filters out the most compatible date based on the set preferences.
+
+Format: `bestMatch`
+
+Expected Output: `List the most compatible date`
+
+Output if error: `No dates found!`
+
+### [Random Date Generator: `blindDate`](#blind-date-generator)
+
+Filters out a blindDate.
+
+Format: `blindDate`
+
+Expected Output: `A random Date entry is printed`
+
+Output if error: `No dates in list!`
+
+### [Clear all dates: `clear`](#clear-all-dates)
+
+Clears all dates in the LoveBook.
+
+Format: `clear`
+
+Expected output: `LoveBook has been cleared!`
+
+### [List all dates: `list`](#list-all-dates)
+
+Shows a list of all dates in the LoveBook.
+
+Format: `list`
+
+Expected output: `Listed all Dates`
+
+### [Deletion of dates: `delete`](#deletion-of-dates-delete)
+
+Deletes the specified date from the LoveBook.
+
+Format: `delete INDEX`
+
+Parameter constraints:
+- The index must be a positive integer, and be within the range of the recorded dates.
+
+Example: `delete 1`
+
+Expected output: `Deleted Date: John Doe; Age: 21; Gender: M; Height: 123; Income: 3000; Horoscope: LIBRA`
+
+Output if error : `The date index provided is invalid`
+
+### [Edit existing dates: `edit`](#edit-existing-date)
+
+Edits a date in the specified index in the LoveBook.
 
 Format: `edit INDEX METRIC/NEW ARG`
 
@@ -129,25 +164,23 @@ Example:
 
 Expected Output: `Edited Date: Cleon Tan; Age: 12; Gender: M; Height: 123; Income: 3000; Horoscope: CANCER`
 
-### [Random Date Generator: `random`](#random-date-generator-random)
+### [Exit the program: `exit`](#exit-the-program)
 
-Filters out a random date.
+Exits the program.
 
-Format: `random`
+Format: `exit`
 
-Expected Output: `A random date entry is printed`
-
-Output if error: ```No dates in list!```
+Expected output: `Exiting LoveBook...`
 
 ### [Filter by Metric: `filter`](#filter-by-metric-filter)
 
-Filters the dates in the lovebook by a specific metric.
+Filters the dates in the LoveBook by a specific metric.
 
 Format: `filter METRIC/ARG`
 
-Parameter constraints:
-- Filter must be from list of metrics
-- Metric is limited to `gender, age, horoscope, name, income, height` only
+* Parameter constraints:
+* Filter must be from list of metrics
+* Metric is limited to `gender, age, horoscope, name, income, height` only
 
 Example:
 - `filter name/Cleon`
@@ -156,11 +189,60 @@ Example:
 
 Expected Output: `Lists the dates with the metric specified`
 
-Output if error: ```No dates found!```
+Output if error: `No dates found!`
 
-### [Sorting list of dates by Metric: `sort`](#sorting-list-of-dates-by-metric-sort)
+### [Find a date: `find`](#find-a-date)
 
-Sorts the dates in the lovebook by a specific metric.
+Finds a date in the LoveBook by a specific name(s)
+
+Format: `find NAME [MORE_NAMES]`
+
+Parameter constraints:
+- Name should be a non non-empty string.
+- More names can be added to the command line, and the search will be conducted for all names provided
+
+Example:
+- `find Cleon`
+- `find Cleon John`
+
+Expected Output: `Lists the dates with the name(s) specified`
+
+Output if error: `0 dates listed!`
+
+### [Help: `help`](#help)
+
+Shows a modal to bring user to the LoveBook User Guide.
+
+Format: `help`
+
+Expected output: `Opened help window.`
+
+### [Setting the matching algorithm: `setP`](#setting-the-date-pref)
+
+Sets the user's preferences for the matching algorithm.
+
+Format: `setP gender/GENDER age/AGE height/HEIGHT income/INCOME`
+
+Example: `setP gender/M age/22 height/180 income/2000`
+
+Expected output: `Updated Preferences: Age: 22; Gender: M; Height: 180; Income: 2000; Horoscope: TAURUS`
+
+Output if error:
+`At least one field to edit must be provided. Please try the following command format: setP: Sets Date Preference. Parameters: age/AGE gender/GENDER height/HEIGHT income/INCOME horoscope/HOROSCOPE Example: setP age/21 gender/M height/23124 income/3000 horoscope/Scorpio`
+
+### [Show Date Preferences: `showP`](#show-date-preferences)
+
+Shows the User's Date Preferences.
+
+Format: `showP`
+
+Example: `showP`
+
+Expected output: `Here are your preferences: Age: 22; Gender: M; Height: 180; Income: 2000; Horoscope: TAURUS`
+
+### [Sorting list of dates by Metric: `sort`](#sorting-date-list)
+
+Sorts the dates in the LoveBook by a specific metric.
 
 Format: `sort METRIC/ORDER`
 
@@ -178,44 +260,43 @@ Expected Output: `Lists the dates in the order specified`
 
 Output if error: ```No dates found!```
 
-### [Getting a recommended date: `match`](#getting-a-recommended-date-match)
+### [Star a date: `star`](#star-a-date)
 
-Filters out the most compatible date based on the set preferences.
+Stars a date in the LoveBook.
 
-Format: `match`
-
-Expected Output: `List the most compatible date`
-
-Output if error: `No dates found!`
-
-### [Setting the matching algorithm: `setPreference`](#setting-the-matching-algorithm-setPreference)
-
-Sets the user's preferences for the matching algorithm. 
-
-Format: `setPreference gender/GENDER age/AGE height/HEIGHT income/INCOME`
-
-Example: `setPreference gender/M age/22 height/180 income/2000`
-
-Expected output: `Preferences have been updated!`
-
-Output if error:
-`Please follow the required format to add a new date (setPreference gender/M age/22 height/180 income/2000)`
-
-### [Star a date: `star`](#star-a-date-star)
 Format: `star INDEX`
 
-Expected output: `NAME has been starred!`
+Example: `star 1`
+
+Expected output: `Starred Date: John Doe; Age: 21; Gender: F; Height: 245; Income: 3000; Horoscope: LIBRA`
 
 Output if error:
-`The index you have provided is out of bounds of your current list of dates`
+`The date index provided is invalid`
 
-### [Unstar a date: `unstar`](#unstar-a-date-unstar)
+<div markdown="span" class="alert alert-info">:information_source: **Info:**
+
+* If Date is already starred, it will display the output `Date has already been starred`
+
+</div>
+
+### [Unstar a date: `unstar`](#unstar-a-date)
+
+Unstars a date in the LoveBook.
+
 Format: `unstar INDEX`
 
-Expected output: `NAME has been unstarred!`
+Example: `unstar 1`
+
+Expected output: `Unstarred Date: John Doe; Age: 21; Gender: M; Height: 123; Income: 3000; Horoscope: LIBRA`
 
 Output if error:
-`The index you have provided is out of bounds of your current list of dates`
+`The date index provided is invalid`
+
+<div markdown="span" class="alert alert-info">:information_source: **Info:**
+
+* If Date is already unstarred, it will display the output `Date has already been unstarred`
+
+</div>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -239,19 +320,19 @@ your data. In the event of a power outage, all your data will be safe.
 
 # 4 [Summary](#4-summary)
 
-| Action                 | Format                                                                               | Examples                                                            |
-|------------------------|--------------------------------------------------------------------------------------|---------------------------------------------------------------------|
-| Listing current dates  | `list`                                                                               | `list`                                                              |
-| Deletion of dates      | `delete INDEX`                                                                       | `delete 2`                                                          |
+| Action                 | Format                                                                                | Examples                                                               |
+|------------------------|---------------------------------------------------------------------------------------|------------------------------------------------------------------------|
+| Listing current dates  | `list`                                                                                | `list`                                                                 |
+| Deletion of dates      | `delete INDEX`                                                                        | `delete 2`                                                             |
 | Creation of new date   | `add name/NAME age/AGE gender/GENDER height/HEIGHT horoscope/HOROSCOPE income/INCOME` | `add name/John age/25 gender/M height/175 horoscope/Aries income/5000` |
-| Edit existing dates    | `edit INDEX METRIC/NEW ARG`                                                          | `edit 3 name/Cleon`                                                 |
-| Random Date Generator  | `random`                                                                             | `random`                                                            |
-| Filter by Metric       | `filter METRIC/ARG`                                                                  | `filter name/Cleon`                                                 |
-| Sorting list of dates  | `sort METRIC/ORDER`                                                                  | `sort name/increasing`                                              |
-| Getting a recommended date | `match`                                                                              | `match`                                                             |
-| Setting the matching algorithm | `setPreference gender/GENDER age/AGE height/HEIGHT income/INCOME`                                | `setPreference gender/M age/22 height/180 income/2000`                 |
- | Star a date            | `star INDEX`                                                                         | `star 1`                                                            |
- | Unstar a date          | `unstar INDEX`                                                                       | `unstar 1`                                                          |
+| Edit existing dates    | `edit INDEX METRIC/NEW ARG`                                                           | `edit 3 name/Cleon`                                                    |
+| Random Date Generator  | `random`                                                                              | `random`                                                               |
+| Filter by Metric       | `filter METRIC/ARG`                                                                   | `filter name/Cleon`                                                    |
+| Sorting list of dates  | `sort METRIC/ORDER`                                                                   | `sort name/increasing`                                                 |
+| Getting a recommended date | `match`                                                                               | `match`                                                                |
+| Setting the matching algorithm | `setP gender/GENDER age/AGE height/HEIGHT income/INCOME`                              | `setP gender/M age/22 height/180 income/2000`                          |
+ | Star a date            | `star INDEX`                                                                          | `star 1`                                                               |
+ | Unstar a date          | `unstar INDEX`                                                                        | `unstar 1`                                                             |
 --------------------------------------------------------------------------------------------------------------------
 
 # 5 [Glossary](#5-glossary)
