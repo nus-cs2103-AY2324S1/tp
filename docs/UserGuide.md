@@ -508,3 +508,127 @@ You remove meeting time for your groups.
 
 **Acceptable values:**
 - `GROUP_NAME` must be alphanumeric.
+
+
+- Group must contain `MEETING_TIME`.
+- `MEETING_TIME` must be a time slot within a weekly schedule.
+
+
+**Example(s):**
+- `deletetime g/CS2100  t/mon 1400 - mon 1600`
+  This removes a time slot when Alex Yeoh is available from your contact list.
+  Insert Image
+  Deleted Time From: Alex Yeoh
+
+
+**Potential error(s):**
+- Group does not exist in the contact list.
+- Group does not contain meeting time.
+- Invalid time slot format.
+
+
+### Listing Meeting Time from a Group `listtime`
+You list meeting time for your groups.
+
+
+**Format:** `listtime g/GROUP_NAME`
+- Provide the full name of the group using the `g/` prefix.
+
+
+**Acceptable values:**
+- `GROUP_NAME` must be alphanumeric.
+
+
+**Example(s):**
+- `listtime g/CS2100`
+  This lists all meeting times of the CS2100 group.
+  Insert Image
+  Listed Time From: CS2100
+
+
+**Potential error(s):**
+- Group does not exist in the contact list.
+
+
+### Finding Free Time of a Group `findfreetime`
+You can find a meeting time slot for your group where everyone is available.
+
+
+**Format:** `findfreetime g/GROUP_NAME`
+- Provide the full name of the group using the `g/` prefix.
+
+
+**Acceptable values:**
+- `GROUP_NAME` must be alphanumeric.
+
+
+**Example(s):**
+- `findfreetime g/CS2100`
+  This finds a common meeting time for your CS2100 group.
+  Insert Image
+
+
+**Potential error(s):**
+- Group does not exist in the contact list.
+- Contacts in the group did not add their available time slots.
+
+
+## General Commands
+
+
+### Viewing Help: `help`
+You can view the link to our UserGuide.
+
+
+**Format:** `help`
+
+
+**Acceptable values:**
+No additional parameters.
+
+
+**Example(s):**
+- `help`
+
+
+**Potential error(s):**
+- Extra inputs detected.
+
+
+### Clearing All Data: `clear`
+Clears all entries from the contact list.
+
+
+**Format:** `clear`
+
+
+**Acceptable values:**
+No additional parameters.
+
+
+**Example(s):**
+- `clear`
+
+
+**Potential error(s):**
+- Extra inputs detected.
+
+
+### Exit ProjectPRO: `exit`
+You can exit ProjectPRO.
+
+
+**Format:** `exit`
+
+
+**Acceptable values:**
+No additional parameters.
+
+
+**Example(s):**
+- `exit`
+
+
+**Potential error(s):**
+- Extra inputs detected.
+
