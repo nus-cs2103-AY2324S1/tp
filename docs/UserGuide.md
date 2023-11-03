@@ -5,20 +5,22 @@ title: User Guide
 
 ## Product Overview
 
-**Land the dream internship or job opportunity you've always wanted by networking more effectively using our application!**
+**Land the dream internship or job opportunity you've always wanted by networking more effectively using _NetworkBook!_**
 
 NetworkBook is a desktop contact book application built for NUS Computing students and professionals to manage information about the people they network with more efficiently than ever before.
 
 Here's an overview of how NetworkBook can help you manage your network of contacts better than existing alternatives:
-- You can search for and sort contacts by multiple networking-relevant fields (e.g. priority, courses taken/taking, specialization(s) taken/intending to take, graduation year)
-- You can access this application offline, with a static online page that contains user manual and download link
-- You can record only the information you find relevant on our application (e.g. you can assign one contact only their email and specialisation, and another contact nothing but their course)
 
-On top of these advantages, we believe that contact management must be efficient. Therefore, NetworkBook is optimised for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). If you type fast, NetworkBook can get your contact managing done faster than existing alternatives performing a similar role.
+* You can search for and sort contacts by multiple networking-relevant fields (e.g. priority, courses taken/taking, specialization(s) taken/intending to take, graduation year)
+* You can access this application offline, with a static online page that contains user manual and download link
+* You can record only the information you find relevant on our application (e.g. you can assign one contact only their email and specialisation, and another contact nothing but their course)
+
+On top of these advantages, we believe that contact management must be efficient. Therefore, NetworkBook is optimised for use via a Command Line Interface while still having the benefits of a Graphical User Interface. If you type fast, NetworkBook can get your contact managing done faster than existing alternatives performing a similar role.
 
 If you are new here, visit our [getting started guide](#getting-started) to start getting connected on NetworkBook!
 
 ## Table of Contents
+
 * TOC
 {:toc}
 
@@ -32,13 +34,14 @@ Additionally, if you are a new user, this user guide provides a quick start guid
 ### What's new in NetworkBook 1.3
 
 NetworkBook 1.3 includes several new features and improvements for ease of use.
+
 * Filter command for more control with finding contacts
 * Edit command to edit contacts' details
 * Error messages are now more specific to give useful information
 * NetworkBook is able to connect with other apps and open links and emails
 * Keyboard shortcuts added for easy access to common commands
 * Undo/redo command to fix mistakes
-* Refinement of GUI to make it more aesthetically pleasing
+* Refinement of user interface to be more clean and usable
 
 ## Getting Started
 
@@ -77,12 +80,14 @@ You can use the create command to create a new contact. When creating a contact,
 Format: `create /name [name] /phone [phone] /email [email] /link [link] /grad [semester of graduation] /course [course] /spec [specialisation] /priority [high/medium/low] /tag [tag]`
 
 Parameters:
+
 * `[name]`  is the name of the contact you wish to add.
 * `[options]` are the non-mandatory fields you can associate with the contact at the point of creation. The fields can also be added using the add command.
 
 When adding a contact, if there is already another contact with the same name, you would be informed that another contact with the same name already exists (not case sensitive)
 
 Example usage:
+
 * `create /name Jiale`
 * `create /name Jiale /phone 12345678 /grad AY2526-S2`
 
@@ -94,7 +99,8 @@ Example usage:
 
 You can add a contact detail to an existing contact. No new contact will be created.
 
-Format: 
+Format:
+
 * Add phone: `add [index] /phone [phone]`
 * Add email: `add [index] /email [email]`
 * Add link: `add [index] /link [link]`
@@ -105,9 +111,10 @@ Format:
 * Add tag: `add [index] /tag [tag name]`
 
 Parameters:
+
 * `[index]` is the index of the contact in the list.
 * `[phone]` is a valid phone number (should be all numeric characters).
-* `[email]` is a valid email (`@` (at sign) must be present, 
+* `[email]` is a valid email (`@` (at sign) must be present,
 and `.` (period) must be present after `@` (at sign)).
 * `[link]` is a valid URL linking to a contact’s social media page.
 * `[grad]` is a valid graduation date, in the format `AYxxxx-Sy`.
@@ -122,6 +129,7 @@ and `.` (period) must be present after `@` (at sign)).
 * `[tag name]` is the name of the tag to associate the contact with
 
 Example usage:
+
 * `add 1 /phone 91234567`
 * `add 3 /email nknguyentdn@gmail.com`
 * `add 1 /link https://nknguyenhc.github.io/`
@@ -142,6 +150,7 @@ Example usage:
 You can edit contact details of existing contacts in your book.
 
 Format:
+
 * Edit name: `edit [index of contact] /name [name]`
 * Edit phone: `edit [index of contact] /phone [phone] /index [index of phone]`
 * Edit email: `edit [index of contact] /email [email] /index [index of email]`
@@ -153,6 +162,7 @@ Format:
 * Edit tag: `edit [index of contact] /tag [tag name]`
 
 Parameters:
+
 * `[index of contact]` is the index of the contact in the list.
 * `[phone]` is a valid phone number (should be all numeric characters).
 * `[index of phone]` is the index of the phone number in the phone list of the contact.
@@ -173,6 +183,7 @@ and `.` (period) must be present after `@` (at sign)).
 * `[index of tag]` is the index of the tag in the tag list of the contact.
 
 Example usage:
+
 * `edit 1 /name nkn`
 * `edit 2 /phone 10938472 /index 1`
 * `edit 3 /email nkn@gmail.com /index 3`
@@ -187,7 +198,7 @@ Example usage:
 
 [Table of Contents](#table-of-contents)
 
-#### Delete a contact: `delete [index]` 
+#### Delete a contact: `delete [index]`
 
 You can remove a contact from your NetworkBook using the `delete` command, 
 
@@ -208,20 +219,20 @@ Example usage:
 
 [Table of Contents](#table-of-contents)
 
-#### Delete some details: `delete [index of contact] [options]` 
+#### Delete some details: `delete [index of contact] [options]`
 
 You can also remove some information about a contact that you previously recorded.
 
 Format:
 
-- Delete phone: `delete [index of contact] /phone /index [index of phone]`
-- Delete email: `delete [index of contact] /email /index [index of email]`
-- Delete link: `delete [index of contact] /link /index [index of link]`
-- Delete graduation semester: `delete [index of contact] /grad`
-- Delete course: `delete [index of contact] /course /index [index of course]`
-- Delete specialisation: `delete [index of contact] /spec /index [index of specialisation]`
-- Delete priority: `delete [index of contact] /priority`
-- Delete tag: `delete [index of contact] /tag /index [index of tag]`
+* Delete phone: `delete [index of contact] /phone /index [index of phone]`
+* Delete email: `delete [index of contact] /email /index [index of email]`
+* Delete link: `delete [index of contact] /link /index [index of link]`
+* Delete graduation semester: `delete [index of contact] /grad`
+* Delete course: `delete [index of contact] /course /index [index of course]`
+* Delete specialisation: `delete [index of contact] /spec /index [index of specialisation]`
+* Delete priority: `delete [index of contact] /priority`
+* Delete tag: `delete [index of contact] /tag /index [index of tag]`
 
 Parameters:
 
@@ -250,9 +261,11 @@ You can use the `find` command to search for contacts by their name if you wish 
 Format: `find [name]`
 
 Parameters:
+
 * `[name]` is a term found in the names of the contacts you wish to find.
 
 Example usage:
+
 * `find Jack`
 * `find Kai Jie`
 
@@ -271,6 +284,7 @@ Parameters
 * `[field]` is the information to sort by.
 
     List of options:
+
     * `name` - Sort alphabetically by contact name
     * `grad` - Sort chronologically by graduation year
     * `priority` - Sort by priority
@@ -279,6 +293,7 @@ Parameters
 * `[order]` (optional) is the order to sort in. If not specified, defaults to ascending.
 
     List of options:
+
     * `asc`/`ascending` - Sort in ascending order
     * `desc`/`descending` - Sort in descending order
 
@@ -305,6 +320,7 @@ Parameters
 * `[field]` is the information to filter by
 
     List of options:
+
     * `course` - Filter to contacts whose courses contain one
     one of the terms
     * `tag` - Filter to contacts whose tags contain one
@@ -320,6 +336,7 @@ specified above.
 out contacts who have finished the course.
 
     List of options:
+
     * `true` - Remove contacts that have finished taking the course.
     * `false` - (default). Include contacts who have finished taking the course.
 
@@ -346,6 +363,7 @@ Format: `undo`
 Parameters: N/A
 
 Example usage:
+
 * `undo`
 
 [Table of Contents](#table-of-contents)
@@ -412,15 +430,11 @@ Example usage:
 
 When typing in the command box and the command box is empty, you can use the following shortcuts to auto-fill the first word of some commands:
 
-`ctrl-F`: auto-fill with `find`
-
-`ctrl-N`: auto-fill with `create`
-
-`ctrl-G`: auto-fill with `edit`
-
-`ctrl-U`: auto-fill with `undo`
-
-`ctrl-R`: auto-fill with `redo`
+* `ctrl-F`: auto-fill with `find`
+* `ctrl-N`: auto-fill with `create`
+* `ctrl-G`: auto-fill with `edit`
+* `ctrl-U`: auto-fill with `undo`
+* `ctrl-R`: auto-fill with `redo`
 
 [Table of Contents](#table-of-contents)
 
@@ -428,23 +442,21 @@ When typing in the command box and the command box is empty, you can use the fol
 
 When typing in the command box, you can use the arrow keys to fill the command box with a previous executed command.
 
-`Up arrow key`: navigate back to the previous command in the history, if any
-
-`	Down arrow key`: navigate forth to the next command in the history, if any
+* `Up arrow key`: navigate back to the previous command in the history, if any.
+* `Down arrow key`: navigate forth to the next command in the history, if any.
 
 [Table of Contents](#table-of-contents)
 
 #### Undo/redo last change: `ctrl-Z/Y`
 
-When not typing in the command box, you can use the following shortcuts to quickly execute an `undo` or `redo` command. 
+When not typing in the command box, you can use the following shortcuts to quickly execute an `undo` or `redo` command.
 
-`ctrl-Z`: undo last change to NetworkBook
-
-`ctrl-Y`: redo last change undone
+* `ctrl-Z`: undo last change to NetworkBook
+* `ctrl-Y`: redo last change undone
 
 Note that this only works when the command box is not active. If you are typing in the command box, these shortcuts will be used to undo or redo changes made to the command text.
 
- [Table of Contents](#table-of-contents)
+[Table of Contents](#table-of-contents)
 
 #### Other useful shortcuts: `ctrl-S/W`
 
@@ -452,7 +464,7 @@ You can use `ctrl-S` to save the contact details in the data file. Although data
 
 You can also use `ctrl-W` to quickly exit the program.
 
- [Table of Contents](#table-of-contents)
+[Table of Contents](#table-of-contents)
 
 ### <u>Category 6 - Mouse interaction</u>
 
@@ -499,9 +511,9 @@ You can click on a contact's email address to email them.
 **A:** If you are familiar with the command prompt, you can follow the steps below:
 
 1. Open command prompt on your computer
-2. Navigate to the directory where the JAR file is located using `cd [JAR file location]`
-3. Type `java -jar networkbook.jar` and press enter
-4. NetworkBook should launch
+1. Navigate to the directory where the JAR file is located using `cd [JAR file location]`
+1. Type `java -jar networkbook.jar` and press enter
+1. NetworkBook should launch
 
 If you have any further issues, please raise an issue on our [GitHub page](https://github.com/AY2324S1-CS2103T-T08-2/tp). We will attend to you as soon as we can.
 
