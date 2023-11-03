@@ -231,7 +231,7 @@ Examples:
 
 * `edit T0123456A p/91234567 e/johndoe@example.com g/F` Edits the phone number and email address of the 1st person to
   be `91234567` and `johndoe@example.com` respectively.
-* `edit S9876543B ic/T0123456A n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all
+* `edit S9876543B n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all
   existing tags.
 
 ### Locating persons by name: `find`
