@@ -18,37 +18,45 @@ img
 
 --- {.double}
 
-<!-- * Table of Contents -->
-<page-nav-print />
+[//]: # (<!-- * Table of Contents -->)
+[//]: # (<page-nav-print />)
 
 ## Table of Contents
 
-- [Quick start <a name="quick-start"></a>](#quick-start)
-- [Glossary](#glossary)
-  * [Definitions](#definitions-br)
-  * [Parameters](#parameters-br)
-  * [Notation Gudie](#notation-guide-br)
-
-- [User Interface Guide](#user-interface-guide)
-  * [Main Window GUI](#main-window-gui-br)
-  * [Applicant Card GUI](#applicant-card-gui-br)
-- [Features](#features)
-  * [`help` : Viewing help](#help--viewing-help)
-  * [`add` : Adding a new applicant](#add--adding-a-new-applicant)
-  * [`edit` : Editing an applicant](#edit--editing-an-applicant)
-  * [`list` : Listing all applicants](#list--listing-all-applicants)
-  * [`delete` : Deleting an applicant](#delete--deleting-an-applicant)
-  * [`find` : Finding an applicant by name](#find--finding-an-applicant-by-name)
-  * [`sort`: Sorting applicants by descriptor](#sort--sorting-applicants-by-descriptor)
-  * [`addi` : Adding an interview to an applicant](#addi--adding-an-interview-to-an-applicant)
-  * [`editi` : Editing an interview of an applicant](#editi--editing-an-interview-of-an-applicant)
-  * [`deletei` : Deleting an interview from an applicant](#deletei--deleting-an-interview-from-an-applicant)
-  * [`status` : Editing an applicant status](#status--editing-an-applicant-status)
-  * [`clear` : Clearing all applicant entries](#clear--clearing-all-applicant-entries)
-  * [`exit` : Exiting the program](#exit--exiting-the-program)
-  * [Saving the data](#saving-the-data)
-  * [Editing the data file](#editing-the-data-file)
-
+* [Introduction](#introduction)
+* [Quick start](#quick-start)
+* [Using this Guide](#using-this-guide)
+  * [Notation Guide](#notation-guide)
+* [User Interface Guide](#user-interface-guide)
+  * [Main Window GUI](#main-window-gui)
+  * [Applicant Card GUI](#applicant-card-gui)
+* [Features](#features)
+  * [Applicant Management Features](#applicant-management-features)
+    * [Command Parameters](#command-parameters-1)
+    * [Adding a new applicant: `add`](#add)
+    * [Editing an applicant: `edit`](#edit)
+    * [Deleting an applicant: `delete`](#delete)
+    * [Listing all applicants: `list`](#list)
+    * [Editing an applicant status: `status`](#status)
+  * [Interview Management Features](#interview-management-features)
+    * [Command Parameters](#command-parameters-2)
+    * [Adding an interview to an applicant: `addi`](#addi)
+    * [Editing an interview of an applicant: `editi`](#editi)
+    * [Deleting an interview from an applicant: `deletei`](#deletei)
+  * [Applicant Processing Features](#applicant-processing-features)
+    * [Command Parameters](#command-parameters-3)
+    * [Finding an applicant by name: `find`](#find)
+    * [Sorting applicants by descriptors: `sort`](#sort)
+    * [Filtering applicants by fields: `filter`](#filter)
+    * [Importing from csv: `import`](#import)
+  * [Miscellaneous Features](#miscellaneous-features)
+    * [Viewing help: `help`](#help)
+    * [Clearing all applicant entries: `clear`](#clear)
+    * [Exiting the program: `exit`](#exit)
+    * [Saving the data](#saving-the-data)
+    * [Editing the data file](#editing-the-data-file)
+* [FAQ](#faq)
+* [Glossary](#glossary)
 ---
 <br>
 
@@ -365,6 +373,7 @@ Example:
 |--------------|----------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------|
 | `DESCRIPTOR` | The applicant descriptor to sort by.<br/> <br/> It should be either `name` or `phone` or `email` or `position` or `score` or `status`. | <ul><li>`name`</li><li>`score`</li></ul>                 |
 | `KEYWORD`    | The keyword to find in an applicant's name. <br/> <br/> It should be ???.                                                              | <ul><li>`Lee`</li><li>`Zhang Jordan`</li></ul>           |
+| `SCORE`      | The applicant's overall score. <br/> <br/> It should be a number between 0.0 and 10.0 inclusive, to 1 decimal place.                   | <ul><li>`0.0`</li><li>`8.3`</li></ul>                    |
 | `FILENAME`   | The file name of the csv file to import. <br/> <br/> It should end with the `.csv` suffix and should not be blank.                     | <ul><li>`demo.csv`</li><li>`applicantBook.csv`</li></ul> |
 
 
@@ -403,7 +412,7 @@ Format: `sort d/DESCRIPTOR [dsc/]`
 * `DESCRIPTOR` must be either `name` or `phone` or `email` or `position` or `score` or `status`.
 * `dsc/` flag indicates to sort the applicant list in descending order.
 
-Examples:
+Example:
 * `sort d/name` sorts the applicant list by name in alphabetical order.
 * `sort d/phone` sorts the applicant list by phone numbers in ascending order.
 * `sort d/email` sorts the applicant list by email in alphabetical order.
@@ -411,32 +420,30 @@ Examples:
 * `sort d/score dsc/` sorts the applicant list by score in descending order.
 * `sort d/status` sorts the applicant list by status in the order _UNDECIDED_, _OFFERED_, _REJECTED_.
 
-
 <br>
 
 ---
-
 <br>
 
 <a name="filter"></a>
-
 #### Filtering applicants by fields: `filter`
 
 Filters the applicant list based on fields given by the user.
 
-Format: `filter [n/Name] [e/Email] [p/Position] [hp/Phone] [s/Status] [lts/Score] [gts/Score]`
+Format: `filter [n/NAME] [e/EMAIL] [p/POSITION] [hp/PHONE] [s/STATUS] [lts/SCORE] [gts/SCORE]`
 * All fields are optional, however at least one of the optional fields must be provided.
 * Any combination of multiple different fields is allowed.
 * Only one of each field can be provided.
 * Only applicants matching all fields will be returned. (i.e. AND search).
-* for `[n/Name]` field, only applicants whose name contains the full substring will be returned, e.g. `n/Ivan Chew` will **NOT** return `Ivan Lee`.
-* `[n/Name]` `[e/Email]` `[p/Position]` fields are case-insensitive, e.g. `n/JOHN` will return `john`.
-* `[lts/Score]` `[gts/Score]` fields do **NOT** include equality in filters, e.g. `gts/7` will return all applicants strictly greater than `7`.
+* for `[n/NAME]` field, only applicants whose name contains the full substring will be returned, e.g. `n/Ivan Chew` will **NOT** return `Ivan Lee`.
+* `[n/NAME]` `[e/EMAIL]` `[p/POSITION]` fields are case-insensitive, e.g. `n/JOHN` will return `john`.
+* If provided, the fields `NAME`, `PHONE`, `EMAIL`, and `POSITION` must satisfy the [parameter constraints](#command-parameters-1) previously described.
+* `[lts/SCORE]` `[gts/SCORE]` fields do **NOT** include equality in filters, e.g. `gts/7` will return all applicants whose score is strictly greater than `7`.
 
-Examples:
+Example:
 * `filter n/Ivan` filters the applicant list to applicants whose name contains `ivan`.
 * `filter n/Ivan p/Testing Engineer status/u` filters applicant list to applicants whose name contains `ivan` applying for the role of `testing engineer` and has a status of `Undecided`.
-* `filter gts/7` filters applicant list to applicants whose score is greater than or equal to 7.
+* `filter gts/7` filters applicant list to applicants whose score is strictly greater than 7.
 
 
 <br>
@@ -526,13 +533,7 @@ Staff-Snap applicant data are saved automatically as a [JSON](#glossary) file `[
 
 faq stuff
 
----
 <br>
-
-<a name="command-summary"></a>
-## Command Summary
-
-command summary stuff
 
 ---
 <br>
