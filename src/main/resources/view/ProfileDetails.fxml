@@ -1,25 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.RowConstraints?>
-<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
-<?import javafx.scene.control.Separator?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
 
-<HBox id="profileDetails" fx:id="profileDetails" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
-    <GridPane VBox.vgrow="ALWAYS" vgap="15">
+<HBox id="profileDetails" fx:id="profileDetails" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
+    <GridPane vgap="15" VBox.vgrow="ALWAYS">
         <columnConstraints>
             <ColumnConstraints hgrow="ALWAYS" />
         </columnConstraints>
         <rowConstraints>
-            <RowConstraints vgrow="NEVER"/>
+            <RowConstraints vgrow="NEVER" />
             <RowConstraints prefHeight="10" />
             <RowConstraints vgrow="NEVER" />
             <RowConstraints vgrow="NEVER" />
@@ -28,17 +27,17 @@
         </rowConstraints>
 
         <!-- Row 0 -->
-        <HBox spacing="40" alignment="TOP_LEFT" GridPane.rowIndex="0">
+        <HBox alignment="TOP_LEFT" spacing="40" GridPane.rowIndex="0">
             <ImageView HBox.hgrow="NEVER">
                 <image>
-                    <Image url="@/images/user_icon.png"/>
+                    <Image url="@/images/user_icon.png" />
                 </image>
                 <fitWidth>60</fitWidth>
                 <fitHeight>60</fitHeight>
             </ImageView>
-            <VBox spacing="15" alignment="CENTER_LEFT">
-                <Label fx:id="name" text="" styleClass="cell_big_label"/>
-                <FlowPane fx:id="departments"/>
+            <VBox alignment="CENTER_LEFT" spacing="15">
+                <Label fx:id="name" styleClass="cell_big_label" text="" />
+                <FlowPane fx:id="departments" />
             </VBox>
         </HBox>
 
@@ -48,22 +47,22 @@
         </Separator>
 
         <!-- Row 2 -->
-        <Label text="Basic Details" styleClass="cell_big_label" GridPane.rowIndex="2" />
+        <Label styleClass="cell_big_label" text="Basic Details" GridPane.rowIndex="2" />
 
         <!-- Row 3 -->
-        <HBox spacing="10" alignment="TOP_LEFT" GridPane.rowIndex="3">
+        <HBox alignment="TOP_LEFT" spacing="10" GridPane.rowIndex="3">
             <ImageView>
                 <image>
-                    <Image url="@/images/phone_icon.png"/>
+                    <Image url="@/images/phone_icon.png" />
                 </image>
                 <fitWidth>18</fitWidth>
                 <fitHeight>18</fitHeight>
             </ImageView>
             <Label fx:id="phone" styleClass="cell_small_label" text="" />
-            <Region prefWidth="15" prefHeight="20"/>
+            <Region prefHeight="20" prefWidth="15" />
             <ImageView>
                 <image>
-                    <Image url="@/images/mail_icon.png"/>
+                    <Image url="@/images/mail_icon.png" />
                 </image>
                 <fitWidth>21</fitWidth>
                 <fitHeight>18</fitHeight>
@@ -72,10 +71,10 @@
         </HBox>
 
         <!-- Row 4 -->
-        <HBox spacing="10" alignment="TOP_LEFT" GridPane.rowIndex="4">
+        <HBox alignment="TOP_LEFT" spacing="10" GridPane.rowIndex="4">
             <ImageView>
                 <image>
-                    <Image url="@/images/location_icon.png"/>
+                    <Image url="@/images/location_icon.png" />
                 </image>
                 <fitWidth>18</fitWidth>
                 <fitHeight>22</fitHeight>
@@ -84,15 +83,22 @@
         </HBox>
 
         <!-- Row 5 -->
-        <HBox spacing="10" alignment="TOP_LEFT" GridPane.rowIndex="5">
+        <HBox alignment="TOP_LEFT" spacing="10" GridPane.rowIndex="5">
             <ImageView>
                 <image>
-                    <Image url="@/images/money_icon.png"/>
+                    <Image url="@/images/money_icon.png" />
                 </image>
                 <fitWidth>18</fitWidth>
                 <fitHeight>18</fitHeight>
             </ImageView>
             <Label fx:id="salary" styleClass="cell_small_label" text="" />
+         <Region prefHeight="20" prefWidth="15" />
+         <ImageView fitHeight="18" fitWidth="21">
+            <image>
+               <Image url="@../images/vacation_icon.png" />
+            </image>
+         </ImageView>
+         <Label fx:id="leave" styleClass="cell_small_label" text="" />
         </HBox>
     </GridPane>
 </HBox>
