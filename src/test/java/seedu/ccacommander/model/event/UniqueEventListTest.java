@@ -43,7 +43,7 @@ public class UniqueEventListTest {
         uniqueEventList.createEvent(AURORA_BOREALIS);
         Event editedAurora = new EventBuilder(AURORA_BOREALIS).withLocation(VALID_LOCATION_BOXING)
                 .build();
-        assertFalse(uniqueEventList.contains(editedAurora));
+        assertTrue(uniqueEventList.contains(editedAurora));
     }
 
     @Test

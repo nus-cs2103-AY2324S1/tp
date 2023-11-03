@@ -120,12 +120,12 @@ public class CcaCommanderTest {
     }
 
     @Test
-    public void hasEvent_eventWithSameNameInCcaCommander_returnsFalse() {
+    public void hasEvent_eventWithSameNameInCcaCommander_returnsTrue() {
         ccaCommander.createEvent(AURORA_BOREALIS);
         Event editedAurora = new EventBuilder(AURORA_BOREALIS).withDate(VALID_DATE_BOXING)
                 .withLocation(VALID_LOCATION_BOXING)
                 .build();
-        assertFalse(ccaCommander.hasEvent(editedAurora));
+        assertTrue(ccaCommander.hasEvent(editedAurora));
     }
 
     @Test
