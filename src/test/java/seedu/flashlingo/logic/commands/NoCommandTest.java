@@ -14,7 +14,7 @@ import seedu.flashlingo.model.UserPrefs;
 import seedu.flashlingo.model.flashcard.FlashCard;
 import seedu.flashlingo.model.flashcard.ProficiencyLevel;
 
-public class YesCommandTest {
+public class NoCommandTest {
     private Model model = new ModelManager();
     private Model expectedModel = new ModelManager();
 
