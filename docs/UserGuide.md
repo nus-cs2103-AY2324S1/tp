@@ -339,12 +339,20 @@ Examples:
 Output:
 
 * If the command is incorrect, the app should display an error message indicating the command format is invalid followed by the command usage message.
+  
+<br>![result for incorrect viewleave command](images/view-leave-wrong-format.png)
 
 * If the `DATE` provided is not in the correct format, the app should display an error message indicating the date format is invalid and provide guidance on the correct date format.'
+  
+<br>![result for incorrect date format](images/view-leave-wrong-date-format.png)
 
 * If there is no employee on leave on the specific date, the app should display an error message indicating there is no employee on leave on the specific date.
+  
+<br>![result for no employee on leave on the specific date](images/view-leave-no-employee-on-leave.png)
 
 * If the command executes successfully, the app should display the employee who is on leave on the specific date.
+  
+<br>![result for correct viewleave command](images/view-leave-success.png)
 
 ### View the calendar of upcoming month: `nm`
 
