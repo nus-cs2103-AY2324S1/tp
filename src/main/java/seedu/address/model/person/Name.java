@@ -71,7 +71,7 @@ public class Name extends ListEntryField {
         }
 
         Name otherName = (Name) other;
-        return fullName.equals(otherName.fullName);
+        return fullName.equalsIgnoreCase(otherName.fullName);
     }
 
     @Override
@@ -108,7 +108,7 @@ public class Name extends ListEntryField {
     }
 
     public boolean contains(Name name) {
-        return fullName.contains(name.fullName);
+        return fullName.toLowerCase().contains(name.fullName.toLowerCase());
     }
 
 }
