@@ -558,7 +558,7 @@ Use case ends.
 
 ### Glossary
 
-* **Mainstream OS**: Windows, Linux, Unix, OS-X
+* **Mainstream OS**: Windows, Linux, Unix, macOS
 * **Flash card**: A virtual card with a word on one side and its translation on the other side
 * **Word**: A word in the language you want to learn
 * **Translation**: The word in your native language that corresponds to the word you want to learn
