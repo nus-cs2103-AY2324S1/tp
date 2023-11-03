@@ -83,7 +83,7 @@ public class DashboardDisplay extends UiPart<Region> {
         double maxY = Math.ceil(1.25 * Math.max(totalHotLeads, Math.max(totalWarmLeads, totalColdLeads)));
 
         xAxis.setLabel("Leads");
-        yAxis.setLabel("Number of clients");
+        yAxis.setLabel("#Clients");
         yAxis.setMinorTickVisible(false);
         yAxis.setTickUnit(1);
         yAxis.setAutoRanging(false);
