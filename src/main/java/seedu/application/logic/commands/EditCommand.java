@@ -25,7 +25,6 @@ import seedu.application.model.job.Job;
 import seedu.application.model.job.JobType;
 import seedu.application.model.job.Role;
 import seedu.application.model.job.Status;
-import seedu.application.model.job.interview.Interview;
 
 
 /**
@@ -151,7 +150,6 @@ public class EditCommand extends Command {
         private Status status;
         private JobType jobType;
         private Industry industry;
-        private List<Interview> interviews;
 
         public EditJobDescriptor() {
         }
