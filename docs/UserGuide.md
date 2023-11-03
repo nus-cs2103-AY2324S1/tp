@@ -65,15 +65,13 @@ will be the least of your worries.
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `add -name NAME`, `NAME` is a parameter which can be used as `add -name Leah`.
+  In this case, "Leah" is substituted for `NAME`.
 
 * Items in square brackets are optional.<br>
   e.g `list [KEYWORDs]` can be used as `list` or as `list STUDENTS`.
 
-* Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
-
 * Parameters can be in any order.<br>
-  e.g. if the command specifies `-name NAME -phone/PHONE_NUMBER`, `-phone/PHONE_NUMBER -name/NAME` is also acceptable.
+  e.g. if the command specifies `-name NAME -phone PHONE_NUMBER`, `-phone PHONE_NUMBER -name NAME` is also acceptable.
 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
