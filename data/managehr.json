@@ -6,9 +6,9 @@
     "address" : "1 Neither Nor St",
     "salary" : "1",
     "leave" : "14",
-    "role" : "subordinate",
+    "role" : "manager",
     "supervisors" : [ ],
-    "departments" : [ ]
+    "departments" : [ "CEO" ]
   }, {
     "name" : "Second Dude",
     "phone" : "92381923",
@@ -17,11 +17,14 @@
     "salary" : "999999",
     "leave" : "15",
     "role" : "subordinate",
-    "supervisors" : [ ],
+    "supervisors" : [ "Another Dude" ],
     "departments" : [ "Janitor" ]
   } ],
   "departments" : [ {
     "name" : "Janitor",
-    "employees" : [ "Second Dude" ]
+    "employees" : [ ]
+  }, {
+    "name" : "CEO",
+    "employees" : [ ]
   } ]
 }

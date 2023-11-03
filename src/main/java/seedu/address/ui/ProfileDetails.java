@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Region;
+import seedu.address.model.department.Department;
 import seedu.address.model.employee.Employee;
 
 /**
@@ -16,7 +17,7 @@ public class ProfileDetails extends UiPart<Region> {
     private static final String FXML = "ProfileDetails.fxml";
 
     private Employee employee;
-
+    private Department department;
     @FXML
     private Label name;
     @FXML
@@ -28,9 +29,13 @@ public class ProfileDetails extends UiPart<Region> {
     @FXML
     private Label salary;
     @FXML
+    private FlowPane listView;
+    @FXML
+    private FlowPane roleLarge;
+    @FXML
     private Label leave;
     @FXML
-    private FlowPane departments;
+    private FlowPane listSupervisors;
 
     /**
      * Creates a {@code EmployeeCode} with the given {@code Employee} and index to display.
@@ -56,11 +61,17 @@ public class ProfileDetails extends UiPart<Region> {
             address.setText(employee.getAddress().value);
             email.setText(employee.getEmail().value);
             salary.setText(employee.getSalary().value);
+            listView.getChildren().clear();
+            roleLarge.getChildren().clear();
+            listSupervisors.getChildren().clear();
             leave.setText(employee.getLeave().value);
-            departments.getChildren().clear();
             employee.getDepartments().stream()
                 .sorted(Comparator.comparing(department -> department.fullName))
-                .forEach(department -> departments.getChildren().add(new Label(department.fullName)));
+                .forEach(department -> listView.getChildren().add(new Label(department.fullName)));
+            employee.getSupervisors().stream()
+                    .sorted(Comparator.comparing(supervisor -> supervisor.fullName))
+                    .forEach(supervisor -> listSupervisors.getChildren().add(new Label(supervisor.fullName)));
+            roleLarge.getChildren().add(new Label(employee.getRole().toString()));
             this.getRoot().setVisible(true);
         }
     }

@@ -8,6 +8,7 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.ReadOnlyManageHr;
+import seedu.address.model.department.Department;
 import seedu.address.model.employee.Employee;
 
 /**
@@ -33,6 +34,8 @@ public interface Logic {
     /** Returns an unmodifiable view of the filtered list of employees */
     ObservableList<Employee> getFilteredEmployeeList();
 
+    /** Returns an unmodifiable view of the filtered list of departments */
+    ObservableList<Department> getDepartmentList();
     /**
      * Returns the user prefs' ManageHR app file path.
      */
