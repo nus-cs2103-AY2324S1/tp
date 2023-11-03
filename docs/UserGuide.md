@@ -240,7 +240,7 @@ The `My Musicians` panel will update to show all matching musicians, while the `
 
 For example, when the input command is `find g/rock i/guitar i/piano`
 * Before: From `list` state
-![find_before.png](images%2Fmusician-features%2Ffind_before.png)
+![find_before.png](images%2Fmusician-features%2Flist_all.png)
 * After: On the left, `My Musicians` panel will display all musicians whose genres contain "rock" AND instruments contain "guitar" or "piano"
 ![find_after.png](images%2Fmusician-features%2Ffind_after.png)
 
@@ -283,29 +283,47 @@ band or change the name of the existing band.
 
 Adds a musician to a specified band.
 
-**Format:** `addm b/BANDINDEX m/MUSICIANINDEX`
+**Format:** `addm b/BAND_INDEX m/MUSICIAN_INDEX...`
 
-**Constraints:**
+**Things to Note:**
 * `BANDINDEX` and `MUSICIANINDEX` must be positive integers 1, 2, 3, …​
+* Before adding any musicians to any band, you should first use the [list](#list-all-musicians-and-bands--list) command to list all musicians and bands.
+* You can only add musicians to a single band. Adding musicians to multiple bands is currently not supported.
 
 Examples:
-* `addm b/1 m/2` adds the second musician in the contact list to the first band in the list of bands.
+* `addm b/1 m/1 m/2 ` adds the first and second musicians in the `My Musicians` contact list to the first band in the `My Bands` list.
 
 **Upon success:**
 
-You will see a message indicating successful addition of the musician into the band like below:
-[insert image]
+You will see a message indicating successful addition of the musician into the band. The `My Bands` panel will update to show ONLY the band which the new musicians are added in. The `My Musicians` panel will update to show all the members of that band.
+
+For example, when the input command is `addm b/1 m/1 m/2`:
+
+* Before: From `list` state
+![addm_before.png](images%2Fband-features%2Flist_all.png)
+* After: On the right, `My Bands` panel will display the band "ACDC". On the left, `My Musicians` panel will display all musicians in that band.
+![addm_after.png](images%2Fband-features%2Faddm_after.png)
 
 **Upon failure:**
 
-Should you input an index that is out of range (e.g. musician index 4 when there are 3 musicians, or band index 2
-when there is 1 band), you will see an error message as shown below.
-[insert image]
-Please input a different index and try again.
+1. Should you input an index that is out of range (e.g. musician index 4 when there are 3 musicians, or band index 2
+when there is 1 band), you will see an error message below:
+    ```
+    The musician index provided is invalid
+    ```
+    or 
+    ```
+    The band index provided is invalid
+    ```
+2. If the musician(s) you are adding is/are already in the band, you will see an error message below:
+    ```
+    One or more of the musicians already exist in the band
+    ```
+3. If you input more than one field for the prefix `b/`, meaning you are trying to add musicians to multiple bands, e.g. `addm b/1 b/2 m/1`, you will see an error message below:
+    ```
+    You can only add musicians to one band at a time
+    ```
 
-In addition, if the musician already exists in the band, you will see an error message as shown below.
-[insert image]
-Please input a different musician and try again.
 
 ### Remove musician from band: `removem`
 
