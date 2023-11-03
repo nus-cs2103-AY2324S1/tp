@@ -28,7 +28,7 @@ For experienced users, if you need help in remembering a particular command, ple
     * [Add musician](#add-musician--add)
     * [Remove musician](#remove-musician--remove)
     * [Edit musician](#edit-musician--edit)
-    * [Tag musician](#tag-musician)
+    * [Show all valid instruments and genres](#show-all-valid-instruments-and-genres--tags)
     * [Find musicians](#find-musicians--find)
   * [Features for bands](#features-for-managing-bands)
     * [Create band](#create-band--addb)
@@ -111,6 +111,10 @@ Name, phone number, email, tag, instrument, genre about the musician can all be 
 * `add n/John Doe p/98765432 e/johnd@example.com t/bestman i/violin g/classical`
 * `add n/Betsy Crowe e/pianistbetsy@smtp.com p/87988039 i/piano g/pop g/rock`
 
+**Things to Note**
+* To add the instruments and genres the musician specialises in using the `i/` and `g/` prefixes, you can only add the instruments and genres included in a pre-defined list of instruments and genres. Refer to the [tags](#show-all-valid-instruments-and-genres--tags) command for more information.
+
+
 **Upon success:**
 A success message like below will be displayed.
 
@@ -124,6 +128,7 @@ If you input a musician which is already in your contact book (i.e. a musician w
 ```
 This musician already exists in your contact list
 ```
+
 
 ### Delete musician: `delete`
 
@@ -153,6 +158,7 @@ The musician index provided is invalid
 
 Please verify that the index is correct and try again.
 
+
 ### Edit musician: `edit`
 
 Edits an existing musician in the contact book referenced by the index.
@@ -170,6 +176,7 @@ Name, phone number, email, tag, instrument, genre about the musician can all be 
 * The `INDEX` refer to the index number shown in the currently displayed `My Musicians` list. The index **must be a positive integer** 1, 2, 3, …​
 * When editing tags/instruments/genres, the existing tags/instruments/genres of the musician will be removed i.e adding of tags/instruments/genres is not cumulative.
 * You can remove all tags/instruments/genres of the musician by inputting an empty tag/instrument/genre field, e.g. `edit 1 t/ i/ g/`.
+* You can only edit the instruments and genres of the musician using the ones included in a pre-defined list. Refer to the [tags](#show-all-valid-instruments-and-genres--tags) command for more information.
 
 **Upon success:**
 A success message like below will be displayed.
@@ -191,59 +198,25 @@ Edited Musician: John Doe; Phone: 98765430; Email: johnd@example.com; Tags: [bes
     Please verify that the index is correct and try again.
 
 
-### Tag musician
-[combine tag i and g]
-with instruments: `tag instrument`
+### Show all valid instruments and genres: `tags`
 
-Tags a musician with one or more instruments he/she is proficient in.
+View all valid instrument and genre tags for musicians and bands.
 
-**Format:** `tag instrument INDEX i/INSTRUMENT…`
+The instrument and genre tags can be added/edited for a musician using the [add](#add-musician--add) and [edit](#edit-musician--edit) command with prefix `i/` and `g/` respectively.
 
-**Constraints:**
-* `INDEX` must be a positive integer 1, 2, 3, …​
-* The instrument tag must be *non-empty*.
-* You have to supply *at least one instrument tag* to the musician you are tagging.
+The genre tags can also be added/edited for a band using the [addb](#create-band--addb) and [editb](#edit-band--editb) command with prefix `g/`. Currently, band does not support instrument tags.
 
-**Examples:**
-* `tag instrument 1 i/Piano i/Violin`
-* `tag instrument 2 i/Drums`
+**Format:** `tags`
 
-**Upon success:**
+**Result:**
+You will see a list of valid instrument and genre tags in the message box like below:
+```
+Listed all valid instrument tags and genre tags below:
+Instrument tags: [bass, cello, clarinet, drums, flute, guitar, piano, saxophone, trumpet, violin, voice, other]
+Genre tags: [blues, classical, country, electronic, folk, hiphop, jazz, latin, metal, pop, rock, soul, other]
+```
+The `My Musicians` and `My Bands` panels will remain unchanged. 
 
-You will see a message indicating successful addition of instruments like below:
-[insert image]
-
-**Upon failure:**
-
-Should you try to tag a musician with zero instrument tags or empty tags, i.e., `tag instrument 1 i/` or
-`tag instrument 1`, you will see a message like below:
-[insert image]
-
-Tag musician with genres: `tag genre`
-
-Tags a musician with one or more genres he/she is proficient in.
-
-**Format:** `tag genre INDEX g/GENRE…`
-
-**Constraints:**
-* `INDEX` must be a positive integer 1, 2, 3, …​
-* The genre tag must be *non-empty*.
-* You have to supply *at least one genre tag* to the musician you are tagging.
-
-**Examples:**
-* `tag genre 1 g/rock g/pop`
-* `tag genre 2 g/jazz`
-
-**Upon success:**
-
-You will see a message indicating successful addition of tags like below:
-[insert image]
-
-**Upon failure:**
-
-Should you try to tag a musician with zero genre tags or empty tags, i.e., `tag genre 1 g/` or `tag genre 1`,
-you will see a message like below:
-[insert image]
 
 ### Find musicians: `find`
 
