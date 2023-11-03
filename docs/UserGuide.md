@@ -53,7 +53,7 @@ ManaGease is a **desktop app for <ins>HR managers</ins> to manage full time staf
 
    * `list` : Lists all contacts.
 
-   * `add /n Jane Smith /e jane@email.com /p 12345678 /a 123 Main St /b 123456789 /jd 2023-09-12 /s 1000 /al 10`: Adds an employee named `John Doe` to ManaGease
+   * `add /n Jane Smith /e jane@email.com /p 12345678 /a 123 Main St /b 123456789 /jd 12/09/2023 /s 1000.00 /l 10`: Adds an employee named `John Doe` to ManaGease
 
    * `delete 3` : Deletes the 3rd employee shown in the current list.
    
