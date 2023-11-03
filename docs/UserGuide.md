@@ -102,16 +102,18 @@ The **GUI** is split up into 4 main sections.
 ### Configuring Class Manager : `config`
 
 <box type="warning" seamless>
+
 **Caution:**
-Configuring Class Manager resets the class details (grades, attendance and class participation details) of all students. This cannot be undone. It is recommended to configure Class Manager before adding students."
+Configuring Class Manager resets the class details (grades, attendance and class participation details) of all students. This **cannot** be undone. It is recommended to configure Class Manager before adding students.
 </box>
 
-Before you begin using Class Manager, it is recommended that you configure the number of tutorials and assignments that your module has. This can be done using the `config` command, and allows Class Manager to automatically generate the correct number of class details fields for each student. Class Manager can be configured at any time, but do take note of the warning above regarding loss of student data. If Class Manager is configured after adding students, each student will have the correct number of tutorials and assignments, but their class details data will be reset.
+Before you begin using Class Manager, it is recommended that you configure the number of tutorials and assignments that your module has. This can be done using the `config` command, and allows Class Manager to automatically generate the correct number of class details fields for each student. <br><br>
+Class Manager can be configured _at any time_, but do take note of the warning above regarding **loss** of student data. If Class Manager is configured after adding students, each student will have the correct number of tutorials and assignments, but their class details data will be **reset**.
 
 Format: `config #t/TUTORIAL_COUNT #a/ASSIGNMENT_COUNT`
 
-* TUTORIAL_COUNT and ASSIGNMENT_COUNT must be 0 or a positive integer.
-* Inputting the same TUTORIAL_COUNT or ASSIGNMENT_COUNT as the previous configuration will also reset the class details of all students.
+* `TUTORIAL_COUNT` and `ASSIGNMENT_COUNT` must be 0 or a positive integer.
+* Inputting the same `TUTORIAL_COUNT` or `ASSIGNMENT_COUNT` as the previous configuration will also **reset** the class details of all students.
 
 Examples:
 * `config #t/13 #a/1`
@@ -137,8 +139,8 @@ Adds a student to Class Manager.
 Format: `add n/NAME p/PHONE e/EMAIL s/STUDENT_NUMBER c/CLASS_NUMBER [t/TAG]…​`
 
 * **ALL** the fields must be provided.
-* The NAME field is case-sensitive.
-* STUDENT NUMBER needs to be unique, and must not be blank.
+* The `NAME` field is case-sensitive.
+* `STUDENT_NUMBER` needs to be unique, and must not be blank.
 * The class details of a student will be automatically populated to be 0 for all fields during the creation of a student.
 * Comment for a student can only be added after the student is instantiated.
 
@@ -174,10 +176,10 @@ The student number entered __without__ the `s/` prefix will be the **old** stude
 </box>
 
 * Edits the student with the student number `STUDENT_NUMBER`.
-* The STUDENT_NUMBER must be valid and exist.
+* The `STUDENT_NUMBER` must be valid and exist.
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* The NEW_STUDENT_NUMBER must be valid and unique (does not exist in Class Manager).
+* The `NEW_STUDENT_NUMBER` must be valid and unique (does not exist in Class Manager).
 
 Examples:
 *  `edit A0245234A p/91234567 e/johndoe@example.com` Edits the phone number and email address of the student with `STUDENT_NUMBER` A0245234A to be `91234567` and `johndoe@example.com` respectively.
@@ -207,18 +209,21 @@ Examples:
 
 Adds a comment to an existing student in Class Manager.
 
-Format: `comment s/STUDENT_NUMBER c/COMMENT`
+Format: `comment s/STUDENT_NUMBER cm/COMMENT`
 
-* The STUDENT_NUMBER must be valid and exist.
-* The COMMENT must be a valid string.
+* The `STUDENT_NUMBER` must be valid and exist.
+* The `COMMENT` must be a valid string.
+  * Take note that the `COMMENT` string must not include any prefix. 
+  * e.g. `comment s/A0249112A cm/This student is very hardworking. t/Hardworking` is not allowed.
+  * This means comment such as "This student is very hardworking. t/Hardworking" is not allowed.
 * Comment can only be performed after the student is created.
 * Edit commands will not impact the comment tagged to the student.
 * Comment can be deleted by using an empty string as the comment.
 
 Examples:
-* `comment s/A0249112A c/This student is very hardworking.`
-* `comment s/A0249112A c/This student is very hardworking and smart.`
-* `comment s/A0249112A c/` (_This deletes the comment_)
+* `comment s/A0249112A cm/This student is very hardworking.`
+* `comment s/A0249112A cm/This student is very hardworking and smart.`
+* `comment s/A0249112A cm/` (_This deletes the comment_)
 
 ---
 
