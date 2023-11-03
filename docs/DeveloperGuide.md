@@ -268,6 +268,8 @@ through the list of Dates, and calls `GetScore` to get the score of the date bas
 income. Each metric will be scored upon 10, and when it deviates from the user's preferences, the score is reduced.
 The maximum score is 40.
 
+<puml src="diagrams/BestMatchSequence.puml" width="450" />
+
 ### Set preferences
 
 The set preferences feature is implemented using the `SetPrefCommand` class. The `SetPrefCommand` class takes in a
