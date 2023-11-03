@@ -99,8 +99,7 @@ public class Member {
         }
 
         return otherMember != null
-                && otherMember.getName().equals(getName())
-                && otherMember.getGender().equals(getGender());
+                && otherMember.getName().equals(getName());
     }
 
     /**

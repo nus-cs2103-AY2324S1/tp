@@ -5,9 +5,10 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.ccacommander.logic.commands.CommandTestUtil.DESC_AURORA;
 import static seedu.ccacommander.logic.commands.CommandTestUtil.DESC_BOXING;
-import static seedu.ccacommander.logic.commands.CommandTestUtil.VALID_LOCATION_AURORA;
+import static seedu.ccacommander.logic.commands.CommandTestUtil.VALID_LOCATION_ANIMAL;
+import static seedu.ccacommander.logic.commands.CommandTestUtil.VALID_NAME_ANIMAL;
 import static seedu.ccacommander.logic.commands.CommandTestUtil.VALID_NAME_AURORA;
-import static seedu.ccacommander.logic.commands.CommandTestUtil.VALID_TAG_AURORA;
+import static seedu.ccacommander.logic.commands.CommandTestUtil.VALID_TAG_ANIMAL;
 import static seedu.ccacommander.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.ccacommander.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.ccacommander.logic.commands.CommandTestUtil.showEventAtIndex;
@@ -67,11 +68,11 @@ public class EditEventCommandTest {
         Event lastEvent = model.getFilteredEventList().get(indexLastEvent.getZeroBased());
 
         EventBuilder eventInList = new EventBuilder(lastEvent);
-        Event editedEvent = eventInList.withName(VALID_NAME_AURORA).withLocation(VALID_LOCATION_AURORA)
-                .withTags(VALID_TAG_AURORA).build();
+        Event editedEvent = eventInList.withName(VALID_NAME_ANIMAL).withLocation(VALID_LOCATION_ANIMAL)
+                .withTags(VALID_TAG_ANIMAL).build();
 
-        EditEventCommand.EditEventDescriptor descriptor = new EditEventDescriptorBuilder().withName(VALID_NAME_AURORA)
-                .withLocation(VALID_LOCATION_AURORA).withTags(VALID_TAG_AURORA).build();
+        EditEventCommand.EditEventDescriptor descriptor = new EditEventDescriptorBuilder().withName(VALID_NAME_ANIMAL)
+                .withLocation(VALID_LOCATION_ANIMAL).withTags(VALID_TAG_ANIMAL).build();
         EditEventCommand editEventCommand = new EditEventCommand(indexLastEvent, descriptor);
 
         String commitMessage = String.format(EditEventCommand.MESSAGE_COMMIT, editedEvent.getName());

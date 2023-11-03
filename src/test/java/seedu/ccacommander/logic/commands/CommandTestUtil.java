@@ -57,12 +57,16 @@ public class CommandTestUtil {
     public static final String VALID_TAG_FRIEND = "friend";
 
     public static final String VALID_NAME_AURORA = "Aurora Borealis";
+    public static final String VALID_NAME_ANIMAL = "Animal Day";
     public static final String VALID_NAME_BOXING = "Boxing Day";
     public static final String VALID_DATE_AURORA = "2023-11-30";
+    public static final String VALID_DATE_ANIMAL = "2023-11-03";
     public static final String VALID_DATE_BOXING = "2023-12-26";
     public static final String VALID_LOCATION_AURORA = "Greenland";
+    public static final String VALID_LOCATION_ANIMAL = "Mendai Zoo";
     public static final String VALID_LOCATION_BOXING = "Ridge View Residential College";
     public static final String VALID_TAG_AURORA = "nature";
+    public static final String VALID_TAG_ANIMAL = "nature";
     public static final String VALID_TAG_BOXING = "rvrc";
 
     public static final String VALID_MEMBER_INDEX_ONE = "1";

@@ -79,7 +79,7 @@ public class Event {
     }
 
     /**
-     * Returns true if both events have the same name, date and location.
+     * Returns true if both events have the same name.
      * This defines a weaker notion of equality between two events.
      */
     public boolean isSameEvent(Event otherEvent) {
@@ -88,9 +88,7 @@ public class Event {
         }
 
         return otherEvent != null
-                && otherEvent.getName().equals(getName())
-                && otherEvent.getDate().equals(getDate())
-                && otherEvent.getLocation().equals(getLocation());
+                && otherEvent.getName().equals(getName());
     }
 
     /**
