@@ -76,7 +76,7 @@ public class EditCommandParser implements Parser<EditCommand> {
                 .ifPresent(editContactDescriptor::setAlternateContacts);
 
         if (!editContactDescriptor.isAnyFieldEdited()) {
-            throw new ParseException(Messages.EDIT_COMMAND_NOT_EDITED);
+            throw new ParseException(Messages.COMMAND_EDIT_NO_PARAM);
         }
 
         return new EditCommand(index, editContactDescriptor);

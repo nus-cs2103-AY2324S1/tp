@@ -63,6 +63,12 @@ application {
     mainClass = 'swe.context.Main'
 }
 
+clean {
+    delete './data/'
+    delete './settings.json'
+    delete fileTree('./') { include '*.log.*' }
+}
+
 run {
     enableAssertions true
 }
