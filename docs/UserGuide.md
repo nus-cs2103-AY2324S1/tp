@@ -1,3 +1,191 @@
+---
+layout: default.md
+title: "User Guide"
+pageNav: 3
+---
+
+
+
+
+# Welcome to ProjectPRO's User Guide
+
+
+## Introductions
+
+
+Achieve simplicity while optimizing efficiency.
+
+
+ProjectPRO is a desktop application designed to help university students organize their projects. Here is how ProjectPRO can streamline your project management process.
+
+
+- Categorize your contacts into various project groups.
+- Track key information from your projects.
+- Find free time for your group meetings.
+
+
+ProjectPRO is optimized for use via a Command Line Interface (CLI) while preserving the advantages of maintaining an attractive user interface. ProjectPRO utilizes simple and easy-to-remember commands to execute different tasks, enhancing our user's experience. For instance, adding a contact is executed with a simple `add` command, as listed in our Features Section. Unlock more time in your day, store your information the smart way.
+
+
+**New here?** View our instructions for first-time users [here](link to first-time user).
+
+
+**Used ProjectPRO before?** Click [here](link to experienced user) to recall what features we have!
+
+
+1. [Introductions](#introductions)
+2. [Table of Contents](#table-of-contents)
+3. [Using Our Guide](#using-our-guide)
+4. [Quick Start](#quick-start)
+5. [Glossary](#glossary)
+6. [Features](#features)
+7. [Commands to Manage Contacts](#commands-to-manage-contacts)
+- [Adding a Contact `add`](#adding-a-contact-add)
+- [Deleting a Contact `delete`](#deleting-a-contact-delete)
+- [Finding a Contact `find`](#finding-a-contact-find)
+- [Listing a Contact `list`](#listing-a-contact-list)
+8. [Commands to Manage Group](#commands-to-manage-group)
+- [Adding a Group `new`](#adding-a-group-new)
+- [Deleting a Group `delete`](#deleting-a-group-delete)
+- [Finding a Group `find`](#finding-a-group-find)
+- [Listing a Group `list`](#listing-a-group-list)
+- [Grouping a Person `group`](#grouping-a-person-group)
+- [Ungrouping a Person `ungroup`](#ungrouping-a-person-ungroup)
+9. [Commands to Manage Time](#commands-to-manage-time)
+- [Adding Time to a Contact `addtime`](#adding-time-to-a-contact-addtime)
+- [Removing Time from a Contact `deletetime`](#removing-time-from-a-contact-deletetime)
+- [Listing Time from a Contact `listtime`](#listing-time-from-a-contact-listtime)
+- [Add Meeting to Group `addmeeting`](#add-meeting-to-group-addmeeting)
+- [Remove Meeting Time from a Group `deletetime`](#remove-meeting-time-from-a-group-deletetime)
+- [Listing Meeting Time from a Group `listtime`](#listing-meeting-time-from-a-group-listtime)
+- [Finding Free Time of a Group `findfreetime`](#finding-free-time-of-a-group-findfreetime)
+10. [General Commands](#general-commands)
+- [Viewing Help `help`](#viewing-help-help)
+- [Clearing All Data `clear`](#clearing-all-data-clear)
+- [Exit ProjectPRO `exit`](#exit-projectpro-exit)
+
+
+
+
+## Using Our Guide
+
+
+This guide explains how you can use ProjectPRO to add contacts and manage your groups of contacts effectively by using our commands.
+
+
+**First Time User**
+
+
+We are happy to have you on board as a first-time user of ProjectPRO! To get started, visit our [Quick Start](quick-start-link) to set up ProjectPRO. Once it's done, you can dive into the Features section to explore the full range of commands and learn more about what ProjectPRO has to offer. Refer to **Image 1** to get acquainted with our user interface.
+
+
+![Image 1: ProjectPRO's user interface](images/UG/Overview_of_GUI.png)
+
+
+**Experienced User**
+
+
+Welcome back to ProjectPRO. Simply head over to our Features section to gain insights into our commands. If you are looking for a quick reference, click [here](experienced-user-link) for our commands' summary table.
+
+
+## Quick Start
+
+
+1. Ensure you have Java 11 or above installed on your computer. ![here](images/UG/QuickStart1.png)
+2. Simply go to your terminal and type `java -version`. ![here](images/UG/QUICKSTART2.png)
+3. Download the latest ProjectPRO.jar from ![here](images/UG/QuickStart3.png).
+- *Screenshot of the page and annotations where the file is downloaded from*
+4. Move the JAR file to a folder where you want to store your project details. For example, create a folder named ProjectPRO and place it on your desktop.
+5. For Mac Users:
+- *Separate guide for Mac users*
+6. For Windows Users:
+- *Separate guide for Windows users*
+7. Launch ProjectPRO.
+- For Mac users: Open a command terminal, `cd` into the folder you put the JAR file in, and use the `java -jar ProjectPRO.jar` command to run the application.
+- For Windows users: Double-click the ProjectPRO.jar file to launch the application.
+8. Start using ProjectPRO!
+
+
+## Glossary
+
+
+**Definitions**
+
+
+Written below are the definitions of the terminology used throughout the User Guide:
+
+
+| Term         | Definition                                             |
+| ------------ | ------------------------------------------------------ |
+| Parameter    | Parameter indicates the type of information required for a particular command. |
+| Command      | A special word used together with parameters to execute a particular action. E.g., `find`. |
+| GUI          | Graphical User Interface, the visual display of ProjectPRO. |
+
+
+**Parameter Information**
+
+
+Written below are some commonly used parameters, what they represent, and examples:
+
+
+| Parameter    | Description                                     | Constraints                                     | Valid Examples       | Invalid Examples           |
+| ------------ | ----------------------------------------------- | ----------------------------------------------- | --------------------  | --------------------------- |
+| `n/`         | Contact name of the student                    | Alphanumeric characters (a to z, A to Z, 0 to 9) | John Doe, David Li 2 | Kishen s/o Kasinathan, ナルト, அசிங்கமான |
+| `p/`         | Phone number of the student                    | Positive integer with 3 or more digits          | 999, 98765432, 18003569377 | 1-800-356-9377, 0, -1, 98431234.5 |
+| `e/`         | Email of the student                           | Email prefix: Alphanumeric characters (a to z, A to Z, 0 to 9), @, Email Domain | example@gmail.com, example@moe.edu.sg | example@!.com, example@moed.edu.s |
+| `g/`         | Name of the group                               | Alphanumeric characters (a to z, A to Z, 0 to 9) | CS2103T, Group 3    | Group 3!, 1 |
+| `r/`         | Group remark                                    | N/A                                           | Zoom link: CS2101.zoom, 123!@#$#@ | N/A |
+| `t/`         | Time interval of student/group                   | 2 timings,
+
+
+## Commands to Manage Contacts
+
+
+### Adding a contact `add`
+You can create a contact in your contact list.
+
+
+**Format:** `add n/NAME p/PHONE e/EMAIL g/GROUP_NAME`
+
+
+**Acceptable values:**
+- `NAME` must be alphanumeric and must not exist in the contact list.
+- `PHONE` must be a positive integer with at least 3 digits and must not exist in the contact list.
+- `EMAIL` must be alphanumeric with a @ domain and must not exist in the contact list.
+- `GROUP_NAME` must be alphanumeric and must exist in the contacts list. This is an optional parameter.
+
+
+**Example(s):**
+- `add n/John Doe p/98765432 e/johnd@example.com g/CS2103T`
+  This creates a person in the contact list with a person named John Doe who is in group CS2103T.
+- `add n/John Doe p/98765432 e/johnd@example.com`
+  This creates a person in the contact list with a person named John Doe who is not in any group.
+
+
+**Potential error(s):**
+- Incorrect format (e.g., no prefix):
+
+
+- The person you are trying to add already exists in your contact list: `This person already exists in your contact list`.
+
+
+### Deleting a contact `delete`
+You can delete a person from the contact list.
+
+
+**Format:** `delete n/NAME`
+
+
+**Acceptable values:**
+- `NAME` must be alphanumeric.
+
+
+**Example(s):**
+- `delete n/Nicholas Lee`
+  Deletes Nicholas Lee from the address book.
+
+
+**Potential error(s):**
 - Invalid format (e.g., no prefix):
 
 
