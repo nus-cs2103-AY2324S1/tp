@@ -1,8 +1,9 @@
 package seedu.address.ui;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ToggleButton;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 
@@ -17,16 +18,17 @@ public class Sidebar extends UiPart<Region> {
     private Label username;
 
     @FXML
-    private Button toggleEmployees;
+    private ToggleButton toggleEmployees;
 
     @FXML
-    private Button toggleDepartments;
+    private ToggleButton toggleDepartments;
 
     @FXML
     private StackPane listPanelContainer;
     @FXML
     private StackPane detailsContainer;
 
+    private ToggleGroup toggleGroup;
     private EmployeeListPanel employeeListPanel;
     private DepartmentListPanel departmentListPanel;
     private ProfileDetails profileDetails;
@@ -48,6 +50,53 @@ public class Sidebar extends UiPart<Region> {
         this.departmentDetails = departmentDetails;
         toggleDepartments.setOnAction(event -> onClickToggleDepartments());
         toggleEmployees.setOnAction(event -> onClickToggleEmployees());
+        toggleGroup = new ToggleGroup();
+        toggleDepartments.setToggleGroup(toggleGroup);
+        toggleEmployees.setToggleGroup(toggleGroup);
+        toggleEmployees.setSelected(true);
+
+        toggleGroup.selectedToggleProperty().addListener((observable, oldVal, newVal) -> {
+            if (newVal == null) {
+                if (observable.getValue() != null) {
+                    ToggleButton originalButton = (ToggleButton) observable.getValue();
+                    originalButton.setSelected(true);
+                }
+                return;
+            }
+            String toggledButton = ((ToggleButton) newVal).getText();
+            switch (toggledButton) {
+            case ("Employees"):
+                if (listPanelContainer.getChildren().contains(departmentListPanel.getRoot())) {
+                    listPanelContainer.getChildren().remove(departmentListPanel.getRoot());
+                }
+                if (!listPanelContainer.getChildren().contains(employeeListPanel.getRoot())) {
+                    listPanelContainer.getChildren().add(employeeListPanel.getRoot());
+                }
+                if (detailsContainer.getChildren().contains(departmentDetails.getRoot())) {
+                    detailsContainer.getChildren().remove(departmentDetails.getRoot());
+                }
+                if (!detailsContainer.getChildren().contains(profileDetails.getRoot())) {
+                    detailsContainer.getChildren().add(profileDetails.getRoot());
+                }
+                break;
+            case ("Departments"):
+                if (listPanelContainer.getChildren().contains(employeeListPanel.getRoot())) {
+                    listPanelContainer.getChildren().remove(employeeListPanel.getRoot());
+                }
+                if (!listPanelContainer.getChildren().contains(departmentListPanel.getRoot())) {
+                    listPanelContainer.getChildren().add(departmentListPanel.getRoot());
+                }
+                if (detailsContainer.getChildren().contains(profileDetails.getRoot())) {
+                    detailsContainer.getChildren().remove(profileDetails.getRoot());
+                }
+                if (!detailsContainer.getChildren().contains(departmentDetails.getRoot())) {
+                    detailsContainer.getChildren().add(departmentDetails.getRoot());
+                }
+                break;
+            default:
+                break;
+            }
+        });
     }
 
     /**

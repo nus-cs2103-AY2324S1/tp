@@ -20,6 +20,9 @@
         </columnConstraints>
         <rowConstraints>
             <RowConstraints vgrow="NEVER"/>
+            <RowConstraints vgrow="NEVER"/>
+            <RowConstraints vgrow="NEVER"/>
+            <RowConstraints vgrow="NEVER"/>
         </rowConstraints>
 
         <!-- Row 0 -->
@@ -33,6 +36,20 @@
             </ImageView>
             <VBox spacing="15" alignment="CENTER_LEFT">
                 <Label fx:id="name" text="" styleClass="cell_big_label"/>
+            </VBox>
+        </HBox>
+
+        <!-- Row 1 -->
+        <Separator orientation="HORIZONTAL" GridPane.rowIndex="1">
+            <visible>false</visible>
+        </Separator>
+
+        <!-- Row 2 -->
+        <Label styleClass="cell_big_label" text="Employees List" GridPane.rowIndex="2" />
+
+        <!-- Row 3 -->
+        <HBox spacing="40" alignment="TOP_LEFT" GridPane.rowIndex="3">
+            <VBox spacing="15" alignment="CENTER_LEFT">
                 <FlowPane fx:id="listView"/>
             </VBox>
         </HBox>

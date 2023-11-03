@@ -13,6 +13,7 @@
 <?import javafx.scene.image.ImageView?>
 
 
+<?import javafx.scene.control.ToggleButton?>
 <VBox VBox.vgrow="ALWAYS" xmlns="http://javafx.com/javafx/17"
       xmlns:fx="http://javafx.com/fxml/1">
     <HBox HBox.hgrow="NEVER" minWidth="200" prefWidth="200">
@@ -31,19 +32,19 @@
             </top>
         </BorderPane>
     </HBox>
-    <Region minWidth="200" prefHeight="300"/>
+    <Region minWidth="200" prefHeight="200"/>
     <HBox HBox.hgrow="NEVER" minWidth="200" prefWidth="200" alignment="CENTER">
-        <Button id="toggleEmployees" fx:id="toggleEmployees" text="Employees">
+        <ToggleButton id="toggleEmployees" fx:id="toggleEmployees" text="Employees">
             <HBox.margin>
                 <Insets left="10"/>
             </HBox.margin>
-        </Button>
+        </ToggleButton>
     </HBox>
     <HBox HBox.hgrow="NEVER" minWidth="200" prefWidth="200" alignment="CENTER">
-        <Button id="toggleDepartments" fx:id="toggleDepartments" text="Departments">
+        <ToggleButton id="toggleDepartments" fx:id="toggleDepartments" text="Departments">
             <HBox.margin>
                 <Insets left="10"/>
             </HBox.margin>
-        </Button>
+        </ToggleButton>
     </HBox>
 </VBox>
