@@ -117,7 +117,7 @@ Examples:
 
 
 
-### Listing all students : `list`
+### Listing upcoming lessons / tasks / students : `list`
 
 The list command has different behaviours depending on the keywords given.
 Lists all the students, lessons and tasks saved in the application, with optional specified information through space-separated keywords.
@@ -126,24 +126,16 @@ The list names are case-insensitive: eg. `STUDENTS`, `students`, `stuDEnts` are 
 To show the `SCHEDULE` list:
 * Format: `list schedule`
 * By default, `list` will also show the `SCHEDULE` list and list all the lessons with their lesson name.
-
-
-To show the `STUDENTS` list:
-* Format: `list students [KEYWORDs]`
-  * displays all the students with their `NAME`.
-  * The `[KEYWORDs]` allows for a list of valid space-separated information of the student to be displayed.
+* This is also the default view when you first open the application.
 
 To show the `TASKS` list:
 * Format: `list tasks`
   * * displays all the tasks with their `DESCRIPTION`.
 
-Examples:
-* `list` displays the `SCHEDULE` list with all the lessons.
-* `list schedule` displays all the lessons with their `NAME`.
-* `list students` displays all the students with their `NAME` (including previously specified fields).
-* `list students subjects` displays all the students with their `NAME` and a list of subjects for each student.
-* `list students subjects email` displays all the students with their `NAME`, a list of subjects for each student and their email.
-* `list tasks` displays all the tasks with their `DESCRIPTION`.
+To show the `STUDENTS` list:
+* Format: `list students [KEYWORDs]`
+    * displays all the students with their `NAME`.
+    * The `[KEYWORDs]` allows for a list of valid space-separated information of the student to be displayed.
 
 Acceptable values for the keywords:
 * `PHONE`
@@ -154,6 +146,16 @@ Acceptable values for the keywords:
 * `REMARK`
 * `NONE` (resets to only showing student names)
 * `ALL` (shows all student detail fields)
+
+Examples:
+* `list` displays the `SCHEDULE` list with all the lessons.
+* `list schedule` displays all the lessons with their `NAME`.
+* `list students` displays all the students with their `NAME` (including previously specified fields).
+* `list students subjects` displays all the students with their `NAME` and a list of subjects for each student.
+* `list students subjects email` displays all the students with their `NAME`, a list of subjects for each student and their email.
+* `list tasks` displays all the tasks with their `DESCRIPTION`.
+
+
 
 
 Success Output:
