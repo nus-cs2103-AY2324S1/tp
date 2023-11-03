@@ -33,17 +33,12 @@ public class AddMusicianToBandCommandParser implements Parser<AddMusicianToBandC
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     AddMusicianToBandCommand.MESSAGE_USAGE));
         }
-        try {
-            Index bandIndex = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_BINDEX).get());
-            List<Index> musicianIndices = new ArrayList<>();
-            for (String indexString : argMultimap.getAllValues(PREFIX_MINDEX)) {
-                musicianIndices.add(ParserUtil.parseIndex(indexString));
-            }
-            return new AddMusicianToBandCommand(bandIndex, musicianIndices);
-        } catch (ParseException pe) {
-            throw new ParseException(
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddMusicianToBandCommand.MESSAGE_USAGE), pe);
+        Index bandIndex = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_BINDEX).get());
+        List<Index> musicianIndices = new ArrayList<>();
+        for (String indexString : argMultimap.getAllValues(PREFIX_MINDEX)) {
+            musicianIndices.add(ParserUtil.parseIndex(indexString));
         }
+        return new AddMusicianToBandCommand(bandIndex, musicianIndices);
     }
 
     /**
