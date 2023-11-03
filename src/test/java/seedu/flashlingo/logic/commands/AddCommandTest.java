@@ -1,11 +1,14 @@
 package seedu.flashlingo.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.flashlingo.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.flashlingo.model.flashcard.FlashCard;
 import seedu.flashlingo.model.flashcard.words.OriginalWord;
 import seedu.flashlingo.model.flashcard.words.TranslatedWord;
+import seedu.flashlingo.testutil.FlashCardBuilder;
 
 public class AddCommandTest {
 
@@ -20,10 +23,10 @@ public class AddCommandTest {
     }
 
     @Test
-    public void constructor_normalFlashCard_success() {
-        // Check that the constructor does not throw any exceptions when a normal FlashCard is provided.
-        OriginalWord original = new OriginalWord("hello", "English");
-        TranslatedWord translation = new TranslatedWord("你好", "Mandarin");
-        new AddCommand(original, translation);
+    public void toStringMethod() {
+        FlashCard addedFlashCard = new FlashCardBuilder().build();
+        AddCommand addCommand = new AddCommand(addedFlashCard);
+        String expected = AddCommand.class.getCanonicalName() + "{toAdd=" + addedFlashCard + "}";
+        assertEquals(expected, addCommand.toString());
     }
 }

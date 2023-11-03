@@ -38,7 +38,7 @@ public class ModelManagerTest {
     @Test
     public void setUserPrefs_validUserPrefs_copiesUserPrefs() {
         UserPrefs userPrefs = new UserPrefs();
-        userPrefs.setFlashlingoFilePath(Paths.get("flashlingo/file/path"));
+        userPrefs.setFlashlingoFilePath(Paths.get("seedu/flashlingo/file/path"));
         userPrefs.setGuiSettings(new GuiSettings(1, 2, 3, 4));
         modelManager.setUserPrefs(userPrefs);
         assertEquals(userPrefs, modelManager.getUserPrefs());
@@ -68,7 +68,7 @@ public class ModelManagerTest {
 
     @Test
     public void setFlashlingoFilePath_validPath_setsFlashlingoFilePath() {
-        Path path = Paths.get("flashlingo/file/path");
+        Path path = Paths.get("seedu/flashlingo/file/path");
         modelManager.setFlashlingoFilePath(path);
         assertEquals(path, modelManager.getFlashlingoFilePath());
     }

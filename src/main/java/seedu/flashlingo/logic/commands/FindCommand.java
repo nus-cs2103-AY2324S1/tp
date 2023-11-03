@@ -33,7 +33,7 @@ public class FindCommand extends Command {
         model.updateFilteredFlashCardList(predicate);
         return new CommandResult(
                 String.format(Messages.MESSAGE_FLASHCARDS_LISTED_OVERVIEW,
-                  model.getFilteredFlashCardList().size()));
+                        model.getFilteredFlashCardList().size()));
     }
 
     @Override

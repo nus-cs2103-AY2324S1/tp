@@ -29,7 +29,21 @@ public class ReviewCommand extends Command {
         model.updateFilteredFlashCardList(predicate);
         return new CommandResult(MESSAGE_SUCCESS + "\n"
                 + String.format(Messages.MESSAGE_FLASHCARDS_LISTED_OVERVIEW + "\n"
-                                + model.getFilteredFlashCardList(),
-                        model.getFilteredFlashCardList().size()));
+                        + model.getFilteredFlashCardList(),
+                model.getFilteredFlashCardList().size()));
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof ReviewCommand)) {
+            return false;
+        }
+
+        return true;
     }
 }

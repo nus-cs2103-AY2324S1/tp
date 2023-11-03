@@ -1,7 +1,5 @@
 package seedu.flashlingo.logic.commands;
 
-import static seedu.flashlingo.logic.commands.CommandTestUtil.assertCommandFailure;
-
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
@@ -26,7 +24,7 @@ public class LoadCommandTest {
 
     @Test
     public void execute_invalidFileName_throwsCommandException() {
-        assertCommandFailure(new LoadCommand("invalidFile.json"), model,
+        CommandTestUtil.assertCommandFailure(new LoadCommand("invalidFile.json"), model,
                 MESSAGE_OPEN_FILE_FAIL);
     }
 
