@@ -182,6 +182,7 @@ Acceptable values for each parameter:
 | Parameters  | Accepted input |
 |-------------|----------------|
 | nil         | -              |
+
 Succeed:
 
 * Outcome: If the command is successful, it lists all employees and
