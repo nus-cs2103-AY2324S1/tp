@@ -28,6 +28,8 @@ public class ProfileDetails extends UiPart<Region> {
     @FXML
     private Label salary;
     @FXML
+    private Label leave;
+    @FXML
     private FlowPane departments;
 
     /**
@@ -54,6 +56,7 @@ public class ProfileDetails extends UiPart<Region> {
             address.setText(employee.getAddress().value);
             email.setText(employee.getEmail().value);
             salary.setText(employee.getSalary().value);
+            leave.setText(employee.getLeave().value);
             departments.getChildren().clear();
             employee.getDepartments().stream()
                 .sorted(Comparator.comparing(department -> department.fullName))
