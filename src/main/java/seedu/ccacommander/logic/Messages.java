@@ -22,7 +22,7 @@ public class Messages {
     public static final String MESSAGE_INVALID_EVENT_DISPLAYED_INDEX = "The event index provided is invalid";
     public static final String MESSAGE_INVALID_MEMBER_AND_EVENT_DISPLAYED_INDEX = "The member and event indexes "
             + "provided are both invalid";
-    public static final String MESSAGE_ENROLMENT_NOT_FOUND = "The member is not enroled to the event!";
+
     public static final String MESSAGE_ENROLMENT_DOES_NOT_EXIST =
             "Member at index %1$d is not enrolled in event at index %2$d.";
     public static final String MESSAGE_DUPLICATE_FIELDS =
@@ -53,7 +53,7 @@ public class Messages {
                 .append(" | Address: ")
                 .append(member.getAddress())
                 .append(" | Tags: ");
-        member.getTags().forEach(builder::append);
+        member.getTags().forEach(tag -> builder.append(tag).append(" "));
         return builder.toString();
     }
 
@@ -68,7 +68,7 @@ public class Messages {
                 .append(" | Location: ")
                 .append(event.getLocation())
                 .append(" | Tags: ");
-        event.getTags().forEach(builder::append);
+        event.getTags().forEach(tag -> builder.append(tag).append(" "));
         return builder.toString();
     }
 

@@ -1,6 +1,7 @@
 package seedu.ccacommander.model;
 
 import java.nio.file.Path;
+import java.util.Collection;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
@@ -181,6 +182,20 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredEnrolmentList(Predicate<Enrolment> predicate);
+
+    /**
+     * Updates the members (enrolled in Event with {@param eventName})
+     * with the hour and remark fields after a viewEventCommand is executed
+     * @param eventName
+     */
+    Collection<Name> updateMemberHoursAndRemark(Name eventName);
+
+    /**
+     * Updates the events (that Member {@param memberName} is enrolled in)
+     * with the hour and remark fields after a viewMemberCommand is executed
+     * @param memberName
+     */
+    Collection<Name> updateEventHoursAndRemark(Name memberName);
 
     void commit(String commitMessage);
 

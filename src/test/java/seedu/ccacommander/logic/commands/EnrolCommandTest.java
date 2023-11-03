@@ -18,6 +18,7 @@ import static seedu.ccacommander.testutil.TypicalMembers.ALICE;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Optional;
 import java.util.function.Predicate;
 
@@ -265,6 +266,16 @@ public class EnrolCommandTest {
         }
 
         @Override
+        public Collection<Name> updateMemberHoursAndRemark(Name eventName) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Collection<Name> updateEventHoursAndRemark(Name memberName) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void commit(String commitMessage) {
             throw new AssertionError("This method should not be called.");
         }
@@ -371,6 +382,7 @@ public class EnrolCommandTest {
         public ReadOnlyCcaCommander getCcaCommander() {
             return new CcaCommander();
         }
+
     }
 
 }

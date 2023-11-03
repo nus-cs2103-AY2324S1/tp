@@ -10,6 +10,8 @@ import java.util.Optional;
 import java.util.Set;
 
 import seedu.ccacommander.commons.util.ToStringBuilder;
+import seedu.ccacommander.model.enrolment.Hours;
+import seedu.ccacommander.model.enrolment.Remark;
 import seedu.ccacommander.model.shared.Name;
 import seedu.ccacommander.model.tag.Tag;
 
@@ -28,6 +30,8 @@ public class Member {
     // Data fields
     private final Optional<Address> address;
     private final Set<Tag> tags = new HashSet<>();
+    private Optional<Hours> hours;
+    private Optional<Remark> remark;
 
     /**
      * Every field must be present and not null.
@@ -42,8 +46,9 @@ public class Member {
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
+        this.hours = Optional.of(Hours.EMPTY_HOURS);
+        this.remark = Optional.of(Remark.EMPTY_REMARK);
     }
-
 
     public Name getName() {
         return name;
@@ -65,6 +70,12 @@ public class Member {
         return address.orElse(Address.EMPTY_ADRESS);
     }
 
+    public Hours getHours() {
+        return hours.orElse(Hours.EMPTY_HOURS);
+    }
+    public Remark getRemark() {
+        return remark.orElse(Remark.EMPTY_REMARK);
+    }
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
@@ -72,7 +83,12 @@ public class Member {
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
     }
-
+    public void setHours(Optional<Hours> hours) {
+        this.hours = hours;
+    }
+    public void setRemark(Optional<Remark> remark) {
+        this.remark = remark;
+    }
     /**
      * Returns true if both members have the same name.
      * This defines a weaker notion of equality between two members.

@@ -11,6 +11,8 @@ import seedu.ccacommander.logic.commands.exceptions.CommandException;
 import seedu.ccacommander.model.Model;
 import seedu.ccacommander.model.member.Member;
 import seedu.ccacommander.model.shared.Name;
+import seedu.ccacommander.ui.EventListPanel;
+import seedu.ccacommander.ui.MemberListPanel;
 
 /**
  * Deletes a member identified using its displayed index from CcaCommander.
@@ -45,6 +47,9 @@ public class DeleteMemberCommand extends Command {
         model.deleteMember(memberToDelete);
         model.deleteEnrolmentsWithMemberName(memberToDeleteName);
         model.commit(String.format(MESSAGE_COMMIT, memberToDelete.getName()));
+
+        MemberListPanel.setDisplayMemberHoursAndRemark(false);
+        EventListPanel.setDisplayEventHoursAndRemark(false);
         return new CommandResult(String.format(MESSAGE_DELETE_MEMBER_SUCCESS, Messages.format(memberToDelete)));
     }
 

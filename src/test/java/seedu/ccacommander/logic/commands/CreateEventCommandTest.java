@@ -10,6 +10,7 @@ import static seedu.ccacommander.testutil.TypicalEvents.BOXING_DAY;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
@@ -239,6 +240,15 @@ public class CreateEventCommandTest {
 
         @Override
         public void updateFilteredEnrolmentList(Predicate<Enrolment> enrolment) {
+            throw new AssertionError("This method should not be called.");
+        }
+        @Override
+        public Collection<Name> updateMemberHoursAndRemark(Name eventName) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Collection<Name> updateEventHoursAndRemark(Name memberName) {
             throw new AssertionError("This method should not be called.");
         }
 

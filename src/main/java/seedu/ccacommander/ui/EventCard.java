@@ -38,20 +38,31 @@ public class EventCard extends UiPart<Region> {
     private Label eventDate;
 
     @FXML
+    private Label eventHours;
+    @FXML
+    private Label eventRemark;
+
+    @FXML
     private FlowPane tags;
 
     /**
      * Creates a {@code EventCode} with the given {@code Event} and index to display.
      */
-    public EventCard(Event event, int displayedIndex) {
+    public EventCard(Event event, int displayedIndex, boolean displayEventHoursAndRemark) {
         super(FXML);
         this.event = event;
         id.setText(displayedIndex + ". ");
         name.setText(event.getName().name);
-        eventLocation.setText(event.getLocation().value);
-        eventDate.setText(event.getDate().toString());
+        eventLocation.setText("Location: " + event.getLocation().value);
+        eventDate.setText("Date: " + event.getDate().toString());
         event.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        eventHours.setText("Hours: " + event.getHours().toString());
+        eventRemark.setText("Remark: " + event.getRemark());
+        if (!displayEventHoursAndRemark) {
+            eventHours.setVisible(false);
+            eventRemark.setVisible(false);
+        }
     }
 }
