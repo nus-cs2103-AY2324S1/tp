@@ -57,7 +57,8 @@ public class EditCommand extends Command {
             + "[" + PREFIX_ROLE + "ROLE] "
             + "[" + PREFIX_MANAGER + "MANAGER]...\n"
             + "[" + PREFIX_DEPARTMENT + "DEPARTMENT]...\n"
-            + "Example: " + MESSAGE_EXAMPLE;
+            + "\n"
+            + "Example: \n" + MESSAGE_EXAMPLE;
 
     public static final String MESSAGE_EDIT_EMPLOYEE_SUCCESS = "Edited Employee: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";

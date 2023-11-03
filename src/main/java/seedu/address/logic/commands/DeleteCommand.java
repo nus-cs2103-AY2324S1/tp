@@ -21,7 +21,8 @@ public class DeleteCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the employee identified by the index number used in the displayed employee list.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
-            + "Example: " + MESSAGE_EXAMPLE;
+            + "\n"
+            + "Example: \n" + MESSAGE_EXAMPLE;
 
     public static final String MESSAGE_DELETE_EMPLOYEE_SUCCESS = "Deleted Employee: %1$s";
 
