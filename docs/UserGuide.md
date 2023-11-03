@@ -291,7 +291,7 @@ Example usage:
 
 [Table of Contents](#table-of-contents)
 
-#### Filter contacts list
+#### Filter contacts list: `filter /by [field] /with [term]`
 
 You can use the `filter` command to filter your list of conatacts,
 temporarily removing contacts that don't contain certain keywords
