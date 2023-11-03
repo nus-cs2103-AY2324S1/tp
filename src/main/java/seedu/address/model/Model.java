@@ -71,6 +71,11 @@ public interface Model {
     void startReminderScheduler();
 
     /**
+     * Stop the reminder scheduler
+     */
+    void stopReminderScheduler();
+
+    /**
      * Returns true if a person with the same identity as {@code person} exists in the address book.
      */
     boolean hasPerson(Person person);
@@ -107,6 +112,11 @@ public interface Model {
      * Returns the currently selected person.
      */
     SimpleObjectProperty<Person> getSelectedPerson();
+
+    /**
+     * Sets the currently selected person.
+     */
+    void setSelectedPerson(Person person);
 
     /**
      * Updates the reminder list
