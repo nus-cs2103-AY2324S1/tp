@@ -17,11 +17,13 @@ import swe.context.model.contact.NameContainsKeywordsPredicate;
 public class FindCommand extends Command {
     public static final String COMMAND_WORD = "find";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Finds and lists all contacts whose names match any of the"
-            + " specified words in full. Case insensitive."
-            + "\nParameters: [KEYWORD]..."
-            + "\nExample: " + COMMAND_WORD + " alice bob charlie";
+    public static final String MESSAGE_USAGE = String.format(
+        "%s: Finds contacts by name. Case insensitive. Requires full word match."
+                + "%nParameters: KEYWORD..."
+                + "%nExample: %s amy Ben CHARLOTTE",
+        FindCommand.COMMAND_WORD,
+        FindCommand.COMMAND_WORD
+    );
 
     private final NameContainsKeywordsPredicate predicate;
 

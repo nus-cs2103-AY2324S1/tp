@@ -5,6 +5,7 @@ import static java.util.Objects.requireNonNull;
 import swe.context.logic.Messages;
 import swe.context.model.Model;
 import swe.context.model.ModelManager;
+import swe.context.model.contact.Contact;
 
 
 
@@ -18,6 +19,6 @@ public class ListCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.setContactsFilter(ModelManager.FILTER_NONE);
-        return new CommandResult(Messages.LIST_COMMAND_SUCCESS);
+        return new CommandResult(Messages.COMMAND_LIST_SUCCESS);
     }
 }

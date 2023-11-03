@@ -21,6 +21,8 @@ import swe.context.model.tag.Tag;
  * Contains utility methods used for parsing strings in the various *Parser classes.
  */
 public class ParserUtil {
+    public static final String MESSAGE_INDEX_NOT_POSITIVE =
+            "Index is not a non-zero unsigned integer.";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -30,7 +32,7 @@ public class ParserUtil {
     public static Index parseIndex(String oneBasedIndex) throws ParseException {
         String trimmedIndex = oneBasedIndex.trim();
         if (!StringUtil.isNonZeroUnsignedInteger(trimmedIndex)) {
-            throw new ParseException(Messages.INVALID_PARSER_INDEX);
+            throw new ParseException(ParserUtil.MESSAGE_INDEX_NOT_POSITIVE);
         }
         return Index.fromOneBased(Integer.parseInt(trimmedIndex));
     }

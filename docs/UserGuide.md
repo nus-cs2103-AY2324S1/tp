@@ -8,8 +8,9 @@ It is optimized for use via an in-app Command Line Interface (CLI), while still 
 
 It has useful features relevant to NUS SoC students:
 
-- Tagging contacts by category: You could tag all your professors and classmates with custom tags such as "Professor", "Tutorial mate", "CS2103" etc., then filter by tag.
-- Storing different ways to reach people: By adding alternate contact details, you could have local phone number, overseas phone number, Telegram, Discord etc. all in the same contact.
+- Tagging contacts by category: You can tag your professors and classmates with custom tags such as "prof", "friend", "CS2103 course" etc., then filter by tag to view all contacts with a certain tag.
+- Storing different ways to reach people: By adding alternate contact details, you could have Telegram, Discord, mobile phone, house phone etc. all in the same contact.
+- Works like a usual CLI: You can use the up/down arrow keys to switch between previously-entered commands, making entering and repeating commands (e.g. adding many new contacts) easier.
 
 If you can type fast, prefer typing, and are reasonably comfortable with CLI inputs, ConText can let you manage contacts faster than traditional GUI apps.
 
@@ -77,8 +78,8 @@ Adds a new contact.
 Note that contacts are identified by their name in ConText, and contacts with exactly the same name (including casing) are considered the same contact.
 Hence, you will not be able to add a new contact with the same name as an existing contact.
 
-For example, if you already have a contact with name "John Doe", you will not be able to add another contact with the same name "John Doe".
-However, you may add another contact with name "John Alex Doe", or "John doe", or you may first modify the name of the existing contact.
+For example, if you already have a contact with name `John Doe`, you will not be able to add another contact with the same name `John Doe`.
+However, you may add another contact with name `John doe`, or `Alex John Doe`. You may also first modify the name of the existing contact.
 
 Should you need to make changes to an existing contact, use the `edit` command as explained below.
 
@@ -98,7 +99,7 @@ The format for `ALTERNATE_CONTACT` is `TYPE: USERNAME`, roughly looking like `So
 **Examples:**
 
 - `add n/John Doe p/98765432 e/john.doe@email.com`
-- `add n/John Doe p/98765432 e/john.doe@email.com o/Good at SE. t/NUS t/CS2103 course a/Telegram: JohnDoe`
+- `add n/John Doe p/98765432 e/john.doe@email.com o/Likes SE. t/NUS t/CS2103 course a/Telegram: JohnDoe`
 
 ### Editing a contact: `edit`
 
@@ -198,18 +199,19 @@ e.g. `find Bee John` will match the names `Amy Bee` and `John Doe`.
 **Examples:**
 
 - `find John`
-- `find alex Bernice CHARLOTTE`
+- `find amy Ben CHARLOTTE`
 
 ### Filtering by tag: `filter`
 
-Searches and displays contacts with tag matching the given keywords (case-insensitive).
+Shows contacts with a tag that fully matches the specified tag (case-insensitive).
 
 **Format:**
-`filter [KEYWORDS]`
+`filter TAG`
 
-**Example:**
+**Examples:**
 
-- `filter Friend`
+- `filter NUS`
+- `filter CS2103 course`
 
 ### Viewing help: `help`
 
