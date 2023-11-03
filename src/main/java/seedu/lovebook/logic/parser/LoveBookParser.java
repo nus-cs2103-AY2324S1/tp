@@ -91,7 +91,6 @@ public class LoveBookParser {
             return new FilterCommandParser().parse(arguments);
 
         case BlindDateCommand.COMMAND_WORD:
-            System.out.println("Random command called");
             return new BlindDateCommand();
 
         case ShowPrefCommand.COMMAND_WORD:

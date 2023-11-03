@@ -6,6 +6,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.lovebook.commons.core.GuiSettings;
+import seedu.lovebook.logic.commands.exceptions.CommandException;
 import seedu.lovebook.model.date.Date;
 
 /**
@@ -83,7 +84,7 @@ public interface Model {
     /**
      * Returns a random date from the date list.
      */
-    public void getRandomDate();
+    public void getRandomDate() throws CommandException;
 
     /**
      * Updates the filter of the filtered date list to filter by the given {@code predicate}.
@@ -105,5 +106,5 @@ public interface Model {
 
     ReadOnlyDatePrefs getDatePrefs();
     void updateSortedPersonList(Comparator<Date> comparator);
-    void getBestDate();
+    void getBestDate() throws CommandException;
 }

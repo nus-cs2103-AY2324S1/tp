@@ -8,7 +8,7 @@ import static seedu.lovebook.commons.util.AppUtil.checkArgument;
  */
 public class Income implements Comparable<Income> {
 
-    public static final String MESSAGE_CONSTRAINTS = "Income can only take on positive values"
+    public static final String MESSAGE_CONSTRAINTS = "Income can only take on positive integer values"
             + ", and it should not be blank";
 
     /*

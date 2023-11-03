@@ -15,6 +15,7 @@ import java.util.Arrays;
 import org.junit.jupiter.api.Test;
 
 import seedu.lovebook.commons.core.GuiSettings;
+import seedu.lovebook.logic.commands.exceptions.CommandException;
 import seedu.lovebook.model.date.NameContainsKeywordsPredicate;
 import seedu.lovebook.testutil.LoveBookBuilder;
 
@@ -101,7 +102,7 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void executeRandomPerson() {
+    public void executeRandomPerson() throws CommandException {
         modelManager.addDate(ALICE);
         modelManager.getRandomDate();
         assertTrue(modelManager.getFilteredPersonList().equals(Arrays.asList(ALICE)));
