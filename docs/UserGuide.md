@@ -33,7 +33,9 @@ For experienced users, if you need help in remembering a particular command, ple
   * [Features for bands](#features-for-managing-bands)
     * [Create band](#create-band--addb)
     * [Add musician to band](#add-musician-to-band--addm)
+    * [Remove musician from band](#remove-musician-from-band-removem)
     * [List band members](#list-all-members-in-band--findb)
+    * [Delete band](#delete-a-band-deleteb)
   * [Clear data](#clear-data--clear)
   * [Exit app](#exit-app--exit)
   * [Save data](#save-data)
@@ -122,9 +124,9 @@ If you input a musician which is already in your contact book (ie. have the same
 This musician already exists in your contact list
 ```
 
-### Remove musician: `remove`
+### Delete musician: `delete`
 
-Removes a musician from your contact list.
+Deletes a musician from your contact list.
 From the current `My Musicians` panel, find the index of the musician to be deleted.
 
 **Format:** `delete INDEX`
@@ -251,10 +253,13 @@ band or change the name of the existing band.
 
 Adds a musician to a specified band.
 
-**Format:** `addm bin/BANDINDEX min/MUSICIANINDEX`
+**Format:** `addm b/BANDINDEX m/MUSICIANINDEX`
+
+**Constraints:**
+* `BANDINDEX` and `MUSICIANINDEX` must be positive integers 1, 2, 3, …​
 
 Examples:
-* `addm bin/1 min/2` adds the second musician in the contact list to the first band in the list of bands.
+* `addm b/1 m/2` adds the second musician in the contact list to the first band in the list of bands.
 
 **Upon success:**
 
@@ -263,9 +268,39 @@ You will see a message indicating successful addition of the musician into the b
 
 **Upon failure:**
 
-Should you input an index that does not exist, you will see an error message showing the possible error. 
-Please input a different index as pointed out by the error message.
+Should you input an index that is out of range (e.g. musician index 4 when there are 3 musicians, or band index 2
+when there is 1 band), you will see an error message as shown below.
 [insert image]
+Please input a different index and try again.
+
+In addition, if the musician already exists in the band, you will see an error message as shown below.
+[insert image]
+Please input a different musician and try again.
+
+### Remove musician from band: `removem`
+
+Removes a musician from a specified band. The musician must already exist in the band.
+
+**Format:** `removem b/BANDINDEX m/MUSICIANINDEX`
+
+**Constraints:**
+* `BANDINDEX` and `MUSICIANINDEX` must be positive integers 1, 2, 3, …​
+
+**Upon success:**
+
+You will see a message indicating successful removal of the musician from the band like below:
+[insert image]
+
+**Upon failure:**
+
+Should you input an index that is out of range (e.g. musician index 4 when there are 3 musicians, or band index 2
+when there is 1 band), you will see an error message as shown below.
+[insert image]
+Please input a different index and try again.
+
+In addition, if the musician does not exist in the band, you will see an error message as shown below.
+[insert image]
+Please verify that the index of the musician is correct or input a different musician, and try again.
 
 ### List all members in band: `findb`
 List the band members of a selected band. From `My Bands` panel, find the complete band name of the band.
@@ -285,6 +320,34 @@ List the band members of a selected band. From `My Bands` panel, find the comple
 
 **Upon failure:**
 If you input an invalid band name, an error message `Band does not exist!` will be displayed. Please input a valid band name and enter the command again.
+
+### Delete a band: `deleteb`
+
+Deletes a band from your contact list.
+From the current `My Bands` panel, find the index of the band to be deleted.
+
+**Format:** `deleteb INDEX`
+
+**Examples:**
+* `deleteb 1`
+
+**Upon success:**
+
+You will see a message indicating successful removal of the first band in the band panel like below:
+
+```
+Deleted Band: Ace; Genres: [jazz]
+```
+
+**Upon failure:**
+
+Should you input an index out of the range of the current `My Bands` list, you will see the error message below:
+
+```
+The band index provided is invalid
+```
+
+Please verify that the index is correct and try again.
 
 ## Clear data: `clear`
 
