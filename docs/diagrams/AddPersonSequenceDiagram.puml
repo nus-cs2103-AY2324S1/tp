@@ -4,9 +4,9 @@
 box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
 participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
-participant ":AddCommandParser" as AddCommandParser LOGIC_COLOR
+participant ":AddPersonCommandParser" as AddPersonCommandParser LOGIC_COLOR
 participant ":ParserUtil" as ParserUtil LOGIC_COLOR
-participant "addCommand:AddCommand" as AddCommand LOGIC_COLOR
+participant "addCommand:AddPersonCommand" as AddPersonCommand LOGIC_COLOR
 participant ":CommandResult" as CommandResult LOGIC_COLOR
 end box
 
@@ -18,59 +18,59 @@ note left of LogicManager
 let {str} be "n/Lee Zheng Jing"
 end note
 
-[-> LogicManager : execute("add {str}")
+[-> LogicManager : execute("add_person {str}")
 activate LogicManager
 
-LogicManager -> AddressBookParser : parseCommand("add {str}")
+LogicManager -> AddressBookParser : parseCommand("add_person {str}")
 activate AddressBookParser
 
-create AddCommandParser
-AddressBookParser -> AddCommandParser
-activate AddCommandParser
+create AddPersonCommandParser
+AddressBookParser -> AddPersonCommandParser
+activate AddPersonCommandParser
 
-AddCommandParser --> AddressBookParser
-deactivate AddCommandParser
+AddPersonCommandParser --> AddressBookParser
+deactivate AddPersonCommandParser
 
-AddressBookParser -> AddCommandParser : parse("{str}")
-activate AddCommandParser
+AddressBookParser -> AddPersonCommandParser : parse("{str}")
+activate AddPersonCommandParser
 
-AddCommandParser -> ParserUtil : parseName("Lee Zheng Jing")
+AddPersonCommandParser -> ParserUtil : parseName("Lee Zheng Jing")
 activate ParserUtil
-ParserUtil --> AddCommandParser : name
+ParserUtil --> AddPersonCommandParser : name
 deactivate ParserUtil
 
-create AddCommand
-AddCommandParser -> AddCommand : new AddCommand(person)
-activate AddCommand
-AddCommand --> AddCommandParser : addCommand
-deactivate AddCommand
+create AddPersonCommand
+AddPersonCommandParser -> AddPersonCommand : new AddPersonCommand(person)
+activate AddPersonCommand
+AddPersonCommand --> AddPersonCommandParser : addPersonCommand
+deactivate AddPersonCommand
 
-AddCommandParser --> AddressBookParser : addCommand
-deactivate AddCommandParser
+AddPersonCommandParser --> AddressBookParser : addPersonCommand
+deactivate AddPersonCommandParser
 
-AddressBookParser --> LogicManager : addCommand
+AddressBookParser --> LogicManager : addPersonCommand
 deactivate AddressBookParser
 
-LogicManager -> AddCommand : execute()
-activate AddCommand
+LogicManager -> AddPersonCommand : execute()
+activate AddPersonCommand
 
-AddCommand -> Model : addPerson(person)
+AddPersonCommand -> Model : addPerson(person)
 activate Model
-Model --> AddCommand : person
+Model --> AddPersonCommand : person
 deactivate Model
 
 'AddCommand -> AddCommand : addPerson(person)
 
-AddCommand -> Model : updateGroups()
+AddPersonCommand -> Model : updateGroups()
 activate Model
-Model --> AddCommand
+Model --> AddPersonCommand
 deactivate Model
 
 create CommandResult
-AddCommand -> CommandResult
+AddPersonCommand -> CommandResult
 activate CommandResult
 
-CommandResult --> AddCommand
+CommandResult --> AddPersonCommand
 deactivate CommandResult
 
 [<--LogicManager

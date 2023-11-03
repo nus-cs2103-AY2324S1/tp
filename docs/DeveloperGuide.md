@@ -152,15 +152,56 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 ## **Implementation**
 
+### Commands
+This section explains the general implementation of all commands.
+
+The following activity diagram generally shows the overall flow of events that the user will experience.
+
+
 This section describes some noteworthy details on how certain features are implemented.
 
+#### Parser Commands
+This section explains the implementation and execution of commands that have their own specific parser.
+
+Below is the sequence diagram for the execution of these commands (denoted by `XYZCommand`) after user input is sent to `LogicManager`. The execution of each of the command has been omitted due to their inherent differences and will be covered in their respective command sections below.
+
+![Command Parser Sequence Diagram](images/CommandsParserSequenceDiagram.png)
+
+Step 1:
+The user enters a command with the necessary parameters which is then passed to the `LogicManager`.
+
+Step 2:
+The `LogicManager` calls `AddressBookParser::parseCommand` for it to identify the type of command.
+
+Step 3:
+The `AddressBookParser` parses the user input and creates a command parser for that specific command. (denoted by `XYZCommandParser`)
+
+Step 4:
+The command parser is returned to the `AddressBookParser` which then calls `XYZCommandParser::parse` to parse the additional parameters.
+
+Step 5:
+The `XYZCommandParser` creates its respective command object (denoted by `XYZCommand`) and returns it to `LogicManager`.
+
+Step 6:
+The `LogicManager` calls `XYZCommand::execute` where the interaction between the command and the model is handled.
+
+Step 7:
+The `XYZCommand` creates a successful `CommandResult` and returns it to the UI.
+
+
+
 ### Ability to add persons
+This section explains the implementation of the Add Task feature via the `add_person` command.
+The `AddPersonCommand` causes the specified `Person` to be added to the Persons List in the application.
+There is only one compulsory field which is the name of the Person. There are several optional fields such as the phone number, email address, address, birthday and remark of the Person.
+
+Below is the sequence diagram outlining the execution of `AddTaskCommand`.
 
 #### Implementation details
 
-The `add` feature involves creating a new `Person` object with optional fields and adding it to FumbleLog. 
+The `add_person` feature involves creating a new `Person` object with optional fields and adding it to FumbleLog. 
 
-This is done using `AddCommand` which implements the `Command` interface. The `AddCommand` is then executed by `LogicManager` which calls `ModelManager` to add the person to the address book.
+This is done using `AddPersonCommand` which implements the `Command` interface. The `AddPersonCommand` is then executed by `LogicManager` which calls `ModelManager` to add the person to the address book.
 
 As a result, the existing `Person` class in AB3's implementation is enhanced to have the capacity of storing optional fields.
 Below is a class diagram of the enhanced 'Person' class:
@@ -174,6 +215,7 @@ The `Person` object is now composed of the following optional attributes due to 
 * `Email`: The email address of the person. Optional field.
 * `Address`: The address of the person. Optional field.
 * `Birthday`: The birthday of the person. Optional field.
+* `Remark`: The remark of the person. Optional field.
 * `Groups`: The groups that the person is associated with. Optional field.
 
 The [**`java.util.Optional<T>`**](https://docs.oracle.com/javase/8/docs/api/java/util/Optional.html) class is used to represent the optional attributes of the `Person` object.
@@ -186,7 +228,7 @@ Except for the name, all the fields given to the `add` command are optional.
 
 The flow for the `add_person` command is described by the following sequence diagram:
 
-<img src="images/AddPersonSequenceDiagram.png" alt="AddPersonSequenceDiagram" width=600 />
+<img src="images/AddPersonSequenceDiagram2.png" alt="AddPersonSequenceDiagram2" width=600 />
 
 ### Feature details
 1. The application will validate the arguments supplied by the user; whether the "NAME" is unique and supplied, and whether the optional fields follow the correct format. 
@@ -200,15 +242,15 @@ The flow for the `add_person` command is described by the following sequence dia
 The original implementation of AB3's `Person` class is refactored to have the capacity of storing optional fields. This is done by using the `java.util.Optional<T>` class to represent the optional attributes of the `Person` object.
 Furthermore, we have added additional fields into the `Person` class to allow users to store more information about the person, such as their birthday.
 
-As the original `add_person` command already exists in AB3, this feature can be implemented by enhancing the `add` command.
+As the original `add` command already exists in AB3, this feature can be implemented by enhancing the `add` command.
 
 Furthermore, we accounted for empty/null inputs in the optional fields by generating a NULL_INSTANCE for the optional fields when the user does not specify the optional fields. This design decision allowed us to easily check
 for empty/null inputs in the Person object by checking if the optional field is not equal to the NULL_INSTANCE, instead of doing null pointer and empty string checks.
 
-* **Alternative 1 (current choice):** Enhance the existing `add_person` command.
+* **Alternative 1 (current choice):** Enhance the existing `add` command.
   * Pros: 
     * Easier to implement.
-    * Reuses the logic for the `add_person` command.
+    * Reuses the logic for the `add` command.
   * Cons:
     * Have to account for empty/null inputs in the optional fields when saving the data and testing it
     * Have to account for empty/null inputs in the optional fields when displaying the data
@@ -252,7 +294,6 @@ This shows how the Models are stored for use in the program.
 
 ### Ability to track events
 
-
 This subsection details of how the `Event` class is implemented.
 
 #### Implementation
@@ -264,7 +305,7 @@ start time, end time, persons involved and groups involved.
 
 #### Design considerations:
 
-- Events stores a list of `Name` and a list of `Group` that are involved in the event. 
+- Events stores a list of `Name` and a list o1f `Group` that are involved in the event. 
 This is to facilitate the ability to track persons and groups involved in the event.
 The `Name` class is used to represent the name of the person involved in the event, as names are unique in the `UniquePersonList
 - To make handling `Event` objects easier, the `Meeting` class is created to represent meetings as a subtype of `Event`. 
@@ -921,11 +962,19 @@ assigned to the event individually.
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
 * **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Person**: A person or entity that is associated with an event. A person contains a name and a list of contact details, such as phone number, email address, etc.
 * **Event**:  An encompassing term that refers to any organized occurrence or gathering,  
 which can include various types of activities, such as meetings, birthdays, and other scheduled events.
 * **Meeting**: A specific type of event that involves the interaction of two or more individuals. Contacts or groups of contacts can be assigned to a single meeting.
 * **Group**: A collection of contacts grouped together for organizational purposes. 
 Contacts or groups can be assigned to a single meeting, allowing for efficient management and coordination of events and interactions.
+* **GUI**: Graphical User Interface
+* **CLI**: Command Line Interface
+* **UI**: User Interface
+* **MSS**: Main Success Scenario
+* **UC**: Use Case
+* **VCS**: Version Control System
+* **CI**: Continuous Integration
 
 --------------------------------------------------------------------------------------------------------------------
 
