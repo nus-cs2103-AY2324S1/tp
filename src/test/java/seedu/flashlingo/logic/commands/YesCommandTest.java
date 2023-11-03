@@ -25,6 +25,7 @@ public class YesCommandTest {
     }
     @Test
     public void execute_getNextReviewWord_success() {
+        model = new ModelManager(getTypicalFlashlingoWithOneFlashCard(), new UserPrefs());
         try {
             FlashCard result = model.nextReviewWord();
             assertNotNull(result);
@@ -35,6 +36,7 @@ public class YesCommandTest {
 
     @Test
     public void execute_updateDate_failure() {
+        model = new ModelManager(getTypicalFlashlingoWithOneFlashCard(), new UserPrefs());
         try {
             FlashCard result = model.nextReviewWord();
             ProficiencyLevel previousLevel = result.getProficiencyLevel();
