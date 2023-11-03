@@ -165,7 +165,51 @@ Will update soon...
 #### Example usage:
 * `dev2team tn/Team Delta n/Irfan Ibrahim`
 ![AddDeveloperToTeamExample](images/UG_images/AddDevToTeamCommandExample.png)
-  
+
+
+
+### List Developers
+#### What this command does:
+* Show only the list of all developers in the project.
+
+#### Command format:
+* `list`
+#### Example usage:
+* `list` (and an example result is shown below)
+  ![ListCommandExample](images/UG_images/ListCommandExample.png)
+
+
+
+### To return to the home page
+* Use the same command `list`
+* You will return to the home page.
+
+
+**Example usage**: When you are at the main window, type `list` to show the developer list
+and type `list` again when you want to go back to the main window.
+
+
+
+### List existing teams in the project
+#### What this command does:
+* Show only the list of all existing teams in the project.
+
+#### Command format:
+* `listt`
+#### Example usage:
+* `listt` (and an example result is shown below)
+  ![ListTeamCommandExample](images/UG_images/ListTeamCommandExample.png)
+
+
+
+### To return to the home page
+* Use the same command `listt`
+* You will return to the home page.
+
+
+**Example usage**: When you are at the main window, type `listt` to show the team list
+and type `listt` again when you want to go back to the main window.
+
 
 
 ### Show Graph
