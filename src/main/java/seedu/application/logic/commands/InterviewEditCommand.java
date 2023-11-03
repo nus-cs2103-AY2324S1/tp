@@ -43,7 +43,6 @@ public class InterviewEditCommand extends InterviewCommand {
         + PREFIX_INTERVIEW_DATETIME + "Dec 31 2030 1200 "
         + PREFIX_INTERVIEW_ADDRESS + "Home\n"
         + "edits 1st interview from 2nd job";
-    ;
 
     public static final String MESSAGE_SUCCESS = "Interview successfully edited: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided. \n"
