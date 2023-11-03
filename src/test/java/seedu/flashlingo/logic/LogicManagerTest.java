@@ -29,7 +29,7 @@ import seedu.flashlingo.model.flashcard.FlashCard;
 import seedu.flashlingo.storage.JsonFlashlingoStorage;
 import seedu.flashlingo.storage.JsonUserPrefsStorage;
 import seedu.flashlingo.storage.StorageManager;
-import seedu.flashlingo.testutil.FlashcardBuilder;
+import seedu.flashlingo.testutil.FlashCardBuilder;
 
 public class LogicManagerTest {
     private static final IOException DUMMY_IO_EXCEPTION = new IOException("dummy IO exception");
@@ -164,7 +164,7 @@ public class LogicManagerTest {
 
         // Triggers the saveAddressBook method by executing an add command
         String addCommand = AddCommand.COMMAND_WORD + WORD_DESC_AMY + TRANSLATION_DESC_AMY;
-        FlashCard expectedFlashCard = new FlashcardBuilder(AMY).build();
+        FlashCard expectedFlashCard = new FlashCardBuilder(AMY).build();
         ModelManager expectedModel = new ModelManager();
         expectedModel.addFlashCard(expectedFlashCard);
         assertCommandFailure(addCommand, CommandException.class, expectedMessage, expectedModel);
