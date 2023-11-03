@@ -458,7 +458,7 @@ You can also use `ctrl-W` to quickly exit the program.
 
 While NetworkBook is optimised for use with keyboards and text commands, it also has buttons you can click to do certain tasks if you prefer. These buttons function the same as the equivalent commands, so you can use your preferred method.
 
-#### Filter (equivalent to [`filter` command](#filter-contacts-list))
+#### Filter (equivalent to [`filter` command](#filter-contacts-list-filter-by-field-with-term))
 
 You can click on a contact's tag, course, graduation, or specialisation to view all contacts with the same tag/course/graduation/specialisation.
 
@@ -488,7 +488,7 @@ You can click on a contact's email address to email them.
 | **redo**   | N/A                                                                                                                                                                                                                            | `redo`                                                                                                                                                                                                                                                                                                                                                                                                                                            | Redoes the last change to the NetworkBook's full list of contacts and/or list of displayed contacts. |
 | **open** | `[/index]` | `open [index] /index [link index]` <br/> e.g., `open 1` <br/> e.g., `open 1 /index 2` | Open a contact's link in the default browser. |
 | **email** | `[/index]` | `email [index] /index [email index]` <br/> e.g., `email 1` <br/> e.g., `email 1 /index 2` | Open default mailbox to compose a new email to a contact's email address. |
-
+g
 [Table of Contents](#table-of-contents)
 
 ## FAQ
