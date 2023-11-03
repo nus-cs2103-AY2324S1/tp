@@ -409,6 +409,24 @@ You can also use `ctrl-W` to quickly exit the program.
 
  [Table of Contents](#table-of-contents)
 
+### <u>Category 6 - Mouse interaction</u>
+
+While NetworkBook is optimised for use with keyboards and text commands, it also has buttons you can click to do certain tasks if you prefer. These buttons function the same as the equivalent commands, so you can use your preferred method.
+
+#### Filter (equivalent to [`filter` command](#filter-contacts-list))
+
+You can click on a contact's tag, course, graduation, or specialisation to view all contacts with the same tag/course/graduation/specialisation.
+
+#### Open link (equivalent to [`open` command](#))
+
+You can click on a contact's link to open the link in your web browser.
+
+#### Email contact (equivalent to [`email` command](#))
+
+You can click on a contact's email address to email them.
+
+[Table of Contents](#table-of-contents)
+
 ## Command summary
 
 | Command    | Prefixes                                                                                                                                                                                                                       | Format and examples                                                                                                                                                                                                                                                                                                                                                                                                                               | What it does                                                 |
