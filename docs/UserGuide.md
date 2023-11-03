@@ -513,7 +513,13 @@ Staff-Snap applicant data are saved automatically as a [JSON](#glossary) file `[
 <a name="faq"></a>
 ## FAQ
 
-faq stuff
+**Q**: How do I transfer my data to another Computer? <br>
+**A**: There are 2 methods you can use to transfer your data.
+- Method 1: Clear the current data using the [`clear`](#clearing-all-applicant-entries-clear) command and import your data using the [`import`](#importing-from-csv-import) command.
+- Method 2: Copy the data file `[JAR file location]/data/applicantBook.json` to the other computer.
+
+**Q**: Is my data secure? <br> 
+**A**: Yes, your data is stored locally in your computer and is not accessible by anyone else.
 
 ---
 <br>
