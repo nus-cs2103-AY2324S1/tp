@@ -22,7 +22,9 @@ import seedu.address.model.tag.Tag;
 
 /**
  * Represents a Person in the address book.
- * Guarantees: details are present and not null, field values are validated, immutable.
+ * Guarantees some fields are present and not null: name, phone, email, address, tags.
+ * Optional fields may be null: lead, telegram, profession, income, details.
+ * All field values are validated and immutable.
  */
 public class Person {
 
