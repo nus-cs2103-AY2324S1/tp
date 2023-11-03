@@ -24,11 +24,11 @@ title: User Guide
    6. [Editing an application: `edit`](#editing-an-application--edit)
    7. [Finding an application: `find`](#finding-an-application--find)
    8. [Sorting the applications: `sort`](#sorting-all-applications--sort)
-   9. [Interview Add Command](#adding-an-interview--interview-add)
-   10. [Interview Delete Command](#deleting-an-application--delete)
-   11. [Interview Edit Command](#editing-an-interview--interview-edit)
-   12. [Clear Command](#clearing-all-applications--clear)
-   13. [Exit Command](#exiting-the-programme--exit)
+   9. [Adding an interview: `interview add`](#adding-an-interview--interview-add)
+   10. [Deleting an interview: `interview delete`](#deleting-an-application--delete)
+   11. [Editing an interview: `interview edit`](#editing-an-interview--interview-edit)
+   12. [Clearing all applications: `clear`](#clearing-all-applications--clear)
+   13. [Exiting the programme: `exit`](#exiting-the-programme--exit)
 5. [FAQ](#faq)
 6. [Glossary](#glossary)
 
@@ -145,19 +145,15 @@ The following are valid interview types:
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines
   as space characters surrounding line-breaks may be omitted when copied over to the application.
 
-
 * Words in upper case are the parameters to be supplied by the user.<br>
     * e.g. in `add c/COMPANY`, `COMPANY` is a parameter which can be used as `add c/Google`.
-
 
 * Items in square brackets are optional.<br>
     * e.g. `c/COMPANY [s/STATUS]` can be used as `c/Google s/Pending` or as `c/Google`.
 
-
 * Parameters can be in any order.<br>
     * e.g. if the command specifies `c/COMPANY r/ROLE`, `r/ROLE c/COMPANY` is also acceptable.
     * When `INDEX` is required, it has to be the first parameter.
-
 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `exit` and `clear`) will be
   ignored.<br>
@@ -166,15 +162,19 @@ The following are valid interview types:
 * The same prefix cannot be used multiple times in the same command.
   * e.g. `add r/Cleaner c/Google c/Microsoft` is an invalid input.
 
-
-* `INDEX` refers to the index number of the chosen application in the displayed application list and must be a _positive
+* `INDEX` and `JOB_INDEX` refers to the index number of the chosen application in the displayed application list and must be a _positive
   integer_ 1, 2, 3, …
+
+* `INTERVIEW_INDEX` refers to the index number of the chosen interview of an application and must be a _positive
+    integer_ 1, 2, 3, …
 
 </div>
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Command summary
+## Features
+
+### Command summary
 
 | Action               | Format                                                                                   |
 |----------------------|------------------------------------------------------------------------------------------|
@@ -191,9 +191,7 @@ The following are valid interview types:
 | **Clear**            | `clear`                                                                                  |
 | **Exit**             | `exit`                                                                                   |
 
---------------------------------------------------------------------------------------------------------------------
-
-## Features
+---
 
 ### Asking for help: `help`
 
@@ -276,7 +274,8 @@ Finds all applications whose fields match the keywords provided.
 **Format:** `find [KEYWORDS] [c/COMPANY] [r/ROLE] [d/DEADLINE] [s/STATUS] [i/INDUSTRY] [t/JOB_TYPE]`
 
 * At least one optional field must be provided.
-* If `[KEYWORDS]` is provided, the command will find all applications that contains the keywords in any field.
+* More than one `KEYWORDS` can be provided.
+* If `KEYWORDS` is provided, the command will find all applications that contains the keywords in any field.
 * An application will be listed only if all the keywords match. The keywords are case-insensitive.
 * Applications with partially matching keywords will not be listed.
     * e.g. searching for the keyword "Goo" will not list applications with "Google".
@@ -288,6 +287,8 @@ Finds all applications whose fields match the keywords provided.
   Finds all applications with "Google" in the company name.
 * `find Google r/Software Engineer`
   Finds all applications with "Software Engineer" in the role and "Google" in any field.
+* `find Google AI`
+  Finds all applications with _both_ "Google" and "AI" in any fields.
 
 ---
 
@@ -330,12 +331,14 @@ Adds an interview to the specified application from the list.
 
 Deletes an interview to the specified application from the list.
 
-**Format:** `interview delete INTERVIEWINDEX t/from JOBINDEX`
+**Format:** `interview delete INTERVIEW_INDEX from/JOB_INDEX`
+
+* Edits the interview at the specified `INTERVIEW_INDEX` of the application at the specified `JOB_INDEX`.
 
 **Examples:**
 
 * `interview delete 1 from/2`
-  Deletes the 1st technical interview from the 2nd job application in the list.
+  Deletes the 1st interview from the 2nd job application in the list.
 
 **UI mockup:**
 
@@ -345,14 +348,17 @@ Deletes an interview to the specified application from the list.
 
 Edits an interview to the specified application from the list.
 
-**Format:** `interview edit INTERVIEWINDEX t/from JOBINDEX [t/TYPE] [d/DATETIME] [a/ADDRESS]`
+**Format:** `interview edit INTERVIEW_INDEX from/JOB_INDEX [t/TYPE] [d/DATETIME] [a/ADDRESS]`
+
+* Edits the interview at the specified `INTERVIEW_INDEX` of the application at the specified `JOB_INDEX`.
+* At least one of the optional fields must be provided.
 
 **Examples:**
 
 * `interview edit 2 from/4 t/GROUP`
-  Edits the interview type to a group interview for the 2nd technical interview from the 4th job application in the list.
+  Edits the interview type to a group interview for the 2nd interview from the 4th job application in the list.
 * `interview edit 4 from/8 a/NTU`
-  Edits the address 4th technical interview from the 8th job application in the list.
+  Edits the address for the 4th interview from the 8th job application in the list.
 
 **UI mockup:**
 
