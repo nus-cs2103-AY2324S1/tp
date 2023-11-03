@@ -163,6 +163,14 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
+     * Clears the application window
+     */
+    @FXML
+    private void handleClear() {
+        jobDetailsPanelPlaceholder.getChildren().clear();
+    }
+
+    /**
      * Executes the command and returns the result.
      *
      * @see Logic#execute(String)
@@ -179,6 +187,10 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.isExit()) {
                 handleExit();
+            }
+
+            if (commandResult.isClear()) {
+                handleClear();
             }
 
             // updates UI whenever an interview command is executed, all other commands return -1

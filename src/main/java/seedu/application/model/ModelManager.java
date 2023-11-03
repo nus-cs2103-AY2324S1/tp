@@ -78,7 +78,6 @@ public class ModelManager implements Model {
     }
 
     //=========== ApplicationBook ================================================================================
-
     @Override
     public void setApplicationBook(ReadOnlyApplicationBook applicationBook) {
         this.applicationBook.resetData(applicationBook);

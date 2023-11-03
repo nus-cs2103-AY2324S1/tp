@@ -1,6 +1,8 @@
 package seedu.application.logic.commands;
 
-import static seedu.application.logic.parser.CliSyntax.*;
+import static seedu.application.logic.parser.CliSyntax.PREFIX_INTERVIEW_ADDRESS;
+import static seedu.application.logic.parser.CliSyntax.PREFIX_INTERVIEW_DATETIME;
+import static seedu.application.logic.parser.CliSyntax.PREFIX_INTERVIEW_TYPE;
 
 import seedu.application.commons.core.index.Index;
 import seedu.application.commons.util.CollectionUtil;
@@ -54,7 +56,7 @@ public class InterviewAddCommand extends InterviewCommand {
 
         jobToAddInterview.addInterview(toAdd);
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)), false,
-                false, jobIndex.getZeroBased());
+            false, false, jobIndex.getZeroBased());
     }
 
     @Override
