@@ -14,7 +14,7 @@ Here's an overview of our main features:
 - **Transaction Management** : Add, Edit and Delete Income and Expenses
 - **Comprehensive Dashboard**: An instant snapshot of your monthly financial situation
 - **Data Integration**: Export/Import financial statements in CSV format
-- **Address Book**: Add people to your address book and link them to transactions
+- **Staff List**: Add people to your staff list and link them to transactions
 
 In addition, Tran$act's **Command Line Interface (CLI)** functionality will allow you to unlock
 greater efficiency as you type faster, while still having the benefits of a Graphical User Interface (GUI)
@@ -33,7 +33,7 @@ to help you streamline your accounting
 3. Copy the file to the folder you want to use as the _home folder_ for Tran$act.
 
 4. Double click `transact.jar` to start the app. The GUI below should appear in a few seconds.
-   ![Ui](images/Ui.png)
+   ![Ui](images/Ui-Overview.png)
 
 > **❗If the above does not work, try this method:**
 >
@@ -97,9 +97,9 @@ Upon opening the app, you'll be greeted with a clear and concise dashboard. The 
 
 For those who need to share data with stakeholders, Tran$act allows you to generate CSV report.
 
-**7. Address Book**
+**7. Staff List**
 
-Import staff lists into the address book for quick access to contact information. You can also add, edit, and remove people from the address book as needed.
+Import staff lists for quick access to contact information. You can also add, edit, and remove people from the staff list as needed.
 
 ---
 
@@ -299,7 +299,7 @@ Tran$act's data is saved in the hard disk automatically after any command that c
 Tran$act's GUI is simple and gives you access to all of its features with just one click.
 
 This should be what you see when you open Tran$act for the first time:
-![Ui](images/Ui.png)
+![Ui](images/Ui-Overview.png)
 
 The upper menu bar contains two tabs:
 
@@ -310,7 +310,9 @@ The lower menu bar contains three tabs:
 
 1. Overview — This tab shows you a monthly summary of your finances based on thr transactions you have entered. Although it's empty right now, when you have added a few transactions it will begin to show graphs.
 2. Transactions — This tab shows you the transactions you have entered in a row-by-row format.
-3. Addressbook — This tab shows you the persons or parties you have entered in a list format.
+   ![Ui](images/Ui-Transactions.png)
+3. Staff List — This tab shows you the persons or parties you have entered in a list format.
+   ![Ui](images/Ui-Staff.png)
 
 The input field below this with the grey text `Enter command here...` is where you can enter your commands.
 
