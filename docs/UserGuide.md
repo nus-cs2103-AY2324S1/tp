@@ -36,7 +36,7 @@ to start keeping track of all your members and applicants!
     * [4.1 Member Features](#41-member-features)
       * [4.1.1 Adding a member : `addMember`](#411-adding-a-member--addmember)
       * [4.1.2 Finding member(s) : `findMember` or `findm`](#412-finding-member--s---findmember-or-findm)
-      * [4.1.3 Viewing member(s) : `viewMembers` or `viewm`](#413-viewing-member--s---viewmembers-or-viewm)
+      * [4.1.3 Viewing member(s) : `viewMembers` or `viewm`](#413-viewing-member--s---viewmember-or-viewm)
       * [4.1.4 Editing a member : `editMember` or `editm`](#414-editing-a-member--editmember-or-editm)
       * [4.1.5 Deleting a member : `deleteMember` or `delm`](#415-deleting-a-member--deletemember-or-delm)
       * [4.1.6 Allocating a task to a member : `addTask` or `addt`](#416-allocating-a-task-to-a-member--addtask-or-addt)
@@ -135,22 +135,27 @@ This section of the User Guide will explain about each feature in detail.
 
 <div markdown="span" class="alert alert-primary">
 
-:information_source: **Notes about the command format:** 
+:information_source: **Notes about the input parameter:**  
+
 - Many of the commands below have _aliases_, or short-form versions that make them easier to type.  
 For example, the command `addMember` can be typed as `addm`. Usages of the aliases are documented below alongside the full command word, and all aliases can be used interchangeably with the full command word.
+  
   
 
 - Words in UPPER_CASE are input parameters that you need to provide for that specific field.  
 For example, in `addm /name NAME`, `NAME` would be the input parameter for the member's name.
   
+  
 
 - Fields in square brackets `[ ]` are optional fields.
+  
   
 
 - Parameters can be in any order.  
 For example, `adda /name Taylor Swift /phone 91961969` and `adda /phone 91691969 /name Taylor Swift` will result in the same applicant added.
+   
   
-
+  
 - Items with … after them can be used multiple times including zero times.  
 For example, [tag/TAG]… can be used as (i.e. 0 times), tag/SWE, tag/UIUX tag/Product etc.
 
@@ -204,6 +209,11 @@ Find and generate a list of all existing member(s) whose information contain any
 :information_source: **Notes about the command format:** KEYWORDs have to be separated by a space.
 </div>
 
+##### Example of usage:
+
+- `findMember Alicia` or `findm Alicia`  
+This generates a list of all members whose details contain `Alicia`.
+
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 For a more efficient experience, use `findm` instead of `findMember`!
 </div>
@@ -213,24 +223,10 @@ If you would like to go back to the whole list of members, use `viewm`.
 You may check out the command [here](#413-viewing-members--s---viewmembers-or-view)
 </div>
 
-##### Example of usage:
-
-- `findMember Alicia` or `findm Alicia`  
-This generates a list of all members whose details contain `Alicia`.
-
 ![Find_Member](images/findMember.png)
 
-##### Viewing all applicants:
 
-`viewApplicants`
-
-`viewa`
-
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-For a more efficient experience, use `findm` instead of `findMember`!
-</div>
-
-#### 4.1.3 Viewing member(s) : `viewMembers` or `viewm`
+#### 4.1.3 Viewing member(s) : `viewMember` or `viewm`
 
 Generates a list of all existing member(s)/applicant(s). An example of where you might want to use this command is if
 you want to go back to viewing all members after a search with `findMember`.
@@ -304,9 +300,15 @@ Find and generate a list of all existing applicants(s) whose information contain
 `finda KEYWORD...`
 
 <div markdown="span" class="alert alert-primary">
-:information_source: **Notes about the command format:** KEYWORDs have to be separated by a space.
+:information_source: **Notes about the input parameter:** KEYWORDs have to be separated by a space.
 </div>
 
+##### Example of usage:
+
+- `findApplicant Rui` or `finda Rui`  
+  This generates a list of all members whose details contain `Rui`.
+
+![Find_Applicant](images/findApplicant.png)  
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 For a more efficient experience, use `finda` instead of `findApplicant`!
 </div>
@@ -315,13 +317,6 @@ For a more efficient experience, use `finda` instead of `findApplicant`!
 If you would like to go back to the whole list of members, use `viewa`.
 You may check out the command [here](#423-viewing-applicants--s---viewapplicants-or-viewa)
 </div>
-
-##### Example of usage:
-
-- `findApplicant Rui` or `finda Rui`  
-  This generates a list of all members whose details contain `Rui`.
-
-![Find_Applicant](images/findApplicant.png)
 
 #### 4.2.3 Viewing applicant(s) : `viewApplicants` or `viewa`
 
@@ -393,16 +388,15 @@ the addMember command. **Proceed with caution!**
 If the index is negative or 0, or the applicant does not exist in the list, this command will throw an error.
 </div>
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-For a more efficient experience, use `dela` instead of `deleteApplicant`!
-</div>
-
 ##### Example of usage:
 
 - `deleteApplicant 3` or `dela 3`
 This deletes the applicant at index 1 in the applicant list.
 
-![Delete_Applicant](images/deleteApplicant.png)
+![Delete_Applicant](images/deleteApplicant.png)  
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+For a more efficient experience, use `dela` instead of `deleteApplicant`!
+</div>
 
 #### 4.2.6 Copying a applicant's details : `copyApplicant` or `cpa`
 
@@ -477,7 +471,7 @@ person or computer, and overwrite the empty addressbook.json with addressbook.js
 
 <div markdown="span" class="alert alert-warning">:exclamation: **CAUTION:**
 If the addressbook.json file is invalid or has any formatting errors, the program might not start up. Please make sure that
-the addressbook.json file used is correct and accurate.**
+the addressbook.json file used is **correct and accurate.**
 </div>
 
 
