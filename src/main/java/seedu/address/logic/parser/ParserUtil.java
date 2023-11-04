@@ -126,7 +126,7 @@ public class ParserUtil {
         if (!Lead.isValidLead(trimmedLead)) {
             throw new ParseException(Lead.MESSAGE_CONSTRAINTS);
         }
-        return new Lead(lead);
+        return Lead.of(lead);
     }
 
     /**

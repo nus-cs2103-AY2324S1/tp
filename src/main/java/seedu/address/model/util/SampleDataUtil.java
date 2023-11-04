@@ -33,7 +33,7 @@ public class SampleDataUtil {
                         getTagSet("friends")).withTelegram(new TelegramHandle("@Allyeo"))
                         .withProfession(new Profession("Software Engineer")).withIncome(new Income(80000))
                         .withDetails(new Details("Looking for automated solutions for project management"))
-                        .withLead(new Lead("COLD")).addInteraction(new Interaction(
+                        .withLead(Lead.of("COLD")).addInteraction(new Interaction(
                                 "setting next meeting", Interaction.Outcome.valueOf("INTERESTED"),
                                 LocalDate.of(2023, 11, 12)
                         )).build(),
@@ -42,13 +42,13 @@ public class SampleDataUtil {
                         getTagSet("colleagues", "friends")).withTelegram(new TelegramHandle("@yuyubern"))
                         .withProfession(new Profession("Graphic Designer")).withIncome(new Income(60000))
                         .withDetails(new Details("Interested in design software with real-time collaboration features"))
-                        .withLead(new Lead("HOT")).build(),
+                        .withLead(Lead.of("HOT")).build(),
                 new Person.PersonBuilder(new Name("Charlotte Oliveiro"), new Phone("93210283"),
                         new Email("charlotte@example.com"), new Address("Blk 11 Ang Mo Kio Street 74, #11-04"),
                         getTagSet("neighbours")).withTelegram(new TelegramHandle("@yuyubern"))
                         .withProfession(new Profession("Graphic Designer")).withIncome(new Income(60000))
                         .withDetails(new Details("Interested in design software with real-time collaboration features"))
-                        .withLead(new Lead("WARM")).addInteraction(new Interaction(
+                        .withLead(Lead.of("WARM")).addInteraction(new Interaction(
                                 "willing to meet again", Interaction.Outcome.valueOf("NOT_INTERESTED"),
                                 LocalDate.of(2022, 1, 11)
                         )).addInteraction(new Interaction(
@@ -60,19 +60,19 @@ public class SampleDataUtil {
                         getTagSet("family")).withTelegram(new TelegramHandle("@pyonpyondav"))
                         .withProfession(new Profession("Financial Analyst")).withIncome(new Income(90000))
                         .withDetails(new Details("Wants investment tracking and portfolio management tools"))
-                        .withLead(new Lead("COLD")).build(),
+                        .withLead(Lead.of("COLD")).build(),
                 new Person.PersonBuilder(new Name("Irfan Ibrahim"), new Phone("92492021"),
                         new Email("irfan@example.com"), new Address("Blk 47 Tampines Street 20, #17-35"),
                         getTagSet("classmates")).withTelegram(new TelegramHandle("@yuyubern"))
                         .withProfession(new Profession("Registered nurse")).withIncome(new Income(70000))
-                        .withDetails(new Details("Interested in medical equipment")).withLead(new Lead("WARM"))
+                        .withDetails(new Details("Interested in medical equipment")).withLead(Lead.of("WARM"))
                         .build(),
                 new Person.PersonBuilder(new Name("Roy Balakrishnan"), new Phone("92624417"),
                         new Email("royb@example.com"), new Address("Blk 45 Aljunied Street 85, #11-31"),
                         getTagSet("colleagues")).withTelegram(new TelegramHandle("@arsyadbala"))
                         .withProfession(new Profession("Digital Marketing Specialist")).withIncome(new Income(75000))
                         .withDetails(new Details("Looking for a comprehensive CRM platform with email marketing"))
-                        .withLead(new Lead("WARM"))
+                        .withLead(Lead.of("WARM"))
                         .addInteraction(new Interaction(
                                 "Still exploring", Interaction.Outcome.valueOf("FOLLOWUP_REQUIRED"),
                                 LocalDate.of(2023, 11, 22)

@@ -7,4 +7,5 @@ public enum LeadType {
     HOT,
     WARM,
     COLD,
+    UNKNOWN
 }

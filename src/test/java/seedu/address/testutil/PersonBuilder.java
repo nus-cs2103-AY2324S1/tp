@@ -54,7 +54,7 @@ public class PersonBuilder {
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
         tags = new HashSet<>();
-        lead = new Lead(DEFAULT_LEAD);
+        lead = Lead.of(DEFAULT_LEAD);
         telegram = new TelegramHandle(DEFAULT_TELEGRAM);
         profession = new Profession(DEFAULT_PROFESSION);
         income = new Income(Integer.valueOf(DEFAULT_INCOME));
@@ -123,7 +123,7 @@ public class PersonBuilder {
      * Sets the {@code Lead} of the {@code Person} that we are building.
      */
     public PersonBuilder withLead(String lead) {
-        this.lead = new Lead(lead);
+        this.lead = Lead.of(lead);
         return this;
     }
 
