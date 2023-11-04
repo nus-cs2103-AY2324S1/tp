@@ -31,4 +31,5 @@
             <VBox fx:id="teamMembers" />
         </VBox>
     </GridPane>
+
 </HBox>
