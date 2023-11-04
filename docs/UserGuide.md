@@ -177,7 +177,7 @@ All planned enhancements will also be listed in the [Planned Enhancements / Know
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. In `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
-* Parameters in square brackets are optional, **with `addalt` and `edit` as an exception. (Refer to [Add alternative information to contact](#add-alternative-information-to-contact) and [Edit contact information](#edit-contact-information) under Features)**<br>
+* Parameters in square brackets are optional, **with `addalt` and `edit` as an exception. (Refer to [Add alternative information to contact](#add-alternative-information-to-contact-addalt) and [Edit contact information](#edit-contact-information-edit) under Features)**<br>
   e.g In `n/NAME [t/TAG]`, `[t/TAG]` is an optional parameter which can be used as `n/John Doe t/friend` or as `n/John Doe`.
 
 * Parameters with `…`​ after them can be used multiple times including zero times.<br>
