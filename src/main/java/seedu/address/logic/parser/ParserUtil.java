@@ -15,6 +15,7 @@ import java.util.regex.Pattern;
 import javafx.util.Pair;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
+import seedu.address.logic.commands.CreateTagCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
@@ -199,9 +200,7 @@ public class ParserUtil {
                     throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
                 }
             } else {
-                if (!Tag.isValidTagName(tag)) {
-                    throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
-                }
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, CreateTagCommand.MESSAGE_USAGE));
             }
         }
         return tagParams;
