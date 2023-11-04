@@ -18,13 +18,17 @@ public class HelpWindow extends UiPart<Stage> {
     public static final String USERGUIDE_URL = "https://ay2324s1-cs2103t-w12-3.github.io/tp/UserGuide.html";
     public static final String HELP_MESSAGE_COMMANDS = "Here are the available commands and how to use them: \n\n"
             + "Words in UPPER_CASE are the parameters to be supplied by the user\n\n"
-            + "1. To add an application: add n/NAME \n"
-            + "2. To delete an application: delete INDEX \n"
-            + "3. To list all applications: list \n"
-            + "4. To mark the status of an application: mark INDEX s/STATUS \n"
-            + "5. To set a deadline for an application: deadline INDEX d/DEADLINE \n"
-            + "6. To find an application by company: find -c [KEYWORDS] \n"
-            + "7. To find an application by role: find -r [KEYWORDS] \n";
+            + "1. To add an application: add c/COMPANY r/ROLE\n"
+            + "2. To edit an application: edit INDEX\n"
+            + "3. To delete an application: delete INDEX \n"
+            + "4. To list all applications: list \n"
+            + "5. To find an application: find [KEYWORDS]\n"
+            + "6. To sort applications: sort FIELD_SPECIFIER\n"
+            + "7. To add an interview to an application: interview add INDEX t/TYPE d/DATETIME a/ADDRESS\n"
+            + "8. To edit an interview of an application: interview edit INTERVIEWINDEX from/JOBINDEX\n"
+            + "9. To delete an interview from an application: interview delete INTERVIEWINDEX from/JOBINDEX\n"
+            + "10. To clear all applications: clear\n"
+            + "11. To exit the app: exit\n";
     public static final String HELP_MESSAGE = HELP_MESSAGE_COMMANDS + "\n"
             + "Refer to the user guide for additional optional inputs: " + USERGUIDE_URL;
 
