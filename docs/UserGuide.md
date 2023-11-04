@@ -107,16 +107,17 @@ Import staff lists for quick access to contact information. You can also add, ed
 
 <div markdown="block" class="alert alert-info">
 
-**Notes about the command format:**
+|                | **Notes about the command format**                                             |
+| -------------- | ------------------------------------------------------------------------------ |
+| [ ]            | Optional field                                                                 |
+| \<description> | Any string                                                                     |
+| \<type>        | R (for Revenue), or E (for Expense)                                            |
+| \<amount>      | Any non-negative number (Large numbers past ~16 digits are not well supported) |
+| \<date>        | In dd/mm/yy format (Can be in the future)                                      |
+| \<staff ID>    | ID of staff, an integer                                                        |
+| \<sort type>   | asc (ascending) or desc (descending)                                           |
+| ...            | Multiple entries allowed, separated by a space                                 |
 
-- []: Optional field
-- \<description>: Any string
-- \<type>: R (for Revenue), or E (for Expense)
-- \<amount>: Any non-negative number
-- \<date>: In dd/mm/yy format (Can be in the future)
-- \<staff ID>: ID of staff, an integer
-- \<sort type>: asc (ascending) or desc (descending)
-- ...: Multiple entries allowed, separated by a space
 </div>
 
 ### Adding transaction : `add`
