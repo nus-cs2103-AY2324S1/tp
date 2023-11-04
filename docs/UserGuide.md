@@ -353,3 +353,7 @@ The input field below this with the grey text `Enter command here...` is where y
 | Income      | Money received (e.g. Product Sale)                     |
 | Expense     | Costs incurred (e.g. Staff salary, cost of production) |
 | Command     | An input into the text box to carry out actions        |
+
+## Future work
+
+- Exported files that are created (e.g. transactions.csv) will be able to be renamed before being exported to the selected directory.
