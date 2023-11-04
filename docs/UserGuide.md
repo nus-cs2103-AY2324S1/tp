@@ -264,7 +264,7 @@ You can create a group in your contact list.
 You can delete a group in your contact list.
 
 
-**Format:** `delete n/GROUP_NAME`
+**Format:** `delete g/GROUP_NAME`
 
 
 **Acceptable values:**
@@ -285,6 +285,28 @@ You can delete a group in your contact list.
 
 
 
+### Adding remarks to a group `remark`
+You can add remarks to a group in your contact list.
+
+
+**Format:** `remark g/GROUP_NAME r/REMARK`
+
+
+**Acceptable values:**
+- `GROUP_NAME` must be alphanumeric and cannot be blank.
+- `GROUP_NAME` must be an existing group in the contact list.
+- `REMARK` must be alphanumeric.
+
+**Example(s):**
+- `remark g/CS2103T r/quiz tomorrow`
+  This adds the remark "quiz tomorrow" to the existing "CS2103T" group in your contact list.
+
+
+**Potential errors(s):**
+- Incorrect format (e.g. no prefix):
+- The group you entered does not exist in your contact list:
+
+
 
 ### Finding a group `find`
 You can find a group in your contact list. This allows you to view the group's members and remarks.
@@ -303,7 +325,7 @@ You can find a group in your contact list. This allows you to view the group's m
 
 
 **Potential error(s):**
-- Incorrect format (e.g., no prefix):
+- Incorrect format (e.g. no prefix):
 
 
 - The group you are trying to find does not exist in your contact list:
@@ -554,17 +576,19 @@ You list meeting time for your groups.
 You can find a meeting time slot for your group where everyone is available.
 
 
-**Format:** `findfreetime g/GROUP_NAME`
+**Format:** `findfreetime g/GROUP_NAME d/DURATION`
 - Provide the full name of the group using the `g/` prefix.
+- Provide the duration of the meeting using the `d/` prefix.
 
 
 **Acceptable values:**
 - `GROUP_NAME` must be alphanumeric.
+- `DURATION` must be an integer representing the meeting duration in minutes.
 
 
 **Example(s):**
-- `findfreetime g/CS2100`
-  This finds a common meeting time for your CS2100 group.
+- `findfreetime g/CS2100 d/60`
+  This finds a common meeting time of 60 minutes for your CS2100 group.
   Insert Image
 
 

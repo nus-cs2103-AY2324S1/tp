@@ -1,15 +1,14 @@
 package seedu.address.model;
 
-import static java.util.Objects.requireNonNull;
+
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FREETIME;
 
 import java.time.DayOfWeek;
 import java.util.ArrayList;
 
-import seedu.address.logic.parser.ParserUtil;
-
-import javax.xml.stream.FactoryConfigurationError;
-
+/**
+ * A class representing a time interval object
+ */
 public class TimeInterval {
 
     public static final String MESSAGE_CONSTRAINTS_SYNTAX = "The format of an interval should be: mon 1200 - tue 1400";
@@ -17,8 +16,8 @@ public class TimeInterval {
     public static final String MESSAGE_CONSTRAINTS_LOGIC = "Your end time cannot be before your start time ";
 
     public static final String MESSAGE_CONSTRAINTS_OVERLAP = "No overlap is allowed in your interval. \n "
-            + PREFIX_FREETIME + "mon 1200 - mon 1600 " + PREFIX_FREETIME  + "mon 1400 - mon 1800 is not allowed. " +
-            "Write it as mon 1200 - mon 1800";
+        + PREFIX_FREETIME + "mon 1200 - mon 1600 " + PREFIX_FREETIME + "mon 1400 - mon 1800 is not allowed. "
+        + "Write it as mon 1200 - mon 1800";
 
 
     public static final String VALIDATION_REGEX = ".* .* - .* .*";
@@ -27,8 +26,9 @@ public class TimeInterval {
 
     /**
      * TimeInterval constructor.
+     *
      * @param start The start time of the interval.
-     * @param end The end time of the interval.
+     * @param end   The end time of the interval.
      */
     public TimeInterval(Time start, Time end) {
         this.start = start;
@@ -37,6 +37,7 @@ public class TimeInterval {
 
     /**
      * Returns true if the timeInterval overlaps with one another.
+     *
      * @param intervals ArrayList of TimeIntervals.
      * @return Returns true if the timeInterval overlaps with one another.
      */
@@ -45,7 +46,8 @@ public class TimeInterval {
             for (int j = i + 1; j < intervals.size(); j++) {
                 int startComparison = intervals.get(i).compareStart(intervals.get(j));
                 int endComparison = intervals.get(i).compareEnd(intervals.get(j));
-                boolean noClash = ((startComparison < 0 && endComparison < 0)|| (startComparison > 0 && endComparison > 0));
+                boolean noClash = ((startComparison < 0 && endComparison < 0)
+                    || (startComparison > 0 && endComparison > 0));
                 if ((startComparison == 0 && endComparison == 0) || !noClash) {
                     return true;
                 }
@@ -57,6 +59,7 @@ public class TimeInterval {
     /**
      * Check whether an interval overlaps another interval in any way
      * Interval overlapping at start and end points not considered as overlap does not form interval
+     *
      * @param t
      * @return
      */
@@ -76,6 +79,7 @@ public class TimeInterval {
 
     /**
      * Check if Intervals are equal in terms of time representation and not exact object comparison
+     *
      * @param otherInterval that we are comparing to
      * @return boolean whether otherInterval is equal in terms of time representation
      */
@@ -95,6 +99,7 @@ public class TimeInterval {
 
     /**
      * Create new time interval with MaxStart and MinEnd
+     *
      * @param otherInterval
      * @return
      */
@@ -105,6 +110,7 @@ public class TimeInterval {
     /**
      * Check if time interval can accomodate for a given duration
      * Whether duration can fit in interval
+     *
      * @param duration of meeting in consideration
      * @return boolean whether meeting is permissible
      */
@@ -119,6 +125,7 @@ public class TimeInterval {
 
     /**
      * Returns true if the interval string is in right format.
+     *
      * @param timeInterval The timeInterval to be checked.
      * @return Returns true if the interval string is in right format.
      */
@@ -128,17 +135,23 @@ public class TimeInterval {
 
     /**
      * Returns true if start time is less than end time.
+     *
      * @param start Start time.
-     * @param end End time.
+     * @param end   End time.
      * @return Returns true if start time is less than end time.
      */
     public static boolean isValidTimeIntervalLogic(Time start, Time end) {
         return start.compareTo(end) <= -1;
     }
 
+    /**
+     * Checks if timeInterval clashes with otherTime
+     */
     public boolean isClash(TimeInterval otherTime) {
-        boolean isBefore = this.start.compareTo(otherTime.start) < 0 && this.end.compareTo(otherTime.end) < 0 && this.end.compareTo(otherTime.start) < 0;
-        boolean isAfter = this.start.compareTo(otherTime.start) > 0 && this.end.compareTo(otherTime.end) > 0 && this.start.compareTo(otherTime.end) > 0;
+        boolean isBefore = this.start.compareTo(otherTime.start) < 0 && this.end.compareTo(otherTime.end) < 0
+            && this.end.compareTo(otherTime.start) < 0;
+        boolean isAfter = this.start.compareTo(otherTime.start) > 0 && this.end.compareTo(otherTime.end) > 0
+            && this.start.compareTo(otherTime.end) > 0;
         return !(isBefore || isAfter);
     }
 
@@ -156,6 +169,7 @@ public class TimeInterval {
 
     /**
      * Gets the start time of the interval
+     *
      * @return Start time
      */
     public Time getStart() {
@@ -164,6 +178,7 @@ public class TimeInterval {
 
     /**
      * Gets the end time of the interval
+     *
      * @return end time
      */
     public Time getEnd() {

@@ -21,7 +21,7 @@ public class AddGroupMeetingTimeCommand extends Command {
             + PREFIX_FREETIME + "MEETING_TIME \n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_GROUPTAG + "CS2103T "
-            + PREFIX_FREETIME + "mon 1200 - mon 1400 ;tue 1000 - wed 1600";
+            + PREFIX_FREETIME + "mon 1200 - mon 1400 " + PREFIX_FREETIME + "wed 1000 - wed 1600";
 
     public static final String MESSAGE_NO_GROUP_WITH_NAME_FOUND = "No group with such name found.\n"
             + "Please provide the group's full name as in the existing contact list.";

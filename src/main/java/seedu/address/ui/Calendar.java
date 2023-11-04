@@ -1,7 +1,5 @@
 package seedu.address.ui;
 
-import java.net.URL;
-import java.util.ArrayList;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
@@ -9,10 +7,11 @@ import javafx.fxml.FXML;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
-import seedu.address.model.TimeInterval;
 import seedu.address.model.group.Group;
-import seedu.address.model.person.Person;
 
+/**
+ * The UI component that is responsible for the calendar.
+ */
 public class Calendar extends UiPart<Region> {
 
     private static final String FXML = "CalendarList.fxml";
@@ -29,6 +28,9 @@ public class Calendar extends UiPart<Region> {
     @FXML
     private ListView<ObservableList<GroupTimeContainer>> dayListView;
 
+    /**
+     * Creates a {@code Calendar with tasks} with the given {@code groupList}.
+     */
     public Calendar(ObservableList<Group> groupList) {
         super(FXML);
         this.groupList = groupList;

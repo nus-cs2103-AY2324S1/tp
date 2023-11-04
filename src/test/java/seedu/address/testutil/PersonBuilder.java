@@ -1,8 +1,6 @@
 package seedu.address.testutil;
 
 import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
 
 import seedu.address.model.group.Group;
 import seedu.address.model.group.GroupList;
@@ -11,8 +9,6 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
-import seedu.address.model.tag.Tag;
-import seedu.address.model.util.SampleDataUtil;
 
 /**
  * A utility class to help with building Person objects.
@@ -75,6 +71,9 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code GroupList} of the {@code args} that we are building.
+     */
     public PersonBuilder withGroupList(String ...args) {
         GroupList gL = new GroupList();
         Arrays.stream(args).forEach(group -> gL.add(new Group(group)));
