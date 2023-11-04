@@ -209,9 +209,8 @@ public class MainWindow extends UiPart<Stage> {
                 setColorTheme(logic.getTheme());
                 commandResult = new CommandResult(commandResult.getFeedbackToUser(), false, false, false);
             }
-
-            resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
             fillInnerParts();
+            resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
             return commandResult;
         } catch (CommandException | ParseException e) {
             logger.info("An error occurred while executing command: " + commandText);
