@@ -43,9 +43,10 @@ public class FlashcardBox extends UiPart<Region> {
     private Label level;
 
     @FXML
-    private Button reveal;
+    private Label lang;
 
-    private boolean isRevealed = false;
+    @FXML
+    private Button reveal;
 
     private MainWindow mw;
 
@@ -62,8 +63,13 @@ public class FlashcardBox extends UiPart<Region> {
         this.mw = mw;
         id.setText(displayedIndex + ") ");
         original.setText(fc.getOriginalWord().toString() + ": ");
-        translation.setText("");
+        if (fc.getIsRevealed()) {
+            translation.setText(flashCard.getTranslatedWord().toString());
+        } else {
+            translation.setText("");
+        }
         level.setText("Proficiency Level: " + fc.getProficiencyLevel().getLevel());
+        lang.setText("Translation language: " + fc.getTranslatedWord().getLanguage());
     }
 
     /**
@@ -89,14 +95,16 @@ public class FlashcardBox extends UiPart<Region> {
      * Hides translation and changes text to reveal if it is displayed
      */
     @FXML
-    public void toggleReveal() {
-        if (isRevealed) {
+    public void toggleReveal() throws CommandException, ParseException {
+        if (flashCard.getIsRevealed()) {
             translation.setText("");
+            this.mw.executeCommand("reveal");
             reveal.setText("Reveal");
         } else {
             translation.setText(flashCard.getTranslatedWord().toString());
+            this.mw.executeCommand("reveal");
             reveal.setText(" Hide ");
         }
-        isRevealed = !isRevealed;
+        flashCard.setIsRevealed(!flashCard.getIsRevealed());
     }
 }

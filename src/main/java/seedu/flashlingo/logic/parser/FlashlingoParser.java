@@ -114,7 +114,7 @@ public class FlashlingoParser {
         case SwitchCommand.COMMAND_WORD:
             return new SwitchCommand();
         case RevealCommand.COMMAND_WORD:
-            throw new ParseException(MESSAGE_NOT_IN_REVIEW_SESSION);
+            return new RevealCommand();
         case LoadCommand.COMMAND_WORD:
             return new LoadCommandParser().parse(arguments);
         default:

@@ -6,6 +6,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import seedu.flashlingo.logic.commands.exceptions.CommandException;
+import seedu.flashlingo.logic.parser.exceptions.ParseException;
 import seedu.flashlingo.model.flashcard.FlashCard;
 import seedu.flashlingo.session.SessionManager;
 
@@ -42,20 +44,29 @@ public class FlashcardBoxNoButton extends UiPart<Region> {
     @FXML
     private Button reveal;
 
-    private boolean isRevealed = false;
+    @FXML
+    private Label lang;
+
+    private MainWindow mw;
 
 
     /**
      * Creates a {@code FlashCard code} with the given {@code FlashCard} and index to display.
      */
-    public FlashcardBoxNoButton(FlashCard fc, int displayedIndex) {
+    public FlashcardBoxNoButton(FlashCard fc, int displayedIndex, MainWindow mw) {
         super(FXML);
         this.flashCard = fc;
+        this.mw = mw;
         assert(!SessionManager.getInstance().isReviewSession());
         id.setText(displayedIndex + ") ");
         original.setText(fc.getOriginalWord().toString() + ": ");
-        translation.setText("");
+        if (fc.getIsRevealed()) {
+            translation.setText(flashCard.getTranslatedWord().toString());
+        } else {
+            translation.setText("");
+        }
         level.setText("Proficiency Level: " + fc.getProficiencyLevel().getLevel());
+        lang.setText("Translation language: " + fc.getTranslatedWord().getLanguage());
     }
 
     /**
@@ -63,14 +74,16 @@ public class FlashcardBoxNoButton extends UiPart<Region> {
      * Hides translation and changes text to reveal if it is displayed
      */
     @FXML
-    public void toggleReveal() {
-        if (isRevealed) {
+    public void toggleReveal() throws CommandException, ParseException {
+        if (flashCard.getIsRevealed()) {
             translation.setText("");
+            this.mw.executeCommand("reveal");
             reveal.setText("Reveal");
         } else {
             translation.setText(flashCard.getTranslatedWord().toString());
+            this.mw.executeCommand("reveal");
             reveal.setText(" Hide ");
         }
-        isRevealed = !isRevealed;
+        flashCard.setIsRevealed(!flashCard.getIsRevealed());
     }
 }
