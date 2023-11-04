@@ -212,6 +212,7 @@ Adds a comment to an existing student in Class Manager.
 Format: `comment s/STUDENT_NUMBER cm/COMMENT`
 
 * The `STUDENT_NUMBER` must be valid and exist.
+* Only 1 comment can be added to a student.
 * The `COMMENT` must be a valid string.
   * Take note that the `COMMENT` string must not include any prefix. 
   * e.g. `comment s/A0249112A cm/This student is very hardworking. t/Hardworking` is not allowed.
