@@ -220,6 +220,11 @@ public class ModelManager implements Model {
 
     @Override
     public TranslatedWord reveal(FlashCard toBeRevealed) {
+        if (toBeRevealed.getIsRevealed()) {
+            toBeRevealed.setIsRevealed(false);
+        } else {
+            toBeRevealed.setIsRevealed(true);
+        }
         return toBeRevealed.getTranslatedWord();
     }
 
