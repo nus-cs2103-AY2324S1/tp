@@ -349,22 +349,22 @@ Then, use the `load` command to import the data.
 
 ## Command summary
 
-| Action                  | Format, Examples                                                |
-|-------------------------|-----------------------------------------------------------------|
-| **Help**                | `help`                                                          |
-| **List**                | `list`                                                          |
-| **Add**                 | `add w/<WORD> t/<TRANSLATION> [wl/<WORD_LANGUAGE>] [tl/<TRANSLATION_LANGUAGE>]` <br> e.g., `add w/regarder t/look`   |
-| **Delete**              | `delete w/WORD`<br> e.g., `del w/look`                          |
+| Action                  | Format, Examples                                                                                                           |
+|-------------------------|----------------------------------------------------------------------------------------------------------------------------|
+| **Help**                | `help`                                                                                                                     |
+| **List**                | `list`                                                                                                                     |
+| **Add**                 | `add w/<WORD> t/<TRANSLATION> [wl/<WORD_LANGUAGE>] [tl/<TRANSLATION_LANGUAGE>]` <br> e.g., `add w/regarder t/look`         |
+| **Delete**              | `delete <INDEX>`<br> e.g., `del 2`    d                                                                                    |
 | **Edit**                | `edit <INDEX> [w/<WORD>] [t/<TRANSLATION>] [wl/<WORD_LANGUAGE>] [tl/<TRANSLATION_LANGUAGE>]`<br> e.g., `edit 1 w/bye t/再见` |
-| **Find**                | `find KEYWORD`<br> e.g., `find bye`                             |
-| **Start**               | `start`                                                         |
-| **Reveal**              | `reveal`                                                        |
-| **Yes**                 | `yes`                                                           |
-| **No**                  | `no`                                                            |
-| **End**                 | `end`                                                           |
-| **Language**            | `language SPECIFIED_LANGUAGE`<br> e.g., `language French`       |
-| **Review**              | `review`                                                        |
-| **Learning Statistics** | `stats`                                                         |
-| **Load**                | `load FILE_NAME`<br> e.g., `load SampleData.xlsx`               |
-| **Switch**              | `switch`                                                        |
-| **Exit**                | `exit`                                                          |
+| **Find**                | `find KEYWORD`<br> e.g., `find bye`                                                                                        |
+| **Start**               | `start`                                                                                                                    |
+| **Reveal**              | `reveal`                                                                                                                   |
+| **Yes**                 | `yes`                                                                                                                      |
+| **No**                  | `no`                                                                                                                       |
+| **End**                 | `end`                                                                                                                      |
+| **Language**            | `language SPECIFIED_LANGUAGE`<br> e.g., `language French`                                                                  |
+| **Review**              | `review`                                                                                                                   |
+| **Learning Statistics** | `stats`                                                                                                                    |
+| **Load**                | `load FILE_NAME`<br> e.g., `load SampleData.xlsx`                                                                          |
+| **Switch**              | `switch`                                                                                                                   |
+| **Exit**                | `exit`                                                                                                                     |
