@@ -43,6 +43,9 @@ public class FlashcardBox extends UiPart<Region> {
     private Label level;
 
     @FXML
+    private Label lang;
+
+    @FXML
     private Button reveal;
 
     private boolean isRevealed = false;
@@ -64,6 +67,7 @@ public class FlashcardBox extends UiPart<Region> {
         original.setText(fc.getOriginalWord().toString() + ": ");
         translation.setText("");
         level.setText("Proficiency Level: " + fc.getProficiencyLevel().getLevel());
+        lang.setText("Translation language: " + fc.getTranslatedWord().getLanguage());
     }
 
     /**
