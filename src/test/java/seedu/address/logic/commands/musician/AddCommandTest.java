@@ -57,6 +57,69 @@ public class AddCommandTest {
     }
 
     @Test
+    public void execute_duplicateName_throwsCommandException() {
+        Musician existingMusician = ALICE;
+        Musician musicianWithDuplicateName = new MusicianBuilder().withName(existingMusician.getName().toString())
+                .build();
+
+        // assert only name is duplicate
+        assert existingMusician.getName().equals(musicianWithDuplicateName.getName())
+                : "Both musicians should have same name";
+        assert !existingMusician.getPhone().equals(musicianWithDuplicateName.getPhone())
+                : "Both musicians should not have same phone";
+        assert !existingMusician.getEmail().equals(musicianWithDuplicateName.getEmail())
+                : "Both musicians should not have same email";
+
+        AddCommand addCommand = new AddCommand(musicianWithDuplicateName);
+        ModelStub modelStub = new ModelStubWithMusician(existingMusician);
+
+        assertThrows(CommandException.class,
+                AddCommand.MESSAGE_DUPLICATE_MUSICIAN, () -> addCommand.execute(modelStub));
+    }
+
+    @Test
+    public void execute_duplicatePhone_throwsCommandException() {
+        Musician existingMusician = ALICE;
+        Musician musicianWithDuplicatePhone = new MusicianBuilder().withPhone(existingMusician.getPhone().toString())
+                .build();
+
+        // assert only phone is duplicate
+        assert !existingMusician.getName().equals(musicianWithDuplicatePhone.getName())
+                : "Both musicians should not have same name";
+        assert existingMusician.getPhone().equals(musicianWithDuplicatePhone.getPhone())
+                : "Both musicians should have same phone";
+        assert !existingMusician.getEmail().equals(musicianWithDuplicatePhone.getEmail())
+                : "Both musicians should not have same email";
+
+        AddCommand addCommand = new AddCommand(musicianWithDuplicatePhone);
+        ModelStub modelStub = new ModelStubWithMusician(existingMusician);
+
+        assertThrows(CommandException.class,
+                AddCommand.MESSAGE_DUPLICATE_INFO, () -> addCommand.execute(modelStub));
+    }
+
+    @Test
+    public void execute_duplicateEmail_throwsCommandException() {
+        Musician existingMusician = ALICE;
+        Musician musicianWithDuplicateEmail = new MusicianBuilder().withEmail(existingMusician.getEmail().toString())
+                .build();
+
+        // assert only email is duplicate
+        assert !existingMusician.getName().equals(musicianWithDuplicateEmail.getName())
+                : "Both musicians should not have same name";
+        assert !existingMusician.getPhone().equals(musicianWithDuplicateEmail.getPhone())
+                : "Both musicians should not have same phone";
+        assert existingMusician.getEmail().equals(musicianWithDuplicateEmail.getEmail())
+                : "Both musicians should have same email";
+
+        AddCommand addCommand = new AddCommand(musicianWithDuplicateEmail);
+        ModelStub modelStub = new ModelStubWithMusician(existingMusician);
+
+        assertThrows(CommandException.class,
+                AddCommand.MESSAGE_DUPLICATE_INFO, () -> addCommand.execute(modelStub));
+    }
+
+    @Test
     public void equals() {
         Musician alice = new MusicianBuilder().withName("Alice").build();
         Musician bob = new MusicianBuilder().withName("Bob").build();
@@ -230,6 +293,12 @@ public class AddCommandTest {
         public boolean hasMusician(Musician musician) {
             requireNonNull(musician);
             return this.musician.isSameMusician(musician);
+        }
+
+        @Override
+        public boolean hasDuplicateInfo(Musician musician) {
+            requireNonNull(musician);
+            return this.musician.hasSameInfo(musician);
         }
     }
 

@@ -78,10 +78,12 @@ public class AddCommandIntegrationTest {
         Musician newMusician = new MusicianBuilder().withName(musicianInList.getName().toString()).build();
 
         // assert only name is duplicate
-        assert musicianInList.getName().equals(newMusician.getName()) : "Both musicians should have same name";
+        assert musicianInList.getName().equals(newMusician.getName())
+                : "Both musicians should have same name";
         assert !musicianInList.getPhone().equals(newMusician.getPhone())
                 : "Both musicians should not have same phone";
-        assert !musicianInList.getEmail().equals(newMusician.getEmail()) : "Both musicians should not have same email";
+        assert !musicianInList.getEmail().equals(newMusician.getEmail())
+                : "Both musicians should not have same email";
 
         assertCommandFailure(new AddCommand(newMusician), model,
                 AddCommand.MESSAGE_DUPLICATE_MUSICIAN);
@@ -93,11 +95,13 @@ public class AddCommandIntegrationTest {
         Musician musicianInList = model.getAddressBook().getMusicianList().get(0);
         Musician newMusician = new MusicianBuilder().withPhone(musicianInList.getPhone().toString()).build();
 
-        // assert only name is duplicate
-        assert !musicianInList.getName().equals(newMusician.getName()) : "Both musicians should not have same name";
+        // assert only phone is duplicate
+        assert !musicianInList.getName().equals(newMusician.getName())
+                : "Both musicians should not have same name";
         assert musicianInList.getPhone().equals(newMusician.getPhone())
                 : "Both musicians should have same phone";
-        assert !musicianInList.getEmail().equals(newMusician.getEmail()) : "Both musicians should not have same email";
+        assert !musicianInList.getEmail().equals(newMusician.getEmail())
+                : "Both musicians should not have same email";
 
         assertCommandFailure(new AddCommand(newMusician), model,
                 AddCommand.MESSAGE_DUPLICATE_INFO);
@@ -110,10 +114,12 @@ public class AddCommandIntegrationTest {
         Musician newMusician = new MusicianBuilder().withEmail(musicianInList.getEmail().toString()).build();
 
         // assert only name is duplicate
-        assert !musicianInList.getName().equals(newMusician.getName()) : "Both musicians should not have same name";
+        assert !musicianInList.getName().equals(newMusician.getName())
+                : "Both musicians should not have same name";
         assert !musicianInList.getPhone().equals(newMusician.getPhone())
                 : "Both musicians should not have same phone";
-        assert musicianInList.getEmail().equals(newMusician.getEmail()) : "Both musicians should have same email";
+        assert musicianInList.getEmail().equals(newMusician.getEmail())
+                : "Both musicians should have same email";
 
         assertCommandFailure(new AddCommand(newMusician), model, AddCommand.MESSAGE_DUPLICATE_INFO);
     }
