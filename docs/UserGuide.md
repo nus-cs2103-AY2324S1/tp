@@ -351,12 +351,14 @@ Format: `delete INDEX`
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `list schedule` followed by :
-  * `delete 2` deletes the 2nd lesson in the schedule list.
-  * `find bedok` followed by `delete 1` deletes the 1st lesson in the results of the `find` command.
-* `list students` followed by :
-    * `delete 2` deletes the 2nd student in the contact list.
-    * `find Betsy` followed by `delete 1` deletes the 1st student in the results of the `find` command.
+* Example 1:
+  1. `list schedule` followed by :
+  2. `delete 2` deletes the 2nd lesson in the schedule list.
+  3. `find bedok` followed by `delete 1` deletes the 1st lesson in the results of the `find` command.
+* Example 2:
+  1. `list students` followed by :
+  2. `delete 2` deletes the 2nd student in the contact list.
+  3. `find Betsy` followed by `delete 1` deletes the 1st student in the results of the `find` command.
 
 
 Success Output:
