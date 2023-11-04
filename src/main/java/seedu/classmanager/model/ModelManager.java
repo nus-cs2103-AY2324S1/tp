@@ -102,6 +102,7 @@ public class ModelManager implements Model {
     public void toggleColorTheme() {
         userPrefs.toggleColorTheme();
     }
+
     //=========== ClassManager ================================================================================
 
     @Override
@@ -172,9 +173,6 @@ public class ModelManager implements Model {
     public void updateFilteredStudentList(Predicate<Student> predicate) {
         requireNonNull(predicate);
         filteredStudents.setPredicate(predicate);
-        if (!filteredStudents.isEmpty()) {
-            versionedClassManager.setSelectedStudent(filteredStudents.get(0));
-        }
     }
 
     /**
