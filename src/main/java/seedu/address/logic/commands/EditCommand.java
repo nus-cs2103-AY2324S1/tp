@@ -59,6 +59,8 @@ public class EditCommand extends UndoableCommand {
     public static final String MESSAGE_PERSON_NOT_FOUND = "INVALID name and/or NRIC!\n"
             + "The given combination of Name and/or NRIC does not match any person in the Patient list.";
 
+    public static final String MESSAGE_NO_CHANGE = "There are no changes in the editable fields provided.\n";
+
     private static final Logger logger = Logger.getLogger(EditCommand.class.getName());
 
     /**
@@ -103,6 +105,10 @@ public class EditCommand extends UndoableCommand {
 
         originalPerson = personToEdit;
         editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
+
+        if (originalPerson.equals(editedPerson)) {
+            throw new CommandException(MESSAGE_NO_CHANGE);
+        }
 
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
