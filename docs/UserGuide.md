@@ -216,7 +216,7 @@ Format: `addPerson -name NAME [-phone PHONE_NUMBER] [-email EMAIL] [-address ADD
 - A new student cannot have the same name as existing students in the contact list.
 - If the user is currently in list `STUDENTS`, the command can be shortened to `add`
 - For flags that can take multiple values (eg. -subject, -tag), separate the values with commas
-- Only subjects like MATHEMATICS, PHYSICS, BIOLOGY, CHEMISTRY, ENGLISH can be added.
+- Only MATHEMATICS, PHYSICS, BIOLOGY, CHEMISTRY, ENGLISH can be added as subjects.
 </box>
 
 Examples:
@@ -233,65 +233,33 @@ Examples:
 
 Edits an existing student in the application.
 
-Format: `editPerson INDEX [-name NAME] [-phone PHONE_NUMBER] [-email EMAIL] [-address ADDRESS] [-subject SUBJECT] [-tag TAG] [-remark REMARK]`
+Format: `editPerson INDEX [-name NAME] [-phone PHONE_NUMBER] [-email EMAIL] [-address ADDRESS] [-subject SUBJECT] [-tag TAG] [-remark REMARK]` <br>
 
 * Edits the student at the specified `INDEX`. The index refers to the index number shown in the displayed student list. The index **must be a positive integer** 1, 2, 3, …​
-* If the user is currently in list `STUDENTS`, the command can be shortened to `add`
+* If the user is currently in list `STUDENTS`, the command can be shortened to `edit INDEX`
+* If the user is currently in list `STUDENTS` with a student shown, the index can be omitted and the command can be shortened to `edit`. The shown student will be edited.
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * For flags that can take multiple values (eg. -subject, -tag), separate the values with commas
 * When editing subjects, tags and remarks, the existing subjects/tags/remarks of the student will be removed i.e. adding of subjects/tags/remarks is not cumulative.
 
 Examples:
-*  `editPerson 1 -phone 91234567 -email johndoe@example.com` Edits the phone number and email address of the 1st student to be `91234567` and `johndoe@example.com` respectively.
-*  `editPerson 2 -name Betsy Crower -tag Secondary` Edits the name of the 2nd student to be `Betsy Crower` and sets the tag to `Secondary`.
-*  `editPerson 3 -subject chemistry, biology` Sets the subjects of the 3rd student to be `CHEMISTRY` and `BIOLOGY`.
+*  `editPerson 1 -phone 91234567 -email johndoe@example.com` <br> Edits the phone number and email address of the 1st student to be `91234567` and `johndoe@example.com` respectively.
+*  `editPerson 2 -name Betsy Crower -tag Secondary`<br> Edits the name of the 2nd student to be `Betsy Crower` and sets the tag to `Secondary`.
+*  `editPerson 3 -subject chemistry, biology` <br> Sets the subjects of the 3rd student to be `CHEMISTRY` and `BIOLOGY`.
 * In list `STUDENTS`:
-  * `edit -name John -phone 91234567`
-  * `edit -name John -subject chemistry, english`
+  * `edit 1 -name John -phone 91234567` <br> Edits the name and phone number of the 1st student to be `John` and `91234567` respectively.
+* In list `STUDENTS` and 2nd student is shown:
+  * `edit -subject chemistry, english` <br> Edits the subject of the 2nd lesson to be `CHEMISTRY` and `ENGLISH`
 
-
-### Deleting a student/lesson : `delete`
-
-The delete command has different behaviours depending on the current list:
-
-1. In `STUDENTS` list:
-    - Deletes the specified student from the contact list in the application.
-2. In `SCHEDULE` list:
-    - Deletes the specified lesson from the lesson list in the application. 
-3. In `TASKS` list:
-    - the `delete` command is disabled. Adding and Deleting of Tasks can only be done in the `SCHEDULE` list via the `addTask` and `deleteTask` command.
-
-Format: `delete INDEX`
-
-* Deletes the student/lesson at the specified `INDEX`.
-* The index refers to the index number shown in the displayed student list.
-* The index **must be a positive integer** 1, 2, 3, …​
-
-Examples:
-* `list students` followed by :
-  * `delete 2` deletes the 2nd student in the contact list.
-  * `find Betsy` followed by `delete 1` deletes the 1st student in the results of the `find` command.
-
-* `list schedule` followed by :
-* `delete 2` deletes the 2nd lesson in the schedule list.
-
-Success Output:
-```
-Deleted Person: Alex Yeoh; Phone: 87438807; Email: alexyeoh@example.com; Address: Blk 30 Geylang Street 29, #06-40; Subjects: CHEMISTRYBIOLOGY; Tags: [friends]; Remark: ```
-```
-Failure Output:
-```
-Index out of bounds, expected 1 to 8 but got 10.
-```
 
 ### Adding a Lesson : `addLesson`
 
 Adds a lesson to the schedule list in application.
 
-Format: `addLesson -name NAME [-start HH:MM] [-end HH:MM] [-day YYYY/MM/DD] [-subject SUBJECT]`
-Format: `addLesson -name NAME [-start HH:MM] [-end HH:MM] [-day YY/MM/DD] [-subject SUBJECT]`
-Format: `addLesson -name NAME [-start HH:MM] [-end HH:MM] [-day MM/DD] [-subject SUBJECT]`
+Format: `addLesson -name NAME [-start HH:MM] [-end HH:MM] [-day YYYY/MM/DD] [-subject SUBJECT]` <br>
+Format: `addLesson -name NAME [-start HH:MM] [-end HH:MM] [-day YY/MM/DD] [-subject SUBJECT]`<br>
+Format: `addLesson -name NAME [-start HH:MM] [-end HH:MM] [-day MM/DD] [-subject SUBJECT]` <br>
 Note: If no year is specified, the year is assumed to be current year.
 <box type="tip" seamless>
 
@@ -317,6 +285,49 @@ Failure Output:
 ```
 Exist lesson clashes with this lesson: Lesson Chemistry Lesson at Bishan from 2:00 PM to 3:00 PM on 12-12-2023
 ```
+### Editing a lesson : `editLesson`
+
+Edits an existing lesson in the application.
+
+Format: `editLesson INDEX [-name NAME] [-start HH:MM] [-end HH:MM] [-day YYYY/MM/DD] [-subject SUBJECT]` <br>
+
+
+* Edits the lesson at the specified `INDEX`. The index refers to the index number shown in the displayed schedule list. The index **must be a positive integer** 1, 2, 3, …​
+* If the user is currently in list `SCHEDULE`, the command can be shortened to `edit INDEX`
+* If the user is currently in list `SCHEDULE` with a lesson shown, the index can be omitted and the command can be shortened to `edit`. The shown lesson will be edited.
+* At least one of the optional fields must be provided.
+* Existing values will be updated to the input values.
+* Start time cannot be after end time.
+* Editing the start and end time of a lesson that overlaps with another existing lesson is not allowed.
+* Editing the name of a lesson to a name of another existing lesson is not allowed.
+
+Examples:
+*  `editLesson 1 -name Lesson at Farrer Road -start 14:00 -end 15:00`<br> Edits the lesson name, start and end time of the 1st lesson to be `Lesson at Farrer Road`, `14:00` and `15:00` respectively.
+* In list `SCHEDULE`:
+  * `edit 2 -start 14:00 -end 15:00`
+  * `edit 2 -name Chemistry lesson at Bedok`
+* In list `SCHEDULE` and a lesson is shown:
+    * `edit -start 14:00 -end 15:00`
+    * `edit -day 2023/12/30`
+
+Success output:
+```
+Edit success.
+ from: Lesson Lesson Tai Seng from 8:00 AM to 10:00 AM on 21-12-2023 for PHYSICS
+ to: Lesson Lesson Tai Seng from 9:00 AM to 11:00 AM on 21-12-2023 for PHYSICS
+```
+Failure Output:
+```
+Invalid lesson format. Invalid lesson input:  is not a valid time. 
+Usage: addLesson -name [NAME] (any number of unique -[subject|day|start|end|remark] [value]). 
+ For example, addLesson -name John -subject English -day 23 -start 14:30 -end 16:30
+ If you are currently displaying schedule list, you could use 'add' inplace of 'addLesson'. 
+ Note you must provide a 'name' not already in the schedule and 'start' must be before 'end'.
+Usage: edit <Index> (at least one of -[name|subject|day|start|end|remark] [value]). 
+For example, edit 1 -name lesson2 -subject English -day 23/12 -start 14:30 -end 16:30
+If you want to edit the currently shown lesson, you could omit the index. 
+Note your edited 'name' must not already in the schedule and 'start' must be before 'end'.
+```
 
 ### Deleting a student/lesson : `delete`
 
@@ -341,7 +352,9 @@ Examples:
     * `find Betsy` followed by `delete 1` deletes the 1st student in the results of the `find` command.
 
 * `list schedule` followed by :
-* `delete 2` deletes the 2nd lesson in the schedule list.
+  * `delete 2` deletes the 2nd lesson in the schedule list.
+  * `find bedok` followed by `delete 1` deletes the 1st lesson in the results of the `find` command.
+
 
 Success Output:
 ```
@@ -351,7 +364,6 @@ Failure Output:
 ```
 Index out of bounds, expected 1 to 8 but got 10.
 ```
-
 
 ### Adding a task : `addTask`
 Adds a task to the specified lesson.
@@ -514,9 +526,9 @@ Action     | Format, Examples                                                   
 **Edit Person**   | `editPerson INDEX [-name NAME] [-phone PHONE_NUMBER] [-email EMAIL] [-address ADDRESS] [-tag TAG,…​`] [-subject SUBJECT,…​`]<br> e.g.,`edit 2 -name James Lee -email jameslee@example.com` |  ANY LIST
 **Add Lesson**    | `addLesson -name NAME [-start HH:MM] [-end HH:MM] [-day YYYY/MM/DD] [-subject SUBJECT]`                                                                                                    | ANY LIST
 **Edit Lesson**   | `editLesson INDEX [-start HH:MM] [-end HH:MM] [-day YYYY/MM/DD] [-subject SUBJECT]` <br> e.g.,`edit 2 -start 13:00 -end 14:00`                                                             |  ANY LIST
+**Delete Person/Lesson** | `delete INDEX`<br> e.g., `delete 3`   
 **Add Task**    | `addTask INDEX DESCRIPTION`                                                                                                                                                                | `SCHEDULE`
-**Delete Task** | `deleteTask INDEX`<br> e.g., `delete 3`                                                                                                                                                    | `SCHEDULE`, <br> `show LESSON_INDEX` has to be used prior to `deleteTask` command
-**Delete Person/Lesson** | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                        | `SCHEDULE`, `STUDENTS`
+**Delete Task** | `deleteTask INDEX`<br> e.g., `delete 3`                                                                                                                                                    | `SCHEDULE`, <br> `show LESSON_INDEX` has to be used prior to `deleteTask` command                                                                                                                                                     | `SCHEDULE`, `STUDENTS`
 **Find**   | `find mary`                                                                                                                                                                                | `SCHEDULE`, `STUDENTS`
 **Help**   | `help`                                                                                                                                                                                     | NA
 
