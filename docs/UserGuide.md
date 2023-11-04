@@ -91,7 +91,8 @@ Creates a tag and categorises it to the specified category.
 You can customize these categories as per your needs and tags will be 
 color coded by the different categories. 
 
-The only restriction is that you can only define up to 5 different categories (excluding the *assessment* category for score-related tags).
+The only restriction is that you can only define up to 6 different categories (including the *assessment* category for score-related tags. Hence if you have
+defined a tag category *assessment* for score-related tags, you will only be able to define 5 other categories).
 
 Format: `create t/CATEGORY TAGNAME…​`
 
@@ -353,7 +354,7 @@ Format: `search n/KEYWORD [MORE KEYWORDS]`
 
 Examples:
 * `search n/John` returns `john` and `John Doe`
-* `search n/david` returns `Alex Yeoh`, `David Li`<br>
+* `search n/alex david` returns `Alex Yeoh`, `David Li`<br>
 
 #### Search job applicants by status
 
