@@ -217,6 +217,7 @@ Format: `addPerson -name NAME [-phone PHONE_NUMBER] [-email EMAIL] [-address ADD
 - For flags that can take multiple values (eg. -subject, -tag), separate the values with commas.
 - Subjects can only be MATHEMATICS, PHYSICS, BIOLOGY, CHEMISTRY or ENGLISH.
 - Tags must be alphanumeric. '-', ',' and spaces are not allowed.
+- Duplicate phone numbers are allowed, since it is possible for 2 children to use their parent's number.
 </box>
 
 Examples:
