@@ -49,6 +49,7 @@ public class FlashcardBox extends UiPart<Region> {
     private Button reveal;
 
     private MainWindow mw;
+    private int index;
 
     /**
      * Creates a {@code FlashCard code} with the given {@code FlashCard} and index to display.
@@ -61,6 +62,7 @@ public class FlashcardBox extends UiPart<Region> {
         //@@author itsNatTan
         this.flashCard = fc;
         this.mw = mw;
+        this.index = displayedIndex;
         id.setText(displayedIndex + ") ");
         original.setText(fc.getOriginalWord().toString() + ": ");
         if (fc.getIsRevealed()) {
@@ -100,11 +102,11 @@ public class FlashcardBox extends UiPart<Region> {
     public void toggleReveal() throws CommandException, ParseException {
         if (flashCard.getIsRevealed()) {
             translation.setText("");
-            this.mw.executeCommand("reveal");
+            this.mw.executeCommand("reveal " + index);
             reveal.setText("Reveal");
         } else {
             translation.setText(flashCard.getTranslatedWord().toString());
-            this.mw.executeCommand("reveal");
+            this.mw.executeCommand("reveal " + index);
             reveal.setText(" Hide ");
         }
     }
