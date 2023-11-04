@@ -497,7 +497,7 @@ Format: `help`
 #### Clearing all applicant entries: `clear`
 
 After typing `clear`, system asks the user to confirm clearing. If user types `yes` and clicks enter, 
-all the current data stored in the system is the cleared. 
+all the current data stored in the system is then cleared. 
 Else, typing in anything else then pressing enter will cancel the clear process. 
 
 Format: `clear`
