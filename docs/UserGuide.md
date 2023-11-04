@@ -8,8 +8,8 @@ online dating journey.
 <!-- * Table of Contents -->
 <page-nav-print />
 
-- [Quick Start](#1-quick-start)
-- [Features](#2-features)
+- [Quick Start](#quick-start)
+- [Features](#features)
     - [Creation of new date: `add`](#creation-of-new-date)
     - [Getting a recommended date: `bestMatch`](#getting-a-best-match)
     - [Blind Date Generator: `blindDate`](#blind-date-generator)
@@ -26,21 +26,20 @@ online dating journey.
     - [Sorting list of dates by Metric: `sort`](#sorting-date-list)
     - [Star a date: `star`](#star-a-date)
     - [Unstar a date: `unstar`](#unstar-a-date)
-- [FAQ](#3-faq)
-- [Summary](#4-summary)
-- [Glossary](#5-glossary)
+- [FAQ](#faq)
+- [Command Summary](#command-summary)
+- [Glossary](#glossary)
 
 --------------------------------------------------------------------------------------------------------------------
 
-# 1 [Quick start](#1-quick-start)
+# 1 [Quick start](#quick-start)
 
 1. Ensure that you have Java `11` or above installed in your Computer.
 
 2. Download the latest `LoveBook.jar` from [here](https://github.com/AY2324S1-CS2103T-F10-2/tp).
 
 3. Double-click the file to start the app. The window that appears will be similar to the below should appear in a few
-   seconds. Note how
-   the app contains some sample information.<br>
+   seconds.<br>
    ![Ui](images/Ui.png)
    *Figure 1: A view of LoveBook at startup*
 
@@ -56,7 +55,7 @@ online dating journey.
 
 --------------------------------------------------------------------------------------------------------------------
 
-# 2 [Features](#2-features)
+# 2 [Features](#features)
 
 **Notes about the command format:**<br>
 
@@ -70,22 +69,24 @@ online dating journey.
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines
   as space characters surrounding line-breaks may be omitted when copied over to the application.
 
-<div markdown="span" class="alert alert-info">:information_source: **Parameter Constraints:**
-
-* `name` should be a non non-empty string.
-* `age` should be a positive integer between 18 and 150 (inclusive).
-* `gender` should be either M or F.
-* `horoscope` should be a valid zodiac sign.
-* `income` (per month) should be a positive integer in SGD.
-* `height` should be a positive integer in cm between 100cm and 250cm (inclusive).
-
-</div>
+<box type="info">
+    * `name` should be a non-empty string.
+    * `age` should be a positive integer between 18 and 150 (inclusive).
+    * `gender` should be either M or F.
+    * `horoscope` should be a valid zodiac sign.
+    * `income` (per month) should be a positive integer in SGD.
+    * `height` should be a positive integer in cm between 100cm and 250cm (inclusive).
+</box>
 
 ### [Creation of new date: `add`](#creation-of-new-date)
 
 Adds a date to the LoveBook.
 
 Format: `add name/NAME age/AGE gender/GENDER height/HEIGHT horoscope/HOROSCOPE income/INCOME`
+
+<box type="tip" seamless>
+    Parameters in the add command can be in any order.
+</box>
 
 Example: `add name/Cleon age/22 gender/F height/176 horoscope/Taurus income/3000`
 
@@ -105,9 +106,9 @@ Expected Output: `List the most compatible date`
 
 Output if error: `No dates found!`
 
-### [Random Date Generator: `blindDate`](#blind-date-generator)
+### [Blind Date Generator: `blindDate`](#blind-date-generator)
 
-Filters out a blindDate.
+Outputs a blind date from the LoveBook.
 
 Format: `blindDate`
 
@@ -282,11 +283,9 @@ Expected output: `Starred Date: John Doe; Age: 21; Gender: F; Height: 245; Incom
 Output if error:
 `The date index provided is invalid`
 
-<div markdown="span" class="alert alert-info">:information_source: **Info:**
-
+<box type="info">
 * If Date is already starred, it will display the output `Date has already been starred`
-
-</div>
+</box>
 
 ### [Unstar a date: `unstar`](#unstar-a-date)
 
@@ -301,15 +300,13 @@ Expected output: `Unstarred Date: John Doe; Age: 21; Gender: M; Height: 123; Inc
 Output if error:
 `The date index provided is invalid`
 
-<div markdown="span" class="alert alert-info">:information_source: **Info:**
-
-* If Date is already unstarred, it will display the output `Date has already been unstarred`
-
-</div>
+<box type="info">
+    If Date is already unstarred, it will display the output `Date has already been unstarred`
+</box>
 
 --------------------------------------------------------------------------------------------------------------------
 
-# 3 [FAQ](#3-faq)
+# 3 [FAQ](#faq)
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file with the file that
@@ -327,7 +324,7 @@ your data. In the event of a power outage, all your data will be safe.
 
 --------------------------------------------------------------------------------------------------------------------
 
-# 4 [Summary](#4-summary)
+# 4 [Command Summary](#command-summary)
 
 | Action                         | Format                                                                                | Examples                                                               |
 |--------------------------------|---------------------------------------------------------------------------------------|------------------------------------------------------------------------|
@@ -335,16 +332,16 @@ your data. In the event of a power outage, all your data will be safe.
 | Deletion of dates              | `delete INDEX`                                                                        | `delete 2`                                                             |
 | Creation of new date           | `add name/NAME age/AGE gender/GENDER height/HEIGHT horoscope/HOROSCOPE income/INCOME` | `add name/John age/25 gender/M height/175 horoscope/Aries income/5000` |
 | Edit existing dates            | `edit INDEX METRIC/NEW ARG`                                                           | `edit 3 name/Cleon`                                                    |
-| Random Date Generator          | `random`                                                                              | `random`                                                               |
+| Blind Date Generator           | `blindDate`                                                                           | `random`                                                               |
 | Filter by Metric               | `filter METRIC/ARG`                                                                   | `filter name/Cleon`                                                    |
 | Sorting list of dates          | `sort METRIC/ORDER`                                                                   | `sort name/increasing`                                                 |
-| Getting a recommended date     | `match`                                                                               | `match`                                                                |
+| Getting a recommended date     | `bestMatch`                                                                           | `match`                                                                |
 | Setting the matching algorithm | `setP gender/GENDER age/AGE height/HEIGHT income/INCOME`                              | `setP gender/M age/22 height/180 income/2000`                          |
 | Star a date                    | `star INDEX`                                                                          | `star 1`                                                               |
 | Unstar a date                  | `unstar INDEX`                                                                        | `unstar 1`                                                             |
 
 --------------------------------------------------------------------------------------------------------------------
 
-# 5 [Glossary](#5-glossary)
+# 5 [Glossary](#glossary)
 
 ### Mainstream OS: Windows, Linux, Unix, OS-X.
