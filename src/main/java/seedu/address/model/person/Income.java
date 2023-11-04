@@ -5,17 +5,17 @@ package seedu.address.model.person;
  */
 public class Income {
 
-    public static final String MESSAGE_CONSTRAINTS = "Income should only contain numbers "
+    public static final String MESSAGE_CONSTRAINTS = "Income should only contain integers "
             + "and it should not be blank";
 
-    public final Number value;
+    public final Integer value;
 
     /**
     * Constructs a {@code Income}.
     *
     * @param income A valid income.
     */
-    public Income(Number income) {
+    public Income(Integer income) {
         value = income;
     }
 
@@ -24,7 +24,7 @@ public class Income {
     */
     public static boolean isValidIncome(String test) {
         try {
-            Double.parseDouble(test);
+            Integer.parseInt(test);
             return true;
         } catch (NumberFormatException e) {
             return false;
