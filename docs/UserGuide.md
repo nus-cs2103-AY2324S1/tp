@@ -8,8 +8,8 @@ online dating journey.
 <!-- * Table of Contents -->
 <page-nav-print />
 
-- [Quick Start](#1-quick-start)
-- [Features](#2-features)
+- [Quick Start](#quick-start)
+- [Features](#features)
     - [Creation of new date: `add`](#creation-of-new-date)
     - [Getting a recommended date: `bestMatch`](#getting-a-best-match)
     - [Blind Date Generator: `blindDate`](#blind-date-generator)
@@ -26,13 +26,13 @@ online dating journey.
     - [Sorting list of dates by Metric: `sort`](#sorting-date-list)
     - [Star a date: `star`](#star-a-date)
     - [Unstar a date: `unstar`](#unstar-a-date)
-- [FAQ](#3-faq)
-- [Summary](#4-summary)
-- [Glossary](#5-glossary)
+- [FAQ](#faq)
+- [Command Summary](#command-summary)
+- [Glossary](#glossary)
 
 --------------------------------------------------------------------------------------------------------------------
 
-# 1 [Quick start](#1-quick-start)
+# 1 [Quick start](#quick-start)
 
 1. Ensure that you have Java `11` or above installed in your Computer.
 
@@ -56,7 +56,7 @@ online dating journey.
 
 --------------------------------------------------------------------------------------------------------------------
 
-# 2 [Features](#2-features)
+# 2 [Features](#features)
 
 **Notes about the command format:**<br>
 
@@ -307,7 +307,7 @@ Output if error:
 
 --------------------------------------------------------------------------------------------------------------------
 
-# 3 [FAQ](#3-faq)
+# 3 [FAQ](#faq)
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file with the file that
@@ -325,7 +325,7 @@ your data. In the event of a power outage, all your data will be safe.
 
 --------------------------------------------------------------------------------------------------------------------
 
-# 4 [Summary](#4-summary)
+# 4 [Command Summary](#command-summary)
 
 | Action                         | Format                                                                                | Examples                                                               |
 |--------------------------------|---------------------------------------------------------------------------------------|------------------------------------------------------------------------|
@@ -343,6 +343,6 @@ your data. In the event of a power outage, all your data will be safe.
 
 --------------------------------------------------------------------------------------------------------------------
 
-# 5 [Glossary](#5-glossary)
+# 5 [Glossary](#glossary)
 
 ### Mainstream OS: Windows, Linux, Unix, OS-X.
