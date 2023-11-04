@@ -1,6 +1,7 @@
 package seedu.flashlingo.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static seedu.flashlingo.logic.Messages.MESSAGE_CONSTRAINTS;
 import static seedu.flashlingo.storage.JsonAdaptedFlashCard.DATE_PATTERN;
 import static seedu.flashlingo.storage.JsonAdaptedFlashCard.INVALID_DATE_FORMAT_MESSAGE;
 import static seedu.flashlingo.storage.JsonAdaptedFlashCard.MISSING_FIELD_MESSAGE_FORMAT;
@@ -44,7 +45,7 @@ public class JsonAdaptedFlashCardTest {
         JsonAdaptedFlashCard flashCard =
                 new JsonAdaptedFlashCard(VALID_ORIGINAL_WORD, INVALID_ORIGINAL_WORD_LANGUAGE, VALID_TRANSLATED_WORD,
                         VALID_TRANSLATED_WORD_LANGUAGE, VALID_WHEN_TO_REVIEW, VALID_LEVEL);
-        String expectedMessage = OriginalWord.MESSAGE_CONSTRAINTS;
+        String expectedMessage = MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, flashCard::toModelType);
     }
 
@@ -61,7 +62,7 @@ public class JsonAdaptedFlashCardTest {
         JsonAdaptedFlashCard flashCard =
                 new JsonAdaptedFlashCard(VALID_ORIGINAL_WORD, VALID_ORIGINAL_WORD_LANGUAGE, VALID_TRANSLATED_WORD,
                         INVALID_TRANSLATED_WORD_LANGUAGE, VALID_WHEN_TO_REVIEW, VALID_LEVEL);
-        String expectedMessage = TranslatedWord.MESSAGE_CONSTRAINTS;
+        String expectedMessage = MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, flashCard::toModelType);
     }
 

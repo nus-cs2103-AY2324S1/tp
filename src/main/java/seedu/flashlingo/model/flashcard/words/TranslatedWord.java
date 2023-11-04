@@ -61,7 +61,7 @@ public class TranslatedWord extends Word {
             return false;
         }
         TranslatedWord otherTranslatedWord = (TranslatedWord) other;
-        return getWord().equals(otherTranslatedWord.getWord())
-                && getLanguage().equals(otherTranslatedWord.getLanguage());
+        return getWord().equalsIgnoreCase(otherTranslatedWord.getWord())
+                && getLanguage().equalsIgnoreCase(otherTranslatedWord.getLanguage());
     }
 }

@@ -12,6 +12,8 @@ import seedu.flashlingo.model.flashcard.FlashCard;
  */
 public class Messages {
 
+    public static final String MESSAGE_CONSTRAINTS =
+            "Languages should only contain alphanumeric characters and spaces, and it should not be blank";
     public static final String MESSAGE_UNKNOWN_COMMAND = "Unknown command";
     public static final String MESSAGE_EMPTY_VALUE = "Word/Translation cannot be empty";
     public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format! \n%1$s";
@@ -26,6 +28,7 @@ public class Messages {
     public static final String MESSAGE_NOT_IN_REVIEW_SESSION = "You are not in a review session.";
     public static final String MESSAGE_OPEN_FILE_FAIL = "File not found or accessible.";
     public static final String MESSAGE_READ_FILE_FAIL = "File cannot be read due to invalid content or format.";
+    public static final String MESSAGE_SAME_WORD = "Word and translation should be different.";
 
     /**
      * Returns an error message indicating the duplicate prefixes.

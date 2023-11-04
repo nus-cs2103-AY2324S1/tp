@@ -28,8 +28,7 @@ public class ReviewCommand extends Command {
         requireNonNull(model);
         model.updateFilteredFlashCardList(predicate);
         return new CommandResult(MESSAGE_SUCCESS + "\n"
-                + String.format(Messages.MESSAGE_FLASHCARDS_LISTED_OVERVIEW + "\n"
-                        + model.getFilteredFlashCardList(),
+                + String.format(Messages.MESSAGE_FLASHCARDS_LISTED_OVERVIEW + "\n",
                 model.getFilteredFlashCardList().size()));
     }
 
