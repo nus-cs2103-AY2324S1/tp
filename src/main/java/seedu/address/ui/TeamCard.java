@@ -29,7 +29,6 @@ public class TeamCard extends UiPart<Region> {
      */
 
     public final Team team;
-
     private ObservableList<Person> memberList;
 
     @FXML
