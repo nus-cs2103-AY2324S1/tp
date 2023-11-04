@@ -11,7 +11,7 @@ import java.time.format.DateTimeParseException;
 public class BookingPeriod {
 
     public static final String MESSAGE_CONSTRAINTS = "Booking periods must be in the format 'YYYY-MM-DD HH:MM to "
-            + "YYYY-MM-DD HH:MM', and the end datetime must be after or equal to the start datetime.";
+            + "YYYY-MM-DD HH:MM', and the end datetime must be after to the start datetime.";
 
     public static final String VALIDATION_REGEX = "^\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2} to"
             + " \\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}$";
@@ -59,7 +59,8 @@ public class BookingPeriod {
         LocalDateTime endDateTime = LocalDateTime.parse(dateTimeParts[1], dateTimeFormatter);
 
         return isValidDate(dateTimeParts[0]) && isValidDate(dateTimeParts[1])
-                && !endDateTime.isBefore(startDateTime);
+                && !endDateTime.isBefore(startDateTime)
+                && !startDateTime.equals(endDateTime);
     }
 
     /**
@@ -179,9 +180,7 @@ public class BookingPeriod {
             return false;
         }
         assert checkInDateTime != null && checkOutDateTime != null;
-        //A period A overlaps with another period B if:
-        // A does not end before B OR B does not end before A.
-        return !(checkInDateTime.isAfter(other.checkOutDateTime) || checkOutDateTime.isBefore(other.checkInDateTime));
+        return checkInDateTime.isBefore(other.checkOutDateTime) && checkOutDateTime.isAfter(other.checkInDateTime);
     }
 
     /**

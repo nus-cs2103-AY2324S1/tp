@@ -111,12 +111,16 @@ public class Booking {
      * This defines a weaker notion of equality between two bookings.
      *
      * @param otherBooking The other booking to compare.
-     * @return True if both bookings have the same name and room, false otherwise.
+     * @return True if both bookings have the same room with overlapping time, false otherwise.
      */
-    public boolean isSameBooking(Booking otherBooking) {
+    public boolean isOverlapBooking(Booking otherBooking) {
+        if (otherBooking == this) {
+            return true;
+        }
+
         return otherBooking != null
                 && otherBooking.getRoom().equals(this.getRoom())
-                && otherBooking.getName().equals(this.getName());
+                && otherBooking.getBookingPeriod().overlaps(getBookingPeriod());
     }
 
     /**

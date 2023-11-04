@@ -3,7 +3,6 @@ package seedu.address.model.booking;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_BOOKING_PERIOD_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
@@ -40,14 +39,6 @@ public class UniqueBookingListTest {
     public void contains_personInList_returnsTrue() {
         uniqueBookingList.add(ALICE);
         assertTrue(uniqueBookingList.contains(ALICE));
-    }
-
-    @Test
-    public void contains_personWithSameIdentityFieldsInList_returnsTrue() {
-        uniqueBookingList.add(ALICE);
-        Booking editedAlice = new BookingBuilder(ALICE).withBookingPeriod(VALID_BOOKING_PERIOD_BOB)
-                .build();
-        assertTrue(uniqueBookingList.contains(editedAlice));
     }
 
     @Test
@@ -197,12 +188,6 @@ public class UniqueBookingListTest {
         uniqueBookingList.add(ALICE);
         assertThrows(DuplicateBookingException.class, () -> uniqueBookingList.setBookings(Arrays.asList(ALICE,
                 BOB, BOB)));
-    }
-
-    @Test
-    public void setPersons_listWithInvalidBooking_throwsDuplicatePersonException() {
-        assertThrows(DuplicateBookingException.class, () -> uniqueBookingList.setBookings(Arrays.asList(ALICE, BOB,
-                new BookingBuilder(BOB).withBookingPeriod("2023-02-20 12:00 to 2023-02-20 14:00").build())));
     }
 
     @Test

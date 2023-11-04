@@ -185,7 +185,7 @@ public class AddCommandTest {
         @Override
         public boolean hasBooking(Booking booking) {
             requireNonNull(booking);
-            return this.booking.isSameBooking(booking);
+            return this.booking.isOverlapBooking(booking);
         }
     }
 
@@ -198,7 +198,7 @@ public class AddCommandTest {
         @Override
         public boolean hasBooking(Booking booking) {
             requireNonNull(booking);
-            return personsAdded.stream().anyMatch(booking::isSameBooking);
+            return personsAdded.stream().anyMatch(booking::isOverlapBooking);
         }
 
         @Override

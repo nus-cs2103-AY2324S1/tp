@@ -107,7 +107,7 @@ public class EditCommand extends Command {
         Booking bookingToEdit = lastShownList.get(index.getZeroBased());
         Booking editedBooking = createEditedBooking(bookingToEdit, editRoomDescriptor);
 
-        if (!bookingToEdit.isSameBooking(editedBooking) && model.hasBooking(editedBooking)) {
+        if (!bookingToEdit.isOverlapBooking(editedBooking) && model.hasBooking(editedBooking)) {
             throw new CommandException(MESSAGE_DUPLICATE_BOOKING);
         }
 

@@ -3,7 +3,6 @@ package seedu.address.model;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_BOOKING_PERIOD_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
@@ -68,14 +67,6 @@ public class AddressBookTest {
     public void hasPerson_personInAddressBook_returnsTrue() {
         addressBook.addBooking(ALICE);
         assertTrue(addressBook.hasBooking(ALICE));
-    }
-
-    @Test
-    public void hasPerson_personWithSameIdentityFieldsInAddressBook_returnsTrue() {
-        addressBook.addBooking(ALICE);
-        Booking editedAlice = new BookingBuilder(ALICE).withBookingPeriod(VALID_BOOKING_PERIOD_BOB)
-                .build();
-        assertTrue(addressBook.hasBooking(editedAlice));
     }
 
     @Test

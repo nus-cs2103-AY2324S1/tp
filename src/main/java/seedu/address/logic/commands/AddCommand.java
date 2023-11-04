@@ -47,7 +47,7 @@ public class AddCommand extends Command {
             "98765432", "johnd@example.com", "Requested extra Queen's sized bed");
 
     public static final String MESSAGE_SUCCESS = "New booking added: %1$s";
-    public static final String MESSAGE_DUPLICATE_BOOKING = "This booking already exists in the bookings book";
+    public static final String MESSAGE_DUPLICATE_BOOKING = "This booking overlaps with existing booking";
 
     private final Booking toAdd;
 
