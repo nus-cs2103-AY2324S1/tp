@@ -27,7 +27,6 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Nric;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
-import seedu.address.model.tag.Tag;
 
 /**
  * Edits the details of an existing person in the address book.
@@ -137,10 +136,9 @@ public class EditCommand extends UndoableCommand {
                 .orElse(personToEdit.getAppointment().orElse(null));
         Set<MedicalHistory> updatedMedicalHistories =
                 editPersonDescriptor.getMedicalHistories().orElse((personToEdit.getMedicalHistories()));
-        Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 
         return new Person(name, nric, updatedPhone, updatedEmail, updatedAddress,
-                updatedAppointment, updatedMedicalHistories, updatedTags);
+                updatedAppointment, updatedMedicalHistories);
     }
 
     @Override
@@ -188,13 +186,11 @@ public class EditCommand extends UndoableCommand {
         private Appointment appointment;
 
         private Set<MedicalHistory> medicalHistories;
-        private Set<Tag> tags;
 
         public EditPersonDescriptor() {}
 
         /**
          * Copy constructor.
-         * A defensive copy of {@code tags} is used internally.
          */
         public EditPersonDescriptor(EditPersonDescriptor toCopy) {
             setName(toCopy.name);
@@ -204,7 +200,6 @@ public class EditCommand extends UndoableCommand {
             setAddress(toCopy.address);
             setAppointment(toCopy.appointment);
             setMedicalHistories(toCopy.medicalHistories);
-            setTags(toCopy.tags);
         }
 
 
@@ -273,23 +268,6 @@ public class EditCommand extends UndoableCommand {
                     ? Optional.of(Collections.unmodifiableSet(medicalHistories)) : Optional.empty();
         }
 
-        /**
-         * Sets {@code tags} to this object's {@code tags}.
-         * A defensive copy of {@code tags} is used internally.
-         */
-        public void setTags(Set<Tag> tags) {
-            this.tags = (tags != null) ? new HashSet<>(tags) : null;
-        }
-
-        /**
-         * Returns an unmodifiable tag set, which throws {@code UnsupportedOperationException}
-         * if modification is attempted.
-         * Returns {@code Optional#empty()} if {@code tags} is null.
-         */
-        public Optional<Set<Tag>> getTags() {
-            return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
-        }
-
         @Override
         public boolean equals(Object other) {
             if (other == this) {
@@ -308,15 +286,14 @@ public class EditCommand extends UndoableCommand {
                     && Objects.equals(email, otherEditPersonDescriptor.email)
                     && Objects.equals(address, otherEditPersonDescriptor.address)
                     && Objects.equals(appointment, otherEditPersonDescriptor.appointment)
-                    && Objects.equals(medicalHistories, otherEditPersonDescriptor.medicalHistories)
-                    && Objects.equals(tags, otherEditPersonDescriptor.tags);
+                    && Objects.equals(medicalHistories, otherEditPersonDescriptor.medicalHistories);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(phone, email, address, medicalHistories, tags, appointment);
+            return CollectionUtil.isAnyNonNull(phone, email, address, medicalHistories, appointment);
         }
 
         @Override
@@ -329,7 +306,6 @@ public class EditCommand extends UndoableCommand {
                     .add("address", address)
                     .add("appointment", appointment)
                     .add("medicalHistories", medicalHistories)
-                    .add("tags", tags)
                     .toString();
         }
     }

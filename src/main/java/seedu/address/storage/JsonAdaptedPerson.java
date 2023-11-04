@@ -20,7 +20,6 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.enums.InputSource;
 import seedu.address.model.person.exceptions.BadAppointmentFormatException;
-import seedu.address.model.tag.Tag;
 
 /**
  * Jackson-friendly version of {@link Person}.
@@ -36,7 +35,6 @@ class JsonAdaptedPerson {
     private final String address;
     private final String appointment;
     private final List<JsonAdaptedMedicalHistory> medicalHistories = new ArrayList<>();
-    private final List<JsonAdaptedTag> tags = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
@@ -45,8 +43,7 @@ class JsonAdaptedPerson {
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("nric") String nric,
                              @JsonProperty("phone") String phone, @JsonProperty("email") String email,
                              @JsonProperty("address") String address, @JsonProperty("appointment") String appointment,
-                             @JsonProperty("medicalHistories") List<JsonAdaptedMedicalHistory> medicalHistories,
-                             @JsonProperty("tags") List<JsonAdaptedTag> tags) {
+                             @JsonProperty("medicalHistories") List<JsonAdaptedMedicalHistory> medicalHistories) {
         this.name = name;
         this.nric = nric;
         this.phone = phone;
@@ -56,9 +53,6 @@ class JsonAdaptedPerson {
         if (medicalHistories != null) {
             this.medicalHistories.addAll(medicalHistories);
         }
-        if (tags != null) {
-            this.tags.addAll(tags);
-        }
     }
 
     /**
@@ -67,15 +61,11 @@ class JsonAdaptedPerson {
     public JsonAdaptedPerson(String name,
                              String phone,
                              String email,
-                             String address,
-                             List<JsonAdaptedTag> tags) {
+                             String address) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
-        if (tags != null) {
-            this.tags.addAll(tags);
-        }
         this.nric = null;
         this.appointment = null;
     }
@@ -97,9 +87,6 @@ class JsonAdaptedPerson {
         medicalHistories.addAll(source.getMedicalHistories().stream()
                 .map(JsonAdaptedMedicalHistory::new)
                 .collect(Collectors.toList()));
-        tags.addAll(source.getTags().stream()
-                .map(JsonAdaptedTag::new)
-                .collect(Collectors.toList()));
     }
 
     /**
@@ -108,10 +95,6 @@ class JsonAdaptedPerson {
      * @throws IllegalValueException if there were any data constraints violated in the adapted person.
      */
     public Person toModelType() throws IllegalValueException {
-        final List<Tag> personTags = new ArrayList<>();
-        for (JsonAdaptedTag tag : tags) {
-            personTags.add(tag.toModelType());
-        }
         final List<MedicalHistory> personMedicalHistory = new ArrayList<>();
         for (JsonAdaptedMedicalHistory medicalHistory : medicalHistories) {
             personMedicalHistory.add(medicalHistory.toModelType());
@@ -148,7 +131,6 @@ class JsonAdaptedPerson {
             throw new IllegalValueException(Address.MESSAGE_CONSTRAINTS);
         }
         final Address modelAddress = new Address(address);
-        final Set<Tag> modelTags = new HashSet<>(personTags);
 
         if (nric == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Nric.class.getSimpleName()));
@@ -172,7 +154,7 @@ class JsonAdaptedPerson {
         }
 
         return new Person(modelName, modelNric, modelPhone, modelEmail, modelAddress, modelAppointment,
-                modelMedicalHistories, modelTags);
+                modelMedicalHistories);
     }
 
 }

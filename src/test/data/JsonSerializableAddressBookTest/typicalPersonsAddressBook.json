@@ -8,7 +8,6 @@
     "address" : "123, Jurong West Ave 6, #08-111",
     "appointment": "12-Dec-2023, 12:00, 15:00",
     "medicalHistories": [ "tachycardia" ],
-    "tags" : [ "friends" ]
   }, {
     "name" : "Benson Meier",
     "nric": "S1234567B",
@@ -17,7 +16,6 @@
     "address" : "311, Clementi Ave 2, #02-25",
     "appointment": "12-Dec-2023, 12:00, 15:00",
     "medicalHistories": [ "diabetes", "high-risk" ],
-    "tags" : [ "owesMoney", "friends" ]
   }, {
     "name" : "Carl Kurz",
     "nric": "S8765432B",
@@ -26,7 +24,6 @@
     "address" : "wall street",
     "appointment": "01-Jan-2023, 10:00, 12:00",
     "medicalHistories": [ "O= Blood Type" ],
-    "tags" : [ ]
   }, {
     "name" : "Daniel Meier",
     "nric": "T1234567I",
@@ -35,7 +32,6 @@
     "address" : "10th street",
     "appointment": "01-Jan-2023, 10:00, 12:00",
     "medicalHistories": [ ],
-    "tags" : [ "friends" ]
   }, {
     "name" : "Elle Meyer",
     "nric": "T1111111Z",
@@ -44,7 +40,6 @@
     "address" : "michegan ave",
     "appointment": "10-Jan-2023, 10:00, 12:00",
     "medicalHistories": [ ],
-    "tags" : [ ]
   }, {
     "name" : "Fiona Kunz",
     "nric": "M2222222Z",
@@ -53,7 +48,6 @@
     "address" : "little tokyo",
     "appointment": "10-Jan-2023, 10:00, 12:00",
     "medicalHistories": [ ],
-    "tags" : [ ]
   }, {
     "name" : "George Best",
     "nric": "T7243948H",
@@ -62,6 +56,5 @@
     "address" : "4th street",
     "appointment": "12-Dec-2023, 12:00, 15:00",
     "medicalHistories": [ ],
-    "tags" : [ ]
   } ]
 }

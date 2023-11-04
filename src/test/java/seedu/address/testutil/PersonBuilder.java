@@ -13,7 +13,6 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.enums.InputSource;
 import seedu.address.model.person.exceptions.BadAppointmentFormatException;
-import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
 /**
@@ -35,7 +34,6 @@ public class PersonBuilder {
     private Address address;
     private Appointment appointment;
     private Set<MedicalHistory> medicalHistories;
-    private Set<Tag> tags;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -53,7 +51,6 @@ public class PersonBuilder {
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
         medicalHistories = new HashSet<>();
-        tags = new HashSet<>();
     }
 
     /**
@@ -67,7 +64,6 @@ public class PersonBuilder {
         address = personToCopy.getAddress();
         medicalHistories = new HashSet<>(personToCopy.getMedicalHistories());
         appointment = personToCopy.getAppointment().isPresent() ? personToCopy.getAppointment().get() : null;
-        tags = new HashSet<>(personToCopy.getTags());
     }
 
     /**
@@ -108,14 +104,6 @@ public class PersonBuilder {
     }
 
     /**
-     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Person} that we are building.
-     */
-    public PersonBuilder withTags(String... tags) {
-        this.tags = SampleDataUtil.getTagSet(tags);
-        return this;
-    }
-
-    /**
      * Sets the {@code Address} of the {@code Person} that we are building.
      */
     public PersonBuilder withAddress(String address) {
@@ -144,7 +132,7 @@ public class PersonBuilder {
      */
     public Person build() {
         return new Person(name, nric, phone, email, address,
-                appointment, medicalHistories, tags);
+                appointment, medicalHistories);
     }
 
     /**
