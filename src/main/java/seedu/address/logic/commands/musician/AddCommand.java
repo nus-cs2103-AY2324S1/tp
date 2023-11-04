@@ -61,7 +61,7 @@ public class AddCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_MUSICIAN);
         }
 
-        if (model.hasDuplicateInfo(toAdd)) {
+        if (model.hasDuplicateInfo(null, toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_INFO);
         }
 

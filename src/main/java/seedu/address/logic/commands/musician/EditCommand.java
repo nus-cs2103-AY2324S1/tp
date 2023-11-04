@@ -54,6 +54,7 @@ public class EditCommand extends Command {
     public static final String MESSAGE_EDIT_MUSICIAN_SUCCESS = "Edited Musician: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_MUSICIAN = "This musician already exists in the address book.";
+    public static final String MESSAGE_DUPLICATE_INFO = "Phone number or email already exists in your contact list!";
 
     private final Index index;
     private final EditMusicianDescriptor editMusicianDescriptor;
@@ -84,6 +85,10 @@ public class EditCommand extends Command {
 
         if (!musicianToEdit.isSameMusician(editedMusician) && model.hasMusician(editedMusician)) {
             throw new CommandException(MESSAGE_DUPLICATE_MUSICIAN);
+        }
+
+        if (model.hasDuplicateInfo(musicianToEdit, editedMusician)) {
+            throw new CommandException(MESSAGE_DUPLICATE_INFO);
         }
 
         // update musician list to show all, update band list to show all, update bands musicians
