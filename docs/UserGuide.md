@@ -166,7 +166,22 @@ Click [here](#table-of-contents) to go back to contents.
 
 
 ### Find developer
+#### What this command does:
+* Finds persons whose names contain any of the given keywords.
 
+Format: find KEYWORD 
+
+ - The search is case-insensitive. e.g hans will match Hans
+ - The order of the keywords does not matter. e.g. Hans Bo will match Bo Hans
+ - Only the name is searched.
+ - Only full words will be matched e.g. Han will not match Hans
+ - Persons matching at least one keyword will be returned (i.e. OR search). e.g. Hans Bo will return Hans Gruber, Bo Yang
+   
+Examples:
+
+ - find John returns john and John Doe
+ - find alex david returns Alex Yeoh, David Li
+   ![Find](images/Find.png)
 ### List developers
 #### What this command does:
 * Show only the list of all developers in the project.
