@@ -2,7 +2,7 @@ package seedu.application.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
-import seedu.application.model.ApplicationBook;Fix
+import seedu.application.model.ApplicationBook;
 import seedu.application.model.Model;
 
 /**
