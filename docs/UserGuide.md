@@ -582,9 +582,9 @@ This feature involves only 1 command: `find`, which list contacts whose fields m
 
 Format: `find FIND_EXPRESSION`
 
-Find expressions have a low barrier to entry that allows for simple filtering by field. This basic filtering for contacts is likely sufficient for most of your use cases. We recommend that you first read the [basic filtering](#find-contacts-basic-filtering) section to learn how to perform simple filtering by a single field.
+Find expressions have a low barrier to entry that allows for simple filtering by field. This basic filtering for contacts is likely sufficient for most of your use cases. We recommend that you first read the [basic filtering](#basic-filtering) section to learn how to perform simple filtering by a single field.
 
-If you then find that the basic filtering is insufficient for your use case, you can read the [advanced filtering](#find-contacts-advanced-filtering) section to learn how to perform more complex filtering.
+If you then find that the basic filtering is insufficient for your use case, you can read the [advanced filtering](#advanced-filtering) section to learn how to perform more complex filtering.
 
 
 
