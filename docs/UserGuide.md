@@ -305,6 +305,9 @@ number in the user input until it hits a unique input, or add 1 if there is no n
 large, or there are too many duplicates, the system might throw a message asking you to handle it manually without 
 handling it for you.
 
+Note: The name change is permanant so removing previous interviews will not change back the name. That is if both
+`technical1` and `technical2` exist, deleting `technical1` will not change `technical2` back to `technical1`.
+
 Duplicate handling: 
 * Entering `technical12`, then `technical12` again will result in the 2nd entry being converted to 
 `technical13`.
