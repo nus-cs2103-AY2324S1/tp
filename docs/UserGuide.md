@@ -282,6 +282,17 @@ delete 1
 
 --------------------------------------------------------------------------------------------------------------------
 
+# Miscellaneous Notes
+
+## `INCOME` Parameter
+
+Incomes must only consist of numerical inputs. Connectify does not yet support:
+- Decimal values `600.50`
+- Currencies `10000 USD`
+- Other non-numeric input e.g. `10,000`
+
+--------------------------------------------------------------------------------------------------------------------
+
 # FAQ [coming soon]
 
 
