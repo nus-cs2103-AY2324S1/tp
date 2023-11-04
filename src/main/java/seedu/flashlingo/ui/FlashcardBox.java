@@ -63,6 +63,8 @@ public class FlashcardBox extends UiPart<Region> {
         this.flashCard = fc;
         this.mw = mw;
         this.index = displayedIndex;
+        original.setWrapText(true);
+        translation.setWrapText(true);
         id.setText(displayedIndex + ") ");
         original.setText(fc.getOriginalWord().toString() + ": ");
         if (fc.getIsRevealed()) {

@@ -59,6 +59,8 @@ public class FlashcardBoxNoButton extends UiPart<Region> {
         this.flashCard = fc;
         this.mw = mw;
         this.index = displayedIndex;
+        original.setWrapText(true);
+        translation.setWrapText(true);
         assert(!SessionManager.getInstance().isReviewSession());
         id.setText(displayedIndex + ") ");
         original.setText(fc.getOriginalWord().toString() + ": ");
