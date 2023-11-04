@@ -92,6 +92,21 @@ Welcome to TutorConnect! We are excited to get you started with a more efficient
 
 4. Double-click the jar file to launch the application.
 
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Unable to Open jar file**<br>
+
+Should the file fail to launch on click:
+    
+1. Open a command terminal on the folder where `tutorconnect.jar` is. On Windows, you can do so by right-clicking on the folder and select "Open in Terminal".
+![terminal](images/quick-start/open-terminal.png)
+On Mac:
+![terminal-mac](images/quick-start/open-terminal-mac.png)
+2. Type the following command in the terminal: `java -jar tutorconnect.jar` and hit enter.
+
+
+</div>
+
    <div markdown="block" class="alert alert-info">
 
    **:information_source: Mac Users**<br>
