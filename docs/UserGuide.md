@@ -989,6 +989,25 @@ The help window can also be accessed by the button above the command box!
 
 [Back To Top](#table-of-contents)
 
+
+#### Exiting the program: `exit`
+
+Exits TutorConnect.
+
+**Scenario**
+
+Are you done using TutorConnect and want to stop the program?
+
+**Follow these steps**
+
+Just type the `exit` command and enter.
+
+**What you can expect to see**
+
+TutorConnect closes and the program stops, going into deep slumber, disappearing from your screen...zzz
+
+[Back To Top](#table-of-contents)
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Frequently Asked Questions
@@ -1112,5 +1131,6 @@ The domain name must:
 | **View Calendar**   | `show DATE` <br> e.g., `show 2023-09-15`                                                                   |
 | **Change Theme**    | `theme NEW_THEME` <br> e.g., `theme dark`                                                                  |
 | **Clear**           | `clear`                                                                                                    |
+| **Exit**            | `exit`                                                                                                     |
 
 [Back To Top](#table-of-contents)
