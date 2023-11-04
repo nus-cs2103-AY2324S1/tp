@@ -88,35 +88,6 @@ Shows a message explaining how to access the help page.
 Format: `help`
 
 
-### Adding a student: `addPerson`
-
-Adds a student to the contact list in application.
-
-Format: `addPerson -name NAME [-phone PHONE_NUMBER] [-email EMAIL] [-address ADDRESS] 
-[-subject SUBJECT] [-tag TAG] [-remark REMARK]`
-
-
-
-<box type="tip" seamless>
-
-
-**Tips:** 
-- A student can have any number of unique tags (including 0)
-- If the user is currently in list `STUDENTS`, the command can be shortened to `add`
-- For flags that can take multiple values (eg. -subject, -tag), separate the values with commas
-</box>
-
-Examples:
-* `addPerson -name John -phone 91234567`
-* `addPerson -name John -phone 91234567 -email test@gmail.com -address 10 Kent Ridge Drive -subject MATHEMATICS`
-* `addPerson -name John -phone 91234567 -email test@gmail.com -address 10 Kent Ridge Drive -subject MATHEMATICS,PHYSICS -tag abc,cde,fgh`
-* In list `STUDENTS`:
-  * `add -name John -phone 91234567`
-  * `add -name John -phone 91234567 -email test@gmail.com -address 10 Kent Ridge Drive -subject MATHEMATICS`
-  * `add -name John -phone 91234567 -email test@gmail.com -address 10 Kent Ridge Drive -subject MATHEMATICS,PHYSICS -tag abc,cde,fgh`
-
-
-
 ### Listing upcoming lessons / tasks / students : `list`
 
 The list command has different behaviours depending on the keywords given.
@@ -130,7 +101,7 @@ To show the `SCHEDULE` list:
 
 To show the `TASKS` list:
 * Format: `list tasks`
-  * * displays all the tasks with their `DESCRIPTION`.
+    * displays all the tasks with their `DESCRIPTION`.
 
 To show the `STUDENTS` list:
 * Format: `list students [KEYWORDs]`
@@ -158,118 +129,129 @@ Examples:
 
 Success Output:
 * For the command `list` or `list schedule`:
-`Showing list SCHEDULE`
-![Success for list SCHEDULE](images/list/list_schedule_positive.png)
+  `Showing list SCHEDULE`
+  ![Success for list SCHEDULE](images/list/list_schedule_positive.png)
 * For the command `list students` (including extra keywords):
-`Showing list STUDENT`
-![Success for list STUDENTS](images/list/list_student_positive.png)
+  `Showing list STUDENT`
+  ![Success for list STUDENTS](images/list/list_student_positive.png)
 * For the command `list tasks`
   `Showing list TASK`
-![Success for list STUDENTS](images/list/list_tasks_positive.png)
+  ![Success for list STUDENTS](images/list/list_tasks_positive.png)
 
 Notes
 * If there are no entries, e.g. there are no students added yet or there are no tasks added yet, an empty list is displayed.
-![Empty list](images/list/list_tasks_empty.png)
+  ![Empty list](images/list/list_tasks_empty.png)
 
 
 Failure Output:
-* When there are invalid keywords specified as a parameter: 
+* When there are invalid keywords specified as a parameter:
 ```Invalid command format!
-  list: Displays the specified list, which can be a STUDENTS list, SCHEDULE list or TASKS list. Default command without specified list displays the schedule list. When specifying STUDENTS list,optional parameters can be used to specify what student details to display
+  list: Displays the specified list, which can be a STUDENTS list, SCHEDULE list or TASKS list. Default command without specified list displays the schedule list. When specifying STUDENTS list, optional parameters can be used to specify what student details to display.
   Parameters: [LIST] [KEYWORDS]...
   Example: list SCHEDULE
   Example: list STUDENTS phone email
-  Example: list TASKS`
+  Example: list TASKS
 ```
 
-### Editing a student : `edit`
-
-Edits an existing student in the application.
-
-Format: `edit INDEX [-name NAME] [-phone PHONE_NUMBER] [-email EMAIL] [-address ADDRESS] [-tag TAG]`
-
-* Edits the student at the specified `INDEX`. The index refers to the index number shown in the displayed student list. The index **must be a positive integer** 1, 2, 3, …​
-* At least one of the optional fields must be provided.
-* Existing values will be updated to the input values.
-* When editing tags, the existing tags of the student will be removed i.e. adding of tags is not cumulative.
-
-Examples:
-*  `edit 1 -phone 91234567 -email johndoe@example.com` Edits the phone number and email address of the 1st student to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 -name Betsy Crower -tag Secondary` Edits the name of the 2nd student to be `Betsy Crower` and sets the tag to `Secondary`.
-
-### Locating students by name: `find`
-
-The find command has different behaviours depending on the current list:
-
-1. In `STUDENTS` list:
-    - Finds students whose names are made up of the given search keyword.
-2. In `SCHEDULE` list:
-    - Finds lessons whose names are made up of the given search keyword.
-
-Format: `find KEYWORD`
-
-1. In `STUDENTS` list:
-   * The search is case-insensitive. e.g `hans` will match `Hans`
-   * Only the name is searched.
-   * Persons matching part of the keyword will be returned (i.e. `OR` search).
-     e.g. `Hans` will return `Hanso Gruber`, `Lee Hansel`
-2. In `SCHEDULE` list:
-    * The search is case-insensitive. e.g `lesson` will match `Lesson`
-    * Only the name is searched.
-    * Lessons matching part of the keyword will be returned (i.e. `OR` search).
-      e.g. `Lesson Chem` will return `Lesson Chemistry`, `Bishan Lesson Chem`
-
-Example Success Output:
-```
-1 persons listed!
-2 lessons listed!
-```
-
-Failure Output:
-```
-0 persons listed!
-0 lessons listed!
-```
-
-### Showing a student's details : `show`
+### Showing a lesson's/task's/student's details : `show`
 
 The show command has different behaviours depending on the current list:
 
-1. In `STUDENTS` list:
-   - Shows the details of the specified student from the contact list in the application.
-2. In `SCHEDULE` list:
-   - Shows the details of the specified lesson from the schedule list in the application.
-3. In `TASKS` list:
-   - Shows the details of the specified task from the full task list in the application.
+1. In `SCHEDULE` list:
+    - Shows the details of the specified lesson from the schedule list in the application. 
+2. In `TASKS` list:
+    - Shows the details of the specified task from the full task list in the application.
+3. In `STUDENTS` list:
+    - Shows the details of the specified student from the contact list in the application.
 
 Format: `show INDEX`
 
-* Shows the details of the student/lesson/task at the specified `INDEX`.
-* The index refers to the index number shown in the displayed student/schedule/task list.
-
+* Shows the details of the lesson/task/student at the specified `INDEX`.
+* The index refers to the index number shown in the displayed schedule/task/student list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-1. In `STUDENTS` list:
-   * `list STUDENTS` followed by `show 2` shows the details of the 2nd student in the student list.
-   * `find Betsy` followed by `show 1` shows the details of the 1st student in the results of the `find` command.
-2. In `SCHEDULE` list:
-   *  `list SCHEDULE` followed by `show 2` shows the details of the 2nd lesson in the schedule list.
-3. In `TASKS` list:
-    *  `list TASKS` followed by `show 2` shows the details of the 2nd task in the full task list.
+1. In `SCHEDULE` list:
+    *  `list SCHEDULE` followed by `show 2` shows the details of the 2nd lesson in the schedule list.
+    * `find lesson1` followed by `show 1` shows the details of the 1st lesson in the results of the `find` command.
+2. In `TASKS` list:
+    *  `list TASKS` followed by `show 2` shows the description of the 2nd task in the full task list.
+3. In `STUDENTS` list:
+    * `list STUDENTS` followed by `show 2` shows the details of the 2nd student in the student list.
+    * `find Betsy` followed by `show 1` shows the details of the 1st student in the results of the `find` command.
 
-Example Success Output:
+Success Output:
+* In `SCHEDULE` list:
+```
+Showing Lesson: Start: 2:30 PM; End: 3:00 PM
+```
+* In `TASKS` list:
+```
+Showing Task: Description: Revise CS2103T Materials
+```
+* In `STUDENTS` list:
 ```
 Showing Person: Alex Yeoh; Phone: 87438807; Email: alexyeoh@example.com; Address: Blk 30 Geylang Street 29, #06-40; Subjects: [BIOLOGY]; Tags: [friends]
 ```
 
 Failure Output:
-```
-The person index provided is invalid
-```
+```  
+  Invalid command format!
+  show: Shows the details of the item identified by the index number used in the last item listing.
+  Parameters: INDEX (must be a positive integer)
+  Example: show 1
+ ```
+
+### Adding a student : `addPerson`
+
+Adds a student to the contact list in application.
+
+Format: `addPerson -name NAME [-phone PHONE_NUMBER] [-email EMAIL] [-address ADDRESS] 
+[-subject SUBJECT] [-tag TAG] [-remark REMARK]`
+
+<box type="tip" seamless>
+
+**Tips:** 
+- A student can have any number of unique tags (including 0)
+- A new student cannot have the same name as existing students in the contact list.
+- If the user is currently in list `STUDENTS`, the command can be shortened to `add`
+- For flags that can take multiple values (eg. -subject, -tag), separate the values with commas
+- Only subjects like MATHEMATICS, PHYSICS, BIOLOGY, CHEMISTRY, ENGLISH can be added.
+</box>
+
+Examples:
+* `addPerson -name John -phone 91234567`
+* `addPerson -name John -phone 91234567 -email test@gmail.com -address 10 Kent Ridge Drive -subject MATHEMATICS`
+* `addPerson -name John -phone 91234567 -email test@gmail.com -address 10 Kent Ridge Drive -subject MATHEMATICS,PHYSICS -tag abc,cde,fgh`
+* In list `STUDENTS`:
+  * `add -name John -phone 91234567`
+  * `add -name John -phone 91234567 -email test@gmail.com -address 10 Kent Ridge Drive -subject MATHEMATICS`
+  * `add -name John -phone 91234567 -email test@gmail.com -address 10 Kent Ridge Drive -subject MATHEMATICS,PHYSICS -tag abc,cde,fgh`
 
 
-### Deleting a student : `delete`
+### Editing a student : `editPerson` 
+
+Edits an existing student in the application.
+
+Format: `editPerson INDEX [-name NAME] [-phone PHONE_NUMBER] [-email EMAIL] [-address ADDRESS] [-subject SUBJECT] [-tag TAG] [-remark REMARK]`
+
+* Edits the student at the specified `INDEX`. The index refers to the index number shown in the displayed student list. The index **must be a positive integer** 1, 2, 3, …​
+* If the user is currently in list `STUDENTS`, the command can be shortened to `add`
+* At least one of the optional fields must be provided.
+* Existing values will be updated to the input values.
+* For flags that can take multiple values (eg. -subject, -tag), separate the values with commas
+* When editing subjects, tags and remarks, the existing subjects/tags/remarks of the student will be removed i.e. adding of subjects/tags/remarks is not cumulative.
+
+Examples:
+*  `editPerson 1 -phone 91234567 -email johndoe@example.com` Edits the phone number and email address of the 1st student to be `91234567` and `johndoe@example.com` respectively.
+*  `editPerson 2 -name Betsy Crower -tag Secondary` Edits the name of the 2nd student to be `Betsy Crower` and sets the tag to `Secondary`.
+*  `editPerson 3 -subject chemistry, biology` Sets the subjects of the 3rd student to be `CHEMISTRY` and `BIOLOGY`.
+* In list `STUDENTS`:
+  * `edit -name John -phone 91234567`
+  * `edit -name John -subject chemistry, english`
+
+
+### Deleting a student/lesson : `delete`
 
 The delete command has different behaviours depending on the current list:
 
@@ -296,35 +278,111 @@ Examples:
 
 Success Output:
 ```
-Student Leah has been deleted successfully!
+Deleted Person: Alex Yeoh; Phone: 87438807; Email: alexyeoh@example.com; Address: Blk 30 Geylang Street 29, #06-40; Subjects: CHEMISTRYBIOLOGY; Tags: [friends]; Remark: ```
 ```
-
 Failure Output:
 ```
 Index out of bounds, expected 1 to 8 but got 10.
 ```
 
+### Adding a Lesson : `addLesson`
+
+Adds a lesson to the schedule list in application.
+
+Format: `addLesson -name NAME [-start HH:MM] [-end HH:MM] [-day YYYY/MM/DD] [-subject SUBJECT]`
+Format: `addLesson -name NAME [-start HH:MM] [-end HH:MM] [-day YY/MM/DD] [-subject SUBJECT]`
+Format: `addLesson -name NAME [-start HH:MM] [-end HH:MM] [-day MM/DD] [-subject SUBJECT]`
+Note: If no year is specified, the year is assumed to be current year.
+<box type="tip" seamless>
+
+**Tips:**
+- A new lesson cannot have the same name as existing lessons in the schedule list.
+- A new lesson cannot have overlapping timings with existing lessons in the schedule list.
+- If the user is currently in list `SCHEDULE`, the command can be shortened to `add`
+- Only one subject can be assigned to a lesson.
+- Only subjects like MATHEMATICS, PHYSICS, BIOLOGY, CHEMISTRY, ENGLISH can be added.
+  </box>
+
+Examples:
+* `addLesson -name Chemistry Lesson at Bishan -start 14:00 -end 15:00 -day 2023/12/12 -subject MATHEMATICS`
+* `addLesson -name Lesson at Tai Seng -start 09:00 -end 11:00 -day 03/21 -subject PHYSICS`
+* In list `SCHEDULE`:
+    * `add -name Lesson at Tai Seng -start 09:00 -end 11:00 -day 03/21 -subject PHYSICS`
+
+Success Output:
+```
+New lesson added: Lesson Chemistry Lesson at Bishan from 2:00 PM to 3:00 PM on 12-12-2023
+```
+Failure Output:
+```
+Exist lesson clashes with this lesson: Lesson Chemistry Lesson at Bishan from 2:00 PM to 3:00 PM on 12-12-2023
+```
+
+### Deleting a student/lesson : `delete`
+
+The delete command has different behaviours depending on the current list:
+
+1. In `STUDENTS` list:
+    - Deletes the specified student from the contact list in the application.
+2. In `SCHEDULE` list:
+    - Deletes the specified lesson from the lesson list in the application.
+3. In `TASKS` list:
+    - the `delete` command is disabled. Adding and Deleting of Tasks can only be done in the `SCHEDULE` list via the `addTask` and `deleteTask` command.
+
+Format: `delete INDEX`
+
+* Deletes the student/lesson at the specified `INDEX`.
+* The index refers to the index number shown in the displayed student list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+* `list students` followed by :
+    * `delete 2` deletes the 2nd student in the contact list.
+    * `find Betsy` followed by `delete 1` deletes the 1st student in the results of the `find` command.
+
+* `list schedule` followed by :
+* `delete 2` deletes the 2nd lesson in the schedule list.
+
+Success Output:
+```
+Deleted Person: Alex Yeoh; Phone: 87438807; Email: alexyeoh@example.com; Address: Blk 30 Geylang Street 29, #06-40; Subjects: CHEMISTRYBIOLOGY; Tags: [friends]; Remark: ```
+```
+Failure Output:
+```
+Index out of bounds, expected 1 to 8 but got 10.
+```
+
+
 ### Adding a task : `addTask`
 Adds a task to the specified lesson.
 
-Format: `addTask INDEX [-description TASKDESCRIPTION]`
+Format: `addTask INDEX [TASKDESCRIPTION]`
 
 * Adds the task to the lesson at specified `INDEX`.
+* A new task cannot have the same description as existing tasks in the task list of that specific lesson.
 * The index refers to the index number shown in the displayed schedule list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `list schedule` followed by `addTask 2 -description mark homework` adds a task to the second lesson in the schedule.
+* `list schedule` followed by `addTask 2 mark homework` adds a task to the second lesson in the schedule.
 
 Success Output:
 ```
-New task added to lesson with index 2: -mark homework
+New task added to lesson with index 2: mark homework
 ```
 
 Failure Output:
 ```
 No lesson with index 10!
+```
+```
 Lesson index has to be a positive value!
+```
+```
+Existing task with same task description with index dmnfdn!
+Usage: addTask/task + [lesson index] [description]. You could omit the lesson index when adding task to showing lesson.
+Example1: addtask 1 do homework
+Example2 (a lesson is shown): addtask do homeworkPlease note that there cannot be two tasks with the same description in any lesson.
 ```
 
 ### Deleting a task : `deleteTask`
@@ -341,17 +399,69 @@ Examples:
 
 Success Output:
 ```
-Deleted Task: -mark extra practice questions 
+Deleted Task: mark extra practice questions 
 ```
 
 Failure Output:
 ```
 Task index do not belong to any tasks!
-
+```
+```
 Invalid command format! 
 deleteTask: Deletes the task identified by the task index from the currently displayed lesson .
 Parameters: task index (must be a positive integer)
 Example: deleteTask 1
+```
+If no lesson is shown:
+```
+Please use show lessonIndex before deleting task!
+```
+
+### Locating students/lessons by name: `find`
+
+The find command has different behaviours depending on the current list:
+
+1. In `SCHEDULE` list:
+    - Finds lessons whose names are made up of the given search keyword.
+2. In `STUDENTS` list:
+    - Finds students whose names are made up of the given search keyword.
+3. In `TASKS` list:
+    - Find tasks by name/description is disabled. 
+    - Tasks can be found based on the lesson (find lesson by name) and `show` lesson to see task list of the lesson.
+
+Format: `find KEYWORD`
+
+1. In `SCHEDULE` list:
+    * The search is case-insensitive. e.g `lesson` will match `Lesson`
+    * Only the name is searched.
+    * Lessons matching part of the keyword will be returned (i.e. `OR` search).
+      e.g. `Lesson Chem` will return `Lesson Chemistry`, `Bishan Lesson Chem`
+
+2. In `STUDENTS` list:
+    * The search is case-insensitive. e.g `hans` will match `Hans`
+    * Only the name is searched.
+    * Persons matching part of the keyword will be returned (i.e. `OR` search).
+      e.g. `Hans` will return `Hanso Gruber`, `Lee Hansel`
+
+Success Output:
+* In `SCHEDULE` list:
+```
+2 lessons listed!
+```
+* In `STUDENTS` list:
+```
+3 persons listed!
+```
+
+
+Failure Output:
+* In `SCHEDULE` list:
+```
+0 lessons listed!
+```
+* In `STUDENTS` list:
+```
+0 persons listed!
 ```
 
 ### Exiting the program : `exit`
@@ -368,7 +478,8 @@ TutorMate data is saved in the hard disk automatically after any command that ch
 
 ### Editing the data file
 
-TutorMate data is saved automatically as a JSON file `[JAR file location]/data/tutormate.json`. Advanced users are welcome to update data directly by editing that data file.
+TutorMate data is saved automatically as JSON files `[JAR file location]/data/addressbook.json`, `[JAR file location]/data/schedulelist.json` and `[JAR file location]/data/personLessonMap.json`. Advanced users are welcome to update data directly by editing that data file.
+Be very careful, especially when you modify attributes such as Start and End time of lessons, as any overlapping lesson timings will render the data as invalid. For example, lesson clashes will not be detected. Scenarios like these are not exhaustive.
 
 <box type="warning" seamless>
 
@@ -393,15 +504,19 @@ If your changes to the data file makes its format invalid, TutorMate will discar
 --------------------------------------------------------------------------------------------------------------------
 
 ## Command summary
+Note: Add, Edit & Delete commands are dependent on the list type [`SCHEDULE`, `TASKS`, `STUDENTS`].
 
-Action     | Format, Examples
------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add Person**    | `addPerson -name John -phone 91234567 -email test@gmail.com -address 10 Kent Ridge Drive -subject MATHEMATICS`
-**Add Task**    | `addTask -description Do CS2103T Preparation`
-**Delete Task** | `delete INDEX`<br> e.g., `delete 3`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit**   | `edit INDEX [-name NAME] [-phone PHONE_NUMBER] [-email EMAIL] [-address ADDRESS] [-tag TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com` (To Be Changed)
-**Show**   | `show INDEX`
-**List**   | `list`, `list schedule`, `list students [KEYWORDs]`, `list tasks`
-**Help**   | `help`
+Action     | Format, Examples                                                                                                                                                                           | List, Remarks 
+-----------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------
+**List**   | `list`, `list schedule`, `list students [KEYWORDs]`, `list tasks`                                                                                                                          | NA
+**Show**   | `show INDEX`                                                                                                                                                                               | `SCHEDULE`, `STUDENTS`, `TASKS`
+**Add Person**    | `addPerson -name John -phone 91234567 -email test@gmail.com -address 10 Kent Ridge Drive -subject MATHEMATICS`                                                                             | ANY LIST
+**Edit Person**   | `editPerson INDEX [-name NAME] [-phone PHONE_NUMBER] [-email EMAIL] [-address ADDRESS] [-tag TAG,…​`] [-subject SUBJECT,…​`]<br> e.g.,`edit 2 -name James Lee -email jameslee@example.com` |  ANY LIST
+**Add Lesson**    | `addLesson -name NAME [-start HH:MM] [-end HH:MM] [-day YYYY/MM/DD] [-subject SUBJECT]`                                                                                                    | ANY LIST
+**Edit Lesson**   | `editLesson INDEX [-start HH:MM] [-end HH:MM] [-day YYYY/MM/DD] [-subject SUBJECT]` <br> e.g.,`edit 2 -start 13:00 -end 14:00`                                                             |  ANY LIST
+**Add Task**    | `addTask INDEX DESCRIPTION`                                                                                                                                                                | `SCHEDULE`
+**Delete Task** | `deleteTask INDEX`<br> e.g., `delete 3`                                                                                                                                                    | `SCHEDULE`, <br> `show LESSON_INDEX` has to be used prior to `deleteTask` command
+**Delete Person/Lesson** | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                        | `SCHEDULE`, `STUDENTS`
+**Find**   | `find mary`                                                                                                                                                                                | `SCHEDULE`, `STUDENTS`
+**Help**   | `help`                                                                                                                                                                                     | NA
 
