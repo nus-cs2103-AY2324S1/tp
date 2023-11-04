@@ -333,31 +333,30 @@ If you want to edit the currently shown lesson, you could omit the index.
 Note your edited 'name' must not already in the schedule and 'start' must be before 'end'.
 ```
 
-### Deleting a student/lesson : `delete`
+### Deleting a lesson/student : `delete`
 
 The delete command has different behaviours depending on the current list:
 
-1. In `STUDENTS` list:
-    - Deletes the specified student from the contact list in the application.
-2. In `SCHEDULE` list:
-    - Deletes the specified lesson from the lesson list in the application.
-3. In `TASKS` list:
+1. In `SCHEDULE` list:
+    - Deletes the specified lesson from the schedule list in the application.
+2. In `TASKS` list:
     - the `delete` command is disabled. Adding and Deleting of Tasks can only be done in the `SCHEDULE` list via the `addTask` and `deleteTask` command.
+3. In `STUDENTS` list:
+    - Deletes the specified student from the contact list in the application.
 
 Format: `delete INDEX`
 
 * Deletes the student/lesson at the specified `INDEX`.
-* The index refers to the index number shown in the displayed student list.
+* The index refers to the index number shown in the displayed schedule/student list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `list students` followed by :
-    * `delete 2` deletes the 2nd student in the contact list.
-    * `find Betsy` followed by `delete 1` deletes the 1st student in the results of the `find` command.
-
 * `list schedule` followed by :
   * `delete 2` deletes the 2nd lesson in the schedule list.
   * `find bedok` followed by `delete 1` deletes the 1st lesson in the results of the `find` command.
+* `list students` followed by :
+    * `delete 2` deletes the 2nd student in the contact list.
+    * `find Betsy` followed by `delete 1` deletes the 1st student in the results of the `find` command.
 
 
 Success Output:
@@ -372,11 +371,13 @@ Index out of bounds, expected 1 to 8 but got 10.
 ### Adding a task : `addTask`
 Adds a task to the specified lesson.
 
-Format: `addTask INDEX [TASKDESCRIPTION]`
+Format: `addTask LESSON_INDEX TASK_DESCRIPTION`
 
-* Adds the task to the lesson at specified `INDEX`.
+* Adds the task to the lesson at specified `LESSON_INDEX`.
+* Task description cannot be empty.
+* If a lesson is shown, the command can be shortened to `addTask` without `LESSON_INDEX`.
 * A new task cannot have the same description as existing tasks in the task list of that specific lesson.
-* The index refers to the index number shown in the displayed schedule list.
+* The lesson index refers to the index number of the lesson shown in the displayed schedule list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
