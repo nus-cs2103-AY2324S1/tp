@@ -264,7 +264,7 @@ You can create a group in your contact list.
 You can delete a group in your contact list.
 
 
-**Format:** `delete n/GROUP_NAME`
+**Format:** `delete g/GROUP_NAME`
 
 
 **Acceptable values:**
@@ -554,17 +554,19 @@ You list meeting time for your groups.
 You can find a meeting time slot for your group where everyone is available.
 
 
-**Format:** `findfreetime g/GROUP_NAME`
+**Format:** `findfreetime g/GROUP_NAME d/DURATION`
 - Provide the full name of the group using the `g/` prefix.
+- Provide the duration of the meeting using the `d/` prefix.
 
 
 **Acceptable values:**
 - `GROUP_NAME` must be alphanumeric.
+- `DURATION` must be an integer representing the meeting duration in minutes.
 
 
 **Example(s):**
-- `findfreetime g/CS2100`
-  This finds a common meeting time for your CS2100 group.
+- `findfreetime g/CS2100 d/60`
+  This finds a common meeting time of 60 minutes for your CS2100 group.
   Insert Image
 
 
