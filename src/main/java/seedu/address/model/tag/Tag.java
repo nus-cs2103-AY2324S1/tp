@@ -9,7 +9,8 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Tag {
 
-    public static final String MESSAGE_CONSTRAINTS = "Illness names should be alphanumeric or space";
+    public static final String MESSAGE_CONSTRAINTS =
+            "Illness names should be alphanumeric and can contain spaces, but it cannot only contain spaces";
     public static final String VALIDATION_REGEX = "[\\p{Alnum} ]+";
 
     public final String tagName;

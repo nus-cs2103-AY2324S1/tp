@@ -29,8 +29,8 @@ import seedu.address.logic.commands.personcommands.AddCommand;
 import seedu.address.logic.commands.personcommands.DeleteCommand;
 import seedu.address.logic.commands.personcommands.DiagnoseCommand;
 import seedu.address.logic.commands.personcommands.EditCommand;
-import seedu.address.logic.commands.personcommands.FindCommand;
 import seedu.address.logic.commands.personcommands.FindIllnessCommand;
+import seedu.address.logic.commands.personcommands.FindPatientCommand;
 import seedu.address.logic.commands.personcommands.PatientsCommand;
 import seedu.address.logic.commands.personcommands.SortPatientCommand;
 import seedu.address.logic.commands.personcommands.UndiagnoseCommand;
@@ -48,8 +48,8 @@ import seedu.address.logic.parser.personparser.AddCommandParser;
 import seedu.address.logic.parser.personparser.DeleteCommandParser;
 import seedu.address.logic.parser.personparser.DiagnoseCommandParser;
 import seedu.address.logic.parser.personparser.EditCommandParser;
-import seedu.address.logic.parser.personparser.FindCommandParser;
 import seedu.address.logic.parser.personparser.FindIllnessCommandParser;
+import seedu.address.logic.parser.personparser.FindPatientCommandParser;
 import seedu.address.logic.parser.personparser.PatientsCommandParser;
 import seedu.address.logic.parser.personparser.SortPatientCommandParser;
 import seedu.address.logic.parser.personparser.UndiagnoseCommandParser;
@@ -96,8 +96,8 @@ public class AddressBookParser {
         case DeleteCommand.COMMAND_WORD:
             return new DeleteCommandParser().parse(arguments);
 
-        case FindCommand.COMMAND_WORD:
-            return new FindCommandParser().parse(arguments);
+        case FindPatientCommand.COMMAND_WORD:
+            return new FindPatientCommandParser().parse(arguments);
 
         case PatientsCommand.COMMAND_WORD:
             return new PatientsCommandParser().parse(arguments);

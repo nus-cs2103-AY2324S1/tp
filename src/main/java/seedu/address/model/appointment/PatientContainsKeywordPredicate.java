@@ -1,23 +1,20 @@
-package seedu.address.model.appointment.appointmentfilters;
+package seedu.address.model.appointment;
 
 import java.util.List;
 import java.util.function.Predicate;
 
 import seedu.address.commons.util.StringUtil;
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.model.appointment.Appointment;
 
 
 /**
- * Represents a filter for finding appointments based on patient names.
- * This filter is used to match appointments with patient names that contain
- * one or more of the provided keywords in a case-insensitive manner.
+ * Tests that an {@code Appointment}'s patient name matches any of the keywords given.
  */
-public class FindPatientFilter implements Predicate<Appointment> {
+public class PatientContainsKeywordPredicate implements Predicate<Appointment> {
 
     private final List<String> keywords;
 
-    public FindPatientFilter(List<String> keywords) {
+    public PatientContainsKeywordPredicate(List<String> keywords) {
         this.keywords = keywords;
     }
 
@@ -44,9 +41,8 @@ public class FindPatientFilter implements Predicate<Appointment> {
             return true;
         }
 
-        if (other instanceof FindPatientFilter) {
-            FindPatientFilter otherFilter = (FindPatientFilter) other;
-
+        if (other instanceof PatientContainsKeywordPredicate) {
+            PatientContainsKeywordPredicate otherFilter = (PatientContainsKeywordPredicate) other;
             return this.keywords.equals(otherFilter.keywords);
         }
 

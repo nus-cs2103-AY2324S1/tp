@@ -40,8 +40,8 @@ public class IllnessContainsKeywordsPredicate implements Predicate<Person> {
             return false;
         }
 
-        IllnessContainsKeywordsPredicate otherIllnessContainsKeywordsPredicate = (IllnessContainsKeywordsPredicate)
-                other;
+        IllnessContainsKeywordsPredicate otherIllnessContainsKeywordsPredicate =
+                (IllnessContainsKeywordsPredicate) other;
         return keywords.equals(otherIllnessContainsKeywordsPredicate.keywords);
     }
 

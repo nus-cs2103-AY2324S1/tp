@@ -7,7 +7,7 @@ import java.util.Arrays;
 import seedu.address.logic.commands.appointmentcommands.FindAppointmentCommand;
 import seedu.address.logic.parser.Parser;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.appointment.appointmentfilters.FindPatientFilter;
+import seedu.address.model.appointment.PatientContainsKeywordPredicate;
 
 
 /**
@@ -32,6 +32,6 @@ public class FindAppointmentCommandParser implements Parser<FindAppointmentComma
 
         String[] nameKeywords = trimmedArgs.split("\\s+");
 
-        return new FindAppointmentCommand(new FindPatientFilter(Arrays.asList(nameKeywords)));
+        return new FindAppointmentCommand(new PatientContainsKeywordPredicate(Arrays.asList(nameKeywords)));
     }
 }
