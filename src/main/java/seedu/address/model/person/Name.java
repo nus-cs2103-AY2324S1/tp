@@ -103,7 +103,7 @@ public class Name extends ListEntryField {
         } else if (n == DEFAULT_NAME) {
             return -1;
         } else {
-            return fullName.compareTo(n.fullName);
+            return fullName.toLowerCase().compareTo(n.fullName.toLowerCase());
         }
     }
 

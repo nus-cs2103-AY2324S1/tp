@@ -26,6 +26,9 @@ public class AddLessonCommand extends Command {
 
         if (model.hasLessonClashWith(lesson)) {
             Lesson clashingLesson = model.getLessonClashWith(lesson);
+            if (clashingLesson.getName().equals(lesson.getName())) {
+                throw new CommandException("Lesson with this name already exists in the schedule");
+            }
             throw new CommandException("Exist lesson clashes with this lesson: "
                     + clashingLesson.toString());
         }
@@ -35,5 +38,4 @@ public class AddLessonCommand extends Command {
         model.showLesson(lesson);
         return new CommandResult(String.format("New lesson added: " + lesson.toString()), State.SCHEDULE);
     }
-
 }

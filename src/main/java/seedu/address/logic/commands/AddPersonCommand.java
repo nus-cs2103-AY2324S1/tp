@@ -71,16 +71,6 @@ public class AddPersonCommand extends Command {
         if (model.hasPersonClashWith(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
-        if (lesson != null) {
-            // ugly; copy and paste from the body of AddLessonCommand, refactor later when I have time by making command
-            // could execute without model by making model singleton
-            if (model.hasLessonClashWith(lesson)) {
-                Lesson clashingLesson = model.getLessonClashWith(lesson);
-                throw new CommandException("Exist lesson clashing with lesson to added: "
-                        + clashingLesson.toString());
-            }
-            model.addLesson(lesson);
-        }
         model.addPerson(toAdd);
         model.resetAllShowFields();
         model.setState(State.STUDENT);
