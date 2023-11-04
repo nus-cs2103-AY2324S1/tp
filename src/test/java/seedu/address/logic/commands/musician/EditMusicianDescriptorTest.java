@@ -60,7 +60,7 @@ public class EditMusicianDescriptorTest {
         assertFalse(DESC_AMY.equals(editedAmy));
 
         // different instrument -> returns false
-        editedAmy = new EditMusicianDescriptorBuilder(DESC_AMY).withGenres(VALID_INSTRUMENT_FLUTE).build();
+        editedAmy = new EditMusicianDescriptorBuilder(DESC_AMY).withInstruments(VALID_INSTRUMENT_FLUTE).build();
         assertFalse(DESC_AMY.equals(editedAmy));
     }
 
