@@ -147,7 +147,7 @@ Success/Fail Output:
 
 ### Sorting transactions : `sort`
 
-Format: `sort [date/<sort type>] [amount/<sort type>]`
+Format: `sort [date/<sort type>] [amt/<sort type>]`
 
 - At least one parameter must be present
 - If both parameters are present, the order matters
@@ -333,7 +333,7 @@ The input field below this with the grey text `Enter command here...` is where y
 | ----------------------- | ----------------------------------------------------------------------------------------------------------------------- |
 | **Add transaction**     | `add ty/<type> d/<description> amt/<amount> on/<date> [s/<staff ID>]`                                                   |
 | **Remove transaction**  | `del <id>`                                                                                                              |
-| **Sort transactions**   | `sort [date/<sort type>] [amount/<sort type>]`                                                                          |
+| **Sort transactions**   | `sort [date/<sort type>] [amt/<sort type>]`                                                                             |
 | **Filter transactions** | `filter [ty/<type>] [has/<keywords...>] [after/<date>] [before/<date>] [more/<amount>] [less/<amount>] [by/<staff ID>]` |
 | **View transaction**    | `view t` or `view transaction`                                                                                          |
 | **Add staff**           | `addstaff n/<name> p/<phone no> e/<email> a/<address> [t/<tag>...]`                                                     |
