@@ -66,9 +66,9 @@ hospital management tasks done faster than the other apps in the industry.
 
         - [Displaying all patients: `patients`](#displaying-all-patients-patients)
 
-        - [Finding patients by name: `find-p`](#finding-patients-by-name-find)
+        - [Finding patients by name: `find-p`](#finding-patients-by-name-find-p)
 
-        - [Finding patients by illness: `find-i`](#finding-patients-by-illness-find-illness)
+        - [Finding patients by illness: `find-i`](#finding-patients-by-illness-find-i)
       
         - [Sorting patients: `sort-p`](#sorting-patients-sort-p)
 
@@ -84,7 +84,7 @@ hospital management tasks done faster than the other apps in the industry.
 
         - [Displaying all appointments: `appointments`](#displaying-all-appointments-appointments)
 
-        - [Finding appointments by patient name: `find-a`](#finding-appointments-by-patient-name-find-appointment)
+        - [Finding appointments by patient name: `find-a`](#finding-appointments-by-patient-name-find-a)
      
         - [Displaying all appointments for today: `today`](#displaying-all-appointments-for-today-today)
 
@@ -273,7 +273,7 @@ email at _johnd@example.com_ and address at _311, Clementi Ave 2, #02-25_, who i
 
 - A patient's birthdate must be in the format `yyyy/MM/dd`, e.g. `2001/04/28` for a birthdate on 28 April 2001.
 
-- A patient's phone must be a _valid phone number_.
+- A patient's phone must be a _valid phone number_, i.e. only contains numbers.
 
 - A patient's email must be a _valid email address_, i.e. of the form `name@domain.com`.
 
@@ -404,7 +404,7 @@ This example command will find all patients with illnesses that contain either `
 - The search is _case-insensitive_, meaning that finding illnesses with the keyword `fever`
   will return the same results as the keyword `Fever`.
 
-- Only patients with names matching the _full words_ of the keywords will be displayed, meaning that `flu` will find patients
+- Only patients with illnesses matching the _full words_ of the keywords will be displayed, meaning that `flu` will find patients
   with illnesses that contain the full `flu` but will not find patients
   with illnesses such as `influenza`.
 
@@ -419,6 +419,10 @@ This command sorts the patients list by name or birthday, in ascending or descen
 This example command will sort the patients by the _names_ in _ascending order_.
 
 :pencil2: **Notes:**
+
+- This command will sort all patients in the application, but it will only display the patients that are currently displayed.
+  E.g. If you had just used the command `find-p` to find patients by name, this command will only display
+  the patients that were found by the previous command.
 
 - The direction can only be `asc` or `desc`, i.e. ascending or descending order respectively.
 
@@ -468,7 +472,7 @@ _2 May 2023_, from _9am_ to _11am_.
 
 - The index provided must be a _positive integer_ and a _valid index_.
 
-- You must edit _at least one_ detail when using the command.
+- You must specify _both start and end_ when using the command.
 
 ### Triaging an appointment: `triage`
 
@@ -552,6 +556,10 @@ This example command will sort the appointments by the _times_ in _ascending ord
 
 :pencil2: **Notes:**
 
+- This command will sort all appointments in the application, but it will only display the appointments that are currently displayed.
+E.g. If you had just used the command `find-a` to find appointments by patient name, this command will only display
+the appointments that were found by the previous command.
+
 - The direction can only be `asc` or `desc`, i.e. ascending or descending order respectively.
 
 - The attribute to sort the appointments by can only be `time` or `priority`.
@@ -616,9 +624,9 @@ Return to the [Table of Contents](#table-of-contents)
 | [**Undiagnosing a patient**](#undiagnosing-a-patient-undiagnose)                                             | `undiagnose INDEX illnesses=ILLNESS`<br> e.g., `undiagnose 1 illnesses=fever`                                                                                                                                                                                          |
 | [**Removing a patient**](#removing-a-patient-delete)                                                         | `delete INDEX`<br> e.g., `delete 1`                                                                                                                                                                                                                                    |
 | [**Displaying all patients**](#displaying-all-patients-patients)                                             | `patients`                                                                                                                                                                                                                                                             |
-| [**Finding patients by name**](#finding-patients-by-name-find-p)                                             | `find-p NAME`<br> e.g., `find alex david`                                                                                                                                                                                                                              |
+| [**Finding patients by name**](#finding-patients-by-name-find-p)                                             | `find-p NAME`<br> e.g., `find-p alex david`                                                                                                                                                                                                                            |
 | [**Finding patients by illness**](#finding-patients-by-illness-find-i)                                       | `find-i ILLNESS`<br> e.g., `find-i fever flu`                                                                                                                                                                                                                          |
-| [**Sorting patients**](#sorting-patients-sort-p)                                                            | `sort-p DIRECTION by=ATTRIBUTE`<br> e.g., `sort-p asc by=name`                                                                                                                                                                                                         |
+| [**Sorting patients**](#sorting-patients-sort-p)                                                             | `sort-p DIRECTION by=ATTRIBUTE`<br> e.g., `sort-p asc by=name`                                                                                                                                                                                                         |
 | [**Scheduling a new appointment**](#scheduling-a-new-appointment-schedule)                                   | `schedule patient=PATIENT start=START end=END description=DESCRIPTION priority=PRIORITY` <br> e.g., `schedule patient=Alex Yeoh start=2023/10/20 12:00 end=2023/10/20 13:00 description=Follow up on Chest X-Ray priority=high`                                        |
 | [**Rescheduling an appointment**](#rescheduling-an-appointment-reschedule)                                   | `reschedule INDEX start=START end=END`<br> e.g., `reschedule 1 start=2023/05/02 09:00 end=2023/05/02 11:00`                                                                                                                                                            |
 | [**Triaging an appointment**](#triaging-an-appointment-triage)                                               | `triage INDEX priority=PRIORITY`<br> e.g., `triage 1 priority=high`                                                                                                                                                                                                    |
@@ -662,7 +670,7 @@ data folder to the data folder on that other computer. The data folder is locate
 **A**: MediFlowR data are saved automatically as a JSON file `[JAR file location]/data/mediflowr.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.
+If your changes to the data file makes its format invalid, the application will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.
 </div>
 
 Return to the [Table of Contents](#table-of-contents)
