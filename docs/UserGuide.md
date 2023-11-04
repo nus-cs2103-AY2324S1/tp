@@ -216,7 +216,7 @@ Format: `addPerson -name NAME [-phone PHONE_NUMBER] [-email EMAIL] [-address ADD
 - A new student cannot have the same name as existing students in the contact list.
 - If the user is currently in list `STUDENTS`, the command can be shortened to `add`
 - For flags that can take multiple values (eg. -subject, -tag), separate the values with commas
-- Only MATHEMATICS, PHYSICS, BIOLOGY, CHEMISTRY, ENGLISH can be added as subjects.
+- Subjects can only be MATHEMATICS, PHYSICS, BIOLOGY, CHEMISTRY or ENGLISH.
 </box>
 
 Examples:
@@ -242,6 +242,7 @@ Format: `editPerson INDEX [-name NAME] [-phone PHONE_NUMBER] [-email EMAIL] [-ad
 * Existing values will be updated to the input values.
 * For flags that can take multiple values (eg. -subject, -tag), separate the values with commas
 * When editing subjects, tags and remarks, the existing subjects/tags/remarks of the student will be removed i.e. adding of subjects/tags/remarks is not cumulative.
+* Subjects can only be MATHEMATICS, PHYSICS, BIOLOGY, CHEMISTRY or ENGLISH.
 
 Examples:
 *  `editPerson 1 -phone 91234567 -email johndoe@example.com` <br> Edits the phone number and email address of the 1st student to be `91234567` and `johndoe@example.com` respectively.
@@ -269,7 +270,7 @@ Note: If no year is specified, the year is assumed to be current year.
 - Start time cannot be after end time.
 - If the user is currently in list `SCHEDULE`, the command can be shortened to `add`
 - Only one subject can be assigned to a lesson.
-- Only subjects like MATHEMATICS, PHYSICS, BIOLOGY, CHEMISTRY, ENGLISH can be added.
+- Subjects can only be MATHEMATICS, PHYSICS, BIOLOGY, CHEMISTRY or ENGLISH.
   </box>
 
 Examples:
@@ -302,6 +303,7 @@ Format: `editLesson INDEX [-name NAME] [-start HH:MM] [-end HH:MM] [-day YYYY/MM
 * Editing the start and end time of a lesson that overlaps with another existing lesson is not allowed.
 * Editing the name of a lesson to a name of another existing lesson is not allowed.
 * Only one subject can be specified. For example, `editLesson 2 -subject mathematics, biology` is not allowed.
+* Subjects can only be MATHEMATICS, PHYSICS, BIOLOGY, CHEMISTRY or ENGLISH.
 
 Examples:
 *  `editLesson 1 -name Lesson at Farrer Road -start 14:00 -end 15:00`<br> Edits the lesson name, start and end time of the 1st lesson to be `Lesson at Farrer Road`, `14:00` and `15:00` respectively.
