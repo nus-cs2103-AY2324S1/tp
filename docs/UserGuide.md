@@ -441,9 +441,9 @@ Please use show lessonIndex before deleting task!
 The find command has different behaviours depending on the current list:
 
 1. In `SCHEDULE` list:
-    - Finds lessons whose names are made up of the given search keyword.
+    - Finds lessons whose names are made up of the given search string.
 2. In `STUDENTS` list:
-    - Finds students whose names are made up of the given search keyword.
+    - Finds students whose names are made up of the given search string.
 3. In `TASKS` list:
     - Find tasks by name/description is disabled. 
     - Tasks can be found based on the lesson (find lesson by name) and `show` lesson to see task list of the lesson.
@@ -453,13 +453,13 @@ Format: `find KEYWORD`
 1. In `SCHEDULE` list:
     * The search is case-insensitive. e.g `lesson` will match `Lesson`
     * Only the name is searched.
-    * Lessons matching part of the keyword will be returned (i.e. `OR` search).
-      e.g. `Lesson Chem` will return `Lesson Chemistry`, `Bishan Lesson Chem`
+    * Lessons matching part of the search string will be returned.
+      e.g. Both `Lesson Chem` and `sson Che` will return `Lesson Chemistry`, `Bishan Lesson Chem`
 
 2. In `STUDENTS` list:
     * The search is case-insensitive. e.g `hans` will match `Hans`
     * Only the name is searched.
-    * Persons matching part of the keyword will be returned (i.e. `OR` search).
+    * Persons matching part of the search string will be returned.
       e.g. `Hans` will return `Hanso Gruber`, `Lee Hansel`
 
 Success Output:
@@ -471,9 +471,7 @@ Success Output:
 ```
 3 persons listed!
 ```
-
-
-Failure Output:
+These are also counted as success outputs, since they can be a result of finding a valid search string:
 * In `SCHEDULE` list:
 ```
 0 lessons listed!
@@ -481,6 +479,14 @@ Failure Output:
 * In `STUDENTS` list:
 ```
 0 persons listed!
+```
+
+Failure Output:
+```
+Invalid command format! 
+find: Finds all persons or lesson whose names contains the specified search string (case-insensitive) and displays them as a list with index numbers.
+Parameter: SEARCH_STRING
+Example: find alex yeoh
 ```
 
 ### Exiting the program : `exit`
