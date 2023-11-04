@@ -400,7 +400,7 @@ This example command will find all patients with illnesses that contain either `
 - The search is _case-insensitive_, meaning that finding illnesses with the keyword `fever`
   will return the same results as the keyword `Fever`.
 
-- Only patients with names matching the _full words_ of the keywords will be displayed, meaning that `flu` will find patients
+- Only patients with illnesses matching the _full words_ of the keywords will be displayed, meaning that `flu` will find patients
   with illnesses that contain the full `flu` but will not find patients
   with illnesses such as `influenza`.
 
