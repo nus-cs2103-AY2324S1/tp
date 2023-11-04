@@ -3,7 +3,6 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.Messages.MESSAGE_TEAMS_LISTED_OVERVIEW;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalTeams.TEAM1;
@@ -57,7 +56,8 @@ public class FindTeamCommandTest {
         TeamContainsKeywordsPredicate predicate = preparePredicate(" ");
         FindTeamCommand command = new FindTeamCommand(predicate);
         expectedModel.updateFilteredTeamList(predicate);
-        CommandResult expectedCommandResult = new CommandResult(expectedMessage, false, false, false, false, false, false, true);
+        CommandResult expectedCommandResult = new CommandResult(expectedMessage,
+                false, false, false, false, false, false, true);
         assertCommandSuccess(command, model, expectedCommandResult, expectedModel);
         assertEquals(Collections.emptyList(), model.getFilteredTeamList());
     }
@@ -68,7 +68,8 @@ public class FindTeamCommandTest {
         TeamContainsKeywordsPredicate predicate = preparePredicate("TEAM1 TEAM2");
         FindTeamCommand command = new FindTeamCommand(predicate);
         expectedModel.updateFilteredTeamList(predicate);
-        CommandResult expectedCommandResult = new CommandResult(expectedMessage, false, false, false, false, false, false, true);
+        CommandResult expectedCommandResult = new CommandResult(expectedMessage,
+                false, false, false, false, false, false, true);
 
         assertCommandSuccess(command, model, expectedCommandResult, expectedModel);
         assertEquals(Arrays.asList(TEAM1, TEAM2), model.getFilteredTeamList());
