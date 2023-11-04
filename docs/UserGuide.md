@@ -412,7 +412,7 @@ Format: `deleteTask TASK_INDEX`
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `show 1` followed by `delete 2` deletes the 2nd task of the 1st lesson in the schedule list.
+* `show 1` followed by `deleteTask 2` deletes the 2nd task of the 1st lesson in the schedule list.
 
 Success Output:
 ```
