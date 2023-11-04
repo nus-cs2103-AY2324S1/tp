@@ -43,6 +43,8 @@ public class CommandTestUtil {
     public static final String VALID_EMAIL_BOB = "bob@example.com";
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
+    public static final String VALID_INSTRUMENT_PIANO = "piano";
+    public static final String VALID_INSTRUMENT_FLUTE = "flute";
     public static final String VALID_GENRE_JAZZ = "jazz";
     public static final String VALID_GENRE_POP = "pop";
     public static final String VALID_GENRE_ROCK = "rock";

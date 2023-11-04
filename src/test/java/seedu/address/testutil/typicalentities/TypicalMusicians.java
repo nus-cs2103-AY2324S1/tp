@@ -41,6 +41,13 @@ public class TypicalMusicians {
             .withEmail("lydia@example.com").build();
     public static final Musician GEORGE = new MusicianBuilder().withName("George Best").withPhone("9482442")
             .withEmail("anna@example.com").build();
+    // ARIANA has the same tags, instruments, genres as ALICE
+    public static final Musician ARIANA = new MusicianBuilder().withName("Ariana Pauline")
+            .withEmail("ariana@example.com")
+            .withPhone("94351254")
+            .withTags("friends")
+            .withInstruments("piano")
+            .withGenres("rock").build();
 
     // Manually added
     public static final Musician HOON = new MusicianBuilder().withName("Hoon Meier").withPhone("8482424")
