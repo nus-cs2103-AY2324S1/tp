@@ -16,8 +16,7 @@ public class DeleteTimeCommandParser implements Parser<DeleteTimeCommand>{
 
     /**
      * Parses the given {@code String} of arguments in the context of the DeleteTimeCommand
-     * and returns a DeleteTimeCommand object for execution.
-     * @throws ParseException if the user input does not conform the expected format
+     * and returns a DeleteTimeCommand object for execution. * @throws ParseException if the user input does not conform the expected format
      */
     public DeleteTimeCommand parse(String args) throws ParseException {
         String trimmedArgs = args.trim();

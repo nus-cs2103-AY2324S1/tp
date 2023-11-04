@@ -26,32 +26,25 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_GROUPTAG);
 
         //duplicate parameters
-        try {
-            argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_GROUPTAG);
-        } catch (ParseException e) {
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_GROUPTAG);
+
+        // check if either n/ or g/ are present
+        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_GROUPTAG)
+                || !argMultimap.getPreamble().isEmpty()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    DeleteCommand.MESSAGE_USAGE));
+        }
+
+        // if n/ and g/ present
+        if (arePrefixesPresent(argMultimap, PREFIX_NAME) && arePrefixesPresent(argMultimap, PREFIX_GROUPTAG)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     DeleteCommand.MESSAGE_TWO_PARAMETERS));
         }
 
-        // check if either n/ or g/ are present
-        if (!arePrefixesPresent(argMultimap, PREFIX_NAME)
-                || !argMultimap.getPreamble().isEmpty()) {
-            if (!arePrefixesPresent(argMultimap, PREFIX_GROUPTAG)) {
-                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                        DeleteCommand.MESSAGE_USAGE));
-            }
-        }
-
-        // if n/ is present
+        // if n/ present
         if (arePrefixesPresent(argMultimap, PREFIX_NAME)) {
-            // check if g/ is present
-            if (arePrefixesPresent(argMultimap, PREFIX_GROUPTAG)) { // g/ present
-                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                        DeleteCommand.MESSAGE_TWO_PARAMETERS));
-            } else {
-                String personName = argMultimap.getValue(PREFIX_NAME).get();
-                return new DeletePersonCommand(personName);
-            }
+            String personName = argMultimap.getValue(PREFIX_NAME).get();
+            return new DeletePersonCommand(personName);
         }
 
         // n/ not present, g/ should be present
