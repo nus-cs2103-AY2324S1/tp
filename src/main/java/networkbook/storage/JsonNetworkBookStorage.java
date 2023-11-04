@@ -10,6 +10,7 @@ import java.util.logging.Logger;
 import networkbook.commons.core.LogsCenter;
 import networkbook.commons.exceptions.DataLoadingException;
 import networkbook.commons.exceptions.IllegalValueException;
+import networkbook.commons.exceptions.NullValueException;
 import networkbook.commons.util.FileUtil;
 import networkbook.commons.util.JsonUtil;
 import networkbook.model.ReadOnlyNetworkBook;
@@ -32,7 +33,7 @@ public class JsonNetworkBookStorage implements NetworkBookStorage {
     }
 
     @Override
-    public Optional<ReadOnlyNetworkBook> readNetworkBook() throws DataLoadingException {
+    public Optional<ReadOnlyNetworkBook> readNetworkBook() throws DataLoadingException, NullValueException {
         return readNetworkBook(filePath);
     }
 
@@ -42,7 +43,8 @@ public class JsonNetworkBookStorage implements NetworkBookStorage {
      * @param filePath location of the data. Cannot be null.
      * @throws DataLoadingException if loading the data from storage failed.
      */
-    public Optional<ReadOnlyNetworkBook> readNetworkBook(Path filePath) throws DataLoadingException {
+    public Optional<ReadOnlyNetworkBook> readNetworkBook(Path filePath)
+            throws DataLoadingException, NullValueException {
         requireNonNull(filePath);
 
         Optional<JsonSerializableNetworkBook> jsonNetworkBook = JsonUtil.readJsonFile(

@@ -22,6 +22,7 @@ import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 
 import networkbook.commons.core.LogsCenter;
 import networkbook.commons.exceptions.DataLoadingException;
+import networkbook.commons.exceptions.NullValueException;
 
 /**
  * Converts a Java object instance to JSON and vice versa
@@ -43,8 +44,8 @@ public class JsonUtil {
         FileUtil.writeToFile(jsonFile, toJsonString(objectToSerialize));
     }
 
-    static <T> T deserializeObjectFromJsonFile(Path jsonFile, Class<T> classOfObjectToDeserialize)
-            throws IOException {
+    static <T extends JsonObject> T deserializeObjectFromJsonFile(Path jsonFile, Class<T> classOfObjectToDeserialize)
+            throws IOException, NullValueException {
         return fromJsonString(FileUtil.readFromFile(jsonFile), classOfObjectToDeserialize);
     }
 
@@ -56,8 +57,8 @@ public class JsonUtil {
      * @param classOfObjectToDeserialize JSON file has to correspond to the structure in the class given here.
      * @throws DataLoadingException if loading of the JSON file failed.
      */
-    public static <T> Optional<T> readJsonFile(
-            Path filePath, Class<T> classOfObjectToDeserialize) throws DataLoadingException {
+    public static <T extends JsonObject> Optional<T> readJsonFile(
+            Path filePath, Class<T> classOfObjectToDeserialize) throws DataLoadingException, NullValueException {
         requireNonNull(filePath);
 
         if (!Files.exists(filePath)) {
@@ -97,8 +98,11 @@ public class JsonUtil {
      * @param <T> The generic type to create an instance of
      * @return The instance of T with the specified values in the JSON string
      */
-    public static <T> T fromJsonString(String json, Class<T> instanceClass) throws IOException {
-        return objectMapper.readValue(json, instanceClass);
+    public static <T extends JsonObject> T fromJsonString(String json, Class<T> instanceClass)
+            throws IOException, NullValueException {
+        T value = objectMapper.readValue(json, instanceClass);
+        value.assertFieldsAreNotNull();
+        return value;
     }
 
     /**

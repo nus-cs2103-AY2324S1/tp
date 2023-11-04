@@ -5,12 +5,14 @@ import java.nio.file.Paths;
 import java.util.Objects;
 import java.util.logging.Level;
 
+import networkbook.commons.exceptions.NullValueException;
+import networkbook.commons.util.JsonObject;
 import networkbook.commons.util.ToStringBuilder;
 
 /**
  * Config values used by the app
  */
-public class Config {
+public class Config implements JsonObject {
 
     public static final Path DEFAULT_CONFIG_FILE = Paths.get("config.json");
 
@@ -32,6 +34,13 @@ public class Config {
 
     public void setUserPrefsFilePath(Path userPrefsFilePath) {
         this.userPrefsFilePath = userPrefsFilePath;
+    }
+
+    @Override
+    public void assertFieldsAreNotNull() throws NullValueException {
+        if (logLevel == null || userPrefsFilePath == null) {
+            throw new NullValueException();
+        }
     }
 
     @Override

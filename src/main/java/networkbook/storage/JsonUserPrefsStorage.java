@@ -5,6 +5,7 @@ import java.nio.file.Path;
 import java.util.Optional;
 
 import networkbook.commons.exceptions.DataLoadingException;
+import networkbook.commons.exceptions.NullValueException;
 import networkbook.commons.util.JsonUtil;
 import networkbook.model.ReadOnlyUserPrefs;
 import networkbook.model.UserPrefs;
@@ -26,7 +27,7 @@ public class JsonUserPrefsStorage implements UserPrefsStorage {
     }
 
     @Override
-    public Optional<UserPrefs> readUserPrefs() throws DataLoadingException {
+    public Optional<UserPrefs> readUserPrefs() throws DataLoadingException, NullValueException {
         return readUserPrefs(filePath);
     }
 
@@ -35,7 +36,7 @@ public class JsonUserPrefsStorage implements UserPrefsStorage {
      * @param prefsFilePath location of the data. Cannot be null.
      * @throws DataLoadingException if the file format is not as expected.
      */
-    public Optional<UserPrefs> readUserPrefs(Path prefsFilePath) throws DataLoadingException {
+    public Optional<UserPrefs> readUserPrefs(Path prefsFilePath) throws DataLoadingException, NullValueException {
         return JsonUtil.readJsonFile(prefsFilePath, UserPrefs.class);
     }
 

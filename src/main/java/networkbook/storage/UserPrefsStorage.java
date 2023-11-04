@@ -5,6 +5,7 @@ import java.nio.file.Path;
 import java.util.Optional;
 
 import networkbook.commons.exceptions.DataLoadingException;
+import networkbook.commons.exceptions.NullValueException;
 import networkbook.model.ReadOnlyUserPrefs;
 import networkbook.model.UserPrefs;
 
@@ -24,7 +25,7 @@ public interface UserPrefsStorage {
      *
      * @throws DataLoadingException if the loading of data from preference file failed.
      */
-    Optional<UserPrefs> readUserPrefs() throws DataLoadingException;
+    Optional<UserPrefs> readUserPrefs() throws DataLoadingException, NullValueException;
 
     /**
      * Saves the given {@link ReadOnlyUserPrefs} to the storage.

@@ -8,6 +8,8 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import networkbook.commons.exceptions.IllegalValueException;
+import networkbook.commons.exceptions.NullValueException;
+import networkbook.commons.util.JsonObject;
 import networkbook.model.person.Course;
 import networkbook.model.person.Email;
 import networkbook.model.person.Graduation;
@@ -23,7 +25,7 @@ import networkbook.model.util.UniqueList;
 /**
  * Jackson-friendly version of {@link Person}.
  */
-class JsonAdaptedPerson {
+class JsonAdaptedPerson implements JsonObject {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Person's %s field is missing!";
 
@@ -180,4 +182,68 @@ class JsonAdaptedPerson {
                 modelSpecs, modelTags, modelPriority);
     }
 
+    @Override
+    public void assertFieldsAreNotNull() throws NullValueException {
+        assertNameIsNotNull();
+        assertPhonesAreNotNull();
+        assertEmailsAreNotNull();
+        assertLinksAreNotNull();
+        assertCoursesAreNotNull();
+        assertSpecialisationsAreNotNull();
+        assertTagsAreNotNull();
+    }
+
+    private void assertNameIsNotNull() throws NullValueException {
+        if (name == null) {
+            throw new NullValueException();
+        }
+    }
+
+    private void assertPhonesAreNotNull() throws NullValueException {
+        for (JsonAdaptedProperty<Phone> phone : phones) {
+            if (phone == null) {
+                throw new NullValueException();
+            }
+        }
+    }
+
+    private void assertEmailsAreNotNull() throws NullValueException {
+        for (JsonAdaptedProperty<Email> email : emails) {
+            if (email == null) {
+                throw new NullValueException();
+            }
+        }
+    }
+
+    private void assertLinksAreNotNull() throws NullValueException {
+        for (JsonAdaptedProperty<Link> link : links) {
+            if (link == null) {
+                throw new NullValueException();
+            }
+        }
+    }
+
+    private void assertCoursesAreNotNull() throws NullValueException {
+        for (JsonAdaptedProperty<Course> course : courses) {
+            if (course == null) {
+                throw new NullValueException();
+            }
+        }
+    }
+
+    private void assertSpecialisationsAreNotNull() throws NullValueException {
+        for (JsonAdaptedProperty<Specialisation> specialisation : specialisations) {
+            if (specialisation == null) {
+                throw new NullValueException();
+            }
+        }
+    }
+
+    private void assertTagsAreNotNull() throws NullValueException {
+        for (JsonAdaptedProperty<Tag> tag : tags) {
+            if (tag == null) {
+                throw new NullValueException();
+            }
+        }
+    }
 }

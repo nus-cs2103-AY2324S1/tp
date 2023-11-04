@@ -7,11 +7,13 @@ import java.nio.file.Paths;
 import java.util.Objects;
 
 import networkbook.commons.core.GuiSettings;
+import networkbook.commons.exceptions.NullValueException;
+import networkbook.commons.util.JsonObject;
 
 /**
  * Represents User's preferences.
  */
-public class UserPrefs implements ReadOnlyUserPrefs {
+public class UserPrefs implements ReadOnlyUserPrefs, JsonObject {
 
     private GuiSettings guiSettings = new GuiSettings();
     private Path networkBookFilePath = Paths.get("data" , "networkbook.json");
@@ -54,6 +56,13 @@ public class UserPrefs implements ReadOnlyUserPrefs {
     public void setNetworkBookFilePath(Path networkBookFilePath) {
         requireNonNull(networkBookFilePath);
         this.networkBookFilePath = networkBookFilePath;
+    }
+
+    @Override
+    public void assertFieldsAreNotNull() throws NullValueException {
+        if (guiSettings == null || networkBookFilePath == null) {
+            throw new NullValueException();
+        }
     }
 
     @Override
