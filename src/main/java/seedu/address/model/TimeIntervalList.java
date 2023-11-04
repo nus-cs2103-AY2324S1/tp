@@ -9,6 +9,9 @@ import javafx.collections.ObservableList;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 
+/**
+ * Class representing the list of time intervals
+ */
 public class TimeIntervalList implements Iterable<TimeInterval> {
 
     private final ObservableList<TimeInterval> internalList = FXCollections.observableArrayList();
