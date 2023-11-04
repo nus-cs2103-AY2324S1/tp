@@ -105,7 +105,7 @@ To show the `TASKS` list:
 
 To show the `STUDENTS` list:
 * Format: `list students [KEYWORDs]`
-    * displays all the students with their `NAME`.
+    * displays all the students with their `NAME` in alphabetical order.
     * The `[KEYWORDs]` allows for a list of valid space-separated information of the student to be displayed.
 
 Acceptable values for the keywords:
@@ -119,7 +119,7 @@ Acceptable values for the keywords:
 * `ALL` (shows all student detail fields)
 
 Examples:
-* `list` and `list schedule` displays the `SCHEDULE` list with all the lessons with their `NAME`.
+* `list` and `list schedule` displays the `SCHEDULE` list with all the lessons with their `NAME` in time order.
 * `list students` displays all the students with their `NAME` (including previously specified fields).
 * `list students subjects` displays all the students with their `NAME` and a list of subjects for each student.
 * `list students subjects email` displays all the students with their `NAME`, a list of subjects for each student and their email.
@@ -167,7 +167,7 @@ Format: `show INDEX`
 
 * Shows the details of the lesson/task/student at the specified `INDEX`.
 * The index refers to the index number shown in the displayed schedule/task/student list.
-* The index **must be a positive integer** 1, 2, 3, …​
+* The index **must be a positive integer between 0 and 99999** 1, 2, 3, …​
 
 Examples:
 1. In `SCHEDULE` list:
@@ -213,9 +213,10 @@ Format: `addPerson -name NAME [-phone PHONE_NUMBER] [-email EMAIL] [-address ADD
 **Tips:** 
 - A student can have any number of unique tags (including 0)
 - A new student cannot have the same name as existing students in the contact list.
-- If the user is currently in list `STUDENTS`, the command can be shortened to `add`
-- For flags that can take multiple values (eg. -subject, -tag), separate the values with commas
+- If the user is currently in list `STUDENTS`, the command can be shortened to `add`.
+- For flags that can take multiple values (eg. -subject, -tag), separate the values with commas.
 - Subjects can only be MATHEMATICS, PHYSICS, BIOLOGY, CHEMISTRY or ENGLISH.
+- Tags must be alphanumeric. '-', ',' and spaces are not allowed.
 </box>
 
 Examples:
@@ -241,7 +242,8 @@ Format: `editPerson INDEX [-name NAME] [-phone PHONE_NUMBER] [-email EMAIL] [-ad
 * Existing values will be updated to the input values.
 * For flags that can take multiple values (eg. -subject, -tag), separate the values with commas
 * When editing subjects, tags and remarks, the existing subjects/tags/remarks of the student will be removed i.e. adding of subjects/tags/remarks is not cumulative.
-* Subjects can only be MATHEMATICS, PHYSICS, BIOLOGY, CHEMISTRY or ENGLISH.
+* Subjects can only be MATHEMATICS, PHYSICS, BIOLOGY, CHEMISTRY or ENGLISH. 
+* Subjects stated are case-insensitive.
 
 Examples:
 *  `editPerson 1 -phone 91234567 -email johndoe@example.com` <br> Edits the phone number and email address of the 1st student to be `91234567` and `johndoe@example.com` respectively.
@@ -257,10 +259,8 @@ Examples:
 
 Adds a lesson to the schedule list in application.
 
-Format: `addLesson -name NAME [-start HH:MM] [-end HH:MM] [-day YYYY/MM/DD] [-subject SUBJECT]` <br>
-Format: `addLesson -name NAME [-start HH:MM] [-end HH:MM] [-day YY/MM/DD] [-subject SUBJECT]`<br>
-Format: `addLesson -name NAME [-start HH:MM] [-end HH:MM] [-day MM/DD] [-subject SUBJECT]` <br>
-Note: If no year is specified, the year is assumed to be current year.
+Format: `addLesson -name NAME [-start HH:MM] [-end HH:MM] [-day YYYY/MM/DD or YY/MM/DD or MM/DD or DD] [-subject SUBJECT]` <br>e
+Note: If no year and month is specified, the year and month is assumed to be current year and month respectively.
 <box type="tip" seamless>
 
 **Tips:**
@@ -290,7 +290,8 @@ Exist lesson clashes with this lesson: Lesson Chemistry Lesson at Bishan from 2:
 
 Edits an existing lesson in the application.
 
-Format: `editLesson INDEX [-name NAME] [-start HH:MM] [-end HH:MM] [-day YYYY/MM/DD] [-subject SUBJECT]` <br>
+Format: `editLesson INDEX [-name NAME] [-start HH:MM] [-end HH:MM] [-day YYYY/MM/DD or YY/MM/DD or MM/DD or DD] [-subject SUBJECT]` <br>
+Note: If no year and month is specified, the year and month is assumed to be current year and month respectively.
 
 * Edits the lesson at the specified `INDEX`. The index refers to the index number shown in the displayed schedule list. The index **must be a positive integer** 1, 2, 3, …​
 * If the user is currently in list `SCHEDULE`, the command can be shortened to `edit INDEX`
