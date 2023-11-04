@@ -35,7 +35,7 @@ public class CommentCommandParser implements Parser<CommentCommand> {
 
         StudentNumber studentNumber;
         try {
-            argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_STUDENT_NUMBER);
+            argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_STUDENT_NUMBER, PREFIX_COMMENT);
             studentNumber = ParserUtil.parseStudentNumber(argMultimap.getValue(PREFIX_STUDENT_NUMBER).get());
         } catch (IllegalValueException ive) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, CommentCommand.MESSAGE_USAGE), ive);
