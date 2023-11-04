@@ -5,29 +5,107 @@ title: User Guide
 
 # ClubMemberContacts
 
-ClubMembersContacts is an app to help EXCO members of School of Computing's CCAs to manage the contacts of all their
-members and applicants in a fast and convenient yet powerful way through a CLI or text-based interface for greater
-speed.
+ClubMembersContacts (CMC) is an application designed to empower EXCO members of the School of Computing's CCAs in 
+efficiently managing the contacts of their members and applicants. 
 
-* It is **written in OOP fashion**. It provides a **reasonably well-written** code base **bigger** (around 6 KLoC) than
-  what students usually write in beginner-level SE modules, without being overwhelmingly big.
-* It comes with a **reasonable level of user and developer documentation**.
+In the fast-paced world of CCA leadership, time is a precious resource, and effective contact management is crucial. 
+ClubMembersContacts has been tailored to cater to your specific needs, ensuring that you can streamline your 
+contact-related responsibilities seamlessly. It provides a swift and convenient yet powerful
+solution through a Command Line Interface (CLI) aimed at optimizing the speed and effectiveness of your contact 
+management tasks. 
 
-This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
+Here are some possible ways you can integrate CMC into your CCA:
+- You can add tags to different members to delegate them roles, or any additional information.
+- You can track tasks assigned to each member to track their completion.
+- You can schedule interview times with your applicants.
+- You can find members or applicants easily through the `find` commands. 
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+If this is your first time using CMC, head over to [How to use CMC's User Guide](#how-to-use-cmcs-user-guide)
+to start keeping track of all your members and applicants!
+</div>
 
 * Table of Contents
-  {:toc}
+  <!-- TOC -->
+* [ClubMemberContacts](#clubmembercontacts)
+  * [Quick start](#quick-start)
+  * [Features](#features)
+    * [Add Member/Applicant](#add-memberapplicant)
+      * [Usage:](#usage-)
+        * [Adding member:](#adding-member-)
+        * [Adding applicant:](#adding-applicant-)
+      * [Acceptable values for parameters:](#acceptable-values-for-parameters-)
+      * [Example of usage:](#example-of-usage-)
+    * [Delete Member](#delete-member)
+      * [Usage:](#usage--1)
+      * [Acceptable values for parameters:](#acceptable-values-for-parameters--1)
+      * [Example of usage:](#example-of-usage--1)
+      * [Expected Outcome:](#expected-outcome-)
+      * [If index is out of range:](#if-index-is-out-of-range-)
+      * [If there are no members:](#if-there-are-no-members-)
+    * [Edit Member](#edit-member)
+      * [Usage:](#usage--2)
+      * [Acceptable values for parameters:](#acceptable-values-for-parameters--2)
+      * [Example of usage:](#example-of-usage--2)
+      * [Expected Outcome:](#expected-outcome--1)
+      * [If name is invalid:](#if-name-is-invalid-)
+      * [If phone number is invalid:](#if-phone-number-is-invalid-)
+      * [If telegram handle is invalid:](#if-telegram-handle-is-invalid-)
+      * [If tag is invalid:](#if-tag-is-invalid-)
+    * [Find Member(s)](#find-member--s-)
+      * [Usage:](#usage--3)
+      * [Acceptable values for parameters:](#acceptable-values-for-parameters--3)
+      * [Example of usage:](#example-of-usage--3)
+      * [Expected Outcome:](#expected-outcome--2)
+      * [If unable to find member(s) with matching keyword(s)](#if-unable-to-find-member--s--with-matching-keyword--s-)
+    * [View Members/Applicants](#view-membersapplicants)
+      * [Usage:](#usage--4)
+        * [Viewing all members:](#viewing-all-members-)
+        * [Viewing all applicants:](#viewing-all-applicants-)
+    * [Delete Applicant](#delete-applicant)
+      * [Usage:](#usage--5)
+      * [Acceptable values for parameters:](#acceptable-values-for-parameters--4)
+      * [Example of usage:](#example-of-usage--4)
+      * [Expected Outcome:](#expected-outcome--3)
+      * [If index is out of range:](#if-index-is-out-of-range--1)
+      * [If there are no applicants:](#if-there-are-no-applicants-)
+    * [Edit Applicant](#edit-applicant)
+      * [Usage:](#usage--6)
+      * [Acceptable values for parameters:](#acceptable-values-for-parameters--5)
+      * [Example of usage:](#example-of-usage--5)
+      * [Expected Outcome:](#expected-outcome--4)
+      * [If name is invalid:](#if-name-is-invalid--1)
+      * [If phone number is invalid:](#if-phone-number-is-invalid--1)
+      * [If interview date is invalid:](#if-interview-date-is-invalid-)
+    * [Find Applicant(s)](#find-applicant--s-)
+      * [Usage:](#usage--7)
+      * [Acceptable values for parameters:](#acceptable-values-for-parameters--6)
+      * [Example of usage:](#example-of-usage--6)
+      * [Expected Outcome:](#expected-outcome--5)
+      * [If unable to find applicant(s) with matching keyword(s)](#if-unable-to-find-applicant--s--with-matching-keyword--s-)
+    * [Copy Member/Applicant](#copy-memberapplicant)
+      * [Usage:](#usage--8)
+        * [Copying member:](#copying-member-)
+        * [Copying applicant:](#copying-applicant-)
+      * [Acceptable values for parameters:](#acceptable-values-for-parameters--7)
+      * [Example of usage:](#example-of-usage--7)
+      * [Expected Outcome:](#expected-outcome--6)
+      * [If index is out of range:](#if-index-is-out-of-range--2)
+  * [Command summary](#command-summary)
+<!-- TOC -->
 
 --------------------------------------------------------------------------------------------------------------------
+
+## How to Use CMC's User Guide
 
 ## Quick start
 
 1. Ensure you have Java 11 or above installed in your Computer.
 
-2. Download the latest clubmemberscontact.jar from [here](https://github.com/se-edu/addressbook-level3/releases).
+2. Download the latest ClubMembersContact.jar from [here](https://github.com/AY2324S1-CS2103T-W15-3/tp/releases).
 
-3. Locate your jar file in your computer and double click on it to run the application. Alternatively, you can run the
-   jar file from the command line using the java -jar clubmemberscontact.jar command.
+3. Locate your jar file in your computer and double-click on it to run the application. Alternatively, you can run the
+   jar file from the command line using the java -jar ClubMembersContact.jar command.
 
 4. A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
@@ -43,6 +121,10 @@ This project is based on the AddressBook-Level3 project created by the [SE-EDU i
     4. `findm John Doe` : Only member John Doe will be listed under the members list
     5. `findm Alicia Johndoe@xyz.com` : Both members Alicia and John Doe will be listed under the members list
     6. `delm 2` : Member John Doe will be deleted from the members list
+    7. `viewm` : All members will be listed under the members list
+    8. `addt 1 /task Finish_Proposal` : Assigns "Finish_Proposal" task to member Alicia
+    9. `delt 1 /task 1` : Deletes "Finish_Proposal" task from member Alicia
+    10. `viewt 1` : All tasks assigned to member Alicia will be listed
 
 6. Refer to the [Features](#features) below for details of each command.
 
@@ -52,7 +134,7 @@ This project is based on the AddressBook-Level3 project created by the [SE-EDU i
 
 <div markdown="span" class="alert alert-primary">
 
-**Note:** Many of the commands below have _aliases_, or short-form versions that make them easier
+:information_source: **Note:** Many of the commands below have _aliases_, or short-form versions that make them easier
 to type. For example, the command `addMember` can be typed as `addm`. Usages of the aliases are documented below
 alongside the full command word, and all aliases can be used interchangeably with the full command word.
 
@@ -306,26 +388,28 @@ fields have to be specified.
 
 #### Usage:
 
-`editApplicant {index} /name {applicantName} /phone {phoneNumber}`
+`editApplicant {index} /name {applicantName} /phone {phoneNumber} /interview {interviewTime}`
 
-`edita {index} /name {applicantName} /phone {phoneNumber}`
+`edita {index} /name {applicantName} /phone {phoneNumber} /interview {interviewTime}`
 
 #### Acceptable values for parameters:
 
 - `index`: Only numbers are allowed, starting from 1
 - `applicantName`: Only alphabetical characters, @, () are allowed
 - `phoneNumber`: Only numbers are allowed
+- `interviewTime` : Only dates in the format of "DD/MM/YYYY HhMm" are allowed. To remove an interview time from an 
+applicant, 'cancel' is also allowed.
 
 #### Example of usage:
 
-`editApplicant 1 /name Aliciaa /phone 12345678`
+`editApplicant 1 /name Alicia /phone 12345678 /interivew 12/10/2023 1400`
 
-`edita 1 /name Aliciaa /phone 12345678`
+`edita 1 /name Alicia /phone 12345678 /interview 12/10/2023 1400`
 
 #### Expected Outcome:
 
 ```
-Edited applicant: Aliciaa
+Edited applicant: Alicia
 ```
 
 #### If name is invalid:
@@ -338,6 +422,13 @@ Names should only contain alphanumeric characters and spaces, and it should not 
 
 ```
 Phone numbers should only contain numbers, and it should be at least 3 digits long
+```
+
+#### If interview date is invalid:
+
+```
+Interview time should be in the format of DD/MM/YYYY HHmm. 
+To cancel the interview, enter 'cancel' (case sensitive)
 ```
 
 ### Find Applicant(s)
@@ -423,15 +514,15 @@ The member index provided is invalid
 
 ## Command summary
 
-| Action                | Format                                                                                                   | Example(s)                                                                     |
-|-----------------------|----------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------|
-| **Add Member**        | `addm /name {memberName} /phone {phoneNumber} /email {email} /tele {telegramHandle} /tag {tag}`          | `addm /name Alicia /phone 92345678 /email Alicia@xyz.com /tele @Alicia`        |
-| **Delete Member**     | `delm {index}`                                                                                           | `delm 1`                                                                       |
-| **Edit Member**       | `editm {index} /name {memberName} /phone {phoneNumber} /email {email} /tele {telegramHandle} /tag {tag}` | `editm 1 /name Aliciaa /phone 12345678`  <br/>`editm 1 /email Aliciaa@xyz.com` |
-| **Find Member(s)**    | `findm {keyword}`                                                                                        | `findm Alicia`<br/>`findm John 92345678`                                       |
-| **View Member(s)**    | `viewm`                                                                                                  | `viewm`                                                                        |
-| **Add Applicant**     | `adda /name {applicantName} /phone {phoneNumber}`                                                        | `adda /name Alicia /phone 92345678`                                            |
-| **Delete Applicant**  | `dela {index}`                                                                                           | `dela 1`                                                                       |
-| **Edit Applicant**    | `edita {index} /name {applicantName} /phone {phoneNumber}`                                               | `edita 1 /name John`<br/>`edita 1 /name Aliciaa /phone 12345678`               |
-| **Find Applicant(s)** | `finda {keyword}`                                                                                        | `finda Alicia`<br/>`finda John 92345678`                                       |
-| **View Applicant(s)** | `viewa`                                                                                                  | `viewa`                                                                        |
+| Action                | Format                                                                                                   | Example(s)                                                                                                                           |
+|-----------------------|----------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------|
+| **Add Member**        | `addm /name {memberName} /phone {phoneNumber} /email {email} /tele {telegramHandle} /tag {tag}`          | `addm /name Alicia /phone 92345678 /email Alicia@xyz.com /tele @Alicia`                                                              |
+| **Delete Member**     | `delm {index}`                                                                                           | `delm 1`                                                                                                                             |
+| **Edit Member**       | `editm {index} /name {memberName} /phone {phoneNumber} /email {email} /tele {telegramHandle} /tag {tag}` | `editm 1 /name Aliciaa /phone 12345678`  <br/>`editm 1 /email Aliciaa@xyz.com`                                                       |
+| **Find Member(s)**    | `findm {keyword}`                                                                                        | `findm Alicia`<br/>`findm John 92345678`                                                                                             |
+| **View Member(s)**    | `viewm`                                                                                                  | `viewm`                                                                                                                              |
+| **Add Applicant**     | `adda /name {applicantName} /phone {phoneNumber}`                                                        | `adda /name Alicia /phone 92345678`                                                                                                  |
+| **Delete Applicant**  | `dela {index}`                                                                                           | `dela 1`                                                                                                                             |
+| **Edit Applicant**    | `edita {index} /name {applicantName} /phone {phoneNumber} /interview {interviewTime}`                    | `edita 1 /name John`<br/>`edita 1 /interview 07/01/2003 1500`<br/>`edita 1 /name Aliciaa /phone 12345678 /interview 10/12/2023 1150` |
+| **Find Applicant(s)** | `finda {keyword}`                                                                                        | `finda Alicia`<br/>`finda John 92345678`                                                                                             |
+| **View Applicant(s)** | `viewa`                                                                                                  | `viewa`                                                                                                                              |
