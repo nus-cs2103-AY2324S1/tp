@@ -100,10 +100,8 @@ Should the file fail to launch on click:
     
 1. Open a command terminal on the folder where `tutorconnect.jar` is. On Windows, you can do so by right-clicking on the folder and select "Open in Terminal".
 ![terminal](images/quick-start/open-terminal.png)
-
 On Mac:
 ![terminal-mac](images/quick-start/open-terminal-mac.png)
-
 2. Type the following command in the terminal: `java -jar tutorconnect.jar` and hit enter.
 
 
