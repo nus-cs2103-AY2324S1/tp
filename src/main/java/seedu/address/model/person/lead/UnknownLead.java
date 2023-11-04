@@ -7,7 +7,7 @@ package seedu.address.model.person.lead;
 public class UnknownLead extends Lead {
 
     // Number of weeks before next follow-up
-    private static final int FOLLOW_UP_PERIOD = 4;
+    public static final int FOLLOW_UP_PERIOD = 4;
     private static final UnknownLead instance = new UnknownLead();
 
     private UnknownLead() {

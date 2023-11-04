@@ -7,7 +7,7 @@ package seedu.address.model.person.lead;
 public class WarmLead extends Lead {
 
     // Number of weeks before next follow-up
-    private static final int FOLLOW_UP_PERIOD = 4;
+    public static final int FOLLOW_UP_PERIOD = 4;
     private static final WarmLead instance = new WarmLead();
 
     private WarmLead() {

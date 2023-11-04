@@ -17,8 +17,8 @@ public abstract class Lead {
      *
      * @param lead the string representation for the lead
      */
-    public Lead(String lead) {
-        assert Objects.nonNull(lead);
+    public Lead(String lead) throws IllegalArgumentException {
+        assert Objects.nonNull(lead) : "Lead should take non-null values";
         checkArgument(isValidLead(lead), MESSAGE_CONSTRAINTS);
     }
 
@@ -28,8 +28,8 @@ public abstract class Lead {
      * @param lead the string representation for the {@code Lead}
      * @return the {@code Lead} object corresponding to the type
      */
-    public static Lead of(String lead) {
-        assert Objects.nonNull(lead);
+    public static Lead of(String lead) throws IllegalArgumentException {
+        assert Objects.nonNull(lead) : "Lead should take non-null values";
         checkArgument(isValidLead(lead), MESSAGE_CONSTRAINTS);
         LeadType leadType = Enum.valueOf(LeadType.class, lead.toUpperCase());
         return Lead.of(leadType);
@@ -41,7 +41,7 @@ public abstract class Lead {
      * @param leadType the type of lead
      * @return the {@code Lead} object corresponding to the type
      */
-    public static Lead of(LeadType leadType) {
+    public static Lead of(LeadType leadType) throws IllegalArgumentException {
         assert Objects.nonNull(leadType);
         switch (leadType) {
         case HOT:
@@ -63,6 +63,7 @@ public abstract class Lead {
      * @return true if the string is a valid lead, false otherwise
      */
     public static boolean isValidLead(String lead) {
+        assert Objects.nonNull(lead) : "lead should not be null";
         for (LeadType leadType : LeadType.values()) {
             if (lead.equalsIgnoreCase(leadType.name())) {
                 return true;
