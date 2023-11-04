@@ -167,17 +167,36 @@ After adding a client profile, you can now log your interactions with the client
 ```text
 interaction INDEX o/OUTCOME [DETAILS]
 ```
-Where `INDEX` refers to the index of the client profile in the displayed list of clients.
 
-Note that at least one of the `OUTCOME` or `DETAILS` parameters must be provided.
+<div markdown="block" class="alert alert-info">
 
-**Examples**
+**:information_source: Notes about the interaction command:**<br>
+
+- `INDEX` refers to the index of the client profile in the displayed list of clients.
+
+- At least one of the `OUTCOME` or `DETAILS` paramters must be provided.
+
+</div>
+
+**Example**
 ```
-interaction 1 o/INTERESTED Meeting with client
+interaction 7 o/INTERESTED First meeting with client, she seems interested!
 ```
-```
-interaction 1 Meeting with client
-```
+
+<figure>
+    <img src="images/ExampleInteractionBefore.png" alt="Profile before adding an interaction">
+    <figcaption align="center">
+        <em>There are initially no past interactions for Bernice Yu's profile.</em>
+    </figcaption>
+</figure>
+
+<figure>
+    <img src="images/ExampleInteractionAfter.png" alt="Profile after adding an interaction">
+    <figcaption align="center">
+        <em>Result of adding an interaction for Bernice Yu's profile.</em>
+    </figcaption>
+</figure>
+<br>
 
 You should directly see the interaction added to the client profile in the application window.
 
