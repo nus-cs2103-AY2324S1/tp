@@ -72,7 +72,7 @@ public class Interview implements Comparable<Interview> {
 
             long number = Long.parseLong(lastNumber);
             long incrementedNumber = number + 1;
-            String result = type.replace(lastNumber, String.valueOf(incrementedNumber));
+            String result = type.replaceAll(lastNumber+"$", String.valueOf(incrementedNumber));
 
             return new Interview(result, rating);
         } else {
