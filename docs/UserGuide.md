@@ -194,34 +194,6 @@ Format: `undo`
 * Example image above shows the result of command `undo`
 * Adds the most recently deleted booking back to the system.
 
-### Flagging an entry: `flag`
-
-Flags a booking that requires attention.
-
-Format: `flag INDEX`
-
-![FlagCommand.png](images%2FFlagCommand.png)
-
-* Example image above shows the result of command `flag 3`
-* Flagged booking will move to the top portion of the list.
-* The index refers to the index number shown in the displayed booking list.
-* Index must be a positive integer.
-* Only one entry can be flagged at a time.
-
-### Unflagging an entry: `unflag`
-
-Unflags a booking that no longer requires attentiobn.
-
-Format `unflag INDEX`
-
-* Example image above shows the result of command `unflag 1`
-* Unflagged booking will move to the bottom portion of the list.
-* The index refers to the index number shown in the displayed booking list.
-* Index must be a positive integer.
-* Only one entry can be unflagged at a time.
-
-![UnflagCommand.png](images%2FUnflagCommand.png)
-
 ### Clearing all entries : `clear`
 
 Clears all entries from the bookingPeriod book.

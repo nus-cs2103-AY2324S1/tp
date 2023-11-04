@@ -66,10 +66,6 @@ public class BookingCard extends UiPart<Region> {
         room.setText("Room " + booking.getRoom().value);
         bookingPeriod.setText(booking.getBookingPeriod().value);
         remark.setText(booking.getRemark().value);
-        if (booking.isFlagged()) {
-            Image flag = new Image("images/Flag.png");
-            flagImage.setImage(flag);
-        }
         RoomTypeTag tag = booking.getTags();
         Label tagLabel = new Label(tag.roomTypeTagName);
         tagLabel.setStyle("-fx-font-weight: bold; -fx-font-size: 14; -fx-background-color: #64a4db;"

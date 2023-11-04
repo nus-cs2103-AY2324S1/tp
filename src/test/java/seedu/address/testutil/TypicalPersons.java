@@ -62,9 +62,6 @@ public class TypicalPersons {
             .withBookingPeriod("2023-01-01 08:00 to 2023-01-02 12:00")
             .withName("Ida Mueller").withPhone("8482131")
             .withEmail("hans@example.com").build();
-    static { // Set ALICE flag to true for use in test cases.
-        ALICE.flag();
-    }
 
     // Manually added - Person's details found in {@code CommandTestUtil}
     public static final Booking AMY = new BookingBuilder().withRoom(VALID_ROOM_AMY)

@@ -10,14 +10,11 @@ CheckMate is designed to streamline the process of room bookings for hotel emplo
 
 Given below are my contributions to the project.
 
-* **New Feature**: Room Statistics Pie Chart. (Pull request [#148](https://github.com/AY2324S1-CS2103T-F10-1/tp/pull/148))
+* **New Feature**: Room Statistics Pie Chart (The class DoughnutPieChart.java which creates the pie chart with an empty centre is taken from https://stackoverflow.com/questions/24121580/can-piechart-from-javafx-be-displayed-as-a-doughnut, but the class RoomPieChart.java is self created). (Pull request [#148](https://github.com/AY2324S1-CS2103T-F10-1/tp/pull/148))
   * What it does: Allows the user to see the overall distribution of available room types and occupied rooms at a glance using the pie chart, as well as see the exact numbers using the legend of the pie chart.
   * Justification: This feature greatly enhances user experience and the ability of the user to do their jobs as hotel receptionists by allowing them an overview of the types of rooms available and occupied rooms.
-  * Highlights: Implementing this feature required an understanding of both the UI components and logic of the commands. It involved changing the constructor of the CommandResult.java class to accept a boolean `showRoomStatistics` parameter, which essentially enables me to integrate the pie chart to every single one of the commands and to manipulate the behaviour of the pie chart for each command.
-
-* **New Feature**: Flag and Unflag commands. (Pull request [#178](https://github.com/AY2324S1-CS2103T-F10-1/tp/pull/178))
-  * What it does: Allows the user to flag the bookings which they want to make changes to later on by keeping the flagged bookings at the top of the `Current Bookings` list and indicating that the booking is flagged by intially adding a `!` to the booking, which Aryan then upgraded to an image of a red flag. The unflag command then does the opposite by putting the Booking back in the `Current Bookings` list ordered according to its room number, and the image of the red flag is removed.
-  * Justification: This feature enables users to have more freedom and efficiency in their work by giving them the ability to come back to editing Bookings at a later time. This feature mimics Microsoft Outlook's flag feature.
+  * Highlights: Implementing this feature required an understanding of both the UI components and logic of the commands.
+  It involved changing the constructor of the CommandResult.java class to accept a boolean `showRoomStatistics` parameter, which essentially enables me to integrate the pie chart to every single one of the commands and to manipulate the behaviour of the pie chart for each command.
 
 * **New Feature**: JSON Injection Parser. (Pull request [#179](https://github.com/AY2324S1-CS2103T-F10-1/tp/pull/179))
   * What it does: Prevents the user from inputting any characters that may constitute a JSON command which could be executed when data is being read or written to the JSON storage file.
@@ -43,7 +40,7 @@ Given below are my contributions to the project.
   * User Guide:
     * Added a Table of Contents for the UG and updated it to match the then-capabilities of our application (Pull request [#127](https://github.com/AY2324S1-CS2103T-F10-1/tp/pull/127)).
   * Developer Guide:
-    * Added implementation details of the `Flag and Unflag command`, `Room Statistics PieChart`, `JsonInjectionParser` features.
+    * Added implementation details of the`Room Statistics PieChart`, `JsonInjectionParser` features.
 
 * **Community**:
   * Approved PRs and commented on some eg: (Pull request [#185](https://github.com/AY2324S1-CS2103T-F10-1/tp/pull/185))
