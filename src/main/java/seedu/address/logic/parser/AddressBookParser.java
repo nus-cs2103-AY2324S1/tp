@@ -23,7 +23,6 @@ import seedu.address.logic.commands.EditTeamNameCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.FindTeamCommand;
-import seedu.address.logic.commands.FindTeamLeaderCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.ListTeamCommand;
@@ -101,9 +100,6 @@ public class AddressBookParser {
 
         case FindTeamCommand.COMMAND_WORD:
             return new FindTeamCommandParser().parse(arguments);
-
-        case FindTeamLeaderCommand.COMMAND_WORD:
-            return new FindTeamLeaderCommandParser().parse(arguments);
 
         case FindCommand.COMMAND_WORD:
             return new FindCommandParser().parse(arguments);
