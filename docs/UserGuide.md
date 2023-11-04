@@ -36,14 +36,14 @@ Choose a topic from the table of contents below to find out how to manage your c
 
 5. Change the directory of the terminal by using the `cd` command.
 
-    a. For example, if I saved my file at `C:\Users\John\Desktop\Connectify\connectify.jar`, run the command `cd C:\Users\John\Desktop\Connectify` in your terminal.
+    a. For example, if you saved your file at `C:\Users\John\Desktop\Connectify\connectify.jar`, run the command `cd C:\Users\John\Desktop\Connectify` in your terminal.
 
 6. Run `java -jar connectify.jar` to start the application.
 
 7. A window similar to the one below should appear in a few seconds, containing sample data.
 
    <figure>
-       <img src="images/StartupGUI.png" alt="Connectify GUI during start-up">
+       <img src="images/Ui.png" alt="Connectify GUI during start-up">
        <figcaption align="center">
            <em>The GUI you see on start-up may be slightly different due to differences in data.</em>
        </figcaption>
@@ -81,12 +81,42 @@ The examples in this guide are formatted with the following conventions:
 
 # Features
 
-## Quick notes about the command format
-- Everything related to the command is case-sensitive unless otherwise stated.
-- Words in `UPPER_CASE` are the parameters to be supplied by the user. <br/> E.g., in `n/NAME`, `NAME` is a parameter which can be used as `n/John Doe`.
-- Parameters that are optional are indicated with square brackets `[OPTIONAL]`. <br/> E.g., in `[tg/TELEGRAM]`, `TELEGRAM` is an optional parameter which can be used as `tg/@john_doe` or omitted.
-- Parameters specified in the command can be written in any order. <br/> E.g., `n/John Doe tg/@john_doe` is equivalent to `tg/@john_doe n/John Doe`.
-- Optional parameters with `...` after the square bracket can be repeated any number of times, including zero. <br/> E.g., in `[tag/TAG]...`, multiple tags can be supplied as `tag/important tag/urgent` or omitted.
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Notes about the command format:**<br>
+
+- Commands usually start with a command word.
+
+    e.g. `create`, `edit` and `bye` are command words.
+
+- Flags are indicators to differentiate various parts of the command. It consists of a letter and a character `/`.
+
+    e.g. in `n/NAME`, `n/` is the flag for the `NAME` parameter.
+
+- Parameters are words in `UPPER_CASE`, to be supplied by the user.
+
+    e.g. in `n/NAME`, `NAME` is a parameter which can be used as `n/John Doe`.
+
+- Commands, flags and parameters are case-sensitive, unless otherwise specified.
+
+- Items in square brackets are optional.
+
+   e.g. `n/NAME [tg/TELEGRAM]` can be used as `n/John Doe tg/@johndoe` or as `n/John Doe`.
+
+- Items with `...` after them can be repeated any number of times, including zero.
+
+   e.g. `[t/TAG]...` can be used as ` ` (0 times), `t/friend`, or `t/friend t/neighbour`, while
+`n/NAME` has to be used exactly once.
+
+- Parameters can be entered in any order.
+
+   e.g. If the command specifies its parameters as `n/NAME p/PHONE`, `p/PHONE n/NAME` is also acceptable.
+
+- Extraneous parameters for commands that do not take in parameters will be ignored.
+
+    e.g. The ***list*** command does not take in any parameters. If the command `list 123` is entered, it will be interpreted as `list`.
+
+</div>
 
 ## Viewing help: ***help***
 
