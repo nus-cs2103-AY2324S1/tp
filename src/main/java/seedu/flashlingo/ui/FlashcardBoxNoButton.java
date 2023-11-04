@@ -62,8 +62,10 @@ public class FlashcardBoxNoButton extends UiPart<Region> {
         original.setText(fc.getOriginalWord().toString() + ": ");
         if (fc.getIsRevealed()) {
             translation.setText(flashCard.getTranslatedWord().toString());
+            reveal.setText(" Hide ");
         } else {
             translation.setText("");
+            reveal.setText("Reveal");
         }
         level.setText("Proficiency Level: " + fc.getProficiencyLevel().getLevel());
         lang.setText("Translation language: " + fc.getTranslatedWord().getLanguage());
