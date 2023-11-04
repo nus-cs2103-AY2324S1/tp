@@ -25,8 +25,6 @@ class JsonAdaptedPerson {
     private final String email;
     private final String remark;
     private final String bookingPeriod;
-    private final boolean flag;
-
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
      */
@@ -34,14 +32,13 @@ class JsonAdaptedPerson {
     public JsonAdaptedPerson(@JsonProperty("room") String room, @JsonProperty("name") String name,
                              @JsonProperty("phone") String phone,
                              @JsonProperty("email") String email, @JsonProperty("bookingPeriod") String bookingPeriod,
-                             @JsonProperty("remark") String remark, @JsonProperty("flag") boolean flag) {
+                             @JsonProperty("remark") String remark) {
         this.room = room;
         this.bookingPeriod = bookingPeriod;
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.remark = remark;
-        this.flag = flag;
     }
 
     /**
@@ -54,7 +51,6 @@ class JsonAdaptedPerson {
         phone = source.getPhone().value;
         email = source.getEmail().value;
         remark = source.getRemark().value;
-        flag = source.isFlagged();
     }
 
     /**
@@ -111,11 +107,6 @@ class JsonAdaptedPerson {
         }
         final Remark modelRemark = new Remark(remark);
         Booking booking = new Booking(modelRoom, modelBookingPeriod, modelName, modelPhone, modelEmail, modelRemark);
-        if (flag == true) {
-            booking.flag();
-        } else {
-            booking.unflag();
-        }
         return booking;
     }
 }

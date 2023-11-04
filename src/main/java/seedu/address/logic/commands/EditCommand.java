@@ -85,9 +85,6 @@ public class EditCommand extends Command {
 
         Booking booking = new Booking(updatedRoom, updatedBookingPeriod, updatedName, updatedPhone, updatedEmail,
                 updatedRemark);
-        if (bookingToEdit.isFlagged()) {
-            booking.flag();
-        }
         return booking;
     }
 
