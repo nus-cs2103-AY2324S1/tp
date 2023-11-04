@@ -279,29 +279,6 @@ public class ParserUtil {
     /**
      * Parses {@code Collection<String> tag parameters} into a {@code List<String> of tags}.
      */
-//    public static List<String> parseSinglePrefixTags(Collection<String> tags, String commandMessage)
-//            throws ParseException {
-//        requireNonNull(tags);
-//        UniqueTagList uniqueTagList = new UniqueTagList();
-//        String[] tagArr = parseSinglePrefixParams(tags, commandMessage);
-//        final List<String> tagList = new ArrayList<>();
-//        List<String> nonExistingTags = new ArrayList<>();
-//        for (String tag : tagArr) {
-//            tag = tag.trim();
-//            if (!Tag.isValidTagName(tag)) {
-//                throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
-//            }
-//            if (!uniqueTagList.contains(tag)) {
-//                nonExistingTags.add(tag);
-//            }
-//            tagList.add(tag);
-//        }
-//        if (!nonExistingTags.isEmpty()) {
-//            throw new ParseException(Tag.MESSAGE_TAG_DOES_NOT_EXIST, nonExistingTags);
-//        }
-//        return tagList;
-//    }
-
     public static List<String> parseSinglePrefixTags(Collection<String> tags, String commandMessage)
             throws ParseException {
         requireNonNull(tags);
