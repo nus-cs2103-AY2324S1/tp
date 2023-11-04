@@ -114,7 +114,9 @@ hospital management tasks done faster than the other apps in the industry.
 
 - [Known Issues](#known-issues)
 
-<div markdown="span" class="alert alert-info">:bulb: **Tip:**
+<div markdown="span" class="alert alert-info">
+:bulb:
+Tips:
 If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as the format might be different when copied over to the application.
 </div>
 
@@ -277,7 +279,9 @@ email at _johnd@example.com_ and address at _311, Clementi Ave 2, #02-25_, who i
 
 - You do not have to enter the illness when adding a patient.
 
-<div markdown="span" class="alert alert-info">:bulb: **Tip:**
+<div markdown="span" class="alert alert-info">
+:bulb:
+Tips:
 You can enter more than one illness for a patient, e.g. `illnesses=fever, flu` will add both fever and flu as a patient's illnesses.
 </div>
 
