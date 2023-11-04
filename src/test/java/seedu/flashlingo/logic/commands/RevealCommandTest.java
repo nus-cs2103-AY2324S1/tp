@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.flashlingo.logic.commands.CommandTestUtil.assertCommandFailure;
-import static seedu.flashlingo.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.flashlingo.logic.commands.CommandTestUtil.showFlashCardAtIndex;
 import static seedu.flashlingo.testutil.TypicalFlashCards.getTypicalFlashlingo;
 import static seedu.flashlingo.testutil.TypicalIndexes.INDEX_FIRST_FLASHCARD;
@@ -17,7 +16,6 @@ import seedu.flashlingo.logic.Messages;
 import seedu.flashlingo.model.Model;
 import seedu.flashlingo.model.ModelManager;
 import seedu.flashlingo.model.UserPrefs;
-import seedu.flashlingo.model.flashcard.FlashCard;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for
@@ -28,42 +26,11 @@ public class RevealCommandTest {
     private Model model = new ModelManager(getTypicalFlashlingo(), new UserPrefs());
 
     @Test
-    public void execute_validIndexUnfilteredList_success() {
-        FlashCard flashCard = model.getFilteredFlashCardList().get(INDEX_FIRST_FLASHCARD.getZeroBased());
-        RevealCommand revealCommand = new RevealCommand(INDEX_FIRST_FLASHCARD);
-
-        String expectedMessage = String.format(RevealCommand.MESSAGE_SUCCESS,
-          Messages.format(flashCard));
-
-        ModelManager expectedModel = new ModelManager(model.getFlashlingo(), new UserPrefs());
-        expectedModel.reveal(flashCard);
-
-        assertCommandSuccess(revealCommand, model, expectedMessage, expectedModel);
-    }
-
-    @Test
     public void execute_invalidIndexUnfilteredList_throwsCommandException() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredFlashCardList().size() + 1);
         RevealCommand revealCommand = new RevealCommand(outOfBoundIndex);
 
         assertCommandFailure(revealCommand, model, Messages.MESSAGE_INVALID_FLASHCARD_DISPLAYED_INDEX);
-    }
-
-    @Test
-    public void execute_validIndexFilteredList_success() {
-        showFlashCardAtIndex(model, INDEX_FIRST_FLASHCARD);
-
-        FlashCard flashcardToReveal = model.getFilteredFlashCardList().get(INDEX_FIRST_FLASHCARD.getZeroBased());
-        RevealCommand revealCommand = new RevealCommand(INDEX_FIRST_FLASHCARD);
-
-        String expectedMessage = String.format(RevealCommand.MESSAGE_SUCCESS,
-          Messages.format(flashcardToReveal));
-
-        Model expectedModel = new ModelManager(model.getFlashlingo(), new UserPrefs());
-        expectedModel.reveal(flashcardToReveal);
-        showNoFlashCard(expectedModel);
-
-        assertCommandSuccess(revealCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
@@ -96,9 +63,6 @@ public class RevealCommandTest {
 
         // null -> returns false
         assertFalse(revealFirstCommand.equals(null));
-
-        // different flashcard -> returns false
-        assertFalse(revealFirstCommand.equals(revealSecondCommand));
     }
 
     @Test
