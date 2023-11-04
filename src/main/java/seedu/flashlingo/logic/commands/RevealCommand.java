@@ -43,6 +43,9 @@ public class RevealCommand extends Command {
 
         FlashCard toBeRevealed = lastShownList.get(targetIndex.getZeroBased());
         TranslatedWord translatedWord = model.reveal(toBeRevealed);
+        if (!toBeRevealed.getIsRevealed()) { // If already revealed -> Hide
+            return new CommandResult("Translation has been hidden");
+        }
         return new CommandResult(MESSAGE_SUCCESS + translatedWord.getWord());
     }
     @Override
