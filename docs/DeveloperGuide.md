@@ -338,16 +338,19 @@ Step 3. When displaying the `Reminder`'s, the `UniqueReminderList` will then be 
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                     | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | user                                       | record my client’s contact information         | conveniently refer to it later                             |
-| `* * *`  | user                                       | access the full details of a particular client's information comprehensively               | aid my future interaction with this client |
-| `* * *`  | user                                       | client profiles                | remove entries that I no longer need                                   |
-| `* *`    | user                                       | add notes of my meetings with my clients          | track details for future interaction with client |
-| `* *`    | user                                       | log the outcomes of my client interactions (e.g., interested, not interested, follow-up required)   | track progress of client interactions                |
-| `* *`      | user                                       | mark a client as a "hot lead," "warm lead," or "cold lead           | gauge the sales potential of the client                                                 |
+| Priority | As a …      | I want to …                                                                                      | So that I can…                                                     |
+|----------|-------------|--------------------------------------------------------------------------------------------------|--------------------------------------------------------------------|
+| `* * *`  | user        | record my client’s contact information                                                           | conveniently refer to it later                                     |
+| `* * *`  | user        | access the full details of a particular client's information comprehensively                     | aid my future interaction with this client                         |
+| `* * *`  | user        | delete client profiles                                                                           | remove entries that I no longer need                               |
+| `* *`    | user        | edit client profiles                                                                             | record any changes in my client's information                      |
+| `* *`    | user        | add notes of my meetings with my clients                                                         | track details for future interactions with my client               |
+| `* *`    | user        | log the outcomes of my client interactions (e.g. interested, not interested, follow-up required) | track progress of client interactions                              |
+| `* *`    | user        | mark a client as a "hot lead", "warm lead" or "cold lead"                                        | gauge the sales potential of the client                            |
+| `* *`    | new user    | have example client data already present in the app                                              | have a reference or play around in the app to get familiar with it |
+| `* *`    | salesperson | view analytics about my performance                                                              | continually improve                                                |
+| `* *`    | salesperson | look at a summary of what's coming up next                                                       | plan my day around them                                            |
 
-*{More to be added}*
 
 ### Use cases
 
