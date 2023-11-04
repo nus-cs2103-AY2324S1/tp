@@ -357,6 +357,21 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
+    /**
+     * Fill the panel with list of person.
+     */
+    @FXML
+    public void handleFindPerson() {
+        fillInnerParts("persons");
+    }
+
+    /**
+     * Fill the panel with list of teams instead of person.
+     */
+    @FXML
+    public void handleFindTeam() {
+        fillInnerParts("teams");
+    }
     void show() {
         primaryStage.show();
     }
@@ -479,6 +494,12 @@ public class MainWindow extends UiPart<Stage> {
                 handleTree();
             }
 
+            if (commandResult.isFindPerson()) {
+                handleFindPerson();
+            }
+            if (commandResult.isFindTeam()) {
+                handleFindTeam();
+            }
             refreshCardContainer();
             refreshStatistics();
 

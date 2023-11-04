@@ -58,12 +58,21 @@ public class TeamCard extends UiPart<Region> {
         teamName.setText(team.getTeamName() + "  ----");
 
         IdentityCode leaderID = team.getTeamLeaderIdentityCode();
-        Label teamLeaderLabel = new Label("Team leader ->  "
-                + findPersonById(memberList, leaderID).getName()
-                + ";   ID ->  "
-                + leaderID.toString());
-        teamLeaderLabel.setStyle("-fx-font-size: 14px;");
-        teamLeader.getChildren().addAll(teamLeaderLabel);
+        Person leader = findPersonById(memberList, leaderID);
+        if (leader != null) {
+            Label teamLeaderLabel = new Label("Team leader ->  "
+                    + leader.getName()
+                    + ";   ID ->  "
+                    + leaderID.toString());
+            teamLeaderLabel.setStyle("-fx-font-size: 14px;");
+            teamLeader.getChildren().addAll(teamLeaderLabel);
+        } else {
+            // Handle the case where the leader is not found
+            Label errorLabel = new Label("Team leader not found!");
+            errorLabel.setStyle("-fx-font-size: 14px;");
+            teamLeader.getChildren().addAll(errorLabel);
+        }
+
 
         Label devLabel = new Label("Developers: ");
         teamMembers.getChildren().add(devLabel);
