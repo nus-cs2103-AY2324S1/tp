@@ -25,95 +25,52 @@ If this is your first time using CMC, head over to [How to use CMC's User Guide]
 to start keeping track of all your members and applicants!
 </div>
 
+--------------------------------------------------------------------------------------------------------------------
 ## Table of Contents
-
 <!-- TOC -->
-* [Table of Contents](#table-of-contents)
-* [How to Use CMC's User Guide](#how-to-use-cmcs-user-guide)
-* [Quick start](#quick-start)
-* [Interface Walkthrough](#interface-walkthrough)
-* [Features](#features)
-  * [Add Member/Applicant](#add-memberapplicant)
-    * [Usage:](#usage-)
-      * [Adding member:](#adding-member-)
-      * [Adding applicant:](#adding-applicant-)
-    * [Acceptable values for parameters:](#acceptable-values-for-parameters-)
-    * [Example of usage:](#example-of-usage-)
-  * [Delete Member](#delete-member)
-    * [Usage:](#usage--1)
-    * [Acceptable values for parameters:](#acceptable-values-for-parameters--1)
-    * [Example of usage:](#example-of-usage--1)
-    * [Expected Outcome:](#expected-outcome-)
-    * [If index is out of range:](#if-index-is-out-of-range-)
-    * [If there are no members:](#if-there-are-no-members-)
-  * [Edit Member](#edit-member)
-    * [Usage:](#usage--2)
-    * [Acceptable values for parameters:](#acceptable-values-for-parameters--2)
-    * [Example of usage:](#example-of-usage--2)
-    * [Expected Outcome:](#expected-outcome--1)
-    * [If name is invalid:](#if-name-is-invalid-)
-    * [If phone number is invalid:](#if-phone-number-is-invalid-)
-    * [If telegram handle is invalid:](#if-telegram-handle-is-invalid-)
-    * [If tag is invalid:](#if-tag-is-invalid-)
-  * [Find Member(s)](#find-member--s-)
-    * [Usage:](#usage--3)
-    * [Acceptable values for parameters:](#acceptable-values-for-parameters--3)
-    * [Example of usage:](#example-of-usage--3)
-    * [Expected Outcome:](#expected-outcome--2)
-    * [If unable to find member(s) with matching keyword(s)](#if-unable-to-find-member--s--with-matching-keyword--s-)
-  * [View Members/Applicants](#view-membersapplicants)
-    * [Usage:](#usage--4)
-      * [Viewing all members:](#viewing-all-members-)
-      * [Viewing all applicants:](#viewing-all-applicants-)
-  * [Delete Applicant](#delete-applicant)
-    * [Usage:](#usage--5)
-    * [Acceptable values for parameters:](#acceptable-values-for-parameters--4)
-    * [Example of usage:](#example-of-usage--4)
-    * [Expected Outcome:](#expected-outcome--3)
-    * [If index is out of range:](#if-index-is-out-of-range--1)
-    * [If there are no applicants:](#if-there-are-no-applicants-)
-  * [Edit Applicant](#edit-applicant)
-    * [Usage:](#usage--6)
-    * [Acceptable values for parameters:](#acceptable-values-for-parameters--5)
-    * [Example of usage:](#example-of-usage--5)
-    * [Expected Outcome:](#expected-outcome--4)
-    * [If name is invalid:](#if-name-is-invalid--1)
-    * [If phone number is invalid:](#if-phone-number-is-invalid--1)
-    * [If interview date is invalid:](#if-interview-date-is-invalid-)
-  * [Find Applicant(s)](#find-applicant--s-)
-    * [Usage:](#usage--7)
-    * [Acceptable values for parameters:](#acceptable-values-for-parameters--6)
-    * [Example of usage:](#example-of-usage--6)
-    * [Expected Outcome:](#expected-outcome--5)
-    * [If unable to find applicant(s) with matching keyword(s)](#if-unable-to-find-applicant--s--with-matching-keyword--s-)
-  * [Copy Member/Applicant](#copy-memberapplicant)
-    * [Usage:](#usage--8)
-      * [Copying member:](#copying-member-)
-      * [Copying applicant:](#copying-applicant-)
-    * [Acceptable values for parameters:](#acceptable-values-for-parameters--7)
-    * [Example of usage:](#example-of-usage--7)
-    * [Expected Outcome:](#expected-outcome--6)
-    * [If index is out of range:](#if-index-is-out-of-range--2)
-* [Command summary](#command-summary)
+* [ClubMemberContacts](#clubmembercontacts)
+  * [1. How to Use CMC's User Guide](#1-how-to-use-cmcs-user-guide)
+  * [2. Quick start](#2-quick-start)
+  * [3. Interface Walkthrough](#3-interface-walkthrough)
+  * [4. Features](#4-features)
+    * [4.1 Member Features](#41-member-features)
+      * [4.1.1 Adding a member : `addMember`](#411-adding-a-member--addmember)
+      * [4.1.2 Finding member(s) : `findMember` or `findm`](#412-finding-member--s---findmember-or-findm)
+      * [4.1.3 Viewing member(s) : `viewMembers` or `viewm`](#413-viewing-member--s---viewmembers-or-viewm)
+      * [4.1.4 Editing a member : `editMember` or `editm`](#414-editing-a-member--editmember-or-editm)
+      * [4.1.5 Deleting a member : `deleteMember` or `delm`](#415-deleting-a-member--deletemember-or-delm)
+      * [4.1.6 Allocating a task to a member : `addTask` or `addt`](#416-allocating-a-task-to-a-member--addtask-or-addt)
+      * [4.1.7 Viewing all tasks allocated to a member : `viewTask` or `viewt`](#417-viewing-all-tasks-allocated-to-a-member--viewtask-or-viewt)
+      * [4.1.8 Deleting a task allocated to a member : `deleteTask` or `delt`](#418-deleting-a-task-allocated-to-a-member--deletetask-or-delt)
+    * [4.2 Applicant Features](#42-applicant-features)
+      * [4.2.1 Adding an applicant : `addApplicant` or `adda`](#421-adding-an-applicant--addapplicant-or-adda)
+      * [4.2.2 Finding applicant(s) : `findApplicant` or `finda`](#422-finding-applicant--s---findapplicant-or-finda)
+      * [4.2.3 Viewing applicant(s) : `viewApplicants` or `viewa`](#423-viewing-applicant--s---viewapplicants-or-viewa)
+      * [4.2.4 Editing an applicant : `editApplicant` or `edita`](#424-editing-an-applicant--editapplicant-or-edita)
+      * [4.2.5 Deleting an applicant : `deleteApplicant` or `dela`](#425-deleting-an-applicant--deleteapplicant-or-dela)
+      * [4.2.6 Copying an applicant's details : `copyApplicant` or `cpa`](#426-copying-a-applicants-details--copyapplicant-or-cpa)
+    * [4.3 General Features](#43-general-features)
+      * [4.3.1 Accessing the user guide : `help`](#431-accessing-the-user-guide--help)
+      * [4.3.2 Exiting the application : `exit`](#432-exiting-the-application--exit)
+  * [5. FAQ](#5-faq)
+  * [6. Command summary](#6-command-summary)
 <!-- TOC -->
-
-
 --------------------------------------------------------------------------------------------------------------------
 
-## How to Use CMC's User Guide
+## 1. How to Use CMC's User Guide
 Thank you for choosing to use CMC. We are sure that CMC will be your trusty companion throughout your 
 management journey. This user guide will provide you a comprehensive documentation of CMC's features.
 
 If you are a first time user of CMC, make sure you have already downloaded the application. Head over to
-[Quick Start](#quick-start) to learn how to install the application.
+[Quick Start](#2-quick-start) to learn how to install the application.
 
 If you would like to have a brief introduction of the application's interface, 
-head over to our [Interface Walkthrough](#interface-walkthrough) to better learn about CMC.
+head over to our [Interface Walkthrough](#3-interface-walkthrough) to better learn about CMC.
 
 If you are already a seasoned user of CMC, you can refer to [Command Summary](#command-summary) for a 
 quick reference to all the commands available in CMC.
 
-## Quick start
+## 2. Quick start
 
 1. Ensure you have Java 11 or above installed in your Computer.
 
@@ -128,38 +85,27 @@ quick reference to all the commands available in CMC.
 5. Type the command in the command box and press Enter to execute it.
    Here are some example commands you can try:
 
-<<<<<<< HEAD
    - `help` : Opens up the help window.
    - `addm /name Alicia Teng /phone 91126291 /email alicia_teng@gmail.com /tele @alicia_teng` : Adds a member named `Alicia Teng` to the member list. See how to [add applicant](#add-memberapplicant) for more.
-   - `adda /name Chan Rui Jia /phone 97777117 /interview 10/12/2023 1400` : Adds an applicant named `Chan Rui Jia` to the list. See how to [add member](#add-memberapplicant) for more.
+   - `adda /name Chan Rui Jia /phone 97777117 /interview 10/12/2023 1400` : Adds an applicant named `Chan Rui Jia` to the list. See how to [add member](#411-adding-a-member--addmember) for more.
    - `deltm 1` : Deletes the member at the 1st position on the member list.
-   - `finda Win Sheng` : Searches for all applicants with `Win Sheng` in their contact details. See how to [find an applicant](#find-applicant--s-) for more.
-   - `editm 1 /tag Design` : Edits the tag of the member at the 3rd position on the member list. See how to [edit a member](#edit-member) for more.
+   - `finda Win Sheng` : Searches for all applicants with `Win Sheng` in their contact details. See how to [find an applicant](#412-finding-member--s---findmember-or-findm) for more.
+   - `editm 1 /tag Design` : Edits the tag of the member at the 3rd position on the member list. See how to [edit a member](#414-editing-a-member--editmember-or-editm) for more.
    - `exit` : Exits the application.
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 Follow each step in order to see how a normal workflow would feel like with CMC!
 </div>
-=======
-    1. `addm /name Alicia /phone 92345678 /email Alicia@xyz.com /tele @Alicia` : Adds a member named Alicia to the
-       members list
-    2. `addm /name John Doe /phone 92345677 /email Johndoe@xyz.com /tele @Johndoe` : Adds a member named John Doe to the
-       members list
-    3. `findm Alicia` : Only member Alicia will be listed under the members list
-    4. `findm John Doe` : Only member John Doe will be listed under the members list
-    5. `findm Alicia Johndoe@xyz.com` : Both members Alicia and John Doe will be listed under the members list
-    6. `delm 2` : Member John Doe will be deleted from the members list
-    7. `viewm` : All members will be listed under the members list
-    8. `addt 1 /task Finish_Proposal` : Assigns "Finish_Proposal" task to member Alicia
-    9. `delt 1 /task 1` : Deletes "Finish_Proposal" task from member Alicia
-    10. `viewt 1` : All tasks assigned to member Alicia will be listed
->>>>>>> master
 
-6. Refer to the [Features](#features) below for details of each command.
+<div markdown="span" class="alert alert-warning">:exclamation: **CAUTION:**
+If you are using a PDF version of this User Guide, be careful when copy-pasting the commands that span beyond several lines. 
+</div>
+
+6. Refer to the [Features](#4-features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Interface Walkthrough
+## 3. Interface Walkthrough
 
 This is the expected interface of the GUI when you launch CMC. Please note that this application has been populated 
 with sample data.
@@ -167,7 +113,7 @@ with sample data.
 The key windows are labeled as follows:
 
 1. File button: Opens an option to exit the application.
-2. Help button: Opens a menu with a link to the User Guide.
+2. Help button: Opens a menu witha link to the User Guide.
 3. Command Box: Enter your command here.
 4. Result Display: Displays the result of your command.
 5. Tag Display: Shows all the tags assigned thus far.
@@ -179,24 +125,43 @@ The key windows are labeled as follows:
 
 The "Help" window will look like as follows :
 ![Help_Window](images/helpMessage.png)
-The "View user guide" button will direct you to this User Guide.
 
 --------------------------------------------------------------------------------------------------------------------
 
 
-## Features
+## 4. Features
+
+This section of the User Guide will explain about each feature in detail.
 
 <div markdown="span" class="alert alert-primary">
 
-:information_source: **Note:** Many of the commands below have _aliases_, or short-form versions that make them easier
-to type. For example, the command `addMember` can be typed as `addm`. Usages of the aliases are documented below
-alongside the full command word, and all aliases can be used interchangeably with the full command word.
+:information_source: **Notes about the command format:** 
+- Many of the commands below have _aliases_, or short-form versions that make them easier to type.  
+For example, the command `addMember` can be typed as `addm`. Usages of the aliases are documented below alongside the full command word, and all aliases can be used interchangeably with the full command word.
+  
+
+- Words in UPPER_CASE are input parameters that you need to provide for that specific field.  
+For example, in `addm /name NAME`, `NAME` would be the input parameter for the member's name.
+  
+
+- Fields in square brackets `[ ]` are optional fields.
+  
+
+- Parameters can be in any order.  
+For example, `adda /name Taylor Swift /phone 91961969` and `adda /phone 91691969 /name Taylor Swift` will result in the same applicant added.
+  
+
+- Items with … after them can be used multiple times including zero times.  
+For example, [tag/TAG]… can be used as (i.e. 0 times), tag/SWE, tag/UIUX tag/Product etc.
 
 </div>
 
-### Add Member/Applicant
+### 4.1 Member Features
+These are all the features in regard to a member in CMC.
 
-You can easily add a new member/applicant to the members/applicants list.
+#### 4.1.1 Adding a member : `addMember` 
+
+Adds a member to the list of members in CMC. 
 
 - Use `addMember` or `addm` to use add a member
 - Use `addApplicant` or `adda` to use add an applicant
@@ -208,12 +173,6 @@ You can easily add a new member/applicant to the members/applicants list.
 `addMember /name {memberName} /phone {phoneNumber} /email {email} /tele {telegramHandle} /tag {tag}`
 
 `addm /name {memberName} /phone {phoneNumber} /email {email} /tele {telegramHandle} /tag {tag}`
-
-##### Adding applicant:
-
-`addApplicant /name {applicantName} /phone {phoneNumber}`
-
-`adda /name {applicantName} /phone {phoneNumber}`
 
 #### Acceptable values for parameters:
 
@@ -229,7 +188,66 @@ You can easily add a new member/applicant to the members/applicants list.
 
 `adda /name John Doe /phone 92345678`
 
-### Delete Member
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+For a more efficient experience, use addm instead of addMember!
+</div>
+
+#### 4.1.2 Finding member(s) : `findMember` or `findm`
+
+Find and generate a list of all existing member(s) whose information contain any of the specified keyword(s).
+
+##### Format :
+`findMember KEYWORD...`  
+`findm KEYWORD...`
+
+<div markdown="span" class="alert alert-primary">
+:information_source: **Notes about the command format:** KEYWORDs have to be separated by a space.
+</div>
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+For a more efficient experience, use `findm` instead of `findMember`!
+</div>
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+If you would like to go back to the whole list of members, use `viewm`.
+You may check out the command [here](#413-viewing-members--s---viewmembers-or-view)
+</div>
+
+##### Example of usage:
+
+- `findMember Alicia` or `findm Alicia`  
+This generates a list of all members whose details contain `Alicia`.
+
+![Find_Member](images/findMember.png)
+
+##### Viewing all applicants:
+
+`viewApplicants`
+
+`viewa`
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+For a more efficient experience, use `findm` instead of `findMember`!
+</div>
+
+#### 4.1.3 Viewing member(s) : `viewMembers` or `viewm`
+
+Generates a list of all existing member(s)/applicant(s). An example of where you might want to use this command is if
+you want to go back to viewing all members after a search with `findMember`.
+
+#### Usage:
+
+`viewMembers`
+
+`viewm`
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+For a more efficient experience, use `viewm` instead of `viewMembers`!
+</div>
+
+#### 4.1.4 Editing a member : `editMember` or `editm`
+
+#### 4.1.5 Deleting a member : `deleteMember` or `delm`
 
 The member at the specified index will be deleted from the members list.
 
@@ -267,175 +285,47 @@ The member index provided is invalid
 The member index provided is invalid
 ```
 
-### Edit Member
+#### 4.1.6 Allocating a task to a member : `addTask` or `addt`
 
-The member at the specified index will have its specified fields edited. At least 1 field to be specified, not all
-fields have to be specified.
+#### 4.1.7 Viewing all tasks allocated to a member : `viewTask` or `viewt`
 
-#### Usage:
+#### 4.1.8 Deleting a task allocated to a member : `deleteTask` or `delt`
 
-`editMember {index} /name {memberName} /phone {phoneNumber} /email {email} /tele {telegramHandle} /tag {tag}`
+### 4.2 Applicant Features
 
-`editm {index} /name {memberName} /phone {phoneNumber} /email {email} /tele {telegramHandle} /tag {tag}`
+#### 4.2.1 Adding an applicant : `addApplicant` or `adda`
 
-#### Acceptable values for parameters:
+#### 4.2.2 Finding applicant(s) : `findApplicant` or `finda`
 
-- `index`: Only numbers are allowed, starting from 1
-- `memberName`: Only alphabetical characters, @, () are allowed
-- `phoneNumber`: Only numbers are allowed
-- `email`: Must follow the format of xyz@abc.wsd
-- `telegramHandle`: Only alphanumeric characters and underscore are allowed
-- `tag`: Only alphanumeric characters are allowed
+Find and generate a list of all existing applicants(s) whose information contain any of the specified keyword(s).
 
-#### Example of usage:
+##### Format :
+`findApplicant KEYWORD...`  
+`finda KEYWORD...`
 
-`editMember 1 /name Aliciaa /phone 12345678`
+<div markdown="span" class="alert alert-primary">
+:information_source: **Notes about the command format:** KEYWORDs have to be separated by a space.
+</div>
 
-`editm 1 /name Aliciaa /phone 12345678`
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+For a more efficient experience, use `finda` instead of `findApplicant`!
+</div>
 
-#### Expected Outcome:
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+If you would like to go back to the whole list of members, use `viewa`.
+You may check out the command [here](#423-viewing-applicants--s---viewapplicants-or-viewa)
+</div>
 
-```
-Edited member: Aliciaa
-```
+##### Example of usage:
 
-#### If name is invalid:
+- `findApplicant Rui` or `finda Rui`  
+  This generates a list of all members whose details contain `Rui`.
 
-```
-Names should only contain alphanumeric characters and spaces, and it should not be blank
-```
+![Find_Applicant](images/findApplicant.png)
 
-#### If phone number is invalid:
+#### 4.2.3 Viewing applicant(s) : `viewApplicants` or `viewa`
 
-```
-Phone numbers should only contain numbers, and it should be at least 3 digits long
-```
-
-#### If telegram handle is invalid:
-
-```
-Telegram handle should follow the format: @exampleHandle 
-```
-
-#### If tag is invalid:
-
-```
-Tags names should be alphanumeric
-```
-
-### Find Member(s)
-
-Find and generate a list of all existing member(s) whose information contain any of specified keyword(s). Keywords to be
-separated by a spacing between 2 keywords.
-
-#### Usage:
-
-`findMember {keyword(s)}`
-
-`findm {keyword(s)}`
-
-#### Acceptable values for parameters:
-
-- `keyword(s)`: All alphanumerical characters are allowed
-
-#### Example of usage:
-
-`findMember Alicia`
-
-`findm Alicia`
-
-#### Expected Outcome:
-
-```
-1 member listed!
-```
-
-#### If unable to find member(s) with matching keyword(s)
-
-```
-0 members listed!
-```
-
-### View Members/Applicants
-
-Generates a list of all existing member(s)/applicant(s). An example of where you might want to use this command is if
-you want to go back to viewing all members after a search with `findMember`.
-
-#### Usage:
-
-##### Viewing all members:
-
-`viewMembers`
-
-`viewm`
-
-##### Viewing all applicants:
-
-`viewApplicants`
-
-`viewa`
-
-[//]: # (#### Expected Outcome:)
-
-[//]: # ()
-
-[//]: # (##### Members:)
-
-[//]: # (```)
-
-[//]: # (Listed all members)
-
-[//]: # (```)
-
-[//]: # (##### Applicants:)
-
-[//]: # (```)
-
-[//]: # (Listed all applicants)
-
-[//]: # (```)
-
-### Delete Applicant
-
-The applicant at the specified index will be deleted from the applicants list.
-
-#### Usage:
-
-`deleteApplicant {index}`
-
-`dela {index}`
-
-#### Acceptable values for parameters:
-
-- `index`: Only numbers are allowed, starting from 1
-
-#### Example of usage:
-
-`deleteApplicant 1`
-
-`dela 1`
-
-#### Expected Outcome:
-
-```
-Deleted applicant: Alicia
-```
-
-#### If index is out of range:
-
-```
-The applicant index provided is invalid
-```
-
-#### If there are no applicants:
-
-Generates a list of all existing applicants in the applicants list.
-
-```
-The applicant index provided is invalid
-```
-
-### Edit Applicant
+#### 4.2.4 Editing an applicant : `editApplicant` or `edita`
 
 The applicant at the specified index will have its specified fields edited. At least 1 field to be specified, not all
 fields have to be specified.
@@ -451,8 +341,8 @@ fields have to be specified.
 - `index`: Only numbers are allowed, starting from 1
 - `applicantName`: Only alphabetical characters, @, () are allowed
 - `phoneNumber`: Only numbers are allowed
-- `interviewTime` : Only dates in the format of "DD/MM/YYYY HhMm" are allowed. To remove an interview time from an 
-applicant, 'cancel' is also allowed.
+- `interviewTime` : Only dates in the format of "DD/MM/YYYY HhMm" are allowed. To remove an interview time from an
+  applicant, 'cancel' is also allowed.
 
 #### Example of usage:
 
@@ -485,40 +375,36 @@ Interview time should be in the format of DD/MM/YYYY HHmm.
 To cancel the interview, enter 'cancel' (case sensitive)
 ```
 
-### Find Applicant(s)
+####  4.2.5 Deleting an applicant : `deleteApplicant` or `dela`
+The applicant at the specified index will be deleted from the applicant list.
 
-Find and generate a list of all existing applicant(s) whose information contain any of specified keyword(s). Keywords to
-be separated by a spacing between 2 keywords.
+##### Format :  
+`deleteApplicant INDEX`  
+`dela INDEX`
 
-#### Usage:
+<div markdown="span" class="alert alert-warning">:exclamation: **CAUTION:**
+This command is DESTRUCTIVE! This command cannot be undone. Deleted applicants will have to be readded into the list via
+the addMember command. **Proceed with caution!**
+</div>
 
-`findApplicant {keyword(s)}`
+<div markdown="span" class="alert alert-primary">
 
-`finda {keyword(s)}`
+:information_source: **Notes about input parameter:** The input parameter will only take positive integers. 
+If the index is negative or 0, or the applicant does not exist in the list, this command will throw an error.
+</div>
 
-#### Acceptable values for parameters:
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+For a more efficient experience, use `dela` instead of `deleteApplicant`!
+</div>
 
-- `keyword(s)`: All alphanumerical characters are allowed
+##### Example of usage:
 
-#### Example of usage:
+- `deleteApplicant 3` or `dela 3`
+This deletes the applicant at index 1 in the applicant list.
 
-`findApplicant Alicia`
+![Delete_Applicant](images/deleteApplicant.png)
 
-`finda Alicia`
-
-#### Expected Outcome:
-
-```
-1 applicant listed!
-```
-
-#### If unable to find applicant(s) with matching keyword(s)
-
-```
-0 applicants listed!
-```
-
-### Copy Member/Applicant
+#### 4.2.6 Copying a applicant's details : `copyApplicant` or `cpa`
 
 Copies the details of the member/applicant at the specified index to the clipboard.
 
@@ -564,19 +450,53 @@ Tasks: [Finish Proposal]
 The member index provided is invalid
 ```
 
+### 4.3 General Features
+#### 4.3.1 Accessing the user guide : `help`
+Opens a window with a link to the user guide. 
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+This window can also be opened from accessing the `Help` button.  
+Checkout the [Interface Walkthrough](#3-interface-walkthrough) to locate where the button is.
+</div>
+
+#### 4.3.2 Exiting the application : `exit`
+Exits the application.
+
+<div markdown="span" class="alert alert-warning">:exclamation: **CAUTION:**
+There will be no prompt to confirm this action.
+</div>
+
+## 5. FAQ
+
+Q: How do I see tasks of a different member?  
+A: You have to use the `viewt` or `viewTask` method to view the tasks allocated to another member.  
+For example, if your window is currently on another member's task, use `viewt 3` to view the tasks of the member at index 3.
+
+Q: How do I transfer my data to another person or computer?  
+A: This application saves the data of your applicants and members in the ./data/addressbook.json file. You can send the file to the other
+person or computer, and overwrite the empty addressbook.json with addressbook.json file of your choice.
+
+<div markdown="span" class="alert alert-warning">:exclamation: **CAUTION:**
+If the addressbook.json file is invalid or has any formatting errors, the program might not start up. Please make sure that
+the addressbook.json file used is correct and accurate.**
+</div>
+
+
 --------------------------------------------------------------------------------------------------------------------
 
-## Command summary
+## 6. Command summary
 
-| Action                | Format                                                                                                   | Example(s)                                                                                                                           |
-|-----------------------|----------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------|
-| **Add Member**        | `addm /name {memberName} /phone {phoneNumber} /email {email} /tele {telegramHandle} /tag {tag}`          | `addm /name Alicia /phone 92345678 /email Alicia@xyz.com /tele @Alicia`                                                              |
-| **Delete Member**     | `delm {index}`                                                                                           | `delm 1`                                                                                                                             |
-| **Edit Member**       | `editm {index} /name {memberName} /phone {phoneNumber} /email {email} /tele {telegramHandle} /tag {tag}` | `editm 1 /name Aliciaa /phone 12345678`  <br/>`editm 1 /email Aliciaa@xyz.com`                                                       |
-| **Find Member(s)**    | `findm {keyword}`                                                                                        | `findm Alicia`<br/>`findm John 92345678`                                                                                             |
-| **View Member(s)**    | `viewm`                                                                                                  | `viewm`                                                                                                                              |
-| **Add Applicant**     | `adda /name {applicantName} /phone {phoneNumber}`                                                        | `adda /name Alicia /phone 92345678`                                                                                                  |
-| **Delete Applicant**  | `dela {index}`                                                                                           | `dela 1`                                                                                                                             |
-| **Edit Applicant**    | `edita {index} /name {applicantName} /phone {phoneNumber} /interview {interviewTime}`                    | `edita 1 /name John`<br/>`edita 1 /interview 07/01/2003 1500`<br/>`edita 1 /name Aliciaa /phone 12345678 /interview 10/12/2023 1150` |
-| **Find Applicant(s)** | `finda {keyword}`                                                                                        | `finda Alicia`<br/>`finda John 92345678`                                                                                             |
-| **View Applicant(s)** | `viewa`                                                                                                  | `viewa`                                                                                                                              |
+| Action                      | Format                                                                                                                                                                                                         | Example(s)                                                                                                                                                                        |
+|-----------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add Member**              | `addMember /name NAME /phone PHONE_NUMBER /email EMAIL /tele TELEGRAM_HANDLE [/tag TAG]...`  <br/> <br/>  `addm /name NAME /phone PHONE_NUMBER /email EMAIL /tele TELEGRAM_HANDLE [/tag TAG]...`               | `addm /name Alicia /phone 92345678 /email alicia@gmail.com /tele @Alicia`  <br/> <br/> `addMember /name Jonas /phone 9993 3325 /email jonas@outlook.com /tele @jonasong /tag SWE` |
+| **Delete Member**           | `deleteMember INDEX` <br/> <br/> `delm INDEX`                                                                                                                                                                  | `deleteMember 1` <br/> <br/> `delm 1`                                                                                                                                             |
+| **Edit Member**             | `editMember INDEX [/name NAME] [/phone PHONE_NUMBER] [/email EMAIL] [/tele TELEGRAM_HANDLE] [/tag TAG]` <br/> <br/>`editm INDEX [/name NAME] [/phone PHONE] [/email EMAIL] [/tele TELEGRAM_HANDLE] [/tag TAG]` | `editm 1 /name Alicia /phone 99126291`  <br/> <br/> `editm 1 /email aliciateng@gmail.com`                                                                                         |
+| **Find Member(s)**          | `findMember KEYWORD` <br/> <br/> `findm KEYWORD`                                                                                                                                                               | `findm Alicia` <br/> <br/> `findm John 92345678` <br/> <br/> `findMember Designer`                                                                                                |
+| **View Member(s)**          | `viewMembers` <br/> <br/> `viewm`                                                                                                                                                                              | `viewMembers` <br/> <br/> `viewm`                                                                                                                                                 |
+| **Add Applicant**           | `addApplicant /name [NAME] /phone PHONE_NUMBER` <br/> <br/> `adda /name NAME /phone PHONE_NUMBER`                                                                                                              | `addApplicant /name Jonas /phone 91238932` <br/> <br/> `adda /name Alicia /phone 92345678`                                                                                        |
+| **Add Task to Member**      | `addTask [MEMBER_INDEX] /task [TASK_DESCRIPTION]` <br/> <br/> `addt [MEMBER_INDEX] /task [TASK_DESCRIPTION]`                                                                                                   | `addTask 2 /task Design Poster` <br/> <br/> `addt 3 /task Meet Product Team`                                                                                                      |
+| **View Task(s) of Member**  | `viewTask [MEMBER_INDEX]` <br/> <br/> `viewt [MEMBER_INDEX]`                                                                                                                                                   | `viewTask 2` <br/> <br/> `viewt 5`                                                                                                                                                |
+| **Delete Task from Member** | `deleteTask MEMBER_INDEX /task TASK_INDEX` <br/> <br/> `delt MEMBER_INDEX /task TASK_INDEX`                                                                                                                    | `deleteTask 2 /task 4` <br/> <br/> `delt 1 /task 10`                                                                                                                              |
+| **Delete Applicant**        | `deleteApplicant INDEX` <br/> <br/> `dela INDEX`                                                                                                                                                               | `deleteApplicant 3` <br/> <br/> `dela 1`                                                                                                                                          |
+| **Edit Applicant**          | `editApplicant INDEX [/name NAME] [/phone PHONE_NUMBER] [/interview INTERVIEW_TIME` <br/> <br/>  `edita INDEX [/name NAME] [/phone PHONE_NUMBER] [/interview INTERVIEW_TIME`                                   | `editApplicant 1 /name John` <br/> <br/> `edita 1 /interview 07/01/2003 1500` <br/><br/> `edita 1 /name Aliciaa /phone 12345678 /interview 10/12/2023 1150`                       |
+| **Find Applicant(s)**       | `findApplicant KEYWORD...` <br/><br/> `finda KEYWORD...`                                                                                                                                                       | `finda Alicia` <br/><br/> `finda John 92345678`                                                                                                                                   |
+| **View Applicant(s)**       | `viewApplicants` <br/><br/> `viewa`                                                                                                                                                                            | `viewApplicants` <br/><br/> `viewa`                                                                                                                                               |
