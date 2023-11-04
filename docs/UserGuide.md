@@ -300,6 +300,7 @@ Format: `editLesson INDEX [-name NAME] [-start HH:MM] [-end HH:MM] [-day YYYY/MM
 * Start time cannot be after end time.
 * Editing the start and end time of a lesson that overlaps with another existing lesson is not allowed.
 * Editing the name of a lesson to a name of another existing lesson is not allowed.
+* Only one subject can be specified. For example, `editLesson 2 -subject mathematics, biology` is not allowed.
 
 Examples:
 *  `editLesson 1 -name Lesson at Farrer Road -start 14:00 -end 15:00`<br> Edits the lesson name, start and end time of the 1st lesson to be `Lesson at Farrer Road`, `14:00` and `15:00` respectively.
