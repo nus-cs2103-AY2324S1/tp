@@ -31,7 +31,7 @@ public class TimeIntervalList implements Iterable<TimeInterval> {
     public String addTime(ArrayList<TimeInterval> timeIntervals) throws CommandException{
         boolean isPass = false;
         boolean isFail = false;
-        StringBuilder errorMessage = new StringBuilder("There is a clash in these input timings with your existing timing:\n");
+        StringBuilder errorMessage = new StringBuilder("There is a clash in these input timings with your existing timings:\n");
         StringBuilder passMessage = new StringBuilder("These times have been added:\n");
         for (TimeInterval interval : timeIntervals) {
             if (isTimeIntervalOverlap(interval)) {
@@ -62,8 +62,8 @@ public class TimeIntervalList implements Iterable<TimeInterval> {
     public String deleteTime(ArrayList<TimeInterval> timeIntervals) throws CommandException {
         boolean isPass = false;
         boolean isFail = false;
-        StringBuilder errorMessage = new StringBuilder("These times are not in the list:\n");
-        StringBuilder passMessage = new StringBuilder("These times have been added:\n");
+        StringBuilder errorMessage = new StringBuilder("These times were not in the list:\n");
+        StringBuilder passMessage = new StringBuilder("These times have been deleted:\n");
         for (TimeInterval interval : timeIntervals) {
             if (!internalList.contains(interval)) {
                 isFail = true;
