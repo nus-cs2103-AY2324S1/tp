@@ -39,8 +39,7 @@ online dating journey.
 2. Download the latest `LoveBook.jar` from [here](https://github.com/AY2324S1-CS2103T-F10-2/tp).
 
 3. Double-click the file to start the app. The window that appears will be similar to the below should appear in a few
-   seconds. Note how
-   the app contains some sample information.<br>
+   seconds.<br>
    ![Ui](images/Ui.png)
    *Figure 1: A view of LoveBook at startup*
 
