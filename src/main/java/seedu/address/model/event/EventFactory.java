@@ -42,19 +42,19 @@ public class EventFactory {
                     );
 
             // Birthday has not passed this year
-            if (birthdayThisYear.isAfter(LocalDate.now())) {
+            if (birthdayThisYear.isAfter(LocalDate.now()) || birthdayThisYear.equals(LocalDate.now())) {
                 event = new Event(
                         String.format("%s's Birthday", person.getName()), "",
-                        birthdayThisYear.atTime(0, 0)
+                        birthdayThisYear.atTime(23, 59)
                 );
             } else {
                 event = new Event(
                         String.format("%s's Birthday", person.getName()), "",
-                        birthdayNextYear.atTime(0, 0)
+                        birthdayNextYear.atTime(23, 59)
                 );
             }
 
-            event.addReminder(Duration.ofDays(1)); // Birthday reminder defaults to 1 day in advance
+            event.addReminder(Duration.ofDays(2)); // Birthday reminder within 1 day of the birthday
             event.addMember(person);
             events.add(event);
         }
