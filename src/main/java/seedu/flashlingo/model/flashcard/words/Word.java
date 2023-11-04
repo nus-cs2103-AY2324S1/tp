@@ -2,13 +2,12 @@ package seedu.flashlingo.model.flashcard.words;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.flashlingo.commons.util.AppUtil.checkArgument;
+import static seedu.flashlingo.logic.Messages.MESSAGE_CONSTRAINTS;
 
 /**
  * Encapsulates an input word
  */
-abstract class Word {
-    public static final String MESSAGE_CONSTRAINTS =
-            "Languages should only contain alphanumeric characters and spaces, and it should not be blank";
+public abstract class Word {
     /*
      * The first character of the language must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
@@ -83,7 +82,7 @@ abstract class Word {
      * @return True or False depending on whether this word is in the same language as language
      */
     public boolean isSameLanguage(String language) {
-        return this.language.equals(language);
+        return this.language.equalsIgnoreCase(language);
     }
 
     /**

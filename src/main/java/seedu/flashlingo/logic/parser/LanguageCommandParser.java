@@ -1,6 +1,8 @@
 package seedu.flashlingo.logic.parser;
 
-import static seedu.flashlingo.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.flashlingo.commons.util.AppUtil.checkArgument;
+import static seedu.flashlingo.logic.Messages.MESSAGE_CONSTRAINTS;
+import static seedu.flashlingo.model.flashcard.words.Word.isValidLanguage;
 
 import seedu.flashlingo.logic.commands.LanguageCommand;
 import seedu.flashlingo.logic.parser.exceptions.ParseException;
@@ -19,11 +21,15 @@ public class LanguageCommandParser implements Parser<LanguageCommand> {
     public LanguageCommand parse(String args) throws ParseException {
         String trimmedArgs = args.trim();
         if (trimmedArgs.isEmpty()) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, LanguageCommand.MESSAGE_USAGE));
+            return new LanguageCommand(new WordLanguagePredicate(trimmedArgs));
         }
 
-        return new LanguageCommand(new WordLanguagePredicate(trimmedArgs));
+        try {
+            checkArgument(isValidLanguage(trimmedArgs), MESSAGE_CONSTRAINTS);
+            return new LanguageCommand(new WordLanguagePredicate(trimmedArgs));
+        } catch (IllegalArgumentException iae) {
+            throw new ParseException(iae.getMessage());
+        }
     }
 
 }
