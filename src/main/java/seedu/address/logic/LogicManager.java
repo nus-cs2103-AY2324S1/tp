@@ -13,6 +13,7 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.BookingBookParser;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.logic.prefixcompletion.PrefixCompletion;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyBookingsBook;
 import seedu.address.model.booking.Booking;
@@ -43,6 +44,7 @@ public class LogicManager implements Logic {
         this.model = model;
         this.storage = storage;
         bookingBookParser = new BookingBookParser();
+        PrefixCompletion.setBookingBook(model.getBookingsBook());
     }
 
     @Override
@@ -52,6 +54,9 @@ public class LogicManager implements Logic {
         CommandResult commandResult;
         Command command = bookingBookParser.parseCommand(commandText);
         commandResult = command.execute(model);
+
+        // Update the bookingBook for prefix completion to use
+        PrefixCompletion.setBookingBook(model.getBookingsBook());
 
         try {
             storage.saveBookingBook(model.getBookingsBook());
