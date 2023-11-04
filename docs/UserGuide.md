@@ -203,19 +203,18 @@ Output: `Review Session has ended.`
 * Users are not allowed to end a review session if the session hasn't been started yet. The message of `You are not in a review session.`
 will be given.
 
-### Revealing translation of the flash card : `reveal`
+### Flipping to the other side of the flashcard: `flip`
 
 To show the translation of the flash card in
 
-Format: `reveal`
+Format: `flip <INDEX>`
 
-Output : `The translation is [CURRENT FLASH CARD'S TRANSLATION]`
+Output : `Flashcard has been flipped!`
 
 Examples:![img.png](images/Reveal.png)
 
 **Note**
-* `reveal` command will only take effect during review session. Otherwise, error message `You are not in a review session.` will be printed out.
-* Pressing `reveal` button will have the same effect, and users can reveal the translation without the constraint of review session.
+* Pressing `reveal` or `hide` button will have the same effect.
 
 ### Indicating user has memorized the word : `yes`
 
@@ -358,7 +357,7 @@ Then, use the `load` command to import the data.
 | **Edit**                | `edit <INDEX> [w/<WORD>] [t/<TRANSLATION>] [wl/<WORD_LANGUAGE>] [tl/<TRANSLATION_LANGUAGE>]`<br> e.g., `edit 1 w/bye t/再见` |
 | **Find**                | `find KEYWORD`<br> e.g., `find bye`                                                                                        |
 | **Start**               | `start`                                                                                                                    |
-| **Reveal**              | `reveal`                                                                                                                   |
+| **Flip**                | `flip <INDEX>`                                                                                                             |
 | **Yes**                 | `yes`                                                                                                                      |
 | **No**                  | `no`                                                                                                                       |
 | **End**                 | `end`                                                                                                                      |

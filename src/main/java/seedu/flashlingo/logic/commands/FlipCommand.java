@@ -14,21 +14,21 @@ import seedu.flashlingo.model.flashcard.FlashCard;
 import seedu.flashlingo.model.flashcard.words.TranslatedWord;
 
 /**
- * Indicates user has not yet memorized the word.
+ * Flips to the other side of the flashcard.
  */
-public class RevealCommand extends Command {
+public class FlipCommand extends Command {
 
-    public static final String COMMAND_WORD = "reveal";
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Reveals the word identified by the index number used "
-        + "\nParameters: INDEX (must be a positive integer)\n"
+    public static final String COMMAND_WORD = "flip";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Flips the flashcard identified by the index number "
+        + "used\nParameters: INDEX (must be a positive integer)\n"
         + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_SUCCESS = "The translation is: ";
+    public static final String MESSAGE_SUCCESS = "Flashcard has been flipped!";
     private final Index targetIndex;
     /**
-     * Creates an RevealCommand.
+     * Creates an FlipCommand.
      */
-    public RevealCommand(Index targetIndex) {
+    public FlipCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
     }
 
@@ -43,7 +43,7 @@ public class RevealCommand extends Command {
 
         FlashCard toBeRevealed = lastShownList.get(targetIndex.getZeroBased());
         TranslatedWord translatedWord = model.reveal(toBeRevealed);
-        return new CommandResult(MESSAGE_SUCCESS + translatedWord.getWord());
+        return new CommandResult(MESSAGE_SUCCESS);
     }
     @Override
     public boolean equals(Object other) {
@@ -52,7 +52,7 @@ public class RevealCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof RevealCommand)) {
+        if (!(other instanceof FlipCommand)) {
             return false;
         }
 

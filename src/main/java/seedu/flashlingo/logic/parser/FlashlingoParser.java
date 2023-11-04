@@ -17,12 +17,12 @@ import seedu.flashlingo.logic.commands.EditCommand;
 import seedu.flashlingo.logic.commands.EndCommand;
 import seedu.flashlingo.logic.commands.ExitCommand;
 import seedu.flashlingo.logic.commands.FindCommand;
+import seedu.flashlingo.logic.commands.FlipCommand;
 import seedu.flashlingo.logic.commands.HelpCommand;
 import seedu.flashlingo.logic.commands.LanguageCommand;
 import seedu.flashlingo.logic.commands.ListCommand;
 import seedu.flashlingo.logic.commands.LoadCommand;
 import seedu.flashlingo.logic.commands.NoCommand;
-import seedu.flashlingo.logic.commands.RevealCommand;
 import seedu.flashlingo.logic.commands.ReviewCommand;
 import seedu.flashlingo.logic.commands.StartCommand;
 import seedu.flashlingo.logic.commands.StatsCommand;
@@ -73,8 +73,8 @@ public class FlashlingoParser {
                 return new NoCommand();
             case ExitCommand.COMMAND_WORD:
                 return new ExitCommand();
-            case RevealCommand.COMMAND_WORD:
-                return new RevealCommandParser().parse(arguments);
+            case FlipCommand.COMMAND_WORD:
+                return new FlipCommandParser().parse(arguments);
             case SwitchCommand.COMMAND_WORD:
                 return new SwitchCommand();
             default:
@@ -113,8 +113,8 @@ public class FlashlingoParser {
             throw new ParseException(MESSAGE_NOT_IN_REVIEW_SESSION);
         case SwitchCommand.COMMAND_WORD:
             return new SwitchCommand();
-        case RevealCommand.COMMAND_WORD:
-            return new RevealCommandParser().parse(arguments);
+        case FlipCommand.COMMAND_WORD:
+            return new FlipCommandParser().parse(arguments);
         case LoadCommand.COMMAND_WORD:
             return new LoadCommandParser().parse(arguments);
         default:
