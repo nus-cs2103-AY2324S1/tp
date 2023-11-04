@@ -14,9 +14,6 @@ public class EventTime {
 
     private final LocalDateTime time;
 
-    private EventTime() {
-        this.time = null;
-    }
     private EventTime(String time) throws DateTimeParseException {
         this.time = DateTimeUtil.parseString(time);
     }
@@ -27,7 +24,7 @@ public class EventTime {
      * @return The {@code EventTime} object
      */
     public static EventTime fromString(String timeStr) throws DateTimeParseException {
-        return timeStr.isEmpty() ? new EventTime() : new EventTime(timeStr);
+        return new EventTime(timeStr);
     }
 
     /**
@@ -58,8 +55,8 @@ public class EventTime {
             return false;
         }
 
-        EventTime otherName = (EventTime) other;
-        return time.equals(otherName.time);
+        EventTime otherTime = (EventTime) other;
+        return time.equals(otherTime.time);
     }
 
     /**

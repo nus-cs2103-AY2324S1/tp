@@ -1,7 +1,9 @@
 package seedu.address.model.event;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -11,6 +13,9 @@ import org.junit.jupiter.api.Test;
 public class EventTimeTest {
     @Test
     public void test_eventTimeEquals_pass() {
+        EventTime instance = EventTime.fromString("2023-11-03 00:30:00");
+        assertTrue(instance.equals(instance));
+        assertFalse(instance.equals(new Object()));
         assertEquals(EventTime.fromString("2023-11-02 00:30:00"),
                 EventTime.fromString("2023-11-02 00:30:00"));
         assertEquals(EventTime.fromString("00:30:00"),

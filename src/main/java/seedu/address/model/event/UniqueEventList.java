@@ -165,20 +165,14 @@ public class UniqueEventList implements Iterable<Event> {
         LocalDateTime newEventEndTime = newEvent.getEndTime();
 
         assert newEventStartTime != null : "Start time should not be null";
-
-        if (newEventEndTime == null) {
-            newEventEndTime = newEventStartTime;
-        }
+        assert newEventEndTime != null : "End time should not be null";
 
         for (Event e : this.internalList) {
             LocalDateTime startTime = e.getStartTime();
             LocalDateTime endTime = e.getEndTime();
 
             assert startTime != null : "Start time should not be null";
-
-            if (endTime == null) {
-                endTime = startTime;
-            }
+            assert endTime != null : "End time should not be null";
 
             if (DateTimeUtil.timeIntervalsOverlap(newEventStartTime, newEventEndTime, startTime, endTime)) {
                 return e;
