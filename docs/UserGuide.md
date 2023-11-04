@@ -266,6 +266,7 @@ Note: If no year is specified, the year is assumed to be current year.
 **Tips:**
 - A new lesson cannot have the same name as existing lessons in the schedule list.
 - A new lesson cannot have overlapping timings with existing lessons in the schedule list.
+- Start time cannot be after end time.
 - If the user is currently in list `SCHEDULE`, the command can be shortened to `add`
 - Only one subject can be assigned to a lesson.
 - Only subjects like MATHEMATICS, PHYSICS, BIOLOGY, CHEMISTRY, ENGLISH can be added.
