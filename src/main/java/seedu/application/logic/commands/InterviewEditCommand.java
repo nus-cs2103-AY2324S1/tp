@@ -2,8 +2,10 @@ package seedu.application.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.application.commons.util.CollectionUtil.requireAllNonNull;
-import static seedu.application.logic.parser.CliSyntax.*;
 import static seedu.application.logic.parser.CliSyntax.PREFIX_INTERVIEW_ADDRESS;
+import static seedu.application.logic.parser.CliSyntax.PREFIX_INTERVIEW_DATETIME;
+import static seedu.application.logic.parser.CliSyntax.PREFIX_INTERVIEW_TYPE;
+import static seedu.application.logic.parser.CliSyntax.PREFIX_JOB_SOURCE;
 
 import java.util.List;
 import java.util.Objects;
@@ -29,24 +31,24 @@ public class InterviewEditCommand extends InterviewCommand {
     public static final String COMMAND_WORD = "edit";
 
     public static final String MESSAGE_USAGE = InterviewCommand.COMMAND_WORD + " " + COMMAND_WORD
-            + ": Edits an interview of a job. \n"
-            + "Parameters: INDEX (of interview) "
-            + PREFIX_JOB_SOURCE + "INDEX (of job)"
-            + "[" + PREFIX_INTERVIEW_TYPE + "INTERVIEW TYPE]"
-            + "[" + PREFIX_INTERVIEW_DATETIME + "INTERVIEW DATE AND TIME]"
-            + "[" + PREFIX_INTERVIEW_ADDRESS + "INTERVIEW ADDRESS]\n"
-            + "Example: \n"
-            + "1 " + PREFIX_JOB_SOURCE + "2 "
-            + PREFIX_INTERVIEW_TYPE + "Technical "
-            + PREFIX_INTERVIEW_DATETIME + "Dec 31 2030 1200 "
-            + PREFIX_INTERVIEW_ADDRESS + "Home\n"
-            + "edits 1st interview from 2nd job";;
+        + ": Edits an interview of a job. \n"
+        + "Parameters: INDEX (of interview) "
+        + PREFIX_JOB_SOURCE + "INDEX (of job)"
+        + "[" + PREFIX_INTERVIEW_TYPE + "INTERVIEW TYPE]"
+        + "[" + PREFIX_INTERVIEW_DATETIME + "INTERVIEW DATE AND TIME]"
+        + "[" + PREFIX_INTERVIEW_ADDRESS + "INTERVIEW ADDRESS]\n"
+        + "Example: \n"
+        + "1 " + PREFIX_JOB_SOURCE + "2 "
+        + PREFIX_INTERVIEW_TYPE + "Technical "
+        + PREFIX_INTERVIEW_DATETIME + "Dec 31 2030 1200 "
+        + PREFIX_INTERVIEW_ADDRESS + "Home\n"
+        + "edits 1st interview from 2nd job";
 
     public static final String MESSAGE_SUCCESS = "Interview successfully edited: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided. \n"
-            + PREFIX_INTERVIEW_TYPE + " for Interview Type\n"
-            + PREFIX_INTERVIEW_DATETIME + " for Interview Date and Time\n"
-            + PREFIX_INTERVIEW_ADDRESS + " for Interview Address\n";
+        + PREFIX_INTERVIEW_TYPE + " for Interview Type\n"
+        + PREFIX_INTERVIEW_DATETIME + " for Interview Date and Time\n"
+        + PREFIX_INTERVIEW_ADDRESS + " for Interview Address\n";
     public static final String MESSAGE_DUPLICATE_INTERVIEW = "This interview already exists for the job";
 
     private final Index jobIndex;
@@ -54,8 +56,8 @@ public class InterviewEditCommand extends InterviewCommand {
     private final EditInterviewDescriptor editInterviewDescriptor;
 
     /**
-     * @param jobIndex index of the job in the filtered job list to edit
-     * @param interviewIndex index of the interview in the job to edit.
+     * @param jobIndex                index of the job in the filtered job list to edit
+     * @param interviewIndex          index of the interview in the job to edit.
      * @param editInterviewDescriptor details to edit the interview with
      */
     public InterviewEditCommand(Index jobIndex, Index interviewIndex, EditInterviewDescriptor editInterviewDescriptor) {
@@ -66,6 +68,7 @@ public class InterviewEditCommand extends InterviewCommand {
         this.interviewIndex = interviewIndex;
         this.editInterviewDescriptor = new EditInterviewDescriptor(editInterviewDescriptor);
     }
+
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
@@ -91,8 +94,9 @@ public class InterviewEditCommand extends InterviewCommand {
 
         jobToEditInterview.setInterview(interviewToEdit, editedInterview);
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(editedInterview)),
-                false, false, jobIndex.getZeroBased());
+            false, false, false, jobIndex.getZeroBased());
     }
+
     /**
      * Creates and returns a {@code Interview} with the details of {@code interviewToEdit}
      * edited with {@code editInterviewDescriptor}.
@@ -101,11 +105,11 @@ public class InterviewEditCommand extends InterviewCommand {
                                                    EditInterviewDescriptor editInterviewDescriptor) {
         assert interviewToEdit != null;
         InterviewType updatedType = editInterviewDescriptor.getType()
-                .orElse(interviewToEdit.getInterviewType());
+            .orElse(interviewToEdit.getInterviewType());
         InterviewDateTime updatedDateTime = editInterviewDescriptor.getDateTime()
-                .orElse(interviewToEdit.getInterviewDateTime());
+            .orElse(interviewToEdit.getInterviewDateTime());
         InterviewAddress updatedAddress = editInterviewDescriptor.getAddress()
-                .orElse(interviewToEdit.getInterviewAddress());
+            .orElse(interviewToEdit.getInterviewAddress());
         return new Interview(updatedType, updatedDateTime, updatedAddress);
     }
 
@@ -122,16 +126,17 @@ public class InterviewEditCommand extends InterviewCommand {
 
         InterviewEditCommand otherInterviewEditCommand = (InterviewEditCommand) other;
         return jobIndex.equals(otherInterviewEditCommand.jobIndex)
-                && interviewIndex.equals(otherInterviewEditCommand.interviewIndex)
-                && editInterviewDescriptor.equals(otherInterviewEditCommand.editInterviewDescriptor);
+            && interviewIndex.equals(otherInterviewEditCommand.interviewIndex)
+            && editInterviewDescriptor.equals(otherInterviewEditCommand.editInterviewDescriptor);
     }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("job index", jobIndex)
-                .add("interview index", interviewIndex)
-                .add("editInterviewDescriptor", editInterviewDescriptor)
-                .toString();
+            .add("job index", jobIndex)
+            .add("interview index", interviewIndex)
+            .add("editInterviewDescriptor", editInterviewDescriptor)
+            .toString();
     }
 
     /**
@@ -199,16 +204,17 @@ public class InterviewEditCommand extends InterviewCommand {
 
             EditInterviewDescriptor otherEditInterviewDescriptor = (EditInterviewDescriptor) other;
             return Objects.equals(interviewType, otherEditInterviewDescriptor.interviewType)
-                    && Objects.equals(interviewDateTime, otherEditInterviewDescriptor.interviewDateTime)
-                    && Objects.equals(interviewAddress, otherEditInterviewDescriptor.interviewAddress);
+                && Objects.equals(interviewDateTime, otherEditInterviewDescriptor.interviewDateTime)
+                && Objects.equals(interviewAddress, otherEditInterviewDescriptor.interviewAddress);
         }
+
         @Override
         public String toString() {
             return new ToStringBuilder(this)
-                    .add("interview type", interviewType)
-                    .add("interview date time", interviewDateTime)
-                    .add("interview address", interviewAddress)
-                    .toString();
+                .add("interview type", interviewType)
+                .add("interview date time", interviewDateTime)
+                .add("interview address", interviewAddress)
+                .toString();
         }
     }
 

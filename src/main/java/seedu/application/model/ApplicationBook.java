@@ -24,12 +24,12 @@ public class ApplicationBook implements ReadOnlyApplicationBook {
      *
      * Note that non-static init blocks are not recommended to use. There are other ways to avoid duplication
      *   among constructors.
-     */
-    {
+     */ {
         jobs = new UniqueJobList();
     }
 
-    public ApplicationBook() {}
+    public ApplicationBook() {
+    }
 
     /**
      * Creates an ApplicationBook using the Jobs in the {@code toBeCopied}
@@ -54,7 +54,6 @@ public class ApplicationBook implements ReadOnlyApplicationBook {
      */
     public void resetData(ReadOnlyApplicationBook newData) {
         requireNonNull(newData);
-
         setJobs(newData.getJobList());
     }
 
@@ -97,6 +96,7 @@ public class ApplicationBook implements ReadOnlyApplicationBook {
 
     /**
      * Sorts the jobs in the application book based on the comparator provided.
+     *
      * @param comparator The comparator used to compare 2 jobs.
      */
     public void sortJobs(FieldComparator comparator) {
@@ -108,8 +108,8 @@ public class ApplicationBook implements ReadOnlyApplicationBook {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("jobs", jobs)
-                .toString();
+            .add("jobs", jobs)
+            .toString();
     }
 
     @Override

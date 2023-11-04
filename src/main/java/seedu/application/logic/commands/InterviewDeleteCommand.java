@@ -22,10 +22,10 @@ public class InterviewDeleteCommand extends InterviewCommand {
     public static final String COMMAND_WORD = "delete";
 
     public static final String MESSAGE_USAGE = InterviewCommand.COMMAND_WORD + " "
-            + COMMAND_WORD + ": Deletes an interview from the job. \n"
-            + "Parameters: INDEX (of interview) and INDEX (of job)\n"
-            + "Example: 1 " + PREFIX_JOB_SOURCE + "2\n"
-            + "deletes 1st interview from 2nd job";
+        + COMMAND_WORD + ": Deletes an interview from the job. \n"
+        + "Parameters: INDEX (of interview) and INDEX (of job)\n"
+        + "Example: 1 " + PREFIX_JOB_SOURCE + "2\n"
+        + "deletes 1st interview from 2nd job";
 
     public static final String MESSAGE_SUCCESS = "Interview deleted: %1$s";
 
@@ -35,7 +35,7 @@ public class InterviewDeleteCommand extends InterviewCommand {
     /**
      * Creates an InterviewDeleteCommand with the specified job and interview
      *
-     * @param jobIndex The index of the job to be deleted.
+     * @param jobIndex       The index of the job to be deleted.
      * @param interviewIndex The index of the interview to be deleted.
      */
     public InterviewDeleteCommand(Index jobIndex, Index interviewIndex) {
@@ -68,7 +68,7 @@ public class InterviewDeleteCommand extends InterviewCommand {
         model.deleteInterview(jobToDeleteInterview, interviewToDelete);
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(jobToDeleteInterview)),
-                false, false, jobIndex.getZeroBased());
+            false, false, false, jobIndex.getZeroBased());
     }
 
     /**
@@ -90,7 +90,7 @@ public class InterviewDeleteCommand extends InterviewCommand {
 
         InterviewDeleteCommand otherInterviewDeleteCommand = (InterviewDeleteCommand) other;
         return jobIndex.equals(otherInterviewDeleteCommand.jobIndex)
-                && interviewIndex.equals(otherInterviewDeleteCommand.interviewIndex);
+            && interviewIndex.equals(otherInterviewDeleteCommand.interviewIndex);
     }
 
     /**
@@ -101,9 +101,9 @@ public class InterviewDeleteCommand extends InterviewCommand {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("jobIndex", jobIndex)
-                .add("interviewIndex", interviewIndex)
-                .toString();
+            .add("jobIndex", jobIndex)
+            .add("interviewIndex", interviewIndex)
+            .toString();
     }
 
 }
