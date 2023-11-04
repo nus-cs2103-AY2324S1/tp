@@ -1,0 +1,34 @@
+@startuml
+skin rose
+skinparam ActivityFontSize 15
+skinparam ArrowFontSize 12
+start
+:User runs edit-s command;
+
+'Since the beta syntax does not support placing the condition outside the
+'diamond we place it as the true branch instead.
+
+:Parse user input;
+
+if () then ([input is valid])
+    :Construct EditScheduleDescriptor object;
+    :Construct EditScheduleCommand object;
+    :Return back to LogicManager;
+    :LogicManager executes EditScheduleCommand;
+    :Construct edited Schedule;
+    if () then ([edited schedule does not already exist])
+        if () then ([edited schedule does not clash with existing schedule])
+            :Replace schedule with edited schedule in ScheduleList;
+            :Update UI;
+        else ([else])
+            :Display clashing schedule error message;
+        endif
+    else ([else])
+        :Display duplicate schedule error message;
+    endif
+else ([else])
+:Display error message;
+
+endif
+stop
+@enduml

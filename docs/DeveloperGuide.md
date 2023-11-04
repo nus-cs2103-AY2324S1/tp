@@ -15,6 +15,7 @@ title: Developer Guide
 
 ## **Setting up, getting started**
 
+
 Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 --------------------------------------------------------------------------------------------------------------------
@@ -148,24 +149,13 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### Add Tutor Feature
+### Add tutor feature
 
 The "Add Tutor" feature allows users to add a new tutor to the address book. Below, we provide an example usage scenario and a detailed description of how the add tutor mechanism behaves at each step.
 
 The following shows the activity diagram from when a user executes the `add-t` command:
 
 ![AddTutorActivityDiagram](images/AddTutorActivityDiagram.png)
-
-<div markdown="block" class="alert alert-info">
-
-**:information_source: Input Limitations**<br>
-* Input format must adhere to the follow limitations:
-  * `NAME`: Only contain alphanumeric characters and spaces, and should not be blank
-  * `PHONE NUMBER`: Only contain numbers, and should be at least 3 digits long
-  * `EMAIL`: Of the format local-part@domain
-* Tutor to be added must be unique and not already exist in the addressbook.
-
-</div>
 
 #### Implementation
 
@@ -184,11 +174,45 @@ The following sequence diagram shows how the above steps for add tutor operation
 
 ![AddTutorSequenceDiagram](images/AddTutorSequenceDiagram.png)
 
-#### Design Rationale
+#### Design rationale
 
 The `add-t` command was designed this way to ensure consistency with the previous `add` person.
 
-=======
+**Aspect: Optional fields**
+* **Alternative 1:** Allow optional fields when adding tutor (e.g. user can omit phone number or email when adding a 
+  tutor).
+    * Pros: Allows users to input only necessary fields.
+    * Cons: Increases code complexity to handle blank fields.
+* **Alternative 2 (current choice):** Disallow optional fields when adding tutor (user must enter name, phone 
+  number and email).
+    * Pros: Easier to implement, and less error prone.
+    * Cons: Users must have every field filled before they can add a tutor.
+
+**Aspect: Non-unique phone number and email restriction**
+* **Alternative 1:** Allow only unique phone numbers and emails of tutors.
+    * Pros: Decreases erroneous user input when duplicated tutors are entered.
+    * Cons: There can be real life scenarios where tutors have the same phone numbers of emails (since there is no 
+      strict requirement against it).
+* **Alternative 2 (current choice):** Allow only non-unique phone numbers and emails of tutors.
+    * Pros: In line with real-life scenario as mentioned above.
+    * Pros: Phone numbers and emails are means of contacting the tutors and there is no real need for them to be unique.
+    * Cons: Duplicated tutors could be added.
+
+**Aspect: Tutor name restrictions**
+* **Alternative 1:** Allow tutors to have name input as only alphabets.
+    * Pros: Decreases erroneous user input when phone numbers are accidentally input as names using `n/` tags.
+    * Cons: With the implementation of unique names, tutor names cannot be differentiated with numbers.
+* **Alternative 2 (current choice):** Allow tutors to have alphanumeric names.
+    * Pros: Tutors with the same name can be differentiated with numbers.
+    * Pros: Tutors' names are restricted to a limited number of characters to promote easy searching and reference 
+      in the future. This also introduces uniformity.
+    * Cons: Number inputs are accepted as names and users can erroneously use phone numbers as names instead.
+    * Cons: Tutors' names with commas cannot be recognised and entered.
+* **Alternative 3:** Allow tutors to have names with special characters, especially commas.
+    * Pros: More representative of various name types, especially those with commas in their names.
+    * Cons: Allowing too many special characters decreases the ability to locate and reference the tutors in future 
+      (e.g. ABC,123@!?:" should not be accepted as a valid name).
+
 ### Edit tutor feature 
 
  The “Edit Tutor” feature allows users to edit an existing tutor in the address book given a tutor index. 
@@ -373,6 +397,68 @@ The following sequence diagram shows how the operation works:
     * Pros: Allows for flexibility in the constraints.
     * Cons: Have to repeatedly write logic perform this check everywhere a new `Schedule` is being created.
 
+### Edit schedule feature
+
+The "Edit Schedule" feature allows users to edit an existing schedule in the address book. Below, we provide an example
+usage scenario and a detailed description of how the edit schedule mechanism behaves at each step.
+
+![EditScheduleActivityDiagram](images/EditScheduleActivityDiagram.png)
+
+#### Implementation
+
+Step 1. The user has the application launched with at least 1 schedule added.
+
+Step 2. The user executes `list-s` to view all added schedules.
+
+Step 3. The user executes `edit-s 1 st/2023-09-15T09:00` to edit the first schedule's start time in the list of
+schedules displayed. The command is parsed in AddressBookParser.
+
+Step 4. EditScheduleCommandParser is created, and constructs an `EditScheduleDescriptor` which describes the edited
+`Schedule`. An EditScheduleCommand object is then constructed with this `EditScheduleDescriptor` and the
+specified schedule index.
+
+Step 5. The EditScheduleCommand object gets the specified schedule from the current filtered schedule list using the
+schedule index.
+
+Step 6. EditScheduleCommand object then creates an edited schedule from the specified schedule and the
+`EditScheduleDescriptor`.
+
+Step 7. EditScheduleCommand object then calls the setSchedule method in the ModelManager with the new edited schedule.
+This method sets the specified `Schedule` in the model to be that edited schedule.
+
+Step 8. Finally, the EditScheduleCommand object updates the schedule list to display the edited schedule.
+
+The following sequence diagram shows how the above steps for edit schedule operation works:
+
+![EditScheduleSequenceDiagram](images/EditScheduleSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">
+:information_source: **Note:** 
+The lifeline for `EditScheduleCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML,
+the lifeline reaches the end of diagram.
+</div>
+
+#### Design rationale
+
+**Aspect: Setting of schedule status**
+* **Alternative 1:** Use an additional prefix to edit the status of a schedule. 
+  * Pros: Allows users to directly edit the schedule status using the edit schedule command. 
+  * Cons: Edit schedule command would have a considerable number of tags (it already has 3). It would also not match 
+    up with add schedule command.
+* **Alternative 2 (current choice):** Have a separate command for setting schedule status. 
+  * Pros: It is more intuitive to the user and separates the responsibility of edit schedule. 
+  * Cons: Requires separate commands for marking and unmarking schedule status.
+
+**Aspect: Reassigning of tutor**
+* **Alternative 1:** Allow user to edit the tutor allocated to the schedule. 
+  * Pros: Allows users to easily modify schedule details, including allocated tutor. 
+  * Cons: Users will need to provide the schedule index to identify the schedule to be edited, and provide the tutor 
+    index that the schedule should be allocated to. This is difficult to implement with one list view.
+* **Alternative 2 (current choice):**  Users cannot edit the tutor allocated to the schedule.
+  * Pros: An additional optional flag is not needed, and the new tutor to be allocated does not need to be 
+    identified from the tutor list.
+  * Cons: In the editing of schedule, a `Person` is needed to create a new `Schedule`. Thus, the tutor allocated to 
+    the target schedule needs to be obtained and used to create a new `Schedule`.
 
 ### Delete Schedule Feature
 #### Implementation Details
@@ -404,90 +490,63 @@ The following sequence diagram shows how the above steps for delete schedule ope
 #### Design rationale:
 The `delete-s` command was designed this way to ensure consistency with the previous delete person command.
 
-### \[Proposed\] Undo/redo feature
+### Change theme feature
 
-#### Proposed Implementation
+The "Change Theme" feature allows users to change the colour theme of the address book. Below, we provide an example 
+usage scenario and a detailed description of how the change theme mechanism behaves at each step.
 
-The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
+#### Implementation
 
-* `VersionedAddressBook#commit()` — Saves the current address book state in its history.
-* `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
-* `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
+Step 1. The user launches the application for the first time.
 
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
+Step 2. The user executes `theme dark` to change the address book theme to dark. The command is parsed in 
+`AddressBookParser`.
 
-Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
+Step 3. `ThemeCommandParser` is created.  The `ThemeCommand` is called with the filepath and theme to be changed to.
 
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
+Step 4. The `ThemeCommand` object returns the `CommandResult` where `isTheme` is true.
 
-![UndoRedoState0](images/UndoRedoState0.png)
+Step 5. The `handleChangeTheme` method is called from `MainWindow` with the new theme to change to.
 
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
+<div markdown="block" class="alert alert-info">
 
-![UndoRedoState1](images/UndoRedoState1.png)
-
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
-
-![UndoRedoState2](images/UndoRedoState2.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
-
-</div>
-
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
-
-![UndoRedoState3](images/UndoRedoState3.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
-than attempting to perform the undo.
+**:information_source: Saving to UserPrefs**
+In order for the app to apply the last used theme when run again, the theme has to be saved to `GuiSettings` on exit.
+* Implementation of saving last used theme is similar to implementation of saving window width and height in AB3.
+* An additional method `getCurrentTheme` is called to obtain current theme during `handleExit`.
+* When the app is opened, the theme from `GuiSettings` is applied, along with window width and height.
+This is not depicted in the following sequence diagram, which focuses on implementation of changing theme.
 
 </div>
 
-The following sequence diagram shows how the undo operation works:
+The following sequence diagram shows how the above steps for change theme operation works:
 
-![UndoSequenceDiagram](images/UndoSequenceDiagram.png)
+![ChangeThemeSequenceDiagram](images/ChangeThemeSequenceDiagram.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-
+<div markdown="span" class="alert alert-info">
+:information_source: **Note:** 
+The lifeline for `ThemeCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML,
+the lifeline reaches the end of diagram.
 </div>
 
-The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
+#### Design rationale
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
-
-</div>
-
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
-
-![UndoRedoState4](images/UndoRedoState4.png)
-
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
-
-![UndoRedoState5](images/UndoRedoState5.png)
-
-The following activity diagram summarizes what happens when a user executes a new command:
-
-<img src="images/CommitActivityDiagram.png" width="250" />
-
-#### Design considerations:
-
-**Aspect: How undo & redo executes:**
-
-* **Alternative 1 (current choice):** Saves the entire address book.
-  * Pros: Easy to implement.
-  * Cons: May have performance issues in terms of memory usage.
-
-* **Alternative 2:** Individual command knows how to undo/redo by
-  itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
-  * Cons: We must ensure that the implementation of each individual command are correct.
-
-_{more aspects and alternatives to be added}_
-
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
-
+**Aspect: Parsing the NEW_THEME**
+- **Alternative 1 (current choice):** New theme is parsed and the filepath is allocated in `ThemeCommandParser`.
+  - Pros: This design is in line with how `FindTutorCommand` and `FindScheduleCommand` obtain the keyword to 
+    implement predicate to get the filtered lists, within their respective parsers.
+  - Cons: The filepath needs to be passed to `ThemeCommand` to construct `CommandResult` with the filepath. The 
+    filepath is then obtained from `CommandResult` at `MainWindow`.
+  - Cons: Thus, `CommandResult` needs another constructor and getter method.
+- **Alternative 2:** New theme is parsed and the filepath is allocated in `AddressBookParser`.
+  - Pros: Switch cases are handled early and the command is verified in the same place it was parsed.
+  - Cons: The filepath needs to be passed to `ThemeCommandParser` and `ThemeCommand` to construct `CommandResult` with 
+    the filepath. The filepath is then obtained from `CommandResult` at `MainWindow`.
+  - Cons: Thus, `CommandResult` needs another constructor and getter method.
+- **Alternative 3:** New theme is parsed and the filepath is allocated in `MainWindow`.
+  - Pros: The filepath does not need to pass through `ThemeCommand` and `CommandResult`. It is allocated and access 
+    from `MainWindow` directly. Thus, `CommandResult` does not need another constructor and getter method.
+  - Cons: `MainWindow` has to parse arguments.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -526,19 +585,26 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`         | manager   | store each tutor's contact information, including their name, phone number, and email address  | access it later                                                             |
 | `* * *`         | manager   | remove tutors from the system when they are no longer available                                | keep the system up to date                                                  |
 | `* * *`         | manager   | view a list of all tutors in the system                                                        | have an overview of available tutors                                        |
-| `* * *`         | manager   | search for a tutor by their name                                                               | quickly find their information                                              |
+| `* * *`         | manager   | find a tutor by their name                                                                     | quickly find their information                                              |
 | `* * *`         | manager   | create a schedule for each tutor                                                               | track their schedule                                                        |
 | `* * *`         | manager   | delete a schedule for a tutor                                                                  | remove an appointment when the tutor is not available                       |
 | `* * *`         | manager   | view a summary of all upcoming tutoring sessions                                               | plan accordingly                                                            |
 | `* * *`         | manager   | save the schedule and tutor’s information                                                      | can access it again in the future                                           |
+| `* *`           | manager   | find schedules by tutor name                                                                   | easily plan the schedule of that tutor                                      |
+| `* *`           | manager   | view both tutors and schedules side by side together                                           | perform actions related to the two without having to change my list view    |
+| `* *`           | manager   | view schedules in a sorted order                                                               | easily see upcoming schedules first                                         |
+| `* *`           | manager   | see where upcoming schedules end and where past schedules begin                                | distinguish between the two easily                                          |
 | `* *`           | manager   | mark sessions as attended or missed                                                            | track the status of tutoring sessions                                       |
+| `* *`           | manager   | unmark sessions                                                                                | update the actual status of the session                                     |
 | `* *`           | manager   | keep a record of completed tutoring sessions                                                   | maintain a history of successful sessions                                   |
 | `* *`           | manager   | keep a record of missed tutoring sessions                                                      | monitor attendance and address any issues                                   |
 | `* *`           | manager   | edit the tutor information                                                                     | update their details easily                                                 |
 | `* *`           | manager   | edit the schedule information                                                                  | reschedule tutoring sessions                                                |
-| `* *`           | manager   | shorter syntax                                                                                 | work faster                                                                 |
 | `* *`           | manager   | view schedules by tutor                                                                        | easily plan the schedule of that tutor                                      |
-| `* *`           | manager   | have a help function                                                                           | quickly check the command parameters without having to check the User Guide |
+| `* *`           | manager   | view the schedules of a given date as a calendar view                                          | have a quick overview of the schedules and find available time slots        |
+| `* *`           | manager   | change the theme of TutorConnect                                                               | use a preferred colour theme                                                |
+| `*`             | manager   | have a help function                                                                           | quickly check the command parameters without having to check the User Guide |
+| `*`             | manager   | shorter syntax                                                                                 | work faster                                                                 |
 | `*`             | manager   | export data to an excel file                                                                   | use the data for other purposes                                             |
 | `*`             | manager   | import data from an excel file                                                                 | easily restore and update records                                           |
 | `*`             | manager   | add new students to the system                                                                 | enrol them                                                                  |
@@ -550,115 +616,17 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`             | manager   | reassign tutors to students                                                                    | adapt to changing needs and preferences                                     |
 
 
-*{More to be added}*
-
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+Given below are the use cases for a few representative user stories that need multiple steps to complete.
 
-**Use case: Delete a tutor**
+<div markdown="span" class="alert alert-info">:information_source: 
+For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified 
+otherwise.
+</div>
 
-**MSS**
-
-1.  User requests to list tutors
-2.  TutorConnect shows a list of tutors
-3.  User requests to delete a specific tutor in the list
-4.  TutorConnect deletes the tutor
-
-    Use case ends.
-
-**Extensions**
-
-* 2a. The list is empty.
-
-  Use case ends.
-
-* 3a. The given index is invalid.
-
-    * 3a1. TutorConnect shows an error message.
-
-      Use case resumes at step 2.
-
-
-**Use case: Add a schedule**
-
-**MSS**
-
-1.  User requests to list tutors
-2.  TutorConnect shows a list of tutors
-3.  User requests to add a schedule for a specific tutor in the list
-4.  TutorConnect adds the schedule and displays a list of schedule
-
-    Use case ends.
-
-**Extensions**
-
-* 2a. The list is empty.
-
-  Use case ends.
-
-* 3a. The given index is invalid.
-
-    * 3a1. TutorConnect shows an error message.
-
-      Use case resumes at step 2.
-
-* 3b. The schedule parameters is invalid.
-
-    * 3b1. TutorConnect shows an error message.
-
-      Use case resumes at step 2.
-
-
-**Use case: Delete a schedule**
-
-**MSS**
-
-1.  User requests to list schedules
-2.  TutorConnect shows a list of schedules
-3.  User requests to delete a specific schedule in the list
-4.  TutorConnect deletes the schedule
-
-    Use case ends.
-
-**Extensions**
-
-* 2a. The list is empty.
-
-  Use case ends.
-
-* 3a. The given index is invalid.
-
-    * 3a1. TutorConnect shows an error message.
-
-      Use case resumes at step 2.
-
-
-**Use case: Mark a schedule as completed**
-
-**MSS**
-
-1.  User requests to list schedules
-2.  TutorConnect shows a list of schedules
-3.  User requests to mark a specific schedule in the list as completed
-4.  TutorConnect marks the schedule as completed
-
-    Use case ends.
-
-**Extensions**
-
-* 2a. The list is empty.
-
-  Use case ends.
-
-* 3a. The given index is invalid.
-
-    * 3a1. TutorConnect shows an error message.
-
-      Use case resumes at step 2.
-
-
-**Use case: Edit a tutor information**
+#### **Use case: Edit a tutor**
+{:.no_toc}
 
 **MSS**
 
@@ -688,7 +656,64 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case resumes at step 2.
 
 
-**Use case: Edit a schedule information**
+#### **Use case: Delete a tutor**
+{:.no_toc}
+
+**MSS**
+
+1.  User requests to list tutors
+2.  TutorConnect shows a list of tutors
+3.  User requests to delete a specific tutor in the list
+4.  TutorConnect deletes the tutor
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given index is invalid.
+
+    * 3a1. TutorConnect shows an error message.
+
+      Use case resumes at step 2.
+
+
+#### **Use case: Add a schedule**
+{:.no_toc}
+
+**MSS**
+
+1.  User requests to list tutors
+2.  TutorConnect shows a list of tutors
+3.  User requests to add a schedule for a specific tutor in the list
+4.  TutorConnect adds the schedule and displays a list of schedule
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given index is invalid.
+
+    * 3a1. TutorConnect shows an error message.
+
+      Use case resumes at step 2.
+
+* 3b. The schedule parameters is invalid.
+
+    * 3b1. TutorConnect shows an error message.
+
+      Use case resumes at step 2.
+
+
+#### **Use case: Edit a schedule**
+{:.no_toc}
 
 **MSS**
 
@@ -718,7 +743,58 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case resumes at step 2.
 
 
-**Use case: View schedules by tutor**
+#### **Use case: Delete a schedule**
+{:.no_toc}
+
+**MSS**
+
+1.  User requests to list schedules
+2.  TutorConnect shows a list of schedules
+3.  User requests to delete a specific schedule in the list
+4.  TutorConnect deletes the schedule
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given index is invalid.
+
+    * 3a1. TutorConnect shows an error message.
+
+      Use case resumes at step 2.
+
+
+#### **Use case: Mark a schedule as completed**
+{:.no_toc}
+
+**MSS**
+
+1.  User requests to list schedules
+2.  TutorConnect shows a list of schedules
+3.  User requests to mark a specific schedule in the list as completed
+4.  TutorConnect marks the schedule as completed
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given index is invalid.
+
+    * 3a1. TutorConnect shows an error message.
+
+      Use case resumes at step 2.
+
+
+#### **Use case: View schedules by tutor**
+{:.no_toc}
 
 **MSS**
 
@@ -742,63 +818,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case resumes at step 2.
 
 
-**Use case: Delete a student**
-
-**MSS**
-
-1.  User requests to list students
-2.  TutorConnect shows a list of students
-3.  User requests to delete a specific student in the list
-4.  TutorConnect deletes the student
-
-    Use case ends.
-
-**Extensions**
-
-* 2a. The list is empty.
-
-  Use case ends.
-
-* 3a. The given index is invalid.
-
-    * 3a1. TutorConnect shows an error message.
-
-      Use case resumes at step 2.
-
-
-**Use case: Edit a student information**
-
-**MSS**
-
-1.  User requests to list students
-2.  TutorConnect shows a list of students
-3.  User requests to edit a specific student information in the list
-4.  TutorConnect modifies the student information
-
-    Use case ends.
-
-**Extensions**
-
-* 2a. The list is empty.
-
-  Use case ends.
-
-* 3a. The given index is invalid.
-
-    * 3a1. TutorConnect shows an error message.
-
-      Use case resumes at step 2.
-
-* 3b. The student information parameters is invalid.
-
-    * 3b1. TutorConnect shows an error message.
-
-      Use case resumes at step 2.
-
-
-*{More to be added}*
-
-### Non-Functional Requirements
+### Non-functional requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `11` installed.
 2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
@@ -810,8 +830,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 8. Should be a single-user application.
 9. Should persistently save data in a human-readable text file between sessions.
 10. Should be able to transfer the data file to another device with no loss of data.
-
-*{More to be added}*
 
 ### Glossary
 
@@ -836,7 +854,8 @@ testers are expected to do more *exploratory* testing.
 
    1. Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   1. Double-click the jar file Expected: Shows the GUI with a set of sample tutors and schedules. The window size may 
+      not be optimum.
 
 1. Saving window preferences
 
@@ -845,13 +864,18 @@ testers are expected to do more *exploratory* testing.
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
+1. Saving theme preferences
+
+   1. Change the theme to another one. Close the window.
+   
+   2. Re-launch the app by double-clicking the jar file.<br>
+      Expected: The most recent theme is retained. 
 
 ### Deleting a person
 
 1. Deleting a person while all persons are being shown
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+   1. Prerequisites: List all persons using the `list-t` command. Multiple persons in the list.
 
    1. Test case: `delete 1`<br>
       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
@@ -864,6 +888,28 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases …​ }_
 
+### Editing a schedule
+
+1. Edits a schedule while all schedules are being shown
+   1. Prerequisites: List all schedules using the `list-s` command. At least 1 existing schedule in the list.
+   
+   2. Test case: `edit-s 1 st/2023-05-05T09:00 et/2023-05-05T11:00`<br>
+      Expected: First schedule start and end time updated. Details of edited schedule shown in the status message.
+   
+   3. Test case: `edit-s 1 st/2023-05-05T05:00`<br>
+      Expected: First schedule start time updated. Details of edited schedule shown in the status message.
+   
+   4. Test case: `edit-s 1 et/2023-05-05T17:00`<br>
+      Expected: First schedule end time updated. Details of edited schedule shown in the status message.
+
+   5. Test case: `edit-s 1`<br>
+      Expected: First schedule not updated. Error details shown in the status message.
+   
+   6. Other incorrect edit schedule commands to try: `edit-s`, `edit-s abc`, `edit-s 1 st/2023-05-05`,
+      `edit-s 0 st/2023-05-05`, `edit-s 1 st/2023-05-05T05:00 st/2023-05-05T05:00`, `edit-s x et/2023-05-05T17:00`
+      (where x is larger than the schedule list size)<br>
+      Expected: Similar to previous.
+
 ### Saving data
 
 1. Dealing with missing/corrupted data files
@@ -871,3 +917,88 @@ testers are expected to do more *exploratory* testing.
    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
 1. _{ more test cases …​ }_
+
+## **Appendix: Planned Enhancements** 
+
+Given below are the planned enhancements for future iterations of the app.
+
+### Tutor name case sensitivity
+The current [add tutor feature](#add-tutor-feature) validates unique tutor names with case sensitivity (e.g. John 
+DOe is different from john Doe). This may not be applicable in the real world. We plan to remove the case 
+sensitivity check for tutor names.
+
+**Proposed implementation**
+
+In the `isEquals` method in the `Name.java`, the check for the same tutor using their names can be replaced with one 
+that removes capitalisation of the tutors' names before checking if they are equal.
+
+### Editing a tutor allocated to a schedule
+The `edit-s` function should allow users to edit the allocated tutor.
+
+The current [edit schedule feature](#edit-schedule-feature) does not allow editing of assigned tutor. We plan to 
+allow reassignment of tutor by adding a new prefix to edit schedule command `t/` which allows users to specify a tutor index to reassign the 
+schedule to. Proper input validation and error handling would be in place to ensure safe modifications to the schedule.
+
+In the planned enhancement of this feature, alternative 1 of [reassigning the tutor](#design-rationale-2) will be 
+implemented. This is possible because of the double list view.
+
+This implementation will remove the need for the tutor of the schedule to be edited to be obtained and fixed.
+
+**Proposed implementation**
+
+Step 1. The user has the application launched with at least 1 schedule added.
+
+Step 2. The user executes `list-s` to view all added schedules.
+
+Step 3. The user executes `edit-s 1 t/1 st/2023-09-15T09:00` to edit the first schedule's start time in the list of
+schedules displayed and to assign the schedule to the first tutor instead. The command is parsed in AddressBookParser.
+
+Step 4. EditScheduleCommandParser is created, and constructs an `EditScheduleDescriptor` which describes the edited
+`Schedule`. An EditScheduleCommand object is then constructed with this `EditScheduleDescriptor` and the
+specified schedule index.
+
+Step 5. The EditScheduleCommand object gets the specified schedule from the current filtered schedule list using the
+schedule index and the current filtered person list using the tutor index.
+
+Step 6. EditScheduleCommand object then creates an edited schedule from the specified schedule, using the specified 
+tutor, and the `EditScheduleDescriptor`.
+
+Step 7. EditScheduleCommand object then calls the setSchedule method in the ModelManager with the new edited schedule.
+This method sets the specified `Schedule` in the model to be that edited schedule.
+
+Step 8. Finally, the EditScheduleCommand object updates the schedule list to display the edited schedule.
+
+### Disallowing future schedules to be marked
+
+**Proposed implementation**
+More details...
+
+### Schedule `datetime` input
+
+**Proposed implementation**
+More details...
+
+### Switching back to list view from calendar view
+
+**Proposed implementation**
+More details...
+
+### Long fields being truncated
+
+**Proposed implementation**
+More details...
+
+### Schedules at the same time being arranged alphabetically
+
+**Proposed implementation**
+More details...
+
+### Having a single `list` command for both lists
+
+**Proposed implementation**
+More details...
+
+### UI for calendar to use colours to reflect status of schedules
+
+**Proposed implementation**
+More details...

@@ -1,0 +1,85 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":EditScheduleCommandParser" as EditScheduleCommandParser LOGIC_COLOR
+participant "e:EditScheduleDescriptor" as EditScheduleDescriptor LOGIC_COLOR
+participant "d:EditScheduleCommand" as EditScheduleCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+participant "editedSchedule:Schedule" as EditedSchedule MODEL_COLOR
+end box
+
+[-> LogicManager : execute("edit-s 1 st/st/2023-09-15T09:00")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("edit-s 1 st/2023-09-15T09:00")
+activate AddressBookParser
+
+create EditScheduleCommandParser
+AddressBookParser -> EditScheduleCommandParser
+activate EditScheduleCommandParser
+
+EditScheduleCommandParser --> AddressBookParser
+deactivate EditScheduleCommandParser
+
+AddressBookParser -> EditScheduleCommandParser : parse("1 st/2023-09-15T09:00")
+activate EditScheduleCommandParser
+
+create EditScheduleDescriptor
+EditScheduleCommandParser -> EditScheduleDescriptor
+activate EditScheduleDescriptor
+
+EditScheduleDescriptor --> EditScheduleCommandParser : e
+deactivate EditScheduleDescriptor
+
+create EditScheduleCommand
+EditScheduleCommandParser -> EditScheduleCommand
+activate EditScheduleCommand
+
+EditScheduleCommand --> EditScheduleCommandParser : d
+deactivate EditScheduleCommand
+
+EditScheduleCommandParser --> AddressBookParser : d
+deactivate EditScheduleCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+EditScheduleCommandParser -[hidden]-> AddressBookParser
+destroy EditScheduleCommandParser
+
+AddressBookParser --> LogicManager : d
+deactivate AddressBookParser
+
+LogicManager -> EditScheduleCommand : execute()
+activate EditScheduleCommand
+
+create EditedSchedule
+EditScheduleCommand -> EditedSchedule ++
+return
+EditScheduleCommand -> Model ++ : hasSchedule(editedSchedule)
+return
+EditScheduleCommand -> Model ++ : setSchedule(scheduleToEdit, editedSchedule)
+return
+EditScheduleCommand -> Model ++ : updateFilteredScheduleList()
+deactivate Model
+
+deactivate Model
+
+create CommandResult
+EditScheduleCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> EditScheduleCommand
+deactivate CommandResult
+
+EditScheduleCommand --> LogicManager : result
+deactivate EditScheduleCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml
