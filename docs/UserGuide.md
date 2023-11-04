@@ -244,7 +244,7 @@ Here is a list of the error messages you may encounter, when the command is ente
 | `Invalid command format!`                                                                  | One or more of the tags `n/`, `p/`, `e/` is missing.                      |
 | `Names should only contain alphanumeric characters and spaces, and it should not be blank` | Tutor name input was either invalid or blank.                             |
 | `Phone numbers should only contain numbers, and it should be at least 3 digits long`       | Tutor phone number input was either invalid or blank.                     |
-| `Emails should be of the format local-part@domain and adhere to the following constraints` | Tutor email input was <br/>either invalid or blank[<sup>1</sup>](#note1). |
+| `Emails should be of the format local-part@domain and adhere to the following constraints` | Tutor email input was <br/>either invalid or blank[<sup>2</sup>](#note2). |
 | `Multiple values specified for the following single-valued field(s): n/`                   | More than 1 `n/` was given in the command.                                |
 | `Multiple values specified for the following single-valued field(s): p/`                   | More than 1 `p/` was given in the command.                                |
 | `Multiple values specified for the following single-valued field(s): e/`                   | More than 1 `e/` was given in the command.                                |
@@ -297,7 +297,7 @@ Here is a list of the error messages you may encounter, when the command is ente
 | `The person index provided is invalid`                                                     | TUTOR_INDEX entered is not in the range of number of tutors.         |
 | `Names should only contain alphanumeric characters and spaces, and it should not be blank` | Tutor name input was either invalid or blank.                        |
 | `Phone numbers should only contain numbers, and it should be at least 3 digits long`       | Tutor phone number input was either invalid or blank.                |
-| `Emails should be of the format local-part@domain and adhere to the following constraints` | Tutor email input was either invalid or blank[<sup>1</sup>](#note1). |
+| `Emails should be of the format local-part@domain and adhere to the following constraints` | Tutor email input was either invalid or blank[<sup>2</sup>](#note2). |
 | `Multiple values specified for the following single-valued field(s): n/`                   | More than 1 `n/` was given in the command.                           |
 | `Multiple values specified for the following single-valued field(s): p/`                   | More than 1 `p/` was given in the command.                           |
 | `Multiple values specified for the following single-valued field(s): e/`                   | More than 1 `e/` was given in the command.                           |
@@ -381,16 +381,7 @@ This command is relatively straight forward to use and has only 1 possible error
 |---------------------------|---------------------------------|
 | `Invalid command format!` | No search keyword was provided. |
 
-<div markdown="block" id="search-behaviour" class="alert alert-info">
-
-**:information_source: Search behaviour**<br>
-
-* The search is case-insensitive. e.g. `hans` will match for `Hans` too!
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only full words will be matched. e.g. `Han` will not match `Hans`
-* Tutors matching at least one keyword will be matched. e.g. `Hans Bo` will match both `Hans Gruber` and `Bo Yang`
-
-</div>
+Learn more about the [search behaviour<sup>1</sup>](#note1) and supercharge your search now!
 
 You can also refer to [input information](#input-examples) for details about valid inputs.
 
@@ -481,8 +472,8 @@ Here is a list of the error messages you may encounter, when the command is ente
 | Error Message                                                                                                      | Reason                                                                                       |
 |--------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------|
 | `Invalid command format!`                                                                                          | Invalid `TUTOR_INDEX` or some of the tags `st/`, `et/` is missing.                           |
-| `StartTime should only contain a valid date and time in the format "yyyy-MM-ddTHH:mm", and it should not be blank` | The start time entered is not in the correct datetime format[<sup>2</sup>](#note2).          |
-| `EndTime should only contain a valid date and time in the format "yyyy-MM-ddTHH:mm", and it should not be blank`   | The end time entered is not in the correct datetime format[<sup>2</sup>](#note2).            |
+| `StartTime should only contain a valid date and time in the format "yyyy-MM-ddTHH:mm", and it should not be blank` | The start time entered is not in the correct datetime format[<sup>3</sup>](#note3).          |
+| `EndTime should only contain a valid date and time in the format "yyyy-MM-ddTHH:mm", and it should not be blank`   | The end time entered is not in the correct datetime format[<sup>3</sup>](#note3).            |
 | `Multiple values specified for the following single-valued field(s): st/`                                          | More than 1 `st/` was given in the command.                                                  |
 | `Multiple values specified for the following single-valued field(s): et/`                                          | More than 1 `et/` was given in the command.                                                  |
 | `This schedule already exists in the address book`                                                                 | There is a schedule for the same tutor with the same start and end time in the address book. |
@@ -535,8 +526,8 @@ Here is a list of the error messages you may encounter, when the command is ente
 |--------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------|
 | `Invalid command format!`                                                                                          | Invalid or missing SCHEDULE_INDEX.                                                           |
 | `The schedule index provided is invalid`                                                                           | SCHEDULE_INDEX entered is not in the range of number of schedules.                           |
-| `EndTime should only contain a valid date and time in the format "yyyy-MM-ddTHH:mm", and it should not be blank`   | The end time entered is not in the correct datetime format[<sup>2</sup>](#note2).            |
-| `StartTime should only contain a valid date and time in the format "yyyy-MM-ddTHH:mm", and it should not be blank` | The start time entered is not in the correct datetime format[<sup>2</sup>](#note2).          |
+| `EndTime should only contain a valid date and time in the format "yyyy-MM-ddTHH:mm", and it should not be blank`   | The end time entered is not in the correct datetime format[<sup>3</sup>](#note3).            |
+| `StartTime should only contain a valid date and time in the format "yyyy-MM-ddTHH:mm", and it should not be blank` | The start time entered is not in the correct datetime format[<sup>3</sup>](#note3).          |
 | `Multiple values specified for the following single-valued field(s): st/`                                          | More than 1 `st/` was given in the command.                                                  |
 | `Multiple values specified for the following single-valued field(s): et/`                                          | More than 1 `et/` was given in the command.                                                  |
 | `This schedule already exists in the address book`                                                                 | There is a schedule for the same tutor with the same start and end time in the address book. |
@@ -656,7 +647,7 @@ Tada! The schedule list has now been updated to show schedules from tutor that c
 
 ![find schedule command](images/find-schedules/find-s-syntax.png)
 
-Learn more about the [search behaviour](#search-behaviour) and supercharge your search now!
+Learn more about the [search behaviour<sup>1</sup>](#note1) and supercharge your search now!
 
 **Errors you might encounter**
 
@@ -1061,17 +1052,28 @@ Here are some inputs you might come across in the User Guide:
 |---------------------|---------------------------------------------------|----------------------------------------------------------------------------------------------|
 | `n/NAME`            | Refers to the name of the tutor.                  | Only contain alphanumeric characters and spaces, and <br/>should <br/>not be blank.          |
 | `p/PHONE NUMBER`    | Refers to the phone number of the tutor.          | Only contain numbers, and should be at least 3 <br/>digits long.                             |
-| `e/EMAIL`           | Refers to the email address of the tutor.         | Of the format local-part@domain[<sup>1</sup>](#note1).                                       |
-| `st/START_TIME`     | Refers to the start time of the schedule.         | Only datetime in `yyyy-MM-ddTHH:mm`[<sup>2</sup>](#note2) format is accepted.                |
-| `et/END_TIME`       | Refers to the end time of the schedule.           | Only datetime in `yyyy-MM-ddTHH:mm`[<sup>2</sup>](#note2) format is accepted.                |
+| `e/EMAIL`           | Refers to the email address of the tutor.         | Of the format local-part@domain[<sup>2</sup>](#note2).                                       |
+| `st/START_TIME`     | Refers to the start time of the schedule.         | Only datetime in `yyyy-MM-ddTHH:mm`[<sup>3</sup>](#note3) format is accepted.                |
+| `et/END_TIME`       | Refers to the end time of the schedule.           | Only datetime in `yyyy-MM-ddTHH:mm`[<sup>3</sup>](#note3) format is accepted.                |
 | `m/SCHEDULE STATUS` | Refers to the status of schedule in the list.     | Only numerical inputs of 0 for MISSED status and 1 for COMPLETED status is accepted          |
 | `TUTOR_INDEX`       | Refers to the position of tutor in the list.      | Only numerical input that ranges from 1 to the last tutor shown in the list of tutors.       |
 | `SCHEDULE_INDEX`    | Refers to the position of schedule in the list.   | Only numerical input that ranges from 1 to the last schedule shown in the list of schedules. |
 | `DATE`              | Refers to the date to view schedules for.         | Only date in `yyyy-MM-dd` format is accepted.                                                |
 | `NEW_THEME`         | Refers to the name of the new theme to switch to. | Only `dark`, `light` and `blue` themes are supported.                                        |
 
-**<sup id="note1">1</sup> Email Format**
 
+**<sup id="note1">1</sup> Keyword Search Format and Behaviour**
+
+Commands reference: [find-t](#locating-tutors-by-name-find-t), [find-s](#locating-schedules-by-name-find-s)
+* The search is case-insensitive. e.g. `hans` will match for `Hans` too!
+* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`.
+* Only full words will be matched. e.g. `Han` will not match `Hans`.
+* Tutors matching at least one keyword will be matched. e.g. `Hans Bo` will match both `Hans Gruber` and `Bo Yang`.
+* The keywords entered will match ANY part of the tutor's name, while keywords that do not match a tutor's name are ignored. e.g. `Hans Blablablah` will match `Hans Gruber` and `Hans Yang`.
+
+**<sup id="note2">2</sup> Email Format**
+
+Commands reference: [add-t](#adding-a-tutor-add-t), [edit-t](#editing-a-tutor-edit-t)
 1. The local-part should only contain alphanumeric characters and these special characters, excluding the parentheses, (+_.-). The local-part may not start or end with any special characters.
 2. This is followed by a '@' and then a domain name. The domain name is made up of domain labels separated by periods.
 
@@ -1080,7 +1082,10 @@ The domain name must:
 * have each domain label start and end with alphanumeric characters
 * have each domain label consist of alphanumeric characters, separated only by hyphens, if any.
 
-**<sup id="note2">2</sup> `yyyy-MM-ddTHH:mm`**
+
+**<sup id="note3">3</sup> `yyyy-MM-ddTHH:mm` Format**
+
+Commands reference: [add-s](#adding-a-schedule-add-s), [edit-s](#editing-a-schedule-edit-s)
 * `yyyy` represents the **year** (e.g., 2023).
 * `MM` represents the **month** with a leading zero (e.g., 09 for September, 10 for October).
 * `dd` represents the **day** of the month with a leading zero (e.g., 03, 15).
