@@ -19,9 +19,6 @@ teams.
 LinkTree is the top contact solution for software professionals. Using our unique tag-based system and tree structure,
 you can access contacts by roles and responsibilities instantly.
 
-* Table of Contents
-{:toc}
-
 <page-nav-print />
 
 --------------------------------------------------------------------------------------------------------------------
@@ -77,20 +74,30 @@ Will update soon...
 
 ## Basic Features
 
-### Adding Contacts
+### Adding Developers
+#### What this command does:
+* Allows you to add developer information into the storage.
 
-* To add contacts for individual developers:
-  - Command: `Add id [contacts]`
-  - Example: `Add 1 [80888888]`
+#### Command format: 
+* `add n/[Developer Name] p/[Phone Number] e/[Email] a/[Address] (OPTIONAL r/[Remark] t/Tags)`
+  
+#### Example usage:
+* `add n/John p/89789678 e/John@gmail.com a/Singapore t/friend`
+  ![AddNewDevToListExample](images/UG_images/AddNewDevToListExample.png)
+
 
 ### Searching Contacts
+#### What this command does:
+* Helps you to search for a user or contact based on their id:
 
-* To search for a user or contact based on their id:
-  - Command: `search [role] [contact_name]`
-  - Example: `search [developer] [Peter]`
+#### Command format: 
+* `search [role] [contact_name]`
+
+#### Example usage: 
+* `search [developer] [Peter]`
 
 ### Editing Contacts
-
+#### What this command does:
 * To edit personal information:
   - Command: `edit INDEX(must be a positive integer) [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [r/REMARK] [t/TAG]...`
   - Example: `edit 1 n/John Wick e/new.email@example.com`
@@ -116,28 +123,113 @@ Will update soon...
 
 ### Deleting Contacts
 
-* To delete existing contacts for developers:
-  - Command: `Delete id [contacts]`
-  - Example: `Delete 2 [12345678]`
+#### What this command does:
+* Performs deletion of existing developers from the storage. Specify the index number as shown on the list.
+#### Command format:
+* `Delete [index number]`
 
-* To delete groups for a project:
-  - Command: `Delete id [name]`
-  - Example: `Delete 2 [name]`
+#### Example usage:
+- For example, to delete John from the list. First find the index number of John. 
+  ![DeletePersonFromListExample](images/UG_images/DeletePersonFromListExample.png)
+- In this example, the index of John is 7. So type, `delete 7`.
+  ![DeletedPersonFromListExample](images/UG_images/DeletedPersonFromListExample.png)
+
+
+### Deleting Teams
+#### What this command does:
+* Performs deletion of existing teams from the storage.
+#### Command format:
+* `Delete id [name]`
+#### Example usage:
+* Example: `Delete 2 [name]`
+
+
+
+### Creating Teams
+#### What this command does:
+* Creates a new team based on the given team name and leader name.
+
+#### Command format: 
+* `newteam tn/[TeamName] tl/[TeamLeader]`
+#### Example usage: 
+* `newteam tn/Team Delta tl/David Li`
+![AddTeamCommandExample](images/UG_images/AddTeamCommandExample.png)
+
+
+
+### Adding developers to a team
+#### What this command does:
+* To add a developer into an existing team:
+#### Command format:
+* `dev2team tn/[TeamName] n/[Developer Name]`
+#### Example usage:
+* `dev2team tn/Team Delta n/Irfan Ibrahim`
+![AddDeveloperToTeamExample](images/UG_images/AddDevToTeamCommandExample.png)
+
+
+
+### List Developers
+#### What this command does:
+* Show only the list of all developers in the project.
+
+#### Command format:
+* `list`
+#### Example usage:
+* `list` (and an example result is shown below)
+  ![ListCommandExample](images/UG_images/ListCommandExample.png)
+
+
+
+### To return to the home page
+* Use the same command `list`
+* You will return to the home page.
+
+
+**Example usage**: When you are at the main window, type `list` to show the developer list
+and type `list` again when you want to go back to the main window.
+
+
+
+### List existing teams in the project
+#### What this command does:
+* Show only the list of all existing teams in the project.
+
+#### Command format:
+* `listt`
+#### Example usage:
+* `listt` (and an example result is shown below)
+  ![ListTeamCommandExample](images/UG_images/ListTeamCommandExample.png)
+
+
+
+### To return to the home page
+* Use the same command `listt`
+* You will return to the home page.
+
+
+**Example usage**: When you are at the main window, type `listt` to show the team list
+and type `listt` again when you want to go back to the main window.
+
+
 
 ### Show Graph
+#### What this command does:
+* Provides a tree visualisation of all the teams and members in the project.
 
-* Display all users in a tree diagram:
-  - Command: `tree`
-  - Example: `tree` (and an example result is shown below)
-  ![TreeResultExample](images/UG_images/TreeResultExample.png)
+#### Command format: 
+* `tree`
+#### Example usage: 
+* `tree` (and an example result is shown below)
+![TreeResultExample](images/UG_images/TreeResultExample.png)
+
+  
+
+### To hide the tree
+  * Use the same command `tree`
+  * You will return to the home page.
 
 
-* Hide the tree
-  - Command: `tree`
-  - Note: just type `tree` **again** and the tree display will be hidden.
-
-
-**Example usage**: when you are at the main window, type `tree` to show the tree graph
+**Example usage**: When you are at the main window, type `tree` to show the tree graph
 and type `tree` again when you want to hide the tree and go back to the main window.
 
 --------------------------------------------------------------------------------------------------------------------
