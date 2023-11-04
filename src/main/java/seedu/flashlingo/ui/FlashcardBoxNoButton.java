@@ -55,7 +55,7 @@ public class FlashcardBoxNoButton extends UiPart<Region> {
         id.setText(displayedIndex + ") ");
         original.setText(fc.getOriginalWord().toString() + ": ");
         translation.setText("");
-        level.setText("Current Level: " + fc.getProficiencyLevel().getLevel());
+        level.setText("Proficiency Level: " + fc.getProficiencyLevel().getLevel());
     }
 
     /**

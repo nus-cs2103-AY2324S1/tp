@@ -38,8 +38,6 @@ public class AddCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "New flashcard added: %s - %s";
     public static final String MESSAGE_DUPLICATE_CARD = "This flashcard already exists";
-
-    private static final ProficiencyLevel level = new ProficiencyLevel(1);
     private final FlashCard toAdd;
     private OriginalWord original;
     private TranslatedWord translated;
@@ -52,7 +50,7 @@ public class AddCommand extends Command {
         requireNonNull(translated);
         this.original = original;
         this.translated = translated;
-        this.toAdd = new FlashCard(original, translated, new Date(), level);
+        this.toAdd = new FlashCard(original, translated, new Date(), new ProficiencyLevel(1));
     }
 
     /**

@@ -24,10 +24,12 @@ Flashlingo is a **desktop app for learning words by flash cards, optimized for u
        <img width="674" alt="Screenshot 2023-10-27 at 2 36 16 PM" src="https://github.com/itsNatTan/tp/assets/64185574/039d9f37-e45e-410f-b819-117ff312e13b">
 
     3. Navigate to the folder containing the jar file. In this example, it is in the Downloads folder.
-       <img width="219" alt="Screenshot 2023-10-27 at 2 41 08 PM" src="https://github.com/itsNatTan/tp/assets/64185574/6f723fd8-0f43-456a-b566-9073334831e3">
+   <br>
+       `$ cd Downloads`
 
     4. Simply type in java -jar flashlingo.jar to get started!
-       <img width="361" alt="Screenshot 2023-10-27 at 2 39 31 PM" src="https://github.com/itsNatTan/tp/assets/64185574/e65a1562-9af9-4290-b5e0-b5a53e4d52c8">
+   <br>
+         `$ java -jar flashlingo.jar`
        <br>
        A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
        ![Ui](images/MainUi.png)
@@ -86,6 +88,8 @@ Output:
 
 
 ### Adding a flash card: `add`
+:information_source: Notes about adding words:
+* In order to give users full customizability, there's no any restriction on input, as long as it is not empty.
 
 Adds a word to the flash card with its translation.
 * Creates a wild flash card.

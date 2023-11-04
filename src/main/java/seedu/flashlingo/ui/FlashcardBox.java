@@ -63,7 +63,7 @@ public class FlashcardBox extends UiPart<Region> {
         id.setText(displayedIndex + ") ");
         original.setText(fc.getOriginalWord().toString() + ": ");
         translation.setText("");
-        level.setText("Current Level: " + fc.getProficiencyLevel().getLevel());
+        level.setText("Proficiency Level: " + fc.getProficiencyLevel().getLevel());
     }
 
     /**
@@ -72,7 +72,7 @@ public class FlashcardBox extends UiPart<Region> {
     @FXML
     public void success() throws CommandException, ParseException {
         this.mw.executeCommand("yes");
-        level.setText("Current Level: " + flashCard.getProficiencyLevel().getLevel());
+        level.setText("Proficiency Level: " + flashCard.getProficiencyLevel().getLevel());
     }
 
     /**
@@ -81,7 +81,7 @@ public class FlashcardBox extends UiPart<Region> {
     @FXML
     public void failure() throws CommandException, ParseException {
         this.mw.executeCommand("no");
-        level.setText("Current Level: " + flashCard.getProficiencyLevel().getLevel());
+        level.setText("Proficiency Level: " + flashCard.getProficiencyLevel().getLevel());
     }
 
     /**
