@@ -9,6 +9,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.staffsnap.commons.util.ToStringBuilder;
+import seedu.staffsnap.logic.commands.exceptions.CommandException;
 
 /**
  * Represents an Interview in the applicant book.
@@ -18,6 +19,10 @@ public class Interview implements Comparable<Interview> {
 
     public static final String MESSAGE_CONSTRAINTS = "Interview types should not be empty and should be at most 14 "
             + "characters long";
+
+    public static final String DUPLICATE_CONSTRAINTS = "Duplicate interview detected. " +
+            "Automatic duplicate handling not" +
+            " available, please resolve duplicates manually.";
 
     public final String type;
 
@@ -54,7 +59,10 @@ public class Interview implements Comparable<Interview> {
      * Increments the interview name and returns the incremented interview
      * @return the incremented interview
      */
-    public Interview incrementName() {
+    public Interview incrementName() throws CommandException {
+        if (type.length() > 11) {
+            throw new CommandException(DUPLICATE_CONSTRAINTS);
+        }
         Pattern pattern = Pattern.compile(".*?(\\d+)$");
 
         Matcher matcher = pattern.matcher(type);
@@ -62,8 +70,8 @@ public class Interview implements Comparable<Interview> {
         if (matcher.find()) {
             String lastNumber = matcher.group(1);
 
-            int number = Integer.parseInt(lastNumber);
-            int incrementedNumber = number + 1;
+            long number = Long.parseLong(lastNumber);
+            long incrementedNumber = number + 1;
             String result = type.replace(lastNumber, String.valueOf(incrementedNumber));
 
             return new Interview(result, rating);
