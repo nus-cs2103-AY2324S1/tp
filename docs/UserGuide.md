@@ -405,14 +405,14 @@ Example2 (a lesson is shown): addtask do homeworkPlease note that there cannot b
 ### Deleting a task : `deleteTask`
 Deletes the specified task from the shown lesson in the application.
 
-Format: `deleteTask INDEX`
+Format: `deleteTask TASK_INDEX`
 
-* Deletes the task at the specified `INDEX` of the task list in shown lesson.
-* The index refers to the index number shown in the displayed student list.
+* Deletes the task at the specified `TASK_INDEX` of the task list in shown lesson.
+* The index refers to the index number shown in the displayed task list of the lesson.
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `show 1` followed by `delete 2` deletes the 2nd task of the 1st lesson in the schedule.
+* `show 1` followed by `delete 2` deletes the 2nd task of the 1st lesson in the schedule list.
 
 Success Output:
 ```
@@ -525,7 +525,7 @@ Note: Add, Edit & Delete commands are dependent on the list type [`SCHEDULE`, `T
 
 Action     | Format, Examples                                                                                                                                                                                | List, Remarks 
 -----------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------
-**Help**   | `help`        |
+**Help**   | `help`                                                                                                                                                                                          |
 **List**   | `list`, `list schedule`, `list students [KEYWORDs]`, `list tasks`                                                                                                                               | NA
 **Show**   | `show INDEX`                                                                                                                                                                                    | `SCHEDULE`, `STUDENTS`, `TASKS`
 **Add Person**    | `addPerson -name John -phone 91234567 -email test@gmail.com -address 10 Kent Ridge Drive -subject MATHEMATICS`                                                                                  | ANY LIST
@@ -533,7 +533,7 @@ Action     | Format, Examples                                                   
 **Add Lesson**    | `addLesson -name NAME [-start HH:MM] [-end HH:MM] [-day YYYY/MM/DD] [-subject SUBJECT]`                                                                                                         | ANY LIST
 **Edit Lesson**   | `editLesson INDEX [-start HH:MM] [-end HH:MM] [-day YYYY/MM/DD] [-subject SUBJECT]` <br> e.g.,`editLesson 2 -start 13:00 -end 14:00`                                                            |  ANY LIST
 **Delete Person/Lesson** | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                             | `SCHEDULE`, `STUDENTS`
-**Add Task**    | `addTask INDEX DESCRIPTION`                                                                                                                                                                     | `SCHEDULE`
-**Delete Task** | `deleteTask INDEX`<br> e.g., `delete 3`                                                                                                                                                         | `SCHEDULE`, <br> `show LESSON_INDEX` has to be used prior to `deleteTask` command                                                                                                                                                    | `SCHEDULE`, `STUDENTS`
+**Add Task**    | `addTask LESSON_INDEX DESCRIPTION`                                                                                                                                                              | `SCHEDULE`
+**Delete Task** | `deleteTask TASK_INDEX`<br> e.g., `delete 3`                                                                                                                                                    | `SCHEDULE`, <br> `show LESSON_INDEX` has to be used prior to `deleteTask` command                                                                                                                                                    | `SCHEDULE`, `STUDENTS`
 **Find**   | `find KEYWORD`                                                                                                                                                                                  | `SCHEDULE`, `STUDENTS`                                                                                                                                                                                  | NA
-**Exit**   | `exit`   | NA
+**Exit**   | `exit`                                                                                                                                                                                          | NA
