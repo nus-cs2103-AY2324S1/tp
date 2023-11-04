@@ -190,6 +190,31 @@ The `add-t` command was designed this way to ensure consistency with the previou
     * Pros: Easier to implement, and less error prone.
     * Cons: Users must have every field filled before they can add a tutor.
 
+**Aspect: Non-unique phone number and email restriction**
+* **Alternative 1:** Allow only unique phone numbers and emails of tutors.
+    * Pros: Decreases erroneous user input when duplicated tutors are entered.
+    * Cons: There can be real life scenarios where tutors have the same phone numbers of emails (since there is no 
+      strict requirement against it).
+* **Alternative 2 (current choice):** Allow only non-unique phone numbers and emails of tutors.
+    * Pros: In line with real-life scenario as mentioned above.
+    * Pros: Phone numbers and emails are means of contacting the tutors and there is no real need for them to be unique.
+    * Cons: Duplicated tutors could be added.
+
+**Aspect: Tutor name restrictions**
+* **Alternative 1:** Allow tutors to have name input as only alphabets.
+    * Pros: Decreases erroneous user input when phone numbers are accidentally input as names using `n/` tags.
+    * Cons: With the implementation of unique names, tutor names cannot be differentiated with numbers.
+* **Alternative 2 (current choice):** Allow tutors to have alphanumeric names.
+    * Pros: Tutors with the same name can be differentiated with numbers.
+    * Pros: Tutors' names are restricted to a limited number of characters to promote easy searching and reference 
+      in the future. This also introduces uniformity.
+    * Cons: Number inputs are accepted as names and users can erroneously use phone numbers as names instead.
+    * Cons: Tutors' names with commas cannot be recognised and entered.
+* **Alternative 3:** Allow tutors to have names with special characters, especially commas.
+    * Pros: More representative of various name types, especially those with commas in their names.
+    * Cons: Allowing too many special characters decreases the ability to locate and reference the tutors in future 
+      (e.g. ABC,123@!?:" should not be accepted as a valid name).
+
 ### Edit tutor feature 
 
  The “Edit Tutor” feature allows users to edit an existing tutor in the address book given a tutor index. 
@@ -899,6 +924,16 @@ testers are expected to do more *exploratory* testing.
 
 Given below are the planned enhancements for future iterations of the app.
 
+### Tutor name case sensitivity
+The current [add tutor feature](#add-tutor-feature) validates unique tutor names with case sensitivity (e.g. John 
+DOe is different from john Doe). This may not be applicable in the real world. We plan to remove the case 
+sensitivity check for tutor names.
+
+**Proposed implementation**
+
+In the `isEquals` method in the `Name.java`, the check for the same tutor using their names can be replaced with one 
+that removes capitalisation of the tutors' names before checking if they are equal.
+
 ### Editing a tutor allocated to a schedule
 The `edit-s` function should allow users to edit the allocated tutor.
 
@@ -934,3 +969,38 @@ Step 7. EditScheduleCommand object then calls the setSchedule method in the Mode
 This method sets the specified `Schedule` in the model to be that edited schedule.
 
 Step 8. Finally, the EditScheduleCommand object updates the schedule list to display the edited schedule.
+
+### Disallowing future schedules to be marked
+
+**Proposed implementation**
+More details...
+
+### Schedule `datetime` input
+
+**Proposed implementation**
+More details...
+
+### Switching back to list view from calendar view
+
+**Proposed implementation**
+More details...
+
+### Long fields being truncated
+
+**Proposed implementation**
+More details...
+
+### Schedules at the same time being arranged alphabetically
+
+**Proposed implementation**
+More details...
+
+### Having a single `list` command for both lists
+
+**Proposed implementation**
+More details...
+
+### UI for calendar to use colours to reflect status of schedules
+
+**Proposed implementation**
+More details...
