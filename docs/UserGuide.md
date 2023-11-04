@@ -354,7 +354,7 @@ Then, use the `load` command to import the data.
 | **Help**                | `help`                                                                                                                     |
 | **List**                | `list`                                                                                                                     |
 | **Add**                 | `add w/<WORD> t/<TRANSLATION> [wl/<WORD_LANGUAGE>] [tl/<TRANSLATION_LANGUAGE>]` <br> e.g., `add w/regarder t/look`         |
-| **Delete**              | `delete <INDEX>`<br> e.g., `del 2`    d                                                                                    |
+| **Delete**              | `delete <Index>`<br> e.g., `del 1`                                                                                         |
 | **Edit**                | `edit <INDEX> [w/<WORD>] [t/<TRANSLATION>] [wl/<WORD_LANGUAGE>] [tl/<TRANSLATION_LANGUAGE>]`<br> e.g., `edit 1 w/bye t/再见` |
 | **Find**                | `find KEYWORD`<br> e.g., `find bye`                                                                                        |
 | **Start**               | `start`                                                                                                                    |
