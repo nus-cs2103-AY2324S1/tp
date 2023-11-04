@@ -11,6 +11,7 @@ import seedu.flashlingo.logic.Messages;
 import seedu.flashlingo.logic.commands.exceptions.CommandException;
 import seedu.flashlingo.model.Model;
 import seedu.flashlingo.model.flashcard.FlashCard;
+import seedu.flashlingo.model.flashcard.words.TranslatedWord;
 
 /**
  * Indicates user has not yet memorized the word.
@@ -40,8 +41,9 @@ public class RevealCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_FLASHCARD_DISPLAYED_INDEX);
         }
 
-        FlashCard flashCard = lastShownList.get(targetIndex.getZeroBased());
-        return new CommandResult(MESSAGE_SUCCESS + flashCard.getTranslatedWord().getWord());
+        FlashCard toBeRevealed = lastShownList.get(targetIndex.getZeroBased());
+        TranslatedWord translatedWord = model.reveal(toBeRevealed);
+        return new CommandResult(MESSAGE_SUCCESS + translatedWord.getWord());
     }
     @Override
     public boolean equals(Object other) {
@@ -60,6 +62,7 @@ public class RevealCommand extends Command {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .toString();
+          .add("targetIndex", targetIndex)
+          .toString();
     }
 }

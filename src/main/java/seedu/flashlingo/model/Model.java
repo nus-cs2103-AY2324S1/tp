@@ -129,5 +129,5 @@ public interface Model {
     void startSession() throws CommandException;
     void endSession();
     boolean hasNextRound();
-    TranslatedWord reveal();
+    TranslatedWord reveal(FlashCard toBeRevealed);
 }

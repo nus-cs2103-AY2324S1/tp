@@ -219,8 +219,8 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public TranslatedWord reveal() {
-        return getFilteredFlashCardList().get(0).getTranslatedWord();
+    public TranslatedWord reveal(FlashCard toBeRevealed) {
+        return toBeRevealed.getTranslatedWord();
     }
 
     @Override
