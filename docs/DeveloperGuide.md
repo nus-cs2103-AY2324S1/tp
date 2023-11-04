@@ -157,8 +157,6 @@ The following shows the activity diagram from when a user executes the `add-t` c
 
 ![AddTutorActivityDiagram](images/AddTutorActivityDiagram.png)
 
-<div markdown="block" class="alert alert-info">
-
 #### Implementation
 
 Step 1. The user launches the application for the first time.
