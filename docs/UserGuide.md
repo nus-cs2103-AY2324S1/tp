@@ -1,7 +1,6 @@
 ---
-layout: default.md
-title: "UserGuide"
-pageNav: 3
+layout: page
+title: User Guide
 ---
 
 # ClubMemberContacts
