@@ -74,7 +74,7 @@ public class FlashlingoParser {
             case ExitCommand.COMMAND_WORD:
                 return new ExitCommand();
             case RevealCommand.COMMAND_WORD:
-                return new RevealCommand();
+                return new RevealCommandParser().parse(arguments);
             case SwitchCommand.COMMAND_WORD:
                 return new SwitchCommand();
             default:
@@ -114,7 +114,7 @@ public class FlashlingoParser {
         case SwitchCommand.COMMAND_WORD:
             return new SwitchCommand();
         case RevealCommand.COMMAND_WORD:
-            return new RevealCommand();
+            return new RevealCommandParser().parse(arguments);
         case LoadCommand.COMMAND_WORD:
             return new LoadCommandParser().parse(arguments);
         default:
