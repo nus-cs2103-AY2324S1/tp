@@ -64,7 +64,8 @@ public class LoadCommand extends Command {
                     continue;
                 }
                 if (originalWordList.contains(originalWordValue) || translatedWordList.contains(translatedWordValue)) {
-                    throw new CommandException(MESSAGE_DUPLICATE_FLASHCARD + originalWordValue + "-" + translatedWordValue + " found in file!");
+                    throw new CommandException(MESSAGE_DUPLICATE_FLASHCARD + originalWordValue + "-"
+                            + translatedWordValue + " found in file!");
                 }
                 originalWordValue = originalWordValue.trim();
                 translatedWordValue = translatedWordValue.trim();
@@ -80,13 +81,14 @@ public class LoadCommand extends Command {
             throw new CommandException(MESSAGE_READ_FILE_FAIL);
         }
         for (int i = 0; i < originalWordList.size(); i++) {
-            FlashCard flashCard = new FlashCard(new OriginalWord(originalWordList.get(i),""),
-                    new TranslatedWord(translatedWordList.get(i),""), new Date(), new ProficiencyLevel(1));
+            FlashCard flashCard = new FlashCard(new OriginalWord(originalWordList.get(i), ""),
+                    new TranslatedWord(translatedWordList.get(i), ""), new Date(), new ProficiencyLevel(1));
             flashCards.add(flashCard);
         }
         for (FlashCard flashCard : flashCards) {
             if (model.hasFlashCard(flashCard)) {
-                throw new CommandException(MESSAGE_DUPLICATE_FLASHCARD + flashCard.getOriginalWord() + "-" + flashCard.getTranslatedWord() + "already in Flashlingo!");
+                throw new CommandException(MESSAGE_DUPLICATE_FLASHCARD + flashCard.getOriginalWord() + "-"
+                        + flashCard.getTranslatedWord() + "already in Flashlingo!");
             }
         }
         model.addFlashCards(flashCards);
