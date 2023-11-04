@@ -1,4 +1,4 @@
-package networkbook.logic.commands;
+package networkbook.logic.commands.add;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -8,6 +8,8 @@ import org.junit.jupiter.api.Test;
 
 import networkbook.commons.core.index.Index;
 import networkbook.logic.Messages;
+import networkbook.logic.commands.ClearCommand;
+import networkbook.logic.commands.CommandTestUtil;
 import networkbook.model.Model;
 import networkbook.model.ModelManager;
 import networkbook.model.NetworkBook;
@@ -96,7 +98,7 @@ public class AddCommandTest {
     @Test
     public void execute_multipleGradsBeingAdded_assertionError() {
         Index indexLastPerson = Index.fromOneBased(model.getDisplayedPersonList().size());
-        AddCommand.AddPersonDescriptor descriptor =
+        AddPersonDescriptor descriptor =
                 new AddPersonDescriptorBuilder().withGraduation(CommandTestUtil.VALID_GRADUATION_AMY).build();
         AddCommand addCommand = new AddCommand(indexLastPerson, descriptor);
         String expectedMessage = AddCommand.MESSAGE_MULTIPLE_UNIQUE_FIELD;
@@ -159,7 +161,7 @@ public class AddCommandTest {
     @Test
     public void execute_invalidPersonIndexUnfilteredList_commandFailure() {
         Index outOfBoundIndex = Index.fromOneBased(model.getDisplayedPersonList().size() + 1);
-        AddCommand.AddPersonDescriptor descriptor =
+        AddPersonDescriptor descriptor =
                 new AddPersonDescriptorBuilder().build();
         AddCommand addCommand = new AddCommand(outOfBoundIndex, descriptor);
 
@@ -189,8 +191,8 @@ public class AddCommandTest {
                 new AddCommand(TypicalIndexes.INDEX_FIRST_PERSON, CommandTestUtil.DESC_AMY);
 
         // same values -> returns true
-        AddCommand.AddPersonDescriptor copyDescriptor =
-                new AddCommand.AddPersonDescriptor(CommandTestUtil.DESC_AMY);
+        AddPersonDescriptor copyDescriptor =
+                new AddPersonDescriptor(CommandTestUtil.DESC_AMY);
         AddCommand commandWithSameValues = new AddCommand(TypicalIndexes.INDEX_FIRST_PERSON, copyDescriptor);
         assertTrue(standardCommand.equals(commandWithSameValues));
 
@@ -215,7 +217,7 @@ public class AddCommandTest {
     @Test
     public void toStringMethod() {
         Index index = Index.fromOneBased(1);
-        AddCommand.AddPersonDescriptor editPersonDescriptor = new AddCommand.AddPersonDescriptor();
+        AddPersonDescriptor editPersonDescriptor = new AddPersonDescriptor();
         AddCommand addCommand = new AddCommand(index, editPersonDescriptor);
         String expected = AddCommand.class.getCanonicalName() + "{index=" + index + ", addPersonDescriptor="
                 + editPersonDescriptor + "}";

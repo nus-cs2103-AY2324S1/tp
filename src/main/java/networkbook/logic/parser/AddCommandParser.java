@@ -8,8 +8,8 @@ import java.util.Optional;
 
 import networkbook.commons.core.index.Index;
 import networkbook.logic.Messages;
-import networkbook.logic.commands.AddCommand;
-import networkbook.logic.commands.AddCommand.AddPersonDescriptor;
+import networkbook.logic.commands.add.AddCommand;
+import networkbook.logic.commands.add.AddPersonDescriptor;
 import networkbook.logic.parser.exceptions.ParseException;
 import networkbook.model.person.Course;
 import networkbook.model.person.Email;
@@ -82,7 +82,7 @@ public class AddCommandParser implements Parser<AddCommand> {
      */
     private static AddPersonDescriptor generateAddPersonDescriptor(ArgumentMultimap argMultimap)
             throws ParseException {
-        AddPersonDescriptor addPersonDescriptor = new AddCommand.AddPersonDescriptor();
+        AddPersonDescriptor addPersonDescriptor = new AddPersonDescriptor();
 
         if (argMultimap.getValue(CliSyntax.PREFIX_NAME).isPresent()) {
             throw new ParseException(MESSAGE_MULTIPLE_NAMES);

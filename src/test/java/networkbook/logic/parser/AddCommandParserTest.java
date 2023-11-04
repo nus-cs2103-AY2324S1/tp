@@ -7,8 +7,9 @@ import org.junit.jupiter.api.Test;
 
 import networkbook.commons.core.index.Index;
 import networkbook.logic.Messages;
-import networkbook.logic.commands.AddCommand;
 import networkbook.logic.commands.CommandTestUtil;
+import networkbook.logic.commands.add.AddCommand;
+import networkbook.logic.commands.add.AddPersonDescriptor;
 import networkbook.model.person.Course;
 import networkbook.model.person.Email;
 import networkbook.model.person.Graduation;
@@ -109,7 +110,7 @@ public class AddCommandParserTest {
                 + CommandTestUtil.SPECIALISATION_DESC_AMY
                 + CommandTestUtil.TAG_DESC_FRIEND;
 
-        AddCommand.AddPersonDescriptor descriptor = new AddPersonDescriptorBuilder()
+        AddPersonDescriptor descriptor = new AddPersonDescriptorBuilder()
                 .withPhone(CommandTestUtil.VALID_PHONE_BOB)
                 .withEmail(CommandTestUtil.VALID_EMAIL_AMY)
                 .withLink(CommandTestUtil.VALID_LINK_AMY)
@@ -128,7 +129,7 @@ public class AddCommandParserTest {
         Index targetIndex = TypicalIndexes.INDEX_FIRST_PERSON;
         String userInput = targetIndex.getOneBased() + CommandTestUtil.PHONE_DESC_BOB + CommandTestUtil.EMAIL_DESC_AMY;
 
-        AddCommand.AddPersonDescriptor descriptor = new AddPersonDescriptorBuilder()
+        AddPersonDescriptor descriptor = new AddPersonDescriptorBuilder()
                 .withPhone(CommandTestUtil.VALID_PHONE_BOB)
                 .withEmail(CommandTestUtil.VALID_EMAIL_AMY).build();
         AddCommand expectedCommand = new AddCommand(targetIndex, descriptor);
@@ -142,7 +143,7 @@ public class AddCommandParserTest {
 
         // phone
         String userInput = targetIndex.getOneBased() + CommandTestUtil.PHONE_DESC_AMY;
-        AddCommand.AddPersonDescriptor descriptor = new AddPersonDescriptorBuilder()
+        AddPersonDescriptor descriptor = new AddPersonDescriptorBuilder()
                 .withPhone(CommandTestUtil.VALID_PHONE_AMY).build();
         AddCommand expectedCommand = new AddCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);

@@ -1,4 +1,4 @@
-package networkbook.logic.commands;
+package networkbook.logic.commands.add;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
+import networkbook.logic.commands.CommandTestUtil;
 import networkbook.model.person.Tag;
 import networkbook.model.util.UniqueList;
 import networkbook.testutil.AddPersonDescriptorBuilder;
@@ -15,8 +16,8 @@ public class AddPersonDescriptorTest {
     @Test
     public void equals() {
         // same values -> returns true
-        AddCommand.AddPersonDescriptor descriptorWithSameValues =
-                new AddCommand.AddPersonDescriptor(CommandTestUtil.DESC_AMY);
+        AddPersonDescriptor descriptorWithSameValues =
+                new AddPersonDescriptor(CommandTestUtil.DESC_AMY);
         assertTrue(CommandTestUtil.DESC_AMY.equals(descriptorWithSameValues));
 
         // same object -> returns true
@@ -32,7 +33,7 @@ public class AddPersonDescriptorTest {
         assertFalse(CommandTestUtil.DESC_AMY.equals(CommandTestUtil.DESC_BOB));
 
         // different phone -> returns false
-        AddCommand.AddPersonDescriptor editedAmy = new AddPersonDescriptorBuilder(CommandTestUtil.DESC_AMY)
+        AddPersonDescriptor editedAmy = new AddPersonDescriptorBuilder(CommandTestUtil.DESC_AMY)
                 .withPhone(CommandTestUtil.VALID_PHONE_BOB)
                 .build();
         assertFalse(CommandTestUtil.DESC_AMY.equals(editedAmy));
@@ -76,7 +77,7 @@ public class AddPersonDescriptorTest {
 
     @Test
     public void addTag_addNewTagWhenTagFieldIsNull_success() {
-        AddCommand.AddPersonDescriptor descriptor = new AddPersonDescriptorBuilder().build();
+        AddPersonDescriptor descriptor = new AddPersonDescriptorBuilder().build();
         descriptor.addTag(new Tag(CommandTestUtil.VALID_TAG_FRIEND));
         UniqueList<Tag> expectedTagList = new UniqueList<>();
         expectedTagList.add(new Tag(CommandTestUtil.VALID_TAG_FRIEND));
@@ -85,8 +86,8 @@ public class AddPersonDescriptorTest {
 
     @Test
     public void toStringMethod() {
-        AddCommand.AddPersonDescriptor editPersonDescriptor = new AddCommand.AddPersonDescriptor();
-        String expected = AddCommand.AddPersonDescriptor.class.getCanonicalName() + "{phones="
+        AddPersonDescriptor editPersonDescriptor = new AddPersonDescriptor();
+        String expected = AddPersonDescriptor.class.getCanonicalName() + "{phones="
                 + editPersonDescriptor.getPhones().orElse(null) + ", emails="
                 + editPersonDescriptor.getEmails().orElse(null) + ", links="
                 + editPersonDescriptor.getLinks().orElse(null) + ", graduation="

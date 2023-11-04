@@ -6,7 +6,6 @@ import java.util.regex.Pattern;
 
 import networkbook.commons.core.LogsCenter;
 import networkbook.logic.Messages;
-import networkbook.logic.commands.AddCommand;
 import networkbook.logic.commands.ClearCommand;
 import networkbook.logic.commands.Command;
 import networkbook.logic.commands.CreateCommand;
@@ -20,6 +19,7 @@ import networkbook.logic.commands.RedoCommand;
 import networkbook.logic.commands.SaveCommand;
 import networkbook.logic.commands.SortCommand;
 import networkbook.logic.commands.UndoCommand;
+import networkbook.logic.commands.add.AddCommand;
 import networkbook.logic.commands.delete.DeletePersonCommand;
 import networkbook.logic.commands.edit.EditCommand;
 import networkbook.logic.commands.filter.FilterCommand;
