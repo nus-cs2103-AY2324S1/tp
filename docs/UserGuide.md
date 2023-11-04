@@ -21,7 +21,7 @@ Here are some possible ways you can integrate CMC into your CCA:
 - You can find members or applicants easily through the `find` commands. 
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-If this is your first time using CMC, head over to [How to use CMC's User Guide](#how-to-use-cmcs-user-guide)
+If this is your first time using CMC, head over to [How to use CMC's User Guide](#1-how-to-use-cmcs-user-guide)
 to start keeping track of all your members and applicants!
 </div>
 
