@@ -189,7 +189,7 @@ public class AddCommandTest {
             throw new AssertionError("This method should not be called.");
         }
         @Override
-        public boolean hasDuplicateInfo(Musician musician) {
+        public boolean hasDuplicateInfo(Musician toExclude, Musician musician) {
             throw new AssertionError("This method should not be called.");
         }
         @Override
@@ -321,7 +321,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public boolean hasDuplicateInfo(Musician musician) {
+        public boolean hasDuplicateInfo(Musician toExclude, Musician musician) {
             requireNonNull(musician);
             return musiciansAdded.stream().anyMatch(musician::hasSameInfo);
         }
