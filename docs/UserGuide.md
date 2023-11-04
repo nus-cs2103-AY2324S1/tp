@@ -350,7 +350,7 @@ View the class details of a student that will be displayed on the right side of 
 
 Format: `view s/STUDENT_NUMBER`
 
-* The STUDENT_NUMBER must be valid e.g `T*`.
+* The STUDENT_NUMBER must be valid.
 * The STUDENT_NUMBER must belong to a student in Class Manager.
 
 Example:
