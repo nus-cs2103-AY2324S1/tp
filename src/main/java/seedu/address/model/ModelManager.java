@@ -98,9 +98,9 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public boolean hasDuplicateInfo(Musician musician) {
+    public boolean hasDuplicateInfo(Musician toExclude, Musician musician) {
         requireNonNull(musician);
-        return addressBook.hasDuplicateInfo(musician);
+        return addressBook.hasDuplicateInfo(toExclude, musician);
     }
 
     @Override

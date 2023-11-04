@@ -121,8 +121,9 @@ public class AddBandCommandTest {
         public void addMusician(Musician musician) {
             throw new AssertionError("This method should not be called.");
         }
+
         @Override
-        public boolean hasDuplicateInfo(Musician musician) {
+        public boolean hasDuplicateInfo(Musician toExclude, Musician musician) {
             throw new AssertionError("This method should not be called.");
         }
 
