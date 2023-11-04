@@ -121,12 +121,12 @@ Import staff lists for quick access to contact information. You can also add, ed
 
 ### Adding transaction : `add`
 
-Format: `add ty/<type> d/<description> a/<amount> on/<date> [s/<staff ID>]`
+Format: `add ty/<type> d/<description> amt/<amount> on/<date> [s/<staff ID>]`
 
 Examples:
 
-- `add ty/R d/Sold 1 Mug a/10 on/10/10/23 s/1`
-- `add ty/E d/Paid Manufacturer a/100 on/10/11/23`
+- `add ty/R d/Sold 1 Mug amt/10 on/10/10/23 s/1`
+- `add ty/E d/Paid Manufacturer amt/100 on/10/11/23`
 
 Success/Fail Output:
 
@@ -331,7 +331,7 @@ The input field below this with the grey text `Enter command here...` is where y
 
 | Action                  | Format, Examples                                                                                                        |
 | ----------------------- | ----------------------------------------------------------------------------------------------------------------------- |
-| **Add transaction**     | `add ty/<type> d/<description> a/<amount> on/<date> [s/<staff ID>]`                                                     |
+| **Add transaction**     | `add ty/<type> d/<description> amt/<amount> on/<date> [s/<staff ID>]`                                                   |
 | **Remove transaction**  | `del <id>`                                                                                                              |
 | **Sort transactions**   | `sort [date/<sort type>] [amount/<sort type>]`                                                                          |
 | **Filter transactions** | `filter [ty/<type>] [has/<keywords...>] [after/<date>] [before/<date>] [more/<amount>] [less/<amount>] [by/<staff ID>]` |
