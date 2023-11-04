@@ -86,6 +86,5 @@ public class FlashcardBoxNoButton extends UiPart<Region> {
             this.mw.executeCommand("reveal");
             reveal.setText(" Hide ");
         }
-        flashCard.setIsRevealed(!flashCard.getIsRevealed());
     }
 }
