@@ -209,7 +209,7 @@ public class MainWindow extends UiPart<Stage> {
                 setColorTheme(logic.getTheme());
                 commandResult = new CommandResult(commandResult.getFeedbackToUser(), false, false, false);
             }
-            fillInnerParts();
+            flashcardListPanel.update();
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
             return commandResult;
         } catch (CommandException | ParseException e) {
