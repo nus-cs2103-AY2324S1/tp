@@ -6,7 +6,7 @@
     "email": "alice@example.com",
     "address": "123, Jurong West Ave 6, #08-111",
     "appointment": "12-Dec-2023, 12:00, 15:00",
-    "MedicalHistories": [ "Diabetes" ],
+    "MedicalHistories": [ "Diabetes" ]
   }, {
     "name": "Alice Pauline",
     "nric": "T0111110E",
