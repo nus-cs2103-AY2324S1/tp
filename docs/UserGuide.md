@@ -25,78 +25,93 @@ If this is your first time using CMC, head over to [How to use CMC's User Guide]
 to start keeping track of all your members and applicants!
 </div>
 
-* Table of Contents
-  <!-- TOC -->
-* [ClubMemberContacts](#clubmembercontacts)
-  * [Quick start](#quick-start)
-  * [Features](#features)
-    * [Add Member/Applicant](#add-memberapplicant)
-      * [Usage:](#usage-)
-        * [Adding member:](#adding-member-)
-        * [Adding applicant:](#adding-applicant-)
-      * [Acceptable values for parameters:](#acceptable-values-for-parameters-)
-      * [Example of usage:](#example-of-usage-)
-    * [Delete Member](#delete-member)
-      * [Usage:](#usage--1)
-      * [Acceptable values for parameters:](#acceptable-values-for-parameters--1)
-      * [Example of usage:](#example-of-usage--1)
-      * [Expected Outcome:](#expected-outcome-)
-      * [If index is out of range:](#if-index-is-out-of-range-)
-      * [If there are no members:](#if-there-are-no-members-)
-    * [Edit Member](#edit-member)
-      * [Usage:](#usage--2)
-      * [Acceptable values for parameters:](#acceptable-values-for-parameters--2)
-      * [Example of usage:](#example-of-usage--2)
-      * [Expected Outcome:](#expected-outcome--1)
-      * [If name is invalid:](#if-name-is-invalid-)
-      * [If phone number is invalid:](#if-phone-number-is-invalid-)
-      * [If telegram handle is invalid:](#if-telegram-handle-is-invalid-)
-      * [If tag is invalid:](#if-tag-is-invalid-)
-    * [Find Member(s)](#find-member--s-)
-      * [Usage:](#usage--3)
-      * [Acceptable values for parameters:](#acceptable-values-for-parameters--3)
-      * [Example of usage:](#example-of-usage--3)
-      * [Expected Outcome:](#expected-outcome--2)
-      * [If unable to find member(s) with matching keyword(s)](#if-unable-to-find-member--s--with-matching-keyword--s-)
-    * [View Members/Applicants](#view-membersapplicants)
-      * [Usage:](#usage--4)
-        * [Viewing all members:](#viewing-all-members-)
-        * [Viewing all applicants:](#viewing-all-applicants-)
-    * [Delete Applicant](#delete-applicant)
-      * [Usage:](#usage--5)
-      * [Acceptable values for parameters:](#acceptable-values-for-parameters--4)
-      * [Example of usage:](#example-of-usage--4)
-      * [Expected Outcome:](#expected-outcome--3)
-      * [If index is out of range:](#if-index-is-out-of-range--1)
-      * [If there are no applicants:](#if-there-are-no-applicants-)
-    * [Edit Applicant](#edit-applicant)
-      * [Usage:](#usage--6)
-      * [Acceptable values for parameters:](#acceptable-values-for-parameters--5)
-      * [Example of usage:](#example-of-usage--5)
-      * [Expected Outcome:](#expected-outcome--4)
-      * [If name is invalid:](#if-name-is-invalid--1)
-      * [If phone number is invalid:](#if-phone-number-is-invalid--1)
-      * [If interview date is invalid:](#if-interview-date-is-invalid-)
-    * [Find Applicant(s)](#find-applicant--s-)
-      * [Usage:](#usage--7)
-      * [Acceptable values for parameters:](#acceptable-values-for-parameters--6)
-      * [Example of usage:](#example-of-usage--6)
-      * [Expected Outcome:](#expected-outcome--5)
-      * [If unable to find applicant(s) with matching keyword(s)](#if-unable-to-find-applicant--s--with-matching-keyword--s-)
-    * [Copy Member/Applicant](#copy-memberapplicant)
-      * [Usage:](#usage--8)
-        * [Copying member:](#copying-member-)
-        * [Copying applicant:](#copying-applicant-)
-      * [Acceptable values for parameters:](#acceptable-values-for-parameters--7)
-      * [Example of usage:](#example-of-usage--7)
-      * [Expected Outcome:](#expected-outcome--6)
-      * [If index is out of range:](#if-index-is-out-of-range--2)
-  * [Command summary](#command-summary)
+## Table of Contents
+
 <!-- TOC -->
+* [Table of Contents](#table-of-contents)
+* [How to Use CMC's User Guide](#how-to-use-cmcs-user-guide)
+* [Quick start](#quick-start)
+* [Interface Walkthrough](#interface-walkthrough)
+* [Features](#features)
+  * [Add Member/Applicant](#add-memberapplicant)
+    * [Usage:](#usage-)
+      * [Adding member:](#adding-member-)
+      * [Adding applicant:](#adding-applicant-)
+    * [Acceptable values for parameters:](#acceptable-values-for-parameters-)
+    * [Example of usage:](#example-of-usage-)
+  * [Delete Member](#delete-member)
+    * [Usage:](#usage--1)
+    * [Acceptable values for parameters:](#acceptable-values-for-parameters--1)
+    * [Example of usage:](#example-of-usage--1)
+    * [Expected Outcome:](#expected-outcome-)
+    * [If index is out of range:](#if-index-is-out-of-range-)
+    * [If there are no members:](#if-there-are-no-members-)
+  * [Edit Member](#edit-member)
+    * [Usage:](#usage--2)
+    * [Acceptable values for parameters:](#acceptable-values-for-parameters--2)
+    * [Example of usage:](#example-of-usage--2)
+    * [Expected Outcome:](#expected-outcome--1)
+    * [If name is invalid:](#if-name-is-invalid-)
+    * [If phone number is invalid:](#if-phone-number-is-invalid-)
+    * [If telegram handle is invalid:](#if-telegram-handle-is-invalid-)
+    * [If tag is invalid:](#if-tag-is-invalid-)
+  * [Find Member(s)](#find-member--s-)
+    * [Usage:](#usage--3)
+    * [Acceptable values for parameters:](#acceptable-values-for-parameters--3)
+    * [Example of usage:](#example-of-usage--3)
+    * [Expected Outcome:](#expected-outcome--2)
+    * [If unable to find member(s) with matching keyword(s)](#if-unable-to-find-member--s--with-matching-keyword--s-)
+  * [View Members/Applicants](#view-membersapplicants)
+    * [Usage:](#usage--4)
+      * [Viewing all members:](#viewing-all-members-)
+      * [Viewing all applicants:](#viewing-all-applicants-)
+  * [Delete Applicant](#delete-applicant)
+    * [Usage:](#usage--5)
+    * [Acceptable values for parameters:](#acceptable-values-for-parameters--4)
+    * [Example of usage:](#example-of-usage--4)
+    * [Expected Outcome:](#expected-outcome--3)
+    * [If index is out of range:](#if-index-is-out-of-range--1)
+    * [If there are no applicants:](#if-there-are-no-applicants-)
+  * [Edit Applicant](#edit-applicant)
+    * [Usage:](#usage--6)
+    * [Acceptable values for parameters:](#acceptable-values-for-parameters--5)
+    * [Example of usage:](#example-of-usage--5)
+    * [Expected Outcome:](#expected-outcome--4)
+    * [If name is invalid:](#if-name-is-invalid--1)
+    * [If phone number is invalid:](#if-phone-number-is-invalid--1)
+    * [If interview date is invalid:](#if-interview-date-is-invalid-)
+  * [Find Applicant(s)](#find-applicant--s-)
+    * [Usage:](#usage--7)
+    * [Acceptable values for parameters:](#acceptable-values-for-parameters--6)
+    * [Example of usage:](#example-of-usage--6)
+    * [Expected Outcome:](#expected-outcome--5)
+    * [If unable to find applicant(s) with matching keyword(s)](#if-unable-to-find-applicant--s--with-matching-keyword--s-)
+  * [Copy Member/Applicant](#copy-memberapplicant)
+    * [Usage:](#usage--8)
+      * [Copying member:](#copying-member-)
+      * [Copying applicant:](#copying-applicant-)
+    * [Acceptable values for parameters:](#acceptable-values-for-parameters--7)
+    * [Example of usage:](#example-of-usage--7)
+    * [Expected Outcome:](#expected-outcome--6)
+    * [If index is out of range:](#if-index-is-out-of-range--2)
+* [Command summary](#command-summary)
+<!-- TOC -->
+
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## How to Use CMC's User Guide
+Thank you for choosing to use CMC. We are sure that CMC will be your trusty companion throughout your 
+management journey. This user guide will provide you a comprehensive documentation of CMC's features.
+
+If you are a first time user of CMC, make sure you have already downloaded the application. Head over to
+[Quick Start](#quick-start) to learn how to install the application.
+
+If you would like to have a brief introduction of the application's interface, 
+head over to our [Interface Walkthrough](#interface-walkthrough) to better learn about CMC.
+
+If you are already a seasoned user of CMC, you can refer to [Command Summary](#command-summary) for a 
+quick reference to all the commands available in CMC.
 
 ## Quick start
 
@@ -108,11 +123,24 @@ to start keeping track of all your members and applicants!
    jar file from the command line using the java -jar ClubMembersContact.jar command.
 
 4. A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![Ui](images/Ui.png)
+   ![Ui](images/Ui_Window.png)
 
 5. Type the command in the command box and press Enter to execute it.
-   Try the following commands in order:
+   Here are some example commands you can try:
 
+<<<<<<< HEAD
+   - `help` : Opens up the help window.
+   - `addm /name Alicia Teng /phone 91126291 /email alicia_teng@gmail.com /tele @alicia_teng` : Adds a member named `Alicia Teng` to the member list. See how to [add applicant](#add-memberapplicant) for more.
+   - `adda /name Chan Rui Jia /phone 97777117 /interview 10/12/2023 1400` : Adds an applicant named `Chan Rui Jia` to the list. See how to [add member](#add-memberapplicant) for more.
+   - `deltm 1` : Deletes the member at the 1st position on the member list.
+   - `finda Win Sheng` : Searches for all applicants with `Win Sheng` in their contact details. See how to [find an applicant](#find-applicant--s-) for more.
+   - `editm 1 /tag Design` : Edits the tag of the member at the 3rd position on the member list. See how to [edit a member](#edit-member) for more.
+   - `exit` : Exits the application.
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+Follow each step in order to see how a normal workflow would feel like with CMC!
+</div>
+=======
     1. `addm /name Alicia /phone 92345678 /email Alicia@xyz.com /tele @Alicia` : Adds a member named Alicia to the
        members list
     2. `addm /name John Doe /phone 92345677 /email Johndoe@xyz.com /tele @Johndoe` : Adds a member named John Doe to the
@@ -125,10 +153,36 @@ to start keeping track of all your members and applicants!
     8. `addt 1 /task Finish_Proposal` : Assigns "Finish_Proposal" task to member Alicia
     9. `delt 1 /task 1` : Deletes "Finish_Proposal" task from member Alicia
     10. `viewt 1` : All tasks assigned to member Alicia will be listed
+>>>>>>> master
 
 6. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
+
+## Interface Walkthrough
+
+This is the expected interface of the GUI when you launch CMC. Please note that this application has been populated 
+with sample data.
+
+The key windows are labeled as follows:
+
+1. File button: Opens an option to exit the application.
+2. Help button: Opens a menu with a link to the User Guide.
+3. Command Box: Enter your command here.
+4. Result Display: Displays the result of your command.
+5. Tag Display: Shows all the tags assigned thus far.
+6. Member List Display: Displays a list of all the members and their contact information.
+7. Task List Display: Displays the task list assigned to a specific member.
+8. Applicant List Display: Displays a list of all the applicants and their contact information.
+
+![Interface](images/Interface_Guide.png)
+
+The "Help" window will look like as follows :
+![Help_Window](images/helpMessage.png)
+The "View user guide" button will direct you to this User Guide.
+
+--------------------------------------------------------------------------------------------------------------------
+
 
 ## Features
 
