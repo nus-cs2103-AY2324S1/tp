@@ -66,6 +66,8 @@ public class CommandResultTest {
                 + ", listTeam=" + commandResult.isListTeam()
                 + ", listPerson=" + commandResult.isListPerson()
                 + ", showTree=" + commandResult.isShowTree()
+                + ", findPerson=" + commandResult.isFindPerson()
+                + ", findTeam=" + commandResult.isFindTeam()
                 + "}";
 
         assertEquals(expected, commandResult.toString());
