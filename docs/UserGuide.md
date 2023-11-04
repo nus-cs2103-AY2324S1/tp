@@ -113,7 +113,7 @@ Import staff lists for quick access to contact information. You can also add, ed
 - \<description>: Any string
 - \<type>: R (for Revenue), or E (for Expense)
 - \<amount>: Any non-negative number
-- \<date>: In dd/mm/yy format
+- \<date>: In dd/mm/yy format (Can be in the future)
 - \<staff ID>: ID of staff, an integer
 - \<sort type>: asc (ascending) or desc (descending)
 - ...: Multiple entries allowed, separated by a space
