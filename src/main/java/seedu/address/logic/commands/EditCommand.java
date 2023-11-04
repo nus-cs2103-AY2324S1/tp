@@ -81,8 +81,6 @@ public class EditCommand extends Command {
         BookingPeriod updatedBookingPeriod = editRoomDescriptor.getBookingPeriod()
                 .orElse(bookingToEdit.getBookingPeriod());
         Remark updatedRemark = editRoomDescriptor.getRemark().orElse(bookingToEdit.getRemark());
-        //Tag updatedTag = editRoomDescriptor.getTags().orElse(bookingToEdit.getTags());
-
         Booking booking = new Booking(updatedRoom, updatedBookingPeriod, updatedName, updatedPhone, updatedEmail,
                 updatedRemark);
         return booking;

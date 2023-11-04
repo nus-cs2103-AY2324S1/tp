@@ -142,7 +142,7 @@ Format: `edit INDEX [r/ROOM] [d/BOOKING_PERIOD] [n/NAME] [p/PHONE] [e/EMAIL]`
 * The Room number is used to map to the Room type; there is no way to directly edit the room type without changing the Room number.
 
 Examples:
-*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email bookingPeriod of the 1st booking to be `91234567` and `johndoe@example.com` respectively.
+*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email of the 1st booking to be `91234567` and `johndoe@example.com` respectively.
 
 ### Locating bookings by name or room: `find`
 
@@ -185,14 +185,13 @@ Examples:
 
 ### Undo a deletion : `undo`
 
-Reverts the most recent deletion. 
+Adds the most recently deleted booking back to the system.
 
 Format: `undo`
 
 ![UndoCommand.png](images%2FUndoCommand.png)
 
 * Example image above shows the result of command `undo`
-* Adds the most recently deleted booking back to the system.
 
 ### Clearing all entries : `clear`
 
@@ -251,14 +250,14 @@ Example:
 
 ## Commands Summary
 
-| Action     | Format, Examples                                                                                                                                                                        |
-|------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**    | `add r/ROOM d/BOOKING_PERIOD n/NAME p/PHONE_NUMBER e/EMAIL rm/REMARK` <br> e.g., `add r/1 d/2023-01-01 to 2023-01-02 n/James Ho p/22224444 e/jamesho@example.com rm/Extra Towels`       |
-| **Clear**  | `clear`                                                                                                                                                                                 |
-| **Delete** | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                     |
-| **Undo**   | `undo`                                                                                                                                                                                  |
-| **Edit**   | `edit INDEX [r/ROOM] [d/BOOKING _PERIOD] [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [rm/REMARK] [t/TAG]…​`<br> e.g.,`edit 2 r/2 d/2023-01-01 to 2023-01-02 n/James Lee e/jameslee@example.com` |
-| **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find 1`                                                                                                                                       |
-| **List**   | `list`                                                                                                                                                                                  |
-| **Help**   | `help`                                                                                                                                                                                  |
-| **Exit**   | `exit`                                                                                                                                                                                  |
+| Action     | Format, Examples                                                                                                                                                                              |
+|------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**    | `add r/ROOM d/BOOKING_PERIOD n/NAME p/PHONE_NUMBER e/EMAIL rm/REMARK` <br> e.g., `add r/1 d/2023-01-01 08:00 to 2023-01-02 11:00 n/James Ho p/22224444 e/jamesho@example.com rm/Extra Towels` |
+| **Clear**  | `clear`                                                                                                                                                                                       |
+| **Delete** | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                           |
+| **Undo**   | `undo`                                                                                                                                                                                        |
+| **Edit**   | `edit INDEX [r/ROOM] [d/BOOKING _PERIOD] [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [rm/REMARK]`<br> e.g.,`edit 2 r/2 d/2023-01-01 08:00 to 2023-01-02 11:00 n/James Lee e/jameslee@example.com`                 |
+| **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find 1`                                                                                                                                             |
+| **List**   | `list`                                                                                                                                                                                        |
+| **Help**   | `help`                                                                                                                                                                                        |
+| **Exit**   | `exit`                                                                                                                                                                                        |
