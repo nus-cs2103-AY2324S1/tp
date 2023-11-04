@@ -1,10 +1,13 @@
 package seedu.flashlingo.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.flashlingo.model.Model.PREDICATE_SHOW_ALL_FLASHCARDS;
 
 import seedu.flashlingo.commons.util.ToStringBuilder;
 import seedu.flashlingo.logic.commands.exceptions.CommandException;
 import seedu.flashlingo.model.Model;
+import seedu.flashlingo.model.flashcard.FlashCard;
+import seedu.flashlingo.session.SessionManager;
 
 /**
  * Indicates user has memorized the word.
@@ -15,12 +18,9 @@ public class YesCommand extends Command {
 
     // For help function
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Indicates user has successfully memorized the word.\n"
-        + "Example: " + COMMAND_WORD + " ";
+            + "Example: " + COMMAND_WORD + " ";
 
     public static final String MESSAGE_SUCCESS = "Great Job! You have indicated that you have memorized the word!";
-
-    public static final String MESSAGE_NOT_START_REVIEW = "Haven't start review!";
-
     /**
      * Creates an YesCommand.
      */
@@ -29,9 +29,16 @@ public class YesCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        model.rememberWord(true);
-        String response = model.nextReviewWord();
-        return new CommandResult(MESSAGE_SUCCESS + "\n" + response);
+        FlashCard response = model.nextReviewWord();
+        response.updateLevel(true);
+        response.recallFlashCard();
+        if (!model.hasNextRound()) {
+            SessionManager.getInstance().setSession(false);
+            model.updateFilteredFlashCardList(PREDICATE_SHOW_ALL_FLASHCARDS);
+            return new CommandResult(MESSAGE_SUCCESS + "\n" + "\nYou have no more words to review!");
+        }
+        model.nextReviewWord();
+        return new CommandResult(MESSAGE_SUCCESS + "\n" + "\nThe next word is: ");
     }
 
     @Override
@@ -41,7 +48,7 @@ public class YesCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof AddCommand)) {
+        if (!(other instanceof YesCommand)) {
             return false;
         }
 
@@ -51,6 +58,6 @@ public class YesCommand extends Command {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-          .toString();
+                .toString();
     }
 }

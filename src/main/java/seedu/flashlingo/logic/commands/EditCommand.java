@@ -20,30 +20,28 @@ import seedu.flashlingo.model.flashcard.FlashCard;
 public class EditCommand extends Command {
     public static final String COMMAND_WORD = "edit";
     public static final String MESSAGE_EDIT_FLASHCARD_SUCCESS = "Edited Flashcard: %1$s";
-    public static final String MESSAGE_DUPLICATE_FLASHCARD = "This flashcard already exists in Flashlingo";
+    public static final String MESSAGE_DUPLICATE_FLASHCARD = "This flash card already exists in Flashlingo!";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the flashcard identified "
-          + "by the index number used in the displayed flashcard list. "
-          + "Existing values will be overwritten by the input values.\n"
-          + "Parameters: INDEX (must be a positive integer) "
-          + "[" + PREFIX_ORIGINAL_WORD + "ORIGINAL WORD] "
-          + "[" + PREFIX_TRANSLATED_WORD + "TRANSLATION] \n"
-          + "Example: " + COMMAND_WORD + " 1 "
-          + PREFIX_ORIGINAL_WORD + "bye "
-          + PREFIX_TRANSLATED_WORD + "再见";
+            + "by the index number used in the displayed flashcard list. "
+            + "Existing values will be overwritten by the input values.\n"
+            + "Parameters: INDEX (must be a positive integer) "
+            + "[" + PREFIX_ORIGINAL_WORD + "ORIGINAL WORD] "
+            + "[" + PREFIX_TRANSLATED_WORD + "TRANSLATION] \n"
+            + "Example: " + COMMAND_WORD + " 1 "
+            + PREFIX_ORIGINAL_WORD + "bye "
+            + PREFIX_TRANSLATED_WORD + "再见";
 
     private final Index index;
-    private final FlashCard replacedFlashCard;
+    private final String[] changes;
     /**
      * @param index of the flashcard in the list to edit
-     * @param replacedFlashCard details to edit the flashcard with
+     * @param changes details to edit the flashcard with
      */
-    public EditCommand(Index index, FlashCard replacedFlashCard) {
+    public EditCommand(Index index, String[] changes) {
         requireNonNull(index);
-        requireNonNull(replacedFlashCard);
-
         this.index = index;
-        this.replacedFlashCard = replacedFlashCard;
+        this.changes = changes;
     }
     @Override
     public CommandResult execute(Model model) throws CommandException {
@@ -55,12 +53,10 @@ public class EditCommand extends Command {
         }
 
         FlashCard flashCardToEdit = lastShownList.get(index.getZeroBased());
-        FlashCard editedFlashCard = this.replacedFlashCard;
-
-        if (!flashCardToEdit.isSameFlashCard(editedFlashCard) && model.hasFlashCard(editedFlashCard)) {
+        FlashCard editedFlashCard = flashCardToEdit.editFlashCard(changes);
+        if ((!changes[0].isEmpty() && model.hasFlashCard(editedFlashCard)) || flashCardToEdit.equals(editedFlashCard)) {
             throw new CommandException(Messages.MESSAGE_DUPLICATE_FLASHCARD);
         }
-        System.out.println("here");
         model.setFlashCard(flashCardToEdit, editedFlashCard);
         model.updateFilteredFlashCardList(PREDICATE_SHOW_ALL_FLASHCARDS);
         return new CommandResult(String.format(MESSAGE_EDIT_FLASHCARD_SUCCESS, Messages.format(editedFlashCard)));
@@ -79,14 +75,14 @@ public class EditCommand extends Command {
 
         EditCommand otherEditCommand = (EditCommand) other;
         return index.equals(otherEditCommand.index)
-            && replacedFlashCard.equals(otherEditCommand.replacedFlashCard);
+                && changes.equals(otherEditCommand.changes);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-          .add("index", index)
-          .add("replacedFlashCard", replacedFlashCard)
-          .toString();
+                .add("index", index)
+                .add("changes", changes)
+                .toString();
     }
 }

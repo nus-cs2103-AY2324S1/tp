@@ -15,7 +15,6 @@ import seedu.flashlingo.model.flashcard.FlashCard;
  * Deletes a flashcard identified using it's displayed index from Flashlingo.
  */
 public class DeleteCommand extends Command {
-
     public static final String COMMAND_WORD = "delete";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
@@ -41,7 +40,6 @@ public class DeleteCommand extends Command {
         }
 
         FlashCard flashCardToDelete = lastShownList.get(targetIndex.getZeroBased());
-        System.out.println(flashCardToDelete);
         model.deleteFlashCard(flashCardToDelete);
         return new CommandResult(String.format(MESSAGE_DELETE_FLASHCARD_SUCCESS, Messages.format(flashCardToDelete)));
     }

@@ -27,8 +27,8 @@ abstract class Word {
     public Word(String word, String language) {
         requireNonNull(language);
         checkArgument(isValidLanguage(language), MESSAGE_CONSTRAINTS);
-        this.word = word;
-        this.language = language;
+        this.word = word.trim();
+        this.language = language.trim();
     }
 
     /**
@@ -49,6 +49,8 @@ abstract class Word {
      * @return True or False depending on whether this is a translated word
      */
     abstract boolean isTranslatedWord();
+
+    public abstract Word editWord(String newWord, String newLanguage);
 
     /**
      * Evaluates and returns this word
@@ -75,6 +77,11 @@ abstract class Word {
         return this.word.toLowerCase().contains(subpart.toLowerCase());
     }
 
+    /**
+     * Checks whether this word is in the same language as the passed language
+     * @param language The language to check against
+     * @return True or False depending on whether this word is in the same language as language
+     */
     public boolean isSameLanguage(String language) {
         return this.language.equals(language);
     }

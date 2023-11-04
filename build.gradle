@@ -18,6 +18,8 @@ repositories {
 
 checkstyle {
     toolVersion = '10.2'
+    configFile = file('config/checkstyle/checkstyle.xml')
+    checkstyleMain.exclude '**/docs/**'
 }
 
 test {
@@ -65,10 +67,17 @@ dependencies {
     testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: jUnitVersion
 
     testRuntimeOnly group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: jUnitVersion
+
+    // https://mvnrepository.com/artifact/org.apache.poi/poi-ooxml
+    implementation group: 'org.apache.poi', name: 'poi-ooxml', version: '3.9'
 }
 
 shadowJar {
     archiveFileName = 'flashlingo.jar'
+}
+
+run {
+    enableAssertions = true
 }
 
 defaultTasks 'clean', 'test'

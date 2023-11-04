@@ -32,6 +32,19 @@ public class TranslatedWord extends Word {
     public boolean isTranslatedWord() {
         return true;
     }
+
+    /**
+     * Edits this word
+     * @param newWord The new word to replace this word
+     * @return The new word
+     */
+    @Override
+    public TranslatedWord editWord(String newWord, String newLanguage) {
+        return new TranslatedWord(
+                newWord.isEmpty() ? getWord() : newWord,
+                newLanguage.isEmpty() ? getLanguage() : newLanguage);
+    }
+
     /**
      * Checks whether this Translated Word is equal to the passed object
      * @param other Passed object to check equality against
@@ -39,6 +52,16 @@ public class TranslatedWord extends Word {
      */
     @Override
     public boolean equals(Object other) {
-        return (other instanceof TranslatedWord) && super.equals(other);
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof TranslatedWord)) {
+            return false;
+        }
+        TranslatedWord otherTranslatedWord = (TranslatedWord) other;
+        return getWord().equals(otherTranslatedWord.getWord())
+                && getLanguage().equals(otherTranslatedWord.getLanguage());
     }
 }

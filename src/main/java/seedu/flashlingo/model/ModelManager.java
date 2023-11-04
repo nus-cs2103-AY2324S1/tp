@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.flashlingo.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -15,6 +16,8 @@ import seedu.flashlingo.logic.commands.exceptions.CommandException;
 import seedu.flashlingo.model.flashcard.FlashCard;
 import seedu.flashlingo.model.flashcard.NextReviewWordPredicate;
 import seedu.flashlingo.model.flashcard.WordOverduePredicate;
+import seedu.flashlingo.model.flashcard.words.TranslatedWord;
+import seedu.flashlingo.session.SessionManager;
 
 /**
  * Represents the in-memory model of the flashlingo data.
@@ -25,9 +28,7 @@ public class ModelManager implements Model {
     private final Flashlingo flashlingo;
     private final UserPrefs userPrefs;
     private final FilteredList<FlashCard> filteredFlashCards;
-    //private final FilteredList<FlashCard> tempFlashCards;
-    private int numberOfFlashCards;
-    private int numberOfRememberedWords;
+
     /**
      * Initializes a ModelManager with the given flashlingo and userPrefs.
      */
@@ -80,6 +81,26 @@ public class ModelManager implements Model {
         userPrefs.setFlashlingoFilePath(flashlingoFilePath);
     }
 
+    @Override
+    public String getTheme() {
+        return userPrefs.getTheme();
+    }
+
+    @Override
+    public void setTheme(String theme) {
+        requireNonNull(theme);
+        userPrefs.setTheme(theme);
+    }
+
+    @Override
+    public void switchTheme() {
+        if (getTheme().equals("Default")) {
+            setTheme("Dark");
+        } else {
+            setTheme("Default");
+        }
+    }
+
     //=========== Flashlingo ================================================================================
 
     @Override
@@ -101,54 +122,47 @@ public class ModelManager implements Model {
     @Override
     public void deleteFlashCard(FlashCard target) {
         flashlingo.removeFlashCard(target);
-        this.numberOfFlashCards--;
     }
 
     @Override
     public void addFlashCard(FlashCard flashCard) {
         flashlingo.addFlashCard(flashCard);
-        this.numberOfFlashCards++;
+        updateFilteredFlashCardList(PREDICATE_SHOW_ALL_FLASHCARDS);
+    }
+
+    @Override
+    public void addFlashCards(ArrayList<FlashCard> flashCards) {
+        for (FlashCard flashCard : flashCards) {
+            flashlingo.addFlashCard(flashCard);
+        }
         updateFilteredFlashCardList(PREDICATE_SHOW_ALL_FLASHCARDS);
     }
 
     @Override
     public void setFlashCard(FlashCard target, FlashCard editedFlashCard) {
         requireAllNonNull(target, editedFlashCard);
-
         flashlingo.setFlashCard(target, editedFlashCard);
     }
     @Override
     public int getNumberOfFlashCards() {
-        return this.numberOfFlashCards;
-    }
-    @Override
-    public int getNumberOfRememberedWords() {
-        return this.numberOfRememberedWords;
-    }
-    @Override
-    public void incrementRememberedWords() {
-        this.numberOfRememberedWords++;
+        return this.filteredFlashCards.size();
     }
 
     @Override
-    public String nextReviewWord() throws CommandException {
+    public FlashCard nextReviewWord() throws CommandException {
         updateFilteredFlashCardList(new WordOverduePredicate());
         if (filteredFlashCards.size() == 0) {
+            SessionManager.getInstance().setSession(false);
+            updateFilteredFlashCardList(unused -> true);
             throw new CommandException("There's no FlashCards to review. Well done!");
         }
         FlashCard toBeReviewed = getFilteredFlashCardList().get(0);
         Predicate<FlashCard> t = new NextReviewWordPredicate(toBeReviewed);
         updateFilteredFlashCardList(t);
-        return "";
-
+        return toBeReviewed;
     }
 
-    @Override
-    public void rememberWord(boolean isUpdated) {
-        FlashCard flashCard = getFilteredFlashCardList().get(0);
-        flashCard.updateLevel(isUpdated);
-    }
-    //=========== Filtered Person List Accessors =============================================================
+    //=========== Filtered Flashcard List Accessors =============================================================
 
     /**
      * Returns an unmodifiable view of the list of {@code FlashCard} backed by the internal list of
@@ -166,10 +180,49 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public int getNumberOfRememberedWords() {
+        int numOfFlashCardsRemembered = 0;
+        for (FlashCard flashCard : filteredFlashCards) {
+            if (flashCard.isRecalled()) {
+                numOfFlashCardsRemembered += 1;
+            }
+        }
+        return numOfFlashCardsRemembered;
+    }
+    @Override
     public void setReviewWord(Predicate<FlashCard> predicate, FlashCard flashCard) {
         filteredFlashCards.setPredicate(predicate);
         addFlashCard(flashCard);
     }
+    @Override
+    public void startSession() throws CommandException {
+        SessionManager.getInstance().setSession(true);
+        updateFilteredFlashCardList(new WordOverduePredicate());
+        if (getFilteredFlashCardList().size() == 0) {
+            SessionManager.getInstance().setSession(false);
+            updateFilteredFlashCardList(PREDICATE_SHOW_ALL_FLASHCARDS);
+            throw new CommandException("You have no more words to review!");
+        }
+        updateFilteredFlashCardList(new NextReviewWordPredicate(getFilteredFlashCardList().get(0)));
+        SessionManager.getInstance().setJustStarted(true);
+    }
+    @Override
+    public void endSession() {
+        SessionManager.getInstance().setSession(false);
+        updateFilteredFlashCardList(PREDICATE_SHOW_ALL_FLASHCARDS);
+    }
+
+    @Override
+    public boolean hasNextRound() {
+        updateFilteredFlashCardList(new WordOverduePredicate());
+        return getFilteredFlashCardList().size() != 0;
+    }
+
+    @Override
+    public TranslatedWord reveal() {
+        return getFilteredFlashCardList().get(0).getTranslatedWord();
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {

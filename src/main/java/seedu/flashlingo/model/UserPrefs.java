@@ -14,8 +14,8 @@ import seedu.flashlingo.commons.core.GuiSettings;
 public class UserPrefs implements ReadOnlyUserPrefs {
 
     private GuiSettings guiSettings = new GuiSettings();
-    private Path addressBookFilePath = Paths.get("data" , "addressbook.json");
     private Path flashlingoFilePath = Paths.get("data" , "flashlingo.json");
+    private String theme = "Default";
 
     /**
      * Creates a {@code UserPrefs} with default values.
@@ -33,16 +33,11 @@ public class UserPrefs implements ReadOnlyUserPrefs {
     /**
      * Resets the existing data of this {@code UserPrefs} with {@code newUserPrefs}.
      */
-    //    public void resetData(ReadOnlyUserPrefs newUserPrefs) {
-    //        requireNonNull(newUserPrefs);
-    //        setGuiSettings(newUserPrefs.getGuiSettings());
-    //        setAddressBookFilePath(newUserPrefs.getAddressBookFilePath());
-    // }
-
     public void resetData(ReadOnlyUserPrefs newUserPrefs) {
         requireNonNull(newUserPrefs);
         setGuiSettings(newUserPrefs.getGuiSettings());
         setFlashlingoFilePath(newUserPrefs.getFlashlingoFilePath());
+        setTheme(newUserPrefs.getTheme());
     }
 
     public GuiSettings getGuiSettings() {
@@ -54,17 +49,17 @@ public class UserPrefs implements ReadOnlyUserPrefs {
         this.guiSettings = guiSettings;
     }
 
-    public Path getAddressBookFilePath() {
-        return addressBookFilePath;
+    public void setTheme(String theme) {
+        requireNonNull(theme);
+        this.theme = theme;
+    }
+
+    public String getTheme() {
+        return theme;
     }
 
     public Path getFlashlingoFilePath() {
         return flashlingoFilePath;
-    }
-
-    public void setAddressBookFilePath(Path addressBookFilePath) {
-        requireNonNull(addressBookFilePath);
-        this.addressBookFilePath = addressBookFilePath;
     }
 
     public void setFlashlingoFilePath(Path flashlingoFilePath) {
@@ -84,16 +79,15 @@ public class UserPrefs implements ReadOnlyUserPrefs {
         }
 
         UserPrefs otherUserPrefs = (UserPrefs) other;
-        //        return guiSettings.equals(otherUserPrefs.guiSettings)
-        //                && addressBookFilePath.equals(otherUserPrefs.addressBookFilePath);
         return guiSettings.equals(otherUserPrefs.guiSettings)
-                && flashlingoFilePath.equals(otherUserPrefs.flashlingoFilePath);
+                && flashlingoFilePath.equals(otherUserPrefs.flashlingoFilePath)
+                && theme.equals(otherUserPrefs.theme);
 
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(guiSettings, flashlingoFilePath);
+        return Objects.hash(guiSettings, flashlingoFilePath, theme);
     }
 
     @Override
@@ -101,6 +95,7 @@ public class UserPrefs implements ReadOnlyUserPrefs {
         StringBuilder sb = new StringBuilder();
         sb.append("Gui Settings : " + guiSettings);
         sb.append("\nLocal data file location : " + flashlingoFilePath);
+        sb.append("\nTheme : " + theme);
         return sb.toString();
     }
 

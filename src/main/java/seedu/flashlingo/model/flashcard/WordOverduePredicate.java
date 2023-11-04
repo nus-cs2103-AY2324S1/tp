@@ -14,7 +14,7 @@ public class WordOverduePredicate implements Predicate<FlashCard> {
 
     @Override
     public boolean test(FlashCard flashCard) {
-        return flashCard.isOverdue();
+        return flashCard.isOverdue() && !flashCard.isDeletedFromReview();
     }
 
     @Override

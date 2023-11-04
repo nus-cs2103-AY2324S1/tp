@@ -4,8 +4,8 @@ import static java.util.Objects.requireNonNull;
 
 import seedu.flashlingo.commons.util.ToStringBuilder;
 import seedu.flashlingo.logic.commands.exceptions.CommandException;
-import seedu.flashlingo.logic.parser.FlashlingoParser;
 import seedu.flashlingo.model.Model;
+
 
 /**
  * Starts a new session of reviewing.
@@ -16,16 +16,13 @@ public class StartCommand extends Command {
 
     // For help function
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Starts reviewing session.\n"
-        + "Example: " + COMMAND_WORD + " ";
+            + "Example: " + COMMAND_WORD + " ";
 
     public static final String MESSAGE_SUCCESS = "Review Session has been started.";
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        model.nextReviewWord();
-        if (model.getFilteredFlashCardList().size() == 0) {
-            FlashlingoParser.setReviewSession(false);
-        }
+        model.startSession();
         return new CommandResult(String.format(MESSAGE_SUCCESS));
     }
 
@@ -36,7 +33,7 @@ public class StartCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof AddCommand)) {
+        if (!(other instanceof StartCommand)) {
             return false;
         }
 
@@ -46,7 +43,7 @@ public class StartCommand extends Command {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-          .add("start", "")
-          .toString();
+                .add("start", "")
+                .toString();
     }
 }

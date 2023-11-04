@@ -6,6 +6,7 @@ import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Scene;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
@@ -18,13 +19,14 @@ import seedu.flashlingo.logic.Logic;
 import seedu.flashlingo.logic.commands.CommandResult;
 import seedu.flashlingo.logic.commands.exceptions.CommandException;
 import seedu.flashlingo.logic.parser.exceptions.ParseException;
+import seedu.flashlingo.model.Model;
 
 /**
  * The Main Window. Provides the basic application layout containing
  * a menu bar and space where other JavaFX elements can be placed.
  */
 public class MainWindow extends UiPart<Stage> {
-
+    private static final String THEME_FILE_PATH_PREFIX = "/view/";
     private static final String FXML = "MainWindow.fxml";
 
     private final Logger logger = LogsCenter.getLogger(getClass());
@@ -36,7 +38,8 @@ public class MainWindow extends UiPart<Stage> {
     private FlashcardListPanel flashcardListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
-
+    @FXML
+    private Scene scene;
     @FXML
     private StackPane commandBoxPlaceholder;
 
@@ -52,22 +55,27 @@ public class MainWindow extends UiPart<Stage> {
     @FXML
     private StackPane statusbarPlaceholder;
 
+    private Model model;
+
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
      */
-    public MainWindow(Stage primaryStage, Logic logic) {
+    public MainWindow(Stage primaryStage, Logic logic, Model model) {
         super(FXML, primaryStage);
 
         // Set dependencies
         this.primaryStage = primaryStage;
         this.logic = logic;
+        this.model = model;
 
         // Configure the UI
         setWindowDefaultSize(logic.getGuiSettings());
+        setColorTheme(logic.getTheme());
 
         setAccelerators();
 
         helpWindow = new HelpWindow();
+        primaryStage.setScene(scene);
     }
 
     public Stage getPrimaryStage() {
@@ -112,7 +120,7 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        flashcardListPanel = new FlashcardListPanel(logic.getFilteredFlashCardList());
+        flashcardListPanel = new FlashcardListPanel(logic.getFilteredFlashCardList(), this);
         flashCardListPanelPlaceholder.getChildren().add(flashcardListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
@@ -141,6 +149,7 @@ public class MainWindow extends UiPart<Stage> {
      * Attempts to open the UserGuide in the default browser.
      * Upon failure, pop up a HelpWindow with the URL shown, or focuses on it if it is already open
      */
+    //@@author itsNatTan
     @FXML
     public void handleHelp() {
         if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) {
@@ -161,7 +170,7 @@ public class MainWindow extends UiPart<Stage> {
             }
         }
     }
-
+    //@@author
     void show() {
         primaryStage.show();
     }
@@ -183,11 +192,10 @@ public class MainWindow extends UiPart<Stage> {
      *
      * @see Logic#execute(String)
      */
-    private CommandResult executeCommand(String commandText) throws CommandException, ParseException {
+    public CommandResult executeCommand(String commandText) throws CommandException, ParseException {
         try {
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
-            resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
 
             if (commandResult.isShowHelp()) {
                 handleHelp();
@@ -196,11 +204,34 @@ public class MainWindow extends UiPart<Stage> {
             if (commandResult.isExit()) {
                 handleExit();
             }
+
+            if (commandResult.isSwitchTheme()) {
+                setColorTheme(logic.getTheme());
+                commandResult = new CommandResult(commandResult.getFeedbackToUser(), false, false, false);
+            }
+
+            resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
             return commandResult;
         } catch (CommandException | ParseException e) {
             logger.info("An error occurred while executing command: " + commandText);
             resultDisplay.setFeedbackToUser(e.getMessage());
             throw e;
         }
+    }
+
+    private void setColorTheme(String theme) {
+        if (theme.equals("Default")) {
+            switchTheme("Light");
+        } else {
+            switchTheme("Dark");
+        }
+    }
+
+    private void switchTheme(String theme) {
+        scene.getStylesheets().clear();
+        String themeFilePath = THEME_FILE_PATH_PREFIX + theme + "Theme.css";
+        String extensionsFilePath = THEME_FILE_PATH_PREFIX + "Extensions.css";
+        scene.getStylesheets().add(getClass().getResource(themeFilePath).toExternalForm());
+        scene.getStylesheets().add(getClass().getResource(extensionsFilePath).toExternalForm());
     }
 }

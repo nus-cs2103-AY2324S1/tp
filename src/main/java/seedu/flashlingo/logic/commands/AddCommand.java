@@ -28,16 +28,16 @@ public class AddCommand extends Command {
             + PREFIX_ORIGINAL_WORD + "ORIGINAL WORD "
             + PREFIX_ORIGINAL_WORD_LANGUAGE + "ORIGINAL WORD LANGUAGE "
             + PREFIX_TRANSLATED_WORD + "TRANSLATION "
-            + PREFIX_TRANSLATED_WORD_LANGUAGE + "TRANSLATED WORD LANGUAGE "
+            + PREFIX_TRANSLATED_WORD_LANGUAGE + "TRANSLATED WORD LANGUAGE \n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_ORIGINAL_WORD + "hello "
-            + PREFIX_TRANSLATED_WORD + "你好 ";
+            + PREFIX_ORIGINAL_WORD_LANGUAGE + "English "
+            + PREFIX_TRANSLATED_WORD + "你好 "
+            + PREFIX_TRANSLATED_WORD_LANGUAGE + "Chinese";
 
 
     public static final String MESSAGE_SUCCESS = "New flashcard added: %s - %s";
     public static final String MESSAGE_DUPLICATE_CARD = "This flashcard already exists";
-
-    private static final ProficiencyLevel level = new ProficiencyLevel(1);
     private final FlashCard toAdd;
     private OriginalWord original;
     private TranslatedWord translated;
@@ -46,9 +46,11 @@ public class AddCommand extends Command {
      * Creates an AddCommand to add the specified {@code FlashCard}
      */
     public AddCommand(OriginalWord original, TranslatedWord translated) {
+        requireNonNull(original);
+        requireNonNull(translated);
         this.original = original;
         this.translated = translated;
-        this.toAdd = new FlashCard(original, translated, new Date(), level);
+        this.toAdd = new FlashCard(original, translated, new Date(), new ProficiencyLevel(1));
     }
 
     /**
@@ -61,7 +63,6 @@ public class AddCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-
         if (model.hasFlashCard(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_CARD);
         }

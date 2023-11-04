@@ -72,11 +72,11 @@ public class JsonAdaptedFlashCard {
     public FlashCard toModelType() throws IllegalValueException {
         if (originalWord == null || originalWordLanguage == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
-                OriginalWord.class.getSimpleName()));
+              OriginalWord.class.getSimpleName()));
         }
         if (translatedWord == null || translatedWordLanguage == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
-                    TranslatedWord.class.getSimpleName()));
+              TranslatedWord.class.getSimpleName()));
         }
         if (!OriginalWord.isValidLanguage(originalWordLanguage)) {
             throw new IllegalValueException(OriginalWord.MESSAGE_CONSTRAINTS);
@@ -92,7 +92,7 @@ public class JsonAdaptedFlashCard {
 
         if (whenToReview == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
-                    Date.class.getSimpleName()));
+              Date.class.getSimpleName()));
         }
         try {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATE_PATTERN);
@@ -108,8 +108,7 @@ public class JsonAdaptedFlashCard {
         final int modelLevel = level;
 
         return new FlashCard(new OriginalWord(modelOriginalWord, modelOriginalWordLanguage),
-                new TranslatedWord(modelTranslatedWord, modelTranslatedWordLanguage),
-                modelWhenToReview, new ProficiencyLevel(modelLevel));
+            new TranslatedWord(modelTranslatedWord, modelTranslatedWordLanguage),
+          modelWhenToReview, new ProficiencyLevel(modelLevel));
     }
-    //TODO: turn expressions to constant(also in test); error handling
 }
