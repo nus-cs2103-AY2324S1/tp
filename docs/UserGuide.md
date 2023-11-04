@@ -231,6 +231,8 @@ Pressing `tab` during inputting a command will autocomplete relevant command pre
 Example:
 
 * `add` followed by `space` and `tab` results in `add r/1`.
+* `edit INDEX` followed by `space` and `tab` 
+  * gives the unused prefix with the actual information for the booking at the index.
 
 </div>
 </details>

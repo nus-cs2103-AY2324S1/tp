@@ -18,6 +18,7 @@ import seedu.address.commons.util.CollectionUtil;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.parser.Prefix;
 import seedu.address.model.Model;
 import seedu.address.model.booking.Booking;
 import seedu.address.model.booking.BookingPeriod;
@@ -48,6 +49,10 @@ public class EditCommand extends Command {
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";
 
+    public static final List<Prefix> PREFIXES = List.of(PREFIX_BOOKING_PERIOD, PREFIX_NAME, PREFIX_PHONE,
+            PREFIX_EMAIL, PREFIX_REMARK);
+    public static final List<String> EXAMPLES = List.of("date", "name",
+            "phone", "email", "remark");
     public static final String MESSAGE_EDIT_BOOKING_SUCCESS = "Edited Booking: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_BOOKING = "This person already exists in the address book.";
