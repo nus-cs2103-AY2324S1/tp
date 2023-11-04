@@ -6,6 +6,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_GENRE_POP;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_INSTRUMENT_FLUTE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
@@ -51,6 +53,14 @@ public class EditMusicianDescriptorTest {
 
         // different tags -> returns false
         editedAmy = new EditMusicianDescriptorBuilder(DESC_AMY).withTags(VALID_TAG_HUSBAND).build();
+        assertFalse(DESC_AMY.equals(editedAmy));
+
+        // different genres -> returns false
+        editedAmy = new EditMusicianDescriptorBuilder(DESC_AMY).withGenres(VALID_GENRE_POP).build();
+        assertFalse(DESC_AMY.equals(editedAmy));
+
+        // different instrument -> returns false
+        editedAmy = new EditMusicianDescriptorBuilder(DESC_AMY).withGenres(VALID_INSTRUMENT_FLUTE).build();
         assertFalse(DESC_AMY.equals(editedAmy));
     }
 

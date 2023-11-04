@@ -39,7 +39,8 @@ public class EditCommandTest {
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
         Musician editedMusician = new MusicianBuilder().build();
-        EditCommand.EditMusicianDescriptor descriptor = new EditMusicianDescriptorBuilder(editedMusician).build();
+        EditCommand.EditMusicianDescriptor descriptor =
+                new EditMusicianDescriptorBuilder(editedMusician).build();
         EditCommand editCommand = new EditCommand(INDEX_FIRST_MUSICIAN, descriptor);
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_MUSICIAN_SUCCESS,
