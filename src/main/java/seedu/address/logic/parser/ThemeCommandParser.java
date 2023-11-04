@@ -23,7 +23,13 @@ public class ThemeCommandParser implements Parser<ThemeCommand> {
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, ThemeCommand.MESSAGE_USAGE));
         }
 
-        String theme = trimmedArgs.split("\\s+")[0];
+        String[] splitArgs = trimmedArgs.split("\\s+");
+        if (splitArgs.length > 1) {
+            throw new ParseException(
+                String.format(MESSAGE_UNKNOWN_THEME, ThemeCommand.MESSAGE_USAGE));
+        }
+
+        String theme = splitArgs[0];
 
         switch(theme) {
 
