@@ -10,7 +10,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Remark {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Remarks should not be more than 500 characters.";
+            "Remarks should not be more than 50 characters.";
 
     /*
      * This regex matches an empty string (i.e., an optional remark) or
