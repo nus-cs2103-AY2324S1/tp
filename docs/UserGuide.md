@@ -105,8 +105,11 @@ Format: `create t/CATEGORY TAGNAME…​`
 * Use this command for frequently used tags for better efficiency in tagging candidates!
 </box>
 
-**Note:** The tags created using this command can be used to tag candidates using the `add` or `edit` command. Tagging
+**Note:**
+* The tags created using this command can be used to tag candidates using the `add` or `edit` command. Tagging
 candidates without previously categorising the tags would still work but the tags would be *uncategorised*.
+* `create` only allows tags to be categorised at creation meaning tags that have already been created, cannot be categorised further.
+This feature will be supported in future iterations of JABPro through the `edit tags` command.
 
 Examples:
 * `create t/role developer`
@@ -505,11 +508,11 @@ In-depth explanation of the statistics:
 
 ### Saving the data
 
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+JABPro data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 ### Editing the data file
 
-AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+JABPro data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <box type="warning" seamless>
 
@@ -518,6 +521,31 @@ If your changes to the data file makes its format invalid, AddressBook will disc
 </box>
 
 _Details coming soon ..._
+
+
+--------------------------------------------------------------------------------------------------------------------
+
+## Planned Enhancements
+
+### Deleting tags : `delete tag`
+
+While certainly useful, JABPro currently does not have feature to delete existing tags. However, this feature will be implemented
+in future iterations.
+
+<box type="tip" seamless>
+
+**Tip:**
+* If you are an advanced user, you are welcome to delete your tags manually by editing the json file! 
+</box>
+
+### Editing tags : `edit tag`
+
+JABPro currently does not support editing tags i.e. editing tag name or category. This feature will be implemented in future iterations.
+
+**Tip:**
+* If you are an advanced user, you are welcome to edit your tags manually by editing the json file!
+  </box>
+
 
 --------------------------------------------------------------------------------------------------------------------
 
