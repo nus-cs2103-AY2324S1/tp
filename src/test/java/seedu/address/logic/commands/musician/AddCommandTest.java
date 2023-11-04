@@ -296,7 +296,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public boolean hasDuplicateInfo(Musician musician) {
+        public boolean hasDuplicateInfo(Musician toExclude, Musician musician) {
             requireNonNull(musician);
             return this.musician.hasSameInfo(musician);
         }
