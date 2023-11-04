@@ -16,8 +16,10 @@ public class ClearCommandTest {
     public void execute_emptyApplicationBook_success() {
         Model model = new ModelManager();
         Model expectedModel = new ModelManager();
+        CommandResult expectedCommandResult = new CommandResult(ClearCommand.MESSAGE_SUCCESS, false,
+                false, true, -1);
 
-        assertCommandSuccess(new ClearCommand(), model, ClearCommand.MESSAGE_SUCCESS, expectedModel);
+        assertCommandSuccess(new ClearCommand(), model, expectedCommandResult, expectedModel);
     }
 
     @Test
@@ -25,8 +27,10 @@ public class ClearCommandTest {
         Model model = new ModelManager(getTypicalApplicationBook(), new UserPrefs());
         Model expectedModel = new ModelManager(getTypicalApplicationBook(), new UserPrefs());
         expectedModel.setApplicationBook(new ApplicationBook());
+        CommandResult expectedCommandResult = new CommandResult(ClearCommand.MESSAGE_SUCCESS, false,
+                false, true, -1);
 
-        assertCommandSuccess(new ClearCommand(), model, ClearCommand.MESSAGE_SUCCESS, expectedModel);
+        assertCommandSuccess(new ClearCommand(), model, expectedCommandResult, expectedModel);
     }
 
 }

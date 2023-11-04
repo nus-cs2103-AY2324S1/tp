@@ -26,6 +26,9 @@ public class CommandResult {
      * The window should be cleared.
      */
     private final boolean clear;
+    /**
+     * The index of the interview to be shown.
+     */
     private final int interview;
 
     /**

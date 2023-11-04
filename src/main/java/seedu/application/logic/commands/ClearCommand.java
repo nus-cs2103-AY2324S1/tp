@@ -2,7 +2,7 @@ package seedu.application.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
-import seedu.application.model.ApplicationBook;
+import seedu.application.model.ApplicationBook;Fix
 import seedu.application.model.Model;
 
 /**
@@ -12,7 +12,6 @@ public class ClearCommand extends Command {
 
     public static final String COMMAND_WORD = "clear";
     public static final String MESSAGE_SUCCESS = "Application book has been cleared!";
-
 
     @Override
     public CommandResult execute(Model model) {
