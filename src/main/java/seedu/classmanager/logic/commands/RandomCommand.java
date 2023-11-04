@@ -16,12 +16,12 @@ import seedu.classmanager.model.student.Student;
  */
 public class RandomCommand extends Command {
     public static final String COMMAND_WORD = "random";
-    public static final String MESSAGE_RANDOM_SUCCESS = "The following students are selected.\n";
+    public static final String MESSAGE_RANDOM_SUCCESS = "The following students are selected:\n";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Selects a specific number of students randomly.\n"
-            + "Parameters: NUM_OF_STUDENT\n"
+            + "Parameters: NUMBER_OF_STUDENTS\n"
             + "Example: " + COMMAND_WORD + " 1";
     public static final String MESSAGE_INVALID_NUM_OF_STUDENT = "Number of students to be selected must be a positive "
-            + "integer(without decimal places) smaller than or equal to the current number of students displayed.\n";
+            + "integer smaller than or equal to the current number of students displayed.\n";
     private final Integer numOfStudent;
 
     /**

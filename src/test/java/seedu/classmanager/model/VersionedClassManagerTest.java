@@ -1,3 +1,6 @@
+//@@author Cikguseven-reused
+//Reused from AddressBook-Level 4 (https://github.com/se-edu/addressbook-level4)
+// with minor modifications
 package seedu.classmanager.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -222,7 +225,7 @@ public class VersionedClassManagerTest {
         assertFalse(versionedClassManager.equals(null));
 
         // different types -> returns false
-        assertFalse(versionedClassManager.equals(1));
+        assertFalse(versionedClassManager.equals(0));
 
         // different state list -> returns false
         VersionedClassManager differentClassManagerList =
@@ -319,3 +322,4 @@ public class VersionedClassManagerTest {
         assertFalse(versionedClassManager.equals(newVersionedClassManager));
     }
 }
+//@@author

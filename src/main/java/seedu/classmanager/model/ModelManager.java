@@ -177,6 +177,9 @@ public class ModelManager implements Model {
         }
     }
 
+    //@@author Cikguseven-reused
+    //Reused from AddressBook-Level 4 (https://github.com/se-edu/addressbook-level4)
+    // with minor modifications
     /**
      * Returns true if the model has previous Class Manager states to restore.
      */
@@ -225,6 +228,7 @@ public class ModelManager implements Model {
         this.versionedClassManager.reset(classManager);
         versionedClassManager.resetSelectedStudent();
     }
+    //@@author
 
     /**
      * Resets the selected student after a clear command.
