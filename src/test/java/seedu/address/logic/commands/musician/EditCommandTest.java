@@ -14,6 +14,7 @@ import static seedu.address.logic.commands.CommandTestUtil.showMusicianAtIndex;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_MUSICIAN;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_MUSICIAN;
 import static seedu.address.testutil.typicalentities.TypicalAddressBook.getTypicalAddressBook;
+import static seedu.address.testutil.typicalentities.TypicalMusicians.ALICE;
 
 import org.junit.jupiter.api.Test;
 
@@ -123,6 +124,43 @@ public class EditCommandTest {
                 new EditMusicianDescriptorBuilder(musicianInList).build());
 
         assertCommandFailure(editCommand, model, EditCommand.MESSAGE_DUPLICATE_MUSICIAN);
+    }
+
+    @Test
+    public void execute_duplicatePhoneUnfilteredList_failure() {
+        Musician firstMusician = model.getFilteredMusicianList().get(INDEX_FIRST_MUSICIAN.getZeroBased());
+        Musician musicianWithDuplicatePhone = new MusicianBuilder().withPhone(firstMusician.getPhone().toString())
+                .build();
+
+        // assert only phone is duplicate
+        assert !firstMusician.getName().equals(musicianWithDuplicatePhone.getName())
+                : "Both musicians should not have same name";
+        assert firstMusician.getPhone().equals(musicianWithDuplicatePhone.getPhone())
+                : "Both musicians should have same phone";
+        assert !firstMusician.getEmail().equals(musicianWithDuplicatePhone.getEmail())
+                : "Both musicians should not have same email";
+
+        EditCommand.EditMusicianDescriptor descriptor =
+                new EditMusicianDescriptorBuilder(musicianWithDuplicatePhone).build();
+        EditCommand editCommand = new EditCommand(INDEX_SECOND_MUSICIAN, descriptor);
+
+        assertCommandFailure(editCommand, model, EditCommand.MESSAGE_DUPLICATE_MUSICIAN);
+    }
+
+    @Test
+    public void execute_duplicatePhoneFilteredList_failure() {
+        showMusicianAtIndex(model, INDEX_FIRST_MUSICIAN);
+
+        Musician existingMusician = ALICE;
+        Musician musicianWithDuplicatePhone = new MusicianBuilder().withPhone(existingMusician.getPhone().toString())
+                .build();
+
+        // edit musician in filtered list into a duplicate in address book
+        Musician musicianInList = model.getAddressBook().getMusicianList().get(INDEX_SECOND_MUSICIAN.getZeroBased());
+        EditCommand editCommand = new EditCommand(INDEX_FIRST_MUSICIAN,
+                new EditMusicianDescriptorBuilder(musicianInList).build());
+
+        assertCommandFailure(editCommand, model, EditCommand.MESSAGE_DUPLICATE_INFO);
     }
 
     @Test
