@@ -25,22 +25,15 @@ public class AddMemberTaskCommandParser implements Parser<AddMemberTaskCommand> 
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_TASK);
 
-        Index index;
-
-        try {
-            index = ParserUtil.parseIndex(argMultimap.getPreamble());
-        } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    AddMemberTaskCommand.MESSAGE_USAGE), pe);
+        if (argMultimap.getValue(PREFIX_TASK).isEmpty() || argMultimap.getPreamble().isEmpty()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddMemberTaskCommand.MESSAGE_USAGE));
         }
 
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_TASK);
+        Index index = ParserUtil.parseIndex(argMultimap.getPreamble());
 
         AddMemberTaskDescriptor addMemberTaskDescriptor = new AddMemberTaskDescriptor();
 
-        if (argMultimap.getValue(PREFIX_TASK).isPresent()) {
-            parseTasksForEdit(argMultimap.getAllValues(PREFIX_TASK)).ifPresent(addMemberTaskDescriptor::setTasks);
-        }
+        parseTasksForAddMemberTask(argMultimap.getAllValues(PREFIX_TASK)).ifPresent(addMemberTaskDescriptor::setTasks);
 
         return new AddMemberTaskCommand(index, addMemberTaskDescriptor);
     }
@@ -50,7 +43,7 @@ public class AddMemberTaskCommandParser implements Parser<AddMemberTaskCommand> 
      * If {@code tags} contain only one element which is an empty string, it will be parsed into a
      * {@code Set<Tag>} containing zero tags.
      */
-    private Optional<List<Task>> parseTasksForEdit(Collection<String> tasks) throws ParseException {
+    private Optional<List<Task>> parseTasksForAddMemberTask(Collection<String> tasks) throws ParseException {
         assert tasks != null;
 
         if (tasks.isEmpty()) {
