@@ -226,13 +226,15 @@ If your changes to the data file makes its format invalid, AddressBook will disc
 
 ### Prefix Completion
 
-Pressing `tab` during inputting a command will autocomplete relevant command prefix with examples.
+Pressing `tab` while inputting a command will autocomplete relevant command prefix with examples. If no prefixes are found, your input will blink red.
 
 Example:
 
 * `add` followed by `space` and `tab` results in `add r/1`.
 * `edit INDEX` followed by `space` and `tab` 
   * gives the unused prefix with the actual information for the booking at the index.
+
+Prefix completions works with `add` and `edit` command and does not validate your input format.
 
 </div>
 </details>
