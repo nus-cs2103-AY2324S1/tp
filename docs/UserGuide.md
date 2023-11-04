@@ -123,7 +123,29 @@ Click [here](#table-of-contents) to go back to contents.
 
 ## Features
 
-### Welcome to LinkTree
+### Welcome Command
+
+#### What this command does:
+* The "Hi" command displays a welcome message along with the current date and time.
+
+Format: `Hi`
+
+#### Features:
+
+- When the command is invoked, it returns a greeting from Linktree and the current date and time.
+- The output format is consistent, showing "Welcome from Linktree, Current date and time: MM-DD-YYYY HH:MM:SS".
+
+#### Guidelines:
+
+- Make sure to capitalize the first letter of the command (e.g., `Hi` not `hi` or `HI`).
+- The command does not take any additional arguments or keywords.
+- The displayed time is in the 24-hour format.
+
+#### Examples:
+
+When you enter the command:
+
+  ![Welcome](images/UG_images/Hi.png)
 
 ### Managing Developers
 
@@ -181,7 +203,7 @@ Examples:
 
  - find John returns john and John Doe
  - find alex david returns Alex Yeoh, David Li
-   ![Find](images/Find.png)
+   ![Find](images/UG_images/Find.png)
 ### List developers
 #### What this command does:
 * Show only the list of all developers in the project.
@@ -244,7 +266,24 @@ and type `list` again when you want to go back to the main window.
   - Example: `editTeamLeader tn/Alpha Team tl/Bob`
   - Result: Now, the team with team name `Alpha Team` changed its team leader to be `Bob`.
 
-### Find team
+## Find Team
+### What this command does:
+- Finds teams whose names contain any of the given keywords.
+
+**Format:** `findteam KEYWORD`
+
+- The search is case-insensitive. e.g., "team" will match "Team Alpha."
+- The order of the keywords does not matter. e.g., "Alpha Bravo" will match "Bravo Alpha Team."
+- Only the team name is searched.
+- Only full words will be matched. e.g., "Alph" will not match "Alpha Team."
+- Teams matching at least one keyword will be returned (i.e., OR search). e.g., "Alpha Bravo" will return "Team Alpha," "Bravo Team."
+
+### Examples:
+- `findteam Alpha` returns "Team Alpha" and "Alpha Squad."
+- `findteam Bravo Charlie` returns "Bravo Team," "Charlie Crew," and "Delta Bravo Charlie Team."
+
+![Find Team](images/UG_images/Findteam.png)
+
 
 ### List teams
 #### What this command does:
