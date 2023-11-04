@@ -43,6 +43,8 @@ public class InfoDisplayPanel extends UiPart<Region> {
             person.getTags().stream()
                     .sorted(Comparator.comparing(tag -> tag.tagName))
                     .forEach(tag -> personTags.getChildren().add(new Label(tag.tagName)));
+        } else {
+            personDisplay.setText("");
         }
 
         if (meeting != null) {
@@ -50,6 +52,8 @@ public class InfoDisplayPanel extends UiPart<Region> {
             meeting.getTags().stream()
                     .sorted(Comparator.comparing(tag -> tag.tagName))
                     .forEach(tag -> meetingTags.getChildren().add(new Label(tag.tagName)));
+        } else {
+            meetingDisplay.setText("");
         }
     }
 }
