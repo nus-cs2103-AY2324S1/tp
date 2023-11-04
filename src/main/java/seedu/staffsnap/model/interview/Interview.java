@@ -20,9 +20,9 @@ public class Interview implements Comparable<Interview> {
     public static final String MESSAGE_CONSTRAINTS = "Interview types should not be empty and should be at most 14 "
             + "characters long";
 
-    public static final String DUPLICATE_CONSTRAINTS = "Duplicate interview detected. " +
-            "Automatic duplicate handling not" +
-            " available, please resolve duplicates manually.";
+    public static final String DUPLICATE_CONSTRAINTS = "Duplicate interview detected. "
+            + "Automatic duplicate handling not"
+            + " available, please resolve duplicates manually.";
 
     public final String type;
 
