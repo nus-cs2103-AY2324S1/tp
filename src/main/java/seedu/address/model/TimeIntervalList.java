@@ -34,17 +34,13 @@ public class TimeIntervalList implements Iterable<TimeInterval> {
     public String addTime(ArrayList<TimeInterval> timeIntervals) throws CommandException{
         boolean isPass = false;
         boolean isFail = false;
-        StringBuilder errorCompilation = new StringBuilder();
-        StringBuilder passMessage = new StringBuilder();
-        errorCompilation.append("There is a clash in these input timings with your existing timing:\n");
+        StringBuilder errorMessage = new StringBuilder("There is a clash in these input timings with your existing timings:\n");
+        StringBuilder passMessage = new StringBuilder("These times have been added:\n");
         for (TimeInterval interval : timeIntervals) {
             if (isTimeIntervalOverlap(interval)) {
                 isFail = true;
-                errorCompilation.append(interval + "\n");
+                errorMessage.append(interval + "\n");
             } else {
-                if (!isPass) {
-                    passMessage.append("These times have been added:\n");
-                }
                 isPass = true;
                 internalList.add(interval);
                 passMessage.append(interval.toString() + "\n");
@@ -52,9 +48,9 @@ public class TimeIntervalList implements Iterable<TimeInterval> {
         }
 
         if (isFail && isPass) {
-            return errorCompilation.append(passMessage).toString();
+            return errorMessage.append(passMessage).toString();
         } else if (isFail) {
-            return errorCompilation.toString();
+            return errorMessage.toString();
         } else {
             return passMessage.toString();
         }
@@ -69,17 +65,13 @@ public class TimeIntervalList implements Iterable<TimeInterval> {
     public String deleteTime(ArrayList<TimeInterval> timeIntervals) throws CommandException {
         boolean isPass = false;
         boolean isFail = false;
-        StringBuilder errorCompilation = new StringBuilder();
-        StringBuilder passMessage = new StringBuilder();
-        errorCompilation.append("These times are not in the list:\n");
+        StringBuilder errorMessage = new StringBuilder("These times were not in the list:\n");
+        StringBuilder passMessage = new StringBuilder("These times have been deleted:\n");
         for (TimeInterval interval : timeIntervals) {
             if (!internalList.contains(interval)) {
                 isFail = true;
-                errorCompilation.append(interval + "\n");
+                errorMessage.append(interval + "\n");
             } else {
-                if (!isPass) {
-                    passMessage.append("These times have been added:\n");
-                }
                 isPass = true;
                 internalList.remove(interval);
                 passMessage.append(interval.toString() + "\n");
@@ -87,9 +79,9 @@ public class TimeIntervalList implements Iterable<TimeInterval> {
         }
 
         if (isFail && isPass) {
-            return errorCompilation.append(passMessage).toString();
+            return errorMessage.append(passMessage).toString();
         } else if (isFail) {
-            return errorCompilation.toString();
+            return errorMessage.toString();
         } else {
             return passMessage.toString();
         }

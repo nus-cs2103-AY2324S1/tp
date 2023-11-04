@@ -191,9 +191,9 @@ public class ModelManager implements Model {
         requireNonNull(personName);
         Person person = addressBook.getPerson(personName.fullName);
         try {
-            String status = person.deleteFreeTime(toDeleteTime);
+            String commandOutcome = person.deleteFreeTime(toDeleteTime);
             forceUpdateList();
-            return status;
+            return commandOutcome;
         } catch (CommandException e) {
             throw new CommandException(e.getMessage());
         }
@@ -262,9 +262,9 @@ public class ModelManager implements Model {
         requireNonNull(group);
         Group groupToDeleteTime = addressBook.getGroup(group.getGroupName());
         try {
-            String status = groupToDeleteTime.deleteTime(toDeleteTime);
+            String commandOutcome = groupToDeleteTime.deleteTime(toDeleteTime);
             forceUpdateList();
-            return status;
+            return commandOutcome;
         } catch (CommandException e) {
             forceUpdateList();
             throw new CommandException(e.getMessage());
