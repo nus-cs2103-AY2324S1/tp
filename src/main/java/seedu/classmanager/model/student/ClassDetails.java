@@ -19,8 +19,8 @@ import seedu.classmanager.storage.JsonAdaptedClassDetails;
  */
 public class ClassDetails {
 
-    public static final String MESSAGE_CONSTRAINTS = "Class number should be in the form 'T[Integer]',"
-            + " such as 'T11'";
+    public static final String MESSAGE_CONSTRAINTS = "Class number can be any alphanumeric string, and is case "
+            + "sensitive.";
     public static final String MESSAGE_INVALID_GRADE = "Grade should be between 0 and 100";
     public static final String MESSAGE_INVALID_ASSIGNMENT_NUMBER = "Assignment index should an integer "
             + "between 1 and %s";
@@ -36,7 +36,7 @@ public class ClassDetails {
             + " match the number of assignments in the save file." + MESSAGE_RECONFIGURE;
 
     // The class number should start with "T".
-    public static final String VALIDATION_REGEX = "T.*";
+    public static final String VALIDATION_REGEX = "^[A-Za-z0-9]+$";
 
     private static int tutorialCount = 13;
     private static int assignmentCount = 6;
