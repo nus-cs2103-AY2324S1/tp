@@ -119,8 +119,7 @@ Acceptable values for the keywords:
 * `ALL` (shows all student detail fields)
 
 Examples:
-* `list` displays the `SCHEDULE` list with all the lessons.
-* `list schedule` displays all the lessons with their `NAME`.
+* `list` and `list schedule` displays the `SCHEDULE` list with all the lessons with their `NAME`.
 * `list students` displays all the students with their `NAME` (including previously specified fields).
 * `list students subjects` displays all the students with their `NAME` and a list of subjects for each student.
 * `list students subjects email` displays all the students with their `NAME`, a list of subjects for each student and their email.
@@ -292,7 +291,6 @@ Exist lesson clashes with this lesson: Lesson Chemistry Lesson at Bishan from 2:
 Edits an existing lesson in the application.
 
 Format: `editLesson INDEX [-name NAME] [-start HH:MM] [-end HH:MM] [-day YYYY/MM/DD] [-subject SUBJECT]` <br>
-
 
 * Edits the lesson at the specified `INDEX`. The index refers to the index number shown in the displayed schedule list. The index **must be a positive integer** 1, 2, 3, …​
 * If the user is currently in list `SCHEDULE`, the command can be shortened to `edit INDEX`
