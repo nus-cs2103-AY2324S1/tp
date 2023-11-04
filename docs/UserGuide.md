@@ -23,6 +23,7 @@ Here are some possible ways you can integrate CMC into your CCA:
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 If this is your first time using CMC, head over to [How to use CMC's User Guide](#how-to-use-cmcs-user-guide)
 to start keeping track of all your members and applicants!
+</div>
 
 * Table of Contents
   <!-- TOC -->
@@ -133,7 +134,7 @@ to start keeping track of all your members and applicants!
 
 <div markdown="span" class="alert alert-primary">
 
-**Note:** Many of the commands below have _aliases_, or short-form versions that make them easier
+:information_source: **Note:** Many of the commands below have _aliases_, or short-form versions that make them easier
 to type. For example, the command `addMember` can be typed as `addm`. Usages of the aliases are documented below
 alongside the full command word, and all aliases can be used interchangeably with the full command word.
 
