@@ -27,6 +27,10 @@ public class StudentNumberTest {
         // invalid student number
         assertFalse(StudentNumber.isValidStudentNumber("")); // empty string
         assertFalse(StudentNumber.isValidStudentNumber("E0940230A")); // starts with non A
+        assertFalse(StudentNumber.isValidStudentNumber("A023819FF")); // ends with 2 Alphabets
+        assertFalse(StudentNumber.isValidStudentNumber("A023819")); // no alphabet at the end
+        assertFalse(StudentNumber.isValidStudentNumber("A023819 /g")); // Symbol at the end\
+        assertFalse(StudentNumber.isValidStudentNumber("023819F ")); // Doesnt start with A
 
         // valid student numbers
         assertTrue(StudentNumber.isValidStudentNumber("A024392341A"));
