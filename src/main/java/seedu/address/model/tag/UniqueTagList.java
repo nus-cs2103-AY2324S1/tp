@@ -36,6 +36,16 @@ public class UniqueTagList implements Iterable<Tag> {
         return internalList.stream().anyMatch(toCheck::equals);
     }
 
+    public boolean contains(String tagNametoCheck) {
+        requireNonNull(tagNametoCheck);
+        for (Tag tag : internalList) {
+            if (tag.tagName.equals(tagNametoCheck)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     /**
      * Adds a tag to the list.
      *
