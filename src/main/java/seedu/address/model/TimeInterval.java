@@ -144,6 +144,9 @@ public class TimeInterval {
         return start.compareTo(end) <= -1;
     }
 
+    /**
+     * Checks if timeInterval clashes with otherTime
+     */
     public boolean isClash(TimeInterval otherTime) {
         boolean isBefore = this.start.compareTo(otherTime.start) < 0 && this.end.compareTo(otherTime.end) < 0
             && this.end.compareTo(otherTime.start) < 0;

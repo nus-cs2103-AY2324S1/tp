@@ -7,6 +7,7 @@ import java.util.stream.Stream;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+
 import seedu.address.logic.commands.exceptions.CommandException;
 
 /**
@@ -23,18 +24,16 @@ public class TimeIntervalList implements Iterable<TimeInterval> {
     }
 
     /**
-     * Converts the internal list to streams.
+     * Adds time to the current TimeInterval list
      *
-     * @return Internal list into streams.
+     * @param timeIntervals ArrayList of timeIntervals
+     * @return the status after adding the time
      */
-    public Stream<TimeInterval> toStream() {
-        return internalList.stream();
-    }
-
-    public String addTime(ArrayList<TimeInterval> timeIntervals) throws CommandException{
+    public String addTime(ArrayList<TimeInterval> timeIntervals) {
         boolean isPass = false;
         boolean isFail = false;
-        StringBuilder errorMessage = new StringBuilder("There is a clash in these input timings with your existing timings:\n");
+        StringBuilder errorMessage = new StringBuilder("There is a clash in these input timings with "
+            + "your existing timings:\n");
         StringBuilder passMessage = new StringBuilder("These times have been added:\n");
         for (TimeInterval interval : timeIntervals) {
             if (isTimeIntervalOverlap(interval)) {
@@ -56,6 +55,19 @@ public class TimeIntervalList implements Iterable<TimeInterval> {
         }
     }
 
+    /**
+     * Converts the internal list to streams.
+     *
+     * @return Internal list into streams.
+     */
+    public Stream<TimeInterval> toStream() {
+        return internalList.stream();
+    }
+
+    /**
+     * Adds all the timeInterval in to current timeInterval list
+     * @param timeIntervalList TimeIntervalList to be added
+     */
     public void addAll(TimeIntervalList timeIntervalList) {
         for (TimeInterval timeInterval : timeIntervalList) {
             this.internalList.add(timeInterval);
@@ -89,6 +101,7 @@ public class TimeIntervalList implements Iterable<TimeInterval> {
 
     /**
      * Checks whether timeInterval contains the time
+     *
      * @param timeInterval The time Interval to check
      * @return Whether time interval is in list
      */
@@ -98,6 +111,7 @@ public class TimeIntervalList implements Iterable<TimeInterval> {
 
     /**
      * Removes free time from list
+     *
      * @param timeInterval The time interval to remove
      */
     public void removeTime(TimeInterval timeInterval) {
@@ -106,6 +120,7 @@ public class TimeIntervalList implements Iterable<TimeInterval> {
 
     /**
      * Checks if time interval overlaps with internal list
+     *
      * @param interval The time iunterval to check
      * @return Whether time interval overlaps with internal list
      */
@@ -118,9 +133,11 @@ public class TimeIntervalList implements Iterable<TimeInterval> {
         return false;
     }
 
-/////////////////////
+    /////////////////////
+
     /**
      * Check whether no time is stored
+     *
      * @return boolean representing whether no time is stored
      */
     public boolean isEmpty() {
@@ -130,12 +147,13 @@ public class TimeIntervalList implements Iterable<TimeInterval> {
 
     /**
      * Generate String representing list of intervals
-     * @param br StringBuilder to store  message
+     *
+     * @param br     StringBuilder to store  message
      * @param format specify Message format
      */
     public void getMessage(StringBuilder br, String format) {
         int intervalCount = 1;
-        for (TimeInterval t: this.internalList) {
+        for (TimeInterval t : this.internalList) {
             br.append(String.format(format, intervalCount, t.toString()));
             intervalCount++;
         }
@@ -144,12 +162,13 @@ public class TimeIntervalList implements Iterable<TimeInterval> {
 
     /**
      * Filter a TimeIntervalList to contain only intervals that fit the duration
+     *
      * @param duration represent time in minutes
      * @return TimeIntervalList with duration greater than duration specified
      */
     public TimeIntervalList fitDuration(Duration duration) {
         TimeIntervalList personTime = new TimeIntervalList();
-        for (TimeInterval interval: internalList) {
+        for (TimeInterval interval : internalList) {
             if (interval.allows(duration)) {
                 personTime.addTime(interval);
             }

@@ -6,6 +6,9 @@ import java.time.DayOfWeek;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * A class represent a time object
+ */
 public class Time {
 
     public static final String MESSAGE_CONSTRAINTS = "The format of a time should be: mon 1200,\n"
@@ -76,6 +79,11 @@ public class Time {
         }
     }
 
+    /**
+     * Converts string to DayOfWeek object
+     * @param day In String
+     * @return day in DayOfWeek object
+     */
     public static DayOfWeek decodeDay(String day) {
         day = day.toLowerCase();
         if (DayOfWeek.MONDAY.toString().toLowerCase().contains(day)) {
