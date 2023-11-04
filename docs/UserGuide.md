@@ -308,7 +308,7 @@ The upper menu bar contains two tabs:
 
 The lower menu bar contains three tabs:
 
-1. Overview — This tab shows you a monthly summary of your finances based on thr transactions you have entered. Although it's empty right now, when you have added a few transactions it will begin to show graphs.
+1. Overview — This tab shows you a monthly summary of your finances based on the transactions you have entered. Although it's empty right now, when you have added a few transactions it will begin to show graphs.
 2. Transactions — This tab shows you the transactions you have entered in a row-by-row format.
    ![Ui](images/Ui-Transactions.png)
 3. Staff List — This tab shows you the persons or parties you have entered in a list format.
