@@ -399,4 +399,5 @@ the data of your previous AddressBook home folder.
 --------------------------------------------------------------------------------------------------------------------
 
 ## Glossary
-1. Prefix - An affix that placed before the field to indicate the type of field.
+1. Prefix - An affix that placed before the field to indicate the type of field
+   * Examples: c/ r/ s/ from/
