@@ -350,7 +350,6 @@ The input field below this with the grey text `Enter command here...` is where y
 | Term        | Definition                                             |
 | ----------- | ------------------------------------------------------ |
 | Transaction | An exchange of money (e.g. Income / Expense)           |
-| Transactor  | Person associated with the transaction                 |
 | Income      | Money received (e.g. Product Sale)                     |
 | Expense     | Costs incurred (e.g. Staff salary, cost of production) |
 | Command     | An input into the text box to carry out actions        |
