@@ -2,10 +2,8 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
@@ -195,22 +193,5 @@ public class ParserUtil {
             throw new ParseException(Task.MESSAGE_CONSTRAINTS);
         }
         return new Task(trimmedTask);
-    }
-
-    /**
-     * Parses {@code String tasks} into an {@code List<Task>}.
-     * Leading and trailing whitespaces will be trimmed.
-     *
-     * @param tasks A collection of strings representing tasks.
-     * @return A list of {@code Task} objects representing the parsed tasks.
-     * @throws ParseException if the given {@code tasks} is invalid.
-     */
-    public static List<Task> parseTasks(Collection<String> tasks) throws ParseException {
-        requireNonNull(tasks);
-        final List<Task> taskList = new ArrayList<>();
-        for (String taskName : tasks) {
-            taskList.add(parseTask(taskName));
-        }
-        return taskList;
     }
 }

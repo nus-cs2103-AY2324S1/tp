@@ -27,13 +27,25 @@ public class AddMemberTaskCommandParser implements Parser<AddMemberTaskCommand> 
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddMemberTaskCommand.MESSAGE_USAGE));
         }
 
-        Index index = ParserUtil.parseIndex(argMultimap.getPreamble());
-
-        AddMemberTaskDescriptor addMemberTaskDescriptor = new AddMemberTaskDescriptor();
-
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_TASK);
 
-        Task task = ParserUtil.parseTask(argMultimap.getValue(PREFIX_TASK).get());
+        Index index;
+        try {
+            index = ParserUtil.parseIndex(argMultimap.getPreamble());
+        } catch (ParseException pe) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    AddMemberTaskCommand.MESSAGE_USAGE), pe);
+        }
+
+        Task task;
+        try {
+            task = ParserUtil.parseTask(argMultimap.getValue(PREFIX_TASK).get());
+        } catch (ParseException pe) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    AddMemberTaskCommand.MESSAGE_USAGE), pe);
+        }
+
+        AddMemberTaskDescriptor addMemberTaskDescriptor = new AddMemberTaskDescriptor();
         addMemberTaskDescriptor.setTasks(new ArrayList<>(List.of(task)));
 
         return new AddMemberTaskCommand(index, addMemberTaskDescriptor);
