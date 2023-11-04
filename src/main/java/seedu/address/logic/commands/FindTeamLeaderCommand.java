@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.List;
 
@@ -32,19 +33,20 @@ public class FindTeamLeaderCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
 
+        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         model.updateFilteredTeamList(predicate);
         List<Team> filteredTeams = model.getFilteredTeamList();
 
         if (filteredTeams.isEmpty()) {
             return new CommandResult(String.format(Messages.MESSAGE_TEAM_NOT_FOUND, predicate),
-                    false, false, true, false, false);
+                    false, false, false, false, false, false, true);
         }
         //assume there is only one team leader in the team
         Team foundTeam = filteredTeams.get(0);
         return new CommandResult(String.format(Messages.MESSAGE_TEAM_LEADER_IDENTITY_CODE_RETRIEVED,
                 foundTeam.getTeamName(),
                 foundTeam.getTeamLeaderIdentityCode()),
-                false, false, true, false, false);
+                false, false, false, false, false, false, true);
     }
 
     @Override
