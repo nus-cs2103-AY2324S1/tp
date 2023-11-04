@@ -62,7 +62,7 @@ public class OriginalWord extends Word {
         }
 
         OriginalWord otherOriginalWord = (OriginalWord) other;
-        return getWord().equals(otherOriginalWord.getWord())
-                && getLanguage().equals(otherOriginalWord.getLanguage());
+        return getWord().equalsIgnoreCase(otherOriginalWord.getWord())
+                && getLanguage().equalsIgnoreCase(otherOriginalWord.getLanguage());
     }
 }

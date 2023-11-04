@@ -1,5 +1,7 @@
 package seedu.flashlingo.storage;
 
+import static seedu.flashlingo.logic.Messages.MESSAGE_CONSTRAINTS;
+
 import java.time.ZoneOffset;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
@@ -79,10 +81,10 @@ public class JsonAdaptedFlashCard {
               TranslatedWord.class.getSimpleName()));
         }
         if (!OriginalWord.isValidLanguage(originalWordLanguage)) {
-            throw new IllegalValueException(OriginalWord.MESSAGE_CONSTRAINTS);
+            throw new IllegalValueException(MESSAGE_CONSTRAINTS);
         }
         if (!TranslatedWord.isValidLanguage(translatedWordLanguage)) {
-            throw new IllegalValueException(TranslatedWord.MESSAGE_CONSTRAINTS);
+            throw new IllegalValueException(MESSAGE_CONSTRAINTS);
         }
 
         final String modelOriginalWord = originalWord;
