@@ -20,6 +20,8 @@ public class FlashCard {
 
     private boolean isRemembered; //if successfully remembers word
 
+    private boolean isRevealed = false;
+
     /**
      * Constructor for Flashcard
      *
@@ -71,6 +73,13 @@ public class FlashCard {
 
     public boolean isDeletedFromReview() {
         return this.currentLevel.isDeletedFromReview();
+    }
+
+    public void setIsRevealed(Boolean isRevealed) {
+        this.isRevealed = isRevealed;
+    }
+    public boolean getIsRevealed() {
+        return this.isRevealed;
     }
 
     /**
