@@ -128,7 +128,6 @@ quick reference to all the commands available in CMC.
 5. Type the command in the command box and press Enter to execute it.
    Here are some example commands you can try:
 
-<<<<<<< HEAD
    - `help` : Opens up the help window.
    - `addm /name Alicia Teng /phone 91126291 /email alicia_teng@gmail.com /tele @alicia_teng` : Adds a member named `Alicia Teng` to the member list. See how to [add applicant](#add-memberapplicant) for more.
    - `adda /name Chan Rui Jia /phone 97777117 /interview 10/12/2023 1400` : Adds an applicant named `Chan Rui Jia` to the list. See how to [add member](#add-memberapplicant) for more.
@@ -140,20 +139,6 @@ quick reference to all the commands available in CMC.
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 Follow each step in order to see how a normal workflow would feel like with CMC!
 </div>
-=======
-    1. `addm /name Alicia /phone 92345678 /email Alicia@xyz.com /tele @Alicia` : Adds a member named Alicia to the
-       members list
-    2. `addm /name John Doe /phone 92345677 /email Johndoe@xyz.com /tele @Johndoe` : Adds a member named John Doe to the
-       members list
-    3. `findm Alicia` : Only member Alicia will be listed under the members list
-    4. `findm John Doe` : Only member John Doe will be listed under the members list
-    5. `findm Alicia Johndoe@xyz.com` : Both members Alicia and John Doe will be listed under the members list
-    6. `delm 2` : Member John Doe will be deleted from the members list
-    7. `viewm` : All members will be listed under the members list
-    8. `addt 1 /task Finish_Proposal` : Assigns "Finish_Proposal" task to member Alicia
-    9. `delt 1 /task 1` : Deletes "Finish_Proposal" task from member Alicia
-    10. `viewt 1` : All tasks assigned to member Alicia will be listed
->>>>>>> master
 
 6. Refer to the [Features](#features) below for details of each command.
 
@@ -179,7 +164,6 @@ The key windows are labeled as follows:
 
 The "Help" window will look like as follows :
 ![Help_Window](images/helpMessage.png)
-The "View user guide" button will direct you to this User Guide.
 
 --------------------------------------------------------------------------------------------------------------------
 
