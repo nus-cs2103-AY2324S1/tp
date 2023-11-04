@@ -207,13 +207,14 @@ will be given.
 
 To show the translation of the flash card in
 
-Format: `flip <INDEX>`
+Format: `flip [<INDEX>]`
 
 Output : `Flashcard has been flipped!`
 
 Examples:![img.png](images/Reveal.png)
 
 **Note**
+* When <INDEX> is omitted, the default value is 1.
 * Pressing `reveal` or `hide` button will have the same effect.
 
 ### Indicating user has memorized the word : `yes`

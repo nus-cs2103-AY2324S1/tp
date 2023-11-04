@@ -18,7 +18,12 @@ public class FlipCommandParser implements Parser<FlipCommand> {
      */
     public FlipCommand parse(String args) throws ParseException {
         try {
-            Index index = ParserUtil.parseIndex(args);
+            Index index;
+            if (args.trim().isBlank()) {
+                index = ParserUtil.parseIndex("1");
+            } else {
+                index = ParserUtil.parseIndex(args);
+            }
             return new FlipCommand(index);
         } catch (ParseException pe) {
             throw new ParseException(
