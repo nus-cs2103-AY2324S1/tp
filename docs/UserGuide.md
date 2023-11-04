@@ -19,14 +19,50 @@ teams.
 LinkTree is the top contact solution for software professionals. Using our unique tag-based system and tree structure,
 you can access contacts by roles and responsibilities instantly.
 
+## Table of Contents
+* [Introduction](#introduction)
+  * [Target User Profile](#target-user-profile)
+  * [How to use this Guide?](#how-to-use-this-guide)
+* [Getting Started](#getting-started)
+  * [Installation](#installation)
+  * [Initial Setup](#initial-setup)
+  * [Understanding the GUI](#understanding-the-gui)
+  * [Tutorial on using our Commands](#tutorial-on-using-our-commands)
+* [Features](#features)
+  * [Welcome to Linktree](#welcome-to-linktree)
+  * [Managing developers](#managing-developers)
+    * [Add developer](#add-developer)
+    * [Remove developer](#remove-developer)
+    * [Edit developer](#edit-developer)
+    * [Find developer](#find-developer)
+    * [List developers](#list-developers)
+  * [Managing teams](#managing-teams)
+    * [Create teams](#create-teams)
+    * [Add developer to team](#add-developers-to-team)
+    * [Delete teams](#delete-team)
+    * [Remove developer from team](#remove-developer)
+    * [Edit team name](#edit-team-name)
+    * [Edit team leader](#edit-team-leader)
+    * [Find team](#find-team)
+    * [List teams](#list-teams)
+  * [Display tree](#display-tree)
+  * [Help](#help)
+  * [Reset the project](#reset-the-project)
+  * [Exit the application](#exit-the-application)
+* [Troubleshooting](#troubleshooting)
+* [FAQs](#faqs)
+* [Support](#support)
+* [Known issues](#known-issues)
+* [Command Summary](#command-summary)
+
 <page-nav-print />
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## Introduction
 
-### Target User Profile:
-- Developers engaged in medium to large-scale software projects.
+### Target User Profile
+- Project managers and Developers who are engaged in startups.
 - Collaborates frequently with multiple teams or departments.
 - Requires quick access to contact details of other team members based on their roles and responsibilities.
 - Prefers an organized and streamlined method for contact management.
@@ -41,6 +77,7 @@ used for easy navigation.
 **Formatting and Icons**: Throughout the guide, we use bold text and colors to emphasize key points and important terms.
 Icons are used to draw your attention to noteworthy tips and additional information.
 
+Click [here](#table-of-contents) to go back to contents.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -65,38 +102,57 @@ It will open a new help window, and shows a command summary in the result box.
 
 
 ### Understanding the GUI
-Will update soon...
+
+ ![Understanding GUI](images/UG_images/Understanding%20GUI.png)
+
+Our GUI is simple and easy to understand.
+1. **Command Box**: You have to type your commands in this box.
+2. **Result Display**: Based on the inputs given, your result will be displayed in this box.
+3. **Help Button**: If you are unsure, you can type `help` in the command box and you will see a help window pop up. 
+Copy this URL to have a look at our user guide.
+4. **Developers Panel**: Lists all the developers from your addressbook.
+5. **Teams Panel**: Lists all the teams from your teambook.
 
 ### Tutorial on using our Commands
 Will update soon...
 
+
+Click [here](#table-of-contents) to go back to contents.
+
 --------------------------------------------------------------------------------------------------------------------
 
-## Basic Features
+## Features
 
-### Adding Developers
+### Welcome to LinkTree
+
+### Managing Developers
+
+### Add developer
 #### What this command does:
 * Allows you to add developer information into the storage.
 
-#### Command format: 
+##### Command format: 
 * `add n/[Developer Name] p/[Phone Number] e/[Email] a/[Address] (OPTIONAL r/[Remark] t/Tags)`
   
-#### Example usage:
+##### Example usage:
 * `add n/John p/89789678 e/John@gmail.com a/Singapore t/friend`
   ![AddNewDevToListExample](images/UG_images/AddNewDevToListExample.png)
 
+  
+### Remove developer
 
-### Searching Contacts
 #### What this command does:
-* Helps you to search for a user or contact based on their id:
+* Performs deletion of existing developers from the storage. Specify the index number as shown on the list.
+#### Command format:
+* `Delete [index number]`
 
-#### Command format: 
-* `search [role] [contact_name]`
+#### Example usage:
+- For example, to delete John from the list. First find the index number of John.
+  ![DeletePersonFromListExample](images/UG_images/DeletePersonFromListExample.png)
+- In this example, the index of John is 7. So type, `delete 7`.
+  ![DeletedPersonFromListExample](images/UG_images/DeletedPersonFromListExample.png)
 
-#### Example usage: 
-* `search [developer] [Peter]`
-
-### Editing Contacts
+### Edit developer
 #### What this command does:
 * To edit personal information:
   - Command: `edit INDEX(must be a positive integer) [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [r/REMARK] [t/TAG]...`
@@ -109,66 +165,9 @@ Will update soon...
   and new email address `e/new.email@example.com`.
 
 
-* To edit team name:
-  - Command: `editTeamName [tn/TEAMNAME(original team name)] [tn/TEAMNAME(new team name)]`
-  - Example: `editTeamName tn/Alpha Team tn/Beta Team`
-  - Result: Now, the team with original team name `Alpha Team` changed its team name
-  to `Beta Team`.
+### Find developer
 
-
-* To edit team leader:
-  - Command: `editTeamLeader [tn/TEAMNAME] [tl/TEAMLEADER]`
-  - Example: `editTeamLeader tn/Alpha Team tl/Bob`
-  - Result: Now, the team with team name `Alpha Team` changed its team leader to be `Bob`.
-
-### Deleting Contacts
-
-#### What this command does:
-* Performs deletion of existing developers from the storage. Specify the index number as shown on the list.
-#### Command format:
-* `Delete [index number]`
-
-#### Example usage:
-- For example, to delete John from the list. First find the index number of John. 
-  ![DeletePersonFromListExample](images/UG_images/DeletePersonFromListExample.png)
-- In this example, the index of John is 7. So type, `delete 7`.
-  ![DeletedPersonFromListExample](images/UG_images/DeletedPersonFromListExample.png)
-
-
-### Deleting Teams
-#### What this command does:
-* Performs deletion of existing teams from the storage.
-#### Command format:
-* `Delete id [name]`
-#### Example usage:
-* Example: `Delete 2 [name]`
-
-
-
-### Creating Teams
-#### What this command does:
-* Creates a new team based on the given team name and leader name.
-
-#### Command format: 
-* `newteam tn/[TeamName] tl/[TeamLeader]`
-#### Example usage: 
-* `newteam tn/Team Delta tl/David Li`
-![AddTeamCommandExample](images/UG_images/AddTeamCommandExample.png)
-
-
-
-### Adding developers to a team
-#### What this command does:
-* To add a developer into an existing team:
-#### Command format:
-* `dev2team tn/[TeamName] n/[Developer Name]`
-#### Example usage:
-* `dev2team tn/Team Delta n/Irfan Ibrahim`
-![AddDeveloperToTeamExample](images/UG_images/AddDevToTeamCommandExample.png)
-
-
-
-### List Developers
+### List developers
 #### What this command does:
 * Show only the list of all developers in the project.
 
@@ -178,19 +177,61 @@ Will update soon...
 * `list` (and an example result is shown below)
   ![ListCommandExample](images/UG_images/ListCommandExample.png)
 
-
-
 ### To return to the home page
 * Use the same command `list`
 * You will return to the home page.
-
 
 **Example usage**: When you are at the main window, type `list` to show the developer list
 and type `list` again when you want to go back to the main window.
 
 
+## Managing Teams
 
-### List existing teams in the project
+### Create teams
+#### What this command does:
+* Creates a new team based on the given team name and leader name.
+
+#### Command format:
+* `newteam tn/[TeamName] tl/[TeamLeader]`
+#### Example usage:
+* `newteam tn/Team Delta tl/David Li`
+  ![AddTeamCommandExample](images/UG_images/AddTeamCommandExample.png)
+
+### Add developers to team
+#### What this command does:
+* To add a developer into an existing team:
+#### Command format:
+* `dev2team tn/[TeamName] n/[Developer Name]`
+#### Example usage:
+* `dev2team tn/Team Delta n/Irfan Ibrahim`
+  ![AddDeveloperToTeamExample](images/UG_images/AddDevToTeamCommandExample.png)
+
+### Delete team
+#### What this command does:
+* Performs deletion of existing teams from the storage.
+#### Command format:
+* `Delete id [name]`
+#### Example usage:
+* Example: `Delete 2 [name]`
+
+### Remove developer from team
+
+### Edit team name
+* To edit team name:
+  - Command: `editTeamName [tn/TEAMNAME(original team name)] [tn/TEAMNAME(new team name)]`
+  - Example: `editTeamName tn/Alpha Team tn/Beta Team`
+  - Result: Now, the team with original team name `Alpha Team` changed its team name
+    to `Beta Team`.
+
+### Edit team leader
+* To edit team leader:
+  - Command: `editTeamLeader [tn/TEAMNAME] [tl/TEAMLEADER]`
+  - Example: `editTeamLeader tn/Alpha Team tl/Bob`
+  - Result: Now, the team with team name `Alpha Team` changed its team leader to be `Bob`.
+
+### Find team
+
+### List teams
 #### What this command does:
 * Show only the list of all existing teams in the project.
 
@@ -200,8 +241,7 @@ and type `list` again when you want to go back to the main window.
 * `listt` (and an example result is shown below)
   ![ListTeamCommandExample](images/UG_images/ListTeamCommandExample.png)
 
-
-
+  
 ### To return to the home page
 * Use the same command `listt`
 * You will return to the home page.
@@ -212,7 +252,7 @@ and type `listt` again when you want to go back to the main window.
 
 
 
-### Show Graph
+### Display tree
 #### What this command does:
 * Provides a tree visualisation of all the teams and members in the project.
 
@@ -232,30 +272,33 @@ and type `listt` again when you want to go back to the main window.
 **Example usage**: When you are at the main window, type `tree` to show the tree graph
 and type `tree` again when you want to hide the tree and go back to the main window.
 
---------------------------------------------------------------------------------------------------------------------
 
-## Advanced Features
+### Help
 
-### Importing/Exporting Contacts
-- Details coming soon...
+### Reset the project
 
-### Creating Groups
-- Details coming soon...
+### Exit the application
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## Troubleshooting
 - Details coming soon...
 
+Click [here](#table-of-contents) to go back to contents.
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQs
 - Details coming soon...
 
+Click [here](#table-of-contents) to go back to contents.
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Support
 - Details coming soon...
+
+Click [here](#table-of-contents) to go back to contents.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -263,8 +306,11 @@ and type `tree` again when you want to hide the tree and go back to the main win
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running it again.
 
+Click [here](#table-of-contents) to go back to contents.
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Command summary
 - Details coming soon...
 
+Click [here](#table-of-contents) to go back to contents.
