@@ -992,8 +992,6 @@ The format for `StartTime` and `EndTime` would be updated to take in only `HH:mm
 
 The new command format would be `add-s TUTOR_INDEX d/yyyy-MM-dd st/HH:mm et/HH:mm`
 
-More details...
-
 ### Switching back to list view from calendar view
 In the current system, when executing any commands, including actions like marking, unmarking, or deleting schedules 
 while in the calendar view, the GUI switches back to the main view displaying the list of tutors and schedules. This 
@@ -1035,10 +1033,8 @@ find and locate a particular schedule.
 
 **Proposed implementation**
 
-The schedules should be sorted first by `StartTime`, then by `EndTime`, and finally alphabetically by the tutor's name.
-This would make the schedule list more organised, making it easier to use and navigate for the user. 
-
-More details...
+The schedules would be sorted first by `StartTime`, then by `EndTime`, and finally alphabetically by the tutor's name.
+This would make the schedule list more organised, making it easier to use and navigate for the user.
 
 ### UI for calendar to use colours to reflect status of schedules
 In the calendar view, incorporating schedule colors to represent their respective statuses can enhance user 
