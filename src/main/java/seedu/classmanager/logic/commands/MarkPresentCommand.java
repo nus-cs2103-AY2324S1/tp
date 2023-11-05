@@ -57,7 +57,6 @@ public class MarkPresentCommand extends Command {
 
         markedStudent.markPresent(this.index);
         model.setStudent(studentToMark, markedStudent);
-        model.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
         model.setSelectedStudent(markedStudent);
         model.commitClassManager();
 

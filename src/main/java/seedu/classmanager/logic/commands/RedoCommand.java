@@ -35,7 +35,6 @@ public class RedoCommand extends Command {
         }
 
         model.redoClassManager();
-        model.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }

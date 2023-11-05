@@ -50,7 +50,6 @@ public class MarkAbsentAllCommand extends Command {
                 model.setSelectedStudent(markedStudent);
             }
         }
-        model.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
         model.commitClassManager();
 
         return new CommandResult(MESSAGE_MARK_SUCCESS);

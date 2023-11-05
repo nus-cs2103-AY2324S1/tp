@@ -61,7 +61,6 @@ public class RecordClassParticipationCommand extends Command {
         Student markedStudent = studentToMark.copy();
         markedStudent.markClassParticipation(this.tutorialIndex, this.hasParticipated);
         model.setStudent(studentToMark, markedStudent);
-        model.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
         model.setSelectedStudent(markedStudent);
         model.commitClassManager();
 

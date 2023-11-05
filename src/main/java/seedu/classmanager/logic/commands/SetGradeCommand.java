@@ -61,7 +61,6 @@ public class SetGradeCommand extends Command {
         Student gradedStudent = studentToGrade.copy();
         gradedStudent.setGrade(assignmentIndex, grade);
         model.setStudent(studentToGrade, gradedStudent);
-        model.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
         model.setSelectedStudent(gradedStudent);
         model.commitClassManager();
 
