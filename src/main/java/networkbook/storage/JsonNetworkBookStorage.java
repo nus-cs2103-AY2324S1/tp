@@ -9,6 +9,7 @@ import java.util.logging.Logger;
 
 import networkbook.commons.core.LogsCenter;
 import networkbook.commons.exceptions.DataLoadingException;
+import networkbook.commons.exceptions.DuplicateEntryException;
 import networkbook.commons.exceptions.IllegalValueException;
 import networkbook.commons.exceptions.NullValueException;
 import networkbook.commons.util.FileUtil;
@@ -58,6 +59,9 @@ public class JsonNetworkBookStorage implements NetworkBookStorage {
         } catch (IllegalValueException ive) {
             logger.info("Illegal values found in " + filePath + ": " + ive.getMessage());
             throw new DataLoadingException(ive);
+        } catch (DuplicateEntryException dee) {
+            logger.info("Duplicate entry in " + filePath + ": " + dee.getMessage());
+            throw new DataLoadingException(dee);
         }
     }
 

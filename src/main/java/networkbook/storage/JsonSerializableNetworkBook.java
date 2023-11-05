@@ -8,6 +8,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 
+import networkbook.commons.exceptions.DuplicateEntryException;
 import networkbook.commons.exceptions.IllegalValueException;
 import networkbook.commons.exceptions.NullValueException;
 import networkbook.commons.util.JsonObject;
@@ -47,7 +48,7 @@ class JsonSerializableNetworkBook implements JsonObject {
      *
      * @throws IllegalValueException if there were any data constraints violated.
      */
-    public NetworkBook toModelType() throws IllegalValueException {
+    public NetworkBook toModelType() throws IllegalValueException, DuplicateEntryException {
         NetworkBook networkBook = new NetworkBook();
         for (JsonAdaptedPerson jsonAdaptedPerson : persons) {
             Person person = jsonAdaptedPerson.toModelType();
