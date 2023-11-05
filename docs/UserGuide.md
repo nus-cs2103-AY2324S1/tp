@@ -115,6 +115,7 @@ For each applicant and each interview, we see the following details:
 --------------------------------------------------------------------------------------------------------------------
 # Features
 
+<div markdown="block" class="alert alert-info">
 **:information_source: Notes about the command format:**<br>
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
@@ -132,6 +133,7 @@ For each applicant and each interview, we see the following details:
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list-i`, `list-a`, `list-i-done`, `list-i-not-done`,
 `list-today`, `sort-rate`, `sort-time`, `exit`, and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
+</div>
 
 [Back to the Table of Contents](#table-of-contents)
 
@@ -154,6 +156,11 @@ Format: `exit`
 ### Clearing all applicants and interviews : `clear`
 
 Clears all applicants and interviews from the address book.
+
+<div markdown="block" class="alert alert-warning">
+**:exclamation: Warning:** <br>
+* This action is irreversible, therefore do proceed with caution!
+</div>
 
 Format: `clear`
 
@@ -183,8 +190,8 @@ Deletes the specified applicant from the address book.
 Format: `delete-a INDEX`
 
 * Deletes the applicant at the specified `INDEX`.
-* The index refers to the index number shown in the displayed applicant list.
-* The index **must be a positive integer** 1, 2, 3, …​ The upper limit of valid integers is the number of applicants currently displayed in the applicant list
+* The `INDEX` refers to the index number shown in the displayed applicant list.
+* The `INDEX` **must be a positive unsigned integer** 1, 2, 3, …​ The upper limit of valid integers is the number of applicants currently displayed in the applicant list
 
 Examples:
 * `delete-a 1` deletes the 1st applicant in the address book.
@@ -198,7 +205,7 @@ Edits an existing applicant in the address book.
 Format: `edit-a APPLICANT_INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]`
 
 * Edits the person at the specified `APPLICANT_INDEX`. The index refers to the index number shown in the displayed applicant list.
-* The index **must be a positive integer** 1, 2, 3, …​ The upper limit of valid integers is the number of applicants currently displayed in the applicant list
+* The `INDEX` **must be a positive unsigned integer** 1, 2, 3, …​ The upper limit of valid integers is the number of applicants currently displayed in the applicant list
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 
@@ -312,8 +319,8 @@ Deletes the specified interview from the address book.
 Format: `delete-i INDEX`
 
 * Deletes the interview at the specified `INDEX`.
-* The index refers to the index number shown in the displayed interview list.
-* The index **must be a positive integer** 1, 2, 3, …​ The upper limit of valid integers is the number of interviews currently displayed in the interview list
+* The `INDEX` refers to the index number shown in the displayed interview list.
+* The `INDEX` **must be a positive unsigned integer** 1, 2, 3, …​ The upper limit of valid integers is the number of interviews currently displayed in the interview list
 
 Examples:
 * `delete-i 1` deletes the 1st interview in the address book.
@@ -327,7 +334,7 @@ Edit an existing interview in the address book.
 Format: `edit-i INTERVIEW_INDEX [app/APPLICANT_ID] [jr/JOB_TITLE] [start/START_DATE_AND_TIME] [end/END_DATE_AND_TIME]`
 
 * Edits the interview at the specified `INTERVIEW_INDEX`. The index refers to the index number shown in the displayed interview list.
-* The index **must be a positive integer** 1, 2, 3, …​ The upper limit of valid integers is the number of interviews currently displayed in the interview list
+* The `INDEX` **must be a positive unsigned integer** 1, 2, 3, …​ The upper limit of valid integers is the number of interviews currently displayed in the interview list
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 
@@ -365,7 +372,7 @@ Format: `list-i`
 
 ### Listing all free time for the given day : `list-freetime`
 
-Lists all the freetime for the given day
+Lists all the free time for the given day
 
 Format: `list-freetime DATE`
 
@@ -420,8 +427,8 @@ Mark the specified interview in the address book.
 Format: `mark INDEX`
 
 * Marks the interview at the specified `INDEX` as done.
-* The index refers to the index number shown in the displayed interview list.
-* The index **must be a positive integer** 1, 2, 3, …​ The upper limit of
+* The `INDEX` refers to the index number shown in the displayed interview list.
+* The `INDEX` **must be a positive unsigned integer** 1, 2, 3, …​ The upper limit of
 valid integers is the number of interviews currently displayed in the interview
 list.
 
@@ -438,9 +445,9 @@ Rate the specified interview in the address book.
 Format: `rate INDEX RATING`
 
 * Rates the interview at the specified `INDEX`.
-* The index refers to the index number shown in the displayed interview list.
-* The index **must be a positive integer** 1, 2, 3, …​ The upper limit of valid integers is the number of interviews currently displayed in the interview list
-* The `RATING` must be a non-negative one decimal place number between 0.0 to 5.0 inclusive.
+* The `INDEX` refers to the index number shown in the displayed interview list.
+* The `INDEX` **must be a positive unsigned integer** 1, 2, 3, …​ The upper limit of valid integers is the number of interviews currently displayed in the interview list.
+* The `RATING` must be a non-negative unsigned one decimal place number between 0.0 to 5.0 inclusive.
 
 Examples:
 * `rate 1 3.0` rates the first interview with a rating of 3.0.
@@ -535,21 +542,21 @@ If your changes to the data file makes its format invalid, InterviewHub will dis
 
 ## Interview Management Commands
 
-| Action                           | Format, Examples                                                                                                                      |
-|----------------------------------|---------------------------------------------------------------------------------------------------------------------------------------|
-| **Add interview**                | `add-i app/APPLICANT_INDEX jr/JOB_TITLE time/INTERVIEW_DATETIME` <br> e.g., `add-i app/18 jr/software engineer time/2022-12-12 18:00` |
-| **Delete interview**             | `delete-i INTERVIEW_INDEX`<br> e.g., `delete-i 3`                                                                                     |
-| **Edit interview**               | `edit-i INTERVIEW_INDEX [app/APPLICANT_INDEX] [jr/JOB_TITLE] [time/INTERVIEW_DATETIME]`<br> e.g.,`edit-i 2 jr/software-engineer`      |
-| **Find interview by job**        | `find-i KEYWORD [MORE_KEYWORDS]`<br> e.g., `find-i software-engineer`                                                                 |
-| **List interview**               | `list-i`                                                                                                                              |
-| **List free time**               | `list-freetime INTERVIEW_DATETIME` <br> e.g, `list-freetime 12-12-2024`                                                               |
-| **List interview for today**     | `list-i-today`                                                                                                                        |
-| **Mark interview as done**       | `mark INTERVIEW_INDEX` <br> e.g., `mark 3`                                                                                            |
-| **Rate interview**               | `rate INTERVIEW_INDEX RATING` <br> e.g., `rate 1 3.0`                                                                                 |
-| **List completed interview**     | `list-i-done`                                                                                                                         |
-| **List incomplete interview**    | `list-i-not-done`                                                                                                                     |
-| **Sort interview by rating**     | `sort-rate`                                                                                                                           |
-| **Sort interview by start time** | `sort-time`                                                                                                                           |
+| Action                           | Format, Examples                                                                                                                                         |
+|----------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add interview**                | `add-i app/APPLICANT_INDEX jr/JOB_TITLE time/INTERVIEW_DATETIME` <br> e.g., `add-i app/3 jr/Software Engineer start/03-11-2024 1500 end/03-11-2024 1600` |
+| **Delete interview**             | `delete-i INTERVIEW_INDEX`<br> e.g., `delete-i 3`                                                                                                        |
+| **Edit interview**               | `edit-i INTERVIEW_INDEX [app/APPLICANT_INDEX] [jr/JOB_TITLE] [time/INTERVIEW_DATETIME]`<br> e.g.,`edit-i 2 jr/software-engineer`                         |
+| **Find interview by job**        | `find-i KEYWORD [MORE_KEYWORDS]`<br> e.g., `find-i software-engineer`                                                                                    |
+| **List interview**               | `list-i`                                                                                                                                                 |
+| **List free time**               | `list-freetime INTERVIEW_DATETIME` <br> e.g, `list-freetime 12-12-2024`                                                                                  |
+| **List interview for today**     | `list-i-today`                                                                                                                                           |
+| **Mark interview as done**       | `mark INTERVIEW_INDEX` <br> e.g., `mark 3`                                                                                                               |
+| **Rate interview**               | `rate INTERVIEW_INDEX RATING` <br> e.g., `rate 1 3.0`                                                                                                    |
+| **List completed interview**     | `list-i-done`                                                                                                                                            |
+| **List incomplete interview**    | `list-i-not-done`                                                                                                                                        |
+| **Sort interview by rating**     | `sort-rate`                                                                                                                                              |
+| **Sort interview by start time** | `sort-time`                                                                                                                                              |
 
 [Back to the Table of Contents](#table-of-contents)
 
