@@ -24,18 +24,24 @@ public class StatusCommandParser implements Parser<StatusCommand> {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_STATUS);
 
-        if (trimmedArgs.isEmpty() || !arePrefixesPresent(argMultimap, PREFIX_STATUS)) {
+        if (trimmedArgs.isEmpty()) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, StatusCommand.MESSAGE_USAGE));
         }
 
         Index index = null;
         Status status = null;
+
+        if (!arePrefixesPresent(argMultimap, PREFIX_STATUS)) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, StatusCommand.MESSAGE_NO_STATUS));
+        }
+
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (ParseException e) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, StatusCommand.MESSAGE_NO_INDEX));
         }
+
         if (argMultimap.getValue(PREFIX_STATUS).isPresent()) {
             status = ParserUtil.parseStatus(argMultimap.getValue(PREFIX_STATUS).get());
         }
