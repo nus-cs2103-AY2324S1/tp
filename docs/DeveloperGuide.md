@@ -1002,3 +1002,43 @@ More details...
 
 **Proposed implementation**
 More details...
+
+### Allow partial name search for find command
+
+The `find-t` and `find-s` commands should allow users to search for tutors without having to input their full names.
+
+The current two `find` commands only allow searching for tutors with their full names matching the user input.
+We plan to change search to match partial words instead of only a full word match.
+
+This would allow users to search for tutors without knowing the tutors exact name. They can search using just a few
+characters of the name.
+
+For example: `find-t john` will now match: `john`, `JOHN123` and `johnetta`.
+
+**Proposed implementation**:
+
+A new method `containsPartialWordIgnoreCase` can be added in `StringUtil` that will be used by
+`NameContainsKeywordsPredicate` and `TutorNameContainsKeywordsPredicate` to test for a match.
+
+This method will call `String::contains` instead of `String::equals` to match partial words too.
+
+Depending on the command prefix, the parse method of the `findTutorCommandParser` or `findScheduleCommandParser` will 
+create the `find` command object with the updated predicate.
+
+This would then be used in the `execute` method of the `find` command object to get the filtered tutor 
+or schedule list with part of their names matching the user input.
+
+### Ban users from entering non-alphanumeric keywords for find command
+
+The `find-t` and `find-s` command should only allow users to find alphanumeric names from the tutor list.
+
+The current `find` commands allow users to search for non-alphanumeric names like `find-t *john,"` although all
+tutor names should be alphanumeric.
+
+Therefore, we plan to only allow users to input alphanumeric keywords for `find` commands.
+
+**Proposed implementation**
+
+In the `findTutorCommandParser` and `findScheduleCommandParser` parse methods, apart from checking for empty inputs, 
+we can add another layer of check using the `parseName` method of the `ParserUtil` class to check for non-alphanumeric
+keywords and throw an error to prevent users from entering non-alphanumeric keywords.
