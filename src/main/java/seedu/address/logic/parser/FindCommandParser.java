@@ -1,6 +1,8 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_NAME;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_NRIC;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_APPOINTMENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
@@ -11,6 +13,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Arrays;
+import java.util.List;
 
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -47,12 +50,20 @@ public class FindCommandParser implements Parser<FindCommand> {
         CompositePredicate findCommandPredicate = new CompositePredicate();
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
             String[] nameKeywords = argMultimap.getValue(PREFIX_NAME).get().trim().split("\\s+");
-            findCommandPredicate.add(new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
+            List<String> nameKeywordsList = Arrays.asList(nameKeywords);
+            if (nameKeywordsList.get(0) == null || nameKeywordsList.get(0).equals("")) {
+                throw new ParseException(String.format(MESSAGE_INVALID_NAME, FindCommand.MESSAGE_USAGE));
+            }
+            findCommandPredicate.add(new NameContainsKeywordsPredicate(nameKeywordsList));
         }
 
         if (argMultimap.getValue(PREFIX_NRIC).isPresent()) {
             String[] nricKeywords = argMultimap.getValue(PREFIX_NRIC).get().trim().split("\\s+");
-            findCommandPredicate.add(new IdContainsKeywordsPredicate(Arrays.asList(nricKeywords)));
+            List<String> nricKeywordsList = Arrays.asList(nricKeywords);
+            if (nricKeywordsList.get(0) == null || nricKeywordsList.get(0).equals("")) {
+                throw new ParseException(String.format(MESSAGE_INVALID_NRIC, FindCommand.MESSAGE_USAGE));
+            }
+            findCommandPredicate.add(new IdContainsKeywordsPredicate(nricKeywordsList));
         }
 
         if (argMultimap.getValue(PREFIX_APPOINTMENT).isPresent()) {

@@ -108,7 +108,8 @@ public class DeleteCommand extends UndoableCommand {
             model.setPerson(personToDelete, editedPerson);
             model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
             model.addToHistory(this);
-            return new CommandResult(String.format(MESSAGE_DELETE_PATIENT_FIELD_SUCCESS, Messages.format(editedPerson)));
+            return new CommandResult(String.format(MESSAGE_DELETE_PATIENT_FIELD_SUCCESS,
+                    Messages.format(editedPerson)));
         }
     }
 
