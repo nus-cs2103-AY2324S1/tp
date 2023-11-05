@@ -62,6 +62,16 @@ public class SetDifficultyCommandTest {
     }
 
     @Test
+    public void execute_setDifficultyInvalid_failure() {
+        SetDifficultyCommand setDifficultyCommand = new SetDifficultyCommand(Index.fromZeroBased(0), "middle");
+
+        String expectedMessage = "middle is not an invalid difficult level! Please enter easy, medium or hard!";
+
+
+        assertCommandFailure(setDifficultyCommand, model, expectedMessage);
+    }
+
+    @Test
     public void execute_withValidRandomIndex_success() {
         // to make it is valid, make sure random index has been set in model.
         Model modelToUse = new ModelManager(model.getDeck(), new UserPrefs());
