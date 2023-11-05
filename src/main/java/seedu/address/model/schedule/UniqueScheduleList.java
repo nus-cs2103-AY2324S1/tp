@@ -46,6 +46,7 @@ public class UniqueScheduleList implements Iterable<Schedule> {
             throw new DuplicateScheduleException();
         }
         internalList.add(toAdd);
+        sort();
     }
 
     /**
