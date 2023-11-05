@@ -53,8 +53,14 @@ public class EditCommand extends Command {
         }
 
         FlashCard flashCardToEdit = lastShownList.get(index.getZeroBased());
-        FlashCard editedFlashCard = flashCardToEdit.editFlashCard(changes);
-        if ((!changes[0].isEmpty() && model.hasFlashCard(editedFlashCard)) || flashCardToEdit.equals(editedFlashCard)) {
+        FlashCard editedFlashCard;
+        try {
+            editedFlashCard = flashCardToEdit.editFlashCard(changes);
+        } catch (IllegalArgumentException e) {
+            throw new CommandException(e.getMessage());
+        }
+
+        if ((changes.length > 0 && model.hasFlashCard(editedFlashCard)) || flashCardToEdit.equals(editedFlashCard)) {
             throw new CommandException(Messages.MESSAGE_DUPLICATE_FLASHCARD);
         }
         model.setFlashCard(flashCardToEdit, editedFlashCard);
