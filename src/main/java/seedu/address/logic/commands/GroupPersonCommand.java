@@ -45,10 +45,6 @@ public class GroupPersonCommand extends Command {
         Pair<Person, Group> output = model.groupPerson(this.personName, this.groupName);
         Person person = output.getKey();
         Group group = output.getValue();
-
-        // person already in the group
-        System.out.println(person.toString());
-
         return new CommandResult(String.format(MESSAGE_SUCCESS, person.getName().fullName, group.getGroupName()));
 	}
 

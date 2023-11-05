@@ -70,7 +70,7 @@ public class AddCommand extends Command {
                 model.addGroup(group);
             }
             try {
-                group.addPerson(toAdd);
+                model.findGroup(group.getGroupName()).addPerson(toAdd);
             } catch (CommandException e) {
                 throw new RuntimeException(e);
             }
