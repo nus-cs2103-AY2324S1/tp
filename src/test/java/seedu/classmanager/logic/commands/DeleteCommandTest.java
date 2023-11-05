@@ -7,7 +7,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.classmanager.logic.commands.CommandTestUtil.NONEXISTENT_STUDENT_NUMBER;
 import static seedu.classmanager.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.classmanager.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.classmanager.logic.commands.CommandTestUtil.showStudentAtIndex;
 import static seedu.classmanager.testutil.TypicalIndexes.INDEX_FIRST_STUDENT;
 import static seedu.classmanager.testutil.TypicalIndexes.INDEX_SECOND_STUDENT;
 

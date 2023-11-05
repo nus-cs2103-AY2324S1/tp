@@ -8,7 +8,6 @@ import static seedu.classmanager.logic.commands.CommandTestUtil.VALID_STUDENT_NU
 import static seedu.classmanager.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.classmanager.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.classmanager.logic.commands.CommandTestUtil.showStudentAtIndex;
-import static seedu.classmanager.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
 import static seedu.classmanager.testutil.TypicalIndexes.INDEX_FIRST_STUDENT;
 import static seedu.classmanager.testutil.TypicalStudents.getTypicalClassManager;
 
