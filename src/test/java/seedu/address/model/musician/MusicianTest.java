@@ -40,13 +40,24 @@ public class MusicianTest {
         editedAlice = new MusicianBuilder(ALICE).withName(VALID_NAME_BOB).build();
         assertFalse(ALICE.isSameMusician(editedAlice));
 
-        // name differs in case, all other attributes same -> returns false
+        // name differs in case, all other attributes same -> returns true
         Musician editedBob = new MusicianBuilder(BOB).withName(VALID_NAME_BOB.toLowerCase()).build();
-        assertFalse(BOB.isSameMusician(editedBob));
+        assertTrue(BOB.isSameMusician(editedBob));
 
-        // name has trailing spaces, all other attributes same -> returns false
-        String nameWithTrailingSpaces = VALID_NAME_BOB + " ";
-        editedBob = new MusicianBuilder(BOB).withName(nameWithTrailingSpaces).build();
+        // name has leading, trailing, and extra spaces, all other attributes same -> returns true
+        String nameWithExtraSpaces = VALID_NAME_BOB.replaceAll("\\s+", "   ") + " ";
+        editedBob = new MusicianBuilder(BOB).withName(nameWithExtraSpaces).build();
+        assertTrue(BOB.isSameMusician(editedBob));
+
+        // name with no spaces, all other attributes same -> returns true
+        String nameWithNoSpaces = VALID_NAME_BOB.replaceAll("\\s+", "");
+        editedBob = new MusicianBuilder(BOB).withName(nameWithNoSpaces).build();
+        assertTrue(BOB.isSameMusician(editedBob));
+
+        // name with inverted first name and last name, all other attributes same -> returns false
+        String nameWithInvertedFirstAndLastName = VALID_NAME_BOB.split("\\s+")[1]
+                + " " + VALID_NAME_BOB.split("\\s+")[0];
+        editedBob = new MusicianBuilder(BOB).withName(nameWithInvertedFirstAndLastName).build();
         assertFalse(BOB.isSameMusician(editedBob));
     }
 

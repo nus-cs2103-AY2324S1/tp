@@ -3,6 +3,8 @@ package seedu.address.model.band;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+import seedu.address.commons.util.StringUtil;
+
 /**
  * Represents a Band's name in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidName(String)}
@@ -56,7 +58,7 @@ public class BandName {
         }
 
         BandName otherName = (BandName) other;
-        return fullName.equalsIgnoreCase(otherName.fullName);
+        return StringUtil.hasSameWordsInSameSequenceIgnoreCase(fullName, otherName.fullName);
     }
 
     @Override
