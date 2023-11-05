@@ -1004,7 +1004,7 @@ A new boolean attribute `exitCalendar` will be added to `CommandResult`, which i
 should exit the calendar view (if active).
 
 The `execute` methods for commands like `AddScheduleCommand` and `EditScheduleCommand` will return a `CommandResult` 
-object with this new attribute set to `true` while all other commands will the value `false`.
+object with this new attribute set to `true` while all other commands will have the value `false`.
 
 In the `handleListDisplay` method in `MainWindow`, it will call `showLists` only if this attribute is `true` and 
 do nothing otherwise. The only exception is if the `commandResult` FeedbackToUser is a 
