@@ -236,7 +236,8 @@ Format: `lookup [c/CLASS_NUMBER] [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [s/STUDENT_
 <box type="warning" seamless>
 
 **Caution:**
-_At least one_ of the optional fields must be provided. `lookup` alone is not allowed.
+_At least one_ of the optional fields must be provided. `lookup` alone is not allowed. <br>
+This command will not check for field validation. e.g. `lookup c/class 11` is allowed even though `class 11` is not a valid class number.
 </box>
 
 * The command is **case-insensitive**. e.g. `hans` will match `Hans`
@@ -272,7 +273,7 @@ Examples:
 
 ### Marking tutorial attendance for all students displayed as present : `present-all`
 
-Marking tutorial attendance for all students in current list displayed as present in Class Manager.
+Marking tutorial attendance for all students in the current list displayed as present in Class Manager.
 
 Format: `present-all tut/TUTORIAL_INDEX`
 
@@ -299,7 +300,7 @@ Examples:
 
 ### Marking tutorial attendance for all students displayed as absent : `absent-all`
 
-Marking tutorial attendance for all students in current list displayed as absent in the class manager.
+Marking tutorial attendance for all students in the current list displayed as absent in the class manager.
 
 Format: `absent-all tut/TUTORIAL_INDEX`
 
