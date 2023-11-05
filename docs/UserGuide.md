@@ -107,26 +107,27 @@ Import staff lists for quick access to contact information. You can also add, ed
 
 <div markdown="block" class="alert alert-info">
 
-**Notes about the command format:**
+|                | **Notes about the command format**                                             |
+| -------------- | ------------------------------------------------------------------------------ |
+| [ ]            | Optional field                                                                 |
+| \<description> | Any string                                                                     |
+| \<type>        | R (for Revenue), or E (for Expense)                                            |
+| \<amount>      | Any non-negative number (Large numbers past ~16 digits are not well supported) |
+| \<date>        | In dd/mm/yy format (Can be in the future)                                      |
+| \<staff ID>    | ID of staff, an integer                                                        |
+| \<sort type>   | asc (ascending) or desc (descending)                                           |
+| ...            | Multiple entries allowed, separated by a space                                 |
 
-- []: Optional field
-- \<description>: Any string
-- \<type>: R (for Revenue), or E (for Expense)
-- \<amount>: Any number
-- \<date>: In dd/mm/yy format
-- \<staff ID>: ID of staff, an integer
-- \<sort type>: asc (ascending) or desc (descending)
-- ...: Multiple entries allowed, separated by a space
 </div>
 
 ### Adding transaction : `add`
 
-Format: `add ty/<type> d/<description> a/<amount> on/<date> [s/<staff ID>]`
+Format: `add ty/<type> d/<description> amt/<amount> on/<date> [s/<staff ID>]`
 
 Examples:
 
-- `add ty/R d/Sold 1 Mug a/10 on/10/10/23 s/1`
-- `add ty/E d/Paid Manufacturer a/100 on/10/11/23`
+- `add ty/R d/Sold 1 Mug amt/10 on/10/10/23 s/1`
+- `add ty/E d/Paid Manufacturer amt/100 on/10/11/23`
 
 Success/Fail Output:
 
@@ -147,7 +148,7 @@ Success/Fail Output:
 
 ### Sorting transactions : `sort`
 
-Format: `sort [date/<sort type>] [amount/<sort type>]`
+Format: `sort [date/<sort type>] [amt/<sort type>]`
 
 - At least one parameter must be present
 - If both parameters are present, the order matters
@@ -308,7 +309,7 @@ The upper menu bar contains two tabs:
 
 The lower menu bar contains three tabs:
 
-1. Overview — This tab shows you a monthly summary of your finances based on thr transactions you have entered. Although it's empty right now, when you have added a few transactions it will begin to show graphs.
+1. Overview — This tab shows you a monthly summary of your finances based on the transactions you have entered. Although it's empty right now, when you have added a few transactions it will begin to show graphs.
 2. Transactions — This tab shows you the transactions you have entered in a row-by-row format.
    ![Ui](images/Ui-Transactions.png)
 3. Staff List — This tab shows you the persons or parties you have entered in a list format.
@@ -331,9 +332,9 @@ The input field below this with the grey text `Enter command here...` is where y
 
 | Action                  | Format, Examples                                                                                                        |
 | ----------------------- | ----------------------------------------------------------------------------------------------------------------------- |
-| **Add transaction**     | `add ty/<type> d/<description> a/<amount> on/<date> [s/<staff ID>]`                                                     |
+| **Add transaction**     | `add ty/<type> d/<description> amt/<amount> on/<date> [s/<staff ID>]`                                                   |
 | **Remove transaction**  | `del <id>`                                                                                                              |
-| **Sort transactions**   | `sort [date/<sort type>] [amount/<sort type>]`                                                                          |
+| **Sort transactions**   | `sort [date/<sort type>] [amt/<sort type>]`                                                                             |
 | **Filter transactions** | `filter [ty/<type>] [has/<keywords...>] [after/<date>] [before/<date>] [more/<amount>] [less/<amount>] [by/<staff ID>]` |
 | **View transaction**    | `view t` or `view transaction`                                                                                          |
 | **Add staff**           | `addstaff n/<name> p/<phone no> e/<email> a/<address> [t/<tag>...]`                                                     |
@@ -349,7 +350,10 @@ The input field below this with the grey text `Enter command here...` is where y
 | Term        | Definition                                             |
 | ----------- | ------------------------------------------------------ |
 | Transaction | An exchange of money (e.g. Income / Expense)           |
-| Transactor  | Person associated with the transaction                 |
 | Income      | Money received (e.g. Product Sale)                     |
 | Expense     | Costs incurred (e.g. Staff salary, cost of production) |
 | Command     | An input into the text box to carry out actions        |
+
+## Future work
+
+- Exported files that are created (e.g. transactions.csv) will be able to be renamed before being exported to the selected directory.
