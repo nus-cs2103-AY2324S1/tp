@@ -1,38 +1,63 @@
+---
+layout: default.md
+title: "User Guide"
+pageNav: 3
+---
 # LoveBook User Guide
 
 LoveBook, is a dating-focused application, revolving around providing users with a convenient
-and enjoyable tool to enhance their dating experiences. Featuring user profile management, date organization,
-compatibility ranking, and customizable filtering options, LoveBook enhances the efficiency and effectiveness of your
+and enjoyable tool to enhance their dating experiences. Featuring user preferences management, date organization,
+customizable filtering options and best match algorithms, LoveBook enhances the efficiency and effectiveness of your
 online dating journey.
 
 <!-- * Table of Contents -->
 <page-nav-print />
 
-- [Quick Start](#quick-start)
-- [Features](#features)
-    - [Creation of new date: `add`](#creation-of-new-date)
-    - [Getting a recommended date: `bestMatch`](#getting-a-best-match)
-    - [Blind Date Generator: `blindDate`](#blind-date-generator)
-    - [Clear all dates: `clear`](#clear-all-dates)
-    - [Deletion of dates: `delete`](#deletion-of-dates-delete)
-    - [Edit existing dates: `edit`](#edit-existing-date)
-    - [Exit the program: `exit`](#exit-the-program)
-    - [Filter by Metric: `filter`](#filter-by-metric-filter)
-    - [Find a date: `find`](#find-a-date)
-    - [Help: `help`](#help)
-    - [Listing current dates : `list`](#list-all-dates)
-    - [Setting the matching algorithm: `setP`](#setting-the-date-pref)
-    - [Show Date Preferences: `showP`](#show-date-preferences)
-    - [Sorting list of dates by Metric: `sort`](#sorting-date-list)
-    - [Star a date: `star`](#star-a-date)
-    - [Unstar a date: `unstar`](#unstar-a-date)
-- [FAQ](#faq)
-- [Command Summary](#command-summary)
-- [Glossary](#glossary)
+[//]: # (- [Quick Start]&#40;#quick-start&#41;)
+
+[//]: # (- [Features]&#40;#features&#41;)
+
+[//]: # (    - [Creation of new date: `add`]&#40;#creation-of-new-date&#41;)
+
+[//]: # (    - [Getting a recommended date: `bestMatch`]&#40;#getting-a-best-match&#41;)
+
+[//]: # (    - [Blind Date Generator: `blindDate`]&#40;#blind-date-generator&#41;)
+
+[//]: # (    - [Clear all dates: `clear`]&#40;#clear-all-dates&#41;)
+
+[//]: # (    - [Deletion of dates: `delete`]&#40;#deletion-of-dates-delete&#41;)
+
+[//]: # (    - [Edit existing dates: `edit`]&#40;#edit-existing-date&#41;)
+
+[//]: # (    - [Exit the program: `exit`]&#40;#exit-the-program&#41;)
+
+[//]: # (    - [Filter by Metric: `filter`]&#40;#filter-by-metric-filter&#41;)
+
+[//]: # (    - [Find a date: `find`]&#40;#find-a-date&#41;)
+
+[//]: # (    - [Help: `help`]&#40;#help&#41;)
+
+[//]: # (    - [Listing current dates : `list`]&#40;#list-all-dates&#41;)
+
+[//]: # (    - [Setting the matching algorithm: `setP`]&#40;#setting-the-date-pref&#41;)
+
+[//]: # (    - [Show Date Preferences: `showP`]&#40;#show-date-preferences&#41;)
+
+[//]: # (    - [Sorting list of dates by Metric: `sort`]&#40;#sorting-date-list&#41;)
+
+[//]: # (    - [Star a date: `star`]&#40;#star-a-date&#41;)
+
+[//]: # (    - [Unstar a date: `unstar`]&#40;#unstar-a-date&#41;)
+
+[//]: # (- [FAQ]&#40;#faq&#41;)
+
+[//]: # (- [Command Summary]&#40;#command-summary&#41;)
+
+[//]: # (- [Glossary]&#40;#glossary&#41;)
 
 --------------------------------------------------------------------------------------------------------------------
 
-# 1 [Quick start](#quick-start)
+## **Quick Start**
 
 1. Ensure that you have Java `11` or above installed in your Computer.
 
@@ -55,7 +80,7 @@ online dating journey.
 
 --------------------------------------------------------------------------------------------------------------------
 
-# 2 [Features](#features)
+## **Features**
 
 **Notes about the command format:**<br>
 
@@ -70,12 +95,14 @@ online dating journey.
   as space characters surrounding line-breaks may be omitted when copied over to the application.
 
 <box type="info">
-    * `name` should be a non-empty string.
-    * `age` should be a positive integer between 18 and 150 (inclusive).
-    * `gender` should be either M or F.
-    * `horoscope` should be a valid zodiac sign.
+
+    - `name` must include letters, numbers and spaces. It must not be left blank.
+    - `age` should be a positive integer between 18 and 150 (inclusive).
+    * `gender` should be either M or F. It is case sensitive.
+    * `horoscope` should be a valid zodiac sign. It is case insensitive.
     * `income` (per month) should be a positive integer in SGD.
     * `height` should be a positive integer in cm between 100cm and 250cm (inclusive).
+
 </box>
 
 ### [Creation of new date: `add`](#creation-of-new-date)
@@ -92,9 +119,12 @@ Example: `add name/Cleon age/22 gender/F height/176 horoscope/Taurus income/3000
 
 Expected output: `New date added: Cleon; Age: 22; Gender: F; Height: 176; Income: 3000; Horoscope: TAURUS`
 
-Output if error: `Invalid command format! add: Adds a date to the LoveBook. Parameters: name/NAME age/AGE gender/GENDER
-height/HEIGHT income/INCOME horoscope/HOROSCOPE Example: add name/John Doe age/21 gender/M height/23124 income/3000
-horoscope/Libra`
+Output if error: 
+```
+Invalid command format! 
+add: Adds a Date to the LoveBook. Parameters: name/NAME age/AGE gender/GENDER height/HEIGHT income/INCOME horoscope/HOROSCOPE
+Example: add name/John Doe age/21 gender/M height/123 income/3000 horoscope/Libra
+```
 
 ### [Getting a recommended Date: `bestMatch`](#getting-a-best-match)
 
@@ -104,7 +134,7 @@ Format: `bestMatch`
 
 Expected Output: `List the most compatible date`
 
-Output if error: `No dates found!`
+Output if error: `Initialise list with dates before calling bestMatch`
 
 ### [Blind Date Generator: `blindDate`](#blind-date-generator)
 
@@ -114,7 +144,7 @@ Format: `blindDate`
 
 Expected Output: `A random Date entry is printed`
 
-Output if error: `No dates in list!`
+Output if error: `Initialise list with dates before calling blindDates`
 
 ### [Clear all dates: `clear`](#clear-all-dates)
 
@@ -146,7 +176,13 @@ Example: `delete 1`
 
 Expected output: `Deleted Date: John Doe; Age: 21; Gender: M; Height: 123; Income: 3000; Horoscope: LIBRA`
 
-Output if error : `The date index provided is invalid`
+Output if error : 
+```
+Invalid command format! 
+delete: Deletes the Date identified by the index number used in the displayed Date list.
+Parameters: INDEX (must be a positive integer)
+Example: delete 1
+```
 
 ### [Edit existing dates: `edit`](#edit-existing-date)
 
@@ -168,6 +204,13 @@ Example:
 - `edit 3 horoscope/Cancer name/Cleon` (sequence doesn't matter)
 
 Expected Output: `Edited Date: Cleon Tan; Age: 12; Gender: M; Height: 123; Income: 3000; Horoscope: CANCER`
+
+Output if error:
+```
+edit: Edits the details of the Date identified by the index number used in the displayed Date list. Existing values will be overwritten by the input values.
+Parameters: INDEX (must be a positive integer) [name/NAME] [age/AGE] [gender/GENDER] [height/HEIGHT] [income/INCOME] [horoscope/HOROSCOPE]
+Example: edit 1 age/24 gender/M height/180 income/3000 horoscope/SCORPIO 
+```
 
 ### [Exit the program: `exit`](#exit-the-program)
 
@@ -229,14 +272,21 @@ Expected output: `Opened help window.`
 
 Sets the user's preferences for the matching algorithm.
 
-Format: `setP gender/GENDER age/AGE height/HEIGHT income/INCOME`
+Format: `setP age/AGE height/HEIGHT income/INCOME`
 
-Example: `setP gender/M age/22 height/180 income/2000`
+Example: `setP age/22 height/180 income/2000`
 
-Expected output: `Updated Preferences: Age: 22; Gender: M; Height: 180; Income: 2000; Horoscope: TAURUS`
+Expected output:
+```
+Updated Preferences: Age: 22; Height: 180; Income: 2000; Horoscope: TAURUS
+```
 
 Output if error:
-`At least one field to edit must be provided. Please try the following command format: setP: Sets Date Preference. Parameters: age/AGE gender/GENDER height/HEIGHT income/INCOME horoscope/HOROSCOPE Example: setP age/21 gender/M height/23124 income/3000 horoscope/Scorpio`
+```
+At least one field to edit must be provided.
+Please try the following command format: setP: Sets Date Preference. Parameters: age/AGE height/HEIGHT income/INCOME horoscope/HOROSCOPE
+Example: setP age/21 height/23124 income/3000 horoscope/Scorpio
+```
 
 ### [Show Date Preferences: `showP`](#show-date-preferences)
 
@@ -246,7 +296,7 @@ Format: `showP`
 
 Example: `showP`
 
-Expected output: `Here are your preferences: Age: 22; Gender: M; Height: 180; Income: 2000; Horoscope: TAURUS`
+Expected output: `Here are your preferences: Age: 22; Height: 180; Income: 2000; Horoscope: TAURUS`
 
 ### [Sorting list of dates by Metric: `sort`](#sorting-date-list)
 
@@ -264,11 +314,16 @@ Example:
 
 - `sort name/increasing`
 - `sort horoscope/decreasing`
-- `filter income/ height/increasing`
 
 Expected Output: `Lists the dates in the order specified`
 
-Output if error: ```No dates found!```
+Output if error: 
+```
+Invalid command format! 
+sort: Sorts all dates in LoveBook alphabetically or numerically.
+Parameters: name/ OR age  OR height/ OR income/ OR horoscope/ AND increasing OR decreasing
+Example: sortname/increasing
+```
 
 ### [Star a date: `star`](#star-a-date)
 
@@ -281,7 +336,12 @@ Example: `star 1`
 Expected output: `Starred Date: John Doe; Age: 21; Gender: F; Height: 245; Income: 3000; Horoscope: LIBRA`
 
 Output if error:
-`The date index provided is invalid`
+```
+Invalid command format!
+star: stars the Date identified by the index number used in the displayed Date list.
+Parameters: INDEX (must be a positive integer)
+Example: star 1
+```
 
 <box type="info">
 * If Date is already starred, it will display the output `Date has already been starred`
@@ -306,7 +366,7 @@ Output if error:
 
 --------------------------------------------------------------------------------------------------------------------
 
-# 3 [FAQ](#faq)
+## **FAQ**
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file with the file that
@@ -324,7 +384,7 @@ your data. In the event of a power outage, all your data will be safe.
 
 --------------------------------------------------------------------------------------------------------------------
 
-# 4 [Command Summary](#command-summary)
+## **Command Summary**
 
 | Action                         | Format                                                                                | Examples                                                               |
 |--------------------------------|---------------------------------------------------------------------------------------|------------------------------------------------------------------------|
@@ -332,16 +392,20 @@ your data. In the event of a power outage, all your data will be safe.
 | Deletion of dates              | `delete INDEX`                                                                        | `delete 2`                                                             |
 | Creation of new date           | `add name/NAME age/AGE gender/GENDER height/HEIGHT horoscope/HOROSCOPE income/INCOME` | `add name/John age/25 gender/M height/175 horoscope/Aries income/5000` |
 | Edit existing dates            | `edit INDEX METRIC/NEW ARG`                                                           | `edit 3 name/Cleon`                                                    |
-| Blind Date Generator           | `blindDate`                                                                           | `random`                                                               |
+| Blind Date Generator           | `blindDate`                                                                           | `blindDate`                                                            |
+| Find a date                    | `find NAME [MORE_NAMES]`                                                              | `find Cleon`                                                           |
 | Filter by Metric               | `filter METRIC/ARG`                                                                   | `filter name/Cleon`                                                    |
 | Sorting list of dates          | `sort METRIC/ORDER`                                                                   | `sort name/increasing`                                                 |
-| Getting a recommended date     | `bestMatch`                                                                           | `match`                                                                |
-| Setting the matching algorithm | `setP gender/GENDER age/AGE height/HEIGHT income/INCOME`                              | `setP gender/M age/22 height/180 income/2000`                          |
+| Getting a recommended date     | `bestMatch`                                                                           | `bestMatch`                                                            |
+| Setting the matching algorithm | `setP age/AGE height/HEIGHT income/INCOME horoscope/HOROSCOPE`                        | `setP age/22 height/180 income/2000 horoscope/TAURUS`                  |
 | Star a date                    | `star INDEX`                                                                          | `star 1`                                                               |
 | Unstar a date                  | `unstar INDEX`                                                                        | `unstar 1`                                                             |
+| Clear all dates                | `clear`                                                                               | `clear`                                                                |
+| Show Date Preferences          | `showP`                                                                               | `showP`                                                                |
+| Exit the program               | `exit`                                                                                | `exit`                                                                 |
 
 --------------------------------------------------------------------------------------------------------------------
 
-# 5 [Glossary](#glossary)
+## **Glossary**
 
 ### Mainstream OS: Windows, Linux, Unix, OS-X.

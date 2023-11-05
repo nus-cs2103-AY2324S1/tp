@@ -23,7 +23,7 @@ public class Avatar {
      * Constructor for the avatar class with a random number
      */
     public Avatar() {
-        value = String.valueOf((int) (Math.random() * (UPPER_BOUND - LOWER_BOUND + 1)) + LOWER_BOUND);
+        value = String.valueOf((int) (Math.random() * (UPPER_BOUND - LOWER_BOUND)) + LOWER_BOUND);
     }
 
     /**
