@@ -86,26 +86,11 @@ Welcome to TutorConnect! We are excited to get you started with a more efficient
     2. Type `java -version` and press Enter.
     3. If it says a version other than 11 or `command not found`, please install Java 11 by following this [guide](https://www.java.com/en/download/help/download_options.html).
 
-2. Download the latest jar file (tutorconnect.jar) from our [Github Releases](https://github.com/AY2324S1-CS2103T-T17-3/tp/releases).
+2. Download the latest jar file (`TutorConnect.jar`) from our [Github Releases](https://github.com/AY2324S1-CS2103T-T17-3/tp/releases).
 
 3. Move the jar file into a new folder called “TutorConnect”.
 
 4. Double-click the jar file to launch the application.
-
-<div markdown="block" class="alert alert-info">
-
-**:information_source: Unable to Open jar file**<br>
-
-Should the file fail to launch on click:
-    
-1. Open a command terminal on the folder where `tutorconnect.jar` is. On Windows, you can do so by right-clicking on the folder and select "Open in Terminal".
-![terminal](images/quick-start/open-terminal.png)
-On Mac:
-![terminal-mac](images/quick-start/open-terminal-mac.png)
-2. Type the following command in the terminal: `java -jar tutorconnect.jar` and hit enter.
-
-
-</div>
 
 <div markdown="block" class="alert alert-info">
 
@@ -117,6 +102,21 @@ the jar file cannot be opened because it is from an unidentified developer. To c
 1. Right-click on the jar file and select `Open With > JavaLauncher (default)`
 2. Press Open when prompted
 </div>
+
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Unable to Open jar file**<br>
+
+Should the file fail to launch on click:
+
+1. Open a command terminal on the folder where `TutorConnect.jar` is. On Windows, you can do so by right-clicking on the folder and select "Open in Terminal".
+   ![terminal](images/quick-start/open-terminal.png)
+   On Mac:
+   ![terminal-mac](images/quick-start/open-terminal-mac.png)
+2. Type the following command in the terminal: `java -jar TutorConnect.jar` and hit enter.
+
+</div>
+
 
 ### Navigating the Interface
 
