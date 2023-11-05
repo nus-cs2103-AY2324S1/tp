@@ -54,6 +54,9 @@ public class DeleteCommandTest {
         assertCommandFailure(deleteCommand, model, Messages.MESSAGE_NONEXISTENT_STUDENT_NUMBER, commandHistory);
     }
 
+    //@@author Cikguseven-reused
+    //Reused from AddressBook-Level 4 (https://github.com/se-edu/addressbook-level4)
+    // with minor modifications
     @Test
     public void executeUndoRedo_validStudentNumber_success() throws Exception {
         Student studentToDelete = TypicalStudents.getTypicalStudents().get(INDEX_FIRST_STUDENT.getZeroBased());
@@ -116,6 +119,7 @@ public class DeleteCommandTest {
         expectedModel.redoClassManager();
         assertCommandSuccess(new RedoCommand(), model, RedoCommand.MESSAGE_SUCCESS, expectedModel, commandHistory);
     }
+    //@@author
 
     @Test
     public void equals() {
