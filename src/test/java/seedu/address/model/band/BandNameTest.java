@@ -56,6 +56,12 @@ public class BandNameTest {
 
         // different values -> returns false
         assertFalse(name.equals(new BandName("Other Valid Name")));
+
+        // different case -> returns true
+        assertTrue(name.equals(new BandName("valid name")));
+
+        // extra whitespaces -> returns true
+        assertTrue(name.equals(new BandName("Valid   Name  ")));
     }
 }
 
