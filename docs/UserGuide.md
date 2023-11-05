@@ -21,6 +21,7 @@ img
 [//]: # (<!-- * Table of Contents -->)
 [//]: # (<page-nav-print />)
 
+<a name="table-of-contents"></a>
 ## Table of Contents
 
 * [Introduction](#introduction)
@@ -56,15 +57,18 @@ img
     * [Editing the data file](#editing-the-data-file)
 * [FAQ](#faq)
 * [Glossary](#glossary)
+
 ---
 <br>
 
 <a name="introduction"></a>
 ## Introduction
 
-**Staff-Snap** is a desktop app for Hiring Managers like you to manage the hiring and tracking of candidates, optimised for use via a Command Line Interface (CLI). Used by hiring managers in companies around the globe, it is effective, easy to use and reliable, making the hiring process a much less painful experience.
+Welcome to the **Staff-Snap** User Guide!
 
-The purpose of this guide is to get you familiar with the features of **Staff-Snap**, from the very basics, to the most advanced features the app has to offer. These features range from being able to add applicants details and save them for later, to being able to calculate a candidate’s favourness based on their performance in interviews or assessments thus far. Every single feature available is in this guide and you can check out the table of contents to navigate to a feature you might be interested in using.
+**Staff-Snap** is a desktop app for Hiring Managers like you to manage the hiring and tracking of applicants, optimised for use via a [Command Line Interface (CLI)](#glossary). Used by hiring managers in companies around the globe, it is effective, easy-to-use and reliable, making the hiring process a much more enjoyable experience.
+
+The purpose of this guide is to get you familiar with the features of **Staff-Snap** - from the very basics, to the most advanced features the application has to offer. These features range from the simple task of adding an applicant to being able to calculate an applicant's score from their ratings in the interview stages. Every single feature is explained in this guide. You can check out the [Table of Contents](#table-of-contents) to navigate to a feature you might be interested in using.
 
 To begin using this guide, ensure you meet the [minimum system requirements](#minimum-system-requirements). Once this is done, go to the [quick start](#quick-start) section to get the app up and running. Once you have done so, please feel free to go through the features sections to find out what features Staff-Snap has installed. We recommend going through it in the order of this guide but any order works as well! You may check out our table of contents to jump to any section of your choice.
 
@@ -86,7 +90,6 @@ To begin using this guide, ensure you meet the [minimum system requirements](#mi
 
 ## Need help?
 If you are unable to follow any of the steps below or get help, please email our CEO at staffsnap@gmail.com or call our 24/7 technical helpline 69696969 for assistance. (For educational purposes, not real contact details.)
-
 
 <br>
 
@@ -239,7 +242,7 @@ Format: `add n/NAME hp/PHONE e/EMAIL p/POSITION`
 </box>
 
 <box type="tip" header="**Note**">
-    As `NAME` can only contain alphanumeric characters and spaces, names containing hyphens `-` or slashes `/` are not allowed in this version of the app.  
+    As <code>NAME</code> can only contain alphanumeric characters and spaces, names containing hyphens <code>-</code> or slashes <code>/</code> are not allowed in this version of the app.  
 </box>
 
 
