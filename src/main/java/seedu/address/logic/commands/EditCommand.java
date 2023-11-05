@@ -55,7 +55,7 @@ public class EditCommand extends Command {
      * @param index              of the Card in the filtered Deck to edit
      * @param editCardDescriptor details to edit the Card with
      */
-    public EditCommand(Index index, EditCardDescriptor editCardDescriptor) {
+    public  EditCommand(Index index, EditCardDescriptor editCardDescriptor) {
         requireNonNull(index);
         requireNonNull(editCardDescriptor);
 
