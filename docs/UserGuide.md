@@ -77,6 +77,8 @@ Click on the relevant links to easily navigate through the guide and access the 
 * Items in square brackets are optional.<br>
   e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 
+* Unless explicitly allowed, blank inputs or inputting any number of spaces as an argument for a field is invalid.
+
 * Items with `…`​ after them can be used multiple times including zero times.<br>
   e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
 
@@ -118,14 +120,14 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS nk/NEXT_KIN nkp/NEXT_KIN_PH
     to check if you have already added the person already.
 
 Acceptable Values:
-1. NAME - any value is possible
+1. NAME - Alphanumeric or space characters only
 2. PHONE_NUMBER - Numbers (0-9) only and at least 3 digits long
 3. EMAIL - string in valid email format
 4. ADDRESS - any value is possible
-5. NEXT_KIN - any value is possible
+5. NEXT_KIN - Alphanumeric or space characters only
 6. NEXT_KIN_PHONE - Numbers (0-9) only and at least 3 digits long
-7. FINANCIAL_PLAN - Alphanumeric or Space characters
-8. TAG - Alphanumeric only
+7. FINANCIAL_PLAN - Alphanumeric or space characters only
+8. TAG - Alphanumeric characters only
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A person can have any number of Financial Plans (including 0)
@@ -179,14 +181,14 @@ Format: `edit ENTRY_INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [nk/NE
 
 Acceptable Values:
 1. ENTRY_INDEX - Number (1 to current size of the contact book)
-2. NAME - any value is possible
+2. NAME - Alphanumeric or space characters only
 3. PHONE_NUMBER - Numbers (0-9) only and at least 3 digits long
 4. EMAIL - string in valid email format
 5. ADDRESS - any value is possible
-6. NEXT_KIN - any value is possible
+6. NEXT_KIN - Alphanumeric or space characters only
 7. NEXT_KIN_PHONE - Numbers (0-9) only and at least 3 digits long
-8. FINANCIAL_PLAN - Alphanumeric or Space characters
-9. TAG - Alphanumeric only
+8. FINANCIAL_PLAN - Alphanumeric or space characters only
+9. TAG - Alphanumeric characters only
 
 Examples:
 *  `edit 4 n/john doe a/23 woodlands ave 123` Edits the name and address of the 1st person to be `john doe` and `woodlands ave 123` respectively.

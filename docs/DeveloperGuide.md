@@ -705,6 +705,19 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 8.  All features added to the code should be tested.
 9.  All commands should be able to be executed by a financial advisor with little technical knowledge.
 
+### Planned Enhancements
+1. The current `schedule` command does not check if the given date is before the current date, so it is vulnerable to
+user error. We plan to make the command check for the date and fail if the date is before the current date: `Date given
+ cannot be before the current date`.
+2. The current `phone` and `next-of-kin phone` fields currently only accepts numbers. It cannot accept international
+number formats. We plan to make the fields accept symbols so numbers such as `+6598765432` and `001-234-1-4610818`
+will be accepted. This will involve changing the validity checker for both fields.
+3. The current contact book does not check for duplicates beyond the exact matching of the person's `name`.
+We plan to refuse adding/editing of a person's details if it results in two people sharing a `name` (case-insensitive)
+or `phone` since two people are very unlikely to share those details.
+4. The current `name` and `next-of-kin name` fields currently do not accept symbols. We plan to make the fields accept
+symbols so that names like `Thaarshen s/o Thaarshen` and `O'Brien` are accepted. This will involve changing the
+validity checker for both fields.
 
 *{More to be added}*
 
