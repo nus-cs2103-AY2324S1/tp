@@ -542,7 +542,7 @@ You can also refer to [input information](#input-examples) for details about val
 
 #### Listing all schedules: `list-s`
 
-Displays a list of all schedules in TutorConnect. List can be filtered by tutors using the `TUTOR_INDEX` provided in the tutor list, or by `COMPLETED` or MISSED `status`.
+Displays a list of all schedules in TutorConnect. List can be filtered by tutors using the `TUTOR_INDEX` provided in the tutor list, or by `COMPLETED` or `MISSED` status.
 
 ##### :star: First time users
 {:.no_toc}
