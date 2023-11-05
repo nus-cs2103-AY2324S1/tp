@@ -22,11 +22,6 @@ class CompleteCommandParserTest {
     private static final String MESSAGE_INVALID_FORMAT =
             String.format(MESSAGE_INVALID_COMMAND_FORMAT, CompleteCommand.MESSAGE_USAGE);
     private CompleteCommandParser parser = new CompleteCommandParser();
-    @Test
-    public void parse_missingParts_failure() {
-        //no index or date specified
-        assertParseFailure(parser, " ", MESSAGE_INVALID_FORMAT);
-    }
 
     @Test
     public void parse_invalidPreamble_failure() {
@@ -44,7 +39,7 @@ class CompleteCommandParserTest {
     }
 
     @Test
-    public void parse_invalidValue_failure() {
+    public void parse_invalidDate_failure() {
         //Invalid date format
         assertParseFailure(parser, DATE_DESC + "01 May 2023", MESSAGE_INVALID_DATE_FORMAT);
         assertParseFailure(parser, DATE_DESC + "01-05", MESSAGE_INVALID_DATE_FORMAT);
@@ -55,6 +50,15 @@ class CompleteCommandParserTest {
         assertParseFailure(parser, DATE_DESC + "01-13-2023", MESSAGE_INVALID_DATE);
     }
 
+    @Test
+    public void parse_invalidArgs_failure() {
+        //no index or date specified
+        assertParseFailure(parser, " ", MESSAGE_INVALID_FORMAT);
+
+        //both index and date specified
+        assertParseFailure(parser, INDEX_FIRST_PERSON.getOneBased() + DATE_DESC + "01-05-2023",
+                MESSAGE_INVALID_FORMAT);
+    }
     @Test
     public void parse_duplicateFields_failure() {
         String userInput = DATE_DESC + "01-05-2023" + DATE_DESC + "02-10-2023";

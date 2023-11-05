@@ -8,7 +8,6 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.function.Consumer;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
@@ -48,31 +47,29 @@ public class CompleteCommand extends Command {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
 
-        Consumer<Index> editByIndex = index -> {
-            Person personToEdit = lastShownList.get(index.getZeroBased());
-            Person edittedPerson = createPersonWithoutAppointment(personToEdit);
-
-            model.setPerson(personToEdit, edittedPerson);
-        };
-
         Optional<Index> index = completeDescriptor.getIndex();
+
+        // if Index present, edit Model by index
         if (index.isPresent()) {
             if (index.get().getZeroBased() >= lastShownList.size()) {
                 throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
             }
 
-            Person person = lastShownList.get(index.get().getZeroBased());
-            if (person.hasNullAppointment()) {
+            Person personToEdit = lastShownList.get(index.get().getZeroBased());
+            if (personToEdit.hasNullAppointment()) {
                 throw new CommandException(MESSAGE_PERSON_NO_APPOINTMENT);
             }
+
+            Person edittedPerson = createPersonWithoutAppointment(personToEdit);
+
+            model.setPerson(personToEdit, edittedPerson);
         }
 
-        // if Index present, edit Model by Person Index
-        completeDescriptor.getIndex().ifPresent(editByIndex);
+        Optional<LocalDate> date = completeDescriptor.getDate();
 
         // if Date present, edit Model by Date;
-        if (completeDescriptor.getDate().isPresent()) {
-            if (!model.clearAppointments(completeDescriptor.getDate().orElse(null))) {
+        if (date.isPresent()) {
+            if (!model.clearAppointments(date.orElse(null))) {
                 throw new CommandException(MESSAGE_DATE_NO_APPOINTMENT);
             }
         }
