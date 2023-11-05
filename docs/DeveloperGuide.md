@@ -1000,12 +1000,6 @@ Conversely, other actions should keep the user within the calendar view.
 This approach aims to provide a smoother and more seamless experience for users interacting with schedules in the 
 calendar view.
 
-### Long fields being truncated
-
-
-**Proposed implementation**
-Replace 
-
 ### Schedules at the same time being arranged alphabetically
 
 **Proposed implementation**
