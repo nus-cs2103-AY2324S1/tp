@@ -312,7 +312,6 @@ public class ModelManager implements Model {
 
     @Override
     public void showTask(Task task) {
-        requireNonNull(task);
         if (ui != null) {
             currentShowingTask = task;
             ui.showTaskDetails(task);
