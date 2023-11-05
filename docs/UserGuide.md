@@ -107,56 +107,93 @@ Import staff lists for quick access to contact information. You can also add, ed
 
 <div markdown="block" class="alert alert-info">
 
-|                | **Notes about the command format**                                             |
-| -------------- | ------------------------------------------------------------------------------ |
-| [ ]            | Optional field                                                                 |
-| \<description> | Any string                                                                     |
-| \<type>        | R (for Revenue), or E (for Expense)                                            |
-| \<amount>      | Any non-negative number (Large numbers past ~16 digits are not well supported) |
-| \<date>        | In dd/mm/yy format (Can be in the future)                                      |
-| \<staff ID>    | ID of staff, an integer                                                        |
-| \<sort type>   | asc (ascending) or desc (descending)                                           |
-| ...            | Multiple entries allowed, separated by a space                                 |
+**Notes about the command format:**
 
+- []: Optional field
+- \<DESCRIPTION>: Any string
+- \<NAME>: Any string
+- \<PHONE>: Number with at least 3 digits (trailing zeroes are allowed)
+- \<EMAIL>: Any string
+- \<ADDRESS>: Any string
+- \<TAG>: A single word with only alphabets and/or digits, with no spaces
+- \<KEYWORD>: A single word with no spaces
+- \<TYPE>: R (for Revenue), or E (for Expense)
+- \<AMOUNT>: Any number
+- \<DATE>: In dd/MM/yy format
+- \<ID>: ID of a transaction, an integer
+- \<STAFF ID>: ID of staff, an integer
+- \<SORT TYPE>: asc (ascending) or desc (descending)
+- ...: Multiple entries allowed, separated by a space
 </div>
 
 ### Adding transaction : `add`
 
-Format: `add ty/<type> d/<description> amt/<amount> on/<date> [s/<staff ID>]`
+Adds a new transaction.
+
+Format: `add ty/<TYPE> d/<DESCRIPTION> a/<AMOUNT> on/<DATE> [s/<STAFF ID>]`
+
+Success output: `New transaction added: <ID>; TransactionType: <TYPE>; Description: <DESCRIPTION>; Amount: <AMOUNT>; Date: <DATE>; [StaffId: <STAFF ID>]`
 
 Examples:
 
 - `add ty/R d/Sold 1 Mug amt/10 on/10/10/23 s/1`
 - `add ty/E d/Paid Manufacturer amt/100 on/10/11/23`
 
-Success/Fail Output:
-
-- Added revenue
-- Added expenditure
-- Error: <Error Message>
-
 ### Removing transaction: `del`
 
-Format: `del <id>`
+Removes the transaction with the given ID.
 
-Example:`del 1`
+Format: `del <ID>`
 
-Success/Fail Output:
+Success output: `Deleted transaction: <ID>; TransactionType: <TYPE>; Description: <DESCRIPTION>; Amount: <AMOUNT>; Date: <DATE>; [StaffId: <STAFF ID>]`
 
-- Removed transaction
-- Error: <Error Message>
+Example: `del 1`
+
+### Edit transaction: `edit`
+
+Edits details of the transaction with the given ID.
+
+Format: `edit <ID> [ty/<TYPE>] [d/<DESCRIPTION>] [amt/<AMOUNT>] [on/<DATE>] [s/<STAFF_ID>]`
+
+Success output: `Edited transaction: <ID>; TransactionType: <TYPE>; Description: <DESCRIPTION>; Amount: <AMOUNT>; Date: <DATE>; [StaffId: <STAFF ID>]`
+
+**Note:** At least one field to edit must be provided in the command.
+
+Examples:
+
+- `edit 1 ty/Income amt/5000`
+- `edit 2 d/NewDescription on/03/10/23`
 
 ### Sorting transactions : `sort`
 
-Format: `sort [date/<sort type>] [amt/<sort type>]`
+Sorts transactions based on the given parameters and order.
+
+Format: `sort [date/<SORT TYPE>] [amt/<SORT TYPE>]`
 
 - At least one parameter must be present
 - If both parameters are present, the order matters
   - Transactions will be sorted by the first parameter; if there are ties, the second parameter is used to tiebreak
 
+Success output: `Transactions sorted by: <date/amount> <SORT TYPE>`
+
+Examples:
+
+- `sort date/asc`
+- `sort amt/desc date/asc`
+
+### Clear sort rules : `clearsort`
+
+Removes all sort rules.
+
+Format: `clearsort`
+
+Success output: `Transaction sort has been cleared`
+
 ### Filtering transactions : `filter`
 
-Format: `filter [ty/<type>] [has/<keywords...>] [after/<date>] [before/<date>] [more/<amount>] [less/<amount>] [by/<staff ID>]`
+Filters transactions based on the given parameters.
+
+Format: `filter [ty/<TYPE>] [has/<KEYWORDS...>] [after/<DATE>] [before/<DATE>] [more/<AMOUNT>] [less/<AMOUNT>] [by/<STAFF ID>]`
 
 - At least one parameter must be present
 - If multiple parameters are present, only transactions matching all parameters will be shown
@@ -169,43 +206,79 @@ Format: `filter [ty/<type>] [has/<keywords...>] [after/<date>] [before/<date>] [
   - The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
   - Only the description is searched.
   - Only full words will be matched e.g. `Han` will not match `Hans`
-- `after` will match dates on or after the given date
-- `before` will match dates on or before the given date
-- `more` will match amounts greater than or equal to the given amount
-- `less` will match amounts less than or equal to the given amount
+- `after` will match dates _on or after_ the given date
+- `before` will match dates _on or before_ the given date
+- `more` will match amounts _greater than or equal to_ the given amount
+- `less` will match amounts _less than or equal to_ the given amount
 - `by` will match transactions with the given staff ID
+
+Success output: `<Number of transactions> transactions listed`
+
+Examples:
+
+- `filter more/100 less/200`
+- `filter ty/R before/10/10/23 by/1`
+
+> **❗`filter` will not affect values displayed on the dashboard overview**
+>
+> The overview page takes all transactions into account regardless of filter rules.<br>
+
+### Clear filter rules : `clearfilter`
+
+Removes all filter rules.
+
+Format: `clearfilter`
+
+Success output: `Transaction filter has been cleared`
 
 ### Viewing transactions : `view t`
 
-Switches UI to transaction tab, which shows the full list of transactions
+Switches UI to transaction tab, which shows the full list of transactions.
 
 Format: `view t` or `view transaction`
 
+Success output: `Listed all transactions`
+
 ### Adding staff : `addstaff`
 
-Format: `addstaff n/<name> p/<phone no> e/<email> a/<address> [t/<tag>...]`
+Adds a new staff member.
 
-Success/Fail Output:
+Format: `addstaff n/<NAME> p/<PHONE> e/<EMAIL> a/<ADDRESS> [t/<TAG>...]`
 
-- Added staff
-- Error: <Error Message>
+Success output: `New person added: <NAME>; Phone: <PHONE>; Email: <EMAIL>; Address: <ADDRESS>; [Tags: <TAG>...]`
+
+Example: `addstaff n/John Doe p/91234567 e/johndoe@gmail.com a/Blk 123, Pasir Ris St 32 t/manager`
 
 ### Removing staff: `delstaff`
 
-Format: `delstaff <staff id>`
+Removes the staff with the given ID.
+
+Format: `delstaff <STAFF ID>`
+
+Success output: `Deleted person: <NAME>; Phone: <PHONE>; Email: <EMAIL>; Address: <ADDRESS>; [Tags: <TAG>...]`
 
 Example: `delstaff 1`
 
-Success/Fail Output:
+### Edit Staff: `editstaff`
 
-- Removed staff
-- Error: <Error Message>
+Edits details of the staff with the given ID.
+
+Format: `editstaff <ID> [n/<NAME>] [p/<PHONE>] [e/<EMAIL>] [a/<ADDRESS>] [t/<TAG>]...`
+
+Success output: `Edited person: <NAME>; Phone: <PHONE>; Email: <EMAIL>; Address: <ADDRESS>; [Tags: <TAG>...]`
+
+**Note:** At least one field to edit must be provided in the command. The ID must be a non-negative integer.
+
+Examples:
+
+- `editstaff 1 p/91234567 e/johndoe@example.com`
+- `editstaff 2 n/NewName t/Manager`
 
 ### Locating staff by name: `find`
 
-Finds persons whose names contain any of the given keywords.
+Finds staff whose names contain any of the given keywords.
 
-Format: `find keyword [keywords...]`
+Format: `find KEYWORD [KEYWORDS...]`
 
 - The search is case-insensitive. e.g `hans` will match `Hans`
 - The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
@@ -214,6 +287,8 @@ Format: `find keyword [keywords...]`
 - Persons matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
+Success output: `<Number of persons> persons listed`
+
 Examples:
 
 - `find John` returns `john` and `John Doe`
@@ -221,15 +296,19 @@ Examples:
 
 ### Viewing staff : `view s`
 
-Switches UI to staff tab, which shows the full list of staff
+Switches UI to staff tab, which shows the full list of staff.
 
 Format: `view s` or `view staff`
 
+Success output: `Listed all staff`
+
 ### Viewing overview : `view o`
 
-Switches UI to overview tab, which shows the overview of transactions
+Switches UI to overview tab, which shows the overview of transactions.
 
 Format: `view o` or `view overview`
+
+Success output: `Showed transaction overview`
 
 ### Clearing the output : `clear`
 
@@ -241,49 +320,21 @@ Format: `clear`
 
 Format: `clearstaff`
 
-Removes all entries in the staff list
+Removes all entries in the staff list.
 
 ### Clearing transactions: `cleartransaction`
 
 Format: `cleartransaction`
 
-Removes all entries in the transaction list
+Success output: `Transaction list has been cleared`
 
-### Edit: `edit`
-
-Format: `edit <ID> [ty/<TYPE>] [d/<DESCRIPTION>] [amt/<AMOUNT>] [on/<DATE>] [s/<STAFF_ID>]...`
-
-Edited Transaction: <ID>; TransactionType: <TYPE>; Description: <DESCRIPTION>; Amount: <AMOUNT>; Date: <DATE>; StaffId: <STAFF_ID>
-Error: <Invalid command format! >
-
-**Note:** At least one field to edit must be provided in the command.
-
-Example:
-
-- `edit 1 ty/Income amt/5000`
-- `edit 2 d/NewDescription on/03/10/23`
-
-In the success output, the edited transaction details will be displayed with the modified values. Existing values will be overwritten by the new input values.
-
-### Edit Staff: `editstaff`
-
-Format: `editstaff <ID> [n/<NAME>] [p/<PHONE>] [e/<EMAIL>] [a/<ADDRESS>] [t/<TAG>]...`
-
-Edited Staff: <ID>; Name: <NAME>; Phone: <PHONE>; Email: <EMAIL>; Address: <ADDRESS>; Tag: <TAG>
-Error: <Invalid command format! >
-
-**Note:** At least one field to edit must be provided in the command. The ID must be a non-negative integer.
-
-Example:
-
-- `editstaff 1 p/91234567 e/johndoe@example.com`
-- `editstaff 2 n/NewName t/Manager`
+Removes all entries in the transaction list.
 
 ### Help: `help`
 
-Format: `help`
-
 Opens your browser to show the user guide.
+
+Format: `help`
 
 ### Exiting the program : `exit`
 
@@ -331,17 +382,23 @@ The input field below this with the grey text `Enter command here...` is where y
 ## Command summary
 
 | Action                  | Format, Examples                                                                                                        |
-| ----------------------- | ----------------------------------------------------------------------------------------------------------------------- |
-| **Add transaction**     | `add ty/<type> d/<description> amt/<amount> on/<date> [s/<staff ID>]`                                                   |
-| **Remove transaction**  | `del <id>`                                                                                                              |
-| **Sort transactions**   | `sort [date/<sort type>] [amt/<sort type>]`                                                                             |
-| **Filter transactions** | `filter [ty/<type>] [has/<keywords...>] [after/<date>] [before/<date>] [more/<amount>] [less/<amount>] [by/<staff ID>]` |
+| ----------------------- |-------------------------------------------------------------------------------------------------------------------------|
+| **Add transaction**     | `add ty/<TYPE> d/<DESCRIPTION> a/<AMOUNT> on/<DATE> [s/<STAFF ID>]`                                                     |
+| **Remove transaction**  | `del <ID>`                                                                                                              |
+| **Edit transaction**    | `edit <ID> [ty/<TYPE>] [d/<DESCRIPTION>] [amt/<AMOUNT>] [on/<DATE>] [s/<STAFF_ID>]`                                  |
+| **Sort transactions**   | `sort [date/<SORT TYPE>] [amount/<SORT TYPE>]`                                                                          |
+| **Clear sort rules**    | `clearsort`                                                                                                             |
+| **Filter transactions** | `filter [ty/<TYPE>] [has/<KEYWORDS...>] [after/<DATE>] [before/<DATE>] [more/<AMOUNT>] [less/<AMOUNT>] [by/<STAFF ID>]` |
+| **Clear filter rules**  | `clearfilter`                                                                                                           |
 | **View transaction**    | `view t` or `view transaction`                                                                                          |
-| **Add staff**           | `addstaff n/<name> p/<phone no> e/<email> a/<address> [t/<tag>...]`                                                     |
-| **Remove staff**        | `delstaff <staff ID>`                                                                                                   |
-| **Find staff**          | `find <keyword> [more keywords...]`                                                                                     |
+| **Add staff**           | `addstaff n/<NAME> p/<PHONE> e/<EMAIL> a/<ADDRESS> [t/<TAG>...]`                                                     |
+| **Remove staff**        | `delstaff <STAFF ID>`                                                                                                   |
+| **Edit staff**          | `editstaff <ID> [n/<NAME>] [p/<PHONE>] [e/<EMAIL>] [a/<ADDRESS>] [t/<TAG>]...`                                       |
+| **Find staff**          | `find <KEYWORD> [KEYWORDS...]`                                                                                          |
 | **View staff**          | `view s` or `view staff`                                                                                                |
 | **View overview**       | `view o` or `view overview`                                                                                             |
+| **Clear staff**         | `clearstaff`                                                                                                            |
+| **Clear transaction**   | `cleartransaction`                                                                                                      |
 | **Clear output**        | `clear`                                                                                                                 |
 | **Exit**                | `exit`                                                                                                                  |
 

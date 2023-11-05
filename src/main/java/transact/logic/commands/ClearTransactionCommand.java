@@ -12,7 +12,7 @@ import transact.ui.MainWindow.TabWindow;
 public class ClearTransactionCommand extends Command {
 
     public static final String COMMAND_WORD = "cleartransaction";
-    public static final String MESSAGE_SUCCESS = "Transaction list has been cleared!";
+    public static final String MESSAGE_SUCCESS = "Transaction list has been cleared";
 
     @Override
     public CommandResult execute(Model model) {

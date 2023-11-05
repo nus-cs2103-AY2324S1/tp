@@ -18,11 +18,11 @@ public class DeleteStaffCommand extends Command {
     public static final String COMMAND_WORD = "delstaff";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the person identified by their unqiue id displayed in the person list.\n"
+            + ": Deletes the person identified by their unique id displayed in the person list.\n"
             + "Parameters: ID (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
+    public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted person: %1$s";
     public static final String MESSAGE_DELETE_PERSON_FAILURE = "Cannot find person with id: %d";
     private final Integer personId;
 
