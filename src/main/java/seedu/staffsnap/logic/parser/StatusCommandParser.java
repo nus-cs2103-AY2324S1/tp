@@ -2,6 +2,7 @@ package seedu.staffsnap.logic.parser;
 
 import static seedu.staffsnap.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_STATUS;
+import static seedu.staffsnap.logic.parser.ParserUtil.arePrefixesPresent;
 
 import seedu.staffsnap.commons.core.index.Index;
 import seedu.staffsnap.logic.commands.StatusCommand;
@@ -20,12 +21,13 @@ public class StatusCommandParser implements Parser<StatusCommand> {
      */
     public StatusCommand parse(String args) throws ParseException {
         String trimmedArgs = args.trim();
-        if (trimmedArgs.isEmpty()) {
+        ArgumentMultimap argMultimap =
+                ArgumentTokenizer.tokenize(args, PREFIX_STATUS);
+
+        if (trimmedArgs.isEmpty() || !arePrefixesPresent(argMultimap, PREFIX_STATUS)) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, StatusCommand.MESSAGE_USAGE));
         }
-        ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_STATUS);
 
         Index index = null;
         Status status = null;
@@ -38,7 +40,7 @@ public class StatusCommandParser implements Parser<StatusCommand> {
             status = ParserUtil.parseStatus(argMultimap.getValue(PREFIX_STATUS).get());
         }
         if (status == null) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, StatusCommand.MESSAGE_NO_STATUS));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, Status.MESSAGE_CONSTRAINTS));
         }
         return new StatusCommand(index, status);
     }
