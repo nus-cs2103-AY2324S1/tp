@@ -19,23 +19,22 @@ public class DeleteMemberTaskCommandParser implements Parser<DeleteMemberTaskCom
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_TASK);
 
+        if (argMultimap.getValue(PREFIX_TASK).isEmpty() || argMultimap.getPreamble().isEmpty()) {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteMemberTaskCommand.MESSAGE_USAGE));
+        }
+
         Index memberIndex;
-        Index taskIndex;
 
         try {
             memberIndex = ParserUtil.parseIndex(argMultimap.getPreamble());
-
-            if (argMultimap.getValue(PREFIX_TASK).isEmpty()) {
-                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                        DeleteMemberTaskCommand.MESSAGE_USAGE));
-            }
-            taskIndex = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_TASK).get());
-
         } catch (ParseException pe) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     DeleteMemberTaskCommand.MESSAGE_USAGE), pe);
         }
 
-        return new DeleteMemberTaskCommand(memberIndex, taskIndex);
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_TASK);
+
+        return new DeleteMemberTaskCommand(memberIndex, ParserUtil.parseIndex(argMultimap.getValue(PREFIX_TASK).get()));
     }
 }

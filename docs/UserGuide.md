@@ -1,24 +1,23 @@
 ---
 layout: page
-title: User Guide
+title: ClubMemberContacts User Guide
 ---
 
-# ClubMemberContacts
+ClubMembersContacts (CMC) is an application designed to empower EXCO members of the School of Computing's CCAs in
+efficiently managing the contacts of their members and applicants.
 
-ClubMembersContacts (CMC) is an application designed to empower EXCO members of the School of Computing's CCAs in 
-efficiently managing the contacts of their members and applicants. 
-
-In the fast-paced world of CCA leadership, time is a precious resource, and effective contact management is crucial. 
-ClubMembersContacts has been tailored to cater to your specific needs, ensuring that you can streamline your 
+In the fast-paced world of CCA leadership, time is a precious resource, and effective contact management is crucial.
+ClubMembersContacts has been tailored to cater to your specific needs, ensuring that you can streamline your
 contact-related responsibilities seamlessly. It provides a swift and convenient yet powerful
-solution through a Command Line Interface (CLI) aimed at optimizing the speed and effectiveness of your contact 
-management tasks. 
+solution through a Command Line Interface (CLI) aimed at optimizing the speed and effectiveness of your contact
+management tasks.
 
 Here are some possible ways you can integrate CMC into your CCA:
+
 - You can add tags to different members to delegate them roles, or any additional information.
 - You can track tasks assigned to each member to track their completion.
 - You can schedule interview times with your applicants.
-- You can find members or applicants easily through the `find` commands. 
+- You can find members or applicants easily through the `find` commands.
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 If this is your first time using CMC, head over to [How to use CMC's User Guide](#1-how-to-use-cmcs-user-guide)
@@ -26,48 +25,53 @@ to start keeping track of all your members and applicants!
 </div>
 
 --------------------------------------------------------------------------------------------------------------------
+
 ## Table of Contents
+
 <!-- TOC -->
-* [ClubMemberContacts](#clubmembercontacts)
-  * [1. How to Use CMC's User Guide](#1-how-to-use-cmcs-user-guide)
-  * [2. Quick start](#2-quick-start)
-  * [3. Interface Walkthrough](#3-interface-walkthrough)
-  * [4. Features](#4-features)
+
+* [1. How to Use CMC's User Guide](#1-how-to-use-cmcs-user-guide)
+* [2. Quick start](#2-quick-start)
+* [3. Interface Walkthrough](#3-interface-walkthrough)
+* [4. Features](#4-features)
     * [4.1 Member Features](#41-member-features)
-      * [4.1.1 Adding a member : `addMember`](#411-adding-a-member--addmember)
-      * [4.1.2 Finding member(s) : `findMember` or `findm`](#412-finding-member--s---findmember-or-findm)
-      * [4.1.3 Viewing member(s) : `viewMembers` or `viewm`](#413-viewing-member--s---viewmember-or-viewm)
-      * [4.1.4 Editing a member : `editMember` or `editm`](#414-editing-a-member--editmember-or-editm)
-      * [4.1.5 Deleting a member : `deleteMember` or `delm`](#415-deleting-a-member--deletemember-or-delm)
-      * [4.1.6 Allocating a task to a member : `addTask` or `addt`](#416-allocating-a-task-to-a-member--addtask-or-addt)
-      * [4.1.7 Viewing all tasks allocated to a member : `viewTask` or `viewt`](#417-viewing-all-tasks-allocated-to-a-member--viewtask-or-viewt)
-      * [4.1.8 Deleting a task allocated to a member : `deleteTask` or `delt`](#418-deleting-a-task-allocated-to-a-member--deletetask-or-delt)
+        * [4.1.1 Adding a member: `addMember`](#411-adding-a-member--addmember)
+        * [4.1.2 Finding members: `findMember` or `findm`](#412-finding-members--findmember-or-findm)
+        * [4.1.3 Viewing members: `viewMembers` or `viewm`](#413-viewing-members--viewmembers-or-viewm)
+        * [4.1.4 Editing a member: `editMember` or `editm`](#414-editing-a-member--editmember-or-editm)
+        * [4.1.5 Deleting a member: `deleteMember` or `delm`](#415-deleting-a-member--deletemember-or-delm)
+        * [4.1.6 Copying a member's details: `copyMember` or `cpm`](#416-copying-a-members-details--copymember-or-cpm)
+        * [4.1.6 Allocating a task to a member: `addTask` or `addt`](#417-allocating-a-task-to-a-member--addtask-or-addt)
+        * [4.1.7 Viewing all tasks allocated to a member: `viewTask` or `viewt`](#418-viewing-all-tasks-allocated-to-a-member--viewtask-or-viewt)
+        * [4.1.8 Deleting a task allocated to a member: `deleteTask` or `delt`](#419-deleting-a-task-allocated-to-a-member--deletetask-or-delt)
     * [4.2 Applicant Features](#42-applicant-features)
-      * [4.2.1 Adding an applicant : `addApplicant` or `adda`](#421-adding-an-applicant--addapplicant-or-adda)
-      * [4.2.2 Finding applicant(s) : `findApplicant` or `finda`](#422-finding-applicant--s---findapplicant-or-finda)
-      * [4.2.3 Viewing applicant(s) : `viewApplicants` or `viewa`](#423-viewing-applicant--s---viewapplicants-or-viewa)
-      * [4.2.4 Editing an applicant : `editApplicant` or `edita`](#424-editing-an-applicant--editapplicant-or-edita)
-      * [4.2.5 Deleting an applicant : `deleteApplicant` or `dela`](#425-deleting-an-applicant--deleteapplicant-or-dela)
-      * [4.2.6 Copying an applicant's details : `copyApplicant` or `cpa`](#426-copying-a-applicants-details--copyapplicant-or-cpa)
+        * [4.2.1 Adding an applicant: `addApplicant` or `adda`](#421-adding-an-applicant--addapplicant-or-adda)
+        * [4.2.2 Finding applicants: `findApplicant` or `finda`](#422-finding-applicants--findapplicant-or-finda)
+        * [4.2.3 Viewing applicants: `viewApplicants` or `viewa`](#423-viewing-applicants--viewapplicants-or-viewa)
+        * [4.2.4 Editing an applicant: `editApplicant` or `edita`](#424-editing-an-applicant--editapplicant-or-edita)
+        * [4.2.5 Deleting an applicant: `deleteApplicant` or `dela`](#425-deleting-an-applicant--deleteapplicant-or-dela)
+        * [4.2.6 Copying an applicant's details: `copyApplicant` or `cpa`](#426-copying-a-applicants-details--copyapplicant-or-cpa)
     * [4.3 General Features](#43-general-features)
-      * [4.3.1 Accessing the user guide : `help`](#431-accessing-the-user-guide--help)
-      * [4.3.2 Exiting the application : `exit`](#432-exiting-the-application--exit)
-  * [5. FAQ](#5-faq)
-  * [6. Command summary](#6-command-summary)
+        * [4.3.1 Accessing the user guide: `help`](#431-accessing-the-user-guide--help)
+        * [4.3.2 Exiting the application: `exit`](#432-exiting-the-application--exit)
+* [5. FAQ](#5-faq)
+* [6. Command summary](#6-command-summary)
+
 <!-- TOC -->
 --------------------------------------------------------------------------------------------------------------------
 
 ## 1. How to Use CMC's User Guide
-Thank you for choosing to use CMC. We are sure that CMC will be your trusty companion throughout your 
+
+Thank you for choosing to use CMC. We are sure that CMC will be your trusty companion throughout your
 management journey. This user guide will provide you a comprehensive documentation of CMC's features.
 
 If you are a first time user of CMC, make sure you have already downloaded the application. Head over to
 [Quick Start](#2-quick-start) to learn how to install the application.
 
-If you would like to have a brief introduction of the application's interface, 
+If you would like to have a brief introduction of the application's interface,
 head over to our [Interface Walkthrough](#3-interface-walkthrough) to better learn about CMC.
 
-If you are already a seasoned user of CMC, you can refer to [Command Summary](#command-summary) for a 
+If you are already a seasoned user of CMC, you can refer to [Command Summary](#6-command-summary) for a
 quick reference to all the commands available in CMC.
 
 ## 2. Quick start
@@ -85,49 +89,52 @@ quick reference to all the commands available in CMC.
 5. Type the command in the command box and press Enter to execute it.
    Here are some example commands you can try:
 
-   - `help` : Opens up the help window.
-   - `addm /name Alicia Teng /phone 91126291 /email alicia_teng@gmail.com /tele @alicia_teng` : Adds a member named `Alicia Teng` to the member list. See how to [add applicant](#add-memberapplicant) for more.
-   - `adda /name Chan Rui Jia /phone 97777117 /interview 10/12/2023 1400` : Adds an applicant named `Chan Rui Jia` to the list. See how to [add member](#411-adding-a-member--addmember) for more.
-   - `deltm 1` : Deletes the member at the 1st position on the member list.
-   - `finda Win Sheng` : Searches for all applicants with `Win Sheng` in their contact details. See how to [find an applicant](#412-finding-member--s---findmember-or-findm) for more.
-   - `editm 1 /tag Design` : Edits the tag of the member at the 3rd position on the member list. See how to [edit a member](#414-editing-a-member--editmember-or-editm) for more.
-   - `exit` : Exits the application.
+    - `help`: Opens up the help window.
+    - `addm /name Alicia Teng /phone 91126291 /email alicia_teng@gmail.com /tele @alicia_teng`: Adds a member
+      named `Alicia Teng` to the member list. See how to [add applicant](#421-adding-an-applicant--addapplicant-or-adda)
+      for more.
+    - `adda /name Chan Rui Jia /phone 97777117 /interview 10/12/2023 1400`: Adds an applicant named `Chan Rui Jia` to
+      the list. See how to [add member](#411-adding-a-member--addmember) for more.
+    - `deltm 1`: Deletes the member at the 1st position on the member list.
+    - `finda Win Sheng`: Searches for all applicants with `Win Sheng` in their contact details. See how
+      to [find an applicant](#412-finding-members--findmember-or-findm) for more.
+    - `editm 1 /tag Design`: Edits the tag of the member at the 3rd position on the member list. See how
+      to [edit a member](#414-editing-a-member--editmember-or-editm) for more.
+    - `exit`: Exits the application.
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-Follow each step in order to see how a normal workflow would feel like with CMC!
-</div>
+    <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+    Follow each step in order to see how a normal workflow would feel like with CMC!
+    </div>
+
+6. Refer to the [Features](#4-features) below for details of each command.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **CAUTION:**
 If you are using a PDF version of this User Guide, be careful when copy-pasting the commands that span beyond several lines. 
 </div>
-
-6. Refer to the [Features](#4-features) below for details of each command.
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## 3. Interface Walkthrough
 
-This is the expected interface of the GUI when you launch CMC. Please note that this application has been populated 
+This is the expected interface of the GUI when you launch CMC. Please note that this application has been populated
 with sample data.
 
 The key windows are labeled as follows:
 
 1. File button: Opens an option to exit the application.
-2. Help button: Opens a menu witha link to the User Guide.
+2. Help button: Opens a menu with a link to the User Guide.
 3. Command Box: Enter your command here.
 4. Result Display: Displays the result of your command.
-5. Tag Display: Shows all the tags assigned thus far.
+5. Tag Display: Shows all the tags assigned to all members thus far.
 6. Member List Display: Displays a list of all the members and their contact information.
 7. Task List Display: Displays the task list assigned to a specific member.
 8. Applicant List Display: Displays a list of all the applicants and their contact information.
 
 ![Interface](images/Interface_Guide.png)
 
-The "Help" window will look like as follows :
+The "Help" window will look like as follows:
 ![Help_Window](images/helpMessage.png)
 
 --------------------------------------------------------------------------------------------------------------------
-
 
 ## 4. Features
 
@@ -135,38 +142,30 @@ This section of the User Guide will explain about each feature in detail.
 
 <div markdown="span" class="alert alert-primary">
 
-:information_source: **Notes about the input parameter:**  
+:information_source: **Notes about the inputs:**
 
-- Many of the commands below have _aliases_, or short-form versions that make them easier to type.  
-For example, the command `addMember` can be typed as `addm`. Usages of the aliases are documented below alongside the full command word, and all aliases can be used interchangeably with the full command word.
-  
-  
-
-- Words in UPPER_CASE are input parameters that you need to provide for that specific field.  
-For example, in `addm /name NAME`, `NAME` would be the input parameter for the member's name.
-  
-  
-
-- Fields in square brackets `[ ]` are optional fields.
-  
-  
-
-- Parameters can be in any order.  
-For example, `adda /name Taylor Swift /phone 91961969` and `adda /phone 91691969 /name Taylor Swift` will result in the same applicant added.
-   
-  
-  
-- Items with … after them can be used multiple times including zero times.  
-For example, [tag/TAG]… can be used as (i.e. 0 times), tag/SWE, tag/UIUX tag/Product etc.
+* Commands are **case-insensitive**.
+* Many of the commands below have _aliases_, or short-form versions that make them easier to type.  
+  For example, the command `addMember` can be typed as `addm`. Usages of the aliases are documented below alongside the
+  full command word, and all aliases can be used interchangeably with the full command word.
+* Words in UPPER_CASE are input parameters that you need to provide for that specific field.  
+  For example, in `addm /name NAME`, `NAME` would be the input parameter for the member's name.
+* Fields in square brackets `[ ]` are optional fields.
+* Parameters can be in any order.  
+  For example, `adda /name Taylor Swift /phone 91961969` and `adda /phone 91691969 /name Taylor Swift` will result in
+  the same applicant added.
+* Items with … after them can be used multiple times including zero times.  
+  For example, [tag/TAG]… can be used as (i.e. 0 times), tag/SWE, tag/UIUX tag/Product etc.
 
 </div>
 
 ### 4.1 Member Features
+
 These are all the features in regard to a member in CMC.
 
-#### 4.1.1 Adding a member : `addMember` 
+#### 4.1.1 Adding a member: `addMember`
 
-Adds a member to the list of members in CMC. 
+Adds a member to the list of members in CMC.
 
 - Use `addMember` or `addm` to use add a member
 - Use `addApplicant` or `adda` to use add an applicant
@@ -197,11 +196,12 @@ Adds a member to the list of members in CMC.
 For a more efficient experience, use addm instead of addMember!
 </div>
 
-#### 4.1.2 Finding member(s) : `findMember` or `findm`
+#### 4.1.2 Finding members: `findMember` or `findm`
 
 Find and generate a list of all existing member(s) whose information contain any of the specified keyword(s).
 
-##### Format :
+##### Format:
+
 `findMember KEYWORD...`  
 `findm KEYWORD...`
 
@@ -212,7 +212,7 @@ Find and generate a list of all existing member(s) whose information contain any
 ##### Example of usage:
 
 - `findMember Alicia` or `findm Alicia`  
-This generates a list of all members whose details contain `Alicia`.
+  This generates a list of all members whose details contain `Alicia`.
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 For a more efficient experience, use `findm` instead of `findMember`!
@@ -225,25 +225,26 @@ You may check out the command [here](#413-viewing-members--s---viewmembers-or-vi
 
 ![Find_Member](images/findMember.png)
 
+#### 4.1.3 Viewing members: `viewMembers` or `viewm`
 
-#### 4.1.3 Viewing member(s) : `viewMember` or `viewm`
+Generates a list of all existing member(s). An example of where you might want to use this command is if
+you want to go back to viewing all members after a search
+with [`findMember`](#412-finding-members--findmember-or-findm).
 
-Generates a list of all existing member(s)/applicant(s). An example of where you might want to use this command is if
-you want to go back to viewing all members after a search with `findMember`.
-
-#### Usage:
+##### Usage:
 
 `viewMembers`
-
 `viewm`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 For a more efficient experience, use `viewm` instead of `viewMembers`!
 </div>
 
-#### 4.1.4 Editing a member : `editMember` or `editm`
+![View_Member](images/viewMember.png)
 
-#### 4.1.5 Deleting a member : `deleteMember` or `delm`
+#### 4.1.4 Editing a member: `editMember` or `editm`
+
+#### 4.1.5 Deleting a member: `deleteMember` or `delm`
 
 The member at the specified index will be deleted from the members list.
 
@@ -281,21 +282,49 @@ The member index provided is invalid
 The member index provided is invalid
 ```
 
-#### 4.1.6 Allocating a task to a member : `addTask` or `addt`
+#### 4.1.6 Copying a member's details: `copyMember` or `cpm`
 
-#### 4.1.7 Viewing all tasks allocated to a member : `viewTask` or `viewt`
+Copies the details of the member at the specified index to the clipboard.
 
-#### 4.1.8 Deleting a task allocated to a member : `deleteTask` or `delt`
+##### Usage:
+
+`copyMember {index}`
+`cpm {index}`
+
+<div markdown="span" class="alert alert-primary">
+
+:information_source: **Notes about input parameter:** The input parameter will only take positive integers.
+If the index is negative or 0, or the member does not exist in the list, this command will throw an error.
+</div>
+
+##### Example of usage:
+
+`copyMember 1` or `cpm 1`: This copies the details of the member at index 1 to the clipboard.
+
+{Image here}
+
+The copied details will be as follows:
+
+```
+PLACEHOLDER
+```
+
+#### 4.1.7 Allocating a task to a member: `addTask` or `addt`
+
+#### 4.1.8 Viewing all tasks allocated to a member: `viewTask` or `viewt`
+
+#### 4.1.9 Deleting a task allocated to a member: `deleteTask` or `delt`
 
 ### 4.2 Applicant Features
 
-#### 4.2.1 Adding an applicant : `addApplicant` or `adda`
+#### 4.2.1 Adding an applicant: `addApplicant` or `adda`
 
-#### 4.2.2 Finding applicant(s) : `findApplicant` or `finda`
+#### 4.2.2 Finding applicants: `findApplicant` or `finda`
 
 Find and generate a list of all existing applicants(s) whose information contain any of the specified keyword(s).
 
-##### Format :
+##### Format:
+
 `findApplicant KEYWORD...`  
 `finda KEYWORD...`
 
@@ -308,7 +337,7 @@ Find and generate a list of all existing applicants(s) whose information contain
 - `findApplicant Rui` or `finda Rui`  
   This generates a list of all members whose details contain `Rui`.
 
-![Find_Applicant](images/findApplicant.png)  
+![Find_Applicant](images/findApplicant.png)
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 For a more efficient experience, use `finda` instead of `findApplicant`!
 </div>
@@ -318,9 +347,24 @@ If you would like to go back to the whole list of members, use `viewa`.
 You may check out the command [here](#423-viewing-applicants--s---viewapplicants-or-viewa)
 </div>
 
-#### 4.2.3 Viewing applicant(s) : `viewApplicants` or `viewa`
+#### 4.2.3 Viewing applicants: `viewApplicants` or `viewa`
 
-#### 4.2.4 Editing an applicant : `editApplicant` or `edita`
+Generates a list of all existing applicant(s). An example of where you might want to use this command is if
+you want to go back to viewing all members after a search
+with [`findApplicant`](#422-finding-applicants--findapplicant-or-finda).
+
+##### Usage:
+
+`viewApplicants`
+`viewa`
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+For a more efficient experience, use `viewa` instead of `viewApplicants`!
+</div>
+
+![View_Applicant](images/viewApplicants.png)
+
+#### 4.2.4 Editing an applicant: `editApplicant` or `edita`
 
 The applicant at the specified index will have its specified fields edited. At least 1 field to be specified, not all
 fields have to be specified.
@@ -336,7 +380,7 @@ fields have to be specified.
 - `index`: Only numbers are allowed, starting from 1
 - `applicantName`: Only alphabetical characters, @, () are allowed
 - `phoneNumber`: Only numbers are allowed
-- `interviewTime` : Only dates in the format of "DD/MM/YYYY HhMm" are allowed. To remove an interview time from an
+- `interviewTime`: Only dates in the format of "DD/MM/YYYY HhMm" are allowed. To remove an interview time from an
   applicant, 'cancel' is also allowed.
 
 #### Example of usage:
@@ -370,10 +414,12 @@ Interview time should be in the format of DD/MM/YYYY HHmm.
 To cancel the interview, enter 'cancel' (case sensitive)
 ```
 
-####  4.2.5 Deleting an applicant : `deleteApplicant` or `dela`
+#### 4.2.5 Deleting an applicant: `deleteApplicant` or `dela`
+
 The applicant at the specified index will be deleted from the applicant list.
 
-##### Format :  
+##### Format:
+
 `deleteApplicant INDEX`  
 `dela INDEX`
 
@@ -384,75 +430,59 @@ the addMember command. **Proceed with caution!**
 
 <div markdown="span" class="alert alert-primary">
 
-:information_source: **Notes about input parameter:** The input parameter will only take positive integers. 
+:information_source: **Notes about input parameter:** The input parameter will only take positive integers.
 If the index is negative or 0, or the applicant does not exist in the list, this command will throw an error.
 </div>
 
 ##### Example of usage:
 
 - `deleteApplicant 3` or `dela 3`
-This deletes the applicant at index 1 in the applicant list.
+  This deletes the applicant at index 1 in the applicant list.
 
-![Delete_Applicant](images/deleteApplicant.png)  
+![Delete_Applicant](images/deleteApplicant.png)
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 For a more efficient experience, use `dela` instead of `deleteApplicant`!
 </div>
 
-#### 4.2.6 Copying a applicant's details : `copyApplicant` or `cpa`
+#### 4.2.6 Copying a applicant's details: `copyApplicant` or `cpa`
 
-Copies the details of the member/applicant at the specified index to the clipboard.
+Copies the details of the applicant at the specified index to the clipboard.
 
-#### Usage:
-
-##### Copying member:
-
-`copyMember {index}`
-
-`cpm {index}`
-
-##### Copying applicant:
+##### Usage:
 
 `copyApplicant {index}`
-
 `cpa {index}`
 
-#### Acceptable values for parameters:
+<div markdown="span" class="alert alert-primary">
 
-- `index`: Only numbers are allowed, starting from 1
+:information_source: **Notes about input parameter:** The input parameter will only take positive integers.
+If the index is negative or 0, or the applicant does not exist in the list, this command will throw an error.
+</div>
 
-#### Example of usage:
+##### Example of usage:
 
-`copyMember 1`
+`copyApplicant 1` or `cpa 1`: This copies the details of the applicant at index 1 to the clipboard.
 
-`cpm 1`
+{Image here}
 
-#### Expected Outcome:
-
-```
-Copied details of member to clipboard:
-Name: Alex Yeoh
-Phone: 87438807
-Email: alexyeoh@example.com
-Telegram: @alexyeoh
-Tags: [Friend]
-Tasks: [Finish Proposal]
-```
-
-#### If index is out of range:
+The copied details will be as follows:
 
 ```
-The member index provided is invalid
+PLACEHOLDER
 ```
 
 ### 4.3 General Features
-#### 4.3.1 Accessing the user guide : `help`
-Opens a window with a link to the user guide. 
+
+#### 4.3.1 Accessing the user guide: `help`
+
+Opens a window with a link to the user guide.
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 This window can also be opened from accessing the `Help` button.  
 Checkout the [Interface Walkthrough](#3-interface-walkthrough) to locate where the button is.
 </div>
 
-#### 4.3.2 Exiting the application : `exit`
+#### 4.3.2 Exiting the application: `exit`
+
 Exits the application.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **CAUTION:**
@@ -463,10 +493,12 @@ There will be no prompt to confirm this action.
 
 Q: How do I see tasks of a different member?  
 A: You have to use the `viewt` or `viewTask` method to view the tasks allocated to another member.  
-For example, if your window is currently on another member's task, use `viewt 3` to view the tasks of the member at index 3.
+For example, if your window is currently on another member's task, use `viewt 3` to view the tasks of the member at
+index 3.
 
 Q: How do I transfer my data to another person or computer?  
-A: This application saves the data of your applicants and members in the ./data/addressbook.json file. You can send the file to the other
+A: This application saves the data of your applicants and members in the ./data/addressbook.json file. You can send the
+file to the other
 person or computer, and overwrite the empty addressbook.json with addressbook.json file of your choice.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **CAUTION:**
