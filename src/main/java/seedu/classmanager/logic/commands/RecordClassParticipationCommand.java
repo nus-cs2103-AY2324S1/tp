@@ -4,7 +4,6 @@ import static java.util.Objects.requireNonNull;
 import static seedu.classmanager.logic.parser.CliSyntax.PREFIX_PARTICIPATION;
 import static seedu.classmanager.logic.parser.CliSyntax.PREFIX_STUDENT_NUMBER;
 import static seedu.classmanager.logic.parser.CliSyntax.PREFIX_TUTORIAL_INDEX;
-import static seedu.classmanager.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
 
 import seedu.classmanager.commons.core.index.Index;
 import seedu.classmanager.commons.util.ToStringBuilder;

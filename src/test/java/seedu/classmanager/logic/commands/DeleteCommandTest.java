@@ -102,8 +102,6 @@ public class DeleteCommandTest {
         DeleteCommand deleteCommand = new DeleteCommand(studentToDelete.getStudentNumber());
         Model expectedModel = new ModelManager(model.getClassManager(), new UserPrefs());
 
-        showStudentAtIndex(model, INDEX_SECOND_STUDENT);
-        studentToDelete = model.getFilteredStudentList().get(INDEX_FIRST_STUDENT.getZeroBased());
         expectedModel.deleteStudent(studentToDelete);
         expectedModel.commitClassManager();
 

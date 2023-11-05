@@ -2,7 +2,6 @@ package seedu.classmanager.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.classmanager.logic.parser.CliSyntax.PREFIX_TUTORIAL_INDEX;
-import static seedu.classmanager.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
 
 import java.util.List;
 

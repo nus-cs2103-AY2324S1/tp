@@ -4,7 +4,6 @@
 package seedu.classmanager.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.classmanager.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
 
 import seedu.classmanager.logic.CommandHistory;
 import seedu.classmanager.logic.commands.exceptions.CommandException;

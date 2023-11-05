@@ -6,7 +6,6 @@ import static seedu.classmanager.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.classmanager.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.classmanager.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.classmanager.logic.parser.CliSyntax.PREFIX_STUDENT_NUMBER;
-import static seedu.classmanager.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
 
 import java.util.Collections;
 import java.util.HashSet;

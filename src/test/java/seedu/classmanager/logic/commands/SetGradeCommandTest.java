@@ -73,7 +73,6 @@ public class SetGradeCommandTest {
         showStudentAtIndex(expectedModel, INDEX_FIRST_STUDENT);
         expectedModel.setStudent(model.getStudent(editedStudent.getStudentNumber()), editedStudent);
         expectedModel.setSelectedStudent(editedStudent);
-        expectedModel.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
         expectedModel.commitClassManager();
 
         assertCommandSuccess(setGradeCommand, model, expectedMessage, expectedModel, commandHistory);
