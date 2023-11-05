@@ -156,9 +156,10 @@ Expected outputs when command fails:
 Deletes the specified patient or an optional fields of the patient from HealthSync.
 
 * Deletes the patient or an optional field of the patient with the specified `n/NAME or id/IC_NUMBER`.
-* The name or IC must be valid.
+* You can choose to delete using only name or IC.
+* If both name and IC are used, both must be valid and belong to the same person.
+* You can only delete one patient at a time.
 * To delete a specified field only instead of the entire patient, we indicate the field after the identification.
-* If multiple people has the same name, HealthSync will display a list of people with that name together with their IC number.
 
 Format: `delete n/NAME or id/IC_NUMBER [field]`
 
@@ -169,7 +170,8 @@ Example commands:
 * `delete n/Alex Yeoh`
 * `delete n/John Doe m/`
 
->:bulb: Specify the medical history to be deleted using `m/` if it's only the medical history data that is to be deleted
+>:bulb: Specify the medical history to be deleted using `m/` if it's only the medical history data that is to be deleted  
+e.g `delete n/John Doe m/Diabetes`
 
 ![result for 'delete n/Alex Yeoh'](images/deleteResult.jpg)
 
@@ -574,7 +576,7 @@ JavaScript Object Notation. This is the file format used by HealthSync to save a
 | **List**       | `ls`     | `list`                                                                                                                                         |
 | **Add**        | `a`      | `add n/NAME id/IC_NUMBER [field] ...` <br> e.g., `add n/James Ho id/SXXXX123D p/91234567 a/A Estate, Clementi Rd, 1234665 e/james@example.com` |
 | **Edit**       | `e`      | `edit n/NAME [field]` *or* `edit id/IC_NUMBER [field] ... `<br> e.g.,`edit n/James Lee e/jameslee@example.com`                                 |
-| **Delete**     | `d`      | `delete n/NAME`                                                                                                                                |
+| **Delete**     | `d`      | `delete NAME [field]` *or* `delete id/IC_NUMBER [field] ...` <br> e.g., `delete n/Alex Yeoh m/Diabetes`                                                                                                           |
 | **Clear**      | `c`      | `clear`                                                                                                                                        |
 | **Find**       | `f`      | `find n/NAME [field]` *or* `find id/IC_NUMBER [field]`<br> e.g., `find n/James Jake` *or* `find id/T0123436F`                                  |
 | **Log**        | `l`      | `log`                                                                                                                                          |
