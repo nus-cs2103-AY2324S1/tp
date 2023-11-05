@@ -46,7 +46,6 @@ public class UniqueScheduleList implements Iterable<Schedule> {
             throw new DuplicateScheduleException();
         }
         internalList.add(toAdd);
-        sort();
     }
 
     /**
@@ -67,7 +66,6 @@ public class UniqueScheduleList implements Iterable<Schedule> {
         }
 
         internalList.set(index, editedSchedule);
-        sort();
     }
 
     /**
@@ -89,7 +87,6 @@ public class UniqueScheduleList implements Iterable<Schedule> {
     public void setSchedules(UniqueScheduleList replacement) {
         requireNonNull(replacement);
         internalList.setAll(replacement.internalList);
-        sort();
     }
 
     /**
@@ -103,7 +100,6 @@ public class UniqueScheduleList implements Iterable<Schedule> {
         }
 
         internalList.setAll(schedules);
-        sort();
     }
 
     /**
