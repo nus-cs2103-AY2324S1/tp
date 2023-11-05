@@ -1,5 +1,6 @@
 package seedu.address.logic.parser;
 
+import static seedu.address.logic.Messages.MESSAGE_INVALID_FIELDS;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_INDEX_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_MISSING_INDEX;
 import static seedu.address.logic.commands.CommandTestUtil.END_DESC_MEETING1;
@@ -79,7 +80,7 @@ public class EditMeetingCommandParserTest {
 
         // invalid prefix being parsed as preamble
         assertParseFailure(parser, "1 i/ nonono",
-                MESSAGE_INVALID_INDEX_FORMAT + "\n" + EditMeetingCommand.MESSAGE_USAGE);
+                MESSAGE_INVALID_FIELDS + "\n" + EditMeetingCommand.MESSAGE_USAGE);
     }
 
     @Test

@@ -3,6 +3,7 @@ package seedu.address.logic.parser;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_FIELDS;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.parser.ParserUtil.FORMAT;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -76,7 +77,9 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_clear() throws Exception {
         assertTrue(parser.parseCommand(ClearCommand.COMMAND_WORD) instanceof ClearCommand);
-        assertTrue(parser.parseCommand(ClearCommand.COMMAND_WORD + " 3") instanceof ClearCommand);
+
+        assertThrows(ParseException.class, MESSAGE_INVALID_FIELDS,
+                () -> parser.parseCommand(ClearCommand.COMMAND_WORD + " 3"));
     }
 
     @Test
@@ -109,7 +112,9 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_exit() throws Exception {
         assertTrue(parser.parseCommand(ExitCommand.COMMAND_WORD) instanceof ExitCommand);
-        assertTrue(parser.parseCommand(ExitCommand.COMMAND_WORD + " 3") instanceof ExitCommand);
+
+        assertThrows(ParseException.class, MESSAGE_INVALID_FIELDS,
+                () -> parser.parseCommand(ExitCommand.COMMAND_WORD + " 3"));
     }
 
     @Test
@@ -118,7 +123,7 @@ public class AddressBookParserTest {
         FindCommand command = (FindCommand) parser
                 .parseCommand(FindCommand.COMMAND_WORD + " n/Alice p/913 e/gmail lc/20.09.2023 1000 s/Active t/friend");
         assertEquals(new FindCommand(
-                preparePersonPredicate(new String[]{"Alice", "913", "gmail", "Active", "friend"}, lastContacted)),
+                preparePersonPredicate(new String[] { "Alice", "913", "gmail", "Active", "friend" }, lastContacted)),
                 command);
     }
 
@@ -126,30 +131,36 @@ public class AddressBookParserTest {
     public void parseCommand_findm() throws Exception {
         LocalDateTime start = LocalDateTime.parse("20.09.2023 1000", FORMAT);
         LocalDateTime end = LocalDateTime.parse("20.09.2023 1200", FORMAT);
-        FindMeetingCommand command = (FindMeetingCommand) parser
-                .parseCommand(FindMeetingCommand.COMMAND_WORD
-                        + " m/CS2103T a/Zoom s/20.09.2023 1000 e/20.09.2023 1200 n/Alice Bob t/friend");
-        assertEquals(new FindMeetingCommand(
-                prepareMeetingPredicate(new String[] {"CS2103T", "Zoom", "Alice Bob", "friend"}, start, end)),
+        FindMeetingCommand command = (FindMeetingCommand) parser.parseCommand(FindMeetingCommand.COMMAND_WORD
+                + " m/CS2103T a/Zoom s/20.09.2023 1000 e/20.09.2023 1200 n/Alice Bob t/friend");
+        assertEquals(
+                new FindMeetingCommand(
+                        prepareMeetingPredicate(new String[] { "CS2103T", "Zoom", "Alice Bob", "friend" }, start, end)),
                 command);
     }
 
     @Test
     public void parseCommand_help() throws Exception {
         assertTrue(parser.parseCommand(HelpCommand.COMMAND_WORD) instanceof HelpCommand);
-        assertTrue(parser.parseCommand(HelpCommand.COMMAND_WORD + " 3") instanceof HelpCommand);
+
+        assertThrows(ParseException.class, MESSAGE_INVALID_FIELDS,
+                () -> parser.parseCommand(HelpCommand.COMMAND_WORD + " 3"));
     }
 
     @Test
     public void parseCommand_listc() throws Exception {
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD) instanceof ListCommand);
-        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " 3") instanceof ListCommand);
+
+        assertThrows(ParseException.class, MESSAGE_INVALID_FIELDS,
+                () -> parser.parseCommand(ListCommand.COMMAND_WORD + " 3"));
     }
 
     @Test
     public void parseCommand_listm() throws Exception {
         assertTrue(parser.parseCommand(ListMeetingCommand.COMMAND_WORD) instanceof ListMeetingCommand);
-        assertTrue(parser.parseCommand(ListMeetingCommand.COMMAND_WORD + " 3") instanceof ListMeetingCommand);
+
+        assertThrows(ParseException.class, MESSAGE_INVALID_FIELDS,
+                () -> parser.parseCommand(ListMeetingCommand.COMMAND_WORD + " 3"));
     }
 
     @Test
@@ -175,8 +186,8 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_unrecognisedInput_throwsParseException() {
-        assertThrows(ParseException.class, MESSAGE_INVALID_COMMAND_FORMAT + "\n" + HelpCommand.MESSAGE_USAGE, (
-                ) -> parser.parseCommand(""));
+        assertThrows(ParseException.class, MESSAGE_INVALID_COMMAND_FORMAT + "\n" + HelpCommand.MESSAGE_USAGE,
+                () -> parser.parseCommand(""));
     }
 
     @Test
@@ -187,8 +198,8 @@ public class AddressBookParserTest {
     /**
      * Parses {@code userInput} into a {@code GeneralMeetingPredicate}.
      */
-    private GeneralMeetingPredicate prepareMeetingPredicate(String[] userInput,
-                                                            LocalDateTime start, LocalDateTime end) {
+    private GeneralMeetingPredicate prepareMeetingPredicate(String[] userInput, LocalDateTime start,
+            LocalDateTime end) {
         return new GeneralMeetingPredicate(new TitleContainsKeywordsPredicate(List.of(userInput[0].split("\\s+"))),
                 new LocationContainsKeywordsPredicate(List.of(userInput[1].split("\\s+"))),
                 new MeetingTimeContainsPredicate(start, end),
@@ -200,13 +211,11 @@ public class AddressBookParserTest {
      * Parses {@code userInput} into a {@code GeneralPersonPredicate}.
      */
     private GeneralPersonPredicate preparePersonPredicate(String[] userInput, LocalDateTime lastContacted) {
-        return new GeneralPersonPredicate(
-                new NameContainsKeywordsPredicate(List.of(userInput[0].split("\\s+"))),
+        return new GeneralPersonPredicate(new NameContainsKeywordsPredicate(List.of(userInput[0].split("\\s+"))),
                 new PhoneContainsPredicate(List.of(userInput[1].split("\\s+"))),
                 new EmailContainsKeywordsPredicate(List.of(userInput[2].split("\\s+"))),
                 new LastContactTimeContainsPredicate(lastContacted),
                 new StatusContainsKeywordsPredicate(List.of(userInput[3].split("\\s+"))),
-                new PersonTagContainsKeywordsPredicate(List.of(userInput[4].split("\\s+")))
-        );
+                new PersonTagContainsKeywordsPredicate(List.of(userInput[4].split("\\s+"))));
     }
 }
