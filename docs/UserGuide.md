@@ -47,6 +47,7 @@ Here are the icons you will see throughout this User Guide and what they mean:
 - :bulb: Tips and tricks that will help you get the most out of the app
 - :wrench: Example usages of the feature that will help you save time
 
+
 > :bulb: The main application consists of the:
 > 1. Patient List View
 > 2. Output Box
@@ -253,6 +254,7 @@ Appends the new results of the most recent find command to the current data in t
 >:bulb: Use `alog` to save patient data you want to continue referring to, on top of the profiles you currently have logged
 
 >:wrench: If you have multiple patients you need to toggle between, and do not want to keep doing `find` to retrieve their data, simply `alog` so their profiles stay on your screen for your easy access!
+
 
 * Adding to the logger tab only works for results of the `find` command.
 * The previously-saved result will remain the same.
