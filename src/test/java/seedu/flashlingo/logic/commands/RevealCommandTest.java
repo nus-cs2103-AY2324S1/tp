@@ -19,18 +19,18 @@ import seedu.flashlingo.model.UserPrefs;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for
- * {@code FlipCommand}.
+ * {@code RevealCommand}.
  */
-public class FlipCommandTest {
+public class RevealCommandTest {
 
     private Model model = new ModelManager(getTypicalFlashlingo(), new UserPrefs());
 
     @Test
     public void execute_invalidIndexUnfilteredList_throwsCommandException() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredFlashCardList().size() + 1);
-        FlipCommand flipCommand = new FlipCommand(outOfBoundIndex);
+        RevealCommand revealCommand = new RevealCommand(outOfBoundIndex);
 
-        assertCommandFailure(flipCommand, model, Messages.MESSAGE_INVALID_FLASHCARD_DISPLAYED_INDEX);
+        assertCommandFailure(revealCommand, model, Messages.MESSAGE_INVALID_FLASHCARD_DISPLAYED_INDEX);
     }
 
     @Test
@@ -41,21 +41,21 @@ public class FlipCommandTest {
         // ensures that outOfBoundIndex is still in bounds of address book list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getFlashlingo().getFlashCardList().size());
 
-        FlipCommand flipCommand = new FlipCommand(outOfBoundIndex);
+        RevealCommand revealCommand = new RevealCommand(outOfBoundIndex);
 
-        assertCommandFailure(flipCommand, model, Messages.MESSAGE_INVALID_FLASHCARD_DISPLAYED_INDEX);
+        assertCommandFailure(revealCommand, model, Messages.MESSAGE_INVALID_FLASHCARD_DISPLAYED_INDEX);
     }
 
     @Test
     public void equals() {
-        FlipCommand revealFirstCommand = new FlipCommand(INDEX_FIRST_FLASHCARD);
-        FlipCommand revealSecondCommand = new FlipCommand(INDEX_SECOND_FLASHCARD);
+        RevealCommand revealFirstCommand = new RevealCommand(INDEX_FIRST_FLASHCARD);
+        RevealCommand revealSecondCommand = new RevealCommand(INDEX_SECOND_FLASHCARD);
 
         // same object -> returns true
         assertTrue(revealFirstCommand.equals(revealFirstCommand));
 
         // same values -> returns true
-        FlipCommand revealFirstCommandCopy = new FlipCommand(INDEX_FIRST_FLASHCARD);
+        RevealCommand revealFirstCommandCopy = new RevealCommand(INDEX_FIRST_FLASHCARD);
         assertTrue(revealFirstCommand.equals(revealFirstCommandCopy));
 
         // different types -> returns false
@@ -68,9 +68,9 @@ public class FlipCommandTest {
     @Test
     public void toStringMethod() {
         Index targetIndex = Index.fromOneBased(1);
-        FlipCommand flipCommand = new FlipCommand(targetIndex);
-        String expected = FlipCommand.class.getCanonicalName() + "{targetIndex=" + targetIndex + "}";
-        assertEquals(expected, flipCommand.toString());
+        RevealCommand revealCommand = new RevealCommand(targetIndex);
+        String expected = RevealCommand.class.getCanonicalName() + "{targetIndex=" + targetIndex + "}";
+        assertEquals(expected, revealCommand.toString());
     }
 
     /**

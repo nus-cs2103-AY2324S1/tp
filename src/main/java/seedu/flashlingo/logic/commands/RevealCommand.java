@@ -14,21 +14,21 @@ import seedu.flashlingo.model.flashcard.FlashCard;
 import seedu.flashlingo.model.flashcard.words.TranslatedWord;
 
 /**
- * Flips to the other side of the flashcard.
+ * Reveals the other side of the flashcard.
  */
-public class FlipCommand extends Command {
+public class RevealCommand extends Command {
 
-    public static final String COMMAND_WORD = "flip";
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Flips the flashcard identified by the index number "
+    public static final String COMMAND_WORD = "reveal";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Reveals the flashcard identified by the index number "
         + "used\nParameters: INDEX (must be a positive integer)\n"
         + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_SUCCESS = "Flashcard has been flipped!";
+    public static final String MESSAGE_SUCCESS = "Flashcard has been revealed!";
     private final Index targetIndex;
     /**
-     * Creates an FlipCommand.
+     * Creates an RevealCommand.
      */
-    public FlipCommand(Index targetIndex) {
+    public RevealCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
     }
 
@@ -52,7 +52,7 @@ public class FlipCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof FlipCommand)) {
+        if (!(other instanceof RevealCommand)) {
             return false;
         }
 
