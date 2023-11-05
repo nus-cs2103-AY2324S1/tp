@@ -32,6 +32,8 @@ public class StatusCommandParser implements Parser<StatusCommand> {
         Index index = null;
         Status status = null;
 
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_STATUS);
+
         if (!arePrefixesPresent(argMultimap, PREFIX_STATUS)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, StatusCommand.MESSAGE_NO_STATUS));
         }
