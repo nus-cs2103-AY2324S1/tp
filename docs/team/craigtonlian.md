@@ -31,6 +31,8 @@
 
 * **Code contributed**: [Craigton Lian's RepoSense link](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=craigtonlian&breakdown=true)
 
+  <iframe src="https://nus-cs2103-ay2324s1.github.io/tp-dashboard/#/widget/?search=craigtonlian&breakdown=false&sort=groupTitle%20dsc&sortWithin=title&since=2023-09-22&timeframe=commit&mergegroup=&groupSelect=groupByRepos&chartGroupIndex=0&chartIndex=0" frameBorder="0" width="800px" height="148px"></iframe>
+
 <br>
 
 * **Project management**:
