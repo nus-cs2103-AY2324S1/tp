@@ -21,7 +21,7 @@ public class RandomCommand extends Command {
             + "Parameters: NUMBER_OF_STUDENTS\n"
             + "Example: " + COMMAND_WORD + " 1";
     public static final String MESSAGE_INVALID_NUM_OF_STUDENT = "Number of students to be selected must be a positive "
-            + "integer smaller than or equal to the current number of students displayed.\n";
+            + "integer(without decimal places) smaller than or equal to the current number of students displayed.\n";
     private final Integer numOfStudent;
 
     /**

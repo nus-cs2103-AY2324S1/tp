@@ -367,7 +367,7 @@ Select a specific number of students from all students displayed in Class Manage
 
 Format: `random NUMBER_OF_STUDENTS`
 
-* The `NUMBER_OF_STUDENT` must be a valid positive integer, smaller than or equal to the number of current students displayed in the class manager.
+* The `NUMBER_OF_STUDENTS` must be a valid positive integer, smaller than or equal to the number of current students displayed in the class manager.
 
 Example:
 
