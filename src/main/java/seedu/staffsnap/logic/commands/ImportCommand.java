@@ -94,14 +94,16 @@ public class ImportCommand extends Command {
         return applicantsToImport.stream().anyMatch(model::hasApplicant);
     }
 
-    // Solution below adapted by https://stackoverflow.com/questions/203984/how-do-i-remove-repeated-elements-from-arraylist
+    // Solution below adapted by
+    // https://stackoverflow.com/questions/203984/how-do-i-remove-repeated-elements-from-arraylist
     private List<Applicant> getDuplicateApplicantsInCsv(List<Applicant> applicantsToImport) {
         return new ArrayList<>(new LinkedHashSet<>(
                 applicantsToImport.stream().filter(applicant -> applicantsToImport.stream()
                 .filter(applicant::isSameApplicant).count() > 1).collect(Collectors.toList())));
     }
 
-    // Solution below adapted by https://stackoverflow.com/questions/203984/how-do-i-remove-repeated-elements-from-arraylist
+    // Solution below adapted by
+    // https://stackoverflow.com/questions/203984/how-do-i-remove-repeated-elements-from-arraylist
     private List<Applicant> getDuplicateApplicantsInModel(List<Applicant> applicantsToImport, Model model) {
         return new ArrayList<>(new LinkedHashSet<>(
                 applicantsToImport.stream().filter(model::hasApplicant).collect(Collectors.toList())));
