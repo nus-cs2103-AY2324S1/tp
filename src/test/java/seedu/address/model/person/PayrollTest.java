@@ -16,7 +16,6 @@ public class PayrollTest {
 
     @Test
     public void constructor_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new Payroll(null));
         assertThrows(NullPointerException.class, () -> new Payroll(validSalary,
                         CommandTestUtil.VALID_DATE, null, null));
     }

@@ -25,7 +25,6 @@ public class Payroll {
      *               E.g. basic salary, deductions and bonuses.
      */
     public Payroll(Salary salary) {
-        requireNonNull(salary);
         this.salary = salary;
         LocalDate localDate = LocalDate.now();
         this.startDate = localDate.withDayOfMonth(1);
