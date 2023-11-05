@@ -242,7 +242,7 @@ Format: `add n/NAME hp/PHONE e/EMAIL p/POSITION`
 </box>
 
 <box type="tip" header="**Note**">
-    As `NAME` can only contain alphanumeric characters and spaces, names containing hyphens `-` or slashes `/` are not allowed in this version of the app.  
+    As <code>NAME</code> can only contain alphanumeric characters and spaces, names containing hyphens <code>-</code> or slashes <code>/</code> are not allowed in this version of the app.  
 </box>
 
 
