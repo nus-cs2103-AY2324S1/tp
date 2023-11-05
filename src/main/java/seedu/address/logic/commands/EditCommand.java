@@ -50,24 +50,24 @@ public class EditCommand extends UndoableCommand {
             + PREFIX_NAME + "Alex Yeoh "
             + PREFIX_PHONE + "82786151 \n";
 
-    public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Patient: %1$s";
-    public static final String MESSAGE_UNDO_EDIT_PERSON_SUCCESS = "Undoing the Editing of Patient:  %1$s";
+    public static final String MESSAGE_EDIT_PATIENT_SUCCESS = "Edited Patient: %1$s";
+    public static final String MESSAGE_UNDO_EDIT_PATIENT_SUCCESS = "Undoing the Editing of Patient:  %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.\n"
             + "Fields include phone (p/), email (e/), "
             + "address (a/), appointment (ap/) and medical history (m/)\n"
             + "Name and NRIC cannot be edited\n";
-    public static final String MESSAGE_PERSON_NOT_FOUND = "INVALID name and/or NRIC!\n"
+    public static final String MESSAGE_PATIENT_NOT_FOUND = "INVALID name and/or NRIC!\n"
             + "The given combination of Name and/or NRIC does not match any person in the Patient list.";
 
     private static final Logger logger = Logger.getLogger(EditCommand.class.getName());
 
     /**
-     * The original state of the person before it was edited by the command.
+     * The original state of the patient before it was edited by the command.
      */
     private Person originalPerson;
 
     /**
-     * The edited state of the person after it was modified by the command.
+     * The edited state of the patient after it was modified by the command.
      */
     private Person editedPerson;
 
@@ -76,9 +76,9 @@ public class EditCommand extends UndoableCommand {
     private final EditPersonDescriptor editPersonDescriptor;
 
     /**
-     * @param name of the person in the filtered person list to edit
-     * @param nric of the person in the filtered person list to edit
-     * @param editPersonDescriptor details to edit the person with
+     * @param name of the patient in the filtered patient list to edit
+     * @param nric of the patient in the filtered patient list to edit
+     * @param editPersonDescriptor details to edit the patient with
      */
     public EditCommand(Name name, Nric nric, EditPersonDescriptor editPersonDescriptor) {
         requireNonNull(editPersonDescriptor);
@@ -95,7 +95,7 @@ public class EditCommand extends UndoableCommand {
 
         if (personOptional.isEmpty()) {
             logger.log(Level.WARNING, "Person not found for editing");
-            throw new CommandException(MESSAGE_PERSON_NOT_FOUND);
+            throw new CommandException(MESSAGE_PATIENT_NOT_FOUND);
         }
 
         Person personToEdit = personOptional.get();
@@ -109,7 +109,7 @@ public class EditCommand extends UndoableCommand {
         logger.log(Level.INFO, "EditCommand executed successfully");
 
         model.addToHistory(this);
-        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)));
+        return new CommandResult(String.format(MESSAGE_EDIT_PATIENT_SUCCESS, Messages.format(editedPerson)));
     }
 
     @Override
@@ -118,7 +118,7 @@ public class EditCommand extends UndoableCommand {
         model.setPerson(editedPerson, originalPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
 
-        return new CommandResult(String.format(MESSAGE_UNDO_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)));
+        return new CommandResult(String.format(MESSAGE_UNDO_EDIT_PATIENT_SUCCESS, Messages.format(editedPerson)));
     }
 
     /**
@@ -174,8 +174,8 @@ public class EditCommand extends UndoableCommand {
     }
 
     /**
-     * Stores the details to edit the person with. Each non-empty field value will replace the
-     * corresponding field value of the person.
+     * Stores the details to edit the patient with. Each non-empty field value will replace the
+     * corresponding field value of the patient.
      */
     public static class EditPersonDescriptor {
         private Name name;

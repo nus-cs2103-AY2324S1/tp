@@ -46,7 +46,7 @@ public class DeleteCommandTest {
         Name name = personToDelete.getName();
         DeleteCommand deleteCommand = new DeleteCommand(null, name, defaultDescriptor);
 
-        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS,
+        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PATIENT_SUCCESS,
                 Messages.format(personToDelete));
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
@@ -62,7 +62,7 @@ public class DeleteCommandTest {
         Nric nric = personToDelete.getNric();
         DeleteCommand deleteCommand = new DeleteCommand(nric, null, defaultDescriptor);
 
-        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS,
+        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PATIENT_SUCCESS,
                 Messages.format(personToDelete));
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
@@ -76,7 +76,7 @@ public class DeleteCommandTest {
         Name invalidName = new Name("Does Not Exist");
         DeleteCommand command = new DeleteCommand(null, invalidName, new DeletePersonDescriptor());
 
-        assertThrows(CommandException.class, DeleteCommand.MESSAGE_PERSON_NOT_FOUND, () -> command.execute(model));
+        assertThrows(CommandException.class, DeleteCommand.MESSAGE_PATIENT_NOT_FOUND, () -> command.execute(model));
     }
 
     @Test
@@ -84,7 +84,7 @@ public class DeleteCommandTest {
         Nric invalidNric = new Nric("S000000X");
         DeleteCommand command = new DeleteCommand(invalidNric, null, new DeletePersonDescriptor());
 
-        assertThrows(CommandException.class, DeleteCommand.MESSAGE_PERSON_NOT_FOUND, () -> command.execute(model));
+        assertThrows(CommandException.class, DeleteCommand.MESSAGE_PATIENT_NOT_FOUND, () -> command.execute(model));
     }
 
     @Test
@@ -295,7 +295,7 @@ public class DeleteCommandTest {
         CommandResult undoResult = deletePersonCommand.undo(model);
 
         assertTrue(model.hasPerson(personToDelete));
-        assertEquals(String.format(DeleteCommand.MESSAGE_UNDO_DELETE_PERSON_SUCCESS,
+        assertEquals(String.format(DeleteCommand.MESSAGE_UNDO_DELETE_PATIENT_SUCCESS,
                 Messages.format(personToDelete)), undoResult.getFeedbackToUser());
     }
 

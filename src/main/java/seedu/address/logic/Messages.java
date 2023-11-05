@@ -17,8 +17,9 @@ public class Messages {
     public static final String MESSAGE_INVALID_NRIC = "Please provide a valid NRIC";
     public static final String MESSAGE_INVALID_NAME = "Please provide a valid Name";
     public static final String MESSAGE_INVALID_NRIC_AND_NAME = "Please provide either a valid NRIC or Name";
-    public static final String MESSAGE_INVALID_PERSON_DISPLAYED_INDEX = "The person index provided is invalid";
-    public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d persons listed!";
+    public static final String MESSAGE_INVALID_PERSON_DISPLAYED_INDEX = "The patient index provided is invalid";
+    public static final String MESSAGE_PATIENTS_LISTED_OVERVIEW = "%1$d patients listed!";
+    public static final String MESSAGE_NO_PATIENT_FOUND = "No such patient found!";
     public static final String MESSAGE_DUPLICATE_FIELDS =
             "Multiple values specified for the following single-valued field(s): ";
     public static final String MESSAGE_EMPTY_FIND_RESULT =

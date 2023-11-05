@@ -16,7 +16,7 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 
 /**
- * Adds a person to the address book.
+ * Adds a patient to the address book.
  */
 public class AddCommand extends UndoableCommand {
 
@@ -54,7 +54,7 @@ public class AddCommand extends UndoableCommand {
             + PREFIX_MEDICAL + "on Medicine CHS ";
 
     public static final String MESSAGE_SUCCESS = "New Patient added: %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This Patient already exists in HealthSync.";
+    public static final String MESSAGE_DUPLICATE_PATIENT = "This Patient already exists in HealthSync.";
     public static final String MESSAGE_UNDO_ADD_SUCCESS = "Undoing the adding of Patient:  %1$s";
 
     private final Person toAdd;
@@ -72,7 +72,7 @@ public class AddCommand extends UndoableCommand {
         requireNonNull(model);
 
         if (model.hasPerson(toAdd)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+            throw new CommandException(MESSAGE_DUPLICATE_PATIENT);
         }
 
         model.addPerson(toAdd);

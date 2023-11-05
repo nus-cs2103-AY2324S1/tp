@@ -128,7 +128,7 @@ Expected outputs when the command fails:
 
 Edits an existing patient's details in HealthSync.
 
- * Edits the person with the specified name or id.
+ * Edits the patient with the specified name or id.
  * If an invalid name or IC Number is passed, an error message will be logged.
  * At least one of the optional fields must be provided.
  * Existing fields will be updated to the input values.
