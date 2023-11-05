@@ -37,6 +37,12 @@ import seedu.address.model.tag.Tag;
 public class ParserUtil {
     public static final DateTimeFormatter FORMAT = DateTimeFormatter.ofPattern("dd.MM.yyyy HHmm");
 
+    public static void verifyNoArgs(String args) throws ParseException {
+        if (!args.isEmpty()) {
+            throw new ParseException(MESSAGE_INVALID_FIELDS);
+        }
+    }
+
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading
      * and trailing whitespaces will be trimmed.

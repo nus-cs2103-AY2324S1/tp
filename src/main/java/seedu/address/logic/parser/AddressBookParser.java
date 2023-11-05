@@ -2,6 +2,7 @@ package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.logic.parser.ParserUtil.verifyNoArgs;
 
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
@@ -73,21 +74,26 @@ public class AddressBookParser {
             return new DeleteCommandParser().parse(arguments);
 
         case ClearCommand.COMMAND_WORD:
+            verifyNoArgs(arguments);
             return new ClearCommand();
 
         case FindCommand.COMMAND_WORD:
             return new FindCommandParser().parse(arguments);
 
         case ListCommand.COMMAND_WORD:
+            verifyNoArgs(arguments);
             return new ListCommand();
 
         case ListMeetingCommand.COMMAND_WORD:
+            verifyNoArgs(arguments);
             return new ListMeetingCommand();
 
         case ExitCommand.COMMAND_WORD:
+            verifyNoArgs(arguments);
             return new ExitCommand();
 
         case HelpCommand.COMMAND_WORD:
+            verifyNoArgs(arguments);
             return new HelpCommand();
 
         case ViewContactCommand.COMMAND_WORD:
