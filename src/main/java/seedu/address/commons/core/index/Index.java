@@ -11,6 +11,7 @@ import seedu.address.commons.util.ToStringBuilder;
  * convert it back to an int if the index will not be passed to a different component again.
  */
 public class Index {
+    public static final Index RANDOM = Index.fromZeroBased(Integer.MAX_VALUE);
     private int zeroBasedIndex;
 
     /**

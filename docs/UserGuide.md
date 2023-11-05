@@ -6,149 +6,233 @@ title: User Guide
 
 ***Revolutionise your studying experience with lesSON!***
 
-lesSON is a **desktop application** aimed to help NUS Computer Science undergraduates make flashcards to aid with 
+lesSON is a **desktop application** aimed to help NUS Computer Science undergraduates make flashcards to aid with
 their memory work for school content.<br>
 Here are some benefits of adopting lesSON in your studying experience:
 - Create and Edit flashcards about key concepts taught in your courses
-- Take advantage of our implemented **Spaced Repetition** to maximise your memorisation
-- Categorise your flashcards based on their courses or topics
-
-On top of these functionalities, we believe that making flashcards must be efficient. Therefore, lesSON is optimized for
-use via a **Command Line Interface (CLI)** while still having the benefits of a **Graphical User Interface (GUI)**. 
-If you type fast, lesSON can get your flashcards done faster than current GUI apps in the industry.
+- Take advantage of inbuilt **Spaced Repetition** to improve memory retention
+- Tag your flashcards based on their courses or topics to stay organised
+- Customise your flashcards using our markdown feature
 
 --------------------------------------------------------------------------------------------------------------------
 
 # Table of Contents
-1. [Quick start](#quick-start)
-2. [Glossary](#glossary)
-3. [Feature list](#feature-list)
+1. [Installation](#installation)
+2. [Quick start](#quick-start)
+3. [Glossary](#glossary)
+4. [User Interface Overview](#user-interface-overview)
+5. [Tutorial](#tutorial)
+6. [Feature list](#feature-list)
    - [Adding a FlashCard](#adding-a-flashcard-add)
    - [Deleting a Flashcard](#deleting-a-flashcard--delete)
    - [View All Flashcards](#view-all-flashcards--list)
    - [Editing a Specific Flashcard](#editing-a-specific-flashcard--edit)
    - [Practise Flashcards](#practise-flashcards-practise)
-   - [Solve Flashcards](#practise-flashcards-solve)
+   - [Hints for Flashcards](#hints-for-flashcards-hint)
+   - [Solve Flashcards](#solving-flashcards-solve)
    - [Setting Difficulty for Flashcards](#setting-difficulty-of-flashcards-set)
-4. [FAQ](#faq)
+   - [Randomly Practise Flashcards](#randomly-practise-flashcards--random)
+   - [Clear all Flashcards](#clear-all-flashcards-clear)
+   - [Setting goals](#setting-goals-goal)
+   - [Getting help](#getting-help-help)
+7. [Additional Features](#additional-features)
+   - [Markdown Syntax](#markdown-syntax)
+   - [Importing and Exporting Decks](#importing-and-exporting-decks)
+8. [FAQ](#frequently-asked-questions)
 
 --------------------------------------------------------------------------------------------------------------------
 
-# Quick start
+# Installation
 
-1. Make sure that you have **Java 11 or above** installed on your computer.
+1. Make sure that you have [Java 11 or above](https://www.java.com/en/download/) installed on your computer.
 2. Download the latest jar file from [here](https://github.com/AY2324S1-CS2103T-W17-4/tp/releases/tag/v1.3(trial)).
 3. Move the jar file installed to a working folder you would store all of your flashcards
-4. Launch lesSON.
-5. Better understand the GUI using this [guide](#table-of-contents).
-6. For new users, we recommend reading this [New User Guide](#table-of-contents).
-7. For advanced users, view all feature details in our [feature list](#feature-list).
+4. Launch lesson by doing the following:
+   1. In the terminal or command prompt, use the `cd` command to navigate to the working folder.
+   [Not sure how to use cd?](https://www.ibm.com/docs/en/aix/7.2?topic=directories-changing-another-directory-cd-command)
+   2. Run lesSON using `java -jar lesSON.jar`
+
+--------------------------------------------------------------------------------------------------------------------
+
+# Quick Start
+
+1. To understand the terms we use in this guide better, check out [our glossary](#glossary).
+2. Better understand the GUI using [this guide](#user-interface-overview).
+3. For new users, we recommend reading [this tutorial](#tutorial).
+4. For advanced users, view all feature details in the [feature list](#feature-list).
 
 --------------------------------------------------------------------------------------------------------------------
 
 # Glossary
 
+`Deck` - A scrollable list of flashcards on the GUI.
+
+`Flashcard`- A card created by the user containing its index, question, answer (not shown) and due date.
+
+`Index` - The relative position of a flashcard within the deck.
+
 --------------------------------------------------------------------------------------------------------------------
+
+# User Interface Overview
+
+Here is a quick overview of the user interface to get you oriented with where things are.
+
+![gui_overview](./images/UserGuide/1.3_gui_overview.png)
+
+* Command Line Box - lesSON is optimised for typing commands. Type your commands in the command box
+to create and change flashcards!
+* Result Box - after inputting a command, the result will show up here. Any errors produced will also appear here, for
+instance in the event of a wrongfully formatted command.
+* Deck List - shows the list of flashcards
+
+--------------------------------------------------------------------------------------------------------------------
+
+# Tutorial
+
+This tutorial explains how to add, edit, tag, and practise your flashcards. Feel free to follow along with lesSON open!
+For advanced users, feel free to look at the [feature list](#feature-list) instead.
+
+1. Firstly, let's add a card. type: <br>`add q/ what does + mean in boolean algebra? a/ it means OR.`
+2. Next, let's capitalise our previous input! Assuming the card is at index `1`, input: <br>`edit 1 q/ What does + mean in boolean
+algebra? a/ It means OR.`
+3. Next, let's tag it under the module CS1231S by inputting: <br>`edit 1 t/CS1231S`
+4. Feel free to add a few more cards by following steps 1 to 3!
+5. Next, to practise the first card, do: <br> `practise`
+6. Try to recall the answer, and when you are ready to reveal the answer, do: <br> `solve`
+7. How hard was the answer to recall? set the difficulty by doing one of these: <br>
+`set d/easy`
+`set d/medium`
+`set d/hard`
+8. The card will automatically be reinserted into deck. This is based on how difficult you found the card. Due to our
+spaced repetition system, as you practise, the more difficult cards will surface more at the top.
+9. Note that the `practise`, `solve`, and `set` commands support indexes, but it is recommended to use them without
+indexes, as in this tutorial, to always operate on the most difficult card.
+
+--------------------------------------------------------------------------------------------------------------------
+
 # Feature list
 
 ### Adding a Flashcard `add`
+
 Adds a flashcard to the deck for the user.
 
-Format: `add q/question a/answer [t/TAG]`
+**Format:**
 
-**Tip**: Tagging is not supported in v1.2 and earlier
+`add q/question a/answer [t/TAG] [h/HINT]`
 
-Examples:
+**Examples:**
 
-```
-- add q/What are the three ways to implement binary systems? a/1s Complement, 2s Complement, and Sign and Magnitude
+_A flashcard with only a question and answer field._
 
-- add q/How do you convert from binary to 1s Complement? a/By inverting all the bits, i.e. 0 to 1 and vice versa t/CS2100 t/Number Systems
-```
+`add q/What are the three ways to implement binary systems? a/1s Complement, 2s Complement, and Sign and Magnitude`
 
-#### Acceptable values for each parameters:
-1. No Empty Input after q/, a/ and t/.
-2. t/ is optional and not necessary.
+_A flashcard with a question, answer and tag field._
+
+`add q/How do you convert from binary to 1s Complement? a/By inverting all the bits, i.e. 0 to 1 and vice versa t/CS2100 t/Number Systems`
+
+_A flashcard with a question, answer, tag and hint field._
+`add q/What are the 5 stages of MIPS? a/Fetch, Decode, Execute, Memory, Write Back t/CS2100 h/5 stages: IF, ID, EX, MEM, WB`
+
+#### To Note:
+1. No Empty Input after `q/`, `a/`, `t/` and `h/`.
+2. `t/` and `h/` is optional and not necessary. 
+3. Tagging is not supported in v1.2 and earlier.
+4. Hint is not supported before v1.3.
+
 #### Expected outputs:
-```
-1. add q/What are the three ways to implement binary systems? a/1s Complement, 2s Complement, and Sign and Magnitude
-   “New Card added: Question: What are the three ways to implement binary systems?; Answer: 1s Complement, 2s Complement, and Sign and Magnitude “
 
-2. add q/What are the three ways to implement binary systems? a/
-   Answers should only contain alphanumeric characters, some special characters and spaces, and it should not be blank
-
-3. add a/10111
-   Invalid command format! 
-   add: Adds a card to the deck. Parameters: q/QUESTION a/ANSWER
-```
+1. Given a correct input, a success message will be shown containing the user's input.
+   1. `“New Card added: Question: (question); Answer: (answer)“`
+2. Given an incorrect input, an error message will be shown, detailing how the error can be fixed.
+   1. `Answers should only contain alphanumeric characters, some special characters and spaces, and it should not be blank`
+   2. ```
+       Invalid command format!
+       add: Adds a card to the deck. Parameters: q/QUESTION a/ANSWER
+      ```
 #### Usage
-1. User Input
-![usage of add command](./images/UserGuide/1.3_add.png)
+1. User Input: `add q/ opcode for R format instructions a/ 000000 t/ CS2100 t/ MIPS`
 
 2. Successful Output
-![result of add command](./images/UserGuide/1.3_add_ans.png)
+
+![result of add command](./images/UserGuide/1.3_add_clean.png)
 
 
 ### Deleting a Flashcard : `delete`
 Deletes a flashcard in the deck
 
-Format: `delete INDEX`
-Examples:
-```
-- delete 2
- (deletes the 2nd flashcard in the deck)
-```
+**Format:**
 
-#### Acceptable values for each parameters:
-1. Index must be positive integer
-2. Index cannot exceed size of the deck
+`delete INDEX`
+
+**Examples:**
+
+_Deleting the card in th deck with an index of 2._
+
+`delete 2`
+
+#### To Note:
+1. Index must be positive integer.
+2. Index cannot exceed size of the deck.
 
 #### Expected outputs:
-```
-1. delete 2
-   Deleted Card: Question: <provided question>; Answer: <provided answer>
+1. Given a correct input, a success message will be shown containing the details of the deleted flashcard.
+   1. `Deleted Card: Question: <provided question>; Answer: <provided answer>`
+2. Given an incorrect input, an error message will be shown, detailing how the error can be fixed.
+   1. `The card index provided is invalid`
+   2. ```
+      Invalid command format!
+      delete: Deletes the deck identified by the index number used in the displayed card list.
+      Parameters: INDEX (must be a positive integer)
+      Example: delete 1
+      ```
 
-2. delete -100
-   Invalid command format! 
-   delete: Deletes the deck identified by the index number used in the displayed card list.
-   Parameters: INDEX (must be a positive integer)
-   Example: delete 1
-```
 #### Usage:
-1. User Input
-   ![usage of delete command](./images/UserGuide/1.3_del.png)
+1. User Input: `delete 1`
 
 2. Successful Output
-   ![result of delete command](./images/UserGuide/1.3_del_ans.png)
+
+![result of delete command](./images/UserGuide/1.3_del_clean.png)
 
 ### View All Flashcards : `list`
-Shows a list of all flashcards in the deck.
+Shows a list of all flashcards in the deck. A keyword may be specified to filter out the list.
 
-Format: `list`
+Format: `list (q/t)/ (prefix question starts with/ tag)`
+Note : Listing questions for markdown syntax should include their relevant markdown notation
 Examples:
 ```
-(list shows the full list of flashcards.)
+1. list
+   (list shows the full list of flashcards)
+
+2. list q/ What
+   (list shows all flashcards with questions starting with 'What')
+
+3. list t/ CS2100
+   (list shows all flashcards with the CS2100 Tag)
+
+4. list t/ CS2100 t/ MIPS
+   (list shows all flashcards with both MIPS and CS2100 Tag)
+
+5. list q/ what t/ CS2100
+   (list shows all flashcards with questions starting with 'What' and has the CS2100 Tag)
 ```
 
 #### Acceptable values for each parameters:
-No parameters are needed
+1. No Empty Input after q/ and t/.
+2. q/ and t/ is optional.
 
 #### Expected output:
 ```
 1. list
-   (Questions to all the flashcards that are added with their index)
-
-2. list potato
-   “No parameters are allowed for this command.”
+   "All cards listed" message will be returned to the user via the CLI
 ```
 
 #### Usage
 ![usage of list command](./images/UserGuide/1.3_list.png)
 
 ### Editing a Specific Flashcard : `edit`
-Edits an existing person in the address book.
+Edits an existing Flashcard in the deck.
 
-Format: `edit INDEX (q/a)/ (question/answer)`
+Format: `edit INDEX (q/a/t/h)/ (question/answer/tag/hint)`
 
 Examples:
 ```
@@ -157,6 +241,12 @@ Examples:
 
 2. edit 1 a/ Red
    (changes the answer at index 1 to “Red”)
+
+3. edit 1 t/ Weather t/ Geogaphy
+   (changes the tag at index 1 to “Weather” and "Geography")
+
+4. edit 1 h/ Apple
+   (changes the hint at index 1 to “Apple")
 ```
 #### Expected output:
 ```
@@ -170,8 +260,7 @@ Examples:
 2. Successful Output
    ![result of edit command](./images/UserGuide/1.3_edit_ans.png)
 
-
-
+   
 ### Practise Flashcards: `practise`
 Practise a single Flashcard in the deck
 
@@ -183,12 +272,12 @@ Format: `practise INDEX`
 
 #### Examples:
 ```
-practise 1 
+practise 1
 (showcases the question at index 1)
 ```
 #### Expected outputs:
 ```
-practise 1 
+practise 1
 "Practising question 1 : <provided question>"
 
 practise 10
@@ -201,6 +290,31 @@ practise 10
 
 2. Successful Output
    ![result of practise command](./images/UserGuide/1.3_prac_ans.png)
+
+### Hints for Flashcards: `hint`
+See the hint for a question at the given index
+
+Format: `hint INDEX`
+
+#### Examples:
+```
+hint 1
+```
+#### Expected outputs:
+```
+hint 1
+"Hint for Question 1: 5 stages: IF, ID, EX, MEM, WB "
+
+solve 2
+"Hint for Question 2: No hint was provided."
+
+solve 10
+"The card index provided is invalid"
+```
+
+#### Acceptable values for each parameters:
+1. Index must be positive integer
+2. Index cannot exceed size of the deck
 
 ### Solving Flashcards: `solve`
 Solves the question at the given index
@@ -217,7 +331,7 @@ solve 1
 ```
 #### Expected outputs:
 ```
-solve 1 
+solve 1
 "Solved Question 1: What pipline protocols are covered
 Answer:2"
 
@@ -227,14 +341,20 @@ solve 10
 
 #### Usage:
 1. User Input
-   ![usage of practise command](./images/UserGuide/1.3_solve.png)
+   ![usage of solve command](./images/UserGuide/1.3_solve.png)
 
 2. Successful Output
-   ![result of practise command](./images/UserGuide/1.3_solve_ans.png)
+   ![result of solve command](./images/UserGuide/1.3_solve_ans.png)
 
 
 ### Setting Difficulty of Flashcards: `set`
 Setting the difficulty of a flashcard
+
+This difficulty refers to how difficult you found the flashcard.
+This flashcard will be rescheduled based on the difficulty, as indicated by their due date.
+More difficult cards will appear more often in the practice rotation.
+This also takes into account past practices, so the more a card is practised,
+the less it will appear in the practice rotation.
 
 Format: set INDEX DIFFICULTY
 
@@ -243,11 +363,11 @@ Format: set INDEX DIFFICULTY
 2. Index cannot exceed size of the deck
 3. Difficulty must be either ‘easy’, ‘medium’, ‘hard’
 
-#### Examples:
+#### Example:
 ```
 set 1
 ```
-   
+
 #### Expected outputs:
 ```
 set 1 d/ easy
@@ -259,15 +379,142 @@ set 10 d/ easy
 
 #### Usage:
 1. User Input
-   ![usage of practise command](./images/UserGuide/1.3_set.png)
+   ![usage of set command](./images/UserGuide/1.3_set.png)
 
 2. Successful Output
-   ![result of practise command](./images/UserGuide/1.3_set_ans.png)
+   ![result of set command](./images/UserGuide/1.3_set_ans.png)
+
+### Randomly Practise Flashcards: `random`
+Practise a single Flashcard in the deck. This command chooses a random flashcard, 
+as opposed to `practise` command which chooses the first (highest priority) flashcard.
+Use `r` index with `solve` and `set` for this random card.
+
+Format: `random`
+
+#### Acceptable values for each parameters:
+* There are no parameters.
+
+#### Examples:
+```
+random
+(showcases a random question)
+```
+#### Expected outputs:
+```
+random
+"Practising question 1 : <provided question>"
+```
+Note: since the output is random, the above can be any question.
 
 
+### Clear all flashcards: `clear`
+Clears all flashcards found in the Deck. Deck is reset back to empty.
+
+Format: clear
+
+#### Example:
+```
+clear
+```
+
+#### Expected outputs:
+```
+clear
+"Deck has been cleared!"
+```
+### Setting goals: `goal`
+Set a goal for the current studying session.
+Initially, the goal is set to 0, and out of the number of cards due that day
+
+ie. If you have 5 cards due that day, it will be set to 0/5 initially
+
+Format: goal NUMBER
+
+#### Example:
+```
+goal 5
+```
+
+
+
+### Getting help: `help`
+Seek more details from a link provided leading to the User Guide.
+Users can also access this function by clicking on the **File** button located at the top
+left of the application, and then navigating to the **Help** tab.
+
+Format: help
+
+#### Example:
+```
+help
+```
+
+#### Expected outputs:
+```
+help
+(A window with the URL leading to the User Guide will pop out. 
+Users can copy the URL by simply clicking on the 'Copy URL' button.)
+```
+--------------------------------------------------------------------------------------------------------------------
+# Additional Features
+
+## MarkDown Syntax
+
+For user who wish to incorporate styling in lesSON, there are 3 font styles currently supported:
+1. Bold
+2. Italic
+3. Underline
+
+### Bold
+To bold a line of text, wrap text with `**`
+
+#### Example:
+```
+edit 1 q/ How many bits can a **Half Adder** add up
+```
+#### Expected Result:
+![usage of bold syntax](./images/UserGuide/1.3_bold.png)
+
+### Italic
+To italicise a line of text, wrap text with `*`
+
+#### Example:
+```
+edit 1 q/ How many bits can a *Half Adder* add up
+```
+#### Expected Result:
+![usage of bold syntax](./images/UserGuide/1.3_italic.png)
+
+### Underline
+To underline a line of text, insert `<u>` at the beginning of the text,
+and end with `</u>` at the end of the underlined text.
+
+#### Example:
+```
+edit 1 q/ How many bits can a <u>Half Adder</u> add up
+```
+#### Expected Result:
+![usage of bold syntax](./images/UserGuide/1.3_underline.png)
+
+# Importing and Exporting Decks
+Users can share their own Decks with others or download their Decks to their own.
+Both import and export features reside in the **File** menu.
+
+## Export
+Users can share their own Deck by clicking on the `Export` button. Their own Deck
+will be displayed as a JSON file which can be easily copied either through the `Copy Data`
+button provided or other means.
+
+## Import
+Users can enjoy the Decks of others by clicking on the `Import` button. A text field
+is displayed for users to paste in the JSON file containing the decks of others. The
+app will close upon clicking the `Import Data` button. Users will have to rerun the app
+to see their new decks.
 
 --------------------------------------------------------------------------------------------------------------------
 
-# FAQ
+# Frequently Asked Questions
 
---------------------------------------------------------------------------------------------------------------------
+### I can't run lesSON! What should I do?
+Please check that you have correctly installed lesSON by following the instructions [here](#installation). For further
+queries, feel free to contact us!

@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ANSWER;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_HINT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_QUESTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
@@ -22,11 +23,13 @@ public class AddCommand extends Command {
             + "Parameters: "
             + PREFIX_QUESTION + "QUESTION "
             + PREFIX_ANSWER + "ANSWER "
-            + PREFIX_TAG + "TAG ";
+            + PREFIX_TAG + "TAG "
+            + PREFIX_HINT + "HINT";
 
     public static final String MESSAGE_SUCCESS = "New Card added: %1$s";
     public static final String MESSAGE_DUPLICATE_CARD = "This Card already exists in the Deck";
 
+    /** {@code Card} to be added into {@code Deck} */
     private final Card toAdd;
 
     /**
@@ -46,6 +49,7 @@ public class AddCommand extends Command {
         }
 
         model.addCard(toAdd);
+        // model.updateFilteredCardList(PREDICATE_SHOW_ALL_CARDS);
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
     }
 
@@ -60,6 +64,7 @@ public class AddCommand extends Command {
             return false;
         }
 
+        // compare Card equality
         AddCommand otherAddCommand = (AddCommand) other;
         return toAdd.equals(otherAddCommand.toAdd);
     }
@@ -70,5 +75,4 @@ public class AddCommand extends Command {
                 .add("toAdd", toAdd)
                 .toString();
     }
-
 }

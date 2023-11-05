@@ -7,7 +7,7 @@ import java.util.Comparator;
  */
 public class CardPracticeDateComparator implements Comparator<Card> {
     @Override
-    public int compare(Card o1, Card o2) {
-        return o1.compareTo(o2);
+    public int compare(Card card, Card otherCard) {
+        return card.compareTo(otherCard);
     }
 }

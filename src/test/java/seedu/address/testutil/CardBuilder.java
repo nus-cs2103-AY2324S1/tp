@@ -6,8 +6,11 @@ import java.util.List;
 
 import seedu.address.model.card.Answer;
 import seedu.address.model.card.Card;
+import seedu.address.model.card.Difficulty;
+import seedu.address.model.card.Hint;
 import seedu.address.model.card.PracticeDate;
 import seedu.address.model.card.Question;
+import seedu.address.model.card.SolveCount;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -20,11 +23,13 @@ public class CardBuilder {
     public static final PracticeDate DEFAULT_NEXT_PRACTICE_DATE =
             new PracticeDate(LocalDateTime.MIN); // highest priority
     public static final List<Tag> DEFAULT_TAGS = new ArrayList<>();
+    public static final Hint DEFAULT_HINT = new Hint.EmptyHint();
 
     private Question question;
     private Answer answer;
     private PracticeDate nextPracticeDate;
     private List<Tag> tags;
+    private Hint hint;
 
     /**
      * Creates a {@code CardBuilder} with the default details.
@@ -34,6 +39,7 @@ public class CardBuilder {
         answer = new Answer(DEFAULT_ANSWER);
         nextPracticeDate = DEFAULT_NEXT_PRACTICE_DATE;
         tags = DEFAULT_TAGS;
+        hint = DEFAULT_HINT;
     }
 
     /**
@@ -44,6 +50,7 @@ public class CardBuilder {
         answer = cardToCopy.getAnswer();
         nextPracticeDate = cardToCopy.getNextPracticeDate();
         tags = cardToCopy.getTags();
+        hint = cardToCopy.getHint();
     }
 
     /**
@@ -78,8 +85,41 @@ public class CardBuilder {
         return this;
     }
 
+    /**
+     * Empty constructor for no tags
+     * @returns card builder with no tags
+     */
+    public CardBuilder withTags() {
+        this.tags = new ArrayList<>();
+        return this;
+    }
+
+    /**
+     * Sets the {@code Hint} of the {@code Card} that we are building.
+     */
+    public CardBuilder withHint(String hint) {
+        this.hint = new Hint(hint);
+        return this;
+    }
+
+    /**
+     * Sets the {@code Hint} of the {@code Card} that we are building.
+     */
+    public CardBuilder withHint(Hint hint) {
+        this.hint = hint;
+        return this;
+    }
+
+    /**
+     * @return a Card with specific details
+     */
     public Card build() {
-        return new Card(question, answer, "new", tags, nextPracticeDate, null);
+        Difficulty difficulty = Difficulty.NEW;
+        PracticeDate lastPracticeDate = null;
+        SolveCount solveCount = new SolveCount();
+        return new Card(question, answer, difficulty,
+                tags, nextPracticeDate, lastPracticeDate,
+                solveCount, hint);
     }
 
 }

@@ -183,4 +183,27 @@ public class MainApp extends Application {
             logger.severe("Failed to save preferences " + StringUtil.getDetails(e));
         }
     }
+    public Storage getStorage() {
+        return this.storage;
+    }
+
+    /**
+     * Regenerates a new set of deck cards
+     */
+    public void reloadDeckData() {
+        Optional<ReadOnlyDeck> deckOptional;
+        ReadOnlyDeck updatedDeck;
+
+        try {
+            deckOptional = storage.readDeck();
+            if (deckOptional.isPresent()) {
+                updatedDeck = deckOptional.get();
+                model.setDeck(updatedDeck);
+            } else {
+                logger.warning("No data found in the data file. Data remains unchanged.");
+            }
+        } catch (DataLoadingException e) {
+            logger.warning("Data file at " + storage.getDeckFilePath() + " could not be loaded.");
+        }
+    }
 }

@@ -129,6 +129,7 @@ public class Deck implements ReadOnlyDeck {
             return false;
         }
 
+        // compare UniqueCardList equality
         Deck otherDeck = (Deck) other;
         return cards.equals(otherDeck.cards);
     }

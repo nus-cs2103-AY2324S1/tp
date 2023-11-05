@@ -12,8 +12,7 @@ import seedu.address.model.tag.Tag;
 
 /**
  * Represents a Card in lesSON.
- * Guarantees: details are present and not null, field values are validated,
- * immutable.
+ * Guarantees: details are present and not null, field values are validated
  */
 public class Card implements Comparable<Card> {
     // Identity fields
@@ -21,48 +20,59 @@ public class Card implements Comparable<Card> {
     private final Answer answer;
 
     // Data fields for card
-    private String difficulty;
+    private Difficulty difficulty;
     private PracticeDate lastPracticeDate; // last date card was practiced, can be null.
     private PracticeDate nextPracticeDate; // next date card should be practiced.
-    private Integer priority;
-    private List<Tag> tags = new ArrayList<>();
+    private final List<Tag> tags = new ArrayList<>();
+    private final SolveCount solveCount;
+    private final Hint hint;
 
     /**
-     * Every field must be present and not null.
+     * Every field must be present, and taking in if solveCount is provided
      */
-    public Card(Question question, Answer answer, String difficulty, List<Tag> tags,
-            PracticeDate nextPracticeDate, PracticeDate lastPracticeDate) {
+    public Card(Question question, Answer answer, Difficulty difficulty,
+                List<Tag> tags, PracticeDate nextPracticeDate, PracticeDate lastPracticeDate,
+                SolveCount solveCount, Hint hint) {
         requireAllNonNull(question, answer, difficulty, tags, nextPracticeDate);
+        assert(question != null);
+        assert(answer != null);
+
         this.question = question;
         this.answer = answer;
-        assert(this.question != null);
-        assert(this.answer != null);
         this.difficulty = difficulty;
         this.tags.addAll(tags);
+
         if (lastPracticeDate == null) {
             this.lastPracticeDate = nextPracticeDate;
         } else {
             this.lastPracticeDate = lastPracticeDate;
         }
+
         this.nextPracticeDate = nextPracticeDate;
+        this.solveCount = solveCount;
+        this.hint = hint;
     }
 
-    public void setDifficulty(String difficulty) {
+    // Difficulty
+    public void setDifficulty(Difficulty difficulty) {
         this.difficulty = difficulty;
     }
 
     public String getDifficulty() {
-        return this.difficulty;
+        return this.difficulty.toString();
     }
 
+    // Question
     public Question getQuestion() {
         return question;
     }
 
+    // Answer
     public Answer getAnswer() {
         return answer;
     }
 
+    // PractiseDate
     public PracticeDate getNextPracticeDate() {
         return this.nextPracticeDate;
     }
@@ -76,23 +86,38 @@ public class Card implements Comparable<Card> {
      * values.
      * @param practiceDate the next practice date.
      */
-    public void setNextPracticeDate(PracticeDate practiceDate) {
+    private void setNextPracticeDate(PracticeDate practiceDate) {
         this.lastPracticeDate = this.nextPracticeDate;
         this.nextPracticeDate = practiceDate;
     }
 
     /**
-     * Sets a new practice date based on difficulty.
-     * @param difficulty
+     * Sets a new practice date based on {@code difficulty}.
+     * @param difficulty the difficulty of the Card to adjust the new practise date
      */
-    public void setNewPracticeDateWith(String difficulty) {
-        PracticeDate newPracticeDate = PracticeDate.calculateNewPracticeDate(
-                this.lastPracticeDate, this.nextPracticeDate, difficulty);
-        this.setNextPracticeDate(newPracticeDate);
+    public void setNewPracticeDateWith(Difficulty difficulty) {
+        PracticeDate newPracticeDate = PracticeDate.calculateNewPracticeDate(this.lastPracticeDate,
+                this.nextPracticeDate, difficulty);
+
+        setNextPracticeDate(newPracticeDate);
     }
 
+    // Tags
     public List<Tag> getTags() {
         return Collections.unmodifiableList(tags);
+    }
+
+    // SolveCount
+    public SolveCount getSolveCount() {
+        return solveCount;
+    }
+    public void incrementSolveCount() {
+        this.solveCount.incrementSolveCount();
+    }
+
+    // Hint
+    public Hint getHint() {
+        return this.hint;
     }
 
     /**
@@ -104,8 +129,7 @@ public class Card implements Comparable<Card> {
             return true;
         }
 
-        return otherCard != null
-                && otherCard.getQuestion().equals(getQuestion());
+        return otherCard != null && otherCard.getQuestion().equals(getQuestion());
     }
 
     /**
@@ -123,6 +147,7 @@ public class Card implements Comparable<Card> {
             return false;
         }
 
+        // compare Question, Answer and Tag equality
         Card otherCard = (Card) other;
         return question.equals(otherCard.question)
                 && answer.equals(otherCard.answer)
@@ -131,7 +156,6 @@ public class Card implements Comparable<Card> {
 
     @Override
     public int hashCode() {
-        // use this method for custom fields hashing instead of implementing your own
         return Objects.hash(question, answer);
     }
 
@@ -148,13 +172,4 @@ public class Card implements Comparable<Card> {
     public int compareTo(Card other) {
         return this.nextPracticeDate.compareTo(other.nextPracticeDate);
     }
-
-    public String questiontoString() {
-        return "Question: " + this.getQuestion().toString();
-    }
-
-    public String answertoString() {
-        return "Answer: " + this.getAnswer().toString();
-    }
-
 }

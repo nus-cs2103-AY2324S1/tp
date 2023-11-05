@@ -11,7 +11,10 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.core.index.Index;
 import seedu.address.model.card.Card;
+import seedu.address.model.exceptions.RandomIndexNotInitialisedException;
+import seedu.address.model.goal.Goal;
 
 /**
  * Represents the in-memory model of the Deck data.
@@ -22,6 +25,9 @@ public class ModelManager implements Model {
     private final Deck deck;
     private final UserPrefs userPrefs;
     private final FilteredList<Card> filteredCards;
+    private final Goal goal;
+
+    private Index randomIndex;
 
     /**
      * Initializes a ModelManager with the given Deck and userPrefs.
@@ -34,13 +40,12 @@ public class ModelManager implements Model {
         this.deck = new Deck(deck);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredCards = new FilteredList<>(this.deck.getCardList());
+        this.goal = new Goal(this.deck);
     }
 
     public ModelManager() {
         this(new Deck(), new UserPrefs());
     }
-
-
 
     //=========== UserPrefs ==================================================================================
 
@@ -89,6 +94,11 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public int getDeckSize() {
+        return deck.getNumberOfCards();
+    }
+
+    @Override
     public boolean hasCard(Card card) {
         requireNonNull(card);
         return deck.hasCard(card);
@@ -102,7 +112,6 @@ public class ModelManager implements Model {
     @Override
     public void addCard(Card card) {
         deck.addCard(card);
-        updateFilteredCardList(PREDICATE_SHOW_ALL_CARDS);
     }
 
     @Override
@@ -140,10 +149,41 @@ public class ModelManager implements Model {
             return false;
         }
 
+        // compare Deck, UserPrefs and FilteredList equality
         ModelManager otherModelManager = (ModelManager) other;
         return deck.equals(otherModelManager.deck)
                 && userPrefs.equals(otherModelManager.userPrefs)
                 && filteredCards.equals(otherModelManager.filteredCards);
+    }
+
+    //=========== Random Index =============================================================
+    @Override
+    public void setRandomIndex(Index randomIndex) {
+        this.randomIndex = randomIndex;
+    }
+
+    @Override
+    public Index getRandomIndex() throws RandomIndexNotInitialisedException {
+        if (this.randomIndex == null) {
+            throw new RandomIndexNotInitialisedException();
+        }
+        return this.randomIndex;
+    }
+
+    @Override
+    public void resetRandomIndex() {
+        this.randomIndex = null;
+    }
+    //=========== Goal ==================================================================================
+
+    @Override
+    public void setGoal(int target) {
+        this.goal.setTarget(target);
+    }
+
+    @Override
+    public Goal getGoal() {
+        return goal;
     }
 
 }

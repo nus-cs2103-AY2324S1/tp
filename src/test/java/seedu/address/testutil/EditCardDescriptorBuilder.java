@@ -1,10 +1,12 @@
 package seedu.address.testutil;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.model.card.Answer;
 import seedu.address.model.card.Card;
+import seedu.address.model.card.Hint;
 import seedu.address.model.card.Question;
 import seedu.address.model.tag.Tag;
 
@@ -31,6 +33,7 @@ public class EditCardDescriptorBuilder {
         descriptor.setQuestion(card.getQuestion());
         descriptor.setAnswer(card.getAnswer());
         descriptor.setTags(card.getTags());
+        descriptor.setHint((card.getHint()));
     }
 
     /**
@@ -57,8 +60,31 @@ public class EditCardDescriptorBuilder {
         return this;
     }
 
+    /**
+     * @returns an EditCardDescriptorBuilder
+     */
+    public EditCardDescriptorBuilder withTags() {
+        descriptor.setTags(new ArrayList<>());
+        return this;
+    }
+
+    /**
+     * Sets the {@code Hint} of the {@code EditCardDescriptor} that we are building.
+     */
+    public EditCardDescriptorBuilder withHint(String hint) {
+        descriptor.setHint(new Hint(hint));
+        return this;
+    }
+
+    /**
+     * Sets the {@code Hint} of the {@code EditCardDescriptor} that we are building.
+     */
+    public EditCardDescriptorBuilder withHint(Hint hint) {
+        descriptor.setHint(hint);
+        return this;
+    }
+
     public EditCommand.EditCardDescriptor build() {
         return descriptor;
     }
-
 }

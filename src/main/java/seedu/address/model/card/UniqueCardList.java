@@ -21,7 +21,6 @@ import seedu.address.model.card.exceptions.DuplicateCardException;
  * identity in the UniqueCardList.
  * However, the removal of a card uses Card#equals(Object)
  * to ensure that the card with exactly the same fields will be removed.
- *
  * Supports a minimal set of list operations.
  *
  * @see Card#isSameCard(Card)
@@ -29,6 +28,7 @@ import seedu.address.model.card.exceptions.DuplicateCardException;
 public class UniqueCardList implements Iterable<Card> {
 
     private final ObservableList<Card> internalList = FXCollections.observableArrayList();
+
     private final ObservableList<Card> internalUnmodifiableList = FXCollections
             .unmodifiableObservableList(internalList);
 
@@ -64,10 +64,9 @@ public class UniqueCardList implements Iterable<Card> {
     }
 
     /**
-     * Sort the list based on the card's next practice date.
+     * Sort the list based on the card's next practise date.
      */
     public void sort() {
-        // internalList.sort(Comparator.comparingInt(Card::getPriority));
         internalList.sort(cardComparator);
     }
 
@@ -81,7 +80,7 @@ public class UniqueCardList implements Iterable<Card> {
         requireAllNonNull(target, editedCard);
 
         int index = internalList.indexOf(target);
-        if (index == -1) {
+        if (index == -1) { // Card not found in list
             throw new CardNotFoundException();
         }
 
@@ -99,6 +98,7 @@ public class UniqueCardList implements Iterable<Card> {
      */
     public void remove(Card toRemove) {
         requireNonNull(toRemove);
+
         if (!internalList.remove(toRemove)) {
             throw new CardNotFoundException();
         }
@@ -107,6 +107,7 @@ public class UniqueCardList implements Iterable<Card> {
 
     public void setCards(UniqueCardList replacement) {
         requireNonNull(replacement);
+
         internalList.setAll(replacement.internalList);
         sort();
     }
@@ -117,6 +118,7 @@ public class UniqueCardList implements Iterable<Card> {
      */
     public void setCards(List<Card> cards) {
         requireAllNonNull(cards);
+
         if (!cardsAreUnique(cards)) {
             throw new DuplicateCardException();
         }
@@ -148,6 +150,7 @@ public class UniqueCardList implements Iterable<Card> {
             return false;
         }
 
+        // compare ObservableList equality
         UniqueCardList otherUniqueCardList = (UniqueCardList) other;
         return internalList.equals(otherUniqueCardList.internalList);
     }
@@ -178,5 +181,4 @@ public class UniqueCardList implements Iterable<Card> {
 
         return isUnique;
     }
-
 }

@@ -10,7 +10,7 @@ public class Answer {
     public static final String MESSAGE_CONSTRAINTS =
             "Answers should only contain alphanumeric characters, some special characters "
                     + "and spaces, and it should not be blank";
-    public static final String VALIDATION_REGEX = "^(?=.*[\\p{Alnum}.,?'():-])\\s*[\\p{Alnum}.,?'(): -]+$";
+    public static final String VALIDATION_REGEX = "^[^\\x00-\\x1F]+$";
 
     public final String answer;
 
@@ -21,6 +21,7 @@ public class Answer {
      */
     public Answer(String answer) {
         requireNonNull(answer);
+
         checkArgument(isValidAnswer(answer), MESSAGE_CONSTRAINTS);
         this.answer = answer;
     }
@@ -48,6 +49,7 @@ public class Answer {
             return false;
         }
 
+        // compare String equality
         Answer otherAnswer = (Answer) other;
         return answer.equals(otherAnswer.answer);
     }
@@ -56,5 +58,4 @@ public class Answer {
     public int hashCode() {
         return answer.hashCode();
     }
-
 }
