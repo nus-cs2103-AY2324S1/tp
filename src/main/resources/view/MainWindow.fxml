@@ -34,12 +34,12 @@
              </Menu>
                   <Menu mnemonicParsing="false" text="Tools">
                     <items>
-                  <MenuItem mnemonicParsing="false" onAction="#handleClearStaffs" text="Clear Staffs" />
+                  <MenuItem mnemonicParsing="false" onAction="#handleClearStaffs" text="Clear Staff" />
                   <MenuItem mnemonicParsing="false" onAction="#handleClearTransactions" text="Clear Transactions" />
                     </items>
                   </Menu>
              <Menu mnemonicParsing="false" text="Help">
-               <MenuItem fx:id="userGuideMenuItem" mnemonicParsing="false" onAction="#handleHelp" text="View user guide" />
+               <MenuItem fx:id="userGuideMenuItem" mnemonicParsing="false" onAction="#handleHelp" text="View User Guide" />
              </Menu>
            </MenuBar>
             </top>
