@@ -346,7 +346,7 @@ The user executes `add-s 1 s/2023-09-15T09:00:00 e/2023-09-15T11:00:00` command.
 The `AddScheduleCommand#exceute(Model)` will perform the following checks in this order to ensure that the `Schedule` can be added to the `Model`:
 1. The `Index` is valid.
 2. A valid schedule can be created with the given `Index`, `StartTime` and `EndTime`.
-    <div markdown="span" class="alert alert-info">:information_source: **Note:** A `Schedule` is considered valid if its start time is before its end time. This is enforced by the constructor of the `Schedule` class, it throws an `IllegalArgumentException` if it is not valid.
+    <div markdown="span" class="alert alert-info">:information_source: **Note:** A `Schedule` is considered valid if its start time is before its end time and both start time and end time falls on the same day. This is enforced by the constructor of the `Schedule` class, it throws an `IllegalArgumentException` if it is not valid.
 
     </div>
 3. Executing this command would not result in a duplicate schedule in the `Model`.
@@ -395,7 +395,7 @@ The following sequence diagram shows how the operation works:
 
 * **Alternative 2:** Perform the check in `AddScheduleCommand`.
     * Pros: Allows for flexibility in the constraints.
-    * Cons: Have to repeatedly write logic perform this check everywhere a new `Schedule` is being created.
+    * Cons: Have to repeatedly write logic to perform these checks every time a new `Schedule` needs to be created in another class.
 
 ### Edit schedule feature
 
@@ -979,8 +979,18 @@ scheduleToEdit's start and end times are earlier than the current datetime.
 If this validation fails, a `CommandException` with a clear and descriptive error message should be thrown.
 
 ### Schedule `datetime` input
+In the current [add schedule feature](#add-schedule-feature), the users have to enter `yyyy-MM-ddTHH:mm` each time for
+both `StartTime` and `EndTime`. However, since a `Schedule` is not allowed to start and end on different days, the user
+is unnecessarily repeating the input `yyyy-MM-dd`. This resulted in a command format that is longer than necessary.
+We plan to streamline the command to make it shorter and more user-friendly.
 
 **Proposed implementation**
+
+The new add schedule command would require an additional prefix `d/` for a `Date` in the format `yyyy-MM-dd`.
+
+The format for `StartTime` and `EndTime` would be updated to take in only `HH:mm`.
+
+The new command format would be `add-s TUTOR_INDEX d/yyyy-MM-dd st/HH:mm et/HH:mm`
 
 More details...
 
@@ -1011,8 +1021,22 @@ do nothing otherwise. The only exception is if the `commandResult` FeedbackToUse
 `ShowCalendarCommand.MESSAGE_SUCCESS` in which case it will call `showCalendar`.
 
 ### Schedules at the same time being arranged alphabetically
+In the current implementation, the schedules are being sorted by `StartTime` only. In particular, they are sorted in 
+2 parts.
+
+The first part of the list contains schedules that are on or after today, sorted in ascending order.
+
+The second part of the list contains schedules that are before today, sorted in descending order.
+
+If you have schedules with the same `StartTime`, they are in the order that they are added to the list.
+
+This resulted in a situation where if you had many schedules starting at the same time, it would be very difficult to 
+find and locate a particular schedule.
 
 **Proposed implementation**
+
+The schedules should be sorted first by `StartTime`, then by `EndTime`, and finally alphabetically by the tutor's name.
+This would make the schedule list more organised, making it easier to use and navigate for the user. 
 
 More details...
 
