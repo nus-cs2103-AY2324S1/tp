@@ -1,6 +1,7 @@
 package seedu.address.model.group;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -70,6 +71,7 @@ public class Group {
         requireNonNull(groupName);
         requireNonNull(listOfGroupMates);
         requireNonNull(timeIntervalList);
+        checkArgument(groupName.matches(VALIDATION_REGEX), MESSAGE_CONSTRAINTS);
         this.groupName = groupName;
         this.groupRemark = groupRemark;
         this.timeIntervalList.addAll(timeIntervalList);
@@ -118,7 +120,7 @@ public class Group {
      * @return The validity of the group name.
      */
     //For now no constraints
-    public static boolean isValidGroup(String name) {
+    public static boolean isValidGroupName(String name) {
         requireNonNull(name);
 
         return !name.isBlank() && name.matches(VALIDATION_REGEX);
