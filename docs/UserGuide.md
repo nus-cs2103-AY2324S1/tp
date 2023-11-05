@@ -48,6 +48,8 @@ HealthSync is a **powerful desktop application designed specifically for clinic 
 > 3. Command Box
 > 4. Logger Tab
 
+>:bulb: Some outputs have to be scrolled to view.
+
 5. Type the command in the command box and press Enter to execute it.
    e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
@@ -188,13 +190,14 @@ Format: `clear`
 
 ![result for 'clear'](images/clearResult.jpg)
 
-### Locating Patients by Name or NRIC: `find`
+### Locating Patients by Name, NRIC or Appointment: `find`
 
-Searches the patient list for all patients matching the name or IC Number and returns their related information.
+Searches the patient list for all patients matching the name, IC Number or Appointment and returns their related information.
 
-* The search is case-insensitive. e.g `hans` will match `Hans`.
+* The search is case-insensitive.  
+e.g `hans` will match `Hans`, `08-Jan-2023 12 13` will match `08-jan-2023 12 13`.
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`.
-* Only the name or IC number is searched.
+* Name, IC Number and Appointment can be searched.
 * Only full words will be matched e.g. `Han` will not match `Hans`.
 * For the name, only patients matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`.
@@ -206,6 +209,7 @@ Format: `find n/NAME or id/IC_NUMBER`
 Example commands:
 * `find n/Alex Yeoh`
 * `find id/T0123436F` 
+* `find ap/08-Aug-2023 0000 2359`
 
 ![result for 'find id/T0123456F'](images/findidT0123456FResult.jpg)
 
