@@ -874,7 +874,7 @@ This command might seem complicated, but it is easy to use with only 1 possible 
 <div markdown="block" class="alert alert-warning">
 
 **:warning: Calendar Limitations**<br>
-* Schedules with very short duration may not be displayed correctly (the schedule's index, status and time will not be visible).
+* Schedules with very short duration will be truncated (only the schedule's index will be displayed).
 * Using any other commands will hide the calendar view. Use the `show` command to view calendar again. 
 
 </div>

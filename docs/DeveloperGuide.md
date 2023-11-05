@@ -918,7 +918,7 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases …​ }_
 
-## **Appendix: Planned Enhancements** 
+## **Appendix: Planned enhancements** 
 
 Given below are the planned enhancements for future iterations of the app.
 
@@ -969,36 +969,63 @@ This method sets the specified `Schedule` in the model to be that edited schedul
 Step 8. Finally, the EditScheduleCommand object updates the schedule list to display the edited schedule.
 
 ### Disallowing future schedules to be marked
+The `mark` function should prohibit setting a schedule status if either the start or end time is in the future.
 
 **Proposed implementation**
-More details...
+
+An extra validation should be included in the `execute` method within the `MarkScheduleCommand` to ensure that both the 
+scheduleToEdit's start and end times are earlier than the current datetime.
+
+If this validation fails, a `CommandException` with a clear and descriptive error message should be thrown.
 
 ### Schedule `datetime` input
 
 **Proposed implementation**
+
 More details...
 
 ### Switching back to list view from calendar view
+In the current system, when executing any commands, including actions like marking, unmarking, or deleting schedules 
+while in the calendar view, the GUI switches back to the main view displaying the list of tutors and schedules. This 
+behavior can be disruptive and frustrating for the user.
+
+To enhance user experience, we propose implementing a more persistent calendar view. This would allow the user to 
+perform certain actions on schedules without being returned to the list view.
+
+Only certain actions, such as adding or editing schedules, should return the user to the main list view. This is
+because these actions necessitate the clearing of any applied filter predicate including the one that was used to
+display schedules only for the specified date.
+
+Conversely, other actions should keep the user within the calendar view.
 
 **Proposed implementation**
-More details...
 
-### Long fields being truncated
+A new boolean attribute `exitCalendar` will be added to `CommandResult`, which indicates whether the command executed
+should exit the calendar view (if active).
 
-**Proposed implementation**
-More details...
+The `execute` methods for commands like `AddScheduleCommand` and `EditScheduleCommand` will return a `CommandResult` 
+object with this new attribute set to `true` while all other commands will have the value `false`.
+
+In the `handleListDisplay` method in `MainWindow`, it will call `showLists` only if this attribute is `true` and 
+do nothing otherwise. The only exception is if the `commandResult` FeedbackToUser is a 
+`ShowCalendarCommand.MESSAGE_SUCCESS` in which case it will call `showCalendar`.
 
 ### Schedules at the same time being arranged alphabetically
 
 **Proposed implementation**
-More details...
 
-### Having a single `list` command for both lists
-
-**Proposed implementation**
 More details...
 
 ### UI for calendar to use colours to reflect status of schedules
+In the calendar view, incorporating schedule colors to represent their respective statuses can enhance user 
+intuitiveness.
 
 **Proposed implementation**
-More details...
+
+In `CalendarCard.java`, the background color of the calendar card will be determined based on schedule status: green 
+for completed, red for missed, and yellow for pending (please note that these colors are not finalised).
+
+To differentiate between rows in the calendar, an alternating shading of green, red, and yellow will be applied.
+
+Additionally, each calendar card will have a visible border to separate it from adjacent schedule cards on 
+the same row.
