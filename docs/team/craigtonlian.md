@@ -11,44 +11,52 @@
 Staff-Snap is a desktop hiring management application used for managing applicants during the recruitment cycle. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 9k LoC.
 
 ## Summary of Contributions
-* **New Feature**: Added the ability to undo/redo previous commands.
-  * What it does: allows the user to undo all previous commands one at a time. Preceding undo commands can be reversed by using the redo command.
-  * Justification: This feature improves the product significantly because a user can make mistakes in commands and the app should provide a convenient way to rectify them.
-  * Highlights: This enhancement affects existing commands and commands to be added in future. It required an in-depth analysis of design alternatives. The implementation too was challenging as it required changes to existing commands.
-  * Credits: *{mention here if you reused any code/ideas from elsewhere or if a third-party library is heavily used in the feature so that a reader can make a more accurate judgement of how much effort went into the feature}*
+* **Interview Management Features**: Added the ability to create new interviews to each applicant.
+  * What it does: Allows the user to add, edit, and delete interviews for each applicant.
+  * Justification: This feature forms the core functionality of Staff-Snap, as it allows the user to manage the interview process for each applicant, while updating the interview rating progressively.
+  * Highlights: This enhancement had to be carefully designed to ensure that the interview data is stored in a way that is easily accessible and modifiable by the user. Input validation and duplicate handling was also implemented to ensure that the data is consistent and accurate.
+  * Automatic duplicate handling under the `addi` function was **not** implemented by me. This was implemented by my teammate [Austin Huang](https://ay2324s1-cs2103t-w08-1.github.io/tp/team/austinhuang1203.html).
 
-* **New Feature**: Added a history command that allows the user to navigate to previous commands using up/down keys.
+* **Import CSV Feature**: Added the ability to import a CSV file into Staff-Snap.
+  * What it does: allows the user to import a correctly-formatted CSV file containing applicant data into Staff-Snap.
+  * Justification: This feature allows the users to directly import large amounts of applicant data into Staff-Snap using a common file format like CSV instead of manually keying in the data.
+  * Highlights: This enhancement required careful and thorough error handling and input validation in order to prevent erroneous data from being added into Staff-Snap. 
+  * Credits: The third-party library [OpenCSV](https://opencsv.sourceforge.net/) was used to parse the input CSV in the implementation of this feature.
+
+<br>
 
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=craigtonlian&breakdown=true)
+
+<br>
 
 * **Project management**:
   * Managed [releases](https://github.com/AY2324S1-CS2103T-W08-1/tp/releases) `v1.2` - `v1.4` (4 releases) on GitHub
 
+<br>
+
 * **Enhancements to existing features**:
-  * Updated the logo for Staff-Snap <a href="https://github.com/AY2324S1-CS2103T-W08-1/tp/pull/74" class="badge rounded-pill bg-success text-dark">\#74</a>
-  * Updated the Applicant Card to display icons <a href="https://github.com/AY2324S1-CS2103T-W08-1/tp/pull/105" class="badge rounded-pill bg-success text-dark">\#105</a>
-  * Updated the GUI to display Interview Cards <a href="https://github.com/AY2324S1-CS2103T-W08-1/tp/pull/111" class="badge rounded-pill bg-success text-dark">\#111</a>
+  * Updated the logo for Staff-Snap <a href="https://github.com/AY2324S1-CS2103T-W08-1/tp/pull/74" class="badge rounded-pill bg-success">\#74</a>
+  * Updated the Applicant Card to display icons <a href="https://github.com/AY2324S1-CS2103T-W08-1/tp/pull/105" class="badge rounded-pill bg-success">\#105</a>
+  * Updated the GUI to display Interview Cards <a href="https://github.com/AY2324S1-CS2103T-W08-1/tp/pull/111" class="badge rounded-pill bg-success">\#111</a>
+
+<br>
 
 * **Documentation**:
   * User Guide:
-    * Added documentation for the features `addi`, `editi`, `deletei` and `import` [[\#80](https://github.com/AY2324S1-CS2103T-W08-1/tp/pull/80), [\#90](https://github.com/AY2324S1-CS2103T-W08-1/tp/pull/90), [\#117](https://github.com/AY2324S1-CS2103T-W08-1/tp/pull/117), [\#140](https://github.com/AY2324S1-CS2103T-W08-1/tp/pull/140)]
-    * Did cosmetic tweaks to existing documentation of features `help`, `edit`: [\#67](https://github.com/AY2324S1-CS2103T-W08-1/tp/pull/67), [\#138](https://github.com/AY2324S1-CS2103T-W08-1/tp/pull/138), [\#145](https://github.com/AY2324S1-CS2103T-W08-1/tp/pull/145)
+    * Added documentation for the features `addi`, `editi`, `deletei` and `import` <a href="https://github.com/AY2324S1-CS2103T-W08-1/tp/pull/80" class="badge rounded-pill bg-success">\#80</a> <a href="https://github.com/AY2324S1-CS2103T-W08-1/tp/pull/90" class="badge rounded-pill bg-success">\#90</a> <a href="https://github.com/AY2324S1-CS2103T-W08-1/tp/pull/117" class="badge rounded-pill bg-success">\#117</a> <a href="https://github.com/AY2324S1-CS2103T-W08-1/tp/pull/140" class="badge rounded-pill bg-success">\#140</a>
+    * Did cosmetic tweaks to existing documentation of features `help`, `edit`: <a href="https://github.com/AY2324S1-CS2103T-W08-1/tp/pull/67" class="badge rounded-pill bg-success">\#67</a> <a href="https://github.com/AY2324S1-CS2103T-W08-1/tp/pull/138" class="badge rounded-pill bg-success">\#138</a> <a href="https://github.com/AY2324S1-CS2103T-W08-1/tp/pull/145" class="badge rounded-pill bg-success">\#145</a>
   * Developer Guide:
-    * <span style="color:red">**[TO BE UPDATED]**</span> Added implementation details of the `delete` feature.
+    * Added implementation details of the Interview Management features such as `addi`, `editi`, and `deletei` <a href="https://github.com/AY2324S1-CS2103T-W08-1/tp/pull/118" class="badge rounded-pill bg-success">\#118</a>
+
+<br>
 
 * **Community**:
   * PRs reviewed (with non-trivial review comments):
-      [\#31](https://github.com/AY2324S1-CS2103T-W08-1/tp/pull/31),
-      [\#32](),
-      [\#19](),
-      [\#42]()
-  * Contributed to forum discussions (examples:
-      [\#2](https://github.com/nus-cs2103-AY2324S1/forum/issues/2),
-      [\#121](https://github.com/nus-cs2103-AY2324S1/forum/issues/121),
-      [\#158](https://github.com/nus-cs2103-AY2324S1/forum/issues/158),
-      [\#228](https://github.com/nus-cs2103-AY2324S1/forum/issues/228))
-  * <span style="color:red">**[TO BE UPDATED]**</span> Reported bugs and suggestions for other teams in the class (examples: [1](), [2](), [3]())
+    <a href="https://github.com/AY2324S1-CS2103T-W08-1/tp/pull/110" class="badge rounded-pill bg-success">\#110</a> <a href="https://github.com/AY2324S1-CS2103T-W08-1/tp/pull/121" class="badge rounded-pill bg-success">\#121</a> <a href="https://github.com/AY2324S1-CS2103T-W08-1/tp/pull/125" class="badge rounded-pill bg-success">\#125</a> <a href="https://github.com/AY2324S1-CS2103T-W08-1/tp/pull/129" class="badge rounded-pill bg-success">\#129</a>  
+  * Contributed to forum discussions <a href="https://github.com/nus-cs2103-AY2324S1/forum/issues/121" class="badge rounded-pill bg-primary">\#121</a> <a href="https://github.com/nus-cs2103-AY2324S1/forum/issues/158" class="badge rounded-pill bg-primary">\#158</a> <a href="https://github.com/nus-cs2103-AY2324S1/forum/issues/228" class="badge rounded-pill bg-primary">\#228</a> <a href="https://github.com/nus-cs2103-AY2324S1/forum/issues/267" class="badge rounded-pill bg-primary">\#267</a>
+
+<br>
 
 * **Tools**:
-  * Integrated a third party library (Natty) to the project ([\#42]())
-  * Integrated a new Github plugin (CircleCI) to the team repo
+  * Integrated a third-party library (OpenCSV) to the project <a href="https://github.com/nus-cs2103-AY2324S1/forum/issues/300" class="badge rounded-pill bg-primary">\#300</a> <a href="https://github.com/AY2324S1-CS2103T-W08-1/tp/pull/126" class="badge rounded-pill bg-success">\#126</a>
+  * Integrated a new GitHub CD workflow ([Netlify Deploy Previews](https://docs.netlify.com/site-deploys/deploy-previews/)) to the team repo to preview deployments to the User Guide and Developer Guide <a href="https://github.com/nus-cs2103-AY2324S1/forum/issues/228" class="badge rounded-pill bg-primary">\#228</a>
