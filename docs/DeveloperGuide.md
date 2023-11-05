@@ -918,7 +918,7 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases …​ }_
 
-## **Appendix: Planned Enhancements** 
+## **Appendix: Planned enhancements** 
 
 Given below are the planned enhancements for future iterations of the app.
 
@@ -969,9 +969,13 @@ This method sets the specified `Schedule` in the model to be that edited schedul
 Step 8. Finally, the EditScheduleCommand object updates the schedule list to display the edited schedule.
 
 ### Disallowing future schedules to be marked
+The `mark` function should prohibit setting a schedule status if either the start or end time is in the future.
 
 **Proposed implementation**
-More details...
+An extra validation should be included in the `execute` method within the `MarkScheduleCommand` to ensure that both the 
+scheduleToEdit's start and end times are earlier than the current datetime.
+
+If this validation fails, a `CommandException` with a clear and descriptive error message should be thrown.
 
 ### Schedule `datetime` input
 
@@ -979,14 +983,22 @@ More details...
 More details...
 
 ### Switching back to list view from calendar view
+In the current system, when executing any commands, including actions like marking, unmarking, or deleting schedules 
+while in the calendar view, the GUI switches back to the main view displaying the list of tutors and schedules. This 
+behavior can be disruptive and frustrating for the user.
+
+To enhance user experience, we propose implementing a more persistent calendar view. This would allow the user to 
+perform certain actions on schedules without being returned to the list view.
 
 **Proposed implementation**
-More details...
+Only certain actions, such as adding or editing schedules, should return the user to the main list view. This is 
+because these actions necessitate the clearing of any applied filter predicate including the one that was used to 
+display schedules only for the specified date.
 
-### Long fields being truncated
+Conversely, other actions should keep the user within the calendar view.
 
-**Proposed implementation**
-More details...
+This approach aims to provide a smoother and more seamless experience for users interacting with schedules in the 
+calendar view.
 
 ### Schedules at the same time being arranged alphabetically
 
@@ -994,11 +1006,28 @@ More details...
 More details...
 
 ### Having a single `list` command for both lists
+Having a new command that updates the lists for both tutors and schedules would enhance user convenience and 
+streamline the overall experience.
 
 **Proposed implementation**
-More details...
+A new command `ListCommand` that updates both the person and schedule list to show all persons and schedules.
+
+Step 1. The user has the application launched with at least 2 tutors and 2 schedules added.
+
+Step 2. The user executes `find-t` and `find-s` to search for a specific tutor and schedule. As a result, the list view
+will display only one tutor and one schedule respectively.
+
+Step 3. The user executes `list` to return to the original list view containing all tutors and schedules.
 
 ### UI for calendar to use colours to reflect status of schedules
+In the calendar view, incorporating schedule colors to represent their respective statuses can enhance user 
+intuitiveness.
 
 **Proposed implementation**
-More details...
+The background color of the schedule card will be determined based on the status: green for completed, red for missed, 
+and yellow for pending (please note that these colors are not finalised).
+
+To differentiate between rows in the calendar, an alternating shading of green, red, and yellow will be applied.
+
+Additionally, each schedule card will have a visible border to separate it from adjacent schedule cards on 
+the same row.
