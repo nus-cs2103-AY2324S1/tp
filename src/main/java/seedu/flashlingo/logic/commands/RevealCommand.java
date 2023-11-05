@@ -14,16 +14,16 @@ import seedu.flashlingo.model.flashcard.FlashCard;
 import seedu.flashlingo.model.flashcard.words.TranslatedWord;
 
 /**
- * Indicates user has not yet memorized the word.
+ * Reveals the other side of the flashcard.
  */
 public class RevealCommand extends Command {
 
     public static final String COMMAND_WORD = "reveal";
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Reveals the word identified by the index number used "
-        + "\nParameters: INDEX (must be a positive integer)\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Reveals the flashcard identified by the index number "
+        + "used\nParameters: INDEX (must be a positive integer)\n"
         + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_SUCCESS = "The translation is: ";
+    public static final String MESSAGE_SUCCESS = "Flashcard has been revealed!";
     private final Index targetIndex;
     /**
      * Creates an RevealCommand.
@@ -43,10 +43,12 @@ public class RevealCommand extends Command {
 
         FlashCard toBeRevealed = lastShownList.get(targetIndex.getZeroBased());
         TranslatedWord translatedWord = model.reveal(toBeRevealed);
+
         if (!toBeRevealed.getIsRevealed()) { // If already revealed -> Hide
             return new CommandResult("Translation has been hidden");
         }
         return new CommandResult(MESSAGE_SUCCESS + translatedWord.getWord());
+
     }
     @Override
     public boolean equals(Object other) {

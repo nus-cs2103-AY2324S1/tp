@@ -9,7 +9,7 @@ import seedu.flashlingo.logic.parser.exceptions.ParseException;
 /**
  * Parses input arguments and creates a new RevealCommand object
  */
-public class RevealCommandParser implements Parser<RevealCommand> {
+public class FlipCommandParser implements Parser<RevealCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the RevealCommand
@@ -18,7 +18,12 @@ public class RevealCommandParser implements Parser<RevealCommand> {
      */
     public RevealCommand parse(String args) throws ParseException {
         try {
-            Index index = ParserUtil.parseIndex(args);
+            Index index;
+            if (args.trim().isBlank()) {
+                index = ParserUtil.parseIndex("1");
+            } else {
+                index = ParserUtil.parseIndex(args);
+            }
             return new RevealCommand(index);
         } catch (ParseException pe) {
             throw new ParseException(
