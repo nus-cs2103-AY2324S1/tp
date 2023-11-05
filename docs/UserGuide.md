@@ -846,12 +846,14 @@ Woah look at that! The schedules are now being displayed in a calendar form.
 
 **:bulb: Worried about having too many schedules to view?**<br>
 * The calendar can show schedules for selected tutors only!
-* Simply use [`find-t`](#locating-tutors-by-name-find-t) to select the tutors first (e.g. `find-t John` to select all
+1. Simply use [`find-t`](#locating-tutors-by-name-find-t) to select the tutors first (e.g. `find-t John` to select all
   tutors with the name John).
-* Then use the `show` command to view their schedules in calendar view on a given date. It's that simple!
+2. Now, just use the [`show`](#viewing-calendar-show) command to view their schedules in calendar view on a given date. 
+   It's that simple!
 
 **Note**:
-* Use [`list-t`](#listing-all-tutors-list-t) before `show` to view the schedules for all tutors again.
+* Use [`list-t`](#listing-all-tutors-list-t) before [`show`](#viewing-calendar-show) to view the schedules for all 
+  tutors again.
 
 </div>
 
