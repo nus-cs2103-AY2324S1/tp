@@ -12,13 +12,12 @@ import seedu.address.logic.commands.CommandTestUtil;
 
 public class PayrollTest {
 
-    private final Salary VALID_SALARY = new Salary("2000.00");
+    private final Salary validSalary = new Salary("2000.00");
 
     @Test
     public void constructor_null_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new Payroll(null));
-        assertThrows(NullPointerException.class,
-                () -> new Payroll(VALID_SALARY,
+        assertThrows(NullPointerException.class, () -> new Payroll(validSalary,
                         CommandTestUtil.VALID_DATE, null, null));
     }
 
@@ -30,8 +29,8 @@ public class PayrollTest {
 
     @Test
     public void constructor_invalidDate_throwsDateTimeParseException() {
-        assertThrows(DateTimeParseException.class,
-                () -> new Payroll(VALID_SALARY, "today", "30/11/2023", "05/12/2023"));
+        assertThrows(DateTimeParseException.class, () -> new Payroll(validSalary,
+                "today", "30/11/2023", "05/12/2023"));
     }
 
     @Test
@@ -50,8 +49,8 @@ public class PayrollTest {
 
     @Test
     public void equals() {
-        Payroll payroll1 = new Payroll(VALID_SALARY);
-        Payroll payroll2 = new Payroll(VALID_SALARY, "01/11/2023", "30/11/2023", "05/12/2023");
+        Payroll payroll1 = new Payroll(validSalary);
+        Payroll payroll2 = new Payroll(validSalary, "01/11/2023", "30/11/2023", "05/12/2023");
 
         // same values -> returns true
         assertTrue(payroll1.equals(new Payroll(new Salary("2000.00"))));
@@ -74,7 +73,7 @@ public class PayrollTest {
         assertFalse(payroll1.equals(new Payroll(new Salary("200.00"))));
 
         // different date -> return false
-        assertFalse(payroll2.equals(new Payroll(VALID_SALARY,
+        assertFalse(payroll2.equals(new Payroll(validSalary,
                 "02/11/2023", "30/11/2023", "05/12/2023")));
     }
 }
