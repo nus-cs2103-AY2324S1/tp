@@ -43,10 +43,13 @@ HealthSync is a **powerful desktop application designed specifically for clinic 
    ![Ui](images/Ui_v1.3.1.jpg)
 
 > :bulb: The main application consists of the:
-> 1. Patient List View
-> 2. Output Box
-> 3. Command Box
-> 4. Logger Tab
+> 1. Menu Sidebar `*`
+> 2. Patient List View
+> 3. Output Box
+> 4. Command Box
+> 5. Logger Tab
+>
+> :warning: **`*`**: The buttons that are in grey and not pressable in the Menu Sidebar are currently not functional and will be implemented in a future version of HealthSync.
 
 5. Type the command in the command box and press Enter to execute it.
    e.g. typing **`help`** and pressing Enter will open the help window.<br>
