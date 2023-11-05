@@ -107,23 +107,24 @@ Import staff lists for quick access to contact information. You can also add, ed
 
 <div markdown="block" class="alert alert-info">
 
-**Notes about the command format:**
+|                | **Notes about the command format**                                             |
+| -------------- | ------------------------------------------------------------------------------ |
+| [ ]            | Optional field                                                                 |
+| \<DESCRIPTION> | Any string                                                                     |
+| \<NAME>        | Any string                                                                     |
+| \<PHONE>       | Number with at least 3 digits (trailing zeroes are allowed)                    |
+| \<EMAIL>       | Any string                                                                     |
+| \<ADDRESS>     | Any string                                                                     |
+| \<TAG>         | A single word with only alphabets and/or digits, with no spaces                |
+| \<KEYWORD>     | A single word with no spaces                                                   |
+| \<TYPE>        | R (for Revenue), or E (for Expense)                                            |
+| \<AMOUNT>      | Any number                                                                     |
+| \<DATE>        | In dd/MM/yy format                                                             |
+| \<ID>          | ID of a transaction, an integer                                                |
+| \<STAFF ID>    | ID of staff, an integer                                                        |
+| \<SORT TYPE>   | asc (ascending) or desc (descending)                                           |
+| ...            | Multiple entries allowed, separated by a space                                 |
 
-- []: Optional field
-- \<DESCRIPTION>: Any string
-- \<NAME>: Any string
-- \<PHONE>: Number with at least 3 digits (trailing zeroes are allowed)
-- \<EMAIL>: Any string
-- \<ADDRESS>: Any string
-- \<TAG>: A single word with only alphabets and/or digits, with no spaces
-- \<KEYWORD>: A single word with no spaces
-- \<TYPE>: R (for Revenue), or E (for Expense)
-- \<AMOUNT>: Any number
-- \<DATE>: In dd/MM/yy format
-- \<ID>: ID of a transaction, an integer
-- \<STAFF ID>: ID of staff, an integer
-- \<SORT TYPE>: asc (ascending) or desc (descending)
-- ...: Multiple entries allowed, separated by a space
 </div>
 
 ### Adding transaction : `add`
