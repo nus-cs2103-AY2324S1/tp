@@ -144,17 +144,17 @@ This section of the User Guide will explain about each feature in detail.
 
 :information_source: **Notes about the inputs:**
 
-- Commands are **case-insensitive**.
-- Many of the commands below have _aliases_, or short-form versions that make them easier to type.  
+* Commands are **case-insensitive**.
+* Many of the commands below have _aliases_, or short-form versions that make them easier to type.  
   For example, the command `addMember` can be typed as `addm`. Usages of the aliases are documented below alongside the
   full command word, and all aliases can be used interchangeably with the full command word.
-- Words in UPPER_CASE are input parameters that you need to provide for that specific field.  
+* Words in UPPER_CASE are input parameters that you need to provide for that specific field.  
   For example, in `addm /name NAME`, `NAME` would be the input parameter for the member's name.
-- Fields in square brackets `[ ]` are optional fields.
-- Parameters can be in any order.  
+* Fields in square brackets `[ ]` are optional fields.
+* Parameters can be in any order.  
   For example, `adda /name Taylor Swift /phone 91961969` and `adda /phone 91691969 /name Taylor Swift` will result in
   the same applicant added.
-- Items with … after them can be used multiple times including zero times.  
+* Items with … after them can be used multiple times including zero times.  
   For example, [tag/TAG]… can be used as (i.e. 0 times), tag/SWE, tag/UIUX tag/Product etc.
 
 </div>
