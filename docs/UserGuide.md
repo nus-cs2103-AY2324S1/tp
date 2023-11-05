@@ -1062,14 +1062,15 @@ Here are some inputs you might come across in the User Guide:
 | `NEW_THEME`         | Refers to the name of the new theme to switch to. | Only `dark`, `light` and `blue` themes are supported.                                        |
 
 
-**<sup id="note1">1</sup> Keyword Search Format and Behaviour**
+**<sup id="note1">1</sup> `KEYWORD` Search Format and Behaviour**
 
 Commands reference: [find-t](#locating-tutors-by-name-find-t), [find-s](#locating-schedules-by-name-find-s)
-* The search is case-insensitive. e.g. `hans` will match for `Hans` too!
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`.
+* The `KEYWORD` search has no restriction on characters entered e.g. `h@ns` is a valid input, but will only return entries matching to `h@ns`.
+* The `KEYWORD` search is case-insensitive. e.g. `hans` will match for `Hans` too!
+* The order of the `KEYWORD` does not matter. e.g. `Hans Bo` will match `Bo Hans`.
 * Only full words will be matched. e.g. `Han` will not match `Hans`.
-* Tutors matching at least one keyword will be matched. e.g. `Hans Bo` will match both `Hans Gruber` and `Bo Yang`.
-* The keywords entered will match ANY part of the tutor's name, while keywords that do not match a tutor's name are ignored. e.g. `Hans Blablablah` will match `Hans Gruber` and `Hans Yang`.
+* Tutors matching at least one `KEYWORD` will be matched. e.g. `Hans Bo` will match both `Hans Gruber` and `Bo Yang`.
+* The `KEYWORD` entered will match ANY part of the tutor's name, while `KEYWORD` that do not match a tutor's name are ignored. e.g. `Hans Bl@bl@$lah` will match `Hans Gruber` and `Hans Yang`.
 
 **<sup id="note2">2</sup> Email Format**
 
