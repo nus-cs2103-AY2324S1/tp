@@ -42,6 +42,11 @@ HealthSync is a **powerful desktop application designed specifically for clinic 
 
    ![Ui](images/Ui_v1.3.1.jpg)
 
+
+Here are the icons you will see throughout this User Guide and what they mean:
+- :bulb: Tips and tricks that will help you get the most out of the app
+- :wrench: Example usages of the feature that will help you save time
+
 > :bulb: The main application consists of the:
 > 1. Patient List View
 > 2. Output Box
@@ -211,11 +216,14 @@ Example commands:
 
 >:bulb: This list command can be used to show the original patient list after a find command is executed
 
-### Preserving a `find` Command Result: `log`
+### Preserving a `find` Command Result in the Log: `log`
 
 Logs the result of the find command to the logger tab, which can be viewed at all times.
 
 >:bulb: Use `log` command to save data you want to continue referring to
+
+>:wrench: If you want to access the patient list/look up a new patient but would still need to refer to the current patient's details, simply `log` so the profile stays on your screen while you carry out your other tasks!
+
 
 * Saving to the logger tab only works for results of the `find` command.
 * The entire result will be saved.
@@ -238,11 +246,14 @@ Expected output when the command fails:
 
 >:bulb: `log` overwrites the data currently in the logger tab, so you do not need to perform clearing prior
 
-### Adding a New `find` Command Result to the Log: `alog`
+### Adding a New `find` Command Result to the current Log: `alog`
 
 Appends the new results of the most recent find command to the current data in the logger tab, which can be viewed at all times.
 
->:bulb: Use `alog` command to save data you want to continue referring to, on top of some others
+>:wrench: Use `alog` to save patient data you want to continue referring to, on top of the profiles you currently have logged
+
+>:bulb: If you want to overwrite the current logged data, do `log`. If you simply want to add on to it, do `alog` 
+
 
 * Adding to the logger tab only works for results of the `find` command.
 * The previously-saved result will remain the same.
@@ -318,7 +329,6 @@ Expected outputs when command fails:
 
 
 ### Exiting HealthSync: `exit`
-
 
 Exits HealthSync.
 
