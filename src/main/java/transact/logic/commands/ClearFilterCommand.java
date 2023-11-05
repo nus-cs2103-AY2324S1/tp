@@ -12,7 +12,7 @@ import transact.ui.MainWindow.TabWindow;
 public class ClearFilterCommand extends Command {
 
     public static final String COMMAND_WORD = "clearfilter";
-    public static final String MESSAGE_SUCCESS = "Transaction filter has been cleared!";
+    public static final String MESSAGE_SUCCESS = "Transaction filter has been cleared";
 
     @Override
     public CommandResult execute(Model model) {

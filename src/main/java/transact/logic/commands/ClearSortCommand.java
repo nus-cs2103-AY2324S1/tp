@@ -11,7 +11,7 @@ import transact.ui.MainWindow.TabWindow;
 public class ClearSortCommand extends Command {
 
     public static final String COMMAND_WORD = "clearsort";
-    public static final String MESSAGE_SUCCESS = "Transaction sort has been cleared!";
+    public static final String MESSAGE_SUCCESS = "Transaction sort has been cleared";
 
     @Override
     public CommandResult execute(Model model) {
