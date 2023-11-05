@@ -1,5 +1,6 @@
 package seedu.address.logic.commands;
 
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalCards.getTypicalDeck;
 
@@ -62,5 +63,20 @@ public class SetDifficultyCommandTest {
         expectedModel.getDeck().sort();
 
         assertCommandSuccess(setDifficultyCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_setDifficultyInvalid_failure() {
+        SetDifficultyCommand setDifficultyCommand = new SetDifficultyCommand(Index.fromZeroBased(0), "middle");
+
+        String expectedMessage = "middle is not an invalid difficult level! Please enter easy, medium or hard!";
+
+
+        Model expectedModel = new ModelManager(new Deck(model.getDeck()), new UserPrefs());
+        expectedModel.getDeck().getCardList().get(0).setDifficulty("hard");
+        expectedModel.getDeck().getCardList().get(0).setNewPracticeDateWith("hard");
+        expectedModel.getDeck().sort();
+
+        assertCommandFailure(setDifficultyCommand, model, expectedMessage);
     }
 }
