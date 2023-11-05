@@ -16,7 +16,7 @@
 
 <box type="tip">
 
-The blue tags <a href="https://github.com/nus-cs2103-AY2324S1/forum/issues/121" class="badge rounded-pill bg-primary">\#121</a> represents an external link to the corresponding GitHub issue.<br>
+The blue tags <a href="https://github.com/nus-cs2103-AY2324S1/forum/issues/121" class="badge rounded-pill bg-primary">\#121</a> represent an external link to the corresponding GitHub issue.<br>
 The green tags <a href="https://github.com/AY2324S1-CS2103T-W08-1/tp/pull/74" class="badge rounded-pill bg-success">\#74</a> represent an external link to the corresponding Pull Request.
 
 </box>
