@@ -250,10 +250,9 @@ Expected output when the command fails:
 
 Appends the new results of the most recent find command to the current data in the logger tab, which can be viewed at all times.
 
->:wrench: Use `alog` to save patient data you want to continue referring to, on top of the profiles you currently have logged
+>:bulb: Use `alog` to save patient data you want to continue referring to, on top of the profiles you currently have logged
 
->:bulb: If you want to overwrite the current logged data, do `log`. If you simply want to add on to it, do `alog` 
-
+>:wrench: If you have multiple patients you need to toggle between, and do not want to keep doing `find` to retrieve their data, simply `alog` so their profiles stay on your screen for your easy access!
 
 * Adding to the logger tab only works for results of the `find` command.
 * The previously-saved result will remain the same.
