@@ -30,7 +30,7 @@ public class OverviewPanel extends UiPart<Region> {
 
     private static final String FXML = "Overview.fxml";
 
-    private static final DateTimeFormatter yearMonthFormat = DateTimeFormatter.ofPattern("MMM yy");
+    private static final DateTimeFormatter YEARMONTH_FORMAT = DateTimeFormatter.ofPattern("MMM yy");
 
     @FXML
     private StackPane pickerContainer;
@@ -78,11 +78,6 @@ public class OverviewPanel extends UiPart<Region> {
         updateGraph();
         changeMonthView(YearMonth.now());
 
-        this.transactionList.addListener((Change<? extends Transaction> change) -> {
-            updateMonthData();
-            updateGraph();
-        });
-
         YearMonthPickerCombo ymp = new YearMonthPickerCombo(
                 monthDataMap.firstKey(),
                 monthDataMap.lastKey(),
@@ -95,6 +90,12 @@ public class OverviewPanel extends UiPart<Region> {
         });
 
         pickerContainer.getChildren().add(ymp);
+
+        this.transactionList.addListener((Change<? extends Transaction> change) -> {
+            updateMonthData();
+            updateGraph();
+            changeMonthView(ymp.getValue());
+        });
     }
 
     private void changeMonthView(YearMonth month) {
@@ -113,21 +114,19 @@ public class OverviewPanel extends UiPart<Region> {
      * {@code transactionList}.
      */
     private void updateMonthData() {
+        monthDataMap.clear();
         transactionList.stream().forEach((Transaction t) -> {
             YearMonth yearMonth = YearMonth.from(t.getDate().getDate().toInstant()
                     .atZone(ZoneId.systemDefault())
                     .toLocalDate());
-            if (monthDataMap.get(yearMonth) == null) {
-                monthDataMap.put(yearMonth, new MonthData(0, 0));
-            }
+            monthDataMap.putIfAbsent(yearMonth, new MonthData(0, 0));
+
             if (t.getTransactionType() == TransactionType.EXPENSE) {
                 // Increase Expense
                 monthDataMap.get(yearMonth).increaseExpense(t.getAmount().getValue().doubleValue());
             } else {
                 // Increase Revenue
-                monthDataMap.get(YearMonth.from(t.getDate().getDate().toInstant()
-                        .atZone(ZoneId.systemDefault())
-                        .toLocalDate())).increaseRevenue(t.getAmount().getValue().doubleValue());
+                monthDataMap.get(yearMonth).increaseRevenue(t.getAmount().getValue().doubleValue());
             }
         });
     }
@@ -145,7 +144,7 @@ public class OverviewPanel extends UiPart<Region> {
         YearMonth lastMonth = monthDataMap.lastKey().plusMonths(1);
 
         while (startMonth.isBefore(lastMonth)) {
-            String displayDate = startMonth.format(yearMonthFormat);
+            String displayDate = startMonth.format(YEARMONTH_FORMAT);
             MonthData monthData = monthDataMap.get(startMonth);
             XYChart.Data<String, Number> d = new XYChart.Data<>(displayDate,
                     monthData == null ? 0 : monthData.getProfit());
