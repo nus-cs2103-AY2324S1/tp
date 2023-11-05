@@ -43,10 +43,6 @@ public class Payroll {
      * @param paymentDate The payment date of the payroll.
      */
     public Payroll(Salary salary, String startDate, String endDate, String paymentDate) {
-        requireNonNull(salary);
-        requireNonNull(startDate);
-        requireNonNull(endDate);
-        requireNonNull(paymentDate);
         this.salary = salary;
         this.startDate = LocalDate.parse(startDate, DATE_TIME_FORMATTER);
         this.endDate = LocalDate.parse(endDate, DATE_TIME_FORMATTER);
