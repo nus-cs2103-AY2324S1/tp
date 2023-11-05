@@ -54,7 +54,12 @@ public class CalendarCard extends UiPart<Region> {
         card.setTranslateX(translateX);
 
         this.index.setText(index.getOneBased() + "");
-        this.timeLabel.setText(timeLabel);
-        this.status.setText(status);
+        if (width > 75) {
+            this.timeLabel.setText(timeLabel);
+            this.status.setText(status);
+        } else {
+            this.timeLabel.setText("");
+            this.status.setText("");
+        }
     }
 }
