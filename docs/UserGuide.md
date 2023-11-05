@@ -116,13 +116,13 @@ All planned enhancements will also be listed in the [Planned Enhancements / Know
      - [Add contact: `add`](#add-contact-add)
      - [Add alternative information to contact: `addalt`](#add-alternative-information-to-contact-addalt)
      - [Edit contact information: `edit`](#edit-contact-information-edit)
-     - [Update contact's photo: `updatephoto`](#update-contacts-photo-updatephoto)
+     - [Update contact's photo: `updatephoto`](#update-contact-s-photo-updatephoto)
      - [List all contacts: `list`](#list-all-contacts-list)
      - [Delete contact: `delete`](#delete-contact-delete)
    - [Notes](#notes)
-     - [Add a note to contact: `addnote`](#add-a-note-to-contact--addnote)
-     - [Remove a note from contact: `removenote`](#remove-a-note-from-contact--removenote)
-     - [View notes of a contact: `viewnotes`](#view-notes-of-a-contact--viewnotes)
+     - [Add a note to contact: `addnote`](#add-a-note-to-contact-addnote)
+     - [Remove a note from contact: `removenote`](#remove-a-note-from-contact-removenote)
+     - [View notes of a contact: `viewnotes`](#view-notes-of-a-contact-viewnotes)
    - [Notifications](#notifications)
      - [Birthday notifications](#birthday-notifications)
    - [Payments](#payments)
@@ -177,7 +177,7 @@ All planned enhancements will also be listed in the [Planned Enhancements / Know
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. In `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
-* Parameters in square brackets are optional, **with `addalt` and `edit` as an exception. (Refer to [Add alternative information to contact](#add-alternative-information-to-contact) and [Edit contact information](#edit-contact-information) under Features)**<br>
+* Parameters in square brackets are optional, **with `addalt` and `edit` as an exception. (Refer to [Add alternative information to contact](#add-alternative-information-to-contact-addalt) and [Edit contact information](#edit-contact-information-edit) under Features)**<br>
   e.g In `n/NAME [t/TAG]`, `[t/TAG]` is an optional parameter which can be used as `n/John Doe t/friend` or as `n/John Doe`.
 
 * Parameters with `…`​ after them can be used multiple times including zero times.<br>
@@ -582,9 +582,9 @@ This feature involves only 1 command: `find`, which list contacts whose fields m
 
 Format: `find FIND_EXPRESSION`
 
-Find expressions have a low barrier to entry that allows for simple filtering by field. This basic filtering for contacts is likely sufficient for most of your use cases. We recommend that you first read the [basic filtering](#find-contacts-basic-filtering) section to learn how to perform simple filtering by a single field.
+Find expressions have a low barrier to entry that allows for simple filtering by field. This basic filtering for contacts is likely sufficient for most of your use cases. We recommend that you first read the [basic filtering](#basic-filtering) section to learn how to perform simple filtering by a single field.
 
-If you then find that the basic filtering is insufficient for your use case, you can read the [advanced filtering](#find-contacts-advanced-filtering) section to learn how to perform more complex filtering.
+If you then find that the basic filtering is insufficient for your use case, you can read the [advanced filtering](#advanced-filtering) section to learn how to perform more complex filtering.
 
 
 
@@ -603,7 +603,7 @@ Across both basic and advanced filtering, the following fields are supported:<br
 | Secondary Email | `e2` | Finds contacts whose secondary email addresses **contain** the given keyword. |
 | Telegram | `tg` | Finds contacts whose telegram handles **contain** the given keyword. |
 | Note | `nt` | Finds contacts who have **any note** that **contains** the given keyword. |
-| Balance | `bal` | Keyword **must be valid balance** (see: [Payments feature format](#tbd)). Finds contacts who **owe user** an amount **more than or equal** to given balance. <br><br> Keyword **may start with a negative sign**, in which case finds contacts who **user owes** more than or equal to given balance. |
+| Balance | `bal` | Keyword **must be valid balance** (see: [Money Amount Format](#money-amount-format)). Finds contacts who **owe user** an amount **more than or equal** to given balance. <br><br> Keyword **may start with a negative sign**, in which case finds contacts who **user owes** more than or equal to given balance. |
 
 </panel>
 
