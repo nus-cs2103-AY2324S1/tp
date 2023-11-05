@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 
@@ -52,12 +53,48 @@ public class AddCommandTest {
     }
 
     @Test
+    public void execute_personWithExistingGroupAcceptedByModel_addSuccessful() throws Exception {
+        String grpName = "CS2103";
+        Group group = new Group(grpName);
+        ModelStubWithGroup modelStub = new ModelStubWithGroup(group);
+        Person validPerson = new PersonBuilder().withGroupList(grpName).build();
+        CommandResult commandResult = new AddCommand(validPerson).execute(modelStub);
+
+        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, Messages.format(validPerson)),
+            commandResult.getFeedbackToUser());
+        assertEquals(Arrays.asList(validPerson), modelStub.personsAdded);
+        assertEquals(validPerson, modelStub.group.getListOfGroupMates().get(0)); // checks if person added in grp
+        assertEquals(modelStub.group, validPerson.getGroups().iterator().next()); // checks if grp added in person
+
+    }
+
+    @Test
+    public void execute_personWithNewGroupAcceptedByModel_addSuccessful() throws Exception {
+        ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
+        String grpName = "CS2103";
+        Person validPerson = new PersonBuilder().withGroupList(grpName).build();
+
+        CommandResult commandResult = new AddCommand(validPerson).execute(modelStub);
+
+        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, Messages.format(validPerson)),
+            commandResult.getFeedbackToUser());
+        assertEquals(Arrays.asList(validPerson), modelStub.personsAdded);
+        // checks if person added in grp
+        assertEquals(validPerson, modelStub.groupsAdded.get(0).getListOfGroupMates().get(0));
+        // checks if grp added in person
+        assertEquals(modelStub.groupsAdded.get(0), validPerson.getGroups().iterator().next());
+
+    }
+
+
+    @Test
     public void execute_duplicatePerson_throwsCommandException() {
         Person validPerson = new PersonBuilder().build();
         AddCommand addCommand = new AddCommand(validPerson);
         ModelStub modelStub = new ModelStubWithPerson(validPerson);
 
-        assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_PERSON, () -> addCommand.execute(modelStub));
+        assertThrows(CommandException.class, String.format(AddCommand.MESSAGE_DUPLICATE_PERSON,
+                validPerson.getName().toString()), () -> addCommand.execute(modelStub));
     }
 
     @Test
@@ -252,6 +289,55 @@ public class AddCommandTest {
         }
     }
 
+    private class ModelStubWithGroup extends ModelStub {
+
+        final ArrayList<Person> personsAdded = new ArrayList<>();
+        private final Group group;
+
+        ModelStubWithGroup(Group group) {
+            this.group = group;
+        }
+
+        @Override
+        public boolean hasGroup(Group group) {
+            requireNonNull(group);
+            return this.group.isSameGroup(group);
+        }
+
+        @Override
+        public Group findGroup(String groupName) {
+            if (group.isSameGroup(new Group(groupName))) {
+                return group;
+            }
+            fail();
+            return null;
+        }
+
+        @Override
+        public boolean hasPerson(Person person) {
+            requireNonNull(person);
+            return personsAdded.stream().anyMatch(person::isSamePerson);
+        }
+
+        @Override
+        public boolean hasEmail(Person person) {
+            return false;
+        }
+
+        @Override
+        public boolean hasPhone(Person person) {
+            return false;
+        }
+
+        @Override
+        public void addPerson(Person person) {
+            requireNonNull(person);
+            personsAdded.add(person);
+        }
+
+
+    }
+
     /**
      * A Model stub that contains a single person.
      */
@@ -276,6 +362,8 @@ public class AddCommandTest {
     private class ModelStubAcceptingPersonAdded extends ModelStub {
         final ArrayList<Person> personsAdded = new ArrayList<>();
 
+        final ArrayList<Group> groupsAdded = new ArrayList<>();
+
         @Override
         public boolean hasPerson(Person person) {
             requireNonNull(person);
@@ -286,6 +374,27 @@ public class AddCommandTest {
         public void addPerson(Person person) {
             requireNonNull(person);
             personsAdded.add(person);
+        }
+
+        @Override
+        public void addGroup(Group group) {
+            requireNonNull(group);
+            groupsAdded.add(group);
+        }
+
+        @Override
+        public boolean hasGroup(Group group) {
+            requireNonNull(group);
+            return groupsAdded.contains(group);
+        }
+
+        @Override
+        public Group findGroup(String groupName) {
+            if (groupsAdded.iterator().next().isSameGroup(new Group(groupName))) {
+                return groupsAdded.iterator().next();
+            }
+            fail();
+            return null;
         }
 
         @Override
