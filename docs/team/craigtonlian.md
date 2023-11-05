@@ -60,15 +60,14 @@ The green tags <a href="https://github.com/AY2324S1-CS2103T-W08-1/tp/pull/74" cl
 * **Documentation**:
   * User Guide:
     * Added documentation for the features `addi`, `editi`, `deletei` and `import` <a href="https://github.com/AY2324S1-CS2103T-W08-1/tp/pull/80" class="badge rounded-pill bg-success">\#80</a> <a href="https://github.com/AY2324S1-CS2103T-W08-1/tp/pull/90" class="badge rounded-pill bg-success">\#90</a> <a href="https://github.com/AY2324S1-CS2103T-W08-1/tp/pull/117" class="badge rounded-pill bg-success">\#117</a> <a href="https://github.com/AY2324S1-CS2103T-W08-1/tp/pull/140" class="badge rounded-pill bg-success">\#140</a>
-    * Did cosmetic tweaks to existing documentation of features `help`, `edit`: <a href="https://github.com/AY2324S1-CS2103T-W08-1/tp/pull/67" class="badge rounded-pill bg-success">\#67</a> <a href="https://github.com/AY2324S1-CS2103T-W08-1/tp/pull/138" class="badge rounded-pill bg-success">\#138</a> <a href="https://github.com/AY2324S1-CS2103T-W08-1/tp/pull/145" class="badge rounded-pill bg-success">\#145</a>
+    * Did cosmetic tweaks to existing documentation of features `help`, `edit` <a href="https://github.com/AY2324S1-CS2103T-W08-1/tp/pull/67" class="badge rounded-pill bg-success">\#67</a> <a href="https://github.com/AY2324S1-CS2103T-W08-1/tp/pull/138" class="badge rounded-pill bg-success">\#138</a> <a href="https://github.com/AY2324S1-CS2103T-W08-1/tp/pull/145" class="badge rounded-pill bg-success">\#145</a>
   * Developer Guide:
     * Added implementation details of the Interview Management features such as `addi`, `editi`, and `deletei` <a href="https://github.com/AY2324S1-CS2103T-W08-1/tp/pull/118" class="badge rounded-pill bg-success">\#118</a>
 
 <br>
 
 * **Community**:
-  * PRs reviewed (with non-trivial review comments):
-    <a href="https://github.com/AY2324S1-CS2103T-W08-1/tp/pull/110" class="badge rounded-pill bg-success">\#110</a> <a href="https://github.com/AY2324S1-CS2103T-W08-1/tp/pull/121" class="badge rounded-pill bg-success">\#121</a> <a href="https://github.com/AY2324S1-CS2103T-W08-1/tp/pull/125" class="badge rounded-pill bg-success">\#125</a> <a href="https://github.com/AY2324S1-CS2103T-W08-1/tp/pull/129" class="badge rounded-pill bg-success">\#129</a>  
+  * PRs reviewed (with non-trivial review comments) <a href="https://github.com/AY2324S1-CS2103T-W08-1/tp/pull/110" class="badge rounded-pill bg-success">\#110</a> <a href="https://github.com/AY2324S1-CS2103T-W08-1/tp/pull/121" class="badge rounded-pill bg-success">\#121</a> <a href="https://github.com/AY2324S1-CS2103T-W08-1/tp/pull/125" class="badge rounded-pill bg-success">\#125</a> <a href="https://github.com/AY2324S1-CS2103T-W08-1/tp/pull/129" class="badge rounded-pill bg-success">\#129</a>  
   * Contributed to forum discussions <a href="https://github.com/nus-cs2103-AY2324S1/forum/issues/121" class="badge rounded-pill bg-primary">\#121</a> <a href="https://github.com/nus-cs2103-AY2324S1/forum/issues/158" class="badge rounded-pill bg-primary">\#158</a> <a href="https://github.com/nus-cs2103-AY2324S1/forum/issues/228" class="badge rounded-pill bg-primary">\#228</a> <a href="https://github.com/nus-cs2103-AY2324S1/forum/issues/267" class="badge rounded-pill bg-primary">\#267</a>
 
 <br>
