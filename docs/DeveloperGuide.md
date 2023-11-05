@@ -176,6 +176,10 @@ After the `AddressBookParser` identifies that the user's input has a schedule co
 
 <img src="images/ScheduleClassDiagram.png" width="400"/>
 
+The following activity diagram summarises what happens the user executes a schedule command. 
+
+<img src="images/ScheduleActivityDiagram.png" width="400"/>
+
 **Design Considerations**
 
 **Aspect: How to implement Appointments for Person**  
@@ -204,7 +208,19 @@ Alternative 2: Create a hashset of Appointments for each Person.
   * Harder to implement operations such as editing of an appointment for a client. An additional step of finding the specified appointment within the hashset is required, which may potentially introduce more bugs.
   * Harder to implement default behaviours for when person has no appointment.
 
+### Complete Feature
 
+The **Complete** feature is facilitated by the `CompleteCommand` and `CompleteCommandParser`. The `CompleteCommandParser` creates a `CompleteCommand` associated with a `CompleteCommandDescriptor` which contains information on how the appointments should be completed.
+
+The following sequence diagram illustrates how the complete operation is executed when date given. 
+
+<img src="images/CompleteSequenceDiagram.png" width="800"/>
+
+> :warn: The lifeline of the diagram should end at the destroyer mark (X) but reaches end of diagram due to limitation of plantUML
+
+The following activity diagram illustrates how the complete operation is executed. 
+
+<img src="images/CompleteActivityDiagram.png" width="800"/>
 
 ### Gather Emails Feature
 
