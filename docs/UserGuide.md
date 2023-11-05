@@ -301,11 +301,18 @@ Example:
 #### Adding an interview to an applicant: `addi`
 
 Adds a new interview to an applicant. In the case of duplicate names, the system will automatically increment the last 
-number in the user input by 1, or add 1 if there is no number.
+number in the user input until it hits a unique input, or add 1 if there is no number. However, if the input is too
+large, or there are too many duplicates, the system might throw a message asking you to handle it manually without 
+handling it for you.
+
+Note: The name change is permanant so removing previous interviews will not change back the name. That is if both
+`technical1` and `technical2` exist, deleting `technical1` will not change `technical2` back to `technical1`.
 
 Duplicate handling: 
 * Entering `technical12`, then `technical12` again will result in the 2nd entry being converted to 
 `technical13`.
+* Entering `technical`, `technical1`, then `technical` again will result in the 2nd `technical` entry being 
+converted to `technical2`.
 * Entering `technical`, then `technical` again will result in the 2nd entry being converted to `technical1`.
 
 Format: `addi INDEX t/TYPE [r/RATING]`
@@ -489,8 +496,9 @@ Format: `help`
 <a name="clear"></a>
 #### Clearing all applicant entries: `clear`
 
-After typing `clear`, system asks the user to confirm clearing. If user types `yes`, all the current data stored 
-in the system is the cleared. Else, the clear process is cancelled. 
+After typing `clear`, system asks the user to confirm clearing. If user types `yes` and clicks enter, 
+all the current data stored in the system is then cleared. 
+Else, typing in anything else then pressing enter will cancel the clear process. 
 
 Format: `clear`
 
