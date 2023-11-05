@@ -23,6 +23,7 @@ public class ListGroupCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
+        MESSAGE_SUCCESS.setLength(0);
         MESSAGE_SUCCESS.append("Groups in address book:\n");
         ObservableList<Group> groupList = model.getFilteredGroupList();
         groupList.stream().forEach(
