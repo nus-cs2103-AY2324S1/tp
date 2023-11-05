@@ -264,7 +264,7 @@ It streamlines tasks and provides a more efficient way to manage patient details
 by different users.
 
 **Q**: How do I import patient data from external sources into HealthSync?<br>
-**A**: Datafile storing current patient data will be stored in `data/addressbook.json` by default under the same folder.
+**A**: Data file storing current patient data will be stored in `data/addressbook.json` by default under the same folder.
 You may import patient data and store into that file. However, do adhere to the data format present in the current file.
 
 **Q**: How do I transfer my data to another Computer?<br>
