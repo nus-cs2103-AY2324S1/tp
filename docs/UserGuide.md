@@ -160,12 +160,12 @@ This section introduces the symbols and notations used throughout this guide. We
 
 <br>
 
-| <div style="width:130px">GUI Component</div> | Purpose                                                                                                                                       |
-|----------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------|
-| Applicant details                            | This is where details about the applicant are displayed. These include their name, phone number, email, and position applied.                 |
-| Applicant status                             | This is where the status of the applicant is displayed. The status is categorised into Offered, Rejected, or Undecided.                       |
-| Overall score                                | This is where the overall score of the applicant is displayed. This allows for a fast and easy way to know the performance of each applicant. |
-| Interview rating                             | This is where the rating for a each interview is displayed.                                                                                   |
+| <div style="width:130px">GUI Component</div> | Purpose                                                                                                                                |
+|----------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------|
+| Applicant details                            | This is where details about the applicant are displayed. These include their name, phone number, email, and position applied.          |
+| Applicant status                             | This is where the status of the applicant is displayed. The status is categorised into Offered, Rejected, or Undecided.                |
+| Overall score                                | This is where the overall score of the applicant is displayed. This represents the _average_ rating of all the applicant's interviews. |
+| Interview rating                             | This is where the rating for a each interview is displayed.                                                                            |
 
 ---
 <br>
