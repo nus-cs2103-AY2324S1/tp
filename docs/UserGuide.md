@@ -449,7 +449,7 @@ Format: `filter [n/NAME] [e/EMAIL] [p/POSITION] [hp/PHONE] [s/STATUS] [lts/SCORE
 
 Example:
 * `filter n/Ivan` filters the applicant list to applicants whose name contains `ivan`.
-* `filter n/Ivan p/Testing Engineer status/u` filters applicant list to applicants whose name contains `ivan` applying for the role of `testing engineer` and has a status of `Undecided`.
+* `filter n/Ivan p/Testing Engineer s/u` filters applicant list to applicants whose name contains `ivan` applying for the role of `testing engineer` and has a status of `Undecided`.
 * `filter gts/7` filters applicant list to applicants whose score is strictly greater than 7.
 
 
