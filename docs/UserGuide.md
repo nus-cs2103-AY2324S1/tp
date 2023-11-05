@@ -254,7 +254,7 @@ Below are some examples on how to use the command:
 
 * `addalt 1 tg/@johndoe_123 e2/johndoe@hotmail.com li/john-doe-b9a38128a b/31/10`: Adds telegram "@johndoe_123", secondary email "johndoe@hotmail.com", linkedin "john-doe-b9a38128a" and birthday "31/10" for contact at index 1 of your contact list.
 * `addalt 2 e2/besty@hotmail.com tg/@betsycrowe li/besty-crowe-b7a15138b b/24/07`: Adds secondary email "besty@hotmail.com", telegram "@bestycrowe", linkedin "besty-crowe-b7a15138b" and birthday "24/07" for contact at index 2 of your contact list.
-* `addalt 3 tg/janedoe_123`: Adds telegram "@janedoe_123" for contact at index 3 of your contact list.                           
+* `addalt 3 tg/@janedoe_123`: Adds telegram "@janedoe_123" for contact at index 3 of your contact list.
 
 Refer to [properties of contact](#properties-of-contact) on the accepted formats for the respective parameters.
 
