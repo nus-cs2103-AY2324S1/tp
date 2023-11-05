@@ -11,6 +11,8 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.commons.util.ToStringBuilder;
@@ -30,30 +32,48 @@ import seedu.address.model.tag.Tag;
 /**
  * Edits the details of an existing person in the address book.
  */
-public class EditCommand extends Command {
+public class EditCommand extends UndoableCommand {
 
     public static final String COMMAND_WORD = "edit";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the person identified "
-            + "by the name or IC of the patient.\n"
+    public static final String COMMAND_WORD_ALIAS = "e";
+
+    public static final String MESSAGE_USAGE = COMMAND_WORD + " or " + COMMAND_WORD_ALIAS
+            + ": Edits the details of the Patient identified "
+            + "by the full Name or NRIC of the Patient.\n"
             + "Existing values will be overwritten by the input values.\n"
-            + "Format: edit n/NAME or id/IC_NUMBER [Fields] ...\n"
-            + "Example: " + COMMAND_WORD + " "
+            + "Format: edit n/NAME or id/NRIC [Fields] ...\n"
+            + "Example 1: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
-            + PREFIX_PHONE + "91234567";
+            + PREFIX_PHONE + "91234567 \n"
+            + "Example 2: " + COMMAND_WORD_ALIAS + " "
+            + PREFIX_NAME + "Alex Yeoh "
+            + PREFIX_PHONE + "82786151 \n";
 
-    public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
-    public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided. Example: p/98742122.";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
-    public static final String MESSAGE_PERSON_NOT_FOUND = "This person does not exist in the address book.";
-    public static final String MESSAGE_INCONSISTENT_NAME_AND_ID =
-            "Both a name and an NRIC were provided, but they do not match the same person.";
+    public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Patient: %1$s";
+    public static final String MESSAGE_UNDO_EDIT_PERSON_SUCCESS = "Undoing the Editing of Patient:  %1$s";
+    public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.\n"
+            + "Fields include phone (p/), email (e/), "
+            + "address (a/), appointment (ap/) and medical history (m/)\n"
+            + "Name and NRIC cannot be edited\n";
+    public static final String MESSAGE_PERSON_NOT_FOUND = "INVALID name and/or NRIC!\n"
+            + "The given combination of Name and/or NRIC does not match any person in the Patient list.";
 
-    private final EditPersonDescriptor editPersonDescriptor;
+    private static final Logger logger = Logger.getLogger(EditCommand.class.getName());
 
+    /**
+     * The original state of the person before it was edited by the command.
+     */
+    private Person originalPerson;
+
+    /**
+     * The edited state of the person after it was modified by the command.
+     */
+    private Person editedPerson;
 
     private final Name name;
     private final Nric nric;
+    private final EditPersonDescriptor editPersonDescriptor;
 
     /**
      * @param name of the person in the filtered person list to edit
@@ -70,71 +90,46 @@ public class EditCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Person> lastShownList = model.getFilteredPersonList();
-
-        Optional<Person> personOptional = findPersonToEdit(lastShownList);
+        List<Person> lastShownList = model.getUnfilteredPersonList();
+        Optional<Person> personOptional = CommandUtil.findPersonByIdentifier(name, nric, lastShownList);
 
         if (personOptional.isEmpty()) {
+            logger.log(Level.WARNING, "Person not found for editing");
             throw new CommandException(MESSAGE_PERSON_NOT_FOUND);
         }
 
         Person personToEdit = personOptional.get();
-        Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
+        logger.log(Level.INFO, "Editing person: {0}", personToEdit);
 
-        if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
-        }
+        originalPerson = personToEdit;
+        editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
 
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        logger.log(Level.INFO, "EditCommand executed successfully");
+
+        model.addToHistory(this);
         return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)));
     }
 
-    /**
-     * Finds the person to edit based on the provided name and/or NRIC.
-     *
-     * @param persons A list of persons to search within.
-     * @return An Optional containing the person to edit, if found, or an empty Optional if not found.
-     * @throws CommandException if there is inconsistency between the provided name and NRIC.
-     */
-    public Optional<Person> findPersonToEdit(List<Person> persons) throws CommandException {
-        if (name != null && nric != null) {
-            // Search for a person by name and NRIC
-            Optional<Person> personByName = persons.stream()
-                    .filter(person -> person.getName().equals(name))
-                    .findFirst();
-            Optional<Person> personByNric = persons.stream()
-                    .filter(person -> person.getNric().equals(nric))
-                    .findFirst();
-            // Check if both Optional instances are not empty, and return the one that represents the same person
-            if (personByName.isPresent() && personByNric.isPresent() && personByName.get() == personByNric.get()) {
-                return personByName;
-            } else {
-                throw new CommandException(MESSAGE_INCONSISTENT_NAME_AND_ID);
-            }
-        }
-        if (name != null) {
-            return persons.stream()
-                    .filter(person -> person.getName().equals(name))
-                    .findFirst();
-        } else if (nric != null) {
-            return persons.stream()
-                    .filter(person -> person.getNric().equals(nric))
-                    .findFirst();
-        } else {
-            return Optional.empty();
-        }
+    @Override
+    public CommandResult undo(Model model) {
+        requireNonNull(model);
+        model.setPerson(editedPerson, originalPerson);
+        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+
+        return new CommandResult(String.format(MESSAGE_UNDO_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)));
     }
 
     /**
      * Creates and returns a {@code Person} with the details of {@code personToEdit}
      * edited with {@code editPersonDescriptor}.
      */
-    private static Person createEditedPerson(Person personToEdit, EditPersonDescriptor editPersonDescriptor) {
+    public static Person createEditedPerson(Person personToEdit, EditPersonDescriptor editPersonDescriptor) {
         assert personToEdit != null;
 
-        Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
-        Nric updatedNric = editPersonDescriptor.getNric().orElse(personToEdit.getNric());
+        Name name = editPersonDescriptor.getName().orElse(personToEdit.getName());
+        Nric nric = editPersonDescriptor.getNric().orElse(personToEdit.getNric());
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
@@ -144,7 +139,7 @@ public class EditCommand extends Command {
                 editPersonDescriptor.getMedicalHistories().orElse((personToEdit.getMedicalHistories()));
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 
-        return new Person(updatedName, updatedNric, updatedPhone, updatedEmail, updatedAddress,
+        return new Person(name, nric, updatedPhone, updatedEmail, updatedAddress,
                 updatedAppointment, updatedMedicalHistories, updatedTags);
     }
 

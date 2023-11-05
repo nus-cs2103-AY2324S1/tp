@@ -8,16 +8,33 @@ import seedu.address.model.Model;
 /**
  * Clears the address book.
  */
-public class ClearCommand extends Command {
+public class ClearCommand extends UndoableCommand {
 
     public static final String COMMAND_WORD = "clear";
-    public static final String MESSAGE_SUCCESS = "Address book has been cleared!";
 
+    public static final String COMMAND_WORD_ALIAS = "c";
+
+    public static final String MESSAGE_SUCCESS = "HealthSync has been cleared!";
+
+    public static final String MESSAGE_UNDO_CLEAR_SUCCESS = "Undoing the clearing of HealthSync data.";
+
+    private AddressBook addressBookBeforeClear;
 
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
+
+        // Store a copy of the current address book before clearing
+        addressBookBeforeClear = new AddressBook(model.getAddressBook());
+        model.addToHistory(this);
+
         model.setAddressBook(new AddressBook());
         return new CommandResult(MESSAGE_SUCCESS);
+    }
+    @Override
+    public CommandResult undo(Model model) {
+        requireNonNull(model);
+        model.setAddressBook(addressBookBeforeClear);
+        return new CommandResult(MESSAGE_UNDO_CLEAR_SUCCESS);
     }
 }

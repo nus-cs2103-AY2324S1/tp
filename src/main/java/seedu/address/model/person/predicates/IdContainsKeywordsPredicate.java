@@ -1,13 +1,17 @@
-package seedu.address.model.person;
+package seedu.address.model.person.predicates;
+
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.function.Predicate;
 
 import seedu.address.commons.util.StringUtil;
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.person.Person;
 
 /**
- * Tests that a {@code Person}'s {@code Name} matches any of the keywords given.
+ * Tests that a {@code Person}'s {@code Nric} matches any of the keywords given exactly.
  */
 public class IdContainsKeywordsPredicate implements Predicate<Person> {
     private final List<String> keywords;
@@ -20,6 +24,11 @@ public class IdContainsKeywordsPredicate implements Predicate<Person> {
     public boolean test(Person person) {
         return keywords.stream()
                 .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(person.getNric().value, keyword));
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(PREFIX_NRIC, keywords);
     }
 
     @Override

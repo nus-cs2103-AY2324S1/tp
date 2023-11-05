@@ -57,7 +57,7 @@ The *Sequence Diagram* below shows how the components interact with each other f
 Each of the four main components (also shown in the diagram above),
 
 * defines its *API* in an `interface` with the same name as the Component.
-* implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point.
+* implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point).
 
 For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
 
@@ -246,10 +246,204 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 _{more aspects and alternatives to be added}_
 
+### Implementation of Single, optional Appointment Field
+
+#### Proposed Implementation
+
+_{Explain how `Appointment` as an optional field is implemented}_
+
+_{Explain how `Appointment` is stored inside each `Person`}_
+
+#### Design Considerations:
+
+**Aspect: Parsing of `Appointment` Field**
+
+* **Alternative 1 (current choice):** Use of the single `ap/` flag.
+  * Pros: Easy to input on the user-end.
+  * Cons: Hard to separate time fields, could be troublesome to implement a parse format string.
+
+* **Alternative 2:** Use of 2 flags to denote start and end time for appointment.
+  * Pros: Immediate clarity on what fields to implement, and how to parse input string.
+  * Cons: Strong dependence between 2 flags requires more fail-state management.
+
+**Aspect: Value to store `Appointment` as**
+
+* **Alternative 1 (current choice):** Use of raw `String` format for Appointment
+  * Pros: Far easier to parse and store as an object.
+  * Cons: Hard to extend upon in future use-cases, such as reminders, etc.
+
+* **Alternative 2:** Use of `DateTime`-related objects for Appointment
+  * Pros: More direct paths of feature extension in the long run.
+  * Cons: Translation to and from `DateTime` objects can be non-trivial.
+
+We are currently in the process of switching to Alternative 2, as Alternative 1 was chosen primarily for its
+fast implementation for the MVP.
+
+### Delete Feature
+
+#### Description
+
+The `DeleteCommand` allows users to delete a patient's profile or a specified field from the patient's profile.
+
+#### Implementation Details
+
+The `DeleteCommand` is implemented as follows:
+- **Command Word**: The command word for this feature is `delete`
+- **Usage**: Users invoke the `DeleteCommand` by specifying the command word, followed by the name or IC of the person they wish to delete and any fields they wish to delete.
+- **Command Format**: `delete n/Name or id/IC_Number[Fields] ...`
+- **DeletePersonDescriptor**: The `DeleteCommand` relies on an `DeletePersonDescriptor` to capture which fields the user wishes to delete from the patient's profile. The descriptor will be passed to the `DeleteCommand` to execute the deletion.
+- **Validation**: The `DeleteCommand` performs validation to ensure that the IC or Name provided is valid.
+- **Execution**: When executed, the `DeleteCommand` identifies the patient to be deleted based on the provided name or IC. When the patient is found, if no there are no specified fields to delete, the entire patient profile will be deleted from the database. Otherwise, the specified fields will be deleted from the patient's profile.
+
+The following activity diagram summarizes what happens when a user executes a new command:
+
+<puml src=diagrams/DeleteActivityDiagram.puml width="250"/>
+
+#### Rationale
+
+- **Flexibility**: The `DeleteCommand` provides flexibility to users, allowing them to choose what to be deleted from the patient's profile, instead of an "all-or-nothing" approach.
+- **Data Accuracy**: The `DeleteCommand` allows users to delete outdated or incorrect information from the patient's profile, ensuring that the database is up-to-date and accurate.
+- **Privacy and Compliance**: The `DeleteCommand` supports "right to erasure" under the PDPA, allowing users to delete patient's information from the database when requested.
+
+#### Alternative Implementation
+
+- **Alternative 1**: The `DeleteCommand` could be implemented as a `DeleteFieldCommand` and a `DeletePersonCommand`. The `DeleteFieldCommand` will delete the specified fields from the patient's profile, while the `DeletePersonCommand` will delete the entire patient profile from the database. This approach will require the user to invoke two commands to delete a patient's profile and the specified fields from the patient's profile. This approach is not chosen as it is less intuitive and requires more effort from the user.
+
+
+### Addition of Interface for Find-type commands
+
+#### Proposed Implementation
+
+_{Explain how there is overlap in function for `find`, `delete`, `edit`}_
+
 ### \[Proposed\] Data archiving
 
 _{Explain here how the data archiving feature will be implemented}_
 
+### Improved GUI
+
+_The Graphical User Interface (GUI) is designed using JavaFX and employs a combination of HBox, VBox, and StackPane layouts. It also utilizes specific color choices to create an appealing and user-friendly interface._
+
+_Developers can use this information as a reference when working with the HealthSync GUI code._
+
+#### Layout Structure:
+
+The primary layout structure for the HealthSync GUI is based on HBox and VBox containers, which allow for a flexible arrangement of UI elements.
+
+1. HBox
+   Location: The HBox is the top-level container in the GUI and spans the entire application window.
+
+2. VBox
+   Location: There are two VBox containers within the HBox, which are responsible for organizing various elements of the GUI.
+
+StackPane
+The StackPane is used to organize specific UI elements within the VBox containers. It allows for the layering of elements and effective management of screen real estate.
+
+1. StackPane (Person List)
+
+   Location: Inside the first VBox (fx:id="personList").
+2. StackPane (Logger Panel)
+
+    Location: Also inside the first VBox (fx:id="personList").
+3. StackPane (Result Display, Command Box, and Status Bar)
+
+    Location: These StackPanes are located inside the second VBox
+
+#### Color Choice:
+
+The HealthSync GUI utilizes specific color choices to create a visually pleasing and organized interface, while still maintaining the original Dark Theme.
+
+1. Primary Colour: #43314E
+2. Secondary Colour: #231335
+
+
+### Edit Feature
+
+#### Description
+
+The `EditCommand` allows users to modify the details of an existing person within the address book.
+
+#### Implementation Details
+
+The `EditCommand` is implemented as follows:
+- **Command Word**: The command word for this feature is `edit`.
+- **Usage**: Users invoke the `EditCommand` by specifying the command word, followed by the name or IC of the person they wish to edit and the fields they wish to modify.
+    - The command format is: `edit n/NAME or id/IC_NUMBER [Fields] ...`.
+- **EditPersonDescriptor**: The `EditCommand` relies on an `EditPersonDescriptor` to capture the details to edit the person with. This descriptor allows for updating various attributes of the person, such as phone, email, address, appointment, and medical histories.
+- **Validation**: The `EditCommand` performs validation to ensure at least one field to edit is provided. It also checks for consistency when both a name and IC are provided.
+- **Execution**: When executed, the `EditCommand` identifies the person to edit based on the provided name and/or IC. If the person is found, it creates an `editedPerson` with the desired changes. The person is then updated with the new details.
+
+The following activity diagram summarizes what happens when a user executes a new command:
+
+<puml src="diagrams/EditActivityDiagram.puml" width="250" />
+
+#### Rationale
+
+- **Flexibility**: The `EditCommand` provides flexibility to users by allowing them to choose whether to edit a person by name or IC, as per their convenience.
+- **Maintaining Data Integrity**: The feature is designed to maintain the integrity of the address book by updating existing entries rather than creating new ones.
+
+#### Alternatives Considered
+
+- **Alternative 1**: Using Numbering Index to specify the person to edit. In this approach, users would provide the index of the person based on the list instead of specifying a name or IC. For example, they could use a command like `edit 1 p/93029393` to edit the first person of the list with the phone number.
+    - **Pros**:
+        - **Simplicity**: Using an index is straightforward and doesn't require specifying a name or IC.
+        - **Reduced Ambiguity**: Using an index avoids potential ambiguity when multiple individuals have the same name.
+
+    - **Cons**:
+         - **Lack of Context**: Users might find it challenging to remember the index of a particular person, especially in a large address book.
+         - **Potential Errors**: If the list of persons changes (e.g., due to deletions or additions), the numbering index could become outdated, leading to errors.
+         - **Limited Identifiability**: Index numbers do not provide any context about the person, which may be confusing when there are multiple people with the same name or similar information.
+
+### Find Feature
+
+#### Description
+
+The `FindCommand` allows users to find existing person(s) within the patient list, using their name or NRIC, and view their field data.
+
+#### Implementation Details
+
+The `FindCommand` is implemented as follows:
+- **Command Word**: The command word for this feature is `find`.
+- **Usage**: Users invoke the `FindCommand` by specifying the command word, followed by the name or NRIC of the person(s) they wish to find.
+    - The command format is: `find n/NAME` or `find id/IC_NUMBER`.
+- **`execute` method**: The `FindCommand` executes the search by using the specified predicates (`NameContainsKeywordsPredicate` or `IdContainsKeywordsPredicate`) to filter and list all persons matching the search criteria.
+- **Validation**: The `FindCommand` performs validation to ensure at least one keyword is provided. It searches based on either name or NRIC, to speed up the search and prevent possible conflicts if name and NRIC do not match each other.
+- **Execution**: When executed, the `FindCommand` identifies the person(s) being searched for based on the provided name or NRIC. If a name is provided as keyword, a `FindCommand(NameContainsKeywordsPredicate)` is created, and if an NRIC is provided as keyword, a `FindCommand(IdContainsKeywordsPredicate)` is created. `updateFilteredPersonList` will then update the filter of the filtered person list to filter by the given name or NRIC predicate (keyword).
+
+The following sequence diagram shows how the find operation works:
+
+<puml src="diagrams/FindSequenceDiagram.puml" width="400" />
+
+The following activity diagram summarizes what happens when a user executes a new command:
+
+<puml src="diagrams/FindActivityDiagram.puml" width="500" />
+
+#### Rationale
+
+- **Flexibility**: The `FindCommand` provides flexibility to users by allowing them to choose whether to find a person by name or NRIC, whichever is faster or available.
+- **User Experience**: The keyword matching is case-insensitive, making the search faster and more user-friendly.
+- **Data Integrity**: The feature is designed to maintain the integrity of the patient list by not changing any of the patient data.
+
+#### Alternatives Considered
+
+- **Alternative 1**: Using only name to find patients.
+    - **Pros**:
+        - **Standardisation**: The command format is fixed and will always only be `find n/NAME`, which may be easier to remember.
+        - **User Convenience**: Searching primarily by name is a common way to look up a patient in a healthcare system and users may be more familiar with this method.
+
+    - **Cons**:
+        - **Potential Errors**: If patients' names change over time, there may be failed searches and other identifiers, like NRIC, may be needed.
+        - **Limited Identifiability**: If multiple patients share the same name, they will be indistinguishable name-wise and other identifiers, like NRIC, may be needed.
+
+
+- **Alternative 2**: Requiring both name and NRIC keywords to find patients within a single find command.
+  - **Pros**:
+    - **Enhanced Precision**: Combining both name and NRIC is a more unique identification method, making it easier to find a patient sharing a name with other patients.
+    - **Patient Verification**: Searching by both criteria adds a layer of verification, ensuring the correct patient is selected.
+
+  - **Cons**:
+    - **Additional User Effort**: Users need to provide both name and NRIC, which may take longer or require extra effort, especially if they only have one piece of information readily available.
+    - **Increased Ambiguity**: If the name keyword does not match the NRIC keyword, this may lead to potential confusion in which patient is being searched for.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -304,7 +498,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* `     | a new user of the app                          | have physical UI Buttons                           | use to execute tasks before I'm familiar with shortcuts                  |
 | `* `     | frontdesk worker                               | have a very optimised app                          | do my task and have data reading almost instantly (O(1))                 |
 | `* `     | frontdesk worker                               | add tags to patients                               | view and filter patients accordingly                                     |
-| `* `     | frontdesk worker                               | leverage on database statistics                    | analyse data (ie. how many appointments booked/ month for doctors)       |
+| `* `     | frontdesk worker                               | leverage on database statistics                    | analyse data (ie. how many appointments booked/ month for doctors)        |
 | `* `     | frontdesk worker                               | save back-up or archive patient details somewhere  | maintain a fast application while still having data securely stored      |
 
 
@@ -471,12 +665,6 @@ based on an identifier
 * 1a. No matches exist in the list.
 
     * 1a1. HealthSync displays a "no matches found" message.
-
-      Use case ends.
-
-* 1b. User additionally specifies fields of the patient that they are interested in.
-
-    * 1b1. HealthSync displays only the specific fields of the patients that match the query.
 
       Use case ends.
 
