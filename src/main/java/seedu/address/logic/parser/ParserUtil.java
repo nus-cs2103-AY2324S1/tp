@@ -37,6 +37,10 @@ import seedu.address.model.tag.Tag;
 public class ParserUtil {
     public static final DateTimeFormatter FORMAT = DateTimeFormatter.ofPattern("dd.MM.yyyy HHmm");
 
+    /**
+     * Checks if the arguments are empty.
+     * @throws ParseException if arguments is not empty.
+     */
     public static void verifyNoArgs(String args) throws ParseException {
         if (!args.isEmpty()) {
             throw new ParseException(MESSAGE_INVALID_FIELDS);
@@ -76,14 +80,10 @@ public class ParserUtil {
         List<Index> indexes = new ArrayList<>();
 
         for (String indexString : indexStrings) {
-            // check if size overflows
-            if (indexes.size() >= expectedIndexes) {
-                // if it is another index, throw too many index exception
-                if (StringUtil.isNumeric(indexString)) {
+            if (indexes.size() >= expectedIndexes) { // check if size overflows
+                if (StringUtil.isNumeric(indexString)) { // if it is another index, throw too many index exception
                     throw new ParseException(MESSAGE_TOO_MANY_INDEXES);
-                }
-                // otherwise, throw invalid field exception
-                else {
+                } else { // otherwise, throw invalid field exception
                     throw new ParseException(MESSAGE_INVALID_FIELDS);
                 }
             }

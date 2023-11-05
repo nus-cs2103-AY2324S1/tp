@@ -24,17 +24,18 @@ import seedu.address.model.tag.Tag;
 public class EditMeetingCommandParser implements Parser<EditMeetingCommand> {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the EditMeetingCommand
-     * and returns an EditMeetingCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the
+     * EditMeetingCommand and returns an EditMeetingCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
     public EditMeetingCommand parse(String args) throws ParseException {
         try {
             requireNonNull(args);
             ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_TITLE, PREFIX_LOCATION, PREFIX_START,
-                            PREFIX_END, PREFIX_TAG);
+                    PREFIX_END, PREFIX_TAG);
 
-            Index index = ParserUtil.parseIndexes(argMultimap.getPreamble(), EditMeetingCommand.EXPECTED_INDEXES).get(0);
+            Index index = ParserUtil.parseIndexes(argMultimap.getPreamble(), EditMeetingCommand.EXPECTED_INDEXES)
+                    .get(0);
 
             argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_TITLE, PREFIX_LOCATION, PREFIX_START, PREFIX_END);
 
@@ -44,7 +45,8 @@ public class EditMeetingCommandParser implements Parser<EditMeetingCommand> {
                 editMeetingDescriptor.setTitle(ParserUtil.parseTitle(argMultimap.getValue(PREFIX_TITLE).get()));
             }
             if (argMultimap.getValue(PREFIX_LOCATION).isPresent()) {
-                editMeetingDescriptor.setLocation(ParserUtil.parseLocation(argMultimap.getValue(PREFIX_LOCATION).get()));
+                editMeetingDescriptor
+                        .setLocation(ParserUtil.parseLocation(argMultimap.getValue(PREFIX_LOCATION).get()));
             }
             if (argMultimap.getValue(PREFIX_START).isPresent()) {
                 editMeetingDescriptor.setStart(ParserUtil.parseMeetingTime(argMultimap.getValue(PREFIX_START).get()));
@@ -66,9 +68,10 @@ public class EditMeetingCommandParser implements Parser<EditMeetingCommand> {
     }
 
     /**
-     * Parses {@code Collection<String> tags} into a {@code Set<Tag>} if {@code tags} is non-empty.
-     * If {@code tags} contain only one element which is an empty string, it will be parsed into a
-     * {@code Set<Tag>} containing zero tags.
+     * Parses {@code Collection<String> tags} into a {@code Set<Tag>} if
+     * {@code tags} is non-empty. If {@code tags} contain only one element which is
+     * an empty string, it will be parsed into a {@code Set<Tag>} containing zero
+     * tags.
      */
     private Optional<Set<Tag>> parseTagsForEdit(Collection<String> tags) throws ParseException {
         assert tags != null;

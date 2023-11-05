@@ -86,21 +86,30 @@ public class EditCommandParserTest {
 
     @Test
     public void parse_invalidValue_failure() {
-        assertParseFailure(parser, "1" + INVALID_NAME_DESC, Name.MESSAGE_CONSTRAINTS + "\n" + EditCommand.MESSAGE_USAGE); // invalid name
-        assertParseFailure(parser, "1" + INVALID_PHONE_DESC, Phone.MESSAGE_CONSTRAINTS + "\n" + EditCommand.MESSAGE_USAGE); // invalid phone
-        assertParseFailure(parser, "1" + INVALID_EMAIL_DESC, Email.MESSAGE_CONSTRAINTS + "\n" + EditCommand.MESSAGE_USAGE); // invalid email
-        assertParseFailure(parser, "1" + INVALID_STATUS_DESC, Status.MESSAGE_CONSTRAINTS + "\n" + EditCommand.MESSAGE_USAGE); // invalid status
-        assertParseFailure(parser, "1" + INVALID_TAG_DESC, Tag.MESSAGE_CONSTRAINTS + "\n" + EditCommand.MESSAGE_USAGE); // invalid tag
+        assertParseFailure(parser, "1" + INVALID_NAME_DESC,
+                Name.MESSAGE_CONSTRAINTS + "\n" + EditCommand.MESSAGE_USAGE); // invalid name
+        assertParseFailure(parser, "1" + INVALID_PHONE_DESC,
+                Phone.MESSAGE_CONSTRAINTS + "\n" + EditCommand.MESSAGE_USAGE); // invalid phone
+        assertParseFailure(parser, "1" + INVALID_EMAIL_DESC,
+                Email.MESSAGE_CONSTRAINTS + "\n" + EditCommand.MESSAGE_USAGE); // invalid email
+        assertParseFailure(parser, "1" + INVALID_STATUS_DESC,
+                Status.MESSAGE_CONSTRAINTS + "\n" + EditCommand.MESSAGE_USAGE); // invalid status
+        assertParseFailure(parser, "1" + INVALID_TAG_DESC,
+                Tag.MESSAGE_CONSTRAINTS + "\n" + EditCommand.MESSAGE_USAGE); // invalid tag
 
         // invalid phone followed by valid email
-        assertParseFailure(parser, "1" + INVALID_PHONE_DESC + EMAIL_DESC_AMY, Phone.MESSAGE_CONSTRAINTS + "\n" + EditCommand.MESSAGE_USAGE);
+        assertParseFailure(parser, "1" + INVALID_PHONE_DESC + EMAIL_DESC_AMY,
+                Phone.MESSAGE_CONSTRAINTS + "\n" + EditCommand.MESSAGE_USAGE);
 
         // while parsing {@code PREFIX_TAG} alone will reset the tags of the {@code
         // Person} being edited,
         // parsing it together with a valid tag results in error
-        assertParseFailure(parser, "1" + TAG_DESC_FRIEND + TAG_DESC_HUSBAND + TAG_EMPTY, Tag.MESSAGE_CONSTRAINTS + "\n" + EditCommand.MESSAGE_USAGE);
-        assertParseFailure(parser, "1" + TAG_DESC_FRIEND + TAG_EMPTY + TAG_DESC_HUSBAND, Tag.MESSAGE_CONSTRAINTS + "\n" + EditCommand.MESSAGE_USAGE);
-        assertParseFailure(parser, "1" + TAG_EMPTY + TAG_DESC_FRIEND + TAG_DESC_HUSBAND, Tag.MESSAGE_CONSTRAINTS + "\n" + EditCommand.MESSAGE_USAGE);
+        assertParseFailure(parser, "1" + TAG_DESC_FRIEND + TAG_DESC_HUSBAND + TAG_EMPTY,
+                Tag.MESSAGE_CONSTRAINTS + "\n" + EditCommand.MESSAGE_USAGE);
+        assertParseFailure(parser, "1" + TAG_DESC_FRIEND + TAG_EMPTY + TAG_DESC_HUSBAND,
+                Tag.MESSAGE_CONSTRAINTS + "\n" + EditCommand.MESSAGE_USAGE);
+        assertParseFailure(parser, "1" + TAG_EMPTY + TAG_DESC_FRIEND + TAG_DESC_HUSBAND,
+                Tag.MESSAGE_CONSTRAINTS + "\n" + EditCommand.MESSAGE_USAGE);
 
         // multiple invalid values, but only the first invalid value is captured
         assertParseFailure(parser, "1" + INVALID_NAME_DESC + INVALID_EMAIL_DESC + VALID_PHONE_AMY,
@@ -189,24 +198,28 @@ public class EditCommandParserTest {
         Index targetIndex = INDEX_FIRST_PERSON;
         String userInput = targetIndex.getOneBased() + INVALID_PHONE_DESC + PHONE_DESC_BOB;
 
-        assertParseFailure(parser, userInput, Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PHONE) + "\n" + EditCommand.MESSAGE_USAGE);
+        assertParseFailure(parser, userInput,
+                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PHONE) + "\n" + EditCommand.MESSAGE_USAGE);
 
         // invalid followed by valid
         userInput = targetIndex.getOneBased() + PHONE_DESC_BOB + INVALID_PHONE_DESC;
 
-        assertParseFailure(parser, userInput, Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PHONE) + "\n" + EditCommand.MESSAGE_USAGE);
+        assertParseFailure(parser, userInput,
+                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PHONE) + "\n" + EditCommand.MESSAGE_USAGE);
 
         // multiple valid fields repeated
         userInput = targetIndex.getOneBased() + PHONE_DESC_AMY + EMAIL_DESC_AMY + TAG_DESC_FRIEND + PHONE_DESC_AMY
                 + EMAIL_DESC_AMY + TAG_DESC_FRIEND + PHONE_DESC_BOB + EMAIL_DESC_BOB + TAG_DESC_HUSBAND;
 
-        assertParseFailure(parser, userInput, Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PHONE, PREFIX_EMAIL) + "\n" + EditCommand.MESSAGE_USAGE);
+        assertParseFailure(parser, userInput, Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PHONE, PREFIX_EMAIL)
+                + "\n" + EditCommand.MESSAGE_USAGE);
 
         // multiple invalid values
         userInput = targetIndex.getOneBased() + INVALID_PHONE_DESC + INVALID_EMAIL_DESC + INVALID_PHONE_DESC
                 + INVALID_EMAIL_DESC;
 
-        assertParseFailure(parser, userInput, Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PHONE, PREFIX_EMAIL) + "\n" + EditCommand.MESSAGE_USAGE);
+        assertParseFailure(parser, userInput, Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PHONE, PREFIX_EMAIL)
+                + "\n" + EditCommand.MESSAGE_USAGE);
     }
 
     @Test

@@ -33,7 +33,7 @@ public class FindMeetingCommandParser implements Parser<FindMeetingCommand> {
     public FindMeetingCommand parse(String args) throws ParseException {
         try {
             logger.info("Begin FindMeetingCommand parse");
-            requireNonNull(args); 
+            requireNonNull(args);
 
             ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_TITLE, PREFIX_LOCATION, PREFIX_START,
                     PREFIX_END, PREFIX_NAME, PREFIX_TAG);

@@ -78,8 +78,8 @@ public class AddressBookParserTest {
     public void parseCommand_clear() throws Exception {
         assertTrue(parser.parseCommand(ClearCommand.COMMAND_WORD) instanceof ClearCommand);
 
-        assertThrows(ParseException.class, MESSAGE_INVALID_FIELDS,
-                () -> parser.parseCommand(ClearCommand.COMMAND_WORD + " 3"));
+        assertThrows(ParseException.class, MESSAGE_INVALID_FIELDS, (
+                ) -> parser.parseCommand(ClearCommand.COMMAND_WORD + " 3"));
     }
 
     @Test
@@ -113,8 +113,8 @@ public class AddressBookParserTest {
     public void parseCommand_exit() throws Exception {
         assertTrue(parser.parseCommand(ExitCommand.COMMAND_WORD) instanceof ExitCommand);
 
-        assertThrows(ParseException.class, MESSAGE_INVALID_FIELDS,
-                () -> parser.parseCommand(ExitCommand.COMMAND_WORD + " 3"));
+        assertThrows(ParseException.class, MESSAGE_INVALID_FIELDS, (
+                ) -> parser.parseCommand(ExitCommand.COMMAND_WORD + " 3"));
     }
 
     @Test
@@ -143,24 +143,24 @@ public class AddressBookParserTest {
     public void parseCommand_help() throws Exception {
         assertTrue(parser.parseCommand(HelpCommand.COMMAND_WORD) instanceof HelpCommand);
 
-        assertThrows(ParseException.class, MESSAGE_INVALID_FIELDS,
-                () -> parser.parseCommand(HelpCommand.COMMAND_WORD + " 3"));
+        assertThrows(ParseException.class, MESSAGE_INVALID_FIELDS, (
+                ) -> parser.parseCommand(HelpCommand.COMMAND_WORD + " 3"));
     }
 
     @Test
     public void parseCommand_listc() throws Exception {
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD) instanceof ListCommand);
 
-        assertThrows(ParseException.class, MESSAGE_INVALID_FIELDS,
-                () -> parser.parseCommand(ListCommand.COMMAND_WORD + " 3"));
+        assertThrows(ParseException.class, MESSAGE_INVALID_FIELDS, (
+                ) -> parser.parseCommand(ListCommand.COMMAND_WORD + " 3"));
     }
 
     @Test
     public void parseCommand_listm() throws Exception {
         assertTrue(parser.parseCommand(ListMeetingCommand.COMMAND_WORD) instanceof ListMeetingCommand);
 
-        assertThrows(ParseException.class, MESSAGE_INVALID_FIELDS,
-                () -> parser.parseCommand(ListMeetingCommand.COMMAND_WORD + " 3"));
+        assertThrows(ParseException.class, MESSAGE_INVALID_FIELDS, (
+                ) -> parser.parseCommand(ListMeetingCommand.COMMAND_WORD + " 3"));
     }
 
     @Test
@@ -186,8 +186,8 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_unrecognisedInput_throwsParseException() {
-        assertThrows(ParseException.class, MESSAGE_INVALID_COMMAND_FORMAT + "\n" + HelpCommand.MESSAGE_USAGE,
-                () -> parser.parseCommand(""));
+        assertThrows(ParseException.class, MESSAGE_INVALID_COMMAND_FORMAT + "\n" + HelpCommand.MESSAGE_USAGE, (
+                ) -> parser.parseCommand(""));
     }
 
     @Test
