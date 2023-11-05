@@ -214,7 +214,7 @@ Finds persons whose names, tags or financial plans contain any of the specified 
 Format: `find [n/NAME]…​ [fp/FINANCIAL_PLAN]…​ [t/TAG]…​`
 
 * At least one of the optional fields must be provided.
-* This command will ignore other prefixes which can cause undefined behaviour.
+* This command will ignore other prefixes. Using them anyway can cause undefined behaviour.
 * The search is case-insensitive. e.g `hans` will match `Hans`
 * For names, only full words will be matched e.g. `Han` will not match `Hans`
 * Calling this command on a sorted list will retain the sorted quality of the list.
