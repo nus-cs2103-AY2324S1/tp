@@ -1,7 +1,5 @@
 package seedu.address.logic.parser;
 
-import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.DeleteMeetingCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -17,13 +15,14 @@ public class DeleteMeetingCommandParser implements Parser<DeleteMeetingCommand> 
      * @throws ParseException if the user input does not conform the expected format
      */
     public DeleteMeetingCommand parse(String args) throws ParseException {
+        Index index;
         try {
-            Index index = ParserUtil.parseIndex(args);
-            return new DeleteMeetingCommand(index);
+            index = ParserUtil.parseIndexes(args, DeleteMeetingCommand.EXPECTED_INDEXES).get(0);
         } catch (ParseException pe) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteMeetingCommand.MESSAGE_USAGE), pe);
+            throw new ParseException(DeleteMeetingCommand.MESSAGE_USAGE, pe);
         }
+
+        return new DeleteMeetingCommand(index);
     }
 
 }

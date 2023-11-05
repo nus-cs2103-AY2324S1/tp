@@ -1,7 +1,5 @@
 package seedu.address.logic.parser;
 
-import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.MarkMeetingCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -17,13 +15,14 @@ public class MarkMeetingCommandParser implements Parser<MarkMeetingCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public MarkMeetingCommand parse(String args) throws ParseException {
+        Index index;
         try {
-            Index index = ParserUtil.parseIndex(args);
-            return new MarkMeetingCommand(index);
+            index = ParserUtil.parseIndex(args);
         } catch (ParseException pe) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, MarkMeetingCommand.MESSAGE_USAGE), pe);
+            throw new ParseException(MarkMeetingCommand.MESSAGE_USAGE, pe);
         }
+
+        return new MarkMeetingCommand(index);
     }
 
 }

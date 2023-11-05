@@ -27,7 +27,7 @@ public class FindMeetingCommandParserTest {
     @Test
     public void parse_nonEmptyPreambleArg_throwsParseException() {
         assertParseFailure(parser, " dfvuv m/CS2103T",
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindMeetingCommand.MESSAGE_USAGE));
+                MESSAGE_INVALID_COMMAND_FORMAT + "\n" + FindMeetingCommand.MESSAGE_USAGE);
     }
 
     @Test
@@ -81,7 +81,7 @@ public class FindMeetingCommandParserTest {
     @Test
     public void parse_inValidArgsTime_throwsParseException() {
         assertParseFailure(parser, " e/20.09.2023 1000 s/20.09.2023 1200",
-                String.format(MeetingTime.MESSAGE_CONSTRAINTS));
+                MeetingTime.MESSAGE_CONSTRAINTS + "\n" + FindMeetingCommand.MESSAGE_USAGE);
     }
 
     /**

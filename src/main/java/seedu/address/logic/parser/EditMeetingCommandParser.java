@@ -1,7 +1,6 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_END;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LOCATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_START;
@@ -30,44 +29,40 @@ public class EditMeetingCommandParser implements Parser<EditMeetingCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public EditMeetingCommand parse(String args) throws ParseException {
-        requireNonNull(args);
-        ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_TITLE, PREFIX_LOCATION, PREFIX_START,
-                        PREFIX_END, PREFIX_TAG);
-
-        Index index;
-
         try {
-            index = ParserUtil.parseIndex(argMultimap.getPreamble());
+            requireNonNull(args);
+            ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_TITLE, PREFIX_LOCATION, PREFIX_START,
+                            PREFIX_END, PREFIX_TAG);
+
+            Index index = ParserUtil.parseIndex(argMultimap.getPreamble());
+
+            argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_TITLE, PREFIX_LOCATION, PREFIX_START, PREFIX_END);
+
+            EditMeetingDescriptor editMeetingDescriptor = new EditMeetingDescriptor();
+
+            if (argMultimap.getValue(PREFIX_TITLE).isPresent()) {
+                editMeetingDescriptor.setTitle(ParserUtil.parseTitle(argMultimap.getValue(PREFIX_TITLE).get()));
+            }
+            if (argMultimap.getValue(PREFIX_LOCATION).isPresent()) {
+                editMeetingDescriptor.setLocation(ParserUtil.parseLocation(argMultimap.getValue(PREFIX_LOCATION).get()));
+            }
+            if (argMultimap.getValue(PREFIX_START).isPresent()) {
+                editMeetingDescriptor.setStart(ParserUtil.parseMeetingTime(argMultimap.getValue(PREFIX_START).get()));
+            }
+            if (argMultimap.getValue(PREFIX_END).isPresent()) {
+                editMeetingDescriptor.setEnd(ParserUtil.parseMeetingTime(argMultimap.getValue(PREFIX_END).get()));
+            }
+
+            parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editMeetingDescriptor::setTags);
+
+            if (!editMeetingDescriptor.isAnyFieldEdited()) {
+                throw new ParseException(EditMeetingCommand.MESSAGE_NOT_EDITED);
+            }
+
+            return new EditMeetingCommand(index, editMeetingDescriptor);
         } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    EditMeetingCommand.MESSAGE_USAGE), pe);
+            throw new ParseException(EditMeetingCommand.MESSAGE_USAGE, pe);
         }
-
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_TITLE, PREFIX_LOCATION, PREFIX_START, PREFIX_END);
-
-        EditMeetingDescriptor editMeetingDescriptor = new EditMeetingDescriptor();
-
-        if (argMultimap.getValue(PREFIX_TITLE).isPresent()) {
-            editMeetingDescriptor.setTitle(ParserUtil.parseTitle(argMultimap.getValue(PREFIX_TITLE).get()));
-        }
-        if (argMultimap.getValue(PREFIX_LOCATION).isPresent()) {
-            editMeetingDescriptor.setLocation(ParserUtil.parseLocation(argMultimap.getValue(PREFIX_LOCATION).get()));
-        }
-        if (argMultimap.getValue(PREFIX_START).isPresent()) {
-            editMeetingDescriptor.setStart(ParserUtil.parseMeetingTime(argMultimap.getValue(PREFIX_START).get()));
-        }
-        if (argMultimap.getValue(PREFIX_END).isPresent()) {
-            editMeetingDescriptor.setEnd(ParserUtil.parseMeetingTime(argMultimap.getValue(PREFIX_END).get()));
-        }
-
-        parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editMeetingDescriptor::setTags);
-
-        if (!editMeetingDescriptor.isAnyFieldEdited()) {
-            throw new ParseException(EditMeetingCommand.MESSAGE_NOT_EDITED);
-        }
-
-        return new EditMeetingCommand(index, editMeetingDescriptor);
     }
 
     /**

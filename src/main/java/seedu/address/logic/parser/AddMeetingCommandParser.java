@@ -38,30 +38,34 @@ public class AddMeetingCommandParser implements Parser<AddMeetingCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public AddMeetingCommand parse(String args) throws ParseException {
-        logger.info("Begin AddMeetingCommand Parse");
-        ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_TITLE, PREFIX_LOCATION, PREFIX_START, PREFIX_END, PREFIX_TAG);
+        try {
+            logger.info("Begin AddMeetingCommand Parse");
+            ArgumentMultimap argMultimap =
+                    ArgumentTokenizer.tokenize(args, PREFIX_TITLE, PREFIX_LOCATION, PREFIX_START, PREFIX_END, PREFIX_TAG);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_TITLE, PREFIX_LOCATION, PREFIX_START, PREFIX_END)
-                || !argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddMeetingCommand.MESSAGE_USAGE));
+            if (!arePrefixesPresent(argMultimap, PREFIX_TITLE, PREFIX_LOCATION, PREFIX_START, PREFIX_END)
+                    || !argMultimap.getPreamble().isEmpty()) {
+                throw new ParseException(MESSAGE_INVALID_COMMAND_FORMAT);
+            }
+
+            argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_TITLE, PREFIX_LOCATION, PREFIX_START, PREFIX_END);
+            Title title = ParserUtil.parseTitle(argMultimap.getValue(PREFIX_TITLE).get());
+            Location location = ParserUtil.parseLocation(argMultimap.getValue(PREFIX_LOCATION).get());
+            LocalDateTime start = ParserUtil.parseMeetingTime(argMultimap.getValue(PREFIX_START).get());
+            LocalDateTime end = ParserUtil.parseMeetingTime(argMultimap.getValue(PREFIX_END).get());
+            if (!MeetingTime.isValidMeetingTime(start, end)) {
+                throw new ParseException(MeetingTime.MESSAGE_CONSTRAINTS);
+            }
+            Set<Attendee> attendeeList = ParserUtil.parseAttendees(argMultimap.getAllValues(PREFIX_NAME));
+            Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
+            MeetingStatus status = new MeetingStatus(false);
+
+            Meeting meeting = new Meeting(title, location, start, end, attendeeList, tagList, status);
+
+            return new AddMeetingCommand(meeting);
+        } catch (ParseException pe) {
+            throw new ParseException(AddMeetingCommand.MESSAGE_USAGE, pe);
         }
-
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_TITLE, PREFIX_LOCATION, PREFIX_START, PREFIX_END);
-        Title title = ParserUtil.parseTitle(argMultimap.getValue(PREFIX_TITLE).get());
-        Location location = ParserUtil.parseLocation(argMultimap.getValue(PREFIX_LOCATION).get());
-        LocalDateTime start = ParserUtil.parseMeetingTime(argMultimap.getValue(PREFIX_START).get());
-        LocalDateTime end = ParserUtil.parseMeetingTime(argMultimap.getValue(PREFIX_END).get());
-        if (!MeetingTime.isValidMeetingTime(start, end)) {
-            throw new ParseException(MeetingTime.MESSAGE_CONSTRAINTS);
-        }
-        Set<Attendee> attendeeList = ParserUtil.parseAttendees(argMultimap.getAllValues(PREFIX_NAME));
-        Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
-        MeetingStatus status = new MeetingStatus(false);
-
-        Meeting meeting = new Meeting(title, location, start, end, attendeeList, tagList, status);
-
-        return new AddMeetingCommand(meeting);
     }
 
     /**

@@ -1,7 +1,5 @@
 package seedu.address.logic.parser;
 
-import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.ViewContactCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -17,12 +15,13 @@ public class ViewContactCommandParser implements Parser<ViewContactCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public ViewContactCommand parse(String args) throws ParseException {
+        Index index;
         try {
-            Index index = ParserUtil.parseIndex(args);
-            return new ViewContactCommand(index);
+            index = ParserUtil.parseIndex(args);
         } catch (ParseException pe) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewContactCommand.MESSAGE_USAGE), pe);
+            throw new ParseException(ViewContactCommand.MESSAGE_USAGE, pe);
         }
+
+        return new ViewContactCommand(index);
     }
 }

@@ -1,6 +1,8 @@
 package seedu.address.logic.parser;
 
-import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_INDEX_FORMAT;
+import static seedu.address.logic.Messages.MESSAGE_MISSING_INDEX;
+import static seedu.address.logic.Messages.MESSAGE_TOO_MANY_INDEXES;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_MEETING;
@@ -12,14 +14,11 @@ import seedu.address.logic.commands.RemoveMeetingContactCommand;
 
 /**
  * As we are only doing white-box testing, our test cases do not cover path
- * variations
- * outside of the RemoveMeetingContactCommand code. For example, inputs "1" and
- * "1 abc" take
- * the
- * same path through the RemoveMeetingContactCommand, and therefore we test only
- * one of them.
- * The path variation for those two cases occur inside the ParserUtil, and
- * therefore should be covered by the ParserUtilTest.
+ * variations outside of the RemoveMeetingContactCommand code. For example,
+ * inputs "1" and "1 abc" take the same path through the
+ * RemoveMeetingContactCommand, and therefore we test only one of them. The path
+ * variation for those two cases occur inside the ParserUtil, and therefore
+ * should be covered by the ParserUtilTest.
  */
 public class RemoveMeetingContactCommandParserTest {
 
@@ -34,14 +33,13 @@ public class RemoveMeetingContactCommandParserTest {
     public void parse_invalidArgs_throwsParseException() {
         // invalid args
         assertParseFailure(parser, "a 1",
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, RemoveMeetingContactCommand.MESSAGE_USAGE));
+                MESSAGE_INVALID_INDEX_FORMAT + "\n" + RemoveMeetingContactCommand.MESSAGE_USAGE);
 
         // too many args
         assertParseFailure(parser, "1 1 2",
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, RemoveMeetingContactCommand.MESSAGE_USAGE));
+                MESSAGE_TOO_MANY_INDEXES + "\n" + RemoveMeetingContactCommand.MESSAGE_USAGE);
 
         // too few args
-        assertParseFailure(parser, "2",
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, RemoveMeetingContactCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "2", MESSAGE_MISSING_INDEX + "\n" + RemoveMeetingContactCommand.MESSAGE_USAGE);
     }
 }

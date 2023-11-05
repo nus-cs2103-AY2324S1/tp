@@ -65,4 +65,15 @@ public class StringUtil {
             return false;
         }
     }
+
+    public static boolean isNumeric(String s) {
+        requireNonNull(s);
+
+        try {
+            Integer.parseInt(s);
+            return true;
+        } catch (NumberFormatException nfe) {
+            return false;
+        }
+    }
 }
