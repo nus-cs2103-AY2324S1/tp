@@ -542,7 +542,7 @@ You can also refer to [input information](#input-examples) for details about val
 
 #### Listing all schedules: `list-s`
 
-Displays a list of all schedules in TutorConnect. List can be filtered by tutors using the index number provided in the tutor list, or filter by `COMPLETED` or `MISSING` status.
+Displays a list of all schedules in TutorConnect. List can be filtered by tutors using the `TUTOR_INDEX` provided in the tutor list, or by `COMPLETED` or MISSED `status`.
 
 ##### :star: First time users
 {:.no_toc}
@@ -556,7 +556,6 @@ The list schedule function is here for that!
 **Follow these steps**
 
 1. On the left panel that shows the list of tutors, check the `TUTOR_INDEX` of Irfan Ibrahim, in this case, his number is 2.
-![list schedule](images/list-schedules/list-s.png)
 2. Type in `list-s 2 m/1` where `m/1` represents schedules marked as `COMPLETED` and press enter.
 3. If you wish to view the schedules that are marked as `MISSED` only, you can also enter `list-s m/0` where `m/0` represents schedules marked as `MISSED` and press enter.
 
@@ -571,16 +570,16 @@ For step 3, the schedule list has been updated to show schedules that are marked
 
 ![list schedule missed](images/list-schedules/list-s-missed.png)
 
-<div markdown="block" class="alert alert-info">
+<div markdown="block" class="alert alert-success">
 
 **:bulb: Tip**<br>
 
 `list-s` command is equipped with flexible options to view a list of schedules that covers the following scenarios:
 - `list-s` : To show all schedules.
-- `list-s 1` : To show schedules by tutor that associates with `tutor_index`1.
+- `list-s 1` : To show schedules by tutor that associates with `TUTOR_INDEX` 1.
 - `list-s m/0` : To show schedules marked as `MISSING`.
 - `list-s m/1` : To show schedules marked as `COMPLETED`.
-- `list-s 1 m/0` : To show schedules by `tutor_index` 1 marked as `MISSING`.
+- `list-s 1 m/0` : To show schedules by `TUTOR_INDEX` 1 marked as `MISSING`.
 
 </div>
 
