@@ -19,6 +19,7 @@ public class Name implements Comparable<Name> {
     public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
 
     public final String fullName;
+    private final String lowercaseFullName;
 
     /**
      * Constructs a {@code Name}.
@@ -29,6 +30,7 @@ public class Name implements Comparable<Name> {
         requireNonNull(name);
         checkArgument(isValidName(name), MESSAGE_CONSTRAINTS);
         fullName = name;
+        lowercaseFullName = name.toLowerCase();
     }
 
     /**
@@ -66,6 +68,6 @@ public class Name implements Comparable<Name> {
 
     @Override
     public int compareTo(Name name) {
-        return fullName.compareTo(name.fullName);
+        return lowercaseFullName.compareTo(name.lowercaseFullName);
     }
 }
