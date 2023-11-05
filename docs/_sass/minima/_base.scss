@@ -64,11 +64,17 @@ main {
  * Images
  */
 img {
-  max-width: 100%;
+  max-width: calc(#{$content-width} - (#{$spacing-unit}));
+  padding-right: $spacing-unit / 2;
+  padding-left: $spacing-unit / 2;
   vertical-align: middle;
 }
 
-
+img.emoji {
+  max-width: 100%;
+  vertical-align: middle;
+  padding: 0;
+}
 
 /**
  * Figures
@@ -292,4 +298,3 @@ table {
     font-size: 32px;
   }
 }
-
