@@ -34,7 +34,7 @@ public class EditMeetingCommandParser implements Parser<EditMeetingCommand> {
             ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_TITLE, PREFIX_LOCATION, PREFIX_START,
                             PREFIX_END, PREFIX_TAG);
 
-            Index index = ParserUtil.parseIndex(argMultimap.getPreamble());
+            Index index = ParserUtil.parseIndexes(argMultimap.getPreamble(), EditMeetingCommand.EXPECTED_INDEXES).get(0);
 
             argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_TITLE, PREFIX_LOCATION, PREFIX_START, PREFIX_END);
 

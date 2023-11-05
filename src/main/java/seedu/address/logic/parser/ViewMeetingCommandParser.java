@@ -17,7 +17,7 @@ public class ViewMeetingCommandParser implements Parser<ViewMeetingCommand> {
     public ViewMeetingCommand parse(String args) throws ParseException {
         Index index;
         try {
-            index = ParserUtil.parseIndex(args);
+            index = ParserUtil.parseIndexes(args, ViewMeetingCommand.EXPECTED_INDEXES).get(0);
         } catch (ParseException pe) {
             throw new ParseException(ViewMeetingCommand.MESSAGE_USAGE, pe);
         }

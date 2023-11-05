@@ -17,7 +17,7 @@ public class ViewContactCommandParser implements Parser<ViewContactCommand> {
     public ViewContactCommand parse(String args) throws ParseException {
         Index index;
         try {
-            index = ParserUtil.parseIndex(args);
+            index = ParserUtil.parseIndexes(args, ViewContactCommand.EXPECTED_INDEXES).get(0);
         } catch (ParseException pe) {
             throw new ParseException(ViewContactCommand.MESSAGE_USAGE, pe);
         }

@@ -22,6 +22,7 @@ import seedu.address.model.person.Person;
 public class MarkMeetingCommand extends Command {
 
     public static final String COMMAND_WORD = "mark";
+    public static final int EXPECTED_INDEXES = 1;
 
     public static final String MESSAGE_MARK_MEETING_SUCCESS = "Meeting marked as complete: %1$s";
 

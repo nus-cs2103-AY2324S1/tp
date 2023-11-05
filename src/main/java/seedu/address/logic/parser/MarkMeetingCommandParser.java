@@ -17,7 +17,7 @@ public class MarkMeetingCommandParser implements Parser<MarkMeetingCommand> {
     public MarkMeetingCommand parse(String args) throws ParseException {
         Index index;
         try {
-            index = ParserUtil.parseIndex(args);
+            index = ParserUtil.parseIndexes(args, MarkMeetingCommand.EXPECTED_INDEXES).get(0);
         } catch (ParseException pe) {
             throw new ParseException(MarkMeetingCommand.MESSAGE_USAGE, pe);
         }
