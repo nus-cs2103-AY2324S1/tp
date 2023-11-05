@@ -40,7 +40,7 @@ public class AddShortcutCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         String feedback = model.registerShortcut(shortcutAlias, command);
-        model.commitAddressBook();
+        model.commit();
         if (feedback == null) {
             // Completely new mapping
             return new CommandResult(String.format(MESSAGE_SUCCESS, shortcutAlias + " --> " + command));

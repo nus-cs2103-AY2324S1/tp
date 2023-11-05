@@ -62,4 +62,7 @@ public class MedicalHistory {
         return value.hashCode();
     }
 
+    public MedicalHistory getCopy() {
+        return new MedicalHistory(this.value);
+    }
 }

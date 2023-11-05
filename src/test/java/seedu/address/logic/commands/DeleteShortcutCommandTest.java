@@ -38,7 +38,7 @@ public class DeleteShortcutCommandTest {
                 new CommandWord(DeleteCommand.COMMAND_WORD));
 
         ModelManager afterModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-        afterModel.commitAddressBook();
+        afterModel.commit();
 
         assertCommandSuccess(deleteShortcutCommand, beforeModel, expectedMessage, afterModel);
     }
@@ -58,7 +58,7 @@ public class DeleteShortcutCommandTest {
                 new CommandWord(DeleteCommand.COMMAND_WORD));
 
         ModelManager afterModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-        afterModel.commitAddressBook();
+        afterModel.commit();
 
         assertCommandSuccess(deleteShortcutCommand, beforeModel, expectedMessage, afterModel);
     }

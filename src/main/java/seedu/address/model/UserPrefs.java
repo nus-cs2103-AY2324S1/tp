@@ -100,4 +100,9 @@ public class UserPrefs implements ReadOnlyUserPrefs {
         return sb.toString();
     }
 
+    public UserPrefs getCopy() {
+        UserPrefs newPrefs = new UserPrefs();
+        newPrefs.setShortcutSettings(this.shortcutSettings.getCopy());
+        return newPrefs;
+    }
 }

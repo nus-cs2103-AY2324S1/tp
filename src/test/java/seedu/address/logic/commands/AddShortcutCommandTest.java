@@ -30,7 +30,7 @@ public class AddShortcutCommandTest {
         ModelManager expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         expectedModel.getShortcutSettings().registerShortcut(new ShortcutAlias("del"),
                 new CommandWord(DeleteCommand.COMMAND_WORD));
-        expectedModel.commitAddressBook();
+        expectedModel.commit();
 
         assertCommandSuccess(addShortcutCommand, model, expectedMessage, expectedModel);
     }
@@ -51,7 +51,7 @@ public class AddShortcutCommandTest {
         ModelManager expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         expectedModel.getShortcutSettings().registerShortcut(new ShortcutAlias("del"),
                 new CommandWord(ListCommand.COMMAND_WORD));
-        expectedModel.commitAddressBook();
+        expectedModel.commit();
 
         assertCommandSuccess(addShortcutCommand, modelWithExistingMapping,
                 expectedMessage, expectedModel);
@@ -71,7 +71,7 @@ public class AddShortcutCommandTest {
         ModelManager expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         expectedModel.getShortcutSettings().registerShortcut(new ShortcutAlias("del"),
                 new CommandWord(DeleteCommand.COMMAND_WORD));
-        expectedModel.commitAddressBook();
+        expectedModel.commit();
 
         assertCommandSuccess(addShortcutCommand, modelWithExistingMapping,
                 expectedMessage, expectedModel);

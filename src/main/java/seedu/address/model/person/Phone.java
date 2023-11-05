@@ -58,4 +58,8 @@ public class Phone {
         return value.hashCode();
     }
 
+    public Phone getCopy() {
+        return new Phone(this.value);
+    }
+
 }
