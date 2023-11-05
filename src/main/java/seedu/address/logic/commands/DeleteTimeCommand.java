@@ -9,7 +9,7 @@ import static seedu.address.logic.parser.CliSyntax.*;
  * Deletes time from the individual and group.
  */
 public abstract class DeleteTimeCommand extends Command {
-    public static final String MESSAGE_DELETE_TIME_SUCCESS = "Deleted Time from: %1$s";
+    public static final String MESSAGE_DELETE_TIME = "Attempted to delete Time from: %1$s";
     public static final String COMMAND_WORD = "deletetime";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Deletes free time from an existing person or group. \n"
             + "For person, parameters: "

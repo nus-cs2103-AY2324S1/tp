@@ -3,7 +3,6 @@ package seedu.address.logic.parser;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.GROUP_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.GROUP_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_GROUP_DESC;
@@ -19,10 +18,14 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
-import static seedu.address.logic.parser.CliSyntax.*;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUPTAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.address.testutil.TypicalPersons.*;
+import static seedu.address.testutil.TypicalPersons.AMYWITHOUTGROUP;
+import static seedu.address.testutil.TypicalPersons.BOB;
 
 import org.junit.jupiter.api.Test;
 
@@ -43,8 +46,8 @@ public class AddCommandParserTest {
         Person expectedPerson = new PersonBuilder(BOB).build();
 
         // whitespace only preamble
-        assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB +
-                 GROUP_DESC_BOB, new AddCommand(expectedPerson));
+        assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
+            + GROUP_DESC_BOB, new AddCommand(expectedPerson));
 
 
         // multiple tags - all accepted
@@ -149,7 +152,7 @@ public class AddCommandParserTest {
         assertParseFailure(parser, PREAMBLE_NON_EMPTY + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB,
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
 
-        assertParseFailure(parser, PREAMBLE_NON_EMPTY + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + " " + PREFIX_GROUPTAG,
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, Group.MESSAGE_CONSTRAINTS));
+        assertParseFailure(parser, PREAMBLE_NON_EMPTY + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
+                + " " + PREFIX_GROUPTAG, String.format(MESSAGE_INVALID_COMMAND_FORMAT, Group.MESSAGE_CONSTRAINTS));
     }
 }

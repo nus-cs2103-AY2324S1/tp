@@ -40,10 +40,11 @@ public class DeletePersonTimeCommandTest {
         // Person has time interval to be deleted
         ArrayList<TimeInterval> validTimeInterval = new ArrayList<>();
         validTimeInterval.add(ParserUtil.parseEachInterval(VALID_TIME_MON));
-        CommandResult commandResult = new DeletePersonTimeCommand(validPerson.getName(), validTimeInterval).execute(modelStub);
+        CommandResult commandResult =
+            new DeletePersonTimeCommand(validPerson.getName(), validTimeInterval).execute(modelStub);
 
-        assertEquals(String.format(DeleteTimeCommand.MESSAGE_DELETE_TIME_SUCCESS, validPerson.getName()),
-                commandResult.getFeedbackToUser());
+        assertEquals(String.format(DeleteTimeCommand.MESSAGE_DELETE_TIME, validPerson.getName()),
+            commandResult.getFeedbackToUser());
         // Time interval has been deleted
         assertEquals(false, modelStub.hasTime(ParserUtil.parseEachInterval(VALID_TIME_MON)));
     }
@@ -57,7 +58,7 @@ public class DeletePersonTimeCommandTest {
         DeletePersonTimeCommand failedCommand = new DeletePersonTimeCommand(validPerson.getName(), invalidTimeInterval);
 
         assertThrows(CommandException.class, "These times are not in the list:\n" + "TUE 1300 - TUE 1400 \n",
-                () -> failedCommand.execute(modelStub));
+            () -> failedCommand.execute(modelStub));
 
         // Time interval has not been deleted
         assertEquals(true, modelStub.hasTime(ParserUtil.parseEachInterval(VALID_TIME_MON)));
@@ -74,7 +75,7 @@ public class DeletePersonTimeCommandTest {
 
         assertThrows(CommandException.class, "These times are not in the list:\n" + "TUE 1300 - TUE 1400 \n"
                 + "The other times have been deleted\n",
-                () -> failedCommand.execute(modelStub));
+            () -> failedCommand.execute(modelStub));
 
         // Time interval has been deleted
         assertEquals(false, modelStub.hasTime(ParserUtil.parseEachInterval(VALID_TIME_MON)));
@@ -91,8 +92,8 @@ public class DeletePersonTimeCommandTest {
         validTimeInterval.add(ParserUtil.parseEachInterval(VALID_TIME_TUE));
         DeletePersonTimeCommand failedCommand = new DeletePersonTimeCommand(validPerson.getName(), validTimeInterval);
 
-        assertEquals(String.format(DeleteTimeCommand.MESSAGE_DELETE_TIME_SUCCESS, validPerson.getName()),
-                failedCommand.execute(modelStub).getFeedbackToUser());
+        assertEquals(String.format(DeleteTimeCommand.MESSAGE_DELETE_TIME, validPerson.getName()),
+            failedCommand.execute(modelStub).getFeedbackToUser());
 
         // Time interval has been deleted
         assertEquals(false, modelStub.hasTime(ParserUtil.parseEachInterval(VALID_TIME_MON)));
@@ -225,7 +226,8 @@ public class DeletePersonTimeCommandTest {
         }
 
         @Override
-        public String deleteTimeFromPerson(Name personName, ArrayList<TimeInterval> listOfTimesToDelete) throws CommandException {
+        public String deleteTimeFromPerson(Name personName, ArrayList<TimeInterval> listOfTimesToDelete)
+            throws CommandException {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -241,7 +243,7 @@ public class DeletePersonTimeCommandTest {
 
         @Override
         public String deleteTimeFromGroup(Group group,
-                                        ArrayList<TimeInterval> toDeleteTime) throws CommandException {
+                                          ArrayList<TimeInterval> toDeleteTime) throws CommandException {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -284,7 +286,7 @@ public class DeletePersonTimeCommandTest {
 
         @Override
         public String deleteTimeFromPerson(Name personName,
-                                         ArrayList<TimeInterval> toDeleteTime) throws CommandException {
+                                           ArrayList<TimeInterval> toDeleteTime) throws CommandException {
             requireNonNull(personName);
             Person person = this.person;
             try {
@@ -320,7 +322,7 @@ public class DeletePersonTimeCommandTest {
 
         @Override
         public String deleteTimeFromPerson(Name personName,
-                                         ArrayList<TimeInterval> toDeleteTime) throws CommandException {
+                                           ArrayList<TimeInterval> toDeleteTime) throws CommandException {
             requireNonNull(personName);
             Person person = this.person;
             try {

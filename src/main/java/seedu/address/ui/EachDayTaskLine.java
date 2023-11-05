@@ -6,6 +6,9 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 
+/**
+ * The UI component that is responsible for each line in each day task list
+ */
 public class EachDayTaskLine extends UiPart<Region> {
 
     private static final String FXML = "GroupTaskCell.fxml";
@@ -15,14 +18,17 @@ public class EachDayTaskLine extends UiPart<Region> {
     @FXML
     private Label dot;
     @FXML
-    private Label group_in_sch;
+    private Label groupInSch;
     @FXML
     private Label taskLine;
 
+    /**
+     * Creates a {@code line of group name and meeting time} with the given {@code task}.
+     */
     public EachDayTaskLine(GroupTimeContainer task) {
         super(FXML);
         this.task = task;
-        group_in_sch.setText(task.getGroup().getGroupName());
+        groupInSch.setText(task.getGroup().getGroupName());
         taskLine.setText(task.getTimeInterval().toString());
     }
 

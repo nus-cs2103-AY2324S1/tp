@@ -7,8 +7,12 @@ import java.util.stream.Stream;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+
 import seedu.address.logic.commands.exceptions.CommandException;
 
+/**
+ * Class representing the list of time intervals
+ */
 public class TimeIntervalList implements Iterable<TimeInterval> {
 
     private final ObservableList<TimeInterval> internalList = FXCollections.observableArrayList();
@@ -20,6 +24,38 @@ public class TimeIntervalList implements Iterable<TimeInterval> {
     }
 
     /**
+     * Adds time to the current TimeInterval list
+     *
+     * @param timeIntervals ArrayList of timeIntervals
+     * @return the status after adding the time
+     */
+    public String addTime(ArrayList<TimeInterval> timeIntervals) {
+        boolean isPass = false;
+        boolean isFail = false;
+        StringBuilder errorMessage = new StringBuilder("There is a clash in these input timings with "
+            + "your existing timings:\n");
+        StringBuilder passMessage = new StringBuilder("These times have been added:\n");
+        for (TimeInterval interval : timeIntervals) {
+            if (isTimeIntervalOverlap(interval)) {
+                isFail = true;
+                errorMessage.append(interval + "\n");
+            } else {
+                isPass = true;
+                internalList.add(interval);
+                passMessage.append(interval.toString() + "\n");
+            }
+        }
+
+        if (isFail && isPass) {
+            return errorMessage.append(passMessage).toString();
+        } else if (isFail) {
+            return errorMessage.toString();
+        } else {
+            return passMessage.toString();
+        }
+    }
+
+    /**
      * Converts the internal list to streams.
      *
      * @return Internal list into streams.
@@ -28,35 +64,10 @@ public class TimeIntervalList implements Iterable<TimeInterval> {
         return internalList.stream();
     }
 
-    public String addTime(ArrayList<TimeInterval> timeIntervals) throws CommandException{
-        boolean isPass = false;
-        boolean isFail = false;
-        StringBuilder errorCompilation = new StringBuilder();
-        StringBuilder passMessage = new StringBuilder();
-        errorCompilation.append("There is a clash in these input timings with your existing timing:\n");
-        for (TimeInterval interval : timeIntervals) {
-            if (isTimeIntervalOverlap(interval)) {
-                isFail = true;
-                errorCompilation.append(interval + "\n");
-            } else {
-                if (!isPass) {
-                    passMessage.append("These times have been added:\n");
-                }
-                isPass = true;
-                internalList.add(interval);
-                passMessage.append(interval.toString() + "\n");
-            }
-        }
-
-        if (isFail && isPass) {
-            return errorCompilation.append(passMessage).toString();
-        } else if (isFail) {
-            return errorCompilation.toString();
-        } else {
-            return passMessage.toString();
-        }
-    }
-
+    /**
+     * Adds all the timeInterval in to current timeInterval list
+     * @param timeIntervalList TimeIntervalList to be added
+     */
     public void addAll(TimeIntervalList timeIntervalList) {
         for (TimeInterval timeInterval : timeIntervalList) {
             this.internalList.add(timeInterval);
@@ -66,17 +77,13 @@ public class TimeIntervalList implements Iterable<TimeInterval> {
     public String deleteTime(ArrayList<TimeInterval> timeIntervals) throws CommandException {
         boolean isPass = false;
         boolean isFail = false;
-        StringBuilder errorCompilation = new StringBuilder();
-        StringBuilder passMessage = new StringBuilder();
-        errorCompilation.append("These times are not in the list:\n");
+        StringBuilder errorMessage = new StringBuilder("These times were not in the list:\n");
+        StringBuilder passMessage = new StringBuilder("These times have been deleted:\n");
         for (TimeInterval interval : timeIntervals) {
             if (!internalList.contains(interval)) {
                 isFail = true;
-                errorCompilation.append(interval + "\n");
+                errorMessage.append(interval + "\n");
             } else {
-                if (!isPass) {
-                    passMessage.append("These times have been added:\n");
-                }
                 isPass = true;
                 internalList.remove(interval);
                 passMessage.append(interval.toString() + "\n");
@@ -84,9 +91,9 @@ public class TimeIntervalList implements Iterable<TimeInterval> {
         }
 
         if (isFail && isPass) {
-            return errorCompilation.append(passMessage).toString();
+            return errorMessage.append(passMessage).toString();
         } else if (isFail) {
-            return errorCompilation.toString();
+            return errorMessage.toString();
         } else {
             return passMessage.toString();
         }
@@ -94,6 +101,7 @@ public class TimeIntervalList implements Iterable<TimeInterval> {
 
     /**
      * Checks whether timeInterval contains the time
+     *
      * @param timeInterval The time Interval to check
      * @return Whether time interval is in list
      */
@@ -103,6 +111,7 @@ public class TimeIntervalList implements Iterable<TimeInterval> {
 
     /**
      * Removes free time from list
+     *
      * @param timeInterval The time interval to remove
      */
     public void removeTime(TimeInterval timeInterval) {
@@ -111,6 +120,7 @@ public class TimeIntervalList implements Iterable<TimeInterval> {
 
     /**
      * Checks if time interval overlaps with internal list
+     *
      * @param interval The time iunterval to check
      * @return Whether time interval overlaps with internal list
      */
@@ -123,9 +133,11 @@ public class TimeIntervalList implements Iterable<TimeInterval> {
         return false;
     }
 
-/////////////////////
+    /////////////////////
+
     /**
      * Check whether no time is stored
+     *
      * @return boolean representing whether no time is stored
      */
     public boolean isEmpty() {
@@ -135,12 +147,13 @@ public class TimeIntervalList implements Iterable<TimeInterval> {
 
     /**
      * Generate String representing list of intervals
-     * @param br StringBuilder to store  message
+     *
+     * @param br     StringBuilder to store  message
      * @param format specify Message format
      */
     public void getMessage(StringBuilder br, String format) {
         int intervalCount = 1;
-        for (TimeInterval t: this.internalList) {
+        for (TimeInterval t : this.internalList) {
             br.append(String.format(format, intervalCount, t.toString()));
             intervalCount++;
         }
@@ -149,12 +162,13 @@ public class TimeIntervalList implements Iterable<TimeInterval> {
 
     /**
      * Filter a TimeIntervalList to contain only intervals that fit the duration
+     *
      * @param duration represent time in minutes
      * @return TimeIntervalList with duration greater than duration specified
      */
     public TimeIntervalList fitDuration(Duration duration) {
         TimeIntervalList personTime = new TimeIntervalList();
-        for (TimeInterval interval: internalList) {
+        for (TimeInterval interval : internalList) {
             if (interval.allows(duration)) {
                 personTime.addTime(interval);
             }

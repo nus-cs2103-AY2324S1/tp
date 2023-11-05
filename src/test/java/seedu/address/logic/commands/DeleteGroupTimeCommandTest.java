@@ -44,7 +44,7 @@ public class DeleteGroupTimeCommandTest {
         CommandResult commandResult = new DeleteGroupTimeCommand(validGroup, validTimeInterval).execute(modelStub);
 
         // Success message
-        assertEquals(String.format(DeleteTimeCommand.MESSAGE_DELETE_TIME_SUCCESS, validGroup.getGroupName()),
+        assertEquals(String.format(DeleteTimeCommand.MESSAGE_DELETE_TIME, validGroup.getGroupName()),
                 commandResult.getFeedbackToUser());
 
         // Time interval has been deleted
@@ -95,7 +95,7 @@ public class DeleteGroupTimeCommandTest {
         validTimeInterval.add(ParserUtil.parseEachInterval(VALID_TIME_TUE));
         DeleteGroupTimeCommand failedCommand = new DeleteGroupTimeCommand(validGroup, validTimeInterval);
 
-        assertEquals(String.format(DeleteTimeCommand.MESSAGE_DELETE_TIME_SUCCESS, validGroup.getGroupName()),
+        assertEquals(String.format(DeleteTimeCommand.MESSAGE_DELETE_TIME, validGroup.getGroupName()),
                 failedCommand.execute(modelStub).getFeedbackToUser());
 
         // Time interval has been deleted

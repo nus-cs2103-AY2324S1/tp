@@ -9,7 +9,6 @@ import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.logic.Messages;
-import seedu.address.logic.commands.UngroupPersonCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
@@ -40,17 +39,21 @@ public class UniquePersonList implements Iterable<Person> {
         return internalList.stream().anyMatch(toCheck::isSamePerson);
     }
 
+    /**
+     * Returns true if the list contains an equivalent email as the given argument.
+     */
     public boolean containsEmail(Person toCheck) {
         requireNonNull(toCheck);
         return internalList.stream().anyMatch(toCheck::isSameEmail);
     }
+
+    /**
+     * Returns true if the list contains an equivalent phonenumber as the given argument.
+     */
     public boolean containsPhoneNumber(Person toCheck) {
         requireNonNull(toCheck);
         return internalList.stream().anyMatch(toCheck::isSamePhone);
     }
-
-
-
 
     /**
      * Adds a person to the list.
@@ -82,6 +85,19 @@ public class UniquePersonList implements Iterable<Person> {
     }
 
     /**
+     * Replaces the contents of this list with {@code persons}.
+     * {@code persons} must not contain duplicate persons.
+     */
+    public void setPersons(List<Person> persons) {
+        requireAllNonNull(persons);
+        if (!personsAreUnique(persons)) {
+            throw new DuplicatePersonException();
+        }
+
+        internalList.setAll(persons);
+    }
+
+    /**
      * Replaces the person {@code target} in the list with {@code editedPerson}.
      * {@code target} must exist in the list.
      * The person identity of {@code editedPerson} must not be the same as another existing person in the list.
@@ -102,18 +118,6 @@ public class UniquePersonList implements Iterable<Person> {
         internalList.set(index, editedPerson);
     }
 
-    /**
-     * Replaces the contents of this list with {@code persons}.
-     * {@code persons} must not contain duplicate persons.
-     */
-    public void setPersons(List<Person> persons) {
-        requireAllNonNull(persons);
-        if (!personsAreUnique(persons)) {
-            throw new DuplicatePersonException();
-        }
-
-        internalList.setAll(persons);
-    }
 
     /**
      * Returns the backing list as an unmodifiable {@code ObservableList}.
