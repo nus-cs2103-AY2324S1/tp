@@ -577,9 +577,9 @@ For step 3, the schedule list has been updated to show schedules that are marked
 `list-s` command is equipped with flexible options to view a list of schedules that covers the following scenarios:
 - `list-s` : To show all schedules.
 - `list-s 1` : To show schedules by tutor that associates with `TUTOR_INDEX` 1.
-- `list-s m/0` : To show schedules marked as `MISSING`.
+- `list-s m/0` : To show schedules marked as `MISSED`.
 - `list-s m/1` : To show schedules marked as `COMPLETED`.
-- `list-s 1 m/0` : To show schedules by `TUTOR_INDEX` 1 marked as `MISSING`.
+- `list-s 1 m/0` : To show schedules by `TUTOR_INDEX` 1 marked as `MISSED`.
 
 </div>
 
