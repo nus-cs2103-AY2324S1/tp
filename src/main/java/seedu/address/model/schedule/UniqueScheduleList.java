@@ -117,6 +117,7 @@ public class UniqueScheduleList implements Iterable<Schedule> {
      * Returns the backing list as an unmodifiable {@code ObservableList}.
      */
     public ObservableList<Schedule> asUnmodifiableObservableList() {
+        sort();
         return internalUnmodifiableList;
     }
 
