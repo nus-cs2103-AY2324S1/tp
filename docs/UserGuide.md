@@ -63,11 +63,31 @@ img
 <a name="introduction"></a>
 ## Introduction
 
-Welcome to the User Guide of **Staff-Snap**! Here you'll find everything you need to start using **Staff-Snap** like a pro.
+**Staff-Snap** is a desktop app for Hiring Managers like you to manage the hiring and tracking of candidates, optimised for use via a Command Line Interface (CLI). Used by hiring managers in companies around the globe, it is effective, easy to use and reliable, making the hiring process a much less painful experience.
 
-**Staff-Snap** is an easy-to-use desktop application for Hiring Managers of Small-Medium Enterprises to manage hundreds of applicants during each recruitment cycle.
+The purpose of this guide is to get you familiar with the features of **Staff-Snap**, from the very basics, to the most advanced features the app has to offer. These features range from being able to add applicants details and save them for later, to being able to calculate a candidate’s favourness based on their performance in interviews or assessments thus far. Every single feature available is in this guide and you can check out the table of contents to navigate to a feature you might be interested in using.
 
-While **Staff-Snap** has a simple and intuitive [Graphical User Interface (GUI)](#glossary), it is optimised for use with a [Command Line Interface (CLI)](#glossary). If you are a fast typer, **Staff-Snap** can get your applicant management tasks done faster than traditional GUI applications.
+To begin using this guide, ensure you meet the [minimum system requirements](#minimum-system-requirements). Once this is done, go to the [quick start](#quick-start) section to get the app up and running. Once you have done so, please feel free to go through the features sections to find out what features Staff-Snap has installed. We recommend going through it in the order of this guide but any order works as well! You may check out our table of contents to jump to any section of your choice.
+
+<br>
+
+---
+<br>
+
+## Minimum System Requirements
+1. A Computer running Windows/MacOS/Linux.
+2. Java 11 or higher
+   1. If you do not have Java 11, follow [this](https://docs.oracle.com/en/java/javase/11/install/overview-jdk-installation.html#GUID-8677A77F-231A-40F7-98B9-1FD0B48C346A) installation guide.
+
+
+<br>
+
+---
+<br>
+
+## Need help?
+If you are unable to follow any of the steps below or get help, please email our CEO at staffsnap@gmail.com or call our 24/7 technical helpline 69696969 for assistance. (For educational purposes, not real contact details.)
+
 
 <br>
 
@@ -77,17 +97,16 @@ While **Staff-Snap** has a simple and intuitive [Graphical User Interface (GUI)]
 <a name="quick-start"></a>
 ## Quick Start 
 
-1. Ensure you have [Java](#glossary) 11 or above installed in your computer.
-2. Download the latest `staffsnap.jar` from [here](https://github.com/AY2324S1-CS2103T-W08-1/tp/releases/tag/v1.3).
-3. Copy the [JAR](#glossary) file to an empty folder that you would like to use as the [home folder](#glossary) for Staff-Snap.
-4. Open the [command terminal](#glossary).
-5. Navigate into your home folder with the `cd` command.
-6. Enter the `java -jar staffsnap.jar` command to run the application.
-7. You should see the [GUI](#glossary) displayed as shown below. Note how the application contains some sample data.<br>
+1. Download the latest `staffsnap.jar` from [here](https://github.com/AY2324S1-CS2103T-W08-1/tp/releases/tag/v1.3).
+2. Copy the [JAR](#glossary) file to an empty folder that you would like to use as the [home folder](#glossary) for Staff-Snap.
+3. Open the [command terminal](#glossary).
+4. Navigate into your home folder with the `cd` command.
+5. Enter the `java -jar staffsnap.jar` command to run the application.
+6. You should see the [GUI](#glossary) displayed as shown below. Note how the application contains some sample data.<br>
 
    ![Main Window view](images/user-guide/MainWindow.png)
 
-8. Type the [command](#glossary) in the command box and press <kbd>Enter</kbd> to execute it. e.g. typing `help` and pressing <kbd>Enter</kbd> will open this User Guide in your browser window. Some example commands that you can try:
+7. Type the [command](#glossary) in the command box and press <kbd>Enter</kbd> to execute it. e.g. typing `help` and pressing <kbd>Enter</kbd> will open this User Guide in your browser window. Some example commands that you can try:
    * `add n/John Doe hp/81238123 p/Boss e/john@mail.com` : Adds an applicant named John Doe to the list. 
    * `list` : Lists all applicants.
    * `delete 1` : Deletes the 1st applicant shown in the current list.
