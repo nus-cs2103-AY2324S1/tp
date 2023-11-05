@@ -203,7 +203,7 @@ Before you proceed to use the manage contact features of CampusConnect, take a q
 | Parameter                   | Format                                                                                                                                         | Example                        |
 |-----------------------------|------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------|
 | `NAME`                      | Use `a-z`, `A-Z`, `0-9` and whitespaces only                                                                                                   | John Doe                       |
-| `PHONE_NUMBER`              | Use `0-9` only and should be 3 digits long                                                                                                     | 98765432                       |
+| `PHONE_NUMBER`              | Use `0-9` only and should be at least 3 digits long                     | 98765432                       |
 | `EMAIL` / `SECONDARY_EMAIL` | Have the format of `local-part@domain`                                                                                                         | johndoe@gmail.com              |
 | `ADDRESS`                   | Use any characters                                                                                                                             | John street, block 123, #01-01 |
 | `TAG`                       | Use `a-z`, `A-Z` and `0-9` only. Alternatively, use `RA` or `SOS` which are predefined tags that indicate your contact as an emergency contact | friend                         |
