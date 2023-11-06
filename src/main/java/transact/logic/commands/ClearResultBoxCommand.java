@@ -10,7 +10,7 @@ import transact.ui.MainWindow.TabWindow;
  */
 public class ClearResultBoxCommand extends Command {
 
-    public static final String COMMAND_WORD = "clearresultbox";
+    public static final String COMMAND_WORD = "clear";
     public static final String MESSAGE_SUCCESS = "Result Box is cleared";
 
     @Override

@@ -319,11 +319,11 @@ Examples:
 - `find John` returns `john` and `John Doe`
 - `find alex david` returns `Alex Yeoh`, `David Li`
 
-### Clearing the output : `clearresultbox`
+### Clearing the output : `clear`
 
 Clears the Result Box.
 
-Format: `clearresultbox`
+Format: `clear`
 
 Success output: clear all the information contained in the result box at bottom.
 
