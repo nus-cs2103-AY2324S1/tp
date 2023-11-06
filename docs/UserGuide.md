@@ -203,7 +203,7 @@ Before you proceed to use the manage contact features of CampusConnect, take a q
 | Parameter                   | Format                                                                                                                                         | Example                        |
 |-----------------------------|------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------|
 | `NAME`                      | Use `a-z`, `A-Z`, `0-9` and whitespaces only                                                                                                   | John Doe                       |
-| `PHONE_NUMBER`              | Use `0-9` only and should be 3 digits long                                                                                                     | 98765432                       |
+| `PHONE_NUMBER`              | Use `0-9` only and should be at least 3 digits long                     | 98765432                       |
 | `EMAIL` / `SECONDARY_EMAIL` | Have the format of `local-part@domain`                                                                                                         | johndoe@gmail.com              |
 | `ADDRESS`                   | Use any characters                                                                                                                             | John street, block 123, #01-01 |
 | `TAG`                       | Use `a-z`, `A-Z` and `0-9` only. Alternatively, use `RA` or `SOS` which are predefined tags that indicate your contact as an emergency contact | friend                         |
@@ -254,7 +254,7 @@ Below are some examples on how to use the command:
 
 * `addalt 1 tg/@johndoe_123 e2/johndoe@hotmail.com li/john-doe-b9a38128a b/31/10`: Adds telegram "@johndoe_123", secondary email "johndoe@hotmail.com", linkedin "john-doe-b9a38128a" and birthday "31/10" for contact at index 1 of your contact list.
 * `addalt 2 e2/besty@hotmail.com tg/@betsycrowe li/besty-crowe-b7a15138b b/24/07`: Adds secondary email "besty@hotmail.com", telegram "@bestycrowe", linkedin "besty-crowe-b7a15138b" and birthday "24/07" for contact at index 2 of your contact list.
-* `addalt 3 tg/janedoe_123`: Adds telegram "@janedoe_123" for contact at index 3 of your contact list.                           
+* `addalt 3 tg/@janedoe_123`: Adds telegram "@janedoe_123" for contact at index 3 of your contact list.
 
 Refer to [properties of contact](#properties-of-contact) on the accepted formats for the respective parameters.
 
@@ -707,9 +707,9 @@ For example, given the following contacts (some fields omitted for brevity):
 | Alex Yeoh | friend |
 | Yervis Alexis | girlfriend |
 
-The following are valid **`FIND_EXPRESSIONs`**:
+The following are valid <b>`FIND_EXPRESSION`</b>s:
 
-- `!n/do` will return all contacts whose names do **not** contain the substring `"do"`, in this case `"Alex Yeoh"` and `"Yervis Alexis"
+- `!n/do` will return all contacts whose names do **not** contain the substring `"do"`, in this case `"Alex Yeoh"` and `"Yervis Alexis"`
 - `n/do && t/friend` will return all contacts whose names contain the substring `"do"` **and** who have the `"friend"` tag, in this case `"Jane Doe"`.
 - `n/do || t/friend` will return all contacts whose names contain the substring `"do"` **or** who have the `"friend"` tag, in this case `"John Doe"`, `"Jane Doe"`, and `"Alex Yeoh"`.
 - `n/do && (t/friend || t/colleague)` will return all contacts whose names contain the substring `"do"` **and** who have either the `"friend"` or `"colleague"` tag, in this case `"John Doe"`, `"Jane Doe"`, and `"Alex Yeoh"`.
