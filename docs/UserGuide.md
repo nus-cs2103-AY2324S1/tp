@@ -112,7 +112,7 @@ Format: `createEvent n/EVENT_NAME l/LOCATION d/DATE [t/TAG]`
 * Acceptable values for `DATE`: Dates in the format of `YYYY-MM-DD`.
 
 Examples:
-* `createEvent n/Party l/Raffles Hall d/16-09-2023` creates an event `Party` in CCACommander.
+* `createEvent n/Party l/Raffles Hall d/2023-09-16` creates an event `Party` in CCACommander.
 
 ### Delete an Event: `deleteEvent`
 
