@@ -115,6 +115,7 @@ For each applicant and each interview, we see the following details:
 --------------------------------------------------------------------------------------------------------------------
 # Features
 
+<div markdown="block" class="alert alert-info">
 **:information_source: Notes about the command format:**<br>
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
@@ -132,6 +133,7 @@ For each applicant and each interview, we see the following details:
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list-i`, `list-a`, `list-i-done`, `list-i-not-done`,
 `list-today`, `sort-rate`, `sort-time`, `exit`, and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
+</div>
 
 [Back to the Table of Contents](#table-of-contents)
 
@@ -155,6 +157,11 @@ Format: `exit`
 
 Clears all applicants and interviews from the address book.
 
+<div markdown="block" class="alert alert-warning">
+**:exclamation: Warning:** <br>
+* This action is irreversible, therefore do proceed with caution!
+</div>
+
 Format: `clear`
 
 ### Saving the data
@@ -172,7 +179,9 @@ Adds an applicant to the address book.
 Format: `add-a n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]`
 
 Examples:
-* `add-a n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
+* `add-a n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`.
+
+[Back to the Table of Contents](#table-of-contents)
 
 ### Deleting an applicant : `delete-a`
 
@@ -181,11 +190,13 @@ Deletes the specified applicant from the address book.
 Format: `delete-a INDEX`
 
 * Deletes the applicant at the specified `INDEX`.
-* The index refers to the index number shown in the displayed applicant list.
-* The index **must be a positive integer** 1, 2, 3, …​ The upper limit of valid integers is the number of applicants currently displayed in the applicant list
+* The `INDEX` refers to the index number shown in the displayed applicant list.
+* The `INDEX` **must be a positive unsigned integer** 1, 2, 3, …​ The upper limit of valid integers is the number of applicants currently displayed in the applicant list
 
 Examples:
 * `delete-a 1` deletes the 1st applicant in the address book.
+
+[Back to the Table of Contents](#table-of-contents)
 
 ### Editing an applicant : `edit-a`
 
@@ -194,13 +205,15 @@ Edits an existing applicant in the address book.
 Format: `edit-a APPLICANT_INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]`
 
 * Edits the person at the specified `APPLICANT_INDEX`. The index refers to the index number shown in the displayed applicant list.
-* The index **must be a positive integer** 1, 2, 3, …​ The upper limit of valid integers is the number of applicants currently displayed in the applicant list
+* The `INDEX` **must be a positive unsigned integer** 1, 2, 3, …​ The upper limit of valid integers is the number of applicants currently displayed in the applicant list
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 
 Examples:
 *  `edit-a 1 n/John Doe` Edits the name of the 1st applicant to be `John Doe`.
-*  `edit-a 2 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 2nd applicant to be `91234567` and `johndoe@example.com` respectively
+*  `edit-a 2 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 2nd applicant to be `91234567` and `johndoe@example.com` respectively.
+
+[Back to the Table of Contents](#table-of-contents)
 
 ### Finding applicants : `find-a`
 
@@ -229,6 +242,8 @@ Before find-a command:
 * `find-a p/874 a/serangoon ang` returns `97438807`, `Serangoon Gardens`,
   `Serangoon Gardens Street`, `Ang Mo Kio`<br>
   ![result for 'find-a p/874 a/serangoon ang'](images/findPhoneAddress.png)
+
+[Back to the Table of Contents](#table-of-contents)
 
 ### Listing all applicants : `list-a`
 
@@ -295,6 +310,8 @@ to the company in general.
 Example:
 * `add-i app/3 jr/software engineer start/11-12-2023 1400 end/11-12-2023 1500`
 
+[Back to the Table of Contents](#table-of-contents)
+
 ### Deleting an interview : `delete-i`
 
 Deletes the specified interview from the address book.
@@ -302,11 +319,13 @@ Deletes the specified interview from the address book.
 Format: `delete-i INDEX`
 
 * Deletes the interview at the specified `INDEX`.
-* The index refers to the index number shown in the displayed interview list.
-* The index **must be a positive integer** 1, 2, 3, …​ The upper limit of valid integers is the number of interviews currently displayed in the interview list
+* The `INDEX` refers to the index number shown in the displayed interview list.
+* The `INDEX` **must be a positive unsigned integer** 1, 2, 3, …​ The upper limit of valid integers is the number of interviews currently displayed in the interview list
 
 Examples:
 * `delete-i 1` deletes the 1st interview in the address book.
+
+[Back to the Table of Contents](#table-of-contents)
 
 ### Editing an interview : `edit-i`
 
@@ -315,13 +334,15 @@ Edit an existing interview in the address book.
 Format: `edit-i INTERVIEW_INDEX [app/APPLICANT_ID] [jr/JOB_TITLE] [start/START_DATE_AND_TIME] [end/END_DATE_AND_TIME]`
 
 * Edits the interview at the specified `INTERVIEW_INDEX`. The index refers to the index number shown in the displayed interview list.
-* The index **must be a positive integer** 1, 2, 3, …​ The upper limit of valid integers is the number of interviews currently displayed in the interview list
+* The `INDEX` **must be a positive unsigned integer** 1, 2, 3, …​ The upper limit of valid integers is the number of interviews currently displayed in the interview list
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 
 Examples:
 *  `edit-i 1 jr/software-engineer` Edits the job title of the 1st interview to be `software-engineer`.
 *  `edit-i 2 jr/data-analyst` Edits the job title of the 2nd interview to be `data-analyst`.
+
+[Back to the Table of Contents](#table-of-contents)
 
 ### Finding interview by job title : `find-i`
 
@@ -339,6 +360,8 @@ Format: `find-i KEYWORD [MORE_KEYWORDS]`
 Examples:
 * `find-i software data` returns `Software-Engineer` and `Data-Analyst`.
 
+[Back to the Table of Contents](#table-of-contents)
+
 ### Listing all interviews : `list-i`
 
 Shows a list of all interviews in the address book onto the GUI.
@@ -349,7 +372,7 @@ Format: `list-i`
 
 ### Listing all free time for the given day : `list-freetime`
 
-Lists all the freetime for the given day
+Lists all the free time for the given day
 
 Format: `list-freetime DATE`
 
@@ -374,6 +397,8 @@ Accepted time formats (to replace `DATE` with):
 * `dd/mm/yyyy`
 * `dd-mm-yyyy`
 
+[Back to the Table of Contents](#table-of-contents)
+
 ### Listing all interviews for today : `list-i-today`
 
 Displays all the interviews that the user has on the day the 
@@ -393,6 +418,8 @@ shown: `Listed all interviews today`
 
 Example: `list-i-today`
 
+[Back to the Table of Contents](#table-of-contents)
+
 ### Marking an interview : `mark`
 
 Mark the specified interview in the address book.
@@ -400,14 +427,16 @@ Mark the specified interview in the address book.
 Format: `mark INDEX`
 
 * Marks the interview at the specified `INDEX` as done.
-* The index refers to the index number shown in the displayed interview list.
-* The index **must be a positive integer** 1, 2, 3, …​ The upper limit of
+* The `INDEX` refers to the index number shown in the displayed interview list.
+* The `INDEX` **must be a positive unsigned integer** 1, 2, 3, …​ The upper limit of
 valid integers is the number of interviews currently displayed in the interview
 list.
 
 Examples:
 * `mark 1` marks the first interview shown on the list as done.
-* `mark 3` marks the third interview shown on the list as done
+* `mark 3` marks the third interview shown on the list as done.
+
+[Back to the Table of Contents](#table-of-contents)
 
 ### Rating an interview : `rate`
 
@@ -416,12 +445,14 @@ Rate the specified interview in the address book.
 Format: `rate INDEX RATING`
 
 * Rates the interview at the specified `INDEX`.
-* The index refers to the index number shown in the displayed interview list.
-* The index **must be a positive integer** 1, 2, 3, …​ The upper limit of valid integers is the number of interviews currently displayed in the interview list
-* The `RATING` must be a non-negative one decimal place number between 0.0 to 5.0 inclusive.
+* The `INDEX` refers to the index number shown in the displayed interview list.
+* The `INDEX` **must be a positive unsigned integer** 1, 2, 3, …​ The upper limit of valid integers is the number of interviews currently displayed in the interview list.
+* The `RATING` must be a non-negative unsigned one decimal place number between 0.0 to 5.0 inclusive.
 
 Examples:
 * `rate 1 3.0` rates the first interview with a rating of 3.0.
+
+[Back to the Table of Contents](#table-of-contents)
 
 ### Listing all completed interview : `list-i-done`
 
@@ -430,6 +461,8 @@ that are done onto the GUI.
 
 Format: `list-i-done`
 
+[Back to the Table of Contents](#table-of-contents)
+
 ### Listing all incomplete interview : `list-i-not-done`
 
 Show a list of all interviews in the address book that are 
@@ -437,11 +470,15 @@ not done onto the GUI.
 
 Format:`list-i-not-done`
 
+[Back to the Table of Contents](#table-of-contents)
+
 ### Sorting interviews by rating : `sort-rate`
 
 Sort the interview list by rating in descending order (highest to the lowest rating).
 
 Format: `sort-rate`
+
+[Back to the Table of Contents](#table-of-contents)
 
 ### Sorting interviews by start-time : `sort-time`
 
@@ -450,6 +487,8 @@ in chronologically ascending order (interviews with earlier start times
 will be shown first)
 
 Format: `sort-time`
+
+[Back to the Table of Contents](#table-of-contents)
 
 
 ### Editing the data file
@@ -495,7 +534,7 @@ If your changes to the data file makes its format invalid, InterviewHub will dis
 
 | Action                   | Format, Examples                                                                                                                                                                                                 |
 |--------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add applicant**        | `add-a n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`                                            |
+| **Add applicant**        | `add-a n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]` <br> e.g., `add-a n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`                                          |
 | **Delete applicant**     | `delete-a APPLICANT_INDEX`<br> e.g., `delete-a 3`                                                                                                                                                                |
 | **Edit applicant**       | `edit-a APPLICANT_INDEX [n/NAME] [t/INTERVIEW_DATETIME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]`<br> e.g.,`edit-a 2 n/John Doe`                                                                                   |
 | **Find applicant**       | `find-a [n/KEYWORDS [MORE_KEYWORDS]...] [p/NUMBER] [e/KEYWORDS [MORE_KEYWORDS]...] [a/KEYWORDS [MORE_KEYWORDS]...] [t/KEYWORDS [MORE_KEYWORDS]...]` <br> e.g., `find-a n/John Bob p/98765432 e/John@example.com` |
@@ -503,21 +542,21 @@ If your changes to the data file makes its format invalid, InterviewHub will dis
 
 ## Interview Management Commands
 
-| Action                           | Format, Examples                                                                                                                      |
-|----------------------------------|---------------------------------------------------------------------------------------------------------------------------------------|
-| **Add interview**                | `add-i app/APPLICANT_INDEX jr/JOB_TITLE time/INTERVIEW_DATETIME` <br> e.g., `add-i app/18 jr/software engineer time/2022-12-12 18:00` |
-| **Delete interview**             | `delete-i INTERVIEW_INDEX`<br> e.g., `delete-i 3`                                                                                     |
-| **Edit interview**               | `edit-i INTERVIEW_INDEX [app/APPLICANT_INDEX] [jr/JOB_TITLE] [time/INTERVIEW_DATETIME]`<br> e.g.,`edit-i 2 jr/software-engineer`      |
-| **Find interview by job**        | `find-i KEYWORD [MORE_KEYWORDS]`<br> e.g., `find-i software-engineer`                                                                 |
-| **List interview**               | `list-i`                                                                                                                              |
-| **List free time**               | `list-freetime INTERVIEW_DATETIME` <br> e.g, `list-freetime 12-12-2024`                                                               |
-| **List interview for today**     | `list-i-today`                                                                                                                        |
-| **Mark interview as done**       | `mark INTERVIEW_INDEX` <br> e.g., `mark 3`                                                                                            |
-| **Rate interview**               | `rate INTERVIEW_INDEX RATING` <br> e.g., `rate 1 3.0`                                                                                 |
-| **List completed interview**     | `list-i-done`                                                                                                                         |
-| **List incomplete interview**    | `list-i-not-done`                                                                                                                     |
-| **Sort interview by rating**     | `sort-rate`                                                                                                                           |
-| **Sort interview by start time** | `sort-time`                                                                                                                           |
+| Action                           | Format, Examples                                                                                                                                         |
+|----------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add interview**                | `add-i app/APPLICANT_INDEX jr/JOB_TITLE time/INTERVIEW_DATETIME` <br> e.g., `add-i app/3 jr/Software Engineer start/03-11-2024 1500 end/03-11-2024 1600` |
+| **Delete interview**             | `delete-i INTERVIEW_INDEX`<br> e.g., `delete-i 3`                                                                                                        |
+| **Edit interview**               | `edit-i INTERVIEW_INDEX [app/APPLICANT_INDEX] [jr/JOB_TITLE] [time/INTERVIEW_DATETIME]`<br> e.g.,`edit-i 2 jr/software-engineer`                         |
+| **Find interview by job**        | `find-i KEYWORD [MORE_KEYWORDS]`<br> e.g., `find-i software-engineer`                                                                                    |
+| **List interview**               | `list-i`                                                                                                                                                 |
+| **List free time**               | `list-freetime INTERVIEW_DATETIME` <br> e.g, `list-freetime 12-12-2024`                                                                                  |
+| **List interview for today**     | `list-i-today`                                                                                                                                           |
+| **Mark interview as done**       | `mark INTERVIEW_INDEX` <br> e.g., `mark 3`                                                                                                               |
+| **Rate interview**               | `rate INTERVIEW_INDEX RATING` <br> e.g., `rate 1 3.0`                                                                                                    |
+| **List completed interview**     | `list-i-done`                                                                                                                                            |
+| **List incomplete interview**    | `list-i-not-done`                                                                                                                                        |
+| **Sort interview by rating**     | `sort-rate`                                                                                                                                              |
+| **Sort interview by start time** | `sort-time`                                                                                                                                              |
 
 [Back to the Table of Contents](#table-of-contents)
 
