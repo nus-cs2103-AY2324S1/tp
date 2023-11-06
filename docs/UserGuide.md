@@ -183,7 +183,7 @@ Successful Output:` Listed all persons`
 
 Edit clients contact fields using an index followed by the updated details.
 
-Format: `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [nk/NEXT_KIN] [nkp/NEXT_KIN_PHONE] [fp/FINANCIAL_PLAN] [t/TAG]…​`
+Format: `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [nk/NEXT_KIN] [nkp/NEXT_KIN_PHONE] [fp/FINANCIAL_PLAN]…​ [t/TAG]…​`
 
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
@@ -353,7 +353,7 @@ that is currently displayed on the screen.
 * `name` : sorts list by lexicographical ordering of name (case-insensitive).
 * `appointment`: sorts list by appointment timing in order of the earliest appointment first.
 
-Format: `sort keyword`
+Format: `sort KEYWORD`
 
 * Calling this command after a Find command will preserve the results filtered by the Find command.
 
@@ -405,15 +405,15 @@ _Details coming soon ..._
 
 | Action       | Format, Examples                                                                                                                                                                                                        |
 |--------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**      | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS nk/NEXT_KIN nkp/NEXT_KIN_PHONE [fp/FINANCIAL_PLAN] [t/TAG]…​` <br> e.g., `add n/John p/80101010 e/johndoe@gmail.com a/Punggol Central Blk 444 #15-32 820123 nk/Brennan nkp/82020202 [t/TAG]…​` |
+| **Add**      | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS nk/NEXT_KIN nkp/NEXT_KIN_PHONE [fp/FINANCIAL_PLAN]…​ [t/TAG]…​` <br> e.g., `add n/John p/80101010 e/johndoe@gmail.com a/Punggol Central Blk 444 #15-32 820123 nk/Brennan nkp/82020202 [t/TAG]…​` |
 | **Clear**    | `clear`                                                                                                                                                                                                                 |
 | **Delete**   | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                                                     |
-| **Edit**     | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [nk/NEXT_KIN] [nkp/NEXT_KIN_PHONE] [fp/FINANCIAL_PLAN] [t/TAG]…​`<br> e.g.,`edit 1 n/john doe a/23 woodlands ave 123`                                                     |
+| **Edit**     | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [nk/NEXT_KIN] [nkp/NEXT_KIN_PHONE] [fp/FINANCIAL_PLAN]…​ [t/TAG]…​`<br> e.g.,`edit 1 n/john doe a/23 woodlands ave 123`                                                     |
 | **Find**     | `find [n/NAME]…​ [fp/FINANCIAL_PLAN]…​ [t/TAG]…​`<br> e.g., `find n/James n/Jake`                                                                                                                                       |
 | **Gather**   | `gather [fp/FINANCIAL PLAN]` or `gather [t/TAG]` <br> e.g., `gather fp/Basic Insurance Plan`                                                                                                                            |
 | **Schedule** | `schedule INDEX ap/APPOINTMENT_NAME d/APPOINTMENT_DATE`<br> e.g. `schedule 1 ap/Annual review of financial goals d/20-11-2023 15:00`                                                                              |
 | **Complete** | `complete [INDEX] [d/APPOINTMENT_DATE]` <br> e.g `complete 1` <br> e.g `complete 01-05-2023`                                                                                                                      |                                                                                                                                                                         |
 | **List**     | `list`                                                                                                                                                                                                                  |
 | **Help**     | `help`                                                                                                                                                                                                                  |
-| **Sort**     | `sort SORTING_FUNCTION` <br> e.g., `sort appointment`                                                                                                                                                                   |
+| **Sort**     | `sort KEYWORD` <br> e.g., `sort appointment`                                                                                                                                                                   |
 
