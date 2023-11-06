@@ -548,6 +548,27 @@ the lifeline reaches the end of diagram.
     from `MainWindow` directly. Thus, `CommandResult` does not need another constructor and getter method.
   - Cons: `MainWindow` has to parse arguments.
 
+### Sorting of schedules
+
+The list of schedules is sorted to be more organised and easier to navigate for users.
+
+#### Implementation Details
+
+The schedules are sorted by implementing the `Comparable` interface and its required `compareTo()` method.
+
+#### Design rationale:
+
+`Schedule`s are sorted by `StartTime` as start time is what tuition centre coordinators are most concerned with.
+
+The schedules are divided into 2 parts: future and past, this organizes the schedules in a way that simplifies 
+navigation for the users. This allows them to quickly differentiate between upcoming and past schedules.
+
+The upcoming schedules are sorted in ascending order so that the most immediate schedules, which are the ones
+that are most relevant to the user at that point in time, is at the very top. 
+
+Past schedules are sorted in descending order, this keeps the more recent schedules readily accessible, while the older, 
+less relevant schedules are at the bottom of the list.
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
@@ -979,18 +1000,17 @@ scheduleToEdit's start and end times are earlier than the current datetime.
 If this validation fails, a `CommandException` with a clear and descriptive error message should be thrown.
 
 ### Schedule `datetime` input
-In the current [add schedule feature](#add-schedule-feature), the users have to enter `yyyy-MM-ddTHH:mm` each time for
-both `StartTime` and `EndTime`. However, since a `Schedule` is not allowed to start and end on different days, the user
-is unnecessarily repeating the input `yyyy-MM-dd`. This resulted in a command format that is longer than necessary.
-We plan to streamline the command to make it shorter and more user-friendly.
+In the current implementation, the users have to enter `yyyy-MM-ddTHH:mm` each time for both `StartTime` and `EndTime`.
+However, since a `Schedule` is not allowed to start and end on different days, the user is unnecessarily repeating the
+input `yyyy-MM-dd`. This resulted in a command format that is longer than necessary. We plan to streamline the command 
+to make it shorter and more user-friendly.
 
 **Proposed implementation**
 
-The new add schedule command would require an additional prefix `d/` for a `Date` in the format `yyyy-MM-dd`.
+The current `st/` and `et/` prefixes will be updated to take in `HH:mm` only. Additionally, this would require a new 
+prefix `d/` which will parse user input in the `yyyy-MM-dd` format into a `Date`.
 
-The format for `StartTime` and `EndTime` would be updated to take in only `HH:mm`.
-
-The new command format would be `add-s TUTOR_INDEX d/yyyy-MM-dd st/HH:mm et/HH:mm`
+For example, any command that uses the `st/` or `et/` prefix will now use `... d/yyyy-MM-dd st/HH:mm et/HH:mm` instead.
 
 ### Switching back to list view from calendar view
 In the current system, when executing any commands, including actions like marking, unmarking, or deleting schedules 
@@ -1019,14 +1039,7 @@ do nothing otherwise. The only exception is if the `commandResult` FeedbackToUse
 `ShowCalendarCommand.MESSAGE_SUCCESS` in which case it will call `showCalendar`.
 
 ### Schedules at the same time being arranged alphabetically
-In the current implementation, the schedules are being sorted by `StartTime` only. In particular, they are sorted in 
-2 parts.
-
-The first part of the list contains schedules that are on or after today, sorted in ascending order.
-
-The second part of the list contains schedules that are before today, sorted in descending order.
-
-If you have schedules with the same `StartTime`, they are in the order that they are added to the list.
+In the [current implementation](#sorting-of-schedules), the schedules are being sorted by `StartTime` only.
 
 This resulted in a situation where if you had many schedules starting at the same time, it would be very difficult to 
 find and locate a particular schedule.
