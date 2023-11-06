@@ -665,9 +665,19 @@ that are different from the MSS.
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Planned Enhancement**
-The current error message when adding an interview where the start and/or end date string is a valid date but is missing time is too general. We plan to make the error message also mention why the command is not accepted and the reason for the failure: Please enter an interview time!
+The current error message when adding an interview where the start and/or end date string is a valid date but is missing time is too general.
+We plan to make the error message also mention why the command is not accepted and the reason for the failure:
+Please enter an interview time!
 
-The current implementation of mark-i allows the user to mark interviews before the interview has been completed, based on the end time of the interview. We plan to not allow the user to mark interviews that have not passed. So, interviews whose end time is after the current time cannot be marked as done.
+The current implementation of mark-i allows the user to mark interviews before the interview has been completed,
+based on the end time of the interview. We plan to not allow the user to mark interviews that have not passed.
+So, interviews whose end time is after the current time cannot be marked as done.
+
+The current implementation of the find-i and find-a commands does not display a constant status of whether the find
+filter is being applied to the current list. E.g. When you perform a find-i command followed by some other command that
+changes the interview list, you have no way to tell if the previous "find-i" filter is still being applied.
+We plan to update the UI to display a constant status of what filter is currently being applied to the applicant and
+interview list.
 
 --------------------------------------------------------------------------------------------------------------------
 
