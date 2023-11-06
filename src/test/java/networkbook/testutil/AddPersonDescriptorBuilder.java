@@ -1,7 +1,7 @@
 package networkbook.testutil;
 
 
-import networkbook.logic.commands.AddCommand;
+import networkbook.logic.commands.add.AddPersonDescriptor;
 import networkbook.model.person.Course;
 import networkbook.model.person.Email;
 import networkbook.model.person.Graduation;
@@ -18,21 +18,21 @@ import networkbook.model.util.UniqueList;
  */
 public class AddPersonDescriptorBuilder {
 
-    private AddCommand.AddPersonDescriptor descriptor;
+    private AddPersonDescriptor descriptor;
 
     public AddPersonDescriptorBuilder() {
-        descriptor = new AddCommand.AddPersonDescriptor();
+        descriptor = new AddPersonDescriptor();
     }
 
-    public AddPersonDescriptorBuilder(AddCommand.AddPersonDescriptor descriptor) {
-        this.descriptor = new AddCommand.AddPersonDescriptor(descriptor);
+    public AddPersonDescriptorBuilder(AddPersonDescriptor descriptor) {
+        this.descriptor = new AddPersonDescriptor(descriptor);
     }
 
     /**
      * Returns an {@code AddPersonDescriptor} with fields containing {@code person}'s details
      */
     public AddPersonDescriptorBuilder(Person person) {
-        descriptor = new AddCommand.AddPersonDescriptor();
+        descriptor = new AddPersonDescriptor();
         descriptor.setPhones(person.getPhones());
         descriptor.setEmails(person.getEmails());
         descriptor.setLinks(person.getLinks());
@@ -111,7 +111,7 @@ public class AddPersonDescriptorBuilder {
         return this;
     }
 
-    public AddCommand.AddPersonDescriptor build() {
+    public AddPersonDescriptor build() {
         return descriptor;
     }
 }

@@ -10,6 +10,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import networkbook.commons.core.index.Index;
+import networkbook.logic.commands.add.AddPersonDescriptor;
 import networkbook.logic.commands.exceptions.CommandException;
 import networkbook.logic.parser.CliSyntax;
 import networkbook.model.Model;
@@ -103,8 +104,8 @@ public class CommandTestUtil {
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
 
-    public static final AddCommand.AddPersonDescriptor DESC_AMY;
-    public static final AddCommand.AddPersonDescriptor DESC_BOB;
+    public static final AddPersonDescriptor DESC_AMY;
+    public static final AddPersonDescriptor DESC_BOB;
     public static final String VALID_INDEX_DESC = " " + CliSyntax.PREFIX_INDEX + " " + "1";
 
     static {
