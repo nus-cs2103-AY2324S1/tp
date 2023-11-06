@@ -5,6 +5,7 @@ import static seedu.lovebook.logic.parser.CliSyntax.PREFIX_NAME;
 
 import java.util.ArrayList;
 
+import seedu.lovebook.commons.util.PredicatesUtil;
 import seedu.lovebook.commons.util.ToStringBuilder;
 import seedu.lovebook.logic.Messages;
 import seedu.lovebook.model.Model;
@@ -34,14 +35,7 @@ public class FilterCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        model.updateFilteredPersonList((person) -> {
-            for (MetricContainsKeywordPredicate predicate : predicateList) {
-                if (!predicate.test(person)) {
-                    return false;
-                }
-            }
-            return true;
-        });
+        model.updateFilteredPersonList(new PredicatesUtil(predicateList));
         return new CommandResult(
                 String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
     }

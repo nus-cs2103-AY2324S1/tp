@@ -18,7 +18,8 @@ Given below are my contributions to the project.
     * What it does: Allows users to filter dates by their date profile attributes
     * Justification: This feature is useful because it allows user to find the specific dates with the attributes that the 
     user is looking for.
-    * Highlights: This enhancement allows user to filter by multiple attributes at once.
+    * Highlights: This enhancement requires the understanding of the model and the creation of new Predicate class to 
+    filter the dates based on different attributes. The implementation was challenging as I had to 
     * Credits: N/A
 
 * **New Feature**: Sort Dates by Date Profile Attributes
