@@ -272,7 +272,7 @@ the lifeline reaches the end of diagram.
 </div>
 
 
-#### Design rationale:
+#### Design rationale
 The `edit-t` command was designed this way to ensure consistency with the previous `edit` person command.
  
 ### Delete tutor feature
@@ -326,7 +326,7 @@ The lifeline for `DeleteTutorCommandParser` should end at the destroy marker (X)
 but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
 
-#### Design rationale:
+#### Design rationale
 The `delete-t` command was designed this way to ensure consistency with the previous `delete` person command.
 
 ### Add Schedule Feature
@@ -372,7 +372,7 @@ The following sequence diagram shows how the operation works:
 
 </div>
 
-#### Design considerations:
+#### Design considerations
 
 **Aspect: Checking for clashing schedule:**
 
@@ -487,7 +487,7 @@ Given below is an example scenario on how the delete schedule command behaves:
 The following sequence diagram shows how the above steps for delete schedule operation works, taking `execute("delete-s 1")` API call as an example.
 
 ![Sequence diagram for delete-s command](images/DeleteScheduleSequenceDiagram.png)
-#### Design rationale:
+#### Design rationale
 The `delete-s` command was designed this way to ensure consistency with the previous delete person command.
 
 ### Change theme feature
@@ -1028,17 +1028,3 @@ create the `find` command object with the updated predicate.
 This would then be used in the `execute` method of the `find` command object to get the filtered tutor 
 or schedule list with part of their names matching the user input.
 
-### Ban users from entering non-alphanumeric keywords for find command
-
-The `find-t` and `find-s` command should only allow users to find alphanumeric names from the tutor list.
-
-The current `find` commands allow users to search for non-alphanumeric names like `find-t *john,"` although all
-tutor names should be alphanumeric.
-
-Therefore, we plan to only allow users to input alphanumeric keywords for `find` commands.
-
-**Proposed implementation**
-
-In the `findTutorCommandParser` and `findScheduleCommandParser` parse methods, apart from checking for empty inputs, 
-we can add another layer of check using the `parseName` method of the `ParserUtil` class to check for non-alphanumeric
-keywords and throw an error to prevent users from entering non-alphanumeric keywords.
