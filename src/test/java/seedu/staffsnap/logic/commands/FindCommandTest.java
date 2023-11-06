@@ -29,6 +29,7 @@ public class FindCommandTest {
     private Model model = new ModelManager(getTypicalApplicantBook(), new UserPrefs());
     private Model expectedModel = new ModelManager(getTypicalApplicantBook(), new UserPrefs());
 
+
     @Test
     public void equals() {
         NameContainsKeywordsPredicate firstPredicate =
@@ -61,7 +62,57 @@ public class FindCommandTest {
         String expectedMessage = String.format(MESSAGE_APPLICANTS_LISTED_OVERVIEW, 0);
         NameContainsKeywordsPredicate predicate = preparePredicate(" ");
         FindCommand command = new FindCommand(predicate);
+
         expectedModel.updateFilteredApplicantList(predicate);
+
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Collections.emptyList(), model.getFilteredApplicantList());
+    }
+
+    @Test
+    public void execute_singleKeyword_noApplicantFound() {
+        String expectedMessage = String.format(MESSAGE_APPLICANTS_LISTED_OVERVIEW, 0);
+        NameContainsKeywordsPredicate predicate = preparePredicate("testing");
+        FindCommand command = new FindCommand(predicate);
+
+        expectedModel.updateFilteredApplicantList(predicate);
+
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Collections.emptyList(), model.getFilteredApplicantList());
+    }
+
+    @Test
+    public void execute_singleCompleteKeyword_singleApplicantFound() {
+        String expectedMessage = String.format(MESSAGE_APPLICANTS_LISTED_OVERVIEW, 1);
+        NameContainsKeywordsPredicate predicate = preparePredicate("fiona");
+        FindCommand command = new FindCommand(predicate);
+
+        expectedModel.updateFilteredApplicantList(predicate);
+
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Arrays.asList(FIONA), model.getFilteredApplicantList());
+    }
+
+    @Test
+    public void execute_singleCompleteKeyword_multipleApplicantsFound() {
+        String expectedMessage = String.format(MESSAGE_APPLICANTS_LISTED_OVERVIEW, 2);
+        NameContainsKeywordsPredicate predicate = preparePredicate("Meier");
+        FindCommand command = new FindCommand(predicate);
+
+        expectedModel.updateFilteredApplicantList(predicate);
+
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Arrays.asList(BENSON, DANIEL), model.getFilteredApplicantList());
+    }
+
+    @Test
+    public void execute_multipleKeywords_noApplicantFound() {
+        String expectedMessage = String.format(MESSAGE_APPLICANTS_LISTED_OVERVIEW, 0);
+        NameContainsKeywordsPredicate predicate = preparePredicate("NO_APPLICANTS_MATCH");
+        FindCommand command = new FindCommand(predicate);
+
+        expectedModel.updateFilteredApplicantList(predicate);
+
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Collections.emptyList(), model.getFilteredApplicantList());
     }
@@ -71,7 +122,9 @@ public class FindCommandTest {
         String expectedMessage = String.format(MESSAGE_APPLICANTS_LISTED_OVERVIEW, 3);
         NameContainsKeywordsPredicate predicate = preparePredicate("Kurz Elle Kunz");
         FindCommand command = new FindCommand(predicate);
+
         expectedModel.updateFilteredApplicantList(predicate);
+
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(CARL, ELLE, FIONA), model.getFilteredApplicantList());
     }
@@ -81,9 +134,35 @@ public class FindCommandTest {
         String expectedMessage = String.format(MESSAGE_APPLICANTS_LISTED_OVERVIEW, 1);
         NameContainsKeywordsPredicate predicate = preparePredicate("Fiona Fluorescence");
         FindCommand command = new FindCommand(predicate);
+
         expectedModel.updateFilteredApplicantList(predicate);
+
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(FIONA), model.getFilteredApplicantList());
+    }
+
+    @Test
+    public void execute_singleIncompleteKeyword_noApplicantFound() {
+        String expectedMessage = String.format(MESSAGE_APPLICANTS_LISTED_OVERVIEW, 0);
+        NameContainsKeywordsPredicate predicate = preparePredicate("arrr");
+        FindCommand command = new FindCommand(predicate);
+
+        expectedModel.updateFilteredApplicantList(predicate);
+
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Collections.emptyList(), model.getFilteredApplicantList());
+    }
+
+    @Test
+    public void execute_singleIncompleteKeyword_singleApplicantFound() {
+        String expectedMessage = String.format(MESSAGE_APPLICANTS_LISTED_OVERVIEW, 1);
+        NameContainsKeywordsPredicate predicate = preparePredicate("car");
+        FindCommand command = new FindCommand(predicate);
+
+        expectedModel.updateFilteredApplicantList(predicate);
+
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Arrays.asList(CARL), model.getFilteredApplicantList());
     }
 
     @Test
@@ -91,9 +170,10 @@ public class FindCommandTest {
         String expectedMessage = String.format(MESSAGE_APPLICANTS_LISTED_OVERVIEW, 2);
         NameContainsKeywordsPredicate predicate = preparePredicate("Mei");
         FindCommand command = new FindCommand(predicate);
+
         expectedModel.updateFilteredApplicantList(predicate);
+
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        System.out.println(model.getFilteredApplicantList());
         assertEquals(Arrays.asList(BENSON, DANIEL), model.getFilteredApplicantList());
     }
 
