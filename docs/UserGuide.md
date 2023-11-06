@@ -95,12 +95,14 @@ online dating journey.
   as space characters surrounding line-breaks may be omitted when copied over to the application.
 
 <box type="info">
-`name` can include letters, numbers and spaces. It must not be left blank. <br>
-`age` should be a positive integer between 18 and 150 (inclusive). <br>
-`gender` should be either M or F. It is case sensitive. <br>
-`horoscope` should be a valid zodiac sign. It is case insensitive. <br>
-`income` (per month) should be a positive integer in SGD. <br>
-`height` should be a positive integer in cm between 100cm and 250cm (inclusive). <br>
+
+* `name` can include letters, numbers and spaces. It must not be left blank.
+* `age` should be a positive integer between 18 and 150 (inclusive).
+* `gender` should be either M or F. It is case sensitive.
+* `horoscope` should be a valid zodiac sign. It is case insensitive.
+* `income` (per month) should be a positive integer in SGD.
+* `height` should be a positive integer in cm between 100cm and 250cm (inclusive).
+
 </box>
 
 ### [Creation of new date: `add`](#creation-of-new-date)
