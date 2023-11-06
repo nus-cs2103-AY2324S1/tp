@@ -2,6 +2,7 @@ package transact.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static transact.commons.util.CollectionUtil.requireAllNonNull;
+import static transact.model.transaction.info.Date.VALIDATION_REGEX;
 
 import java.util.Collection;
 import java.util.HashSet;
@@ -195,9 +196,12 @@ public class ParserUtil {
      */
     public static Date parseDate(String date) throws ParseException {
         requireNonNull(date);
+        if (! date.matches(VALIDATION_REGEX)) {
+            throw new ParseException(Date.MESSAGE_CONSTRAINTS);
+        }
         String trimmedDate = date.trim();
         if (!Date.isValidDate(trimmedDate)) {
-            throw new ParseException(Date.MESSAGE_CONSTRAINTS);
+            throw new ParseException(Date.MESSAGE_INVALIDDATE);
         }
         return new Date(trimmedDate);
     }
