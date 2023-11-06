@@ -52,7 +52,8 @@ public class EditLeaveCommandTest {
                 .withLeaveList(editedLeaveList.leaveList)
                 .withRemarkList(VALID_REMARKLIST_BOB)
                 .build();
-        String expectedMessage = String.format(EditLeaveCommand.MESSAGE_SUCCESS, Messages.formatLeaves(editedEmployee));
+        String expectedMessage = String.format(EditLeaveCommand.MESSAGE_SUCCESS, oldLeaveDate, newLeaveDate,
+                Messages.formatLeaves(editedEmployee));
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
 
         model.addEmployee(BOB);
