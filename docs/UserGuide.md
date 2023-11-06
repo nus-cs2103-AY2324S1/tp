@@ -223,15 +223,15 @@ Format:
 `list so/ATTRIBUTE`
 
 * `so/ATTRIBUTE` is completely **optional**, on default will NOT be sorted.
-* As of v1.2, the attributes that are supported are `name` and `email`.
+* The attributes that are supported are `name` and `email`.
 * Attribute is case-insensitive: `list so/NAME` and `list so/name` return the same result.
 * The result will be sorted in **ascending** order.
-* Note: as of v1.2, the sorting algorithm is case-sensitive, which means it will treat uppercase and 
+* The sorting algorithm is case-sensitive, which means it will treat uppercase and 
 lowercase letters as distinct. This may result in names being sorted as A B C a b c, rather than A a B b C c.
 
 Examples:
 * `list` Shows a list of all persons.
-* `list s/name` Shows a list of all persons, sorted by name in ascending order.
+* `list so/name` Shows a list of all persons, sorted by name in ascending order.
 
 ### Listing all tags: `listT`
 
