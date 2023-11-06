@@ -1,11 +1,10 @@
 package seedu.address.logic.commands.trendresults;
 
-import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.logic.commands.CommandResult;
-import seedu.address.logic.commands.TrendCommand;
-
 import java.util.Map;
 import java.util.Objects;
+
+import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.logic.commands.CommandResult;
 
 /**
  * Represents the command result for trend graph generation.

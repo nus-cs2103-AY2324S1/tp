@@ -15,7 +15,6 @@ import seedu.address.model.person.StudentIsGenderPredicate;
 import seedu.address.model.person.StudentIsSecLevelPredicate;
 import seedu.address.model.person.StudentTakesSubjectPredicate;
 import seedu.address.model.tag.Subject;
-import seedu.address.ui.TrendWindow;
 
 /**
  * Class for organizing data by different attributes.

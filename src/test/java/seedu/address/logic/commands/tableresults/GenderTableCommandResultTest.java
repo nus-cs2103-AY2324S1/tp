@@ -78,6 +78,7 @@ public class GenderTableCommandResultTest {
                 + commandResult.getFeedbackToUser() + ", showHelp=" + commandResult.isShowHelp()
                 + ", showTable=" + commandResult.isShowTable()
                 + ", showBarChart=" + commandResult.isShowBarChart()
+                + ", showTrend=" + commandResult.isShowTrend()
                 + ", exit=" + commandResult.isExit() + "}";
         assertEquals(expected, commandResult.toString());
     }
