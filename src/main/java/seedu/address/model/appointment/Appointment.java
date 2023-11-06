@@ -92,19 +92,6 @@ public class Appointment implements Comparable<Appointment> {
         return this.priorityTag;
     }
 
-    /**
-     * Returns true if both appointments have the same time.
-     * This defines a weaker notion of equality between two appointments.
-     */
-    public boolean isSameAppointment(Appointment otherAppointment) {
-        if (otherAppointment == this) {
-            return true;
-        }
-
-        return otherAppointment != null
-                && otherAppointment.getAppointmentTime().equals(getAppointmentTime());
-    }
-
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -139,7 +126,7 @@ public class Appointment implements Comparable<Appointment> {
                 .add("patient", patient)
                 .add("appointmentTime", appointmentTime)
                 .add("description", appointmentDescription)
-                .add("priorityTag", priorityTag)
+                .add("priority", priorityTag)
                 .toString();
     }
 }

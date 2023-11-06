@@ -51,6 +51,11 @@ public class CommandTestUtil {
 
     public static final String INVALID_TAG_HEPATITIS = "Hepatitis-B";
 
+    public static final String VALID_APPOINTMENT_START = "2023/09/10 10:00";
+    public static final String VALID_APPOINTMENT_END = "2023/09/10 11:00";
+    public static final String VALID_APPOINTMENT_DESCRIPTION = "Checkup Appointment";
+    public static final String VALID_APPOINTMENT_PRIORITY = "medium";
+
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
     public static final String GENDER_DESC_AMY = " " + PREFIX_GENDER + VALID_GENDER_AMY;
@@ -161,7 +166,7 @@ public class CommandTestUtil {
         assertTrue(targetIndex.getZeroBased() < model.getFilteredAppointmentList().size());
 
         Appointment appointment = model.getFilteredAppointmentList().get(targetIndex.getZeroBased());
-        model.updateFilteredAppointmentList(x -> x.isSameAppointment(appointment));
+        model.updateFilteredAppointmentList(x -> x.equals(appointment));
 
         assertEquals(1, model.getFilteredAppointmentList().size());
     }

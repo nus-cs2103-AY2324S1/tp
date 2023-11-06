@@ -1,6 +1,7 @@
 package seedu.address.model.appointment;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
  * Represents an Appointment's description in the address book.
@@ -19,6 +20,7 @@ public class AppointmentDescription {
      */
     public AppointmentDescription(String description) {
         requireNonNull(description);
+        checkArgument(isValidAppointmentDescription(description), MESSAGE_CONSTRAINTS);
         this.value = description;
     }
 
