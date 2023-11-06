@@ -2,6 +2,7 @@ package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_EMPTY_FIELDS;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.Messages.MESSAGE_PREAMBLE_DETECTED;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_COMPANY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LICENCE_PLATE;
@@ -37,19 +38,15 @@ public class FindCommandParser implements Parser<FindCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public FindCommand parse(String args) throws ParseException {
-        String trimmedArgs = args.trim();
-
-        if (trimmedArgs.isEmpty()) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
-        }
-
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_TAG,
                         PREFIX_NRIC, PREFIX_LICENCE_PLATE, PREFIX_COMPANY,
                         PREFIX_POLICY_NUMBER, PREFIX_POLICY_ISSUE_DATE,
                         PREFIX_POLICY_EXPIRY_DATE);
 
+        if (!argMultimap.getPreamble().isEmpty()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_PREAMBLE_DETECTED));
+        }
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_TAG, PREFIX_COMPANY,
                 PREFIX_NRIC, PREFIX_LICENCE_PLATE, PREFIX_POLICY_NUMBER, PREFIX_POLICY_ISSUE_DATE,
                 PREFIX_POLICY_EXPIRY_DATE);

@@ -45,6 +45,7 @@ public class PolicyDate implements Comparable<PolicyDate> {
     public static boolean isValidPolicyDate(String test) {
         try {
             SimpleDateFormat format = new SimpleDateFormat(VALIDATION_DATE_FORMAT);
+            format.setLenient(false);
             format.parse(test);
             return true;
         } catch (ParseException e) {

@@ -37,7 +37,7 @@ public class FindCommandParserTest {
                         new TagContainsKeywordsPredicate(""), new PolicyExpiryContainsKeywordsPredicate(""),
                         new EmailContainsKeywordsPredicate(""), new PolicyIssueContainsKeywordsPredicate(""),
                         new CompanyContainsKeywordsPredicate(""));
-        assertParseSuccess(parser, "find n/Alice Bob", expectedFindCommand);
+        assertParseSuccess(parser, " n/Alice Bob", expectedFindCommand);
     }
 
 }
