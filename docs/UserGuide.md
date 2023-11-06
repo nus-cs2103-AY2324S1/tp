@@ -233,7 +233,8 @@ Gathers all the emails of persons with a desired financial plan or tag.
 
 Format: `gather fp/FINANCIAL PLAN` or `gather t/TAG`
 
-* Only either Financial Plan or Tag can be searched at once.
+* Generates a list of emails separated by spaces, making it convenient for copying and pasting into the recipient input of an email application.
+* **Either Financial Plan or Tag** can be searched at once.
 * The search is case-insensitive. e.g `financial` will match `FINANCIAL` or `Financial`.
 * A person's email will be gathered if the prompt matches a substring of their financial plan or tag.
 
