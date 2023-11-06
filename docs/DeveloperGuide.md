@@ -9,7 +9,8 @@ title: Developer Guide
 
 ## **Acknowledgements**
 
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+* The foundational code for add and find features are adapted from [AB-3](https://github.com/nus-cs2103-AY2324S1/tp).
+* The formatting for the developer guide is inspired by [NUSCoursemates](https://ay2324s1-cs2103t-t17-4.github.io/tp/DeveloperGuide.html).
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -58,7 +59,7 @@ The *Sequence Diagram* below shows how the components interact with each other f
 Each of the four main components (also shown in the diagram above),
 
 * defines its *API* in an `interface` with the same name as the Component.
-* implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point.
+* implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point).
 
 For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
 
@@ -101,9 +102,9 @@ The sequence diagram below illustrates the interactions within the `Logic` compo
 How the `Logic` component works:
 
 1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
-1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`.
-1. The command can communicate with the `Model` when it is executed (e.g. to delete a applicant).
-1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
+2. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`.
+3. The command can communicate with the `Model` when it is executed (e.g. to delete a applicant).
+4. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
 
@@ -154,34 +155,37 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### Find Interview by Job Title Feature
+### Add interview feature
 
 #### Implementation
 
-The find interview by job title feature allows users to query the list of added interview
-for interviews that match the job title via the command `find-i JOB_TITLE`, where `JOB_TITLE` must not
-be an empty string.
+#### How is the command executed
 
-The `find-i` command is facilitated by the `FindInterviewCommand`, `FindInterviewCommandParser`, `JobContainsKeywordsPredicate` and `ApplicantContainsInterviewPredicate`.
+#### Design consideration
+
+### Find interview by job title feature
+
+#### Implementation
+
+The find interview by job title feature allows users to query the list of added interview for interviews that match the job title via the command `find-i KEYWORD [MORE_KEYWORD]... `, where `KEYWORD` must not
+be an empty string. 
+
+For more information on the command constrains, please refer to the [User Guide](https://ay2324s1-cs2103t-t11-2.github.io/tp/UserGuide.html).
+
+The `find-i` command is facilitated by the `FindInterviewCommand`, `FindInterviewCommandParser`, and `JobContainsKeywordsPredicate`.
 It uses `Model#updateFilteredInterviewList(Predicate<Interview> predicate)` to apply the `JobContainsKeywordsPredicate`
-in order to produce a filtered list containing only entries whose job correspond to `JOB_TITLE`.
+in order to produce a filtered list containing only entries whose job correspond to `KEYWORD [MORE_KEYWORD]...`.
 
-The find interview command will affect the applicant list. The new applicant list will contain the applicant who have their respective interview
-listed in the interview list. The applicant list index represents an applicant at that index has an interview at the same index in the interview list.
-The applicant list uses `Model#updateFilteredApplicantList(Predicate<Applicant> predicate)` to apply the `ApplicantContainsInterviewPredicate`
-in order to produce a filtered list containing only entries whose interview correspond to the interview list.
+#### How is the command executed
+1. The user inputs the `find-i` command together with non-empty job-title as keyword(s);
+2. The `LogicManager` receives the command string and forwarded it to the `AddressBookParser`.
+3. The `AddressBookParser` checks the type of command and constructs `FindInterviewCommandParser` to parse the keyword(s).
+4. The `FindInterviewCommandParser` constructs `JobContainsKeywordsPredicate` containing the keyword as predicate.
+5. The `LogicManager` executes the `FindInterviewCommand` which calls the `Model#updateFilteredInterviewList(Predicate<Interview> predicate)` method.
+6. The `FindInterviewCommand` construct `CommandResult` containing the number of successful interviews filtered in the final list and returns it to `LogicManager`.
+7. The GUI will be updated automatically by when the list changes.
 
 #### Design Consideration
-
-**Aspect: How filter is done:**
-
-* **Alternative 1 (current choice):** Use a predicate object (JobContainsKeywordsPredicate) to handle filtering.
-    * Pros: Decrease the coupling effect by separating the predicate and increase extendability.
-    * Cons: Difficult to implement as more abstraction is being used.
-
-* **Alternative 2:** Implement filtering logic directly within the FindCourseCommand.
-    * Pros: The implementation will be simpler without the consideration of abstraction.
-    * Cons: Less abstraction and less extendable for future features.
 
 **Aspect: Case-sensitivity in search:**
 
@@ -203,7 +207,85 @@ in order to produce a filtered list containing only entries whose interview corr
     * Pros: Easier to control the input and filtering.
     * Cons: Less powerful since users can only search job based on one keyword.
 
-### Multiple time formats
+### Find applicant feature
+
+#### Implementation
+
+The find applicant feature allows users to query the list of applicants for applicants
+whose name, phone, email, address and tags match the given arguments.
+
+This can be done
+via the command `find-a [n/KEYWORDS [MORE_KEYWORDS]...] [p/NUMBER]
+[e/KEYWORDS [MORE_KEYWORDS]...] [a/KEYWORDS [MORE_KEYWORDS]...] t/KEYWORDS [MORE_KEYWORDS]...]`.
+
+The find applicant feature is facilitated by `FindApplicantCommand`, `FindApplicantCommandParser`,
+`AddressContainsKeywordsPredicate`, `EmailContainsKeywordsPredicate`, `NameContainsKeywordsPredicate`,
+`PhoneContainsNumberPredicate`, `TagContainsKeywordsPredicate`.
+It uses `Model#updateFilteredApplicantList(Predicate<Applicant>)` to apply the predicates
+in order to produce a filtered list containing only the filtered entries.
+
+#### How is the command executed
+
+#### Design Considerations
+
+Aspect: How find applicant command filters applicants:
+* **Alternative 1 (current choice):** Use a predicate for each field
+    * Pros:
+        * Decrease coupling and increases extensibility.
+        * Easier to maintain
+    * Cons:
+        * More difficult and tedious to implement
+        * More test cases needed for each predicate
+
+* **Alternative 2:** Use one predicate for the entire applicant
+    * Pros:
+        * Easier to code and less code to write
+    * Cons:
+        * Harder to maintain
+        * More coupling as predicates for different fields are not abstracted out
+
+Aspect: Which find command format
+* **Alternative 1 (current choice):** Accepts multiple space or comma separated keywords for each prefix
+    * Pros:
+        * Allows filtering using multiple keywords in a single find command
+        * User can type the command quickly
+    * Cons:
+        * Only allows filtering by words and not phrases
+* **Alternative 2:** Accepts one keyword for each prefix
+    * Pros:
+        * Easy to implement
+        * User can type the command quickly
+    * Cons:
+        * Can only find using one keyword for each applicant field in a single find command
+* **Alternative 3:** Accepts duplicate prefixes and a keyphrase for each prefix
+    * Pros:
+        * Allows filtering of multiple keywords or keyphrase in a single find command
+        * The most specific filter out of all the alternatives
+    * Cons:
+        * Most difficult to implement of all alternatives considered
+        * The command can be slow to type due to the need to type many prefixes
+
+Aspect: How find command matches the arguments for name
+* **Alternative 1 (current choice):** Match keywords to words in the name
+    * Pros:
+        * Can find a person with only the first name or last name
+    * Cons:
+        * Less specific than exact matching
+* **Alternative 2:** Require exact match between arguments and name
+    * Pros:
+        * More specific search
+    * Cons:
+        * Users need to type longer commands to search for an applicant
+        * Less flexibility
+* **Alternative 3:** Check if argument is substring of the name
+    * Pros:
+        * Users can find an applicant without typing an entire word
+        * More flexibility
+    * Cons:
+        * Too many applicants might show up in a single find command which defeats
+          the purpose of the find command
+
+### Time feature
 
 #### Implementation
 This feature is implemented though the `TimeParser` class. This class contains several public static methods related to manipulating time:
@@ -227,7 +309,7 @@ This feature is implemented though the `TimeParser` class. This class contains s
         - `2023-12-12 1647`
     - The sequence diagram shown below shows how the API is called by other classes:
 
-      ![parseDateSequenceDiagram.png](images%2FparseDateSequenceDiagram.png)
+      ![parseDateSequenceDiagram.png](images/parseDateSequenceDiagram.png)
 
 
 - `TimeParser#listInterviewClashes(String potentialInterview, UniqueInterviewList interviews)`  — Takes in an interview time in the String format, and checks the given list of interviews that the user has, and lists all clashing interviews.
@@ -236,7 +318,9 @@ This feature is implemented though the `TimeParser` class. This class contains s
 - `TimeParser#sortInterviewsByTimeAscending(UniqueInterviewList interviews)`  —  Takes in a list of interviews, and sorts them in ascending chronological order
 - `TimeParser#listTodayInterviews(String day, UniqueInterviewList interviews)`  —  Takes in a given day, and if valid, lists out all the interviews that fall within that day
 
-#### Design considerations:
+#### How is the command executed
+
+#### Design considerations
 
 **Aspect: How `TimeParser#parseDate(String date)` works:**
 
@@ -303,84 +387,37 @@ This feature is implemented though the `TimeParser` class. This class contains s
     * Cons:
       * Might increase coupling in the codebase since an object from another object is passed into the API and modified
 
-### Find applicant feature
+### List all free timing for today feature
 
 #### Implementation
 
-The find applicant feature allows users to query the list of applicants for applicants 
-whose name, phone, email, address and tags match the given arguments. 
+#### How is the command executed
 
-This can be done 
-via the command `find-a [n/KEYWORDS [MORE_KEYWORDS]...] [p/NUMBER]
-[e/KEYWORDS [MORE_KEYWORDS]...] [a/KEYWORDS [MORE_KEYWORDS]...] t/KEYWORDS [MORE_KEYWORDS]...]`.
+#### Design consideration
 
-The find applicant feature is facilitated by `FindApplicantCommand`, `FindApplicantCommandParser`, 
-`AddressContainsKeywordsPredicate`, `EmailContainsKeywordsPredicate`, `NameContainsKeywordsPredicate`, 
-`PhoneContainsNumberPredicate`, `TagContainsKeywordsPredicate`.
-It uses `Model#updateFilteredApplicantList(Predicate<Applicant>)` to apply the predicates 
-in order to produce a filtered list containing only the filtered entries.
+### List all interviews for today feature
 
-#### Design Considerations:
+#### Implementation
 
-Aspect: How find applicant command filters applicants:
-* **Alternative 1 (current choice):** Use a predicate for each field
-  * Pros: 
-    * Decrease coupling and increases extensibility.
-    * Easier to maintain
-  * Cons:
-    * More difficult and tedious to implement
-    * More test cases needed for each predicate
+#### How is the command executed
 
-* **Alternative 2:** Use one predicate for the entire applicant
-  * Pros:
-    * Easier to code and less code to write
-  * Cons:
-    * Harder to maintain
-    * More coupling as predicates for different fields are not abstracted out
+#### Design consideration
 
-Aspect: Which find command format
-* **Alternative 1 (current choice):** Accepts multiple space or comma separated keywords for each prefix
-  * Pros: 
-    * Allows filtering using multiple keywords in a single find command
-    * User can type the command quickly
-  * Cons:
-    * Only allows filtering by words and not phrases
-* **Alternative 2:** Accepts one keyword for each prefix
-  * Pros:
-    * Easy to implement
-    * User can type the command quickly
-  * Cons:
-    * Can only find using one keyword for each applicant field in a single find command
-* **Alternative 3:** Accepts duplicate prefixes and a keyphrase for each prefix
-  * Pros:
-    * Allows filtering of multiple keywords or keyphrase in a single find command
-    * The most specific filter out of all the alternatives
-  * Cons:
-    * Most difficult to implement of all alternatives considered
-    * The command can be slow to type due to the need to type many prefixes
+### Rate interview feature
 
-Aspect: How find command matches the arguments for name
-* **Alternative 1 (current choice):** Match keywords to words in the name
-  * Pros:
-    * Can find a person with only the first name or last name
-  * Cons:
-    * Less specific than exact matching
-* **Alternative 2:** Require exact match between arguments and name
-  * Pros:
-    * More specific search
-  * Cons:
-    * Users need to type longer commands to search for an applicant
-    * Less flexibility
-* **Alternative 3:** Check if argument is substring of the name
-  * Pros:
-    * Users can find an applicant without typing an entire word
-    * More flexibility
-  * Cons:
-    * Too many applicants might show up in a single find command which defeats
-    the purpose of the find command
+#### Implementation
 
+#### How is the command executed
 
-_{more aspects and alternatives to be added}_
+#### Design consideration
+
+### Sort interview feature
+
+#### Implementation
+
+#### How is the command executed
+
+#### Design consideration
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -414,34 +451,31 @@ _{more aspects and alternatives to be added}_
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                               | I want to …​                             | So that I can…​                                                        |
-|----------|-------------------------------------------------------|------------------------------------------|------------------------------------------------------------------------|
-| `* * *`  | New user of the app                                   | see usage instructions                   | refer to instructions when I first started to use the App              |
-| `* * *`  | Engineering Manager ready for job applicant           | add a new applicant                      | save their contact details into the App                                |
-| `* * *`  | Engineering Manager opening a job role                | add a new job role                       | keep track of the job role available for application                   |
-| `* * *`  | Engineering Manager ready to start an interview       | add a new interview slot                 | save the interview information into the App                            |
-| `* * *`  | Engineering Manager ready for next round of interview | delete an applicant                      | remove their contact details that I no longer need                     |
-| `* * *`  | Engineering Manager that finished an interview        | delete an interview                      | remove the interview that has already been completed                   |
+| Priority | As a …​                                               | I want to …​                             | So that I can…​                                                           |
+|----------|-------------------------------------------------------|------------------------------------------|---------------------------------------------------------------------------|
+| `* * *`  | New user of the app                                   | see usage instructions                   | refer to instructions when I first started to use the App                 |
+| `* * *`  | Engineering Manager ready for job applicant           | add a new applicant                      | save their contact details into the App                                   |
+| `* * *`  | Engineering Manager opening a job role                | add a new job role                       | keep track of the job role available for application                      |
+| `* * *`  | Engineering Manager ready to start an interview       | add a new interview slot                 | save the interview information into the App                               |
+| `* * *`  | Engineering Manager ready for next round of interview | delete an applicant                      | remove their contact details that I no longer need                        |
+| `* * *`  | Engineering Manager that finished an interview        | delete an interview                      | remove the interview that has already been completed                      |
 | `* * *`  | Busy Engineering Manager                              | find an applicant by name                | locate details of applicants without having to go through the entire list |
-| `* * *`  | Busy Engineering Manager                              | find a job role by name                  | easily locate the job role which are still available                   |
-| `* *`    | Busy Engineering Manager                              | set reminder of interview                | stay organised and track upcoming interview                            |
-| `* *`    | Engineering Manager with sensitive information        | hide private contact details             | protect the privacy of the applicants information in the App           |
-| `* *`    | Engineering Manager with many applicants              | sort the applicants by skill             | prioritise and focus on the most promising candidates                  |
-| `* *`    | Engineering Manager with many applicants              | rank the applicants                      | keep track of the applicants who have performed well                   |
-| `* *`    | Engineering Manager                                   | update an applicant details              | easily update their information on the App                             |
-| `* *`    | Engineering Manager                                   | update a job role                        | easily change the details about the job role                           |
-| `* *`    | Engineering Manager with limited budget               | track the cost per hire                  | ensure that the company budget is not exceeded                         |
-| `* *`    | Team-Oriented Engineering Manager                     | add other interviewer                    | facililate collaboration and delegation of responsibilities            |
-| `*`      | Organised Engineering Manager                         | sort applicants by name                     | locate an applicant easily                                             |
-| `*`      | Engineering Manager with many contacts                | import contacts from other file          | add multiple contacts into the App smoothly                            |
-| `*`      | Meticulous Engineering Manager                        | store the applicant's background         | make a more informed choice to benefit the company                     |
-| `*`      | Engineering Manager with multiple rounds of interview | track the progress of each candidate     | maintain a clear overview of our recruitment efforts                   |
-| `*`      | New Engineering Manager                               | analyse the performance of the interview | make improvements to my interview processes                            |
-| `*`      | Helpful Engineering Manager                           | provide feedback to the applicant        | offer constructive advice to help them improve their skills            |
-| `*`      | Long user of the app                                  | provide feedback to the developer        | suggest improvements and enhancements for the app                      |
-
-
-*{More to be added}*
+| `* * *`  | Busy Engineering Manager                              | find a job role by name                  | easily locate the job role which are still available                      |
+| `* *`    | Busy Engineering Manager                              | set reminder of interview                | stay organised and track upcoming interview                               |
+| `* *`    | Engineering Manager with sensitive information        | hide private contact details             | protect the privacy of the applicants information in the App              |
+| `* *`    | Engineering Manager with many applicants              | sort the applicants by skill             | prioritise and focus on the most promising candidates                     |
+| `* *`    | Engineering Manager with many applicants              | rank the applicants                      | keep track of the applicants who have performed well                      |
+| `* *`    | Engineering Manager                                   | update an applicant details              | easily update their information on the App                                |
+| `* *`    | Engineering Manager                                   | update a job role                        | easily change the details about the job role                              |
+| `* *`    | Engineering Manager with limited budget               | track the cost per hire                  | ensure that the company budget is not exceeded                            |
+| `* *`    | Team-Oriented Engineering Manager                     | add other interviewer                    | facilitate collaboration and delegation of responsibilities               |
+| `*`      | Organised Engineering Manager                         | sort applicants by name                  | locate an applicant easily                                                |
+| `*`      | Engineering Manager with many contacts                | import contacts from other file          | add multiple contacts into the App smoothly                               |
+| `*`      | Meticulous Engineering Manager                        | store the applicant's background         | make a more informed choice to benefit the company                        |
+| `*`      | Engineering Manager with multiple rounds of interview | track the progress of each candidate     | maintain a clear overview of our recruitment efforts                      |
+| `*`      | New Engineering Manager                               | analyse the performance of the interview | make improvements to my interview processes                               |
+| `*`      | Helpful Engineering Manager                           | provide feedback to the applicant        | offer constructive advice to help them improve their skills               |
+| `*`      | Long user of the app                                  | provide feedback to the developer        | suggest improvements and enhancements for the app                         |
 
 ### Use cases
 
@@ -604,8 +638,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-*{More to be added}*
-
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
@@ -614,11 +646,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 4.  The system should have an interface that is very easy to pick up for our target audience(i.e. Engineering Managers
 that have many years of programming experience).
 
-*{More to be added}*
-
 ### Glossary
 
-* **Mainstream OS**: Windows, Linux, Unix, OS-X
+* **Mainstream OS**: Windows, Linux, Unix, OS-X/MacOS
 * **Private contact detail**: A contact detail that is not meant to be shared with others
 * **Applicant**: The applicant applying to a particular job role.
 * **Hiring manager**: The manager interviewing the applicant.
@@ -627,6 +657,14 @@ This manager is familiar with the technical aspects of the role. Also called eng
 interaction in a use case where nothing goes wrong.
 * **Extensions**: In a use case, an extension describes an alternative flow of events
 that are different from the MSS.
+
+--------------------------------------------------------------------------------------------------------------------
+
+## **Appendix: Effort**
+
+--------------------------------------------------------------------------------------------------------------------
+
+## **Appendix: Planned Enhancement**
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -645,33 +683,33 @@ testers are expected to do more *exploratory* testing.
 
    1. Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   2. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
-1. Saving window preferences
+2. Saving window preferences
 
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-   1. Re-launch the app by double-clicking the jar file.<br>
+   2. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
+3. _{ more test cases …​ }_
 
-### Deleting a applicant
+### Deleting an applicant
 
-1. Deleting a applicant while all applicants are being shown
+1. Deleting an applicant while all applicants are being shown
 
    1. Prerequisites: List all applicants using the `list` command. Multiple applicants in the list.
 
-   1. Test case: `delete 1`<br>
+   2. Test case: `delete 1`<br>
       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 
-   1. Test case: `delete 0`<br>
+   3. Test case: `delete 0`<br>
       Expected: No applicant is deleted. Error details shown in the status message. Status bar remains the same.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+   4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
+2. _{ more test cases …​ }_
 
 ### Saving data
 
@@ -679,4 +717,4 @@ testers are expected to do more *exploratory* testing.
 
    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
-1. _{ more test cases …​ }_
+2. _{ more test cases …​ }_
