@@ -12,7 +12,7 @@ import java.util.ArrayList;
 
 import seedu.lovebook.logic.commands.FilterCommand;
 import seedu.lovebook.logic.parser.exceptions.ParseException;
-import seedu.lovebook.model.date.MetricContainsKeywordPredicate;
+import seedu.lovebook.model.date.*;
 
 /**
  * Parses input arguments and creates a new FindCommand object
@@ -45,21 +45,25 @@ public class FilterCommandParser implements Parser<FilterCommand> {
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
             keyword = argMultimap.getValue(PREFIX_NAME).get();
             metric = new Prefix("name/");
+            Name name = ParserUtil.parseName(keyword); // checks validity
             predicates.add(new MetricContainsKeywordPredicate(keyword, metric));
         }
         if (argMultimap.getValue(PREFIX_AGE).isPresent()) {
             keyword = argMultimap.getValue(PREFIX_AGE).get();
             metric = new Prefix("age/");
+            Age age = ParserUtil.parseAge(keyword); // checks validity
             predicates.add(new MetricContainsKeywordPredicate(keyword, metric));
         }
         if (argMultimap.getValue(PREFIX_GENDER).isPresent()) {
             keyword = argMultimap.getValue(PREFIX_GENDER).get();
             metric = new Prefix("gender/");
+            Gender gender = ParserUtil.parseGender(keyword); // checks validity
             predicates.add(new MetricContainsKeywordPredicate(keyword, metric));
         }
         if (argMultimap.getValue(PREFIX_HEIGHT).isPresent()) {
             keyword = argMultimap.getValue(PREFIX_HEIGHT).get();
             metric = new Prefix("height/");
+            Height height = ParserUtil.parseHeight(keyword); // checks validity
             predicates.add(new MetricContainsKeywordPredicate(keyword, metric));
         }
         if (argMultimap.getValue(PREFIX_INCOME).isPresent()) {

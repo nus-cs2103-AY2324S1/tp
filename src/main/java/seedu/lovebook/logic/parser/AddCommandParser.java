@@ -46,7 +46,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
         Age age = ParserUtil.parseAge(argMultimap.getValue(PREFIX_AGE).get());
         Gender gender = ParserUtil.parseGender(argMultimap.getValue(PREFIX_GENDER).get());
-        Height height = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_HEIGHT).get());
+        Height height = ParserUtil.parseHeight(argMultimap.getValue(PREFIX_HEIGHT).get());
         Income income = ParserUtil.parseIncome(argMultimap.getValue(PREFIX_INCOME).get());
         Horoscope horoscope = ParserUtil.parseHoroscope(argMultimap.getValue(PREFIX_HOROSCOPE).get());
 
