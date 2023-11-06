@@ -23,9 +23,9 @@ import seedu.lovebook.model.date.Date;
 public class SortCommand extends Command {
     public static final String COMMAND_WORD = "sort";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Sorts all dates in LoveBook alphabetically "
-            + "or numerically.\n"
-            + "Parameters: name/ OR age  OR height/ OR income/ OR horoscope/ AND increasing OR decreasing" + "\n"
-            + "Example: " + COMMAND_WORD + PREFIX_NAME + "increasing";
+            + "or numerically based on ONE metric.\n"
+            + "Parameters: name/ OR age OR height/ OR income/ OR horoscope/ + increasing OR decreasing" + "\n"
+            + "Example: " + COMMAND_WORD + " " + PREFIX_NAME + "increasing";
     public static final String SEQUENCE_ASCENDING = "increasing";
     public static final String SEQUENCE_DESCENDING = "decreasing";
     public final Prefix prefix;

@@ -83,7 +83,7 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code height} is invalid.
      */
-    public static Height parseAddress(String height) throws ParseException {
+    public static Height parseHeight(String height) throws ParseException {
         requireNonNull(height);
         String trimmedAddress = height.trim();
         if (!Height.isValidHeight(trimmedAddress)) {

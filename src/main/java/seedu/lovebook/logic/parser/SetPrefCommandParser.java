@@ -33,7 +33,7 @@ public class SetPrefCommandParser implements Parser<SetPrefCommand> {
             setPrefDescriptor.setAge(ParserUtil.parseAge(argMultimap.getValue(PREFIX_AGE).get()));
         }
         if (argMultimap.getValue(PREFIX_HEIGHT).isPresent()) {
-            setPrefDescriptor.setHeight(ParserUtil.parseAddress(argMultimap.getValue(PREFIX_HEIGHT).get()));
+            setPrefDescriptor.setHeight(ParserUtil.parseHeight(argMultimap.getValue(PREFIX_HEIGHT).get()));
         }
         if (argMultimap.getValue(PREFIX_INCOME).isPresent()) {
             setPrefDescriptor.setIncome(ParserUtil.parseIncome(argMultimap.getValue(PREFIX_INCOME).get()));

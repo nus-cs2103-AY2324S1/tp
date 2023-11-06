@@ -91,26 +91,26 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseAddress_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseAddress((String) null));
+    public void parseHeight_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseHeight((String) null));
     }
 
     @Test
-    public void parseAddress_invalidValue_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseAddress(INVALID_HEIGHT));
+    public void parseHeight_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseHeight(INVALID_HEIGHT));
     }
 
     @Test
-    public void parseAddress_validValueWithoutWhitespace_returnsAddress() throws Exception {
+    public void parseHeight_validValueWithoutWhitespace_returnsHeight() throws Exception {
         Height expectedHeight = new Height(VALID_HEIGHT);
-        assertEquals(expectedHeight, ParserUtil.parseAddress(VALID_HEIGHT));
+        assertEquals(expectedHeight, ParserUtil.parseHeight(VALID_HEIGHT));
     }
 
     @Test
-    public void parseAddress_validValueWithWhitespace_returnsTrimmedAddress() throws Exception {
+    public void parseHeight_validValueWithWhitespace_returnsTrimmedHeight() throws Exception {
         String addressWithWhitespace = WHITESPACE + VALID_HEIGHT + WHITESPACE;
         Height expectedHeight = new Height(VALID_HEIGHT);
-        assertEquals(expectedHeight, ParserUtil.parseAddress(addressWithWhitespace));
+        assertEquals(expectedHeight, ParserUtil.parseHeight(addressWithWhitespace));
     }
 
     @Test

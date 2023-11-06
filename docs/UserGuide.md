@@ -322,7 +322,7 @@ Output if error:
 Invalid command format! 
 sort: Sorts all dates in LoveBook alphabetically or numerically.
 Parameters: name/ OR age  OR height/ OR income/ OR horoscope/ AND increasing OR decreasing
-Example: sortname/increasing
+Example: sort name/increasing
 ```
 
 ### [Star a date: `star`](#star-a-date)

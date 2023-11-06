@@ -45,31 +45,37 @@ public class FilterCommandParser implements Parser<FilterCommand> {
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
             keyword = argMultimap.getValue(PREFIX_NAME).get();
             metric = new Prefix("name/");
+            ParserUtil.parseName(keyword); // checks validity
             predicates.add(new MetricContainsKeywordPredicate(keyword, metric));
         }
         if (argMultimap.getValue(PREFIX_AGE).isPresent()) {
             keyword = argMultimap.getValue(PREFIX_AGE).get();
             metric = new Prefix("age/");
+            ParserUtil.parseAge(keyword); // checks validity
             predicates.add(new MetricContainsKeywordPredicate(keyword, metric));
         }
         if (argMultimap.getValue(PREFIX_GENDER).isPresent()) {
             keyword = argMultimap.getValue(PREFIX_GENDER).get();
             metric = new Prefix("gender/");
+            ParserUtil.parseGender(keyword); // checks validity
             predicates.add(new MetricContainsKeywordPredicate(keyword, metric));
         }
         if (argMultimap.getValue(PREFIX_HEIGHT).isPresent()) {
             keyword = argMultimap.getValue(PREFIX_HEIGHT).get();
             metric = new Prefix("height/");
+            ParserUtil.parseHeight(keyword); // checks validity
             predicates.add(new MetricContainsKeywordPredicate(keyword, metric));
         }
         if (argMultimap.getValue(PREFIX_INCOME).isPresent()) {
             keyword = argMultimap.getValue(PREFIX_INCOME).get();
             metric = new Prefix("income/");
+            ParserUtil.parseIncome(keyword); // checks validity
             predicates.add(new MetricContainsKeywordPredicate(keyword, metric));
         }
         if (argMultimap.getValue(PREFIX_HOROSCOPE).isPresent()) {
             keyword = argMultimap.getValue(PREFIX_HOROSCOPE).get();
             metric = new Prefix("horoscope/");
+            ParserUtil.parseHoroscope(keyword); // checks validity
             predicates.add(new MetricContainsKeywordPredicate(keyword, metric));
         }
         if (metric == null || keyword.isEmpty()) {
