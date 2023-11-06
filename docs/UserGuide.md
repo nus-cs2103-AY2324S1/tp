@@ -275,10 +275,6 @@ Format: `add-i app/APPLICANT_ID jr/JOB_ROLE start/START_DATE_AND_TIME end/END_DA
 to the company in general.
 
 * List of accepted date formats:
-  * Day and time: 
-    * `Tue 1600`
-    * `Tue 4.00pm`
-    * `Tue 4pm`
   * DD/MM/YYYY and time:
     * `16 May 2024 1515`
     * `16 May 2024 3.15pm`
@@ -316,6 +312,7 @@ to the company in general.
   * When the user inputs a valid date without a time: `"Please enter an interview time!"`
   * When the user enters a valid date in the past: `Input date cannot be in the past!`
   * When there is an interview clash: `“Oops! You have an <insert interview object> scheduled at <from date & by date>`
+  * When the user enters a valid date that has a year that is past the year 9999: `“Please specify a valid date!”`
 
 Example:
 * `add-i app/3 jr/software engineer start/11-12-2023 1400 end/11-12-2023 1500`
@@ -341,12 +338,13 @@ Examples:
 
 Edit an existing interview in the address book.
 
-Format: `edit-i INTERVIEW_INDEX [app/APPLICANT_ID] [jr/JOB_TITLE] [start/START_DATE_AND_TIME] [end/END_DATE_AND_TIME]`
+Format: `edit-i INTERVIEW_INDEX [jr/JOB_TITLE] [start/START_DATE_AND_TIME] [end/END_DATE_AND_TIME]`
 
 * Edits the interview at the specified `INTERVIEW_INDEX`. The index refers to the index number shown in the displayed interview list.
 * The `INDEX` **must be a positive unsigned integer** 1, 2, 3, …​ The upper limit of valid integers is the number of interviews currently displayed in the interview list
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
+* To edit the `RATING` field, please refer to the [rate command](#rating-an-interview--rate)
 
 Examples:
 *  `edit-i 1 jr/software-engineer` Edits the job title of the 1st interview to be `software-engineer`.
@@ -398,6 +396,9 @@ listed will be: `from: 09:00 to: 17:00`
 be shown:`Please specify a valid date!`
 * If the `DATE` is valid but in the past, this error message will
 be shown:`Input date cannot be in the past!`
+* If the prefix substring of the time string is a valid time string with day, month and year, adding additional parameters separated by a non-number string not cause the command to be not accepted. Example: `list-freetime 12/12/2099 hello` or `list-freetime 12/12/2099:8216479863149`
+* If the prefix substring of the time string is a valid time string with day, month and year separated by '/', but invalid year, adding additional parameters not cause the command to be not accepted. Example: `list-freetime 12/12/209938746913654` or `list-freetime 12/12/20343141364138216479863149` will be accepted, but the year will be set to the current year as defined by the system time
+* If the prefix substring of the time string is a valid time string with day, month and year separated by '-', but invalid year and/or month, adding additional parameters will cause the command to be not accepted. Example: `list-freetime 12-12-209938746913654` or `list-freetime 12-12-20343141364138216479863149`
 
 Examples:
 * `list-freetime 12/12/2099`
