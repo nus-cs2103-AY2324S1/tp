@@ -4,7 +4,6 @@ import static java.util.Objects.requireNonNull;
 import static seedu.classmanager.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.classmanager.logic.parser.CliSyntax.PREFIX_STUDENT_NUMBER;
 import static seedu.classmanager.logic.parser.CliSyntax.PREFIX_TUTORIAL_INDEX;
-import static seedu.classmanager.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
 
 import seedu.classmanager.commons.core.index.Index;
 import seedu.classmanager.logic.CommandHistory;
@@ -57,10 +56,11 @@ public class MarkPresentCommand extends Command {
 
         markedStudent.markPresent(this.index);
         model.setStudent(studentToMark, markedStudent);
-        model.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
+      
         if (model.isSelectedStudent(markedStudent)) {
             model.setSelectedStudent(markedStudent);
         }
+
         model.commitClassManager();
 
         return new CommandResult(MESSAGE_MARK_SUCCESS);
