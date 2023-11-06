@@ -58,6 +58,7 @@ quick reference to all the commands available in CMC.
    jar file from the command line using the java -jar ClubMembersContact.jar command.
 
 4. A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+
    ![Ui](images/Ui_Window.png)
 
 5. Type the command in the command box and press Enter to execute it.
@@ -137,8 +138,11 @@ This section of the User Guide will explain about each feature in detail.
 
 <div markdown="block" class="alert alert-info">
 
-:bulb: Many of the commands below have _aliases_, or short-form versions that make them easier to type (e.g. `addm`
-for `addMember`).  
+:bulb: **Aliases**
+
+Many of the commands below have _aliases_, or short-form versions that make them easier to type (e.g. `addm`
+for `addMember`).
+
 The aliases are documented below alongside the full command. For a more efficient experience, use the aliases instead of
 the full command word!
 
@@ -192,7 +196,7 @@ Find and generate a list of all existing member(s) whose information contain any
 
 ##### Example of usage:
 
-- `findMember Alicia` or `findm Alicia`  
+- `findMember Alicia` or `findm Alicia`<br/>
   This generates a list of all members whose details contain `Alicia`.
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
@@ -217,8 +221,8 @@ with [`findMember`](#412-finding-members-findmember-or-findm).
 
 ##### Example of usage:
 
-`viewMembers`<br/>
-This is the result of the command above.
+- `viewMembers`<br/>
+  Generates a list of all existing member(s).
 
 ![View_Member](images/viewMember.png)
 
@@ -279,8 +283,7 @@ If the index is negative or 0, or the member does not exist in the list, this co
 
 ##### Example of usage:
 
-`copyMember 1` or `cpm 1`
-
+`copyMember 1` or `cpm 1`<br/>
 This copies the details of the member at index 1 to the clipboard.
 
 ![Copy_Member](images/copyMember.jpg)
@@ -346,8 +349,8 @@ with [`findApplicant`](#422-finding-applicants-findapplicant-or-finda).
 
 ##### Example of usage:
 
-`viewa`<br/>
-This is the result of the command above.
+- `viewa`<br/>
+  Generates a list of all existing applicant(s).
 
 ![View_Applicant](images/viewApplicants.png)
 
@@ -446,8 +449,7 @@ If the index is negative or 0, or the applicant does not exist in the list, this
 
 ##### Example of usage:
 
-`copyApplicant 1` or `cpa 1`
-
+`copyApplicant 1` or `cpa 1`<br/>
 This copies the details of the applicant at index 1 to the clipboard.
 
 ![Copy_Applicant](images/copyApplicant.jpg)
