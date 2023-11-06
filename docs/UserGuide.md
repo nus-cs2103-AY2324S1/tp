@@ -358,7 +358,7 @@ Then, use the `load` command to import the data.
 | **Edit**                | `edit <INDEX> [w/<WORD>] [t/<TRANSLATION>] [wl/<WORD_LANGUAGE>] [tl/<TRANSLATION_LANGUAGE>]`<br> e.g., `edit 1 w/bye t/再见` |
 | **Find**                | `find KEYWORD`<br> e.g., `find bye`                                                                                        |
 | **Start**               | `start`                                                                                                                    |
-| **Flip**                | `flip <INDEX>`                                                                                                             |
+| **Reveal**              | `reveal <INDEX>`                                                                                                           |
 | **Yes**                 | `yes`                                                                                                                      |
 | **No**                  | `no`                                                                                                                       |
 | **End**                 | `end`                                                                                                                      |

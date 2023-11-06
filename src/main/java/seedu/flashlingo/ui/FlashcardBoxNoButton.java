@@ -48,6 +48,7 @@ public class FlashcardBoxNoButton extends UiPart<Region> {
     private Label lang;
 
     private MainWindow mw;
+    private int index;
 
 
     /**
@@ -57,6 +58,9 @@ public class FlashcardBoxNoButton extends UiPart<Region> {
         super(FXML);
         this.flashCard = fc;
         this.mw = mw;
+        this.index = displayedIndex;
+        original.setWrapText(true);
+        translation.setWrapText(true);
         assert(!SessionManager.getInstance().isReviewSession());
         id.setText(displayedIndex + ") ");
         original.setText(fc.getOriginalWord().toString() + ": ");
@@ -79,11 +83,11 @@ public class FlashcardBoxNoButton extends UiPart<Region> {
     public void toggleReveal() throws CommandException, ParseException {
         if (flashCard.getIsRevealed()) {
             translation.setText("");
-            this.mw.executeCommand("reveal");
+            this.mw.executeCommand("reveal " + index);
             reveal.setText("Reveal");
         } else {
             translation.setText(flashCard.getTranslatedWord().toString());
-            this.mw.executeCommand("reveal");
+            this.mw.executeCommand("reveal " + index);
             reveal.setText(" Hide ");
         }
     }
