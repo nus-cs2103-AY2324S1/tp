@@ -59,6 +59,10 @@ public class Person {
         return lastContactedTime.getTime();
     }
 
+    public String getLastContactedDisplay() {
+        return lastContactedTime.getDisplay();
+    }
+
     public Remark getRemark() {
         return remark;
     }
@@ -137,6 +141,6 @@ public class Person {
      */
     public String toDisplayString() {
         return String.format("Name: %s\nPhone: %s\nEmail: %s\nLast Meeting: %s\nStatus: %s\nRemark: %s",
-                name, phone, email, LastContactedTime.toDisplayFormat(lastContactedTime), status, remark);
+                name, phone, email, lastContactedTime.getDisplay(), status, remark);
     }
 }

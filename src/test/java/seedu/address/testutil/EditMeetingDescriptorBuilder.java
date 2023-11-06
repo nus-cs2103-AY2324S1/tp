@@ -1,8 +1,7 @@
 package seedu.address.testutil;
 
-import static seedu.address.logic.parser.ParserUtil.FORMAT;
+import static seedu.address.commons.util.DateTimeUtil.parse;
 
-import java.time.LocalDateTime;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -61,7 +60,7 @@ public class EditMeetingDescriptorBuilder {
      * {@code EditMeetingDescriptor} that we are building.
      */
     public EditMeetingDescriptorBuilder withStart(String start) {
-        descriptor.setStart(LocalDateTime.parse(start, FORMAT));
+        descriptor.setStart(parse(start));
         return this;
     }
 
@@ -70,7 +69,7 @@ public class EditMeetingDescriptorBuilder {
      * {@code EditMeetingDescriptor} that we are building.
      */
     public EditMeetingDescriptorBuilder withEnd(String end) {
-        descriptor.setEnd(LocalDateTime.parse(end, FORMAT));
+        descriptor.setEnd(parse(end));
         return this;
     }
 

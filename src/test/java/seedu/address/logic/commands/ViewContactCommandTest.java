@@ -34,7 +34,7 @@ public class ViewContactCommandTest {
         String expectedMessage = String.format(Messages.MESSAGE_PERSON_VIEWED_OVERVIEW, personToView.getName());
         String expectedDisplayString = String.format(
                 "Name: %s\nPhone: %s\nEmail: %s\nLast Meeting: %s\nStatus: %s\nRemark: %s",
-                "Bob Choo", "22222222", "bob@example.com", "20 September 2023, 1200", "prospective", "");
+                "Bob Choo", "22222222", "bob@example.com", "20.09.2023 1200", "prospective", "");
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
 
@@ -60,7 +60,7 @@ public class ViewContactCommandTest {
         String expectedMessage = String.format(Messages.MESSAGE_PERSON_VIEWED_OVERVIEW, personToView.getName());
         String expectedDisplayString = String.format(
                 "Name: %s\nPhone: %s\nEmail: %s\nLast Meeting: %s\nStatus: %s\nRemark: %s",
-                "Bob Choo", "22222222", "bob@example.com", "20 September 2023, 1200", "prospective", "");
+                "Bob Choo", "22222222", "bob@example.com", "20.09.2023 1200", "prospective", "");
 
         // Model displaying filtered list should not change
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());

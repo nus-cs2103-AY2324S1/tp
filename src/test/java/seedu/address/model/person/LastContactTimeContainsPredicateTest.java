@@ -3,7 +3,7 @@ package seedu.address.model.person;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.parser.ParserUtil.FORMAT;
+import static seedu.address.commons.util.DateTimeUtil.parse;
 
 import java.time.LocalDateTime;
 
@@ -12,8 +12,8 @@ import org.junit.jupiter.api.Test;
 import seedu.address.testutil.PersonBuilder;
 
 public class LastContactTimeContainsPredicateTest {
-    private LocalDateTime time1 = LocalDateTime.parse("10.09.2023 1000", FORMAT);
-    private LocalDateTime time2 = LocalDateTime.parse("11.09.2023 1000", FORMAT);
+    private LocalDateTime time1 = parse("10.09.2023 1000");
+    private LocalDateTime time2 = parse("11.09.2023 1000");
 
     @Test
     public void equals() {

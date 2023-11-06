@@ -1,12 +1,12 @@
 package seedu.address.testutil;
 
+import static seedu.address.commons.util.DateTimeUtil.format;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LASTTIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
-import static seedu.address.logic.parser.ParserUtil.FORMAT;
 
 import java.util.Set;
 
@@ -35,7 +35,7 @@ public class PersonUtil {
         sb.append(PREFIX_NAME + person.getName().fullName + " ");
         sb.append(PREFIX_PHONE + person.getPhone().value + " ");
         sb.append(PREFIX_EMAIL + person.getEmail().value + " ");
-        sb.append(PREFIX_LASTTIME + person.getLastContactedTime().format(FORMAT) + " ");
+        sb.append(PREFIX_LASTTIME + format(person.getLastContactedTime()) + " ");
         sb.append(PREFIX_REMARK + person.getRemark().value + " ");
         person.getTags().stream().forEach(
             s -> sb.append(PREFIX_TAG + s.tagName + " ")
@@ -51,7 +51,7 @@ public class PersonUtil {
         descriptor.getName().ifPresent(name -> sb.append(PREFIX_NAME).append(name.fullName).append(" "));
         descriptor.getPhone().ifPresent(phone -> sb.append(PREFIX_PHONE).append(phone.value).append(" "));
         descriptor.getEmail().ifPresent(email -> sb.append(PREFIX_EMAIL).append(email.value).append(" "));
-        descriptor.getLastContactedTime().ifPresent(time -> sb.append(PREFIX_LASTTIME).append(time.format(FORMAT))
+        descriptor.getLastContactedTime().ifPresent(time -> sb.append(PREFIX_LASTTIME).append(format(time))
                 .append(" "));
         descriptor.getRemark().ifPresent(remark -> sb.append(PREFIX_REMARK).append(remark.value).append(" "));
         if (descriptor.getTags().isPresent()) {

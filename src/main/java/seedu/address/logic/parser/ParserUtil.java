@@ -7,7 +7,6 @@ import static seedu.address.logic.Messages.MESSAGE_MISSING_INDEX;
 import static seedu.address.logic.Messages.MESSAGE_TOO_MANY_INDEXES;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -16,6 +15,7 @@ import java.util.List;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.commons.util.DateTimeUtil;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.meeting.Attendee;
@@ -35,7 +35,6 @@ import seedu.address.model.tag.Tag;
  * classes.
  */
 public class ParserUtil {
-    public static final DateTimeFormatter FORMAT = DateTimeFormatter.ofPattern("dd.MM.yyyy HHmm");
 
     /**
      * Checks if the arguments are empty.
@@ -187,7 +186,7 @@ public class ParserUtil {
             return LocalDateTime.MIN;
         }
         try {
-            LocalDateTime preppedTime = LocalDateTime.parse(trimmedStart, FORMAT);
+            LocalDateTime preppedTime = DateTimeUtil.parse(trimmedStart);
             if (!LastContactedTime.isValidLastContactedTime(preppedTime)) {
                 throw new ParseException(LastContactedTime.MESSAGE_CONSTRAINTS);
             }
@@ -207,7 +206,7 @@ public class ParserUtil {
         requireNonNull(time);
         String trimmedStart = time.trim();
         try {
-            return LocalDateTime.parse(trimmedStart, FORMAT);
+            return DateTimeUtil.parse(trimmedStart);
         } catch (DateTimeParseException e) {
             throw new ParseException(MeetingTime.MESSAGE_CONSTRAINTS);
         }

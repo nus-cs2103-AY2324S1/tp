@@ -6,7 +6,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showMeetingAtIndex;
-import static seedu.address.logic.parser.ParserUtil.FORMAT;
 import static seedu.address.testutil.TypicalAddressBook.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_MEETING;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
@@ -19,6 +18,7 @@ import java.util.Iterator;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.commons.util.DateTimeUtil;
 import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -108,7 +108,7 @@ public class MarkMeetingCommandTest {
             Attendee attendee = attendeeIterator.next();
             Person person = expectedModel.getPerson(attendee.getAttendeeName());
             Person expectedPerson = new PersonBuilder(person)
-                    .withLastContactedTime(meetingToMark.getEnd().format(FORMAT)).build();
+                    .withLastContactedTime(DateTimeUtil.format(meetingToMark.getEnd())).build();
             expectedModel.setPerson(person, expectedPerson);
         }
 

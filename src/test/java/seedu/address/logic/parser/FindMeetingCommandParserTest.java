@@ -3,13 +3,13 @@ package seedu.address.logic.parser;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.address.logic.parser.ParserUtil.FORMAT;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.commons.util.DateTimeUtil;
 import seedu.address.logic.commands.FindMeetingCommand;
 import seedu.address.model.meeting.AttendeeContainsKeywordsPredicate;
 import seedu.address.model.meeting.GeneralMeetingPredicate;
@@ -46,8 +46,8 @@ public class FindMeetingCommandParserTest {
 
     @Test
     public void parse_validArgsTime_returnsFilterMeetingCommand() {
-        LocalDateTime start = LocalDateTime.parse("20.09.2023 1000", FORMAT);
-        LocalDateTime end = LocalDateTime.parse("20.09.2023 1200", FORMAT);
+        LocalDateTime start = DateTimeUtil.parse("20.09.2023 1000");
+        LocalDateTime end = DateTimeUtil.parse("20.09.2023 1200");
         FindMeetingCommand expectedFindMeetingCommand =
                 new FindMeetingCommand(preparePredicate(new String[]{"", "", "", ""}, start, end));
         assertParseSuccess(parser, " s/20.09.2023 1000 e/20.09.2023 1200", expectedFindMeetingCommand);
@@ -69,8 +69,8 @@ public class FindMeetingCommandParserTest {
 
     @Test
     public void parse_validArgs_returnsFilterMeetingCommand() {
-        LocalDateTime start = LocalDateTime.parse("20.09.2023 1000", FORMAT);
-        LocalDateTime end = LocalDateTime.parse("20.09.2023 1200", FORMAT);
+        LocalDateTime start = DateTimeUtil.parse("20.09.2023 1000");
+        LocalDateTime end = DateTimeUtil.parse("20.09.2023 1200");
         FindMeetingCommand expectedFindMeetingCommand =
                 new FindMeetingCommand(preparePredicate(new String[]{"CS2103T", "Zoom", "Alice Bob", "friend"},
                         start, end));

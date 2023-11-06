@@ -1,5 +1,7 @@
 package seedu.address.model.meeting;
 
+import static seedu.address.commons.util.DateTimeUtil.verbose;
+
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -165,7 +167,7 @@ public class Meeting {
         String indexedAttendees = Arrays.toString(attendees.stream().map(x -> "\n" + counter.getAndIncrement()
                 + ": " + x.getAttendeeName()).toArray()).replace(",", "");
         return String.format("Title: %s\nLocation: %s\nStart: %s\nEnd: %s\nAttendees: %s\n", title, location,
-                MeetingTime.toDisplayFormat(meetingTime.getStart()), MeetingTime.toDisplayFormat(meetingTime.getEnd()),
+                verbose(meetingTime.getStart()), verbose(meetingTime.getEnd()),
                 indexedAttendees);
 
     }
