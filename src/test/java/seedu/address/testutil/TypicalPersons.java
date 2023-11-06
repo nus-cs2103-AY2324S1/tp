@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.person.Person;
 
@@ -26,7 +27,6 @@ public class TypicalPersons {
             .withPhone("94351253")
             .withGroupList("CS2103T").build();
     public static final Person BENSON = new PersonBuilder().withName("Benson Meier")
-            .withAddress("311, Clementi Ave 2, #02-25")
             .withEmail("johnd@example.com").withPhone("98765432")
             .withGroupList("CS2103T").build();
     public static final Person CARL = new PersonBuilder().withName("Carl Kurz").withPhone("95352563")
