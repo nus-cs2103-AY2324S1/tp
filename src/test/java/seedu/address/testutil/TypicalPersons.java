@@ -26,22 +26,9 @@ public class TypicalPersons {
             .withEmail("alice@example.com")
             .withPhone("94351253")
             .withGroupList("CS2103T").build();
-    public static final Person BENSON;
-
-    static {
-        try {
-            BENSON = new PersonBuilder().withName("Benson Meier")
-                    .withAddress("311, Clementi Ave 2, #02-25")
-                    .withEmail("johnd@example.com").withPhone("98765432")
-                    .withGroupList("CS2103T")
-                    .withTimeInterval("mon 1300 - mon 1400")
-                    .withTimeInterval("tue 1300 - tue 1400")
-                    .build();
-        } catch (ParseException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
+    public static final Person BENSON = new PersonBuilder().withName("Benson Meier")
+            .withEmail("johnd@example.com").withPhone("98765432")
+            .withGroupList("CS2103T").build();
     public static final Person CARL = new PersonBuilder().withName("Carl Kurz").withPhone("95352563")
             .withEmail("heinz@example.com").withGroupList("CS2103T").build();
     public static final Person DANIEL = new PersonBuilder().withName("Daniel Meier").withPhone("87652533")
