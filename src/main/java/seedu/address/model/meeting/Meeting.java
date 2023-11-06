@@ -2,7 +2,6 @@ package seedu.address.model.meeting;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
@@ -162,8 +161,9 @@ public class Meeting {
      */
     public String toDisplayString() {
         AtomicInteger counter = new AtomicInteger(1);
-        String indexedAttendees = Arrays.toString(attendees.stream().map(x -> "\n" + counter.getAndIncrement()
-                + ": " + x.getAttendeeName()).toArray()).replace(",", "");
+        String indexedAttendees = attendees.stream()
+                .map(x -> "\n" + counter.getAndIncrement() + ". " + x.getAttendeeName())
+                .reduce("", (result, next) -> result + next);
         return String.format("Title: %s\nLocation: %s\nStart: %s\nEnd: %s\nAttendees: %s\n", title, location,
                 MeetingTime.toDisplayFormat(meetingTime.getStart()), MeetingTime.toDisplayFormat(meetingTime.getEnd()),
                 indexedAttendees);
