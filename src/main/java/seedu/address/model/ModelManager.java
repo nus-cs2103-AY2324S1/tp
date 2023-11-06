@@ -4,14 +4,18 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.Comparator;
+import java.util.List;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
+import javafx.util.Pair;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.model.person.Person;
+import seedu.address.model.applicant.Applicant;
+import seedu.address.model.interview.Interview;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -21,7 +25,8 @@ public class ModelManager implements Model {
 
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
-    private final FilteredList<Person> filteredPersons;
+    private final FilteredList<Applicant> filteredApplicants;
+    private final FilteredList<Interview> filteredInterviews;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -33,7 +38,8 @@ public class ModelManager implements Model {
 
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        filteredApplicants = new FilteredList<>(this.addressBook.getApplicantList());
+        filteredInterviews = new FilteredList<>(this.addressBook.getInterviewList());
     }
 
     public ModelManager() {
@@ -75,7 +81,7 @@ public class ModelManager implements Model {
         userPrefs.setAddressBookFilePath(addressBookFilePath);
     }
 
-    //=========== AddressBook ================================================================================
+    //=========== AddressBook Applicants ===========================================================================
 
     @Override
     public void setAddressBook(ReadOnlyAddressBook addressBook) {
@@ -88,44 +94,126 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public boolean hasPerson(Person person) {
-        requireNonNull(person);
-        return addressBook.hasPerson(person);
+    public boolean hasApplicant(Applicant applicant) {
+        requireNonNull(applicant);
+        return addressBook.hasApplicant(applicant);
     }
 
     @Override
-    public void deletePerson(Person target) {
-        addressBook.removePerson(target);
+    public void deleteApplicant(Applicant target) {
+        if (target.hasInterview()) {
+            Interview interviewWithTarget = addressBook.findInterviewWithApplicant(target);
+            addressBook.removeInterview(interviewWithTarget);
+        }
+
+        addressBook.removeApplicant(target);
     }
 
     @Override
-    public void addPerson(Person person) {
-        addressBook.addPerson(person);
-        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+    public void addApplicant(Applicant applicant) {
+        addressBook.addApplicant(applicant);
+        updateFilteredApplicantList(PREDICATE_SHOW_ALL_APPLICANTS);
     }
 
     @Override
-    public void setPerson(Person target, Person editedPerson) {
-        requireAllNonNull(target, editedPerson);
+    public void setApplicant(Applicant target, Applicant editedApplicant) {
+        requireAllNonNull(target, editedApplicant);
 
-        addressBook.setPerson(target, editedPerson);
+        if (target.hasInterview()) {
+            Interview interviewWithTarget = addressBook.findInterviewWithApplicant(target);
+            Interview interviewWithEditedApplicant = new Interview(
+                    editedApplicant,
+                    interviewWithTarget.getJobRole(),
+                    interviewWithTarget.getInterviewStartTime(),
+                    interviewWithTarget.getInterviewEndTime()
+            );
+            addressBook.setInterview(interviewWithTarget, interviewWithEditedApplicant);
+        }
+
+        addressBook.setApplicant(target, editedApplicant);
     }
 
-    //=========== Filtered Person List Accessors =============================================================
+    //=========== AddressBook Interviews ======================================================================
+    @Override
+    public boolean hasInterview(Interview interview) {
+        requireNonNull(interview);
+        return addressBook.hasInterview(interview);
+    }
+
+    @Override
+    public boolean hasInterviewClash(Interview interview) {
+        requireNonNull(interview);
+        return addressBook.hasInterviewClash(interview);
+    }
+
+
+    @Override
+    public void addInterview(Interview interview) {
+        addressBook.addInterview(interview);
+        updateFilteredInterviewList(PREDICATE_SHOW_ALL_INTERVIEWS);
+    }
+
+    @Override
+    public void setInterview(Interview target, Interview editedInterview) {
+        requireAllNonNull(target, editedInterview);
+
+        addressBook.setInterview(target, editedInterview);
+    }
+
+    @Override
+    public void deleteInterview(Interview target) {
+        Applicant applicantToUpdate = target.getInterviewApplicant();
+        addressBook.setApplicant(applicantToUpdate, applicantToUpdate.getApplicantWithoutInterview());
+        addressBook.removeInterview(target);
+    }
 
     /**
-     * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
+     * Lists the pockets of time on a given day.
+     *
+     * @author Tan Kerway
+     * @param day the day to list pockets of time on
+     * @return a list of pockets of time available on the given day
+     */
+    public List<Pair<Time, Time>> listPocketsOfTimeOnGivenDay(Time day) {
+        return addressBook.listPocketsOfTimeOnGivenDay(day);
+    }
+
+    //=========== Filtered Applicant and Interview List Accessors =================================================
+
+    /**
+     * Returns an unmodifiable view of the list of {@code Applicant} backed by the internal list of
      * {@code versionedAddressBook}
      */
     @Override
-    public ObservableList<Person> getFilteredPersonList() {
-        return filteredPersons;
+    public ObservableList<Applicant> getFilteredApplicantList() {
+        return filteredApplicants;
+    }
+
+    /**
+     * Returns an unmodifiable view of the list of {@code Job} backed by the internal list of
+     * {@code versionedAddressBook}
+     */
+    @Override
+    public ObservableList<Interview> getFilteredInterviewList() {
+        return filteredInterviews;
     }
 
     @Override
-    public void updateFilteredPersonList(Predicate<Person> predicate) {
+    public void updateFilteredApplicantList(Predicate<Applicant> predicate) {
         requireNonNull(predicate);
-        filteredPersons.setPredicate(predicate);
+        filteredApplicants.setPredicate(predicate);
+    }
+
+    @Override
+    public void updateFilteredInterviewList(Predicate<Interview> predicate) {
+        requireNonNull(predicate);
+        filteredInterviews.setPredicate(predicate);
+    }
+
+    @Override
+    public void sortInterviewList(Comparator<Interview> comparator) {
+        requireNonNull(comparator);
+        this.addressBook.sortInterview(comparator);
     }
 
     @Override
@@ -142,7 +230,7 @@ public class ModelManager implements Model {
         ModelManager otherModelManager = (ModelManager) other;
         return addressBook.equals(otherModelManager.addressBook)
                 && userPrefs.equals(otherModelManager.userPrefs)
-                && filteredPersons.equals(otherModelManager.filteredPersons);
+                && filteredApplicants.equals(otherModelManager.filteredApplicants)
+                && filteredInterviews.equals(otherModelManager.filteredInterviews);
     }
-
 }

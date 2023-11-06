@@ -75,4 +75,12 @@ public class ArgumentMultimap {
             throw new ParseException(Messages.getErrorMessageForDuplicatePrefixes(duplicatedPrefixes));
         }
     }
+
+    /**
+     *  Returns false if no prefixes given in {@code prefixes} appear in the arguments,
+     *  else returns true.
+     */
+    public boolean argumentHasAtLeastOnePrefix(Prefix... prefixes) throws ParseException {
+        return (Stream.of(prefixes).anyMatch(argMultimap::containsKey));
+    }
 }
