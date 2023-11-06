@@ -372,7 +372,7 @@ The following sequence diagram shows how the operation works:
 
 </div>
 
-#### Design considerations
+#### Design rationale
 
 **Aspect: Checking for clashing schedule:**
 
@@ -1033,10 +1033,10 @@ the same row.
 
 The `find-t` and `find-s` commands should allow users to search for tutors without having to input their full names.
 
-The current two `find` commands only allow searching for tutors with their full names matching the user input.
-We plan to change search to match partial words instead of only a full word match.
+The current two `find` commands only allow searching for tutor when a full word in their names matches the user 
+input exactly. We plan to change search to match partial words instead of only a full word match.
 
-This would allow users to search for tutors without knowing the tutors exact name. They can search using just a few
+This would allow users to search for tutors without knowing the tutors' exact name. They can search using just a few
 characters of the name.
 
 For example: `find-t john` will now match: `john`, `JOHN123` and `johnetta`.
