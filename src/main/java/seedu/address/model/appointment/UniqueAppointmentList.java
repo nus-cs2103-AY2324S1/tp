@@ -12,7 +12,6 @@ import javafx.collections.ObservableList;
 import seedu.address.model.appointment.exceptions.AppointmentNotFoundException;
 import seedu.address.model.appointment.exceptions.DuplicateAppointmentException;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.exceptions.DuplicatePersonException;
 
 /**
  * A list of appointments that enforces uniqueness between its elements.
@@ -96,7 +95,7 @@ public class UniqueAppointmentList implements Iterable<Appointment> {
     public void setAppointments(List<Appointment> appointments) {
         requireAllNonNull(appointments);
         if (!appointmentsAreUnique(appointments)) {
-            throw new DuplicatePersonException();
+            throw new DuplicateAppointmentException();
         }
 
         internalList.setAll(appointments);

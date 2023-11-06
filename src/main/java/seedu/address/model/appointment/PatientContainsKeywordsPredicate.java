@@ -10,11 +10,11 @@ import seedu.address.commons.util.ToStringBuilder;
 /**
  * Tests that an {@code Appointment}'s patient name matches any of the keywords given.
  */
-public class PatientContainsKeywordPredicate implements Predicate<Appointment> {
+public class PatientContainsKeywordsPredicate implements Predicate<Appointment> {
 
     private final List<String> keywords;
 
-    public PatientContainsKeywordPredicate(List<String> keywords) {
+    public PatientContainsKeywordsPredicate(List<String> keywords) {
         this.keywords = keywords;
     }
 
@@ -41,8 +41,8 @@ public class PatientContainsKeywordPredicate implements Predicate<Appointment> {
             return true;
         }
 
-        if (other instanceof PatientContainsKeywordPredicate) {
-            PatientContainsKeywordPredicate otherFilter = (PatientContainsKeywordPredicate) other;
+        if (other instanceof PatientContainsKeywordsPredicate) {
+            PatientContainsKeywordsPredicate otherFilter = (PatientContainsKeywordsPredicate) other;
             return this.keywords.equals(otherFilter.keywords);
         }
 

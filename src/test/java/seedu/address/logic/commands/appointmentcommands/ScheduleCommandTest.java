@@ -219,7 +219,7 @@ public class ScheduleCommandTest {
         @Override
         public boolean hasAppointment(Appointment appointment) {
             requireNonNull(appointment);
-            return appointments.stream().anyMatch(appointment::isSameAppointment);
+            return appointments.stream().anyMatch(appointment::equals);
         }
 
         @Override
@@ -243,7 +243,7 @@ public class ScheduleCommandTest {
         @Override
         public boolean hasAppointment(Appointment appointment) {
             requireNonNull(appointment);
-            return this.appointment.isSameAppointment(appointment);
+            return this.appointment.equals(appointment);
         }
     }
 }

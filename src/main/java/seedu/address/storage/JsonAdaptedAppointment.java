@@ -41,7 +41,7 @@ class JsonAdaptedAppointment {
                                   @JsonProperty("start") String start,
                                   @JsonProperty("end") String end,
                                   @JsonProperty("description") String description,
-                                  @JsonProperty("priorityTag") String priorityTag) {
+                                  @JsonProperty("priority") String priorityTag) {
         this.patientName = patientName;
         this.start = start;
         this.end = end;

@@ -5,7 +5,6 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.commons.util.DateUtil.dateTimeToString;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Objects;
 
@@ -26,8 +25,6 @@ public class AppointmentTime implements Comparable<AppointmentTime> {
     private final LocalDateTime start;
     private final LocalDateTime end;
 
-    private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm");
-
     /**
      * Constructs an {@code AppointmentTime}.
      *
@@ -35,6 +32,7 @@ public class AppointmentTime implements Comparable<AppointmentTime> {
      * @param end End time of the appointment.
      */
     public AppointmentTime(LocalDateTime start, LocalDateTime end) {
+        requireAllNonNull(start, end);
         checkArgument(isValidAppointmentTime(start, end), MESSAGE_CONSTRAINTS);
         this.start = start;
         this.end = end;

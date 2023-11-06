@@ -7,7 +7,7 @@ import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.appointment.PatientContainsKeywordPredicate;
+import seedu.address.model.appointment.PatientContainsKeywordsPredicate;
 
 
 /**
@@ -27,9 +27,9 @@ public class FindAppointmentCommand extends Command {
             + "Parameters: PATIENT\n"
             + "Example: " + COMMAND_WORD + " alex david";
 
-    private final PatientContainsKeywordPredicate predicate;
+    private final PatientContainsKeywordsPredicate predicate;
 
-    public FindAppointmentCommand(PatientContainsKeywordPredicate predicate) {
+    public FindAppointmentCommand(PatientContainsKeywordsPredicate predicate) {
         this.predicate = predicate;
     }
 
