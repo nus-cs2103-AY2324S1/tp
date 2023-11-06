@@ -15,9 +15,9 @@ import org.junit.jupiter.api.Test;
 
 public class DateTimeUtilTest {
 
-    String testString = "20.09.2023 1200";
-    LocalDateTime testDateTime = LocalDateTime.parse("20.09.2023 1200", FORMATTER);
-    String testVerbose = testDateTime.format(VERBOSE_FORMATTER);
+    private String testString = "20.09.2023 1200";
+    private LocalDateTime testDateTime = LocalDateTime.parse("20.09.2023 1200", FORMATTER);
+    private String testVerbose = testDateTime.format(VERBOSE_FORMATTER);
 
     @Test
     public void format_success() {
@@ -26,17 +26,17 @@ public class DateTimeUtilTest {
 
     @Test
     public void verbose_success() {
-        assertEquals(verbose(testDateTime), verbose(testDateTime)); 
+        assertEquals(verbose(testDateTime), testVerbose);
     }
 
     @Test
     public void parse_success() {
-        assertEquals(parse(testString), testDateTime); 
+        assertEquals(parse(testString), testDateTime);
     }
 
     @Test
-    public void parse_badInput_DateTimeParseException() {
-        assertThrows(DateTimeParseException.class, ()->parse("")); 
+    public void parse_badInput_throwsDateTimeParseException() {
+        assertThrows(DateTimeParseException.class, ()->parse(""));
     }
-    
+
 }

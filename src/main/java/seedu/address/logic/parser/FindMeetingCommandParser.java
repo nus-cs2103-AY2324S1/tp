@@ -53,8 +53,11 @@ public class FindMeetingCommandParser implements Parser<FindMeetingCommand> {
             if (argMultimap.getValue(PREFIX_START).isPresent() && argMultimap.getValue(PREFIX_END).isPresent()) {
                 start = ParserUtil.parseMeetingTime(argMultimap.getValue(PREFIX_START).get());
                 end = ParserUtil.parseMeetingTime(argMultimap.getValue(PREFIX_END).get());
-            }
-            if (!MeetingTime.isValidMeetingTime(start, end)) {
+                if (!MeetingTime.isValidMeetingTime(start, end) && start != null && end != null) {
+                    throw new ParseException(MeetingTime.MESSAGE_CONSTRAINTS);
+                }
+            } else if (argMultimap.getValue(PREFIX_START).isPresent()
+                    || argMultimap.getValue(PREFIX_END).isPresent()) {
                 throw new ParseException(MeetingTime.MESSAGE_CONSTRAINTS);
             }
 

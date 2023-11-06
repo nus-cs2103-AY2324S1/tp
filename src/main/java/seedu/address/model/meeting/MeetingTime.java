@@ -38,7 +38,7 @@ public class MeetingTime {
     }
 
     public static boolean isValidMeetingTime(LocalDateTime start, LocalDateTime end) {
-        return !start.isAfter(end) && start.isAfter(LocalDateTime.MIN) && end.isBefore(LocalDateTime.MAX); 
+        return !start.isAfter(end) && start.isAfter(LocalDateTime.MIN) && end.isBefore(LocalDateTime.MAX);
     }
 
     @Override

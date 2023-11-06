@@ -19,7 +19,7 @@ public class LastContactTimeContainsPredicate implements Predicate<Person> {
      */
     public LastContactTimeContainsPredicate(LocalDateTime time) {
         this.time = time;
-        format(this.time); 
+        format(this.time);
         LastContactedTime.isValidLastContactedTime(time);
     }
 

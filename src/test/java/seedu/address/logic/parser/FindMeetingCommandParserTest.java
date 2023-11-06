@@ -89,8 +89,7 @@ public class FindMeetingCommandParserTest {
                 MeetingTime.MESSAGE_CONSTRAINTS + "\n" + FindMeetingCommand.MESSAGE_USAGE);
 
         // wrong end format
-        assertParseFailure(parser, " e/2",
-        MeetingTime.MESSAGE_CONSTRAINTS + "\n" + FindMeetingCommand.MESSAGE_USAGE);
+        assertParseFailure(parser, " e/2", MeetingTime.MESSAGE_CONSTRAINTS + "\n" + FindMeetingCommand.MESSAGE_USAGE);
     }
 
     /**
