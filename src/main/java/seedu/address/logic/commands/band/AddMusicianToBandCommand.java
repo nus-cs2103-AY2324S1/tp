@@ -35,6 +35,7 @@ public class AddMusicianToBandCommand extends Command {
     public static final String MESSAGE_SUCCESS = "New musicians added to band: %1$s";
     public static final String MESSAGE_DUPLICATE_MUSICIAN = "One or more of the musicians already exist in the band";
     public static final String MESSAGE_MUSICIAN_INDEX_REPEATED = "There are repeated musician indices in the command";
+    public static final String MESSAGE_MULTIPLE_BAND_INDICES = "You can only add musicians to one band at a time";
 
     private final Index bandToAddInto;
     private final List<Index> musiciansToAdd;

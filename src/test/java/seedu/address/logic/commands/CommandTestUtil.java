@@ -2,8 +2,10 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_BINDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GENRE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MINDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
@@ -62,13 +64,20 @@ public class CommandTestUtil {
     public static final String GENRE_DESC_JAZZ = " " + PREFIX_GENRE + VALID_GENRE_JAZZ;
     public static final String GENRE_DESC_POP = " " + PREFIX_GENRE + VALID_GENRE_POP;
     public static final String GENRE_DESC_ROCK = " " + PREFIX_GENRE + VALID_GENRE_ROCK;
+    public static final String BAND_INDEX_DESC_FIRST = " " + PREFIX_BINDEX + "1";
+    public static final String BAND_INDEX_DESC_SECOND = " " + PREFIX_BINDEX + "2";
+    public static final String MUSICIAN_INDEX_DESC_FIRST = " " + PREFIX_MINDEX + "1";
+    public static final String MUSICIAN_INDEX_DESC_SECOND = " " + PREFIX_MINDEX + "2";
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
     public static final String INVALID_GENRE_DESC = " " + PREFIX_GENRE + "r0ck"; // not among allowed genres
-
+    // zero index not allowed
+    public static final String INVALID_BAND_INDEX_DESC_ZERO = " " + PREFIX_BINDEX + "0";
+    // negative index not allowed
+    public static final String INVALID_MUSICIAN_INDEX_DESC_NEGATIVE = " " + PREFIX_MINDEX + "-1";
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
 
