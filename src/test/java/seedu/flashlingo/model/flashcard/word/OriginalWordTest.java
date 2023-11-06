@@ -54,7 +54,7 @@ class OriginalWordTest {
     @Test
     void testToString() {
         OriginalWord ogWord = new OriginalWord("Hello", " eng ");
-        assertEquals(ogWord.toString(), "Hello");
+        assertEquals(ogWord.toString(), "Hello (eng)");
     }
 
     @Test
