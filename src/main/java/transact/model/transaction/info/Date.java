@@ -42,7 +42,12 @@ public class Date {
     public java.util.Date getDate() {
         return this.date;
     }
-
+    /**
+     * Checks if the given date string is valid according to the specified format "dd/MM/yy".
+     *
+     * @param date The date string to be validated.
+     * @return {@code true} if the date is valid, {@code false} if it's invalid or the input format is incorrect.
+     */
     public static boolean isValidDate(String date) {
         try {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yy");

@@ -196,7 +196,7 @@ public class ParserUtil {
      */
     public static Date parseDate(String date) throws ParseException {
         requireNonNull(date);
-        if (! date.matches(VALIDATION_REGEX)) {
+        if (!date.matches(VALIDATION_REGEX)) {
             throw new ParseException(Date.MESSAGE_CONSTRAINTS);
         }
         String trimmedDate = date.trim();
