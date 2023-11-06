@@ -35,9 +35,10 @@ public class FindCommand extends Command {
 
     /**
      * Executes the find command.
+     * Find Command performs an OR search of the names of applicants.
+     * Any applicant whose name contains any of the keywords will be included in the resulting list.
      * @param model {@code Model} which the command should operate on.
-     * @return CommandResult which contains the list of applicants
-     * whose name contains any of the keywords given.
+     * @return CommandResult which contains the list of applicants whose name contains any of the keywords given.
      */
     @Override
     public CommandResult execute(Model model) {

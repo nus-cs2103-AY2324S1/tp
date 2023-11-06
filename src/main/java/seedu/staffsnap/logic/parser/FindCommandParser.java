@@ -1,8 +1,8 @@
 package seedu.staffsnap.logic.parser;
 
 import static seedu.staffsnap.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.staffsnap.logic.commands.FindCommand.MESSAGE_WRONG_FORMAT;
 import static seedu.staffsnap.logic.commands.FindCommand.MESSAGE_TOO_LONG;
+import static seedu.staffsnap.logic.commands.FindCommand.MESSAGE_WRONG_FORMAT;
 
 import java.util.Arrays;
 
@@ -18,8 +18,7 @@ public class FindCommandParser implements Parser<FindCommand> {
     /**
      * Parses the given {@code String} of arguments in the context of the FindCommand
      * and returns a FindCommand object for execution.
-     * @throws ParseException if the user input is empty
-     * or if the user input contains characters other than alphabets.
+     * @throws ParseException if the user input is empty or if the user input contains characters other than alphabets.
      */
     public FindCommand parse(String args) throws ParseException {
         String trimmedArgs = args.trim();
