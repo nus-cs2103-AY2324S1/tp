@@ -107,7 +107,7 @@ Examples:
 
 Creates a new event with accompanying details (name, location, date, tag).
 
-Format: `createEvent n/EVENT_NAME l/LOCATION d/DATE [t/TAG]`
+Format: `createEvent n/EVENT_NAME l/LOCATION d/DATE [t/TAG]...`
 
 * Acceptable values for `DATE`: Dates in the format of `YYYY-MM-DD`.
 
