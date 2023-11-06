@@ -6,7 +6,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Scene?>
-<fx:root resizable="false" title="Notes"
+<fx:root title="Notes"
          type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
     <scene>
         <Scene>
@@ -15,7 +15,7 @@
                     <Insets top="10" right="10" bottom="10" left="10" />
                 </padding>
                 <Label text="Notes" style="-fx-font-weight: bold; -fx-font-size: 18px;" />
-                <ListView fx:id="notesListView" />
+                <ListView fx:id="notesListView" VBox.vgrow="ALWAYS"/>
                 <Label text="Press ESC to exit" style="-fx-font-size: 12px;" />
                 <Button text="Close" onAction="#handleClose" />
             </VBox>

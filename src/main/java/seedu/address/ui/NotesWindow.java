@@ -6,6 +6,8 @@ import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
+import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -77,6 +79,27 @@ public class NotesWindow extends UiPart<Stage> {
             notesObservableList.add(note.toString());
         }
         notesListView.setItems(notesObservableList);
+        notesListView.setCellFactory(listView -> new ListCell<String>() {
+            @Override
+            protected void updateItem(String note, boolean empty) {
+                super.updateItem(note, empty);
+                if (empty || note == null) {
+                    setText(null);
+                    setGraphic(null);
+                } else {
+                    Label label = new Label(note);
+                    label.setWrapText(true);
+                    label.prefWidthProperty().bind(listView.widthProperty().subtract(40));
+                    setGraphic(label);
+                }
+            }
+        });
+
+        // make sure the width is always correct even after resizing the window
+        notesListView.widthProperty().addListener((observable) -> {
+            notesListView.refresh();
+        });
+
     }
 
     @FXML
