@@ -340,7 +340,7 @@ that is currently displayed on the screen.
 * `name` : sorts list by lexicographical ordering of name (case-insensitive).
 * `appointment`: sorts list by appointment timing in order of the earliest appointment first.
 
-Format: `sort keyword`
+Format: `sort KEYWORD`
 
 * Calling this command after a Find command will preserve the results filtered by the Find command.
 
