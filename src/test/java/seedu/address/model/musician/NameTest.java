@@ -27,6 +27,7 @@ public class NameTest {
         // invalid name
         assertFalse(Name.isValidName("")); // empty string
         assertFalse(Name.isValidName(" ")); // spaces only
+        assertFalse(Name.isValidName(" Peter")); // name begins with space
         assertFalse(Name.isValidName("^")); // only non-alphanumeric characters
         assertFalse(Name.isValidName("peter*")); // contains non-alphanumeric characters
 
@@ -56,5 +57,11 @@ public class NameTest {
 
         // different values -> returns false
         assertFalse(name.equals(new Name("Other Valid Name")));
+
+        // different case -> returns true
+        assertTrue(name.equals(new Name("valid name")));
+
+        // extra whitespaces -> returns true
+        assertTrue(name.equals(new Name("Valid   Name  ")));
     }
 }

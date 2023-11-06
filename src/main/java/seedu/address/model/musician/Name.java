@@ -3,6 +3,8 @@ package seedu.address.model.musician;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+import seedu.address.commons.util.StringUtil;
+
 /**
  * Represents a Musician's name in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidName(String)}
@@ -44,6 +46,11 @@ public class Name {
         return fullName;
     }
 
+    /**
+     * Returns true if the names are the same (case-insensitive).
+     * @param other the other name to compare with.
+     * @return true if both names are the same (case-insensitive).
+     */
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -56,7 +63,7 @@ public class Name {
         }
 
         Name otherName = (Name) other;
-        return fullName.equals(otherName.fullName);
+        return StringUtil.hasSameWordsInSameSequenceIgnoreCase(fullName, otherName.fullName);
     }
 
     @Override

@@ -121,6 +121,7 @@ A success message like below will be displayed.
 ```
 New musician added: John Doe; Phone: 98765432; Email: johnd@example.com; Tags: [bestman]; Instruments: [violin]; Genres: [classical]
 ```
+![add_after.png](images%2Fmusician-features%2Fadd_after.png)
 
 **Upon failure:**
 
@@ -128,7 +129,6 @@ If you input a musician which is already in your contact book (i.e. a musician w
 ```
 This musician already exists in your contact list
 ```
-
 
 ### Delete musician: `delete`
 
@@ -147,6 +147,7 @@ You will see a message indicating successful removal of the first musician conta
 ```
 Deleted Musician: John Doe; Phone: 98765432; Email: johnd@example.com; Tags: [bestman]; Instruments: [violin]; Genres: [classical]
 ```
+![delete_after.png](images%2Fmusician-features%2Fdelete_after.png)
 
 **Upon failure:**
 
@@ -184,6 +185,13 @@ A success message like below will be displayed.
 ```
 Edited Musician: John Doe; Phone: 98765430; Email: johnd@example.com; Tags: [bestman]; Instruments: [violin]; Genres: [pop]
 ```
+* Before: From `list` state, John Doe's genre is classical
+  ![edit_before.png](images%2Fmusician-features%2Fedit_before.png)
+
+
+* After: John Doe's genre is changed to pop
+  ![edit_after.png](images%2Fmusician-features%2Fedit_after.png)
+
 
 **Upon failure:**
 1. If you provide no argument for the musician to be edited, e.g. `edit 1`, you will see an error message like below:
@@ -217,6 +225,7 @@ Genre tags: [blues, classical, country, electronic, folk, hiphop, jazz, latin, m
 ```
 The `My Musicians` and `My Bands` panels will remain unchanged. 
 
+![tags.png](images%2Fmusician-features%2Ftags.png)
 
 ### Find musicians: `find`
 

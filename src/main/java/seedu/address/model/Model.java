@@ -62,7 +62,7 @@ public interface Model {
     /**
      * Returns true if a musician with the same phone or email as {@code musician} exists in the address book.
      */
-    boolean hasDuplicateInfo(Musician musician);
+    boolean hasDuplicateInfo(Musician toExclude, Musician musician);
 
     /**
      * Deletes the given musician.

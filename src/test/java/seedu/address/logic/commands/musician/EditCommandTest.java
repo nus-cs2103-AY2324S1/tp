@@ -39,7 +39,8 @@ public class EditCommandTest {
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
         Musician editedMusician = new MusicianBuilder().build();
-        EditCommand.EditMusicianDescriptor descriptor = new EditMusicianDescriptorBuilder(editedMusician).build();
+        EditCommand.EditMusicianDescriptor descriptor =
+                new EditMusicianDescriptorBuilder(editedMusician).build();
         EditCommand editCommand = new EditCommand(INDEX_FIRST_MUSICIAN, descriptor);
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_MUSICIAN_SUCCESS,
@@ -123,6 +124,92 @@ public class EditCommandTest {
                 new EditMusicianDescriptorBuilder(musicianInList).build());
 
         assertCommandFailure(editCommand, model, EditCommand.MESSAGE_DUPLICATE_MUSICIAN);
+    }
+
+    @Test
+    public void execute_duplicatePhoneUnfilteredList_failure() {
+        Musician firstMusician = model.getFilteredMusicianList().get(INDEX_FIRST_MUSICIAN.getZeroBased());
+        Musician musicianWithDuplicatePhone = new MusicianBuilder().withPhone(firstMusician.getPhone().toString())
+                .build();
+
+        // assert only phone is duplicate
+        assert !firstMusician.getName().equals(musicianWithDuplicatePhone.getName())
+                : "Both musicians should not have same name";
+        assert firstMusician.getPhone().equals(musicianWithDuplicatePhone.getPhone())
+                : "Both musicians should have same phone";
+        assert !firstMusician.getEmail().equals(musicianWithDuplicatePhone.getEmail())
+                : "Both musicians should not have same email";
+
+        EditCommand.EditMusicianDescriptor descriptor =
+                new EditMusicianDescriptorBuilder(musicianWithDuplicatePhone).build();
+        EditCommand editCommand = new EditCommand(INDEX_SECOND_MUSICIAN, descriptor);
+
+        assertCommandFailure(editCommand, model, EditCommand.MESSAGE_DUPLICATE_INFO);
+    }
+
+    @Test
+    public void execute_duplicatePhoneFilteredList_failure() {
+        Musician secondMusician = model.getFilteredMusicianList().get(INDEX_SECOND_MUSICIAN.getZeroBased());
+        showMusicianAtIndex(model, INDEX_FIRST_MUSICIAN);
+        Musician musicianWithDuplicatePhone = new MusicianBuilder().withPhone(secondMusician.getPhone().toString())
+                .build();
+
+        // assert only phone is duplicate
+        assert !secondMusician.getName().equals(musicianWithDuplicatePhone.getName())
+                : "Both musicians should not have same name";
+        assert secondMusician.getPhone().equals(musicianWithDuplicatePhone.getPhone())
+                : "Both musicians should have same phone";
+        assert !secondMusician.getEmail().equals(musicianWithDuplicatePhone.getEmail())
+                : "Both musicians should not have same email";
+
+        // edit musician in filtered list into a duplicate in address book
+        EditCommand editCommand = new EditCommand(INDEX_FIRST_MUSICIAN,
+                new EditMusicianDescriptorBuilder(musicianWithDuplicatePhone).build());
+
+        assertCommandFailure(editCommand, model, EditCommand.MESSAGE_DUPLICATE_INFO);
+    }
+
+    @Test
+    public void execute_duplicateEmailUnfilteredList_failure() {
+        Musician firstMusician = model.getFilteredMusicianList().get(INDEX_FIRST_MUSICIAN.getZeroBased());
+        Musician musicianWithDuplicateEmail = new MusicianBuilder().withEmail(firstMusician.getEmail().toString())
+                .build();
+
+        // assert only email is duplicate
+        assert !firstMusician.getName().equals(musicianWithDuplicateEmail.getName())
+                : "Both musicians should not have same name";
+        assert !firstMusician.getPhone().equals(musicianWithDuplicateEmail.getPhone())
+                : "Both musicians should have same phone";
+        assert firstMusician.getEmail().equals(musicianWithDuplicateEmail.getEmail())
+                : "Both musicians should not have same email";
+
+        EditCommand.EditMusicianDescriptor descriptor =
+                new EditMusicianDescriptorBuilder(musicianWithDuplicateEmail).build();
+        EditCommand editCommand = new EditCommand(INDEX_SECOND_MUSICIAN, descriptor);
+
+        assertCommandFailure(editCommand, model, EditCommand.MESSAGE_DUPLICATE_INFO);
+    }
+
+    @Test
+    public void execute_duplicateEmailFilteredList_failure() {
+        Musician secondMusician = model.getFilteredMusicianList().get(INDEX_SECOND_MUSICIAN.getZeroBased());
+        showMusicianAtIndex(model, INDEX_FIRST_MUSICIAN);
+        Musician musicianWithDuplicateEmail = new MusicianBuilder().withEmail(secondMusician.getEmail().toString())
+                .build();
+
+        // assert only email is duplicate
+        assert !secondMusician.getName().equals(musicianWithDuplicateEmail.getName())
+                : "Both musicians should not have same name";
+        assert !secondMusician.getPhone().equals(musicianWithDuplicateEmail.getPhone())
+                : "Both musicians should have same phone";
+        assert secondMusician.getEmail().equals(musicianWithDuplicateEmail.getEmail())
+                : "Both musicians should not have same email";
+
+        // edit musician in filtered list into a duplicate in address book
+        EditCommand editCommand = new EditCommand(INDEX_FIRST_MUSICIAN,
+                new EditMusicianDescriptorBuilder(musicianWithDuplicateEmail).build());
+
+        assertCommandFailure(editCommand, model, EditCommand.MESSAGE_DUPLICATE_INFO);
     }
 
     @Test
