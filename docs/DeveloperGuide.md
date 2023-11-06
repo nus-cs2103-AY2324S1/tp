@@ -1054,21 +1054,3 @@ create the `find` command object with the updated predicate.
 This would then be used in the `execute` method of the `find` command object to get the filtered tutor 
 or schedule list with part of their names matching the user input.
 
-<<<<<<< HEAD
-=======
-### Ban users from entering non-alphanumeric keywords for find command
-
-The `find-t` and `find-s` command should only allow users to find alphanumeric names from the tutor list.
-
-The current `find` commands allow users to search for non-alphanumeric names like `find-t *john,"` although all
-tutor names should be alphanumeric.
-
-Therefore, we plan to only allow users to input alphanumeric keywords for `find` commands.
-
-**Proposed implementation**
-
-In the `findTutorCommandParser` and `findScheduleCommandParser` parse methods, apart from checking for empty inputs, 
-we can add another layer of check using the `parseName` method of the `ParserUtil` class to check for non-alphanumeric
-keywords and throw an error to prevent users from entering non-alphanumeric keywords.
-
->>>>>>> fa5db7a132b66a3aad5d89773e09741aa08c3621
