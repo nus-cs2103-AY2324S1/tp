@@ -325,7 +325,7 @@ Clears the output window.
 
 Format: `clearresultbox`
 
-Success output: A blank output window.
+Success output: clear all the information contained in the result box at bottom.
 
 ### Clearing staff: `clearstaff`
 
