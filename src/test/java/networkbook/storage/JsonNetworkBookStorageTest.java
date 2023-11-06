@@ -12,6 +12,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
 import networkbook.commons.exceptions.DataLoadingException;
+import networkbook.commons.exceptions.NullValueException;
 import networkbook.model.NetworkBook;
 import networkbook.model.ReadOnlyNetworkBook;
 import networkbook.testutil.TypicalPersons;
@@ -23,8 +24,10 @@ public class JsonNetworkBookStorageTest {
     public Path testFolder;
 
     @Test
-    public void readNetworkBook_nullFilePath_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> readNetworkBook(null));
+    public void readNetworkBook_nullFilePath_throwsAssertionError() {
+        assertThrows(AssertionError.class, () -> new JsonNetworkBookStorage(null).readNetworkBook());
+        assertThrows(AssertionError.class, ()
+                -> new JsonNetworkBookStorage(Paths.get("test.json")).readNetworkBook(null));
     }
 
     private java.util.Optional<ReadOnlyNetworkBook> readNetworkBook(String filePath) throws Exception {
@@ -55,6 +58,18 @@ public class JsonNetworkBookStorageTest {
     @Test
     public void readNetworkBook_invalidAndValidPersonNetworkBook_throwDataLoadingException() {
         assertThrows(DataLoadingException.class, () -> readNetworkBook("invalidAndValidPersonNetworkBook.json"));
+    }
+
+    @Test
+    public void readNetworkBook_networkBookWithOnePersonContainingDuplicatePhones_throwsDataLoadingException() {
+        assertThrows(DataLoadingException.class, () -> readNetworkBook(
+                "networkBookWithPersonContainingDuplicatePhones.json"));
+    }
+
+    @Test
+    public void readNetworkBook_networkBookWithPersonContainingNullPhone_throwsNullValueException() {
+        assertThrows(NullValueException.class, () -> readNetworkBook(
+                "networkBookWithPersonContainingNullPhone.json"));
     }
 
     @Test

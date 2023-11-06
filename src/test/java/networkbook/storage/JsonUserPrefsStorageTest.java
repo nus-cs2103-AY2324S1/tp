@@ -28,13 +28,13 @@ public class JsonUserPrefsStorageTest {
         assertThrows(NullPointerException.class, () -> readUserPrefs(null));
     }
 
-    private Optional<UserPrefs> readUserPrefs(String userPrefsFileInTestDataFolder) throws DataLoadingException {
+    private Optional<UserPrefs> readUserPrefs(String userPrefsFileInTestDataFolder) throws Exception {
         Path prefsFilePath = addToTestDataPathIfNotNull(userPrefsFileInTestDataFolder);
         return new JsonUserPrefsStorage(prefsFilePath).readUserPrefs(prefsFilePath);
     }
 
     @Test
-    public void readUserPrefs_missingFile_emptyResult() throws DataLoadingException {
+    public void readUserPrefs_missingFile_emptyResult() throws Exception {
         assertFalse(readUserPrefs("NonExistentFile.json").isPresent());
     }
 
@@ -50,20 +50,20 @@ public class JsonUserPrefsStorageTest {
     }
 
     @Test
-    public void readUserPrefs_fileInOrder_successfullyRead() throws DataLoadingException {
+    public void readUserPrefs_fileInOrder_successfullyRead() throws Exception {
         UserPrefs expected = getTypicalUserPrefs();
         UserPrefs actual = readUserPrefs("TypicalUserPref.json").get();
         assertEquals(expected, actual);
     }
 
     @Test
-    public void readUserPrefs_valuesMissingFromFile_defaultValuesUsed() throws DataLoadingException {
+    public void readUserPrefs_valuesMissingFromFile_defaultValuesUsed() throws Exception {
         UserPrefs actual = readUserPrefs("EmptyUserPrefs.json").get();
         assertEquals(new UserPrefs(), actual);
     }
 
     @Test
-    public void readUserPrefs_extraValuesInFile_extraValuesIgnored() throws DataLoadingException {
+    public void readUserPrefs_extraValuesInFile_extraValuesIgnored() throws Exception {
         UserPrefs expected = getTypicalUserPrefs();
         UserPrefs actual = readUserPrefs("ExtraValuesUserPref.json").get();
 
@@ -100,7 +100,7 @@ public class JsonUserPrefsStorageTest {
     }
 
     @Test
-    public void saveUserPrefs_allInOrder_success() throws DataLoadingException, IOException {
+    public void saveUserPrefs_allInOrder_success() throws Exception {
 
         UserPrefs original = new UserPrefs();
         original.setGuiSettings(new GuiSettings(1200, 200, 0, 2));

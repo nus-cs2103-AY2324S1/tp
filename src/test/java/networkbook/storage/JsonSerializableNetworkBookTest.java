@@ -8,7 +8,9 @@ import java.nio.file.Paths;
 
 import org.junit.jupiter.api.Test;
 
+import networkbook.commons.exceptions.DuplicateEntryException;
 import networkbook.commons.exceptions.IllegalValueException;
+import networkbook.commons.exceptions.NullValueException;
 import networkbook.commons.util.JsonUtil;
 import networkbook.model.NetworkBook;
 import networkbook.testutil.TypicalPersons;
@@ -19,6 +21,10 @@ public class JsonSerializableNetworkBookTest {
     private static final Path TYPICAL_PERSONS_FILE = TEST_DATA_FOLDER.resolve("typicalPersonsNetworkBook.json");
     private static final Path INVALID_PERSON_FILE = TEST_DATA_FOLDER.resolve("invalidPersonNetworkBook.json");
     private static final Path DUPLICATE_PERSON_FILE = TEST_DATA_FOLDER.resolve("duplicatePersonNetworkBook.json");
+    private static final Path PERSON_WITH_DUPLICATE_PHONES_FILE =
+            TEST_DATA_FOLDER.resolve("personWithDuplicatePhones.json");
+    private static final Path PERSON_WITH_NULL_PHONE_FILE = TEST_DATA_FOLDER.resolve("personWithNullPhone.json");
+    private static final Path PERSON_WITH_NULL_NAME_FILE = TEST_DATA_FOLDER.resolve("personWithNullName.json");
 
     @Test
     public void toModelType_typicalPersonsFile_success() throws Exception {
@@ -44,4 +50,10 @@ public class JsonSerializableNetworkBookTest {
                 dataFromFile::toModelType);
     }
 
+    @Test
+    public void toModelType_personWithDuplicateFields_throwsDuplicateEntryException() throws Exception {
+        JsonSerializableNetworkBook dataFromFile = JsonUtil.readJsonFile(PERSON_WITH_DUPLICATE_PHONES_FILE,
+                JsonSerializableNetworkBook.class).get();
+        assertThrows(DuplicateEntryException.class, dataFromFile::toModelType);
+    }
 }

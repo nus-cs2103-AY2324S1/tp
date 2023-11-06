@@ -35,6 +35,7 @@ public class JsonNetworkBookStorage implements NetworkBookStorage {
 
     @Override
     public Optional<ReadOnlyNetworkBook> readNetworkBook() throws DataLoadingException, NullValueException {
+        assert filePath != null;
         return readNetworkBook(filePath);
     }
 
@@ -46,7 +47,7 @@ public class JsonNetworkBookStorage implements NetworkBookStorage {
      */
     public Optional<ReadOnlyNetworkBook> readNetworkBook(Path filePath)
             throws DataLoadingException, NullValueException {
-        requireNonNull(filePath);
+        assert filePath != null;
 
         Optional<JsonSerializableNetworkBook> jsonNetworkBook = JsonUtil.readJsonFile(
                 filePath, JsonSerializableNetworkBook.class);

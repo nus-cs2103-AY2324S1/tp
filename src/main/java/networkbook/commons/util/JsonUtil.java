@@ -44,7 +44,7 @@ public class JsonUtil {
         FileUtil.writeToFile(jsonFile, toJsonString(objectToSerialize));
     }
 
-    static <T extends JsonObject> T deserializeObjectFromJsonFile(Path jsonFile, Class<T> classOfObjectToDeserialize)
+    private static <T extends JsonObject> T deserializeObjectFromJsonFile(Path jsonFile, Class<T> classOfObjectToDeserialize)
             throws IOException, NullValueException {
         return fromJsonString(FileUtil.readFromFile(jsonFile), classOfObjectToDeserialize);
     }
@@ -98,7 +98,7 @@ public class JsonUtil {
      * @param <T> The generic type to create an instance of
      * @return The instance of T with the specified values in the JSON string
      */
-    public static <T extends JsonObject> T fromJsonString(String json, Class<T> instanceClass)
+    private static <T extends JsonObject> T fromJsonString(String json, Class<T> instanceClass)
             throws IOException, NullValueException {
         T value = objectMapper.readValue(json, instanceClass);
         value.assertFieldsAreNotNull();

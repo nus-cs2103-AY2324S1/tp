@@ -1,0 +1,12 @@
+{
+  "persons": [ {
+    "name": "Hans",
+    "phones": [ "9482424", "9482424" ],
+    "emails": [ "hans@example.com" ],
+    "links": [ "hahahans.com" ],
+    "graduation": "AY2324-S1",
+    "course": "Computer Science",
+    "specialisation": "Programming Languages",
+    "tags": [ "friends" ]
+  } ]
+}

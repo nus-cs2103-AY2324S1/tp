@@ -29,7 +29,7 @@ import networkbook.model.util.UniqueList;
 class JsonAdaptedPerson implements JsonObject {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Person's %s field is missing!";
-    private static final String DUPLICATE_ENTRY_MESSAGE = "Duplicate entry for %s found: %s";
+    public static final String DUPLICATE_ENTRY_MESSAGE = "Duplicate entry for %s found: %s";
 
     private final String name;
     private final List<JsonAdaptedProperty<Phone>> phones = new ArrayList<>();
