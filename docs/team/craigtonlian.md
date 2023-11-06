@@ -16,7 +16,7 @@
 
 <box type="tip">
 
-The tags with a G-prefix [[G\#158](https://github.com/nus-cs2103-AY2324S1/forum/issues/158)] represents an external link to the corresponding GitHub Issue.<br>
+The tags with a G-prefix [[G\#267](https://github.com/nus-cs2103-AY2324S1/forum/issues/267)] represents an external link to the corresponding GitHub Issue.<br>
 The tags with a P-prefix [[P\#80](https://github.com/AY2324S1-CS2103T-W08-1/tp/pull/80)] represents an external link to the corresponding Pull Request.<br>
 
 </box>
@@ -61,7 +61,7 @@ The tags with a P-prefix [[P\#80](https://github.com/AY2324S1-CS2103T-W08-1/tp/p
 * **Documentation**:
   * User Guide:
     * Added documentation for the features `addi`, `editi`, `deletei`, and `import` [[P\#80](https://github.com/AY2324S1-CS2103T-W08-1/tp/pull/80)] [[P\#90](https://github.com/AY2324S1-CS2103T-W08-1/tp/pull/90)] [[P\#117](https://github.com/AY2324S1-CS2103T-W08-1/tp/pull/117)] [[P\#140](https://github.com/AY2324S1-CS2103T-W08-1/tp/pull/140)]
-    * Did cosmetic tweaks to existing documentation of features `help`, `edit` [[P\#67](https://github.com/AY2324S1-CS2103T-W08-1/tp/pull/67)] [[P\#138](https://github.com/AY2324S1-CS2103T-W08-1/tp/pull/138)] [[P\#145](https://github.com/AY2324S1-CS2103T-W08-1/tp/pull/145)]
+    * Did cosmetic tweaks to existing documentation of features `help` and `edit` [[P\#67](https://github.com/AY2324S1-CS2103T-W08-1/tp/pull/67)] [[P\#138](https://github.com/AY2324S1-CS2103T-W08-1/tp/pull/138)] [[P\#145](https://github.com/AY2324S1-CS2103T-W08-1/tp/pull/145)]
   * Developer Guide:
     * Added implementation details of the Interview Management features such as `addi`, `editi`, and `deletei` [[P\#118](https://github.com/AY2324S1-CS2103T-W08-1/tp/pull/118)]
 
