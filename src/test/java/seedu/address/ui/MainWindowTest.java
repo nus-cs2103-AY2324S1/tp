@@ -2,12 +2,13 @@ package seedu.address.ui;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
+import javafx.stage.Stage;
+import java.nio.file.Path;
+
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 import org.testfx.framework.junit5.ApplicationTest;
 
-import javafx.stage.Stage;
-import java.nio.file.Path;
 import seedu.address.logic.Logic;
 import seedu.address.logic.LogicManager;
 import seedu.address.model.Model;
