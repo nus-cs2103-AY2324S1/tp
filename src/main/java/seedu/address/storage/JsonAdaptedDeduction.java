@@ -17,7 +17,7 @@ public class JsonAdaptedDeduction {
      * Constructs a {@code JsonAdaptedDeduction} with the given deduction details.
      */
     @JsonCreator
-    public JsonAdaptedDeduction(@JsonProperty("reason") String reason, @JsonProperty("benefit") String deduction) {
+    public JsonAdaptedDeduction(@JsonProperty("reason") String reason, @JsonProperty("deductions") String deduction) {
         this.reason = reason;
         this.deduction = deduction;
     }
