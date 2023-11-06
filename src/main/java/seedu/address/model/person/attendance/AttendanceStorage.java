@@ -70,6 +70,7 @@ public class AttendanceStorage {
      * @return attendance type. This can either be Late, Absent or Present.
      */
     public AttendanceType getType(LocalDate date) {
+        requireNonNull(date);
         if (getAttendance(date) == null) {
             return AttendanceType.PRESENT;
         }
@@ -82,6 +83,7 @@ public class AttendanceStorage {
      * @param date The date on which the person is absent.
      */
     public void markAbsent(LocalDate date) {
+        requireNonNull(date);
         if (getAttendance(date) == null) {
             storage.add(new Attendance(date, AttendanceType.ABSENT));
         } else {
@@ -95,6 +97,7 @@ public class AttendanceStorage {
      * @param date The date on which the person is late.
      */
     public void markLate(LocalDate date) {
+        requireNonNull(date);
         if (getAttendance(date) == null) {
             storage.add(new Attendance(date, AttendanceType.LATE));
         } else {
@@ -108,6 +111,7 @@ public class AttendanceStorage {
      * @param date The date on which the person is present.
      */
     public void markPresent(LocalDate date) {
+        requireNonNull(date);
         if (getAttendance(date) != null) {
             storage.remove(getAttendance(date));
         }
@@ -124,8 +128,10 @@ public class AttendanceStorage {
     /**
      * Gets the number of attendances for the given type.
      *
-     * @param type type of attendance to count
-     * @return count of number of attendances
+     * @param type the type of attendance
+     * @param joinDate the date the employee joined
+     * @param numOfLeave the number of leaves taken
+     * @return
      */
     private int getCount(AttendanceType type, JoinDate joinDate, int numOfLeave) {
         //TODO decide if the param should be JoinDate or LocalDate
@@ -148,7 +154,11 @@ public class AttendanceStorage {
      *
      * @return count of number of attendances
      */
-    public int[] getAttendanceReport(JoinDate joinDate, int numOfLeave) {
+    public int[] getAttendanceReport(JoinDate joinDate, int numOfLeave) throws IllegalArgumentException {
+
+        if (numOfLeave < 0) {
+            throw new IllegalArgumentException("Number of leaves cannot be negative!");
+        }
         int numOfDaysOnLeave = numOfLeave;
         int numOfDaysAbsent = getCount(AttendanceType.ABSENT, joinDate, numOfLeave);
         int numOfDaysLate = getCount(AttendanceType.LATE, joinDate, numOfLeave);
@@ -158,9 +168,9 @@ public class AttendanceStorage {
     }
 
     /**
-     * Gets value of storage.
+     * Gets value of storage as an array list of Strings.
      *
-     * @return
+     * @return array list of Attendance values as string
      */
     public ArrayList<String> getValue() {
         // Assuming storage is an ArrayList<Attendance>

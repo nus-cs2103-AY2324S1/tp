@@ -45,6 +45,8 @@ public class CommandTestUtil {
     public static final String VALID_SALARY_BOB = "2500.00";
     public static final String VALID_ANNUALLEAVE_AMY = "4";
     public static final String VALID_ANNUALLEAVE_BOB = "2";
+    public static final ArrayList<String> VALID_ATTENDANCE_STORAGE_AMY = new ArrayList<>();
+    public static final ArrayList<String> VALID_ATTENDANCE_STORAGE_BOB = new ArrayList<>();
     public static final String VALID_DATE = "03/11/2023";
 
 

@@ -45,6 +45,7 @@ public class AttendanceCommand extends Command {
      */
     public AttendanceCommand(NameContainsKeywordsPredicate name) {
         this.targetIndex = null;
+        requireNonNull(name);
         this.name = name;
     }
 
@@ -53,6 +54,7 @@ public class AttendanceCommand extends Command {
      * @param index The index of the employee to view
      */
     public AttendanceCommand(Index index) {
+        requireNonNull(index);
         this.targetIndex = index;
         this.name = null;
     }
