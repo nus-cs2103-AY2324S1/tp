@@ -20,44 +20,19 @@ Here are some possible ways you can integrate CMC into your CCA:
 - You can find members or applicants easily through the `find` commands.
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+
 If this is your first time using CMC, head over to [How to use CMC's User Guide](#1-how-to-use-cmcs-user-guide)
 to start keeping track of all your members and applicants!
+
 </div>
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## Table of Contents
 
-<!-- TOC -->
+* Table of Contents
+  {:toc}
 
-* [1. How to Use CMC's User Guide](#1-how-to-use-cmcs-user-guide)
-* [2. Quick start](#2-quick-start)
-* [3. Interface Walkthrough](#3-interface-walkthrough)
-* [4. Features](#4-features)
-    * [4.1 Member Features](#41-member-features)
-        * [4.1.1 Adding a member: `addMember`](#411-adding-a-member--addmember)
-        * [4.1.2 Finding members: `findMember` or `findm`](#412-finding-members--findmember-or-findm)
-        * [4.1.3 Viewing members: `viewMembers` or `viewm`](#413-viewing-members--viewmembers-or-viewm)
-        * [4.1.4 Editing a member: `editMember` or `editm`](#414-editing-a-member--editmember-or-editm)
-        * [4.1.5 Deleting a member: `deleteMember` or `delm`](#415-deleting-a-member--deletemember-or-delm)
-        * [4.1.6 Copying a member's details: `copyMember` or `cpm`](#416-copying-a-members-details--copymember-or-cpm)
-        * [4.1.6 Allocating a task to a member: `addTask` or `addt`](#417-allocating-a-task-to-a-member--addtask-or-addt)
-        * [4.1.7 Viewing all tasks allocated to a member: `viewTask` or `viewt`](#418-viewing-all-tasks-allocated-to-a-member--viewtask-or-viewt)
-        * [4.1.8 Deleting a task allocated to a member: `deleteTask` or `delt`](#419-deleting-a-task-allocated-to-a-member--deletetask-or-delt)
-    * [4.2 Applicant Features](#42-applicant-features)
-        * [4.2.1 Adding an applicant: `addApplicant` or `adda`](#421-adding-an-applicant--addapplicant-or-adda)
-        * [4.2.2 Finding applicants: `findApplicant` or `finda`](#422-finding-applicants--findapplicant-or-finda)
-        * [4.2.3 Viewing applicants: `viewApplicants` or `viewa`](#423-viewing-applicants--viewapplicants-or-viewa)
-        * [4.2.4 Editing an applicant: `editApplicant` or `edita`](#424-editing-an-applicant--editapplicant-or-edita)
-        * [4.2.5 Deleting an applicant: `deleteApplicant` or `dela`](#425-deleting-an-applicant--deleteapplicant-or-dela)
-        * [4.2.6 Copying an applicant's details: `copyApplicant` or `cpa`](#426-copying-a-applicants-details--copyapplicant-or-cpa)
-    * [4.3 General Features](#43-general-features)
-        * [4.3.1 Accessing the user guide: `help`](#431-accessing-the-user-guide--help)
-        * [4.3.2 Exiting the application: `exit`](#432-exiting-the-application--exit)
-* [5. FAQ](#5-faq)
-* [6. Command summary](#6-command-summary)
-
-<!-- TOC -->
 --------------------------------------------------------------------------------------------------------------------
 
 ## 1. How to Use CMC's User Guide
@@ -91,15 +66,15 @@ quick reference to all the commands available in CMC.
 
     - `help`: Opens up the help window.
     - `addm /name Alicia Teng /phone 91126291 /email alicia_teng@gmail.com /tele @alicia_teng`: Adds a member
-      named `Alicia Teng` to the member list. See how to [add applicant](#421-adding-an-applicant--addapplicant-or-adda)
+      named `Alicia Teng` to the member list. See how to [add applicant](#421-adding-an-applicant-addapplicant-or-adda)
       for more.
     - `adda /name Chan Rui Jia /phone 97777117 /interview 10/12/2023 1400`: Adds an applicant named `Chan Rui Jia` to
-      the list. See how to [add member](#411-adding-a-member--addmember) for more.
+      the list. See how to [add member](#411-adding-a-member-addmember) for more.
     - `deltm 1`: Deletes the member at the 1st position on the member list.
     - `finda Win Sheng`: Searches for all applicants with `Win Sheng` in their contact details. See how
-      to [find an applicant](#412-finding-members--findmember-or-findm) for more.
+      to [find an applicant](#412-finding-members-findmember-or-findm) for more.
     - `editm 1 /tag Design`: Edits the tag of the member at the 3rd position on the member list. See how
-      to [edit a member](#414-editing-a-member--editmember-or-editm) for more.
+      to [edit a member](#414-editing-a-member-editmember-or-editm) for more.
     - `exit`: Exits the application.
 
     <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
@@ -132,6 +107,7 @@ The key windows are labeled as follows:
 ![Interface](images/Interface_Guide.png)
 
 The "Help" window will look like as follows:
+
 ![Help_Window](images/helpMessage.png)
 
 --------------------------------------------------------------------------------------------------------------------
@@ -140,20 +116,25 @@ The "Help" window will look like as follows:
 
 This section of the User Guide will explain about each feature in detail.
 
-<div markdown="span" class="alert alert-primary">
+<div markdown="block" class="alert alert-primary">
 
 :information_source: **Notes about the inputs:**
 
 * Commands are **case-insensitive**.
+
 * Many of the commands below have _aliases_, or short-form versions that make them easier to type.  
   For example, the command `addMember` can be typed as `addm`. Usages of the aliases are documented below alongside the
   full command word, and all aliases can be used interchangeably with the full command word.
+
 * Words in UPPER_CASE are input parameters that you need to provide for that specific field.  
   For example, in `addm /name NAME`, `NAME` would be the input parameter for the member's name.
+
 * Fields in square brackets `[ ]` are optional fields.
+
 * Parameters can be in any order.  
   For example, `adda /name Taylor Swift /phone 91961969` and `adda /phone 91691969 /name Taylor Swift` will result in
   the same applicant added.
+
 * Items with … after them can be used multiple times including zero times.  
   For example, [tag/TAG]… can be used as (i.e. 0 times), tag/SWE, tag/UIUX tag/Product etc.
 
@@ -219,8 +200,10 @@ For a more efficient experience, use `findm` instead of `findMember`!
 </div>
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+
 If you would like to go back to the whole list of members, use `viewm`.
-You may check out the command [here](#413-viewing-members--s---viewmembers-or-view)
+You may check out the command [here](#413-viewing-members-viewmembers-or-view).
+
 </div>
 
 ![Find_Member](images/findMember.png)
@@ -229,7 +212,7 @@ You may check out the command [here](#413-viewing-members--s---viewmembers-or-vi
 
 Generates a list of all existing member(s). An example of where you might want to use this command is if
 you want to go back to viewing all members after a search
-with [`findMember`](#412-finding-members--findmember-or-findm).
+with [`findMember`](#412-finding-members-findmember-or-findm).
 
 ##### Usage:
 
@@ -343,15 +326,17 @@ For a more efficient experience, use `finda` instead of `findApplicant`!
 </div>
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+
 If you would like to go back to the whole list of members, use `viewa`.
-You may check out the command [here](#423-viewing-applicants--s---viewapplicants-or-viewa)
+You may check out the command [here](#423-viewing-applicants-viewapplicants-or-viewa)
+
 </div>
 
 #### 4.2.3 Viewing applicants: `viewApplicants` or `viewa`
 
 Generates a list of all existing applicant(s). An example of where you might want to use this command is if
 you want to go back to viewing all members after a search
-with [`findApplicant`](#422-finding-applicants--findapplicant-or-finda).
+with [`findApplicant`](#422-finding-applicants-findapplicant-or-finda).
 
 ##### Usage:
 
@@ -477,8 +462,10 @@ PLACEHOLDER
 
 Opens a window with a link to the user guide.
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+
 This window can also be opened from accessing the `Help` button.  
-Checkout the [Interface Walkthrough](#3-interface-walkthrough) to locate where the button is.
+Check out the [Interface Walkthrough](#3-interface-walkthrough) to locate where the button is.
+
 </div>
 
 #### 4.3.2 Exiting the application: `exit`
