@@ -2,6 +2,7 @@ package seedu.staffsnap.logic.parser;
 
 import static seedu.staffsnap.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.staffsnap.logic.commands.FindCommand.MESSAGE_WRONG_FORMAT;
+import static seedu.staffsnap.logic.commands.FindCommand.MESSAGE_TOO_LONG;
 
 import java.util.Arrays;
 
@@ -22,12 +23,17 @@ public class FindCommandParser implements Parser<FindCommand> {
      */
     public FindCommand parse(String args) throws ParseException {
         String trimmedArgs = args.trim();
+        String alphanumericRegex = "[\\p{Alnum}][\\p{Alnum} ]*";
+
         if (trimmedArgs.isEmpty()) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
-        } else if (!trimmedArgs.matches("^[a-zA-Z]*$")) {
+        } else if (!trimmedArgs.matches(alphanumericRegex)) {
             throw new ParseException((
                     String.format(MESSAGE_WRONG_FORMAT, FindCommand.MESSAGE_USAGE)));
+        } else if (trimmedArgs.length() > 55) {
+            throw new ParseException((
+                    String.format(MESSAGE_TOO_LONG, FindCommand.MESSAGE_USAGE)));
         }
 
         String[] nameKeywords = trimmedArgs.split("\\s+");

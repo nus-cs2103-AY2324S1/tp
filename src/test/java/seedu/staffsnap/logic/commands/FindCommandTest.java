@@ -108,7 +108,7 @@ public class FindCommandTest {
     @Test
     public void execute_multipleKeywords_noApplicantFound() {
         String expectedMessage = String.format(MESSAGE_APPLICANTS_LISTED_OVERVIEW, 0);
-        NameContainsKeywordsPredicate predicate = preparePredicate("NO_APPLICANTS_MATCH");
+        NameContainsKeywordsPredicate predicate = preparePredicate("NONE APPLICANTS MATCH");
         FindCommand command = new FindCommand(predicate);
 
         expectedModel.updateFilteredApplicantList(predicate);
@@ -176,7 +176,6 @@ public class FindCommandTest {
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(BENSON, DANIEL), model.getFilteredApplicantList());
     }
-
 
     @Test
     public void toStringMethod() {
