@@ -68,6 +68,7 @@ public class RescheduleCommand extends Command {
         Appointment rescheduledAppointment = createRescheduledAppointment(appointmentToReschedule, appointmentTime);
 
         model.updateFilteredAppointmentList(PREDICATE_SHOW_ALL_APPOINTMENTS);
+        model.updateFilteredAppointmentList(appointment -> !appointment.equals(appointmentToReschedule));
         lastShownList = model.getFilteredAppointmentList();
 
         // Clash in appointment slot
