@@ -18,7 +18,7 @@ public class GatherCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Gathers all emails of person whose details matches "
             + "the desire prompt\n"
-            + "Gather by ether Financial Plans or Tags. Not both.\n"
+            + "Gather by either Financial Plans or Tags. Not both.\n"
             + "Parameters: "
             + "[" + PREFIX_FINANCIAL_PLAN + "FINANCIAL_PLAN] or "
             + "[" + PREFIX_TAG + "TAG]\n"
