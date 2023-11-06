@@ -7,6 +7,8 @@ import static seedu.address.logic.Messages.MESSAGE_MISSING_INDEX;
 import static seedu.address.logic.Messages.MESSAGE_TOO_MANY_INDEXES;
 
 import java.time.LocalDateTime;
+import java.time.Month;
+import java.time.Year;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
@@ -191,7 +193,12 @@ public class ParserUtil {
             if (!LastContactedTime.isValidLastContactedTime(preppedTime)) {
                 throw new ParseException(LastContactedTime.MESSAGE_CONSTRAINTS);
             }
-            return preppedTime;
+            if (checkCorrectDay(preppedTime, time)) {
+                return preppedTime;
+            } else {
+                throw new ParseException(preppedTime.getMonth().toString()
+                        + " does not have " + time.substring(0, 2) + " days.");
+            }
         } catch (DateTimeParseException e) {
             throw new ParseException(LastContactedTime.MESSAGE_CONSTRAINTS);
         }
@@ -207,9 +214,38 @@ public class ParserUtil {
         requireNonNull(time);
         String trimmedStart = time.trim();
         try {
-            return LocalDateTime.parse(trimmedStart, FORMAT);
+            LocalDateTime result = LocalDateTime.parse(trimmedStart, FORMAT);
+            if (checkCorrectDay(result, time)) {
+                return result;
+            } else {
+                throw new ParseException(result.getMonth().toString()
+                        + "does not have " + time.substring(0, 2) + " days.");
+            }
         } catch (DateTimeParseException e) {
             throw new ParseException(MeetingTime.MESSAGE_CONSTRAINTS);
+        }
+    }
+
+    private static boolean checkCorrectDay(LocalDateTime localDateTime, String string) {
+        if (Year.isLeap(localDateTime.getYear())
+                && (localDateTime.getMonth() == Month.FEBRUARY && string.startsWith("29"))) {
+            return true;
+        }
+        Month thisMonth = localDateTime.getMonth();
+        if (!has31Days(thisMonth) && string.startsWith("31")) {
+            return false;
+        }
+        return thisMonth != Month.FEBRUARY
+                || (!string.startsWith("29") && !string.startsWith("30"));
+    }
+
+    private static boolean has31Days(Month month) {
+        requireNonNull(month);
+        switch (month) {
+        case FEBRUARY: case APRIL: case JUNE: case SEPTEMBER: case NOVEMBER:
+            return false;
+        default:
+            return true;
         }
     }
 
