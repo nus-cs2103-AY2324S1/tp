@@ -6,7 +6,7 @@ title: User Guide
 Flashlingo is a **desktop app for learning words by flash cards, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). Flashlingo is designed with beginner language learners in mind, specialising in helping them expand their vocabulary.
 
 * Table of Contents
-  {:toc}
+{:toc}
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -14,7 +14,7 @@ Flashlingo is a **desktop app for learning words by flash cards, optimized for u
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-1. Download the latest `flashlingo.jar` from [here](https://github.com/AY2324S1-CS2103T-T11-4/tp/releases) (Not finished yet).
+1. Download the latest `flashlingo.jar` from [here](https://github.com/AY2324S1-CS2103T-T11-4/tp/releases).
 
 1. Copy the file to the folder you want to use as the _home folder_ for your Flashlingo.
 
@@ -354,7 +354,7 @@ Then, use the `load` command to import the data.
 | **Help**                | `help`                                                                                                                     |
 | **List**                | `list`                                                                                                                     |
 | **Add**                 | `add w/<WORD> t/<TRANSLATION> [wl/<WORD_LANGUAGE>] [tl/<TRANSLATION_LANGUAGE>]` <br> e.g., `add w/regarder t/look`         |
-| **Delete**              | `delete <Index>`<br> e.g., `del 1`                                                                                         |
+| **Delete**              | `delete <Index>`<br> e.g., `delete 1`                                                                                      |
 | **Edit**                | `edit <INDEX> [w/<WORD>] [t/<TRANSLATION>] [wl/<WORD_LANGUAGE>] [tl/<TRANSLATION_LANGUAGE>]`<br> e.g., `edit 1 w/bye t/再见` |
 | **Find**                | `find KEYWORD`<br> e.g., `find bye`                                                                                        |
 | **Start**               | `start`                                                                                                                    |
