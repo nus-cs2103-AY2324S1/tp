@@ -46,6 +46,8 @@ public class OverviewPanel extends UiPart<Region> {
 
     private LineChart<String, Number> profitGraph;
 
+    private YearMonthPickerCombo ymp;
+
     private ObservableList<Transaction> transactionList;
 
     private TreeMap<YearMonth, MonthData> monthDataMap = new TreeMap<>();
@@ -76,9 +78,19 @@ public class OverviewPanel extends UiPart<Region> {
 
         updateMonthData();
         updateGraph();
-        changeMonthView(YearMonth.now());
+        updatePicker();
+        changeMonthView(ymp.getValue());
 
-        YearMonthPickerCombo ymp = new YearMonthPickerCombo(
+        this.transactionList.addListener((Change<? extends Transaction> change) -> {
+            updateMonthData();
+            updateGraph();
+            updatePicker();
+            changeMonthView(ymp.getValue());
+        });
+    }
+
+    private void updatePicker() {
+        ymp = new YearMonthPickerCombo(
                 monthDataMap.firstKey(),
                 monthDataMap.lastKey(),
                 monthDataMap.lastKey(),
@@ -89,13 +101,7 @@ public class OverviewPanel extends UiPart<Region> {
             changeMonthView(ymp.getValue());
         });
 
-        pickerContainer.getChildren().add(ymp);
-
-        this.transactionList.addListener((Change<? extends Transaction> change) -> {
-            updateMonthData();
-            updateGraph();
-            changeMonthView(ymp.getValue());
-        });
+        pickerContainer.getChildren().setAll(ymp);
     }
 
     private void changeMonthView(YearMonth month) {
