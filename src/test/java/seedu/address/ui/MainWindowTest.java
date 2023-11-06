@@ -1,9 +1,13 @@
 package seedu.address.ui;
 
-import javafx.stage.Stage;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 import org.testfx.framework.junit5.ApplicationTest;
+
+import javafx.stage.Stage;
+import java.nio.file.Path;
 import seedu.address.logic.Logic;
 import seedu.address.logic.LogicManager;
 import seedu.address.model.Model;
@@ -13,18 +17,14 @@ import seedu.address.storage.JsonTeamBookStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
 import seedu.address.storage.StorageManager;
 
-import java.nio.file.Path;
-
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-
 public class MainWindowTest extends ApplicationTest {
-
-    private MainWindow mainWindow;
-    private Stage primaryStage;
-    private Logic logic;
 
     @TempDir
     public Path temporaryFolder;
+
+    private Logic logic;
+    private Stage primaryStage;
+    private MainWindow mainWindow;
 
     @Override
     public void start(Stage stage) {
