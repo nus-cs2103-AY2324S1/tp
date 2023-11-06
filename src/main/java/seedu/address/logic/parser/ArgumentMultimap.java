@@ -63,6 +63,13 @@ public class ArgumentMultimap {
     }
 
     /**
+     * Returns whether the preamble is not a number.
+     */
+    public boolean checkPreambleIsNotNumber() {
+        return !getPreamble().matches("-?\\d+");
+    }
+
+    /**
      * Throws a {@code ParseException} if any of the prefixes given in {@code prefixes} appeared more than
      * once among the arguments.
      */

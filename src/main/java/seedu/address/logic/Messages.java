@@ -29,7 +29,7 @@ public class Messages {
      * Messages for appointment class.
      */
     public static final String MESSAGE_INVALID_APPOINTMENT_DISPLAYED_INDEX = "The appointment index provided is"
-            + "invalid";
+            + " invalid";
     public static final String MESSAGE_INVALID_SORT_ATTRIBUTE = "The attribute given is invalid, please"
             + " give one of the following attributes: %1$s";
     public static final String MESSAGE_PATIENT_DOES_NOT_EXIST = "Patient provided does not exist";
