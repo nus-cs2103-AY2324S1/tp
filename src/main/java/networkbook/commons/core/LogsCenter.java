@@ -92,13 +92,18 @@ public class LogsCenter {
         baseLogger.addHandler(consoleHandler);
 
         // add a FileHandler to log to a file
-        try {
-            FileHandler fileHandler = new FileHandler(LOG_FILE, MAX_FILE_SIZE_IN_BYTES, MAX_FILE_COUNT, true);
-            fileHandler.setFormatter(new SimpleFormatter());
-            fileHandler.setLevel(Level.ALL);
-            baseLogger.addHandler(fileHandler);
-        } catch (IOException e) {
-            logger.warning("Error adding file handler for logger.");
+        String filename = LOG_FILE;
+        boolean isLogFileCreated = false;
+        while (!isLogFileCreated) {
+            try {
+                FileHandler fileHandler = new FileHandler(filename, MAX_FILE_SIZE_IN_BYTES, MAX_FILE_COUNT, true);
+                fileHandler.setFormatter(new SimpleFormatter());
+                fileHandler.setLevel(Level.ALL);
+                baseLogger.addHandler(fileHandler);
+                isLogFileCreated = true;
+            } catch (IOException e) {
+                filename += ".1";
+            }
         }
     }
 
