@@ -732,3 +732,11 @@ Timestamp in the status bar is updated.
     1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
 1. _{ more test cases …​ }_
+
+# Appendix
+
+## Planned Enhancements
+
+1. Currently, the view panel can only be updated through the `view` command. We plan to make it so that clicking
+on a person in the list panel also updates the view panel to the selected person. The reason is although our application is made for
+CLI users, expecting that clicking on a person updates the view panel seems to be an intuitive and reasonable expected behaviour.

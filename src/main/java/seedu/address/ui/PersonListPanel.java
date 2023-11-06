@@ -41,29 +41,16 @@ public class PersonListPanel extends UiPart<Region> {
             personType.setText("Specialists");
         }
 
-        // set the text fill color after JavaFX initialization to prevent race condition
-        Platform.runLater(() -> {
-            if (personList.isEmpty()) {
-                personType.setTextFill(Color.GREY);
-            } else if (personList.get(0) instanceof Patient) {
-                personType.setTextFill(Color.AQUA);
-            } else {
-                personType.setTextFill(Color.GREENYELLOW);
-            }
-        });
         personList.addListener(
                 new ListChangeListener<Person>() {
                     @Override
                     public void onChanged(Change<? extends Person> c) {
                         if (personList.isEmpty()) {
                             personType.setText("No data found");
-                            personType.setTextFill(Color.GREY);
                         } else if (personList.get(0) instanceof Patient) {
                             personType.setText("Patients");
-                            personType.setTextFill(Color.AQUA);
                         } else {
                             personType.setText("Specialists");
-                            personType.setTextFill(Color.GREENYELLOW);
                         }
                     }
                 }
