@@ -24,8 +24,10 @@ import seedu.address.model.person.exceptions.PersonNotFoundException;
 import seedu.address.model.schedule.Date;
 import seedu.address.model.schedule.Schedule;
 import seedu.address.model.schedule.ScheduleIsOnDatePredicate;
+import seedu.address.model.schedule.Status;
 import seedu.address.testutil.AddressBookBuilder;
 import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.ScheduleBuilder;
 
 public class ModelManagerTest {
 
@@ -190,17 +192,18 @@ public class ModelManagerTest {
     public void updateTutorSchedules_success() {
         ModelManager model = new ModelManager();
         model.addPerson(ALICE);
-        model.addSchedule(SCHEDULE_ALICE_FIRST_JAN);
+        Schedule schedule = new ScheduleBuilder(SCHEDULE_ALICE_FIRST_JAN).withStatus(Status.COMPLETED).build();
+        model.addSchedule(schedule);
 
         Person editedPerson = new PersonBuilder().withName("John Doe").build();
-        Schedule editedSchedule = new Schedule(editedPerson, SCHEDULE_ALICE_FIRST_JAN.getStartTime(),
-            SCHEDULE_ALICE_FIRST_JAN.getEndTime());
+        Schedule editedSchedule = new Schedule(editedPerson, schedule.getStartTime(),
+            schedule.getEndTime(), schedule.getStatus());
 
         model.updateTutorSchedules(ALICE, editedPerson);
 
         // Check if the schedule is updated correctly
         assertTrue(model.getFilteredScheduleList().contains(editedSchedule));
-        assertFalse(model.getFilteredScheduleList().contains(SCHEDULE_ALICE_FIRST_JAN));
+        assertFalse(model.getFilteredScheduleList().contains(schedule));
     }
 
     @Test
