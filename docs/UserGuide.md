@@ -149,10 +149,10 @@ You can create a contact in your contact list.
 
 
 **Acceptable values:**
-- `NAME` must be alphanumeric and must not exist in the contact list.
+- `NAME` must be alphanumeric, cannot be blank and must not exist in the contact list.
 - `PHONE` must be a positive integer with at least 3 digits and must not exist in the contact list.
-- `EMAIL` must be alphanumeric with a @ domain and must not exist in the contact list.
-- `GROUP_NAME` must be alphanumeric and must exist in the contacts list. This is an optional parameter.
+- `EMAIL` must be alphanumeric with a @ domain, end with a domain label at least 2 characters long and must not exist in the contact list.
+- `GROUP_NAME` must be alphanumeric. This is an optional parameter.
 
 
 **Example(s):**
@@ -163,7 +163,7 @@ You can create a contact in your contact list.
 
 
 **Potential error(s):**
-- Incorrect format (e.g., no prefix):
+- Incorrect format (e.g., no prefix, duplicate prefixes):
 
 
 - The person you are trying to add already exists in your contact list: `This person already exists in your contact list`.
@@ -177,7 +177,7 @@ You can delete a person from the contact list.
 
 
 **Acceptable values:**
-- `NAME` must be alphanumeric.
+- `NAME` must be alphanumeric and cannot be blank.
 
 
 **Example(s):**
@@ -186,7 +186,7 @@ You can delete a person from the contact list.
 
 
 **Potential error(s):**
-- Invalid format (e.g., no prefix):
+- Invalid format (e.g., no prefix, duplicate prefixes):
 
 
 - The contact you are trying to delete does not exist in your contact list: `Please provide the person's full name as in the existing contact list`.
@@ -200,7 +200,7 @@ You can find all the persons from the contact list with the matching keyword.
 
 
 **Acceptable values:**
-- `KEYWORDS_IN_NAME` must be alphanumeric, and it is not case sensitive.
+- `KEYWORDS_IN_NAME` must be alphanumeric and cannot be blank, and it is not case sensitive.
 
 
 **Example(s):**
@@ -209,7 +209,7 @@ You can find all the persons from the contact list with the matching keyword.
 
 
 **Potential error(s):**
-- Invalid format (e.g., no prefix):
+- Invalid format (e.g., no prefix, duplicate prefixes):
 
 
 
@@ -254,8 +254,7 @@ You can create a group in your contact list.
 
 
 **Potential error(s):**
-- Incorrect format (e.g., no prefix):
-
+- Invalid command format (e.g., no prefix, duplicate prefixes):
 
 - The group you are trying to add already exists in your contact list: `This group already exists in the contact list`.
 
@@ -278,7 +277,7 @@ You can delete a group in your contact list.
 
 
 **Potential error(s):**
-- Incorrect format (e.g., no prefix):
+- Incorrect format (e.g., no prefix, duplicate prefixes):
 
 
 - The group you are trying to delete does not exist in your contact list:
@@ -303,7 +302,7 @@ You can add remarks to a group in your contact list.
 
 
 **Potential errors(s):**
-- Incorrect format (e.g. no prefix):
+- Incorrect format (e.g. no prefix, duplicate prefixes):
 - The group you entered does not exist in your contact list:
 
 
@@ -325,7 +324,7 @@ You can find a group in your contact list. This allows you to view the group's m
 
 
 **Potential error(s):**
-- Incorrect format (e.g. no prefix):
+- Incorrect format (e.g. no prefix, duplicate prefixes):
 
 
 - The group you are trying to find does not exist in your contact list:
@@ -374,7 +373,7 @@ You can add an existing contact to an existing group.
 
 
 **Potential error(s):**
-- Incorrect format (e.g., no prefix):
+- Incorrect format (e.g., no prefix, duplicate prefixes):
 
 
 - The contact you are trying to add is already a member of the group: `NAME is already in this group: GROUP_NAME`.
@@ -401,7 +400,7 @@ You can remove a person from a group.
 
 
 **Potential error(s):**
-- Incorrect format (e.g., no prefix):
+- Incorrect format (e.g., no prefix, duplicate prefixes):
 
 
 - The contact you are trying to remove is not a member of the group: `Bernice Yu is not in this group: CS2103T`.
@@ -421,7 +420,7 @@ You can add time slots when your contacts are available.
 
 
 **Acceptable values:**
-- `NAME` must be alphanumeric.
+- `NAME` must be alphanumeric and cannot be blank.
 - `FREE_TIME` must be a time slot within a weekly schedule.
 
 
@@ -449,7 +448,7 @@ You can remove available time slots of your contacts.
 
 
 **Acceptable values:**
-- `NAME` must be alphanumeric.
+- `NAME` must be alphanumeric and cannot be blank.
 - `FREE_TIME` must be a time slot within a weekly schedule.
 - `FREE_TIME` must be a time slot that has been added to the contact.
 
@@ -476,7 +475,7 @@ You list all available time slots of your contacts.
 
 
 **Acceptable values:**
-- `NAME` must be alphanumeric.
+- `NAME` must be alphanumeric and cannot be blank.
 
 
 **Example(s):**
@@ -502,7 +501,7 @@ You can add a meeting time slot for your group.
 
 
 **Acceptable values:**
-- `GROUP_NAME` must be alphanumeric.
+- `GROUP_NAME` must be alphanumeric and cannot be blank.
 - `MEETING_TIME` must be a time slot within a weekly schedule.
 
 
@@ -510,7 +509,7 @@ You can add a meeting time slot for your group.
 - `addmeeting g/CS2100  t/mon 1400 - mon 1600`
   This adds a meeting for your group CS2100.
   Insert Image
-  Free time added to: 2100
+  Free time added to: CS2100
 
 
 **Potential error(s):**
@@ -519,7 +518,7 @@ You can add a meeting time slot for your group.
 
 
 ### Remove Meeting Time from a Group `deletetime`
-You remove meeting time for your groups.
+You can remove meeting times from your groups.
 
 
 **Format:** `deletetime g/GROUP_NAME t/MEETING_TIME`
@@ -529,7 +528,7 @@ You remove meeting time for your groups.
 
 
 **Acceptable values:**
-- `GROUP_NAME` must be alphanumeric.
+- `GROUP_NAME` must be alphanumeric and cannot be blank.
 
 
 - Group must contain `MEETING_TIME`.
@@ -558,7 +557,7 @@ You list meeting time for your groups.
 
 
 **Acceptable values:**
-- `GROUP_NAME` must be alphanumeric.
+- `GROUP_NAME` must be alphanumeric and cannot be blank.
 
 
 **Example(s):**
@@ -582,7 +581,7 @@ You can find a meeting time slot for your group where everyone is available.
 
 
 **Acceptable values:**
-- `GROUP_NAME` must be alphanumeric.
+- `GROUP_NAME` must be alphanumeric and cannot be blank.
 - `DURATION` must be an integer representing the meeting duration in minutes.
 
 
