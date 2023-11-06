@@ -57,8 +57,9 @@ Given below are my contributions to the project.
   * Release `1.3(final)` for PE-D
 
 * **Enhancements to existing features**:
-  * e.g. Hid the answers from the Display Card so as to simulate exam conditions
-  * e.g. Wrote additional tests for existing features to increase coverage from 60% to 63% (Pull requests [\#116]())
+  * Removal of test cases that were only applicable to the previous project [#83]()
+  * Hid the answers from the Display Card to simulate exam conditions [#72]()
+  * Wrote additional tests for existing features to increase coverage from 60% to 63% (Pull requests [\#116]())
 
 * **Documentation**:
   * User Guide:
@@ -73,8 +74,8 @@ Given below are my contributions to the project.
   * Developer Guide:
     * Add search implementation for future developments [\#98]()
     * Changed the diagrams in the guide to reflect latest project flow [\#190]()
-    * Included implementation for Export and Import and finalise proposed features [\#190]()
+    * Included implementation for Export and Import and finalised proposed features [\#190]()
 
 * **Tools**:
-  * Integrated codecov into github actions and CodeCov badge [\#107]()
+  * Integrated codecov into GitHub actions and CodeCov badge [\#107]()
 
