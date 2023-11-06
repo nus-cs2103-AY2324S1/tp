@@ -14,8 +14,10 @@ import org.junit.jupiter.api.Test;
 import org.testfx.framework.junit5.ApplicationTest;
 
 import javafx.application.Platform;
+import javafx.collections.ObservableList;
 import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
+import seedu.address.model.person.Note;
 import seedu.address.model.person.Person;
 
 public class NotesWindowTest extends ApplicationTest {
@@ -43,9 +45,14 @@ public class NotesWindowTest extends ApplicationTest {
     @Test
     public void displayNotes_correctNumberOfItemsAndContent_displaysExpectedNotes() {
         interact(() -> {
-            List<String> expectedNotes = Arrays.asList("Likes to swim", "Likes to run", "Is a chad");
+            List<Note> expectedNotes = Arrays.asList(
+                new Note("Likes to swim"),
+                new Note("Likes to run"),
+                new Note("Is a chad")
+            );
             verifyThat("#notesListView", hasItems(3));
-            assertTrue(notesWindow.getNotesListView().getItems().containsAll(expectedNotes));
+            ObservableList<Note> actualNotes = notesWindow.getNotesListView().getItems();
+            assertTrue(actualNotes.containsAll(expectedNotes));
         });
     }
 

@@ -1,6 +1,5 @@
 package seedu.address.ui;
 
-import java.util.List;
 import java.util.logging.Logger;
 
 import javafx.collections.FXCollections;
@@ -67,10 +66,6 @@ public class NotesWindow extends UiPart<Stage> {
 
     public void hide() {
         getRoot().hide();
-    }
-
-    public void focus() {
-        getRoot().requestFocus();
     }
 
     private void populateListView(ObservableList<Note> notes) {
