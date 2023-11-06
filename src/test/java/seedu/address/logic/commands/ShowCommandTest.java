@@ -15,10 +15,12 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
+import seedu.address.model.FullTaskList;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.lessons.Lesson;
+import seedu.address.model.lessons.Task;
 import seedu.address.model.person.Person;
 import seedu.address.model.state.State;
 
@@ -60,6 +62,21 @@ public class ShowCommandTest {
     }
 
     @Test
+    public void execute_validIndexFullTaskListList_success() {
+        model.setState(State.TASK);
+        Task taskToShow = model.getFullTaskList().get(INDEX_FIRST_PERSON.getZeroBased());
+        ShowCommand showCommand = new ShowCommand(INDEX_FIRST_PERSON);
+        String expectedMessage = String.format(ShowCommand.MESSAGE_SHOW_TASK_SUCCESS,
+                Messages.formatTask(taskToShow));
+        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(),
+                model.getScheduleList());
+        expectedModel.showTask(taskToShow);
+
+        assertCommandSuccess(showCommand, model, expectedMessage, expectedModel);
+    }
+
+
+    @Test
     public void execute_invalidIndexUnfilteredPersonList_throwsCommandException() {
         model.setState(State.STUDENT);
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
@@ -75,6 +92,15 @@ public class ShowCommandTest {
         ShowCommand showCommand = new ShowCommand(outOfBoundIndex);
 
         assertCommandFailure(showCommand, model, Messages.MESSAGE_INVALID_LESSON_DISPLAYED_INDEX);
+    }
+
+    @Test
+    public void execute_invalidIndexFullTaskList_throwsCommandException() {
+        model.setState(State.TASK);
+        Index outOfBoundIndex = Index.fromOneBased(model.getFullTaskList().size() + 1);
+        ShowCommand showCommand = new ShowCommand(outOfBoundIndex);
+
+        assertCommandFailure(showCommand, model, Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
     }
 
     @Test
