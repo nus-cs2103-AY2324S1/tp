@@ -2,7 +2,6 @@ package seedu.flashlingo.logic.parser;
 
 import static seedu.flashlingo.logic.Messages.MESSAGE_EMPTY_VALUE;
 import static seedu.flashlingo.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.flashlingo.logic.Messages.MESSAGE_SAME_WORD;
 import static seedu.flashlingo.logic.parser.CliSyntax.PREFIX_ORIGINAL_WORD;
 import static seedu.flashlingo.logic.parser.CliSyntax.PREFIX_ORIGINAL_WORD_LANGUAGE;
 import static seedu.flashlingo.logic.parser.CliSyntax.PREFIX_TRANSLATED_WORD;
@@ -39,10 +38,6 @@ public class AddCommandParser implements Parser<AddCommand> {
                 PREFIX_TRANSLATED_WORD, PREFIX_TRANSLATED_WORD_LANGUAGE);
         String originalWord = argMultimap.getValue(PREFIX_ORIGINAL_WORD).get().trim();
         String translationWord = argMultimap.getValue(PREFIX_TRANSLATED_WORD).get().trim();
-
-        if (originalWord.toUpperCase().equals(translationWord.toUpperCase())) {
-            throw new ParseException(String.format(MESSAGE_SAME_WORD, AddCommand.MESSAGE_USAGE));
-        }
 
         if (originalWord.isEmpty() | translationWord.isEmpty()) {
             throw new ParseException(String.format(MESSAGE_EMPTY_VALUE, AddCommand.MESSAGE_USAGE));

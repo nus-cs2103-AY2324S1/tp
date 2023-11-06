@@ -1,5 +1,8 @@
 package seedu.flashlingo.model.flashcard;
 
+import static seedu.flashlingo.commons.util.AppUtil.checkArgument;
+import static seedu.flashlingo.logic.Messages.MESSAGE_SAME_WORD;
+
 import java.util.Date;
 
 import seedu.flashlingo.model.flashcard.words.OriginalWord;
@@ -21,7 +24,6 @@ public class FlashCard {
     private boolean isRemembered; //if successfully remembers word
 
     private boolean isRevealed = false;
-
     /**
      * Constructor for Flashcard
      *
@@ -36,6 +38,7 @@ public class FlashCard {
         this.whenToReview = whenToReview;
         this.translatedWord = translatedWord;
         this.originalWord = originalWord;
+        checkArgument(isValidWord(originalWord, translatedWord), MESSAGE_SAME_WORD);
     }
 
     /**
@@ -82,6 +85,9 @@ public class FlashCard {
         return this.isRevealed;
     }
 
+    private boolean isValidWord(OriginalWord word, TranslatedWord translate) {
+        return !word.getWord().equalsIgnoreCase(translate.getWord());
+    }
     /**
      * Edits the flashCard
      * @param changes The new word to replace the old word
