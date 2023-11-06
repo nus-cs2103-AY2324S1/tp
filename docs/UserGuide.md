@@ -47,6 +47,7 @@ ProjectPRO is optimized for use via a Command Line Interface (CLI) while preserv
 8. [Commands to Manage Group](#commands-to-manage-group)
 - [Adding a Group `new`](#adding-a-group-new)
 - [Deleting a Group `delete`](#deleting-a-group-delete)
+- [Adding remarks to a Group `remark`](#adding-remarks-to-a-group-remark)
 - [Finding a Group `find`](#finding-a-group-find)
 - [Listing a Group `list`](#listing-a-group-list)
 - [Grouping a Person `group`](#grouping-a-person-group)
