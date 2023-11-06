@@ -321,7 +321,7 @@ Examples:
 
 ### Clearing the output : `clearresultbox`
 
-Clears the output window.
+Clears the Result Box.
 
 Format: `clearresultbox`
 
