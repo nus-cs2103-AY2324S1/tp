@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import networkbook.commons.exceptions.NullValueException;
 import networkbook.commons.util.JsonObject;
 
 /**

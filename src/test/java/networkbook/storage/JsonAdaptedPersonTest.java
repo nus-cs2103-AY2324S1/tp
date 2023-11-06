@@ -122,7 +122,7 @@ public class JsonAdaptedPersonTest {
 
     @Test
     public void assertFieldsAreNotNull_linksContainNull_throwsNullValueException() {
-        JsonAdaptedPerson person = new JsonAdaptedPerson(VALID_NAME, VALID_PHONES, VALID_EMAILS,CONTAINING_NULL_LINKS,
+        JsonAdaptedPerson person = new JsonAdaptedPerson(VALID_NAME, VALID_PHONES, VALID_EMAILS, CONTAINING_NULL_LINKS,
                 VALID_GRADUATION, VALID_COURSES, VALID_SPECIALISATIONS, VALID_TAGS, VALID_PRIORITY);
         assertThrows(NullValueException.class, person::assertFieldsAreNotNull);
     }

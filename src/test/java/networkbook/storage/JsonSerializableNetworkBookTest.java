@@ -10,7 +10,6 @@ import org.junit.jupiter.api.Test;
 
 import networkbook.commons.exceptions.DuplicateEntryException;
 import networkbook.commons.exceptions.IllegalValueException;
-import networkbook.commons.exceptions.NullValueException;
 import networkbook.commons.util.JsonUtil;
 import networkbook.model.NetworkBook;
 import networkbook.testutil.TypicalPersons;

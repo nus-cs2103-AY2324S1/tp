@@ -44,8 +44,8 @@ public class JsonUtil {
         FileUtil.writeToFile(jsonFile, toJsonString(objectToSerialize));
     }
 
-    private static <T extends JsonObject> T deserializeObjectFromJsonFile(Path jsonFile, Class<T> classOfObjectToDeserialize)
-            throws IOException, NullValueException {
+    private static <T extends JsonObject> T deserializeObjectFromJsonFile(
+            Path jsonFile, Class<T> classOfObjectToDeserialize) throws IOException, NullValueException {
         return fromJsonString(FileUtil.readFromFile(jsonFile), classOfObjectToDeserialize);
     }
 
