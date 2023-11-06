@@ -77,6 +77,8 @@ Click on the relevant links to easily navigate through the guide and access the 
 * Items in square brackets are optional.<br>
   e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 
+* Unless explicitly allowed, blank inputs or inputting any number of spaces as an argument for a field is invalid.
+
 * Items with `…`​ after them can be used multiple times including zero times.<br>
   e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
 
@@ -112,15 +114,20 @@ number) into contact book.
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS nk/NEXT_KIN nkp/NEXT_KIN_PHONE [fp/FINANCIAL_PLAN] [t/TAG]…​`
 
+* Adding a person with the exact same name (case-sensitive) as a person currently in the contact book will cause the
+    command to fail.
+* To prevent accidentally adding duplicates, you can use [Find](#locating-persons-by-name-financial-plan-andor-tag--find)
+    to check if you have already added the person already.
+
 Acceptable Values:
-1. NAME - any value is possible
-2. PHONE_NUMBER - Numbers (0-9) and symbols, but no alphabets
+1. NAME - Alphanumeric or space characters only
+2. PHONE_NUMBER - Numbers (0-9) only and at least 3 digits long
 3. EMAIL - string in valid email format
 4. ADDRESS - any value is possible
-5. NEXT_KIN - any value is possible
-6. NEXT_KIN_PHONE - Numbers (0-9), and symbols, no alphabets
-7. FINANCIAL_PLAN - Alphanumeric or Space characters
-8. TAG - Alphanumeric
+5. NEXT_KIN - Alphanumeric or space characters only
+6. NEXT_KIN_PHONE - Numbers (0-9) only and at least 3 digits long
+7. FINANCIAL_PLAN - Alphanumeric or space characters only
+8. TAG - Alphanumeric characters only
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A person can have any number of Financial Plans (including 0)
@@ -163,6 +170,8 @@ Format: `edit ENTRY_INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [nk/NE
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
+* Editing the name of a person to be the exact same name as another person currently in the contact book
+    (case-sensitive) will cause the command to fail.
 * When editing financial plans or tags, the existing financial plans or tags of the person will be removed i.e adding of tags is not cumulative.
 * You can remove all the person’s tags by typing `t/` without
     specifying any tags after it.
@@ -172,14 +181,14 @@ Format: `edit ENTRY_INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [nk/NE
 
 Acceptable Values:
 1. ENTRY_INDEX - Number (1 to current size of the contact book)
-2. NAME - any value is possible
-3. PHONE_NUMBER - Numbers (0-9) and symbols, no alphabets
+2. NAME - Alphanumeric or space characters only
+3. PHONE_NUMBER - Numbers (0-9) only and at least 3 digits long
 4. EMAIL - string in valid email format
 5. ADDRESS - any value is possible
-6. NEXT_KIN - any value is possible
-7. NEXT_KIN_PHONE - Numbers (0-9), and symbols, no alphabets
-8. FINANCIAL_PLAN - Alphanumeric or Space characters
-9. TAG - Alphanumeric
+6. NEXT_KIN - Alphanumeric or space characters only
+7. NEXT_KIN_PHONE - Numbers (0-9) only and at least 3 digits long
+8. FINANCIAL_PLAN - Alphanumeric or space characters only
+9. TAG - Alphanumeric characters only
 
 Examples:
 *  `edit 4 n/john doe a/23 woodlands ave 123` Edits the name and address of the 1st person to be `john doe` and `woodlands ave 123` respectively.
@@ -205,6 +214,7 @@ Finds persons whose names, tags or financial plans contain any of the specified 
 Format: `find [n/NAME]…​ [fp/FINANCIAL_PLAN]…​ [t/TAG]…​`
 
 * At least one of the optional fields must be provided.
+* This command will ignore other prefixes. Using them anyway can cause undefined behaviour.
 * The search is case-insensitive. e.g `hans` will match `Hans`
 * For names, only full words will be matched e.g. `Han` will not match `Hans`
 * Calling this command on a sorted list will retain the sorted quality of the list.
@@ -368,17 +378,17 @@ _Details coming soon ..._
 
 ## Command summary
 
-| Action       | Format, Examples                                                                                                                                                                                                        |
-|--------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**      | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS nk/NEXT_KIN nkp/NEXT_KIN_PHONE [t/TAG]…​` <br> e.g., `add n/John p/80101010 e/johndoe@gmail.com a/Punggol Central Blk 444 #15-32 820123 nk/Brennan nkp/82020202 [t/TAG]…​` |
-| **Clear**    | `clear`                                                                                                                                                                                                                 |
-| **Delete**   | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                                                     |
-| **Edit**     | `edit ENTRY_INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [nk/NEXT_KIN] [nkp/NEXT_KIN_PHONE] [t/TAG]…​`<br> e.g.,`edit 1 n/john doe a/23 woodlands ave 123`                                                     |
-| **Find**     | `find [n/NAME]…​ [fp/FINANCIAL_PLAN]…​ [t/TAG]…​`<br> e.g., `find n/James n/Jake`                                                                                                                                       |
-| **Gather**   | `gather [fp/FINANCIAL PLAN]` or `gather [t/TAG]` <br> e.g., `gather fp/Basic Insurance Plan`                                                                                                                            |
-| **Schedule** | `schedule ENTRY_INDEX ap/APPOINTMENT_NAME d/APPOINTMENT_DATE`<br> e.g. `schedule 1 ap/Annual review of financial goals d/20-11-2023 15:00`                                                                              |
-| **Complete** | `complete [ENTRY_INDEX] [d/APPOINTMENT_DATE]` <br> e.g `complete 1` <br> e.g `complete 01-05-2023`                                                                                                                      |                                                                                                                                                                         |
-| **List**     | `list`                                                                                                                                                                                                                  |
-| **Help**     | `help`                                                                                                                                                                                                                  |
-| **Sort**     | `sort SORTING_FUNCTION` <br> e.g., `sort appointment`                                                                                                                                                                   |
+| Action       | Format, Examples                                                                                                                                                                                                |
+|--------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**      | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS nk/NEXT_KIN nkp/NEXT_KIN_PHONE [t/TAG]…​` <br> e.g., `add n/John p/80101010 e/johndoe@gmail.com a/Punggol Central Blk 444 #15-32 820123 nk/Brennan nkp/82020202`   |
+| **Clear**    | `clear`                                                                                                                                                                                                         |
+| **Delete**   | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                                             |
+| **Edit**     | `edit ENTRY_INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [nk/NEXT_KIN] [nkp/NEXT_KIN_PHONE] [t/TAG]…​`<br> e.g.,`edit 1 n/john doe a/23 woodlands ave 123`                                             |
+| **Find**     | `find [n/NAME]…​ [fp/FINANCIAL_PLAN]…​ [t/TAG]…​`<br> e.g., `find n/James n/Jake`                                                                                                                               |
+| **Gather**   | `gather [fp/FINANCIAL PLAN]` or `gather [t/TAG]` <br> e.g., `gather fp/Basic Insurance Plan`                                                                                                                    |
+| **Schedule** | `schedule ENTRY_INDEX ap/APPOINTMENT_NAME d/APPOINTMENT_DATE`<br> e.g. `schedule 1 ap/Annual review of financial goals d/20-11-2023 15:00`                                                                      |
+| **Complete** | `complete [ENTRY_INDEX] [d/APPOINTMENT_DATE]` <br> e.g `complete 1` <br> e.g `complete 01-05-2023`                                                                                                              |                                                                                                                                                                         |
+| **List**     | `list`                                                                                                                                                                                                          |
+| **Help**     | `help`                                                                                                                                                                                                          |
+| **Sort**     | `sort SORTING_FUNCTION` <br> e.g., `sort appointment`                                                                                                                                                           |
 
