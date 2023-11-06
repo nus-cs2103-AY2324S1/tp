@@ -50,8 +50,7 @@ public class RecordClassParticipationCommandParser implements Parser<RecordClass
         String participation = argMultimap.getValue(PREFIX_PARTICIPATION).get();
         if (!participation.equalsIgnoreCase("true")
                 && !participation.equalsIgnoreCase("false")) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    RecordClassParticipationCommand.MESSAGE_USAGE));
+            throw new ParseException(ClassDetails.MESSAGE_INVALID_PARTICIPATION);
         }
         boolean hasParticipated = Boolean.parseBoolean(participation);
         return new RecordClassParticipationCommand(studentNumber, tutorialIndex, hasParticipated);

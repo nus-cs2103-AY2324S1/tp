@@ -65,7 +65,7 @@ public class SetGradeCommandParserTest {
                 ClassDetails.getMessageInvalidAssignmentIndex()); // invalid assignment
 
         assertParseFailure(parser, STUDENT_NUMBER_DESC_AMY + VALID_ASSIGNMENT_DESC + INVALID_GRADE_DESC,
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, SetGradeCommand.MESSAGE_USAGE)); // invalid grade
+                ClassDetails.MESSAGE_INVALID_GRADE); // invalid grade
     }
 
     @Test

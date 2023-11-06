@@ -202,5 +202,12 @@ public class MainApp extends Application {
         } catch (IOException e) {
             logger.severe("Failed to save preferences " + StringUtil.getDetails(e));
         }
+
+        // Save the class manager data upon exiting the application
+        try {
+            storage.saveClassManager(model.getClassManager(), model.getClassManagerFilePath());
+        } catch (IOException e) {
+            logger.severe("Failed to save Class Manager data " + StringUtil.getDetails(e));
+        }
     }
 }
