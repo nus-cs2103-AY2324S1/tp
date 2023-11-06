@@ -246,12 +246,14 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 _{more aspects and alternatives to be added}_
 
-### Implementation of Singular, Optional Appointment Field
+### Implementation of Singular, Optional Fields
 
 #### Proposed Implementation
 
-We needed a way to add a property to `Person` that could be nullable, to reflect optionality within our
-field implementation.
+A way to add a property to `Person` that could be nullable was needed, to reflect optionality within our
+field implementation. While optional fields like `MedicalHistory` exist in HealthSync, these fields are
+Collections, and can natively handle the empty state. Singular optional properties can be added this way,
+but is hard to distinguish between properties that allow for multiple entries and fields that don't.
 
 <puml src="diagrams/AppointmentClassDiagram0.puml" width="250" />
 
@@ -269,9 +271,30 @@ able to assist in our coding.
 <puml src="diagrams/AppointmentClassDiagram1.puml" width="250" />
 
 Therefore, the implementation of optional fields now return its value wrapped in the Java
-`Optional` wrapper. When `getAppointment` is called now, the implementer will be informed of the
-type mismatch with the `Appointment` type, explicitly informing the implementer that this value is
-potentially `null`.
+`Optional` wrapper. In this example, when `getAppointment` is called now, the implementer will be
+informed of the type mismatch with the `Appointment` type, explicitly informing the implementer that
+this value is potentially `null`. By doing it in this way, we also guarantee to the implementer that
+the fields that do not generate an `Optional` wrapper cannot be empty.
+
+#### Design Considerations:
+
+**Aspect: Handling of Optional Fields**
+
+* **Alternative 1 (current choice):** Allow `null` values
+  * Pros: Simple to implement, and easy to understand what it means.
+  * Cons: Checks for null value required for every implementation of the optional field.
+    * This is partially circumvented using the `Optional` wrapper, which caused the team to favor
+      this implementation.
+* **Alternative 2:** Use abstracted "empty-value" objects that extend the given field
+  * Pros: No check of the empty state required by implementers, allows for simple code outside its
+          implementation.
+  * Cons: Non-negligible abstraction required to create an empty object and have it work in all cases
+          where the empty case is needed.
+
+### Implementation of Appointment Field
+
+`Appointment` is a special field belonging to the `Person` model class, as it implicitly stores a temporal
+relationship within itself.
 
 #### Design Considerations:
 
