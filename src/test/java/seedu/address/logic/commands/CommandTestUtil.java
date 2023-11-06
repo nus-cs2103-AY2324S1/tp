@@ -203,7 +203,7 @@ public class CommandTestUtil {
         try {
             commandResult = logicManager.execute(input);
         } catch (Exception e) {
-            fail("Expected CommandResult but exception was thrown : " + e + e.getMessage());
+            fail("Expected CommandResult but exception was thrown : " + e + " : " + e.getMessage());
             return;
         }
         assertEquals(expectedCommandResult, commandResult);

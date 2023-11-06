@@ -88,7 +88,7 @@ public class Specialist extends Person {
                 super.getPhone().getCopy(),
                 super.getEmail().getCopy(),
                 this.location.getCopy(),
-                this.getTags(),
+                tagCopies,
                 this.getSpecialty().getCopy()
         );
     }
