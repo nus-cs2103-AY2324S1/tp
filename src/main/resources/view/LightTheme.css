@@ -135,6 +135,14 @@
     -fx-text-fill: black;
 }
 
+.cell_color_label {
+    -fx-font-size: 11pt;
+    -fx-text-fill: black;
+    -fx-background-color: #f0f0f0;
+    -fx-padding: 2 3 2 3;
+    -fx-background-radius: 5;
+}
+
 .stack-pane {
     -fx-background-color: #f0f0f0;
 }
@@ -224,7 +232,7 @@
     -fx-padding: 4 20 4 20;
     -fx-border-width: 2;
     -fx-background-radius: 20;
-    -fx-background-color: white;
+    -fx-background-color: #f0f0f0;
     -fx-background-radius: 3px;
     -fx-font-size: 11pt;
 }

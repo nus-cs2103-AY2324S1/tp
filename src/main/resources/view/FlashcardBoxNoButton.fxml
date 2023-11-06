@@ -34,8 +34,16 @@
             </padding>
       </HBox>
       <FlowPane fx:id="tags" />
-      <Label fx:id="level" styleClass="cell_small_label" text="\$level" />
-         <Label fx:id="lang" styleClass="cell_small_label" text="\$lang" />
+        <VBox spacing="3">
+            <HBox alignment="CENTER_LEFT" spacing="5">
+                <Label styleClass="cell_small_label" text="Level:" />
+                <Label fx:id="level" styleClass="cell_color_label" text="\$level" />
+            </HBox>
+            <HBox fx:id="languageLabel" alignment="CENTER_LEFT" spacing="5">
+                <Label styleClass="cell_small_label" text="Translation language:" />
+                <Label fx:id="lang" styleClass="cell_color_label" text="\$lang" />
+            </HBox>
+        </VBox>
          <HBox alignment="CENTER_LEFT" spacing="5">
             <padding>
                <Insets right="5" top="5" />

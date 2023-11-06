@@ -1,6 +1,8 @@
 //@@author itsNatTan
 package seedu.flashlingo.ui;
 
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -47,9 +49,12 @@ public class FlashcardBox extends UiPart<Region> {
 
     @FXML
     private Button reveal;
+    @FXML
+    private HBox languageLabel;
 
     private MainWindow mw;
     private int index;
+    private BooleanProperty hasLanguage = new SimpleBooleanProperty(false);
 
     /**
      * Creates a {@code FlashCard code} with the given {@code FlashCard} and index to display.
@@ -66,16 +71,20 @@ public class FlashcardBox extends UiPart<Region> {
         original.setWrapText(true);
         translation.setWrapText(true);
         id.setText(displayedIndex + ") ");
-        original.setText(fc.getOriginalWord().toString() + ": ");
+        original.setText(fc.getOriginalWord().getWord() + ": ");
         if (fc.getIsRevealed()) {
-            translation.setText(flashCard.getTranslatedWord().toString());
+            translation.setText(flashCard.getTranslatedWord().getWord());
             reveal.setText(" Hide ");
         } else {
             translation.setText("");
             reveal.setText("Reveal");
         }
-        level.setText("Proficiency Level: " + fc.getProficiencyLevel().getLevel());
-        lang.setText("Translation language: " + fc.getTranslatedWord().getLanguage());
+        level.setText(Integer.toString(fc.getProficiencyLevel().getLevel()));
+        languageLabel.visibleProperty().bind(hasLanguage);
+        if (!fc.getTranslatedWord().getLanguage().equals("")) {
+            hasLanguage.setValue(true);
+            lang.setText(fc.getTranslatedWord().getLanguage());
+        }
     }
 
     /**
