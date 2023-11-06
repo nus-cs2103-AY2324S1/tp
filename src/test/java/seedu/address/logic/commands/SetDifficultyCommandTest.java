@@ -72,6 +72,13 @@ public class SetDifficultyCommandTest {
     }
 
     @Test
+    public void execute_setDifficultyInvalidIndex_failure() {
+        SetDifficultyCommand setDifficultyCommand = new SetDifficultyCommand(Index.fromZeroBased(999), "easy");
+
+        assertCommandFailure(setDifficultyCommand, model, "The card index provided is invalid");
+    }
+
+    @Test
     public void execute_withValidRandomIndex_success() {
         // to make it is valid, make sure random index has been set in model.
         Model modelToUse = new ModelManager(model.getDeck(), new UserPrefs());
