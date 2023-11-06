@@ -140,7 +140,7 @@ For those who need to view their staff list in another format, Tran$act allows y
 | \<SORT TYPE>   | asc (ascending) or desc (descending)                            |
 | ...            | Multiple entries allowed, separated by a space                  |
 
-- Extraneous parameters for commands that do not take in parameters (such as help, list, exit, clearstaff, cleartransaction, and clearresultbox) will be ignored. For example, if the command specifies 'help 123,' it will be interpreted as 'help.'
+- Extraneous parameters for commands that do not take in parameters (such as help, list, exit, clearstaff, cleartransaction, and clear) will be ignored. For example, if the command specifies 'help 123,' it will be interpreted as 'help.'
 </div>
 
 ### Adding transaction : `add`
