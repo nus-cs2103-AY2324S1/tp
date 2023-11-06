@@ -37,7 +37,7 @@ management tasks done faster than traditional GUI apps.
 
    * `exit` : Exits the app.
 
-6. To begin using Class Manager, configure Class Manager with your module information using the `config` command. For example: 
+6. To begin using Class Manager, configure Class Manager with your module information using the `config` command. For example:
    * `config #t/10 #a/1` configures Class Manager to have 10 tutorials and 1 assignment.
 
 7. That's it! You can now explore Class Manager! Refer to the [Commands](#commands) below for details of each command. <br>
