@@ -6,7 +6,9 @@
 
 # Tutorium User Guide
 
-Tutorium is a **desktop application for tuition centre staff** to obtain data analysis to plan marketing strategies. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.
+Welcome to Tutorium! Tutorium is a **desktop application for tuition centre administrative staff** to conduct data analysis for the planning of marketing strategies. Users can interact with it using a Command Line Interface (CLI), and it has a Graphical User Interface(GUI) created with JavaFX.
+
+Currently, Tutorium caters to the needs of tuition centre administrative staff under the O-Level and IP systems in Singapore, and supports adding data of students from Secondary 1 up to Secondary 4.
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -17,24 +19,24 @@ Tutorium is a **desktop application for tuition centre staff** to obtain data an
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-1. Download the latest `tutorium.jar` from [here](https://github.com/AY2324S1-CS2103T-W13-2/tp/releases).
+1. Download the latest `tutorium.jar` file from [here](https://github.com/AY2324S1-CS2103T-W13-2/tp/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your Tutorium.
+1. Copy the file to the folder you want to use as the _home folder_ for the Tutorium app.
 
 1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar tutorium.jar` command to run the application.<br>
-   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+   A GUI similar to the below should appear in a few seconds. Note that the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-    * `list` : Lists all contacts.
+    * `list` : Lists all students.
 
-    * `add n/John Doe p/12345678 e/johnd@example.com a/John street, block 123, #01-01 g/M l/2 m/KR mrt s/English` : Adds a contact named `John Doe` to the Address Book.
+    * `add n/John Doe p/12345678 e/johnd@example.com a/John street, block 123, #01-01 g/M l/2 m/KR mrt s/English` : Adds a student named `John Doe` to the Address Book.
 
-    * `delete John Doe` : Deletes the contact with matching name in the current list.
+    * `delete John Doe` : Deletes the student with the matching name in the current list.
 
-    * `clear` : Deletes all contacts.
+    * `clear` : Deletes the data of all students.
 
     * `exit` : Exits the app.
 
@@ -57,6 +59,11 @@ Tutorium is a **desktop application for tuition centre staff** to obtain data an
 * Items with `…`​ after them can be used multiple times including zero times.<br>
   e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
 
+* When providing parameters starting with any of the prefixes used by Tutorium `(n/, p/, e/, a/, g/, l/, n/, s/ and d/)` to fields,
+  users are discouraged from adding spaces between the prefix for that field and the input value. This is because the addition
+  of spaces will cause Tutorium to interpret the prefix in the input value as an actual prefix for a field and not as part of the input value.
+  e.g. Filtering students with the address `e/house` should be done with the command `filter a/e/house` rather than `filter a/ e/house`.
+
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
@@ -68,7 +75,7 @@ Tutorium is a **desktop application for tuition centre staff** to obtain data an
 
 ### Viewing help : `help`
 
-Shows a message explaning how to access the help page.
+Displays the URL for the User Guide.
 
 ![help message](images/helpMessage.png)
 
@@ -81,10 +88,12 @@ Adds a student's data to the address book.
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS g/GENDER l/SEC_LEVEL m/MRT STATION [s/SUBJECT]… [d/ENROL_DATE]…​`
 
+* The accepted range of secondary school levels is from Secondary 1 to Secondary 4.
 * When adding subjects, if no enrol date is provided, the date on which the command was executed will be applied to all subjects listed by default.
   * If only 1 enrol date is provided, the same enrol date will be applied to all subjects listed.
   * If the number of enrol dates provided is the same as the number of subjects listed, the order in which enrol dates are applied to subjects will be the same as the order in which they are provided.
   * Any mismatch between the number of subjects and the number of enrol dates provided (other than the cases listed above) will result in an error.
+* Simply providing 1 enrol date without providing any corresponding subject(s) will result in an error.
 
 <box type="tip" seamless>
 
@@ -99,15 +108,15 @@ Examples:
 
 ### Importing data from .csv file: `import`
 
-Imports students datas to the address book.
+Imports students' data into Tutorium.
 1. Move your .csv file into the folder containing Tutorium.
-2. Enter the command with the following format.
+2. Enter the import command with the following format (shown below).
 
 Format: `import FILENAME.csv`
 
 <box type="tip" seamless>
 
-**Note:** The column should have "Name", "Phone", "Email", "Address", "Gender", "Sec level", "Nearest Mrt Station", "Subject"
+**Note:** The columns should be "Name", "Phone", "Email", "Address", "Gender", "Sec level", "Nearest Mrt Station", "Subject"
 </box>
 
 Examples:
@@ -126,10 +135,12 @@ Format:
 
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* When editing subjects, if no enrol date is provided, the date on which the command was executed will be applied to all subjects listed by default. 
-- If only 1 enrol date is provided, the same enrol date will be applied to all subjects listed. 
-- If the number of enrol dates provided is the same as the number of subjects listed, the order in which enrol dates are applied to subjects will be the same as the order in which they are provided. 
-- Any mismatch between the number of subjects and the number of enrol dates provided (other than the cases listed above) will result in an error.
+* The accepted range of secondary school levels is from Secondary 1 to Secondary 4.
+* When editing subjects, if no enrol date is provided, the date on which the command was executed will be applied to all subjects listed by default.
+  * If only 1 enrol date is provided, the same enrol date will be applied to all subjects listed.
+  * If the number of enrol dates provided is the same as the number of subjects listed, the order in which enrol dates are applied to subjects will be the same as the order in which they are provided.
+  * Any mismatch between the number of subjects and the number of enrol dates provided (other than the cases listed above) will result in an error.
+* Simply providing 1 enrol date without providing any corresponding subject(s) will result in an error.
 
 Examples:
 *  `edit John Doe n/Joe` specify that you want to edit John Doe's name to "Joe".
@@ -194,10 +205,11 @@ Format: `filter prefix/FIELD_VALUE [MORE FIELDS]`
 * FIELD_VALUE: Case-sensitive string.
 * The student list shows only the students whose data fulfills all given conditions.
 * At least one condition must be provided.
+* All fields can be filtered except for the name and enrol date fields. When looking for students with a certain name or keyword in their name, refer to the section on the search feature.
 
 Examples:
 * `filter g/F s/English s/Physics`
-* `filter s/Physics` returns all students taking Physics subject <br>
+* `filter s/Physics` returns all students taking the Physics subject <br>
   <br>
   ![result for 'filter Physics'](images/ug_images/filterResult.png)
 
@@ -205,7 +217,7 @@ Examples:
 
 Sort the list of students data that fulfills the given conditions.
 
-Format: `sort in/[DESCRIPTION]` 
+Format: `sort in/[DESCRIPTION]`
 
 * `DESCRIPTION` should be `ASC` or `DESC`, non-case-sensitive.
 
@@ -281,7 +293,7 @@ Below is the chart generated after typing `trend y/2023`
 
 Export the statistical table or bar chart into PNG format.
 
-Format: `export v/[VISUAL]` 
+Format: `export v/[VISUAL]`
 
 * `VISUAL` should be `TABLE` or `BAR`, non-case-sensitive.
 * `TABLE` indicates exporting the table created, while `BAR` indicates exporting the bar chart created.
