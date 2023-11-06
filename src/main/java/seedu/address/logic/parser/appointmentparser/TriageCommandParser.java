@@ -1,6 +1,7 @@
 package seedu.address.logic.parser.appointmentparser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_APPOINTMENT_DISPLAYED_INDEX;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_APPOINTMENT_PRIORITY;
 
@@ -31,16 +32,15 @@ public class TriageCommandParser implements Parser<TriageCommand> {
 
         Index index;
 
+        if (argMultimap.getValue(PREFIX_APPOINTMENT_PRIORITY).isEmpty()
+                || argMultimap.getPreamble().isEmpty() || argMultimap.checkPreambleIsNotNumber()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, TriageCommand.MESSAGE_USAGE));
+        }
+
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (ParseException pe) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, TriageCommand.MESSAGE_USAGE), pe);
-        }
-
-        if (argMultimap.getValue(PREFIX_APPOINTMENT_PRIORITY).isEmpty()
-                || argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, TriageCommand.MESSAGE_USAGE));
+            throw new ParseException(MESSAGE_INVALID_APPOINTMENT_DISPLAYED_INDEX);
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_APPOINTMENT_PRIORITY);

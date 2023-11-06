@@ -2,6 +2,7 @@ package seedu.address.logic.parser.personparser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ILLNESSES;
 
 import java.util.Set;
@@ -32,19 +33,18 @@ public class UndiagnoseCommandParser implements Parser<UndiagnoseCommand> {
 
         Index index;
 
+        if (argMultimap.getValue(PREFIX_ILLNESSES).isEmpty()
+                || argMultimap.getPreamble().isEmpty() || argMultimap.checkPreambleIsNotNumber()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, UndiagnoseCommand.MESSAGE_USAGE));
+        }
+
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (ParseException pe) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, UndiagnoseCommand.MESSAGE_USAGE), pe);
+            throw new ParseException(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_ILLNESSES);
-
-        if (!argMultimap.getValue(PREFIX_ILLNESSES).isPresent()
-                || argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, UndiagnoseCommand.MESSAGE_USAGE));
-        }
 
         Set<Tag> illnesses = ParserUtil.parseIllnesses(argMultimap.getValue(PREFIX_ILLNESSES).get());
 
