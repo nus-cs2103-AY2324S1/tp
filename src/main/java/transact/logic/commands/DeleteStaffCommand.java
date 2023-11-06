@@ -2,12 +2,17 @@ package transact.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.ArrayList;
+
+import javafx.collections.ObservableMap;
 import transact.commons.util.ToStringBuilder;
 import transact.logic.Messages;
 import transact.logic.commands.exceptions.CommandException;
 import transact.model.Model;
 import transact.model.person.Person;
 import transact.model.person.PersonId;
+import transact.model.transaction.Transaction;
+import transact.model.transaction.info.TransactionId;
 import transact.ui.MainWindow.TabWindow;
 
 /**
@@ -36,6 +41,18 @@ public class DeleteStaffCommand extends Command {
         for (PersonId id : model.getAddressBook().getPersonMap().keySet()) {
             if (id.getValue().equals(personId)) {
                 Person deletedPerson = model.deletePerson(id);
+
+                // This will set transactions associated with the deleted person to not be associated with anyone
+                ArrayList<Transaction> transactionsToEdit = new ArrayList<>();
+                ObservableMap<TransactionId, Transaction> transactionMap = model.getTransactionMap();
+                transactionMap.values().stream().filter(t -> t.getPersonId().equals(id.getValue()))
+                        .forEach(transactionsToEdit::add);
+                transactionsToEdit.forEach(t -> {
+                    Transaction editedTransaction = new Transaction(t.getTransactionId(), t.getTransactionType(), t.getDescription(),
+                            t.getAmount(), t.getDate(), -1);
+                    model.setTransaction(t.getTransactionId(), editedTransaction);
+                });
+
                 return new CommandResult(
                         String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(deletedPerson)),
                         TabWindow.ADDRESSBOOK);
