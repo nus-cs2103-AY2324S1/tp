@@ -1,8 +1,12 @@
 package seedu.address.logic.parser;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_FIELDS;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_INDEX_FORMAT;
+import static seedu.address.logic.Messages.MESSAGE_MISSING_INDEX;
+import static seedu.address.logic.Messages.MESSAGE_TOO_MANY_INDEXES;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
@@ -38,14 +42,29 @@ public class ParserUtilTest {
     private static final String WHITESPACE = " \t\r\n";
 
     @Test
+    public void verifyNoArgs_argsPresent_throwsParseException() {
+        assertThrows(ParseException.class, MESSAGE_INVALID_FIELDS, () -> ParserUtil.verifyNoArgs("10 a"));
+    }
+
+    @Test
+    public void verifyNoArgs_noArgs_success() {
+        assertDoesNotThrow(() -> ParserUtil.verifyNoArgs(""));
+    }
+
+    @Test
     public void parseIndex_invalidInput_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseIndex("10 a"));
+        assertThrows(ParseException.class, MESSAGE_INVALID_INDEX_FORMAT, () -> ParserUtil.parseIndex("10 a"));
     }
 
     @Test
     public void parseIndex_outOfRangeInput_throwsParseException() {
-        assertThrows(ParseException.class, MESSAGE_INVALID_INDEX, (
+        assertThrows(ParseException.class, MESSAGE_INVALID_INDEX_FORMAT, (
                 ) -> ParserUtil.parseIndex(Long.toString(Integer.MAX_VALUE + 1)));
+    }
+
+    @Test
+    public void parseIndex_emptyInput_throwsParseException() {
+        assertThrows(ParseException.class, MESSAGE_MISSING_INDEX, () -> ParserUtil.parseIndex(""));
     }
 
     @Test
@@ -59,27 +78,46 @@ public class ParserUtilTest {
 
     @Test
     public void parseIndexes_invalidInput_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseIndexes("10 10 w"));
+        assertThrows(ParseException.class, MESSAGE_INVALID_INDEX_FORMAT, () -> ParserUtil.parseIndexes("10 10 w", 3));
     }
 
     @Test
     public void parseIndexes_outOfRangeInput_throwsParseException() {
-        assertThrows(ParseException.class, MESSAGE_INVALID_INDEX, (
-                ) -> ParserUtil.parseIndexes("1 0 4"));
+        assertThrows(ParseException.class, MESSAGE_INVALID_INDEX_FORMAT, () -> ParserUtil.parseIndexes("1 0 4", 3));
+    }
+
+    @Test
+    public void parseIndexes_tooFewArgs_throwsParseException() {
+        assertThrows(ParseException.class, MESSAGE_MISSING_INDEX, () -> ParserUtil.parseIndexes("10 10", 3));
+    }
+
+    @Test
+    public void parseIndexes_tooManyNumericArgs_throwsParseException() {
+        assertThrows(ParseException.class, MESSAGE_TOO_MANY_INDEXES, () -> ParserUtil.parseIndexes("10 10", 1));
+    }
+
+    @Test
+    public void parseIndexes_tooManyNonNumericArgs_throwsParseException() {
+        assertThrows(ParseException.class, MESSAGE_INVALID_FIELDS, () -> ParserUtil.parseIndexes("10 w", 1));
+    }
+
+    @Test
+    public void parseIndexes_nonPositiveExpectedIndexes_throwsAssertionError() {
+        assertThrows(AssertionError.class, () -> ParserUtil.parseIndexes("", 0));
     }
 
     @Test
     public void parseIndexes_validInput_success() throws Exception {
         // Single index
         List<Index> singleIndexList = List.of(INDEX_FIRST_PERSON);
-        assertEquals(singleIndexList, ParserUtil.parseIndexes("1"));
+        assertEquals(singleIndexList, ParserUtil.parseIndexes("1", 1));
 
         // Multiple indexes
         List<Index> multipleIndexList = List.of(INDEX_FIRST_PERSON, INDEX_SECOND_PERSON, INDEX_THIRD_PERSON);
-        assertEquals(multipleIndexList, ParserUtil.parseIndexes("1 2 3"));
+        assertEquals(multipleIndexList, ParserUtil.parseIndexes("1 2 3", 3));
 
         // Different whitespaces
-        assertEquals(multipleIndexList, ParserUtil.parseIndexes(" 1  2      3   "));
+        assertEquals(multipleIndexList, ParserUtil.parseIndexes(" 1  2      3   ", 3));
     }
 
     @Test

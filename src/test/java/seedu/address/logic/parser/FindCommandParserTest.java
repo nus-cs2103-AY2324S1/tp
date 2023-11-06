@@ -27,7 +27,7 @@ public class FindCommandParserTest {
     @Test
     public void parse_nonEmptyPreambleArg_throwsParseException() {
         assertParseFailure(parser, " bobby n/Alice",
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+                MESSAGE_INVALID_COMMAND_FORMAT + "\n" + FindCommand.MESSAGE_USAGE);
     }
 
     @Test

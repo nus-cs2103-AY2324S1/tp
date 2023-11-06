@@ -17,6 +17,7 @@ import seedu.address.model.meeting.Meeting;
 public class DeleteMeetingCommand extends Command {
 
     public static final String COMMAND_WORD = "deletem";
+    public static final int EXPECTED_INDEXES = 1;
 
     public static final String MESSAGE_DELETE_MEETING_SUCCESS = "Meeting deleted: %1$s";
 

@@ -65,4 +65,19 @@ public class StringUtil {
             return false;
         }
     }
+
+    /**
+     * Returns true if {@code s} is an integer and false otherwise.
+     * @throws NullPointerException if {@code s} is null.
+     */
+    public static boolean isNumeric(String s) {
+        requireNonNull(s);
+
+        try {
+            Integer.parseInt(s);
+            return true;
+        } catch (NumberFormatException nfe) {
+            return false;
+        }
+    }
 }

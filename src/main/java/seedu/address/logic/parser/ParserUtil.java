@@ -1,6 +1,10 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_FIELDS;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_INDEX_FORMAT;
+import static seedu.address.logic.Messages.MESSAGE_MISSING_INDEX;
+import static seedu.address.logic.Messages.MESSAGE_TOO_MANY_INDEXES;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -31,10 +35,17 @@ import seedu.address.model.tag.Tag;
  * classes.
  */
 public class ParserUtil {
-
-    public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
-
     public static final DateTimeFormatter FORMAT = DateTimeFormatter.ofPattern("dd.MM.yyyy HHmm");
+
+    /**
+     * Checks if the arguments are empty.
+     * @throws ParseException if arguments is not empty.
+     */
+    public static void verifyNoArgs(String args) throws ParseException {
+        if (!args.isEmpty()) {
+            throw new ParseException(MESSAGE_INVALID_FIELDS);
+        }
+    }
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading
@@ -45,8 +56,11 @@ public class ParserUtil {
      */
     public static Index parseIndex(String oneBasedIndex) throws ParseException {
         String trimmedIndex = oneBasedIndex.trim();
+        if (trimmedIndex.equals("")) {
+            throw new ParseException(MESSAGE_MISSING_INDEX);
+        }
         if (!StringUtil.isNonZeroUnsignedInteger(trimmedIndex)) {
-            throw new ParseException(MESSAGE_INVALID_INDEX);
+            throw new ParseException(MESSAGE_INVALID_INDEX_FORMAT);
         }
         return Index.fromOneBased(Integer.parseInt(trimmedIndex));
     }
@@ -56,16 +70,29 @@ public class ParserUtil {
      * ArrayList of {@code Indexes} and returns it. Leading and trailing whitespaces
      * will be trimmed.
      *
-     * @throws ParseException if any indexes are invalid (not non-zero
-     *                        unsigned integer).
+     * @throws ParseException if any indexes are invalid (not non-zero unsigned integer)
+     *                        or if there are too many indexes provided.
      */
-    public static List<Index> parseIndexes(String oneBasedIndexes) throws ParseException {
-        String[] indexStrings = oneBasedIndexes.trim().split("\\s+");
+    public static List<Index> parseIndexes(String oneBasedIndexes, int expectedIndexes) throws ParseException {
+        assert expectedIndexes > 0 : "Expected indexes must be positive";
 
-        // not elegant to use streams due to checked exception
+        String[] indexStrings = oneBasedIndexes.trim().split("\\s+");
         List<Index> indexes = new ArrayList<>();
+
         for (String indexString : indexStrings) {
+            if (indexes.size() >= expectedIndexes) { // check if size overflows
+                if (StringUtil.isNumeric(indexString)) { // if it is another index, throw too many index exception
+                    throw new ParseException(MESSAGE_TOO_MANY_INDEXES);
+                } else { // otherwise, throw invalid field exception
+                    throw new ParseException(MESSAGE_INVALID_FIELDS);
+                }
+            }
+
             indexes.add(parseIndex(indexString));
+        }
+
+        if (indexes.size() < expectedIndexes) {
+            throw new ParseException(MESSAGE_MISSING_INDEX);
         }
 
         return indexes;

@@ -17,6 +17,7 @@ import seedu.address.model.person.Person;
 public class ViewContactCommand extends Command {
 
     public static final String COMMAND_WORD = "viewc";
+    public static final int EXPECTED_INDEXES = 1;
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Views detailed information of the person identified "
             + "by the index number used in the displayed person list.\n"

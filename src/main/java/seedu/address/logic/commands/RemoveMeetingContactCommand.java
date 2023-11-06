@@ -20,6 +20,7 @@ import seedu.address.model.meeting.Meeting;
 public class RemoveMeetingContactCommand extends Command {
 
     public static final String COMMAND_WORD = "rmmc";
+    public static final int EXPECTED_INDEXES = 2;
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Removes the attendee indicated by the attendee index in the attendees list of the meeting "

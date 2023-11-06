@@ -21,6 +21,7 @@ import seedu.address.model.person.Person;
 public class AddMeetingContactCommand extends Command {
 
     public static final String COMMAND_WORD = "addmc";
+    public static final int EXPECTED_INDEXES = 2;
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Adds the contact indicated by the contact index to the attendees list of the meeting "

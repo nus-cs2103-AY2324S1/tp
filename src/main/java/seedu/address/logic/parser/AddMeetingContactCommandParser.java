@@ -1,7 +1,5 @@
 package seedu.address.logic.parser;
 
-import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-
 import java.util.List;
 
 import seedu.address.commons.core.index.Index;
@@ -21,21 +19,17 @@ public class AddMeetingContactCommandParser implements Parser<AddMeetingContactC
      * @throws ParseException if the user input does not conform to the expected format
      */
     public AddMeetingContactCommand parse(String args) throws ParseException {
+        List<Index> indexes;
         try {
-            List<Index> indexes = ParserUtil.parseIndexes(args);
-            if (indexes.size() != 2) {
-                throw new ParseException(
-                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddMeetingContactCommand.MESSAGE_USAGE));
-            }
-
-            Index meetingIndex = indexes.get(0);
-            Index contactIndex = indexes.get(1);
-            return new AddMeetingContactCommand(meetingIndex, contactIndex);
+            indexes = ParserUtil.parseIndexes(args, AddMeetingContactCommand.EXPECTED_INDEXES);
         } catch (ParseException pe) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddMeetingContactCommand.MESSAGE_USAGE), pe);
+            throw new ParseException(AddMeetingContactCommand.MESSAGE_USAGE, pe);
         }
-    }
 
+        Index meetingIndex = indexes.get(0);
+        Index contactIndex = indexes.get(1);
+
+        return new AddMeetingContactCommand(meetingIndex, contactIndex);
+    }
 }
 

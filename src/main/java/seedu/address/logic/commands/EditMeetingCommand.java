@@ -35,6 +35,7 @@ import seedu.address.model.tag.Tag;
  */
 public class EditMeetingCommand extends Command {
     public static final String COMMAND_WORD = "editm";
+    public static final int EXPECTED_INDEXES = 1;
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the meeting identified "
             + "by the index number used in the displayed meeting list. "
