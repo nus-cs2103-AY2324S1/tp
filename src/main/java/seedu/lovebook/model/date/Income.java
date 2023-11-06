@@ -64,8 +64,8 @@ public class Income implements Comparable<Income> {
 
     @Override
     public int compareTo(Income o) {
-        int thisIncome = Integer.parseInt(this.toString());
-        int otherIncome = Integer.parseInt(o.toString());
+        long thisIncome = Long.parseLong(this.toString());
+        long otherIncome = Long.parseLong(o.toString());
         if (thisIncome > otherIncome) {
             return 1;
         } else if (thisIncome < otherIncome) {

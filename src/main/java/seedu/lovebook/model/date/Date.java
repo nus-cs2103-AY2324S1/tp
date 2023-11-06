@@ -231,6 +231,6 @@ public class Date implements Comparable<Date> {
 
     @Override
     public int compareTo(Date o) {
-        return this.getName().toString().compareTo(o.getName().toString());
+        return this.getName().toString().toLowerCase().compareTo(o.getName().toString().toLowerCase());
     }
 }
