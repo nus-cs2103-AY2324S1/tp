@@ -25,7 +25,7 @@ public class NotesWindow extends UiPart<Stage> {
     private static final String FXML = "NotesWindow.fxml";
 
     @FXML
-    private ListView<String> notesListView;
+    private ListView<Note> notesListView;
 
     private final Person person;
 
@@ -73,21 +73,18 @@ public class NotesWindow extends UiPart<Stage> {
         getRoot().requestFocus();
     }
 
-    private void populateListView(List<Note> notes) {
-        ObservableList<String> notesObservableList = FXCollections.observableArrayList();
-        for (Note note : notes) {
-            notesObservableList.add(note.toString());
-        }
+    private void populateListView(ObservableList<Note> notes) {
+        ObservableList<Note> notesObservableList = FXCollections.observableArrayList(notes);
         notesListView.setItems(notesObservableList);
-        notesListView.setCellFactory(listView -> new ListCell<String>() {
+        notesListView.setCellFactory(listView -> new ListCell<Note>() {
             @Override
-            protected void updateItem(String note, boolean empty) {
+            protected void updateItem(Note note, boolean empty) {
                 super.updateItem(note, empty);
                 if (empty || note == null) {
                     setText(null);
                     setGraphic(null);
                 } else {
-                    Label label = new Label(note);
+                    Label label = new Label((getIndex() + 1) + ". " + note.toString());
                     label.setWrapText(true);
                     label.prefWidthProperty().bind(listView.widthProperty().subtract(40));
                     setGraphic(label);
@@ -99,7 +96,6 @@ public class NotesWindow extends UiPart<Stage> {
         notesListView.widthProperty().addListener((observable) -> {
             notesListView.refresh();
         });
-
     }
 
     @FXML
@@ -108,7 +104,7 @@ public class NotesWindow extends UiPart<Stage> {
         stage.close();
     }
 
-    public ListView<String> getNotesListView() {
+    public ListView<Note> getNotesListView() {
         return notesListView;
     }
 }
