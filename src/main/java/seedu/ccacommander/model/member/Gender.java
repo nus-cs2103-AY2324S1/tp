@@ -10,7 +10,7 @@ import static seedu.ccacommander.commons.util.StringUtil.capitaliseWordsInString
  */
 public class Gender {
 
-    public static final String MESSAGE_CONSTRAINTS = "Gender should only be one of the following: \n"
+    public static final String MESSAGE_CONSTRAINTS = "Genders should only be one of the following: \n"
             + "Male, Female, or Others";
 
     public final String value;

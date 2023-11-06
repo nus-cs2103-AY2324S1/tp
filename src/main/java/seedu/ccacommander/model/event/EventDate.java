@@ -14,7 +14,7 @@ import java.time.format.DateTimeParseException;
 public class EventDate {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Date should be a valid date in the format of YYYY-MM-DD, and it should not be blank";
+            "Dates should be valid dates in the format of YYYY-MM-DD, and it should not be blank";
 
     public static final DateTimeFormatter LOCAL_DATE_FORMATTER = DateTimeFormatter.ofPattern("YYYY-MM-DD");
     public final LocalDate date;
