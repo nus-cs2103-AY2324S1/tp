@@ -15,9 +15,8 @@ import seedu.address.model.ModelManager;
 import seedu.address.storage.JsonAddressBookStorage;
 import seedu.address.storage.JsonTeamBookStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
-import seedu.address.storage.StorageManager;
-
 import javafx.stage.Stage;
+import seedu.address.storage.StorageManager;
 
 public class MainWindowTest extends ApplicationTest {
 
