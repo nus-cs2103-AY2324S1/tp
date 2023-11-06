@@ -41,6 +41,11 @@ public class CompleteCommandParser implements Parser<CompleteCommand> {
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_APPOINTMENT_DATE);
 
+        if (!completeDescriptor.getIndex().isEmpty() & argMultimap.getValue(PREFIX_APPOINTMENT_DATE).isPresent()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    CompleteCommand.MESSAGE_USAGE));
+        }
+
         if (argMultimap.getValue(PREFIX_APPOINTMENT_DATE).isPresent()) {
             LocalDate date = ParserUtil.parseDate(argMultimap.getValue(PREFIX_APPOINTMENT_DATE).get());
             completeDescriptor.setDate(date);
