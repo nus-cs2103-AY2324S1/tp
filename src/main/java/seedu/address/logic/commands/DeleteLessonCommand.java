@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.List;
 
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.lessons.Lesson;
@@ -27,6 +28,10 @@ public class DeleteLessonCommand extends Command {
         this.targetIndex = targetIndex;
     }
 
+    public DeleteLessonCommand(Index targetIndex) {
+        this.targetIndex = targetIndex.getOneBased();
+    }
+
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
@@ -48,4 +53,20 @@ public class DeleteLessonCommand extends Command {
         }
         return new CommandResult(String.format(MESSAGE_DELETE_LESSON_SUCCESS, lessonToDelete.toString()));
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof DeleteLessonCommand)) {
+            return false;
+        }
+
+        DeleteLessonCommand otherDeleteLessonCommand = (DeleteLessonCommand) other;
+        return targetIndex == otherDeleteLessonCommand.targetIndex;
+    }
+
 }
