@@ -1,6 +1,7 @@
 package seedu.lovebook.logic.parser;
 
 import static seedu.lovebook.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.lovebook.logic.Messages.MESSAGE_INVALID_FILTER_FORMAT;
 import static seedu.lovebook.logic.parser.CliSyntax.PREFIX_AGE;
 import static seedu.lovebook.logic.parser.CliSyntax.PREFIX_HEIGHT;
 import static seedu.lovebook.logic.parser.CliSyntax.PREFIX_HOROSCOPE;
@@ -31,25 +32,32 @@ public class SortCommandParser implements Parser<SortCommand> {
                 PREFIX_HEIGHT, PREFIX_INCOME, PREFIX_HOROSCOPE);
         argumentMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_AGE, PREFIX_HEIGHT, PREFIX_INCOME,
                 PREFIX_HOROSCOPE);
+
         String sequence = null;
         Prefix metric = null;
+        int prefixCount = 0;
         if (argumentMultimap.getValue(PREFIX_NAME).isPresent()) {
+            prefixCount++;
             sequence = argumentMultimap.getValue(PREFIX_NAME).get();
             metric = new Prefix("name/");
         }
         if (argumentMultimap.getValue(PREFIX_AGE).isPresent()) {
+            prefixCount++;
             sequence = argumentMultimap.getValue(PREFIX_AGE).get();
             metric = new Prefix("age/");
         }
         if (argumentMultimap.getValue(PREFIX_HEIGHT).isPresent()) {
+            prefixCount++;
             sequence = argumentMultimap.getValue(PREFIX_HEIGHT).get();
             metric = new Prefix("height/");
         }
         if (argumentMultimap.getValue(PREFIX_INCOME).isPresent()) {
+            prefixCount++;
             sequence = argumentMultimap.getValue(PREFIX_INCOME).get();
             metric = new Prefix("income/");
         }
         if (argumentMultimap.getValue(PREFIX_HOROSCOPE).isPresent()) {
+            prefixCount++;
             sequence = argumentMultimap.getValue(PREFIX_HOROSCOPE).get();
             metric = new Prefix("horoscope/");
         }
@@ -57,6 +65,10 @@ public class SortCommandParser implements Parser<SortCommand> {
                 && !sequence.equals(SortCommand.SEQUENCE_DESCENDING)) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
+        }
+        if (prefixCount > 1) {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_FILTER_FORMAT, SortCommand.MESSAGE_USAGE));
         }
         return new SortCommand(metric, sequence);
     }
