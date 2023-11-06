@@ -1,6 +1,6 @@
 ---
 layout: page
-title: ClubMemberContacts User Guide
+title: User Guide
 ---
 
 ClubMembersContacts (CMC) is an application designed to empower EXCO members of the School of Computing's CCAs in
@@ -30,8 +30,7 @@ to start keeping track of all your members and applicants!
 
 ## Table of Contents
 
-* Table of Contents
-  {:toc}
+* Table of Contents {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -122,10 +121,6 @@ This section of the User Guide will explain about each feature in detail.
 
 * Commands are **case-insensitive**.
 
-* Many of the commands below have _aliases_, or short-form versions that make them easier to type.  
-  For example, the command `addMember` can be typed as `addm`. Usages of the aliases are documented below alongside the
-  full command word, and all aliases can be used interchangeably with the full command word.
-
 * Words in UPPER_CASE are input parameters that you need to provide for that specific field.  
   For example, in `addm /name NAME`, `NAME` would be the input parameter for the member's name.
 
@@ -137,6 +132,15 @@ This section of the User Guide will explain about each feature in detail.
 
 * Items with … after them can be used multiple times including zero times.  
   For example, [tag/TAG]… can be used as (i.e. 0 times), tag/SWE, tag/UIUX tag/Product etc.
+
+</div>
+
+<div markdown="block" class="alert alert-info">
+
+:bulb: Many of the commands below have _aliases_, or short-form versions that make them easier to type (e.g. `addm`
+for `addMember`).  
+The aliases are documented below alongside the full command. For a more efficient experience, use the aliases instead of
+the full command word!
 
 </div>
 
@@ -173,10 +177,6 @@ Adds a member to the list of members in CMC.
 
 `adda /name John Doe /phone 92345678`
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-For a more efficient experience, use addm instead of addMember!
-</div>
-
 #### 4.1.2 Finding members: `findMember` or `findm`
 
 Find and generate a list of all existing member(s) whose information contain any of the specified keyword(s).
@@ -196,10 +196,6 @@ Find and generate a list of all existing member(s) whose information contain any
   This generates a list of all members whose details contain `Alicia`.
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-For a more efficient experience, use `findm` instead of `findMember`!
-</div>
-
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 
 If you would like to go back to the whole list of members, use `viewm`.
 You may check out the command [here](#413-viewing-members-viewmembers-or-view).
@@ -214,14 +210,15 @@ Generates a list of all existing member(s). An example of where you might want t
 you want to go back to viewing all members after a search
 with [`findMember`](#412-finding-members-findmember-or-findm).
 
-##### Usage:
+##### Format:
 
-`viewMembers`
+`viewMembers`<br/>
 `viewm`
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-For a more efficient experience, use `viewm` instead of `viewMembers`!
-</div>
+##### Example of usage:
+
+`viewMembers`<br/>
+This is the result of the command above.
 
 ![View_Member](images/viewMember.png)
 
@@ -233,8 +230,7 @@ The member at the specified index will be deleted from the members list.
 
 #### Usage:
 
-`deleteMember {index}`
-
+`deleteMember {index}`<br/>
 `delm {index}`
 
 #### Acceptable values for parameters:
@@ -271,25 +267,33 @@ Copies the details of the member at the specified index to the clipboard.
 
 ##### Usage:
 
-`copyMember {index}`
+`copyMember {index}`<br/>
 `cpm {index}`
 
 <div markdown="span" class="alert alert-primary">
 
 :information_source: **Notes about input parameter:** The input parameter will only take positive integers.
 If the index is negative or 0, or the member does not exist in the list, this command will throw an error.
+
 </div>
 
 ##### Example of usage:
 
-`copyMember 1` or `cpm 1`: This copies the details of the member at index 1 to the clipboard.
+`copyMember 1` or `cpm 1`
 
-{Image here}
+This copies the details of the member at index 1 to the clipboard.
+
+![Copy_Member](images/copyMember.jpg)
 
 The copied details will be as follows:
 
 ```
-PLACEHOLDER
+Name: Taylor Swift
+Phone: 91691969
+Email: taylorswift@era.tour
+Telegram: @tswift
+Tags: [Singer]
+Tasks:
 ```
 
 #### 4.1.7 Allocating a task to a member: `addTask` or `addt`
@@ -321,13 +325,10 @@ Find and generate a list of all existing applicants(s) whose information contain
   This generates a list of all members whose details contain `Rui`.
 
 ![Find_Applicant](images/findApplicant.png)
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-For a more efficient experience, use `finda` instead of `findApplicant`!
-</div>
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 
-If you would like to go back to the whole list of members, use `viewa`.
+If you would like to go back to the whole list of members, use `.
 You may check out the command [here](#423-viewing-applicants-viewapplicants-or-viewa)
 
 </div>
@@ -338,14 +339,15 @@ Generates a list of all existing applicant(s). An example of where you might wan
 you want to go back to viewing all members after a search
 with [`findApplicant`](#422-finding-applicants-findapplicant-or-finda).
 
-##### Usage:
+##### Format:
 
-`viewApplicants`
+`viewApplicants`<br/>
 `viewa`
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-For a more efficient experience, use `viewa` instead of `viewApplicants`!
-</div>
+##### Example of usage:
+
+`viewa`<br/>
+This is the result of the command above.
 
 ![View_Applicant](images/viewApplicants.png)
 
@@ -405,7 +407,7 @@ The applicant at the specified index will be deleted from the applicant list.
 
 ##### Format:
 
-`deleteApplicant INDEX`  
+`deleteApplicant INDEX`<br/>
 `dela INDEX`
 
 <div markdown="span" class="alert alert-warning">:exclamation: **CAUTION:**
@@ -422,14 +424,12 @@ If the index is negative or 0, or the applicant does not exist in the list, this
 ##### Example of usage:
 
 - `deleteApplicant 3` or `dela 3`
-  This deletes the applicant at index 1 in the applicant list.
+
+This deletes the applicant at index 1 in the applicant list.
 
 ![Delete_Applicant](images/deleteApplicant.png)
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-For a more efficient experience, use `dela` instead of `deleteApplicant`!
-</div>
 
-#### 4.2.6 Copying a applicant's details: `copyApplicant` or `cpa`
+#### 4.2.6 Copying an applicant's details: `copyApplicant` or `cpa`
 
 Copies the details of the applicant at the specified index to the clipboard.
 
@@ -446,14 +446,18 @@ If the index is negative or 0, or the applicant does not exist in the list, this
 
 ##### Example of usage:
 
-`copyApplicant 1` or `cpa 1`: This copies the details of the applicant at index 1 to the clipboard.
+`copyApplicant 1` or `cpa 1`
 
-{Image here}
+This copies the details of the applicant at index 1 to the clipboard.
+
+![Copy_Applicant](images/copyApplicant.jpg)
 
 The copied details will be as follows:
 
 ```
-PLACEHOLDER
+Name: Lady Gaga
+Phone: 99129969
+Interview Time: Interview time has not been set
 ```
 
 ### 4.3 General Features
