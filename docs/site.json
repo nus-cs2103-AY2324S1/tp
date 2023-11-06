@@ -1,7 +1,7 @@
 {
   "baseUrl": "",
   "titlePrefix": "LoveBook",
-  "titleSuffix": "LoveBook",
+  "titleSuffix": "",
   "faviconPath": "images/logo.png",
   "style": {
     "codeTheme": "light"

@@ -665,4 +665,13 @@ testers are expected to do more *exploratory* testing.
     * Close the app.
     * Expected: A `data` folder is created under the current repository where the jar file is located.
 
+## **Appendix: Planned Enhancements**
+
+1. Improve the command parser to be more robust. Some examples include:
+   - Gender entered while adding a new date is case-sensitive. We are planning to make it case-insensitive.
+   - Adding dates with the same name is currently not allowed. We are planning to allow this.
+   - Allowing some fields to be optional if user doesn't have access to the information. For example, if the user does
+     not know the income of the date, he/she can leave it blank. Currently, this is not allowed. We are planning to
+     allow this.
+
 ------------------------------------------------------------

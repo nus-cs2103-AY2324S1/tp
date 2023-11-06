@@ -95,14 +95,12 @@ online dating journey.
   as space characters surrounding line-breaks may be omitted when copied over to the application.
 
 <box type="info">
-
-    - `name` must include letters, numbers and spaces. It must not be left blank.
-    - `age` should be a positive integer between 18 and 150 (inclusive).
-    * `gender` should be either M or F. It is case sensitive.
-    * `horoscope` should be a valid zodiac sign. It is case insensitive.
-    * `income` (per month) should be a positive integer in SGD.
-    * `height` should be a positive integer in cm between 100cm and 250cm (inclusive).
-
+`name` can include letters, numbers and spaces. It must not be left blank. <br>
+`age` should be a positive integer between 18 and 150 (inclusive). <br>
+`gender` should be either M or F. It is case sensitive. <br>
+`horoscope` should be a valid zodiac sign. It is case insensitive. <br>
+`income` (per month) should be a positive integer in SGD. <br>
+`height` should be a positive integer in cm between 100cm and 250cm (inclusive). <br>
 </box>
 
 ### [Creation of new date: `add`](#creation-of-new-date)
@@ -381,6 +379,10 @@ your data. In the event of a power outage, all your data will be safe.
 
 **Q**: Where do I go if I have issues with LoveBook? <br>
 **A**: You may leave your issues [here](https://github.com/AY2324S1-CS2103T-F10-2/tp/issues).
+
+**Q**: What happens if I enter invalid data into the stored data file? <br>
+**A**: LoveBook will clear all the existing data and reset to as it was when you installed it. It is highly discouraged
+to manually edit the data file.
 
 --------------------------------------------------------------------------------------------------------------------
 
