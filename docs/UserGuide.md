@@ -1,6 +1,6 @@
 ---
 layout: page
-title: ClubMemberContacts User Guide
+title: User Guide
 ---
 
 ClubMembersContacts (CMC) is an application designed to empower EXCO members of the School of Computing's CCAs in
