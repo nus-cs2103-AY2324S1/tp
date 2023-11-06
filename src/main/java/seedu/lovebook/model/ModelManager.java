@@ -15,6 +15,7 @@ import javafx.collections.transformation.SortedList;
 import seedu.lovebook.commons.core.GuiSettings;
 import seedu.lovebook.commons.core.LogsCenter;
 import seedu.lovebook.logic.Messages;
+import seedu.lovebook.logic.commands.exceptions.CommandException;
 import seedu.lovebook.model.date.Date;
 import seedu.lovebook.model.date.RandomPredicate;
 
@@ -135,7 +136,10 @@ public class ModelManager implements Model {
     /**
      * Returns a random date from the date list.
      */
-    public void getRandomDate() {
+    public void getRandomDate() throws CommandException {
+        if (loveBook.getPersonList().size() == 0) {
+            throw new CommandException("Initialise list with dates before calling blindDates");
+        }
         Random randomGenerator = new Random();
         int randomIndex = randomGenerator.nextInt(loveBook.getPersonList().size());
         Date person = loveBook.getPersonList().get(randomIndex);
@@ -198,7 +202,10 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void getBestDate() {
+    public void getBestDate() throws CommandException {
+        if (loveBook.getPersonList().size() == 0) {
+            throw new CommandException("Initialise list with dates before calling bestMatch");
+        }
         ObservableList<Date> dateList = loveBook.getPersonList();
         Date bestDate = dateList.stream().max(Comparator.comparing(date -> date.getScore(this.datePrefs))).orElse(null);
         filteredDates.setPredicate(date -> date.equals(bestDate));

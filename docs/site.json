@@ -1,8 +1,8 @@
 {
   "baseUrl": "",
   "titlePrefix": "LoveBook",
-  "titleSuffix": "LoveBook Level-3",
-  "faviconPath": "images/SeEduLogo.png",
+  "titleSuffix": "LoveBook",
+  "faviconPath": "images/logo.png",
   "style": {
     "codeTheme": "light"
   },
