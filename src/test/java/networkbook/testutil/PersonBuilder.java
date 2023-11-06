@@ -107,7 +107,11 @@ public class PersonBuilder {
      * Sets the {@code Graduation} of the {@code Person} that we are building.
      */
     public PersonBuilder withGraduation(String graduation) {
-        this.graduation = new Graduation(graduation);
+        if (graduation != null) {
+            this.graduation = new Graduation(graduation);
+        } else {
+            this.graduation = null;
+        }
         return this;
     }
 
@@ -194,7 +198,11 @@ public class PersonBuilder {
      * Sets the {@code Priority} of the {@code Person} that we are building.
      */
     public PersonBuilder withPriority(String priority) {
-        this.priority = new Priority(priority);
+        if (priority != null) {
+            this.priority = new Priority(priority);
+        } else {
+            this.priority = null;
+        }
         return this;
     }
 

@@ -11,6 +11,7 @@ import networkbook.commons.core.Config;
 import networkbook.commons.core.LogsCenter;
 import networkbook.commons.core.Version;
 import networkbook.commons.exceptions.DataLoadingException;
+import networkbook.commons.exceptions.NullValueException;
 import networkbook.commons.util.ConfigUtil;
 import networkbook.commons.util.StringUtil;
 import networkbook.logic.Logic;
@@ -88,6 +89,10 @@ public class MainApp extends Application {
             logger.warning("Data file at " + storage.getNetworkBookFilePath() + " could not be loaded."
                     + " Will be starting with an empty NetworkBook.");
             initialData = new NetworkBook();
+        } catch (NullValueException e) {
+            logger.warning(e.getMessage());
+            logger.warning("Starting with an empty NetworkBook.");
+            initialData = new NetworkBook();
         }
 
         return new ModelManager(initialData, userPrefs);
@@ -125,6 +130,10 @@ public class MainApp extends Application {
             logger.warning("Config file at " + configFilePathUsed + " could not be loaded."
                     + " Using default config properties.");
             initializedConfig = new Config();
+        } catch (NullValueException e) {
+            logger.warning(e.getMessage());
+            logger.warning("Using default config properties.");
+            initializedConfig = new Config();
         }
 
         //Update config file in case it was missing to begin with or there are new/unused fields
@@ -155,6 +164,10 @@ public class MainApp extends Application {
         } catch (DataLoadingException e) {
             logger.warning("Preference file at " + prefsFilePath + " could not be loaded."
                     + " Using default preferences.");
+            initializedPrefs = new UserPrefs();
+        } catch (NullValueException e) {
+            logger.warning(e.getMessage());
+            logger.warning("Using default preferences");
             initializedPrefs = new UserPrefs();
         }
 

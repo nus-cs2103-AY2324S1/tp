@@ -5,6 +5,7 @@ import java.nio.file.Path;
 import java.util.Optional;
 
 import networkbook.commons.exceptions.DataLoadingException;
+import networkbook.commons.exceptions.NullValueException;
 import networkbook.model.ReadOnlyNetworkBook;
 import networkbook.model.ReadOnlyUserPrefs;
 import networkbook.model.UserPrefs;
@@ -15,7 +16,7 @@ import networkbook.model.UserPrefs;
 public interface Storage extends NetworkBookStorage, UserPrefsStorage {
 
     @Override
-    Optional<UserPrefs> readUserPrefs() throws DataLoadingException;
+    Optional<UserPrefs> readUserPrefs() throws DataLoadingException, NullValueException;
 
     @Override
     void saveUserPrefs(ReadOnlyUserPrefs userPrefs) throws IOException;
@@ -24,7 +25,7 @@ public interface Storage extends NetworkBookStorage, UserPrefsStorage {
     Path getNetworkBookFilePath();
 
     @Override
-    Optional<ReadOnlyNetworkBook> readNetworkBook() throws DataLoadingException;
+    Optional<ReadOnlyNetworkBook> readNetworkBook() throws DataLoadingException, NullValueException;
 
     @Override
     void saveNetworkBook(ReadOnlyNetworkBook networkBook) throws IOException;

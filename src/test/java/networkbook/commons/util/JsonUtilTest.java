@@ -1,12 +1,14 @@
 package networkbook.commons.util;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.io.IOException;
 import java.nio.file.Path;
 
 import org.junit.jupiter.api.Test;
 
+import networkbook.commons.exceptions.NullValueException;
 import networkbook.testutil.SerializableTestClass;
 import networkbook.testutil.TestUtil;
 
@@ -16,6 +18,7 @@ import networkbook.testutil.TestUtil;
 public class JsonUtilTest {
 
     private static final Path SERIALIZATION_FILE = TestUtil.getFilePathInSandboxFolder("serialize.json");
+    private static final Path EMPTY_FILE = TestUtil.getFilePathInSandboxFolder("empty.json");
 
     @Test
     public void serializeObjectToJsonFile_noExceptionThrown() throws IOException {
@@ -28,18 +31,23 @@ public class JsonUtilTest {
     }
 
     @Test
-    public void deserializeObjectFromJsonFile_noExceptionThrown() throws IOException {
+    public void readJsonFile_fileWithValidContent_noExceptionThrown() throws Exception {
         FileUtil.writeToFile(SERIALIZATION_FILE, SerializableTestClass.JSON_STRING_REPRESENTATION);
 
         SerializableTestClass serializableTestClass = JsonUtil
-                .deserializeObjectFromJsonFile(SERIALIZATION_FILE, SerializableTestClass.class);
+                .readJsonFile(SERIALIZATION_FILE, SerializableTestClass.class).get();
 
         assertEquals(serializableTestClass.getName(), SerializableTestClass.getNameTestValue());
         assertEquals(serializableTestClass.getListOfLocalDateTimes(), SerializableTestClass.getListTestValues());
         assertEquals(serializableTestClass.getMapOfIntegerToString(), SerializableTestClass.getHashMapTestValues());
     }
 
-    //TODO: @Test jsonUtil_readJsonStringToObjectInstance_correctObject()
-
-    //TODO: @Test jsonUtil_writeThenReadObjectToJson_correctObject()
+    @Test
+    public void readJsonFile_failToAssertNull_throwsNullValueException() throws Exception {
+        FileUtil.writeToFile(EMPTY_FILE, "{}");
+        JsonObject jsonObject = () -> {
+            throw new NullValueException();
+        };
+        assertThrows(NullValueException.class, () -> JsonUtil.readJsonFile(EMPTY_FILE, jsonObject.getClass()).get());
+    }
 }

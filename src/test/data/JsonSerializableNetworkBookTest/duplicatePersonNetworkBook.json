@@ -5,8 +5,8 @@
     "emails": [ "alice@example.com" ],
     "links": [ "paulice.sg" ],
     "graduation": "AY2324-S1",
-    "course": "Computer Science",
-    "specialisation": "Software Engineering",
+    "courses": [ "Computer Science" ],
+    "specialisations": [ "Software Engineering" ],
     "tags": [ "friends" ]
   }, {
     "name": "Alice Pauline",
@@ -14,8 +14,8 @@
     "emails": [ "pauline@example.com" ],
     "links": [ "paulice.sg" ],
     "graduation": "AY2324-S1",
-    "course": "Computer Science",
-    "specialisation": "Software Engineering",
+    "courses": [ "Computer Science" ],
+    "specialisations": [ "Software Engineering" ],
     "tags": [ "friends" ]
   } ]
 }

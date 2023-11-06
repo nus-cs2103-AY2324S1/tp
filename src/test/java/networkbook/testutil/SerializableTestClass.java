@@ -5,10 +5,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import networkbook.commons.util.JsonObject;
+
 /**
  * A class used to test serialization and deserialization
  */
-public class SerializableTestClass {
+public class SerializableTestClass implements JsonObject {
     public static final String JSON_STRING_REPRESENTATION = String.format("{%n"
             + "  \"name\" : \"This is a test class\",%n"
             + "  \"listOfLocalDateTimes\" : "
@@ -68,5 +70,8 @@ public class SerializableTestClass {
 
     public HashMap<Integer, String> getMapOfIntegerToString() {
         return mapOfIntegerToString;
+    }
+
+    public void assertFieldsAreNotNull() {
     }
 }

@@ -7,6 +7,7 @@ import java.util.logging.Logger;
 
 import networkbook.commons.core.LogsCenter;
 import networkbook.commons.exceptions.DataLoadingException;
+import networkbook.commons.exceptions.NullValueException;
 import networkbook.model.ReadOnlyNetworkBook;
 import networkbook.model.ReadOnlyUserPrefs;
 import networkbook.model.UserPrefs;
@@ -36,7 +37,7 @@ public class StorageManager implements Storage {
     }
 
     @Override
-    public Optional<UserPrefs> readUserPrefs() throws DataLoadingException {
+    public Optional<UserPrefs> readUserPrefs() throws DataLoadingException, NullValueException {
         return userPrefsStorage.readUserPrefs();
     }
 
@@ -54,12 +55,13 @@ public class StorageManager implements Storage {
     }
 
     @Override
-    public Optional<ReadOnlyNetworkBook> readNetworkBook() throws DataLoadingException {
+    public Optional<ReadOnlyNetworkBook> readNetworkBook() throws DataLoadingException, NullValueException {
         return readNetworkBook(networkBookStorage.getNetworkBookFilePath());
     }
 
     @Override
-    public Optional<ReadOnlyNetworkBook> readNetworkBook(Path filePath) throws DataLoadingException {
+    public Optional<ReadOnlyNetworkBook> readNetworkBook(Path filePath)
+            throws DataLoadingException, NullValueException {
         logger.fine("Attempting to read data from file: " + filePath);
         return networkBookStorage.readNetworkBook(filePath);
     }

@@ -5,6 +5,7 @@ import java.nio.file.Path;
 import java.util.Optional;
 
 import networkbook.commons.exceptions.DataLoadingException;
+import networkbook.commons.exceptions.NullValueException;
 import networkbook.model.NetworkBook;
 import networkbook.model.ReadOnlyNetworkBook;
 
@@ -24,12 +25,12 @@ public interface NetworkBookStorage {
      *
      * @throws DataLoadingException if loading the data from storage failed.
      */
-    Optional<ReadOnlyNetworkBook> readNetworkBook() throws DataLoadingException;
+    Optional<ReadOnlyNetworkBook> readNetworkBook() throws DataLoadingException, NullValueException;
 
     /**
      * @see #getNetworkBookFilePath()
      */
-    Optional<ReadOnlyNetworkBook> readNetworkBook(Path filePath) throws DataLoadingException;
+    Optional<ReadOnlyNetworkBook> readNetworkBook(Path filePath) throws DataLoadingException, NullValueException;
 
     /**
      * Saves the given {@link ReadOnlyNetworkBook} to the storage.

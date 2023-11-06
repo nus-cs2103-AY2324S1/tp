@@ -6,13 +6,14 @@ import java.util.Optional;
 
 import networkbook.commons.core.Config;
 import networkbook.commons.exceptions.DataLoadingException;
+import networkbook.commons.exceptions.NullValueException;
 
 /**
  * A class for accessing the Config File.
  */
 public class ConfigUtil {
 
-    public static Optional<Config> readConfig(Path configFilePath) throws DataLoadingException {
+    public static Optional<Config> readConfig(Path configFilePath) throws DataLoadingException, NullValueException {
         return JsonUtil.readJsonFile(configFilePath, Config.class);
     }
 

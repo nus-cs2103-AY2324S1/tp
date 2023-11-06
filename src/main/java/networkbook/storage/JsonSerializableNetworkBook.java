@@ -8,7 +8,10 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 
+import networkbook.commons.exceptions.DuplicateEntryException;
 import networkbook.commons.exceptions.IllegalValueException;
+import networkbook.commons.exceptions.NullValueException;
+import networkbook.commons.util.JsonObject;
 import networkbook.model.NetworkBook;
 import networkbook.model.ReadOnlyNetworkBook;
 import networkbook.model.person.Person;
@@ -17,7 +20,7 @@ import networkbook.model.person.Person;
  * An Immutable NetworkBook that is serializable to JSON format.
  */
 @JsonRootName(value = "networkbook")
-class JsonSerializableNetworkBook {
+class JsonSerializableNetworkBook implements JsonObject {
 
     public static final String MESSAGE_DUPLICATE_PERSON = "Persons list contains duplicate person(s).";
 
@@ -45,7 +48,7 @@ class JsonSerializableNetworkBook {
      *
      * @throws IllegalValueException if there were any data constraints violated.
      */
-    public NetworkBook toModelType() throws IllegalValueException {
+    public NetworkBook toModelType() throws IllegalValueException, DuplicateEntryException {
         NetworkBook networkBook = new NetworkBook();
         for (JsonAdaptedPerson jsonAdaptedPerson : persons) {
             Person person = jsonAdaptedPerson.toModelType();
@@ -57,4 +60,13 @@ class JsonSerializableNetworkBook {
         return networkBook;
     }
 
+    @Override
+    public void assertFieldsAreNotNull() throws NullValueException {
+        for (JsonAdaptedPerson person : persons) {
+            if (person == null) {
+                throw new NullValueException();
+            }
+            person.assertFieldsAreNotNull();
+        }
+    }
 }

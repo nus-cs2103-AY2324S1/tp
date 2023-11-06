@@ -1,8 +1,8 @@
 {
   "persons": [ {
     "name": "Hans Muster",
-    "phones": [ "9482424" ],
-    "emails": [ "invalid@email!3e" ],
+    "phones": [ null, "12345" ],
+    "emails": [ "valid@email.com" ],
     "links": [ "hahahans.com" ],
     "graduation": "AY2324-S1",
     "courses": [ "Computer Science" ],

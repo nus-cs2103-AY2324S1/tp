@@ -9,7 +9,9 @@ import java.util.logging.Logger;
 
 import networkbook.commons.core.LogsCenter;
 import networkbook.commons.exceptions.DataLoadingException;
+import networkbook.commons.exceptions.DuplicateEntryException;
 import networkbook.commons.exceptions.IllegalValueException;
+import networkbook.commons.exceptions.NullValueException;
 import networkbook.commons.util.FileUtil;
 import networkbook.commons.util.JsonUtil;
 import networkbook.model.ReadOnlyNetworkBook;
@@ -32,7 +34,8 @@ public class JsonNetworkBookStorage implements NetworkBookStorage {
     }
 
     @Override
-    public Optional<ReadOnlyNetworkBook> readNetworkBook() throws DataLoadingException {
+    public Optional<ReadOnlyNetworkBook> readNetworkBook() throws DataLoadingException, NullValueException {
+        assert filePath != null;
         return readNetworkBook(filePath);
     }
 
@@ -42,8 +45,9 @@ public class JsonNetworkBookStorage implements NetworkBookStorage {
      * @param filePath location of the data. Cannot be null.
      * @throws DataLoadingException if loading the data from storage failed.
      */
-    public Optional<ReadOnlyNetworkBook> readNetworkBook(Path filePath) throws DataLoadingException {
-        requireNonNull(filePath);
+    public Optional<ReadOnlyNetworkBook> readNetworkBook(Path filePath)
+            throws DataLoadingException, NullValueException {
+        assert filePath != null;
 
         Optional<JsonSerializableNetworkBook> jsonNetworkBook = JsonUtil.readJsonFile(
                 filePath, JsonSerializableNetworkBook.class);
@@ -56,6 +60,9 @@ public class JsonNetworkBookStorage implements NetworkBookStorage {
         } catch (IllegalValueException ive) {
             logger.info("Illegal values found in " + filePath + ": " + ive.getMessage());
             throw new DataLoadingException(ive);
+        } catch (DuplicateEntryException dee) {
+            logger.info("Duplicate entry in " + filePath + ": " + dee.getMessage());
+            throw new DataLoadingException(dee);
         }
     }
 
