@@ -35,11 +35,6 @@ Given below are my contributions to the project.
   * Justification: To make a more visual association with the date.
   * Highlights: Avatar is randomly generated based on the user's gender.
 
-* **New Feature**:
-  * What it does: Added the ability to store the user's preferences.
-  * Justification: To make the user's preferences persistent so that it can be used by our matchmaking algorithm.
-  * Highlights: Created a new classes and interfaces to store user preferences in a JSON file.
-
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=shishir&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code&since=2023-09-22&tabOpen=false)
 
 * **Project management**:
@@ -55,7 +50,7 @@ Given below are my contributions to the project.
     * User Guide:
       - Updated documentation for add, edit, delete dates.
       - Added a command summary table for the documentation.
-      - Added introduction section, table of contents to the documentation.
+      - Added introduction section to the documentation.
   * Developer Guide:
 
 * **Community**:

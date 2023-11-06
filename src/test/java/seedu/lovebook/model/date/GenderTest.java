@@ -28,7 +28,7 @@ public class GenderTest {
         assertFalse(Gender.isValidGender("")); // empty string
         assertFalse(Gender.isValidGender(" ")); // spaces only
 
-        // missing parts
+        // Repeated/Invalid
         assertFalse(Gender.isValidGender("FF")); // repetition of F
         assertFalse(Gender.isValidGender("MM")); // repetition of F
         assertFalse(Gender.isValidGender("T")); // something other than M or F
@@ -56,5 +56,11 @@ public class GenderTest {
 
         // different values -> returns false
         assertFalse(gender.equals(new Gender("F")));
+    }
+
+    @Test
+    public void hashCodeTest() {
+        Gender gender = new Gender("F");
+        assertTrue(new Gender("F").hashCode() == gender.hashCode());
     }
 }

@@ -6,6 +6,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.lovebook.logic.commands.CommandTestUtil.VALID_AGE_BOB;
 import static seedu.lovebook.logic.commands.CommandTestUtil.VALID_GENDER_BOB;
 import static seedu.lovebook.logic.commands.CommandTestUtil.VALID_HEIGHT_BOB;
+import static seedu.lovebook.logic.commands.CommandTestUtil.VALID_HOROSCOPE_BOB;
+import static seedu.lovebook.logic.commands.CommandTestUtil.VALID_INCOME_BOB;
 import static seedu.lovebook.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.lovebook.testutil.TypicalPersons.ALICE;
 import static seedu.lovebook.testutil.TypicalPersons.BOB;
@@ -72,6 +74,18 @@ public class DateTest {
         editedAlice = new PersonBuilder(ALICE).withGender(VALID_GENDER_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
 
+        // different height -> returns false
+        editedAlice = new PersonBuilder(ALICE).withHeight(VALID_HEIGHT_BOB).build();
+        assertFalse(ALICE.equals(editedAlice));
+
+        // different income -> returns false
+        editedAlice = new PersonBuilder(ALICE).withIncome(VALID_INCOME_BOB).build();
+        assertFalse(ALICE.equals(editedAlice));
+
+        // different horoscope -> returns false
+        editedAlice = new PersonBuilder(ALICE).withHoroscope(VALID_HOROSCOPE_BOB).build();
+        assertFalse(ALICE.equals(editedAlice));
+
         // different lovebook -> returns false
         editedAlice = new PersonBuilder(ALICE).withHeight(VALID_HEIGHT_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
@@ -83,5 +97,11 @@ public class DateTest {
                 + ", gender=" + ALICE.getGender() + ", height=" + ALICE.getHeight() + ", income=" + ALICE.getIncome()
                 + ", horoscope=" + ALICE.getHoroscope() + "}";
         assertEquals(expected, ALICE.toString());
+    }
+
+    @Test
+    public void hashCodeTest() {
+        Date aliceCopy = new PersonBuilder(ALICE).build();
+        assertTrue(ALICE.hashCode() == aliceCopy.hashCode());
     }
 }

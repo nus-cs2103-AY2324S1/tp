@@ -1,5 +1,8 @@
 package seedu.lovebook.model.date;
 
+import static java.util.Objects.requireNonNull;
+import static seedu.lovebook.commons.util.AppUtil.checkArgument;
+
 /**
  * Represents a Date's avatar in the lovebook.
  * Guarantees: immutable; is always valid
@@ -16,6 +19,8 @@ public class Avatar {
      * @param value the avatar number
      */
     public Avatar(String value) {
+        requireNonNull(value);
+        checkArgument(isValidAvatar(value), MESSAGE_CONSTRAINTS);
         this.value = value;
     }
 
@@ -38,6 +43,8 @@ public class Avatar {
      * Returns true if the avatar number is valid.
      */
     public static boolean isValidAvatar(String avatar) {
+        requireNonNull(avatar);
+
         int avatarNumber = Integer.parseInt(avatar);
         return avatarNumber >= LOWER_BOUND && avatarNumber < UPPER_BOUND;
     }

@@ -39,6 +39,10 @@ public class AgeTest {
         assertTrue(Age.isValidAge("91")); // exactly 3 numbers
         assertTrue(Age.isValidAge("23"));
         assertTrue(Age.isValidAge("124")); // long age numbers
+
+        // EP Boundary Values
+        assertTrue(Age.isValidAge("18")); // Age 18
+        assertTrue(Age.isValidAge("150")); // Age 150
     }
 
     @Test
@@ -59,5 +63,28 @@ public class AgeTest {
 
         // different values -> returns false
         assertFalse(age.equals(new Age("19")));
+    }
+
+    @Test
+    public void compareTo() {
+        Age age = new Age("25");
+
+        // same values -> returns 0
+        assertTrue(age.compareTo(new Age("25")) == 0);
+
+        // same object -> returns 0
+        assertTrue(age.compareTo(age) == 0);
+
+        // less than values -> returns 1
+        assertTrue(age.compareTo(new Age("23")) == 1);
+
+        // greater values -> returns -1
+        assertTrue(age.compareTo(new Age("39")) == -1);
+    }
+
+    @Test
+    public void hashCodeTest() {
+        Age age = new Age("25");
+        assertTrue(age.hashCode() == new Age("25").hashCode());
     }
 }

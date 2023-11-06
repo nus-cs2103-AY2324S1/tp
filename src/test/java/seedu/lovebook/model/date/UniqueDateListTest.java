@@ -84,8 +84,7 @@ public class UniqueDateListTest {
     @Test
     public void setPerson_editedPersonHasSameIdentity_success() {
         uniqueDateList.add(ALICE);
-        Date editedAlice = new PersonBuilder(ALICE).withHeight(VALID_HEIGHT_BOB)
-                .build();
+        Date editedAlice = new PersonBuilder(ALICE).withHeight(VALID_HEIGHT_BOB).build();
         uniqueDateList.setDate(ALICE, editedAlice);
         UniqueDateList expectedUniqueDateList = new UniqueDateList();
         expectedUniqueDateList.add(editedAlice);
