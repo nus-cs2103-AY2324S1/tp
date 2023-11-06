@@ -67,7 +67,6 @@ public class UniqueScheduleList implements Iterable<Schedule> {
         }
 
         internalList.set(index, editedSchedule);
-        sort();
     }
 
     /**
@@ -89,7 +88,6 @@ public class UniqueScheduleList implements Iterable<Schedule> {
     public void setSchedules(UniqueScheduleList replacement) {
         requireNonNull(replacement);
         internalList.setAll(replacement.internalList);
-        sort();
     }
 
     /**
@@ -103,7 +101,6 @@ public class UniqueScheduleList implements Iterable<Schedule> {
         }
 
         internalList.setAll(schedules);
-        sort();
     }
 
     /**
@@ -117,6 +114,7 @@ public class UniqueScheduleList implements Iterable<Schedule> {
      * Returns the backing list as an unmodifiable {@code ObservableList}.
      */
     public ObservableList<Schedule> asUnmodifiableObservableList() {
+        sort();
         return internalUnmodifiableList;
     }
 
