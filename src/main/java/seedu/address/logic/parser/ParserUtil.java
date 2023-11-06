@@ -160,10 +160,19 @@ public class ParserUtil {
     public static Salary parseSalary(String salary) throws ParseException {
         requireNonNull(salary);
         String trimmedSalary = salary.trim();
-        if (!Salary.isValidSalary(trimmedSalary)) {
+
+        int i = 1;
+        while (i < trimmedSalary.length() && trimmedSalary.charAt(i - 1) == '0') {
+            i++;
+        }
+        StringBuffer sb = new StringBuffer(trimmedSalary);
+        sb.replace(0, i - 1, "");
+        String parsedSalary = sb.toString();
+
+        if (!Salary.isValidSalary(parsedSalary)) {
             throw new ParseException(Salary.MESSAGE_CONSTRAINTS);
         }
-        return new Salary(trimmedSalary);
+        return new Salary(parsedSalary);
     }
 
     /**
