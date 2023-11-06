@@ -127,7 +127,7 @@ Acceptable Values:
 5. NEXT_KIN - Alphanumeric or space characters only
 6. NEXT_KIN_PHONE - Numbers (0-9) only and at least 3 digits long
 7. FINANCIAL_PLAN - Alphanumeric or space characters only
-8. TAG - Alphanumeric characters only
+8. TAG - Alphanumeric characters only (spaces not allowed)
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A person can have any number of Financial Plans (including 0)
@@ -188,7 +188,7 @@ Acceptable Values:
 6. NEXT_KIN - Alphanumeric or space characters only
 7. NEXT_KIN_PHONE - Numbers (0-9) only and at least 3 digits long
 8. FINANCIAL_PLAN - Alphanumeric or space characters only
-9. TAG - Alphanumeric characters only
+9. TAG - Alphanumeric characters only (spaces not allowed)
 
 Examples:
 *  `edit 4 n/john doe a/23 woodlands ave 123` Edits the name and address of the 1st person to be `john doe` and `woodlands ave 123` respectively.
