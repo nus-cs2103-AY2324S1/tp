@@ -7,19 +7,19 @@
 
 > ***Craigton Lian's*** *Project Portfolio Page*<br>
 
+<box type="tip">
+
+The tags with a G-prefix [[G\#74](https://github.com/AY2324S1-CS2103T-W08-1/tp/pull/74)] represents an external link to the corresponding GitHub Issue.<br>
+The tags with a P-prefix [[P\#80](https://github.com/AY2324S1-CS2103T-W08-1/tp/pull/80)] represents an external link to the corresponding Pull Request.<br>
+
+</box>
+
 ## Overview
 **Staff-Snap** is a desktop hiring management application used for managing applicants during the recruitment cycle. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 9,000 lines of code.
 
 <br>
 
 ## Summary of Contributions
-
-<box type="tip">
-
-The blue tags <a href="https://github.com/nus-cs2103-AY2324S1/forum/issues/121" class="badge rounded-pill bg-primary">\#121</a> represent an external link to the corresponding GitHub issue.<br>
-The green tags <a href="https://github.com/AY2324S1-CS2103T-W08-1/tp/pull/74" class="badge rounded-pill bg-success">\#74</a> represent an external link to the corresponding Pull Request.
-
-</box>
 
 * **Interview Management Features**: Added the `addi`, `editi`, and `deletei` command.
   * **What it does**: Allows the user to add, edit, and delete interviews for each applicant.
@@ -35,11 +35,10 @@ The green tags <a href="https://github.com/AY2324S1-CS2103T-W08-1/tp/pull/74" cl
   * **Highlights**: This enhancement required careful and thorough error handling and input validation in order to prevent erroneous data from being added into Staff-Snap. 
   * **Credits**: The third-party library [OpenCSV](https://opencsv.sourceforge.net/) was used to parse the input CSV in the implementation of this feature.
 
-<br>
+
+<div style="page-break-after: always;"></div>
 
 * **Code contributed**: [Craigton Lian's RepoSense link](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=craigtonlian&breakdown=true)
-
-  <iframe src="https://nus-cs2103-ay2324s1.github.io/tp-dashboard/#/widget/?search=craigtonlian&breakdown=false&sort=groupTitle%20dsc&sortWithin=title&since=2023-09-22&timeframe=commit&mergegroup=&groupSelect=groupByRepos&chartGroupIndex=0&chartIndex=0" frameBorder="0" width="800px" height="148px"></iframe>
 
 <br>
 
@@ -50,28 +49,28 @@ The green tags <a href="https://github.com/AY2324S1-CS2103T-W08-1/tp/pull/74" cl
 <br>
 
 * **Enhancements to existing features**:
-  * Updated the logo for Staff-Snap <a href="https://github.com/AY2324S1-CS2103T-W08-1/tp/pull/74" class="badge rounded-pill bg-success">\#74</a>
-  * Updated the Applicant Card to display icons <a href="https://github.com/AY2324S1-CS2103T-W08-1/tp/pull/105" class="badge rounded-pill bg-success">\#105</a>
-  * Updated the GUI to display Interview Cards <a href="https://github.com/AY2324S1-CS2103T-W08-1/tp/pull/111" class="badge rounded-pill bg-success">\#111</a>
-  * Updated the `help` command to open the User Guide in the browser <a href="https://github.com/AY2324S1-CS2103T-W08-1/tp/pull/75" class="badge rounded-pill bg-success">\#75</a>
+  * Updated the logo for Staff-Snap [[P\#74](https://github.com/AY2324S1-CS2103T-W08-1/tp/pull/74)]
+  * Updated the Applicant Card to display icons [[P\#105](https://github.com/AY2324S1-CS2103T-W08-1/tp/pull/105)]
+  * Updated the GUI to display Interview Cards [[P\#111](https://github.com/AY2324S1-CS2103T-W08-1/tp/pull/111)]
+  * Updated the `help` command to open the User Guide in the browser [[P\#75](https://github.com/AY2324S1-CS2103T-W08-1/tp/pull/75)]
 
 <br>
 
 * **Documentation**:
   * User Guide:
-    * Added documentation for the features `addi`, `editi`, `deletei` and `import` <a href="https://github.com/AY2324S1-CS2103T-W08-1/tp/pull/80" class="badge rounded-pill bg-success">\#80</a> <a href="https://github.com/AY2324S1-CS2103T-W08-1/tp/pull/90" class="badge rounded-pill bg-success">\#90</a> <a href="https://github.com/AY2324S1-CS2103T-W08-1/tp/pull/117" class="badge rounded-pill bg-success">\#117</a> <a href="https://github.com/AY2324S1-CS2103T-W08-1/tp/pull/140" class="badge rounded-pill bg-success">\#140</a>
-    * Did cosmetic tweaks to existing documentation of features `help`, `edit` <a href="https://github.com/AY2324S1-CS2103T-W08-1/tp/pull/67" class="badge rounded-pill bg-success">\#67</a> <a href="https://github.com/AY2324S1-CS2103T-W08-1/tp/pull/138" class="badge rounded-pill bg-success">\#138</a> <a href="https://github.com/AY2324S1-CS2103T-W08-1/tp/pull/145" class="badge rounded-pill bg-success">\#145</a>
+    * Added documentation for the features `addi`, `editi`, `deletei`, and `import` [[P\#80](https://github.com/AY2324S1-CS2103T-W08-1/tp/pull/80)] [[P\#90](https://github.com/AY2324S1-CS2103T-W08-1/tp/pull/90)] [[P\#117](https://github.com/AY2324S1-CS2103T-W08-1/tp/pull/117)] [[P\#140](https://github.com/AY2324S1-CS2103T-W08-1/tp/pull/140)]
+    * Did cosmetic tweaks to existing documentation of features `help`, `edit` [[P\#67](https://github.com/AY2324S1-CS2103T-W08-1/tp/pull/67)] [[P\#138](https://github.com/AY2324S1-CS2103T-W08-1/tp/pull/138)] [[P\#145](https://github.com/AY2324S1-CS2103T-W08-1/tp/pull/145)]
   * Developer Guide:
-    * Added implementation details of the Interview Management features such as `addi`, `editi`, and `deletei` <a href="https://github.com/AY2324S1-CS2103T-W08-1/tp/pull/118" class="badge rounded-pill bg-success">\#118</a>
+    * Added implementation details of the Interview Management features such as `addi`, `editi`, and `deletei` [[P\#118](https://github.com/AY2324S1-CS2103T-W08-1/tp/pull/118)]
 
 <br>
 
 * **Community**:
-  * PRs reviewed (with non-trivial review comments) <a href="https://github.com/AY2324S1-CS2103T-W08-1/tp/pull/110" class="badge rounded-pill bg-success">\#110</a> <a href="https://github.com/AY2324S1-CS2103T-W08-1/tp/pull/121" class="badge rounded-pill bg-success">\#121</a> <a href="https://github.com/AY2324S1-CS2103T-W08-1/tp/pull/125" class="badge rounded-pill bg-success">\#125</a> <a href="https://github.com/AY2324S1-CS2103T-W08-1/tp/pull/129" class="badge rounded-pill bg-success">\#129</a>  
-  * Contributed to forum discussions <a href="https://github.com/nus-cs2103-AY2324S1/forum/issues/121" class="badge rounded-pill bg-primary">\#121</a> <a href="https://github.com/nus-cs2103-AY2324S1/forum/issues/158" class="badge rounded-pill bg-primary">\#158</a> <a href="https://github.com/nus-cs2103-AY2324S1/forum/issues/228" class="badge rounded-pill bg-primary">\#228</a> <a href="https://github.com/nus-cs2103-AY2324S1/forum/issues/267" class="badge rounded-pill bg-primary">\#267</a>
+  * PRs reviewed (with non-trivial review comments) [[P\#110](https://github.com/AY2324S1-CS2103T-W08-1/tp/pull/110)] [[P\#121](https://github.com/AY2324S1-CS2103T-W08-1/tp/pull/121)] [[P\#125](https://github.com/AY2324S1-CS2103T-W08-1/tp/pull/125)] [[P\#129](https://github.com/AY2324S1-CS2103T-W08-1/tp/pull/129)]
+  * Contributed to forum discussions [[G\#121](https://github.com/nus-cs2103-AY2324S1/forum/issues/121)] [[G\#158](https://github.com/nus-cs2103-AY2324S1/forum/issues/158)] [[G\#228](https://github.com/nus-cs2103-AY2324S1/forum/issues/228)] [[G\#267](https://github.com/nus-cs2103-AY2324S1/forum/issues/267)]
 
 <br>
 
 * **Tools**:
-  * Integrated a third-party library ([OpenCSV](https://opencsv.sourceforge.net/)) to the project <a href="https://github.com/nus-cs2103-AY2324S1/forum/issues/300" class="badge rounded-pill bg-primary">\#300</a> <a href="https://github.com/AY2324S1-CS2103T-W08-1/tp/pull/126" class="badge rounded-pill bg-success">\#126</a>
-  * Integrated a new GitHub CD workflow ([Netlify Deploy Previews](https://docs.netlify.com/site-deploys/deploy-previews/)) to the team repo to preview deployments to the User Guide and Developer Guide <a href="https://github.com/nus-cs2103-AY2324S1/forum/issues/228" class="badge rounded-pill bg-primary">\#228</a>
+  * Integrated a third-party library ([OpenCSV](https://opencsv.sourceforge.net/)) to the project [[G\#300](https://github.com/nus-cs2103-AY2324S1/forum/issues/300)] [[P\#126](https://github.com/AY2324S1-CS2103T-W08-1/tp/pull/126)]
+  * Integrated a new GitHub CD workflow ([Netlify Deploy Previews](https://docs.netlify.com/site-deploys/deploy-previews/)) to the team repo to preview deployments to the User Guide and Developer Guide [[G\#228](https://github.com/nus-cs2103-AY2324S1/forum/issues/228)]
