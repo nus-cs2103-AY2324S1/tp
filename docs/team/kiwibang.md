@@ -14,6 +14,8 @@ Given below are my contributions to the project.
     * Justification: Different individuals have different ways of entering dates
     * Highlights: This feature increases the flexibility of the command,
       allowing the user to type in inputs without the input being rejected, leading to better UX.
+* **New Feature**: list-freetime DATE
+  * What it does: Allows the user to list all the blocks of time from 9am to 5pm on a given day. 
 
 * **Code contributed**: [RepoSense link]()
 

@@ -275,10 +275,6 @@ Format: `add-i app/APPLICANT_ID jr/JOB_ROLE start/START_DATE_AND_TIME end/END_DA
 to the company in general.
 
 * List of accepted date formats:
-  * Day and time: 
-    * `Tue 1600`
-    * `Tue 4.00pm`
-    * `Tue 4pm`
   * DD/MM/YYYY and time:
     * `16 May 2024 1515`
     * `16 May 2024 3.15pm`
@@ -316,6 +312,7 @@ to the company in general.
   * When the user inputs a valid date without a time: `"Please enter an interview time!"`
   * When the user enters a valid date in the past: `Input date cannot be in the past!`
   * When there is an interview clash: `“Oops! You have an <insert interview object> scheduled at <from date & by date>`
+  * When the user enters a valid date that has a year that is past the year 9999: `“Please specify a valid date!”`
 
 Example:
 * `add-i app/3 jr/software engineer start/11-12-2023 1400 end/11-12-2023 1500`
