@@ -4,10 +4,13 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
+import java.util.HashSet;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.DeleteCommand.DeletePersonDescriptor;
+import seedu.address.model.person.MedicalHistory;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Nric;
 import seedu.address.testutil.PersonBuilder;
@@ -46,12 +49,42 @@ public class DeleteCommandParserTest {
     }
 
     @Test
-    public void test_parse_descriptor() {
+    public void test_parse_descriptorAppointment() {
         String userString = " id/" + PersonBuilder.DEFAULT_NRIC + " ap/";
         DeletePersonDescriptor descriptor = new DeletePersonDescriptor();
-        descriptor.setAppointment();
+        descriptor.setDeleteAppointment();
         DeleteCommand deleteCommand = new DeleteCommand(defaultNric, null, descriptor);
         assertParseSuccess(parser, userString, deleteCommand);
+    }
+
+    @Test
+    public void test_parse_descriptorMedicalHistoryDeleteAll() {
+        String userString = " id/" + PersonBuilder.DEFAULT_NRIC + " m/";
+        DeletePersonDescriptor descriptor = new DeletePersonDescriptor();
+        descriptor.setDeleteMedicalHistory();
+        descriptor.setMedicalHistory(new HashSet<>());
+        DeleteCommand deleteCommand = new DeleteCommand(defaultNric, null, descriptor);
+        assertParseSuccess(parser, userString, deleteCommand);
+    }
+
+    @Test
+    public void test_parse_descriptorMedicalHistoryDeleteOne() {
+        String userString = " id/" + PersonBuilder.DEFAULT_NRIC + " m/tachycardia";
+        DeletePersonDescriptor descriptor = new DeletePersonDescriptor();
+        MedicalHistory medicalHistory = new MedicalHistory("tachycardia");
+        HashSet<MedicalHistory> testSet = new HashSet<>();
+        testSet.add(medicalHistory);
+        descriptor.setDeleteMedicalHistory();
+        descriptor.setMedicalHistory(testSet);
+        DeleteCommand deleteCommand = new DeleteCommand(defaultNric, null, descriptor);
+        assertParseSuccess(parser, userString, deleteCommand);
+    }
+
+    @Test
+    public void test_parse_descriptorInvalidField() {
+        String userString = "id/ " + PersonBuilder.DEFAULT_NRIC + " p/";
+        assertParseFailure(parser, userString,
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
     }
 
     @Test

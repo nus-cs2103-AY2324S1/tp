@@ -9,7 +9,9 @@ import java.util.regex.Pattern;
 
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.AppendLogCommand;
 import seedu.address.logic.commands.ClearCommand;
+import seedu.address.logic.commands.ClearLogCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
@@ -17,6 +19,8 @@ import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.LogCommand;
+import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -54,33 +58,69 @@ public class AddressBookParser {
         switch (commandWord) {
 
         case AddCommand.COMMAND_WORD:
+            //Fallthrough
+        case AddCommand.COMMAND_WORD_ALIAS:
             return new AddCommandParser().parse(arguments);
 
         case EditCommand.COMMAND_WORD:
+            //Fallthrough
+        case EditCommand.COMMAND_WORD_ALIAS:
             return new EditCommandParser().parse(arguments);
 
         case DeleteCommand.COMMAND_WORD:
+            //Fallthrough
+        case DeleteCommand.COMMAND_WORD_ALIAS:
             return new DeleteCommandParser().parse(arguments);
 
+        case UndoCommand.COMMAND_WORD:
+            //Fallthrough
+        case UndoCommand.COMMAND_WORD_ALIAS:
+            return new UndoCommandParser().parse(arguments);
+
         case ClearCommand.COMMAND_WORD:
+            //Fallthrough
+        case ClearCommand.COMMAND_WORD_ALIAS:
             return new ClearCommand();
 
         case FindCommand.COMMAND_WORD:
+            //Fallthrough
+        case FindCommand.COMMAND_WORD_ALIAS:
             return new FindCommandParser().parse(arguments);
 
         case ListCommand.COMMAND_WORD:
+            //Fallthrough
+        case ListCommand.COMMAND_WORD_ALIAS:
             return new ListCommand();
 
         case ExitCommand.COMMAND_WORD:
+            //Fallthrough
+        case ExitCommand.COMMAND_WORD_ALIAS:
             return new ExitCommand();
 
         case HelpCommand.COMMAND_WORD:
+            //Fallthrough
+        case HelpCommand.COMMAND_WORD_ALIAS:
             return new HelpCommand();
+
+        case LogCommand.COMMAND_WORD:
+            //Fallthrough
+        case LogCommand.COMMAND_WORD_ALIAS:
+            return new LogCommand();
+
+        case AppendLogCommand.COMMAND_WORD:
+            //Fallthrough
+        case AppendLogCommand.COMMAND_WORD_ALIAS:
+            return new AppendLogCommand();
+
+        case ClearLogCommand.COMMAND_WORD:
+            //Fallthrough
+        case ClearLogCommand.COMMAND_WORD_ALIAS:
+            return new ClearLogCommand();
+
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }
     }
-
 }

@@ -8,7 +8,8 @@ src/main/resources/docs/
 /out/
 /*.iml
 
-# ignore bin folder
+
+# ignore binary folders
 /bin/
 
 # Storage/log files
