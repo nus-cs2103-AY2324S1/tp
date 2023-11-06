@@ -7,19 +7,19 @@
 
 > ***Craigton Lian's*** *Project Portfolio Page*<br>
 
-<box type="tip">
-
-The tags with a G-prefix [[G\#74](https://github.com/AY2324S1-CS2103T-W08-1/tp/pull/74)] represents an external link to the corresponding GitHub Issue.<br>
-The tags with a P-prefix [[P\#80](https://github.com/AY2324S1-CS2103T-W08-1/tp/pull/80)] represents an external link to the corresponding Pull Request.<br>
-
-</box>
-
 ## Overview
 **Staff-Snap** is a desktop hiring management application used for managing applicants during the recruitment cycle. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 9,000 lines of code.
 
 <br>
 
 ## Summary of Contributions
+
+<box type="tip">
+
+The tags with a G-prefix [[G\#158](https://github.com/nus-cs2103-AY2324S1/forum/issues/158)] represents an external link to the corresponding GitHub Issue.<br>
+The tags with a P-prefix [[P\#80](https://github.com/AY2324S1-CS2103T-W08-1/tp/pull/80)] represents an external link to the corresponding Pull Request.<br>
+
+</box>
 
 * **Interview Management Features**: Added the `addi`, `editi`, and `deletei` command.
   * **What it does**: Allows the user to add, edit, and delete interviews for each applicant.
@@ -38,17 +38,19 @@ The tags with a P-prefix [[P\#80](https://github.com/AY2324S1-CS2103T-W08-1/tp/p
 
 <div style="page-break-after: always;"></div>
 
-* **Code contributed**: [Craigton Lian's RepoSense link](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=craigtonlian&breakdown=true)
+* **Code Contributed**: [Craigton Lian's RepoSense link](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=craigtonlian&breakdown=true)
 
 <br>
 
-* **Project management**:
+* **Project Management**:
+  * Set up GitHub [team organisation](https://github.com/orgs/AY2324S1-CS2103T-W08-1/people) and [repo](https://github.com/AY2324S1-CS2103T-W08-1/tp)
+  * Set up CodeCov GitHub Action and Gradle Build
   * Managed [releases](https://github.com/AY2324S1-CS2103T-W08-1/tp/releases) `v1.2`, `v1.2.1`, `v1.3`, and `v1.4` on GitHub
   * Managed team's [Project Board](https://github.com/orgs/AY2324S1-CS2103T-W08-1/projects/1) on GitHub to ensure steady and consistent progress
 
 <br>
 
-* **Enhancements to existing features**:
+* **Enhancements to Existing Features**:
   * Updated the logo for Staff-Snap [[P\#74](https://github.com/AY2324S1-CS2103T-W08-1/tp/pull/74)]
   * Updated the Applicant Card to display icons [[P\#105](https://github.com/AY2324S1-CS2103T-W08-1/tp/pull/105)]
   * Updated the GUI to display Interview Cards [[P\#111](https://github.com/AY2324S1-CS2103T-W08-1/tp/pull/111)]
