@@ -224,6 +224,8 @@ Tags:`
 
 ![result for 'edit 4 n/john doe a/23 woodlands ave 123'](images/editUi.png)
 
+Do note that it is possible to edit a client's contact such that the contact has multiple tags by duplicating the `t/` prefix. However, each client can have only up to one financial plan at any point in time.
+
 ---------------
 ### Locating persons by name, financial plan, and/or tag : `find`
 
