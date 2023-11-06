@@ -246,13 +246,32 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 _{more aspects and alternatives to be added}_
 
-### Implementation of Single, optional Appointment Field
+### Implementation of Singular, Optional Appointment Field
 
 #### Proposed Implementation
 
-_{Explain how `Appointment` as an optional field is implemented}_
+We needed a way to add a property to `Person` that could be nullable, to reflect optionality within our
+field implementation.
 
-_{Explain how `Appointment` is stored inside each `Person`}_
+<puml src="diagrams/AppointmentClassDiagram0.puml" width="250" />
+
+The optional fields could be implemented directly to `Person` as shown in the partial class diagram above.
+However, several other packages depend upon `Person` as well, including `UI` and `Storage`.
+These packages already make assumptions on the `non-null` property on the variables of `Person`.
+
+<puml src="diagrams/AppointmentSequence0.puml" width="250" />
+
+The diagram above illustrates a possible path that may arise if the optional property of the field is
+not explicitly defined. There is a need to explicitly denote that our optional field is possibly an
+empty value without having its implementers perform the check themselves, so that the compiler is
+able to assist in our coding.
+
+<puml src="diagrams/AppointmentClassDiagram1.puml" width="250" />
+
+Therefore, the implementation of optional fields now return its value wrapped in the Java
+`Optional` wrapper. When `getAppointment` is called now, the implementer will be informed of the
+type mismatch with the `Appointment` type, explicitly informing the implementer that this value is
+potentially `null`.
 
 #### Design Considerations:
 
