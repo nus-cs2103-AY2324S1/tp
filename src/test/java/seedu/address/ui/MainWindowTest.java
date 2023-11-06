@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 import org.testfx.framework.junit5.ApplicationTest;
 
+import javafx.stage.Stage;
 import seedu.address.logic.Logic;
 import seedu.address.logic.LogicManager;
 import seedu.address.model.Model;
@@ -15,7 +16,6 @@ import seedu.address.model.ModelManager;
 import seedu.address.storage.JsonAddressBookStorage;
 import seedu.address.storage.JsonTeamBookStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
-import javafx.stage.Stage;
 import seedu.address.storage.StorageManager;
 
 public class MainWindowTest extends ApplicationTest {
