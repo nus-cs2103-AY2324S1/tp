@@ -78,9 +78,9 @@ quick reference to all the commands available in CMC.
       to [edit a member](#414-editing-a-member-editmember-or-editm) for more.
     - `exit`: Exits the application.
 
-    <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-    Follow each step in order to see how a normal workflow would feel like with CMC!
-    </div>
+        <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+        Follow each step in order to see how a normal workflow would feel like with CMC!
+        </div>
 
 6. Refer to the [Features](#4-features) below for details of each command.
 
