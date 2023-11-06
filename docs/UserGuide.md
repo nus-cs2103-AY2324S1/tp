@@ -6,9 +6,9 @@
 
 # Tutorium User Guide
 
-Welcome to Tutorium! Tutorium is a **desktop application for tuition centre administrative staff** to conduct data analysis for the planning of marketing strategies. Users can interact with it using a Command Line Interface (CLI), and it has a Graphical User Interface(GUI) created with JavaFX. 
+Welcome to Tutorium! Tutorium is a **desktop application for tuition centre administrative staff** to conduct data analysis for the planning of marketing strategies. Users can interact with it using a Command Line Interface (CLI), and it has a Graphical User Interface(GUI) created with JavaFX.
 
-Currently, Tutorium caters to the needs of tuition centre administrative staff under the O-Level and IP systems in Singapore, and supports adding data of students from Secondary 1 up to Secondary 4. 
+Currently, Tutorium caters to the needs of tuition centre administrative staff under the O-Level and IP systems in Singapore, and supports adding data of students from Secondary 1 up to Secondary 4.
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -59,7 +59,7 @@ Currently, Tutorium caters to the needs of tuition centre administrative staff u
 * Items with `…`​ after them can be used multiple times including zero times.<br>
   e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
 
-* When providing parameters starting with any of the prefixes used by Tutorium `(n/, p/, e/, a/, g/, l/, n/, s/ and d/)` to fields, 
+* When providing parameters starting with any of the prefixes used by Tutorium `(n/, p/, e/, a/, g/, l/, n/, s/ and d/)` to fields,
   users are discouraged from adding spaces between the prefix for that field and the input value. This is because the addition
   of spaces will cause Tutorium to interpret the prefix in the input value as an actual prefix for a field and not as part of the input value.
   e.g. Filtering students with the address `e/house` should be done with the command `filter a/e/house` rather than `filter a/ e/house`.
@@ -136,9 +136,9 @@ Format:
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * The accepted range of secondary school levels is from Secondary 1 to Secondary 4.
-* When editing subjects, if no enrol date is provided, the date on which the command was executed will be applied to all subjects listed by default. 
-  * If only 1 enrol date is provided, the same enrol date will be applied to all subjects listed. 
-  * If the number of enrol dates provided is the same as the number of subjects listed, the order in which enrol dates are applied to subjects will be the same as the order in which they are provided. 
+* When editing subjects, if no enrol date is provided, the date on which the command was executed will be applied to all subjects listed by default.
+  * If only 1 enrol date is provided, the same enrol date will be applied to all subjects listed.
+  * If the number of enrol dates provided is the same as the number of subjects listed, the order in which enrol dates are applied to subjects will be the same as the order in which they are provided.
   * Any mismatch between the number of subjects and the number of enrol dates provided (other than the cases listed above) will result in an error.
 * Simply providing 1 enrol date without providing any corresponding subject(s) will result in an error.
 
@@ -217,7 +217,7 @@ Examples:
 
 Sort the list of students data that fulfills the given conditions.
 
-Format: `sort in/[DESCRIPTION]` 
+Format: `sort in/[DESCRIPTION]`
 
 * `DESCRIPTION` should be `ASC` or `DESC`, non-case-sensitive.
 
@@ -293,7 +293,7 @@ Below is the chart generated after typing `trend y/2023`
 
 Export the statistical table or bar chart into PNG format.
 
-Format: `export v/[VISUAL]` 
+Format: `export v/[VISUAL]`
 
 * `VISUAL` should be `TABLE` or `BAR`, non-case-sensitive.
 * `TABLE` indicates exporting the table created, while `BAR` indicates exporting the bar chart created.
