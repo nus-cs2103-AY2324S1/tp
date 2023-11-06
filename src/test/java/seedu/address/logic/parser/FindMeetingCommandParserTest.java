@@ -79,9 +79,18 @@ public class FindMeetingCommandParserTest {
     }
 
     @Test
-    public void parse_inValidArgsTime_throwsParseException() {
+    public void parse_invalidArgsTime_throwsParseException() {
+        // start before end
         assertParseFailure(parser, " e/20.09.2023 1000 s/20.09.2023 1200",
                 MeetingTime.MESSAGE_CONSTRAINTS + "\n" + FindMeetingCommand.MESSAGE_USAGE);
+
+        // wrong start format
+        assertParseFailure(parser, " s/2",
+                MeetingTime.MESSAGE_CONSTRAINTS + "\n" + FindMeetingCommand.MESSAGE_USAGE);
+
+        // wrong end format
+        assertParseFailure(parser, " e/2",
+        MeetingTime.MESSAGE_CONSTRAINTS + "\n" + FindMeetingCommand.MESSAGE_USAGE);
     }
 
     /**
