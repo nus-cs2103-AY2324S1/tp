@@ -67,7 +67,7 @@ Format: `clear`
 ### Create a Member: `createMember`
 Creates a new member with accompanying personal details (name, gender, phone number, email address, home address, tag).
 
-Format: `createMember n/MEMBER_NAME g/GENDER [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]`
+Format: `createMember n/MEMBER_NAME g/GENDER [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]...`
 
 * Acceptable values for `GENDER`: `Male`, `Female`, `Others`.
 * Acceptable values for `EMAIL`: A string with an email extension (e.g. `@gmail.com`).
@@ -92,7 +92,7 @@ Examples:
 ### Edit a Member: `editMember`
 Edits the member at the specified index with the specified fields.
 
-Format: `editMember MEMBER_INDEX [n/MEMBER_NAME] [g/GENDER] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]`
+Format: `editMember MEMBER_INDEX [n/MEMBER_NAME] [g/GENDER] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]...`
 
 * The index refers to the index number shown in the displayed member list.
 * The index **must be a positive integer** that is within the range of the length of the member list.
@@ -107,7 +107,7 @@ Examples:
 
 Creates a new event with accompanying details (name, location, date, tag).
 
-Format: `createEvent n/EVENT_NAME l/LOCATION d/DATE [t/TAG]`
+Format: `createEvent n/EVENT_NAME l/LOCATION d/DATE [t/TAG]...`
 
 * Acceptable values for `DATE`: Dates in the format of `YYYY-MM-DD`.
 
@@ -132,7 +132,7 @@ Examples:
 
 Edits the event at the specified index with the specified attributes.
 
-Format: `editEvent EVENT_INDEX [n/EVENT_NAME] [l/LOCATION] [d/DATE] [t/TAG]`
+Format: `editEvent EVENT_INDEX [n/EVENT_NAME] [l/LOCATION] [d/DATE] [t/TAG]...`
 
 * The index refers to the index number shown in the displayed event list.
 * The index **must be a positive integer** that is within the range of the length of the member list.
@@ -324,12 +324,12 @@ If your changes to the data file makes its format invalid, CCACommander will dis
 Action | Format, Examples
 --------|------------------
 **Clear all members and events** | `clear`
-**Create a member** | `createMember n/MEMBER_NAME g/GENDER [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]` <br> e.g. `createMember n/CHU WEI RONG g/Male p/98765432 e/chuweirongrocks@gmail.com a/19 Kent Ridge Crescent, Singapore 119278 t/Leader`
+**Create a member** | `createMember n/MEMBER_NAME g/GENDER [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]...` <br> e.g. `createMember n/CHU WEI RONG g/Male p/98765432 e/chuweirongrocks@gmail.com a/19 Kent Ridge Crescent, Singapore 119278 t/Leader`
 **Delete a member** | `deleteMember MEMBER_INDEX` <br> e.g.`deleteMember 1`
-**Edit a member** | `editMember MEMBER_INDEX [n/MEMBER_NAME] [g/GENDER] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]` <br> e.g.`editMember 1 a/One North`
-**Create an event** | `createEvent n/EVENT_NAME [l/LOCATION] [d/DATE] [t/TAG]` <br> e.g.`createEvent n/Party l/Raffles Hall d/16-09-2023 t/Fun`
+**Edit a member** | `editMember MEMBER_INDEX [n/MEMBER_NAME] [g/GENDER] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]...` <br> e.g.`editMember 1 a/One North`
+**Create an event** | `createEvent n/EVENT_NAME [l/LOCATION] [d/DATE] [t/TAG]...` <br> e.g.`createEvent n/Party l/Raffles Hall d/16-09-2023 t/Fun`
 **Delete an event** | `deleteEvent EVENT_INDEX` <br> e.g.`deleteEvent 1`
-**Edit an event** | `editEvent EVENT_INDEX [n/EVENT_NAME] [l/LOCATION] [d/DATE] [t/TAG]` <br> e.g. `editEvent 5 n/Halloween Surprise Party l/UTR d/2023-10-31 t/sem1`
+**Edit an event** | `editEvent EVENT_INDEX [n/EVENT_NAME] [l/LOCATION] [d/DATE] [t/TAG]...` <br> e.g. `editEvent 5 n/Halloween Surprise Party l/UTR d/2023-10-31 t/sem1`
 **Add member to an event** | `enrol m/MEMBER_INDEX e/EVENT_INDEX [h/NUMBER_OF_HOURS] [r/REMARK]` <br> e.g.`enrol m/1 e/5 h/3 r/did planning`
 **Delete member from an event** | `unenrol m/MEMBER_INDEX e/EVENT_INDEX` <br> e.g.`unenrol m/1 e/5`
 **Edit an enrolment** | `editEnrolment m/MEMBER_INDEX e/EVENT_INDEX [h/NUMBER_OF_HOURS] [r/REMARK]` <br> e.g. `editEnrolment m/1 e/1 h/0 r/Absent due to Covid`
