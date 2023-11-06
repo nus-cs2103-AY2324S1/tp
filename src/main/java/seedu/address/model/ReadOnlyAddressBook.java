@@ -1,7 +1,6 @@
 package seedu.address.model;
 
 import javafx.collections.ObservableList;
-import seedu.address.commons.core.ShortcutSettings;
 import seedu.address.model.person.Person;
 
 /**

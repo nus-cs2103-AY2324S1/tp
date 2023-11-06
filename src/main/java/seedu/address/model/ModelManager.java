@@ -55,7 +55,7 @@ public class ModelManager implements Model {
         this.commandStringStash = new CommandStringStash();
         this.themeProperty = new ThemeProperty();
         this.modelManagerStateList = new ArrayList<>();
-        this.currentStatePointer = -1; //starts from -1 because commit() will +1 later on
+        this.currentStatePointer = -1;
 
         // DoConnek Pro shows all patients on startup by default.
         updateFilteredPersonList(PersonType.PATIENT.getSearchPredicate());
