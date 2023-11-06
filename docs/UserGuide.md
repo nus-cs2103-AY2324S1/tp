@@ -256,7 +256,7 @@ Examples:
 
 Undoes the previous command that the user has entered, which has changed the data within CCACommander.
 
-Format: `redo`
+Format: `undo`
 
 ### Undoing a command: `redo`
 
