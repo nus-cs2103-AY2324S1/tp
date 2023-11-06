@@ -2,7 +2,6 @@ package seedu.address.ui;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-import javafx.stage.Stage;
 import java.nio.file.Path;
 
 import org.junit.jupiter.api.Test;
@@ -17,6 +16,8 @@ import seedu.address.storage.JsonAddressBookStorage;
 import seedu.address.storage.JsonTeamBookStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
 import seedu.address.storage.StorageManager;
+
+import javafx.stage.Stage;
 
 public class MainWindowTest extends ApplicationTest {
 
