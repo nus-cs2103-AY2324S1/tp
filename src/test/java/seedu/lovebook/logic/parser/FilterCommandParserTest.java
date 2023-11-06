@@ -16,6 +16,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.lovebook.logic.commands.FilterCommand;
 import seedu.lovebook.model.date.MetricContainsKeywordPredicate;
+import seedu.lovebook.model.date.Name;
 
 public class FilterCommandParserTest {
 
@@ -35,8 +36,7 @@ public class FilterCommandParserTest {
 
     @Test
     public void parse_emptyKeyword_throwsParseException() {
-        assertParseFailure(parser, " name/", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                FilterCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, " name/", Name.MESSAGE_CONSTRAINTS);
     }
 
     @Test

@@ -10,9 +10,7 @@ import java.util.function.Predicate;
 
 import seedu.lovebook.commons.util.StringUtil;
 import seedu.lovebook.commons.util.ToStringBuilder;
-import seedu.lovebook.logic.parser.ParserUtil;
 import seedu.lovebook.logic.parser.Prefix;
-import seedu.lovebook.logic.parser.exceptions.ParseException;
 
 /**
  * Tests that a {@code Date}'s {@code Name} matches any of the keywords given.
@@ -60,15 +58,6 @@ public class MetricContainsKeywordPredicate implements Predicate<Date> {
         MetricContainsKeywordPredicate otherMetricContainsKeywordsPredicate = (MetricContainsKeywordPredicate) other;
         return keyword.equals(otherMetricContainsKeywordsPredicate.keyword);
     }
-
-    /**
-     * Checks if the name is valid
-     * @return true if the name is valid
-     */
-    private boolean checkValidName() throws ParseException {
-            ParserUtil.parseName(keyword);
-            return true;
-        }
 
     @Override
     public String toString() {

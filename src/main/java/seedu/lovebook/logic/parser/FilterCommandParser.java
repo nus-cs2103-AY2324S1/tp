@@ -10,10 +10,9 @@ import static seedu.lovebook.logic.parser.CliSyntax.PREFIX_NAME;
 
 import java.util.ArrayList;
 
-import seedu.lovebook.commons.util.AppUtil;
 import seedu.lovebook.logic.commands.FilterCommand;
 import seedu.lovebook.logic.parser.exceptions.ParseException;
-import seedu.lovebook.model.date.*;
+import seedu.lovebook.model.date.MetricContainsKeywordPredicate;
 
 /**
  * Parses input arguments and creates a new FindCommand object
