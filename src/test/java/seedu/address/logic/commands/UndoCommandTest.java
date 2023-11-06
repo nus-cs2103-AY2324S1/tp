@@ -172,27 +172,4 @@ public class UndoCommandTest {
         assertCommandResultExecutedFromLogicManager(logicManager, "del2 1",
                 new CommandResult(commandResultString));
     }
-
-    @Test
-    public void temp() {
-        model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-        LogicManager logicManager = getNewLogicManager();
-
-        Person firstPerson = model.getFilteredPersonList().get(0);
-        model.deletePerson(firstPerson);
-        model.commit();
-        //3 person left
-
-        model.undo();
-        //works as expected, back to 4 person
-
-        firstPerson = model.getFilteredPersonList().get(0);
-        model.deletePerson(firstPerson);
-        model.commit();
-        //filteredPersons in ModelManager doesnt get updated, have 4 person expected 3
-
-        firstPerson = model.getFilteredPersonList().get(0);
-        model.deletePerson(firstPerson);
-        model.commit();
-    }
 }

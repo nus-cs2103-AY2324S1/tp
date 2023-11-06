@@ -45,9 +45,10 @@ public class DeleteShortcutCommand extends Command {
                 message.append(String.format(MESSAGE_NONEXISTENT, shortcutAlias));
             } else {
                 message.append(String.format(MESSAGE_SUCCESS, shortcutAlias + " --> " + feedback));
-                model.commit();
+
             }
         });
+        model.commit();
         return new CommandResult(message.toString());
     }
 

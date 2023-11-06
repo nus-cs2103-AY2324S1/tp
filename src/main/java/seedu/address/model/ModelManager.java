@@ -73,11 +73,11 @@ public class ModelManager implements Model {
      * @param toCopyFrom ModelManager to copy from
      */
     public void resetData(ReadOnlyModelManager toCopyFrom) {
-        this.addressBook = toCopyFrom.addressBook;
-        this.userPrefs = toCopyFrom.userPrefs;
-        this.selectedPerson = toCopyFrom.selectedPerson;
-        this.filteredPersons = toCopyFrom.filteredPersons;
-        //Problem : resetted filteredPersons dont get updated by future commands
+        setAddressBook(toCopyFrom.addressBook);
+        setUserPrefs(toCopyFrom.userPrefs);
+        updateSelectedPerson(toCopyFrom.selectedPerson);
+        updateFilteredPersonList((Predicate<Person>) toCopyFrom.filteredPersons.getPredicate());
+        setTheme(toCopyFrom.themeProperty.getValue());
     }
 
     //=========== UserPrefs ==================================================================================
@@ -297,14 +297,13 @@ public class ModelManager implements Model {
         obListCopy.setPersons(this.addressBook.getPersonList());
         FilteredList<Person> filteredListCopy = new FilteredList<Person>(obListCopy.asUnmodifiableObservableList());
         filteredListCopy.setPredicate(this.filteredPersons.getPredicate());
-        //maybe causing undone states to malfunction
 
         modelManagerStateList.add(new ReadOnlyModelManager(
                 new AddressBook(this.addressBook),
-                filteredListCopy, //gets edited when new command wrong
+                filteredListCopy,
                 this.userPrefs.getCopy(),
                 personCopy,
-                this.themeProperty
+                this.themeProperty.getCopy()
         ));
         currentStatePointer++;
     }

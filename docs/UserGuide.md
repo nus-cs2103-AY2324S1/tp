@@ -204,7 +204,9 @@ Examples:
 
 ### Undo previous entry : `undo`
 
-Undo the previous command, stackable. (Able to keep undo-ing till there are no commands left to be undone)
+Undo the previous command, stackable. (Able to keep undo-ing till there are no commands left to be undone).
+The undo/redo command is affected by all successful commands, whether they change the data or not.
+For example, 2 successive `list -sp` commands will require 2 undos, although the second command might not produce any visible change.
 
 Format: `undo`
 
