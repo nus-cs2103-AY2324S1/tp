@@ -297,6 +297,7 @@ public class ModelManager implements Model {
         obListCopy.setPersons(this.addressBook.getPersonList());
         FilteredList<Person> filteredListCopy = new FilteredList<Person>(obListCopy.asUnmodifiableObservableList());
         filteredListCopy.setPredicate(this.filteredPersons.getPredicate());
+        //maybe causing undone states to malfunction
 
         modelManagerStateList.add(new ReadOnlyModelManager(
                 new AddressBook(this.addressBook),
