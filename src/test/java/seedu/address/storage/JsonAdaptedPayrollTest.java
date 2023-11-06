@@ -7,6 +7,7 @@ import static seedu.address.testutil.TypicalPersons.BENSON;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
@@ -21,8 +22,8 @@ public class JsonAdaptedPayrollTest {
     private static final String INVALID_STARTDATE = "11/2023";
     private static final String INVALID_ENDDATE = "38/11/2023";
     private static final String INVALID_PAYMENTDATE = "1234";
-    private static final String INVALID_BENEFIT = "200.00";
-    private static final String INVALID_DEDUCTION = "200.00";
+    private static final String INVALID_BENEFIT = "200";
+    private static final String INVALID_DEDUCTION = "200";
 
     private static final String VALID_SALARY = "200.00";
     private static final String VALID_STARTDATE = BENSON.getLatestPayroll().getStartDateString();
@@ -42,7 +43,7 @@ public class JsonAdaptedPayrollTest {
     }
 
     @Test
-    public void toModelType_invalidSalary_throwsIllegalValueException() {
+    public void toModelType_invalidSalary_throwsIllegalArgumentException() {
         JsonAdaptedPayroll payroll = new JsonAdaptedPayroll(INVALID_SALARY, VALID_STARTDATE,
                 VALID_ENDDATE, VALID_PAYMENTDATE, VALID_BENEFITS, VALID_DEDUCTIONS);
         String expectedMessage = Salary.MESSAGE_CONSTRAINTS;
@@ -97,5 +98,25 @@ public class JsonAdaptedPayrollTest {
         JsonAdaptedPayroll payroll = new JsonAdaptedPayroll(VALID_SALARY, VALID_STARTDATE,
                 VALID_ENDDATE, null, VALID_BENEFITS, VALID_DEDUCTIONS);
         assertThrows(NullPointerException.class, payroll::toModelType);
+    }
+
+    @Test
+    public void toModelType_invalidBenefits_throwsIllegalArgumentException() {
+        List<JsonAdaptedBenefit> invalidBenefits = new ArrayList<>(VALID_BENEFITS);
+        invalidBenefits.add(new JsonAdaptedBenefit(INVALID_BENEFIT, "ANNUAL_BONUS"));
+        JsonAdaptedPayroll payroll =
+                new JsonAdaptedPayroll(VALID_SALARY, VALID_STARTDATE,
+                        VALID_ENDDATE, VALID_ENDDATE, invalidBenefits, VALID_DEDUCTIONS);
+        assertThrows(IllegalArgumentException.class, payroll::toModelType);
+    }
+
+    @Test
+    public void toModelType_invalidDeductions_throwsIllegalArgumentException() {
+        List<JsonAdaptedDeduction> invalidDeductions = new ArrayList<>(VALID_DEDUCTIONS);
+        invalidDeductions.add(new JsonAdaptedDeduction(INVALID_DEDUCTION, "ABSENCE"));
+        JsonAdaptedPayroll payroll =
+                new JsonAdaptedPayroll(VALID_SALARY, VALID_STARTDATE,
+                        VALID_ENDDATE, VALID_ENDDATE, VALID_BENEFITS, invalidDeductions);
+        assertThrows(IllegalArgumentException.class, payroll::toModelType);
     }
 }
