@@ -114,8 +114,8 @@ create n/NAME p/PHONE e/EMAIL a/ADDRESS [t/TAG]... [tg/TELEGRAM]
 
 **Example**
 ```text
-create n/Bernice Yu p/99272758 e/berniceyu@example.com
-a/Blk 30 Lorong 3 Serangoon Gardens, #07-18 t/colleagues
+create n/Bernice Yu p/99272758 e/berniceyu@example.com 
+a/Blk 30 Lorong 3 Serangoon Gardens, #07-18 t/colleagues 
 t/friends tg/@yuyubern pf/Graphic Designer i/60000
 ```
 
