@@ -103,18 +103,15 @@ the jar file cannot be opened because it is from an unidentified developer. To c
 2. Press Open when prompted
 </div>
 
-<div markdown="block" class="alert alert-info">
+<div markdown="block" class="alert alert-warning">
 
-**:information_source: Unable to Open jar file**<br>
+**:warning: Unable to Open jar file**<br>
 
 Should the file fail to launch on click:
 
-1. Open a command terminal on the folder where `TutorConnect.jar` is. On Windows, you can do so by right-clicking on the folder and select "Open in Terminal".
-   ![terminal](images/quick-start/open-terminal.png)
-   On Mac:
-   ![terminal-mac](images/quick-start/open-terminal-mac.png)
+1. Open a command terminal (using [Windows](https://www.lifewire.com/open-command-prompt-in-a-folder-5185505) or [Mac](https://support.apple.com/en-sg/guide/terminal/trmlb20c7888/mac#:~:text=On%20your%20Mac%2C%20open%20a,window%3A%20Choose%20Open%20in%20Terminal.)) on the folder where `TutorConnect.jar` is. 
 2. Type the following command in the terminal: `java -jar TutorConnect.jar` and hit enter.
-
+3. The command should run and launch the application.
 </div>
 
 
