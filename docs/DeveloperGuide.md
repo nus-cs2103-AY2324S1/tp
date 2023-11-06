@@ -172,9 +172,9 @@ Additionally, ModelManager implements the following operations:
 
 * `ModelManager#commit()` — Saves the current ModelManager state in its history.
 * `ModelManager#undo()` — Restores the previous ModelManager state from its history.
-* `ModelManager#redo()` — Restores a previously ModelManager state from its history.
+* `ModelManager#redo()` — Restores a previously undone ModelManager state from its history.
 
-These operations are exposed in the `Model` interface as `Model#commitk()`, `Model#undo()` and `Model#redo()` respectively.
+These operations are exposed in the `Model` interface as `Model#commit()`, `Model#undo()` and `Model#redo()` respectively.
 
 Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
 
