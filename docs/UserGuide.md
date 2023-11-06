@@ -402,5 +402,5 @@ _Details coming soon ..._
 | **Complete** | `complete [INDEX] [d/APPOINTMENT_DATE]` <br> e.g `complete 1` <br> e.g `complete 01-05-2023`                                                                                                                      |                                                                                                                                                                         |
 | **List**     | `list`                                                                                                                                                                                                                  |
 | **Help**     | `help`                                                                                                                                                                                                                  |
-| **Sort**     | `sort SORTING_FUNCTION` <br> e.g., `sort appointment`                                                                                                                                                                   |
+| **Sort**     | `sort KEYWORD` <br> e.g., `sort appointment`                                                                                                                                                                   |
 
