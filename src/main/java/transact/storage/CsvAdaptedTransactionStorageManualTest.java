@@ -24,8 +24,6 @@ import transact.model.transaction.info.TransactionType;
 public class CsvAdaptedTransactionStorageManualTest {
     public static void main(String[] args) {
         Path filePath = Path.of("transactions.csv");
-        Path exportPath = Path.of("exportTransactions.csv");
-        Path importPath = Path.of("importTransactions.csv");
 
         ReadOnlyTransactionBook transactionBook = createTestTransactionBook();
 
