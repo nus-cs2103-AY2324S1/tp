@@ -530,15 +530,15 @@ Marks the indicated employee as “Absent”, “Late”, or “Present”.
 
 **Command Format**
 
-`mark INDEX /at Attendance_Type` or `mark /n NAME /at Attendance_Type`
+`mark INDEX /atd Attendance_Type` or `mark /n NAME /atd Attendance_Type`
 
 * The attendance type can only be: `ABSENT`, `LATE`, or `PRESENT`.
 * It is not case-insensitive. e.g. you can either enter ABSENT or absent.
 
 Examples:
 
-* `mark n/John /at Absent` marks John as absent.
-* `mark 1 /at Present` marks the first employee in the current list to be present.
+* `mark n/John /atd Absent` marks John as absent.
+* `mark 1 /atd Present` marks the first employee in the current list to be present.
 
 Output:
 * If the index is not within the numbers in the list, the app should display `The employee index provided is invalid.`
@@ -562,7 +562,7 @@ View employee’s attendance report.
 Examples:
 
 * `attendance /n John` views John’s attendance report for the year up till today.
-* `attendance 1` views the first employee’s attendance report in the current list.
+* `attendance 1` views the first employee’s attendance report for the year up till today.
 
 Output:
 * If the index is not within the numbers in the list, the app should display `The employee index provided is invalid.`
@@ -658,29 +658,29 @@ If your changes to the data file makes its format invalid, ManaGease will discar
 
 ## Command summary
 
-| Action                                                                 | Format and Examples                                                                                                                                                                                                         |
-|------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **[Add](#adding-a-employee-add)**                                      | `add /n NAME /e EMAIL /p PHONE /a ADDRESS /b BANK_ACCOUNT /jd JOIN_DATE /s SALARY /l ANNUAL_LEAVE`<br /> e.g., `add /n Jane Smith /e jane@email.com /p 12345678 /a 123 Main St /b 123456789/jd 12/09/2023 /s 1000.00 /l 10` |
-| **[Clear](#clearing-all-entries-clear)**                               | `clear`                                                                                                                                                                                                                     |
-| **[Delete](#deleting-a-employee-delete)**                              | `delete INDEX`<br /> e.g., `delete 3`                                                                                                                                                                                       |
-| **[Edit](#editing-a-employee-edit)**                                   | `edit INDEX [/n NAME] [/e EMAIL] [/p PHONE] [/a ADDRESS] [/b BANK_ACCOUNT] [/jd JOIN_DATE] [/s SALARY] [/l ANNUAL_LEAVE]`<br /> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                            |
-| **[Read](#reading-a-employees-information-read)**                      | `read INDEX PREFIX`<br /> e.g., `read 3 /n`                                                                                                                                                                                 |
-| **[List](#listing-all-employees-list)**                                | `list`                                                                                                                                                                                                                      |
-| **[Find](#locating-employees-by-name-find)**                           | `find KEYWORD [MORE_KEYWORDS]`<br /> e.g., `find alex`                                                                                                                                                                      |
-| **[Deduct](#adding-a-deduction-to-the-payroll-of-an-employee-deduct)** | `deduct INDEX /v VALUE /r REASON` or `deduct /n NAME /v VALUE /r REASON`<br /> e.g., `deduct 3 /v 200.00 /r cpf`                                                                                                            |
-| **[Benefit](#adding-a-benefit-to-the-payroll-of-an-employee-benefit)** | `benefit INDEX /v VALUE /r REASON` or `benefit /n NAME /v VALUE /r REASON`<br /> e.g., `benefit 3 /v 1000.00 /r bonus`                                                                                                      |
-| **[Payroll](#calculating-an-employees-payroll-payroll)**               | `payroll INDEX` or `payroll /n NAME`<br /> e.g., `payroll 3`                                                                                                                                                                |
-| **[Payslip](#generating-payslips-for-an-employee-payslip)**            | `payslip INDEX [/t DD/MM/YYYY]` or `payslip /n NAME [/t DD/MM/YYYY]`<br /> e.g., `payslip 3`                                                                                                                                |
-| **[Add Leave](#adding-leave-to-an-employee-addleave)**                 | `addleave INDEX /on DATE` or `addleave INDEX /from DATE /to DATE`<br /> e.g., `addleave 3 /from 12/12/2024 /to 14/12/2024`                                                                                                  |
-| **[Delete Leave](#deleting-leave-from-an-employee-deleteleave)**       | `deleteleave INDEX /on DATE` or `deleteleave INDEX /from DATE /to DATE`<br /> e.g., `deleteleave 3 /from 12/12/2024 /to 14/12/2024`                                                                                         |
-| **[View Leave](#view-employee-who-is-on-leave-viewleave)**             | `viewleave /on DATE`<br /> e.g., `viewleave /on 12/12/2024`                                                                                                                                                                 |
-| **[View Previous Month](#view-the-calendar-of-previous-month-pm)**     | `pm`                                                                                                                                                                                                                        |
-| **[View Current Month](#view-the-calendar-of-current-month-cm)**       | `cm`                                                                                                                                                                                                                        |
-| **[View Next Month](#view-the-calendar-of-upcoming-month-nm)**         | `nm`                                                                                                                                                                                                                        |
-| **[Mark](#marking-employees-attendance-mark)**                         | `mark INDEX /at ATTENDANCE_TYPE` or `mark /n NAME /at ATTENDANCE_TYPE`<br /> e.g, `mark 3 /at present`                                                                                                                      |
-| **[Attendance](#view-employees-attendance-report-attendance)**         | `attendance INDEX` or `attendance /n NAME`<br /> e.g, `attendance 3`                                                                                                                                                        |
-| **[Help](#viewing-help-help)**                                         | `help`                                                                                                                                                                                                                      |
-| **[Exit](#exiting-the-program-exit)**                                  | `exit`                                                                                                                                                                                                                      |
+| Action                                                                 | Format and Examples                                                                                                                                                                                                          |
+|------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **[Add](#adding-a-employee-add)**                                      | `add /n NAME /e EMAIL /p PHONE /a ADDRESS /b BANK_ACCOUNT /jd JOIN_DATE /s SALARY /l ANNUAL_LEAVE`<br /> e.g., `add /n Jane Smith /e jane@email.com /p 12345678 /a 123 Main St /b 123456789 /jd 12/09/2023 /s 1000.00 /l 10` |
+| **[Clear](#clearing-all-entries-clear)**                               | `clear`                                                                                                                                                                                                                      |
+| **[Delete](#deleting-a-employee-delete)**                              | `delete INDEX`<br /> e.g., `delete 3`                                                                                                                                                                                        |
+| **[Edit](#editing-a-employee-edit)**                                   | `edit INDEX [/n NAME] [/e EMAIL] [/p PHONE] [/a ADDRESS] [/b BANK_ACCOUNT] [/jd JOIN_DATE] [/s SALARY] [/l ANNUAL_LEAVE]`<br /> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                             |
+| **[Read](#reading-a-employees-information-read)**                      | `read INDEX PREFIX`<br /> e.g., `read 3 /n`                                                                                                                                                                                  |
+| **[List](#listing-all-employees-list)**                                | `list`                                                                                                                                                                                                                       |
+| **[Find](#locating-employees-by-name-find)**                           | `find KEYWORD [MORE_KEYWORDS]`<br /> e.g., `find alex`                                                                                                                                                                       |
+| **[Deduct](#adding-a-deduction-to-the-payroll-of-an-employee-deduct)** | `deduct INDEX /v VALUE /r REASON` or `deduct /n NAME /v VALUE /r REASON`<br /> e.g., `deduct 3 /v 200.00 /r cpf`                                                                                                             |
+| **[Benefit](#adding-a-benefit-to-the-payroll-of-an-employee-benefit)** | `benefit INDEX /v VALUE /r REASON` or `benefit /n NAME /v VALUE /r REASON`<br /> e.g., `benefit 3 /v 1000.00 /r bonus`                                                                                                       |
+| **[Payroll](#calculating-an-employees-payroll-payroll)**               | `payroll INDEX` or `payroll /n NAME`<br /> e.g., `payroll 3`                                                                                                                                                                 |
+| **[Payslip](#generating-payslips-for-an-employee-payslip)**            | `payslip INDEX [/t DD/MM/YYYY]` or `payslip /n NAME [/t DD/MM/YYYY]`<br /> e.g., `payslip 3`                                                                                                                                 |
+| **[Add Leave](#adding-leave-to-an-employee-addleave)**                 | `addleave INDEX /on DATE` or `addleave INDEX /from DATE /to DATE`<br /> e.g., `addleave 3 /from 12/12/2024 /to 14/12/2024`                                                                                                   |
+| **[Delete Leave](#deleting-leave-from-an-employee-deleteleave)**       | `deleteleave INDEX /on DATE` or `deleteleave INDEX /from DATE /to DATE`<br /> e.g., `deleteleave 3 /from 12/12/2024 /to 14/12/2024`                                                                                          |
+| **[View Leave](#view-employee-who-is-on-leave-viewleave)**             | `viewleave /on DATE`<br /> e.g., `viewleave /on 12/12/2024`                                                                                                                                                                  |
+| **[View Previous Month](#view-the-calendar-of-previous-month-pm)**     | `pm`                                                                                                                                                                                                                         |
+| **[View Current Month](#view-the-calendar-of-current-month-cm)**       | `cm`                                                                                                                                                                                                                         |
+| **[View Next Month](#view-the-calendar-of-upcoming-month-nm)**         | `nm`                                                                                                                                                                                                                         |
+| **[Mark](#marking-employees-attendance-mark)**                         | `mark INDEX /atd ATTENDANCE_TYPE` or `mark /n NAME /atd ATTENDANCE_TYPE`<br /> e.g, `mark 3 /atd present`                                                                                                                    |
+| **[Attendance](#view-employees-attendance-report-attendance)**         | `attendance INDEX` or `attendance /n NAME`<br /> e.g, `attendance 3`                                                                                                                                                         |
+| **[Help](#viewing-help-help)**                                         | `help`                                                                                                                                                                                                                       |
+| **[Exit](#exiting-the-program-exit)**                                  | `exit`                                                                                                                                                                                                                       |
 
 
 * Go back to [Features](#features)

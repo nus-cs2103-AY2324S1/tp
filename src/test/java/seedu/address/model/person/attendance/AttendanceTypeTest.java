@@ -1,17 +1,16 @@
 package seedu.address.model.person.attendance;
 
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import org.junit.jupiter.api.Test;
 
 public class AttendanceTypeTest {
     @Test
     public void isValidAttendanceType_nullName() {
         assertThrows(
-                NullPointerException.class,
-                () -> AttendanceType.isValidAttendanceType(null));
+                NullPointerException.class, () -> AttendanceType.isValidAttendanceType(null));
     }
 
     @Test

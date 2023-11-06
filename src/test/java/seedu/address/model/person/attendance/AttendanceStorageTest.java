@@ -1,12 +1,15 @@
 package seedu.address.model.person.attendance;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static seedu.address.testutil.Assert.assertThrows;
-
-import org.junit.jupiter.api.Test;
-import seedu.address.model.person.JoinDate;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.ArrayList;
+
+import org.junit.jupiter.api.Test;
+
+import seedu.address.model.person.JoinDate;
+
 
 public class AttendanceStorageTest {
 
@@ -28,12 +31,12 @@ public class AttendanceStorageTest {
     }
 
     @Test
-    public void markLate_null_throwsNullPointerException(){
+    public void markLate_null_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new AttendanceStorage().markLate(null));
     }
 
     @Test
-    public void markPresent_null_throwsNullPointerException(){
+    public void markPresent_null_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new AttendanceStorage().markPresent(null));
     }
 
@@ -47,7 +50,7 @@ public class AttendanceStorageTest {
     public void getAttendanceReport_validJoinDate_invalidNumOfLeave() {
         JoinDate joinDate = new JoinDate("10/03/2023");
         AttendanceStorage attendanceStorage = new AttendanceStorage();
-        assertThrows(IllegalArgumentException.class,() -> attendanceStorage.getAttendanceReport(joinDate, -11));
+        assertThrows(IllegalArgumentException.class, () -> attendanceStorage.getAttendanceReport(joinDate, -11));
     }
 
     @Test

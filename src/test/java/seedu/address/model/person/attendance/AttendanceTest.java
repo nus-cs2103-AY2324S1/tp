@@ -1,31 +1,31 @@
 package seedu.address.model.person.attendance;
 
-import java.time.LocalDate;
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.testutil.Assert.assertThrows;
 
+import java.time.LocalDate;
+
+import org.junit.jupiter.api.Test;
+
+
+
 public class AttendanceTest {
     @Test
-    public void constructor_nullDate_validAttendanceType_throwsNullPointerException() {
+    public void constructorTestNullDateValidAtdTypeThrowsNullPointerException() {
         assertThrows(
-                NullPointerException.class,
-                () -> new Attendance(null, AttendanceType.LATE));
+                NullPointerException.class, () -> new Attendance(null, AttendanceType.LATE));
     }
 
     @Test
-    public void constructor_validDate_nullAttendanceType_throwsNullPointerException() {
+    public void constructorTestValidDateNullAtdTypeThrowsNullPointerException() {
         assertThrows(
-                NullPointerException.class,
-                () -> new Attendance(LocalDate.now(), null));
+                NullPointerException.class, () -> new Attendance(LocalDate.now(), null));
     }
 
     @Test
-    public void constructor_nullDate_nullAttendanceType_throwsNullPointerException() {
+    public void constructorTestNullDateNullAttendanceTypeThrowsNullPointerException() {
         assertThrows(
-                NullPointerException.class,
-                () -> new Attendance(null, null));
+                NullPointerException.class, () -> new Attendance(null, null));
     }
 
     @Test

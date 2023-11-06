@@ -14,6 +14,8 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailur
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
+import java.util.Arrays;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.Messages;
@@ -22,13 +24,11 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.attendance.AttendanceType;
 
-import java.util.Arrays;
-
 public class MarkCommandParserTest {
     private MarkCommandParser parser = new MarkCommandParser();
 
     @Test
-    public void parse_namePresent_validType_success() {
+    public void parseTestValidNameValidTypeSuccess() {
         // valid name, mark as absent
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_BOB + ATTENDANCE_TYPE_DESC_ABSENT,
                 new MarkCommand(
@@ -49,7 +49,7 @@ public class MarkCommandParserTest {
     }
 
     @Test
-    public void parse_indexPresent_success() {
+    public void parseIndexPresentSuccess() {
         // valid index, mark as absent
         assertParseSuccess(parser, "1" + ATTENDANCE_TYPE_DESC_ABSENT,
                 new MarkCommand(
@@ -57,7 +57,7 @@ public class MarkCommandParserTest {
                         AttendanceType.ABSENT));
 
         // valid index, mark as late
-        assertParseSuccess(parser, "1"  + ATTENDANCE_TYPE_DESC_LATE,
+        assertParseSuccess(parser, "1" + ATTENDANCE_TYPE_DESC_LATE,
                 new MarkCommand(
                         INDEX_FIRST_PERSON,
                         AttendanceType.LATE));
