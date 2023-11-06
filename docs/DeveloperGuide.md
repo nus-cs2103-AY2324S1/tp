@@ -172,23 +172,55 @@ The flow of how a `Command` is executed is illustrated with the `Schedule` Comma
 ### Schedule Command
 
 #### Implementation Overview
+After the `AddressBookParser` identifies that the user's input has a schedule command word, it creates a `ScheduleCommandParser`. The `ScheduleCommandParser` then parses the users input and creates a new `ScheduleCommand` containing an `Appointment` and an `Index`. The `ScheduleCommand` is then executed by `Logic Manager`, which updates the `Person` in `Model` to have the created `Appointment`. A `CommandResult` which stores the message of the outcome of schedule command is then returned. The partial class diagram is shown below.
 
 <img src="images/ScheduleClassDiagram.png" width="400"/>
 
-Upon entering the `Schedule Command`, 
-- The user input will be parsed by `AddressBookParser`. The `schedule` command word will be parsed and an instance of a `ScheduleCommandParser` will be created.
-- The `ScheduleCommandParser` will parse the user arguments, creating a `ScheduleCommand` that has a single `Index` and `Appointment`. 
-- The `ScheduleCommand` will then be executed by the `LogicManager`, which then adds an `Appointment` to the specified person and returns the `CommandResult` containing the success message.
+The following activity diagram summarises what happens the user executes a schedule command. 
+
+<img src="images/ScheduleActivityDiagram.png" width="400"/>
 
 **Design Considerations**
 
+**Aspect: How to implement Appointments for Person**  
+
+Alternative 1 (Current Choice): Create an abstract class ScheduleItem and make it a compulsory field for Person.
+
+The diagram below illustrates our current implementation. A `Person` has is associated with 1 `ScheduleItem`, which can be a `NullAppointment`(empty appointment) or `Appointment`. 
+
 <img src="images/ScheduleItemClassDiagram.png" width="300"/> 
 
-- When a Person is first added to the contact book, a Person will have a `NullAppointment`. A `Person` have a compulsory 1 to 1 relationship with ScheduleItem. This is to ensure a `Person` will not have multiple appointments scheduled. 
-- When a `ScheduleCommand` is executed, the Person will be associated with an `Appointment` object that contains the appointment name and date.
-- There is only one static instance of `NullAppointment` which is returned when the method `#getNullAppointment` is called. 
-- The abstract class ScheduleItem is created so that LSP is adhered to.
+- Pros: 
+  * This ensures a 1-to-1 relationship between Person and Appointment, making implementation of other functions like sort easier. This also prevents clutter of appointments in the UI.
+  * This makes use of a **facade** design pattern, where `NullAppointment` and `Appointment` will handle themselves without the `Person` knowing. 
+  
+- Cons: 
+  * This makes the scheduling of Appointments more inflexible, as the FA is unable to schedule multiple appointments with the same person.
 
+- Other considerations: 
+  * `NullAppointment` is a Singleton class to prevent multiple instances of it being created, making it more efficient for memory. 
+
+Alternative 2: Create a hashset of Appointments for each Person. 
+- Pros:
+  * More flexible, user can now schedule multiple appointment for a Person. 
+  
+- Cons:
+  * Harder to implement operations such as editing of an appointment for a client. An additional step of finding the specified appointment within the hashset is required, which may potentially introduce more bugs.
+  * Harder to implement default behaviours for when person has no appointment.
+
+### Complete Feature
+
+The **Complete** feature is facilitated by the `CompleteCommand` and `CompleteCommandParser`. The `CompleteCommandParser` creates a `CompleteCommand` associated with a `CompleteCommandDescriptor` which contains information on how the appointments should be completed.
+
+The following sequence diagram illustrates how the complete operation is executed when date given. 
+
+<img src="images/CompleteSequenceDiagram.png" width="800"/>
+
+> :warn: The lifeline of the diagram should end at the destroyer mark (X) but reaches end of diagram due to limitation of plantUML
+
+The following activity diagram illustrates how the complete operation is executed. 
+
+<img src="images/CompleteActivityDiagram.png" width="800"/>
 
 ### Gather Emails Feature
 
@@ -328,44 +360,6 @@ The following sequence diagram shows how the gather operation works:
 - **Cons:** Unlikely, but if for some reason the user wants the list sorted back to its original order, the only way is to restart the app at the current moment.
 
 _{more aspects and alternatives to be added}_
-
-### Expanded Find feature
-
-The enhanced find mechanism is facilitated by the `CombinedPredicate` and utilises the existing FindCommand structure.
-It extends `Predicate<Person>` and is composed of up to one of a `NameContainsKeywordsPredicate`, `FinancialPlanContainsKeywordsPredicate`
-and a `TagContainsKeywordsPredicate` each. Here's a partial class diagram of the `CombinedPredicate`.
-![CombinedPredicate](images/CombinedPredicate.png)
-
-The `NameContainsKeywordsPredicate`, `FinancialPlanContainsKeywordsPredicate` and
-`TagContainsKeywordsPredicate` check a Person if the respective field contains
-any of the keywords supplied to the predicate. Note that only the `NameContainsKeywordsPredicate`
-checks for whole words, because it is rare to search for people by substrings, while `FinancialPlanContainsKeywordsPredicate`
-and `TagContainsKeywordsPredicate` allow matching for substrings because there are certain cases where it is logical to search for
-substrings e.g. `Plan A` and `Plan A Premium` are related, so they can show up in the same search.
-
-The Find command format also changes to resemble a format more similar to the `add` and `edit` commands, to allow for
-searching for keywords in multiple fields at the same time.
-
-#### Design Considerations:
-
-**Aspect: How to implement find for multiple fields**
-* **Alternative 1 (current choice):** Use one unified command and format.
-    * Pros: Easy to implement (argument multimap is available), allows for more flexible usage.
-    * Cons: May get cluttered when there are many terms.
-
-* **Alternative 2:** Take an argument to decide which field to find by.
-    * Pros: More user-friendly and natural since there is no need to use prefixes.
-    * Cons: Less flexible, slightly more difficult to implement.
-
-**Aspect: How to implement `CombinedPredicate`**
-* **Alternative 1 (current choice):** Compose it with the 3 component predicates.
-    * Pros: Easier to modify and test.
-    * Cons: Less flexible when trying to combine multiple predicates (that may be of the same type).
-
-* **Alternative 2:** Use a `Predicate<Person>` and use the `or()` method to chain predicates.
-    * Pros: More flexible in usage.
-    * Cons: More difficult to modify and test.
-
 
 
 ### Appointment Sidebar Feature

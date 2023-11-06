@@ -102,8 +102,8 @@ public class AddressBook implements ReadOnlyAddressBook {
         return persons.gatherEmails(prompt);
     };
 
-    public void clearAppointments(LocalDate date) {
-        persons.clearAppointments(date);
+    public boolean clearAppointments(LocalDate date) {
+        return persons.clearAppointments(date);
     }
 
     //// util methods

@@ -151,6 +151,10 @@ public class Person {
                 tags, NullAppointment.getNullAppointment());
     }
 
+    public boolean hasNullAppointment() {
+        return appointment.equals(NullAppointment.getNullAppointment());
+    }
+
     /**
      * Returns true if both persons have the same identity and data fields.
      * This defines a stronger notion of equality between two persons.

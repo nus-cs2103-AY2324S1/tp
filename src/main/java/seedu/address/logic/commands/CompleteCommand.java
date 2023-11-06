@@ -8,7 +8,6 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.function.Consumer;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
@@ -34,6 +33,10 @@ public class CompleteCommand extends Command {
     public static final String MESSAGE_COMPLETE_SUCCESS = "Appointments Completed!";
     public static final String MESSAGE_INVALID_DATE_FORMAT = "Input Date should be in format of dd-MM-yyyy";
     public static final String MESSAGE_INVALID_DATE = "Please input a valid Date";
+    public static final String MESSAGE_PERSON_NO_APPOINTMENT = "No Appointment Found:"
+            + " Selected Person currently has no appointment scheduled";
+    public static final String MESSAGE_DATE_NO_APPOINTMENT = "No Appointment Found:"
+            + " No Appointments found with the current date";
     private final CompleteDescriptor completeDescriptor;
     public CompleteCommand(CompleteDescriptor completeDescriptor) {
         this.completeDescriptor = completeDescriptor;
@@ -44,29 +47,32 @@ public class CompleteCommand extends Command {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
 
-        Consumer<Index> editByIndex = index -> {
-            Person personToEdit = lastShownList.get(index.getZeroBased());
-            Person edittedPerson = createPersonWithoutAppointment(personToEdit);
-
-            model.setPerson(personToEdit, edittedPerson);
-        };
-
-        Consumer<LocalDate> editByDate = date -> {
-            model.clearAppointments(date);
-        };
-
         Optional<Index> index = completeDescriptor.getIndex();
+
+        // if Index present, edit Model by index
         if (index.isPresent()) {
             if (index.get().getZeroBased() >= lastShownList.size()) {
                 throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
             }
+
+            Person personToEdit = lastShownList.get(index.get().getZeroBased());
+            if (personToEdit.hasNullAppointment()) {
+                throw new CommandException(MESSAGE_PERSON_NO_APPOINTMENT);
+            }
+
+            Person edittedPerson = createPersonWithoutAppointment(personToEdit);
+
+            model.setPerson(personToEdit, edittedPerson);
         }
 
-        // if Index present, edit Model by Person Index
-        completeDescriptor.getIndex().ifPresent(editByIndex);
+        Optional<LocalDate> date = completeDescriptor.getDate();
 
         // if Date present, edit Model by Date;
-        completeDescriptor.getDate().ifPresent(editByDate);
+        if (date.isPresent()) {
+            if (!model.clearAppointments(date.orElse(null))) {
+                throw new CommandException(MESSAGE_DATE_NO_APPOINTMENT);
+            }
+        }
 
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(MESSAGE_COMPLETE_SUCCESS);
