@@ -1,12 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Label?>
-
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -41,10 +35,9 @@
                 <fitWidth>60</fitWidth>
                 <fitHeight>60</fitHeight>
             </ImageView>
-            <VBox spacing="15" alignment="CENTER_LEFT">
-                <Label fx:id="name" text="" styleClass="cell_big_label"/>
-                <FlowPane fx:id="roleLarge" />
-                <FlowPane fx:id="listView"/>
+            <VBox alignment="CENTER_LEFT" spacing="15">
+                <Label fx:id="name" styleClass="cell_big_label" text="" />
+                <FlowPane fx:id="departments" />
             </VBox>
         </HBox>
 
@@ -106,21 +99,6 @@
             </image>
          </ImageView>
          <Label fx:id="leave" styleClass="cell_small_label" text="" />
-        </HBox>
-
-        <!-- Row 6 (Separator) -->
-        <Separator orientation="HORIZONTAL" GridPane.rowIndex="6">
-            <visible>false</visible>
-        </Separator>
-
-        <!-- Row 7 -->
-        <Label styleClass="cell_big_label" text="Managed By" GridPane.rowIndex="7" />
-
-        <!-- Row 8 -->
-        <HBox alignment="TOP_LEFT" spacing="40" GridPane.rowIndex="8">
-            <VBox spacing="15" alignment="CENTER_LEFT">
-                <FlowPane fx:id="listSupervisors"/>
-            </VBox>
         </HBox>
     </GridPane>
 </HBox>
