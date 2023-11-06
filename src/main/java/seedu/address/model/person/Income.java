@@ -5,8 +5,8 @@ package seedu.address.model.person;
  */
 public class Income {
 
-    public static final String MESSAGE_CONSTRAINTS
-            = "Income should only contain positive integers less than 2147483648 and it should not be blank";
+    public static final String MESSAGE_CONSTRAINTS =
+            "Income should only contain positive integers less than 2147483648 and it should not be blank";
 
     public final Integer value;
 
