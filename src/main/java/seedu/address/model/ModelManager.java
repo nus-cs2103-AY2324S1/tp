@@ -273,10 +273,6 @@ public class ModelManager implements Model {
 
     //=========== Full Task List ================================================================================
 
-    @Override
-    public ReadOnlyFullTaskList getFullTaskListObject() {
-        return fullTaskList;
-    }
 
     @Override
     public ObservableList<Task> getFullTaskList() {
