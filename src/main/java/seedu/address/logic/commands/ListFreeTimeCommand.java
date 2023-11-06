@@ -1,11 +1,13 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.Messages.MESSAGE_PAST_DATE;
 
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import javafx.util.Pair;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.Time;
 
@@ -59,8 +61,11 @@ public class ListFreeTimeCommand extends Command {
      * @return the command result of executing the find-freetime command
      */
     @Override
-    public CommandResult execute(Model model) {
+    public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+        if (givenDay.isPastDate()) {
+            throw new CommandException(MESSAGE_PAST_DATE);
+        }
         List<Pair<Time, Time>> freeTimes = model.listPocketsOfTimeOnGivenDay(givenDay);
         String formattedFreeTime = formatFreeTime(freeTimes);
         String formattedDate = givenDay.getDate().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));

@@ -34,7 +34,7 @@ class ListFreeTimeCommandTest {
 
     @Test
     void testFormatFreeTimeSuccess() {
-        LocalDateTime today = LocalDateTime.now();
+        LocalDateTime today = LocalDateTime.now().plusDays(1);
         ListFreeTimeCommand listFreeTimeCommand = new ListFreeTimeCommand(new Time(today));
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         String expectedMessage = "Free times on " + today.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"))

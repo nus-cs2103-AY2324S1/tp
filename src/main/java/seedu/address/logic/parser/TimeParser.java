@@ -189,6 +189,6 @@ public class TimeParser {
      */
     public static String formatDate(LocalDateTime time) {
         assert time != null : "time should be not null";
-        return time.format(DateTimeFormatter.ofPattern("d/M/yy HHmm"));
+        return time.format(DateTimeFormatter.ofPattern("d/M/yyyy HHmm"));
     }
 }
