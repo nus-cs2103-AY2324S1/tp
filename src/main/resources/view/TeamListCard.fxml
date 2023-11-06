@@ -25,7 +25,8 @@
                         <Region fx:constant="USE_PREF_SIZE" />
                     </minWidth>
                 </Label>
-                <Label fx:id="teamName" text="\$teamName" styleClass="cell_big_label" />
+                <Label fx:id="teamName" text="\$teamName" styleClass="cell_big_label"
+                       wrapText="true" maxWidth="800.0" />
             </HBox>
             <VBox fx:id="teamLeader"  />
             <VBox fx:id="teamMembers" />
