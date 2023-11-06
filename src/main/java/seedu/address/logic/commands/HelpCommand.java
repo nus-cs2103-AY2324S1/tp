@@ -14,6 +14,7 @@ public class HelpCommand extends Command {
 
     public static final String SHOWING_HELP_MESSAGE = "(Opened help window.)\n"
             + "Command summary: \n"
+            + "  -> Hi\n"
             + "  -> add + n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]\n"
             + "  -> delete + INDEX\n"
             + "  -> edit + "
@@ -28,7 +29,8 @@ public class HelpCommand extends Command {
             + "  -> deletedev + tn/Team Name n/Developer Name\n"
             + "  -> listt\n"
             + "  -> clear (CAUTION! using the clear command might result in unintended loss of data!)\n"
-            + "  -> find + KEYWORD [MORE_KEYWORDS]\n";
+            + "  -> find + KEYWORD [MORE_KEYWORDS]\n"
+            + "  -> findteam + KEYWORD [MORE_KEYWORDS]\n";
 
     @Override
     public CommandResult execute(Model model) {
