@@ -6,6 +6,8 @@ import static seedu.ccacommander.model.Model.PREDICATE_SHOW_ALL_MEMBERS;
 
 import seedu.ccacommander.logic.commands.exceptions.CommandException;
 import seedu.ccacommander.model.Model;
+import seedu.ccacommander.ui.EventListPanel;
+import seedu.ccacommander.ui.MemberListPanel;
 
 /**
  * Undoes the latest undoable command {@code Command}
@@ -24,6 +26,10 @@ public class UndoCommand extends Command {
         }
 
         String undoCommandMessage = model.undo();
+
+        MemberListPanel.setDisplayMemberHoursAndRemark(false);
+        EventListPanel.setDisplayEventHoursAndRemark(false);
+
         model.updateFilteredMemberList(PREDICATE_SHOW_ALL_MEMBERS);
         model.updateFilteredEventList(PREDICATE_SHOW_ALL_EVENTS);
         return new CommandResult(String.format(MESSAGE_SUCCESS_UNDO, undoCommandMessage));
