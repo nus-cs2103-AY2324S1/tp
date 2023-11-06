@@ -144,7 +144,7 @@ public class SampleDataUtil {
 
                 new Person.PersonBuilder(new Name("Lucas Chen"), new Phone("93214576"),
                         new Email("lucasc@example.com"), new Address("Blk 20 Woodlands Street 13 #09-33"),
-                        getTagSet("family")).withTelegram(new TelegramHandle("@lucas_woods"))
+                        getTagSet("family")).withTelegram(new TelegramHandle("@lucaswoods"))
                         .withLead(new Lead("WARM")).build(),
 
                 new Person.PersonBuilder(new Name("Mia Tan"), new Phone("93671245"),
