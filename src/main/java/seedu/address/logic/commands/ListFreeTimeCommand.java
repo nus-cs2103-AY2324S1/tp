@@ -63,7 +63,7 @@ public class ListFreeTimeCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        if (givenDay.isPast()) {
+        if (givenDay.isPastDate()) {
             throw new CommandException(MESSAGE_PAST_DATE);
         }
         List<Pair<Time, Time>> freeTimes = model.listPocketsOfTimeOnGivenDay(givenDay);
