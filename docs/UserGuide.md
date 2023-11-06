@@ -234,6 +234,13 @@ Refer to [properties of contact](#properties-of-contact) on the accepted formats
 
 </box>
 
+Here is what CampusConnect looks like when you execute the `add` command.
+
+<div style="display:flex; justify-content:space-around; align-items:center;">
+  <img src="images/before_add.png" alt="Before add command" style="height:400px; margin:10px;">
+  <img src="images/after_add.png" alt="After add command" style="height:400px; margin:10px;">
+</div>
+
 <box type="warning">
 
 If you are adding a new contact with a name ___(case sensitive)___ that is already saved in CampusConnect, you will not be able to add the new contact.
