@@ -18,7 +18,7 @@ public class FindCommandParser implements Parser<FindCommand> {
     /**
      * Parses the given {@code String} of arguments in the context of the FindCommand
      * and returns a FindCommand object for execution.
-     * @throws ParseException if the user input is empty or if the user input contains characters other than alphabets.
+     * @throws ParseException if the user input is empty or if the user input is not alphanumeric.
      */
     public FindCommand parse(String args) throws ParseException {
         String trimmedArgs = args.trim();

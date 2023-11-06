@@ -23,6 +23,7 @@ import seedu.staffsnap.model.UserPrefs;
 import seedu.staffsnap.model.applicant.NameContainsKeywordsPredicate;
 
 /**
+ * Tests the FindCommand to ensure that it gives the correct result for different keywords.
  * Contains integration tests (interaction with the Model) for {@code FindCommand}.
  */
 public class FindCommandTest {
