@@ -172,9 +172,9 @@ public class ParserUtil {
             throw new ParseException(Income.MESSAGE_CONSTRAINTS);
         }
 
-        Double incomeDouble = Double.parseDouble(trimmedIncome);
+        Integer incomeInteger = Integer.parseInt(trimmedIncome);
 
-        return new Income(incomeDouble);
+        return new Income(incomeInteger);
     }
 
     /**
