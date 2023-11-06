@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.Messages.MESSAGE_PAST_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_END_TIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_JOB_ROLE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_START_TIME;
@@ -85,6 +86,10 @@ public class EditInterviewCommand extends Command {
 
         if (!editedInterview.isValid()) {
             throw new CommandException(MESSAGE_INVALID_TIME);
+        }
+
+        if (editedInterview.getInterviewStartTime().isPast()) {
+            throw new CommandException(MESSAGE_PAST_DATE);
         }
 
         if (model.hasInterviewClash(editedInterview)) {

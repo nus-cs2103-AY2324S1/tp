@@ -62,7 +62,7 @@ public class Email {
      * Returns domain of email.
      */
     public String getDomain() {
-        return value.split("@")[0].split("\\.")[0];
+        return value.split("@")[1].split("\\.")[0];
     }
 
     @Override
