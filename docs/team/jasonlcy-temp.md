@@ -6,7 +6,7 @@ title: JasonLCY-Temp Project Portfolio Page
 ### Project: InterviewHub
 
 InterviewHub is a desktop application that helps engineering hiring managers to manage applicants and interviews.
-The user interacts with it using a Command Line Interface (CLI), and it has a Graphical User Interface (GUI) created 
+The user interacts with it using a Command Line Interface (CLI), and it has a Graphical User Interface (GUI) created
 with JavaFX. It is written in Java, and has about 18 kLoC.
 
 Given below are my contributions to the project.
@@ -16,8 +16,8 @@ Given below are my contributions to the project.
   * Justification: The basic CRUD features of `Interview` serves as the crucial foundation of our product,
 alongside AB3's Person which was adapted into Applicant by Jing Jie. Most of the code for Interview was implemented by me,
 adapting the frame of AB3's Person class CRUD classes. Implementing it was a lot more challenging than initially expected
-due to how many additional classes (~20 associated classes) had to be edited, some a lot more heavily than others, 
-in order to handle the `Interview` object properly through all levels of abstraction - From the stored Json datafile 
+due to how many additional classes (~20 associated classes) had to be edited, some a lot more heavily than others,
+in order to handle the `Interview` object properly through all levels of abstraction - From the stored Json datafile
 all the way up the abstraction ladder (Model, AddressBook etc.) to the ObservableList used to display the data on the UI.
 
 
@@ -43,7 +43,7 @@ all the way up the abstraction ladder (Model, AddressBook etc.) to the Observabl
 
 
 * **PRs reviewed** (with non-trivial comments):
-  * Git conventions and GitHub usage tips/advice: 
+  * Git conventions and GitHub usage tips/advice:
     [#19](https://github.com/AY2324S1-CS2103T-T11-2/tp/pull/19)
     [#20](https://github.com/AY2324S1-CS2103T-T11-2/tp/pull/20)
 
@@ -51,11 +51,11 @@ all the way up the abstraction ladder (Model, AddressBook etc.) to the Observabl
     [#64](https://github.com/AY2324S1-CS2103T-T11-2/tp/pull/64)
     [#77](https://github.com/AY2324S1-CS2103T-T11-2/tp/pull/77)
 
-  * General quality checks: 
+  * General quality checks:
     [#27](https://github.com/AY2324S1-CS2103T-T11-2/tp/pull/27)
     [#67](https://github.com/AY2324S1-CS2103T-T11-2/tp/pull/67)
 
 
 * **Community Contribution**:
-  * Point out (potentially) confusing instructions for clarification 
+  * Point out (potentially) confusing instructions for clarification
     [#236](https://github.com/nus-cs2103-AY2324S1/forum/issues/236)
