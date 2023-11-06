@@ -665,6 +665,7 @@ that are different from the MSS.
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Planned Enhancement**
+The current error message when adding an interview where the start and/or end date string is a valid date but is missing time is too general. We plan to make the error message also mention why the command is not accepted and the reason for the failure: Please enter an interview time!
 
 --------------------------------------------------------------------------------------------------------------------
 
