@@ -54,7 +54,7 @@ HouR is a **desktop app for managing employee records, optimized for use via a C
 
    * `help`: Shows help window with link to user guide.
 
-   * `add n/John Doe pos/Senior Software Enginner id/EID2023-7890 p/81239876 e/johndoe@test.com s/$5,000` : Adds an employee named `John Doe` to the employee list.
+   * `add n/John Doe pos/Senior Software Enginner id/EID2023-7890 p/81239876 e/johndoe@test.com s/5000` : Adds an employee named `John Doe` to the employee list.
 
    * `list` : Lists all employees.
    
@@ -66,7 +66,7 @@ HouR is a **desktop app for managing employee records, optimized for use via a C
 
    * `sort f/salary in/asc`: Sorts the employees by their salaries in ascending order.
 
-   * `addleave id/EID1234-5678 from/2023-12-26 to/2023-12-28`: Adds leave dates from 29 to 31 October 2023 inclusive for employee with id EID1234-5678.
+   * `addleave id/EID1234-5678 from/2023-12-26 to/2023-12-28`: Adds leave dates from 29 to 31 December 2023 inclusive for employee with id EID1234-5678.
 
    * `deleteleave id/EID1234-5678 from/2023-12-27 to/2023-12-27`: Deletes all leave dates of an employee with id EID1234-5678 that fall on 27 December 2023.
    

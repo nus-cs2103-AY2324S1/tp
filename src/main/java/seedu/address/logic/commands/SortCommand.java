@@ -15,7 +15,7 @@ public class SortCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Sorts the list of employees from the last listing by the specified field "
-            + "(name / salary / overtime / leaves)"
+            + "(name / salary / overtime / leaves) "
             + "in the specified order (asc / desc).\n"
             + "Parameters: "
             + PREFIX_FIELD + "FIELD "
@@ -26,7 +26,7 @@ public class SortCommand extends Command {
     public static final String MESSAGE_NO_FIELD = "There needs to be an field to sort the list by. ";
     public static final String MESSAGE_WRONG_FIELD = "Field %1$s cannot be used to sort the list. ";
     public static final String MESSAGE_NO_ORDER = "There needs to be an order of sorting the list. ";
-    public static final String MESSAGE_WRONG_ORDER = "Only orders ascending and descending is accepted.";
+    public static final String MESSAGE_WRONG_ORDER = "Only order parameters asc and desc is accepted.";
 
 
     private final String field;
