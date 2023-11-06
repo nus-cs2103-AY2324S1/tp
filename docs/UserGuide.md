@@ -45,7 +45,7 @@ ProjectPRO is optimized for use via a Command Line Interface (CLI) while preserv
 - [Deleting a Contact `delete`](#deleting-a-contact-delete)
 - [Finding a Contact `find`](#finding-a-contact-find)
 - [Listing all Contacts `list`](#listing-contacts-list)
-8. [Commands to Manage Group](#commands-to-manage-groups)
+8. [Commands to Manage Groups](#commands-to-manage-groups)
 - [Adding a Group `new`](#adding-a-group-new)
 - [Deleting a Group `delete`](#deleting-a-group-delete)
 - [Adding remarks to a Group `remark`](#adding-remarks-to-a-group-remark)
@@ -186,7 +186,7 @@ You can delete a person from the contact list.
 
 **Example(s):**
 - `delete n/Nicholas Lee`
-  Deletes Nicholas Lee from the address book.
+  This deletes Nicholas Lee from the address book.
 
 
 **Potential error(s):**
@@ -209,7 +209,7 @@ You can find all the persons from the contact list with the matching keywords.
 
 **Example(s):**
 - `find n/alice alex john`
-  Returns all the contacts with names of Alice, Alex, and John.
+  This returns all the contacts with names of Alice, Alex, and John.
 
 
 **Potential error(s):**
@@ -231,7 +231,7 @@ No additional parameters.
 
 **Example(s):**
 - `List`
-  Lists all the people in the group.
+  This lists all the people in the group.
 
 
 **Potential error(s):**
@@ -254,7 +254,7 @@ You can create a group in your contact list.
 
 
 **Example(s):**
-- `new g/CS2103T tp` creates a new group named "CS2103T tp".
+- `new g/CS2103T tp` This creates a new group named "CS2103T tp".
 
 
 **Potential error(s):**
@@ -427,12 +427,13 @@ You can add time slots when your contacts are available.
 **Acceptable values:**
 - `NAME` must be alphanumeric.
 - `FREE_TIME` must be a time slot within a weekly schedule.
+- `FREE_TIME` must not be a time slot already added to the contact.
 
 
 **Example(s):**
 - `addtime n/Alex Yeoh  t/mon 1400 - mon 1600`
-
 This adds a time slot when Alex Yeoh is available to your contact list.
+
 Insert Image
 Free time added to: Alex Yeoh
 
@@ -455,13 +456,14 @@ You can remove available time slots of your contacts.
 **Acceptable values:**
 - `NAME` must be alphanumeric.
 - `FREE_TIME` must be a time slot within a weekly schedule.
-- `FREE_TIME` must be a time slot that has been added to the contact.
+- `FREE_TIME` must be a time slot already added to the contact.
 
 
 **Example(s):**
 - `deletetime n/Alex Yeoh  t/mon 1400 - mon 1600`
   This removes a time slot when Alex Yeoh is available from your contact list.
-  Insert Image
+  
+Insert Image
   Deleted Time From: Alex Yeoh
 
 
@@ -486,7 +488,8 @@ You list all available time slots of your contacts.
 **Example(s):**
 - `listtime n/Alex Yeoh`
   This lists all time slots when Alex Yeoh is available from your contact list.
-  Insert Image
+  
+Insert Image
   Listed times of Person: Alex Yeoh
   MON 1400 - MON 1600
 
@@ -508,13 +511,15 @@ You can add a meeting time slot for your group.
 **Acceptable values:**
 - `GROUP_NAME` must be alphanumeric.
 - `MEETING_TIME` must be a time slot within a weekly schedule.
+- `MEETING_TIME` must not be a time slot already added to the group.
 
 
 **Example(s):**
 - `addmeeting g/CS2100  t/mon 1400 - mon 1600`
   This adds a meeting for your group CS2100.
-  Insert Image
-  Free time added to: 2100
+  
+Insert Image
+  Free time added to: CS2100
 
 
 **Potential error(s):**
@@ -534,16 +539,15 @@ You remove meeting time for your groups.
 
 **Acceptable values:**
 - `GROUP_NAME` must be alphanumeric.
-
-
-- Group must contain `MEETING_TIME`.
 - `MEETING_TIME` must be a time slot within a weekly schedule.
+- `MEETING_TIME` must be a time slot already added to the group.
 
 
 **Example(s):**
 - `deletetime g/CS2100  t/mon 1400 - mon 1600`
   This removes a time slot when Alex Yeoh is available from your contact list.
-  Insert Image
+  
+Insert Image
   Deleted Time From: Alex Yeoh
 
 
@@ -568,7 +572,8 @@ You list meeting time for your groups.
 **Example(s):**
 - `listtime g/CS2100`
   This lists all meeting times of the CS2100 group.
-  Insert Image
+  
+Insert Image
   Listed Time From: CS2100
 
 
@@ -593,7 +598,8 @@ You can find a meeting time slot for your group where everyone is available.
 **Example(s):**
 - `findfreetime g/CS2100 d/60`
   This finds a common meeting time of 60 minutes for your CS2100 group.
-  Insert Image
+  
+Insert Image
 
 
 **Potential error(s):**
@@ -659,4 +665,3 @@ You can exit ProjectPRO.
 
 **Potential error(s):**
 - Extra inputs detected.
-
