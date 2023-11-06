@@ -5,11 +5,14 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
 import networkbook.commons.exceptions.DuplicateEntryException;
 import networkbook.commons.exceptions.IllegalValueException;
+import networkbook.commons.exceptions.NullValueException;
 import networkbook.commons.util.JsonUtil;
 import networkbook.model.NetworkBook;
 import networkbook.testutil.TypicalPersons;
@@ -54,5 +57,26 @@ public class JsonSerializableNetworkBookTest {
         JsonSerializableNetworkBook dataFromFile = JsonUtil.readJsonFile(PERSON_WITH_DUPLICATE_PHONES_FILE,
                 JsonSerializableNetworkBook.class).get();
         assertThrows(DuplicateEntryException.class, dataFromFile::toModelType);
+    }
+
+    @Test
+    public void assertFieldsAreNotNull_nullPerson_throwsNullValueException() {
+        List<JsonAdaptedPerson> personList = new ArrayList<>();
+        personList.add(null);
+        JsonSerializableNetworkBook networkBook = new JsonSerializableNetworkBook(personList);
+        assertThrows(NullValueException.class, networkBook::assertFieldsAreNotNull);
+    }
+
+    @Test
+    public void assertFieldsAreNotNull_personThrowingNullValueException_throwsNullValueException() {
+        JsonAdaptedPerson personThrowingNullValueException = new JsonAdaptedPerson(TypicalPersons.BENSON) {
+            public void assertFieldsAreNotNull() throws NullValueException {
+                throw new NullValueException();
+            }
+        };
+        List<JsonAdaptedPerson> personList = new ArrayList<>();
+        personList.add(personThrowingNullValueException);
+        JsonSerializableNetworkBook networkBook = new JsonSerializableNetworkBook(personList);
+        assertThrows(NullValueException.class, networkBook::assertFieldsAreNotNull);
     }
 }

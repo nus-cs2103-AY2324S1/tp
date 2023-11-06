@@ -14,6 +14,7 @@ import org.junit.jupiter.api.io.TempDir;
 
 import networkbook.commons.core.GuiSettings;
 import networkbook.commons.exceptions.DataLoadingException;
+import networkbook.commons.exceptions.NullValueException;
 import networkbook.model.UserPrefs;
 
 public class JsonUserPrefsStorageTest {
@@ -68,6 +69,17 @@ public class JsonUserPrefsStorageTest {
         UserPrefs actual = readUserPrefs("ExtraValuesUserPref.json").get();
 
         assertEquals(expected, actual);
+    }
+
+    @Test
+    public void readUserPrefs_nullGuiSettings_throwsNullValueException() {
+        assertThrows(NullValueException.class, () -> readUserPrefs("nullGuiSettingsUserPrefs.json"));
+    }
+
+    @Test
+    public void readUserPrefs_nullNetworkBookFilePath_throwsNullValueException() {
+        assertThrows(NullValueException.class, ()
+                -> readUserPrefs("nullNetworkBookFilePathUserPrefs.json"));
     }
 
     private UserPrefs getTypicalUserPrefs() {

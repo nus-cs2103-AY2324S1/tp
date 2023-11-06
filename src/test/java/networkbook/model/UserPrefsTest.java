@@ -1,21 +1,21 @@
 package networkbook.model;
 
-import static networkbook.testutil.Assert.assertThrows;
+import static networkbook.testutil.Assert.assertThrowsAssertionError;
 
 import org.junit.jupiter.api.Test;
 
 public class UserPrefsTest {
 
     @Test
-    public void setGuiSettings_nullGuiSettings_throwsNullPointerException() {
+    public void setGuiSettings_nullGuiSettings_throwsAssertionError() {
         UserPrefs userPref = new UserPrefs();
-        assertThrows(NullPointerException.class, () -> userPref.setGuiSettings(null));
+        assertThrowsAssertionError(() -> userPref.setGuiSettings(null));
     }
 
     @Test
-    public void setNetworkBookFilePath_nullPath_throwsNullPointerException() {
+    public void setNetworkBookFilePath_nullPath_throwsAssertionError() {
         UserPrefs userPrefs = new UserPrefs();
-        assertThrows(NullPointerException.class, () -> userPrefs.setNetworkBookFilePath(null));
+        assertThrowsAssertionError(() -> userPrefs.setNetworkBookFilePath(null));
     }
 
 }

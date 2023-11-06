@@ -45,7 +45,7 @@ public class UserPrefs implements ReadOnlyUserPrefs, JsonObject {
     }
 
     public void setGuiSettings(GuiSettings guiSettings) {
-        requireNonNull(guiSettings);
+        assert guiSettings != null;
         this.guiSettings = guiSettings;
     }
 
@@ -54,7 +54,7 @@ public class UserPrefs implements ReadOnlyUserPrefs, JsonObject {
     }
 
     public void setNetworkBookFilePath(Path networkBookFilePath) {
-        requireNonNull(networkBookFilePath);
+        assert networkBookFilePath != null;
         this.networkBookFilePath = networkBookFilePath;
     }
 
