@@ -37,85 +37,64 @@ to help you streamline your accounting.
 
 > **❗If the above does not work, try this method:**
 >
-> Open a command terminal, `cd` into the folder you put the jar file in, type `java -jar transact.jar` and press Enter
-> to run the application.<br>
+> Open a command terminal, `cd` into the folder you put the jar file in, type `java -jar transact.jar` and press Enter to run the application.<br>
 
 5. The app contains some sample data. Type `view s` to switch to the _staff list_.
 
-> Alternatively, you can click on the Staff List/Transaction tab at the top of the window to switch to the
-> staff/transaction
+> Alternatively, you can click on the Staff List/Transaction tab at the top of the window to switch to the staff/transaction
 > view respectively.
 
-6. Let's add a new staff member:
-   type `addstaff n/Isaac p/92345678 e/isaac@gmail.com a/Blk 456, Pasir Ris St 32 t/marketing`
-   and press Enter.
+6. Let's add a new staff member: type `addstaff n/Isaac p/92345678 e/isaac@gmail.com a/Blk 456, Pasir Ris St 32 t/marketing` and press Enter.
 
-   This creates a new staff member called `Isaac` with the phone number `92345678`, email `isaac@gmail.com`,
-   address `Blk 456, Pasir Ris St 32`, and adds an
-   optional tag with the name `marketing`.
+   This creates a new staff member called `Isaac` with the phone number `92345678`, email `isaac@gmail.com`, address `Blk 456, Pasir Ris St 32`, and adds an optional tag with the name `marketing`.
 
 7. Let's add a new transaction: type `add ty/E d/Flyer printing amt/100 on/23/10/23 s/7` and press Enter.
 
-   This creates a new transaction with type `E` for expense, description `Flyer printing`, amount `100`,
-   date `23/10/2023` and staff with ID of `7`, which in this case is `Isaac` from the previous step since that's what
-   the app automatically assigned them.
+   This creates a new transaction with type `E` for expense, description `Flyer printing`, amount `100`, date `23/10/2023` and staff with ID of `7`, which in this case is `Isaac` from the previous step since that's what the app automatically assigned them.
 
-   Notice that the app automatically switches to the _transaction list_, and your newly added transaction appears
-   at the bottom of the list.
+   Notice that the app automatically switches to the _transaction list_, and your newly added transaction appears at the bottom of the list.
 
 8. Congratulations, you have successfully added a staff member and a transaction!
 
-9. Once you have familarized yourself with Tran$act and want to begin inputting your own data, feel free to
-   type `clearstaff` and press Enter followed by `cleartransaction` and press Enter to clear the transaction book and
-   staff list.
+9. Once you have familarized yourself with Tran$act and want to begin inputting your own data, feel free to type `clearstaff` and press Enter followed by `cleartransaction` and press Enter to clear the transaction book and staff list.
 
 10. Now, you can begin using Tran$act for to record your own data.
 
-11. Refer to the [Features](#features)
-    below for the full details of each command. Enjoy transacting with Tran$act!
+11. Refer to the [Features](#features) below for the full details of each command. Enjoy transacting with Tran$act!
 
 ---
 
 ## Features
 
-Tran$act offers a range of features designed to make transaction recording and management a seamless process. These
-features are tailored to the needs of accountants and finance professionals in small businesses, allowing for efficient
-data entry and financial reporting. Here's an overview of the key features:
+Tran$act offers a range of features designed to make transaction recording and management a seamless process. These features are tailored to the needs of accountants and finance professionals in small businesses, allowing for efficient data entry and financial reporting. Here's an overview of the key features:
 
 **1. Adding Transactions**
 
-Tran$act allows you to add transactions with ease. Specify the transaction type, description, amount, date, and
-optionally, the associated person. The system validates your input data and records the transaction in the database.
+Tran$act allows you to add transactions with ease. Specify the transaction type, description, amount, date, and optionally, the associated person. The system validates your input data and records the transaction in the database.
 
 **2. Removing Transactions**
 
-Remove transactions from your records with ease. Simply select the transaction you wish to delete, and the system will
-confirm the removal before removing it from the database.
+Remove transactions from your records with ease. Simply select the transaction you wish to delete, and the system will confirm the removal before removing it from the database.
 
 **3. Viewing All Transactions**
 
-View a comprehensive list of all recorded transactions for reference. This list provides an overview of all financial
-activities in one place.
+View a comprehensive list of all recorded transactions for reference. This list provides an overview of all financial activities in one place.
 
 **4. Editing Transactions**
 
-Need to make corrections or updates to transaction records? Tran$act allows you to edit transaction details, ensuring
-your records are accurate.
+Need to make corrections or updates to transaction records? Tran$act allows you to edit transaction details, ensuring your records are accurate.
 
 **5. Filtering Transactions**
 
-Need to find transactions meeting a specific criteria, and order them? Tran$act allows you to filter transactions by
-date, amount and person, and sort transactions by date and amount.
+Need to find transactions meeting a specific criteria, and order them? Tran$act allows you to filter transactions by date, amount and person.
 
 **6. Sorting Transactions**
 
-Tran$act provides support for sorting your transactions by either date or amount. They can be sorted in either ascending
-or descending order.
+Tran$act provides support for sorting your transactions by either date or amount. They can be sorted in either ascending or descending order.
 
 **7. Adding Staff**
 
-Tran$act allows users to add staff to the staff list so you can link transactions to that staff. Each staff entry can
-store a person's name, phone number, email address and any tags they are associated with.
+Tran$act allows users to add staff to the staff list so you can link transactions to that staff. Each staff entry can store a person's name, phone number, email address and any tags they are associated with.
 
 **8. Editing Staff**
 
@@ -123,13 +102,11 @@ Tran$act allows users to edit existing staff in the staff list in case any of th
 
 **9. Deleting Staff**
 
-Anybody leave the business? Tran$act supports functionality to remove staff who may have left the company or are no
-longer associated with it, reducing bloat.
+Anybody leave the business? Tran$act supports functionality to remove staff who may have left the company or are no longer associated with it, reducing bloat.
 
 **10. Dashboard Display**
 
-Upon opening the app, you'll be greeted with a clear and concise dashboard. The dashboard displays essential financial
-information, including total income, total expenses, net profit for the selected period.
+Upon opening the app, you'll be greeted with a clear and concise dashboard. The dashboard displays essential financial information, including total income, total expenses, net profit for the selected period.
 
 **11. Exporting Transactions in Comma-Separated Values (CSV) Format**
 
@@ -137,8 +114,7 @@ For those who need to share data with stakeholders, Tran$act allows you to expor
 
 **12. Exporting Staff List in JSON Format**
 
-For those who need to view their staff list in another format, Tran$act allows you to export your staff list in a JSON
-file.
+For those who need to view their staff list in another format, Tran$act allows you to export your staff list in a JSON file.
 
 ---
 
@@ -147,7 +123,7 @@ file.
 <div markdown="block" class="alert alert-info">
 
 |                | **Notes about the command format**                              |
-|----------------|-----------------------------------------------------------------|
+| -------------- | --------------------------------------------------------------- |
 | [ ]            | Optional field                                                  |
 | \<DESCRIPTION> | Any string                                                      |
 | \<NAME>        | Any string                                                      |
@@ -172,8 +148,7 @@ Adds a new transaction.
 
 Format: `add ty/<TYPE> d/<DESCRIPTION> a/<AMOUNT> on/<DATE> [s/<STAFF ID>]`
 
-Success
-output: `New transaction added: <ID>; TransactionType: <TYPE>; Description: <DESCRIPTION>; Amount: <AMOUNT>; Date: <DATE>; [StaffId: <STAFF ID>]`
+Success output: `New transaction added: <ID>; TransactionType: <TYPE>; Description: <DESCRIPTION>; Amount: <AMOUNT>; Date: <DATE>; [StaffId: <STAFF ID>]`
 
 Examples:
 
@@ -186,8 +161,7 @@ Removes the transaction with the given ID.
 
 Format: `del <ID>`
 
-Success
-output: `Deleted transaction: <ID>; TransactionType: <TYPE>; Description: <DESCRIPTION>; Amount: <AMOUNT>; Date: <DATE>; [StaffId: <STAFF ID>]`
+Success output: `Deleted transaction: <ID>; TransactionType: <TYPE>; Description: <DESCRIPTION>; Amount: <AMOUNT>; Date: <DATE>; [StaffId: <STAFF ID>]`
 
 Example: `del 1`
 
@@ -197,8 +171,7 @@ Edits details of the transaction with the given ID.
 
 Format: `edit <ID> [ty/<TYPE>] [d/<DESCRIPTION>] [amt/<AMOUNT>] [on/<DATE>] [s/<STAFF_ID>]`
 
-Success
-output: `Edited transaction: <ID>; TransactionType: <TYPE>; Description: <DESCRIPTION>; Amount: <AMOUNT>; Date: <DATE>; [StaffId: <STAFF ID>]`
+Success output: `Edited transaction: <ID>; TransactionType: <TYPE>; Description: <DESCRIPTION>; Amount: <AMOUNT>; Date: <DATE>; [StaffId: <STAFF ID>]`
 
 **Note:** At least one field to edit must be provided in the command.
 
@@ -215,7 +188,7 @@ Format: `sort [date/<SORT TYPE>] [amt/<SORT TYPE>]`
 
 - At least one parameter must be present
 - If both parameters are present, the order matters
-    - Transactions will be sorted by the first parameter; if there are ties, the second parameter is used to tiebreak
+  - Transactions will be sorted by the first parameter; if there are ties, the second parameter is used to tiebreak
 
 Success output: `Transactions sorted by: <date/amount> <SORT TYPE>`
 
@@ -242,13 +215,13 @@ Format: `filter [ty/<TYPE>] [has/<KEYWORDS...>] [after/<DATE>] [before/<DATE>] [
 - If multiple parameters are present, only transactions matching all parameters will be shown
 - The order of parameters does not matter
 - `ty` will match transactions of the given type
-    - `R` will match revenue
-    - `E` will match expense
+  - `R` will match revenue
+  - `E` will match expense
 - `has` will match descriptions containing the keyword(s)
-    - The search is case-insensitive. e.g `hans` will match `Hans`
-    - The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-    - Only the description is searched.
-    - Only full words will be matched e.g. `Han` will not match `Hans`
+  - The search is case-insensitive. e.g `hans` will match `Hans`
+  - The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
+  - Only the description is searched.
+  - Only full words will be matched e.g. `Han` will not match `Hans`
 - `after` will match dates _on or after_ the given date
 - `before` will match dates _on or before_ the given date
 - `more` will match amounts _greater than or equal to_ the given amount
@@ -383,8 +356,7 @@ Format: `exit`
 
 ### Saving the data
 
-Tran$act's data is saved in the hard disk automatically after any command that changes the data. There is no need to
-save manually.
+Tran$act's data is saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 ## Navigating the GUI
 
@@ -396,63 +368,47 @@ This should be what you see when you open Tran$act for the first time:
 The upper menu bar contains three tabs:
 
 1. File — This tab contains actions like exporting data and exiting the program.
-    1. Export
-        1. Staff List — Exports the staff list into a JSON file. Opens a window of your computer's File System. Once you
-           have chosen the folder where you want the JSON file of your staff list to be exported to, press Enter and it
-           will appear there.
-        2. Transaction List — Exports the transaction list into a CSV file. Opens a window of your computer's File
-           system. Once you have chosen the folder where you want the CSV file of your transaction list to be exported
-           to, press Enter and it will appear there.
-    2. Exit — Exits the program.
+   1. Export
+      1. Staff List — Exports the staff list into a JSON file. Opens a window of your computer's File System. Once you have chosen the folder where you want the JSON file of your staff list to be exported to, press Enter and it will appear there.
+      2. Transaction List — Exports the transaction list into a CSV file. Opens a window of your computer's File system. Once you have chosen the folder where you want the CSV file of your transaction list to be exported to, press Enter and it will appear there.
+   2. Exit — Exits the program.
 2. Tools — This tab contains actions for clearing the transaction list and staff list.
-    1. Clear Staff — Clears all existing staff in the staff list. Performs the same function as the `clearstaff`
-       command.
-    2. Clear Transactions — Clears all existing transactions. Performs the same function as the `cleartransaction`
-       command.
-2. Help — This tab contains more information about Tran$act like, for example, this User Guide.
-    1. View User Guide — Opens your browser to show the user guide. Performs the same function as the `help` command.
-       Can also be accessed by pressing F1 on the keyboard.
+   1. Clear Staff — Clears all existing staff in the staff list. Performs the same function as the `clearstaff` command.
+   2. Clear Transactions — Clears all existing transactions. Performs the same function as the `cleartransaction` command.
+3. Help — This tab contains more information about Tran$act like, for example, this User Guide.
+   1. View User Guide — Opens your browser to show the user guide. Performs the same function as the `help` command. Can also be accessed by pressing F1 on the keyboard.
 
 The lower menu bar contains three tabs:
 
-1. Overview — This tab shows you a monthly summary of your finances based on the transactions you have entered. Although
-   it's empty right now, when you have added a few transactions it will begin to show graphs.
+1. Overview — This tab shows you a monthly summary of your finances based on the transactions you have entered. Although it's empty right now, when you have added a few transactions it will begin to show graphs.
 2. Transactions — This tab shows you the transactions you have entered in a row-by-row format.
    ![Ui](images/Ui-Transactions.png)
 3. Staff List — This tab shows you the persons or parties you have entered in a list format.
    ![Ui](images/Ui-Staff.png)
 
-Below that is the output window. This is where any message Tran$act has will be provided to you. For example, this is
-where your success outputs or errors will be. You can clear it with `clear`.
+Below that is the output window. This is where any message Tran$act has will be provided to you. For example, this is where your success outputs or errors will be. You can clear it with `clear`.
 The input field below this with the grey text `Enter command here...` is where you can enter your commands.
 
 ## FAQ
 
 1. How do I check my Java Version?
-    - Open a Terminal/ Command Prompt and type java --version. If you do not have Java installed, you can check the
-      instructions [here](https://nus-cs2103-ay2223s2.github.io/website/admin/programmingLanguages.html)
+   - Open a Terminal/ Command Prompt and type java --version. If you do not have Java installed, you can check the instructions [here](https://nus-cs2103-ay2223s2.github.io/website/admin/programmingLanguages.html)
 2. Can I do further analysis with the transaction data?
-    - The purpose of Tran$act is to keep accounting and analysis simple to improve efficiency. Nonetheless, you can
-      export the data as a CSV file and use the data in third party apps such as excel and do further analysis if
-      needed.
+   - The purpose of Tran$act is to keep accounting and analysis simple to improve efficiency. Nonetheless, you can export the data as a CSV file and use the data in third party apps such as excel and do further analysis if needed.
 3. How can I launch Tran$act if clicking on the JAR file does not work?
-    - Open a command terminal, `cd` into the folder you put the jar file in, type `java -jar transact.jar` and press
-      Enter to run the application.
-    - If this doesn't work, check our GitHub to make sure you have the latest version of Tran$act downloaded.
+   - Open a command terminal, `cd` into the folder you put the jar file in, type `java -jar transact.jar` and press Enter to run the application.
+   - If this doesn't work, check our GitHub to make sure you have the latest version of Tran$act downloaded.
 4. Can I import my own data into Tran$act?
-    - Tran$act currently does not support file importing. However, if have data in Tran$act on another computer, you can
-      manually copy the `\data` folder to to this computer and place it in the same folder as Tran$act and your data
-      will be transferred over.
+   - Tran$act currently does not support file importing. However, if have data in Tran$act on another computer, you can manually copy the `\data` folder to to this computer and place it in the same folder as Tran$act and your data will be transferred over.
 5. The Tran$act window is too small. Can I change its size?
-    - Yes, you can change Tran$act's window size by hovering your cursor over the border's of Tran$act's window. You'll
-      see your cursor change and you'll be able to click and drag the border freely.
+   - Yes, you can change Tran$act's window size by hovering your cursor over the border's of Tran$act's window. You'll see your cursor change and you'll be able to click and drag the border freely.
 
 ---
 
 ## Command summary
 
 | Action                  | Format, Examples                                                                                                        |
-|-------------------------|-------------------------------------------------------------------------------------------------------------------------|
+| ----------------------- | ----------------------------------------------------------------------------------------------------------------------- |
 | **Add transaction**     | `add ty/<TYPE> d/<DESCRIPTION> a/<AMOUNT> on/<DATE> [s/<STAFF ID>]`                                                     |
 | **Remove transaction**  | `del <ID>`                                                                                                              |
 | **Edit transaction**    | `edit <ID> [ty/<TYPE>] [d/<DESCRIPTION>] [amt/<AMOUNT>] [on/<DATE>] [s/<STAFF_ID>]`                                     |
@@ -464,7 +420,7 @@ The input field below this with the grey text `Enter command here...` is where y
 | **Add staff**           | `addstaff n/<NAME> p/<PHONE> e/<EMAIL> a/<ADDRESS> [t/<TAG>...]`                                                        |
 | **Remove staff**        | `delstaff <STAFF ID>`                                                                                                   |
 | **Edit staff**          | `editstaff <ID> [n/<NAME>] [p/<PHONE>] [e/<EMAIL>] [a/<ADDRESS>] [t/<TAG>]...`                                          |
-| **Find staff**          | `find <KEYWORD> [KEYWORDS...]`                                                                                          |                                                                                         |
+| **Find staff**          | `find <KEYWORD> [KEYWORDS...]`                                                                                          |
 | **Clear staff**         | `clearstaff`                                                                                                            |
 | **Clear transaction**   | `cleartransaction`                                                                                                      |
 | **Clear output**        | `clear`                                                                                                                 |
@@ -472,16 +428,15 @@ The input field below this with the grey text `Enter command here...` is where y
 
 ## Glossary
 
-| Term        | Definition                                                                                                                                                            |
-|-------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Transaction | An exchange of money (e.g. Income / Expense)                                                                                                                          |
-| Income      | Money received (e.g. Product Sale)                                                                                                                                    |
-| Expense     | Costs incurred (e.g. Staff salary, cost of production)                                                                                                                |
-| Command     | An input into the text box to carry out actions                                                                                                                       |
-| CSV File    | A Comma Separated Values (CSV) file is a plain text file that stores data by delimiting data entries with commas. <br/>Can be imported  into applications like Excel. |
-| JSON File   | A JavaScript Object Notation (JSON) file that stores data in human-readable text.                                                                                     |
+| Term        | Definition                                                                                                                                                           |
+| ----------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Transaction | An exchange of money (e.g. Income / Expense)                                                                                                                         |
+| Income      | Money received (e.g. Product Sale)                                                                                                                                   |
+| Expense     | Costs incurred (e.g. Staff salary, cost of production)                                                                                                               |
+| Command     | An input into the text box to carry out actions                                                                                                                      |
+| CSV File    | A Comma Separated Values (CSV) file is a plain text file that stores data by delimiting data entries with commas. <br/>Can be imported into applications like Excel. |
+| JSON File   | A JavaScript Object Notation (JSON) file that stores data in human-readable text.                                                                                    |
 
 ## Future work
 
-- Exported files that are created (e.g. transactions.csv) will be able to be renamed before being exported to the
-  selected directory.
+- Exported files that are created (e.g. transactions.csv) will be able to be renamed before being exported to the selected directory.
