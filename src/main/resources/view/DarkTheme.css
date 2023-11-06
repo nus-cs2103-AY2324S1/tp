@@ -337,62 +337,6 @@
     -fx-background-radius: 0;
 }
 
-#listSupervisors {
-    -fx-hgap: 7;
-    -fx-vgap: 3;
-}
-
-#listSupervisors .label {
-    -fx-text-fill: white;
-    -fx-background-color: #3e7b91;
-    -fx-padding: 1 3 1 3;
-    -fx-border-radius: 2;
-    -fx-background-radius: 2;
-    -fx-font-size: 18;
-}
-
-#listView {
-    -fx-hgap: 10;
-    -fx-vgap: 6;
-}
-
-#listView .label {
-    -fx-text-fill: white;
-    -fx-background-color: #3e7b91;
-    -fx-padding: 1 3 1 3;
-    -fx-border-radius: 2;
-    -fx-background-radius: 2;
-    -fx-font-size: 15;
-}
-
-#role {
-    -fx-hgap: 10;
-    -fx-vgap: 6;
-}
-
-#role .label {
-    -fx-text-fill: white;
-    -fx-background-color: #FBA420;
-    -fx-padding: 1 3 1 3;
-    -fx-border-radius: 2;
-    -fx-background-radius: 2;
-    -fx-font-size: 11;
-}
-
-#roleLarge {
-    -fx-hgap: 10;
-    -fx-vgap: 6;
-}
-
-#roleLarge .label {
-    -fx-text-fill: white;
-    -fx-background-color: #FBA420;
-    -fx-padding: 1 3 1 3;
-    -fx-border-radius: 2;
-    -fx-background-radius: 2;
-    -fx-font-size: 15;
-}
-
 #departments {
     -fx-hgap: 7;
     -fx-vgap: 3;
@@ -406,6 +350,7 @@
     -fx-background-radius: 2;
     -fx-font-size: 11;
 }
+
 #profileDetails .cell_big_label {
     -fx-font-size: 17pt;
     -fx-text-fill: white;
@@ -419,19 +364,6 @@
     -fx-effect: innershadow(gaussian, rgba(192, 192, 192, 1), 100, 1, 0, 0);
 }
 
-#departmentDetails .cell_big_label {
-    -fx-font-size: 17pt;
-    -fx-text-fill: white;
-}
-
-#departmentDetails .cell_small_label {
-    -fx-text-fill: white;
-}
-
-#departmentDetails ImageView {
-    -fx-effect: innershadow(gaussian, rgba(192, 192, 192, 1), 100, 1, 0, 0);
-}
-
 #sidebar ImageView {
     -fx-effect: innershadow(gaussian, rgba(192, 192, 192, 1), 100, 1, 0, 0);
 }
@@ -440,24 +372,4 @@
     -fx-font-size: 16pt;
     -fx-text-fill: white;
     -fx-text-alignment: center;
-}
-
-#toggleEmployees, #toggleDepartments {
-    -fx-min-height: 40;
-    -fx-min-width: 180;
-    -fx-font-size: 11pt;
-    -fx-vgap: 3;
-    -fx-padding: 1 3 1 3;
-    -fx-border-radius: 2;
-    -fx-background-radius: 2;
-    -fx-background-color: transparent;
-    -fx-text-fill: white;
-}
-
-#toggleEmployees:selected, #toggleDepartments:selected {
-    -fx-background-color: #3e7b91;
-}
-
-#toggleEmployees:hover, #toggleDepartments:hover {
-    -fx-background-color: #54ACCB;
 }

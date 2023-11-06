@@ -14,7 +14,7 @@
 <?import javafx.scene.control.Label?>
 
 <fx:root type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
-         title="Address App" minWidth="1000" minHeight="700" onCloseRequest="#handleExit">
+         title="Address App" minWidth="1000" minHeight="550" onCloseRequest="#handleExit">
   <icons>
     <Image url="@/images/address_book_32.png" />
   </icons>
@@ -47,14 +47,14 @@
             <!-- Upper container -->
             <HBox VBox.vgrow="ALWAYS">
               <!-- Scrollable List -->
-              <VBox fx:id="variableList" styleClass="pane-with-border" minWidth="320" prefWidth="320" VBox.vgrow="ALWAYS">
+              <VBox fx:id="employeeList" styleClass="pane-with-border" minWidth="320" prefWidth="320" VBox.vgrow="ALWAYS">
                 <padding>
                   <Insets top="10" right="10" bottom="10" left="10"/>
                 </padding>
-                <StackPane fx:id="listPanelPlaceholder" VBox.vgrow="ALWAYS"/>
+                <StackPane fx:id="employeeListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
               </VBox>
               <!-- Selected Profile -->
-              <StackPane fx:id="detailsPlaceholder" styleClass="pane-with-border" VBox.vgrow="ALWAYS" HBox.hgrow="ALWAYS">
+              <StackPane fx:id="profileDetailsPlaceholder" styleClass="pane-with-border" VBox.vgrow="ALWAYS" HBox.hgrow="ALWAYS">
                 <padding>
                   <Insets top="40" right="30" bottom="40" left="30" />
                 </padding>

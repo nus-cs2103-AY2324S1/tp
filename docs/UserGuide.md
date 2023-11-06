@@ -108,40 +108,6 @@ hen deleting an existing employee from ManageHR, you will need to account for th
 1. The employee to be deleted must not be in charge of any employees.
     - If the employee to be deleted has employees under him, all the employees under said employee must be reassigned.
 
-## Feature 2: Department-Employee Relationships
-
-### Overview
-
-Our application also includes a department-employee feature that enables users to group employees within
-organization. This feature is designed to help users keep track of large clustering of employees.
-
-### Constraints
-
-1. A department can be empty, or contain a single/multiple employees
-2. An employee can be assigned to multiple departments
-3. If an employee is in a department, a department will contain the employee
-4. When an employee is removed from the system, all departments containing the employees will remove the employee from
-    the system 
-5. When a department is removed from the system, all employees that were in that department will have that department
-    property removed from them
-
-
-### Usage Instructions
-
-To use this function relationships, follow these steps:
-
-#### Creating a department
-
-Use the `department` command to add a department into the system. The department name must not already exist
-
-#### Adding/Removing a employee from a department
-
-Use the `add` or `edit` command with the department tag `d/` to include/remove an employee from a department
-
-### Deleting a department
-
-Use the `department` command to remove a department from the system. The department name must exist in the system
-   
 ### Viewing help : `help`
 
 Shows the help window for a specific command. Help window shows the syntactic use of the command, as well as an example of how the command is to be used.
@@ -289,7 +255,7 @@ Expected outputs:
 | Outcome | Output                            |
 | --- |-----------------------------------|
 | **Success** | X employees listed!    |
-| **Fail** | Invalid command format!|
+| **Fail** | Invalid command format!| 
 
 ![filterCommandExample](images/filterCommandExample.png)
 
@@ -319,37 +285,6 @@ Constraints:
 
 ### Fitering Employees : `filter`
 Filters current employee list by constraints given. Displays all filtered employees at-a-glance.
-
-### Adding/Deleting a department : `department`
-
-Creates/Delete a specified department to/from the address book.
-
-Format: `department [t/TYPE] [n/NAME]`
-
-* Creates a department of name `NAME` iff `TYPE` is "add" and the department name do not exist currently.
-* Deletes the department of name `NAME` iff `TYPE` is "delete" and the department exist currently.
-* Name is case-sensitive, and will only match the exact department name
-* List of departments and its employees related to it can be found in the side navigation bar
-* Add/Remove an employee into/from a department using the add or edit command
-
-Examples:
-* `department t/add n/trial` adds a department of name trial into the app
-* `department t/delete n/trial` deletes the department name of trial from the app
-
-Succeed:
-* You’ll see a reply "New department added: <Department Name>" if type is add
-* You'll see a reply "Department deleted: <Department Name" if type is delete
-
-![departmentCommandExample](images/departmentAddSuccess.png)
-
-Fail:
-* If the department to be added already exist, a warning will be displayed.
-  “This department already exist in ManageHR.”
-* If the department to be deleted does not exist, a warning will be displayed.
-  “This department does not exist in ManageHR.”
-
-Constraints:
-* [Department-Employee relationship](#creating-a-department)
 
 ### Exiting the program : `exit`
 
@@ -396,16 +331,16 @@ Now, your data should be successfully transferred to the new computer.
 
 ## Command summary
 
-| Action         | Format, Examples                                                                                                                                                                                                                               |
-|----------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Action         | Format, Examples                                                                                                                                                                                                                                |
+|----------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Add**        | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS s/SALARY l/LEAVE r/ROLE d/DEPARTMENT… m/MANAGER NAME…` <br> e.g., `add n/Johnny p/91242712 e/johnnysins@gmail.com a/Johnny street, block 69, #05-05 s/5300 l/14 r/subordinate d/ R&D m/ Alex Yeoh` |
-| **Clear**      | `clear`                                                                                                                                                                                                                                        |
-| **Delete**     | `delete INDEX`<br> e.g., `delete 4`                                                                                                                                                                                                            |
-| **Department** | `delete t/(add/delete> n/DEPARTMENT_NAME` <br> e.g., `department t/add n/Engineering`                                                                                                                                                          |
-| **Edit**       | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [s/SALARY] [l/LEAVE] [r/ROLE] [m/MANAGER NAME]… [d/DEPARTMENT]…`<br> e.g.,`edit 1 p/91234567 e/johnsimmons@gmail.com`                                                                     |
-| **Exit**       | `exit`                                                                                                                                                                                                                                         |
-| **Filter**     | `filter [n/NAME] [e/EMAIL] [a/ADDRESS] [s/SALARY] [l/LEAVE] [r/ROLE] [m/MANAGERNAME] [d/DEPARTMENT]` <br> e.g., `filter d/R&D s/10000`                                                                                                         |
-| **Find**       | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find alex david`                                                                                                                                                                                     |
-| **Help**       | `help` or `help [command]` <br> e.g., `help add`                                                                                                                                                                                               |
-| **List**       | `list`                                                                                                                                                                                                                                         |
-| **Department** | `department [t/TYPE] [n/NAME]`<br> e.g., `department t/add n/Department 1`                                                                                                                                                                         |
+| **Clear**      | `clear`                                                                                                                                                                                                                                         |
+| **Delete**     | `delete INDEX`<br> e.g., `delete 4`                                                                                                                                                                                                             |
+| **Department** | `delete t/(add/delete> n/DEPARTMENT_NAME` <br> e.g., `department t/add n/Engineering`                                                                                                                                                           |
+| **Edit**       | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [s/SALARY] [l/LEAVE] [r/ROLE] [m/MANAGER NAME]… [d/DEPARTMENT]…`<br> e.g.,`edit 1 p/91234567 e/johnsimmons@gmail.com`                                                                      |
+| **Exit**       | `exit`                                                                                                                                                                                                                                          |
+| **Filter**     | `filter [n/NAME] [e/EMAIL] [a/ADDRESS] [s/SALARY] [l/LEAVE] [r/ROLE] [m/MANAGERNAME] [d/DEPARTMENT]` <br> e.g., `filter d/R&D s/10000`                                                                                                                                                                       |
+| **Find**       | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find alex david`                                                                                                                                                                                      |
+| **Help**       | `help` or `help [command]` <br> e.g., `help add`                                                                                                                                                                                                |
+| **List**       | `list`                                                                                                                                                                                                                                          |
+
