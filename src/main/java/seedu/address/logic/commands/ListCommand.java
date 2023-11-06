@@ -30,6 +30,7 @@ public class ListCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.updateFilteredPersonList(personType.getSearchPredicate());
+        model.commit();
         return new CommandResult(personType == PersonType.PATIENT
                 ? PATIENT_MESSAGE_SUCCESS
                 : SPECIALIST_MESSAGE_SUCCESS);

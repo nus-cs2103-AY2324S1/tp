@@ -1,6 +1,7 @@
 package seedu.address.model;
 
 import javafx.collections.transformation.FilteredList;
+import seedu.address.commons.core.ThemeProperty;
 import seedu.address.model.person.Person;
 
 /**
@@ -11,6 +12,7 @@ public class ReadOnlyModelManager {
     public final FilteredList<Person> filteredPersons;
     public final UserPrefs userPrefs;
     public final Person selectedPerson;
+    public final ThemeProperty themeProperty;
 
     /**
      * Constructor
@@ -18,12 +20,14 @@ public class ReadOnlyModelManager {
      * @param filteredPersons
      * @param userPrefs
      * @param selectedPerson
+     * @param themeProperty
      */
     public ReadOnlyModelManager(AddressBook addressBook, FilteredList filteredPersons,
-                                 UserPrefs userPrefs, Person selectedPerson) {
+                                 UserPrefs userPrefs, Person selectedPerson, ThemeProperty themeProperty) {
         this.addressBook = addressBook;
         this.filteredPersons = filteredPersons;
         this.userPrefs = userPrefs;
         this.selectedPerson = selectedPerson;
-     }
+        this.themeProperty = themeProperty;
+    }
 }

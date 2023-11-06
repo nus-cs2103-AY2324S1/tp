@@ -181,4 +181,26 @@ public class RedoCommandTest {
         assertExceptionExecutedFromLogicManager(logicManager, "del2 1",
                 new ParseException(MESSAGE_UNKNOWN_COMMAND));
     }
+
+    @Test
+    public void temp() {
+        model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        LogicManager logicManager = getNewLogicManager();
+
+        Person firstPerson = model.getFilteredPersonList().get(0);
+        model.deletePerson(firstPerson);
+        model.commit();
+        String pl3a = "";
+        model.undo();
+        String pla = "";
+
+        firstPerson = model.getFilteredPersonList().get(0);
+        model.deletePerson(firstPerson);
+        model.commit();
+        pla = "";
+        firstPerson = model.getFilteredPersonList().get(0);
+        model.deletePerson(firstPerson);
+        model.commit();
+        pla = "";
+    }
 }

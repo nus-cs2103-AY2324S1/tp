@@ -20,6 +20,7 @@ import seedu.address.logic.commands.CommandWord;
 import seedu.address.logic.commands.ShortcutAlias;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.PersonType;
+import seedu.address.model.person.UniquePersonList;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -73,9 +74,10 @@ public class ModelManager implements Model {
      */
     public void resetData(ReadOnlyModelManager toCopyFrom) {
         this.addressBook = toCopyFrom.addressBook;
-        this.filteredPersons = toCopyFrom.filteredPersons;
         this.userPrefs = toCopyFrom.userPrefs;
         this.selectedPerson = toCopyFrom.selectedPerson;
+        this.filteredPersons = toCopyFrom.filteredPersons;
+        //Problem : resetted filteredPersons dont get updated by future commands
     }
 
     //=========== UserPrefs ==================================================================================
@@ -290,20 +292,23 @@ public class ModelManager implements Model {
                 this.selectedPerson == null
                 ? null
                 : this.selectedPerson.getCopy();
-        FilteredList<Person> filteredListCopy = new FilteredList<Person>(this.addressBook.getPersonList());
+        //making a copy of current filteredPersons
+        UniquePersonList obListCopy = new UniquePersonList();
+        obListCopy.setPersons(this.addressBook.getPersonList());
+        FilteredList<Person> filteredListCopy = new FilteredList<Person>(obListCopy.asUnmodifiableObservableList());
+        filteredListCopy.setPredicate(this.filteredPersons.getPredicate());
+
         modelManagerStateList.add(new ReadOnlyModelManager(
                 new AddressBook(this.addressBook),
-                filteredListCopy,
+                filteredListCopy, //gets edited when new command wrong
                 this.userPrefs.getCopy(),
-                personCopy
+                personCopy,
+                this.themeProperty
         ));
         currentStatePointer++;
     }
 
     private void removeStatesAfterCurrentPointer() {
-        if (currentStatePointer == 0) {
-            return;
-        }
         modelManagerStateList.subList(currentStatePointer + 1, modelManagerStateList.size()).clear();
     }
 
