@@ -44,10 +44,11 @@ public class MarkPresentCommandTest {
         Student markedStudent = studentToMark.copy();
         markedStudent.markPresent(i);
         expectedModel.setStudent(studentToMark, markedStudent);
+        expectedModel.setSelectedStudent(markedStudent);
         expectedModel.commitClassManager();
 
         assertCommandSuccess(markPresentCommand, model, expectedMessage, expectedModel, commandHistory);
-        assertEquals(studentToMark, model.getSelectedStudent().get(0));
+        assertEquals(expectedModel.getSelectedStudent().get(0), model.getSelectedStudent().get(0));
     }
 
     @Test
