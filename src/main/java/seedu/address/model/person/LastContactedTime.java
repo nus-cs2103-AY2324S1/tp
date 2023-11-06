@@ -1,7 +1,7 @@
 package seedu.address.model.person;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.DateTimeUtil.format;
+import static seedu.address.commons.util.DateTimeUtil.verbose;
 
 import java.time.LocalDateTime;
 import java.util.Objects;
@@ -66,7 +66,7 @@ public class LastContactedTime {
             return "NA";
         }
 
-        return format(lastContactedTime);
+        return verbose(lastContactedTime);
     }
 
     @Override
