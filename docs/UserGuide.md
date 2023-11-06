@@ -405,6 +405,7 @@ Here is the list of commands that can be undone/redone:
 * `present-all`
 * `absent-all`
 * `tag`
+* `view`
 
 Displayed result if undo is successful: `Undo success!`
 
@@ -431,6 +432,7 @@ Here is the list of commands that can be redone after they are undone (same list
 * `present-all`
 * `absent-all`
 * `tag`
+* `view`
 
 Displayed result if redo is successful: `Redo success!`
 

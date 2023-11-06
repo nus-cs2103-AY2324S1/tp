@@ -62,7 +62,9 @@ public class SetGradeCommand extends Command {
         gradedStudent.setGrade(assignmentIndex, grade);
         model.setStudent(studentToGrade, gradedStudent);
         model.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
-        model.setSelectedStudent(gradedStudent);
+        if (model.isSelectedStudent(gradedStudent)) {
+            model.setSelectedStudent(gradedStudent);
+        }
         model.commitClassManager();
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, studentNumber)

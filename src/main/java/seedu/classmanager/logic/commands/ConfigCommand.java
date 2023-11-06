@@ -74,10 +74,8 @@ public class ConfigCommand extends Command {
                         student.getStudentNumber(), newClassDetails, student.getTags(), student.getComment());
                 model.setStudent(student, editedStudent);
             }
-            // This will display the class details of the first student after the configuration is done
-            if (!allStudentList.isEmpty()) {
-                model.setSelectedStudent(allStudentList.get(0));
-            }
+            // clears the view panel after resetting class details of students
+            model.resetSelectedStudent();
             return new CommandResult(String.format(MESSAGE_CONFIG_SUCCESS, tutorialCount, assignmentCount));
         } catch (Exception e) {
             return new CommandResult(MESSAGE_CONFIG_FAILED);
