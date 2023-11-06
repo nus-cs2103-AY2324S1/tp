@@ -15,9 +15,7 @@
                     <Insets top="10" right="10" bottom="10" left="10" />
                 </padding>
                 <Label text="Notes" style="-fx-font-weight: bold; -fx-font-size: 18px;" />
-                <ScrollPane fitToWidth="true" prefHeight="300" VBox.vgrow="ALWAYS">
-                    <ListView fx:id="notesListView" />
-                </ScrollPane>
+                <ListView fx:id="notesListView" />
                 <Label text="Press ESC to exit" style="-fx-font-size: 12px;" />
                 <Button text="Close" onAction="#handleClose" />
             </VBox>
