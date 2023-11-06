@@ -99,7 +99,11 @@ public class TimeParser {
                             .toInstant()
                             .atZone(ZoneId.systemDefault())
                             .toLocalDateTime();
-                    return new Time(addMissingDateFields(temp, currentFormatID, dateOnly));
+                    Time res = new Time(addMissingDateFields(temp, currentFormatID, dateOnly));
+                    if (res.getDate().getYear() > 9999) {
+                        throw new seedu.address.logic.parser.exceptions.ParseException("Please specify a valid date!");
+                    }
+                    return res;
                 } catch (ParseException ignored) {
                     String s = "";
                 }
