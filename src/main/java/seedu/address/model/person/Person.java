@@ -111,11 +111,11 @@ public class Person {
      */
     public String gatherEmailsContainsFinancialPlan(String prompt) {
         StringBuilder result = new StringBuilder();
-
         for (FinancialPlan financialPlan : financialPlans) {
             // Perform a case-insensitive check if the financial plan contains the prompt as a substring
             if (financialPlan.containsSubstring(prompt)) {
                 result.append(email); // Add the email to the result string
+                break; // Should only append email once
             }
         }
         return result.toString();
@@ -132,6 +132,7 @@ public class Person {
             // Perform a case-insensitive check if the tag contains the prompt substring
             if (tag.containsSubstring(prompt)) {
                 result.append(email); // Add the email to the result string
+                break;
             }
         }
         return result.toString();
