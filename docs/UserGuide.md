@@ -88,7 +88,7 @@ The **GUI** is split up into 4 main sections.
 
 ### Student Number
 
-* Student Number refers to the unique matriculation number of a NUS student. It must begin with capital A, followed by any number of alphanumeric characters. It must not be blank.
+* Student Number refers to the unique matriculation number of a NUS student. In Class Manager, it must begin with the capital 'A', followed by 1 or more digits, and end with a single alphabetical character. Student Number must not be blank as well.
 * Class Manager uses the Student Number to uniquely identify each student in most commands. The Student Number is not case-sensitive, other than the first capital A. e.g. If the Student Number is `A123V`, `A123v` also refers to the same student.
 
 ### Command navigation
@@ -350,7 +350,7 @@ View the class details of a student that will be displayed on the right side of 
 
 Format: `view s/STUDENT_NUMBER`
 
-* The STUDENT_NUMBER must be valid e.g `T*`.
+* The STUDENT_NUMBER must be valid.
 * The STUDENT_NUMBER must belong to a student in Class Manager.
 
 Example:
@@ -367,7 +367,7 @@ Select a specific number of students from all students displayed in Class Manage
 
 Format: `random NUMBER_OF_STUDENTS`
 
-* The `NUMBER_OF_STUDENT` must be a valid positive integer, smaller than or equal to the number of current students displayed in the class manager.
+* The `NUMBER_OF_STUDENTS` must be a valid positive integer, smaller than or equal to the number of current students displayed in the class manager.
 
 Example:
 
@@ -554,7 +554,7 @@ Format: `theme`
 | [**Absent**](#marking-tutorial-attendance-for-a-student-as-absent-absent)                         | `absent s/STUDENT_NUMBER tut/TUTORIAL_INDEX` <br> e.g. `absent s/A0245234A tut/1`                                                                                   |
 | [**Present All**](#marking-tutorial-attendance-for-all-students-displayed-as-present-present-all) | `present-all tut/TUTORIAL_INDEX` <br> e.g. `present-all tut/1`                                                                                                      |
 | [**Absent All**](#marking-tutorial-attendance-for-all-students-displayed-as-absent-absent-all)    | `absent-all tut/TUTORIAL_INDEX` <br> e.g. `absent-all tut/1`                                                                                                        |
-| [**Random**](#selecting-students-randomly-random)                                                 | `random NUM_OF_STUDENTS` <br> e.g. `random 2`                                                                                                                       |
+| [**Random**](#selecting-students-randomly-random)                                                 | `random NUMBER_OF_STUDENTS` <br> e.g. `random 2`                                                                                                                    |
 | [**Record Class Participation**](#record-class-participation-for-a-student-class-part)            | `class-part s/STUDENT_NUMBER tut/TUTORIAL_INDEX part/PARTICIPATION_LEVEL` <br> e.g. `class-part s/A0245234A tut/1 part/true`                                        |
 | [**Set Assignment Grade**](#setting-assignment-grade-for-a-student-grade)                         | `grade s/STUDENT_NUMBER a/ASSIGNMENT_INDEX g/GRADE` <br> e.g. `grade s/A0245234A a/1 g/100`                                                                         |
 | [**Tag**](#tagging-a-student-tag)                                                                 | `tag s/STUDENT_NUMBER [/add] [/delete] t/[TAG]…​` <br> e.g. `tag s/A0123456N t/smart t/shy`                                                                         |
@@ -565,7 +565,7 @@ Format: `theme`
 ## Glossary
 
 * **cd**: Change directory command in terminal/command line. cd takes the name of the folder you want to navigate to as an argument. The full command is cd `your-directory`.
-* **Student Number**: Matriculation number of NUS student. It must begin with capital A, followed by any number of alphanumeric characters. It must not be blank.
+* **Student Number**: Matriculation number of NUS student. In Class Manager, it must begin with the capital 'A', followed by 1 or more digits, and end with a single alphabetical character. Student Number must not be blank as well.
 * **Email**: Any valid electronic mail address, such as NUS email address (eXXXXXXX@u.nus.edu).
 * **CLI**: Command Line Interface.
 * **GUI**: Graphical User Interface.
