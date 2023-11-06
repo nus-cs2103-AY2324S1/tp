@@ -4,7 +4,6 @@
 package seedu.classmanager.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.classmanager.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
 
 import seedu.classmanager.logic.CommandHistory;
 import seedu.classmanager.logic.commands.exceptions.CommandException;
@@ -35,7 +34,6 @@ public class RedoCommand extends Command {
         }
 
         model.redoClassManager();
-        model.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }

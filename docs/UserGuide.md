@@ -86,10 +86,20 @@ The **GUI** is split up into 4 main sections.
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </box>
 
+### Class Number
+
+* Class Number refers to the tutorial class number of a particular course. 
+* Class Number is not case-sensitive, and it must begin with 1 to 3 alphabet letters, followed by 1 to 5 digits, and end with an optional single alphabetical character. Class Number must not be blank.
+* Here are some valid examples of Class Number:
+    - `G11`
+    - `T11A`
+    - `SG10`
+    - `ABC12345D`
+
 ### Student Number
 
-* Student Number refers to the unique matriculation number of a NUS student. In Class Manager, it must begin with the capital 'A', followed by 1 or more digits, and end with a single alphabetical character. Student Number must not be blank as well.
-* Class Manager uses the Student Number to uniquely identify each student in most commands. The Student Number is not case-sensitive, other than the first capital A. e.g. If the Student Number is `A123V`, `A123v` also refers to the same student.
+* Student Number refers to the unique matriculation number of a NUS student. In Class Manager, it must begin with the letter 'A' or 'a', followed by 1 or more digits, and end with a single alphabetical character. Student Number must not be blank as well.
+* Class Manager uses the Student Number to uniquely identify each student in most commands. The Student Number is not case-sensitive. e.g. Student Number `A123V` and `A123v` refers to the same student.
 
 ### Command navigation
 
@@ -236,7 +246,8 @@ Format: `lookup [c/CLASS_NUMBER] [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [s/STUDENT_
 <box type="warning" seamless>
 
 **Caution:**
-_At least one_ of the optional fields must be provided. `lookup` alone is not allowed.
+_At least one_ of the optional fields must be provided. `lookup` alone is not allowed. <br>
+This command will not check for field validation. e.g. `lookup c/class 11` is allowed even though `class 11` is not a valid class number.
 </box>
 
 * The command is **case-insensitive**. e.g. `hans` will match `Hans`
@@ -272,7 +283,7 @@ Examples:
 
 ### Marking tutorial attendance for all students displayed as present : `present-all`
 
-Marking tutorial attendance for all students in current list displayed as present in Class Manager.
+Marking tutorial attendance for all students in the current list displayed as present in Class Manager.
 
 Format: `present-all tut/TUTORIAL_INDEX`
 
@@ -299,7 +310,7 @@ Examples:
 
 ### Marking tutorial attendance for all students displayed as absent : `absent-all`
 
-Marking tutorial attendance for all students in current list displayed as absent in the class manager.
+Marking tutorial attendance for all students in the current list displayed as absent in the class manager.
 
 Format: `absent-all tut/TUTORIAL_INDEX`
 
