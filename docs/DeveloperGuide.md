@@ -248,6 +248,7 @@ The _Activity_ diagram summarises what happens after the user enters a sort comm
 
 <puml src="diagrams/SortActivity.puml" width="450" />
 
+
 The _Sequence_ Diagram below shows how the components interact with each other for the scenario where the user issues
 the command `sort name/ increasing`
 
