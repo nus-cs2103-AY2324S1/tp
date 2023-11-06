@@ -77,6 +77,8 @@ Click on the relevant links to easily navigate through the guide and access the 
 * Items in square brackets are optional.<br>
   e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 
+* Unless explicitly allowed, blank inputs or inputting any number of spaces as an argument for a field is invalid.
+
 * Items with `…`​ after them can be used multiple times including zero times.<br>
   e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
 
@@ -102,6 +104,7 @@ Click on the relevant links to easily navigate through the guide and access the 
 Shows a message explaining how to access the help page, as well as a list of available keywords.
 
 ![help message](images/helpMessage.png)
+
 Format: `help`
 
 ---------------------------
@@ -112,15 +115,20 @@ number) into contact book.
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS nk/NEXT_KIN nkp/NEXT_KIN_PHONE [fp/FINANCIAL_PLAN] [t/TAG]…​`
 
+* Adding a person with the exact same name (case-sensitive) as a person currently in the contact book will cause the
+    command to fail.
+* To prevent accidentally adding duplicates, you can use [Find](#locating-persons-by-name-financial-plan-andor-tag--find)
+    to check if you have already added the person already.
+
 Acceptable Values:
-1. NAME - any value is possible
-2. PHONE_NUMBER - Numbers (0-9) and symbols, but no alphabets
-3. EMAIL - string in valid email format
+1. NAME - Alphabets, numbers and space characters only
+2. PHONE_NUMBER - Numbers only and at least 3 digits long
+3. EMAIL - Alphabets, numbers and symbols only in a valid email format
 4. ADDRESS - any value is possible
-5. NEXT_KIN - any value is possible
-6. NEXT_KIN_PHONE - Numbers (0-9), and symbols, no alphabets
-7. FINANCIAL_PLAN - Alphanumeric or Space characters
-8. TAG - Alphanumeric
+5. NEXT_KIN - Alphabets, numbers and space characters only
+6. NEXT_KIN_PHONE - Numbers only and at least 3 digits long
+7. FINANCIAL_PLAN - Alphabets, numbers and space characters only
+8. TAG - Alphabets and numbers only
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A person can have any number of Financial Plans (including 0)
@@ -142,10 +150,10 @@ Tags:`
 
 ![result for 'add n/John p/80101010 e/johndoe@gmail.com a/Punggol Central Blk 444 #15-32 820123 nk/Brennan nkp/82020202'](images/addUi.png)
 
-You can also add a client's contacts with multiple tags.
+You can also add a client's contacts with a tag and a financial plan.
 
 Examples:
-* `add n/John p/80101010 e/johndoe@gmail.com a/Punggol Central Blk 444 #15-32 820123 nk/Brennan nkp/82020202 t/80yo t/grumpy`
+* `add n/John p/80101010 e/johndoe@gmail.com a/Punggol Central Blk 444 #15-32 820123 nk/Brennan nkp/82020202 t/80yo fp/Financial Plan C`
 
 Successful Output: `New person added: John; 
 Phone: 80101010; 
@@ -154,8 +162,10 @@ Address: Punggol Central Blk 444 #15-32 820123;
 Next-of-kin Name: Brennan; 
 Next-of-kin Phone: 82020202; 
 Appointment: No Appointment made!; 
-Financial Plans: ; 
-Tags: [80yo][grumpy]`
+Financial Plans: [Financial Plan C]; 
+Tags: [80yo]`
+
+Do note that it is possible to add a client's contact with multiple tags by duplicating the `t/` prefix. However, each client can have only up to one financial plan at any point in time.
 
 ------------------
 ### Listing all persons : `list`
@@ -164,7 +174,7 @@ Display a list of all the clients and their contact details
 
 Format: `list`
 
-Successful Output:`Listed all persons`
+Successful Output:` Listed all persons`
 
 ![result for 'list'](images/ListUi.png)
 
@@ -178,6 +188,8 @@ Format: `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [nk/NEXT_KIN
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
+* Editing the name of a person to be the exact same name as another person currently in the contact book
+    (case-sensitive) will cause the command to fail.
 * When editing financial plans or tags, the existing financial plans or tags of the person will be removed i.e adding of tags is not cumulative.
 * You can remove all the person’s tags by typing `t/` without
     specifying any tags after it.
@@ -191,10 +203,10 @@ Acceptable Values:
 3. PHONE_NUMBER - Numbers (0-9) and symbols, no alphabets
 4. EMAIL - string in valid email format
 5. ADDRESS - any value is possible
-6. NEXT_KIN - any value is possible
-7. NEXT_KIN_PHONE - Numbers (0-9), and symbols, no alphabets
-8. FINANCIAL_PLAN - Alphanumeric or Space characters
-9. TAG - Alphanumeric
+6. NEXT_KIN - Alphabets, numbers and space characters only
+7. NEXT_KIN_PHONE - Numbers only and at least 3 digits long
+8. FINANCIAL_PLAN - Alphabets, numbers and space characters only
+9. TAG - Alphabets and numbers only
 
 Examples:
 *  `edit 4 n/john doe a/23 woodlands ave 123` Edits the name and address of the 1st person to be `john doe` and `woodlands ave 123` respectively.
@@ -220,6 +232,7 @@ Finds persons whose names, tags or financial plans contain any of the specified 
 Format: `find [n/NAME]…​ [fp/FINANCIAL_PLAN]…​ [t/TAG]…​`
 
 * At least one of the optional fields must be provided.
+* This command will ignore other prefixes. Using them anyway can cause undefined behaviour.
 * The search is case-insensitive. e.g `hans` will match `Hans`
 * For names, only full words will be matched e.g. `Han` will not match `Hans`
 * Calling this command on a sorted list will retain the sorted quality of the list.
