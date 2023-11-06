@@ -100,15 +100,25 @@ Before we begin, the table below describes some of the symbols and syntax you ma
 
 ![GUI Summary](images/GuiSummary.png)
 
-For each applicant and each interview, we see the following details:
+For each applicant, we see the following details:
 
-| Applicant | Interview  |
-|-----------|------------|
-| Name      | Job role   |
- | Tags      | Start time |
-| Phone     | End time   |
-| Address   | Rating     |
- | Email     |            |
+| Applicant |
+|-----------|
+| Name      |
+| Tags      |
+| Phone     |
+| Address   |
+| Email     |
+
+For each interview, we see the following details:
+
+| Interview        |
+|------------------|
+| Applicant's Name |
+| Job Role         |
+| Start Time       |
+| End Time         |
+| Rating           |
 
 [Back to the Table of Contents](#table-of-contents)
 
