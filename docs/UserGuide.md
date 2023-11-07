@@ -68,24 +68,7 @@ Flashlingo is a **desktop app for learning words by flash cards, optimized for u
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </div>
 
-### Viewing help : `help`
 
-Opens a browser with the help page (User Guide).
-
-Format: `help`
-
-### Listing all flash cards : `list`
-
-Shows the list of flash cards with both the original word and the corresponding translation.
-
-Format: `list`
-
-Output:
-* `Listed all flash cards`
-  `1. ORIGINAL_WORD - TRANSLATION`
-  `2. ORIGINAL_WORD - TRANSLATION`
-  `3. ORIGINAL_WORD - TRANSLATION`
-  `...`
 
 
 ### Adding a flash card: `add`
@@ -176,6 +159,18 @@ Examples:
 * `find look` returns the flash card list and its translation that contains the keyword `look`
 * `find look, hello, goodbye` returns the flash card list that has all flash cards that contain `look`, `hello` and `goodbye`
 
+### Listing all flash cards : `list`
+
+Shows the list of flash cards with both the original word and the corresponding translation.
+
+Format: `list`
+
+Output:
+* `Listed all flash cards`
+  `1. ORIGINAL_WORD - TRANSLATION`
+  `2. ORIGINAL_WORD - TRANSLATION`
+  `3. ORIGINAL_WORD - TRANSLATION`
+  `...`
 
 ###  Starts review session : `start`
 
@@ -310,6 +305,13 @@ Output:
 |  light theme   | ![img.png](images/LightTheme.png) |
 |:--------------:|:---------------------------------:|
 | **dark theme** | ![img.png](images/DarkTheme.png)  |
+
+### Viewing help : `help`
+
+Opens a browser with the help page (User Guide).
+
+Format: `help`
+
 
 ### Exiting the program : `exit`
 
