@@ -90,8 +90,7 @@ When the command succeeds:
 
 ```
 New teaching assistant added: Rayner Toh; Phone: 93812311; Email: rayner@example.com; Telegram: @raynertjx; 
-Free Time:
-Tags: [parttime]; 
+Free Time:  Tags: [parttime]; 
 Courses:
 Name: Software Engineering
 Lessons: [CS2103T Lecture 10:00-12:00, CS2103T Tutorial 10:00-12:00, CS2103T Laboratory 10:00-12:00]; 
