@@ -470,6 +470,7 @@ e.g. `Ed` will match both `Edward` and `Ed`.
 * Applicants matching at least one keyword will be returned (i.e. OR search), 
 e.g. `Ben Bobby` will return `Ben Yang` and `Bobby Chin`.
 
+
 Example:
 
 * `find IVAN` finds any applicant whose name contains “ivan”.
