@@ -62,9 +62,40 @@ Please refer to the [Features](#features) below for details of each command.
 
 # Features
 
-## Command Format
-[to be updated].
-[also meaning of icons probably needed].
+<div markdown="block" class="alert alert-info">
+
+**:information_source: How to interpret each feature description:** <br>
+
+The description of each feature is divided into 7 parts:
+* **Feature Name** - The name of the feature.
+* **Feature Description** - A brief description of the feature.
+* **Scenario** - A scenario that illustrates when and why the feature is useful.
+* **Command Format** - The format of the command to use the feature, followed by some examples.
+* **Examples** - Examples of the command and their effects.
+* **Expected Outcomes** - The expected successful and failed outcomes of the command.
+* **Things to Note** - Any additional information that the user should take note of when using the feature.
+
+</div>
+
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Notes about the command format:** <br>
+
+When looking at the command format of each feature the first time, it might seem confusing. But, they all follow a general pattern, and here is the explanation of the pattern with an example of adding a musician contact to the application:
+
+```
+add n/NAME p/PHONE_NUMBER e/EMAIL [t/TAG]…​  [i/INSTRUMENT]…​  [g/GENRE]…​ 
+```
+
+* The first word represents the command name, in this case, `add`.
+* The words in uppercase represent the parameters to be provided by the user, and their meanings are self-explanatory. For example, `n/NAME` means you need to provide a name for the contact.
+* The prefixes like `n/`, `p/`, `e/` are used to identify the parameters. So, when typing `add n/John Doe`, the application knows that `John Doe` is the name of the musician.
+* The parameters in square brackets like `[g/GENRE]` are optional, while the parameters without square brackets like `n/NAME` are compulsory. 
+* The parameters in with `…​ ` like `[g/GENRE]…​ ` can be entered multiple times (including zero times). For example, `g/rock g/jazz` or `g/blues` or `` are all valid.
+* The order of the parameters does not affect the result. For example, `p/PHONE_NUMBER` can be entered before `n/NAME`, and the command still works the same.
+* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, or `tags`) will be ignored.
+
+</div>
 
 ## Get help: `help`
 Access a link to our user guide.
@@ -89,7 +120,7 @@ Adds one musician to the contact book.
 
 Name, phone number, email, tag, instrument, genre about the musician can all be included.
 
-**Format:** `add n/NAME p/PHONE_NUMBER e/EMAIL [t/TAG]... [i/INSTRUMENT]... [g/GENRE]...`
+**Format:** `add n/NAME p/PHONE_NUMBER e/EMAIL [t/TAG]…​  [i/INSTRUMENT]…​  [g/GENRE]…​ `
 
 **Examples:**
 * `add n/John Doe p/98765432 e/johnd@example.com t/bestman i/violin g/classical`
@@ -150,7 +181,7 @@ Edits an existing musician in the contact book referenced by the index.
 
 Name, phone number, email, tag, instrument, genre about the musician can all be included for edit.
 
-**Format:** `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [t/TAG]... [i/INSTRUMENT]... [g/GENRE]...`
+**Format:** `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [t/TAG]…​  [i/INSTRUMENT]…​  [g/GENRE]…​ `
 
 **Examples:**
 * `edit 1 p/98765430 g/pop`
@@ -215,7 +246,7 @@ The `My Musicians` and `My Bands` panels will remain unchanged.
 
 Finds all musicians whose names, tags, instruments, AND genres contain ANY of the given keywords.
 
-**Format:** `find [n/NAME]... [t/TAG]... [i/INSTRUMENT]... [g/GENRE]...`
+**Format:** `find [n/NAME]…​  [t/TAG]…​  [i/INSTRUMENT]…​  [g/GENRE]…​ `
 
 **Examples:**
 * `find n/John i/violin i/piano` finds all musicians whose names contain "John" AND instruments contain "violin" or "piano".
@@ -283,7 +314,7 @@ For a list of valid genres, please use the command 'tags'
 
 Adds a musician to a specified band.
 
-**Format:** `addm b/BAND_INDEX m/MUSICIAN_INDEX...`
+**Format:** `addm b/BAND_INDEX m/MUSICIAN_INDEX…​ `
 
 **Things to Note:**
 * `BANDINDEX` and `MUSICIANINDEX` must be positive integers 1, 2, 3, …​
@@ -374,7 +405,7 @@ If you input an invalid band name, an error message `Band does not exist!` will 
 Edit the name and genre of a selected band.
 From the current `My Bands` panel, find the index of the band to be edited.
 
-**Format:** `editb INDEX n/NEWNAME g/GENRE...`
+**Format:** `editb INDEX n/NEWNAME g/GENRE…​ `
 
 **Examples:**
 * `editb 1 n/Ace`
