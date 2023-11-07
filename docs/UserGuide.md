@@ -20,9 +20,10 @@ Flashlingo is a **desktop app for learning words by flash cards, optimized for u
 
 4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar flashlingo.jar` command to run the application.
    Below shows the steps to perform such a task
-    1. Open up the terminal. For mac users, open up `terminal` through the finder. For windows users, search `cmd` and run it.
+    1. Open up the terminal. 
+    * For mac users, press `Command + Space` to open Spotlight search, type `Terminal`, and press `Enter`.
        <img width="674" alt="Screenshot 2023-10-27 at 2 36 16 PM" src="https://github.com/itsNatTan/tp/assets/64185574/039d9f37-e45e-410f-b819-117ff312e13b">
-
+    * For windows users, press `Windows + R` keys simultaneously, type `cmd` and press `Enter`.
     2. Navigate to the folder containing the jar file. In this example, it is in the Downloads folder.
    <br>
        `$ cd Downloads`
