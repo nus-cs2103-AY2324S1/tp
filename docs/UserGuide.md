@@ -41,7 +41,7 @@ management tasks done faster than traditional GUI apps.
    * `config #t/10 #a/1` configures Class Manager to have 10 tutorials and 1 assignment.
 
 7. That's it! You can now explore Class Manager! Refer to the [Commands](#commands) below for details of each command. <br>
-   You can also refer to the [Command Summary](#command-summary-in-alphabetical-order).
+   You can also refer to the [Command Summary](#command-summary).
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -180,12 +180,13 @@ Format: `history`
 
 #### Load a save file : `load`
 
-Load student information from an existing JSON file. Copy the JSON file to be loaded into the `/data` folder. The data in the JSON file will be loaded into the app via the `load` command. This file also becomes the new default save file.
+Load student information from an existing JSON file. Copy the JSON file to be loaded into the `/data` folder. The data in the JSON file will be loaded into the app via the `load` command. This file also becomes the new default save file. You can refer to [this section](#editing-the-data-file) for more information on the valid format of the data file.
 
 Format: `load f/FILE_NAME`
 * File name does not include the .json extension.
 * File name is case-insensitive
 * File name must be valid and exist in the `/data` folder.
+* Number of tutorials and assignments in the loaded file must be the same as the current configuration of Class Manager. You can reconfigure Class Manager to match the number of tutorials and assignments in the loaded file using the `config` command.
 
 Example:
 * `load f/sample` loads the sample.json file in the `/data` folder.
