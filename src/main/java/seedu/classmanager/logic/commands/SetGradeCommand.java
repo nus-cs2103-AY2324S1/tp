@@ -4,7 +4,6 @@ import static java.util.Objects.requireNonNull;
 import static seedu.classmanager.logic.parser.CliSyntax.PREFIX_ASSIGNMENT;
 import static seedu.classmanager.logic.parser.CliSyntax.PREFIX_GRADE;
 import static seedu.classmanager.logic.parser.CliSyntax.PREFIX_STUDENT_NUMBER;
-import static seedu.classmanager.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
 
 import seedu.classmanager.commons.core.index.Index;
 import seedu.classmanager.commons.util.ToStringBuilder;
@@ -61,7 +60,6 @@ public class SetGradeCommand extends Command {
         Student gradedStudent = studentToGrade.copy();
         gradedStudent.setGrade(assignmentIndex, grade);
         model.setStudent(studentToGrade, gradedStudent);
-        model.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
         model.setSelectedStudent(gradedStudent);
         model.commitClassManager();
 
