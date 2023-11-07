@@ -62,7 +62,6 @@ public class SetDifficultyCommand extends Command {
 
         Card cardToSetDifficulty = lastShownList.get(actualIndex.getZeroBased());
         Difficulty difficultySet = getDifficultyFromString(difficulty);
-      
         return updateCardBasedOnDifficulty(model, cardToSetDifficulty, difficultySet, actualIndex);
     }
 
