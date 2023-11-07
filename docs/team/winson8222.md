@@ -100,7 +100,12 @@ Given below are my contributions to the project.
 
 
 * **Community**:
+<<<<<<< HEAD
   * Reviewed PR (With non-trivial comments)
+=======
+
+* **Mentoring / PR contribution:**
+  * Reviewed PR
     * Removal of irrelevant test cases[#68](https://github.com/AY2324S1-CS2103T-W17-4/tp/pull/68)
     * Modification of error messages [#74](https://github.com/AY2324S1-CS2103T-W17-4/tp/pull/74)
     * Adding NextPractiseDate to a Card and give advice to improve the feature further 
@@ -109,7 +114,8 @@ Given below are my contributions to the project.
   * Wrote further test cases of code implemented by other team member
   * Reported bugs and provide suggestions for other teams (Issues: [1](https://github.com/winson8222/ped/issues/1), 
   [2](https://github.com/winson8222/ped/issues/2), [3](https://github.com/winson8222/ped/issues/3), 
-  [4](https://github.com/winson8222/ped/issues/4)))
+  [4](https://github.com/winson8222/ped/issues/4))
+
   
 
 * **Tools**:
