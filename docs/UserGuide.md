@@ -112,20 +112,17 @@ Format:
 Parameters:
 
 * `[index]` is the index of the contact in the list.
-* `[phone]` is a valid phone number (should be all numeric characters).
-* `[email]` is a valid email (`@` (at sign) must be present,
-and `.` (period) must be present after `@` (at sign)).
+* `[phone]` is a valid phone number (should be all numeric characters, with an optional `+` for country code).
+* `[email]` is a valid email (`@` (at sign) must be present, and `.` (period) must be present after `@` (at sign)).
 * `[link]` is a valid URL linking to a contact’s social media page.
 * `[grad]` is a valid graduation date, in the format `AYxxxx-Sy`.
     * `xxxx` is the 4-digit representation of the 2 calendar years, in the academic year e.g. `2223` for Academic Year 20`22`/20`23`. Academic year must be between AY1970/1971 to AY2069/2070 (inclusive).
     * `y` is either `1` for Semester 1, or `2` for Semester 2.
 * `[course]` is a course that the contact is taking/has taken.
-    * `[course]` consists of `course name [/start date] [/end date]`, where `/start` and `/end` indicate
-    when the contact started and finished taking the course respectively. A course can have no dates, a start date, or
-    a start and end date.
+    * `[course]` consists of `course name [/start date] [/end date]`, where `/start` and `/end` indicate when the contact started and finished taking the course respectively. A course can have no dates, a start date, or a start and end date.
 * `[spec]` is the specialisation that contact is taking/has taken.
 * `[priority level]` either **high**, **medium** or **low**, or the initial alphabet to represent the respective priority level.
-* `[tag name]` is the name of the tag to associate the contact with
+* `[tag name]` is the name of the tag to associate the contact with.
 
 Example usage:
 
@@ -162,10 +159,9 @@ Format:
 Parameters:
 
 * `[index of contact]` is the index of the contact in the list.
-* `[phone]` is a valid phone number (should be all numeric characters).
+* `[phone]` is a valid phone number (should be all numeric characters, with an optional `+` for country code).
 * `[index of phone]` is the index of the phone number in the phone list of the contact.
-* `[email]` is a valid email (`@` (at sign) must be present, 
-and `.` (period) must be present after `@` (at sign)).
+* `[email]` is a valid email (`@` (at sign) must be present, and `.` (period) must be present after `@` (at sign)).
 * `[index of email]` is the index of the email in the email list of the contact.
 * `[link]` is a valid URL linking to a contact’s social media page.
 * `[index of link]` is the index of the link in the link list of the contact.
