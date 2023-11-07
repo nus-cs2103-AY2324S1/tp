@@ -53,9 +53,10 @@ public class FreeTimeTest {
         LocalTime to = LocalTime.parse("23:44");
         LocalTime closeFrom = LocalTime.parse("12:21");
         FreeTime freeTime = new FreeTime(from, to);
+        FreeTime otherFreeTime = new FreeTime(LocalTime.parse("12:20"), LocalTime.parse("23:44"));
 
         // same values -> returns true
-        assertEquals(freeTime, new FreeTime(LocalTime.parse("12:20"), LocalTime.parse("23:44")));
+        assertEquals(freeTime, otherFreeTime);
 
         // same object -> returns true
         assertEquals(freeTime, freeTime);
@@ -65,6 +66,14 @@ public class FreeTimeTest {
 
         // different values -> returns false
         assertNotEquals(freeTime, new FreeTime(from, closeFrom));
+
+        // set one day to be null -> returns true
+        freeTime = freeTime.updateAvailabilityForDay(1, null);
+        otherFreeTime = otherFreeTime.updateAvailabilityForDay(1, null);
+        assertEquals(freeTime, otherFreeTime);
+
+        // different type
+        assertNotEquals(freeTime, 1);
     }
 
     @Test
@@ -80,7 +89,7 @@ public class FreeTimeTest {
         assertEquals(freeTime, freeTime);
 
         // Check updatedFreeTime is edited
-        assertFalse(freeTime.equals(updatedFreeTime));
+        assertNotEquals(freeTime, updatedFreeTime);
 
         // Check that the time interval for the first day is updated
         assertNotEquals(freeTime.getDay(0), upDatedTimeInterval);

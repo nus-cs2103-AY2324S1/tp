@@ -3,13 +3,11 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_COURSE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_FROM;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_HOUR;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TELEGRAM;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TO;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.Collections;
@@ -52,11 +50,9 @@ public class EditCommand extends Command {
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_TELEGRAM + "TELEGRAM] "
-            + "[" + PREFIX_FROM + "FROM "
-            + PREFIX_TO + "TO] "
-            + "[" + PREFIX_TAG + "TAG] "
-            + "[" + PREFIX_COURSE + "COURSE]..."
-            + "[" + PREFIX_HOUR + "HOUR\n"
+            + "[" + PREFIX_TAG + "TAG]... "
+            + "[" + PREFIX_COURSE + "COURSE]... "
+            + "[" + PREFIX_HOUR + "HOUR]\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";
@@ -92,7 +88,7 @@ public class EditCommand extends Command {
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Telegram updatedTelegram = editPersonDescriptor.getTelegram().orElse(personToEdit.getTelegram());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
-        FreeTime updatedFreeTime = editPersonDescriptor.getFreeTime().orElse(personToEdit.getFreeTime());
+        FreeTime updatedFreeTime = personToEdit.getFreeTime();
         Set<Course> updatedCourses = editPersonDescriptor.getCourses().orElse(personToEdit.getCourses());
         Hour updatedHour = editPersonDescriptor.getHour().orElse(personToEdit.getHour());
 
@@ -156,7 +152,6 @@ public class EditCommand extends Command {
         private Email email;
         private Telegram telegram;
         private Set<Tag> tags;
-        private FreeTime freeTime;
         private Set<Course> courses;
         private Hour hour;
         private TimeInterval timeInterval;
@@ -174,18 +169,17 @@ public class EditCommand extends Command {
             setEmail(toCopy.email);
             setTelegram(toCopy.telegram);
             setTags(toCopy.tags);
-            setFreeTime(toCopy.freeTime);
             setCourses(toCopy.courses);
             setHour(toCopy.hour);
             setTimeInterval(toCopy.timeInterval);
         }
 
         /**
-         * Returns true if at least one field is edited.
+         * Returns true if no field is edited.
          */
-        public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, telegram, tags,
-                    courses, freeTime, hour, timeInterval);
+        public boolean isNoFieldEdited() {
+            return !CollectionUtil.isAnyNonNull(name, phone, email, telegram, tags,
+                    courses, hour, timeInterval);
         }
 
         public Optional<Name> getName() {
@@ -238,16 +232,6 @@ public class EditCommand extends Command {
             this.tags = (tags != null) ? new HashSet<>(tags) : null;
         }
 
-        public Optional<FreeTime> getFreeTime() {
-            return Optional.ofNullable(freeTime);
-        }
-
-        public void setFreeTime(FreeTime freeTime) {
-            if (freeTime != FreeTime.EMPTY_FREE_TIME) {
-                this.freeTime = freeTime;
-            }
-        }
-
         /**
          * Returns an unmodifiable mod set, which throws
          * {@code UnsupportedOperationException}
@@ -277,6 +261,7 @@ public class EditCommand extends Command {
         public Optional<TimeInterval> getTimeInterval() {
             return Optional.ofNullable(timeInterval);
         }
+
         public void setTimeInterval(TimeInterval timeInterval) {
             this.timeInterval = timeInterval;
         }
@@ -298,7 +283,6 @@ public class EditCommand extends Command {
                     && Objects.equals(email, otherEditPersonDescriptor.email)
                     && Objects.equals(telegram, otherEditPersonDescriptor.telegram)
                     && Objects.equals(tags, otherEditPersonDescriptor.tags)
-                    && Objects.equals(freeTime, otherEditPersonDescriptor.freeTime)
                     && Objects.equals(courses, otherEditPersonDescriptor.courses)
                     && Objects.equals(hour, otherEditPersonDescriptor.hour);
         }
@@ -311,7 +295,6 @@ public class EditCommand extends Command {
                     .add("email", email)
                     .add("telegram", telegram)
                     .add("tags", tags)
-                    .add("free time", freeTime)
                     .add("courses", courses)
                     .add("work hour", hour)
                     .toString();
