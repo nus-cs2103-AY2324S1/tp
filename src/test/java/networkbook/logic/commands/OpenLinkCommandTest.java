@@ -88,7 +88,6 @@ public class OpenLinkCommandTest {
         public boolean canRedoNetworkBook() {
             throw new AssertionError("This method should not be called.");
         }
-        
         public void undoNetworkBook() {
             throw new AssertionError("This method should not be called.");
         }
