@@ -240,14 +240,18 @@ Adds a job application to the list.
 
 **Examples:**
 
-* `add c/Microsoft r/Software Engineer d/Nov 12 2024 1200 i/Technology s/Pending`
+***Successful Commands:***
+1. Adding a basic job application: `add c/Google r/Software Engineer`
+* This command adds a job application for the company "Google" with the role "Software Engineer."
+* Optional fields like deadline, status, industry, and job type are not provided, so they will use their default values.
+2. Adding a complete job application with all fields: `add c/Microsoft r/Project Manager d/Dec 31 2023 1400 i/Technology s/Pending t/FULL_TIME`
+* This command adds a job application for the company "Microsoft" with the role "Project Manager" and provides a deadline, industry, status, and job type.
 
-  Adds a company called Microsoft, with the role Software Engineer in the technology industry,
-  deadline Nov 12 2024 1200 and status as pending.
-
-* `add c/Google r/Cleaner`
-
-  Adds a company called Google, with the role Cleaner and status `TO_ADD_STATUS`.
+***Failed Commands:***
+1. Missing required fields: `add r/Data Analyst`
+* This command is invalid because it doesn't provide the "c/COMPANY" field, which is required.
+2. Invalid Job Type: `add c/Apple r/Software Developer t/Part-Time`
+* This command is invalid because "t/Part-Time" is not a valid job type. It should be "t/PART_TIME."
 
 **UI mockup:**
 ![](images/user-guide/AddCommand.png)
@@ -285,13 +289,19 @@ Edits an application in the list.
 
 **Examples:**
 
-* `edit 1 r/Announcer`
+***Successful Commands:***
+1. Editing the role of a job application: `edit 1 r/Marketing Manager`
+* This command edits the role of the first job application to "Marketing Manager."
+2. Editing multiple fields of a job application: `edit 2 c/Amazon r/Product Manager d/Dec 15 2023 1000 s/APPROVED`
+* This command edits the company, role, deadline, and status of the second job application.
 
-  Changes the role of the 1st job application to an announcer.
-
-* `edit 5 s/approved t/volunteer`
-
-  Changes the status and job type of the 5th job application to `APPROVED` and volunteer respectively.
+***Failed Commands:***
+1. Missing index: `edit c/Google r/Software Engineer`
+* This command is invalid because it doesn't specify the index of the job application to edit.
+2. Invalid field: `edit 3 q/Designer`
+* This command is invalid because "q/Designer" is not a valid field. It should be "r/Designer."
+3. Invalid Job Type: `edit 4 t/Part-Time`
+* This command is invalid because "t/Part-Time" is not a valid job type. It should be "t/PART_TIME."
 
 **UI mockup:**
 ![](images/user-guide/EditCommand.png)
