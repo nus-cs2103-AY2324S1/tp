@@ -22,7 +22,7 @@ public class SortCommand extends Command {
             + PREFIX_ORDER + "ORDER\n"
             + "Example: " + COMMAND_WORD + " f/salary in/asc";
 
-    public static final String MESSAGE_SUCCESS = "Successfully sorted employees by %1$s. ";
+    public static final String MESSAGE_SUCCESS = "Successfully sorted employees by %1$s in %2$s order. ";
     public static final String MESSAGE_NO_FIELD = "There needs to be an field to sort the list by. ";
     public static final String MESSAGE_WRONG_FIELD = "Field %1$s cannot be used to sort the list. ";
     public static final String MESSAGE_NO_ORDER = "There needs to be an order of sorting the list. ";
@@ -42,6 +42,8 @@ public class SortCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
+        String orderFull = order.equals("asc") ? "ascending" : order.equals("desc") ? "descending" : "invalid";
+
         requireNonNull(model);
 
         switch (field.toLowerCase()) {
@@ -63,7 +65,7 @@ public class SortCommand extends Command {
             throw new CommandException(String.format(MESSAGE_WRONG_FIELD, field));
         }
 
-        return new CommandResult(String.format(MESSAGE_SUCCESS, field));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, field, orderFull));
     }
 
     /**
