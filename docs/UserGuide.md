@@ -71,7 +71,7 @@ Format: `help`
 
 Adds a new teaching assistant to TAManager.
 
-Format: `add n/NAME p/PHONE e/EMAIL tele/TELEGRAM [from/FROM to/TO] [t/TAG]... [c/COURSE_CODE]... h/HOUR`
+Format: `add n/NAME p/PHONE e/EMAIL tele/TELEGRAM [t/TAG]... [c/COURSE_CODE]... h/HOUR`
 
 - `NAME` should be a string.
 - `PHONE` should be an 8-digit integer.
@@ -111,8 +111,9 @@ and optionally end with an alphabet.`
 
 Edits a teaching assistant in TAManager.
 
-Format: `edit INDEX n/NAME p/PHONE e/EMAIL tele/TELEGRAM [t/TAG]... [c/COURSE_CODE]... h/HOUR`
+Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [tele/TELEGRAM] [t/TAG]... [c/COURSE_CODE]... [h/HOUR]`
 
+-  At least one field to edit must be provided.
 - `NAME` should be a string.
 - `PHONE` should be an 8-digit integer.
 - `EMAIL` should be a valid email address.
