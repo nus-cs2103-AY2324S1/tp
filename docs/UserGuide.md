@@ -22,6 +22,8 @@ img
 
 <a name="table-of-contents"></a>
 ## Table of Contents
+
+
 * [Introduction](#introduction)
 * [Quick Start](#quick-start)
 * [Using this Guide](#using-this-guide)
@@ -38,19 +40,19 @@ img
     * [Editing an applicant status: `status`](#editing-an-applicant-status--status)
   * [Interview Management Features](#interview-management-features)
     * [Command Parameters](#command-parameters-2)
-    * [Adding an interview to an applicant: `addi`](#addi)
-    * [Editing an interview of an applicant: `editi`](#editi)
-    * [Deleting an interview from an applicant: `deletei`](#deletei)
+    * [Adding an interview to an applicant: `addi`](#adding-an-interview-to-an-applicant--addi)
+    * [Editing an interview of an applicant: `editi`](#editing-an-interview-of-an-applicant--editi)
+    * [Deleting an interview from an applicant: `deletei`](#deleting-an-interview-from-an-applicant--deletei)
   * [Applicant Processing Features](#applicant-processing-features)
     * [Command Parameters](#command-parameters-3)
     * [Finding an applicant by name: `find`](#finding-an-applicant-by-name--find)
-    * [Sorting applicants by descriptors: `sort`](#sort)
-    * [Filtering applicants by fields: `filter`](#filter)
-    * [Importing from csv: `import`](#import)
+    * [Sorting applicants by descriptors: `sort`](#sorting-applicants-by-descriptors--sort)
+    * [Filtering applicants by fields: `filter`](#filtering-applicants-by-fields--filter)
+    * [Importing from csv: `import`](#importing-from-csv--import)
   * [Miscellaneous Features](#miscellaneous-features)
-    * [Viewing help: `help`](#help)
-    * [Clearing all applicant entries: `clear`](#clear)
-    * [Exiting the program: `exit`](#exit)
+    * [Viewing help: `help`](#viewing-help--help)
+    * [Clearing all applicant entries: `clear`](#clearing-all-applicant-entries--clear)
+    * [Exiting the program: `exit`](#exiting-the-program--exit)
     * [Saving the data](#saving-the-data)
     * [Editing the data file](#editing-the-data-file)
 * [FAQ](#faq)
@@ -227,7 +229,7 @@ This section introduces the full-suite of features in Staff-Snap. The features a
 | `PHONE`    | The applicant's phone number. <br/> <br/> It can only contain numbers, should be at least 3 digits long, and should not exceed 30 digits.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          | <ul><li>`91234726`</li><li>`1234567890123`</li></ul>             |
 | `EMAIL`    | The applicant's email. <br/> <br/> It should be of the format **local-part@domain**. <br/><br/> The **local-part** should only contain alphanumeric characters and these special characters, excluding the parentheses, (+_.-). The **local-part** may not start or end with any special characters. <br/><br/> This is followed by a **'@'** and then a **domain name**. The **domain name** is made up of domain labels separated by periods. The domain name must end with a domain label at least 2 characters long, have each domain label start and end with alphanumeric characters, and have each domain label consist of alphanumeric characters, separated only by hyphens, if any. <br/><br/> The entire email address should not exceed 30 characters. | <ul><li>`james@gmail.com`</li><li>`e9867626@u.nus.edu`</li></ul> |
 | `POSITION` | The position applied for by the applicant. <br/> <br/> It can take any value, should not be blank and should not exceed 30 characters.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             | <ul><li>`Software Engineer`</li><li>`AI Architect 2`</li></ul>   |
-| `STATUS`   | The status of the applicant. <br/> <br/> It can only be `o` or `offered` for _OFFERED_, `r` or `rejected` for _REJECTED_, or `u` or `undecided` for _UNDECIDED_. <br/> <br/> The default status for an applicant is "Undecided".                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   | <ul><li>`o`</li><li>`u`</li><li>`rejected`</li></ul>             |
+| `STATUS`   | The status of the applicant. <br/> <br/> It can only be `o` or `offered` for _OFFERED_, `r` or `rejected` for _REJECTED_, or `u` or `undecided` for _UNDECIDED_. <br/> <br/> The default status for an applicant is _UNDECIDED_.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   | <ul><li>`o`</li><li>`u`</li><li>`rejected`</li></ul>             |
 | `INDEX`    | The index of the applicant in the displayed list. <br/> <br/> It must be a positive integer and not more than the total number of applicants.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      | <ul><li>`2`</li></ul>                                            |
 
 
@@ -255,7 +257,7 @@ Format: `add n/NAME hp/PHONE e/EMAIL p/POSITION`
 </box>
 
 <box type="tip" header="**Note**">
-    Note that the default status for new Applicants is "Undecided".
+    Note that the default status for new Applicants is UNDECIDED.
 </box>
 
 
@@ -344,7 +346,8 @@ Example:
 <br>
 
 <a name="command-parameters-2"></a>
-#### Command Parameters
+
+#### Command Parameters 
 
 | Parameter         | Description​                                                                                                                                                          | Examples​                                          |
 |-------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------|
