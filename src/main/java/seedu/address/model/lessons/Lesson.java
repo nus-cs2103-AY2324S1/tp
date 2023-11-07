@@ -42,7 +42,7 @@ public class Lesson extends ListEntry<Lesson> {
     public Lesson(Name name, Time start, Time end, Day day, Subject subject, TaskList taskList, Name... studentNames) {
         requireAllNonNull(name, start, end, day, subject, taskList, studentNames);
         this.name = name;
-        setStart(start);
+        this.start = start;
         setEnd(end);
         this.subject = subject;
         this.day = day;
