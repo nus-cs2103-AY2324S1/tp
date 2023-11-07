@@ -4,7 +4,6 @@ import java.util.Map;
 import java.util.Objects;
 
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.count.EnrolDateCommandResult;
 
 /**

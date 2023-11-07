@@ -27,7 +27,6 @@ public class TrendWindow extends UiPart<Stage> {
         EnrolDate.JAN, EnrolDate.FEB, EnrolDate.MAR, EnrolDate.APR, EnrolDate.MAY,
         EnrolDate.JUN, EnrolDate.JUL, EnrolDate.AUG, EnrolDate.SEP, EnrolDate.OCT, EnrolDate.NOV, EnrolDate.DEC
     };
-  
     private static final int NUMBER_OF_MONTHS = 12;
     private static final String X_AXIS_LABEL = "Month";
     private static final String Y_AXIS_LABEL = "Number of Enrolments";
