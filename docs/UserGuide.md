@@ -459,7 +459,7 @@ You can also use `ctrl-W` to quickly exit the program.
 
 [Table of Contents](#table-of-contents)
 
-### <u>Category 6 - Mouse interaction</u>
+### <u>Category 7 - Mouse interaction</u>
 
 While NetworkBook is optimised for use with keyboards and text commands, it also has buttons you can click to do certain tasks if you prefer. These buttons function the same as the equivalent commands, so you can use your preferred method.
 
