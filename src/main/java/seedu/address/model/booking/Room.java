@@ -1,6 +1,7 @@
 package seedu.address.model.booking;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -79,6 +80,7 @@ public class Room {
      */
     public Room(String value) {
         requireNonNull(value);
+        checkArgument(isValidRoom(value), MESSAGE_CONSTRAINTS);
         this.value = Integer.parseInt(value);
         this.type = RoomType.getRoomTypeByNumber(this.value);
         this.roomTypeTag = new RoomTypeTag(this.type.name());
@@ -91,8 +93,12 @@ public class Room {
      * @return True if the room number is within the valid range, false otherwise.
      */
     public static boolean isValidRoom(String number) {
-        int roomNumber = Integer.parseInt(number);
-        return roomNumber < 1 || roomNumber > 500;
+        try {
+            int roomNumber = Integer.parseInt(number);
+            return roomNumber >= 1 && roomNumber <= 500;
+        } catch (NumberFormatException e) {
+            return false;
+        }
     }
 
     /**
@@ -120,7 +126,7 @@ public class Room {
      * @return the room number
      */
     public int getRoomNumber() {
-        return (int) this.value;
+        return this.value;
     }
 
     /**
