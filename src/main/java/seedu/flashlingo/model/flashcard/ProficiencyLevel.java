@@ -64,8 +64,12 @@ public class ProficiencyLevel {
     public int getLevel() {
         return level;
     }
+
     @Override
     public String toString() {
+        if (this.level >= this.deleteFromReviewThreshold) {
+            return "Word Mastered";
+        }
         return String.valueOf(this.level);
     }
 

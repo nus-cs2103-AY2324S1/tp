@@ -17,13 +17,13 @@ import seedu.flashlingo.model.flashcard.words.OriginalWord;
 import seedu.flashlingo.model.flashcard.words.TranslatedWord;
 
 /**
- * Adds a flashcard to Flashlingo.
+ * Adds a flash card to Flashlingo.
  */
 public class AddCommand extends Command {
     public static final String COMMAND_WORD = "add";
 
     // For help function
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a flashcard to Flashlingo.\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a flash card to Flashlingo.\n"
             + "Parameters: "
             + PREFIX_ORIGINAL_WORD + "ORIGINAL WORD "
             + PREFIX_ORIGINAL_WORD_LANGUAGE + "ORIGINAL WORD LANGUAGE "
@@ -36,8 +36,8 @@ public class AddCommand extends Command {
             + PREFIX_TRANSLATED_WORD_LANGUAGE + "Chinese";
 
 
-    public static final String MESSAGE_SUCCESS = "New flashcard added: %s - %s";
-    public static final String MESSAGE_DUPLICATE_CARD = "This flashcard already exists";
+    public static final String MESSAGE_SUCCESS = "New flash card added: %s - %s";
+    public static final String MESSAGE_DUPLICATE_CARD = "This flash card already exists";
     private FlashCard toAdd;
     private OriginalWord original;
     private TranslatedWord translated;
@@ -72,7 +72,7 @@ public class AddCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_CARD);
         }
         model.addFlashCard(toAdd);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, this.original, this.translated));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, this.original.getWord(), this.translated.getWord()));
     }
 
     @Override

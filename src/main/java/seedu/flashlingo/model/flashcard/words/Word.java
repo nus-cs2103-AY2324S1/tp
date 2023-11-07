@@ -79,7 +79,7 @@ public abstract class Word {
      */
     @Override
     public String toString() {
-        return this.word;
+        return this.word + " (" + this.language + ")";
     }
 }
 
