@@ -13,6 +13,15 @@ In this user guide, you will learn the basics of our application and how you can
 {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
+# Who is this guide for?
+Our guide is made for FumbleLog users of all experiences! Refer to the table below to find out which section of the guide is most relevant to you.
+
+|  **If you are...**  |                                                                                     **You should...**                                                                                      |
+|:-------------------:|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|
+|  New to FumbleLog   |            Read the [Quick Start](#quick-start) section to get started. After setting up, you can go through a step-by-step [Tutorial](#fumblelog-tutorial) of our application.            |
+| An experienced user | Skip to the [Commands Summary](#command-summary) section for a quick overview of all the commands, or have a look at our [Features](#features) for a detailed look at each of our features |
+
+
 
 # Quick start
 
@@ -52,6 +61,40 @@ In this user guide, you will learn the basics of our application and how you can
 [Scroll back to Table of Contents](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
+# Orientation to the Graphical User-Interface (GUI)
+![User Interface](images/userInterfaceTutorial.png)
+
+Refer to the table below for details on each GUI component
+
+| **GUI Component** | **Description**                                                                                                                                   |
+|:------------------|:--------------------------------------------------------------------------------------------------------------------------------------------------|
+| Menu Bar          | Contains the `File` dropdown menu which allows you to exit the application and the `Help` dropdown menu which allows you to access the user guide |
+| Command box       | Type your commands here and press `Enter` to execute them.                                                                                        |
+| Response box      | The response to your command will be shown here. If your command is invalid, the correct command format will be shown here.                       |
+| Contact list      | Displays the list of persons in your FumbleLog. You can scroll through the list of persons using the scroll bar on the right of the list.         |
+| Index             | Displays the index of the person in the contact list. This index is used for commands such as editing and deleting persons or events.             |
+|Event list         | Displays the list of events in your FumbleLog. You can scroll through the list of events using the scroll bar on the right of the list.          |
+
+
+
+# FumbleLog Tutorial
+This tutorial is designed for new users looking to get started using FumbleLog. In this tutorial, you will find step-by-step instructions on how to use commands in FumbleLog to help you manage
+your contacts and events better.
+
+1. First launch FumbleLog. You many refer to the [Quick Start](#quick-start) guide if you have forgotten how to.
+2. Lets first try **adding a person**, `Mary Lee`, to your contact list. Enter the command: `add_person n/Mary Lee p/91234567 e/mary@gmail.com a/Mary Street #01-01 b/2001-12-12 g/Family`. You should see FumbleLog successfully adding the contact to the contact list:
+![Tutorial Add](images/tutorialAdd.png)
+3. Now, lets try **editing the name and email** of your contact. Let's use the index of `Mary Lee` shown in the list (in this case 1), and edit her information: `edit_person 1 n/John Doe e/John@gmail.com`. FumbleLog should reflect the changes to your contact immediately:
+![Tutorial Edit](images/tutorialEdit.png)
+4. Try adding a few more contacts and assign them to the same `family` group using the `g/` parameter. Your contact list should look something like this:
+![Tutorial Add More](images/tutorialAddMore.png)
+5. Next, lets say `John Doe`'s birthday is in a few weeks. We can **add this event** to FumbleLog using this command: `add_event m/Mary's birthday d/2023-12-12`.
+![Tutorial Event Add](images/tutorialEventAdd.png)
+6. If everyone in the `family` group is attending `John Doe`'s birthday, you can easily assign every contact to the event by **editing the event** by just assigning the `family` group to the event: `edit_event 1 g/Family`. Now you should see every one in `Family` is assigned to `John Doe`'s birthday.
+![Tutorial Event Edit](images/tutorialEventEdit.png)
+7. Finally, when the event is over, you can **delete the event** easily by using the index of the event (in this case 1): `delete_event 1`.
+8. **Well done!** You have mastered the basics of FumbleLog! Now you can visit the [Features section](#features) to learn advanced commands!
+
 
 # Features
 
@@ -87,6 +130,23 @@ Format: `help`
 [Scroll back to Table of Contents](#table-of-contents)
 
 ## Commands for Persons
+
+### Properties of person
+Before you proceed to use commands to manage persons, you should know the properties of a person in FumbleLog.
+
+<panel header=":fa-solid-book: **Command Parameter Table**" type="secondary" expanded no-close>
+
+| Parameter | Format                                                                                                                                                                                                                       | Example                        |
+|-----------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------|
+| `NAME`     | Use `a-z`, `A-Z`, `0-9` and whitespaces only.                                                                                                                                                                                | `John Doe`                     |
+| `PHONE_NUMBER | Use `0-9` only and should be at least 3 digits long and maximum of 17 digits.                                                                                                                                                | `p/98765432`                   |
+| `EMAIL`       | Be in format `local-part@domain`. `local_part` should only contain alphanumeric values and special characters `+`, `_`, `.` and `-`. `domain` be at least 2 characters long, and start and end with alphanumeric characters. | `johndoe@gmail.com`              |
+| `ADDRESS` | Use any characters.                                                                                                                                                                                                          | `John Street, block 123, #01-01` |
+| `BIRTHDAY` | Have format `yyyy-MM-dd` and should not be later than current date.                                                                                                                                                          | `2001-12-30 `                    |
+| `REMARK` | Use any characters.                                                                                                                                                                                                          | `Owes me $2.`                    |
+| `GROUP` | Use `a-z`, `A-Z`, `0-9` only and must not contain any whitespaces.                                                                                                                                                           | `CS2103T`                      |
+
+</panel>
 
 ### Adding a person: `add_person`
 
@@ -238,6 +298,25 @@ Expected output when a command succeeds:
 [Scroll back to Table of Contents](#table-of-contents)
 
 ## Commands for Events
+
+### Properties of events
+Before you proceed to use commands to manage events, you should know the properties of an event in FumbleLog.
+
+<panel header=":fa-solid-book: **Command Parameter Table**" type="secondary" expanded no-close>
+
+| Parameter                  | Format                                                                        | Example           |
+|----------------------------|-------------------------------------------------------------------------------|-------------------|
+| `EVENT_NAME`               | Use `a-z`, `A-Z`, `0-9` and whitespaces only.                                 | `CS2103T meeting` |
+| `DATE`                     | Have format `yyyy-MM-dd` and should not be earlier than current date.         | `2023-12-01` |
+| `START_TIME` and `END_TIME` | Have format `HHmm`. `START_TIME` should be earlier than `END_TIME`.           | `1400` |
+| `NAME`| Multiple persons can be assigned to an event but only existing persons name can be added. | `John Doe` |
+| `GROUP` | Multiple groups can be assigned to an event but only existing groups can be added. | `CS2103T` |
+
+
+
+
+
+</panel>
 
 ### Adding an event : `add_event`
 
