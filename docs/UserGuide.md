@@ -24,6 +24,7 @@ img {
 ## Table of Contents
 
 * [Introduction](#introduction)
+* [Minimum System Requirements](#minimum-system-requirements)
 * [Quick Start](#quick-start)
 * [Using this Guide](#using-this-guide)
   * [Understanding the Notations](#understanding-the-notations)
@@ -74,7 +75,7 @@ Welcome to the **Staff-Snap** User Guide!
 
 The purpose of this guide is to get you familiar with the features of **Staff-Snap** - from the very basics, to the most advanced features the application has to offer. These features range from the simple task of adding an applicant to being able to calculate an applicant's score from their ratings in the interview stages. Every single feature is explained in this guide. You can check out the [Table of Contents](#table-of-contents) to navigate to a feature you might be interested in using.
 
-To begin using this guide, ensure you meet the [minimum system requirements](#minimum-system-requirements). Once this is done, go to the [quick start](#quick-start) section to get the app up and running. Once you have done so, please feel free to go through the features sections to find out what features Staff-Snap has installed. We recommend going through it in the order of this guide but any order works as well! You may check out our table of contents to jump to any section of your choice.
+To begin using this guide, ensure you meet the [Minimum System Requirements](#minimum-system-requirements). Once this is done, go to the [Quick Start](#quick-start) section to get the app up and running. Once you have done so, please feel free to go through the features sections to find out what features Staff-Snap has installed. We recommend going through it in the order of this guide but any order works as well! You may check out our table of contents to jump to any section of your choice.
 
 <br>
 
@@ -83,17 +84,9 @@ To begin using this guide, ensure you meet the [minimum system requirements](#mi
 
 ## Minimum System Requirements
 1. A Computer running Windows/MacOS/Linux.
-2. Java 11 or higher
+2. [Java](#glossary) 11 or higher
    1. If you do not have Java 11, follow [this](https://docs.oracle.com/en/java/javase/11/install/overview-jdk-installation.html#GUID-8677A77F-231A-40F7-98B9-1FD0B48C346A) installation guide.
 
-
-<br>
-
----
-<br>
-
-## Need help?
-If you are unable to follow any of the steps below or get help, please email our CEO at staffsnap@gmail.com or call our 24/7 technical helpline 69696969 for assistance. (For educational purposes, not real contact details.)
 
 <br>
 
