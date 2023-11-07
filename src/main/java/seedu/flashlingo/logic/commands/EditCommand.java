@@ -12,8 +12,8 @@ import java.util.List;
 
 import seedu.flashlingo.commons.core.index.Index;
 import seedu.flashlingo.commons.util.ToStringBuilder;
-import seedu.flashlingo.logic.commands.exceptions.CommandException;
 import seedu.flashlingo.logic.Messages;
+import seedu.flashlingo.logic.commands.exceptions.CommandException;
 import seedu.flashlingo.model.Model;
 import seedu.flashlingo.model.flashcard.FlashCard;
 
