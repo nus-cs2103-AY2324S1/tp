@@ -37,7 +37,8 @@ public class EditLeaveCommand extends Command {
             + PREFIX_OLD + "2023-12-26 "
             + PREFIX_NEW + "2023-12-28";
 
-    public static final String MESSAGE_SUCCESS = "Leave date edited from\n%1$s\nto\n%1$s";
+    public static final String MESSAGE_SUCCESS = "Leave date has been successfully edited from %1$s to %2$s. "
+            + "Here is the new leave list for:\n\n%3$s";
     public static final String MISSING_DATE = "No date given! "
             + "Leaves must have date in yyyy-MM-dd format.";
     public static final String MESSAGE_NON_EXISTENT_LEAVE = "This old leave currently does not exist.";
@@ -73,7 +74,8 @@ public class EditLeaveCommand extends Command {
                         employee.getOvertimeHours(), updatedList, employee.getRemarkList());
 
                 model.setEmployee(employee, editedEmployee);
-                return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.formatLeaves(editedEmployee)));
+                return new CommandResult(String.format(MESSAGE_SUCCESS, oldDate, newDate,
+                        Messages.formatLeaves(editedEmployee)));
             }
         }
         throw new CommandException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE));
