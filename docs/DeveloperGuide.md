@@ -404,19 +404,19 @@ _{Explain here how the data archiving feature will be implemented}_
 
 ### Allow users to add / delete tags without retyping previous tags
 **Current Implementation**:
-* **Current Issue**: Each member/event can have tags attached to it and these tags can be edited using the `editMember` / `editEvent`
-commands. However, upon adding a new tag to a member/event without typing all of the old tags, it will override the initial tags attached to
+* **Current Issue**: Each member/event can have tags attached to it and these tags can be edited using the `editMember`/`editEvent`
+commands. However, upon adding a new tag to a member/event without typing all the old tags, it will override the initial tags attached to
 the member/event and only the new tag will be displayed. This brings inconvenience to the user as the user has to 
 type both the old and new tags instead of just typing the new tag.
-* **Example**: We have a member called Alice with a member index of 1 and she has an initial tag called "friend". We want to 
-add a new tag "early" to her. Upon entering the command `editMember 1 t/early`, the current implementation will override 
-all the initial tags and only the "early" tag will be displayed.
+* **Example**: We have a member called Alice with a member index of 1, and she has an initial tag called `friend`. We want to 
+add a new tag `early` to her. Upon entering the command `editMember 1 t/early`, the current implementation will override 
+all the initial tags and only the `early` tag will be displayed.
 
 **Proposed solution:**
 
-We propose to enhance the `editMember` / `editEvent` commands to give the user the flexibility to choose one of the following options
-when editing the tags of the member / event:
-1. Override the initial tag entirely where the new tags that the user enters will entirely replace all the old tags
+We propose to enhance the `editMember`/`editEvent` commands to give the user the flexibility to choose one of the following options
+when editing the tags of the member/event:
+1. Override the initial tags entirely where the new tags that the user enters will entirely replace all the old tags
 2. Add new tag to the list of old tags where the old tags will remain attached to the member/event with the addition of the new tags
 3. Edit current list of tags attached to the member/event
 4. Delete specific tags from the current list of tags attached to the member/event
