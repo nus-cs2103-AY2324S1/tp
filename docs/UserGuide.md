@@ -444,14 +444,15 @@ Parameters:
 
 **:information_source: Notes about the command:**<br>
 
-*  The UI generates a profile page where details of the fosterer are shown.
-*  Aside from the details added by the add command, here is the list of fields the profile page shows:
-* `NOTE` : Notes for the user, examples include but are not limited to (optional and non-exhaustive):
+* Apart from the details added by the add command, we also provide an optional **notes feature** in the profile page for 
+more flexibility.
+* You can use this to include additional details(non-exhaustive) such as: 
   * Health condition of the animal
-  * Duration / end date of foster, whichever the foster manager prefers
+  * Foster period of the animal
   * Identifiable physical traits of the animal
-*  The respective updated field descriptions can be keyed in and saved by the user through the `save` command.
-  * Please refer to the section [Viewing a fosterer's detail: Editing a fosterer’s details in profile page](#editing-a-fosterers-details-in-profile-page) for the specific steps to do so.
+*  Just like the other fields, remember to save the changes using the `save` command.
+  * Please refer to the section [Viewing a fosterer's detail: Editing a fosterer’s details in profile page](#editing-a-fosterers-details-in-profile-page) for the specific steps on how to edit a fosterer in their 
+profile page.
  
 </div>
 
