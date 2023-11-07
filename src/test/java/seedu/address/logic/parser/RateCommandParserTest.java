@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.logic.commands.RateCommand;
 import seedu.address.model.interview.Rating;
 
+//@@author jonyxzx
 public class RateCommandParserTest {
 
     private RateCommandParser parser = new RateCommandParser();
