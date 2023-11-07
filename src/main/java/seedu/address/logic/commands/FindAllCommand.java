@@ -43,10 +43,11 @@ public class FindAllCommand extends Command {
         model.updateFilteredEventList(Model.PREDICATE_SHOW_ALL_EVENTS);
         model.updateFilteredEventList(eventPredicate);
         model.updateFilteredPersonList(personPredicate);
+        int personListSize = model.getFilteredPersonList().size();
+        int eventListSize = model.getFilteredEventList().size();
+        String stringMessage = getResultString(personListSize, eventListSize);
         return new CommandResult(
-                String.format(Messages.MESSAGE_PERSONS_AND_EVENTS_LISTED_OVERVIEW,
-                        model.getFilteredPersonList().size(),
-                        model.getFilteredEventList().size()));
+                String.format(stringMessage, personListSize, eventListSize));
     }
 
     @Override
@@ -69,5 +70,17 @@ public class FindAllCommand extends Command {
         return new ToStringBuilder(this)
                 .add("predicate", personPredicate)
                 .toString();
+    }
+
+    private String getResultString(int personListSize, int eventListSize) {
+        if (personListSize == 1 && eventListSize != 1) {
+            return Messages.MESSAGE_PERSON_AND_EVENTS_LISTED_OVERVIEW;
+        } else if (personListSize != 1 && eventListSize == 1) {
+            return Messages.MESSAGE_PERSONS_AND_EVENT_LISTED_OVERVIEW;
+        } else if (personListSize == 1 && eventListSize == 1) {
+            return Messages.MESSAGE_PERSON_AND_EVENT_LISTED_OVERVIEW;
+        } else {
+            return Messages.MESSAGE_PERSONS_AND_EVENTS_LISTED_OVERVIEW;
+        }
     }
 }
