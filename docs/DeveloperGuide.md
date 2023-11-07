@@ -403,8 +403,8 @@ _{Explain here how the data archiving feature will be implemented}_
 ## **Planned Enhancements**
 
 ### Allow users to add / delete tags without retyping previous tags
-**Current Implementation**:
-* **Current Issue**: Each member/event can have tags attached to it and these tags can be edited using the `editMember`/`editEvent`
+**Current Implementation:**
+* **Current Issue:** Each member/event can have tags attached to it and these tags can be edited using the `editMember`/`editEvent`
 commands. However, upon adding a new tag to a member/event without typing all the old tags, it will override the initial tags attached to
 the member/event and only the new tag will be displayed. This brings inconvenience to the user as the user has to 
 type both the old and new tags instead of just typing the new tag.
@@ -423,8 +423,8 @@ when editing the tags of the member/event:
 
 
 ### Provide specific error messages for unknown prefixes
-**Current Implementation**
-* **Current Issue**: Many of the commands require the use of prefixes in the input, such as `n/`, `g/`, `p/`, etc.
+**Current Implementation:**
+* **Current Issue:** Many of the commands require the use of prefixes in the input, such as `n/`, `g/`, `p/`, etc.
 However, upon inputting an erroneous unknown prefix in the command input, the error message shown to the user is not accurate.
 The error message displayed will be based on the error message of the preceding prefix.
 * **Example**: The user inputs the command `createMember n/Jane Smith g/Female q/test` but the error message displayed
