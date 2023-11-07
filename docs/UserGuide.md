@@ -3,11 +3,32 @@ layout: page
 title: User Guide
 ---
 
-Flashlingo is a **desktop app for learning words by flash cards, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). Flashlingo is designed with beginner language learners in mind, specialising in helping them expand their vocabulary.
-
 * Table of Contents
 {:toc}
 
+--------------------------------------------------------------------------------------------------------------------
+
+## Introduction
+Flashlingo is a versatile desktop application centered around learning words through flashcards. It is optimized for use via a Command Line Interface (CLI), 
+while also providing the advantages of a Graphical User Interface (GUI). Tailored with a focus on beginner language 
+learners, Flashlingo specializes in expanding vocabulary.
+
+The application leverages the scientifically-proven principle of the [**Forgetting Curve**](https://en.wikipedia.org/wiki/Forgetting_curve). 
+By incorporating the forgetting curve concept, Flashlingo schedules review sessions, ensuring words are revisited at 
+optimal intervals to enhance long-term memory retention. This method assists users in effectively retaining and expanding their vocabulary over time.
+--------------------------------------------------------------------------------------------------------------------
+
+## Application Features
+Flashlingo predominantly consists of two main features: **Managing flash cards** and **Reviewing flash cards**
+- **Managing flash cards**
+  - Users are given the ability to add, delete and edit flash cards. And each flashcard is assigned with a `level`, which
+  indicates the proficiency of the user with the word. The level of the flashcard will be updated after each review session.
+* **Reviewing flash cards**
+   - In each review session, words that require reviewing will be presented to users one by one. For each word, users can indicate whether
+     - they have memorized the word  
+     This will advance the word into the next `level`, meaning less frequent review for the word in the near future.
+     - they have forgotten the word 
+        This will decrease the `level` by 1, meaning more frequent review for the word in the near future.
 --------------------------------------------------------------------------------------------------------------------
 
 ## Quick start
