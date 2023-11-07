@@ -71,7 +71,7 @@ Pull requests: [#235](https://github.com/AY2324S1-CS2103T-T08-2/tp/pull/235) [#2
     for features related to accessibility. Pull request: [#24](https://github.com/AY2324S1-CS2103T-T08-2/tp/pull/24)
     * Add a glossary to define relevant terms used in the Developer Guide.
     * Add documentation on the implementation the edit feature.
-    This includes the sequence diagrams on the edit command.
+    This also includes the sequence diagrams on the edit command.
     Pull request: [#138](https://github.com/AY2324S1-CS2103T-T08-2/tp/pull/138)
     * Refine documentation on the model package. Pull request:
 
@@ -80,7 +80,20 @@ Pull requests: [#235](https://github.com/AY2324S1-CS2103T-T08-2/tp/pull/235) [#2
   * Did task division to ensure equal share of workload and team's progress.
   * Ensured that team members follow the internal deadlines.
     * Conducted thorough review of team's dynamics in `v1.2` postmortem meeting to ensure everyone is on track, upon late work submissions in `v1.2`.
-  * Maintained issue tracker and milestones.
+  * Reviews on major PRs (with changes in functional code):
+    * Add `AddCommand` class: [#82](https://github.com/AY2324S1-CS2103T-T08-2/tp/pull/82)
+    * Add `Priority` class and functionality: [#85](https://github.com/AY2324S1-CS2103T-T08-2/tp/pull/85)
+    * Update attributes of `Person` class: [#87](https://github.com/AY2324S1-CS2103T-T08-2/tp/pull/87)
+    * Add contact sorting feature: [#94](https://github.com/AY2324S1-CS2103T-T08-2/tp/pull/94)
+    * Edit functionalities of `Tag` class: [#97](https://github.com/AY2324S1-CS2103T-T08-2/tp/pull/97)
+    * Add feature of filtering by various fields: [#141](https://github.com/AY2324S1-CS2103T-T08-2/tp/pull/141) [#167](https://github.com/AY2324S1-CS2103T-T08-2/tp/pull/167)
+    * Enhancement of GUI: [#142](https://github.com/AY2324S1-CS2103T-T08-2/tp/pull/142) [#166](https://github.com/AY2324S1-CS2103T-T08-2/tp/pull/166)
+    * Add undo and redo commands: [#145](https://github.com/AY2324S1-CS2103T-T08-2/tp/pull/145) [#178](https://github.com/AY2324S1-CS2103T-T08-2/tp/pull/178)
+    * Delete command: [#146](https://github.com/AY2324S1-CS2103T-T08-2/tp/pull/146)
+    * Add keyboard shortcut functionalities: [#160](https://github.com/AY2324S1-CS2103T-T08-2/tp/pull/160)
+    * Enhance course-related features: [#165](https://github.com/AY2324S1-CS2103T-T08-2/tp/pull/165)
+  * Completed teammate's task when he could not finish in time.
+    * Add functionalities related to specialisation and course attributes of a contact: [#95](https://github.com/AY2324S1-CS2103T-T08-2/tp/pull/95)
 
 * **Tools**:
   * Set up team member's privileges in the repository.
