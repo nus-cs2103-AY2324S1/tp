@@ -907,6 +907,30 @@ otherwise.
 
       Use case resumes at step 2.
 
+#### **Use case: Unmark a schedule**
+{:.no_toc}
+
+**MSS**
+
+1.  User requests to list schedules
+2.  TutorConnect shows a list of schedules
+3.  User requests to unmark a specific schedule in the list
+4.  TutorConnect unmarks the schedule
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given index is invalid.
+
+    * 3a1. TutorConnect shows an error message.
+
+      Use case resumes at step 2.
+
 
 #### **Use case: View schedules by tutor**
 {:.no_toc}
