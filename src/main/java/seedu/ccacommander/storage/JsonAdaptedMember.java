@@ -111,7 +111,7 @@ class JsonAdaptedMember {
         if (address == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName()));
         }
-        if (!email.isEmpty() && !Address.isValidAddress(address)) {
+        if (!address.isEmpty() && !Address.isValidAddress(address)) {
             throw new IllegalValueException(Address.MESSAGE_CONSTRAINTS);
         }
         final Address modelAddress = address.isEmpty() ? null : new Address(address);
