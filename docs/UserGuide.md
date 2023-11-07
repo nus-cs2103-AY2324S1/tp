@@ -7,17 +7,20 @@ Unlock your musical potential with **_BandConnect++_** !
 
 **_BandConnect++_** is a powerful desktop app that helps independent music producers manage their musician contacts and create perfect bands with ease. Say goodbye to the tedious process of scrolling through your phone contacts and noting down every potential musician for your dream bands! With BandConnect++, you own the freedom to experiment with various hypothetical band makeups. You can quickly create a new band from scratch, add your musician contacts to the band, and check if their instruments and genres are a perfect match. 
 
-What's more, BandConnect++ has a convenient and intuitive [Command Line Interface (CLI)](#glossary) that allows you to perform all the tasks with just a few keystrokes. It may be a little daunting at first, but don't worry! We have prepared a comprehensive user guide to get you started and answer your confusion. Once you get the hang of it, your efficiency will be brought to a whole new level!
+What's more, **_BandConnect++_** has a convenient and intuitive [Command Line Interface (CLI)](#glossary) that allows you to perform all the tasks with just a few keystrokes. It may be a little daunting at first, but don't worry! We have prepared a comprehensive user guide to get you started and answer your confusion. Once you get the hang of it, your efficiency will be brought to a whole new level!
 
 So, no more waiting! Let's start creating your first dream band now!
 
 --------------------------------------------------------------------------------------------------------------------
+
 # Using the Guide
-Welcome to the *BandConnect++ User Guide*! This user guide walks you through everything about *BandConnect++*. Whether you are new to our app or a seasoned user, you can always find something useful in this guide. 
+This user guide walks you through the essential features of *BandConnect++*, familiarises you with the [CLI](#glossary) commands, and provides the best help we can if problem arises. We have made this guide beginner-friendly so that anyone who has used a software application before should have no trouble understanding it. Whether you are new to our application or a seasoned user, you can always find something useful in this guide. 
 
-For first-time users, please go to the [Quick start](#quick-start) section below to start an end-to-end tutorial that gets you onboard. Should you encounter any difficulty understanding the terminology, don't forget to refer to the [Glossary](#glossary)!
+For first-time users, please go to the [Quick start](#quick-start) section to start an end-to-end tutorial that gets you onboard. Should you encounter any difficulty understanding the terminology, don't forget to refer to the [Glossary](#glossary)!
 
-For experienced users, if you need help in remembering a particular command, please see [Command Summary](#command-summary). For common troubleshooting, please see [Troubleshooting](#troubleshooting).
+For experienced users who have used _BandConnect++_ before, if you need help in remembering a particular command, please see [Command Summary](#command-summary). You can also refer to the [Features](#features) section for a more detailed explanation of each command.
+
+If you encounter any problems along your journey, please take a look at the [troubleshooting](#troubleshooting) section and also refer to our [FAQ](#frequently-asked-questions) for more information.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -60,7 +63,8 @@ Please refer to the [Features](#features) below for details of each command.
 # Features
 
 ## Command Format
-to be updated.
+[to be updated].
+[also meaning of icons probably needed].
 
 ## Get help: `help`
 Access a link to our user guide.
