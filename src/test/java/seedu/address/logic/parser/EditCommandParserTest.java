@@ -76,7 +76,8 @@ public class EditCommandParserTest {
     @Test
     public void parse_missingParts_failure() {
         // no field specified
-        assertParseComplexFailure(parser, "", EditCommand.MESSAGE_NOT_EDITED, PersonType.SPECIALIST);
+        assertParseComplexFailure(parser, "",
+                EditCommand.MESSAGE_NOT_EDITED + "\n" + EditCommand.MESSAGE_USAGE_SPECIALIST, PersonType.SPECIALIST);
     }
 
     @Test
