@@ -88,21 +88,6 @@ public class Date implements Comparable<Date> {
         this.avatar = avatar;
     }
 
-
-    /**
-     * Constructor to incorporate User and Date class.
-     */
-    public Date() {
-        this.name = null;
-        this.age = null;
-        this.gender = null;
-        this.height = null;
-        this.income = null;
-        this.horoscope = null;
-        this.star = null;
-        this.avatar = null;
-    }
-
     public Name getName() {
         return name;
     }
