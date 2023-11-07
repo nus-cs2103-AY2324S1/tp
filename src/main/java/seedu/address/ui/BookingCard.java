@@ -81,6 +81,10 @@ public class BookingCard extends UiPart<Region> {
         FlowPane.setMargin(tagLabel, new Insets(0, 0, 0, 50)); // Adjust the insets as needed
     }
 
+    /**
+     * Closes all pop-up stages opened within the application.
+     * Iterates through the list of pop-up stages and closes each one.
+     */
     public static void closeAllPopups() {
         for (Stage stage : popupStages) {
             stage.close();
@@ -132,9 +136,11 @@ public class BookingCard extends UiPart<Region> {
             phoneIcon.setFitWidth(30);
 
             // Create Labels and set the actual data for Name, Email, and Phone
-            Label nameLabel = new Label(booking.getName().toString());
+            String displayedName = booking.getName().truncatedName();
+            Label nameLabel = new Label(displayedName);
             Label phoneLabel = new Label(booking.getPhone().toString());
-            Label emailLabel = new Label(booking.getEmail().toString());
+            String displayedEmail = booking.getEmail().truncatedEmail();
+            Label emailLabel = new Label(displayedEmail);
 
             // Apply bold style, increase font size, and increase letter-spacing to the labels
             nameLabel.setStyle("-fx-font-weight: bold; -fx-font-size: 14; -fx-text-letter-spacing: 1.5;");

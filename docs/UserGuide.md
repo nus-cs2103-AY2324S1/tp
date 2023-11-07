@@ -41,7 +41,7 @@ CheckMate is a **desktop app for streamlining the process of room bookings for h
 
     * `clear` : Deletes all booking.
 
-    * `undo` : Undoes the most recent command 
+    * `undo` : Undoes the most recent deletion
 
     * `exit` : Exits CheckMate and closes the application.
 
@@ -167,7 +167,7 @@ Examples:
 
 ### Deleting a booking : `delete`
 
-Deletes the specified booking from the bookings book.
+Deletes the specified booking(s) from the bookings book.
 
 Format: `delete INDEX ...`
 
@@ -178,6 +178,7 @@ Format: `delete INDEX ...`
 * The index refers to the index number shown in the displayed booking list.
 * The index **must be a positive integer** 1, 2, 3, …
 * Multiple entries can be deleted at once by including their list index i.e. `delete 1 2 3 ...`
+* Incorrect indices will not be deleted instead they will be flagged out to the user
 
 Examples:
 * `list` followed by `delete 2` deletes the 2nd booking in the bookingPeriod book.
@@ -192,6 +193,8 @@ Format: `undo`
 ![UndoCommand.png](images%2FUndoCommand.png)
 
 * Example image above shows the result of command `undo`
+* If the deleted item was manually added back, then undo was performed, the deleted booking will not be added as it 
+* already exists in CheckMate which compares two bookings using their room number and booking period.
 
 ### Clearing all entries : `clear`
 

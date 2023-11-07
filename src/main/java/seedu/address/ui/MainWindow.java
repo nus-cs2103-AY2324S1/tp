@@ -175,6 +175,12 @@ public class MainWindow extends UiPart<Stage> {
      */
     @FXML
     private void handleExit() {
+        // Close all associated pop-up stages
+        closeAllPopups();
+
+        if (helpWindow.isShowing()) {
+            helpWindow.hide();
+        }
         GuiSettings guiSettings = new GuiSettings(primaryStage.getWidth(), primaryStage.getHeight(),
                 (int) primaryStage.getX(), (int) primaryStage.getY());
         logic.setGuiSettings(guiSettings);

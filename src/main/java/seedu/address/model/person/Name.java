@@ -10,7 +10,8 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Name {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Names should only contain alphanumeric characters and spaces, and it should not be blank";
+            "Names should only contain alphanumeric characters and spaces, should not be blank and "
+                    + "should be at max 50 characters in length";
 
     /*
      * The first character of the address must not be a whitespace,
@@ -38,6 +39,9 @@ public class Name {
      * @return True if the string matches the expected name format, false otherwise.
      */
     public static boolean isValidName(String test) {
+        if (test.length() > 50) {
+            return false;
+        }
         return test.matches(VALIDATION_REGEX);
     }
 
@@ -80,6 +84,19 @@ public class Name {
     @Override
     public int hashCode() {
         return fullName.hashCode();
+    }
+
+    /**
+     * Truncates the full name to a maximum of 15 characters, appending an ellipsis (...) for portions
+     * exceeding this limit.
+     *
+     * @return The truncated full name adhering to the 15-character limit.
+     */
+    public String truncatedName() {
+        if (fullName.length() > 15) {
+            return fullName.substring(0, 12) + "...";
+        }
+        return fullName;
     }
 
 }
