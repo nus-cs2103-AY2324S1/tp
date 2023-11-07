@@ -1,5 +1,6 @@
 package seedu.address.storage;
 
+import java.io.IOException;
 import java.time.MonthDay;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -175,7 +176,18 @@ class JsonAdaptedPerson {
 
         final Optional<Integer> modelID = id.map(x -> x.intValue());
 
-        final Avatar modelAvatar = new Avatar(avatar);
+        Avatar modelAvatar;
+        try {
+            String path = avatar.getPath();
+            // Default avatar
+            if (path == null) {
+                modelAvatar = new Avatar();
+            } else {
+                modelAvatar = new Avatar(avatar.getPath());
+            }
+        } catch (IOException e) {
+            throw new IllegalValueException(String.format("Error loading person with avatar: %s", e.getMessage()));
+        }
 
         final ObservableList<Note> modelNotes = FXCollections.observableArrayList(personNotes);
 

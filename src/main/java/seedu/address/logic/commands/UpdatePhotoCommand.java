@@ -5,11 +5,13 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_AVATAR;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
 import javafx.collections.ObservableList;
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -41,19 +43,18 @@ public class UpdatePhotoCommand extends Command {
             + PREFIX_AVATAR + "D:/image/cute_cat.png";
 
     public static final String MESSAGE_SUCCESS = "Photo updated";
-
-    private final int zeroBasedIdx;
+    private final Index index;
     private String path;
 
     /**
      * Creates an UpdatePhotoCommand to replace the current photo
      * of a specific contact by the photo given by the path.
      *
-     * @param idx one-based index of the contact to update photo
+     * @param index Index of the contact to update photo
      * @param path String path to the photo to be used
      */
-    public UpdatePhotoCommand(int idx, String path) {
-        zeroBasedIdx = idx - 1;
+    public UpdatePhotoCommand(Index index, String path) {
+        this.index = index;
         this.path = path;
     }
 
@@ -62,24 +63,28 @@ public class UpdatePhotoCommand extends Command {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
 
-        if (zeroBasedIdx < 0 || zeroBasedIdx >= model.getFilteredPersonList().size()) {
+        if (index.getZeroBased() < 0 || index.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
-        Person personToEdit = lastShownList.get(zeroBasedIdx);
+        Person personToEdit = lastShownList.get(index.getZeroBased());
 
+        Avatar avatar;
         try {
-            Person editedPerson = copyPerson(personToEdit);
-            model.setPerson(personToEdit, editedPerson);
+            avatar = new Avatar(path);
         } catch (FileNotFoundException e) {
             throw new CommandException("Invalid file path provided");
+        } catch (IOException e) {
+            throw new CommandException(String.format("Error while reading image: %s", e.getMessage()));
         }
 
+        Person editedPerson = createPersonWithAvatar(personToEdit, avatar);
+        model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(MESSAGE_SUCCESS);
     }
 
-    private Person copyPerson(Person personToEdit) throws FileNotFoundException {
+    private Person createPersonWithAvatar(Person personToEdit, Avatar avatar) {
         assert personToEdit != null;
 
         Name updatedName = personToEdit.getName();
@@ -92,7 +97,6 @@ public class UpdatePhotoCommand extends Command {
         Optional<Telegram> telegram = personToEdit.getTelegram();
         Set<Tag> updatedTags = personToEdit.getTags();
         Optional<Integer> id = personToEdit.getId();
-        Avatar avatar = new Avatar(path);
         ObservableList<Note> notes = personToEdit.getNotes();
         Balance balance = personToEdit.getBalance();
 

@@ -29,7 +29,7 @@ public class UpdatePhotoCommandParser implements Parser<UpdatePhotoCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, UpdatePhotoCommand.MESSAGE_USAGE));
         }
 
-        return new UpdatePhotoCommand(Integer.parseInt(index), photoPath.get());
+        return new UpdatePhotoCommand(ParserUtil.parseIndex(index), photoPath.get());
     }
 }
 
