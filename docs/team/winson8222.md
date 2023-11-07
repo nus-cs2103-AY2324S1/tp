@@ -96,12 +96,25 @@ Given below are my contributions to the project.
     * Added extensions to use cases (add, edit, delete, practise, solve, set), to describe the cases
     when invalid parameters or incorrect command format is entered by the users. [#131](https://github.com/AY2324S1-CS2103T-W17-4/tp/pull/131)
   *  README:
-    * Removed trace of ab3 and revamped README file for lesSON [$50](https://github.com/AY2324S1-CS2103T-W17-4/tp/pull/50)
+    * Removed trace of ab3 and revamped README file for lesSON [#50](https://github.com/AY2324S1-CS2103T-W17-4/tp/pull/50)
+
 
 * **Community**:
+
+
+* **Mentoring / PR contribution:**
+  * Reviewed PR
+    * Removal of irrelevant test cases[#68](https://github.com/AY2324S1-CS2103T-W17-4/tp/pull/68)
+    * Modification of error messages [#74](https://github.com/AY2324S1-CS2103T-W17-4/tp/pull/74)
+    * Adding NextPractiseDate to a Card and give advice to improve the feature further 
+    [#93](https://github.com/AY2324S1-CS2103T-W17-4/tp/pull/93)
+    * Filtering function based on tag and question [#93](https://github.com/AY2324S1-CS2103T-W17-4/tp/pull/93)
+  * Wrote further test cases of code implemented by other team member
   
+
 * **Tools**:
   * Integrated a third party module FlexMark for display of MarkDown styles in the UI
+
 
 
 
