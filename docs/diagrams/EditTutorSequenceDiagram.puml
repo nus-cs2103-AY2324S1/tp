@@ -40,7 +40,7 @@ EditPersonDescriptor --> EditTutorCommandParser : e
 deactivate EditPersonDescriptor
 
 create EditTutorCommand
-EditTutorCommandParser -> EditTutorCommand : EditTutorCommand(1, e)
+EditTutorCommandParser -> EditTutorCommand
 activate EditTutorCommand
 
 EditTutorCommand --> EditTutorCommandParser : d

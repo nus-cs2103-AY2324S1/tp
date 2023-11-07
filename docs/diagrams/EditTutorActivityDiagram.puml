@@ -3,27 +3,28 @@ skin rose
 skinparam ActivityFontSize 15
 skinparam ArrowFontSize 12
 start
-:User executes command;
+:User runs edit-t command;
 
 'Since the beta syntax does not support placing the condition outside the
 'diamond we place it as the true branch instead.
 
-if () then ([valid index])
-    if () then ([no repeated fields])
-         if () then ([no invalid field values])
-            if () then ([non-duplicate tutor])
-                :Edit tutor in AddressBook;
-            else ([else])
-             :ErrorDuplicateTutor;
-            endif
-        else ([else])
-         :ErrorInvalidFieldValue;
-        endif
+:Parse user input;
+
+if () then ([input is valid])
+    :Construct EditPersonDescriptor object;
+    :Construct EditPersonCommand object;
+    :Return back to LogicManager;
+    :LogicManager executes EditPersonCommand;
+    :Construct edited Person;
+    if () then ([edited Person does not already exist])
+        :Replace Person with edited Person in PersonList;
+        :Update UI;
     else ([else])
-     :ErrorDuplicatePrefixes;
+        :Display duplicate Person error message;
     endif
 else ([else])
- :ErrorInvalidCommandFormat;
+:Display error message;
+
 endif
 stop
 @enduml
