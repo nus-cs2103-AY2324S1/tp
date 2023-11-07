@@ -5,6 +5,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_YEAR;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.OrganizeData;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.commands.trendresults.TrendCommandResult;
 import seedu.address.model.Model;
 
@@ -31,6 +32,8 @@ public class TrendCommand extends Command {
      * @param args The year such that the data during this year is to be analyzed.
      */
     public TrendCommand(String args) {
+        String trimmed = args.trim();
+
         this.year = Integer.parseInt(args.trim());
     }
 
