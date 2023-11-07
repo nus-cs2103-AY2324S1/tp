@@ -1,10 +1,7 @@
 package networkbook.logic.commands;
 
-import static org.junit.jupiter.api.Assertions.fail;
-
 import org.junit.jupiter.api.Test;
 
-import networkbook.logic.commands.exceptions.CommandException;
 import networkbook.model.Model;
 import networkbook.model.ModelManager;
 import networkbook.model.UserPrefs;
