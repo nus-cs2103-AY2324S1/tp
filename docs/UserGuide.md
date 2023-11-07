@@ -148,7 +148,7 @@ All planned enhancements will also be listed in the [Planned Enhancements / Know
 
 4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar CampusConnect.jar` command to run the application.<br>
    CampusConnect will appear shortly, as shown in the image below. Note how CampusConnect contains some sample data.<br>
-   ![Ui](images/Final_Ui.png)
+   ![Ui](images/Ui.png)
 
 5. You can now start typing some command into the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
 
@@ -233,6 +233,13 @@ Below are some examples on how to use the command:
 Refer to [properties of contact](#properties-of-contact) on the accepted formats for the respective parameters.
 
 </box>
+
+Here is what CampusConnect looks like when you execute the `add` command.
+
+<div style="display:flex; justify-content:space-around; align-items:center;">
+  <img src="images/before_add.png" alt="Before add command" style="height:400px; margin:10px;">
+  <img src="images/after_add.png" alt="After add command" style="height:400px; margin:10px;">
+</div>
 
 <box type="warning">
 
