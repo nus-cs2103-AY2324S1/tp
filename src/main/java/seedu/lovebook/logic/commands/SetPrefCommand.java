@@ -38,7 +38,7 @@ public class SetPrefCommand extends Command {
             + PREFIX_HOROSCOPE + "HOROSCOPE "
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_AGE + "21 "
-            + PREFIX_HEIGHT + "23124 "
+            + PREFIX_HEIGHT + "180 "
             + PREFIX_INCOME + "3000 "
             + PREFIX_HOROSCOPE + "Scorpio ";
 
