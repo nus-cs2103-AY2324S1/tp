@@ -20,7 +20,7 @@ public class UnstarCommand extends Command {
     public static final String COMMAND_WORD = "unstar";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": stars the Date identified by the index number used in the displayed Date list.\n"
+            + ": unstars the date identified by the index number used in the displayed Date list.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 

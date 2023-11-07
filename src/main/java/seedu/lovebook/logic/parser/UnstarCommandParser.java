@@ -2,7 +2,6 @@ package seedu.lovebook.logic.parser;
 import static seedu.lovebook.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import seedu.lovebook.commons.core.index.Index;
-import seedu.lovebook.logic.commands.StarCommand;
 import seedu.lovebook.logic.commands.UnstarCommand;
 import seedu.lovebook.logic.parser.exceptions.ParseException;
 
@@ -23,7 +22,7 @@ public class UnstarCommandParser implements Parser<UnstarCommand> {
             return new UnstarCommand(index);
         } catch (ParseException pe) {
             throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, StarCommand.MESSAGE_USAGE), pe);
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, UnstarCommand.MESSAGE_USAGE), pe);
         }
     }
 }
