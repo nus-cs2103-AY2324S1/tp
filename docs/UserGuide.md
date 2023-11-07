@@ -47,7 +47,7 @@ HouR is a **desktop app for managing employee records, optimized for use via a C
 
 1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar hour.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![Ui](images/Ui.png)
+   ![Ui](images/ug-pics/Ui.png)
 
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
@@ -68,9 +68,9 @@ HouR is a **desktop app for managing employee records, optimized for use via a C
 
    * `addleave id/EID1234-5678 from/2023-12-26 to/2023-12-28`: Adds leave dates from 26 to 28 December 2023 inclusive for employee with id EID1234-5678.
 
-   * `deleteleave id/EID1234-5678 from/2023-12-27 to/2023-12-27`: Deletes all leave dates of an employee with id EID1234-5678 that fall on 27 December 2023.
+   * `deleteleave id/EID1234-5678 from/2023-12-27 to/2023-12-27`: Deletes leave date 27 December 2023 for employee with id EID1234-5678.
    
-   * `editleave id/EID1234-5678 old/2023-12-26 new/2023-12-29`: Edits the old leave date `2023-12-26` of an employee with id EID1234-5678 to new leave date `2023-12-29`.
+   * `editleave id/EID1234-5678 old/2023-12-26 new/2023-12-29`: Edits the old leave date on 26 December 2023 of employee with id EID1234-5678 to new leave date on 29 December 2023.
    
    * `listleave on/2023-12-28`: Lists all employees on leave on 28 December 2023.
    
@@ -78,9 +78,9 @@ HouR is a **desktop app for managing employee records, optimized for use via a C
    
    * `deleteremark id/EID1234-5678 r/good worker`: Deletes the remark `good worker` from the employee with id EID1234-5678.
    
-   * `overtime id/EID1234-5678 o/inc a/10`: Increases the overtime hours of employee with id EID1234-5678 to 10 hours.
+   * `overtime id/EID1234-5678 o/inc a/10`: Increases the overtime hours of employee with id EID1234-5678 by 10 hours.
    
-   * `report EID1234-5678`: Generates a report with details on leaves and overtime for employee with id EID1234-5678.
+   * `report EID1234-5678`: Generates a report with details of the employee with id EID1234-5678.
    
    * `reset f/overtime`: Resets the overtime hours field of all employees to the default value 0.
    
@@ -115,7 +115,7 @@ HouR is a **desktop app for managing employee records, optimized for use via a C
 
 <div markdown="block" class="alert alert-info">
 
-**:information_source: Notes about the command format**<br>
+**:information_source: Notes about the command format and commands**<br>
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
@@ -131,6 +131,9 @@ HouR is a **desktop app for managing employee records, optimized for use via a C
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
+* For all commands except for `find` and `listleave`, the entire employee list will be called after the command is executed successfully.<br>
+  e.g. if the employee list was previously filtered through the `find` and `listleave` commands, the employee list panel will change to show the entire employee list.
+
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </div>
 
@@ -139,6 +142,14 @@ HouR is a **desktop app for managing employee records, optimized for use via a C
 Shows a message explaining how to access the help page.
 
 ![help message](images/helpMessage.png)
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+For Windows users, you can use keyboard shortcut **F1** to open up the help window.
+</div>
+
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+Note that if you are running HouR on another monitor, the help window defaults to the centre of the primary monitor.
+</div>
 
 Format: `help`
 
@@ -152,12 +163,12 @@ Examples:
 * `add n/Jane Doe pos/Manager id/EID2023-7891 p/81234567 e/janedoe@test.com s/5000`
 * `add n/Alex Yeoh pos/Software Engineer id/EID2023-1234 p/87428807 e/alexyeoh@example.com s/8500 d/IT`
 
-![add success](images/addSuccess.png)
+![add success](images/ug-pics/addSuccess.png)
 
 * `add n/Charlotte Oliveiro pos/Software Engineer id/EID2023-1234 p/98561234 e/alexyeoh2@example.com s/9500 d/IT` is
   invalid because `id` already exists in the records.
 
-![add failure](images/addFailure.png)
+![add failure](images/ug-pics/addFailure.png)
 
 ### Deleting an employee : `delete`
 
@@ -172,11 +183,11 @@ Format: `delete EMPLOYEE_ID`
 Examples:
 * `delete EID1234-5678` deletes the employee with employee id EID1234-5678 in the employee list.
 
-![delete success](images/deleteSuccess.png)
+![delete success](images/ug-pics/deleteSuccess.png)
 
 * `delete EID0000-0000` is invalid because the id does not exist.
 
-![delete failure](images/deleteFailure.png)
+![delete failure](images/ug-pics/deleteFailure.png)
 
 ### Editing an employee : `edit`
 
@@ -191,11 +202,11 @@ Format: `edit INDEX [n/NAME] [pos/POSITION] [id/EMPLOYEE_ID] [p/PHONE_NUMBER] [e
 Examples:
 *  `edit 1 pos/Senior Software Engineer` edits the position of the 1st employee to be `Senior Software Engineer`.
 
-![edit success](images/editSuccess.png)
+![edit success](images/ug-pics/editSuccess.png)
 
 *  `edit 10 pos/Senior Software Engineer` is invalid because the index does not exist.
 
-![edit failure](images/editFailure.png)
+![edit failure](images/ug-pics/editFailure.png)
 
 ### Listing all employees : `list`
 
@@ -203,7 +214,7 @@ Shows a list of all employees in the employee list.
 
 Format: `list`
 
-![list success](images/list.png)
+![list success](images/ug-pics/list.png)
 
 ### Locating employees: `find`
 
@@ -220,7 +231,7 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 Examples:
 * `find Bernice` returns `Bernice Yu`
 
-![find success](images/findSuccess.png)
+![find success](images/ug-pics/findSuccess.png)
 
 ### Sorting all employees : `sort`
 
@@ -236,11 +247,11 @@ Examples:
 * `sort f/salary in/asc` sorts the employee list such that their salaries are arranged 
   in ascending order from top to bottom
 
-![sort success](images/sortSuccess.png)
+![sort success](images/ug-pics/sortSuccess.png)
 
 * `sort f/blah in/desc` is invalid because field `blah` does not exist.
 
-![sort failure](images/sortFailure.png)
+![sort failure](images/ug-pics/sortFailure.png)
 
 ### Adding a leave period of an employee: `addleave`
 
@@ -255,11 +266,11 @@ Examples:
 * `addleave id/EID1234-5678 from/2023-12-26 to/2023-12-28` adds the dates 26, 27, and 28 December 2023 to the leaves taken
   by employee with id EID1234-5678.
 
-![addleave success](images/addleaveSuccess.png)
+![addleave success](images/ug-pics/addleaveSuccess.png)
 
 * `addleave id/EID1234-5678 from/2023-12-31 to/2023-12-28` is invalid because the start date 2023-12-31 is after the end date 2023-12-28, which is impossible.
 
-![addleave failure](images/addleaveFailure.png)
+![addleave failure](images/ug-pics/addleaveFailure.png)
 
 ### Deleting a leave period of an employee: `deleteleave`
 
@@ -276,15 +287,15 @@ Examples:
 * `deleteleave id/EID1234-5678 from/2023-12-26 to/2023-12-28` deletes all leave dates
   of employee with id EID1234-5678 that fall on 26, 27, and 28 December 2023.
 
-![deleteleave success](images/deleteleaveSuccess.png)
+![deleteleave success](images/ug-pics/deleteleaveSuccess.png)
 
 * `deleteleave id/EID1234-5678 from/2023-12-31 to/2023-12-28` is invalid because the start date 2023-12-31 is after the end date 2023-12-28, which is impossible.
 
-![deleteleave failure](images/deleteleaveFailure1.png)
+![deleteleave failure](images/ug-pics/deleteleaveFailure1.png)
 
 * `deleteleave id/EID1234-5678 from/2023-12-28 to/2023-12-28` is invalid because there is no existing leave on 28 December 2023.
 
-![deleteleave failure](images/deleteleaveFailure2.png)
+![deleteleave failure](images/ug-pics/deleteleaveFailure2.png)
 
 ### Editing a leave date of an employee : `editleave`
 
@@ -299,15 +310,15 @@ Examples:
 * `editleave id/EID1234-5678 old/2023-12-26 new/2023-12-28` edits the leave on 26 December 2023 to 28 December 2023
   for employee with id EID1234-5678.
 
-![editleave success](images/editleaveSuccess.png)
+![editleave success](images/ug-pics/editleaveSuccess.png)
 
 * `editleave id/EID1234-5678 old/2023-12-31 new/2023-12-28` is invalid because there is no existing leave on 31 December 2023.
 
-![editleave failure](images/editleaveFailure1.png)
+![editleave failure](images/ug-pics/editleaveFailure1.png)
 
 * `editleave id/EID1234-5678 old/2023-12-31 new/2023-12-28` is invalid because there is an existing leave on 28 December 2023.
 
-![editleave failure](images/editleaveFailure2.png)
+![editleave failure](images/ug-pics/editleaveFailure2.png)
 
 ### Listing the employees on leave on a specified date : `listleave`
 
@@ -318,11 +329,11 @@ Format: `listleave on/DATE`
 Examples:
 * `listleave on/2023-12-28` lists all the employees that are on leave on 28 December 2023.
 
-![listleave success](images/listleaveSuccess.png)
+![listleave success](images/ug-pics/listleaveSuccess.png)
 
 * `listleave on/2023-12-29` displays an empty list because there are no employees that are on leave on 29 December 2023.
 
-![listleave empty](images/listleaveEmpty.png)
+![listleave empty](images/ug-pics/listleaveEmpty.png)
 
 ### Adding a remark for an employee : `addremark`
 
@@ -338,11 +349,11 @@ Examples:
 * `addremark id/EID1234-5678 r/good worker` adds the remark `good worker` to
    employee with id EID1234-5678.
 
-![addremark success](images/addremarkSuccess.png)
+![addremark success](images/ug-pics/addremarkSuccess.png)
 
 * `addremark id/EID1234-5678 r/GOOD WORKER` is invalid because there is already a remark `good worker` for the employee.
 
-![addremark_failure](images/addremarkFailure.png)
+![addremark_failure](images/ug-pics/addremarkFailure.png)
 
 ### Deleting a remark of an employee : `deleteremark`
 
@@ -358,12 +369,12 @@ Examples:
 * `deleteremark id/EID1234-5678 r/good worker` deletes the remark `good worker` from
   employee with id EID1234-5678.
 
-![deleteremark success](images/deleteremarkSuccess.png)
+![deleteremark success](images/ug-pics/deleteremarkSuccess.png)
 
 * `deleteremark id/EID1234-5678 r/team player` is invalid because the remark `team player` does not exist under 
   the employee with id EID1234-5678.
 
-![deleteremark failure](images/deleteremarkFailure.png)
+![deleteremark failure](images/ug-pics/deleteremarkFailure.png)
 
 ### Updating overtime hours of an employee : `overtime`
 
@@ -379,15 +390,15 @@ Format: `overtime id/EMPLOYEE_ID o/OPERATION a/AMOUNT`
 Examples:
 * `overtime id/EID1234-5678 o/inc a/10` increases the overtime hours of employee with id EID1234-5678 by 10 hours.
 
-![overtime success](images/overtimeSuccess.png)
+![overtime success](images/ug-pics/overtimeSuccess.png)
 
 * `overtime id/EID1234-5678 o/dec a/20` is invalid because it will result in negative overtime hours.
 
-![overtime failure](images/overtimeFailure.png)
+![overtime failure](images/ug-pics/overtimeFailure.png)
 
 ### Generating a report : `report`
 
-Generates a report with details on leaves, overtime hours and remarks for an employee.
+Generates a report with details on leaves, overtime hours, overtime pay, and remarks for an employee.
 
 Format: `report EMPLOYEE_ID`
 
@@ -396,15 +407,18 @@ Format: `report EMPLOYEE_ID`
 * The report is downloaded in a `.txt` file, located in the `reports` folder in the location of `hour.jar`.
   * The `.txt` file follows the naming convention `DATE_NAME` where `DATE` is the date the report is created, 
     and `NAME` is the name of the corresponding employee.
+* The overtime pay is calculated based on the overtime hours and the salary of the employee.
+  * The [Singaporean Ministry of Manpower's prescribed formula](https://www.mom.gov.sg/employment-practices/hours-of-work-overtime-and-rest-days) ($1.5\times \frac{12 \times \text{Monthly Salary}}{52\times 44}$) is used to calculate overtime pay.
+
 
 Examples:
 * `report EID1234-5678` generates and downloads a report for the employee with employee id EID1234-5678.
 
-![report success](images/reportSuccess.png)
+![report success](images/ug-pics/reportSuccess.png)
 
 * `report EID0000-0000` is invalid because the id does not exist.
 
-![report failure](images/reportFailure.png)
+![report failure](images/ug-pics/reportFailure.png)
 
 ### Resetting fields : `reset`
 
@@ -417,15 +431,15 @@ Format: `reset f/FIELD`
 Examples:
 * `reset f/overtime` resets the overtime hours of all employees in the list to the default value 0.
 
-![reset success](images/resetOvertimeSuccess.png)
+![reset success](images/ug-pics/resetOvertimeSuccess.png)
 
 * `reset f/leaves` resets the number of leaves taken by all employees in the list to the default value 0.
 
-![reset success](images/resetLeavesSuccess.png)
+![reset success](images/ug-pics/resetLeavesSuccess.png)
 
 * `reset f/name` is an invalid field and cannot be reset.
 
-![reset failure](images/resetFailure.png)
+![reset failure](images/ug-pics/resetFailure.png)
 
 ### Clearing all entries : `clear`
 
@@ -433,7 +447,7 @@ Clears all entries from the employee book.
 
 Format: `clear`
 
-![clear](images/clear.png)
+![clear](images/ug-pics/clear.png)
 
 ### Exiting the program : `exit`
 

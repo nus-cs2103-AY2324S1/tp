@@ -86,6 +86,13 @@ class OvertimeCommandTest {
     }
 
     @Test
+    void execute_invalidId_failure() {
+        OvertimeHours changeInOvertimeHours = new OvertimeHours(VALID_OVERTIME_HOURS_BOB);
+        OvertimeCommand overtimeCommand = new OvertimeCommand(new Id("EID0000-0000"), changeInOvertimeHours, true);
+        assertCommandFailure(overtimeCommand, model, Messages.MESSAGE_INVALID_EMPLOYEE_DISPLAYED_ID);
+    }
+
+    @Test
     public void equals() {
         OvertimeHours changeInOvertimeHours = new OvertimeHours(VALID_OVERTIME_HOURS_BOB);
         Id idBob = new Id(VALID_ID_BOB);
