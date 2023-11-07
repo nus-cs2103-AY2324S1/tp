@@ -32,7 +32,8 @@ import seedu.address.logic.commands.barchartresults.GenderBarChartCommandResult;
 import seedu.address.logic.commands.barchartresults.SecLevelBarChartCommandResult;
 import seedu.address.logic.commands.barchartresults.SubjectBarChartCommandResult;
 import seedu.address.model.ModelManager;
-import seedu.address.model.tag.Subject;
+import seedu.address.model.person.SecLevel;
+import seedu.address.model.tag.EnrolDate;
 
 /**
  * Controller of a table page.
@@ -115,7 +116,7 @@ public class BarChartWindow extends UiPart<Stage> {
         CategoryAxis xAxis = new CategoryAxis();
 
         xAxis.setCategories(FXCollections.<String>observableArrayList(Arrays.asList(
-                "Sec 1", "Sec 2", "Sec 3", "Sec 4")));
+            SecLevel.SEC1, SecLevel.SEC2, SecLevel.SEC3, SecLevel.SEC4)));
         xAxis.setLabel("Sec Level");
 
         NumberAxis yAxis = new NumberAxis();
@@ -125,10 +126,10 @@ public class BarChartWindow extends UiPart<Stage> {
         barChart.setTitle("Comparison between Sec Levels");
 
         XYChart.Series<String, Number> series = new XYChart.Series<>();
-        series.getData().add(new XYChart.Data<>("Sec 1", commandResult.getSec1Count()));
-        series.getData().add(new XYChart.Data<>("Sec 2", commandResult.getSec2Count()));
-        series.getData().add(new XYChart.Data<>("Sec 3", commandResult.getSec3Count()));
-        series.getData().add(new XYChart.Data<>("Sec 4", commandResult.getSec4Count()));
+        series.getData().add(new XYChart.Data<>(SecLevel.SEC1, commandResult.getSec1Count()));
+        series.getData().add(new XYChart.Data<>(SecLevel.SEC2, commandResult.getSec2Count()));
+        series.getData().add(new XYChart.Data<>(SecLevel.SEC3, commandResult.getSec3Count()));
+        series.getData().add(new XYChart.Data<>(SecLevel.SEC4, commandResult.getSec4Count()));
 
         barChart.getData().add(series);
 
@@ -144,8 +145,7 @@ public class BarChartWindow extends UiPart<Stage> {
         CategoryAxis xAxis = new CategoryAxis();
 
         xAxis.setCategories(FXCollections.<String>observableArrayList(Arrays.asList(
-                Subject.ENG, Subject.CHI, Subject.EMATH, Subject.AMATH, Subject.PHY, Subject.CHEMI,
-                Subject.BIO, Subject.GEOG, Subject.HIST, Subject.SOC)));
+                "Eng", "Chi", "E.Math", "A.Math", "Phy", "Chem", "Bio", "Geo", "Hist", "Soc")));
         xAxis.setLabel("Subjects");
 
         NumberAxis yAxis = new NumberAxis();
@@ -155,16 +155,16 @@ public class BarChartWindow extends UiPart<Stage> {
         barChart.setTitle("Comparison between Subjects");
 
         XYChart.Series<String, Number> series = new XYChart.Series<>();
-        series.getData().add(new XYChart.Data<>(Subject.ENG, commandResult.getEngCount()));
-        series.getData().add(new XYChart.Data<>(Subject.CHI, commandResult.getChiCount()));
-        series.getData().add(new XYChart.Data<>(Subject.EMATH, commandResult.getEmathCount()));
-        series.getData().add(new XYChart.Data<>(Subject.AMATH, commandResult.getAmathCount()));
-        series.getData().add(new XYChart.Data<>(Subject.PHY, commandResult.getPhyCount()));
-        series.getData().add(new XYChart.Data<>(Subject.CHEMI, commandResult.getChemiCount()));
-        series.getData().add(new XYChart.Data<>(Subject.BIO, commandResult.getBioCount()));
-        series.getData().add(new XYChart.Data<>(Subject.GEOG, commandResult.getGeogCount()));
-        series.getData().add(new XYChart.Data<>(Subject.HIST, commandResult.getHistCount()));
-        series.getData().add(new XYChart.Data<>(Subject.SOC, commandResult.getSocCount()));
+        series.getData().add(new XYChart.Data<>("Eng", commandResult.getEngCount()));
+        series.getData().add(new XYChart.Data<>("Chi", commandResult.getChiCount()));
+        series.getData().add(new XYChart.Data<>("E.Math", commandResult.getEmathCount()));
+        series.getData().add(new XYChart.Data<>("A.Math", commandResult.getAmathCount()));
+        series.getData().add(new XYChart.Data<>("Phy", commandResult.getPhyCount()));
+        series.getData().add(new XYChart.Data<>("Chem", commandResult.getChemiCount()));
+        series.getData().add(new XYChart.Data<>("Bio", commandResult.getBioCount()));
+        series.getData().add(new XYChart.Data<>("Geo", commandResult.getGeogCount()));
+        series.getData().add(new XYChart.Data<>("Hist", commandResult.getHistCount()));
+        series.getData().add(new XYChart.Data<>("Soc", commandResult.getSocCount()));
 
         barChart.getData().add(series);
 
@@ -181,8 +181,8 @@ public class BarChartWindow extends UiPart<Stage> {
         CategoryAxis xAxis = new CategoryAxis();
 
         xAxis.setCategories(FXCollections.<String>observableArrayList(Arrays.asList(
-                "Jan", "Feb", "Mar", "Apr", "May",
-                "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec")));
+            EnrolDate.JAN, EnrolDate.FEB, EnrolDate.MAR, EnrolDate.APR, EnrolDate.MAY, EnrolDate.JUN,
+            EnrolDate.JUL, EnrolDate.AUG, EnrolDate.SEP, EnrolDate.OCT, EnrolDate.NOV, EnrolDate.DEC)));
         xAxis.setLabel("Month");
 
         NumberAxis yAxis = new NumberAxis();

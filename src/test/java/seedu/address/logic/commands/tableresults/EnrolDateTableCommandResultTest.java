@@ -11,6 +11,8 @@ import java.util.Map;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.CommandResult;
+import seedu.address.model.tag.EnrolDate;
+
 public class EnrolDateTableCommandResultTest {
     @Test
     public void equals() {
@@ -63,39 +65,39 @@ public class EnrolDateTableCommandResultTest {
         assertEquals(expected, commandResult.toString());
     }
 
-    public CommandResult getEnrolDateTableCommandResultSample1() {
+    public EnrolDateTableCommandResult getEnrolDateTableCommandResultSample1() {
         Map<String, Integer> titlesValuesMapping1 = new HashMap<>();
-        titlesValuesMapping1.put("Jan", 50);
-        titlesValuesMapping1.put("Feb", 10);
-        titlesValuesMapping1.put("Mar", 30);
-        titlesValuesMapping1.put("Apr", 20);
-        titlesValuesMapping1.put("May", 40);
-        titlesValuesMapping1.put("Jun", 50);
-        titlesValuesMapping1.put("Jul", 25);
-        titlesValuesMapping1.put("Aug", 15);
-        titlesValuesMapping1.put("Sep", 20);
-        titlesValuesMapping1.put("Oct", 5);
-        titlesValuesMapping1.put("Nov", 3);
-        titlesValuesMapping1.put("Dec", 100);
-        CommandResult commandResult1 = new EnrolDateTableCommandResult(titlesValuesMapping1);
+        titlesValuesMapping1.put(EnrolDate.JAN, 50);
+        titlesValuesMapping1.put(EnrolDate.FEB, 10);
+        titlesValuesMapping1.put(EnrolDate.MAR, 30);
+        titlesValuesMapping1.put(EnrolDate.APR, 20);
+        titlesValuesMapping1.put(EnrolDate.MAY, 40);
+        titlesValuesMapping1.put(EnrolDate.JUN, 50);
+        titlesValuesMapping1.put(EnrolDate.JUL, 25);
+        titlesValuesMapping1.put(EnrolDate.AUG, 15);
+        titlesValuesMapping1.put(EnrolDate.SEP, 20);
+        titlesValuesMapping1.put(EnrolDate.OCT, 5);
+        titlesValuesMapping1.put(EnrolDate.NOV, 3);
+        titlesValuesMapping1.put(EnrolDate.DEC, 100);
+        EnrolDateTableCommandResult commandResult1 = new EnrolDateTableCommandResult(titlesValuesMapping1);
         return commandResult1;
     }
 
-    public CommandResult getEnrolDateTableCommandResultSample2() {
+    public EnrolDateTableCommandResult getEnrolDateTableCommandResultSample2() {
         Map<String, Integer> titlesValuesMapping2 = new HashMap<>();
-        titlesValuesMapping2.put("Jan", 30);
-        titlesValuesMapping2.put("Feb", 15);
-        titlesValuesMapping2.put("Mar", 20);
-        titlesValuesMapping2.put("Apr", 10);
-        titlesValuesMapping2.put("May", 100);
-        titlesValuesMapping2.put("Jun", 21);
-        titlesValuesMapping2.put("Jul", 32);
-        titlesValuesMapping2.put("Aug", 15);
-        titlesValuesMapping2.put("Sep", 20);
-        titlesValuesMapping2.put("Oct", 5);
-        titlesValuesMapping2.put("Nov", 5);
-        titlesValuesMapping2.put("Dec", 100);
-        CommandResult commandResult2 = new EnrolDateTableCommandResult(titlesValuesMapping2);
+        titlesValuesMapping2.put(EnrolDate.JAN, 30);
+        titlesValuesMapping2.put(EnrolDate.FEB, 15);
+        titlesValuesMapping2.put(EnrolDate.MAR, 20);
+        titlesValuesMapping2.put(EnrolDate.APR, 10);
+        titlesValuesMapping2.put(EnrolDate.MAY, 100);
+        titlesValuesMapping2.put(EnrolDate.JUN, 21);
+        titlesValuesMapping2.put(EnrolDate.JUL, 32);
+        titlesValuesMapping2.put(EnrolDate.AUG, 15);
+        titlesValuesMapping2.put(EnrolDate.SEP, 20);
+        titlesValuesMapping2.put(EnrolDate.OCT, 5);
+        titlesValuesMapping2.put(EnrolDate.NOV, 5);
+        titlesValuesMapping2.put(EnrolDate.DEC, 100);
+        EnrolDateTableCommandResult commandResult2 = new EnrolDateTableCommandResult(titlesValuesMapping2);
         return commandResult2;
     }
 }
