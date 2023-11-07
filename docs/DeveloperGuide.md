@@ -290,7 +290,7 @@ Step 6: Should user want to see the full deck, they will execute `list` to view 
       1. Will use more memory.
       2. Adding/Deleting/Editing cards will require modifications to \'mini-deck\'.
 
-### \[Proposed\] Search Filter feature
+### Search Filter feature
 
 Introducing a search feature that allows users to search for specific flashcards based on their questions. This feature empowers users with greater navigability over their study materials.
 
@@ -306,11 +306,11 @@ Step 4: To return to viewing your full deck of cards, simply execute the `list` 
 
 Step 5: If the user wishes to practise from this view, simply `practise index` for the index of the card
 
-### \[Proposed\] Markdown support feature
+### Markdown support feature
 
-#### Proposed Implementation
+#### Implementation
 
-The proposed feature aims to support Markdown based language for inputs and renders the corresponding display (i.e. ** Bold ** will become **Bold**).
+The feature aims to support Markdown based language for inputs and renders the corresponding display (i.e. ** Bold ** will become **Bold**).
 This provides users the freedom to adapt the content within the card, granting them more control over their study material. Users would be able to highlight more specific
 part of the `Answer` which would be the key concept tested in the exam.
 
@@ -341,18 +341,30 @@ Step 5: The `UI` renders the `Card` with the relevant fields meant to be written
         2. More checks and assertions required for increased edge cases.
         3. More testing.
 
+
+**Finalised Implementation:**
+
+Settled on using alternative 1 as it provides out of the box markdown support for our application.
+
+The external library we used `johnrengelman.shadow` that allowed us to display the mark down text as we wanted.
+
+
+
 ### Spaced Repetition Feature
 
 #### Implementation
 
 This features aim to implement a Spaced Repetition system to schedule cards based on the level of difficulty indicated by the user.
 In combination with the difficulty feature, Spaced Repetition determines when is the next recommended revision date
-for each flashcard, to make user give more of their attention to the difficult ones and practice it earlier, optimising learning.
+for each flashcard, to make users give more of their attention to the difficult ones and practice it earlier, optimising learning.
 
 Using the difficulty system, we can decide a `nextPracticeDate` for the specified card based on the difficulty selected by the user.
 This helps to remove the need to manually set `nextPracticeDate`, and provides user with a more intuitive way to determine their `nextPracticeDate` based on `difficulty`.
+This is also a key feature of the app, which allows for automatic scheduling of cards and removes it off the users hands.
 
 Possible difficulty inputs: `easy`, `medium`, `hard`
+
+Any wrong input will result in an error being flagged out
 
 Given below is an example usage of the Spaced Repetition Feature.
 
@@ -375,9 +387,72 @@ Step 5: The card is automatically sorted in the list according to the new `nextP
 will now appear earlier when using the `practice` command without index now.
 
 
+### Export Functionality
+
+We implemented an export functionality to allow our users to port over their data with ease.
+This is not to be mistaken as a **Command** as it is meant to be used after the user decides to use our application
+for revision purposes.
+
+The export button will allow users to access a copy of the deck.json file and has a copy button function that allows
+users to copy over their deck.json file with ease.
+
+#### Design considerations:
+
+**Aspect: How can we showcase the data while preventing users from editing directly:**
+
+* We decided that showing a copy of the text found in `deck.json` will prevent the user from directly editing
+`deck.json`, and thus prevents any accidental erasure of the deck should the user tamper with it unknowningly
 
 
+Given below is an example usage of the Export Feature.
 
+Step 1: User generates cards according to their needs and produced a deck for revision
+
+Step 2: User wishes to share their deck with peers or online, and needs a fixed format 
+to be used across all lesSON applications
+
+Step 3: User navigates to the menu bar at the top of the screen and presses on it.
+
+Step 4: The dropdown menu displays the export function, and it produces the text of the `deck.json` to be copied
+
+Step 5: User proceeds to click on the copy data button, and it is copied to the users clipboard
+
+### Import Functionality
+
+We implemented an import functionality to allow our users to port over their data with ease.
+Similarly to Export, this is not to be mistaken as a **Command** as it is meant to be used before the user decides to use our application
+for revision purposes.
+
+The Import button will allow users who have received the text from the Export function to transfer the deck of carss over, thereby
+effectively importing over the shared deck of cards generated by another user.
+
+#### Design considerations:
+
+**Aspect: Ineffective way to modify state of deck from Import window :**
+
+* **Alternative 1 :** Investigate more into how we can update the deck of cards from Import window
+    * Pros: Smoother user experience as the application stays running
+    * Cons: Requires more extensive testing and research 
+
+* **Alternative 2:** Make the application restart so that it re-opens with the updated deck
+    * Pros: Saves a lot of time as the logic to do so hinges on pre-existing features to operate.
+    * Cons: User is forced to exit the application upon import, which might lead to a less than ideal user experience.
+
+Given below is an example usage of the Import Feature.
+
+Step 1: User A has used lesSON and already a pre-existing deck of cards
+
+Step 2: User A then clicks on the Export button (mentioned above) <!-- Put link in the DG -->
+
+Step 3: User B receives the text from User A either via message, text or email.
+
+Step 4: User B opens lesSOn and clicks on the menu button
+
+Step 5: User B clicks on the Import menu button and copies and pastes the text received from A into the text field.
+
+Step 6: User B clicks on Import data button which will then import the data and closes the application
+
+Step 7: User B re-opens lesSOn to see his new functional deck of cards.
 
 --------------------------------------------------------------------------------------------------------------------
 
