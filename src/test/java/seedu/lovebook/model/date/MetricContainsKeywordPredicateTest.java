@@ -4,9 +4,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.lovebook.logic.parser.CliSyntax.PREFIX_AGE;
+import static seedu.lovebook.logic.parser.CliSyntax.PREFIX_GENDER;
+import static seedu.lovebook.logic.parser.CliSyntax.PREFIX_HEIGHT;
+import static seedu.lovebook.logic.parser.CliSyntax.PREFIX_HOROSCOPE;
 import static seedu.lovebook.logic.parser.CliSyntax.PREFIX_INCOME;
 import static seedu.lovebook.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.lovebook.logic.parser.CliSyntax.PREFIX_HOROSCOPE;
 
 import org.junit.jupiter.api.Test;
 
@@ -99,10 +101,80 @@ public class MetricContainsKeywordPredicateTest {
         assertFalse(predicate.test(new PersonBuilder().withName("Alice Bob").build()));
 
         // Keywords match age, gender and height, but does not match name
-        predicate = new MetricContainsKeywordPredicate("Alice", PREFIX_AGE);
-        assertFalse(predicate.test(new PersonBuilder().withName("Alice").withAge("33")
+        predicate = new MetricContainsKeywordPredicate("Alice", PREFIX_NAME);
+        assertFalse(predicate.test(new PersonBuilder().withName("Barry").withAge("33")
                 .withGender("F").withHeight("124").build()));
     }
+
+    @Test
+    public void test_genderContainsKeywords_returnsTrue() {
+        // One keyword
+        MetricContainsKeywordPredicate predicate = new MetricContainsKeywordPredicate("F", PREFIX_GENDER);
+        assertTrue(predicate.test(new PersonBuilder().withGender("F").build()));
+
+        // Mixed-case keywords
+        predicate = new MetricContainsKeywordPredicate("f", PREFIX_GENDER);
+        assertTrue(predicate.test(new PersonBuilder().withGender("F").build()));
+    }
+
+    @Test
+    public void test_genderDoesNotContainKeyword_returnsFalse() {
+        // Non-matching keyword
+        MetricContainsKeywordPredicate predicate = new MetricContainsKeywordPredicate("M", PREFIX_GENDER);
+        assertFalse(predicate.test(new PersonBuilder().withGender("F").build()));
+    }
+
+    @Test
+    public void test_heightContainsKeywords_returnsTrue() {
+        // One keyword
+        MetricContainsKeywordPredicate predicate = new MetricContainsKeywordPredicate("123", PREFIX_HEIGHT);
+        assertTrue(predicate.test(new PersonBuilder().withHeight("123").build()));
+
+        // Mixed-case keywords
+        predicate = new MetricContainsKeywordPredicate("123", PREFIX_HEIGHT);
+        assertTrue(predicate.test(new PersonBuilder().withHeight("123").build()));
+    }
+
+    @Test
+    public void test_heightDoesNotContainKeyword_returnsFalse() {
+        // Non-matching keyword
+        MetricContainsKeywordPredicate predicate = new MetricContainsKeywordPredicate("123", PREFIX_HEIGHT);
+        assertFalse(predicate.test(new PersonBuilder().withHeight("124").build()));
+    }
+
+    @Test
+    public void test_ageContainsKeywords_returnsTrue() {
+        MetricContainsKeywordPredicate predicate = new MetricContainsKeywordPredicate("20", PREFIX_AGE);
+        assertTrue(predicate.test(new PersonBuilder().withAge("20").build()));
+    }
+
+    @Test
+    public void test_ageDoesNotContainKeyword_returnsFalse() {
+        // Non-matching keyword
+        MetricContainsKeywordPredicate predicate = new MetricContainsKeywordPredicate("20", PREFIX_AGE);
+        assertFalse(predicate.test(new PersonBuilder().withAge("21").build()));
+    }
+
+    @Test
+    public void test_incomeContainsKeywords_returnsTrue() {
+        MetricContainsKeywordPredicate predicate = new MetricContainsKeywordPredicate("1000", PREFIX_INCOME);
+        assertTrue(predicate.test(new PersonBuilder().withIncome("1000").build()));
+    }
+
+    @Test
+    public void test_incomeDoesNotContainKeyword_returnsFalse() {
+        // Non-matching keyword
+        MetricContainsKeywordPredicate predicate = new MetricContainsKeywordPredicate("1000", PREFIX_INCOME);
+        assertFalse(predicate.test(new PersonBuilder().withIncome("2000").build()));
+    }
+
+    @Test
+    public void test_returnsFalse() {
+        MetricContainsKeywordPredicate predicate = new MetricContainsKeywordPredicate("1000",
+                new Prefix("random"));
+        assertFalse(predicate.test(new PersonBuilder().withName("Ryann").build()));
+    }
+
 
     @Test
     public void toStringMethod() {
