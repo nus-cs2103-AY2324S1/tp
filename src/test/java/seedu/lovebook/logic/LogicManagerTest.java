@@ -10,7 +10,7 @@ import static seedu.lovebook.logic.commands.CommandTestUtil.HOROSCOPE_DESC_AMY;
 import static seedu.lovebook.logic.commands.CommandTestUtil.INCOME_DESC_AMY;
 import static seedu.lovebook.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.lovebook.testutil.Assert.assertThrows;
-import static seedu.lovebook.testutil.TypicalPersons.AMY;
+import static seedu.lovebook.testutil.TypicalDates.AMY;
 
 import java.io.IOException;
 import java.nio.file.AccessDeniedException;

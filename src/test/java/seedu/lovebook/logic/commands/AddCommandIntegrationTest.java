@@ -3,7 +3,7 @@ package seedu.lovebook.logic.commands;
 import static seedu.lovebook.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.lovebook.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.lovebook.testutil.TypicalDatePrefs.getTypicalDatePrefs;
-import static seedu.lovebook.testutil.TypicalPersons.getTypicalLoveBook;
+import static seedu.lovebook.testutil.TypicalDates.getTypicalLoveBook;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

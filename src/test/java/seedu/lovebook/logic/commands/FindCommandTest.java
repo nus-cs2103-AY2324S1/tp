@@ -6,10 +6,10 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.lovebook.logic.Messages.MESSAGE_PERSONS_LISTED_OVERVIEW;
 import static seedu.lovebook.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.lovebook.testutil.TypicalDatePrefs.getTypicalDatePrefs;
-import static seedu.lovebook.testutil.TypicalPersons.CARL;
-import static seedu.lovebook.testutil.TypicalPersons.ELLE;
-import static seedu.lovebook.testutil.TypicalPersons.FIONA;
-import static seedu.lovebook.testutil.TypicalPersons.getTypicalLoveBook;
+import static seedu.lovebook.testutil.TypicalDates.CARL;
+import static seedu.lovebook.testutil.TypicalDates.ELLE;
+import static seedu.lovebook.testutil.TypicalDates.FIONA;
+import static seedu.lovebook.testutil.TypicalDates.getTypicalLoveBook;
 
 import java.util.Arrays;
 import java.util.Collections;

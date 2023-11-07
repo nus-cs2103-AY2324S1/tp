@@ -13,8 +13,6 @@ import seedu.lovebook.model.date.Date;
 public class DateCard extends UiPart<Region> {
 
     private static final String FXML = "DateListCard.fxml";
-    private static final int LOWER_BOUND = 1;
-    private static final int UPPER_BOUND = 9;
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -71,4 +69,45 @@ public class DateCard extends UiPart<Region> {
             horoscopeImage.setImage(new Image("images/bot.png"));
         }
     }
+
+    /**
+     * Returns the name of the date.
+     * @return name of the date
+     */
+    public String getName() {
+        return name.getText();
+    }
+
+    /**
+     * Returns information about the date.
+     * @return information about the date
+     */
+    public String getAboutInfo() {
+        return aboutInfo.getText();
+    }
+
+    /**
+     * Returns the ID of the date.
+     * @return ID of the date
+     */
+    public String getID() {
+        return id.getText();
+    }
+
+    /**
+     * Returns the image url of the gender of the date.
+     * @return url of the gender image
+     */
+    public String getGenderImage() {
+        return genderImage.getImage().getUrl();
+    }
+
+    /**
+     * Returns the image url of the horoscope of the date.
+     * @return url of the horoscope image
+     */
+    public String getHoroscopeImage() {
+        return horoscopeImage.getImage().getUrl();
+    }
+
 }

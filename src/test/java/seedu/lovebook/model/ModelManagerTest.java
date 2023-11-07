@@ -5,8 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.lovebook.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static seedu.lovebook.testutil.Assert.assertThrows;
-import static seedu.lovebook.testutil.TypicalPersons.ALICE;
-import static seedu.lovebook.testutil.TypicalPersons.BENSON;
+import static seedu.lovebook.testutil.TypicalDates.ALICE;
+import static seedu.lovebook.testutil.TypicalDates.BENSON;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
