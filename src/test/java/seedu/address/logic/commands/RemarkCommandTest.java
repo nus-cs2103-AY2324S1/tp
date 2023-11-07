@@ -22,10 +22,10 @@ public class RemarkCommandTest {
 
     private Model model = new ModelManager(getTypicalAddressBook(), getTypicalTeamBook(), new UserPrefs());
 
-    private final String message_add_remark_success = "Added remark to Person: seedu.address.model.person."
+    private final String messageAddRemarkSuccess = "Added remark to Person: seedu.address.model.person."
             + "Person{name=Alice Pauline, phone=94351253, email=alice@example.com, address=123, "
             + "Jurong West Ave 6, #08-111, remark=Likes to swim, tags=[[friends]], identitycode=1}";
-    private final String message_remove_remark_success = "Removed remark from Person: seedu.address.model."
+    private final String messageRemoveRemarkSuccess = "Removed remark from Person: seedu.address.model."
             + "person.Person{name=Alice Pauline, phone=94351253, email=alice@example.com, address=123, "
             + "Jurong West Ave 6, #08-111, remark=, tags=[[friends]], identitycode=1}";
 
@@ -37,7 +37,7 @@ public class RemarkCommandTest {
 
         CommandResult commandResult = remarkCommand.execute(model);
 
-        assertEquals(message_add_remark_success, commandResult.getFeedbackToUser());
+        assertEquals(messageAddRemarkSuccess, commandResult.getFeedbackToUser());
     }
 
     @Test
@@ -48,6 +48,6 @@ public class RemarkCommandTest {
 
         CommandResult commandResult = remarkCommand.execute(model);
 
-        assertEquals(message_remove_remark_success, commandResult.getFeedbackToUser());
+        assertEquals(messageRemoveRemarkSuccess, commandResult.getFeedbackToUser());
     }
 }
