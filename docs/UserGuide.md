@@ -734,7 +734,6 @@ ManaGease data are saved automatically as a JSON file `[JAR file location]/data/
 If your changes to the data file makes its format invalid, ManaGease will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.
 </div>
 
-* Go back to [Table of Contents](#table-of-contents)
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
@@ -742,14 +741,12 @@ If your changes to the data file makes its format invalid, ManaGease will discar
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous ManaGease home folder.
 
-* Go back to [Table of Contents](#table-of-contents)
 --------------------------------------------------------------------------------------------------------------------
 
 ## Known issues
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 
-* Go back to [Table of Contents](#table-of-contents)
 --------------------------------------------------------------------------------------------------------------------
 
 ## Command summary
