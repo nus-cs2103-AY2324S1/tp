@@ -16,7 +16,7 @@ import seedu.address.model.UserPrefs;
 
 public class TrendCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    //private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
     public void equals() {

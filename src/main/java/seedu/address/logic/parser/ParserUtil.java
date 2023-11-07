@@ -201,6 +201,9 @@ public class ParserUtil {
      */
     public static Set<Subject> parseTags(Collection<String> tags, EnrolDate date) throws ParseException {
         requireNonNull(tags);
+        if (tags.size() < 1) {
+            throw new ParseException(Messages.MESSAGE_DATE_NUMBER_NOT_MATCHING);
+        }
         final Set<Subject> subjectSet = new HashSet<>();
         for (String tagName : tags) {
             subjectSet.add(parseTag(tagName, date));
