@@ -62,7 +62,7 @@ HouR is a **desktop app for managing employee records, optimized for use via a C
    
    * `find Alex Manager`: Lists all employees with the keywords `Alex` or `Manager`.
 
-   * `delete EID1234-5678` : Deletes the employee with employee id EID1234-5678 shown in the list.
+   * `delete EID2023-1234` : Deletes the employee with employee id EID2023-1234 shown in the list.
 
    * `sort f/salary in/asc`: Sorts the employees by their salaries in ascending order.
 
@@ -181,7 +181,7 @@ Format: `delete EMPLOYEE_ID`
 * The employee id **must follow the EID format** (EID[4 digits]-[4 digits])
 
 Examples:
-* `delete EID1234-5678` deletes the employee with employee id EID1234-5678 in the employee list.
+* `delete EID2023-1234` deletes the employee with employee id EID2023-1234 in the employee list.
 
 ![delete success](images/ug-pics/deleteSuccess.png)
 
