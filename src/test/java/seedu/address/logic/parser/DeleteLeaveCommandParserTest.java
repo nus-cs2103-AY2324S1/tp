@@ -45,6 +45,20 @@ public class DeleteLeaveCommandParserTest {
 
         // invalid prefix being parsed as preamble
         assertParseFailure(parser, "1 i/ string", MESSAGE_INVALID_FORMAT);
+
+        // empty prefix being parsed as preamble
+        assertParseFailure(parser, "", MESSAGE_INVALID_FORMAT);
+
+        // empty space prefix being parsed as preamble
+        assertParseFailure(parser, " ", MESSAGE_INVALID_FORMAT);
+
+        // invalid index being parsed as preamble
+        assertParseFailure(parser, "-1", MESSAGE_INVALID_FORMAT);
+
+        // invalid index being parsed as preamble
+        assertParseFailure(parser, "-3", MESSAGE_INVALID_FORMAT);
+
+
     }
 
     @Test
@@ -83,6 +97,48 @@ public class DeleteLeaveCommandParserTest {
                 currentDate.plusDays(2));
 
         assertParseSuccess(parser, userInput, deleteLeaveCommand);
+    }
+
+    @Test
+    public void parse_invalidStartDateFieldsSpecifiedForDeletingMultipleLeave_failure() {
+        LocalDate currentDate = LocalDate.now();
+        Index targetIndex = INDEX_FIRST_PERSON;
+        String userInput1 = targetIndex.getOneBased() + " /from "
+                + " /to "
+                + ParserUtil.dateToString(currentDate.plusDays(1));
+        String userInput2 = targetIndex.getOneBased() + " /from 32/02/2023"
+                + " /to "
+                + ParserUtil.dateToString(currentDate.plusDays(1));
+
+        assertParseFailure(parser, userInput1, MESSAGE_INVALID_DATE);
+        assertParseFailure(parser, userInput2, MESSAGE_INVALID_DATE);
+    }
+
+    @Test
+    public void parse_invalidEndDateFieldsSpecifiedForDeletingMultipleLeave_failure() {
+        LocalDate currentDate = LocalDate.now();
+        Index targetIndex = INDEX_FIRST_PERSON;
+        String userInput1 = targetIndex.getOneBased() + " /from "
+                + ParserUtil.dateToString(currentDate.plusDays(1))
+                + " /to ";
+        String userInput2 = targetIndex.getOneBased() + " /from "
+                + ParserUtil.dateToString(currentDate.plusDays(1))
+                + " /to 32/02/2023";
+
+        assertParseFailure(parser, userInput1, MESSAGE_INVALID_DATE);
+        assertParseFailure(parser, userInput2, MESSAGE_INVALID_DATE);
+    }
+
+    @Test
+    public void parse_invalidStartDateFieldsSpecifiedForDeletingSingleLeave_failure() {
+        Index targetIndex = INDEX_FIRST_PERSON;
+        String userInput1 = targetIndex.getOneBased() + " /on";
+        String userInput2 = targetIndex.getOneBased() + " /on 32/02/2023";
+        String userInput3 = targetIndex.getOneBased() + " /on 29/02/2023";
+
+        assertParseFailure(parser, userInput1, MESSAGE_INVALID_DATE);
+        assertParseFailure(parser, userInput2, MESSAGE_INVALID_DATE);
+        assertParseFailure(parser, userInput3, MESSAGE_INVALID_DATE);
     }
 
 

@@ -30,6 +30,15 @@ public class AddLeaveCommandParserTest {
 
         // no index and no field specified
         assertParseFailure(parser, "", MESSAGE_INVALID_FORMAT);
+
+        // no index and no field specified
+        assertParseFailure(parser, " ", MESSAGE_INVALID_FORMAT);
+
+        // invalid field specified
+        assertParseFailure(parser, "1 ma", MESSAGE_INVALID_FORMAT);
+
+        // invalid field specified
+        assertParseFailure(parser, "1 /at", MESSAGE_INVALID_FORMAT);
     }
 
     @Test
@@ -39,6 +48,12 @@ public class AddLeaveCommandParserTest {
 
         // zero index
         assertParseFailure(parser, "0" + " /on 12/12/2024", MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+
+        // zero index
+        assertParseFailure(parser, "-1" + " /from 12/12/2024 /to 13/12/2024", MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+
+        // zero index
+        assertParseFailure(parser, "0" + " /from 12/12/2024 /to 13/12/2024", MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
 
         // invalid arguments being parsed as preamble
         assertParseFailure(parser, "1 some random string", MESSAGE_INVALID_FORMAT);
@@ -55,7 +70,15 @@ public class AddLeaveCommandParserTest {
         assertParseFailure(parser, "1" + " /on", MESSAGE_INVALID_DATE); // invalid date
         assertParseFailure(parser, "1" + " /on 1/01/2024", MESSAGE_INVALID_DATE); // invalid
         // date
-        assertParseFailure(parser, "1" + " /on 2024/12/12", MESSAGE_INVALID_DATE); // invalid
+        assertParseFailure(parser, "1" + " /from", MESSAGE_INVALID_FORMAT); // invalid
+        // date
+        assertParseFailure(parser, "1" + " /from 2024/12/12 /to", MESSAGE_INVALID_DATE); // invalid
+        // date
+        assertParseFailure(parser, "1" + " /from 12/12/2023", MESSAGE_INVALID_FORMAT); // invalid
+        // format
+        assertParseFailure(parser, "1" + " /to 12/12/2023", MESSAGE_INVALID_FORMAT); // invalid
+        // format
+        assertParseFailure(parser, "1" + " /from 12/12/2023 /to", MESSAGE_INVALID_DATE); // invalid
         // date
     }
 

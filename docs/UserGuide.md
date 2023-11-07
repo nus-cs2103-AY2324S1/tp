@@ -222,10 +222,9 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd employee in the employee directory.
 * `find Betsy` followed by `delete 1` deletes the 1st employee in the results of the `find` command.
 
-Output:
-* If there are multiple employees with the same name, we just list down the employees for them to view, return “Here is the list of the matching employees:”. Then you can decide which employee to delete from this list.
-  <br>![result for deleting same-name employee](images/deleteSameName.png)
-  
+
+* If there are multiple employees with the same name, all the matching employees would be displayed. Hence, ManaGease will return “Here is the list of the matching employees:”
+![result for deleting same-name employee](images/deleteSameName.png)
 * Otherwise, ManaGease should display a confirmation message indicating that the employee information has been successfully deleted.
 * The employee's list should be updated by removing the employee.
   <br>![result for deleting employee](images/deleteSuccess.png)
@@ -276,7 +275,10 @@ This feature allows users to add leave(s) to an employee.
 
 `addleave INDEX /on DATE` or `addleave INDEX /from DATE /to DATE`
 
-* Adds a single day of leave or multiple days of leave to the employee specified by the `INDEX`.
+
+* Adds leave to the employee specified by the `INDEX`. 
+* You have the flexibility to add leave for a single day or multiple consecutive days. 
+* You can add leave for the current year and the upcoming year, but you won't be able to add leave for past dates.
 * The `INDEX` refers to the index number shown in the displayed employee list.
 * The `INDEX` **must be a positive integer**, and **must be within the range of the list**.
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
@@ -319,7 +321,8 @@ This feature allows users to delete leave(s) from an employee.
 
 `deleteleave INDEX /on DATE` or `deleteleave INDEX /from DATE /to DATE`
 
-* Deletes leave from the employee specified by the `INDEX`, can be a single day of leave or multiple days of leave.
+* Deletes leave from the employee specified by the `INDEX`.
+* You have the flexibility to delete leave for a single day or multiple consecutive days.
 * The `INDEX` refers to the index number shown in the displayed employee list.
 * The `INDEX` **must be a positive integer**, and **must be within the range of the list**.
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
