@@ -303,18 +303,19 @@ Examples:
 
 #### Comment on a student : `comment`
 
-Adds a comment to an existing student in Class Manager.
+Adds or replaces a comment of an existing student in Class Manager.
 
 Format: `comment s/STUDENT_NUMBER cm/COMMENT`
 
 * The `STUDENT_NUMBER` must be valid and exist.
+* Every student can only have 1 comment.
 * The `COMMENT` must be a valid string.
     * Take note that the `COMMENT` string must not include any prefix.
     * e.g. `comment s/A0249112A cm/This student is very hardworking. t/Hardworking` is not allowed.
-    * This means comment such as "This student is very hardworking. t/Hardworking" is not allowed.
-* Comment can only be performed after the student is created.
-* Edit commands will not impact the comment tagged to the student.
-* Comment can be deleted by using an empty string as the comment.
+    * This means comments such as "This student is very hardworking. t/Hardworking" is not allowed.
+* `comment` can only be performed after the student is created.
+* Edit commands will not affect the comment of a student.
+* Comment can be deleted by using an empty string as `COMMENT`.
 
 Examples:
 * `comment s/A0249112A cm/This student is very hardworking.`
