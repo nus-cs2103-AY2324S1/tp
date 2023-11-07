@@ -5,36 +5,44 @@ title: Xavier's Project Portfolio Page
 
 ## Project: Tran$act
 
-Tran$act is a simple and easy to use transaction recorder and tracker built in Java.
+**Tran$act** is the solution for effortless transaction recording and management.
+It is a desktop application designed to cater the needs of startup or small scale
+retailers looking for a cheap and efficient way to record daily transactions.
 
 ### **Code contributed**: [RepoSense link](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=cxo05&breakdown=true)
 
+### **Features Added**
+
+1. Transaction View UI (Pull request [\#53](https://github.com/AY2324S1-CS2103T-W13-3/tp/pull/53))
+   - Added Tabs to the UI to allow users to switch between the Overview, Transaction and Staff List view.
+   - View transactions in a table.
+2. Transaction Handling Integration (Pull request [\#64](https://github.com/AY2324S1-CS2103T-W13-3/tp/pull/64))
+   - Integrated transaction commands to update the UI
+3. Overview UI (Pull request [\#88](https://github.com/AY2324S1-CS2103T-W13-3/tp/pull/88))
+   - Overview landing page that shows monthly total revenue and monthly proft graph.
+
 ### **Enhancements implemented**
 
-`to be added soon`
+- Moved command box and result box to bottom of window for better UX. (Pull request [\#53](https://github.com/AY2324S1-CS2103T-W13-3/tp/pull/53))
+- View user guide now opens browser with url directly (Pull requests [\#53](https://github.com/AY2324S1-CS2103T-W13-3/tp/pull/53))
 
-<!-- - Updated the GUI color scheme (Pull requests [\#33](), [\#34]())
-- Wrote additional tests for existing features to increase coverage from 88% to 92% (Pull requests [\#36](), [\#38]()) -->
+### **Project Management**
+
+- Maintaining of issue tracker
+- Triaging of bugs and issues
+- Testing and approving pull requests
 
 ### **User Guide**
 
-`to be added soon`
-
-  <!-- - User Guide:
-    - Added documentation for the features `delete` and `find` [\#72]()
-    - Did cosmetic tweaks to existing documentation of features `clear`, `exit`: [\#74]()
-  - Developer Guide:
-    - Added implementation details of the `delete` feature. -->
+- Added glossary terms [\#85](https://github.com/AY2324S1-CS2103T-W13-3/tp/pull/85)
+- User guide fixes after PE-D [\#182](https://github.com/AY2324S1-CS2103T-W13-3/tp/pull/182)
 
 ### **Developer Guide**
 
 `to be added soon`
 
+<!-- - Added implementation details of the `delete` feature. -->
+
 ### **Review Contributions**
 
-`to be added soon`
-
-<!-- - PRs reviewed (with non-trivial review comments): [\#12](), [\#32](), [\#19](), [\#42]()
-- Contributed to forum discussions (examples: [1](), [2](), [3](), [4]())
-- Reported bugs and suggestions for other teams in the class (examples: [1](), [2](), [3]())
-- Some parts of the history feature I added was adopted by several other class mates ([1](), [2]()) -->
+- PRs reviewed (with non-trivial review comments): [\#56](https://github.com/AY2324S1-CS2103T-W13-3/tp/pull/56), [\#61](https://github.com/AY2324S1-CS2103T-W13-3/tp/pull/61), [\#69](https://github.com/AY2324S1-CS2103T-W13-3/tp/pull/69), [\#78](https://github.com/AY2324S1-CS2103T-W13-3/tp/pull/78), [\#90](https://github.com/AY2324S1-CS2103T-W13-3/tp/pull/90), [\#93](https://github.com/AY2324S1-CS2103T-W13-3/tp/pull/93) , [\#120](https://github.com/AY2324S1-CS2103T-W13-3/tp/pull/120)
