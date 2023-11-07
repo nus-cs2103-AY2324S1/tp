@@ -59,6 +59,7 @@ public class CommandResultTest {
                 + commandResult1.getFeedbackToUser() + ", showHelp=" + commandResult1.isShowHelp()
                 + ", showTable=" + commandResult1.isShowTable()
                 + ", showBarChart=" + commandResult1.isShowBarChart()
+                + ", showTrend=" + commandResult1.isShowTrend()
                 + ", exit=" + commandResult1.isExit() + "}";
         assertEquals(expected, commandResult1.toString());
     }

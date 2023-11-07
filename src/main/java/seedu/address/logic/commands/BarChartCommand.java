@@ -41,7 +41,7 @@ public class BarChartCommand extends Command {
      */
     public BarChartCommand(String args) {
         this.args = args.trim();
-        this.year = 0;
+        this.year = -1;
     }
 
     /**
@@ -123,9 +123,15 @@ public class BarChartCommand extends Command {
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this)
-                .add("category: ", args)
-                .toString();
+        if (year == -1) {
+            return new ToStringBuilder(this)
+                    .add("category: ", args)
+                    .toString();
+        } else {
+            return new ToStringBuilder(this)
+                    .add("category: ", args + year)
+                    .toString();
+        }
     }
 
 }

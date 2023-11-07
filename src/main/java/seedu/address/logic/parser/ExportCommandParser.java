@@ -10,14 +10,14 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Visual;
 
 /**
- * Parses input arguments and creates a new AddCommand object
+ * Parses the input argument and creates a new ExportCommand object
  */
 public class ExportCommandParser implements Parser<ExportCommand> {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the AddCommand
-     * and returns an AddCommand object for execution.
-     * Arguments include name, phone number, email, address, gender, sec level, mrt station and subject
+     * Parses the given {@code String} of arguments in the context of the ExportCommand
+     * and returns an ExportCommand object for execution.
+     * Arguments include visual type
      * @throws ParseException if the user input does not conform the expected format
      */
     public ExportCommand parse(String args) throws ParseException {

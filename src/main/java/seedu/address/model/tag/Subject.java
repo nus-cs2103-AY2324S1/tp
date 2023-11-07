@@ -5,7 +5,6 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import java.time.YearMonth;
 
-
 /**
  * Represents a Subject in the address book.
  * Guarantees: immutable; name is valid as declared in {@link #isValidSubjectName(String)}

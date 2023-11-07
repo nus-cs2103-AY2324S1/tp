@@ -3,13 +3,15 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SORT_IN;
 
+import java.util.Objects;
+
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.SortIn;
 
 /**
- * Sorts students in the address book.
+ * Sorts students in the address book by their name.
  */
 public class SortCommand extends Command {
 
@@ -26,7 +28,7 @@ public class SortCommand extends Command {
 
 
     /**
-     * Creates an SortCommand to sort the students {@code SortIn}
+     * Creates a SortCommand to sort the students {@code SortIn}
      */
     public SortCommand(SortIn sortIn) {
         requireNonNull(sortIn);
@@ -45,5 +47,17 @@ public class SortCommand extends Command {
         return new ToStringBuilder(this)
                 .add("sortIn", sortIn)
                 .toString();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+        SortCommand other = (SortCommand) obj;
+        return Objects.equals(this.sortIn, other.sortIn);
     }
 }
