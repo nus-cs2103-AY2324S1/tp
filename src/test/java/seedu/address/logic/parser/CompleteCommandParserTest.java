@@ -15,8 +15,10 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
+import seedu.address.logic.commands.CompleteByDate;
+import seedu.address.logic.commands.CompleteByIndex;
 import seedu.address.logic.commands.CompleteCommand;
-import seedu.address.logic.commands.CompleteCommand.CompleteDescriptor;
+
 class CompleteCommandParserTest {
     public static final String DATE_DESC = " " + PREFIX_APPOINTMENT_DATE;
     private static final String MESSAGE_INVALID_FORMAT =
@@ -70,9 +72,7 @@ class CompleteCommandParserTest {
         Index targetIndex = INDEX_FIRST_PERSON;
         String userInput = targetIndex.getOneBased() + "";
 
-        CompleteDescriptor completeDescriptor = new CompleteDescriptor();
-        completeDescriptor.setIndex(targetIndex);
-        CompleteCommand expectedCommand = new CompleteCommand(completeDescriptor);
+        CompleteByIndex expectedCommand = new CompleteByIndex(targetIndex);
 
         assertParseSuccess(parser, userInput, expectedCommand);
     }
@@ -81,9 +81,7 @@ class CompleteCommandParserTest {
     public void parse_dateSpecified_success() {
         String userInput = DATE_DESC + "01-05-2023";
 
-        CompleteDescriptor completeDescriptor = new CompleteDescriptor();
-        completeDescriptor.setDate(LocalDate.of(2023, 5, 1));
-        CompleteCommand expectedCommand = new CompleteCommand(completeDescriptor);
+        CompleteByDate expectedCommand = new CompleteByDate(LocalDate.of(2023, 5, 1));
 
         assertParseSuccess(parser, userInput, expectedCommand);
     }
