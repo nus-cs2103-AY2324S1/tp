@@ -32,7 +32,7 @@ public class MarkAbsentCommandTest {
     private final CommandHistory commandHistory = new CommandHistory();
 
     @Test
-    public void execute_validStudentNumber_success() throws IllegalValueException, CommandException {
+    public void execute_validStudentNumber_success() throws CommandException {
         Student studentToMark = TypicalStudents.getTypicalStudents().get(INDEX_FIRST_STUDENT.getZeroBased());
         Index i = Index.fromOneBased(ClassDetails.getTutorialCount());
         model.setSelectedStudent(studentToMark);
