@@ -65,6 +65,7 @@ public class ConfigCommand extends Command {
             ClassDetails.setAssignmentCount(assignmentCount);
             model.setTutorialCount(tutorialCount);
             model.setAssignmentCount(assignmentCount);
+
             // This will display the class details of the first student before the configuration is done
             model.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
             List<Student> allStudentList = model.getFilteredStudentList();
@@ -74,8 +75,13 @@ public class ConfigCommand extends Command {
                         student.getStudentNumber(), newClassDetails, student.getTags(), student.getComment());
                 model.setStudent(student, editedStudent);
             }
+
             // clears the view panel after resetting class details of students
             model.resetSelectedStudent();
+          
+            // Reset the history of the model and prevent any undo commands
+            model.configReset();
+
             return new CommandResult(String.format(MESSAGE_CONFIG_SUCCESS, tutorialCount, assignmentCount));
         } catch (Exception e) {
             return new CommandResult(MESSAGE_CONFIG_FAILED);

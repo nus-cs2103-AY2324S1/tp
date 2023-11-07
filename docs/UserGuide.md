@@ -114,20 +114,20 @@ The **GUI** is split up into 4 main sections.
 <box type="warning" seamless>
 
 **Caution:**
-Configuring Class Manager resets the class details (grades, attendance and class participation details) of all students. This **cannot** be undone. It is recommended to configure Class Manager before adding students.
+Configuring Class Manager resets the class details (grades, attendance and class participation details) of all students, as well as the past states of Class Manager. This **cannot** be undone using the `undo` command. It is recommended to configure Class Manager before adding students.
 </box>
 
 Before you begin using Class Manager, it is recommended that you configure the number of tutorials and assignments that your module has. This can be done using the `config` command, and allows Class Manager to automatically generate the correct number of class details fields for each student. <br><br>
-Class Manager can be configured _at any time_, but do take note of the warning above regarding **loss** of student data. If Class Manager is configured after adding students, each student will have the correct number of tutorials and assignments, but their class details data will be **reset**.
+Class Manager can be configured _at any time_, but do take note of the warning above regarding **loss** of student data and past Class Manager states. If you configure Class Manager after adding students, each student will have the correct number of tutorials and assignments. However, their class details data will be **reset** and there will be no previous states of Class Manager you can return to via the `undo` command.
 
 Format: `config #t/TUTORIAL_COUNT #a/ASSIGNMENT_COUNT`
 
-* `TUTORIAL_COUNT` and `ASSIGNMENT_COUNT` must be 0 or a positive integer.
+* `TUTORIAL_COUNT` and `ASSIGNMENT_COUNT` must be a positive integer between 1 and 40 inclusive.
 * Inputting the same `TUTORIAL_COUNT` or `ASSIGNMENT_COUNT` as the previous configuration will also **reset** the class details of all students.
 
 Examples:
 * `config #t/13 #a/1`
-* `config #a/4 #t/26`
+* `config #a/4 #t/39`
 
 ---
 
