@@ -35,13 +35,15 @@ public class CommandTestUtil {
     public static final String VALID_PHONE_BOB = "22222222";
     public static final String VALID_EMAIL_AMY = "amy@example.com";
     public static final String VALID_EMAIL_BOB = "bob@example.com";
-    public static final String VALID_POSITION_AMY = "Block 312, Amy Street 1";
-    public static final String VALID_POSITION_BOB = "Block 123, Bobby Street 3";
+    public static final String VALID_POSITION_AMY = "Marketing Assistant";
+    public static final String VALID_POSITION_BOB = "Software Engineer";
     public static final String VALID_TYPE_TECHNICAL = "technical";
     public static final String VALID_TYPE_BEHAVIORAL = "behavioral";
     public static final String VALID_RATING_TEN = "10.0";
     public static final Interview VALID_INTERVIEW_BEHAVIORAL = new Interview("behavioral", new Rating("8.5"));
     public static final Interview VALID_INTERVIEW_TECHNICAL = new Interview("technical", new Rating("8.0"));
+
+    public static final Interview VALID_INTERVIEW_HR = new Interview("HR", new Rating("9.0"));
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
