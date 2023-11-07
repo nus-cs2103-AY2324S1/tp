@@ -123,6 +123,9 @@ public interface Model {
      */
     void updateFilteredStudentList(Predicate<Student> predicate);
 
+    //@@author Cikguseven-reused
+    //Reused from AddressBook-Level 4 (https://github.com/se-edu/addressbook-level4)
+    // with minor modifications
     /**
      * Returns true if the model has previous Class Manager states to restore.
      */
@@ -147,11 +150,17 @@ public interface Model {
      * Saves the current Class Manager state for undo/redo.
      */
     void commitClassManager();
+    //@@author
 
     /**
      * Resets the history of the model after a load command.
      */
-    void reset(ReadOnlyClassManager classManager);
+    void loadReset(ReadOnlyClassManager classManager);
+
+    /**
+     * Resets the history of the model after a config command.
+     */
+    void configReset();
 
     /**
      * Resets the selected student after a clear command.

@@ -2,7 +2,6 @@ package seedu.classmanager.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.classmanager.logic.parser.CliSyntax.PREFIX_TUTORIAL_INDEX;
-import static seedu.classmanager.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
 
 import java.util.List;
 
@@ -22,7 +21,7 @@ public class MarkAbsentAllCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Marks the attendance of all displayed students as "
             + "absent.\n"
             + "Parameters: "
-            + PREFIX_TUTORIAL_INDEX + "TUTORIAL INDEX\n"
+            + PREFIX_TUTORIAL_INDEX + "TUTORIAL_SESSION\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_TUTORIAL_INDEX + "1";
     private final Index index;
@@ -50,7 +49,6 @@ public class MarkAbsentAllCommand extends Command {
                 model.setSelectedStudent(markedStudent);
             }
         }
-        model.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
         model.commitClassManager();
 
         return new CommandResult(MESSAGE_MARK_SUCCESS);
