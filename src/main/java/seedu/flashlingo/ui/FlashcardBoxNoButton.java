@@ -1,8 +1,6 @@
 //@@author itsNatTan
 package seedu.flashlingo.ui;
 
-import javafx.beans.property.BooleanProperty;
-import javafx.beans.property.SimpleBooleanProperty;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -48,13 +46,9 @@ public class FlashcardBoxNoButton extends UiPart<Region> {
 
     @FXML
     private Label lang;
-    @FXML
-    private HBox languageLabel;
 
     private MainWindow mw;
     private int index;
-    private BooleanProperty hasLanguage = new SimpleBooleanProperty(false);
-
 
     /**
      * Creates a {@code FlashCard code} with the given {@code FlashCard} and index to display.
@@ -76,12 +70,7 @@ public class FlashcardBoxNoButton extends UiPart<Region> {
             translation.setText("");
             reveal.setText("Reveal");
         }
-        level.setText(Integer.toString(fc.getProficiencyLevel().getLevel()));
-        languageLabel.visibleProperty().bind(hasLanguage);
-        if (!fc.getTranslatedWord().getLanguage().equals("")) {
-            hasLanguage.setValue(true);
-            lang.setText(fc.getTranslatedWord().getLanguage());
-        }
+        level.setText("Current Level: " + fc.getProficiencyLevel().toString());
     }
 
     /**
