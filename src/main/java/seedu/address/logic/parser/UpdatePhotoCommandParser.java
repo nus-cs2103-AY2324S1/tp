@@ -5,7 +5,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_AVATAR;
 
 import java.util.Optional;
 
-import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.UpdatePhotoCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
