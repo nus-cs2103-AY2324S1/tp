@@ -35,8 +35,8 @@ public class CommandTestUtil {
     public static final String VALID_AGE_BOB = "22";
     public static final String VALID_GENDER_AMY = "F";
     public static final String VALID_GENDER_BOB = "M";
-    public static final String VALID_HEIGHT_AMY = "30";
-    public static final String VALID_HEIGHT_BOB = "10";
+    public static final String VALID_HEIGHT_AMY = "180";
+    public static final String VALID_HEIGHT_BOB = "140";
     public static final String VALID_INCOME_AMY = "3000";
     public static final String VALID_INCOME_BOB = "2000";
     public static final String VALID_HOROSCOPE_AMY = "TAURUS";
