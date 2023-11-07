@@ -68,9 +68,9 @@ HouR is a **desktop app for managing employee records, optimized for use via a C
 
    * `addleave id/EID1234-5678 from/2023-12-26 to/2023-12-28`: Adds leave dates from 26 to 28 December 2023 inclusive for employee with id EID1234-5678.
 
-   * `deleteleave id/EID1234-5678 from/2023-12-27 to/2023-12-27`: Deletes all leave dates of an employee with id EID1234-5678 that fall on 27 December 2023.
+   * `deleteleave id/EID1234-5678 from/2023-12-27 to/2023-12-27`: Deletes leave date 27 December 2023 for employee with id EID1234-5678.
    
-   * `editleave id/EID1234-5678 old/2023-12-26 new/2023-12-29`: Edits the old leave date `2023-12-26` of an employee with id EID1234-5678 to new leave date `2023-12-29`.
+   * `editleave id/EID1234-5678 old/2023-12-26 new/2023-12-29`: Edits the old leave date on 26 December 2023 of employee with id EID1234-5678 to new leave date on 29 December 2023.
    
    * `listleave on/2023-12-28`: Lists all employees on leave on 28 December 2023.
    
@@ -402,7 +402,7 @@ Examples:
 
 ### Generating a report : `report`
 
-Generates a report with details on leaves, overtime hours and remarks for an employee.
+Generates a report with details on leaves, overtime hours, overtime pay, and remarks for an employee.
 
 Format: `report EMPLOYEE_ID`
 
@@ -411,6 +411,9 @@ Format: `report EMPLOYEE_ID`
 * The report is downloaded in a `.txt` file, located in the `reports` folder in the location of `hour.jar`.
   * The `.txt` file follows the naming convention `DATE_NAME` where `DATE` is the date the report is created, 
     and `NAME` is the name of the corresponding employee.
+* The overtime pay is calculated based on the overtime hours and the salary of the employee.
+  * The [Singaporean Ministry of Manpower's prescribed formula](https://www.mom.gov.sg/employment-practices/hours-of-work-overtime-and-rest-days) ($1.5\times \frac{12 \times \text{Monthly Salary}}{52\times 44}$) is used to calculate overtime pay.
+
 
 Examples:
 * `report EID1234-5678` generates and downloads a report for the employee with employee id EID1234-5678.
