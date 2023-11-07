@@ -165,7 +165,7 @@ Appointment: No Appointment made!;
 Financial Plans: [Financial Plan C]; 
 Tags: [80yo]`
 
-Do note that it is possible to add a client's contact with multiple tags by duplicating the `t/` prefix. However, each client can have only up to one financial plan at any point in time.
+Do note that it is possible to add a client's contact with multiple tags by duplicating the `t/` prefix. The same can be done with for financial plans with the `fp/` prefix.
 
 ------------------
 ### Listing all persons : `list`
@@ -174,7 +174,7 @@ Display a list of all the clients and their contact details
 
 Format: `list`
 
-Successful Output:` Listed all persons`
+Successful Output: `Listed all persons`
 
 ![result for 'list'](images/ListUi.png)
 
@@ -199,9 +199,9 @@ Format: `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [nk/NEXT_KIN
 
 Acceptable Values:
 1. INDEX - Number (1 to current size of the contact book)
-2. NAME - any value is possible
-3. PHONE_NUMBER - Numbers (0-9) and symbols, no alphabets
-4. EMAIL - string in valid email format
+2. NAME - Alphabets, numbers and space characters only
+3. PHONE_NUMBER - Numbers only and at least 3 digits long
+4. EMAIL - Alphabets, numbers and symbols only
 5. ADDRESS - any value is possible
 6. NEXT_KIN - Alphabets, numbers and space characters only
 7. NEXT_KIN_PHONE - Numbers only and at least 3 digits long
@@ -224,7 +224,7 @@ Tags:`
 
 ![result for 'edit 4 n/john doe a/23 woodlands ave 123'](images/editUi.png)
 
-Do note that it is possible to edit a client's contact such that the contact has multiple tags by duplicating the `t/` prefix. However, each client can have only up to one financial plan at any point in time.
+Do note that it is possible to edit a client's contact such that the contact has multiple tags by duplicating the `t/` prefix. The same can be done with for financial plans with the `fp/` prefix.
 
 ---------------
 ### Locating persons by name, financial plan, and/or tag : `find`
@@ -308,7 +308,7 @@ Format: `schedule INDEX ap/APPOINTMENT_NAME d/APPOINTMENT_DATE`
 Example: 
 - `schedule 1 ap/Annual review of financial goals d/20-11-2023 15:00`
 
-Successful Output:`Appointment updated!`
+Successful Output: `Appointment updated!`
 
 ![result for`schedule 1 ap/Annual review of financial goals d/20-11-2023 15:00'](images/scheduleUi.png)
 
@@ -326,7 +326,7 @@ Examples:
 - `complete 1`
 - `complete d/01-05-2023`
 
-Successful Output:`Appointment Completed!`
+Successful Output: `Appointment Completed!`
 
 ![result for 'complete 1'](images/completeUi.png)
 
@@ -407,7 +407,7 @@ _Details coming soon ..._
 
 | Action       | Format, Examples                                                                                                                                                                                                        |
 |--------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**      | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS nk/NEXT_KIN nkp/NEXT_KIN_PHONE [fp/FINANCIAL_PLAN]…​ [t/TAG]…​` <br> e.g., `add n/John p/80101010 e/johndoe@gmail.com a/Punggol Central Blk 444 #15-32 820123 nk/Brennan nkp/82020202 [t/TAG]…​` |
+| **Add**      | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS nk/NEXT_KIN nkp/NEXT_KIN_PHONE [fp/FINANCIAL_PLAN]…​ [t/TAG]…​` <br> e.g., `add n/John p/80101010 e/johndoe@gmail.com a/Punggol Central Blk 444 #15-32 820123 nk/Brennan nkp/82020202` |
 | **Clear**    | `clear`                                                                                                                                                                                                                 |
 | **Delete**   | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                                                     |
 | **Edit**     | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [nk/NEXT_KIN] [nkp/NEXT_KIN_PHONE] [fp/FINANCIAL_PLAN]…​ [t/TAG]…​`<br> e.g.,`edit 1 n/john doe a/23 woodlands ave 123`                                                     |
