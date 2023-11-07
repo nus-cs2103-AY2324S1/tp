@@ -17,6 +17,7 @@ import seedu.address.logic.commands.CopyApplicantCommand;
 import seedu.address.logic.commands.CopyMemberCommand;
 import seedu.address.logic.commands.DeleteApplicantCommand;
 import seedu.address.logic.commands.DeleteMemberCommand;
+import seedu.address.logic.commands.DeleteMemberTaskCommand;
 import seedu.address.logic.commands.EditApplicantCommand;
 import seedu.address.logic.commands.EditMemberCommand;
 import seedu.address.logic.commands.ExitCommand;
@@ -60,7 +61,7 @@ public class AddressBookParser {
         // Lower level log messages are used sparingly to minimize noise in the code.
         logger.fine("Command word: " + commandWord + "; Arguments: " + arguments);
 
-        switch (commandWord) {
+        switch (commandWord.toLowerCase()) {
 
         case AddMemberCommand.COMMAND_WORD:
         case AddMemberCommand.COMMAND_ALIAS:
@@ -112,6 +113,10 @@ public class AddressBookParser {
         case ViewMemberTaskCommand.COMMAND_WORD:
         case ViewMemberTaskCommand.COMMAND_ALIAS:
             return new ViewMemberTaskCommandParser().parse(arguments);
+
+        case DeleteMemberTaskCommand.COMMAND_WORD:
+        case DeleteMemberTaskCommand.COMMAND_ALIAS:
+            return new DeleteMemberTaskCommandParser().parse(arguments);
 
         case CopyMemberCommand.COMMAND_WORD:
         case CopyMemberCommand.COMMAND_ALIAS:

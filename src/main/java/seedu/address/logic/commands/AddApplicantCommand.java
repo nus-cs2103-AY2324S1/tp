@@ -15,7 +15,7 @@ import seedu.address.model.person.Applicant;
  */
 public class AddApplicantCommand extends Command {
 
-    public static final String COMMAND_WORD = "addApplicant";
+    public static final String COMMAND_WORD = "addapplicant";
     public static final String COMMAND_ALIAS = "adda";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an applicant to the applicant list. "
@@ -34,6 +34,8 @@ public class AddApplicantCommand extends Command {
 
     /**
      * Creates an AddApplicantCommand to add the specified {@code Applicant}
+     *
+     * @param applicant The applicant to add.
      */
     public AddApplicantCommand(Applicant applicant) {
         requireNonNull(applicant);

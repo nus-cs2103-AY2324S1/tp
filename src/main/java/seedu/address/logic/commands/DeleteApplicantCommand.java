@@ -16,7 +16,7 @@ import seedu.address.model.person.Applicant;
  */
 public class DeleteApplicantCommand extends Command {
 
-    public static final String COMMAND_WORD = "deleteApplicant";
+    public static final String COMMAND_WORD = "deleteapplicant";
     public static final String COMMAND_ALIAS = "dela";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
@@ -28,6 +28,11 @@ public class DeleteApplicantCommand extends Command {
 
     private final Index applicantIndex;
 
+    /**
+     * Creates a DeleteApplicantCommand to delete the specified {@code Applicant}
+     *
+     * @param applicantIndex The index of the applicant to delete.
+     */
     public DeleteApplicantCommand(Index applicantIndex) {
         this.applicantIndex = applicantIndex;
     }

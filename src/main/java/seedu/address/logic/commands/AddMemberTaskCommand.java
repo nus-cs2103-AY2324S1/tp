@@ -20,7 +20,7 @@ import seedu.address.model.task.Task;
  */
 public class AddMemberTaskCommand extends Command {
 
-    public static final String COMMAND_WORD = "addTask";
+    public static final String COMMAND_WORD = "addtask";
     public static final String COMMAND_ALIAS = "addt";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a task to the specified member "
@@ -35,14 +35,17 @@ public class AddMemberTaskCommand extends Command {
 
 
     /**
-     * Creates an AddMemberCommand to add the specified {@code Member}
+     * Creates an AddMemberTaskCommand to add the specified {@code Member}
+     *
+     * @param index                   The index of the member to add the task to.
+     * @param addMemberTaskDescriptor The AddMemberTaskDescriptor containing the task to be added.
      */
     public AddMemberTaskCommand(Index index, AddMemberTaskDescriptor addMemberTaskDescriptor) {
         requireNonNull(addMemberTaskDescriptor);
         requireNonNull(index);
 
         this.index = index;
-        this.addMemberTaskDescriptor = addMemberTaskDescriptor;
+        this.addMemberTaskDescriptor = new AddMemberTaskDescriptor(addMemberTaskDescriptor);
     }
 
     @Override
@@ -85,12 +88,17 @@ public class AddMemberTaskCommand extends Command {
     public static class AddMemberTaskDescriptor {
         private List<Task> tasks;
 
+        /**
+         * Default constructor.
+         */
         public AddMemberTaskDescriptor() {
         }
 
         /**
          * Copy constructor.
          * A defensive copy of {@code tags} is used internally.
+         *
+         * @param toCopy The AddMemberTaskDescriptor to copy from.
          */
         public AddMemberTaskDescriptor(AddMemberTaskDescriptor toCopy) {
             setTasks(toCopy.tasks);

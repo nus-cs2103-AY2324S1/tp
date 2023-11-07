@@ -27,11 +27,14 @@ public class ModelManager implements Model {
     private final UserPrefs userPrefs;
     private final FilteredList<Member> filteredMembers;
     private final FilteredList<Applicant> filteredApplicants;
-    private FilteredList<Tag> filteredTags;
-    private ObservableList<Task> filteredTasks;
+    private final FilteredList<Tag> filteredTags;
+    private final ObservableList<Task> filteredTasks;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
+     *
+     * @param addressBook The addressBook to be used.
+     * @param userPrefs   The userPrefs to be used.
      */
     public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs) {
         requireAllNonNull(addressBook, userPrefs);
@@ -48,6 +51,9 @@ public class ModelManager implements Model {
         filteredTasks = FXCollections.observableArrayList();
     }
 
+    /**
+     * Default constructor.
+     */
     public ModelManager() {
         this(new AddressBook(), new UserPrefs());
     }
@@ -185,6 +191,7 @@ public class ModelManager implements Model {
     public ObservableList<Tag> getFilteredTagList() {
         return filteredTags;
     }
+
     @Override
     public ObservableList<Task> getFilteredTaskList() {
         return filteredTasks;
@@ -226,9 +233,9 @@ public class ModelManager implements Model {
 
         ModelManager otherModelManager = (ModelManager) other;
         return addressBook.equals(otherModelManager.addressBook)
-                && userPrefs.equals(otherModelManager.userPrefs)
-                && filteredMembers.equals(otherModelManager.filteredMembers)
-                && filteredApplicants.equals(otherModelManager.filteredApplicants);
+            && userPrefs.equals(otherModelManager.userPrefs)
+            && filteredMembers.equals(otherModelManager.filteredMembers)
+            && filteredApplicants.equals(otherModelManager.filteredApplicants);
     }
 
 }

@@ -15,7 +15,7 @@ import seedu.address.model.person.Member;
  */
 public class ViewMemberTaskCommand extends Command {
 
-    public static final String COMMAND_WORD = "viewTask";
+    public static final String COMMAND_WORD = "viewtask";
     public static final String COMMAND_ALIAS = "viewt";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Views all tasks assigned to the specified member "
@@ -29,6 +29,8 @@ public class ViewMemberTaskCommand extends Command {
 
     /**
      * Creates an AddMemberCommand to add the specified {@code Member}
+     *
+     * @param index The index of the member to view.
      */
     public ViewMemberTaskCommand(Index index) {
         requireNonNull(index);

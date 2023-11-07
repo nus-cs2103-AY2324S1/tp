@@ -16,7 +16,7 @@ import seedu.address.model.person.Member;
  */
 public class DeleteMemberCommand extends Command {
 
-    public static final String COMMAND_WORD = "deleteMember";
+    public static final String COMMAND_WORD = "deletemember";
     public static final String COMMAND_ALIAS = "delm";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
@@ -28,6 +28,11 @@ public class DeleteMemberCommand extends Command {
 
     private final Index memberIndex;
 
+    /**
+     * Creates a DeleteMemberCommand to delete the specified {@code Member}
+     *
+     * @param memberIndex The index of the member to delete.
+     */
     public DeleteMemberCommand(Index memberIndex) {
         this.memberIndex = memberIndex;
     }

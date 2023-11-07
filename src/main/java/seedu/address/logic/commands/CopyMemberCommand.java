@@ -19,7 +19,7 @@ import seedu.address.model.person.Member;
  */
 public class CopyMemberCommand extends Command {
 
-    public static final String COMMAND_WORD = "copyMember";
+    public static final String COMMAND_WORD = "copymember";
     public static final String COMMAND_ALIAS = "cpm";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
