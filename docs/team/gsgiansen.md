@@ -52,34 +52,30 @@ Given below are my contributions to the project.
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=gsgiansen&breakdown=true)
 
 * **Project management**:
-  * Release 1.2
-  * Release 1.3
-  * Release 1.3(final) for PE-D
-  * e.g. Managed releases `v1.2` - `v1.3` - `v1.3(final)`(3 releases) on GitHub
+  * Release `1.2`
+  * Release `1.3`
+  * Release `1.3(final)` for PE-D
 
 * **Enhancements to existing features**:
-  * Which enhancements were written by me (include PR number)
-  * e.g. Updated the GUI color scheme (Pull requests [\#33](), [\#34]())
-  * e.g. Wrote additional tests for existing features to increase coverage from 88% to 92% (Pull requests [\#36](), [\#38]())
+  * Removal of test cases that were only applicable to the previous project [#83]()
+  * Hid the answers from the Display Card to simulate exam conditions [#72]()
+  * Wrote additional tests for existing features to increase coverage from 60% to 63% (Pull requests [\#116]())
 
 * **Documentation**:
   * User Guide:
     * Edit user guide to remove traces of AB3 and to reflect lesSON for v1.1 [\#44]()
     * Add new screenshots of lesSON at the 1.3 stage [\#110]()
     * Addition of codeCov badge into README [\#107]()
-    * 
+    * Addition of user guide for export and import functionality [\#190]()
+    * Add updated screenshots for `v1.2` release [\#44]()
+    * Add updated screenshots for `v1.3` release [\#110]()
+    * Add updated screenshots for `v1.3b` release [\#190]()
+
   * Developer Guide:
     * Add search implementation for future developments [\#98]()
-    * 
-* **Community**:
-  * Contributions to the community (include examples i.e. PR number / screenshots)
-  * e.g. PRs reviewed (with non-trivial review comments): [\#12](), [\#32](), [\#19](), [\#42]()
-  * e.g. Contributed to forum discussions (examples: [1](), [2](), [3](), [4]())
-  * e.g. Reported bugs and suggestions for other teams in the class (examples: [1](), [2](), [3]())
+    * Changed the diagrams in the guide to reflect latest project flow [\#190]()
+    * Included implementation for Export and Import and finalised proposed features [\#190]()
 
 * **Tools**:
-  * List of tools used (include examples i.e. PR number / screenshots)
-  * Integrated a third party library (Natty) to the project ([\#42]())
-  * Integrated a new Github plugin (CircleCI) to the team repo
+  * Integrated codecov into GitHub actions and CodeCov badge [\#107]()
 
-* _{you can add/remove categories in the list above}_
