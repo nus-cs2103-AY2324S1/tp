@@ -20,7 +20,6 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import seedu.staffsnap.model.interview.Interview;
 
-import javax.swing.*;
 import java.util.List;
 
 /**
@@ -48,7 +47,7 @@ public class ApplicantCardTest {
     }
 
     @Test
-    public void displayApplicantId_newApplicant_applicantIdDisplayed() {
+    public void displayApplicantId_applicantIdDisplayed() {
         //ApplicantCard should display the correct id
         HBox idLabel = (HBox) stage.getScene().lookup("#details");
         assertNotNull(idLabel);
@@ -57,7 +56,7 @@ public class ApplicantCardTest {
     }
 
     @Test
-    public void displayApplicantDetails_newApplicant_applicantDetailsDisplayed() {
+    public void displayApplicantDetails_applicantDetailsDisplayed() {
         //Applicant Card should display the correct name, phone, email, and position
         HBox idLabel = (HBox) stage.getScene().lookup("#details");
         assertNotNull(idLabel);
@@ -90,8 +89,8 @@ public class ApplicantCardTest {
     }
 
     @Test
-    public void displayApplicantStatus_newApplicant_applicantStatusDisplayed() {
-        //ApplicantCard should display the status as UNDECIDED when a new applicant is added
+    public void displayApplicantStatus_applicantStatusDisplayed() {
+        //ApplicantCard should correctly display the status of the applicant
         HBox idLabel = (HBox) stage.getScene().lookup("#details");
         Label status = (Label) idLabel.lookup("#status");
         assertNotNull(status);
@@ -99,7 +98,35 @@ public class ApplicantCardTest {
     }
 
     @Test
-    public void displayApplicantScore_newInterview_correctScore() {
+    public void displayApplicantInterviews_correctDataDisplayed() {
+        //ApplicantCard should display the correct title and score for each interview
+        List<Interview> interviewList = BENSON.getInterviews();
+        HBox interviews = (HBox) stage.getScene().lookup("#interviews");
+
+        for (int i = 0; i < interviewList.size(); i++) {
+            Interview interviewToCheck = interviewList.get(i);
+            System.out.println(interviewToCheck.toString());
+            VBox interviewBox = (VBox) interviews.getChildren()
+                    .get(BENSON.getInterviewIndexForApplicantCard(interviewToCheck) - 1);
+
+            HBox interviewHeader = (HBox) interviewBox.getChildren().get(0);
+            Label interviewLabel  = (Label) interviewHeader.getChildren().get(0);
+
+            HBox interviewRating = (HBox) interviewBox.getChildren().get(1);
+            Label interviewRatingLabel = (Label) interviewRating.getChildren().get(0);
+
+            String correctHeader = BENSON.getInterviewIndexForApplicantCard(interviewToCheck) + ". "
+                    + interviewToCheck.getType();
+            String correctRating = interviewToCheck.getRating().toString();
+
+            assertEquals(correctHeader, interviewLabel.getText());
+            assertEquals(correctRating, interviewRatingLabel.getText());
+        }
+
+    }
+
+    @Test
+    public void displayApplicantScore_correctScore() {
         //ApplicantCard should display the correct average score of an applicant
         StackPane overallRating = (StackPane) stage.getScene().lookup("#overallRating");
         assertNotNull(overallRating);
@@ -133,29 +160,4 @@ public class ApplicantCardTest {
         assertEquals(correctScore, ratingLabel.getText());
     }
 
-    @Test
-    public void displayApplicantInterviews_correctData() {
-        //ApplicantCard should display the correct title and score for each interview
-        List<Interview> interviewList = BENSON.getInterviews();
-        HBox interviews = (HBox) stage.getScene().lookup("#interviews");
-
-        for (int i = 0; i < interviewList.size(); i++) {
-            Interview interviewToCheck = interviewList.get(i);
-            VBox interviewBox = (VBox) interviews.getChildren().get(i);
-
-            HBox interviewHeader = (HBox) interviewBox.getChildren().get(0);
-            Label interviewLabel  = (Label) interviewHeader.getChildren().get(0);
-
-            HBox interviewRating = (HBox) interviewBox.getChildren().get(1);
-            Label interviewRatingLabel = (Label) interviewRating.getChildren().get(0);
-
-            String correctHeader = BENSON.getInterviewIndexForApplicantCard(interviewToCheck) + ". "
-                    + interviewToCheck.getType();
-            String correctRating = interviewToCheck.getRating().toString();
-
-            assertEquals(correctHeader, interviewLabel.getText());
-            assertEquals(correctRating, interviewRatingLabel.getText());
-        }
-
-    }
 }
