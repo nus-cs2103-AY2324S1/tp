@@ -56,8 +56,8 @@ public class JobCard extends UiPart<Region> {
         Label statusLabel = new Label(jobStatus);
         statusLabel.getStyleClass().add("cell_status_label");
 
-        if (jobStatus.equals("TO_BE_SUBMITTED")) {
-            statusLabel.getStyleClass().add("to_be_submitted");
+        if (jobStatus.equals("TO_ADD_STATUS")) {
+            statusLabel.getStyleClass().add("to_add_status");
         } else if (jobStatus.equals("PENDING")) {
             statusLabel.getStyleClass().add("pending");
         } else if (jobStatus.equals("APPROVED")) {
