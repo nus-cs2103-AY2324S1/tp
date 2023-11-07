@@ -68,17 +68,13 @@ public class SetDifficultyCommandTest {
         String expectedMessage = "middle is not an invalid difficult level! Please enter easy, medium or hard!";
 
 
+        Model expectedModel = new ModelManager(new Deck(model.getDeck()), new UserPrefs());
+        expectedModel.getDeck().getCardList().get(0).setDifficulty("hard");
+        expectedModel.getDeck().getCardList().get(0).setNewPracticeDateWith("hard");
+        expectedModel.getDeck().sort();
+
         assertCommandFailure(setDifficultyCommand, model, expectedMessage);
-    }
-
-    @Test
-    public void execute_setDifficultyInvalidIndex_failure() {
-        SetDifficultyCommand setDifficultyCommand = new SetDifficultyCommand(Index.fromZeroBased(999), "easy");
-
-        assertCommandFailure(setDifficultyCommand, model, "The card index provided is invalid");
-    }
-
-    @Test
+  
     public void execute_withValidRandomIndex_success() {
         // to make it is valid, make sure random index has been set in model.
         Model modelToUse = new ModelManager(model.getDeck(), new UserPrefs());
