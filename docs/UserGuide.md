@@ -3,7 +3,7 @@ layout: page
 title: User Guide
 ---
 
-ManaGease is a **desktop app for <ins>HR managers</ins> to manage full time staff in the workplace, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, ManaGease can get your contact management tasks done faster than traditional apps.
+ManaGease is a **desktop app for <ins>HR managers</ins> to manage full time staff in the workplace, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, ManaGease can get your employee management tasks done faster than traditional apps.
 
 ---
 ## Table of Contents
@@ -56,7 +56,7 @@ ManaGease is a **desktop app for <ins>HR managers</ins> to manage full time staf
 5. Type the command in the command box and press Enter on your keyboard to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-   * `list` : Lists all contacts.
+   * `list` : Lists all employees.
 
    * `add /n Jane Smith /e jane@email.com /p 12345678 /a 123 Main St /b 123456789 /jd 12/09/2023 /s 1000.00 /l 10`: Adds an employee named `Jane Smith` to ManaGease
 
@@ -167,6 +167,9 @@ Output:
 * If prefix used is not defined, an error message will appear.
   <br>![failed result for adding employee](images/addFailed.png)
 
+* If a new employee is added with the same name, email, phone number, address, bank account, join date, salary and number of leaves as an existing employee, an error message will appear. 
+  <br>![failed result for adding duplicate employee](images/addFailedDuplicate.png)
+
 * Go back to [Table of Contents](#table-of-contents)
 
 ### Editing an employee: `edit`
@@ -254,7 +257,7 @@ Please do not use negative integers, non-integers and extremely large integers(i
 
 
 Examples:
-* `read 3 /e` reads the email of the third employee in the most recently displayed list.
+* `read 1 /a` reads the address of the first employee in the most recently displayed list.
 
 Output:
 
@@ -306,6 +309,10 @@ Output:
 
 * If the second `DATE` is before the first `DATE` when adding in multiple days of leave, the app should display the following error message.
   <br>![result for invalid leave range for addleave command](images/addLeaveStartEndDateError.png)
+
+* If any of the `DATE` is not in the current year or next year, or if the total number of days of leave added to a person exceeds the total days of leave allowed for an employee, the app should display the following error message.
+  <br>![result for invalid number of days of leave to add](images/addLeaveExceedLeavesOrNextYear.png)
+
 
 * Otherwise, if there are no errors, the app should display the following success message that the leave(s) has been added and display the number of leave left for the current year and the following year.
   <br>![result for successful addleave command](images/addLeaveSuccessMsg.png)
@@ -727,7 +734,7 @@ Exits the program.
 
 ### Saving the data
 
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+Employee data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 ### Editing the data file
 
