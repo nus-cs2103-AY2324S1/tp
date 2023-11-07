@@ -484,6 +484,17 @@ Please verify that the index is correct and try again.
 
 ### Clear data: `clear`
 
+Clears all data in the application.
+
+<div markdown="block" class="alert alert-warning">
+
+**:warning: Warning:** 
+
+This command is irreversible, and all data will be forever lost!
+Please use this command with caution.
+
+</div>
+
 ### Exit app : `exit`
 
 Exits the program.
@@ -516,6 +527,7 @@ If you wish, please refer to the below section for a more succinct [command summ
 | **Remove a Musician from a Band**              | `removem b/BANDINDEX m/MUSICIANINDEX` <br> e.g., `removem b/1 m/1`                                                                                               |
 | **List All Members in a Band**                 | `findb BANDNAME` <br> e.g., `findb theory X`                                                                                                                     |
 | **List All Musicians and Bands**               | `list`                                                                                                                                                           |
+| **Clear All Data**                             | `clear`                                                                                                                                                          |
 
 --------------------------------------------------------------------------------------------------------------------
 
