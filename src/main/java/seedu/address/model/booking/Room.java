@@ -68,10 +68,9 @@ public class Room {
             return ROOM_MAP.getOrDefault(roomNumber, null);
         }
     }
-
-    public final Integer value;
-    public final RoomType type;
     public final RoomTypeTag roomTypeTag;
+    private final Integer value;
+    private final RoomType type;
 
     /**
      * Constructs a Room object with the specified room number.
@@ -121,7 +120,7 @@ public class Room {
      * @return the room number
      */
     public int getRoomNumber() {
-        return this.value;
+        return (int) this.value;
     }
 
     /**

@@ -6,6 +6,7 @@ import static seedu.address.model.booking.Room.NUMBER_OF_PRESIDENTIAL_SUITES;
 import static seedu.address.model.booking.Room.NUMBER_OF_STUDIO_ROOMS;
 import static seedu.address.model.booking.Room.NUMBER_OF_SUITES;
 
+import java.util.HashSet;
 import java.util.logging.Logger;
 
 import javafx.collections.FXCollections;
@@ -35,7 +36,7 @@ public class RoomPieChart extends UiPart<Region> {
      */
     public RoomPieChart(ObservableList<Booking> bookingList) {
         super(FXML);
-
+        HashSet<Integer> roomNumbersInPieChart = new HashSet<>();
         int numOfOccupiedRooms = 0;
         int availableNormalRooms = NUMBER_OF_NORMAL_ROOMS;
         int availableStudioRooms = NUMBER_OF_STUDIO_ROOMS;
@@ -43,8 +44,13 @@ public class RoomPieChart extends UiPart<Region> {
         int availableSuites = NUMBER_OF_SUITES;
         int availablePresidentialSuites = NUMBER_OF_PRESIDENTIAL_SUITES;
         for (Booking booking : bookingList) {
+            int roomNumber = booking.getRoom().getRoomNumber();
+            if (roomNumbersInPieChart.contains(roomNumber)) {
+                continue;
+            }
+            roomNumbersInPieChart.add(roomNumber);
             numOfOccupiedRooms++;
-            Room.RoomType roomType = booking.getRoom().type;
+            Room.RoomType roomType = booking.getRoom().getType();
             switch (roomType) {
             case NORMAL:
                 availableNormalRooms--;

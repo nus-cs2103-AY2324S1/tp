@@ -33,8 +33,8 @@ public class BookingCard extends UiPart<Region> {
      * @see <a href="https://github.com/se-edu/addressbook-level4/issues/336">The issue on AddressBook level 4</a>
      */
 
-    public final Booking booking;
-
+    private final Booking booking;
+    private int roomNumber;
     @FXML
     private HBox cardPane;
     @FXML
@@ -62,8 +62,9 @@ public class BookingCard extends UiPart<Region> {
     public BookingCard(Booking booking, int displayedIndex) {
         super(FXML);
         this.booking = booking;
+        this.roomNumber = booking.getRoom().getRoomNumber();
         id.setText(displayedIndex + ". ");
-        room.setText("Room " + booking.getRoom().value);
+        room.setText("Room " + roomNumber);
         bookingPeriod.setText(booking.getBookingPeriod().value);
         remark.setText(booking.getRemark().value);
         RoomTypeTag tag = booking.getTags();
@@ -123,13 +124,13 @@ public class BookingCard extends UiPart<Region> {
             Scene scene = new Scene(popupRoot);
 
             Stage popupStage = new Stage();
-            popupStage.setTitle("Room " + booking.getRoom().value);
+            popupStage.setTitle("Room " + roomNumber);
 
             // Set the room image as the icon
             popupStage.getIcons().add(new Image("images/Room.png"));
 
             // Set a tooltip for the stage title to show the full room number
-            Tooltip tooltip = new Tooltip("Room " + booking.getRoom().value);
+            Tooltip tooltip = new Tooltip("Room " + roomNumber);
             Tooltip.install(scene.getRoot(), tooltip); // Install tooltip on the scene root
 
             popupStage.setScene(scene);

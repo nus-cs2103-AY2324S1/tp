@@ -45,7 +45,7 @@ class JsonAdaptedPerson {
      * Converts a given {@code Person} into this class for Jackson use.
      */
     public JsonAdaptedPerson(Booking source) {
-        room = String.valueOf(source.getRoom().value);
+        room = String.valueOf(source.getRoom().getRoomNumber());
         bookingPeriod = source.getBookingPeriod().value;
         name = source.getName().fullName;
         phone = source.getPhone().value;

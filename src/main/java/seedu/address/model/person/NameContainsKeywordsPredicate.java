@@ -32,7 +32,8 @@ public class NameContainsKeywordsPredicate implements Predicate<Booking> {
     public boolean test(Booking booking) {
         return keywords.stream()
                 .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(booking.getName().fullName, keyword)
-                        || StringUtil.containsWordIgnoreCase(Integer.toString(booking.getRoom().value), keyword));
+                        || StringUtil.containsWordIgnoreCase(Integer.toString(booking.getRoom().getRoomNumber()),
+                        keyword));
     }
 
     /**
