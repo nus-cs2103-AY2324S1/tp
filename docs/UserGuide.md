@@ -532,6 +532,12 @@ Show a list of all the interviews in **InterviewHub** that are not done onto the
 
 Format:`list-i-not-done`
 
+Before `list-i-not-done`:
+![beforelistinotdone](images/beforelistinotdone.png)
+
+After `list-i-not-done`:
+![afterlistinotdone](images/afterlistinotdone.png)
+
 [Back to the Table of Contents](#table-of-contents)
 
 ### Sorting interviews by rating : `sort-rate`
