@@ -1,6 +1,10 @@
 package seedu.lovebook.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.lovebook.logic.commands.CommandTestUtil.DESC_PREF_AMY;
+import static seedu.lovebook.logic.commands.CommandTestUtil.DESC_PREF_BOB;
 import static seedu.lovebook.testutil.Assert.assertThrows;
 
 import java.nio.file.Path;
@@ -47,6 +51,43 @@ public class SetPrefCommandTest {
         ModelStubAcceptingPreferenceAdded modelStub = new ModelStubAcceptingPreferenceAdded();
         SetPrefCommand.SetPreferenceDescriptor emptyPreference = new SetPrefCommand.SetPreferenceDescriptor();
         assertThrows(RuntimeException.class, () -> new SetPrefCommand(emptyPreference).execute(modelStub));
+    }
+
+    @Test
+    public void equals() {
+        SetPrefCommand.SetPreferenceDescriptor descriptor =
+                new SetPrefCommand.SetPreferenceDescriptor(DESC_PREF_AMY);
+
+        SetPrefCommand.SetPreferenceDescriptor secondDescriptor =
+                new SetPrefCommand.SetPreferenceDescriptor(DESC_PREF_BOB);
+
+        final SetPrefCommand standardCommand = new SetPrefCommand(descriptor);
+
+        // same values -> returns true
+        SetPrefCommand commandWithSameValues = new SetPrefCommand(descriptor);
+        assertTrue(standardCommand.equals(commandWithSameValues));
+
+        // same object -> returns true
+        assertTrue(standardCommand.equals(standardCommand));
+
+        // null -> returns false
+        assertFalse(standardCommand.equals(null));
+
+        // different types -> returns false
+        assertFalse(standardCommand.equals(new ClearCommand()));
+
+        // different descriptor -> returns false
+        assertFalse(standardCommand.equals(new SetPrefCommand(secondDescriptor)));
+    }
+
+    @Test
+    public void toStringMethod() {
+        SetPrefCommand.SetPreferenceDescriptor setPrefDescriptor =
+                new SetPrefCommand.SetPreferenceDescriptor(DESC_PREF_BOB);
+        SetPrefCommand setPrefCommand = new SetPrefCommand(setPrefDescriptor);
+        String expected = SetPrefCommand.class.getCanonicalName() + "{setPreferenceDescriptor="
+                + setPrefDescriptor + "}";
+        assertEquals(expected, setPrefCommand.toString());
     }
 
     /**

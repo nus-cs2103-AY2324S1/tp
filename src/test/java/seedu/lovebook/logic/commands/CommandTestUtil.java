@@ -22,6 +22,7 @@ import seedu.lovebook.model.Model;
 import seedu.lovebook.model.date.Date;
 import seedu.lovebook.model.date.NameContainsKeywordsPredicate;
 import seedu.lovebook.testutil.EditPersonDescriptorBuilder;
+import seedu.lovebook.testutil.SetPreferenceDescriptorBuilder;
 
 /**
  * Contains helper methods for testing commands.
@@ -68,6 +69,8 @@ public class CommandTestUtil {
 
     public static final EditCommand.EditPersonDescriptor DESC_AMY;
     public static final EditCommand.EditPersonDescriptor DESC_BOB;
+    public static final SetPrefCommand.SetPreferenceDescriptor DESC_PREF_AMY;
+    public static final SetPrefCommand.SetPreferenceDescriptor DESC_PREF_BOB;
 
     static {
         DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
@@ -75,6 +78,10 @@ public class CommandTestUtil {
                 .withIncome(VALID_INCOME_AMY).withHoroscope(VALID_HOROSCOPE_AMY).build();
         DESC_BOB = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withAge(VALID_AGE_BOB).withGender(VALID_GENDER_BOB).withHeight(VALID_HEIGHT_BOB)
+                .withIncome(VALID_INCOME_AMY).withHoroscope(VALID_HOROSCOPE_BOB).build();
+        DESC_PREF_AMY = new SetPreferenceDescriptorBuilder().withAge(VALID_AGE_AMY).withHeight(VALID_HEIGHT_AMY)
+                .withIncome(VALID_INCOME_AMY).withHoroscope(VALID_HOROSCOPE_AMY).build();
+        DESC_PREF_BOB = new SetPreferenceDescriptorBuilder().withAge(VALID_AGE_BOB).withHeight(VALID_HEIGHT_BOB)
                 .withIncome(VALID_INCOME_AMY).withHoroscope(VALID_HOROSCOPE_BOB).build();
     }
 
