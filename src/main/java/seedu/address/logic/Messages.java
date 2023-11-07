@@ -77,7 +77,7 @@ public class Messages {
                 .append("; Annual Leave: ")
                 .append(person.getAnnualLeave().value)
                 .append("; Attendance: ")
-                .append(person.getAttendanceToday());
+                .append(person.getWorkingStatusToday());
         return builder.toString();
     }
 

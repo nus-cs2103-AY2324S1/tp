@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ANNUAL_LEAVE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ATTENDANCE_TYPE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_BANK_ACCOUNT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_JOIN_DATE;
@@ -45,6 +46,13 @@ public class CommandTestUtil {
     public static final String VALID_SALARY_BOB = "2500.00";
     public static final String VALID_ANNUALLEAVE_AMY = "4";
     public static final String VALID_ANNUALLEAVE_BOB = "2";
+    public static final String VALID_ATTENDANCE_TYPE_PRESENT = "present";
+    public static final String VALID_ATTENDANCE_TYPE_ABSENT = "absent";
+    public static final String VALID_ATTENDANCE_TYPE_LATE = "late";
+
+
+    public static final ArrayList<String> VALID_ATTENDANCE_STORAGE_AMY = new ArrayList<>();
+    public static final ArrayList<String> VALID_ATTENDANCE_STORAGE_BOB = new ArrayList<>();
     public static final String VALID_DATE = "03/11/2023";
 
 
@@ -64,6 +72,13 @@ public class CommandTestUtil {
     public static final String SALARY_DESC_BOB = " " + PREFIX_SALARY + " " + VALID_SALARY_BOB;
     public static final String ANNUALLEAVE_DESC_AMY = " " + PREFIX_ANNUAL_LEAVE + " " + VALID_ANNUALLEAVE_AMY;
     public static final String ANNUALLEAVE_DESC_BOB = " " + PREFIX_ANNUAL_LEAVE + " " + VALID_ANNUALLEAVE_BOB;
+    public static final String ATTENDANCE_TYPE_DESC_ABSENT = " "
+            + PREFIX_ATTENDANCE_TYPE + " " + VALID_ATTENDANCE_TYPE_ABSENT;
+    public static final String ATTENDANCE_TYPE_DESC_PRESENT = " "
+            + PREFIX_ATTENDANCE_TYPE + " " + VALID_ATTENDANCE_TYPE_PRESENT;
+    public static final String ATTENDANCE_TYPE_DESC_LATE = " "
+            + PREFIX_ATTENDANCE_TYPE + " " + VALID_ATTENDANCE_TYPE_LATE;
+
 
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + " James&"; // '&' not allowed in names
