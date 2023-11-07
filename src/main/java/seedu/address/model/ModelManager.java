@@ -101,11 +101,6 @@ public class ModelManager implements Model {
 
     @Override
     public void deleteApplicant(Applicant target) {
-        if (target.hasInterview()) {
-            Interview interviewWithTarget = addressBook.findInterviewWithApplicant(target);
-            addressBook.removeInterview(interviewWithTarget);
-        }
-
         addressBook.removeApplicant(target);
     }
 

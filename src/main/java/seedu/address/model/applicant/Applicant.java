@@ -71,6 +71,14 @@ public class Applicant {
     }
 
     /**
+     * Returns an Applicant object with the same details as the current Applicant, with
+     * the hasInterview field set to true.
+     */
+    public Applicant withInterview() {
+        return new Applicant(name, phone, email, address, tags, true);
+    }
+
+    /**
      * Obtains an Applicant object with the same details as the current Applicant, except hasInterview which is always
      *     set to false.
      * @return A new Applicant object with the same details except for hasInterview which is always false.

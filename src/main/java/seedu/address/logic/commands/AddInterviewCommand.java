@@ -82,14 +82,7 @@ public class AddInterviewCommand extends Command {
             throw new CommandException(MESSAGE_APPLICANT_HAS_INTERVIEW);
         }
 
-        Applicant applicantWithInterview = new Applicant(
-                applicant.getName(),
-                applicant.getPhone(),
-                applicant.getEmail(),
-                applicant.getAddress(),
-                applicant.getTags(),
-                true
-        );
+        Applicant applicantWithInterview = applicant.withInterview();
 
         Interview toAdd = new Interview(applicantWithInterview, jobRole, startTime, endTime);
 

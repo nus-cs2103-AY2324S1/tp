@@ -118,6 +118,11 @@ public class AddressBook implements ReadOnlyAddressBook {
      * {@code key} must exist in the address book.
      */
     public void removeApplicant(Applicant key) {
+        if (key.hasInterview()) {
+            Interview interviewWithTarget = findInterviewWithApplicant(key);
+            removeInterview(interviewWithTarget);
+        }
+
         applicants.remove(key);
     }
 
