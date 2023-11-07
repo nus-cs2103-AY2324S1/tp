@@ -14,20 +14,20 @@ Flashlingo is a **desktop app for learning words by flash cards, optimized for u
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-1. Download the latest `flashlingo.jar` from [here](https://github.com/AY2324S1-CS2103T-T11-4/tp/releases) (Not finished yet).
+2. Download the latest `flashlingo.jar` from [here](https://github.com/AY2324S1-CS2103T-T11-4/tp/releases) (Not finished yet).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your Flashlingo.
+3. Copy the file to the folder you want to use as the _home folder_ for your Flashlingo.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar flashlingo.jar` command to run the application.
+4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar flashlingo.jar` command to run the application.
    Below shows the steps to perform such a task
     1. Open up the terminal. For mac users, open up `terminal` through the finder. For windows users, search `cmd` and run it.
        <img width="674" alt="Screenshot 2023-10-27 at 2 36 16 PM" src="https://github.com/itsNatTan/tp/assets/64185574/039d9f37-e45e-410f-b819-117ff312e13b">
 
-    3. Navigate to the folder containing the jar file. In this example, it is in the Downloads folder.
+    2. Navigate to the folder containing the jar file. In this example, it is in the Downloads folder.
    <br>
        `$ cd Downloads`
 
-    4. Simply type in java -jar flashlingo.jar to get started!
+    3. Simply type in java -jar flashlingo.jar to get started!
    <br>
          `$ java -jar flashlingo.jar`
        <br>
