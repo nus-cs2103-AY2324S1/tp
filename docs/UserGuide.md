@@ -473,6 +473,7 @@ Output:
   <br>![result for incorrect deduct command](images/incorrectDeductCommand.png)
 * If the `VALUE` provided is not in the correct format, the app should display the following message.
   <br>![result for incorrect deduct value format](images/incorrectDeductValueFormat.png)
+  Here it says that `Payment should only contain unmerical digits.`. This is because the `VALUE` field refers to the amount of money to be deducted from the employee's salary, which is a `Payment`. This also applies to the `VALUE` field in the [`benefit`](#adding-a-benefit-to-the-payroll-of-an-employee-benefit) command and the `SALARY` field in the [`add`](#adding-an-employee-add) and [`edit`](#editing-an-employee-edit) command.
 * If the `REASON` field is missing, the app should display the following message.
   <br>![result for missing reason](images/missingReason.png)
 * If the `REASON` provided is not supported (i.e. not one of the five reasons in the [parameter formats](#parameter-formats)), the app should display the following message.
@@ -517,6 +518,7 @@ Output:
   <br>![result for incorrect benefit command](images/incorrectBenefitCommand.png)
 * If the `VALUE` provided is not in the correct format, the app should display the following message.
   <br>![result for incorrect benefit value format](images/incorrectDeductValueFormat.png)
+  Here it says that `Payment should only contain unmerical digits.`. This is because the `VALUE` field refers to the amount of money to be added to the employee's salary, which is a `Payment`. This also applies to the `VALUE` field in the [`deduct`](#adding-a-deduction-to-the-payroll-of-an-employee-deduct) command and the `SALARY` field in the [`add`](#adding-an-employee-add) and [`edit`](#editing-an-employee-edit) command.
 * If the `REASON` field is missing, the app should display the following message.
   <br>![result for missing reason](images/missingReason.png)
 * If the `REASON` provided is not supported (i.e. not one of the five reasons in the [parameter formats](#parameter-formats)), the app should display the following message.
@@ -595,6 +597,10 @@ Output:
 * A payslip report in PDF format will be generated in the `payslips` folder in the ManaGease home directory.
   <br>![location of payslip](images/payslipLocation.png)
   <br>![payslip content](images/payslipContent.png)
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+Please close any payslip PDF file before generating another payslip. Otherwise, the payslip PDF file will not be generated successfully.
+</div>
+
 * If the index is not within the numbers in the list, the app should display `The employee index provided is invalid`.
 * If the command is incorrect, the app should display the following message.
   <br>![result for incorrect payslip command](images/incorrectPayslipCommand.png)
@@ -741,10 +747,10 @@ Employee data are saved in the hard disk automatically after any command that ch
 
 ### Editing the data file
 
-ManaGease data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+ManaGease data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. You are discouraged from editing the data file to make sure ManaGease works well to help you with your business.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file makes its format invalid, ManaGease will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.
+If your changes to the data file makes its format invalid, ManaGease will not run. Hence, it is recommended not to edit the data file directly, and you can edit the data through our useful commands.
 </div>
 
 --------------------------------------------------------------------------------------------------------------------
