@@ -244,13 +244,18 @@ public class ParserUtil {
      */
     public static Double parseScore(String score) throws ParseException {
         requireNonNull(score);
+        String trimmedScore = score.trim();
         Double result;
         try {
-            result = Double.parseDouble(score);
+            result = Double.parseDouble(trimmedScore);
         } catch (NumberFormatException e) {
             throw new ParseException(FilterCommand.MESSAGE_SCORE_PARSE_FAILURE);
         }
-        return result;
+        String resultString = String.format("%.1f", result);
+        if (!Rating.isValidRating(resultString)) {
+            throw new ParseException(FilterCommand.MESSAGE_SCORE_PARSE_FAILURE);
+        }
+        return Double.parseDouble(resultString);
     }
 
     /**
