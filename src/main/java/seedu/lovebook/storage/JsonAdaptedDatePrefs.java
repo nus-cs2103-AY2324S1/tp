@@ -16,7 +16,6 @@ import seedu.lovebook.model.date.horoscope.Horoscope;
 public class JsonAdaptedDatePrefs {
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Date's %s field is missing!";
     private String age;
-    private String gender;
     private String height;
     private String income;
     private String horoscope;
@@ -25,11 +24,10 @@ public class JsonAdaptedDatePrefs {
      * Constructs a {@code JsonAdaptedDate} with the given date details.
      */
     @JsonCreator
-    public JsonAdaptedDatePrefs(@JsonProperty("age") String age, @JsonProperty("gender") String gender,
-                                @JsonProperty("height") String height, @JsonProperty("income") String income,
+    public JsonAdaptedDatePrefs(@JsonProperty("age") String age, @JsonProperty("height") String height,
+                                @JsonProperty("income") String income,
                                 @JsonProperty("horoscope") String horoscope) {
         this.age = age;
-        this.gender = gender;
         this.height = height;
         this.income = income;
         this.horoscope = horoscope;

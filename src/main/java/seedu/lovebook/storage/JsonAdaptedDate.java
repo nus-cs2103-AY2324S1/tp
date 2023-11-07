@@ -19,7 +19,7 @@ import seedu.lovebook.model.date.horoscope.Horoscope;
  */
 class JsonAdaptedDate {
 
-    public static final String MISSING_FIELD_MESSAGE_FORMAT = "Date's %sg field is missing!";
+    public static final String MISSING_FIELD_MESSAGE_FORMAT = "Date's %s field is missing!";
     public static final String INVALID_AVATAR = "Date's avatar is invalid!";
 
     private final String name;
