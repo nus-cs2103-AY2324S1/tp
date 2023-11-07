@@ -62,7 +62,7 @@ class JsonAdaptedPerson {
         if (room == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Room.class.getSimpleName()));
         }
-        if (Room.isValidRoom(room)) {
+        if (!Room.isValidRoom(room)) {
             throw new IllegalValueException(Name.MESSAGE_CONSTRAINTS);
         }
         final Room modelRoom = new Room(room);

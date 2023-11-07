@@ -23,6 +23,7 @@ import seedu.address.model.person.Phone;
 public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+    public static final String MESSAGE_INVALID_ROOM = "Room numbers are between 1 and 500 inclusive.";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -47,7 +48,7 @@ public class ParserUtil {
         requireNonNull(room);
         String trimmedRoom = room.trim();
         if (!Room.isValidRoom(trimmedRoom)) {
-            throw new ParseException(Room.MESSAGE_CONSTRAINTS);
+            throw new ParseException(MESSAGE_INVALID_ROOM);
         }
         return new Room(room);
     }
